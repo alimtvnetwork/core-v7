@@ -1,0 +1,3 @@
+# cconsts
+
+common constants
