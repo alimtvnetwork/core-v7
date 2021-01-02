@@ -21,7 +21,7 @@ All common constants package.
 
 ## Installation
 
-`go get YourModuleName`
+`go get gitlab.com/evatix-go/constants`
 
 ### Go get issue for private package
 
