@@ -140,4 +140,10 @@ var (
 	InvalidInstancePtr                   = &invalidInstance
 	InvalidValuePtr                      = &invalidValue
 	WildCardSymbolPtr                    = &wildCardSymbol
+	ParenthesisStartPtr                  = &parenthesisStart
+	ParenthesisEndPtr                    = &parenthesisEnd
+	CurlyStartPtr                        = &curlyStart
+	CurlyEndPtr                          = &curlyEnd
+	SquareStartPtr                       = &squareStart
+	SquareEndPtr                         = &squareEnd
 )

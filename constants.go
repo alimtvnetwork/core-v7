@@ -144,6 +144,12 @@ const (
 	InvalidInstance                   = -1
 	InvalidValue                      = -1
 	WildCardSymbol                    = "*"
+	ParenthesisStart                  = "("
+	ParenthesisEnd                    = ")"
+	CurlyStart                        = "{"
+	CurlyEnd                          = "}"
+	SquareStart                       = "["
+	SquareEnd                         = "]"
 
 	// https://stackoverflow.com/questions/18415904/what-does-mode-t-0644-mean
 	FileModePermission = 0644

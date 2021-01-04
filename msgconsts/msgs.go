@@ -30,4 +30,3 @@ const (
 	StringOutOfRangeMessage         = "String out of range. Range, which is unexpected."
 	ShouldBeGreaterThanEqualMessage = "Values or value should be greater or equal to the reference."
 )
-

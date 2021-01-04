@@ -140,4 +140,10 @@ var (
 	invalidInstance                   = InvalidInstance
 	invalidValue                      = InvalidValue
 	wildCardSymbol                    = WildCardSymbol
+	parenthesisStart                  = ParenthesisStart
+	parenthesisEnd                    = ParenthesisEnd
+	curlyStart                        = CurlyStart
+	curlyEnd                          = CurlyEnd
+	squareStart                       = SquareStart
+	squareEnd                         = SquareEnd
 )
