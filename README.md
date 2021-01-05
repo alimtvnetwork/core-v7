@@ -1,16 +1,16 @@
-# `Constants` Intro
+# `Core` Intro
 
 ![Use Package logo](UseLogo)
 
-All common constants package.
+All common core infrastructure and constants combined package.
 
 ## Git Clone
 
-`git clone https://gitlab.com/evatix-go/constants.git`
+`git clone https://gitlab.com/evatix-go/core.git`
 
 ### 2FA enabled, for linux
 
-`git clone https://[YourGitLabUserName]:[YourGitlabAcessTokenGenerateFromGitlabsTokens]@gitlab.com/evatix-go/constants.git`
+`git clone https://[YourGitLabUserName]:[YourGitlabAcessTokenGenerateFromGitlabsTokens]@gitlab.com/evatix-go/core.git`
 
 ### Prerequisites
 
@@ -21,7 +21,7 @@ All common constants package.
 
 ## Installation
 
-`go get gitlab.com/evatix-go/constants`
+`go get gitlab.com/evatix-go/core`
 
 ### Go get issue for private package
 
@@ -53,7 +53,7 @@ Any other packages used
 
 ## Issues
 
-- [Create your issues](https://gitlab.com/evatix-go/constants/-/issues)
+- [Create your issues](https://gitlab.com/evatix-go/core/-/issues)
 
 ## Notes
 

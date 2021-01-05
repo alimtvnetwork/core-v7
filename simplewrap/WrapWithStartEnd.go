@@ -1,12 +1,12 @@
-package constants
+package simplewrap
 
 // wrapper + source + wrapper
-func WrapWithStartEnd(wrapper, source string) string {
+func WithStartEnd(wrapper, source string) string {
 	return wrapper + source + wrapper
 }
 
 // wrapper + source + wrapper
-func WrapWithStartEndPtr(wrapper, source *string) *string {
+func WithStartEndPtr(wrapper, source *string) *string {
 	final := *wrapper + *source + *wrapper
 
 	return &final

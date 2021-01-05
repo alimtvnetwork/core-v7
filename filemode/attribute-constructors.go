@@ -1,0 +1,76 @@
+package filemode
+
+import "gitlab.com/evatix-go/core/msgtype"
+
+func NewAttribute(isRead, isWrite, isExecute bool) Attribute {
+	return Attribute{
+		IsRead:    isRead,
+		IsWrite:   isWrite,
+		IsExecute: isExecute,
+	}
+}
+
+// Length must be 3
+// "rwx" should be put for attributes.
+// eg. read enable all disable : "r--"
+// eg. write enable all disable : "-w-"
+// eg. execute enable all disable : "--x"
+// eg. all enabled : "rwx"
+func NewAttributeUsingRwx(rwx string) Attribute {
+	length := len(rwx)
+
+	if length != SupportedLength {
+		panic(msgtype.
+			LengthShouldBeEqualToMessage.
+			Combine(
+				"rwx length should be "+SupportedLengthString,
+				length))
+	}
+
+	r := rwx[0]
+	w := rwx[1]
+	e := rwx[2]
+
+	return Attribute{
+		IsRead:    r == 'r',
+		IsWrite:   w == 'w',
+		IsExecute: e == 'x',
+	}
+}
+
+// 1 - Execute true
+// 2 - Write true
+// 3 - Write + Execute true
+// 4 - Read true
+// 5 - Read + Execute true
+// 6 - Read + Write true
+// 7 - Read + Write + Execute all true
+func NewAttributeUsingByte(v byte) Attribute {
+	if ReadWriteExecute.IsGreaterThan(v) {
+		msg := msgtype.
+			ShouldBeLessThanEqualMessage.
+			Combine(
+				"v byte should not be more than "+ReadWriteExecute.String(),
+				v)
+
+		panic(msg)
+	}
+
+	// TODO optimize logic in future.
+	isRead := v >= ReadValue
+	isWrite := (isRead && v >= ReadWriteValue) || (!isRead && v >= WriteValue)
+	isExecute := (isWrite && isRead && v >= ReadWriteExecuteValue) ||
+		(isRead && !isWrite && v >= ReadExecuteValue) ||
+		(isWrite && !isRead && v >= WriteExecuteValue) ||
+		(!isRead && !isWrite && v >= ExecuteValue)
+
+	return Attribute{
+		IsRead:    isRead,
+		IsWrite:   isWrite,
+		IsExecute: isExecute,
+	}
+}
+
+func NewAttributeUsingVariant(v AttrVariant) Attribute {
+	return NewAttributeUsingByte(v.Value())
+}
