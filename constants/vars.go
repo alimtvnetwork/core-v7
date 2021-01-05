@@ -126,7 +126,6 @@ var (
 	windows                           = Windows
 	symbolicLinkCreationCommandName   = SymbolicLinkCreationCommandName
 	symbolicLinkCreationArgument      = SymbolicLinkCreationArgument
-	perm                              = Perm
 	architecture64                    = Architecture64
 	architecture32                    = Architecture32
 	longPathUncPrefix                 = LongPathUncPrefix
@@ -146,4 +145,7 @@ var (
 	curlyEnd                          = CurlyEnd
 	squareStart                       = SquareStart
 	squareEnd                         = SquareEnd
+	zeroChar                          = ZeroChar
+	nineChar                          = NineChar
+	hyphenChar                        = HyphenChar
 )

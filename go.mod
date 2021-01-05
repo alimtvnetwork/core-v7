@@ -1,3 +1,3 @@
-module gitlab.com/evatix-go/constants
+module gitlab.com/evatix-go/core
 
 go 1.15

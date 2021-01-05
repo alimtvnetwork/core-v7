@@ -126,7 +126,6 @@ var (
 	WindowsPtr                           = &windows
 	SymbolicLinkCreationCommandNamePtr   = &symbolicLinkCreationCommandName
 	SymbolicLinkCreationArgumentPtr      = &symbolicLinkCreationArgument
-	PermPtr                              = &perm
 	Architecture64Ptr                    = &architecture64
 	Architecture32Ptr                    = &architecture32
 	LongPathUncPrefixPtr                 = &longPathUncPrefix
@@ -146,4 +145,7 @@ var (
 	CurlyEndPtr                          = &curlyEnd
 	SquareStartPtr                       = &squareStart
 	SquareEndPtr                         = &squareEnd
+	ZeroCharPtr                          = &zeroChar
+	NineCharPtr                          = &nineChar
+	HyphenCharPtr                        = &hyphenChar
 )
