@@ -136,7 +136,6 @@ var (
 	endOfLineMark                     = EndOfLineMark
 	startOfBlock                      = StartOfBlock
 	minusOne                          = MinusOne
-	invalidInstance                   = InvalidInstance
 	invalidValue                      = InvalidValue
 	wildCardSymbol                    = WildCardSymbol
 	parenthesisStart                  = ParenthesisStart

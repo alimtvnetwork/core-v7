@@ -66,6 +66,7 @@ func (wrapper Wrapper) ToModeStr() string {
 	return string(allBytes[1:])
 }
 
+// returns "-rwxrwxrwx"
 func (wrapper Wrapper) ToRwxes() string {
 	owner := wrapper.Owner.ToRwxString()
 	group := wrapper.Group.ToRwxString()

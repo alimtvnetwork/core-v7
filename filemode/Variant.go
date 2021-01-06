@@ -2,6 +2,7 @@ package filemode
 
 type Variant string
 
+//goland:noinspection ALL
 const (
 	AllRead                             Variant = "444"
 	AllWrite                            Variant = "222"

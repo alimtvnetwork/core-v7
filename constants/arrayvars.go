@@ -1,5 +1,6 @@
 package constants
 
+//goland:noinspection ALL
 var (
 	// Copied from golang strings
 	AsciiSpace = [256]uint8{

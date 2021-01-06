@@ -31,4 +31,5 @@ const (
 	IsLinux                   = CurrentOperatingSystem == Linux
 	IsDarwinOrMacOs           = CurrentOperatingSystem == DarwinOrMacOs
 	IsUbuntu                  = CurrentOperatingSystem == Ubuntu
+	IsUnixGroup               = !IsWindows
 )

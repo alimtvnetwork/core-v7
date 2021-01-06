@@ -9,7 +9,7 @@ import (
 
 // Skip on Unix
 func SkipOnUnix(t *testing.T) {
-	if !osconsts.IsWindows {
+	if osconsts.IsUnixGroup {
 		t.Skip(msgtype.UnixIgnoreMessage)
 	}
 }

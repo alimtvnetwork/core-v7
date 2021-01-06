@@ -1,9 +1,13 @@
 package msgtype
 
-import "errors"
+import (
+	"errors"
+	"strings"
+)
 
 type Variation string
 
+//goland:noinspection ALL
 const (
 	InvalidRequest                  Variation = "Invalid : request, cannot process it."
 	InvalidNullPointer              Variation = "Invalid : null pointer, cannot process it."
@@ -51,6 +55,7 @@ const (
 	ShouldBeGreaterThanEqualMessage Variation = "Values or value should be greater or equal to the reference."
 	UnixIgnoreMessage               Variation = "Windows tests ignored in Unix."
 	WindowsIgnoreMessage            Variation = "Unix tests ignored in Windows."
+	ComparatorShouldBeWithinRanghe  Variation = "Comparator should be within the range."
 )
 
 func (variation Variation) String() string {
@@ -64,5 +69,11 @@ func (variation Variation) Combine(otherMsg string, reference interface{}) strin
 func (variation Variation) Error(otherMsg string, reference interface{}) error {
 	msg := CombineWithMsgType(variation, otherMsg, reference)
 
-	return errors.New(msg)
+	return errors.New(strings.ToLower(msg))
+}
+
+func (variation Variation) HandleUsingPanic(otherMsg string, reference interface{}) {
+	msg := CombineWithMsgType(variation, otherMsg, reference)
+
+	panic(msg)
 }

@@ -9,6 +9,7 @@ package filemode
 // 7 - Read + Write + Execute all true
 type AttrVariant byte
 
+//goland:noinspection ALL
 const (
 	Execute          AttrVariant = 1
 	Write            AttrVariant = 2

@@ -136,7 +136,6 @@ var (
 	EndOfLineMarkPtr                     = &endOfLineMark
 	StartOfBlockPtr                      = &startOfBlock
 	MinusOnePtr                          = &minusOne
-	InvalidInstancePtr                   = &invalidInstance
 	InvalidValuePtr                      = &invalidValue
 	WildCardSymbolPtr                    = &wildCardSymbol
 	ParenthesisStartPtr                  = &parenthesisStart

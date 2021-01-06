@@ -1,5 +1,6 @@
 package osconsts
 
+//goland:noinspection ALL
 var (
 	X32Architectures = []string{
 		"386",

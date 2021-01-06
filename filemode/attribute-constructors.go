@@ -32,9 +32,9 @@ func NewAttributeUsingRwx(rwx string) Attribute {
 	e := rwx[2]
 
 	return Attribute{
-		IsRead:    r == 'r',
-		IsWrite:   w == 'w',
-		IsExecute: e == 'x',
+		IsRead:    r == ReadChar,
+		IsWrite:   w == WriteChar,
+		IsExecute: e == ExecuteChar,
 	}
 }
 

@@ -1,8 +1,8 @@
 package filemode
 
 import (
+	"gitlab.com/evatix-go/core/conditional"
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coremath"
 )
 
 type Attribute struct {
@@ -23,17 +23,17 @@ func (attribute Attribute) ToAttributeValue() AttributeValue {
 }
 
 func (attribute Attribute) ToSpecificBytes() (read, write, exe, sum byte) {
-	read = coremath.GetValue(attribute.IsRead, ReadValue)
-	write = coremath.GetValue(attribute.IsWrite, WriteValue)
-	exe = coremath.GetValue(attribute.IsExecute, ExecuteValue)
+	read = conditional.Byte(attribute.IsRead, ReadValue, constants.Zero)
+	write = conditional.Byte(attribute.IsWrite, WriteValue, constants.Zero)
+	exe = conditional.Byte(attribute.IsExecute, ExecuteValue, constants.Zero)
 
 	return read, write, exe, read + write + exe
 }
 
 func (attribute Attribute) ToByte() byte {
-	r := coremath.GetValue(attribute.IsRead, ReadValue)
-	w := coremath.GetValue(attribute.IsWrite, WriteValue)
-	e := coremath.GetValue(attribute.IsExecute, ExecuteValue)
+	r := conditional.Byte(attribute.IsRead, ReadValue, constants.Zero)
+	w := conditional.Byte(attribute.IsWrite, WriteValue, constants.Zero)
+	e := conditional.Byte(attribute.IsExecute, ExecuteValue, constants.Zero)
 
 	return r + w + e
 }
@@ -44,9 +44,9 @@ func (attribute Attribute) ToSum() byte {
 
 func (attribute Attribute) ToRwx() [3]byte {
 	return [3]byte{
-		coremath.GetValueWithDefault(attribute.IsRead, ReadChar, constants.HyphenChar),
-		coremath.GetValueWithDefault(attribute.IsWrite, WriteChar, constants.HyphenChar),
-		coremath.GetValueWithDefault(attribute.IsExecute, ExecuteChar, constants.HyphenChar),
+		conditional.Byte(attribute.IsRead, ReadChar, constants.HyphenChar),
+		conditional.Byte(attribute.IsWrite, WriteChar, constants.HyphenChar),
+		conditional.Byte(attribute.IsExecute, ExecuteChar, constants.HyphenChar),
 	}
 }
 

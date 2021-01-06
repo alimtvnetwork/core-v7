@@ -1,5 +1,6 @@
 package regconsts
 
+//goland:noinspection ALL
 const (
 	RegExForEachWordsWithDollarSymbol       = "\\$(\\w+)(\\d*)"  // Selects a full word that starts with a "$" symbol
 	EachWordsWithinPercentSymbol            = "\\%(\\w+)(\\d*)%" // Selects a full word that is within two "%" symbol

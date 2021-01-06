@@ -110,7 +110,7 @@ func NewUsingRwxes(rwxrwxrwx string) (Wrapper, error) {
 			LengthShouldBeEqualToMessage.
 			Error("rwxrwxrwx length must be 9", length)
 
-		return Wrapper{},err
+		return Wrapper{}, err
 	}
 
 	owner := rwxrwxrwx[0:3]
