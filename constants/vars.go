@@ -2,6 +2,7 @@ package constants
 
 //goland:noinspection ALL
 var (
+	newline                           = NewLine
 	emptyArray                        = EmptyArray
 	firstItemEmptyStringArray         = FirstItemEmptyStringArray
 	emptyStatus                       = EmptyStatus
@@ -147,4 +148,21 @@ var (
 	zeroChar                          = ZeroChar
 	nineChar                          = NineChar
 	hyphenChar                        = HyphenChar
+	maxUnit8Rune                      = MaxUnit8Rune
+	maxUnit8AsInt16                   = MaxUnit8AsInt16
+	parenthesisStartRune              = ParenthesisStartRune
+	parenthesisEndRune                = ParenthesisEndRune
+	curlyStartRune                    = CurlyStartRune
+	curlyEndRune                      = CurlyEndRune
+	squareStartRune                   = SquareStartRune
+	squareEndRune                     = SquareEndRune
+	zeroRune                          = ZeroRune
+	nineRune                          = NineRune
+	hyphenRune                        = HyphenRune
+	upperCaseARune                    = UpperCaseARune
+	upperCaseZRune                    = UpperCaseZRune
+	lowerCaseARune                    = LowerCaseARune
+	lowerCaseZRune                    = LowerCaseZRune
+	lowerCaseRune                     = LowerCaseRune
+	upperCaseRune                     = UpperCaseRune
 )

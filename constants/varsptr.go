@@ -2,6 +2,8 @@ package constants
 
 //goland:noinspection ALL
 var (
+	// Better to use NewLineUnix
+	NewLinePtr                           = &newline
 	EmptyArrayPtr                        = &emptyArray
 	FirstItemEmptyStringArrayPtr         = &firstItemEmptyStringArray
 	EmptyStatusPtr                       = &emptyStatus
@@ -147,4 +149,21 @@ var (
 	ZeroCharPtr                          = &zeroChar
 	NineCharPtr                          = &nineChar
 	HyphenCharPtr                        = &hyphenChar
+	MaxUnit8RunePtr                      = &maxUnit8Rune
+	MaxUnit8AsInt16Ptr                   = &maxUnit8AsInt16
+	ParenthesisStartRunePtr              = &parenthesisStartRune
+	ParenthesisEndRunePtr                = &parenthesisEndRune
+	CurlyStartRunePtr                    = &curlyStartRune
+	CurlyEndRunePtr                      = &curlyEndRune
+	SquareStartRunePtr                   = &squareStartRune
+	SquareEndRunePtr                     = &squareEndRune
+	ZeroRunePtr                          = &zeroRune
+	NineRunePtr                          = &nineRune
+	HyphenRunePtr                        = &hyphenRune
+	UpperCaseARunePtr                    = &upperCaseARune
+	UpperCaseZRunePtr                    = &upperCaseZRune
+	LowerCaseARunePtr                    = &lowerCaseARune
+	LowerCaseZRunePtr                    = &lowerCaseZRune
+	LowerCaseRunePtr                     = &lowerCaseRune
+	UpperCaseRunePtr                     = &upperCaseRune
 )
