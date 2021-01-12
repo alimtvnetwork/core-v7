@@ -56,6 +56,8 @@ const (
 	UnixIgnoreMessage               Variation = "Windows tests ignored in Unix."
 	WindowsIgnoreMessage            Variation = "Unix tests ignored in Windows."
 	ComparatorShouldBeWithinRanghe  Variation = "Comparator should be within the range."
+	SearchInputEmpty                Variation = "Search Input is either null or empty."
+	SearchInputOrSearchTermEmpty    Variation = "Search Input or search term either null or empty."
 )
 
 func (variation Variation) String() string {

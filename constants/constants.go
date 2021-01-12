@@ -12,12 +12,12 @@ const (
 	FilePath                                = "File Path"
 	DirectoryPath                           = "Directory Path"
 	Dot                                     = "."
-	UpperCaseA                        byte  = 'A'
-	UpperCaseZ                        byte  = 'Z'
-	LowerCaseA                        byte  = 'a'
-	LowerCaseZ                        byte  = 'z'
-	LowerCase                               = LowerCaseA - UpperCaseA               // c - 'A' + 'a' (ref: https://bit.ly/3mFnUPW) a - A = 32 also works
-	UpperCase                         int16 = int16(UpperCaseA) - int16(LowerCaseA) // c - 'a' + 'A'
+	UpperCaseA                              = 'A'
+	UpperCaseZ                              = 'Z'
+	LowerCaseA                              = 'a'
+	LowerCaseZ                              = 'z'
+	LowerCase                               = LowerCaseA - UpperCaseA // c - 'A' + 'a' (ref: https://bit.ly/3mFnUPW) a - A = 32 also works
+	UpperCase                               = UpperCaseA - LowerCaseA // c - 'a' + 'A'
 	NewLineMac                              = "\n"
 	NewLineUnix                             = "\n"
 	NewLineWindows                          = "\r\n"
@@ -85,15 +85,15 @@ const (
 	ArbitraryCapacity3000                   = 3000
 	ArbitraryCapacity5000                   = 5000
 	ArbitraryCapacity10000                  = 10000
-	LineFeedUnix                      byte  = '\n'
-	CarriageReturn                    byte  = '\r'
-	FormFeed                          byte  = '\f'
-	SpaceByte                         byte  = ' '
-	TabByte                           byte  = '\t'
-	LineFeedUnixByte                  byte  = '\n'
-	CarriageReturnByte                byte  = '\r'
-	FormFeedByte                      byte  = '\f'
-	TabVByte                          byte  = '\v'
+	LineFeedUnix                            = '\n'
+	CarriageReturn                          = '\r'
+	FormFeed                                = '\f'
+	SpaceByte                               = ' '
+	TabByte                                 = '\t'
+	LineFeedUnixByte                        = '\n'
+	CarriageReturnByte                      = '\r'
+	FormFeedByte                            = '\f'
+	TabVByte                                = '\v'
 	MaxUnit8                          byte  = 255
 	OtherPathSeparator                      = "/"
 	WindowsPathSeparator                    = "\\"
@@ -151,4 +151,21 @@ const (
 	ZeroChar                          byte  = '0'
 	NineChar                          byte  = '9'
 	HyphenChar                        byte  = '-'
+	MaxUnit8Rune                      rune  = 255
+	MaxUnit8AsInt16                   int16 = 255
+	ParenthesisStartRune              rune  = '('
+	ParenthesisEndRune                rune  = ')'
+	CurlyStartRune                    rune  = '{'
+	CurlyEndRune                      rune  = '}'
+	SquareStartRune                   rune  = '['
+	SquareEndRune                     rune  = ']'
+	ZeroRune                          rune  = '0'
+	NineRune                          rune  = '9'
+	HyphenRune                        rune  = '-'
+	UpperCaseARune                    rune  = 'A'
+	UpperCaseZRune                    rune  = 'Z'
+	LowerCaseARune                    rune  = 'a'
+	LowerCaseZRune                    rune  = 'z'
+	LowerCaseRune                     rune  = LowerCaseA - UpperCaseA         // c - 'A' + 'a' (ref: https://bit.ly/3mFnUPW) a - A = 32 also works
+	UpperCaseRune                     rune  = UpperCaseARune - LowerCaseARune // c - 'a' + 'A'
 )
