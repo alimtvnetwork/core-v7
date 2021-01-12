@@ -29,6 +29,20 @@ func (v Variant) Is(n Variant) bool {
 	return v.Value() == n.Value()
 }
 
+// val >= start &&  val <= end
+func (v Variant) IsBetween(start, end byte) bool {
+	val := v.Value()
+
+	return val >= start && val <= end
+}
+
+// val >= start &&  val <= end
+func (v Variant) IsBetweenInt(start, end int) bool {
+	val := v.Value()
+
+	return val >= byte(start) && val <= byte(end)
+}
+
 func (v Variant) IsEqual(n byte) bool {
 	return v.Value() == n
 }
@@ -51,6 +65,30 @@ func (v Variant) IsLess(n byte) bool {
 // v.Value() <= n
 func (v Variant) IsLessEqual(n byte) bool {
 	return v.Value() <= n
+}
+
+func (v Variant) IsEqualInt(n int) bool {
+	return v.Value() == byte(n)
+}
+
+// v.Value() > n
+func (v Variant) IsGreaterInt(n int) bool {
+	return v.Value() > byte(n)
+}
+
+// v.Value() >= n
+func (v Variant) IsGreaterEqualInt(n int) bool {
+	return v.Value() >= byte(n)
+}
+
+// v.Value() < n
+func (v Variant) IsLessInt(n int) bool {
+	return v.Value() < byte(n)
+}
+
+// v.Value() <= n
+func (v Variant) IsLessEqualInt(n int) bool {
+	return v.Value() <= byte(n)
 }
 
 // Here left is v, and right is `n`
