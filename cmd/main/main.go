@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"gitlab.com/evatix-go/core/osconsts"
+)
 
 func main() {
-	fmt.Println("Hello World")
+	fmt.Println(osconsts.IsWindows)
+	fmt.Println(osconsts.IsUnixGroup)
 }

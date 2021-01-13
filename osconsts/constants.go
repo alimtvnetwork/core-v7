@@ -32,4 +32,5 @@ const (
 	IsDarwinOrMacOs           = CurrentOperatingSystem == DarwinOrMacOs
 	IsUbuntu                  = CurrentOperatingSystem == Ubuntu
 	IsUnixGroup               = !IsWindows
+	WindowsCDrive             = "C:\\"
 )

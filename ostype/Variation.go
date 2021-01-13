@@ -1,11 +1,14 @@
 package ostype
 
-import "gitlab.com/evatix-go/core/msgtype"
+import (
+	"gitlab.com/evatix-go/core/msgtype"
+)
 
 type Variation byte
 
 const (
-	Windows Variation = iota
+	Any Variation = iota
+	Windows
 	Linux
 	DarwinOrMacOs
 	JavaScript
@@ -21,8 +24,63 @@ func (variation Variation) IsByte(another byte) bool {
 	return variation == Variation(another)
 }
 
-func (variation Variation) Is(another Variation) bool {
-	return variation == another
+func (variation Variation) IsAnyOperatingSystem() bool {
+	return Any == variation
+}
+
+func (variation Variation) Is(other Variation) bool {
+	return other == variation
+}
+
+func (variation Variation) IsAnyMatch(others ...Variation) bool {
+	for _, other := range others {
+		if other == variation {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (variation Variation) IsStringsMatchAny(others ...string) bool {
+	for _, other := range others {
+		otherVariant := GetVariant(other)
+
+		if otherVariant == variation {
+			return true
+		}
+	}
+
+	return false
+}
+
+// variation != Windows
+func (variation Variation) IsPossibleUnixGroup() bool {
+	return variation != Windows
+}
+
+func (variation Variation) IsLinuxOrMac() bool {
+	return variation == Linux || variation == DarwinOrMacOs
+}
+
+func (variation Variation) Group() Group {
+	if variation == Windows {
+		return WindowsGroup
+	}
+
+	if variation == Android {
+		return AndroidGroup
+	}
+
+	if variation == JavaScript {
+		return JavaScriptGroup
+	}
+
+	return UnixGroup
+}
+
+func (variation Variation) IsActualGroupUnix() bool {
+	return variation.Group().IsUnix()
 }
 
 func (variation Variation) IsWindows() bool {
