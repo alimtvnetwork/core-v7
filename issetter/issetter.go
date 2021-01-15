@@ -19,6 +19,30 @@ const (
 	Set           Value = 4
 )
 
+func GetSet(
+	isCondition bool,
+	trueValue Value,
+	falseValue Value,
+) Value {
+	if isCondition {
+		return trueValue
+	}
+
+	return falseValue
+}
+
+func GetSetByte(
+	isCondition bool,
+	trueValue byte,
+	falseValue byte,
+) Value {
+	if isCondition {
+		return Value(trueValue)
+	}
+
+	return Value(falseValue)
+}
+
 func (v Value) Value() byte {
 	return byte(v)
 }
