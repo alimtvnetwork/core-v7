@@ -166,4 +166,8 @@ var (
 	LowerCaseZRunePtr                    = &lowerCaseZRune
 	LowerCaseRunePtr                     = &lowerCaseRune
 	UpperCaseRunePtr                     = &upperCaseRune
+	NoElementsPtr                        = &noElements
+	NoItemsPtr                           = &noItems
+	NoItemsSqaurePtr                     = &noItemsSqaure
+	NoElementsSqaurePtr                  = &noElementsSqaure
 )

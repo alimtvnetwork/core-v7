@@ -165,4 +165,8 @@ var (
 	lowerCaseZRune                    = LowerCaseZRune
 	lowerCaseRune                     = LowerCaseRune
 	upperCaseRune                     = UpperCaseRune
+	noElements                        = NoElements
+	noItems                           = NoItems
+	noItemsSqaure                     = NoItemsSqaure
+	noElementsSqaure                  = NoElementsSqaure
 )

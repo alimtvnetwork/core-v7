@@ -51,6 +51,10 @@ Any other packages used
 
 ## Links
 
+- [go - Calling a method on a nil struct pointer doesn't panic. Why not? - Stack Overflow](https://stackoverflow.com/questions/42238624/calling-a-method-on-a-nil-struct-pointer-doesnt-panic-why-not)
+- [Array of pointers to JSON - Stack Overflow](https://stackoverflow.com/questions/28101966/array-of-pointers-to-json)
+- [Json Parsing of Array Pointers](https://play.golang.org/p/zTuMLBgGWk)
+
 ## Issues
 
 - [Create your issues](https://gitlab.com/evatix-go/core/-/issues)

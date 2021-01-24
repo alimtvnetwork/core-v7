@@ -58,6 +58,7 @@ const (
 	ComparatorShouldBeWithinRanghe  Variation = "Comparator should be within the range."
 	SearchInputEmpty                Variation = "Search Input is either null or empty."
 	SearchInputOrSearchTermEmpty    Variation = "Search Input or search term either null or empty."
+	EmptyResultCannotMakeJson       Variation = "Empty result, cannot make json out of it."
 )
 
 func GetSet(
