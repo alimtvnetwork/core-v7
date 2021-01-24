@@ -280,7 +280,7 @@ func (charCollectionMap *CharCollectionMap) HasWithCollection(
 	str string,
 ) (bool, *Collection) {
 	if charCollectionMap.IsEmpty() {
-		return false, StaticEmptyCollectionPtr
+		return false, EmptyCollection()
 	}
 
 	char := charCollectionMap.
@@ -292,7 +292,7 @@ func (charCollectionMap *CharCollectionMap) HasWithCollection(
 		return collection.Has(str), collection
 	}
 
-	return false, StaticEmptyCollectionPtr
+	return false, EmptyCollection()
 }
 
 func (charCollectionMap *CharCollectionMap) HasWithCollectionLock(
@@ -302,7 +302,7 @@ func (charCollectionMap *CharCollectionMap) HasWithCollectionLock(
 	defer charCollectionMap.Unlock()
 
 	if charCollectionMap.IsEmpty() {
-		return false, StaticEmptyCollectionPtr
+		return false, EmptyCollection()
 	}
 
 	char := charCollectionMap.
@@ -314,7 +314,7 @@ func (charCollectionMap *CharCollectionMap) HasWithCollectionLock(
 		return collection.HasLock(str), collection
 	}
 
-	return false, StaticEmptyCollectionPtr
+	return false, EmptyCollection()
 }
 
 func (charCollectionMap *CharCollectionMap) LengthOf(char byte) int {
