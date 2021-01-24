@@ -351,7 +351,7 @@ func (charHashsetMap *CharHashsetMap) HasWithHashset(
 	str string,
 ) (bool, *Hashset) {
 	if charHashsetMap.IsEmpty() {
-		return false, StaticEmptyHashsetPtr
+		return false, EmptyHashset()
 	}
 
 	char := charHashsetMap.
@@ -363,7 +363,7 @@ func (charHashsetMap *CharHashsetMap) HasWithHashset(
 		return hashset.Has(str), hashset
 	}
 
-	return false, StaticEmptyHashsetPtr
+	return false, EmptyHashset()
 }
 
 func (charHashsetMap *CharHashsetMap) HasWithHashsetLock(
@@ -373,7 +373,7 @@ func (charHashsetMap *CharHashsetMap) HasWithHashsetLock(
 	defer charHashsetMap.Unlock()
 
 	if charHashsetMap.IsEmpty() {
-		return false, StaticEmptyHashsetPtr
+		return false, EmptyHashset()
 	}
 
 	char := charHashsetMap.
@@ -385,7 +385,7 @@ func (charHashsetMap *CharHashsetMap) HasWithHashsetLock(
 		return hashset.HasLock(str), hashset
 	}
 
-	return false, StaticEmptyHashsetPtr
+	return false, EmptyHashset()
 }
 
 func (charHashsetMap *CharHashsetMap) LengthOf(char byte) int {
