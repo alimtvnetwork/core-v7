@@ -50,6 +50,60 @@ func EmptyCharCollectionMap() *CharCollectionMap {
 	}
 }
 
+func NewCharCollectionMapUsingItems(
+	items []string,
+) *CharCollectionMap {
+	if items == nil {
+		return EmptyCharCollectionMap()
+	}
+
+	return NewCharCollectionMapUsingItemsPtr(
+		&items)
+}
+
+func NewCharCollectionMapUsingItemsPtr(
+	items *[]string,
+) *CharCollectionMap {
+	if items == nil {
+		return EmptyCharCollectionMap()
+	}
+
+	length := len(*items)
+	if length == 0 {
+		return EmptyCharCollectionMap()
+	}
+
+	mapElements := make(map[byte]*Collection, length)
+	charCollectionMap := &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: 0,
+	}
+
+	charCollectionMap.AddStringsPtr(items)
+
+	return charCollectionMap
+}
+
+func NewCharCollectionMapUsingItemsPlusCap(
+	items *[]string,
+	capacityOrLength int,
+) *CharCollectionMap {
+	mapElements := make(map[byte]*Collection, capacityOrLength)
+
+	charCollectionMap := &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: 0,
+	}
+
+	if items == nil || len(*items) == 0 {
+		return charCollectionMap
+	}
+
+	charCollectionMap.AddStringsPtr(items)
+
+	return charCollectionMap
+}
+
 func (charCollectionMap *CharCollectionMap) GetChar(
 	str string,
 ) byte {

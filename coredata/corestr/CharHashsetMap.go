@@ -41,6 +41,57 @@ func NewCharHashsetMap(
 	}
 }
 
+func NewCharHashsetMapUsingItemsPlusCap(
+	items *[]string,
+	capacity, selfHashsetCapacity int,
+) *CharHashsetMap {
+	charHashsetMap := NewCharHashsetMap(capacity, selfHashsetCapacity)
+
+	charHashsetMap.AddStringsPtr(items)
+
+	return charHashsetMap
+}
+
+func NewCharHashsetMapUsingItems(
+	items []string,
+	selfHashsetCapacity int,
+) *CharHashsetMap {
+	if items == nil {
+		return NewCharHashsetMap(
+			constants.ArbitraryCapacity5,
+			selfHashsetCapacity)
+	}
+
+	length := len(items)
+	charHashsetMap := NewCharHashsetMap(
+		length,
+		selfHashsetCapacity)
+
+	charHashsetMap.AddStrings(items...)
+
+	return charHashsetMap
+}
+
+func NewCharHashsetMapUsingItemsPtr(
+	items *[]string,
+	selfHashsetCapacity int,
+) *CharHashsetMap {
+	if items == nil {
+		return NewCharHashsetMap(
+			constants.ArbitraryCapacity5,
+			selfHashsetCapacity)
+	}
+
+	length := len(*items)
+	charHashsetMap := NewCharHashsetMap(
+		length,
+		selfHashsetCapacity)
+
+	charHashsetMap.AddStringsPtr(items)
+
+	return charHashsetMap
+}
+
 // selfHashsetCapacity = 0
 func EmptyCharHashsetMap() *CharHashsetMap {
 	mapElements := make(

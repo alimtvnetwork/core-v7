@@ -382,7 +382,7 @@ func (hashset *Hashset) GetFilteredItems(
 		0,
 		hashset.Length())
 
-	for key, _ := range *hashset.items {
+	for key := range *hashset.items {
 		result, isKeep := filter(key)
 
 		if !isKeep {
@@ -410,7 +410,7 @@ func (hashset *Hashset) GetFilteredCollection(
 		0,
 		hashset.Length())
 
-	for key, _ := range *hashset.items {
+	for key := range *hashset.items {
 		result, isKeep := filter(key)
 
 		if !isKeep {
@@ -528,7 +528,7 @@ func (hashset *Hashset) IsEqualsPtrLock(another *Hashset) bool {
 		return false
 	}
 
-	for key, _ := range *hashset.items {
+	for key := range *hashset.items {
 		isRes, has := (*another.items)[key]
 
 		if !has || !isRes {
@@ -564,7 +564,7 @@ func (hashset *Hashset) IsEqualsPtr(another *Hashset) bool {
 		return false
 	}
 
-	for key, _ := range *hashset.items {
+	for key := range *hashset.items {
 		isRes, has := (*another.items)[key]
 
 		if !has || !isRes {

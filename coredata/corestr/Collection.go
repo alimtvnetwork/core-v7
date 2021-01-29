@@ -655,7 +655,7 @@ func (collection *Collection) HasAll(items ...string) bool {
 		return false
 	}
 
-	for _, element := range *collection.items {
+	for _, element := range items {
 		if !collection.IsContainsPtr(&element) {
 			return false
 		}
