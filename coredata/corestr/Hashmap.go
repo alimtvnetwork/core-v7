@@ -459,6 +459,30 @@ func (hashmap *Hashmap) ItemsCopyLock() *map[string]string {
 	return copiedItemsMap
 }
 
+func (hashmap *Hashmap) ValuesCollection() *Collection {
+	return NewCollectionUsingStrings(
+		hashmap.ValuesListPtr())
+}
+
+func (hashmap *Hashmap) ValuesHashset() *Hashset {
+	return NewHashsetUsingStrings(
+		hashmap.ValuesListPtr(),
+		0,
+		false)
+}
+
+func (hashmap *Hashmap) ValuesCollectionLock() *Collection {
+	return NewCollectionUsingStrings(
+		hashmap.ValuesListCopyPtrLock())
+}
+
+func (hashmap *Hashmap) ValuesHashsetLock() *Hashset {
+	return NewHashsetUsingStrings(
+		hashmap.ValuesListCopyPtrLock(),
+		0,
+		false)
+}
+
 func (hashmap *Hashmap) ValuesList() []string {
 	return *hashmap.ValuesListPtr()
 }
@@ -471,9 +495,40 @@ func (hashmap *Hashmap) ValuesListPtr() *[]string {
 	return hashmap.cachedList
 }
 
+func (hashmap *Hashmap) KeysValuesCollection() (keys, values *Collection) {
+	wg := &sync.WaitGroup{}
+	wg.Add(2)
+
+	go func() {
+		keys = NewCollectionUsingStrings(hashmap.Keys())
+		wg.Done()
+	}()
+
+	go func() {
+		values = NewCollectionUsingStrings(hashmap.ValuesListPtr())
+		wg.Done()
+	}()
+
+	wg.Wait()
+
+	return keys, values
+}
+
 func (hashmap *Hashmap) KeysValuesList() (keys, values *[]string) {
-	keys = hashmap.Keys()
-	values = hashmap.ValuesListPtr()
+	wg := &sync.WaitGroup{}
+	wg.Add(2)
+
+	go func() {
+		keys = hashmap.Keys()
+		wg.Done()
+	}()
+
+	go func() {
+		values = hashmap.ValuesListPtr()
+		wg.Done()
+	}()
+
+	wg.Wait()
 
 	return keys, values
 }
@@ -496,14 +551,19 @@ func (hashmap *Hashmap) KeysValuePairs() *[]KeyValuePair {
 
 func (hashmap *Hashmap) KeysValuesListLock() (keys, values *[]string) {
 	hashmap.Lock()
+	wg := &sync.WaitGroup{}
+	wg.Add(2)
 
 	go func() {
 		keys = hashmap.Keys()
+		wg.Done()
 	}()
 	go func() {
 		values = hashmap.ValuesListPtr()
+		wg.Done()
 	}()
 
+	wg.Wait()
 	hashmap.Unlock()
 
 	return keys, values
@@ -523,6 +583,10 @@ func (hashmap *Hashmap) Keys() *[]string {
 	}
 
 	return &keys
+}
+
+func (hashmap *Hashmap) KeysCollection() *Collection {
+	return NewCollectionUsingStrings(hashmap.Keys())
 }
 
 func (hashmap *Hashmap) KeysLock() *[]string {
@@ -584,7 +648,7 @@ func (hashmap *Hashmap) ValuesToLower() *Hashmap {
 }
 
 func (hashmap *Hashmap) Length() int {
-	if hashmap.hasMapUpdated {
+	if hashmap.hasMapUpdated || hashmap.length < 0 {
 		if hashmap.items == nil || *hashmap.items == nil {
 			hashmap.length = 0
 
@@ -753,9 +817,10 @@ func (hashmap *Hashmap) UnmarshalJSON(data []byte) error {
 
 	if err == nil {
 		hashmap.items = dataModel.Items
-		hashmap.length = -1
-		hashmap.hasMapUpdated = true
-		hashmap.isEmptySet = false
+		hashmap.length = len(*hashmap.items)
+		hashmap.hasMapUpdated = false
+		hashmap.isEmptySet = hashmap.length == 0
+		hashmap.cachedList = nil
 	}
 
 	return err
