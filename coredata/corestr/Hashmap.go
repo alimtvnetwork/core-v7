@@ -763,12 +763,12 @@ func (hashmap *Hashmap) UnmarshalJSON(data []byte) error {
 
 func (hashmap *Hashmap) Json() *corejson.Result {
 	if hashmap.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(hashmap)
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }
 
 // It will not update the self but creates a new one.

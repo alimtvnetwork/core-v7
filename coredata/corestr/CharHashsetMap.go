@@ -1252,10 +1252,10 @@ func (charHashsetMap *CharHashsetMap) UnmarshalJSON(data []byte) error {
 
 func (charHashsetMap *CharHashsetMap) Json() *corejson.Result {
 	if charHashsetMap.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(charHashsetMap.JsonModel())
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }

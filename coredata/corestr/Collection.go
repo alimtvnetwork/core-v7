@@ -895,12 +895,12 @@ func (collection *Collection) UnmarshalJSON(data []byte) error {
 
 func (collection *Collection) Json() *corejson.Result {
 	if collection.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(collection)
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }
 
 func (collection *Collection) ParseInjectUsingJson(

@@ -1201,12 +1201,12 @@ func (charCollectionMap *CharCollectionMap) UnmarshalJSON(data []byte) error {
 
 func (charCollectionMap *CharCollectionMap) Json() *corejson.Result {
 	if charCollectionMap.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(charCollectionMap.JsonModel())
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }
 
 func (charCollectionMap *CharCollectionMap) ParseInjectUsingJson(

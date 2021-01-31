@@ -227,12 +227,12 @@ func (hashsetsCollection *HashsetsCollection) UnmarshalJSON(
 
 func (hashsetsCollection *HashsetsCollection) Json() *corejson.Result {
 	if hashsetsCollection.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(hashsetsCollection)
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }
 
 func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJson(

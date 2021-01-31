@@ -811,12 +811,12 @@ func (hashset *Hashset) UnmarshalJSON(data []byte) error {
 
 func (hashset *Hashset) Json() *corejson.Result {
 	if hashset.IsEmpty() {
-		return corejson.EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(hashset)
 
-	return corejson.NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewPtr(jsonBytes, err)
 }
 
 // It will not update the self but creates a new one.
