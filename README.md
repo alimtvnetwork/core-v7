@@ -28,7 +28,7 @@ All common core infrastructure and constants combined package.
 - Update git to 2.29
 - Enable go modules. (Windows : `go env -w GO111MODULE=on`, Unix : `export GO111MODULE=on`)
 - Add `gitlab.com/evatix-go` to go env private
-  
+
 To set for Windows:
 
 `go env -w GOPRIVATE=[AddExistingOnes;]gitlab.com/evatix-go`

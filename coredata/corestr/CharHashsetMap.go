@@ -1,21 +1,23 @@
 package corestr
 
 import (
+	"encoding/json"
 	"fmt"
 	"strings"
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
 )
 
 type CharHashsetMap struct {
 	items               *map[byte]*Hashset
-	selfHashsetCapacity int
+	eachHashsetCapacity int
 	sync.Mutex
 }
 
-// CharHashsetMap.selfHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
+// CharHashsetMap.eachHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
 //
 // For lower than 5 use the EmptyCharHashsetMap hashset definition.
 func NewCharHashsetMap(
@@ -37,7 +39,7 @@ func NewCharHashsetMap(
 
 	return &CharHashsetMap{
 		items:               &mapElements,
-		selfHashsetCapacity: selfHashsetCapacity,
+		eachHashsetCapacity: selfHashsetCapacity,
 	}
 }
 
@@ -92,7 +94,7 @@ func NewCharHashsetMapUsingItemsPtr(
 	return charHashsetMap
 }
 
-// selfHashsetCapacity = 0
+// eachHashsetCapacity = 0
 func EmptyCharHashsetMap() *CharHashsetMap {
 	mapElements := make(
 		map[byte]*Hashset,
@@ -100,7 +102,7 @@ func EmptyCharHashsetMap() *CharHashsetMap {
 
 	return &CharHashsetMap{
 		items:               &mapElements,
-		selfHashsetCapacity: 0,
+		eachHashsetCapacity: 0,
 	}
 }
 
@@ -640,7 +642,7 @@ func (charHashsetMap *CharHashsetMap) AddLock(
 		return charHashsetMap
 	}
 
-	newHashset := NewHashset(charHashsetMap.selfHashsetCapacity)
+	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
 	newHashset.Add(str)
 
 	charHashsetMap.Lock()
@@ -662,7 +664,7 @@ func (charHashsetMap *CharHashsetMap) Add(
 		hashset.Add(str)
 	}
 
-	newHashset := NewHashset(charHashsetMap.selfHashsetCapacity)
+	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
 	newHashset.Add(str)
 	(*charHashsetMap.
 		items)[char] = newHashset
@@ -682,7 +684,7 @@ func (charHashsetMap *CharHashsetMap) AddStringPtr(
 		hashset.AddPtr(str)
 	}
 
-	newHashset := NewHashset(charHashsetMap.selfHashsetCapacity)
+	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
 	newHashset.AddPtr(str)
 	(*charHashsetMap.
 		items)[char] = newHashset
@@ -707,7 +709,7 @@ func (charHashsetMap *CharHashsetMap) AddStringPtrLock(
 		return charHashsetMap
 	}
 
-	newHashset := NewHashset(charHashsetMap.selfHashsetCapacity)
+	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
 	newHashset.AddPtr(str)
 
 	charHashsetMap.Lock()
@@ -724,8 +726,13 @@ func (charHashsetMap *CharHashsetMap) AddSameStartingCharItems(
 	allItemsWithSameChar *[]string,
 ) *CharHashsetMap {
 	if allItemsWithSameChar == nil ||
-		*allItemsWithSameChar == nil ||
-		len(*allItemsWithSameChar) == 0 {
+		*allItemsWithSameChar == nil {
+		return charHashsetMap
+	}
+
+	length := len(*allItemsWithSameChar)
+
+	if length == 0 {
 		return charHashsetMap
 	}
 
@@ -739,7 +746,10 @@ func (charHashsetMap *CharHashsetMap) AddSameStartingCharItems(
 	}
 
 	(*charHashsetMap.items)[char] =
-		NewHashsetUsingStrings(allItemsWithSameChar)
+		NewHashsetUsingStrings(
+			allItemsWithSameChar,
+			length*2,
+			true)
 
 	return charHashsetMap
 }
@@ -886,7 +896,7 @@ func (charHashsetMap *CharHashsetMap) GetHashset(
 	}
 
 	if isAddNewOnEmpty {
-		newHashset := NewHashset(charHashsetMap.selfHashsetCapacity)
+		newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
 		(*charHashsetMap.items)[char] = newHashset
 
 		return newHashset
@@ -935,7 +945,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollection(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := NewHashset(
-			charHashsetMap.selfHashsetCapacity)
+			charHashsetMap.eachHashsetCapacity)
 		(*charHashsetMap.items)[char] = newHashset
 
 		return newHashset
@@ -976,7 +986,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsHashset(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := NewHashset(
-			charHashsetMap.selfHashsetCapacity)
+			charHashsetMap.eachHashsetCapacity)
 		(*charHashsetMap.items)[char] = newHashset
 
 		return newHashset
@@ -1052,7 +1062,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollectionLock(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := NewHashset(
-			charHashsetMap.selfHashsetCapacity)
+			charHashsetMap.eachHashsetCapacity)
 		charHashsetMap.Lock()
 		(*charHashsetMap.items)[char] = newHashset
 		charHashsetMap.Unlock()
@@ -1097,7 +1107,7 @@ func (charHashsetMap *CharHashsetMap) AddHashsetLock(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := NewHashset(
-			charHashsetMap.selfHashsetCapacity)
+			charHashsetMap.eachHashsetCapacity)
 		charHashsetMap.Lock()
 		(*charHashsetMap.items)[char] = newHashset
 		charHashsetMap.Unlock()
@@ -1156,4 +1166,96 @@ func (charHashsetMap *CharHashsetMap) HashsetByStringFirstCharLock(
 	char := charHashsetMap.GetChar(str)
 
 	return charHashsetMap.HashsetByCharLock(char)
+}
+
+func (charHashsetMap *CharHashsetMap) JsonModel() *CharHashsetDataModel {
+	return &CharHashsetDataModel{
+		Items: charHashsetMap.items,
+		EachHashsetCapacity: charHashsetMap.
+			eachHashsetCapacity,
+	}
+}
+
+func (charHashsetMap *CharHashsetMap) JsonModelAny() interface{} {
+	return charHashsetMap.JsonModel()
+}
+
+func (charHashsetMap *CharHashsetMap) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = charHashsetMap
+
+	return &jsoner
+}
+
+func (charHashsetMap *CharHashsetMap) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = charHashsetMap
+
+	return &jsonMarshaller
+}
+
+func (charHashsetMap *CharHashsetMap) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonMarshaller corejson.ParseSelfInjector = charHashsetMap
+
+	return &jsonMarshaller
+}
+
+func (charHashsetMap *CharHashsetMap) JsonParseSelfInject(jsonResult *corejson.Result) {
+	charHashsetMap.ParseInjectUsingJsonMust(jsonResult)
+}
+
+func (charHashsetMap *CharHashsetMap) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*CharHashsetMap, error) {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
+		return EmptyCharHashsetMap(), nil
+	}
+
+	err := json.Unmarshal(*jsonResult.Bytes, &charHashsetMap)
+
+	if err != nil {
+		return EmptyCharHashsetMap(), err
+	}
+
+	return charHashsetMap, nil
+}
+
+// Panic if error
+func (charHashsetMap *CharHashsetMap) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *CharHashsetMap {
+	newUsingJson, err :=
+		charHashsetMap.ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return newUsingJson
+}
+
+func (charHashsetMap *CharHashsetMap) MarshalJSON() ([]byte, error) {
+	return json.Marshal(*charHashsetMap.JsonModel())
+}
+
+func (charHashsetMap *CharHashsetMap) UnmarshalJSON(data []byte) error {
+	var dataModel CharHashsetDataModel
+
+	err := json.Unmarshal(data, &dataModel)
+
+	if err == nil {
+		charHashsetMap.items = dataModel.Items
+		charHashsetMap.eachHashsetCapacity =
+			dataModel.EachHashsetCapacity
+	}
+
+	return err
+}
+
+func (charHashsetMap *CharHashsetMap) Json() *corejson.Result {
+	if charHashsetMap.IsEmpty() {
+		return corejson.EmptyJsonResultWithoutErrorPtr()
+	}
+
+	jsonBytes, err := json.Marshal(charHashsetMap.JsonModel())
+
+	return corejson.NewJsonResultPtr(jsonBytes, err)
 }

@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
 )
 
@@ -16,7 +17,7 @@ type CharCollectionMap struct {
 	sync.Mutex
 }
 
-// CharCollectionMap.EachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
+// CharCollectionMap.eachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
 //
 // For lower than 5 use the EmptyCharCollectionMap items definition.
 func NewCharCollectionMap(
@@ -40,7 +41,7 @@ func NewCharCollectionMap(
 	}
 }
 
-// EachCollectionCapacity = 0
+// eachCollectionCapacity = 0
 func EmptyCharCollectionMap() *CharCollectionMap {
 	mapElements := make(map[byte]*Collection, 0)
 
@@ -1031,7 +1032,10 @@ func (charCollectionMap *CharCollectionMap) HashsetByChar(
 		return nil
 	}
 
-	return NewHashsetUsingCollection(collection)
+	return NewHashsetUsingCollection(
+		collection,
+		0,
+		false)
 }
 
 func (charCollectionMap *CharCollectionMap) HashsetByCharLock(
@@ -1047,7 +1051,10 @@ func (charCollectionMap *CharCollectionMap) HashsetByCharLock(
 
 	items := collection.ListCopyPtrLock()
 
-	return NewHashsetUsingStrings(items)
+	return NewHashsetUsingStrings(
+		items,
+		0,
+		false)
 }
 
 func (charCollectionMap *CharCollectionMap) HashsetByStringFirstChar(
@@ -1148,6 +1155,32 @@ func (charCollectionMap *CharCollectionMap) JsonModel() *CharCollectionDataModel
 	}
 }
 
+func (charCollectionMap *CharCollectionMap) JsonModelAny() interface{} {
+	return charCollectionMap.JsonModel()
+}
+
+func (charCollectionMap *CharCollectionMap) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = charCollectionMap
+
+	return &jsoner
+}
+
+func (charCollectionMap *CharCollectionMap) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = charCollectionMap
+
+	return &jsonMarshaller
+}
+
+func (charCollectionMap *CharCollectionMap) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonMarshaller corejson.ParseSelfInjector = charCollectionMap
+
+	return &jsonMarshaller
+}
+
+func (charCollectionMap *CharCollectionMap) JsonParseSelfInject(jsonResult *corejson.Result) {
+	charCollectionMap.ParseInjectUsingJsonMust(jsonResult)
+}
+
 func (charCollectionMap *CharCollectionMap) MarshalJSON() ([]byte, error) {
 	return json.Marshal(*charCollectionMap.JsonModel())
 }
@@ -1166,20 +1199,20 @@ func (charCollectionMap *CharCollectionMap) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-func (charCollectionMap *CharCollectionMap) Json() *JsonResult {
+func (charCollectionMap *CharCollectionMap) Json() *corejson.Result {
 	if charCollectionMap.IsEmpty() {
-		return EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyJsonResultWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(charCollectionMap.JsonModel())
 
-	return NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewJsonResultPtr(jsonBytes, err)
 }
 
 func (charCollectionMap *CharCollectionMap) ParseInjectUsingJson(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) (*CharCollectionMap, error) {
-	if jsonResult == nil || jsonResult.IsBytesEmpty() {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
 		return EmptyCharCollectionMap(), nil
 	}
 
@@ -1194,7 +1227,7 @@ func (charCollectionMap *CharCollectionMap) ParseInjectUsingJson(
 
 // Panic if error
 func (charCollectionMap *CharCollectionMap) ParseInjectUsingJsonMust(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) *CharCollectionMap {
 	newUsingJson, err :=
 		charCollectionMap.ParseInjectUsingJson(jsonResult)

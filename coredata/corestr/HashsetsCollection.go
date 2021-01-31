@@ -6,6 +6,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 )
 
 type HashsetsCollection struct {
@@ -203,6 +204,10 @@ func (hashsetsCollection *HashsetsCollection) JsonModel() *HashsetsCollectionDat
 	return NewHashsetsCollectionDataModelUsing(hashsetsCollection)
 }
 
+func (hashsetsCollection *HashsetsCollection) JsonModelAny() interface{} {
+	return hashsetsCollection.JsonModel()
+}
+
 func (hashsetsCollection *HashsetsCollection) MarshalJSON() ([]byte, error) {
 	return json.Marshal(hashsetsCollection.JsonModel())
 }
@@ -220,20 +225,20 @@ func (hashsetsCollection *HashsetsCollection) UnmarshalJSON(
 	return err
 }
 
-func (hashsetsCollection *HashsetsCollection) Json() *JsonResult {
+func (hashsetsCollection *HashsetsCollection) Json() *corejson.Result {
 	if hashsetsCollection.IsEmpty() {
-		return EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyJsonResultWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(hashsetsCollection)
 
-	return NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewJsonResultPtr(jsonBytes, err)
 }
 
 func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJson(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) (*HashsetsCollection, error) {
-	if jsonResult == nil || jsonResult.IsBytesEmpty() {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
 		return EmptyHashsetsCollection(), nil
 	}
 
@@ -248,7 +253,7 @@ func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJson(
 
 // Panic if error
 func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJsonMust(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) *HashsetsCollection {
 	hashSet, err := hashsetsCollection.
 		ParseInjectUsingJson(jsonResult)
@@ -282,4 +287,26 @@ func (hashsetsCollection *HashsetsCollection) Join(
 	return strings.Join(
 		*hashsetsCollection.StringsList(),
 		separator)
+}
+
+func (hashsetsCollection *HashsetsCollection) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = hashsetsCollection
+
+	return &jsoner
+}
+
+func (hashsetsCollection *HashsetsCollection) JsonParseSelfInject(jsonResult *corejson.Result) {
+	hashsetsCollection.ParseInjectUsingJsonMust(jsonResult)
+}
+
+func (hashsetsCollection *HashsetsCollection) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonMarshaller corejson.ParseSelfInjector = hashsetsCollection
+
+	return &jsonMarshaller
+}
+
+func (hashsetsCollection *HashsetsCollection) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = hashsetsCollection
+
+	return &jsonMarshaller
 }

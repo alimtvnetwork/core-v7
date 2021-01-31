@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 )
 
 type Hashset struct {
@@ -26,6 +27,84 @@ func (hashset *Hashset) IsEmpty() bool {
 	}
 
 	return hashset.isEmptySet
+}
+
+// Changing capacity creates new map and points to it.
+// There is memory copy and loop is performed.
+func (hashset *Hashset) AddCapacitiesLock(
+	capacities ...int,
+) *Hashset {
+	length := hashset.LengthLock()
+
+	if capacities == nil || len(capacities) == 0 {
+		return hashset
+	}
+
+	for _, capacity := range capacities {
+		length += capacity
+	}
+
+	return hashset.ResizeLock(length)
+}
+
+// Changing capacity creates new map and points to it.
+// There is memory copy and loop is performed.
+func (hashset *Hashset) AddCapacities(
+	capacities ...int,
+) *Hashset {
+	length := hashset.Length()
+
+	if capacities == nil || len(capacities) == 0 {
+		return hashset
+	}
+
+	for _, capacity := range capacities {
+		length += capacity
+	}
+
+	return hashset.Resize(length)
+}
+
+// Changing capacity creates new map and points to it.
+// There is memory copy and loop is performed.
+func (hashset *Hashset) Resize(capacity int) *Hashset {
+	length := hashset.Length()
+
+	if length > capacity {
+		return hashset
+	}
+
+	newItemsMap := make(map[string]bool, capacity)
+
+	for val := range *hashset.items {
+		newItemsMap[val] = true
+	}
+
+	hashset.items = &newItemsMap
+
+	return hashset
+}
+
+// Changing capacity creates new map and points to it.
+// There is memory copy and loop is performed.
+func (hashset *Hashset) ResizeLock(capacity int) *Hashset {
+	length := hashset.LengthLock()
+
+	if length > capacity {
+		return hashset
+	}
+
+	newItemsMap := make(map[string]bool, capacity)
+
+	for val := range *hashset.items {
+		newItemsMap[val] = true
+	}
+
+	hashset.Lock()
+	hashset.items = &newItemsMap
+	hashset.Unlock()
+
+	return hashset
 }
 
 func (hashset *Hashset) Collection() *Collection {
@@ -79,6 +158,12 @@ func (hashset *Hashset) AddStringsPtrWgLock(keys *[]string, wg *sync.WaitGroup) 
 		return hashset
 	}
 
+	length := len(*keys)
+
+	if length > hashset.length || length > constants.ArbitraryCapacity100 {
+		hashset.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
+	}
+
 	hashset.Lock()
 	for _, key := range *keys {
 		(*hashset.items)[key] = true
@@ -98,6 +183,12 @@ func (hashset *Hashset) AddHashsetItems(
 		return hashset
 	}
 
+	length := hashsetAdd.Length()
+
+	if length > hashset.length || length > constants.ArbitraryCapacity100 {
+		hashset.AddCapacities(length*2, constants.ArbitraryCapacity100)
+	}
+
 	for k := range *hashsetAdd.items {
 		(*hashset.items)[k] = true
 	}
@@ -107,11 +198,77 @@ func (hashset *Hashset) AddHashsetItems(
 	return hashset
 }
 
+// only add if the value is true
+func (hashset *Hashset) AddItemsMap(
+	itemsMap *map[string]bool,
+) *Hashset {
+	if itemsMap == nil {
+		return hashset
+	}
+
+	length := len(*itemsMap)
+
+	if length > hashset.length || length > constants.ArbitraryCapacity100 {
+		hashset.AddCapacities(length*2, constants.ArbitraryCapacity100)
+	}
+
+	for k, isEnabled := range *itemsMap {
+		if !isEnabled {
+			continue
+		}
+
+		(*hashset.items)[k] = true
+	}
+
+	hashset.hasMapUpdated = true
+
+	return hashset
+}
+
+// only add if the value is true
+// Assume that wg already enqueued the job as wg.Add(...) done already.
+func (hashset *Hashset) AddItemsMapWgLock(
+	itemsMap *map[string]bool,
+	wg *sync.WaitGroup,
+) *Hashset {
+	if itemsMap == nil {
+		return hashset
+	}
+
+	length := len(*itemsMap)
+
+	if length > hashset.length || length > constants.ArbitraryCapacity100 {
+		hashset.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
+	}
+
+	for k, isEnabled := range *itemsMap {
+		if !isEnabled {
+			continue
+		}
+
+		hashset.Lock()
+		(*hashset.items)[k] = true
+		hashset.Unlock()
+	}
+
+	wg.Done()
+	hashset.hasMapUpdated = true
+
+	return hashset
+}
+
 func (hashset *Hashset) AddHashsetWgLock(
-	hashsetAdd *Hashset, wg *sync.WaitGroup,
+	hashsetAdd *Hashset,
+	wg *sync.WaitGroup,
 ) *Hashset {
 	if hashsetAdd == nil {
 		return hashset
+	}
+
+	length := hashsetAdd.LengthLock()
+
+	if length > hashset.length || length > constants.ArbitraryCapacity100 {
+		hashset.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
 	}
 
 	hashset.Lock()
@@ -467,7 +624,8 @@ func (hashset *Hashset) setCached() {
 
 // Create a new items with all lower strings
 func (hashset *Hashset) ToLowerSet() *Hashset {
-	newMap := make(map[string]bool, hashset.Length())
+	length := hashset.Length()
+	newMap := make(map[string]bool, length)
 
 	var toLower string
 	for key, isEnabled := range *hashset.items {
@@ -475,7 +633,10 @@ func (hashset *Hashset) ToLowerSet() *Hashset {
 		newMap[toLower] = isEnabled
 	}
 
-	return NewHashsetUsingMap(&newMap)
+	return NewHashsetUsingMap(
+		&newMap,
+		length,
+		false)
 }
 
 func (hashset *Hashset) Length() int {
@@ -626,6 +787,10 @@ func (hashset *Hashset) JsonModel() *HashsetDataModel {
 	return NewHashsetsDataModelUsing(hashset)
 }
 
+func (hashset *Hashset) JsonModelAny() interface{} {
+	return hashset.JsonModel()
+}
+
 func (hashset *Hashset) MarshalJSON() ([]byte, error) {
 	return json.Marshal(hashset.JsonModel())
 }
@@ -644,21 +809,21 @@ func (hashset *Hashset) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-func (hashset *Hashset) Json() *JsonResult {
+func (hashset *Hashset) Json() *corejson.Result {
 	if hashset.IsEmpty() {
-		return EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyJsonResultWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(hashset)
 
-	return NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewJsonResultPtr(jsonBytes, err)
 }
 
 // It will not update the self but creates a new one.
 func (hashset *Hashset) ParseInjectUsingJson(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) (*Hashset, error) {
-	if jsonResult == nil || jsonResult.IsBytesEmpty() {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
 		return EmptyHashset(), nil
 	}
 
@@ -673,7 +838,7 @@ func (hashset *Hashset) ParseInjectUsingJson(
 
 // Panic if error
 func (hashset *Hashset) ParseInjectUsingJsonMust(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) *Hashset {
 	hashSet, err := hashset.ParseInjectUsingJson(jsonResult)
 

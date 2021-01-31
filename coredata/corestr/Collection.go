@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 )
 
 type Collection struct {
@@ -602,11 +603,17 @@ func (collection *Collection) NonEmptyListPtr() *[]string {
 }
 
 func (collection *Collection) Hashset() *Hashset {
-	return NewHashsetUsingStrings(collection.items)
+	return NewHashsetUsingStrings(
+		collection.items,
+		collection.Length()*2,
+		true)
 }
 
 func (collection *Collection) HashsetLock() *Hashset {
-	return NewHashsetUsingStrings(collection.ListCopyPtrLock())
+	return NewHashsetUsingStrings(
+		collection.ListCopyPtrLock(),
+		0,
+		false)
 }
 
 // direct return pointer
@@ -866,6 +873,10 @@ func (collection *Collection) JsonModel() *CollectionDataModel {
 	}
 }
 
+func (collection *Collection) JsonModelAny() interface{} {
+	return collection.JsonModel()
+}
+
 func (collection *Collection) MarshalJSON() ([]byte, error) {
 	return json.Marshal(*collection.JsonModel())
 }
@@ -882,20 +893,20 @@ func (collection *Collection) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-func (collection *Collection) Json() *JsonResult {
+func (collection *Collection) Json() *corejson.Result {
 	if collection.IsEmpty() {
-		return EmptyJsonResultWithoutErrorPtr()
+		return corejson.EmptyJsonResultWithoutErrorPtr()
 	}
 
 	jsonBytes, err := json.Marshal(collection)
 
-	return NewJsonResultPtr(jsonBytes, err)
+	return corejson.NewJsonResultPtr(jsonBytes, err)
 }
 
 func (collection *Collection) ParseInjectUsingJson(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) (*Collection, error) {
-	if jsonResult == nil || jsonResult.IsBytesEmpty() {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
 		return EmptyCollection(), nil
 	}
 
@@ -910,7 +921,7 @@ func (collection *Collection) ParseInjectUsingJson(
 
 // Panic if error
 func (collection *Collection) ParseInjectUsingJsonMust(
-	jsonResult *JsonResult,
+	jsonResult *corejson.Result,
 ) *Collection {
 	newUsingJson, err :=
 		collection.ParseInjectUsingJson(jsonResult)
@@ -920,4 +931,27 @@ func (collection *Collection) ParseInjectUsingJsonMust(
 	}
 
 	return newUsingJson
+}
+
+// Panic if error
+func (collection *Collection) JsonParseSelfInject(jsonResult *corejson.Result) {
+	collection.ParseInjectUsingJsonMust(jsonResult)
+}
+
+func (collection *Collection) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = collection
+
+	return &jsoner
+}
+
+func (collection *Collection) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonInjector corejson.ParseSelfInjector = collection
+
+	return &jsonInjector
+}
+
+func (collection *Collection) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = collection
+
+	return &jsonMarshaller
 }
