@@ -155,6 +155,103 @@ func NewCollectionUsingLength(len, capacity int) *Collection {
 	}
 }
 
+// --------- CharCollectionMap starts ----------
+
+// CharCollectionMap.eachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
+//
+// For lower than 5 use the EmptyCharCollectionMap items definition.
+func NewCharCollectionMap(
+	capacity, selfCollectionCapacity int,
+) *CharCollectionMap {
+	const limit = constants.ArbitraryCapacity10
+
+	if capacity < limit {
+		capacity = limit
+	}
+
+	mapElements := make(map[byte]*Collection, capacity)
+
+	if selfCollectionCapacity < limit {
+		selfCollectionCapacity = limit
+	}
+
+	return &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: selfCollectionCapacity,
+	}
+}
+
+// eachCollectionCapacity = 0
+func EmptyCharCollectionMap() *CharCollectionMap {
+	mapElements := make(map[byte]*Collection, 0)
+
+	return &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: defaultEachCollectionCapacity,
+	}
+}
+
+func NewCharCollectionMapUsingItems(
+	items []string,
+) *CharCollectionMap {
+	if items == nil {
+		return EmptyCharCollectionMap()
+	}
+
+	return NewCharCollectionMapUsingItemsPtr(
+		&items)
+}
+
+func NewCharCollectionMapUsingItemsPtr(
+	items *[]string,
+) *CharCollectionMap {
+	if items == nil {
+		return EmptyCharCollectionMap()
+	}
+
+	length := len(*items)
+	if length == 0 {
+		return EmptyCharCollectionMap()
+	}
+
+	mapElements := make(map[byte]*Collection, length)
+	charCollectionMap := &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: 0,
+	}
+
+	charCollectionMap.AddStringsPtr(items)
+
+	return charCollectionMap
+}
+
+func NewCharCollectionMapUsingItemsPlusCap(
+	items *[]string,
+	additionalCapacityOrLength int,
+	eachCollectionCapacity int,
+) *CharCollectionMap {
+	isDefined := items != nil && *items != nil
+	length := 0
+	if isDefined {
+		length = len(*items)
+		additionalCapacityOrLength += length
+	}
+
+	mapElements := make(map[byte]*Collection, additionalCapacityOrLength)
+
+	charCollectionMap := &CharCollectionMap{
+		items:                  &mapElements,
+		eachCollectionCapacity: eachCollectionCapacity,
+	}
+
+	if !isDefined || length == 0 {
+		return charCollectionMap
+	}
+
+	return charCollectionMap.
+		AddStringsPtr(items)
+}
+
 // --------- HashsetsCollection starts ----------
 
 func EmptyHashsetsCollection() *HashsetsCollection {

@@ -1,8 +1,10 @@
 package corestr
 
+import "gitlab.com/evatix-go/core/constants"
+
 const (
 	emptyChar                              byte = 0
-	eachItemDefaultCapacity                     = 100
+	defaultEachCollectionCapacity               = constants.ArbitraryCapacity30
 	defaultHashsetItems                         = 10
 	RegularCollectionEfficiencyLimit            = 1000
 	DoubleLimit                                 = RegularCollectionEfficiencyLimit * 3

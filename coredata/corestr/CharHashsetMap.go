@@ -3,6 +3,7 @@ package corestr
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 	"sync"
 
@@ -328,6 +329,41 @@ func (charHashsetMap *CharHashsetMap) StringLock() string {
 	return strings.Join(
 		hashsetOfHashset,
 		constants.EmptyString)
+}
+
+func (charHashsetMap *CharHashsetMap) List() *[]string {
+	list := make([]string, charHashsetMap.AllLengthsSum())
+
+	i := 0
+	for _, hashset := range *charHashsetMap.items {
+		for s := range *hashset.items {
+			list[i] = s
+			i++
+		}
+	}
+
+	return &list
+}
+
+func (charHashsetMap *CharHashsetMap) SortedListAsc() *[]string {
+	list := charHashsetMap.List()
+	sort.Strings(*list)
+
+	return list
+}
+
+func (charHashsetMap *CharHashsetMap) SortedListDsc() *[]string {
+	list := charHashsetMap.SortedListAsc()
+	length := len(*list)
+	mid := length / 2
+
+	for i := 0; i < mid; i++ {
+		temp := (*list)[i]
+		(*list)[i] = (*list)[length-1-i]
+		(*list)[length-1-i] = temp
+	}
+
+	return list
 }
 
 func (charHashsetMap *CharHashsetMap) Print(isPrint bool) {

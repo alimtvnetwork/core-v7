@@ -671,7 +671,20 @@ func (collection *Collection) HasAll(items ...string) bool {
 	return true
 }
 
-func (collection *Collection) Sorted() *Collection {
+// Creates new doesn't modify current collection
+func (collection *Collection) SortedListAsc() *[]string {
+	if collection.IsEmpty() {
+		return &[]string{}
+	}
+
+	list := &(*collection.items)
+	sort.Strings(*list)
+
+	return list
+}
+
+// mutates current collection
+func (collection *Collection) SortedAsc() *Collection {
 	if collection.IsEmpty() {
 		return collection
 	}
@@ -681,7 +694,8 @@ func (collection *Collection) Sorted() *Collection {
 	return collection
 }
 
-func (collection *Collection) SortedLock() *Collection {
+// mutates current collection
+func (collection *Collection) SortedAscLock() *Collection {
 	if collection.IsEmptyLock() {
 		return collection
 	}
@@ -690,6 +704,36 @@ func (collection *Collection) SortedLock() *Collection {
 	defer collection.Unlock()
 
 	sort.Strings(*collection.items)
+
+	return collection
+}
+
+// Creates new one.
+func (collection *Collection) SortedListDsc() *[]string {
+	list := collection.SortedListAsc()
+	length := len(*list)
+	mid := length / 2
+
+	for i := 0; i < mid; i++ {
+		temp := (*list)[i]
+		(*list)[i] = (*list)[length-1-i]
+		(*list)[length-1-i] = temp
+	}
+
+	return list
+}
+
+// mutates itself.
+func (collection *Collection) SortedDsc() *Collection {
+	list := collection.items
+	length := len(*list)
+	mid := length / 2
+
+	for i := 0; i < mid; i++ {
+		temp := (*list)[i]
+		(*list)[i] = (*list)[length-1-i]
+		(*list)[length-1-i] = temp
+	}
 
 	return collection
 }

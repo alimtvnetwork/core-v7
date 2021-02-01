@@ -3,6 +3,7 @@ package corestr
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 	"sync"
 
@@ -589,6 +590,13 @@ func (hashset *Hashset) Items() *map[string]bool {
 
 func (hashset *Hashset) List() []string {
 	return *hashset.ListPtr()
+}
+
+func (hashset *Hashset) ListPtrSortedAsc() *[]string {
+	list := hashset.ListPtr()
+	sort.Strings(*list)
+
+	return list
 }
 
 func (hashset *Hashset) ListPtr() *[]string {

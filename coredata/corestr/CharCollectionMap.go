@@ -3,6 +3,7 @@ package corestr
 import (
 	"encoding/json"
 	"fmt"
+	"sort"
 	"strings"
 	"sync"
 
@@ -15,94 +16,6 @@ type CharCollectionMap struct {
 	items                  *map[byte]*Collection
 	eachCollectionCapacity int
 	sync.Mutex
-}
-
-// CharCollectionMap.eachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
-//
-// For lower than 5 use the EmptyCharCollectionMap items definition.
-func NewCharCollectionMap(
-	capacity, selfCollectionCapacity int,
-) *CharCollectionMap {
-	const limit = constants.ArbitraryCapacity10
-
-	if capacity < limit {
-		capacity = limit
-	}
-
-	mapElements := make(map[byte]*Collection, capacity)
-
-	if selfCollectionCapacity < limit {
-		selfCollectionCapacity = limit
-	}
-
-	return &CharCollectionMap{
-		items:                  &mapElements,
-		eachCollectionCapacity: selfCollectionCapacity,
-	}
-}
-
-// eachCollectionCapacity = 0
-func EmptyCharCollectionMap() *CharCollectionMap {
-	mapElements := make(map[byte]*Collection, 0)
-
-	return &CharCollectionMap{
-		items:                  &mapElements,
-		eachCollectionCapacity: 0,
-	}
-}
-
-func NewCharCollectionMapUsingItems(
-	items []string,
-) *CharCollectionMap {
-	if items == nil {
-		return EmptyCharCollectionMap()
-	}
-
-	return NewCharCollectionMapUsingItemsPtr(
-		&items)
-}
-
-func NewCharCollectionMapUsingItemsPtr(
-	items *[]string,
-) *CharCollectionMap {
-	if items == nil {
-		return EmptyCharCollectionMap()
-	}
-
-	length := len(*items)
-	if length == 0 {
-		return EmptyCharCollectionMap()
-	}
-
-	mapElements := make(map[byte]*Collection, length)
-	charCollectionMap := &CharCollectionMap{
-		items:                  &mapElements,
-		eachCollectionCapacity: 0,
-	}
-
-	charCollectionMap.AddStringsPtr(items)
-
-	return charCollectionMap
-}
-
-func NewCharCollectionMapUsingItemsPlusCap(
-	items *[]string,
-	capacityOrLength int,
-) *CharCollectionMap {
-	mapElements := make(map[byte]*Collection, capacityOrLength)
-
-	charCollectionMap := &CharCollectionMap{
-		items:                  &mapElements,
-		eachCollectionCapacity: 0,
-	}
-
-	if items == nil || len(*items) == 0 {
-		return charCollectionMap
-	}
-
-	charCollectionMap.AddStringsPtr(items)
-
-	return charCollectionMap
 }
 
 func (charCollectionMap *CharCollectionMap) GetChar(
@@ -133,6 +46,11 @@ func (charCollectionMap *CharCollectionMap) GetCharsPtrGroups(
 	}
 
 	length := len(*items)
+	lenBy4 := length / 3
+
+	if lenBy4 < defaultEachCollectionCapacity {
+		lenBy4 = defaultEachCollectionCapacity
+	}
 
 	if length == 0 {
 		return nil
@@ -234,6 +152,13 @@ func (charCollectionMap *CharCollectionMap) String() string {
 	return strings.Join(
 		collectionOfCollection,
 		constants.EmptyString)
+}
+
+func (charCollectionMap *CharCollectionMap) SortedListAsc() *[]string {
+	list := charCollectionMap.List()
+	sort.Strings(*list)
+
+	return list
 }
 
 func (charCollectionMap *CharCollectionMap) StringLock() string {
@@ -674,6 +599,75 @@ func (charCollectionMap *CharCollectionMap) AddPtrStringsLock(
 			*item, true)
 
 		foundCollection.AddPtrLock(item)
+	}
+
+	return charCollectionMap
+}
+
+func (charCollectionMap *CharCollectionMap) AddHashmapsValues(
+	hashmaps ...*Hashmap,
+) *CharCollectionMap {
+	if hashmaps == nil {
+		return charCollectionMap
+	}
+
+	for _, hashmap := range hashmaps {
+		if hashmap == nil || hashmap.IsEmpty() {
+			continue
+		}
+
+		for _, v := range *hashmap.items {
+			charCollectionMap.AddStringPtr(&v)
+		}
+	}
+
+	return charCollectionMap
+}
+
+func (charCollectionMap *CharCollectionMap) AddHashmapsKeysOrValuesBothUsingFilter(
+	filter IsKeyValueFilter,
+	hashmaps ...*Hashmap,
+) *CharCollectionMap {
+	if hashmaps == nil {
+		return charCollectionMap
+	}
+
+	for _, hashmap := range hashmaps {
+		if hashmap == nil || hashmap.IsEmpty() {
+			continue
+		}
+
+		for k, v := range *hashmap.items {
+			result, isAccept := filter(KeyValuePair{
+				Key:   k,
+				Value: v,
+			})
+
+			if isAccept {
+				charCollectionMap.AddStringPtr(&result)
+			}
+		}
+	}
+
+	return charCollectionMap
+}
+
+func (charCollectionMap *CharCollectionMap) AddHashmapsKeysValuesBoth(
+	hashmaps ...*Hashmap,
+) *CharCollectionMap {
+	if hashmaps == nil {
+		return charCollectionMap
+	}
+
+	for _, hashmap := range hashmaps {
+		if hashmap == nil || hashmap.IsEmpty() {
+			continue
+		}
+
+		for k, v := range *hashmap.items {
+			charCollectionMap.AddStringPtr(&v)
+			charCollectionMap.AddStringPtr(&k)
+		}
 	}
 
 	return charCollectionMap

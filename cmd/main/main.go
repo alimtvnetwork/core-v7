@@ -26,7 +26,7 @@ func main() {
 	}
 
 	// fmt.Println(newItems)
-	// fmt.Println("Sorted : ", collection.Add("0. Next Alim").Sorted().String())
+	// fmt.Println("SortedAsc : ", collection.Add("0. Next Alim").SortedAsc().String())
 
 	cmap := corestr.NewCharCollectionMap(
 		10,
