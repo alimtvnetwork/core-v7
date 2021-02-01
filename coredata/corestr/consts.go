@@ -3,8 +3,7 @@ package corestr
 import "gitlab.com/evatix-go/core/constants"
 
 const (
-	charCollectionDefaultCapacity = constants.ArbitraryCapacity10
-
+	charCollectionDefaultCapacity               = constants.ArbitraryCapacity10
 	emptyChar                              byte = 0
 	defaultEachCollectionCapacity               = constants.ArbitraryCapacity30
 	defaultHashsetItems                         = 10
