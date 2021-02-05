@@ -1,6 +1,6 @@
 # `Core` Intro
 
-![Use Package logo](UseLogo)
+![Use Package logo](https://gitlab.com/evatix-go/core/uploads/486811aa7446cd43b17ff167ceaf90d1/core-250.png)
 
 All common core infrastructure and constants combined package.
 
@@ -60,6 +60,9 @@ Any other packages used
 - [Quick Sort in Go (Golang) - golangprograms.com](https://www.golangprograms.com/golang-program-for-implementation-of-quick-sort.html)
     - [Sorting using golang lib](https://play.golang.org/p/sJ8a464USeV)
     - [Pointer Strings Sort](https://play.golang.org/p/8V8YYdQrO6q)
+- [Golang Array process issue without copying (!Important)](https://play.golang.org/p/GvdJMPmCStz)
+- [Linked List | Set 2 (Inserting a node) - GeeksforGeeks](https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/)
+- [Go Data Structures: Linked List](https://flaviocopes.com/golang-data-structure-linked-list/)
 
 ## Issues
 

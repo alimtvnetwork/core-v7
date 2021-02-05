@@ -109,7 +109,7 @@ func (hashset *Hashset) ResizeLock(capacity int) *Hashset {
 }
 
 func (hashset *Hashset) Collection() *Collection {
-	return NewCollectionUsingStrings(hashset.ListPtr())
+	return NewCollectionUsingStrings(hashset.ListPtr(), false)
 }
 
 func (hashset *Hashset) IsEmptyLock() bool {
@@ -132,6 +132,7 @@ func (hashset *Hashset) AddWithWgLock(key string, group *sync.WaitGroup) *Hashse
 	hashset.Unlock()
 
 	hashset.hasMapUpdated = true
+
 	group.Done()
 
 	return hashset
@@ -585,7 +586,7 @@ func (hashset *Hashset) GetFilteredCollection(
 	}
 
 	return NewCollectionUsingStrings(
-		&filteredList)
+		&filteredList, false)
 }
 
 func (hashset *Hashset) Items() *map[string]bool {
@@ -615,8 +616,9 @@ func (hashset *Hashset) ListPtr() *[]string {
 func (hashset *Hashset) ListCopyPtrLock() *[]string {
 	hashset.Lock()
 	defer hashset.Unlock()
+	cloned := *hashset.ListPtr()
 
-	return &(*hashset.ListPtr())
+	return &cloned
 }
 
 func (hashset *Hashset) setCached() {

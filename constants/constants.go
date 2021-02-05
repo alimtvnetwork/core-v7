@@ -172,4 +172,5 @@ const (
 	NoItems                                 = "{No Items}"
 	NoItemsSqaure                           = "[No Items]"
 	NoElementsSqaure                        = "[No Element]"
+	DoubleNewLine                           = "\n\n"
 )

@@ -10,11 +10,16 @@ type LinkedListFilter func(list *LinkedList, index int, node *LinkedListNode) (r
 type LinkedListSimpleProcessor func(
 	index int, currentNode, prevNode *LinkedListNode, isFirstIndex, isEndingIndex bool,
 ) (isBreak bool)
+type LinkedCollectionFilter func(
+	list *LinkedCollections, index int, node *LinkedCollectionNode,
+) (result *LinkedCollectionNode, isKeep bool)
+type LinkedCollectionSimpleProcessor func(
+	index int, currentNode, prevNode *LinkedCollectionNode, isFirstIndex, isEndingIndex bool,
+) (isBreak bool)
 
-// TODO for next MR
-// type LinkedCollectionFilter func(
-// 	list *LinkedCollections, index int, node *LinkedCollectionNode,
-// ) (result *LinkedCollectionNode, isKeep bool)
-// type LinkedCollectionSimpleProcessor func(
-// 	index int, currentNode, prevNode *LinkedCollectionNode, isFirstIndex, isEndingIndex bool,
-// ) (isBreak bool)
+type LinkedCollectionReverseProcessor func(
+	index int,
+	currentNode, nextNode *LinkedCollectionNode,
+	isFirstIndex,
+	isEndingIndex bool,
+) (isBreak bool)

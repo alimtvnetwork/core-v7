@@ -35,6 +35,12 @@ func (linkedList *LinkedList) incrementLength() int {
 	return linkedList.length
 }
 
+func (linkedList *LinkedList) incrementLengthUsingNumber(number int) int {
+	linkedList.length += number
+
+	return linkedList.length
+}
+
 func (linkedList *LinkedList) setLengthToZero() int {
 	linkedList.length = 0
 
@@ -45,18 +51,6 @@ func (linkedList *LinkedList) decrementLength() int {
 	linkedList.length--
 
 	return linkedList.length
-}
-
-func (linkedList *LinkedList) incrementLengthLock() {
-	linkedList.Lock()
-	linkedList.length++
-	linkedList.Unlock()
-}
-
-func (linkedList *LinkedList) decrementLengthLock() {
-	linkedList.Lock()
-	linkedList.length--
-	linkedList.Unlock()
 }
 
 func (linkedList *LinkedList) LengthLock() int {
@@ -114,36 +108,15 @@ func (linkedList *LinkedList) IsEqualsWithSensitivePtr(
 	leftNode := linkedList.head
 	rightNode := anotherLinkedList.head
 
-	for {
-		isBothExist := leftNode != nil && rightNode != nil
-		isBothNull := leftNode == nil && rightNode == nil
-		isBothEqualPointer := leftNode == rightNode
-		isEqual := isBothEqualPointer ||
-			isBothNull ||
-			isBothExist &&
-				leftNode.IsEqualSensitive(
-					rightNode, isCaseSensitive)
+	if leftNode == nil && rightNode == nil {
+		return true
+	}
 
-		if !isEqual {
-			return false
-		}
-
-		if leftNode.HasNext() && rightNode.HasNext() {
-			// both has possibility of having next
-
-			leftNode = leftNode.Next()
-			rightNode = rightNode.Next()
-
-			continue
-		}
-
-		if leftNode.HasNext() || rightNode.HasNext() {
-			// one has next another doesn't
-			return false
-		}
-
+	if leftNode == nil || rightNode == nil {
 		return false
 	}
+
+	return leftNode.IsChainEqual(rightNode, isCaseSensitive)
 }
 
 func (linkedList *LinkedList) IsEmptyLock() bool {
@@ -177,6 +150,60 @@ func (linkedList *LinkedList) Add(item string) *LinkedList {
 
 	linkedList.tail = linkedList.tail.next
 	linkedList.incrementLength()
+
+	return linkedList
+}
+
+func (linkedList *LinkedList) AddLock(item string) *LinkedList {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
+	return linkedList.Add(item)
+}
+
+// BigO(n) expensive operation.
+func (linkedList *LinkedList) InsertAt(index int, item string) *LinkedList {
+	if index < 1 {
+		return linkedList.AddFront(item)
+	}
+
+	node := linkedList.IndexAt(index - 1)
+	linkedList.AddAfterNode(node, item)
+
+	return linkedList
+}
+
+func (linkedList *LinkedList) AddBackNode(node *LinkedListNode) *LinkedList {
+	return linkedList.AppendNode(node)
+}
+
+func (linkedList *LinkedList) AppendNode(node *LinkedListNode) *LinkedList {
+	if linkedList.IsEmpty() {
+		linkedList.head = node
+		linkedList.tail = linkedList.head
+		linkedList.incrementLength()
+
+		return linkedList
+	}
+
+	linkedList.tail.next = node
+	linkedList.tail = linkedList.tail.next
+	linkedList.incrementLength()
+
+	return linkedList
+}
+
+func (linkedList *LinkedList) AppendChainOfNodes(nodeHead *LinkedListNode) *LinkedList {
+	endOfChain, length := nodeHead.EndOfChain()
+
+	if linkedList.IsEmpty() {
+		linkedList.head = nodeHead
+	} else {
+		linkedList.tail.next = nodeHead
+	}
+
+	linkedList.tail = endOfChain
+	linkedList.incrementLengthUsingNumber(length)
 
 	return linkedList
 }
@@ -224,6 +251,7 @@ func (linkedList *LinkedList) AttachWithNode(currentNode, addingNode *LinkedList
 
 	addingNode.next = currentNode.next
 	currentNode.next = addingNode
+
 	linkedList.incrementLength()
 
 	return nil
@@ -250,7 +278,13 @@ func (linkedList *LinkedList) Loop(
 	}
 
 	node := linkedList.head
-	isBreak := simpleProcessor(0, node, nil, true, false)
+	isBreak := simpleProcessor(
+		0,
+		node,
+		nil,
+		true,
+		false)
+
 	if isBreak {
 		return linkedList
 	}
@@ -263,7 +297,13 @@ func (linkedList *LinkedList) Loop(
 		prev := node
 		node = node.Next()
 		isEndingIndex = lenMinusOne == index
-		isBreak = simpleProcessor(index, node, prev, false, isEndingIndex)
+		isBreak = simpleProcessor(
+			index,
+			node,
+			prev,
+			false,
+			isEndingIndex)
+
 		if isBreak {
 			return linkedList
 		}
@@ -285,16 +325,23 @@ func (linkedList *LinkedList) Filter(
 	}
 
 	node := linkedList.head
-	result, isKeep := filter(linkedList, 0, node)
+	result, isKeep := filter(
+		linkedList,
+		0,
+		node)
 
 	if isKeep {
 		list = append(list, result)
 	}
 
 	index := 1
+
 	for node.HasNext() {
 		node = node.Next()
-		result2, isKeep2 := filter(linkedList, index, node)
+		result2, isKeep2 := filter(
+			linkedList,
+			index,
+			node)
 
 		if isKeep2 {
 			list = append(list, result2)
@@ -310,20 +357,33 @@ func (linkedList *LinkedList) RemoveNodeByElementValue(
 	element string,
 	isCaseSensitive bool,
 ) *LinkedList {
+	if linkedList.IsEmpty() {
+		msgtype.
+			CannotRemoveIndexesFromEmptyCollection.
+			HandleUsingPanic("element cannot be removed from empty linkedlist.", element)
+	}
+
 	var processor LinkedListSimpleProcessor = func(
-		index int, currentNode, prevNode *LinkedListNode, isFirstIndex, isEndingIndex bool,
+		index int,
+		currentNode,
+		prevNode *LinkedListNode,
+		isFirstIndex,
+		isEndingIndex bool,
 	) (isBreak bool) {
-		isSameNode := (isCaseSensitive && currentNode.Element == element) ||
-			(!isCaseSensitive && strings.EqualFold(element, currentNode.Element))
+		isSameNode :=
+			(isCaseSensitive && currentNode.Element == element) ||
+				(!isCaseSensitive && strings.EqualFold(element, currentNode.Element))
 
 		if isSameNode && isFirstIndex {
 			linkedList.head = currentNode.next
+			linkedList.decrementLength()
 
 			return false
 		}
 
 		if isSameNode {
 			prevNode.next = currentNode.next
+			linkedList.decrementLength()
 
 			return false
 		}
@@ -341,20 +401,32 @@ func (linkedList *LinkedList) RemoveNodeByIndex(
 		return linkedList
 	}
 
+	if linkedList.IsEmpty() && len(removingIndexes) > 0 {
+		msgtype.
+			CannotRemoveIndexesFromEmptyCollection.
+			HandleUsingPanic("removingIndexes cannot be removed from empty linkedlist.", removingIndexes)
+	}
+
 	removingIndexesPtr := &removingIndexes
 
 	var processor LinkedListSimpleProcessor = func(
-		index int, currentNode, prevNode *LinkedListNode, isFirstIndex, isEndingIndex bool,
+		index int,
+		currentNode,
+		prevNode *LinkedListNode,
+		isFirstIndex,
+		isEndingIndex bool,
 	) (isBreak bool) {
-		isSameNode := coreindexes.IsCurrentIndex(removingIndexesPtr, index)
+		isSameNode := coreindexes.HasIndex(removingIndexesPtr, index)
 		if isSameNode && isFirstIndex {
 			linkedList.head = currentNode.next
+			linkedList.decrementLength()
 
 			return false
 		}
 
 		if isSameNode {
 			prevNode.next = currentNode.next
+			linkedList.decrementLength()
 
 			return false
 		}
@@ -365,21 +437,38 @@ func (linkedList *LinkedList) RemoveNodeByIndex(
 	return linkedList.Loop(processor)
 }
 
+// skip if removingNode is nil
 func (linkedList *LinkedList) RemoveNode(
 	removingNode *LinkedListNode,
 ) *LinkedList {
+	if removingNode == nil {
+		return linkedList
+	}
+
+	if linkedList.IsEmpty() && removingNode != nil {
+		msgtype.
+			CannotRemoveIndexesFromEmptyCollection.
+			HandleUsingPanic("removingNode cannot be removed from empty linkedlist.", removingNode.String())
+	}
+
 	var processor LinkedListSimpleProcessor = func(
-		index int, currentNode, prevNode *LinkedListNode, isFirstIndex, isEndingIndex bool,
+		index int,
+		currentNode,
+		prevNode *LinkedListNode,
+		isFirstIndex,
+		isEndingIndex bool,
 	) (isBreak bool) {
 		isSameNode := currentNode == removingNode
 		if isSameNode && isFirstIndex {
 			linkedList.head = currentNode.next
+			linkedList.decrementLength()
 
 			return true
 		}
 
 		if isSameNode {
 			prevNode.next = currentNode.next
+			linkedList.decrementLength()
 
 			return true
 		}
@@ -440,7 +529,10 @@ func (linkedList *LinkedList) AddStringsPtrToNode(
 	return linkedList
 }
 
-func (linkedList *LinkedList) AddAfterNode(node *LinkedListNode, item string) *LinkedListNode {
+func (linkedList *LinkedList) AddAfterNode(
+	node *LinkedListNode,
+	item string,
+) *LinkedListNode {
 	newNode := &LinkedListNode{
 		Element: item,
 		next:    node.next,
@@ -463,6 +555,14 @@ func (linkedList *LinkedList) AddStringsPtr(items *[]string) *LinkedList {
 	}
 
 	return linkedList
+}
+
+// add to back
+func (linkedList *LinkedList) AddStringsPtrLock(items *[]string) *LinkedList {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
+	return linkedList.AddStringsPtr(items)
 }
 
 // Expensive operation BigO(n)
@@ -509,7 +609,10 @@ func (linkedList *LinkedList) SafePointerIndexAt(index int) *string {
 }
 
 // Expensive operation BigO(n)
-func (linkedList *LinkedList) SafePointerIndexAtUsingDefault(index int, defaultString string) string {
+func (linkedList *LinkedList) SafePointerIndexAtUsingDefault(
+	index int,
+	defaultString string,
+) string {
 	node := linkedList.SafeIndexAt(index)
 
 	if node == nil {
@@ -544,6 +647,25 @@ func (linkedList *LinkedList) SafeIndexAt(index int) *LinkedListNode {
 	}
 
 	return nil
+}
+
+// Expensive operation BigO(n)
+func (linkedList *LinkedList) SafeIndexAtLock(index int) *LinkedListNode {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
+	return linkedList.SafeIndexAt(index)
+}
+
+// Expensive operation BigO(n)
+func (linkedList *LinkedList) SafePointerIndexAtUsingDefaultLock(
+	index int,
+	defaultString string,
+) string {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
+	return linkedList.SafePointerIndexAtUsingDefault(index, defaultString)
 }
 
 // skip on nil, add to back
@@ -613,6 +735,14 @@ func (linkedList *LinkedList) ListPtr() *[]string {
 	return &list
 }
 
+// must return slice.
+func (linkedList *LinkedList) ListPtrLock() *[]string {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
+	return linkedList.ListPtr()
+}
+
 func (linkedList *LinkedList) String() string {
 	if linkedList.IsEmpty() {
 		return commonJoiner + NoElements
@@ -641,6 +771,15 @@ func (linkedList *LinkedList) StringLock() string {
 func (linkedList *LinkedList) Join(
 	separator string,
 ) string {
+	return strings.Join(*linkedList.ListPtr(), separator)
+}
+
+func (linkedList *LinkedList) JoinLock(
+	separator string,
+) string {
+	linkedList.Lock()
+	defer linkedList.Unlock()
+
 	return strings.Join(*linkedList.ListPtr(), separator)
 }
 

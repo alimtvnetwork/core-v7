@@ -2,6 +2,7 @@ package filemode
 
 import "gitlab.com/evatix-go/core/msgtype"
 
+//goland:noinspection GoUnusedExportedFunction
 func NewAttribute(isRead, isWrite, isExecute bool) Attribute {
 	return Attribute{
 		IsRead:    isRead,
