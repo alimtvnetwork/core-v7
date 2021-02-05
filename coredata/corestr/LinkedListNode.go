@@ -20,6 +20,62 @@ func (linkedListNode *LinkedListNode) Next() *LinkedListNode {
 	return linkedListNode.next
 }
 
+func (linkedListNode *LinkedListNode) EndOfChain() (
+	endOfChain *LinkedListNode,
+	length int,
+) {
+	node := linkedListNode
+	length++
+
+	for node.HasNext() {
+		node = node.Next()
+		length++
+	}
+
+	return node, length
+}
+
+func (linkedListNode *LinkedListNode) LoopEndOfChain(
+	processor LinkedListSimpleProcessor,
+) (endOfLoop *LinkedListNode, length int) {
+	node := linkedListNode
+	isBreak := processor(
+		0,
+		node,
+		nil,
+		true,
+		false)
+
+	length++
+
+	if isBreak {
+		return node, length
+	}
+
+	i := 1
+	for node.HasNext() {
+		prev := node
+		node = node.Next()
+		isEnd := !node.HasNext()
+
+		isBreak = processor(
+			i,
+			node,
+			prev,
+			false,
+			isEnd)
+
+		length++
+		i++
+
+		if isBreak {
+			return node, length
+		}
+	}
+
+	return node, length
+}
+
 func (linkedListNode *LinkedListNode) AddNext(
 	linkedListForIncrement *LinkedList,
 	item string,
@@ -81,33 +137,48 @@ func (linkedListNode *LinkedListNode) IsEqual(another *LinkedListNode) bool {
 		return true
 	}
 
-	if another == nil && linkedListNode != nil {
-		return false
-	}
-
 	//goland:noinspection GoNilness
 	if linkedListNode.Element == another.Element {
-		if !linkedListNode.HasNext() && !another.HasNext() {
-			return false
-		}
-
-		if !linkedListNode.HasNext() || !another.HasNext() {
-			return false
-		}
-
-		if linkedListNode.HasNext() && another.HasNext() {
-			return linkedListNode.Next().Element == another.Element
-		}
-
-		if linkedListNode.HasNext() || another.HasNext() {
-			return false
-		}
+		return linkedListNode.isNextEqual(
+			another,
+			true)
 	}
 
 	return false
 }
 
-func (linkedListNode *LinkedListNode) IsEqualSensitive(another *LinkedListNode, isCaseSensitive bool) bool {
+func (linkedListNode *LinkedListNode) IsChainEqual(
+	another *LinkedListNode,
+	isCaseSensitive bool,
+) bool {
+	if linkedListNode == nil && nil == another {
+		return true
+	}
+
+	if linkedListNode == nil || nil == another {
+		return false
+	}
+
+	if linkedListNode == another {
+		return true
+	}
+
+	elem1 := linkedListNode.Element
+	elem2 := another.Element
+
+	//goland:noinspection GoNilness
+	isElementSame := (isCaseSensitive && elem1 == elem2) ||
+		(!isCaseSensitive && strings.EqualFold(elem1, elem2))
+
+	return isElementSame &&
+		linkedListNode.isNextChainEqual(
+			another, isCaseSensitive)
+}
+
+func (linkedListNode *LinkedListNode) IsEqualSensitive(
+	another *LinkedListNode,
+	isCaseSensitive bool,
+) bool {
 	if linkedListNode == another {
 		return true
 	}
@@ -116,12 +187,56 @@ func (linkedListNode *LinkedListNode) IsEqualSensitive(another *LinkedListNode, 
 		return false
 	}
 
-	//goland:noinspection GoNilness
-	if linkedListNode.IsEqualValueSensitive(another.Element, isCaseSensitive) {
+	isSame := linkedListNode.IsEqualValueSensitive(another.Element, isCaseSensitive)
+
+	return isSame &&
+		linkedListNode.isNextEqual(another, isCaseSensitive)
+}
+
+func (linkedListNode *LinkedListNode) isNextEqual(
+	another *LinkedListNode,
+	isCaseSensitive bool,
+) bool {
+	next1 := linkedListNode.Next()
+	next2 := another.Next()
+
+	if next1 == nil && nil == next2 {
 		return true
 	}
 
-	return false
+	if next1 == nil || nil == next2 {
+		return false
+	}
+
+	if isCaseSensitive {
+		return next1.Element == next2.Element
+	}
+
+	return strings.EqualFold(next1.Element, next2.Element)
+}
+
+func (linkedListNode *LinkedListNode) isNextChainEqual(
+	another *LinkedListNode,
+	isCaseSensitive bool,
+) bool {
+	next1 := linkedListNode.Next()
+	next2 := another.Next()
+
+	if next1 == nil && nil == next2 {
+		return true
+	}
+
+	if next1 == nil || nil == next2 {
+		return false
+	}
+
+	return next1.
+		IsChainEqual(next2, isCaseSensitive)
+}
+
+func (linkedListNode *LinkedListNode) CreateLinkedList() *LinkedList {
+	return NewLinkedList().
+		AppendChainOfNodes(linkedListNode)
 }
 
 func (linkedListNode *LinkedListNode) IsEqualValue(value string) bool {

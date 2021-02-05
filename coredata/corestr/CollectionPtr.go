@@ -528,7 +528,7 @@ func (collectionPtr *CollectionPtr) RemoveItemsIndexesPtr(
 
 	newList := make([]*string, 0, collectionPtr.Capacity())
 	for i, s := range *collectionPtr.items {
-		if coreindexes.IsCurrentIndex(indexes, i) {
+		if coreindexes.HasIndex(indexes, i) {
 			continue
 		}
 

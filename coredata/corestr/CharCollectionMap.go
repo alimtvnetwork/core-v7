@@ -88,12 +88,14 @@ func (charCollectionMap *CharCollectionMap) SummaryStringLock() string {
 	collectionOfCollection[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharCollectionMapLengthFormat,
 		charCollectionMap,
-		length)
+		length,
+		coreindexes.First)
 
 	i := 1
 	for key, collection := range *charCollectionMap.GetCopyMapLock() {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
+			i+1,
 			string(key),
 			collection.LengthLock())
 
@@ -113,12 +115,14 @@ func (charCollectionMap *CharCollectionMap) SummaryString() string {
 	collectionOfCollection[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharCollectionMapLengthFormat,
 		charCollectionMap,
-		charCollectionMap.Length())
+		charCollectionMap.Length(),
+		coreindexes.First+1)
 
 	i := 1
 	for key, collection := range *charCollectionMap.items {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
+			i+1,
 			string(key),
 			collection.Length())
 
@@ -562,6 +566,7 @@ func (charCollectionMap *CharCollectionMap) AddStringPtrLock(
 func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 	char byte,
 	allItemsWithSameChar *[]string,
+	isCloneAdd bool,
 ) *CharCollectionMap {
 	if allItemsWithSameChar == nil ||
 		*allItemsWithSameChar == nil ||
@@ -580,7 +585,7 @@ func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 
 	(*charCollectionMap.
 		items)[char] =
-		NewCollectionUsingStrings(allItemsWithSameChar)
+		NewCollectionUsingStrings(allItemsWithSameChar, isCloneAdd)
 
 	return charCollectionMap
 }

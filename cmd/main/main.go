@@ -10,55 +10,42 @@ func main() {
 	// fmt.Println(osconsts.IsWindows)
 	// fmt.Println(osconsts.IsUnixGroup)
 
-	items := []string{" Alim NewHashset first,", "alim 1,", "alim next, ", "0 alim ,"}
-	collection := corestr.NewCollectionUsingStrings(&items)
+	items := []string{"alim items collect 01", "alim items collect 02", "alim items collect 03"}
+	items1 := []string{"alim 01"}
+	items2 := []string{"alim 02"}
+	items3 := []string{"alim 03"}
+	items4 := []string{"alim 04"}
+	items5 := []string{"alim 05"}
 
-	collection.Resize(100)
-	// fmt.Println("Capacity :", collection.Capacity())
+	collectOfCollections := corestr.NewCollectionsOfCollectionUsingStringsOfStrings(
+		true,
+		&items1,
+		&items2,
+		&items3,
+		&items4,
+		&items5,
+	)
 
-	length := 10
-	newItems := make([]string, 0, length+len(items))
-	newItems = append(newItems, items...)
+	collection := corestr.NewCollectionUsingStrings(&items, false)
+	linkedCollection := corestr.NewLinkedCollectionsUsingCollections(collection)
 
-	for i := 0; i < length; i++ {
-		str := fmt.Sprintf("%d . %s", i, "alim ")
-		newItems = append(newItems, str)
-	}
+	linkedCollection.AddCollection(collectOfCollections.Items()[1])
+	linkedCollection.AddCollection(collectOfCollections.Items()[2])
+	linkedCollection.AddCollection(collectOfCollections.Items()[3])
+	linkedCollection.AddCollection(collectOfCollections.Items()[4])
 
-	// fmt.Println(newItems)
-	// fmt.Println("SortedAsc : ", collection.Add("0. Next Alim").SortedAsc().String())
+	linked2 := corestr.NewLinkedCollections()
+	linked2.AddStringsPtr(&items, true)
+	linked2.AddCollection(collectOfCollections.Items()[1])
+	linked2.AddCollection(collectOfCollections.Items()[2])
+	linked2.AddCollection(collectOfCollections.Items()[3])
+	linked2.AddCollection(collectOfCollections.Items()[4])
 
-	cmap := corestr.NewCharCollectionMap(
-		10,
-		5)
+	linked2.RemoveNodeByIndex(3, 4)
 
-	var onComplete corestr.OnCompleteCharCollectionMap = func(stringsMap *corestr.CharCollectionMap) {
-		linkedList := corestr.NewLinkedList().
-			AddStringsPtr(collection.ListPtr())
+	fmt.Println(linkedCollection.GetCompareSummary(linked2, "Link1", "Link2"))
 
-		fmt.Println("before:\n", linkedList)
+	// linkedCollection.RemoveNodeByIndex(0)
+	fmt.Println(linkedCollection.GetCompareSummary(linked2, "Link1", "Link2"))
 
-		node := linkedList.SafeIndexAt(2)
-
-		fmt.Println("node :\n", node)
-
-		finalNode := node.AddNext(linkedList, "alim +++").AddNext(linkedList, "alim ++ 2")
-
-		fmt.Println("after:\n", linkedList)
-
-		finalNode.AddCollectionToNode(linkedList, true, collection)
-		linkedList.RemoveAll()
-		fmt.Println("after items:\n", linkedList, "\nlen:\n", linkedList.Length())
-	}
-
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), onComplete)
 }

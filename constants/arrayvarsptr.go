@@ -1,6 +1,6 @@
 package constants
 
-//goland:noinspection ALL,GoLinterLocal
+//goland:noinspection ALL
 var (
 	AsciiSpacePtr            = &AsciiSpace
 	AsciiNewLinesCharsPtr    = &AsciiNewLinesChars
