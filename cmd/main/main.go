@@ -10,67 +10,58 @@ func main() {
 	// fmt.Println(osconsts.IsWindows)
 	// fmt.Println(osconsts.IsUnixGroup)
 
-	items := []string{" Alim NewHashset first,", "alim 1,", "alim next, ", "0 alim ,"}
-	collection := corestr.NewCollectionUsingStrings(&items)
+	items := []string{"alim items collect 00", "alim items collect 01", "alim items collect 02", "03", "04", "05"}
+	/*items1 := []string{"alim 01"}
+	items2 := []string{"alim 02"}
+	items3 := []string{"alim 03"}
+	items4 := []string{"alim 04"}
+	items5 := []string{"alim 05"}*/
+	linkedList1 := corestr.NewLinkedList()
+	linkedList2 := corestr.NewLinkedList()
 
-	collection.Resize(100)
-	fmt.Println("Capacity :", collection.Capacity())
+	linkedList1.AddStringsPtr(&items)
+	linkedList2.AddStringsPtr(&items)
+	fmt.Println(linkedList1.GetCompareSummary(linkedList2, "Link1", "Link2"))
 
-	length := 10
-	newItems := make([]string, 0, length+len(items))
-	newItems = append(newItems, items...)
+	linkedList1.RemoveNodeByIndexes(true, 1, 3)
 
-	for i := 0; i < length; i++ {
-		str := fmt.Sprintf("%d . %s", i, "alim ")
-		newItems = append(newItems, str)
-	}
+	fmt.Println(linkedList1.GetCompareSummary(linkedList2, "After remove (1,2,3) - Link1", "Link2"))
 
-	// fmt.Println(newItems)
-	// fmt.Println("SortedAsc : ", collection.Add("0. Next Alim").SortedAsc().String())
+	linkedList2.RemoveNodeByIndexes(true, 3, 3, 1)
 
-	cmap := corestr.NewCharCollectionMap(
-		10,
-		5)
+	fmt.Println(linkedList1.GetCompareSummary(linkedList2, "After remove (1,2,3) - Link1", "After remove (3,2,1) - Link2"))
 
-	var onComplete corestr.OnCompleteCharCollectionMap = func(stringsMap *corestr.CharCollectionMap) {
-		stringsMap.PrintLock(true)
+	//
+	// collectOfCollections := corestr.NewCollectionsOfCollectionUsingStringsOfStrings(
+	// 	true,
+	// 	&items1,
+	// 	&items2,
+	// 	&items3,
+	// 	&items4,
+	// 	&items5,
+	// )
+	//
+	// collection := corestr.NewCollectionUsingStrings(&items, false)
+	// linkedCollection := corestr.NewLinkedCollectionsUsingCollections(collection)
+	//
+	// linkedCollection.AddCollection(collectOfCollections.Items()[1])
+	// linkedCollection.AddCollection(collectOfCollections.Items()[2])
+	// linkedCollection.AddCollection(collectOfCollections.Items()[3])
+	// linkedCollection.AddCollection(collectOfCollections.Items()[4])
+	//
+	// linked2 := corestr.NewLinkedCollections()
+	// linked2.AddStringsPtr(&items, true)
+	// linked2.AddCollection(collectOfCollections.Items()[1])
+	// linked2.AddCollection(collectOfCollections.Items()[2])
+	// linked2.AddCollection(collectOfCollections.Items()[3])
+	// linked2.AddCollection(collectOfCollections.Items()[4])
+	//
+	// linkedCollection.RemoveNodeByIndexes(true, 2, 1, 4)
+	// linked2.RemoveNodeByIndexes(true, 1, 2, 4)
+	//
+	// fmt.Println(linkedCollection.GetCompareSummary(linked2, "Link1", "Link2"))
+	//
+	// // linkedCollection.RemoveNodeByIndexes(0)
+	// fmt.Println(linkedCollection.GetCompareSummary(linked2, "Link1", "Link2"))
 
-		json := cmap.Json()
-
-		fmt.Println("json1:\n", json.JsonString())
-
-		h, e := stringsMap.ParseInjectUsingJson(json)
-
-		fmt.Println("Data from JSON1:\n", h, e)
-
-		hashset1 := cmap.HashsetByStringFirstCharLock("a")
-		json2 := hashset1.Json()
-
-		fmt.Println("json2:\n", json2.JsonString())
-
-		h2, e2 := hashset1.ParseInjectUsingJson(json2)
-
-		fmt.Println("Data from JSON2:\n", h2.List(), h2, e2)
-
-		hCollections := stringsMap.HashsetsCollection()
-
-		json3 := hCollections.Json()
-
-		fmt.Println("json3:\n", json3.JsonString())
-
-		h3, _ := hCollections.ParseInjectUsingJson(json3)
-
-		fmt.Println("Data from JSON3:\n", h3.String())
-	}
-
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), nil)
-	cmap.AddStringsPtrAsyncLock(collection.ListPtr(), onComplete)
 }

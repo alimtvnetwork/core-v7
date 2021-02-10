@@ -88,12 +88,14 @@ func (charCollectionMap *CharCollectionMap) SummaryStringLock() string {
 	collectionOfCollection[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharCollectionMapLengthFormat,
 		charCollectionMap,
-		length)
+		length,
+		coreindexes.First)
 
 	i := 1
 	for key, collection := range *charCollectionMap.GetCopyMapLock() {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
+			i+1,
 			string(key),
 			collection.LengthLock())
 
@@ -113,12 +115,14 @@ func (charCollectionMap *CharCollectionMap) SummaryString() string {
 	collectionOfCollection[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharCollectionMapLengthFormat,
 		charCollectionMap,
-		charCollectionMap.Length())
+		charCollectionMap.Length(),
+		coreindexes.First+1)
 
 	i := 1
 	for key, collection := range *charCollectionMap.items {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
+			i+1,
 			string(key),
 			collection.Length())
 
@@ -562,6 +566,7 @@ func (charCollectionMap *CharCollectionMap) AddStringPtrLock(
 func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 	char byte,
 	allItemsWithSameChar *[]string,
+	isCloneAdd bool,
 ) *CharCollectionMap {
 	if allItemsWithSameChar == nil ||
 		*allItemsWithSameChar == nil ||
@@ -580,7 +585,7 @@ func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 
 	(*charCollectionMap.
 		items)[char] =
-		NewCollectionUsingStrings(allItemsWithSameChar)
+		NewCollectionUsingStrings(allItemsWithSameChar, isCloneAdd)
 
 	return charCollectionMap
 }
@@ -617,7 +622,8 @@ func (charCollectionMap *CharCollectionMap) AddHashmapsValues(
 		}
 
 		for _, v := range *hashmap.items {
-			charCollectionMap.AddStringPtr(&v)
+			vc := v
+			charCollectionMap.AddStringPtr(&vc)
 		}
 	}
 
@@ -665,8 +671,10 @@ func (charCollectionMap *CharCollectionMap) AddHashmapsKeysValuesBoth(
 		}
 
 		for k, v := range *hashmap.items {
-			charCollectionMap.AddStringPtr(&v)
-			charCollectionMap.AddStringPtr(&k)
+			vc := v
+			kc := k
+			charCollectionMap.AddStringPtr(&vc)
+			charCollectionMap.AddStringPtr(&kc)
 		}
 	}
 
@@ -760,7 +768,8 @@ func (charCollectionMap *CharCollectionMap) AddStringsPtr(
 	}
 
 	for _, item := range *items {
-		charCollectionMap.AddStringPtr(&item)
+		itemC := item
+		charCollectionMap.AddStringPtr(&itemC)
 	}
 
 	return charCollectionMap
@@ -769,13 +778,12 @@ func (charCollectionMap *CharCollectionMap) AddStringsPtr(
 func (charCollectionMap *CharCollectionMap) AddStrings(
 	items ...string,
 ) *CharCollectionMap {
-	if items == nil ||
-		len(items) == 0 {
+	if len(items) == 0 {
 		return charCollectionMap
 	}
 
-	for _, item := range items {
-		charCollectionMap.AddStringPtr(&item)
+	for i := range items {
+		charCollectionMap.AddStringPtr(&(items)[i])
 	}
 
 	return charCollectionMap
@@ -831,6 +839,7 @@ func (charCollectionMap *CharCollectionMap) AddSameCharsCollection(
 	hasCollectionHoweverNothingToAdd := has && isNilOrEmptyCollectionGiven
 
 	if isAddToCollection {
+		//goland:noinspection GoNilness
 		foundCollection.AddStringsPtr(stringsWithSameStartChar.items)
 
 		return foundCollection
@@ -911,8 +920,7 @@ func (charCollectionMap *CharCollectionMap) Resize(
 func (charCollectionMap *CharCollectionMap) AddLength(
 	lengths ...int,
 ) *CharCollectionMap {
-
-	if lengths == nil || len(lengths) == 0 {
+	if len(lengths) == 0 {
 		return charCollectionMap
 	}
 
@@ -951,6 +959,7 @@ func (charCollectionMap *CharCollectionMap) List() *[]string {
 
 	i := 0
 	for _, collection := range *charCollectionMap.items {
+
 		for _, itemInList := range *collection.items {
 			list[i] = itemInList
 			i++
@@ -982,6 +991,7 @@ func (charCollectionMap *CharCollectionMap) AddSameCharsCollectionLock(
 	hasCollectionHoweverNothingToAdd := has && isNilOrEmptyCollectionGiven
 
 	if isAddToCollection {
+		//goland:noinspection GoNilness
 		foundCollection.AddStringsPtr(stringsWithSameStartChar.items)
 
 		return foundCollection
@@ -995,8 +1005,11 @@ func (charCollectionMap *CharCollectionMap) AddSameCharsCollectionLock(
 		// create new
 		newCollection := NewCollection(
 			charCollectionMap.eachCollectionCapacity)
+
 		charCollectionMap.Lock()
+
 		(*charCollectionMap.items)[char] = newCollection
+
 		charCollectionMap.Unlock()
 
 		return newCollection
@@ -1082,8 +1095,7 @@ func (charCollectionMap *CharCollectionMap) HashsetsCollectionByStringFirstChar(
 	for _, item := range stringItems {
 		char := charCollectionMap.GetChar(item)
 		hashset := charCollectionMap.HashsetByChar(char)
-		if hashset == nil ||
-			hashset.IsEmpty() {
+		if hashset == nil || hashset.IsEmpty() {
 			continue
 		}
 
@@ -1231,4 +1243,17 @@ func (charCollectionMap *CharCollectionMap) ParseInjectUsingJsonMust(
 	}
 
 	return newUsingJson
+}
+
+// clears existing items, deletes items using delete(*charCollectionMap.items, char)
+func (charCollectionMap *CharCollectionMap) Clear() *CharCollectionMap {
+	if charCollectionMap.IsEmpty() {
+		return charCollectionMap
+	}
+
+	for char := range *charCollectionMap.items {
+		delete(*charCollectionMap.items, char)
+	}
+
+	return charCollectionMap
 }

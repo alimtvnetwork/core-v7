@@ -37,7 +37,7 @@ func (hashset *Hashset) AddCapacitiesLock(
 ) *Hashset {
 	length := hashset.LengthLock()
 
-	if capacities == nil || len(capacities) == 0 {
+	if len(capacities) == 0 {
 		return hashset
 	}
 
@@ -55,7 +55,7 @@ func (hashset *Hashset) AddCapacities(
 ) *Hashset {
 	length := hashset.Length()
 
-	if capacities == nil || len(capacities) == 0 {
+	if len(capacities) == 0 {
 		return hashset
 	}
 
@@ -109,7 +109,7 @@ func (hashset *Hashset) ResizeLock(capacity int) *Hashset {
 }
 
 func (hashset *Hashset) Collection() *Collection {
-	return NewCollectionUsingStrings(hashset.ListPtr())
+	return NewCollectionUsingStrings(hashset.ListPtr(), false)
 }
 
 func (hashset *Hashset) IsEmptyLock() bool {
@@ -132,6 +132,7 @@ func (hashset *Hashset) AddWithWgLock(key string, group *sync.WaitGroup) *Hashse
 	hashset.Unlock()
 
 	hashset.hasMapUpdated = true
+
 	group.Done()
 
 	return hashset
@@ -139,6 +140,7 @@ func (hashset *Hashset) AddWithWgLock(key string, group *sync.WaitGroup) *Hashse
 
 func (hashset *Hashset) AddPtrLock(key *string) *Hashset {
 	hashset.Lock()
+
 	(*hashset.items)[*key] = true
 	hashset.Unlock()
 
@@ -172,6 +174,7 @@ func (hashset *Hashset) AddStringsPtrWgLock(keys *[]string, wg *sync.WaitGroup) 
 
 	hashset.Unlock()
 	wg.Done()
+
 	hashset.hasMapUpdated = true
 
 	return hashset
@@ -253,6 +256,7 @@ func (hashset *Hashset) AddItemsMapWgLock(
 	}
 
 	wg.Done()
+
 	hashset.hasMapUpdated = true
 
 	return hashset
@@ -279,6 +283,7 @@ func (hashset *Hashset) AddHashsetWgLock(
 
 	hashset.Unlock()
 	wg.Done()
+
 	hashset.hasMapUpdated = true
 
 	return hashset
@@ -581,7 +586,7 @@ func (hashset *Hashset) GetFilteredCollection(
 	}
 
 	return NewCollectionUsingStrings(
-		&filteredList)
+		&filteredList, false)
 }
 
 func (hashset *Hashset) Items() *map[string]bool {
@@ -611,8 +616,9 @@ func (hashset *Hashset) ListPtr() *[]string {
 func (hashset *Hashset) ListCopyPtrLock() *[]string {
 	hashset.Lock()
 	defer hashset.Unlock()
+	cloned := *hashset.ListPtr()
 
-	return &(*hashset.ListPtr())
+	return &cloned
 }
 
 func (hashset *Hashset) setCached() {
@@ -668,48 +674,24 @@ func (hashset *Hashset) LengthLock() int {
 	return hashset.Length()
 }
 
+//goland:noinspection GoVetCopyLock
 func (hashset *Hashset) IsEquals(another Hashset) bool {
 	return hashset.IsEqualsPtr(&another)
 }
 
 func (hashset *Hashset) IsEqualsPtrLock(another *Hashset) bool {
-	if hashset == nil {
-		return false
-	}
+	hashset.Lock()
+	defer hashset.Unlock()
 
-	if hashset == another {
-		// ptr same
-		return true
-	}
-
-	if hashset.IsEmpty() && another.IsEmpty() {
-		return true
-	}
-
-	if hashset.IsEmpty() || another.IsEmpty() {
-		return false
-	}
-
-	leftLength := hashset.Length()
-	rightLength := another.Length()
-
-	if leftLength != rightLength {
-		return false
-	}
-
-	for key := range *hashset.items {
-		isRes, has := (*another.items)[key]
-
-		if !has || !isRes {
-			return false
-		}
-	}
-
-	return true
+	return hashset.IsEqualsPtr(another)
 }
 
 func (hashset *Hashset) IsEqualsPtr(another *Hashset) bool {
-	if hashset == nil {
+	if hashset == nil && another == nil {
+		return true
+	}
+
+	if hashset == nil || another == nil {
 		return false
 	}
 
@@ -791,10 +773,12 @@ func (hashset *Hashset) Join(
 	return strings.Join(*hashset.ListPtr(), separator)
 }
 
+//goland:noinspection GoLinterLocal
 func (hashset *Hashset) JsonModel() *HashsetDataModel {
 	return NewHashsetsDataModelUsing(hashset)
 }
 
+//goland:noinspection GoLinterLocal
 func (hashset *Hashset) JsonModelAny() interface{} {
 	return hashset.JsonModel()
 }
@@ -817,6 +801,7 @@ func (hashset *Hashset) UnmarshalJSON(data []byte) error {
 	return err
 }
 
+//goland:noinspection GoLinterLocal
 func (hashset *Hashset) Json() *corejson.Result {
 	if hashset.IsEmpty() {
 		return corejson.EmptyWithoutErrorPtr()

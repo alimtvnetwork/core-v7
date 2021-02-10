@@ -30,7 +30,7 @@ func (hashmap *Hashmap) IsEmpty() bool {
 }
 
 func (hashmap *Hashmap) Collection() *Collection {
-	return NewCollectionUsingStrings(hashmap.ValuesListPtr())
+	return NewCollectionUsingStrings(hashmap.ValuesListPtr(), false)
 }
 
 func (hashmap *Hashmap) IsEmptyLock() bool {
@@ -53,6 +53,7 @@ func (hashmap *Hashmap) AddOrUpdateWithWgLock(key, val string, group *sync.WaitG
 	hashmap.Unlock()
 
 	hashmap.hasMapUpdated = true
+
 	group.Done()
 
 	return hashmap
@@ -129,6 +130,7 @@ func (hashmap *Hashmap) AddOrUpdateStringsPtrWgLock(keys, values *[]string, wg *
 
 	hashmap.Unlock()
 	wg.Done()
+
 	hashmap.hasMapUpdated = true
 
 	return hashmap
@@ -444,16 +446,19 @@ func (hashmap *Hashmap) GetFilteredCollection(
 	}
 
 	return NewCollectionUsingStrings(
-		&filteredList)
+		&filteredList, false)
 }
 
 func (hashmap *Hashmap) Items() *map[string]string {
 	return hashmap.items
 }
 
+//goland:noinspection GoLinterLocal
 func (hashmap *Hashmap) ItemsCopyLock() *map[string]string {
 	hashmap.Lock()
+
 	copiedItemsMap := &(*hashmap.items)
+
 	hashmap.Unlock()
 
 	return copiedItemsMap
@@ -461,7 +466,7 @@ func (hashmap *Hashmap) ItemsCopyLock() *map[string]string {
 
 func (hashmap *Hashmap) ValuesCollection() *Collection {
 	return NewCollectionUsingStrings(
-		hashmap.ValuesListPtr())
+		hashmap.ValuesListPtr(), false)
 }
 
 func (hashmap *Hashmap) ValuesHashset() *Hashset {
@@ -473,7 +478,7 @@ func (hashmap *Hashmap) ValuesHashset() *Hashset {
 
 func (hashmap *Hashmap) ValuesCollectionLock() *Collection {
 	return NewCollectionUsingStrings(
-		hashmap.ValuesListCopyPtrLock())
+		hashmap.ValuesListCopyPtrLock(), false)
 }
 
 func (hashmap *Hashmap) ValuesHashsetLock() *Hashset {
@@ -500,12 +505,14 @@ func (hashmap *Hashmap) KeysValuesCollection() (keys, values *Collection) {
 	wg.Add(2)
 
 	go func() {
-		keys = NewCollectionUsingStrings(hashmap.Keys())
+		keys = NewCollectionUsingStrings(hashmap.Keys(), false)
+
 		wg.Done()
 	}()
 
 	go func() {
-		values = NewCollectionUsingStrings(hashmap.ValuesListPtr())
+		values = NewCollectionUsingStrings(hashmap.ValuesListPtr(), false)
+
 		wg.Done()
 	}()
 
@@ -586,7 +593,7 @@ func (hashmap *Hashmap) Keys() *[]string {
 }
 
 func (hashmap *Hashmap) KeysCollection() *Collection {
-	return NewCollectionUsingStrings(hashmap.Keys())
+	return NewCollectionUsingStrings(hashmap.Keys(), false)
 }
 
 func (hashmap *Hashmap) KeysLock() *[]string {
@@ -668,48 +675,24 @@ func (hashmap *Hashmap) LengthLock() int {
 	return hashmap.Length()
 }
 
-func (hashmap *Hashmap) IsEquals(another Hashmap) bool {
+//goland:noinspection GoLinterLocal
+func (hashmap *Hashmap) IsEquals(another Hashmap) bool { //nolint:govet
 	return hashmap.IsEqualsPtr(&another)
 }
 
 func (hashmap *Hashmap) IsEqualsPtrLock(another *Hashmap) bool {
-	if hashmap == nil {
-		return false
-	}
+	hashmap.Lock()
+	defer hashmap.Unlock()
 
-	if hashmap == another {
-		// ptr same
-		return true
-	}
-
-	if hashmap.IsEmpty() && another.IsEmpty() {
-		return true
-	}
-
-	if hashmap.IsEmpty() || another.IsEmpty() {
-		return false
-	}
-
-	leftLength := hashmap.Length()
-	rightLength := another.Length()
-
-	if leftLength != rightLength {
-		return false
-	}
-
-	for key, value := range *hashmap.items {
-		result, has := (*another.items)[key]
-
-		if !has || !(result != value) {
-			return false
-		}
-	}
-
-	return true
+	return hashmap.IsEqualsPtr(another)
 }
 
 func (hashmap *Hashmap) IsEqualsPtr(another *Hashmap) bool {
-	if hashmap == nil {
+	if hashmap == nil && another == nil {
+		return true
+	}
+
+	if hashmap == nil || another == nil {
 		return false
 	}
 

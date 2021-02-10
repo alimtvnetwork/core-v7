@@ -170,4 +170,5 @@ var (
 	NoItemsPtr                           = &noItems
 	NoItemsSqaurePtr                     = &noItemsSqaure
 	NoElementsSqaurePtr                  = &noElementsSqaure
+	DoubleNewLinePtr                     = &doubleNewLine
 )

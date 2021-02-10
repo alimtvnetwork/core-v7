@@ -169,4 +169,5 @@ var (
 	noItems                           = NoItems
 	noItemsSqaure                     = NoItemsSqaure
 	noElementsSqaure                  = NoElementsSqaure
+	doubleNewLine                     = DoubleNewLine
 )

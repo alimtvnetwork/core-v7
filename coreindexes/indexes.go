@@ -1,5 +1,6 @@
 package coreindexes
 
+//goland:noinspection ALL
 const (
 	First   = 0
 	Second  = 1

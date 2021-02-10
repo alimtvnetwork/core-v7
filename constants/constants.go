@@ -168,8 +168,9 @@ const (
 	LowerCaseZRune                    rune  = 'z'
 	LowerCaseRune                     rune  = LowerCaseA - UpperCaseA         // c - 'A' + 'a' (ref: https://bit.ly/3mFnUPW) a - A = 32 also works
 	UpperCaseRune                     rune  = UpperCaseARune - LowerCaseARune // c - 'a' + 'A'
-	NoElements                              = "{No Elements}"
+	NoElements                              = "{No Element}"
 	NoItems                                 = "{No Items}"
 	NoItemsSqaure                           = "[No Items]"
-	NoElementsSqaure                        = "[No Elements]"
+	NoElementsSqaure                        = "[No Element]"
+	DoubleNewLine                           = "\n\n"
 )

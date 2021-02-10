@@ -96,7 +96,8 @@ func (hashsetsCollection *HashsetsCollection) ListDirectPtr() *[]Hashset {
 	list := make([]Hashset, hashsetsCollection.Length())
 
 	for i, hashset := range *hashsetsCollection.items {
-		list[i] = *hashset
+		//goland:noinspection GoLinterLocal,GoVetCopyLock
+		list[i] = *hashset //nolint:govet
 	}
 
 	return &list
@@ -165,7 +166,11 @@ func (hashsetsCollection *HashsetsCollection) IsEqual(another HashsetsCollection
 }
 
 func (hashsetsCollection *HashsetsCollection) IsEqualPtr(another *HashsetsCollection) bool {
-	if hashsetsCollection == nil {
+	if hashsetsCollection == nil && another == nil {
+		return true
+	}
+
+	if hashsetsCollection == nil || another == nil {
 		return false
 	}
 

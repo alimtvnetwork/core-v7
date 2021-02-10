@@ -27,6 +27,7 @@ func NewHashset(length int) *Hashset {
 }
 
 // addCapacity will not work if it is not a clone.
+//goland:noinspection ALL
 func NewHashsetWithValues(
 	addCapacity int,
 	isMakeClone bool,
@@ -105,6 +106,7 @@ func NewHashsetUsingMap(
 	}
 
 	length := len(*itemsMap)
+
 	if isMakeClone {
 		hashset := NewHashset(length + addCapacity)
 
@@ -123,7 +125,7 @@ func NewHashsetUsingMap(
 	}
 }
 
-// --------- Collection starts ----------
+// --------- ToCollection starts ----------
 
 func NewCollection(capacity int) *Collection {
 	collection := make([]string, 0, capacity)
@@ -134,23 +136,116 @@ func NewCollection(capacity int) *Collection {
 }
 
 func EmptyCollection() *Collection {
-	collection := make([]string, 0, 0)
+	collection := make([]string, 0)
 
 	return &Collection{
 		items: &collection,
 	}
 }
 
-func NewCollectionUsingStrings(stringItems *[]string) *Collection {
+func NewCollectionUsingStrings(stringItems *[]string, isMakeClone bool) *Collection {
+	if isMakeClone {
+		cloned := *stringItems
+
+		return &Collection{
+			items: &cloned,
+		}
+	}
+
 	return &Collection{
 		items: stringItems,
 	}
 }
 
+func NewCollectionUsingStringsPlusCap(stringItems *[]string, capacity int) *Collection {
+	length := LengthOfStrings(stringItems)
+	collection := NewCollection(length + capacity)
+
+	return collection.AddStringsPtr(stringItems)
+}
+
+func NewCollectionUsingPointerStringsPlusCap(stringItems *[]*string, capacity int) *Collection {
+	length := LengthOfPointerStrings(stringItems)
+	collection := NewCollection(length + capacity)
+
+	return collection.AddPointerStringsPtr(stringItems)
+}
+
+//goland:noinspection ALL
 func NewCollectionUsingLength(len, capacity int) *Collection {
 	collection := make([]string, len, capacity)
 
 	return &Collection{
+		items: &collection,
+	}
+}
+
+// --------- CollectionPtr starts ----------
+
+func NewCollectionPtr(capacity int) *CollectionPtr {
+	collection := make([]*string, 0, capacity)
+
+	return &CollectionPtr{
+		items: &collection,
+	}
+}
+
+func EmptyCollectionPtr() *CollectionPtr {
+	collection := make([]*string, 0)
+
+	return &CollectionPtr{
+		items: &collection,
+	}
+}
+
+//goland:noinspection ALL
+func NewCollectionPtrUsingPointerStrings(
+	stringItems *[]*string,
+	addCapacity int,
+) *CollectionPtr {
+	if addCapacity == 0 {
+		return &CollectionPtr{
+			items: stringItems,
+		}
+	}
+
+	if stringItems == nil {
+		return NewCollectionPtr(addCapacity)
+	}
+
+	length := len(*stringItems)
+	collection := NewCollectionPtr(length + addCapacity)
+
+	return collection.
+		AddPointerStringsPtr(stringItems)
+}
+
+func NewCollectionPtrUsingStrings(
+	stringItems *[]string,
+	addCapacity int,
+) *CollectionPtr {
+	if addCapacity == 0 {
+		return &CollectionPtr{
+			items: converters.StringsToPointerStrings(stringItems),
+		}
+	}
+
+	if stringItems == nil {
+		return NewCollectionPtr(addCapacity)
+	}
+
+	length := len(*stringItems)
+	collection := NewCollectionPtr(length + addCapacity)
+
+	return collection.
+		AddStringsPtr(stringItems)
+}
+
+//goland:noinspection ALL
+func NewCollectionPtrUsingLength(len, capacity int) *CollectionPtr {
+	collection := make([]*string, len, capacity)
+
+	return &CollectionPtr{
 		items: &collection,
 	}
 }
@@ -189,6 +284,7 @@ func EmptyCharCollectionMap() *CharCollectionMap {
 	}
 }
 
+//goland:noinspection ALL
 func NewCharCollectionMapUsingItems(
 	items []string,
 ) *CharCollectionMap {
@@ -223,6 +319,7 @@ func NewCharCollectionMapUsingItemsPtr(
 	return charCollectionMap
 }
 
+//goland:noinspection ALL
 func NewCharCollectionMapUsingItemsPlusCap(
 	items *[]string,
 	additionalCapacityOrLength int,
@@ -272,7 +369,9 @@ func NewHashsetsCollection(hashsets *[]Hashset) *HashsetsCollection {
 		length,
 		length+constants.ArbitraryCapacity10)
 
-	for i, hashset := range *hashsets {
+	//goland:noinspection GoLinterLocal,GoVetCopyLock
+	for i, hashset := range *hashsets { //nolint:govet
+		//goland:noinspection GoLinterLocal
 		collection[i] = &hashset
 	}
 
@@ -292,6 +391,7 @@ func NewHashsetsCollectionUsingPointerHashsets(hashsets *[]*Hashset) *HashsetsCo
 	}
 }
 
+//goland:noinspection ALL
 func NewHashsetsCollectionUsingLength(len, capacity int) *HashsetsCollection {
 	collection := make([]*Hashset, len, capacity)
 
@@ -319,6 +419,7 @@ func NewHashmap(length int) *Hashmap {
 	}
 }
 
+//goland:noinspection ALL
 func NewHashmapUsingKeyAnyValues(keyAnyValues *[]KeyAnyValuePair) *Hashmap {
 	if keyAnyValues == nil || *keyAnyValues == nil {
 		return NewHashmap(defaultHashsetItems)
@@ -331,6 +432,7 @@ func NewHashmapUsingKeyAnyValues(keyAnyValues *[]KeyAnyValuePair) *Hashmap {
 	return hashMap
 }
 
+//goland:noinspection ALL
 func NewHashmapUsingKeyValues(keyValues *[]KeyValuePair) *Hashmap {
 	if keyValues == nil || *keyValues == nil {
 		return NewHashmap(defaultHashsetItems)
@@ -343,6 +445,7 @@ func NewHashmapUsingKeyValues(keyValues *[]KeyValuePair) *Hashmap {
 	return hashMap
 }
 
+//goland:noinspection ALL
 func NewHashmapUsingCollection(keys, values *Collection) *Hashmap {
 	if keys == nil || keys.IsEmpty() {
 		return EmptyHashmap()
@@ -358,6 +461,7 @@ func NewHashmapUsingCollection(keys, values *Collection) *Hashmap {
 		false)
 }
 
+//goland:noinspection ALL
 func NewHashmapUsingStrings(keys, values *[]string) *Hashmap {
 	if keys == nil || *keys == nil {
 		return EmptyHashmap()
@@ -402,6 +506,7 @@ func NewHashmapUsingMap(
 }
 
 // always returns the clone of the items.
+//goland:noinspection ALL
 func NewHashmapUsingMapUsingAddCapacity(
 	itemsMap *map[string]string,
 	addCapacity int,
@@ -415,4 +520,274 @@ func NewHashmapUsingMapUsingAddCapacity(
 	hashMap.AddOrUpdateMap(itemsMap)
 
 	return hashMap
+}
+
+// --------- LinkedList starts ----------
+
+func NewLinkedList() *LinkedList {
+	return &LinkedList{}
+}
+
+func EmptyLinkedList() *LinkedList {
+	return &LinkedList{}
+}
+
+//goland:noinspection ALL
+func NewLinkedListUsingPointerStrings(
+	stringItems *[]*string,
+) *LinkedList {
+	if stringItems == nil {
+		return &LinkedList{}
+	}
+
+	linkedList := NewLinkedList()
+
+	return linkedList.
+		AddPointerStringsPtr(stringItems)
+}
+
+//goland:noinspection ALL
+func NewLinkedListUsingStringsPtr(
+	stringItems *[]string,
+) *LinkedList {
+	if stringItems == nil {
+		return &LinkedList{}
+	}
+
+	linkedList := NewLinkedList()
+
+	return linkedList.
+		AddStringsPtr(stringItems)
+}
+
+// --------- CharHashset starts ----------
+
+// CharHashsetMap.eachHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
+//
+// For lower than 5 use the EmptyCharHashsetMap hashset definition.
+func NewCharHashsetMap(
+	capacity, selfHashsetCapacity int,
+) *CharHashsetMap {
+	const limit = constants.ArbitraryCapacity10
+
+	if capacity < limit {
+		capacity = limit
+	}
+
+	mapElements := make(
+		map[byte]*Hashset,
+		capacity)
+
+	if selfHashsetCapacity < limit {
+		selfHashsetCapacity = limit
+	}
+
+	return &CharHashsetMap{
+		items:               &mapElements,
+		eachHashsetCapacity: selfHashsetCapacity,
+	}
+}
+
+//goland:noinspection ALL
+func NewCharHashsetMapUsingItemsPlusCap(
+	items *[]string,
+	capacity, selfHashsetCapacity int,
+) *CharHashsetMap {
+	charHashsetMap := NewCharHashsetMap(capacity, selfHashsetCapacity)
+
+	charHashsetMap.AddStringsPtr(items)
+
+	return charHashsetMap
+}
+
+func NewCharHashsetMapUsingItems(
+	items []string,
+	selfHashsetCapacity int,
+) *CharHashsetMap {
+	if items == nil {
+		return NewCharHashsetMap(
+			constants.ArbitraryCapacity5,
+			selfHashsetCapacity)
+	}
+
+	length := len(items)
+	charHashsetMap := NewCharHashsetMap(
+		length,
+		selfHashsetCapacity)
+
+	charHashsetMap.AddStrings(items...)
+
+	return charHashsetMap
+}
+
+func NewCharHashsetMapUsingItemsPtr(
+	items *[]string,
+	selfHashsetCapacity int,
+) *CharHashsetMap {
+	if items == nil {
+		return NewCharHashsetMap(
+			constants.ArbitraryCapacity5,
+			selfHashsetCapacity)
+	}
+
+	length := len(*items)
+	charHashsetMap := NewCharHashsetMap(
+		length,
+		selfHashsetCapacity)
+
+	charHashsetMap.AddStringsPtr(items)
+
+	return charHashsetMap
+}
+
+// eachHashsetCapacity = 0
+func EmptyCharHashsetMap() *CharHashsetMap {
+	mapElements := make(
+		map[byte]*Hashset,
+		0)
+
+	return &CharHashsetMap{
+		items:               &mapElements,
+		eachHashsetCapacity: 0,
+	}
+}
+
+// --------- LinkedCollections starts ----------
+
+func NewLinkedCollections() *LinkedCollections {
+	return &LinkedCollections{}
+}
+
+func EmptyLinkedCollections() *LinkedCollections {
+	return &LinkedCollections{}
+}
+
+//goland:noinspection ALL
+func NewLinkedCollectionsUsingPointerStrings(
+	stringItems *[]*string,
+) *LinkedCollections {
+	if stringItems == nil {
+		return &LinkedCollections{}
+	}
+
+	linkedList := NewLinkedCollections()
+
+	return linkedList.
+		AddPointerStringsPtr(stringItems)
+}
+
+func NewLinkedCollectionsUsingCollections(
+	collections ...*Collection,
+) *LinkedCollections {
+	if collections == nil {
+		return &LinkedCollections{}
+	}
+
+	linkedList := NewLinkedCollections()
+
+	return linkedList.
+		AppendCollectionsPointers(true, &collections)
+}
+
+//goland:noinspection ALL
+func NewLinkedCollectionsUsingStringsPtr(
+	stringItems *[]string,
+	isMakeClone bool,
+) *LinkedCollections {
+	if stringItems == nil {
+		return &LinkedCollections{}
+	}
+
+	linkedList := NewLinkedCollections()
+
+	return linkedList.
+		AddStringsPtr(stringItems, isMakeClone)
+}
+
+// --------- CollectionsOfCollection starts ----------
+
+func NewCollectionsOfCollection(
+	capacity int,
+) *CollectionsOfCollection {
+	collection := make([]*Collection, 0, capacity)
+
+	return &CollectionsOfCollection{
+		items: &collection,
+	}
+}
+
+func EmptyCollectionsOfCollection() *CollectionsOfCollection {
+	collection := make([]*Collection, 0)
+
+	return &CollectionsOfCollection{
+		items: &collection,
+	}
+}
+
+func NewCollectionsOfCollectionUsingStringsOfStrings(
+	isMakeClone bool,
+	stringItems ...*[]string,
+) *CollectionsOfCollection {
+	length := LengthOfStringsOfPointerStrings(&stringItems)
+
+	return NewCollectionsOfCollectionUsingLength(
+		0,
+		length,
+	).AddsStringsOfPointerStrings(isMakeClone, &stringItems)
+}
+
+func NewCollectionsOfCollectionUsingStringsOfPointerStrings(
+	isMakeClone bool,
+	stringItems *[]*[]string,
+) *CollectionsOfCollection {
+	length := LengthOfStringsOfPointerStrings(stringItems)
+
+	return NewCollectionsOfCollectionUsingLength(
+		0,
+		length,
+	).AddsStringsOfPointerStrings(isMakeClone, stringItems)
+}
+
+func NewCollectionsOfCollectionUsingStrings(
+	stringItems *[]string,
+	isMakeClone bool,
+) *CollectionsOfCollection {
+	length := LengthOfStrings(stringItems)
+
+	return NewCollectionsOfCollectionUsingLength(
+		0,
+		length,
+	).AddStringsPtr(stringItems, isMakeClone)
+}
+
+func NewCollectionsOfCollectionUsingStringsPlusCap(
+	stringItems *[]string,
+	capacity int,
+	isMakeClone bool,
+) *CollectionsOfCollection {
+	length := LengthOfStrings(stringItems)
+	collection := NewCollectionsOfCollection(length + capacity)
+
+	return collection.AddStringsPtr(stringItems, isMakeClone)
+}
+
+func NewCollectionsOfCollectionUsingPointerStringsPlusCap(
+	stringItems *[]*string, capacity int,
+) *CollectionsOfCollection {
+	length := LengthOfPointerStrings(stringItems)
+	collection := NewCollectionsOfCollection(length + capacity)
+
+	return collection.AddPointerStringsPtr(stringItems)
+}
+
+//goland:noinspection ALL
+func NewCollectionsOfCollectionUsingLength(
+	len,
+	capacity int,
+) *CollectionsOfCollection {
+	collection := make([]*Collection, len, capacity)
+
+	return &CollectionsOfCollection{
+		items: &collection,
+	}
 }

@@ -1,6 +1,8 @@
 package inttype
 
 import (
+	"strconv"
+
 	"gitlab.com/evatix-go/core/corecomparator"
 	"gitlab.com/evatix-go/core/msgtype"
 )
@@ -11,6 +13,7 @@ func (v Variant) Value() int {
 	return int(v)
 }
 
+//goland:noinspection ALL
 func GetSet(
 	isCondition bool,
 	trueValue Variant,
@@ -23,6 +26,7 @@ func GetSet(
 	return falseValue
 }
 
+//goland:noinspection ALL
 func GetSetVariant(
 	isCondition bool,
 	trueValue int,
@@ -36,7 +40,7 @@ func GetSetVariant(
 }
 
 func (v Variant) StringValue() string {
-	return string(v)
+	return strconv.Itoa(v.Value())
 }
 
 // v + n

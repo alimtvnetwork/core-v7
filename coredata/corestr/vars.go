@@ -5,15 +5,8 @@ import (
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
+//goland:noinspection ALL
 var (
-	StaticEmptyCollection           = *EmptyCollection()
-	StaticEmptyCollectionPtr        = &StaticEmptyCollection
-	StaticEmptyCharCollectionMap    = *EmptyCharCollectionMap()
-	StaticEmptyCharCollectionMapPtr = &StaticEmptyCharCollectionMap
-	StaticEmptyCharHashsetMap       = *EmptyCharHashsetMap()
-	StaticEmptyCharHashsetMapPtr    = &StaticEmptyCharHashsetMap
-	StaticEmptyHashset              = *EmptyHashset()
-	StaticEmptyHashsetPtr           = &StaticEmptyHashset
-	StaticJsonError                 = msgtype.EmptyResultCannotMakeJson.
+	StaticJsonError = msgtype.EmptyResultCannotMakeJson.
 		Error(constants.EmptyString, constants.EmptyString)
 )

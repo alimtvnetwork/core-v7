@@ -18,95 +18,6 @@ type CharHashsetMap struct {
 	sync.Mutex
 }
 
-// CharHashsetMap.eachHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
-//
-// For lower than 5 use the EmptyCharHashsetMap hashset definition.
-func NewCharHashsetMap(
-	capacity, selfHashsetCapacity int,
-) *CharHashsetMap {
-	const limit = constants.ArbitraryCapacity10
-
-	if capacity < limit {
-		capacity = limit
-	}
-
-	mapElements := make(
-		map[byte]*Hashset,
-		capacity)
-
-	if selfHashsetCapacity < limit {
-		selfHashsetCapacity = limit
-	}
-
-	return &CharHashsetMap{
-		items:               &mapElements,
-		eachHashsetCapacity: selfHashsetCapacity,
-	}
-}
-
-func NewCharHashsetMapUsingItemsPlusCap(
-	items *[]string,
-	capacity, selfHashsetCapacity int,
-) *CharHashsetMap {
-	charHashsetMap := NewCharHashsetMap(capacity, selfHashsetCapacity)
-
-	charHashsetMap.AddStringsPtr(items)
-
-	return charHashsetMap
-}
-
-func NewCharHashsetMapUsingItems(
-	items []string,
-	selfHashsetCapacity int,
-) *CharHashsetMap {
-	if items == nil {
-		return NewCharHashsetMap(
-			constants.ArbitraryCapacity5,
-			selfHashsetCapacity)
-	}
-
-	length := len(items)
-	charHashsetMap := NewCharHashsetMap(
-		length,
-		selfHashsetCapacity)
-
-	charHashsetMap.AddStrings(items...)
-
-	return charHashsetMap
-}
-
-func NewCharHashsetMapUsingItemsPtr(
-	items *[]string,
-	selfHashsetCapacity int,
-) *CharHashsetMap {
-	if items == nil {
-		return NewCharHashsetMap(
-			constants.ArbitraryCapacity5,
-			selfHashsetCapacity)
-	}
-
-	length := len(*items)
-	charHashsetMap := NewCharHashsetMap(
-		length,
-		selfHashsetCapacity)
-
-	charHashsetMap.AddStringsPtr(items)
-
-	return charHashsetMap
-}
-
-// eachHashsetCapacity = 0
-func EmptyCharHashsetMap() *CharHashsetMap {
-	mapElements := make(
-		map[byte]*Hashset,
-		0)
-
-	return &CharHashsetMap{
-		items:               &mapElements,
-		eachHashsetCapacity: 0,
-	}
-}
-
 func (charHashsetMap *CharHashsetMap) GetChar(
 	str string,
 ) byte {
@@ -157,8 +68,8 @@ func (charHashsetMap *CharHashsetMap) HashsetsCollectionByStringsFirstChar(
 	for _, item := range stringItems {
 		char := charHashsetMap.GetChar(item)
 		hashset := charHashsetMap.HashsetByChar(char)
-		if hashset == nil ||
-			hashset.IsEmpty() {
+
+		if hashset == nil || hashset.IsEmpty() {
 			continue
 		}
 
@@ -179,6 +90,7 @@ func (charHashsetMap *CharHashsetMap) HashsetsCollection() *HashsetsCollection {
 		charHashsetMap.Length())
 
 	for _, hashset := range *charHashsetMap.items {
+		//goland:noinspection ALL
 		hashsets = append(hashsets, *hashset)
 	}
 
@@ -240,12 +152,14 @@ func (charHashsetMap *CharHashsetMap) SummaryStringLock() string {
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		charHashsetMap,
-		length)
+		length,
+		coreindexes.First)
 
 	i := 1
 	for key, hashset := range *charHashsetMap.GetCopyMapLock() {
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapSingleItemFormat,
+			i,
 			string(key),
 			hashset.LengthLock())
 
@@ -265,12 +179,14 @@ func (charHashsetMap *CharHashsetMap) SummaryString() string {
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		charHashsetMap,
-		charHashsetMap.Length())
+		charHashsetMap.Length(),
+		coreindexes.First)
 
 	i := 1
 	for key, hashset := range *charHashsetMap.items {
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapSingleItemFormat,
+			i,
 			string(key),
 			hashset.Length())
 
@@ -316,13 +232,14 @@ func (charHashsetMap *CharHashsetMap) StringLock() string {
 
 	i := 1
 	for key, hashset := range *charHashsetMap.GetCopyMapLock() {
+
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapLengthFormat,
 			string(key))
 
 		i++
-		hashsetOfHashset[i] =
-			hashset.StringLock()
+
+		hashsetOfHashset[i] = hashset.StringLock()
 		i++
 	}
 
@@ -988,6 +905,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollection(
 	}
 
 	// items exist or stringsWithSameStartChar exists
+	//goland:noinspection GoNilness
 	toHashset := stringsWithSameStartChar.Hashset()
 	(*charHashsetMap.items)[char] = toHashset
 
@@ -1082,6 +1000,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollectionLock(
 		isNilOrEmptyHashsetGiven
 
 	if isAddToHashset {
+		//goland:noinspection GoNilness
 		list := stringsWithSameStartChar.
 			ListCopyPtrLock()
 
@@ -1107,7 +1026,9 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollectionLock(
 	}
 
 	// items exist or stringsWithSameStartChar exists
+	//goland:noinspection GoNilness
 	hashset := stringsWithSameStartChar.Hashset()
+	//goland:noinspection GoLinterLocal
 	charHashsetMap.Lock()
 	(*charHashsetMap.items)[char] =
 		hashset
@@ -1131,6 +1052,7 @@ func (charHashsetMap *CharHashsetMap) AddHashsetLock(
 	hasHashsetHoweverNothingToAdd := has && isNilOrEmptyHashsetGiven
 
 	if isAddToHashset {
+		//goland:noinspection GoNilness
 		foundHashset.AddStringsPtr(stringsWithSameStartChar.ListPtr())
 
 		return foundHashset
@@ -1294,4 +1216,37 @@ func (charHashsetMap *CharHashsetMap) Json() *corejson.Result {
 	jsonBytes, err := json.Marshal(charHashsetMap.JsonModel())
 
 	return corejson.NewPtr(jsonBytes, err)
+}
+
+// remove all existing items, deletes items using delete(*charCollectionMap.items, char), expensive operation
+func (charHashsetMap *CharHashsetMap) RemoveAll() *CharHashsetMap {
+	if charHashsetMap.IsEmpty() {
+		return charHashsetMap
+	}
+
+	for char := range *charHashsetMap.items {
+		delete(*charHashsetMap.items, char)
+	}
+
+	return charHashsetMap
+}
+
+// points to a new map and collects old pointer and remove all elements from pointer in separate goroutine.
+func (charHashsetMap *CharHashsetMap) Clear() *CharHashsetMap {
+	if charHashsetMap.IsEmpty() {
+		return charHashsetMap
+	}
+
+	newMap := make(map[byte]*Hashset, 0)
+	tempCollection := charHashsetMap.items
+	charHashsetMap.items = nil
+	charHashsetMap.items = &newMap
+
+	go func() {
+		for char := range *tempCollection {
+			delete(*tempCollection, char)
+		}
+	}()
+
+	return charHashsetMap
 }

@@ -1,9 +1,14 @@
 package testconsts
 
+//goland:noinspection ALL
 const (
-	JhonDoe    = "Jhon Doe"
-	Jhon       = "Jhon Doe"
-	Doe        = "Doe"
-	NumberOne  = 1
-	NumberFive = 5
+	JohnDoe     = "John Doe"
+	JaneDoe     = "Jane Doe"
+	John        = "John"
+	Jane        = "Jane"
+	Doe         = "Doe"
+	NumberOne   = 1
+	NumberTwo   = 2
+	NumberThree = 3
+	NumberFive  = 5
 )
