@@ -35,6 +35,7 @@ const (
 	FailedToParse                          Variation = "Failed : request failed to parse!"
 	FailedToConvert                        Variation = "Failed : request failed to convert!"
 	CannotRemoveIndexesFromEmptyCollection Variation = "Invalid operation: cannot remove indexes (either indexes are nil) or cannot remove indexes from the empty collection."
+	CannotBeNegativeIndex                  Variation = "Invalid operation / index: index cannot be negative, operations canceled."
 	CannotBeNegativeMessage                Variation = "Values or value cannot be negative value."
 	CannotBeNilOrEmptyMessage              Variation = "Values or value cannot be nil or null or empty."
 	CannotBeNilMessage                     Variation = "Values or value cannot be nil or null."
