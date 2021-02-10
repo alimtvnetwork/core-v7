@@ -39,13 +39,15 @@ func (linkedListNode *LinkedListNode) LoopEndOfChain(
 	processor LinkedListSimpleProcessor,
 ) (endOfLoop *LinkedListNode, length int) {
 	node := linkedListNode
-	isBreak := processor(
-		0,
-		node,
-		nil,
-		true,
-		false)
+	arg := &LinkedListProcessorParameter{
+		Index:         0,
+		CurrentNode:   node,
+		PrevNode:      nil,
+		IsFirstIndex:  true,
+		IsEndingIndex: false,
+	}
 
+	isBreak := processor(arg)
 	length++
 
 	if isBreak {
@@ -56,15 +58,17 @@ func (linkedListNode *LinkedListNode) LoopEndOfChain(
 	for node.HasNext() {
 		prev := node
 		node = node.Next()
-		isEnd := !node.HasNext()
+		isEndingIndex := !node.HasNext()
 
-		isBreak = processor(
-			i,
-			node,
-			prev,
-			false,
-			isEnd)
+		arg2 := &LinkedListProcessorParameter{
+			Index:         i,
+			CurrentNode:   node,
+			PrevNode:      prev,
+			IsFirstIndex:  false,
+			IsEndingIndex: isEndingIndex,
+		}
 
+		isBreak = processor(arg2)
 		length++
 		i++
 
@@ -74,6 +78,13 @@ func (linkedListNode *LinkedListNode) LoopEndOfChain(
 	}
 
 	return node, length
+}
+
+func (linkedListNode *LinkedListNode) Clone() *LinkedListNode {
+	return &LinkedListNode{
+		Element: linkedListNode.Element,
+		next:    nil,
+	}
 }
 
 func (linkedListNode *LinkedListNode) AddNext(
@@ -183,7 +194,11 @@ func (linkedListNode *LinkedListNode) IsEqualSensitive(
 		return true
 	}
 
-	if another == nil && linkedListNode != nil {
+	if another == nil && linkedListNode == nil {
+		return true
+	}
+
+	if another == nil || linkedListNode == nil {
 		return false
 	}
 

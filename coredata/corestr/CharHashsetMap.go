@@ -152,12 +152,14 @@ func (charHashsetMap *CharHashsetMap) SummaryStringLock() string {
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		charHashsetMap,
-		length)
+		length,
+		coreindexes.First)
 
 	i := 1
 	for key, hashset := range *charHashsetMap.GetCopyMapLock() {
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapSingleItemFormat,
+			i,
 			string(key),
 			hashset.LengthLock())
 
@@ -177,12 +179,14 @@ func (charHashsetMap *CharHashsetMap) SummaryString() string {
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		charHashsetMap,
-		charHashsetMap.Length())
+		charHashsetMap.Length(),
+		coreindexes.First)
 
 	i := 1
 	for key, hashset := range *charHashsetMap.items {
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapSingleItemFormat,
+			i,
 			string(key),
 			hashset.Length())
 

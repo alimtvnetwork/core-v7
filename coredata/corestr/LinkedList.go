@@ -2,6 +2,7 @@ package corestr
 
 import (
 	"encoding/json"
+	"fmt"
 	"strings"
 	"sync"
 
@@ -43,6 +44,12 @@ func (linkedList *LinkedList) incrementLengthUsingNumber(number int) int {
 
 func (linkedList *LinkedList) setLengthToZero() int {
 	linkedList.length = 0
+
+	return linkedList.length
+}
+
+func (linkedList *LinkedList) setLength(number int) int {
+	linkedList.length = number
 
 	return linkedList.length
 }
@@ -278,12 +285,15 @@ func (linkedList *LinkedList) Loop(
 	}
 
 	node := linkedList.head
-	isBreak := simpleProcessor(
-		0,
-		node,
-		nil,
-		true,
-		false)
+	arg := &LinkedListProcessorParameter{
+		Index:         0,
+		CurrentNode:   node,
+		PrevNode:      nil,
+		IsFirstIndex:  true,
+		IsEndingIndex: false,
+	}
+
+	isBreak := simpleProcessor(arg)
 
 	if isBreak {
 		return linkedList
@@ -297,14 +307,18 @@ func (linkedList *LinkedList) Loop(
 		prev := node
 		node = node.Next()
 		isEndingIndex = lenMinusOne == index
-		isBreak = simpleProcessor(
-			index,
-			node,
-			prev,
-			false,
-			isEndingIndex)
 
-		if isBreak {
+		arg2 := &LinkedListProcessorParameter{
+			Index:         index,
+			CurrentNode:   node,
+			PrevNode:      prev,
+			IsFirstIndex:  false,
+			IsEndingIndex: isEndingIndex,
+		}
+
+		isBreak2 := simpleProcessor(arg2)
+
+		if isBreak2 {
 			return linkedList
 		}
 
@@ -325,26 +339,37 @@ func (linkedList *LinkedList) Filter(
 	}
 
 	node := linkedList.head
-	result, isKeep := filter(
-		linkedList,
-		0,
-		node)
+	arg := &LinkedListFilterParameter{
+		Node:  node,
+		Index: 0,
+	}
+	result := filter(arg)
 
-	if isKeep {
-		list = append(list, result)
+	if result.IsKeep {
+		list = append(list, result.Value)
+	}
+
+	if result.IsBreak {
+		return &list
 	}
 
 	index := 1
 
 	for node.HasNext() {
 		node = node.Next()
-		result2, isKeep2 := filter(
-			linkedList,
-			index,
-			node)
 
-		if isKeep2 {
-			list = append(list, result2)
+		arg2 := &LinkedListFilterParameter{
+			Node:  node,
+			Index: index,
+		}
+		result2 := filter(arg2)
+
+		if result2.IsKeep {
+			list = append(list, result2.Value)
+		}
+
+		if result2.IsBreak {
+			return &list
 		}
 
 		index++
@@ -356,36 +381,31 @@ func (linkedList *LinkedList) Filter(
 func (linkedList *LinkedList) RemoveNodeByElementValue(
 	element string,
 	isCaseSensitive bool,
+	isIgnorePanic bool,
 ) *LinkedList {
-	if linkedList.IsEmpty() {
+	if !isIgnorePanic && linkedList.IsEmpty() {
 		msgtype.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("element cannot be removed from empty linkedlist.", element)
 	}
 
 	var processor LinkedListSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedListNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedListProcessorParameter,
 	) (isBreak bool) {
 		isSameNode :=
-			(isCaseSensitive && currentNode.Element == element) ||
-				(!isCaseSensitive && strings.EqualFold(element, currentNode.Element))
+			(isCaseSensitive && arg.CurrentNode.Element == element) ||
+				(!isCaseSensitive && strings.EqualFold(element, arg.CurrentNode.Element))
 
-		if isSameNode && isFirstIndex {
-			linkedList.head = currentNode.next
+		if isSameNode && arg.IsFirstIndex {
+			linkedList.head = arg.CurrentNode.next
 			linkedList.decrementLength()
 
 			return false
 		}
 
 		if isSameNode {
-			prevNode.next = currentNode.next
+			arg.PrevNode.next = arg.CurrentNode.next
 			linkedList.decrementLength()
-
-			return false
 		}
 
 		return false
@@ -395,46 +415,130 @@ func (linkedList *LinkedList) RemoveNodeByElementValue(
 }
 
 func (linkedList *LinkedList) RemoveNodeByIndex(
+	removingIndex int,
+) *LinkedList {
+	if removingIndex < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"removeIndex was less than 0.",
+				removingIndex)
+	}
+
+	var singleProcessor LinkedListSimpleProcessor = func(
+		arg *LinkedListProcessorParameter,
+	) (isBreak bool) {
+		hasIndex := removingIndex == arg.Index
+
+		if !hasIndex {
+			return false
+		}
+
+		isBreak = hasIndex
+		linkedList.decrementLength()
+
+		if arg.IsFirstIndex {
+			linkedList.head =
+				arg.CurrentNode.next
+			arg.CurrentNode = nil
+			return isBreak
+		}
+
+		if arg.IsEndingIndex {
+			arg.PrevNode.next = nil
+			arg.CurrentNode = nil
+
+			return isBreak
+		}
+
+		arg.PrevNode.next = arg.CurrentNode.next
+		arg.CurrentNode = nil
+
+		return isBreak
+	}
+
+	return linkedList.Loop(singleProcessor)
+}
+
+func (linkedList *LinkedList) RemoveNodeByIndexes(
+	isIgnorePanic bool,
 	removingIndexes ...int,
 ) *LinkedList {
-	if removingIndexes == nil {
+	length := len(removingIndexes)
+
+	if length == 0 {
 		return linkedList
 	}
 
-	if linkedList.IsEmpty() && len(removingIndexes) > 0 {
+	if !isIgnorePanic && linkedList.IsEmpty() && length > 0 {
 		msgtype.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("removingIndexes cannot be removed from empty linkedlist.", removingIndexes)
 	}
 
-	removingIndexesPtr := &removingIndexes
+	removingIndexesCopy := removingIndexes
+	removingIndexesCopyPtr := &removingIndexesCopy
 
-	var processor LinkedListSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedListNode,
-		isFirstIndex,
-		isEndingIndex bool,
-	) (isBreak bool) {
-		isSameNode := coreindexes.HasIndex(removingIndexesPtr, index)
-		if isSameNode && isFirstIndex {
-			linkedList.head = currentNode.next
-			linkedList.decrementLength()
+	nonChainedNodes := linkedList.Filter(
+		func(
+			arg *LinkedListFilterParameter,
+		) *LinkedListFilterResult {
+			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopyPtr, arg.Index)
+			if hasIndex {
+				// remove
+				return &LinkedListFilterResult{
+					Value:   arg.Node,
+					IsKeep:  false,
+					IsBreak: false,
+				}
+			}
 
-			return false
-		}
+			// not remove
+			return &LinkedListFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: false,
+			}
+		})
 
-		if isSameNode {
-			prevNode.next = currentNode.next
-			linkedList.decrementLength()
-
-			return false
-		}
-
-		return false
+	nonChainedCollection := &NonChainedLinkedListNodes{
+		items:             nonChainedNodes,
+		isChainingApplied: false,
 	}
 
-	return linkedList.Loop(processor)
+	if nonChainedCollection.IsEmpty() {
+		return linkedList
+	}
+
+	linkedList.setLength(nonChainedCollection.Length())
+	linkedList.head = nonChainedCollection.ApplyChaining().First()
+
+	return linkedList
+}
+
+func (linkedList *LinkedList) GetCompareSummary(
+	right *LinkedList,
+	leftName, rightName string,
+) string {
+	lLen := linkedList.Length()
+	rLen := right.Length()
+
+	leftStr := fmt.Sprintf(
+		linkedListCollectionCompareHeaderLeft,
+		leftName,
+		lLen,
+		linkedList)
+
+	rightStr := fmt.Sprintf(
+		linkedListCollectionCompareHeaderRight,
+		rightName,
+		rLen,
+		right,
+		linkedList.IsEqualsPtr(right),
+		lLen,
+		rLen)
+
+	return leftStr + rightStr
 }
 
 // skip if removingNode is nil
@@ -445,29 +549,25 @@ func (linkedList *LinkedList) RemoveNode(
 		return linkedList
 	}
 
-	if linkedList.IsEmpty() && removingNode != nil {
+	if linkedList.IsEmpty() {
 		msgtype.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("removingNode cannot be removed from empty linkedlist.", removingNode.String())
 	}
 
 	var processor LinkedListSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedListNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedListProcessorParameter,
 	) (isBreak bool) {
-		isSameNode := currentNode == removingNode
-		if isSameNode && isFirstIndex {
-			linkedList.head = currentNode.next
+		isSameNode := arg.CurrentNode == removingNode
+		if isSameNode && arg.IsFirstIndex {
+			linkedList.head = arg.CurrentNode.next
 			linkedList.decrementLength()
 
 			return true
 		}
 
 		if isSameNode {
-			prevNode.next = currentNode.next
+			arg.PrevNode.next = arg.CurrentNode.next
 			linkedList.decrementLength()
 
 			return true

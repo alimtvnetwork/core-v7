@@ -1,4 +1,4 @@
-package strsort
+package intsort
 
 import (
 	"sort"
@@ -9,8 +9,8 @@ import (
 // Warning: Data gets mutated inside.
 //
 // Reference : https://play.golang.org/p/_OkY82E2kO9
-func QuickPtr(pointerStringsIn *[]*string) *[]*string {
-	pointerStrings := coredata.PointerStrings(*pointerStringsIn)
+func QuickPtr(pointerStringsIn *[]*int) *[]*int {
+	pointerStrings := coredata.PointerIntegers(*pointerStringsIn)
 	sort.Sort(pointerStrings)
 
 	return pointerStringsIn
@@ -19,17 +19,17 @@ func QuickPtr(pointerStringsIn *[]*string) *[]*string {
 // Warning: Data gets mutated inside.
 //
 // Reference : https://play.golang.org/p/sJ8a464USeV
-func Quick(stringsPointerIn *[]string) *[]string {
-	sort.Strings(*stringsPointerIn)
+func Quick(intsPointerIn *[]int) *[]int {
+	sort.Ints(*intsPointerIn)
 
-	return stringsPointerIn
+	return intsPointerIn
 }
 
 // Warning: Data gets mutated inside.
 //
 // Reference : https://play.golang.org/p/_OkY82E2kO9
-func QuickDscPtr(pointerStringsIn *[]*string) *[]*string {
-	pointerStringsDsc := coredata.PointerStringsDsc(*pointerStringsIn)
+func QuickDscPtr(pointerStringsIn *[]*int) *[]*int {
+	pointerStringsDsc := coredata.PointerIntegersDsc(*pointerStringsIn)
 	sort.Sort(pointerStringsDsc)
 
 	return pointerStringsIn
@@ -38,9 +38,9 @@ func QuickDscPtr(pointerStringsIn *[]*string) *[]*string {
 // Warning: Data gets mutated inside.
 //
 // Reference : https://play.golang.org/p/sJ8a464USeV
-func QuickDsc(stringsPointerIn *[]string) *[]string {
-	pointerStringsDsc := coredata.StringsDsc(*stringsPointerIn)
-	sort.Strings(pointerStringsDsc)
+func QuickDsc(intsPointerIn *[]int) *[]int {
+	pointerStringsDsc := coredata.IntegersDsc(*intsPointerIn)
+	sort.Sort(pointerStringsDsc)
 
-	return stringsPointerIn
+	return intsPointerIn
 }

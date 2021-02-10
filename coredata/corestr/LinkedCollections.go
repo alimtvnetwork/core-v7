@@ -63,13 +63,9 @@ func (linkedCollections *LinkedCollections) AllIndividualItemsLength() int {
 	allLengthSum := 0
 
 	var processor LinkedCollectionSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedCollectionNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedCollectionProcessorParameter,
 	) (isBreak bool) {
-		allLengthSum += currentNode.Element.Length()
+		allLengthSum += arg.CurrentNode.Element.Length()
 
 		return false
 	}
@@ -87,6 +83,12 @@ func (linkedCollections *LinkedCollections) incrementLength() int {
 
 func (linkedCollections *LinkedCollections) setLengthToZero() int {
 	linkedCollections.length = 0
+
+	return linkedCollections.length
+}
+
+func (linkedCollections *LinkedCollections) setLength(number int) int {
+	linkedCollections.length = number
 
 	return linkedCollections.length
 }
@@ -175,6 +177,103 @@ func (linkedCollections *LinkedCollections) InsertAt(
 
 	node := linkedCollections.IndexAt(index - 1)
 	linkedCollections.AddAfterNode(node, collection)
+
+	return linkedCollections
+}
+
+func (linkedCollections *LinkedCollections) AddAsync(
+	collection *Collection,
+	wg *sync.WaitGroup,
+) *LinkedCollections {
+	go func() {
+		linkedCollections.Lock()
+		defer linkedCollections.Unlock()
+		linkedCollections.Add(collection)
+
+		wg.Done()
+	}()
+
+	return linkedCollections
+}
+
+// Append back
+func (linkedCollections *LinkedCollections) AddsAsyncOnComplete(
+	onComplete OnCompleteLinkedCollections,
+	isSkipOnNil bool,
+	collections ...*Collection,
+) *LinkedCollections {
+	go func() {
+		linkedCollections.Lock()
+		defer linkedCollections.Unlock()
+
+		linkedCollections.AppendCollectionsPointers(isSkipOnNil, &collections)
+
+		onComplete(linkedCollections)
+	}()
+
+	return linkedCollections
+}
+
+// Append back
+func (linkedCollections *LinkedCollections) AddsUsingProcessorAsyncOnComplete(
+	onComplete OnCompleteLinkedCollections,
+	processor AnyToCollectionProcessor,
+	isSkipOnNil bool,
+	anys ...interface{},
+) *LinkedCollections {
+	go func() {
+		linkedCollections.Lock()
+		defer linkedCollections.Unlock()
+
+		if anys == nil && isSkipOnNil {
+			onComplete(linkedCollections)
+
+			return
+		}
+
+		for _, any := range anys {
+			if any == nil && isSkipOnNil {
+				continue
+			}
+
+			collection := processor(any)
+			linkedCollections.Add(collection)
+		}
+
+		onComplete(linkedCollections)
+	}()
+
+	return linkedCollections
+}
+
+// Append back
+func (linkedCollections *LinkedCollections) AddsUsingProcessorAsync(
+	wg *sync.WaitGroup,
+	processor AnyToCollectionProcessor,
+	isSkipOnNil bool,
+	anys ...interface{},
+) *LinkedCollections {
+	go func() {
+		linkedCollections.Lock()
+		defer linkedCollections.Unlock()
+
+		if anys == nil && isSkipOnNil {
+			wg.Done()
+
+			return
+		}
+
+		for _, any := range anys {
+			if any == nil && isSkipOnNil {
+				continue
+			}
+
+			collection := processor(any)
+			linkedCollections.Add(collection)
+		}
+
+		wg.Done()
+	}()
 
 	return linkedCollections
 }
@@ -316,6 +415,19 @@ func (linkedCollections *LinkedCollections) AddCollectionToNode(
 		collection)
 }
 
+func (linkedCollections *LinkedCollections) GetAllLinkedNodes() *[]*LinkedCollectionNode {
+	return linkedCollections.Filter(
+		func(
+			arg *LinkedCollectionFilterParameter,
+		) *LinkedCollectionFilterResult {
+			return &LinkedCollectionFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: false,
+			}
+		})
+}
+
 func (linkedCollections *LinkedCollections) Loop(
 	simpleProcessor LinkedCollectionSimpleProcessor,
 ) *LinkedCollections {
@@ -325,12 +437,15 @@ func (linkedCollections *LinkedCollections) Loop(
 	}
 
 	node := linkedCollections.head
-	isBreak := simpleProcessor(
-		0,
-		node,
-		nil,
-		true,
-		false)
+	arg := &LinkedCollectionProcessorParameter{
+		Index:         0,
+		CurrentNode:   node,
+		PrevNode:      nil,
+		IsFirstIndex:  true,
+		IsEndingIndex: false,
+	}
+
+	isBreak := simpleProcessor(arg)
 
 	if isBreak {
 		return linkedCollections
@@ -344,12 +459,16 @@ func (linkedCollections *LinkedCollections) Loop(
 		prev := node
 		node = node.Next()
 		isEndingIndex = lenMinusOne == index
-		isBreak = simpleProcessor(
-			index,
-			node,
-			prev,
-			false,
-			isEndingIndex)
+
+		arg2 := &LinkedCollectionProcessorParameter{
+			Index:         index,
+			CurrentNode:   node,
+			PrevNode:      prev,
+			IsFirstIndex:  false,
+			IsEndingIndex: isEndingIndex,
+		}
+
+		isBreak = simpleProcessor(arg2)
 
 		if isBreak {
 			return linkedCollections
@@ -372,25 +491,38 @@ func (linkedCollections *LinkedCollections) Filter(
 	}
 
 	node := linkedCollections.head
-	result, isKeep := filter(
-		linkedCollections,
-		0,
-		node)
+	arg := &LinkedCollectionFilterParameter{
+		Node:  node,
+		Index: 0,
+	}
 
-	if isKeep {
-		list = append(list, result)
+	result := filter(arg)
+
+	if result.IsKeep {
+		list = append(list, result.Value)
+	}
+
+	if result.IsBreak {
+		return &list
 	}
 
 	index := 1
 	for node.HasNext() {
 		node = node.Next()
-		result2, isKeep2 := filter(
-			linkedCollections,
-			index,
-			node)
 
-		if isKeep2 {
-			list = append(list, result2)
+		arg2 := &LinkedCollectionFilterParameter{
+			Node:  node,
+			Index: index,
+		}
+
+		result2 := filter(arg2)
+
+		if result2.IsKeep {
+			list = append(list, result2.Value)
+		}
+
+		if result2.IsBreak {
+			return &list
 		}
 
 		index++
@@ -444,72 +576,121 @@ func (linkedCollections *LinkedCollections) FilterAsCollections(
 }
 
 func (linkedCollections *LinkedCollections) RemoveNodeByIndex(
+	removingIndex int,
+) *LinkedCollections {
+	if removingIndex < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"removeIndex was less than 0.",
+				removingIndex)
+	}
+
+	var singleProcessor LinkedCollectionSimpleProcessor = func(
+		arg *LinkedCollectionProcessorParameter,
+	) (isBreak bool) {
+		hasIndex := removingIndex == arg.Index
+
+		if !hasIndex {
+			return false
+		}
+
+		isBreak = hasIndex
+		linkedCollections.decrementLength()
+
+		if arg.IsFirstIndex {
+			linkedCollections.head =
+				arg.CurrentNode.next
+			arg.CurrentNode = nil
+			return isBreak
+		}
+
+		if arg.IsEndingIndex {
+			arg.PrevNode.next = nil
+			arg.CurrentNode = nil
+
+			return isBreak
+		}
+
+		arg.PrevNode.next = arg.CurrentNode.next
+		arg.CurrentNode = nil
+
+		return isBreak
+	}
+
+	return linkedCollections.Loop(singleProcessor)
+}
+
+func (linkedCollections *LinkedCollections) RemoveNodeByIndexes(
+	isIgnorePanic bool,
 	removingIndexes ...int,
 ) *LinkedCollections {
-	if removingIndexes == nil {
+	length := len(removingIndexes)
+
+	if length == 0 {
 		return linkedCollections
+	}
+
+	if !isIgnorePanic && linkedCollections.IsEmpty() && length > 0 {
+		msgtype.
+			CannotRemoveIndexesFromEmptyCollection.
+			HandleUsingPanic("removingIndexes cannot be removed from empty LinkedCollections.", removingIndexes)
 	}
 
 	removingIndexesCopy := removingIndexes
 	removingIndexesCopyPtr := &removingIndexesCopy
 
-	var processor LinkedCollectionSimpleProcessor = func(
-		index int,
-		currentNode, prevNode *LinkedCollectionNode,
-		isFirstIndex,
-		isEndingIndex bool,
-	) (isBreak bool) {
-		hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopyPtr, index)
+	nonChainedNodes := linkedCollections.Filter(
+		func(arg *LinkedCollectionFilterParameter) *LinkedCollectionFilterResult {
+			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopyPtr, arg.Index)
+			if hasIndex {
+				// remove
+				return &LinkedCollectionFilterResult{
+					Value:   arg.Node,
+					IsKeep:  false,
+					IsBreak: false,
+				}
+			}
 
-		if !hasIndex {
-			return isBreak
-		}
+			// not remove
+			return &LinkedCollectionFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: false,
+			}
+		})
 
-		isBreak = len(*removingIndexesCopyPtr) == 0
-		linkedCollections.decrementLength()
-
-		if isFirstIndex {
-			linkedCollections.head = currentNode.next
-			currentNode = nil
-			return isBreak
-		}
-
-		if isEndingIndex {
-			prevNode.next = nil
-			currentNode = nil
-
-			return isBreak
-		}
-
-		prevNode.next = currentNode.next
-		currentNode = nil
-
-		return isBreak
+	nonChainedCollection := &NonChainedLinkedCollectionNodes{
+		items:             nonChainedNodes,
+		isChainingApplied: false,
 	}
 
-	return linkedCollections.Loop(processor)
+	if nonChainedCollection.IsEmpty() {
+		return linkedCollections
+	}
+
+	linkedCollections.setLength(nonChainedCollection.Length())
+	linkedCollections.head = nonChainedCollection.ApplyChaining().First()
+
+	return linkedCollections
 }
 
 func (linkedCollections *LinkedCollections) RemoveNode(
 	removingNode *LinkedCollectionNode,
 ) *LinkedCollections {
 	var processor LinkedCollectionSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedCollectionNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedCollectionProcessorParameter,
 	) (isBreak bool) {
-		isSameNode := currentNode == removingNode
-		if isSameNode && isFirstIndex {
-			linkedCollections.head = currentNode.next
+		isSameNode := arg.CurrentNode == removingNode
+		if isSameNode && arg.IsFirstIndex {
+			linkedCollections.head = arg.CurrentNode.next
 			linkedCollections.decrementLength()
 
 			return true
 		}
 
 		if isSameNode {
-			prevNode.next = currentNode.next
+			arg.PrevNode.next = arg.CurrentNode.next
 			linkedCollections.decrementLength()
 
 			return true
@@ -855,19 +1036,14 @@ func (linkedCollections *LinkedCollections) ToCollection(
 	collection := NewCollection(
 		linkedCollections.AllIndividualItemsLength() +
 			addCapacity)
-
 	var processor LinkedCollectionSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedCollectionNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedCollectionProcessorParameter,
 	) (isBreak bool) {
-		if currentNode == nil {
+		if arg.CurrentNode == nil {
 			return false
 		}
 
-		collection.AddCollection(currentNode.Element)
+		collection.AddCollection(arg.CurrentNode.Element)
 
 		return false
 	}
@@ -889,17 +1065,13 @@ func (linkedCollections *LinkedCollections) ToCollectionsOfCollection(
 			addCapacity)
 
 	var processor LinkedCollectionSimpleProcessor = func(
-		index int,
-		currentNode,
-		prevNode *LinkedCollectionNode,
-		isFirstIndex,
-		isEndingIndex bool,
+		arg *LinkedCollectionProcessorParameter,
 	) (isBreak bool) {
-		if currentNode == nil {
+		if arg.CurrentNode == nil {
 			return false
 		}
 
-		collection.Adds(currentNode.Element)
+		collection.Adds(arg.CurrentNode.Element)
 
 		return false
 	}

@@ -214,12 +214,15 @@ func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
 	processor LinkedCollectionSimpleProcessor,
 ) (endOfLoop *LinkedCollectionNode, length int) {
 	node := linkedCollectionNode
-	isBreak := processor(
-		0,
-		node,
-		nil,
-		true,
-		false)
+	arg := &LinkedCollectionProcessorParameter{
+		Index:         0,
+		CurrentNode:   node,
+		PrevNode:      nil,
+		IsFirstIndex:  true,
+		IsEndingIndex: false,
+	}
+
+	isBreak := processor(arg)
 
 	length++
 
@@ -232,15 +235,16 @@ func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
 	for node.HasNext() {
 		prev := node
 		node = node.Next()
-		isEnd := !node.HasNext()
+		isEndingIndex := !node.HasNext()
+		arg2 := &LinkedCollectionProcessorParameter{
+			Index:         i,
+			CurrentNode:   node,
+			PrevNode:      prev,
+			IsFirstIndex:  false,
+			IsEndingIndex: isEndingIndex,
+		}
 
-		isBreak = processor(
-			i,
-			node,
-			prev,
-			false,
-			isEnd)
-
+		isBreak = processor(arg2)
 		length++
 		i++
 
@@ -255,6 +259,13 @@ func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
 func (linkedCollectionNode *LinkedCollectionNode) CreateLinkedList() *LinkedCollections {
 	return NewLinkedCollections().
 		AppendChainOfNodes(linkedCollectionNode)
+}
+
+func (linkedCollectionNode *LinkedCollectionNode) Clone() *LinkedCollectionNode {
+	return &LinkedCollectionNode{
+		Element: linkedCollectionNode.Element,
+		next:    nil,
+	}
 }
 
 func (linkedCollectionNode *LinkedCollectionNode) String() string {
