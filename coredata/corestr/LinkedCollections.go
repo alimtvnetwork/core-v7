@@ -278,6 +278,13 @@ func (linkedCollections *LinkedCollections) AddsUsingProcessorAsync(
 	return linkedCollections
 }
 
+func (linkedCollections *LinkedCollections) AddLock(collection *Collection) *LinkedCollections {
+	linkedCollections.Lock()
+	defer linkedCollections.Unlock()
+
+	return linkedCollections.Add(collection)
+}
+
 func (linkedCollections *LinkedCollections) Add(collection *Collection) *LinkedCollections {
 	if linkedCollections.IsEmpty() {
 		linkedCollections.head = &LinkedCollectionNode{
@@ -352,6 +359,10 @@ func (linkedCollections *LinkedCollections) AppendChainOfNodesAsync(
 	return linkedCollections
 }
 
+func (linkedCollections *LinkedCollections) PushBackLock(collection *Collection) *LinkedCollections {
+	return linkedCollections.AddLock(collection)
+}
+
 func (linkedCollections *LinkedCollections) PushBack(collection *Collection) *LinkedCollections {
 	return linkedCollections.Add(collection)
 }
@@ -361,6 +372,13 @@ func (linkedCollections *LinkedCollections) Push(collection *Collection) *Linked
 }
 
 func (linkedCollections *LinkedCollections) PushFront(collection *Collection) *LinkedCollections {
+	return linkedCollections.AddFront(collection)
+}
+
+func (linkedCollections *LinkedCollections) AddFrontLock(collection *Collection) *LinkedCollections {
+	linkedCollections.Lock()
+	defer linkedCollections.Unlock()
+
 	return linkedCollections.AddFront(collection)
 }
 
@@ -413,6 +431,24 @@ func (linkedCollections *LinkedCollections) AddCollectionToNode(
 		isSkipOnNull,
 		node,
 		collection)
+}
+
+func (linkedCollections *LinkedCollections) GetNextNodes(count int) *[]*LinkedCollectionNode {
+	counter := 0
+
+	return linkedCollections.Filter(
+		func(
+			arg *LinkedCollectionFilterParameter,
+		) *LinkedCollectionFilterResult {
+			isBreak := counter >= count-1
+
+			counter++
+			return &LinkedCollectionFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: isBreak,
+			}
+		})
 }
 
 func (linkedCollections *LinkedCollections) GetAllLinkedNodes() *[]*LinkedCollectionNode {
@@ -712,7 +748,33 @@ func (linkedCollections *LinkedCollections) AppendCollections(
 	}
 
 	for i := range collections {
-		linkedCollections.Add(collections[i])
+		collection := collections[i]
+		if isSkipOnNull && collection == nil {
+			continue
+		}
+
+		linkedCollections.Add(collection)
+	}
+
+	return linkedCollections
+}
+
+// iSkipOnNil
+func (linkedCollections *LinkedCollections) AppendCollectionsPointersLock(
+	isSkipOnNull bool,
+	collections *[]*Collection,
+) *LinkedCollections {
+	if isSkipOnNull && collections == nil {
+		return linkedCollections
+	}
+
+	for i := range *collections {
+		collection := (*collections)[i]
+		if isSkipOnNull && collection == nil {
+			continue
+		}
+
+		linkedCollections.AddLock(collection)
 	}
 
 	return linkedCollections
@@ -728,7 +790,12 @@ func (linkedCollections *LinkedCollections) AppendCollectionsPointers(
 	}
 
 	for i := range *collections {
-		linkedCollections.Add((*collections)[i])
+		collection := (*collections)[i]
+		if isSkipOnNull && collection == nil {
+			continue
+		}
+
+		linkedCollections.Add(collection)
 	}
 
 	return linkedCollections
@@ -1033,9 +1100,10 @@ func (linkedCollections *LinkedCollections) ToCollection(
 		return EmptyCollection()
 	}
 
-	collection := NewCollection(
-		linkedCollections.AllIndividualItemsLength() +
-			addCapacity)
+	newLength := linkedCollections.AllIndividualItemsLength() +
+		addCapacity
+
+	collection := NewCollection(newLength)
 	var processor LinkedCollectionSimpleProcessor = func(
 		arg *LinkedCollectionProcessorParameter,
 	) (isBreak bool) {
@@ -1060,9 +1128,10 @@ func (linkedCollections *LinkedCollections) ToCollectionsOfCollection(
 		return EmptyCollectionsOfCollection()
 	}
 
-	collection := NewCollectionsOfCollection(
-		linkedCollections.AllIndividualItemsLength() +
-			addCapacity)
+	newLength := linkedCollections.AllIndividualItemsLength() +
+		addCapacity
+
+	collection := NewCollectionsOfCollection(newLength)
 
 	var processor LinkedCollectionSimpleProcessor = func(
 		arg *LinkedCollectionProcessorParameter,
