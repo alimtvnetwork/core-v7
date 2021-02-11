@@ -239,7 +239,7 @@ func (collectionPtr *CollectionPtr) resizeForHashmaps(
 		length += hashmap.Length()
 	}
 
-	if length < constants.ArbitraryCapacity100 {
+	if !collectionPtr.isResizeRequired(length) {
 		return collectionPtr
 	}
 
@@ -268,7 +268,7 @@ func (collectionPtr *CollectionPtr) resizeForCollectionPtrs(
 		length += collection.Length()
 	}
 
-	if length < constants.ArbitraryCapacity100 {
+	if !collectionPtr.isResizeRequired(length) {
 		return collectionPtr
 	}
 
@@ -288,7 +288,7 @@ func (collectionPtr *CollectionPtr) resizeForItems(
 	}
 
 	length := len(*items)
-	if length < constants.ArbitraryCapacity100 {
+	if !collectionPtr.isResizeRequired(length) {
 		return collectionPtr
 	}
 
@@ -297,6 +297,21 @@ func (collectionPtr *CollectionPtr) resizeForItems(
 			length/2
 
 	return collectionPtr.AddCapacity(finalLength)
+}
+
+func (collectionPtr *CollectionPtr) isResizeRequired(
+	length int,
+) bool {
+	if length < constants.ArbitraryCapacity200 {
+		return false
+	}
+
+	windowLength := collectionPtr.Capacity() - collectionPtr.Length()
+	if windowLength >= length {
+		return false
+	}
+
+	return true
 }
 
 func (collectionPtr *CollectionPtr) resizeForAnys(
@@ -308,7 +323,7 @@ func (collectionPtr *CollectionPtr) resizeForAnys(
 	}
 
 	length := len(*items)
-	if length < constants.ArbitraryCapacity100 {
+	if !collectionPtr.isResizeRequired(length) {
 		return collectionPtr
 	}
 

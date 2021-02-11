@@ -768,6 +768,35 @@ func (linkedList *LinkedList) SafePointerIndexAtUsingDefaultLock(
 	return linkedList.SafePointerIndexAtUsingDefault(index, defaultString)
 }
 
+func (linkedList *LinkedList) GetNextNodes(count int) *[]*LinkedListNode {
+	counter := 0
+
+	return linkedList.Filter(
+		func(
+			arg *LinkedListFilterParameter,
+		) *LinkedListFilterResult {
+			isBreak := counter >= count-1
+			return &LinkedListFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: isBreak,
+			}
+		})
+}
+
+func (linkedList *LinkedList) GetAllLinkedNodes() *[]*LinkedListNode {
+	return linkedList.Filter(
+		func(
+			arg *LinkedListFilterParameter,
+		) *LinkedListFilterResult {
+			return &LinkedListFilterResult{
+				Value:   arg.Node,
+				IsKeep:  true,
+				IsBreak: false,
+			}
+		})
+}
+
 // skip on nil, add to back
 func (linkedList *LinkedList) AddPointerStringsPtr(items *[]*string) *LinkedList {
 	if items == nil {
@@ -799,7 +828,8 @@ func (linkedList *LinkedList) AddCollection(collection *Collection) *LinkedList 
 }
 
 func (linkedList *LinkedList) ToCollection(addCapacity int) *Collection {
-	collection := NewCollection(linkedList.Length() + addCapacity)
+	newLength := linkedList.Length() + addCapacity
+	collection := NewCollection(newLength)
 
 	if linkedList.IsEmpty() {
 		return collection

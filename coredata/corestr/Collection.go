@@ -241,6 +241,21 @@ func (collection *Collection) AddHashmapsKeys(
 	return collection
 }
 
+func (collection *Collection) isResizeRequired(
+	length int,
+) bool {
+	if length < constants.ArbitraryCapacity200 {
+		return false
+	}
+
+	windowLength := collection.Capacity() - collection.Length()
+	if windowLength >= length {
+		return false
+	}
+
+	return true
+}
+
 func (collection *Collection) resizeForHashmaps(
 	hashmaps *[]*Hashmap,
 	multiplier int,
@@ -259,7 +274,7 @@ func (collection *Collection) resizeForHashmaps(
 		length += hashmap.Length()
 	}
 
-	if length < constants.ArbitraryCapacity100 {
+	if !collection.isResizeRequired(length) {
 		return collection
 	}
 
@@ -288,7 +303,7 @@ func (collection *Collection) resizeForCollections(
 		length += hashmap.Length()
 	}
 
-	if length < constants.ArbitraryCapacity100 {
+	if !collection.isResizeRequired(length) {
 		return collection
 	}
 
@@ -308,7 +323,7 @@ func (collection *Collection) resizeForItems(
 	}
 
 	length := len(*items)
-	if length < constants.ArbitraryCapacity100 {
+	if !collection.isResizeRequired(length) {
 		return collection
 	}
 
@@ -328,7 +343,7 @@ func (collection *Collection) resizeForPointerItems(
 	}
 
 	length := len(*items)
-	if length < constants.ArbitraryCapacity100 {
+	if !collection.isResizeRequired(length) {
 		return collection
 	}
 
@@ -348,7 +363,7 @@ func (collection *Collection) resizeForAnys(
 	}
 
 	length := len(*items)
-	if length < constants.ArbitraryCapacity100 {
+	if !collection.isResizeRequired(length) {
 		return collection
 	}
 
