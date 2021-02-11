@@ -16,6 +16,14 @@ const (
 	Unknown
 )
 
+func (arch Architecture) IsX32() bool {
+	return arch == X32
+}
+
+func (arch Architecture) IsX64() bool {
+	return arch == X64
+}
+
 func (arch Architecture) Value() byte {
 	return byte(arch)
 }
