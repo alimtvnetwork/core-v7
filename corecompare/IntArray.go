@@ -9,17 +9,9 @@ func IntArray(array, other []int) bool {
 		return false
 	}
 
-	length := len(array)
+	arrayPtr := &array
+	otherPtr := &other
 
-	if length != len(other) {
-		return false
-	}
-
-	for i := 0; i < length; i++ {
-		if array[i] != other[i] {
-			return false
-		}
-	}
-
-	return true
+	return IntArrayPtr(arrayPtr, otherPtr)
 }
+
