@@ -21,6 +21,9 @@ func main() {
 
 	linkedList1.AddStringsPtr(&items)
 	linkedList2.AddStringsPtr(&items)
+
+	fmt.Println(linkedList1.Json().JsonString())
+
 	fmt.Println(linkedList1.GetCompareSummary(linkedList2, "Link1", "Link2"))
 
 	linkedList1.RemoveNodeByIndexes(true, 1, 3)

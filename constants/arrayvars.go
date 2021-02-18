@@ -21,6 +21,30 @@ var (
 		CarriageReturn: One,
 	}
 
+	SpecialChars = [256]uint8{
+		'!': One,
+		'@': One,
+		'#': One,
+		'$': One,
+		'%': One,
+		'^': One,
+		'&': One,
+		'*': One,
+		'(': One,
+		')': One,
+	}
+
+	BracketChars = [256]uint8{
+		'[': One,
+		']': One,
+		'{': One,
+		'}': One,
+		'(': One,
+		')': One,
+		'<': One,
+		'>': One,
+	}
+
 	EmptyStrings          []string
 	EmptyPtrStrings       []*string
 	EmptyInts             []int
