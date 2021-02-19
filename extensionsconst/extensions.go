@@ -1,5 +1,6 @@
 package extensionsconst
 
+//goland:noinspection ALL
 const (
 	AllFiles string = "*.*"
 	DotAny   string = ".*"

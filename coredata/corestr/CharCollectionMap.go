@@ -644,13 +644,17 @@ func (charCollectionMap *CharCollectionMap) AddHashmapsKeysOrValuesBothUsingFilt
 		}
 
 		for k, v := range *hashmap.items {
-			result, isAccept := filter(KeyValuePair{
+			result, isAccept, isBreak := filter(KeyValuePair{
 				Key:   k,
 				Value: v,
 			})
 
 			if isAccept {
 				charCollectionMap.AddStringPtr(&result)
+			}
+
+			if isBreak {
+				return charCollectionMap
 			}
 		}
 	}

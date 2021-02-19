@@ -386,11 +386,15 @@ func (hashset *Hashset) AddsAnyUsingFilter(
 		}
 
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if isKeep {
 			(*hashset.items)[result] = true
 			hashset.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashset
 		}
 	}
 
@@ -414,7 +418,7 @@ func (hashset *Hashset) AddsAnyUsingFilterLock(
 			constants.SprintValueFormat,
 			any)
 
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if isKeep {
 			hashset.Lock()
@@ -422,6 +426,10 @@ func (hashset *Hashset) AddsAnyUsingFilterLock(
 			hashset.Unlock()
 
 			hashset.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashset
 		}
 	}
 
@@ -437,11 +445,15 @@ func (hashset *Hashset) AddsUsingFilter(
 	}
 
 	for _, key := range keys {
-		result, isKeep := filter(key)
+		result, isKeep, isBreak := filter(key)
 
 		if isKeep {
 			(*hashset.items)[result] = true
 			hashset.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashset
 		}
 	}
 
@@ -546,7 +558,7 @@ func (hashset *Hashset) GetFilteredItems(
 		hashset.Length())
 
 	for key := range *hashset.items {
-		result, isKeep := filter(key)
+		result, isKeep, isBreak := filter(key)
 
 		if !isKeep {
 			continue
@@ -555,6 +567,10 @@ func (hashset *Hashset) GetFilteredItems(
 		filteredList = append(
 			filteredList,
 			result)
+
+		if isBreak {
+			return &filteredList
+		}
 	}
 
 	return &filteredList
@@ -574,7 +590,7 @@ func (hashset *Hashset) GetFilteredCollection(
 		hashset.Length())
 
 	for key := range *hashset.items {
-		result, isKeep := filter(key)
+		result, isKeep, isBreak := filter(key)
 
 		if !isKeep {
 			continue
@@ -583,6 +599,11 @@ func (hashset *Hashset) GetFilteredCollection(
 		filteredList = append(
 			filteredList,
 			result)
+
+		if isBreak {
+			return NewCollectionUsingStrings(
+				&filteredList, false)
+		}
 	}
 
 	return NewCollectionUsingStrings(
