@@ -383,7 +383,7 @@ func (collectionPtr *CollectionPtr) AddHashmapsKeysValuesUsingFilter(
 		}
 
 		for k, v := range *hashmap.items {
-			result, isAcceptable := filter(KeyValuePair{
+			result, isAcceptable, isBreak := filter(KeyValuePair{
 				Key:   k,
 				Value: v,
 			})
@@ -392,6 +392,10 @@ func (collectionPtr *CollectionPtr) AddHashmapsKeysValuesUsingFilter(
 				*collectionPtr.items = append(
 					*collectionPtr.items,
 					&result)
+			}
+
+			if isBreak {
+				return collectionPtr
 			}
 		}
 	}
@@ -714,7 +718,7 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilter(
 			constants.SprintValueFormat,
 			any)
 
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if !isKeep {
 			continue
@@ -723,6 +727,10 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilter(
 		*collectionPtr.items = append(
 			*collectionPtr.items,
 			&result)
+
+		if isBreak {
+			return collectionPtr
+		}
 	}
 
 	return collectionPtr
@@ -747,7 +755,7 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilterLock(
 		}
 
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if !isKeep {
 			continue
@@ -758,6 +766,10 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilterLock(
 			*collectionPtr.items,
 			&result)
 		collectionPtr.Unlock()
+
+		if isBreak {
+			return collectionPtr
+		}
 	}
 
 	return collectionPtr
@@ -939,10 +951,14 @@ func (collectionPtr *CollectionPtr) FilterSimpleArray(
 	list := make([]string, 0, collectionPtr.Length())
 
 	for _, element := range *collectionPtr.items {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep && result != nil {
 			list = append(list, *result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -965,10 +981,14 @@ func (collectionPtr *CollectionPtr) FilterSimpleArrayLock(
 	list := make([]string, 0, length)
 
 	for _, element := range *collectionPtr.items {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep && result != nil {
 			list = append(list, *result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -988,10 +1008,14 @@ func (collectionPtr *CollectionPtr) Filter(
 	list := make([]*string, 0, collectionPtr.Length())
 
 	for _, element := range *collectionPtr.items {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1012,10 +1036,14 @@ func (collectionPtr *CollectionPtr) FilterLock(
 	list := make([]*string, 0, length)
 
 	for _, element := range *elements {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1053,10 +1081,14 @@ func (collectionPtr *CollectionPtr) FilterPtrLock(
 	list := make([]*string, 0, length)
 
 	for _, element := range *elements {
-		result, isKeep := filterPtr(element)
+		result, isKeep, isBreak := filterPtr(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1074,10 +1106,14 @@ func (collectionPtr *CollectionPtr) FilterPtr(
 	list := make([]*string, 0, collectionPtr.Length())
 
 	for _, element := range *collectionPtr.items {
-		result, isKeep := filterPtr(element)
+		result, isKeep, isBreak := filterPtr(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 

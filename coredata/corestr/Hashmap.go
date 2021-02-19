@@ -253,11 +253,15 @@ func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilter(
 	}
 
 	for _, pair := range pairs {
-		result, isKeep := filter(pair)
+		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
 			(*hashmap.items)[pair.Key] = result
 			hashmap.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashmap
 		}
 	}
 
@@ -274,7 +278,7 @@ func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
 	}
 
 	for _, pair := range pairs {
-		result, isKeep := filter(pair)
+		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
 			hashmap.Lock()
@@ -282,6 +286,10 @@ func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
 			hashmap.Unlock()
 
 			hashmap.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashmap
 		}
 	}
 
@@ -297,11 +305,15 @@ func (hashmap *Hashmap) AddsOrUpdatesUsingFilter(
 	}
 
 	for _, pair := range pairs {
-		result, isKeep := filter(pair)
+		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
 			(*hashmap.items)[pair.Key] = result
 			hashmap.hasMapUpdated = true
+		}
+
+		if isBreak {
+			return hashmap
 		}
 	}
 
@@ -406,7 +418,7 @@ func (hashmap *Hashmap) GetFilteredItems(
 		hashmap.Length())
 
 	for key := range *hashmap.items {
-		result, isKeep := filter(key)
+		result, isKeep, isBreak := filter(key)
 
 		if !isKeep {
 			continue
@@ -415,6 +427,10 @@ func (hashmap *Hashmap) GetFilteredItems(
 		filteredList = append(
 			filteredList,
 			result)
+
+		if isBreak {
+			return &filteredList
+		}
 	}
 
 	return &filteredList
@@ -434,7 +450,7 @@ func (hashmap *Hashmap) GetFilteredCollection(
 		hashmap.Length())
 
 	for key := range *hashmap.items {
-		result, isKeep := filter(key)
+		result, isKeep, isBreak := filter(key)
 
 		if !isKeep {
 			continue
@@ -443,6 +459,11 @@ func (hashmap *Hashmap) GetFilteredCollection(
 		filteredList = append(
 			filteredList,
 			result)
+
+		if isBreak {
+			return NewCollectionUsingStrings(
+				&filteredList, false)
+		}
 	}
 
 	return NewCollectionUsingStrings(
@@ -675,7 +696,7 @@ func (hashmap *Hashmap) LengthLock() int {
 	return hashmap.Length()
 }
 
-//goland:noinspection GoLinterLocal
+//goland:noinspection GoLinterLocal,GoVetCopyLock
 func (hashmap *Hashmap) IsEquals(another Hashmap) bool { //nolint:govet
 	return hashmap.IsEqualsPtr(&another)
 }

@@ -40,10 +40,10 @@ type OnCompleteCharCollectionMap func(charCollection *CharCollectionMap)
 type OnCompleteLinkedCollections func(linkedCollections *LinkedCollections)
 type AnyToCollectionProcessor func(any interface{}) *Collection
 type OnCompleteCharHashsetMap func(charHashset *CharHashsetMap)
-type IsStringFilter func(str string) (result string, isKeep bool)
-type IsKeyAnyValueFilter func(pair KeyAnyValuePair) (result string, isKeep bool)
-type IsKeyValueFilter func(pair KeyValuePair) (result string, isKeep bool)
-type IsStringPointerFilter func(stringPointer *string) (result *string, isKeep bool)
+type IsStringFilter func(str string) (result string, isKeep bool, isBreak bool)
+type IsKeyAnyValueFilter func(pair KeyAnyValuePair) (result string, isKeep bool, isBreak bool)
+type IsKeyValueFilter func(pair KeyValuePair) (result string, isKeep bool, isBreak bool)
+type IsStringPointerFilter func(stringPointer *string) (result *string, isKeep bool, isBreak bool)
 type LinkedListFilter func(arg *LinkedListFilterParameter) *LinkedListFilterResult
 type LinkedListSimpleProcessor func(
 	arg *LinkedListProcessorParameter,

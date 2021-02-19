@@ -421,7 +421,7 @@ func (collection *Collection) AddHashmapsKeysValuesUsingFilter(
 		}
 
 		for k, v := range *hashmap.items {
-			result, isAcceptable := filter(KeyValuePair{
+			result, isAcceptable, isBreak := filter(KeyValuePair{
 				Key:   k,
 				Value: v,
 			})
@@ -430,6 +430,10 @@ func (collection *Collection) AddHashmapsKeysValuesUsingFilter(
 				*collection.items = append(
 					*collection.items,
 					result)
+			}
+
+			if isBreak {
+				return collection
 			}
 		}
 	}
@@ -905,7 +909,7 @@ func (collection *Collection) AppendAnysUsingFilter(
 			constants.SprintValueFormat,
 			any)
 
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if !isKeep {
 			continue
@@ -914,6 +918,10 @@ func (collection *Collection) AppendAnysUsingFilter(
 		*collection.items = append(
 			*collection.items,
 			result)
+
+		if isBreak {
+			return collection
+		}
 	}
 
 	return collection
@@ -938,7 +946,7 @@ func (collection *Collection) AppendAnysUsingFilterLock(
 		}
 
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
-		result, isKeep := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr)
 
 		if !isKeep {
 			continue
@@ -949,6 +957,10 @@ func (collection *Collection) AppendAnysUsingFilterLock(
 			*collection.items,
 			result)
 		collection.Unlock()
+
+		if isBreak {
+			return collection
+		}
 	}
 
 	return collection
@@ -1141,10 +1153,14 @@ func (collection *Collection) Filter(filter IsStringFilter) *[]string {
 	list := make([]string, 0, collection.Length())
 
 	for _, element := range *collection.items {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1163,10 +1179,14 @@ func (collection *Collection) FilterLock(filter IsStringFilter) *[]string {
 	list := make([]string, 0, length)
 
 	for _, element := range *elements {
-		result, isKeep := filter(element)
+		result, isKeep, isBreak := filter(element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1195,10 +1215,14 @@ func (collection *Collection) FilterPtrLock(filterPtr IsStringPointerFilter) *[]
 	list := make([]*string, 0, length)
 
 	for i := range *elements {
-		result, isKeep := filterPtr(&(*elements)[i])
+		result, isKeep, isBreak := filterPtr(&(*elements)[i])
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
@@ -1214,10 +1238,14 @@ func (collection *Collection) FilterPtr(filterPtr IsStringPointerFilter) *[]*str
 	list := make([]*string, 0, collection.Length())
 
 	for _, element := range *collection.items {
-		result, isKeep := filterPtr(&element)
+		result, isKeep, isBreak := filterPtr(&element)
 
 		if isKeep {
 			list = append(list, result)
+		}
+
+		if isBreak {
+			return &list
 		}
 	}
 
