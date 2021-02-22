@@ -1271,10 +1271,17 @@ func (collection *Collection) NonEmptyListPtr() *[]string {
 	return &list
 }
 
-func (collection *Collection) Hashset() *Hashset {
+func (collection *Collection) HashsetAsIs() *Hashset {
 	return NewHashsetUsingStrings(
 		collection.items,
-		collection.Length()*2,
+		0,
+		true)
+}
+
+func (collection *Collection) HashsetWithDoubleLength() *Hashset {
+	return NewHashsetUsingStrings(
+		collection.items,
+		collection.Length(),
 		true)
 }
 
@@ -1324,6 +1331,20 @@ func (collection *Collection) Has(str string) bool {
 
 	for _, element := range *collection.items {
 		if element == str {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (collection *Collection) HasPtr(str *string) bool {
+	if str == nil || collection.IsEmpty() {
+		return false
+	}
+
+	for _, element := range *collection.items {
+		if element == *str {
 			return true
 		}
 	}
@@ -1442,7 +1463,7 @@ func (collection *Collection) IsContainsPtr(item *string) bool {
 
 // nil will return false.
 func (collection *Collection) GetHashsetPlusHasAll(items *[]string) (*Hashset, bool) {
-	hashset := collection.Hashset()
+	hashset := collection.HashsetAsIs()
 
 	if items == nil || collection.IsEmpty() {
 		return hashset, false
@@ -1489,6 +1510,56 @@ func (collection *Collection) IsContainsAllLock(items ...string) bool {
 	}
 
 	return collection.IsContainsAllPtr(&items)
+}
+
+// Get all items except the mentioned ones.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this collection
+// Set B = itemsCollection given in parameters.
+func (collection *Collection) GetAllExceptCollection(itemsCollection *Collection) *[]string {
+	if itemsCollection == nil || itemsCollection.IsEmpty() {
+		newItems := *collection.items
+
+		return &newItems
+	}
+
+	finalList := make(
+		[]string,
+		0,
+		collection.Length())
+
+	for _, item := range *collection.items {
+		if itemsCollection.Has(item) {
+			continue
+		}
+
+		finalList = append(
+			finalList,
+			item)
+	}
+
+	return &finalList
+}
+
+// Get all items except the mentioned ones.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this collection
+// Set B = items given in parameters.
+func (collection *Collection) GetAllExcept(items *[]string) *[]string {
+	if items == nil {
+		newItems := *collection.items
+
+		return &newItems
+	}
+
+	newCollection := NewCollectionUsingStrings(
+		items,
+		false)
+
+	return collection.GetAllExceptCollection(
+		newCollection)
 }
 
 func (collection *Collection) CharCollectionMap() *CharCollectionMap {

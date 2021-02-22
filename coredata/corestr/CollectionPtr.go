@@ -1120,6 +1120,55 @@ func (collectionPtr *CollectionPtr) FilterPtr(
 	return &list
 }
 
+// Get all items except the mentioned ones in itemsCollection.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this collection
+// Set B = itemsCollection given in parameters.
+func (collectionPtr *CollectionPtr) GetAllExceptCollection(itemsCollection *CollectionPtr) *[]*string {
+	if itemsCollection == nil || itemsCollection.IsEmpty() {
+		newItems := *collectionPtr.items
+
+		return &newItems
+	}
+
+	finalList := make(
+		[]*string,
+		0,
+		collectionPtr.Length())
+
+	for _, item := range *collectionPtr.items {
+		if itemsCollection.HasPtr(item) {
+			continue
+		}
+
+		finalList = append(
+			finalList,
+			item)
+	}
+
+	return &finalList
+}
+
+// Get all items except the mentioned ones.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this collection
+// Set B = items given in parameters.
+func (collectionPtr *CollectionPtr) GetAllExcept(items *[]*string) *[]*string {
+	if items == nil {
+		newItems := *collectionPtr.items
+
+		return &newItems
+	}
+
+	newCollection := NewCollectionPtrUsingPointerStrings(
+		items, 0)
+
+	return collectionPtr.GetAllExceptCollection(
+		newCollection)
+}
+
 // must return a slice
 func (collectionPtr *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 	if collectionPtr.IsEmpty() {
@@ -1139,10 +1188,17 @@ func (collectionPtr *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 	return &list
 }
 
-func (collectionPtr *CollectionPtr) Hashset() *Hashset {
+func (collectionPtr *CollectionPtr) HashsetAsIs() *Hashset {
 	return NewHashsetUsingStringPointersArray(
 		collectionPtr.items,
-		collectionPtr.Length()*2,
+		0,
+		true)
+}
+
+func (collectionPtr *CollectionPtr) HashsetDoubleLength() *Hashset {
+	return NewHashsetUsingStringPointersArray(
+		collectionPtr.items,
+		collectionPtr.Length(),
 		true)
 }
 
@@ -1206,6 +1262,28 @@ func (collectionPtr *CollectionPtr) Has(str string) bool {
 		}
 
 		if *element == str {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (collectionPtr *CollectionPtr) HasPtr(str *string) bool {
+	if collectionPtr.IsEmpty() {
+		return false
+	}
+
+	for _, element := range *collectionPtr.items {
+		if element == nil && str == nil {
+			return true
+		}
+
+		if element == nil {
+			continue
+		}
+
+		if *element == *str {
 			return true
 		}
 	}
@@ -1422,7 +1500,7 @@ func (collectionPtr *CollectionPtr) IsContainsPtr(
 func (collectionPtr *CollectionPtr) GetHashsetPlusHasAll(
 	items *[]string,
 ) (*Hashset, bool) {
-	hashset := collectionPtr.Hashset()
+	hashset := collectionPtr.HashsetAsIs()
 
 	if items == nil || collectionPtr.IsEmpty() {
 		return hashset, false

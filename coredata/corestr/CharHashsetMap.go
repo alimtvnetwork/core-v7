@@ -906,7 +906,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollection(
 
 	// items exist or stringsWithSameStartChar exists
 	//goland:noinspection GoNilness
-	toHashset := stringsWithSameStartChar.Hashset()
+	toHashset := stringsWithSameStartChar.HashsetAsIs()
 	(*charHashsetMap.items)[char] = toHashset
 
 	return toHashset
@@ -1027,7 +1027,7 @@ func (charHashsetMap *CharHashsetMap) AddSameCharsCollectionLock(
 
 	// items exist or stringsWithSameStartChar exists
 	//goland:noinspection GoNilness
-	hashset := stringsWithSameStartChar.Hashset()
+	hashset := stringsWithSameStartChar.HashsetAsIs()
 	//goland:noinspection GoLinterLocal
 	charHashsetMap.Lock()
 	(*charHashsetMap.items)[char] =

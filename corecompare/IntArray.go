@@ -14,4 +14,3 @@ func IntArray(array, other []int) bool {
 
 	return IntArrayPtr(arrayPtr, otherPtr)
 }
-
