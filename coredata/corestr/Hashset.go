@@ -610,6 +610,83 @@ func (hashset *Hashset) GetFilteredCollection(
 		&filteredList, false)
 }
 
+// Get all hashset items except the mentioned ones in anotherHashset.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashset
+// Set B = anotherHashset given in parameters.
+func (hashset *Hashset) GetAllExceptHashset(anotherHashset *Hashset) *[]string {
+	if anotherHashset == nil || anotherHashset.IsEmpty() {
+		return hashset.ListPtr()
+	}
+
+	finalList := make(
+		[]string,
+		0,
+		hashset.Length())
+
+	for item := range *hashset.items {
+		if anotherHashset.Has(item) {
+			continue
+		}
+
+		finalList = append(
+			finalList,
+			item)
+	}
+
+	return &finalList
+}
+
+// Get all hashset items except the mentioned ones in items.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashset
+// Set B = items given in parameters.
+func (hashset *Hashset) GetAllExcept(items *[]string) *[]string {
+	if items == nil {
+		return hashset.ListPtr()
+	}
+
+	newHashset := NewHashsetUsingStrings(
+		items,
+		0,
+		false)
+
+	return hashset.GetAllExceptHashset(
+		newHashset)
+}
+
+// Get all hashset items except the mentioned ones in collection.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashset
+// Set B = collection given in parameters.
+func (hashset *Hashset) GetAllExceptCollection(collection *Collection) *[]string {
+	if collection == nil {
+		return hashset.ListPtr()
+	}
+
+	return hashset.GetAllExceptHashset(
+		collection.HashsetAsIs())
+}
+
+// Get all hashset items except the mentioned ones in collectionPtr.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashset
+// Set B = collectionPtr given in parameters.
+func (hashset *Hashset) GetAllExceptCollectionPtr(
+	collectionPtr *CollectionPtr,
+) *[]string {
+	if collectionPtr == nil {
+		return hashset.ListPtr()
+	}
+
+	return hashset.GetAllExceptHashset(
+		collectionPtr.HashsetAsIs())
+}
+
 func (hashset *Hashset) Items() *map[string]bool {
 	return hashset.items
 }

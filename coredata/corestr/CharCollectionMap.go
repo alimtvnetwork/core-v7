@@ -1125,7 +1125,7 @@ func (charCollectionMap *CharCollectionMap) HashsetsCollection() *HashsetsCollec
 			continue
 		}
 
-		hashset := collection.Hashset()
+		hashset := collection.HashsetAsIs()
 		hashsets = append(hashsets, hashset)
 	}
 

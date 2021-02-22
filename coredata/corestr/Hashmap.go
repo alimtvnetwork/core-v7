@@ -789,6 +789,83 @@ func (hashmap *Hashmap) StringLock() string {
 			commonJoiner)
 }
 
+// Get all Collection except the mentioned ones.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashmap
+// Set B = anotherHashset given in parameters.
+func (hashmap *Hashmap) GetValuesExceptKeysInHashset(anotherHashset *Hashset) *[]string {
+	if anotherHashset == nil || anotherHashset.IsEmpty() {
+		return hashmap.ValuesListPtr()
+	}
+
+	finalList := make(
+		[]string,
+		0,
+		hashmap.Length())
+
+	for key, value := range *hashmap.items {
+		if anotherHashset.Has(key) {
+			continue
+		}
+
+		finalList = append(
+			finalList,
+			value)
+	}
+
+	return &finalList
+}
+
+// Get all items except the mentioned ones.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashmap
+// Set B = items given in parameters.
+func (hashmap *Hashmap) GetValuesKeysExcept(items *[]string) *[]string {
+	if items == nil {
+		return hashmap.ValuesListPtr()
+	}
+
+	newCollection := NewHashsetUsingStrings(
+		items,
+		0,
+		false)
+
+	return hashmap.GetValuesExceptKeysInHashset(
+		newCollection)
+}
+
+// Get all Hashmap items except the mentioned ones in collection.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashmap
+// Set B = collection given in parameters.
+func (hashmap *Hashmap) GetAllExceptCollection(collection *Collection) *[]string {
+	if collection == nil {
+		return hashmap.ValuesListPtr()
+	}
+
+	return hashmap.GetValuesExceptKeysInHashset(
+		collection.HashsetAsIs())
+}
+
+// Get all items except the mentioned ones in collectionPtr.
+// Always returns a copy of new strings.
+// It is like set A - B
+// Set A = this Hashmap
+// Set B = collectionPtr given in parameters.
+func (hashmap *Hashmap) GetAllExceptCollectionPtr(
+	collectionPtr *CollectionPtr,
+) *[]string {
+	if collectionPtr == nil {
+		return hashmap.ValuesListPtr()
+	}
+
+	return hashmap.GetValuesExceptKeysInHashset(
+		collectionPtr.HashsetAsIs())
+}
+
 // Joins values
 func (hashmap *Hashmap) Join(
 	separator string,
