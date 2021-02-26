@@ -118,6 +118,12 @@ func (collection *Collection) IsEmpty() bool {
 		len(*collection.items) == 0
 }
 
+func (collection *Collection) HasItems() bool {
+	return collection.items != nil &&
+		*collection.items != nil &&
+		len(*collection.items) > 0
+}
+
 func (collection *Collection) AddLock(str string) *Collection {
 	collection.Lock()
 	defer collection.Unlock()

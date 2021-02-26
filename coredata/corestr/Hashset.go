@@ -30,6 +30,10 @@ func (hashset *Hashset) IsEmpty() bool {
 	return hashset.isEmptySet
 }
 
+func (hashset *Hashset) HasItems() bool {
+	return !hashset.IsEmpty()
+}
+
 // Changing capacity creates new map and points to it.
 // There is memory copy and loop is performed.
 func (hashset *Hashset) AddCapacitiesLock(

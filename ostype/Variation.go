@@ -17,6 +17,9 @@ const (
 	OpenBsd
 	DragonFly
 	Android
+	Plan9
+	Solaris
+	Nacl
 	Unknown
 )
 

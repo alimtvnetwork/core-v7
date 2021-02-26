@@ -15,6 +15,10 @@ func (cc *CollectionsOfCollection) IsEmpty() bool {
 	return cc.items == nil || len(*cc.items) == 0
 }
 
+func (cc *CollectionsOfCollection) HasItems() bool {
+	return cc.items != nil && len(*cc.items) > 0
+}
+
 func (cc *CollectionsOfCollection) Length() int {
 	if cc.items == nil {
 		return 0

@@ -129,6 +129,12 @@ func (collectionPtr *CollectionPtr) IsEmpty() bool {
 		len(*collectionPtr.items) == 0
 }
 
+func (collectionPtr *CollectionPtr) HasItems() bool {
+	return collectionPtr.items != nil &&
+		*collectionPtr.items != nil &&
+		len(*collectionPtr.items) > 0
+}
+
 func (collectionPtr *CollectionPtr) AddLock(str string) *CollectionPtr {
 	collectionPtr.Lock()
 	defer collectionPtr.Unlock()

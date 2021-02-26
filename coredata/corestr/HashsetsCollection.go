@@ -19,6 +19,12 @@ func (hashsetsCollection *HashsetsCollection) IsEmpty() bool {
 		len(*hashsetsCollection.items) == 0
 }
 
+func (hashsetsCollection *HashsetsCollection) HasItems() bool {
+	return hashsetsCollection.items != nil &&
+		*hashsetsCollection.items != nil &&
+		len(*hashsetsCollection.items) > 0
+}
+
 func (hashsetsCollection *HashsetsCollection) IndexOf(index int) *Hashset {
 	if hashsetsCollection.IsEmpty() ||
 		hashsetsCollection.Length()-1 > index {

@@ -134,7 +134,13 @@ func (linkedList *LinkedList) IsEmptyLock() bool {
 }
 
 func (linkedList *LinkedList) IsEmpty() bool {
-	return linkedList.head == nil || linkedList.length == 0
+	return linkedList.head == nil ||
+		linkedList.length == 0
+}
+
+func (linkedList *LinkedList) HasItems() bool {
+	return linkedList.head != nil &&
+		linkedList.length > 0
 }
 
 func (linkedList *LinkedList) Add(item string) *LinkedList {
