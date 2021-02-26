@@ -29,6 +29,10 @@ func (hashmap *Hashmap) IsEmpty() bool {
 	return hashmap.isEmptySet
 }
 
+func (hashmap *Hashmap) HasItems() bool {
+	return !hashmap.IsEmpty()
+}
+
 func (hashmap *Hashmap) Collection() *Collection {
 	return NewCollectionUsingStrings(hashmap.ValuesListPtr(), false)
 }

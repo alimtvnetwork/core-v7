@@ -309,6 +309,12 @@ func (charHashsetMap *CharHashsetMap) IsEmpty() bool {
 		len(*charHashsetMap.items) == 0
 }
 
+func (charHashsetMap *CharHashsetMap) HasItems() bool {
+	return charHashsetMap.items != nil &&
+		*charHashsetMap.items != nil &&
+		len(*charHashsetMap.items) > 0
+}
+
 func (charHashsetMap *CharHashsetMap) IsEmptyLock() bool {
 	charHashsetMap.Lock()
 	defer charHashsetMap.Unlock()

@@ -13,6 +13,9 @@ var (
 		OpenBsd:       osconsts.OpenBsd,
 		DragonFly:     osconsts.DragonFly,
 		Android:       osconsts.Android,
+		Plan9:         osconsts.Plan9,
+		Solaris:       osconsts.Solaris,
+		Nacl:          osconsts.Nacl,
 		Unknown:       osconsts.Unknown,
 	}
 
@@ -26,6 +29,9 @@ var (
 		osconsts.OpenBsd:       OpenBsd,
 		osconsts.DragonFly:     DragonFly,
 		osconsts.Android:       Android,
+		osconsts.Plan9:         Plan9,
+		osconsts.Solaris:       Solaris,
+		osconsts.Nacl:          Nacl,
 		osconsts.Unknown:       Unknown,
 	}
 )

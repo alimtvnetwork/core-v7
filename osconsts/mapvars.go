@@ -37,9 +37,11 @@ var (
 		"ios":       true,
 		"ubuntu":    true,
 		"dragonfly": true,
-		"freeBSD":   true,
-		"openBSD":   true,
-		"netBSD":    true,
+		"freebsd":   true,
+		"openbsd":   true,
+		"netbsd":    true,
+		"plan9":     true,
 		"solaris":   true,
+		"nacl":      true,
 	}
 )

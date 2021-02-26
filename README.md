@@ -63,6 +63,8 @@ Any other packages used
 - [Golang Array process issue without copying (!Important)](https://play.golang.org/p/GvdJMPmCStz)
 - [Linked List | Set 2 (Inserting a node) - GeeksforGeeks](https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/)
 - [Go Data Structures: Linked List](https://flaviocopes.com/golang-data-structure-linked-list/)
+- [System info](https://github.com/zcalusic/sysinfo)
+  -[Stackoverflow Centos detect](https://stackoverflow.com/a/65207574)
 
 ## Issues
 

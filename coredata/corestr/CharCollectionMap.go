@@ -216,6 +216,12 @@ func (charCollectionMap *CharCollectionMap) IsEmpty() bool {
 		len(*charCollectionMap.items) == 0
 }
 
+func (charCollectionMap *CharCollectionMap) HasItems() bool {
+	return charCollectionMap.items != nil &&
+		*charCollectionMap.items != nil &&
+		len(*charCollectionMap.items) > 0
+}
+
 func (charCollectionMap *CharCollectionMap) IsEmptyLock() bool {
 	charCollectionMap.Lock()
 	defer charCollectionMap.Unlock()

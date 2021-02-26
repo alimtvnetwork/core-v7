@@ -166,6 +166,11 @@ func (linkedCollections *LinkedCollections) IsEmpty() bool {
 	return linkedCollections.head == nil || linkedCollections.length == 0
 }
 
+func (linkedCollections *LinkedCollections) HasItems() bool {
+	return linkedCollections.head != nil &&
+		linkedCollections.length > 0
+}
+
 // BigO(n) expensive operation.
 func (linkedCollections *LinkedCollections) InsertAt(
 	index int,
