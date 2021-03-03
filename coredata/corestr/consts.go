@@ -13,7 +13,7 @@ const (
 	NoElements                                  = " {No Element}"
 	charCollectionMapLengthFormat               = "\n## Items of `%s`"
 	charHashsetMapLengthFormat                  = charCollectionMapLengthFormat
-	charCollectionMapSingleItemFormat           = "\n\t%d - `%s` has `%d` items."
+	charCollectionMapSingleItemFormat           = "\n\t%d . `%s` has `%d` items."
 	charHashsetMapSingleItemFormat              = charCollectionMapSingleItemFormat
 	summaryOfCharCollectionMapLengthFormat      = "# Summary of `%T`, Length (\"%d\") - Sequence `%d`"
 	summaryOfCharHashsetMapLengthFormat         = summaryOfCharCollectionMapLengthFormat

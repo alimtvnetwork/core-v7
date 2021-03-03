@@ -623,6 +623,15 @@ func (collection *Collection) AddStringsPtr(stringItems *[]string) *Collection {
 	return collection
 }
 
+func (collection *Collection) AddStringsPtrLock(stringItems *[]string) *Collection {
+	collection.Lock()
+	defer collection.Unlock()
+
+	collection.AddStringsPtr(stringItems)
+
+	return collection
+}
+
 func (collection *Collection) AddStringsPtrAsync(
 	wg *sync.WaitGroup,
 	stringItems *[]string,
@@ -1575,9 +1584,7 @@ func (collection *Collection) CharCollectionMap() *CharCollectionMap {
 		length,
 		lengthByFourBestGuess)
 
-	for _, item := range *collection.items {
-		runeMap.AddStringPtr(&item)
-	}
+	runeMap.AddStringsPtr(collection.items)
 
 	return runeMap
 }

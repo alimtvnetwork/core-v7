@@ -1,5 +1,7 @@
 package corejson
 
+import "encoding/json"
+
 func EmptyWithError(err error) Result {
 	return Result{
 		Bytes: nil,
@@ -63,5 +65,21 @@ func NewPtrUsingBytesPtr(jsonBytes *[]byte, err error) *Result {
 	return &Result{
 		Bytes: jsonBytes,
 		Error: nil,
+	}
+}
+
+func NewFromAny(any interface{}) *Result {
+	jsonBytes, err := json.Marshal(any)
+
+	if err != nil {
+		return &Result{
+			Bytes: &[]byte{},
+			Error: err,
+		}
+	}
+
+	return &Result{
+		Bytes: &jsonBytes,
+		Error: err,
 	}
 }

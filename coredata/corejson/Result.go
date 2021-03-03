@@ -1,6 +1,8 @@
 package corejson
 
 import (
+	"encoding/json"
+
 	"gitlab.com/evatix-go/core/coreindexes"
 )
 
@@ -92,4 +94,12 @@ func (jsonResult *Result) IsEmptyJson() bool {
 
 func (jsonResult *Result) HasJson() bool {
 	return jsonResult.HasBytes()
+}
+
+func (jsonResult *Result) Unmarshal(any interface{}) error {
+	if jsonResult.HasError() {
+		return jsonResult.Error
+	}
+
+	return json.Unmarshal(*jsonResult.Bytes, any)
 }

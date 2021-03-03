@@ -148,10 +148,15 @@ func (cc *CollectionsOfCollection) AddCollections(
 }
 
 func (cc *CollectionsOfCollection) String() string {
-	list := make([]string, 0, cc.Length())
+	list := make(
+		[]string,
+		0,
+		cc.Length())
 
 	for i, collection := range *cc.items {
-		list = append(list, collection.SummaryString(i+1))
+		list = append(
+			list,
+			collection.SummaryString(i+1))
 	}
 
 	return strings.Join(list, constants.DoubleNewLine)
