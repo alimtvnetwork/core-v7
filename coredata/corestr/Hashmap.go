@@ -442,7 +442,7 @@ func (hashmap *Hashmap) HasWithLock(key string) bool {
 }
 
 // must return slice.
-func (hashmap *Hashmap) GetFilteredItems(
+func (hashmap *Hashmap) GetKeysFilteredItems(
 	filter IsStringFilter,
 ) *[]string {
 	if hashmap.IsEmpty() {
@@ -454,10 +454,12 @@ func (hashmap *Hashmap) GetFilteredItems(
 		0,
 		hashmap.Length())
 
+	i := 0
 	for key := range *hashmap.items {
 		result, isKeep, isBreak :=
-			filter(key)
+			filter(key, i)
 
+		i++
 		if !isKeep {
 			continue
 		}
@@ -475,7 +477,7 @@ func (hashmap *Hashmap) GetFilteredItems(
 }
 
 // must return items.
-func (hashmap *Hashmap) GetFilteredCollection(
+func (hashmap *Hashmap) GetKeysFilteredCollection(
 	filter IsStringFilter,
 ) *Collection {
 	if hashmap.IsEmpty() {
@@ -487,8 +489,10 @@ func (hashmap *Hashmap) GetFilteredCollection(
 		0,
 		hashmap.Length())
 
+	i := 0
 	for key := range *hashmap.items {
-		result, isKeep, isBreak := filter(key)
+		result, isKeep, isBreak := filter(key, i)
+		i++
 
 		if !isKeep {
 			continue
