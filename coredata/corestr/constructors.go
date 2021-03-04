@@ -10,7 +10,7 @@ import (
 // --------- Hashset starts ----------
 
 func EmptyHashset() *Hashset {
-	return NewHashset(0)
+	return NewHashset(constants.Zero)
 }
 
 func NewHashset(length int) *Hashset {
@@ -120,7 +120,7 @@ func NewHashsetUsingMap(
 		hasMapUpdated: false,
 		cachedList:    nil,
 		length:        length,
-		isEmptySet:    length == 0,
+		isEmptySet:    length == constants.Zero,
 		Mutex:         sync.Mutex{},
 	}
 }
@@ -128,7 +128,7 @@ func NewHashsetUsingMap(
 // --------- ToCollection starts ----------
 
 func NewCollection(capacity int) *Collection {
-	collection := make([]string, 0, capacity)
+	collection := make([]string, constants.Zero, capacity)
 
 	return &Collection{
 		items: &collection,
@@ -136,7 +136,7 @@ func NewCollection(capacity int) *Collection {
 }
 
 func EmptyCollection() *Collection {
-	collection := make([]string, 0)
+	collection := make([]string, constants.Zero)
 
 	return &Collection{
 		items: &collection,
@@ -172,8 +172,8 @@ func NewCollectionUsingPointerStringsPlusCap(stringItems *[]*string, capacity in
 }
 
 //goland:noinspection ALL
-func NewCollectionUsingLength(len, capacity int) *Collection {
-	collection := make([]string, len, capacity)
+func NewCollectionUsingLength(length, capacity int) *Collection {
+	collection := make([]string, length, capacity)
 
 	return &Collection{
 		items: &collection,
@@ -183,7 +183,7 @@ func NewCollectionUsingLength(len, capacity int) *Collection {
 // --------- CollectionPtr starts ----------
 
 func NewCollectionPtr(capacity int) *CollectionPtr {
-	collection := make([]*string, 0, capacity)
+	collection := make([]*string, constants.Zero, capacity)
 
 	return &CollectionPtr{
 		items: &collection,
@@ -191,7 +191,7 @@ func NewCollectionPtr(capacity int) *CollectionPtr {
 }
 
 func EmptyCollectionPtr() *CollectionPtr {
-	collection := make([]*string, 0)
+	collection := make([]*string, constants.Zero)
 
 	return &CollectionPtr{
 		items: &collection,
@@ -242,8 +242,8 @@ func NewCollectionPtrUsingStrings(
 }
 
 //goland:noinspection ALL
-func NewCollectionPtrUsingLength(len, capacity int) *CollectionPtr {
-	collection := make([]*string, len, capacity)
+func NewCollectionPtrUsingLength(length, capacity int) *CollectionPtr {
+	collection := make([]*string, length, capacity)
 
 	return &CollectionPtr{
 		items: &collection,
@@ -276,7 +276,7 @@ func NewCharCollectionMap(
 
 // eachCollectionCapacity = 0
 func EmptyCharCollectionMap() *CharCollectionMap {
-	mapElements := make(map[byte]*Collection, 0)
+	mapElements := make(map[byte]*Collection, constants.Zero)
 
 	return &CharCollectionMap{
 		items:                  &mapElements,
@@ -311,7 +311,7 @@ func NewCharCollectionMapUsingItemsPtr(
 	mapElements := make(map[byte]*Collection, length)
 	charCollectionMap := &CharCollectionMap{
 		items:                  &mapElements,
-		eachCollectionCapacity: 0,
+		eachCollectionCapacity: constants.Zero,
 	}
 
 	charCollectionMap.AddStringsPtr(items)
@@ -350,14 +350,16 @@ func NewCharCollectionMapUsingItemsPlusCap(
 // --------- HashsetsCollection starts ----------
 
 func EmptyHashsetsCollection() *HashsetsCollection {
-	collection := make([]*Hashset, 0, 0)
+	collection := make([]*Hashset, constants.Zero, constants.Zero)
 
 	return &HashsetsCollection{
 		items: &collection,
 	}
 }
 
-func NewHashsetsCollection(hashsets *[]Hashset) *HashsetsCollection {
+func NewHashsetsCollection(
+	hashsets *[]Hashset,
+) *HashsetsCollection {
 	if hashsets == nil ||
 		*hashsets == nil {
 		return EmptyHashsetsCollection()
@@ -380,7 +382,9 @@ func NewHashsetsCollection(hashsets *[]Hashset) *HashsetsCollection {
 	}
 }
 
-func NewHashsetsCollectionUsingPointerHashsets(hashsets *[]*Hashset) *HashsetsCollection {
+func NewHashsetsCollectionUsingPointerHashsets(
+	hashsets *[]*Hashset,
+) *HashsetsCollection {
 	if hashsets == nil ||
 		*hashsets == nil {
 		return EmptyHashsetsCollection()
@@ -392,8 +396,10 @@ func NewHashsetsCollectionUsingPointerHashsets(hashsets *[]*Hashset) *HashsetsCo
 }
 
 //goland:noinspection ALL
-func NewHashsetsCollectionUsingLength(len, capacity int) *HashsetsCollection {
-	collection := make([]*Hashset, len, capacity)
+func NewHashsetsCollectionUsingLength(
+	length, capacity int,
+) *HashsetsCollection {
+	collection := make([]*Hashset, length, capacity)
 
 	return &HashsetsCollection{
 		items: &collection,
@@ -403,7 +409,7 @@ func NewHashsetsCollectionUsingLength(len, capacity int) *HashsetsCollection {
 // --------- Hashmap starts ----------
 
 func EmptyHashmap() *Hashmap {
-	return NewHashmap(0)
+	return NewHashmap(constants.Zero)
 }
 
 func NewHashmap(length int) *Hashmap {
@@ -420,7 +426,9 @@ func NewHashmap(length int) *Hashmap {
 }
 
 //goland:noinspection ALL
-func NewHashmapUsingKeyAnyValues(keyAnyValues *[]KeyAnyValuePair) *Hashmap {
+func NewHashmapUsingKeyAnyValues(
+	keyAnyValues *[]KeyAnyValuePair,
+) *Hashmap {
 	if keyAnyValues == nil || *keyAnyValues == nil {
 		return NewHashmap(defaultHashsetItems)
 	}
@@ -433,7 +441,9 @@ func NewHashmapUsingKeyAnyValues(keyAnyValues *[]KeyAnyValuePair) *Hashmap {
 }
 
 //goland:noinspection ALL
-func NewHashmapUsingKeyValues(keyValues *[]KeyValuePair) *Hashmap {
+func NewHashmapUsingKeyValues(
+	keyValues *[]KeyValuePair,
+) *Hashmap {
 	if keyValues == nil || *keyValues == nil {
 		return NewHashmap(defaultHashsetItems)
 	}
@@ -446,7 +456,9 @@ func NewHashmapUsingKeyValues(keyValues *[]KeyValuePair) *Hashmap {
 }
 
 //goland:noinspection ALL
-func NewHashmapUsingCollection(keys, values *Collection) *Hashmap {
+func NewHashmapUsingCollection(
+	keys, values *Collection,
+) *Hashmap {
 	if keys == nil || keys.IsEmpty() {
 		return EmptyHashmap()
 	}
@@ -457,12 +469,14 @@ func NewHashmapUsingCollection(keys, values *Collection) *Hashmap {
 
 	return NewHashmapUsingMap(
 		itemsMap,
-		0,
+		constants.Zero,
 		false)
 }
 
 //goland:noinspection ALL
-func NewHashmapUsingStrings(keys, values *[]string) *Hashmap {
+func NewHashmapUsingStrings(
+	keys, values *[]string,
+) *Hashmap {
 	if keys == nil || *keys == nil {
 		return EmptyHashmap()
 	}
@@ -473,7 +487,7 @@ func NewHashmapUsingStrings(keys, values *[]string) *Hashmap {
 
 	return NewHashmapUsingMap(
 		itemsMap,
-		0,
+		constants.Zero,
 		false)
 }
 
@@ -501,7 +515,7 @@ func NewHashmapUsingMap(
 		hasMapUpdated: false,
 		cachedList:    nil,
 		length:        length,
-		isEmptySet:    length == 0,
+		isEmptySet:    length == constants.Zero,
 	}
 }
 
@@ -593,7 +607,8 @@ func NewCharHashsetMapUsingItemsPlusCap(
 	items *[]string,
 	capacity, selfHashsetCapacity int,
 ) *CharHashsetMap {
-	charHashsetMap := NewCharHashsetMap(capacity, selfHashsetCapacity)
+	charHashsetMap := NewCharHashsetMap(
+		capacity, selfHashsetCapacity)
 
 	charHashsetMap.AddStringsPtr(items)
 
@@ -644,11 +659,11 @@ func NewCharHashsetMapUsingItemsPtr(
 func EmptyCharHashsetMap() *CharHashsetMap {
 	mapElements := make(
 		map[byte]*Hashset,
-		0)
+		constants.Zero)
 
 	return &CharHashsetMap{
 		items:               &mapElements,
-		eachHashsetCapacity: 0,
+		eachHashsetCapacity: constants.Zero,
 	}
 }
 
@@ -709,7 +724,7 @@ func NewLinkedCollectionsUsingStringsPtr(
 func NewCollectionsOfCollection(
 	capacity int,
 ) *CollectionsOfCollection {
-	collection := make([]*Collection, 0, capacity)
+	collection := make([]*Collection, constants.Zero, capacity)
 
 	return &CollectionsOfCollection{
 		items: &collection,
@@ -717,7 +732,7 @@ func NewCollectionsOfCollection(
 }
 
 func EmptyCollectionsOfCollection() *CollectionsOfCollection {
-	collection := make([]*Collection, 0)
+	collection := make([]*Collection, constants.Zero)
 
 	return &CollectionsOfCollection{
 		items: &collection,
@@ -731,7 +746,7 @@ func NewCollectionsOfCollectionUsingStringsOfStrings(
 	length := LengthOfStringsOfPointerStrings(&stringItems)
 
 	return NewCollectionsOfCollectionUsingLength(
-		0,
+		constants.Zero,
 		length,
 	).AddsStringsOfPointerStrings(isMakeClone, &stringItems)
 }
@@ -740,24 +755,30 @@ func NewCollectionsOfCollectionUsingStringsOfPointerStrings(
 	isMakeClone bool,
 	stringItems *[]*[]string,
 ) *CollectionsOfCollection {
-	length := LengthOfStringsOfPointerStrings(stringItems)
+	length := LengthOfStringsOfPointerStrings(
+		stringItems)
 
 	return NewCollectionsOfCollectionUsingLength(
-		0,
+		constants.Zero,
 		length,
-	).AddsStringsOfPointerStrings(isMakeClone, stringItems)
+	).AddsStringsOfPointerStrings(
+		isMakeClone,
+		stringItems)
 }
 
 func NewCollectionsOfCollectionUsingStrings(
 	stringItems *[]string,
 	isMakeClone bool,
 ) *CollectionsOfCollection {
-	length := LengthOfStrings(stringItems)
+	length := LengthOfStrings(
+		stringItems)
 
 	return NewCollectionsOfCollectionUsingLength(
-		0,
+		constants.Zero,
 		length,
-	).AddStringsPtr(stringItems, isMakeClone)
+	).AddStringsPtr(
+		stringItems,
+		isMakeClone)
 }
 
 func NewCollectionsOfCollectionUsingStringsPlusCap(
@@ -765,29 +786,143 @@ func NewCollectionsOfCollectionUsingStringsPlusCap(
 	capacity int,
 	isMakeClone bool,
 ) *CollectionsOfCollection {
-	length := LengthOfStrings(stringItems)
-	collection := NewCollectionsOfCollection(length + capacity)
+	length := LengthOfStrings(
+		stringItems)
+	collection := NewCollectionsOfCollection(
+		length + capacity)
 
-	return collection.AddStringsPtr(stringItems, isMakeClone)
+	return collection.AddStringsPtr(
+		stringItems, isMakeClone)
 }
 
 func NewCollectionsOfCollectionUsingPointerStringsPlusCap(
-	stringItems *[]*string, capacity int,
+	stringItems *[]*string,
+	capacity int,
 ) *CollectionsOfCollection {
-	length := LengthOfPointerStrings(stringItems)
-	collection := NewCollectionsOfCollection(length + capacity)
+	length := LengthOfPointerStrings(
+		stringItems)
+	collection := NewCollectionsOfCollection(
+		length + capacity)
 
-	return collection.AddPointerStringsPtr(stringItems)
+	return collection.AddPointerStringsPtr(
+		stringItems)
 }
 
 //goland:noinspection ALL
 func NewCollectionsOfCollectionUsingLength(
-	len,
+	length,
 	capacity int,
 ) *CollectionsOfCollection {
-	collection := make([]*Collection, len, capacity)
+	collection := make(
+		[]*Collection,
+		length,
+		capacity)
 
 	return &CollectionsOfCollection{
+		items: &collection,
+	}
+}
+
+// --------- CollectionsOfCollectionPtr starts ----------
+
+func NewCollectionsOfCollectionPtr(
+	capacity int,
+) *CollectionsOfCollectionPtr {
+	collection := make(
+		[]*CollectionPtr,
+		constants.Zero,
+		capacity)
+
+	return &CollectionsOfCollectionPtr{
+		items: &collection,
+	}
+}
+
+func EmptyCollectionsOfCollectionPtr() *CollectionsOfCollectionPtr {
+	collection := make([]*CollectionPtr, constants.Zero)
+
+	return &CollectionsOfCollectionPtr{
+		items: &collection,
+	}
+}
+
+func NewCollectionsOfCollectionPtrUsingStringsOfStrings(
+	stringItems ...*[]string,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStringsOfPointerStrings(
+		&stringItems)
+
+	return NewCollectionsOfCollectionPtrUsingLength(
+		constants.Zero,
+		length,
+	).AddsStringsOfPointerStrings(
+		constants.Zero,
+		&stringItems)
+}
+
+func NewCollectionsOfCollectionPtrUsingStringsOfPointerStrings(
+	stringItems *[]*[]string,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStringsOfPointerStrings(
+		stringItems)
+
+	return NewCollectionsOfCollectionPtrUsingLength(
+		constants.Zero,
+		length,
+	).AddsStringsOfPointerStrings(
+		constants.Zero,
+		stringItems)
+}
+
+func NewCollectionsOfCollectionPtrUsingStrings(
+	stringItems *[]string,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStrings(stringItems)
+
+	return NewCollectionsOfCollectionPtrUsingLength(
+		constants.Zero,
+		length,
+	).AddStringsPtr(stringItems, constants.Zero)
+}
+
+func NewCollectionsOfCollectionPtrUsingStringsPlusCap(
+	stringItems *[]string,
+	addCapacity int,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStrings(
+		stringItems)
+	collection := NewCollectionsOfCollectionPtr(
+		length + addCapacity)
+
+	return collection.AddStringsPtr(
+		stringItems,
+		constants.Zero)
+}
+
+func NewCollectionsOfCollectionPtrUsingPointerStringsPlusCap(
+	stringItems *[]*string,
+	capacity int,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfPointerStrings(
+		stringItems)
+	collection := NewCollectionsOfCollectionPtr(
+		length + capacity)
+
+	return collection.AddPointerStringsPtr(
+		stringItems)
+}
+
+//goland:noinspection ALL
+func NewCollectionsOfCollectionPtrUsingLength(
+	length,
+	capacity int,
+) *CollectionsOfCollectionPtr {
+	collection := make(
+		[]*CollectionPtr,
+		length,
+		capacity)
+
+	return &CollectionsOfCollectionPtr{
 		items: &collection,
 	}
 }

@@ -3,6 +3,7 @@ package corestr
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"sort"
 	"strings"
 	"sync"
@@ -541,11 +542,15 @@ func (collection *Collection) AddPointerStringsPtr(
 	return collection
 }
 
-func (collection *Collection) IndexAt(index int) string {
+func (collection *Collection) IndexAt(
+	index int,
+) string {
 	return (*collection.items)[index]
 }
 
-func (collection *Collection) SafePointerIndexAt(index int) *string {
+func (collection *Collection) SafePointerIndexAt(
+	index int,
+) *string {
 	length := collection.Length()
 	if length-1 < index {
 		return nil
@@ -554,7 +559,9 @@ func (collection *Collection) SafePointerIndexAt(index int) *string {
 	return &(*collection.items)[index]
 }
 
-func (collection *Collection) SafePointerIndexAtUsingLength(length, index int) *string {
+func (collection *Collection) SafePointerIndexAtUsingLength(
+	length, index int,
+) *string {
 	if length-1 < index {
 		return nil
 	}
@@ -562,7 +569,9 @@ func (collection *Collection) SafePointerIndexAtUsingLength(length, index int) *
 	return &(*collection.items)[index]
 }
 
-func (collection *Collection) SafeIndexAtUsingLength(defaultString string, length, index int) string {
+func (collection *Collection) SafeIndexAtUsingLength(
+	defaultString string, length, index int,
+) string {
 	if length-1 < index {
 		return defaultString
 	}
@@ -607,7 +616,139 @@ func (collection *Collection) FirstOrDefault() string {
 	return (*collection.items)[0]
 }
 
-func (collection *Collection) AddStringsPtr(stringItems *[]string) *Collection {
+// use One based index
+func (collection *Collection) Take(
+	take int,
+) *Collection {
+	length := collection.Length()
+
+	if length <= take || take == 0 {
+		return collection
+	}
+
+	list := (*collection.items)[:take+1]
+
+	return NewCollectionUsingStrings(
+		&list,
+		false)
+}
+
+// use One based index
+func (collection *Collection) Skip(
+	skip int,
+) *Collection {
+	length := collection.Length()
+
+	if length < skip {
+		msgtype.
+			LengthShouldBeEqualToMessage.
+			HandleUsingPanic(
+				"Length is lower than skip value. Skip:",
+				skip)
+	}
+	if skip < 0 {
+		msgtype.
+			ShouldBeGreaterThanEqualMessage.
+			HandleUsingPanic(
+				"Skip should be more than or equal to 0.",
+				skip)
+	}
+
+	if skip == 0 {
+		return collection
+	}
+
+	list := (*collection.items)[skip+1:]
+
+	return NewCollectionUsingStrings(
+		&list,
+		false)
+}
+
+func (collection *Collection) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := collection.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (collection *Collection) GetPagedCollection(
+	eachPageSize int,
+) *CollectionsOfCollection {
+	length := collection.Length()
+
+	if length < eachPageSize {
+		return NewCollectionsOfCollectionUsingStrings(
+			collection.items, false)
+	}
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := NewCollectionsOfCollection(
+		pagesPossibleCeiling)
+
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		pagedCollection := collection.GetSinglePageCollection(
+			eachPageSize, i)
+
+		if i >= pagesPossibleCeiling && pagedCollection.IsEmpty() {
+			break
+		}
+
+		collectionOfCollection.Adds(
+			pagedCollection)
+	}
+
+	return collectionOfCollection
+}
+
+// PageIndex is one based index. Should be above or equal 1
+func (collection *Collection) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+) *Collection {
+	length := collection.Length()
+
+	if length < eachPageSize {
+		return collection
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	skipIndex := skipItems + 1
+	endingIndex := skipIndex + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := (*collection.items)[
+		skipIndex:endingIndex]
+
+	return NewCollectionUsingStrings(
+		&list,
+		false)
+}
+
+func (collection *Collection) AddStringsPtr(
+	stringItems *[]string,
+) *Collection {
 	if stringItems == nil {
 		return collection
 	}
@@ -623,7 +764,9 @@ func (collection *Collection) AddStringsPtr(stringItems *[]string) *Collection {
 	return collection
 }
 
-func (collection *Collection) AddStringsPtrLock(stringItems *[]string) *Collection {
+func (collection *Collection) AddStringsPtrLock(
+	stringItems *[]string,
+) *Collection {
 	collection.Lock()
 	defer collection.Unlock()
 
@@ -653,7 +796,9 @@ func (collection *Collection) AddStringsPtrAsync(
 	return collection
 }
 
-func (collection *Collection) InsertItemsAt(index int, stringItems *[]string) *Collection {
+func (collection *Collection) InsertItemsAt(
+	index int, stringItems *[]string,
+) *Collection {
 	length := collection.Length()
 	isAtFirst := length == 0
 	isAtLast := length-1 == index
@@ -676,7 +821,9 @@ func (collection *Collection) InsertItemsAt(index int, stringItems *[]string) *C
 	return collection
 }
 
-func (collection *Collection) RemoveAt(index int) *Collection {
+func (collection *Collection) RemoveAt(
+	index int,
+) *Collection {
 	*collection.items = append(
 		(*collection.items)[:index],
 		(*collection.items)[index+1:]...)
@@ -915,7 +1062,7 @@ func (collection *Collection) AppendAnysUsingFilter(
 		&anys,
 		constants.One)
 
-	for _, any := range anys {
+	for i, any := range anys {
 		if any == nil {
 			continue
 		}
@@ -924,7 +1071,7 @@ func (collection *Collection) AppendAnysUsingFilter(
 			constants.SprintValueFormat,
 			any)
 
-		result, isKeep, isBreak := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr, i)
 
 		if !isKeep {
 			continue
@@ -955,13 +1102,13 @@ func (collection *Collection) AppendAnysUsingFilterLock(
 		&anys,
 		constants.One)
 
-	for _, any := range anys {
+	for i, any := range anys {
 		if any == nil {
 			continue
 		}
 
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
-		result, isKeep, isBreak := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr, i)
 
 		if !isKeep {
 			continue
@@ -1167,8 +1314,8 @@ func (collection *Collection) Filter(filter IsStringFilter) *[]string {
 
 	list := make([]string, 0, collection.Length())
 
-	for _, element := range *collection.items {
-		result, isKeep, isBreak := filter(element)
+	for i, element := range *collection.items {
+		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep {
 			list = append(list, result)
@@ -1193,8 +1340,8 @@ func (collection *Collection) FilterLock(filter IsStringFilter) *[]string {
 
 	list := make([]string, 0, length)
 
-	for _, element := range *elements {
-		result, isKeep, isBreak := filter(element)
+	for i, element := range *elements {
+		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep {
 			list = append(list, result)
@@ -1230,7 +1377,7 @@ func (collection *Collection) FilterPtrLock(filterPtr IsStringPointerFilter) *[]
 	list := make([]*string, 0, length)
 
 	for i := range *elements {
-		result, isKeep, isBreak := filterPtr(&(*elements)[i])
+		result, isKeep, isBreak := filterPtr(&(*elements)[i], i)
 
 		if isKeep {
 			list = append(list, result)
@@ -1252,8 +1399,8 @@ func (collection *Collection) FilterPtr(filterPtr IsStringPointerFilter) *[]*str
 
 	list := make([]*string, 0, collection.Length())
 
-	for _, element := range *collection.items {
-		result, isKeep, isBreak := filterPtr(&element)
+	for i, element := range *collection.items {
+		result, isKeep, isBreak := filterPtr(&element, i)
 
 		if isKeep {
 			list = append(list, result)

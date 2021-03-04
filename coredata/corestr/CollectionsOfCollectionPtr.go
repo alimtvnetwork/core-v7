@@ -4,22 +4,21 @@ import (
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/converters"
 )
 
-type CollectionsOfCollection struct {
-	items *[]*Collection
+type CollectionsOfCollectionPtr struct {
+	items *[]*CollectionPtr
 }
 
-func (cc *CollectionsOfCollection) IsEmpty() bool {
+func (cc *CollectionsOfCollectionPtr) IsEmpty() bool {
 	return cc.items == nil || len(*cc.items) == 0
 }
 
-func (cc *CollectionsOfCollection) HasItems() bool {
+func (cc *CollectionsOfCollectionPtr) HasItems() bool {
 	return cc.items != nil && len(*cc.items) > 0
 }
 
-func (cc *CollectionsOfCollection) Length() int {
+func (cc *CollectionsOfCollectionPtr) Length() int {
 	if cc.items == nil {
 		return 0
 	}
@@ -27,7 +26,7 @@ func (cc *CollectionsOfCollection) Length() int {
 	return len(*cc.items)
 }
 
-func (cc *CollectionsOfCollection) AllIndividualItemsLength() int {
+func (cc *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
 	if cc.IsEmpty() {
 		return 0
 	}
@@ -45,15 +44,17 @@ func (cc *CollectionsOfCollection) AllIndividualItemsLength() int {
 	return allLength
 }
 
-func (cc *CollectionsOfCollection) ItemsPtr() *[]*Collection {
+func (cc *CollectionsOfCollectionPtr) ItemsPtr() *[]*CollectionPtr {
 	return cc.items
 }
 
-func (cc *CollectionsOfCollection) Items() []*Collection {
+func (cc *CollectionsOfCollectionPtr) Items() []*CollectionPtr {
 	return *cc.items
 }
 
-func (cc *CollectionsOfCollection) ListPtr(additionalCapacity int) *[]string {
+func (cc *CollectionsOfCollectionPtr) ListPtr(
+	additionalCapacity int,
+) *[]string {
 	allLength := cc.AllIndividualItemsLength()
 	list := make([]string, 0, allLength+additionalCapacity)
 
@@ -62,76 +63,84 @@ func (cc *CollectionsOfCollection) ListPtr(additionalCapacity int) *[]string {
 	}
 
 	for _, collection := range *cc.items {
-
 		for _, s := range *collection.ListPtr() {
-			list = append(list, s)
+			list = append(list, *s)
 		}
 	}
 
 	return &list
 }
 
-func (cc *CollectionsOfCollection) ToCollection() *Collection {
+func (cc *CollectionsOfCollectionPtr) ToCollection() *Collection {
 	list := cc.ListPtr(0)
 
 	return NewCollectionUsingStringsPlusCap(list, 0)
 }
 
-func (cc *CollectionsOfCollection) AddStringsPtr(
-	stringsItems *[]string, isCloneAdd bool,
-) *CollectionsOfCollection {
+func (cc *CollectionsOfCollectionPtr) AddStringsPtr(
+	stringsItems *[]string,
+	addCapacity int,
+) *CollectionsOfCollectionPtr {
 	if stringsItems == nil {
 		return cc
 	}
 
-	return cc.Adds(NewCollectionUsingStrings(stringsItems, isCloneAdd))
+	return cc.Adds(
+		NewCollectionPtrUsingStrings(
+			stringsItems,
+			addCapacity))
 }
 
-func (cc *CollectionsOfCollection) AddPointerStringsPtr(
+func (cc *CollectionsOfCollectionPtr) AddPointerStringsPtr(
 	pointerStringsItems *[]*string,
-) *CollectionsOfCollection {
+) *CollectionsOfCollectionPtr {
 	if pointerStringsItems == nil {
 		return cc
 	}
 
-	stringsItems := converters.PointerStringsToStrings(pointerStringsItems)
-
-	return cc.Adds(NewCollectionUsingStrings(stringsItems, false))
+	return cc.Adds(
+		NewCollectionPtrUsingPointerStrings(
+			pointerStringsItems,
+			0))
 }
 
-func (cc *CollectionsOfCollection) AddsStringsOfStrings(
-	isMakeClone bool,
+func (cc *CollectionsOfCollectionPtr) AddsStringsOfStrings(
+	addCapacity int,
 	stringsOfPointerStrings ...*[]string,
-) *CollectionsOfCollection {
+) *CollectionsOfCollectionPtr {
 	if stringsOfPointerStrings == nil {
 		return cc
 	}
 
 	for _, stringsPointer := range stringsOfPointerStrings {
-		cc.AddStringsPtr(stringsPointer, isMakeClone)
+		cc.AddStringsPtr(
+			stringsPointer,
+			addCapacity)
 	}
 
 	return cc
 }
 
-func (cc *CollectionsOfCollection) AddsStringsOfPointerStrings(
-	isMakeClone bool,
+func (cc *CollectionsOfCollectionPtr) AddsStringsOfPointerStrings(
+	addCapacity int,
 	stringsOfPointerStrings *[]*[]string,
-) *CollectionsOfCollection {
+) *CollectionsOfCollectionPtr {
 	if stringsOfPointerStrings == nil {
 		return cc
 	}
 
 	for _, stringsPointer := range *stringsOfPointerStrings {
-		cc.AddStringsPtr(stringsPointer, isMakeClone)
+		cc.AddStringsPtr(
+			stringsPointer,
+			addCapacity)
 	}
 
 	return cc
 }
 
-func (cc *CollectionsOfCollection) Adds(
-	collections ...*Collection,
-) *CollectionsOfCollection {
+func (cc *CollectionsOfCollectionPtr) Adds(
+	collections ...*CollectionPtr,
+) *CollectionsOfCollectionPtr {
 	if collections == nil {
 		return cc
 	}
@@ -139,21 +148,23 @@ func (cc *CollectionsOfCollection) Adds(
 	return cc.AddCollections(&collections)
 }
 
-func (cc *CollectionsOfCollection) AddCollections(
-	collections *[]*Collection,
-) *CollectionsOfCollection {
+func (cc *CollectionsOfCollectionPtr) AddCollections(
+	collections *[]*CollectionPtr,
+) *CollectionsOfCollectionPtr {
 	if collections == nil {
 		return cc
 	}
 
 	for i := range *collections {
-		*cc.items = append(*cc.items, (*collections)[i])
+		*cc.items = append(
+			*cc.items,
+			(*collections)[i])
 	}
 
 	return cc
 }
 
-func (cc *CollectionsOfCollection) String() string {
+func (cc *CollectionsOfCollectionPtr) String() string {
 	list := make(
 		[]string,
 		0,
