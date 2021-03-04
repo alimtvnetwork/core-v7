@@ -122,7 +122,7 @@ func (charCollectionMap *CharCollectionMap) SummaryString() string {
 	for key, collection := range *charCollectionMap.items {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
-			i+1,
+			i,
 			string(key),
 			collection.Length())
 
@@ -510,6 +510,8 @@ func (charCollectionMap *CharCollectionMap) Add(
 
 	if has {
 		collection.Add(str)
+
+		return charCollectionMap
 	}
 
 	newCollection := NewCollection(charCollectionMap.eachCollectionCapacity)
@@ -530,6 +532,8 @@ func (charCollectionMap *CharCollectionMap) AddStringPtr(
 
 	if has {
 		collection.AddPtr(str)
+
+		return charCollectionMap
 	}
 
 	newCollection := NewCollection(charCollectionMap.eachCollectionCapacity)
@@ -591,7 +595,9 @@ func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 
 	(*charCollectionMap.
 		items)[char] =
-		NewCollectionUsingStrings(allItemsWithSameChar, isCloneAdd)
+		NewCollectionUsingStrings(
+			allItemsWithSameChar,
+			isCloneAdd)
 
 	return charCollectionMap
 }
@@ -706,8 +712,9 @@ func (charCollectionMap *CharCollectionMap) AddStringsPtrAsyncLock(
 		return charCollectionMap
 	}
 
-	isListIsTooLargeAndHasExistingData := length > RegularCollectionEfficiencyLimit &&
-		charCollectionMap.Length() > DoubleLimit
+	isListIsTooLargeAndHasExistingData :=
+		length > RegularCollectionEfficiencyLimit &&
+			charCollectionMap.Length() > DoubleLimit
 
 	if isListIsTooLargeAndHasExistingData {
 		return charCollectionMap.
@@ -740,7 +747,8 @@ func (charCollectionMap *CharCollectionMap) AddStringsPtrAsyncLock(
 }
 
 func (charCollectionMap *CharCollectionMap) efficientAddOfLargeItems(
-	largeStringsCollection *[]string, onComplete OnCompleteCharCollectionMap,
+	largeStringsCollection *[]string,
+	onComplete OnCompleteCharCollectionMap,
 ) *CharCollectionMap {
 	allCharsMap := charCollectionMap.
 		GetCharsPtrGroups(largeStringsCollection)
@@ -1002,7 +1010,7 @@ func (charCollectionMap *CharCollectionMap) AddSameCharsCollectionLock(
 
 	if isAddToCollection {
 		//goland:noinspection GoNilness
-		foundCollection.AddStringsPtr(stringsWithSameStartChar.items)
+		foundCollection.AddStringsPtrLock(stringsWithSameStartChar.items)
 
 		return foundCollection
 	} else if hasCollectionHoweverNothingToAdd {
@@ -1232,7 +1240,9 @@ func (charCollectionMap *CharCollectionMap) ParseInjectUsingJson(
 		return EmptyCharCollectionMap(), nil
 	}
 
-	err := json.Unmarshal(*jsonResult.Bytes, &charCollectionMap)
+	err := json.Unmarshal(
+		*jsonResult.Bytes,
+		&charCollectionMap)
 
 	if err != nil {
 		return EmptyCharCollectionMap(), err

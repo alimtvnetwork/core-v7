@@ -384,13 +384,13 @@ func (hashset *Hashset) AddsAnyUsingFilter(
 		return hashset
 	}
 
-	for _, any := range anys {
+	for i, any := range anys {
 		if any == nil {
 			continue
 		}
 
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
-		result, isKeep, isBreak := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr, i)
 
 		if isKeep {
 			(*hashset.items)[result] = true
@@ -413,7 +413,7 @@ func (hashset *Hashset) AddsAnyUsingFilterLock(
 		return hashset
 	}
 
-	for _, any := range anys {
+	for i, any := range anys {
 		if any == nil {
 			continue
 		}
@@ -422,7 +422,7 @@ func (hashset *Hashset) AddsAnyUsingFilterLock(
 			constants.SprintValueFormat,
 			any)
 
-		result, isKeep, isBreak := filter(anyStr)
+		result, isKeep, isBreak := filter(anyStr, i)
 
 		if isKeep {
 			hashset.Lock()
@@ -448,8 +448,8 @@ func (hashset *Hashset) AddsUsingFilter(
 		return hashset
 	}
 
-	for _, key := range keys {
-		result, isKeep, isBreak := filter(key)
+	for i, key := range keys {
+		result, isKeep, isBreak := filter(key, i)
 
 		if isKeep {
 			(*hashset.items)[result] = true
@@ -561,8 +561,10 @@ func (hashset *Hashset) GetFilteredItems(
 		0,
 		hashset.Length())
 
+	i := 0
 	for key := range *hashset.items {
-		result, isKeep, isBreak := filter(key)
+		result, isKeep, isBreak := filter(key, i)
+		i++
 
 		if !isKeep {
 			continue
@@ -593,8 +595,10 @@ func (hashset *Hashset) GetFilteredCollection(
 		0,
 		hashset.Length())
 
+	i := 0
 	for key := range *hashset.items {
-		result, isKeep, isBreak := filter(key)
+		result, isKeep, isBreak := filter(key, i)
+		i++
 
 		if !isKeep {
 			continue
@@ -619,7 +623,9 @@ func (hashset *Hashset) GetFilteredCollection(
 // It is like set A - B
 // Set A = this Hashset
 // Set B = anotherHashset given in parameters.
-func (hashset *Hashset) GetAllExceptHashset(anotherHashset *Hashset) *[]string {
+func (hashset *Hashset) GetAllExceptHashset(
+	anotherHashset *Hashset,
+) *[]string {
 	if anotherHashset == nil || anotherHashset.IsEmpty() {
 		return hashset.ListPtr()
 	}
@@ -647,7 +653,9 @@ func (hashset *Hashset) GetAllExceptHashset(anotherHashset *Hashset) *[]string {
 // It is like set A - B
 // Set A = this Hashset
 // Set B = items given in parameters.
-func (hashset *Hashset) GetAllExcept(items *[]string) *[]string {
+func (hashset *Hashset) GetAllExcept(
+	items *[]string,
+) *[]string {
 	if items == nil {
 		return hashset.ListPtr()
 	}
@@ -666,7 +674,9 @@ func (hashset *Hashset) GetAllExcept(items *[]string) *[]string {
 // It is like set A - B
 // Set A = this Hashset
 // Set B = collection given in parameters.
-func (hashset *Hashset) GetAllExceptCollection(collection *Collection) *[]string {
+func (hashset *Hashset) GetAllExceptCollection(
+	collection *Collection,
+) *[]string {
 	if collection == nil {
 		return hashset.ListPtr()
 	}

@@ -236,12 +236,12 @@ func (linkedCollections *LinkedCollections) AddsUsingProcessorAsyncOnComplete(
 			return
 		}
 
-		for _, any := range anys {
+		for i, any := range anys {
 			if any == nil && isSkipOnNil {
 				continue
 			}
 
-			collection := processor(any)
+			collection := processor(any, i)
 			linkedCollections.Add(collection)
 		}
 
@@ -268,12 +268,12 @@ func (linkedCollections *LinkedCollections) AddsUsingProcessorAsync(
 			return
 		}
 
-		for _, any := range anys {
+		for i, any := range anys {
 			if any == nil && isSkipOnNil {
 				continue
 			}
 
-			collection := processor(any)
+			collection := processor(any, i)
 			linkedCollections.Add(collection)
 		}
 

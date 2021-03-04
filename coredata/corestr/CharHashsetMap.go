@@ -621,6 +621,8 @@ func (charHashsetMap *CharHashsetMap) Add(
 
 	if has {
 		hashset.Add(str)
+
+		return charHashsetMap
 	}
 
 	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
@@ -641,6 +643,8 @@ func (charHashsetMap *CharHashsetMap) AddStringPtr(
 
 	if has {
 		hashset.AddPtr(str)
+
+		return charHashsetMap
 	}
 
 	newHashset := NewHashset(charHashsetMap.eachHashsetCapacity)
@@ -1059,13 +1063,15 @@ func (charHashsetMap *CharHashsetMap) AddHashsetLock(
 
 	if isAddToHashset {
 		//goland:noinspection GoNilness
-		foundHashset.AddStringsPtr(stringsWithSameStartChar.ListPtr())
+		foundHashset.AddStringsPtrLock(
+			stringsWithSameStartChar.ListPtr())
 
 		return foundHashset
 	} else if hasHashsetHoweverNothingToAdd {
 		return foundHashset
 	}
 
+	// current str char, no lock required
 	char := charHashsetMap.GetChar(str)
 
 	if isNilOrEmptyHashsetGiven {
