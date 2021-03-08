@@ -40,7 +40,7 @@ func QuickDscPtr(pointerStringsIn *[]*string) *[]*string {
 // Reference : https://play.golang.org/p/sJ8a464USeV
 func QuickDsc(stringsPointerIn *[]string) *[]string {
 	pointerStringsDsc := coredata.StringsDsc(*stringsPointerIn)
-	sort.Strings(pointerStringsDsc)
+	sort.Sort(pointerStringsDsc)
 
 	return stringsPointerIn
 }

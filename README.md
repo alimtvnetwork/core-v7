@@ -37,13 +37,111 @@ To set for Unix:
 
 `expoort GOPRIVATE=[AddExistingOnes;]gitlab.com/evatix-go`
 
-## Why `constants?`
+## Why `core?`
 
 It makes our other go-packages DRY and concise.
 
 ## Examples
 
-`Code Smaples`
+```go
+package main
+
+import (
+  "fmt"
+  "gitlab.com/evatix-go/core/conditional"
+  "gitlab.com/evatix-go/core/constants"
+  "gitlab.com/evatix-go/core/converters"
+  "gitlab.com/evatix-go/core/coredata/corestr"
+  "gitlab.com/evatix-go/core/coremath"
+  "gitlab.com/evatix-go/core/issetter"
+)
+
+func main() {
+  // substituting functions as ternary operator
+  fmt.Println(conditional.Int(true, 2, 7))  // 2
+  fmt.Println(conditional.Int(false, 2, 7)) // 7
+
+  // making collection from array of strings
+  stringValues := []string{"hello", "world", "something"}
+  collectionPtr1 := corestr.NewCollectionPtrUsingStrings(&stringValues, constants.Zero)
+  fmt.Println(collectionPtr1)
+  /* outputs:
+     - hello
+     - world
+     - something
+  */
+
+  // different methods of collection
+  fmt.Println(collectionPtr1.Length())  // 3
+  fmt.Println(collectionPtr1.IsEmpty()) // false
+
+  // adding more element including empty string
+  collectionPtr2 := collectionPtr1.AddsLock("else")
+  fmt.Println(collectionPtr2.Length()) // 4
+
+  // checking equality
+  fmt.Println(collectionPtr1.IsEqualsPtr(collectionPtr2)) // true
+
+  // creating CharCollectionMap using collection
+  sampleMap := collectionPtr1.CharCollectionPtrMap()
+  fmt.Println(sampleMap)
+
+  // methods on CharCollectionMap
+  fmt.Println(sampleMap.Length())        // 4
+  fmt.Println(sampleMap.AllLengthsSum()) // 4
+  fmt.Println(sampleMap.Clear())         // prints: # Summary of `*corestr.CharCollectionMap`, Length ("0") - Sequence `1`
+  otherMap := sampleMap.Add("another")
+  fmt.Println(otherMap)
+  /* prints:
+  # Summary of `*corestr.CharCollectionMap`, Length ("1") - Sequence `1`
+          1 . `a` has `1` items.
+  ## Items of `a`
+          - another
+  */
+
+  // declaring an empty hashset of length 2 and calling methods on it
+  newHashSet := corestr.NewHashset(2)
+  fmt.Println(newHashSet.Length())  // 2
+  fmt.Println(newHashSet.IsEmpty()) // true
+  fmt.Println(newHashSet.Items())   // &map[]
+
+  // adding items to hashset
+  strPtr := "new"
+  newHashSet.AddPtr(&strPtr)
+  fmt.Println(newHashSet.Items()) // &map[new:true]
+
+  // adding map to hashset
+  newHashSet.AddItemsMap(&map[string]bool{"hi": true, "no": false})
+  fmt.Println(newHashSet.Items()) // &map[hi:true new:true]
+
+  // math operations: getting the larger/smaller value from two given values
+  fmt.Println(coremath.MaxByte('e', 'i')) // 105 which represents 'i' in ASCII
+  fmt.Println(coremath.MinByte(23, 5))    // 5
+
+  // initializing issetter value
+  var issetterValue issetter.Value = 2        // initializing as false
+  fmt.Println(issetterValue.HasInitialized()) // true
+  fmt.Println(issetterValue.Value())          // 2
+  fmt.Println(issetterValue.IsPositive())     // false
+
+  // sorting strings
+  fruits := []string{"banana", "mango", "apple"}
+  fmt.Println(strsort.Quick(&fruits))    // &[apple banana mango]
+  fmt.Println(strsort.QuickDsc(&fruits)) // &[mango banana apple]
+
+  // converting pointer strings to strings
+  mile := "mile"
+  km := "km"
+  measures := []*string{&mile, &km}
+  fmt.Println(converters.PointerStringsToStrings(&measures)) // &[mile km]
+  fmt.Printf("Type %T", converters.PointerStringsToStrings(&measures)) // Type *[]string
+  
+  // comparing two int arays
+  Values :=  []int{1, 2, 3, 4}
+  OtherValues :=  []int{5, 6, 7, 8}
+  fmt.Println(corecompare.IntArray(Values, OtherValues)) // false
+}
+```
 
 ## Acknowledgement
 
