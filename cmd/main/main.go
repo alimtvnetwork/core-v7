@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-
 	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
