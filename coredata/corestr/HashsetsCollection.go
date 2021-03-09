@@ -306,8 +306,14 @@ func (hashsetsCollection *HashsetsCollection) AsJsoner() *corejson.Jsoner {
 	return &jsoner
 }
 
-func (hashsetsCollection *HashsetsCollection) JsonParseSelfInject(jsonResult *corejson.Result) {
-	hashsetsCollection.ParseInjectUsingJsonMust(jsonResult)
+func (hashsetsCollection *HashsetsCollection) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := hashsetsCollection.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (hashsetsCollection *HashsetsCollection) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {

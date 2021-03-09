@@ -1907,9 +1907,14 @@ func (collection *Collection) ParseInjectUsingJsonMust(
 	return newUsingJson
 }
 
-// Panic if error
-func (collection *Collection) JsonParseSelfInject(jsonResult *corejson.Result) {
-	collection.ParseInjectUsingJsonMust(jsonResult)
+func (collection *Collection) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := collection.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (collection *Collection) AsJsoner() *corejson.Jsoner {

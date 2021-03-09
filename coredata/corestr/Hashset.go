@@ -953,3 +953,31 @@ func (hashset *Hashset) ParseInjectUsingJsonMust(
 
 	return hashSet
 }
+
+func (hashset *Hashset) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = hashset
+
+	return &jsoner
+}
+
+func (hashset *Hashset) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := hashset.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (hashset *Hashset) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonMarshaller corejson.ParseSelfInjector = hashset
+
+	return &jsonMarshaller
+}
+
+func (hashset *Hashset) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = hashset
+
+	return &jsonMarshaller
+}
