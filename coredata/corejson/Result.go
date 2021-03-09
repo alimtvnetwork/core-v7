@@ -96,10 +96,105 @@ func (jsonResult *Result) HasJson() bool {
 	return jsonResult.HasBytes()
 }
 
+func (jsonResult *Result) InjectInto(
+	injector ParseSelfInjector,
+) error {
+	return injector.JsonParseSelfInject(jsonResult)
+}
+
 func (jsonResult *Result) Unmarshal(any interface{}) error {
 	if jsonResult.HasError() {
 		return jsonResult.Error
 	}
 
 	return json.Unmarshal(*jsonResult.Bytes, any)
+}
+
+//goland:noinspection GoLinterLocal
+func (jsonResult *Result) JsonModel() *ResultModel {
+	return NewModel(jsonResult)
+}
+
+//goland:noinspection GoLinterLocal
+func (jsonResult *Result) JsonModelAny() interface{} {
+	return jsonResult.JsonModel()
+}
+
+func (jsonResult *Result) MarshalJSON() ([]byte, error) {
+	return json.Marshal(jsonResult.JsonModel())
+}
+
+func (jsonResult *Result) UnmarshalJSON(data []byte) error {
+	var dataModel ResultModel
+	err := json.Unmarshal(data, &dataModel)
+
+	if err == nil {
+		transpileModelToResult(&dataModel, jsonResult)
+	}
+
+	return err
+}
+
+//goland:noinspection GoLinterLocal
+func (jsonResult *Result) Json() *Result {
+	return jsonResult
+}
+
+// It will not update the self but creates a new one.
+func (jsonResult *Result) ParseInjectUsingJson(
+	jsonResultIn *Result,
+) (*Result, error) {
+	if jsonResultIn == nil || jsonResultIn.IsEmptyJsonBytes() {
+		return EmptyWithoutErrorPtr(), nil
+	}
+
+	err := json.Unmarshal(
+		*jsonResultIn.Bytes,
+		&jsonResult)
+
+	if err != nil {
+		return EmptyWithErrorPtr(err), err
+	}
+
+	return jsonResult, nil
+}
+
+// Panic if error
+func (jsonResult *Result) ParseInjectUsingJsonMust(
+	jsonResultIn *Result,
+) *Result {
+	result, err := jsonResult.ParseInjectUsingJson(
+		jsonResultIn)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return result
+}
+
+func (jsonResult *Result) AsJsoner() *Jsoner {
+	var jsoner Jsoner = jsonResult
+
+	return &jsoner
+}
+
+func (jsonResult *Result) JsonParseSelfInject(
+	jsonResultIn *Result,
+) error {
+	_, err := jsonResult.ParseInjectUsingJson(jsonResultIn)
+
+	return err
+}
+
+func (jsonResult *Result) AsJsonParseSelfInjector() *ParseSelfInjector {
+	var jsonMarshaller ParseSelfInjector = jsonResult
+
+	return &jsonMarshaller
+}
+
+func (jsonResult *Result) AsJsonMarshaller() *JsonMarshaller {
+	var jsonMarshaller JsonMarshaller = jsonResult
+
+	return &jsonMarshaller
 }

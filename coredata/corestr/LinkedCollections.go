@@ -1335,8 +1335,12 @@ func (linkedCollections *LinkedCollections) GetCompareSummary(
 // Panic if error
 func (linkedCollections *LinkedCollections) JsonParseSelfInject(
 	jsonResult *corejson.Result,
-) {
-	linkedCollections.ParseInjectUsingJsonMust(jsonResult)
+) error {
+	_, err := linkedCollections.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (linkedCollections *LinkedCollections) AsJsoner() *corejson.Jsoner {

@@ -1018,8 +1018,14 @@ func (hashmap *Hashmap) AsJsoner() *corejson.Jsoner {
 	return &jsoner
 }
 
-func (hashmap *Hashmap) JsonParseSelfInject(jsonResult *corejson.Result) {
-	hashmap.ParseInjectUsingJsonMust(jsonResult)
+func (hashmap *Hashmap) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := hashmap.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (hashmap *Hashmap) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {

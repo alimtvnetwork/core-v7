@@ -1,9 +1,11 @@
 package corestr
 
 import (
+	"encoding/json"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 )
 
 type CollectionsOfCollectionPtr struct {
@@ -179,4 +181,101 @@ func (cc *CollectionsOfCollectionPtr) String() string {
 	return strings.Join(
 		list,
 		constants.DoubleNewLine)
+}
+
+func (cc *CollectionsOfCollectionPtr) JsonModel() *CollectionsOfCollectionPtrModel {
+	return &CollectionsOfCollectionPtrModel{
+		Items: cc.items,
+	}
+}
+
+func (cc *CollectionsOfCollectionPtr) JsonModelAny() interface{} {
+	return cc.JsonModel()
+}
+
+func (cc *CollectionsOfCollectionPtr) MarshalJSON() ([]byte, error) {
+	return json.Marshal(*cc.JsonModel())
+}
+
+func (cc *CollectionsOfCollectionPtr) UnmarshalJSON(data []byte) error {
+	var dataModel CollectionsOfCollectionPtrModel
+
+	err := json.Unmarshal(data, &dataModel)
+
+	if err == nil {
+		cc.items = dataModel.Items
+	}
+
+	return err
+}
+
+//goland:noinspection GoLinterLocal
+func (cc *CollectionsOfCollectionPtr) Json() *corejson.Result {
+	if cc.IsEmpty() {
+		return corejson.EmptyWithoutErrorPtr()
+	}
+
+	jsonBytes, err := json.Marshal(cc)
+
+	return corejson.NewPtr(jsonBytes, err)
+}
+
+//goland:noinspection GoLinterLocal
+func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*CollectionsOfCollectionPtr, error) {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
+		return EmptyCollectionsOfCollectionPtr(), nil
+	}
+
+	err := json.Unmarshal(*jsonResult.Bytes, &cc)
+
+	if err != nil {
+		return EmptyCollectionsOfCollectionPtr(), err
+	}
+
+	return cc, nil
+}
+
+// Panic if error
+//goland:noinspection GoLinterLocal
+func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *CollectionsOfCollectionPtr {
+	newUsingJson, err :=
+		cc.ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return newUsingJson
+}
+
+func (cc *CollectionsOfCollectionPtr) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := cc.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (cc *CollectionsOfCollectionPtr) AsJsoner() *corejson.Jsoner {
+	var jsoner corejson.Jsoner = cc
+
+	return &jsoner
+}
+
+func (cc *CollectionsOfCollectionPtr) AsJsonParseSelfInjector() *corejson.ParseSelfInjector {
+	var jsonInjector corejson.ParseSelfInjector = cc
+
+	return &jsonInjector
+}
+
+func (cc *CollectionsOfCollectionPtr) AsJsonMarshaller() *corejson.JsonMarshaller {
+	var jsonMarshaller corejson.JsonMarshaller = cc
+
+	return &jsonMarshaller
 }

@@ -1,5 +1,5 @@
 package corejson
 
 type ParseSelfInjector interface {
-	JsonParseSelfInject(jsonResult *Result)
+	JsonParseSelfInject(jsonResult *Result) error
 }

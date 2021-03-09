@@ -20,21 +20,27 @@ func EmptyWithoutErrorPtr() *Result {
 	return EmptyWithErrorPtr(StaticJsonError)
 }
 
-func NewUsingBytes(jsonBytes *[]byte) Result {
+func NewUsingBytes(
+	jsonBytes *[]byte,
+) Result {
 	return Result{
 		Bytes: jsonBytes,
 		Error: nil,
 	}
 }
 
-func NewUsingBytesPtr(jsonBytes *[]byte) *Result {
+func NewUsingBytesPtr(
+	jsonBytes *[]byte,
+) *Result {
 	return &Result{
 		Bytes: jsonBytes,
 		Error: nil,
 	}
 }
 
-func NewPtr(jsonBytes []byte, err error) *Result {
+func NewPtr(
+	jsonBytes []byte, err error,
+) *Result {
 	if err != nil {
 		return EmptyWithErrorPtr(err)
 	}
@@ -49,11 +55,15 @@ func NewPtr(jsonBytes []byte, err error) *Result {
 	}
 }
 
-func New(jsonBytes []byte, err error) Result {
+func New(
+	jsonBytes []byte, err error,
+) Result {
 	return *NewPtr(jsonBytes, err)
 }
 
-func NewPtrUsingBytesPtr(jsonBytes *[]byte, err error) *Result {
+func NewPtrUsingBytesPtr(
+	jsonBytes *[]byte, err error,
+) *Result {
 	if err != nil {
 		return EmptyWithErrorPtr(err)
 	}
@@ -82,4 +92,58 @@ func NewFromAny(any interface{}) *Result {
 		Bytes: &jsonBytes,
 		Error: err,
 	}
+}
+
+func EmptyResultsCollection() *ResultsCollection {
+	list := make([]*Result, 0, 0)
+
+	return &ResultsCollection{
+		Items: &list,
+	}
+}
+
+func NewResultsCollection(cap int) *ResultsCollection {
+	list := make([]*Result, 0, cap)
+
+	return &ResultsCollection{
+		Items: &list,
+	}
+}
+
+func NewResultsCollectionUsingJsoners(
+	addCapacity int, jsoners ...Jsoner,
+) *ResultsCollection {
+	length := addCapacity
+	if jsoners == nil {
+		return NewResultsCollection(length)
+	}
+
+	additionalCapacity := len(jsoners)
+	length += additionalCapacity
+	list := make([]*Result, 0, length)
+	resultsCollection := &ResultsCollection{
+		Items: &list,
+	}
+
+	return resultsCollection.
+		AddJsonerPtr(&jsoners)
+}
+
+func NewResultsCollectionUsingJsonResults(
+	addCapacity int, results ...*Result,
+) *ResultsCollection {
+	length := addCapacity
+	if results == nil {
+		return NewResultsCollection(length)
+	}
+
+	additionalCapacity := len(results)
+	length += additionalCapacity
+	list := make([]*Result, 0, length)
+	resultsCollection := &ResultsCollection{
+		Items: &list,
+	}
+
+	return resultsCollection.
+		AddNonNilItemsPtr(&results)
 }

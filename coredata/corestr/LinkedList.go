@@ -1015,8 +1015,14 @@ func (linkedList *LinkedList) ParseInjectUsingJsonMust(
 }
 
 // Panic if error
-func (linkedList *LinkedList) JsonParseSelfInject(jsonResult *corejson.Result) {
-	linkedList.ParseInjectUsingJsonMust(jsonResult)
+func (linkedList *LinkedList) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := linkedList.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (linkedList *LinkedList) AsJsoner() *corejson.Jsoner {

@@ -1168,8 +1168,14 @@ func (charHashsetMap *CharHashsetMap) AsJsonParseSelfInjector() *corejson.ParseS
 	return &jsonMarshaller
 }
 
-func (charHashsetMap *CharHashsetMap) JsonParseSelfInject(jsonResult *corejson.Result) {
-	charHashsetMap.ParseInjectUsingJsonMust(jsonResult)
+func (charHashsetMap *CharHashsetMap) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := charHashsetMap.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (charHashsetMap *CharHashsetMap) ParseInjectUsingJson(

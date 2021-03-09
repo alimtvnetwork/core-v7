@@ -1201,8 +1201,14 @@ func (charCollectionMap *CharCollectionMap) AsJsonParseSelfInjector() *corejson.
 	return &jsonMarshaller
 }
 
-func (charCollectionMap *CharCollectionMap) JsonParseSelfInject(jsonResult *corejson.Result) {
-	charCollectionMap.ParseInjectUsingJsonMust(jsonResult)
+func (charCollectionMap *CharCollectionMap) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := charCollectionMap.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (charCollectionMap *CharCollectionMap) MarshalJSON() ([]byte, error) {
