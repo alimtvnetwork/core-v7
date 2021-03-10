@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type CharHashsetMap struct {
@@ -1182,7 +1183,7 @@ func (charHashsetMap *CharHashsetMap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CharHashsetMap, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyCharHashsetMap(), nil
+		return EmptyCharHashsetMap(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
 	}
 
 	err := json.Unmarshal(*jsonResult.Bytes, &charHashsetMap)

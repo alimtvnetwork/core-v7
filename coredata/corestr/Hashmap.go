@@ -8,6 +8,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type Hashmap struct {
@@ -987,7 +988,7 @@ func (hashmap *Hashmap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashmap, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyHashmap(), nil
+		return EmptyHashmap(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
 	}
 
 	err := json.Unmarshal(*jsonResult.Bytes, &hashmap)

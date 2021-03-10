@@ -9,6 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type Hashset struct {
@@ -929,7 +930,7 @@ func (hashset *Hashset) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashset, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyHashset(), nil
+		return EmptyHashset(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
 	}
 
 	err := json.Unmarshal(*jsonResult.Bytes, &hashset)

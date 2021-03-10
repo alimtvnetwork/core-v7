@@ -6,6 +6,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type CollectionsOfCollectionPtr struct {
@@ -225,7 +226,7 @@ func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CollectionsOfCollectionPtr, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyCollectionsOfCollectionPtr(), nil
+		return EmptyCollectionsOfCollectionPtr(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
 	}
 
 	err := json.Unmarshal(*jsonResult.Bytes, &cc)

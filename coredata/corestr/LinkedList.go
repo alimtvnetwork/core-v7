@@ -9,6 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -988,7 +989,7 @@ func (linkedList *LinkedList) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*LinkedList, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyLinkedList(), nil
+		return EmptyLinkedList(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
 	}
 
 	err := json.Unmarshal(*jsonResult.Bytes, &linkedList)

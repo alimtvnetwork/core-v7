@@ -62,6 +62,9 @@ const (
 	SearchInputEmpty                       Variation = "Search Input is either null or empty."
 	SearchInputOrSearchTermEmpty           Variation = "Search Input or search term either null or empty."
 	EmptyResultCannotMakeJson              Variation = "Empty result, cannot make json out of it."
+	MarshallingFailed                      Variation = "Failed to marshal / parse / serialize."
+	UnMarshallingFailed                    Variation = "Failed to unmarshal / parse / deserialize. Failed to convert to object from serialized data source."
+	ParsingFailed                          Variation = "Failed to parse."
 )
 
 func GetSet(
@@ -98,6 +101,12 @@ func (variation Variation) Combine(otherMsg string, reference interface{}) strin
 
 func (variation Variation) Error(otherMsg string, reference interface{}) error {
 	msg := CombineWithMsgType(variation, otherMsg, reference)
+
+	return errors.New(strings.ToLower(msg))
+}
+
+func (variation Variation) ErrorNoRefs(otherMsg string) error {
+	msg := CombineWithMsgType(variation, otherMsg, "No Reference")
 
 	return errors.New(strings.ToLower(msg))
 }
