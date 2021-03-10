@@ -27,7 +27,7 @@ func (receiver *ResultsCollection) HasItems() bool {
 }
 
 // skip on nil
-func (receiver *ResultsCollection) AddSkipNil(
+func (receiver *ResultsCollection) AddSkipOnNil(
 	result *Result,
 ) *ResultsCollection {
 	if result == nil {
@@ -66,7 +66,11 @@ func (receiver *ResultsCollection) AllErrors() (
 	errList := make(
 		[]error,
 		0,
-		receiver.Length())
+		length)
+
+	if length == 0 {
+		return &errList, hasAnyError
+	}
 
 	for i := 0; i < length; i++ {
 		err := (*receiver.Items)[i].Error
@@ -82,12 +86,16 @@ func (receiver *ResultsCollection) AllErrors() (
 	return &errList, hasAnyError
 }
 
-func (receiver *ResultsCollection) GetErrorsAsSingleString() string {
+func (receiver *ResultsCollection) GetErrorsStrings() *[]string {
 	length := receiver.Length()
 	errStrList := make(
 		[]string,
 		0,
 		length)
+
+	if length == 0 {
+		return &errStrList
+	}
 
 	for _, result := range *receiver.Items {
 		if result == nil || result.IsEmptyError() {
@@ -99,7 +107,15 @@ func (receiver *ResultsCollection) GetErrorsAsSingleString() string {
 			result.Error.Error())
 	}
 
-	return strings.Join(errStrList, constants.NewLineUnix)
+	return &errStrList
+}
+
+func (receiver *ResultsCollection) GetErrorsAsSingleString() string {
+	errStrList := receiver.GetErrorsStrings()
+
+	return strings.Join(
+		*errStrList,
+		constants.NewLineUnix)
 }
 
 func (receiver *ResultsCollection) GetErrorsAsSingle() error {
@@ -281,6 +297,49 @@ func (receiver *ResultsCollection) Adds(
 	return receiver
 }
 
+// Skip on nil
+func (receiver *ResultsCollection) AddsAnys(
+	anys ...interface{},
+) *ResultsCollection {
+	if anys == nil {
+		return receiver
+	}
+
+	return receiver.AddsAnysPtr(&anys)
+}
+
+// Skip on nil
+func (receiver *ResultsCollection) AddsAnysPtr(
+	anysPtr *[]interface{},
+) *ResultsCollection {
+	if anysPtr == nil {
+		return receiver
+	}
+
+	for _, any := range *anysPtr {
+		if any == nil {
+			continue
+		}
+
+		*receiver.Items = append(
+			*receiver.Items,
+			NewFromAny(any))
+	}
+
+	return receiver
+}
+
+// skip on nil items
+func (receiver *ResultsCollection) AddResultsCollection(
+	collection *ResultsCollection,
+) *ResultsCollection {
+	if collection == nil {
+		return receiver
+	}
+
+	return receiver.AddNonNilItemsPtr(collection.Items)
+}
+
 // skip on nil
 func (receiver *ResultsCollection) AddNonNilItems(
 	results ...*Result,
@@ -301,16 +360,6 @@ func (receiver *ResultsCollection) AddNonNilItems(
 	}
 
 	return receiver
-}
-
-func (receiver *ResultsCollection) AddResultsCollection(
-	collection *ResultsCollection,
-) *ResultsCollection {
-	if collection == nil {
-		return receiver
-	}
-
-	return receiver.AddNonNilItemsPtr(collection.Items)
 }
 
 // skip on nil
@@ -343,7 +392,12 @@ func (receiver *ResultsCollection) Clear() *ResultsCollection {
 }
 
 func (receiver *ResultsCollection) GetStrings() *[]string {
-	list := make([]string, receiver.Length())
+	length := receiver.Length()
+	list := make([]string, length)
+
+	if length == 0 {
+		return &list
+	}
 
 	for i, result := range *receiver.Items {
 		list[i] = *result.JsonStringPtr()

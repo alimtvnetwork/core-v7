@@ -111,7 +111,8 @@ func NewResultsCollection(cap int) *ResultsCollection {
 }
 
 func NewResultsCollectionUsingJsoners(
-	addCapacity int, jsoners ...Jsoner,
+	addCapacity int,
+	jsoners ...Jsoner,
 ) *ResultsCollection {
 	length := addCapacity
 	if jsoners == nil {
@@ -130,7 +131,8 @@ func NewResultsCollectionUsingJsoners(
 }
 
 func NewResultsCollectionUsingJsonResults(
-	addCapacity int, results ...*Result,
+	addCapacity int,
+	results ...*Result,
 ) *ResultsCollection {
 	length := addCapacity
 	if results == nil {
@@ -146,4 +148,24 @@ func NewResultsCollectionUsingJsonResults(
 
 	return resultsCollection.
 		AddNonNilItemsPtr(&results)
+}
+
+func NewResultsCollectionUsingAnys(
+	addCapacity int,
+	anys ...interface{},
+) *ResultsCollection {
+	length := addCapacity
+	if anys == nil {
+		return NewResultsCollection(length)
+	}
+
+	additionalCapacity := len(anys)
+	length += additionalCapacity
+	list := make([]*Result, 0, length)
+	resultsCollection := &ResultsCollection{
+		Items: &list,
+	}
+
+	return resultsCollection.
+		AddsAnysPtr(&anys)
 }
