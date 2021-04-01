@@ -1,4 +1,4 @@
-package osfilemode
+package filemode
 
 import "os"
 
