@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-// panic if not a number
+// StringsToIntegers panic if not a number
 func StringsToIntegers(strArray *[]string) *[]int {
 	results := make([]int, len(*strArray))
 

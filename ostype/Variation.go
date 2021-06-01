@@ -59,7 +59,7 @@ func (variation Variation) IsStringsMatchAny(others ...string) bool {
 	return false
 }
 
-// variation != Windows
+// IsPossibleUnixGroup variation != Windows
 func (variation Variation) IsPossibleUnixGroup() bool {
 	return variation != Windows
 }

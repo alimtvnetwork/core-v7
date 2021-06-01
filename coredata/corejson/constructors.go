@@ -1,6 +1,25 @@
 package corejson
 
-import "encoding/json"
+import (
+	"encoding/json"
+
+	"gitlab.com/evatix-go/core/coredata"
+)
+
+// NewUsingBytesError Get created with nil.
+func NewUsingBytesError(bytesError *coredata.BytesError) Result {
+	if bytesError == nil {
+		return Result{
+			Bytes: nil,
+			Error: nil,
+		}
+	}
+
+	return Result{
+		Bytes: bytesError.Bytes,
+		Error: bytesError.Error,
+	}
+}
 
 func EmptyWithError(err error) Result {
 	return Result{

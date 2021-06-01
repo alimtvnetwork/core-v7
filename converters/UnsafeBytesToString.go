@@ -2,7 +2,7 @@ package converters
 
 import "unsafe"
 
-// Returns string from unsafe bytes pointer
+// UnsafeBytesToString Returns string from unsafe bytes pointer
 //
 // May panic on conversion if the bytes were not in unsafe pointer.
 //

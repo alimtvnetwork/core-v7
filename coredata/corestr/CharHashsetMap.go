@@ -132,7 +132,7 @@ func (charHashsetMap *CharHashsetMap) GetMap() *map[byte]*Hashset {
 	return charHashsetMap.items
 }
 
-// Sends a copy of items
+// GetCopyMapLock Sends a copy of items
 func (charHashsetMap *CharHashsetMap) GetCopyMapLock() *map[byte]*Hashset {
 	charHashsetMap.Lock()
 	defer charHashsetMap.Unlock()
@@ -326,7 +326,7 @@ func (charHashsetMap *CharHashsetMap) IsEmptyLock() bool {
 		len(*charHashsetMap.items) == 0
 }
 
-// Get the char of the string given and get the length of how much is there.
+// LengthOfHashsetFromFirstChar Get the char of the string given and get the length of how much is there.
 func (charHashsetMap *CharHashsetMap) LengthOfHashsetFromFirstChar(
 	str string,
 ) int {
@@ -432,7 +432,7 @@ func (charHashsetMap *CharHashsetMap) LengthOfLock(char byte) int {
 	return 0
 }
 
-// All lengths sum.
+// AllLengthsSum All lengths sum.
 func (charHashsetMap *CharHashsetMap) AllLengthsSum() int {
 	if charHashsetMap.
 		items == nil ||
@@ -449,7 +449,7 @@ func (charHashsetMap *CharHashsetMap) AllLengthsSum() int {
 	return allLengthsSum
 }
 
-// All lengths sum.
+// AllLengthsSumLock All lengths sum.
 func (charHashsetMap *CharHashsetMap) AllLengthsSumLock() int {
 	charHashsetMap.Lock()
 	defer charHashsetMap.Unlock()
@@ -684,7 +684,7 @@ func (charHashsetMap *CharHashsetMap) AddStringPtrLock(
 	return charHashsetMap
 }
 
-// Assuming all items starts with same chars
+// AddSameStartingCharItems Assuming all items starts with same chars
 func (charHashsetMap *CharHashsetMap) AddSameStartingCharItems(
 	char byte,
 	allItemsWithSameChar *[]string,
@@ -1189,7 +1189,7 @@ func (charHashsetMap *CharHashsetMap) ParseInjectUsingJson(
 	return charHashsetMap, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (charHashsetMap *CharHashsetMap) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *CharHashsetMap {
@@ -1231,7 +1231,7 @@ func (charHashsetMap *CharHashsetMap) Json() *corejson.Result {
 	return corejson.NewPtr(jsonBytes, err)
 }
 
-// remove all existing items, deletes items using delete(*charCollectionMap.items, char), expensive operation
+// RemoveAll remove all existing items, deletes items using delete(*charCollectionMap.items, char), expensive operation
 func (charHashsetMap *CharHashsetMap) RemoveAll() *CharHashsetMap {
 	if charHashsetMap.IsEmpty() {
 		return charHashsetMap
@@ -1244,7 +1244,7 @@ func (charHashsetMap *CharHashsetMap) RemoveAll() *CharHashsetMap {
 	return charHashsetMap
 }
 
-// points to a new map and collects old pointer and remove all elements from pointer in separate goroutine.
+// Clear points to a new map and collects old pointer and remove all elements from pointer in separate goroutine.
 func (charHashsetMap *CharHashsetMap) Clear() *CharHashsetMap {
 	if charHashsetMap.IsEmpty() {
 		return charHashsetMap

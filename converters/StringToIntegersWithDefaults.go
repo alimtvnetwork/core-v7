@@ -9,7 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/converters/coreconverted"
 )
 
-func StringToIntegerWithDefaults(
+func StringToIntegersWithDefaults(
 	stringInput,
 	separator string,
 	defaultInt int,

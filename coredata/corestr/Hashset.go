@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/internal/stringutil"
 )
 
 type Hashset struct {
@@ -161,7 +162,63 @@ func (hashset *Hashset) Add(key string) *Hashset {
 	return hashset
 }
 
-func (hashset *Hashset) AddStringsPtrWgLock(keys *[]string, wg *sync.WaitGroup) *Hashset {
+func (hashset *Hashset) AddNonEmpty(str string) *Hashset {
+	if str == "" {
+		return hashset
+	}
+
+	return hashset
+}
+
+func (hashset *Hashset) AddNonEmptyWhitespace(str string) *Hashset {
+	if stringutil.IsEmptyOrWhitespace(str) {
+		return hashset
+	}
+
+	return hashset.Add(str)
+}
+
+func (hashset *Hashset) AddIf(isAdd bool, addingString string) *Hashset {
+	if !isAdd {
+		return hashset
+	}
+
+	return hashset.Add(addingString)
+}
+
+func (hashset *Hashset) AddIfMany(
+	isAdd bool,
+	addingStrings ...string,
+) *Hashset {
+	if !isAdd {
+		return hashset
+	}
+
+	return hashset.Adds(addingStrings...)
+}
+
+func (hashset *Hashset) AddFunc(f func() string) *Hashset {
+	return hashset.Add(f())
+}
+
+func (hashset *Hashset) AddFuncErr(
+	funcReturnsError func() (result string, err error),
+	errHandler func(errInput error),
+) *Hashset {
+	r, err := funcReturnsError()
+
+	if err != nil {
+		errHandler(err)
+
+		return hashset
+	}
+
+	return hashset.Add(r)
+}
+
+func (hashset *Hashset) AddStringsPtrWgLock(
+	keys *[]string, wg *sync.WaitGroup,
+) *Hashset {
 	if keys == nil {
 		return hashset
 	}
@@ -504,7 +561,9 @@ func (hashset *Hashset) HasAllStringsPtr(keys *[]string) bool {
 }
 
 // return false on items is nil or empty.
-func (hashset *Hashset) HasAllCollectionItems(collection *Collection) bool {
+func (hashset *Hashset) HasAllCollectionItems(
+	collection *Collection,
+) bool {
 	if collection == nil || collection.IsEmpty() {
 		return false
 	}

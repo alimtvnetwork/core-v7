@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/osconsts"
 )
 
-// Skip on Windows 
+// SkipOnWindows Skip on Windows
 func SkipOnWindows(t *testing.T) {
 	if osconsts.IsWindows {
 		t.Skip(msgtype.WindowsIgnoreMessage)

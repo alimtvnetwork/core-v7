@@ -79,7 +79,7 @@ func (receiver *NonChainedLinkedListNodes) LastOrDefault() *LinkedListNode {
 	return (*receiver.items)[receiver.Length()-1]
 }
 
-// Warning Mutates data inside.
+// ApplyChaining Warning Mutates data inside.
 func (receiver *NonChainedLinkedListNodes) ApplyChaining() *NonChainedLinkedListNodes {
 	length := receiver.Length()
 	if length == 0 {

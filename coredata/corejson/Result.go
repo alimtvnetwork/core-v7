@@ -5,6 +5,7 @@ import (
 
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type Result struct {
@@ -37,6 +38,23 @@ func (jsonResult *Result) HasError() bool {
 	return jsonResult.Error != nil
 }
 
+// MeaningfulError create error even if results are nil.
+func (jsonResult *Result) MeaningfulError() error {
+	var msgVariation msgtype.Variation
+
+	if jsonResult.IsEmptyJsonBytes() {
+		msgVariation = msgtype.JsonResultBytesAreNilOrEmpty
+	}
+
+	if jsonResult.HasError() {
+		return msgtype.FailedToParse.Error(
+			jsonResult.Error.Error(),
+			msgVariation.String())
+	}
+
+	return nil
+}
+
 func (jsonResult *Result) IsEmptyError() bool {
 	return jsonResult.Error == nil
 }
@@ -65,7 +83,7 @@ func (jsonResult *Result) HasBytes() bool {
 	return !jsonResult.IsEmptyJsonBytes()
 }
 
-// len == 0, nil, {} returns as empty true
+// IsEmptyJsonBytes len == 0, nil, {} returns as empty true
 func (jsonResult *Result) IsEmptyJsonBytes() bool {
 	isEmptyFirst := jsonResult.HasError() ||
 		jsonResult.Bytes == nil
@@ -136,12 +154,11 @@ func (jsonResult *Result) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-//goland:noinspection GoLinterLocal
 func (jsonResult *Result) Json() *Result {
 	return jsonResult
 }
 
-// It will not update the self but creates a new one.
+// ParseInjectUsingJson It will not update the self but creates a new one.
 func (jsonResult *Result) ParseInjectUsingJson(
 	jsonResultIn *Result,
 ) (*Result, error) {
@@ -160,7 +177,7 @@ func (jsonResult *Result) ParseInjectUsingJson(
 	return jsonResult, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (jsonResult *Result) ParseInjectUsingJsonMust(
 	jsonResultIn *Result,
 ) *Result {

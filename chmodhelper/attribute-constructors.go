@@ -11,7 +11,7 @@ func NewAttribute(isRead, isWrite, isExecute bool) Attribute {
 	}
 }
 
-// Length must be 3
+// NewAttributeUsingRwx Length must be 3
 // "rwx" should be put for attributes.
 // eg. read enable all disable : "r--"
 // eg. write enable all disable : "-w-"
@@ -21,11 +21,7 @@ func NewAttributeUsingRwx(rwx string) Attribute {
 	length := len(rwx)
 
 	if length != SupportedLength {
-		panic(msgtype.
-			LengthShouldBeEqualToMessage.
-			Combine(
-				"rwx length should be "+SupportedLengthString,
-				length))
+		panic(GetRwxLengthError(rwx))
 	}
 
 	r := rwx[0]
@@ -39,6 +35,8 @@ func NewAttributeUsingRwx(rwx string) Attribute {
 	}
 }
 
+// NewAttributeUsingByte
+//
 // 1 - Execute true
 // 2 - Write true
 // 3 - Write + Execute true

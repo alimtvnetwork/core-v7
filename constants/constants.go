@@ -42,6 +42,17 @@ const (
 	SprintFullPropertyNameValueFormat         = "%#v"
 	SprintPropertyNameValueFormat             = "%+v"
 	SprintTypeFormat                          = "%T"
+	SprintDoubleQuoteFormat                   = "%q"
+	EqualSymbol                               = "="
+	DoubleEqualSymbol                         = "=="
+	TrippleEqualSymbol                        = "==="
+	NotEqualSymbol                            = "!="
+	JsNotEqualSymbol                          = "!=="
+	SqlNotEqualSymbol                         = "<>"
+	LeftLessSymbol                            = "<"
+	LeftLessEqualSymbol                       = "<="
+	LeftGreaterSymbol                         = ">"
+	LeftGreaterEqualSymbol                    = ">="
 	InvalidNotFoundCase                       = -1
 	Zero                                      = 0
 	NotImplemented                            = "Not Implemented"
@@ -56,52 +67,6 @@ const (
 	CurlyEndSymbol                    byte    = '}'
 	SquareStartSymbol                 byte    = '['
 	SquareEndSymbol                   byte    = ']'
-	ArbitraryCapacity1                        = 1
-	ArbitraryCapacity2                        = 2
-	ArbitraryCapacity3                        = 3
-	ArbitraryCapacity4                        = 4
-	ArbitraryCapacity5                        = 5
-	ArbitraryCapacity6                        = 6
-	ArbitraryCapacity7                        = 7
-	ArbitraryCapacity8                        = 8
-	ArbitraryCapacity9                        = 9
-	ArbitraryCapacity10                       = 10
-	ArbitraryCapacity11                       = 11
-	ArbitraryCapacity12                       = 12
-	ArbitraryCapacity13                       = 13
-	ArbitraryCapacity14                       = 14
-	ArbitraryCapacity15                       = 15
-	ArbitraryCapacity16                       = 16
-	ArbitraryCapacity17                       = 17
-	ArbitraryCapacity18                       = 18
-	ArbitraryCapacity19                       = 19
-	ArbitraryCapacity20                       = 20
-	ArbitraryCapacity21                       = 21
-	ArbitraryCapacity22                       = 22
-	ArbitraryCapacity23                       = 23
-	ArbitraryCapacity24                       = 24
-	ArbitraryCapacity25                       = 25
-	ArbitraryCapacity26                       = 26
-	ArbitraryCapacity27                       = 27
-	ArbitraryCapacity28                       = 28
-	ArbitraryCapacity29                       = 29
-	ArbitraryCapacity30                       = 30
-	ArbitraryCapacity31                       = 31
-	ArbitraryCapacity32                       = 32
-	ArbitraryCapacity64                       = 64
-	ArbitraryCapacity50                       = 50
-	ArbitraryCapacity100                      = 100
-	ArbitraryCapacity150                      = 150
-	ArbitraryCapacity200                      = 200
-	ArbitraryCapacity250                      = 250
-	ArbitraryCapacity500                      = 500
-	ArbitraryCapacity1000                     = 1000
-	ArbitraryCapacity1500                     = 1500
-	ArbitraryCapacity2000                     = 2000
-	ArbitraryCapacity2500                     = 2500
-	ArbitraryCapacity3000                     = 3000
-	ArbitraryCapacity5000                     = 5000
-	ArbitraryCapacity10000                    = 10000
 	LineFeedUnix                              = '\n'
 	CarriageReturn                            = '\r'
 	FormFeed                                  = '\f'
@@ -130,6 +95,7 @@ const (
 	Dash                                      = "-"
 	DoubleDash                                = "--"
 	DoubleUnderscore                          = "__"
+	HypenAngelRight                           = "->"
 	GoPath                                    = "GOPATH"
 	GoBinPath                                 = "GOBIN"
 	Go111ModuleEnvironment                    = "GO111MODULE"
@@ -159,6 +125,8 @@ const (
 	MinusOne                                  = -1
 	InvalidValue                              = -1
 	WildcardSymbol                            = "*"
+	WildcardChar                              = '*'
+	WildcardRune                      rune    = '*'
 	ParenthesisStart                          = "("
 	ParenthesisEnd                            = ")"
 	CurlyStart                                = "{"
@@ -192,6 +160,7 @@ const (
 	NoItemsSqaure                             = "[No Items]"
 	NoElementsSqaure                          = "[No Element]"
 	DoubleNewLine                             = "\n\n"
+	DotSymbol                                 = "."
 	DotChar                           byte    = '.'
 	ForwardChar                       byte    = '/'
 	BackwardChar                      byte    = '\\'
@@ -220,6 +189,9 @@ const (
 	SemicolonChar                     byte    = ';'
 	SpaceChar                         byte    = ' '
 	AtChar                            byte    = '@'
+	EqualChar                         byte    = '='
+	LeftLessChar                      byte    = '<'
+	LeftGreaterChar                   byte    = '>'
 	DotRune                           rune    = '.'
 	ForwardRune                       rune    = '/'
 	BackwardRune                      rune    = '\\'
@@ -246,6 +218,9 @@ const (
 	ColonRune                         rune    = ':'
 	SemicolonRune                     rune    = ';'
 	SpaceRune                         rune    = ' '
+	EqualRune                         rune    = '='
+	LeftLessRune                      rune    = '<'
+	LeftGreaterRune                   rune    = '>'
 	MinusTwo                                  = -2
 	MinusThree                                = -3
 	MinusFour                                 = -4
@@ -314,6 +289,8 @@ const (
 	ArgumentForReleaseDate                    = "-v"
 	LsbCommand                                = "lsb_release"
 	UnameCommand                              = "uname"
+	ChmodCommand                              = "chmod"
+	RecursiveCommandFlag                      = "-R"
 	VersionCommandForCmd                      = "ver.exe"
 	CompareEqual                              = 0
 	CompareLess                               = -1
@@ -333,4 +310,11 @@ const (
 	N8String                                  = "8"
 	N9String                                  = "9"
 	N10String                                 = "10"
+	KeyValuuePariSimpleFormat                 = "{ Key (Type - %T): %v} - { Value (Type - %T) : %v  }"
+	MaxUint                                   = ^uint(0) // https://stackoverflow.com/a/6878625
+	MinUint                                   = 0
+	MaxInt                                    = int(MaxUint >> 1) // https://stackoverflow.com/a/6878625, 64 bit 9223372036854775807, 32bit, 2147483647
+	MinInt                                    = -MaxInt - 1
+	NewLineUnixChar                   byte    = '\n'
+	NewLineUnixRune                   rune    = '\n'
 )

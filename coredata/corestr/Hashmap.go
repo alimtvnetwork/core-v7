@@ -279,7 +279,7 @@ func (hashmap *Hashmap) AddOrUpdateCollection(
 	return hashmap
 }
 
-// Keep result from filter.
+// AddsOrUpdatesAnyUsingFilter Keep result from filter.
 func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilter(
 	filter IsKeyAnyValueFilter,
 	pairs ...KeyAnyValuePair,
@@ -304,7 +304,7 @@ func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilter(
 	return hashmap
 }
 
-// Keep result from filter.
+// AddsOrUpdatesAnyUsingFilterLock Keep result from filter.
 func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
 	filter IsKeyAnyValueFilter,
 	pairs ...KeyAnyValuePair,
@@ -394,7 +394,7 @@ func (hashmap *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 	return true
 }
 
-// return false on items is nil or empty.
+// HasAllCollectionItems return false on items is nil or empty.
 func (hashmap *Hashmap) HasAllCollectionItems(
 	collection *Collection,
 ) bool {
@@ -442,7 +442,7 @@ func (hashmap *Hashmap) HasWithLock(key string) bool {
 	return isFound
 }
 
-// must return slice.
+// GetKeysFilteredItems must return slice.
 func (hashmap *Hashmap) GetKeysFilteredItems(
 	filter IsStringFilter,
 ) *[]string {
@@ -477,7 +477,7 @@ func (hashmap *Hashmap) GetKeysFilteredItems(
 	return &filteredList
 }
 
-// must return items.
+// GetKeysFilteredCollection must return items.
 func (hashmap *Hashmap) GetKeysFilteredCollection(
 	filter IsStringFilter,
 ) *Collection {
@@ -689,7 +689,7 @@ func (hashmap *Hashmap) KeysLock() *[]string {
 	return &keys
 }
 
-// a slice must returned
+// ValuesListCopyPtrLock  a slice must returned
 func (hashmap *Hashmap) ValuesListCopyPtrLock() *[]string {
 	hashmap.Lock()
 	defer hashmap.Unlock()
@@ -719,7 +719,7 @@ func (hashmap *Hashmap) setCached() {
 	hashmap.cachedList = &list
 }
 
-// Create a new items with all lower strings
+// ValuesToLower Create a new items with all lower strings
 func (hashmap *Hashmap) ValuesToLower() *Hashmap {
 	newMap := make(map[string]string, hashmap.Length())
 
@@ -849,7 +849,7 @@ func (hashmap *Hashmap) StringLock() string {
 			commonJoiner)
 }
 
-// Get all Collection except the mentioned ones.
+// GetValuesExceptKeysInHashset Get all Collection except the mentioned ones.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this Hashmap
@@ -879,7 +879,7 @@ func (hashmap *Hashmap) GetValuesExceptKeysInHashset(
 	return &finalList
 }
 
-// Get all items except the mentioned ones.
+// GetValuesKeysExcept Get all items except the mentioned ones.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this Hashmap
@@ -900,7 +900,7 @@ func (hashmap *Hashmap) GetValuesKeysExcept(
 		newCollection)
 }
 
-// Get all Hashmap items except the mentioned ones in collection.
+// GetAllExceptCollection Get all Hashmap items except the mentioned ones in collection.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this Hashmap
@@ -916,7 +916,7 @@ func (hashmap *Hashmap) GetAllExceptCollection(
 		collection.HashsetAsIs())
 }
 
-// Get all items except the mentioned ones in collectionPtr.
+// GetAllExceptCollectionPtr Get all items except the mentioned ones in collectionPtr.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this Hashmap
@@ -932,14 +932,13 @@ func (hashmap *Hashmap) GetAllExceptCollectionPtr(
 		collectionPtr.HashsetAsIs())
 }
 
-// Joins values
+// Join values
 func (hashmap *Hashmap) Join(
 	separator string,
 ) string {
 	return strings.Join(*hashmap.ValuesListPtr(), separator)
 }
 
-// Joins Keys
 func (hashmap *Hashmap) JoinKeys(
 	separator string,
 ) string {
@@ -983,7 +982,7 @@ func (hashmap *Hashmap) Json() *corejson.Result {
 	return corejson.NewPtr(jsonBytes, err)
 }
 
-// It will not update the self but creates a new one.
+// ParseInjectUsingJson It will not update the self but creates a new one.
 func (hashmap *Hashmap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashmap, error) {
@@ -1000,7 +999,7 @@ func (hashmap *Hashmap) ParseInjectUsingJson(
 	return hashmap, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (hashmap *Hashmap) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *Hashmap {

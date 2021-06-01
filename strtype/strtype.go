@@ -1,35 +1,6 @@
 package strtype
 
-import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/msgtype"
-)
-
 type Variant string
-
-func GetSet(
-	isCondition bool,
-	trueValue Variant,
-	falseValue Variant,
-) Variant {
-	if isCondition {
-		return trueValue
-	}
-
-	return falseValue
-}
-
-func GetSetVariant(
-	isCondition bool,
-	trueValue byte,
-	falseValue byte,
-) Variant {
-	if isCondition {
-		return Variant(trueValue)
-	}
-
-	return Variant(falseValue)
-}
 
 func (v Variant) Value() string {
 	return string(v)
@@ -39,7 +10,7 @@ func (v Variant) StringValue() string {
 	return string(v)
 }
 
-// v + n
+// Add v + n
 func (v Variant) Add(n string) Variant {
 	return Variant(v.Value() + n)
 }
@@ -52,48 +23,22 @@ func (v Variant) IsEqual(n string) bool {
 	return v.Value() == n
 }
 
-// v.Value() > n
+// IsGreater v.Value() > n
 func (v Variant) IsGreater(n string) bool {
 	return v.Value() > n
 }
 
-// v.Value() >= n
+// IsGreaterEqual v.Value() >= n
 func (v Variant) IsGreaterEqual(n string) bool {
 	return v.Value() >= n
 }
 
-// v.Value() < n
+// IsLess v.Value() < n
 func (v Variant) IsLess(n string) bool {
 	return v.Value() < n
 }
 
-// v.Value() <= n
+// IsLessEqual v.Value() <= n
 func (v Variant) IsLessEqual(n string) bool {
 	return v.Value() <= n
-}
-
-// Here left is v, and right is `n`
-func (v Variant) IsTrue(n string, compare corecomparator.Compare) bool {
-	switch compare {
-	case corecomparator.Equal:
-		return v.IsEqual(n)
-	case corecomparator.LeftGreater:
-		return v.IsGreater(n)
-	case corecomparator.LeftGreaterEqual:
-		return v.IsGreaterEqual(n)
-	case corecomparator.LeftLess:
-		return v.IsLess(n)
-	case corecomparator.LeftLessEqual:
-		return v.IsLessEqual(n)
-	case corecomparator.NotEqual:
-		return !v.IsEqual(n)
-	default:
-		msg := msgtype.RangeNotMeet(
-			msgtype.ComparatorShouldBeWithinRanghe.String(),
-			corecomparator.Min(),
-			corecomparator.Max(),
-			compare.Ranges())
-
-		panic(msg)
-	}
 }

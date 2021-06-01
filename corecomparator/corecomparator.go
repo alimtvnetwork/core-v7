@@ -13,14 +13,6 @@ const (
 	NotEqual
 )
 
-func Min() Compare {
-	return Equal
-}
-
-func Max() Compare {
-	return NotEqual
-}
-
 func (compare Compare) Is(other Compare) bool {
 	return compare == other
 }

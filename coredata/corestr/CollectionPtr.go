@@ -14,12 +14,51 @@ import (
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/coresort/strsort"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/internal/stringutil"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type CollectionPtr struct {
 	items *[]*string
 	sync.Mutex
+}
+
+func (collectionPtr *CollectionPtr) Count() int {
+	return len(*collectionPtr.items)
+}
+
+func (collectionPtr *CollectionPtr) HasAnyItem() bool {
+	return len(*collectionPtr.items) > 0
+}
+
+func (collectionPtr *CollectionPtr) LastIndex() int {
+	return len(*collectionPtr.items) - 1
+}
+
+func (collectionPtr *CollectionPtr) HasIndex(index int) bool {
+	return collectionPtr.LastIndex() >= index
+}
+
+func (collectionPtr *CollectionPtr) ListStringsPtr() *[]string {
+	return collectionPtr.SimpleListPtr()
+}
+
+func (collectionPtr *CollectionPtr) ListStrings() []string {
+	return *collectionPtr.SimpleListPtr()
+}
+
+func (collectionPtr *CollectionPtr) StringJSON() string {
+	return collectionPtr.Json().JsonString()
+}
+
+func (collectionPtr *CollectionPtr) RemoveAt(index int) (isSuccess bool) {
+	if !collectionPtr.HasIndex(index) {
+		return false
+	}
+
+	collectionPtr.ChainRemoveAt(index)
+
+	return true
 }
 
 func (collectionPtr *CollectionPtr) Capacity() int {
@@ -152,6 +191,76 @@ func (collectionPtr *CollectionPtr) Add(str string) *CollectionPtr {
 	*collectionPtr.items = append(
 		*collectionPtr.items,
 		&str)
+
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) AddNonEmptyWhitespace(str string) *CollectionPtr {
+	if str == "" {
+		return collectionPtr
+	}
+
+	if stringutil.IsEmptyOrWhitespace(str) {
+		return collectionPtr
+	}
+
+	*collectionPtr.items = append(
+		*collectionPtr.items,
+		&str)
+
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) AddIf(isAdd bool, addingStringPtr *string) *CollectionPtr {
+	if !isAdd {
+		return collectionPtr
+	}
+
+	*collectionPtr.items = append(
+		*collectionPtr.items,
+		addingStringPtr)
+
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) AddIfMany(
+	isAdd bool,
+	addingStrings ...*string,
+) *CollectionPtr {
+	if !isAdd {
+		return collectionPtr
+	}
+
+	*collectionPtr.items = append(
+		*collectionPtr.items,
+		addingStrings...)
+
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) AddFunc(f func() *string) *CollectionPtr {
+	*collectionPtr.items = append(
+		*collectionPtr.items,
+		f())
+
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) AddFuncErr(
+	funcReturnsError func() (result *string, err error),
+	errHandler func(errInput error),
+) *CollectionPtr {
+	r, err := funcReturnsError()
+
+	if err != nil {
+		errHandler(err)
+
+		return collectionPtr
+	}
+
+	*collectionPtr.items = append(
+		*collectionPtr.items,
+		r)
 
 	return collectionPtr
 }
@@ -507,7 +616,7 @@ func (collectionPtr *CollectionPtr) InsertItemsAt(index int, stringItems *[]stri
 	return collectionPtr
 }
 
-func (collectionPtr *CollectionPtr) RemoveAt(index int) *CollectionPtr {
+func (collectionPtr *CollectionPtr) ChainRemoveAt(index int) *CollectionPtr {
 	*collectionPtr.items = append(
 		(*collectionPtr.items)[:index],
 		(*collectionPtr.items)[index+1:]...)
@@ -515,7 +624,7 @@ func (collectionPtr *CollectionPtr) RemoveAt(index int) *CollectionPtr {
 	return collectionPtr
 }
 
-// creates a new collection without the indexes mentioned.
+// RemoveItemsIndexes creates a new collection without the indexes mentioned.
 //
 // it is better to filter out than remove.
 func (collectionPtr *CollectionPtr) RemoveItemsIndexes(
@@ -530,7 +639,7 @@ func (collectionPtr *CollectionPtr) RemoveItemsIndexes(
 		RemoveItemsIndexesPtr(isIgnoreRemoveError, &indexes)
 }
 
-// creates a new collection without the indexes mentioned.
+// RemoveItemsIndexesPtr creates a new collection without the indexes mentioned.
 //
 // it is better to filter out than remove.
 func (collectionPtr *CollectionPtr) RemoveItemsIndexesPtr(
@@ -653,7 +762,7 @@ func (collectionPtr *CollectionPtr) AppendCollectionPtrsPtr(
 	return collectionPtr
 }
 
-// Continue on nil
+// AppendAnysLock Continue on nil
 func (collectionPtr *CollectionPtr) AppendAnysLock(
 	anys ...interface{},
 ) *CollectionPtr {
@@ -682,7 +791,7 @@ func (collectionPtr *CollectionPtr) AppendAnysLock(
 	return collectionPtr
 }
 
-// Continue on nil
+// AppendAnys Continue on nil
 func (collectionPtr *CollectionPtr) AppendAnys(
 	anys ...interface{},
 ) *CollectionPtr {
@@ -712,7 +821,7 @@ func (collectionPtr *CollectionPtr) AppendAnys(
 	return collectionPtr
 }
 
-// Skip on nil
+// AppendAnysUsingFilter Skip on nil
 func (collectionPtr *CollectionPtr) AppendAnysUsingFilter(
 	filter IsStringFilter,
 	anys ...interface{},
@@ -752,7 +861,7 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilter(
 	return collectionPtr
 }
 
-// Skip on nil
+// AppendAnysUsingFilterLock Skip on nil
 func (collectionPtr *CollectionPtr) AppendAnysUsingFilterLock(
 	filter IsStringFilter,
 	anys ...interface{},
@@ -791,7 +900,7 @@ func (collectionPtr *CollectionPtr) AppendAnysUsingFilterLock(
 	return collectionPtr
 }
 
-// Continue on nil
+// AppendNonEmptyAnys Continue on nil
 func (collectionPtr *CollectionPtr) AppendNonEmptyAnys(
 	anys ...interface{},
 ) *CollectionPtr {
@@ -821,7 +930,7 @@ func (collectionPtr *CollectionPtr) AppendNonEmptyAnys(
 	return collectionPtr
 }
 
-// adds nil
+// AddsPtr adds nil
 func (collectionPtr *CollectionPtr) AddsPtr(
 	itemsPtr ...*string,
 ) *CollectionPtr {
@@ -889,7 +998,7 @@ func (collectionPtr *CollectionPtr) UniqueBoolMapLock(
 	return collectionPtr.UniqueBoolMap(isAddEmptyStringOnNil)
 }
 
-// continue on nil
+// UniqueBoolMap continue on nil
 func (collectionPtr *CollectionPtr) UniqueBoolMap(
 	isAddEmptyStringOnNil bool,
 ) *map[string]bool {
@@ -956,7 +1065,7 @@ func (collectionPtr *CollectionPtr) List() []*string {
 	return *collectionPtr.items
 }
 
-// must return a slice
+// FilterSimpleArray must return a slice
 func (collectionPtr *CollectionPtr) FilterSimpleArray(
 	filter IsStringPointerFilter,
 ) *[]string {
@@ -981,7 +1090,7 @@ func (collectionPtr *CollectionPtr) FilterSimpleArray(
 	return &list
 }
 
-// assumed wg is added to be done here.
+// FilterSimpleArrayLock assumed wg is added to be done here.
 //
 // must return a slice
 func (collectionPtr *CollectionPtr) FilterSimpleArrayLock(
@@ -1013,7 +1122,7 @@ func (collectionPtr *CollectionPtr) FilterSimpleArrayLock(
 	return &list
 }
 
-// must return a slice
+// Filter must return a slice
 func (collectionPtr *CollectionPtr) Filter(
 	filter IsStringPointerFilter,
 ) *[]*string {
@@ -1038,7 +1147,7 @@ func (collectionPtr *CollectionPtr) Filter(
 	return &list
 }
 
-// must return a slice
+// FilterLock must return a slice
 func (collectionPtr *CollectionPtr) FilterLock(
 	filter IsStringPointerFilter,
 ) *[]*string {
@@ -1066,7 +1175,7 @@ func (collectionPtr *CollectionPtr) FilterLock(
 	return &list
 }
 
-// must return a items
+// FilteredCollection must return a items
 func (collectionPtr *CollectionPtr) FilteredCollection(
 	filter IsStringPointerFilter,
 ) *CollectionPtr {
@@ -1076,7 +1185,7 @@ func (collectionPtr *CollectionPtr) FilteredCollection(
 		constants.Zero)
 }
 
-// must return a items
+// FilteredCollectionLock must return a items
 func (collectionPtr *CollectionPtr) FilteredCollectionLock(
 	filter IsStringPointerFilter,
 ) *CollectionPtr {
@@ -1088,7 +1197,7 @@ func (collectionPtr *CollectionPtr) FilteredCollectionLock(
 		constants.Zero)
 }
 
-// must return a slice
+// FilterPtrLock must return a slice
 func (collectionPtr *CollectionPtr) FilterPtrLock(
 	filterPtr IsStringPointerFilter,
 ) *[]*string {
@@ -1122,7 +1231,7 @@ func (collectionPtr *CollectionPtr) FilterPtrLock(
 	return &list
 }
 
-// must return a slice
+// FilterPtr must return a slice
 func (collectionPtr *CollectionPtr) FilterPtr(
 	filterPtr IsStringPointerFilter,
 ) *[]*string {
@@ -1147,7 +1256,7 @@ func (collectionPtr *CollectionPtr) FilterPtr(
 	return &list
 }
 
-// Get all items except the mentioned ones in itemsCollection.
+// GetAllExceptCollection Get all items except the mentioned ones in itemsCollection.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this collection
@@ -1179,7 +1288,7 @@ func (collectionPtr *CollectionPtr) GetAllExceptCollection(
 	return &finalList
 }
 
-// Get all items except the mentioned ones.
+// GetAllExcept Get all items except the mentioned ones.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this collection
@@ -1200,7 +1309,7 @@ func (collectionPtr *CollectionPtr) GetAllExcept(
 		newCollection)
 }
 
-// must return a slice
+// NonEmptySimpleListPtr must return a slice
 func (collectionPtr *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 	if collectionPtr.IsEmpty() {
 		return &([]string{})
@@ -1258,12 +1367,12 @@ func (collectionPtr *CollectionPtr) SimpleListPtrLock() *[]string {
 		collectionPtr.items)
 }
 
-// direct return pointer
+// ListPtr direct return pointer
 func (collectionPtr *CollectionPtr) ListPtr() *[]*string {
 	return collectionPtr.items
 }
 
-// returns a copy of the items
+// ListCopyPtrLock returns a copy of the items
 //
 // must return a slice
 func (collectionPtr *CollectionPtr) ListCopyPtrLock() *[]*string {
@@ -1402,7 +1511,7 @@ func (collectionPtr *CollectionPtr) FirstOrDefault() string {
 	return *(*collectionPtr.items)[0]
 }
 
-// use One based index
+// Take use One based index
 func (collectionPtr *CollectionPtr) Take(
 	take int,
 ) *CollectionPtr {
@@ -1423,7 +1532,7 @@ func (collectionPtr *CollectionPtr) Take(
 		constants.Zero)
 }
 
-// use One based index
+// Skip use One based index
 func (collectionPtr *CollectionPtr) Skip(
 	skip int,
 ) *CollectionPtr {
@@ -1486,7 +1595,7 @@ func (collectionPtr *CollectionPtr) GetPagedCollection(
 	return collectionOfCollection
 }
 
-// PageIndex is one based index. Should be above or equal 1
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
 func (collectionPtr *CollectionPtr) GetSinglePageCollection(
 	eachPageSize int,
 	pageIndex int,
@@ -1567,7 +1676,7 @@ func (collectionPtr *CollectionPtr) SafeIndexAtUsingLength(
 	return *pointer
 }
 
-// Creates new doesn't modify current collection
+// SortedListAsc Creates new doesn't modify current collection
 func (collectionPtr *CollectionPtr) SortedListAsc() *[]string {
 	if collectionPtr.IsEmpty() {
 		return &[]string{}
@@ -1579,7 +1688,7 @@ func (collectionPtr *CollectionPtr) SortedListAsc() *[]string {
 	return list
 }
 
-// mutates current collection
+// SortedAsc mutates current collection
 func (collectionPtr *CollectionPtr) SortedAsc() *CollectionPtr {
 	if collectionPtr.IsEmpty() {
 		return collectionPtr
@@ -1590,7 +1699,7 @@ func (collectionPtr *CollectionPtr) SortedAsc() *CollectionPtr {
 	return collectionPtr
 }
 
-// mutates current collection
+// SortedAscLock mutates current collection
 func (collectionPtr *CollectionPtr) SortedAscLock() *CollectionPtr {
 	if collectionPtr.IsEmptyLock() {
 		return collectionPtr
@@ -1604,7 +1713,7 @@ func (collectionPtr *CollectionPtr) SortedAscLock() *CollectionPtr {
 	return collectionPtr
 }
 
-// Creates new one.
+// SortedListDsc Creates new one.
 func (collectionPtr *CollectionPtr) SortedListDsc() *[]string {
 	list := collectionPtr.SortedListAsc()
 	length := len(*list)
@@ -1619,7 +1728,7 @@ func (collectionPtr *CollectionPtr) SortedListDsc() *[]string {
 	return list
 }
 
-// mutates itself.
+// SortedDsc mutates itself.
 func (collectionPtr *CollectionPtr) SortedDsc() *CollectionPtr {
 	list := collectionPtr.items
 	length := len(*list)
@@ -1654,7 +1763,7 @@ func (collectionPtr *CollectionPtr) IsContainsPtr(
 	return false
 }
 
-// nil will return false.
+// GetHashsetPlusHasAll nil will return false.
 func (collectionPtr *CollectionPtr) GetHashsetPlusHasAll(
 	items *[]string,
 ) (*Hashset, bool) {
@@ -1667,7 +1776,7 @@ func (collectionPtr *CollectionPtr) GetHashsetPlusHasAll(
 	return hashset, hashset.HasAllStringsPtr(items)
 }
 
-// nil will return false.
+// IsContainsAllPtr nil will return false.
 func (collectionPtr *CollectionPtr) IsContainsAllPtr(
 	items *[]string,
 ) bool {
@@ -1688,7 +1797,7 @@ func (collectionPtr *CollectionPtr) IsContainsAllPtr(
 	return true
 }
 
-// nil will return false.
+// IsContainsAll nil will return false.
 func (collectionPtr *CollectionPtr) IsContainsAll(
 	items ...string,
 ) bool {
@@ -1699,7 +1808,7 @@ func (collectionPtr *CollectionPtr) IsContainsAll(
 	return collectionPtr.IsContainsAllPtr(&items)
 }
 
-// nil will return false.
+// IsContainsAllLock IsContainsAllLock nil will return false.
 func (collectionPtr *CollectionPtr) IsContainsAllLock(
 	items ...string,
 ) bool {
@@ -1798,7 +1907,7 @@ func (collectionPtr *CollectionPtr) AddCapacity(
 	return collectionPtr.Resize(currentCapacity)
 }
 
-// Only resize if capacity is bigger than the current one
+// Resize Only resize if capacity is bigger than the current one
 // Warning changes current pointer with new one.
 func (collectionPtr *CollectionPtr) Resize(
 	newCapacity int,
@@ -1895,7 +2004,7 @@ func (collectionPtr *CollectionPtr) ParseInjectUsingJson(
 	return collectionPtr, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (collectionPtr *CollectionPtr) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *CollectionPtr {
@@ -1928,5 +2037,17 @@ func (collectionPtr *CollectionPtr) AsJsonParseSelfInjector() corejson.JsonParse
 }
 
 func (collectionPtr *CollectionPtr) AsJsonMarshaller() corejson.JsonMarshaller {
+	return collectionPtr
+}
+
+func (collectionPtr *CollectionPtr) StringJson() (jsonString string, err error) {
+	return collectionPtr.Json().JsonString(), nil
+}
+
+func (collectionPtr *CollectionPtr) StringJsonMust() string {
+	return collectionPtr.Json().JsonString()
+}
+
+func (collectionPtr *CollectionPtr) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return collectionPtr
 }

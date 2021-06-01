@@ -3,6 +3,8 @@ package msgtype
 import (
 	"errors"
 	"strings"
+
+	"gitlab.com/evatix-go/core/constants"
 )
 
 type Variation string
@@ -32,6 +34,7 @@ const (
 	UnsupportedInUnix                      Variation = "Unsupported : given request is not supported in any of Unix (including Linux, macOs, CentOS etc) operating versions!"
 	UnsupportedInWindows                   Variation = "Unsupported : given request is not supported in any of Windows operating system versions!"
 	FailedToExecute                        Variation = "Failed : request failed to execute!"
+	FailedToCreateCmd                      Variation = "Failed : To create cmd, command process call. Nil pointer! Cannot proceed further."
 	FailedToParse                          Variation = "Failed : request failed to parse!"
 	FailedToConvert                        Variation = "Failed : request failed to convert!"
 	CannotRemoveIndexesFromEmptyCollection Variation = "Invalid operation: cannot remove indexes (either indexes are nil) or cannot remove indexes from the empty collection."
@@ -50,6 +53,8 @@ const (
 	EmptyArrayMessage                      Variation = "Empty array, which is unexpected."
 	EmptyItemsMessage                      Variation = "Empty items, which is unexpected."
 	FileErrorMessage                       Variation = "File error, which is unexpected."
+	FileChmodApplyMessage                  Variation = "File chmod apply error."
+	FileChmodConvertFailedMessage          Variation = "File chmod convert failed to octal."
 	UnexpectedValueErrorMessage            Variation = "Unexpected value error, which is unexpected."
 	UnexpectedTypeErrorMessage             Variation = "Unexpected type error, which is unexpected."
 	IntegerOutOfRangeMessage               Variation = "Integer out of range. Range, which is unexpected."
@@ -58,13 +63,17 @@ const (
 	ShouldBeGreaterThanEqualMessage        Variation = "Values or value should be greater or equal to the reference."
 	UnixIgnoreMessage                      Variation = "Windows tests ignored in Unix."
 	WindowsIgnoreMessage                   Variation = "Unix tests ignored in Windows."
-	ComparatorShouldBeWithinRanghe         Variation = "Comparator should be within the range."
+	ComparatorShouldBeWithinRange          Variation = "Comparator should be within the range."
+	EnumValuesOutOfRange                   Variation = "Out of Range / Invalid Range: Enum values are are not within the range as per the expectation."
 	SearchInputEmpty                       Variation = "Search Input is either null or empty."
 	SearchInputOrSearchTermEmpty           Variation = "Search Input or search term either null or empty."
 	EmptyResultCannotMakeJson              Variation = "Empty result, cannot make json out of it."
 	MarshallingFailed                      Variation = "Failed to marshal / parse / serialize."
 	UnMarshallingFailed                    Variation = "Failed to unmarshal / parse / deserialize. Failed to convert to object from serialized data source."
 	ParsingFailed                          Variation = "Failed to parse."
+	TypeMismatch                           Variation = "TypeMismatch : Type is not as expected."
+	NotImplemented                         Variation = "Not Implemented : Feature / method is not implemented yet."
+	JsonResultBytesAreNilOrEmpty           Variation = "Json Result: Bytes data either nil or empty, cannot process the data for the given resource."
 )
 
 func GetSet(
@@ -93,6 +102,17 @@ func GetSetVariant(
 
 func (variation Variation) String() string {
 	return string(variation)
+}
+
+func (variation Variation) CombineWithAnother(
+	another Variation,
+	otherMsg string,
+	reference interface{},
+) Variation {
+	return Variation(CombineWithMsgType(
+		variation,
+		otherMsg+constants.NewLineUnix+another.String(),
+		reference))
 }
 
 func (variation Variation) Combine(otherMsg string, reference interface{}) string {

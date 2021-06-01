@@ -9,7 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/converters/coreconverted"
 )
 
-// On fail use the default int
+// StringsToIntegersWithDefaults On fail use the default int
 func StringsToIntegersWithDefaults(
 	strArray *[]string,
 	defaultInt int,

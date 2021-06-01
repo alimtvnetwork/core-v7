@@ -1,6 +1,6 @@
 package converters
 
-// handle converts from processor func
+// StringsToIntegersConditional handle converts from processor func
 func StringsToIntegersConditional(
 	strArray *[]string,
 	processor func(in string) (out int, isTake, isBreak bool),

@@ -14,11 +14,10 @@ const (
 	RFC3339     Layout = "2006-01-02T15:04:05Z07:00"
 	RFC3339Nano Layout = "2006-01-02T15:04:05.999999999Z07:00"
 	Kitchen     Layout = "3:04PM"
-	// Handy time stamps.
-	Stamp      Layout = "Jan _2 15:04:05"
-	StampMilli Layout = "Jan _2 15:04:05.000"
-	StampMicro Layout = "Jan _2 15:04:05.000000"
-	StampNano  Layout = "Jan _2 15:04:05.000000000"
+	Stamp       Layout = "Jan _2 15:04:05"
+	StampMilli  Layout = "Jan _2 15:04:05.000"
+	StampMicro  Layout = "Jan _2 15:04:05.000000"
+	StampNano   Layout = "Jan _2 15:04:05.000000000"
 )
 
 func (layout Layout) Value() string {

@@ -15,7 +15,7 @@ func RangeNotMeet(
 	rangeStr := ""
 
 	if wholeRange == nil {
-		rangeStr = fmt.Sprintf(rangeWithOutRangeFormat, rangeStart, rangeEnd)
+		rangeStr = fmt.Sprintf(rangeWithoutRangeFormat, rangeStart, rangeEnd)
 	} else {
 		rangeStr = fmt.Sprintf(rangeWithRangeFormat, rangeStart, rangeEnd, wholeRange)
 	}
@@ -23,7 +23,6 @@ func RangeNotMeet(
 	return OutOfRange.String() +
 		constants.Space +
 		otherMsg +
-		constants.Space +
 		ReferenceStart +
 		rangeStr +
 		ReferenceEnd

@@ -8,7 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
-// mode length needs to 3, not more not less
+// New mode length needs to 3, not more not less
 // mode chars should be digits only (0-7)
 // example "777", "755", "655"
 func New(mode string) (Wrapper, error) {
@@ -44,7 +44,7 @@ func New(mode string) (Wrapper, error) {
 		allBytes[OtherIndex]), nil
 }
 
-// each byte should not be more than 7
+// NewUsingBytes each byte should not be more than 7
 func NewUsingBytes(allBytes [3]byte) Wrapper {
 	return NewUsingByte(
 		allBytes[OwnerIndex],
@@ -52,24 +52,35 @@ func NewUsingBytes(allBytes [3]byte) Wrapper {
 		allBytes[OtherIndex])
 }
 
-func NewUsingFileMode(fileMode os.FileMode) Wrapper {
+func NewUsingFileModePtr(fileMode os.FileMode) *Wrapper {
 	str := fileMode.String()
-
 	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
 	owner := str[1:4]
 	group := str[4:7]
 	other := str[7:10]
 
-	wrapper := Wrapper{
+	return &Wrapper{
 		Owner: NewAttributeUsingRwx(owner),
 		Group: NewAttributeUsingRwx(group),
 		Other: NewAttributeUsingRwx(other),
 	}
-
-	return wrapper
 }
 
-// each byte should not be more than 7
+func NewUsingFileMode(fileMode os.FileMode) Wrapper {
+	str := fileMode.String()
+	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
+	owner := str[1:4]
+	group := str[4:7]
+	other := str[7:10]
+
+	return Wrapper{
+		Owner: NewAttributeUsingRwx(owner),
+		Group: NewAttributeUsingRwx(group),
+		Other: NewAttributeUsingRwx(other),
+	}
+}
+
+// NewUsingByte each byte should not be more than 7
 func NewUsingByte(owner, group, other byte) Wrapper {
 	wrapper := Wrapper{
 		Owner: NewAttributeUsingByte(owner),
@@ -100,7 +111,7 @@ func NewUsingAttrs(owner, group, other Attribute) Wrapper {
 	return wrapper
 }
 
-// Format "-rwxrwxrwx"
+// NewUsingHyphenedRwxes Format "-rwxrwxrwx"
 //
 // eg. owener all enabled only "-rwx------"
 //
@@ -123,7 +134,7 @@ func NewUsingHyphenedRwxes(hyphenedRwxRwxRwx string) (Wrapper, error) {
 	return NewUsingRwxes(hyphenedRwxRwxRwx[constants.One:])
 }
 
-// Format "rwxrwxrwx"
+// NewUsingRwxes Format "rwxrwxrwx"
 //
 // eg. owener all enabled only "rwx------"
 //

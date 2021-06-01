@@ -170,4 +170,7 @@ var (
 	noItemsSqaure                     = NoItemsSqaure
 	noElementsSqaure                  = NoElementsSqaure
 	doubleNewLine                     = DoubleNewLine
+	NewLineBytes                      = []byte(NewLine)
+	NewLineUnixBytes                  = []byte(NewLineUnix)
+	NewLineWindowsBytes               = []byte(NewLineWindows)
 )

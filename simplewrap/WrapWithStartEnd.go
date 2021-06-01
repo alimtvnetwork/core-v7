@@ -1,11 +1,11 @@
 package simplewrap
 
-// wrapper + source + wrapper
+// WithStartEnd wrapper + source + wrapper
 func WithStartEnd(wrapper, source string) string {
 	return wrapper + source + wrapper
 }
 
-// wrapper + source + wrapper
+// WithStartEndPtr wrapper + source + wrapper
 func WithStartEndPtr(wrapper, source *string) *string {
 	final := *wrapper + *source + *wrapper
 

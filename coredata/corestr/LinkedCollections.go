@@ -59,7 +59,7 @@ func (linkedCollections *LinkedCollections) Length() int {
 	return linkedCollections.length
 }
 
-// including all nested ones
+// AllIndividualItemsLength including all nested ones
 func (linkedCollections *LinkedCollections) AllIndividualItemsLength() int {
 	allLengthSum := 0
 
@@ -172,7 +172,7 @@ func (linkedCollections *LinkedCollections) HasItems() bool {
 		linkedCollections.length > 0
 }
 
-// BigO(n) expensive operation.
+// InsertAt BigO(n) expensive operation.
 func (linkedCollections *LinkedCollections) InsertAt(
 	index int,
 	collection *Collection,
@@ -202,7 +202,7 @@ func (linkedCollections *LinkedCollections) AddAsync(
 	return linkedCollections
 }
 
-// Append back
+// AddsAsyncOnComplete Append back
 func (linkedCollections *LinkedCollections) AddsAsyncOnComplete(
 	onComplete OnCompleteLinkedCollections,
 	isSkipOnNil bool,
@@ -220,7 +220,7 @@ func (linkedCollections *LinkedCollections) AddsAsyncOnComplete(
 	return linkedCollections
 }
 
-// Append back
+// AddsUsingProcessorAsyncOnComplete Append back
 func (linkedCollections *LinkedCollections) AddsUsingProcessorAsyncOnComplete(
 	onComplete OnCompleteLinkedCollections,
 	processor AnyToCollectionProcessor,
@@ -252,7 +252,7 @@ func (linkedCollections *LinkedCollections) AddsUsingProcessorAsyncOnComplete(
 	return linkedCollections
 }
 
-// Append back
+// AddsUsingProcessorAsync Append back
 func (linkedCollections *LinkedCollections) AddsUsingProcessorAsync(
 	wg *sync.WaitGroup,
 	processor AnyToCollectionProcessor,
@@ -448,7 +448,7 @@ func (linkedCollections *LinkedCollections) AttachWithNode(
 	return nil
 }
 
-// iSkipOnNil
+// AddCollectionToNode iSkipOnNil
 func (linkedCollections *LinkedCollections) AddCollectionToNode(
 	isSkipOnNull bool,
 	node *LinkedCollectionNode,
@@ -765,7 +765,7 @@ func (linkedCollections *LinkedCollections) RemoveNode(
 	return linkedCollections.Loop(processor)
 }
 
-// iSkipOnNil
+// AppendCollections iSkipOnNil
 func (linkedCollections *LinkedCollections) AppendCollections(
 	isSkipOnNull bool,
 	collections ...*Collection,
@@ -786,7 +786,7 @@ func (linkedCollections *LinkedCollections) AppendCollections(
 	return linkedCollections
 }
 
-// iSkipOnNil
+// AppendCollectionsPointersLock iSkipOnNil
 func (linkedCollections *LinkedCollections) AppendCollectionsPointersLock(
 	isSkipOnNull bool,
 	collections *[]*Collection,
@@ -807,7 +807,7 @@ func (linkedCollections *LinkedCollections) AppendCollectionsPointersLock(
 	return linkedCollections
 }
 
-// iSkipOnNil
+// AppendCollectionsPointers iSkipOnNil
 func (linkedCollections *LinkedCollections) AppendCollectionsPointers(
 	isSkipOnNull bool,
 	collections *[]*Collection,
@@ -828,7 +828,7 @@ func (linkedCollections *LinkedCollections) AppendCollectionsPointers(
 	return linkedCollections
 }
 
-// iSkipOnNil
+// AddCollectionsToNodeAsync iSkipOnNil
 func (linkedCollections *LinkedCollections) AddCollectionsToNodeAsync(
 	isSkipOnNull bool,
 	wg *sync.WaitGroup,
@@ -854,7 +854,7 @@ func (linkedCollections *LinkedCollections) AddCollectionsToNodeAsync(
 	return linkedCollections
 }
 
-// iSkipOnNil
+// AddCollectionsToNode iSkipOnNil
 func (linkedCollections *LinkedCollections) AddCollectionsToNode(
 	isSkipOnNull bool,
 	node *LinkedCollectionNode,
@@ -1109,7 +1109,7 @@ func (linkedCollections *LinkedCollections) AddPointerStringsPtrAsync(
 	return linkedCollections
 }
 
-// skip on nil
+// AddCollection skip on nil
 func (linkedCollections *LinkedCollections) AddCollection(
 	collection *Collection,
 ) *LinkedCollections {
@@ -1177,7 +1177,7 @@ func (linkedCollections *LinkedCollections) ToCollectionsOfCollection(
 	return collection
 }
 
-// must return slice.
+// ListPtr must return slice.
 func (linkedCollections *LinkedCollections) ListPtr() *[]string {
 	return linkedCollections.
 		ToCollection(constants.ArbitraryCapacity5).

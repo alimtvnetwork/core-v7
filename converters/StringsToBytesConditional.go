@@ -1,6 +1,6 @@
 package converters
 
-// only take if isTake returns true, breaks and exits if isBreak to true
+// StringsToBytesConditional only take if isTake returns true, breaks and exits if isBreak to true
 func StringsToBytesConditional(
 	strArray *[]string,
 	processor func(in string) (out byte, isTake, isBreak bool),

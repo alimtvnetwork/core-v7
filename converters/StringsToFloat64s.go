@@ -6,7 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/constants/bitsize"
 )
 
-// panic if not a number
+// StringsToFloat64s panic if not a number
 func StringsToFloat64s(strArray *[]string) *[]float64 {
 	results := make([]float64, len(*strArray))
 

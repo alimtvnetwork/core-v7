@@ -1,5 +1,7 @@
 package chmodhelper
 
+// AttrVariant
+//
 // 1 - Execute true
 // 2 - Write true
 // 3 - Write + Execute true
@@ -20,7 +22,7 @@ const (
 	ReadWriteExecute AttrVariant = 7
 )
 
-// v > byte(attrVariant)
+// IsGreaterThan v > byte(attrVariant)
 func (attrVariant AttrVariant) IsGreaterThan(v byte) bool {
 	return v > byte(attrVariant)
 }

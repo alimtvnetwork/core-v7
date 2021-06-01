@@ -1,6 +1,6 @@
 package converters
 
-// panic if not a number or more than 255 or less than 0
+// StringsToBytes panic if not a number or more than 255 or less than 0
 func StringsToBytes(strArray *[]string) *[]byte {
 	results := make([]byte, len(*strArray))
 

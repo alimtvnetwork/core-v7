@@ -1,6 +1,8 @@
 package defaultcapacity
 
-import "gitlab.com/evatix-go/core/constants/percentconst"
+import (
+	"gitlab.com/evatix-go/core/constants/percentconst"
+)
 
 // Result must be positive possibleLen * multiplier + additionalCap.
 //

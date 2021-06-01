@@ -2,7 +2,7 @@ package converters
 
 import "strings"
 
-func StringToIntegerConditional(
+func StringToIntegersConditional(
 	stringInput,
 	separator string,
 	processor func(in string) (out int, isTake, isBreak bool),

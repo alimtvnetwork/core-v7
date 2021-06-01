@@ -79,7 +79,7 @@ func (receiver *NonChainedLinkedCollectionNodes) LastOrDefault() *LinkedCollecti
 	return (*receiver.items)[receiver.Length()-1]
 }
 
-// Warning Mutates data inside.
+// ApplyChaining Warning Mutates data inside.
 func (receiver *NonChainedLinkedCollectionNodes) ApplyChaining() *NonChainedLinkedCollectionNodes {
 	length := receiver.Length()
 	if length == 0 || receiver.isChainingApplied {

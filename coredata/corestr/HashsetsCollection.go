@@ -68,7 +68,7 @@ func (hashsetsCollection *HashsetsCollection) StringsList() *[]string {
 	return &stringsList
 }
 
-// items returns false
+// HasAll items returns false
 // hashsetsCollection empty returns false
 func (hashsetsCollection *HashsetsCollection) HasAll(items ...string) bool {
 	if hashsetsCollection.IsEmpty() || items == nil {
@@ -138,7 +138,7 @@ func (hashsetsCollection *HashsetsCollection) AddNonEmpty(
 	return hashsetsCollection
 }
 
-// nil will be skipped
+// Adds nil will be skipped
 func (hashsetsCollection *HashsetsCollection) Adds(
 	hashsets ...*Hashset,
 ) *HashsetsCollection {
@@ -263,7 +263,7 @@ func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJson(
 	return hashsetsCollection, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (hashsetsCollection *HashsetsCollection) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *HashsetsCollection {

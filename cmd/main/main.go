@@ -3,48 +3,83 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/chmodhelper"
+	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
 func main() {
-	items := &[]string{
-		"00",
-		"01",
-		"02",
-		"03",
-		"04",
-		"05",
-		"06",
-		"07",
-		"08",
-		"09",
-		"10",
-		"11",
-		"12",
-	}
-
-	// collectionPtr := corestr.NewCollectionPtrUsingStrings(items, 0)
-	collection := corestr.NewCollectionUsingStrings(items, false)
-	jsonResults := corejson.NewResultsCollectionUsingJsoners(1, collection)
-	jsonResultFromResults := jsonResults.Json()
-
-	fmt.Println(jsonResultFromResults.JsonString())
-
-	res2 := corejson.EmptyResultsCollection()
-
-	res2.ParseInjectUsingJson(jsonResultFromResults)
-
-	fmt.Println(res2.Json().JsonString())
-	collect2 := corestr.EmptyCollection()
-
-	// res2.InjectIntoAt(0, collect2)
-	// res2.UnmarshalAt(0, collect2)
-	res2.UnmarshalIntoSameIndex(collect2)
-
-	fmt.Println(collect2)
+	// items := &[]string{
+	// 	"00",
+	// 	"01",
+	// 	"02",
+	// 	"03",
+	// 	"04",
+	// 	"05",
+	// 	"06",
+	// 	"07",
+	// 	"08",
+	// 	"09",
+	// 	"10",
+	// 	"11",
+	// 	"12",
+	// }
+	//
+	// // collectionPtr := corestr.NewCollectionPtrUsingStrings(items, 0)
+	// collection := corestr.NewCollectionUsingStrings(items, false)
+	// jsonResults := corejson.NewResultsCollectionUsingJsoners(1, collection)
+	// jsonResultFromResults := jsonResults.Json()
+	//
+	// fmt.Println(jsonResultFromResults.JsonString())
+	//
+	// res2 := corejson.EmptyResultsCollection()
+	//
+	// res2.ParseInjectUsingJson(jsonResultFromResults)
+	//
+	// fmt.Println(res2.Json().JsonString())
+	// collect2 := corestr.EmptyCollection()
+	//
+	// // res2.InjectIntoAt(0, collect2)
+	// // res2.UnmarshalAt(0, collect2)
+	// res2.UnmarshalIntoSameIndex(collect2)
+	//
+	// fmt.Println(collect2)
 
 	// PrintCollection(collection)
+
+	moredata3 := map[int]string{1: "one", 2: "two", 3: "three", 4: "four"}
+	dynamicCollection := coredynamic.NewDynamicCollection(100)
+
+	dynamicCollection.AddAny(1, true)
+	dynamicCollection.AddAny(2, true)
+	dynamicCollection.AddAny(3, true)
+	dynamicCollection.AddAny(4, true)
+	dynamicCollection.AddAny(5, true)
+	dynamicCollection.AddAny(moredata3, true)
+	// maps, _ := result.
+	// 	MapToKeyVal()
+
+	// fmt.Printf(constants.SprintPropertyNameValueFormat, maps)
+	// fmt.Println(dynamicCollection.RemoveAt(1))
+	// fmt.Println(dynamicCollection.Length())
+	// fmt.Println(dynamicCollection.ListStrings())
+	// fmt.Println(dynamicCollection.StringJson())
+	// fmt.Println(dynamicCollection.At(2).IsPrimitive())
+	// fmt.Println(dynamicCollection.Items())
+	//
+	// _ = bytetype.Variant(1).RangesInvalidMessage()
+	// bt := bytetype.Variant(1)
+	// fmt.Println(bt.StringJsonMust())
+	// fmt.Println(bt.Value())
+	// fmt.Println(bt.IsValidRange())
+
+	fmt.Println(chmodhelper.MergeRwxWildcardWithFixedRwx("-w*", "r-x"))
+	fmt.Println(constants.MinInt)
+	// fmt.Println(result.IsSliceOrArray())
+	// fmt.Println(result.IsMap())
+	// fmt.Println(result.InvalidError())
+	// fmt.Println(result.GetErrorOnTypeMismatch(reflect.TypeOf(map[int]string{}), true))
 }
 
 func PrintCollection(collection *corestr.Collection) {

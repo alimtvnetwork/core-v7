@@ -10,7 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/defaulterr"
 )
 
-// panic if not a number or more than 255
+// StringsToBytesWithDefaults panic if not a number or more than 255
 func StringsToBytesWithDefaults(
 	strArray *[]string,
 	defaultByte byte,

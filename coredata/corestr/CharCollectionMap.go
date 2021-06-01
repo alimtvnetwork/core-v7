@@ -68,7 +68,7 @@ func (charCollectionMap *CharCollectionMap) GetMap() *map[byte]*Collection {
 	return charCollectionMap.items
 }
 
-// Sends a copy of items
+// GetCopyMapLock Sends a copy of items
 func (charCollectionMap *CharCollectionMap) GetCopyMapLock() *map[byte]*Collection {
 	charCollectionMap.Lock()
 	defer charCollectionMap.Unlock()
@@ -233,7 +233,7 @@ func (charCollectionMap *CharCollectionMap) IsEmptyLock() bool {
 		len(*charCollectionMap.items) == 0
 }
 
-// Get the char of the string given and get the length of how much is there.
+// LengthOfCollectionFromFirstChar Get the char of the string given and get the length of how much is there.
 func (charCollectionMap *CharCollectionMap) LengthOfCollectionFromFirstChar(
 	str string,
 ) int {
@@ -339,7 +339,7 @@ func (charCollectionMap *CharCollectionMap) LengthOfLock(char byte) int {
 	return 0
 }
 
-// All lengths sum.
+// AllLengthsSum All lengths sum.
 func (charCollectionMap *CharCollectionMap) AllLengthsSum() int {
 	if charCollectionMap.
 		items == nil ||
@@ -356,7 +356,7 @@ func (charCollectionMap *CharCollectionMap) AllLengthsSum() int {
 	return allLengthsSum
 }
 
-// All lengths sum.
+// AllLengthsSumLock All lengths sum.
 func (charCollectionMap *CharCollectionMap) AllLengthsSumLock() int {
 	charCollectionMap.Lock()
 	defer charCollectionMap.Unlock()
@@ -376,7 +376,7 @@ func (charCollectionMap *CharCollectionMap) AllLengthsSumLock() int {
 	return allLengthsSum
 }
 
-// Returns the length of chars which is the map length.
+// Length Returns the length of chars which is the map length.
 func (charCollectionMap *CharCollectionMap) Length() int {
 	if charCollectionMap.
 		items == nil ||
@@ -573,7 +573,7 @@ func (charCollectionMap *CharCollectionMap) AddStringPtrLock(
 	return charCollectionMap
 }
 
-// Assuming all items starts with same chars
+// AddSameStartingCharItems Assuming all items starts with same chars
 func (charCollectionMap *CharCollectionMap) AddSameStartingCharItems(
 	char byte,
 	allItemsWithSameChar *[]string,
@@ -1252,7 +1252,7 @@ func (charCollectionMap *CharCollectionMap) ParseInjectUsingJson(
 	return charCollectionMap, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (charCollectionMap *CharCollectionMap) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *CharCollectionMap {
@@ -1266,7 +1266,7 @@ func (charCollectionMap *CharCollectionMap) ParseInjectUsingJsonMust(
 	return newUsingJson
 }
 
-// clears existing items, deletes items using delete(*charCollectionMap.items, char)
+// Clear clears existing items, deletes items using delete(*charCollectionMap.items, char)
 func (charCollectionMap *CharCollectionMap) Clear() *CharCollectionMap {
 	if charCollectionMap.IsEmpty() {
 		return charCollectionMap

@@ -26,7 +26,7 @@ func NewHashset(length int) *Hashset {
 	}
 }
 
-// addCapacity will not work if it is not a clone.
+// NewHashsetWithValues addCapacity will not work if it is not a clone.
 //goland:noinspection ALL
 func NewHashsetWithValues(
 	addCapacity int,
@@ -43,7 +43,7 @@ func NewHashsetWithValues(
 		isMakeClone)
 }
 
-// addCapacity will not work if it is not a clone.
+// NewHashsetUsingStringPointersArray addCapacity will not work if it is not a clone.
 func NewHashsetUsingStringPointersArray(
 	inputArray *[]*string,
 	addCapacity int,
@@ -61,7 +61,7 @@ func NewHashsetUsingStringPointersArray(
 		isMakeClone)
 }
 
-// addCapacity will not work if it is not a clone.
+// NewHashsetUsingCollection addCapacity will not work if it is not a clone.
 func NewHashsetUsingCollection(
 	collection *Collection,
 	addCapacity int,
@@ -77,7 +77,7 @@ func NewHashsetUsingCollection(
 		isMakeClone)
 }
 
-// addCapacity will not work if it is not a clone.
+// NewHashsetUsingStrings addCapacity will not work if it is not a clone.
 func NewHashsetUsingStrings(
 	inputArray *[]string,
 	addCapacity int,
@@ -95,7 +95,7 @@ func NewHashsetUsingStrings(
 		isMakeClone)
 }
 
-// addCapacity will not work if it is not a clone.
+// NewHashsetUsingMap addCapacity will not work if it is not a clone.
 func NewHashsetUsingMap(
 	itemsMap *map[string]bool,
 	addCapacity int,
@@ -171,7 +171,6 @@ func NewCollectionUsingPointerStringsPlusCap(stringItems *[]*string, capacity in
 	return collection.AddPointerStringsPtr(stringItems)
 }
 
-//goland:noinspection ALL
 func NewCollectionUsingLength(length, capacity int) *Collection {
 	collection := make([]string, length, capacity)
 
@@ -198,7 +197,6 @@ func EmptyCollectionPtr() *CollectionPtr {
 	}
 }
 
-//goland:noinspection ALL
 func NewCollectionPtrUsingPointerStrings(
 	stringItems *[]*string,
 	addCapacity int,
@@ -241,7 +239,6 @@ func NewCollectionPtrUsingStrings(
 		AddStringsPtr(stringItems)
 }
 
-//goland:noinspection ALL
 func NewCollectionPtrUsingLength(length, capacity int) *CollectionPtr {
 	collection := make([]*string, length, capacity)
 
@@ -252,7 +249,7 @@ func NewCollectionPtrUsingLength(length, capacity int) *CollectionPtr {
 
 // --------- CharCollectionMap starts ----------
 
-// CharCollectionMap.eachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
+// NewCharCollectionMap CharCollectionMap.eachCollectionCapacity, capacity minimum 10 will be set if lower than 10 is given.
 //
 // For lower than 5 use the EmptyCharCollectionMap items definition.
 func NewCharCollectionMap(
@@ -274,7 +271,7 @@ func NewCharCollectionMap(
 	}
 }
 
-// eachCollectionCapacity = 0
+// EmptyCharCollectionMap eachCollectionCapacity = 0
 func EmptyCharCollectionMap() *CharCollectionMap {
 	mapElements := make(map[byte]*Collection, constants.Zero)
 
@@ -284,7 +281,6 @@ func EmptyCharCollectionMap() *CharCollectionMap {
 	}
 }
 
-//goland:noinspection ALL
 func NewCharCollectionMapUsingItems(
 	items []string,
 ) *CharCollectionMap {
@@ -319,7 +315,6 @@ func NewCharCollectionMapUsingItemsPtr(
 	return charCollectionMap
 }
 
-//goland:noinspection ALL
 func NewCharCollectionMapUsingItemsPlusCap(
 	items *[]string,
 	additionalCapacityOrLength int,
@@ -395,7 +390,6 @@ func NewHashsetsCollectionUsingPointerHashsets(
 	}
 }
 
-//goland:noinspection ALL
 func NewHashsetsCollectionUsingLength(
 	length, capacity int,
 ) *HashsetsCollection {
@@ -425,7 +419,6 @@ func NewHashmap(length int) *Hashmap {
 	}
 }
 
-//goland:noinspection ALL
 func NewHashmapUsingKeyAnyValues(
 	keyAnyValues *[]KeyAnyValuePair,
 ) *Hashmap {
@@ -440,7 +433,6 @@ func NewHashmapUsingKeyAnyValues(
 	return hashMap
 }
 
-//goland:noinspection ALL
 func NewHashmapUsingKeyValues(
 	keyValues *[]KeyValuePair,
 ) *Hashmap {
@@ -455,7 +447,6 @@ func NewHashmapUsingKeyValues(
 	return hashMap
 }
 
-//goland:noinspection ALL
 func NewHashmapUsingCollection(
 	keys, values *Collection,
 ) *Hashmap {
@@ -473,7 +464,6 @@ func NewHashmapUsingCollection(
 		false)
 }
 
-//goland:noinspection ALL
 func NewHashmapUsingStrings(
 	keys, values *[]string,
 ) *Hashmap {
@@ -491,6 +481,7 @@ func NewHashmapUsingStrings(
 		false)
 }
 
+// NewHashmapUsingMap
 // isMakeClone : copies itemsMap or else use the same one as pointer assign.
 func NewHashmapUsingMap(
 	itemsMap *map[string]string,
@@ -519,8 +510,7 @@ func NewHashmapUsingMap(
 	}
 }
 
-// always returns the clone of the items.
-//goland:noinspection ALL
+// NewHashmapUsingMapUsingAddCapacity always returns the clone of the items.
 func NewHashmapUsingMapUsingAddCapacity(
 	itemsMap *map[string]string,
 	addCapacity int,
@@ -546,7 +536,6 @@ func EmptyLinkedList() *LinkedList {
 	return &LinkedList{}
 }
 
-//goland:noinspection ALL
 func NewLinkedListUsingPointerStrings(
 	stringItems *[]*string,
 ) *LinkedList {
@@ -560,7 +549,6 @@ func NewLinkedListUsingPointerStrings(
 		AddPointerStringsPtr(stringItems)
 }
 
-//goland:noinspection ALL
 func NewLinkedListUsingStringsPtr(
 	stringItems *[]string,
 ) *LinkedList {
@@ -576,7 +564,7 @@ func NewLinkedListUsingStringsPtr(
 
 // --------- CharHashset starts ----------
 
-// CharHashsetMap.eachHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
+// NewCharHashsetMap CharHashsetMap.eachHashsetCapacity, capacity minimum 10 will be set if lower than 10 is given.
 //
 // For lower than 5 use the EmptyCharHashsetMap hashset definition.
 func NewCharHashsetMap(
@@ -602,7 +590,6 @@ func NewCharHashsetMap(
 	}
 }
 
-//goland:noinspection ALL
 func NewCharHashsetMapUsingItemsPlusCap(
 	items *[]string,
 	capacity, selfHashsetCapacity int,
@@ -655,7 +642,7 @@ func NewCharHashsetMapUsingItemsPtr(
 	return charHashsetMap
 }
 
-// eachHashsetCapacity = 0
+// EmptyCharHashsetMap eachHashsetCapacity = 0
 func EmptyCharHashsetMap() *CharHashsetMap {
 	mapElements := make(
 		map[byte]*Hashset,
@@ -677,7 +664,6 @@ func EmptyLinkedCollections() *LinkedCollections {
 	return &LinkedCollections{}
 }
 
-//goland:noinspection ALL
 func NewLinkedCollectionsUsingPointerStrings(
 	stringItems *[]*string,
 ) *LinkedCollections {
@@ -704,7 +690,6 @@ func NewLinkedCollectionsUsingCollections(
 		AppendCollectionsPointers(true, &collections)
 }
 
-//goland:noinspection ALL
 func NewLinkedCollectionsUsingStringsPtr(
 	stringItems *[]string,
 	isMakeClone bool,
@@ -808,7 +793,6 @@ func NewCollectionsOfCollectionUsingPointerStringsPlusCap(
 		stringItems)
 }
 
-//goland:noinspection ALL
 func NewCollectionsOfCollectionUsingLength(
 	length,
 	capacity int,
@@ -912,7 +896,6 @@ func NewCollectionsOfCollectionPtrUsingPointerStringsPlusCap(
 		stringItems)
 }
 
-//goland:noinspection ALL
 func NewCollectionsOfCollectionPtrUsingLength(
 	length,
 	capacity int,

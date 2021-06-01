@@ -2,7 +2,7 @@ package defaultcapacity
 
 import "math"
 
-// Result must be positive possibleLen * multiplier + additionalCap.
+// Predictive Result must be positive possibleLen * multiplier + additionalCap.
 //
 // Less than zero yields additionalCap
 func Predictive(

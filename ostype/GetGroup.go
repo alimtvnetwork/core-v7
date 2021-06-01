@@ -4,7 +4,7 @@ import (
 	"gitlab.com/evatix-go/core/osconsts"
 )
 
-// rawRuntimeGoos = runtime.GOOS
+// GetGroup rawRuntimeGoos = runtime.GOOS
 func GetGroup(rawRuntimeGoos string) Group {
 	if rawRuntimeGoos == osconsts.Windows {
 		return WindowsGroup

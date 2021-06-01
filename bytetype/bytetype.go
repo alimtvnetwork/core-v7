@@ -1,34 +1,45 @@
 package bytetype
 
 import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/coreinterface"
 )
 
 type Variant byte
 
-func GetSet(
-	isCondition bool,
-	trueValue Variant,
-	falseValue Variant,
-) Variant {
-	if isCondition {
-		return trueValue
-	}
-
-	return falseValue
+func (v Variant) String() string {
+	return basicEnumImpl.ToEnumString(v.Value())
 }
 
-func GetSetVariant(
-	isCondition bool,
-	trueValue byte,
-	falseValue byte,
-) Variant {
-	if isCondition {
-		return Variant(trueValue)
-	}
+func (v Variant) StringJson() (jsonString string, err error) {
+	return basicEnumImpl.StringJson(v.Value())
+}
 
-	return Variant(falseValue)
+func (v Variant) StringJsonMust() string {
+	return basicEnumImpl.StringJsonMust(v.Value())
+}
+
+func (v Variant) StringRangesPtr() *[]string {
+	return basicEnumImpl.StringRangesPtr()
+}
+
+func (v Variant) StringRanges() []string {
+	return basicEnumImpl.StringRanges()
+}
+
+func (v Variant) RangesInvalidMessage() string {
+	return basicEnumImpl.RangesInvalidMessage()
+}
+
+func (v Variant) RangesInvalidErr() error {
+	return basicEnumImpl.RangesInvalidErr()
+}
+
+func (v Variant) IsValidRange() bool {
+	return basicEnumImpl.IsValidRange(v.Value())
+}
+
+func (v Variant) IsInvalidRange() bool {
+	return !v.IsValidRange()
 }
 
 func (v Variant) Value() byte {
@@ -39,12 +50,12 @@ func (v Variant) StringValue() string {
 	return string(v)
 }
 
-// v + n
+// Add v + n
 func (v Variant) Add(n byte) Variant {
 	return Variant(v.Value() + n)
 }
 
-// v - n
+// Subtract v - n
 func (v Variant) Subtract(n byte) Variant {
 	return Variant(v.Value() - n)
 }
@@ -53,14 +64,14 @@ func (v Variant) Is(n Variant) bool {
 	return v.Value() == n.Value()
 }
 
-// val >= start &&  val <= end
+// IsBetween val >= start &&  val <= end
 func (v Variant) IsBetween(start, end byte) bool {
 	val := v.Value()
 
 	return val >= start && val <= end
 }
 
-// val >= start &&  val <= end
+// IsBetweenInt val >= start &&  val <= end
 func (v Variant) IsBetweenInt(start, end int) bool {
 	val := v.Value()
 
@@ -71,22 +82,22 @@ func (v Variant) IsEqual(n byte) bool {
 	return v.Value() == n
 }
 
-// v.Value() > n
+// IsGreater v.Value() > n
 func (v Variant) IsGreater(n byte) bool {
 	return v.Value() > n
 }
 
-// v.Value() >= n
+// IsGreaterEqual v.Value() >= n
 func (v Variant) IsGreaterEqual(n byte) bool {
 	return v.Value() >= n
 }
 
-// v.Value() < n
+// IsLess v.Value() < n
 func (v Variant) IsLess(n byte) bool {
 	return v.Value() < n
 }
 
-// v.Value() <= n
+// IsLessEqual v.Value() <= n
 func (v Variant) IsLessEqual(n byte) bool {
 	return v.Value() <= n
 }
@@ -95,48 +106,26 @@ func (v Variant) IsEqualInt(n int) bool {
 	return v.Value() == byte(n)
 }
 
-// v.Value() > n
+// IsGreaterInt v.Value() > n
 func (v Variant) IsGreaterInt(n int) bool {
 	return v.Value() > byte(n)
 }
 
-// v.Value() >= n
+// IsGreaterEqualInt v.Value() >= n
 func (v Variant) IsGreaterEqualInt(n int) bool {
 	return v.Value() >= byte(n)
 }
 
-// v.Value() < n
+// IsLessInt v.Value() < n
 func (v Variant) IsLessInt(n int) bool {
 	return v.Value() < byte(n)
 }
 
-// v.Value() <= n
+// IsLessEqualInt v.Value() <= n
 func (v Variant) IsLessEqualInt(n int) bool {
 	return v.Value() <= byte(n)
 }
 
-// Here left is v, and right is `n`
-func (v Variant) IsTrue(n byte, compare corecomparator.Compare) bool {
-	switch compare {
-	case corecomparator.Equal:
-		return v.IsEqual(n)
-	case corecomparator.LeftGreater:
-		return v.IsGreater(n)
-	case corecomparator.LeftGreaterEqual:
-		return v.IsGreaterEqual(n)
-	case corecomparator.LeftLess:
-		return v.IsLess(n)
-	case corecomparator.LeftLessEqual:
-		return v.IsLessEqual(n)
-	case corecomparator.NotEqual:
-		return !v.IsEqual(n)
-	default:
-		msg := msgtype.RangeNotMeet(
-			msgtype.ComparatorShouldBeWithinRanghe.String(),
-			corecomparator.Min(),
-			corecomparator.Max(),
-			compare.Ranges())
-
-		panic(msg)
-	}
+func (v Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return v
 }

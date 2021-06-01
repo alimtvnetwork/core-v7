@@ -1,6 +1,6 @@
 package converters
 
-// handle convert from processor function either throw or ignore
+// StringsToFloat64sConditional handle convert from processor function either throw or ignore
 func StringsToFloat64sConditional(
 	strArray *[]string,
 	processor func(in string) (out float64, isTake, isBreak bool),

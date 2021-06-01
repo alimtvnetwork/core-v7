@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/internal/stringutil"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -175,7 +176,7 @@ func (linkedList *LinkedList) AddLock(item string) *LinkedList {
 	return linkedList.Add(item)
 }
 
-// BigO(n) expensive operation.
+// InsertAt BigO(n) expensive operation.
 func (linkedList *LinkedList) InsertAt(index int, item string) *LinkedList {
 	if index < 1 {
 		return linkedList.AddFront(item)
@@ -224,6 +225,60 @@ func (linkedList *LinkedList) AppendChainOfNodes(nodeHead *LinkedListNode) *Link
 
 func (linkedList *LinkedList) PushBack(item string) *LinkedList {
 	return linkedList.Add(item)
+}
+
+func (linkedList *LinkedList) AddNonEmpty(item string) *LinkedList {
+	if item == "" {
+		return linkedList
+	}
+
+	return linkedList.Add(item)
+}
+
+func (linkedList *LinkedList) AddNonEmptyWhitespace(item string) *LinkedList {
+	if stringutil.IsEmptyOrWhitespace(item) {
+		return linkedList
+	}
+
+	return linkedList.Add(item)
+}
+
+func (linkedList *LinkedList) AddIf(isAdd bool, item string) *LinkedList {
+	if !isAdd {
+		return linkedList
+	}
+
+	return linkedList.Add(item)
+}
+
+func (linkedList *LinkedList) AddIfMany(
+	isAdd bool,
+	addingStrings ...string,
+) *LinkedList {
+	if !isAdd {
+		return linkedList
+	}
+
+	return linkedList.AddStringsPtr(&addingStrings)
+}
+
+func (linkedList *LinkedList) AddFunc(f func() string) *LinkedList {
+	return linkedList.Add(f())
+}
+
+func (linkedList *LinkedList) AddFuncErr(
+	funcReturnsStringError func() (result string, err error),
+	errHandler func(errInput error),
+) *LinkedList {
+	r, err := funcReturnsStringError()
+
+	if err != nil {
+		errHandler(err)
+
+		return linkedList
+	}
+
+	return linkedList.Add(r)
 }
 
 func (linkedList *LinkedList) Push(item string) *LinkedList {
@@ -548,7 +603,7 @@ func (linkedList *LinkedList) GetCompareSummary(
 	return leftStr + rightStr
 }
 
-// skip if removingNode is nil
+// RemoveNode skip if removingNode is nil
 func (linkedList *LinkedList) RemoveNode(
 	removingNode *LinkedListNode,
 ) *LinkedList {
@@ -586,7 +641,7 @@ func (linkedList *LinkedList) RemoveNode(
 	return linkedList.Loop(processor)
 }
 
-// iSkipOnNil
+// AddStringsPtrToNode iSkipOnNil
 func (linkedList *LinkedList) AddStringsPtrToNode(
 	isSkipOnNull bool,
 	node *LinkedListNode,
@@ -651,7 +706,7 @@ func (linkedList *LinkedList) AddAfterNode(
 	return newNode
 }
 
-// add to back
+// AddStringsPtr add to back
 func (linkedList *LinkedList) AddStringsPtr(items *[]string) *LinkedList {
 	if items == nil {
 		return linkedList
@@ -664,7 +719,7 @@ func (linkedList *LinkedList) AddStringsPtr(items *[]string) *LinkedList {
 	return linkedList
 }
 
-// add to back
+// AddStringsPtrLock add to back
 func (linkedList *LinkedList) AddStringsPtrLock(items *[]string) *LinkedList {
 	linkedList.Lock()
 	defer linkedList.Unlock()
@@ -672,7 +727,7 @@ func (linkedList *LinkedList) AddStringsPtrLock(items *[]string) *LinkedList {
 	return linkedList.AddStringsPtr(items)
 }
 
-// Expensive operation BigO(n)
+// IndexAt Expensive operation BigO(n)
 func (linkedList *LinkedList) IndexAt(index int) *LinkedListNode {
 	length := linkedList.Length()
 	if index < 0 {
@@ -704,7 +759,7 @@ func (linkedList *LinkedList) IndexAt(index int) *LinkedListNode {
 	return nil
 }
 
-// Expensive operation BigO(n)
+// SafePointerIndexAt Expensive operation BigO(n)
 func (linkedList *LinkedList) SafePointerIndexAt(index int) *string {
 	node := linkedList.SafeIndexAt(index)
 
@@ -715,7 +770,7 @@ func (linkedList *LinkedList) SafePointerIndexAt(index int) *string {
 	return &node.Element
 }
 
-// Expensive operation BigO(n)
+// SafePointerIndexAtUsingDefault Expensive operation BigO(n)
 func (linkedList *LinkedList) SafePointerIndexAtUsingDefault(
 	index int,
 	defaultString string,
@@ -729,7 +784,7 @@ func (linkedList *LinkedList) SafePointerIndexAtUsingDefault(
 	return node.Element
 }
 
-// Expensive operation BigO(n)
+// SafeIndexAt Expensive operation BigO(n)
 func (linkedList *LinkedList) SafeIndexAt(index int) *LinkedListNode {
 	length := linkedList.Length()
 	isExitCondition := index < 0 || length == 0 || length-1 < index
@@ -756,7 +811,7 @@ func (linkedList *LinkedList) SafeIndexAt(index int) *LinkedListNode {
 	return nil
 }
 
-// Expensive operation BigO(n)
+// SafeIndexAtLock Expensive operation BigO(n)
 func (linkedList *LinkedList) SafeIndexAtLock(index int) *LinkedListNode {
 	linkedList.Lock()
 	defer linkedList.Unlock()
@@ -764,7 +819,7 @@ func (linkedList *LinkedList) SafeIndexAtLock(index int) *LinkedListNode {
 	return linkedList.SafeIndexAt(index)
 }
 
-// Expensive operation BigO(n)
+// SafePointerIndexAtUsingDefaultLock Expensive operation BigO(n)
 func (linkedList *LinkedList) SafePointerIndexAtUsingDefaultLock(
 	index int,
 	defaultString string,
@@ -804,7 +859,7 @@ func (linkedList *LinkedList) GetAllLinkedNodes() *[]*LinkedListNode {
 		})
 }
 
-// skip on nil, add to back
+// AddPointerStringsPtr skip on nil, add to back
 func (linkedList *LinkedList) AddPointerStringsPtr(items *[]*string) *LinkedList {
 	if items == nil {
 		return linkedList
@@ -821,7 +876,7 @@ func (linkedList *LinkedList) AddPointerStringsPtr(items *[]*string) *LinkedList
 	return linkedList
 }
 
-// skip on nil
+// AddCollection skip on nil
 func (linkedList *LinkedList) AddCollection(collection *Collection) *LinkedList {
 	if collection == nil {
 		return linkedList
@@ -853,7 +908,7 @@ func (linkedList *LinkedList) ToCollection(addCapacity int) *Collection {
 	return collection
 }
 
-// must return slice.
+// ListPtr must return slice.
 func (linkedList *LinkedList) ListPtr() *[]string {
 	list := make([]string, 0, linkedList.Length())
 
@@ -872,7 +927,7 @@ func (linkedList *LinkedList) ListPtr() *[]string {
 	return &list
 }
 
-// must return slice.
+// ListPtrLock must return slice.
 func (linkedList *LinkedList) ListPtrLock() *[]string {
 	linkedList.Lock()
 	defer linkedList.Unlock()
@@ -1001,7 +1056,7 @@ func (linkedList *LinkedList) ParseInjectUsingJson(
 	return linkedList, nil
 }
 
-// Panic if error
+// ParseInjectUsingJsonMust Panic if error
 func (linkedList *LinkedList) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *LinkedList {
@@ -1015,7 +1070,7 @@ func (linkedList *LinkedList) ParseInjectUsingJsonMust(
 	return newUsingJson
 }
 
-// Panic if error
+// JsonParseSelfInject Panic if error
 func (linkedList *LinkedList) JsonParseSelfInject(
 	jsonResult *corejson.Result,
 ) error {
@@ -1024,14 +1079,6 @@ func (linkedList *LinkedList) JsonParseSelfInject(
 	)
 
 	return err
-}
-
-func (linkedList *LinkedList) AsJsoner() corejson.Jsoner {
-	return linkedList
-}
-
-func (linkedList *LinkedList) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
-	return linkedList
 }
 
 func (linkedList *LinkedList) AsJsonMarshaller() corejson.JsonMarshaller {
