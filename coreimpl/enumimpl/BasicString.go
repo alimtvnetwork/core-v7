@@ -4,8 +4,9 @@ import "gitlab.com/evatix-go/core/converters"
 
 type BasicString struct {
 	*numberEnumBase
-	hashset        map[string]bool
-	minVal, maxVal string
+	hashset          map[string]bool
+	jsonBytesHashmap map[string][]byte
+	minVal, maxVal   string
 }
 
 func NewBasicString(
@@ -18,12 +19,21 @@ func NewBasicString(
 		min,
 		max)
 
+	jsonBytesHashmap := make(
+		map[string][]byte,
+		len(stringRanges))
+
+	for _, actualVal := range stringRanges {
+		jsonBytesHashmap[actualVal] = []byte(actualVal)
+	}
+
 	return &BasicString{
 		numberEnumBase: enumBase,
 		minVal:         min,
 		maxVal:         max,
 		hashset: *converters.
 			StringsToMap(&stringRanges),
+		jsonBytesHashmap: jsonBytesHashmap,
 	}
 }
 
@@ -49,4 +59,8 @@ func (receiver *BasicString) HashsetPtr() *map[string]bool {
 
 func (receiver *BasicString) IsValidRange(value string) bool {
 	return receiver.hashset[value]
+}
+
+func (receiver *BasicString) ToEnumJsonBytes(value string) []byte {
+	return receiver.jsonBytesHashmap[value]
 }

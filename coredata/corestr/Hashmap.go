@@ -1030,9 +1030,9 @@ func (hashmap *Hashmap) KeyValStringLines() *[]string {
 
 func (hashmap *Hashmap) ToStringsUsingCompiler(
 	compilerFunc func(
-		key,
-		val string,
-	) string,
+	key,
+	val string,
+) string,
 ) *[]string {
 	length := hashmap.Length()
 	slice := make([]string, length)

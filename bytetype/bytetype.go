@@ -8,7 +8,7 @@ import (
 type Variant byte
 
 func (v Variant) MarshalJSON() ([]byte, error) {
-	return []byte(basicEnumImpl.ToEnumString(v)), nil
+	return basicEnumImpl.ToEnumJsonBytes(v.Value()), nil
 }
 
 func (v Variant) UnmarshalJSON(data []byte) error {

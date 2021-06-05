@@ -1,9 +1,12 @@
 package enumimpl
 
+import "gitlab.com/evatix-go/core/converters"
+
 type BasicInt8 struct {
 	*numberEnumBase
-	hashMap        map[string]int8
-	minVal, maxVal int8
+	hashMap          map[string]int8
+	jsonBytesHashmap map[int8][]byte
+	minVal, maxVal   int8
 }
 
 func NewBasicInt8(
@@ -18,16 +21,20 @@ func NewBasicInt8(
 		max)
 
 	hashMap := make(map[string]int8, len(actualValueRanges))
+	jsonBytesHashmap := make(map[int8][]byte, len(actualValueRanges))
+
 	for i, actualVal := range actualValueRanges {
 		key := stringRanges[i]
 		hashMap[key] = actualVal
+		jsonBytesHashmap[actualVal] = []byte(key)
 	}
 
 	return &BasicInt8{
-		numberEnumBase: enumBase,
-		minVal:         min,
-		maxVal:         max,
-		hashMap:        hashMap,
+		numberEnumBase:   enumBase,
+		minVal:           min,
+		maxVal:           max,
+		hashMap:          hashMap,
+		jsonBytesHashmap: jsonBytesHashmap,
 	}
 }
 
@@ -61,4 +68,12 @@ func (receiver *BasicInt8) HashmapPtr() *map[string]int8 {
 
 func (receiver *BasicInt8) IsValidRange(value int8) bool {
 	return value >= receiver.minVal && value <= receiver.maxVal
+}
+
+func (receiver *BasicInt8) ToEnumJsonBytes(value int8) []byte {
+	return receiver.jsonBytesHashmap[value]
+}
+
+func (receiver *BasicInt8) ToEnumString(value int8) string {
+	return *converters.UnsafeBytesToStringPtr(receiver.jsonBytesHashmap[value])
 }

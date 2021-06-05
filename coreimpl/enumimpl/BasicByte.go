@@ -1,11 +1,15 @@
 package enumimpl
 
-import "gitlab.com/evatix-go/core/constants"
+import (
+	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/converters"
+)
 
 type BasicByte struct {
 	*numberEnumBase
-	hashMap        map[string]byte
-	minVal, maxVal byte
+	hashMap          map[string]byte
+	jsonBytesHashmap map[byte][]byte
+	minVal, maxVal   byte
 }
 
 func NewBasicByte(
@@ -20,16 +24,20 @@ func NewBasicByte(
 		max)
 
 	hashMap := make(map[string]byte, len(actualValueRanges))
-	for i, b := range actualValueRanges {
+	jsonBytesHashmap := make(map[byte][]byte, len(actualValueRanges))
+
+	for i, actualVal := range actualValueRanges {
 		key := stringRanges[i]
-		hashMap[key] = b
+		hashMap[key] = actualVal
+		jsonBytesHashmap[actualVal] = []byte(key)
 	}
 
 	return &BasicByte{
-		numberEnumBase: enumBase,
-		minVal:         min,
-		maxVal:         max,
-		hashMap:        hashMap,
+		numberEnumBase:   enumBase,
+		minVal:           min,
+		maxVal:           max,
+		hashMap:          hashMap,
+		jsonBytesHashmap: jsonBytesHashmap,
 	}
 }
 
@@ -44,23 +52,11 @@ func NewBasicByteUsingIndexedSlice(
 		actualValues[i] = byte(i)
 	}
 
-	enumBase := newNumberEnumBase(
+	return NewBasicByte(
 		actualValues,
 		indexedSliceWithValues,
-		min,
-		max)
-
-	hashMap := make(map[string]byte, max)
-	for i, key := range indexedSliceWithValues {
-		hashMap[key] = actualValues[i]
-	}
-
-	return &BasicByte{
-		numberEnumBase: enumBase,
-		minVal:         byte(min),
-		maxVal:         byte(max),
-		hashMap:        hashMap,
-	}
+		byte(min),
+		byte(max))
 }
 
 func (receiver *BasicByte) Max() byte {
@@ -93,4 +89,12 @@ func (receiver *BasicByte) HashmapPtr() *map[string]byte {
 
 func (receiver *BasicByte) IsValidRange(value byte) bool {
 	return value >= receiver.minVal && value <= receiver.maxVal
+}
+
+func (receiver *BasicByte) ToEnumJsonBytes(value byte) []byte {
+	return receiver.jsonBytesHashmap[value]
+}
+
+func (receiver *BasicByte) ToEnumString(value byte) string {
+	return *converters.UnsafeBytesToStringPtr(receiver.jsonBytesHashmap[value])
 }

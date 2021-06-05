@@ -3,9 +3,6 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
@@ -48,15 +45,15 @@ func main() {
 
 	// PrintCollection(collection)
 
-	moredata3 := map[int]string{1: "one", 2: "two", 3: "three", 4: "four"}
-	dynamicCollection := coredynamic.NewDynamicCollection(100)
-
-	dynamicCollection.AddAny(1, true)
-	dynamicCollection.AddAny(2, true)
-	dynamicCollection.AddAny(3, true)
-	dynamicCollection.AddAny(4, true)
-	dynamicCollection.AddAny(5, true)
-	dynamicCollection.AddAny(moredata3, true)
+	// moredata3 := map[int]string{1: "one", 2: "two", 3: "three", 4: "four"}
+	// dynamicCollection := coredynamic.NewDynamicCollection(100)
+	//
+	// dynamicCollection.AddAny(1, true)
+	// dynamicCollection.AddAny(2, true)
+	// dynamicCollection.AddAny(3, true)
+	// dynamicCollection.AddAny(4, true)
+	// dynamicCollection.AddAny(5, true)
+	// dynamicCollection.AddAny(moredata3, true)
 	// maps, _ := result.
 	// 	MapToKeyVal()
 
@@ -73,9 +70,18 @@ func main() {
 	// fmt.Println(bt.StringJsonMust())
 	// fmt.Println(bt.Value())
 	// fmt.Println(bt.IsValidRange())
+	//
+	// fmt.Println(chmodhelper.MergeRwxWildcardWithFixedRwx("-w*", "r-x"))
+	// fmt.Println(constants.MinInt)
+	// t3 := bytetype.T3
+	// b, e := t3.MarshalJSON()
+	// fmt.Println(string(b), e)
+	//
+	// fmt.Println(t3.RangesInvalidMessage())
+	// fmt.Println(t3.String())
+	//
+	// fmt.Println(bytetype.BasicEnum2Impl.StringJson(bytetype.Ab4))
 
-	fmt.Println(chmodhelper.MergeRwxWildcardWithFixedRwx("-w*", "r-x"))
-	fmt.Println(constants.MinInt)
 	// fmt.Println(result.IsSliceOrArray())
 	// fmt.Println(result.IsMap())
 	// fmt.Println(result.InvalidError())

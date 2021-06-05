@@ -1,9 +1,12 @@
 package enumimpl
 
+import "gitlab.com/evatix-go/core/converters"
+
 type BasicInt16 struct {
 	*numberEnumBase
-	hashMap        map[string]int16
-	minVal, maxVal int16
+	hashMap          map[string]int16
+	jsonBytesHashmap map[int16][]byte
+	minVal, maxVal   int16
 }
 
 func NewBasicInt16(
@@ -18,16 +21,20 @@ func NewBasicInt16(
 		max)
 
 	hashMap := make(map[string]int16, len(actualValueRanges))
-	for i, actual := range actualValueRanges {
+	jsonBytesHashmap := make(map[int16][]byte, len(actualValueRanges))
+
+	for i, actualVal := range actualValueRanges {
 		key := stringRanges[i]
-		hashMap[key] = actual
+		hashMap[key] = actualVal
+		jsonBytesHashmap[actualVal] = []byte(key)
 	}
 
 	return &BasicInt16{
-		numberEnumBase: enumBase,
-		minVal:         min,
-		maxVal:         max,
-		hashMap:        hashMap,
+		numberEnumBase:   enumBase,
+		minVal:           min,
+		maxVal:           max,
+		hashMap:          hashMap,
+		jsonBytesHashmap: jsonBytesHashmap,
 	}
 }
 
@@ -61,4 +68,12 @@ func (receiver *BasicInt16) HashmapPtr() *map[string]int16 {
 
 func (receiver *BasicInt16) IsValidRange(value int16) bool {
 	return value >= receiver.minVal && value <= receiver.maxVal
+}
+
+func (receiver *BasicInt16) ToEnumJsonBytes(value int16) []byte {
+	return receiver.jsonBytesHashmap[value]
+}
+
+func (receiver *BasicInt16) ToEnumString(value int16) string {
+	return *converters.UnsafeBytesToStringPtr(receiver.jsonBytesHashmap[value])
 }
