@@ -3,6 +3,7 @@ package enumimpl
 import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type BasicByte struct {
@@ -97,4 +98,23 @@ func (receiver *BasicByte) ToEnumJsonBytes(value byte) []byte {
 
 func (receiver *BasicByte) ToEnumString(value byte) string {
 	return *converters.UnsafeBytesToStringPtr(receiver.jsonBytesHashmap[value])
+}
+
+func (receiver *BasicByte) JsonBytesToValue(
+	jsonUnmarshallingValue []byte,
+) (byte, error) {
+	if jsonUnmarshallingValue == nil {
+		return constants.Zero,
+			defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	str := string(jsonUnmarshallingValue)
+	v, has := receiver.hashMap[str]
+
+	if !has {
+		return constants.Zero,
+			defaulterr.UnMarshalling
+	}
+
+	return v, nil
 }

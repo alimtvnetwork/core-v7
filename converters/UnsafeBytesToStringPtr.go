@@ -1,6 +1,8 @@
 package converters
 
-import "unsafe"
+import (
+	"unsafe"
+)
 
 func UnsafeBytesToStringPtr(unsafeBytes []byte) *string {
 	if unsafeBytes == nil {

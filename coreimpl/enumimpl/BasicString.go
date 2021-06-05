@@ -1,6 +1,10 @@
 package enumimpl
 
-import "gitlab.com/evatix-go/core/converters"
+import (
+	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/evatix-go/core/defaulterr"
+)
 
 type BasicString struct {
 	*numberEnumBase
@@ -63,4 +67,17 @@ func (receiver *BasicString) IsValidRange(value string) bool {
 
 func (receiver *BasicString) ToEnumJsonBytes(value string) []byte {
 	return receiver.jsonBytesHashmap[value]
+}
+
+func (receiver *BasicString) JsonBytesToValue(
+	jsonUnmarshallingValue []byte,
+) (string, error) {
+	if jsonUnmarshallingValue == nil {
+		return constants.EmptyString,
+			defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	str := string(jsonUnmarshallingValue)
+
+	return str, nil
 }
