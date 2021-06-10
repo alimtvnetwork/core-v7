@@ -9,6 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coredata/stringslice"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/internal/stringutil"
 )
@@ -608,6 +609,17 @@ func (hashset *Hashset) HasWithLock(key string) bool {
 	return isFound && isSet
 }
 
+func (hashset *Hashset) OrderedList() *[]string {
+	if hashset.IsEmpty() {
+		return &[]string{}
+	}
+
+	return hashset.
+		Collection().
+		SortedAsc().
+		items
+}
+
 // GetFilteredItems must return slice.
 func (hashset *Hashset) GetFilteredItems(
 	filter IsStringFilter,
@@ -721,9 +733,7 @@ func (hashset *Hashset) GetAllExcept(
 	}
 
 	newHashset := NewHashsetUsingStrings(
-		items,
-		0,
-		false)
+		items)
 
 	return hashset.GetAllExceptHashset(
 		newHashset)
@@ -769,11 +779,29 @@ func (hashset *Hashset) List() []string {
 	return *hashset.ListPtr()
 }
 
+func (hashset *Hashset) JoinSorted(joiner string) string {
+	if hashset.IsEmpty() {
+		return constants.EmptyString
+	}
+
+	list := hashset.ListPtr()
+	sort.Strings(*list)
+
+	return strings.Join(*list, joiner)
+}
+
 func (hashset *Hashset) ListPtrSortedAsc() *[]string {
 	list := hashset.ListPtr()
 	sort.Strings(*list)
 
 	return list
+}
+
+func (hashset *Hashset) ListPtrSortedDsc() *[]string {
+	list := hashset.ListPtr()
+	sort.Strings(*list)
+
+	return stringslice.InPlaceReverse(list)
 }
 
 func (hashset *Hashset) ListPtr() *[]string {
@@ -940,9 +968,25 @@ func (hashset *Hashset) StringLock() string {
 }
 
 func (hashset *Hashset) Join(
-	separator string,
+	joiner string,
 ) string {
-	return strings.Join(*hashset.ListPtr(), separator)
+	return strings.Join(*hashset.ListPtr(), joiner)
+}
+
+func (hashset *Hashset) NonEmptyJoins(
+	joiner string,
+) string {
+	return stringslice.NonEmptyJoin(
+		hashset.ListPtr(),
+		joiner)
+}
+
+func (hashset *Hashset) NonWhitespaceJoins(
+	joiner string,
+) string {
+	return stringslice.NonWhitespaceJoin(
+		hashset.ListPtr(),
+		joiner)
 }
 
 //goland:noinspection GoLinterLocal

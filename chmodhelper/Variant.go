@@ -34,6 +34,6 @@ func (variant Variant) String() string {
 	return string(variant)
 }
 
-func (variant Variant) ToWrapper() (Wrapper, error) {
+func (variant Variant) ToWrapper() (RwxWrapper, error) {
 	return NewUsingVariant(variant)
 }

@@ -1,31 +1,36 @@
 package chmodhelper
 
+// MergeRwxWildcardWithFixedRwx
+//
+//  - existingRwx : Usually refers to fixed rwx values like "rwx", "--x", "-w-" etc.
+//  - rwxWildcardInput : Usually refers to fixed rwx values like "rw*", "*-x", "-w-" etc.
+//      Wildcard means keep the existing value as is.
 func MergeRwxWildcardWithFixedRwx(
-	rwxWildcard,
-	rwxFixed string,
+	existingRwx,
+	rwxWildcardInput string,
 ) (
 	fixedAttribute *Attribute,
 	err error,
 ) {
-	length := len(rwxWildcard)
+	length := len(rwxWildcardInput)
 
 	if length != SingleRwxLength {
-		return nil, GetRwxLengthError(rwxWildcard)
+		return nil, GetRwxLengthError(rwxWildcardInput)
 	}
 
-	length2 := len(rwxFixed)
+	length2 := len(existingRwx)
 
 	if length2 != SingleRwxLength {
-		return nil, GetRwxLengthError(rwxFixed)
+		return nil, GetRwxLengthError(existingRwx)
 	}
 
-	varAttr, err := ParseRwxToVarAttribute(rwxWildcard)
+	varAttr, err := ParseRwxToVarAttribute(rwxWildcardInput)
 
 	if err != nil {
 		return nil, err
 	}
 
-	attr := NewAttributeUsingRwx(rwxFixed)
+	attr := NewAttributeUsingRwx(existingRwx)
 	fixedAttr := varAttr.ToCompileAttr(&attr)
 
 	return &fixedAttr, nil

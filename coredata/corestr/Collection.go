@@ -10,6 +10,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coredata/stringslice"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/defaulterr"
@@ -1585,23 +1586,29 @@ func (collection *Collection) NonEmptyListPtr() *[]string {
 
 func (collection *Collection) HashsetAsIs() *Hashset {
 	return NewHashsetUsingStrings(
-		collection.items,
-		0,
-		true)
+		collection.items)
 }
 
 func (collection *Collection) HashsetWithDoubleLength() *Hashset {
 	return NewHashsetUsingStrings(
-		collection.items,
-		collection.Length(),
-		true)
+		collection.items)
 }
 
 func (collection *Collection) HashsetLock() *Hashset {
 	return NewHashsetUsingStrings(
-		collection.ListCopyPtrLock(),
-		0,
-		false)
+		collection.ListCopyPtrLock())
+}
+
+func (collection *Collection) NonEmptyItems() []string {
+	return stringslice.NonEmptySlice(*collection.items)
+}
+
+func (collection *Collection) NonEmptyItemsPtr() *[]string {
+	return stringslice.NonEmptySlicePtr(collection.items)
+}
+
+func (collection *Collection) NonEmptyItemsOrNonWhitespacePtr() *[]string {
+	return stringslice.NonWhitespaceSlicePtr(collection.items)
 }
 
 // Items direct return pointer
@@ -1718,31 +1725,10 @@ func (collection *Collection) SortedAscLock() *Collection {
 // SortedListDsc Creates new one.
 func (collection *Collection) SortedListDsc() *[]string {
 	list := collection.SortedListAsc()
-	length := len(*list)
-	mid := length / 2
-
-	for i := 0; i < mid; i++ {
-		temp := (*list)[i]
-		(*list)[i] = (*list)[length-1-i]
-		(*list)[length-1-i] = temp
-	}
+	stringslice.InPlaceReverse(
+		collection.items)
 
 	return list
-}
-
-// SortedDsc mutates itself.
-func (collection *Collection) SortedDsc() *Collection {
-	list := collection.items
-	length := len(*list)
-	mid := length / 2
-
-	for i := 0; i < mid; i++ {
-		temp := (*list)[i]
-		(*list)[i] = (*list)[length-1-i]
-		(*list)[length-1-i] = temp
-	}
-
-	return collection
 }
 
 func (collection *Collection) HasUsingSensitivity(str string, isCaseSensitive bool) bool {
@@ -1822,6 +1808,104 @@ func (collection *Collection) IsContainsAllLock(items ...string) bool {
 	}
 
 	return collection.IsContainsAllPtr(&items)
+}
+
+func (collection *Collection) New(
+	slice ...string,
+) *Collection {
+	length := len(slice)
+
+	if length == 0 {
+		return NewCollection(constants.Zero)
+	}
+
+	newCollection := NewCollection(constants.Zero)
+
+	return newCollection.AddStringsPtr(&slice)
+}
+
+func (collection *Collection) AddNonEmptyStrings(
+	slice ...string,
+) *Collection {
+	if len(slice) == 0 {
+		return collection
+	}
+
+	return collection.
+		AddNonEmptyStringsPtr(&slice)
+}
+
+func (collection *Collection) AddFuncResult(
+	getterFunctions ...func() string,
+) *Collection {
+	if getterFunctions == nil {
+		return collection
+	}
+
+	items := collection.items
+
+	for _, getterFunc := range getterFunctions {
+		item := getterFunc()
+
+		*items = append(*items, item)
+	}
+
+	collection.items = items
+
+	return collection
+}
+
+func (collection *Collection) AddNonEmptyStringsPtr(
+	slice *[]string,
+) *Collection {
+	if slice == nil || len(*slice) == 0 {
+		return collection
+	}
+
+	items := collection.items
+
+	for _, addingItem := range *slice {
+		*items = append(*items, addingItem)
+	}
+
+	collection.items = items
+
+	return collection
+}
+
+func (collection *Collection) AddStringsByFuncChecking(
+	slice *[]string,
+	isIntegrityOkay func(line string) bool,
+) *Collection {
+
+	for _, item := range *slice {
+		if isIntegrityOkay(item) {
+			collection.Add(item)
+		}
+	}
+
+	return collection
+}
+
+func (collection *Collection) ExpandSlicePlusAdd(
+	slice *[]string,
+	expandFunc func(line string) *[]string,
+) *Collection {
+	items := stringslice.ExpandByFunc(slice, expandFunc)
+
+	return collection.AddStringsPtr(items)
+}
+
+func (collection *Collection) MergeSlicesOfSlicePtr(slices *[]*[]string) *Collection {
+	collection.items = stringslice.MergeNewSlicesPtrOfSlicesPtr(slices)
+
+	return collection
+}
+
+func (collection *Collection) MergeSlicesOfSlice(slices ...*[]string) *Collection {
+	collection.items = stringslice.MergeNewSlicesPtrOfSlicesPtr(&slices)
+
+	return collection
 }
 
 // GetAllExceptCollection Get all items except the mentioned ones.
@@ -2014,6 +2098,22 @@ func (collection *Collection) Joins(
 	newItems = append(newItems, items...)
 
 	return strings.Join(newItems, separator)
+}
+
+func (collection *Collection) NonEmptyJoins(
+	joiner string,
+) string {
+	return stringslice.NonEmptyJoin(
+		collection.items,
+		joiner)
+}
+
+func (collection *Collection) NonWhitespaceJoins(
+	joiner string,
+) string {
+	return stringslice.NonWhitespaceJoin(
+		collection.items,
+		joiner)
 }
 
 // Clear clears existing items.

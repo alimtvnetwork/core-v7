@@ -13,7 +13,7 @@ var (
 		CannotBeNilMessage.
 		Error(
 			"rwx (...) - parsing failed",
-			"rwxInstruction - given as nil")
+			"rwxInstruction / rwxOwnerGroupOther - given as nil")
 
 	failedToCompileVarWrapperToWrapper = msgtype.
 		FailedToExecute.

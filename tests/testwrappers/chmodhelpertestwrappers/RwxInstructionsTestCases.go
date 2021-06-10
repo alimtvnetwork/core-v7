@@ -8,6 +8,45 @@ var defaultRwx = chmodins.RwxOwnerGroupOther{
 	Other: "r--",
 }
 
+var defaultExpected = chmodins.RwxOwnerGroupOther{
+	Owner: "r-x",
+	Group: "r-x",
+	Other: "-w-",
+}
+
+type RwxCompileValueTestWrapper struct {
+	Existing, Input, Expected chmodins.RwxOwnerGroupOther
+}
+
+var RwxCompileValueTestCases = []RwxCompileValueTestWrapper{
+	{
+		Existing: defaultRwx,
+		Input: chmodins.RwxOwnerGroupOther{
+			Owner: "*-x",
+			Group: "**x",
+			Other: "-w-",
+		},
+		Expected: defaultExpected,
+	},
+	{
+		Existing: chmodins.RwxOwnerGroupOther{
+			Owner: "rwx",
+			Group: "r--",
+			Other: "--x",
+		},
+		Input: chmodins.RwxOwnerGroupOther{
+			Owner: "***",
+			Group: "**x",
+			Other: "-w*",
+		},
+		Expected: chmodins.RwxOwnerGroupOther{
+			Owner: "rwx",
+			Group: "r-x",
+			Other: "-wx",
+		},
+	},
+}
+
 // RwxInstructionsApplyTestCases https://ss64.com/bash/chmod.html
 var RwxInstructionsApplyTestCases = []RwxInstructionTestWrapper{
 	{
@@ -46,11 +85,7 @@ var RwxInstructionsApplyTestCases = []RwxInstructionTestWrapper{
 			},
 		},
 		funcName: RwxApplyOnPath,
-		expected: chmodins.RwxOwnerGroupOther{
-			Owner: "r-x",
-			Group: "r-x",
-			Other: "-w-",
-		},
+		expected: defaultExpected,
 	},
 }
 
@@ -101,10 +136,6 @@ var RwxInstructionsUnixApplyRecursivelyTestCases = []RwxInstructionTestWrapper{
 			},
 		},
 		funcName: RwxApplyOnPath,
-		expected: chmodins.RwxOwnerGroupOther{
-			Owner: "r-x",
-			Group: "r-x",
-			Other: "-w-",
-		},
+		expected: defaultExpected,
 	},
 }

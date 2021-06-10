@@ -536,9 +536,7 @@ func (hashmap *Hashmap) ValuesCollection() *Collection {
 
 func (hashmap *Hashmap) ValuesHashset() *Hashset {
 	return NewHashsetUsingStrings(
-		hashmap.ValuesListPtr(),
-		0,
-		false)
+		hashmap.ValuesListPtr())
 }
 
 func (hashmap *Hashmap) ValuesCollectionLock() *Collection {
@@ -548,9 +546,7 @@ func (hashmap *Hashmap) ValuesCollectionLock() *Collection {
 
 func (hashmap *Hashmap) ValuesHashsetLock() *Hashset {
 	return NewHashsetUsingStrings(
-		hashmap.ValuesListCopyPtrLock(),
-		0,
-		false)
+		hashmap.ValuesListCopyPtrLock())
 }
 
 func (hashmap *Hashmap) ValuesList() []string {
@@ -893,9 +889,7 @@ func (hashmap *Hashmap) GetValuesKeysExcept(
 	}
 
 	newCollection := NewHashsetUsingStrings(
-		items,
-		0,
-		false)
+		items)
 
 	return hashmap.GetValuesExceptKeysInHashset(
 		newCollection)

@@ -30,6 +30,7 @@ func (attribute Attribute) ToSpecificBytes() (read, write, exe, sum byte) {
 	return read, write, exe, read + write + exe
 }
 
+// ToByte refers to the compiled byte value in between 0-7
 func (attribute Attribute) ToByte() byte {
 	r := conditional.Byte(attribute.IsRead, ReadValue, constants.Zero)
 	w := conditional.Byte(attribute.IsWrite, WriteValue, constants.Zero)
@@ -38,6 +39,7 @@ func (attribute Attribute) ToByte() byte {
 	return r + w + e
 }
 
+// ToSum refers to the compiled byte value in between 0-7
 func (attribute Attribute) ToSum() byte {
 	return attribute.ToByte()
 }
@@ -50,6 +52,7 @@ func (attribute Attribute) ToRwx() [3]byte {
 	}
 }
 
+// ToRwxString returns "rwx"
 func (attribute Attribute) ToRwxString() string {
 	rwxBytes := attribute.ToRwx()
 
@@ -62,6 +65,9 @@ func (attribute Attribute) ToVariant() AttrVariant {
 	return AttrVariant(b)
 }
 
-func (attribute Attribute) ToChar() byte {
+// ToStringByte returns the compiled byte value as Char byte value
+//
+// It is not restricted between 0-7 but 0-7 + char '0', which makes it string 0-7
+func (attribute Attribute) ToStringByte() byte {
 	return attribute.ToByte() + constants.ZeroChar
 }

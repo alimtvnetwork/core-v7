@@ -2,10 +2,10 @@ package chmodhelper
 
 import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
 
-func ParseRwxOwnerGroupOtherInstructionToVarWrapper(
+func ParseRwxOwnerGroupOtherToRwxVariableWrapper(
 	rwxInstruction *chmodins.RwxOwnerGroupOther,
 ) (
-	*VarWrapper, error,
+	*RwxVariableWrapper, error,
 ) {
 	if rwxInstruction == nil {
 		return nil, rwxInstructionNilErr
@@ -37,7 +37,7 @@ func ParseRwxOwnerGroupOtherInstructionToVarWrapper(
 		groupVarAttr.IsFixedType() &&
 		otherVarAttr.IsFixedType()
 
-	return &VarWrapper{
+	return &RwxVariableWrapper{
 		rawInput:    rawInput,
 		isFixedType: isFixedType,
 		Owner:       *ownerVarAttr,

@@ -38,9 +38,7 @@ func NewHashsetWithValues(
 	}
 
 	return NewHashsetUsingStrings(
-		&items,
-		addCapacity,
-		isMakeClone)
+		&items)
 }
 
 // NewHashsetUsingStringPointersArray addCapacity will not work if it is not a clone.
@@ -64,24 +62,18 @@ func NewHashsetUsingStringPointersArray(
 // NewHashsetUsingCollection addCapacity will not work if it is not a clone.
 func NewHashsetUsingCollection(
 	collection *Collection,
-	addCapacity int,
-	isMakeClone bool,
 ) *Hashset {
 	if collection == nil || collection.IsEmpty() {
 		return EmptyHashset()
 	}
 
 	return NewHashsetUsingStrings(
-		collection.items,
-		addCapacity,
-		isMakeClone)
+		collection.items)
 }
 
 // NewHashsetUsingStrings addCapacity will not work if it is not a clone.
 func NewHashsetUsingStrings(
 	inputArray *[]string,
-	addCapacity int,
-	isMakeClone bool,
 ) *Hashset {
 	if inputArray == nil || *inputArray == nil {
 		return EmptyHashset()
@@ -91,8 +83,8 @@ func NewHashsetUsingStrings(
 
 	return NewHashsetUsingMap(
 		maps,
-		addCapacity,
-		isMakeClone)
+		constants.Zero,
+		false)
 }
 
 // NewHashsetUsingMap addCapacity will not work if it is not a clone.
@@ -145,11 +137,14 @@ func EmptyCollection() *Collection {
 
 func NewCollectionUsingStrings(stringItems *[]string, isMakeClone bool) *Collection {
 	if isMakeClone {
-		cloned := *stringItems
+		length := LengthOfStrings(stringItems)
+		slice := make([]string, 0, length+constants.Capacity4)
 
-		return &Collection{
-			items: &cloned,
+		collection := &Collection{
+			items: &slice,
 		}
+
+		return collection.AddStringsPtr(stringItems)
 	}
 
 	return &Collection{

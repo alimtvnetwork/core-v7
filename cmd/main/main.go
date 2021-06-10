@@ -3,10 +3,23 @@ package main
 import (
 	"fmt"
 
+	"gitlab.com/evatix-go/core/chmodhelper"
+	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
 func main() {
+	rwx := chmodins.RwxOwnerGroupOther{
+		Owner: "rwx",
+		Group: "r--",
+		Other: "-wx",
+	}
+
+	fmt.Println(rwx.String())
+	wrapper, _ := chmodhelper.NewUsingRwxOwnerGroupOther(&rwx)
+
+	fmt.Println(wrapper.ToRwxOwnerGroupOther().String())
+
 	// items := &[]string{
 	// 	"00",
 	// 	"01",

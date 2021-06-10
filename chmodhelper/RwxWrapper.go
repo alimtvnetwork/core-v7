@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strconv"
 
+	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
 	"gitlab.com/evatix-go/core/internal/fsinternal"
@@ -13,27 +14,27 @@ import (
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
-type Wrapper struct {
+type RwxWrapper struct {
 	Owner, Group, Other Attribute
 }
 
-func (wrapper Wrapper) Verify(location string) error {
-	return VerifyChmod(location, wrapper.ToHyphenedRwx())
+func (wrapper RwxWrapper) Verify(location string) error {
+	return VerifyChmod(location, wrapper.ToFullRwxValueString())
 }
 
-func (wrapper Wrapper) VerifyPaths(location *[]string, isContinueOnError bool) error {
+func (wrapper RwxWrapper) VerifyPaths(location *[]string, isContinueOnError bool) error {
 	return VerifyChmodPaths(
 		location,
-		wrapper.ToHyphenedRwx(),
+		wrapper.ToFullRwxValueString(),
 		isContinueOnError)
 }
 
-func (wrapper Wrapper) HasChmod(location string) bool {
-	return IsChmod(location, wrapper.ToHyphenedRwx())
+func (wrapper RwxWrapper) HasChmod(location string) bool {
+	return IsChmod(location, wrapper.ToFullRwxValueString())
 }
 
 // Bytes return rwx, (Owner)(Group)(Other) byte values under 1-7
-func (wrapper Wrapper) Bytes() [3]byte {
+func (wrapper RwxWrapper) Bytes() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner := wrapper.Owner.ToSum()
 	group := wrapper.Group.ToSum()
@@ -44,7 +45,7 @@ func (wrapper Wrapper) Bytes() [3]byte {
 	return allBytes
 }
 
-func (wrapper Wrapper) ToUint32Octal() uint32 {
+func (wrapper RwxWrapper) ToUint32Octal() uint32 {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	str := wrapper.ToFileModeString()
 
@@ -62,37 +63,78 @@ func (wrapper Wrapper) ToUint32Octal() uint32 {
 	return uint32(octal)
 }
 
-// Chars return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
+// ToCompiledOctalBytes4Digits return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 0777, 0555, 0755 NOT 0rwx
-func (wrapper Wrapper) Chars() [4]byte {
+func (wrapper RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	owner := wrapper.Owner.ToChar()
-	group := wrapper.Group.ToChar()
-	other := wrapper.Other.ToChar()
+	owner := wrapper.Owner.ToStringByte()
+	group := wrapper.Group.ToStringByte()
+	other := wrapper.Other.ToStringByte()
 
-	allBytes := [4]byte{constants.ZeroChar, owner, group, other}
+	allBytes := [4]byte{
+		constants.ZeroChar,
+		owner,
+		group,
+		other,
+	}
 
 	return allBytes
 }
 
-// ToFileModeString 4 digit string 0rwx, example 0777
-func (wrapper Wrapper) ToFileModeString() string {
+// ToCompiledOctalBytes3Digits return '0'(Owner + '0')(Group + '0')(Other + '0')
+// eg. 777, 555, 755 NOT rwx
+// return
+//      owner -> (0 - 7 value)
+//      group -> (0 - 7 value)
+//      other -> (0 - 7 value)
+func (wrapper RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	allBytes := wrapper.Chars()
+	owner := wrapper.Owner.ToStringByte()
+	group := wrapper.Group.ToStringByte()
+	other := wrapper.Other.ToStringByte()
+
+	allBytes := [3]byte{
+		owner,
+		group,
+		other,
+	}
+
+	return allBytes
+}
+
+// ToCompiledSplitValues
+// return
+//      owner -> (0 - 7 value)
+//      group -> (0 - 7 value)
+//      other -> (0 - 7 value)
+//      eg. 777, 755 etc
+func (wrapper RwxWrapper) ToCompiledSplitValues() (owner, group, other byte) {
+	// # https://play.golang.org/p/dX-wsvJmFie
+	owner = wrapper.Owner.ToStringByte()
+	group = wrapper.Group.ToStringByte()
+	other = wrapper.Other.ToStringByte()
+
+	return owner, group, other
+}
+
+// ToFileModeString 4 digit string 0rwx, example 0777
+func (wrapper RwxWrapper) ToFileModeString() string {
+	// # https://play.golang.org/p/dX-wsvJmFie
+	allBytes := wrapper.ToCompiledOctalBytes4Digits()
 
 	return string(allBytes[:])
 }
 
-// ToModeStr 3 digit string, example 777
-func (wrapper Wrapper) ToModeStr() string {
+// ToRwxCompiledStr 3 digit string, example 777
+func (wrapper RwxWrapper) ToRwxCompiledStr() string {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	allBytes := wrapper.Chars()
+	allBytes := wrapper.ToCompiledOctalBytes4Digits()
 
 	return string(allBytes[1:])
 }
 
-// ToHyphenedRwx returns "-rwxrwxrwx"
-func (wrapper Wrapper) ToHyphenedRwx() string {
+// ToFullRwxValueString returns "-rwxrwxrwx"
+func (wrapper RwxWrapper) ToFullRwxValueString() string {
 	owner := wrapper.Owner.ToRwxString()
 	group := wrapper.Group.ToRwxString()
 	other := wrapper.Other.ToRwxString()
@@ -101,26 +143,27 @@ func (wrapper Wrapper) ToHyphenedRwx() string {
 	return constants.Hyphen + owner + group + other
 }
 
-func (wrapper Wrapper) ToHyphenedRwxChars() []byte {
-	str := wrapper.ToHyphenedRwx()
+// ToFullRwxValuesChars "-rwxrwxrwx" Bytes values
+func (wrapper RwxWrapper) ToFullRwxValuesChars() []byte {
+	str := wrapper.ToFullRwxValueString()
 	chars := []byte(str)
 
 	return chars
 }
 
-func (wrapper Wrapper) String() string {
+func (wrapper RwxWrapper) String() string {
 	// # https://ss64.com/bash/chmod.html, needs to be 10 always
-	return wrapper.ToHyphenedRwx()
+	return wrapper.ToFullRwxValueString()
 }
 
-func (wrapper Wrapper) ToFileMode() os.FileMode {
+func (wrapper RwxWrapper) ToFileMode() os.FileMode {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	octalUint32 := wrapper.ToUint32Octal()
 
 	return os.FileMode(octalUint32)
 }
 
-func (wrapper Wrapper) ApplyChmod(
+func (wrapper RwxWrapper) ApplyChmod(
 	fileOrDirectoryPath string,
 	isSkipOnNonExist bool,
 ) error {
@@ -149,7 +192,7 @@ func (wrapper Wrapper) ApplyChmod(
 }
 
 // UnixApplyRecursive skip if it is a non dir path
-func (wrapper Wrapper) UnixApplyRecursive(
+func (wrapper RwxWrapper) UnixApplyRecursive(
 	dirPath string,
 	isSkipOnNonExist bool,
 ) error {
@@ -166,17 +209,11 @@ func (wrapper Wrapper) UnixApplyRecursive(
 				"Path doesn't exist", dirPath)
 	}
 
-	isDir := fsinternal.IsDirectory(dirPath)
-
-	if isDir {
-		return wrapper.applyUnixRecursiveChmodUsingCmd(
-			dirPath)
-	}
-
-	return nil
+	return wrapper.applyUnixRecursiveChmodUsingCmd(
+		dirPath)
 }
 
-func (wrapper Wrapper) applyUnixRecursiveChmodUsingCmd(dirPath string) error {
+func (wrapper RwxWrapper) applyUnixRecursiveChmodUsingCmd(dirPath string) error {
 	cmd := wrapper.getUnixRecursiveCmdForChmod(dirPath)
 
 	if cmd == nil {
@@ -200,12 +237,12 @@ func (wrapper Wrapper) applyUnixRecursiveChmodUsingCmd(dirPath string) error {
 	return nil
 }
 
-func (wrapper Wrapper) getUnixRecursiveCmdForChmod(dirPath string) *exec.Cmd {
+func (wrapper RwxWrapper) getUnixRecursiveCmdForChmod(dirPath string) *exec.Cmd {
 	instructionLine := constants.ChmodCommand +
 		constants.Space +
 		constants.RecursiveCommandFlag +
 		constants.Space +
-		wrapper.ToModeStr() +
+		wrapper.ToRwxCompiledStr() +
 		constants.Space +
 		dirPath
 
@@ -215,10 +252,18 @@ func (wrapper Wrapper) getUnixRecursiveCmdForChmod(dirPath string) *exec.Cmd {
 		instructionLine)
 }
 
-func (wrapper Wrapper) MustApplyChmod(fileOrDirectoryPath string) {
+func (wrapper RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 	err := os.Chmod(fileOrDirectoryPath, wrapper.ToFileMode())
 
 	if err != nil {
 		panic(err)
+	}
+}
+
+func (wrapper RwxWrapper) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
+	return &chmodins.RwxOwnerGroupOther{
+		Owner: wrapper.Owner.ToRwxString(),
+		Group: wrapper.Group.ToRwxString(),
+		Other: wrapper.Other.ToRwxString(),
 	}
 }

@@ -6,7 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
-func applyPathInstructions(
+func unixApplyRecursivePathInstructions(
 	testCase *chmodhelpertestwrappers.RwxInstructionTestWrapper,
 ) error {
 	executors, err := chmodhelper.ParseRwxInstructionsToExecutors(
@@ -15,8 +15,7 @@ func applyPathInstructions(
 	msgtype.SimpleHandleErr(err, "applyPathInstructions")
 
 	for _, createPath := range testCase.CreatePaths {
-		err2 := executors.ApplyOnPaths(createPath.GetPaths())
-
+		err2 := executors.ApplyOnPath(createPath.Dir)
 		if err2 != nil {
 			return err2
 		}

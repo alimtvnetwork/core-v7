@@ -8,11 +8,11 @@ import (
 
 func GetExistingChmodWrapper(
 	filePath string,
-) (Wrapper, error) {
+) (RwxWrapper, error) {
 	fileInfo, err := os.Stat(filePath)
 
 	if err != nil {
-		return Wrapper{}, msgtype.
+		return RwxWrapper{}, msgtype.
 			PathErrorMessage.
 			Error(err.Error(), ", file:"+filePath)
 	}

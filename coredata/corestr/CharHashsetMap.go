@@ -711,9 +711,7 @@ func (charHashsetMap *CharHashsetMap) AddSameStartingCharItems(
 
 	(*charHashsetMap.items)[char] =
 		NewHashsetUsingStrings(
-			allItemsWithSameChar,
-			length*2,
-			true)
+			allItemsWithSameChar)
 
 	return charHashsetMap
 }

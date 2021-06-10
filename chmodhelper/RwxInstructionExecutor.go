@@ -11,7 +11,7 @@ import (
 
 type RwxInstructionExecutor struct {
 	rwxInstruction *chmodins.RwxInstruction
-	varWrapper     *VarWrapper
+	varWrapper     *RwxVariableWrapper
 }
 
 func (receiver *RwxInstructionExecutor) IsVarWrapper() bool {
@@ -22,7 +22,7 @@ func (receiver *RwxInstructionExecutor) IsFixedWrapper() bool {
 	return receiver.varWrapper.IsFixedType()
 }
 
-func (receiver *RwxInstructionExecutor) CompiledWrapper(mode os.FileMode) (*Wrapper, error) {
+func (receiver *RwxInstructionExecutor) CompiledWrapper(mode os.FileMode) (*RwxWrapper, error) {
 	if receiver.IsFixedWrapper() {
 		return receiver.
 			varWrapper.
@@ -41,8 +41,8 @@ func (receiver *RwxInstructionExecutor) CompiledWrapper(mode os.FileMode) (*Wrap
 }
 
 func (receiver *RwxInstructionExecutor) CompiledWrapperUsingWrapper(
-	wrapper *Wrapper,
-) (*Wrapper, error) {
+	wrapper *RwxWrapper,
+) (*RwxWrapper, error) {
 	if receiver.IsFixedWrapper() {
 		return receiver.
 			varWrapper.

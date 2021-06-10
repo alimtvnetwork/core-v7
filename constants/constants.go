@@ -298,6 +298,8 @@ const (
 	BashDefaultPath                           = "/bin/bash"
 	BashCommandline                           = "bash"
 	NonInteractiveFlag                        = "-c"
+	NonInteractiveCmdFlag                     = "/c"
+	NonInteractivePerlFlag                    = "-e"
 	ChmodCommand                              = "chmod"
 	RecursiveCommandFlag                      = "-R"
 	VersionCommandForCmd                      = "ver.exe"

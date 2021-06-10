@@ -1059,9 +1059,7 @@ func (charCollectionMap *CharCollectionMap) HashsetByChar(
 	}
 
 	return NewHashsetUsingCollection(
-		collection,
-		0,
-		false)
+		collection)
 }
 
 func (charCollectionMap *CharCollectionMap) HashsetByCharLock(
@@ -1079,8 +1077,7 @@ func (charCollectionMap *CharCollectionMap) HashsetByCharLock(
 
 	return NewHashsetUsingStrings(
 		items,
-		0,
-		false)
+	)
 }
 
 func (charCollectionMap *CharCollectionMap) HashsetByStringFirstChar(

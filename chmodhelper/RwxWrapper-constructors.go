@@ -3,6 +3,7 @@ package chmodhelper
 import (
 	"os"
 
+	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/msgtype"
@@ -11,7 +12,7 @@ import (
 // New mode length needs to 3, not more not less
 // mode chars should be digits only (0-7)
 // example "777", "755", "655"
-func New(mode string) (Wrapper, error) {
+func New(mode string) (RwxWrapper, error) {
 	length := len(mode)
 
 	if length != SingleRwxLength {
@@ -32,7 +33,7 @@ func New(mode string) (Wrapper, error) {
 					messages.ModeCharShouldBeAllNumbersAndWithin0To7,
 					n+constants.ZeroChar)
 
-			return Wrapper{}, err
+			return RwxWrapper{}, err
 		}
 
 		allBytes[i] = n
@@ -45,44 +46,52 @@ func New(mode string) (Wrapper, error) {
 }
 
 // NewUsingBytes each byte should not be more than 7
-func NewUsingBytes(allBytes [3]byte) Wrapper {
+func NewUsingBytes(allBytes [3]byte) RwxWrapper {
 	return NewUsingByte(
 		allBytes[OwnerIndex],
 		allBytes[GroupIndex],
 		allBytes[OtherIndex])
 }
 
-func NewUsingFileModePtr(fileMode os.FileMode) *Wrapper {
+func NewUsingFileModePtr(fileMode os.FileMode) *RwxWrapper {
 	str := fileMode.String()
 	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
 	owner := str[1:4]
 	group := str[4:7]
 	other := str[7:10]
 
-	return &Wrapper{
+	return &RwxWrapper{
 		Owner: NewAttributeUsingRwx(owner),
 		Group: NewAttributeUsingRwx(group),
 		Other: NewAttributeUsingRwx(other),
 	}
 }
 
-func NewUsingFileMode(fileMode os.FileMode) Wrapper {
+func NewUsingFileMode(fileMode os.FileMode) RwxWrapper {
 	str := fileMode.String()
 	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
 	owner := str[1:4]
 	group := str[4:7]
 	other := str[7:10]
 
-	return Wrapper{
+	return RwxWrapper{
 		Owner: NewAttributeUsingRwx(owner),
 		Group: NewAttributeUsingRwx(group),
 		Other: NewAttributeUsingRwx(other),
 	}
+}
+
+func NewUsingRwxOwnerGroupOther(
+	rwxOwnerGroupOther *chmodins.RwxOwnerGroupOther,
+) (RwxWrapper, error) {
+	return NewUsingRwxFullString(
+		rwxOwnerGroupOther.ToString(
+			false))
 }
 
 // NewUsingByte each byte should not be more than 7
-func NewUsingByte(owner, group, other byte) Wrapper {
-	wrapper := Wrapper{
+func NewUsingByte(owner, group, other byte) RwxWrapper {
+	wrapper := RwxWrapper{
 		Owner: NewAttributeUsingByte(owner),
 		Group: NewAttributeUsingByte(group),
 		Other: NewAttributeUsingByte(other),
@@ -91,8 +100,8 @@ func NewUsingByte(owner, group, other byte) Wrapper {
 	return wrapper
 }
 
-func NewUsingAttrVariants(owner, group, other AttrVariant) Wrapper {
-	wrapper := Wrapper{
+func NewUsingAttrVariants(owner, group, other AttrVariant) RwxWrapper {
+	wrapper := RwxWrapper{
 		Owner: NewAttributeUsingVariant(owner),
 		Group: NewAttributeUsingVariant(group),
 		Other: NewAttributeUsingVariant(other),
@@ -101,8 +110,8 @@ func NewUsingAttrVariants(owner, group, other AttrVariant) Wrapper {
 	return wrapper
 }
 
-func NewUsingAttrs(owner, group, other Attribute) Wrapper {
-	wrapper := Wrapper{
+func NewUsingAttrs(owner, group, other Attribute) RwxWrapper {
+	wrapper := RwxWrapper{
 		Owner: owner,
 		Group: group,
 		Other: other,
@@ -111,7 +120,7 @@ func NewUsingAttrs(owner, group, other Attribute) Wrapper {
 	return wrapper
 }
 
-// NewUsingHyphenedRwxes Format "-rwxrwxrwx"
+// NewUsingHyphenedRwxFullString Format "-rwxrwxrwx"
 //
 // eg. owener all enabled only "-rwx------"
 //
@@ -120,35 +129,35 @@ func NewUsingAttrs(owner, group, other Attribute) Wrapper {
 // length must be 10 always.
 //
 // Reference: https://ss64.com/bash/chmod.html
-func NewUsingHyphenedRwxes(hyphenedRwxRwxRwx string) (Wrapper, error) {
+func NewUsingHyphenedRwxFullString(hyphenedRwxRwxRwx string) (RwxWrapper, error) {
 	length := len(hyphenedRwxRwxRwx)
 
 	if length != HyphenedRwxLength {
-		return Wrapper{}, hyphenedRwxLengthErr
+		return RwxWrapper{}, hyphenedRwxLengthErr
 	}
 
-	return NewUsingRwxes(hyphenedRwxRwxRwx[constants.One:])
+	return NewUsingRwxFullString(hyphenedRwxRwxRwx[constants.One:])
 }
 
-// NewUsingRwxes Format "rwxrwxrwx"
+// NewUsingRwxFullString Format "rwxrwxrwx"
 //
 // eg. owener all enabled only "rwx------"
 //
 // eg. group all enabled only  "---rwx---"
 //
 // length must be 9 always.
-func NewUsingRwxes(rwxrwxrwx string) (Wrapper, error) {
-	length := len(rwxrwxrwx)
+func NewUsingRwxFullString(rwxFullStringWithoutHyphen string) (RwxWrapper, error) {
+	length := len(rwxFullStringWithoutHyphen)
 
 	if length != FullRwxLengthWithoutHyphen {
-		return Wrapper{}, fullRwxLengthWithoutHyphenErr
+		return RwxWrapper{}, fullRwxLengthWithoutHyphenErr
 	}
 
-	owner := rwxrwxrwx[0:3]
-	group := rwxrwxrwx[3:6]
-	other := rwxrwxrwx[6:9]
+	owner := rwxFullStringWithoutHyphen[0:3]
+	group := rwxFullStringWithoutHyphen[3:6]
+	other := rwxFullStringWithoutHyphen[6:9]
 
-	wrapper := Wrapper{
+	wrapper := RwxWrapper{
 		Owner: NewAttributeUsingRwx(owner),
 		Group: NewAttributeUsingRwx(group),
 		Other: NewAttributeUsingRwx(other),
@@ -157,6 +166,6 @@ func NewUsingRwxes(rwxrwxrwx string) (Wrapper, error) {
 	return wrapper, nil
 }
 
-func NewUsingVariant(variant Variant) (Wrapper, error) {
+func NewUsingVariant(variant Variant) (RwxWrapper, error) {
 	return New(variant.String())
 }

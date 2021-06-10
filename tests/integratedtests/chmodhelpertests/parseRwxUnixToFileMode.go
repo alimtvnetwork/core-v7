@@ -8,7 +8,7 @@ import (
 )
 
 func parseRwxUnixToFileMode(rwxOwnerGroupOther *chmodins.RwxOwnerGroupOther) os.FileMode {
-	varWrapper, err := chmodhelper.ParseRwxOwnerGroupOtherInstructionToVarWrapper(
+	varWrapper, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
 		rwxOwnerGroupOther)
 
 	if err != nil {

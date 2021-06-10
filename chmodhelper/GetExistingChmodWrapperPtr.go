@@ -8,7 +8,7 @@ import (
 
 func GetExistingChmodWrapperPtr(
 	filePath string,
-) (*Wrapper, error) {
+) (*RwxWrapper, error) {
 	fileInfo, err := os.Stat(filePath)
 
 	if err != nil {

@@ -5,12 +5,12 @@ import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
 func ParseRwxInstructionToVarWrapper(
 	rwxInstruction *chmodins.RwxInstruction,
 ) (
-	*VarWrapper, error,
+	*RwxVariableWrapper, error,
 ) {
 	if rwxInstruction == nil {
 		return nil, rwxInstructionNilErr
 	}
 
-	return ParseRwxOwnerGroupOtherInstructionToVarWrapper(
+	return ParseRwxOwnerGroupOtherToRwxVariableWrapper(
 		&rwxInstruction.RwxOwnerGroupOther)
 }
