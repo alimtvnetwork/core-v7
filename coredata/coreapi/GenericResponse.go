@@ -13,6 +13,6 @@ func (receiver GenericResponse) GenericResponseResult() *GenericResponseResult {
 		Response: coredynamic.NewSimpleResult(
 			receiver,
 			receiver.Attribute.IsValid,
-			receiver.Attribute.InvalidMessage),
+			receiver.Attribute.Message),
 	}
 }

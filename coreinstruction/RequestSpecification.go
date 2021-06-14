@@ -12,7 +12,10 @@ type RequestSpecification struct {
 func (r RequestSpecification) ClonePtr() *RequestSpecification {
 	return &RequestSpecification{
 		BaseIdentifier:    BaseIdentifier{r.Id},
-		BaseTypeDotFilter: BaseTypeDotFilter{r.TypeDotFilter},
+		BaseTypeDotFilter: BaseTypeDotFilter{
+			splitDotFilters: nil,
+			TypeDotFilter:   r.TypeDotFilter,
+		},
 		BaseTags: BaseTags{
 			Tags: r.Tags,
 		},
