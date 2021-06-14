@@ -1,9 +1,12 @@
 package enumimpl
 
 import (
+	"fmt"
+
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type BasicInt16 struct {
@@ -42,6 +45,20 @@ func NewBasicInt16(
 	}
 }
 
+func (receiver *BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
+	if len(checkingItems) == 0 {
+		return true
+	}
+
+	for _, givenByte := range checkingItems {
+		if value == givenByte {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (receiver *BasicInt16) Max() int16 {
 	return receiver.maxVal
 }
@@ -74,6 +91,7 @@ func (receiver *BasicInt16) IsValidRange(value int16) bool {
 	return value >= receiver.minVal && value <= receiver.maxVal
 }
 
+// ToEnumJsonBytes used for MarshalJSON from map
 func (receiver *BasicInt16) ToEnumJsonBytes(value int16) []byte {
 	return receiver.jsonBytesHashmap[value]
 }
@@ -82,7 +100,14 @@ func (receiver *BasicInt16) ToEnumString(value int16) string {
 	return *converters.UnsafeBytesToStringPtr(receiver.jsonBytesHashmap[value])
 }
 
-func (receiver *BasicInt16) JsonBytesToValue(
+func (receiver *BasicInt16) ToNumberString(valueInRawFormat interface{}) string {
+	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
+}
+
+// UnmarshallEnumToValue Mostly used for UnmarshalJSON
+//
+// Given bytes string enum value and transpile to exact enum raw value using map
+func (receiver *BasicInt16) UnmarshallEnumToValue(
 	jsonUnmarshallingValue []byte,
 ) (int16, error) {
 	if jsonUnmarshallingValue == nil {
@@ -94,7 +119,11 @@ func (receiver *BasicInt16) JsonBytesToValue(
 	v, has := receiver.hashMap[str]
 
 	if !has {
-		return constants.Zero, defaulterr.UnMarshalling
+		return constants.Zero, msgtype.MeaningFulErrorWithData(
+			msgtype.UnMarshallingFailed,
+			"UnmarshallEnumToValue",
+			defaulterr.UnMarshallingPlusCannotFindingEnumMap,
+			string(jsonUnmarshallingValue))
 	}
 
 	return v, nil

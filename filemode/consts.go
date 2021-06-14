@@ -23,6 +23,8 @@ const (
 	X222                                         os.FileMode = 0222
 	X333                                         os.FileMode = 0333
 	X444                                         os.FileMode = 0444
+	X455                                         os.FileMode = 0455
+	X466                                         os.FileMode = 0466
 	X555                                         os.FileMode = 0555
 	X644                                         os.FileMode = 0644
 	X655                                         os.FileMode = 0655

@@ -7,6 +7,18 @@ import (
 
 type Variant byte
 
+func (v Variant) ToNumberString() string {
+	return basicEnumImpl.ToNumberString(v.Value())
+}
+
+func (v Variant) Name() string {
+	return basicEnumImpl.ToEnumString(v.Value())
+}
+
+func (v Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+	panic("implement me")
+}
+
 func (v Variant) MarshalJSON() ([]byte, error) {
 	return basicEnumImpl.ToEnumJsonBytes(v.Value()), nil
 }

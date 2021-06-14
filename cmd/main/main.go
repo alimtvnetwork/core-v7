@@ -3,22 +3,33 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/evatix-go/core/reqtype"
 )
 
 func main() {
-	rwx := chmodins.RwxOwnerGroupOther{
-		Owner: "rwx",
-		Group: "r--",
-		Other: "-wx",
-	}
+	// rwx := chmodins.RwxOwnerGroupOther{
+	// 	Owner: "rwx",
+	// 	Group: "r--",
+	// 	Other: "-wx",
+	// }
+	//
+	// fmt.Println(rwx.String())
+	// wrapper, _ := chmodhelper.NewUsingRwxOwnerGroupOther(&rwx)
 
-	fmt.Println(rwx.String())
-	wrapper, _ := chmodhelper.NewUsingRwxOwnerGroupOther(&rwx)
+	// fmt.Println(wrapper.ToRwxOwnerGroupOther().String())
+	//
+	// for name, variation := range linuxtype.RangesMap {
+	// 	fmt.Println(name, variation.Name(), variation.Value(), variation.String(), variation.ToNumberString())
+	// }
+	//
+	// for name, variation := range reqtype.RangesMap {
+	// 	fmt.Println(name, variation.Name(), variation.Value(), variation.String(), variation.ToNumberString())
+	// 	fmt.Println(variation.IsCrudOrSkip())
+	// 	fmt.Println("IsCreate OR Merge:", variation.IsAnyOfReqs(reqtype.Create, reqtype.Merge))
+	// }
 
-	fmt.Println(wrapper.ToRwxOwnerGroupOther().String())
+	fmt.Println(reqtype.RangesNotMeetError("", reqtype.Create, reqtype.Merge))
 
 	// items := &[]string{
 	// 	"00",

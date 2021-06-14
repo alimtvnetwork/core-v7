@@ -11,6 +11,13 @@ var (
 		UnMarshallingFailed.
 		ErrorNoRefs("Cannot unmarshal data to object form.")
 
+	UnMarshallingPlusCannotFindingEnumMap = msgtype.
+		UnMarshallingFailed.
+		ErrorNoRefs(
+			"Cannot unmarshal data to object form. " +
+				"Cannot find the given data in the enum map or dictionary. " +
+				"Reference data given as : ")
+
 	MarshallingFailedDueToNilOrEmpty = msgtype.
 		UnMarshallingFailed.
 		ErrorNoRefs("Cannot marshal to serialize data because of nil or empty object.")
