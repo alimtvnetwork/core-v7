@@ -206,10 +206,22 @@ func (receiver *Dynamic) IsStruct() bool {
 	return receiver.ReflectKind() == reflect.Struct
 }
 
+func (receiver *Dynamic) IsFunc() bool {
+	return receiver.ReflectKind() == reflect.Func
+}
+
 func (receiver *Dynamic) IsSliceOrArray() bool {
 	k := receiver.ReflectKind()
 
 	return k == reflect.Slice || k == reflect.Array
+}
+
+func (receiver *Dynamic) IsSliceOrArrayOrMap() bool {
+	k := receiver.ReflectKind()
+
+	return k == reflect.Slice ||
+		k == reflect.Array ||
+		k == reflect.Map
 }
 
 func (receiver *Dynamic) IsMap() bool {

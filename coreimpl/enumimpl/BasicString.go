@@ -41,6 +41,20 @@ func NewBasicString(
 	}
 }
 
+func (receiver *BasicString) IsAnyOf(value string, checkingItems ...string) bool {
+	if len(checkingItems) == 0 {
+		return true
+	}
+
+	for _, givenByte := range checkingItems {
+		if value == givenByte {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (receiver *BasicString) Max() string {
 	return receiver.maxVal
 }
@@ -65,11 +79,15 @@ func (receiver *BasicString) IsValidRange(value string) bool {
 	return receiver.hashset[value]
 }
 
+// ToEnumJsonBytes used for MarshalJSON from map
 func (receiver *BasicString) ToEnumJsonBytes(value string) []byte {
 	return receiver.jsonBytesHashmap[value]
 }
 
-func (receiver *BasicString) JsonBytesToValue(
+// UnmarshallEnumToValue Mostly used for UnmarshalJSON
+//
+// Given bytes string enum value and transpile to exact enum raw value using map
+func (receiver *BasicString) UnmarshallEnumToValue(
 	jsonUnmarshallingValue []byte,
 ) (string, error) {
 	if jsonUnmarshallingValue == nil {

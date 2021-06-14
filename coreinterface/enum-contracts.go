@@ -3,7 +3,10 @@ package coreinterface
 import "gitlab.com/evatix-go/core/coredata/corejson"
 
 type BasicEnumer interface {
+	ToNamer
+	ToNumberStringer
 	Stringer
+	UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error)
 	corejson.JsonMarshaller
 }
 
@@ -59,20 +62,28 @@ type Int16ToEnumStringer interface {
 	ToInt16EnumString(input int16) string
 }
 
+type BasicInt32Enumer interface {
+	MaxInt32() int32
+	MinInt32() int32
+	ValueInt32() int32
+	RangesInt32() []int32
+	ToEnumString(input int32) string
+}
+
 type BasicInt16Enumer interface {
-	MaxInt16() int8
-	MinInt16() int8
-	ValueInt16() int8
-	RangesInt16() []int8
-	ToEnumString(input int8) string
+	MaxInt16() int16
+	MinInt16() int16
+	ValueInt16() int16
+	RangesInt16() []int16
+	ToEnumString(input int16) string
 }
 
 type BasicInt8Enumer interface {
-	MaxInt8() int16
-	MinInt8() int16
-	ValueInt8() int16
-	RangesInt8() []int16
-	ToEnumString(input int16) string
+	MaxInt8() int8
+	MinInt8() int8
+	ValueInt8() int8
+	RangesInt8() []int8
+	ToEnumString(input int8) string
 }
 
 type BasicIntEnumer interface {
