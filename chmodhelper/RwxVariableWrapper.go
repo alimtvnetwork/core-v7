@@ -23,6 +23,20 @@ func (varWrapper *RwxVariableWrapper) ToCompileWrapper(fixed *RwxWrapper) RwxWra
 	return *varWrapper.ToCompileWrapperPtr(fixed)
 }
 
+func (varWrapper *RwxVariableWrapper) ToCompileWrapperUsingLocationPtr(location string) (*RwxWrapper, error) {
+	if varWrapper.IsFixedType() {
+		return varWrapper.ToCompileFixedPtr(), nil
+	}
+
+	existingRwxWrapper, err := GetExistingChmodRwxWrapperPtr(location)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return varWrapper.ToCompileWrapperPtr(existingRwxWrapper), nil
+}
+
 // ToCompileWrapperPtr if Fixed type then fixed input can be nil.
 func (varWrapper *RwxVariableWrapper) ToCompileWrapperPtr(fixed *RwxWrapper) *RwxWrapper {
 	if varWrapper.IsFixedType() {

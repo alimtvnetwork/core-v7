@@ -83,13 +83,22 @@ func (receiver *RwxInstructionExecutor) ApplyOnPath(location string) error {
 
 	if receiver.rwxInstruction.IsRecursive {
 		return compiledWrapper.LinuxApplyRecursive(
-			location,
-			receiver.rwxInstruction.IsSkipOnNonExist)
+			receiver.rwxInstruction.IsSkipOnNonExist,
+			location)
 	}
 
 	return compiledWrapper.ApplyChmod(
+		receiver.rwxInstruction.IsSkipOnNonExist,
 		location,
-		receiver.rwxInstruction.IsSkipOnNonExist)
+	)
+}
+
+func (receiver *RwxInstructionExecutor) ApplyOnPathsDirect(locations ...string) error {
+	if len(locations) == 0 {
+		return nil
+	}
+
+	return receiver.ApplyOnPathsPtr(&locations)
 }
 
 func (receiver *RwxInstructionExecutor) ApplyOnPaths(locations []string) error {
@@ -139,5 +148,5 @@ func (receiver *RwxInstructionExecutor) applyOnPathsContinueOnError(locations *[
 		}
 	}
 
-	return msgtype.SliceToError(&errorSlice)
+	return msgtype.SliceToErrorPtr(&errorSlice)
 }

@@ -28,7 +28,7 @@ func Test_LinuxApplyRecursiveOnPath(t *testing.T) {
 			convey.So(actualErr, convey.ShouldBeNil)
 		})
 
-		assertChmodAsExpected(
+		assertTestCaseChmodAsExpected(
 			t,
 			&testCase,
 			testHeader)

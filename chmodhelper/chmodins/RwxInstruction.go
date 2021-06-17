@@ -2,9 +2,7 @@ package chmodins
 
 type RwxInstruction struct {
 	RwxOwnerGroupOther
-	IsSkipOnNonExist  bool `json:"IsSkipOnNonExist"`
-	IsContinueOnError bool `json:"IsContinueOnError"`
-	IsRecursive       bool `json:"IsRecursive"`
+	Condition
 }
 
 func (receiver *RwxInstruction) Clone() *RwxInstruction {
@@ -14,8 +12,10 @@ func (receiver *RwxInstruction) Clone() *RwxInstruction {
 
 	return &RwxInstruction{
 		RwxOwnerGroupOther: *receiver.RwxOwnerGroupOther.Clone(),
-		IsSkipOnNonExist:   receiver.IsSkipOnNonExist,
-		IsContinueOnError:  receiver.IsContinueOnError,
-		IsRecursive:        receiver.IsRecursive,
+		Condition: Condition{
+			IsSkipOnNonExist:  receiver.IsSkipOnNonExist,
+			IsContinueOnError: receiver.IsContinueOnError,
+			IsRecursive:       receiver.IsRecursive,
+		},
 	}
 }

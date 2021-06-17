@@ -443,13 +443,11 @@ func (receiver Request) String() string {
 func (receiver *Request) UnmarshalJSON(data []byte) error {
 	dataConv, err := BasicEnumImpl.UnmarshallEnumToValue(data)
 
-	if err != nil {
-		return err
+	if err == nil {
+		*receiver = Request(dataConv)
 	}
 
-	*receiver = Request(dataConv)
-
-	return nil
+	return err
 }
 
 func (receiver Request) MarshalJSON() ([]byte, error) {

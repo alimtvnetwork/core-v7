@@ -169,3 +169,17 @@ func NewUsingRwxFullString(rwxFullStringWithoutHyphen string) (RwxWrapper, error
 func NewUsingVariant(variant Variant) (RwxWrapper, error) {
 	return New(variant.String())
 }
+
+// NewRwxInstruction rwxFullString must be 10 chars in "-rwxrwxrwx"
+func NewRwxInstruction(
+	rwxFullString string,
+	condition chmodins.Condition,
+) (*chmodins.RwxInstruction, error) {
+	rwxWrapper, err := NewUsingHyphenedRwxFullString(rwxFullString)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return rwxWrapper.ToRwxInstruction(&condition), nil
+}

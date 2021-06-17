@@ -2,6 +2,7 @@ package chmodhelper
 
 import (
 	"bytes"
+	"errors"
 	"os"
 	"os/exec"
 	"strconv"
@@ -164,8 +165,8 @@ func (rwxWrapper *RwxWrapper) ToFileMode() os.FileMode {
 }
 
 func (rwxWrapper *RwxWrapper) ApplyChmod(
-	fileOrDirectoryPath string,
 	isSkipOnNonExist bool,
+	fileOrDirectoryPath string,
 ) error {
 	isFileExist := fsinternal.IsPathExists(fileOrDirectoryPath)
 
@@ -193,10 +194,10 @@ func (rwxWrapper *RwxWrapper) ApplyChmod(
 
 // LinuxApplyRecursive skip if it is a non dir path
 func (rwxWrapper *RwxWrapper) LinuxApplyRecursive(
-	dirPath string,
 	isSkipOnNonExist bool,
+	location string,
 ) error {
-	isFileExist := fsinternal.IsPathExists(dirPath)
+	isFileExist := fsinternal.IsPathExists(location)
 
 	if isSkipOnNonExist && !isFileExist {
 		return nil
@@ -206,21 +207,21 @@ func (rwxWrapper *RwxWrapper) LinuxApplyRecursive(
 		return msgtype.
 			PathInvalidErrorMessage.
 			Error(
-				"Path doesn't exist", dirPath)
+				"Path doesn't exist. path : ", location)
 	}
 
 	return rwxWrapper.applyLinuxRecursiveChmodUsingCmd(
-		dirPath)
+		location)
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(dirPath string) error {
-	cmd := rwxWrapper.getLinuxRecursiveCmdForChmod(dirPath)
+func (rwxWrapper *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
+	cmd := rwxWrapper.getLinuxRecursiveCmdForChmod(location)
 
 	if cmd == nil {
 		return msgtype.
 			FailedToCreateCmd.Error(
 			constants.BashCommandline,
-			dirPath)
+			location)
 	}
 
 	var stderr bytes.Buffer
@@ -231,7 +232,7 @@ func (rwxWrapper *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(dirPath string) e
 		return msgtype.
 			FailedToCreateCmd.Error(
 			constants.ChmodCommand,
-			err.Error()+constants.NewLineUnix+stderr.String())
+			err.Error()+constants.NewLineUnix+stderr.String()+"location:"+location)
 	}
 
 	return nil
@@ -258,7 +259,12 @@ func (rwxWrapper *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 		rwxWrapper.ToFileMode())
 
 	if err != nil {
-		panic(err)
+		finalErr := errors.New(err.Error() + fileOrDirectoryPath)
+
+		panic(msgtype.MeaningFulError(
+			msgtype.PathChmodApplyMessage,
+			"MustApplyChmod",
+			finalErr))
 	}
 }
 
@@ -267,6 +273,17 @@ func (rwxWrapper *RwxWrapper) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOthe
 		Owner: rwxWrapper.Owner.ToRwxString(),
 		Group: rwxWrapper.Group.ToRwxString(),
 		Other: rwxWrapper.Other.ToRwxString(),
+	}
+}
+
+func (rwxWrapper *RwxWrapper) ToRwxInstruction(
+	condition *chmodins.Condition,
+) *chmodins.RwxInstruction {
+	rwxOwnerGroupOther := rwxWrapper.ToRwxOwnerGroupOther()
+
+	return &chmodins.RwxInstruction{
+		RwxOwnerGroupOther: *rwxOwnerGroupOther,
+		Condition:          *condition,
 	}
 }
 
@@ -280,4 +297,104 @@ func (rwxWrapper *RwxWrapper) Clone() *RwxWrapper {
 		Group: *rwxWrapper.Group.Clone(),
 		Other: *rwxWrapper.Other.Clone(),
 	}
+}
+
+func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
+	condition *chmodins.Condition,
+	locations []string,
+) error {
+	if condition.IsContinueOnError {
+		// continue on error
+		return rwxWrapper.applyLinuxChmodNonRecursiveManyContinueOnError(
+			condition,
+			locations)
+	}
+
+	for _, location := range locations {
+		err := rwxWrapper.ApplyChmod(
+			condition.IsSkipOnNonExist,
+			location)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (rwxWrapper *RwxWrapper) ApplyLinuxChmodOnMany(
+	condition *chmodins.Condition,
+	locations ...string,
+) error {
+	if condition.IsRecursive {
+		return rwxWrapper.applyLinuxChmodOnManyRecursive(
+			condition,
+			locations)
+	}
+
+	return rwxWrapper.applyLinuxChmodOnManyNonRecursive(
+		condition, locations)
+}
+
+func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyRecursive(
+	condition *chmodins.Condition,
+	locations []string,
+) error {
+	if condition.IsContinueOnError {
+		// continue on error
+		return rwxWrapper.applyLinuxChmodRecursiveManyContinueOnError(
+			condition,
+			locations)
+	}
+
+	for _, location := range locations {
+		err := rwxWrapper.LinuxApplyRecursive(
+			condition.IsSkipOnNonExist,
+			location)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (rwxWrapper *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
+	condition *chmodins.Condition,
+	locations []string,
+) error {
+	var errSlice []string
+
+	for _, location := range locations {
+		err := rwxWrapper.LinuxApplyRecursive(
+			condition.IsSkipOnNonExist,
+			location)
+
+		if err != nil {
+			errSlice = append(errSlice, err.Error())
+		}
+	}
+
+	return msgtype.SliceToErrorPtr(&errSlice)
+}
+
+func (rwxWrapper *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
+	condition *chmodins.Condition,
+	locations []string,
+) error {
+	var errSlice []string
+
+	for _, location := range locations {
+		err := rwxWrapper.ApplyChmod(
+			condition.IsSkipOnNonExist,
+			location)
+
+		if err != nil {
+			errSlice = append(errSlice, err.Error())
+		}
+	}
+
+	return msgtype.SliceToErrorPtr(&errSlice)
 }

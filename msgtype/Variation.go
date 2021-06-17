@@ -42,6 +42,7 @@ const (
 	CannotBeNegativeMessage                Variation = "Values or value cannot be negative value."
 	CannotBeNilOrEmptyMessage              Variation = "Values or value cannot be nil or null or empty."
 	CannotBeNilMessage                     Variation = "Values or value cannot be nil or null."
+	CannotConvertToRwxWhereVarRwxPossible  Variation = "Cannot convert Rwx, it had wildcards in type. It can only be converted to VarRwx."
 	ShouldBeNilMessage                     Variation = "Values or value should be nil or null."
 	ShouldBeLessThanMessage                Variation = "Values or value should be less than the reference."
 	ShouldBeGreaterThanMessage             Variation = "Values or value should be greater than the reference."
