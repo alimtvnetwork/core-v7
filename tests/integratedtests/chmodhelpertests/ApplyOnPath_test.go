@@ -28,7 +28,7 @@ func Test_ApplyOnPath(t *testing.T) {
 			So(actualErr, ShouldBeNil)
 		})
 
-		assertChmodAsExpected(
+		assertTestCaseChmodAsExpected(
 			t,
 			&testCase,
 			testHeader)

@@ -24,4 +24,5 @@ const (
 	ReadChar                         byte = 'r'
 	WriteChar                        byte = 'w'
 	ExecuteChar                      byte = 'x'
+	AllWildcards                          = "***"
 )

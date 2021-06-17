@@ -12,7 +12,7 @@ func linuxApplyRecursivePathInstructions(
 	executors, err := chmodhelper.ParseRwxInstructionsToExecutors(
 		&testCase.RwxInstructions)
 
-	msgtype.SimpleHandleErr(err, "applyPathInstructions")
+	msgtype.SimpleHandleErr(err, "linuxApplyRecursivePathInstructions")
 
 	for _, createPath := range testCase.CreatePaths {
 		err2 := executors.ApplyOnPath(createPath.Dir)

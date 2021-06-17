@@ -3,34 +3,34 @@ package chmodhelper
 import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
 
 func ParseRwxOwnerGroupOtherToRwxVariableWrapper(
-	rwxInstruction *chmodins.RwxOwnerGroupOther,
+	rwxOwnerGroupOther *chmodins.RwxOwnerGroupOther,
 ) (
 	*RwxVariableWrapper, error,
 ) {
-	if rwxInstruction == nil {
+	if rwxOwnerGroupOther == nil {
 		return nil, rwxInstructionNilErr
 	}
 
-	ownerVarAttr, ownerErr := ParseRwxToVarAttribute(rwxInstruction.Owner)
+	ownerVarAttr, ownerErr := ParseRwxToVarAttribute(rwxOwnerGroupOther.Owner)
 
 	if ownerErr != nil {
 		return nil, ownerErr
 	}
 
-	groupVarAttr, groupErr := ParseRwxToVarAttribute(rwxInstruction.Group)
+	groupVarAttr, groupErr := ParseRwxToVarAttribute(rwxOwnerGroupOther.Group)
 
 	if groupErr != nil {
 		return nil, groupErr
 	}
 
-	otherVarAttr, otherErr := ParseRwxToVarAttribute(rwxInstruction.Other)
+	otherVarAttr, otherErr := ParseRwxToVarAttribute(rwxOwnerGroupOther.Other)
 
 	if otherErr != nil {
 		return nil, otherErr
 	}
 
 	rawInput := ParseRwxInstructionToStringRwx(
-		rwxInstruction,
+		rwxOwnerGroupOther,
 		false)
 
 	isFixedType := ownerVarAttr.IsFixedType() &&

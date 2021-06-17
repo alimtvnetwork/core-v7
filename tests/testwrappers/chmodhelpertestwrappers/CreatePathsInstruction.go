@@ -33,15 +33,12 @@ func (receiver *CreatePathsInstruction) GetPathsPtr() *[]string {
 
 func (receiver *CreatePathsInstruction) GetFilesChmodMap() *corestr.Hashmap {
 	files := receiver.GetPathsPtr()
-	hashmap := corestr.NewHashmap(constants.ArbitraryCapacity50)
 
-	for _, filePath := range *files {
-		fileMode, err := chmodhelper.GetExistingChmod(filePath)
+	hashmap, err := chmodhelper.GetFilesChmodRwxFullMap(*files)
 
-		msgtype.SimpleHandleErr(err, filePath)
-
-		hashmap.AddOrUpdate(filePath, fileMode.String())
-	}
+	msgtype.SimpleHandleErr(
+		err,
+		"GetFilesChmodMap() failed to retrive hashmap from file paths")
 
 	return hashmap
 }
