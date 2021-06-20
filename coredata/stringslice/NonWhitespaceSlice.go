@@ -1,6 +1,6 @@
 package stringslice
 
-import "gitlab.com/evatix-go/core/internal/stringutil"
+import "gitlab.com/evatix-go/core/internal/strutilinternal"
 
 func NonWhitespaceSlice(
 	slice []string,
@@ -18,7 +18,7 @@ func NonWhitespaceSlice(
 	newSlice := MakeDefault(length)
 
 	for _, s := range slice {
-		if stringutil.IsEmptyOrWhitespace(s) {
+		if strutilinternal.IsEmptyOrWhitespace(s) {
 			continue
 		}
 

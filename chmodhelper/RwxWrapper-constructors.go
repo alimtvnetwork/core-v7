@@ -170,6 +170,16 @@ func NewUsingVariant(variant Variant) (RwxWrapper, error) {
 	return New(variant.String())
 }
 
+func NewUsingVariantPtr(variant Variant) (*RwxWrapper, error) {
+	rwxWrapper, err := New(variant.String())
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &rwxWrapper, nil
+}
+
 // NewRwxInstruction rwxFullString must be 10 chars in "-rwxrwxrwx"
 func NewRwxInstruction(
 	rwxFullString string,

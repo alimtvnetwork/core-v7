@@ -7,6 +7,14 @@ func CombineWithMsgType(
 	otherMsg string,
 	reference interface{},
 ) string {
+	if otherMsg == "" {
+		return genericMsg.String() +
+			constants.Space +
+			ReferenceStart +
+			ToValueString(reference) +
+			ReferenceEnd
+	}
+
 	return genericMsg.String() +
 		constants.Space +
 		otherMsg +

@@ -1,4 +1,4 @@
-package stringutil
+package strutilinternal
 
 import "strings"
 

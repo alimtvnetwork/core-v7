@@ -26,7 +26,10 @@ type SingleRwx struct {
 	ClassType chmodclasstype.Variant
 }
 
-func NewSingleRwx(rwx string, classType chmodclasstype.Variant) (*SingleRwx, error) {
+func NewSingleRwx(
+	rwx string,
+	classType chmodclasstype.Variant,
+) (*SingleRwx, error) {
 	err := GetRwxLengthError(rwx)
 
 	if err != nil {

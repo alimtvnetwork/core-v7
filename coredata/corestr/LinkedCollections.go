@@ -980,6 +980,36 @@ func (linkedCollections *LinkedCollections) AddStringsPtrAsync(
 	return linkedCollections
 }
 
+// AddAsyncFuncItems must add all the lengths to the wg
+func (linkedCollections *LinkedCollections) AddAsyncFuncItems(
+	wg *sync.WaitGroup,
+	isMakeClone bool,
+	asyncFunctions ...func() []string,
+) *LinkedCollections {
+	if asyncFunctions == nil {
+		return linkedCollections
+	}
+
+	asyncFuncWrap := func(asyncFunc func() []string) {
+		items := asyncFunc()
+		collection := NewCollectionUsingStrings(&items, isMakeClone)
+
+		linkedCollections.Lock()
+		linkedCollections.Add(collection)
+		linkedCollections.Unlock()
+
+		wg.Done()
+	}
+
+	for _, function := range asyncFunctions {
+		go asyncFuncWrap(function)
+	}
+
+	wg.Wait()
+
+	return linkedCollections
+}
+
 // AddStringsPtr add to back
 func (linkedCollections *LinkedCollections) AddStringsPtr(
 	items *[]string,
@@ -1175,6 +1205,40 @@ func (linkedCollections *LinkedCollections) ToCollectionsOfCollection(
 	linkedCollections.Loop(processor)
 
 	return collection
+}
+
+func (linkedCollections *LinkedCollections) ItemsOfItems() *[]*[]string {
+	length := linkedCollections.Length()
+	itemsOfItems := make([]*[]string, length)
+
+	if length == 0 {
+		return &itemsOfItems
+	}
+
+	nodes := linkedCollections.GetAllLinkedNodes()
+
+	for i, node := range *nodes {
+		itemsOfItems[i] = node.Element.items
+	}
+
+	return &itemsOfItems
+}
+
+func (linkedCollections *LinkedCollections) ItemsOfItemsCollection() *[]*Collection {
+	length := linkedCollections.Length()
+	itemsOfItems := make([]*Collection, length)
+
+	if length == 0 {
+		return &itemsOfItems
+	}
+
+	nodes := linkedCollections.GetAllLinkedNodes()
+
+	for i, node := range *nodes {
+		itemsOfItems[i] = node.Element
+	}
+
+	return &itemsOfItems
 }
 
 // ListPtr must return slice.

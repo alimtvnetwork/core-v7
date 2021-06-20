@@ -3,8 +3,12 @@ package defaultcapacity
 import "gitlab.com/evatix-go/core/constants"
 
 func OfSearch(length int) int {
-	if length <= constants.N15 {
+	if length <= constants.Capacity3 {
 		return length
+	}
+
+	if length > constants.Capacity3 && length <= constants.N20 {
+		return length / constants.Capacity3
 	}
 
 	defaultCapacity := length

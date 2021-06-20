@@ -2,7 +2,7 @@ package corestr
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type LeftRight struct {
@@ -70,11 +70,11 @@ func (receiver *LeftRight) IsRightEmpty() bool {
 }
 
 func (receiver *LeftRight) IsRightWhitespace() bool {
-	return stringutil.IsEmptyOrWhitespace(receiver.Right)
+	return strutilinternal.IsEmptyOrWhitespace(receiver.Right)
 }
 
 func (receiver *LeftRight) IsLeftWhitespace() bool {
-	return stringutil.IsEmptyOrWhitespace(receiver.Left)
+	return strutilinternal.IsEmptyOrWhitespace(receiver.Left)
 }
 
 func (receiver *LeftRight) HasValidNonEmptyLeft() bool {

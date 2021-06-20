@@ -14,7 +14,7 @@ import (
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/coresort/strsort"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -200,7 +200,7 @@ func (collectionPtr *CollectionPtr) AddNonEmptyWhitespace(str string) *Collectio
 		return collectionPtr
 	}
 
-	if stringutil.IsEmptyOrWhitespace(str) {
+	if strutilinternal.IsEmptyOrWhitespace(str) {
 		return collectionPtr
 	}
 

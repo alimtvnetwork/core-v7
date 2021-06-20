@@ -3,7 +3,9 @@ package main
 import (
 	"fmt"
 
+	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/evatix-go/core/coreutils/stringutil"
 	"gitlab.com/evatix-go/core/reqtype"
 )
 
@@ -30,7 +32,15 @@ func main() {
 	// }
 
 	// fmt.Println(reqtype.RangesNotMeetError("", reqtype.Create, reqtype.Merge))
-	fmt.Println(reqtype.BasicEnumImpl.RangesInvalidErr())
+	// fmt.Println(reqtype.BasicEnumImpl.RangesInvalidErr())
+
+	fixedRwx := chmodins.FixRwxFullStringWithWildcards("-rwx-w-r-x")
+	fmt.Println(fixedRwx)
+	ownerGO, _ := chmodins.ExpandRwxFullStringToOwnerGroupOther(fixedRwx)
+
+	fmt.Println(ownerGO.Owner, ownerGO.Group, ownerGO.Other)
+	fmt.Println(stringutil.MaskLines(chmodins.AllWildCardsRwxFullString, "-rwx"))
+	fmt.Println(reqtype.RangesNotSupportedFor("", reqtype.Create, reqtype.Merge))
 	// items := &[]string{
 	// 	"00",
 	// 	"01",

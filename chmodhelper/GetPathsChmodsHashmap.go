@@ -8,7 +8,7 @@ import (
 // GetFilesChmodRwxFullMap returns filePath -> "-rwxrwxrwx"
 func GetFilesChmodRwxFullMap(
 	requestedPaths []string,
-) (*corestr.Hashmap, error) {
+) (filePathToRwxMap *corestr.Hashmap, err error) {
 	length := len(requestedPaths)
 	hashmap := corestr.NewHashmap(length)
 

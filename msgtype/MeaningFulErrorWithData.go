@@ -1,7 +1,7 @@
 package msgtype
 
 import (
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 func MeaningFulErrorWithData(
@@ -14,5 +14,5 @@ func MeaningFulErrorWithData(
 		return nil
 	}
 
-	return msgType.Error(funcName, err.Error()+stringutil.AnyToString(data))
+	return msgType.Error(funcName, err.Error()+strutilinternal.AnyToString(data))
 }

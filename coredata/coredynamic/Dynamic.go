@@ -12,7 +12,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/coreonce"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/issetter"
 	"gitlab.com/evatix-go/core/msgtype"
 )
@@ -89,7 +89,7 @@ func (receiver *Dynamic) StructStringPtr() *string {
 		return receiver.innerDataString
 	}
 
-	toString := stringutil.AnyToString(receiver.innerData)
+	toString := strutilinternal.AnyToString(receiver.innerData)
 	receiver.innerDataString = &toString
 
 	return receiver.innerDataString
@@ -161,12 +161,12 @@ func (receiver *Dynamic) IsValueType() bool {
 }
 
 func (receiver *Dynamic) IsStructStringNullOrEmpty() bool {
-	return receiver.IsNull() || stringutil.IsNullOrEmpty(
+	return receiver.IsNull() || strutilinternal.IsNullOrEmpty(
 		receiver.StructStringPtr())
 }
 
 func (receiver *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
-	return receiver.IsNull() || stringutil.IsNullOrEmptyOrWhitespace(
+	return receiver.IsNull() || strutilinternal.IsNullOrEmptyOrWhitespace(
 		receiver.StructStringPtr())
 }
 

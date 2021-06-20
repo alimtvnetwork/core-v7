@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -71,7 +71,7 @@ func (receiver *SimpleResult) InvalidError() error {
 		return receiver.err
 	}
 
-	if stringutil.IsEmptyOrWhitespace(receiver.Message) {
+	if strutilinternal.IsEmptyOrWhitespace(receiver.Message) {
 		return nil
 	}
 

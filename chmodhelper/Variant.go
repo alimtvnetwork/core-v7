@@ -24,16 +24,25 @@ const (
 	X677                                Variant = "677"
 	X711                                Variant = "711"
 	X722                                Variant = "722"
+	X733                                Variant = "733"
 	X744                                Variant = "744"
 	X755                                Variant = "755"
 	X766                                Variant = "766"
 	X777                                Variant = "777"
 )
 
-func (variant Variant) String() string {
-	return string(variant)
+func (variant *Variant) String() string {
+	return string(*variant)
 }
 
-func (variant Variant) ToWrapper() (RwxWrapper, error) {
-	return NewUsingVariant(variant)
+func (variant *Variant) ExpandOctalByte() (r7, w7, x7 byte) {
+	return ExpandCharRwx(string(*variant))
+}
+
+func (variant *Variant) ToWrapper() (RwxWrapper, error) {
+	return NewUsingVariant(*variant)
+}
+
+func (variant *Variant) ToWrapperPtr() (*RwxWrapper, error) {
+	return NewUsingVariantPtr(*variant)
 }

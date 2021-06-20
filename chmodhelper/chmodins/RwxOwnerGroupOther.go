@@ -55,6 +55,33 @@ type RwxOwnerGroupOther struct {
 	Other string `json:"Other"`
 }
 
+// NewRwxOwnerGroupOther
+//
+// Each arg ownerRwx, groupRwx, otherRwx should have
+//
+// Index Values
+//  - 0: 'r'/'*'/'-'
+//  - 1: 'w'/'*'/'-'
+//  - 2: 'x'/'*'/'-'
+// Examples can be :
+//  - "rwx" or
+//  - "*wx" or
+//  - "rw*" or
+//  - "***"
+//
+// Length must be 3. Not more not less.
+func NewRwxOwnerGroupOther(
+	ownerRwx,
+	groupRwx,
+	otherRwx string,
+) *RwxOwnerGroupOther {
+	return &RwxOwnerGroupOther{
+		Owner: ownerRwx,
+		Group: groupRwx,
+		Other: otherRwx,
+	}
+}
+
 func (receiver *RwxOwnerGroupOther) IsOwner(rwx string) bool {
 	return receiver.Owner == rwx
 }
@@ -113,6 +140,11 @@ func (receiver *RwxOwnerGroupOther) ToString(isIncludeHyphen bool) string {
 		receiver.Other
 }
 
+// String : Includes hyphen in-front
+// constants.Hyphen +
+//		receiver.Owner +
+//		receiver.Group +
+//		receiver.Other
 func (receiver *RwxOwnerGroupOther) String() string {
 	return constants.Hyphen +
 		receiver.Owner +

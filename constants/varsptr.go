@@ -171,4 +171,7 @@ var (
 	NoItemsSqaurePtr                     = &noItemsSqaure
 	NoElementsSqaurePtr                  = &noElementsSqaure
 	DoubleNewLinePtr                     = &doubleNewLine
+	FalseBoolPtr                         = &falseBool
+	TrueBoolPtr                          = &trueBool
+	ZeroBytePtr                          = &zeroByte
 )

@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/issetter"
 )
 
@@ -46,7 +46,7 @@ func (receiver *AnyOnce) IsStringEmpty() bool {
 }
 
 func (receiver *AnyOnce) IsStringEmptyOrWhitespace() bool {
-	return stringutil.IsEmptyOrWhitespace(receiver.String())
+	return strutilinternal.IsEmptyOrWhitespace(receiver.String())
 }
 
 func (receiver *AnyOnce) String() string {

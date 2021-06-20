@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/stringutil"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type ValueValid struct {
@@ -46,7 +46,7 @@ func (receiver *ValueValid) IsEmpty() bool {
 }
 
 func (receiver *ValueValid) IsWhitespace() bool {
-	return stringutil.IsEmptyOrWhitespace(receiver.Value)
+	return strutilinternal.IsEmptyOrWhitespace(receiver.Value)
 }
 
 func (receiver *ValueValid) HasValidNonEmpty() bool {

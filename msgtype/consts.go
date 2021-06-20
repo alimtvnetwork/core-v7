@@ -1,7 +1,7 @@
 package msgtype
 
 const (
-	ReferenceStart                           = " Reference ("
+	ReferenceStart                           = "Reference(s) ("
 	ReferenceEnd                             = ")"
 	rangeWithRangeFormat                     = "Range must be in between %v and %v. Ranges must be one of these {%v}"
 	rangeWithoutRangeFormat                  = "Range must be in between %v and %v."

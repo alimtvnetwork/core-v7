@@ -1,6 +1,6 @@
 package corestr
 
-import "gitlab.com/evatix-go/core/internal/stringutil"
+import "gitlab.com/evatix-go/core/internal/strutilinternal"
 
 type LeftMiddleRight struct {
 	LeftRight
@@ -16,7 +16,7 @@ func (receiver *LeftMiddleRight) IsMiddleEmpty() bool {
 }
 
 func (receiver *LeftMiddleRight) IsMiddleWhitespace() bool {
-	return stringutil.IsEmptyOrWhitespace(receiver.Middle)
+	return strutilinternal.IsEmptyOrWhitespace(receiver.Middle)
 }
 
 func (receiver *LeftMiddleRight) HasValidNonEmptyMiddle() bool {

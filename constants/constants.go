@@ -328,4 +328,5 @@ const (
 	MinInt                                    = -MaxInt - 1
 	NewLineUnixChar                   byte    = '\n'
 	NewLineUnixRune                   rune    = '\n'
+	DefaultRangesJoiner                       = ", "
 )

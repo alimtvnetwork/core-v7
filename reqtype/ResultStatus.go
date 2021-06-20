@@ -1,6 +1,6 @@
 package reqtype
 
-type Status struct {
+type ResultStatus struct {
 	IsSuccess  bool
 	IndexMatch int
 	Ranges     []Request

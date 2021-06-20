@@ -49,6 +49,20 @@ const (
 	DeleteHttp
 	PatchHttp
 	Touch
+	Start
+	Stop
+	Restart
+	Reload
+	StopSleepStart
+	Suspend
+	Pause
+	Resumed
+	TryRestart3Times
+	TryRestart5Times
+	TryStart3Times
+	TryStart5Times
+	TryStop3Times
+	TryStop5Times
 	InheritOnly
 	InheritPlusOverride
 	DynamicAction
@@ -194,12 +208,73 @@ func (receiver Request) IsTouch() bool {
 	return receiver == Touch
 }
 
+func (receiver Request) IsStart() bool {
+	return receiver == Start
+}
+
+func (receiver Request) IsStop() bool {
+	return receiver == Stop
+}
+
+func (receiver Request) IsRestart() bool {
+	return receiver == Restart
+}
+
+func (receiver Request) IsReload() bool {
+	return receiver == Reload
+}
+
+func (receiver Request) IsStopSleepStart() bool {
+	return receiver == StopSleepStart
+}
+
+func (receiver Request) IsSuspend() bool {
+	return receiver == Suspend
+}
+
+func (receiver Request) IsPause() bool {
+	return receiver == Pause
+}
+
+func (receiver Request) IsResumed() bool {
+	return receiver == Resumed
+}
+
+func (receiver Request) IsTryRestart3Times() bool {
+	return receiver == TryRestart3Times
+}
+
+func (receiver Request) IsTryRestart5Times() bool {
+	return receiver == TryRestart5Times
+}
+
+func (receiver Request) IsTryStart3Times() bool {
+	return receiver == TryStart3Times
+}
+
+func (receiver Request) IsTryStart5Times() bool {
+	return receiver == TryStart5Times
+}
+
+func (receiver Request) IsTryStop3Times() bool {
+	return receiver == TryStop3Times
+}
+
+func (receiver Request) IsTryStop5Times() bool {
+	return receiver == TryStop5Times
+}
+
 func (receiver Request) IsInheritOnly() bool {
 	return receiver == InheritOnly
 }
 
 func (receiver Request) IsInheritPlusOverride() bool {
 	return receiver == InheritPlusOverride
+}
+
+// IsRestartOrReload  receiver. IsRestart() || receiver. IsReload()
+func (receiver Request) IsRestartOrReload() bool {
+	return receiver.IsRestart() || receiver.IsReload()
 }
 
 // IsCrud returns true if Read, Update, Create, Delete, IsCreateOrUpdate
@@ -345,9 +420,9 @@ func (receiver Request) IsAnyOfReqs(reqs ...Request) bool {
 }
 
 // GetStatusAnyOf returns status success true if current one is any of the given values.
-func (receiver Request) GetStatusAnyOf(reqs ...Request) *Status {
+func (receiver Request) GetStatusAnyOf(reqs ...Request) *ResultStatus {
 	if len(reqs) == 0 {
-		return &Status{
+		return &ResultStatus{
 			IsSuccess:  true,
 			IndexMatch: constants.InvalidNotFoundCase,
 			Ranges:     reqs,
@@ -357,7 +432,7 @@ func (receiver Request) GetStatusAnyOf(reqs ...Request) *Status {
 
 	for i, req := range reqs {
 		if req == receiver {
-			return &Status{
+			return &ResultStatus{
 				IsSuccess:  true,
 				IndexMatch: i,
 				Ranges:     reqs,
@@ -372,7 +447,7 @@ func (receiver Request) GetStatusAnyOf(reqs ...Request) *Status {
 		end(&reqs),
 		reqs)
 
-	return &Status{
+	return &ResultStatus{
 		IsSuccess:  true,
 		IndexMatch: constants.InvalidNotFoundCase,
 		Ranges:     reqs,
@@ -381,12 +456,12 @@ func (receiver Request) GetStatusAnyOf(reqs ...Request) *Status {
 }
 
 // GetInBetweenStatus edge case including the start, end
-func (receiver Request) GetInBetweenStatus(start, end Request) *Status {
+func (receiver Request) GetInBetweenStatus(start, end Request) *ResultStatus {
 	isInBetween := receiver.IsInBetween(start, end)
 	ranges := RangesInBetween(start, end)
 
 	if isInBetween {
-		return &Status{
+		return &ResultStatus{
 			IsSuccess:  isInBetween,
 			IndexMatch: receiver.ValueInt(),
 			Ranges:     ranges,
@@ -400,7 +475,7 @@ func (receiver Request) GetInBetweenStatus(start, end Request) *Status {
 		end,
 		ranges)
 
-	return &Status{
+	return &ResultStatus{
 		IsSuccess:  false,
 		IndexMatch: constants.InvalidNotFoundCase,
 		Ranges:     ranges,
@@ -448,6 +523,18 @@ func (receiver *Request) UnmarshalJSON(data []byte) error {
 	}
 
 	return err
+}
+
+func (receiver Request) ToPtr() *Request {
+	return &receiver
+}
+
+func (receiver *Request) ToSimple() Request {
+	if receiver == nil {
+		return Uninitialized
+	}
+
+	return *receiver
 }
 
 func (receiver Request) MarshalJSON() ([]byte, error) {
