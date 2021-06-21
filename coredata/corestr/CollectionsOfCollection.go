@@ -3,6 +3,7 @@ package corestr
 import (
 	"encoding/json"
 	"strings"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
@@ -12,6 +13,7 @@ import (
 
 type CollectionsOfCollection struct {
 	items *[]*Collection
+	sync.Mutex
 }
 
 func (cc *CollectionsOfCollection) IsEmpty() bool {
@@ -128,6 +130,80 @@ func (cc *CollectionsOfCollection) AddsStringsOfPointerStrings(
 	for _, stringsPointer := range *stringsOfPointerStrings {
 		cc.AddStringsPtr(stringsPointer, isMakeClone)
 	}
+
+	return cc
+}
+
+// AddAsyncFuncItems must add all the lengths to the wg
+func (cc *CollectionsOfCollection) AddAsyncFuncItems(
+	wg *sync.WaitGroup,
+	isMakeClone bool,
+	asyncFunctions ...func() []string,
+) *CollectionsOfCollection {
+	if asyncFunctions == nil {
+		return cc
+	}
+
+	asyncFuncWrap := func(asyncFunc func() []string) {
+		items := asyncFunc()
+
+		if len(items) == 0 {
+			wg.Done()
+
+			return
+		}
+
+		cc.Lock()
+		cc.AddStringsPtr(
+			&items,
+			isMakeClone)
+		cc.Unlock()
+
+		wg.Done()
+	}
+
+	for _, function := range asyncFunctions {
+		go asyncFuncWrap(function)
+	}
+
+	wg.Wait()
+
+	return cc
+}
+
+// AddAsyncFuncItemsPointer must add all the lengths to the wg
+func (cc *CollectionsOfCollection) AddAsyncFuncItemsPointer(
+	wg *sync.WaitGroup,
+	isMakeClone bool,
+	asyncFunctions ...func() *[]string,
+) *CollectionsOfCollection {
+	if asyncFunctions == nil {
+		return cc
+	}
+
+	asyncFuncWrap := func(asyncFunc func() *[]string) {
+		items := asyncFunc()
+
+		if items == nil || len(*items) == 0 {
+			wg.Done()
+
+			return
+		}
+
+		cc.Lock()
+		cc.AddStringsPtr(
+			items,
+			isMakeClone)
+		cc.Unlock()
+
+		wg.Done()
+	}
+
+	for _, function := range asyncFunctions {
+		go asyncFuncWrap(function)
+	}
+
+	wg.Wait()
 
 	return cc
 }

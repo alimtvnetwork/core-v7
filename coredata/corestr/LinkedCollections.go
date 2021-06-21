@@ -992,7 +992,51 @@ func (linkedCollections *LinkedCollections) AddAsyncFuncItems(
 
 	asyncFuncWrap := func(asyncFunc func() []string) {
 		items := asyncFunc()
+
+		if len(items) == 0 {
+			wg.Done()
+
+			return
+		}
+
 		collection := NewCollectionUsingStrings(&items, isMakeClone)
+
+		linkedCollections.Lock()
+		linkedCollections.Add(collection)
+		linkedCollections.Unlock()
+
+		wg.Done()
+	}
+
+	for _, function := range asyncFunctions {
+		go asyncFuncWrap(function)
+	}
+
+	wg.Wait()
+
+	return linkedCollections
+}
+
+// AddAsyncFuncItemsPointer must add all the lengths to the wg
+func (linkedCollections *LinkedCollections) AddAsyncFuncItemsPointer(
+	wg *sync.WaitGroup,
+	isMakeClone bool,
+	asyncFunctions ...func() *[]string,
+) *LinkedCollections {
+	if asyncFunctions == nil {
+		return linkedCollections
+	}
+
+	asyncFuncWrap := func(asyncFunc func() *[]string) {
+		items := asyncFunc()
+
+		if items == nil || len(*items) == 0 {
+			wg.Done()
+
+			return
+		}
+
+		collection := NewCollectionUsingStrings(items, isMakeClone)
 
 		linkedCollections.Lock()
 		linkedCollections.Add(collection)
@@ -1022,6 +1066,28 @@ func (linkedCollections *LinkedCollections) AddStringsPtr(
 	collection := NewCollectionUsingStrings(items, isMakeClone)
 
 	return linkedCollections.Add(collection)
+}
+
+// AddStringsOfStringsPtr add to back
+func (linkedCollections *LinkedCollections) AddStringsOfStringsPtr(
+	items *[]*[]string,
+	isMakeClone bool,
+) *LinkedCollections {
+	if items == nil || len(*items) == 0 {
+		return linkedCollections
+	}
+
+	for _, stringItems := range *items {
+		if stringItems == nil {
+			continue
+		}
+
+		linkedCollections.AddStringsPtr(
+			stringItems,
+			isMakeClone)
+	}
+
+	return linkedCollections
 }
 
 // IndexAt Expensive operation BigO(n)

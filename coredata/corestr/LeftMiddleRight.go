@@ -1,10 +1,43 @@
 package corestr
 
-import "gitlab.com/evatix-go/core/internal/strutilinternal"
+import (
+	"strings"
+
+	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
+)
 
 type LeftMiddleRight struct {
 	LeftRight
 	Middle string
+}
+
+func InvalidLeftMiddleRightNoMessage() *LeftMiddleRight {
+	return &LeftMiddleRight{
+		LeftRight: LeftRight{
+			Left:    constants.EmptyString,
+			Right:   constants.EmptyString,
+			IsValid: false,
+			Message: constants.EmptyString,
+		},
+		Middle: constants.EmptyString,
+	}
+}
+
+func InvalidLeftMiddleRight(message string) *LeftMiddleRight {
+	return &LeftMiddleRight{
+		LeftRight: LeftRight{
+			Left:    constants.EmptyString,
+			Right:   constants.EmptyString,
+			IsValid: false,
+			Message: message,
+		},
+		Middle: constants.EmptyString,
+	}
+}
+
+func (receiver *LeftMiddleRight) MiddleTrim() string {
+	return strings.TrimSpace(receiver.Middle)
 }
 
 func (receiver *LeftMiddleRight) MiddleBytes() []byte {
@@ -42,4 +75,11 @@ func (receiver *LeftMiddleRight) IsAll(left, mid, right string) bool {
 	return receiver.Left == left &&
 		receiver.Right == right &&
 		receiver.Middle == mid
+}
+
+func (receiver *LeftMiddleRight) Clone() *LeftMiddleRight {
+	return &LeftMiddleRight{
+		LeftRight: *receiver.LeftRight.Clone(),
+		Middle:    receiver.Middle,
+	}
 }

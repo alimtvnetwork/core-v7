@@ -1,6 +1,8 @@
 package corestr
 
 import (
+	"strings"
+
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
@@ -37,6 +39,34 @@ func LeftRightUsingSlicePtr(slice *[]string) *LeftRight {
 	return LeftRightUsingSlice(*slice)
 }
 
+func LeftRightTrimmedUsingSlice(slice []string) *LeftRight {
+	if slice == nil {
+		return LeftRightUsingSlice(nil)
+	}
+
+	length := len(slice)
+
+	if length == 0 {
+		return InvalidLeftRight(
+			LeftRightExpectingLengthMessager.Message(
+				length))
+	}
+
+	if length == 1 {
+		return &LeftRight{
+			Left:    slice[constants.Zero],
+			Right:   constants.EmptyString,
+			IsValid: length == ExpectingLengthForLeftRight,
+		}
+	}
+
+	return &LeftRight{
+		Left:    strings.TrimSpace(slice[constants.Zero]),
+		Right:   strings.TrimSpace(slice[length-1]),
+		IsValid: length == ExpectingLengthForLeftRight,
+	}
+}
+
 func LeftRightUsingSlice(slice []string) *LeftRight {
 	length := len(slice)
 
@@ -44,6 +74,14 @@ func LeftRightUsingSlice(slice []string) *LeftRight {
 		return InvalidLeftRight(
 			LeftRightExpectingLengthMessager.Message(
 				length))
+	}
+
+	if length == 1 {
+		return &LeftRight{
+			Left:    slice[constants.Zero],
+			Right:   constants.EmptyString,
+			IsValid: length == ExpectingLengthForLeftRight,
+		}
 	}
 
 	return &LeftRight{
@@ -59,6 +97,14 @@ func (receiver *LeftRight) LeftBytes() []byte {
 
 func (receiver *LeftRight) RightBytes() []byte {
 	return []byte(receiver.Right)
+}
+
+func (receiver *LeftRight) LeftTrim() string {
+	return strings.TrimSpace(receiver.Left)
+}
+
+func (receiver *LeftRight) RightTrim() string {
+	return strings.TrimSpace(receiver.Right)
 }
 
 func (receiver *LeftRight) IsLeftEmpty() bool {
@@ -112,4 +158,13 @@ func (receiver *LeftRight) IsRight(right string) bool {
 
 func (receiver *LeftRight) Is(left, right string) bool {
 	return receiver.Left == left && receiver.Right == right
+}
+
+func (receiver *LeftRight) Clone() *LeftRight {
+	return &LeftRight{
+		Left:    receiver.Left,
+		Right:   receiver.Right,
+		IsValid: receiver.IsValid,
+		Message: receiver.Message,
+	}
 }

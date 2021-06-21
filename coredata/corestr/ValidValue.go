@@ -49,6 +49,10 @@ func (receiver *ValueValid) IsWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(receiver.Value)
 }
 
+func (receiver *ValueValid) Trim() string {
+	return strings.TrimSpace(receiver.Value)
+}
+
 func (receiver *ValueValid) HasValidNonEmpty() bool {
 	return receiver.IsValid && !receiver.IsEmpty()
 }

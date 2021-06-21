@@ -9,7 +9,7 @@ type RequestSpecification struct {
 	BaseIsRunAll
 }
 
-func (r RequestSpecification) ClonePtr() *RequestSpecification {
+func (r RequestSpecification) Clone() *RequestSpecification {
 	return &RequestSpecification{
 		BaseIdentifier: BaseIdentifier{r.Id},
 		BaseTypeDotFilter: BaseTypeDotFilter{
