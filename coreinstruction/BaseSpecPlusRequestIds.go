@@ -1,31 +1,44 @@
 package coreinstruction
 
 type BaseSpecPlusRequestIds struct {
-	Specification *Specification          `json:"Specification,omitempty"`
-	RequestIds    *IdentifierWithIsGlobal `json:"RequestIds,omitempty"`
+	BaseSpecification
+	BaseRequestIds
+}
+
+func NewBaseSpecPlusRequestIdsUsingSpecOnly(
+	spec *Specification,
+) *BaseSpecPlusRequestIds {
+	return &BaseSpecPlusRequestIds{
+		BaseSpecification: BaseSpecification{
+			Specification: spec,
+		},
+		BaseRequestIds: BaseRequestIds{
+			RequestIds: []IdentifierWithIsGlobal{},
+		},
+	}
 }
 
 func NewBaseSpecPlusRequestIds(
 	spec *Specification,
-	reqIds *IdentifierWithIsGlobal,
+	reqIds []IdentifierWithIsGlobal,
 ) *BaseSpecPlusRequestIds {
 	return &BaseSpecPlusRequestIds{
-		Specification: spec,
-		RequestIds:    reqIds,
+		BaseSpecification: BaseSpecification{
+			Specification: spec,
+		},
+		BaseRequestIds: BaseRequestIds{
+			RequestIds: reqIds,
+		},
 	}
 }
 
-func (b *BaseSpecPlusRequestIds) HasSpec() bool {
-	return b != nil && b.Specification != nil
-}
-
-func (b *BaseSpecPlusRequestIds) HasRequestIds() bool {
-	return b != nil && b.RequestIds != nil
-}
-
 func (b *BaseSpecPlusRequestIds) Clone() *BaseSpecPlusRequestIds {
+	if b == nil {
+		return nil
+	}
+
 	return &BaseSpecPlusRequestIds{
-		Specification: b.Specification.Clone(),
-		RequestIds:    b.RequestIds.Clone(),
+		BaseSpecification: *b.BaseSpecification.Clone(),
+		BaseRequestIds:    *b.BaseRequestIds.Clone(),
 	}
 }

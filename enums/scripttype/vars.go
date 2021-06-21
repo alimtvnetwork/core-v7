@@ -6,8 +6,13 @@ import (
 )
 
 var (
+	bash                   = Bash
+	cmd                    = Cmd
+	bashDefaultScript      = bash.ScriptDefault()
+	cmdDefaultScript       = cmd.ScriptDefault()
 	scriptTypeStringRanges = [...]string{
 		Uninitialized: "Uninitialized",
+		Default:       "Default",
 		Shell:         "Shell",
 		Bash:          "Bash",
 		Perl:          "Perl",
@@ -23,6 +28,7 @@ var (
 	scriptTypeRanges = [...]Variant{
 		Uninitialized: Uninitialized,
 		Shell:         Shell,
+		Default:       Default,
 		Bash:          Bash,
 		Perl:          Perl,
 		Python:        Python,
@@ -37,6 +43,14 @@ var (
 	RangesMap = map[Variant]*ScriptDefault{
 		Uninitialized: {
 			ScriptType:    Uninitialized,
+			IsImplemented: false,
+		},
+		Default: {
+			ScriptType:  Default,
+			ProcessName: "",
+			DefaultArguments: []string{
+				constants.NonInteractiveFlag,
+			},
 			IsImplemented: false,
 		},
 		Shell: {
@@ -59,7 +73,7 @@ var (
 			ScriptType:  Perl,
 			ProcessName: "perl",
 			DefaultArguments: []string{
-				"-e",
+				constants.NonInteractivePerlFlag,
 			},
 			IsImplemented: true,
 		},
@@ -101,7 +115,7 @@ var (
 			DefaultArguments: []string{
 				constants.NonInteractiveFlag,
 			},
-			IsImplemented: false,
+			IsImplemented: true,
 		},
 		Powershell: {
 			ScriptType:  Powershell,
@@ -115,7 +129,7 @@ var (
 			ScriptType:  Cmd,
 			ProcessName: "cmd",
 			DefaultArguments: []string{
-				"/c",
+				constants.NonInteractiveCmdFlag,
 			},
 			IsImplemented: true,
 		},

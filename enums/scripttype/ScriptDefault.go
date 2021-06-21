@@ -14,5 +14,7 @@ type ScriptDefault struct {
 }
 
 func (receiver *ScriptDefault) String() string {
-	return fmt.Sprint(receiver.ScriptType.String(), converters.AnyToString(*receiver))
+	return fmt.Sprint(
+		receiver.ScriptType.String(),
+		converters.AnyToString(*receiver))
 }

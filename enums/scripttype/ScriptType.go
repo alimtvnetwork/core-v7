@@ -8,6 +8,7 @@ type Variant byte
 
 const (
 	Uninitialized Variant = iota
+	Default
 	Shell
 	Bash
 	Perl
@@ -71,11 +72,74 @@ func (receiver *Variant) RangesByte() []byte {
 	return scriptTypeBasicEnumImpl.Ranges()
 }
 
+func (receiver Variant) IsUninitialized() bool {
+	return receiver == Uninitialized
+}
+
+func (receiver Variant) IsDefault() bool {
+	return receiver == Default
+}
+
+func (receiver Variant) IsShell() bool {
+	return receiver == Shell
+}
+
+func (receiver Variant) IsBash() bool {
+	return receiver == Bash
+}
+
+func (receiver Variant) IsPerl() bool {
+	return receiver == Perl
+}
+
+func (receiver Variant) IsPython() bool {
+	return receiver == Python
+}
+
+func (receiver Variant) IsPython2() bool {
+	return receiver == Python2
+}
+
+func (receiver Variant) IsPython3() bool {
+	return receiver == Python3
+}
+
+func (receiver Variant) IsCLang() bool {
+	return receiver == CLang
+}
+
+func (receiver Variant) IsMakeScript() bool {
+	return receiver == MakeScript
+}
+
+func (receiver Variant) IsPowershell() bool {
+	return receiver == Powershell
+}
+
+func (receiver Variant) IsCmd() bool {
+	return receiver == Cmd
+}
+
+func (receiver Variant) IsCmdOrPowerShell() bool {
+	return receiver.IsCmd() ||
+		receiver.IsPowershell()
+}
+
+func (receiver Variant) IsAnyPython() bool {
+	return receiver.IsPython() ||
+		receiver.IsPython2() ||
+		receiver.IsPython3()
+}
+
 func (receiver *Variant) RangesVariants() []Variant {
 	return scriptTypeRanges[:]
 }
 
 func (receiver *Variant) ScriptDefault() *ScriptDefault {
+	if receiver.IsDefault() {
+		return DefaultOsScript()
+	}
+
 	return RangesMap[*receiver]
 }
 
