@@ -11,6 +11,7 @@ type FilteredPathFileInfoMap struct {
 	lazyValidLocations                   []string
 	lazyValidLocationFileInfoRwxWrappers []LocationFileInfoRwxWrapper
 	FilesToInfoMap                       map[string]os.FileInfo
+	PathsRemainsUnProcessed              []string // TODO
 	MissingOrOtherPathIssues             []string
 	Error                                error
 }

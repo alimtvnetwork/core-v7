@@ -7,7 +7,7 @@ import (
 )
 
 type mutexMap struct {
-	items *map[string]*sync.Mutex
+	items map[string]*sync.Mutex
 }
 
 var globalMutex = sync.Mutex{}
@@ -16,14 +16,14 @@ var items = make(
 	constants.ArbitraryCapacity10)
 
 var internalMap = mutexMap{
-	items: &items,
+	items: items,
 }
 
 func Get(key string) *sync.Mutex {
 	globalMutex.Lock()
 	defer globalMutex.Unlock()
 
-	mutex, has := (*internalMap.items)[key]
+	mutex, has := internalMap.items[key]
 
 	if has {
 		return mutex
@@ -31,7 +31,7 @@ func Get(key string) *sync.Mutex {
 
 	// not there
 	newMutex := &sync.Mutex{}
-	(*internalMap.items)[key] = newMutex
+	internalMap.items[key] = newMutex
 
 	return newMutex
 }
@@ -40,10 +40,10 @@ func Delete(key string) bool {
 	globalMutex.Lock()
 	defer globalMutex.Unlock()
 
-	_, has := (*internalMap.items)[key]
+	_, has := internalMap.items[key]
 
 	if has {
-		delete(*internalMap.items, key)
+		delete(internalMap.items, key)
 	}
 
 	return has

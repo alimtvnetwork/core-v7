@@ -7,7 +7,7 @@ func SafeIndexAtUsingLastIndex(
 	lastIndex,
 	index int,
 ) string {
-	if lastIndex == 0 || lastIndex > index {
+	if lastIndex == 0 || lastIndex < index {
 		return constants.EmptyString
 	}
 

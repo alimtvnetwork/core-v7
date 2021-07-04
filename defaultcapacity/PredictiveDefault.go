@@ -12,5 +12,5 @@ func PredictiveDefault(possibleLen int) int {
 	return Predictive(
 		possibleLen,
 		percentconst.FiftyPercentIncrement,
-		constants.ArbitraryCapacity50)
+		constants.ArbitraryCapacity30)
 }

@@ -18,7 +18,7 @@ func GetExistsFilteredPathFileInfoMap(
 
 	results := make(
 		map[string]os.FileInfo,
-		len(locations)+constants.Capacity5)
+		len(locations)+constants.Capacity4)
 
 	var missingOrHaveIssuesFiles []string
 

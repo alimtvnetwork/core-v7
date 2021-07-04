@@ -1,18 +1,25 @@
 package coretests
 
 import (
-	"strings"
-
 	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
 type ComparingInstruction struct {
 	actualHashset                    *corestr.Hashset
+	actual                           string
 	Header                           string
-	Actual                           string
 	MatchingAsEqual                  string
 	ComparingItems                   []Compare
 	HasWhitespace, IsMatchingAsEqual bool
+}
+
+func (it *ComparingInstruction) Actual() string {
+	return it.actual
+}
+
+func (it *ComparingInstruction) SetActual(actual string) {
+	it.actual = actual
+	it.actualHashset = nil
 }
 
 func (it *ComparingInstruction) ActualHashset() *corestr.Hashset {
@@ -23,7 +30,7 @@ func (it *ComparingInstruction) ActualHashset() *corestr.Hashset {
 	whitespaceRemovedSplits := GetMessageToSortedArray(
 		false,
 		true,
-		strings.TrimSpace(it.Actual))
+		it.Actual())
 
 	it.actualHashset = corestr.NewHashsetUsingStrings(&whitespaceRemovedSplits)
 
@@ -39,7 +46,7 @@ func (it *ComparingInstruction) IsMatches(
 			isPrint,
 			it.HasWhitespace,
 			it.Header,
-			it.Actual,
+			it.actual,
 			it.MatchingAsEqual,
 			index)
 

@@ -19,6 +19,13 @@ const (
 	OwnerCanDoAllGroupOtherCanExecuteOnly        os.FileMode = 0711
 	OwnerCanDoAllGroupOtherCanReadExecuteOnly    os.FileMode = 0755
 	OwnerCanDoAllGroupOtherCanWriteOnly          os.FileMode = 0722
+	X100                                         os.FileMode = 0100
+	X200                                         os.FileMode = 0200
+	X300                                         os.FileMode = 0300
+	X400                                         os.FileMode = 0400
+	X500                                         os.FileMode = 0500
+	X600                                         os.FileMode = 0600
+	X700                                         os.FileMode = 0700
 	X111                                         os.FileMode = 0111
 	X222                                         os.FileMode = 0222
 	X333                                         os.FileMode = 0333

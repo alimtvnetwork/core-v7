@@ -2,10 +2,6 @@ package coretests
 
 import (
 	"fmt"
-	"sort"
-
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/testconsts"
 )
 
 func GetMessageToSortedArray(
@@ -17,17 +13,7 @@ func GetMessageToSortedArray(
 		fmt.Println(message)
 	}
 
-	if message == "" {
-		return []string{}
-	}
-
-	items := testconsts.WhitespaceOrPipeFinderRegex.Split(
+	return GetTrimmedNonEmptySpaceSplit(
 		message,
-		constants.TakeAllMinusOne)
-
-	if isSort {
-		sort.Strings(items)
-	}
-
-	return items
+		isSort)
 }

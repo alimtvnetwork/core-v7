@@ -24,7 +24,7 @@ func SafeRangeItems(
 		end = lastIndex
 	}
 
-	if start > lastIndex && start != constants.InvalidValue {
+	if start <= lastIndex && start != constants.InvalidValue {
 		return slice[start:end]
 	}
 
