@@ -5,7 +5,7 @@ func SafeIndexAtWith(
 	index int,
 	defaultVal string,
 ) string {
-	if len(slice) == 0 {
+	if len(slice) == 0 || len(slice)-1 < index {
 		return defaultVal
 	}
 

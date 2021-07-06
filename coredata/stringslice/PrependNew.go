@@ -2,7 +2,10 @@ package stringslice
 
 import "gitlab.com/evatix-go/core/constants"
 
-func PrependNew(secondSlice []string, prependingItems ...string) *[]string {
+func PrependNew(
+	secondSlice []string,
+	prependingItems ...string,
+) *[]string {
 	sliceLength := len(secondSlice)
 	additionalItemsLength := len(prependingItems)
 

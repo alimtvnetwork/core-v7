@@ -3,12 +3,12 @@ package stringslice
 // SafeIndexesDefaultPtr Only indexes which are present values will be included.
 //
 // Warning : Not found indexes will not be included in the values.
-func SafeIndexesDefaultPtr(slice *[]string, indexes ...int) (values *[]string) {
+func SafeIndexesPtr(slice *[]string, indexes ...int) (values *[]string) {
 	if IsEmptyPtr(slice) {
-		return &[]string{}
+		return MakeLenPtr(len(indexes))
 	}
 
-	values2 := SafeIndexesDefault(*slice, indexes...)
+	values2 := SafeIndexes(*slice, indexes...)
 
 	return &values2
 }

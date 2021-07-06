@@ -8,7 +8,10 @@ import (
 // SafeIndexesDefaultWithDetail Only indexes which are present values will be included.
 //
 // Warning : Not found indexes will not be included in the values.
-func SafeIndexesDefaultWithDetail(slice []string, indexes ...int) *IndexValuesDetail {
+func SafeIndexesDefaultWithDetail(
+	slice []string,
+	indexes ...int,
+) *IndexValuesDetail {
 	length := len(slice)
 
 	if length == 0 {
