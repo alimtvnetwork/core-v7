@@ -22,7 +22,7 @@ func (receiver *Variant) ToNumberString() string {
 }
 
 func (receiver *Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
-	return basicEnumImpl.UnmarshallEnumToValue(jsonUnmarshallingValue)
+	return basicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
 }
 
 func (receiver *Variant) String() string {
@@ -34,7 +34,7 @@ func (receiver *Variant) MarshalJSON() ([]byte, error) {
 }
 
 func (receiver *Variant) UnmarshalJSON(data []byte) error {
-	rawScriptType, err := basicEnumImpl.UnmarshallEnumToValue(data)
+	rawScriptType, err := receiver.UnmarshallEnumToValue(data)
 
 	if err != nil {
 		*receiver = Variant(rawScriptType)

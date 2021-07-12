@@ -123,7 +123,8 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		},
 	},
 	{
-		Header: "IsTrimCompare, IsSortStringsBySpace with IsNonEmptyWhitespace flag true different text and multiple search should give 2 errors",
+		Header: "IsTrimCompare, IsSortStringsBySpace with IsNonEmptyWhitespace true " +
+			"different text and multiple search should give 2 errors",
 		ComparingLines: []string{
 			"alim alim 2 alim 4",
 			"alim alim 2 alim 3",
