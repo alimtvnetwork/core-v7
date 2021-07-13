@@ -6,6 +6,7 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/chmodhelper"
 	"gitlab.com/evatix-go/core/coretests"
+	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
@@ -17,7 +18,7 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
 		&createPathInstructions)
-	for i, testCase := range chmodhelpertestwrappers.VerifyRwxPartialChmodLocationsTestCases {
+	for caseIndex, testCase := range chmodhelpertestwrappers.VerifyRwxPartialChmodLocationsTestCases {
 		header := testCase.Header
 		expectationMessage := testCase.ExpectationErrorMessage
 
@@ -28,15 +29,21 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 			testCase.ExpectedPartialRwx,
 			testCase.Locations)
 
+		expectation := &msgtype.ExpectationMessageDef{
+			CaseIndex:      caseIndex,
+			FuncName:       "Test_VerifyRwxPartialChmodLocations_Unix",
+			TestCaseName:   "VerifyRwxPartialChmodLocationsTestCases",
+			When:           testCase.Header,
+			Expected:       expectationMessage,
+			IsNonWhiteSort: true,
+		}
+
 		// Assert
 		Convey(header, t, func() {
-			isEqual := coretests.IsStringErrorWithoutWhitespaceSortedEqual(
+			isEqual := coretests.IsErrorNonWhiteSortedEqual(
 				true,
-				true,
-				testCase.Header,
 				err,
-				expectationMessage,
-				i)
+				expectation)
 
 			So(isEqual, ShouldBeTrue)
 		})

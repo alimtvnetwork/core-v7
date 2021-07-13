@@ -7,20 +7,18 @@ import (
 )
 
 func GetWhenActualAndExpectProcessedMessage(
-	counter int,
-	when interface{},
 	actual interface{},
-	expected interface{},
-	actualSorted interface{},
-	expectedSorted interface{},
+	expectationMessageDef *ExpectationMessageDef,
 ) string {
 	return fmt.Sprintf(
 		msgformats.PrintWhenActualAndExpectedProcessedFormat,
-		counter,
-		when,
+		expectationMessageDef.CaseIndex,
+		expectationMessageDef.When,
+		expectationMessageDef.FuncName,
 		actual,
-		expected,
-		actualSorted,
-		expectedSorted,
+		expectationMessageDef.Expected,
+		expectationMessageDef.ActualProcessed,
+		expectationMessageDef.ExpectedProcessed,
+		expectationMessageDef.TestCaseName,
 	)
 }

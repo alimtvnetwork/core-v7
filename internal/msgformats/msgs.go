@@ -19,13 +19,15 @@ const (
 		"  Actual:`%#v` ,\n\t\t" +
 		"Expected:`%#v`"
 
-	PrintWhenActualAndExpectedProcessedFormat = "----------------------" +
-		"\n%d )\t" +
-		"    When:%#v\n\t\t" +
-		"  Actual:`%#v` ,\n\t\t" +
-		"Expected:`%#v`\n\t\t" +
-		"  Actual-Processed:`%#v` ,\n\t\t" +
-		"Expected-Processed:`%#v`"
+	PrintWhenActualAndExpectedProcessedFormat = "" +
+		"\n%d )" +
+		"   When: %#v\n  " +
+		"    Func:`%#v` ,\n  " +
+		"  Actual:`%#v` ,\n  " +
+		"Expected:`%#v`\n  " +
+		"  Actual-Processed:`%#v`,\n  " +
+		"Expected-Processed:`%#v`,\n  " +
+		"    TestCase:`%#v` ,\n  "
 
 	PrintActualAndExpectedProcessedFormat = "----------------------" +
 		"\n%d )\t" +

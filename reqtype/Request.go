@@ -325,12 +325,11 @@ func (it Request) IsAnyDrop() bool {
 // IsDropSafe
 //
 // returns true if
-// IsDeleteOrSkipOnNonExist, IsDropOnExist, IsDropCreate,
+// IsDeleteOrSkipOnNonExist, IsDropOnExist,
 // IsDropOrSkipOnNonExist
 func (it Request) IsDropSafe() bool {
 	return it.IsDeleteOrSkipOnNonExist() ||
 		it.IsDropOnExist() ||
-		it.IsDropCreate() ||
 		it.IsDropOrSkipOnNonExist()
 }
 

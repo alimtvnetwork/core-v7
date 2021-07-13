@@ -4,9 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/regexnew"
 )
 
 func GetTrimmedNonEmptySpaceSplit(
@@ -19,10 +17,7 @@ func GetTrimmedNonEmptySpaceSplit(
 		return []string{}
 	}
 
-	items := regexnew.WhitespaceFinderRegex.Split(
-		message,
-		constants.TakeAllMinusOne)
-
+	items := strings.Fields(message)
 	items = stringslice.NonWhitespaceTrimSlice(items)
 
 	if isSort {

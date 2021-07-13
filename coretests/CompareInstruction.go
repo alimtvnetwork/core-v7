@@ -2,15 +2,18 @@ package coretests
 
 import (
 	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type ComparingInstruction struct {
-	actualHashset                    *corestr.Hashset
-	actual                           string
-	Header                           string
-	MatchingAsEqual                  string
+	FunName,
+	Header,
+	TestCaseName,
+	MatchingAsEqualExpectation string
 	ComparingItems                   []Compare
 	HasWhitespace, IsMatchingAsEqual bool
+	actualHashset                    *corestr.Hashset
+	actual                           string
 }
 
 func (it *ComparingInstruction) Actual() string {
@@ -38,25 +41,37 @@ func (it *ComparingInstruction) ActualHashset() *corestr.Hashset {
 }
 
 func (it *ComparingInstruction) IsMatch(
-	testCaseIndex int,
-	isPrint bool,
+	caseIndexPlusIsPrint *CaseIndexPlusIsPrint,
 ) bool {
-	isMatchesEqual := !it.IsMatchingAsEqual || it.IsMatchingAsEqual &&
-		IsStringMessageWithoutWhitespaceSortedEqual(
-			isPrint,
-			it.HasWhitespace,
-			it.Header,
-			it.actual,
-			it.MatchingAsEqual,
-			testCaseIndex)
+	isMatchesEqual := it.isMatchingEqual(caseIndexPlusIsPrint)
 
 	for i, item := range it.ComparingItems {
 		isMatchesEqual = item.IsMatch(
-			isPrint,
+			caseIndexPlusIsPrint.IsPrint,
 			i,
 			it) &&
 			isMatchesEqual
 	}
 
 	return isMatchesEqual
+}
+
+func (it *ComparingInstruction) isMatchingEqual(caseIndexPlusIsPrint *CaseIndexPlusIsPrint,) bool {
+	if !it.IsMatchingAsEqual {
+		return true
+	}
+
+	expectation := &msgtype.ExpectationMessageDef{
+		CaseIndex:      caseIndexPlusIsPrint.CaseIndex,
+		FuncName:       it.FunName,
+		TestCaseName:   it.TestCaseName,
+		When:           it.Header,
+		Expected:       it.MatchingAsEqualExpectation,
+		IsNonWhiteSort: it.HasWhitespace,
+	}
+
+	return IsStrMsgNonWhiteSortedEqual(
+		caseIndexPlusIsPrint.IsPrint,
+		it.actual,
+		expectation)
 }

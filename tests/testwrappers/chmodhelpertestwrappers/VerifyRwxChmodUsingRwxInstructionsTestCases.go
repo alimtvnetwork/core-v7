@@ -4,7 +4,7 @@ import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
 
 var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstructionsWrapper{
 	{
-		Header: "rwx",
+		Header: "rwx - missing paths",
 		RwxInstruction: chmodins.RwxInstruction{
 			RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 				Owner: "rwx",
@@ -24,7 +24,7 @@ var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstru
 			"]\" }",
 	},
 	{
-		Header: "rwx",
+		Header: "rwx - expectation failed",
 		RwxInstruction: chmodins.RwxInstruction{
 			RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 				Owner: "rwx",
@@ -44,7 +44,7 @@ var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstru
 			"Expect [\"rwxr-x---\"] != [\"rwxr-xr--\"] Actual",
 	},
 	{
-		Header: "rwx",
+		Header: "Recursive not supported",
 		RwxInstruction: chmodins.RwxInstruction{
 			RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 				Owner: "rwx",
@@ -59,7 +59,7 @@ var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstru
 		},
 		Locations: SimpleLocations,
 		ExpectedErrorMessage: "Not Supported: Feature / method is not supported yet. " +
-			"ValidatorCoreCondition.IsRecursive is not supported for Verify chmod. " +
+			"IsRecursive is not supported for Verify chmod. " +
 			"Reference(s) { \"[" +
 			"/temp/core/test-cases-2 " +
 			"/temp/core/test-cases-3s " +
@@ -68,7 +68,7 @@ var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstru
 			"]\" }",
 	},
 	{
-		Header: "rwx",
+		Header: "Missing paths + Expection failed",
 		RwxInstruction: chmodins.RwxInstruction{
 			RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 				Owner: "rwx",
@@ -94,5 +94,28 @@ var VerifyRwxChmodUsingRwxInstructionsTestCases = []VerifyRwxChmodUsingRwxInstru
 			"Expect [\"rwxr-x---\"] != [\"rwxr-xr--\"] Actual\n" +
 			"Path:/temp/core/test-cases-2 - " +
 			"Expect [\"rwxr-x---\"] != [\"rwxr-xr--\"] Actual",
+	},
+	{
+		Header: "Expectation and missing paths, isContinue false so will fail for missing paths only",
+		RwxInstruction: chmodins.RwxInstruction{
+			RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
+				Owner: "rwx",
+				Group: "r-x",
+				Other: "---",
+			},
+			Condition: chmodins.Condition{
+				IsSkipOnInvalid:   false,
+				IsContinueOnError: false,
+				IsRecursive:       false,
+			},
+		},
+		Locations: SimpleLocations,
+		ExpectedErrorMessage: "Path missing or having other access issues! Reference(s) { " +
+			"\"" +
+			"[" +
+			"/temp/core/test-cases-3s " +
+			"/temp/core/test-cases-3x" +
+			"]" +
+			"\" }",
 	},
 }
