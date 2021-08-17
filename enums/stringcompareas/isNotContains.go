@@ -6,17 +6,17 @@ import "strings"
 var isNotContainsFunc = func(
 	contentLine,
 	searchComparingLine string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
-	if isCaseSensitive {
+	if isIgnoreCase {
 		return !strings.Contains(
-			contentLine,
-			searchComparingLine,
+			strings.ToLower(contentLine),
+			strings.ToLower(searchComparingLine),
 		)
 	}
 
 	return !strings.Contains(
-		strings.ToLower(contentLine),
-		strings.ToLower(searchComparingLine),
+		contentLine,
+		searchComparingLine,
 	)
 }

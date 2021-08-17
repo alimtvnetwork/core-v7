@@ -8,8 +8,9 @@ import "gitlab.com/evatix-go/core/regexnew"
 var isRegexFunc = func(
 	contentLine,
 	regexStringSearching string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
-	return regexnew.NewMust(regexStringSearching).
-		MatchString(contentLine)
+	return regexnew.IsMatchLock(
+		regexStringSearching,
+		contentLine)
 }

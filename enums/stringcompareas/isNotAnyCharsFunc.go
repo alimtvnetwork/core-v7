@@ -9,17 +9,17 @@ import "strings"
 var isNotAnyCharsFunc = func(
 	contentLine,
 	charsFind string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
-	if isCaseSensitive {
+	if isIgnoreCase {
 		return !strings.ContainsAny(
-			contentLine,
-			charsFind,
+			strings.ToLower(contentLine),
+			strings.ToLower(charsFind),
 		)
 	}
 
 	return !strings.ContainsAny(
-		strings.ToLower(contentLine),
-		strings.ToLower(charsFind),
+		contentLine,
+		charsFind,
 	)
 }

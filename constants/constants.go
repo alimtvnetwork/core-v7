@@ -340,4 +340,13 @@ const (
 	SingleQuotation                           = `'`
 	CodeQuotation                             = "`"
 	CodeQuotationStartEnd                     = "``"
+	SpaceWithColon                            = " : "
+	SprintFormatNumberWithColon               = "%d:%d"
+	SprintFormatAnyValueWithColon             = "%v:%v"
+	SprintFormatAnyValueWithComma             = "%v,%v"
+	SprintFormatAnyValueWithPipe              = "%v|%v"
+	SprintFormatAnyNameValueWithColon         = "%#v:%#v"
+	SprintFormatAnyNameValueWithPipe          = "%#v|%#v"
+	SprintFormatNumberWithHyphen              = "%d-%d"
+	SprintFormatNumberWithPipe                = "%d|%d"
 )

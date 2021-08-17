@@ -56,7 +56,7 @@ func (it *ComparingInstruction) IsMatch(
 	return isMatchesEqual
 }
 
-func (it *ComparingInstruction) isMatchingEqual(caseIndexPlusIsPrint *CaseIndexPlusIsPrint,) bool {
+func (it *ComparingInstruction) isMatchingEqual(caseIndexPlusIsPrint *CaseIndexPlusIsPrint) bool {
 	if !it.IsMatchingAsEqual {
 		return true
 	}

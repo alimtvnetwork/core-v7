@@ -16,7 +16,7 @@ func SplitContentsByWhitespaceConditions(
 	isUnique bool,
 	isLowerCase bool,
 ) []string {
-	if isLowerCase && isUnique {
+	if isLowerCase || isUnique {
 		input = strings.ToLower(input)
 	}
 

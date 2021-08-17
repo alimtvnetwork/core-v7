@@ -18,11 +18,10 @@ func NewRangeIntUsingValues(
 	start, end int,
 	isValid bool,
 ) *RangeInt {
-	sep := constants.Hyphen
 	return &RangeInt{
 		BaseRange: &BaseRange{
-			RawInput:  strconv.Itoa(start) + sep + strconv.Itoa(end),
-			Separator: sep,
+			RawInput:  strconv.Itoa(start) + defaultSeparator + strconv.Itoa(end),
+			Separator: defaultSeparator,
 			IsValid:   isValid,
 			HasStart:  start > 0,
 			HasEnd:    end > 0,

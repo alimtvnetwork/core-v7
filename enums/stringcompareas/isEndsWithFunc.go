@@ -5,10 +5,10 @@ import "gitlab.com/evatix-go/core/coreutils/stringutil"
 var isEndsWithFunc = func(
 	contentLine,
 	equalChecking string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
 	return stringutil.IsEndsWith(
 		contentLine,
 		equalChecking,
-		isCaseSensitive)
+		isIgnoreCase)
 }

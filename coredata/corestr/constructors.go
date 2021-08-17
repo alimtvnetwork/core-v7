@@ -17,7 +17,7 @@ func NewHashset(length int) *Hashset {
 	hashset := make(map[string]bool, length)
 
 	return &Hashset{
-		items:         &hashset,
+		items:         hashset,
 		hasMapUpdated: false,
 		cachedList:    nil,
 		length:        length,
@@ -54,7 +54,7 @@ func NewHashsetUsingStringPointersArray(
 	maps := converters.StringsPointersToStringBoolMap(inputArray)
 
 	return NewHashsetUsingMap(
-		maps,
+		*maps,
 		addCapacity,
 		isMakeClone)
 }
@@ -71,6 +71,21 @@ func NewHashsetUsingCollection(
 		collection.items)
 }
 
+func NewHashsetUsingStringsWithoutPointer(
+	inputArray []string,
+) *Hashset {
+	if len(inputArray) == 0 {
+		return EmptyHashset()
+	}
+
+	maps := converters.StringsToMap(&inputArray)
+
+	return NewHashsetUsingMap(
+		*maps,
+		constants.Zero,
+		false)
+}
+
 // NewHashsetUsingStrings addCapacity will not work if it is not a clone.
 func NewHashsetUsingStrings(
 	inputArray *[]string,
@@ -82,22 +97,22 @@ func NewHashsetUsingStrings(
 	maps := converters.StringsToMap(inputArray)
 
 	return NewHashsetUsingMap(
-		maps,
+		*maps,
 		constants.Zero,
 		false)
 }
 
 // NewHashsetUsingMap addCapacity will not work if it is not a clone.
 func NewHashsetUsingMap(
-	itemsMap *map[string]bool,
+	itemsMap map[string]bool,
 	addCapacity int,
 	isMakeClone bool,
 ) *Hashset {
-	if itemsMap == nil || *itemsMap == nil {
+	if len(itemsMap) == 0 {
 		return NewHashset(defaultHashsetItems)
 	}
 
-	length := len(*itemsMap)
+	length := len(itemsMap)
 
 	if isMakeClone {
 		hashset := NewHashset(length + addCapacity)

@@ -254,7 +254,7 @@ func (charHashsetMap *CharHashsetMap) List() *[]string {
 
 	i := 0
 	for _, hashset := range *charHashsetMap.items {
-		for s := range *hashset.items {
+		for s := range hashset.items {
 			list[i] = s
 			i++
 		}

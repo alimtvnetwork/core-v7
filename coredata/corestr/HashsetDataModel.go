@@ -3,14 +3,14 @@ package corestr
 import "sync"
 
 type HashsetDataModel struct {
-	Items *map[string]bool `json:"Hashset"`
+	Items map[string]bool `json:"Hashset"`
 }
 
 func NewHashsetUsingDataModel(dataModel *HashsetDataModel) *Hashset {
 	length := 0
 
 	if dataModel.Items != nil {
-		length = len(*dataModel.Items)
+		length = len(dataModel.Items)
 	}
 
 	return &Hashset{

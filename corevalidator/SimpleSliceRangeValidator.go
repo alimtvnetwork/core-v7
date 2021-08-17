@@ -28,8 +28,7 @@ func (it *SimpleSliceRangeValidator) SliceValidators() *SliceValidators {
 
 	for _, segment := range it.VerifierSegments {
 		expectedSegments := segment.ExpectedLines
-		actualSegments := it.actual.Items[
-			segment.RangeInt.Start:segment.RangeInt.End]
+		actualSegments := it.actual.Items[segment.RangeInt.Start:segment.RangeInt.End]
 
 		sliceValidator := SliceValidator{
 			CompareAs:              segment.CompareAs,

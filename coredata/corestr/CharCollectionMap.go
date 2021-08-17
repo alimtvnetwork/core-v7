@@ -907,7 +907,7 @@ func (charCollectionMap *CharCollectionMap) AddCharHashsetMap(
 	}
 
 	for _, hashset := range *charHashsetMap.items {
-		for item := range *hashset.items {
+		for item := range hashset.items {
 			charCollectionMap.Add(item)
 		}
 	}

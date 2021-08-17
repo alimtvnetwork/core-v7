@@ -4,7 +4,7 @@ type (
 	IsLineCompareFunc func(
 		content,
 		searchComparingLine string,
-		isCaseSensitive bool,
+		isIgnoreCase bool,
 	) bool
 
 	IsDynamicCompareFunc func(

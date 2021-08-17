@@ -30,10 +30,10 @@ func executeErrorFunctions(functions []func() error) error {
 
 func executeAnyFunctions(
 	functions []func() (
-	result interface{},
-	isTake,
-	isBreak bool,
-),
+		result interface{},
+		isTake,
+		isBreak bool,
+	),
 ) []interface{} {
 	if len(functions) == 0 {
 		return nil

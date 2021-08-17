@@ -11,7 +11,9 @@ func AnyToString(any interface{}) string {
 		return ""
 	}
 
+	val := ReflectInterfaceVal(any)
+
 	return fmt.Sprintf(
 		constants.SprintValueFormat,
-		any)
+		val)
 }

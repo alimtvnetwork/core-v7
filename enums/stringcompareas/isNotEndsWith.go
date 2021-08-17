@@ -6,10 +6,10 @@ import "gitlab.com/evatix-go/core/coreutils/stringutil"
 var isNotEndsWithFunc = func(
 	contentLine,
 	searchComparingLine string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
 	return !stringutil.IsEndsWith(
 		contentLine,
 		searchComparingLine,
-		isCaseSensitive)
+		isIgnoreCase)
 }

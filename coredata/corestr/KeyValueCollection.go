@@ -195,7 +195,7 @@ func (it *KeyValueCollection) AddHashset(
 		return it
 	}
 
-	for key := range *inputHashset.items {
+	for key := range inputHashset.items {
 		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
 			Key:   key,
 			Value: key,

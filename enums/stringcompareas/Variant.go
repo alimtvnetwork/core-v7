@@ -173,8 +173,8 @@ func (it *Variant) RangesByte() []byte {
 //  NotContains:   isNotContainsFunc,
 //  NotAnyChars:   isNotAnyCharsFunc,
 //  NotMatchRegex: isNotMatchRegex,
-func (it *Variant) IsLineCompareFunc() IsLineCompareFunc {
-	return rangesMap[*it]
+func (it Variant) IsLineCompareFunc() IsLineCompareFunc {
+	return rangesMap[it]
 }
 
 func (it Variant) DynamicCompare(
@@ -195,52 +195,60 @@ func (it Variant) DynamicCompare(
 // if running twice it will not create new but the same one from the map.
 // It save the regex into map using mutex lock, so async codes can run.
 func (it Variant) IsCompareSuccess(
+	isIgnoreCase bool,
 	content,
 	search string,
-	isCaseSensitive bool,
 ) bool {
 	return it.IsLineCompareFunc()(
 		content,
 		search,
-		isCaseSensitive)
+		isIgnoreCase)
 }
 
 func (it Variant) VerifyMessage(
+	isIgnoreCase bool,
 	content,
 	search string,
-	isCaseSensitive bool,
 ) string {
 	isMatch := it.IsCompareSuccess(
+		isIgnoreCase,
 		content,
 		search,
-		isCaseSensitive)
+	)
 
 	if isMatch {
 		return constants.EmptyString
 	}
 
+	isIgnoreCaseString := "- {case strict}"
+
+	if isIgnoreCase {
+		isIgnoreCaseString = "- {case ignored}"
+	}
+
 	if it.IsNegativeCondition() {
 		return msgtype.ExpectingNotEqualSimpleNoType(
-			"Method \""+it.Name()+"\" - {negative} match failed",
+			"Method \""+it.Name()+"\" - {negative} match failed " + isIgnoreCaseString,
 			search,
 			content)
 	}
 
 	return msgtype.ExpectingSimpleNoType(
-		"Method \""+it.Name()+"\" - match failed",
+		"Method \""+it.Name()+"\" - match failed " + isIgnoreCaseString,
 		search,
 		content)
 }
 
 func (it Variant) VerifyError(
+	isIgnoreCase bool,
 	content,
 	search string,
-	isCaseSensitive bool,
 ) error {
 	message := it.VerifyMessage(
+		isIgnoreCase,
 		content,
 		search,
-		isCaseSensitive)
+	)
 
 	if message == constants.EmptyString {
 		return nil
@@ -254,9 +262,10 @@ func (it Variant) VerifyMessageCaseSensitive(
 	search string,
 ) string {
 	return it.VerifyMessage(
+		false,
 		content,
 		search,
-		true)
+	)
 }
 
 func (it Variant) VerifyErrorCaseSensitive(
@@ -264,9 +273,10 @@ func (it Variant) VerifyErrorCaseSensitive(
 	search string,
 ) error {
 	return it.VerifyError(
+		false,
 		content,
 		search,
-		true)
+	)
 }
 
 // IsCompareSuccessCaseSensitive for
@@ -276,7 +286,7 @@ func (it *Variant) IsCompareSuccessCaseSensitive(content, search string) bool {
 	return it.IsLineCompareFunc()(
 		content,
 		search,
-		true)
+		false)
 }
 
 // IsCompareSuccessNonCaseSensitive for
@@ -286,7 +296,7 @@ func (it *Variant) IsCompareSuccessNonCaseSensitive(content, search string) bool
 	return it.IsLineCompareFunc()(
 		content,
 		search,
-		false)
+		true)
 }
 
 func (it *Variant) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {

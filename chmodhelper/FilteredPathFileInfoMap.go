@@ -16,8 +16,7 @@ type FilteredPathFileInfoMap struct {
 	Error                                error
 }
 
-func (it *FilteredPathFileInfoMap) LazyValidLocationFileInfoRwxWrappers(
-) []LocationFileInfoRwxWrapper {
+func (it *FilteredPathFileInfoMap) LazyValidLocationFileInfoRwxWrappers() []LocationFileInfoRwxWrapper {
 	if it.lazyValidLocationFileInfoRwxWrappers != nil {
 		return it.lazyValidLocationFileInfoRwxWrappers
 	}
@@ -72,8 +71,7 @@ func (it *FilteredPathFileInfoMap) ValidFileInfos() []os.FileInfo {
 	return slice
 }
 
-func (it *FilteredPathFileInfoMap) ValidLocationFileInfoRwxWrappers(
-) []LocationFileInfoRwxWrapper {
+func (it *FilteredPathFileInfoMap) ValidLocationFileInfoRwxWrappers() []LocationFileInfoRwxWrapper {
 	length := len(it.FilesToInfoMap)
 	slice := make([]LocationFileInfoRwxWrapper, length)
 

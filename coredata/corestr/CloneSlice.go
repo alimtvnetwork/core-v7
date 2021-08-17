@@ -10,9 +10,7 @@ func CloneSlice(items []string) []string {
 		0,
 		len(items))
 
-	for _, item := range items {
-		slice = append(slice, item)
-	}
+	slice = append(slice, items...)
 
 	return slice
 }

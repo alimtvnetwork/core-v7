@@ -6,13 +6,13 @@ import "strings"
 var isNotEqualFunc = func(
 	contentLine,
 	notEqualText string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
-	if isCaseSensitive {
-		return contentLine != notEqualText
+	if isIgnoreCase {
+		return !strings.EqualFold(
+			notEqualText,
+			contentLine)
 	}
 
-	return !strings.EqualFold(
-		notEqualText,
-		contentLine)
+	return contentLine != notEqualText
 }

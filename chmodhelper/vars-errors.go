@@ -10,14 +10,14 @@ import (
 
 var (
 	rwxInstructionNilErr = msgtype.
-		CannotBeNilMessage.
-		Error(
+				CannotBeNilMessage.
+				Error(
 			"rwx (...) - parsing failed",
 			"rwxInstruction / rwxOwnerGroupOther - given as nil")
 
 	failedToCompileVarWrapperToWrapper = msgtype.
-		FailedToExecute.
-		Error(
+						FailedToExecute.
+						Error(
 			messages.FailedToCompileChmodhelperVarWrapperToWrapper,
 			constants.EmptyString)
 

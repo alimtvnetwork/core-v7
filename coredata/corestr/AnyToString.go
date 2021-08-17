@@ -14,13 +14,15 @@ func AnyToString(
 		return constants.EmptyString
 	}
 
+	val := reflectInterfaceVal(any)
+
 	if isIncludeFieldName {
 		return fmt.Sprintf(
 			constants.SprintPropertyNameValueFormat,
-			any)
+			val)
 	}
 
 	return fmt.Sprintf(
 		constants.SprintValueFormat,
-		any)
+		val)
 }

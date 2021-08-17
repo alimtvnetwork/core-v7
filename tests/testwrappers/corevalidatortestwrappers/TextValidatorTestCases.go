@@ -31,7 +31,13 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 0",
 			"     Content-Processed:`\"alim      alim 2 alim 4\"`",
 			"  SearchTerm-Processed:`\"   alim      alim 2 alim 3                 \"`",
-			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], Method: [`Equal`], IsTrimCompare: [`false`], IsSplitByWhitespace: [`false`], IsUniqueWordOnly: [`false`], IsNonEmptyWhitespace: [`false`], IsSortStringsBySpace: [`false`]\"`",
+			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `]," +
+				" Method: [`Equal`], " +
+				"IsTrimCompare: [`false`], " +
+				"IsSplitByWhitespace: [`false`], " +
+				"IsUniqueWordOnly: [`false`], " +
+				"IsNonEmptyWhitespace: [`false`], " +
+				"IsSortStringsBySpace: [`false`]\"`",
 		},
 	},
 	{

@@ -92,96 +92,109 @@ func LeftRightUsingSlice(slice []string) *LeftRight {
 	}
 }
 
-func (receiver *LeftRight) LeftBytes() []byte {
-	return []byte(receiver.Left)
+func (it *LeftRight) LeftBytes() []byte {
+	return []byte(it.Left)
 }
 
-func (receiver *LeftRight) RightBytes() []byte {
-	return []byte(receiver.Right)
+func (it *LeftRight) RightBytes() []byte {
+	return []byte(it.Right)
 }
 
-func (receiver *LeftRight) LeftTrim() string {
-	return strings.TrimSpace(receiver.Left)
+func (it *LeftRight) LeftTrim() string {
+	return strings.TrimSpace(it.Left)
 }
 
-func (receiver *LeftRight) RightTrim() string {
-	return strings.TrimSpace(receiver.Right)
+func (it *LeftRight) RightTrim() string {
+	return strings.TrimSpace(it.Right)
 }
 
-func (receiver *LeftRight) IsLeftEmpty() bool {
-	return receiver.Left == ""
+func (it *LeftRight) IsLeftEmpty() bool {
+	return it.Left == ""
 }
 
-func (receiver *LeftRight) IsRightEmpty() bool {
-	return receiver.Right == ""
+func (it *LeftRight) IsRightEmpty() bool {
+	return it.Right == ""
 }
 
-func (receiver *LeftRight) IsRightWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(receiver.Right)
+func (it *LeftRight) IsRightWhitespace() bool {
+	return utilstringinternal.IsEmptyOrWhitespace(it.Right)
 }
 
-func (receiver *LeftRight) IsLeftWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(receiver.Left)
+func (it *LeftRight) IsLeftWhitespace() bool {
+	return utilstringinternal.IsEmptyOrWhitespace(it.Left)
 }
 
-func (receiver *LeftRight) HasValidNonEmptyLeft() bool {
-	return receiver.IsValid && !receiver.IsLeftEmpty()
+func (it *LeftRight) HasValidNonEmptyLeft() bool {
+	return it.IsValid && !it.IsLeftEmpty()
 }
 
-func (receiver *LeftRight) HasValidNonEmptyRight() bool {
-	return receiver.IsValid && !receiver.IsRightEmpty()
+func (it *LeftRight) HasValidNonEmptyRight() bool {
+	return it.IsValid && !it.IsRightEmpty()
 }
 
-func (receiver *LeftRight) HasValidNonWhitespaceLeft() bool {
-	return receiver.IsValid && !receiver.IsLeftWhitespace()
+func (it *LeftRight) HasValidNonWhitespaceLeft() bool {
+	return it.IsValid && !it.IsLeftWhitespace()
 }
 
-func (receiver *LeftRight) HasValidNonWhitespaceRight() bool {
-	return receiver.IsValid && !receiver.IsRightWhitespace()
+func (it *LeftRight) HasValidNonWhitespaceRight() bool {
+	return it.IsValid && !it.IsRightWhitespace()
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
 //		!receiver.IsLeftEmpty() &&
 //		!receiver.IsRightEmpty()
-func (receiver *LeftRight) HasSafeNonEmpty() bool {
-	return receiver.IsValid &&
-		!receiver.IsLeftEmpty() &&
-		!receiver.IsRightEmpty()
+func (it *LeftRight) HasSafeNonEmpty() bool {
+	return it.IsValid &&
+		!it.IsLeftEmpty() &&
+		!it.IsRightEmpty()
 }
 
-func (receiver *LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
+func (it *LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
 	if regexp == nil {
 		return false
 	}
 
-	return regexp.MatchString(receiver.Left)
+	return regexp.MatchString(it.Left)
 }
 
-func (receiver *LeftRight) IsRightRegexMatch(regexp *regexp.Regexp) bool {
+func (it *LeftRight) IsRightRegexMatch(regexp *regexp.Regexp) bool {
 	if regexp == nil {
 		return false
 	}
 
-	return regexp.MatchString(receiver.Right)
+	return regexp.MatchString(it.Right)
 }
 
-func (receiver *LeftRight) IsLeft(left string) bool {
-	return receiver.Left == left
+func (it *LeftRight) IsLeft(left string) bool {
+	return it.Left == left
 }
 
-func (receiver *LeftRight) IsRight(right string) bool {
-	return receiver.Right == right
+func (it *LeftRight) IsRight(right string) bool {
+	return it.Right == right
 }
 
-func (receiver *LeftRight) Is(left, right string) bool {
-	return receiver.Left == left && receiver.Right == right
+func (it *LeftRight) Is(left, right string) bool {
+	return it.Left == left && it.Right == right
 }
 
-func (receiver *LeftRight) Clone() *LeftRight {
+func (it *LeftRight) IsEqual(another *LeftRight) bool {
+	if it == nil && another == nil {
+		return true
+	}
+
+	if it == nil || another == nil {
+		return false
+	}
+
+	return it.IsValid == another.IsValid &&
+		it.Is(another.Left, another.Right)
+}
+
+func (it *LeftRight) Clone() *LeftRight {
 	return &LeftRight{
-		Left:    receiver.Left,
-		Right:   receiver.Right,
-		IsValid: receiver.IsValid,
-		Message: receiver.Message,
+		Left:    it.Left,
+		Right:   it.Right,
+		IsValid: it.IsValid,
+		Message: it.Message,
 	}
 }

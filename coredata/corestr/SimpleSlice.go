@@ -1,11 +1,14 @@
 package corestr
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type SimpleSlice struct {
@@ -20,7 +23,9 @@ func NewSimpleSlice(capacity int) *SimpleSlice {
 	}
 }
 
-func NewSimpleSliceUsing(isClone bool, lines []string) *SimpleSlice {
+func NewSimpleSliceUsing(
+	isClone bool, lines []string,
+) *SimpleSlice {
 	if lines == nil {
 		return EmptySimpleSlice()
 	}
@@ -40,13 +45,17 @@ func EmptySimpleSlice() *SimpleSlice {
 	return NewSimpleSlice(0)
 }
 
-func (it *SimpleSlice) Add(item string) *SimpleSlice {
+func (it *SimpleSlice) Add(
+	item string,
+) *SimpleSlice {
 	it.Items = append(it.Items, item)
 
 	return it
 }
 
-func (it *SimpleSlice) AddIf(isAdd bool, item string) *SimpleSlice {
+func (it *SimpleSlice) AddIf(
+	isAdd bool, item string,
+) *SimpleSlice {
 	if !isAdd {
 		return it
 	}
@@ -56,7 +65,13 @@ func (it *SimpleSlice) AddIf(isAdd bool, item string) *SimpleSlice {
 	return it
 }
 
-func (it *SimpleSlice) Adds(items ...string) *SimpleSlice {
+func (it *SimpleSlice) Adds(
+	items ...string,
+) *SimpleSlice {
+	if len(items) == 0 {
+		return it
+	}
+
 	it.Items = append(it.Items, items...)
 
 	return it
@@ -69,18 +84,34 @@ func (it *SimpleSlice) InsertAt(index int, item string) *SimpleSlice {
 	return it
 }
 
-func (it *SimpleSlice) AddStructOrPointer(
+func (it *SimpleSlice) AddStruct(
+	isIncludeFieldName bool,
 	anyStruct interface{},
 ) *SimpleSlice {
 	if anyStruct == nil {
 		return it
 	}
 
-	value := fmt.Sprintf(
-		constants.SprintValueFormat,
+	val := AnyToString(
+		isIncludeFieldName,
 		anyStruct)
 
-	return it.Add(value)
+	return it.Add(val)
+}
+
+func (it *SimpleSlice) AddPointer(
+	isIncludeFieldName bool,
+	anyPtr interface{},
+) *SimpleSlice {
+	if anyPtr == nil {
+		return it
+	}
+
+	val := AnyToString(
+		isIncludeFieldName,
+		anyPtr)
+
+	return it.Add(val)
 }
 
 func (it *SimpleSlice) AddsIf(
@@ -218,6 +249,79 @@ func (it *SimpleSlice) Hashset() *Hashset {
 	return NewHashsetUsingStrings(&it.Items)
 }
 
+func (it *SimpleSlice) Join(joiner string) string {
+	return strings.Join(it.Items, joiner)
+}
+
+func (it *SimpleSlice) PrependJoin(
+	joiner string,
+	prependItems ...string,
+) string {
+	prependSlice := &SimpleSlice{
+		Items: prependItems,
+	}
+
+	return prependSlice.
+		ConcatNew(it.Items...).
+		Join(joiner)
+}
+
+func (it *SimpleSlice) AppendJoin(
+	joiner string,
+	appendItems ...string,
+) string {
+	return it.
+		ConcatNew(appendItems...).
+		Join(joiner)
+}
+
+func (it *SimpleSlice) IsEqual(another *SimpleSlice) bool {
+	if it == nil && another == nil {
+		return true
+	}
+
+	if it == nil || another == nil {
+		return false
+	}
+
+	if it.Length() != another.Length() {
+		return false
+	}
+
+	return it.IsEqualLines(another.Items)
+}
+
+func (it *SimpleSlice) IsEqualLines(lines []string) bool {
+	if it == nil && lines == nil {
+		return true
+	}
+
+	if it == nil || lines == nil {
+		return false
+	}
+
+	if it.Length() != len(lines) {
+		return false
+	}
+
+	for i, item := range it.Items {
+		anotherItem := lines[i]
+
+		if item != anotherItem {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (it *SimpleSlice) IsDistinctEqual(lines []string) bool {
+	selfHashset := NewHashsetUsingStrings(&it.Items)
+	linesHashset := NewHashsetUsingStringsWithoutPointer(lines)
+
+	return selfHashset.IsEqualsPtr(linesHashset)
+}
+
 func (it *SimpleSlice) Collection(isClone bool) *Collection {
 	return NewCollectionUsingStrings(
 		&it.Items,
@@ -295,4 +399,91 @@ func (it *SimpleSlice) CsvStrings() []string {
 	}
 
 	return newSlice
+}
+
+func (it *SimpleSlice) JsonModel() *SimpleSlice {
+	return it
+}
+
+func (it *SimpleSlice) JsonModelAny() interface{} {
+	return it.JsonModel()
+}
+
+func (it *SimpleSlice) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.JsonModel())
+}
+
+func (it *SimpleSlice) UnmarshalJSON(
+	data []byte,
+) error {
+	var dataModel SimpleSlice
+	err := json.Unmarshal(data, &dataModel)
+
+	if err == nil {
+		it.Items = dataModel.Items
+	}
+
+	return err
+}
+
+func (it *SimpleSlice) Json() *corejson.Result {
+	if it.IsEmpty() {
+		return corejson.EmptyWithoutErrorPtr()
+	}
+
+	jsonBytes, err := json.Marshal(it)
+
+	return corejson.NewPtr(jsonBytes, err)
+}
+
+func (it *SimpleSlice) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*SimpleSlice, error) {
+	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
+		return EmptySimpleSlice(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	err := json.Unmarshal(*jsonResult.Bytes, &it)
+
+	if err != nil {
+		return EmptySimpleSlice(), err
+	}
+
+	return it, nil
+}
+
+// ParseInjectUsingJsonMust Panic if error
+func (it *SimpleSlice) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *SimpleSlice {
+	hashSet, err := it.
+		ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return hashSet
+}
+
+func (it *SimpleSlice) AsJsoner() corejson.Jsoner {
+	return it
+}
+
+func (it *SimpleSlice) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := it.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (it *SimpleSlice) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return it
+}
+
+func (it *SimpleSlice) AsJsonMarshaller() corejson.JsonMarshaller {
+	return it
 }

@@ -22,7 +22,7 @@ var (
 	}
 
 	basicEnumImpl = enumimpl.
-		NewBasicByteUsingIndexedSlice(stringRanges[:])
+			NewBasicByteUsingIndexedSlice(stringRanges[:])
 
 	rangesMap = map[Variant]IsLineCompareFunc{
 		Equal:         isEqualFunc,

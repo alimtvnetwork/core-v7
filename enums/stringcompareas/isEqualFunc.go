@@ -5,14 +5,14 @@ import "strings"
 var isEqualFunc = func(
 	contentLine,
 	searchComparingLine string,
-	isCaseSensitive bool,
+	isIgnoreCase bool,
 ) bool {
-	if isCaseSensitive {
-		return contentLine ==
-			searchComparingLine
+	if isIgnoreCase {
+		return strings.EqualFold(
+			searchComparingLine,
+			contentLine)
 	}
 
-	return strings.EqualFold(
-		searchComparingLine,
-		contentLine)
+	return contentLine ==
+		searchComparingLine
 }

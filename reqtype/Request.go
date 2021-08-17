@@ -277,6 +277,25 @@ func (it Request) IsRestartOrReload() bool {
 	return it.IsRestart() || it.IsReload()
 }
 
+// IsAnySkipOnExist =>
+// IsSkipOnExist, IsCreateOrSkipOnExist,
+// IsUpdateOrSkipOnNonExist, IsDeleteOrSkipOnNonExist,
+// IsDeleteOrSkipOnNonExist, IsDropOrSkipOnNonExist
+func (it Request) IsAnySkipOnExist() bool {
+	return it.IsSkipOnExist() ||
+		it.IsCreateOrSkipOnExist() ||
+		it.IsUpdateOrSkipOnNonExist() ||
+		it.IsDeleteOrSkipOnNonExist() ||
+		it.IsDropOrSkipOnNonExist()
+}
+
+// IsAnyApplyOnExist =>
+// IsUpdateOnExist, IsDropOnExist,
+func (it Request) IsAnyApplyOnExist() bool {
+	return it.IsUpdateOnExist() ||
+		it.IsDropOnExist()
+}
+
 // IsCrud returns true if Read, Update, Create, Delete, IsCreateOrUpdate
 func (it Request) IsCrud() bool {
 	return it.IsRead() ||

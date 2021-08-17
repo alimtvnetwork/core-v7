@@ -8,7 +8,7 @@ import (
 //goland:noinspection ALL
 var (
 	StaticJsonError = msgtype.EmptyResultCannotMakeJson.
-		Error(constants.EmptyString, constants.EmptyString)
+			Error(constants.EmptyString, constants.EmptyString)
 	ExpectingLengthForLeftRight      = constants.Two
 	LeftRightExpectingLengthMessager = msgtype.ExpectingFuture(
 		"Expecting length at least",

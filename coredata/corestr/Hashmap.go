@@ -13,15 +13,19 @@ import (
 )
 
 type Hashmap struct {
-	items         *map[string]string
 	hasMapUpdated bool
-	cachedList    *[]string
-	length        int
 	isEmptySet    bool
+	length        int
+	items         *map[string]string
+	cachedList    *[]string
 	sync.Mutex
 }
 
 func (hashmap *Hashmap) IsEmpty() bool {
+	if hashmap == nil {
+		return true
+	}
+
 	if hashmap.hasMapUpdated {
 		hashmap.isEmptySet = hashmap.items == nil ||
 			*hashmap.items == nil ||
@@ -32,7 +36,7 @@ func (hashmap *Hashmap) IsEmpty() bool {
 }
 
 func (hashmap *Hashmap) HasItems() bool {
-	return !hashmap.IsEmpty()
+	return hashmap != nil && !hashmap.IsEmpty()
 }
 
 func (hashmap *Hashmap) Collection() *Collection {
@@ -1130,9 +1134,9 @@ func (hashmap *Hashmap) KeyValStringLines() *[]string {
 
 func (hashmap *Hashmap) ToStringsUsingCompiler(
 	compilerFunc func(
-	key,
-	val string,
-) string,
+		key,
+		val string,
+	) string,
 ) *[]string {
 	length := hashmap.Length()
 	slice := make([]string, length)

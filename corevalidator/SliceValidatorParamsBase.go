@@ -6,3 +6,7 @@ type ValidatorParamsBase struct {
 	IsAttachUserInputs                bool
 	IsCaseSensitive                   bool
 }
+
+func (it ValidatorParamsBase) IsIgnoreCase() bool {
+	return !it.IsCaseSensitive
+}

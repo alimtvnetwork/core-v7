@@ -101,10 +101,13 @@ func (it *TextValidator) IsMatch(
 		content,
 		isCaseSensitive)
 
+	isIgnoreCase := !isCaseSensitive
+
 	return it.SearchAs.IsCompareSuccess(
+		isIgnoreCase,
 		processedContent,
 		search,
-		isCaseSensitive)
+	)
 }
 
 func (it *TextValidator) IsMatchMany(
@@ -158,9 +161,10 @@ func (it *TextValidator) verifyDetailErrorUsingLineProcessing(
 		params.IsCaseSensitive)
 
 	isMatch := it.SearchAs.IsCompareSuccess(
+		params.IsIgnoreCase(),
 		processedContent,
 		processedSearch,
-		params.IsCaseSensitive)
+	)
 
 	if isMatch {
 		return nil
@@ -198,9 +202,10 @@ func (it *TextValidator) VerifySimpleError(
 		params.IsCaseSensitive)
 
 	isMatch := it.SearchAs.IsCompareSuccess(
+		params.IsIgnoreCase(),
 		processedContent,
 		processedSearch,
-		params.IsCaseSensitive)
+	)
 
 	if isMatch {
 		return nil

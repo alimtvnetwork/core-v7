@@ -295,7 +295,7 @@ func (it *ValidValues) AddHashset(
 		return it
 	}
 
-	return it.AddHashsetMap(*inputHashset.items)
+	return it.AddHashsetMap(inputHashset.items)
 }
 
 func (it *ValidValues) Hashmap() *Hashmap {

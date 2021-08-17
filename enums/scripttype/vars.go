@@ -134,5 +134,5 @@ var (
 	}
 
 	scriptTypeBasicEnumImpl = enumimpl.
-		NewBasicByteUsingIndexedSlice(scriptTypeStringRanges[:])
+				NewBasicByteUsingIndexedSlice(scriptTypeStringRanges[:])
 )
