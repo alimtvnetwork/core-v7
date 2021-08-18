@@ -39,19 +39,32 @@ func (it *Result) JsonStringPtr() *string {
 	return it.jsonString
 }
 
+func (it *Result) Length() int {
+	if it == nil || it.Bytes == nil {
+		return 0
+	}
+
+	return len(*it.Bytes)
+}
+
 func (it *Result) HasError() bool {
 	return it != nil && it.Error != nil
 }
 
-func (it *Result) ValueMust() []byte {
-	return *it.ValueMustPtr()
+func (it *Result) String() string {
+	if it.HasIssuesOrEmpty() {
+		return constants.EmptyString
+	}
+
+	return it.JsonString()
 }
 
-func (it *Result) ValueMustPtr() *[]byte {
-	if it == nil ||
-		it.Error != nil ||
-		it.Bytes == nil ||
-		len(*it.Bytes) == 0 {
+func (it *Result) ValuesNonPtr() []byte {
+	return *it.ValueMust()
+}
+
+func (it *Result) ValueMust() *[]byte {
+	if it.HasIssuesOrEmpty() {
 		return &[]byte{}
 	}
 
@@ -77,6 +90,14 @@ func (it *Result) MeaningfulError() error {
 
 func (it *Result) IsEmptyError() bool {
 	return it == nil || it.Error == nil
+}
+
+func (it *Result) HasSafeItems() bool {
+	return !it.IsEmptyJsonBytes()
+}
+
+func (it *Result) HasIssuesOrEmpty() bool {
+	return it.IsEmptyJsonBytes()
 }
 
 func (it *Result) HandleError() {

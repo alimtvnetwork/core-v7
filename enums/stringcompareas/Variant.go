@@ -228,13 +228,13 @@ func (it Variant) VerifyMessage(
 
 	if it.IsNegativeCondition() {
 		return msgtype.ExpectingNotEqualSimpleNoType(
-			"Method \""+it.Name()+"\" - {negative} match failed " + isIgnoreCaseString,
+			"Method \""+it.Name()+"\" - {negative} match failed "+isIgnoreCaseString,
 			search,
 			content)
 	}
 
 	return msgtype.ExpectingSimpleNoType(
-		"Method \""+it.Name()+"\" - match failed " + isIgnoreCaseString,
+		"Method \""+it.Name()+"\" - match failed "+isIgnoreCaseString,
 		search,
 		content)
 }

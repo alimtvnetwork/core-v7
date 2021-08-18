@@ -114,10 +114,10 @@ func NewFromAny(any interface{}) *Result {
 }
 
 func EmptyResultsCollection() *ResultsCollection {
-	list := make([]*Result, 0, 0)
+	list := make([]*Result, 0)
 
 	return &ResultsCollection{
-		Items: &list,
+		Items: list,
 	}
 }
 
@@ -125,7 +125,7 @@ func NewResultsCollection(cap int) *ResultsCollection {
 	list := make([]*Result, 0, cap)
 
 	return &ResultsCollection{
-		Items: &list,
+		Items: list,
 	}
 }
 
@@ -142,7 +142,7 @@ func NewResultsCollectionUsingJsoners(
 	length += additionalCapacity
 	list := make([]*Result, 0, length)
 	resultsCollection := &ResultsCollection{
-		Items: &list,
+		Items: list,
 	}
 
 	return resultsCollection.
@@ -162,11 +162,11 @@ func NewResultsCollectionUsingJsonResults(
 	length += additionalCapacity
 	list := make([]*Result, 0, length)
 	resultsCollection := &ResultsCollection{
-		Items: &list,
+		Items: list,
 	}
 
 	return resultsCollection.
-		AddNonNilItemsPtr(&results)
+		AddNonNilItemsPtr(results)
 }
 
 func NewResultsCollectionUsingAnys(
@@ -182,7 +182,7 @@ func NewResultsCollectionUsingAnys(
 	length += additionalCapacity
 	list := make([]*Result, 0, length)
 	resultsCollection := &ResultsCollection{
-		Items: &list,
+		Items: list,
 	}
 
 	return resultsCollection.

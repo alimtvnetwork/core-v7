@@ -10,47 +10,99 @@ import (
 )
 
 type ResultsCollection struct {
-	Items *[]*Result `json:"JsonResultsCollection"`
+	Items []*Result `json:"JsonResultsCollection"`
 }
 
-func (receiver *ResultsCollection) Length() int {
-	return len(*receiver.Items)
+func (it *ResultsCollection) Length() int {
+	if it == nil || it.Items == nil {
+		return 0
+	}
+
+	return len(it.Items)
 }
 
-func (receiver *ResultsCollection) IsEmpty() bool {
-	return receiver.Items == nil ||
-		len(*receiver.Items) == 0
+func (it *ResultsCollection) LastIndex() int {
+	return it.Length() - 1
 }
 
-func (receiver *ResultsCollection) HasItems() bool {
-	return receiver.Items != nil &&
-		len(*receiver.Items) > 0
+func (it *ResultsCollection) IsEmpty() bool {
+	return it.Length() == 0
+}
+
+func (it *ResultsCollection) HasAnyItem() bool {
+	return it.Length() > 0
+}
+
+func (it *ResultsCollection) FirstOrDefault() *Result {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	return it.Items[0]
+}
+
+func (it *ResultsCollection) LastOrDefault() *Result {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	return it.Items[it.LastIndex()]
+}
+
+func (it *ResultsCollection) Take(limit int) *ResultsCollection {
+	if it.IsEmpty() {
+		return EmptyResultsCollection()
+	}
+
+	return &ResultsCollection{
+		Items: it.Items[:limit],
+	}
+}
+
+func (it *ResultsCollection) Limit(limit int) *ResultsCollection {
+	if it.IsEmpty() {
+		return EmptyResultsCollection()
+	}
+
+	return &ResultsCollection{
+		Items: it.Items[:limit],
+	}
+}
+
+func (it *ResultsCollection) Skip(skip int) *ResultsCollection {
+	if it.IsEmpty() {
+		return EmptyResultsCollection()
+	}
+
+	return &ResultsCollection{
+		Items: it.Items[skip:],
+	}
 }
 
 // AddSkipOnNil skip on nil
-func (receiver *ResultsCollection) AddSkipOnNil(
+func (it *ResultsCollection) AddSkipOnNil(
 	result *Result,
 ) *ResultsCollection {
 	if result == nil {
-		return receiver
+		return it
 	}
 
-	*receiver.Items = append(
-		*receiver.Items,
+	it.Items = append(
+		it.Items,
 		result)
 
-	return receiver
+	return it
 }
 
-func (receiver *ResultsCollection) GetAt(
+func (it *ResultsCollection) GetAt(
 	index int,
 ) *Result {
-	return (*receiver.Items)[index]
+	return it.Items[index]
 }
 
 // HasError has any error
-func (receiver *ResultsCollection) HasError() bool {
-	for _, result := range *receiver.Items {
+func (it *ResultsCollection) HasError() bool {
+	for _, result := range it.Items {
 		if result != nil && result.Error != nil {
 			return true
 		}
@@ -59,11 +111,11 @@ func (receiver *ResultsCollection) HasError() bool {
 	return false
 }
 
-func (receiver *ResultsCollection) AllErrors() (
+func (it *ResultsCollection) AllErrors() (
 	errListPtr *[]error,
 	hasAnyError bool,
 ) {
-	length := receiver.Length()
+	length := it.Length()
 	errList := make(
 		[]error,
 		0,
@@ -74,7 +126,7 @@ func (receiver *ResultsCollection) AllErrors() (
 	}
 
 	for i := 0; i < length; i++ {
-		err := (*receiver.Items)[i].Error
+		err := it.Items[i].Error
 
 		if err != nil {
 			hasAnyError = true
@@ -87,8 +139,8 @@ func (receiver *ResultsCollection) AllErrors() (
 	return &errList, hasAnyError
 }
 
-func (receiver *ResultsCollection) GetErrorsStrings() *[]string {
-	length := receiver.Length()
+func (it *ResultsCollection) GetErrorsStrings() *[]string {
+	length := it.Length()
 	errStrList := make(
 		[]string,
 		0,
@@ -98,8 +150,8 @@ func (receiver *ResultsCollection) GetErrorsStrings() *[]string {
 		return &errStrList
 	}
 
-	for _, result := range *receiver.Items {
-		if result == nil || result.IsEmptyError() {
+	for _, result := range it.Items {
+		if result.IsEmptyError() {
 			continue
 		}
 
@@ -111,32 +163,32 @@ func (receiver *ResultsCollection) GetErrorsStrings() *[]string {
 	return &errStrList
 }
 
-func (receiver *ResultsCollection) GetErrorsAsSingleString() string {
-	errStrList := receiver.GetErrorsStrings()
+func (it *ResultsCollection) GetErrorsAsSingleString() string {
+	errStrList := it.GetErrorsStrings()
 
 	return strings.Join(
 		*errStrList,
 		constants.NewLineUnix)
 }
 
-func (receiver *ResultsCollection) GetErrorsAsSingle() error {
-	errorString := receiver.GetErrorsAsSingleString()
+func (it *ResultsCollection) GetErrorsAsSingle() error {
+	errorString := it.GetErrorsAsSingleString()
 
 	return errors.New(errorString)
 }
 
-func (receiver *ResultsCollection) UnmarshalAt(
+func (it *ResultsCollection) UnmarshalAt(
 	index int,
 	any interface{},
 ) error {
-	result := (*receiver.Items)[index]
+	result := it.Items[index]
 
 	if result == nil || result.IsEmptyJsonBytes() {
 		return nil
 	}
 
 	if result.HasError() {
-		return result.Error
+		return result.MeaningfulError()
 	}
 
 	if result.IsEmptyJsonBytes() {
@@ -150,16 +202,16 @@ func (receiver *ResultsCollection) UnmarshalAt(
 	return err
 }
 
-func (receiver *ResultsCollection) InjectIntoAt(
+func (it *ResultsCollection) InjectIntoAt(
 	index int,
 	injector JsonParseSelfInjector,
 ) error {
 	return injector.JsonParseSelfInject(
-		(*receiver.Items)[index])
+		it.Items[index])
 }
 
 // InjectIntoSameIndex any nil skip
-func (receiver *ResultsCollection) InjectIntoSameIndex(
+func (it *ResultsCollection) InjectIntoSameIndex(
 	injectors ...JsonParseSelfInjector,
 ) (
 	errListPtr *[]error,
@@ -173,7 +225,7 @@ func (receiver *ResultsCollection) InjectIntoSameIndex(
 	errList := make([]error, length)
 
 	for i := 0; i < length; i++ {
-		result := (*receiver.Items)[i]
+		result := it.Items[i]
 		injector := injectors[i]
 
 		if result == nil {
@@ -205,7 +257,7 @@ func (receiver *ResultsCollection) InjectIntoSameIndex(
 }
 
 // UnmarshalIntoSameIndex any nil skip
-func (receiver *ResultsCollection) UnmarshalIntoSameIndex(
+func (it *ResultsCollection) UnmarshalIntoSameIndex(
 	anys ...interface{},
 ) (
 	errListPtr *[]error,
@@ -219,7 +271,7 @@ func (receiver *ResultsCollection) UnmarshalIntoSameIndex(
 	errList := make([]error, length)
 
 	for i := 0; i < length; i++ {
-		result := (*receiver.Items)[i]
+		result := it.Items[i]
 		any := anys[i]
 
 		if result == nil ||
@@ -252,69 +304,69 @@ func (receiver *ResultsCollection) UnmarshalIntoSameIndex(
 	return &errList, hasAnyError
 }
 
-func (receiver *ResultsCollection) GetAtSafe(
+func (it *ResultsCollection) GetAtSafe(
 	index int,
 ) *Result {
-	if index > constants.InvalidNotFoundCase && index <= receiver.Length()-1 {
-		return (*receiver.Items)[index]
+	if index > constants.InvalidNotFoundCase && index <= it.Length()-1 {
+		return it.Items[index]
 	}
 
 	return nil
 }
 
-func (receiver *ResultsCollection) GetAtSafeUsingLength(
+func (it *ResultsCollection) GetAtSafeUsingLength(
 	index, length int,
 ) *Result {
 	if index > constants.InvalidNotFoundCase && index <= length-1 {
-		return (*receiver.Items)[index]
+		return it.Items[index]
 	}
 
 	return nil
 }
 
-func (receiver *ResultsCollection) Add(
+func (it *ResultsCollection) Add(
 	result *Result,
 ) *ResultsCollection {
-	*receiver.Items = append(
-		*receiver.Items,
+	it.Items = append(
+		it.Items,
 		result)
 
-	return receiver
+	return it
 }
 
-func (receiver *ResultsCollection) Adds(
+func (it *ResultsCollection) Adds(
 	results ...*Result,
 ) *ResultsCollection {
 	if results == nil {
-		return receiver
+		return it
 	}
 
 	for _, result := range results {
-		*receiver.Items = append(
-			*receiver.Items,
+		it.Items = append(
+			it.Items,
 			result)
 	}
 
-	return receiver
+	return it
 }
 
 // AddsAnys Skip on nil
-func (receiver *ResultsCollection) AddsAnys(
+func (it *ResultsCollection) AddsAnys(
 	anys ...interface{},
 ) *ResultsCollection {
 	if anys == nil {
-		return receiver
+		return it
 	}
 
-	return receiver.AddsAnysPtr(&anys)
+	return it.AddsAnysPtr(&anys)
 }
 
 // AddsAnysPtr Skip on nil
-func (receiver *ResultsCollection) AddsAnysPtr(
+func (it *ResultsCollection) AddsAnysPtr(
 	anysPtr *[]interface{},
 ) *ResultsCollection {
 	if anysPtr == nil {
-		return receiver
+		return it
 	}
 
 	for _, any := range *anysPtr {
@@ -322,31 +374,31 @@ func (receiver *ResultsCollection) AddsAnysPtr(
 			continue
 		}
 
-		*receiver.Items = append(
-			*receiver.Items,
+		it.Items = append(
+			it.Items,
 			NewFromAny(any))
 	}
 
-	return receiver
+	return it
 }
 
 // AddResultsCollection skip on nil items
-func (receiver *ResultsCollection) AddResultsCollection(
+func (it *ResultsCollection) AddResultsCollection(
 	collection *ResultsCollection,
 ) *ResultsCollection {
 	if collection == nil {
-		return receiver
+		return it
 	}
 
-	return receiver.AddNonNilItemsPtr(collection.Items)
+	return it.AddNonNilItemsPtr(collection.Items)
 }
 
 // AddNonNilItems skip on nil
-func (receiver *ResultsCollection) AddNonNilItems(
+func (it *ResultsCollection) AddNonNilItems(
 	results ...*Result,
 ) *ResultsCollection {
 	if results == nil {
-		return receiver
+		return it
 	}
 
 	for _, result := range results {
@@ -354,53 +406,51 @@ func (receiver *ResultsCollection) AddNonNilItems(
 			continue
 		}
 
-		*receiver.Items = append(
-			*receiver.Items,
-			result)
-
+		it.Items = append(
+			it.Items,
+			results...)
 	}
 
-	return receiver
+	return it
 }
 
 // AddNonNilItemsPtr skip on nil
-func (receiver *ResultsCollection) AddNonNilItemsPtr(
-	results *[]*Result,
+func (it *ResultsCollection) AddNonNilItemsPtr(
+	results []*Result,
 ) *ResultsCollection {
 	if results == nil {
-		return receiver
+		return it
 	}
 
-	for _, result := range *results {
+	for _, result := range results {
 		if result == nil {
 			continue
 		}
 
-		*receiver.Items = append(
-			*receiver.Items,
+		it.Items = append(
+			it.Items,
 			result)
-
 	}
 
-	return receiver
+	return it
 }
 
-func (receiver *ResultsCollection) Clear() *ResultsCollection {
-	clearedItems := (*receiver.Items)[:0]
-	receiver.Items = &clearedItems
+func (it *ResultsCollection) Clear() *ResultsCollection {
+	clearedItems := it.Items[:0]
+	it.Items = clearedItems
 
-	return receiver
+	return it
 }
 
-func (receiver *ResultsCollection) GetStrings() *[]string {
-	length := receiver.Length()
+func (it *ResultsCollection) GetStrings() *[]string {
+	length := it.Length()
 	list := make([]string, length)
 
 	if length == 0 {
 		return &list
 	}
 
-	for i, result := range *receiver.Items {
+	for i, result := range it.Items {
 		list[i] = *result.JsonStringPtr()
 	}
 
@@ -408,22 +458,22 @@ func (receiver *ResultsCollection) GetStrings() *[]string {
 }
 
 // AddJsoner skip on nil
-func (receiver *ResultsCollection) AddJsoner(
+func (it *ResultsCollection) AddJsoner(
 	jsoners ...Jsoner,
 ) *ResultsCollection {
 	if jsoners == nil {
-		return receiver
+		return it
 	}
 
-	return receiver.AddJsonerPtr(&jsoners)
+	return it.AddJsonerPtr(&jsoners)
 }
 
 // AddJsonerPtr skip on nil
-func (receiver *ResultsCollection) AddJsonerPtr(
+func (it *ResultsCollection) AddJsonerPtr(
 	jsoners *[]Jsoner,
 ) *ResultsCollection {
 	if jsoners == nil {
-		return receiver
+		return it
 	}
 
 	for _, jsoner := range *jsoners {
@@ -437,37 +487,37 @@ func (receiver *ResultsCollection) AddJsonerPtr(
 			continue
 		}
 
-		*receiver.Items = append(
-			*receiver.Items,
+		it.Items = append(
+			it.Items,
 			result)
 	}
 
-	return receiver
+	return it
 }
 
 //goland:noinspection GoLinterLocal
-func (receiver *ResultsCollection) JsonModel() *ResultsCollection {
-	return receiver
+func (it *ResultsCollection) JsonModel() *ResultsCollection {
+	return it
 }
 
 //goland:noinspection GoLinterLocal
-func (receiver *ResultsCollection) JsonModelAny() interface{} {
-	return receiver.JsonModel()
+func (it *ResultsCollection) JsonModelAny() interface{} {
+	return it.JsonModel()
 }
 
 //goland:noinspection GoLinterLocal
-func (receiver *ResultsCollection) Json() *Result {
-	if receiver.IsEmpty() {
+func (it *ResultsCollection) Json() *Result {
+	if it.IsEmpty() {
 		return EmptyWithoutErrorPtr()
 	}
 
-	jsonBytes, err := json.Marshal(receiver)
+	jsonBytes, err := json.Marshal(it)
 
 	return NewPtr(jsonBytes, err)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
-func (receiver *ResultsCollection) ParseInjectUsingJson(
+func (it *ResultsCollection) ParseInjectUsingJson(
 	jsonResult *Result,
 ) (*ResultsCollection, error) {
 	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
@@ -476,21 +526,21 @@ func (receiver *ResultsCollection) ParseInjectUsingJson(
 
 	err := json.Unmarshal(
 		*jsonResult.Bytes,
-		&receiver,
+		&it,
 	)
 
 	if err != nil {
 		return EmptyResultsCollection(), err
 	}
 
-	return receiver, nil
+	return it, nil
 }
 
 // ParseInjectUsingJsonMust Panic if error
-func (receiver *ResultsCollection) ParseInjectUsingJsonMust(
+func (it *ResultsCollection) ParseInjectUsingJsonMust(
 	jsonResult *Result,
 ) *ResultsCollection {
-	resultCollection, err := receiver.
+	resultCollection, err := it.
 		ParseInjectUsingJson(jsonResult)
 
 	if err != nil {
@@ -500,20 +550,20 @@ func (receiver *ResultsCollection) ParseInjectUsingJsonMust(
 	return resultCollection
 }
 
-func (receiver *ResultsCollection) AsJsoner() Jsoner {
-	return receiver
+func (it *ResultsCollection) AsJsoner() Jsoner {
+	return it
 }
 
-func (receiver *ResultsCollection) JsonParseSelfInject(
+func (it *ResultsCollection) JsonParseSelfInject(
 	jsonResult *Result,
 ) error {
-	_, err := receiver.ParseInjectUsingJson(
+	_, err := it.ParseInjectUsingJson(
 		jsonResult,
 	)
 
 	return err
 }
 
-func (receiver *ResultsCollection) AsJsonParseSelfInjector() JsonParseSelfInjector {
-	return receiver
+func (it *ResultsCollection) AsJsonParseSelfInjector() JsonParseSelfInjector {
+	return it
 }
