@@ -34,6 +34,10 @@ func (it *Variant) Name() string {
 	return basicEnumImpl.ToEnumString(it.ValueByte())
 }
 
+func (it *Variant) TypeName() string {
+	return basicEnumImpl.TypeName()
+}
+
 func (it *Variant) ToNumberString() string {
 	return basicEnumImpl.ToNumberString(it.ValueByte())
 }
@@ -120,7 +124,7 @@ func (it Variant) IsNotMatchRegex() bool {
 	return it == NotMatchRegex
 }
 
-func (it *Variant) MarshalJSON() ([]byte, error) {
+func (it Variant) MarshalJSON() ([]byte, error) {
 	return basicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
 }
 
@@ -128,11 +132,15 @@ func (it *Variant) UnmarshalJSON(data []byte) error {
 	rawScriptType, err := basicEnumImpl.UnmarshallToValue(
 		isMappedToDefault, data)
 
-	if err != nil {
+	if err == nil {
 		*it = Variant(rawScriptType)
 	}
 
 	return err
+}
+
+func (it *Variant) RangeNamesCsv() string {
+	return basicEnumImpl.RangeNamesCsv()
 }
 
 func (it *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
@@ -228,13 +236,13 @@ func (it Variant) VerifyMessage(
 
 	if it.IsNegativeCondition() {
 		return msgtype.ExpectingNotEqualSimpleNoType(
-			"Method \""+it.Name()+"\" - {negative} match failed "+isIgnoreCaseString,
+			"CompareMethod \""+it.Name()+"\" - {negative} match failed "+isIgnoreCaseString,
 			search,
 			content)
 	}
 
 	return msgtype.ExpectingSimpleNoType(
-		"Method \""+it.Name()+"\" - match failed "+isIgnoreCaseString,
+		"CompareMethod \""+it.Name()+"\" - match failed "+isIgnoreCaseString,
 		search,
 		content)
 }

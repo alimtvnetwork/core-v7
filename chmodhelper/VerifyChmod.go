@@ -14,7 +14,7 @@ func VerifyChmod(location string, expectedHyphenedRwx string) error {
 		return msgtype.MeaningfulError(
 			msgtype.LengthShouldBeEqualToMessage,
 			"VerifyChmod"+constants.HypenAngelRight+location,
-			hyphenedRwxLengthErr)
+			errHyphenedRwxLength)
 	}
 
 	fileInfo, err := os.Stat(location)

@@ -15,92 +15,100 @@ const (
 	OwnerOther
 )
 
-func (receiver Variant) IsUnInitialized() bool {
-	return receiver == UnInitialized
+func (it Variant) IsUnInitialized() bool {
+	return it == UnInitialized
 }
 
-func (receiver Variant) IsAll() bool {
-	return receiver == All
+func (it Variant) IsAll() bool {
+	return it == All
 }
 
-func (receiver Variant) IsOwner() bool {
-	return receiver == Owner
+func (it Variant) IsOwner() bool {
+	return it == Owner
 }
 
-func (receiver Variant) IsGroup() bool {
-	return receiver == Group
+func (it Variant) IsGroup() bool {
+	return it == Group
 }
 
-func (receiver Variant) IsOther() bool {
-	return receiver == Other
+func (it Variant) IsOther() bool {
+	return it == Other
 }
 
-func (receiver Variant) IsOwnerGroup() bool {
-	return receiver == OwnerGroup
+func (it Variant) IsOwnerGroup() bool {
+	return it == OwnerGroup
 }
 
-func (receiver Variant) IsGroupOther() bool {
-	return receiver == GroupOther
+func (it Variant) IsGroupOther() bool {
+	return it == GroupOther
 }
 
-func (receiver Variant) IsOwnerOther() bool {
-	return receiver == OwnerOther
+func (it Variant) IsOwnerOther() bool {
+	return it == OwnerOther
 }
 
-func (receiver *Variant) Name() string {
-	return BasicEnumImpl.ToEnumString(receiver.ValueByte())
+func (it *Variant) Name() string {
+	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
-func (receiver *Variant) ToNumberString() string {
-	return BasicEnumImpl.ToNumberString(receiver.ValueByte())
+func (it *Variant) ToNumberString() string {
+	return BasicEnumImpl.ToNumberString(it.ValueByte())
 }
 
-func (receiver *Variant) String() string {
-	return BasicEnumImpl.ToEnumString(receiver.ValueByte())
+func (it *Variant) String() string {
+	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
-func (receiver *Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+func (it *Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
 	return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
 }
 
-func (receiver *Variant) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(receiver.Value()), nil
+func (it *Variant) MarshalJSON() ([]byte, error) {
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
 }
 
-func (receiver *Variant) UnmarshalJSON(data []byte) error {
-	dataConv, err := receiver.UnmarshallEnumToValue(data)
+func (it *Variant) UnmarshalJSON(data []byte) error {
+	dataConv, err := it.UnmarshallEnumToValue(data)
 
 	if err == nil {
-		*receiver = Variant(dataConv)
+		*it = Variant(dataConv)
 	}
 
 	return err
 }
 
-func (receiver *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return receiver
+func (it Variant) RangeNamesCsv() string {
+	return BasicEnumImpl.RangeNamesCsv()
 }
 
-func (receiver *Variant) MaxByte() byte {
+func (it Variant) TypeName() string {
+	return BasicEnumImpl.TypeName()
+}
+
+func (it *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return it
+}
+
+func (it *Variant) MaxByte() byte {
 	return BasicEnumImpl.Max()
 }
 
-func (receiver *Variant) MinByte() byte {
+func (it *Variant) MinByte() byte {
 	return BasicEnumImpl.Min()
 }
 
-func (receiver Variant) ValueByte() byte {
-	return byte(receiver)
+func (it Variant) ValueByte() byte {
+	return byte(it)
 }
 
-func (receiver Variant) Value() byte {
-	return byte(receiver)
+func (it Variant) Value() byte {
+	return byte(it)
 }
 
-func (receiver *Variant) RangesByte() []byte {
+func (it *Variant) RangesByte() []byte {
 	return BasicEnumImpl.Ranges()
 }
 
-func (receiver *Variant) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return receiver
+func (it *Variant) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
+	return it
 }

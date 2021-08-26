@@ -2,10 +2,10 @@ package enumimpl
 
 import (
 	"fmt"
+	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -18,11 +18,13 @@ type BasicInt32 struct {
 }
 
 func NewBasicInt32(
+	typeName string,
 	actualValueRanges []int32,
 	stringRanges []string,
 	min, max int32,
 ) *BasicInt32 {
 	enumBase := newNumberEnumBase(
+		typeName,
 		actualValueRanges,
 		stringRanges,
 		min,
@@ -34,8 +36,12 @@ func NewBasicInt32(
 
 	for i, actualVal := range actualValueRanges {
 		key := stringRanges[i]
+		indexJson := simplewrap.WithDoubleQuoteAny(i)
+		indexString := strconv.Itoa(i)
 		jsonName := simplewrap.WithDoubleQuote(key)
 		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
+		jsonDoubleQuoteNameToValueHashMap[indexJson] = actualVal
+		jsonDoubleQuoteNameToValueHashMap[indexString] = actualVal
 		valueToJsonDoubleQuoteStringBytesHashmap[actualVal] = []byte(jsonName)
 		valueNameHashmap[actualVal] = key
 	}
@@ -50,7 +56,7 @@ func NewBasicInt32(
 	}
 }
 
-func (receiver *BasicInt32) IsAnyOf(value int32, checkingItems ...int32) bool {
+func (it *BasicInt32) IsAnyOf(value int32, checkingItems ...int32) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -64,55 +70,55 @@ func (receiver *BasicInt32) IsAnyOf(value int32, checkingItems ...int32) bool {
 	return false
 }
 
-func (receiver *BasicInt32) Max() int32 {
-	return receiver.maxVal
+func (it *BasicInt32) Max() int32 {
+	return it.maxVal
 }
 
-func (receiver *BasicInt32) Min() int32 {
-	return receiver.minVal
+func (it *BasicInt32) Min() int32 {
+	return it.minVal
 }
 
-func (receiver *BasicInt32) GetValueByString(valueString string) int32 {
-	return receiver.jsonDoubleQuoteNameToValueHashMap[valueString]
+func (it *BasicInt32) GetValueByString(valueString string) int32 {
+	return it.jsonDoubleQuoteNameToValueHashMap[valueString]
 }
 
-func (receiver *BasicInt32) GetStringValue(input int32) string {
-	return receiver.StringRanges()[input]
+func (it *BasicInt32) GetStringValue(input int32) string {
+	return it.StringRanges()[input]
 }
 
-func (receiver *BasicInt32) Ranges() []int32 {
-	return receiver.actualValueRanges.([]int32)
+func (it *BasicInt32) Ranges() []int32 {
+	return it.actualValueRanges.([]int32)
 }
 
-func (receiver *BasicInt32) Hashmap() map[string]int32 {
-	return receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicInt32) Hashmap() map[string]int32 {
+	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicInt32) HashmapPtr() *map[string]int32 {
-	return &receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicInt32) HashmapPtr() *map[string]int32 {
+	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicInt32) IsValidRange(value int32) bool {
-	return value >= receiver.minVal && value <= receiver.maxVal
+func (it *BasicInt32) IsValidRange(value int32) bool {
+	return value >= it.minVal && value <= it.maxVal
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (receiver *BasicInt32) ToEnumJsonBytes(value int32) []byte {
-	return receiver.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it *BasicInt32) ToEnumJsonBytes(value int32) []byte {
+	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
 }
 
-func (receiver *BasicInt32) ToEnumString(value int32) string {
-	return receiver.valueNameHashmap[value]
+func (it *BasicInt32) ToEnumString(value int32) string {
+	return it.valueNameHashmap[value]
 }
 
-func (receiver *BasicInt32) ToNumberString(valueInRawFormat interface{}) string {
+func (it *BasicInt32) ToNumberString(valueInRawFormat interface{}) string {
 	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (receiver *BasicInt32) UnmarshallToValue(
+func (it *BasicInt32) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
 ) (int32, error) {
@@ -122,24 +128,22 @@ func (receiver *BasicInt32) UnmarshallToValue(
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
 	str := string(jsonUnmarshallingValue)
 	if isMappedToFirstIfEmpty &&
 		(str == constants.EmptyString || str == constants.DoubleQuotationStartEnd) {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
-	v, has := receiver.jsonDoubleQuoteNameToValueHashMap[str]
+	v, has := it.jsonDoubleQuoteNameToValueHashMap[str]
 
 	if !has {
-		return constants.Zero,
-			msgtype.MeaningfulErrorWithData(
-				msgtype.UnMarshallingFailed,
-				"UnmarshallToValue",
-				defaulterr.UnMarshallingPlusCannotFindingEnumMap,
-				string(jsonUnmarshallingValue))
+		return constants.Zero, enumUnmarshallingMappingFailedError(
+			it.TypeName(),
+			str,
+			it.RangeNamesCsv())
 	}
 
 	return v, nil

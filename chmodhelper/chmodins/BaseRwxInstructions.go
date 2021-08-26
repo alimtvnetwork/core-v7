@@ -4,36 +4,42 @@ type BaseRwxInstructions struct {
 	RwxInstructions []RwxInstruction `json:"RwxInstructions,omitempty"`
 }
 
-func (receiver *BaseRwxInstructions) Length() int {
-	if receiver == nil || receiver.RwxInstructions == nil {
+func (it *BaseRwxInstructions) Length() int {
+	if it == nil || it.RwxInstructions == nil {
 		return 0
 	}
 
-	return len(receiver.RwxInstructions)
+	return len(it.RwxInstructions)
 }
 
-func (receiver *BaseRwxInstructions) IsEmpty() bool {
-	return receiver.Length() == 0
+func (it *BaseRwxInstructions) IsEmpty() bool {
+	return it.Length() == 0
 }
 
-func (receiver *BaseRwxInstructions) HasAnyItem() bool {
-	return receiver.Length() > 0
+func (it *BaseRwxInstructions) HasAnyItem() bool {
+	return it.Length() > 0
 }
 
-func (receiver *BaseRwxInstructions) Clone() *BaseRwxInstructions {
-	if receiver == nil {
+func (it *BaseRwxInstructions) Clone() *BaseRwxInstructions {
+	if it == nil {
 		return nil
 	}
 
+	cloned := it.CloneNonPtr()
+
+	return &cloned
+}
+
+func (it BaseRwxInstructions) CloneNonPtr() BaseRwxInstructions {
 	instructions := make(
 		[]RwxInstruction,
-		receiver.Length())
+		it.Length())
 
-	for i, instruction := range receiver.RwxInstructions {
+	for i, instruction := range it.RwxInstructions {
 		instructions[i] = *instruction.Clone()
 	}
 
-	return &BaseRwxInstructions{
+	return BaseRwxInstructions{
 		RwxInstructions: instructions,
 	}
 }

@@ -3,6 +3,7 @@ package chmodhelper
 import (
 	"bytes"
 	"errors"
+	"io/fs"
 	"os"
 	"os/exec"
 	"strconv"
@@ -13,42 +14,43 @@ import (
 	"gitlab.com/evatix-go/core/internal/fsinternal"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/osconsts"
 )
 
 type RwxWrapper struct {
 	Owner, Group, Other Attribute
 }
 
-func (rwxWrapper *RwxWrapper) Verify(location string) error {
-	return VerifyChmod(location, rwxWrapper.ToFullRwxValueString())
+func (it *RwxWrapper) Verify(location string) error {
+	return VerifyChmod(location, it.ToFullRwxValueString())
 }
 
-func (rwxWrapper *RwxWrapper) VerifyPaths(location *[]string, isContinueOnError bool) error {
+func (it *RwxWrapper) VerifyPaths(location *[]string, isContinueOnError bool) error {
 	return VerifyChmodPaths(
 		location,
-		rwxWrapper.ToFullRwxValueString(),
+		it.ToFullRwxValueString(),
 		isContinueOnError)
 }
 
-func (rwxWrapper *RwxWrapper) HasChmod(location string) bool {
-	return IsChmod(location, rwxWrapper.ToFullRwxValueString())
+func (it *RwxWrapper) HasChmod(location string) bool {
+	return IsChmod(location, it.ToFullRwxValueString())
 }
 
 // Bytes return rwx, (Owner)(Group)(Other) byte values under 1-7
-func (rwxWrapper *RwxWrapper) Bytes() [3]byte {
+func (it *RwxWrapper) Bytes() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	owner := rwxWrapper.Owner.ToSum()
-	group := rwxWrapper.Group.ToSum()
-	other := rwxWrapper.Other.ToSum()
+	owner := it.Owner.ToSum()
+	group := it.Group.ToSum()
+	other := it.Other.ToSum()
 
 	allBytes := [3]byte{owner, group, other}
 
 	return allBytes
 }
 
-func (rwxWrapper *RwxWrapper) ToUint32Octal() uint32 {
+func (it *RwxWrapper) ToUint32Octal() uint32 {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	str := rwxWrapper.ToFileModeString()
+	str := it.ToFileModeString()
 
 	// # https://bit.ly/35aBepk
 	octal, err := strconv.ParseUint(str, bitsize.Of8, bitsize.Of32)
@@ -66,11 +68,11 @@ func (rwxWrapper *RwxWrapper) ToUint32Octal() uint32 {
 
 // ToCompiledOctalBytes4Digits return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 0777, 0555, 0755 NOT 0rwx
-func (rwxWrapper *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
+func (it *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	owner := rwxWrapper.Owner.ToStringByte()
-	group := rwxWrapper.Group.ToStringByte()
-	other := rwxWrapper.Other.ToStringByte()
+	owner := it.Owner.ToStringByte()
+	group := it.Group.ToStringByte()
+	other := it.Other.ToStringByte()
 
 	allBytes := [4]byte{
 		constants.ZeroChar,
@@ -88,11 +90,11 @@ func (rwxWrapper *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 //      owner -> (0 - 7 value)
 //      group -> (0 - 7 value)
 //      other -> (0 - 7 value)
-func (rwxWrapper *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
+func (it *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	owner := rwxWrapper.Owner.ToStringByte()
-	group := rwxWrapper.Group.ToStringByte()
-	other := rwxWrapper.Other.ToStringByte()
+	owner := it.Owner.ToStringByte()
+	group := it.Group.ToStringByte()
+	other := it.Other.ToStringByte()
 
 	allBytes := [3]byte{
 		owner,
@@ -109,72 +111,72 @@ func (rwxWrapper *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 //      group -> (0 - 7 value)
 //      other -> (0 - 7 value)
 //      eg. 777, 755 etc
-func (rwxWrapper *RwxWrapper) ToCompiledSplitValues() (owner, group, other byte) {
+func (it *RwxWrapper) ToCompiledSplitValues() (owner, group, other byte) {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	owner = rwxWrapper.Owner.ToStringByte()
-	group = rwxWrapper.Group.ToStringByte()
-	other = rwxWrapper.Other.ToStringByte()
+	owner = it.Owner.ToStringByte()
+	group = it.Group.ToStringByte()
+	other = it.Other.ToStringByte()
 
 	return owner, group, other
 }
 
 // ToFileModeString 4 digit string 0rwx, example 0777
-func (rwxWrapper *RwxWrapper) ToFileModeString() string {
+func (it *RwxWrapper) ToFileModeString() string {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	allBytes := rwxWrapper.ToCompiledOctalBytes4Digits()
+	allBytes := it.ToCompiledOctalBytes4Digits()
 
 	return string(allBytes[:])
 }
 
 // ToRwxCompiledStr 3 digit string, example 777
-func (rwxWrapper *RwxWrapper) ToRwxCompiledStr() string {
+func (it *RwxWrapper) ToRwxCompiledStr() string {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	allBytes := rwxWrapper.ToCompiledOctalBytes4Digits()
+	allBytes := it.ToCompiledOctalBytes4Digits()
 
 	return string(allBytes[1:])
 }
 
 // ToFullRwxValueString returns "-rwxrwxrwx"
-func (rwxWrapper *RwxWrapper) ToFullRwxValueString() string {
-	owner := rwxWrapper.Owner.ToRwxString()
-	group := rwxWrapper.Group.ToRwxString()
-	other := rwxWrapper.Other.ToRwxString()
+func (it *RwxWrapper) ToFullRwxValueString() string {
+	owner := it.Owner.ToRwxString()
+	group := it.Group.ToRwxString()
+	other := it.Other.ToRwxString()
 
 	// # https://ss64.com/bash/chmod.html, needs to be 10 always
 	return constants.Hyphen + owner + group + other
 }
 
 // ToFullRwxValueStringExceptHyphen returns "rwxrwxrwx", 9 chars
-func (rwxWrapper *RwxWrapper) ToFullRwxValueStringExceptHyphen() string {
-	owner := rwxWrapper.Owner.ToRwxString()
-	group := rwxWrapper.Group.ToRwxString()
-	other := rwxWrapper.Other.ToRwxString()
+func (it *RwxWrapper) ToFullRwxValueStringExceptHyphen() string {
+	owner := it.Owner.ToRwxString()
+	group := it.Group.ToRwxString()
+	other := it.Other.ToRwxString()
 
 	// # https://ss64.com/bash/chmod.html, needs to be 10 always
 	return owner + group + other
 }
 
 // ToFullRwxValuesChars "-rwxrwxrwx" Bytes values
-func (rwxWrapper *RwxWrapper) ToFullRwxValuesChars() []byte {
-	str := rwxWrapper.ToFullRwxValueString()
+func (it *RwxWrapper) ToFullRwxValuesChars() []byte {
+	str := it.ToFullRwxValueString()
 	chars := []byte(str)
 
 	return chars
 }
 
-func (rwxWrapper *RwxWrapper) String() string {
+func (it *RwxWrapper) String() string {
 	// # https://ss64.com/bash/chmod.html, needs to be 10 always
-	return rwxWrapper.ToFullRwxValueString()
+	return it.ToFullRwxValueString()
 }
 
-func (rwxWrapper *RwxWrapper) ToFileMode() os.FileMode {
+func (it *RwxWrapper) ToFileMode() os.FileMode {
 	// # https://play.golang.org/p/dX-wsvJmFie
-	octalUint32 := rwxWrapper.ToUint32Octal()
+	octalUint32 := it.ToUint32Octal()
 
 	return os.FileMode(octalUint32)
 }
 
-func (rwxWrapper *RwxWrapper) ApplyChmod(
+func (it *RwxWrapper) ApplyChmod(
 	isSkipOnInvalid bool,
 	fileOrDirectoryPath string,
 ) error {
@@ -191,7 +193,7 @@ func (rwxWrapper *RwxWrapper) ApplyChmod(
 				messages.PathNotExist, fileOrDirectoryPath)
 	}
 
-	err := os.Chmod(fileOrDirectoryPath, rwxWrapper.ToFileMode())
+	err := os.Chmod(fileOrDirectoryPath, it.ToFileMode())
 
 	if err != nil {
 		return msgtype.
@@ -203,29 +205,114 @@ func (rwxWrapper *RwxWrapper) ApplyChmod(
 }
 
 // LinuxApplyRecursive skip if it is a non dir path
-func (rwxWrapper *RwxWrapper) LinuxApplyRecursive(
+func (it *RwxWrapper) LinuxApplyRecursive(
 	isSkipOnInvalid bool,
 	location string,
 ) error {
-	isFileExist := fsinternal.IsPathExists(location)
+	isPathExists := fsinternal.IsPathExists(location)
 
-	if isSkipOnInvalid && !isFileExist {
+	if isSkipOnInvalid && !isPathExists {
 		return nil
 	}
 
-	if !isSkipOnInvalid && !isFileExist {
+	if !isSkipOnInvalid && !isPathExists {
 		return msgtype.
 			PathInvalidErrorMessage.
-			Error(
-				"Path doesn't exist. path : ", location)
+			Error(pathInvalidMessage,
+				location)
 	}
 
-	return rwxWrapper.applyLinuxRecursiveChmodUsingCmd(
+	return it.applyLinuxRecursiveChmodUsingCmd(
 		location)
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
-	cmd := rwxWrapper.getLinuxRecursiveCmdForChmod(location)
+// ApplyRecursive skip if it is a non dir path
+func (it *RwxWrapper) ApplyRecursive(
+	isSkipOnInvalid bool,
+	location string,
+) error {
+	stat := GetPathExistStat(location)
+
+	if isSkipOnInvalid && !stat.IsExist {
+		return nil
+	}
+
+	if !isSkipOnInvalid && !stat.IsExist {
+		return msgtype.
+			PathInvalidErrorMessage.
+			Error(pathInvalidMessage,
+				location)
+	}
+
+	if osconsts.IsLinux {
+		return it.LinuxApplyRecursive(
+			false,
+			location)
+	}
+
+	mode := it.ToFileMode()
+
+	if stat.IsFile() {
+		return os.Chmod(location, mode)
+	}
+
+	var sliceErr []string
+
+	finalErr := RecursivePathsApply(
+		location,
+		func(currentPath string, info fs.FileInfo, err error) error {
+			if err != nil {
+				sliceErr = append(
+					sliceErr,
+					msgtype.
+						PathInvalidErrorMessage.Combine(
+						err.Error()+pathInvalidMessage,
+						currentPath))
+
+				return err
+			}
+
+			if info == nil {
+				sliceErr = append(
+					sliceErr,
+					msgtype.
+						PathInvalidErrorMessage.Combine(
+						pathInvalidMessage,
+						currentPath))
+
+				return err
+			}
+
+			err2 := os.Chmod(currentPath, mode)
+
+			if err2 != nil {
+				sliceErr = append(
+					sliceErr,
+					msgtype.
+						PathInvalidErrorMessage.Combine(
+						err2.Error()+pathInvalidMessage,
+						currentPath))
+
+				return err2
+			}
+
+			return nil
+		})
+
+	if finalErr != nil {
+		sliceErr = append(
+			sliceErr,
+			msgtype.
+				PathInvalidErrorMessage.Combine(
+				finalErr.Error()+pathInvalidMessage,
+				location))
+	}
+
+	return msgtype.SliceToError(sliceErr)
+}
+
+func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
+	cmd := it.getLinuxRecursiveCmdForChmod(location)
 
 	if cmd == nil {
 		return msgtype.
@@ -248,12 +335,12 @@ func (rwxWrapper *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) 
 	return nil
 }
 
-func (rwxWrapper *RwxWrapper) getLinuxRecursiveCmdForChmod(dirPath string) *exec.Cmd {
+func (it *RwxWrapper) getLinuxRecursiveCmdForChmod(dirPath string) *exec.Cmd {
 	instructionLine := constants.ChmodCommand +
 		constants.Space +
 		constants.RecursiveCommandFlag +
 		constants.Space +
-		rwxWrapper.ToRwxCompiledStr() +
+		it.ToRwxCompiledStr() +
 		constants.Space +
 		dirPath
 
@@ -263,10 +350,10 @@ func (rwxWrapper *RwxWrapper) getLinuxRecursiveCmdForChmod(dirPath string) *exec
 		instructionLine)
 }
 
-func (rwxWrapper *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
+func (it *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 	err := os.Chmod(
 		fileOrDirectoryPath,
-		rwxWrapper.ToFileMode())
+		it.ToFileMode())
 
 	if err != nil {
 		finalErr := errors.New(err.Error() + fileOrDirectoryPath)
@@ -278,18 +365,18 @@ func (rwxWrapper *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 	}
 }
 
-func (rwxWrapper *RwxWrapper) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
+func (it *RwxWrapper) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
 	return &chmodins.RwxOwnerGroupOther{
-		Owner: rwxWrapper.Owner.ToRwxString(),
-		Group: rwxWrapper.Group.ToRwxString(),
-		Other: rwxWrapper.Other.ToRwxString(),
+		Owner: it.Owner.ToRwxString(),
+		Group: it.Group.ToRwxString(),
+		Other: it.Other.ToRwxString(),
 	}
 }
 
-func (rwxWrapper *RwxWrapper) ToRwxInstruction(
+func (it *RwxWrapper) ToRwxInstruction(
 	condition *chmodins.Condition,
 ) *chmodins.RwxInstruction {
-	rwxOwnerGroupOther := rwxWrapper.ToRwxOwnerGroupOther()
+	rwxOwnerGroupOther := it.ToRwxOwnerGroupOther()
 
 	return &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *rwxOwnerGroupOther,
@@ -297,31 +384,31 @@ func (rwxWrapper *RwxWrapper) ToRwxInstruction(
 	}
 }
 
-func (rwxWrapper *RwxWrapper) Clone() *RwxWrapper {
-	if rwxWrapper == nil {
+func (it *RwxWrapper) Clone() *RwxWrapper {
+	if it == nil {
 		return nil
 	}
 
 	return &RwxWrapper{
-		Owner: *rwxWrapper.Owner.Clone(),
-		Group: *rwxWrapper.Group.Clone(),
-		Other: *rwxWrapper.Other.Clone(),
+		Owner: *it.Owner.Clone(),
+		Group: *it.Group.Clone(),
+		Other: *it.Other.Clone(),
 	}
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
+func (it *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
 	if condition.IsContinueOnError {
 		// continue on error
-		return rwxWrapper.applyLinuxChmodNonRecursiveManyContinueOnError(
+		return it.applyLinuxChmodNonRecursiveManyContinueOnError(
 			condition,
 			locations)
 	}
 
 	for _, location := range locations {
-		err := rwxWrapper.ApplyChmod(
+		err := it.ApplyChmod(
 			condition.IsSkipOnInvalid,
 			location)
 
@@ -333,33 +420,33 @@ func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
 	return nil
 }
 
-func (rwxWrapper *RwxWrapper) ApplyLinuxChmodOnMany(
+func (it *RwxWrapper) ApplyLinuxChmodOnMany(
 	condition *chmodins.Condition,
 	locations ...string,
 ) error {
 	if condition.IsRecursive {
-		return rwxWrapper.applyLinuxChmodOnManyRecursive(
+		return it.applyLinuxChmodOnManyRecursive(
 			condition,
 			locations)
 	}
 
-	return rwxWrapper.applyLinuxChmodOnManyNonRecursive(
+	return it.applyLinuxChmodOnManyNonRecursive(
 		condition, locations)
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyRecursive(
+func (it *RwxWrapper) applyLinuxChmodOnManyRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
 	if condition.IsContinueOnError {
 		// continue on error
-		return rwxWrapper.applyLinuxChmodRecursiveManyContinueOnError(
+		return it.applyLinuxChmodRecursiveManyContinueOnError(
 			condition,
 			locations)
 	}
 
 	for _, location := range locations {
-		err := rwxWrapper.LinuxApplyRecursive(
+		err := it.LinuxApplyRecursive(
 			condition.IsSkipOnInvalid,
 			location)
 
@@ -371,14 +458,14 @@ func (rwxWrapper *RwxWrapper) applyLinuxChmodOnManyRecursive(
 	return nil
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
+func (it *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
 	var errSlice []string
 
 	for _, location := range locations {
-		err := rwxWrapper.LinuxApplyRecursive(
+		err := it.LinuxApplyRecursive(
 			condition.IsSkipOnInvalid,
 			location)
 
@@ -390,14 +477,14 @@ func (rwxWrapper *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
 	return msgtype.SliceToErrorPtr(&errSlice)
 }
 
-func (rwxWrapper *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
+func (it *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
 	var errSlice []string
 
 	for _, location := range locations {
-		err := rwxWrapper.ApplyChmod(
+		err := it.ApplyChmod(
 			condition.IsSkipOnInvalid,
 			location)
 
@@ -410,7 +497,7 @@ func (rwxWrapper *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
 }
 
 // IsEqualVarWrapper if rwxVariableWrapper nil then returns false
-func (rwxWrapper *RwxWrapper) IsEqualVarWrapper(
+func (it *RwxWrapper) IsEqualVarWrapper(
 	rwxVariableWrapper *RwxVariableWrapper,
 ) bool {
 	if rwxVariableWrapper == nil {
@@ -418,22 +505,22 @@ func (rwxWrapper *RwxWrapper) IsEqualVarWrapper(
 	}
 
 	return rwxVariableWrapper.IsEqualRwxWrapperPtr(
-		rwxWrapper)
+		it)
 }
 
 // IsRwxEqualFileInfo if fileInfo nil then returns false
-func (rwxWrapper *RwxWrapper) IsRwxEqualFileInfo(
+func (it *RwxWrapper) IsRwxEqualFileInfo(
 	fileInfo os.FileInfo,
 ) bool {
 	if fileInfo == nil {
 		return false
 	}
 
-	return rwxWrapper.IsRwxFullEqual(
+	return it.IsRwxFullEqual(
 		fileInfo.Mode().String())
 }
 
-func (rwxWrapper *RwxWrapper) IsRwxEqualLocation(
+func (it *RwxWrapper) IsRwxEqualLocation(
 	location string,
 ) bool {
 	fileInfo, _ := os.Stat(location)
@@ -442,41 +529,41 @@ func (rwxWrapper *RwxWrapper) IsRwxEqualLocation(
 		return false
 	}
 
-	return rwxWrapper.IsRwxFullEqual(
+	return it.IsRwxFullEqual(
 		fileInfo.Mode().String())
 }
 
-func (rwxWrapper *RwxWrapper) IsRwxFullEqual(
+func (it *RwxWrapper) IsRwxFullEqual(
 	rwxFull string,
 ) bool {
 	if len(rwxFull) < chmodins.RwxFullLength {
 		return false
 	}
 
-	return rwxWrapper.ToFullRwxValueStringExceptHyphen() == rwxFull[1:]
+	return it.ToFullRwxValueStringExceptHyphen() == rwxFull[1:]
 }
 
-func (rwxWrapper *RwxWrapper) IsEqualPtr(
+func (it *RwxWrapper) IsEqualPtr(
 	next *RwxWrapper,
 ) bool {
-	if rwxWrapper == nil && next == nil {
+	if it == nil && next == nil {
 		return true
 	}
 
-	if rwxWrapper == nil || next == nil {
+	if it == nil || next == nil {
 		return false
 	}
 
-	return rwxWrapper.Owner.IsEqual(next.Owner) &&
-		rwxWrapper.Group.IsEqual(next.Group) &&
-		rwxWrapper.Other.IsEqual(next.Other)
+	return it.Owner.IsEqual(next.Owner) &&
+		it.Group.IsEqual(next.Group) &&
+		it.Other.IsEqual(next.Other)
 }
 
-func (rwxWrapper *RwxWrapper) IsEqualFileMode(
+func (it *RwxWrapper) IsEqualFileMode(
 	mode os.FileMode,
 ) bool {
 	toString := mode.String()[1:]
-	wrapperString := rwxWrapper.ToFullRwxValueStringExceptHyphen()
+	wrapperString := it.ToFullRwxValueStringExceptHyphen()
 
 	return toString == wrapperString
 }

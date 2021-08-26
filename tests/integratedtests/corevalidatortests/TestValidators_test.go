@@ -29,8 +29,8 @@ func Test_TestValidators(t *testing.T) {
 			err)
 
 		sliceValidator := corevalidator.SliceValidator{
-			InputLines:     errorLines,
-			ComparingLines: testCase.ExpectationLines,
+			ActualLines:   errorLines,
+			ExpectedLines: testCase.ExpectationLines,
 			ValidatorCoreCondition: corevalidator.ValidatorCoreCondition{
 				IsTrimCompare:        false,
 				IsNonEmptyWhitespace: false,

@@ -14,8 +14,7 @@ var (
 	UnMarshallingPlusCannotFindingEnumMap = msgtype.
 						UnMarshallingFailed.
 						ErrorNoRefs(
-			"Cannot unmarshal data to object form. " +
-				"Cannot find the given data in the enum map or dictionary. " +
+			"Cannot find in the enum map. " +
 				"Reference data given as : ")
 
 	MarshallingFailedDueToNilOrEmpty = msgtype.

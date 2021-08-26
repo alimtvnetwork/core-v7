@@ -107,7 +107,7 @@ func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
 	}
 
 	if it.rwxInstruction.IsRecursive {
-		return compiledWrapper.LinuxApplyRecursive(
+		return compiledWrapper.ApplyRecursive(
 			it.rwxInstruction.IsSkipOnInvalid,
 			location)
 	}

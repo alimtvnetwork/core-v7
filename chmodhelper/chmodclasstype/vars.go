@@ -1,6 +1,9 @@
 package chmodclasstype
 
-import "gitlab.com/evatix-go/core/coreimpl/enumimpl"
+import (
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
+)
 
 var (
 	Ranges = [...]string{
@@ -14,5 +17,7 @@ var (
 		OwnerOther:    "OwnerOther",
 	}
 
-	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(Ranges[:])
+	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
+		reflectinternal.TypeName(UnInitialized),
+		Ranges[:])
 )

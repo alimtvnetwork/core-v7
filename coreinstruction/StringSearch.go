@@ -1,14 +1,15 @@
 package coreinstruction
 
 import (
+	"gitlab.com/evatix-go/core/corecomparator"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
 	"gitlab.com/evatix-go/core/regexnew"
 )
 
 type StringSearch struct {
-	IsIgnoreCase bool
-	Method       stringcompareas.Variant
-	Search       string
+	corecomparator.BaseIsIgnoreCase
+	CompareMethod stringcompareas.Variant
+	Search        string
 }
 
 func (it *StringSearch) IsEmpty() bool {
@@ -23,20 +24,38 @@ func (it *StringSearch) Has() bool {
 	return it != nil
 }
 
-func (it *StringSearch) IsCaseSensitive() bool {
-	return !it.IsIgnoreCase
-}
-
 func (it *StringSearch) IsMatch(content string) bool {
 	if it == nil {
 		return true
 	}
 
-	return it.Method.IsCompareSuccess(
+	return it.CompareMethod.IsCompareSuccess(
 		it.IsIgnoreCase,
 		content,
 		it.Search,
 	)
+}
+
+func (it *StringSearch) IsAllMatch(contents ...string) bool {
+	if len(contents) == 0 {
+		return true
+	}
+
+	for _, content := range contents {
+		if it.IsMatchFailed(content) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (it *StringSearch) IsAnyMatchFailed(contents ...string) bool {
+	return !it.IsAllMatch(contents...)
+}
+
+func (it *StringSearch) IsMatchFailed(content string) bool {
+	return !it.IsMatch(content)
 }
 
 func (it *StringSearch) VerifyError(content string) error {
@@ -44,13 +63,13 @@ func (it *StringSearch) VerifyError(content string) error {
 		return nil
 	}
 
-	if it.Method.IsRegex() {
+	if it.CompareMethod.IsRegex() {
 		return regexnew.MatchErrorLock(
 			it.Search,
 			content)
 	}
 
-	return it.Method.VerifyError(
+	return it.CompareMethod.VerifyError(
 		it.IsIgnoreCase,
 		content,
 		it.Search,

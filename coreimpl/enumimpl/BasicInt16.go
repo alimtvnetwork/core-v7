@@ -2,10 +2,10 @@ package enumimpl
 
 import (
 	"fmt"
+	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -18,11 +18,13 @@ type BasicInt16 struct {
 }
 
 func NewBasicInt16(
+	typeName string,
 	actualValueRanges []int16,
 	stringRanges []string,
 	min, max int16,
 ) *BasicInt16 {
 	enumBase := newNumberEnumBase(
+		typeName,
 		actualValueRanges,
 		stringRanges,
 		min,
@@ -34,8 +36,12 @@ func NewBasicInt16(
 
 	for i, actualVal := range actualValueRanges {
 		key := stringRanges[i]
+		indexJson := simplewrap.WithDoubleQuoteAny(i)
+		indexString := strconv.Itoa(i)
 		jsonName := simplewrap.WithDoubleQuote(key)
 		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
+		jsonDoubleQuoteNameToValueHashMap[indexJson] = actualVal
+		jsonDoubleQuoteNameToValueHashMap[indexString] = actualVal
 		valueToJsonDoubleQuoteStringBytesHashmap[actualVal] = []byte(jsonName)
 		valueNameHashmap[actualVal] = key
 	}
@@ -51,6 +57,7 @@ func NewBasicInt16(
 }
 
 func NewBasicInt16UsingIndexedSlice(
+	typeName string,
 	indexedSliceWithValues []string,
 ) *BasicInt16 {
 	min := constants.Zero
@@ -62,13 +69,14 @@ func NewBasicInt16UsingIndexedSlice(
 	}
 
 	return NewBasicInt16(
+		typeName,
 		actualValues,
 		indexedSliceWithValues,
 		int16(min),
 		int16(max))
 }
 
-func (receiver *BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
+func (it *BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -82,55 +90,55 @@ func (receiver *BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
 	return false
 }
 
-func (receiver *BasicInt16) Max() int16 {
-	return receiver.maxVal
+func (it *BasicInt16) Max() int16 {
+	return it.maxVal
 }
 
-func (receiver *BasicInt16) Min() int16 {
-	return receiver.minVal
+func (it *BasicInt16) Min() int16 {
+	return it.minVal
 }
 
-func (receiver *BasicInt16) GetValueByString(valueString string) int16 {
-	return receiver.jsonDoubleQuoteNameToValueHashMap[valueString]
+func (it *BasicInt16) GetValueByString(valueString string) int16 {
+	return it.jsonDoubleQuoteNameToValueHashMap[valueString]
 }
 
-func (receiver *BasicInt16) GetStringValue(input int16) string {
-	return receiver.StringRanges()[input]
+func (it *BasicInt16) GetStringValue(input int16) string {
+	return it.StringRanges()[input]
 }
 
-func (receiver *BasicInt16) Ranges() []int16 {
-	return receiver.actualValueRanges.([]int16)
+func (it *BasicInt16) Ranges() []int16 {
+	return it.actualValueRanges.([]int16)
 }
 
-func (receiver *BasicInt16) Hashmap() map[string]int16 {
-	return receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicInt16) Hashmap() map[string]int16 {
+	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicInt16) HashmapPtr() *map[string]int16 {
-	return &receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicInt16) HashmapPtr() *map[string]int16 {
+	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicInt16) IsValidRange(value int16) bool {
-	return value >= receiver.minVal && value <= receiver.maxVal
+func (it *BasicInt16) IsValidRange(value int16) bool {
+	return value >= it.minVal && value <= it.maxVal
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (receiver *BasicInt16) ToEnumJsonBytes(value int16) []byte {
-	return receiver.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it *BasicInt16) ToEnumJsonBytes(value int16) []byte {
+	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
 }
 
-func (receiver *BasicInt16) ToEnumString(value int16) string {
-	return receiver.valueNameHashmap[value]
+func (it *BasicInt16) ToEnumString(value int16) string {
+	return it.valueNameHashmap[value]
 }
 
-func (receiver *BasicInt16) ToNumberString(valueInRawFormat interface{}) string {
+func (it *BasicInt16) ToNumberString(valueInRawFormat interface{}) string {
 	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (receiver *BasicInt16) UnmarshallToValue(
+func (it *BasicInt16) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
 ) (int16, error) {
@@ -140,24 +148,22 @@ func (receiver *BasicInt16) UnmarshallToValue(
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
 	str := string(jsonUnmarshallingValue)
 	if isMappedToFirstIfEmpty &&
 		(str == constants.EmptyString || str == constants.DoubleQuotationStartEnd) {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
-	v, has := receiver.jsonDoubleQuoteNameToValueHashMap[str]
+	v, has := it.jsonDoubleQuoteNameToValueHashMap[str]
 
 	if !has {
-		return constants.Zero,
-			msgtype.MeaningfulErrorWithData(
-				msgtype.UnMarshallingFailed,
-				"UnmarshallToValue",
-				defaulterr.UnMarshallingPlusCannotFindingEnumMap,
-				string(jsonUnmarshallingValue))
+		return constants.Zero, enumUnmarshallingMappingFailedError(
+			it.TypeName(),
+			str,
+			it.RangeNamesCsv())
 	}
 
 	return v, nil

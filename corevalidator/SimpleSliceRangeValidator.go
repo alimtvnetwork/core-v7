@@ -33,8 +33,8 @@ func (it *SimpleSliceRangeValidator) SliceValidators() *SliceValidators {
 		sliceValidator := SliceValidator{
 			CompareAs:              segment.CompareAs,
 			ValidatorCoreCondition: segment.ValidatorCoreCondition,
-			InputLines:             actualSegments,
-			ComparingLines:         expectedSegments,
+			ActualLines:            actualSegments,
+			ExpectedLines:          expectedSegments,
 		}
 
 		validators = append(validators, &sliceValidator)

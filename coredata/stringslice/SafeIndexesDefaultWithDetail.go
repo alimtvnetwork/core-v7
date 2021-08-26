@@ -30,7 +30,7 @@ func SafeIndexesDefaultWithDetail(
 	inputIndex := 0
 	lastIndex := length - 1
 	for _, index := range indexes {
-		if index > lastIndex  || index < 0{
+		if index > lastIndex || index < 0 {
 			missingIndexes = append(
 				missingIndexes,
 				index)

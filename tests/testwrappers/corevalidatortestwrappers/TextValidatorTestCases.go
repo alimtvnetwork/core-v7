@@ -28,11 +28,11 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 0",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 0",
 			"     Content-Processed:`\"alim      alim 2 alim 4\"`",
 			"  SearchTerm-Processed:`\"   alim      alim 2 alim 3                 \"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `]," +
-				" Method: [`Equal`], " +
+				" CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`false`], " +
 				"IsSplitByWhitespace: [`false`], " +
 				"IsUniqueWordOnly: [`false`], " +
@@ -127,21 +127,21 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 0",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 0",
 			"     Content-Processed:`\"alim alim 2 alim 4\"`",
 			"  SearchTerm-Processed:`\"alim alim 2 alim 3\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`false`], " +
 				"IsNonEmptyWhitespace: [`true`], " +
 				"IsSortStringsBySpace: [`false`]\"`",
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 2",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 2",
 			"     Content-Processed:`\"alim alim 2 alim 5\"`",
 			"  SearchTerm-Processed:`\"alim alim 2 alim 3\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`false`], " +
@@ -174,21 +174,21 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 0",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 0",
 			"     Content-Processed:`\"2 4 alim alim alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim alim alim\"`",
 			"            Additional:`\"Search Input: [`   alim      3 alim 2 alim                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`false`], " +
 				"IsNonEmptyWhitespace: [`true`], " +
 				"IsSortStringsBySpace: [`true`]\"`",
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 2",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 2",
 			"     Content-Processed:`\"2 5 alim alim alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim alim alim\"`",
 			"            Additional:`\"Search Input: [`   alim      3 alim 2 alim                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`false`], " +
@@ -220,21 +220,21 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 0",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 0",
 			"     Content-Processed:`\"2 4 alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`true`], " +
 				"IsNonEmptyWhitespace: [`true`], " +
 				"IsSortStringsBySpace: [`true`]\"`",
-			"0 )\t  Expectation failed: Using Method `\"Equal\"`, Line Index: 2",
+			"0 )\t  Expectation failed: Using CompareMethod `\"Equal\"`, Line Index: 2",
 			"     Content-Processed:`\"2 5 alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`Equal`], " +
+				"CompareMethod: [`Equal`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`true`], " +
@@ -267,11 +267,11 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"NotEqual\"`, Line Index: 1",
+			"0 )\t  Expectation failed: Using CompareMethod `\"NotEqual\"`, Line Index: 1",
 			"     Content-Processed:`\"2 3 alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`NotEqual`], " +
+				"CompareMethod: [`NotEqual`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`true`], " +
@@ -304,11 +304,11 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       false,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"NotEqual\"`, Line Index: 1",
+			"0 )\t  Expectation failed: Using CompareMethod `\"NotEqual\"`, Line Index: 1",
 			"     Content-Processed:`\"2 3 alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`NotEqual`], " +
+				"CompareMethod: [`NotEqual`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`true`], " +
@@ -341,11 +341,11 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       false,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"NotEqual\"`, Line Index: 1",
+			"0 )\t  Expectation failed: Using CompareMethod `\"NotEqual\"`, Line Index: 1",
 			"     Content-Processed:`\"2 3 alim\"`",
 			"  SearchTerm-Processed:`\"2 3 alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 alim 3                 `], " +
-				"Method: [`NotEqual`], " +
+				"CompareMethod: [`NotEqual`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`true`], " +
@@ -378,11 +378,11 @@ var TextValidatorsTestCases = []TextValidatorsWrapper{
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       false,
 		ExpectationLines: []string{
-			"0 )\t  Expectation failed: Using Method `\"NotEqual\"`, Line Index: 1",
+			"0 )\t  Expectation failed: Using CompareMethod `\"NotEqual\"`, Line Index: 1",
 			"     Content-Processed:`\"2 3 Alim Alim alim\"`",
 			"  SearchTerm-Processed:`\"2 3 Alim alim alim\"`",
 			"            Additional:`\"Search Input: [`   alim      alim 2 Alim 3                 `], " +
-				"Method: [`NotEqual`], " +
+				"CompareMethod: [`NotEqual`], " +
 				"IsTrimCompare: [`true`], " +
 				"IsSplitByWhitespace: [`true`], " +
 				"IsUniqueWordOnly: [`false`], " +

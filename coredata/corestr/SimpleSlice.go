@@ -270,7 +270,7 @@ func (it *SimpleSlice) JoinCsv() string {
 }
 
 func (it *SimpleSlice) JoinCsvLine() string {
-	return strings.Join(it.CsvStrings(), constants.Comma + constants.NewLineUnix)
+	return strings.Join(it.CsvStrings(), constants.Comma+constants.NewLineUnix)
 }
 
 func (it *SimpleSlice) PrependJoin(

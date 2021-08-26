@@ -6,6 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corestr"
 	"gitlab.com/evatix-go/core/coreinstruction"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 func main() {
@@ -14,11 +15,13 @@ func main() {
 	// 	End:   "2",
 	// })
 	//
-	// a, _ := issetter.Wildcard.MarshalJSON()
-	// val2 := issetter.Value(0)
-	//
-	// fmt.Println(val2.UnmarshalJSON(a))
-	// fmt.Println(val2)
+	// a, _ := stringcompareas.EndsWith.MarshalJSON()
+	val2 := stringcompareas.Variant(0)
+	fmt.Println(reflectinternal.TypeName(val2))
+	err := val2.UnmarshalJSON([]byte("12x"))
+
+	fmt.Println(err)
+	fmt.Println(val2.Name())
 	//
 	// lineValidator := corevalidator.LineValidator{
 	// 	LineNumber: corevalidator.LineNumber{
@@ -54,10 +57,10 @@ func main() {
 	// fmt.Println(err)
 	//
 	// sliceValidator := corevalidator.SliceValidator{
-	// 	InputLines: lines,
-	// 	ComparingLines: []string{
+	// 	ActualLines: lines,
+	// 	ExpectedLines: []string{
 	// 		"----------------------",
-	// 		"2 )\tExpectation failed: Using Method `\"Equal\"`",
+	// 		"2 )\tExpectation failed: Using CompareMethod `\"Equal\"`",
 	// 		"        Content-Processed:`\"alim      alim 2 alim 4\"`",
 	// 		"     SearchTerm-Processed:`\"alim      alim 2 alim 3\"`",
 	// 		"Additional:`corevalidator.TextValidator{Search:\"   alim      alim 2 alim 3                 \", " +

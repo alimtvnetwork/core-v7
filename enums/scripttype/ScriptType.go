@@ -41,6 +41,14 @@ func (it *Variant) String() string {
 	return scriptTypeBasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
+func (it Variant) RangeNamesCsv() string {
+	return scriptTypeBasicEnumImpl.RangeNamesCsv()
+}
+
+func (it Variant) TypeName() string {
+	return scriptTypeBasicEnumImpl.TypeName()
+}
+
 func (it *Variant) MarshalJSON() ([]byte, error) {
 	return scriptTypeBasicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
 }

@@ -21,6 +21,6 @@ var (
 			messages.FailedToCompileChmodhelperVarWrapperToWrapper,
 			constants.EmptyString)
 
-	hyphenedRwxLengthErr          = errors.New("length should be " + HyphenedRwxLengthString)
-	fullRwxLengthWithoutHyphenErr = errors.New("length should be " + FullRwxLengthWithoutHyphenString)
+	errHyphenedRwxLength          = errors.New("length should be " + HyphenedRwxLengthString)
+	errFullRwxLengthWithoutHyphen = errors.New("length should be " + FullRwxLengthWithoutHyphenString)
 )

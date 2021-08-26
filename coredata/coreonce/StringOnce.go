@@ -27,58 +27,57 @@ func NewStringOncePtr(initializerFunc func() string) *StringOnce {
 	}
 }
 
-func (receiver *StringOnce) MarshalJSON() ([]byte, error) {
-
-	return json.Marshal(receiver.Value())
+func (it *StringOnce) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.Value())
 }
 
-func (receiver *StringOnce) UnmarshalJSON(data []byte) error {
-	receiver.isInitialized = issetter.True
+func (it *StringOnce) UnmarshalJSON(data []byte) error {
+	it.isInitialized = issetter.True
 
-	return json.Unmarshal(data, &receiver.innerData)
+	return json.Unmarshal(data, &it.innerData)
 }
 
-func (receiver *StringOnce) ValuePtr() *string {
-	val := receiver.Value()
+func (it *StringOnce) ValuePtr() *string {
+	val := it.Value()
 
 	return &val
 }
 
-func (receiver *StringOnce) Value() string {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *StringOnce) Value() string {
+	if it.isInitialized.IsTrue() {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = issetter.True
 
-	return receiver.innerData
+	return it.innerData
 }
 
-func (receiver *StringOnce) IsEqual(equalString string) bool {
-	return receiver.Value() == equalString
+func (it *StringOnce) IsEqual(equalString string) bool {
+	return it.Value() == equalString
 }
 
-func (receiver *StringOnce) IsContains(equalString string) bool {
-	return strings.Contains(receiver.Value(), equalString)
+func (it *StringOnce) IsContains(equalString string) bool {
+	return strings.Contains(it.Value(), equalString)
 }
 
-func (receiver *StringOnce) IsEmpty() bool {
-	return receiver.Value() == ""
+func (it *StringOnce) IsEmpty() bool {
+	return it.Value() == ""
 }
 
-func (receiver *StringOnce) IsEmptyOrWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(receiver.Value())
+func (it *StringOnce) IsEmptyOrWhitespace() bool {
+	return utilstringinternal.IsEmptyOrWhitespace(it.Value())
 }
 
-func (receiver *StringOnce) Bytes() []byte {
-	return []byte(receiver.Value())
+func (it *StringOnce) Bytes() []byte {
+	return []byte(it.Value())
 }
 
-func (receiver *StringOnce) Error() error {
-	return errors.New(receiver.Value())
+func (it *StringOnce) Error() error {
+	return errors.New(it.Value())
 }
 
-func (receiver *StringOnce) String() string {
-	return receiver.Value()
+func (it *StringOnce) String() string {
+	return it.Value()
 }
