@@ -3,6 +3,7 @@ package scripttype
 import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 var (
@@ -133,6 +134,7 @@ var (
 		},
 	}
 
-	scriptTypeBasicEnumImpl = enumimpl.
-				NewBasicByteUsingIndexedSlice(scriptTypeStringRanges[:])
+	scriptTypeBasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
+		reflectinternal.TypeName(Uninitialized),
+		scriptTypeStringRanges[:])
 )

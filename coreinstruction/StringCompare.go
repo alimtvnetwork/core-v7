@@ -1,6 +1,7 @@
 package coreinstruction
 
 import (
+	"gitlab.com/evatix-go/core/corecomparator"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
 	"gitlab.com/evatix-go/core/regexnew"
 )
@@ -18,9 +19,11 @@ func NewStringCompare(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method:       method,
-			Search:       search,
-			IsIgnoreCase: isIgnoreCase,
+			CompareMethod: method,
+			Search:        search,
+			BaseIsIgnoreCase: corecomparator.BaseIsIgnoreCase{
+				IsIgnoreCase: isIgnoreCase,
+			},
 		},
 		Content: content,
 	}
@@ -32,8 +35,8 @@ func NewStringCompareEqual(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method: stringcompareas.Equal,
-			Search: search,
+			CompareMethod: stringcompareas.Equal,
+			Search:        search,
 		},
 		Content: content,
 	}
@@ -45,8 +48,8 @@ func NewStringCompareRegex(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method: stringcompareas.Regex,
-			Search: regex,
+			CompareMethod: stringcompareas.Regex,
+			Search:        regex,
 		},
 		Content: content,
 	}
@@ -59,9 +62,11 @@ func NewStringCompareStartsWith(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method:       stringcompareas.StartsWith,
-			Search:       search,
-			IsIgnoreCase: isIgnoreCase,
+			CompareMethod: stringcompareas.StartsWith,
+			Search:        search,
+			BaseIsIgnoreCase: corecomparator.BaseIsIgnoreCase{
+				IsIgnoreCase: isIgnoreCase,
+			},
 		},
 		Content: content,
 	}
@@ -74,9 +79,11 @@ func NewStringCompareEndsWith(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method:       stringcompareas.EndsWith,
-			Search:       search,
-			IsIgnoreCase: isIgnoreCase,
+			CompareMethod: stringcompareas.EndsWith,
+			Search:        search,
+			BaseIsIgnoreCase: corecomparator.BaseIsIgnoreCase{
+				IsIgnoreCase: isIgnoreCase,
+			},
 		},
 		Content: content,
 	}
@@ -89,28 +96,22 @@ func NewStringCompareContains(
 ) *StringCompare {
 	return &StringCompare{
 		StringSearch: StringSearch{
-			Method:       stringcompareas.Contains,
-			Search:       search,
-			IsIgnoreCase: isIgnoreCase,
+			CompareMethod: stringcompareas.Contains,
+			Search:        search,
+			BaseIsIgnoreCase: corecomparator.BaseIsIgnoreCase{
+				IsIgnoreCase: isIgnoreCase,
+			},
 		},
 		Content: content,
 	}
 }
 
-func (it *StringCompare) IsEmpty() bool {
+func (it *StringCompare) IsInvalid() bool {
 	return it == nil
 }
 
-func (it *StringCompare) IsExist() bool {
+func (it *StringCompare) IsDefined() bool {
 	return it != nil
-}
-
-func (it *StringCompare) Has() bool {
-	return it != nil
-}
-
-func (it *StringCompare) IsCaseSensitive() bool {
-	return !it.IsIgnoreCase
 }
 
 func (it *StringCompare) IsMatch() bool {
@@ -118,11 +119,15 @@ func (it *StringCompare) IsMatch() bool {
 		return true
 	}
 
-	return it.Method.IsCompareSuccess(
+	return it.CompareMethod.IsCompareSuccess(
 		it.IsIgnoreCase,
 		it.Content,
 		it.Search,
 	)
+}
+
+func (it *StringCompare) IsMatchFailed() bool {
+	return !it.IsMatch()
 }
 
 func (it *StringCompare) VerifyError() error {
@@ -130,13 +135,13 @@ func (it *StringCompare) VerifyError() error {
 		return nil
 	}
 
-	if it.Method.IsRegex() {
+	if it.CompareMethod.IsRegex() {
 		return regexnew.MatchErrorLock(
 			it.Search,
 			it.Content)
 	}
 
-	return it.Method.VerifyError(
+	return it.CompareMethod.VerifyError(
 		it.IsIgnoreCase,
 		it.Content,
 		it.Search,

@@ -1,6 +1,9 @@
 package linuxtype
 
-import "gitlab.com/evatix-go/core/coreimpl/enumimpl"
+import (
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
+)
 
 var (
 	Ranges = [...]string{
@@ -47,5 +50,7 @@ var (
 		"Android":              Android,
 	}
 
-	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(Ranges[:])
+	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
+		reflectinternal.TypeName(Unknown),
+		Ranges[:])
 )

@@ -133,7 +133,7 @@ func NewUsingHyphenedRwxFullString(hyphenedRwxRwxRwx string) (RwxWrapper, error)
 	length := len(hyphenedRwxRwxRwx)
 
 	if length != HyphenedRwxLength {
-		return RwxWrapper{}, hyphenedRwxLengthErr
+		return RwxWrapper{}, errHyphenedRwxLength
 	}
 
 	return NewUsingRwxFullString(hyphenedRwxRwxRwx[constants.One:])
@@ -150,7 +150,7 @@ func NewUsingRwxFullString(rwxFullStringWithoutHyphen string) (RwxWrapper, error
 	length := len(rwxFullStringWithoutHyphen)
 
 	if length != FullRwxLengthWithoutHyphen {
-		return RwxWrapper{}, fullRwxLengthWithoutHyphenErr
+		return RwxWrapper{}, errFullRwxLengthWithoutHyphen
 	}
 
 	owner := rwxFullStringWithoutHyphen[0:3]

@@ -38,6 +38,7 @@ const (
 	QuestionMarkSymbol                        = "?"
 	NilString                                 = "nil"
 	SprintValueFormat                         = "%v"
+	SprintValueDoubleQuotationFormat          = "\"%v\""
 	SprintNumberFormat                        = "%d"
 	SprintFullPropertyNameValueFormat         = "%#v"
 	SprintPropertyNameValueFormat             = "%+v"

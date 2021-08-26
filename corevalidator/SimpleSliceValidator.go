@@ -24,8 +24,8 @@ func (it *SimpleSliceValidator) SliceValidator() *SliceValidator {
 	sliceValidator := SliceValidator{
 		CompareAs:              it.CompareAs,
 		ValidatorCoreCondition: it.ValidatorCoreCondition,
-		InputLines:             it.actual.Items,
-		ComparingLines:         it.Expected.Items,
+		ActualLines:            it.actual.Items,
+		ExpectedLines:          it.Expected.Items,
 	}
 
 	return &sliceValidator
@@ -36,7 +36,7 @@ func (it *SimpleSliceValidator) VerifyAll(
 	params *ValidatorParamsBase,
 ) error {
 	sliceValidator := it.SliceValidator()
-	sliceValidator.InputLines = actual
+	sliceValidator.ActualLines = actual
 
 	return sliceValidator.AllVerifyError(params)
 }
@@ -46,7 +46,7 @@ func (it *SimpleSliceValidator) VerifyFirst(
 	params *ValidatorParamsBase,
 ) error {
 	sliceValidator := it.SliceValidator()
-	sliceValidator.InputLines = actual
+	sliceValidator.ActualLines = actual
 
 	return sliceValidator.VerifyFirstError(params)
 }
@@ -57,7 +57,7 @@ func (it *SimpleSliceValidator) VerifyUpto(
 	length int,
 ) error {
 	sliceValidator := it.SliceValidator()
-	sliceValidator.InputLines = actual
+	sliceValidator.ActualLines = actual
 
 	return sliceValidator.AllVerifyErrorUptoLength(
 		false,

@@ -16,9 +16,11 @@ type numberEnumBase struct {
 	rangesCsvString      *coreonce.StringOnce
 	rangesInvalidMessage *coreonce.StringOnce
 	invalidError         *coreonce.ErrorOnce
+	typeName             string
 }
 
 func newNumberEnumBase(
+	typeName string,
 	actualRangesAnyType interface{},
 	stringRanges []string,
 	min, max interface{},
@@ -31,9 +33,9 @@ func newNumberEnumBase(
 	}
 
 	rangesToCsvOnce := coreonce.NewStringOncePtr(func() string {
-		return converters.StringsToCsv(
+		return converters.StringsToCsvWithIndexes(
 			&stringRanges,
-			false)
+		)
 	})
 
 	invalidMessageOnce := coreonce.NewStringOncePtr(func() string {
@@ -53,37 +55,42 @@ func newNumberEnumBase(
 			return errors.New(invalidMessageOnce.Value())
 		}),
 		rangesCsvString: rangesToCsvOnce,
+		typeName:        typeName,
 	}
 }
 
-func (receiver *numberEnumBase) RangeNamesCsv() string {
-	return receiver.rangesCsvString.Value()
+func (it *numberEnumBase) TypeName() string {
+	return it.typeName
 }
 
-func (receiver *numberEnumBase) RangesInvalidMessage() string {
-	return receiver.rangesInvalidMessage.Value()
+func (it *numberEnumBase) RangeNamesCsv() string {
+	return it.rangesCsvString.Value()
 }
 
-func (receiver *numberEnumBase) RangesInvalidErr() error {
-	return receiver.invalidError.Value()
+func (it *numberEnumBase) RangesInvalidMessage() string {
+	return it.rangesInvalidMessage.Value()
 }
 
-func (receiver *numberEnumBase) StringRangesPtr() *[]string {
-	return &receiver.stringRanges
+func (it *numberEnumBase) RangesInvalidErr() error {
+	return it.invalidError.Value()
 }
 
-func (receiver *numberEnumBase) StringRanges() []string {
-	return receiver.stringRanges
+func (it *numberEnumBase) StringRangesPtr() *[]string {
+	return &it.stringRanges
 }
 
-func (receiver *numberEnumBase) StringJson(input interface{}) (jsonString string, err error) {
-	return receiver.ToEnumString(input), nil
+func (it *numberEnumBase) StringRanges() []string {
+	return it.stringRanges
 }
 
-func (receiver *numberEnumBase) StringJsonMust(input interface{}) string {
-	return receiver.ToEnumString(input)
+func (it *numberEnumBase) StringJson(input interface{}) (jsonString string, err error) {
+	return it.ToEnumString(input), nil
 }
 
-func (receiver *numberEnumBase) ToEnumString(input interface{}) string {
+func (it *numberEnumBase) StringJsonMust(input interface{}) string {
+	return it.ToEnumString(input)
+}
+
+func (it *numberEnumBase) ToEnumString(input interface{}) string {
 	return fmt.Sprintf(constants.SprintValueFormat, input)
 }

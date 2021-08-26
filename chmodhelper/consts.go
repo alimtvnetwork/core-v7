@@ -26,4 +26,5 @@ const (
 	WriteChar                        byte = 'w'
 	ExecuteChar                      byte = 'x'
 	AllWildcards                          = "***"
+	pathInvalidMessage                    = "Path invalid or permission issue. path : "
 )

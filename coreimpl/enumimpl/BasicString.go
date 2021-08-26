@@ -15,10 +15,12 @@ type BasicString struct {
 }
 
 func NewBasicString(
+	typeName string,
 	stringRanges []string,
 	min, max string,
 ) *BasicString {
 	enumBase := newNumberEnumBase(
+		typeName,
 		stringRanges,
 		stringRanges,
 		min,

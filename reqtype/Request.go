@@ -72,6 +72,14 @@ func (it Request) IsUninitialized() bool {
 	return it == Uninitialized
 }
 
+func (it Request) RangeNamesCsv() string {
+	return BasicEnumImpl.RangeNamesCsv()
+}
+
+func (it Request) TypeName() string {
+	return BasicEnumImpl.TypeName()
+}
+
 func (it Request) IsCreate() bool {
 	return it == Create
 }

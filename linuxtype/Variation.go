@@ -135,6 +135,14 @@ func (it *Variation) UnmarshallEnumToValue(
 		UnmarshallToValue(true, jsonUnmarshallingValue)
 }
 
+func (it Variation) RangeNamesCsv() string {
+	return BasicEnumImpl.RangeNamesCsv()
+}
+
+func (it Variation) TypeName() string {
+	return BasicEnumImpl.TypeName()
+}
+
 func (it *Variation) UnmarshalJSON(data []byte) error {
 	dataConv, err := it.UnmarshallEnumToValue(data)
 

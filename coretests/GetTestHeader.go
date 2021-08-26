@@ -5,7 +5,7 @@ import (
 )
 
 func GetTestHeader(testCaseMessenger TestCaseMessenger) string {
-	return fmt.Sprintf("Method : [%s]",
+	return fmt.Sprintf("CompareMethod : [%s]",
 		testCaseMessenger.FuncName(),
 	)
 }

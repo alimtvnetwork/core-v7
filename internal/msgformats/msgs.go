@@ -40,7 +40,7 @@ const (
 
 	PrintHeaderForSearchWithActualAndExpectedProcessedFormat = "" +
 		"%d )\t" +
-		"  Expectation failed: Using Method `%#v`, Line Index: %d\n  " +
+		"  Expectation failed: Using CompareMethod `%#v`, Line Index: %d\n  " +
 		"   Content-Processed:`%#v`\n  " +
 		"SearchTerm-Processed:`%#v`\n  " +
 		"          Additional:`%#v`"
@@ -86,7 +86,7 @@ const (
 
 	TextValidatorSingleLineFormat = "" +
 		"Search Input: [`%s`], " +
-		"Method: [`%s`], " +
+		"CompareMethod: [`%s`], " +
 		"IsTrimCompare: [`%#v`], " +
 		"IsSplitByWhitespace: [`%#v`], " +
 		"IsUniqueWordOnly: [`%#v`], " +
@@ -95,7 +95,7 @@ const (
 
 	TextValidatorMultiLineFormat = "" +
 		"        Search Input: [`%s`],\n " +
-		"              Method: [`%s`],\n " +
+		"              CompareMethod: [`%s`],\n " +
 		"       IsTrimCompare: [`%#v`],\n " +
 		" IsSplitByWhitespace: [`%#v`],\n " +
 		"    IsUniqueWordOnly: [`%#v`],\n " +

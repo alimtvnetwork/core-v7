@@ -11,6 +11,7 @@ type BasicEnumer interface {
 
 type BasicEnumContractsBinder interface {
 	BasicEnumer
+	TypeNameWithRangeNamesCsvGetter
 	AsBasicEnumContractsBinder() BasicEnumContractsBinder
 }
 

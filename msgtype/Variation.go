@@ -75,7 +75,7 @@ const (
 	SearchInputOrSearchTermEmpty           Variation = "Search Input or search term either null or empty."
 	EmptyResultCannotMakeJson              Variation = "Empty result, cannot make json out of it."
 	MarshallingFailed                      Variation = "Failed to marshal / parse / serialize."
-	UnMarshallingFailed                    Variation = "Failed to unmarshal / parse / deserialize. Failed to convert to object from serialized data source."
+	UnMarshallingFailed                    Variation = "Failed to unmarshal / parse / deserialize."
 	ParsingFailed                          Variation = "Failed to parse."
 	TypeMismatch                           Variation = "TypeMismatch: Type is not as expected."
 	NotImplemented                         Variation = "Not Implemented: Feature / method is not implemented yet."

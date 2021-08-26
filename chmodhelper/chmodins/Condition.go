@@ -42,3 +42,11 @@ func (receiver *Condition) Clone() *Condition {
 		IsRecursive:       receiver.IsRecursive,
 	}
 }
+
+func (receiver Condition) CloneNonPtr() Condition {
+	return Condition{
+		IsSkipOnInvalid:   receiver.IsSkipOnInvalid,
+		IsContinueOnError: receiver.IsContinueOnError,
+		IsRecursive:       receiver.IsRecursive,
+	}
+}
