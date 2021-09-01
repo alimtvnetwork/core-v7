@@ -36,11 +36,11 @@ func EmptyWithErrorPtr(err error) *Result {
 }
 
 func EmptyWithoutErrorPtr() *Result {
-	return EmptyWithErrorPtr(StaticJsonError)
+	return EmptyWithErrorPtr(nil)
 }
 
 func NewUsingBytes(
-	jsonBytes *[]byte,
+	jsonBytes []byte,
 ) Result {
 	return Result{
 		Bytes: jsonBytes,
@@ -51,8 +51,15 @@ func NewUsingBytes(
 func NewUsingBytesPtr(
 	jsonBytes *[]byte,
 ) *Result {
+	if jsonBytes == nil {
+		return &Result{
+			Bytes: nil,
+			Error: nil,
+		}
+	}
+
 	return &Result{
-		Bytes: jsonBytes,
+		Bytes: *jsonBytes,
 		Error: nil,
 	}
 }
@@ -69,7 +76,7 @@ func NewPtr(
 	}
 
 	return &Result{
-		Bytes: &jsonBytes,
+		Bytes: jsonBytes,
 		Error: nil,
 	}
 }
@@ -92,7 +99,7 @@ func NewPtrUsingBytesPtr(
 	}
 
 	return &Result{
-		Bytes: jsonBytes,
+		Bytes: *jsonBytes,
 		Error: nil,
 	}
 }
@@ -102,13 +109,13 @@ func NewFromAny(any interface{}) *Result {
 
 	if err != nil {
 		return &Result{
-			Bytes: &[]byte{},
+			Bytes: []byte{},
 			Error: err,
 		}
 	}
 
 	return &Result{
-		Bytes: &jsonBytes,
+		Bytes: jsonBytes,
 		Error: err,
 	}
 }

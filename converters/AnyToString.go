@@ -6,10 +6,21 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-func AnyToString(any interface{}) string {
+func AnyToString(
+	isIncludeFullName bool,
+	any interface{},
+) string {
 	if any == nil {
 		return ""
 	}
 
-	return fmt.Sprintf(constants.SprintValueFormat, any)
+	if isIncludeFullName {
+		return fmt.Sprintf(
+			constants.SprintFullPropertyNameValueFormat,
+			any)
+	}
+
+	return fmt.Sprintf(
+		constants.SprintValueFormat,
+		any)
 }

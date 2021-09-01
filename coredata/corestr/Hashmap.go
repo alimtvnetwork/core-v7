@@ -3,12 +3,12 @@ package corestr
 import (
 	"encoding/json"
 	"fmt"
+	"strconv"
 	"strings"
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -16,396 +16,394 @@ type Hashmap struct {
 	hasMapUpdated bool
 	isEmptySet    bool
 	length        int
-	items         *map[string]string
-	cachedList    *[]string
+	items         map[string]string
+	cachedList    []string
 	sync.Mutex
 }
 
-func (hashmap *Hashmap) IsEmpty() bool {
-	if hashmap == nil {
+func (it *Hashmap) IsEmpty() bool {
+	if it == nil {
 		return true
 	}
 
-	if hashmap.hasMapUpdated {
-		hashmap.isEmptySet = hashmap.items == nil ||
-			*hashmap.items == nil ||
-			len(*hashmap.items) == 0
+	if it.hasMapUpdated {
+		it.isEmptySet = len(it.items) == 0
 	}
 
-	return hashmap.isEmptySet
+	return it.isEmptySet
 }
 
-func (hashmap *Hashmap) HasItems() bool {
-	return hashmap != nil && !hashmap.IsEmpty()
+func (it *Hashmap) HasItems() bool {
+	return it != nil && !it.IsEmpty()
 }
 
-func (hashmap *Hashmap) Collection() *Collection {
-	return NewCollectionUsingStrings(hashmap.ValuesListPtr(), false)
+func (it *Hashmap) Collection() *Collection {
+	return NewCollectionUsingStrings(it.ValuesListPtr(), false)
 }
 
-func (hashmap *Hashmap) IsEmptyLock() bool {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) IsEmptyLock() bool {
+	it.Lock()
+	defer it.Unlock()
 
-	return hashmap.IsEmpty()
+	return it.IsEmpty()
 }
 
-func (hashmap *Hashmap) AddOrUpdatePtr(
+func (it *Hashmap) AddOrUpdatePtr(
 	key, val *string,
 ) *Hashmap {
-	(*hashmap.items)[*key] = *val
-	hashmap.hasMapUpdated = true
+	it.items[*key] = *val
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateWithWgLock(
+func (it *Hashmap) AddOrUpdateWithWgLock(
 	key, val string,
 	group *sync.WaitGroup,
 ) *Hashmap {
-	hashmap.Lock()
+	it.Lock()
 
-	(*hashmap.items)[key] = val
-	hashmap.hasMapUpdated = true
+	it.items[key] = val
+	it.hasMapUpdated = true
 
-	hashmap.Unlock()
+	it.Unlock()
 	group.Done()
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdatePtrLock(
+func (it *Hashmap) AddOrUpdatePtrLock(
 	key, val *string,
 ) *Hashmap {
-	hashmap.Lock()
+	it.Lock()
 
-	(*hashmap.items)[*key] = *val
-	hashmap.hasMapUpdated = true
+	it.items[*key] = *val
+	it.hasMapUpdated = true
 
-	hashmap.Unlock()
+	it.Unlock()
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyStrValInt(
+func (it *Hashmap) AddOrUpdateKeyStrValInt(
 	key string,
 	val int,
 ) *Hashmap {
-	(*hashmap.items)[key] = fmt.Sprintf("%d", val)
-	hashmap.hasMapUpdated = true
+	it.items[key] = strconv.Itoa(val)
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyStrValFloat(
+func (it *Hashmap) AddOrUpdateKeyStrValFloat(
 	key string,
 	val float32,
 ) *Hashmap {
-	(*hashmap.items)[key] = fmt.Sprintf("%f", val)
-	hashmap.hasMapUpdated = true
+	it.items[key] = fmt.Sprintf("%f", val)
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyStrValFloat64(
+func (it *Hashmap) AddOrUpdateKeyStrValFloat64(
 	key string, val float64,
 ) *Hashmap {
-	(*hashmap.items)[key] = fmt.Sprintf("%f", val)
-	hashmap.hasMapUpdated = true
+	it.items[key] = fmt.Sprintf("%f", val)
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyStrValAny(
+func (it *Hashmap) AddOrUpdateKeyStrValAny(
 	key string,
 	val interface{},
 ) *Hashmap {
-	(*hashmap.items)[key] = fmt.Sprintf(constants.SprintValueFormat, val)
-	hashmap.hasMapUpdated = true
+	it.items[key] = fmt.Sprintf(constants.SprintValueFormat, val)
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyValueAny(
+func (it *Hashmap) AddOrUpdateKeyValueAny(
 	pair KeyAnyValuePair,
 ) *Hashmap {
-	(*hashmap.items)[pair.Key] = pair.ValueString()
-	hashmap.hasMapUpdated = true
+	it.items[pair.Key] = pair.ValueString()
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyVal(
+func (it *Hashmap) AddOrUpdateKeyVal(
 	keyVal KeyValuePair,
 ) *Hashmap {
-	(*hashmap.items)[keyVal.Key] = keyVal.Value
-	hashmap.hasMapUpdated = true
+	it.items[keyVal.Key] = keyVal.Value
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdate(key, val string) *Hashmap {
-	(*hashmap.items)[key] = val
-	hashmap.hasMapUpdated = true
+func (it *Hashmap) AddOrUpdate(key, val string) *Hashmap {
+	it.items[key] = val
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateStringsPtrWgLock(
+func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
 	keys, values *[]string, wg *sync.WaitGroup,
 ) *Hashmap {
 	if keys == nil || values == nil {
-		return hashmap
+		return it
 	}
 
-	hashmap.Lock()
+	it.Lock()
 	for i, key := range *keys {
-		(*hashmap.items)[key] = (*values)[i]
+		it.items[key] = (*values)[i]
 	}
 
-	hashmap.hasMapUpdated = true
-	hashmap.Unlock()
+	it.hasMapUpdated = true
+	it.Unlock()
 	wg.Done()
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateStringsPtr(
+func (it *Hashmap) AddOrUpdateStringsPtr(
 	keys, values *[]string,
 ) *Hashmap {
 	if keys == nil || values == nil {
-		return hashmap
+		return it
 	}
 
 	for i, key := range *keys {
-		(*hashmap.items)[key] = (*values)[i]
+		it.items[key] = (*values)[i]
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateStringsPtrLock(
+func (it *Hashmap) AddOrUpdateStringsPtrLock(
 	keys, values *[]string,
 ) *Hashmap {
 	if keys == nil || values == nil {
-		return hashmap
+		return it
 	}
 
-	hashmap.Lock()
+	it.Lock()
 	for i, key := range *keys {
-		(*hashmap.items)[key] = (*values)[i]
+		it.items[key] = (*values)[i]
 	}
 
-	hashmap.hasMapUpdated = true
-	hashmap.Unlock()
+	it.hasMapUpdated = true
+	it.Unlock()
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateHashmap(
+func (it *Hashmap) AddOrUpdateHashmap(
 	hashmap2 *Hashmap,
 ) *Hashmap {
 	if hashmap2 == nil {
-		return hashmap
+		return it
 	}
 
-	for key, val := range *hashmap2.items {
-		(*hashmap.items)[key] = val
+	for key, val := range hashmap2.items {
+		it.items[key] = val
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateMap(
+func (it *Hashmap) AddOrUpdateMap(
 	itemsMap map[string]string,
 ) *Hashmap {
 	if len(itemsMap) == 0 {
-		return hashmap
+		return it
 	}
 
 	for key, val := range itemsMap {
-		(*hashmap.items)[key] = val
+		it.items[key] = val
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateMapPtr(
+func (it *Hashmap) AddOrUpdateMapPtr(
 	itemsMap *map[string]string,
 ) *Hashmap {
 	if itemsMap == nil || len(*itemsMap) == 0 {
-		return hashmap
+		return it
 	}
 
 	for key, val := range *itemsMap {
-		(*hashmap.items)[key] = val
+		it.items[key] = val
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddsOrUpdates(
+func (it *Hashmap) AddsOrUpdates(
 	KeyValuePair ...KeyValuePair,
 ) *Hashmap {
 	if KeyValuePair == nil {
-		return hashmap
+		return it
 	}
 
 	for _, keyVal := range KeyValuePair {
-		(*hashmap.items)[keyVal.Key] = keyVal.Value
+		it.items[keyVal.Key] = keyVal.Value
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyAnyValsPtr(
+func (it *Hashmap) AddOrUpdateKeyAnyValsPtr(
 	pairs *[]KeyAnyValuePair,
 ) *Hashmap {
 	if pairs == nil || *pairs == nil {
-		return hashmap
+		return it
 	}
 
 	for _, pair := range *pairs {
-		(*hashmap.items)[pair.Key] = pair.ValueString()
+		it.items[pair.Key] = pair.ValueString()
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateKeyValsPtr(
+func (it *Hashmap) AddOrUpdateKeyValsPtr(
 	pairs *[]KeyValuePair,
 ) *Hashmap {
 	if pairs == nil || *pairs == nil {
-		return hashmap
+		return it
 	}
 
 	for _, pair := range *pairs {
-		(*hashmap.items)[pair.Key] = pair.Value
+		it.items[pair.Key] = pair.Value
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddOrUpdateCollection(
+func (it *Hashmap) AddOrUpdateCollection(
 	keys, values *Collection,
 ) *Hashmap {
 	if (keys == nil || keys.IsEmpty()) || (values == nil || values.IsEmpty()) {
-		return hashmap
+		return it
 	}
 
 	for i, element := range *keys.items {
-		(*hashmap.items)[element] = (*values.items)[i]
+		it.items[element] = (*values.items)[i]
 	}
 
-	hashmap.hasMapUpdated = true
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
 // AddsOrUpdatesAnyUsingFilter Keep result from filter.
-func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilter(
+func (it *Hashmap) AddsOrUpdatesAnyUsingFilter(
 	filter IsKeyAnyValueFilter,
 	pairs ...KeyAnyValuePair,
 ) *Hashmap {
 	if pairs == nil {
-		return hashmap
+		return it
 	}
 
 	for _, pair := range pairs {
 		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
-			(*hashmap.items)[pair.Key] = result
-			hashmap.hasMapUpdated = true
+			it.items[pair.Key] = result
+			it.hasMapUpdated = true
 		}
 
 		if isBreak {
-			return hashmap
+			return it
 		}
 	}
 
-	return hashmap
+	return it
 }
 
 // AddsOrUpdatesAnyUsingFilterLock Keep result from filter.
-func (hashmap *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
+func (it *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
 	filter IsKeyAnyValueFilter,
 	pairs ...KeyAnyValuePair,
 ) *Hashmap {
 	if pairs == nil {
-		return hashmap
+		return it
 	}
 
 	for _, pair := range pairs {
 		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
-			hashmap.Lock()
-			(*hashmap.items)[pair.Key] = result
-			hashmap.Unlock()
+			it.Lock()
+			it.items[pair.Key] = result
+			it.Unlock()
 
-			hashmap.hasMapUpdated = true
+			it.hasMapUpdated = true
 		}
 
 		if isBreak {
-			return hashmap
+			return it
 		}
 	}
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) AddsOrUpdatesUsingFilter(
+func (it *Hashmap) AddsOrUpdatesUsingFilter(
 	filter IsKeyValueFilter,
 	pairs ...KeyValuePair,
 ) *Hashmap {
 	if pairs == nil {
-		return hashmap
+		return it
 	}
 
 	for _, pair := range pairs {
 		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
-			(*hashmap.items)[pair.Key] = result
-			hashmap.hasMapUpdated = true
+			it.items[pair.Key] = result
+			it.hasMapUpdated = true
 		}
 
 		if isBreak {
-			return hashmap
+			return it
 		}
 	}
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) ConcatNew(
+func (it *Hashmap) ConcatNew(
 	isCloneOnEmptyAsWell bool,
 	hashmaps ...*Hashmap,
 ) *Hashmap {
 	if len(hashmaps) == 0 {
 		return NewHashmapUsingMap(
-			hashmap.items,
+			it.items,
 			constants.Zero,
 			isCloneOnEmptyAsWell,
 		)
 	}
 
-	length := hashmap.Length() + constants.Capacity2
+	length := it.Length() + constants.Capacity2
 
 	for _, h := range hashmaps {
 		if h == nil {
@@ -416,11 +414,11 @@ func (hashmap *Hashmap) ConcatNew(
 	}
 
 	newHashmap := NewHashmapUsingMap(
-		hashmap.items,
+		it.items,
 		length,
 		true)
 
-	newHashmap.AddOrUpdateHashmap(hashmap)
+	newHashmap.AddOrUpdateHashmap(it)
 
 	for _, hashmap2 := range hashmaps {
 		newHashmap.AddOrUpdateHashmap(
@@ -430,19 +428,19 @@ func (hashmap *Hashmap) ConcatNew(
 	return newHashmap
 }
 
-func (hashmap *Hashmap) ConcatNewUsingMaps(
+func (it *Hashmap) ConcatNewUsingMaps(
 	isCloneOnEmptyAsWell bool,
 	hashmaps ...*map[string]string,
 ) *Hashmap {
 	if len(hashmaps) == 0 {
 		return NewHashmapUsingMap(
-			hashmap.items,
+			it.items,
 			constants.Zero,
 			isCloneOnEmptyAsWell,
 		)
 	}
 
-	length := hashmap.Length() +
+	length := it.Length() +
 		constants.Capacity5
 	for _, h := range hashmaps {
 		if h == nil {
@@ -453,11 +451,11 @@ func (hashmap *Hashmap) ConcatNewUsingMaps(
 	}
 
 	newHashmap := NewHashmapUsingMap(
-		hashmap.items,
+		it.items,
 		length,
 		true)
 
-	newHashmap.AddOrUpdateHashmap(hashmap)
+	newHashmap.AddOrUpdateHashmap(it)
 
 	for _, hashmap2 := range hashmaps {
 		newHashmap.AddOrUpdateMapPtr(
@@ -467,33 +465,47 @@ func (hashmap *Hashmap) ConcatNewUsingMaps(
 	return newHashmap
 }
 
-func (hashmap *Hashmap) AddOrUpdateLock(key, value string) *Hashmap {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) AddOrUpdateLock(key, value string) *Hashmap {
+	it.Lock()
+	defer it.Unlock()
 
-	(*hashmap.items)[key] = value
-	hashmap.hasMapUpdated = true
+	it.items[key] = value
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) Has(key string) bool {
-	_, isFound := (*hashmap.items)[key]
+func (it *Hashmap) Has(key string) bool {
+	_, isFound := it.items[key]
 
 	return isFound
 }
 
-func (hashmap *Hashmap) HasLock(key string) bool {
-	hashmap.Lock()
-	_, isFound := (*hashmap.items)[key]
-	hashmap.Unlock()
+func (it *Hashmap) IsKeyMissing(key string) bool {
+	_, isFound := it.items[key]
+
+	return !isFound
+}
+
+func (it *Hashmap) IsKeyMissingLock(key string) bool {
+	it.Lock()
+	_, isFound := it.items[key]
+	it.Unlock()
+
+	return !isFound
+}
+
+func (it *Hashmap) HasLock(key string) bool {
+	it.Lock()
+	_, isFound := it.items[key]
+	it.Unlock()
 
 	return isFound
 }
 
-func (hashmap *Hashmap) HasAllStringsPtr(keys *[]string) bool {
+func (it *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 	for _, key := range *keys {
-		_, isFound := (*hashmap.items)[key]
+		_, isFound := it.items[key]
 
 		if !isFound {
 			// not found
@@ -506,19 +518,19 @@ func (hashmap *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 }
 
 // HasAllCollectionItems return false on items is nil or empty.
-func (hashmap *Hashmap) HasAllCollectionItems(
+func (it *Hashmap) HasAllCollectionItems(
 	collection *Collection,
 ) bool {
 	if collection == nil || collection.IsEmpty() {
 		return false
 	}
 
-	return hashmap.HasAllStringsPtr(collection.items)
+	return it.HasAllStringsPtr(collection.items)
 }
 
-func (hashmap *Hashmap) HasAll(keys ...string) bool {
+func (it *Hashmap) HasAll(keys ...string) bool {
 	for _, key := range keys {
-		_, isFound := (*hashmap.items)[key]
+		_, isFound := it.items[key]
 
 		if !isFound {
 			// not found
@@ -530,9 +542,9 @@ func (hashmap *Hashmap) HasAll(keys ...string) bool {
 	return true
 }
 
-func (hashmap *Hashmap) HasAny(keys ...string) bool {
+func (it *Hashmap) HasAny(keys ...string) bool {
 	for _, key := range keys {
-		_, isFound := (*hashmap.items)[key]
+		_, isFound := it.items[key]
 
 		if isFound {
 			// any found
@@ -544,30 +556,30 @@ func (hashmap *Hashmap) HasAny(keys ...string) bool {
 	return false
 }
 
-func (hashmap *Hashmap) HasWithLock(key string) bool {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) HasWithLock(key string) bool {
+	it.Lock()
+	defer it.Unlock()
 
-	_, isFound := (*hashmap.items)[key]
+	_, isFound := it.items[key]
 
 	return isFound
 }
 
 // GetKeysFilteredItems must return slice.
-func (hashmap *Hashmap) GetKeysFilteredItems(
+func (it *Hashmap) GetKeysFilteredItems(
 	filter IsStringFilter,
 ) *[]string {
-	if hashmap.IsEmpty() {
+	if it.IsEmpty() {
 		return &([]string{})
 	}
 
 	filteredList := make(
 		[]string,
 		0,
-		hashmap.Length())
+		it.Length())
 
 	i := 0
-	for key := range *hashmap.items {
+	for key := range it.items {
 		result, isKeep, isBreak :=
 			filter(key, i)
 
@@ -589,20 +601,20 @@ func (hashmap *Hashmap) GetKeysFilteredItems(
 }
 
 // GetKeysFilteredCollection must return items.
-func (hashmap *Hashmap) GetKeysFilteredCollection(
+func (it *Hashmap) GetKeysFilteredCollection(
 	filter IsStringFilter,
 ) *Collection {
-	if hashmap.IsEmpty() {
+	if it.IsEmpty() {
 		return EmptyCollection()
 	}
 
 	filteredList := make(
 		[]string,
 		0,
-		hashmap.Length())
+		it.Length())
 
 	i := 0
-	for key := range *hashmap.items {
+	for key := range it.items {
 		result, isKeep, isBreak := filter(key, i)
 		i++
 
@@ -624,67 +636,67 @@ func (hashmap *Hashmap) GetKeysFilteredCollection(
 		&filteredList, false)
 }
 
-func (hashmap *Hashmap) Items() *map[string]string {
-	return hashmap.items
+func (it *Hashmap) Items() map[string]string {
+	return it.items
 }
 
 //goland:noinspection GoLinterLocal
-func (hashmap *Hashmap) ItemsCopyLock() *map[string]string {
-	hashmap.Lock()
+func (it *Hashmap) ItemsCopyLock() *map[string]string {
+	it.Lock()
 
-	copiedItemsMap := &(*hashmap.items)
+	copiedItemsMap := &it.items
 
-	hashmap.Unlock()
+	it.Unlock()
 
 	return copiedItemsMap
 }
 
-func (hashmap *Hashmap) ValuesCollection() *Collection {
+func (it *Hashmap) ValuesCollection() *Collection {
 	return NewCollectionUsingStrings(
-		hashmap.ValuesListPtr(), false)
+		it.ValuesListPtr(), false)
 }
 
-func (hashmap *Hashmap) ValuesHashset() *Hashset {
+func (it *Hashmap) ValuesHashset() *Hashset {
 	return NewHashsetUsingStrings(
-		hashmap.ValuesListPtr())
+		it.ValuesListPtr())
 }
 
-func (hashmap *Hashmap) ValuesCollectionLock() *Collection {
+func (it *Hashmap) ValuesCollectionLock() *Collection {
 	return NewCollectionUsingStrings(
-		hashmap.ValuesListCopyPtrLock(), false)
+		it.ValuesListCopyPtrLock(), false)
 }
 
-func (hashmap *Hashmap) ValuesHashsetLock() *Hashset {
+func (it *Hashmap) ValuesHashsetLock() *Hashset {
 	return NewHashsetUsingStrings(
-		hashmap.ValuesListCopyPtrLock())
+		it.ValuesListCopyPtrLock())
 }
 
-func (hashmap *Hashmap) ValuesList() []string {
-	return *hashmap.ValuesListPtr()
+func (it *Hashmap) ValuesList() []string {
+	return *it.ValuesListPtr()
 }
 
-func (hashmap *Hashmap) ValuesListPtr() *[]string {
-	if hashmap.hasMapUpdated || hashmap.cachedList == nil {
-		hashmap.setCached()
+func (it *Hashmap) ValuesListPtr() *[]string {
+	if it.hasMapUpdated || it.cachedList == nil {
+		it.setCached()
 	}
 
-	return hashmap.cachedList
+	return &it.cachedList
 }
 
-func (hashmap *Hashmap) KeysValuesCollection() (
+func (it *Hashmap) KeysValuesCollection() (
 	keys, values *Collection,
 ) {
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
-		keys = NewCollectionUsingStrings(hashmap.Keys(), false)
+		keys = NewCollectionUsingStrings(it.Keys(), false)
 
 		wg.Done()
 	}()
 
 	go func() {
-		values = NewCollectionUsingStrings(hashmap.ValuesListPtr(), false)
+		values = NewCollectionUsingStrings(it.ValuesListPtr(), false)
 
 		wg.Done()
 	}()
@@ -694,19 +706,19 @@ func (hashmap *Hashmap) KeysValuesCollection() (
 	return keys, values
 }
 
-func (hashmap *Hashmap) KeysValuesList() (
+func (it *Hashmap) KeysValuesList() (
 	keys, values *[]string,
 ) {
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
-		keys = hashmap.Keys()
+		keys = it.Keys()
 		wg.Done()
 	}()
 
 	go func() {
-		values = hashmap.ValuesListPtr()
+		values = it.ValuesListPtr()
 		wg.Done()
 	}()
 
@@ -715,11 +727,11 @@ func (hashmap *Hashmap) KeysValuesList() (
 	return keys, values
 }
 
-func (hashmap *Hashmap) KeysValuePairs() *[]KeyValuePair {
-	pairs := make([]KeyValuePair, hashmap.Length())
+func (it *Hashmap) KeysValuePairs() *[]KeyValuePair {
+	pairs := make([]KeyValuePair, it.Length())
 
 	i := 0
-	for k, v := range *hashmap.items {
+	for k, v := range it.items {
 		pairs[i] = KeyValuePair{
 			Key:   k,
 			Value: v,
@@ -731,30 +743,30 @@ func (hashmap *Hashmap) KeysValuePairs() *[]KeyValuePair {
 	return &pairs
 }
 
-func (hashmap *Hashmap) KeysValuesListLock() (
+func (it *Hashmap) KeysValuesListLock() (
 	keys, values *[]string,
 ) {
-	hashmap.Lock()
+	it.Lock()
 	wg := &sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
-		keys = hashmap.Keys()
+		keys = it.Keys()
 		wg.Done()
 	}()
 	go func() {
-		values = hashmap.ValuesListPtr()
+		values = it.ValuesListPtr()
 		wg.Done()
 	}()
 
 	wg.Wait()
-	hashmap.Unlock()
+	it.Unlock()
 
 	return keys, values
 }
 
-func (hashmap *Hashmap) Keys() *[]string {
-	length := len(*hashmap.items)
+func (it *Hashmap) Keys() *[]string {
+	length := len(it.items)
 	keys := make([]string, length)
 
 	if length == 0 {
@@ -762,7 +774,7 @@ func (hashmap *Hashmap) Keys() *[]string {
 	}
 
 	i := 0
-	for k := range *hashmap.items {
+	for k := range it.items {
 		keys[i] = k
 		i++
 	}
@@ -770,14 +782,14 @@ func (hashmap *Hashmap) Keys() *[]string {
 	return &keys
 }
 
-func (hashmap *Hashmap) KeysCollection() *Collection {
+func (it *Hashmap) KeysCollection() *Collection {
 	return NewCollectionUsingStrings(
-		hashmap.Keys(),
+		it.Keys(),
 		false)
 }
 
-func (hashmap *Hashmap) KeysLock() *[]string {
-	length := hashmap.LengthLock()
+func (it *Hashmap) KeysLock() *[]string {
+	length := it.LengthLock()
 	keys := make([]string, length)
 
 	if length == 0 {
@@ -785,127 +797,125 @@ func (hashmap *Hashmap) KeysLock() *[]string {
 	}
 
 	i := 0
-	hashmap.Lock()
-	for k := range *hashmap.items {
+	it.Lock()
+	for k := range it.items {
 		keys[i] = k
 		i++
 	}
 
-	hashmap.Unlock()
+	it.Unlock()
 
 	return &keys
 }
 
 // ValuesListCopyPtrLock  a slice must returned
-func (hashmap *Hashmap) ValuesListCopyPtrLock() *[]string {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) ValuesListCopyPtrLock() *[]string {
+	it.Lock()
+	defer it.Unlock()
 
-	return &(*hashmap.ValuesListPtr())
+	return &(*it.ValuesListPtr())
 }
 
-func (hashmap *Hashmap) setCached() {
-	length := hashmap.Length()
+func (it *Hashmap) setCached() {
+	length := it.Length()
 	list := make([]string, length)
 
 	if length == 0 {
-		hashmap.cachedList = &list
-		hashmap.hasMapUpdated = false
+		it.cachedList = list
+		it.hasMapUpdated = false
 
 		return
 	}
 
 	i := 0
 
-	for _, val := range *hashmap.items {
+	for _, val := range it.items {
 		list[i] = val
 		i++
 	}
 
-	hashmap.hasMapUpdated = false
-	hashmap.cachedList = &list
+	it.hasMapUpdated = false
+	it.cachedList = list
 }
 
 // ValuesToLower Create a new items with all lower strings
-func (hashmap *Hashmap) ValuesToLower() *Hashmap {
-	newMap := make(map[string]string, hashmap.Length())
+func (it *Hashmap) ValuesToLower() *Hashmap {
+	newMap := make(map[string]string, it.Length())
 
 	var toLower string
-	for key, value := range *hashmap.items {
+	for key, value := range it.items {
 		toLower = strings.ToLower(key)
 		newMap[toLower] = value
 	}
 
 	return NewHashmapUsingMap(
-		&newMap,
+		newMap,
 		0,
 		false)
 }
 
-func (hashmap *Hashmap) Length() int {
-	if hashmap.hasMapUpdated || hashmap.length < 0 {
-		if hashmap.items == nil || *hashmap.items == nil {
-			hashmap.length = 0
-
-			return hashmap.length
-		}
-
-		hashmap.length = len(*hashmap.items)
+func (it *Hashmap) Length() int {
+	if it == nil {
+		return 0
 	}
 
-	return hashmap.length
+	if it.hasMapUpdated || it.length < 0 {
+		it.length = len(it.items)
+	}
+
+	return it.length
 }
 
-func (hashmap *Hashmap) LengthLock() int {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) LengthLock() int {
+	it.Lock()
+	defer it.Unlock()
 
-	return hashmap.Length()
+	return it.Length()
 }
 
 //goland:noinspection GoLinterLocal,GoVetCopyLock
-func (hashmap *Hashmap) IsEquals(another Hashmap) bool { //nolint:govet
-	return hashmap.IsEqualsPtr(&another)
+func (it *Hashmap) IsEquals(another Hashmap) bool { //nolint:govet
+	return it.IsEqualsPtr(&another)
 }
 
-func (hashmap *Hashmap) IsEqualsPtrLock(another *Hashmap) bool {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) IsEqualsPtrLock(another *Hashmap) bool {
+	it.Lock()
+	defer it.Unlock()
 
-	return hashmap.IsEqualsPtr(another)
+	return it.IsEqualsPtr(another)
 }
 
-func (hashmap *Hashmap) IsEqualsPtr(another *Hashmap) bool {
-	if hashmap == nil && another == nil {
+func (it *Hashmap) IsEqualsPtr(another *Hashmap) bool {
+	if it == nil && another == nil {
 		return true
 	}
 
-	if hashmap == nil || another == nil {
+	if it == nil || another == nil {
 		return false
 	}
 
-	if hashmap == another {
+	if it == another {
 		// ptr same
 		return true
 	}
 
-	if hashmap.IsEmpty() && another.IsEmpty() {
+	if it.IsEmpty() && another.IsEmpty() {
 		return true
 	}
 
-	if hashmap.IsEmpty() || another.IsEmpty() {
+	if it.IsEmpty() || another.IsEmpty() {
 		return false
 	}
 
-	leftLength := hashmap.Length()
+	leftLength := it.Length()
 	rightLength := another.Length()
 
 	if leftLength != rightLength {
 		return false
 	}
 
-	for key, value := range *hashmap.items {
-		result, has := (*another.items)[key]
+	for key, value := range it.items {
+		result, has := another.items[key]
 
 		if !has || !(result != value) {
 			return false
@@ -915,44 +925,44 @@ func (hashmap *Hashmap) IsEqualsPtr(another *Hashmap) bool {
 	return true
 }
 
-func (hashmap *Hashmap) Remove(key string) *Hashmap {
-	delete(*hashmap.items, key)
-	hashmap.hasMapUpdated = true
+func (it *Hashmap) Remove(key string) *Hashmap {
+	delete(it.items, key)
+	it.hasMapUpdated = true
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) RemoveWithLock(key string) *Hashmap {
-	hashmap.Lock()
-	defer hashmap.Unlock()
+func (it *Hashmap) RemoveWithLock(key string) *Hashmap {
+	it.Lock()
+	defer it.Unlock()
 
-	hashmap.Remove(key)
+	it.Remove(key)
 
-	return hashmap
+	return it
 }
 
-func (hashmap *Hashmap) String() string {
-	if hashmap.IsEmpty() {
+func (it *Hashmap) String() string {
+	if it.IsEmpty() {
 		return commonJoiner + NoElements
 	}
 
 	return commonJoiner +
 		strings.Join(
-			hashmap.ValuesList(),
+			it.ValuesList(),
 			commonJoiner)
 }
 
-func (hashmap *Hashmap) StringLock() string {
-	if hashmap.IsEmptyLock() {
+func (it *Hashmap) StringLock() string {
+	if it.IsEmptyLock() {
 		return commonJoiner + NoElements
 	}
 
-	hashmap.Lock()
-	defer hashmap.Unlock()
+	it.Lock()
+	defer it.Unlock()
 
 	return commonJoiner +
 		strings.Join(
-			*hashmap.ValuesListPtr(),
+			*it.ValuesListPtr(),
 			commonJoiner)
 }
 
@@ -961,19 +971,19 @@ func (hashmap *Hashmap) StringLock() string {
 // It is like set A - B
 // Set A = this Hashmap
 // Set B = anotherHashset given in parameters.
-func (hashmap *Hashmap) GetValuesExceptKeysInHashset(
+func (it *Hashmap) GetValuesExceptKeysInHashset(
 	anotherHashset *Hashset,
 ) *[]string {
 	if anotherHashset == nil || anotherHashset.IsEmpty() {
-		return hashmap.ValuesListPtr()
+		return it.ValuesListPtr()
 	}
 
 	finalList := make(
 		[]string,
 		0,
-		hashmap.Length())
+		it.Length())
 
-	for key, value := range *hashmap.items {
+	for key, value := range it.items {
 		if anotherHashset.Has(key) {
 			continue
 		}
@@ -991,17 +1001,17 @@ func (hashmap *Hashmap) GetValuesExceptKeysInHashset(
 // It is like set A - B
 // Set A = this Hashmap
 // Set B = items given in parameters.
-func (hashmap *Hashmap) GetValuesKeysExcept(
+func (it *Hashmap) GetValuesKeysExcept(
 	items *[]string,
 ) *[]string {
 	if items == nil {
-		return hashmap.ValuesListPtr()
+		return it.ValuesListPtr()
 	}
 
 	newCollection := NewHashsetUsingStrings(
 		items)
 
-	return hashmap.GetValuesExceptKeysInHashset(
+	return it.GetValuesExceptKeysInHashset(
 		newCollection)
 }
 
@@ -1010,14 +1020,14 @@ func (hashmap *Hashmap) GetValuesKeysExcept(
 // It is like set A - B
 // Set A = this Hashmap
 // Set B = collection given in parameters.
-func (hashmap *Hashmap) GetAllExceptCollection(
+func (it *Hashmap) GetAllExceptCollection(
 	collection *Collection,
 ) *[]string {
 	if collection == nil {
-		return hashmap.ValuesListPtr()
+		return it.ValuesListPtr()
 	}
 
-	return hashmap.GetValuesExceptKeysInHashset(
+	return it.GetValuesExceptKeysInHashset(
 		collection.HashsetAsIs())
 }
 
@@ -1026,89 +1036,85 @@ func (hashmap *Hashmap) GetAllExceptCollection(
 // It is like set A - B
 // Set A = this Hashmap
 // Set B = collectionPtr given in parameters.
-func (hashmap *Hashmap) GetAllExceptCollectionPtr(
+func (it *Hashmap) GetAllExceptCollectionPtr(
 	collectionPtr *CollectionPtr,
 ) *[]string {
 	if collectionPtr == nil {
-		return hashmap.ValuesListPtr()
+		return it.ValuesListPtr()
 	}
 
-	return hashmap.GetValuesExceptKeysInHashset(
+	return it.GetValuesExceptKeysInHashset(
 		collectionPtr.HashsetAsIs())
 }
 
 // Join values
-func (hashmap *Hashmap) Join(
+func (it *Hashmap) Join(
 	separator string,
 ) string {
-	return strings.Join(*hashmap.ValuesListPtr(), separator)
+	return strings.Join(*it.ValuesListPtr(), separator)
 }
 
-func (hashmap *Hashmap) JoinKeys(
+func (it *Hashmap) JoinKeys(
 	separator string,
 ) string {
-	return strings.Join(*hashmap.Keys(), separator)
+	return strings.Join(*it.Keys(), separator)
 }
 
-func (hashmap *Hashmap) JsonModel() *HashmapDataModel {
-	return NewHashmapsDataModelUsing(hashmap)
+func (it *Hashmap) JsonModel() *HashmapDataModel {
+	return NewHashmapsDataModelUsing(it)
 }
 
-func (hashmap *Hashmap) JsonModelAny() interface{} {
-	return hashmap.JsonModel()
+func (it *Hashmap) JsonModelAny() interface{} {
+	return it.JsonModel()
 }
 
-func (hashmap *Hashmap) MarshalJSON() ([]byte, error) {
-	return json.Marshal(hashmap.JsonModel())
+func (it *Hashmap) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.JsonModel())
 }
 
-func (hashmap *Hashmap) UnmarshalJSON(data []byte) error {
+func (it *Hashmap) UnmarshalJSON(data []byte) error {
 	var dataModel HashmapDataModel
 	err := json.Unmarshal(data, &dataModel)
 
 	if err == nil {
-		hashmap.items = dataModel.Items
-		hashmap.length = len(*hashmap.items)
-		hashmap.hasMapUpdated = false
-		hashmap.isEmptySet = hashmap.length == 0
-		hashmap.cachedList = nil
+		it.items = dataModel.Items
+		it.length = len(it.items)
+		it.hasMapUpdated = false
+		it.isEmptySet = it.length == 0
+		it.cachedList = nil
 	}
 
 	return err
 }
 
-func (hashmap *Hashmap) Json() *corejson.Result {
-	if hashmap.IsEmpty() {
+func (it *Hashmap) Json() *corejson.Result {
+	if it.IsEmpty() {
 		return corejson.EmptyWithoutErrorPtr()
 	}
 
-	jsonBytes, err := json.Marshal(hashmap)
+	jsonBytes, err := json.Marshal(it)
 
 	return corejson.NewPtr(jsonBytes, err)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
-func (hashmap *Hashmap) ParseInjectUsingJson(
+func (it *Hashmap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashmap, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyHashmap(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &hashmap)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptyHashmap(), err
 	}
 
-	return hashmap, nil
+	return it, nil
 }
 
 // ParseInjectUsingJsonMust Panic if error
-func (hashmap *Hashmap) ParseInjectUsingJsonMust(
+func (it *Hashmap) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *Hashmap {
-	hashSet, err := hashmap.ParseInjectUsingJson(jsonResult)
+	hashSet, err := it.ParseInjectUsingJson(jsonResult)
 
 	if err != nil {
 		panic(err)
@@ -1117,28 +1123,28 @@ func (hashmap *Hashmap) ParseInjectUsingJsonMust(
 	return hashSet
 }
 
-func (hashmap *Hashmap) ToError(sep string) error {
-	return msgtype.SliceError(sep, hashmap.KeyValStringLines())
+func (it *Hashmap) ToError(sep string) error {
+	return msgtype.SliceError(sep, it.KeyValStringLines())
 }
 
-func (hashmap *Hashmap) ToDefaultError() error {
+func (it *Hashmap) ToDefaultError() error {
 	return msgtype.SliceError(
-		constants.NewLineUnix, hashmap.KeyValStringLines())
+		constants.NewLineUnix, it.KeyValStringLines())
 }
 
-func (hashmap *Hashmap) KeyValStringLines() *[]string {
-	return hashmap.ToStringsUsingCompiler(func(key, val string) string {
+func (it *Hashmap) KeyValStringLines() *[]string {
+	return it.ToStringsUsingCompiler(func(key, val string) string {
 		return key + constants.HypenAngelRight + val
 	})
 }
 
-func (hashmap *Hashmap) ToStringsUsingCompiler(
+func (it *Hashmap) ToStringsUsingCompiler(
 	compilerFunc func(
 		key,
 		val string,
 	) string,
 ) *[]string {
-	length := hashmap.Length()
+	length := it.Length()
 	slice := make([]string, length)
 
 	if length == 0 {
@@ -1146,7 +1152,7 @@ func (hashmap *Hashmap) ToStringsUsingCompiler(
 	}
 
 	index := 0
-	for key, val := range *hashmap.items {
+	for key, val := range it.items {
 		line := compilerFunc(key, val)
 		slice[index] = line
 
@@ -1156,24 +1162,24 @@ func (hashmap *Hashmap) ToStringsUsingCompiler(
 	return &slice
 }
 
-func (hashmap *Hashmap) AsJsoner() corejson.Jsoner {
-	return hashmap
+func (it *Hashmap) AsJsoner() corejson.Jsoner {
+	return it
 }
 
-func (hashmap *Hashmap) JsonParseSelfInject(
+func (it *Hashmap) JsonParseSelfInject(
 	jsonResult *corejson.Result,
 ) error {
-	_, err := hashmap.ParseInjectUsingJson(
+	_, err := it.ParseInjectUsingJson(
 		jsonResult,
 	)
 
 	return err
 }
 
-func (hashmap *Hashmap) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
-	return hashmap
+func (it *Hashmap) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return it
 }
 
-func (hashmap *Hashmap) AsJsonMarshaller() corejson.JsonMarshaller {
-	return hashmap
+func (it *Hashmap) AsJsonMarshaller() corejson.JsonMarshaller {
+	return it
 }

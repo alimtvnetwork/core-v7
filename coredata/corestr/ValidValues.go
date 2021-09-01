@@ -313,7 +313,7 @@ func (it *ValidValues) Hashmap() *Hashmap {
 	return hashmap
 }
 
-func (it *ValidValues) Map() *map[string]string {
+func (it *ValidValues) Map() map[string]string {
 	hashmap := it.Hashmap()
 
 	return hashmap.items

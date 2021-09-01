@@ -212,7 +212,7 @@ func (it *KeyValueCollection) AddsHashmap(
 		return it
 	}
 
-	for key, val := range *hashmap.items {
+	for key, val := range hashmap.items {
 		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
 			Key:   key,
 			Value: val,
@@ -237,7 +237,7 @@ func (it *KeyValueCollection) Hashmap() *Hashmap {
 	return hashmap
 }
 
-func (it *KeyValueCollection) Map() *map[string]string {
+func (it *KeyValueCollection) Map() map[string]string {
 	hashmap := it.Hashmap()
 
 	return hashmap.items

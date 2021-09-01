@@ -10,7 +10,6 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 )
 
@@ -19,7 +18,7 @@ type Hashset struct {
 	isEmptySet    bool
 	length        int
 	items         map[string]bool
-	cachedList    *[]string
+	cachedList    []string
 	sync.Mutex
 }
 
@@ -951,7 +950,7 @@ func (it *Hashset) ListPtr() *[]string {
 		it.setCached()
 	}
 
-	return it.cachedList
+	return &it.cachedList
 }
 
 // ListCopyPtrLock a slice must returned
@@ -975,7 +974,7 @@ func (it *Hashset) setCached() {
 	}
 
 	it.hasMapUpdated = false
-	it.cachedList = &list
+	it.cachedList = list
 }
 
 // ToLowerSet Create a new items with all lower strings
@@ -1172,11 +1171,7 @@ func (it *Hashset) Json() *corejson.Result {
 func (it *Hashset) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashset, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyHashset(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &it)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptyHashset(), err

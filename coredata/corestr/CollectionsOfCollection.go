@@ -8,7 +8,6 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type CollectionsOfCollection struct {
@@ -290,11 +289,7 @@ func (cc *CollectionsOfCollection) Json() *corejson.Result {
 func (cc *CollectionsOfCollection) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CollectionsOfCollection, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyCollectionsOfCollection(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &cc)
+	err := jsonResult.Unmarshal(&cc)
 
 	if err != nil {
 		return EmptyCollectionsOfCollection(), err

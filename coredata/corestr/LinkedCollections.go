@@ -9,7 +9,6 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -719,12 +718,9 @@ func (it *LinkedCollections) RemoveNodeByIndexes(
 			HandleUsingPanic("removingIndexes cannot be removed from empty LinkedCollections.", removingIndexes)
 	}
 
-	removingIndexesCopy := removingIndexes
-	removingIndexesCopyPtr := &removingIndexesCopy
-
 	nonChainedNodes := it.Filter(
 		func(arg *LinkedCollectionFilterParameter) *LinkedCollectionFilterResult {
-			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopyPtr, arg.Index)
+			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexes, arg.Index)
 			if hasIndex {
 				// remove
 				return &LinkedCollectionFilterResult{
@@ -1496,11 +1492,7 @@ func (it *LinkedCollections) Json() *corejson.Result {
 func (it *LinkedCollections) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*LinkedCollections, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyLinkedCollections(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &it)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptyLinkedCollections(), err

@@ -2,6 +2,7 @@ package corevalidator
 
 type ValidatorParamsBase struct {
 	CaseIndex                         int
+	Header                            string
 	IsIgnoreCompareOnActualInputEmpty bool
 	IsAttachUserInputs                bool
 	IsCaseSensitive                   bool

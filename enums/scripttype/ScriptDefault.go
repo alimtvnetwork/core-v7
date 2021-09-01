@@ -8,13 +8,13 @@ import (
 
 type ScriptDefault struct {
 	ScriptType       Variant
+	IsImplemented    bool
 	ProcessName      string
 	DefaultArguments []string
-	IsImplemented    bool
 }
 
-func (receiver *ScriptDefault) String() string {
+func (it *ScriptDefault) String() string {
 	return fmt.Sprint(
-		receiver.ScriptType.String(),
-		converters.AnyToString(*receiver))
+		it.ScriptType.String(),
+		converters.AnyToValueString(*it))
 }

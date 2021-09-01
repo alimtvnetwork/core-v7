@@ -11,7 +11,7 @@ import (
 
 type Result struct {
 	jsonString *string
-	Bytes      *[]byte
+	Bytes      []byte
 	Error      error
 }
 
@@ -29,7 +29,7 @@ func (it *Result) JsonStringPtr() *string {
 	}
 
 	if it.jsonString == nil && it.HasBytes() {
-		jsonString := string(*it.Bytes)
+		jsonString := string(it.Bytes)
 		it.jsonString = &jsonString
 	} else if it.jsonString == nil {
 		emptyStr := ""
@@ -44,7 +44,7 @@ func (it *Result) Length() int {
 		return 0
 	}
 
-	return len(*it.Bytes)
+	return len(it.Bytes)
 }
 
 func (it *Result) HasError() bool {
@@ -60,12 +60,12 @@ func (it *Result) String() string {
 }
 
 func (it *Result) ValuesNonPtr() []byte {
-	return *it.ValueMust()
+	return it.ValueMust()
 }
 
-func (it *Result) ValueMust() *[]byte {
+func (it *Result) ValueMust() []byte {
 	if it.HasIssuesOrEmpty() {
-		return &[]byte{}
+		return []byte{}
 	}
 
 	return it.Bytes
@@ -139,7 +139,7 @@ func (it *Result) IsEmptyJsonBytes() bool {
 		return isEmptyFirst
 	}
 
-	length := len(*it.Bytes)
+	length := len(it.Bytes)
 
 	if length == 0 {
 		return true
@@ -147,15 +147,15 @@ func (it *Result) IsEmptyJsonBytes() bool {
 
 	if length == 2 {
 		// empty json
-		return (*it.Bytes)[coreindexes.First] == constants.CurlyBraceStartChar &&
-			(*it.Bytes)[coreindexes.Second] == constants.CurlyBraceEndChar
+		return (it.Bytes)[coreindexes.First] == constants.CurlyBraceStartChar &&
+			(it.Bytes)[coreindexes.Second] == constants.CurlyBraceEndChar
 	}
 
 	return false
 }
 
 func (it *Result) IsEmptyJson() bool {
-	return it == nil || it.Bytes == nil || len(*it.Bytes) == 0
+	return it == nil || len(it.Bytes) == 0
 }
 
 func (it *Result) HasJson() bool {
@@ -169,11 +169,22 @@ func (it *Result) InjectInto(
 }
 
 func (it *Result) Unmarshal(any interface{}) error {
+	if it == nil {
+		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
 	if it.HasError() {
 		return it.Error
 	}
 
-	return json.Unmarshal(*it.Bytes, any)
+	return json.Unmarshal(it.Bytes, any)
+}
+
+func (it *Result) UnmarshalResult() (*Result, error) {
+	empty := EmptyWithoutErrorPtr()
+	err := it.Unmarshal(empty)
+
+	return empty, err
 }
 
 //goland:noinspection GoLinterLocal
@@ -201,8 +212,11 @@ func (it *Result) UnmarshalJSON(data []byte) error {
 	return err
 }
 
+// Json result itself is marshaled to new JsonResult
+//
+// to have it back use Unmarshal on an empty
 func (it *Result) Json() *Result {
-	return it
+	return NewFromAny(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -214,7 +228,7 @@ func (it *Result) ParseInjectUsingJson(
 	}
 
 	err := json.Unmarshal(
-		*jsonResultIn.Bytes,
+		jsonResultIn.Bytes,
 		&it)
 
 	if err != nil {

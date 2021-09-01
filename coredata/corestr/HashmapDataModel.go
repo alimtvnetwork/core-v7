@@ -3,14 +3,14 @@ package corestr
 import "sync"
 
 type HashmapDataModel struct {
-	Items *map[string]string `json:"Hashmap"`
+	Items map[string]string `json:"Hashmap"`
 }
 
 func NewHashmapUsingDataModel(dataModel *HashmapDataModel) *Hashmap {
 	length := 0
 
 	if dataModel.Items != nil {
-		length = len(*dataModel.Items)
+		length = len(dataModel.Items)
 	}
 
 	return &Hashmap{

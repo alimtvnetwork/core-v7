@@ -32,6 +32,7 @@ const (
 	Hyphen                                    = "-"
 	Semicolon                                 = ";"
 	Comma                                     = ","
+	CommaUnixNewLine                          = ",\n"
 	CommaSpace                                = ", "
 	SpaceColonSpace                           = " : "
 	Pipe                                      = "|"

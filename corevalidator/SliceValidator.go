@@ -330,7 +330,7 @@ func (it *SliceValidator) AllVerifyErrorUptoLength(
 	if params.IsAttachUserInputs && len(sliceErr) > constants.Zero {
 		sliceErr = append(
 			sliceErr,
-			it.ActualInputWithExpectingMessage())
+			it.ActualInputWithExpectingMessage(params.Header))
 	}
 
 	return msgtype.SliceToError(sliceErr)
@@ -439,14 +439,14 @@ func (it *SliceValidator) initialVerifyErrorWithMerged(
 	return nil
 }
 
-func (it *SliceValidator) ActualInputWithExpectingMessage() string {
-	return it.ActualInputMessage() +
+func (it *SliceValidator) ActualInputWithExpectingMessage(header string) string {
+	return it.ActualInputMessage(header) +
 		it.UserExpectingMessage()
 }
 
-func (it *SliceValidator) ActualInputMessage() string {
+func (it *SliceValidator) ActualInputMessage(header string) string {
 	return msgtype.MsgHeaderPlusEnding(
-		actualUserInputsMessage,
+		actualUserInputsMessage + header,
 		it.ActualLinesString())
 }
 
@@ -472,11 +472,11 @@ func (it *SliceValidator) UserInputsMergeWithError(
 	}
 
 	if err == nil {
-		return errors.New(it.ActualInputWithExpectingMessage())
+		return errors.New(it.ActualInputWithExpectingMessage(paramsBase.Header))
 	}
 
 	msg := err.Error() +
-		it.ActualInputWithExpectingMessage()
+		it.ActualInputWithExpectingMessage(paramsBase.Header)
 
 	return errors.New(msg)
 }

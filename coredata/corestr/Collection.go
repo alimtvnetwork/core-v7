@@ -14,7 +14,6 @@ import (
 	"gitlab.com/evatix-go/core/coredata/stringslice"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/simplewrap"
@@ -398,7 +397,7 @@ func (it *Collection) AddHashmapsValues(
 			continue
 		}
 
-		for _, v := range *hashmap.items {
+		for _, v := range hashmap.items {
 			*it.items = append(
 				*it.items,
 				v)
@@ -424,7 +423,7 @@ func (it *Collection) AddHashmapsKeys(
 			continue
 		}
 
-		for k := range *hashmap.items {
+		for k := range hashmap.items {
 			*it.items = append(
 				*it.items,
 				k)
@@ -583,7 +582,7 @@ func (it *Collection) AddHashmapsKeysValues(
 			continue
 		}
 
-		for k, v := range *hashmap.items {
+		for k, v := range hashmap.items {
 			*it.items = append(
 				*it.items,
 				k)
@@ -613,7 +612,7 @@ func (it *Collection) AddHashmapsKeysValuesUsingFilter(
 			continue
 		}
 
-		for k, v := range *hashmap.items {
+		for k, v := range hashmap.items {
 			result, isAcceptable, isBreak := filter(KeyValuePair{
 				Key:   k,
 				Value: v,
@@ -2196,11 +2195,7 @@ func (it *Collection) Json() *corejson.Result {
 func (it *Collection) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Collection, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyCollection(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &it)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptyCollection(), err

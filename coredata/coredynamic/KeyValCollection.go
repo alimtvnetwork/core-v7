@@ -9,7 +9,7 @@ import (
 )
 
 type KeyValCollection struct {
-	items *[]*KeyVal
+	items []*KeyVal
 }
 
 func EmptyKeyValCollection() *KeyValCollection {
@@ -19,71 +19,75 @@ func EmptyKeyValCollection() *KeyValCollection {
 func NewKeyValCollection(capacity int) *KeyValCollection {
 	slice := make([]*KeyVal, 0, capacity)
 
-	return &KeyValCollection{items: &slice}
+	return &KeyValCollection{items: slice}
 }
 
-func (receiver *KeyValCollection) Length() int {
-	return len(*receiver.items)
+func (it *KeyValCollection) Length() int {
+	if it == nil {
+		return 0
+	}
+
+	return len(it.items)
 }
 
-func (receiver *KeyValCollection) IsEmpty() bool {
-	return receiver.Length() == 0
+func (it *KeyValCollection) IsEmpty() bool {
+	return it.Length() == 0
 }
 
-func (receiver *KeyValCollection) HasAnyItem() bool {
-	return receiver.Length() > 0
+func (it *KeyValCollection) HasAnyItem() bool {
+	return it.Length() > 0
 }
 
-func (receiver *KeyValCollection) AddPtr(
+func (it *KeyValCollection) AddPtr(
 	keyVal *KeyVal,
 ) *KeyValCollection {
-	*receiver.items = append(*receiver.items, keyVal)
+	it.items = append(it.items, keyVal)
 
-	return receiver
+	return it
 }
 
-func (receiver *KeyValCollection) AddMany(
+func (it *KeyValCollection) AddMany(
 	keyValues ...*KeyVal,
 ) *KeyValCollection {
 	if keyValues == nil || len(keyValues) == 0 {
-		return receiver
+		return it
 	}
 
 	for _, keyVal := range keyValues {
-		*receiver.items = append(
-			*receiver.items, keyVal)
+		it.items = append(
+			it.items, keyVal)
 	}
 
-	return receiver
+	return it
 }
 
-func (receiver *KeyValCollection) Items() *[]*KeyVal {
-	return receiver.items
+func (it *KeyValCollection) Items() []*KeyVal {
+	return it.items
 }
 
-func (receiver *KeyValCollection) String() string {
+func (it *KeyValCollection) String() string {
 	return fmt.Sprintf(
 		constants.SprintPropertyNameValueFormat,
-		*receiver.items)
+		it.items)
 }
 
-func (receiver *KeyValCollection) StringJson() (jsonString string, err error) {
-	toBytes, err := json.Marshal(receiver.items)
+func (it *KeyValCollection) StringJson() (jsonString string, err error) {
+	toBytes, err := json.Marshal(it.items)
 
 	if err != nil {
-		return constants.EmptyString, nil
+		return constants.EmptyString, err
 	}
 
-	return string(toBytes), nil
+	return string(toBytes), err
 }
 
-func (receiver *KeyValCollection) StringJsonMust() string {
-	toString, err := receiver.StringJson()
+func (it *KeyValCollection) StringJsonMust() string {
+	toString, err := it.StringJson()
 
 	if err != nil {
 		msgtype.
 			MarshallingFailed.
-			HandleUsingPanic(err.Error(), receiver.items)
+			HandleUsingPanic(err.Error(), it.items)
 	}
 
 	return toString

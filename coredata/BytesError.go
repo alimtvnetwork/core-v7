@@ -6,72 +6,72 @@ import (
 
 type BytesError struct {
 	toString *string
-	Bytes    *[]byte
+	Bytes    []byte
 	Error    error
 }
 
-func (bytesError *BytesError) String() string {
-	return *bytesError.StringPtr()
+func (it *BytesError) String() string {
+	return *it.StringPtr()
 }
 
-func (bytesError *BytesError) StringPtr() *string {
-	if bytesError.toString != nil {
-		return bytesError.toString
+func (it *BytesError) StringPtr() *string {
+	if it.toString != nil {
+		return it.toString
 	}
 
-	if bytesError.toString == nil && bytesError.HasBytes() {
-		jsonString := string(*bytesError.Bytes)
-		bytesError.toString = &jsonString
-	} else if bytesError.toString == nil {
+	if it.toString == nil && it.HasBytes() {
+		jsonString := string(it.Bytes)
+		it.toString = &jsonString
+	} else if it.toString == nil {
 		emptyStr := ""
-		bytesError.toString = &emptyStr
+		it.toString = &emptyStr
 	}
 
-	return bytesError.toString
+	return it.toString
 }
 
-func (bytesError *BytesError) HasError() bool {
-	return bytesError.Error != nil
+func (it *BytesError) HasError() bool {
+	return it != nil && it.Error != nil
 }
 
-func (bytesError *BytesError) IsEmptyError() bool {
-	return bytesError.Error == nil
+func (it *BytesError) IsEmptyError() bool {
+	return it == nil || it.Error == nil
 }
 
-func (bytesError *BytesError) HandleError() {
-	if bytesError.IsEmptyError() {
+func (it *BytesError) HandleError() {
+	if it.IsEmptyError() {
 		return
 	}
 
-	panic(bytesError.Error)
+	panic(it.Error)
 }
 
-func (bytesError *BytesError) HandleErrorWithMsg(msg string) {
-	if bytesError.IsEmptyError() {
+func (it *BytesError) HandleErrorWithMsg(msg string) {
+	if it.IsEmptyError() {
 		return
 	}
 
 	if msg != "" {
-		panic(msg + bytesError.Error.Error())
+		panic(msg + it.Error.Error())
 	}
 
-	panic(bytesError.Error)
+	panic(it.Error)
 }
 
-func (bytesError *BytesError) HasBytes() bool {
-	return !bytesError.IsEmptyOrErrorBytes()
+func (it *BytesError) HasBytes() bool {
+	return !it.IsEmptyOrErrorBytes()
 }
 
 // IsEmptyOrErrorBytes len == 0, nil, {} returns as empty true
-func (bytesError *BytesError) IsEmptyOrErrorBytes() bool {
-	isEmptyFirst := bytesError.HasError() ||
-		bytesError.Bytes == nil
+func (it *BytesError) IsEmptyOrErrorBytes() bool {
+	isEmptyFirst := it.HasError() ||
+		it.Bytes == nil
 
 	if isEmptyFirst {
 		return isEmptyFirst
 	}
 
-	length := len(*bytesError.Bytes)
+	length := len(it.Bytes)
 
 	if length == 0 {
 		return true
@@ -79,13 +79,21 @@ func (bytesError *BytesError) IsEmptyOrErrorBytes() bool {
 
 	if length == 2 {
 		// empty json
-		return (*bytesError.Bytes)[coreindexes.First] == 123 &&
-			(*bytesError.Bytes)[coreindexes.Second] == 125
+		return (it.Bytes)[coreindexes.First] == 123 &&
+			(it.Bytes)[coreindexes.Second] == 125
 	}
 
 	return false
 }
 
-func (bytesError *BytesError) IsEmpty() bool {
-	return bytesError.Bytes == nil || len(*bytesError.Bytes) == 0
+func (it *BytesError) Length() int {
+	if it == nil {
+		return 0
+	}
+
+	return len(it.Bytes)
+}
+
+func (it *BytesError) IsEmpty() bool {
+	return it == nil || len(it.Bytes) == 0
 }

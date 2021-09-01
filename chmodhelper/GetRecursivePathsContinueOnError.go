@@ -8,8 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
-func GetRecursivePaths(
-	isContinueOnError bool,
+func GetRecursivePathsContinueOnError(
 	rootPath string,
 ) ([]string, error) {
 	stat := GetPathExistStat(rootPath)
@@ -21,10 +20,6 @@ func GetRecursivePaths(
 
 	if stat.IsFile() {
 		return []string{rootPath}, nil
-	}
-
-	if isContinueOnError {
-		return GetRecursivePathsContinueOnError(rootPath)
 	}
 
 	allPaths := make(
@@ -41,7 +36,7 @@ func GetRecursivePaths(
 					sliceErr,
 					err.Error()+constants.HypenAngelRight+path)
 
-				return err
+				return nil
 			}
 
 			allPaths = append(allPaths, path)

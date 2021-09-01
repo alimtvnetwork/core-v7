@@ -9,7 +9,6 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 )
@@ -539,13 +538,12 @@ func (linkedList *LinkedList) RemoveNodeByIndexes(
 	}
 
 	removingIndexesCopy := removingIndexes
-	removingIndexesCopyPtr := &removingIndexesCopy
 
 	nonChainedNodes := linkedList.Filter(
 		func(
 			arg *LinkedListFilterParameter,
 		) *LinkedListFilterResult {
-			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopyPtr, arg.Index)
+			hasIndex := coreindexes.HasIndexPlusRemoveIndex(removingIndexesCopy, arg.Index)
 			if hasIndex {
 				// remove
 				return &LinkedListFilterResult{
@@ -1043,11 +1041,7 @@ func (linkedList *LinkedList) Json() *corejson.Result {
 func (linkedList *LinkedList) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*LinkedList, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptyLinkedList(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &linkedList)
+	err := jsonResult.Unmarshal(&linkedList)
 
 	if err != nil {
 		return EmptyLinkedList(), err

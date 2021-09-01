@@ -3,6 +3,7 @@ package issetter
 import (
 	"errors"
 
+	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/defaulterr"
 )
 
@@ -37,6 +38,10 @@ func (v Value) IsTrue() bool {
 // IsFalse v == False
 func (v Value) IsFalse() bool {
 	return v == False
+}
+
+func (v Value) IsTrueOrSet() bool {
+	return v == True || v == Set
 }
 
 // IsSet v == Set
@@ -320,6 +325,18 @@ func (v Value) GetErrorOnOutOfRange(n byte, msg string) error {
 
 func (v Value) Name() string {
 	return valuesToNameMap[v]
+}
+
+func (v Value) YesNoMappedValue() string {
+	if v.IsUninitialized() {
+		return constants.EmptyString
+	}
+
+	if v.IsTrueOrSet() {
+		return Yes
+	}
+
+	return No
 }
 
 func (v Value) MarshalJSON() ([]byte, error) {

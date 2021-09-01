@@ -13,7 +13,7 @@ func VerifyChmodUsingHashmap(
 ) error {
 	var sliceError []string
 
-	for filePath, expectedRwxFull := range *filePathToRwxMap.Items() {
+	for filePath, expectedRwxFull := range filePathToRwxMap.Items() {
 		err := VerifyChmod(filePath, expectedRwxFull)
 
 		if err != nil {

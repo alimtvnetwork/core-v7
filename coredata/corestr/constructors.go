@@ -423,12 +423,11 @@ func NewHashmap(length int) *Hashmap {
 	hashset := make(map[string]string, length)
 
 	return &Hashmap{
-		items:         &hashset,
+		items:         hashset,
 		hasMapUpdated: false,
 		cachedList:    nil,
 		length:        length,
 		isEmptySet:    true,
-		Mutex:         sync.Mutex{},
 	}
 }
 
@@ -472,7 +471,7 @@ func NewHashmapUsingCollection(
 		values.items)
 
 	return NewHashmapUsingMap(
-		itemsMap,
+		*itemsMap,
 		constants.Zero,
 		false)
 }
@@ -489,7 +488,7 @@ func NewHashmapUsingStrings(
 		values)
 
 	return NewHashmapUsingMap(
-		itemsMap,
+		*itemsMap,
 		constants.Zero,
 		false)
 }
@@ -497,19 +496,19 @@ func NewHashmapUsingStrings(
 // NewHashmapUsingMap
 // isMakeClone : copies itemsMap or else use the same one as pointer assign.
 func NewHashmapUsingMap(
-	itemsMap *map[string]string,
+	itemsMap map[string]string,
 	addCapacity int,
 	isMakeClone bool,
 ) *Hashmap {
-	if itemsMap == nil || *itemsMap == nil {
+	if len(itemsMap) == 0 {
 		return NewHashmap(defaultHashsetItems)
 	}
 
-	length := len(*itemsMap)
+	length := len(itemsMap)
 
 	if isMakeClone {
 		hashMap := NewHashmap(length + addCapacity)
-		hashMap.AddOrUpdateMapPtr(itemsMap)
+		hashMap.AddOrUpdateMap(itemsMap)
 
 		return hashMap
 	}
@@ -525,16 +524,16 @@ func NewHashmapUsingMap(
 
 // NewHashmapUsingMapUsingAddCapacity always returns the clone of the items.
 func NewHashmapUsingMapUsingAddCapacity(
-	itemsMap *map[string]string,
+	itemsMap map[string]string,
 	addCapacity int,
 ) *Hashmap {
-	if itemsMap == nil || *itemsMap == nil {
+	if len(itemsMap) == 0 {
 		return NewHashmap(defaultHashsetItems)
 	}
 
-	length := len(*itemsMap)
+	length := len(itemsMap)
 	hashMap := NewHashmap(length + addCapacity)
-	hashMap.AddOrUpdateMapPtr(itemsMap)
+	hashMap.AddOrUpdateMap(itemsMap)
 
 	return hashMap
 }

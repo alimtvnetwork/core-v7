@@ -8,7 +8,6 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/defaulterr"
 )
 
 type SimpleSlice struct {
@@ -270,7 +269,7 @@ func (it *SimpleSlice) JoinCsv() string {
 }
 
 func (it *SimpleSlice) JoinCsvLine() string {
-	return strings.Join(it.CsvStrings(), constants.Comma+constants.NewLineUnix)
+	return strings.Join(it.CsvStrings(), constants.CommaUnixNewLine)
 }
 
 func (it *SimpleSlice) PrependJoin(
@@ -421,8 +420,8 @@ func (it *SimpleSlice) CsvStrings() []string {
 	return newSlice
 }
 
-func (it *SimpleSlice) JsonModel() *SimpleSlice {
-	return it
+func (it *SimpleSlice) JsonModel() []string {
+	return it.Items
 }
 
 func (it *SimpleSlice) JsonModelAny() interface{} {
@@ -436,11 +435,11 @@ func (it *SimpleSlice) MarshalJSON() ([]byte, error) {
 func (it *SimpleSlice) UnmarshalJSON(
 	data []byte,
 ) error {
-	var dataModel SimpleSlice
+	var dataModel []string
 	err := json.Unmarshal(data, &dataModel)
 
 	if err == nil {
-		it.Items = dataModel.Items
+		it.Items = dataModel
 	}
 
 	return err
@@ -459,11 +458,7 @@ func (it *SimpleSlice) Json() *corejson.Result {
 func (it *SimpleSlice) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*SimpleSlice, error) {
-	if jsonResult == nil || jsonResult.IsEmptyJsonBytes() {
-		return EmptySimpleSlice(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(*jsonResult.Bytes, &it)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptySimpleSlice(), err

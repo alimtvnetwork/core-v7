@@ -1,8 +1,6 @@
 package chmodins
 
 import (
-	"encoding/json"
-
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/msgtype"
 )
@@ -21,7 +19,7 @@ func ParseRwxInstructionUsingJsonResult(
 	}
 
 	var rwxInstruction RwxInstruction
-	err := json.Unmarshal(*result.Bytes, &rwxInstruction)
+	err := result.Unmarshal(&rwxInstruction)
 
 	if err != nil {
 		return nil, msgtype.MeaningfulError(

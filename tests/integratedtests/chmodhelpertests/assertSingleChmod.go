@@ -17,7 +17,7 @@ func assertSingleChmod(
 	expectedChmodRwxFullString string,
 ) {
 	fileChmodMap := createPath.GetFilesChmodMap()
-	for filePath, chmodValueString := range *fileChmodMap.Items() {
+	for filePath, chmodValueString := range fileChmodMap.Items() {
 		convey.Convey(testHeader, t, func() {
 			isEqual := chmodValueString == expectedChmodRwxFullString
 

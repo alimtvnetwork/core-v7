@@ -3,7 +3,7 @@ package corejson
 import "gitlab.com/evatix-go/core/constants"
 
 type ResultModel struct {
-	Bytes    *[]byte
+	Bytes    []byte
 	Error    string
 	HasError bool
 }
@@ -11,7 +11,7 @@ type ResultModel struct {
 func NewModel(result *Result) *ResultModel {
 	if result == nil {
 		return &ResultModel{
-			Bytes: &[]byte{},
+			Bytes: []byte{},
 			Error: constants.EmptyString,
 		}
 	}
