@@ -1185,3 +1185,20 @@ func (it *Hashmap) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
 func (it *Hashmap) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
 }
+
+func (it *Hashmap) ClonePtr() *Hashmap {
+	if it == nil {
+		return nil
+	}
+
+	cloned := it.Clone()
+
+	return &cloned
+}
+
+func (it Hashmap) Clone() Hashmap {
+	empty := EmptyHashmap()
+	jsonResult := it.JsonPtr()
+
+	return *empty.ParseInjectUsingJsonMust(jsonResult)
+}

@@ -361,12 +361,19 @@ func (it *SimpleStringOnce) SplitTrimNonWhitespace(
 	return slice
 }
 
-func (it *SimpleStringOnce) Clone() *SimpleStringOnce {
+func (it *SimpleStringOnce) ClonePtr() *SimpleStringOnce {
 	if it == nil {
 		return nil
 	}
 
 	return &SimpleStringOnce{
+		value:         it.value,
+		isInitialized: it.isInitialized,
+	}
+}
+
+func (it SimpleStringOnce) Clone() SimpleStringOnce {
+	return SimpleStringOnce{
 		value:         it.value,
 		isInitialized: it.isInitialized,
 	}

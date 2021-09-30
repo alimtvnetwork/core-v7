@@ -7,10 +7,8 @@ func CloneSlice(items []string) []string {
 
 	slice := make(
 		[]string,
-		0,
 		len(items))
-
-	slice = append(slice, items...)
+	copy(slice, items)
 
 	return slice
 }

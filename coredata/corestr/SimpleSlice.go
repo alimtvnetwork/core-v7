@@ -527,3 +527,20 @@ func (it *SimpleSlice) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector 
 func (it *SimpleSlice) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
 }
+
+func (it SimpleSlice) Clone(isDeepClone bool) SimpleSlice {
+	return SimpleSlice{
+		Items: CloneSliceIf(isDeepClone, it.Items...),
+	}
+}
+
+func (it *SimpleSlice) ClonePtr(isDeepClone bool) *SimpleSlice {
+	if it == nil {
+		return nil
+	}
+
+	cloned := it.Clone(
+		isDeepClone)
+
+	return &cloned
+}
