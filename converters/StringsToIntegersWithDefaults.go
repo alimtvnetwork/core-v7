@@ -11,13 +11,13 @@ import (
 
 // StringsToIntegersWithDefaults On fail use the default int
 func StringsToIntegersWithDefaults(
-	strArray *[]string,
 	defaultInt int,
+	strArray ...string,
 ) *coreconverted.Integers {
-	results := make([]int, 0, len(*strArray))
+	results := make([]int, 0, len(strArray))
 	var errMessages []string
 
-	for i, v := range *strArray {
+	for i, v := range strArray {
 		vInt, err := strconv.Atoi(v)
 
 		if err != nil {

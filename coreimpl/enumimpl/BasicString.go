@@ -3,6 +3,7 @@ package enumimpl
 import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
@@ -50,7 +51,7 @@ func NewBasicString(
 	}
 }
 
-func (receiver *BasicString) IsAnyOf(value string, checkingItems ...string) bool {
+func (it *BasicString) IsAnyOf(value string, checkingItems ...string) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -64,39 +65,57 @@ func (receiver *BasicString) IsAnyOf(value string, checkingItems ...string) bool
 	return false
 }
 
-func (receiver *BasicString) Max() string {
-	return receiver.maxVal
+func (it *BasicString) Max() string {
+	return it.maxVal
 }
 
-func (receiver *BasicString) Min() string {
-	return receiver.minVal
+func (it *BasicString) Min() string {
+	return it.minVal
 }
 
-func (receiver *BasicString) Ranges() []string {
-	return receiver.actualValueRanges.([]string)
+func (it *BasicString) Ranges() []string {
+	return it.actualValueRanges.([]string)
 }
 
-func (receiver *BasicString) Hashset() map[string]bool {
-	return receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicString) Hashset() map[string]bool {
+	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicString) HashsetPtr() *map[string]bool {
-	return &receiver.jsonDoubleQuoteNameToValueHashMap
+func (it *BasicString) HashsetPtr() *map[string]bool {
+	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (receiver *BasicString) IsValidRange(value string) bool {
-	return receiver.jsonDoubleQuoteNameToValueHashMap[value]
+func (it *BasicString) IsValidRange(value string) bool {
+	return it.jsonDoubleQuoteNameToValueHashMap[value]
+}
+
+func (it *BasicString) AppendPrependJoinValue(
+	joiner string,
+	appendVal, prependVal string,
+) string {
+	return it.ToEnumString(prependVal) +
+		joiner +
+		it.ToEnumString(appendVal)
+}
+
+func (it *BasicString) AppendPrependJoinNamer(
+	joiner string,
+	appendVal, prependVal coreinterface.ToNamer,
+) string {
+	return prependVal.Name() +
+		joiner +
+		appendVal.Name()
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (receiver *BasicString) ToEnumJsonBytes(value string) []byte {
-	return receiver.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it *BasicString) ToEnumJsonBytes(value string) []byte {
+	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (receiver *BasicString) UnmarshallToValue(
+func (it *BasicString) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
 ) (string, error) {
@@ -106,12 +125,12 @@ func (receiver *BasicString) UnmarshallToValue(
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
 	str := string(jsonUnmarshallingValue)
 	if isMappedToFirstIfEmpty && (str == "" || str == `""`) {
-		return receiver.minVal, nil
+		return it.minVal, nil
 	}
 
 	return str, nil

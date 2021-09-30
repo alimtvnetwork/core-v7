@@ -1,30 +1,30 @@
 package coreconverted
 
 type Bytes struct {
-	Values        *[]byte
+	Values        []byte
 	CombinedError error
 }
 
-func (receiver *Bytes) HasError() bool {
-	return receiver.CombinedError != nil
+func (it *Bytes) HasError() bool {
+	return it.CombinedError != nil
 }
 
-func (receiver *Bytes) Length() int {
-	if receiver.Values == nil {
+func (it *Bytes) Length() int {
+	if it == nil || it.Values == nil {
 		return 0
 	}
 
-	return len(*receiver.Values)
+	return len(it.Values)
 }
 
-func (receiver *Bytes) IsEmpty() bool {
-	return receiver.Length() == 0
+func (it *Bytes) IsEmpty() bool {
+	return it.Length() == 0
 }
 
-func (receiver *Bytes) HandleWithPanic() {
-	if receiver.CombinedError == nil {
+func (it *Bytes) HandleWithPanic() {
+	if it.CombinedError == nil {
 		return
 	}
 
-	panic(receiver.CombinedError)
+	panic(it.CombinedError)
 }

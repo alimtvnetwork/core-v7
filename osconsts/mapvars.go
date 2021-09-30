@@ -30,18 +30,15 @@ var (
 	}
 
 	UnixGroupsMap = map[string]bool{
-		"debian":    true,
-		"linux":     true,
+		"android":   true,
 		"darwin":    true,
-		"mac":       true,
-		"ios":       true,
-		"ubuntu":    true,
 		"dragonfly": true,
 		"freebsd":   true,
-		"openbsd":   true,
+		"linux":     true,
+		"nacl":      true,
 		"netbsd":    true,
+		"openBSD":   true,
 		"plan9":     true,
 		"solaris":   true,
-		"nacl":      true,
 	}
 )

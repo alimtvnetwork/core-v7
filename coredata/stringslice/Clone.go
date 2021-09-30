@@ -2,10 +2,10 @@ package stringslice
 
 // Clone on nil or empty makes new  &[]string{}
 // else makes a copy of itself
-func Clone(slice []string) (slicePtr []string) {
+func Clone(slice []string) (newSlice []string) {
 	if len(slice) == 0 {
 		return []string{}
 	}
 
-	return *MergeNew(slice)
+	return CloneUsingCap(0, slice)
 }

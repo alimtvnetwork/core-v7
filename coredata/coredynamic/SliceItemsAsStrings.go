@@ -26,6 +26,10 @@ func SliceItemsAsStrings(reflectVal reflect.Value) ([]string, error) {
 	length := reflectVal.Len()
 	slice := make([]string, length)
 
+	if length == 0 {
+		return slice, nil
+	}
+
 	for i := 0; i < length; i++ {
 		value := reflectVal.Index(i)
 		toString := fmt.Sprintf(

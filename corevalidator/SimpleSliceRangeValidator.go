@@ -18,7 +18,7 @@ func (it *SimpleSliceRangeValidator) SetActual(
 ) *SimpleSliceRangeValidator {
 	it.actual = corestr.NewSimpleSliceUsing(
 		false,
-		lines)
+		lines...)
 
 	return it
 }

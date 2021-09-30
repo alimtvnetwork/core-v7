@@ -40,7 +40,10 @@ const (
 	CannotBeNegativeIndex                  Variation = "Invalid operation / index: index cannot be negative, operations canceled."
 	CannotBeNegativeMessage                Variation = "Values or value cannot be negative value."
 	CannotBeNilOrEmptyMessage              Variation = "Values or value cannot be nil or null or empty."
+	AlreadyInitialized                     Variation = "Value is already initialized."
+	KeyNotExistInMap                       Variation = "Key doesn't exist in map."
 	CannotBeNilMessage                     Variation = "Values or value cannot be nil or null."
+	ShouldBePointer                        Variation = "Reference or Input needs to be a pointer!"
 	CannotConvertToRwxWhereVarRwxPossible  Variation = "Cannot convert Rwx, it had wildcards in type. It can only be converted to VarRwx."
 	ShouldBeNilMessage                     Variation = "Values or value should be nil or null."
 	ShouldBeLessThanMessage                Variation = "Values or value should be less than the reference."
@@ -70,6 +73,7 @@ const (
 	UnixIgnoreMessage                      Variation = "Windows tests ignored in Unix."
 	WindowsIgnoreMessage                   Variation = "Unix tests ignored in Windows."
 	ComparatorShouldBeWithinRange          Variation = "Comparator should be within the range."
+	CannotModifyCompleteResource           Variation = "Cannot modify complete or frozen resource."
 	EnumValuesOutOfRange                   Variation = "Out of Range / Invalid Range: Enum values are are not within the range as per the expectation."
 	SearchInputEmpty                       Variation = "Search Input is either null or empty."
 	SearchInputOrSearchTermEmpty           Variation = "Search Input or search term either null or empty."
@@ -138,6 +142,15 @@ func (variation Variation) Error(otherMsg string, reference interface{}) error {
 
 func (variation Variation) ErrorRefOnly(reference interface{}) error {
 	msg := CombineWithMsgType(variation, constants.EmptyString, reference)
+
+	return errors.New(msg)
+}
+
+func (variation Variation) Expecting(expecting, actual interface{}) error {
+	msg := Expecting(
+		variation.String(),
+		expecting,
+		actual)
 
 	return errors.New(msg)
 }

@@ -1,6 +1,7 @@
 package corejson
 
 type Jsoner interface {
-	Json() *Result
+	Json() Result
+	JsonPtr() *Result
 	JsonModelAny() interface{}
 }

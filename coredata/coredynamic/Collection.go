@@ -2,14 +2,14 @@ package coredynamic
 
 import (
 	"encoding/json"
-	"fmt"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type Collection struct {
-	items *[]*Dynamic
+	items []Dynamic
 }
 
 func EmptyDynamicCollection() *Collection {
@@ -17,65 +17,63 @@ func EmptyDynamicCollection() *Collection {
 }
 
 func NewDynamicCollection(capacity int) *Collection {
-	slice := make([]*Dynamic, 0, capacity)
+	slice := make([]Dynamic, 0, capacity)
 
-	return &Collection{items: &slice}
+	return &Collection{items: slice}
 }
 
-func (receiver *Collection) At(index int) *Dynamic {
-	return (*receiver.items)[index]
+func (it *Collection) At(index int) Dynamic {
+	return it.items[index]
 }
 
-func (receiver *Collection) Items() *[]*Dynamic {
-	return receiver.items
+func (it *Collection) Items() []Dynamic {
+	return it.items
 }
 
-func (receiver *Collection) Length() int {
-	return len(*receiver.items)
+func (it *Collection) Length() int {
+	return len(it.items)
 }
 
-func (receiver *Collection) Count() int {
-	return len(*receiver.items)
+func (it *Collection) Count() int {
+	return len(it.items)
 }
 
-func (receiver *Collection) IsEmpty() bool {
-	return len(*receiver.items) == 0
+func (it *Collection) IsEmpty() bool {
+	return len(it.items) == 0
 }
 
-func (receiver *Collection) HasAnyItem() bool {
-	return len(*receiver.items) > 0
+func (it *Collection) HasAnyItem() bool {
+	return len(it.items) > 0
 }
 
-func (receiver *Collection) LastIndex() int {
-	return len(*receiver.items) - 1
+func (it *Collection) LastIndex() int {
+	return len(it.items) - 1
 }
 
-func (receiver *Collection) HasIndex(index int) bool {
-	return receiver.LastIndex() >= index
+func (it *Collection) HasIndex(index int) bool {
+	return it.LastIndex() >= index
 }
 
-func (receiver *Collection) ListStringsPtr() *[]string {
-	slice := make([]string, constants.Zero, receiver.Length()+1)
+func (it *Collection) ListStringsPtr() *[]string {
+	slice := make([]string, constants.Zero, it.Length()+1)
 
-	for _, dynamic := range *receiver.items {
-		slice = append(slice, dynamic.StringJsonMust())
+	for _, dynamic := range it.items {
+		slice = append(slice, dynamic.JsonStringMust())
 	}
 
 	return &slice
 }
 
-func (receiver *Collection) ListStrings() []string {
-	return *receiver.ListStringsPtr()
+func (it *Collection) ListStrings() []string {
+	return *it.ListStringsPtr()
 }
 
-func (receiver *Collection) String() string {
-	return fmt.Sprintf(
-		constants.SprintPropertyNameValueFormat,
-		*receiver.items)
+func (it *Collection) String() string {
+	return strings.Join(it.ListStrings(), constants.NewLineUnix)
 }
 
-func (receiver *Collection) StringJson() (jsonString string, err error) {
-	toBytes, err := json.Marshal(receiver.items)
+func (it *Collection) JsonString() (jsonString string, err error) {
+	toBytes, err := json.Marshal(it.items)
 
 	if err != nil {
 		return constants.EmptyString, nil
@@ -84,105 +82,103 @@ func (receiver *Collection) StringJson() (jsonString string, err error) {
 	return string(toBytes), nil
 }
 
-func (receiver *Collection) StringJsonMust() string {
-	toString, err := receiver.StringJson()
+func (it *Collection) JsonStringMust() string {
+	toString, err := it.JsonString()
 
 	if err != nil {
 		msgtype.
 			MarshallingFailed.
-			HandleUsingPanic(err.Error(), receiver.items)
+			HandleUsingPanic(err.Error(), it.items)
 	}
 
 	return toString
 }
 
-func (receiver *Collection) RemoveAt(index int) (isSuccess bool) {
-	if !receiver.HasIndex(index) {
+func (it *Collection) RemoveAt(index int) (isSuccess bool) {
+	if !it.HasIndex(index) {
 		return false
 	}
 
-	items := *receiver.items
-	*receiver.items = append(
+	items := it.items
+	it.items = append(
 		items[:index],
 		items[index+constants.One:]...)
 
 	return true
 }
 
-func (receiver *Collection) MarshalJSON() ([]byte, error) {
-	return json.Marshal(receiver.items)
+func (it *Collection) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.items)
 }
 
-func (receiver *Collection) UnmarshalJSON(data []byte) error {
+func (it *Collection) UnmarshalJSON(data []byte) error {
 	return msgtype.
 		NotImplemented.
 		Error(msgtype.UnMarshallingFailed.String(), data)
 }
 
-func (receiver *Collection) AddAny(anyItem interface{}, isValid bool) *Collection {
-	*receiver.items = append(
-		*receiver.items,
-		NewDynamicPtr(anyItem, isValid))
+func (it *Collection) AddAny(anyItem interface{}, isValid bool) *Collection {
+	it.items = append(
+		it.items,
+		NewDynamic(anyItem, isValid))
 
-	return receiver
+	return it
 }
 
-func (receiver *Collection) AddAnyNonNull(anyItem interface{}, isValid bool) *Collection {
+func (it *Collection) AddAnyNonNull(anyItem interface{}, isValid bool) *Collection {
 	if anyItem == nil {
-		return receiver
+		return it
 	}
 
-	*receiver.items = append(
-		*receiver.items,
-		NewDynamicPtr(anyItem, isValid))
+	it.items = append(
+		it.items,
+		NewDynamic(anyItem, isValid))
 
-	return receiver
+	return it
 }
 
-func (receiver *Collection) AddAnyMany(anyItems ...interface{}) *Collection {
+func (it *Collection) AddAnyMany(anyItems ...interface{}) *Collection {
 	if anyItems == nil {
-		return receiver
+		return it
 	}
 
 	for _, item := range anyItems {
-		*receiver.items = append(
-			*receiver.items,
-			NewDynamicPtr(item, true))
+		it.items = append(
+			it.items,
+			NewDynamic(item, true))
 	}
 
-	return receiver
+	return it
 }
 
-func (receiver *Collection) Add(dynamic Dynamic) *Collection {
-	*receiver.items = append(*receiver.items, &dynamic)
+func (it *Collection) Add(dynamic Dynamic) *Collection {
+	it.items = append(it.items, dynamic)
 
-	return receiver
+	return it
 }
 
-func (receiver *Collection) AddPtr(dynamic *Dynamic) *Collection {
-	*receiver.items = append(*receiver.items, dynamic)
+func (it *Collection) AddPtr(dynamic *Dynamic) *Collection {
+	if dynamic == nil {
+		return it
+	}
 
-	return receiver
+	it.items = append(it.items, *dynamic)
+
+	return it
 }
 
-func (receiver *Collection) AddManyPtr(dynamicItems ...*Dynamic) *Collection {
+func (it *Collection) AddManyPtr(dynamicItems ...*Dynamic) *Collection {
 	if dynamicItems == nil {
-		return receiver
+		return it
 	}
 
 	for _, item := range dynamicItems {
-		*receiver.items = append(*receiver.items, item)
+		if item == nil {
+			continue
+		}
+
+		it.items = append(it.items, *item)
 	}
 
-	return receiver
-}
-
-func (receiver *Collection) AddNonEmpty(dynamic *Dynamic) *Collection {
-	if dynamic == nil {
-		return receiver
-	}
-
-	*receiver.items = append(*receiver.items, dynamic)
-
-	return receiver
+	return it
 }

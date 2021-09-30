@@ -9,7 +9,7 @@ const (
 	defaultHashsetItems                         = 10
 	RegularCollectionEfficiencyLimit            = 1000
 	DoubleLimit                                 = RegularCollectionEfficiencyLimit * 3
-	commonJoiner                                = "\n\t- "
+	commonJoiner                                = "\n - "
 	NoElements                                  = " {No Element}"
 	charCollectionMapLengthFormat               = "\n## Items of `%s`"
 	charHashsetMapLengthFormat                  = charCollectionMapLengthFormat

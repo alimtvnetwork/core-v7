@@ -1,5 +1,5 @@
 package corecomparator
 
 func Ranges() []string {
-	return compares
+	return CompareNames[:]
 }

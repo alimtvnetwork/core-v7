@@ -32,7 +32,7 @@ func AnyLinesAsyncProcess(
 	}
 
 	slice := Make(constants.Zero, length)
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 
 	wg.Add(length)
 

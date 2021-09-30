@@ -12,30 +12,30 @@ type CollectionsOfCollectionPtr struct {
 	items *[]*CollectionPtr
 }
 
-func (cc *CollectionsOfCollectionPtr) IsEmpty() bool {
-	return cc.items == nil || len(*cc.items) == 0
+func (it *CollectionsOfCollectionPtr) IsEmpty() bool {
+	return it.items == nil || len(*it.items) == 0
 }
 
-func (cc *CollectionsOfCollectionPtr) HasItems() bool {
-	return cc.items != nil && len(*cc.items) > 0
+func (it *CollectionsOfCollectionPtr) HasItems() bool {
+	return it.items != nil && len(*it.items) > 0
 }
 
-func (cc *CollectionsOfCollectionPtr) Length() int {
-	if cc.items == nil {
+func (it *CollectionsOfCollectionPtr) Length() int {
+	if it.items == nil {
 		return 0
 	}
 
-	return len(*cc.items)
+	return len(*it.items)
 }
 
-func (cc *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
-	if cc.IsEmpty() {
+func (it *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
+	if it.IsEmpty() {
 		return 0
 	}
 
 	allLength := 0
 
-	for _, collection := range *cc.items {
+	for _, collection := range *it.items {
 		if collection == nil || collection.IsEmpty() {
 			continue
 		}
@@ -46,25 +46,25 @@ func (cc *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
 	return allLength
 }
 
-func (cc *CollectionsOfCollectionPtr) ItemsPtr() *[]*CollectionPtr {
-	return cc.items
+func (it *CollectionsOfCollectionPtr) ItemsPtr() *[]*CollectionPtr {
+	return it.items
 }
 
-func (cc *CollectionsOfCollectionPtr) Items() []*CollectionPtr {
-	return *cc.items
+func (it *CollectionsOfCollectionPtr) Items() []*CollectionPtr {
+	return *it.items
 }
 
-func (cc *CollectionsOfCollectionPtr) ListPtr(
+func (it *CollectionsOfCollectionPtr) ListPtr(
 	additionalCapacity int,
 ) *[]string {
-	allLength := cc.AllIndividualItemsLength()
+	allLength := it.AllIndividualItemsLength()
 	list := make([]string, 0, allLength+additionalCapacity)
 
 	if allLength == 0 {
 		return &list
 	}
 
-	for _, collection := range *cc.items {
+	for _, collection := range *it.items {
 		for _, s := range *collection.ListPtr() {
 			list = append(list, *s)
 		}
@@ -73,106 +73,106 @@ func (cc *CollectionsOfCollectionPtr) ListPtr(
 	return &list
 }
 
-func (cc *CollectionsOfCollectionPtr) ToCollection() *Collection {
-	list := cc.ListPtr(0)
+func (it *CollectionsOfCollectionPtr) ToCollection() *Collection {
+	list := it.ListPtr(0)
 
-	return NewCollectionUsingStringsPlusCap(list, 0)
+	return NewCollectionUsingStringsPlusCapPtr(list, 0)
 }
 
-func (cc *CollectionsOfCollectionPtr) AddStringsPtr(
+func (it *CollectionsOfCollectionPtr) AddStringsPtr(
 	stringsItems *[]string,
 	addCapacity int,
 ) *CollectionsOfCollectionPtr {
 	if stringsItems == nil {
-		return cc
+		return it
 	}
 
-	return cc.Adds(
+	return it.Adds(
 		NewCollectionPtrUsingStrings(
 			stringsItems,
 			addCapacity))
 }
 
-func (cc *CollectionsOfCollectionPtr) AddPointerStringsPtr(
+func (it *CollectionsOfCollectionPtr) AddPointerStringsPtr(
 	pointerStringsItems *[]*string,
 ) *CollectionsOfCollectionPtr {
 	if pointerStringsItems == nil {
-		return cc
+		return it
 	}
 
-	return cc.Adds(
+	return it.Adds(
 		NewCollectionPtrUsingPointerStrings(
 			pointerStringsItems,
 			0))
 }
 
-func (cc *CollectionsOfCollectionPtr) AddsStringsOfStrings(
+func (it *CollectionsOfCollectionPtr) AddsStringsOfStrings(
 	addCapacity int,
 	stringsOfPointerStrings ...*[]string,
 ) *CollectionsOfCollectionPtr {
 	if stringsOfPointerStrings == nil {
-		return cc
+		return it
 	}
 
 	for _, stringsPointer := range stringsOfPointerStrings {
-		cc.AddStringsPtr(
+		it.AddStringsPtr(
 			stringsPointer,
 			addCapacity)
 	}
 
-	return cc
+	return it
 }
 
-func (cc *CollectionsOfCollectionPtr) AddsStringsOfPointerStrings(
+func (it *CollectionsOfCollectionPtr) AddsStringsOfPointerStrings(
 	addCapacity int,
 	stringsOfPointerStrings *[]*[]string,
 ) *CollectionsOfCollectionPtr {
 	if stringsOfPointerStrings == nil {
-		return cc
+		return it
 	}
 
 	for _, stringsPointer := range *stringsOfPointerStrings {
-		cc.AddStringsPtr(
+		it.AddStringsPtr(
 			stringsPointer,
 			addCapacity)
 	}
 
-	return cc
+	return it
 }
 
-func (cc *CollectionsOfCollectionPtr) Adds(
+func (it *CollectionsOfCollectionPtr) Adds(
 	collections ...*CollectionPtr,
 ) *CollectionsOfCollectionPtr {
 	if collections == nil {
-		return cc
+		return it
 	}
 
-	return cc.AddCollections(&collections)
+	return it.AddCollections(&collections)
 }
 
-func (cc *CollectionsOfCollectionPtr) AddCollections(
+func (it *CollectionsOfCollectionPtr) AddCollections(
 	collections *[]*CollectionPtr,
 ) *CollectionsOfCollectionPtr {
 	if collections == nil {
-		return cc
+		return it
 	}
 
 	for i := range *collections {
-		*cc.items = append(
-			*cc.items,
+		*it.items = append(
+			*it.items,
 			(*collections)[i])
 	}
 
-	return cc
+	return it
 }
 
-func (cc *CollectionsOfCollectionPtr) String() string {
+func (it *CollectionsOfCollectionPtr) String() string {
 	list := make(
 		[]string,
 		0,
-		cc.Length())
+		it.Length())
 
-	for i, collection := range *cc.items {
+	for i, collection := range *it.items {
 		list = append(
 			list,
 			collection.SummaryString(i+1))
@@ -183,63 +183,60 @@ func (cc *CollectionsOfCollectionPtr) String() string {
 		constants.DoubleNewLine)
 }
 
-func (cc *CollectionsOfCollectionPtr) JsonModel() *CollectionsOfCollectionPtrModel {
+func (it *CollectionsOfCollectionPtr) JsonModel() *CollectionsOfCollectionPtrModel {
 	return &CollectionsOfCollectionPtrModel{
-		Items: cc.items,
+		Items: it.items,
 	}
 }
 
-func (cc *CollectionsOfCollectionPtr) JsonModelAny() interface{} {
-	return cc.JsonModel()
+func (it *CollectionsOfCollectionPtr) JsonModelAny() interface{} {
+	return it.JsonModel()
 }
 
-func (cc *CollectionsOfCollectionPtr) MarshalJSON() ([]byte, error) {
-	return json.Marshal(*cc.JsonModel())
+func (it *CollectionsOfCollectionPtr) MarshalJSON() ([]byte, error) {
+	return json.Marshal(*it.JsonModel())
 }
 
-func (cc *CollectionsOfCollectionPtr) UnmarshalJSON(data []byte) error {
+func (it *CollectionsOfCollectionPtr) UnmarshalJSON(data []byte) error {
 	var dataModel CollectionsOfCollectionPtrModel
 
 	err := json.Unmarshal(data, &dataModel)
 
 	if err == nil {
-		cc.items = dataModel.Items
+		it.items = dataModel.Items
 	}
 
 	return err
 }
 
-//goland:noinspection GoLinterLocal
-func (cc *CollectionsOfCollectionPtr) Json() *corejson.Result {
-	if cc.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it CollectionsOfCollectionPtr) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(cc)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it CollectionsOfCollectionPtr) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 //goland:noinspection GoLinterLocal
-func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJson(
+func (it *CollectionsOfCollectionPtr) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CollectionsOfCollectionPtr, error) {
-	err := jsonResult.Unmarshal(&cc)
+	err := jsonResult.Unmarshal(&it)
 
 	if err != nil {
 		return EmptyCollectionsOfCollectionPtr(), err
 	}
 
-	return cc, nil
+	return it, nil
 }
 
 // ParseInjectUsingJsonMust Panic if error
 //goland:noinspection GoLinterLocal
-func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJsonMust(
+func (it *CollectionsOfCollectionPtr) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *CollectionsOfCollectionPtr {
 	newUsingJson, err :=
-		cc.ParseInjectUsingJson(jsonResult)
+		it.ParseInjectUsingJson(jsonResult)
 
 	if err != nil {
 		panic(err)
@@ -248,24 +245,24 @@ func (cc *CollectionsOfCollectionPtr) ParseInjectUsingJsonMust(
 	return newUsingJson
 }
 
-func (cc *CollectionsOfCollectionPtr) JsonParseSelfInject(
+func (it *CollectionsOfCollectionPtr) JsonParseSelfInject(
 	jsonResult *corejson.Result,
 ) error {
-	_, err := cc.ParseInjectUsingJson(
+	_, err := it.ParseInjectUsingJson(
 		jsonResult,
 	)
 
 	return err
 }
 
-func (cc *CollectionsOfCollectionPtr) AsJsoner() corejson.Jsoner {
-	return cc
+func (it *CollectionsOfCollectionPtr) AsJsoner() corejson.Jsoner {
+	return it
 }
 
-func (cc *CollectionsOfCollectionPtr) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
-	return cc
+func (it *CollectionsOfCollectionPtr) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return it
 }
 
-func (cc *CollectionsOfCollectionPtr) AsJsonMarshaller() corejson.JsonMarshaller {
-	return cc
+func (it *CollectionsOfCollectionPtr) AsJsonMarshaller() corejson.JsonMarshaller {
+	return it
 }

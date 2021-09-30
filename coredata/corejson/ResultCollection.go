@@ -1,7 +1,6 @@
 package corejson
 
 import (
-	"encoding/json"
 	"errors"
 	"strings"
 
@@ -9,7 +8,7 @@ import (
 )
 
 type ResultsCollection struct {
-	Items []*Result `json:"JsonResultsCollection"`
+	Items []Result `json:"JsonResultsCollection"`
 }
 
 func (it *ResultsCollection) Length() int {
@@ -37,7 +36,7 @@ func (it *ResultsCollection) FirstOrDefault() *Result {
 		return nil
 	}
 
-	return it.Items[0]
+	return &it.Items[0]
 }
 
 func (it *ResultsCollection) LastOrDefault() *Result {
@@ -45,7 +44,7 @@ func (it *ResultsCollection) LastOrDefault() *Result {
 		return nil
 	}
 
-	return it.Items[it.LastIndex()]
+	return &it.Items[it.LastIndex()]
 }
 
 func (it *ResultsCollection) Take(limit int) *ResultsCollection {
@@ -88,7 +87,21 @@ func (it *ResultsCollection) AddSkipOnNil(
 
 	it.Items = append(
 		it.Items,
-		result)
+		*result)
+
+	return it
+}
+
+func (it *ResultsCollection) AddNonNilNonError(
+	result *Result,
+) *ResultsCollection {
+	if result == nil || result.HasError() {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		*result)
 
 	return it
 }
@@ -96,13 +109,13 @@ func (it *ResultsCollection) AddSkipOnNil(
 func (it *ResultsCollection) GetAt(
 	index int,
 ) *Result {
-	return it.Items[index]
+	return &it.Items[index]
 }
 
 // HasError has any error
 func (it *ResultsCollection) HasError() bool {
 	for _, result := range it.Items {
-		if result != nil && result.Error != nil {
+		if result.HasError() {
 			return true
 		}
 	}
@@ -111,7 +124,7 @@ func (it *ResultsCollection) HasError() bool {
 }
 
 func (it *ResultsCollection) AllErrors() (
-	errListPtr *[]error,
+	errListPtr []error,
 	hasAnyError bool,
 ) {
 	length := it.Length()
@@ -121,7 +134,7 @@ func (it *ResultsCollection) AllErrors() (
 		length)
 
 	if length == 0 {
-		return &errList, hasAnyError
+		return errList, hasAnyError
 	}
 
 	for i := 0; i < length; i++ {
@@ -135,10 +148,10 @@ func (it *ResultsCollection) AllErrors() (
 		}
 	}
 
-	return &errList, hasAnyError
+	return errList, hasAnyError
 }
 
-func (it *ResultsCollection) GetErrorsStrings() *[]string {
+func (it *ResultsCollection) GetErrorsStrings() []string {
 	length := it.Length()
 	errStrList := make(
 		[]string,
@@ -146,7 +159,7 @@ func (it *ResultsCollection) GetErrorsStrings() *[]string {
 		length)
 
 	if length == 0 {
-		return &errStrList
+		return errStrList
 	}
 
 	for _, result := range it.Items {
@@ -159,6 +172,12 @@ func (it *ResultsCollection) GetErrorsStrings() *[]string {
 			result.Error.Error())
 	}
 
+	return errStrList
+}
+
+func (it *ResultsCollection) GetErrorsStringsPtr() *[]string {
+	errStrList := it.GetErrorsStrings()
+
 	return &errStrList
 }
 
@@ -166,7 +185,7 @@ func (it *ResultsCollection) GetErrorsAsSingleString() string {
 	errStrList := it.GetErrorsStrings()
 
 	return strings.Join(
-		*errStrList,
+		errStrList,
 		constants.NewLineUnix)
 }
 
@@ -182,18 +201,6 @@ func (it *ResultsCollection) UnmarshalAt(
 ) error {
 	result := it.Items[index]
 
-	if result == nil || result.IsEmptyJsonBytes() {
-		return nil
-	}
-
-	if result.HasError() {
-		return result.MeaningfulError()
-	}
-
-	if result.IsEmptyJsonBytes() {
-		return nil
-	}
-
 	return result.Unmarshal(
 		any)
 }
@@ -203,18 +210,18 @@ func (it *ResultsCollection) InjectIntoAt(
 	injector JsonParseSelfInjector,
 ) error {
 	return injector.JsonParseSelfInject(
-		it.Items[index])
+		&it.Items[index])
 }
 
 // InjectIntoSameIndex any nil skip
 func (it *ResultsCollection) InjectIntoSameIndex(
 	injectors ...JsonParseSelfInjector,
 ) (
-	errListPtr *[]error,
+	errListPtr []error,
 	hasAnyError bool,
 ) {
 	if injectors == nil {
-		return &[]error{}, false
+		return []error{}, false
 	}
 
 	length := len(injectors)
@@ -223,10 +230,6 @@ func (it *ResultsCollection) InjectIntoSameIndex(
 	for i := 0; i < length; i++ {
 		result := it.Items[i]
 		injector := injectors[i]
-
-		if result == nil {
-			continue
-		}
 
 		if result.HasError() {
 			hasAnyError = true
@@ -240,7 +243,7 @@ func (it *ResultsCollection) InjectIntoSameIndex(
 
 		err := injector.
 			JsonParseSelfInject(
-				result)
+				&result)
 
 		if err != nil {
 			hasAnyError = true
@@ -249,18 +252,18 @@ func (it *ResultsCollection) InjectIntoSameIndex(
 		errList[i] = err
 	}
 
-	return &errList, hasAnyError
+	return errList, hasAnyError
 }
 
 // UnmarshalIntoSameIndex any nil skip
 func (it *ResultsCollection) UnmarshalIntoSameIndex(
 	anys ...interface{},
 ) (
-	errListPtr *[]error,
+	errListPtr []error,
 	hasAnyError bool,
 ) {
 	if anys == nil {
-		return &[]error{}, false
+		return []error{}, false
 	}
 
 	length := len(anys)
@@ -270,8 +273,7 @@ func (it *ResultsCollection) UnmarshalIntoSameIndex(
 		result := it.Items[i]
 		any := anys[i]
 
-		if result == nil ||
-			any == nil {
+		if any == nil {
 			continue
 		}
 
@@ -296,14 +298,14 @@ func (it *ResultsCollection) UnmarshalIntoSameIndex(
 		errList[i] = err
 	}
 
-	return &errList, hasAnyError
+	return errList, hasAnyError
 }
 
 func (it *ResultsCollection) GetAtSafe(
 	index int,
 ) *Result {
 	if index > constants.InvalidNotFoundCase && index <= it.Length()-1 {
-		return it.Items[index]
+		return &it.Items[index]
 	}
 
 	return nil
@@ -313,14 +315,28 @@ func (it *ResultsCollection) GetAtSafeUsingLength(
 	index, length int,
 ) *Result {
 	if index > constants.InvalidNotFoundCase && index <= length-1 {
-		return it.Items[index]
+		return &it.Items[index]
 	}
 
 	return nil
 }
 
-func (it *ResultsCollection) Add(
+func (it *ResultsCollection) AddPtr(
 	result *Result,
+) *ResultsCollection {
+	if result == nil {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		*result)
+
+	return it
+}
+
+func (it *ResultsCollection) Add(
+	result Result,
 ) *ResultsCollection {
 	it.Items = append(
 		it.Items,
@@ -330,7 +346,7 @@ func (it *ResultsCollection) Add(
 }
 
 func (it *ResultsCollection) Adds(
-	results ...*Result,
+	results ...Result,
 ) *ResultsCollection {
 	if results == nil {
 		return it
@@ -345,6 +361,26 @@ func (it *ResultsCollection) Adds(
 	return it
 }
 
+func (it *ResultsCollection) AddsPtr(
+	results ...*Result,
+) *ResultsCollection {
+	if results == nil {
+		return it
+	}
+
+	for _, result := range results {
+		if result == nil {
+			continue
+		}
+
+		it.Items = append(
+			it.Items,
+			*result)
+	}
+
+	return it
+}
+
 // AddsAnys Skip on nil
 func (it *ResultsCollection) AddsAnys(
 	anys ...interface{},
@@ -353,18 +389,7 @@ func (it *ResultsCollection) AddsAnys(
 		return it
 	}
 
-	return it.AddsAnysPtr(&anys)
-}
-
-// AddsAnysPtr Skip on nil
-func (it *ResultsCollection) AddsAnysPtr(
-	anysPtr *[]interface{},
-) *ResultsCollection {
-	if anysPtr == nil {
-		return it
-	}
-
-	for _, any := range *anysPtr {
+	for _, any := range anys {
 		if any == nil {
 			continue
 		}
@@ -385,35 +410,14 @@ func (it *ResultsCollection) AddResultsCollection(
 		return it
 	}
 
-	return it.AddNonNilItemsPtr(collection.Items)
-}
-
-// AddNonNilItems skip on nil
-func (it *ResultsCollection) AddNonNilItems(
-	results ...*Result,
-) *ResultsCollection {
-	if results == nil {
-		return it
-	}
-
-	for _, result := range results {
-		if result == nil {
-			continue
-		}
-
-		it.Items = append(
-			it.Items,
-			results...)
-	}
-
-	return it
+	return it.Adds(collection.Items...)
 }
 
 // AddNonNilItemsPtr skip on nil
 func (it *ResultsCollection) AddNonNilItemsPtr(
-	results []*Result,
+	results ...*Result,
 ) *ResultsCollection {
-	if results == nil {
+	if results == nil || len(results) == 0 {
 		return it
 	}
 
@@ -424,7 +428,7 @@ func (it *ResultsCollection) AddNonNilItemsPtr(
 
 		it.Items = append(
 			it.Items,
-			result)
+			*result)
 	}
 
 	return it
@@ -437,48 +441,44 @@ func (it *ResultsCollection) Clear() *ResultsCollection {
 	return it
 }
 
-func (it *ResultsCollection) GetStrings() *[]string {
+func (it *ResultsCollection) GetStrings() []string {
 	length := it.Length()
 	list := make([]string, length)
 
 	if length == 0 {
-		return &list
+		return list
 	}
 
 	for i, result := range it.Items {
 		list[i] = *result.JsonStringPtr()
 	}
 
+	return list
+}
+
+func (it *ResultsCollection) GetStringsPtr() *[]string {
+	list := it.GetStrings()
+
 	return &list
 }
 
-// AddJsoner skip on nil
-func (it *ResultsCollection) AddJsoner(
+// AddJsoners skip on nil
+func (it *ResultsCollection) AddJsoners(
+	isIgnoreNilOrError bool,
 	jsoners ...Jsoner,
 ) *ResultsCollection {
 	if jsoners == nil {
 		return it
 	}
 
-	return it.AddJsonerPtr(&jsoners)
-}
-
-// AddJsonerPtr skip on nil
-func (it *ResultsCollection) AddJsonerPtr(
-	jsoners *[]Jsoner,
-) *ResultsCollection {
-	if jsoners == nil {
-		return it
-	}
-
-	for _, jsoner := range *jsoners {
+	for _, jsoner := range jsoners {
 		if jsoner == nil {
 			continue
 		}
 
 		result := jsoner.Json()
 
-		if result == nil {
+		if isIgnoreNilOrError && result.HasError() {
 			continue
 		}
 
@@ -500,15 +500,12 @@ func (it *ResultsCollection) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-//goland:noinspection GoLinterLocal
-func (it *ResultsCollection) Json() *Result {
-	if it.IsEmpty() {
-		return EmptyWithoutErrorPtr()
-	}
+func (it ResultsCollection) Json() Result {
+	return NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return NewPtr(jsonBytes, err)
+func (it ResultsCollection) JsonPtr() *Result {
+	return NewFromAnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -556,4 +553,31 @@ func (it *ResultsCollection) JsonParseSelfInject(
 
 func (it *ResultsCollection) AsJsonParseSelfInjector() JsonParseSelfInjector {
 	return it
+}
+
+func (it *ResultsCollection) ShadowClone() *ResultsCollection {
+	if it == nil {
+		return nil
+	}
+
+	return it.Clone(false)
+}
+
+func (it *ResultsCollection) Clone(isDeepCloneEach bool) *ResultsCollection {
+	if it == nil {
+		return nil
+	}
+
+	newResults := NewResultsCollection(
+		it.Length())
+
+	if newResults.Length() == 0 {
+		return newResults
+	}
+
+	for _, item := range it.Items {
+		newResults.Add(*item.Clone(isDeepCloneEach))
+	}
+
+	return newResults
 }

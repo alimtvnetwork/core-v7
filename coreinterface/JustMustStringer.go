@@ -1,5 +1,5 @@
 package coreinterface
 
-type JustMustStringer interface {
-	StringJsonMust() string
+type MustJsonStringer interface {
+	JsonStringMust() string
 }

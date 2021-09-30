@@ -2,8 +2,6 @@ package ostype
 
 type Group byte
 
-var osGroups = []string{"WindowsGroup", "UnixGroup", "AndroidGroup", "JavaScriptGroup", "UnknownGroup"}
-
 const (
 	WindowsGroup Group = iota
 	UnixGroup

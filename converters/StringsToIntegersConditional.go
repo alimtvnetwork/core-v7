@@ -2,12 +2,12 @@ package converters
 
 // StringsToIntegersConditional handle converts from processor func
 func StringsToIntegersConditional(
-	strArray *[]string,
 	processor func(in string) (out int, isTake, isBreak bool),
-) *[]int {
-	results := make([]int, 0, len(*strArray))
+	strArray []string,
+) []int {
+	results := make([]int, 0, len(strArray))
 
-	for _, v := range *strArray {
+	for _, v := range strArray {
 		out, isTake, isBreak := processor(v)
 
 		if isTake {
@@ -19,5 +19,5 @@ func StringsToIntegersConditional(
 		}
 	}
 
-	return &results
+	return results
 }

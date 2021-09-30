@@ -15,7 +15,7 @@ type SimpleSliceValidator struct {
 func (it *SimpleSliceValidator) SetActual(lines []string) *SimpleSliceValidator {
 	it.actual = corestr.NewSimpleSliceUsing(
 		false,
-		lines)
+		lines...)
 
 	return it
 }

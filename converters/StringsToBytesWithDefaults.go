@@ -1,24 +1,23 @@
 package converters
 
 import (
-	"errors"
 	"strconv"
-	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters/coreconverted"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 // StringsToBytesWithDefaults panic if not a number or more than 255
 func StringsToBytesWithDefaults(
-	strArray *[]string,
 	defaultByte byte,
+	stringsSlice ...string,
 ) *coreconverted.Bytes {
-	results := make([]byte, len(*strArray))
-	var errMessages []string
+	results := make([]byte, len(stringsSlice))
+	var sliceErr []string
 
-	for i, v := range *strArray {
+	for i, v := range stringsSlice {
 		vInt, err := strconv.Atoi(v)
 
 		if err != nil {
@@ -27,8 +26,8 @@ func StringsToBytesWithDefaults(
 				v +
 				constants.CommaIndexColonSpace +
 				strconv.Itoa(i)
-			errMessages = append(
-				errMessages,
+			sliceErr = append(
+				sliceErr,
 				msg)
 
 			results[i] = defaultByte
@@ -42,8 +41,8 @@ func StringsToBytesWithDefaults(
 				v +
 				constants.CommaIndexColonSpace +
 				strconv.Itoa(i)
-			errMessages = append(
-				errMessages,
+			sliceErr = append(
+				sliceErr,
 				msg)
 
 			results[i] = defaultByte
@@ -54,14 +53,8 @@ func StringsToBytesWithDefaults(
 		results[i] = byte(vInt)
 	}
 
-	var combinedError error
-	if len(errMessages) > 0 {
-		errCompiledMessage := strings.Join(errMessages, constants.NewLineUnix)
-		combinedError = errors.New(errCompiledMessage)
-	}
-
 	return &coreconverted.Bytes{
-		Values:        &results,
-		CombinedError: combinedError,
+		Values:        results,
+		CombinedError: msgtype.SliceToError(sliceErr),
 	}
 }

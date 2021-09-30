@@ -1,7 +1,9 @@
 package corejson
 
 import (
+	"bytes"
 	"encoding/json"
+	"errors"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreindexes"
@@ -15,7 +17,7 @@ type Result struct {
 	Error      error
 }
 
-func (it *Result) JsonString() string {
+func (it Result) JsonString() string {
 	return *it.JsonStringPtr()
 }
 
@@ -49,6 +51,30 @@ func (it *Result) Length() int {
 
 func (it *Result) HasError() bool {
 	return it != nil && it.Error != nil
+}
+
+func (it *Result) ErrorString() string {
+	if it.IsEmptyError() {
+		return constants.EmptyString
+	}
+
+	return it.Error.Error()
+}
+
+func (it *Result) IsErrorEqual(err error) bool {
+	if it.IsEmptyError() && err == nil {
+		return true
+	}
+
+	if it.IsEmptyError() || err == nil {
+		return false
+	}
+
+	if it.HasError() && it.ErrorString() == err.Error() {
+		return true
+	}
+
+	return false
 }
 
 func (it *Result) String() string {
@@ -212,11 +238,12 @@ func (it *Result) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-// Json result itself is marshaled to new JsonResult
-//
-// to have it back use Unmarshal on an empty
-func (it *Result) Json() *Result {
+func (it Result) Json() Result {
 	return NewFromAny(it)
+}
+
+func (it Result) JsonPtr() *Result {
+	return NewFromAnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -270,4 +297,56 @@ func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
 
 func (it *Result) AsJsonMarshaller() JsonMarshaller {
 	return it
+}
+
+func (it *Result) CloneError() error {
+	if it.HasError() {
+		return errors.New(it.Error.Error())
+	}
+
+	return nil
+}
+
+func (it *Result) IsEqual(another *Result) bool {
+	if it == nil && another == nil {
+		return true
+	}
+
+	if it == nil || another == nil {
+		return false
+	}
+
+	if it.Length() != another.Length() {
+		return false
+	}
+
+	if !it.IsErrorEqual(another.Error) {
+		return false
+	}
+
+	if it.jsonString != nil && another.jsonString != nil &&
+		it.jsonString == another.jsonString {
+		return true
+	}
+
+	return bytes.Equal(it.Bytes, another.Bytes)
+}
+
+func (it *Result) Clone(isDeepClone bool) *Result {
+	if it == nil {
+		return nil
+	}
+
+	if it.Length() == 0 {
+		return NewPtr([]byte{}, it.CloneError())
+	}
+
+	if !isDeepClone || it.Length() == 0 {
+		return NewPtr(it.Bytes, it.CloneError())
+	}
+
+	newBytes := make([]byte, it.Length())
+	copy(newBytes, it.Bytes)
+
+	return NewPtr(newBytes, it.CloneError())
 }

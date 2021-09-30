@@ -71,7 +71,7 @@ func (it *KeyValCollection) String() string {
 		it.items)
 }
 
-func (it *KeyValCollection) StringJson() (jsonString string, err error) {
+func (it *KeyValCollection) JsonString() (jsonString string, err error) {
 	toBytes, err := json.Marshal(it.items)
 
 	if err != nil {
@@ -81,8 +81,8 @@ func (it *KeyValCollection) StringJson() (jsonString string, err error) {
 	return string(toBytes), err
 }
 
-func (it *KeyValCollection) StringJsonMust() string {
-	toString, err := it.StringJson()
+func (it *KeyValCollection) JsonStringMust() string {
+	toString, err := it.JsonString()
 
 	if err != nil {
 		msgtype.

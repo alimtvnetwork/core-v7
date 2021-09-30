@@ -446,7 +446,7 @@ func (it *SliceValidator) ActualInputWithExpectingMessage(header string) string 
 
 func (it *SliceValidator) ActualInputMessage(header string) string {
 	return msgtype.MsgHeaderPlusEnding(
-		actualUserInputsMessage + header,
+		actualUserInputsMessage+header,
 		it.ActualLinesString())
 }
 

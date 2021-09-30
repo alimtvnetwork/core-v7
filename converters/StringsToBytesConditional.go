@@ -2,12 +2,12 @@ package converters
 
 // StringsToBytesConditional only take if isTake returns true, breaks and exits if isBreak to true
 func StringsToBytesConditional(
-	strArray *[]string,
 	processor func(in string) (out byte, isTake, isBreak bool),
+	stringsSlice []string,
 ) *[]byte {
-	results := make([]byte, 0, len(*strArray))
+	results := make([]byte, 0, len(stringsSlice))
 
-	for _, v := range *strArray {
+	for _, v := range stringsSlice {
 		out, isTake, isBreak := processor(v)
 
 		if isTake {

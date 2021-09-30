@@ -100,8 +100,9 @@ func (receiver *ErrorOnce) HandleErrorWith(messages ...string) {
 func (receiver *ErrorOnce) ConcatNewString(messages ...string) string {
 	additionalMessages :=
 		converters.StringsToCsv(
-			&messages,
-			false)
+			false,
+			messages...,
+		)
 
 	if receiver.IsNullOrEmpty() {
 		return additionalMessages

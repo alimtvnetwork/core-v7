@@ -7,10 +7,10 @@ import (
 )
 
 // StringsToFloat64s panic if not a number
-func StringsToFloat64s(strArray *[]string) *[]float64 {
-	results := make([]float64, len(*strArray))
+func StringsToFloat64s(strArray []string) []float64 {
+	results := make([]float64, len(strArray))
 
-	for i, v := range *strArray {
+	for i, v := range strArray {
 		vFloat, err := strconv.ParseFloat(v, bitsize.Of64)
 
 		if err != nil {
@@ -20,5 +20,5 @@ func StringsToFloat64s(strArray *[]string) *[]float64 {
 		results[i] = vFloat
 	}
 
-	return &results
+	return results
 }

@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
@@ -129,6 +130,24 @@ func (it *BasicInt16) ToEnumJsonBytes(value int16) []byte {
 
 func (it *BasicInt16) ToEnumString(value int16) string {
 	return it.valueNameHashmap[value]
+}
+
+func (it *BasicInt16) AppendPrependJoinValue(
+	joiner string,
+	appendVal, prependVal int16,
+) string {
+	return it.ToEnumString(prependVal) +
+		joiner +
+		it.ToEnumString(appendVal)
+}
+
+func (it *BasicInt16) AppendPrependJoinNamer(
+	joiner string,
+	appendVal, prependVal coreinterface.ToNamer,
+) string {
+	return prependVal.Name() +
+		joiner +
+		appendVal.Name()
 }
 
 func (it *BasicInt16) ToNumberString(valueInRawFormat interface{}) string {

@@ -8,11 +8,11 @@ import (
 type Variant byte
 
 func (it Variant) ToNumberString() string {
-	return basicEnumImpl.ToNumberString(it.Value())
+	return BasicEnumImpl.ToNumberString(it.Value())
 }
 
 func (it Variant) Name() string {
-	return basicEnumImpl.ToEnumString(it.Value())
+	return BasicEnumImpl.ToEnumString(it.Value())
 }
 
 func (it Variant) UnmarshallToValue(jsonUnmarshallingValue []byte) (byte, error) {
@@ -20,7 +20,7 @@ func (it Variant) UnmarshallToValue(jsonUnmarshallingValue []byte) (byte, error)
 }
 
 func (it Variant) MarshalJSON() ([]byte, error) {
-	return basicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
 }
 
 func (it Variant) UnmarshalJSON(data []byte) error {
@@ -28,35 +28,35 @@ func (it Variant) UnmarshalJSON(data []byte) error {
 }
 
 func (it Variant) String() string {
-	return basicEnumImpl.ToEnumString(it.Value())
+	return BasicEnumImpl.ToEnumString(it.Value())
 }
 
-func (it Variant) StringJson() (jsonString string, err error) {
-	return basicEnumImpl.StringJson(it.Value())
+func (it Variant) JsonString() (jsonString string, err error) {
+	return BasicEnumImpl.StringJson(it.Value())
 }
 
-func (it Variant) StringJsonMust() string {
-	return basicEnumImpl.StringJsonMust(it.Value())
+func (it Variant) JsonStringMust() string {
+	return BasicEnumImpl.StringJsonMust(it.Value())
 }
 
 func (it Variant) StringRangesPtr() *[]string {
-	return basicEnumImpl.StringRangesPtr()
+	return BasicEnumImpl.StringRangesPtr()
 }
 
 func (it Variant) StringRanges() []string {
-	return basicEnumImpl.StringRanges()
+	return BasicEnumImpl.StringRanges()
 }
 
 func (it Variant) RangesInvalidMessage() string {
-	return basicEnumImpl.RangesInvalidMessage()
+	return BasicEnumImpl.RangesInvalidMessage()
 }
 
 func (it Variant) RangesInvalidErr() error {
-	return basicEnumImpl.RangesInvalidErr()
+	return BasicEnumImpl.RangesInvalidErr()
 }
 
 func (it Variant) IsValidRange() bool {
-	return basicEnumImpl.IsValidRange(it.Value())
+	return BasicEnumImpl.IsValidRange(it.Value())
 }
 
 func (it Variant) IsInvalidRange() bool {
@@ -148,11 +148,11 @@ func (it Variant) IsLessEqualInt(n int) bool {
 }
 
 func (it Variant) RangeNamesCsv() string {
-	return basicEnumImpl.RangeNamesCsv()
+	return BasicEnumImpl.RangeNamesCsv()
 }
 
 func (it Variant) TypeName() string {
-	return basicEnumImpl.TypeName()
+	return BasicEnumImpl.TypeName()
 }
 
 func (it Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {

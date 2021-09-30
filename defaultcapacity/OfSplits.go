@@ -4,11 +4,21 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-// OfSplits returns max as 100
-func OfSplits(wholeTextLength int, limits int) int {
-	if limits > constants.MinusOne {
-		return limits
+// OfSplits
+//
+// returns
+//  - limit:   -1, returns predictive length based on wholeLength (max 100)
+//  - limit: >= 0, returns limit if limit < wholeLength or
+//          else returns predictive length based on wholeLength (max 100)
+func OfSplits(wholeLength int, limit int) int {
+	hasLimit := limit > constants.MinusOne
+
+	if hasLimit && limit >= wholeLength {
+		return OfSearch(wholeLength)
+	} else if hasLimit && limit < wholeLength {
+		return limit
 	}
 
-	return OfSearch(wholeTextLength)
+	// no limit
+	return OfSearch(wholeLength)
 }

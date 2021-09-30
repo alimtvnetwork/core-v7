@@ -17,4 +17,12 @@ const (
 	expectingSimpleMessageFormat                  = "%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
 	expectingSimpleNoTypeMessageFormat            = "%s - Expect [\"%v\"] != [\"%v\"] Actual"
 	expectingNotMatchingSimpleNoTypeMessageFormat = "%s - Expect [\"%v\"] Not Matching [\"%v\"] Actual"
+	var2Format                                    = "(%s, %s) = (%v, %v)"
+	var2WithTypeFormat                            = "(%s [t:%T], %s[t:%T]) = (%v, %v)"
+	var3Format                                    = "(%s, %s, %s) = (%v, %v, %v)"
+	keyValFormat                                  = "%s = %v"
+	var3WithTypeFormat                            = "(%s [t:%T], %s[t:%T], %s[t:%T]) = (%v, %v, %v)"
+	messageVar2Format                             = "%s (%s, %s) = (%v, %v)"
+	messageVar3Format                             = "%s (%s, %s, %s) = (%v, %v, %v)"
+	messageMapFormat                              = "%s Ref(s) { %s }"
 )

@@ -71,12 +71,12 @@ func NewDynamicPtr(
 	}
 }
 
-func (receiver *Dynamic) Data() interface{} {
-	return receiver.innerData
+func (it *Dynamic) Data() interface{} {
+	return it.innerData
 }
 
-func (receiver *Dynamic) Value() interface{} {
-	return receiver.innerData
+func (it *Dynamic) Value() interface{} {
+	return it.innerData
 }
 
 // Length Returns length of a slice, map, array
@@ -84,124 +84,124 @@ func (receiver *Dynamic) Value() interface{} {
 // It will also reduce from pointer
 //
 // Reference : https://cutt.ly/PnaWAFn | https://cutt.ly/jnaEig8 | https://play.golang.org/p/UCORoShXlv1
-func (receiver *Dynamic) Length() int {
-	return receiver.length.Value()
+func (it *Dynamic) Length() int {
+	return it.length.Value()
 }
 
-func (receiver *Dynamic) StructStringPtr() *string {
-	if receiver.innerDataString != nil {
-		return receiver.innerDataString
+func (it *Dynamic) StructStringPtr() *string {
+	if it.innerDataString != nil {
+		return it.innerDataString
 	}
 
-	toString := utilstringinternal.AnyToString(receiver.innerData)
-	receiver.innerDataString = &toString
+	toString := utilstringinternal.AnyToString(it.innerData)
+	it.innerDataString = &toString
 
-	return receiver.innerDataString
+	return it.innerDataString
 }
 
-func (receiver *Dynamic) ReflectValue() *reflect.Value {
-	if receiver.reflectVal != nil {
-		return receiver.reflectVal
+func (it *Dynamic) ReflectValue() *reflect.Value {
+	if it.reflectVal != nil {
+		return it.reflectVal
 	}
 
-	reflectValueOfAny := reflect.ValueOf(receiver.innerData)
-	receiver.reflectVal = &reflectValueOfAny
+	reflectValueOfAny := reflect.ValueOf(it.innerData)
+	it.reflectVal = &reflectValueOfAny
 
-	return receiver.reflectVal
+	return it.reflectVal
 }
 
-func (receiver *Dynamic) MapToKeyVal() (*KeyValCollection, error) {
-	return MapAsKeyValSlice(*receiver.ReflectValue())
+func (it *Dynamic) MapToKeyVal() (*KeyValCollection, error) {
+	return MapAsKeyValSlice(*it.ReflectValue())
 }
 
-func (receiver *Dynamic) ReflectKind() reflect.Kind {
-	return receiver.ReflectValue().Kind()
+func (it *Dynamic) ReflectKind() reflect.Kind {
+	return it.ReflectValue().Kind()
 }
 
-func (receiver *Dynamic) ReflectTypeName() string {
-	return receiver.typeName.Value()
+func (it *Dynamic) ReflectTypeName() string {
+	return it.typeName.Value()
 }
 
-func (receiver *Dynamic) ReflectType() reflect.Type {
-	if receiver.reflectType != nil {
-		return receiver.reflectType
+func (it *Dynamic) ReflectType() reflect.Type {
+	if it.reflectType != nil {
+		return it.reflectType
 	}
 
-	reflectType := reflect.TypeOf(receiver.innerData)
-	receiver.reflectType = reflectType
+	reflectType := reflect.TypeOf(it.innerData)
+	it.reflectType = reflectType
 
-	return receiver.reflectType
+	return it.reflectType
 }
 
-func (receiver *Dynamic) IsReflectTypeOf(
+func (it *Dynamic) IsReflectTypeOf(
 	typeRequest reflect.Type,
 ) bool {
-	return receiver.ReflectType() == typeRequest
+	return it.ReflectType() == typeRequest
 }
 
-func (receiver *Dynamic) String() string {
-	return *receiver.StructStringPtr()
+func (it *Dynamic) String() string {
+	return *it.StructStringPtr()
 }
 
-func (receiver *Dynamic) StructString() string {
-	return *receiver.StructStringPtr()
+func (it *Dynamic) StructString() string {
+	return *it.StructStringPtr()
 }
 
-func (receiver *Dynamic) IsReflectKind(checkingKind reflect.Kind) bool {
-	return receiver.ReflectKind() == checkingKind
+func (it *Dynamic) IsReflectKind(checkingKind reflect.Kind) bool {
+	return it.ReflectKind() == checkingKind
 }
 
-func (receiver *Dynamic) IsPointer() bool {
-	if receiver.isPointer.IsUninitialized() {
-		receiver.isPointer = issetter.GetBool(
-			receiver.IsReflectKind(reflect.Ptr))
+func (it *Dynamic) IsPointer() bool {
+	if it.isPointer.IsUninitialized() {
+		it.isPointer = issetter.GetBool(
+			it.IsReflectKind(reflect.Ptr))
 	}
 
-	return receiver.isPointer.IsTrue()
+	return it.isPointer.IsTrue()
 }
 
-func (receiver *Dynamic) IsValueType() bool {
-	return !receiver.IsPointer()
+func (it *Dynamic) IsValueType() bool {
+	return !it.IsPointer()
 }
 
-func (receiver *Dynamic) IsStructStringNullOrEmpty() bool {
-	return receiver.IsNull() || utilstringinternal.IsNullOrEmpty(
-		receiver.StructStringPtr())
+func (it *Dynamic) IsStructStringNullOrEmpty() bool {
+	return it.IsNull() || utilstringinternal.IsNullOrEmpty(
+		it.StructStringPtr())
 }
 
-func (receiver *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
-	return receiver.IsNull() || utilstringinternal.IsNullOrEmptyOrWhitespace(
-		receiver.StructStringPtr())
+func (it *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
+	return it.IsNull() || utilstringinternal.IsNullOrEmptyOrWhitespace(
+		it.StructStringPtr())
 }
 
-func (receiver *Dynamic) IsPrimitive() bool {
-	return reflectinternal.IsPrimitive(receiver.ReflectKind())
+func (it *Dynamic) IsPrimitive() bool {
+	return reflectinternal.IsPrimitive(it.ReflectKind())
 }
 
 // IsNumber true if float (any), byte, int (any), uint(any)
-func (receiver *Dynamic) IsNumber() bool {
-	return reflectinternal.IsNumber(receiver.ReflectKind())
+func (it *Dynamic) IsNumber() bool {
+	return reflectinternal.IsNumber(it.ReflectKind())
 }
 
-func (receiver *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
-	if receiver.IsNull() {
+func (it *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
+	if it.IsNull() {
 		return defaultInt, false
 	}
 
-	stringVal := receiver.StructString()
+	stringVal := it.StructString()
 
 	return converters.StringToIntegerWithDefault(stringVal, defaultInt)
 }
 
-func (receiver *Dynamic) Float64() (val float64, err error) {
-	if receiver.IsNull() {
+func (it *Dynamic) Float64() (val float64, err error) {
+	if it.IsNull() {
 		return constants.Zero, msgtype.
 			ParsingFailed.Error(
 			messages.DynamicFailedToParseToFloat64BecauseNull,
-			receiver.String())
+			it.String())
 	}
 
-	stringVal := receiver.StructString()
+	stringVal := it.StructString()
 	valFloat, err2 := strconv.ParseFloat(stringVal, bitsize.Of64)
 
 	if err2 != nil {
@@ -218,59 +218,59 @@ func (receiver *Dynamic) Float64() (val float64, err error) {
 	return valFloat, err
 }
 
-func (receiver *Dynamic) IsStruct() bool {
-	return receiver.ReflectKind() == reflect.Struct
+func (it *Dynamic) IsStruct() bool {
+	return it.ReflectKind() == reflect.Struct
 }
 
-func (receiver *Dynamic) IsFunc() bool {
-	return receiver.ReflectKind() == reflect.Func
+func (it *Dynamic) IsFunc() bool {
+	return it.ReflectKind() == reflect.Func
 }
 
-func (receiver *Dynamic) IsSliceOrArray() bool {
-	k := receiver.ReflectKind()
+func (it *Dynamic) IsSliceOrArray() bool {
+	k := it.ReflectKind()
 
 	return k == reflect.Slice || k == reflect.Array
 }
 
-func (receiver *Dynamic) IsSliceOrArrayOrMap() bool {
-	k := receiver.ReflectKind()
+func (it *Dynamic) IsSliceOrArrayOrMap() bool {
+	k := it.ReflectKind()
 
 	return k == reflect.Slice ||
 		k == reflect.Array ||
 		k == reflect.Map
 }
 
-func (receiver *Dynamic) IsMap() bool {
-	return receiver.ReflectKind() == reflect.Map
+func (it *Dynamic) IsMap() bool {
+	return it.ReflectKind() == reflect.Map
 }
 
-func (receiver *Dynamic) IsNull() bool {
-	return receiver.innerData == nil
+func (it *Dynamic) IsNull() bool {
+	return it.innerData == nil
 }
 
-func (receiver *Dynamic) IsValid() bool {
-	return receiver.isValid
+func (it *Dynamic) IsValid() bool {
+	return it.isValid
 }
 
-func (receiver *Dynamic) IsInvalid() bool {
-	return !receiver.isValid
+func (it *Dynamic) IsInvalid() bool {
+	return !it.isValid
 }
 
-func (receiver *Dynamic) ConvertUsingFunc(
+func (it *Dynamic) ConvertUsingFunc(
 	converter SimpleInOutConverter,
 	expectedType reflect.Type,
 ) *SimpleResult {
-	return converter(receiver.innerData, expectedType)
+	return converter(it.innerData, expectedType)
 }
 
 // JsonBytesPtr returns empty string on nil.
 // no error on nil.
-func (receiver *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
-	if receiver.IsNull() {
+func (it *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
+	if it.IsNull() {
 		return &[]byte{}, nil
 	}
 
-	marshalledBytes, e := json.Marshal(receiver.innerData)
+	marshalledBytes, e := json.Marshal(it.innerData)
 
 	if e != nil {
 		return &[]byte{}, e
@@ -279,18 +279,18 @@ func (receiver *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
 	return &marshalledBytes, nil
 }
 
-func (receiver *Dynamic) MarshalJSON() ([]byte, error) {
-	return json.Marshal(receiver.innerData)
+func (it *Dynamic) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.innerData)
 }
 
-func (receiver *Dynamic) UnmarshalJSON(data []byte) error {
+func (it *Dynamic) UnmarshalJSON(data []byte) error {
 	return msgtype.
 		NotImplemented.
 		Error(msgtype.UnMarshallingFailed.String(), data)
 }
 
-func (receiver *Dynamic) JsonBytes() (jsonBytesPtr []byte, err error) {
-	allBytes, err := receiver.JsonBytesPtr()
+func (it *Dynamic) JsonBytes() (jsonBytesPtr []byte, err error) {
+	allBytes, err := it.JsonBytesPtr()
 
 	if err != nil {
 		return []byte{}, err
@@ -299,8 +299,8 @@ func (receiver *Dynamic) JsonBytes() (jsonBytesPtr []byte, err error) {
 	return *allBytes, err
 }
 
-func (receiver *Dynamic) StringJson() (jsonString string, err error) {
-	marshalledBytes, err := receiver.JsonBytes()
+func (it *Dynamic) JsonString() (jsonString string, err error) {
+	marshalledBytes, err := it.JsonBytes()
 
 	if err != nil {
 		return constants.EmptyString, err
@@ -309,24 +309,24 @@ func (receiver *Dynamic) StringJson() (jsonString string, err error) {
 	return string(marshalledBytes), err
 }
 
-func (receiver *Dynamic) StringJsonMust() string {
-	marshalledBytes, err := receiver.JsonBytes()
+func (it *Dynamic) JsonStringMust() string {
+	marshalledBytes, err := it.JsonBytes()
 
 	if err != nil {
 		msgtype.
 			MarshallingFailed.
-			HandleUsingPanic(err.Error(), receiver.innerDataString)
+			HandleUsingPanic(err.Error(), it.innerDataString)
 	}
 
 	return string(marshalledBytes)
 }
 
-func (receiver *Dynamic) Clone() *Dynamic {
-	if receiver == nil {
+func (it *Dynamic) Clone() *Dynamic {
+	if it == nil {
 		return nil
 	}
 
 	return NewDynamicPtr(
-		receiver.innerData,
-		receiver.isValid)
+		it.innerData,
+		it.isValid)
 }

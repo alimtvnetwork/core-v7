@@ -30,37 +30,37 @@ func NewStringsOncePtr(initializerFunc func() *[]string) *StringsOnce {
 	}
 }
 
-func (receiver *StringsOnce) MarshalJSON() ([]byte, error) {
-	return json.Marshal(receiver.Value())
+func (it *StringsOnce) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.Value())
 }
 
-func (receiver *StringsOnce) UnmarshalJSON(data []byte) error {
-	receiver.isInitialized = issetter.True
+func (it *StringsOnce) UnmarshalJSON(data []byte) error {
+	it.isInitialized = issetter.True
 
-	return json.Unmarshal(data, &receiver.innerData)
+	return json.Unmarshal(data, &it.innerData)
 }
 
-func (receiver *StringsOnce) Strings() *[]string {
-	return receiver.Value()
+func (it *StringsOnce) Strings() *[]string {
+	return it.Value()
 }
 
-func (receiver *StringsOnce) Values() *[]string {
-	return receiver.Value()
+func (it *StringsOnce) Values() *[]string {
+	return it.Value()
 }
 
-func (receiver *StringsOnce) Value() *[]string {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *StringsOnce) Value() *[]string {
+	if it.isInitialized.IsTrue() {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = issetter.True
 
-	return receiver.innerData
+	return it.innerData
 }
 
-func (receiver *StringsOnce) Length() int {
-	values := receiver.Value()
+func (it *StringsOnce) Length() int {
+	values := it.Value()
 
 	if values == nil {
 		return 0
@@ -69,20 +69,20 @@ func (receiver *StringsOnce) Length() int {
 	return len(*values)
 }
 
-func (receiver *StringsOnce) HasAnyItem() bool {
-	return !receiver.IsEmpty()
+func (it *StringsOnce) HasAnyItem() bool {
+	return !it.IsEmpty()
 }
 
 // IsEmpty returns true if zero
-func (receiver *StringsOnce) IsEmpty() bool {
-	values := receiver.Value()
+func (it *StringsOnce) IsEmpty() bool {
+	values := it.Value()
 
 	return values == nil || len(*values) == 0
 }
 
-func (receiver *StringsOnce) HasAll(searchTerms ...string) bool {
+func (it *StringsOnce) HasAll(searchTerms ...string) bool {
 	for _, term := range searchTerms {
-		if !receiver.IsContains(term) {
+		if !it.IsContains(term) {
 			return false
 		}
 	}
@@ -90,19 +90,19 @@ func (receiver *StringsOnce) HasAll(searchTerms ...string) bool {
 	return true
 }
 
-func (receiver *StringsOnce) UniqueMapLock() *map[string]bool {
-	receiver.Lock()
-	defer receiver.Unlock()
+func (it *StringsOnce) UniqueMapLock() *map[string]bool {
+	it.Lock()
+	defer it.Unlock()
 
-	return receiver.UniqueMap()
+	return it.UniqueMap()
 }
 
-func (receiver *StringsOnce) UniqueMap() *map[string]bool {
-	if receiver.mapOnce != nil {
-		return receiver.mapOnce
+func (it *StringsOnce) UniqueMap() *map[string]bool {
+	if it.mapOnce != nil {
+		return it.mapOnce
 	}
 
-	values := receiver.Values()
+	values := it.Values()
 
 	if values == nil {
 		return &map[string]bool{}
@@ -114,17 +114,17 @@ func (receiver *StringsOnce) UniqueMap() *map[string]bool {
 		hashset[item] = true
 	}
 
-	receiver.mapOnce = &hashset
+	it.mapOnce = &hashset
 
-	return receiver.mapOnce
+	return it.mapOnce
 }
 
-func (receiver *StringsOnce) Has(search string) bool {
-	return receiver.IsContains(search)
+func (it *StringsOnce) Has(search string) bool {
+	return it.IsContains(search)
 }
 
-func (receiver *StringsOnce) IsContains(search string) bool {
-	for _, s := range *receiver.innerData {
+func (it *StringsOnce) IsContains(search string) bool {
+	for _, s := range *it.innerData {
 		if s == search {
 			return true
 		}
@@ -133,33 +133,33 @@ func (receiver *StringsOnce) IsContains(search string) bool {
 	return false
 }
 
-func (receiver *StringsOnce) CsvLines() *[]string {
+func (it *StringsOnce) CsvLines() *[]string {
 	return simplewrap.DoubleQuoteWrapElements(
-		receiver.Value(),
+		it.Value(),
 		false)
 }
 
-func (receiver *StringsOnce) CsvOptions(isSkipQuoteOnlyOnExistence bool) string {
-	return converters.StringsToCsv(receiver.Value(), isSkipQuoteOnlyOnExistence)
+func (it *StringsOnce) CsvOptions(isSkipQuoteOnlyOnExistence bool) string {
+	return converters.StringsToCsvPtr(isSkipQuoteOnlyOnExistence, it.Value())
 }
 
-func (receiver *StringsOnce) Csv() string {
-	return receiver.CsvOptions(false)
+func (it *StringsOnce) Csv() string {
+	return it.CsvOptions(false)
 }
 
-func (receiver *StringsOnce) StringJsonMust() string {
-	marshalledJsonBytes, err := receiver.MarshalJSON()
+func (it *StringsOnce) JsonStringMust() string {
+	marshalledJsonBytes, err := it.MarshalJSON()
 
 	if err != nil {
 		msgtype.MarshallingFailed.
 			HandleUsingPanic(
-				"StringsOnce failed to marshall."+err.Error(), receiver.innerData)
+				"StringsOnce failed to marshall."+err.Error(), it.innerData)
 
 	}
 
 	return string(marshalledJsonBytes)
 }
 
-func (receiver *StringsOnce) String() string {
-	return receiver.Csv()
+func (it *StringsOnce) String() string {
+	return it.Csv()
 }

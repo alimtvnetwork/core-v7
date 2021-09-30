@@ -117,7 +117,7 @@ func (it *Hashset) ResizeLock(capacity int) *Hashset {
 }
 
 func (it *Hashset) Collection() *Collection {
-	return NewCollectionUsingStrings(it.ListPtr(), false)
+	return NewCollectionUsingStrings(it.List(), false)
 }
 
 func (it *Hashset) IsEmptyLock() bool {
@@ -513,7 +513,7 @@ func (it *Hashset) AddCollection(
 		return it
 	}
 
-	for _, element := range *collection.items {
+	for _, element := range collection.items {
 		it.items[element] = true
 	}
 
@@ -534,7 +534,7 @@ func (it *Hashset) AddCollections(
 			continue
 		}
 
-		for _, element := range *collection.items {
+		for _, element := range collection.items {
 			it.items[element] = true
 		}
 	}
@@ -696,7 +696,7 @@ func (it *Hashset) HasAllCollectionItems(
 		return false
 	}
 
-	return it.HasAllStringsPtr(collection.items)
+	return it.HasAllStringsPtr(collection.ListPtr())
 }
 
 func (it *Hashset) HasAll(keys ...string) bool {
@@ -750,9 +750,9 @@ func (it *Hashset) HasWithLock(key string) bool {
 	return isFound && isSet
 }
 
-func (it *Hashset) OrderedList() *[]string {
+func (it *Hashset) OrderedList() []string {
 	if it.IsEmpty() {
-		return &[]string{}
+		return []string{}
 	}
 
 	return it.
@@ -823,12 +823,12 @@ func (it *Hashset) GetFilteredCollection(
 
 		if isBreak {
 			return NewCollectionUsingStrings(
-				&filteredList, false)
+				filteredList, false)
 		}
 	}
 
 	return NewCollectionUsingStrings(
-		&filteredList, false)
+		filteredList, false)
 }
 
 // GetAllExceptHashset Get all hashset items except the mentioned ones in anotherHashset.
@@ -1115,7 +1115,7 @@ func (it *Hashset) Join(
 func (it *Hashset) NonEmptyJoins(
 	joiner string,
 ) string {
-	return stringslice.NonEmptyJoin(
+	return stringslice.NonEmptyJoinPtr(
 		it.ListPtr(),
 		joiner)
 }
@@ -1156,15 +1156,12 @@ func (it *Hashset) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-//goland:noinspection GoLinterLocal
-func (it *Hashset) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it Hashset) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it Hashset) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.

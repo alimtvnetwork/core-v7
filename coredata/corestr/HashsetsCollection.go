@@ -76,15 +76,16 @@ func (it *HashsetsCollection) HasAll(items ...string) bool {
 
 	length := it.Length()
 	boolList := make([]bool, length)
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 	wg.Add(length)
-	hasFunc := func(i int, wg *sync.WaitGroup) {
-		boolList[i] = (*it.items)[i].HasAllStringsPtr(&items)
+	hasFunc := func(i int) {
+		boolList[i] = (*it.items)[i].
+			HasAllStringsPtr(&items)
 		wg.Done()
 	}
 
 	for i := 0; i < length; i++ {
-		go hasFunc(i, wg)
+		go hasFunc(i)
 	}
 
 	wg.Wait()
@@ -283,14 +284,12 @@ func (it *HashsetsCollection) UnmarshalJSON(
 	return err
 }
 
-func (it *HashsetsCollection) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it HashsetsCollection) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it HashsetsCollection) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 func (it *HashsetsCollection) ParseInjectUsingJson(

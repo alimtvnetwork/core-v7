@@ -121,7 +121,7 @@ func (linkedListNode *LinkedListNode) AddCollectionToNode(
 	return linkedListForIncrement.AddStringsPtrToNode(
 		isSkipOnNull,
 		linkedListNode,
-		collection.items)
+		collection.ListPtr())
 }
 
 func (linkedListNode *LinkedListNode) AddNextNode(

@@ -38,7 +38,7 @@ func (it *Hashmap) HasItems() bool {
 }
 
 func (it *Hashmap) Collection() *Collection {
-	return NewCollectionUsingStrings(it.ValuesListPtr(), false)
+	return NewCollectionUsingStrings(it.ValuesList(), false)
 }
 
 func (it *Hashmap) IsEmptyLock() bool {
@@ -305,8 +305,8 @@ func (it *Hashmap) AddOrUpdateCollection(
 		return it
 	}
 
-	for i, element := range *keys.items {
-		it.items[element] = (*values.items)[i]
+	for i, element := range keys.items {
+		it.items[element] = values.items[i]
 	}
 
 	it.hasMapUpdated = true
@@ -525,7 +525,7 @@ func (it *Hashmap) HasAllCollectionItems(
 		return false
 	}
 
-	return it.HasAllStringsPtr(collection.items)
+	return it.HasAllStringsPtr(collection.ListPtr())
 }
 
 func (it *Hashmap) HasAll(keys ...string) bool {
@@ -628,12 +628,12 @@ func (it *Hashmap) GetKeysFilteredCollection(
 
 		if isBreak {
 			return NewCollectionUsingStrings(
-				&filteredList, false)
+				filteredList, false)
 		}
 	}
 
 	return NewCollectionUsingStrings(
-		&filteredList, false)
+		filteredList, false)
 }
 
 func (it *Hashmap) Items() map[string]string {
@@ -653,7 +653,7 @@ func (it *Hashmap) ItemsCopyLock() *map[string]string {
 
 func (it *Hashmap) ValuesCollection() *Collection {
 	return NewCollectionUsingStrings(
-		it.ValuesListPtr(), false)
+		it.ValuesList(), false)
 }
 
 func (it *Hashmap) ValuesHashset() *Hashset {
@@ -663,7 +663,7 @@ func (it *Hashmap) ValuesHashset() *Hashset {
 
 func (it *Hashmap) ValuesCollectionLock() *Collection {
 	return NewCollectionUsingStrings(
-		it.ValuesListCopyPtrLock(), false)
+		*it.ValuesListCopyPtrLock(), false)
 }
 
 func (it *Hashmap) ValuesHashsetLock() *Hashset {
@@ -686,17 +686,21 @@ func (it *Hashmap) ValuesListPtr() *[]string {
 func (it *Hashmap) KeysValuesCollection() (
 	keys, values *Collection,
 ) {
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
-		keys = NewCollectionUsingStrings(it.Keys(), false)
+		keys = NewCollectionUsingStringsPtr(
+			it.Keys(),
+			false)
 
 		wg.Done()
 	}()
 
 	go func() {
-		values = NewCollectionUsingStrings(it.ValuesListPtr(), false)
+		values = NewCollectionUsingStringsPtr(
+			it.ValuesListPtr(),
+			false)
 
 		wg.Done()
 	}()
@@ -709,7 +713,7 @@ func (it *Hashmap) KeysValuesCollection() (
 func (it *Hashmap) KeysValuesList() (
 	keys, values *[]string,
 ) {
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
@@ -747,7 +751,7 @@ func (it *Hashmap) KeysValuesListLock() (
 	keys, values *[]string,
 ) {
 	it.Lock()
-	wg := &sync.WaitGroup{}
+	wg := sync.WaitGroup{}
 	wg.Add(2)
 
 	go func() {
@@ -783,7 +787,7 @@ func (it *Hashmap) Keys() *[]string {
 }
 
 func (it *Hashmap) KeysCollection() *Collection {
-	return NewCollectionUsingStrings(
+	return NewCollectionUsingStringsPtr(
 		it.Keys(),
 		false)
 }
@@ -1087,14 +1091,12 @@ func (it *Hashmap) UnmarshalJSON(data []byte) error {
 	return err
 }
 
-func (it *Hashmap) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it Hashmap) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it Hashmap) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.

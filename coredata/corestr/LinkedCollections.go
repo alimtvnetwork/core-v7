@@ -330,7 +330,7 @@ func (it *LinkedCollections) AddStrings(stringsItems ...string) *LinkedCollectio
 		return it
 	}
 
-	collection := NewCollectionUsingStrings(&stringsItems, false)
+	collection := NewCollectionUsingStrings(stringsItems, false)
 
 	return it.Add(collection)
 }
@@ -981,7 +981,7 @@ func (it *LinkedCollections) AddStringsPtrAsync(
 	}
 
 	go func() {
-		collection := NewCollectionUsingStrings(items, isMakeClone)
+		collection := NewCollectionUsingStringsPtr(items, isMakeClone)
 
 		it.Lock()
 
@@ -1037,7 +1037,7 @@ func (it *LinkedCollections) AddAsyncFuncItems(
 			return
 		}
 
-		collection := NewCollectionUsingStrings(&items, isMakeClone)
+		collection := NewCollectionUsingStrings(items, isMakeClone)
 
 		it.Lock()
 		it.Add(collection)
@@ -1074,7 +1074,7 @@ func (it *LinkedCollections) AddAsyncFuncItemsPointer(
 			return
 		}
 
-		collection := NewCollectionUsingStrings(items, isMakeClone)
+		collection := NewCollectionUsingStringsPtr(items, isMakeClone)
 
 		it.Lock()
 		it.Add(collection)
@@ -1101,7 +1101,7 @@ func (it *LinkedCollections) AddStringsPtr(
 		return it
 	}
 
-	collection := NewCollectionUsingStrings(items, isMakeClone)
+	collection := NewCollectionUsingStringsPtr(items, isMakeClone)
 
 	return it.Add(collection)
 }
@@ -1285,11 +1285,11 @@ func (it *LinkedCollections) AddCollections(
 }
 
 func (it *LinkedCollections) ToStringsPtr() *[]string {
-	return it.ToCollectionSimple().Items()
+	return it.ToCollectionSimple().ListPtr()
 }
 
 func (it *LinkedCollections) ToStrings() []string {
-	return *it.ToCollectionSimple().Items()
+	return it.ToCollectionSimple().List()
 }
 
 func (it *LinkedCollections) ToCollectionSimple() *Collection {
@@ -1364,7 +1364,7 @@ func (it *LinkedCollections) ItemsOfItems() *[]*[]string {
 	nodes := it.GetAllLinkedNodes()
 
 	for i, node := range *nodes {
-		itemsOfItems[i] = node.Element.items
+		itemsOfItems[i] = &node.Element.items
 	}
 
 	return &itemsOfItems
@@ -1391,7 +1391,7 @@ func (it *LinkedCollections) ItemsOfItemsCollection() *[]*Collection {
 func (it *LinkedCollections) ListPtr() *[]string {
 	return it.
 		ToCollection(constants.ArbitraryCapacity5).
-		items
+		ListPtr()
 }
 
 func (it *LinkedCollections) String() string {
@@ -1439,7 +1439,7 @@ func (it *LinkedCollections) Joins(
 	return collection.Join(separator)
 }
 
-func (it *LinkedCollections) JsonModel() *CollectionDataModel {
+func (it *LinkedCollections) JsonModel() []string {
 	return it.ToCollection(0).JsonModel()
 }
 
@@ -1448,16 +1448,16 @@ func (it *LinkedCollections) JsonModelAny() interface{} {
 }
 
 func (it *LinkedCollections) MarshalJSON() ([]byte, error) {
-	return json.Marshal(*it.JsonModel())
+	return json.Marshal(it.JsonModel())
 }
 
 func (it *LinkedCollections) UnmarshalJSON(data []byte) error {
-	var dataModel CollectionDataModel
-	err := json.Unmarshal(data, &dataModel)
+	var dataModelStrings []string
+	err := json.Unmarshal(data, &dataModelStrings)
 
 	if err == nil {
 		it.Clear()
-		it.AddStringsPtr(dataModel.Items, false)
+		it.AddStrings(dataModelStrings...)
 	}
 
 	return err
@@ -1479,14 +1479,12 @@ func (it *LinkedCollections) Clear() *LinkedCollections {
 	return it
 }
 
-func (it *LinkedCollections) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it LinkedCollections) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it LinkedCollections) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 func (it *LinkedCollections) ParseInjectUsingJson(

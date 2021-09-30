@@ -6,16 +6,16 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-func NonEmptyJoin(slice *[]string, joiner string) string {
+func NonEmptyJoin(slice []string, joiner string) string {
 	if slice == nil {
 		return constants.EmptyString
 	}
 
-	length := len(*slice)
+	length := len(slice)
 
 	if length == 0 {
 		return constants.EmptyString
 	}
 
-	return strings.Join(*NonEmptySlicePtr(slice), joiner)
+	return strings.Join(*NonEmptySlicePtr(&slice), joiner)
 }

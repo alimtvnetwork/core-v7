@@ -35,5 +35,5 @@ func VerifyChmodPaths(
 		slice.AddIf(err != nil, err.Error())
 	}
 
-	return msgtype.SliceErrorDefault(slice.Items())
+	return msgtype.SliceErrorDefault(slice.ListPtr())
 }

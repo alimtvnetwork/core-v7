@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 
 	"gitlab.com/evatix-go/core/coredata"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 // NewUsingBytesError Get created with nil.
@@ -104,13 +106,33 @@ func NewPtrUsingBytesPtr(
 	}
 }
 
-func NewFromAny(any interface{}) *Result {
+func NewFromAny(any interface{}) Result {
+	jsonBytes, err := json.Marshal(any)
+
+	if err != nil {
+		return Result{
+			Bytes: nil,
+			Error: msgtype.MarshallingFailed.Error(
+				err.Error(),
+				reflectinternal.TypeName(any)),
+		}
+	}
+
+	return Result{
+		Bytes: jsonBytes,
+		Error: err,
+	}
+}
+
+func NewFromAnyPtr(any interface{}) *Result {
 	jsonBytes, err := json.Marshal(any)
 
 	if err != nil {
 		return &Result{
-			Bytes: []byte{},
-			Error: err,
+			Bytes: nil,
+			Error: msgtype.MarshallingFailed.Error(
+				err.Error(),
+				reflectinternal.TypeName(any)),
 		}
 	}
 
@@ -121,7 +143,7 @@ func NewFromAny(any interface{}) *Result {
 }
 
 func EmptyResultsCollection() *ResultsCollection {
-	list := make([]*Result, 0)
+	list := make([]Result, 0)
 
 	return &ResultsCollection{
 		Items: list,
@@ -129,14 +151,31 @@ func EmptyResultsCollection() *ResultsCollection {
 }
 
 func NewResultsCollection(cap int) *ResultsCollection {
-	list := make([]*Result, 0, cap)
+	list := make([]Result, 0, cap)
 
 	return &ResultsCollection{
 		Items: list,
 	}
 }
 
+func EmptyResultsPtrCollection() *ResultsPtrCollection {
+	list := make([]*Result, 0)
+
+	return &ResultsPtrCollection{
+		Items: list,
+	}
+}
+
+func NewResultsPtrCollection(cap int) *ResultsPtrCollection {
+	list := make([]*Result, 0, cap)
+
+	return &ResultsPtrCollection{
+		Items: list,
+	}
+}
+
 func NewResultsCollectionUsingJsoners(
+	isIgnoreNilOrError bool,
 	addCapacity int,
 	jsoners ...Jsoner,
 ) *ResultsCollection {
@@ -145,15 +184,14 @@ func NewResultsCollectionUsingJsoners(
 		return NewResultsCollection(length)
 	}
 
-	additionalCapacity := len(jsoners)
-	length += additionalCapacity
-	list := make([]*Result, 0, length)
-	resultsCollection := &ResultsCollection{
-		Items: list,
-	}
+	actualLength := len(jsoners)
+	length += actualLength
+	list := NewResultsCollection(length)
 
-	return resultsCollection.
-		AddJsonerPtr(&jsoners)
+	return list.
+		AddJsoners(
+			isIgnoreNilOrError,
+			jsoners...)
 }
 
 func NewResultsCollectionUsingJsonResults(
@@ -165,15 +203,16 @@ func NewResultsCollectionUsingJsonResults(
 		return NewResultsCollection(length)
 	}
 
-	additionalCapacity := len(results)
-	length += additionalCapacity
-	list := make([]*Result, 0, length)
-	resultsCollection := &ResultsCollection{
-		Items: list,
+	actualLength := len(results)
+	length += actualLength
+	list := NewResultsCollection(length)
+
+	if actualLength == 0 {
+		return list
 	}
 
-	return resultsCollection.
-		AddNonNilItemsPtr(results)
+	return list.
+		AddNonNilItemsPtr(results...)
 }
 
 func NewResultsCollectionUsingAnys(
@@ -187,11 +226,73 @@ func NewResultsCollectionUsingAnys(
 
 	additionalCapacity := len(anys)
 	length += additionalCapacity
-	list := make([]*Result, 0, length)
-	resultsCollection := &ResultsCollection{
-		Items: list,
+	list := NewResultsCollection(length)
+
+	return list.
+		AddsAnys(&anys)
+}
+
+func EmptyMapResultsUsingCap() *MapResults {
+	return &MapResults{
+		Items: map[string]Result{},
+	}
+}
+
+func NewMapResultsUsingCap(
+	addCapacity int,
+) *MapResults {
+	return &MapResults{
+		Items: make(map[string]Result, addCapacity),
+	}
+}
+
+func NewMapResultsUsingKeyAnys(
+	addCapacity int,
+	keyAnys ...KeyAny,
+) *MapResults {
+	length := addCapacity
+	if keyAnys == nil {
+		return NewMapResultsUsingCap(length)
 	}
 
-	return resultsCollection.
-		AddsAnysPtr(&anys)
+	additionalCapacity := len(keyAnys)
+	length += additionalCapacity
+	mapResults := NewMapResultsUsingCap(length)
+
+	return mapResults.
+		AddKeyAnys(keyAnys...)
+}
+
+func NewMapResultsUsingKeyResults(
+	addCapacity int,
+	keyWithResults ...KeyWithResult,
+) *MapResults {
+	length := addCapacity
+	if keyWithResults == nil {
+		return NewMapResultsUsingCap(length)
+	}
+
+	additionalCapacity := len(keyWithResults)
+	length += additionalCapacity
+	mapResults := NewMapResultsUsingCap(length)
+
+	return mapResults.
+		AddKeysWithResults(keyWithResults...)
+}
+
+func NewMapResultsUsingKeyJsoners(
+	addCapacity int,
+	keyWithJsoners ...KeyWithJsoner,
+) *MapResults {
+	length := addCapacity
+	if keyWithJsoners == nil {
+		return NewMapResultsUsingCap(length)
+	}
+
+	additionalCapacity := len(keyWithJsoners)
+	length += additionalCapacity
+	mapResults := NewMapResultsUsingCap(length)
+
+	return mapResults.
+		AddKeysWithJsoners(keyWithJsoners...)
 }

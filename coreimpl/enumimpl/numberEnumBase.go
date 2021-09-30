@@ -34,7 +34,7 @@ func newNumberEnumBase(
 
 	rangesToCsvOnce := coreonce.NewStringOncePtr(func() string {
 		return converters.StringsToCsvWithIndexes(
-			&stringRanges,
+			stringRanges,
 		)
 	})
 

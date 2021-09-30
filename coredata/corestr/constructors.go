@@ -68,7 +68,7 @@ func NewHashsetUsingCollection(
 	}
 
 	return NewHashsetUsingStrings(
-		collection.items)
+		&collection.items)
 }
 
 func NewHashsetUsingStringsWithoutPointer(
@@ -138,7 +138,7 @@ func NewCollection(capacity int) *Collection {
 	collection := make([]string, constants.Zero, capacity)
 
 	return &Collection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -146,20 +146,20 @@ func EmptyCollection() *Collection {
 	collection := make([]string, constants.Zero)
 
 	return &Collection{
-		items: &collection,
+		items: collection,
 	}
 }
 
-func NewCollectionUsingStrings(stringItems *[]string, isMakeClone bool) *Collection {
+func NewCollectionUsingStrings(stringItems []string, isMakeClone bool) *Collection {
 	if isMakeClone {
 		length := LengthOfStrings(stringItems)
 		slice := make([]string, 0, length+constants.Capacity4)
 
 		collection := &Collection{
-			items: &slice,
+			items: slice,
 		}
 
-		return collection.AddStringsPtr(stringItems)
+		return collection.AddStringsPtr(&stringItems)
 	}
 
 	return &Collection{
@@ -167,8 +167,36 @@ func NewCollectionUsingStrings(stringItems *[]string, isMakeClone bool) *Collect
 	}
 }
 
-func NewCollectionUsingStringsPlusCap(stringItems *[]string, capacity int) *Collection {
+func NewCollectionUsingStringsPtr(stringItems *[]string, isMakeClone bool) *Collection {
+	if isMakeClone {
+		length := LengthOfStringsPtr(stringItems)
+		slice := make([]string, 0, length+constants.Capacity4)
+
+		collection := &Collection{
+			items: slice,
+		}
+
+		return collection.AddStringsPtr(stringItems)
+	}
+
+	if stringItems == nil {
+		return EmptyCollection()
+	}
+
+	return &Collection{
+		items: *stringItems,
+	}
+}
+
+func NewCollectionUsingStringsPlusCap(stringItems []string, capacity int) *Collection {
 	length := LengthOfStrings(stringItems)
+	collection := NewCollection(length + capacity)
+
+	return collection.Adds(stringItems...)
+}
+
+func NewCollectionUsingStringsPlusCapPtr(stringItems *[]string, capacity int) *Collection {
+	length := LengthOfStringsPtr(stringItems)
 	collection := NewCollection(length + capacity)
 
 	return collection.AddStringsPtr(stringItems)
@@ -185,7 +213,7 @@ func NewCollectionUsingLength(length, capacity int) *Collection {
 	collection := make([]string, length, capacity)
 
 	return &Collection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -466,9 +494,9 @@ func NewHashmapUsingCollection(
 		return EmptyHashmap()
 	}
 
-	itemsMap := converters.KeysValuesStringsToMap(
-		keys.items,
-		values.items)
+	itemsMap := converters.KeysValuesStringsToMapPtr(
+		keys.ListPtr(),
+		values.ListPtr())
 
 	return NewHashmapUsingMap(
 		*itemsMap,
@@ -483,7 +511,7 @@ func NewHashmapUsingStrings(
 		return EmptyHashmap()
 	}
 
-	itemsMap := converters.KeysValuesStringsToMap(
+	itemsMap := converters.KeysValuesStringsToMapPtr(
 		keys,
 		values)
 
@@ -764,10 +792,25 @@ func NewCollectionsOfCollectionUsingStringsOfPointerStrings(
 }
 
 func NewCollectionsOfCollectionUsingStrings(
+	isMakeClone bool,
+	stringItems ...string,
+) *CollectionsOfCollection {
+	length := LengthOfStrings(
+		stringItems)
+
+	return NewCollectionsOfCollectionUsingLength(
+		constants.Zero,
+		length,
+	).AddStringsPtr(
+		&stringItems,
+		isMakeClone)
+}
+
+func NewCollectionsOfCollectionUsingStringsPtr(
 	stringItems *[]string,
 	isMakeClone bool,
 ) *CollectionsOfCollection {
-	length := LengthOfStrings(
+	length := LengthOfStringsPtr(
 		stringItems)
 
 	return NewCollectionsOfCollectionUsingLength(
@@ -779,11 +822,25 @@ func NewCollectionsOfCollectionUsingStrings(
 }
 
 func NewCollectionsOfCollectionUsingStringsPlusCap(
-	stringItems *[]string,
+	stringItems []string,
 	capacity int,
 	isMakeClone bool,
 ) *CollectionsOfCollection {
 	length := LengthOfStrings(
+		stringItems)
+	collection := NewCollectionsOfCollection(
+		length + capacity)
+
+	return collection.AddStringsPtr(
+		&stringItems, isMakeClone)
+}
+
+func NewCollectionsOfCollectionUsingStringsPlusCapPtr(
+	stringItems *[]string,
+	capacity int,
+	isMakeClone bool,
+) *CollectionsOfCollection {
+	length := LengthOfStringsPtr(
 		stringItems)
 	collection := NewCollectionsOfCollection(
 		length + capacity)
@@ -871,9 +928,20 @@ func NewCollectionsOfCollectionPtrUsingStringsOfPointerStrings(
 }
 
 func NewCollectionsOfCollectionPtrUsingStrings(
-	stringItems *[]string,
+	stringItems []string,
 ) *CollectionsOfCollectionPtr {
 	length := LengthOfStrings(stringItems)
+
+	return NewCollectionsOfCollectionPtrUsingLength(
+		constants.Zero,
+		length,
+	).AddStringsPtr(&stringItems, constants.Zero)
+}
+
+func NewCollectionsOfCollectionPtrUsingStringsPtr(
+	stringItems *[]string,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStringsPtr(stringItems)
 
 	return NewCollectionsOfCollectionPtrUsingLength(
 		constants.Zero,
@@ -882,10 +950,25 @@ func NewCollectionsOfCollectionPtrUsingStrings(
 }
 
 func NewCollectionsOfCollectionPtrUsingStringsPlusCap(
+	addCapacity int,
+	stringItems ...string,
+) *CollectionsOfCollectionPtr {
+	length := LengthOfStrings(
+		stringItems)
+
+	collection := NewCollectionsOfCollectionPtr(
+		length + addCapacity)
+
+	return collection.AddStringsPtr(
+		&stringItems,
+		constants.Zero)
+}
+
+func NewCollectionsOfCollectionPtrUsingStringsPlusCapPtr(
 	stringItems *[]string,
 	addCapacity int,
 ) *CollectionsOfCollectionPtr {
-	length := LengthOfStrings(
+	length := LengthOfStringsPtr(
 		stringItems)
 	collection := NewCollectionsOfCollectionPtr(
 		length + addCapacity)

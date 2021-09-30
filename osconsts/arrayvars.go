@@ -31,6 +31,15 @@ var (
 	}
 
 	UnixGroups = []string{
-		"android", "darwin", "dragonfly", "freebsd", "linux", "nacl", "netbsd", "openBSD", "plan9", "solaris",
+		"android",
+		"darwin",
+		"dragonfly",
+		"freebsd",
+		"linux",
+		"nacl",
+		"netbsd",
+		"openBSD",
+		"plan9",
+		"solaris",
 	}
 )

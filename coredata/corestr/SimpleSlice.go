@@ -23,7 +23,8 @@ func NewSimpleSlice(capacity int) *SimpleSlice {
 }
 
 func NewSimpleSliceUsing(
-	isClone bool, lines []string,
+	isClone bool,
+	lines ...string,
 ) *SimpleSlice {
 	if lines == nil {
 		return EmptySimpleSlice()
@@ -272,6 +273,18 @@ func (it *SimpleSlice) JoinCsvLine() string {
 	return strings.Join(it.CsvStrings(), constants.CommaUnixNewLine)
 }
 
+func (it *SimpleSlice) EachItemSplitBy(splitBy string) []string {
+	slice := make([]string, 0, it.Length()*constants.Capacity3)
+
+	for _, item := range it.Items {
+		splitItems := strings.Split(item, splitBy)
+
+		slice = append(slice, splitItems...)
+	}
+
+	return slice
+}
+
 func (it *SimpleSlice) PrependJoin(
 	joiner string,
 	prependItems ...string,
@@ -292,6 +305,20 @@ func (it *SimpleSlice) AppendJoin(
 	return it.
 		ConcatNew(appendItems...).
 		Join(joiner)
+}
+
+func (it *SimpleSlice) PrependAppend(
+	prependItems, appendItems []string,
+) *SimpleSlice {
+	if len(prependItems) > 0 {
+		it.Items = append(prependItems, it.Items...)
+	}
+
+	if len(appendItems) > 0 {
+		it.Items = append(it.Items, appendItems...)
+	}
+
+	return it
 }
 
 func (it *SimpleSlice) IsEqual(another *SimpleSlice) bool {
@@ -343,7 +370,7 @@ func (it *SimpleSlice) IsDistinctEqual(lines []string) bool {
 
 func (it *SimpleSlice) Collection(isClone bool) *Collection {
 	return NewCollectionUsingStrings(
-		&it.Items,
+		it.Items,
 		isClone)
 }
 
@@ -401,7 +428,7 @@ func (it *SimpleSlice) ConcatNew(items ...string) *SimpleSlice {
 }
 
 func (it *SimpleSlice) ToCollection(isClone bool) *Collection {
-	return NewCollectionUsingStrings(&it.Items, isClone)
+	return NewCollectionUsingStrings(it.Items, isClone)
 }
 
 func (it *SimpleSlice) CsvStrings() []string {
@@ -445,14 +472,12 @@ func (it *SimpleSlice) UnmarshalJSON(
 	return err
 }
 
-func (it *SimpleSlice) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it SimpleSlice) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it SimpleSlice) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 func (it *SimpleSlice) ParseInjectUsingJson(
