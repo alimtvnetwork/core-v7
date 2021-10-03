@@ -389,40 +389,37 @@ func EmptyHashsetsCollection() *HashsetsCollection {
 	collection := make([]*Hashset, constants.Zero, constants.Zero)
 
 	return &HashsetsCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
 func NewHashsetsCollection(
-	hashsets *[]Hashset,
+	hashsets ...Hashset,
 ) *HashsetsCollection {
-	if hashsets == nil ||
-		*hashsets == nil {
+	length := len(hashsets)
+
+	if length == 0 {
 		return EmptyHashsetsCollection()
 	}
 
-	length := len(*hashsets)
 	collection := make(
 		[]*Hashset,
 		length,
 		length+constants.ArbitraryCapacity10)
 
-	//goland:noinspection GoLinterLocal,GoVetCopyLock
-	for i, hashset := range *hashsets { //nolint:govet
-		//goland:noinspection GoLinterLocal
+	for i, hashset := range hashsets {
 		collection[i] = &hashset
 	}
 
 	return &HashsetsCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
 func NewHashsetsCollectionUsingPointerHashsets(
-	hashsets *[]*Hashset,
+	hashsets ...*Hashset,
 ) *HashsetsCollection {
-	if hashsets == nil ||
-		*hashsets == nil {
+	if len(hashsets) == 0 {
 		return EmptyHashsetsCollection()
 	}
 
@@ -437,7 +434,7 @@ func NewHashsetsCollectionUsingLength(
 	collection := make([]*Hashset, length, capacity)
 
 	return &HashsetsCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 

@@ -4,6 +4,7 @@ import "gitlab.com/evatix-go/core/constants"
 
 const (
 	funcPrintFormat     = "func %s (...) line (%d):\n\r\tFile %s:%d"
+	shortStringFormat   = "%s (%d) -> %s:%d"
 	fileWithLineFormat  = "%s:%d"
 	DefaultStackCount   = 12
 	defaultInternalSkip = constants.One

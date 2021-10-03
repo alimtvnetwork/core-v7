@@ -194,7 +194,28 @@ func NewResultsCollectionUsingJsoners(
 			jsoners...)
 }
 
-func NewResultsCollectionUsingJsonResults(
+func NewResultsCollectionPtrUsingJsonResultsPtr(
+	addCapacity int,
+	results ...*Result,
+) *ResultsPtrCollection {
+	length := addCapacity
+	if results == nil {
+		return NewResultsPtrCollection(length)
+	}
+
+	actualLength := len(results)
+	length += actualLength
+	list := NewResultsPtrCollection(length)
+
+	if actualLength == 0 {
+		return list
+	}
+
+	return list.
+		AddNonNilItemsPtr(results...)
+}
+
+func NewResultsCollectionUsingJsonResultsPtr(
 	addCapacity int,
 	results ...*Result,
 ) *ResultsCollection {
@@ -215,6 +236,27 @@ func NewResultsCollectionUsingJsonResults(
 		AddNonNilItemsPtr(results...)
 }
 
+func NewResultsCollectionUsingJsonResults(
+	addCapacity int,
+	results ...Result,
+) *ResultsCollection {
+	length := addCapacity
+	if results == nil {
+		return NewResultsCollection(length)
+	}
+
+	actualLength := len(results)
+	length += actualLength
+	list := NewResultsCollection(length)
+
+	if actualLength == 0 {
+		return list
+	}
+
+	return list.
+		Adds(results...)
+}
+
 func NewResultsCollectionUsingAnys(
 	addCapacity int,
 	anys ...interface{},
@@ -232,7 +274,7 @@ func NewResultsCollectionUsingAnys(
 		AddsAnys(&anys)
 }
 
-func EmptyMapResultsUsingCap() *MapResults {
+func EmptyMapResults() *MapResults {
 	return &MapResults{
 		Items: map[string]Result{},
 	}
@@ -261,6 +303,28 @@ func NewMapResultsUsingKeyAnys(
 
 	return mapResults.
 		AddKeyAnys(keyAnys...)
+}
+
+func NewMapResultsUsingMap(
+	isClone, isDeepClone bool,
+	addCapacity int,
+	mapResults map[string]Result,
+) *MapResults {
+	if len(mapResults) == 0 {
+		return NewMapResultsUsingCap(
+			addCapacity)
+	}
+
+	additionalCapacity :=
+		len(mapResults) +
+			addCapacity
+	finalMapResults := NewMapResultsUsingCap(
+		additionalCapacity)
+
+	return finalMapResults.AddMapResultsUsingCloneOption(
+		isClone,
+		isDeepClone,
+		mapResults)
 }
 
 func NewMapResultsUsingKeyResults(

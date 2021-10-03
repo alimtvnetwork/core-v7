@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"sort"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
@@ -451,6 +452,37 @@ func (it *SimpleSlice) JsonModel() []string {
 	return it.Items
 }
 
+func (it *SimpleSlice) Sort() *SimpleSlice {
+	sort.Strings(it.Items)
+
+	return it
+}
+
+func (it *SimpleSlice) Reverse() *SimpleSlice {
+	length := it.Length()
+
+	if length <= 1 {
+		return it
+	}
+
+	if length == 2 {
+		it.Items[0], it.Items[1] = it.Items[1], it.Items[0]
+
+		return it
+	}
+
+	mid := length / 2
+	lastIndex := length - 1
+
+	for i := 0; i < mid; i++ {
+		first := it.Items[i]
+		it.Items[i] = it.Items[lastIndex-i]
+		it.Items[lastIndex-i] = first
+	}
+
+	return it
+}
+
 func (it *SimpleSlice) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
@@ -496,14 +528,14 @@ func (it *SimpleSlice) ParseInjectUsingJson(
 func (it *SimpleSlice) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
 ) *SimpleSlice {
-	hashSet, err := it.
+	parsedResult, err := it.
 		ParseInjectUsingJson(jsonResult)
 
 	if err != nil {
 		panic(err)
 	}
 
-	return hashSet
+	return parsedResult
 }
 
 func (it *SimpleSlice) AsJsoner() corejson.Jsoner {

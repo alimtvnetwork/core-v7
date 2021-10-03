@@ -56,50 +56,58 @@ func NewSimpleResult(
 	}
 }
 
-func (receiver *SimpleResult) GetErrorOnTypeMismatch(
+func (it *SimpleResult) GetErrorOnTypeMismatch(
 	typeMatch reflect.Type,
 	isIncludeInvalidMessage bool,
 ) error {
-	if receiver.IsReflectTypeOf(typeMatch) {
+	if it.IsReflectTypeOf(typeMatch) {
 		return nil
 	}
 
 	typeMismatchMessage := msgtype.CombineWithMsgType(
 		msgtype.TypeMismatch,
-		"Current type - ["+receiver.ReflectTypeName()+"], expected type",
+		"Current type - ["+it.ReflectTypeName()+"], expected type",
 		typeMatch) + constants.NewLineUnix
 
 	if !isIncludeInvalidMessage {
 		return errors.New(typeMismatchMessage)
 	}
 
-	return errors.New(typeMismatchMessage + receiver.Message)
+	return errors.New(typeMismatchMessage + it.Message)
 }
 
-func (receiver *SimpleResult) InvalidError() error {
-	if receiver.err != nil {
-		return receiver.err
+func (it *SimpleResult) InvalidError() error {
+	if it.err != nil {
+		return it.err
 	}
 
-	if utilstringinternal.IsEmptyOrWhitespace(receiver.Message) {
+	if utilstringinternal.IsEmptyOrWhitespace(it.Message) {
 		return nil
 	}
 
-	if receiver.err == nil {
-		receiver.err = errors.New(receiver.Message)
+	if it.err == nil {
+		it.err = errors.New(it.Message)
 	}
 
-	return receiver.err
+	return it.err
 }
 
-func (receiver *SimpleResult) Clone() *SimpleResult {
-	if receiver == nil {
+func (it *SimpleResult) Clone() SimpleResult {
+	return SimpleResult{
+		Dynamic: it.Dynamic,
+		Result:  it.Result,
+		Message: it.Message,
+	}
+}
+
+func (it *SimpleResult) ClonePtr() *SimpleResult {
+	if it == nil {
 		return nil
 	}
 
 	return &SimpleResult{
-		Dynamic: receiver.Dynamic,
-		Result:  receiver.Result,
-		Message: receiver.Message,
+		Dynamic: it.Dynamic,
+		Result:  it.Result,
+		Message: it.Message,
 	}
 }

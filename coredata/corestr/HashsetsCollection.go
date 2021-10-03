@@ -10,19 +10,15 @@ import (
 )
 
 type HashsetsCollection struct {
-	items *[]*Hashset
+	items []*Hashset
 }
 
 func (it *HashsetsCollection) IsEmpty() bool {
-	return it.items == nil ||
-		*it.items == nil ||
-		len(*it.items) == 0
+	return it.Length() == 0
 }
 
 func (it *HashsetsCollection) HasItems() bool {
-	return it.items != nil &&
-		*it.items != nil &&
-		len(*it.items) > 0
+	return it.Length() > 0
 }
 
 func (it *HashsetsCollection) IndexOf(index int) *Hashset {
@@ -31,17 +27,17 @@ func (it *HashsetsCollection) IndexOf(index int) *Hashset {
 		return nil
 	}
 
-	hashset := (*it.items)[index]
+	hashset := it.items[index]
 
 	return hashset
 }
 
 func (it *HashsetsCollection) ListPtr() *[]*Hashset {
-	return it.items
+	return &it.items
 }
 
 func (it *HashsetsCollection) List() []*Hashset {
-	return *it.items
+	return it.items
 }
 
 func (it *HashsetsCollection) StringsList() *[]string {
@@ -50,14 +46,14 @@ func (it *HashsetsCollection) StringsList() *[]string {
 	}
 
 	completeLength := 0
-	for _, hashset := range *it.items {
+	for _, hashset := range it.items {
 		completeLength += hashset.Length()
 	}
 
 	stringsList := make([]string, completeLength)
 	index := 0
 
-	for _, hashset := range *it.items {
+	for _, hashset := range it.items {
 		for _, item := range *hashset.ListPtr() {
 			stringsList[index] = item
 			index++
@@ -79,7 +75,7 @@ func (it *HashsetsCollection) HasAll(items ...string) bool {
 	wg := sync.WaitGroup{}
 	wg.Add(length)
 	hasFunc := func(i int) {
-		boolList[i] = (*it.items)[i].
+		boolList[i] = it.items[i].
 			HasAllStringsPtr(&items)
 		wg.Done()
 	}
@@ -102,7 +98,7 @@ func (it *HashsetsCollection) HasAll(items ...string) bool {
 func (it *HashsetsCollection) ListDirectPtr() *[]Hashset {
 	list := make([]Hashset, it.Length())
 
-	for i, hashset := range *it.items {
+	for i, hashset := range it.items {
 		//goland:noinspection GoLinterLocal,GoVetCopyLock
 		list[i] = *hashset //nolint:govet
 	}
@@ -117,13 +113,13 @@ func (it *HashsetsCollection) AddHashsetsCollection(
 		return it
 	}
 
-	items := *it.items
+	items := it.items
 
-	for _, nextHashset := range *next.items {
+	for _, nextHashset := range next.items {
 		items = append(items, nextHashset)
 	}
 
-	it.items = &items
+	it.items = items
 
 	return it
 }
@@ -132,7 +128,7 @@ func (it *HashsetsCollection) ConcatNew(
 	nextCollections ...*HashsetsCollection,
 ) *HashsetsCollection {
 	if nextCollections == nil || len(nextCollections) == 0 {
-		return NewHashsetsCollectionUsingPointerHashsets(it.items)
+		return NewHashsetsCollectionUsingPointerHashsets(it.items...)
 	}
 
 	length := it.Length() + constants.Capacity4
@@ -154,8 +150,8 @@ func (it *HashsetsCollection) ConcatNew(
 func (it *HashsetsCollection) Add(
 	hashset *Hashset,
 ) *HashsetsCollection {
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		hashset)
 
 	return it
@@ -168,7 +164,7 @@ func (it *HashsetsCollection) AddNonNil(
 		return it
 	}
 
-	*it.items = append(*it.items, hashset)
+	it.items = append(it.items, hashset)
 
 	return it
 }
@@ -176,11 +172,11 @@ func (it *HashsetsCollection) AddNonNil(
 func (it *HashsetsCollection) AddNonEmpty(
 	hashset *Hashset,
 ) *HashsetsCollection {
-	if hashset == nil || hashset.IsEmpty() {
+	if hashset.IsEmpty() {
 		return it
 	}
 
-	*it.items = append(*it.items, hashset)
+	it.items = append(it.items, hashset)
 
 	return it
 }
@@ -194,12 +190,12 @@ func (it *HashsetsCollection) Adds(
 	}
 
 	for _, hashset := range hashsets {
-		if hashset == nil || hashset.IsEmpty() {
+		if hashset.IsEmpty() {
 			continue
 		}
 
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			hashset)
 	}
 
@@ -207,12 +203,15 @@ func (it *HashsetsCollection) Adds(
 }
 
 func (it *HashsetsCollection) Length() int {
-	if it.items == nil ||
-		*it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
+}
+
+func (it *HashsetsCollection) LastIndex() int {
+	return it.Length() - 1
 }
 
 func (it *HashsetsCollection) IsEqual(another HashsetsCollection) bool {
@@ -248,8 +247,8 @@ func (it *HashsetsCollection) IsEqualPtr(another *HashsetsCollection) bool {
 		return false
 	}
 
-	for i, hashset := range *it.items {
-		anotherHashset := (*another.items)[i]
+	for i, hashset := range it.items {
+		anotherHashset := another.items[i]
 
 		if !hashset.IsEqualsPtr(anotherHashset) {
 			return false
@@ -325,7 +324,7 @@ func (it *HashsetsCollection) String() string {
 
 	strList := make([]string, it.Length())
 
-	for i, hashset := range *it.items {
+	for i, hashset := range it.items {
 		strList[i] = hashset.String()
 	}
 

@@ -865,6 +865,30 @@ func (it *Collection) Skip(
 		false)
 }
 
+func (it *Collection) Reverse() *Collection {
+	length := it.Length()
+
+	if length <= constants.Capacity1 {
+		return it
+	}
+
+	if length == constants.Capacity2 {
+		it.items[0], it.items[1] = it.items[1], it.items[0]
+
+		return it
+	}
+
+	mid := length / 2
+	lastIndex := length - 1
+
+	for i := 0; i < mid; i++ {
+		it.items[i], it.items[lastIndex-i] =
+			it.items[lastIndex-i], it.items[i]
+	}
+
+	return it
+}
+
 func (it *Collection) GetPagesSize(
 	eachPageSize int,
 ) int {
@@ -892,13 +916,24 @@ func (it *Collection) GetPagedCollection(
 	collectionOfCollection := NewCollectionsOfCollection(
 		pagesPossibleCeiling)
 
-	for i := 1; i <= pagesPossibleCeiling; i++ {
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
 		pagedCollection := it.GetSinglePageCollection(
-			eachPageSize, i)
+			eachPageSize,
+			oneBasedPageIndex,
+		)
 
-		collectionOfCollection.Adds(
-			pagedCollection)
+		(*collectionOfCollection.items)[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
 	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
 
 	return collectionOfCollection
 }

@@ -1,7 +1,7 @@
 package corestr
 
 type HashsetsCollectionDataModel struct {
-	Items *[]*Hashset `json:"HashsetsCollections"`
+	Items []*Hashset `json:"HashsetsCollections"`
 }
 
 //goland:noinspection GoUnusedExportedFunction

@@ -1,14 +1,33 @@
 package stringslice
 
-func InPlaceReverse(list *[]string) *[]string {
-	length := len(*list)
-	mid := length / 2
+import "gitlab.com/evatix-go/core/constants"
 
-	for i := 0; i < mid; i++ {
-		temp := (*list)[i]
-		(*list)[i] = (*list)[length-1-i]
-		(*list)[length-1-i] = temp
+func InPlaceReverse(list *[]string) *[]string {
+	if list == nil {
+		return &[]string{}
 	}
 
-	return list
+	nonPtrList := *list
+	length := len(nonPtrList)
+
+	if length <= 1 {
+		return list
+	}
+
+	if length == constants.Capacity2 {
+		nonPtrList[0], nonPtrList[1] =
+			nonPtrList[1], nonPtrList[0]
+
+		return &nonPtrList
+	}
+
+	mid := length / 2
+	lastIndex := length - 1
+
+	for i := 0; i < mid; i++ {
+		nonPtrList[i], nonPtrList[lastIndex-i] =
+			nonPtrList[lastIndex-i], nonPtrList[i]
+	}
+
+	return &nonPtrList
 }

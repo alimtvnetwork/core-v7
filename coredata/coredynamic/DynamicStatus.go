@@ -23,14 +23,22 @@ func InvalidDynamicStatus(message string) *DynamicStatus {
 // Clone Warning: Cannot clone dynamic data or interface properly but set it again
 //
 // If it is a pointer one needs to copy it manually.
-func (receiver *DynamicStatus) Clone() *DynamicStatus {
-	if receiver == nil {
+func (it DynamicStatus) Clone() DynamicStatus {
+	return DynamicStatus{
+		Dynamic: it.Dynamic.Clone(),
+		Index:   constants.InvalidNotFoundCase,
+		Message: it.Message,
+	}
+}
+
+func (it *DynamicStatus) ClonePtr() *DynamicStatus {
+	if it == nil {
 		return nil
 	}
 
 	return &DynamicStatus{
-		Dynamic: *receiver.Dynamic.Clone(),
+		Dynamic: it.Dynamic.Clone(),
 		Index:   constants.InvalidNotFoundCase,
-		Message: receiver.Message,
+		Message: it.Message,
 	}
 }

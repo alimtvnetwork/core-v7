@@ -2,11 +2,14 @@ package codestack
 
 import (
 	"fmt"
+	"math"
 	"strings"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaultcapacity"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type TraceCollection struct {
@@ -315,6 +318,88 @@ func (it *TraceCollection) Limit(limit int) []Trace {
 	return it.Take(limit)
 }
 
+func (it *TraceCollection) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := it.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (it *TraceCollection) GetPagedCollection(
+	eachPageSize int,
+) []*TraceCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return []*TraceCollection{}
+	}
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := make([]*TraceCollection, pagesPossibleCeiling)
+
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
+		pagedCollection := it.GetSinglePageCollection(
+			eachPageSize,
+			oneBasedPageIndex,
+		)
+
+		collectionOfCollection[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
+	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
+
+	return collectionOfCollection
+}
+
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
+func (it *TraceCollection) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+) *TraceCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return it
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	endingIndex := skipItems + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := it.Items[skipItems:endingIndex]
+
+	return NewNewTraceCollectionUsing(false, list...)
+}
+
 func (it *TraceCollection) Length() int {
 	if it == nil {
 		return 0
@@ -497,6 +582,44 @@ func (it *TraceCollection) FileWithLinesStrings() []string {
 	}
 
 	return list
+}
+
+func (it *TraceCollection) ShortStrings() []string {
+	list := make([]string, it.Length())
+
+	for i, item := range it.Items {
+		list[i] = item.ShortString()
+	}
+
+	return list
+}
+
+func (it *TraceCollection) JoinShortStrings(joiner string) string {
+	return strings.Join(it.ShortStrings(), joiner)
+}
+
+func (it *TraceCollection) Reverse() *TraceCollection {
+	length := it.Length()
+
+	if length <= 1 {
+		return it
+	}
+
+	if length == 2 {
+		it.Items[0], it.Items[1] = it.Items[1], it.Items[0]
+
+		return it
+	}
+
+	mid := length / 2
+	lastIndex := length - 1
+
+	for i := 0; i < mid; i++ {
+		it.Items[i], it.Items[lastIndex-i] =
+			it.Items[lastIndex-i], it.Items[i]
+	}
+
+	return it
 }
 
 func (it *TraceCollection) JsonStrings() []string {

@@ -9,6 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
 	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -23,8 +24,8 @@ type Dynamic struct {
 	reflectType     reflect.Type
 	reflectVal      *reflect.Value
 	innerDataString *string
-	typeName        *coreonce.StringOnce
-	length          *coreonce.IntegerOnce
+	typeName        coreonce.StringOnce
+	length          coreonce.IntegerOnce
 	isPointer       issetter.Value
 }
 
@@ -58,10 +59,10 @@ func NewDynamicPtr(
 	return &Dynamic{
 		innerData: data,
 		isValid:   isValid,
-		typeName: coreonce.NewStringOncePtr(func() string {
+		typeName: coreonce.NewStringOnce(func() string {
 			return fmt.Sprintf(constants.SprintTypeFormat, data)
 		}),
-		length: coreonce.NewIntegerOncePtr(func() int {
+		length: coreonce.NewIntegerOnce(func() int {
 			if data == nil {
 				return 0
 			}
@@ -263,6 +264,14 @@ func (it *Dynamic) ConvertUsingFunc(
 	return converter(it.innerData, expectedType)
 }
 
+func (it Dynamic) NonPtr() Dynamic {
+	return it
+}
+
+func (it *Dynamic) Ptr() *Dynamic {
+	return it
+}
+
 // JsonBytesPtr returns empty string on nil.
 // no error on nil.
 func (it *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
@@ -287,6 +296,60 @@ func (it *Dynamic) UnmarshalJSON(data []byte) error {
 	return msgtype.
 		NotImplemented.
 		Error(msgtype.UnMarshallingFailed.String(), data)
+}
+
+func (it *Dynamic) JsonModel() interface{} {
+	return it.innerData
+}
+
+func (it *Dynamic) JsonModelAny() interface{} {
+	return it.JsonModel()
+}
+
+func (it Dynamic) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
+
+func (it Dynamic) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
+}
+
+//goland:noinspection GoLinterLocal
+func (it *Dynamic) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*Dynamic, error) {
+	err := jsonResult.Unmarshal(it)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return it, nil
+}
+
+// ParseInjectUsingJsonMust Panic if error
+//goland:noinspection GoLinterLocal
+func (it *Dynamic) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *Dynamic {
+	newUsingJson, err :=
+		it.ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return newUsingJson
+}
+
+func (it *Dynamic) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := it.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
 }
 
 func (it *Dynamic) JsonBytes() (jsonBytesPtr []byte, err error) {
@@ -321,7 +384,13 @@ func (it *Dynamic) JsonStringMust() string {
 	return string(marshalledBytes)
 }
 
-func (it *Dynamic) Clone() *Dynamic {
+func (it Dynamic) Clone() Dynamic {
+	return NewDynamic(
+		it.innerData,
+		it.isValid)
+}
+
+func (it *Dynamic) ClonePtr() *Dynamic {
 	if it == nil {
 		return nil
 	}

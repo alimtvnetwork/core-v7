@@ -1117,7 +1117,7 @@ func (it *CharCollectionMap) HashsetsCollectionByStringFirstChar(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(&hashsets)
+	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
 }
 
 func (it *CharCollectionMap) HashsetsCollection() *HashsetsCollection {
@@ -1140,7 +1140,7 @@ func (it *CharCollectionMap) HashsetsCollection() *HashsetsCollection {
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(&hashsets)
+	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
 }
 
 func (it *CharCollectionMap) HashsetsCollectionByChars(
@@ -1165,7 +1165,7 @@ func (it *CharCollectionMap) HashsetsCollectionByChars(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(&hashsets)
+	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
 }
 
 func (it *CharCollectionMap) JsonModel() *CharCollectionDataModel {

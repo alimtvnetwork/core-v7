@@ -2,9 +2,12 @@ package corejson
 
 import (
 	"errors"
+	"math"
 	"strings"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type ResultsCollection struct {
@@ -361,6 +364,32 @@ func (it *ResultsCollection) Adds(
 	return it
 }
 
+func (it *ResultsCollection) AddMapResults(
+	mapResults *MapResults,
+) *ResultsCollection {
+	if mapResults.IsEmpty() {
+		return it
+	}
+
+	return it.AddRawMapResults(mapResults.Items)
+}
+
+func (it *ResultsCollection) AddRawMapResults(
+	mapResults map[string]Result,
+) *ResultsCollection {
+	if len(mapResults) == 0 {
+		return it
+	}
+
+	for _, result := range mapResults {
+		it.Items = append(
+			it.Items,
+			result)
+	}
+
+	return it
+}
+
 func (it *ResultsCollection) AddsPtr(
 	results ...*Result,
 ) *ResultsCollection {
@@ -377,6 +406,20 @@ func (it *ResultsCollection) AddsPtr(
 			it.Items,
 			*result)
 	}
+
+	return it
+}
+
+func (it *ResultsCollection) AddAny(
+	any interface{},
+) *ResultsCollection {
+	if any == nil {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		NewFromAny(any))
 
 	return it
 }
@@ -490,6 +533,92 @@ func (it *ResultsCollection) AddJsoners(
 	return it
 }
 
+func (it *ResultsCollection) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := it.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (it *ResultsCollection) GetPagedCollection(
+	eachPageSize int,
+) []*ResultsCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return []*ResultsCollection{
+			it,
+		}
+	}
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := make([]*ResultsCollection, pagesPossibleCeiling)
+
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
+		pagedCollection := it.GetSinglePageCollection(
+			eachPageSize,
+			oneBasedPageIndex,
+		)
+
+		collectionOfCollection[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
+	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
+
+	return collectionOfCollection
+}
+
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
+func (it *ResultsCollection) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+) *ResultsCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return it
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	endingIndex := skipItems + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := it.Items[skipItems:endingIndex]
+
+	return NewResultsCollectionUsingJsonResults(
+		constants.Zero,
+		list...)
+}
+
 //goland:noinspection GoLinterLocal
 func (it *ResultsCollection) JsonModel() *ResultsCollection {
 	return it
@@ -576,7 +705,7 @@ func (it *ResultsCollection) Clone(isDeepCloneEach bool) *ResultsCollection {
 	}
 
 	for _, item := range it.Items {
-		newResults.Add(*item.Clone(isDeepCloneEach))
+		newResults.Add(*item.ClonePtr(isDeepCloneEach))
 	}
 
 	return newResults

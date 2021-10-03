@@ -11,19 +11,49 @@ type KeyVal struct {
 	Value interface{}
 }
 
-func (receiver *KeyVal) KeyDynamic() *Dynamic {
-	return NewDynamicPtr(receiver.Key, true)
+func (it *KeyVal) KeyDynamic() Dynamic {
+	return NewDynamic(it.Key, true)
 }
 
-func (receiver *KeyVal) ValueDynamic() *Dynamic {
-	return NewDynamicPtr(receiver.Value, true)
+func (it *KeyVal) ValueDynamic() Dynamic {
+	return NewDynamic(it.Value, true)
 }
 
-func (receiver *KeyVal) String() string {
+func (it *KeyVal) KeyDynamicPtr() *Dynamic {
+	return NewDynamicPtr(it.Key, true)
+}
+
+func (it *KeyVal) ValueDynamicPtr() *Dynamic {
+	return NewDynamicPtr(it.Value, true)
+}
+
+func (it *KeyVal) String() string {
 	return fmt.Sprintf(
 		constants.KeyValuuePariSimpleFormat,
-		receiver.Key,
-		receiver.Key,
-		receiver.Value,
-		receiver.Value)
+		it.Key,
+		it.Key,
+		it.Value,
+		it.Value)
+}
+
+func (it *KeyVal) KeyString() string {
+	if it == nil || it.Key == nil {
+		return constants.EmptyString
+	}
+
+	return fmt.Sprintf(
+		constants.SprintValueFormat,
+		it.Key,
+	)
+}
+
+func (it *KeyVal) ValueString() string {
+	if it == nil || it.Value == nil {
+		return constants.EmptyString
+	}
+
+	return fmt.Sprintf(
+		constants.SprintValueFormat,
+		it.Value,
+	)
 }
