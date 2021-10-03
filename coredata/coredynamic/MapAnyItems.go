@@ -2,7 +2,10 @@ package coredynamic
 
 import (
 	"encoding/json"
+	"math"
 	"reflect"
+	"sort"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
@@ -288,6 +291,150 @@ func (it *MapAnyItems) AddJsonResultPtr(
 	return it
 }
 
+func (it *MapAnyItems) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := it.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (it *MapAnyItems) GetPagedCollection(
+	eachPageSize int,
+) []*MapAnyItems {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return []*MapAnyItems{
+			it,
+		}
+	}
+
+	allKeys := it.AllKeysSorted()
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := make([]*MapAnyItems, pagesPossibleCeiling)
+
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
+		pagedCollection := it.GetSinglePageCollection(
+			eachPageSize,
+			oneBasedPageIndex,
+			allKeys)
+
+		collectionOfCollection[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
+	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
+
+	return collectionOfCollection
+}
+
+func (it *MapAnyItems) AddMapResultsUsingCloneOption(
+	mapResults map[string]interface{},
+) *MapAnyItems {
+	if len(mapResults) == 0 {
+		return it
+	}
+
+	for key, result := range mapResults {
+		it.Items[key] = result
+	}
+
+	return it
+}
+
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
+func (it *MapAnyItems) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+	allKeys []string,
+) *MapAnyItems {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return it
+	}
+
+	if length != len(allKeys) {
+		reference := msgtype.Var2NoType(
+			"MapLength", it.Length(),
+			"AllKeysLength", len(allKeys))
+
+		msgtype.
+			LengthShouldBeEqualToMessage.
+			HandleUsingPanic(
+				"allKeys length should be exact same as the map length, "+
+					"use AllKeys method to get the keys.",
+				reference)
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	endingIndex := skipItems + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := allKeys[skipItems:endingIndex]
+
+	return it.GetNewMapUsingKeys(
+		true,
+		list...)
+}
+
+func (it *MapAnyItems) GetNewMapUsingKeys(
+	isPanicOnMissing bool,
+	keys ...string,
+) *MapAnyItems {
+	if len(keys) == 0 {
+		return EmptyMapAnyItems()
+	}
+
+	mapResults := make(map[string]interface{}, len(keys))
+
+	for _, key := range keys {
+		item, has := it.Items[key]
+
+		if isPanicOnMissing && !has {
+			msgtype.
+				KeyNotExistInMap.
+				HandleUsingPanic(
+					"given key is not found in the map, key ="+key,
+					it.AllKeys())
+		}
+
+		if has {
+			mapResults[key] = item
+		}
+	}
+
+	return &MapAnyItems{Items: mapResults}
+}
+
 func (it *MapAnyItems) JsonString() (jsonString string, err error) {
 	toBytes, err := json.Marshal(it.Items)
 
@@ -355,6 +502,17 @@ func (it *MapAnyItems) AllKeys() []string {
 	return keys
 }
 
+func (it *MapAnyItems) AllKeysSorted() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
+	keys := it.AllKeys()
+	sort.Strings(keys)
+
+	return keys
+}
+
 func (it *MapAnyItems) AllValues() []interface{} {
 	if it.IsEmpty() {
 		return []interface{}{}
@@ -385,6 +543,36 @@ func (it *MapAnyItems) JsonMapResults() *corejson.MapResults {
 	}
 
 	return mapResults
+}
+
+func (it *MapAnyItems) JsonResultsCollection() *corejson.ResultsCollection {
+	jsonResultsCollection := corejson.NewResultsCollection(it.Length())
+
+	if it.IsEmpty() {
+		return jsonResultsCollection
+	}
+
+	for _, anyInf := range it.Items {
+		jsonResultsCollection.AddAny(
+			anyInf)
+	}
+
+	return jsonResultsCollection
+}
+
+func (it *MapAnyItems) JsonResultsPtrCollection() *corejson.ResultsPtrCollection {
+	jsonResultsCollection := corejson.NewResultsPtrCollection(it.Length())
+
+	if it.IsEmpty() {
+		return jsonResultsCollection
+	}
+
+	for _, anyInf := range it.Items {
+		jsonResultsCollection.AddAny(
+			anyInf)
+	}
+
+	return jsonResultsCollection
 }
 
 func (it *MapAnyItems) JsonModel() *corejson.MapResults {

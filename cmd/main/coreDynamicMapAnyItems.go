@@ -38,6 +38,19 @@ func coreDynamicMapAnyItems() {
 	mapAnyItems.Add("alim-something", collection)
 	mapAnyItems.Add("alim-something2", collection)
 	mapAnyItems.Add("alim-something3", collection.ConcatNew(1, "alim 5"))
+	mapAnyItems.Add("alim-something4", collection)
+	mapAnyItems.Add("alim-something5", collection)
+	mapAnyItems.Add("alim-something6", collection)
+	mapAnyItems.Add("alim-something7", collection)
+	mapAnyItems.Add("alim-something8", collection)
+	mapAnyItems.Add("alim-something9", collection)
+
+	splittedItems := mapAnyItems.GetPagedCollection(2)
+
+	for _, splittedItem := range splittedItems {
+		fmt.Println(splittedItem.AllKeys())
+	}
+
 	jsonResult := mapAnyItems.Json()
 	emptyCollection4 := corestr.EmptyCollection()
 	mapAnyItems.GetItemRef("alim-something3", emptyCollection4)

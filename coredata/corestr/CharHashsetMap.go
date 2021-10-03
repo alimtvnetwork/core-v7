@@ -50,7 +50,7 @@ func (it *CharHashsetMap) HashsetsCollectionByChars(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(&hashsets)
+	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
 }
 
 func (it *CharHashsetMap) HashsetsCollectionByStringsFirstChar(
@@ -76,7 +76,7 @@ func (it *CharHashsetMap) HashsetsCollectionByStringsFirstChar(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(&hashsets)
+	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
 }
 
 func (it *CharHashsetMap) HashsetsCollection() *HashsetsCollection {
@@ -94,7 +94,7 @@ func (it *CharHashsetMap) HashsetsCollection() *HashsetsCollection {
 		hashsets = append(hashsets, *hashset)
 	}
 
-	return NewHashsetsCollection(&hashsets)
+	return NewHashsetsCollection(hashsets...)
 }
 
 func (it *CharHashsetMap) GetCharOfPtr(

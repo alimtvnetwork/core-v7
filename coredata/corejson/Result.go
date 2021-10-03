@@ -307,6 +307,14 @@ func (it *Result) CloneError() error {
 	return nil
 }
 
+func (it Result) NonPtr() Result {
+	return it
+}
+
+func (it *Result) Ptr() *Result {
+	return it
+}
+
 func (it *Result) IsEqual(another *Result) bool {
 	if it == nil && another == nil {
 		return true
@@ -332,21 +340,35 @@ func (it *Result) IsEqual(another *Result) bool {
 	return bytes.Equal(it.Bytes, another.Bytes)
 }
 
-func (it *Result) Clone(isDeepClone bool) *Result {
+func (it Result) CloneIf(isClone, isDeepClone bool) Result {
+	if isClone {
+		return it.Clone(isDeepClone)
+	}
+
+	return it
+}
+
+func (it *Result) ClonePtr(isDeepClone bool) *Result {
 	if it == nil {
 		return nil
 	}
 
+	cloned := it.Clone(isDeepClone)
+
+	return &cloned
+}
+
+func (it Result) Clone(isDeepClone bool) Result {
 	if it.Length() == 0 {
-		return NewPtr([]byte{}, it.CloneError())
+		return New([]byte{}, it.CloneError())
 	}
 
 	if !isDeepClone || it.Length() == 0 {
-		return NewPtr(it.Bytes, it.CloneError())
+		return New(it.Bytes, it.CloneError())
 	}
 
 	newBytes := make([]byte, it.Length())
 	copy(newBytes, it.Bytes)
 
-	return NewPtr(newBytes, it.CloneError())
+	return New(newBytes, it.CloneError())
 }

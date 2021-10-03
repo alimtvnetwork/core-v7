@@ -1,6 +1,7 @@
 package corestr
 
 import (
+	"encoding/json"
 	"fmt"
 	"regexp"
 	"strconv"
@@ -8,13 +9,14 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type SimpleStringOnce struct {
-	value         string
-	isInitialized bool
+	value        string
+	isInitialize bool
 }
 
 func NewSimpleStringOnceAny(
@@ -27,8 +29,8 @@ func NewSimpleStringOnceAny(
 		value)
 
 	return SimpleStringOnce{
-		value:         toString,
-		isInitialized: isInitialize,
+		value:        toString,
+		isInitialize: isInitialize,
 	}
 }
 
@@ -37,8 +39,8 @@ func NewSimpleStringOnce(
 	isInitialize bool,
 ) SimpleStringOnce {
 	return SimpleStringOnce{
-		value:         value,
-		isInitialized: isInitialize,
+		value:        value,
+		isInitialize: isInitialize,
 	}
 }
 
@@ -47,8 +49,8 @@ func NewSimpleStringOncePtr(
 	isInitialize bool,
 ) *SimpleStringOnce {
 	return &SimpleStringOnce{
-		value:         value,
-		isInitialized: isInitialize,
+		value:        value,
+		isInitialize: isInitialize,
 	}
 }
 
@@ -61,16 +63,16 @@ func (it *SimpleStringOnce) Value() string {
 }
 
 func (it *SimpleStringOnce) IsInitialized() bool {
-	return it.isInitialized
+	return it.isInitialize
 }
 
 // IsUnInit Not initialized yet
 func (it *SimpleStringOnce) IsUnInit() bool {
-	return !it.isInitialized
+	return !it.isInitialize
 }
 
 func (it *SimpleStringOnce) IsInvalid() bool {
-	return !it.isInitialized || it.value == ""
+	return !it.isInitialize || it.value == ""
 }
 
 func (it *SimpleStringOnce) ValueBytes() []byte {
@@ -84,14 +86,14 @@ func (it *SimpleStringOnce) ValueBytesPtr() *[]byte {
 }
 
 func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
-	if it.isInitialized {
+	if it.isInitialize {
 		return msgtype.
 			AlreadyInitialized.
 			Error("cannot set :"+setVal, it.value)
 	}
 
 	it.value = setVal
-	it.SetInitialized()
+	it.SetInitialize()
 
 	return nil
 }
@@ -99,12 +101,23 @@ func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
 func (it *SimpleStringOnce) GetPlusSetOnUninitialized(
 	setValPlusGetOnUnInit string,
 ) (valGet string) {
-	if it.isInitialized {
+	if it.isInitialize {
 		return it.value
 	}
 
 	it.value = setValPlusGetOnUnInit
-	it.SetInitialized()
+	it.SetInitialize()
+
+	return it.value
+}
+
+func (it *SimpleStringOnce) GetPlusSetEmptyOnUninitialized() (valGet string) {
+	if it.isInitialize {
+		return it.value
+	}
+
+	it.value = constants.EmptyString
+	it.SetInitialize()
 
 	return it.value
 }
@@ -112,29 +125,52 @@ func (it *SimpleStringOnce) GetPlusSetOnUninitialized(
 func (it *SimpleStringOnce) GetPlusSetOnUninitializedFunc(
 	setValPlusGetOnUnInitFunc func() string,
 ) (valGet string) {
-	if it.isInitialized {
+	if it.isInitialize {
 		return it.value
 	}
 
 	it.value = setValPlusGetOnUnInitFunc()
-	it.SetInitialized()
+	it.SetInitialize()
 
 	return it.value
 }
 
 func (it *SimpleStringOnce) SetOnUninitialized(setVal string) (isSet bool) {
-	if it.isInitialized {
+	if it.isInitialize {
 		return false
 	}
 
 	it.value = setVal
-	it.SetInitialized()
+	it.SetInitialize()
 
 	return true
 }
 
-func (it *SimpleStringOnce) SetInitialized() {
-	it.isInitialized = true
+func (it *SimpleStringOnce) SetInitialize() {
+	it.isInitialize = true
+}
+
+func (it *SimpleStringOnce) SetUnInit() {
+	it.isInitialize = false
+}
+
+func (it *SimpleStringOnce) ConcatNew(appendingText string) SimpleStringOnce {
+	return SimpleStringOnce{
+		value:        it.value + appendingText,
+		isInitialize: it.isInitialize,
+	}
+}
+
+func (it *SimpleStringOnce) ConcatNewUsingStrings(
+	joiner string,
+	appendingTexts ...string,
+) SimpleStringOnce {
+	slice := append([]string{it.value}, appendingTexts...)
+
+	return SimpleStringOnce{
+		value:        strings.Join(slice, joiner),
+		isInitialize: it.isInitialize,
+	}
 }
 
 func (it *SimpleStringOnce) IsEmpty() bool {
@@ -150,14 +186,14 @@ func (it *SimpleStringOnce) Trim() string {
 }
 
 func (it *SimpleStringOnce) HasValidNonEmpty() bool {
-	return it.isInitialized && !it.IsEmpty()
+	return it.isInitialize && !it.IsEmpty()
 }
 
 func (it *SimpleStringOnce) HasValidNonWhitespace() bool {
-	return it.isInitialized && !it.IsWhitespace()
+	return it.isInitialize && !it.IsWhitespace()
 }
 
-func (it *SimpleStringOnce) ValueBool() bool {
+func (it *SimpleStringOnce) IsValueBool() bool {
 	if it.value == "" {
 		return false
 	}
@@ -226,10 +262,10 @@ func (it *SimpleStringOnce) ValueDefFloat64() float64 {
 }
 
 // HasSafeNonEmpty
-//      it.isInitialized &&
+//      it.isInitialize &&
 //		!it.IsEmpty()
 func (it *SimpleStringOnce) HasSafeNonEmpty() bool {
-	return it.isInitialized &&
+	return it.isInitialize &&
 		!it.IsEmpty()
 }
 
@@ -367,15 +403,22 @@ func (it *SimpleStringOnce) ClonePtr() *SimpleStringOnce {
 	}
 
 	return &SimpleStringOnce{
-		value:         it.value,
-		isInitialized: it.isInitialized,
+		value:        it.value,
+		isInitialize: it.isInitialize,
 	}
 }
 
 func (it SimpleStringOnce) Clone() SimpleStringOnce {
 	return SimpleStringOnce{
-		value:         it.value,
-		isInitialized: it.isInitialized,
+		value:        it.value,
+		isInitialize: it.isInitialize,
+	}
+}
+
+func (it SimpleStringOnce) CloneUsingNewVal(val string) SimpleStringOnce {
+	return SimpleStringOnce{
+		value:        val,
+		isInitialize: it.isInitialize,
 	}
 }
 
@@ -387,6 +430,15 @@ func (it *SimpleStringOnce) String() string {
 	return it.value
 }
 
+func (it *SimpleStringOnce) StringPtr() *string {
+	if it == nil {
+		emptyString := ""
+		return &emptyString
+	}
+
+	return &it.value
+}
+
 func (it *SimpleStringOnce) FullString() string {
 	if it == nil {
 		return constants.EmptyString
@@ -395,4 +447,100 @@ func (it *SimpleStringOnce) FullString() string {
 	return fmt.Sprintf(
 		constants.SprintPropertyNameValueFormat,
 		*it)
+}
+
+func (it *SimpleStringOnce) FullStringPtr() *string {
+	fullStr := it.FullString()
+
+	return &fullStr
+}
+
+type SimpleStringOnceModel struct {
+	Value        string
+	IsInitialize bool
+}
+
+func (it *SimpleStringOnce) JsonModel() SimpleStringOnceModel {
+	return SimpleStringOnceModel{
+		Value:        it.Value(),
+		IsInitialize: it.IsInitialized(),
+	}
+}
+
+func (it *SimpleStringOnce) JsonModelAny() interface{} {
+	return it.JsonModel()
+}
+
+func (it *SimpleStringOnce) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.JsonModel())
+}
+
+func (it *SimpleStringOnce) UnmarshalJSON(
+	data []byte,
+) error {
+	var dataModel SimpleStringOnceModel
+	err := json.Unmarshal(data, &dataModel)
+
+	if err == nil {
+		it.value = dataModel.Value
+		it.isInitialize = dataModel.IsInitialize
+	}
+
+	return err
+}
+
+func (it SimpleStringOnce) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
+
+func (it SimpleStringOnce) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
+}
+
+func (it *SimpleStringOnce) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*SimpleStringOnce, error) {
+	err := jsonResult.Unmarshal(&it)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return it, nil
+}
+
+// ParseInjectUsingJsonMust Panic if error
+func (it *SimpleStringOnce) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *SimpleStringOnce {
+	parsedResult, err := it.
+		ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return parsedResult
+}
+
+func (it *SimpleStringOnce) AsJsoner() corejson.Jsoner {
+	return it
+}
+
+func (it *SimpleStringOnce) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := it.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (it *SimpleStringOnce) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return it
+}
+
+func (it *SimpleStringOnce) AsJsonMarshaller() corejson.JsonMarshaller {
+	return it
 }

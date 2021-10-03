@@ -28,10 +28,25 @@ func stackTrackerTest3() {
 	st2 := collection.ConcatNewUsingSkip(0)
 
 	fmt.Println(st2.JoinJsonStrings(constants.NewLineUnix))
-	fmt.Println(codestack.
+
+	trace3 := codestack.
 		NewStacksCollection().
-		AddsUsingSkipDefault(0).
-		JoinFileWithLinesStrings(constants.CommaUnixNewLine))
+		AddsUsingSkipDefault(0)
+
+	fmt.Println(trace3.
+		JoinShortStrings(constants.NewLineUnix))
+	fmt.Println("-------------")
+	fmt.Println(collection.
+		JoinFileWithLinesStrings(constants.NewLineUnix))
+
+	fmt.Println("-------------")
+
+	fmt.Println(collection.
+		Reverse().JoinFileWithLinesStrings(constants.NewLineUnix))
+	fmt.Println("-------------")
+
+	fmt.Println(collection.Add(collection.First()).
+		Reverse().JoinFileWithLinesStrings(constants.NewLineUnix))
 }
 
 func stackTrackerTest4() {

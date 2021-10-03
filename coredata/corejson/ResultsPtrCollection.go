@@ -2,9 +2,12 @@ package corejson
 
 import (
 	"errors"
+	"math"
 	"strings"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type ResultsPtrCollection struct {
@@ -374,6 +377,20 @@ func (it *ResultsPtrCollection) Adds(
 	return it
 }
 
+func (it *ResultsPtrCollection) AddAny(
+	any interface{},
+) *ResultsPtrCollection {
+	if any == nil {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		NewFromAnyPtr(any))
+
+	return it
+}
+
 // AddsAnysPtr Skip on nil
 func (it *ResultsPtrCollection) AddsAnysPtr(
 	anys ...interface{},
@@ -504,6 +521,92 @@ func (it *ResultsPtrCollection) AddJsoners(
 	return it
 }
 
+func (it *ResultsPtrCollection) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := it.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (it *ResultsPtrCollection) GetPagedCollection(
+	eachPageSize int,
+) []*ResultsPtrCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return []*ResultsPtrCollection{
+			it,
+		}
+	}
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := make([]*ResultsPtrCollection, pagesPossibleCeiling)
+
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
+		pagedCollection := it.GetSinglePageCollection(
+			eachPageSize,
+			oneBasedPageIndex,
+		)
+
+		collectionOfCollection[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
+	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
+
+	return collectionOfCollection
+}
+
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
+func (it *ResultsPtrCollection) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+) *ResultsPtrCollection {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return it
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	endingIndex := skipItems + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := it.Items[skipItems:endingIndex]
+
+	return NewResultsCollectionPtrUsingJsonResultsPtr(
+		constants.Zero,
+		list...)
+}
+
 //goland:noinspection GoLinterLocal
 func (it *ResultsPtrCollection) JsonModel() *ResultsPtrCollection {
 	return it
@@ -582,7 +685,7 @@ func (it *ResultsPtrCollection) Clone(
 	}
 
 	for _, item := range it.Items {
-		newResults.Add(item.Clone(isDeepCloneEach))
+		newResults.Add(item.ClonePtr(isDeepCloneEach))
 	}
 
 	return newResults

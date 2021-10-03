@@ -2,7 +2,10 @@ package corejson
 
 import (
 	"errors"
+	"math"
+	"sort"
 	"strings"
+	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/msgtype"
@@ -456,6 +459,17 @@ func (it *MapResults) AllKeys() []string {
 	return keys
 }
 
+func (it *MapResults) AllKeysSorted() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
+	keys := it.AllKeys()
+	sort.Strings(keys)
+
+	return keys
+}
+
 func (it *MapResults) AllValues() []Result {
 	if it.IsEmpty() {
 		return []Result{}
@@ -569,6 +583,173 @@ func (it *MapResults) AddKeyWithJsonerPtr(
 		keyWithJsoner.Jsoner)
 }
 
+func (it *MapResults) GetPagesSize(
+	eachPageSize int,
+) int {
+	length := it.Length()
+
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+
+	return pagesPossibleCeiling
+}
+
+func (it *MapResults) GetPagedCollection(
+	eachPageSize int,
+) []*MapResults {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return []*MapResults{
+			it,
+		}
+	}
+
+	allKeys := it.AllKeysSorted()
+	pagesPossibleFloat := float64(length) / float64(eachPageSize)
+	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
+	collectionOfCollection := make([]*MapResults, pagesPossibleCeiling)
+
+	wg := sync.WaitGroup{}
+	addPagedItemsFunc := func(oneBasedPageIndex int) {
+		pagedCollection := it.GetSinglePageCollection(
+			eachPageSize,
+			oneBasedPageIndex,
+			allKeys)
+
+		collectionOfCollection[oneBasedPageIndex-1] = pagedCollection
+
+		wg.Done()
+	}
+
+	wg.Add(pagesPossibleCeiling)
+	for i := 1; i <= pagesPossibleCeiling; i++ {
+		go addPagedItemsFunc(i)
+	}
+
+	wg.Wait()
+
+	return collectionOfCollection
+}
+
+func (it *MapResults) AddMapResultsUsingCloneOption(
+	isClone, isDeepClone bool,
+	mapResults map[string]Result,
+) *MapResults {
+	if len(mapResults) == 0 {
+		return it
+	}
+
+	if !isClone && !isDeepClone {
+		for key, result := range mapResults {
+			it.Items[key] = result
+		}
+
+		return it
+	}
+
+	for key, result := range mapResults {
+		cloned := result.CloneIf(
+			isClone,
+			isDeepClone)
+
+		it.Items[key] = cloned
+	}
+
+	return it
+}
+
+// GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
+func (it *MapResults) GetSinglePageCollection(
+	eachPageSize int,
+	pageIndex int,
+	allKeys []string,
+) *MapResults {
+	length := it.Length()
+
+	if length < eachPageSize {
+		return it
+	}
+
+	if length != len(allKeys) {
+		reference := msgtype.Var2NoType(
+			"MapLength", it.Length(),
+			"AllKeysLength", len(allKeys))
+
+		msgtype.
+			LengthShouldBeEqualToMessage.
+			HandleUsingPanic(
+				"allKeys length should be exact same as the map length, "+
+					"use AllKeys method to get the keys.",
+				reference)
+	}
+
+	/**
+	 * eachPageItems = 10
+	 * pageIndex = 4
+	 * skipItems = 10 * (4 - 1) = 30
+	 */
+	skipItems := eachPageSize * (pageIndex - 1)
+	if skipItems < 0 {
+		msgtype.
+			CannotBeNegativeIndex.
+			HandleUsingPanic(
+				"pageIndex cannot be negative or zero.",
+				pageIndex)
+	}
+
+	endingIndex := skipItems + eachPageSize
+
+	if endingIndex > length {
+		endingIndex = length
+	}
+
+	list := allKeys[skipItems:endingIndex]
+
+	return it.GetNewMapUsingKeys(
+		true,
+		list...)
+}
+
+func (it *MapResults) GetNewMapUsingKeys(
+	isPanicOnMissing bool,
+	keys ...string,
+) *MapResults {
+	if len(keys) == 0 {
+		return EmptyMapResults()
+	}
+
+	mapResults := make(map[string]Result, len(keys))
+
+	for _, key := range keys {
+		item, has := it.Items[key]
+
+		if isPanicOnMissing && !has {
+			msgtype.
+				KeyNotExistInMap.
+				HandleUsingPanic(
+					"given key is not found in the map, key ="+key,
+					it.AllKeys())
+		}
+
+		if has {
+			mapResults[key] = item
+		}
+	}
+
+	return &MapResults{Items: mapResults}
+}
+
+func (it *MapResults) ResultCollection() *ResultsCollection {
+	if it.IsEmpty() {
+		return EmptyResultsCollection()
+	}
+
+	results := NewResultsCollection(it.Length())
+
+	return results.AddRawMapResults(it.Items)
+}
+
 //goland:noinspection GoLinterLocal
 func (it *MapResults) JsonModel() *MapResults {
 	return it
@@ -596,7 +777,7 @@ func (it *MapResults) ParseInjectUsingJson(
 	)
 
 	if err != nil {
-		return EmptyMapResultsUsingCap(), err
+		return EmptyMapResults(), err
 	}
 
 	return it, nil

@@ -13,17 +13,39 @@ type Trace struct {
 	PackageName,
 	MethodName,
 	PackageMethodName string
-	FileName string
-	Line     int
-	IsOkay   bool
-	message  corestr.SimpleStringOnce
+	FileName    string
+	Line        int
+	IsOkay      bool
+	message     corestr.SimpleStringOnce
+	shortString corestr.SimpleStringOnce
 }
 
 func (it *Trace) Message() string {
+	if it.message.IsInitialized() {
+		return it.message.String()
+	}
+
 	return it.
 		message.
 		GetPlusSetOnUninitializedFunc(
 			it.getCompiledMessage)
+}
+
+func (it *Trace) ShortString() string {
+	if it.shortString.IsInitialized() {
+		return it.shortString.String()
+	}
+
+	shortString := fmt.Sprintf(shortStringFormat,
+		it.PackageMethodName,
+		it.Line,
+		it.FileName,
+		it.Line)
+
+	return it.
+		shortString.
+		GetPlusSetOnUninitialized(
+			shortString)
 }
 
 func (it *Trace) IsNil() bool {

@@ -9,13 +9,20 @@ type GenericResponseResult struct {
 	Response  *coredynamic.SimpleResult `json:"Response,omitempty"`
 }
 
-func (receiver *GenericResponseResult) Clone() *GenericResponseResult {
-	if receiver == nil {
+func (it GenericResponseResult) Clone() GenericResponseResult {
+	return GenericResponseResult{
+		Attribute: it.Attribute.Clone(),
+		Response:  it.Response.ClonePtr(),
+	}
+}
+
+func (it *GenericResponseResult) ClonePtr() *GenericResponseResult {
+	if it == nil {
 		return nil
 	}
 
 	return &GenericResponseResult{
-		Attribute: receiver.Attribute.Clone(),
-		Response:  receiver.Response.Clone(),
+		Attribute: it.Attribute.Clone(),
+		Response:  it.Response.ClonePtr(),
 	}
 }

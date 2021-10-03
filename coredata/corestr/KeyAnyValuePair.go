@@ -8,30 +8,32 @@ import (
 
 type KeyAnyValuePair struct {
 	Key         string
-	valueString *string
+	valueString SimpleStringOnce
 	Value       interface{}
 }
 
-func (keyAnyValuePair *KeyAnyValuePair) IsValueNull() bool {
-	return keyAnyValuePair.Value == nil
+func (it *KeyAnyValuePair) IsValueNull() bool {
+	return it.Value == nil
 }
 
-func (keyAnyValuePair *KeyAnyValuePair) HasNonNull() bool {
-	return keyAnyValuePair.Value != nil
+func (it *KeyAnyValuePair) HasNonNull() bool {
+	return it.Value != nil
 }
 
-func (keyAnyValuePair *KeyAnyValuePair) ValueString() string {
-	return *keyAnyValuePair.ValueStringPtr()
-}
-
-func (keyAnyValuePair *KeyAnyValuePair) ValueStringPtr() *string {
-	if keyAnyValuePair.valueString == nil && keyAnyValuePair.HasNonNull() {
-		valueString := fmt.Sprintf(constants.SprintValueFormat, keyAnyValuePair.Value)
-		keyAnyValuePair.valueString = &valueString
-	} else if keyAnyValuePair.valueString == nil {
-		valueString := ""
-		keyAnyValuePair.valueString = &valueString
+func (it *KeyAnyValuePair) ValueString() string {
+	if it.valueString.IsInitialized() {
+		return it.valueString.String()
 	}
 
-	return keyAnyValuePair.valueString
+	if it.HasNonNull() {
+		valueString := fmt.Sprintf(constants.SprintValueFormat, it.Value)
+
+		return it.
+			valueString.
+			GetPlusSetOnUninitialized(valueString)
+	}
+
+	return it.
+		valueString.
+		GetPlusSetEmptyOnUninitialized()
 }
