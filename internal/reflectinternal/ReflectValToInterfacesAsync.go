@@ -2,15 +2,14 @@ package reflectinternal
 
 import (
 	"reflect"
+	"sync"
 )
 
-func ReflectValToInterfaces(
-	isSkipOnNil bool,
+func ReflectValToInterfacesAsync(
 	reflectVal reflect.Value,
 ) []interface{} {
 	if reflectVal.Kind() == reflect.Ptr {
-		return ReflectValToInterfaces(
-			isSkipOnNil,
+		return ReflectValToInterfacesAsync(
 			reflect.Indirect(reflect.ValueOf(reflectVal)))
 	}
 
@@ -23,22 +22,27 @@ func ReflectValToInterfaces(
 	}
 
 	length := reflectVal.Len()
-	slice := make([]interface{}, 0, length)
+	slice := make([]interface{}, length)
 
 	if length == 0 {
 		return slice
 	}
-
-	for i := 0; i < length; i++ {
-		value := reflectVal.Index(i)
+	wg := sync.WaitGroup{}
+	setterIndexFunc := func(index int) {
+		value := reflectVal.Index(index)
 		valueInf := value.Interface()
 
-		if isSkipOnNil && valueInf == nil {
-			continue
-		}
+		slice[index] = valueInf
 
-		slice = append(slice, valueInf)
+		wg.Done()
 	}
+
+	wg.Add(length)
+	for i := 0; i < length; i++ {
+		go setterIndexFunc(i)
+	}
+
+	wg.Wait()
 
 	return slice
 }

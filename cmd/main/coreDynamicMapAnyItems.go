@@ -86,6 +86,9 @@ func coreDynamicMapAnyItems() {
 
 	newLinkedList.JsonParseSelfInject(collectionJsonResult)
 	fmt.Println(newLinkedList)
-
 	fmt.Println(mapAnyItems)
+
+	anyCollection := coredynamic.NewAnyCollection(10)
+	anyCollection.AddAnySliceFromSingleItem(splittedItems[0].AllKeys())
+	fmt.Println(anyCollection)
 }

@@ -183,6 +183,18 @@ func (it *AnyCollection) Add(anyItem interface{}) *AnyCollection {
 	return it
 }
 
+func (it *AnyCollection) AddAnySliceFromSingleItem(
+	sliceList interface{},
+) *AnyCollection {
+	if sliceList == nil {
+		return it
+	}
+
+	items := AnySliceValToInterfacesAsync(sliceList)
+
+	return it.AddMany(items...)
+}
+
 func (it *AnyCollection) AddMany(anyItems ...interface{}) *AnyCollection {
 	if anyItems == nil {
 		return it

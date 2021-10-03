@@ -179,6 +179,22 @@ func (it *DynamicCollection) AnyItems() []interface{} {
 	return slice
 }
 
+func (it *DynamicCollection) AddAnySliceFromSingleItem(
+	isValid bool,
+	sliceList interface{},
+) *DynamicCollection {
+	if sliceList == nil {
+		return it
+	}
+
+	items := AnySliceValToInterfacesAsync(sliceList)
+	for _, item := range items {
+		it.items = append(it.items, NewDynamic(item, isValid))
+	}
+
+	return it
+}
+
 func (it *DynamicCollection) AnyItemsCollection() *AnyCollection {
 	if it.IsEmpty() {
 		return EmptyAnyCollection()
