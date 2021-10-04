@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"math"
+	"reflect"
 	"strings"
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/pagingutil"
@@ -66,6 +68,97 @@ func (it *AnyCollection) DynamicCollection() *DynamicCollection {
 	return &DynamicCollection{
 		items: it.DynamicItems(),
 	}
+}
+
+func (it *AnyCollection) FirstDynamic() interface{} {
+	return it.items[0]
+}
+
+func (it *AnyCollection) First() interface{} {
+	return it.items[0]
+}
+
+func (it *AnyCollection) LastDynamic() interface{} {
+	return it.items[it.LastIndex()]
+}
+
+func (it *AnyCollection) Last() interface{} {
+	return it.items[it.LastIndex()]
+}
+
+func (it *AnyCollection) FirstOrDefaultDynamic() interface{} {
+	return it.FirstOrDefault()
+}
+
+func (it *AnyCollection) FirstOrDefault() interface{} {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	return it.First()
+}
+
+func (it *AnyCollection) LastOrDefaultDynamic() interface{} {
+	return it.LastOrDefault()
+}
+
+func (it *AnyCollection) LastOrDefault() interface{} {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	return it.Last()
+}
+
+func (it *AnyCollection) SkipDynamic(skippingItemsCount int) interface{} {
+	return it.items[skippingItemsCount:]
+}
+
+func (it *AnyCollection) Skip(skippingItemsCount int) []interface{} {
+	return it.items[skippingItemsCount:]
+}
+
+func (it *AnyCollection) SkipCollection(skippingItemsCount int) *AnyCollection {
+	return &AnyCollection{
+		items: it.items[skippingItemsCount:],
+	}
+}
+
+func (it *AnyCollection) TakeDynamic(takeDynamicItems int) interface{} {
+	return it.items[:takeDynamicItems]
+}
+
+func (it *AnyCollection) Take(takeDynamicItems int) []interface{} {
+	return it.items[:takeDynamicItems]
+}
+
+func (it *AnyCollection) TakeCollection(takeDynamicItems int) *AnyCollection {
+	return &AnyCollection{
+		items: it.items[:takeDynamicItems],
+	}
+}
+
+func (it *AnyCollection) LimitCollection(limit int) *AnyCollection {
+	return &AnyCollection{
+		items: it.items[:limit],
+	}
+}
+
+func (it *AnyCollection) SafeLimitCollection(limit int) *AnyCollection {
+	limit = defaultcapacity.
+		MaxLimit(it.Length(), limit)
+
+	return &AnyCollection{
+		items: it.items[:limit],
+	}
+}
+
+func (it *AnyCollection) LimitDynamic(limit int) interface{} {
+	return it.Take(limit)
+}
+
+func (it *AnyCollection) Limit(limit int) []interface{} {
+	return it.Take(limit)
 }
 
 func (it *AnyCollection) Length() int {
@@ -137,6 +230,68 @@ func (it *AnyCollection) AddAny(anyItem interface{}, isValid bool) *AnyCollectio
 		NewDynamic(anyItem, isValid))
 
 	return it
+}
+
+func (it *AnyCollection) AddAnyItemsWithTypeValidation(
+	isContinueOnError,
+	isNullNotAllowed bool,
+	expectedType reflect.Type,
+	anyItems ...interface{},
+) error {
+	if len(anyItems) == 0 {
+		return nil
+	}
+
+	if isContinueOnError {
+		var sliceErr []string
+
+		for _, anyItem := range anyItems {
+			err := it.AddAnyWithTypeValidation(
+				isNullNotAllowed,
+				expectedType,
+				anyItem)
+
+			if err != nil {
+				sliceErr = append(sliceErr, err.Error())
+			}
+		}
+
+		return msgtype.SliceToError(sliceErr)
+	}
+
+	for _, anyItem := range anyItems {
+		err := it.AddAnyWithTypeValidation(
+			isNullNotAllowed,
+			expectedType,
+			anyItem)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (it *AnyCollection) AddAnyWithTypeValidation(
+	isNullNotAllowed bool,
+	expectedType reflect.Type,
+	anyItem interface{},
+) error {
+	err := ReflectTypeValidation(
+		isNullNotAllowed,
+		expectedType,
+		anyItem)
+
+	if err != nil {
+		return err
+	}
+
+	it.items = append(
+		it.items,
+		anyItem)
+
+	return nil
 }
 
 func (it *AnyCollection) AddNonNull(anyItem interface{}) *AnyCollection {

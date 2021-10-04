@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -64,6 +65,13 @@ func (it *ResultsCollection) Limit(limit int) *ResultsCollection {
 	if it.IsEmpty() {
 		return EmptyResultsCollection()
 	}
+
+	if limit <= constants.TakeAllMinusOne {
+		return it
+	}
+
+	limit = defaultcapacity.
+		MaxLimit(it.Length(), limit)
 
 	return &ResultsCollection{
 		Items: it.Items[:limit],
@@ -692,7 +700,22 @@ func (it *ResultsCollection) ShadowClone() *ResultsCollection {
 	return it.Clone(false)
 }
 
-func (it *ResultsCollection) Clone(isDeepCloneEach bool) *ResultsCollection {
+func (it ResultsCollection) Clone(isDeepCloneEach bool) *ResultsCollection {
+	newResults := NewResultsCollection(
+		it.Length())
+
+	if newResults.Length() == 0 {
+		return newResults
+	}
+
+	for _, item := range it.Items {
+		newResults.Add(*item.ClonePtr(isDeepCloneEach))
+	}
+
+	return newResults
+}
+
+func (it *ResultsCollection) ClonePtr(isDeepCloneEach bool) *ResultsCollection {
 	if it == nil {
 		return nil
 	}

@@ -310,6 +310,15 @@ func (it *TraceCollection) LimitCollection(limit int) *TraceCollection {
 	}
 }
 
+func (it *TraceCollection) SafeLimitCollection(limit int) *TraceCollection {
+	limit = defaultcapacity.
+		MaxLimit(it.Length(), limit)
+
+	return &TraceCollection{
+		Items: it.Items[:limit],
+	}
+}
+
 func (it *TraceCollection) LimitDynamic(limit int) interface{} {
 	return it.Take(limit)
 }

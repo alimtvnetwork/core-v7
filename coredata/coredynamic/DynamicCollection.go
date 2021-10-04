@@ -3,11 +3,13 @@ package coredynamic
 import (
 	"encoding/json"
 	"math"
+	"reflect"
 	"strings"
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
@@ -36,6 +38,101 @@ func (it *DynamicCollection) Items() []Dynamic {
 	}
 
 	return it.items
+}
+
+func (it *DynamicCollection) FirstDynamic() interface{} {
+	return it.items[0]
+}
+
+func (it *DynamicCollection) First() Dynamic {
+	return it.items[0]
+}
+
+func (it *DynamicCollection) LastDynamic() interface{} {
+	return it.items[it.LastIndex()]
+}
+
+func (it *DynamicCollection) Last() Dynamic {
+	return it.items[it.LastIndex()]
+}
+
+func (it *DynamicCollection) FirstOrDefaultDynamic() interface{} {
+	return it.FirstOrDefault()
+}
+
+func (it *DynamicCollection) FirstOrDefault() *Dynamic {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	first := it.First()
+
+	return &first
+}
+
+func (it *DynamicCollection) LastOrDefaultDynamic() interface{} {
+	return it.LastOrDefault()
+}
+
+func (it *DynamicCollection) LastOrDefault() *Dynamic {
+	if it.IsEmpty() {
+		return nil
+	}
+
+	last := it.Last()
+
+	return &last
+}
+
+func (it *DynamicCollection) SkipDynamic(skippingItemsCount int) interface{} {
+	return it.items[skippingItemsCount:]
+}
+
+func (it *DynamicCollection) Skip(skippingItemsCount int) []Dynamic {
+	return it.items[skippingItemsCount:]
+}
+
+func (it *DynamicCollection) SkipCollection(skippingItemsCount int) *DynamicCollection {
+	return &DynamicCollection{
+		items: it.items[skippingItemsCount:],
+	}
+}
+
+func (it *DynamicCollection) TakeDynamic(takeDynamicItems int) interface{} {
+	return it.items[:takeDynamicItems]
+}
+
+func (it *DynamicCollection) Take(takeDynamicItems int) []Dynamic {
+	return it.items[:takeDynamicItems]
+}
+
+func (it *DynamicCollection) TakeCollection(takeDynamicItems int) *DynamicCollection {
+	return &DynamicCollection{
+		items: it.items[:takeDynamicItems],
+	}
+}
+
+func (it *DynamicCollection) LimitCollection(limit int) *DynamicCollection {
+	return &DynamicCollection{
+		items: it.items[:limit],
+	}
+}
+
+func (it *DynamicCollection) SafeLimitCollection(limit int) *DynamicCollection {
+	limit = defaultcapacity.
+		MaxLimit(it.Length(), limit)
+
+	return &DynamicCollection{
+		items: it.items[:limit],
+	}
+}
+
+func (it *DynamicCollection) LimitDynamic(limit int) interface{} {
+	return it.Take(limit)
+}
+
+func (it *DynamicCollection) Limit(limit int) []Dynamic {
+	return it.Take(limit)
 }
 
 func (it *DynamicCollection) Length() int {
@@ -99,7 +196,71 @@ func (it *DynamicCollection) RemoveAt(index int) (isSuccess bool) {
 	return true
 }
 
-func (it *DynamicCollection) AddAny(anyItem interface{}, isValid bool) *DynamicCollection {
+func (it *DynamicCollection) AddAnyItemsWithTypeValidation(
+	isContinueOnError,
+	isNullNotAllowed bool,
+	expectedType reflect.Type,
+	anyItems ...interface{},
+) error {
+	if len(anyItems) == 0 {
+		return nil
+	}
+
+	if isContinueOnError {
+		var sliceErr []string
+
+		for _, anyItem := range anyItems {
+			err := it.AddAnyWithTypeValidation(
+				isNullNotAllowed,
+				expectedType,
+				anyItem)
+
+			if err != nil {
+				sliceErr = append(sliceErr, err.Error())
+			}
+		}
+
+		return msgtype.SliceToError(sliceErr)
+	}
+
+	for _, anyItem := range anyItems {
+		err := it.AddAnyWithTypeValidation(
+			isNullNotAllowed,
+			expectedType,
+			anyItem)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (it *DynamicCollection) AddAnyWithTypeValidation(
+	isNullNotAllowed bool,
+	expectedType reflect.Type,
+	anyItem interface{},
+) error {
+	err := ReflectTypeValidation(
+		isNullNotAllowed,
+		expectedType,
+		anyItem)
+
+	if err != nil {
+		return err
+	}
+
+	it.items = append(
+		it.items,
+		NewDynamic(anyItem, true))
+
+	return nil
+}
+
+func (it *DynamicCollection) AddAny(
+	anyItem interface{}, isValid bool,
+) *DynamicCollection {
 	it.items = append(
 		it.items,
 		NewDynamic(anyItem, isValid))
@@ -107,7 +268,9 @@ func (it *DynamicCollection) AddAny(anyItem interface{}, isValid bool) *DynamicC
 	return it
 }
 
-func (it *DynamicCollection) AddAnyNonNull(anyItem interface{}, isValid bool) *DynamicCollection {
+func (it *DynamicCollection) AddAnyNonNull(
+	anyItem interface{}, isValid bool,
+) *DynamicCollection {
 	if anyItem == nil {
 		return it
 	}
@@ -119,7 +282,9 @@ func (it *DynamicCollection) AddAnyNonNull(anyItem interface{}, isValid bool) *D
 	return it
 }
 
-func (it *DynamicCollection) AddAnyMany(anyItems ...interface{}) *DynamicCollection {
+func (it *DynamicCollection) AddAnyMany(
+	anyItems ...interface{},
+) *DynamicCollection {
 	if anyItems == nil {
 		return it
 	}
@@ -133,13 +298,17 @@ func (it *DynamicCollection) AddAnyMany(anyItems ...interface{}) *DynamicCollect
 	return it
 }
 
-func (it *DynamicCollection) Add(dynamic Dynamic) *DynamicCollection {
+func (it *DynamicCollection) Add(
+	dynamic Dynamic,
+) *DynamicCollection {
 	it.items = append(it.items, dynamic)
 
 	return it
 }
 
-func (it *DynamicCollection) AddPtr(dynamic *Dynamic) *DynamicCollection {
+func (it *DynamicCollection) AddPtr(
+	dynamic *Dynamic,
+) *DynamicCollection {
 	if dynamic == nil {
 		return it
 	}
@@ -149,7 +318,9 @@ func (it *DynamicCollection) AddPtr(dynamic *Dynamic) *DynamicCollection {
 	return it
 }
 
-func (it *DynamicCollection) AddManyPtr(dynamicItems ...*Dynamic) *DynamicCollection {
+func (it *DynamicCollection) AddManyPtr(
+	dynamicItems ...*Dynamic,
+) *DynamicCollection {
 	if dynamicItems == nil {
 		return it
 	}
@@ -189,7 +360,9 @@ func (it *DynamicCollection) AddAnySliceFromSingleItem(
 
 	items := AnySliceValToInterfacesAsync(sliceList)
 	for _, item := range items {
-		it.items = append(it.items, NewDynamic(item, isValid))
+		it.items = append(
+			it.items,
+			NewDynamic(item, isValid))
 	}
 
 	return it

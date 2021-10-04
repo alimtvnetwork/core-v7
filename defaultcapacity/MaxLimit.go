@@ -18,5 +18,5 @@ func MaxLimit(wholeLength int, limit int) int {
 	}
 
 	// no limit
-	return OfSearch(wholeLength)
+	return wholeLength
 }

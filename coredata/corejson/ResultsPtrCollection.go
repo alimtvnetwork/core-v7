@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -64,6 +65,13 @@ func (it *ResultsPtrCollection) Limit(limit int) *ResultsPtrCollection {
 	if it.IsEmpty() {
 		return EmptyResultsPtrCollection()
 	}
+
+	if limit <= constants.TakeAllMinusOne {
+		return it
+	}
+
+	limit = defaultcapacity.
+		MaxLimit(it.Length(), limit)
 
 	return &ResultsPtrCollection{
 		Items: it.Items[:limit],

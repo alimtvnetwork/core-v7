@@ -318,6 +318,17 @@ func NewMapResultsUsingMap(
 	additionalCapacity :=
 		len(mapResults) +
 			addCapacity
+
+	hasNoChange := additionalCapacity == len(mapResults) &&
+		!isClone &&
+		!isDeepClone
+
+	if hasNoChange {
+		return &MapResults{
+			Items: mapResults,
+		}
+	}
+
 	finalMapResults := NewMapResultsUsingCap(
 		additionalCapacity)
 
