@@ -2,10 +2,6 @@ package codestack
 
 import (
 	"runtime"
-	"strings"
-
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
 )
 
 func NewPtr(skipIndex int) *Trace {
@@ -13,13 +9,12 @@ func NewPtr(skipIndex int) *Trace {
 	funcInfo := runtime.FuncForPC(pc)
 	fullFuncName := funcInfo.Name()
 
-	splitsByDot := strings.Split(fullFuncName, constants.Dot)
-	first, last := stringslice.FirstLastDefault(splitsByDot)
+	packageName, methodName := MethodNamePackageName(fullFuncName)
 
 	return &Trace{
 		SkipIndex:         skipIndex,
-		PackageName:       first,
-		MethodName:        last,
+		PackageName:       packageName,
+		MethodName:        methodName,
 		PackageMethodName: fullFuncName,
 		FileName:          file,
 		Line:              line,

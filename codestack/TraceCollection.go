@@ -422,7 +422,7 @@ func (it *TraceCollection) Count() int {
 }
 
 func (it *TraceCollection) IsEmpty() bool {
-	return it == nil || it.Length() == 0
+	return it.Length() == 0
 }
 
 func (it *TraceCollection) HasAnyItem() bool {
@@ -647,6 +647,28 @@ func (it *TraceCollection) JoinFileWithLinesStrings(joiner string) string {
 
 func (it *TraceCollection) JoinJsonStrings(joiner string) string {
 	return strings.Join(it.JsonStrings(), joiner)
+}
+
+func (it *TraceCollection) CodeStacksString() string {
+	if it.IsEmpty() {
+		return constants.EmptyString
+	}
+
+	toString := codeStacksHeader +
+		prefixStackTrace +
+		it.JoinShortStrings(prefixStackTraceNewLine)
+
+	return toString
+}
+
+func (it *TraceCollection) CodeStacksStringLimit(limit int) string {
+	if it.IsEmpty() {
+		return constants.EmptyString
+	}
+
+	collection := it.SafeLimitCollection(limit)
+
+	return collection.CodeStacksString()
 }
 
 func (it *TraceCollection) Join(joiner string) string {

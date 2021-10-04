@@ -157,6 +157,16 @@ Any other packages used
 - [System info](https://github.com/zcalusic/sysinfo)
   -[Stackoverflow Centos detect](https://stackoverflow.com/a/65207574)
 
+### Regex Patterns
+
+#### Path RegEx Patterns
+
+* [java - Regex pattern to validate Linux folder path - Stack Overflow](https://stackoverflow.com/questions/55069650/regex-pattern-to-validate-linux-folder-path/55070259)
+* [regex - What is the most correct regular expression for a UNIX file path? - Stack Overflow](https://stackoverflow.com/questions/537772/what-is-the-most-correct-regular-expression-for-a-unix-file-path)
+* [java - Regular expression to validate windows and linux path with extension - Stack Overflow](https://stackoverflow.com/questions/44289075/regular-expression-to-validate-windows-and-linux-path-with-extension)
+* [javascript - Regex windows path validator - Stack Overflow](https://stackoverflow.com/questions/51494579/regex-windows-path-validator/51504254)
+* [Path Regex fix for all OS](https://t.ly/1JuS)
+
 ## Issues
 
 - [Create your issues](https://gitlab.com/evatix-go/core/-/issues)

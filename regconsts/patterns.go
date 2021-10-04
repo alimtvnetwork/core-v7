@@ -4,7 +4,7 @@ package regconsts
 //goland:noinspection ALL
 const (
 	Alpha                                  = "^[a-zA-Z]+$"                                                                                                                                                                                                                             // Alpha represents regular expression for alpha characters
-	AlphaDash                              = "^[a-zA-Z0-9_-]+$"                                                                                                                                                                                                                        // AlphaDash represents regular expression for alpha characters with underscore and dash
+	AlphaDash                              = "^[a-zA-Z0-9_\\-]+$"                                                                                                                                                                                                                      // AlphaDash represents regular expression for alpha characters with underscore and dash
 	AlphaSpace                             = "^[-a-zA-Z0-9_ ]+$"                                                                                                                                                                                                                       // AlphaSpace represents regular expression for alpha characters with underscore, space and dash
 	AlphaNumeric                           = "^[a-zA-Z0-9]+$"                                                                                                                                                                                                                          // AlphaNumeric represents regular expression for alpha numeric characters
 	CreditCard                             = "^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$"                                                                              // CreditCard represents regular expression for credit cards like (Visa, MasterCard, American Express, Diners Club, Discover, and JCB cards). Ref: https://stackoverflow.com/questions/9315647/regex-credit-card-number-tests
@@ -16,7 +16,7 @@ const (
 	Numeric                                = "^[-+]?[0-9]+$"                                                                                                                                                                                                                           // Numeric represents regular expression for numeric
 	IntegerOnly                            = "^[0-9]+"
 	SignedOrInteger                        = "^[-+]?[0-9]+"
-	Path                                   = `[\/a-z]+[\.][a-z]+`
+	Path                                   = `[/\\]{0,2}[_-]*[Aa0-zZ9. ]+[_-]*[Aa0-zZ9. ]*(?:\!\@\#\$\%\&)?[/\\]?|^/$` // https://t.ly/Q58e {includes windows, unix and space}
 	IpSimple                               = `(\d{1,3}\.){3}\d{1,3}[^\r\n]*`
 	FloatingPointNumberOnly                = `^[-+]?[0-9]+[\.][0-9]+`
 	SignOrIntegerOrFloatingPointNumber     = `^[-+]?[0-9]+[\.]?[0-9]+`
@@ -52,8 +52,8 @@ const (
 	UrlIP                                  = `([1-9]\d?|1\d\d|2[01]\d|22[0-3]|24\d|25[0-5])(\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])){2}(?:\.([0-9]\d?|1\d\d|2[0-4]\d|25[0-5]))`
 	UrlSubdomain                           = `((www\.)|([a-zA-Z0-9]+([-_\.]?[a-zA-Z0-9])*[a-zA-Z0-9]\.[a-zA-Z0-9]+))`
 	SSN                                    = `^\d{3}[- ]?\d{2}[- ]?\d{4}$`
-	WinPath                                = `^[a-zA-Z]:\\(?:[^\\/:*?"<>|\r\n]+\\)*[^\\/:*?"<>|\r\n]*$`
-	UnixPath                               = `^(/[^/\x00]*)+/?$`
+	WinPathWithOrWithoutUnc                = `(\\\\\?\\)?[a-zA-Z]:(\\|/)[_-]*[Aa0-zZ9. ]+[_-]*[Aa0-zZ9. ]*(?:\!\@\#\$\%\&)?(\\|/)?[_-]*[Aa0-zZ9. ]+[_-]*[Aa0-zZ9. ]*` // https://regex101.com/r/a5CLhu/1
+	UnixPathWithoutSpace                   = `/[Aa0-zZ9.]+[_-]*[Aa0-zZ9.]*|^/$`                                                                                       // https://regex101.com/r/DqsKNb/1
 	Semver                                 = "^v?(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(-(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(\\.(0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\\+[0-9a-zA-Z-]+(\\.[0-9a-zA-Z-]+)*)?$"
 	HasLowerCase                           = ".*[[:lower:]]"
 	HasUpperCase                           = ".*[[:upper:]]"

@@ -22,9 +22,10 @@ func main() {
 	// timeCompareTest()
 	// versionComparesTest()
 	// testMakerTesting()
-	coreDynamicMapAnyItems()
+	// coreDynamicMapAnyItems()
+	// stackTrackerTest7()
 
 	// keyLegendsTest()
 	// stackTrackerTest()
-	// stackTrackerTest5()
+	stackTrackerTest5()
 }

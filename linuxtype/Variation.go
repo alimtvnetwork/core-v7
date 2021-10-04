@@ -13,19 +13,39 @@ const (
 	UbuntuServer19
 	UbuntuServer20
 	UbuntuServer21
-	UbuntuDesktop
+	UbuntuServer22
+	UbuntuServer23
 	Centos
 	Centos7
 	Centos8
 	Centos9
+	Centos10
+	Centos11
+	Centos12
+	CentosStream
 	DebianServer
+	DebianServer7
+	DebianServer8
+	DebianServer9
+	DebianServer10
+	DebianServer11
+	DebianServer12
+	DebianServer13
+	DebianServer14
 	DebianDesktop
 	Docker
 	DockerUbuntuServer
+	DockerUbuntuServer18
+	DockerUbuntuServer19
 	DockerUbuntuServer20
 	DockerUbuntuServer21
+	DockerUbuntuServer22
+	DockerCentos7
+	DockerCentos8
 	DockerCentos9
+	DockerCentos10
 	Android
+	UbuntuDesktop
 )
 
 func (it Variation) Value() byte {
