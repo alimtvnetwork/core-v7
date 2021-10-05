@@ -778,7 +778,7 @@ func (it TraceCollection) JsonPtr() *corejson.Result {
 func (it *TraceCollection) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*TraceCollection, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyTraceCollection(), err
@@ -817,6 +817,17 @@ func (it *TraceCollection) JsonParseSelfInject(
 
 func (it *TraceCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
 	return it
+}
+
+func (it *TraceCollection) Clear() *TraceCollection {
+	it.Items = it.Items[:0]
+
+	return it
+}
+
+func (it *TraceCollection) Dispose() {
+	it.Clear()
+	it.Items = nil
 }
 
 func (it TraceCollection) Clone() TraceCollection {

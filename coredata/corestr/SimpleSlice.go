@@ -515,7 +515,7 @@ func (it SimpleSlice) JsonPtr() *corejson.Result {
 func (it *SimpleSlice) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*SimpleSlice, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptySimpleSlice(), err
@@ -558,6 +558,25 @@ func (it *SimpleSlice) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector 
 
 func (it *SimpleSlice) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
+}
+
+func (it *SimpleSlice) Clear() *SimpleSlice {
+	if it == nil {
+		return nil
+	}
+
+	it.Items = it.Items[:0]
+
+	return it
+}
+
+func (it *SimpleSlice) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.Items = nil
 }
 
 func (it SimpleSlice) Clone(isDeepClone bool) SimpleSlice {

@@ -51,7 +51,7 @@ func coreDynamicMapAnyItems() {
 		fmt.Println(splittedItem.AllKeys())
 	}
 
-	jsonResult := mapAnyItems.Json()
+	jsonResult := mapAnyItems.JsonPtr()
 	emptyCollection4 := corestr.EmptyCollection()
 	mapAnyItems.GetItemRef("alim-something3", emptyCollection4)
 	fmt.Println("4", emptyCollection4)

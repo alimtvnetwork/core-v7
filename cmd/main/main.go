@@ -23,7 +23,9 @@ func main() {
 	// versionComparesTest()
 	// testMakerTesting()
 	// coreDynamicMapAnyItems()
-	stackTrackerTest7()
+	// stackTrackerTest7()
+	// jsonResultUnmarshallingTest01()
+	jsonResultUnmarshallingTest02()
 
 	// keyLegendsTest()
 	// stackTrackerTest()

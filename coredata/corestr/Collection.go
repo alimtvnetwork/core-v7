@@ -2201,17 +2201,6 @@ func (it *Collection) NonWhitespaceJoins(
 		joiner)
 }
 
-// Clear clears existing items.
-func (it *Collection) Clear() *Collection {
-	if it.IsEmpty() {
-		return it
-	}
-
-	it.items = it.items[:0]
-
-	return it
-}
-
 func (it *Collection) JsonModel() []string {
 	return it.items
 }
@@ -2248,7 +2237,7 @@ func (it Collection) JsonPtr() *corejson.Result {
 func (it *Collection) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Collection, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyCollection(), err
@@ -2280,6 +2269,25 @@ func (it *Collection) JsonParseSelfInject(
 	)
 
 	return err
+}
+
+func (it *Collection) Clear() *Collection {
+	if it == nil {
+		return nil
+	}
+
+	it.items = it.items[:0]
+
+	return it
+}
+
+func (it *Collection) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.items = nil
 }
 
 func (it *Collection) AsJsonMarshaller() corejson.JsonMarshaller {

@@ -19,7 +19,6 @@ func NewHashset(length int) *Hashset {
 	return &Hashset{
 		items:         hashset,
 		hasMapUpdated: false,
-		cachedList:    nil,
 		length:        length,
 		isEmptySet:    true,
 		Mutex:         sync.Mutex{},
@@ -125,7 +124,6 @@ func NewHashsetUsingMap(
 	return &Hashset{
 		items:         itemsMap,
 		hasMapUpdated: false,
-		cachedList:    nil,
 		length:        length,
 		isEmptySet:    length == constants.Zero,
 		Mutex:         sync.Mutex{},
@@ -305,7 +303,7 @@ func NewCharCollectionMap(
 	}
 
 	return &CharCollectionMap{
-		items:                  &mapElements,
+		items:                  mapElements,
 		eachCollectionCapacity: selfCollectionCapacity,
 	}
 }
@@ -315,7 +313,7 @@ func EmptyCharCollectionMap() *CharCollectionMap {
 	mapElements := make(map[byte]*Collection, constants.Zero)
 
 	return &CharCollectionMap{
-		items:                  &mapElements,
+		items:                  mapElements,
 		eachCollectionCapacity: defaultEachCollectionCapacity,
 	}
 }
@@ -345,7 +343,7 @@ func NewCharCollectionMapUsingItemsPtr(
 
 	mapElements := make(map[byte]*Collection, length)
 	charCollectionMap := &CharCollectionMap{
-		items:                  &mapElements,
+		items:                  mapElements,
 		eachCollectionCapacity: constants.Zero,
 	}
 
@@ -371,7 +369,7 @@ func NewCharCollectionMapUsingItemsPlusCap(
 		additionalCapacityOrLength)
 
 	charCollectionMap := &CharCollectionMap{
-		items:                  &mapElements,
+		items:                  mapElements,
 		eachCollectionCapacity: eachCollectionCapacity,
 	}
 
@@ -450,7 +448,6 @@ func NewHashmap(length int) *Hashmap {
 	return &Hashmap{
 		items:         hashset,
 		hasMapUpdated: false,
-		cachedList:    nil,
 		length:        length,
 		isEmptySet:    true,
 	}
@@ -541,7 +538,6 @@ func NewHashmapUsingMap(
 	return &Hashmap{
 		items:         itemsMap,
 		hasMapUpdated: false,
-		cachedList:    nil,
 		length:        length,
 		isEmptySet:    length == constants.Zero,
 	}
@@ -622,7 +618,7 @@ func NewCharHashsetMap(
 	}
 
 	return &CharHashsetMap{
-		items:               &mapElements,
+		items:               mapElements,
 		eachHashsetCapacity: selfHashsetCapacity,
 	}
 }
@@ -686,7 +682,7 @@ func EmptyCharHashsetMap() *CharHashsetMap {
 		constants.Zero)
 
 	return &CharHashsetMap{
-		items:               &mapElements,
+		items:               mapElements,
 		eachHashsetCapacity: constants.Zero,
 	}
 }

@@ -63,7 +63,7 @@ func (it FileWithLine) JsonPtr() *corejson.Result {
 func (it *FileWithLine) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*FileWithLine, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return nil, err

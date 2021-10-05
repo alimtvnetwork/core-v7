@@ -953,6 +953,28 @@ func (it *Hashset) ListPtr() *[]string {
 	return &it.cachedList
 }
 
+func (it *Hashset) Clear() *Hashset {
+	if it == nil {
+		return it
+	}
+	it.items = nil
+	it.items = make(map[string]bool)
+	it.cachedList = []string{}
+	it.hasMapUpdated = true
+
+	return it
+}
+
+func (it *Hashset) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.items = nil
+	it.cachedList = nil
+}
+
 // ListCopyPtrLock a slice must returned
 func (it *Hashset) ListCopyPtrLock() *[]string {
 	it.Lock()
@@ -1168,7 +1190,7 @@ func (it Hashset) JsonPtr() *corejson.Result {
 func (it *Hashset) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashset, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyHashset(), err

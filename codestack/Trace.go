@@ -53,7 +53,7 @@ func (it *Trace) IsNil() bool {
 }
 
 func (it *Trace) HasIssues() bool {
-	return it == nil || !it.IsOkay || it.PackageMethodName == ""
+	return it == nil || !it.IsOkay || it.PackageMethodName == "" || it.PackageName == ""
 }
 
 func (it *Trace) IsNotNil() bool {
@@ -120,7 +120,7 @@ func (it Trace) JsonPtr() *corejson.Result {
 func (it *Trace) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Trace, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return nil, err

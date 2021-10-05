@@ -1490,7 +1490,7 @@ func (it LinkedCollections) JsonPtr() *corejson.Result {
 func (it *LinkedCollections) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*LinkedCollections, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyLinkedCollections(), err

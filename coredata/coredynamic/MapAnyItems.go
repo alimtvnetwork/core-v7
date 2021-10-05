@@ -595,22 +595,19 @@ func (it *MapAnyItems) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-//goland:noinspection GoLinterLocal
-func (it *MapAnyItems) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it MapAnyItems) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it MapAnyItems) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 //goland:noinspection GoLinterLocal
 func (it *MapAnyItems) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*MapAnyItems, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyMapAnyItems(), err

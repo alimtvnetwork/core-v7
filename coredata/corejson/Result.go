@@ -7,7 +7,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 	"gitlab.com/evatix-go/core/msgtype"
 )
 
@@ -196,14 +196,38 @@ func (it *Result) InjectInto(
 
 func (it *Result) Unmarshal(any interface{}) error {
 	if it == nil {
-		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return msgtype.
+			UnMarshallingFailed.
+			Error(
+				"cannot unmarshal if JsonResult is nil, type",
+				reflectinternal.TypeName(any))
 	}
 
 	if it.HasError() {
-		return it.Error
+		reference := msgtype.Var2NoType(
+			"JsonResult Error", it.Error,
+			"Unmarshalling Reference Type", reflectinternal.TypeName(any))
+
+		return msgtype.
+			UnMarshallingFailed.
+			Error(
+				"cannot unmarshal if JsonResult has already error.",
+				reference)
 	}
 
-	return json.Unmarshal(it.Bytes, any)
+	err := json.Unmarshal(it.Bytes, any)
+
+	if err != nil {
+		reference := msgtype.Var2NoType(
+			"Unmarshalling Error", err,
+			"Unmarshalling Reference Type", reflectinternal.TypeName(any))
+
+		return msgtype.
+			UnMarshallingFailed.
+			ErrorRefOnly(reference)
+	}
+
+	return nil
 }
 
 func (it *Result) UnmarshalResult() (*Result, error) {
@@ -250,13 +274,8 @@ func (it Result) JsonPtr() *Result {
 func (it *Result) ParseInjectUsingJson(
 	jsonResultIn *Result,
 ) (*Result, error) {
-	if jsonResultIn == nil || jsonResultIn.IsEmptyJsonBytes() {
-		return EmptyWithoutErrorPtr(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
-	}
-
-	err := json.Unmarshal(
-		jsonResultIn.Bytes,
-		&it)
+	err := jsonResultIn.Unmarshal(
+		it)
 
 	if err != nil {
 		return EmptyWithErrorPtr(err), err
@@ -315,7 +334,7 @@ func (it *Result) Ptr() *Result {
 	return it
 }
 
-func (it *Result) IsEqual(another *Result) bool {
+func (it *Result) IsEqualPtr(another *Result) bool {
 	if it == nil && another == nil {
 		return true
 	}
@@ -324,6 +343,23 @@ func (it *Result) IsEqual(another *Result) bool {
 		return false
 	}
 
+	if it.Length() != another.Length() {
+		return false
+	}
+
+	if !it.IsErrorEqual(another.Error) {
+		return false
+	}
+
+	if it.jsonString != nil && another.jsonString != nil &&
+		it.jsonString == another.jsonString {
+		return true
+	}
+
+	return bytes.Equal(it.Bytes, another.Bytes)
+}
+
+func (it Result) IsEqual(another Result) bool {
 	if it.Length() != another.Length() {
 		return false
 	}

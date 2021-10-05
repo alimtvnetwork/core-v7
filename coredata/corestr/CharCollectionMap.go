@@ -13,7 +13,7 @@ import (
 )
 
 type CharCollectionMap struct {
-	items                  *map[byte]*Collection
+	items                  map[byte]*Collection
 	eachCollectionCapacity int
 	sync.Mutex
 }
@@ -63,20 +63,21 @@ func (it *CharCollectionMap) GetCharsPtrGroups(
 	return collectionMap.AddStringsPtr(items)
 }
 
-func (it *CharCollectionMap) GetMap() *map[byte]*Collection {
+func (it *CharCollectionMap) GetMap() map[byte]*Collection {
 	return it.items
 }
 
 // GetCopyMapLock Sends a copy of items
-func (it *CharCollectionMap) GetCopyMapLock() *map[byte]*Collection {
+func (it *CharCollectionMap) GetCopyMapLock() map[byte]*Collection {
 	it.Lock()
 	defer it.Unlock()
 
 	if it.IsEmpty() {
-		return &(map[byte]*Collection{})
+		return map[byte]*Collection{}
 	}
 
-	return &(*it.items)
+	// TODO Fix copy logic
+	return it.items
 }
 
 func (it *CharCollectionMap) SummaryStringLock() string {
@@ -92,7 +93,7 @@ func (it *CharCollectionMap) SummaryStringLock() string {
 		coreindexes.First)
 
 	i := 1
-	for key, collection := range *it.GetCopyMapLock() {
+	for key, collection := range it.GetCopyMapLock() {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
 			i+1,
@@ -119,7 +120,7 @@ func (it *CharCollectionMap) SummaryString() string {
 		coreindexes.First+1)
 
 	i := 1
-	for key, collection := range *it.items {
+	for key, collection := range it.items {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapSingleItemFormat,
 			i,
@@ -143,7 +144,7 @@ func (it *CharCollectionMap) String() string {
 		it.SummaryString()
 
 	i := 1
-	for key, collection := range *it.items {
+	for key, collection := range it.items {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapLengthFormat,
 			string(key))
@@ -174,7 +175,7 @@ func (it *CharCollectionMap) StringLock() string {
 		it.SummaryStringLock()
 
 	i := 1
-	for key, collection := range *it.GetCopyMapLock() {
+	for key, collection := range it.GetCopyMapLock() {
 		collectionOfCollection[i] = fmt.Sprintf(
 			charCollectionMapLengthFormat,
 			string(key))
@@ -211,25 +212,19 @@ func (it *CharCollectionMap) PrintLock(isPrint bool) {
 }
 
 func (it *CharCollectionMap) IsEmpty() bool {
-	return it.items == nil ||
-		*it.items == nil ||
-		len(*it.items) == 0
+	return it == nil ||
+		len(it.items) == 0
 }
 
 func (it *CharCollectionMap) HasItems() bool {
-	return it.items != nil &&
-		*it.items != nil &&
-		len(*it.items) > 0
+	return !it.IsEmpty()
 }
 
 func (it *CharCollectionMap) IsEmptyLock() bool {
 	it.Lock()
 	defer it.Unlock()
 
-	return it.
-		items == nil ||
-		*it.items == nil ||
-		len(*it.items) == 0
+	return it.IsEmpty()
 }
 
 // LengthOfCollectionFromFirstChar Get the char of the string given and get the length of how much is there.
@@ -238,7 +233,7 @@ func (it *CharCollectionMap) LengthOfCollectionFromFirstChar(
 ) int {
 	char := it.GetChar(str)
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.Length()
@@ -257,7 +252,7 @@ func (it *CharCollectionMap) Has(
 	char := it.
 		GetChar(str)
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.Has(str)
@@ -276,7 +271,7 @@ func (it *CharCollectionMap) HasWithCollection(
 	char := it.
 		GetChar(str)
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.Has(str), collection
@@ -298,7 +293,7 @@ func (it *CharCollectionMap) HasWithCollectionLock(
 	char := it.
 		GetChar(str)
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.HasLock(str), collection
@@ -312,7 +307,7 @@ func (it *CharCollectionMap) LengthOf(char byte) int {
 		return 0
 	}
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.Length()
@@ -329,7 +324,7 @@ func (it *CharCollectionMap) LengthOfLock(char byte) int {
 		return 0
 	}
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection.Length()
@@ -340,15 +335,13 @@ func (it *CharCollectionMap) LengthOfLock(char byte) int {
 
 // AllLengthsSum All lengths sum.
 func (it *CharCollectionMap) AllLengthsSum() int {
-	if it.
-		items == nil ||
-		*it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
 	allLengthsSum := 0
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		allLengthsSum += collection.Length()
 	}
 
@@ -360,15 +353,13 @@ func (it *CharCollectionMap) AllLengthsSumLock() int {
 	it.Lock()
 	defer it.Unlock()
 
-	if it.
-		items == nil ||
-		*it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
 	allLengthsSum := 0
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		allLengthsSum += collection.LengthLock()
 	}
 
@@ -377,26 +368,22 @@ func (it *CharCollectionMap) AllLengthsSumLock() int {
 
 // Length Returns the length of chars which is the map length.
 func (it *CharCollectionMap) Length() int {
-	if it.
-		items == nil ||
-		*it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 func (it *CharCollectionMap) LengthLock() int {
 	it.Lock()
 	defer it.Unlock()
 
-	if it.
-		items == nil ||
-		*it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 func (it *CharCollectionMap) IsEqualsPtrLock(
@@ -457,8 +444,8 @@ func (it *CharCollectionMap) IsEqualsWithCaseSensitivityPtr(
 	leftMap := it.items
 	rightMap := another.items
 
-	for key, collection := range *leftMap {
-		rCollection, has := (*rightMap)[key]
+	for key, collection := range leftMap {
+		rCollection, has := rightMap[key]
 
 		if !has {
 			return false
@@ -480,8 +467,7 @@ func (it *CharCollectionMap) AddLock(
 	char := it.GetChar(str)
 
 	it.Lock()
-	collection, has := (*it.
-		items)[char]
+	collection, has := it.items[char]
 	it.Unlock()
 
 	if has {
@@ -494,7 +480,7 @@ func (it *CharCollectionMap) AddLock(
 	newCollection.Add(str)
 
 	it.Lock()
-	(*it.items)[char] = newCollection
+	it.items[char] = newCollection
 	it.Unlock()
 
 	return it
@@ -505,8 +491,7 @@ func (it *CharCollectionMap) Add(
 ) *CharCollectionMap {
 	char := it.GetChar(str)
 
-	collection, has := (*it.
-		items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		collection.Add(str)
@@ -516,8 +501,7 @@ func (it *CharCollectionMap) Add(
 
 	newCollection := NewCollection(it.eachCollectionCapacity)
 	newCollection.Add(str)
-	(*it.
-		items)[char] = newCollection
+	it.items[char] = newCollection
 
 	return it
 }
@@ -527,8 +511,7 @@ func (it *CharCollectionMap) AddStringPtr(
 ) *CharCollectionMap {
 	char := it.GetCharOfPtr(str)
 
-	collection, has := (*it.
-		items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		collection.AddPtr(str)
@@ -538,8 +521,7 @@ func (it *CharCollectionMap) AddStringPtr(
 
 	newCollection := NewCollection(it.eachCollectionCapacity)
 	newCollection.AddPtr(str)
-	(*it.
-		items)[char] = newCollection
+	it.items[char] = newCollection
 
 	return it
 }
@@ -551,8 +533,7 @@ func (it *CharCollectionMap) AddStringPtrLock(
 	char := it.GetCharOfPtr(str)
 
 	it.Lock()
-	collection, has := (*it.
-		items)[char]
+	collection, has := it.items[char]
 	it.Unlock()
 
 	if has {
@@ -565,8 +546,7 @@ func (it *CharCollectionMap) AddStringPtrLock(
 	newCollection.AddPtr(str)
 
 	it.Lock()
-	(*it.
-		items)[char] = newCollection
+	it.items[char] = newCollection
 	it.Unlock()
 
 	return it
@@ -584,8 +564,7 @@ func (it *CharCollectionMap) AddSameStartingCharItems(
 		return it
 	}
 
-	values, has := (*it.
-		items)[char]
+	values, has := it.items[char]
 
 	if has {
 		values.AddStringsPtr(allItemsWithSameChar)
@@ -593,8 +572,7 @@ func (it *CharCollectionMap) AddSameStartingCharItems(
 		return it
 	}
 
-	(*it.
-		items)[char] =
+	it.items[char] =
 		NewCollectionUsingStrings(
 			*allItemsWithSameChar,
 			isCloneAdd)
@@ -756,7 +734,7 @@ func (it *CharCollectionMap) efficientAddOfLargeItems(
 	wg := &sync.WaitGroup{}
 	wg.Add(allCharsMap.Length())
 
-	for key, collection := range *allCharsMap.items {
+	for key, collection := range allCharsMap.items {
 		foundCollection := it.GetCollectionLock(
 			string(key),
 			true)
@@ -813,7 +791,7 @@ func (it *CharCollectionMap) GetCollection(
 ) *Collection {
 	char := it.GetChar(strFirstChar)
 
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if has {
 		return collection
@@ -821,7 +799,7 @@ func (it *CharCollectionMap) GetCollection(
 
 	if isAddNewOnEmpty {
 		newCollection := NewCollection(it.eachCollectionCapacity)
-		(*it.items)[char] = newCollection
+		it.items[char] = newCollection
 
 		return newCollection
 	}
@@ -872,13 +850,13 @@ func (it *CharCollectionMap) AddSameCharsCollection(
 		// create new
 		newCollection := NewCollection(
 			it.eachCollectionCapacity)
-		(*it.items)[char] = newCollection
+		it.items[char] = newCollection
 
 		return newCollection
 	}
 
 	// items exist or stringsWithSameStartChar exists
-	(*it.items)[char] =
+	it.items[char] =
 		stringsWithSameStartChar
 
 	return stringsWithSameStartChar
@@ -901,12 +879,11 @@ func (it *CharCollectionMap) AddCollectionItems(
 func (it *CharCollectionMap) AddCharHashsetMap(
 	charHashsetMap *CharHashsetMap,
 ) *CharCollectionMap {
-	if charHashsetMap == nil ||
-		charHashsetMap.IsEmpty() {
+	if charHashsetMap.IsEmpty() {
 		return it
 	}
 
-	for _, hashset := range *charHashsetMap.items {
+	for _, hashset := range charHashsetMap.items {
 		for item := range hashset.items {
 			it.Add(item)
 		}
@@ -926,12 +903,12 @@ func (it *CharCollectionMap) Resize(
 
 	newCollection := make(map[byte]*Collection, newLength)
 
-	for key, element := range *it.items {
+	for key, element := range it.items {
 		newCollection[key] = element
 	}
 
 	it.items = nil
-	it.items = &newCollection
+	it.items = newCollection
 
 	return it
 }
@@ -977,7 +954,7 @@ func (it *CharCollectionMap) List() *[]string {
 	list := make([]string, it.AllLengthsSum())
 
 	i := 0
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		for _, itemInList := range collection.items {
 			list[i] = itemInList
 			i++
@@ -1026,7 +1003,7 @@ func (it *CharCollectionMap) AddSameCharsCollectionLock(
 
 		it.Lock()
 
-		(*it.items)[char] = newCollection
+		it.items[char] = newCollection
 
 		it.Unlock()
 
@@ -1035,7 +1012,7 @@ func (it *CharCollectionMap) AddSameCharsCollectionLock(
 
 	// items exist or stringsWithSameStartChar exists
 	it.Lock()
-	(*it.items)[char] =
+	it.items[char] =
 		stringsWithSameStartChar
 	it.Unlock()
 
@@ -1045,13 +1022,13 @@ func (it *CharCollectionMap) AddSameCharsCollectionLock(
 func (it *CharCollectionMap) GetCollectionByChar(
 	char byte,
 ) *Collection {
-	return (*it.items)[char]
+	return it.items[char]
 }
 
 func (it *CharCollectionMap) HashsetByChar(
 	char byte,
 ) *Hashset {
-	collection, has := (*it.items)[char]
+	collection, has := it.items[char]
 
 	if !has {
 		return nil
@@ -1065,7 +1042,7 @@ func (it *CharCollectionMap) HashsetByCharLock(
 	char byte,
 ) *Hashset {
 	it.Lock()
-	collection := (*it.items)[char]
+	collection := it.items[char]
 	it.Unlock()
 
 	if collection == nil {
@@ -1130,7 +1107,7 @@ func (it *CharCollectionMap) HashsetsCollection() *HashsetsCollection {
 		0,
 		it.Length())
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		if collection == nil ||
 			collection.IsEmpty() {
 			continue
@@ -1231,7 +1208,7 @@ func (it CharCollectionMap) JsonPtr() *corejson.Result {
 func (it *CharCollectionMap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CharCollectionMap, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyCharCollectionMap(), err
@@ -1260,9 +1237,21 @@ func (it *CharCollectionMap) Clear() *CharCollectionMap {
 		return it
 	}
 
-	for char := range *it.items {
-		delete(*it.items, char)
+	for char, values := range it.items {
+		values.Dispose()
+		values = nil
+
+		delete(it.items, char)
 	}
 
 	return it
+}
+
+func (it *CharCollectionMap) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.items = nil
 }

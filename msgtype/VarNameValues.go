@@ -1,7 +1,6 @@
 package msgtype
 
 import (
-	"fmt"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
@@ -14,16 +13,7 @@ func VarNameValues(
 		return ""
 	}
 
-	items := make([]string, len(nameValues))
-
-	index := 0
-	for _, nameValue := range nameValues {
-		items[index] = fmt.Sprintf(
-			keyValFormat,
-			nameValue.Name,
-			nameValue.Value)
-		index++
-	}
+	items := VarNameValuesStrings(nameValues...)
 
 	return strings.Join(
 		items,

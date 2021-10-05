@@ -500,7 +500,7 @@ func (it SimpleStringOnce) JsonPtr() *corejson.Result {
 func (it *SimpleStringOnce) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*SimpleStringOnce, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return nil, err

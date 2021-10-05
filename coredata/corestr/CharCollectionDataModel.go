@@ -1,7 +1,7 @@
 package corestr
 
 type CharCollectionDataModel struct {
-	Items                  *map[byte]*Collection `json:"CharacterVsStringsCollectionMap"`
+	Items                  map[byte]*Collection `json:"CharacterVsStringsCollectionMap"`
 	EachCollectionCapacity int
 }
 

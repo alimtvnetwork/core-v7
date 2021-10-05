@@ -221,7 +221,7 @@ func (it CollectionsOfCollectionPtr) JsonPtr() *corejson.Result {
 func (it *CollectionsOfCollectionPtr) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CollectionsOfCollectionPtr, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyCollectionsOfCollectionPtr(), err

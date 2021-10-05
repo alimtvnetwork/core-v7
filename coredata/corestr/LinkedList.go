@@ -1064,7 +1064,7 @@ func (it *LinkedList) Json() *corejson.Result {
 func (it *LinkedList) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*LinkedList, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyLinkedList(), err

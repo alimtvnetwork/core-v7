@@ -1,7 +1,7 @@
 package corestr
 
 type CharHashsetDataModel struct {
-	Items               *map[byte]*Hashset `json:"CharacterVsHashsetMap"`
+	Items               map[byte]*Hashset `json:"CharacterVsHashsetMap"`
 	EachHashsetCapacity int
 }
 

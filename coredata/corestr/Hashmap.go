@@ -769,12 +769,12 @@ func (it *Hashmap) KeysValuesListLock() (
 	return keys, values
 }
 
-func (it *Hashmap) Keys() *[]string {
+func (it *Hashmap) AllKeys() []string {
 	length := len(it.items)
 	keys := make([]string, length)
 
 	if length == 0 {
-		return &keys
+		return keys
 	}
 
 	i := 0
@@ -782,6 +782,12 @@ func (it *Hashmap) Keys() *[]string {
 		keys[i] = k
 		i++
 	}
+
+	return keys
+}
+
+func (it *Hashmap) Keys() *[]string {
+	keys := it.AllKeys()
 
 	return &keys
 }
@@ -1103,7 +1109,7 @@ func (it Hashmap) JsonPtr() *corejson.Result {
 func (it *Hashmap) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*Hashmap, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyHashmap(), err
@@ -1138,6 +1144,28 @@ func (it *Hashmap) KeyValStringLines() *[]string {
 	return it.ToStringsUsingCompiler(func(key, val string) string {
 		return key + constants.HypenAngelRight + val
 	})
+}
+
+func (it *Hashmap) Clear() *Hashmap {
+	if it == nil {
+		return it
+	}
+
+	it.items = nil
+	it.items = map[string]string{}
+	it.cachedList = it.cachedList[:0]
+	it.hasMapUpdated = true
+
+	return it
+}
+
+func (it *Hashmap) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.items = nil
+	it.cachedList = nil
 }
 
 func (it *Hashmap) ToStringsUsingCompiler(

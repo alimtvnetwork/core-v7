@@ -1988,7 +1988,7 @@ func (it CollectionPtr) JsonPtr() *corejson.Result {
 func (it *CollectionPtr) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*CollectionPtr, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyCollectionPtr(), err

@@ -294,7 +294,7 @@ func (it HashsetsCollection) JsonPtr() *corejson.Result {
 func (it *HashsetsCollection) ParseInjectUsingJson(
 	jsonResult *corejson.Result,
 ) (*HashsetsCollection, error) {
-	err := jsonResult.Unmarshal(&it)
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
 		return EmptyHashsetsCollection(), err
