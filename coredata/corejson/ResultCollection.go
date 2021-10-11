@@ -8,7 +8,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type ResultsCollection struct {
@@ -486,10 +486,26 @@ func (it *ResultsCollection) AddNonNilItemsPtr(
 }
 
 func (it *ResultsCollection) Clear() *ResultsCollection {
-	clearedItems := it.Items[:0]
-	it.Items = clearedItems
+	temp := it.Items
+	clearFunc := func() {
+		for _, result := range temp {
+			result.Dispose()
+		}
+	}
+
+	go clearFunc()
+	it.Items = []Result{}
 
 	return it
+}
+
+func (it *ResultsCollection) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.Items = nil
 }
 
 func (it *ResultsCollection) GetStrings() []string {
@@ -607,7 +623,7 @@ func (it *ResultsCollection) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",

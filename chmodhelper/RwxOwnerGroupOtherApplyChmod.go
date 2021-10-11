@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // RwxOwnerGroupOtherApplyChmod rwxFullString 10 chars "-rwxrwxrwx"
@@ -16,12 +16,12 @@ func RwxOwnerGroupOtherApplyChmod(
 	}
 
 	if rwxOwnerGroupOther == nil {
-		return msgtype.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyMessage.
 			ErrorNoRefs("rwxOwnerGroupOther")
 	}
 
 	if condition == nil {
-		return msgtype.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyMessage.
 			ErrorNoRefs("condition")
 	}
 

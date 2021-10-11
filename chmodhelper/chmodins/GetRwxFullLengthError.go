@@ -1,13 +1,13 @@
 package chmodins
 
 import (
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // GetRwxFullLengthError must be 10 chars length
 func GetRwxFullLengthError(rwxFull string) error {
 	if len(rwxFull) != RwxFullLength {
-		return msgtype.LengthShouldBeEqualToMessage.
+		return errcore.LengthShouldBeEqualToMessage.
 			Error(
 				"rwxFull length should be "+RwxFullLengthString,
 				len(rwxFull))

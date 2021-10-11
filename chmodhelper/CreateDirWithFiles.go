@@ -4,7 +4,7 @@ import (
 	"os"
 	"path"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func CreateDirWithFiles(
@@ -21,8 +21,8 @@ func CreateDirWithFiles(
 	}
 
 	if removeErr != nil {
-		return msgtype.PathMeaningFulError(
-			msgtype.PathCreateFailedMessage,
+		return errcore.PathMeaningFulError(
+			errcore.PathCreateFailedMessage,
 			funcName,
 			removeErr,
 			dir)
@@ -32,8 +32,8 @@ func CreateDirWithFiles(
 		dir, fileChmod)
 
 	if mkDirErr != nil {
-		return msgtype.PathMeaningFulError(
-			msgtype.PathCreateFailedMessage,
+		return errcore.PathMeaningFulError(
+			errcore.PathCreateFailedMessage,
 			funcName,
 			mkDirErr,
 			dir)
@@ -50,8 +50,8 @@ func CreateDirWithFiles(
 		osFile, err := os.Create(compiledPath)
 
 		if err != nil {
-			return msgtype.PathMeaningFulError(
-				msgtype.PathCreateFailedMessage,
+			return errcore.PathMeaningFulError(
+				errcore.PathCreateFailedMessage,
 				funcName,
 				err,
 				dir)
@@ -62,8 +62,8 @@ func CreateDirWithFiles(
 		}
 
 		if fileManipulateErr != nil {
-			return msgtype.PathMeaningFulError(
-				msgtype.FileCloseFailedMessage,
+			return errcore.PathMeaningFulError(
+				errcore.FileCloseFailedMessage,
 				funcName,
 				fileManipulateErr,
 				compiledPath)
@@ -74,8 +74,8 @@ func CreateDirWithFiles(
 			fileChmod)
 
 		if chmodErr != nil {
-			return msgtype.PathMeaningFulError(
-				msgtype.PathChmodApplyMessage,
+			return errcore.PathMeaningFulError(
+				errcore.PathChmodApplyMessage,
 				funcName,
 				chmodErr,
 				compiledPath)

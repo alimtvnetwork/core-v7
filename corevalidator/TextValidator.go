@@ -8,8 +8,8 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreutils/stringutil"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/msgformats"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type TextValidator struct {
@@ -172,7 +172,7 @@ func (it *TextValidator) verifyDetailErrorUsingLineProcessing(
 
 	expectationMethod := it.SearchAs.Name()
 
-	msg := msgtype.GetSearchTermExpectationMessage(
+	msg := errcore.GetSearchTermExpectationMessage(
 		params.CaseIndex,
 		expectationMethod,
 		lineProcessingIndex,
@@ -213,7 +213,7 @@ func (it *TextValidator) VerifySimpleError(
 
 	method := it.SearchAs.Name()
 
-	msg := msgtype.GetSearchTermExpectationSimpleMessage(
+	msg := errcore.GetSearchTermExpectationSimpleMessage(
 		params.CaseIndex,
 		method,
 		processingIndex,
@@ -296,6 +296,6 @@ func (it *TextValidator) AllVerifyError(
 		}
 	}
 
-	return msgtype.SliceToError(
+	return errcore.SliceToError(
 		sliceErr)
 }

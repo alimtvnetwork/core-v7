@@ -4,17 +4,21 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata"
 	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/csvinternal"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type Result struct {
 	jsonString *string
 	Bytes      []byte
 	Error      error
+	TypeName   string
 }
 
 func (it Result) JsonString() string {
@@ -62,11 +66,11 @@ func (it *Result) ErrorString() string {
 }
 
 func (it *Result) IsErrorEqual(err error) bool {
-	if it.IsEmptyError() && err == nil {
+	if it.Error == nil && err == nil {
 		return true
 	}
 
-	if it.IsEmptyError() || err == nil {
+	if it.Error == nil || err == nil {
 		return false
 	}
 
@@ -99,14 +103,14 @@ func (it *Result) ValueMust() []byte {
 
 // MeaningfulError create error even if results are nil.
 func (it *Result) MeaningfulError() error {
-	var msgVariation msgtype.Variation
+	var msgVariation errcore.Variation
 
 	if it.IsEmptyJsonBytes() {
-		msgVariation = msgtype.JsonResultBytesAreNilOrEmpty
+		msgVariation = errcore.JsonResultBytesAreNilOrEmpty
 	}
 
 	if it.HasError() {
-		return msgtype.FailedToParse.Error(
+		return errcore.FailedToParse.Error(
 			it.Error.Error(),
 			msgVariation.String())
 	}
@@ -196,19 +200,20 @@ func (it *Result) InjectInto(
 
 func (it *Result) Unmarshal(any interface{}) error {
 	if it == nil {
-		return msgtype.
+		return errcore.
 			UnMarshallingFailed.
 			Error(
-				"cannot unmarshal if JsonResult is nil, type",
+				"cannot unmarshal if JsonResult is ni, type",
 				reflectinternal.TypeName(any))
 	}
 
 	if it.HasError() {
-		reference := msgtype.Var2NoType(
+		reference := errcore.Var3NoType(
 			"JsonResult Error", it.Error,
-			"Unmarshalling Reference Type", reflectinternal.TypeName(any))
+			"Source Type", it.TypeName,
+			"To Reference Type", reflectinternal.TypeName(any))
 
-		return msgtype.
+		return errcore.
 			UnMarshallingFailed.
 			Error(
 				"cannot unmarshal if JsonResult has already error.",
@@ -217,17 +222,43 @@ func (it *Result) Unmarshal(any interface{}) error {
 
 	err := json.Unmarshal(it.Bytes, any)
 
-	if err != nil {
-		reference := msgtype.Var2NoType(
-			"Unmarshalling Error", err,
-			"Unmarshalling Reference Type", reflectinternal.TypeName(any))
-
-		return msgtype.
-			UnMarshallingFailed.
-			ErrorRefOnly(reference)
+	if err == nil {
+		return nil
 	}
 
-	return nil
+	reference := errcore.Var3NoType(
+		"Unmarshall Error", err.Error(),
+		"Source Type", it.TypeName,
+		"To Reference Type", reflectinternal.TypeName(any))
+
+	return errcore.
+		UnMarshallingFailed.
+		ErrorRefOnly(reference)
+}
+
+func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
+	if it == nil {
+		return errcore.
+			UnMarshallingFailed.
+			Error(
+				"cannot unmarshal if JsonResult is nil, type",
+				reflectinternal.TypeName(any))
+	}
+
+	err := json.Unmarshal(it.Bytes, any)
+
+	if err == nil {
+		return nil
+	}
+
+	reference := errcore.Var3NoType(
+		"Unmarshall Error", err.Error(),
+		"Source Type", it.TypeName,
+		"To Reference Type", reflectinternal.TypeName(any))
+
+	return errcore.
+		UnMarshallingFailed.
+		ErrorRefOnly(reference)
 }
 
 func (it *Result) UnmarshalResult() (*Result, error) {
@@ -238,28 +269,13 @@ func (it *Result) UnmarshalResult() (*Result, error) {
 }
 
 //goland:noinspection GoLinterLocal
-func (it *Result) JsonModel() *ResultModel {
-	return NewModel(it)
+func (it Result) JsonModel() Result {
+	return it
 }
 
 //goland:noinspection GoLinterLocal
 func (it *Result) JsonModelAny() interface{} {
 	return it.JsonModel()
-}
-
-func (it *Result) MarshalJSON() ([]byte, error) {
-	return json.Marshal(it.JsonModel())
-}
-
-func (it *Result) UnmarshalJSON(data []byte) error {
-	var dataModel ResultModel
-	err := json.Unmarshal(data, &dataModel)
-
-	if err == nil {
-		transpileModelToResult(&dataModel, it)
-	}
-
-	return err
 }
 
 func (it Result) Json() Result {
@@ -314,10 +330,6 @@ func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
 	return it
 }
 
-func (it *Result) AsJsonMarshaller() JsonMarshaller {
-	return it
-}
-
 func (it *Result) CloneError() error {
 	if it.HasError() {
 		return errors.New(it.Error.Error())
@@ -326,11 +338,11 @@ func (it *Result) CloneError() error {
 	return nil
 }
 
-func (it Result) NonPtr() Result {
+func (it *Result) Ptr() *Result {
 	return it
 }
 
-func (it *Result) Ptr() *Result {
+func (it Result) NonPtr() Result {
 	return it
 }
 
@@ -351,12 +363,40 @@ func (it *Result) IsEqualPtr(another *Result) bool {
 		return false
 	}
 
+	if it.TypeName != another.TypeName {
+		return false
+	}
+
 	if it.jsonString != nil && another.jsonString != nil &&
 		it.jsonString == another.jsonString {
 		return true
 	}
 
 	return bytes.Equal(it.Bytes, another.Bytes)
+}
+
+func (it *Result) CombineErrorWithRef(references ...string) string {
+	if it.IsEmptyError() {
+		return ""
+	}
+
+	csv := csvinternal.StringsToStringDefault(references...)
+
+	return fmt.Sprintf(
+		constants.MessageReferenceWrap,
+		it.Error.Error(),
+		csv)
+}
+
+func (it *Result) CombineErrorWithRefError(references ...string) error {
+	if it.IsEmptyError() {
+		return nil
+	}
+
+	errorString := it.CombineErrorWithRef(
+		references...)
+
+	return errors.New(errorString)
 }
 
 func (it Result) IsEqual(another Result) bool {
@@ -374,6 +414,28 @@ func (it Result) IsEqual(another Result) bool {
 	}
 
 	return bytes.Equal(it.Bytes, another.Bytes)
+}
+
+func (it *Result) BytesError() *coredata.BytesError {
+	if it == nil {
+		return nil
+	}
+
+	return &coredata.BytesError{
+		Bytes: it.Bytes,
+		Error: it.Error,
+	}
+}
+
+func (it *Result) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Error = nil
+	it.Bytes = nil
+	it.TypeName = ""
+	it.jsonString = nil
 }
 
 func (it Result) CloneIf(isClone, isDeepClone bool) Result {
@@ -396,15 +458,15 @@ func (it *Result) ClonePtr(isDeepClone bool) *Result {
 
 func (it Result) Clone(isDeepClone bool) Result {
 	if it.Length() == 0 {
-		return New([]byte{}, it.CloneError())
+		return New([]byte{}, it.CloneError(), it.TypeName)
 	}
 
 	if !isDeepClone || it.Length() == 0 {
-		return New(it.Bytes, it.CloneError())
+		return New(it.Bytes, it.CloneError(), it.TypeName)
 	}
 
 	newBytes := make([]byte, it.Length())
 	copy(newBytes, it.Bytes)
 
-	return New(newBytes, it.CloneError())
+	return New(newBytes, it.CloneError(), it.TypeName)
 }

@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type numberEnumBase struct {
@@ -26,8 +26,8 @@ func newNumberEnumBase(
 	min, max interface{},
 ) *numberEnumBase {
 	if stringRanges == nil {
-		msgtype.MeaningfulErrorHandle(
-			msgtype.CannotBeNilMessage,
+		errcore.MeaningfulErrorHandle(
+			errcore.CannotBeNilMessage,
 			"newNumberEnumBase",
 			errors.New("StringRanges cannot be nil"))
 	}
@@ -39,7 +39,7 @@ func newNumberEnumBase(
 	})
 
 	invalidMessageOnce := coreonce.NewStringOncePtr(func() string {
-		msg := msgtype.EnumRangeNotMeet(
+		msg := errcore.EnumRangeNotMeet(
 			min,
 			max,
 			rangesToCsvOnce.Value())

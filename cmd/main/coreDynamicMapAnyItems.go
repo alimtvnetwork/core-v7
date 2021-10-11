@@ -6,13 +6,13 @@ import (
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func coreDynamicMapAnyItems() {
-	fmt.Println(msgtype.Var2NoType("s1", "ss", "s2", 2))
-	fmt.Println(msgtype.MessageVar2("current message", "s1", "ss", "s2", 2))
-	fmt.Println(msgtype.MessageVarMap(
+	fmt.Println(errcore.Var2NoType("s1", "ss", "s2", 2))
+	fmt.Println(errcore.MessageVar2("current message", "s1", "ss", "s2", 2))
+	fmt.Println(errcore.MessageVarMap(
 		"current message",
 		map[string]interface{}{
 			"key1": 1,
@@ -20,13 +20,13 @@ func coreDynamicMapAnyItems() {
 			"key3": "",
 		}))
 
-	fmt.Println(msgtype.MessageNameValues(
+	fmt.Println(errcore.MessageNameValues(
 		"current message",
-		msgtype.NameVal{
+		errcore.NameVal{
 			Name:  "name1",
 			Value: "nil",
 		},
-		msgtype.NameVal{
+		errcore.NameVal{
 			Name:  "name2",
 			Value: 2,
 		}))

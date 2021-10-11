@@ -1,6 +1,8 @@
 package devenv
 
+import "gitlab.com/evatix-go/core/enums/envtype"
+
 type Info struct {
-	IsDev, IsProd, IsTest, IsVerbose, IsLog, IsWarning, IsDebug bool
-	EnvName                                                     string
+	IsVerbose, IsLog, IsWarning, IsDebug bool
+	EnvName                              envtype.Variant
 }

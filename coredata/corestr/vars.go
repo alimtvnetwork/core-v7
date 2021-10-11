@@ -2,15 +2,15 @@ package corestr
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 //goland:noinspection ALL
 var (
-	StaticJsonError = msgtype.EmptyResultCannotMakeJson.
+	StaticJsonError = errcore.EmptyResultCannotMakeJson.
 			Error(constants.EmptyString, constants.EmptyString)
 	ExpectingLengthForLeftRight      = constants.Two
-	LeftRightExpectingLengthMessager = msgtype.ExpectingFuture(
+	LeftRightExpectingLengthMessager = errcore.ExpectingFuture(
 		"Expecting length at least",
 		ExpectingLengthForLeftRight)
 )

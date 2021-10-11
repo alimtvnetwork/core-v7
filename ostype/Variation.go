@@ -1,7 +1,7 @@
 package ostype
 
 import (
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Variation byte
@@ -127,7 +127,7 @@ func (variation Variation) String() string {
 		return osName
 	}
 
-	msg := msgtype.UnsupportedCategory.Combine(
+	msg := errcore.UnsupportedCategory.Combine(
 		"os type pkg: variant not supported.",
 		string(variation))
 

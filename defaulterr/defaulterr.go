@@ -1,55 +1,55 @@
 package defaulterr
 
-import "gitlab.com/evatix-go/core/msgtype"
+import "gitlab.com/evatix-go/core/errcore"
 
 var (
-	Marshalling = msgtype.
+	Marshalling = errcore.
 			MarshallingFailed.
 			ErrorNoRefs("Cannot marshal object to serialize form.")
 
-	UnMarshalling = msgtype.
+	UnMarshalling = errcore.
 			UnMarshallingFailed.
 			ErrorNoRefs("Cannot unmarshal data to object form.")
 
-	UnMarshallingPlusCannotFindingEnumMap = msgtype.
+	UnMarshallingPlusCannotFindingEnumMap = errcore.
 						UnMarshallingFailed.
 						ErrorNoRefs(
 			"Cannot find in the enum map. " +
 				"Reference data given as : ")
 
-	MarshallingFailedDueToNilOrEmpty = msgtype.
+	MarshallingFailedDueToNilOrEmpty = errcore.
 						UnMarshallingFailed.
 						ErrorNoRefs("Cannot marshal to serialize data because of nil or empty object.")
 
-	UnMarshallingFailedDueToNilOrEmpty = msgtype.
+	UnMarshallingFailedDueToNilOrEmpty = errcore.
 						UnMarshallingFailed.
 						ErrorNoRefs("Cannot unmarshal to object because of nil or empty serialized data.")
 
-	CannotProcessNilOrEmpty = msgtype.
+	CannotProcessNilOrEmpty = errcore.
 				CannotBeNilOrEmptyMessage.
 				ErrorNoRefs("Cannot process nil or empty.")
 
-	OutOfRange = msgtype.
+	OutOfRange = errcore.
 			OutOfRange.
 			ErrorNoRefs("Cannot process out of range data.")
 
-	NegativeDataCannotProcess = msgtype.
+	NegativeDataCannotProcess = errcore.
 					CannotBeNegativeMessage.
 					ErrorNoRefs("Cannot process negative values.")
 
-	NilResult = msgtype.
+	NilResult = errcore.
 			NullResultMessage.
 			ErrorNoRefs("Cannot process nil result.")
 
-	UnexpectedValue = msgtype.
+	UnexpectedValue = errcore.
 			UnexpectedValueErrorMessage.
 			ErrorNoRefs("Cannot process unexpected value or values.")
 
-	CannotRemoveFromEmptyCollection = msgtype.
+	CannotRemoveFromEmptyCollection = errcore.
 					CannotRemoveIndexesFromEmptyCollection.
 					ErrorNoRefs("Cannot process request: cannot remove from empty collection.")
 
-	CannotConvertStringToByte = msgtype.
+	CannotConvertStringToByte = errcore.
 					FailedToConvert.
 					ErrorNoRefs("Cannot convert string to byte.")
 )

@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type LineValidator struct {
@@ -67,7 +67,7 @@ func (it *LineValidator) VerifyError(
 	content string,
 ) error {
 	if !it.LineNumber.IsMatch(processingLineNumber) {
-		msg := msgtype.GetSearchLineNumberExpectationMessage(
+		msg := errcore.GetSearchLineNumberExpectationMessage(
 			params.CaseIndex,
 			it.LineNumber.LineNumber,
 			processingLineNumber,
@@ -155,6 +155,6 @@ func (it *LineValidator) AllVerifyError(
 		}
 	}
 
-	return msgtype.SliceToError(
+	return errcore.SliceToError(
 		sliceErr)
 }

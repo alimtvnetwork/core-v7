@@ -4,7 +4,7 @@ import (
 	"errors"
 	"os"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type PathExistStat struct {
@@ -44,8 +44,8 @@ func (it *PathExistStat) MeaningFullError() error {
 		it.Location
 
 	newErr := errors.New(newErrMsg)
-	meaningFulErr := msgtype.MeaningfulError(
-		msgtype.PathInvalidErrorMessage,
+	meaningFulErr := errcore.MeaningfulError(
+		errcore.PathInvalidErrorMessage,
 		"PathExistStat",
 		newErr,
 	)

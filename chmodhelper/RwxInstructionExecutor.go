@@ -6,8 +6,8 @@ import (
 
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type RwxInstructionExecutor struct {
@@ -82,7 +82,7 @@ func (it *RwxInstructionExecutor) CompiledRwxWrapperUsingFixedRwxWrapper(
 			ToCompileWrapperPtr(wrapper), nil
 	}
 
-	return nil, msgtype.
+	return nil, errcore.
 		FailedToExecute.
 		Error(
 			messages.FailedToCompileChmodhelperVarWrapperToWrapper,
@@ -93,7 +93,7 @@ func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
 	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(location)
 
 	if err != nil {
-		return msgtype.PathErrorMessage.Error(messages.FailedToGetFileModeRwx, location)
+		return errcore.PathErrorMessage.Error(messages.FailedToGetFileModeRwx, location)
 	}
 
 	compiledWrapper, err2 := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
@@ -101,9 +101,9 @@ func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
 	if err2 != nil {
 		funcWithLoc := "ApplyOnPath" + constants.HypenAngelRight + location
 
-		return msgtype.
+		return errcore.
 			MeaningfulError(
-				msgtype.PathErrorMessage, funcWithLoc, err2)
+				errcore.PathErrorMessage, funcWithLoc, err2)
 	}
 
 	if it.rwxInstruction.IsRecursive {
@@ -156,7 +156,7 @@ func (it *RwxInstructionExecutor) getVerifyRwxInternalError(
 	*FilteredPathFileInfoMap, error,
 ) {
 	if !isRecursiveIgnore && it.rwxInstruction.Condition.IsRecursive {
-		return nil, msgtype.NotSupported.Error(
+		return nil, errcore.NotSupported.Error(
 			"IsRecursive is not supported for Verify chmod.",
 			locations)
 	}
@@ -190,14 +190,14 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsContinueOnError(
 		if fixedRwxWrapper != nil && !fixedRwxWrapper.IsEqualFileMode(fileMode) {
 			sliceErr = append(
 				sliceErr,
-				msgtype.ExpectingSimpleNoType(
+				errcore.ExpectingSimpleNoType(
 					"Path:"+filePath,
 					fixedRwxWrapper.ToFullRwxValueStringExceptHyphen(),
 					fileMode.String()[1:]))
 		}
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }
 
 func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
@@ -213,15 +213,15 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
 			fileMode)
 
 		if err != nil {
-			return msgtype.MeaningfulErrorWithData(
-				msgtype.ValidataionFailed,
+			return errcore.MeaningfulErrorWithData(
+				errcore.ValidataionFailed,
 				"verifyChmodLocationsNoContinue",
 				err,
 				"failed to verify rwxInstruction for - "+filePath)
 		}
 
 		if fixedRwxWrapper != nil && !fixedRwxWrapper.IsEqualFileMode(fileMode) {
-			expectingMsg := msgtype.ExpectingSimpleNoType(
+			expectingMsg := errcore.ExpectingSimpleNoType(
 				"Path:"+filePath,
 				fixedRwxWrapper.ToFullRwxValueStringExceptHyphen(),
 				fileMode.String()[1:])
@@ -288,5 +288,5 @@ func (it *RwxInstructionExecutor) applyOnPathsContinueOnError(locations *[]strin
 		}
 	}
 
-	return msgtype.SliceToErrorPtr(&errorSlice)
+	return errcore.SliceToErrorPtr(&errorSlice)
 }

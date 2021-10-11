@@ -3,7 +3,7 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func ReflectKindValidation(
@@ -16,7 +16,7 @@ func ReflectKindValidation(
 		return nil
 	}
 
-	return msgtype.ExpectingErrorSimpleNoType(
+	return errcore.ExpectingErrorSimpleNoType(
 		"ReflectKindValidation: reflect kind validation failed",
 		expectedKind,
 		actualKind)

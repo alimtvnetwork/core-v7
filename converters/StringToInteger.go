@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func StringToInteger(
@@ -17,8 +17,8 @@ func StringToInteger(
 			constants.NewLineUnix +
 			err2.Error()
 
-		return constants.Zero, msgtype.ParsingFailed.Error(
-			msgtype.FailedToConvert.String(),
+		return constants.Zero, errcore.ParsingFailed.Error(
+			errcore.FailedToConvert.String(),
 			reference)
 	}
 

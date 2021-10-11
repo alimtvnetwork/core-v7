@@ -6,7 +6,7 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/chmodhelper"
 	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
@@ -29,7 +29,7 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 			testCase.ExpectedPartialRwx,
 			testCase.Locations)
 
-		expectation := &msgtype.ExpectationMessageDef{
+		expectation := &errcore.ExpectationMessageDef{
 			CaseIndex:      caseIndex,
 			FuncName:       "Test_VerifyRwxPartialChmodLocations_Unix",
 			TestCaseName:   "VerifyRwxPartialChmodLocationsTestCases",

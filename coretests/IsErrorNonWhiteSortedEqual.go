@@ -1,11 +1,11 @@
 package coretests
 
-import "gitlab.com/evatix-go/core/msgtype"
+import "gitlab.com/evatix-go/core/errcore"
 
 func IsErrorNonWhiteSortedEqual(
 	isPrintOnFail bool,
 	actual error,
-	expectationMessageDef *msgtype.ExpectationMessageDef,
+	expectationMessageDef *errcore.ExpectationMessageDef,
 ) bool {
 	var actualErrorMessage string
 

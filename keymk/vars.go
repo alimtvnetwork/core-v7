@@ -43,7 +43,7 @@ var (
 		EndBracket:       constants.SquareEnd,
 	}
 
-	ParentThesisJoinerOption = &Option{
+	ParenthesisJoinerOption = &Option{
 		Joiner:           DefaultJoiner,
 		IsSkipEmptyEntry: true,
 		IsUseBrackets:    true,

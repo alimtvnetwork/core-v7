@@ -6,9 +6,9 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 	"gitlab.com/evatix-go/core/coreinterface"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type LinesValidators struct {
@@ -162,8 +162,8 @@ func (it *LinesValidators) VerifyFirstDefaultLineNumberError(
 	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
 		return nil
 	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
-		return msgtype.MeaningfulErrorWithData(
-			msgtype.ValidataionFailed,
+		return errcore.MeaningfulErrorWithData(
+			errcore.ValidataionFailed,
 			funcName,
 			errors.New(messages.CannotVerifyEmptyContentsWhereValidatorsArePresent),
 			it.Items)
@@ -195,8 +195,8 @@ func (it *LinesValidators) AllVerifyError(
 	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
 		return nil
 	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
-		return msgtype.MeaningfulErrorWithData(
-			msgtype.ValidataionFailed,
+		return errcore.MeaningfulErrorWithData(
+			errcore.ValidataionFailed,
 			funcName,
 			errors.New(messages.CannotVerifyEmptyContentsWhereValidatorsArePresent),
 			it.Items)
@@ -216,5 +216,5 @@ func (it *LinesValidators) AllVerifyError(
 		}
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }

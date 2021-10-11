@@ -9,7 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type TraceCollection struct {
@@ -391,7 +391,7 @@ func (it *TraceCollection) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
@@ -654,9 +654,8 @@ func (it *TraceCollection) CodeStacksString() string {
 		return constants.EmptyString
 	}
 
-	toString := codeStacksHeader +
-		prefixStackTrace +
-		it.JoinShortStrings(prefixStackTraceNewLine)
+	toString := errcore.StackTracesCompiled(
+		it.ShortStrings())
 
 	return toString
 }
@@ -675,7 +674,7 @@ func (it *TraceCollection) Join(joiner string) string {
 	return strings.Join(it.Strings(), joiner)
 }
 
-func (it *TraceCollection) JoinLine() string {
+func (it *TraceCollection) JoinLines() string {
 	return strings.Join(it.Strings(), constants.NewLineUnix)
 }
 
@@ -740,7 +739,7 @@ func (it *TraceCollection) String() string {
 		return constants.EmptyString
 	}
 
-	return it.JoinLine()
+	return it.JoinLines()
 }
 
 func (it *TraceCollection) CsvStrings() []string {

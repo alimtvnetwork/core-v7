@@ -6,8 +6,8 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type SliceValidator struct {
@@ -27,7 +27,7 @@ func NewSliceValidatorUsingErr(
 	isSortStringsBySpace bool,
 	compareAs stringcompareas.Variant,
 ) *SliceValidator {
-	inputLines := msgtype.ErrorToSplitLines(errActual)
+	inputLines := errcore.ErrorToSplitLines(errActual)
 	compareLines := strings.Split(
 		compareLinesContentAsExpected,
 		constants.NewLineUnix)
@@ -116,7 +116,7 @@ func (it *SliceValidator) ActualLinesString() string {
 		return constants.EmptyString
 	}
 
-	return msgtype.StringLinesToQuoteLinesToSingle(
+	return errcore.StringLinesToQuoteLinesToSingle(
 		it.ActualLines)
 }
 
@@ -125,7 +125,7 @@ func (it *SliceValidator) ExpectingLinesString() string {
 		return constants.EmptyString
 	}
 
-	return msgtype.StringLinesToQuoteLinesToSingle(
+	return errcore.StringLinesToQuoteLinesToSingle(
 		it.ExpectedLines)
 }
 
@@ -264,7 +264,7 @@ func (it *SliceValidator) AllVerifyErrorTestCase(
 		&params,
 		it.ExpectingLinesLength())
 
-	msgtype.ErrPrintWithTestIndex(caseIndex, err)
+	errcore.ErrPrintWithTestIndex(caseIndex, err)
 
 	return err
 }
@@ -333,7 +333,7 @@ func (it *SliceValidator) AllVerifyErrorUptoLength(
 			it.ActualInputWithExpectingMessage(params.Header))
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }
 
 func (it *SliceValidator) lengthVerifyError(
@@ -345,7 +345,7 @@ func (it *SliceValidator) lengthVerifyError(
 
 	var comparingLengthError error
 	if hasLengthUpto && lengthUpto > comparingLength {
-		comparingLengthError = msgtype.OutOfRangeLength.Error(
+		comparingLengthError = errcore.OutOfRangeLength.Error(
 			"Asked comparingLength is out of range!",
 			comparingLength,
 		)
@@ -359,7 +359,7 @@ func (it *SliceValidator) lengthVerifyError(
 
 	var inputLengthErr error
 	if it.ActualLinesLength() > 0 && comparingLength == 0 {
-		inputLengthErr = msgtype.LengthIssue.Error(
+		inputLengthErr = errcore.LengthIssue.Error(
 			"Input comparison has some text but comparing length is 0! Must set comparing text!",
 			comparingLength,
 		)
@@ -386,7 +386,7 @@ func (it *SliceValidator) initialVerifyError(
 		it.ExpectedLines == nil
 
 	if isAnyNilCase {
-		return msgtype.ExpectingErrorSimpleNoType(
+		return errcore.ExpectingErrorSimpleNoType(
 			"ActualLines, ExpectedLines any is nil and other is not.",
 			it.ActualLines,
 			it.ExpectedLines,
@@ -394,7 +394,7 @@ func (it *SliceValidator) initialVerifyError(
 	}
 
 	if !it.isLengthOkay(lengthUpto) {
-		return msgtype.ExpectingErrorSimpleNoType(
+		return errcore.ExpectingErrorSimpleNoType(
 			"ActualLines, ExpectedLines Length is not equal",
 			len(it.ActualLines),
 			len(it.ExpectedLines),
@@ -445,13 +445,13 @@ func (it *SliceValidator) ActualInputWithExpectingMessage(header string) string 
 }
 
 func (it *SliceValidator) ActualInputMessage(header string) string {
-	return msgtype.MsgHeaderPlusEnding(
+	return errcore.MsgHeaderPlusEnding(
 		actualUserInputsMessage+header,
 		it.ActualLinesString())
 }
 
 func (it *SliceValidator) UserExpectingMessage() string {
-	return msgtype.MsgHeaderPlusEnding(
+	return errcore.MsgHeaderPlusEnding(
 		expectingLinesMessage,
 		it.ExpectingLinesString())
 }

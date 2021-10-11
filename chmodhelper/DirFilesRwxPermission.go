@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type DirFilesWithRwxPermission struct {
@@ -35,7 +35,7 @@ func (it *DirFilesWithRwxPermission) GetFilesChmodMap() *corestr.Hashmap {
 
 	hashmap, err := GetFilesChmodRwxFullMap(*files)
 
-	msgtype.SimpleHandleErr(
+	errcore.SimpleHandleErr(
 		err,
 		"GetFilesChmodMap() failed to retrive hashmap from file paths")
 

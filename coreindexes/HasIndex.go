@@ -1,7 +1,7 @@
 package coreindexes
 
-func HasIndex(indexes *[]int, currentIndex int) bool {
-	for _, indexValue := range *indexes {
+func HasIndex(indexes []int, currentIndex int) bool {
+	for _, indexValue := range indexes {
 		if indexValue == currentIndex {
 			return true
 		}

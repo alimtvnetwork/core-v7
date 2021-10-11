@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/msgtype"
+import "gitlab.com/evatix-go/core/errcore"
 
 //goland:noinspection GoUnusedExportedFunction
 func NewAttribute(isRead, isWrite, isExecute bool) Attribute {
@@ -46,7 +46,7 @@ func NewAttributeUsingRwx(rwx string) Attribute {
 // 7 - Read + Write + Execute all true
 func NewAttributeUsingByte(v byte) Attribute {
 	if ReadWriteExecute.IsGreaterThan(v) {
-		msg := msgtype.
+		msg := errcore.
 			ShouldBeLessThanEqualMessage.
 			Combine(
 				"v byte should not be more than "+ReadWriteExecute.String(),

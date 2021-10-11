@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // RwxStringApplyChmod rwxFullString 10 chars "-rwxrwxrwx"
@@ -21,7 +21,7 @@ func RwxStringApplyChmod(
 	}
 
 	if condition == nil {
-		return msgtype.
+		return errcore.
 			CannotBeNilOrEmptyMessage.
 			ErrorNoRefs("condition")
 	}

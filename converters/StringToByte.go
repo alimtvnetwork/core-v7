@@ -4,13 +4,13 @@ import (
 	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func StringToByte(input string) (byte, error) {
 	if input == "" {
-		return 0, msgtype.FailedToConvert.
-			Error(msgtype.CannotConvertStringToByte, input)
+		return 0, errcore.FailedToConvert.
+			Error(errcore.CannotConvertStringToByte, input)
 	}
 
 	if input == "0" {
@@ -28,13 +28,13 @@ func StringToByte(input string) (byte, error) {
 	}
 
 	if vInt < 0 {
-		return 0, msgtype.FailedToConvert.
-			Error(msgtype.CannotConvertStringToByteForLessThanZero, input)
+		return 0, errcore.FailedToConvert.
+			Error(errcore.CannotConvertStringToByteForLessThanZero, input)
 	}
 
 	if vInt > constants.MaxUnit8AsInt {
-		return 0, msgtype.FailedToConvert.
-			Error(msgtype.CannotConvertStringToByteForMoreThan255, input)
+		return 0, errcore.FailedToConvert.
+			Error(errcore.CannotConvertStringToByteForMoreThan255, input)
 	}
 
 	return byte(vInt), nil

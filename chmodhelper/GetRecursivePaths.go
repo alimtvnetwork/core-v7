@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func GetRecursivePaths(
@@ -15,7 +15,7 @@ func GetRecursivePaths(
 	stat := GetPathExistStat(rootPath)
 
 	if !stat.IsExist {
-		return []string{}, msgtype.PathsMissingOrHavingIssues.
+		return []string{}, errcore.PathsMissingOrHavingIssues.
 			ErrorRefOnly(rootPath)
 	}
 
@@ -55,5 +55,5 @@ func GetRecursivePaths(
 			finalErr.Error()+constants.HypenAngelRight+rootPath)
 	}
 
-	return allPaths, msgtype.SliceToError(sliceErr)
+	return allPaths, errcore.SliceToError(sliceErr)
 }

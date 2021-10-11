@@ -6,7 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/stringslice"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Key struct {
@@ -43,7 +43,7 @@ func (it *Key) Length() int {
 func (it *Key) AppendChain(items ...interface{}) *Key {
 	if it.IsComplete() {
 		// panic
-		msgtype.CannotModifyCompleteResource.HandleUsingPanic(
+		errcore.CannotModifyCompleteResource.HandleUsingPanic(
 			cannotModifyErrorMessage,
 			items)
 	}
@@ -111,7 +111,7 @@ func (it *Key) AppendChainStrings(
 ) *Key {
 	if it.IsComplete() {
 		// panic
-		msgtype.CannotModifyCompleteResource.HandleUsingPanic(
+		errcore.CannotModifyCompleteResource.HandleUsingPanic(
 			cannotModifyErrorMessage,
 			items)
 	}

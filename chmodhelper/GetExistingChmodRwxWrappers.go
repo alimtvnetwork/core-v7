@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/msgtype"
+import "gitlab.com/evatix-go/core/errcore"
 
 func GetExistingChmodRwxWrappers(
 	isContinueOnError bool,
@@ -30,7 +30,7 @@ func GetExistingChmodRwxWrappers(
 			}
 		}
 
-		return &results, msgtype.SliceToError(sliceErr)
+		return &results, errcore.SliceToError(sliceErr)
 	}
 
 	// immediate exit

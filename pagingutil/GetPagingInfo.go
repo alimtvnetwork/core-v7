@@ -1,6 +1,6 @@
 package pagingutil
 
-import "gitlab.com/evatix-go/core/msgtype"
+import "gitlab.com/evatix-go/core/errcore"
 
 func GetPagingInfo(request PagingRequest) PagingInfo {
 	length := request.Length
@@ -21,7 +21,7 @@ func GetPagingInfo(request PagingRequest) PagingInfo {
 	 */
 	skipItems := request.EachPageSize * (request.PageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",

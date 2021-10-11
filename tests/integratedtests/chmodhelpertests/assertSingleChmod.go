@@ -6,7 +6,7 @@ import (
 
 	"github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // assertSingleChmod , expectedChmodRwxFullString 10 chars "-rwxrwxrwx"
@@ -23,7 +23,7 @@ func assertSingleChmod(
 
 			if !isEqual {
 				fmt.Println(
-					msgtype.Expecting(
+					errcore.Expecting(
 						filePath,
 						expectedChmodRwxFullString,
 						chmodValueString))

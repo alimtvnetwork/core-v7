@@ -2,7 +2,7 @@ package coretests
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // SimpleGherkins
@@ -24,7 +24,7 @@ type SimpleGherkins struct {
 }
 
 func (it *SimpleGherkins) ToString(testIndex int) string {
-	return msgtype.GherkinsString(
+	return errcore.GherkinsString(
 		testIndex,
 		it.Feature,
 		it.Given,
@@ -39,7 +39,7 @@ func (it *SimpleGherkins) String() string {
 func (it *SimpleGherkins) GetWithExpectation(
 	testIndex int,
 ) string {
-	return msgtype.GherkinsStringWithExpectation(
+	return errcore.GherkinsStringWithExpectation(
 		testIndex,
 		it.Feature,
 		it.Given,

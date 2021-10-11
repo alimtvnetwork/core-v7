@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Request byte
@@ -424,17 +424,17 @@ func (it Request) CurrentNotImpl(
 		compiledMessage
 
 	if reference == nil {
-		return msgtype.NotImplemented.ErrorNoRefs(fullCompiled)
+		return errcore.NotImplemented.ErrorNoRefs(fullCompiled)
 	}
 
-	return msgtype.NotImplemented.Error(fullCompiled, reference)
+	return errcore.NotImplemented.Error(fullCompiled, reference)
 }
 
 func (it Request) NotSupportedErr(
 	message string,
 	reference interface{},
 ) error {
-	return msgtype.NotSupported.Error(
+	return errcore.NotSupported.Error(
 		message,
 		reference)
 }
@@ -491,7 +491,7 @@ func (it Request) GetStatusAnyOf(reqs ...Request) *ResultStatus {
 		}
 	}
 
-	errMsg := msgtype.RangeNotMeet(
+	errMsg := errcore.RangeNotMeet(
 		"Failed GetStatusAnyOf",
 		start(&reqs),
 		end(&reqs),
@@ -519,7 +519,7 @@ func (it Request) GetInBetweenStatus(start, end Request) *ResultStatus {
 		}
 	}
 
-	errMsg := msgtype.RangeNotMeet(
+	errMsg := errcore.RangeNotMeet(
 		"Failed GetInBetweenStatus",
 		start,
 		end,

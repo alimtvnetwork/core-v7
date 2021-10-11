@@ -5,7 +5,7 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 
 	"gitlab.com/evatix-go/core/chmodhelper"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
@@ -24,14 +24,14 @@ func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
 		expectationMessage := testCase.ExpectedErrorMessage
 		executor, err := chmodhelper.ParseRwxInstructionToExecutor(&testCase.RwxInstruction)
 
-		msgtype.SimpleHandleErr(err, "")
+		errcore.SimpleHandleErr(err, "")
 
 		// Act
 		actualErr := executor.VerifyRwxModifiersDirect(
 			false,
 			testCase.Locations...)
 
-		expectation := &msgtype.ExpectationMessageDef{
+		expectation := &errcore.ExpectationMessageDef{
 			CaseIndex:      caseIndex,
 			FuncName:       "Test_VerifyRwxChmodUsingRwxInstructions_Unix",
 			TestCaseName:   "VerifyRwxChmodUsingRwxInstructionsTestCases",

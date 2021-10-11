@@ -6,7 +6,7 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
@@ -15,7 +15,7 @@ func Test_PartialRwxVerify(t *testing.T) {
 		Convey(testCase.Header, t, func() {
 			// Arrange
 			rwx, err := chmodhelper.NewRwxVariableWrapper(testCase.PartialRwxInput1)
-			msgtype.SimpleHandleErr(err, "rwxVar create failed.")
+			errcore.SimpleHandleErr(err, "rwxVar create failed.")
 
 			// Act
 			actual := rwx.IsEqualPartialRwxPartial(testCase.FullRwxVerifyInput2)

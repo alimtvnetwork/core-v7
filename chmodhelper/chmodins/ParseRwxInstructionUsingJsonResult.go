@@ -2,7 +2,7 @@ package chmodins
 
 import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func ParseRwxInstructionUsingJsonResult(
@@ -10,7 +10,7 @@ func ParseRwxInstructionUsingJsonResult(
 ) (*RwxInstruction, error) {
 	if result == nil {
 		return nil,
-			msgtype.JsonResultBytesAreNilOrEmpty.Error(
+			errcore.JsonResultBytesAreNilOrEmpty.Error(
 				"ParseRwxInstructionUsingJsonResult", nil)
 	}
 
@@ -22,8 +22,8 @@ func ParseRwxInstructionUsingJsonResult(
 	err := result.Unmarshal(&rwxInstruction)
 
 	if err != nil {
-		return nil, msgtype.MeaningfulError(
-			msgtype.FailedToParse,
+		return nil, errcore.MeaningfulError(
+			errcore.FailedToParse,
 			"ParseRwxInstructionUsingJsonResult",
 			err)
 	}

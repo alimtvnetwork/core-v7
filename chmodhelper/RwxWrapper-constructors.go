@@ -5,8 +5,8 @@ import (
 
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 // New mode length needs to 3, not more not less
@@ -16,7 +16,7 @@ func New(mode string) (RwxWrapper, error) {
 	length := len(mode)
 
 	if length != SingleRwxLength {
-		panic(msgtype.OutOfRangeLength.Combine(
+		panic(errcore.OutOfRangeLength.Combine(
 			"mode length should be "+SingleRwxLengthString,
 			length))
 	}
@@ -27,7 +27,7 @@ func New(mode string) (RwxWrapper, error) {
 		n := allByte - constants.ZeroChar
 
 		if n > 7 || n < 0 {
-			err := msgtype.
+			err := errcore.
 				InvalidCharErrorMessage.
 				Error(
 					messages.ModeCharShouldBeAllNumbersAndWithin0To7,

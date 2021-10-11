@@ -5,8 +5,8 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type TextValidators struct {
@@ -252,7 +252,7 @@ func (it *TextValidators) AllVerifyErrorMany(
 		}
 	}
 
-	return msgtype.SliceToError(
+	return errcore.SliceToError(
 		errorSlice)
 }
 
@@ -288,5 +288,5 @@ func (it *TextValidators) AllVerifyError(
 		}
 	}
 
-	return msgtype.SliceToError(errorSlice)
+	return errcore.SliceToError(errorSlice)
 }

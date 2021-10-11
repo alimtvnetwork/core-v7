@@ -3,13 +3,13 @@ package coretests
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func IsStrMsgNonWhiteSortedEqual(
 	isPrintOnFail bool,
 	actual string,
-	expectationMessageDef *msgtype.ExpectationMessageDef,
+	expectationMessageDef *errcore.ExpectationMessageDef,
 ) bool {
 	if expectationMessageDef.IsNonWhiteSort {
 		return isStrMsgNonWhiteSortedEqualInternal(

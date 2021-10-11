@@ -5,7 +5,7 @@ import (
 
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type RwxVariableWrapper struct {
@@ -32,7 +32,7 @@ func NewRwxVariableWrapper(partialRwx string) (*RwxVariableWrapper, error) {
 	groupAttr, err2 := ParseRwxToVarAttribute(group)
 	otherAttr, err3 := ParseRwxToVarAttribute(other)
 
-	mergedErr := msgtype.MergeErr(
+	mergedErr := errcore.MergeErr(
 		err,
 		err2,
 		err3)
@@ -189,7 +189,7 @@ func (varWrapper *RwxVariableWrapper) ApplyRwxOnLocations(
 			}
 		}
 
-		return msgtype.SliceToError(sliceErr)
+		return errcore.SliceToError(sliceErr)
 	}
 
 	for _, locationFileInfoRwx := range locationsFileInfoRwx {

@@ -11,9 +11,9 @@ import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/fsinternal"
 	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/osconsts"
 )
 
@@ -56,9 +56,9 @@ func (it *RwxWrapper) ToUint32Octal() uint32 {
 	octal, err := strconv.ParseUint(str, bitsize.Of8, bitsize.Of32)
 
 	if err != nil {
-		msgtype.
+		errcore.
 			MeaningfulErrorHandle(
-				msgtype.PathChmodConvertFailedMessage,
+				errcore.PathChmodConvertFailedMessage,
 				"ToUint32Octal",
 				err)
 	}
@@ -187,7 +187,7 @@ func (it *RwxWrapper) ApplyChmod(
 	}
 
 	if !isSkipOnInvalid && !isFileExist {
-		return msgtype.
+		return errcore.
 			PathInvalidErrorMessage.
 			Error(
 				messages.PathNotExist, fileOrDirectoryPath)
@@ -196,7 +196,7 @@ func (it *RwxWrapper) ApplyChmod(
 	err := os.Chmod(fileOrDirectoryPath, it.ToFileMode())
 
 	if err != nil {
-		return msgtype.
+		return errcore.
 			PathChmodApplyMessage.
 			Error(err.Error(), fileOrDirectoryPath)
 	}
@@ -216,7 +216,7 @@ func (it *RwxWrapper) LinuxApplyRecursive(
 	}
 
 	if !isSkipOnInvalid && !isPathExists {
-		return msgtype.
+		return errcore.
 			PathInvalidErrorMessage.
 			Error(pathInvalidMessage,
 				location)
@@ -238,7 +238,7 @@ func (it *RwxWrapper) ApplyRecursive(
 	}
 
 	if !isSkipOnInvalid && !stat.IsExist {
-		return msgtype.
+		return errcore.
 			PathInvalidErrorMessage.
 			Error(pathInvalidMessage,
 				location)
@@ -264,7 +264,7 @@ func (it *RwxWrapper) ApplyRecursive(
 			if err != nil {
 				sliceErr = append(
 					sliceErr,
-					msgtype.
+					errcore.
 						PathInvalidErrorMessage.Combine(
 						err.Error()+pathInvalidMessage,
 						currentPath))
@@ -275,7 +275,7 @@ func (it *RwxWrapper) ApplyRecursive(
 			if info == nil {
 				sliceErr = append(
 					sliceErr,
-					msgtype.
+					errcore.
 						PathInvalidErrorMessage.Combine(
 						pathInvalidMessage,
 						currentPath))
@@ -288,7 +288,7 @@ func (it *RwxWrapper) ApplyRecursive(
 			if err2 != nil {
 				sliceErr = append(
 					sliceErr,
-					msgtype.
+					errcore.
 						PathInvalidErrorMessage.Combine(
 						err2.Error()+pathInvalidMessage,
 						currentPath))
@@ -302,20 +302,20 @@ func (it *RwxWrapper) ApplyRecursive(
 	if finalErr != nil {
 		sliceErr = append(
 			sliceErr,
-			msgtype.
+			errcore.
 				PathInvalidErrorMessage.Combine(
 				finalErr.Error()+pathInvalidMessage,
 				location))
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }
 
 func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
 	cmd := it.getLinuxRecursiveCmdForChmod(location)
 
 	if cmd == nil {
-		return msgtype.
+		return errcore.
 			FailedToCreateCmd.Error(
 			constants.BashCommandline,
 			location)
@@ -326,7 +326,7 @@ func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
 	err := cmd.Run()
 
 	if err != nil {
-		return msgtype.
+		return errcore.
 			FailedToCreateCmd.Error(
 			constants.ChmodCommand,
 			err.Error()+constants.NewLineUnix+stderr.String()+"location:"+location)
@@ -358,8 +358,8 @@ func (it *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 	if err != nil {
 		finalErr := errors.New(err.Error() + fileOrDirectoryPath)
 
-		panic(msgtype.MeaningfulError(
-			msgtype.PathChmodApplyMessage,
+		panic(errcore.MeaningfulError(
+			errcore.PathChmodApplyMessage,
 			"MustApplyChmod",
 			finalErr))
 	}
@@ -474,7 +474,7 @@ func (it *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
 		}
 	}
 
-	return msgtype.SliceToErrorPtr(&errSlice)
+	return errcore.SliceToErrorPtr(&errSlice)
 }
 
 func (it *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
@@ -493,7 +493,7 @@ func (it *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
 		}
 	}
 
-	return msgtype.SliceToErrorPtr(&errSlice)
+	return errcore.SliceToErrorPtr(&errSlice)
 }
 
 // IsEqualVarWrapper if rwxVariableWrapper nil then returns false

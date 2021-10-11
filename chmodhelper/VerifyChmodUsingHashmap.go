@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // VerifyChmodUsingHashmap - expectedHyphenedRwx should be 10 chars example "-rwxrwxrwx"
@@ -21,5 +21,5 @@ func VerifyChmodUsingHashmap(
 		}
 	}
 
-	return msgtype.SliceToError(sliceError)
+	return errcore.SliceToError(sliceError)
 }

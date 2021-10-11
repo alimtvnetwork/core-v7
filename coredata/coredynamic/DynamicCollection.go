@@ -10,7 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
 
@@ -220,7 +220,7 @@ func (it *DynamicCollection) AddAnyItemsWithTypeValidation(
 			}
 		}
 
-		return msgtype.SliceToError(sliceErr)
+		return errcore.SliceToError(sliceErr)
 	}
 
 	for _, anyItem := range anyItems {
@@ -392,7 +392,7 @@ func (it *DynamicCollection) JsonStringMust() string {
 	toString, err := it.JsonString()
 
 	if err != nil {
-		msgtype.
+		errcore.
 			MarshallingFailed.
 			HandleUsingPanic(err.Error(), it.items)
 	}

@@ -9,8 +9,8 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type LinkedList struct {
@@ -306,13 +306,13 @@ func (it *LinkedList) AddFront(item string) *LinkedList {
 
 func (it *LinkedList) AttachWithNode(currentNode, addingNode *LinkedListNode) error {
 	if currentNode == nil {
-		return msgtype.
+		return errcore.
 			CannotBeNilMessage.
 			Error("CurrentNode cannot be nil.", nil)
 	}
 
 	if currentNode.next != nil {
-		return msgtype.
+		return errcore.
 			ShouldBeNilMessage.
 			Error("CurrentNode.next", nil)
 	}
@@ -445,7 +445,7 @@ func (it *LinkedList) RemoveNodeByElementValue(
 	isIgnorePanic bool,
 ) *LinkedList {
 	if !isIgnorePanic && it.IsEmpty() {
-		msgtype.
+		errcore.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("element cannot be removed from empty linkedlist.", element)
 	}
@@ -479,7 +479,7 @@ func (it *LinkedList) RemoveNodeByIndex(
 	removingIndex int,
 ) *LinkedList {
 	if removingIndex < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"removeIndex was less than 0.",
@@ -532,7 +532,7 @@ func (it *LinkedList) RemoveNodeByIndexes(
 	}
 
 	if !isIgnorePanic && it.IsEmpty() && length > 0 {
-		msgtype.
+		errcore.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("removingIndexes cannot be removed from empty linkedlist.", removingIndexes)
 	}
@@ -610,7 +610,7 @@ func (it *LinkedList) RemoveNode(
 	}
 
 	if it.IsEmpty() {
-		msgtype.
+		errcore.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("removingNode cannot be removed from empty linkedlist.", removingNode.String())
 	}
@@ -650,7 +650,7 @@ func (it *LinkedList) AddStringsPtrToNode(
 	}
 
 	if node == nil {
-		msgtype.
+		errcore.
 			CannotBeNilMessage.
 			HandleUsingPanic(
 				"node cannot be nil.",
@@ -746,7 +746,7 @@ func (it *LinkedList) IndexAt(index int) *LinkedListNode {
 	}
 
 	if length == 0 || length-1 < index {
-		msgtype.OutOfRange.HandleUsingPanic(
+		errcore.OutOfRange.HandleUsingPanic(
 			"Given index is out of range. Whereas length:",
 			length)
 	}
@@ -1051,14 +1051,12 @@ func (it *LinkedList) Clear() *LinkedList {
 	return it
 }
 
-func (it *LinkedList) Json() *corejson.Result {
-	if it.IsEmpty() {
-		return corejson.EmptyWithoutErrorPtr()
-	}
+func (it LinkedList) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
 
-	jsonBytes, err := json.Marshal(it)
-
-	return corejson.NewPtr(jsonBytes, err)
+func (it LinkedList) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
 }
 
 func (it *LinkedList) ParseInjectUsingJson(

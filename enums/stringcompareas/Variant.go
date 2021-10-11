@@ -5,7 +5,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Variant byte
@@ -235,13 +235,13 @@ func (it Variant) VerifyMessage(
 	}
 
 	if it.IsNegativeCondition() {
-		return msgtype.ExpectingNotEqualSimpleNoType(
+		return errcore.ExpectingNotEqualSimpleNoType(
 			"CompareMethod \""+it.Name()+"\" - {negative} match failed "+isIgnoreCaseString,
 			search,
 			content)
 	}
 
-	return msgtype.ExpectingSimpleNoType(
+	return errcore.ExpectingSimpleNoType(
 		"CompareMethod \""+it.Name()+"\" - match failed "+isIgnoreCaseString,
 		search,
 		content)

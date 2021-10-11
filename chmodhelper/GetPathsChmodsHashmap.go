@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // GetFilesChmodRwxFullMap returns filePath -> "-rwxrwxrwx"
@@ -30,5 +30,5 @@ func GetFilesChmodRwxFullMap(
 		hashmap.AddOrUpdate(filePath, fileMode.String())
 	}
 
-	return hashmap, msgtype.SliceErrorDefault(&sliceErr)
+	return hashmap, errcore.SliceErrorDefault(&sliceErr)
 }

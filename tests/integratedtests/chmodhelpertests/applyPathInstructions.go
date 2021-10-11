@@ -2,7 +2,7 @@ package chmodhelpertests
 
 import (
 	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
@@ -12,7 +12,7 @@ func applyPathInstructions(
 	executors, err := chmodhelper.ParseRwxInstructionsToExecutors(
 		testCase.RwxInstructions)
 
-	msgtype.SimpleHandleErr(err, "applyPathInstructions")
+	errcore.SimpleHandleErr(err, "applyPathInstructions")
 
 	for _, createPath := range testCase.CreatePaths {
 		err2 := executors.ApplyOnPathsPtr(createPath.GetPathsPtr())

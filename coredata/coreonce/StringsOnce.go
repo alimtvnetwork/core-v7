@@ -5,8 +5,8 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/issetter"
-	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -151,7 +151,7 @@ func (it *StringsOnce) JsonStringMust() string {
 	marshalledJsonBytes, err := it.MarshalJSON()
 
 	if err != nil {
-		msgtype.MarshallingFailed.
+		errcore.MarshallingFailed.
 			HandleUsingPanic(
 				"StringsOnce failed to marshall."+err.Error(), it.innerData)
 

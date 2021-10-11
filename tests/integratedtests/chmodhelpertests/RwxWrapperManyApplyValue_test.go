@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/chmodhelper"
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
@@ -25,7 +25,7 @@ func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 	existingAppliedRwxFull := firstCreationIns.ApplyRwx.String()
 	for _, testCase := range chmodhelpertestwrappers.SingleRwxTestCases {
 		rwxWrapper, err := testCase.ToDisabledRwxWrapper()
-		msgtype.SimpleHandleErr(err, "SingleRwx ToDisabledRwxWrapper failed")
+		errcore.SimpleHandleErr(err, "SingleRwx ToDisabledRwxWrapper failed")
 		expectation := rwxWrapper.ToFullRwxValueString()
 
 		header := fmt.Sprintf(
@@ -37,7 +37,7 @@ func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 		// Act
 		err2 := rwxWrapper.ApplyLinuxChmodOnMany(condition, paths...)
 
-		msgtype.SimpleHandleErr(err2, "rwxWrapper.ApplyLinuxChmodOnMany failed")
+		errcore.SimpleHandleErr(err2, "rwxWrapper.ApplyLinuxChmodOnMany failed")
 
 		// for directory `-` will be placed not `d`
 		// Assert

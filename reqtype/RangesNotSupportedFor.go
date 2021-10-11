@@ -1,7 +1,7 @@
 package reqtype
 
 import (
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func RangesNotSupportedFor(
@@ -15,7 +15,7 @@ func RangesNotSupportedFor(
 	referencesMessage := RangesStringDefaultJoiner(
 		requests...)
 
-	return msgtype.NotSupported.Error(
+	return errcore.NotSupported.Error(
 		message,
 		referencesMessage)
 }

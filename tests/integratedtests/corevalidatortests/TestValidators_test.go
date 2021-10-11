@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/corevalidator"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/tests/testwrappers/corevalidatortestwrappers"
 )
 
@@ -25,7 +25,7 @@ func Test_TestValidators(t *testing.T) {
 			&paramsBase,
 			testCase.ComparingLines...)
 
-		errorLines := msgtype.ErrorToSplitLines(
+		errorLines := errcore.ErrorToSplitLines(
 			err)
 
 		sliceValidator := corevalidator.SliceValidator{
@@ -59,7 +59,7 @@ func Test_TestValidators(t *testing.T) {
 
 		// Assert
 		convey.Convey(testCase.Header, t, func() {
-			msgtype.ErrPrintWithTestIndex(caseIndex, validationFinalError)
+			errcore.ErrPrintWithTestIndex(caseIndex, validationFinalError)
 
 			convey.So(isValid, convey.ShouldBeTrue)
 		})

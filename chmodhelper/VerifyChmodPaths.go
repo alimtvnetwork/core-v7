@@ -3,7 +3,7 @@ package chmodhelper
 import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func VerifyChmodPaths(
@@ -12,7 +12,7 @@ func VerifyChmodPaths(
 	isContinueOnError bool,
 ) error {
 	if locations == nil || len(*locations) == 0 {
-		return msgtype.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyMessage.
 			Error(constants.EmptyString, nil)
 	}
 
@@ -35,5 +35,5 @@ func VerifyChmodPaths(
 		slice.AddIf(err != nil, err.Error())
 	}
 
-	return msgtype.SliceErrorDefault(slice.ListPtr())
+	return errcore.SliceErrorDefault(slice.ListPtr())
 }

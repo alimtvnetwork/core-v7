@@ -9,7 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type LinkedCollections struct {
@@ -429,13 +429,13 @@ func (it *LinkedCollections) AttachWithNode(
 	addingNode *LinkedCollectionNode,
 ) error {
 	if currentNode == nil {
-		return msgtype.
+		return errcore.
 			CannotBeNilMessage.
 			Error(currentNodeCannotBeNull, nil)
 	}
 
 	if currentNode.next != nil {
-		return msgtype.
+		return errcore.
 			ShouldBeNilMessage.
 			Error("CurrentNode.next", nil)
 	}
@@ -660,7 +660,7 @@ func (it *LinkedCollections) RemoveNodeByIndex(
 	removingIndex int,
 ) *LinkedCollections {
 	if removingIndex < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"removeIndex was less than 0.",
@@ -713,7 +713,7 @@ func (it *LinkedCollections) RemoveNodeByIndexes(
 	}
 
 	if !isIgnorePanic && it.IsEmpty() && length > 0 {
-		msgtype.
+		errcore.
 			CannotRemoveIndexesFromEmptyCollection.
 			HandleUsingPanic("removingIndexes cannot be removed from empty LinkedCollections.", removingIndexes)
 	}
@@ -896,7 +896,7 @@ func (it *LinkedCollections) AddCollectionsPointerToNode(
 	}
 
 	if node == nil {
-		msgtype.
+		errcore.
 			CannotBeNilMessage.
 			HandleUsingPanic(
 				nodesCannotBeNull,
@@ -1138,7 +1138,7 @@ func (it *LinkedCollections) IndexAt(
 	}
 
 	if length == 0 || length-1 < index {
-		msgtype.OutOfRange.HandleUsingPanic(
+		errcore.OutOfRange.HandleUsingPanic(
 			"Given index is out of range. Whereas length:",
 			length)
 	}

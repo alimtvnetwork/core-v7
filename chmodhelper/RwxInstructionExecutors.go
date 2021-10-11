@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type RwxInstructionExecutors struct {
@@ -123,7 +123,7 @@ func (receiver *RwxInstructionExecutors) verifyChmodErrorContinueOnErr(
 		}
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }
 
 func (receiver *RwxInstructionExecutors) Items() *[]*RwxInstructionExecutor {

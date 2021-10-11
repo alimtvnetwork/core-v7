@@ -5,7 +5,7 @@ import (
 	"reflect"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func SliceItemsAsStrings(reflectVal reflect.Value) ([]string, error) {
@@ -20,7 +20,7 @@ func SliceItemsAsStrings(reflectVal reflect.Value) ([]string, error) {
 
 	if !isSliceOrArray {
 		return []string{},
-			msgtype.TypeMismatch.Error("Reflection is not Slice or Array", reflectVal)
+			errcore.TypeMismatch.Error("Reflection is not Slice or Array", reflectVal)
 	}
 
 	length := reflectVal.Len()

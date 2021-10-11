@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type RwxMatchingStatus struct {
@@ -47,7 +47,7 @@ func (it *RwxMatchingStatus) CreateErrFinalError() error {
 	sliceErr := make([]string, 0, length)
 
 	for _, info := range it.RwxMismatchInfos {
-		expectingMessage := msgtype.ExpectingSimpleNoType(
+		expectingMessage := errcore.ExpectingSimpleNoType(
 			info.FilePath,
 			info.Expecting,
 			info.Actual)
@@ -63,5 +63,5 @@ func (it *RwxMatchingStatus) CreateErrFinalError() error {
 			it.Error.Error())
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }

@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // RwxPartialToInstructionExecutor
@@ -18,7 +18,7 @@ func RwxPartialToInstructionExecutor(
 	condition *chmodins.Condition,
 ) (*RwxInstructionExecutor, error) {
 	if condition == nil {
-		return nil, msgtype.CannotBeNilOrEmptyMessage.
+		return nil, errcore.CannotBeNilOrEmptyMessage.
 			ErrorNoRefs("condition")
 	}
 

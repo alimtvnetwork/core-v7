@@ -3,7 +3,7 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func ReflectTypeValidation(
@@ -12,7 +12,7 @@ func ReflectTypeValidation(
 	anyItem interface{},
 ) error {
 	if isNotNullExpected && anyItem == nil {
-		return msgtype.ExpectingErrorSimpleNoType(
+		return errcore.ExpectingErrorSimpleNoType(
 			"ReflectTypeValidation: cannot be nil but got nil.",
 			"not nil",
 			"<nil>")
@@ -24,7 +24,7 @@ func ReflectTypeValidation(
 		return nil
 	}
 
-	return msgtype.ExpectingErrorSimpleNoType(
+	return errcore.ExpectingErrorSimpleNoType(
 		"ReflectTypeValidation: reflect type validation failed",
 		expectedType,
 		actualType)

@@ -14,8 +14,8 @@ import (
 	"gitlab.com/evatix-go/core/coredata/stringslice"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaultcapacity"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -295,11 +295,11 @@ func (it *Collection) ConcatNew(
 }
 
 func (it *Collection) ToError(sep string) error {
-	return msgtype.SliceError(sep, &it.items)
+	return errcore.SliceError(sep, &it.items)
 }
 
 func (it *Collection) ToDefaultError() error {
-	return msgtype.SliceError(
+	return errcore.SliceError(
 		constants.NewLineUnix, &it.items)
 }
 
@@ -787,7 +787,7 @@ func (it *Collection) First() string {
 func (it *Collection) Single() string {
 	length := it.Length()
 	if length != 1 {
-		msgtype.LengthShouldBeEqualToMessage.HandleUsingPanic(
+		errcore.LengthShouldBeEqualToMessage.HandleUsingPanic(
 			"1",
 			length)
 	}
@@ -847,7 +847,7 @@ func (it *Collection) Skip(
 	length := it.Length()
 
 	if length < skip {
-		msgtype.
+		errcore.
 			LengthShouldBeEqualToMessage.
 			HandleUsingPanic(
 				"Length is lower than skip value. Skip:",
@@ -956,7 +956,7 @@ func (it *Collection) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
@@ -1073,7 +1073,7 @@ func (it *Collection) RemoveItemsIndexes(
 	}
 
 	return it.
-		RemoveItemsIndexesPtr(isIgnoreRemoveError, &indexes)
+		RemoveItemsIndexesPtr(isIgnoreRemoveError, indexes)
 }
 
 // RemoveItemsIndexesPtr creates a new collection without the indexes mentioned.
@@ -1081,22 +1081,22 @@ func (it *Collection) RemoveItemsIndexes(
 // it is better to filter out than remove.
 func (it *Collection) RemoveItemsIndexesPtr(
 	isIgnoreRemoveError bool,
-	indexes *[]int,
+	indexes []int,
 ) *Collection {
 	if indexes == nil {
 		return it
 	}
 
 	length := it.Length()
-	indexesLength := len(*indexes)
+	indexesLength := len(indexes)
 	hasPossibleError := length == 0 && indexesLength > 0
 
 	if hasPossibleError && !isIgnoreRemoveError {
-		panic(msgtype.CannotRemoveIndexesFromEmptyCollection)
+		panic(errcore.CannotRemoveIndexesFromEmptyCollection)
 	}
 
 	if !isIgnoreRemoveError {
-		msgtype.PanicOnIndexOutOfRange(length, indexes)
+		errcore.PanicOnIndexOutOfRange(length, indexes)
 	}
 
 	if hasPossibleError {

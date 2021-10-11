@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodclasstype"
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type SingleRwx struct {
@@ -132,7 +132,7 @@ func (receiver *SingleRwx) ToDisabledRwxWrapper() (*RwxWrapper, error) {
 
 func (receiver *SingleRwx) ToRwxWrapper() (*RwxWrapper, error) {
 	if !receiver.ClassType.IsAll() {
-		return nil, msgtype.MeaningfulError(msgtype.CannotConvertToRwxWhereVarRwxPossible,
+		return nil, errcore.MeaningfulError(errcore.CannotConvertToRwxWhereVarRwxPossible,
 			"ToRwxWrapper", errors.New("use ToVarRwx"))
 	}
 

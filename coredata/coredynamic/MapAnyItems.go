@@ -9,7 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type MapAnyItems struct {
@@ -67,7 +67,7 @@ func (it *MapAnyItems) GetUsingUnmarshallAt(
 	valInf, has := it.Items[key]
 
 	if !has {
-		return msgtype.
+		return errcore.
 			KeyNotExistInMap.
 			ErrorRefOnly(key)
 	}
@@ -75,22 +75,22 @@ func (it *MapAnyItems) GetUsingUnmarshallAt(
 	rawBytes, err := json.Marshal(valInf)
 
 	if err != nil {
-		ref := msgtype.Var2NoType(
+		ref := errcore.Var2NoType(
 			"key", key,
 			"type", TypeName(valInf))
 
-		return msgtype.MarshallingFailed.ErrorRefOnly(ref)
+		return errcore.MarshallingFailed.ErrorRefOnly(ref)
 	}
 
 	unmarshalErr := json.Unmarshal(rawBytes, unmarshalRef)
 
 	if unmarshalErr != nil {
-		ref := msgtype.Var3NoType(
+		ref := errcore.Var3NoType(
 			"key", key,
 			"StoreType", TypeName(valInf),
 			"RequestedType", TypeName(unmarshalRef))
 
-		return msgtype.UnMarshallingFailed.ErrorRefOnly(ref)
+		return errcore.UnMarshallingFailed.ErrorRefOnly(ref)
 	}
 
 	return nil
@@ -139,17 +139,17 @@ func (it *MapAnyItems) GetItemRef(
 	valInf, has := it.Items[key]
 
 	if !has {
-		return msgtype.
+		return errcore.
 			KeyNotExistInMap.
 			Error("key", key)
 	}
 
 	if referenceOut == nil {
-		reference := msgtype.Var2NoType(
+		reference := errcore.Var2NoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut))
 
-		return msgtype.
+		return errcore.
 			CannotBeNilMessage.
 			Error(
 				"referenceOut cannot be nil",
@@ -160,11 +160,11 @@ func (it *MapAnyItems) GetItemRef(
 	foundItemRv := reflect.ValueOf(valInf)
 
 	if outInfRv.Kind() != reflect.Ptr {
-		reference := msgtype.Var2NoType(
+		reference := errcore.Var2NoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut))
 
-		return msgtype.
+		return errcore.
 			ShouldBePointer.
 			Error(
 				"referenceOut is not a pointer!",
@@ -172,12 +172,12 @@ func (it *MapAnyItems) GetItemRef(
 	}
 
 	if outInfRv.IsNil() || foundItemRv.IsNil() {
-		reference := msgtype.Var3NoType(
+		reference := errcore.Var3NoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut),
 			"foundItemType", TypeName(valInf))
 
-		return msgtype.
+		return errcore.
 			CannotBeNilMessage.
 			Error(
 				"referenceOut or found item is nil",
@@ -188,12 +188,12 @@ func (it *MapAnyItems) GetItemRef(
 	refOutTypeName := outInfRv.Type().String()
 	isTypeNotEqual := foundTypeName != refOutTypeName
 	if isTypeNotEqual {
-		reference := msgtype.Var3NoType(
+		reference := errcore.Var3NoType(
 			"key", key,
 			"referenceOutType", refOutTypeName,
 			"foundItemType", foundTypeName)
 
-		return msgtype.
+		return errcore.
 			TypeMismatch.
 			Error(
 				"Use UnmarshalAt method to get generic data to specific type.",
@@ -212,12 +212,12 @@ func (it *MapAnyItems) GetItemRef(
 		return nil
 	}
 
-	reference := msgtype.Var3NoType(
+	reference := errcore.Var3NoType(
 		"key", key,
 		"referenceOutType", TypeName(referenceOut),
 		"foundItemType", TypeName(valInf))
 
-	return msgtype.
+	return errcore.
 		UnexpectedValueErrorMessage.
 		Error(
 			"unknown error",
@@ -247,7 +247,7 @@ func (it *MapAnyItems) AddKeyAnyWithValidation(
 ) error {
 	actualTypeOf := reflect.TypeOf(keyAny.AnyInf)
 	if actualTypeOf != typeVerify {
-		return msgtype.
+		return errcore.
 			TypeMismatch.
 			Expecting(
 				typeVerify.String(),
@@ -266,7 +266,7 @@ func (it *MapAnyItems) AddWithValidation(
 ) error {
 	actualTypeOf := reflect.TypeOf(anyInf)
 	if actualTypeOf != typeVerify {
-		return msgtype.
+		return errcore.
 			TypeMismatch.
 			Expecting(
 				typeVerify.String(),
@@ -367,11 +367,11 @@ func (it *MapAnyItems) GetSinglePageCollection(
 	}
 
 	if length != len(allKeys) {
-		reference := msgtype.Var2NoType(
+		reference := errcore.Var2NoType(
 			"MapLength", it.Length(),
 			"AllKeysLength", len(allKeys))
 
-		msgtype.
+		errcore.
 			LengthShouldBeEqualToMessage.
 			HandleUsingPanic(
 				"allKeys length should be exact same as the map length, "+
@@ -386,7 +386,7 @@ func (it *MapAnyItems) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
@@ -420,7 +420,7 @@ func (it *MapAnyItems) GetNewMapUsingKeys(
 		item, has := it.Items[key]
 
 		if isPanicOnMissing && !has {
-			msgtype.
+			errcore.
 				KeyNotExistInMap.
 				HandleUsingPanic(
 					"given key is not found in the map, key ="+key,
@@ -449,7 +449,7 @@ func (it *MapAnyItems) JsonStringMust() string {
 	toString, err := it.JsonString()
 
 	if err != nil {
-		msgtype.
+		errcore.
 			MarshallingFailed.
 			HandleUsingPanic(err.Error(), it.Items)
 	}
@@ -465,7 +465,7 @@ func (it *MapAnyItems) JsonResultOfKey(key string) *corejson.Result {
 	}
 
 	return corejson.EmptyWithErrorPtr(
-		msgtype.KeyNotExistInMap.Error("Key", key))
+		errcore.KeyNotExistInMap.Error("Key", key))
 }
 
 func (it *MapAnyItems) JsonResultOfKeys(
@@ -642,9 +642,9 @@ func (it *MapAnyItems) JsonParseSelfInject(
 }
 
 func (it *MapAnyItems) Strings() []string {
-	return msgtype.VarMapStrings(it.Items)
+	return errcore.VarMapStrings(it.Items)
 }
 
 func (it *MapAnyItems) String() string {
-	return msgtype.VarMap(it.Items)
+	return errcore.VarMap(it.Items)
 }

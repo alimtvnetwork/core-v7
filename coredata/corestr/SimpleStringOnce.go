@@ -9,8 +9,8 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type SimpleStringOnce struct {
@@ -109,7 +109,7 @@ func (it *SimpleStringOnce) ValueBytesPtr() *[]byte {
 
 func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
 	if it.isInitialize {
-		return msgtype.
+		return errcore.
 			AlreadyInitialized.
 			Error("cannot set :"+setVal, it.value)
 	}

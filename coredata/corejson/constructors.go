@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 
 	"gitlab.com/evatix-go/core/coredata"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 // NewUsingBytesError Get created with nil.
@@ -67,78 +67,96 @@ func NewUsingBytesPtr(
 }
 
 func NewPtr(
-	jsonBytes []byte, err error,
+	jsonBytes []byte,
+	err error,
+	typeName string,
 ) *Result {
-	if err != nil {
-		return EmptyWithErrorPtr(err)
-	}
-
-	if jsonBytes == nil {
-		return EmptyWithoutErrorPtr()
-	}
-
 	return &Result{
-		Bytes: jsonBytes,
-		Error: nil,
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
 	}
 }
 
 func New(
-	jsonBytes []byte, err error,
+	jsonBytes []byte,
+	err error,
+	typeName string,
 ) Result {
-	return *NewPtr(jsonBytes, err)
+	return Result{
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
+	}
 }
 
 func NewPtrUsingBytesPtr(
-	jsonBytes *[]byte, err error,
+	jsonBytes *[]byte,
+	err error,
+	typeName string,
 ) *Result {
 	if err != nil {
-		return EmptyWithErrorPtr(err)
+		return &Result{
+			Bytes:    []byte{},
+			Error:    err,
+			TypeName: typeName,
+		}
 	}
 
 	if jsonBytes == nil {
-		return EmptyWithoutErrorPtr()
+		return &Result{
+			Bytes:    []byte{},
+			Error:    nil,
+			TypeName: typeName,
+		}
 	}
 
 	return &Result{
-		Bytes: *jsonBytes,
-		Error: nil,
+		Bytes:    *jsonBytes,
+		Error:    nil,
+		TypeName: typeName,
 	}
 }
 
 func NewFromAny(any interface{}) Result {
 	jsonBytes, err := json.Marshal(any)
+	typeName := reflectinternal.TypeName(any)
 
 	if err != nil {
 		return Result{
-			Bytes: nil,
-			Error: msgtype.MarshallingFailed.Error(
+			Bytes: jsonBytes,
+			Error: errcore.MarshallingFailed.Error(
 				err.Error(),
-				reflectinternal.TypeName(any)),
+				typeName),
+			TypeName: typeName,
 		}
 	}
 
 	return Result{
-		Bytes: jsonBytes,
-		Error: err,
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
 	}
 }
 
 func NewFromAnyPtr(any interface{}) *Result {
 	jsonBytes, err := json.Marshal(any)
+	typeName := reflectinternal.TypeName(any)
 
 	if err != nil {
 		return &Result{
-			Bytes: nil,
-			Error: msgtype.MarshallingFailed.Error(
+			Bytes: jsonBytes,
+			Error: errcore.MarshallingFailed.Error(
 				err.Error(),
-				reflectinternal.TypeName(any)),
+				typeName),
+			TypeName: typeName,
 		}
 	}
 
 	return &Result{
-		Bytes: jsonBytes,
-		Error: err,
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
 	}
 }
 

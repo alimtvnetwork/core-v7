@@ -2,7 +2,7 @@ package reqtype
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func RangesNotMeet(
@@ -16,7 +16,7 @@ func RangesNotMeet(
 	currentStart := start(&reqs)
 	currentEnd := end(&reqs)
 
-	return msgtype.RangeNotMeet(
+	return errcore.RangeNotMeet(
 		message,
 		currentStart,
 		currentEnd,

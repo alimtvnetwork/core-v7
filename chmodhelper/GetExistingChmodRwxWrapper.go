@@ -3,7 +3,7 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func GetExistingChmodRwxWrapper(
@@ -12,7 +12,7 @@ func GetExistingChmodRwxWrapper(
 	fileInfo, err := os.Stat(filePath)
 
 	if err != nil {
-		return RwxWrapper{}, msgtype.
+		return RwxWrapper{}, errcore.
 			PathErrorMessage.
 			Error(err.Error(), ", file:"+filePath)
 	}

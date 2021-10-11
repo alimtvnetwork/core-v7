@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type MapResults struct {
@@ -151,13 +151,13 @@ func (it *MapResults) UnmarshalAt(
 	result, has := it.Items[key]
 
 	if has {
-		return msgtype.
+		return errcore.
 			KeyNotExistInMap.
 			Error("Given key not found!", key)
 	}
 
 	if result.IsEmptyJsonBytes() {
-		return msgtype.
+		return errcore.
 			EmptyResultCannotMakeJson.
 			Error("Cannot make json of empty bytes!", key)
 	}
@@ -262,8 +262,8 @@ func (it *MapResults) AddAny(
 	item interface{},
 ) error {
 	if item == nil {
-		return msgtype.MarshallingFailed.Error(
-			msgtype.CannotBeNilMessage.String(),
+		return errcore.MarshallingFailed.Error(
+			errcore.CannotBeNilMessage.String(),
 			key)
 	}
 
@@ -506,14 +506,6 @@ func (it *MapResults) AllResults() []Result {
 	return it.AllValues()
 }
 
-func (it *MapResults) Clear() *MapResults {
-	it.Items = make(
-		map[string]Result,
-		constants.Zero)
-
-	return it
-}
-
 func (it *MapResults) GetStrings() []string {
 	length := it.Length()
 	list := make([]string, length)
@@ -672,11 +664,11 @@ func (it *MapResults) GetSinglePageCollection(
 	}
 
 	if length != len(allKeys) {
-		reference := msgtype.Var2NoType(
+		reference := errcore.Var2NoType(
 			"MapLength", it.Length(),
 			"AllKeysLength", len(allKeys))
 
-		msgtype.
+		errcore.
 			LengthShouldBeEqualToMessage.
 			HandleUsingPanic(
 				"allKeys length should be exact same as the map length, "+
@@ -691,7 +683,7 @@ func (it *MapResults) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
@@ -725,7 +717,7 @@ func (it *MapResults) GetNewMapUsingKeys(
 		item, has := it.Items[key]
 
 		if isPanicOnMissing && !has {
-			msgtype.
+			errcore.
 				KeyNotExistInMap.
 				HandleUsingPanic(
 					"given key is not found in the map, key ="+key,
@@ -758,6 +750,29 @@ func (it *MapResults) JsonModel() *MapResults {
 //goland:noinspection GoLinterLocal
 func (it *MapResults) JsonModelAny() interface{} {
 	return it.JsonModel()
+}
+
+func (it *MapResults) Clear() *MapResults {
+	temp := it.Items
+	clearFunc := func() {
+		for _, result := range temp {
+			result.Dispose()
+		}
+	}
+
+	go clearFunc()
+	it.Items = map[string]Result{}
+
+	return it
+}
+
+func (it *MapResults) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+	it.Items = nil
 }
 
 func (it MapResults) Json() Result {

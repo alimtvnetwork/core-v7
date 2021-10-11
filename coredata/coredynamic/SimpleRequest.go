@@ -5,9 +5,9 @@ import (
 	"reflect"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/issetter"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type SimpleRequest struct {
@@ -72,8 +72,8 @@ func (receiver *SimpleRequest) GetErrorOnTypeMismatch(
 		return nil
 	}
 
-	typeMismatchMessage := msgtype.CombineWithMsgType(
-		msgtype.TypeMismatch,
+	typeMismatchMessage := errcore.CombineWithMsgType(
+		errcore.TypeMismatch,
 		"Current type - ["+receiver.ReflectTypeName()+"], expected type",
 		typeMatch) + constants.NewLineUnix
 

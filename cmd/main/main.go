@@ -25,7 +25,10 @@ func main() {
 	// coreDynamicMapAnyItems()
 	// stackTrackerTest7()
 	// jsonResultUnmarshallingTest01()
-	jsonResultUnmarshallingTest02()
+	// jsonResultUnmarshallingTest02()
+	// parallelTaskTest01()
+	// parallelTaskTest02()
+	parallelTaskTest03()
 
 	// keyLegendsTest()
 	// stackTrackerTest()

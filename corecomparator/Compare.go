@@ -7,7 +7,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Compare byte
@@ -115,7 +115,7 @@ func (it *Compare) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	return msgtype.
+	return errcore.
 		FailedToConvert.
 		Error(string(data)+" failed to convert to core-compare. Must be any of the values.",
 			strings.Join(Ranges(),

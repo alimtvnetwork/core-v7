@@ -9,7 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Hashmap struct {
@@ -1132,11 +1132,11 @@ func (it *Hashmap) ParseInjectUsingJsonMust(
 }
 
 func (it *Hashmap) ToError(sep string) error {
-	return msgtype.SliceError(sep, it.KeyValStringLines())
+	return errcore.SliceError(sep, it.KeyValStringLines())
 }
 
 func (it *Hashmap) ToDefaultError() error {
-	return msgtype.SliceError(
+	return errcore.SliceError(
 		constants.NewLineUnix, it.KeyValStringLines())
 }
 

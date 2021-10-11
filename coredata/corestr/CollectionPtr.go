@@ -13,8 +13,8 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/coresort/strsort"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type CollectionPtr struct {
@@ -635,7 +635,7 @@ func (it *CollectionPtr) RemoveItemsIndexes(
 	}
 
 	return it.
-		RemoveItemsIndexesPtr(isIgnoreRemoveError, &indexes)
+		RemoveItemsIndexesPtr(isIgnoreRemoveError, indexes)
 }
 
 // RemoveItemsIndexesPtr creates a new collection without the indexes mentioned.
@@ -643,18 +643,18 @@ func (it *CollectionPtr) RemoveItemsIndexes(
 // it is better to filter out than remove.
 func (it *CollectionPtr) RemoveItemsIndexesPtr(
 	isIgnoreRemoveError bool,
-	indexes *[]int,
+	indexes []int,
 ) *CollectionPtr {
 	length := it.Length()
-	indexesLength := len(*indexes)
+	indexesLength := len(indexes)
 	hasPossibleError := length == 0 && indexesLength > 0
 
 	if hasPossibleError && !isIgnoreRemoveError {
-		panic(msgtype.CannotRemoveIndexesFromEmptyCollection)
+		panic(errcore.CannotRemoveIndexesFromEmptyCollection)
 	}
 
 	if !isIgnoreRemoveError {
-		msgtype.PanicOnIndexOutOfRange(length, indexes)
+		errcore.PanicOnIndexOutOfRange(length, indexes)
 	}
 
 	if hasPossibleError {
@@ -1480,7 +1480,7 @@ func (it *CollectionPtr) First() string {
 func (it *CollectionPtr) Single() string {
 	length := it.Length()
 	if length != 1 {
-		msgtype.LengthShouldBeEqualToMessage.HandleUsingPanic("1", length)
+		errcore.LengthShouldBeEqualToMessage.HandleUsingPanic("1", length)
 	}
 
 	return *(*it.items)[0]
@@ -1538,7 +1538,7 @@ func (it *CollectionPtr) Skip(
 	length := it.Length()
 
 	if length < skip {
-		msgtype.
+		errcore.
 			LengthShouldBeEqualToMessage.
 			HandleUsingPanic(
 				"Length is lower than skip value. Skip:",
@@ -1612,7 +1612,7 @@ func (it *CollectionPtr) GetSinglePageCollection(
 	 */
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
-		msgtype.
+		errcore.
 			CannotBeNegativeIndex.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",

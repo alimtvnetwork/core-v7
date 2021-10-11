@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type LineNumber struct {
@@ -31,7 +31,7 @@ func (it *LineNumber) VerifyError(
 		return nil
 	}
 
-	msg := msgtype.Expecting(
+	msg := errcore.Expecting(
 		"Line Number didn't match",
 		it.LineNumber,
 		lineNumber)

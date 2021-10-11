@@ -3,7 +3,7 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func MapKeysStringSlice(reflectVal reflect.Value) ([]string, error) {
@@ -14,7 +14,7 @@ func MapKeysStringSlice(reflectVal reflect.Value) ([]string, error) {
 
 	if reflectVal.Kind() != reflect.Map {
 		return []string{},
-			msgtype.TypeMismatch.Error("Reflection is not Map", reflectVal)
+			errcore.TypeMismatch.Error("Reflection is not Map", reflectVal)
 	}
 
 	mapKeys := reflectVal.MapKeys()
@@ -26,7 +26,7 @@ func MapKeysStringSlice(reflectVal reflect.Value) ([]string, error) {
 		keyAsString, isString := keyAny.(string)
 
 		if !isString {
-			return keys, msgtype.TypeMismatch.Error("Not string type", keyAny)
+			return keys, errcore.TypeMismatch.Error("Not string type", keyAny)
 		}
 
 		keys[i] = keyAsString

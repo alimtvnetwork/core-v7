@@ -5,7 +5,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func StringToFloat64(input string) (value float64, err error) {
@@ -16,9 +16,9 @@ func StringToFloat64(input string) (value float64, err error) {
 			constants.NewLineUnix +
 			err2.Error()
 
-		return constants.Zero, msgtype.
+		return constants.Zero, errcore.
 			ParsingFailed.Error(
-			msgtype.FailedToConvert.String(),
+			errcore.FailedToConvert.String(),
 			reference)
 	}
 

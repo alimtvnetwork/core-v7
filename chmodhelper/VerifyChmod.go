@@ -5,14 +5,14 @@ import (
 	"os"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // VerifyChmod - expectedHyphenedRwx should be 10 chars example "-rwxrwxrwx"
 func VerifyChmod(location string, expectedHyphenedRwx string) error {
 	if len(expectedHyphenedRwx) != HyphenedRwxLength {
-		return msgtype.MeaningfulError(
-			msgtype.LengthShouldBeEqualToMessage,
+		return errcore.MeaningfulError(
+			errcore.LengthShouldBeEqualToMessage,
 			"VerifyChmod"+constants.HypenAngelRight+location,
 			errHyphenedRwxLength)
 	}
@@ -20,8 +20,8 @@ func VerifyChmod(location string, expectedHyphenedRwx string) error {
 	fileInfo, err := os.Stat(location)
 
 	if os.IsNotExist(err) || fileInfo == nil {
-		return msgtype.MeaningfulError(
-			msgtype.PathInvalidErrorMessage,
+		return errcore.MeaningfulError(
+			errcore.PathInvalidErrorMessage,
 			"VerifyChmod"+constants.HypenAngelRight+location,
 			err)
 	}
@@ -31,13 +31,13 @@ func VerifyChmod(location string, expectedHyphenedRwx string) error {
 		return nil
 	}
 
-	expectationFailedMessage := msgtype.ExpectingSimpleNoType(
+	expectationFailedMessage := errcore.ExpectingSimpleNoType(
 		chmod,
 		expectedHyphenedRwx,
 		existingFileMode)
 
-	return msgtype.MeaningfulError(
-		msgtype.PathChmodMismatchErrorMessage,
+	return errcore.MeaningfulError(
+		errcore.PathChmodMismatchErrorMessage,
 		"VerifyChmod"+constants.HypenAngelRight+location,
 		errors.New(expectationFailedMessage))
 }

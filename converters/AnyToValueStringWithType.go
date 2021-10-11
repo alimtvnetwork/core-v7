@@ -9,7 +9,7 @@ import (
 func AnyToValueStringWithType(any interface{}) string {
 	if any == nil {
 		return fmt.Sprintf(
-			constants.SprintNilValueTypeInParentThesisFormat,
+			constants.SprintNilValueTypeInParenthesisFormat,
 			any)
 	}
 

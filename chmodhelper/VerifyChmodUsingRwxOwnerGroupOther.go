@@ -2,7 +2,7 @@ package chmodhelper
 
 import (
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func VerifyChmodUsingRwxOwnerGroupOther(
@@ -10,7 +10,7 @@ func VerifyChmodUsingRwxOwnerGroupOther(
 	rwx *chmodins.RwxOwnerGroupOther,
 ) error {
 	if rwx == nil {
-		return msgtype.
+		return errcore.
 			CannotBeNilOrEmptyMessage.
 			Error("rwx is nil", location)
 	}

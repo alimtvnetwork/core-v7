@@ -2,7 +2,7 @@ package coretests
 
 import (
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type ComparingInstruction struct {
@@ -61,7 +61,7 @@ func (it *ComparingInstruction) isMatchingEqual(caseIndexPlusIsPrint *CaseIndexP
 		return true
 	}
 
-	expectation := &msgtype.ExpectationMessageDef{
+	expectation := &errcore.ExpectationMessageDef{
 		CaseIndex:      caseIndexPlusIsPrint.CaseIndex,
 		FuncName:       it.FunName,
 		TestCaseName:   it.TestCaseName,

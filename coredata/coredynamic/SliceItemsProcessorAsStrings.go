@@ -3,7 +3,7 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func SliceItemsProcessorAsStrings(
@@ -21,7 +21,7 @@ func SliceItemsProcessorAsStrings(
 
 	if !isSliceOrArray {
 		return []string{},
-			msgtype.TypeMismatch.Error("Reflection is not Slice or Array", reflectVal)
+			errcore.TypeMismatch.Error("Reflection is not Slice or Array", reflectVal)
 	}
 
 	length := reflectVal.Len()

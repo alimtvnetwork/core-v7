@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func executeErrorFunctions(functions []func() error) error {
@@ -25,7 +25,7 @@ func executeErrorFunctions(functions []func() error) error {
 		}
 	}
 
-	return msgtype.SliceToError(sliceErr)
+	return errcore.SliceToError(sliceErr)
 }
 
 func executeAnyFunctions(

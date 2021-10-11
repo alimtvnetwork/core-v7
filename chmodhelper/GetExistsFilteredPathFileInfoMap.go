@@ -4,8 +4,8 @@ import (
 	"os"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/fsinternal"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 func GetExistsFilteredPathFileInfoMap(
@@ -37,7 +37,7 @@ func GetExistsFilteredPathFileInfoMap(
 
 	var err2 error
 	if len(missingOrHaveIssuesFiles) > 0 && !isSkipOnInvalid {
-		err2 = msgtype.PathsMissingOrHavingIssues.ErrorRefOnly(
+		err2 = errcore.PathsMissingOrHavingIssues.ErrorRefOnly(
 			missingOrHaveIssuesFiles)
 	}
 

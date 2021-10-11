@@ -2,7 +2,7 @@ package bytetype
 
 import (
 	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Variant byte
@@ -24,7 +24,7 @@ func (it Variant) MarshalJSON() ([]byte, error) {
 }
 
 func (it Variant) UnmarshalJSON(data []byte) error {
-	panic(msgtype.NotImplemented.ErrorNoRefs("UnmarshalJSON not implemented for bytetype."))
+	panic(errcore.NotImplemented.ErrorNoRefs("UnmarshalJSON not implemented for bytetype."))
 }
 
 func (it Variant) String() string {

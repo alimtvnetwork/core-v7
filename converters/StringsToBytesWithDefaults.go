@@ -6,7 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters/coreconverted"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 // StringsToBytesWithDefaults panic if not a number or more than 255
@@ -55,6 +55,6 @@ func StringsToBytesWithDefaults(
 
 	return &coreconverted.Bytes{
 		Values:        results,
-		CombinedError: msgtype.SliceToError(sliceErr),
+		CombinedError: errcore.SliceToError(sliceErr),
 	}
 }

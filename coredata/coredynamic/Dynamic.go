@@ -11,11 +11,11 @@ import (
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/issetter"
-	"gitlab.com/evatix-go/core/msgtype"
 )
 
 type Dynamic struct {
@@ -196,7 +196,7 @@ func (it *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
 
 func (it *Dynamic) Float64() (val float64, err error) {
 	if it.IsNull() {
-		return constants.Zero, msgtype.
+		return constants.Zero, errcore.
 			ParsingFailed.Error(
 			messages.DynamicFailedToParseToFloat64BecauseNull,
 			it.String())
@@ -210,9 +210,9 @@ func (it *Dynamic) Float64() (val float64, err error) {
 			constants.NewLineUnix +
 			err2.Error()
 
-		return constants.Zero, msgtype.
+		return constants.Zero, errcore.
 			ParsingFailed.Error(
-			msgtype.FailedToConvert.String(),
+			errcore.FailedToConvert.String(),
 			reference)
 	}
 
@@ -293,9 +293,9 @@ func (it *Dynamic) MarshalJSON() ([]byte, error) {
 }
 
 func (it *Dynamic) UnmarshalJSON(data []byte) error {
-	return msgtype.
+	return errcore.
 		NotImplemented.
-		Error(msgtype.UnMarshallingFailed.String(), data)
+		Error(errcore.UnMarshallingFailed.String(), data)
 }
 
 func (it *Dynamic) JsonModel() interface{} {
@@ -376,7 +376,7 @@ func (it *Dynamic) JsonStringMust() string {
 	marshalledBytes, err := it.JsonBytes()
 
 	if err != nil {
-		msgtype.
+		errcore.
 			MarshallingFailed.
 			HandleUsingPanic(err.Error(), it.innerDataString)
 	}

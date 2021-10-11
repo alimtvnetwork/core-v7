@@ -9,7 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
 
@@ -304,7 +304,7 @@ func (it *KeyValCollection) JsonStringMust() string {
 	toString, err := it.JsonString()
 
 	if err != nil {
-		msgtype.
+		errcore.
 			MarshallingFailed.
 			HandleUsingPanic(err.Error(), it.items)
 	}

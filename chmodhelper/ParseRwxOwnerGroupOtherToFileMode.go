@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func ParseRwxOwnerGroupOtherToFileMode(
@@ -14,8 +14,8 @@ func ParseRwxOwnerGroupOtherToFileMode(
 		rwxOwnerGroupOther)
 
 	if err != nil {
-		return 0, msgtype.MeaningfulErrorWithData(
-			msgtype.FailedToConvert,
+		return 0, errcore.MeaningfulErrorWithData(
+			errcore.FailedToConvert,
 			"ParseRwxOwnerGroupOtherToFileMode",
 			err,
 			rwxOwnerGroupOther)

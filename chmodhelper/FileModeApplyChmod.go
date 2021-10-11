@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/msgtype"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func FileModeApplyChmod(
@@ -17,7 +17,7 @@ func FileModeApplyChmod(
 	}
 
 	if condition == nil {
-		return msgtype.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyMessage.
 			ErrorNoRefs("condition")
 	}
 
