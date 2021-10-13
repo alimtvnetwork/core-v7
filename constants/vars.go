@@ -22,7 +22,7 @@ var (
 	tabV                                   = TabV
 	hash                                   = Hash
 	doubleHash                             = DoubleHash
-	trippleHash                            = TrippleHash
+	trippleHash                            = TripleHash
 	hashSpace                              = HashSpace
 	doubleHashSpace                        = DoubleHashSpace
 	space                                  = Space
@@ -167,8 +167,8 @@ var (
 	upperCaseRune                          = UpperCaseRune
 	noElements                             = NoElements
 	noItems                                = NoItems
-	noItemsSqaure                          = NoItemsSqaure
-	noElementsSqaure                       = NoElementsSqaure
+	noItemsSquare                          = NoItemsSquare
+	noElementsSquare                       = NoElementsSquare
 	doubleNewLine                          = DoubleNewLine
 	NewLineBytes                           = []byte(NewLine)
 	NewLineUnixBytes                       = []byte(NewLineUnix)

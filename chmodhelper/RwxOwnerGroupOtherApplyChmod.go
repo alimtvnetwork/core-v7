@@ -16,12 +16,12 @@ func RwxOwnerGroupOtherApplyChmod(
 	}
 
 	if rwxOwnerGroupOther == nil {
-		return errcore.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyType.
 			ErrorNoRefs("rwxOwnerGroupOther")
 	}
 
 	if condition == nil {
-		return errcore.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyType.
 			ErrorNoRefs("condition")
 	}
 

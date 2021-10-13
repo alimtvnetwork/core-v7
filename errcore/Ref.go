@@ -12,7 +12,7 @@ func Ref(reference interface{}) string {
 	}
 
 	return fmt.Sprintf(
-		constants.ReferenceWrap,
+		constants.ReferenceWrapFormat,
 		reference)
 
 }

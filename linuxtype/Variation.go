@@ -48,6 +48,10 @@ const (
 	UbuntuDesktop
 )
 
+func (it Variation) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
+}
+
 func (it Variation) Value() byte {
 	return byte(it)
 }
@@ -175,8 +179,8 @@ func (it *Variation) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (it Variation) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return &it
+func (it *Variation) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return it
 }
 
 func (it Variation) MaxByte() byte {

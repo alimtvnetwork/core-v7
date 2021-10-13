@@ -29,7 +29,7 @@ func (it *KeyVal) ValueDynamicPtr() *Dynamic {
 
 func (it *KeyVal) String() string {
 	return fmt.Sprintf(
-		constants.KeyValuuePariSimpleFormat,
+		constants.KeyValuePariSimpleFormat,
 		it.Key,
 		it.Key,
 		it.Value,

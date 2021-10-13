@@ -8,7 +8,7 @@ import (
 
 // PathMeaningFulMessage skip error if messages empty or length 0
 func PathMeaningFulMessage(
-	msgType Variation,
+	rawErrType RawErrorType,
 	funcName string,
 	location string,
 	messages ...string,
@@ -20,7 +20,7 @@ func PathMeaningFulMessage(
 	messagesCompiled := strings.Join(messages, constants.Space)
 	errMsg := "location: [" + location + "], " + messagesCompiled
 
-	return msgType.Error(
+	return rawErrType.Error(
 		funcName,
 		errMsg)
 }

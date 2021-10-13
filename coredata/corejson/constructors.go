@@ -125,7 +125,7 @@ func NewFromAny(any interface{}) Result {
 	if err != nil {
 		return Result{
 			Bytes: jsonBytes,
-			Error: errcore.MarshallingFailed.Error(
+			Error: errcore.MarshallingFailedType.Error(
 				err.Error(),
 				typeName),
 			TypeName: typeName,
@@ -146,7 +146,7 @@ func NewFromAnyPtr(any interface{}) *Result {
 	if err != nil {
 		return &Result{
 			Bytes: jsonBytes,
-			Error: errcore.MarshallingFailed.Error(
+			Error: errcore.MarshallingFailedType.Error(
 				err.Error(),
 				typeName),
 			TypeName: typeName,

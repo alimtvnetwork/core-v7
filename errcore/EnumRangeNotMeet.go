@@ -15,7 +15,7 @@ func EnumRangeNotMeet(
 		rangeStr = fmt.Sprintf(rangeWithRangeFormat, rangeStart, rangeEnd, wholeRange)
 	}
 
-	return EnumValuesOutOfRange.String() +
+	return EnumValuesOutOfRangeType.String() +
 		ReferenceStart +
 		rangeStr +
 		ReferenceEnd

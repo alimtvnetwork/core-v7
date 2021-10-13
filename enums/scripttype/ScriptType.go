@@ -25,6 +25,10 @@ func (it *Variant) Name() string {
 	return scriptTypeBasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
+func (it Variant) NameValue() string {
+	return scriptTypeBasicEnumImpl.NameWithValue(it)
+}
+
 func (it *Variant) ToNumberString() string {
 	return scriptTypeBasicEnumImpl.ToNumberString(it.ValueByte())
 }
@@ -37,7 +41,7 @@ func (it *Variant) UnmarshallEnumToValue(
 		jsonUnmarshallingValue)
 }
 
-func (it *Variant) String() string {
+func (it Variant) String() string {
 	return scriptTypeBasicEnumImpl.ToEnumString(it.ValueByte())
 }
 

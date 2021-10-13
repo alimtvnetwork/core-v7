@@ -16,7 +16,7 @@ func New(mode string) (RwxWrapper, error) {
 	length := len(mode)
 
 	if length != SingleRwxLength {
-		panic(errcore.OutOfRangeLength.Combine(
+		panic(errcore.OutOfRangeLengthType.Combine(
 			"mode length should be "+SingleRwxLengthString,
 			length))
 	}
@@ -28,7 +28,7 @@ func New(mode string) (RwxWrapper, error) {
 
 		if n > 7 || n < 0 {
 			err := errcore.
-				InvalidCharErrorMessage.
+				InvalidCharType.
 				Error(
 					messages.ModeCharShouldBeAllNumbersAndWithin0To7,
 					n+constants.ZeroChar)

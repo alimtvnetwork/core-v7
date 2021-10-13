@@ -22,7 +22,7 @@ func SliceItemsSimpleProcessorAsStrings(
 
 	if !isSliceOrArray {
 		return []string{},
-			errcore.TypeMismatch.Error(
+			errcore.TypeMismatchType.Error(
 				"Reflection is not Slice or Array", reflectVal)
 	}
 

@@ -83,7 +83,7 @@ func (it *RwxInstructionExecutor) CompiledRwxWrapperUsingFixedRwxWrapper(
 	}
 
 	return nil, errcore.
-		FailedToExecute.
+		FailedToExecuteType.
 		Error(
 			messages.FailedToCompileChmodhelperVarWrapperToWrapper,
 			wrapper.String())
@@ -93,17 +93,17 @@ func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
 	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(location)
 
 	if err != nil {
-		return errcore.PathErrorMessage.Error(messages.FailedToGetFileModeRwx, location)
+		return errcore.PathErrorType.Error(messages.FailedToGetFileModeRwx, location)
 	}
 
 	compiledWrapper, err2 := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
 
 	if err2 != nil {
-		funcWithLoc := "ApplyOnPath" + constants.HypenAngelRight + location
+		funcWithLoc := "ApplyOnPath" + constants.HyphenAngelRight + location
 
 		return errcore.
 			MeaningfulError(
-				errcore.PathErrorMessage, funcWithLoc, err2)
+				errcore.PathErrorType, funcWithLoc, err2)
 	}
 
 	if it.rwxInstruction.IsRecursive {
@@ -156,7 +156,7 @@ func (it *RwxInstructionExecutor) getVerifyRwxInternalError(
 	*FilteredPathFileInfoMap, error,
 ) {
 	if !isRecursiveIgnore && it.rwxInstruction.Condition.IsRecursive {
-		return nil, errcore.NotSupported.Error(
+		return nil, errcore.NotSupportedType.Error(
 			"IsRecursive is not supported for Verify chmod.",
 			locations)
 	}
@@ -214,7 +214,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
 
 		if err != nil {
 			return errcore.MeaningfulErrorWithData(
-				errcore.ValidataionFailed,
+				errcore.ValidataionFailedType,
 				"verifyChmodLocationsNoContinue",
 				err,
 				"failed to verify rwxInstruction for - "+filePath)

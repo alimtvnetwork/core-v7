@@ -13,3 +13,19 @@ func (it *BaseIsIgnoreCase) BaseIsCaseSensitive() BaseIsCaseSensitive {
 		IsCaseSensitive: it.IsCaseSensitive(),
 	}
 }
+
+func (it BaseIsIgnoreCase) Clone() BaseIsIgnoreCase {
+	return BaseIsIgnoreCase{
+		IsIgnoreCase: it.IsIgnoreCase,
+	}
+}
+
+func (it *BaseIsIgnoreCase) ClonePtr() *BaseIsIgnoreCase {
+	if it == nil {
+		return nil
+	}
+
+	return &BaseIsIgnoreCase{
+		IsIgnoreCase: it.IsIgnoreCase,
+	}
+}

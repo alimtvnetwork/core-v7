@@ -20,7 +20,7 @@ func SliceItemsAsStrings(reflectVal reflect.Value) ([]string, error) {
 
 	if !isSliceOrArray {
 		return []string{},
-			errcore.TypeMismatch.Error("Reflection is not Slice or Array", reflectVal)
+			errcore.TypeMismatchType.Error("Reflection is not Slice or Array", reflectVal)
 	}
 
 	length := reflectVal.Len()

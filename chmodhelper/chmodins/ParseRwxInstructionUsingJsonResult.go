@@ -10,7 +10,7 @@ func ParseRwxInstructionUsingJsonResult(
 ) (*RwxInstruction, error) {
 	if result == nil {
 		return nil,
-			errcore.JsonResultBytesAreNilOrEmpty.Error(
+			errcore.BytesAreNilOrEmptyType.Error(
 				"ParseRwxInstructionUsingJsonResult", nil)
 	}
 
@@ -23,7 +23,7 @@ func ParseRwxInstructionUsingJsonResult(
 
 	if err != nil {
 		return nil, errcore.MeaningfulError(
-			errcore.FailedToParse,
+			errcore.FailedToParseType,
 			"ParseRwxInstructionUsingJsonResult",
 			err)
 	}

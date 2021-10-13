@@ -307,13 +307,13 @@ func (it *LinkedList) AddFront(item string) *LinkedList {
 func (it *LinkedList) AttachWithNode(currentNode, addingNode *LinkedListNode) error {
 	if currentNode == nil {
 		return errcore.
-			CannotBeNilMessage.
+			CannotBeNilType.
 			Error("CurrentNode cannot be nil.", nil)
 	}
 
 	if currentNode.next != nil {
 		return errcore.
-			ShouldBeNilMessage.
+			ShouldBeNilType.
 			Error("CurrentNode.next", nil)
 	}
 
@@ -446,7 +446,7 @@ func (it *LinkedList) RemoveNodeByElementValue(
 ) *LinkedList {
 	if !isIgnorePanic && it.IsEmpty() {
 		errcore.
-			CannotRemoveIndexesFromEmptyCollection.
+			CannotRemoveIndexesFromEmptyCollectionType.
 			HandleUsingPanic("element cannot be removed from empty linkedlist.", element)
 	}
 
@@ -480,7 +480,7 @@ func (it *LinkedList) RemoveNodeByIndex(
 ) *LinkedList {
 	if removingIndex < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"removeIndex was less than 0.",
 				removingIndex)
@@ -533,7 +533,7 @@ func (it *LinkedList) RemoveNodeByIndexes(
 
 	if !isIgnorePanic && it.IsEmpty() && length > 0 {
 		errcore.
-			CannotRemoveIndexesFromEmptyCollection.
+			CannotRemoveIndexesFromEmptyCollectionType.
 			HandleUsingPanic("removingIndexes cannot be removed from empty linkedlist.", removingIndexes)
 	}
 
@@ -611,7 +611,7 @@ func (it *LinkedList) RemoveNode(
 
 	if it.IsEmpty() {
 		errcore.
-			CannotRemoveIndexesFromEmptyCollection.
+			CannotRemoveIndexesFromEmptyCollectionType.
 			HandleUsingPanic("removingNode cannot be removed from empty linkedlist.", removingNode.String())
 	}
 
@@ -651,7 +651,7 @@ func (it *LinkedList) AddStringsPtrToNode(
 
 	if node == nil {
 		errcore.
-			CannotBeNilMessage.
+			CannotBeNilType.
 			HandleUsingPanic(
 				"node cannot be nil.",
 				nil)
@@ -746,7 +746,7 @@ func (it *LinkedList) IndexAt(index int) *LinkedListNode {
 	}
 
 	if length == 0 || length-1 < index {
-		errcore.OutOfRange.HandleUsingPanic(
+		errcore.OutOfRangeType.HandleUsingPanic(
 			"Given index is out of range. Whereas length:",
 			length)
 	}

@@ -787,7 +787,7 @@ func (it *Collection) First() string {
 func (it *Collection) Single() string {
 	length := it.Length()
 	if length != 1 {
-		errcore.LengthShouldBeEqualToMessage.HandleUsingPanic(
+		errcore.LengthShouldBeEqualToType.HandleUsingPanic(
 			"1",
 			length)
 	}
@@ -848,7 +848,7 @@ func (it *Collection) Skip(
 
 	if length < skip {
 		errcore.
-			LengthShouldBeEqualToMessage.
+			LengthShouldBeEqualToType.
 			HandleUsingPanic(
 				"Length is lower than skip value. Skip:",
 				skip)
@@ -957,7 +957,7 @@ func (it *Collection) GetSinglePageCollection(
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				pageIndex)
@@ -1092,7 +1092,7 @@ func (it *Collection) RemoveItemsIndexesPtr(
 	hasPossibleError := length == 0 && indexesLength > 0
 
 	if hasPossibleError && !isIgnoreRemoveError {
-		panic(errcore.CannotRemoveIndexesFromEmptyCollection)
+		panic(errcore.CannotRemoveIndexesFromEmptyCollectionType)
 	}
 
 	if !isIgnoreRemoveError {
@@ -2128,12 +2128,6 @@ func (it *Collection) StringLock() string {
 		strings.Join(
 			it.items,
 			commonJoiner)
-}
-
-func (it *Collection) Join(
-	separator string,
-) string {
-	return strings.Join(it.items, separator)
 }
 
 func (it *Collection) AddCapacity(

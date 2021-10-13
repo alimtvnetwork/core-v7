@@ -15,7 +15,7 @@ func ParseRwxOwnerGroupOtherToFileMode(
 
 	if err != nil {
 		return 0, errcore.MeaningfulErrorWithData(
-			errcore.FailedToConvert,
+			errcore.FailedToConvertType,
 			"ParseRwxOwnerGroupOtherToFileMode",
 			err,
 			rwxOwnerGroupOther)

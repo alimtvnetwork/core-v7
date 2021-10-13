@@ -1,6 +1,9 @@
 package coreversion
 
-import "gitlab.com/evatix-go/core/corecomparator"
+import (
+	"gitlab.com/evatix-go/core/corecmp"
+	"gitlab.com/evatix-go/core/corecomparator"
+)
 
 func Compare(
 	left,
@@ -12,7 +15,7 @@ func Compare(
 		return compare
 	}
 
-	majorVersionCompare := corecomparator.Integer(
+	majorVersionCompare := corecmp.Integer(
 		left.VersionMajor,
 		right.VersionMajor)
 
@@ -21,7 +24,7 @@ func Compare(
 	}
 
 	// proceed only on equal
-	minorVersionCompare := corecomparator.Integer(
+	minorVersionCompare := corecmp.Integer(
 		left.VersionMinor,
 		right.VersionMinor)
 
@@ -29,7 +32,7 @@ func Compare(
 		return minorVersionCompare
 	}
 
-	patchVersionCompare := corecomparator.Integer(
+	patchVersionCompare := corecmp.Integer(
 		left.VersionPatch,
 		right.VersionPatch,
 	)

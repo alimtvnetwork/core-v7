@@ -27,7 +27,7 @@ func newNumberEnumBase(
 ) *numberEnumBase {
 	if stringRanges == nil {
 		errcore.MeaningfulErrorHandle(
-			errcore.CannotBeNilMessage,
+			errcore.CannotBeNilType,
 			"newNumberEnumBase",
 			errors.New("StringRanges cannot be nil"))
 	}
@@ -63,6 +63,39 @@ func (it *numberEnumBase) TypeName() string {
 	return it.typeName
 }
 
+// NameWithValueOption
+//
+// Warning :
+//
+// Make sure non ptr is called +
+// String should also be attached with non ptr.
+func (it *numberEnumBase) NameWithValueOption(value interface{}, isIncludeQuotation bool) string {
+	if isIncludeQuotation {
+		return fmt.Sprintf(
+			constants.DoubleQuoteStringWithBracketWrapNumberFormat,
+			value,
+			value)
+	}
+
+	return fmt.Sprintf(
+		constants.StringWithBracketWrapNumberFormat,
+		value,
+		value)
+}
+
+// NameWithValue
+//
+// Warning :
+//
+// Make sure non ptr is called +
+// String should also be attached with non ptr.
+func (it *numberEnumBase) NameWithValue(value interface{}) string {
+	return fmt.Sprintf(
+		constants.StringWithBracketWrapNumberFormat,
+		value,
+		value)
+}
+
 func (it *numberEnumBase) RangeNamesCsv() string {
 	return it.rangesCsvString.Value()
 }
@@ -83,11 +116,7 @@ func (it *numberEnumBase) StringRanges() []string {
 	return it.stringRanges
 }
 
-func (it *numberEnumBase) StringJson(input interface{}) (jsonString string, err error) {
-	return it.ToEnumString(input), nil
-}
-
-func (it *numberEnumBase) StringJsonMust(input interface{}) string {
+func (it *numberEnumBase) JsonString(input interface{}) string {
 	return it.ToEnumString(input)
 }
 

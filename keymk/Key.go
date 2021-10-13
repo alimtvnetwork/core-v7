@@ -43,7 +43,7 @@ func (it *Key) Length() int {
 func (it *Key) AppendChain(items ...interface{}) *Key {
 	if it.IsComplete() {
 		// panic
-		errcore.CannotModifyCompleteResource.HandleUsingPanic(
+		errcore.CannotModifyCompleteResourceType.HandleUsingPanic(
 			cannotModifyErrorMessage,
 			items)
 	}
@@ -111,7 +111,7 @@ func (it *Key) AppendChainStrings(
 ) *Key {
 	if it.IsComplete() {
 		// panic
-		errcore.CannotModifyCompleteResource.HandleUsingPanic(
+		errcore.CannotModifyCompleteResourceType.HandleUsingPanic(
 			cannotModifyErrorMessage,
 			items)
 	}

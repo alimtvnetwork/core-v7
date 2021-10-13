@@ -13,7 +13,7 @@ func RefToError(reference interface{}) error {
 	}
 
 	return errors.New(fmt.Sprintf(
-		constants.ReferenceWrap,
+		constants.ReferenceWrapFormat,
 		reference),
 	)
 }

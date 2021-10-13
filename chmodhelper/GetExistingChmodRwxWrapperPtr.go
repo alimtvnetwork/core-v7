@@ -12,7 +12,7 @@ func GetExistingChmodRwxWrapperPtr(
 	fileInfo, err := os.Stat(filePath)
 
 	if err != nil {
-		return nil, errcore.PathErrorMessage.
+		return nil, errcore.PathErrorType.
 			Error(err.Error(), ", file:"+filePath)
 	}
 

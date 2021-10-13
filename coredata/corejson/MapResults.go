@@ -93,7 +93,7 @@ func (it *MapResults) AllErrors() (
 			hasAnyError = true
 			errList = append(
 				errList,
-				errors.New(key+constants.HypenAngelRight+err.Error()))
+				errors.New(key+constants.HyphenAngelRight+err.Error()))
 		}
 	}
 
@@ -118,7 +118,7 @@ func (it *MapResults) GetErrorsStrings() []string {
 
 		errStrList = append(
 			errStrList,
-			key+constants.HypenAngelRight+result.Error.Error())
+			key+constants.HyphenAngelRight+result.Error.Error())
 	}
 
 	return errStrList
@@ -152,13 +152,13 @@ func (it *MapResults) UnmarshalAt(
 
 	if has {
 		return errcore.
-			KeyNotExistInMap.
+			KeyNotExistInMapType.
 			Error("Given key not found!", key)
 	}
 
 	if result.IsEmptyJsonBytes() {
 		return errcore.
-			EmptyResultCannotMakeJson.
+			EmptyResultCannotMakeJsonType.
 			Error("Cannot make json of empty bytes!", key)
 	}
 
@@ -262,8 +262,8 @@ func (it *MapResults) AddAny(
 	item interface{},
 ) error {
 	if item == nil {
-		return errcore.MarshallingFailed.Error(
-			errcore.CannotBeNilMessage.String(),
+		return errcore.MarshallingFailedType.Error(
+			errcore.CannotBeNilType.String(),
 			key)
 	}
 
@@ -669,7 +669,7 @@ func (it *MapResults) GetSinglePageCollection(
 			"AllKeysLength", len(allKeys))
 
 		errcore.
-			LengthShouldBeEqualToMessage.
+			LengthShouldBeEqualToType.
 			HandleUsingPanic(
 				"allKeys length should be exact same as the map length, "+
 					"use AllKeys method to get the keys.",
@@ -684,7 +684,7 @@ func (it *MapResults) GetSinglePageCollection(
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				pageIndex)
@@ -718,7 +718,7 @@ func (it *MapResults) GetNewMapUsingKeys(
 
 		if isPanicOnMissing && !has {
 			errcore.
-				KeyNotExistInMap.
+				KeyNotExistInMapType.
 				HandleUsingPanic(
 					"given key is not found in the map, key ="+key,
 					it.AllKeys())
@@ -810,6 +810,10 @@ func (it *MapResults) ParseInjectUsingJsonMust(
 	}
 
 	return resultCollection
+}
+
+func (it *MapResults) AsJsonContractsBinder() JsonContractsBinder {
+	return it
 }
 
 func (it *MapResults) AsJsoner() Jsoner {

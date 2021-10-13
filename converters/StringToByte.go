@@ -9,7 +9,7 @@ import (
 
 func StringToByte(input string) (byte, error) {
 	if input == "" {
-		return 0, errcore.FailedToConvert.
+		return 0, errcore.FailedToConvertType.
 			Error(errcore.CannotConvertStringToByte, input)
 	}
 
@@ -28,12 +28,12 @@ func StringToByte(input string) (byte, error) {
 	}
 
 	if vInt < 0 {
-		return 0, errcore.FailedToConvert.
+		return 0, errcore.FailedToConvertType.
 			Error(errcore.CannotConvertStringToByteForLessThanZero, input)
 	}
 
 	if vInt > constants.MaxUnit8AsInt {
-		return 0, errcore.FailedToConvert.
+		return 0, errcore.FailedToConvertType.
 			Error(errcore.CannotConvertStringToByteForMoreThan255, input)
 	}
 

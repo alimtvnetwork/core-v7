@@ -5,9 +5,9 @@ import (
 )
 
 // NewLock calls New with mutex lock and unlock.
-func NewLock(regularExpressionSyntax string) (*regexp.Regexp, error) {
+func NewLock(regularExpressionPattern string) (*regexp.Regexp, error) {
 	regexMutex.Lock()
 	defer regexMutex.Unlock()
 
-	return New(regularExpressionSyntax)
+	return New(regularExpressionPattern)
 }

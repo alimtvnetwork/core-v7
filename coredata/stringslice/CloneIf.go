@@ -1,5 +1,7 @@
 package stringslice
 
+import "strings"
+
 func CloneIf(
 	isClone bool,
 	additionalCap int,
@@ -14,4 +16,12 @@ func CloneIf(
 	}
 
 	return CloneUsingCap(additionalCap, slice)
+}
+
+func JoinWith(joiner string, items ...string) string {
+	if len(items) == 0 {
+		return ""
+	}
+
+	return joiner + strings.Join(items, joiner)
 }

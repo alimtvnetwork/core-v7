@@ -23,6 +23,10 @@ func (it *Variant) Name() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
+func (it Variant) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
+}
+
 func (it *Variant) ToNumberString() string {
 	return BasicEnumImpl.ToNumberString(it.ValueByte())
 }
@@ -95,7 +99,7 @@ func (it *Variant) UnmarshallEnumToValue(
 		jsonUnmarshallingValue)
 }
 
-func (it *Variant) String() string {
+func (it Variant) String() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 

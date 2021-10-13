@@ -73,7 +73,7 @@ func (receiver *SimpleRequest) GetErrorOnTypeMismatch(
 	}
 
 	typeMismatchMessage := errcore.CombineWithMsgType(
-		errcore.TypeMismatch,
+		errcore.TypeMismatchType,
 		"Current type - ["+receiver.ReflectTypeName()+"], expected type",
 		typeMatch) + constants.NewLineUnix
 

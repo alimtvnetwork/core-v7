@@ -345,7 +345,7 @@ func (it *SliceValidator) lengthVerifyError(
 
 	var comparingLengthError error
 	if hasLengthUpto && lengthUpto > comparingLength {
-		comparingLengthError = errcore.OutOfRangeLength.Error(
+		comparingLengthError = errcore.OutOfRangeLengthType.Error(
 			"Asked comparingLength is out of range!",
 			comparingLength,
 		)
@@ -359,7 +359,7 @@ func (it *SliceValidator) lengthVerifyError(
 
 	var inputLengthErr error
 	if it.ActualLinesLength() > 0 && comparingLength == 0 {
-		inputLengthErr = errcore.LengthIssue.Error(
+		inputLengthErr = errcore.LengthIssueType.Error(
 			"Input comparison has some text but comparing length is 0! Must set comparing text!",
 			comparingLength,
 		)

@@ -168,8 +168,8 @@ var (
 	UpperCaseRunePtr                     = &upperCaseRune
 	NoElementsPtr                        = &noElements
 	NoItemsPtr                           = &noItems
-	NoItemsSqaurePtr                     = &noItemsSqaure
-	NoElementsSqaurePtr                  = &noElementsSqaure
+	NoItemsSquarePtr                     = &noItemsSquare
+	NoElementsSquarePtr                  = &noElementsSquare
 	DoubleNewLinePtr                     = &doubleNewLine
 	FalseBoolPtr                         = &falseBool
 	TrueBoolPtr                          = &trueBool

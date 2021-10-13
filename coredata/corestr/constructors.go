@@ -221,7 +221,7 @@ func NewCollectionPtr(capacity int) *CollectionPtr {
 	collection := make([]*string, constants.Zero, capacity)
 
 	return &CollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -229,12 +229,12 @@ func EmptyCollectionPtr() *CollectionPtr {
 	collection := make([]*string, constants.Zero)
 
 	return &CollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 
 func NewCollectionPtrUsingPointerStrings(
-	stringItems *[]*string,
+	stringItems []*string,
 	addCapacity int,
 ) *CollectionPtr {
 	if addCapacity == 0 {
@@ -247,11 +247,11 @@ func NewCollectionPtrUsingPointerStrings(
 		return NewCollectionPtr(addCapacity)
 	}
 
-	length := len(*stringItems)
+	length := len(stringItems)
 	collection := NewCollectionPtr(length + addCapacity)
 
 	return collection.
-		AddPointerStringsPtr(stringItems)
+		AddPointerStrings(stringItems...)
 }
 
 func NewCollectionPtrUsingStrings(
@@ -260,7 +260,7 @@ func NewCollectionPtrUsingStrings(
 ) *CollectionPtr {
 	if addCapacity == 0 {
 		return &CollectionPtr{
-			items: converters.StringsToPointerStrings(stringItems),
+			items: *converters.StringsToPointerStrings(stringItems),
 		}
 	}
 
@@ -279,7 +279,7 @@ func NewCollectionPtrUsingLength(length, capacity int) *CollectionPtr {
 	collection := make([]*string, length, capacity)
 
 	return &CollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -493,9 +493,10 @@ func NewHashmapUsingCollection(
 		values.ListPtr())
 
 	return NewHashmapUsingMap(
-		*itemsMap,
+		false,
 		constants.Zero,
-		false)
+		*itemsMap,
+	)
 }
 
 func NewHashmapUsingStrings(
@@ -510,17 +511,17 @@ func NewHashmapUsingStrings(
 		values)
 
 	return NewHashmapUsingMap(
-		*itemsMap,
+		false,
 		constants.Zero,
-		false)
+		*itemsMap)
 }
 
 // NewHashmapUsingMap
 // isMakeClone : copies itemsMap or else use the same one as pointer assign.
 func NewHashmapUsingMap(
-	itemsMap map[string]string,
-	addCapacity int,
 	isMakeClone bool,
+	addCapacity int,
+	itemsMap map[string]string,
 ) *Hashmap {
 	if len(itemsMap) == 0 {
 		return NewHashmap(defaultHashsetItems)
@@ -880,7 +881,7 @@ func NewCollectionsOfCollectionPtr(
 		capacity)
 
 	return &CollectionsOfCollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -888,7 +889,7 @@ func EmptyCollectionsOfCollectionPtr() *CollectionsOfCollectionPtr {
 	collection := make([]*CollectionPtr, constants.Zero)
 
 	return &CollectionsOfCollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -972,16 +973,15 @@ func NewCollectionsOfCollectionPtrUsingStringsPlusCapPtr(
 }
 
 func NewCollectionsOfCollectionPtrUsingPointerStringsPlusCap(
-	stringItems *[]*string,
 	capacity int,
+	stringItems ...*string,
 ) *CollectionsOfCollectionPtr {
-	length := LengthOfPointerStrings(
-		stringItems)
+	length := len(stringItems)
 	collection := NewCollectionsOfCollectionPtr(
 		length + capacity)
 
-	return collection.AddPointerStringsPtr(
-		stringItems)
+	return collection.AddPointerStrings(
+		stringItems...)
 }
 
 func NewCollectionsOfCollectionPtrUsingLength(
@@ -994,7 +994,7 @@ func NewCollectionsOfCollectionPtrUsingLength(
 		capacity)
 
 	return &CollectionsOfCollectionPtr{
-		items: &collection,
+		items: collection,
 	}
 }
 

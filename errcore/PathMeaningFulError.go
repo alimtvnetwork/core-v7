@@ -1,7 +1,7 @@
 package errcore
 
 func PathMeaningFulError(
-	msgType Variation,
+	rawErrType RawErrorType,
 	funcName string,
 	err error,
 	location string,
@@ -13,7 +13,7 @@ func PathMeaningFulError(
 	errMsg := err.Error() +
 		", location: [" + location + "]"
 
-	return msgType.Error(
+	return rawErrType.Error(
 		funcName,
 		errMsg)
 }

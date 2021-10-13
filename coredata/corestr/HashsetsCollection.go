@@ -341,6 +341,10 @@ func (it *HashsetsCollection) Join(
 		separator)
 }
 
+func (it *HashsetsCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *HashsetsCollection) AsJsoner() corejson.Jsoner {
 	return it
 }

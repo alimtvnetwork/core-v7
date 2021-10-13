@@ -18,7 +18,7 @@ func RwxPartialToInstructionExecutor(
 	condition *chmodins.Condition,
 ) (*RwxInstructionExecutor, error) {
 	if condition == nil {
-		return nil, errcore.CannotBeNilOrEmptyMessage.
+		return nil, errcore.CannotBeNilOrEmptyType.
 			ErrorNoRefs("condition")
 	}
 

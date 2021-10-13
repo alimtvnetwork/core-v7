@@ -47,7 +47,7 @@ func NewAttributeUsingRwx(rwx string) Attribute {
 func NewAttributeUsingByte(v byte) Attribute {
 	if ReadWriteExecute.IsGreaterThan(v) {
 		msg := errcore.
-			ShouldBeLessThanEqualMessage.
+			ShouldBeLessThanEqualType.
 			Combine(
 				"v byte should not be more than "+ReadWriteExecute.String(),
 				v)

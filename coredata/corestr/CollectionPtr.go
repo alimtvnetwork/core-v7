@@ -18,20 +18,20 @@ import (
 )
 
 type CollectionPtr struct {
-	items *[]*string
+	items []*string
 	sync.Mutex
 }
 
 func (it *CollectionPtr) Count() int {
-	return len(*it.items)
+	return it.Length()
 }
 
 func (it *CollectionPtr) HasAnyItem() bool {
-	return len(*it.items) > 0
+	return it.Length() > 0
 }
 
 func (it *CollectionPtr) LastIndex() int {
-	return len(*it.items) - 1
+	return it.Length() - 1
 }
 
 func (it *CollectionPtr) HasIndex(index int) bool {
@@ -65,26 +65,26 @@ func (it *CollectionPtr) Capacity() int {
 		return 0
 	}
 
-	return cap(*it.items)
+	return cap(it.items)
 }
 
 func (it *CollectionPtr) Length() int {
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 func (it *CollectionPtr) LengthLock() int {
 	it.Lock()
 	defer it.Unlock()
 
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 //goland:noinspection GoVetCopyLock
@@ -136,8 +136,8 @@ func (it *CollectionPtr) IsEqualsWithSensitivePtr(
 	rightItems := anotherCollectionPtr.items
 
 	if isCaseSensitive {
-		for i, leftVal := range *leftItems {
-			if leftVal != (*rightItems)[i] {
+		for i, leftVal := range leftItems {
+			if leftVal != rightItems[i] {
 				return false
 			}
 		}
@@ -145,8 +145,18 @@ func (it *CollectionPtr) IsEqualsWithSensitivePtr(
 		return true
 	}
 
-	for i, leftVal := range *leftItems {
-		if !strings.EqualFold(*leftVal, *(*rightItems)[i]) {
+	for i, leftVal := range leftItems {
+		rightVal := rightItems[i]
+
+		if leftVal == nil && rightVal == nil {
+			continue
+		}
+
+		if leftVal == nil || rightVal == nil {
+			return false
+		}
+
+		if !strings.EqualFold(*leftVal, *rightVal) {
 			return false
 		}
 	}
@@ -158,37 +168,31 @@ func (it *CollectionPtr) IsEmptyLock() bool {
 	it.Lock()
 	defer it.Unlock()
 
-	return it.items == nil ||
-		*it.items == nil ||
-		len(*it.items) == 0
+	return it.Length() == 0
 }
 
 func (it *CollectionPtr) IsEmpty() bool {
-	return it.items == nil ||
-		*it.items == nil ||
-		len(*it.items) == 0
+	return it.Length() == 0
 }
 
 func (it *CollectionPtr) HasItems() bool {
-	return it.items != nil &&
-		*it.items != nil &&
-		len(*it.items) > 0
+	return it.Length() > 0
 }
 
 func (it *CollectionPtr) AddLock(str string) *CollectionPtr {
 	it.Lock()
 	defer it.Unlock()
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		&str)
 
 	return it
 }
 
 func (it *CollectionPtr) Add(str string) *CollectionPtr {
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		&str)
 
 	return it
@@ -203,8 +207,8 @@ func (it *CollectionPtr) AddNonEmptyWhitespace(str string) *CollectionPtr {
 		return it
 	}
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		&str)
 
 	return it
@@ -215,8 +219,8 @@ func (it *CollectionPtr) AddIf(isAdd bool, addingStringPtr *string) *CollectionP
 		return it
 	}
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		addingStringPtr)
 
 	return it
@@ -230,16 +234,16 @@ func (it *CollectionPtr) AddIfMany(
 		return it
 	}
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		addingStrings...)
 
 	return it
 }
 
 func (it *CollectionPtr) AddFunc(f func() *string) *CollectionPtr {
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		f())
 
 	return it
@@ -257,8 +261,8 @@ func (it *CollectionPtr) AddFuncErr(
 		return it
 	}
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		r)
 
 	return it
@@ -269,8 +273,8 @@ func (it *CollectionPtr) AddsLock(items ...string) *CollectionPtr {
 	defer it.Unlock()
 
 	for i := range items {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&(items[i]))
 	}
 
@@ -279,8 +283,8 @@ func (it *CollectionPtr) AddsLock(items ...string) *CollectionPtr {
 
 func (it *CollectionPtr) Adds(items ...string) *CollectionPtr {
 	for i := range items {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&(items[i]))
 	}
 
@@ -301,8 +305,8 @@ func (it *CollectionPtr) AddHashmapsValues(
 
 		for _, v := range hashmap.items {
 			newV := v
-			*it.items = append(
-				*it.items,
+			it.items = append(
+				it.items,
 				&newV)
 		}
 	}
@@ -328,8 +332,8 @@ func (it *CollectionPtr) AddHashmapsKeys(
 
 		for k := range hashmap.items {
 			keyCopied := k
-			*it.items = append(
-				*it.items,
+			it.items = append(
+				it.items,
 				&keyCopied)
 		}
 	}
@@ -396,14 +400,14 @@ func (it *CollectionPtr) resizeForCollectionPtrs(
 }
 
 func (it *CollectionPtr) resizeForItems(
-	items *[]*string,
+	items []*string,
 	multiplier int,
 ) *CollectionPtr {
 	if items == nil {
 		return it
 	}
 
-	length := len(*items)
+	length := len(items)
 	if !it.isResizeRequired(length) {
 		return it
 	}
@@ -469,11 +473,11 @@ func (it *CollectionPtr) AddHashmapsKeysValues(
 		for k, v := range hashmap.items {
 			kc := k
 			vc := v
-			*it.items = append(
-				*it.items,
+			it.items = append(
+				it.items,
 				&kc)
-			*it.items = append(
-				*it.items,
+			it.items = append(
+				it.items,
 				&vc)
 		}
 	}
@@ -505,8 +509,8 @@ func (it *CollectionPtr) AddHashmapsKeysValuesUsingFilter(
 			})
 
 			if isAcceptable {
-				*it.items = append(
-					*it.items,
+				it.items = append(
+					it.items,
 					&result)
 			}
 
@@ -520,8 +524,8 @@ func (it *CollectionPtr) AddHashmapsKeysValuesUsingFilter(
 }
 
 func (it *CollectionPtr) AddPtr(str *string) *CollectionPtr {
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		str)
 
 	return it
@@ -531,8 +535,8 @@ func (it *CollectionPtr) AddPtrLock(str *string) *CollectionPtr {
 	it.Lock()
 	defer it.Unlock()
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		str)
 
 	return it
@@ -545,8 +549,8 @@ func (it *CollectionPtr) AddWithWgLock(
 	it.Lock()
 	defer it.Unlock()
 
-	*it.items = append(
-		*it.items,
+	it.items = append(
+		it.items,
 		&str)
 
 	group.Done()
@@ -559,8 +563,8 @@ func (it *CollectionPtr) AddsPtrLock(itemsPtr ...*string) *CollectionPtr {
 	defer it.Unlock()
 
 	for _, str := range itemsPtr {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			str)
 	}
 
@@ -582,8 +586,8 @@ func (it *CollectionPtr) AddStringsPtrWgLock(
 
 func (it *CollectionPtr) AddStringsPtr(stringItems *[]string) *CollectionPtr {
 	for i := range *stringItems {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&(*stringItems)[i])
 	}
 
@@ -603,22 +607,22 @@ func (it *CollectionPtr) InsertItemsAt(index int, stringItems *[]string) *Collec
 	pointerStrings := converters.StringsToPointerStrings(stringItems)
 
 	// https://bit.ly/3pIDfRY
-	*it.items =
+	it.items =
 		append(
-			(*it.items)[:index],
+			it.items[:index],
 			*pointerStrings...)
 
-	*it.items = append(
-		*it.items,
-		(*it.items)[index:]...)
+	it.items = append(
+		it.items,
+		it.items[index:]...)
 
 	return it
 }
 
 func (it *CollectionPtr) ChainRemoveAt(index int) *CollectionPtr {
-	*it.items = append(
-		(*it.items)[:index],
-		(*it.items)[index+1:]...)
+	it.items = append(
+		it.items[:index],
+		it.items[index+1:]...)
 
 	return it
 }
@@ -650,7 +654,7 @@ func (it *CollectionPtr) RemoveItemsIndexesPtr(
 	hasPossibleError := length == 0 && indexesLength > 0
 
 	if hasPossibleError && !isIgnoreRemoveError {
-		panic(errcore.CannotRemoveIndexesFromEmptyCollection)
+		panic(errcore.CannotRemoveIndexesFromEmptyCollectionType)
 	}
 
 	if !isIgnoreRemoveError {
@@ -662,7 +666,7 @@ func (it *CollectionPtr) RemoveItemsIndexesPtr(
 	}
 
 	newList := make([]*string, constants.Zero, it.Capacity())
-	for i, s := range *it.items {
+	for i, s := range it.items {
 		if coreindexes.HasIndex(indexes, i) {
 			continue
 		}
@@ -670,28 +674,28 @@ func (it *CollectionPtr) RemoveItemsIndexesPtr(
 		newList = append(newList, s)
 	}
 
-	it.items = &newList
+	it.items = newList
 
 	return it
 }
 
 func (it *CollectionPtr) AddPointerStringsPtrLock(
-	pointerStringItems *[]*string,
+	pointerStringItems []*string,
 ) *CollectionPtr {
 	it.Lock()
 	defer it.Unlock()
 
 	return it.
-		AddPointerStringsPtr(pointerStringItems)
+		AddPointerStrings(pointerStringItems...)
 }
 
-func (it *CollectionPtr) AddPointerStringsPtr(
-	pointerStringItems *[]*string,
+func (it *CollectionPtr) AddPointerStrings(
+	pointerStringItems ...*string,
 ) *CollectionPtr {
-	for i := range *pointerStringItems {
-		*it.items = append(
-			*it.items,
-			(*pointerStringItems)[i])
+	for i := range pointerStringItems {
+		it.items = append(
+			it.items,
+			pointerStringItems[i])
 	}
 
 	return it
@@ -705,9 +709,9 @@ func (it *CollectionPtr) AppendCollectionPtr(
 		anotherCollectionPtr.items,
 		constants.One)
 
-	*it.items = append(
-		*it.items,
-		*anotherCollectionPtr.items...)
+	it.items = append(
+		it.items,
+		anotherCollectionPtr.items...)
 
 	return it
 }
@@ -719,9 +723,9 @@ func (it *CollectionPtr) AppendCollectionPtrPtr(
 		anotherCollectionPtr.items,
 		constants.One)
 
-	*it.items = append(
-		*it.items,
-		*anotherCollectionPtr.items...)
+	it.items = append(
+		it.items,
+		anotherCollectionPtr.items...)
 
 	return it
 }
@@ -753,9 +757,9 @@ func (it *CollectionPtr) AppendCollectionPtrsPtr(
 			continue
 		}
 
-		*it.items = append(
-			*it.items,
-			*currentCollectionPtr.items...)
+		it.items = append(
+			it.items,
+			currentCollectionPtr.items...)
 	}
 
 	return it
@@ -781,8 +785,8 @@ func (it *CollectionPtr) AppendAnysLock(
 		anyStr := fmt.Sprintf(constants.SprintValueFormat, any)
 
 		it.Lock()
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&anyStr)
 		it.Unlock()
 	}
@@ -812,8 +816,8 @@ func (it *CollectionPtr) AppendAnys(
 			any,
 		)
 
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&anyStr)
 	}
 
@@ -848,8 +852,8 @@ func (it *CollectionPtr) AppendAnysUsingFilter(
 			continue
 		}
 
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&result)
 
 		if isBreak {
@@ -886,8 +890,8 @@ func (it *CollectionPtr) AppendAnysUsingFilterLock(
 		}
 
 		it.Lock()
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&result)
 		it.Unlock()
 
@@ -921,8 +925,8 @@ func (it *CollectionPtr) AppendNonEmptyAnys(
 			continue
 		}
 
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			&anyStr)
 	}
 
@@ -938,8 +942,8 @@ func (it *CollectionPtr) AddsPtr(
 	}
 
 	for _, str := range itemsPtr {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			str)
 	}
 
@@ -958,8 +962,8 @@ func (it *CollectionPtr) AddsNonEmptyPtr(
 			continue
 		}
 
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			str)
 	}
 
@@ -979,8 +983,8 @@ func (it *CollectionPtr) AddsNonEmptyPtrLock(
 		}
 
 		it.Lock()
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			str)
 		it.Unlock()
 	}
@@ -1005,7 +1009,7 @@ func (it *CollectionPtr) UniqueBoolMap(
 		map[string]bool,
 		it.Length())
 
-	for _, item := range *it.items {
+	for _, item := range it.items {
 		if item == nil && !isAddEmptyStringOnNil {
 			continue
 		} else if item == nil && isAddEmptyStringOnNil {
@@ -1061,7 +1065,24 @@ func (it *CollectionPtr) UniqueList(
 }
 
 func (it *CollectionPtr) List() []*string {
-	return *it.items
+	return it.items
+}
+
+// ListCopyPtrLock returns a copy of the items
+//
+// must return a slice
+func (it *CollectionPtr) ListCopyPtrLock() []*string {
+	it.Lock()
+	defer it.Unlock()
+
+	if it.IsEmpty() {
+		return []*string{}
+	}
+
+	newSlice := make([]*string, it.Length())
+	copy(newSlice, it.items)
+
+	return newSlice
 }
 
 // FilterSimpleArray must return a slice
@@ -1074,7 +1095,7 @@ func (it *CollectionPtr) FilterSimpleArray(
 
 	list := make([]string, constants.Zero, it.Length())
 
-	for i, element := range *it.items {
+	for i, element := range it.items {
 		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep && result != nil {
@@ -1097,14 +1118,14 @@ func (it *CollectionPtr) FilterSimpleArrayLock(
 	wg *sync.WaitGroup,
 ) *[]string {
 	copyList := it.ListCopyPtrLock()
-	length := len(*copyList)
+	length := len(copyList)
 	if length == 0 {
 		return &([]string{})
 	}
 
 	list := make([]string, constants.Zero, length)
 
-	for i, element := range *it.items {
+	for i, element := range it.items {
 		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep && result != nil {
@@ -1131,7 +1152,7 @@ func (it *CollectionPtr) Filter(
 
 	list := make([]*string, constants.Zero, it.Length())
 
-	for i, element := range *it.items {
+	for i, element := range it.items {
 		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep {
@@ -1149,9 +1170,9 @@ func (it *CollectionPtr) Filter(
 // FilterLock must return a slice
 func (it *CollectionPtr) FilterLock(
 	filter IsStringPointerFilter,
-) *[]*string {
+) []*string {
 	elements := it.ListCopyPtrLock()
-	length := len(*elements)
+	length := len(elements)
 
 	if length == 0 {
 		return elements
@@ -1159,7 +1180,7 @@ func (it *CollectionPtr) FilterLock(
 
 	list := make([]*string, constants.Zero, length)
 
-	for i, element := range *elements {
+	for i, element := range elements {
 		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep {
@@ -1167,11 +1188,11 @@ func (it *CollectionPtr) FilterLock(
 		}
 
 		if isBreak {
-			return &list
+			return list
 		}
 	}
 
-	return &list
+	return list
 }
 
 // FilteredCollection must return a items
@@ -1199,12 +1220,12 @@ func (it *CollectionPtr) FilteredCollectionLock(
 // FilterPtrLock must return a slice
 func (it *CollectionPtr) FilterPtrLock(
 	filterPtr IsStringPointerFilter,
-) *[]*string {
+) []*string {
 	elements := it.ListCopyPtrLock()
-	length := len(*elements)
+	length := len(elements)
 
 	if length == 0 {
-		return &([]*string{})
+		return []*string{}
 	}
 
 	list := make(
@@ -1212,7 +1233,7 @@ func (it *CollectionPtr) FilterPtrLock(
 		constants.Zero,
 		length)
 
-	for i, element := range *elements {
+	for i, element := range elements {
 		result, isKeep, isBreak :=
 			filterPtr(element, i)
 
@@ -1223,24 +1244,24 @@ func (it *CollectionPtr) FilterPtrLock(
 		}
 
 		if isBreak {
-			return &list
+			return list
 		}
 	}
 
-	return &list
+	return list
 }
 
 // FilterPtr must return a slice
 func (it *CollectionPtr) FilterPtr(
 	filterPtr IsStringPointerFilter,
-) *[]*string {
+) []*string {
 	if it.IsEmpty() {
-		return &([]*string{})
+		return []*string{}
 	}
 
 	list := make([]*string, constants.Zero, it.Length())
 
-	for i, element := range *it.items {
+	for i, element := range it.items {
 		result, isKeep, isBreak := filterPtr(element, i)
 
 		if isKeep {
@@ -1248,14 +1269,16 @@ func (it *CollectionPtr) FilterPtr(
 		}
 
 		if isBreak {
-			return &list
+			return list
 		}
 	}
 
-	return &list
+	return list
 }
 
-// GetAllExceptCollection Get all items except the mentioned ones in itemsCollection.
+// GetAllExceptCollection
+//
+// Get all items except the mentioned ones in itemsCollection.
 // Always returns a copy of new strings.
 // It is like set A - B
 // Set A = this collection
@@ -1264,7 +1287,7 @@ func (it *CollectionPtr) GetAllExceptCollection(
 	itemsCollection *CollectionPtr,
 ) *[]*string {
 	if itemsCollection == nil || itemsCollection.IsEmpty() {
-		newItems := *it.items
+		newItems := it.items
 
 		return &newItems
 	}
@@ -1274,7 +1297,7 @@ func (it *CollectionPtr) GetAllExceptCollection(
 		constants.Zero,
 		it.Length())
 
-	for _, item := range *it.items {
+	for _, item := range it.items {
 		if itemsCollection.HasPtr(item) {
 			continue
 		}
@@ -1293,10 +1316,10 @@ func (it *CollectionPtr) GetAllExceptCollection(
 // Set A = this collection
 // Set B = items given in parameters.
 func (it *CollectionPtr) GetAllExcept(
-	items *[]*string,
+	items []*string,
 ) *[]*string {
 	if items == nil {
-		newItems := *it.items
+		newItems := it.items
 
 		return &newItems
 	}
@@ -1316,7 +1339,7 @@ func (it *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 
 	list := make([]string, constants.Zero, it.Length())
 
-	for _, element := range *it.items {
+	for _, element := range it.items {
 		if element == nil || *element == "" {
 			continue
 		}
@@ -1328,62 +1351,64 @@ func (it *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 }
 
 func (it *CollectionPtr) HashsetAsIs() *Hashset {
+	if it.IsEmpty() {
+		return EmptyHashset()
+	}
+
 	return NewHashsetUsingStringPointersArray(
-		it.items,
+		&it.items,
 		constants.Zero,
 		true)
 }
 
 func (it *CollectionPtr) HashsetDoubleLength() *Hashset {
+	if it.IsEmpty() {
+		return EmptyHashset()
+	}
+
 	return NewHashsetUsingStringPointersArray(
-		it.items,
+		&it.items,
 		it.Length(),
 		true)
 }
 
 func (it *CollectionPtr) HashsetLock() *Hashset {
+	items := it.ListCopyPtrLock()
+
 	return NewHashsetUsingStringPointersArray(
-		it.ListCopyPtrLock(),
+		&items,
 		constants.ArbitraryCapacity100,
 		false)
 }
 
 func (it *CollectionPtr) SimpleList() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
 	return *converters.PointerStringsToStrings(
-		it.items)
+		&it.items)
 }
 
 func (it *CollectionPtr) SimpleListPtr() *[]string {
+	if it.IsEmpty() {
+		return &[]string{}
+	}
+
 	return converters.PointerStringsToStrings(
-		it.items)
+		&it.items)
 }
 
 func (it *CollectionPtr) SimpleListPtrLock() *[]string {
 	it.Lock()
 	defer it.Unlock()
 
-	return converters.PointerStringsToStrings(
-		it.items)
+	return it.SimpleListPtr()
 }
 
 // ListPtr direct return pointer
-func (it *CollectionPtr) ListPtr() *[]*string {
+func (it *CollectionPtr) ListPtr() []*string {
 	return it.items
-}
-
-// ListCopyPtrLock returns a copy of the items
-//
-// must return a slice
-func (it *CollectionPtr) ListCopyPtrLock() *[]*string {
-	it.Lock()
-	defer it.Unlock()
-
-	if it.items == nil ||
-		*it.items == nil {
-		return &([]*string{})
-	}
-
-	return &(*it.items)
 }
 
 func (it *CollectionPtr) HasLock(str string) bool {
@@ -1398,7 +1423,7 @@ func (it *CollectionPtr) Has(str string) bool {
 		return false
 	}
 
-	for _, element := range *it.items {
+	for _, element := range it.items {
 		if element == nil {
 			continue
 		}
@@ -1416,7 +1441,7 @@ func (it *CollectionPtr) HasPtr(str *string) bool {
 		return false
 	}
 
-	for _, element := range *it.items {
+	for _, element := range it.items {
 		if element == nil && str == nil {
 			return true
 		}
@@ -1444,7 +1469,7 @@ func (it *CollectionPtr) HasUsingSensitivity(
 		return it.Has(str)
 	}
 
-	for _, element := range *it.items {
+	for _, element := range it.items {
 		if element == nil {
 			continue
 		}
@@ -1474,22 +1499,22 @@ func (it *CollectionPtr) HasAll(
 }
 
 func (it *CollectionPtr) First() string {
-	return *(*it.items)[0]
+	return *it.items[0]
 }
 
 func (it *CollectionPtr) Single() string {
 	length := it.Length()
 	if length != 1 {
-		errcore.LengthShouldBeEqualToMessage.HandleUsingPanic("1", length)
+		errcore.LengthShouldBeEqualToType.HandleUsingPanic("1", length)
 	}
 
-	return *(*it.items)[0]
+	return *it.items[0]
 }
 
 func (it *CollectionPtr) Last() string {
 	length := it.Length()
 
-	return *(*it.items)[length-1]
+	return *it.items[length-1]
 }
 
 func (it *CollectionPtr) LastOrDefault() string {
@@ -1499,7 +1524,7 @@ func (it *CollectionPtr) LastOrDefault() string {
 		return constants.EmptyString
 	}
 
-	return *(*it.items)[length-1]
+	return *it.items[length-1]
 }
 
 func (it *CollectionPtr) FirstOrDefault() string {
@@ -1507,7 +1532,7 @@ func (it *CollectionPtr) FirstOrDefault() string {
 		return constants.EmptyString
 	}
 
-	return *(*it.items)[0]
+	return *it.items[0]
 }
 
 // Take use One based index
@@ -1524,10 +1549,10 @@ func (it *CollectionPtr) Take(
 		return EmptyCollectionPtr()
 	}
 
-	list := (*it.items)[:take]
+	list := it.items[:take]
 
 	return NewCollectionPtrUsingPointerStrings(
-		&list,
+		list,
 		constants.Zero)
 }
 
@@ -1539,7 +1564,7 @@ func (it *CollectionPtr) Skip(
 
 	if length < skip {
 		errcore.
-			LengthShouldBeEqualToMessage.
+			LengthShouldBeEqualToType.
 			HandleUsingPanic(
 				"Length is lower than skip value. Skip:",
 				skip)
@@ -1549,10 +1574,10 @@ func (it *CollectionPtr) Skip(
 		return it
 	}
 
-	list := (*it.items)[skip:]
+	list := it.items[skip:]
 
 	return NewCollectionPtrUsingPointerStrings(
-		&list,
+		list,
 		constants.Zero)
 }
 
@@ -1574,8 +1599,9 @@ func (it *CollectionPtr) GetPagedCollection(
 
 	if length < eachPageSize {
 		return NewCollectionsOfCollectionPtrUsingPointerStringsPlusCap(
-			it.items,
-			constants.Zero)
+			constants.Zero,
+			it.items...,
+		)
 	}
 
 	pagesPossibleFloat := float64(length) / float64(eachPageSize)
@@ -1613,7 +1639,7 @@ func (it *CollectionPtr) GetSinglePageCollection(
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				pageIndex)
@@ -1625,17 +1651,17 @@ func (it *CollectionPtr) GetSinglePageCollection(
 		endingIndex = length
 	}
 
-	list := (*it.items)[skipItems:endingIndex]
+	list := it.items[skipItems:endingIndex]
 
 	return NewCollectionPtrUsingPointerStrings(
-		&list,
+		list,
 		constants.Zero)
 }
 
 func (it *CollectionPtr) IndexAt(
 	index int,
 ) string {
-	return *(*it.items)[index]
+	return *it.items[index]
 }
 
 func (it *CollectionPtr) SafePointerIndexAt(
@@ -1646,7 +1672,7 @@ func (it *CollectionPtr) SafePointerIndexAt(
 		return nil
 	}
 
-	return (*it.items)[index]
+	return it.items[index]
 }
 
 func (it *CollectionPtr) SafePointerIndexAtUsingLength(
@@ -1656,7 +1682,7 @@ func (it *CollectionPtr) SafePointerIndexAtUsingLength(
 		return nil
 	}
 
-	return (*it.items)[index]
+	return it.items[index]
 }
 
 func (it *CollectionPtr) SafeIndexAtUsingLength(
@@ -1666,7 +1692,7 @@ func (it *CollectionPtr) SafeIndexAtUsingLength(
 		return defaultString
 	}
 
-	pointer := (*it.items)[index]
+	pointer := it.items[index]
 
 	if pointer == nil {
 		return defaultString
@@ -1693,7 +1719,7 @@ func (it *CollectionPtr) SortedAsc() *CollectionPtr {
 		return it
 	}
 
-	strsort.QuickPtr(it.items)
+	strsort.QuickPtr(&it.items)
 
 	return it
 }
@@ -1707,7 +1733,7 @@ func (it *CollectionPtr) SortedAscLock() *CollectionPtr {
 	it.Lock()
 	defer it.Unlock()
 
-	strsort.QuickPtr(it.items)
+	strsort.QuickPtr(&it.items)
 
 	return it
 }
@@ -1730,13 +1756,13 @@ func (it *CollectionPtr) SortedListDsc() *[]string {
 // SortedDsc mutates itself.
 func (it *CollectionPtr) SortedDsc() *CollectionPtr {
 	list := it.items
-	length := len(*list)
+	length := len(list)
 	mid := length / 2
 
 	for i := 0; i < mid; i++ {
-		temp := (*list)[i]
-		(*list)[i] = (*list)[length-1-i]
-		(*list)[length-1-i] = temp
+		temp := list[i]
+		list[i] = list[length-1-i]
+		list[length-1-i] = temp
 	}
 
 	return it
@@ -1749,7 +1775,7 @@ func (it *CollectionPtr) IsContainsPtr(
 		return false
 	}
 
-	for _, element := range *it.items {
+	for _, element := range it.items {
 		if element == nil {
 			continue
 		}
@@ -1807,7 +1833,9 @@ func (it *CollectionPtr) IsContainsAll(
 	return it.IsContainsAllPtr(&items)
 }
 
-// IsContainsAllLock IsContainsAllLock nil will return false.
+// IsContainsAllLock
+//
+// nil will return false.
 func (it *CollectionPtr) IsContainsAllLock(
 	items ...string,
 ) bool {
@@ -1828,7 +1856,7 @@ func (it *CollectionPtr) CharCollectionPtrMap() *CharCollectionMap {
 		length,
 		lengthByFourBestGuess)
 
-	for _, item := range *it.items {
+	for _, item := range it.items {
 		runeMap.AddStringPtr(item)
 	}
 
@@ -1882,12 +1910,24 @@ func (it *CollectionPtr) StringLock() string {
 			commonJoiner)
 }
 
-func (it *CollectionPtr) Join(
-	separator string,
+func (it *Collection) Join(
+	joiner string,
 ) string {
-	return strings.Join(
-		*it.SimpleListPtr(),
-		separator)
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return strings.Join(it.items, joiner)
+}
+
+func (it *Collection) JoinWith(
+	joiner string,
+) string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return joiner + strings.Join(it.items, joiner)
 }
 
 func (it *CollectionPtr) AddCapacity(
@@ -1917,9 +1957,9 @@ func (it *CollectionPtr) Resize(
 	}
 
 	newItems := make([]*string, it.Length(), newCapacity)
-	copy(newItems, *it.items)
+	copy(newItems, it.items)
 
-	it.items = &newItems
+	it.items = newItems
 
 	return it
 }
@@ -1930,7 +1970,7 @@ func (it *CollectionPtr) Joins(
 ) string {
 	newItems := make([]string, constants.Zero, it.Length()+len(items))
 
-	for _, item := range *it.items {
+	for _, item := range it.items {
 		if item == nil {
 			continue
 		}

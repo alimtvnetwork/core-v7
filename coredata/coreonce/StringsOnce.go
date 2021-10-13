@@ -151,7 +151,7 @@ func (it *StringsOnce) JsonStringMust() string {
 	marshalledJsonBytes, err := it.MarshalJSON()
 
 	if err != nil {
-		errcore.MarshallingFailed.
+		errcore.MarshallingFailedType.
 			HandleUsingPanic(
 				"StringsOnce failed to marshall."+err.Error(), it.innerData)
 

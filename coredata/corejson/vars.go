@@ -6,6 +6,6 @@ import (
 )
 
 var (
-	StaticJsonError = errcore.EmptyResultCannotMakeJson.
+	StaticJsonError = errcore.EmptyResultCannotMakeJsonType.
 		Error(constants.EmptyString, constants.EmptyString)
 )

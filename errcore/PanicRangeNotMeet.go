@@ -20,7 +20,7 @@ func PanicRangeNotMeet(
 		rangeStr = fmt.Sprintf(rangeWithRangeFormat, rangeStart, rangeEnd, wholeRange)
 	}
 
-	return OutOfRange.String() +
+	return OutOfRangeType.String() +
 		constants.Space +
 		otherMsg +
 		constants.Space +

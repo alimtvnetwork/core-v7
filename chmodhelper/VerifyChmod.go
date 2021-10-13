@@ -12,8 +12,8 @@ import (
 func VerifyChmod(location string, expectedHyphenedRwx string) error {
 	if len(expectedHyphenedRwx) != HyphenedRwxLength {
 		return errcore.MeaningfulError(
-			errcore.LengthShouldBeEqualToMessage,
-			"VerifyChmod"+constants.HypenAngelRight+location,
+			errcore.LengthShouldBeEqualToType,
+			"VerifyChmod"+constants.HyphenAngelRight+location,
 			errHyphenedRwxLength)
 	}
 
@@ -21,8 +21,8 @@ func VerifyChmod(location string, expectedHyphenedRwx string) error {
 
 	if os.IsNotExist(err) || fileInfo == nil {
 		return errcore.MeaningfulError(
-			errcore.PathInvalidErrorMessage,
-			"VerifyChmod"+constants.HypenAngelRight+location,
+			errcore.PathInvalidErrorType,
+			"VerifyChmod"+constants.HyphenAngelRight+location,
 			err)
 	}
 
@@ -37,7 +37,7 @@ func VerifyChmod(location string, expectedHyphenedRwx string) error {
 		existingFileMode)
 
 	return errcore.MeaningfulError(
-		errcore.PathChmodMismatchErrorMessage,
-		"VerifyChmod"+constants.HypenAngelRight+location,
+		errcore.PathChmodMismatchErrorType,
+		"VerifyChmod"+constants.HyphenAngelRight+location,
 		errors.New(expectationFailedMessage))
 }

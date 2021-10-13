@@ -11,7 +11,7 @@ func VerifyChmodUsingRwxOwnerGroupOther(
 ) error {
 	if rwx == nil {
 		return errcore.
-			CannotBeNilOrEmptyMessage.
+			CannotBeNilOrEmptyType.
 			Error("rwx is nil", location)
 	}
 

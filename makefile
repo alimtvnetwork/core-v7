@@ -12,6 +12,9 @@ run-linux: create-bin copy-config build linux-run
 run-unix: create-bin copy-config-mac build linux-run
 run-ps: create-windows-bin win-copy-config build run-direct
 
+run-main:
+	go run cmd/main/*.go
+
 create-windows-bin:
 	if not exist "$(BinariesDirectory)" mkdir "$(BinariesDirectory)"
 

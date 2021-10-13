@@ -5,7 +5,7 @@ import (
 )
 
 func CombineWithMsgType(
-	genericMsg Variation,
+	genericMsg RawErrorType,
 	otherMsg string,
 	reference interface{},
 ) string {

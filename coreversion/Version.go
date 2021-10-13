@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/corecmp"
 	"gitlab.com/evatix-go/core/corecomparator"
 	"gitlab.com/evatix-go/core/enums/versionindexes"
 )
@@ -170,12 +171,11 @@ func (it *Version) AllValidVersionValues() []int {
 }
 
 func (it *Version) Major(comparingMajor int) corecomparator.Compare {
-	return corecomparator.Integer(it.VersionMajor, comparingMajor)
+	return corecmp.Integer(it.VersionMajor, comparingMajor)
 }
 
 func (it *Version) IsMajorAtLeast(comparingMajor int) bool {
-	return corecomparator.
-		Integer(it.VersionMajor, comparingMajor).
+	return corecmp.Integer(it.VersionMajor, comparingMajor).
 		IsLeftGreaterOrGreaterEqualOrEqual()
 }
 
@@ -203,13 +203,13 @@ func (it *Version) MajorMinor(
 	major,
 	minor int,
 ) corecomparator.Compare {
-	majorCmp := corecomparator.Integer(it.VersionMajor, major)
+	majorCmp := corecmp.Integer(it.VersionMajor, major)
 
 	if majorCmp.IsNotEqualLogically() {
 		return majorCmp
 	}
 
-	minorCmp := corecomparator.Integer(it.VersionMinor, minor)
+	minorCmp := corecmp.Integer(it.VersionMinor, minor)
 
 	if minorCmp.IsNotEqualLogically() {
 		return minorCmp
@@ -229,7 +229,7 @@ func (it *Version) MajorMinorPatch(
 		return majorMinor
 	}
 
-	patchCmp := corecomparator.Integer(
+	patchCmp := corecmp.Integer(
 		it.VersionPatch,
 		patch)
 
@@ -299,7 +299,7 @@ func (it *Version) ComparisonValueIndexes(
 		rightVersions[i] = right.ValueByIndex(index)
 	}
 
-	return corecomparator.VersionSliceInteger(
+	return corecmp.VersionSliceInteger(
 		leftVersions,
 		rightVersions)
 }

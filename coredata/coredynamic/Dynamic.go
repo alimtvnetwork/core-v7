@@ -197,7 +197,7 @@ func (it *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
 func (it *Dynamic) Float64() (val float64, err error) {
 	if it.IsNull() {
 		return constants.Zero, errcore.
-			ParsingFailed.Error(
+			ParsingFailedType.Error(
 			messages.DynamicFailedToParseToFloat64BecauseNull,
 			it.String())
 	}
@@ -211,8 +211,8 @@ func (it *Dynamic) Float64() (val float64, err error) {
 			err2.Error()
 
 		return constants.Zero, errcore.
-			ParsingFailed.Error(
-			errcore.FailedToConvert.String(),
+			ParsingFailedType.Error(
+			errcore.FailedToConvertType.String(),
 			reference)
 	}
 
@@ -294,8 +294,8 @@ func (it *Dynamic) MarshalJSON() ([]byte, error) {
 
 func (it *Dynamic) UnmarshalJSON(data []byte) error {
 	return errcore.
-		NotImplemented.
-		Error(errcore.UnMarshallingFailed.String(), data)
+		NotImplementedType.
+		Error(errcore.UnMarshallingFailedType.String(), data)
 }
 
 func (it *Dynamic) JsonModel() interface{} {
@@ -377,7 +377,7 @@ func (it *Dynamic) JsonStringMust() string {
 
 	if err != nil {
 		errcore.
-			MarshallingFailed.
+			MarshallingFailedType.
 			HandleUsingPanic(err.Error(), it.innerDataString)
 	}
 

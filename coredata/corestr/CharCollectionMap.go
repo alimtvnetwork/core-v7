@@ -1157,6 +1157,10 @@ func (it *CharCollectionMap) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+func (it *CharCollectionMap) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *CharCollectionMap) AsJsoner() corejson.Jsoner {
 	return it
 }

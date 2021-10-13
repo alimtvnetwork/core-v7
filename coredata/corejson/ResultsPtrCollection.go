@@ -613,7 +613,7 @@ func (it *ResultsPtrCollection) GetSinglePageCollection(
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				pageIndex)
@@ -675,6 +675,10 @@ func (it *ResultsPtrCollection) ParseInjectUsingJsonMust(
 	}
 
 	return resultCollection
+}
+
+func (it *ResultsPtrCollection) AsJsonContractsBinder() JsonContractsBinder {
+	return it
 }
 
 func (it *ResultsPtrCollection) AsJsoner() Jsoner {

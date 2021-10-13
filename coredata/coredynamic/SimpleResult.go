@@ -65,7 +65,7 @@ func (it *SimpleResult) GetErrorOnTypeMismatch(
 	}
 
 	typeMismatchMessage := errcore.CombineWithMsgType(
-		errcore.TypeMismatch,
+		errcore.TypeMismatchType,
 		"Current type - ["+it.ReflectTypeName()+"], expected type",
 		typeMatch) + constants.NewLineUnix
 

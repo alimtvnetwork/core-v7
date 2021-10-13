@@ -392,7 +392,7 @@ func (it *TraceCollection) GetSinglePageCollection(
 	skipItems := eachPageSize * (pageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				pageIndex)
@@ -800,6 +800,10 @@ func (it *TraceCollection) ParseInjectUsingJsonMust(
 	return hashSet
 }
 
+func (it *TraceCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *TraceCollection) AsJsoner() corejson.Jsoner {
 	return it
 }
@@ -819,7 +823,16 @@ func (it *TraceCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfInjec
 }
 
 func (it *TraceCollection) Clear() *TraceCollection {
-	it.Items = it.Items[:0]
+	tempItems := it.Items
+	clearFunc := func() {
+		for _, item := range tempItems {
+			item.Dispose()
+		}
+	}
+
+	go clearFunc()
+
+	it.Items = []Trace{}
 
 	return it
 }

@@ -10,6 +10,6 @@ import (
 // SkipOnUnix Skip on Unix
 func SkipOnUnix(t *testing.T) {
 	if osconsts.IsUnixGroup {
-		t.Skip(errcore.UnixIgnoreMessage)
+		t.Skip(errcore.UnixIgnoreType)
 	}
 }

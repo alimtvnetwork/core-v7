@@ -17,7 +17,7 @@ func FileModeApplyChmod(
 	}
 
 	if condition == nil {
-		return errcore.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyType.
 			ErrorNoRefs("condition")
 	}
 

@@ -13,7 +13,7 @@ func RangesOnlySupportedFor(
 	referencesMessage := RangesStringDefaultJoiner(
 		requests...)
 
-	return errcore.RangesOnlySupported.Error(
+	return errcore.RangesOnlySupportedType.Error(
 		message,
 		referencesMessage)
 }

@@ -7,22 +7,22 @@ import (
 
 var (
 	UptoBuildIndexes = []int{
-		Major,
-		Minor,
-		Patch,
-		Build,
+		Major.ValueInt(),
+		Minor.ValueInt(),
+		Patch.ValueInt(),
+		Build.ValueInt(),
 	}
-	UptoPatchIndexes = []int{
-		Major,
-		Minor,
-		Patch,
+	UptoPatchIndexes = [...]int{
+		Major.ValueInt(),
+		Minor.ValueInt(),
+		Patch.ValueInt(),
 	}
 	UptoMinorIndexes = []int{
-		Major,
-		Minor,
+		Major.ValueInt(),
+		Minor.ValueInt(),
 	}
 	UptoMajorIndexes = []int{
-		Major,
+		Major.ValueInt(),
 	}
 
 	Ranges = [...]string{

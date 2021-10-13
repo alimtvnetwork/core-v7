@@ -15,6 +15,10 @@ type CollectionsOfCollection struct {
 	sync.Mutex
 }
 
+func (it *CollectionsOfCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *CollectionsOfCollection) IsEmpty() bool {
 	return it.items == nil || len(*it.items) == 0
 }

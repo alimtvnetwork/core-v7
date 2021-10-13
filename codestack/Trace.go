@@ -103,6 +103,22 @@ func (it *Trace) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+func (it *Trace) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.SkipIndex = constants.Zero
+	it.PackageName = constants.EmptyString
+	it.MethodName = constants.EmptyString
+	it.PackageMethodName = constants.EmptyString
+	it.FileName = constants.EmptyString
+	it.Line = constants.Zero
+	it.IsOkay = false
+	it.message.Dispose()
+	it.shortString.Dispose()
+}
+
 func (it *Trace) JsonString() string {
 	jsonResult := it.Json()
 

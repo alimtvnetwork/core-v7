@@ -1,6 +1,8 @@
 package chmodclasstype
 
-import "gitlab.com/evatix-go/core/coreinterface"
+import (
+	"gitlab.com/evatix-go/core/coreinterface"
+)
 
 type Variant byte
 
@@ -55,7 +57,7 @@ func (it *Variant) ToNumberString() string {
 	return BasicEnumImpl.ToNumberString(it.ValueByte())
 }
 
-func (it *Variant) String() string {
+func (it Variant) String() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
@@ -83,6 +85,10 @@ func (it Variant) RangeNamesCsv() string {
 
 func (it Variant) TypeName() string {
 	return BasicEnumImpl.TypeName()
+}
+
+func (it Variant) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
 }
 
 func (it *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {

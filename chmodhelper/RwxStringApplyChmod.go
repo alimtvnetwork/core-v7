@@ -22,7 +22,7 @@ func RwxStringApplyChmod(
 
 	if condition == nil {
 		return errcore.
-			CannotBeNilOrEmptyMessage.
+			CannotBeNilOrEmptyType.
 			ErrorNoRefs("condition")
 	}
 

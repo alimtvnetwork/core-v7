@@ -17,8 +17,8 @@ func StringToInteger(
 			constants.NewLineUnix +
 			err2.Error()
 
-		return constants.Zero, errcore.ParsingFailed.Error(
-			errcore.FailedToConvert.String(),
+		return constants.Zero, errcore.ParsingFailedType.Error(
+			errcore.FailedToConvertType.String(),
 			reference)
 	}
 

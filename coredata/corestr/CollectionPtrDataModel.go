@@ -1,7 +1,7 @@
 package corestr
 
 type CollectionPtrDataModel struct {
-	Items *[]*string `json:"PointerStringsCollection"`
+	Items []*string `json:"PointerStringsCollection"`
 }
 
 func NewCollectionPtrDataModelUsingDataModel(dataModel *CollectionPtrDataModel) *CollectionPtr {

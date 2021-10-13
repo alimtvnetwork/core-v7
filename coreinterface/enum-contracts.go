@@ -4,6 +4,7 @@ import "gitlab.com/evatix-go/core/coredata/corejson"
 
 type BasicEnumer interface {
 	ToNamer
+	NameValuer
 	ToNumberStringer
 	Stringer
 	corejson.JsonMarshaller

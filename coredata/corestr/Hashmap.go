@@ -397,9 +397,9 @@ func (it *Hashmap) ConcatNew(
 ) *Hashmap {
 	if len(hashmaps) == 0 {
 		return NewHashmapUsingMap(
-			it.items,
-			constants.Zero,
 			isCloneOnEmptyAsWell,
+			constants.Zero,
+			it.items,
 		)
 	}
 
@@ -414,9 +414,10 @@ func (it *Hashmap) ConcatNew(
 	}
 
 	newHashmap := NewHashmapUsingMap(
-		it.items,
+		true,
 		length,
-		true)
+		it.items,
+	)
 
 	newHashmap.AddOrUpdateHashmap(it)
 
@@ -434,9 +435,9 @@ func (it *Hashmap) ConcatNewUsingMaps(
 ) *Hashmap {
 	if len(hashmaps) == 0 {
 		return NewHashmapUsingMap(
-			it.items,
-			constants.Zero,
 			isCloneOnEmptyAsWell,
+			constants.Zero,
+			it.items,
 		)
 	}
 
@@ -451,9 +452,10 @@ func (it *Hashmap) ConcatNewUsingMaps(
 	}
 
 	newHashmap := NewHashmapUsingMap(
-		it.items,
+		true,
 		length,
-		true)
+		it.items,
+	)
 
 	newHashmap.AddOrUpdateHashmap(it)
 
@@ -859,9 +861,10 @@ func (it *Hashmap) ValuesToLower() *Hashmap {
 	}
 
 	return NewHashmapUsingMap(
-		newMap,
+		false,
 		0,
-		false)
+		newMap,
+	)
 }
 
 func (it *Hashmap) Length() int {
@@ -1142,7 +1145,7 @@ func (it *Hashmap) ToDefaultError() error {
 
 func (it *Hashmap) KeyValStringLines() *[]string {
 	return it.ToStringsUsingCompiler(func(key, val string) string {
-		return key + constants.HypenAngelRight + val
+		return key + constants.HyphenAngelRight + val
 	})
 }
 
@@ -1204,6 +1207,10 @@ func (it *Hashmap) JsonParseSelfInject(
 	)
 
 	return err
+}
+
+func (it *Hashmap) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *Hashmap) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {

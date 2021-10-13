@@ -78,6 +78,10 @@ func (v Value) IsInitBoolean() bool {
 	return v == True || v == False
 }
 
+func (v Value) IsDefinedBoolean() bool {
+	return v == True || v == False
+}
+
 func (v Value) IsInitBooleanWild() bool {
 	return v == True || v == False || v == Wildcard
 }

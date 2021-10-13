@@ -12,5 +12,5 @@ import (
 func WithParenthesis(
 	source interface{},
 ) string {
-	return fmt.Sprintf(constants.ParenthesisWrap, source)
+	return fmt.Sprintf(constants.ParenthesisWrapFormat, source)
 }

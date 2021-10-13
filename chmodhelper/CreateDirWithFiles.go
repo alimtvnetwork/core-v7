@@ -22,7 +22,7 @@ func CreateDirWithFiles(
 
 	if removeErr != nil {
 		return errcore.PathMeaningFulError(
-			errcore.PathCreateFailedMessage,
+			errcore.PathCreateFailedType,
 			funcName,
 			removeErr,
 			dir)
@@ -33,7 +33,7 @@ func CreateDirWithFiles(
 
 	if mkDirErr != nil {
 		return errcore.PathMeaningFulError(
-			errcore.PathCreateFailedMessage,
+			errcore.PathCreateFailedType,
 			funcName,
 			mkDirErr,
 			dir)
@@ -51,7 +51,7 @@ func CreateDirWithFiles(
 
 		if err != nil {
 			return errcore.PathMeaningFulError(
-				errcore.PathCreateFailedMessage,
+				errcore.PathCreateFailedType,
 				funcName,
 				err,
 				dir)
@@ -63,7 +63,7 @@ func CreateDirWithFiles(
 
 		if fileManipulateErr != nil {
 			return errcore.PathMeaningFulError(
-				errcore.FileCloseFailedMessage,
+				errcore.FileCloseFailedType,
 				funcName,
 				fileManipulateErr,
 				compiledPath)
@@ -75,7 +75,7 @@ func CreateDirWithFiles(
 
 		if chmodErr != nil {
 			return errcore.PathMeaningFulError(
-				errcore.PathChmodApplyMessage,
+				errcore.PathChmodApplyType,
 				funcName,
 				chmodErr,
 				compiledPath)

@@ -68,6 +68,10 @@ const (
 	DynamicAction
 )
 
+func (it Request) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
+}
+
 func (it Request) IsUninitialized() bool {
 	return it == Uninitialized
 }
@@ -424,17 +428,17 @@ func (it Request) CurrentNotImpl(
 		compiledMessage
 
 	if reference == nil {
-		return errcore.NotImplemented.ErrorNoRefs(fullCompiled)
+		return errcore.NotImplementedType.ErrorNoRefs(fullCompiled)
 	}
 
-	return errcore.NotImplemented.Error(fullCompiled, reference)
+	return errcore.NotImplementedType.Error(fullCompiled, reference)
 }
 
 func (it Request) NotSupportedErr(
 	message string,
 	reference interface{},
 ) error {
-	return errcore.NotSupported.Error(
+	return errcore.NotSupportedType.Error(
 		message,
 		reference)
 }
@@ -591,8 +595,8 @@ func (it Request) MarshalJSON() ([]byte, error) {
 	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
 }
 
-func (it Request) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return &it
+func (it *Request) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return it
 }
 
 func (it *Request) AsJsonMarshaller() corejson.JsonMarshaller {
