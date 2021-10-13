@@ -5,7 +5,7 @@ import "gitlab.com/evatix-go/core/constants"
 const (
 	ReferenceStart                           = "Reference(s) ("
 	ReferenceEnd                             = ")"
-	ReferenceFormat                          = " Reference(s) { \"%v\" }"
+	ReferenceFormat                          = " Ref(s) { \"%v\" }"
 	rangeWithRangeFormat                     = "Range must be in between %v and %v. Ranges must be one of these {%v}"
 	rangeWithoutRangeFormat                  = "Range must be in between %v and %v."
 	CannotConvertStringToByteForLessThanZero = "Cannot convert string to byte. String cannot be less than 0 for byte."
@@ -26,9 +26,12 @@ const (
 	var3WithTypeFormat                            = "(%s [t:%T], %s[t:%T], %s[t:%T]) = (%v, %v, %v)"
 	messageVar2Format                             = "%s (%s, %s) = (%v, %v)"
 	messageVar3Format                             = "%s (%s, %s, %s) = (%v, %v, %v)"
-	messageMapFormat                              = constants.MessageReferenceWrap
+	messageMapFormat                              = constants.MessageReferenceWrapFormat
 	messageWithTracesWithoutRefFormat             = "%s \n%s"
-	messageWithTracesRefFormat                    = messageWithTracesWithoutRefFormat + " Ref (s) { %v }"
+	refsWithoutQuotation                          = " Ref (s) { %v }"
+	messageWithRefWithoutQuoteFormat              = "%s" + refsWithoutQuotation
+	messageWithOtherMsgWithRefWithoutQuoteFormat  = "%s " + messageWithRefWithoutQuoteFormat
+	messageWithTracesRefFormat                    = messageWithTracesWithoutRefFormat + refsWithoutQuotation
 	PrefixStackTrace                              = constants.Hyphen + constants.Space
 	PrefixStackTraceNewLine                       = constants.NewLineUnix + PrefixStackTrace
 	NewLineCodeStacksHeader                       = "\nCode Stacks :\n"

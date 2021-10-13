@@ -49,7 +49,7 @@ func (it *BytesError) CombineErrorWithRef(references ...string) string {
 	csv := csvinternal.StringsToStringDefault(references...)
 
 	return fmt.Sprintf(
-		constants.MessageReferenceWrap,
+		constants.MessageReferenceWrapFormat,
 		it.Error.Error(),
 		csv)
 }

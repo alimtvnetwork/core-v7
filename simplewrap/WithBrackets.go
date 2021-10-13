@@ -12,5 +12,5 @@ import (
 func WithBrackets(
 	source interface{},
 ) string {
-	return fmt.Sprintf(constants.BracketWrap, source)
+	return fmt.Sprintf(constants.BracketWrapFormat, source)
 }

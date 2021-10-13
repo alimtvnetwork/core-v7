@@ -393,7 +393,7 @@ func (it *DynamicCollection) JsonStringMust() string {
 
 	if err != nil {
 		errcore.
-			MarshallingFailed.
+			MarshallingFailedType.
 			HandleUsingPanic(err.Error(), it.items)
 	}
 

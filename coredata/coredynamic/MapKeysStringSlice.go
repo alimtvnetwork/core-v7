@@ -14,7 +14,7 @@ func MapKeysStringSlice(reflectVal reflect.Value) ([]string, error) {
 
 	if reflectVal.Kind() != reflect.Map {
 		return []string{},
-			errcore.TypeMismatch.Error("Reflection is not Map", reflectVal)
+			errcore.TypeMismatchType.Error("Reflection is not Map", reflectVal)
 	}
 
 	mapKeys := reflectVal.MapKeys()
@@ -26,7 +26,7 @@ func MapKeysStringSlice(reflectVal reflect.Value) ([]string, error) {
 		keyAsString, isString := keyAny.(string)
 
 		if !isString {
-			return keys, errcore.TypeMismatch.Error("Not string type", keyAny)
+			return keys, errcore.TypeMismatchType.Error("Not string type", keyAny)
 		}
 
 		keys[i] = keyAsString

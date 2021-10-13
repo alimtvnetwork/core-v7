@@ -7,7 +7,7 @@ import (
 
 var (
 	ComparatorOutOfRangeMessage = errcore.RangeNotMeet(
-		errcore.ComparatorShouldBeWithinRange.String(),
+		errcore.ComparatorShouldBeWithinRangeType.String(),
 		corecomparator.Min(),
 		corecomparator.Max(),
 		corecomparator.Ranges())

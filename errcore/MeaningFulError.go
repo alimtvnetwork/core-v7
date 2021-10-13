@@ -1,7 +1,7 @@
 package errcore
 
 func MeaningfulError(
-	msgType Variation,
+	rawErrType RawErrorType,
 	funcName string,
 	err error,
 ) error {
@@ -9,6 +9,6 @@ func MeaningfulError(
 		return nil
 	}
 
-	return msgType.Error(
+	return rawErrType.Error(
 		funcName, err.Error())
 }

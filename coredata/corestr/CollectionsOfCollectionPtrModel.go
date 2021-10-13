@@ -1,5 +1,5 @@
 package corestr
 
 type CollectionsOfCollectionPtrModel struct {
-	Items *[]*CollectionPtr `json:"PointerStringsCollectionsOfCollection"`
+	Items []*CollectionPtr `json:"PointerStringsCollectionsOfCollection"`
 }

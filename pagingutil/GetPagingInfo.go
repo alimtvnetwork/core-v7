@@ -22,7 +22,7 @@ func GetPagingInfo(request PagingRequest) PagingInfo {
 	skipItems := request.EachPageSize * (request.PageIndex - 1)
 	if skipItems < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"pageIndex cannot be negative or zero.",
 				request.PageIndex)

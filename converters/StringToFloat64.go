@@ -17,8 +17,8 @@ func StringToFloat64(input string) (value float64, err error) {
 			err2.Error()
 
 		return constants.Zero, errcore.
-			ParsingFailed.Error(
-			errcore.FailedToConvert.String(),
+			ParsingFailedType.Error(
+			errcore.FailedToConvertType.String(),
 			reference)
 	}
 

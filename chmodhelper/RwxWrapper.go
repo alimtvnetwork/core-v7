@@ -58,7 +58,7 @@ func (it *RwxWrapper) ToUint32Octal() uint32 {
 	if err != nil {
 		errcore.
 			MeaningfulErrorHandle(
-				errcore.PathChmodConvertFailedMessage,
+				errcore.PathChmodConvertFailedType,
 				"ToUint32Octal",
 				err)
 	}
@@ -188,7 +188,7 @@ func (it *RwxWrapper) ApplyChmod(
 
 	if !isSkipOnInvalid && !isFileExist {
 		return errcore.
-			PathInvalidErrorMessage.
+			PathInvalidErrorType.
 			Error(
 				messages.PathNotExist, fileOrDirectoryPath)
 	}
@@ -197,7 +197,7 @@ func (it *RwxWrapper) ApplyChmod(
 
 	if err != nil {
 		return errcore.
-			PathChmodApplyMessage.
+			PathChmodApplyType.
 			Error(err.Error(), fileOrDirectoryPath)
 	}
 
@@ -217,7 +217,7 @@ func (it *RwxWrapper) LinuxApplyRecursive(
 
 	if !isSkipOnInvalid && !isPathExists {
 		return errcore.
-			PathInvalidErrorMessage.
+			PathInvalidErrorType.
 			Error(pathInvalidMessage,
 				location)
 	}
@@ -239,7 +239,7 @@ func (it *RwxWrapper) ApplyRecursive(
 
 	if !isSkipOnInvalid && !stat.IsExist {
 		return errcore.
-			PathInvalidErrorMessage.
+			PathInvalidErrorType.
 			Error(pathInvalidMessage,
 				location)
 	}
@@ -265,7 +265,7 @@ func (it *RwxWrapper) ApplyRecursive(
 				sliceErr = append(
 					sliceErr,
 					errcore.
-						PathInvalidErrorMessage.Combine(
+						PathInvalidErrorType.Combine(
 						err.Error()+pathInvalidMessage,
 						currentPath))
 
@@ -276,7 +276,7 @@ func (it *RwxWrapper) ApplyRecursive(
 				sliceErr = append(
 					sliceErr,
 					errcore.
-						PathInvalidErrorMessage.Combine(
+						PathInvalidErrorType.Combine(
 						pathInvalidMessage,
 						currentPath))
 
@@ -289,7 +289,7 @@ func (it *RwxWrapper) ApplyRecursive(
 				sliceErr = append(
 					sliceErr,
 					errcore.
-						PathInvalidErrorMessage.Combine(
+						PathInvalidErrorType.Combine(
 						err2.Error()+pathInvalidMessage,
 						currentPath))
 
@@ -303,7 +303,7 @@ func (it *RwxWrapper) ApplyRecursive(
 		sliceErr = append(
 			sliceErr,
 			errcore.
-				PathInvalidErrorMessage.Combine(
+				PathInvalidErrorType.Combine(
 				finalErr.Error()+pathInvalidMessage,
 				location))
 	}
@@ -316,7 +316,7 @@ func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
 
 	if cmd == nil {
 		return errcore.
-			FailedToCreateCmd.Error(
+			FailedToCreateCmdType.Error(
 			constants.BashCommandline,
 			location)
 	}
@@ -327,7 +327,7 @@ func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
 
 	if err != nil {
 		return errcore.
-			FailedToCreateCmd.Error(
+			FailedToCreateCmdType.Error(
 			constants.ChmodCommand,
 			err.Error()+constants.NewLineUnix+stderr.String()+"location:"+location)
 	}
@@ -359,7 +359,7 @@ func (it *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 		finalErr := errors.New(err.Error() + fileOrDirectoryPath)
 
 		panic(errcore.MeaningfulError(
-			errcore.PathChmodApplyMessage,
+			errcore.PathChmodApplyType,
 			"MustApplyChmod",
 			finalErr))
 	}

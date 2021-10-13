@@ -7,7 +7,7 @@ import (
 
 //goland:noinspection ALL
 var (
-	StaticJsonError = errcore.EmptyResultCannotMakeJson.
+	StaticJsonError = errcore.EmptyResultCannotMakeJsonType.
 			Error(constants.EmptyString, constants.EmptyString)
 	ExpectingLengthForLeftRight      = constants.Two
 	LeftRightExpectingLengthMessager = errcore.ExpectingFuture(

@@ -7,6 +7,10 @@ import (
 
 type Variant byte
 
+func (it Variant) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
+}
+
 func (it Variant) ToNumberString() string {
 	return BasicEnumImpl.ToNumberString(it.Value())
 }
@@ -24,19 +28,15 @@ func (it Variant) MarshalJSON() ([]byte, error) {
 }
 
 func (it Variant) UnmarshalJSON(data []byte) error {
-	panic(errcore.NotImplemented.ErrorNoRefs("UnmarshalJSON not implemented for bytetype."))
+	panic(errcore.NotImplementedType.ErrorNoRefs("UnmarshalJSON not implemented for bytetype."))
 }
 
 func (it Variant) String() string {
 	return BasicEnumImpl.ToEnumString(it.Value())
 }
 
-func (it Variant) JsonString() (jsonString string, err error) {
-	return BasicEnumImpl.StringJson(it.Value())
-}
-
-func (it Variant) JsonStringMust() string {
-	return BasicEnumImpl.StringJsonMust(it.Value())
+func (it Variant) JsonString() string {
+	return BasicEnumImpl.JsonString(it)
 }
 
 func (it Variant) StringRangesPtr() *[]string {

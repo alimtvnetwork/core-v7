@@ -448,6 +448,26 @@ func (it *SimpleSlice) CsvStrings() []string {
 	return newSlice
 }
 
+func (it *SimpleSlice) JoinCsvString(joiner string) string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	newSlice := it.CsvStrings()
+
+	return strings.Join(newSlice, joiner)
+}
+
+func (it *SimpleSlice) JoinWith(
+	joiner string,
+) string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return joiner + strings.Join(it.Items, joiner)
+}
+
 func (it *SimpleSlice) JsonModel() []string {
 	return it.Items
 }
@@ -536,6 +556,10 @@ func (it *SimpleSlice) ParseInjectUsingJsonMust(
 	}
 
 	return parsedResult
+}
+
+func (it *SimpleSlice) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *SimpleSlice) AsJsoner() corejson.Jsoner {

@@ -132,7 +132,7 @@ func (receiver *SingleRwx) ToDisabledRwxWrapper() (*RwxWrapper, error) {
 
 func (receiver *SingleRwx) ToRwxWrapper() (*RwxWrapper, error) {
 	if !receiver.ClassType.IsAll() {
-		return nil, errcore.MeaningfulError(errcore.CannotConvertToRwxWhereVarRwxPossible,
+		return nil, errcore.MeaningfulError(errcore.CannotConvertToRwxWhereVarRwxPossibleType,
 			"ToRwxWrapper", errors.New("use ToVarRwx"))
 	}
 

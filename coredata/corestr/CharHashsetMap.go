@@ -1128,6 +1128,10 @@ func (it *CharHashsetMap) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+func (it *CharHashsetMap) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *CharHashsetMap) AsJsoner() corejson.Jsoner {
 	return it
 }

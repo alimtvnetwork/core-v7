@@ -1,7 +1,7 @@
 package errcore
 
 func MeaningfulErrorHandle(
-	msgType Variation,
+	rawErrType RawErrorType,
 	funcName string,
 	err error,
 ) {
@@ -9,7 +9,7 @@ func MeaningfulErrorHandle(
 		return
 	}
 
-	err2 := MeaningfulError(msgType, funcName, err)
+	err2 := MeaningfulError(rawErrType, funcName, err)
 
 	panic(err2)
 }

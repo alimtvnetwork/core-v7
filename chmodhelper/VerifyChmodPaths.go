@@ -12,7 +12,7 @@ func VerifyChmodPaths(
 	isContinueOnError bool,
 ) error {
 	if locations == nil || len(*locations) == 0 {
-		return errcore.CannotBeNilOrEmptyMessage.
+		return errcore.CannotBeNilOrEmptyType.
 			Error(constants.EmptyString, nil)
 	}
 

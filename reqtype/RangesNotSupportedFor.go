@@ -15,7 +15,7 @@ func RangesNotSupportedFor(
 	referencesMessage := RangesStringDefaultJoiner(
 		requests...)
 
-	return errcore.NotSupported.Error(
+	return errcore.NotSupportedType.Error(
 		message,
 		referencesMessage)
 }

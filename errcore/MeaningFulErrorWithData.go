@@ -5,7 +5,7 @@ import (
 )
 
 func MeaningfulErrorWithData(
-	msgType Variation,
+	rawErrType RawErrorType,
 	funcName string,
 	err error,
 	data interface{},
@@ -14,7 +14,7 @@ func MeaningfulErrorWithData(
 		return nil
 	}
 
-	return msgType.Error(
+	return rawErrType.Error(
 		funcName,
 		err.Error()+utilstringinternal.AnyToString(data))
 }

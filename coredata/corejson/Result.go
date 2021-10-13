@@ -45,6 +45,50 @@ func (it *Result) JsonStringPtr() *string {
 	return it.jsonString
 }
 
+func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
+	var prettyJSON bytes.Buffer
+
+	if it == nil || len(it.Bytes) == 0 {
+		return &prettyJSON, nil
+	}
+
+	err := json.Indent(
+		&prettyJSON,
+		it.Bytes,
+		prefix,
+		indent)
+
+	return &prettyJSON, err
+}
+
+func (it *Result) PrettyJsonString() string {
+	if it.IsEmptyJson() {
+		return ""
+	}
+
+	prettyJSON, err := it.PrettyJsonBuffer(
+		constants.EmptyString,
+		constants.Tab)
+
+	if err != nil {
+		return ""
+	}
+
+	return prettyJSON.String()
+}
+
+func (it *Result) PrettyJsonStringWithErr() string {
+	if it == nil {
+		return "json result: nil cannot have json string"
+	}
+
+	if it.HasError() {
+		return it.MeaningfulError().Error()
+	}
+
+	return it.PrettyJsonString()
+}
+
 func (it *Result) Length() int {
 	if it == nil || it.Bytes == nil {
 		return 0
@@ -103,19 +147,23 @@ func (it *Result) ValueMust() []byte {
 
 // MeaningfulError create error even if results are nil.
 func (it *Result) MeaningfulError() error {
-	var msgVariation errcore.Variation
-
-	if it.IsEmptyJsonBytes() {
-		msgVariation = errcore.JsonResultBytesAreNilOrEmpty
+	if it == nil {
+		return errcore.CannotBeNilType.ErrorNoRefs("JsonResult is nil")
 	}
 
-	if it.HasError() {
-		return errcore.FailedToParse.Error(
-			it.Error.Error(),
-			msgVariation.String())
+	if it.IsEmptyError() && it.Bytes != nil {
+		return nil
 	}
 
-	return nil
+	if it.Bytes == nil {
+		return errcore.FailedToParseType.Error(
+			errcore.BytesAreNilOrEmptyType.String()+" Additional: "+it.Error.Error()+", type:",
+			it.TypeName)
+	}
+
+	return errcore.FailedToParseType.Error(
+		it.Error.Error()+", type:",
+		it.TypeName)
 }
 
 func (it *Result) IsEmptyError() bool {
@@ -184,6 +232,10 @@ func (it *Result) IsEmptyJsonBytes() bool {
 	return false
 }
 
+func (it *Result) IsEmpty() bool {
+	return it == nil || len(it.Bytes) == 0
+}
+
 func (it *Result) IsEmptyJson() bool {
 	return it == nil || len(it.Bytes) == 0
 }
@@ -201,7 +253,7 @@ func (it *Result) InjectInto(
 func (it *Result) Unmarshal(any interface{}) error {
 	if it == nil {
 		return errcore.
-			UnMarshallingFailed.
+			UnMarshallingFailedType.
 			Error(
 				"cannot unmarshal if JsonResult is ni, type",
 				reflectinternal.TypeName(any))
@@ -214,7 +266,7 @@ func (it *Result) Unmarshal(any interface{}) error {
 			"To Reference Type", reflectinternal.TypeName(any))
 
 		return errcore.
-			UnMarshallingFailed.
+			UnMarshallingFailedType.
 			Error(
 				"cannot unmarshal if JsonResult has already error.",
 				reference)
@@ -232,14 +284,14 @@ func (it *Result) Unmarshal(any interface{}) error {
 		"To Reference Type", reflectinternal.TypeName(any))
 
 	return errcore.
-		UnMarshallingFailed.
+		UnMarshallingFailedType.
 		ErrorRefOnly(reference)
 }
 
 func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
 	if it == nil {
 		return errcore.
-			UnMarshallingFailed.
+			UnMarshallingFailedType.
 			Error(
 				"cannot unmarshal if JsonResult is nil, type",
 				reflectinternal.TypeName(any))
@@ -257,7 +309,7 @@ func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
 		"To Reference Type", reflectinternal.TypeName(any))
 
 	return errcore.
-		UnMarshallingFailed.
+		UnMarshallingFailedType.
 		ErrorRefOnly(reference)
 }
 
@@ -314,22 +366,6 @@ func (it *Result) ParseInjectUsingJsonMust(
 	return result
 }
 
-func (it *Result) AsJsoner() Jsoner {
-	return it
-}
-
-func (it *Result) JsonParseSelfInject(
-	jsonResultIn *Result,
-) error {
-	_, err := it.ParseInjectUsingJson(jsonResultIn)
-
-	return err
-}
-
-func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
-	return it
-}
-
 func (it *Result) CloneError() error {
 	if it.HasError() {
 		return errors.New(it.Error.Error())
@@ -383,7 +419,7 @@ func (it *Result) CombineErrorWithRef(references ...string) string {
 	csv := csvinternal.StringsToStringDefault(references...)
 
 	return fmt.Sprintf(
-		constants.MessageReferenceWrap,
+		constants.MessageReferenceWrapFormat,
 		it.Error.Error(),
 		csv)
 }
@@ -469,4 +505,24 @@ func (it Result) Clone(isDeepClone bool) Result {
 	copy(newBytes, it.Bytes)
 
 	return New(newBytes, it.CloneError(), it.TypeName)
+}
+
+func (it *Result) AsJsonContractsBinder() JsonContractsBinder {
+	return it
+}
+
+func (it *Result) AsJsoner() Jsoner {
+	return it
+}
+
+func (it *Result) JsonParseSelfInject(
+	jsonResultIn *Result,
+) error {
+	_, err := it.ParseInjectUsingJson(jsonResultIn)
+
+	return err
+}
+
+func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
+	return it
 }

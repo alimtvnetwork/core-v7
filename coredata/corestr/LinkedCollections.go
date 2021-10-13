@@ -430,13 +430,13 @@ func (it *LinkedCollections) AttachWithNode(
 ) error {
 	if currentNode == nil {
 		return errcore.
-			CannotBeNilMessage.
+			CannotBeNilType.
 			Error(currentNodeCannotBeNull, nil)
 	}
 
 	if currentNode.next != nil {
 		return errcore.
-			ShouldBeNilMessage.
+			ShouldBeNilType.
 			Error("CurrentNode.next", nil)
 	}
 
@@ -661,7 +661,7 @@ func (it *LinkedCollections) RemoveNodeByIndex(
 ) *LinkedCollections {
 	if removingIndex < 0 {
 		errcore.
-			CannotBeNegativeIndex.
+			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"removeIndex was less than 0.",
 				removingIndex)
@@ -714,7 +714,7 @@ func (it *LinkedCollections) RemoveNodeByIndexes(
 
 	if !isIgnorePanic && it.IsEmpty() && length > 0 {
 		errcore.
-			CannotRemoveIndexesFromEmptyCollection.
+			CannotRemoveIndexesFromEmptyCollectionType.
 			HandleUsingPanic("removingIndexes cannot be removed from empty LinkedCollections.", removingIndexes)
 	}
 
@@ -897,7 +897,7 @@ func (it *LinkedCollections) AddCollectionsPointerToNode(
 
 	if node == nil {
 		errcore.
-			CannotBeNilMessage.
+			CannotBeNilType.
 			HandleUsingPanic(
 				nodesCannotBeNull,
 				nil)
@@ -1138,7 +1138,7 @@ func (it *LinkedCollections) IndexAt(
 	}
 
 	if length == 0 || length-1 < index {
-		errcore.OutOfRange.HandleUsingPanic(
+		errcore.OutOfRangeType.HandleUsingPanic(
 			"Given index is out of range. Whereas length:",
 			length)
 	}
@@ -1545,6 +1545,10 @@ func (it *LinkedCollections) JsonParseSelfInject(
 	)
 
 	return err
+}
+
+func (it *LinkedCollections) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *LinkedCollections) AsJsoner() corejson.Jsoner {

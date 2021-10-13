@@ -10,6 +10,6 @@ import (
 // SkipOnWindows Skip on Windows
 func SkipOnWindows(t *testing.T) {
 	if osconsts.IsWindows {
-		t.Skip(errcore.WindowsIgnoreMessage)
+		t.Skip(errcore.WindowsIgnoreType)
 	}
 }

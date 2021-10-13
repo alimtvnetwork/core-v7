@@ -4,7 +4,7 @@ import "gitlab.com/evatix-go/core/errcore"
 
 func GetRwxLengthError(rwx string) error {
 	if len(rwx) != SingleRwxLength {
-		return errcore.LengthShouldBeEqualToMessage.
+		return errcore.LengthShouldBeEqualToType.
 			Error(
 				"rwx length should be "+SingleRwxLengthString,
 				len(rwx))

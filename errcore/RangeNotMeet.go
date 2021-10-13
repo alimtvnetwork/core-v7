@@ -20,7 +20,7 @@ func RangeNotMeet(
 		rangeStr = fmt.Sprintf(rangeWithRangeFormat, rangeStart, rangeEnd, wholeRange)
 	}
 
-	return OutOfRange.String() +
+	return OutOfRangeType.String() +
 		constants.Space +
 		otherMsg +
 		ReferenceStart +

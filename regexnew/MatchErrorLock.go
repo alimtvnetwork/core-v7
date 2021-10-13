@@ -1,10 +1,11 @@
 package regexnew
 
-import "fmt"
-
-// MatchErrorLock creates new regex using lock
-// and then calls match
-// if doesn't match then returns error
+// MatchErrorLock
+//
+// creates new regex using lock
+// and then calls match.
+// On condition mismatch returns error
+// or else nil
 func MatchErrorLock(regex, comparing string) error {
 	regEx, err := NewLock(regex)
 
@@ -12,22 +13,9 @@ func MatchErrorLock(regex, comparing string) error {
 		return nil
 	}
 
-	if err != nil {
-		return fmt.Errorf(
-			"[%q], regex compile failed / invalid cannot match with [%q]",
-			err.Error(),
-			comparing)
-	}
-
-	if regEx == nil {
-		return fmt.Errorf(
-			"given regex [%q] invalid cannot match with [%q]",
-			regex,
-			comparing)
-	}
-
-	return fmt.Errorf(
-		"given regex [%q] doesn't match with [%q]",
+	return regExMatchValidationError(
 		regex,
-		comparing)
+		comparing,
+		err,
+		regEx)
 }

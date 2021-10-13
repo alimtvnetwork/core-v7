@@ -163,7 +163,7 @@ func (it *LinesValidators) VerifyFirstDefaultLineNumberError(
 		return nil
 	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
 		return errcore.MeaningfulErrorWithData(
-			errcore.ValidataionFailed,
+			errcore.ValidataionFailedType,
 			funcName,
 			errors.New(messages.CannotVerifyEmptyContentsWhereValidatorsArePresent),
 			it.Items)
@@ -196,7 +196,7 @@ func (it *LinesValidators) AllVerifyError(
 		return nil
 	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
 		return errcore.MeaningfulErrorWithData(
-			errcore.ValidataionFailed,
+			errcore.ValidataionFailedType,
 			funcName,
 			errors.New(messages.CannotVerifyEmptyContentsWhereValidatorsArePresent),
 			it.Items)

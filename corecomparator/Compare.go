@@ -2,6 +2,7 @@ package corecomparator
 
 import (
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -92,6 +93,37 @@ func (it Compare) IsAnyOf(values ...Compare) bool {
 	return false
 }
 
+func (it Compare) NameValue() string {
+	return fmt.Sprintf(
+		constants.StringWithBracketWrapNumberFormat,
+		it.Name(),
+		it.Value())
+}
+
+func (it Compare) CsvStrings(values ...Compare) []string {
+	if len(values) == 0 {
+		return []string{}
+	}
+
+	slice := make([]string, len(values))
+
+	for i, value := range values {
+		slice[i] = value.NameValue()
+	}
+
+	return slice
+}
+
+func (it Compare) CsvString(values ...Compare) string {
+	if len(values) == 0 {
+		return ""
+	}
+
+	slice := it.CsvStrings(values...)
+
+	return strings.Join(slice, constants.CsvJoiner)
+}
+
 func (it Compare) Name() string {
 	return it.String()
 }
@@ -116,7 +148,7 @@ func (it *Compare) UnmarshalJSON(data []byte) error {
 	}
 
 	return errcore.
-		FailedToConvert.
+		FailedToConvertType.
 		Error(string(data)+" failed to convert to core-compare. Must be any of the values.",
 			strings.Join(Ranges(),
 				constants.Comma))
@@ -124,6 +156,42 @@ func (it *Compare) UnmarshalJSON(data []byte) error {
 
 func (it Compare) Value() byte {
 	return byte(it)
+}
+
+func (it Compare) OnlySupportedErr(
+	message string,
+	onlySupportedCompares ...Compare,
+) error {
+	if message == "" {
+		return it.OnlySupportedDirectErr(onlySupportedCompares...)
+	}
+
+	if it.IsAnyOf(onlySupportedCompares...) {
+		return nil
+	}
+
+	csv := it.CsvString(onlySupportedCompares...)
+
+	return fmt.Errorf(constants.EnumOnlySupportedWithMessageFormat,
+		it,
+		it.NameValue(),
+		message,
+		csv)
+}
+
+func (it Compare) OnlySupportedDirectErr(
+	onlySupportedCompares ...Compare,
+) error {
+	if it.IsAnyOf(onlySupportedCompares...) {
+		return nil
+	}
+
+	csv := it.CsvString(onlySupportedCompares...)
+
+	return fmt.Errorf(constants.EnumOnlySupportedFormat,
+		it,
+		it.NameValue(),
+		csv)
 }
 
 func (it Compare) OperatorSymbol() string {

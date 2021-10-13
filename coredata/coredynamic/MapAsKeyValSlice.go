@@ -14,7 +14,7 @@ func MapAsKeyValSlice(reflectVal reflect.Value) (*KeyValCollection, error) {
 
 	if reflectVal.Kind() != reflect.Map {
 		return EmptyKeyValCollection(),
-			errcore.TypeMismatch.Error("Reflection is not Map", reflectVal)
+			errcore.TypeMismatchType.Error("Reflection is not Map", reflectVal)
 	}
 
 	mapKeys := reflectVal.MapKeys()

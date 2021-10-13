@@ -9,23 +9,31 @@ import (
 )
 
 type CollectionsOfCollectionPtr struct {
-	items *[]*CollectionPtr
+	items []*CollectionPtr
+}
+
+func (it *CollectionsOfCollectionPtr) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *CollectionsOfCollectionPtr) IsEmpty() bool {
-	return it.items == nil || len(*it.items) == 0
+	return it == nil || it.items == nil || len(it.items) == 0
 }
 
 func (it *CollectionsOfCollectionPtr) HasItems() bool {
-	return it.items != nil && len(*it.items) > 0
+	return it.Length() > 0
+}
+
+func (it *CollectionsOfCollectionPtr) HasAnyItem() bool {
+	return it.Length() > 0
 }
 
 func (it *CollectionsOfCollectionPtr) Length() int {
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 func (it *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
@@ -35,7 +43,7 @@ func (it *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
 
 	allLength := 0
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		if collection == nil || collection.IsEmpty() {
 			continue
 		}
@@ -46,12 +54,12 @@ func (it *CollectionsOfCollectionPtr) AllIndividualItemsLength() int {
 	return allLength
 }
 
-func (it *CollectionsOfCollectionPtr) ItemsPtr() *[]*CollectionPtr {
+func (it *CollectionsOfCollectionPtr) ItemsPtr() []*CollectionPtr {
 	return it.items
 }
 
 func (it *CollectionsOfCollectionPtr) Items() []*CollectionPtr {
-	return *it.items
+	return it.items
 }
 
 func (it *CollectionsOfCollectionPtr) ListPtr(
@@ -64,8 +72,8 @@ func (it *CollectionsOfCollectionPtr) ListPtr(
 		return &list
 	}
 
-	for _, collection := range *it.items {
-		for _, s := range *collection.ListPtr() {
+	for _, collection := range it.items {
+		for _, s := range collection.ListPtr() {
 			list = append(list, *s)
 		}
 	}
@@ -93,8 +101,8 @@ func (it *CollectionsOfCollectionPtr) AddStringsPtr(
 			addCapacity))
 }
 
-func (it *CollectionsOfCollectionPtr) AddPointerStringsPtr(
-	pointerStringsItems *[]*string,
+func (it *CollectionsOfCollectionPtr) AddPointerStrings(
+	pointerStringsItems ...*string,
 ) *CollectionsOfCollectionPtr {
 	if pointerStringsItems == nil {
 		return it
@@ -158,8 +166,8 @@ func (it *CollectionsOfCollectionPtr) AddCollections(
 	}
 
 	for i := range *collections {
-		*it.items = append(
-			*it.items,
+		it.items = append(
+			it.items,
 			(*collections)[i])
 	}
 
@@ -172,7 +180,7 @@ func (it *CollectionsOfCollectionPtr) String() string {
 		0,
 		it.Length())
 
-	for i, collection := range *it.items {
+	for i, collection := range it.items {
 		list = append(
 			list,
 			collection.SummaryString(i+1))

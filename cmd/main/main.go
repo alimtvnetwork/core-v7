@@ -28,9 +28,14 @@ func main() {
 	// jsonResultUnmarshallingTest02()
 	// parallelTaskTest01()
 	// parallelTaskTest02()
-	parallelTaskTest03()
 
 	// keyLegendsTest()
 	// stackTrackerTest()
 	// stackTrackerTest5()
+	// jsonResultPrettyTest01()
+
+	// errTypePrintTest01()
+
+	// compareEnumTesting02()
+	indexEnumTesting01()
 }

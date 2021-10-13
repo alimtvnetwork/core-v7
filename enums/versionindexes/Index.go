@@ -1,18 +1,26 @@
 package versionindexes
 
-import "gitlab.com/evatix-go/core/coreinterface"
+import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coreinterface"
+	"gitlab.com/evatix-go/core/defaulterr"
+)
 
 type Index byte
 
 const (
-	Major = iota
-	Minor = 1
-	Patch = 2
-	Build = 3
+	Major Index = iota
+	Minor Index = 1
+	Patch Index = 2
+	Build Index = 3
 )
 
 func (it *Index) Name() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
+}
+
+func (it Index) NameValue() string {
+	return BasicEnumImpl.NameWithValue(it)
 }
 
 func (it *Index) ToNumberString() string {
@@ -27,7 +35,7 @@ func (it *Index) UnmarshallEnumToValue(
 		jsonUnmarshallingValue)
 }
 
-func (it *Index) String() string {
+func (it Index) String() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
@@ -54,6 +62,36 @@ func (it *Index) UnmarshalJSON(data []byte) error {
 	return err
 }
 
+func (it Index) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
+
+func (it Index) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
+}
+
+func (it *Index) JsonParseSelfInject(jsonResult *corejson.Result) error {
+	if jsonResult == nil {
+		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	if jsonResult.HasError() {
+		return jsonResult.MeaningfulError()
+	}
+
+	v, err := it.UnmarshallEnumToValue(jsonResult.Bytes)
+
+	if err == nil {
+		*it = Index(v)
+	}
+
+	return err
+}
+
+func (it *Index) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *Index) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
 	return it
 }
@@ -66,8 +104,12 @@ func (it *Index) MinByte() byte {
 	return BasicEnumImpl.Min()
 }
 
-func (it *Index) ValueByte() byte {
-	return byte(*it)
+func (it Index) ValueByte() byte {
+	return byte(it)
+}
+
+func (it Index) ValueInt() int {
+	return int(it)
 }
 
 func (it *Index) RangesByte() []byte {

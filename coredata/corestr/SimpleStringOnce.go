@@ -110,7 +110,7 @@ func (it *SimpleStringOnce) ValueBytesPtr() *[]byte {
 func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
 	if it.isInitialize {
 		return errcore.
-			AlreadyInitialized.
+			AlreadyInitializedType.
 			Error("cannot set :"+setVal, it.value)
 	}
 
@@ -531,6 +531,10 @@ func (it *SimpleStringOnce) ParseInjectUsingJsonMust(
 	}
 
 	return parsedResult
+}
+
+func (it *SimpleStringOnce) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *SimpleStringOnce) AsJsoner() corejson.Jsoner {

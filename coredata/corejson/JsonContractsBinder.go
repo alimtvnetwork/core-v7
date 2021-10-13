@@ -1,8 +1,6 @@
 package corejson
 
 type JsonContractsBinder interface {
-	Jsoner
-	JsonMarshaller
-	JsonParseSelfInjector
+	SimpleJsoner
 	AsJsonContractsBinder() JsonContractsBinder
 }

@@ -1212,6 +1212,10 @@ func (it *Hashset) ParseInjectUsingJsonMust(
 	return hashSet
 }
 
+func (it *Hashset) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
 func (it *Hashset) AsJsoner() corejson.Jsoner {
 	return it
 }

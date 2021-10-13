@@ -12,5 +12,5 @@ import (
 func WithCurlyQuotation(
 	source interface{},
 ) string {
-	return fmt.Sprintf(constants.CurlyQuotationWrap, source)
+	return fmt.Sprintf(constants.CurlyQuotationWrapFormat, source)
 }

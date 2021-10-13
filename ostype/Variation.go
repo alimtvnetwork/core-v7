@@ -127,7 +127,7 @@ func (variation Variation) String() string {
 		return osName
 	}
 
-	msg := errcore.UnsupportedCategory.Combine(
+	msg := errcore.UnsupportedCategoryType.Combine(
 		"os type pkg: variant not supported.",
 		string(variation))
 

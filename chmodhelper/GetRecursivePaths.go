@@ -15,7 +15,7 @@ func GetRecursivePaths(
 	stat := GetPathExistStat(rootPath)
 
 	if !stat.IsExist {
-		return []string{}, errcore.PathsMissingOrHavingIssues.
+		return []string{}, errcore.PathsMissingOrHavingIssuesType.
 			ErrorRefOnly(rootPath)
 	}
 
@@ -39,7 +39,7 @@ func GetRecursivePaths(
 			if err != nil {
 				sliceErr = append(
 					sliceErr,
-					err.Error()+constants.HypenAngelRight+path)
+					err.Error()+constants.HyphenAngelRight+path)
 
 				return err
 			}
@@ -52,7 +52,7 @@ func GetRecursivePaths(
 	if finalErr != nil {
 		sliceErr = append(
 			sliceErr,
-			finalErr.Error()+constants.HypenAngelRight+rootPath)
+			finalErr.Error()+constants.HyphenAngelRight+rootPath)
 	}
 
 	return allPaths, errcore.SliceToError(sliceErr)
