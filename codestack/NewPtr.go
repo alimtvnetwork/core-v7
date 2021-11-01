@@ -16,7 +16,7 @@ func NewPtr(skipIndex int) *Trace {
 		PackageName:       packageName,
 		MethodName:        methodName,
 		PackageMethodName: fullMethodSignature,
-		FileName:          file,
+		FilePath:          file,
 		Line:              line,
 		IsOkay:            isOkay,
 	}

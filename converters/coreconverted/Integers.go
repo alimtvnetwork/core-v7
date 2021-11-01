@@ -1,30 +1,38 @@
 package coreconverted
 
 type Integers struct {
-	Values        *[]int
+	Values        []int
 	CombinedError error
 }
 
-func (receiver *Integers) HasError() bool {
-	return receiver.CombinedError != nil
+func (it *Integers) HasError() bool {
+	return it.CombinedError != nil
 }
 
-func (receiver *Integers) Length() int {
-	if receiver.Values == nil {
+func (it *Integers) Length() int {
+	if it == nil || it.Values == nil {
 		return 0
 	}
 
-	return len(*receiver.Values)
+	return len(it.Values)
 }
 
-func (receiver *Integers) IsEmpty() bool {
-	return receiver.Length() == 0
+func (it *Integers) IsEmpty() bool {
+	return it.Length() == 0
 }
 
-func (receiver *Integers) HandleWithPanic() {
-	if receiver.CombinedError == nil {
+func (it *Integers) HasAnyItem() bool {
+	return it.Length() > 0
+}
+
+func (it *Integers) HasIssuesOrEmpty() bool {
+	return it.IsEmpty() || it.CombinedError != nil
+}
+
+func (it *Integers) HandleWithPanic() {
+	if it.CombinedError == nil {
 		return
 	}
 
-	panic(receiver.CombinedError)
+	panic(it.CombinedError)
 }

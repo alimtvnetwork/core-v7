@@ -1,21 +1,21 @@
 package corecmp
 
-func StringsEqual(array, other []string) bool {
-	if array == nil && other == nil {
+func StringsEqual(leftItems, rightItems []string) bool {
+	if leftItems == nil && rightItems == nil {
 		return true
 	}
 
-	if array == nil || other == nil {
+	if leftItems == nil || rightItems == nil {
 		return false
 	}
 
-	length := len(array)
-	if length != len(other) {
+	length := len(leftItems)
+	if length != len(rightItems) {
 		return false
 	}
 
 	for i := 0; i < length; i++ {
-		if array[i] != other[i] {
+		if leftItems[i] != rightItems[i] {
 			return false
 		}
 	}

@@ -753,6 +753,10 @@ func (it *MapResults) JsonModelAny() interface{} {
 }
 
 func (it *MapResults) Clear() *MapResults {
+	if it == nil {
+		return it
+	}
+
 	temp := it.Items
 	clearFunc := func() {
 		for _, result := range temp {

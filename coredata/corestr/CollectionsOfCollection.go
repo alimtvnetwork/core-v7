@@ -86,13 +86,14 @@ func (it *CollectionsOfCollection) ToCollection() *Collection {
 }
 
 func (it *CollectionsOfCollection) AddStringsPtr(
-	stringsItems *[]string, isCloneAdd bool,
+	isCloneAdd bool,
+	stringsItems *[]string,
 ) *CollectionsOfCollection {
-	if stringsItems == nil {
+	if stringsItems == nil || len(*stringsItems) == 0 {
 		return it
 	}
 
-	return it.Adds(NewCollectionUsingStrings(*stringsItems, isCloneAdd))
+	return it.Adds(NewCollectionUsingStrings(isCloneAdd, *stringsItems))
 }
 
 func (it *CollectionsOfCollection) AddPointerStringsPtr(
@@ -104,7 +105,7 @@ func (it *CollectionsOfCollection) AddPointerStringsPtr(
 
 	stringsItems := converters.PointerStringsToStrings(pointerStringsItems)
 
-	return it.Adds(NewCollectionUsingStrings(*stringsItems, false))
+	return it.Adds(NewCollectionUsingStrings(false, *stringsItems))
 }
 
 func (it *CollectionsOfCollection) AddsStringsOfStrings(
@@ -116,7 +117,7 @@ func (it *CollectionsOfCollection) AddsStringsOfStrings(
 	}
 
 	for _, stringsPointer := range stringsOfPointerStrings {
-		it.AddStringsPtr(stringsPointer, isMakeClone)
+		it.AddStringsPtr(isMakeClone, stringsPointer)
 	}
 
 	return it
@@ -131,7 +132,7 @@ func (it *CollectionsOfCollection) AddsStringsOfPointerStrings(
 	}
 
 	for _, stringsPointer := range *stringsOfPointerStrings {
-		it.AddStringsPtr(stringsPointer, isMakeClone)
+		it.AddStringsPtr(isMakeClone, stringsPointer)
 	}
 
 	return it
@@ -158,8 +159,9 @@ func (it *CollectionsOfCollection) AddAsyncFuncItems(
 
 		it.Lock()
 		it.AddStringsPtr(
+			isMakeClone,
 			&items,
-			isMakeClone)
+		)
 		it.Unlock()
 
 		wg.Done()
@@ -195,8 +197,9 @@ func (it *CollectionsOfCollection) AddAsyncFuncItemsPointer(
 
 		it.Lock()
 		it.AddStringsPtr(
+			isMakeClone,
 			items,
-			isMakeClone)
+		)
 		it.Unlock()
 
 		wg.Done()

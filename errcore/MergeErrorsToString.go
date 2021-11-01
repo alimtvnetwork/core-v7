@@ -2,7 +2,7 @@ package errcore
 
 import "strings"
 
-func MergeErrorString(
+func MergeErrorsToString(
 	joiner string,
 	errorItems ...error,
 ) string {

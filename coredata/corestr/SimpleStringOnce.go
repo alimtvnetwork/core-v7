@@ -2,6 +2,7 @@ package corestr
 
 import (
 	"encoding/json"
+	"math"
 	"regexp"
 	"strconv"
 	"strings"
@@ -11,6 +12,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/issetter"
 )
 
 type SimpleStringOnce struct {
@@ -88,6 +90,13 @@ func (it *SimpleStringOnce) IsInitialized() bool {
 // !it.isInitialize
 func (it *SimpleStringOnce) IsUnInit() bool {
 	return !it.isInitialize
+}
+
+// Invalidate
+//
+// Will make initialize to false
+func (it *SimpleStringOnce) Invalidate() {
+	it.isInitialize = false
 }
 
 // IsInvalid
@@ -216,17 +225,165 @@ func (it *SimpleStringOnce) HasValidNonWhitespace() bool {
 }
 
 func (it *SimpleStringOnce) IsValueBool() bool {
-	if it.value == "" {
+	return it.Boolean(false)
+}
+
+func (it *SimpleStringOnce) SafeValue() string {
+	if it.IsInitialized() {
+		return it.value
+	}
+
+	return constants.EmptyString
+}
+
+func (it *SimpleStringOnce) Uint16() (val uint16, isInRange bool) {
+	toUint16, isInRange := it.WithinRange(
+		true,
+		constants.Zero,
+		math.MaxUint16)
+
+	return uint16(toUint16), isInRange
+}
+
+func (it *SimpleStringOnce) Uint32() (val uint32, isInRange bool) {
+	toUint16, isInRange := it.WithinRange(
+		true,
+		constants.Zero,
+		math.MaxUint32)
+
+	return uint32(toUint16), isInRange
+}
+
+func (it *SimpleStringOnce) WithinRangeDefault(
+	min, max int,
+) (val int, isInRange bool) {
+	return it.WithinRange(
+		true,
+		min,
+		max)
+}
+
+func (it *SimpleStringOnce) WithinRange(
+	isUsageMinMaxBoundary bool,
+	min, max int,
+) (val int, isInRange bool) {
+	toInt, err := strconv.Atoi(it.value)
+
+	if err != nil {
+		return constants.Zero, false
+	}
+
+	if toInt >= min && toInt <= max {
+		return toInt, true
+	}
+
+	if !isUsageMinMaxBoundary {
+		return toInt, false
+	}
+
+	if toInt < min {
+		return min, false
+	}
+
+	if toInt > max {
+		return max, false
+	}
+
+	return constants.Zero, false
+}
+
+func (it *SimpleStringOnce) Int() int {
+	toInt, err := strconv.Atoi(it.value)
+
+	if err != nil {
+		return constants.Zero
+	}
+
+	return toInt
+}
+
+func (it *SimpleStringOnce) Byte() byte {
+	toInt, err := strconv.Atoi(it.value)
+
+	if err != nil {
+		return constants.Zero
+	}
+
+	if toInt >= constants.Zero && toInt <= constants.MaxUnit8AsInt {
+		return byte(toInt)
+	}
+
+	return constants.Zero
+}
+
+func (it *SimpleStringOnce) Int16() int16 {
+	toInt, err := strconv.Atoi(it.value)
+
+	if err != nil {
+		return constants.Zero
+	}
+
+	if toInt >= math.MinInt16 && toInt <= constants.MaxInt16AsInt {
+		return int16(toInt)
+	}
+
+	return constants.Zero
+}
+
+func (it *SimpleStringOnce) Int32() int32 {
+	toInt, err := strconv.Atoi(it.value)
+
+	if err != nil {
+		return constants.Zero
+	}
+
+	if toInt >= math.MinInt32 && toInt <= math.MaxInt32 {
+		return int32(toInt)
+	}
+
+	return constants.Zero
+}
+
+func (it *SimpleStringOnce) BooleanDefault() bool {
+	return it.Boolean(true)
+}
+
+func (it *SimpleStringOnce) Boolean(isConsiderInit bool) bool {
+	if isConsiderInit && it.IsUnInit() {
 		return false
 	}
 
-	toBool, err := strconv.ParseBool(it.value)
+	value := it.value
 
+	if value == "yes" || value == "y" || value == "1" || value == "YES" || value == "Y" {
+		return true
+	}
+
+	parsedBool, err := strconv.ParseBool(value)
 	if err != nil {
 		return false
 	}
 
-	return toBool
+	return parsedBool
+}
+
+func (it *SimpleStringOnce) IsSetter(isConsiderInit bool) issetter.Value {
+	if isConsiderInit && it.IsUnInit() {
+		return issetter.False
+	}
+
+	value := it.value
+
+	if value == "yes" || value == "y" || value == "1" || value == "YES" || value == "Y" {
+		return issetter.True
+	}
+
+	parsedBool, err := strconv.ParseBool(value)
+	if err != nil {
+		return issetter.Uninitialized
+	}
+
+	return issetter.GetBool(parsedBool)
 }
 
 func (it *SimpleStringOnce) ValueInt(defaultInteger int) int {
@@ -374,6 +531,20 @@ func (it *SimpleStringOnce) RegexFindAllStrings(
 	}
 
 	return regexp.FindAllString(it.value, n)
+}
+
+func (it *SimpleStringOnce) LinesSimpleSlice() *SimpleSlice {
+	lines := strings.Split(it.value, constants.DefaultLine)
+
+	return NewSimpleSliceDirect(false, lines)
+}
+
+func (it *SimpleStringOnce) SimpleSlice(
+	sep string,
+) *SimpleSlice {
+	lines := strings.Split(it.value, sep)
+
+	return NewSimpleSliceDirect(false, lines)
 }
 
 func (it *SimpleStringOnce) Split(

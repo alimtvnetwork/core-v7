@@ -2,14 +2,15 @@ package keymk
 
 // NewKeyWithLegend
 //
-// Chain Sequence (Root-Package-Group-User-Item)
+// Chain Sequence (Root-Package-Group-State-User-Item)
 func NewKeyWithLegend(
 	option *Option,
 	legendName LegendName,
 	isAttachLegendNames bool,
 	rootName,
 	packageName,
-	group string,
+	group,
+	stateName string,
 ) *KeyWithLegend {
 	keyWithLegend := &KeyWithLegend{
 		option:              option,
@@ -17,6 +18,7 @@ func NewKeyWithLegend(
 		rootName:            rootName,
 		packageName:         packageName,
 		groupName:           group,
+		stateName:           stateName,
 		isAttachLegendNames: isAttachLegendNames,
 	}
 

@@ -555,27 +555,26 @@ func (it *CharCollectionMap) AddStringPtrLock(
 // AddSameStartingCharItems Assuming all items starts with same chars
 func (it *CharCollectionMap) AddSameStartingCharItems(
 	char byte,
-	allItemsWithSameChar *[]string,
+	allItemsWithSameChar []string,
 	isCloneAdd bool,
 ) *CharCollectionMap {
-	if allItemsWithSameChar == nil ||
-		*allItemsWithSameChar == nil ||
-		len(*allItemsWithSameChar) == 0 {
+	if len(allItemsWithSameChar) == 0 {
 		return it
 	}
 
 	values, has := it.items[char]
 
 	if has {
-		values.AddStringsPtr(allItemsWithSameChar)
+		values.Adds(allItemsWithSameChar...)
 
 		return it
 	}
 
 	it.items[char] =
 		NewCollectionUsingStrings(
-			*allItemsWithSameChar,
-			isCloneAdd)
+			isCloneAdd,
+			allItemsWithSameChar,
+		)
 
 	return it
 }

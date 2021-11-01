@@ -4,10 +4,11 @@ import (
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/namevalue"
 )
 
 func VarNameValues(
-	nameValues ...NameVal,
+	nameValues ...namevalue.Instance,
 ) string {
 	if len(nameValues) == 0 {
 		return ""

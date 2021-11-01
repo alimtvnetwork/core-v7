@@ -50,7 +50,7 @@ func (linkedCollectionNode *LinkedCollectionNode) AddStringsPtrToNode(
 	items *[]string,
 	isMakeClone bool,
 ) *LinkedCollections {
-	collection := NewCollectionUsingStringsPtr(items, isMakeClone)
+	collection := NewCollectionUsingStringsPtr(isMakeClone, items)
 
 	return linkedCollection.AddCollectionToNode(
 		isSkipOnNull,

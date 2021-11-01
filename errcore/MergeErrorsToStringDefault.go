@@ -2,12 +2,12 @@ package errcore
 
 import "gitlab.com/evatix-go/core/constants"
 
-func MergeErrorStringDefault(
+func MergeErrorsToStringDefault(
 	errorItems ...error,
 ) string {
 	if errorItems == nil {
 		return ""
 	}
 
-	return MergeErrorString(constants.Space, errorItems...)
+	return MergeErrorsToString(constants.Space, errorItems...)
 }

@@ -474,6 +474,10 @@ func (it *ResultsPtrCollection) AddNonNilItemsPtr(
 }
 
 func (it *ResultsPtrCollection) Clear() *ResultsPtrCollection {
+	if it == nil {
+		return it
+	}
+
 	temp := it.Items
 	clearFunc := func() {
 		for _, result := range temp {

@@ -1,6 +1,7 @@
 package constants
 
 import (
+	"math"
 	"os"
 )
 
@@ -139,6 +140,8 @@ const (
 	MaxUnit8Rune                     rune    = 255
 	MaxUnit8AsInt16                  int16   = 255
 	MaxUnit8AsInt                    int     = 255
+	MaxInt16                                 = math.MaxUint16
+	MaxInt16AsInt                    int     = math.MaxUint16
 	MaxUnit8AsFloat32                float32 = 255
 	ParenthesisStartRune             rune    = '('
 	ParenthesisEndRune               rune    = ')'
@@ -354,4 +357,13 @@ const (
 	NonAsyncSafeRangeLarge                   = 100
 	FileInfoEachLineJoiner                   = ",\n - "
 	IndentFileInfoEachLineJoiner             = "\n   - "
+	PathPrefixTemplate                       = "{prefix}"
+	PathRootTemplate                         = "{root}"
+	PathHomeTemplate                         = "{home}"
+	PathUserTemplate                         = "{user}"
+	PathRootPrefixTemplate                   = "{root}/{prefix}/"
+	PathHomeUserTemplate                     = "{home}/{user}"
+	PathTempDirTemplate                      = "{tmp}/{app}/{pkg}/"
+	PathTempTestDirTemplate                  = "{tmp}/{app}/{pkg}/{test}"
+	KeyValShortFormat                        = "%s = %v" // Key, Value any
 )

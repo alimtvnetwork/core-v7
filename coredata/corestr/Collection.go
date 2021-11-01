@@ -280,8 +280,9 @@ func (it *Collection) ConcatNew(
 
 	if length == 0 {
 		return NewCollectionUsingStrings(
+			true,
 			it.items,
-			true)
+		)
 	}
 
 	finalLength := it.Length() + length
@@ -836,8 +837,9 @@ func (it *Collection) Take(
 	list := (it.items)[:take]
 
 	return NewCollectionUsingStrings(
+		false,
 		list,
-		false)
+	)
 }
 
 // Skip use One based index
@@ -861,8 +863,9 @@ func (it *Collection) Skip(
 	list := (it.items)[skip:]
 
 	return NewCollectionUsingStrings(
+		false,
 		list,
-		false)
+	)
 }
 
 func (it *Collection) Reverse() *Collection {
@@ -972,8 +975,9 @@ func (it *Collection) GetSinglePageCollection(
 	list := (it.items)[skipItems:endingIndex]
 
 	return NewCollectionUsingStrings(
+		false,
 		list,
-		false)
+	)
 }
 
 func (it *Collection) AddStringsPtr(
@@ -1589,12 +1593,12 @@ func (it *Collection) FilterLock(filter IsStringFilter) *[]string {
 
 // FilteredCollection must return a items
 func (it *Collection) FilteredCollection(filter IsStringFilter) *Collection {
-	return NewCollectionUsingStringsPtr(it.Filter(filter), false)
+	return NewCollectionUsingStringsPtr(false, it.Filter(filter))
 }
 
 // FilteredCollectionLock must return a items
 func (it *Collection) FilteredCollectionLock(filter IsStringFilter) *Collection {
-	return NewCollectionUsingStringsPtr(it.FilterLock(filter), false)
+	return NewCollectionUsingStringsPtr(false, it.FilterLock(filter))
 }
 
 // FilterPtrLock must return a slice
@@ -2036,8 +2040,9 @@ func (it *Collection) GetAllExcept(items []string) *[]string {
 	}
 
 	newCollection := NewCollectionUsingStrings(
+		false,
 		items,
-		false)
+	)
 
 	return it.GetAllExceptCollection(
 		newCollection)

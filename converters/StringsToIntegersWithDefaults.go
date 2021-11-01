@@ -42,7 +42,7 @@ func StringsToIntegersWithDefaults(
 	}
 
 	return &coreconverted.Integers{
-		Values:        &results,
+		Values:        results,
 		CombinedError: combinedError,
 	}
 }

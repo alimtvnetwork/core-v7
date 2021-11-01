@@ -15,7 +15,7 @@ func main() {
 	// fmt.Println(resultOfResult.JsonString())
 	// fmt.Println(coreJson2.JsonString())
 	// fmt.Println(emptyX.Json().String())
-	// fmt.Println(string(resultOfResult.ValuesNonPtr()))
+	// fmt.Println(string(resultOfResult.SafeBytes()))
 
 	// enumTesting()
 	// testMakerTesting()
@@ -40,9 +40,10 @@ func main() {
 	// indexEnumTesting01()
 
 	// nullTesting01()
-
+	// fmt.Println(runtime.NumCPU())
 	// pathStatTest01()
 	// pathStatTest02()
-	nullTesting02()
+	// nullTesting02()
 
+	keyLegendsTest()
 }

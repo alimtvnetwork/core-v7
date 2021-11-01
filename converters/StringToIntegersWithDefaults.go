@@ -16,7 +16,7 @@ func StringToIntegersWithDefaults(
 ) *coreconverted.Integers {
 	if stringInput == "" {
 		return &coreconverted.Integers{
-			Values:        &[]int{},
+			Values:        []int{},
 			CombinedError: nil,
 		}
 	}
@@ -50,7 +50,7 @@ func StringToIntegersWithDefaults(
 	}
 
 	return &coreconverted.Integers{
-		Values:        &results,
+		Values:        results,
 		CombinedError: combinedError,
 	}
 }

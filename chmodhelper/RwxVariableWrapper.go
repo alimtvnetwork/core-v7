@@ -32,7 +32,7 @@ func NewRwxVariableWrapper(partialRwx string) (*RwxVariableWrapper, error) {
 	groupAttr, err2 := ParseRwxToVarAttribute(group)
 	otherAttr, err3 := ParseRwxToVarAttribute(other)
 
-	mergedErr := errcore.MergeErr(
+	mergedErr := errcore.MergeErrors(
 		err,
 		err2,
 		err3)

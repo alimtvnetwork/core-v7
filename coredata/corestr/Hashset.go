@@ -117,7 +117,7 @@ func (it *Hashset) ResizeLock(capacity int) *Hashset {
 }
 
 func (it *Hashset) Collection() *Collection {
-	return NewCollectionUsingStrings(it.List(), false)
+	return NewCollectionUsingStrings(false, it.List())
 }
 
 func (it *Hashset) IsEmptyLock() bool {
@@ -761,6 +761,22 @@ func (it *Hashset) OrderedList() []string {
 		items
 }
 
+func (it *Hashset) SafeStrings() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
+	return it.List()
+}
+
+func (it *Hashset) Lines() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
+	return it.List()
+}
+
 // GetFilteredItems must return slice.
 func (it *Hashset) GetFilteredItems(
 	filter IsStringFilter,
@@ -823,12 +839,14 @@ func (it *Hashset) GetFilteredCollection(
 
 		if isBreak {
 			return NewCollectionUsingStrings(
-				filteredList, false)
+				false,
+				filteredList)
 		}
 	}
 
 	return NewCollectionUsingStrings(
-		filteredList, false)
+		false,
+		filteredList)
 }
 
 // GetAllExceptHashset Get all hashset items except the mentioned ones in anotherHashset.
@@ -957,6 +975,7 @@ func (it *Hashset) Clear() *Hashset {
 	if it == nil {
 		return it
 	}
+
 	it.items = nil
 	it.items = make(map[string]bool)
 	it.cachedList = []string{}

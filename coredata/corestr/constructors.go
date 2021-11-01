@@ -1,6 +1,7 @@
 package corestr
 
 import (
+	"strings"
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
@@ -148,9 +149,9 @@ func EmptyCollection() *Collection {
 	}
 }
 
-func NewCollectionUsingStrings(stringItems []string, isMakeClone bool) *Collection {
+func NewCollectionUsingStrings(isMakeClone bool, stringItems []string) *Collection {
 	if isMakeClone {
-		length := LengthOfStrings(stringItems)
+		length := len(stringItems)
 		slice := make([]string, 0, length+constants.Capacity4)
 
 		collection := &Collection{
@@ -165,7 +166,23 @@ func NewCollectionUsingStrings(stringItems []string, isMakeClone bool) *Collecti
 	}
 }
 
-func NewCollectionUsingStringsPtr(stringItems *[]string, isMakeClone bool) *Collection {
+func NewCollectionUsingSeparator(sep, line string) *Collection {
+	lines := strings.Split(line, sep)
+
+	return &Collection{
+		items: lines,
+	}
+}
+
+func NewCollectionUsingLines(compiledLine string) *Collection {
+	lines := strings.Split(compiledLine, constants.DefaultLine)
+
+	return &Collection{
+		items: lines,
+	}
+}
+
+func NewCollectionUsingStringsPtr(isMakeClone bool, stringItems *[]string) *Collection {
 	if isMakeClone {
 		length := LengthOfStringsPtr(stringItems)
 		slice := make([]string, 0, length+constants.Capacity4)
@@ -187,7 +204,7 @@ func NewCollectionUsingStringsPtr(stringItems *[]string, isMakeClone bool) *Coll
 }
 
 func NewCollectionUsingStringsPlusCap(stringItems []string, capacity int) *Collection {
-	length := LengthOfStrings(stringItems)
+	length := len(stringItems)
 	collection := NewCollection(length + capacity)
 
 	return collection.Adds(stringItems...)
@@ -789,15 +806,16 @@ func NewCollectionsOfCollectionUsingStrings(
 	isMakeClone bool,
 	stringItems ...string,
 ) *CollectionsOfCollection {
-	length := LengthOfStrings(
+	length := len(
 		stringItems)
 
 	return NewCollectionsOfCollectionUsingLength(
 		constants.Zero,
 		length,
 	).AddStringsPtr(
+		isMakeClone,
 		&stringItems,
-		isMakeClone)
+	)
 }
 
 func NewCollectionsOfCollectionUsingStringsPtr(
@@ -811,8 +829,9 @@ func NewCollectionsOfCollectionUsingStringsPtr(
 		constants.Zero,
 		length,
 	).AddStringsPtr(
+		isMakeClone,
 		stringItems,
-		isMakeClone)
+	)
 }
 
 func NewCollectionsOfCollectionUsingStringsPlusCap(
@@ -820,13 +839,14 @@ func NewCollectionsOfCollectionUsingStringsPlusCap(
 	capacity int,
 	isMakeClone bool,
 ) *CollectionsOfCollection {
-	length := LengthOfStrings(
+	length := len(
 		stringItems)
 	collection := NewCollectionsOfCollection(
 		length + capacity)
 
 	return collection.AddStringsPtr(
-		&stringItems, isMakeClone)
+		isMakeClone,
+		&stringItems)
 }
 
 func NewCollectionsOfCollectionUsingStringsPlusCapPtr(
@@ -840,7 +860,8 @@ func NewCollectionsOfCollectionUsingStringsPlusCapPtr(
 		length + capacity)
 
 	return collection.AddStringsPtr(
-		stringItems, isMakeClone)
+		isMakeClone,
+		stringItems)
 }
 
 func NewCollectionsOfCollectionUsingPointerStringsPlusCap(
@@ -924,7 +945,7 @@ func NewCollectionsOfCollectionPtrUsingStringsOfPointerStrings(
 func NewCollectionsOfCollectionPtrUsingStrings(
 	stringItems []string,
 ) *CollectionsOfCollectionPtr {
-	length := LengthOfStrings(stringItems)
+	length := len(stringItems)
 
 	return NewCollectionsOfCollectionPtrUsingLength(
 		constants.Zero,
@@ -947,7 +968,7 @@ func NewCollectionsOfCollectionPtrUsingStringsPlusCap(
 	addCapacity int,
 	stringItems ...string,
 ) *CollectionsOfCollectionPtr {
-	length := LengthOfStrings(
+	length := len(
 		stringItems)
 
 	collection := NewCollectionsOfCollectionPtr(

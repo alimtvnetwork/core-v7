@@ -1,10 +1,14 @@
 package errcore
 
-import "fmt"
+import (
+	"fmt"
+
+	"gitlab.com/evatix-go/core/namevalue"
+)
 
 func MessageNameValues(
 	message string,
-	nameValues ...NameVal,
+	nameValues ...namevalue.Instance,
 ) string {
 	if len(nameValues) == 0 {
 		return message

@@ -10,9 +10,9 @@ func ToBool(
 	}
 
 	switch s {
-	case "yes", "Yes", "YES":
+	case "yes", "Yes", "YES", "y", "1":
 		return true
-	case "no", "NO", "No":
+	case "no", "NO", "No", "0", "n":
 		return false
 	}
 

@@ -10,6 +10,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/namevalue"
 )
 
 type PathExistStat struct {
@@ -259,31 +260,31 @@ func (it *PathExistStat) String() string {
 	}
 
 	slice := errcore.VarNameValuesStrings(
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "Location",
 			Value: it.Location,
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "Name",
 			Value: it.FileName(),
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "IsExist",
 			Value: it.IsExist,
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "IsFile",
 			Value: it.IsFile(),
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "IsDir",
 			Value: it.IsDir(),
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "Chmod",
 			Value: it.FileMode(),
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "Error",
 			Value: it.Error,
 		})

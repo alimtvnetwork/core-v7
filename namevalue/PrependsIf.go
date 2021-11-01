@@ -1,10 +1,10 @@
-package errcore
+package namevalue
 
-func ConditionalNameValPrepends(
+func PrependsIf(
 	isAdd bool,
-	nameValues []NameVal,
-	prependingItems ...NameVal,
-) []NameVal {
+	nameValues []Instance,
+	prependingItems ...Instance,
+) []Instance {
 	if !isAdd || len(prependingItems) == 0 {
 		return nameValues
 	}

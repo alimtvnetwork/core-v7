@@ -4,7 +4,7 @@ import "gitlab.com/evatix-go/core/constants"
 
 // NewKeyWithLegendNoLegendPackage
 //
-// Chain Sequence (Root-Group-User-Item)
+// Chain Sequence (Root-Group-State-User-Item)
 func NewKeyWithLegendNoLegendPackage(
 	isAttachLegend bool,
 	option *Option,

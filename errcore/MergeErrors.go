@@ -4,7 +4,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-func MergeErr(errorItems ...error) error {
+func MergeErrors(errorItems ...error) error {
 	if len(errorItems) == 0 {
 		return nil
 	}

@@ -2,7 +2,7 @@ package keymk
 
 // NewKeyWithLegendNoLegend
 //
-// Chain Sequence (Root-Package-Group-User-Item)
+// Chain Sequence (Root-Package-Group-State-User-Item)
 func NewKeyWithLegendNoLegend(
 	option *Option,
 	rootName,

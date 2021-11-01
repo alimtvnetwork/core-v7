@@ -1,9 +1,13 @@
 package errcore
 
-import "fmt"
+import (
+	"fmt"
+
+	"gitlab.com/evatix-go/core/namevalue"
+)
 
 func VarNameValuesStrings(
-	nameValues ...NameVal,
+	nameValues ...namevalue.Instance,
 ) []string {
 	if len(nameValues) == 0 {
 		return []string{}

@@ -1,10 +1,14 @@
 package errcore
 
-import "strings"
+import (
+	"strings"
+
+	"gitlab.com/evatix-go/core/namevalue"
+)
 
 func VarNameValuesJoiner(
 	joiner string,
-	nameValues ...NameVal,
+	nameValues ...namevalue.Instance,
 ) string {
 	if len(nameValues) == 0 {
 		return ""

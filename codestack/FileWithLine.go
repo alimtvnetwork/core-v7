@@ -8,8 +8,16 @@ import (
 )
 
 type FileWithLine struct {
-	FileName string
-	Line     int
+	FilePath string // absolute file path
+	Line     int    // line number
+}
+
+func (it *FileWithLine) FullFilePath() string {
+	return it.FilePath
+}
+
+func (it *FileWithLine) LineNumber() int {
+	return it.Line
 }
 
 func (it *FileWithLine) IsNil() bool {
@@ -34,7 +42,7 @@ func (it FileWithLine) StringUsingFmt(formatterFunc func(fileWithLine FileWithLi
 
 func (it *FileWithLine) FileWithLine() string {
 	return fmt.Sprintf(fileWithLineFormat,
-		it.FileName,
+		it.FilePath,
 		it.Line)
 }
 
@@ -95,4 +103,8 @@ func (it *FileWithLine) JsonParseSelfInject(
 	)
 
 	return err
+}
+
+func (it *FileWithLine) AsFileLiner() FileWithLiner {
+	return it
 }

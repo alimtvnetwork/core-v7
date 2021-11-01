@@ -22,7 +22,7 @@ const (
 	var2Format                                    = "(%s, %s) = (%v, %v)"
 	var2WithTypeFormat                            = "(%s [t:%T], %s[t:%T]) = (%v, %v)"
 	var3Format                                    = "(%s, %s, %s) = (%v, %v, %v)"
-	keyValFormat                                  = "%s = %v"
+	keyValFormat                                  = constants.KeyValShortFormat
 	var3WithTypeFormat                            = "(%s [t:%T], %s[t:%T], %s[t:%T]) = (%v, %v, %v)"
 	messageVar2Format                             = "%s (%s, %s) = (%v, %v)"
 	messageVar3Format                             = "%s (%s, %s, %s) = (%v, %v, %v)"
@@ -33,7 +33,7 @@ const (
 	messageWithOtherMsgWithRefWithoutQuoteFormat  = "%s " + messageWithRefWithoutQuoteFormat
 	messageWithTracesRefFormat                    = messageWithTracesWithoutRefFormat + refsWithoutQuotation
 	PrefixStackTrace                              = constants.Hyphen + constants.Space
-	PrefixStackTraceNewLine                       = constants.NewLineUnix + PrefixStackTrace
+	PrefixStackTraceNewLine                       = constants.DefaultLine + PrefixStackTrace
 	NewLineCodeStacksHeader                       = "\nCode Stacks :\n"
 	CodeStacksHeaderNewLine                       = "Code Stacks :\n"
 )

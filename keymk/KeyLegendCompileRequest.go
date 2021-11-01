@@ -1,6 +1,7 @@
 package keymk
 
 type KeyLegendCompileRequest struct {
+	StateName,
 	UserId,
 	GroupId,
 	ItemId string
@@ -11,7 +12,8 @@ func (it KeyLegendCompileRequest) NewKeyLegend(
 	legendName LegendName,
 	isAttachLegend bool,
 	rootName,
-	packageName string,
+	packageName,
+	stateName string,
 ) *KeyWithLegend {
 	return NewKeyWithLegend(
 		option,
@@ -19,12 +21,14 @@ func (it KeyLegendCompileRequest) NewKeyLegend(
 		isAttachLegend,
 		rootName,
 		packageName,
-		it.GroupId)
+		it.GroupId,
+		stateName)
 }
 
 func (it KeyLegendCompileRequest) NewKeyLegendDefaults(
 	rootName,
-	packageName string,
+	packageName,
+	stateName string,
 ) *KeyWithLegend {
 	return NewKeyWithLegend(
 		JoinerOption,
@@ -32,5 +36,6 @@ func (it KeyLegendCompileRequest) NewKeyLegendDefaults(
 		false,
 		rootName,
 		packageName,
-		it.GroupId)
+		it.GroupId,
+		stateName)
 }

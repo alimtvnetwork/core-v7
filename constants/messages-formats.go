@@ -40,8 +40,7 @@ const (
 	StringWithSingleQuoteFormat                  = "'%s'"
 	MessageWrapMessageFormat                     = "%s (%s)"
 	ValueWrapValueFormat                         = "%v (%v)"
-
-	EnumOnlySupportedFormat = "enum: %T, " +
+	EnumOnlySupportedFormat                      = "enum: %T, " +
 		"not supported (\"%s\") | only supported { %s }" // enumSelf, enumSelf, csv-support
 	EnumOnlySupportedWithMessageFormat = "enum: %T, " +
 		"not supported (\"%s\") | %s | only supported { %s }" // enumSelf, enumSelf, message, csv-support

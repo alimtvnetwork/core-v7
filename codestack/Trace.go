@@ -13,7 +13,7 @@ type Trace struct {
 	PackageName,
 	MethodName,
 	PackageMethodName string
-	FileName    string
+	FilePath    string
 	Line        int
 	IsOkay      bool
 	message     corestr.SimpleStringOnce
@@ -39,7 +39,7 @@ func (it *Trace) ShortString() string {
 	shortString := fmt.Sprintf(shortStringFormat,
 		it.PackageMethodName,
 		it.Line,
-		it.FileName,
+		it.FilePath,
 		it.Line)
 
 	return it.
@@ -74,14 +74,22 @@ func (it Trace) StringUsingFmt(formatterFunc func(trace Trace) string) string {
 
 func (it *Trace) FileWithLine() FileWithLine {
 	return FileWithLine{
-		FileName: it.FileName,
+		FilePath: it.FilePath,
 		Line:     it.Line,
 	}
 }
 
+func (it *Trace) FullFilePath() string {
+	return it.FilePath
+}
+
+func (it *Trace) LineNumber() int {
+	return it.Line
+}
+
 func (it *Trace) FileWithLineString() string {
 	return fmt.Sprintf(fileWithLineFormat,
-		it.FileName,
+		it.FilePath,
 		it.Line)
 }
 
@@ -89,7 +97,7 @@ func (it *Trace) getCompiledMessage() string {
 	message := fmt.Sprintf(funcPrintFormat,
 		it.PackageMethodName,
 		it.Line,
-		it.FileName,
+		it.FilePath,
 		it.Line)
 
 	return message
@@ -112,7 +120,7 @@ func (it *Trace) Dispose() {
 	it.PackageName = constants.EmptyString
 	it.MethodName = constants.EmptyString
 	it.PackageMethodName = constants.EmptyString
-	it.FileName = constants.EmptyString
+	it.FilePath = constants.EmptyString
 	it.Line = constants.Zero
 	it.IsOkay = false
 	it.message.Dispose()
@@ -176,7 +184,7 @@ func (it Trace) Clone() Trace {
 		PackageName:       it.PackageName,
 		MethodName:        it.MethodName,
 		PackageMethodName: it.PackageMethodName,
-		FileName:          it.FileName,
+		FilePath:          it.FilePath,
 		Line:              it.Line,
 		IsOkay:            it.IsOkay,
 	}
@@ -190,4 +198,8 @@ func (it *Trace) ClonePtr() *Trace {
 	trace := it.Clone()
 
 	return &trace
+}
+
+func (it *Trace) AsFileLiner() FileWithLiner {
+	return it
 }

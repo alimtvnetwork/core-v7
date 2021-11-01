@@ -7,6 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/namevalue"
 )
 
 func coreDynamicMapAnyItems() {
@@ -22,11 +23,11 @@ func coreDynamicMapAnyItems() {
 
 	fmt.Println(errcore.MessageNameValues(
 		"current message",
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "name1",
 			Value: "nil",
 		},
-		errcore.NameVal{
+		namevalue.Instance{
 			Name:  "name2",
 			Value: 2,
 		}))

@@ -25,6 +25,10 @@ func (it Result) JsonString() string {
 	return *it.JsonStringPtr()
 }
 
+func (it Result) SafeString() string {
+	return *it.JsonStringPtr()
+}
+
 func (it *Result) JsonStringPtr() *string {
 	if it == nil {
 		return constants.EmptyStringPtr
@@ -133,16 +137,36 @@ func (it *Result) String() string {
 	return it.JsonString()
 }
 
-func (it *Result) ValuesNonPtr() []byte {
-	return it.ValueMust()
-}
-
-func (it *Result) ValueMust() []byte {
-	if it.HasIssuesOrEmpty() {
+func (it *Result) SafeNonIssueBytes() []byte {
+	if it.HasSafeItems() {
 		return []byte{}
 	}
 
 	return it.Bytes
+}
+
+func (it *Result) SafeBytes() []byte {
+	if it.Bytes == nil {
+		return []byte{}
+	}
+
+	return it.Bytes
+}
+
+func (it *Result) SafeValues() []byte {
+	if it.Bytes == nil {
+		return []byte{}
+	}
+
+	return it.Bytes
+}
+
+func (it *Result) SafeValuesPtr() *[]byte {
+	if it.HasIssuesOrEmpty() {
+		return &[]byte{}
+	}
+
+	return &it.Bytes
 }
 
 // MeaningfulError create error even if results are nil.
@@ -172,6 +196,10 @@ func (it *Result) IsEmptyError() bool {
 
 func (it *Result) HasSafeItems() bool {
 	return !it.IsEmptyJsonBytes()
+}
+
+func (it *Result) IsAnyNull() bool {
+	return it == nil || it.Bytes == nil
 }
 
 func (it *Result) HasIssuesOrEmpty() bool {
@@ -470,7 +498,7 @@ func (it *Result) Dispose() {
 
 	it.Error = nil
 	it.Bytes = nil
-	it.TypeName = ""
+	it.TypeName = constants.EmptyString
 	it.jsonString = nil
 }
 

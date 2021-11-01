@@ -38,7 +38,7 @@ func (it *Hashmap) HasItems() bool {
 }
 
 func (it *Hashmap) Collection() *Collection {
-	return NewCollectionUsingStrings(it.ValuesList(), false)
+	return NewCollectionUsingStrings(false, it.ValuesList())
 }
 
 func (it *Hashmap) IsEmptyLock() bool {
@@ -630,12 +630,12 @@ func (it *Hashmap) GetKeysFilteredCollection(
 
 		if isBreak {
 			return NewCollectionUsingStrings(
-				filteredList, false)
+				false, filteredList)
 		}
 	}
 
 	return NewCollectionUsingStrings(
-		filteredList, false)
+		false, filteredList)
 }
 
 func (it *Hashmap) Items() map[string]string {
@@ -655,7 +655,7 @@ func (it *Hashmap) ItemsCopyLock() *map[string]string {
 
 func (it *Hashmap) ValuesCollection() *Collection {
 	return NewCollectionUsingStrings(
-		it.ValuesList(), false)
+		false, it.ValuesList())
 }
 
 func (it *Hashmap) ValuesHashset() *Hashset {
@@ -665,7 +665,7 @@ func (it *Hashmap) ValuesHashset() *Hashset {
 
 func (it *Hashmap) ValuesCollectionLock() *Collection {
 	return NewCollectionUsingStrings(
-		*it.ValuesListCopyPtrLock(), false)
+		false, *it.ValuesListCopyPtrLock())
 }
 
 func (it *Hashmap) ValuesHashsetLock() *Hashset {
@@ -693,16 +693,18 @@ func (it *Hashmap) KeysValuesCollection() (
 
 	go func() {
 		keys = NewCollectionUsingStringsPtr(
+			false,
 			it.Keys(),
-			false)
+		)
 
 		wg.Done()
 	}()
 
 	go func() {
 		values = NewCollectionUsingStringsPtr(
+			false,
 			it.ValuesListPtr(),
-			false)
+		)
 
 		wg.Done()
 	}()
@@ -796,8 +798,9 @@ func (it *Hashmap) Keys() *[]string {
 
 func (it *Hashmap) KeysCollection() *Collection {
 	return NewCollectionUsingStringsPtr(
+		false,
 		it.Keys(),
-		false)
+	)
 }
 
 func (it *Hashmap) KeysLock() *[]string {

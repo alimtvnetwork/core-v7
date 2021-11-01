@@ -3,6 +3,7 @@ package corejson
 import (
 	"encoding/json"
 
+	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -190,6 +191,27 @@ func NewResultsPtrCollection(cap int) *ResultsPtrCollection {
 	return &ResultsPtrCollection{
 		Items: list,
 	}
+}
+
+func NewBytesCollection(cap int) *BytesCollection {
+	list := make([][]byte, 0, cap)
+
+	return &BytesCollection{
+		Items: list,
+	}
+}
+
+func NewBytesCollectionUsing(anyItems ...interface{}) (*BytesCollection, error) {
+	length := len(anyItems)
+	collection := NewBytesCollection(length)
+	err := collection.AddAnyItems(anyItems...)
+
+	return collection, err
+
+}
+
+func EmptyBytesCollection() *BytesCollection {
+	return NewBytesCollection(constants.Zero)
 }
 
 func NewResultsCollectionUsingJsoners(

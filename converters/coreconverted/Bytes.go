@@ -17,6 +17,14 @@ func (it *Bytes) Length() int {
 	return len(it.Values)
 }
 
+func (it *Bytes) HasAnyItem() bool {
+	return it.Length() > 0
+}
+
+func (it *Bytes) HasIssuesOrEmpty() bool {
+	return it.IsEmpty() || it.CombinedError != nil
+}
+
 func (it *Bytes) IsEmpty() bool {
 	return it.Length() == 0
 }

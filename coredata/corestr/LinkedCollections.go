@@ -330,7 +330,7 @@ func (it *LinkedCollections) AddStrings(stringsItems ...string) *LinkedCollectio
 		return it
 	}
 
-	collection := NewCollectionUsingStrings(stringsItems, false)
+	collection := NewCollectionUsingStrings(false, stringsItems)
 
 	return it.Add(collection)
 }
@@ -981,7 +981,7 @@ func (it *LinkedCollections) AddStringsPtrAsync(
 	}
 
 	go func() {
-		collection := NewCollectionUsingStringsPtr(items, isMakeClone)
+		collection := NewCollectionUsingStringsPtr(isMakeClone, items)
 
 		it.Lock()
 
@@ -1037,7 +1037,7 @@ func (it *LinkedCollections) AddAsyncFuncItems(
 			return
 		}
 
-		collection := NewCollectionUsingStrings(items, isMakeClone)
+		collection := NewCollectionUsingStrings(isMakeClone, items)
 
 		it.Lock()
 		it.Add(collection)
@@ -1074,7 +1074,7 @@ func (it *LinkedCollections) AddAsyncFuncItemsPointer(
 			return
 		}
 
-		collection := NewCollectionUsingStringsPtr(items, isMakeClone)
+		collection := NewCollectionUsingStringsPtr(isMakeClone, items)
 
 		it.Lock()
 		it.Add(collection)
@@ -1101,7 +1101,7 @@ func (it *LinkedCollections) AddStringsPtr(
 		return it
 	}
 
-	collection := NewCollectionUsingStringsPtr(items, isMakeClone)
+	collection := NewCollectionUsingStringsPtr(isMakeClone, items)
 
 	return it.Add(collection)
 }

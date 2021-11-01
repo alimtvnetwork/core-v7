@@ -1,5 +1,7 @@
 package constants
 
+import "runtime"
+
 //goland:noinspection ALL
 var (
 	newline                                = NewLine
@@ -172,8 +174,14 @@ var (
 	doubleNewLine                          = DoubleNewLine
 	NewLineBytes                           = []byte(NewLine)
 	NewLineUnixBytes                       = []byte(NewLineUnix)
+	DefaultLineBytes                       = []byte(DefaultLine)
 	NewLineWindowsBytes                    = []byte(NewLineWindows)
 	falseBool                              = false
 	trueBool                               = true
 	zeroByte                          byte = 0
+	CpuNumber                              = runtime.NumCPU()
+	ProcessorCount                         = CpuNumber
+	MaxWorker                              = CpuNumber * 5
+	SafeWorker                             = CpuNumber * 3
+	SafestWorker                           = CpuNumber * 2
 )

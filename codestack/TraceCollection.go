@@ -344,7 +344,9 @@ func (it *TraceCollection) GetPagedCollection(
 	length := it.Length()
 
 	if length < eachPageSize {
-		return []*TraceCollection{}
+		return []*TraceCollection{
+			it,
+		}
 	}
 
 	pagesPossibleFloat := float64(length) / float64(eachPageSize)
@@ -569,7 +571,7 @@ func (it *TraceCollection) SkipFilterFilenameTraceCollection(
 	skipFilename string,
 ) *TraceCollection {
 	return it.FilterTraceCollection(func(trace *Trace) (isTake, isBreak bool) {
-		return trace.FileName != skipFilename, false
+		return trace.FilePath != skipFilename, false
 	})
 }
 
@@ -823,6 +825,10 @@ func (it *TraceCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfInjec
 }
 
 func (it *TraceCollection) Clear() *TraceCollection {
+	if it == nil {
+		return it
+	}
+
 	tempItems := it.Items
 	clearFunc := func() {
 		for _, item := range tempItems {
@@ -838,6 +844,10 @@ func (it *TraceCollection) Clear() *TraceCollection {
 }
 
 func (it *TraceCollection) Dispose() {
+	if it == nil {
+		return
+	}
+
 	it.Clear()
 	it.Items = nil
 }

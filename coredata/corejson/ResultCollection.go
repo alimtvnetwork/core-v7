@@ -486,6 +486,10 @@ func (it *ResultsCollection) AddNonNilItemsPtr(
 }
 
 func (it *ResultsCollection) Clear() *ResultsCollection {
+	if it == nil {
+		return it
+	}
+
 	temp := it.Items
 	clearFunc := func() {
 		for _, result := range temp {
@@ -712,27 +716,23 @@ func (it *ResultsCollection) AsJsonParseSelfInjector() JsonParseSelfInjector {
 	return it
 }
 
-func (it *ResultsCollection) ShadowClone() *ResultsCollection {
-	if it == nil {
-		return nil
-	}
-
+func (it ResultsCollection) ShadowClone() ResultsCollection {
 	return it.Clone(false)
 }
 
-func (it ResultsCollection) Clone(isDeepCloneEach bool) *ResultsCollection {
+func (it ResultsCollection) Clone(isDeepCloneEach bool) ResultsCollection {
 	newResults := NewResultsCollection(
 		it.Length())
 
 	if newResults.Length() == 0 {
-		return newResults
+		return *newResults
 	}
 
 	for _, item := range it.Items {
 		newResults.Add(*item.ClonePtr(isDeepCloneEach))
 	}
 
-	return newResults
+	return *newResults
 }
 
 func (it *ResultsCollection) ClonePtr(isDeepCloneEach bool) *ResultsCollection {

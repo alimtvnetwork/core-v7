@@ -1,6 +1,8 @@
 package stringutil
 
-import "strconv"
+import (
+	"strconv"
+)
 
 func ToInt(
 	s string,

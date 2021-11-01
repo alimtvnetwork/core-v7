@@ -42,6 +42,45 @@ func NewSimpleSliceUsing(
 	return slice.Adds(lines...)
 }
 
+func NewSimpleSliceDirect(
+	isClone bool,
+	lines []string,
+) *SimpleSlice {
+	if lines == nil {
+		return EmptySimpleSlice()
+	}
+
+	if !isClone {
+		return &SimpleSlice{
+			lines,
+		}
+	}
+
+	slice := NewSimpleSlice(len(lines))
+
+	return slice.Adds(lines...)
+}
+
+func NewSimpleSliceUsingSeparator(
+	sep, line string,
+) *SimpleSlice {
+	lines := strings.Split(line, sep)
+
+	return &SimpleSlice{
+		Items: lines,
+	}
+}
+
+func NewSimpleSliceUsingLine(
+	combinedLine string,
+) *SimpleSlice {
+	lines := strings.Split(combinedLine, constants.DefaultLine)
+
+	return &SimpleSlice{
+		Items: lines,
+	}
+}
+
 func EmptySimpleSlice() *SimpleSlice {
 	return NewSimpleSlice(0)
 }
@@ -335,7 +374,89 @@ func (it *SimpleSlice) IsEqual(another *SimpleSlice) bool {
 		return false
 	}
 
+	if it.Length() == 0 {
+		return true
+	}
+
 	return it.IsEqualLines(another.Items)
+}
+
+// IsEqualUnorderedLines
+//
+// Will sort both the list,
+// output will contain sorted lines
+func (it *SimpleSlice) IsEqualUnorderedLines(lines []string) bool {
+	if it == nil && lines == nil {
+		return true
+	}
+
+	if it == nil || lines == nil {
+		return false
+	}
+
+	if it.Length() != len(lines) {
+		return false
+	}
+
+	if it.Length() == 0 {
+		return true
+	}
+
+	sort.Strings(it.Items)
+	sort.Strings(lines)
+
+	for i, item := range it.Items {
+		anotherItem := lines[i]
+
+		if item != anotherItem {
+			return false
+		}
+	}
+
+	return true
+}
+
+// IsEqualUnorderedLinesClone
+//
+// Will sort both the list,
+// output will contain sorted lines
+func (it *SimpleSlice) IsEqualUnorderedLinesClone(lines []string) bool {
+	if it == nil && lines == nil {
+		return true
+	}
+
+	if it == nil || lines == nil {
+		return false
+	}
+
+	if it.Length() != len(lines) {
+		return false
+	}
+
+	if it.Length() == 0 {
+		return true
+	}
+
+	clonedLeftSlice := it.Clone(true)
+	clonedRightSlice := NewSimpleSliceDirect(true, lines)
+
+	sort.Strings(clonedLeftSlice.Items)
+	sort.Strings(clonedRightSlice.Items)
+
+	for i, item := range clonedLeftSlice.Items {
+		anotherItem := clonedRightSlice.Items[i]
+
+		if item != anotherItem {
+			return false
+		}
+	}
+
+	go func() {
+		clonedLeftSlice.Dispose()
+		clonedRightSlice.Dispose()
+	}()
+
+	return true
 }
 
 func (it *SimpleSlice) IsEqualLines(lines []string) bool {
@@ -371,8 +492,9 @@ func (it *SimpleSlice) IsDistinctEqual(lines []string) bool {
 
 func (it *SimpleSlice) Collection(isClone bool) *Collection {
 	return NewCollectionUsingStrings(
+		isClone,
 		it.Items,
-		isClone)
+	)
 }
 
 func (it *SimpleSlice) String() string {
@@ -429,7 +551,7 @@ func (it *SimpleSlice) ConcatNew(items ...string) *SimpleSlice {
 }
 
 func (it *SimpleSlice) ToCollection(isClone bool) *Collection {
-	return NewCollectionUsingStrings(it.Items, isClone)
+	return NewCollectionUsingStrings(isClone, it.Items)
 }
 
 func (it *SimpleSlice) CsvStrings() []string {
