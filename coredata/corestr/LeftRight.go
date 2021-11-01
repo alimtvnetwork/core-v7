@@ -149,6 +149,14 @@ func (it *LeftRight) HasSafeNonEmpty() bool {
 		!it.IsRightEmpty()
 }
 
+func (it LeftRight) NonPtr() LeftRight {
+	return it
+}
+
+func (it *LeftRight) Ptr() *LeftRight {
+	return it
+}
+
 func (it *LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
 	if regexp == nil {
 		return false

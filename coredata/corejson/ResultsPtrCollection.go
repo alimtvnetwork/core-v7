@@ -550,6 +550,14 @@ func (it *ResultsPtrCollection) AddJsoners(
 	return it
 }
 
+func (it ResultsPtrCollection) NonPtr() ResultsPtrCollection {
+	return it
+}
+
+func (it *ResultsPtrCollection) Ptr() *ResultsPtrCollection {
+	return it
+}
+
 func (it *ResultsPtrCollection) GetPagesSize(
 	eachPageSize int,
 ) int {

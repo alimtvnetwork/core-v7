@@ -440,6 +440,14 @@ func (it *SimpleStringOnce) ValueDefFloat64() float64 {
 	return it.ValueFloat64(constants.Zero)
 }
 
+func (it SimpleStringOnce) NonPtr() SimpleStringOnce {
+	return it
+}
+
+func (it *SimpleStringOnce) Ptr() *SimpleStringOnce {
+	return it
+}
+
 // HasSafeNonEmpty
 //      it.isInitialize &&
 //		!it.IsEmpty()

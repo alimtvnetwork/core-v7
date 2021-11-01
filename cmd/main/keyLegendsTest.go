@@ -21,7 +21,7 @@ func keyLegendsTest() {
 	// fmt.Println(k.GroupString("g"))
 
 	// fmt.Println(k.Item("itemId1"))
-	 // fmt.Println(k.ItemIntRange(5, 10))
+	// fmt.Println(k.ItemIntRange(5, 10))
 	fmt.Println(k.GroupIntRange(5, 10))
 	// fmt.Println(k.GroupItem("mygroup", "item"))
 	//
@@ -35,6 +35,6 @@ func keyLegendsTest() {
 	// fmt.Println(k.GroupName())
 	// fmt.Println(k.UptoGroup(""))
 	// fmt.Println(k.ItemIntRange( 10, 20))
-	 fmt.Println(k.UptoGroup( "mynewuser1"))
-	fmt.Println(k.UptoState( "my-user"))
+	fmt.Println(k.UptoGroup("mynewuser1"))
+	fmt.Println(k.UptoState("my-user"))
 }

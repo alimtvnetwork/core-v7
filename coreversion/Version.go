@@ -303,3 +303,35 @@ func (it *Version) ComparisonValueIndexes(
 		leftVersions,
 		rightVersions)
 }
+
+func (it Version) Clone() Version {
+	return Version{
+		VersionCompact: it.VersionCompact,
+		VersionMajor:   it.VersionMajor,
+		VersionMinor:   it.VersionMinor,
+		VersionPatch:   it.VersionPatch,
+		VersionBuild:   it.VersionBuild,
+	}
+}
+
+func (it *Version) ClonePtr() *Version {
+	if it == nil {
+		return nil
+	}
+
+	return &Version{
+		VersionCompact: it.VersionCompact,
+		VersionMajor:   it.VersionMajor,
+		VersionMinor:   it.VersionMinor,
+		VersionPatch:   it.VersionPatch,
+		VersionBuild:   it.VersionBuild,
+	}
+}
+
+func (it Version) NonPtr() Version {
+	return it
+}
+
+func (it *Version) Ptr() *Version {
+	return it
+}

@@ -485,6 +485,14 @@ func (it *ResultsCollection) AddNonNilItemsPtr(
 	return it
 }
 
+func (it ResultsCollection) NonPtr() ResultsCollection {
+	return it
+}
+
+func (it *ResultsCollection) Ptr() *ResultsCollection {
+	return it
+}
+
 func (it *ResultsCollection) Clear() *ResultsCollection {
 	if it == nil {
 		return it

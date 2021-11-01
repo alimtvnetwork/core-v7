@@ -497,6 +497,14 @@ func (it *SimpleSlice) Collection(isClone bool) *Collection {
 	)
 }
 
+func (it SimpleSlice) NonPtr() SimpleSlice {
+	return it
+}
+
+func (it *SimpleSlice) Ptr() *SimpleSlice {
+	return it
+}
+
 func (it *SimpleSlice) String() string {
 	if it.IsEmpty() {
 		return constants.EmptyString
