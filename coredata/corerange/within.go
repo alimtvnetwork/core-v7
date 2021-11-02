@@ -246,11 +246,59 @@ func (it *within) RangeInteger(
 		return min, false
 	}
 
-	if input > max {
-		return max, false
+	return max, false
+}
+
+func (it *within) RangeByteDefault(
+	input int,
+) (val byte, isInRange bool) {
+	return it.RangeByte(
+		true,
+		input)
+}
+
+func (it *within) RangeByte(
+	isUsageMinMaxBoundary bool,
+	input int,
+) (val byte, isInRange bool) {
+	if input >= constants.Zero && input <= math.MaxUint8 {
+		return byte(input), true
 	}
 
-	return constants.Zero, false
+	if !isUsageMinMaxBoundary {
+		return constants.Zero, false
+	}
+
+	if input < constants.Zero {
+		return constants.Zero, false
+	}
+
+	return math.MaxUint8, false
+}
+
+func (it *within) RangeUint16Default(
+	input int,
+) (val uint16, isInRange bool) {
+	return it.RangeUint16(
+		true,
+		input)
+}
+
+func (it *within) RangeUint16(
+	isUsageMinMaxBoundary bool,
+	input int,
+) (val uint16, isInRange bool) {
+	toInt, isInRange := it.RangeInteger(
+		isUsageMinMaxBoundary,
+		constants.Zero,
+		math.MaxUint16,
+		input)
+
+	if isInRange || isUsageMinMaxBoundary {
+		return uint16(toInt), isInRange
+	}
+
+	return constants.Zero, isInRange
 }
 
 func (it *within) RangeFloat(
@@ -270,11 +318,7 @@ func (it *within) RangeFloat(
 		return min, false
 	}
 
-	if input > max {
-		return max, false
-	}
-
-	return constants.Zero, false
+	return max, false
 }
 
 func (it *within) RangeFloat64(
@@ -294,9 +338,5 @@ func (it *within) RangeFloat64(
 		return min, false
 	}
 
-	if input > max {
-		return max, false
-	}
-
-	return constants.Zero, false
+	return max, false
 }

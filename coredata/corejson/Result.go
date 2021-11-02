@@ -269,7 +269,7 @@ func (it *Result) IsEmptyJson() bool {
 }
 
 func (it *Result) HasJson() bool {
-	return it.HasBytes()
+	return !it.IsEmptyJsonBytes()
 }
 
 func (it *Result) InjectInto(
