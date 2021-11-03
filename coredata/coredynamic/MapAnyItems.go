@@ -529,20 +529,24 @@ func (it *MapAnyItems) AllValues() []interface{} {
 	return values
 }
 
-func (it *MapAnyItems) JsonMapResults() *corejson.MapResults {
+func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {
 	mapResults := corejson.NewMapResultsUsingCap(it.Length())
 
 	if it.IsEmpty() {
-		return mapResults
+		return mapResults, nil
 	}
 
 	for key, anyInf := range it.Items {
-		mapResults.AddAny(
+		err := mapResults.AddAny(
 			key,
 			anyInf)
+
+		if err != nil {
+			return mapResults, err
+		}
 	}
 
-	return mapResults
+	return mapResults, nil
 }
 
 func (it *MapAnyItems) JsonResultsCollection() *corejson.ResultsCollection {

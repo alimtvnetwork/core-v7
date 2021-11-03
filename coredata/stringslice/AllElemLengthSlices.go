@@ -1,7 +1,7 @@
 package stringslice
 
 func AllElemLengthSlices(slices ...*[]string) int {
-	if slices == nil || len(slices) == 0 {
+	if len(slices) == 0 {
 		return 0
 	}
 

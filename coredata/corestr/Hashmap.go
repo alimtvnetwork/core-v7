@@ -1076,8 +1076,8 @@ func (it *Hashmap) JoinKeys(
 	return strings.Join(*it.Keys(), separator)
 }
 
-func (it *Hashmap) JsonModel() *HashmapDataModel {
-	return NewHashmapsDataModelUsing(it)
+func (it *Hashmap) JsonModel() map[string]string {
+	return it.items
 }
 
 func (it *Hashmap) JsonModelAny() interface{} {
@@ -1089,11 +1089,11 @@ func (it *Hashmap) MarshalJSON() ([]byte, error) {
 }
 
 func (it *Hashmap) UnmarshalJSON(data []byte) error {
-	var dataModel HashmapDataModel
-	err := json.Unmarshal(data, &dataModel)
+	var dataModelItems map[string]string
+	err := json.Unmarshal(data, &dataModelItems)
 
 	if err == nil {
-		it.items = dataModel.Items
+		it.items = dataModelItems
 		it.length = len(it.items)
 		it.hasMapUpdated = false
 		it.isEmptySet = it.length == 0

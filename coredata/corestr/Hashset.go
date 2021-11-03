@@ -1054,11 +1054,6 @@ func (it *Hashset) LengthLock() int {
 	return it.Length()
 }
 
-//goland:noinspection GoVetCopyLock
-func (it *Hashset) IsEquals(another Hashset) bool {
-	return it.IsEqualsPtr(&another)
-}
-
 func (it *Hashset) IsEqualsPtrLock(another *Hashset) bool {
 	it.Lock()
 	defer it.Unlock()
@@ -1170,8 +1165,8 @@ func (it *Hashset) NonWhitespaceJoins(
 }
 
 //goland:noinspection GoLinterLocal
-func (it *Hashset) JsonModel() *HashsetDataModel {
-	return NewHashsetsDataModelUsing(it)
+func (it *Hashset) JsonModel() map[string]bool {
+	return it.items
 }
 
 //goland:noinspection GoLinterLocal
@@ -1184,11 +1179,11 @@ func (it *Hashset) MarshalJSON() ([]byte, error) {
 }
 
 func (it *Hashset) UnmarshalJSON(data []byte) error {
-	var dataModel HashsetDataModel
-	err := json.Unmarshal(data, &dataModel)
+	var dataModelItems map[string]bool
+	err := json.Unmarshal(data, &dataModelItems)
 
 	if err == nil {
-		it.items = dataModel.Items
+		it.items = dataModelItems
 		it.length = -1
 		it.hasMapUpdated = true
 		it.isEmptySet = false

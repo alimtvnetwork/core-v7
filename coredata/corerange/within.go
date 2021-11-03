@@ -10,18 +10,6 @@ import (
 
 type within struct{}
 
-func (it *within) StringRangeInt64(
-	input string,
-) (val int64, isInRange bool) {
-	finalInt, isInRange := it.StringRangeInteger(
-		true,
-		math.MinInt64,
-		math.MaxInt64,
-		input)
-
-	return int64(finalInt), isInRange
-}
-
 func (it *within) StringRangeInt32(
 	input string,
 ) (val int32, isInRange bool) {
@@ -94,18 +82,6 @@ func (it *within) StringRangeUint32(
 	return uint32(finalInt), isInRange
 }
 
-func (it *within) StringRangeUint64(
-	input string,
-) (val uint64, isInRange bool) {
-	finalInt, isInRange := it.StringRangeInteger(
-		true,
-		constants.Zero,
-		math.MaxUint64,
-		input)
-
-	return uint64(finalInt), isInRange
-}
-
 func (it *within) StringRangeIntegerDefault(
 	min, max int,
 	input string,
@@ -140,7 +116,6 @@ func (it *within) StringRangeInteger(
 		min,
 		max,
 		toInt)
-
 }
 
 func (it *within) StringRangeFloat(
