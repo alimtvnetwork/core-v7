@@ -300,7 +300,7 @@ func (it *ValidValues) AddHashset(
 
 func (it *ValidValues) Hashmap() *Hashmap {
 	length := it.Length()
-	hashmap := NewHashmap(length)
+	hashmap := New.Hashmap.Cap(length)
 
 	if length == 0 {
 		return hashmap

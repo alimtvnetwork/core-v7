@@ -250,7 +250,7 @@ func (linkedListNode *LinkedListNode) isNextChainEqual(
 }
 
 func (linkedListNode *LinkedListNode) CreateLinkedList() *LinkedList {
-	return NewLinkedList().
+	return Empty.LinkedList().
 		AppendChainOfNodes(linkedListNode)
 }
 

@@ -10,7 +10,7 @@ import (
 func getMapAnyItems() *coredynamic.MapAnyItems {
 	fmt.Println("MapAnyItems")
 	mapAnyItems := coredynamic.NewMapAnyItems(200)
-	collection := corestr.NewCollection(100)
+	collection := corestr.New.Collection.Cap(100)
 	collection.Adds("alim-1", "alim-2", "alim-3", "alim-4")
 	mapAnyItems.Add("alim-something", collection)
 	mapAnyItems.Add("alim-something2", collection)

@@ -34,7 +34,7 @@ func NewValidValueUsingAny(
 	}
 }
 
-// NewValidValueUsingAnyAutoValid IsValid to false on nil or empty string
+// NewValidValueUsingAnyAutoValid IsValid to false on nil or Empty string
 func NewValidValueUsingAnyAutoValid(
 	isIncludeFieldName bool,
 	any interface{},

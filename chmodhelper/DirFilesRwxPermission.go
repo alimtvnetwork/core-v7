@@ -20,7 +20,7 @@ func (it *DirFilesWithRwxPermission) GetPaths() []string {
 }
 
 func (it *DirFilesWithRwxPermission) GetPathsPtr() *[]string {
-	collection := corestr.NewCollection(constants.ArbitraryCapacity50)
+	collection := corestr.New.Collection.Cap(constants.ArbitraryCapacity50)
 
 	for _, file := range it.Files {
 		compiledPath := path.Join(it.Dir, file)

@@ -1199,10 +1199,9 @@ func (it *CollectionPtr) FilterLock(
 func (it *CollectionPtr) FilteredCollection(
 	filter IsStringPointerFilter,
 ) *CollectionPtr {
-	return NewCollectionPtrUsingStrings(
+	return New.CollectionPtr.StringsPtr(
 		it.FilterSimpleArray(
-			filter),
-		constants.Zero)
+			filter))
 }
 
 // FilteredCollectionLock must return a items
@@ -1212,9 +1211,9 @@ func (it *CollectionPtr) FilteredCollectionLock(
 	it.Lock()
 	defer it.Unlock()
 
-	return NewCollectionPtrUsingStrings(
+	return New.CollectionPtr.StringsPtr(
 		it.FilterSimpleArray(filter),
-		constants.Zero)
+	)
 }
 
 // FilterPtrLock must return a slice
@@ -1324,8 +1323,8 @@ func (it *CollectionPtr) GetAllExcept(
 		return &newItems
 	}
 
-	newCollection := NewCollectionPtrUsingPointerStrings(
-		items, constants.Zero)
+	newCollection := New.CollectionPtr.Default(
+		items)
 
 	return it.GetAllExceptCollection(
 		newCollection)
@@ -1352,33 +1351,32 @@ func (it *CollectionPtr) NonEmptySimpleListPtr() *[]string {
 
 func (it *CollectionPtr) HashsetAsIs() *Hashset {
 	if it.IsEmpty() {
-		return EmptyHashset()
+		return New.Hashset.Empty()
 	}
 
-	return NewHashsetUsingStringPointersArray(
-		&it.items,
-		constants.Zero,
-		true)
+	return New.Hashset.PointerStrings(
+		it.items,
+	)
 }
 
 func (it *CollectionPtr) HashsetDoubleLength() *Hashset {
 	if it.IsEmpty() {
-		return EmptyHashset()
+		return New.Hashset.Empty()
 	}
 
-	return NewHashsetUsingStringPointersArray(
+	return New.Hashset.PointerStringsPtrOption(
+		it.Length()*2,
+		false,
 		&it.items,
-		it.Length(),
-		true)
+	)
 }
 
 func (it *CollectionPtr) HashsetLock() *Hashset {
 	items := it.ListCopyPtrLock()
 
-	return NewHashsetUsingStringPointersArray(
-		&items,
-		constants.ArbitraryCapacity100,
-		false)
+	return New.Hashset.PointerStrings(
+		items,
+	)
 }
 
 func (it *CollectionPtr) SimpleList() []string {
@@ -1546,14 +1544,14 @@ func (it *CollectionPtr) Take(
 	}
 
 	if take == 0 {
-		return EmptyCollectionPtr()
+		return Empty.CollectionPtr()
 	}
 
 	list := it.items[:take]
 
-	return NewCollectionPtrUsingPointerStrings(
+	return New.CollectionPtr.Default(
 		list,
-		constants.Zero)
+	)
 }
 
 // Skip use One based index
@@ -1576,9 +1574,9 @@ func (it *CollectionPtr) Skip(
 
 	list := it.items[skip:]
 
-	return NewCollectionPtrUsingPointerStrings(
+	return New.CollectionPtr.Default(
 		list,
-		constants.Zero)
+	)
 }
 
 func (it *CollectionPtr) GetPagesSize(
@@ -1598,15 +1596,14 @@ func (it *CollectionPtr) GetPagedCollection(
 	length := it.Length()
 
 	if length < eachPageSize {
-		return NewCollectionsOfCollectionPtrUsingPointerStringsPlusCap(
-			constants.Zero,
-			it.items...,
+		return New.CollectionsOfCollectionPtr.PointerStrings(
+			it.items,
 		)
 	}
 
 	pagesPossibleFloat := float64(length) / float64(eachPageSize)
 	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
-	collectionOfCollection := NewCollectionsOfCollectionPtr(
+	collectionOfCollection := New.CollectionsOfCollectionPtr.Cap(
 		pagesPossibleCeiling)
 
 	for i := 1; i <= pagesPossibleCeiling; i++ {
@@ -1653,9 +1650,9 @@ func (it *CollectionPtr) GetSinglePageCollection(
 
 	list := it.items[skipItems:endingIndex]
 
-	return NewCollectionPtrUsingPointerStrings(
+	return New.CollectionPtr.PointerStrings(
 		list,
-		constants.Zero)
+	)
 }
 
 func (it *CollectionPtr) IndexAt(
@@ -1852,7 +1849,7 @@ func (it *CollectionPtr) IsContainsAllLock(
 func (it *CollectionPtr) CharCollectionPtrMap() *CharCollectionMap {
 	length := it.Length()
 	lengthByFourBestGuess := length / 4
-	runeMap := NewCharCollectionMap(
+	runeMap := New.CharCollectionMap.CapSelfCap(
 		length,
 		lengthByFourBestGuess)
 
@@ -2031,7 +2028,7 @@ func (it *CollectionPtr) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyCollectionPtr(), err
+		return nil, err
 	}
 
 	return it, nil

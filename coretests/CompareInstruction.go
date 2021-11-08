@@ -35,7 +35,7 @@ func (it *ComparingInstruction) ActualHashset() *corestr.Hashset {
 		true,
 		it.Actual())
 
-	it.actualHashset = corestr.NewHashsetUsingStrings(&whitespaceRemovedSplits)
+	it.actualHashset = corestr.New.Hashset.StringsPtr(&whitespaceRemovedSplits)
 
 	return it.actualHashset
 }

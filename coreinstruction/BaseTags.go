@@ -32,55 +32,55 @@ func NewTags(tags []string) *BaseTags {
 	}
 }
 
-func (receiver BaseTags) TagsLength() int {
-	if receiver.Tags == nil {
+func (it BaseTags) TagsLength() int {
+	if it.Tags == nil {
 		return constants.Zero
 	}
 
-	return len(*receiver.Tags)
+	return len(*it.Tags)
 }
 
-func (receiver BaseTags) IsTagsEmpty() bool {
-	return receiver.TagsLength() == 0
+func (it BaseTags) IsTagsEmpty() bool {
+	return it.TagsLength() == 0
 }
 
-func (receiver BaseTags) TagsHashset() *corestr.Hashset {
-	if receiver.tagsHashset != nil {
-		return receiver.tagsHashset
+func (it BaseTags) TagsHashset() *corestr.Hashset {
+	if it.tagsHashset != nil {
+		return it.tagsHashset
 	}
 
-	receiver.tagsHashset = corestr.NewHashsetUsingStrings(
-		receiver.Tags)
+	it.tagsHashset = corestr.New.Hashset.StringsPtr(
+		it.Tags)
 
-	return receiver.tagsHashset
+	return it.tagsHashset
 }
 
-func (receiver BaseTags) HasAllTags(tags ...string) bool {
+func (it BaseTags) HasAllTags(tags ...string) bool {
 	if len(tags) == 0 {
 		return true
 	}
 
-	hashset := receiver.TagsHashset()
+	hashset := it.TagsHashset()
 
 	return hashset.HasAll(tags...)
 }
 
-func (receiver BaseTags) HasAnyTags(tags ...string) bool {
+func (it BaseTags) HasAnyTags(tags ...string) bool {
 	if len(tags) == 0 {
 		return true
 	}
 
-	hashset := receiver.TagsHashset()
+	hashset := it.TagsHashset()
 
 	return hashset.HasAny(tags...)
 }
 
-func (receiver BaseTags) IsAnyTagMatchesRegex(regexp2 *regexp.Regexp) bool {
-	if receiver.IsTagsEmpty() {
+func (it BaseTags) IsAnyTagMatchesRegex(regexp2 *regexp.Regexp) bool {
+	if it.IsTagsEmpty() {
 		return false
 	}
 
-	for _, s := range *receiver.Tags {
+	for _, s := range *it.Tags {
 		if regexp2.MatchString(s) {
 			return true
 		}

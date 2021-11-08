@@ -56,7 +56,7 @@ func (it *CharCollectionMap) GetCharsPtrGroups(
 		return nil
 	}
 
-	collectionMap := NewCharCollectionMap(
+	collectionMap := New.CharCollectionMap.CapSelfCap(
 		length,
 		length/3)
 
@@ -265,7 +265,7 @@ func (it *CharCollectionMap) HasWithCollection(
 	str string,
 ) (bool, *Collection) {
 	if it.IsEmpty() {
-		return false, EmptyCollection()
+		return false, Empty.Collection()
 	}
 
 	char := it.
@@ -277,7 +277,7 @@ func (it *CharCollectionMap) HasWithCollection(
 		return collection.Has(str), collection
 	}
 
-	return false, EmptyCollection()
+	return false, Empty.Collection()
 }
 
 func (it *CharCollectionMap) HasWithCollectionLock(
@@ -287,7 +287,7 @@ func (it *CharCollectionMap) HasWithCollectionLock(
 	defer it.Unlock()
 
 	if it.IsEmpty() {
-		return false, EmptyCollection()
+		return false, Empty.Collection()
 	}
 
 	char := it.
@@ -299,7 +299,7 @@ func (it *CharCollectionMap) HasWithCollectionLock(
 		return collection.HasLock(str), collection
 	}
 
-	return false, EmptyCollection()
+	return false, Empty.Collection()
 }
 
 func (it *CharCollectionMap) LengthOf(char byte) int {
@@ -476,7 +476,7 @@ func (it *CharCollectionMap) AddLock(
 		return it
 	}
 
-	newCollection := NewCollection(it.eachCollectionCapacity)
+	newCollection := New.Collection.Cap(it.eachCollectionCapacity)
 	newCollection.Add(str)
 
 	it.Lock()
@@ -499,7 +499,7 @@ func (it *CharCollectionMap) Add(
 		return it
 	}
 
-	newCollection := NewCollection(it.eachCollectionCapacity)
+	newCollection := New.Collection.Cap(it.eachCollectionCapacity)
 	newCollection.Add(str)
 	it.items[char] = newCollection
 
@@ -519,7 +519,7 @@ func (it *CharCollectionMap) AddStringPtr(
 		return it
 	}
 
-	newCollection := NewCollection(it.eachCollectionCapacity)
+	newCollection := New.Collection.Cap(it.eachCollectionCapacity)
 	newCollection.AddPtr(str)
 	it.items[char] = newCollection
 
@@ -542,7 +542,7 @@ func (it *CharCollectionMap) AddStringPtrLock(
 		return it
 	}
 
-	newCollection := NewCollection(it.eachCollectionCapacity)
+	newCollection := New.Collection.Cap(it.eachCollectionCapacity)
 	newCollection.AddPtr(str)
 
 	it.Lock()
@@ -571,7 +571,7 @@ func (it *CharCollectionMap) AddSameStartingCharItems(
 	}
 
 	it.items[char] =
-		NewCollectionUsingStrings(
+		New.Collection.StringsOptions(
 			isCloneAdd,
 			allItemsWithSameChar,
 		)
@@ -797,7 +797,7 @@ func (it *CharCollectionMap) GetCollection(
 	}
 
 	if isAddNewOnEmpty {
-		newCollection := NewCollection(it.eachCollectionCapacity)
+		newCollection := New.Collection.Cap(it.eachCollectionCapacity)
 		it.items[char] = newCollection
 
 		return newCollection
@@ -847,7 +847,7 @@ func (it *CharCollectionMap) AddSameCharsCollection(
 
 	if isNilOrEmptyCollectionGiven {
 		// create new
-		newCollection := NewCollection(
+		newCollection := New.Collection.Cap(
 			it.eachCollectionCapacity)
 		it.items[char] = newCollection
 
@@ -997,7 +997,7 @@ func (it *CharCollectionMap) AddSameCharsCollectionLock(
 
 	if isNilOrEmptyCollectionGiven {
 		// create new
-		newCollection := NewCollection(
+		newCollection := New.Collection.Cap(
 			it.eachCollectionCapacity)
 
 		it.Lock()
@@ -1033,7 +1033,7 @@ func (it *CharCollectionMap) HashsetByChar(
 		return nil
 	}
 
-	return NewHashsetUsingCollection(
+	return New.Hashset.UsingCollection(
 		collection)
 }
 
@@ -1045,12 +1045,12 @@ func (it *CharCollectionMap) HashsetByCharLock(
 	it.Unlock()
 
 	if collection == nil {
-		return EmptyHashset()
+		return New.Hashset.Empty()
 	}
 
 	items := collection.ListCopyPtrLock()
 
-	return NewHashsetUsingStrings(
+	return New.Hashset.Strings(
 		items,
 	)
 }
@@ -1075,7 +1075,7 @@ func (it *CharCollectionMap) HashsetsCollectionByStringFirstChar(
 	stringItems ...string,
 ) *HashsetsCollection {
 	if it.IsEmpty() {
-		return EmptyHashsetsCollection()
+		return Empty.HashsetsCollection()
 	}
 
 	hashsets := make(
@@ -1093,12 +1093,12 @@ func (it *CharCollectionMap) HashsetsCollectionByStringFirstChar(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
+	return New.HashsetsCollection.UsingHashsetsPointers(hashsets...)
 }
 
 func (it *CharCollectionMap) HashsetsCollection() *HashsetsCollection {
 	if it.IsEmpty() {
-		return EmptyHashsetsCollection()
+		return Empty.HashsetsCollection()
 	}
 
 	hashsets := make(
@@ -1116,14 +1116,14 @@ func (it *CharCollectionMap) HashsetsCollection() *HashsetsCollection {
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
+	return New.HashsetsCollection.UsingHashsetsPointers(hashsets...)
 }
 
 func (it *CharCollectionMap) HashsetsCollectionByChars(
 	chars ...byte,
 ) *HashsetsCollection {
 	if it.IsEmpty() {
-		return EmptyHashsetsCollection()
+		return Empty.HashsetsCollection()
 	}
 
 	hashsets := make(
@@ -1141,7 +1141,7 @@ func (it *CharCollectionMap) HashsetsCollectionByChars(
 		hashsets = append(hashsets, hashset)
 	}
 
-	return NewHashsetsCollectionUsingPointerHashsets(hashsets...)
+	return New.HashsetsCollection.UsingHashsetsPointers(hashsets...)
 }
 
 func (it *CharCollectionMap) JsonModel() *CharCollectionDataModel {
@@ -1214,7 +1214,7 @@ func (it *CharCollectionMap) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyCharCollectionMap(), err
+		return Empty.CharCollectionMap(), err
 	}
 
 	return it, nil

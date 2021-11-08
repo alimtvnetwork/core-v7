@@ -84,21 +84,22 @@ func (it *CollectionsOfCollectionPtr) ListPtr(
 func (it *CollectionsOfCollectionPtr) ToCollection() *Collection {
 	list := it.ListPtr(0)
 
-	return NewCollectionUsingStringsPlusCapPtr(list, 0)
+	return New.Collection.StringsPtr(list)
 }
 
 func (it *CollectionsOfCollectionPtr) AddStringsPtr(
-	stringsItems *[]string,
 	addCapacity int,
+	stringsItems *[]string,
 ) *CollectionsOfCollectionPtr {
 	if stringsItems == nil {
 		return it
 	}
 
 	return it.Adds(
-		NewCollectionPtrUsingStrings(
+		New.CollectionPtr.StringsPtrPlusCap(
+			addCapacity,
 			stringsItems,
-			addCapacity))
+		))
 }
 
 func (it *CollectionsOfCollectionPtr) AddPointerStrings(
@@ -109,9 +110,9 @@ func (it *CollectionsOfCollectionPtr) AddPointerStrings(
 	}
 
 	return it.Adds(
-		NewCollectionPtrUsingPointerStrings(
+		New.CollectionPtr.PointerStrings(
 			pointerStringsItems,
-			0))
+		))
 }
 
 func (it *CollectionsOfCollectionPtr) AddsStringsOfStrings(
@@ -124,8 +125,9 @@ func (it *CollectionsOfCollectionPtr) AddsStringsOfStrings(
 
 	for _, stringsPointer := range stringsOfPointerStrings {
 		it.AddStringsPtr(
+			addCapacity,
 			stringsPointer,
-			addCapacity)
+		)
 	}
 
 	return it
@@ -141,8 +143,9 @@ func (it *CollectionsOfCollectionPtr) AddsStringsOfPointerStrings(
 
 	for _, stringsPointer := range *stringsOfPointerStrings {
 		it.AddStringsPtr(
+			addCapacity,
 			stringsPointer,
-			addCapacity)
+		)
 	}
 
 	return it
@@ -232,7 +235,7 @@ func (it *CollectionsOfCollectionPtr) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyCollectionsOfCollectionPtr(), err
+		return Empty.CollectionsOfCollectionPtr(), err
 	}
 
 	return it, nil

@@ -50,7 +50,9 @@ func (linkedCollectionNode *LinkedCollectionNode) AddStringsPtrToNode(
 	items *[]string,
 	isMakeClone bool,
 ) *LinkedCollections {
-	collection := NewCollectionUsingStringsPtr(isMakeClone, items)
+	collection := New.
+		Collection.
+		StringsPtrOption(isMakeClone, items)
 
 	return linkedCollection.AddCollectionToNode(
 		isSkipOnNull,
@@ -257,7 +259,7 @@ func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
 }
 
 func (linkedCollectionNode *LinkedCollectionNode) CreateLinkedList() *LinkedCollections {
-	return NewLinkedCollections().
+	return Empty.LinkedCollections().
 		AppendChainOfNodes(linkedCollectionNode)
 }
 

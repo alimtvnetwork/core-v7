@@ -117,7 +117,7 @@ func (it *Hashset) ResizeLock(capacity int) *Hashset {
 }
 
 func (it *Hashset) Collection() *Collection {
-	return NewCollectionUsingStrings(false, it.List())
+	return New.Collection.StringsOptions(false, it.List())
 }
 
 func (it *Hashset) IsEmptyLock() bool {
@@ -134,10 +134,11 @@ func (it *Hashset) ConcatNewHashsets(
 	isEmpty := hashsets == nil || len(hashsets) == 0
 
 	if isEmpty {
-		return NewHashsetUsingMap(
-			it.items,
+		return New.Hashset.UsingMapOption(
 			constants.Zero,
-			isCloneCurrentOnEmpty)
+			isCloneCurrentOnEmpty,
+			it.items,
+		)
 	}
 
 	length := it.Length() + constants.Capacity4
@@ -150,10 +151,11 @@ func (it *Hashset) ConcatNewHashsets(
 		length += h.Length()
 	}
 
-	newHashset := NewHashsetUsingMap(
-		it.items,
+	newHashset := New.Hashset.UsingMapOption(
 		length,
-		isCloneCurrentOnEmpty)
+		isCloneCurrentOnEmpty,
+		it.items,
+	)
 
 	newHashset.AddHashsetItems(it)
 
@@ -171,20 +173,22 @@ func (it *Hashset) ConcatNewStringsPointers(
 	isEmpty := len(stringsOfStringsItems) == 0
 
 	if isEmpty {
-		return NewHashsetUsingMap(
-			it.items,
+		return New.Hashset.UsingMapOption(
 			constants.Zero,
-			isCloneCurrentOnEmpty)
+			isCloneCurrentOnEmpty,
+			it.items,
+		)
 	}
 
 	length := AllIndividualItemsStringsOfStringsPointerLength(&stringsOfStringsItems) +
 		it.Length() +
 		constants.Capacity4
 
-	newHashset := NewHashsetUsingMap(
-		it.items,
+	newHashset := New.Hashset.UsingMapOption(
 		length,
-		isCloneCurrentOnEmpty)
+		isCloneCurrentOnEmpty,
+		it.items,
+	)
 
 	newHashset.AddHashsetItems(it)
 
@@ -202,19 +206,21 @@ func (it *Hashset) ConcatNewStrings(
 	isEmpty := len(stringsOfStringsItems) == 0
 
 	if isEmpty {
-		return NewHashsetUsingMap(
-			it.items,
+		return New.Hashset.UsingMapOption(
 			constants.Zero,
-			isCloneCurrentOnEmpty)
+			isCloneCurrentOnEmpty,
+			it.items,
+		)
 	}
 
 	length := AllIndividualStringsOfStringsLength(&stringsOfStringsItems) +
 		it.Length() +
 		constants.Capacity4
-	newHashset := NewHashsetUsingMap(
-		it.items,
+	newHashset := New.Hashset.UsingMapOption(
 		length,
-		true)
+		true,
+		it.items,
+	)
 
 	newHashset.AddHashsetItems(it)
 
@@ -688,7 +694,7 @@ func (it *Hashset) HasAllStringsPtr(keys *[]string) bool {
 	return true
 }
 
-// HasAllCollectionItems return false on items is nil or empty.
+// HasAllCollectionItems return false on items is nil or Empty.
 func (it *Hashset) HasAllCollectionItems(
 	collection *Collection,
 ) bool {
@@ -816,7 +822,7 @@ func (it *Hashset) GetFilteredCollection(
 	filter IsStringFilter,
 ) *Collection {
 	if it.IsEmpty() {
-		return EmptyCollection()
+		return Empty.Collection()
 	}
 
 	filteredList := make(
@@ -838,13 +844,13 @@ func (it *Hashset) GetFilteredCollection(
 			result)
 
 		if isBreak {
-			return NewCollectionUsingStrings(
+			return New.Collection.StringsOptions(
 				false,
 				filteredList)
 		}
 	}
 
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false,
 		filteredList)
 }
@@ -891,7 +897,7 @@ func (it *Hashset) GetAllExcept(
 		return it.ListPtr()
 	}
 
-	newHashset := NewHashsetUsingStrings(
+	newHashset := New.Hashset.StringsPtr(
 		items)
 
 	return it.GetAllExceptHashset(
@@ -1029,10 +1035,11 @@ func (it *Hashset) ToLowerSet() *Hashset {
 		newMap[toLower] = isEnabled
 	}
 
-	return NewHashsetUsingMap(
-		newMap,
+	return New.Hashset.UsingMapOption(
 		length,
-		false)
+		false,
+		newMap,
+	)
 }
 
 func (it *Hashset) Length() int {
@@ -1207,7 +1214,7 @@ func (it *Hashset) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyHashset(), err
+		return New.Hashset.Empty(), err
 	}
 
 	return it, nil

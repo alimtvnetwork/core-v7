@@ -224,7 +224,7 @@ func (it *KeyValueCollection) AddsHashmap(
 
 func (it *KeyValueCollection) Hashmap() *Hashmap {
 	length := it.Length()
-	hashmap := NewHashmap(length)
+	hashmap := New.Hashmap.Cap(length)
 
 	if length == 0 {
 		return hashmap
