@@ -45,5 +45,6 @@ func main() {
 	// pathStatTest02()
 	// nullTesting02()
 
-	keyLegendsTest()
+	// keyLegendsTest()
+	coreDynamicMapAnyItems()
 }

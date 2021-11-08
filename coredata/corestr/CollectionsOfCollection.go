@@ -82,7 +82,7 @@ func (it *CollectionsOfCollection) ListPtr(additionalCapacity int) *[]string {
 func (it *CollectionsOfCollection) ToCollection() *Collection {
 	list := it.ListPtr(0)
 
-	return NewCollectionUsingStringsPlusCapPtr(list, 0)
+	return New.Collection.StringsPtr(list)
 }
 
 func (it *CollectionsOfCollection) AddStringsPtr(
@@ -93,7 +93,7 @@ func (it *CollectionsOfCollection) AddStringsPtr(
 		return it
 	}
 
-	return it.Adds(NewCollectionUsingStrings(isCloneAdd, *stringsItems))
+	return it.Adds(New.Collection.StringsOptions(isCloneAdd, *stringsItems))
 }
 
 func (it *CollectionsOfCollection) AddPointerStringsPtr(
@@ -105,7 +105,7 @@ func (it *CollectionsOfCollection) AddPointerStringsPtr(
 
 	stringsItems := converters.PointerStringsToStrings(pointerStringsItems)
 
-	return it.Adds(NewCollectionUsingStrings(false, *stringsItems))
+	return it.Adds(New.Collection.StringsOptions(false, *stringsItems))
 }
 
 func (it *CollectionsOfCollection) AddsStringsOfStrings(
@@ -296,7 +296,7 @@ func (it *CollectionsOfCollection) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyCollectionsOfCollection(), err
+		return Empty.CollectionsOfCollection(), err
 	}
 
 	return it, nil

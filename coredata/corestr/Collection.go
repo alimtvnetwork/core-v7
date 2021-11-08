@@ -279,7 +279,7 @@ func (it *Collection) ConcatNew(
 	length := len(addingStrings)
 
 	if length == 0 {
-		return NewCollectionUsingStrings(
+		return New.Collection.StringsOptions(
 			true,
 			it.items,
 		)
@@ -290,7 +290,7 @@ func (it *Collection) ConcatNew(
 		finalLength,
 		predictiveLengthAdd)
 
-	return NewCollection(capacity).
+	return New.Collection.Cap(capacity).
 		Adds(it.items...).
 		AddStringsPtr(&addingStrings)
 }
@@ -831,12 +831,12 @@ func (it *Collection) Take(
 	}
 
 	if take == 0 {
-		return EmptyCollection()
+		return Empty.Collection()
 	}
 
 	list := (it.items)[:take]
 
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false,
 		list,
 	)
@@ -862,7 +862,7 @@ func (it *Collection) Skip(
 
 	list := (it.items)[skip:]
 
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false,
 		list,
 	)
@@ -909,14 +909,13 @@ func (it *Collection) GetPagedCollection(
 	length := it.Length()
 
 	if length < eachPageSize {
-		return NewCollectionsOfCollectionUsingStrings(
-			false,
-			it.items...)
+		return New.CollectionsOfCollection.Strings(
+			it.items)
 	}
 
 	pagesPossibleFloat := float64(length) / float64(eachPageSize)
 	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
-	collectionOfCollection := NewCollectionsOfCollection(
+	collectionOfCollection := New.CollectionsOfCollection.Cap(
 		pagesPossibleCeiling)
 
 	wg := sync.WaitGroup{}
@@ -974,7 +973,7 @@ func (it *Collection) GetSinglePageCollection(
 
 	list := (it.items)[skipItems:endingIndex]
 
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false,
 		list,
 	)
@@ -1543,9 +1542,9 @@ func (it *Collection) List() []string {
 }
 
 // Filter must return a slice
-func (it *Collection) Filter(filter IsStringFilter) *[]string {
+func (it *Collection) Filter(filter IsStringFilter) []string {
 	if it.IsEmpty() {
-		return &([]string{})
+		return []string{}
 	}
 
 	list := make([]string, 0, it.Length())
@@ -1558,17 +1557,17 @@ func (it *Collection) Filter(filter IsStringFilter) *[]string {
 		}
 
 		if isBreak {
-			return &list
+			return list
 		}
 	}
 
-	return &list
+	return list
 }
 
 // FilterLock must return a slice
-func (it *Collection) FilterLock(filter IsStringFilter) *[]string {
+func (it *Collection) FilterLock(filter IsStringFilter) []string {
 	elements := it.ListCopyPtrLock()
-	length := len(*elements)
+	length := len(elements)
 
 	if length == 0 {
 		return elements
@@ -1576,7 +1575,7 @@ func (it *Collection) FilterLock(filter IsStringFilter) *[]string {
 
 	list := make([]string, 0, length)
 
-	for i, element := range *elements {
+	for i, element := range elements {
 		result, isKeep, isBreak := filter(element, i)
 
 		if isKeep {
@@ -1584,21 +1583,21 @@ func (it *Collection) FilterLock(filter IsStringFilter) *[]string {
 		}
 
 		if isBreak {
-			return &list
+			return list
 		}
 	}
 
-	return &list
+	return list
 }
 
 // FilteredCollection must return a items
 func (it *Collection) FilteredCollection(filter IsStringFilter) *Collection {
-	return NewCollectionUsingStringsPtr(false, it.Filter(filter))
+	return New.Collection.Strings(it.Filter(filter))
 }
 
 // FilteredCollectionLock must return a items
 func (it *Collection) FilteredCollectionLock(filter IsStringFilter) *Collection {
-	return NewCollectionUsingStringsPtr(false, it.FilterLock(filter))
+	return New.Collection.Strings(it.FilterLock(filter))
 }
 
 // FilterPtrLock must return a slice
@@ -1606,7 +1605,7 @@ func (it *Collection) FilterPtrLock(
 	filterPtr IsStringPointerFilter,
 ) *[]*string {
 	elements := it.ListCopyPtrLock()
-	length := len(*elements)
+	length := len(elements)
 
 	if length == 0 {
 		return &([]*string{})
@@ -1614,8 +1613,8 @@ func (it *Collection) FilterPtrLock(
 
 	list := make([]*string, 0, length)
 
-	for i := range *elements {
-		copyTo := (*elements)[i]
+	for i := range elements {
+		copyTo := elements[i]
 		result, isKeep, isBreak :=
 			filterPtr(&copyTo, i)
 
@@ -1675,17 +1674,19 @@ func (it *Collection) NonEmptyListPtr() *[]string {
 }
 
 func (it *Collection) HashsetAsIs() *Hashset {
-	return NewHashsetUsingStrings(
-		&it.items)
+	return New.Hashset.Strings(
+		it.items)
 }
 
 func (it *Collection) HashsetWithDoubleLength() *Hashset {
-	return NewHashsetUsingStrings(
-		&it.items)
+	return New.Hashset.StringsOption(
+		it.Length()*2,
+		false,
+		it.items...)
 }
 
 func (it *Collection) HashsetLock() *Hashset {
-	return NewHashsetUsingStrings(
+	return New.Hashset.Strings(
 		it.ListCopyPtrLock())
 }
 
@@ -1714,15 +1715,15 @@ func (it *Collection) ListPtr() *[]string {
 // ListCopyPtrLock returns a copy of the items
 //
 // must return a slice
-func (it *Collection) ListCopyPtrLock() *[]string {
+func (it *Collection) ListCopyPtrLock() []string {
 	it.Lock()
 	defer it.Unlock()
 
 	if it.IsEmpty() {
-		return &([]string{})
+		return []string{}
 	}
 
-	return &(it.items)
+	return it.items
 }
 
 func (it *Collection) HasLock(str string) bool {
@@ -1905,10 +1906,10 @@ func (it *Collection) New(
 	length := len(slice)
 
 	if length == 0 {
-		return NewCollection(constants.Zero)
+		return New.Collection.Cap(constants.Zero)
 	}
 
-	newCollection := NewCollection(constants.Zero)
+	newCollection := New.Collection.Cap(constants.Zero)
 
 	return newCollection.AddStringsPtr(&slice)
 }
@@ -2039,7 +2040,7 @@ func (it *Collection) GetAllExcept(items []string) *[]string {
 		return &newItems
 	}
 
-	newCollection := NewCollectionUsingStrings(
+	newCollection := New.Collection.StringsOptions(
 		false,
 		items,
 	)
@@ -2051,13 +2052,11 @@ func (it *Collection) GetAllExcept(items []string) *[]string {
 func (it *Collection) CharCollectionMap() *CharCollectionMap {
 	length := it.Length()
 	lengthByFourBestGuess := length / 4
-	runeMap := NewCharCollectionMap(
+	runeMap := New.CharCollectionMap.CapSelfCap(
 		length,
 		lengthByFourBestGuess)
 
-	runeMap.AddStringsPtr(&it.items)
-
-	return runeMap
+	return runeMap.AddStringsPtr(&it.items)
 }
 
 func (it *Collection) SummaryString(sequence int) string {
@@ -2239,7 +2238,7 @@ func (it *Collection) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyCollection(), err
+		return Empty.Collection(), err
 	}
 
 	return it, nil

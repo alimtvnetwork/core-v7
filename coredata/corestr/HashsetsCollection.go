@@ -64,7 +64,7 @@ func (it *HashsetsCollection) StringsList() *[]string {
 }
 
 // HasAll items returns false
-// hashsetsCollection empty returns false
+// hashsetsCollection Empty returns false
 func (it *HashsetsCollection) HasAll(items ...string) bool {
 	if it.IsEmpty() || items == nil {
 		return false
@@ -128,7 +128,7 @@ func (it *HashsetsCollection) ConcatNew(
 	nextCollections ...*HashsetsCollection,
 ) *HashsetsCollection {
 	if nextCollections == nil || len(nextCollections) == 0 {
-		return NewHashsetsCollectionUsingPointerHashsets(it.items...)
+		return New.HashsetsCollection.UsingHashsetsPointers(it.items...)
 	}
 
 	length := it.Length() + constants.Capacity4
@@ -137,7 +137,7 @@ func (it *HashsetsCollection) ConcatNew(
 		length += collection.Length()
 	}
 
-	newHashsetsCollection := NewHashsetsCollectionUsingLength(constants.Zero, length)
+	newHashsetsCollection := New.HashsetsCollection.LenCap(constants.Zero, length)
 	newHashsetsCollection.AddHashsetsCollection(it)
 
 	for _, collection := range nextCollections {
@@ -297,7 +297,7 @@ func (it *HashsetsCollection) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyHashsetsCollection(), err
+		return Empty.HashsetsCollection(), err
 	}
 
 	return it, nil

@@ -10,7 +10,7 @@ func GetFilesChmodRwxFullMap(
 	requestedPaths []string,
 ) (filePathToRwxMap *corestr.Hashmap, err error) {
 	length := len(requestedPaths)
-	hashmap := corestr.NewHashmap(length)
+	hashmap := corestr.New.Hashmap.Cap(length)
 
 	if length == 0 {
 		return hashmap, nil

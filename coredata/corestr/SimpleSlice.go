@@ -286,7 +286,7 @@ func (it *SimpleSlice) Strings() []string {
 }
 
 func (it *SimpleSlice) Hashset() *Hashset {
-	return NewHashsetUsingStrings(&it.Items)
+	return New.Hashset.StringsPtr(&it.Items)
 }
 
 func (it *SimpleSlice) Join(joiner string) string {
@@ -484,14 +484,14 @@ func (it *SimpleSlice) IsEqualLines(lines []string) bool {
 }
 
 func (it *SimpleSlice) IsDistinctEqual(lines []string) bool {
-	selfHashset := NewHashsetUsingStrings(&it.Items)
-	linesHashset := NewHashsetUsingStringsWithoutPointer(lines)
+	selfHashset := New.Hashset.StringsPtr(&it.Items)
+	linesHashset := New.Hashset.Strings(lines)
 
 	return selfHashset.IsEqualsPtr(linesHashset)
 }
 
 func (it *SimpleSlice) Collection(isClone bool) *Collection {
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		isClone,
 		it.Items,
 	)
@@ -559,7 +559,7 @@ func (it *SimpleSlice) ConcatNew(items ...string) *SimpleSlice {
 }
 
 func (it *SimpleSlice) ToCollection(isClone bool) *Collection {
-	return NewCollectionUsingStrings(isClone, it.Items)
+	return New.Collection.StringsOptions(isClone, it.Items)
 }
 
 func (it *SimpleSlice) CsvStrings() []string {

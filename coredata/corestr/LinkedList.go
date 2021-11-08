@@ -168,6 +168,22 @@ func (it *LinkedList) Add(item string) *LinkedList {
 	return it
 }
 
+func (it *LinkedList) AddItemsMap(itemsMap map[string]bool) *LinkedList {
+	if len(itemsMap) == 0 {
+		return it
+	}
+
+	for key, isAdd := range itemsMap {
+		if !isAdd {
+			continue
+		}
+
+		it.Add(key)
+	}
+
+	return it
+}
+
 func (it *LinkedList) AddLock(item string) *LinkedList {
 	it.Lock()
 	defer it.Unlock()
@@ -447,7 +463,7 @@ func (it *LinkedList) RemoveNodeByElementValue(
 	if !isIgnorePanic && it.IsEmpty() {
 		errcore.
 			CannotRemoveIndexesFromEmptyCollectionType.
-			HandleUsingPanic("element cannot be removed from empty linkedlist.", element)
+			HandleUsingPanic("element cannot be removed from Empty linkedlist.", element)
 	}
 
 	var processor LinkedListSimpleProcessor = func(
@@ -534,7 +550,7 @@ func (it *LinkedList) RemoveNodeByIndexes(
 	if !isIgnorePanic && it.IsEmpty() && length > 0 {
 		errcore.
 			CannotRemoveIndexesFromEmptyCollectionType.
-			HandleUsingPanic("removingIndexes cannot be removed from empty linkedlist.", removingIndexes)
+			HandleUsingPanic("removingIndexes cannot be removed from Empty linkedlist.", removingIndexes)
 	}
 
 	removingIndexesCopy := removingIndexes
@@ -612,7 +628,7 @@ func (it *LinkedList) RemoveNode(
 	if it.IsEmpty() {
 		errcore.
 			CannotRemoveIndexesFromEmptyCollectionType.
-			HandleUsingPanic("removingNode cannot be removed from empty linkedlist.", removingNode.String())
+			HandleUsingPanic("removingNode cannot be removed from Empty linkedlist.", removingNode.String())
 	}
 
 	var processor LinkedListSimpleProcessor = func(
@@ -902,7 +918,7 @@ func (it *LinkedList) AddCollection(collection *Collection) *LinkedList {
 
 func (it *LinkedList) ToCollection(addCapacity int) *Collection {
 	newLength := it.Length() + addCapacity
-	collection := NewCollection(newLength)
+	collection := New.Collection.Cap(newLength)
 
 	if it.IsEmpty() {
 		return collection
@@ -1065,7 +1081,7 @@ func (it *LinkedList) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyLinkedList(), err
+		return New.LinkedList.Create(), err
 	}
 
 	return it, nil

@@ -26,7 +26,7 @@ func VerifyChmodPaths(
 		}
 	}
 
-	slice := corestr.NewCollection(constants.Zero)
+	slice := corestr.New.Collection.Cap(constants.Zero)
 
 	for _, location := range *locations {
 		err := VerifyChmod(location, expectedHyphenedRwx)

@@ -31,7 +31,7 @@ func SplitContentsByWhitespaceConditions(
 	}
 
 	if isUnique {
-		hashset := corestr.NewHashsetUsingStrings(&compiledStringSplits)
+		hashset := corestr.New.Hashset.StringsPtr(&compiledStringSplits)
 		compiledStringSplits = hashset.List()
 	}
 

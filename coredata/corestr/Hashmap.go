@@ -38,7 +38,7 @@ func (it *Hashmap) HasItems() bool {
 }
 
 func (it *Hashmap) Collection() *Collection {
-	return NewCollectionUsingStrings(false, it.ValuesList())
+	return New.Collection.StringsOptions(false, it.ValuesList())
 }
 
 func (it *Hashmap) IsEmptyLock() bool {
@@ -396,7 +396,7 @@ func (it *Hashmap) ConcatNew(
 	hashmaps ...*Hashmap,
 ) *Hashmap {
 	if len(hashmaps) == 0 {
-		return NewHashmapUsingMap(
+		return New.Hashmap.UsingMapOptions(
 			isCloneOnEmptyAsWell,
 			constants.Zero,
 			it.items,
@@ -413,7 +413,7 @@ func (it *Hashmap) ConcatNew(
 		length += h.length
 	}
 
-	newHashmap := NewHashmapUsingMap(
+	newHashmap := New.Hashmap.UsingMapOptions(
 		true,
 		length,
 		it.items,
@@ -434,7 +434,7 @@ func (it *Hashmap) ConcatNewUsingMaps(
 	hashmaps ...*map[string]string,
 ) *Hashmap {
 	if len(hashmaps) == 0 {
-		return NewHashmapUsingMap(
+		return New.Hashmap.UsingMapOptions(
 			isCloneOnEmptyAsWell,
 			constants.Zero,
 			it.items,
@@ -451,7 +451,7 @@ func (it *Hashmap) ConcatNewUsingMaps(
 		length += len(*h)
 	}
 
-	newHashmap := NewHashmapUsingMap(
+	newHashmap := New.Hashmap.UsingMapOptions(
 		true,
 		length,
 		it.items,
@@ -519,7 +519,7 @@ func (it *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 	return true
 }
 
-// HasAllCollectionItems return false on items is nil or empty.
+// HasAllCollectionItems return false on items is nil or Empty.
 func (it *Hashmap) HasAllCollectionItems(
 	collection *Collection,
 ) bool {
@@ -607,7 +607,7 @@ func (it *Hashmap) GetKeysFilteredCollection(
 	filter IsStringFilter,
 ) *Collection {
 	if it.IsEmpty() {
-		return EmptyCollection()
+		return Empty.Collection()
 	}
 
 	filteredList := make(
@@ -629,12 +629,12 @@ func (it *Hashmap) GetKeysFilteredCollection(
 			result)
 
 		if isBreak {
-			return NewCollectionUsingStrings(
+			return New.Collection.StringsOptions(
 				false, filteredList)
 		}
 	}
 
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false, filteredList)
 }
 
@@ -654,22 +654,22 @@ func (it *Hashmap) ItemsCopyLock() *map[string]string {
 }
 
 func (it *Hashmap) ValuesCollection() *Collection {
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false, it.ValuesList())
 }
 
 func (it *Hashmap) ValuesHashset() *Hashset {
-	return NewHashsetUsingStrings(
+	return New.Hashset.StringsPtr(
 		it.ValuesListPtr())
 }
 
 func (it *Hashmap) ValuesCollectionLock() *Collection {
-	return NewCollectionUsingStrings(
+	return New.Collection.StringsOptions(
 		false, *it.ValuesListCopyPtrLock())
 }
 
 func (it *Hashmap) ValuesHashsetLock() *Hashset {
-	return NewHashsetUsingStrings(
+	return New.Hashset.StringsPtr(
 		it.ValuesListCopyPtrLock())
 }
 
@@ -692,8 +692,7 @@ func (it *Hashmap) KeysValuesCollection() (
 	wg.Add(2)
 
 	go func() {
-		keys = NewCollectionUsingStringsPtr(
-			false,
+		keys = New.Collection.StringsPtr(
 			it.Keys(),
 		)
 
@@ -701,8 +700,7 @@ func (it *Hashmap) KeysValuesCollection() (
 	}()
 
 	go func() {
-		values = NewCollectionUsingStringsPtr(
-			false,
+		values = New.Collection.StringsPtr(
 			it.ValuesListPtr(),
 		)
 
@@ -797,8 +795,7 @@ func (it *Hashmap) Keys() *[]string {
 }
 
 func (it *Hashmap) KeysCollection() *Collection {
-	return NewCollectionUsingStringsPtr(
-		false,
+	return New.Collection.StringsPtr(
 		it.Keys(),
 	)
 }
@@ -863,7 +860,7 @@ func (it *Hashmap) ValuesToLower() *Hashmap {
 		newMap[toLower] = value
 	}
 
-	return NewHashmapUsingMap(
+	return New.Hashmap.UsingMapOptions(
 		false,
 		0,
 		newMap,
@@ -1024,7 +1021,7 @@ func (it *Hashmap) GetValuesKeysExcept(
 		return it.ValuesListPtr()
 	}
 
-	newCollection := NewHashsetUsingStrings(
+	newCollection := New.Hashset.StringsPtr(
 		items)
 
 	return it.GetValuesExceptKeysInHashset(
@@ -1118,7 +1115,7 @@ func (it *Hashmap) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyHashmap(), err
+		return Empty.Hashmap(), err
 	}
 
 	return it, nil
@@ -1235,7 +1232,7 @@ func (it *Hashmap) ClonePtr() *Hashmap {
 }
 
 func (it Hashmap) Clone() Hashmap {
-	empty := EmptyHashmap()
+	empty := Empty.Hashmap()
 	jsonResult := it.JsonPtr()
 
 	return *empty.ParseInjectUsingJsonMust(jsonResult)

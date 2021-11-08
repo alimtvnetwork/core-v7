@@ -34,7 +34,7 @@ func coreDynamicMapAnyItems() {
 
 	fmt.Println("MapAnyItems")
 	mapAnyItems := coredynamic.NewMapAnyItems(200)
-	collection := corestr.NewCollection(100)
+	collection := corestr.New.Collection.Cap(100)
 	collection.Adds("alim-1", "alim-2", "alim-3", "alim-4")
 	mapAnyItems.Add("alim-something", collection)
 	mapAnyItems.Add("alim-something2", collection)
@@ -53,12 +53,12 @@ func coreDynamicMapAnyItems() {
 	}
 
 	jsonResult := mapAnyItems.JsonPtr()
-	emptyCollection4 := corestr.EmptyCollection()
+	emptyCollection4 := corestr.Empty.Collection()
 	mapAnyItems.GetItemRef("alim-something3", emptyCollection4)
 	fmt.Println("4", emptyCollection4)
 
 	emptyMapAnyItems := coredynamic.EmptyMapAnyItems()
-	emptyCollection3 := corestr.EmptyCollection()
+	emptyCollection3 := corestr.Empty.Collection()
 	req := corejson.KeyAny{
 		Key:    "alim-something3",
 		AnyInf: emptyCollection3,
@@ -83,7 +83,7 @@ func coreDynamicMapAnyItems() {
 	fmt.Println(newJsonResult.JsonString())
 	fmt.Println("jsonResult == newJsonResult :", jsonResult.IsEqual(newJsonResult))
 	fmt.Println(collectionJsonResult.JsonString())
-	newLinkedList := corestr.EmptyLinkedList()
+	newLinkedList := corestr.Empty.LinkedList()
 
 	newLinkedList.JsonParseSelfInject(collectionJsonResult)
 	fmt.Println(newLinkedList)
