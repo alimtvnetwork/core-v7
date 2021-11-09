@@ -46,5 +46,6 @@ func main() {
 	// nullTesting02()
 
 	// keyLegendsTest()
-	coreDynamicMapAnyItems()
+	// coreDynamicMapAnyItems()
+	enumTesting()
 }

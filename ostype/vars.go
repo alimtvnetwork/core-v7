@@ -1,5 +1,10 @@
 package ostype
 
+import (
+	"gitlab.com/evatix-go/core/coredata/coredynamic"
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
+)
+
 var (
 	CurrentGroupVariant = GetGroupVariant()
 	// CurrentGroup Current os group
@@ -14,4 +19,12 @@ var (
 		"JavaScriptGroup",
 		"UnknownGroup",
 	}
+
+	basicEnumImplOsType = enumimpl.NewBasicByteUsingIndexedSlice(
+		coredynamic.TypeName(Any),
+		osTypesStrings[:])
+
+	basicEnumImplOsGroup = enumimpl.NewBasicByteUsingIndexedSlice(
+		coredynamic.TypeName(WindowsGroup),
+		osGroups)
 )

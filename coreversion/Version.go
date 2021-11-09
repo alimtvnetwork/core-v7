@@ -6,6 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/corecmp"
 	"gitlab.com/evatix-go/core/corecomparator"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/enums/versionindexes"
 )
 
@@ -333,5 +334,21 @@ func (it Version) NonPtr() Version {
 }
 
 func (it *Version) Ptr() *Version {
+	return it
+}
+
+func (it Version) Json() corejson.Result {
+	return corejson.NewFromAny(it)
+}
+
+func (it Version) JsonPtr() *corejson.Result {
+	return corejson.NewFromAnyPtr(it)
+}
+
+func (it *Version) JsonParseSelfInject(jsonResult *corejson.Result) error {
+	return jsonResult.Unmarshal(it)
+}
+
+func (it *Version) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
 }

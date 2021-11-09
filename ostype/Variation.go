@@ -1,7 +1,8 @@
 package ostype
 
 import (
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coreinterface"
 )
 
 type Variation byte
@@ -25,21 +26,21 @@ const (
 	Unknown
 )
 
-func (variation Variation) IsByte(another byte) bool {
-	return variation == Variation(another)
+func (it Variation) IsByte(another byte) bool {
+	return it == Variation(another)
 }
 
-func (variation Variation) IsAnyOperatingSystem() bool {
-	return Any == variation
+func (it Variation) IsAnyOperatingSystem() bool {
+	return Any == it
 }
 
-func (variation Variation) Is(other Variation) bool {
-	return other == variation
+func (it Variation) Is(other Variation) bool {
+	return other == it
 }
 
-func (variation Variation) IsAnyMatch(others ...Variation) bool {
+func (it Variation) IsAnyMatch(others ...Variation) bool {
 	for _, other := range others {
-		if other == variation {
+		if other == it {
 			return true
 		}
 	}
@@ -47,11 +48,11 @@ func (variation Variation) IsAnyMatch(others ...Variation) bool {
 	return false
 }
 
-func (variation Variation) IsStringsMatchAny(others ...string) bool {
+func (it Variation) IsStringsMatchAny(others ...string) bool {
 	for _, other := range others {
 		otherVariant := GetVariant(other)
 
-		if otherVariant == variation {
+		if otherVariant == it {
 			return true
 		}
 	}
@@ -60,76 +61,134 @@ func (variation Variation) IsStringsMatchAny(others ...string) bool {
 }
 
 // IsPossibleUnixGroup variation != Windows
-func (variation Variation) IsPossibleUnixGroup() bool {
-	return variation != Windows
+func (it Variation) IsPossibleUnixGroup() bool {
+	return it != Windows
 }
 
-func (variation Variation) IsLinuxOrMac() bool {
-	return variation == Linux || variation == DarwinOrMacOs
+func (it Variation) IsLinuxOrMac() bool {
+	return it == Linux || it == DarwinOrMacOs
 }
 
-func (variation Variation) Group() Group {
-	if variation == Windows {
+func (it Variation) Group() Group {
+	if it == Windows {
 		return WindowsGroup
 	}
 
-	if variation == Android {
+	if it == Android {
 		return AndroidGroup
 	}
 
 	return UnixGroup
 }
 
-func (variation Variation) IsActualGroupUnix() bool {
-	return variation.Group().IsUnix()
+func (it Variation) IsActualGroupUnix() bool {
+	return it.Group().IsUnix()
 }
 
-func (variation Variation) IsWindows() bool {
-	return variation == Windows
+func (it Variation) IsWindows() bool {
+	return it == Windows
 }
 
-func (variation Variation) IsLinux() bool {
-	return variation == Linux
+func (it Variation) IsLinux() bool {
+	return it == Linux
 }
 
-func (variation Variation) IsDarwinOrMacOs() bool {
-	return variation == DarwinOrMacOs
+func (it Variation) IsDarwinOrMacOs() bool {
+	return it == DarwinOrMacOs
 }
 
-func (variation Variation) IsJavaScript() bool {
-	return variation == JavaScript
+func (it Variation) IsJavaScript() bool {
+	return it == JavaScript
 }
 
-func (variation Variation) IsFreeBsd() bool {
-	return variation == FreeBsd
+func (it Variation) IsFreeBsd() bool {
+	return it == FreeBsd
 }
 
-func (variation Variation) IsNetBsd() bool {
-	return variation == NetBsd
+func (it Variation) IsNetBsd() bool {
+	return it == NetBsd
 }
 
-func (variation Variation) IsOpenBsd() bool {
-	return variation == NetBsd
+func (it Variation) IsOpenBsd() bool {
+	return it == NetBsd
 }
 
-func (variation Variation) IsDragonFly() bool {
-	return variation == DragonFly
+func (it Variation) IsDragonFly() bool {
+	return it == DragonFly
 }
 
-func (variation Variation) Value() byte {
-	return byte(variation)
+func (it Variation) MarshalJSON() ([]byte, error) {
+	return basicEnumImplOsType.ToEnumJsonBytes(it.Value()), nil
 }
 
-func (variation Variation) String() string {
-	osName, has := OsVariantToStringMap[variation]
+func (it *Variation) UnmarshalJSON(data []byte) error {
+	valueByte, err := basicEnumImplOsType.UnmarshallToValue(
+		true,
+		data)
 
-	if has {
-		return osName
+	if err == nil {
+		*it = Variation(valueByte)
 	}
 
-	msg := errcore.UnsupportedCategoryType.Combine(
-		"os type pkg: variant not supported.",
-		string(variation))
+	return err
+}
 
-	panic(msg)
+func (it Variation) Name() string {
+	return basicEnumImplOsType.ToEnumString(it.Value())
+}
+
+func (it Variation) NameValue() string {
+	return basicEnumImplOsType.NameWithValue(it.Value())
+}
+
+func (it Variation) ToNumberString() string {
+	return basicEnumImplOsType.ToNumberString(it.Value())
+}
+
+func (it Variation) RangeNamesCsv() string {
+	return basicEnumImplOsType.RangeNamesCsv()
+}
+
+func (it Variation) TypeName() string {
+	return basicEnumImplOsType.TypeName()
+}
+
+func (it Variation) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+	return basicEnumImplOsType.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+func (it Variation) MaxByte() byte {
+	return basicEnumImplOsType.Max()
+}
+
+func (it Variation) MinByte() byte {
+	return basicEnumImplOsType.Min()
+}
+
+func (it Variation) ValueByte() byte {
+	return byte(it)
+}
+
+func (it Variation) RangesByte() []byte {
+	return basicEnumImplOsType.Ranges()
+}
+
+func (it Variation) Value() byte {
+	return byte(it)
+}
+
+func (it Variation) String() string {
+	return basicEnumImplOsType.ToEnumString(it.Value())
+}
+
+func (it *Variation) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return it
+}
+
+func (it *Variation) AsJsonContractsBinder() corejson.JsonMarshaller {
+	return it
+}
+
+func (it *Variation) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
+	return it
 }
