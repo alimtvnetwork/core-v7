@@ -35,16 +35,24 @@ func (it *newCharHashsetMapCreator) Cap(
 	}
 }
 
-func (it *newCharHashsetMapCreator) NewCharHashsetMapUsingItemsPlusCap(
-	items *[]string,
+func (it *newCharHashsetMapCreator) CapItemsPtr(
 	capacity, selfHashsetCapacity int,
+	items *[]string,
 ) *CharHashsetMap {
 	charHashsetMap := it.Cap(
 		capacity, selfHashsetCapacity)
 
-	charHashsetMap.AddStringsPtr(items)
+	return charHashsetMap.AddStringsPtr(items)
+}
 
-	return charHashsetMap
+func (it *newCharHashsetMapCreator) CapItems(
+	capacity, selfHashsetCapacity int,
+	items []string,
+) *CharHashsetMap {
+	charHashsetMap := it.Cap(
+		capacity, selfHashsetCapacity)
+
+	return charHashsetMap.AddStrings(items...)
 }
 
 func (it *newCharHashsetMapCreator) Strings(
@@ -82,7 +90,5 @@ func (it *newCharHashsetMapCreator) StringsPtr(
 		length,
 		selfHashsetCapacity)
 
-	charHashsetMap.AddStringsPtr(items)
-
-	return charHashsetMap
+	return charHashsetMap.AddStringsPtr(items)
 }

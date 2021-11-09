@@ -50,7 +50,7 @@ func (it *SliceValidators) VerifyAll(
 		return nil
 	}
 
-	errs := corestr.NewSimpleSlice(constants.Capacity2)
+	errs := corestr.New.SimpleSlice.Cap(constants.Capacity2)
 
 	for _, sliceValidator := range it.Validators {
 		err := sliceValidator.AllVerifyError(params)
@@ -81,7 +81,7 @@ func (it *SliceValidators) VerifyFirst(
 		return nil
 	}
 
-	errs := corestr.NewSimpleSlice(constants.Capacity2)
+	errs := corestr.New.SimpleSlice.Cap(constants.Capacity2)
 
 	for _, sliceValidator := range it.Validators {
 		err := sliceValidator.VerifyFirstError(params)
@@ -114,7 +114,7 @@ func (it *SliceValidators) VerifyUpto(
 		return nil
 	}
 
-	errs := corestr.NewSimpleSlice(constants.Capacity2)
+	errs := corestr.New.SimpleSlice.Cap(constants.Capacity2)
 
 	for _, sliceValidator := range it.Validators {
 		err := sliceValidator.AllVerifyErrorUptoLength(

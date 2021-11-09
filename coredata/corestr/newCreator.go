@@ -5,6 +5,8 @@ type newCreator struct {
 	CollectionPtr              *newCollectionPtrCreator
 	CharHashsetMap             *newCharHashsetMapCreator
 	CharCollectionMap          *newCharCollectionMapCreator
+	SimpleStringOnce           *newSimpleStringOnceCreator
+	SimpleSlice                *newSimpleSliceCreator
 	Hashset                    *newHashsetCreator
 	HashsetsCollection         *newHashsetsCollectionCreator
 	Hashmap                    *newHashmapCreator

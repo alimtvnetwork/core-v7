@@ -4,7 +4,7 @@ func main() {
 	// x := corestr.SimpleSlice{Items: []string{"a", "b"}}
 	// result := x.Json()
 	//
-	// emptyX := corestr.EmptySimpleSlice()
+	// emptyX := corestr.Empty()
 	// // result.Error = errors.New("alim errs")
 	//
 	// resultOfResult := result.Json()

@@ -16,9 +16,9 @@ func (it *SimpleSliceRangeValidator) LengthOfVerifierSegments() int {
 func (it *SimpleSliceRangeValidator) SetActual(
 	lines []string,
 ) *SimpleSliceRangeValidator {
-	it.actual = corestr.NewSimpleSliceUsing(
+	it.actual = corestr.New.SimpleSlice.Direct(
 		false,
-		lines...)
+		lines)
 
 	return it
 }

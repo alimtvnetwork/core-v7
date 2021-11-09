@@ -15,76 +15,6 @@ type SimpleSlice struct {
 	Items []string `json:"Items,omitempty"`
 }
 
-func NewSimpleSlice(capacity int) *SimpleSlice {
-	slice := make([]string, 0, capacity)
-
-	return &SimpleSlice{
-		slice,
-	}
-}
-
-func NewSimpleSliceUsing(
-	isClone bool,
-	lines ...string,
-) *SimpleSlice {
-	if lines == nil {
-		return EmptySimpleSlice()
-	}
-
-	if !isClone {
-		return &SimpleSlice{
-			lines,
-		}
-	}
-
-	slice := NewSimpleSlice(len(lines))
-
-	return slice.Adds(lines...)
-}
-
-func NewSimpleSliceDirect(
-	isClone bool,
-	lines []string,
-) *SimpleSlice {
-	if lines == nil {
-		return EmptySimpleSlice()
-	}
-
-	if !isClone {
-		return &SimpleSlice{
-			lines,
-		}
-	}
-
-	slice := NewSimpleSlice(len(lines))
-
-	return slice.Adds(lines...)
-}
-
-func NewSimpleSliceUsingSeparator(
-	sep, line string,
-) *SimpleSlice {
-	lines := strings.Split(line, sep)
-
-	return &SimpleSlice{
-		Items: lines,
-	}
-}
-
-func NewSimpleSliceUsingLine(
-	combinedLine string,
-) *SimpleSlice {
-	lines := strings.Split(combinedLine, constants.DefaultLine)
-
-	return &SimpleSlice{
-		Items: lines,
-	}
-}
-
-func EmptySimpleSlice() *SimpleSlice {
-	return NewSimpleSlice(0)
-}
-
 func (it *SimpleSlice) Add(
 	item string,
 ) *SimpleSlice {
@@ -438,7 +368,7 @@ func (it *SimpleSlice) IsEqualUnorderedLinesClone(lines []string) bool {
 	}
 
 	clonedLeftSlice := it.Clone(true)
-	clonedRightSlice := NewSimpleSliceDirect(true, lines)
+	clonedRightSlice := New.SimpleSlice.Direct(true, lines)
 
 	sort.Strings(clonedLeftSlice.Items)
 	sort.Strings(clonedRightSlice.Items)
@@ -668,7 +598,7 @@ func (it *SimpleSlice) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptySimpleSlice(), err
+		return Empty.SimpleSlice(), err
 	}
 
 	return it, nil

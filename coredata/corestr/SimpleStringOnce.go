@@ -20,63 +20,6 @@ type SimpleStringOnce struct {
 	isInitialize bool
 }
 
-func NewSimpleStringOnceAny(
-	isIncludeFieldNames bool,
-	value interface{},
-	isInitialize bool,
-) SimpleStringOnce {
-	toString := AnyToString(
-		isIncludeFieldNames,
-		value)
-
-	return SimpleStringOnce{
-		value:        toString,
-		isInitialize: isInitialize,
-	}
-}
-
-func NewSimpleStringOnceInitialized(
-	value string,
-) SimpleStringOnce {
-	return SimpleStringOnce{
-		value:        value,
-		isInitialize: true,
-	}
-}
-
-func NewSimpleStringOnceInitializedPtr(
-	value string,
-) *SimpleStringOnce {
-	return &SimpleStringOnce{
-		value:        value,
-		isInitialize: true,
-	}
-}
-
-func NewSimpleStringOnce(
-	value string,
-	isInitialize bool,
-) SimpleStringOnce {
-	return SimpleStringOnce{
-		value:        value,
-		isInitialize: isInitialize,
-	}
-}
-
-func NewSimpleStringOncePtr(
-	value string,
-	isInitialize bool,
-) *SimpleStringOnce {
-	return &SimpleStringOnce{
-		value:        value,
-		isInitialize: isInitialize,
-	}
-}
-
-func EmptySimpleStringOnce() SimpleStringOnce {
-	return SimpleStringOnce{}
-}
-
 func (it *SimpleStringOnce) Value() string {
 	return it.value
 }
@@ -544,7 +487,7 @@ func (it *SimpleStringOnce) RegexFindAllStrings(
 func (it *SimpleStringOnce) LinesSimpleSlice() *SimpleSlice {
 	lines := strings.Split(it.value, constants.DefaultLine)
 
-	return NewSimpleSliceDirect(false, lines)
+	return New.SimpleSlice.Direct(false, lines)
 }
 
 func (it *SimpleStringOnce) SimpleSlice(
@@ -552,7 +495,7 @@ func (it *SimpleStringOnce) SimpleSlice(
 ) *SimpleSlice {
 	lines := strings.Split(it.value, sep)
 
-	return NewSimpleSliceDirect(false, lines)
+	return New.SimpleSlice.Direct(false, lines)
 }
 
 func (it *SimpleStringOnce) Split(
