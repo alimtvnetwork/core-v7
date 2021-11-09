@@ -32,7 +32,11 @@ func (it *emptyCreator) LeftRight() *LeftRight {
 	return &LeftRight{}
 }
 
-func (it *emptyCreator) SimpleStringOnce() *SimpleStringOnce {
+func (it *emptyCreator) SimpleStringOnce() SimpleStringOnce {
+	return SimpleStringOnce{}
+}
+
+func (it *emptyCreator) SimpleStringOncePtr() *SimpleStringOnce {
 	return &SimpleStringOnce{}
 }
 
