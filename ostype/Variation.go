@@ -11,6 +11,7 @@ type Variation byte
 // go tool dist list
 const (
 	Any Variation = iota
+	Unknown
 	Windows
 	Linux
 	DarwinOrMacOs
@@ -23,7 +24,9 @@ const (
 	Plan9
 	Solaris
 	Nacl
-	Unknown
+	Illumos
+	IOs
+	Aix
 )
 
 func (it Variation) IsByte(another byte) bool {
@@ -134,6 +137,10 @@ func (it *Variation) UnmarshalJSON(data []byte) error {
 }
 
 func (it Variation) Name() string {
+	return basicEnumImplOsType.ToEnumString(it.Value())
+}
+
+func (it Variation) GoosName() string {
 	return basicEnumImplOsType.ToEnumString(it.Value())
 }
 

@@ -30,9 +30,14 @@ func ReflectValToInterfacesUsingProcessor(
 
 	for i := 0; i < length; i++ {
 		value := reflectVal.Index(i)
+
+		if value.Kind() == reflect.Ptr {
+			value = value.Elem()
+		}
+
 		valueInf := value.Interface()
 
-		if isSkipOnNil && valueInf == nil {
+		if isSkipOnNil && IsNull(valueInf) {
 			continue
 		}
 

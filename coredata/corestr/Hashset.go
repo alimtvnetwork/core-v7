@@ -270,6 +270,16 @@ func (it *Hashset) Add(key string) *Hashset {
 	return it
 }
 
+func (it *Hashset) AddBool(key string) (isExist bool) {
+	_, has := it.items[key]
+
+	if !has {
+		it.items[key] = true
+	}
+
+	return has
+}
+
 func (it *Hashset) AddNonEmpty(str string) *Hashset {
 	if str == "" {
 		return it
@@ -481,6 +491,14 @@ func (it *Hashset) AddStrings(keys []string) *Hashset {
 	return it.AddStringsPtr(&keys)
 }
 
+func (it *Hashset) AddSimpleSlice(simpleSlice *SimpleSlice) *Hashset {
+	if simpleSlice.IsEmpty() {
+		return it
+	}
+
+	return it.AddStringsPtr(&simpleSlice.Items)
+}
+
 func (it *Hashset) AddStringsPtrLock(keys *[]string) *Hashset {
 	if keys == nil {
 		return it
@@ -680,8 +698,8 @@ func (it *Hashset) HasLock(key string) bool {
 	return isFound && isSet
 }
 
-func (it *Hashset) HasAllStringsPtr(keys *[]string) bool {
-	for _, key := range *keys {
+func (it *Hashset) HasAllStrings(keys []string) bool {
+	for _, key := range keys {
 		isSet, isFound := it.items[key]
 
 		if !(isFound && isSet) {
@@ -702,7 +720,7 @@ func (it *Hashset) HasAllCollectionItems(
 		return false
 	}
 
-	return it.HasAllStringsPtr(collection.ListPtr())
+	return it.HasAllStrings(collection.List())
 }
 
 func (it *Hashset) HasAll(keys ...string) bool {
@@ -862,9 +880,9 @@ func (it *Hashset) GetFilteredCollection(
 // Set B = anotherHashset given in parameters.
 func (it *Hashset) GetAllExceptHashset(
 	anotherHashset *Hashset,
-) *[]string {
+) []string {
 	if anotherHashset == nil || anotherHashset.IsEmpty() {
-		return it.ListPtr()
+		return it.List()
 	}
 
 	finalList := make(
@@ -882,7 +900,7 @@ func (it *Hashset) GetAllExceptHashset(
 			item)
 	}
 
-	return &finalList
+	return finalList
 }
 
 // GetAllExcept Get all hashset items except the mentioned ones in items.
@@ -891,13 +909,27 @@ func (it *Hashset) GetAllExceptHashset(
 // Set A = this Hashset
 // Set B = items given in parameters.
 func (it *Hashset) GetAllExcept(
-	items *[]string,
-) *[]string {
+	items []string,
+) []string {
 	if items == nil {
-		return it.ListPtr()
+		return it.List()
 	}
 
-	newHashset := New.Hashset.StringsPtr(
+	newHashset := New.Hashset.Strings(
+		items)
+
+	return it.GetAllExceptHashset(
+		newHashset)
+}
+
+func (it *Hashset) GetAllExceptSpread(
+	items ...string,
+) []string {
+	if items == nil {
+		return it.List()
+	}
+
+	newHashset := New.Hashset.Strings(
 		items)
 
 	return it.GetAllExceptHashset(
@@ -911,9 +943,9 @@ func (it *Hashset) GetAllExcept(
 // Set B = collection given in parameters.
 func (it *Hashset) GetAllExceptCollection(
 	collection *Collection,
-) *[]string {
+) []string {
 	if collection == nil {
-		return it.ListPtr()
+		return it.List()
 	}
 
 	return it.GetAllExceptHashset(
@@ -927,9 +959,9 @@ func (it *Hashset) GetAllExceptCollection(
 // Set B = collectionPtr given in parameters.
 func (it *Hashset) GetAllExceptCollectionPtr(
 	collectionPtr *CollectionPtr,
-) *[]string {
+) []string {
 	if collectionPtr == nil {
-		return it.ListPtr()
+		return it.List()
 	}
 
 	return it.GetAllExceptHashset(
@@ -955,18 +987,18 @@ func (it *Hashset) JoinSorted(joiner string) string {
 	return strings.Join(*list, joiner)
 }
 
-func (it *Hashset) ListPtrSortedAsc() *[]string {
+func (it *Hashset) ListPtrSortedAsc() []string {
 	list := it.ListPtr()
 	sort.Strings(*list)
 
-	return list
+	return *list
 }
 
-func (it *Hashset) ListPtrSortedDsc() *[]string {
+func (it *Hashset) ListPtrSortedDsc() []string {
 	list := it.ListPtr()
 	sort.Strings(*list)
 
-	return stringslice.InPlaceReverse(list)
+	return *stringslice.InPlaceReverse(list)
 }
 
 func (it *Hashset) ListPtr() *[]string {
@@ -1115,6 +1147,15 @@ func (it *Hashset) Remove(key string) *Hashset {
 	return it
 }
 
+func (it *Hashset) SafeRemove(key string) *Hashset {
+	if it.Has(key) {
+		delete(it.items, key)
+		it.hasMapUpdated = true
+	}
+
+	return it
+}
+
 func (it *Hashset) RemoveWithLock(key string) *Hashset {
 	it.Lock()
 	defer it.Unlock()
@@ -1200,11 +1241,11 @@ func (it *Hashset) UnmarshalJSON(data []byte) error {
 }
 
 func (it Hashset) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Hashset) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.

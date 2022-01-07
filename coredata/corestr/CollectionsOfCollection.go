@@ -282,11 +282,11 @@ func (it *CollectionsOfCollection) UnmarshalJSON(data []byte) error {
 }
 
 func (it CollectionsOfCollection) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it CollectionsOfCollection) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 //goland:noinspection GoLinterLocal

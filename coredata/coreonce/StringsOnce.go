@@ -44,6 +44,20 @@ func (it *StringsOnce) Strings() *[]string {
 	return it.Value()
 }
 
+func (it *StringsOnce) SafeStrings() []string {
+	items := it.Value()
+
+	if items == nil || len(*items) == 0 {
+		return []string{}
+	}
+
+	return *it.Value()
+}
+
+func (it *StringsOnce) List() []string {
+	return *it.Value()
+}
+
 func (it *StringsOnce) Values() *[]string {
 	return it.Value()
 }
@@ -133,10 +147,10 @@ func (it *StringsOnce) IsContains(search string) bool {
 	return false
 }
 
-func (it *StringsOnce) CsvLines() *[]string {
+func (it *StringsOnce) CsvLines() []string {
 	return simplewrap.DoubleQuoteWrapElements(
-		it.Value(),
-		false)
+		false,
+		it.List()...)
 }
 
 func (it *StringsOnce) CsvOptions(isSkipQuoteOnlyOnExistence bool) string {

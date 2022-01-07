@@ -307,11 +307,11 @@ func (it *Dynamic) JsonModelAny() interface{} {
 }
 
 func (it Dynamic) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Dynamic) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 //goland:noinspection GoLinterLocal

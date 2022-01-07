@@ -6,6 +6,12 @@ import (
 )
 
 var (
-	StaticJsonError = errcore.EmptyResultCannotMakeJsonType.
-		Error(constants.EmptyString, constants.EmptyString)
+	NewResult               = newResultCreator{}
+	NewResultsCollection    = newResultsCollectionCreator{}
+	NewBytesCollection      = newBytesCollectionCreator{}
+	NewResultsPtrCollection = newResultsPtrCollectionCreator{}
+	NewMapResults           = newMapResultsCreator{}
+	Empty                   = emptyCreator{}
+	StaticJsonError         = errcore.EmptyResultCannotMakeJsonType.
+				Error(constants.EmptyString, constants.EmptyString)
 )

@@ -1,6 +1,10 @@
 package stringutil
 
-import "strconv"
+import (
+	"strconv"
+
+	"gitlab.com/evatix-go/core/constants"
+)
 
 func ToByte(
 	s string,
@@ -12,5 +16,9 @@ func ToByte(
 		return defVal
 	}
 
-	return byte(toInt)
+	if toInt >= constants.Zero && toInt <= constants.MaxUnit8AsInt {
+		return byte(toInt)
+	}
+
+	return defVal
 }

@@ -17,11 +17,11 @@ func jsonResultPrettyTest01() {
 
 	fmt.Println(rs2.PrettyJsonStringWithErr())
 
-	rs2 = corejson.NewPtr([]byte{}, errors.New("something wrong"), "t1")
+	rs2 = corejson.NewResult.Ptr([]byte{}, errors.New("something wrong"), "t1")
 
 	fmt.Println(rs2.PrettyJsonStringWithErr())
 
-	rs2 = corejson.NewPtr(nil, errors.New("something wrong"), "t1")
+	rs2 = corejson.NewResult.Ptr(nil, errors.New("something wrong"), "t1")
 
 	fmt.Println(rs2.PrettyJsonStringWithErr())
 }

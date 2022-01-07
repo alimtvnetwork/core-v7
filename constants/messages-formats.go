@@ -17,6 +17,12 @@ const (
 	KeyValuePariSimpleFormat                     = "{ Key (Type - %T): %v} - { Value (Type - %T) : %v  }"
 	SprintFormatNumberWithColon                  = "%d:%d"
 	SprintFormatAnyValueWithColon                = "%v:%v"
+	CurlyTitleWrapFormat                         = "%v: {%v}"        // Title, Value
+	QuotationTitleWrapFormat                     = "%v: \"%v\""      // Title, Value
+	QuotationTitleMetaWrapFormat                 = "%v: \"%v\" (%v)" // Title, Value, Meta
+	CurlyTitleMetaWrapFormat                     = "%v: {%v} (%v)"   // Title, Value, Meta
+	SquareTitleWrapFormat                        = "%v: [%v]"        // Title, Value
+	SquareTitleMetaWrapFormat                    = "%v: [%v] (%v)"   // Title, Value, Meta
 	SprintFormatAnyValueWithComma                = "%v,%v"
 	SprintFormatAnyValueWithPipe                 = "%v|%v"
 	SprintFormatAnyNameValueWithColon            = "%#v:%#v"
@@ -40,6 +46,7 @@ const (
 	StringWithSingleQuoteFormat                  = "'%s'"
 	MessageWrapMessageFormat                     = "%s (%s)"
 	ValueWrapValueFormat                         = "%v (%v)"
+	FilePathEmpty                                = "File path was empty(\"\")."
 	EnumOnlySupportedFormat                      = "enum: %T, " +
 		"not supported (\"%s\") | only supported { %s }" // enumSelf, enumSelf, csv-support
 	EnumOnlySupportedWithMessageFormat = "enum: %T, " +

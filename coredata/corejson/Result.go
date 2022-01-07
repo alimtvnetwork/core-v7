@@ -169,6 +169,18 @@ func (it *Result) SafeValuesPtr() *[]byte {
 	return &it.Bytes
 }
 
+func (it *Result) Raw() ([]byte, error) {
+	return it.SafeBytes(), it.MeaningfulError()
+}
+
+func (it *Result) RawString() (jsonString string, err error) {
+	return it.JsonString(), it.MeaningfulError()
+}
+
+func (it *Result) RawPrettyString() (jsonString string, err error) {
+	return it.PrettyJsonString(), it.MeaningfulError()
+}
+
 // MeaningfulError create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
@@ -207,6 +219,15 @@ func (it *Result) HasIssuesOrEmpty() bool {
 }
 
 func (it *Result) HandleError() {
+	if it == nil || it.IsEmptyError() {
+		return
+	}
+
+	panic(it.MeaningfulError())
+}
+
+// MustSafe alias for HandleError
+func (it *Result) MustSafe() {
 	if it == nil || it.IsEmptyError() {
 		return
 	}
@@ -278,20 +299,54 @@ func (it *Result) InjectInto(
 	return injector.JsonParseSelfInject(it)
 }
 
-func (it *Result) Unmarshal(any interface{}) error {
+// Deserialize
+//
+// Same as Unmarshal, just alias
+func (it *Result) Deserialize(
+	anyPointer interface{},
+) error {
+	return it.Unmarshal(anyPointer)
+}
+
+// DeserializeMust
+//
+// Same as UnmarshalMust, just alias
+func (it *Result) DeserializeMust(
+	anyPointer interface{},
+) {
+	err := it.Unmarshal(anyPointer)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func (it *Result) UnmarshalMust(
+	anyPointer interface{},
+) {
+	err := it.Unmarshal(anyPointer)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func (it *Result) Unmarshal(
+	anyPointer interface{},
+) error {
 	if it == nil {
 		return errcore.
 			UnMarshallingFailedType.
 			Error(
 				"cannot unmarshal if JsonResult is ni, type",
-				reflectinternal.TypeName(any))
+				reflectinternal.TypeName(anyPointer))
 	}
 
 	if it.HasError() {
 		reference := errcore.Var3NoType(
 			"JsonResult Error", it.Error,
 			"Source Type", it.TypeName,
-			"To Reference Type", reflectinternal.TypeName(any))
+			"To Reference Type", reflectinternal.TypeName(anyPointer))
 
 		return errcore.
 			UnMarshallingFailedType.
@@ -300,7 +355,7 @@ func (it *Result) Unmarshal(any interface{}) error {
 				reference)
 	}
 
-	err := json.Unmarshal(it.Bytes, any)
+	err := json.Unmarshal(it.Bytes, anyPointer)
 
 	if err == nil {
 		return nil
@@ -309,23 +364,25 @@ func (it *Result) Unmarshal(any interface{}) error {
 	reference := errcore.Var3NoType(
 		"Unmarshall Error", err.Error(),
 		"Source Type", it.TypeName,
-		"To Reference Type", reflectinternal.TypeName(any))
+		"To Reference Type", reflectinternal.TypeName(anyPointer))
 
 	return errcore.
 		UnMarshallingFailedType.
 		ErrorRefOnly(reference)
 }
 
-func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
+func (it *Result) UnmarshalIgnoreExistingError(
+	anyItem interface{},
+) error {
 	if it == nil {
 		return errcore.
 			UnMarshallingFailedType.
 			Error(
 				"cannot unmarshal if JsonResult is nil, type",
-				reflectinternal.TypeName(any))
+				reflectinternal.TypeName(anyItem))
 	}
 
-	err := json.Unmarshal(it.Bytes, any)
+	err := json.Unmarshal(it.Bytes, anyItem)
 
 	if err == nil {
 		return nil
@@ -334,7 +391,7 @@ func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
 	reference := errcore.Var3NoType(
 		"Unmarshall Error", err.Error(),
 		"Source Type", it.TypeName,
-		"To Reference Type", reflectinternal.TypeName(any))
+		"To Reference Type", reflectinternal.TypeName(anyItem))
 
 	return errcore.
 		UnMarshallingFailedType.
@@ -342,7 +399,7 @@ func (it *Result) UnmarshalIgnoreExistingError(any interface{}) error {
 }
 
 func (it *Result) UnmarshalResult() (*Result, error) {
-	empty := EmptyWithoutErrorPtr()
+	empty := Empty.ResultPtr()
 	err := it.Unmarshal(empty)
 
 	return empty, err
@@ -359,11 +416,11 @@ func (it *Result) JsonModelAny() interface{} {
 }
 
 func (it Result) Json() Result {
-	return NewFromAny(it)
+	return NewResult.Any(it)
 }
 
 func (it Result) JsonPtr() *Result {
-	return NewFromAnyPtr(it)
+	return NewResult.AnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -374,7 +431,7 @@ func (it *Result) ParseInjectUsingJson(
 		it)
 
 	if err != nil {
-		return EmptyWithErrorPtr(err), err
+		return Empty.ResultPtrWithErr(it.TypeName, err), err
 	}
 
 	return it, nil
@@ -522,17 +579,26 @@ func (it *Result) ClonePtr(isDeepClone bool) *Result {
 
 func (it Result) Clone(isDeepClone bool) Result {
 	if it.Length() == 0 {
-		return New([]byte{}, it.CloneError(), it.TypeName)
+		return NewResult.Create(
+			[]byte{},
+			it.CloneError(),
+			it.TypeName)
 	}
 
 	if !isDeepClone || it.Length() == 0 {
-		return New(it.Bytes, it.CloneError(), it.TypeName)
+		return NewResult.Create(
+			it.Bytes,
+			it.CloneError(),
+			it.TypeName)
 	}
 
 	newBytes := make([]byte, it.Length())
 	copy(newBytes, it.Bytes)
 
-	return New(newBytes, it.CloneError(), it.TypeName)
+	return NewResult.Create(
+		newBytes,
+		it.CloneError(),
+		it.TypeName)
 }
 
 func (it *Result) AsJsonContractsBinder() JsonContractsBinder {

@@ -8,20 +8,20 @@ import (
 
 // DoubleQuoteWrapElementsWithIndexes Returns new empty slice if nil or empty slice given.
 func DoubleQuoteWrapElementsWithIndexes(
-	inputSlice []string,
+	inputElements ...string,
 ) (doubleQuoteWrappedItems []string) {
-	if inputSlice == nil {
+	if inputElements == nil {
 		return []string{}
 	}
 
-	length := len(inputSlice)
+	length := len(inputElements)
 	newSlice := make([]string, length)
 
 	if length == 0 {
 		return newSlice
 	}
 
-	for i, item := range inputSlice {
+	for i, item := range inputElements {
 		indexString := constants.SquareStart +
 			strconv.Itoa(i) +
 			constants.SquareEnd

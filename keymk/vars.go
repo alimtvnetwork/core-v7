@@ -97,4 +97,7 @@ var (
 		Package: "p",
 		Item:    "i",
 	}
+
+	NewKey           = &newKeyCreator{}
+	NewKeyWithLegend = &newKeyWithLegendCreator{}
 )

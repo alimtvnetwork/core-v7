@@ -1850,14 +1850,14 @@ func (it *Collection) IsContainsPtr(item *string) bool {
 }
 
 // GetHashsetPlusHasAll nil will return false.
-func (it *Collection) GetHashsetPlusHasAll(items *[]string) (*Hashset, bool) {
+func (it *Collection) GetHashsetPlusHasAll(items []string) (*Hashset, bool) {
 	hashset := it.HashsetAsIs()
 
 	if items == nil || it.IsEmpty() {
 		return hashset, false
 	}
 
-	return hashset, hashset.HasAllStringsPtr(items)
+	return hashset, hashset.HasAllStrings(items)
 }
 
 // IsContainsAllPtr nil will return false.
@@ -2088,18 +2088,19 @@ func (it *Collection) String() string {
 			commonJoiner)
 }
 
-func (it *Collection) CsvLines() *[]string {
+func (it *Collection) CsvLines() []string {
 	return simplewrap.DoubleQuoteWrapElements(
-		&it.items,
-		false)
+		false,
+		it.items...,
+	)
 }
 
 func (it *Collection) CsvLinesOptions(
 	isSkipQuoteOnlyOnExistence bool,
 ) []string {
-	return *simplewrap.DoubleQuoteWrapElements(
-		&it.items,
-		isSkipQuoteOnlyOnExistence)
+	return simplewrap.DoubleQuoteWrapElements(
+		isSkipQuoteOnlyOnExistence,
+		it.items...)
 }
 
 func (it *Collection) Csv() string {
@@ -2224,11 +2225,11 @@ func (it *Collection) UnmarshalJSON(data []byte) error {
 }
 
 func (it Collection) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Collection) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 //goland:noinspection GoLinterLocal

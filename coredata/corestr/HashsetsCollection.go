@@ -76,7 +76,7 @@ func (it *HashsetsCollection) HasAll(items ...string) bool {
 	wg.Add(length)
 	hasFunc := func(i int) {
 		boolList[i] = it.items[i].
-			HasAllStringsPtr(&items)
+			HasAllStrings(items)
 		wg.Done()
 	}
 
@@ -284,11 +284,11 @@ func (it *HashsetsCollection) UnmarshalJSON(
 }
 
 func (it HashsetsCollection) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it HashsetsCollection) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *HashsetsCollection) ParseInjectUsingJson(

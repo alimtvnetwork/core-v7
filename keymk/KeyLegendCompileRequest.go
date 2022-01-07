@@ -15,7 +15,7 @@ func (it KeyLegendCompileRequest) NewKeyLegend(
 	packageName,
 	stateName string,
 ) *KeyWithLegend {
-	return NewKeyWithLegend(
+	return NewKeyWithLegend.All(
 		option,
 		legendName,
 		isAttachLegend,
@@ -30,7 +30,7 @@ func (it KeyLegendCompileRequest) NewKeyLegendDefaults(
 	packageName,
 	stateName string,
 ) *KeyWithLegend {
-	return NewKeyWithLegend(
+	return NewKeyWithLegend.All(
 		JoinerOption,
 		ShortLegends,
 		false,

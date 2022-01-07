@@ -52,7 +52,7 @@ func (it *BytesCollection) LastOrDefault() []byte {
 
 func (it *BytesCollection) Take(limit int) *BytesCollection {
 	if it.IsEmpty() {
-		return EmptyBytesCollection()
+		return Empty.BytesCollectionPtr()
 	}
 
 	return &BytesCollection{
@@ -62,7 +62,7 @@ func (it *BytesCollection) Take(limit int) *BytesCollection {
 
 func (it *BytesCollection) Limit(limit int) *BytesCollection {
 	if it.IsEmpty() {
-		return EmptyBytesCollection()
+		return Empty.BytesCollectionPtr()
 	}
 
 	if limit <= constants.TakeAllMinusOne {
@@ -79,7 +79,7 @@ func (it *BytesCollection) Limit(limit int) *BytesCollection {
 
 func (it *BytesCollection) Skip(skip int) *BytesCollection {
 	if it.IsEmpty() {
-		return EmptyBytesCollection()
+		return Empty.BytesCollectionPtr()
 	}
 
 	return &BytesCollection{
@@ -349,7 +349,7 @@ func (it *BytesCollection) AddAnyItems(
 	}
 
 	for _, anyItem := range anyItems {
-		jsonResult := NewFromAnyPtr(anyItem)
+		jsonResult := NewPtr(anyItem)
 		if jsonResult.HasError() {
 			return jsonResult.MeaningfulError()
 		}
@@ -415,7 +415,7 @@ func (it *BytesCollection) AddsPtr(
 func (it *BytesCollection) AddAny(
 	any interface{},
 ) error {
-	result := NewFromAny(any)
+	result := New(any)
 
 	if result.HasError() {
 		return result.MeaningfulError()
@@ -612,11 +612,11 @@ func (it *BytesCollection) JsonModelAny() interface{} {
 }
 
 func (it BytesCollection) Json() Result {
-	return NewFromAny(it)
+	return New(it)
 }
 
 func (it BytesCollection) JsonPtr() *Result {
-	return NewFromAnyPtr(it)
+	return NewPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -628,7 +628,7 @@ func (it *BytesCollection) ParseInjectUsingJson(
 	)
 
 	if err != nil {
-		return EmptyBytesCollection(), err
+		return Empty.BytesCollectionPtr(), err
 	}
 
 	return it, nil
@@ -675,7 +675,7 @@ func (it *BytesCollection) ShadowClone() BytesCollection {
 }
 
 func (it BytesCollection) Clone(isDeepCloneEach bool) BytesCollection {
-	newResults := NewBytesCollection(
+	newResults := NewBytesCollection.UsingCap(
 		it.Length())
 
 	if newResults.Length() == 0 {
@@ -694,7 +694,7 @@ func (it *BytesCollection) ClonePtr(isDeepCloneEach bool) *BytesCollection {
 		return nil
 	}
 
-	newResults := NewBytesCollection(
+	newResults := NewBytesCollection.UsingCap(
 		it.Length())
 
 	if newResults.Length() == 0 {

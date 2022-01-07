@@ -61,11 +61,11 @@ func (it *FileWithLine) JsonString() string {
 }
 
 func (it FileWithLine) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it FileWithLine) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *FileWithLine) ParseInjectUsingJson(

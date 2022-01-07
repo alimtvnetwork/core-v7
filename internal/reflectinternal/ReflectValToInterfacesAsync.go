@@ -27,11 +27,16 @@ func ReflectValToInterfacesAsync(
 	if length == 0 {
 		return slice
 	}
+
 	wg := sync.WaitGroup{}
 	setterIndexFunc := func(index int) {
 		value := reflectVal.Index(index)
-		valueInf := value.Interface()
 
+		if value.Kind() == reflect.Ptr {
+			value = value.Elem()
+		}
+
+		valueInf := value.Interface()
 		slice[index] = valueInf
 
 		wg.Done()

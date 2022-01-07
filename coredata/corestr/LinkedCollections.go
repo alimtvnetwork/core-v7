@@ -1481,11 +1481,11 @@ func (it *LinkedCollections) Clear() *LinkedCollections {
 }
 
 func (it LinkedCollections) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it LinkedCollections) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *LinkedCollections) ParseInjectUsingJson(

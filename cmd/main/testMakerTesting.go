@@ -7,7 +7,7 @@ import (
 )
 
 func testMakerTesting() {
-	key := keymk.New(keymk.BracketJoinerOption, "alim")
+	key := keymk.NewKey.All(keymk.BracketJoinerOption, "alim")
 	key.AppendChainStrings("2", "alim-4")
 
 	fmt.Println(key.String())

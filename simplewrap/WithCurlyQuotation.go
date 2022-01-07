@@ -8,9 +8,11 @@ import (
 
 // WithCurlyQuotation
 //
-// {\"%v\"}
+// Example : {\"%v\"}
 func WithCurlyQuotation(
 	source interface{},
 ) string {
-	return fmt.Sprintf(constants.CurlyQuotationWrapFormat, source)
+	return fmt.Sprintf(
+		constants.CurlyQuotationWrapFormat,
+		source)
 }

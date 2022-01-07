@@ -1068,11 +1068,11 @@ func (it *LinkedList) Clear() *LinkedList {
 }
 
 func (it LinkedList) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it LinkedList) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *LinkedList) ParseInjectUsingJson(

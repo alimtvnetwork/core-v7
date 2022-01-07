@@ -22,6 +22,10 @@ const (
 	Solaris                   = "solaris"
 	Windows                   = "windows"
 	Unknown                   = "Unknown"
+	Any                       = "Any"
+	Illumos                   = "illumos"
+	IOs                       = "ios"
+	Aix                       = "aix"
 	NewLine                   = constants.NewLine
 	PathSeparator             = constants.PathSeparator
 	CurrentOperatingSystem    = runtime.GOOS

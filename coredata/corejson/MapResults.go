@@ -49,7 +49,7 @@ func (it *MapResults) AddSkipOnNil(
 	return it
 }
 
-func (it *MapResults) GetAt(
+func (it *MapResults) GetByKey(
 	key string,
 ) *Result {
 	r, has := it.Items[key]
@@ -135,7 +135,7 @@ func (it *MapResults) GetErrorsAsSingleString() string {
 
 	return strings.Join(
 		errStrList,
-		constants.NewLineUnix)
+		constants.DefaultLine)
 }
 
 func (it *MapResults) GetErrorsAsSingle() error {
@@ -166,14 +166,14 @@ func (it *MapResults) UnmarshalAt(
 		any)
 }
 
-func (it *MapResults) UnmarshalManys(
-	keyAnys ...KeyAny,
+func (it *MapResults) UnmarshalMany(
+	keyAnyItems ...KeyAny,
 ) error {
-	if len(keyAnys) == 0 {
+	if len(keyAnyItems) == 0 {
 		return nil
 	}
 
-	for _, keyAny := range keyAnys {
+	for _, keyAny := range keyAnyItems {
 		err := it.UnmarshalAt(
 			keyAny.Key,
 			keyAny.AnyInf)
@@ -186,14 +186,14 @@ func (it *MapResults) UnmarshalManys(
 	return nil
 }
 
-func (it *MapResults) UnmarshalManysSafe(
-	keyAnys ...KeyAny,
+func (it *MapResults) UnmarshalManySafe(
+	keyAnyItems ...KeyAny,
 ) error {
-	if len(keyAnys) == 0 {
+	if len(keyAnyItems) == 0 {
 		return nil
 	}
 
-	for _, keyAny := range keyAnys {
+	for _, keyAny := range keyAnyItems {
 		err := it.SafeUnmarshalAt(
 			keyAny.Key,
 			keyAny.AnyInf)
@@ -225,13 +225,7 @@ func (it *MapResults) InjectIntoAt(
 	injector JsonParseSelfInjector,
 ) error {
 	return injector.JsonParseSelfInject(
-		it.GetAt(key))
-}
-
-func (it *MapResults) GetAtSafe(
-	key string,
-) *Result {
-	return it.GetAt(key)
+		it.GetByKey(key))
 }
 
 func (it *MapResults) Add(
@@ -267,7 +261,8 @@ func (it *MapResults) AddAny(
 			key)
 	}
 
-	jsonResult := NewFromAny(item)
+	jsonResult := NewResult.Any(
+		item)
 
 	if jsonResult.HasError() {
 		return jsonResult.MeaningfulError()
@@ -287,7 +282,7 @@ func (it *MapResults) AddAnySkipOnNil(
 		return nil
 	}
 
-	jsonResult := NewFromAny(item)
+	jsonResult := NewResult.Any(item)
 
 	if jsonResult.HasError() {
 		return jsonResult.MeaningfulError()
@@ -308,7 +303,7 @@ func (it *MapResults) AddAnyNonEmptyNonError(
 
 	return it.AddNonEmptyNonErrorPtr(
 		key,
-		NewFromAnyPtr(item))
+		NewResult.AnyPtr(item))
 }
 
 func (it *MapResults) AddAnyNonEmpty(
@@ -319,9 +314,9 @@ func (it *MapResults) AddAnyNonEmpty(
 		return it
 	}
 
-	return it.AddPtr(
+	return it.Add(
 		key,
-		NewFromAnyPtr(item))
+		NewResult.Any(item))
 }
 
 func (it *MapResults) AddKeyWithResult(
@@ -388,7 +383,7 @@ func (it *MapResults) AddKeyAnyInfPtr(
 		result.AnyInf)
 }
 
-func (it *MapResults) AddKeyAnys(
+func (it *MapResults) AddKeyAnyItems(
 	results ...KeyAny,
 ) *MapResults {
 	if results == nil {
@@ -402,7 +397,7 @@ func (it *MapResults) AddKeyAnys(
 	return it
 }
 
-func (it *MapResults) AddKeyAnysPtr(
+func (it *MapResults) AddKeyAnyItemsPtr(
 	results ...*KeyAny,
 ) *MapResults {
 	if results == nil {
@@ -436,8 +431,22 @@ func (it *MapResults) AddMapResults(
 		return it
 	}
 
-	for key, r := range mapResults.Items {
-		it.Items[key] = r
+	for key := range mapResults.Items {
+		it.Items[key] = mapResults.Items[key]
+	}
+
+	return it
+}
+
+func (it *MapResults) AddMapAnyItems(
+	addOrUpdateMap map[string]interface{},
+) *MapResults {
+	if len(addOrUpdateMap) == 0 {
+		return it
+	}
+
+	for key := range addOrUpdateMap {
+		it.Items[key] = NewResult.Any(addOrUpdateMap[key])
 	}
 
 	return it
@@ -488,10 +497,11 @@ func (it *MapResults) AllValues() []Result {
 
 func (it *MapResults) AllResultsCollection() *ResultsCollection {
 	if it.IsEmpty() {
-		return EmptyResultsCollection()
+		return Empty.ResultsCollection()
 	}
 
-	resultsCollection := NewResultsCollection(it.Length())
+	resultsCollection := NewResultsCollection.UsingCap(
+		it.Length())
 
 	index := 0
 	for _, result := range it.Items {
@@ -708,10 +718,12 @@ func (it *MapResults) GetNewMapUsingKeys(
 	keys ...string,
 ) *MapResults {
 	if len(keys) == 0 {
-		return EmptyMapResults()
+		return Empty.MapResults()
 	}
 
-	mapResults := make(map[string]Result, len(keys))
+	mapResults := make(
+		map[string]Result,
+		len(keys))
 
 	for _, key := range keys {
 		item, has := it.Items[key]
@@ -734,12 +746,14 @@ func (it *MapResults) GetNewMapUsingKeys(
 
 func (it *MapResults) ResultCollection() *ResultsCollection {
 	if it.IsEmpty() {
-		return EmptyResultsCollection()
+		return Empty.ResultsCollection()
 	}
 
-	results := NewResultsCollection(it.Length())
+	results := NewResultsCollection.UsingCap(
+		it.Length())
 
-	return results.AddRawMapResults(it.Items)
+	return results.AddRawMapResults(
+		it.Items)
 }
 
 //goland:noinspection GoLinterLocal
@@ -780,11 +794,11 @@ func (it *MapResults) Dispose() {
 }
 
 func (it MapResults) Json() Result {
-	return NewFromAny(it)
+	return NewResult.Any(it)
 }
 
 func (it MapResults) JsonPtr() *Result {
-	return NewFromAnyPtr(it)
+	return NewResult.AnyPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -796,7 +810,7 @@ func (it *MapResults) ParseInjectUsingJson(
 	)
 
 	if err != nil {
-		return EmptyMapResults(), err
+		return Empty.MapResults(), err
 	}
 
 	return it, nil

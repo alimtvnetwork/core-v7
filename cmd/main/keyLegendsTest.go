@@ -7,7 +7,7 @@ import (
 )
 
 func keyLegendsTest() {
-	k := keymk.NewKeyWithLegend(
+	k := keymk.NewKeyWithLegend.All(
 		keymk.JoinerOption,
 		keymk.ShortLegends,
 		false,

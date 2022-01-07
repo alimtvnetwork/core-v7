@@ -53,7 +53,7 @@ func (it *ResultsPtrCollection) LastOrDefault() *Result {
 
 func (it *ResultsPtrCollection) Take(limit int) *ResultsPtrCollection {
 	if it.IsEmpty() {
-		return EmptyResultsPtrCollection()
+		return Empty.ResultsPtrCollection()
 	}
 
 	return &ResultsPtrCollection{
@@ -63,7 +63,7 @@ func (it *ResultsPtrCollection) Take(limit int) *ResultsPtrCollection {
 
 func (it *ResultsPtrCollection) Limit(limit int) *ResultsPtrCollection {
 	if it.IsEmpty() {
-		return EmptyResultsPtrCollection()
+		return Empty.ResultsPtrCollection()
 	}
 
 	if limit <= constants.TakeAllMinusOne {
@@ -80,7 +80,7 @@ func (it *ResultsPtrCollection) Limit(limit int) *ResultsPtrCollection {
 
 func (it *ResultsPtrCollection) Skip(skip int) *ResultsPtrCollection {
 	if it.IsEmpty() {
-		return EmptyResultsPtrCollection()
+		return Empty.ResultsPtrCollection()
 	}
 
 	return &ResultsPtrCollection{
@@ -394,13 +394,13 @@ func (it *ResultsPtrCollection) AddAny(
 
 	it.Items = append(
 		it.Items,
-		NewFromAnyPtr(any))
+		NewPtr(any))
 
 	return it
 }
 
-// AddsAnysPtr Skip on nil
-func (it *ResultsPtrCollection) AddsAnysPtr(
+// AddAnyItems Skip on nil
+func (it *ResultsPtrCollection) AddAnyItems(
 	anys ...interface{},
 ) *ResultsPtrCollection {
 	if anys == nil {
@@ -414,7 +414,7 @@ func (it *ResultsPtrCollection) AddsAnysPtr(
 
 		it.Items = append(
 			it.Items,
-			NewFromAnyPtr(any))
+			NewPtr(any))
 	}
 
 	return it
@@ -639,9 +639,9 @@ func (it *ResultsPtrCollection) GetSinglePageCollection(
 
 	list := it.Items[skipItems:endingIndex]
 
-	return NewResultsCollectionPtrUsingJsonResultsPtr(
-		constants.Zero,
-		list...)
+	return NewResultsPtrCollection.
+		UsingResults(
+			list...)
 }
 
 //goland:noinspection GoLinterLocal
@@ -655,11 +655,11 @@ func (it *ResultsPtrCollection) JsonModelAny() interface{} {
 }
 
 func (it ResultsPtrCollection) Json() Result {
-	return NewFromAny(it)
+	return New(it)
 }
 
 func (it ResultsPtrCollection) JsonPtr() *Result {
-	return NewFromAnyPtr(it)
+	return NewPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -669,7 +669,7 @@ func (it *ResultsPtrCollection) ParseInjectUsingJson(
 	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return EmptyResultsPtrCollection(), err
+		return Empty.ResultsPtrCollection(), err
 	}
 
 	return it, nil
@@ -718,7 +718,7 @@ func (it *ResultsPtrCollection) Clone(
 		return nil
 	}
 
-	newResults := NewResultsPtrCollection(
+	newResults := NewResultsPtrCollection.UsingCap(
 		it.Length())
 
 	if newResults.Length() == 0 {

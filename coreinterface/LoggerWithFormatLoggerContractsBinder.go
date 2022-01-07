@@ -1,0 +1,6 @@
+package coreinterface
+
+type LoggerWithFormatLoggerContractsBinder interface {
+	LoggerWithFormatLogger
+	AsLoggerWithFormatLoggerContractsBinder() LoggerWithFormatLoggerContractsBinder
+}

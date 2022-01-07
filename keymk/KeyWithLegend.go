@@ -515,7 +515,7 @@ func (it *KeyWithLegend) CloneUsing(groupName string) *KeyWithLegend {
 		return nil
 	}
 
-	return NewKeyWithLegend(
+	return NewKeyWithLegend.All(
 		it.option.ClonePtr(),
 		it.LegendName,
 		it.isAttachLegendNames,

@@ -4,6 +4,8 @@ import "gitlab.com/evatix-go/core/osconsts"
 
 var (
 	osTypesStrings = [...]string{
+		Any:           osconsts.Any,
+		Unknown:       osconsts.Unknown,
 		Windows:       osconsts.Windows,
 		Linux:         osconsts.Linux,
 		DarwinOrMacOs: osconsts.DarwinOrMacOs,
@@ -15,10 +17,14 @@ var (
 		Plan9:         osconsts.Plan9,
 		Solaris:       osconsts.Solaris,
 		Nacl:          osconsts.Nacl,
-		Unknown:       osconsts.Unknown,
+		Illumos:       osconsts.Illumos,
+		IOs:           osconsts.IOs,
+		Aix:           osconsts.Aix,
 	}
 
 	OsVariantToStringMap = map[Variation]string{
+		Any:           osconsts.Any,
+		Unknown:       osconsts.Unknown,
 		Windows:       osconsts.Windows,
 		Linux:         osconsts.Linux,
 		DarwinOrMacOs: osconsts.DarwinOrMacOs,
@@ -30,10 +36,14 @@ var (
 		Plan9:         osconsts.Plan9,
 		Solaris:       osconsts.Solaris,
 		Nacl:          osconsts.Nacl,
-		Unknown:       osconsts.Unknown,
+		Illumos:       osconsts.Illumos,
+		IOs:           osconsts.IOs,
+		Aix:           osconsts.Aix,
 	}
 
 	OsStringToVariantMap = map[string]Variation{
+		osconsts.Any:           Any,
+		osconsts.Unknown:       Unknown,
 		osconsts.Windows:       Windows,
 		osconsts.Linux:         Linux,
 		osconsts.DarwinOrMacOs: DarwinOrMacOs,
@@ -45,6 +55,8 @@ var (
 		osconsts.Plan9:         Plan9,
 		osconsts.Solaris:       Solaris,
 		osconsts.Nacl:          Nacl,
-		osconsts.Unknown:       Unknown,
+		osconsts.Illumos:       Illumos,
+		osconsts.IOs:           IOs,
+		osconsts.Aix:           Aix,
 	}
 )

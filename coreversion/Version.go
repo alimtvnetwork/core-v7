@@ -338,11 +338,11 @@ func (it *Version) Ptr() *Version {
 }
 
 func (it Version) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Version) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *Version) JsonParseSelfInject(jsonResult *corejson.Result) error {

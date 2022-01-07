@@ -3,6 +3,7 @@ package constants
 import (
 	"math"
 	"os"
+	"time"
 )
 
 const (
@@ -22,6 +23,8 @@ const (
 	NewLineMac                               = "\n"
 	NewLineUnix                              = "\n"
 	DefaultLine                              = "\n"
+	NewLineHyphenSpace                       = DefaultLine + HyphenSpace
+	NewLineEqualSpace                        = DefaultLine + "= "
 	NewLineWindows                           = "\r\n"
 	Tab                                      = "\t"
 	TabV                                     = "\v"
@@ -343,6 +346,7 @@ const (
 	PublicPort                               = 80
 	Common8080Port                           = 8080
 	SpaceHyphenSpace                         = " - "
+	HyphenSpace                              = "- "
 	SpaceEqualSpace                          = " = "
 	SpacePipeSpace                           = " | "
 	SpaceUnderscoreSpace                     = " _ "
@@ -363,7 +367,41 @@ const (
 	PathUserTemplate                         = "{user}"
 	PathRootPrefixTemplate                   = "{root}/{prefix}/"
 	PathHomeUserTemplate                     = "{home}/{user}"
+	PathHomeUserAppTemplate                  = "{home}/{user}/{app}"
 	PathTempDirTemplate                      = "{tmp}/{app}/{pkg}/"
 	PathTempTestDirTemplate                  = "{tmp}/{app}/{pkg}/{test}"
+	PathVarAppLogDirTemplate                 = "{var}/log/{app}"
 	KeyValShortFormat                        = "%s = %v" // Key, Value any
+	LikeQuerySuffix                          = " LIKE ?"
+	SpaceStartedExclamation                  = " started!"
+	SpaceEndedExclamation                    = " ended!"
+	SpaceFailedExclamation                   = " failed!"
+	SpaceErrorColon                          = " error:"
+	AndJoiner                                = " AND "
+	WhereClauseStart                         = " WHERE "
+	DoubleStars                              = "**"
+	Export                                   = "export"
+	ProductName                              = "Cimux"
+	ProductNameLower                         = "cimux"
+	RedisDefaultAddress                      = "localhost:6379"
+	DefaultConcurrency                       = 10
+	DefaultMaxTrySmall                       = 3
+	DefaultMaxTry                            = 5
+	DefaultMaxTryLarge                       = 10
+	DefaultMaxDepth                          = 50
+	DefaultMaxDepthSmall                     = 10
+	DefaultRecursiveMaxDepth                 = 255
+	DefaultRecursiveMaxDepthLarge            = 2048
+	DefaultMaxLevel                          = 8
+	DefaultMaxLevelLarge                     = 64
+	DefaultWait                              = 800 * time.Millisecond
+	DefaultWaitLong                          = 1 * time.Minute
+	DefaultWaitLongLong                      = 2 * time.Minute
+	DefaultWaitFast                          = 500 * time.Millisecond
+	DefaultWaitFastest                       = 300 * time.Millisecond
+	DurationDay                              = 24 * time.Hour
+	DurationWeek                             = 7 * DurationDay
+	DurationMinute                           = 1 * time.Minute
+	DurationMonth                            = 30 * DurationDay
+	DurationYear                             = 365 * DurationDay
 )

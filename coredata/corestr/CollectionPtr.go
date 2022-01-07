@@ -1787,7 +1787,7 @@ func (it *CollectionPtr) IsContainsPtr(
 
 // GetHashsetPlusHasAll nil will return false.
 func (it *CollectionPtr) GetHashsetPlusHasAll(
-	items *[]string,
+	items []string,
 ) (*Hashset, bool) {
 	hashset := it.HashsetAsIs()
 
@@ -1795,7 +1795,7 @@ func (it *CollectionPtr) GetHashsetPlusHasAll(
 		return hashset, false
 	}
 
-	return hashset, hashset.HasAllStringsPtr(items)
+	return hashset, hashset.HasAllStrings(items)
 }
 
 // IsContainsAllPtr nil will return false.
@@ -2015,11 +2015,11 @@ func (it *CollectionPtr) UnmarshalJSON(
 }
 
 func (it CollectionPtr) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it CollectionPtr) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *CollectionPtr) ParseInjectUsingJson(

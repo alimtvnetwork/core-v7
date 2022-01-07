@@ -2,8 +2,11 @@ package simplewrap
 
 import "gitlab.com/evatix-go/core/constants"
 
-func wrapDoubleQuoteByExistenceCheck(inputSlice *[]string, newSlice []string) *[]string {
-	for i, item := range *inputSlice {
+func wrapDoubleQuoteByExistenceCheck(
+	inputSlice []string,
+	newSlice []string,
+) []string {
+	for i, item := range inputSlice {
 		itemLength := len(item)
 		if itemLength < 2 {
 			newSlice[i] = WithDoubleQuote(item)
@@ -20,5 +23,5 @@ func wrapDoubleQuoteByExistenceCheck(inputSlice *[]string, newSlice []string) *[
 		newSlice[i] = WithDoubleQuote(item)
 	}
 
-	return &newSlice
+	return newSlice
 }

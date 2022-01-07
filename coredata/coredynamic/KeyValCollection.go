@@ -117,7 +117,7 @@ func (it *KeyValCollection) MapAnyItems() *MapAnyItems {
 }
 
 func (it *KeyValCollection) JsonMapResults() *corejson.MapResults {
-	mapResults := corejson.NewMapResultsUsingCap(it.Length())
+	mapResults := corejson.NewMapResults.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return mapResults
@@ -133,7 +133,7 @@ func (it *KeyValCollection) JsonMapResults() *corejson.MapResults {
 }
 
 func (it *KeyValCollection) JsonResultsCollection() *corejson.ResultsCollection {
-	jsonResultsCollection := corejson.NewResultsCollection(it.Length())
+	jsonResultsCollection := corejson.NewResultsCollection.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection
@@ -148,7 +148,7 @@ func (it *KeyValCollection) JsonResultsCollection() *corejson.ResultsCollection 
 }
 
 func (it *KeyValCollection) JsonResultsPtrCollection() *corejson.ResultsPtrCollection {
-	jsonResultsCollection := corejson.NewResultsPtrCollection(it.Length())
+	jsonResultsCollection := corejson.NewResultsPtrCollection.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection

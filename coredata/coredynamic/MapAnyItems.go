@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 type MapAnyItems struct {
@@ -461,17 +462,24 @@ func (it *MapAnyItems) JsonResultOfKey(key string) *corejson.Result {
 	item, has := it.Get(key)
 
 	if has {
-		return corejson.NewFromAnyPtr(item)
+		return corejson.NewPtr(item)
 	}
 
-	return corejson.EmptyWithErrorPtr(
-		errcore.KeyNotExistInMapType.Error("Key", key))
+	err := errcore.
+		KeyNotExistInMapType.
+		Error("Key", key)
+
+	return corejson.
+		Empty.
+		ResultPtrWithErr(
+			reflectinternal.TypeName(it),
+			err)
 }
 
 func (it *MapAnyItems) JsonResultOfKeys(
 	keys ...string,
 ) *corejson.MapResults {
-	mapResults := corejson.NewMapResultsUsingCap(len(keys))
+	mapResults := corejson.NewMapResults.UsingCap(len(keys))
 
 	if len(keys) == 0 {
 		return mapResults
@@ -530,7 +538,7 @@ func (it *MapAnyItems) AllValues() []interface{} {
 }
 
 func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {
-	mapResults := corejson.NewMapResultsUsingCap(it.Length())
+	mapResults := corejson.NewMapResults.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return mapResults, nil
@@ -550,7 +558,9 @@ func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {
 }
 
 func (it *MapAnyItems) JsonResultsCollection() *corejson.ResultsCollection {
-	jsonResultsCollection := corejson.NewResultsCollection(it.Length())
+	jsonResultsCollection := corejson.
+		NewResultsCollection.
+		UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection
@@ -565,7 +575,7 @@ func (it *MapAnyItems) JsonResultsCollection() *corejson.ResultsCollection {
 }
 
 func (it *MapAnyItems) JsonResultsPtrCollection() *corejson.ResultsPtrCollection {
-	jsonResultsCollection := corejson.NewResultsPtrCollection(it.Length())
+	jsonResultsCollection := corejson.NewResultsPtrCollection.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection
@@ -580,7 +590,7 @@ func (it *MapAnyItems) JsonResultsPtrCollection() *corejson.ResultsPtrCollection
 }
 
 func (it *MapAnyItems) JsonModel() *corejson.MapResults {
-	mapResults := corejson.NewMapResultsUsingCap(
+	mapResults := corejson.NewMapResults.UsingCap(
 		it.Length() +
 			constants.Capacity3)
 
@@ -600,11 +610,11 @@ func (it *MapAnyItems) JsonModelAny() interface{} {
 }
 
 func (it MapAnyItems) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it MapAnyItems) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 //goland:noinspection GoLinterLocal

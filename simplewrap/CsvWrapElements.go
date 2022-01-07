@@ -4,27 +4,27 @@ package simplewrap
 //
 // Reference : https://play.golang.org/p/s_uN2-ckk2F | https://stackoverflow.com/a/48832120
 func DoubleQuoteWrapElements(
-	inputSlice *[]string,
 	isSkipQuoteOnlyOnExistence bool,
-) (doubleQuoteWrappedItems *[]string) {
-	if inputSlice == nil {
-		return &[]string{}
+	inputElements ...string,
+) (doubleQuoteWrappedItems []string) {
+	if inputElements == nil {
+		return []string{}
 	}
 
-	length := len(*inputSlice)
+	length := len(inputElements)
 	newSlice := make([]string, length)
 
 	if length == 0 {
-		return &newSlice
+		return newSlice
 	}
 
 	if isSkipQuoteOnlyOnExistence {
-		return wrapDoubleQuoteByExistenceCheck(inputSlice, newSlice)
+		return wrapDoubleQuoteByExistenceCheck(inputElements, newSlice)
 	}
 
-	for i, item := range *inputSlice {
+	for i, item := range inputElements {
 		newSlice[i] = WithDoubleQuote(item)
 	}
 
-	return &newSlice
+	return newSlice
 }

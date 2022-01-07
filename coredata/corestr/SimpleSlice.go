@@ -585,11 +585,11 @@ func (it *SimpleSlice) UnmarshalJSON(
 }
 
 func (it SimpleSlice) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it SimpleSlice) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *SimpleSlice) ParseInjectUsingJson(

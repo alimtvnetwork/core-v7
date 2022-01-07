@@ -404,7 +404,7 @@ func (it *AnyCollection) UnmarshalJSON(data []byte) error {
 }
 
 func (it *AnyCollection) JsonResultsCollection() *corejson.ResultsCollection {
-	jsonResultsCollection := corejson.NewResultsCollection(it.Length())
+	jsonResultsCollection := corejson.NewResultsCollection.UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection
@@ -419,7 +419,9 @@ func (it *AnyCollection) JsonResultsCollection() *corejson.ResultsCollection {
 }
 
 func (it *AnyCollection) JsonResultsPtrCollection() *corejson.ResultsPtrCollection {
-	jsonResultsCollection := corejson.NewResultsPtrCollection(it.Length())
+	jsonResultsCollection := corejson.
+		NewResultsPtrCollection.
+		UsingCap(it.Length())
 
 	if it.IsEmpty() {
 		return jsonResultsCollection
@@ -525,11 +527,11 @@ func (it *AnyCollection) JsonModelAny() interface{} {
 }
 
 func (it AnyCollection) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it AnyCollection) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *AnyCollection) ParseInjectUsingJson(

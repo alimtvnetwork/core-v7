@@ -63,11 +63,11 @@ func (it *Index) UnmarshalJSON(data []byte) error {
 }
 
 func (it Index) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Index) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *Index) JsonParseSelfInject(jsonResult *corejson.Result) error {

@@ -53,7 +53,7 @@ func (it *ResultsCollection) LastOrDefault() *Result {
 
 func (it *ResultsCollection) Take(limit int) *ResultsCollection {
 	if it.IsEmpty() {
-		return EmptyResultsCollection()
+		return Empty.ResultsCollection()
 	}
 
 	return &ResultsCollection{
@@ -63,7 +63,7 @@ func (it *ResultsCollection) Take(limit int) *ResultsCollection {
 
 func (it *ResultsCollection) Limit(limit int) *ResultsCollection {
 	if it.IsEmpty() {
-		return EmptyResultsCollection()
+		return Empty.ResultsCollection()
 	}
 
 	if limit <= constants.TakeAllMinusOne {
@@ -80,7 +80,7 @@ func (it *ResultsCollection) Limit(limit int) *ResultsCollection {
 
 func (it *ResultsCollection) Skip(skip int) *ResultsCollection {
 	if it.IsEmpty() {
-		return EmptyResultsCollection()
+		return Empty.ResultsCollection()
 	}
 
 	return &ResultsCollection{
@@ -427,27 +427,48 @@ func (it *ResultsCollection) AddAny(
 
 	it.Items = append(
 		it.Items,
-		NewFromAny(any))
+		New(any))
 
 	return it
 }
 
-// AddsAnys Skip on nil
-func (it *ResultsCollection) AddsAnys(
-	anys ...interface{},
+// AddAnyItems Skip on nil
+func (it *ResultsCollection) AddAnyItems(
+	anyItems ...interface{},
 ) *ResultsCollection {
-	if anys == nil {
+	if anyItems == nil {
 		return it
 	}
 
-	for _, any := range anys {
+	for _, any := range anyItems {
 		if any == nil {
 			continue
 		}
 
 		it.Items = append(
 			it.Items,
-			NewFromAny(any))
+			New(any))
+	}
+
+	return it
+}
+
+// AddAnyItems Skip on nil
+func (it *ResultsCollection) AddAnyItemsSlice(
+	anyItems []interface{},
+) *ResultsCollection {
+	if anyItems == nil {
+		return it
+	}
+
+	for _, any := range anyItems {
+		if any == nil {
+			continue
+		}
+
+		it.Items = append(
+			it.Items,
+			New(any))
 	}
 
 	return it
@@ -650,8 +671,7 @@ func (it *ResultsCollection) GetSinglePageCollection(
 
 	list := it.Items[skipItems:endingIndex]
 
-	return NewResultsCollectionUsingJsonResults(
-		constants.Zero,
+	return NewResultsCollection.UsingResults(
 		list...)
 }
 
@@ -666,11 +686,11 @@ func (it *ResultsCollection) JsonModelAny() interface{} {
 }
 
 func (it ResultsCollection) Json() Result {
-	return NewFromAny(it)
+	return New(it)
 }
 
 func (it ResultsCollection) JsonPtr() *Result {
-	return NewFromAnyPtr(it)
+	return NewPtr(it)
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.
@@ -682,7 +702,7 @@ func (it *ResultsCollection) ParseInjectUsingJson(
 	)
 
 	if err != nil {
-		return EmptyResultsCollection(), err
+		return Empty.ResultsCollection(), err
 	}
 
 	return it, nil
@@ -729,8 +749,8 @@ func (it ResultsCollection) ShadowClone() ResultsCollection {
 }
 
 func (it ResultsCollection) Clone(isDeepCloneEach bool) ResultsCollection {
-	newResults := NewResultsCollection(
-		it.Length())
+	newResults := NewResultsCollection.
+		UsingCap(it.Length())
 
 	if newResults.Length() == 0 {
 		return *newResults
@@ -748,7 +768,7 @@ func (it *ResultsCollection) ClonePtr(isDeepCloneEach bool) *ResultsCollection {
 		return nil
 	}
 
-	newResults := NewResultsCollection(
+	newResults := NewResultsCollection.UsingCap(
 		it.Length())
 
 	if newResults.Length() == 0 {

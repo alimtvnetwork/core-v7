@@ -1,6 +1,7 @@
 package keymk
 
 import (
+	"strconv"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
@@ -313,7 +314,7 @@ func (it *Key) ClonePtr(
 		return nil
 	}
 
-	key := New(
+	key := NewKey.All(
 		it.option.ClonePtr(),
 		it.mainName,
 	)
@@ -323,6 +324,31 @@ func (it *Key) ClonePtr(
 
 	return key.AppendChain(
 		newAppendingChains...)
+}
+
+func (it *Key) IntRange(
+	startIncluding, endIncluding int,
+) []string {
+	keyOuts := make(
+		[]string,
+		0,
+		endIncluding-startIncluding+1)
+
+	for i := startIncluding; i <= endIncluding; i++ {
+		keyOuts = append(
+			keyOuts,
+			it.CompileStrings(strconv.Itoa(i)))
+	}
+
+	return keyOuts
+}
+
+func (it *Key) IntRangeEnding(
+	endIncluding int,
+) []string {
+	return it.IntRange(
+		constants.Zero,
+		endIncluding)
 }
 
 func (it *Key) Compile(

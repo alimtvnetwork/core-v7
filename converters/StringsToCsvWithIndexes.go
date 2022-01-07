@@ -9,7 +9,7 @@ import (
 
 func StringsToCsvWithIndexes(stringsSlice []string) string {
 	csvLines := simplewrap.DoubleQuoteWrapElementsWithIndexes(
-		stringsSlice,
+		stringsSlice...,
 	)
 
 	return strings.Join(csvLines, constants.Comma)

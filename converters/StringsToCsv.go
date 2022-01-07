@@ -9,8 +9,8 @@ import (
 
 func StringsToCsv(isSkipQuoteOnlyOnExistence bool, stringsSlice ...string) string {
 	csvLines := simplewrap.DoubleQuoteWrapElements(
-		&stringsSlice,
-		isSkipQuoteOnlyOnExistence)
+		isSkipQuoteOnlyOnExistence,
+		stringsSlice...)
 
-	return strings.Join(*csvLines, constants.Comma)
+	return strings.Join(csvLines, constants.Comma)
 }

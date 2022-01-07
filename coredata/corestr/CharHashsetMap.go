@@ -1198,11 +1198,11 @@ func (it *CharHashsetMap) UnmarshalJSON(data []byte) error {
 }
 
 func (it CharHashsetMap) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it CharHashsetMap) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 // RemoveAll remove all existing items, deletes items using delete(*charCollectionMap.items, char), expensive operation

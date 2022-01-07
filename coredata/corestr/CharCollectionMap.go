@@ -1201,11 +1201,11 @@ func (it *CharCollectionMap) UnmarshalJSON(data []byte) error {
 }
 
 func (it CharCollectionMap) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it CharCollectionMap) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *CharCollectionMap) ParseInjectUsingJson(

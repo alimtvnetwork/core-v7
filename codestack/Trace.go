@@ -2,6 +2,7 @@ package codestack
 
 import (
 	"fmt"
+	"path/filepath"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
@@ -31,12 +32,23 @@ func (it *Trace) Message() string {
 			it.getCompiledMessage)
 }
 
+// ShortString
+//
+// Returns lazy or at once "Method (LineNumber) -> FileFullPath:LineNumber"
+// using format shortStringFormat "%s (%d) -> %s:%d"
+//
+// Format :
+//  - https://prnt.sc/25ypcyc : "%s (%d) -> %s:%d"
+//
+// Example :
+//  - "Method (LineNumber) -> FileFullPath:LineNumber"
 func (it *Trace) ShortString() string {
 	if it.shortString.IsInitialized() {
 		return it.shortString.String()
 	}
 
-	shortString := fmt.Sprintf(shortStringFormat,
+	shortString := fmt.Sprintf(
+		shortStringFormat,
 		it.PackageMethodName,
 		it.Line,
 		it.FilePath,
@@ -79,16 +91,34 @@ func (it *Trace) FileWithLine() FileWithLine {
 	}
 }
 
+// FullFilePath
+//
+// Returns the full file path
 func (it *Trace) FullFilePath() string {
 	return it.FilePath
+}
+
+// FileName
+//
+// Returns the file name only
+func (it *Trace) FileName() string {
+	return filepath.Base(it.FilePath)
 }
 
 func (it *Trace) LineNumber() int {
 	return it.Line
 }
 
+// FileWithLineString
+//
+// Format :
+//  - https://prnt.sc/25yorfh : "%s:%d"
+//
+// Example :
+//  - "FilePath:LineNumber"
 func (it *Trace) FileWithLineString() string {
-	return fmt.Sprintf(fileWithLineFormat,
+	return fmt.Sprintf(
+		fileWithLineFormat,
 		it.FilePath,
 		it.Line)
 }
@@ -134,11 +164,11 @@ func (it *Trace) JsonString() string {
 }
 
 func (it Trace) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it Trace) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *Trace) ParseInjectUsingJson(

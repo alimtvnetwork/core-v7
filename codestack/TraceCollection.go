@@ -595,6 +595,33 @@ func (it *TraceCollection) FileWithLinesStrings() []string {
 	return list
 }
 
+func (it *TraceCollection) StringsUsingFmt(formatter Formatter) []string {
+	list := make([]string, it.Length())
+
+	for i := range it.Items {
+		list[i] = formatter(&it.Items[i])
+	}
+
+	return list
+}
+
+func (it *TraceCollection) JoinUsingFmt(formatter Formatter, joiner string) string {
+	lines := it.StringsUsingFmt(formatter)
+
+	return strings.Join(lines, joiner)
+}
+
+// ShortStrings
+//
+// Returns slice of Trace.ShortString() which gives
+// "Method (LineNumber) -> FileFullPath:LineNumber"
+// using format shortStringFormat "%s (%d) -> %s:%d"
+//
+// Format :
+//  - https://prnt.sc/25ypcyc : "%s (%d) -> %s:%d"
+//
+// Example :
+//  - Slice of []String{"Method (LineNumber) -> FileFullPath:LineNumber"}
 func (it *TraceCollection) ShortStrings() []string {
 	list := make([]string, it.Length())
 
@@ -605,6 +632,17 @@ func (it *TraceCollection) ShortStrings() []string {
 	return list
 }
 
+// JoinShortStrings
+//
+// Returns a join slice of Trace.ShortString() from ShortStrings()
+// which gives "Method (LineNumber) -> FileFullPath:LineNumber"
+// using format shortStringFormat "%s (%d) -> %s:%d"
+//
+// Format :
+//  - https://prnt.sc/25ypcyc : "%s (%d) -> %s:%d"
+//
+// Example :
+//  - Compiled joined string of slice []String{"Method (LineNumber) -> FileFullPath:LineNumber"}
 func (it *TraceCollection) JoinShortStrings(joiner string) string {
 	return strings.Join(it.ShortStrings(), joiner)
 }
@@ -651,6 +689,15 @@ func (it *TraceCollection) JoinJsonStrings(joiner string) string {
 	return strings.Join(it.JsonStrings(), joiner)
 }
 
+// CodeStacksString
+//
+// Returns a join "Code Stack :\n- JoinLinesWith(\n- )"
+//
+// Format :
+//  - https://prnt.sc/25ypwem : "Code Stack :\n- JoinLinesWith(\n- )"
+//
+// Sample :
+//  - "Code Stack :\n- JoinLinesWith(\n- )"
 func (it *TraceCollection) CodeStacksString() string {
 	if it.IsEmpty() {
 		return constants.EmptyString
@@ -658,6 +705,17 @@ func (it *TraceCollection) CodeStacksString() string {
 
 	toString := errcore.StackTracesCompiled(
 		it.ShortStrings())
+
+	return toString
+}
+
+func (it *TraceCollection) FileWithLinesString() string {
+	if it.IsEmpty() {
+		return constants.EmptyString
+	}
+
+	toString := errcore.StackTracesCompiled(
+		it.FileWithLinesStrings())
 
 	return toString
 }
@@ -769,11 +827,11 @@ func (it *TraceCollection) JsonModelAny() interface{} {
 }
 
 func (it TraceCollection) Json() corejson.Result {
-	return corejson.NewFromAny(it)
+	return corejson.New(it)
 }
 
 func (it TraceCollection) JsonPtr() *corejson.Result {
-	return corejson.NewFromAnyPtr(it)
+	return corejson.NewPtr(it)
 }
 
 func (it *TraceCollection) ParseInjectUsingJson(

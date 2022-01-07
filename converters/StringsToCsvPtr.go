@@ -8,9 +8,14 @@ import (
 )
 
 func StringsToCsvPtr(isSkipQuoteOnlyOnExistence bool, stringsSlice *[]string) string {
-	csvLines := simplewrap.DoubleQuoteWrapElements(
-		stringsSlice,
-		isSkipQuoteOnlyOnExistence)
+	if stringsSlice == nil {
+		return ""
+	}
 
-	return strings.Join(*csvLines, constants.Comma)
+	csvLines := simplewrap.DoubleQuoteWrapElements(
+		isSkipQuoteOnlyOnExistence,
+		*stringsSlice...,
+	)
+
+	return strings.Join(csvLines, constants.Comma)
 }

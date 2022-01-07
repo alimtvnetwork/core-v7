@@ -20,3 +20,18 @@ func AnyToAnyItems(
 		isSkipOnNil,
 		reflectVal)
 }
+
+func AnyToNonNullItems(
+	isSkipOnNil bool,
+	anyItem interface{},
+) []interface{} {
+	if isSkipOnNil && anyItem == nil || reflectinternal.IsNull(anyItem) {
+		return []interface{}{}
+	}
+
+	reflectVal := reflect.ValueOf(anyItem)
+
+	return reflectinternal.ReflectValToInterfaces(
+		isSkipOnNil,
+		reflectVal)
+}
