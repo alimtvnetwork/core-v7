@@ -1,6 +1,8 @@
 package reflectinternal
 
-import "reflect"
+import (
+	"reflect"
+)
 
 func TypeName(any interface{}) string {
 	return reflect.TypeOf(any).String()

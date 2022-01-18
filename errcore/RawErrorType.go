@@ -6,6 +6,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/internal/csvinternal"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 type RawErrorType string
@@ -68,6 +69,7 @@ const (
 	PathChmodConvertFailedType                 RawErrorType = "Path chmod convert failed to octal."
 	UnexpectedValueType                        RawErrorType = "Unexpected value error, which is unexpected."
 	UnexpectedType                             RawErrorType = "Unexpected type error, which is unexpected."
+	UnsupportedType                            RawErrorType = "Unsupported type, none of the type matches."
 	IntegerOutOfRangeType                      RawErrorType = "Integer out of range. Range, which is unexpected."
 	FloatOutOfRangeType                        RawErrorType = "Float out of range. Range, which is unexpected."
 	StringOutOfRangeType                       RawErrorType = "ToFileModeString out of range. Range, which is unexpected."
@@ -82,6 +84,8 @@ const (
 	EmptyResultCannotMakeJsonType              RawErrorType = "Empty result, cannot make json out of it."
 	MarshallingFailedType                      RawErrorType = "Failed to marshal / parse / serialize."
 	UnMarshallingFailedType                    RawErrorType = "Failed to unmarshal / parse / deserialize."
+	Serialize                                  RawErrorType = "Failed to serialize or marshal convert to bytes."
+	Deserialize                                RawErrorType = "Failed to deserialize or unmarshal convert to object from bytes."
 	ParsingFailedType                          RawErrorType = "Failed to parse."
 	TypeMismatchType                           RawErrorType = "TypeMismatchType: Type is not as expected."
 	NotImplementedType                         RawErrorType = "Not Implemented: Feature / method is not implemented yet."
@@ -132,8 +136,56 @@ func (it RawErrorType) CombineWithAnother(
 		reference))
 }
 
-func (it RawErrorType) Combine(otherMsg string, reference interface{}) string {
+func (it RawErrorType) Combine(
+	otherMsg string, reference interface{},
+) string {
 	return CombineWithMsgType(it, otherMsg, reference)
+}
+
+func (it RawErrorType) TypesAttach(
+	otherMsg string,
+	reflectionTypes ...interface{},
+) string {
+	return CombineWithMsgType(
+		it,
+		otherMsg,
+		reflectinternal.TypeNamesString(
+			true,
+			reflectionTypes...))
+}
+
+func (it RawErrorType) TypesAttachErr(
+	otherMsg string,
+	reflectionTypes ...interface{},
+) error {
+	message := it.TypesAttach(otherMsg, reflectionTypes...)
+
+	return errors.New(message)
+}
+
+func (it RawErrorType) SrcDestination(
+	otherMsg string,
+	srcName string, srcValue interface{},
+	destinationName string, destinationValue interface{},
+) string {
+	reference := VarTwoNoType(
+		srcName, srcValue,
+		destinationName, destinationValue)
+
+	return CombineWithMsgType(it, otherMsg, reference)
+}
+
+func (it RawErrorType) SrcDestinationErr(
+	otherMsg string,
+	srcName string, srcValue interface{},
+	destinationName string, destinationValue interface{},
+) error {
+	wholeMessage := it.SrcDestination(
+		otherMsg,
+		srcName, srcValue,
+		destinationName, destinationValue)
+
+	return errors.New(wholeMessage)
 }
 
 func (it RawErrorType) Error(otherMsg string, reference interface{}) error {

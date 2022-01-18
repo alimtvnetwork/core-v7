@@ -1,7 +1,6 @@
 package coredynamic
 
 import (
-	"encoding/json"
 	"fmt"
 	"math"
 	"sort"
@@ -9,7 +8,6 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
 
@@ -290,24 +288,108 @@ func (it *KeyValCollection) String() string {
 		it.items)
 }
 
-func (it *KeyValCollection) JsonString() (jsonString string, err error) {
-	toBytes, err := json.Marshal(it.items)
+func (it KeyValCollection) JsonModel() interface{} {
+	return it
+}
+
+func (it KeyValCollection) JsonModelAny() interface{} {
+	return it.JsonModel()
+}
+
+func (it KeyValCollection) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it KeyValCollection) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+//goland:noinspection GoLinterLocal
+func (it *KeyValCollection) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*KeyValCollection, error) {
+	err := jsonResult.Unmarshal(it)
 
 	if err != nil {
-		return constants.EmptyString, err
+		return nil, err
 	}
 
-	return string(toBytes), err
+	return it, nil
+}
+
+// ParseInjectUsingJsonMust Panic if error
+//goland:noinspection GoLinterLocal
+func (it *KeyValCollection) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *KeyValCollection {
+	newUsingJson, err :=
+		it.ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return newUsingJson
+}
+
+func (it *KeyValCollection) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := it.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (it *KeyValCollection) Serialize() (jsonBytesPtr []byte, err error) {
+	jsonResult := it.Json()
+
+	if jsonResult.HasError() {
+		return []byte{}, jsonResult.MeaningfulError()
+	}
+
+	return jsonResult.SafeBytes(), nil
+}
+
+func (it *KeyValCollection) JsonString() (jsonString string, err error) {
+	jsonResult := it.Json()
+
+	if jsonResult.HasError() {
+		return constants.EmptyString, jsonResult.MeaningfulError()
+	}
+
+	return jsonResult.JsonString(), nil
 }
 
 func (it *KeyValCollection) JsonStringMust() string {
-	toString, err := it.JsonString()
+	jsonResult := it.Json()
+	jsonResult.HandleError()
 
-	if err != nil {
-		errcore.
-			MarshallingFailedType.
-			HandleUsingPanic(err.Error(), it.items)
+	return jsonResult.JsonString()
+}
+
+func (it KeyValCollection) Clone() KeyValCollection {
+	keyValCollection := NewKeyValCollection(it.Length())
+	keyValCollection.AddMany(it.items...)
+
+	return keyValCollection.NonPtr()
+}
+
+func (it *KeyValCollection) ClonePtr() *KeyValCollection {
+	if it == nil {
+		return nil
 	}
 
-	return toString
+	cloned := it.Clone()
+
+	return cloned.Ptr()
+}
+
+func (it KeyValCollection) NonPtr() KeyValCollection {
+	return it
+}
+
+func (it *KeyValCollection) Ptr() *KeyValCollection {
+	return it
 }

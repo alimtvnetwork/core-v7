@@ -24,11 +24,14 @@ const (
 	SquareTitleWrapFormat                        = "%v: [%v]"        // Title, Value
 	SquareTitleMetaWrapFormat                    = "%v: [%v] (%v)"   // Title, Value, Meta
 	SprintFormatAnyValueWithComma                = "%v,%v"
+	SprintFormatWithNewLine                      = "%v\n%v"
 	SprintFormatAnyValueWithPipe                 = "%v|%v"
 	SprintFormatAnyNameValueWithColon            = "%#v:%#v"
 	SprintFormatAnyNameValueWithPipe             = "%#v|%#v"
 	SprintFormatNumberWithHyphen                 = "%d-%d"
 	SprintFormatNumberWithPipe                   = "%d|%d"
+	ThreeValueNewLineJoin                        = "%v\n%v\n%v"
+	ThreeValueNewLineSpaceJoin                   = " %v\n %v\n %v"
 	BracketWrapFormat                            = "[%v]"
 	BracketQuotationWrapFormat                   = "[\"%v\"]"
 	CurlyWrapFormat                              = "{%v}"

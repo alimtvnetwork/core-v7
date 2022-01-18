@@ -10,7 +10,9 @@ func ReflectKindValidation(
 	expectedKind reflect.Kind,
 	anyItem interface{},
 ) error {
-	actualKind := reflect.ValueOf(anyItem).Kind()
+	actualKind := reflect.
+		ValueOf(anyItem).
+		Kind()
 
 	if actualKind == expectedKind {
 		return nil

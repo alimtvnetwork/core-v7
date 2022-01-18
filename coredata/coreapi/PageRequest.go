@@ -5,13 +5,29 @@ type PageRequest struct {
 	PageIndex int
 }
 
-func (p *PageRequest) Clone() *PageRequest {
-	if p == nil {
+func (it *PageRequest) IsPageSizeEmpty() bool {
+	return it == nil || it.PageSize <= 0
+}
+
+func (it *PageRequest) IsPageIndexEmpty() bool {
+	return it == nil || it.PageIndex <= 0
+}
+
+func (it *PageRequest) HasPageSize() bool {
+	return it != nil && it.PageSize > 0
+}
+
+func (it *PageRequest) HasPageIndex() bool {
+	return it != nil && it.PageIndex > 0
+}
+
+func (it *PageRequest) Clone() *PageRequest {
+	if it == nil {
 		return nil
 	}
 
 	return &PageRequest{
-		PageSize:  p.PageSize,
-		PageIndex: p.PageIndex,
+		PageSize:  it.PageSize,
+		PageIndex: it.PageIndex,
 	}
 }

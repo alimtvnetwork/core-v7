@@ -10,12 +10,54 @@ import (
 
 type newResultCreator struct{}
 
+// UsingUnmarshalBytes
+//
+//  Aka. alias for UsingDeserializeBytes
+//
+//  Should be used when Result itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultCreator) UsingUnmarshalBytes(
+	deserializingBytes []byte,
+) *Result {
+	return it.UsingDeserializeBytes(deserializingBytes)
+}
+
+// UsingDeserializeBytes
+//
+//  Should be used when Result itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultCreator) UsingDeserializeBytes(
+	deserializingBytes []byte,
+) *Result {
+	empty := it.TypeName(resultTypeName)
+
+	err := Deserialize.
+		UsingBytes(deserializingBytes, empty)
+
+	if err == nil {
+		return empty
+	}
+
+	empty.Error = err
+
+	return empty
+}
+
 func (it newResultCreator) UsingBytes(
 	jsonBytes []byte,
 ) Result {
 	return Result{
 		Bytes: jsonBytes,
-		Error: nil,
+	}
+}
+
+func (it newResultCreator) UsingErrType(
+	typeName string,
+	jsonBytes []byte,
+) Result {
+	return Result{
+		Bytes:    jsonBytes,
+		TypeName: typeName,
 	}
 }
 
@@ -28,6 +70,20 @@ func (it newResultCreator) UsingBytesPtr(
 
 	return &Result{
 		Bytes: *jsonBytes,
+	}
+}
+
+func (it newResultCreator) UsingBytesErrPtr(
+	jsonBytes *[]byte, err error, typeName string,
+) *Result {
+	if jsonBytes == nil || *jsonBytes == nil {
+		return &Result{}
+	}
+
+	return &Result{
+		Bytes:    *jsonBytes,
+		Error:    err,
+		TypeName: typeName,
 	}
 }
 
@@ -181,8 +237,24 @@ func (it newResultCreator) ErrorPtr(err error) *Result {
 	}
 }
 
+func (it newResultCreator) Empty() Result {
+	return Result{}
+}
+
 func (it newResultCreator) EmptyPtr() *Result {
 	return &Result{}
+}
+
+func (it newResultCreator) TypeName(typeName string) *Result {
+	return &Result{
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) TypeNameBytes(typeName string) *Result {
+	return &Result{
+		TypeName: typeName,
+	}
 }
 
 func (it newResultCreator) Many(

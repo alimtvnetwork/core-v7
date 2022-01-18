@@ -2,15 +2,19 @@ package coredynamic
 
 import "reflect"
 
+// ReflectInterfaceVal
+//
+// Reduce pointer to value (one step only)
 func ReflectInterfaceVal(any interface{}) interface{} {
 	rVal := reflect.ValueOf(any)
+	k := rVal.Kind()
 
-	if rVal.Kind() != reflect.Ptr {
+	if k != reflect.Ptr && k != reflect.Interface {
 		return rVal.Interface()
 	}
 
-	if rVal.Kind() == reflect.Ptr {
-		rVal = rVal.Elem()
+	if k == reflect.Ptr || k == reflect.Interface {
+		return rVal.Elem().Interface()
 	}
 
 	return rVal.Interface()

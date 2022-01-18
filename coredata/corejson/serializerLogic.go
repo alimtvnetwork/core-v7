@@ -2,6 +2,7 @@ package corejson
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -41,34 +42,122 @@ func (it serializerLogic) Apply(
 	}
 }
 
+func (it serializerLogic) FromBytes(
+	currentBytes []byte,
+) *Result {
+	return it.Apply(currentBytes)
+}
+
+func (it serializerLogic) FromStrings(
+	lines []string,
+) *Result {
+	return it.Apply(lines)
+}
+
+func (it serializerLogic) FromStringsSpread(
+	lines ...string,
+) *Result {
+	return it.Apply(lines)
+}
+
+func (it serializerLogic) FromString(
+	line string,
+) *Result {
+	return it.Apply(line)
+}
+
+func (it serializerLogic) FromInteger(
+	integer int,
+) *Result {
+	return it.Apply(integer)
+}
+
+func (it serializerLogic) FromInteger64(
+	integer64 int,
+) *Result {
+	return it.Apply(integer64)
+}
+
+func (it serializerLogic) FromBool(
+	isResult bool,
+) *Result {
+	return it.Apply(isResult)
+}
+
+func (it serializerLogic) FromIntegers(
+	integers []int,
+) *Result {
+	return it.Apply(integers)
+}
+
+func (it serializerLogic) FromStringer(
+	stringer fmt.Stringer,
+) *Result {
+	return it.Apply(stringer.String())
+}
+
+func (it serializerLogic) UsingAnyPtr(
+	anyItem interface{},
+) *Result {
+	jsonBytes, err := json.Marshal(
+		anyItem)
+	typeName := reflectinternal.TypeName(
+		anyItem)
+
+	if err != nil {
+		finalErr := errcore.
+			MarshallingFailedType.Error(
+			err.Error(),
+			typeName)
+
+		return &Result{
+			Bytes:    jsonBytes,
+			Error:    finalErr,
+			TypeName: typeName,
+		}
+	}
+
+	return &Result{
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
+	}
+}
+
+func (it serializerLogic) UsingAny(
+	anyItem interface{},
+) Result {
+	return it.Apply(anyItem).NonPtr()
+}
+
 func (it serializerLogic) ApplyMust(
 	anyItem interface{},
 ) *Result {
 	result := it.Apply(anyItem)
-	result.MustSafe()
+	result.MustBeSafe()
 
 	return result
 }
 
-func (it serializerLogic) BytesMust(
+func (it serializerLogic) ToBytesMust(
 	anyItem interface{},
 ) []byte {
 	result := it.Apply(anyItem)
-	result.MustSafe()
+	result.MustBeSafe()
 
 	return result.Bytes
 }
 
-func (it serializerLogic) SafeBytesMust(
+func (it serializerLogic) ToSafeBytesMust(
 	anyItem interface{},
 ) []byte {
 	result := it.Apply(anyItem)
-	result.MustSafe()
+	result.MustBeSafe()
 
 	return result.SafeBytes()
 }
 
-// SafeBytes
+// ToSafeBytesSwallowErr
 //
 // Warning or Danger:
 //  - shallow err by not throwing or returning (could be dangerous as well)
@@ -78,7 +167,7 @@ func (it serializerLogic) SafeBytesMust(
 //
 // Use case (rarely):
 //  - When don't care about the error just proceed with the value.
-func (it serializerLogic) SafeBytes(
+func (it serializerLogic) ToSafeBytesSwallowErr(
 	anyItem interface{},
 ) []byte {
 	result := it.Apply(anyItem)
@@ -86,7 +175,7 @@ func (it serializerLogic) SafeBytes(
 	return result.SafeBytes()
 }
 
-// Bytes
+// ToBytesSwallowErr
 //
 // Warning or Danger:
 //  - shallow err by not throwing or returning (could be dangerous as well)
@@ -96,7 +185,7 @@ func (it serializerLogic) SafeBytes(
 //
 // Use case (rarely):
 //  - When don't care about the error just proceed with the value.
-func (it serializerLogic) Bytes(
+func (it serializerLogic) ToBytesSwallowErr(
 	anyItem interface{},
 ) []byte {
 	result := it.Apply(anyItem)
@@ -104,7 +193,7 @@ func (it serializerLogic) Bytes(
 	return result.Bytes
 }
 
-func (it serializerLogic) BytesErr(
+func (it serializerLogic) ToBytesErr(
 	anyItem interface{},
 ) ([]byte, error) {
 	result := it.Apply(anyItem)
@@ -112,7 +201,7 @@ func (it serializerLogic) BytesErr(
 	return result.Bytes, result.MeaningfulError()
 }
 
-// String
+// ToString
 //
 // Warning:
 //  - Shallow err by not throwing or
@@ -125,7 +214,7 @@ func (it serializerLogic) BytesErr(
 //
 // Use case (rarely):
 //  - When don't care about the error just proceed with the value.
-func (it serializerLogic) String(
+func (it serializerLogic) ToString(
 	anyItem interface{},
 ) string {
 	result := it.Apply(anyItem)
@@ -133,7 +222,7 @@ func (it serializerLogic) String(
 	return result.JsonString()
 }
 
-func (it serializerLogic) StringMust(
+func (it serializerLogic) ToStringMust(
 	anyItem interface{},
 ) string {
 	result := it.Apply(anyItem)
@@ -142,7 +231,7 @@ func (it serializerLogic) StringMust(
 	return result.JsonString()
 }
 
-func (it serializerLogic) StringErr(
+func (it serializerLogic) ToStringErr(
 	anyItem interface{},
 ) (string, error) {
 	result := it.Apply(anyItem)
@@ -150,7 +239,7 @@ func (it serializerLogic) StringErr(
 	return result.RawString()
 }
 
-func (it serializerLogic) PrettyStringErr(
+func (it serializerLogic) ToPrettyStringErr(
 	anyItem interface{},
 ) (string, error) {
 	result := it.Apply(anyItem)
@@ -158,7 +247,7 @@ func (it serializerLogic) PrettyStringErr(
 	return result.RawPrettyString()
 }
 
-// PrettyStringIncludingErr
+// ToPrettyStringIncludingErr
 //
 // Warning:
 //  - Shallow err by not throwing or
@@ -171,7 +260,7 @@ func (it serializerLogic) PrettyStringErr(
 //
 // Use case (rarely):
 //  - When don't care about the error just proceed with the value.
-func (it serializerLogic) PrettyStringIncludingErr(
+func (it serializerLogic) ToPrettyStringIncludingErr(
 	anyItem interface{},
 ) string {
 	result := it.Apply(anyItem)

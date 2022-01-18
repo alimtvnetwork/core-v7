@@ -1,8 +1,5 @@
 module gitlab.com/evatix-go/core
 
-go 1.15
+go 1.16
 
-require (
-	github.com/smartystreets/assertions v1.2.0 // indirect
-	github.com/smartystreets/goconvey v1.6.4
-)
+require github.com/smartystreets/goconvey v1.7.2

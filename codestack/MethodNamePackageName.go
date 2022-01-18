@@ -12,11 +12,17 @@ func MethodNamePackageName(fullFuncName string) (fullMethodName, packageName, me
 		return "", "", ""
 	}
 
-	hasComplexName := strings.HasPrefix(fullFuncName, gitlabDotCom) ||
-		strings.ContainsRune(fullFuncName, constants.ForwardRune)
+	hasComplexName := strings.HasPrefix(
+		fullFuncName,
+		gitlabDotCom) ||
+		strings.ContainsRune(
+			fullFuncName,
+			constants.ForwardRune)
 
 	if hasComplexName {
-		forwardSlashFound := strings.LastIndexByte(fullFuncName, constants.ForwardChar)
+		forwardSlashFound := strings.LastIndexByte(
+			fullFuncName,
+			constants.ForwardChar)
 
 		return MethodNamePackageName(fullFuncName[forwardSlashFound+1:])
 	}

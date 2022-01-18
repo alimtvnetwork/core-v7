@@ -181,6 +181,16 @@ func (it *Result) RawPrettyString() (jsonString string, err error) {
 	return it.PrettyJsonString(), it.MeaningfulError()
 }
 
+func (it *Result) MeaningfulErrorMessage() string {
+	err := it.MeaningfulError()
+
+	if err == nil {
+		return ""
+	}
+
+	return err.Error()
+}
+
 // MeaningfulError create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
@@ -226,8 +236,8 @@ func (it *Result) HandleError() {
 	panic(it.MeaningfulError())
 }
 
-// MustSafe alias for HandleError
-func (it *Result) MustSafe() {
+// MustBeSafe alias for HandleError
+func (it *Result) MustBeSafe() {
 	if it == nil || it.IsEmptyError() {
 		return
 	}
@@ -338,12 +348,12 @@ func (it *Result) Unmarshal(
 		return errcore.
 			UnMarshallingFailedType.
 			Error(
-				"cannot unmarshal if JsonResult is ni, type",
+				"cannot unmarshal if JsonResult is nil or null, type",
 				reflectinternal.TypeName(anyPointer))
 	}
 
 	if it.HasError() {
-		reference := errcore.Var3NoType(
+		reference := errcore.VarThreeNoType(
 			"JsonResult Error", it.Error,
 			"Source Type", it.TypeName,
 			"To Reference Type", reflectinternal.TypeName(anyPointer))
@@ -361,7 +371,7 @@ func (it *Result) Unmarshal(
 		return nil
 	}
 
-	reference := errcore.Var3NoType(
+	reference := errcore.VarThreeNoType(
 		"Unmarshall Error", err.Error(),
 		"Source Type", it.TypeName,
 		"To Reference Type", reflectinternal.TypeName(anyPointer))
@@ -369,6 +379,50 @@ func (it *Result) Unmarshal(
 	return errcore.
 		UnMarshallingFailedType.
 		ErrorRefOnly(reference)
+}
+
+func (it *Result) Serialize() ([]byte, error) {
+	if it == nil {
+		return nil, errcore.
+			Serialize.
+			ErrorNoRefs("cannot marshal if JsonResult is nil or null")
+	}
+
+	if it.HasError() {
+		reference := errcore.VarTwoNoType(
+			"JsonResult Error", it.Error,
+			"Source Type", it.TypeName,
+		)
+
+		return nil, errcore.
+			Serialize.
+			Error(
+				"cannot marshal if JsonResult has already error.",
+				reference)
+	}
+
+	rawBytes, err := json.Marshal(it)
+
+	if err == nil {
+		return rawBytes, nil
+	}
+
+	// has error
+	reference := errcore.VarTwoNoType(
+		"Marshal/Serialize Error", err.Error(),
+		"Source Type", it.TypeName,
+	)
+
+	return nil, errcore.
+		Serialize.
+		ErrorRefOnly(reference)
+}
+
+func (it *Result) SerializeMust() []byte {
+	rs, err := it.Serialize()
+	errcore.MustBeEmpty(err)
+
+	return rs
 }
 
 func (it *Result) UnmarshalIgnoreExistingError(
@@ -388,7 +442,7 @@ func (it *Result) UnmarshalIgnoreExistingError(
 		return nil
 	}
 
-	reference := errcore.Var3NoType(
+	reference := errcore.VarThreeNoType(
 		"Unmarshall Error", err.Error(),
 		"Source Type", it.TypeName,
 		"To Reference Type", reflectinternal.TypeName(anyItem))
@@ -474,6 +528,10 @@ func (it *Result) IsEqualPtr(another *Result) bool {
 
 	if it == nil || another == nil {
 		return false
+	}
+
+	if it == another {
+		return true
 	}
 
 	if it.Length() != another.Length() {

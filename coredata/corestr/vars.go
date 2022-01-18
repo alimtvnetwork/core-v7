@@ -7,23 +7,7 @@ import (
 
 //goland:noinspection ALL
 var (
-	New = &newCreator{
-		Collection:                 &newCollectionCreator{},
-		CollectionPtr:              &newCollectionPtrCreator{},
-		CharHashsetMap:             &newCharHashsetMapCreator{},
-		CharCollectionMap:          &newCharCollectionMapCreator{},
-		SimpleStringOnce:           &newSimpleStringOnceCreator{},
-		SimpleSlice:                &newSimpleSliceCreator{},
-		Hashset:                    &newHashsetCreator{},
-		KeyValues:                  &newKeyValuesCreator{},
-		HashsetsCollection:         &newHashsetsCollectionCreator{},
-		Hashmap:                    &newHashmapCreator{},
-		LinkedList:                 &newLinkedListCreator{},
-		LinkedCollection:           &newLinkedListCollectionsCreator{},
-		CollectionsOfCollection:    &newCollectionsOfCollectionCreator{},
-		CollectionsOfCollectionPtr: &newCollectionsOfCollectionPtrCreator{},
-	}
-
+	New             = &newCreator{}
 	Empty           = &emptyCreator{}
 	StaticJsonError = errcore.EmptyResultCannotMakeJsonType.
 			Error(constants.EmptyString, constants.EmptyString)

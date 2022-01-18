@@ -124,6 +124,7 @@ const (
 	StartOfBlock                             = "{"
 	MinusOne                                 = -1
 	InvalidValue                             = -1
+	InvalidIndex                             = -1
 	InvalidLineNumber                        = -1
 	TakeAllMinusOne                          = -1
 	NoLimits                                 = -1
@@ -404,4 +405,16 @@ const (
 	DurationMinute                           = 1 * time.Minute
 	DurationMonth                            = 30 * DurationDay
 	DurationYear                             = 365 * DurationDay
+	SourceLower                              = "source"
+	Source                                   = "Source"
+	DestinationLower                         = "destination"
+	Destination                              = "Destination"
+	FromLower                                = "from"
+	ToLower                                  = "to"
+	From                                     = "From"
+	To                                       = "To"
+	Left                                     = "Left"
+	Right                                    = "Right"
+	LeftLower                                = "left"
+	RightLower                               = "right"
 )

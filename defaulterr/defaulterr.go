@@ -52,4 +52,8 @@ var (
 	CannotConvertStringToByte = errcore.
 					FailedToConvertType.
 					ErrorNoRefs("Cannot convert string to byte.")
+
+	AttributeNull = errcore.
+			NullResultType.
+			ErrorNoRefs("attribute is nil!")
 )

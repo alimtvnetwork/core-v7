@@ -24,24 +24,24 @@ func InvalidGenericResponse(attr *ResponseAttribute) *GenericResponse {
 	}
 }
 
-func (receiver *GenericResponse) GenericResponseResult() *GenericResponseResult {
+func (it *GenericResponse) GenericResponseResult() *GenericResponseResult {
 	return &GenericResponseResult{
-		Attribute: receiver.Attribute,
+		Attribute: it.Attribute,
 		Response: coredynamic.NewSimpleResult(
-			receiver,
-			receiver.Attribute.IsValid,
-			receiver.Attribute.Message),
+			it,
+			it.Attribute.IsValid,
+			it.Attribute.Message),
 	}
 }
 
 // Clone Cannot copy interface, just putting response in response field.
-func (receiver *GenericResponse) Clone() *GenericResponse {
-	if receiver == nil {
+func (it *GenericResponse) Clone() *GenericResponse {
+	if it == nil {
 		return nil
 	}
 
 	return &GenericResponse{
-		Attribute: receiver.Attribute.Clone(),
-		Response:  receiver.Response,
+		Attribute: it.Attribute.Clone(),
+		Response:  it.Response,
 	}
 }

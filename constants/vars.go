@@ -1,6 +1,9 @@
 package constants
 
-import "runtime"
+import (
+	"runtime"
+	"unsafe"
+)
 
 //goland:noinspection ALL
 var (
@@ -184,4 +187,6 @@ var (
 	MaxWorker                              = CpuNumber * 5
 	SafeWorker                             = CpuNumber * 3
 	SafestWorker                           = CpuNumber * 2
+	UnsafeNullPointer                      = unsafe.Pointer(nil)          // Reference: https://github.com/golang/go/issues/4680
+	NullPointerUintPtr                     = uintptr(unsafe.Pointer(nil)) // Reference: https://github.com/golang/go/issues/4680
 )

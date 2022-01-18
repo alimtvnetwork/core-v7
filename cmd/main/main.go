@@ -15,7 +15,7 @@ func main() {
 	// fmt.Println(resultOfResult.JsonString())
 	// fmt.Println(coreJson2.JsonString())
 	// fmt.Println(emptyX.Json().String())
-	// fmt.Println(string(resultOfResult.SafeBytes()))
+	// fmt.Println(string(resultOfResult.ToSafeBytesSwallowErr()))
 
 	// enumTesting()
 	// testMakerTesting()

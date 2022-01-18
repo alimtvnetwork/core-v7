@@ -135,18 +135,22 @@ func (it *Hashmap) AddOrUpdateKeyValueAny(
 
 func (it *Hashmap) AddOrUpdateKeyVal(
 	keyVal KeyValuePair,
-) *Hashmap {
+) (isAddedNewly bool) {
+	_, isAlreadyExist := it.items[keyVal.Key]
+
 	it.items[keyVal.Key] = keyVal.Value
 	it.hasMapUpdated = true
 
-	return it
+	return !isAlreadyExist
 }
 
-func (it *Hashmap) AddOrUpdate(key, val string) *Hashmap {
+func (it *Hashmap) AddOrUpdate(key, val string) (isAddedNewly bool) {
+	_, isAlreadyExist := it.items[key]
+
 	it.items[key] = val
 	it.hasMapUpdated = true
 
-	return it
+	return !isAlreadyExist
 }
 
 func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
@@ -542,6 +546,10 @@ func (it *Hashmap) HasAll(keys ...string) bool {
 
 	// all found.
 	return true
+}
+
+func (it *Hashmap) HasAnyItem() bool {
+	return it != nil && it.Length() > 0
 }
 
 func (it *Hashmap) HasAny(keys ...string) bool {

@@ -76,7 +76,7 @@ func (it *MapAnyItems) GetUsingUnmarshallAt(
 	rawBytes, err := json.Marshal(valInf)
 
 	if err != nil {
-		ref := errcore.Var2NoType(
+		ref := errcore.VarTwoNoType(
 			"key", key,
 			"type", TypeName(valInf))
 
@@ -86,7 +86,7 @@ func (it *MapAnyItems) GetUsingUnmarshallAt(
 	unmarshalErr := json.Unmarshal(rawBytes, unmarshalRef)
 
 	if unmarshalErr != nil {
-		ref := errcore.Var3NoType(
+		ref := errcore.VarThreeNoType(
 			"key", key,
 			"StoreType", TypeName(valInf),
 			"RequestedType", TypeName(unmarshalRef))
@@ -98,9 +98,9 @@ func (it *MapAnyItems) GetUsingUnmarshallAt(
 }
 
 func (it *MapAnyItems) GetUsingUnmarshallManyAt(
-	keyAnys ...corejson.KeyAny,
+	keyAnyItems ...corejson.KeyAny,
 ) error {
-	for _, keyAny := range keyAnys {
+	for _, keyAny := range keyAnyItems {
 		err := it.GetUsingUnmarshallAt(
 			keyAny.Key,
 			keyAny.AnyInf)
@@ -114,13 +114,13 @@ func (it *MapAnyItems) GetUsingUnmarshallManyAt(
 }
 
 func (it *MapAnyItems) GetManyItemsRefs(
-	keyAnys ...corejson.KeyAny,
+	keyAnyItems ...corejson.KeyAny,
 ) error {
-	if len(keyAnys) == 0 {
+	if len(keyAnyItems) == 0 {
 		return nil
 	}
 
-	for _, keyAny := range keyAnys {
+	for _, keyAny := range keyAnyItems {
 		err := it.GetItemRef(
 			keyAny.Key,
 			keyAny.AnyInf)
@@ -146,7 +146,7 @@ func (it *MapAnyItems) GetItemRef(
 	}
 
 	if referenceOut == nil {
-		reference := errcore.Var2NoType(
+		reference := errcore.VarTwoNoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut))
 
@@ -161,7 +161,7 @@ func (it *MapAnyItems) GetItemRef(
 	foundItemRv := reflect.ValueOf(valInf)
 
 	if outInfRv.Kind() != reflect.Ptr {
-		reference := errcore.Var2NoType(
+		reference := errcore.VarTwoNoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut))
 
@@ -173,7 +173,7 @@ func (it *MapAnyItems) GetItemRef(
 	}
 
 	if outInfRv.IsNil() || foundItemRv.IsNil() {
-		reference := errcore.Var3NoType(
+		reference := errcore.VarThreeNoType(
 			"key", key,
 			"referenceOutType", TypeName(referenceOut),
 			"foundItemType", TypeName(valInf))
@@ -189,7 +189,7 @@ func (it *MapAnyItems) GetItemRef(
 	refOutTypeName := outInfRv.Type().String()
 	isTypeNotEqual := foundTypeName != refOutTypeName
 	if isTypeNotEqual {
-		reference := errcore.Var3NoType(
+		reference := errcore.VarThreeNoType(
 			"key", key,
 			"referenceOutType", refOutTypeName,
 			"foundItemType", foundTypeName)
@@ -213,7 +213,7 @@ func (it *MapAnyItems) GetItemRef(
 		return nil
 	}
 
-	reference := errcore.Var3NoType(
+	reference := errcore.VarThreeNoType(
 		"key", key,
 		"referenceOutType", TypeName(referenceOut),
 		"foundItemType", TypeName(valInf))
@@ -228,15 +228,17 @@ func (it *MapAnyItems) GetItemRef(
 func (it *MapAnyItems) Add(
 	key string,
 	valInf interface{},
-) *MapAnyItems {
+) (isNewlyAdded bool) {
+	_, isAlreadyExist := it.Items[key]
+
 	it.Items[key] = valInf
 
-	return it
+	return !isAlreadyExist
 }
 
 func (it *MapAnyItems) AddKeyAny(
 	keyAny corejson.KeyAny,
-) *MapAnyItems {
+) (isNewlyAdded bool) {
 	return it.Add(
 		keyAny.Key,
 		keyAny.AnyInf)
@@ -368,7 +370,7 @@ func (it *MapAnyItems) GetSinglePageCollection(
 	}
 
 	if length != len(allKeys) {
-		reference := errcore.Var2NoType(
+		reference := errcore.VarTwoNoType(
 			"MapLength", it.Length(),
 			"AllKeysLength", len(allKeys))
 
@@ -458,7 +460,9 @@ func (it *MapAnyItems) JsonStringMust() string {
 	return toString
 }
 
-func (it *MapAnyItems) JsonResultOfKey(key string) *corejson.Result {
+func (it *MapAnyItems) JsonResultOfKey(
+	key string,
+) *corejson.Result {
 	item, has := it.Get(key)
 
 	if has {
@@ -657,6 +661,41 @@ func (it *MapAnyItems) JsonParseSelfInject(
 
 func (it *MapAnyItems) Strings() []string {
 	return errcore.VarMapStrings(it.Items)
+}
+
+func (it *MapAnyItems) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Items = map[string]interface{}{}
+}
+
+func (it *MapAnyItems) DeepClear() {
+	if it == nil {
+		return
+	}
+
+	tempItems := it.Items
+
+	tempClearFunc := func() {
+		for key := range tempItems {
+			delete(tempItems, key)
+		}
+	}
+
+	go tempClearFunc()
+
+	it.Items = map[string]interface{}{}
+}
+
+func (it *MapAnyItems) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.DeepClear()
+	it.Items = nil
 }
 
 func (it *MapAnyItems) String() string {

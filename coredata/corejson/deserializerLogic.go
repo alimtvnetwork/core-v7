@@ -3,182 +3,14 @@ package corejson
 import (
 	"encoding/json"
 
+	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
-type deserializerLogic struct{}
-
-func (it deserializerLogic) ToStrings(
-	jsonResult *Result,
-) (lines []string, err error) {
-	err = it.Apply(jsonResult, &lines)
-
-	return lines, err
-}
-
-func (it deserializerLogic) UsingBytesToStrings(
-	rawBytes []byte,
-) (lines []string, err error) {
-	err = it.UsingBytes(
-		rawBytes,
-		&lines)
-
-	return lines, err
-}
-
-func (it deserializerLogic) UsingBytesToStringsMust(
-	rawBytes []byte,
-) (lines []string) {
-	err := it.UsingBytes(
-		rawBytes,
-		&lines)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return lines
-}
-
-func (it deserializerLogic) UsingBytesToString(
-	rawBytes []byte,
-) (line string, err error) {
-	err = it.UsingBytes(
-		rawBytes,
-		&line)
-
-	return line, err
-}
-
-func (it deserializerLogic) UsingBytesToIntegers(
-	rawBytes []byte,
-) (integers []int, err error) {
-	err = it.UsingBytes(
-		rawBytes,
-		&integers)
-
-	return integers, err
-}
-
-func (it deserializerLogic) UsingBytesToIntegersMust(
-	rawBytes []byte,
-) (integers []int) {
-	err := it.UsingBytes(
-		rawBytes,
-		&integers)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return integers
-}
-
-func (it deserializerLogic) UsingBytesToStringMust(
-	rawBytes []byte,
-) (line string) {
-	err := it.UsingBytes(rawBytes, &line)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return line
-}
-
-func (it deserializerLogic) UsingBytesToMapAnyItem(
-	rawBytes []byte,
-) (mapAnyItem map[string]interface{}, err error) {
-	err = it.UsingBytes(rawBytes, &mapAnyItem)
-
-	return mapAnyItem, err
-}
-
-func (it deserializerLogic) UsingBytesToMapAnyItemMust(
-	rawBytes []byte,
-) (mapAnyItem map[string]interface{}) {
-	err := it.UsingBytes(
-		rawBytes,
-		&mapAnyItem)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return mapAnyItem
-}
-
-func (it deserializerLogic) ToString(
-	jsonResult *Result,
-) (line string, err error) {
-	err = it.Apply(jsonResult, &line)
-
-	return line, err
-}
-
-func (it deserializerLogic) ToBool(
-	jsonResult *Result,
-) (isResult bool, err error) {
-	err = it.Apply(jsonResult, &isResult)
-
-	return isResult, err
-}
-
-func (it deserializerLogic) ToByte(
-	jsonResult *Result,
-) (byteVal byte, err error) {
-	err = it.Apply(jsonResult, &byteVal)
-
-	return byteVal, err
-}
-
-func (it deserializerLogic) ToByteMust(
-	jsonResult *Result,
-) byte {
-	result, err := it.ToByte(jsonResult)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return result
-}
-
-func (it deserializerLogic) ToBoolMust(
-	jsonResult *Result,
-) bool {
-	result, err := it.ToBool(jsonResult)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return result
-}
-
-func (it deserializerLogic) ToStringMust(
-	jsonResult *Result,
-) string {
-	result, err := it.ToString(jsonResult)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return result
-}
-
-func (it deserializerLogic) ToStringsMust(
-	jsonResult *Result,
-) []string {
-	results, err := it.ToStrings(jsonResult)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return results
+type deserializerLogic struct {
+	BytesTo  deserializeFromBytesTo
+	ResultTo deserializeFromResultTo
 }
 
 func (it deserializerLogic) Apply(
@@ -201,14 +33,55 @@ func (it deserializerLogic) ApplyMust(
 	}
 }
 
+func (it deserializerLogic) UsingString(
+	jsonString string,
+	unmarshalToPointer interface{},
+) error {
+	return it.UsingBytes(
+		[]byte(jsonString),
+		unmarshalToPointer)
+}
+
+func (it deserializerLogic) UsingStringOption(
+	isIgnoreEmptyString bool,
+	jsonString string,
+	unmarshalToPointer interface{},
+) error {
+	if isIgnoreEmptyString && jsonString == "" {
+		return nil
+	}
+
+	return it.UsingBytes(
+		[]byte(jsonString),
+		unmarshalToPointer)
+}
+
+func (it deserializerLogic) UsingStringIgnoreEmpty(
+	jsonString string,
+	unmarshalToPointer interface{},
+) error {
+	if jsonString == "" {
+		return nil
+	}
+
+	return it.UsingBytes(
+		[]byte(jsonString),
+		unmarshalToPointer)
+}
+
+// UsingBytes
+//
+// json.Unmarshal bytes to object
 func (it deserializerLogic) UsingBytes(
 	rawBytes []byte,
 	unmarshalToPointer interface{},
 ) error {
-	err := json.Unmarshal(rawBytes, unmarshalToPointer)
+	err := json.Unmarshal(
+		rawBytes,
+		unmarshalToPointer)
 
 	if err != nil {
-		reference := errcore.Var2NoType(
+		reference := errcore.VarTwoNoType(
 			"JsonResult Error", err.Error(),
 			"To Reference Type", reflectinternal.TypeName(unmarshalToPointer))
 
@@ -220,6 +93,68 @@ func (it deserializerLogic) UsingBytes(
 	}
 
 	return nil
+}
+
+func (it deserializerLogic) UsingBytesPointerMust(
+	rawBytesPointer *[]byte,
+	unmarshalToPointer interface{},
+) {
+	err := it.UsingBytesPointer(
+		rawBytesPointer,
+		unmarshalToPointer)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
+func (it deserializerLogic) UsingBytesIf(
+	isDeserialize bool,
+	rawBytes []byte,
+	unmarshalToPointer interface{},
+) error {
+	if !isDeserialize {
+		return nil
+	}
+
+	return it.UsingBytes(
+		rawBytes,
+		unmarshalToPointer)
+}
+
+func (it deserializerLogic) UsingBytesPointerIf(
+	isDeserialize bool,
+	rawBytesPointer *[]byte,
+	unmarshalToPointer interface{},
+) error {
+	if !isDeserialize {
+		return nil
+	}
+
+	return it.UsingBytesPointer(
+		rawBytesPointer,
+		unmarshalToPointer)
+}
+
+func (it deserializerLogic) UsingBytesPointer(
+	rawBytesPointer *[]byte,
+	unmarshalToPointer interface{},
+) error {
+	if rawBytesPointer == nil || *rawBytesPointer == nil {
+		reference := errcore.VarTwoNoType(
+			"rawBytesPointer", constants.NilAngelBracket,
+			"To Reference Type", reflectinternal.TypeName(unmarshalToPointer))
+
+		return errcore.
+			UnMarshallingFailedType.
+			Error(
+				"failed to unmarshal nil bytes pointer.",
+				reference)
+	}
+
+	return it.UsingBytes(
+		*rawBytesPointer,
+		unmarshalToPointer)
 }
 
 func (it deserializerLogic) UsingBytesMust(

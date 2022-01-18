@@ -12,7 +12,8 @@ import (
 )
 
 func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
-	// coretests.SkipOnWindows(t)
+	coretests.SkipOnWindows(t)
+
 	// Setup
 	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(

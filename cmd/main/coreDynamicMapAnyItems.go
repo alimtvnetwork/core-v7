@@ -11,8 +11,8 @@ import (
 )
 
 func coreDynamicMapAnyItems() {
-	fmt.Println(errcore.Var2NoType("s1", "ss", "s2", 2))
-	fmt.Println(errcore.MessageVar2("current message", "s1", "ss", "s2", 2))
+	fmt.Println(errcore.VarTwoNoType("s1", "ss", "s2", 2))
+	fmt.Println(errcore.MessageVarTwo("current message", "s1", "ss", "s2", 2))
 	fmt.Println(errcore.MessageVarMap(
 		"current message",
 		map[string]interface{}{

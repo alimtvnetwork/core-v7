@@ -1,5 +1,6 @@
 package coreinterface
 
 type Serializer interface {
-	Serialize() []byte
+	Serialize() ([]byte, error)
+	SerializeMust() []byte
 }

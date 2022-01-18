@@ -14,8 +14,20 @@ const (
 		"\tType:%T\n" +
 		"\tValue:%s\n"
 
-	QuickActualExpectedMessageFormat = "----------------------\n" +
+	// QuickIndexInputActualExpectedMessageFormat
+	//
+	// Index, Input, Actual, Expected
+	QuickIndexInputActualExpectedMessageFormat = "----------------------\n" +
 		"%d )\tWhen:%#v\n\t\t" +
+		"  Actual:`%#v` ,\n\t\t" +
+		"Expected:`%#v`"
+
+	// QuickIndexTitleInputActualExpectedMessageFormat
+	//
+	// Index, Title, Input, Actual, Expected
+	QuickIndexTitleInputActualExpectedMessageFormat = "----------------------\n" +
+		"%d )\tTitle:%#v\n\t\t" +
+		"   Input:`%#v` ,\n\t\t" +
 		"  Actual:`%#v` ,\n\t\t" +
 		"Expected:`%#v`"
 

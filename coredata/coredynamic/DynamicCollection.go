@@ -163,6 +163,22 @@ func (it *DynamicCollection) LastIndex() int {
 	return it.Length() - 1
 }
 
+func (it *DynamicCollection) Loop(
+	loopProcessorFunc func(index int, dynamicItem *Dynamic) (isBreak bool),
+) {
+	if it.IsEmpty() {
+		return
+	}
+
+	for i := range it.items {
+		isBreak := loopProcessorFunc(i, &it.items[i])
+
+		if isBreak {
+			return
+		}
+	}
+}
+
 func (it *DynamicCollection) HasIndex(index int) bool {
 	return it.LastIndex() >= index
 }

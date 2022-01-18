@@ -144,7 +144,7 @@ func (it *MapResults) GetErrorsAsSingle() error {
 	return errors.New(errorString)
 }
 
-func (it *MapResults) UnmarshalAt(
+func (it *MapResults) Unmarshal(
 	key string,
 	any interface{},
 ) error {
@@ -166,6 +166,23 @@ func (it *MapResults) UnmarshalAt(
 		any)
 }
 
+func (it *MapResults) Deserialize(
+	key string,
+	any interface{},
+) error {
+	return it.Unmarshal(key, any)
+}
+
+func (it *MapResults) DeserializeMust(
+	key string,
+	any interface{},
+) *MapResults {
+	err := it.Unmarshal(key, any)
+	errcore.MustBeEmpty(err)
+
+	return it
+}
+
 func (it *MapResults) UnmarshalMany(
 	keyAnyItems ...KeyAny,
 ) error {
@@ -174,7 +191,7 @@ func (it *MapResults) UnmarshalMany(
 	}
 
 	for _, keyAny := range keyAnyItems {
-		err := it.UnmarshalAt(
+		err := it.Unmarshal(
 			keyAny.Key,
 			keyAny.AnyInf)
 
@@ -194,7 +211,7 @@ func (it *MapResults) UnmarshalManySafe(
 	}
 
 	for _, keyAny := range keyAnyItems {
-		err := it.SafeUnmarshalAt(
+		err := it.SafeUnmarshal(
 			keyAny.Key,
 			keyAny.AnyInf)
 
@@ -206,7 +223,7 @@ func (it *MapResults) UnmarshalManySafe(
 	return nil
 }
 
-func (it *MapResults) SafeUnmarshalAt(
+func (it *MapResults) SafeUnmarshal(
 	key string,
 	any interface{},
 ) error {
@@ -218,6 +235,27 @@ func (it *MapResults) SafeUnmarshalAt(
 
 	return result.Unmarshal(
 		any)
+}
+
+func (it *MapResults) SafeDeserialize(
+	key string,
+	any interface{},
+) error {
+	return it.SafeUnmarshal(
+		key,
+		any)
+}
+
+func (it *MapResults) SafeDeserializeMust(
+	key string,
+	any interface{},
+) *MapResults {
+	err := it.SafeUnmarshal(
+		key,
+		any)
+	errcore.MustBeEmpty(err)
+
+	return it
 }
 
 func (it *MapResults) InjectIntoAt(
@@ -674,7 +712,7 @@ func (it *MapResults) GetSinglePageCollection(
 	}
 
 	if length != len(allKeys) {
-		reference := errcore.Var2NoType(
+		reference := errcore.VarTwoNoType(
 			"MapLength", it.Length(),
 			"AllKeysLength", len(allKeys))
 

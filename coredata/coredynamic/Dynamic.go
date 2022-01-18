@@ -11,6 +11,7 @@ import (
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
+	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -272,6 +273,62 @@ func (it *Dynamic) Ptr() *Dynamic {
 	return it
 }
 
+func (it *Dynamic) Bytes() (rawBytes []byte, isSuccess bool) {
+	if it == nil {
+		return nil, false
+	}
+
+	rawBytes, isSuccess = it.innerData.([]byte)
+
+	if isSuccess {
+		return rawBytes, isSuccess
+	}
+
+	rawBytes, err := json.Marshal(it.innerData)
+
+	return rawBytes, err != nil
+}
+
+func (it *Dynamic) ReflectSet(toPointer interface{}) error {
+	if it == nil {
+		return defaulterr.NilResult
+	}
+
+	return ReflectSetFromTo(
+		it.innerData,
+		toPointer)
+}
+
+func (it *Dynamic) Deserialize(jsonBytes []byte) (deserialized *Dynamic, err error) {
+	if it == nil {
+		return InvalidDynamicPtr(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	err = corejson.
+		Deserialize.
+		UsingBytes(jsonBytes, it.innerData)
+
+	it.isValid = err == nil
+
+	return it, err
+}
+
+func (it *Dynamic) ValueMarshal() (jsonBytes []byte, err error) {
+	if it == nil {
+		return nil, defaulterr.NilResult
+	}
+
+	return corejson.
+		Serialize.
+		ToBytesErr(it.innerData)
+}
+
+func (it *Dynamic) JsonPayloadMust() (jsonBytes []byte) {
+	return corejson.
+		Serialize.
+		ToSafeBytesMust(it.innerData)
+}
+
 // JsonBytesPtr returns empty string on nil.
 // no error on nil.
 func (it *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
@@ -289,13 +346,23 @@ func (it *Dynamic) JsonBytesPtr() (jsonBytesPtr *[]byte, err error) {
 }
 
 func (it *Dynamic) MarshalJSON() ([]byte, error) {
-	return json.Marshal(it.innerData)
+	return corejson.
+		Serialize.
+		ToBytesErr(it.innerData)
 }
 
 func (it *Dynamic) UnmarshalJSON(data []byte) error {
-	return errcore.
-		NotImplementedType.
-		Error(errcore.UnMarshallingFailedType.String(), data)
+	if it == nil {
+		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+	}
+
+	err := corejson.
+		Deserialize.
+		UsingBytes(data, it.innerData)
+
+	it.isValid = err == nil
+
+	return err
 }
 
 func (it *Dynamic) JsonModel() interface{} {
@@ -398,4 +465,81 @@ func (it *Dynamic) ClonePtr() *Dynamic {
 	return NewDynamicPtr(
 		it.innerData,
 		it.isValid)
+}
+
+func (it *Dynamic) ValueInt() int {
+	casted, isSuccess := it.innerData.(int)
+
+	if isSuccess {
+		return casted
+	}
+
+	return constants.InvalidValue
+}
+
+func (it *Dynamic) ValueUInt() uint {
+	casted, isSuccess := it.innerData.(uint)
+
+	if isSuccess {
+		return casted
+	}
+
+	return constants.Zero
+}
+
+func (it *Dynamic) ValueStrings() []string {
+	casted, isSuccess := it.innerData.([]string)
+
+	if isSuccess {
+		return casted
+	}
+
+	return nil
+}
+
+func (it *Dynamic) ValueBool() bool {
+	casted, isSuccess := it.innerData.(bool)
+
+	if isSuccess {
+		return casted
+	}
+
+	return false
+}
+
+func (it *Dynamic) ValueInt64() int64 {
+	casted, isSuccess := it.innerData.(int64)
+
+	if isSuccess {
+		return casted
+	}
+
+	return constants.InvalidValue
+}
+
+func (it *Dynamic) ValueNullErr() error {
+	if it == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("Dynamic is nil or null")
+	}
+
+	if reflectinternal.IsNull(it.innerData) {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("Dynamic internal data is nil.")
+	}
+
+	return nil
+}
+
+func (it *Dynamic) ValueString() string {
+	if it == nil || it.innerData == nil {
+		return constants.EmptyString
+	}
+
+	return fmt.Sprintf(
+		constants.SprintValueFormat,
+		it.innerData,
+	)
 }
