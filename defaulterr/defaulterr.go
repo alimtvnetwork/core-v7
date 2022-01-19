@@ -21,7 +21,7 @@ var (
 						UnMarshallingFailedType.
 						ErrorNoRefs("Cannot marshal to serialize data because of nil or empty object.")
 
-	UnMarshallingFailedDueToNilOrEmpty = errcore.
+	UnmarshallingFailedDueToNilOrEmpty = errcore.
 						UnMarshallingFailedType.
 						ErrorNoRefs("Cannot unmarshal to object because of nil or empty serialized data.")
 
@@ -56,4 +56,11 @@ var (
 	AttributeNull = errcore.
 			NullResultType.
 			ErrorNoRefs("attribute is nil!")
+	JsonResultNull = errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("JsonResult is given as nil")
+
+	KeyNotExistInMap = errcore.
+				KeyNotExistInMapType.
+				ErrorNoRefs("key doesn't exist in the map.")
 )

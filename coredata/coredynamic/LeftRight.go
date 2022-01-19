@@ -39,6 +39,18 @@ func (it *LeftRight) IsRightEmpty() bool {
 		reflectinternal.IsNull(it.Right)
 }
 
+func (it *LeftRight) LeftReflectSet(
+	toPointerOrBytesPointer interface{},
+) error {
+	return ReflectSetFromTo(it.Left, toPointerOrBytesPointer)
+}
+
+func (it *LeftRight) RightReflectSet(
+	toPointerOrBytesPointer interface{},
+) error {
+	return ReflectSetFromTo(it.Right, toPointerOrBytesPointer)
+}
+
 func (it *LeftRight) DeserializeLeft() *corejson.Result {
 	return corejson.NewPtr(it.Left)
 }

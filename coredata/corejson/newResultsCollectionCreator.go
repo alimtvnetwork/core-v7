@@ -1,8 +1,60 @@
 package corejson
 
-import "gitlab.com/evatix-go/core/constants"
+import (
+	"gitlab.com/evatix-go/core/constants"
+)
 
 type newResultsCollectionCreator struct{}
+
+// UnmarshalUsingBytes
+//
+//  Aka. alias for DeserializeUsingBytes
+//
+//  Should be used when ResultsCollection itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultsCollectionCreator) UnmarshalUsingBytes(
+	deserializingBytes []byte,
+) (*ResultsCollection, error) {
+	return it.DeserializeUsingBytes(deserializingBytes)
+}
+
+// DeserializeUsingBytes
+//
+//  Should be used when ResultsCollection itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultsCollectionCreator) DeserializeUsingBytes(
+	deserializingBytes []byte,
+) (*ResultsCollection, error) {
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(deserializingBytes, empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
+
+func (it newResultsCollectionCreator) DeserializeUsingResult(
+	jsonResult *Result,
+) (*ResultsCollection, error) {
+	if jsonResult.HasIssuesOrEmpty() {
+		return nil, jsonResult.MeaningfulError()
+	}
+
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(jsonResult.SafeBytes(), empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
 
 func (it newResultsCollectionCreator) Empty() *ResultsCollection {
 	return &ResultsCollection{

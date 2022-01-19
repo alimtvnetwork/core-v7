@@ -1,8 +1,60 @@
 package corejson
 
-import "gitlab.com/evatix-go/core/constants"
+import (
+	"gitlab.com/evatix-go/core/constants"
+)
 
 type newResultsPtrCollectionCreator struct{}
+
+// UnmarshalUsingBytes
+//
+//  Aka. alias for DeserializeUsingBytes
+//
+//  Should be used when ResultsPtrCollection itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultsPtrCollectionCreator) UnmarshalUsingBytes(
+	deserializingBytes []byte,
+) (*ResultsPtrCollection, error) {
+	return it.DeserializeUsingBytes(deserializingBytes)
+}
+
+// DeserializeUsingBytes
+//
+//  Should be used when ResultsPtrCollection itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newResultsPtrCollectionCreator) DeserializeUsingBytes(
+	deserializingBytes []byte,
+) (*ResultsPtrCollection, error) {
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(deserializingBytes, empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
+
+func (it newResultsPtrCollectionCreator) DeserializeUsingResult(
+	jsonResult *Result,
+) (*ResultsPtrCollection, error) {
+	if jsonResult.HasIssuesOrEmpty() {
+		return nil, jsonResult.MeaningfulError()
+	}
+
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(jsonResult.SafeBytes(), empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
 
 func (it newResultsPtrCollectionCreator) Empty() *ResultsPtrCollection {
 	list := make([]*Result, 0)

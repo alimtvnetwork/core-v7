@@ -21,6 +21,27 @@ func (it deserializerLogic) Apply(
 		unmarshalToPointer)
 }
 
+func (it deserializerLogic) UsingError(
+	errInJsonFormat error,
+	unmarshalToPointer interface{},
+) error {
+	if errInJsonFormat == nil {
+		return nil
+	}
+
+	return it.UsingString(
+		errInJsonFormat.Error(),
+		unmarshalToPointer)
+}
+
+func (it deserializerLogic) UsingResult(
+	jsonResult *Result,
+	unmarshalToPointer interface{},
+) error {
+	return jsonResult.Unmarshal(
+		unmarshalToPointer)
+}
+
 func (it deserializerLogic) ApplyMust(
 	jsonResult *Result,
 	unmarshalToPointer interface{},

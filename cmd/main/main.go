@@ -47,5 +47,6 @@ func main() {
 
 	// keyLegendsTest()
 	// coreDynamicMapAnyItems()
-	enumTesting()
+	// enumTesting()
+	payloadTest01()
 }

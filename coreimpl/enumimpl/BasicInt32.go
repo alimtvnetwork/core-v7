@@ -144,7 +144,7 @@ func (it *BasicInt32) UnmarshallToValue(
 ) (int32, error) {
 	if !isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
 		return constants.Zero,
-			defaulterr.UnMarshallingFailedDueToNilOrEmpty
+			defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {

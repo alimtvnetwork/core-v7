@@ -22,8 +22,9 @@ func (it newPayloadWrapperCreator) Deserialize(
 	empty := it.Empty()
 
 	err := corejson.
-		Deserialize.UsingBytes(
-		rawBytes, empty)
+		Deserialize.
+		UsingBytes(
+			rawBytes, empty)
 
 	if err != nil {
 		return nil, err
@@ -32,52 +33,68 @@ func (it newPayloadWrapperCreator) Deserialize(
 	return empty, nil
 }
 
-func (it newPayloadWrapperCreator) UsingCreateStruct(
-	create *PayloadCreate,
+func (it newPayloadWrapperCreator) DeserializeUsingJsonResult(
+	jsonResult *corejson.Result,
+) (*PayloadWrapper, error) {
+	empty := it.Empty()
+
+	err := corejson.
+		Deserialize.
+		Apply(jsonResult, empty)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return empty, nil
+}
+
+func (it newPayloadWrapperCreator) UsingCreateInstruction(
+	createInstruction *PayloadCreateInstruction,
 ) *PayloadWrapper {
-	switch payloadCasted := create.Payloads.(type) {
+	switch payloadCasted := createInstruction.Payloads.(type) {
 	case []byte:
 		return it.createInternalUsingBytes(
-			create.Name,
-			create.Identifier,
-			create.TaskTypeName,
-			create.CategoryName,
-			create.EntityType,
-			create.HasManyRecords,
+			createInstruction.Name,
+			createInstruction.Identifier,
+			createInstruction.TaskTypeName,
+			createInstruction.CategoryName,
+			createInstruction.EntityType,
+			createInstruction.HasManyRecords,
 			payloadCasted,
-			create.Attributes,
+			createInstruction.Attributes,
 			nil)
 	case *[]byte:
 		return it.createInternalUsingBytes(
-			create.Name,
-			create.Identifier,
-			create.TaskTypeName,
-			create.CategoryName,
-			create.EntityType,
-			create.HasManyRecords,
+			createInstruction.Name,
+			createInstruction.Identifier,
+			createInstruction.TaskTypeName,
+			createInstruction.CategoryName,
+			createInstruction.EntityType,
+			createInstruction.HasManyRecords,
 			converters.BytesPointerToBytes(payloadCasted),
-			create.Attributes,
+			createInstruction.Attributes,
 			nil)
 	case string:
 		return it.createInternalUsingBytes(
-			create.Name,
-			create.Identifier,
-			create.TaskTypeName,
-			create.CategoryName,
-			create.EntityType,
-			create.HasManyRecords,
+			createInstruction.Name,
+			createInstruction.Identifier,
+			createInstruction.TaskTypeName,
+			createInstruction.CategoryName,
+			createInstruction.EntityType,
+			createInstruction.HasManyRecords,
 			[]byte(payloadCasted),
-			create.Attributes,
+			createInstruction.Attributes,
 			nil)
 	default:
 		return it.createInternal(
-			create.Name,
-			create.Identifier,
-			create.TaskTypeName,
-			create.CategoryName,
-			create.HasManyRecords,
+			createInstruction.Name,
+			createInstruction.Identifier,
+			createInstruction.TaskTypeName,
+			createInstruction.CategoryName,
+			createInstruction.HasManyRecords,
 			payloadCasted, // any
-			create.Attributes,
+			createInstruction.Attributes,
 		)
 	}
 }
@@ -87,8 +104,8 @@ func (it newPayloadWrapperCreator) UsingBytes(
 	category, entityName string,
 	payload []byte,
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
@@ -102,8 +119,8 @@ func (it newPayloadWrapperCreator) Create(
 	name, id, taskName, category string,
 	record interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
@@ -120,8 +137,8 @@ func (it newPayloadWrapperCreator) NameIdCategory(
 	entity := reflectinternal.SafeTypeName(
 		record)
 
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: entity,
@@ -135,8 +152,8 @@ func (it newPayloadWrapperCreator) Records(
 	name, id, taskName, category string,
 	records interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
@@ -152,8 +169,8 @@ func (it newPayloadWrapperCreator) Record(
 	name, id, taskName, category string,
 	record interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
@@ -168,8 +185,8 @@ func (it newPayloadWrapperCreator) NameIdTaskRecord(
 	name, id, taskName string,
 	record interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
@@ -182,8 +199,8 @@ func (it newPayloadWrapperCreator) NameIdRecord(
 	name, id string,
 	record interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Name:       name,
 			Identifier: id,
 			EntityType: reflectinternal.SafeTypeName(record),
@@ -195,8 +212,8 @@ func (it newPayloadWrapperCreator) NameTaskNameRecord(
 	id, taskName string,
 	record interface{},
 ) *PayloadWrapper {
-	return it.UsingCreateStruct(
-		&PayloadCreate{
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
 			Identifier:   id,
 			TaskTypeName: taskName,
 			EntityType:   reflectinternal.SafeTypeName(record),
@@ -229,7 +246,7 @@ func (it newPayloadWrapperCreator) createInternal(
 			EntityType:     entityTypeName,
 			HasManyRecords: hasManyRecords,
 			CategoryName:   category,
-			Payloads:       jsonResult.SafeBytes(),
+			Payloads:       jsonResult.Bytes,
 			Attributes:     attr,
 		}
 	}

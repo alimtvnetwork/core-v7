@@ -369,7 +369,7 @@ func (v Value) MarshalJSON() ([]byte, error) {
 
 func (v *Value) UnmarshalJSON(data []byte) error {
 	if data == nil {
-		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	str := string(data)

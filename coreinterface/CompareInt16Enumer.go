@@ -7,5 +7,4 @@ type CompareInt16Enumer interface {
 	IsGreater(comparingValue int16) bool
 	IsGreaterEqual(comparingValue int16) bool
 	IsNotEqual(comparingValue int16) bool
-	IsInt16CompareResultChecker
 }

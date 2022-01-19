@@ -6,7 +6,6 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 type RawErrorType string
@@ -149,8 +148,7 @@ func (it RawErrorType) TypesAttach(
 	return CombineWithMsgType(
 		it,
 		otherMsg,
-		reflectinternal.TypeNamesString(
-			true,
+		typesNamesString(
 			reflectionTypes...))
 }
 

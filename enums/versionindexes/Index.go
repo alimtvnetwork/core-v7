@@ -72,7 +72,7 @@ func (it Index) JsonPtr() *corejson.Result {
 
 func (it *Index) JsonParseSelfInject(jsonResult *corejson.Result) error {
 	if jsonResult == nil {
-		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	if jsonResult.HasError() {

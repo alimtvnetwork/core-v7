@@ -2,6 +2,56 @@ package corejson
 
 type newMapResultsCreator struct{}
 
+// UnmarshalUsingBytes
+//
+//  Aka. alias for UnmarshalUsingBytes
+//
+//  Should be used when MapResults itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newMapResultsCreator) UnmarshalUsingBytes(
+	deserializingBytes []byte,
+) (*MapResults, error) {
+	return it.DeserializeUsingBytes(deserializingBytes)
+}
+
+// DeserializeUsingBytes
+//
+//  Should be used when MapResults itself is Serialized
+//  and save to somewhere and then unmarshal or deserialize
+func (it newMapResultsCreator) DeserializeUsingBytes(
+	deserializingBytes []byte,
+) (*MapResults, error) {
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(deserializingBytes, empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
+
+func (it newMapResultsCreator) DeserializeUsingResult(
+	jsonResult *Result,
+) (*MapResults, error) {
+	if jsonResult.HasIssuesOrEmpty() {
+		return nil, jsonResult.MeaningfulError()
+	}
+
+	empty := it.Empty()
+
+	err := Deserialize.
+		UsingBytes(jsonResult.SafeBytes(), empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	return nil, err
+}
+
 func (it newMapResultsCreator) Empty() *MapResults {
 	return &MapResults{
 		Items: map[string]Result{},
