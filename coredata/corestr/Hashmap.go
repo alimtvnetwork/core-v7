@@ -895,18 +895,18 @@ func (it *Hashmap) LengthLock() int {
 }
 
 //goland:noinspection GoLinterLocal,GoVetCopyLock
-func (it *Hashmap) IsEquals(another Hashmap) bool { //nolint:govet
-	return it.IsEqualsPtr(&another)
+func (it *Hashmap) IsEqual(another Hashmap) bool { //nolint:govet
+	return it.IsEqualPtr(&another)
 }
 
-func (it *Hashmap) IsEqualsPtrLock(another *Hashmap) bool {
+func (it *Hashmap) IsEqualPtrLock(another *Hashmap) bool {
 	it.Lock()
 	defer it.Unlock()
 
-	return it.IsEqualsPtr(another)
+	return it.IsEqualPtr(another)
 }
 
-func (it *Hashmap) IsEqualsPtr(another *Hashmap) bool {
+func (it *Hashmap) IsEqualPtr(another *Hashmap) bool {
 	if it == nil && another == nil {
 		return true
 	}

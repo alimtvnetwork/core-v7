@@ -12,6 +12,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 	"gitlab.com/evatix-go/core/internal/utilstringinternal"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
@@ -32,6 +33,15 @@ func NewAnyCollection(capacity int) *AnyCollection {
 
 func (it *AnyCollection) At(index int) interface{} {
 	return it.items[index]
+}
+
+func (it *AnyCollection) ReflectSetAt(
+	index int,
+	toPointerOrBytesSet interface{},
+) error {
+	item := it.items[index]
+
+	return ReflectSetFromTo(item, toPointerOrBytesSet)
 }
 
 func (it *AnyCollection) AtAsDynamic(index int) Dynamic {
@@ -222,6 +232,90 @@ func (it *AnyCollection) RemoveAt(index int) (isSuccess bool) {
 		items[index+constants.One:]...)
 
 	return true
+}
+
+func (it *AnyCollection) Loop(
+	isRunAsync bool,
+	loopProcessorFunc func(index int, item interface{}) (isBreak bool), // break will not work on async
+) *AnyCollection {
+	if it.IsEmpty() {
+		return it
+	}
+
+	length := it.Length()
+
+	if isRunAsync {
+		wg := sync.WaitGroup{}
+		wg.Add(length)
+		wrappedFunc := func(index int) {
+			loopProcessorFunc(index, it.items[index])
+
+			wg.Done()
+		}
+
+		for index := 0; index < length; index++ {
+			go wrappedFunc(index)
+		}
+
+		wg.Wait()
+
+		return it
+	}
+
+	for index := 0; index < it.Length(); index++ {
+		isBreak := loopProcessorFunc(index, it.items[index])
+
+		if isBreak {
+			return it
+		}
+	}
+
+	return it
+}
+
+func (it *AnyCollection) LoopDynamic(
+	isRunAsync bool,
+	loopProcessorFunc func(index int, item Dynamic) (isBreak bool), // break will not work on async
+) *AnyCollection {
+	if it.IsEmpty() {
+		return it
+	}
+
+	length := it.Length()
+
+	if isRunAsync {
+		wg := sync.WaitGroup{}
+		wg.Add(length)
+		wrappedFunc := func(index int) {
+			dynamic := NewDynamic(
+				it.items[index],
+				reflectinternal.IsNotNull(it.items[index]))
+			loopProcessorFunc(index, dynamic)
+
+			wg.Done()
+		}
+
+		for index := 0; index < length; index++ {
+			go wrappedFunc(index)
+		}
+
+		wg.Wait()
+
+		return it
+	}
+
+	for index := 0; index < it.Length(); index++ {
+		dynamic := NewDynamic(
+			it.items[index],
+			reflectinternal.IsNotNull(it.items[index]))
+		isBreak := loopProcessorFunc(index, dynamic)
+
+		if isBreak {
+			return it
+		}
+	}
+
+	return it
 }
 
 func (it *AnyCollection) AddAny(anyItem interface{}, isValid bool) *AnyCollection {

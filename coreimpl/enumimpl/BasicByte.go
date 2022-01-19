@@ -163,7 +163,7 @@ func (it *BasicByte) UnmarshallToValue(
 ) (byte, error) {
 	if !isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
 		return constants.Zero,
-			defaulterr.UnMarshallingFailedDueToNilOrEmpty
+			defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {

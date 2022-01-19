@@ -13,6 +13,38 @@ import (
 
 type newAttributesCreator struct{}
 
+func (it *newAttributesCreator) Deserialize(
+	rawBytes []byte,
+) (*Attributes, error) {
+	empty := &Attributes{}
+	err := corejson.
+		Deserialize.
+		UsingBytes(rawBytes, empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	// has error
+	return nil, err
+}
+
+func (it *newAttributesCreator) DeserializeUsingJsonResult(
+	jsonResult *corejson.Result,
+) (*Attributes, error) {
+	empty := &Attributes{}
+	err := corejson.
+		Deserialize.
+		UsingResult(jsonResult, empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	// has error
+	return nil, err
+}
+
 func (it *newAttributesCreator) Create(
 	err error,
 	dynamicPayloads []byte,

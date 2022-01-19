@@ -9,6 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata"
 	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/csvinternal"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -138,7 +139,7 @@ func (it *Result) String() string {
 }
 
 func (it *Result) SafeNonIssueBytes() []byte {
-	if it.IsAnyNull() || it.HasError() {
+	if it.HasIssuesOrEmpty() {
 		return []byte{}
 	}
 
@@ -194,22 +195,27 @@ func (it *Result) MeaningfulErrorMessage() string {
 // MeaningfulError create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
-		return errcore.CannotBeNilType.ErrorNoRefs("JsonResult is nil")
+		return defaulterr.JsonResultNull
 	}
 
-	if it.IsEmptyError() && it.Bytes != nil {
+	if it.IsEmptyError() && it.HasJsonBytes() {
 		return nil
 	}
 
-	if it.Bytes == nil {
-		return errcore.FailedToParseType.Error(
-			errcore.BytesAreNilOrEmptyType.String()+" Additional: "+it.Error.Error()+", type:",
-			it.TypeName)
+	if it.IsEmptyJsonBytes() {
+		errMsg := errcore.BytesAreNilOrEmptyType.String() +
+			" Additional: " + it.Error.Error() + ", type:"
+
+		return errcore.
+			FailedToParseType.
+			Error(errMsg, it.TypeName)
 	}
 
-	return errcore.FailedToParseType.Error(
-		it.Error.Error()+", type:",
-		it.TypeName)
+	return errcore.
+		FailedToParseType.
+		Error(
+			it.Error.Error()+", type:",
+			it.TypeName)
 }
 
 func (it *Result) IsEmptyError() bool {
@@ -224,8 +230,13 @@ func (it *Result) IsAnyNull() bool {
 	return it == nil || it.Bytes == nil
 }
 
+// HasIssuesOrEmpty
+//
+// Result.IsAnyNull() ||
+// Result.HasError() ||
+// Result.IsEmptyJsonBytes()
 func (it *Result) HasIssuesOrEmpty() bool {
-	return it.IsEmptyJsonBytes()
+	return it.IsAnyNull() || it.HasError() || it.IsEmptyJsonBytes()
 }
 
 func (it *Result) HandleError() {
@@ -259,11 +270,23 @@ func (it *Result) HandleErrorWithMsg(msg string) {
 	panic(err)
 }
 
+// HasBytes
+//
+// Invert of Result.IsEmptyJsonBytes()
 func (it *Result) HasBytes() bool {
 	return !it.IsEmptyJsonBytes()
 }
 
-// IsEmptyJsonBytes len == 0, nil, {} returns as empty true
+// HasJsonBytes
+//
+// Invert of Result.IsEmptyJsonBytes()
+func (it *Result) HasJsonBytes() bool {
+	return !it.IsEmptyJsonBytes()
+}
+
+// IsEmptyJsonBytes
+//
+// len == 0, nil, {} returns as empty true
 func (it *Result) IsEmptyJsonBytes() bool {
 	if it == nil {
 		return true
@@ -296,9 +319,12 @@ func (it *Result) IsEmpty() bool {
 }
 
 func (it *Result) IsEmptyJson() bool {
-	return it == nil || len(it.Bytes) == 0
+	return it.IsEmptyJsonBytes()
 }
 
+// HasJson
+//
+// Invert of Result.IsEmptyJsonBytes()
 func (it *Result) HasJson() bool {
 	return !it.IsEmptyJsonBytes()
 }
@@ -381,6 +407,36 @@ func (it *Result) Unmarshal(
 		ErrorRefOnly(reference)
 }
 
+func (it *Result) SerializeSkipExistingIssues() (
+	[]byte, error,
+) {
+	if it.HasIssuesOrEmpty() {
+		return nil, nil
+	}
+
+	return it.serializeInternal()
+}
+
+func (it *Result) serializeInternal() (
+	[]byte, error,
+) {
+	rawBytes, err := json.Marshal(it)
+
+	if err == nil {
+		return rawBytes, nil
+	}
+
+	// has error
+	reference := errcore.VarTwoNoType(
+		"Marshal/Serialize Error", err.Error(),
+		"Source Type", it.TypeName,
+	)
+
+	return nil, errcore.
+		Serialize.
+		ErrorRefOnly(reference)
+}
+
 func (it *Result) Serialize() ([]byte, error) {
 	if it == nil {
 		return nil, errcore.
@@ -401,21 +457,7 @@ func (it *Result) Serialize() ([]byte, error) {
 				reference)
 	}
 
-	rawBytes, err := json.Marshal(it)
-
-	if err == nil {
-		return rawBytes, nil
-	}
-
-	// has error
-	reference := errcore.VarTwoNoType(
-		"Marshal/Serialize Error", err.Error(),
-		"Source Type", it.TypeName,
-	)
-
-	return nil, errcore.
-		Serialize.
-		ErrorRefOnly(reference)
+	return it.serializeInternal()
 }
 
 func (it *Result) SerializeMust() []byte {
@@ -425,15 +467,11 @@ func (it *Result) SerializeMust() []byte {
 	return rs
 }
 
-func (it *Result) UnmarshalIgnoreExistingError(
+func (it *Result) UnmarshalSkipExistingIssues(
 	anyItem interface{},
 ) error {
-	if it == nil {
-		return errcore.
-			UnMarshallingFailedType.
-			Error(
-				"cannot unmarshal if JsonResult is nil, type",
-				reflectinternal.TypeName(anyItem))
+	if it.HasIssuesOrEmpty() {
+		return nil
 	}
 
 	err := json.Unmarshal(it.Bytes, anyItem)

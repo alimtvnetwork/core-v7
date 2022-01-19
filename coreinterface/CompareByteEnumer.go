@@ -7,5 +7,4 @@ type CompareByteEnumer interface {
 	IsGreater(comparingValue byte) bool
 	IsGreaterEqual(comparingValue byte) bool
 	IsNotEqual(comparingValue byte) bool
-	IsByteCompareResultChecker
 }

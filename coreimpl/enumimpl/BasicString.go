@@ -121,7 +121,7 @@ func (it *BasicString) UnmarshallToValue(
 ) (string, error) {
 	if !isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
 		return constants.EmptyString,
-			defaulterr.UnMarshallingFailedDueToNilOrEmpty
+			defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	if isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {

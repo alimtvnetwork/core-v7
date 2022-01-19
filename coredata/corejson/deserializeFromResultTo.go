@@ -1,5 +1,7 @@
 package corejson
 
+import "gitlab.com/evatix-go/core/errcore"
+
 type deserializeFromResultTo struct{}
 
 func (it deserializeFromResultTo) String(
@@ -72,4 +74,183 @@ func (it deserializeFromResultTo) StringsMust(
 	}
 
 	return lines
+}
+
+func (it deserializeFromResultTo) MapAnyItem(
+	jsonResult *Result,
+) (mapAnyItem map[string]interface{}, err error) {
+	err = jsonResult.Deserialize(
+		&mapAnyItem)
+
+	return mapAnyItem, err
+}
+
+func (it deserializeFromResultTo) MapAnyItemMust(
+	jsonResult *Result,
+) (mapAnyItem map[string]interface{}) {
+	err := jsonResult.Deserialize(
+		&mapAnyItem)
+
+	errcore.HandleErr(err)
+
+	return mapAnyItem
+}
+
+func (it deserializeFromResultTo) MapStringString(
+	jsonResult *Result,
+) (mappedItems map[string]string, err error) {
+	err = jsonResult.Deserialize(
+		&mappedItems)
+
+	return mappedItems, err
+}
+
+func (it deserializeFromResultTo) MapStringStringMust(
+	jsonResult *Result,
+) (mappedItems map[string]string) {
+	err := jsonResult.Deserialize(
+		&mappedItems)
+	errcore.HandleErr(err)
+
+	return mappedItems
+}
+
+func (it deserializeFromResultTo) ResultCollection(
+	jsonResult *Result,
+) (*ResultsCollection, error) {
+	empty := NewResultsCollection.
+		Empty()
+	err := jsonResult.
+		Deserialize(empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	// has error
+	return nil, err
+}
+
+func (it deserializeFromResultTo) ResultCollectionMust(
+	jsonResult *Result,
+) *ResultsCollection {
+	rs, err := it.ResultCollection(jsonResult)
+	errcore.HandleErr(err)
+
+	return rs
+}
+
+func (it deserializeFromResultTo) ResultsPtrCollection(
+	jsonResult *Result,
+) (*ResultsPtrCollection, error) {
+	empty := NewResultsPtrCollection.
+		Empty()
+	err := jsonResult.
+		Deserialize(empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	// has error
+	return nil, err
+}
+
+func (it deserializeFromResultTo) ResultsPtrCollectionMust(
+	jsonResult *Result,
+) *ResultsPtrCollection {
+	rs, err := it.ResultsPtrCollection(
+		jsonResult)
+	errcore.HandleErr(err)
+
+	return rs
+}
+
+func (it deserializeFromResultTo) Result(
+	jsonResultInput *Result,
+) (jsonResult Result, err error) {
+	empty := Empty.ResultPtr()
+	err = jsonResultInput.
+		Deserialize(empty)
+
+	if err == nil {
+		return empty.NonPtr(), nil
+	}
+
+	// has error
+	return jsonResult, errcore.MergeErrors(
+		err,
+		jsonResult.MeaningfulError())
+}
+
+func (it deserializeFromResultTo) ResultMust(
+	jsonResultInput *Result,
+) (jsonResult Result) {
+	jsonResult, err := it.Result(jsonResultInput)
+	errcore.MustBeEmpty(err)
+
+	return jsonResult
+}
+
+func (it deserializeFromResultTo) ResultPtr(
+	jsonResultInput *Result,
+) (jsonResultPtr *Result, err error) {
+	jsonResult, err := it.Result(jsonResultInput)
+
+	return jsonResult.Ptr(), err
+}
+
+func (it deserializeFromResultTo) ResultPtrMust(
+	jsonResultInput *Result,
+) (jsonResultPtr *Result) {
+	jsonResult, err := it.Result(jsonResultInput)
+	errcore.HandleErr(err)
+
+	return jsonResult.Ptr()
+}
+
+func (it deserializeFromResultTo) MapResults(
+	jsonResult *Result,
+) (*MapResults, error) {
+	empty := NewMapResults.
+		Empty()
+	err := jsonResult.
+		Deserialize(empty)
+
+	if err == nil {
+		return empty, nil
+	}
+
+	// has error
+	return nil, err
+}
+
+func (it deserializeFromResultTo) Bytes(
+	jsonResult *Result,
+) (nextDeserializedBytes []byte, err error) {
+	jsonResultOut, err := it.Result(jsonResult)
+
+	if err == nil {
+		return jsonResultOut.Bytes, jsonResultOut.MeaningfulError()
+	}
+
+	return jsonResultOut.Bytes, err
+}
+
+func (it deserializeFromResultTo) BytesMust(
+	jsonResult *Result,
+) (nextDeserializedBytes []byte) {
+	nextDeserializedBytes, err := it.Bytes(jsonResult)
+	errcore.HandleErr(err)
+
+	return nextDeserializedBytes
+}
+
+func (it deserializeFromResultTo) MapResultsMust(
+	jsonResult *Result,
+) *MapResults {
+	rs, err := it.MapResults(jsonResult)
+	errcore.HandleErr(err)
+
+	return rs
 }

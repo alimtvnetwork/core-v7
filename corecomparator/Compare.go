@@ -2,13 +2,12 @@ package corecomparator
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Compare byte
@@ -134,7 +133,7 @@ func (it Compare) MarshalJSON() ([]byte, error) {
 
 func (it *Compare) UnmarshalJSON(data []byte) error {
 	if data == nil {
-		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return errors.New("compare unmarshal json error: data nil")
 	}
 
 	name := string(data)
@@ -147,11 +146,7 @@ func (it *Compare) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
-	return errcore.
-		FailedToConvertType.
-		Error(string(data)+" failed to convert to core-compare. Must be any of the values.",
-			strings.Join(Ranges(),
-				constants.Comma))
+	return errors.New(string(data) + " failed to convert to core-compare. Must be any of the values.")
 }
 
 func (it Compare) Value() byte {

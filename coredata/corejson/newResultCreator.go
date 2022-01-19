@@ -10,29 +10,50 @@ import (
 
 type newResultCreator struct{}
 
-// UsingUnmarshalBytes
+// UnmarshalUsingBytes
 //
-//  Aka. alias for UsingDeserializeBytes
+//  Aka. alias for DeserializeUsingBytes
 //
 //  Should be used when Result itself is Serialized
 //  and save to somewhere and then unmarshal or deserialize
-func (it newResultCreator) UsingUnmarshalBytes(
+func (it newResultCreator) UnmarshalUsingBytes(
 	deserializingBytes []byte,
 ) *Result {
-	return it.UsingDeserializeBytes(deserializingBytes)
+	return it.DeserializeUsingBytes(deserializingBytes)
 }
 
-// UsingDeserializeBytes
+// DeserializeUsingBytes
 //
 //  Should be used when Result itself is Serialized
 //  and save to somewhere and then unmarshal or deserialize
-func (it newResultCreator) UsingDeserializeBytes(
+func (it newResultCreator) DeserializeUsingBytes(
 	deserializingBytes []byte,
 ) *Result {
 	empty := it.TypeName(resultTypeName)
 
 	err := Deserialize.
 		UsingBytes(deserializingBytes, empty)
+
+	if err == nil {
+		return empty
+	}
+
+	empty.Error = err
+
+	return empty
+}
+
+func (it newResultCreator) DeserializeUsingResult(
+	jsonResult *Result,
+) *Result {
+	if jsonResult.HasIssuesOrEmpty() {
+		return it.ErrorPtr(jsonResult.MeaningfulError())
+	}
+
+	empty := it.TypeName(resultTypeName)
+
+	err := Deserialize.
+		UsingBytes(jsonResult.SafeBytes(), empty)
 
 	if err == nil {
 		return empty

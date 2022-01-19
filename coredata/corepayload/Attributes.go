@@ -1,7 +1,7 @@
 package corepayload
 
 import (
-	"encoding/json"
+	"bytes"
 	"errors"
 	"fmt"
 
@@ -68,6 +68,12 @@ func (it *Attributes) HasError() bool {
 	return it != nil && it.ErrorMessage != ""
 }
 
+func (it *Attributes) HandleErr() {
+	if it.ErrorMessage != "" {
+		panic(it.ErrorMessage)
+	}
+}
+
 func (it *Attributes) Error() error {
 	if it.IsEmptyError() {
 		return nil
@@ -113,8 +119,10 @@ func (it *Attributes) DeserializeDynamicPayloads(
 			unmarshalToPointer)
 }
 
-func (it *Attributes) DeserializeDynamicPayloadsToAttributes() (newAttr *Attributes, err error) {
-	newAttr = New.Attributes.Empty()
+func (it *Attributes) DeserializeDynamicPayloadsToAttributes() (
+	newAttr *Attributes, err error,
+) {
+	newAttr = &Attributes{}
 	err = corejson.Deserialize.UsingBytes(
 		it.DynamicPayloads,
 		newAttr)
@@ -126,7 +134,9 @@ func (it *Attributes) DeserializeDynamicPayloadsToAttributes() (newAttr *Attribu
 	return newAttr, err
 }
 
-func (it *Attributes) DeserializeDynamicPayloadsToPayloadWrapper() (payloadWrapper *PayloadWrapper, err error) {
+func (it *Attributes) DeserializeDynamicPayloadsToPayloadWrapper() (
+	payloadWrapper *PayloadWrapper, err error,
+) {
 	payloadWrapper = New.PayloadWrapper.Empty()
 	err = corejson.Deserialize.UsingBytes(
 		it.DynamicPayloads,
@@ -249,16 +259,6 @@ func (it *Attributes) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it *Attributes) MarshalJSON() ([]byte, error) {
-	return json.Marshal(it.JsonModel())
-}
-
-func (it *Attributes) UnmarshalJSON(data []byte) error {
-	err := json.Unmarshal(data, it)
-
-	return err
-}
-
 func (it Attributes) Json() corejson.Result {
 	return corejson.New(it)
 }
@@ -353,10 +353,48 @@ func (it *Attributes) Dispose() {
 	it.Clear()
 }
 
-func (it *Attributes) AsJsonMarshaller() corejson.JsonMarshaller {
+func (it *Attributes) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
 }
 
-func (it *Attributes) AsJsonContractsBinder() corejson.JsonContractsBinder {
-	return it
+func (it *Attributes) IsEqual(attributes *Attributes) bool {
+	if it == nil && attributes == nil {
+		return true
+	}
+
+	if it == nil || attributes == nil {
+		return false
+	}
+
+	if it == attributes {
+		return true
+	}
+
+	if it.ErrorMessage != attributes.ErrorMessage {
+		return false
+	}
+
+	if it.ErrorMessage != attributes.ErrorMessage {
+		return false
+	}
+
+	if !it.PagingInfo.IsEqual(attributes.PagingInfo) {
+		return false
+	}
+
+	if !it.KeyValuePairs.IsEqualPtr(attributes.KeyValuePairs) {
+		return false
+	}
+
+	if !bytes.Equal(
+		it.DynamicPayloads,
+		attributes.DynamicPayloads) {
+		return false
+	}
+
+	if !it.AnyKeyValuePairs.IsEqual(attributes.AnyKeyValuePairs) {
+		return false
+	}
+
+	return true
 }

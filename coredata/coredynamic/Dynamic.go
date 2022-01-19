@@ -8,7 +8,6 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
 	"gitlab.com/evatix-go/core/defaulterr"
@@ -191,8 +190,13 @@ func (it *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
 	}
 
 	stringVal := it.StructString()
+	toInt, err := strconv.Atoi(stringVal)
 
-	return converters.StringToIntegerWithDefault(stringVal, defaultInt)
+	if err == nil {
+		return toInt, true
+	}
+
+	return defaultInt, false
 }
 
 func (it *Dynamic) Float64() (val float64, err error) {
@@ -301,7 +305,7 @@ func (it *Dynamic) ReflectSet(toPointer interface{}) error {
 
 func (it *Dynamic) Deserialize(jsonBytes []byte) (deserialized *Dynamic, err error) {
 	if it == nil {
-		return InvalidDynamicPtr(), defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return InvalidDynamicPtr(), defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	err = corejson.
@@ -353,7 +357,7 @@ func (it *Dynamic) MarshalJSON() ([]byte, error) {
 
 func (it *Dynamic) UnmarshalJSON(data []byte) error {
 	if it == nil {
-		return defaulterr.UnMarshallingFailedDueToNilOrEmpty
+		return defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
 
 	err := corejson.

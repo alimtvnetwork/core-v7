@@ -1,8 +1,11 @@
 package coredynamic
 
 import (
+	"errors"
+
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type BytesConverter struct {
@@ -45,6 +48,39 @@ func (it BytesConverter) ToBoolMust() (isResult bool) {
 		BoolMust(it.rawBytes)
 }
 
+func (it BytesConverter) SafeCastString() (line string) {
+	if len(it.rawBytes) == 0 {
+		return ""
+	}
+
+	return string(it.rawBytes)
+}
+
+func (it BytesConverter) CastString() (line string, err error) {
+	if len(it.rawBytes) == 0 {
+		return "", errors.New("cast failed for empty bytes")
+	}
+
+	return string(it.rawBytes), nil
+}
+
+func (it BytesConverter) ToString() (line string, err error) {
+	return corejson.
+		Deserialize.
+		BytesTo.
+		String(it.rawBytes)
+}
+
+func (it BytesConverter) ToStringMust() (line string) {
+	line, err := corejson.
+		Deserialize.
+		BytesTo.
+		String(it.rawBytes)
+	errcore.HandleErr(err)
+
+	return line
+}
+
 func (it BytesConverter) ToStrings() (lines []string, err error) {
 	return corejson.
 		Deserialize.
@@ -67,6 +103,14 @@ func (it BytesConverter) ToInt64() (isResult bool, err error) {
 	return isResult, err
 }
 
+func (it BytesConverter) ToInt64Must() (isResult bool) {
+	corejson.
+		Deserialize.
+		UsingBytesMust(it.rawBytes, &isResult)
+
+	return isResult
+}
+
 func (it BytesConverter) ToHashmap() (hashmap *corestr.Hashmap, err error) {
 	hashmap = corestr.Empty.Hashmap()
 
@@ -79,6 +123,13 @@ func (it BytesConverter) ToHashmap() (hashmap *corestr.Hashmap, err error) {
 	}
 
 	return nil, err
+}
+
+func (it BytesConverter) ToHashmapMust() (hashmap *corestr.Hashmap) {
+	hashmap, err := it.ToHashmap()
+	errcore.HandleErr(err)
+
+	return hashmap
 }
 
 func (it BytesConverter) ToHashset() (hashset *corestr.Hashset, err error) {
@@ -95,6 +146,13 @@ func (it BytesConverter) ToHashset() (hashset *corestr.Hashset, err error) {
 	return nil, err
 }
 
+func (it BytesConverter) ToHashsetMust() (hashset *corestr.Hashset) {
+	hashset, err := it.ToHashset()
+	errcore.HandleErr(err)
+
+	return hashset
+}
+
 func (it BytesConverter) ToCollection() (collection *corestr.Collection, err error) {
 	collection = corestr.Empty.Collection()
 
@@ -107,6 +165,34 @@ func (it BytesConverter) ToCollection() (collection *corestr.Collection, err err
 	}
 
 	return nil, err
+}
+
+func (it BytesConverter) ToCollectionMust() (collection *corestr.Collection) {
+	collection, err := it.ToCollection()
+	errcore.HandleErr(err)
+
+	return collection
+}
+
+func (it BytesConverter) ToSimpleSlice() (simpleSlice *corestr.SimpleSlice, err error) {
+	simpleSlice = corestr.Empty.SimpleSlice()
+
+	err = corejson.
+		Deserialize.
+		UsingBytes(it.rawBytes, simpleSlice)
+
+	if err == nil {
+		return simpleSlice, nil
+	}
+
+	return nil, err
+}
+
+func (it BytesConverter) ToSimpleSliceMust() (simpleSlice *corestr.SimpleSlice) {
+	simpleSlice, err := it.ToSimpleSlice()
+	errcore.HandleErr(err)
+
+	return simpleSlice
 }
 
 func (it BytesConverter) ToKeyValCollection() (keyValCollection *KeyValCollection, err error) {
@@ -192,6 +278,22 @@ func (it BytesConverter) ToJsonMapResults() (
 
 	if err == nil {
 		return jsonMapResults, nil
+	}
+
+	return nil, err
+}
+
+func (it BytesConverter) ToBytesCollection() (
+	bytesCollection *corejson.BytesCollection, err error,
+) {
+	bytesCollection = corejson.Empty.BytesCollectionPtr()
+
+	err = corejson.
+		Deserialize.
+		UsingBytes(it.rawBytes, bytesCollection)
+
+	if err == nil {
+		return bytesCollection, nil
 	}
 
 	return nil, err

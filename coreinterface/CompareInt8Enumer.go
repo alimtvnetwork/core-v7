@@ -7,5 +7,4 @@ type CompareInt8Enumer interface {
 	IsGreater(comparingValue int8) bool
 	IsGreaterEqual(comparingValue int8) bool
 	IsNotEqual(comparingValue int8) bool
-	IsInt8CompareResultChecker
 }

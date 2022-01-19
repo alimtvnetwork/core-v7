@@ -9,6 +9,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
@@ -47,6 +48,31 @@ func (it *MapAnyItems) HasKey(key string) bool {
 	_, has := it.Items[key]
 
 	return has
+}
+
+func (it *MapAnyItems) ReflectSet(
+	key string,
+	toPointerOrBytes interface{},
+) error {
+	valInf, has := it.Items[key]
+
+	if !has {
+		return errcore.ErrorWithRefToError(
+			defaulterr.KeyNotExistInMap,
+			it.AllKeysSorted())
+	}
+
+	return ReflectSetFromTo(
+		valInf,
+		toPointerOrBytes)
+}
+
+func (it *MapAnyItems) ReflectSetMust(
+	key string,
+	toPointerOrBytes interface{},
+) {
+	err := it.ReflectSet(key, toPointerOrBytes)
+	errcore.HandleErr(err)
 }
 
 func (it *MapAnyItems) Get(
@@ -700,4 +726,59 @@ func (it *MapAnyItems) Dispose() {
 
 func (it *MapAnyItems) String() string {
 	return errcore.VarMap(it.Items)
+}
+
+func (it *MapAnyItems) IsEqualRaw(
+	rightMappedItems map[string]interface{},
+) bool {
+	if it == nil && rightMappedItems == nil {
+		return true
+	}
+
+	if it == nil || rightMappedItems == nil {
+		return false
+	}
+
+	leftLength := it.Length()
+	rightLength := len(rightMappedItems)
+
+	if leftLength != rightLength {
+		return false
+	}
+
+	for key := range it.Items {
+		rightElem, has := rightMappedItems[key]
+
+		if !has {
+			return false
+		}
+
+		leftElem := it.Items[key]
+		if !reflectinternal.IsAnyEqual(leftElem, rightElem) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (it *MapAnyItems) IsEqual(
+	right *MapAnyItems,
+) bool {
+	if it == nil && right == nil {
+		return true
+	}
+
+	if it == nil || right == nil {
+		return false
+	}
+
+	leftLength := it.Length()
+	rightLength := right.Length()
+
+	if leftLength != rightLength {
+		return false
+	}
+
+	return it.IsEqualRaw(right.Items)
 }
