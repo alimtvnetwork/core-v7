@@ -10,7 +10,7 @@ func payloadTest01() {
 
 	payload := corepayload.New.PayloadWrapper.UsingCreateInstruction(
 		&corepayload.PayloadCreateInstruction{
-			Name:           "name",
+			Name:           "name -- as payload",
 			Identifier:     "id",
 			TaskTypeName:   "task type",
 			EntityType:     "entity",
@@ -33,8 +33,8 @@ func payloadTest01() {
 
 	payload3 := corepayload.New.PayloadWrapper.Create(
 		"name3",
-		"id3", "taskname3", "category3", "some record")
+		"id3", "taskname3", "category3", jsResult.Bytes)
 
 	println(payload3.JsonPtr().PrettyJsonString())
-
+	println(payload3.DeserializePayloadsToPayloadWrapperMust().JsonPtr().PrettyJsonString())
 }

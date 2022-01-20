@@ -178,6 +178,10 @@ func (it *Result) RawString() (jsonString string, err error) {
 	return it.JsonString(), it.MeaningfulError()
 }
 
+func (it *Result) RawErrString() (rawJsonBytes []byte, errorMsg string) {
+	return it.Bytes, it.MeaningfulErrorMessage()
+}
+
 func (it *Result) RawPrettyString() (jsonString string, err error) {
 	return it.PrettyJsonString(), it.MeaningfulError()
 }
@@ -222,15 +226,33 @@ func (it *Result) IsEmptyError() bool {
 	return it == nil || it.Error == nil
 }
 
+// HasSafeItems
+//
+//  Returns true if
+//  Result is not null
+//  and has NO error
+//  and has non-Empty json (other than length 0 or "{}")
+//
+// Invert of HasIssuesOrEmpty
 func (it *Result) HasSafeItems() bool {
-	return !it.IsEmptyJsonBytes()
+	return !it.HasIssuesOrEmpty()
 }
 
+// IsAnyNull
+//
+//  Returns true
+//  if Result is null
+//  or Bytes is null
 func (it *Result) IsAnyNull() bool {
 	return it == nil || it.Bytes == nil
 }
 
 // HasIssuesOrEmpty
+//
+//  Returns true
+//  if Result is null
+//  or has any error
+//  or has empty json (length 0 or "{}")
 //
 // Result.IsAnyNull() ||
 // Result.HasError() ||
@@ -273,6 +295,7 @@ func (it *Result) HandleErrorWithMsg(msg string) {
 // HasBytes
 //
 // Invert of Result.IsEmptyJsonBytes()
+//  Represents has at least valid json data other than length 0 or "{}"
 func (it *Result) HasBytes() bool {
 	return !it.IsEmptyJsonBytes()
 }
@@ -280,13 +303,14 @@ func (it *Result) HasBytes() bool {
 // HasJsonBytes
 //
 // Invert of Result.IsEmptyJsonBytes()
+//  Represents has at least valid json data other than length 0 or "{}"
 func (it *Result) HasJsonBytes() bool {
 	return !it.IsEmptyJsonBytes()
 }
 
 // IsEmptyJsonBytes
 //
-// len == 0, nil, {} returns as empty true
+// len == 0, nil, "{}" returns as empty true
 func (it *Result) IsEmptyJsonBytes() bool {
 	if it == nil {
 		return true
@@ -407,6 +431,9 @@ func (it *Result) Unmarshal(
 		ErrorRefOnly(reference)
 }
 
+// SerializeSkipExistingIssues
+//
+// Ignores and returns nil if HasIssuesOrEmpty satisfied
 func (it *Result) SerializeSkipExistingIssues() (
 	[]byte, error,
 ) {
@@ -467,6 +494,9 @@ func (it *Result) SerializeMust() []byte {
 	return rs
 }
 
+// UnmarshalSkipExistingIssues
+//
+// Ignores and returns nil if HasIssuesOrEmpty satisfied
 func (it *Result) UnmarshalSkipExistingIssues(
 	anyItem interface{},
 ) error {

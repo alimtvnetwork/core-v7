@@ -49,6 +49,21 @@ func (it newPayloadWrapperCreator) DeserializeUsingJsonResult(
 	return empty, nil
 }
 
+func (it newPayloadWrapperCreator) UsingBytesCreateInstruction(
+	createInstruction *BytesCreateInstruction,
+) *PayloadWrapper {
+	return it.createInternalUsingBytes(
+		createInstruction.Name,
+		createInstruction.Identifier,
+		createInstruction.TaskTypeName,
+		createInstruction.CategoryName,
+		createInstruction.EntityType,
+		createInstruction.HasManyRecords,
+		createInstruction.Payloads,
+		createInstruction.Attributes,
+		nil)
+}
+
 func (it newPayloadWrapperCreator) UsingCreateInstruction(
 	createInstruction *PayloadCreateInstruction,
 ) *PayloadWrapper {

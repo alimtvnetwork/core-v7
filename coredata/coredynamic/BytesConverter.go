@@ -95,20 +95,20 @@ func (it BytesConverter) ToStringsMust() (lines []string) {
 		StringsMust(it.rawBytes)
 }
 
-func (it BytesConverter) ToInt64() (isResult bool, err error) {
+func (it BytesConverter) ToInt64() (integer64 int64, err error) {
 	err = corejson.
 		Deserialize.
-		UsingBytes(it.rawBytes, &isResult)
+		UsingBytes(it.rawBytes, &integer64)
 
-	return isResult, err
+	return integer64, err
 }
 
-func (it BytesConverter) ToInt64Must() (isResult bool) {
+func (it BytesConverter) ToInt64Must() (integer64 int64) {
 	corejson.
 		Deserialize.
-		UsingBytesMust(it.rawBytes, &isResult)
+		UsingBytesMust(it.rawBytes, &integer64)
 
-	return isResult
+	return integer64
 }
 
 func (it BytesConverter) ToHashmap() (hashmap *corestr.Hashmap, err error) {

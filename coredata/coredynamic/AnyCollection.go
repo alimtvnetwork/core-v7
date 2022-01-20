@@ -287,9 +287,11 @@ func (it *AnyCollection) LoopDynamic(
 		wg := sync.WaitGroup{}
 		wg.Add(length)
 		wrappedFunc := func(index int) {
+			currentItem := it.items[index]
 			dynamic := NewDynamic(
-				it.items[index],
-				reflectinternal.IsNotNull(it.items[index]))
+				currentItem,
+				reflectinternal.IsNotNull(currentItem))
+
 			loopProcessorFunc(index, dynamic)
 
 			wg.Done()

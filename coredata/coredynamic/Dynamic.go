@@ -140,6 +140,22 @@ func (it *Dynamic) IsReflectTypeOf(
 	return it.ReflectType() == typeRequest
 }
 
+func (it *Dynamic) ItemReflectValueUsingIndex(index int) reflect.Value {
+	return it.ReflectValue().Index(index)
+}
+
+func (it *Dynamic) ItemReflectValueUsingKey(key interface{}) reflect.Value {
+	return it.ReflectValue().MapIndex(reflect.ValueOf(key))
+}
+
+func (it *Dynamic) ItemUsingIndex(index int) interface{} {
+	return it.ReflectValue().Index(index).Interface()
+}
+
+func (it *Dynamic) ItemUsingKey(key interface{}) interface{} {
+	return it.ReflectValue().MapIndex(reflect.ValueOf(key)).Interface()
+}
+
 func (it *Dynamic) String() string {
 	return *it.StructStringPtr()
 }
@@ -260,6 +276,86 @@ func (it *Dynamic) IsValid() bool {
 
 func (it *Dynamic) IsInvalid() bool {
 	return !it.isValid
+}
+
+func (it *Dynamic) Loop(
+	loopProcessorFunc func(index int, item interface{}) (isBreak bool),
+) (isCalled bool) {
+	if it.IsInvalid() || it.IsNull() || it.Length() <= 0 {
+		return false
+	}
+
+	length := it.Length()
+	rv := *it.ReflectValue()
+
+	for i := 0; i < length; i++ {
+		isBreak := loopProcessorFunc(
+			i,
+			rv.Index(i).Interface())
+
+		if isBreak {
+			return true
+		}
+	}
+
+	return true
+}
+
+func (it *Dynamic) FilterAsDynamicCollection(
+	filterFunc func(index int, itemAsDynamic Dynamic) (isTake, isBreak bool),
+) *DynamicCollection {
+	if it.IsInvalid() || it.IsNull() || it.Length() <= 0 {
+		return EmptyDynamicCollection()
+	}
+
+	length := it.Length()
+	rv := *it.ReflectValue()
+	dynamicCollection := NewDynamicCollection(length / 2)
+
+	for i := 0; i < length; i++ {
+		currentRv := rv.Index(i)
+		valInf := currentRv.Interface()
+		currentDynamic := NewDynamic(valInf, currentRv.IsValid())
+
+		isTake, isBreak := filterFunc(
+			i,
+			currentDynamic)
+
+		if isTake {
+			dynamicCollection.Add(currentDynamic)
+		}
+
+		if isBreak {
+			return dynamicCollection
+		}
+	}
+
+	return dynamicCollection
+}
+
+func (it *Dynamic) LoopMap(
+	mapLoopProcessorFunc func(index int, key, value interface{}) (isBreak bool),
+) (isCalled bool) {
+	if it.IsInvalid() || it.IsNull() || it.Length() <= 0 {
+		return false
+	}
+
+	rv := *it.ReflectValue()
+	mapIterator := rv.MapRange()
+	index := 0
+	for mapIterator.Next() {
+		k := mapIterator.Key()
+		v := mapIterator.Value()
+		isBreak := mapLoopProcessorFunc(index, k.Interface(), v.Interface())
+
+		if isBreak {
+			return true
+		}
+
+		index++
+	}
+
+	return true
 }
 
 func (it *Dynamic) ConvertUsingFunc(
@@ -423,6 +519,12 @@ func (it *Dynamic) JsonParseSelfInject(
 	return err
 }
 
+func (it *Dynamic) IsStringType() bool {
+	_, isString := it.innerData.(string)
+
+	return isString
+}
+
 func (it *Dynamic) JsonBytes() (jsonBytesPtr []byte, err error) {
 	allBytes, err := it.JsonBytesPtr()
 
@@ -540,6 +642,12 @@ func (it *Dynamic) ValueNullErr() error {
 func (it *Dynamic) ValueString() string {
 	if it == nil || it.innerData == nil {
 		return constants.EmptyString
+	}
+
+	currentString, isString := it.innerData.(string)
+
+	if isString {
+		return currentString
 	}
 
 	return fmt.Sprintf(
