@@ -59,6 +59,7 @@ func CastTo(
 			IsMatchingAcceptedType: isMatchingAcceptedType,
 			IsPointer:              isOutNonPointer,
 			IsSourcePointer:        kind == reflect.Ptr,
+			IsValid:                rv.IsValid(),
 		}
 	}
 
@@ -75,5 +76,6 @@ func CastTo(
 		IsMatchingAcceptedType: isMatchingAcceptedType,
 		IsPointer:              isOutNonPointer,
 		IsSourcePointer:        kind == reflect.Ptr,
+		IsValid:                rv.IsValid(),
 	}
 }
