@@ -103,7 +103,9 @@ func (it *BasicInt16) GetValueByString(valueString string) int16 {
 	return it.jsonDoubleQuoteNameToValueHashMap[valueString]
 }
 
-func (it *BasicInt16) GetValueByName(name string) (int16, error) {
+func (it *BasicInt16) GetValueByName(
+	name string,
+) (int16, error) {
 	v, has := it.jsonDoubleQuoteNameToValueHashMap[name]
 
 	if has {
@@ -200,14 +202,5 @@ func (it *BasicInt16) UnmarshallToValue(
 		return it.minVal, nil
 	}
 
-	v, has := it.jsonDoubleQuoteNameToValueHashMap[str]
-
-	if !has {
-		return constants.Zero, enumUnmarshallingMappingFailedError(
-			it.TypeName(),
-			str,
-			it.RangeNamesCsv())
-	}
-
-	return v, nil
+	return it.GetValueByName(str)
 }
