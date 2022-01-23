@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corepayload"
 	"gitlab.com/evatix-go/core/errcore"
 )
@@ -37,4 +38,22 @@ func payloadTest01() {
 
 	println(payload3.JsonPtr().PrettyJsonString())
 	println(payload3.DeserializePayloadsToPayloadWrapperMust().JsonPtr().PrettyJsonString())
+	pay4, err := payload3.ClonePtr(true)
+	errcore.HandleErr(err)
+	pay4.Name = "pay 4"
+	pay4.Attributes.AddOrUpdateAnyItem(
+		"some key",
+		payload3.DeserializePayloadsToPayloadWrapperMust().JsonPtr())
+	pay4Json := pay4.JsonPtr()
+	pay5 := corepayload.PayloadWrapper{}
+	pay4Json.DeserializeMust(&pay5)
+	println("Pay 5", pay5.PrettyJsonString())
+
+	newJson := corejson.Result{}
+	pay5.Attributes.AnyKeyValuePairs.DeserializeMust(
+		"some key",
+		&newJson)
+
+	println("conv JSON", newJson.PrettyJsonString())
+	println(payload3.PrettyJsonString())
 }

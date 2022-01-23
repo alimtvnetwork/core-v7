@@ -1,5 +1,6 @@
 package keymk
 
 type LegendName struct {
-	Root, Group, Package, State, User, Item string
+	Root, Group, Package,
+	State, User, Item string
 }

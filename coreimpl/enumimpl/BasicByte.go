@@ -77,7 +77,10 @@ func NewBasicByteUsingIndexedSlice(
 		byte(max))
 }
 
-func (it *BasicByte) IsAnyOf(value byte, givenBytes ...byte) bool {
+func (it *BasicByte) IsAnyOf(
+	value byte,
+	givenBytes ...byte,
+) bool {
 	if len(givenBytes) == 0 {
 		return true
 	}
@@ -99,11 +102,15 @@ func (it *BasicByte) Min() byte {
 	return it.minVal
 }
 
-func (it *BasicByte) GetValueByString(jsonValueString string) byte {
+func (it *BasicByte) GetValueByString(
+	jsonValueString string,
+) byte {
 	return it.jsonDoubleQuoteNameToValueHashMap[jsonValueString]
 }
 
-func (it *BasicByte) GetValueByName(name string) (byte, error) {
+func (it *BasicByte) GetValueByName(
+	name string,
+) (byte, error) {
 	v, has := it.jsonDoubleQuoteNameToValueHashMap[name]
 
 	if has {
@@ -127,7 +134,9 @@ func (it *BasicByte) GetValueByName(name string) (byte, error) {
 		it.RangeNamesCsv())
 }
 
-func (it *BasicByte) GetStringValue(input byte) string {
+func (it *BasicByte) GetStringValue(
+	input byte,
+) string {
 	return it.StringRanges()[input]
 }
 
@@ -143,16 +152,22 @@ func (it *BasicByte) HashmapPtr() *map[string]byte {
 	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it *BasicByte) IsValidRange(value byte) bool {
+func (it *BasicByte) IsValidRange(
+	value byte,
+) bool {
 	return value >= it.minVal && value <= it.maxVal
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (it *BasicByte) ToEnumJsonBytes(value byte) []byte {
+func (it *BasicByte) ToEnumJsonBytes(
+	value byte,
+) []byte {
 	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
 }
 
-func (it *BasicByte) ToEnumString(value byte) string {
+func (it *BasicByte) ToEnumString(
+	value byte,
+) string {
 	return it.valueNameHashmap[value]
 }
 
@@ -174,7 +189,9 @@ func (it *BasicByte) AppendPrependJoinNamer(
 		appendVal.Name()
 }
 
-func (it *BasicByte) ToNumberString(valueInRawFormat interface{}) string {
+func (it *BasicByte) ToNumberString(
+	valueInRawFormat interface{},
+) string {
 	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
 }
 
@@ -200,14 +217,5 @@ func (it *BasicByte) UnmarshallToValue(
 		return it.minVal, nil
 	}
 
-	v, has := it.jsonDoubleQuoteNameToValueHashMap[str]
-
-	if !has {
-		return constants.Zero, enumUnmarshallingMappingFailedError(
-			it.TypeName(),
-			str,
-			it.RangeNamesCsv())
-	}
-
-	return v, nil
+	return it.GetValueByName(str)
 }

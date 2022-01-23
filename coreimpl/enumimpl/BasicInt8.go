@@ -200,14 +200,5 @@ func (it *BasicInt8) UnmarshallToValue(
 		return it.minVal, nil
 	}
 
-	v, has := it.jsonDoubleQuoteNameToValueHashMap[str]
-
-	if !has {
-		return constants.Zero, enumUnmarshallingMappingFailedError(
-			it.TypeName(),
-			str,
-			it.RangeNamesCsv())
-	}
-
-	return v, nil
+	return it.GetValueByName(str)
 }

@@ -1,10 +1,9 @@
 package corejson
 
-func BytesCloneIf(
-	isDeepClone bool,
+func BytesDeepClone(
 	inputBytes []byte,
 ) []byte {
-	if !isDeepClone || len(inputBytes) == 0 {
+	if len(inputBytes) == 0 {
 		return []byte{}
 	}
 

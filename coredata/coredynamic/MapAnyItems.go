@@ -87,6 +87,25 @@ func (it *MapAnyItems) Get(
 	return nil, false
 }
 
+func (it *MapAnyItems) Deserialize(
+	key string,
+	toPointer interface{},
+) error {
+	return it.GetUsingUnmarshallAt(
+		key,
+		toPointer)
+}
+
+func (it *MapAnyItems) DeserializeMust(
+	key string,
+	toPointer interface{},
+) {
+	err := it.GetUsingUnmarshallAt(
+		key,
+		toPointer)
+	errcore.HandleErr(err)
+}
+
 func (it *MapAnyItems) GetUsingUnmarshallAt(
 	key string,
 	unmarshalRef interface{},
@@ -781,4 +800,20 @@ func (it *MapAnyItems) IsEqual(
 	}
 
 	return it.IsEqualRaw(right.Items)
+}
+
+func (it *MapAnyItems) ClonePtr() (*MapAnyItems, error) {
+	if it == nil {
+		return nil, defaulterr.NilResult
+	}
+
+	jsonResult := it.Json()
+	if jsonResult.HasError() {
+		return EmptyMapAnyItems(), jsonResult.MeaningfulError()
+	}
+
+	bytesConv := NewBytesConverter(
+		jsonResult.Bytes)
+
+	return bytesConv.ToMapAnyItems()
 }

@@ -36,7 +36,9 @@ func (it *RwxWrapper) HasChmod(location string) bool {
 	return IsChmod(location, it.ToFullRwxValueString())
 }
 
-// Bytes return rwx, (Owner)(Group)(Other) byte values under 1-7
+// Bytes
+//
+// return rwx, (Owner)(Group)(Other) byte values under 1-7
 func (it *RwxWrapper) Bytes() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner := it.Owner.ToSum()
