@@ -12,10 +12,22 @@ type BytesConverter struct {
 	rawBytes []byte
 }
 
-func NewBytesConverter(rawBytes []byte) *BytesConverter {
+func NewBytesConverter(
+	rawBytes []byte,
+) *BytesConverter {
 	return &BytesConverter{
 		rawBytes: rawBytes,
 	}
+}
+
+func NewBytesConverterUsingJsonResult(
+	jsonResult *corejson.Result,
+) (*BytesConverter, error) {
+	if jsonResult.HasIssuesOrEmpty() {
+		return nil, jsonResult.MeaningfulError()
+	}
+
+	return NewBytesConverter(jsonResult.Bytes), nil
 }
 
 func (it BytesConverter) Deserialize(

@@ -7,6 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 )
 
@@ -90,6 +91,14 @@ func (it *PayloadWrapper) IsEntityType(entityType string) bool {
 
 func (it *PayloadWrapper) IsCategory(category string) bool {
 	return it != nil && it.CategoryName == category
+}
+
+func (it PayloadWrapper) String() string {
+	return it.JsonString()
+}
+
+func (it PayloadWrapper) PrettyJsonString() string {
+	return it.JsonPtr().PrettyJsonString()
 }
 
 func (it *PayloadWrapper) JsonString() string {
@@ -319,5 +328,67 @@ func (it *PayloadWrapper) Dispose() {
 }
 
 func (it *PayloadWrapper) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
+func (it *PayloadWrapper) Clone(
+	isDeepClone bool,
+) (PayloadWrapper, error) {
+	clonedPtr, err := it.ClonePtr(isDeepClone)
+
+	if err != nil {
+		return PayloadWrapper{}, err
+	}
+
+	if clonedPtr == nil {
+		return PayloadWrapper{}, defaulterr.NilResult
+	}
+
+	return clonedPtr.NonPtr(), nil
+}
+
+func (it *PayloadWrapper) ClonePtr(
+	isDeepClone bool,
+) (*PayloadWrapper, error) {
+	if it == nil {
+		return nil, nil
+	}
+
+	attrCloned, err := it.
+		Attributes.
+		ClonePtr(isDeepClone)
+
+	if err != nil {
+		return nil, err
+	}
+
+	if isDeepClone {
+		return &PayloadWrapper{
+			Name:           it.Name,
+			Identifier:     it.Identifier,
+			TaskTypeName:   it.TaskTypeName,
+			EntityType:     it.EntityType,
+			CategoryName:   it.CategoryName,
+			HasManyRecords: it.HasManyRecords,
+			Payloads: corejson.BytesDeepClone(
+				it.Payloads),
+			Attributes: attrCloned,
+		}, nil
+	}
+
+	// NOT deep clone
+	return &PayloadWrapper{
+		Name:           it.Name,
+		Identifier:     it.Identifier,
+		TaskTypeName:   it.TaskTypeName,
+		EntityType:     it.EntityType,
+		CategoryName:   it.CategoryName,
+		HasManyRecords: it.HasManyRecords,
+		Payloads:       it.Payloads,
+		Attributes:     attrCloned,
+	}, nil
+}
+
+func (it PayloadWrapper) NonPtr() PayloadWrapper {
 	return it
 }

@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Attributes struct {
@@ -259,6 +260,14 @@ func (it *Attributes) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+func (it Attributes) String() string {
+	return it.JsonString()
+}
+
+func (it Attributes) PrettyJsonString() string {
+	return it.JsonPtr().PrettyJsonString()
+}
+
 func (it Attributes) Json() corejson.Result {
 	return corejson.New(it)
 }
@@ -397,4 +406,63 @@ func (it *Attributes) IsEqual(attributes *Attributes) bool {
 	}
 
 	return true
+}
+
+func (it *Attributes) Clone(
+	isDeepClone bool,
+) (Attributes, error) {
+	clonedPtr, err := it.ClonePtr(isDeepClone)
+
+	if err != nil {
+		return Attributes{}, err
+	}
+
+	if clonedPtr == nil {
+		return Attributes{}, nil
+	}
+
+	return clonedPtr.NonPtr(), nil
+}
+
+func (it *Attributes) ClonePtr(
+	isDeepClone bool,
+) (*Attributes, error) {
+	if it == nil {
+		return nil, nil
+	}
+
+	if isDeepClone {
+		return it.deepClonePtr()
+	}
+
+	// NOT deep clone
+	return New.
+		Attributes.
+		All(
+			it.KeyValuePairs,
+			it.AnyKeyValuePairs,
+			it.PagingInfo,
+			it.DynamicPayloads,
+			errcore.ToError(it.ErrorMessage)), nil
+}
+
+func (it *Attributes) deepClonePtr() (*Attributes, error) {
+	anyMap, err := it.AnyKeyValuePairs.ClonePtr()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return New.
+		Attributes.
+		All(
+			it.KeyValuePairs.ClonePtr(),
+			anyMap,
+			it.PagingInfo.Clone(),
+			corejson.BytesDeepClone(it.DynamicPayloads),
+			errcore.ToError(it.ErrorMessage)), nil
+}
+
+func (it Attributes) NonPtr() Attributes {
+	return it
 }

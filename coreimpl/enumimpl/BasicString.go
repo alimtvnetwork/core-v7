@@ -159,5 +159,5 @@ func (it *BasicString) UnmarshallToValue(
 		return it.minVal, nil
 	}
 
-	return str, nil
+	return it.GetValueByName(str)
 }
