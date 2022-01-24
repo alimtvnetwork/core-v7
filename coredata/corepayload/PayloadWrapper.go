@@ -235,6 +235,15 @@ func (it *PayloadWrapper) PayloadDeserializeMust(
 	}
 }
 
+func (it *PayloadWrapper) DeserializePayloadsToManyPayloadWrappers() (
+	payloadWrappers []*PayloadWrapper, err error,
+) {
+	return New.
+		PayloadWrapper.
+		DeserializeToMany(
+			it.Payloads)
+}
+
 func (it *PayloadWrapper) DeserializePayloadsToPayloadWrapper() (
 	payloadWrapper *PayloadWrapper, err error,
 ) {

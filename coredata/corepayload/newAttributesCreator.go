@@ -29,6 +29,21 @@ func (it *newAttributesCreator) Deserialize(
 	return nil, err
 }
 
+func (it *newAttributesCreator) DeserializeMany(
+	rawBytes []byte,
+) (attrSlice []*Attributes, err error) {
+	err = corejson.
+		Deserialize.
+		UsingBytes(rawBytes, &attrSlice)
+
+	if err == nil {
+		return attrSlice, nil
+	}
+
+	// has error
+	return nil, err
+}
+
 func (it *newAttributesCreator) DeserializeUsingJsonResult(
 	jsonResult *corejson.Result,
 ) (*Attributes, error) {

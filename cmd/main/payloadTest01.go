@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corepayload"
 	"gitlab.com/evatix-go/core/errcore"
@@ -56,4 +58,18 @@ func payloadTest01() {
 
 	println("conv JSON", newJson.PrettyJsonString())
 	println(payload3.PrettyJsonString())
+	sliceOfPayloads := []*corepayload.PayloadWrapper{
+		payload,
+		payload2,
+		payload3,
+		pay4,
+	}
+
+	jsonSlice := corejson.Serialize.Apply(sliceOfPayloads)
+	jsonSlice.HandleError()
+
+	newSlice, err := corepayload.New.PayloadWrapper.DeserializeToMany(jsonSlice.Bytes)
+	errcore.HandleErr(err)
+
+	fmt.Println("new slice", newSlice)
 }

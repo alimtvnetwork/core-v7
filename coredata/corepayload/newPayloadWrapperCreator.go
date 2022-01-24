@@ -33,6 +33,22 @@ func (it newPayloadWrapperCreator) Deserialize(
 	return empty, nil
 }
 
+func (it newPayloadWrapperCreator) DeserializeToMany(
+	rawBytes []byte,
+) (payloadsSlice []*PayloadWrapper, err error) {
+	err = corejson.
+		Deserialize.
+		UsingBytes(
+			rawBytes,
+			&payloadsSlice)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return payloadsSlice, nil
+}
+
 func (it newPayloadWrapperCreator) DeserializeUsingJsonResult(
 	jsonResult *corejson.Result,
 ) (*PayloadWrapper, error) {
