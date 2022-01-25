@@ -410,6 +410,54 @@ func (it *PayloadsCollection) FilterWithLimit(
 	return list
 }
 
+func (it *PayloadsCollection) FirstByFilter(
+	findByFunc func(payloadWrapper *PayloadWrapper) (isFound bool),
+) *PayloadWrapper {
+	items := it.Filter(func(payloadWrapper *PayloadWrapper) (isTake, isBreak bool) {
+		isTake = findByFunc(payloadWrapper)
+
+		return isTake, isTake
+	})
+
+	if len(items) > 0 {
+		return items[0]
+	}
+
+	return nil
+}
+
+func (it *PayloadsCollection) FirstById(
+	id string,
+) *PayloadWrapper {
+	return it.FirstByFilter(func(payloadWrapper *PayloadWrapper) (isFound bool) {
+		return payloadWrapper.IsIdentifier(id)
+	})
+}
+
+func (it *PayloadsCollection) FirstByCategory(
+	category string,
+) *PayloadWrapper {
+	return it.FirstByFilter(func(payloadWrapper *PayloadWrapper) (isFound bool) {
+		return payloadWrapper.IsCategory(category)
+	})
+}
+
+func (it *PayloadsCollection) FirstByTaskType(
+	taskType string,
+) *PayloadWrapper {
+	return it.FirstByFilter(func(payloadWrapper *PayloadWrapper) (isFound bool) {
+		return payloadWrapper.IsTaskTypeName(taskType)
+	})
+}
+
+func (it *PayloadsCollection) FirstByEntityType(
+	entityType string,
+) *PayloadWrapper {
+	return it.FirstByFilter(func(payloadWrapper *PayloadWrapper) (isFound bool) {
+		return payloadWrapper.IsEntityType(entityType)
+	})
+}
+
 func (it *PayloadsCollection) FilterCollection(
 	filterFunc FilterFunc,
 ) *PayloadsCollection {

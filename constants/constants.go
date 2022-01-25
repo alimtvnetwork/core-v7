@@ -362,7 +362,22 @@ const (
 	NonAsyncSafeRangeLarge                   = 100
 	FileInfoEachLineJoiner                   = ",\n - "
 	IndentFileInfoEachLineJoiner             = "\n   - "
+	PrefixKeyword                            = "prefix"
+	RelativeKeyword                          = "relative"
+	IdKeyword                                = "id"
+	OnKeyword                                = "on"
+	OffKeyword                               = "off"
+	FileKeyword                              = "file"
+	LogFileKeyword                           = "log-file"
+	HomeKeyword                              = "home"
+	UserKeyword                              = "user"
+	AppKeyword                               = "app"
+	TmpKeyword                               = "tmp"
 	PathPrefixTemplate                       = "{prefix}"
+	PathRelativeTemplate                     = "{relative}"
+	PathIdTemplate                           = "{id}"
+	PathLogFileTemplate                      = "{log-file}"
+	PathFileTemplate                         = "{file}"
 	PathRootTemplate                         = "{root}"
 	PathHomeTemplate                         = "{home}"
 	PathUserTemplate                         = "{user}"
@@ -371,8 +386,17 @@ const (
 	PathHomeUserAppTemplate                  = "{home}/{user}/{app}"
 	PathTempDirTemplate                      = "{tmp}/{app}/{pkg}/"
 	PathTempTestDirTemplate                  = "{tmp}/{app}/{pkg}/{test}"
-	PathVarAppLogDirTemplate                 = "{var}/log/{app}"
-	KeyValShortFormat                        = "%s = %v" // Key, Value any
+	PathVarAppDirTemplate                    = "/var/{app}"                      // app
+	PathVarAppDirFileTemplate                = PathVarAppDirTemplate + "/{file}" // app, file
+	PathVarLogDirTemplate                    = "/var/log"
+	PathVarAppLogDirTemplate                 = "/var/log/{app}/{log-file}"       // app, log-filename
+	PrefixRelativeTemplate                   = "{prefix}/{relative}"             // prefix, relative
+	PrefixRelativeIdTemplate                 = "{prefix}/{relative}/{id}"        // prefix, relative, id
+	PrefixRelativeIdFileTemplate             = "{prefix}/{relative}/{id}/{file}" // prefix, relative, id, file
+	PrefixRelativeFormat                     = "%v/%v"                           // prefix, relative
+	PrefixRelativeIdFormat                   = "%v/%v/%v"                        // prefix, relative, id
+	PrefixRelativeIdFileFormat               = "%v/%v/%v/%v"                     // prefix, relative, id, file
+	KeyValShortFormat                        = "%s = %v"                         // Key, Value any
 	LikeQuerySuffix                          = " LIKE ?"
 	SpaceStartedExclamation                  = " started!"
 	SpaceEndedExclamation                    = " ended!"

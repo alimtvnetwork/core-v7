@@ -1,6 +1,7 @@
 package keymk
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 
@@ -277,6 +278,67 @@ func (it *Key) compileSingleItem(
 	}
 
 	return item
+}
+
+// CompileReplaceCurlyKeyMap
+//
+// Keys will be converted to {Key} then replaced
+func (it *Key) CompileReplaceCurlyKeyMap(
+	mapToReplace map[string]string,
+) string {
+	return it.CompileReplaceMapUsingItemsOption(
+		true,
+		mapToReplace,
+	)
+}
+
+// CompileReplaceCurlyKeyMapUsingItems
+//
+// Keys will be converted to {Key} then replaced
+func (it *Key) CompileReplaceCurlyKeyMapUsingItems(
+	mapToReplace map[string]string,
+	additionalItems ...interface{},
+) string {
+	return it.CompileReplaceMapUsingItemsOption(
+		true,
+		mapToReplace,
+		additionalItems...)
+}
+
+func (it *Key) CompileReplaceMapUsingItemsOption(
+	isConvKeysToCurlyBraceKeys bool, // conv key to {key} before replace
+	mapToReplace map[string]string,
+	additionalItems ...interface{},
+) string {
+	format := it.Compile(additionalItems...)
+
+	if len(mapToReplace) == 0 {
+		return format
+	}
+
+	if isConvKeysToCurlyBraceKeys {
+		for key, valueToReplace := range mapToReplace {
+			keyCurly := fmt.Sprintf(
+				constants.CurlyWrapFormat,
+				key)
+
+			format = strings.ReplaceAll(
+				format,
+				keyCurly,
+				valueToReplace)
+		}
+
+		return format
+	}
+
+	for key, valueToReplace := range mapToReplace {
+		format = strings.ReplaceAll(
+			format,
+			key,
+			valueToReplace)
+	}
+
+	return format
 }
 
 func (it *Key) compileFinalStrings(

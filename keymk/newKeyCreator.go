@@ -20,6 +20,44 @@ func (it *newKeyCreator) Create(
 	return key
 }
 
+func (it *newKeyCreator) PathTemplate(
+	root string,
+	starterKeyChains ...interface{},
+) *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		starterKeyChains...)
+}
+
+func (it *newKeyCreator) PathTemplateDefault(
+	starterKeyChains ...interface{},
+) *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		constants.PathRootTemplate,
+		starterKeyChains...)
+}
+
+func (it *newKeyCreator) PathTemplatePrefixRelativeIdDefault() *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		prefix,
+		relative,
+		id)
+}
+
+func (it *newKeyCreator) PathTemplatePrefixRelativeIdFileDefault() *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		prefix,
+		relative,
+		id,
+		constants.FileKeyword)
+}
+
 func (it *newKeyCreator) All(
 	option *Option,
 	main string,

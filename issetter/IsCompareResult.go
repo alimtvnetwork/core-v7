@@ -6,20 +6,20 @@ import (
 )
 
 // IsCompareResult Here left is v, and right is `n`
-func (v Value) IsCompareResult(n byte, compare corecomparator.Compare) bool {
+func (it Value) IsCompareResult(n byte, compare corecomparator.Compare) bool {
 	switch compare {
 	case corecomparator.Equal:
-		return v.IsEqual(n)
+		return it.IsEqual(n)
 	case corecomparator.LeftGreater:
-		return v.IsGreater(n)
+		return it.IsGreater(n)
 	case corecomparator.LeftGreaterEqual:
-		return v.IsGreaterEqual(n)
+		return it.IsGreaterEqual(n)
 	case corecomparator.LeftLess:
-		return v.IsLess(n)
+		return it.IsLess(n)
 	case corecomparator.LeftLessEqual:
-		return v.IsLessEqual(n)
+		return it.IsLessEqual(n)
 	case corecomparator.NotEqual:
-		return !v.IsEqual(n)
+		return !it.IsEqual(n)
 	default:
 		panic(messages.ComparatorOutOfRangeMessage)
 	}

@@ -2,19 +2,69 @@ package coretests
 
 import (
 	"fmt"
+	"reflect"
+	"testing"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type BaseTestCase struct {
-	Title                                    string // consider as header
-	ArrangeInput, ActualInput, ExpectedInput interface{}
-	HasError                                 bool
-	IsValidateError                          bool
+	Title                                                           string // consider as header
+	ArrangeInput, ActualInput, ExpectedInput                        interface{}
+	ArrangeExpectedType, ActualExpectedType, ExpectedTypeOfExpected reflect.Type
+	HasError                                                        bool
+	IsValidateError                                                 bool
 }
 
 func (it *BaseTestCase) CaseTitle() string {
 	return it.Title
+}
+
+func (it *BaseTestCase) TypesValidationMustPasses(t *testing.T) {
+	err := it.TypeValidationError()
+
+	if err != nil {
+		t.Error(
+			"any one of the type validation failed",
+			err.Error())
+	}
+}
+
+func (it *BaseTestCase) TypeValidationError() error {
+	var sliceErr []string
+	arrangeInputActualType := reflect.TypeOf(it.ArrangeExpectedType)
+	actualInputActualType := reflect.TypeOf(it.ActualInput)
+	expectedInputActualType := reflect.TypeOf(it.ExpectedInput)
+
+	if arrangeInputActualType != it.ArrangeExpectedType {
+		sliceErr = append(
+			sliceErr,
+			errcore.Expecting(
+				"Arrange Type Mismatch",
+				it.ArrangeExpectedType,
+				arrangeInputActualType))
+	}
+
+	if actualInputActualType != it.ActualExpectedType {
+		sliceErr = append(
+			sliceErr,
+			errcore.Expecting(
+				"Actual Type Mismatch",
+				it.ActualExpectedType,
+				actualInputActualType))
+	}
+
+	if expectedInputActualType != it.ExpectedTypeOfExpected {
+		sliceErr = append(
+			sliceErr,
+			errcore.Expecting(
+				"Expected Type Mismatch",
+				it.ExpectedTypeOfExpected,
+				expectedInputActualType))
+	}
+
+	return errcore.SliceToError(sliceErr)
 }
 
 func (it *BaseTestCase) ArrangeString() string {

@@ -27,6 +27,14 @@ var (
 		EndBracket:       constants.SquareEnd + constants.Pipe,
 	}
 
+	CurlyBracePathJoinerOption = &Option{
+		Joiner:           constants.PathSeparator,
+		IsSkipEmptyEntry: true,
+		IsUseBrackets:    true,
+		StartBracket:     constants.CurlyStart,
+		EndBracket:       constants.CurlyEnd,
+	}
+
 	CurlyBraceJoinerOption = &Option{
 		Joiner:           DefaultJoiner,
 		IsSkipEmptyEntry: true,
