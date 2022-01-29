@@ -11,7 +11,7 @@ import (
 )
 
 type CollectionsOfCollection struct {
-	items *[]*Collection
+	items []*Collection
 	sync.Mutex
 }
 
@@ -20,11 +20,11 @@ func (it *CollectionsOfCollection) AsJsonContractsBinder() corejson.JsonContract
 }
 
 func (it *CollectionsOfCollection) IsEmpty() bool {
-	return it.items == nil || len(*it.items) == 0
+	return it.items == nil || len(it.items) == 0
 }
 
 func (it *CollectionsOfCollection) HasItems() bool {
-	return it.items != nil && len(*it.items) > 0
+	return it.items != nil && len(it.items) > 0
 }
 
 func (it *CollectionsOfCollection) Length() int {
@@ -32,7 +32,7 @@ func (it *CollectionsOfCollection) Length() int {
 		return 0
 	}
 
-	return len(*it.items)
+	return len(it.items)
 }
 
 func (it *CollectionsOfCollection) AllIndividualItemsLength() int {
@@ -42,7 +42,7 @@ func (it *CollectionsOfCollection) AllIndividualItemsLength() int {
 
 	allLength := 0
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 		if collection == nil || collection.IsEmpty() {
 			continue
 		}
@@ -54,11 +54,11 @@ func (it *CollectionsOfCollection) AllIndividualItemsLength() int {
 }
 
 func (it *CollectionsOfCollection) ItemsPtr() *[]*Collection {
-	return it.items
+	return &it.items
 }
 
 func (it *CollectionsOfCollection) Items() []*Collection {
-	return *it.items
+	return it.items
 }
 
 func (it *CollectionsOfCollection) ListPtr(additionalCapacity int) *[]string {
@@ -69,7 +69,7 @@ func (it *CollectionsOfCollection) ListPtr(additionalCapacity int) *[]string {
 		return &list
 	}
 
-	for _, collection := range *it.items {
+	for _, collection := range it.items {
 
 		for _, s := range *collection.ListPtr() {
 			list = append(list, s)
@@ -232,7 +232,7 @@ func (it *CollectionsOfCollection) AddCollections(
 	}
 
 	for i := range *collections {
-		*it.items = append(*it.items, (*collections)[i])
+		it.items = append(it.items, (*collections)[i])
 	}
 
 	return it
@@ -244,7 +244,7 @@ func (it *CollectionsOfCollection) String() string {
 		0,
 		it.Length())
 
-	for i, collection := range *it.items {
+	for i, collection := range it.items {
 		list = append(
 			list,
 			collection.SummaryString(i+1))

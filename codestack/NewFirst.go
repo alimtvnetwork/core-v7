@@ -1,5 +1,5 @@
 package codestack
 
-func NewSkip1() Trace {
+func NewFirst() Trace {
 	return New(Skip2)
 }

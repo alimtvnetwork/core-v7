@@ -10,6 +10,32 @@ import (
 
 func payloadTest01() {
 	line := []byte("some payload")
+	sysUser := corepayload.New.User.System(
+		"sys-1",
+		"system-user-type")
+
+	regularUser := corepayload.New.User.All(
+		false,
+		"some user id",
+		"regular-2",
+		"system-user-type",
+		"authToken",
+		"passhash")
+
+	authInfo := corepayload.AuthInfo{
+		Identifier:   "authid",
+		ActionType:   "actionType",
+		ResourceName: "resourceIdentity",
+		SessionInfo: &corepayload.SessionInfo{
+			Id:          "session id",
+			User:        regularUser,
+			SessionPath: "sesssion path",
+		},
+		UserInfo: &corepayload.UserInfo{
+			User:       regularUser,
+			SystemUser: sysUser,
+		},
+	}
 
 	payload := corepayload.New.PayloadWrapper.UsingCreateInstruction(
 		&corepayload.PayloadCreateInstruction{
@@ -22,6 +48,7 @@ func payloadTest01() {
 			Payloads:       &line,
 			Attributes: &corepayload.Attributes{
 				ErrorMessage: "some err",
+				AuthInfo:     authInfo.Ptr(),
 			},
 		})
 
@@ -75,5 +102,5 @@ func payloadTest01() {
 
 	payloadsSlice2 := corepayload.New.PayloadsCollection.UsingWrappers(
 		sliceOfPayloads...)
-	fmt.Println("new slice2", payloadsSlice2)
+	fmt.Println("new slice2", payloadsSlice2.PrettyJsonString())
 }

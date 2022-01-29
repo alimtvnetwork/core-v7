@@ -62,10 +62,37 @@ func (it *newAttributesCreator) DeserializeUsingJsonResult(
 
 func (it *newAttributesCreator) Create(
 	err error,
+	authInfo *AuthInfo,
 	dynamicPayloads []byte,
 ) *Attributes {
 	return &Attributes{
 		ErrorMessage:     errcore.ToString(err),
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+		DynamicPayloads:  dynamicPayloads,
+	}
+}
+
+func (it *newAttributesCreator) UsingAuthInfoJsonResult(
+	authInfo *AuthInfo,
+	jsonResult *corejson.Result,
+) *Attributes {
+	return &Attributes{
+		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+		DynamicPayloads:  jsonResult.Bytes,
+	}
+}
+
+func (it *newAttributesCreator) UsingAuthInfoDynamicBytes(
+	authInfo *AuthInfo,
+	dynamicPayloads []byte,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  dynamicPayloads,
@@ -122,6 +149,7 @@ func (it *newAttributesCreator) UsingDynamicPayloadBytes(
 }
 
 func (it *newAttributesCreator) AllAny(
+	authInfo *AuthInfo,
 	keyValues *corestr.Hashmap,
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
@@ -133,6 +161,7 @@ func (it *newAttributesCreator) AllAny(
 
 	return &Attributes{
 		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
@@ -158,6 +187,7 @@ func (it *newAttributesCreator) PageInfoAny(
 }
 
 func (it *newAttributesCreator) All(
+	authInfo *AuthInfo,
 	keyValues *corestr.Hashmap,
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
@@ -166,6 +196,7 @@ func (it *newAttributesCreator) All(
 ) *Attributes {
 	return &Attributes{
 		ErrorMessage:     errcore.ToString(err),
+		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
@@ -173,7 +204,18 @@ func (it *newAttributesCreator) All(
 	}
 }
 
-func (it *newAttributesCreator) UsingDynamicAny(
+func (it *newAttributesCreator) UsingAuthInfo(
+	authInfo *AuthInfo,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+	}
+}
+
+func (it *newAttributesCreator) UsingDynamicPayloadAny(
+	authInfo *AuthInfo,
 	anyItem interface{},
 ) *Attributes {
 	jsonResult := corejson.
@@ -182,6 +224,7 @@ func (it *newAttributesCreator) UsingDynamicAny(
 
 	return &Attributes{
 		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  jsonResult.SafeBytes(),
@@ -198,6 +241,18 @@ func (it *newAttributesCreator) UsingKeyValues(
 	}
 }
 
+func (it *newAttributesCreator) UsingAuthInfoKeyValues(
+	authInfo *AuthInfo,
+	keyValues *corestr.Hashmap,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    keyValues,
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+		DynamicPayloads:  []byte{},
+	}
+}
+
 func (it *newAttributesCreator) UsingKeyValuesPlusDynamic(
 	keyValues *corestr.Hashmap,
 	dynamicPayloads []byte,
@@ -206,6 +261,18 @@ func (it *newAttributesCreator) UsingKeyValuesPlusDynamic(
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  dynamicPayloads,
+	}
+}
+
+func (it *newAttributesCreator) UsingAuthInfoAnyKeyValues(
+	authInfo *AuthInfo,
+	anyKeyValues *coredynamic.MapAnyItems,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: anyKeyValues,
+		DynamicPayloads:  []byte{},
 	}
 }
 

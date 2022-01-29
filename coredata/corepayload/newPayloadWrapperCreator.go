@@ -1,6 +1,8 @@
 package corepayload
 
 import (
+	"fmt"
+
 	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/errcore"
@@ -74,6 +76,21 @@ func (it newPayloadWrapperCreator) DeserializeUsingJsonResult(
 	return empty, nil
 }
 
+func (it newPayloadWrapperCreator) UsingBytesCreateInstructionTypeStringer(
+	createInstruction *BytesCreateInstructionStringer,
+) *PayloadWrapper {
+	return it.createInternalUsingBytes(
+		createInstruction.Name,
+		createInstruction.Identifier,
+		createInstruction.TaskTypeName.String(),
+		createInstruction.CategoryName.String(),
+		createInstruction.EntityType,
+		createInstruction.HasManyRecords,
+		createInstruction.Payloads,
+		createInstruction.Attributes,
+		nil)
+}
+
 func (it newPayloadWrapperCreator) UsingBytesCreateInstruction(
 	createInstruction *BytesCreateInstruction,
 ) *PayloadWrapper {
@@ -87,6 +104,12 @@ func (it newPayloadWrapperCreator) UsingBytesCreateInstruction(
 		createInstruction.Payloads,
 		createInstruction.Attributes,
 		nil)
+}
+
+func (it newPayloadWrapperCreator) UsingCreateInstructionTypeStringer(
+	createInstruction *PayloadCreateInstructionTypeStringer,
+) *PayloadWrapper {
+	return it.UsingCreateInstruction(createInstruction.PayloadCreateInstruction())
 }
 
 func (it newPayloadWrapperCreator) UsingCreateInstruction(
@@ -170,6 +193,22 @@ func (it newPayloadWrapperCreator) Create(
 		})
 }
 
+func (it newPayloadWrapperCreator) CreateUsingTypeStringer(
+	name, id string,
+	taskNameStringer, categoryStringer fmt.Stringer,
+	record interface{},
+) *PayloadWrapper {
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
+			Name:         name,
+			Identifier:   id,
+			TaskTypeName: taskNameStringer.String(),
+			EntityType:   reflectinternal.SafeTypeName(record),
+			CategoryName: categoryStringer.String(),
+			Payloads:     record,
+		})
+}
+
 func (it newPayloadWrapperCreator) NameIdCategory(
 	name, id, category string,
 	record interface{},
@@ -184,6 +223,25 @@ func (it newPayloadWrapperCreator) NameIdCategory(
 			TaskTypeName: entity,
 			EntityType:   entity,
 			CategoryName: category,
+			Payloads:     record,
+		})
+}
+
+func (it newPayloadWrapperCreator) NameIdCategoryStringer(
+	name, id string,
+	categoryStringer fmt.Stringer,
+	record interface{},
+) *PayloadWrapper {
+	entity := reflectinternal.SafeTypeName(
+		record)
+
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
+			Name:         name,
+			Identifier:   id,
+			TaskTypeName: entity,
+			EntityType:   entity,
+			CategoryName: categoryStringer.String(),
 			Payloads:     record,
 		})
 }
@@ -205,6 +263,24 @@ func (it newPayloadWrapperCreator) Records(
 		})
 }
 
+func (it newPayloadWrapperCreator) RecordsTypeStringer(
+	name, id string,
+	taskNameStringer, categoryStringer fmt.Stringer,
+	records interface{},
+) *PayloadWrapper {
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
+			Name:         name,
+			Identifier:   id,
+			TaskTypeName: taskNameStringer.String(),
+			EntityType: reflectinternal.SafeTypeNameOfSliceOrSingle(
+				false, records),
+			CategoryName:   categoryStringer.String(),
+			HasManyRecords: true,
+			Payloads:       records,
+		})
+}
+
 func (it newPayloadWrapperCreator) Record(
 	name, id, taskName, category string,
 	record interface{},
@@ -221,6 +297,23 @@ func (it newPayloadWrapperCreator) Record(
 		})
 }
 
+func (it newPayloadWrapperCreator) RecordTypeStringer(
+	name, id string,
+	taskNameStringer, categoryStringer fmt.Stringer,
+	record interface{},
+) *PayloadWrapper {
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
+			Name:         name,
+			Identifier:   id,
+			TaskTypeName: taskNameStringer.String(),
+			EntityType: reflectinternal.SafeTypeName(
+				record),
+			CategoryName: categoryStringer.String(),
+			Payloads:     record,
+		})
+}
+
 func (it newPayloadWrapperCreator) NameIdTaskRecord(
 	name, id, taskName string,
 	record interface{},
@@ -230,6 +323,21 @@ func (it newPayloadWrapperCreator) NameIdTaskRecord(
 			Name:         name,
 			Identifier:   id,
 			TaskTypeName: taskName,
+			EntityType:   reflectinternal.SafeTypeName(record),
+			Payloads:     record,
+		})
+}
+
+func (it newPayloadWrapperCreator) NameIdTaskStringerRecord(
+	name, id string,
+	taskNameStringer fmt.Stringer,
+	record interface{},
+) *PayloadWrapper {
+	return it.UsingCreateInstruction(
+		&PayloadCreateInstruction{
+			Name:         name,
+			Identifier:   id,
+			TaskTypeName: taskNameStringer.String(),
 			EntityType:   reflectinternal.SafeTypeName(record),
 			Payloads:     record,
 		})
@@ -371,6 +479,47 @@ func (it newPayloadWrapperCreator) All(
 		TaskTypeName:   taskName,
 		EntityType:     entityTypeName,
 		CategoryName:   category,
+		HasManyRecords: hasManyRecords,
+		Payloads:       payloads,
+		Attributes:     attributes,
+	}
+}
+
+func (it newPayloadWrapperCreator) AllUsingStringer(
+	name, id string,
+	taskNameStringer,
+	categoryStringer fmt.Stringer,
+	entityTypeName string,
+	hasManyRecords bool,
+	attributes *Attributes,
+	payloads []byte,
+) *PayloadWrapper {
+	return &PayloadWrapper{
+		Name:           name,
+		Identifier:     id,
+		TaskTypeName:   taskNameStringer.String(),
+		EntityType:     entityTypeName,
+		CategoryName:   categoryStringer.String(),
+		HasManyRecords: hasManyRecords,
+		Payloads:       payloads,
+		Attributes:     attributes,
+	}
+}
+
+func (it newPayloadWrapperCreator) AllUsingExpander(
+	name, id string,
+	typeExpander PayloadTypeExpander,
+	entityTypeName string,
+	hasManyRecords bool,
+	attributes *Attributes,
+	payloads []byte,
+) *PayloadWrapper {
+	return &PayloadWrapper{
+		Name:           name,
+		Identifier:     id,
+		TaskTypeName:   typeExpander.TaskTypeStringer.String(),
+		EntityType:     entityTypeName,
+		CategoryName:   typeExpander.CategoryStringer.String(),
 		HasManyRecords: hasManyRecords,
 		Payloads:       payloads,
 		Attributes:     attributes,

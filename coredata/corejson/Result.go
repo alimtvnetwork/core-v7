@@ -50,10 +50,10 @@ func (it *Result) JsonStringPtr() *string {
 	return it.jsonString
 }
 
-func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
+func (it Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
 	var prettyJSON bytes.Buffer
 
-	if it == nil || len(it.Bytes) == 0 {
+	if it.IsEmpty() {
 		return &prettyJSON, nil
 	}
 
@@ -66,7 +66,7 @@ func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error)
 	return &prettyJSON, err
 }
 
-func (it *Result) PrettyJsonString() string {
+func (it Result) PrettyJsonString() string {
 	if it.IsEmptyJson() {
 		return ""
 	}
@@ -170,7 +170,7 @@ func (it *Result) SafeValuesPtr() *[]byte {
 	return &it.Bytes
 }
 
-func (it *Result) Raw() ([]byte, error) {
+func (it Result) Raw() ([]byte, error) {
 	return it.SafeBytes(), it.MeaningfulError()
 }
 

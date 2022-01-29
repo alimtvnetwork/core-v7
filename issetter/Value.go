@@ -109,6 +109,10 @@ func (it Value) IsYes() bool {
 	return it == True
 }
 
+func (it Value) Boolean() bool {
+	return it == True
+}
+
 func (it Value) IsOnLogically() bool {
 	return it.IsInitialized() && trueMap[it]
 }
@@ -171,11 +175,19 @@ func (it *Value) GetSetBoolOnInvalidFunc(
 	return it.IsTrue()
 }
 
-// LazyEvaluate
+func (it Value) ToBooleanValue() Value {
+	return convSetUnsetToTrueFalseMap[it]
+}
+
+func (it Value) ToSetUnsetValue() Value {
+	return convTrueFalseToSetUnsetMap[it]
+}
+
+// LazyEvaluateBool
 //
 // Only execute evaluatorFunc if Uninitialized
 // and then set True to self and returns t/f based on called or not
-func (it *Value) LazyEvaluate(
+func (it *Value) LazyEvaluateBool(
 	evaluatorFunc func(),
 ) (isCalled bool) {
 	if it.IsDefinedBoolean() {
@@ -186,6 +198,23 @@ func (it *Value) LazyEvaluate(
 	*it = True
 
 	return it.IsTrue()
+}
+
+// LazyEvaluateBool
+//
+// Only execute evaluatorFunc if Uninitialized
+// and then set True to self and returns t/f based on called or not
+func (it *Value) LazyEvaluateSet(
+	evaluatorFunc func(),
+) (isCalled bool) {
+	if it.IsInitSet() {
+		return false
+	}
+
+	evaluatorFunc()
+	*it = Set
+
+	return it.IsSet()
 }
 
 // IsWildcardOrBool

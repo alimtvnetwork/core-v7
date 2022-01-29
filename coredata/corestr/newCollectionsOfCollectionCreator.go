@@ -12,7 +12,7 @@ func (it *newCollectionsOfCollectionCreator) Cap(
 	collection := make([]*Collection, constants.Zero, capacity)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -20,7 +20,7 @@ func (it *newCollectionsOfCollectionCreator) Empty() *CollectionsOfCollection {
 	collection := make([]*Collection, constants.Zero)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -142,6 +142,6 @@ func (it *newCollectionsOfCollectionCreator) LenCap(
 		capacity)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }

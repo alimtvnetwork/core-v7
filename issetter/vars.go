@@ -134,4 +134,22 @@ var (
 		Unset:         "unset",
 		Wildcard:      "*",
 	}
+
+	convSetUnsetToTrueFalseMap = map[Value]Value{
+		Uninitialized: Uninitialized,
+		True:          True,
+		False:         False,
+		Set:           True,
+		Unset:         False,
+		Wildcard:      Wildcard,
+	}
+
+	convTrueFalseToSetUnsetMap = map[Value]Value{
+		Uninitialized: Uninitialized,
+		True:          Set,
+		False:         Unset,
+		Set:           Set,
+		Unset:         Unset,
+		Wildcard:      Wildcard,
+	}
 )

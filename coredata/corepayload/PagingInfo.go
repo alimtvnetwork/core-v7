@@ -5,6 +5,11 @@ type PagingInfo struct {
 	TotalPages, PerPageItems, TotalItems int
 }
 
+func (it *PagingInfo) IsEmpty() bool {
+	return it == nil ||
+		it.TotalPages == 0 && it.TotalItems == 0
+}
+
 func (it *PagingInfo) IsEqual(right *PagingInfo) bool {
 	if it == nil && right == nil {
 		return true

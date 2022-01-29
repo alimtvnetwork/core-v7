@@ -925,7 +925,7 @@ func (it *Collection) GetPagedCollection(
 			oneBasedPageIndex,
 		)
 
-		(*collectionOfCollection.items)[oneBasedPageIndex-1] = pagedCollection
+		collectionOfCollection.items[oneBasedPageIndex-1] = pagedCollection
 
 		wg.Done()
 	}

@@ -11,6 +11,7 @@ type mutexMap struct {
 }
 
 var globalMutex = sync.Mutex{}
+
 var items = make(
 	map[string]*sync.Mutex,
 	constants.ArbitraryCapacity10)

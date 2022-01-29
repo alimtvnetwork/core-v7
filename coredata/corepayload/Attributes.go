@@ -15,6 +15,7 @@ import (
 
 type Attributes struct {
 	ErrorMessage     string                   `json:"ErrorMessage,omitempty"`
+	AuthInfo         *AuthInfo                `json:"AuthInfo,omitempty"`
 	PagingInfo       *PagingInfo              `json:"PagingInfo,omitempty"`
 	KeyValuePairs    *corestr.Hashmap         `json:"KeyValuePairs,omitempty"`
 	AnyKeyValuePairs *coredynamic.MapAnyItems `json:"AnyKeyValuePairs,omitempty"`
@@ -206,6 +207,101 @@ func (it *Attributes) IsEmpty() bool {
 
 func (it *Attributes) HasItems() bool {
 	return !it.IsEmpty()
+}
+
+func (it *Attributes) IsErrorMessageEmpty() bool {
+	return it == nil ||
+		it.ErrorMessage == ""
+}
+
+func (it *Attributes) IsPagingInfoEmpty() bool {
+	return it == nil ||
+		it.PagingInfo.IsEmpty()
+}
+
+func (it *Attributes) IsKeyValuePairsEmpty() bool {
+	return it == nil ||
+		it.KeyValuePairs.IsEmpty()
+}
+
+func (it *Attributes) IsAnyKeyValuePairsEmpty() bool {
+	return it == nil ||
+		it.AnyKeyValuePairs.IsEmpty()
+}
+
+func (it *Attributes) IsUserInfoEmpty() bool {
+	return it == nil ||
+		it.AuthInfo.IsUserInfoEmpty()
+}
+
+func (it *Attributes) VirtualUser() *User {
+	if it.IsUserInfoEmpty() {
+		return nil
+	}
+
+	return it.AuthInfo.UserInfo.User
+}
+
+func (it *Attributes) SystemUser() *User {
+	if it.IsUserInfoEmpty() {
+		return nil
+	}
+
+	return it.AuthInfo.UserInfo.SystemUser
+}
+
+func (it *Attributes) SessionUser() *User {
+	if it.IsSessionInfoEmpty() {
+		return nil
+	}
+
+	return it.AuthInfo.SessionInfo.User
+}
+
+func (it *Attributes) IsAuthInfoEmpty() bool {
+	return it == nil ||
+		it.AuthInfo.IsEmpty()
+}
+
+func (it *Attributes) IsSessionInfoEmpty() bool {
+	return it == nil ||
+		it.AuthInfo.IsSessionInfoEmpty()
+}
+
+func (it *Attributes) HasUserInfo() bool {
+	return !it.IsUserInfoEmpty()
+}
+
+func (it *Attributes) HasAuthInfo() bool {
+	return !it.IsAuthInfoEmpty()
+}
+
+func (it *Attributes) HasSessionInfo() bool {
+	return !it.IsSessionInfoEmpty()
+}
+
+func (it *Attributes) SessionInfo() *SessionInfo {
+	if it.IsSessionInfoEmpty() {
+		return nil
+	}
+
+	return it.AuthInfo.SessionInfo
+}
+
+func (it *Attributes) AuthType() string {
+	if it.IsAuthInfoEmpty() {
+		return ""
+	}
+
+	return it.AuthInfo.ActionType
+}
+
+func (it *Attributes) ResourceName() string {
+	if it.IsAuthInfoEmpty() {
+		return ""
+	}
+
+	return it.AuthInfo.ResourceName
 }
 
 func (it *Attributes) HasStringKeyValuePairs() bool {
@@ -448,6 +544,7 @@ func (it *Attributes) ClonePtr(
 	return New.
 		Attributes.
 		All(
+			it.AuthInfo,
 			it.KeyValuePairs,
 			it.AnyKeyValuePairs,
 			it.PagingInfo,
@@ -465,6 +562,7 @@ func (it *Attributes) deepClonePtr() (*Attributes, error) {
 	return New.
 		Attributes.
 		All(
+			it.AuthInfo.ClonePtr(),
 			it.KeyValuePairs.ClonePtr(),
 			anyMap,
 			it.PagingInfo.ClonePtr(),
