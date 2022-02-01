@@ -1,11 +1,19 @@
 package bytetype
 
 import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Variant byte
+
+func (it Variant) IsValid() bool {
+	return it != 0
+}
+
+func (it Variant) IsInvalid() bool {
+	return it == 0
+}
 
 func (it Variant) NameValue() string {
 	return BasicEnumImpl.NameWithValue(it)
@@ -20,15 +28,35 @@ func (it Variant) Name() string {
 }
 
 func (it Variant) UnmarshallToValue(jsonUnmarshallingValue []byte) (byte, error) {
-	panic("implement me")
+	newEmpty := Variant(0)
+	err := corejson.
+		Deserialize.
+		UsingBytes(
+			jsonUnmarshallingValue, &newEmpty)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return newEmpty.Value(), nil
 }
 
 func (it Variant) MarshalJSON() ([]byte, error) {
 	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
 }
 
-func (it Variant) UnmarshalJSON(data []byte) error {
-	panic(errcore.NotImplementedType.ErrorNoRefs("UnmarshalJSON not implemented for bytetype."))
+func (it *Variant) UnmarshalJSON(data []byte) error {
+	newEmpty := Variant(0)
+	err := corejson.
+		Deserialize.
+		UsingBytes(
+			data, &newEmpty)
+
+	if err == nil {
+		*it = newEmpty
+	}
+
+	return err
 }
 
 func (it Variant) String() string {
@@ -156,5 +184,5 @@ func (it Variant) TypeName() string {
 }
 
 func (it Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+	return &it
 }

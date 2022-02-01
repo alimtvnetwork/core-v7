@@ -7,7 +7,7 @@ import (
 
 var (
 	Ranges = [...]string{
-		Uninitialized:                    "Uninitialized",
+		Invalid:                          "Invalid",
 		Create:                           "Create",
 		Read:                             "Read",
 		Update:                           "Update",
@@ -62,7 +62,7 @@ var (
 	}
 
 	RangesMap = map[string]Request{
-		"Uninitialized":                    Uninitialized,
+		"Invalid":                          Invalid,
 		"Create":                           Create,
 		"Read":                             Read,
 		"Update":                           Update,
@@ -117,6 +117,6 @@ var (
 	}
 
 	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
-		reflectinternal.TypeName(Uninitialized),
+		reflectinternal.TypeName(Invalid),
 		Ranges[:])
 )

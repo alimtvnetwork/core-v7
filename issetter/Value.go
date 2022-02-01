@@ -485,6 +485,14 @@ func (it Value) TrueFalseName() string {
 	return trueFalseNames[it]
 }
 
+func (it Value) OnOffLowercaseName() string {
+	return lowerCaseOnOffNames[it]
+}
+
+func (it Value) OnOffName() string {
+	return onOffNames[it]
+}
+
 func (it Value) TrueFalseLowercaseName() string {
 	return trueFalseLowerNames[it]
 }

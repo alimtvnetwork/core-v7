@@ -7,6 +7,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 type BaseTestCase struct {
@@ -33,11 +34,11 @@ func (it *BaseTestCase) TypesValidationMustPasses(t *testing.T) {
 
 func (it *BaseTestCase) TypeValidationError() error {
 	var sliceErr []string
-	arrangeInputActualType := reflect.TypeOf(it.ArrangeExpectedType)
+	arrangeInputActualType := reflect.TypeOf(it.ArrangeInput)
 	actualInputActualType := reflect.TypeOf(it.ActualInput)
 	expectedInputActualType := reflect.TypeOf(it.ExpectedInput)
 
-	if arrangeInputActualType != it.ArrangeExpectedType {
+	if reflectinternal.IsNotNull(it.ArrangeInput) && arrangeInputActualType != it.ArrangeExpectedType {
 		sliceErr = append(
 			sliceErr,
 			errcore.Expecting(
@@ -46,7 +47,7 @@ func (it *BaseTestCase) TypeValidationError() error {
 				arrangeInputActualType))
 	}
 
-	if actualInputActualType != it.ActualExpectedType {
+	if reflectinternal.IsNotNull(it.ActualInput) && actualInputActualType != it.ActualExpectedType {
 		sliceErr = append(
 			sliceErr,
 			errcore.Expecting(
@@ -55,7 +56,7 @@ func (it *BaseTestCase) TypeValidationError() error {
 				actualInputActualType))
 	}
 
-	if expectedInputActualType != it.ExpectedTypeOfExpected {
+	if reflectinternal.IsNotNull(it.ExpectedInput) && expectedInputActualType != it.ExpectedTypeOfExpected {
 		sliceErr = append(
 			sliceErr,
 			errcore.Expecting(

@@ -41,12 +41,14 @@ var (
 		"Yes":                                  True,
 		"y":                                    True,
 		"Y":                                    True,
+		"1":                                    True,
 		"false":                                False,
 		"False":                                False,
 		"no":                                   False,
 		"No":                                   False,
 		"n":                                    False,
 		"N":                                    False,
+		"2":                                    True,
 		"*":                                    Wildcard,
 		"Wildcard":                             Wildcard,
 		"wildcard":                             Wildcard,
@@ -105,6 +107,24 @@ var (
 		False:         "No",
 		Set:           "Yes",
 		Unset:         "No",
+		Wildcard:      "*",
+	}
+
+	lowerCaseOnOffNames = map[Value]string{
+		Uninitialized: "-",
+		True:          "on",
+		False:         "off",
+		Set:           "on",
+		Unset:         "off",
+		Wildcard:      "*",
+	}
+
+	onOffNames = map[Value]string{
+		Uninitialized: "-",
+		True:          "On",
+		False:         "Off",
+		Set:           "On",
+		Unset:         "Off",
 		Wildcard:      "*",
 	}
 

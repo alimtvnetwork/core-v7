@@ -19,7 +19,7 @@ import (
 func AnyItemsToCsvString(
 	joiner string,
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	references ...interface{},
 ) string {
 	if len(references) == 0 {

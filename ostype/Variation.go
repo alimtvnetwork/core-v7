@@ -29,6 +29,14 @@ const (
 	Aix
 )
 
+func (it Variation) IsValid() bool {
+	return it.Value() != 0
+}
+
+func (it Variation) IsInvalid() bool {
+	return it.Value() == 0
+}
+
 func (it Variation) IsByte(another byte) bool {
 	return it == Variation(another)
 }
@@ -196,6 +204,6 @@ func (it *Variation) AsJsonContractsBinder() corejson.JsonMarshaller {
 	return it
 }
 
-func (it *Variation) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Variation) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
+	return &it
 }

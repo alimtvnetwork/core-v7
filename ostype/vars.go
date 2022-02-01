@@ -17,7 +17,7 @@ var (
 		"UnixGroup",
 		"AndroidGroup",
 		"JavaScriptGroup",
-		"UnknownGroup",
+		"InvalidGroup",
 	}
 
 	basicEnumImplOsType = enumimpl.NewBasicByteUsingIndexedSlice(

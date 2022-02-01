@@ -49,6 +49,9 @@ const (
 	StringWithDoubleQuoteFormat                  = "\"%s\""
 	StringWithSingleQuoteFormat                  = "'%s'"
 	MessageWrapMessageFormat                     = "%s (%s)"
+	FromToFormat                                 = "{From : %q, To: %q}"            // From, To name
+	SourceDestinationFormat                      = "{Source : %q, Destination: %q}" // source, destination
+	RenameFormat                                 = "{Existing : %q, New: %q}"       // existing, new
 	ValueWrapValueFormat                         = "%v (%v)"
 	FilePathEmpty                                = "File path was empty(\"\")."
 	EnumOnlySupportedFormat                      = "enum: %T, " +

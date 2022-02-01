@@ -28,7 +28,16 @@ const (
 	NotContains   // invert of Anywhere
 	NotAnyChars   // invert of AnyChars
 	NotMatchRegex // invert of Regex
+	Invalid
 )
+
+func (it Variant) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Variant) IsInvalid() bool {
+	return it == Invalid
+}
 
 func (it *Variant) Name() string {
 	return basicEnumImpl.ToEnumString(it.ValueByte())
@@ -147,8 +156,8 @@ func (it *Variant) RangeNamesCsv() string {
 	return basicEnumImpl.RangeNamesCsv()
 }
 
-func (it *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+func (it Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return &it
 }
 
 func (it *Variant) MaxByte() byte {

@@ -1,5 +1,5 @@
 package coreinterface
 
-type Deserializer interface {
+type FieldBytesToPointerDeserializer interface {
 	Deserialize(toPtr interface{}) error
 }

@@ -20,6 +20,7 @@ var (
 		NotContains:   "NotContains",
 		NotAnyChars:   "NotAnyChars",
 		NotMatchRegex: "NotMatchRegex",
+		Invalid:       "Invalid",
 	}
 
 	basicEnumImpl = enumimpl.

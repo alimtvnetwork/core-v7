@@ -19,7 +19,7 @@ import (
 func StringsToCsvString(
 	joiner string,
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	references ...string,
 ) string {
 	if len(references) == 0 {

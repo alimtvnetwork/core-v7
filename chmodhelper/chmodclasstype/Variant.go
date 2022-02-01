@@ -7,7 +7,7 @@ import (
 type Variant byte
 
 const (
-	UnInitialized Variant = iota
+	Invalid Variant = iota
 	All
 	Owner
 	Group
@@ -18,7 +18,7 @@ const (
 )
 
 func (it Variant) IsUnInitialized() bool {
-	return it == UnInitialized
+	return it == Invalid
 }
 
 func (it Variant) IsAll() bool {
@@ -47,6 +47,14 @@ func (it Variant) IsGroupOther() bool {
 
 func (it Variant) IsOwnerOther() bool {
 	return it == OwnerOther
+}
+
+func (it Variant) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Variant) IsInvalid() bool {
+	return it == Invalid
 }
 
 func (it *Variant) Name() string {

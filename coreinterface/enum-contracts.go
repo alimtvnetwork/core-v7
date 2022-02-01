@@ -7,6 +7,8 @@ type BasicEnumer interface {
 	NameValuer
 	ToNumberStringer
 	Stringer
+	IsValidChecker
+	IsInvalidChecker
 	corejson.JsonMarshaller
 }
 

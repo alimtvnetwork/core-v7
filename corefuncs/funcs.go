@@ -13,7 +13,8 @@ type (
 	IsApplyFunc                 func() (isSuccess bool)
 	InOutFunc                   func(input interface{}) (output interface{})
 	InOutErrFunc                func(input interface{}) (output interface{}, err error)
-	DeserializeOutputFunc       func(input interface{}) (deserializedBytes []byte, err error)
+	SerializeOutputFunc         func(input interface{}) (serializedBytes []byte, err error)
+	SerializerVoidFunc          func() (serializedBytes []byte, err error)
 	InActionReturnsErrFunc      func(input interface{}) (err error)
 	NamedActionFunc             func(name string)
 	ActionReturnsErrorFunc      func() error

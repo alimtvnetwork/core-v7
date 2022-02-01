@@ -5,7 +5,7 @@ import "strings"
 func CompileStringersToString(
 	joiner string,
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	compileStringerFunctions ...func() string,
 ) string {
 	slice := CompileStringersToCsvStrings(

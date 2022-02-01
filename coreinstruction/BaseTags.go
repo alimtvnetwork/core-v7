@@ -9,7 +9,7 @@ import (
 
 type BaseTags struct {
 	tagsHashset *corestr.Hashset
-	Tags        *[]string `json:"Tags,omitempty"`
+	Tags        []string `json:"Tags,omitempty"`
 }
 
 func NewTagsPtr(tags *[]string) *BaseTags {
@@ -23,12 +23,12 @@ func NewTagsPtr(tags *[]string) *BaseTags {
 func NewTags(tags []string) *BaseTags {
 	if len(tags) == 0 {
 		return &BaseTags{
-			Tags: &[]string{},
+			Tags: []string{},
 		}
 	}
 
 	return &BaseTags{
-		Tags: &tags,
+		Tags: tags,
 	}
 }
 
@@ -37,7 +37,7 @@ func (it BaseTags) TagsLength() int {
 		return constants.Zero
 	}
 
-	return len(*it.Tags)
+	return len(it.Tags)
 }
 
 func (it BaseTags) IsTagsEmpty() bool {
@@ -49,7 +49,7 @@ func (it BaseTags) TagsHashset() *corestr.Hashset {
 		return it.tagsHashset
 	}
 
-	it.tagsHashset = corestr.New.Hashset.StringsPtr(
+	it.tagsHashset = corestr.New.Hashset.Strings(
 		it.Tags)
 
 	return it.tagsHashset
@@ -80,7 +80,7 @@ func (it BaseTags) IsAnyTagMatchesRegex(regexp2 *regexp.Regexp) bool {
 		return false
 	}
 
-	for _, s := range *it.Tags {
+	for _, s := range it.Tags {
 		if regexp2.MatchString(s) {
 			return true
 		}

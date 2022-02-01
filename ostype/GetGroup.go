@@ -20,5 +20,5 @@ func GetGroup(rawRuntimeGoos string) Group {
 		return UnixGroup
 	}
 
-	return UnknownGroup
+	return InvalidGroup
 }

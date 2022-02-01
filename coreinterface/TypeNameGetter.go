@@ -1,5 +1,5 @@
 package coreinterface
 
-type TypeNamer interface {
+type TypeNameGetter interface {
 	TypeName() string
 }

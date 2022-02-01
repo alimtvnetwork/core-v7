@@ -9,11 +9,20 @@ import (
 type Index byte
 
 const (
-	Major Index = iota
-	Minor Index = 1
-	Patch Index = 2
-	Build Index = 3
+	Major   Index = iota
+	Minor   Index = 1
+	Patch   Index = 2
+	Build   Index = 3
+	Invalid Index = 4
 )
+
+func (it Index) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Index) IsInvalid() bool {
+	return it == Invalid
+}
 
 func (it *Index) Name() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())

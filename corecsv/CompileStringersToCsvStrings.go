@@ -14,7 +14,7 @@ import (
 //  - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
 func CompileStringersToCsvStrings(
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	compileStringerFunctions ...func() string,
 ) []string {
 	if len(compileStringerFunctions) == 0 {

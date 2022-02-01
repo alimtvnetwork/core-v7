@@ -14,7 +14,7 @@ type Request byte
 
 // https://www.restapitutorial.com/lessons/httpmethods.html
 const (
-	Uninitialized Request = iota
+	Invalid Request = iota
 	Create
 	Read
 	Update
@@ -68,12 +68,20 @@ const (
 	DynamicAction
 )
 
+func (it Request) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Request) IsInvalid() bool {
+	return it == Invalid
+}
+
 func (it Request) NameValue() string {
 	return BasicEnumImpl.NameWithValue(it)
 }
 
 func (it Request) IsUninitialized() bool {
-	return it == Uninitialized
+	return it == Invalid
 }
 
 func (it Request) RangeNamesCsv() string {
@@ -585,7 +593,7 @@ func (it Request) ToPtr() *Request {
 
 func (it *Request) ToSimple() Request {
 	if it == nil {
-		return Uninitialized
+		return Invalid
 	}
 
 	return *it
@@ -595,14 +603,14 @@ func (it Request) MarshalJSON() ([]byte, error) {
 	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
 }
 
-func (it *Request) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+func (it Request) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
+	return &it
 }
 
 func (it *Request) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
 }
 
-func (it *Request) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Request) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
+	return &it
 }

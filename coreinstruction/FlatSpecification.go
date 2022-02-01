@@ -3,12 +3,12 @@ package coreinstruction
 import "gitlab.com/evatix-go/core/coredata/stringslice"
 
 type FlatSpecification struct {
-	Id       string    `json:"Id"`
-	Display  string    `json:"Display"`
-	Type     string    `json:"Type"`
-	IsGlobal bool      `json:"IsGlobal"`
-	Tags     *[]string `json:"Tags,omitempty"`
-	IsValid  bool      `json:"IsValid,omitempty"`
+	Id       string   `json:"Id"`
+	Display  string   `json:"Display"`
+	Type     string   `json:"Type"`
+	IsGlobal bool     `json:"IsGlobal"`
+	Tags     []string `json:"Tags,omitempty"`
+	IsValid  bool     `json:"IsValid,omitempty"`
 	spec     *Specification
 }
 
@@ -18,7 +18,7 @@ func InvalidFlatSpecification() *FlatSpecification {
 		Display:  "",
 		Type:     "",
 		IsGlobal: false,
-		Tags:     &[]string{},
+		Tags:     []string{},
 		IsValid:  false,
 	}
 }
@@ -35,61 +35,61 @@ func NewFlatSpecificationUsingSpec(spec *Specification, isValid bool) *FlatSpeci
 	}
 }
 
-func (receiver *FlatSpecification) BaseIdentifier() BaseIdentifier {
-	return receiver.Spec().BaseIdentifier
+func (it *FlatSpecification) BaseIdentifier() BaseIdentifier {
+	return it.Spec().BaseIdentifier
 }
 
-func (receiver *FlatSpecification) BaseTags() BaseTags {
-	return receiver.Spec().BaseTags
+func (it *FlatSpecification) BaseTags() BaseTags {
+	return it.Spec().BaseTags
 }
 
-func (receiver *FlatSpecification) BaseIsGlobal() BaseIsGlobal {
-	return receiver.Spec().BaseIsGlobal
+func (it *FlatSpecification) BaseIsGlobal() BaseIsGlobal {
+	return it.Spec().BaseIsGlobal
 }
 
-func (receiver *FlatSpecification) BaseDisplay() BaseDisplay {
-	return receiver.Spec().BaseDisplay
+func (it *FlatSpecification) BaseDisplay() BaseDisplay {
+	return it.Spec().BaseDisplay
 }
 
-func (receiver *FlatSpecification) BaseType() BaseType {
-	return receiver.Spec().BaseType
+func (it *FlatSpecification) BaseType() BaseType {
+	return it.Spec().BaseType
 }
 
-func (receiver *FlatSpecification) Spec() *Specification {
-	if receiver == nil {
+func (it *FlatSpecification) Spec() *Specification {
+	if it == nil {
 		return nil
 	}
 
-	if receiver.spec != nil {
-		return receiver.spec
+	if it.spec != nil {
+		return it.spec
 	}
 
-	receiver.spec = &Specification{
+	it.spec = &Specification{
 		BaseIdDisplayType: BaseIdDisplayType{
-			BaseIdentifier: BaseIdentifier{Id: receiver.Id},
-			BaseDisplay:    BaseDisplay{receiver.Display},
-			BaseType:       BaseType{receiver.Type},
+			BaseIdentifier: BaseIdentifier{Id: it.Id},
+			BaseDisplay:    BaseDisplay{it.Display},
+			BaseType:       BaseType{it.Type},
 		},
 		BaseTags: BaseTags{
-			Tags: receiver.Tags,
+			Tags: it.Tags,
 		},
-		BaseIsGlobal: BaseIsGlobal{IsGlobal: receiver.IsGlobal},
+		BaseIsGlobal: BaseIsGlobal{IsGlobal: it.IsGlobal},
 	}
 
-	return receiver.spec
+	return it.spec
 }
 
-func (receiver *FlatSpecification) Clone() *FlatSpecification {
-	if receiver == nil {
+func (it *FlatSpecification) Clone() *FlatSpecification {
+	if it == nil {
 		return nil
 	}
 
 	return &FlatSpecification{
-		Id:       receiver.Id,
-		Display:  receiver.Display,
-		Type:     receiver.Type,
-		IsGlobal: receiver.IsGlobal,
-		Tags:     stringslice.ClonePtr(receiver.Tags),
-		IsValid:  receiver.IsValid,
+		Id:       it.Id,
+		Display:  it.Display,
+		Type:     it.Type,
+		IsGlobal: it.IsGlobal,
+		Tags:     stringslice.Clone(it.Tags),
+		IsValid:  it.IsValid,
 	}
 }

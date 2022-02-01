@@ -14,7 +14,7 @@ import (
 //  - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
 func AnyItemsToCsvStrings(
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	references ...interface{},
 ) []string {
 	if len(references) == 0 {

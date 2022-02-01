@@ -11,7 +11,7 @@ const (
 	WindowsGroup Group = iota
 	UnixGroup
 	AndroidGroup
-	UnknownGroup
+	InvalidGroup
 )
 
 func (it Group) Is(another Group) bool {
@@ -30,8 +30,8 @@ func (it Group) IsAndroid() bool {
 	return it == AndroidGroup
 }
 
-func (it Group) IsUnknown() bool {
-	return it == UnknownGroup
+func (it Group) IsInvalidGroup() bool {
+	return it == InvalidGroup
 }
 
 func (it Group) Byte() byte {
@@ -102,6 +102,14 @@ func (it Group) String() string {
 	return basicEnumImplOsGroup.ToEnumString(it.Value())
 }
 
+func (it Group) IsValid() bool {
+	return it != InvalidGroup
+}
+
+func (it Group) IsInvalid() bool {
+	return it == InvalidGroup
+}
+
 func (it *Group) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
 	return it
 }
@@ -110,6 +118,6 @@ func (it *Group) AsJsonContractsBinder() corejson.JsonMarshaller {
 	return it
 }
 
-func (it *Group) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Group) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
+	return &it
 }
