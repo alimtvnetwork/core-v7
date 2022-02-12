@@ -39,7 +39,7 @@ func (it Variation) IsEnumEqual(enum enuminf.BasicEnumer) bool {
 
 func (it *Variation) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
 	for _, enum := range enums {
-		if enum.IsEnumEqual(it) {
+		if it.IsEnumEqual(enum) {
 			return true
 		}
 	}
@@ -260,6 +260,10 @@ func (it Variation) Value() byte {
 
 func (it Variation) String() string {
 	return basicEnumImplOsType.ToEnumString(it.Value())
+}
+
+func (it Variation) EnumType() enuminf.EnumTyper {
+	return basicEnumImplOsType.EnumType()
 }
 
 func (it Variation) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {

@@ -41,7 +41,7 @@ func (it Variant) IsEnumEqual(enum enuminf.BasicEnumer) bool {
 
 func (it *Variant) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
 	for _, enum := range enums {
-		if enum.IsEnumEqual(it) {
+		if it.IsEnumEqual(enum) {
 			return true
 		}
 	}
@@ -222,10 +222,6 @@ func (it Variant) RangeNamesCsv() string {
 	return basicEnumImpl.RangeNamesCsv()
 }
 
-func (it Variant) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
-	return &it
-}
-
 func (it *Variant) MaxByte() byte {
 	return basicEnumImpl.Max()
 }
@@ -384,6 +380,14 @@ func (it *Variant) IsCompareSuccessNonCaseSensitive(content, search string) bool
 		content,
 		search,
 		true)
+}
+
+func (it Variant) EnumType() enuminf.EnumTyper {
+	return basicEnumImpl.EnumType()
+}
+
+func (it Variant) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
+	return &it
 }
 
 func (it Variant) AsBasicByteEnumContractsBinder() enuminf.BasicByteEnumContractsBinder {

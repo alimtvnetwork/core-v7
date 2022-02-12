@@ -24,7 +24,7 @@ func (it Group) IsEnumEqual(enum enuminf.BasicEnumer) bool {
 
 func (it *Group) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
 	for _, enum := range enums {
-		if enum.IsEnumEqual(it) {
+		if it.IsEnumEqual(enum) {
 			return true
 		}
 	}
@@ -174,6 +174,10 @@ func (it Group) IsValid() bool {
 
 func (it Group) IsInvalid() bool {
 	return it == InvalidGroup
+}
+
+func (it Group) EnumType() enuminf.EnumTyper {
+	return basicEnumImplOsGroup.EnumType()
 }
 
 func (it *Group) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {

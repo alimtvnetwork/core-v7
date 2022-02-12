@@ -2,12 +2,11 @@ package enumimpl
 
 import (
 	"fmt"
-	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/simplewrap"
 )
 
 type BasicInt32 struct {
@@ -16,45 +15,6 @@ type BasicInt32 struct {
 	valueToJsonDoubleQuoteStringBytesHashmap map[int32][]byte // contains value to string bytes with double quotes
 	valueNameHashmap                         map[int32]string // contains name without double quotes
 	minVal, maxVal                           int32
-}
-
-func NewBasicInt32(
-	typeName string,
-	actualValueRanges []int32,
-	stringRanges []string,
-	min, max int32,
-) *BasicInt32 {
-	enumBase := newNumberEnumBase(
-		typeName,
-		actualValueRanges,
-		stringRanges,
-		min,
-		max)
-
-	jsonDoubleQuoteNameToValueHashMap := make(map[string]int32, len(actualValueRanges))
-	valueToJsonDoubleQuoteStringBytesHashmap := make(map[int32][]byte, len(actualValueRanges))
-	valueNameHashmap := make(map[int32]string, len(actualValueRanges))
-
-	for i, actualVal := range actualValueRanges {
-		key := stringRanges[i]
-		indexJson := simplewrap.WithDoubleQuoteAny(i)
-		indexString := strconv.Itoa(i)
-		jsonName := simplewrap.WithDoubleQuote(key)
-		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexJson] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexString] = actualVal
-		valueToJsonDoubleQuoteStringBytesHashmap[actualVal] = []byte(jsonName)
-		valueNameHashmap[actualVal] = key
-	}
-
-	return &BasicInt32{
-		numberEnumBase:                           enumBase,
-		minVal:                                   min,
-		maxVal:                                   max,
-		jsonDoubleQuoteNameToValueHashMap:        jsonDoubleQuoteNameToValueHashMap,
-		valueToJsonDoubleQuoteStringBytesHashmap: valueToJsonDoubleQuoteStringBytesHashmap,
-		valueNameHashmap:                         valueNameHashmap,
-	}
 }
 
 func (it BasicInt32) IsAnyOf(value int32, checkingItems ...int32) bool {
@@ -182,4 +142,8 @@ func (it BasicInt32) UnmarshallToValue(
 	}
 
 	return it.GetValueByName(str)
+}
+
+func (it BasicInt32) EnumType() enumtype.Variant {
+	return enumtype.Integer32
 }

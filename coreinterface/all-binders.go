@@ -30,3 +30,8 @@ type JsonBytesStringerContractsBinder interface {
 	JsonCombineStringer
 	AsJsonBytesStringerContractsBinder() JsonBytesStringerContractsBinder
 }
+
+type CountStateTrackerBinder interface {
+	CountStateTracker
+	AsCountStateTrackerBinder() CountStateTrackerBinder
+}

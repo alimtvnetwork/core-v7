@@ -78,7 +78,7 @@ func (it Request) IsEnumEqual(enum enuminf.BasicEnumer) bool {
 
 func (it *Request) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
 	for _, enum := range enums {
-		if enum.IsEnumEqual(it) {
+		if it.IsEnumEqual(enum) {
 			return true
 		}
 	}
@@ -661,6 +661,10 @@ func (it *Request) ToSimple() Request {
 
 func (it Request) MarshalJSON() ([]byte, error) {
 	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+}
+
+func (it Request) EnumType() enuminf.EnumTyper {
+	return BasicEnumImpl.EnumType()
 }
 
 func (it Request) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {

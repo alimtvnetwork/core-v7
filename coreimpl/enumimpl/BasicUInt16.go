@@ -9,18 +9,15 @@ import (
 	"gitlab.com/evatix-go/core/defaulterr"
 )
 
-type BasicInt8 struct {
+type BasicUInt16 struct {
 	*numberEnumBase
-	jsonDoubleQuoteNameToValueHashMap        map[string]int8 // contains names double quotes to value
-	valueToJsonDoubleQuoteStringBytesHashmap map[int8][]byte // contains value to string bytes with double quotes
-	valueNameHashmap                         map[int8]string // contains name without double quotes
-	minVal, maxVal                           int8
+	jsonDoubleQuoteNameToValueHashMap        map[string]uint16 // contains names double quotes to value
+	valueToJsonDoubleQuoteStringBytesHashmap map[uint16][]byte // contains value to string bytes with double quotes
+	valueNameHashmap                         map[uint16]string // contains name without double quotes
+	minVal, maxVal                           uint16
 }
 
-func (it BasicInt8) IsAnyOf(
-	value int8,
-	checkingItems ...int8,
-) bool {
+func (it BasicUInt16) IsAnyOf(value uint16, checkingItems ...uint16) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -34,19 +31,21 @@ func (it BasicInt8) IsAnyOf(
 	return false
 }
 
-func (it BasicInt8) Max() int8 {
+func (it BasicUInt16) Max() uint16 {
 	return it.maxVal
 }
 
-func (it BasicInt8) Min() int8 {
+func (it BasicUInt16) Min() uint16 {
 	return it.minVal
 }
 
-func (it BasicInt8) GetValueByString(valueString string) int8 {
+func (it BasicUInt16) GetValueByString(valueString string) uint16 {
 	return it.jsonDoubleQuoteNameToValueHashMap[valueString]
 }
 
-func (it BasicInt8) GetValueByName(name string) (int8, error) {
+func (it BasicUInt16) GetValueByName(
+	name string,
+) (uint16, error) {
 	v, has := it.jsonDoubleQuoteNameToValueHashMap[name]
 
 	if has {
@@ -64,53 +63,51 @@ func (it BasicInt8) GetValueByName(name string) (int8, error) {
 	}
 
 	// has error
-	return constants.InvalidValue, enumUnmarshallingMappingFailedError(
+	return constants.Zero, enumUnmarshallingMappingFailedError(
 		it.TypeName(),
 		name,
 		it.RangeNamesCsv())
 }
 
-func (it BasicInt8) GetStringValue(input int8) string {
+func (it BasicUInt16) GetStringValue(input uint16) string {
 	return it.StringRanges()[input]
 }
 
-func (it BasicInt8) Ranges() []int8 {
-	return it.actualValueRanges.([]int8)
+func (it BasicUInt16) Ranges() []uint16 {
+	return it.actualValueRanges.([]uint16)
 }
 
-func (it BasicInt8) Hashmap() map[string]int8 {
+func (it BasicUInt16) Hashmap() map[string]uint16 {
 	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it BasicInt8) HashmapPtr() *map[string]int8 {
+func (it BasicUInt16) HashmapPtr() *map[string]uint16 {
 	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it BasicInt8) IsValidRange(value int8) bool {
+func (it BasicUInt16) IsValidRange(value uint16) bool {
 	return value >= it.minVal && value <= it.maxVal
 }
 
-// ToEnumJsonBytes
-//
-//  used for MarshalJSON from map
-func (it BasicInt8) ToEnumJsonBytes(value int8) []byte {
+// ToEnumJsonBytes used for MarshalJSON from map
+func (it BasicUInt16) ToEnumJsonBytes(value uint16) []byte {
 	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
 }
 
-func (it BasicInt8) ToEnumString(value int8) string {
+func (it BasicUInt16) ToEnumString(value uint16) string {
 	return it.valueNameHashmap[value]
 }
 
-func (it BasicInt8) AppendPrependJoinValue(
+func (it BasicUInt16) AppendPrependJoinValue(
 	joiner string,
-	appendVal, prependVal int8,
+	appendVal, prependVal uint16,
 ) string {
 	return it.ToEnumString(prependVal) +
 		joiner +
 		it.ToEnumString(appendVal)
 }
 
-func (it BasicInt8) AppendPrependJoinNamer(
+func (it BasicUInt16) AppendPrependJoinNamer(
 	joiner string,
 	appendVal, prependVal coreinterface.ToNamer,
 ) string {
@@ -119,17 +116,17 @@ func (it BasicInt8) AppendPrependJoinNamer(
 		appendVal.Name()
 }
 
-func (it BasicInt8) ToNumberString(valueInRawFormat interface{}) string {
+func (it BasicUInt16) ToNumberString(valueInRawFormat interface{}) string {
 	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (it BasicInt8) UnmarshallToValue(
+func (it BasicUInt16) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
-) (int8, error) {
+) (uint16, error) {
 	if !isMappedToFirstIfEmpty && jsonUnmarshallingValue == nil {
 		return constants.Zero,
 			defaulterr.UnmarshallingFailedDueToNilOrEmpty
@@ -148,6 +145,6 @@ func (it BasicInt8) UnmarshallToValue(
 	return it.GetValueByName(str)
 }
 
-func (it BasicInt8) EnumType() enumtype.Variant {
-	return enumtype.Integer8
+func (it BasicUInt16) EnumType() enumtype.Variant {
+	return enumtype.UnsignedInteger16
 }

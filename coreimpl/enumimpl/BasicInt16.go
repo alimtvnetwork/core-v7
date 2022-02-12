@@ -2,12 +2,11 @@ package enumimpl
 
 import (
 	"fmt"
-	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/simplewrap"
 )
 
 type BasicInt16 struct {
@@ -16,65 +15,6 @@ type BasicInt16 struct {
 	valueToJsonDoubleQuoteStringBytesHashmap map[int16][]byte // contains value to string bytes with double quotes
 	valueNameHashmap                         map[int16]string // contains name without double quotes
 	minVal, maxVal                           int16
-}
-
-func NewBasicInt16(
-	typeName string,
-	actualValueRanges []int16,
-	stringRanges []string,
-	min, max int16,
-) *BasicInt16 {
-	enumBase := newNumberEnumBase(
-		typeName,
-		actualValueRanges,
-		stringRanges,
-		min,
-		max)
-
-	jsonDoubleQuoteNameToValueHashMap := make(map[string]int16, len(actualValueRanges))
-	valueToJsonDoubleQuoteStringBytesHashmap := make(map[int16][]byte, len(actualValueRanges))
-	valueNameHashmap := make(map[int16]string, len(actualValueRanges))
-
-	for i, actualVal := range actualValueRanges {
-		key := stringRanges[i]
-		indexJson := simplewrap.WithDoubleQuoteAny(i)
-		indexString := strconv.Itoa(i)
-		jsonName := simplewrap.WithDoubleQuote(key)
-		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexJson] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexString] = actualVal
-		valueToJsonDoubleQuoteStringBytesHashmap[actualVal] = []byte(jsonName)
-		valueNameHashmap[actualVal] = key
-	}
-
-	return &BasicInt16{
-		numberEnumBase:                           enumBase,
-		minVal:                                   min,
-		maxVal:                                   max,
-		jsonDoubleQuoteNameToValueHashMap:        jsonDoubleQuoteNameToValueHashMap,
-		valueToJsonDoubleQuoteStringBytesHashmap: valueToJsonDoubleQuoteStringBytesHashmap,
-		valueNameHashmap:                         valueNameHashmap,
-	}
-}
-
-func NewBasicInt16UsingIndexedSlice(
-	typeName string,
-	indexedSliceWithValues []string,
-) *BasicInt16 {
-	min := constants.Zero
-	max := len(indexedSliceWithValues)
-
-	actualValues := make([]int16, max)
-	for i := range indexedSliceWithValues {
-		actualValues[i] = int16(i)
-	}
-
-	return NewBasicInt16(
-		typeName,
-		actualValues,
-		indexedSliceWithValues,
-		int16(min),
-		int16(max))
 }
 
 func (it BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
@@ -203,4 +143,8 @@ func (it BasicInt16) UnmarshallToValue(
 	}
 
 	return it.GetValueByName(str)
+}
+
+func (it BasicInt16) EnumType() enumtype.Variant {
+	return enumtype.Integer16
 }

@@ -2,8 +2,11 @@ package issetter
 
 import (
 	"errors"
+	"strconv"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/defaulterr"
 )
 
@@ -28,6 +31,102 @@ const (
 	Set           Value = 4
 	Wildcard      Value = 5
 )
+
+// IsNo
+//
+//  Returns true if False or Unset
+func (it Value) IsNo() bool {
+	return falseMap[it]
+}
+
+// IsAsk
+//
+//  Returns true if Uninitialized or Wildcard
+func (it Value) IsAsk() bool {
+	return undefinedMap[it]
+}
+
+// IsIndeterminate
+//
+//  Returns true if Uninitialized or Wildcard
+func (it Value) IsIndeterminate() bool {
+	return undefinedMap[it]
+}
+
+// IsAccept
+//
+//  Returns true if True or Set
+func (it Value) IsAccept() bool {
+	return trueMap[it]
+}
+
+// IsReject
+//
+//  Returns true if False or Unset
+func (it Value) IsReject() bool {
+	return falseMap[it]
+}
+
+// IsSkip
+//
+//  Returns true if Uninitialized or Wildcard
+func (it Value) IsSkip() bool {
+	return undefinedMap[it]
+}
+
+func (it Value) NameValue() string {
+	return it.Name() + "[" + it.ValueString() + "]"
+}
+
+func (it Value) IsNameEqual(name string) bool {
+	return it.Name() == name
+}
+
+func (it Value) IsNameOf(names ...string) bool {
+	for _, name := range names {
+		if it.IsNameEqual(name) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Value) ToNumberString() string {
+	return strconv.Itoa(it.ValueInt())
+}
+
+func (it Value) ValueByte() byte {
+	return byte(it)
+}
+
+func (it Value) ValueInt() int {
+	return int(it)
+}
+
+func (it Value) ValueInt8() int8 {
+	return int8(it)
+}
+
+func (it Value) ValueInt16() int16 {
+	return int16(it)
+}
+
+func (it Value) ValueInt32() int32 {
+	return int32(it)
+}
+
+func (it Value) ValueString() string {
+	return strconv.Itoa(it.ValueInt())
+}
+
+func (it Value) Format(format string) (compiled string) {
+	panic("not implemented")
+}
+
+func (it Value) EnumType() enuminf.EnumTyper {
+	return enumtype.Byte
+}
 
 func (it Value) Value() byte {
 	return byte(it)
