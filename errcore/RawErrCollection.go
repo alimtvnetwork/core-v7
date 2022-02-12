@@ -11,7 +11,61 @@ type RawErrCollection struct {
 	Items []error
 }
 
+func (it RawErrCollection) AddErrors(errs ...error) {
+	it.Adds(errs...)
+}
+
+func (it RawErrCollection) ConditionalAddError(isAdd bool, err error) {
+	if !isAdd {
+		return
+	}
+
+	it.Add(err)
+}
+
+func (it RawErrCollection) CountStateChangeTracker() CountStateChangeTracker {
+	return NewCountStateChangeTracker(&it)
+}
+
+func (it RawErrCollection) IsErrorsCollected(
+	errorsItems ...error,
+) bool {
+	count := it.Length()
+
+	it.Adds(errorsItems...)
+
+	return count != it.Length()
+}
+
+func (it RawErrCollection) IsValid() bool {
+	return it.IsEmpty()
+}
+
+func (it RawErrCollection) IsSuccess() bool {
+	return it.IsEmpty()
+}
+
+func (it RawErrCollection) IsFailed() bool {
+	return !it.IsEmpty()
+}
+
+func (it RawErrCollection) IsInvalid() bool {
+	return !it.IsEmpty()
+}
+
+func (it RawErrCollection) ToRawErrCollection() *RawErrCollection {
+	return &it
+}
+
 func (it *RawErrCollection) Add(err error) {
+	if err == nil {
+		return
+	}
+
+	it.Items = append(it.Items, err)
+}
+
+func (it *RawErrCollection) AddError(err error) {
 	if err == nil {
 		return
 	}
@@ -69,12 +123,89 @@ func (it *RawErrCollection) AddWithRef(
 		compiledErr)
 }
 
-func (it *RawErrCollection) Adds(errorItems ...error) {
+func (it *RawErrCollection) Adds(
+	errorItems ...error,
+) {
 	if len(errorItems) == 0 {
 		return
 	}
 
 	for _, err := range errorItems {
+		if err == nil {
+			continue
+		}
+
+		it.Items = append(it.Items, err)
+	}
+}
+
+// AddString
+//
+//  Empty string will be ignored
+func (it *RawErrCollection) AddString(
+	message string,
+) {
+	if message == "" {
+		return
+	}
+
+	it.Items = append(
+		it.Items,
+		errors.New(message))
+}
+
+func (it *RawErrCollection) AddStringSliceAsErr(
+	errSliceStrings ...string,
+) {
+	if len(errSliceStrings) == 0 {
+		return
+	}
+
+	for _, errString := range errSliceStrings {
+		if errString == "" {
+			continue
+		}
+
+		it.Items = append(it.Items, errors.New(errString))
+	}
+}
+
+func (it *RawErrCollection) AddErrorGetters(
+	errorGetter ...errorGetter,
+) {
+	if len(errorGetter) == 0 {
+		return
+	}
+
+	for _, errGetter := range errorGetter {
+		if errGetter == nil {
+			continue
+		}
+
+		err := errGetter.Error()
+
+		if err == nil {
+			continue
+		}
+
+		it.Items = append(it.Items, err)
+	}
+}
+
+func (it *RawErrCollection) AddCompiledErrorGetters(
+	errorGetter ...compiledErrorGetter,
+) {
+	if len(errorGetter) == 0 {
+		return
+	}
+
+	for _, errGetter := range errorGetter {
+		if errGetter == nil {
+			continue
+		}
+
+		err := errGetter.CompiledError()
+
 		if err == nil {
 			continue
 		}
@@ -96,6 +227,10 @@ func (it *RawErrCollection) IsEmpty() bool {
 }
 
 func (it *RawErrCollection) HasError() bool {
+	return it != nil && len(it.Items) > 0
+}
+
+func (it *RawErrCollection) HasAnyError() bool {
 	return it != nil && len(it.Items) > 0
 }
 

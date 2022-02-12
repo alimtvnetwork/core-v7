@@ -46,4 +46,6 @@ const (
 	S           string = "s" // assembly source file
 	Pem         string = "pem"
 	Key         string = "key"
+	Backup      string = "backup"
+	Ins         string = "ins"
 )

@@ -9,8 +9,8 @@ type BasicEnumer interface {
 	IsAnyNameOfChecker
 	ToNumberStringer
 	IsValidInvalidChecker
-	IsBothEnumEqualer
 	BasicEnumValuer
 	EnumFormatter
+	EnumType() EnumTyper
 	corejson.JsonMarshaller
 }

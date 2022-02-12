@@ -1,5 +1,7 @@
 package loggerinf
 
+import "gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+
 type StandardLogger interface {
 	Info(args ...interface{}) StandardLogger
 	Trace(args ...interface{}) StandardLogger
@@ -64,6 +66,41 @@ type StandardLogger interface {
 	StackTracesSkip(stackSkipIndex int) StandardLogger
 	TitleStackTraces(title string) StandardLogger
 	TitleStackTracesSkip(stackSkipIndex int, title string) StandardLogger
+
+	FullTraceAsAttr(
+		title string,
+		attrFullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) StandardLogger
+	FullTraceAsAttrStackSkip(
+		stackSkipIndex int,
+		title string,
+		attrFullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) StandardLogger
+	FullStringWithTracesOptions(
+		logType LogTypeChecker,
+		fullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) StandardLogger
+
+	// FullStringWithTraces Log as error
+	FullStringWithTraces(
+		fullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) StandardLogger
+
+	BaseRawErrCollectionDefiner(
+		rawErrCollection errcoreinf.BaseRawErrCollectionDefiner,
+	) StandardLogger
+	BasicErrWrapper(basicErrWrapper errcoreinf.BasicErrWrapper) StandardLogger
+	BasicErrWrapperOptions(
+		logType LogTypeChecker,
+		basicErrWrapper errcoreinf.BasicErrWrapper,
+		attributes string,
+	) StandardLogger
+	BasicErrWrapperOptionsStackSkip(
+		stackSkipIndex int,
+		logType LogTypeChecker,
+		basicErrWrapper errcoreinf.BasicErrWrapper,
+		attributes string,
+	) StandardLogger
 
 	ConditionalStandardLogger
 }

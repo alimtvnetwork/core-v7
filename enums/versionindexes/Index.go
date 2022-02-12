@@ -26,7 +26,7 @@ func (it Index) IsEnumEqual(enum enuminf.BasicEnumer) bool {
 
 func (it *Index) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
 	for _, enum := range enums {
-		if enum.IsEnumEqual(it) {
+		if it.IsEnumEqual(enum) {
 			return true
 		}
 	}
@@ -201,6 +201,10 @@ func (it Index) IsPatch() bool {
 
 func (it Index) IsBuild() bool {
 	return it == Build
+}
+
+func (it Index) EnumType() enuminf.EnumTyper {
+	return BasicEnumImpl.EnumType()
 }
 
 func (it Index) AsBasicByteEnumContractsBinder() enuminf.BasicByteEnumContractsBinder {

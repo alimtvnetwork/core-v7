@@ -1,6 +1,10 @@
 package coreinterface
 
-import "reflect"
+import (
+	"reflect"
+
+	"gitlab.com/evatix-go/core/internal/internalinterface"
+)
 
 type IsReflectionTypeChecker interface {
 	IsManyReflectionOfType(typeOf reflect.Type, dynamicItems ...interface{}) bool
@@ -134,7 +138,7 @@ type IsDynamicValueValidChecker interface {
 }
 
 type IsEmptyChecker interface {
-	IsEmpty() bool
+	internalinterface.IsEmptyChecker
 }
 
 type IsEmptyErrorChecker interface {

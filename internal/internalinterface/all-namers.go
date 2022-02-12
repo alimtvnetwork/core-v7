@@ -11,3 +11,7 @@ type CategoryNamer interface {
 type TableNamer interface {
 	TableName() string
 }
+
+type Namer interface {
+	Name() string
+}

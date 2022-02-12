@@ -1,12 +1,15 @@
 package loggerinf
 
 import (
+	"io"
+
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
 	"gitlab.com/evatix-go/core/internal/internalinterface"
 )
 
 type PersistentLogger interface {
-	LogPathExtender() internalinterface.PathExtender
+	LogPathExtender() PathExtender
 	IsRotating() bool
 	IsDbLogger() bool
 	IsFileLogger() bool
@@ -74,24 +77,133 @@ type PersistentLogger interface {
 	DebugMessage(message string) PersistentLogger
 	DebugMessageAttr(message, attr string) PersistentLogger
 	Err(err error) PersistentLogger
-	// ErrorStackTraces
-	//
-	// Includes stack-traces
-	ErrorStackTraces(err error) PersistentLogger
-	// DebugStackTraces
-	//
-	// Includes stack-traces
-	DebugStackTraces(message string) PersistentLogger
-	// DebugAttrStackTraces
-	//
-	// Includes stack-traces
-	DebugAttrStackTraces(message, attr string) PersistentLogger
-	StackTraces() PersistentLogger
-	StackTracesSkip(stackSkipIndex int) PersistentLogger
-	TitleStackTraces(title string) PersistentLogger
-	TitleStackTracesSkip(stackSkipIndex int, title string) PersistentLogger
-	HasError() bool
-	CompileErrorWithTraces() error
 
-	ConditionalStandardLogger
+	FullTraceAsAttr(
+		title string,
+		attrFullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) PersistentLogger
+
+	FullTraceAsAttrStackSkip(
+		stackSkipIndex int,
+		title string,
+		attrFullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) PersistentLogger
+
+	FullStringWithTracesOptions(
+		logType LogTypeChecker,
+		fullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) PersistentLogger
+
+	// FullStringWithTraces Log as error
+	FullStringWithTraces(
+		fullStringWithTraces errcoreinf.FullStringWithTracesGetter,
+	) PersistentLogger
+	BaseRawErrCollectionDefiner(
+		rawErrCollection errcoreinf.BaseRawErrCollectionDefiner,
+	) PersistentLogger
+	BasicErrWrapper(basicErrWrapper errcoreinf.BasicErrWrapper) PersistentLogger
+	BasicErrWrapperOptions(
+		logType LogTypeChecker,
+		basicErrWrapper errcoreinf.BasicErrWrapper,
+		attributes string,
+	) PersistentLogger
+	BasicErrWrapperOptionsStackSkip(
+		stackSkipIndex int,
+		logType LogTypeChecker,
+		basicErrWrapper errcoreinf.BasicErrWrapper,
+		attributes string,
+	) PersistentLogger
+	ErrOptions(
+		logType LogTypeChecker,
+		err error,
+		attributes string,
+	) PersistentLogger
+	persistentAllStacktraceLogger
+
+	NewGeneralWriter
+	AllLogWriter
+	persistentAllParamsLogger
+	ConditionalPersistentLogger
+
+	InfoAnyAttr(anyItem interface{}, attr string)
+	TraceAnyAttr(anyItem interface{}, attr string)
+	DebugAnyAttr(anyItem interface{}, attr string)
+	WarnAnyAttr(anyItem interface{}, attr string)
+	ErrorAnyAttr(anyItem interface{}, attr string)
+	FatalAnyAttr(anyItem interface{}, attr string)
+	PanicAnyAttr(anyItem interface{}, attr string)
+
+	DebugAnyAttrAny(anyItem, attr interface{})
+
+	InfoAny(anyItem interface{})
+	TraceAny(anyItem interface{})
+	DebugAny(anyItem interface{})
+	WarnAny(anyItem interface{})
+	ErrorAny(anyItem interface{})
+	FatalAny(anyItem interface{})
+	PanicAny(anyItem interface{})
+
+	InfoAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	TraceAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	DebugAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	WarnAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	ErrorAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	FatalAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+	PanicAnyStackSkip(
+		stackSkip int,
+		anyItem interface{},
+	)
+}
+
+type persistentAllParamsLogger interface {
+	LogAll(
+		logTyper LoggerTyper,
+		message, attributes string,
+	) PersistentLogger
+	LogAllUsingStackSkip(
+		stackSkipIndex int,
+		logTyper LoggerTyper,
+		message, attributes string,
+	) PersistentLogger
+	LogAllUsingConfig(
+		config Configurer,
+		message, attributes string,
+	) PersistentLogger
+}
+
+type NewGeneralWriter interface {
+	NewGeneralWriter(writeConfigurer WriterConfigurer) io.Writer
+}
+
+type Configurer interface {
+	LoggerTyper() LoggerTyper
+	StackSkipIndex() int
+}
+
+type WriterConfigurer interface {
+	Configurer
+	AdditionalConfigProcessor
+}
+
+type AdditionalConfigProcessor interface {
+	AdditionalConfigBytes() []byte
+	AdditionalConfigProcess() error
 }

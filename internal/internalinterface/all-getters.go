@@ -89,3 +89,49 @@ type ValueStringGetter interface {
 type ValueStringsGetter interface {
 	Value() []string
 }
+
+type ErrTypeDetailDefiner interface {
+	TypenameString() string
+	TypeMessage() string
+	BaseErrorTypeGetter
+}
+
+type BaseErrorTypeGetter interface {
+	BaseErrorTyper() BaseErrorTyper
+}
+
+type ErrorValueGetter interface {
+	Value() error
+}
+
+type CompiledStackTracesStringGetter interface {
+	CompiledStackTracesString() string
+}
+
+type CompiledErrorWithStackTracesGetter interface {
+	CompiledErrorWithStackTraces() error
+}
+
+type FullStringWithTracesGetter interface {
+	FullStringWithTraces() string
+}
+
+// FullStringWithTracesIfGetter
+//
+//  Returns full string with stack traces if given as true
+//  Or, else just FullString returns
+type FullStringWithTracesIfGetter interface {
+	// FullStringWithTracesIf
+	//
+	//  Returns full string with stack traces if given as true
+	//  Or, else just FullString returns
+	FullStringWithTracesIf(isStackTraces bool) string
+}
+
+type JsonModelAnyGetter interface {
+	JsonModelAny() interface{}
+}
+
+type CompiledErrorGetter interface {
+	CompiledError() error
+}

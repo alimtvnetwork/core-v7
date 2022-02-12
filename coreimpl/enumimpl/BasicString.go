@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
 )
@@ -122,4 +123,8 @@ func (it BasicString) UnmarshallToValue(
 	}
 
 	return it.GetValueByName(str)
+}
+
+func (it BasicString) EnumType() enumtype.Variant {
+	return enumtype.String
 }
