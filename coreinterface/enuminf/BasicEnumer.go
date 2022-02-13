@@ -1,6 +1,8 @@
 package enuminf
 
-import "gitlab.com/evatix-go/core/coredata/corejson"
+import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
+)
 
 type BasicEnumer interface {
 	enumNameStinger
@@ -12,5 +14,6 @@ type BasicEnumer interface {
 	BasicEnumValuer
 	EnumFormatter
 	EnumType() EnumTyper
+	RangeNamesCsvGetter
 	corejson.JsonMarshaller
 }

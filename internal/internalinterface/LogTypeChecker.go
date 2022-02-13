@@ -10,6 +10,7 @@ type LogTypeChecker interface {
 	IsError() bool
 	IsFatal() bool
 	IsPanic() bool
+	IsSuccess() bool
 	IsInvalid() bool
 	IsErrorLogical() bool
 	IsErrorFatalLogical() bool

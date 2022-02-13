@@ -33,7 +33,7 @@ type enumNameStinger interface {
 //
 // Examples:
 //  - ToNumberString() -> "1"  if the value is 1
-//  - ToNumberString() -> "10" if the value is 110
+//  - ToNumberString() -> "10" if the value is 10
 type toNumberStringer interface {
 	// ToNumberString
 	//
@@ -41,6 +41,6 @@ type toNumberStringer interface {
 	//
 	// Examples:
 	//  - ToNumberString() -> "1"  if the value is 1
-	//  - ToNumberString() -> "10" if the value is 110
+	//  - ToNumberString() -> "10" if the value is 10
 	ToNumberString() string
 }

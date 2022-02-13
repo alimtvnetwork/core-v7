@@ -137,10 +137,14 @@ func (it Variant) MarshalJSON() ([]byte, error) {
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {
-	toString := string(data)
+	var toString string
+
+	if len(data) > 0 {
+		toString = string(data)
+	}
 
 	if toString == "" || len(toString) <= 2 {
-		return errors.New("cannot map to variant or length is below 2")
+		return errors.New("cannot map to variant or length is below 2 : " + toString)
 	}
 
 	unWrapped := toString[1 : len(toString)-1]

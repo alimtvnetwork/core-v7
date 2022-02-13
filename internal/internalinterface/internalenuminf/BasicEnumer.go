@@ -4,8 +4,7 @@ type BasicEnumer interface {
 	enumNameStinger
 	nameValuer
 	IsNameEqualer
-	IsAnyNameOfChecker
 	toNumberStringer
 	IsValidInvalidChecker
-	BasicEnumValuer
+	RangeNamesCsvGetter
 }

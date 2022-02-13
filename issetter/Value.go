@@ -299,7 +299,7 @@ func (it *Value) LazyEvaluateBool(
 	return it.IsTrue()
 }
 
-// LazyEvaluateBool
+// LazyEvaluateSet
 //
 // Only execute evaluatorFunc if Uninitialized
 // and then set True to self and returns t/f based on called or not

@@ -57,4 +57,6 @@ type ConditionalErrorAdder interface {
 
 type BaseErrorWrapperCollectionDefiner interface {
 	internalinterface.BaseErrorWrapperCollectionDefiner
+	AddErrorUsingBasicType(errType BasicErrorTyper, err error) BaseErrorWrapperCollectionDefiner
+	AddBasicErrWrapper(basicErrWrapper BasicErrWrapper) BaseErrorWrapperCollectionDefiner
 }

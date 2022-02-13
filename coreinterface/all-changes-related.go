@@ -7,8 +7,8 @@ type ChangesCommitter interface {
 	ChangeAccepter
 	ChangeRejecter
 	RemindLaterChangeSkipper
-	Commit(option YesNoAcceptRejecter) error
-	CommitMust(option YesNoAcceptRejecter)
+	Commit(option AcceptRejectOrSkipper) error
+	CommitMust(option AcceptRejectOrSkipper)
 }
 
 type ChangeAccepter interface {
@@ -60,8 +60,4 @@ type AcceptRejectOrSkipper interface {
 
 type YesNoAcceptRejecter interface {
 	internalinterface.YesNoAcceptRejecter
-}
-
-type CommonSliceDefiner interface {
-	internalinterface.CommonSliceDefiner
 }

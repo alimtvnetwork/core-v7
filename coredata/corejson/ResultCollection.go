@@ -453,7 +453,9 @@ func (it *ResultsCollection) AddAnyItems(
 	return it
 }
 
-// AddAnyItems Skip on nil
+// AddAnyItemsSlice
+//
+//  Skip on nil
 func (it *ResultsCollection) AddAnyItemsSlice(
 	anyItems []interface{},
 ) *ResultsCollection {
@@ -474,7 +476,9 @@ func (it *ResultsCollection) AddAnyItemsSlice(
 	return it
 }
 
-// AddResultsCollection skip on nil items
+// AddResultsCollection
+//
+//  skip on nil items
 func (it *ResultsCollection) AddResultsCollection(
 	collection *ResultsCollection,
 ) *ResultsCollection {

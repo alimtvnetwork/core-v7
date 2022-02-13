@@ -50,3 +50,7 @@ type StringRangesGetter interface {
 type BasicEnumerGetter interface {
 	TypeBasicEnum() BasicEnumer
 }
+
+type RangeNamesCsvGetter interface {
+	RangeNamesCsv() string
+}

@@ -5,19 +5,22 @@ import (
 
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/pathextendinf"
 	"gitlab.com/evatix-go/core/internal/internalinterface"
 )
 
 type PersistentLogger interface {
-	LogPathExtender() PathExtender
+	LogPathInfo() pathextendinf.PathInfoer
 	IsRotating() bool
 	IsDbLogger() bool
 	IsFileLogger() bool
 
-	Config() interface{}
+	DynamicConfig() interface{}
 	ConfigReflectSetTo(toPointer interface{}) error
+
 	internalinterface.IdStringerWithNamer
 
+	Success(message string) PersistentLogger
 	Info(message string) PersistentLogger
 	Trace(message string) PersistentLogger
 	Debug(message string) PersistentLogger
@@ -26,6 +29,7 @@ type PersistentLogger interface {
 	Fatal(message string) PersistentLogger
 	Panic(message string) PersistentLogger
 
+	SuccessAttr(message, attr string) PersistentLogger
 	InfoAttr(message, attr string) PersistentLogger
 	TraceAttr(message, attr string) PersistentLogger
 	DebugAttr(message, attr string) PersistentLogger
@@ -49,17 +53,26 @@ type PersistentLogger interface {
 	InfoBytes(rawBytes []byte) PersistentLogger
 	ErrorBytes(rawBytes []byte) PersistentLogger
 	DebugBytes(rawBytes []byte) PersistentLogger
+	SuccessBytes(rawBytes []byte) PersistentLogger
 
 	InfoTitleBytes(title string, rawBytes []byte) PersistentLogger
 	ErrorTitleBytes(title string, rawBytes []byte) PersistentLogger
 	DebugTitleBytes(title string, rawBytes []byte) PersistentLogger
+	SuccessTitleBytes(title string, rawBytes []byte) PersistentLogger
 
 	Log(message string) PersistentLogger
 	LogRaw(logType LogTypeChecker, message, attr string) PersistentLogger
 	LogRawStackSkip(stackSkipIndex int, logType LogTypeChecker, message, attr string) PersistentLogger
-	Jsoner(logType LogTypeChecker, message string, jsonResult *corejson.Result) PersistentLogger
-	JsonerStackSkip(
-		stackSkipIndex int, logType LogTypeChecker, message string, jsonResult *corejson.Result,
+	JsonResultOptions(
+		logType LogTypeChecker,
+		message string,
+		jsonResult *corejson.Result,
+	) PersistentLogger
+	JsonResultOptionsStackSkip(
+		stackSkipIndex int,
+		logType LogTypeChecker,
+		message string,
+		jsonResult *corejson.Result,
 	) PersistentLogger
 
 	LogStackSkip(stackSkipIndex int, message string) PersistentLogger
@@ -125,62 +138,72 @@ type PersistentLogger interface {
 	persistentAllParamsLogger
 	ConditionalPersistentLogger
 
-	InfoAnyAttr(anyItem interface{}, attr string)
-	TraceAnyAttr(anyItem interface{}, attr string)
-	DebugAnyAttr(anyItem interface{}, attr string)
-	WarnAnyAttr(anyItem interface{}, attr string)
-	ErrorAnyAttr(anyItem interface{}, attr string)
-	FatalAnyAttr(anyItem interface{}, attr string)
-	PanicAnyAttr(anyItem interface{}, attr string)
+	InfoAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	TraceAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	DebugAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	WarnAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	ErrorAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	FatalAnyAttr(anyItem interface{}, attr string) PersistentLogger
+	PanicAnyAttr(anyItem interface{}, attr string) PersistentLogger
 
-	DebugAnyAttrAny(anyItem, attr interface{})
+	DebugAnyAttrAny(anyItem, attr interface{}) PersistentLogger
 
-	InfoAny(anyItem interface{})
-	TraceAny(anyItem interface{})
-	DebugAny(anyItem interface{})
-	WarnAny(anyItem interface{})
-	ErrorAny(anyItem interface{})
-	FatalAny(anyItem interface{})
-	PanicAny(anyItem interface{})
+	InfoFmt(formatter string, v ...interface{}) PersistentLogger
+	DebugFmt(formatter string, v ...interface{}) PersistentLogger
+	ErrorFmt(formatter string, v ...interface{}) PersistentLogger
+	FatalFmt(formatter string, v ...interface{}) PersistentLogger
+	LogFmt(
+		logType LoggerTyper,
+		formatter string,
+		v ...interface{},
+	) PersistentLogger
+
+	InfoAny(anyItem interface{}) PersistentLogger
+	TraceAny(anyItem interface{}) PersistentLogger
+	DebugAny(anyItem interface{}) PersistentLogger
+	WarnAny(anyItem interface{}) PersistentLogger
+	ErrorAny(anyItem interface{}) PersistentLogger
+	FatalAny(anyItem interface{}) PersistentLogger
+	PanicAny(anyItem interface{}) PersistentLogger
 
 	InfoAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	TraceAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	DebugAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	WarnAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	ErrorAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	FatalAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 	PanicAnyStackSkip(
 		stackSkip int,
 		anyItem interface{},
-	)
+	) PersistentLogger
 }
 
 type persistentAllParamsLogger interface {
 	LogAll(
-		logTyper LoggerTyper,
+		logType LoggerTyper,
 		message, attributes string,
 	) PersistentLogger
 	LogAllUsingStackSkip(
 		stackSkipIndex int,
-		logTyper LoggerTyper,
+		logType LoggerTyper,
 		message, attributes string,
 	) PersistentLogger
 	LogAllUsingConfig(

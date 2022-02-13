@@ -48,7 +48,7 @@ type ToValueStringer interface {
 //
 // Examples:
 //  - ToNumberString() -> "1"  if the value is 1
-//  - ToNumberString() -> "10" if the value is 110
+//  - ToNumberString() -> "10" if the value is 10
 type ToNumberStringer interface {
 	// ToNumberString
 	//
@@ -56,7 +56,7 @@ type ToNumberStringer interface {
 	//
 	// Examples:
 	//  - ToNumberString() -> "1"  if the value is 1
-	//  - ToNumberString() -> "10" if the value is 110
+	//  - ToNumberString() -> "10" if the value is 10
 	ToNumberString() string
 }
 
