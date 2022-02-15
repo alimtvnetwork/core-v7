@@ -83,7 +83,7 @@ func (it *Collection) Capacity() int {
 }
 
 func (it *Collection) Length() int {
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
@@ -94,7 +94,7 @@ func (it *Collection) LengthLock() int {
 	it.Lock()
 	defer it.Unlock()
 
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 

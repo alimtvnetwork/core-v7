@@ -341,6 +341,10 @@ func (it *HashsetsCollection) Join(
 		separator)
 }
 
+func (it *HashsetsCollection) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
 func (it *HashsetsCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
 }
