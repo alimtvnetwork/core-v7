@@ -2,8 +2,11 @@ package corestr
 
 import (
 	"fmt"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
 type KeyAnyValuePair struct {
@@ -13,11 +16,23 @@ type KeyAnyValuePair struct {
 }
 
 func (it *KeyAnyValuePair) IsValueNull() bool {
-	return it.Value == nil
+	return it == nil || reflectinternal.IsNull(it.Value)
 }
 
 func (it *KeyAnyValuePair) HasNonNull() bool {
-	return it.Value != nil
+	return it != nil && reflectinternal.IsNotNull(it.Value)
+}
+
+func (it *KeyAnyValuePair) HasValue() bool {
+	return it != nil && reflectinternal.IsNotNull(it.Value)
+}
+
+func (it *KeyAnyValuePair) IsValueEmptyString() bool {
+	return it == nil || it.ValueString() == ""
+}
+
+func (it *KeyAnyValuePair) IsValueWhitespace() bool {
+	return it == nil || strings.TrimSpace(it.ValueString()) == ""
 }
 
 func (it *KeyAnyValuePair) ValueString() string {
@@ -36,4 +51,71 @@ func (it *KeyAnyValuePair) ValueString() string {
 	return it.
 		valueString.
 		GetPlusSetEmptyOnUninitialized()
+}
+
+func (it *KeyAnyValuePair) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *KeyAnyValuePair) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*KeyAnyValuePair, error) {
+	err := jsonResult.Unmarshal(it)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return it, nil
+}
+
+// ParseInjectUsingJsonMust Panic if error
+func (it *KeyAnyValuePair) ParseInjectUsingJsonMust(
+	jsonResult *corejson.Result,
+) *KeyAnyValuePair {
+	parsed, err := it.
+		ParseInjectUsingJson(jsonResult)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return parsed
+}
+
+func (it KeyAnyValuePair) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it *KeyAnyValuePair) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it *KeyAnyValuePair) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
+}
+
+func (it *KeyAnyValuePair) AsJsoner() corejson.Jsoner {
+	return it
+}
+
+func (it *KeyAnyValuePair) JsonParseSelfInject(
+	jsonResult *corejson.Result,
+) error {
+	_, err := it.ParseInjectUsingJson(
+		jsonResult,
+	)
+
+	return err
+}
+
+func (it *KeyAnyValuePair) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return it
+}
+
+func (it KeyAnyValuePair) String() string {
+	return fmt.Sprintf(
+		keyValuePrintFormat,
+		it.Key,
+		it.Value)
 }

@@ -700,7 +700,7 @@ func (it *Hashmap) KeysValuesCollection() (
 	wg.Add(2)
 
 	go func() {
-		keys = New.Collection.StringsPtr(
+		keys = New.Collection.Strings(
 			it.Keys(),
 		)
 
@@ -721,7 +721,7 @@ func (it *Hashmap) KeysValuesCollection() (
 }
 
 func (it *Hashmap) KeysValuesList() (
-	keys, values *[]string,
+	keys, values []string,
 ) {
 	wg := sync.WaitGroup{}
 	wg.Add(2)
@@ -732,7 +732,7 @@ func (it *Hashmap) KeysValuesList() (
 	}()
 
 	go func() {
-		values = it.ValuesListPtr()
+		values = it.ValuesList()
 		wg.Done()
 	}()
 
@@ -741,12 +741,12 @@ func (it *Hashmap) KeysValuesList() (
 	return keys, values
 }
 
-func (it *Hashmap) KeysValuePairs() *[]KeyValuePair {
-	pairs := make([]KeyValuePair, it.Length())
+func (it *Hashmap) KeysValuePairs() []*KeyValuePair {
+	pairs := make([]*KeyValuePair, it.Length())
 
 	i := 0
 	for k, v := range it.items {
-		pairs[i] = KeyValuePair{
+		pairs[i] = &KeyValuePair{
 			Key:   k,
 			Value: v,
 		}
@@ -754,11 +754,20 @@ func (it *Hashmap) KeysValuePairs() *[]KeyValuePair {
 		i++
 	}
 
-	return &pairs
+	return pairs
+}
+func (it *Hashmap) KeysValuePairsCollection() *KeyValueCollection {
+	pairs := New.KeyValues.Cap(it.Length())
+
+	for k, v := range it.items {
+		pairs.Add(k, v)
+	}
+
+	return pairs
 }
 
 func (it *Hashmap) KeysValuesListLock() (
-	keys, values *[]string,
+	keys, values []string,
 ) {
 	it.Lock()
 	wg := sync.WaitGroup{}
@@ -769,7 +778,7 @@ func (it *Hashmap) KeysValuesListLock() (
 		wg.Done()
 	}()
 	go func() {
-		values = it.ValuesListPtr()
+		values = it.ValuesList()
 		wg.Done()
 	}()
 
@@ -796,24 +805,22 @@ func (it *Hashmap) AllKeys() []string {
 	return keys
 }
 
-func (it *Hashmap) Keys() *[]string {
-	keys := it.AllKeys()
-
-	return &keys
+func (it *Hashmap) Keys() []string {
+	return it.AllKeys()
 }
 
 func (it *Hashmap) KeysCollection() *Collection {
-	return New.Collection.StringsPtr(
+	return New.Collection.Strings(
 		it.Keys(),
 	)
 }
 
-func (it *Hashmap) KeysLock() *[]string {
+func (it *Hashmap) KeysLock() []string {
 	length := it.LengthLock()
 	keys := make([]string, length)
 
 	if length == 0 {
-		return &keys
+		return keys
 	}
 
 	i := 0
@@ -825,10 +832,12 @@ func (it *Hashmap) KeysLock() *[]string {
 
 	it.Unlock()
 
-	return &keys
+	return keys
 }
 
-// ValuesListCopyPtrLock  a slice must returned
+// ValuesListCopyPtrLock
+//
+//  a slice must be returned
 func (it *Hashmap) ValuesListCopyPtrLock() *[]string {
 	it.Lock()
 	defer it.Unlock()
@@ -1078,7 +1087,7 @@ func (it *Hashmap) Join(
 func (it *Hashmap) JoinKeys(
 	separator string,
 ) string {
-	return strings.Join(*it.Keys(), separator)
+	return strings.Join(it.Keys(), separator)
 }
 
 func (it *Hashmap) JsonModel() map[string]string {

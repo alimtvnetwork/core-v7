@@ -19,6 +19,5 @@ type PathExtender interface {
 	IsEqual(right PathExtender) bool
 	ActionStacker
 	ActionExecutor
-	Clone() PathExtender
-	CloneNew(newFileName string) PathExtender
+	Cloner() Cloner
 }

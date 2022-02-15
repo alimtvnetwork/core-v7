@@ -1,50 +1,97 @@
 package internalinterface
 
-type BasicErrWrapper interface {
-	ErrorHandler
+import (
+	"fmt"
+)
 
+type IsReferencesEmptyChecker interface {
 	IsReferencesEmpty() bool
-	HasReferences() bool
+}
 
+type HasReferencesChecker interface {
+	HasReferences() bool
+}
+
+type StringCompiler interface {
+	Compile() string
+}
+
+type HasCurrentErrorChecker interface {
+	HasCurrentError() bool
+}
+
+type FullStringer interface {
+	FullString() string
+}
+
+type TypeNamer interface {
+	TypeName() string
+}
+
+type IsNullOrAnyNullChecker interface {
 	IsNull() bool
 	IsAnyNull() bool
-	IsEmptyErrorChecker
-	HasErrorChecker
-	IsSuccessValidator
-	IsEmptyChecker
-	HasCurrentError() bool
+}
 
-	TypeNameCodeMessage() string
-	RawErrorTypeValue() uint16
+type CodeTypeNamer interface {
 	CodeTypeName() string
+}
 
-	String() string
+type TypeCodeNameStringer interface {
+	TypeCodeNameString() string
+}
 
-	ErrorMessageHandler
-	ErrorValueGetter
-	FullStringSplitByNewLine() []string
-	FullStringWithoutReferences() string
-	RawErrorTypeName() string
+// SerializeWithoutTracesGetter
+//
+//  Stack traces will be SKIPPED from the json bytes
+type SerializeWithoutTracesGetter interface {
+	SerializeWithoutTraces() ([]byte, error)
+}
 
-	StringIf(isWithRef bool) string
-	FullStringWithTracesGetter
-	FullStringWithTracesIfGetter
-	ReferencesCompiledString() string
-	FullString() string
-	CompiledError() error
-	CompiledErrorWithStackTracesGetter
-	CompiledStackTracesStringGetter
+type FullOrErrorMessageGetter interface {
 	FullOrErrorMessage(
 		isErrorMessage,
 		isWithRef bool,
 	) string
+}
 
-	JsonModelAnyGetter
+type ReferencesCompiledStringGetter interface {
+	ReferencesCompiledString() string
+}
 
-	// SerializeWithoutTraces
+type ErrorStringGetter interface {
+	ErrorString() string
+}
+
+type BaseErrorOrCollectionWrapper interface {
+	ErrorHandler
+	IsNullOrAnyNullChecker
+	HasErrorChecker
+	IsEmptyChecker
+	ErrorStringGetter
+	IsSuccessValidator
+	IsInvalidChecker
+	HasErrorOrHasAnyErrorChecker
+	// StringCompiler
+	//
+	//  error wrapper compiles to string with traces.
+	StringCompiler
+	ErrorHandler
+	ErrorMessageHandler
+
+	FullStringer
+	CompiledErrorGetter
+	FullStringWithTracesGetter
+	FullStringWithTracesIfGetter
+	ReferencesCompiledStringGetter
+	CompiledErrorWithStackTracesGetter
+	CompiledStackTracesStringGetter
+	FullStringSplitByNewLine() []string
+	FullStringWithoutReferences() string
+	// SerializeWithoutTracesGetter
 	//
 	//  Stack traces will be SKIPPED from the json bytes
-	SerializeWithoutTraces() ([]byte, error)
+	SerializeWithoutTracesGetter
 	// Serialize
 	//
 	//  Should include stack traces
@@ -52,7 +99,49 @@ type BasicErrWrapper interface {
 	SerializeMust() []byte
 	MarshalJSON() ([]byte, error)
 	UnmarshalJSON(data []byte) error
+	ErrorValueGetter
 	Dispose()
+	CompiledVoidLogger
+
+	fmt.Stringer
+}
+
+// BasicErrWrapper
+//
+// IsEmpty:
+//  Refers to no error for print or doesn't treat this as error.
+//
+//  Conditions (true):
+//      - if Wrapper nil, Or,
+//      - if Wrapper is StaticEmptyPtr, Or,
+//      - if Wrapper .errorType is IsNoError(), Or,
+//      - if Wrapper .currentError NOT nil and Wrapper .references.IsEmpty()
+type BasicErrWrapper interface {
+	BaseErrorOrCollectionWrapper
+	IsReferencesEmptyChecker
+	HasReferencesChecker
+	IsEmptyErrorChecker
+	HasCurrentErrorChecker
+
+	TypeNameCodeMessage() string
+	TypeNameWithCustomMessage(customMessage string) string
+	RawErrorTypeValue() uint16
+	TypeNamer
+	CodeTypeNamer
+	TypeCodeNameStringer
+
+	IsErrorMessageEqual(msg string) bool
+	// IsErrorMessage
+	//
+	// If error IsEmpty then returns false regardless
+	IsErrorMessage(msg string, isCaseSensitive bool) bool
+	ErrorValueGetter
+	StringIf(isWithRef bool) string
+
+	FullOrErrorMessageGetter
+	JsonModelAnyGetter
+	MarshalJSON() ([]byte, error)
+	UnmarshalJSON(data []byte) error
 
 	IsErrorEqualsChecker
 }
@@ -66,12 +155,10 @@ type IsErrorsCollected interface {
 }
 
 type BaseRawErrCollectionDefiner interface {
+	BaseErrorOrCollectionWrapper
 	Add(err error)
 	AddErrorer
 	IsErrorsCollected
-	IsSuccessValidator
-	IsValidChecker
-	IsInvalidChecker
 	AddWithTraceRef(
 		err error,
 		traces []string,
@@ -98,7 +185,6 @@ type BaseRawErrCollectionDefiner interface {
 		errSliceStrings ...string,
 	)
 	CommonSliceDefiner
-	HasErrorOrHasAnyErrorChecker
 	StringUsingJoiner
 	StringUsingJoinerAdditional(joiner, additionalMessage string) string
 	CompiledErrorGetter
@@ -144,9 +230,9 @@ type ConditionalErrorAdder interface {
 }
 
 type BaseErrorWrapperCollectionDefiner interface {
+	BaseErrorOrCollectionWrapper
 	DyanmicLinqer
 	CommonSliceDefiner
-
 	LastIndex() int
 	HasIndex(index int) bool
 
@@ -156,9 +242,7 @@ type BaseErrorWrapperCollectionDefiner interface {
 	ConditionalErrorAdder
 
 	HasError() bool
-
 	IsEmpty() bool
-
 	Length() int
 
 	ToString(
@@ -178,7 +262,6 @@ type BaseErrorWrapperCollectionDefiner interface {
 	DisplayStringWithTraces() string
 
 	DisplayStringWithLimitTraces(limit int) string
-
 	LogDisplayStringWithLimitTraces(limit int)
 	FullStringWithTracesIfGetter
 
@@ -190,7 +273,6 @@ type BaseErrorWrapperCollectionDefiner interface {
 	) []string
 
 	StringsWithoutReferencePlusHeader() []string
-
 	StringsIf(isIncludeStakeTraces bool) []string
 
 	FullStrings() []string
@@ -198,24 +280,11 @@ type BaseErrorWrapperCollectionDefiner interface {
 	FullStringsWithLimitTraces(limit int) []string
 
 	Errors() []error
-
 	CompiledErrors() []error
 	CompiledErrorsWithStackTraces() []error
 
-	IsSuccess() bool
-	IsValid() bool
-	IsFailed() bool
 	GetAsError() error
-
-	ErrWrapperLogger
-
-	ErrorHandler
 
 	// HandleWithMsg Skip if no error.
 	HandleWithMsg(msg string)
-	// Dispose After dispose nothing will work, everything be removed from memory.
-	Dispose()
-	JsonModelAny() interface{}
-	MarshalJSON() ([]byte, error)
-	UnmarshalJSON(data []byte) error
 }

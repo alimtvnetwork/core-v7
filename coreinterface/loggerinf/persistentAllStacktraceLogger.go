@@ -4,35 +4,35 @@ type persistentAllStacktraceLogger interface {
 	// ErrorStackTraces
 	//
 	// Includes stack-traces
-	ErrorStackTraces(err error) PersistentLogger
+	ErrorStackTraces(err error) BasePersistentLogger
 	// TitleErrorStackTraces
 	//
 	// Includes stack-traces
-	TitleErrorStackTraces(title string, err error) PersistentLogger
+	TitleErrorStackTraces(title string, err error) BasePersistentLogger
 	// DebugStackTraces
 	//
 	// Includes stack-traces
-	DebugStackTraces(message string) PersistentLogger
+	DebugStackTraces(message string) BasePersistentLogger
 	// DebugAttrStackTraces
 	//
 	// Includes stack-traces
-	DebugAttrStackTraces(message, attr string) PersistentLogger
+	DebugAttrStackTraces(message, attr string) BasePersistentLogger
 	// StackTracesIf
 	//
 	// Log StackTraces
-	StackTracesIf(isCondition bool) PersistentLogger
+	StackTracesIf(isCondition bool) BasePersistentLogger
 	// StackTraces
 	//
 	// Log StackTraces as Info
-	StackTraces() PersistentLogger
+	StackTraces() BasePersistentLogger
 	// StackTracesSkip
 	//
 	// Log StackTraces
-	StackTracesSkip(stackSkipIndex int) PersistentLogger
+	StackTracesSkip(stackSkipIndex int) BasePersistentLogger
 	// StackTracesSkipIf
 	//
 	// Log StackTraces
-	StackTracesSkipIf(isCondition bool, stackSkipIndex int) PersistentLogger
-	TitleStackTraces(title string) PersistentLogger
-	TitleStackTracesSkip(stackSkipIndex int, title string) PersistentLogger
+	StackTracesSkipIf(isCondition bool, stackSkipIndex int) BasePersistentLogger
+	TitleStackTraces(title string) BasePersistentLogger
+	TitleStackTracesSkip(stackSkipIndex int, title string) BasePersistentLogger
 }
