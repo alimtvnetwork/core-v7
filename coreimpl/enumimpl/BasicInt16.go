@@ -17,6 +17,21 @@ type BasicInt16 struct {
 	minVal, maxVal                           int16
 }
 
+func (it BasicInt16) IsAnyNamesOf(
+	value int16,
+	names ...string,
+) bool {
+	currentName := it.ToEnumString(value)
+
+	for _, name := range names {
+		if name == currentName {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (it BasicInt16) IsAnyOf(value int16, checkingItems ...int16) bool {
 	if len(checkingItems) == 0 {
 		return true

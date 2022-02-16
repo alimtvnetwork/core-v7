@@ -33,6 +33,21 @@ func (it BasicByte) IsAnyOf(
 	return false
 }
 
+func (it BasicByte) IsAnyNamesOf(
+	value byte,
+	names ...string,
+) bool {
+	currentName := it.ToEnumString(value)
+
+	for _, name := range names {
+		if name == currentName {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (it BasicByte) Max() byte {
 	return it.maxVal
 }

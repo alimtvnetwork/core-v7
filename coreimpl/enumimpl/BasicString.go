@@ -16,6 +16,19 @@ type BasicString struct {
 	minVal, maxVal                           string
 }
 
+func (it BasicString) IsAnyNamesOf(
+	valueName string,
+	names ...string,
+) bool {
+	for _, name := range names {
+		if name == valueName {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (it BasicString) IsAnyOf(value string, checkingItems ...string) bool {
 	if len(checkingItems) == 0 {
 		return true

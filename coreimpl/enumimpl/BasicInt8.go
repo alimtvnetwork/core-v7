@@ -17,6 +17,21 @@ type BasicInt8 struct {
 	minVal, maxVal                           int8
 }
 
+func (it BasicInt8) IsAnyNamesOf(
+	value int8,
+	names ...string,
+) bool {
+	currentName := it.ToEnumString(value)
+
+	for _, name := range names {
+		if name == currentName {
+			return true
+		}
+	}
+
+	return false
+}
+
 func (it BasicInt8) IsAnyOf(
 	value int8,
 	checkingItems ...int8,
