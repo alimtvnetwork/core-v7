@@ -78,7 +78,7 @@ func (it newBasicInt8Creator) UsingTypeSliceAliasMap(
 	aliasingMap map[string]int8,
 ) *BasicInt8 {
 	min := constants.Zero
-	max := len(indexedSliceWithValues)
+	max := len(indexedSliceWithValues) -1
 
 	actualValues := make([]int8, max)
 	for i := range indexedSliceWithValues {

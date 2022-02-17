@@ -93,7 +93,7 @@ func (it newBasicByteCreator) UsingTypeSliceAliasMap(
 	aliasingMap map[string]byte,
 ) *BasicByte {
 	min := constants.Zero
-	max := len(indexedSliceWithValues)
+	max := len(indexedSliceWithValues) -1
 
 	actualValues := make([]byte, max)
 	for i := range indexedSliceWithValues {

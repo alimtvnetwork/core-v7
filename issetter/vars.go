@@ -1,6 +1,8 @@
 package issetter
 
 import (
+	"reflect"
+
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -172,4 +174,6 @@ var (
 		Unset:         Unset,
 		Wildcard:      Wildcard,
 	}
+
+	typeName = reflect.TypeOf(Uninitialized).String()
 )

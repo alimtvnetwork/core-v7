@@ -78,7 +78,7 @@ func (it newBasicUInt16Creator) UsingTypeSliceAliasMap(
 	aliasingMap map[string]uint16,
 ) *BasicUInt16 {
 	min := constants.Zero
-	max := len(indexedSliceWithValues)
+	max := len(indexedSliceWithValues) - 1
 
 	actualValues := make([]uint16, max)
 	for i := range indexedSliceWithValues {

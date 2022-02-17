@@ -661,3 +661,35 @@ func (it Value) Serialize() ([]byte, error) {
 
 	return json.Marshal(name)
 }
+
+func (it Value) TypeName() string {
+	return typeName
+}
+
+func (it Value) IsAnyValuesEqual(anyByteValues ...byte) bool {
+	for _, value := range anyByteValues {
+		if it.Value() == value {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Value) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+	err := it.UnmarshalJSON(jsonUnmarshallingValue)
+
+	return it.ValueByte(), err
+}
+
+func (it Value) MaxByte() byte {
+	return Wildcard.ValueByte()
+}
+
+func (it Value) MinByte() byte {
+	return Uninitialized.ValueByte()
+}
+
+func (it Value) RangesByte() []byte {
+	panic("not implemented, later, todo")
+}
