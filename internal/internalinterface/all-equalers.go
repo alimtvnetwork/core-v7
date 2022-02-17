@@ -32,11 +32,6 @@ type EntityTypeNameWithEqualer interface {
 	IsEntityTypeNameEqualer
 }
 
-type ValueByteWithValueEqualer interface {
-	IsValueEqual(value byte) bool
-	ValueByte() byte
-}
-
 type IsNameEqualer interface {
 	IsNameEqual(name string) bool
 }
