@@ -38,13 +38,7 @@ func (it Value) IsValueEqual(value byte) bool {
 }
 
 func (it Value) RangeNamesCsv() string {
-	rawBytes, err := json.Marshal(values)
-
-	if err != nil {
-		panic(err)
-	}
-
-	return string(rawBytes)
+	return RangeNamesCsv()
 }
 
 func (it Value) IsByteValueEqual(value byte) bool {

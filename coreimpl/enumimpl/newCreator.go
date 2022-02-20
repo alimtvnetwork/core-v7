@@ -6,4 +6,5 @@ type newCreator struct {
 	BasicInt16  newBasicInt16Creator
 	BasicInt32  newBasicInt32Creator
 	BasicString newBasicStringCreator
+	BasicUInt16 newBasicUInt16Creator
 }

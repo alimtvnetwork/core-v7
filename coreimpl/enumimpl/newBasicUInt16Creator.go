@@ -9,6 +9,48 @@ import (
 
 type newBasicUInt16Creator struct{}
 
+func (it newBasicUInt16Creator) CreateUsingMap(
+	typeName string,
+	actualRangesMap map[uint16]string,
+) *BasicUInt16 {
+	return it.CreateUsingMapPlusAliasMap(
+		typeName,
+		actualRangesMap,
+		nil,
+	)
+}
+
+func (it newBasicUInt16Creator) CreateUsingMapPlusAliasMap(
+	typeName string,
+	actualRangesMap map[uint16]string,
+	aliasingMap map[string]uint16,
+) *BasicUInt16 {
+	var min, max uint16
+	actualValues := make([]uint16, len(actualRangesMap))
+	actualNames := make([]string, len(actualRangesMap))
+
+	index := 0
+	for val, name := range actualRangesMap {
+		actualValues[index] = val
+		actualNames[index] = name
+
+		if max < val {
+			max = val
+		}
+
+		index++
+	}
+
+	return it.CreateUsingAliasMap(
+		typeName,
+		actualValues,
+		actualNames,
+		aliasingMap, // aliasing map
+		min,         // zero
+		max,
+	)
+}
+
 // CreateUsingAliasMap
 //
 // Length : must match stringRanges and actualRangesAnyType

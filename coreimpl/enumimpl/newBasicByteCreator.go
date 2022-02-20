@@ -9,6 +9,52 @@ import (
 
 type newBasicByteCreator struct{}
 
+func (it newBasicByteCreator) CreateUsingMap(
+	typeName string,
+	actualRangesMap map[byte]string,
+) *BasicByte {
+	return it.CreateUsingMapPlusAliasMap(
+		typeName,
+		actualRangesMap,
+		nil,
+	)
+}
+
+func (it newBasicByteCreator) CreateUsingMapPlusAliasMap(
+	typeName string,
+	actualRangesMap map[byte]string,
+	aliasingMap map[string]byte,
+) *BasicByte {
+	var min, max byte
+
+	max = constants.MinUint
+	min = 0
+
+	actualValues := make([]byte, len(actualRangesMap))
+	actualNames := make([]string, len(actualRangesMap))
+
+	index := 0
+	for val, name := range actualRangesMap {
+		actualValues[index] = val
+		actualNames[index] = name
+
+		if max < val {
+			max = val
+		}
+
+		index++
+	}
+
+	return it.CreateUsingAliasMap(
+		typeName,
+		actualValues,
+		actualNames,
+		aliasingMap, // aliasing map
+		min,         // zero
+		max,
+	)
+}
+
 func (it newBasicByteCreator) Create(
 	typeName string,
 	actualValueRanges []byte,

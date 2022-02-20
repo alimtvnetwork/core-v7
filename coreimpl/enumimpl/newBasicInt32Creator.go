@@ -1,6 +1,7 @@
 package enumimpl
 
 import (
+	"math"
 	"reflect"
 	"strconv"
 
@@ -8,6 +9,56 @@ import (
 )
 
 type newBasicInt32Creator struct{}
+
+func (it newBasicInt32Creator) CreateUsingMap(
+	typeName string,
+	actualRangesMap map[int32]string,
+) *BasicInt32 {
+	return it.CreateUsingMapPlusAliasMap(
+		typeName,
+		actualRangesMap,
+		nil,
+	)
+}
+
+func (it newBasicInt32Creator) CreateUsingMapPlusAliasMap(
+	typeName string,
+	actualRangesMap map[int32]string,
+	aliasingMap map[string]int32,
+) *BasicInt32 {
+	var min, max int32
+
+	max = math.MinInt32
+	min = math.MaxInt32
+
+	actualValues := make([]int32, len(actualRangesMap))
+	actualNames := make([]string, len(actualRangesMap))
+
+	index := 0
+	for val, name := range actualRangesMap {
+		actualValues[index] = val
+		actualNames[index] = name
+
+		if max < val {
+			max = val
+		}
+
+		if min > val {
+			min = val
+		}
+
+		index++
+	}
+
+	return it.CreateUsingAliasMap(
+		typeName,
+		actualValues,
+		actualNames,
+		aliasingMap, // aliasing map
+		min,
+		max,
+	)
+}
 
 // CreateUsingAliasMap
 //

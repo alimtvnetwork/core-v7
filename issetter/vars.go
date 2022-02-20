@@ -3,6 +3,7 @@ package issetter
 import (
 	"reflect"
 
+	"gitlab.com/evatix-go/core/internal/csvinternal"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -174,6 +175,9 @@ var (
 		Unset:         Unset,
 		Wildcard:      Wildcard,
 	}
+
+	rangesCsvString = csvinternal.RangeNamesWithValuesIndexesCsvString(
+		values...)
 
 	typeName = reflect.TypeOf(Uninitialized).String()
 )
