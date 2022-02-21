@@ -5,6 +5,7 @@ import (
 	"math"
 	"sort"
 	"strconv"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
 )
@@ -127,9 +128,63 @@ func (it DynamicMap) KeyValueString(
 func (it DynamicMap) KeyValueIntDefault(
 	key string,
 ) (val int) {
-	valInt, _, _ := it.KeyValueInt(key)
+	valInt, isFound, isConvFailed := it.KeyValueInt(key)
+
+	if !isFound || isConvFailed {
+		return constants.InvalidValue
+	}
 
 	return valInt
+}
+
+func (it DynamicMap) KeyValueByte(
+	key string,
+) (val byte, isFound, isConvFailed bool) {
+	valInf, isFound := it[key]
+
+	if !isFound {
+		return constants.Zero, isFound, true
+	}
+
+	valueByterCasted, isSuccess := valInf.(valueByter)
+
+	if isSuccess {
+		return valueByterCasted.Value(),
+			true,
+			false
+	}
+
+	exactValueByterCasted, isSuccess := valInf.(exactValueByter)
+
+	if isSuccess {
+		return exactValueByterCasted.ValueByte(),
+			true,
+			false
+	}
+
+	toByteCasted, isSuccess := valInf.(byte)
+
+	if isSuccess {
+		return toByteCasted,
+			true,
+			false
+	}
+
+	toString := fmt.Sprintf(
+		constants.SprintValueFormat,
+		valInf)
+
+	toInt, err := strconv.Atoi(toString)
+
+	if err != nil {
+		return constants.Zero, true, false
+	}
+
+	if toInt >= 0 && toInt <= 255 {
+		return byte(toInt), true, false
+	}
+
+	return constants.Zero, true, true
 }
 
 func (it *DynamicMap) Add(
@@ -152,7 +207,24 @@ func (it DynamicMap) KeyValueInt(
 
 	valInt, isInt := valInf.(int)
 	if isInt {
-		return valInt, isFound, true
+		return valInt, isFound, false
+	}
+
+	valueByterCasted, isByter := valInf.(valueByter)
+
+	if isByter {
+		return int(valueByterCasted.Value()), isFound, false
+	}
+
+	exactValueByterCasted, isExactByter := valInf.(exactValueByter)
+
+	if isExactByter {
+		return int(exactValueByterCasted.ValueByte()), isFound, false
+	}
+
+	valByte, isByte := valInf.(byte)
+	if isByte {
+		return int(valByte), isFound, false
 	}
 
 	toString := fmt.Sprintf(
@@ -162,7 +234,8 @@ func (it DynamicMap) KeyValueInt(
 	toInt, err := strconv.Atoi(toString)
 
 	if err != nil {
-		return constants.InvalidValue, true, false
+		// failed
+		return constants.InvalidValue, true, true
 	}
 
 	return toInt, true, false
@@ -337,14 +410,14 @@ func (it DynamicMap) ConvMapByteString() map[byte]string {
 	newMap := make(map[byte]string, it.Length())
 
 	for key := range it {
-		valInt := it.KeyValueIntDefault(
+		valByte, isFound, isFailed := it.KeyValueByte(
 			key)
 
-		if valInt < 0 || valInt > constants.MaxUnit8AsInt {
+		if !isFound || isFailed {
 			continue
 		}
 
-		newMap[byte(valInt)] = key
+		newMap[valByte] = key
 	}
 
 	return newMap
@@ -495,12 +568,16 @@ func (it DynamicMap) ConvMapInt64String() map[int64]string {
 }
 
 func (it DynamicMap) Strings() []string {
+	if it.IsEmpty() {
+		return []string{}
+	}
+
 	slice := make([]string, it.Length())
 
 	index := 0
 	for key, value := range it {
 		slice[index] = fmt.Sprintf(
-			constants.KeyValShortFormat,
+			constants.KeyValJsonFormat,
 			key,
 			value)
 
@@ -511,7 +588,7 @@ func (it DynamicMap) Strings() []string {
 }
 
 func (it DynamicMap) String() string {
-	return fmt.Sprintf(
-		constants.SprintValueFormat,
-		it.Strings())
+	return strings.Join(
+		it.Strings(),
+		constants.DefaultLine)
 }

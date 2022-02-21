@@ -293,6 +293,7 @@ const (
 	Shell                                    = "sh"
 	Bash                                     = "bash"
 	BinShellCmd                              = "/bin/sh"
+	Etc                                      = "/etc/"
 	ShellCmdline                             = "sh"
 	PerlCmdline                              = "perl"
 	MakeCmdline                              = "make"
@@ -338,6 +339,10 @@ const (
 	DoubleQuotation                          = `"`
 	SingleQuotationStartEnd                  = `''`
 	SingleQuotation                          = `'`
+	Backtick                                 = "`"
+	BacktickStartEnd                         = "``"
+	BacktickSymbol                           = '`'
+	BacktickRuneSymbol               rune    = '`'
 	CodeQuotation                            = "`"
 	CodeQuotationStartEnd                    = "``"
 	SpaceWithColon                           = " : "
@@ -373,6 +378,23 @@ const (
 	UserKeyword                              = "user"
 	AppKeyword                               = "app"
 	TmpKeyword                               = "tmp"
+	WrappedTemplate                          = "{wrapped}"
+	BracketsWrappedTemplate                  = "{brackets-wrapped}"
+	QuotesWrappedTemplate                    = "{quotes-wrapped}"
+	SingleQuotesWrappedTemplate              = "{single-quotes-wrapped}"
+	DoubleQuotesWrappedTemplate              = "{double-quotes-wrapped}"
+	BacktickQuotesWrappedTemplate            = "{backtick-quotes-wrapped}"
+	ParenthesisWrappedTemplate               = "{parenthesis-wrapped}"
+	SquareWrappedTemplate                    = "{square-wrapped}"
+	CurlyWrappedTemplate                     = "{curly-wrapped}"
+	DynamicTemplate                          = "{dynamic}"
+	DynamicTemplateTemplate                  = "{dynamic-template}"
+	RandomTemplate                           = "{random}"
+	InjectTemplate                           = "{inject-template}"
+	ValueTemplate                            = "{value}"
+	ValueWithFieldsTemplate                  = "{value-fields}"
+	ValueJsonTemplate                        = "{value-json}"
+	ValueYamlTemplate                        = "{value-yaml}"
 	PathPrefixTemplate                       = "{prefix}"
 	PathRelativeTemplate                     = "{relative}"
 	PathIdTemplate                           = "{id}"
@@ -397,6 +419,7 @@ const (
 	PrefixRelativeIdFormat                   = "%v/%v/%v"                        // prefix, relative, id
 	PrefixRelativeIdFileFormat               = "%v/%v/%v/%v"                     // prefix, relative, id, file
 	KeyValShortFormat                        = "%s = %v"                         // Key, Value any
+	KeyValJsonFormat                         = "{key: %s, val: %v}"              // Key, Value any
 	LikeQuerySuffix                          = " LIKE ?"
 	SpaceStartedExclamation                  = " started!"
 	SpaceEndedExclamation                    = " ended!"

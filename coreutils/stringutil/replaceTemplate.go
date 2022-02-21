@@ -196,5 +196,170 @@ func (it *replaceTemplate) UsingMapOptions(
 	return format
 }
 
-type name interface {
+func (it *replaceTemplate) UsingNamerMapOptions(
+	isConvKeysToCurlyBraceKeys bool, // true: conv key to {key} before replace
+	format string, // Template-format: {key}-text-something/{path}...
+	mapToReplace map[namer]string,
+) string {
+	if len(mapToReplace) == 0 || len(format) == 0 {
+		return format
+	}
+
+	if isConvKeysToCurlyBraceKeys {
+		for key, valueToReplace := range mapToReplace {
+			keyCurly := fmt.Sprintf(
+				constants.CurlyWrapFormat,
+				key)
+
+			format = strings.ReplaceAll(
+				format,
+				keyCurly,
+				valueToReplace)
+		}
+
+		return format
+	}
+
+	for keyNamer, valueToReplace := range mapToReplace {
+		format = strings.ReplaceAll(
+			format,
+			keyNamer.Name(),
+			valueToReplace)
+	}
+
+	return format
+}
+
+func (it *replaceTemplate) UsingStringerMapOptions(
+	isConvKeysToCurlyBraceKeys bool, // true: conv key to {key} before replace
+	format string, // Template-format: {key}-text-something/{path}...
+	mapToReplace map[fmt.Stringer]string,
+) string {
+	if len(mapToReplace) == 0 || len(format) == 0 {
+		return format
+	}
+
+	if isConvKeysToCurlyBraceKeys {
+		for key, valueToReplace := range mapToReplace {
+			keyCurly := fmt.Sprintf(
+				constants.CurlyWrapFormat,
+				key)
+
+			format = strings.ReplaceAll(
+				format,
+				keyCurly,
+				valueToReplace)
+		}
+
+		return format
+	}
+
+	for keyStringer, valueToReplace := range mapToReplace {
+		format = strings.ReplaceAll(
+			format,
+			keyStringer.String(),
+			valueToReplace)
+	}
+
+	return format
+}
+
+// UsingWrappedTemplate
+//
+//  Replaces all constants.WrappedTemplate {wrapped} with replaceText
+//
+//  Format:
+//      - "some format {wrapped} text here."
+func (it *replaceTemplate) UsingWrappedTemplate(
+	format,
+	replacingText string,
+) string {
+	if len(format) == 0 {
+		return format
+	}
+
+	return strings.ReplaceAll(
+		format,
+		constants.WrappedTemplate,
+		replacingText)
+}
+
+// UsingBracketsWrappedTemplate
+//
+//  Replaces all constants.BracketsWrappedTemplate {brackets-wrapped} with replaceText
+//
+//  Format:
+//      - "some format {brackets-wrapped} text here."
+func (it *replaceTemplate) UsingBracketsWrappedTemplate(
+	format,
+	replacingText string,
+) string {
+	if len(format) == 0 {
+		return format
+	}
+
+	return strings.ReplaceAll(
+		format,
+		constants.BracketsWrappedTemplate,
+		replacingText)
+}
+
+// UsingQuotesWrappedTemplate
+//
+//  Replaces all constants.QuotesWrappedTemplate "{quotes-wrapped}" with replaceText
+//
+//  Format:
+//      - "some format {quotes-wrapped} text here."
+func (it *replaceTemplate) UsingQuotesWrappedTemplate(
+	format,
+	replacingText string,
+) string {
+	if len(format) == 0 {
+		return format
+	}
+
+	return strings.ReplaceAll(
+		format,
+		constants.QuotesWrappedTemplate,
+		replacingText)
+}
+
+// UsingValueTemplate
+//
+//  Replaces all constants.ValueTemplate "{value}" with replaceText
+//
+//  Format:
+//      - "some format {value} text here."
+func (it *replaceTemplate) UsingValueTemplate(
+	format,
+	replacingText string,
+) string {
+	if len(format) == 0 {
+		return format
+	}
+
+	return strings.ReplaceAll(
+		format,
+		constants.ValueTemplate,
+		replacingText)
+}
+
+// UsingValueWithFieldsTemplate
+//
+//  Replaces all constants.ValueWithFieldsTemplate "{value-fields}" with replaceText
+//
+//  Format:
+//      - "some format {value-fields} text here."
+func (it *replaceTemplate) UsingValueWithFieldsTemplate(
+	format,
+	replacingText string,
+) string {
+	if len(format) == 0 {
+		return format
+	}
+
+	return strings.ReplaceAll(
+		format,
+		constants.ValueWithFieldsTemplate,
+		replacingText)
 }

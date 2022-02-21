@@ -10,7 +10,6 @@ import (
 
 type newBasicInt16Creator struct{}
 
-
 func (it newBasicInt16Creator) CreateUsingMap(
 	typeName string,
 	actualRangesMap map[int16]string,
