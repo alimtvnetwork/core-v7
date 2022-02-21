@@ -1,6 +1,8 @@
 package enumimpl
 
 import (
+	"fmt"
+
 	"gitlab.com/evatix-go/core/converters"
 )
 
@@ -49,6 +51,76 @@ func (it newBasicStringCreator) CreateUsingMapPlusAliasMap(
 		min,
 		max,
 	)
+}
+
+func (it newBasicStringCreator) CreateUsingStringersSpread(
+	typeName string,
+	stringerRanges ...fmt.Stringer,
+) *BasicString {
+	actualNames := make([]string, len(stringerRanges))
+	min := ""
+	max := ""
+
+	index := 0
+	for _, strigner := range stringerRanges {
+		name := strigner.String()
+		actualNames[index] = name
+
+		if name > max {
+			max = name
+		}
+
+		if name < min {
+			min = name
+		}
+
+		index++
+	}
+
+	return it.CreateUsingAliasMap(
+		typeName,
+		actualNames,
+		nil,
+		min, max)
+}
+
+func (it newBasicStringCreator) CreateUsingNamesSpread(
+	typeName string,
+	stringRangesNames ...string,
+) *BasicString {
+	min := ""
+	max := ""
+
+	index := 0
+	for _, name := range stringRangesNames {
+		if name > max {
+			max = name
+		}
+
+		if name < min {
+			min = name
+		}
+
+		index++
+	}
+
+	return it.CreateUsingAliasMap(
+		typeName,
+		stringRangesNames,
+		nil,
+		min, max)
+}
+
+func (it newBasicStringCreator) CreateUsingNamesMinMax(
+	typeName string,
+	stringRangesNames []string,
+	min, max string,
+) *BasicString {
+	return it.CreateUsingAliasMap(
+		typeName,
+		stringRangesNames,
+		nil,
+		min, max)
 }
 
 // CreateUsingAliasMap
