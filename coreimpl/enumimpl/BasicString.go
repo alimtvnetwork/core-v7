@@ -7,10 +7,11 @@ import (
 	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type BasicString struct {
-	*numberEnumBase
+	numberEnumBase
 	jsonDoubleQuoteNameToValueHashMap        map[string]bool   // contains names double quotes to value
 	valueToJsonDoubleQuoteStringBytesHashmap map[string][]byte // contains value to string bytes with double quotes
 	minVal, maxVal                           string
@@ -89,6 +90,18 @@ func (it BasicString) GetValueByName(name string) (string, error) {
 
 func (it BasicString) IsValidRange(value string) bool {
 	return it.jsonDoubleQuoteNameToValueHashMap[value]
+}
+
+func (it BasicString) OnlySupportedErr(supportedNames ...string) error {
+	return OnlySupportedErr(
+		it.StringRanges(),
+		supportedNames...)
+}
+
+func (it BasicString) OnlySupportedMsgErr(errMessage string, supportedNames ...string) error {
+	return errcore.ConcatMessageWithErr(
+		errMessage,
+		it.OnlySupportedErr(supportedNames...))
 }
 
 func (it BasicString) AppendPrependJoinValue(

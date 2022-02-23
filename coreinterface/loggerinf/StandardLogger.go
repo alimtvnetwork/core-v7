@@ -44,6 +44,8 @@ type StandardLogger interface {
 	ErrInterface(errorWrapperOrCollection errcoreinf.BaseErrorOrCollectionWrapper) StandardLogger
 	ErrInterfaceStackTraces(errorWrapperOrCollection errcoreinf.BaseErrorOrCollectionWrapper) StandardLogger
 
+	ReflectSetter
+
 	ErrorJsoner(jsoner corejson.Jsoner) StandardLogger
 	DebugJsoner(jsoner corejson.Jsoner) StandardLogger
 	ErrorJsonerTitle(title string, jsoner corejson.Jsoner) StandardLogger

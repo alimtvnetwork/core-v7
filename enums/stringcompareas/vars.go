@@ -22,7 +22,7 @@ var (
 		Invalid:       "Invalid",
 	}
 
-	basicEnumImpl = enumimpl.
+	BasicEnumImpl = enumimpl.
 			New.
 			BasicByte.
 			Default(

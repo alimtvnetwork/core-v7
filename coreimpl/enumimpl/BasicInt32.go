@@ -10,7 +10,7 @@ import (
 )
 
 type BasicInt32 struct {
-	*numberEnumBase
+	numberEnumBase
 	jsonDoubleQuoteNameToValueHashMap        map[string]int32 // contains names double quotes to value
 	valueToJsonDoubleQuoteStringBytesHashmap map[int32][]byte // contains value to string bytes with double quotes
 	valueNameHashmap                         map[int32]string // contains name without double quotes

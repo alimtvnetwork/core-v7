@@ -61,4 +61,6 @@ func main() {
 	fmt.Println(reqtype.BasicEnumImpl.DynamicMap().SortedKeyAnyValues())
 	fmt.Println(reqtype.Read.RangeNamesCsv())
 	fmt.Println(issetter.True.RangeNamesCsv())
+	fmt.Println(reqtype.BasicEnumImpl.AllNameValues())
+	fmt.Println(issetter.True.AllNameValues())
 }

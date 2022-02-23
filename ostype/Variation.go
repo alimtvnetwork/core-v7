@@ -29,6 +29,26 @@ const (
 	Aix
 )
 
+func (it Variation) AllNameValues() []string {
+	return basicEnumImplOsType.AllNameValues()
+}
+
+func (it Variation) OnlySupportedErr(names ...string) error {
+	return basicEnumImplOsType.OnlySupportedErr(names...)
+}
+
+func (it Variation) OnlySupportedMsgErr(message string, names ...string) error {
+	return basicEnumImplOsType.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Variation) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variation) IntegerEnumRanges() []int {
+	return basicEnumImplOsType.IntegerEnumRanges()
+}
+
 func (it Variation) MaxMaxAny() (min, max interface{}) {
 	return basicEnumImplOsType.MaxMaxAny()
 }

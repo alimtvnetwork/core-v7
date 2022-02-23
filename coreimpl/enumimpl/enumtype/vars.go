@@ -11,6 +11,7 @@ var (
 		Integer8:          "Integer8",
 		Integer16:         "Integer16",
 		Integer32:         "Integer32",
+		Integer64:         "Integer64",
 		Integer:           "Integer",
 		String:            "String",
 	}
@@ -25,6 +26,7 @@ var (
 		"Integer8":          Integer8,
 		"Integer16":         Integer16,
 		"Integer32":         Integer32,
+		"Integer64":         Integer64,
 		"Integer":           Integer,
 		"String":            String,
 	}
@@ -44,6 +46,7 @@ var (
 		Integer8:          true,
 		Integer16:         true,
 		Integer32:         true,
+		Integer64:         true,
 		Integer:           true,
 	}
 
@@ -51,6 +54,7 @@ var (
 		Integer8:  true,
 		Integer16: true,
 		Integer32: true,
+		Integer64: true,
 		Integer:   true,
 	}
 )

@@ -3,7 +3,11 @@ package enumtype
 import (
 	"encoding/json"
 	"errors"
+	"reflect"
 	"strconv"
+
+	"gitlab.com/evatix-go/core/coreinterface/enuminf"
+	"gitlab.com/evatix-go/core/internal/csvinternal"
 )
 
 type Variant byte
@@ -18,9 +22,69 @@ const (
 	Integer8
 	Integer16
 	Integer32
+	Integer64
 	Integer
 	String
 )
+
+func (it Variant) TypeName() string {
+	return reflect.TypeOf(it).String()
+}
+
+func (it Variant) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variant) RangeNamesCsv() string {
+	return csvinternal.RangeNamesWithValuesIndexesCsvString(
+		rangesMap[:]...)
+}
+
+func (it Variant) MaxMaxAny() (min, max interface{}) {
+	return Invalid, String
+}
+
+func (it Variant) MinValueString() string {
+	return Invalid.String()
+}
+
+func (it Variant) MaxValueString() string {
+	return String.String()
+}
+
+func (it Variant) MaxInt() int {
+	return String.ValueInt()
+}
+
+func (it Variant) MinInt() int {
+	return Invalid.ValueInt()
+}
+
+func (it Variant) RangesDynamicMap() map[string]interface{} {
+	newMap := make(map[string]interface{}, len(stringToVariantMap))
+
+	for s, variant := range stringToVariantMap {
+		newMap[s] = variant.Value()
+	}
+
+	return newMap
+}
+
+func (it Variant) IntegerEnumRanges() []int {
+	slice := make([]int, len(stringToVariantMap))
+
+	index := 0
+	for _, variant := range stringToVariantMap {
+		slice[index] = variant.ValueInt()
+		index++
+	}
+
+	return slice
+}
+
+func (it Variant) EnumType() enuminf.EnumTyper {
+	return Byte
+}
 
 func (it Variant) Value() byte {
 	return byte(it)
@@ -56,6 +120,10 @@ func (it Variant) IsInteger16() bool {
 
 func (it Variant) IsInteger32() bool {
 	return it == Integer32
+}
+
+func (it Variant) IsInteger64() bool {
+	return it == Integer64
 }
 
 func (it Variant) IsInteger() bool {

@@ -31,28 +31,48 @@ const (
 	Invalid
 )
 
+func (it Variant) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Variant) OnlySupportedErr(names ...string) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Variant) OnlySupportedMsgErr(message string, names ...string) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Variant) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variant) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
 func (it Variant) MaxMaxAny() (min, max interface{}) {
-	return basicEnumImpl.MaxMaxAny()
+	return BasicEnumImpl.MaxMaxAny()
 }
 
 func (it Variant) MinValueString() string {
-	return basicEnumImpl.MinValueString()
+	return BasicEnumImpl.MinValueString()
 }
 
 func (it Variant) MaxValueString() string {
-	return basicEnumImpl.MaxValueString()
+	return BasicEnumImpl.MaxValueString()
 }
 
 func (it Variant) MaxInt() int {
-	return basicEnumImpl.MaxInt()
+	return BasicEnumImpl.MaxInt()
 }
 
 func (it Variant) MinInt() int {
-	return basicEnumImpl.MinInt()
+	return BasicEnumImpl.MinInt()
 }
 
 func (it Variant) RangesDynamicMap() map[string]interface{} {
-	return basicEnumImpl.RangesDynamicMap()
+	return BasicEnumImpl.RangesDynamicMap()
 }
 
 func (it Variant) IsByteValueEqual(value byte) bool {
@@ -60,7 +80,7 @@ func (it Variant) IsByteValueEqual(value byte) bool {
 }
 
 func (it Variant) Format(format string) (compiled string) {
-	return basicEnumImpl.Format(format, it)
+	return BasicEnumImpl.Format(format, it)
 }
 
 func (it Variant) IsEnumEqual(enum enuminf.BasicEnumer) bool {
@@ -134,31 +154,31 @@ func (it Variant) IsInvalid() bool {
 }
 
 func (it Variant) Name() string {
-	return basicEnumImpl.ToEnumString(it.ValueByte())
+	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
 func (it Variant) NameValue() string {
-	return basicEnumImpl.NameWithValue(it)
+	return BasicEnumImpl.NameWithValue(it)
 }
 
 func (it Variant) TypeName() string {
-	return basicEnumImpl.TypeName()
+	return BasicEnumImpl.TypeName()
 }
 
 func (it Variant) ToNumberString() string {
-	return basicEnumImpl.ToNumberString(it.ValueByte())
+	return BasicEnumImpl.ToNumberString(it.ValueByte())
 }
 
 func (it Variant) UnmarshallEnumToValue(
 	jsonUnmarshallingValue []byte,
 ) (byte, error) {
-	return basicEnumImpl.UnmarshallToValue(
+	return BasicEnumImpl.UnmarshallToValue(
 		isMappedToDefault,
 		jsonUnmarshallingValue)
 }
 
 func (it Variant) String() string {
-	return basicEnumImpl.ToEnumString(it.ValueByte())
+	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
 
 func (it Variant) Is(compare Variant) bool {
@@ -232,11 +252,11 @@ func (it Variant) IsNotMatchRegex() bool {
 }
 
 func (it Variant) MarshalJSON() ([]byte, error) {
-	return basicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {
-	rawScriptType, err := basicEnumImpl.UnmarshallToValue(
+	rawScriptType, err := BasicEnumImpl.UnmarshallToValue(
 		isMappedToDefault, data)
 
 	if err == nil {
@@ -247,15 +267,15 @@ func (it *Variant) UnmarshalJSON(data []byte) error {
 }
 
 func (it Variant) RangeNamesCsv() string {
-	return basicEnumImpl.RangeNamesCsv()
+	return BasicEnumImpl.RangeNamesCsv()
 }
 
 func (it *Variant) MaxByte() byte {
-	return basicEnumImpl.Max()
+	return BasicEnumImpl.Max()
 }
 
 func (it *Variant) MinByte() byte {
-	return basicEnumImpl.Min()
+	return BasicEnumImpl.Min()
 }
 
 func (it *Variant) ValueByte() byte {
@@ -263,7 +283,7 @@ func (it *Variant) ValueByte() byte {
 }
 
 func (it *Variant) RangesByte() []byte {
-	return basicEnumImpl.Ranges()
+	return BasicEnumImpl.Ranges()
 }
 
 // IsLineCompareFunc for
@@ -411,7 +431,7 @@ func (it *Variant) IsCompareSuccessNonCaseSensitive(content, search string) bool
 }
 
 func (it Variant) EnumType() enuminf.EnumTyper {
-	return basicEnumImpl.EnumType()
+	return BasicEnumImpl.EnumType()
 }
 
 func (it Variant) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {

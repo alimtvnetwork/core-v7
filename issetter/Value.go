@@ -3,17 +3,20 @@ package issetter
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strconv"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/internal/csvinternal"
 )
 
 // Value
 //
-//  Used evaluate lazy boolean values.
+//  Used evaluate lazy boolean valuesNames.
 //
 // Values:
 //  - Uninitialized Value = 0
@@ -32,6 +35,58 @@ const (
 	Set           Value = 4
 	Wildcard      Value = 5
 )
+
+func (it Value) AllNameValues() []string {
+	slice := make([]string, len(valuesNames))
+
+	for i := range valuesNames {
+		slice[i] = Value(i).NameValue()
+	}
+
+	return slice
+}
+
+func (it Value) OnlySupportedErr(names ...string) error {
+	if len(names) == 0 {
+		return nil
+	}
+
+	hashset := toHashset(names...)
+	var unsupportedNames []string
+
+	for _, name := range valuesNames {
+		_, has := hashset[name]
+
+		if !has {
+			unsupportedNames = append(unsupportedNames, name)
+		}
+	}
+
+	if len(unsupportedNames) > 0 {
+		return errors.New(csvinternal.StringsToStringDefault(unsupportedNames...) + " not supported")
+	}
+
+	return nil
+
+}
+
+func (it Value) OnlySupportedMsgErr(message string, names ...string) error {
+	err := it.OnlySupportedErr(names...)
+
+	if err == nil {
+		return nil
+	}
+
+	return errors.New(message + err.Error())
+}
+
+func (it Value) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Value) IntegerEnumRanges() []int {
+	return integerRanges
+}
 
 func (it Value) MaxMaxAny() (min, max interface{}) {
 	return Min(), Max()
@@ -116,6 +171,14 @@ func (it Value) IsReject() bool {
 	return falseMap[it]
 }
 
+func (it Value) IsFailed() bool {
+	return falseMap[it]
+}
+
+func (it Value) IsSuccess() bool {
+	return trueMap[it]
+}
+
 // IsSkip
 //
 //  Returns true if Uninitialized or Wildcard
@@ -124,7 +187,10 @@ func (it Value) IsSkip() bool {
 }
 
 func (it Value) NameValue() string {
-	return it.Name() + "[" + it.ValueString() + "]"
+	return fmt.Sprintf(
+		constants.EnumNameValueFormat,
+		it.Name(),
+		it.Value())
 }
 
 func (it Value) IsNameEqual(name string) bool {
@@ -170,7 +236,17 @@ func (it Value) ValueString() string {
 }
 
 func (it Value) Format(format string) (compiled string) {
-	panic("not implemented")
+	newMap := map[string]string{
+		"{type-name}": typeName,
+		"{name}":      it.Name(),
+		"{value}":     it.ValueString(),
+	}
+
+	for search, replacer := range newMap {
+		format = strings.ReplaceAll(format, search, replacer)
+	}
+
+	return format
 }
 
 func (it Value) EnumType() enuminf.EnumTyper {
@@ -186,7 +262,7 @@ func (it Value) StringValue() string {
 }
 
 func (it Value) String() string {
-	return values[it]
+	return valuesNames[it]
 }
 
 // IsTrue v == True

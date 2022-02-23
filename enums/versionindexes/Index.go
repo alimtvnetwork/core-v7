@@ -16,6 +16,26 @@ const (
 	Invalid Index = 4
 )
 
+func (it Index) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Index) OnlySupportedErr(names ...string) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Index) OnlySupportedMsgErr(message string, names ...string) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Index) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Index) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
 func (it Index) MaxMaxAny() (min, max interface{}) {
 	return BasicEnumImpl.MaxMaxAny()
 }

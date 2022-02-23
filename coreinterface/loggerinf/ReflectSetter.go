@@ -1,4 +1,4 @@
-package coreinterface
+package loggerinf
 
 // ReflectSetter
 //

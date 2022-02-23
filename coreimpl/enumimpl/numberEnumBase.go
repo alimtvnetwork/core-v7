@@ -17,6 +17,7 @@ type numberEnumBase struct {
 	rangesCsvString        coreonce.StringOnce
 	rangesInvalidMessage   coreonce.StringOnce
 	invalidError           coreonce.ErrorOnce
+	integerEnumRangesOnce  coreonce.IntegersOnce
 	typeName               string
 	minAny, maxAny         interface{}
 	minStr, maxStr         string
@@ -35,7 +36,7 @@ func newNumberEnumBase(
 	actualRangesAnyType interface{},
 	nameRanges []string,
 	min, max interface{},
-) *numberEnumBase {
+) numberEnumBase {
 	if nameRanges == nil {
 		errcore.MeaningfulErrorHandle(
 			errcore.CannotBeNilType,
@@ -57,6 +58,10 @@ func newNumberEnumBase(
 			slice...)
 	})
 
+	integerEnumRangesOnce := coreonce.NewIntegersOnce(func() []int {
+		return IntegersRangesOfAnyVal(actualRangesAnyType)
+	})
+
 	invalidMessageOnce := coreonce.NewStringOnce(func() string {
 		msg := errcore.EnumRangeNotMeet(
 			min,
@@ -66,7 +71,7 @@ func newNumberEnumBase(
 		return msg
 	})
 
-	return &numberEnumBase{
+	return numberEnumBase{
 		actualValueRanges:    actualRangesAnyType,
 		stringRanges:         nameRanges,
 		rangesCsvString:      rangesToCsvOnce,
@@ -74,13 +79,14 @@ func newNumberEnumBase(
 		invalidError: coreonce.NewErrorOnce(func() error {
 			return errors.New(invalidMessageOnce.Value())
 		}),
-		typeName: typeName,
-		minAny:   min,
-		maxAny:   max,
+		integerEnumRangesOnce: integerEnumRangesOnce,
+		typeName:              typeName,
+		minAny:                min,
+		maxAny:                max,
 	}
 }
 
-func (it *numberEnumBase) MaxMaxAny() (min, max interface{}) {
+func (it numberEnumBase) MaxMaxAny() (min, max interface{}) {
 	return it.minAny, it.maxAny
 }
 
@@ -94,16 +100,34 @@ func (it *numberEnumBase) MinValueString() string {
 	return it.minStr
 }
 
-func (it *numberEnumBase) MinInt() int {
-	return convAnyValToInteger(it.minAny)
+func (it numberEnumBase) MinInt() int {
+	return ConvEnumAnyValToInteger(it.minAny)
 }
 
-func (it *numberEnumBase) MaxInt() int {
-	return convAnyValToInteger(it.maxAny)
+func (it numberEnumBase) MaxInt() int {
+	return ConvEnumAnyValToInteger(it.maxAny)
 }
 
-func (it *numberEnumBase) RangesMap() int {
-	return convAnyValToInteger(it.maxAny)
+func (it numberEnumBase) AllNameValues() []string {
+	return AllNameValues(
+		it.StringRanges(),
+		it.actualValueRanges)
+}
+
+func (it numberEnumBase) RangesMap() map[int]string {
+	return it.DynamicMap().ConvMapIntegerString()
+}
+
+func (it numberEnumBase) OnlySupportedErr(supportedNames ...string) error {
+	return OnlySupportedErr(
+		it.StringRanges(),
+		supportedNames...)
+}
+
+func (it numberEnumBase) OnlySupportedMsgErr(errMessage string, supportedNames ...string) error {
+	return errcore.ConcatMessageWithErr(
+		errMessage,
+		it.OnlySupportedErr(supportedNames...))
 }
 
 func (it *numberEnumBase) MaxValueString() string {
@@ -116,11 +140,15 @@ func (it *numberEnumBase) MaxValueString() string {
 	return it.maxStr
 }
 
-func (it *numberEnumBase) Length() int {
+func (it *numberEnumBase) IntegerEnumRanges() []int {
+	return it.integerEnumRangesOnce.Values()
+}
+
+func (it numberEnumBase) Length() int {
 	return len(it.StringRanges())
 }
 
-func (it *numberEnumBase) Count() int {
+func (it numberEnumBase) Count() int {
 	return len(it.StringRanges())
 }
 
@@ -174,7 +202,7 @@ func (it *numberEnumBase) KeyAnyValues() []KeyAnyVal {
 	return it.keyAnyValues
 }
 
-func (it *numberEnumBase) KeyValIntegers() []KeyValInteger {
+func (it numberEnumBase) KeyValIntegers() []KeyValInteger {
 	slice := make([]KeyValInteger, it.Length())
 
 	it.LoopInteger(func(index int, name string, valInteger int) (isBreak bool) {
@@ -189,7 +217,7 @@ func (it *numberEnumBase) KeyValIntegers() []KeyValInteger {
 	return slice
 }
 
-func (it *numberEnumBase) Loop(looperFunc LooperFunc) {
+func (it numberEnumBase) Loop(looperFunc LooperFunc) {
 	for i, keyAnyVal := range it.KeyAnyValues() {
 		isBreak := looperFunc(i, keyAnyVal.Key, keyAnyVal.AnyValue)
 
@@ -199,7 +227,7 @@ func (it *numberEnumBase) Loop(looperFunc LooperFunc) {
 	}
 }
 
-func (it *numberEnumBase) LoopInteger(looperFunc LooperIntegerFunc) {
+func (it numberEnumBase) LoopInteger(looperFunc LooperIntegerFunc) {
 	for i, keyAnyVal := range it.KeyAnyValues() {
 		isBreak := looperFunc(i, keyAnyVal.Key, keyAnyVal.ValInt())
 
@@ -209,7 +237,7 @@ func (it *numberEnumBase) LoopInteger(looperFunc LooperIntegerFunc) {
 	}
 }
 
-func (it *numberEnumBase) TypeName() string {
+func (it numberEnumBase) TypeName() string {
 	return it.typeName
 }
 
@@ -219,21 +247,18 @@ func (it *numberEnumBase) TypeName() string {
 //
 // Make sure non ptr is called +
 // String should also be attached with non ptr.
-func (it *numberEnumBase) NameWithValueOption(
+func (it numberEnumBase) NameWithValueOption(
 	value interface{},
 	isIncludeQuotation bool,
 ) string {
 	if isIncludeQuotation {
 		return fmt.Sprintf(
-			constants.DoubleQuoteStringWithBracketWrapNumberFormat,
+			constants.EnumDoubleQuoteNameValueFormat,
 			value,
 			value)
 	}
 
-	return fmt.Sprintf(
-		constants.StringWithBracketWrapNumberFormat,
-		value,
-		value)
+	return NameWithValue(value)
 }
 
 // NameWithValue
@@ -242,16 +267,13 @@ func (it *numberEnumBase) NameWithValueOption(
 //
 // Make sure non ptr is called +
 // String should also be attached with non ptr.
-func (it *numberEnumBase) NameWithValue(
+func (it numberEnumBase) NameWithValue(
 	value interface{},
 ) string {
-	return fmt.Sprintf(
-		constants.StringWithBracketWrapNumberFormat,
-		value,
-		value)
+	return NameWithValue(value)
 }
 
-func (it *numberEnumBase) ValueString(
+func (it numberEnumBase) ValueString(
 	value interface{},
 ) string {
 	return fmt.Sprintf(
@@ -275,7 +297,7 @@ func (it *numberEnumBase) ValueString(
 //  - {type-name} : represents type-name string
 //  - {name}      : represents name string
 //  - {value}     : represents value string
-func (it *numberEnumBase) Format(
+func (it numberEnumBase) Format(
 	format string,
 	value interface{},
 ) string {
@@ -303,19 +325,27 @@ func (it *numberEnumBase) RangesInvalidErr() error {
 	return it.invalidError.Value()
 }
 
-func (it *numberEnumBase) StringRangesPtr() *[]string {
+func (it numberEnumBase) StringRangesPtr() *[]string {
 	return &it.stringRanges
 }
 
-func (it *numberEnumBase) StringRanges() []string {
+func (it numberEnumBase) StringRanges() []string {
 	return it.stringRanges
 }
 
-func (it *numberEnumBase) JsonString(input interface{}) string {
+func (it numberEnumBase) NamesHashset() map[string]bool {
+	if it.Length() == 0 {
+		return map[string]bool{}
+	}
+
+	return toHashset(it.StringRanges()...)
+}
+
+func (it numberEnumBase) JsonString(input interface{}) string {
 	return it.ToEnumString(input)
 }
 
-func (it *numberEnumBase) ToEnumString(
+func (it numberEnumBase) ToEnumString(
 	input interface{},
 ) string {
 	return fmt.Sprintf(

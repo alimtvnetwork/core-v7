@@ -11,6 +11,18 @@ type KeyAnyVal struct {
 	AnyValue interface{}
 }
 
+func (it KeyAnyVal) KeyString() string {
+	return it.Key
+}
+
+func (it KeyAnyVal) AnyVal() interface{} {
+	return it.AnyValue
+}
+
+func (it KeyAnyVal) AnyValString() string {
+	return convAnyValToString(it.AnyValue)
+}
+
 func (it KeyAnyVal) WrapKey() string {
 	return toJsonName(it.Key)
 }
@@ -36,7 +48,7 @@ func (it KeyAnyVal) IsString() bool {
 }
 
 func (it KeyAnyVal) ValInt() int {
-	return convAnyValToInteger(it.AnyValue)
+	return ConvEnumAnyValToInteger(it.AnyValue)
 }
 
 func (it KeyAnyVal) KeyValInteger() KeyValInteger {

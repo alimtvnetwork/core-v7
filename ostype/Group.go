@@ -14,6 +14,26 @@ const (
 	InvalidGroup
 )
 
+func (it Group) AllNameValues() []string {
+	return basicEnumImplOsGroup.AllNameValues()
+}
+
+func (it Group) OnlySupportedErr(names ...string) error {
+	return basicEnumImplOsGroup.OnlySupportedErr(names...)
+}
+
+func (it Group) OnlySupportedMsgErr(message string, names ...string) error {
+	return basicEnumImplOsGroup.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Group) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Group) IntegerEnumRanges() []int {
+	return basicEnumImplOsGroup.IntegerEnumRanges()
+}
+
 func (it Group) MaxMaxAny() (min, max interface{}) {
 	return basicEnumImplOsGroup.MaxMaxAny()
 }

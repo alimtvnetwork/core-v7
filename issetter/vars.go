@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	values = []string{"Uninitialized", "True", "False", "Unset", "Set", "Wildcard"}
+	valuesNames = []string{"Uninitialized", "True", "False", "Unset", "Set", "Wildcard"}
 
 	jsonValuesMap = map[string]Value{
 		simplewrap.WithDoubleQuote("0"):        Uninitialized,
@@ -177,9 +177,10 @@ var (
 	}
 
 	rangesCsvString = csvinternal.RangeNamesWithValuesIndexesCsvString(
-		values...)
+		valuesNames...)
 
 	dynamicRangesMap = generateDynamicRangesMap()
+	integerRanges    = IntegerEnumRanges()
 
 	typeName = reflect.TypeOf(Uninitialized).String()
 )

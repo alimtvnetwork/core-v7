@@ -7,6 +7,32 @@ import (
 
 type Variant byte
 
+func (it Variant) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Variant) OnlySupportedErr(
+	names ...string,
+) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Variant) OnlySupportedMsgErr(
+	message string,
+	names ...string,
+) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(
+		message, names...)
+}
+
+func (it Variant) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variant) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
 func (it Variant) MaxMaxAny() (min, max interface{}) {
 	return BasicEnumImpl.MaxMaxAny()
 }

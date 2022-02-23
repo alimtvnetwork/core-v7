@@ -3,16 +3,12 @@ package coreonce
 import (
 	"encoding/json"
 	"strconv"
-
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/issetter"
 )
 
 type IntegerOnce struct {
 	innerData       int
 	initializerFunc func() int
-	isInitialized   issetter.Value
+	isInitialized   bool
 }
 
 func NewIntegerOnce(initializerFunc func() int) IntegerOnce {
@@ -27,64 +23,50 @@ func NewIntegerOncePtr(initializerFunc func() int) *IntegerOnce {
 	}
 }
 
-func (receiver *IntegerOnce) MarshalJSON() ([]byte, error) {
-	return json.Marshal(receiver.Value())
+func (it *IntegerOnce) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.Value())
 }
 
-func (receiver *IntegerOnce) UnmarshalJSON(data []byte) error {
-	receiver.isInitialized = issetter.True
+func (it *IntegerOnce) UnmarshalJSON(data []byte) error {
+	it.isInitialized = true
 
-	return json.Unmarshal(data, &receiver.innerData)
+	return json.Unmarshal(data, &it.innerData)
 }
 
-func (receiver *IntegerOnce) Value() int {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *IntegerOnce) Value() int {
+	if it.isInitialized {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = true
 
-	return receiver.innerData
+	return it.innerData
 }
 
 // IsEmpty returns true if zero
-func (receiver *IntegerOnce) IsEmpty() bool {
-	return receiver.Value() == 0
+func (it *IntegerOnce) IsEmpty() bool {
+	return it.Value() == 0
 }
 
-func (receiver *IntegerOnce) IsZero() bool {
-	return receiver.Value() == 0
+func (it *IntegerOnce) IsZero() bool {
+	return it.Value() == 0
 }
 
-func (receiver *IntegerOnce) IsNegative() bool {
-	return receiver.Value() < 0
+func (it *IntegerOnce) IsNegative() bool {
+	return it.Value() < 0
 }
 
-func (receiver *IntegerOnce) IsPositive() bool {
-	return receiver.Value() > 0
+func (it *IntegerOnce) IsPositive() bool {
+	return it.Value() > 0
 }
 
-func (receiver *IntegerOnce) IsIntCompareResult(valueCompare int, compare corecomparator.Compare) bool {
-	currentValue := receiver.Value()
-	switch compare {
-	case corecomparator.Equal:
-		return currentValue == valueCompare
-	case corecomparator.LeftGreater:
-		return currentValue > valueCompare
-	case corecomparator.LeftGreaterEqual:
-		return currentValue >= valueCompare
-	case corecomparator.LeftLess:
-		return currentValue < valueCompare
-	case corecomparator.LeftLessEqual:
-		return currentValue <= valueCompare
-	case corecomparator.NotEqual:
-		return currentValue != valueCompare
-	default:
-		panic(messages.ComparatorOutOfRangeMessage)
-	}
+func (it *IntegerOnce) String() string {
+	return strconv.Itoa(it.Value())
 }
 
-func (receiver *IntegerOnce) String() string {
-	return strconv.Itoa(receiver.Value())
+func (it *IntegerOnce) Serialize() ([]byte, error) {
+	value := it.Value()
+
+	return json.Marshal(value)
 }

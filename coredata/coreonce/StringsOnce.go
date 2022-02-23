@@ -2,29 +2,29 @@ package coreonce
 
 import (
 	"encoding/json"
+	"sort"
 	"sync"
 
-	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/issetter"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/evatix-go/core/internal/csvinternal"
 )
 
 type StringsOnce struct {
-	innerData       *[]string
-	mapOnce         *map[string]bool
-	initializerFunc func() *[]string
-	isInitialized   issetter.Value
+	innerData       []string
+	mapOnce         map[string]bool
+	initializerFunc func() []string
+	isInitialized   bool
+	sortedValues    []string
 	sync.Mutex
 }
 
-func NewStringsOnce(initializerFunc func() *[]string) StringsOnce {
+func NewStringsOnce(initializerFunc func() []string) StringsOnce {
 	return StringsOnce{
 		initializerFunc: initializerFunc,
 	}
 }
 
-func NewStringsOncePtr(initializerFunc func() *[]string) *StringsOnce {
+func NewStringsOncePtr(initializerFunc func() []string) *StringsOnce {
 	return &StringsOnce{
 		initializerFunc: initializerFunc,
 	}
@@ -35,40 +35,44 @@ func (it *StringsOnce) MarshalJSON() ([]byte, error) {
 }
 
 func (it *StringsOnce) UnmarshalJSON(data []byte) error {
-	it.isInitialized = issetter.True
+	it.isInitialized = true
 
 	return json.Unmarshal(data, &it.innerData)
 }
 
-func (it *StringsOnce) Strings() *[]string {
+func (it *StringsOnce) Strings() []string {
 	return it.Value()
 }
 
 func (it *StringsOnce) SafeStrings() []string {
-	items := it.Value()
-
-	if items == nil || len(*items) == 0 {
+	if it.IsEmpty() {
 		return []string{}
 	}
 
-	return *it.Value()
-}
-
-func (it *StringsOnce) List() []string {
-	return *it.Value()
-}
-
-func (it *StringsOnce) Values() *[]string {
 	return it.Value()
 }
 
-func (it *StringsOnce) Value() *[]string {
-	if it.isInitialized.IsTrue() {
+func (it *StringsOnce) List() []string {
+	return it.Value()
+}
+
+func (it *StringsOnce) Values() []string {
+	return it.Value()
+}
+
+func (it *StringsOnce) ValuesPtr() *[]string {
+	values := it.Value()
+
+	return &values
+}
+
+func (it *StringsOnce) Value() []string {
+	if it.isInitialized == true {
 		return it.innerData
 	}
 
 	it.innerData = it.initializerFunc()
-	it.isInitialized = issetter.True
+	it.isInitialized = true
 
 	return it.innerData
 }
@@ -80,7 +84,7 @@ func (it *StringsOnce) Length() int {
 		return 0
 	}
 
-	return len(*values)
+	return len(values)
 }
 
 func (it *StringsOnce) HasAnyItem() bool {
@@ -89,9 +93,13 @@ func (it *StringsOnce) HasAnyItem() bool {
 
 // IsEmpty returns true if zero
 func (it *StringsOnce) IsEmpty() bool {
+	if it == nil || it.initializerFunc == nil {
+		return true
+	}
+
 	values := it.Value()
 
-	return values == nil || len(*values) == 0
+	return values == nil || len(values) == 0
 }
 
 func (it *StringsOnce) HasAll(searchTerms ...string) bool {
@@ -104,14 +112,14 @@ func (it *StringsOnce) HasAll(searchTerms ...string) bool {
 	return true
 }
 
-func (it *StringsOnce) UniqueMapLock() *map[string]bool {
+func (it *StringsOnce) UniqueMapLock() map[string]bool {
 	it.Lock()
 	defer it.Unlock()
 
 	return it.UniqueMap()
 }
 
-func (it *StringsOnce) UniqueMap() *map[string]bool {
+func (it *StringsOnce) UniqueMap() map[string]bool {
 	if it.mapOnce != nil {
 		return it.mapOnce
 	}
@@ -119,16 +127,16 @@ func (it *StringsOnce) UniqueMap() *map[string]bool {
 	values := it.Values()
 
 	if values == nil {
-		return &map[string]bool{}
+		return map[string]bool{}
 	}
 
-	hashset := make(map[string]bool, len(*values))
+	hashset := make(map[string]bool, len(values))
 
-	for _, item := range *values {
+	for _, item := range values {
 		hashset[item] = true
 	}
 
-	it.mapOnce = &hashset
+	it.mapOnce = hashset
 
 	return it.mapOnce
 }
@@ -138,7 +146,7 @@ func (it *StringsOnce) Has(search string) bool {
 }
 
 func (it *StringsOnce) IsContains(search string) bool {
-	for _, s := range *it.innerData {
+	for _, s := range it.innerData {
 		if s == search {
 			return true
 		}
@@ -148,20 +156,83 @@ func (it *StringsOnce) IsContains(search string) bool {
 }
 
 func (it *StringsOnce) CsvLines() []string {
-	return simplewrap.DoubleQuoteWrapElements(
-		false,
+	return csvinternal.StringsToCsvStringsDefault(
 		it.List()...)
 }
 
-func (it *StringsOnce) CsvOptions(isSkipQuoteOnlyOnExistence bool) string {
-	return converters.StringsToCsvPtr(isSkipQuoteOnlyOnExistence, it.Value())
+func (it *StringsOnce) CsvOptions() string {
+	return csvinternal.StringsToStringDefault(it.Value()...)
 }
 
 func (it *StringsOnce) Csv() string {
-	return it.CsvOptions(false)
+	return it.CsvOptions()
 }
 
-func (it *StringsOnce) JsonStringMust() string {
+// Sorted
+//
+//  Warning : Current values will be mutated,
+//  so better to make a clone of it.
+func (it *StringsOnce) Sorted() []string {
+	if it.sortedValues != nil {
+		return it.sortedValues
+	}
+
+	it.sortedValues = it.Value()
+	sort.Strings(it.sortedValues)
+
+	return it.sortedValues
+}
+
+func (it *StringsOnce) RangesMap() map[string]int {
+	values := it.Value()
+
+	if len(values) == 0 {
+		return map[string]int{}
+	}
+
+	newMap := make(map[string]int, len(values))
+
+	for i, value := range values {
+		newMap[value] = i
+	}
+
+	return newMap
+}
+
+func (it StringsOnce) Serialize() ([]byte, error) {
+	values := it.Value()
+
+	return json.Marshal(values)
+}
+
+func (it *StringsOnce) IsEqual(comparingItems ...string) bool {
+	if it == nil && comparingItems == nil {
+		return true
+	}
+
+	currentItems := it.Value()
+	if currentItems == nil && comparingItems == nil {
+		return true
+	}
+
+	if currentItems == nil || comparingItems == nil {
+		return false
+	}
+
+	if len(currentItems) != len(comparingItems) {
+		return false
+	}
+
+	for i, item := range currentItems {
+		if item != comparingItems[i] {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (it StringsOnce) JsonStringMust() string {
 	marshalledJsonBytes, err := it.MarshalJSON()
 
 	if err != nil {
@@ -174,6 +245,6 @@ func (it *StringsOnce) JsonStringMust() string {
 	return string(marshalledJsonBytes)
 }
 
-func (it *StringsOnce) String() string {
+func (it StringsOnce) String() string {
 	return it.Csv()
 }

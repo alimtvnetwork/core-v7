@@ -1,6 +1,8 @@
 package errcore
 
-import "gitlab.com/evatix-go/core/constants"
+import (
+	"gitlab.com/evatix-go/core/constants"
+)
 
 func MergeErrorsToStringDefault(
 	errorItems ...error,

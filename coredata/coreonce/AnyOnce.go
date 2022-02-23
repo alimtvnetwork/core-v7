@@ -1,17 +1,17 @@
 package coreonce
 
 import (
+	"encoding/json"
 	"fmt"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/issetter"
 )
 
 type AnyOnce struct {
 	innerData       interface{}
 	initializerFunc func() interface{}
-	isInitialized   issetter.Value
+	isInitialized   bool
 }
 
 func NewAnyOnce(initializerFunc func() interface{}) AnyOnce {
@@ -26,33 +26,39 @@ func NewAnyOncePtr(initializerFunc func() interface{}) *AnyOnce {
 	}
 }
 
-func (receiver *AnyOnce) Value() interface{} {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *AnyOnce) Value() interface{} {
+	if it.isInitialized {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = true
 
-	return receiver.innerData
+	return it.innerData
 }
 
-func (receiver *AnyOnce) IsNull() bool {
-	return receiver.Value() == nil
+func (it *AnyOnce) IsNull() bool {
+	return it.Value() == nil
 }
 
-func (receiver *AnyOnce) IsStringEmpty() bool {
-	return receiver.String() == ""
+func (it *AnyOnce) IsStringEmpty() bool {
+	return it.String() == ""
 }
 
-func (receiver *AnyOnce) IsStringEmptyOrWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(receiver.String())
+func (it *AnyOnce) IsStringEmptyOrWhitespace() bool {
+	return strings.TrimSpace(it.String()) == ""
 }
 
-func (receiver *AnyOnce) String() string {
-	if receiver.IsNull() {
+func (it *AnyOnce) String() string {
+	if it.IsNull() {
 		return constants.EmptyString
 	}
 
-	return fmt.Sprintf(constants.SprintValueFormat, receiver.Value())
+	return fmt.Sprintf(constants.SprintValueFormat, it.Value())
+}
+
+func (it *AnyOnce) Serialize() ([]byte, error) {
+	value := it.Value()
+
+	return json.Marshal(value)
 }

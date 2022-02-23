@@ -26,5 +26,9 @@ type BasicEnumer interface {
 	MaxInt() int
 	MinInt() int
 	RangesDynamicMapGetter
+	AllNameValues() []string
+	OnlySupportedErr(names ...string) error
+	OnlySupportedMsgErr(message string, names ...string) error
+	IntegerEnumRangesGetter
 	EnumType() EnumTyper
 }

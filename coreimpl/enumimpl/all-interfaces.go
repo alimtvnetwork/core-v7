@@ -23,3 +23,11 @@ type valueInt8er interface {
 type exactValueInt8er interface {
 	ValueInt8() int8
 }
+
+type valueUInt16er interface {
+	Value() uint16
+}
+
+type exactValueUInt16er interface {
+	ValueUInt16() uint16
+}

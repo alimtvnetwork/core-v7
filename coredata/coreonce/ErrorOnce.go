@@ -6,13 +6,12 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/converters"
-	"gitlab.com/evatix-go/core/issetter"
 )
 
 type ErrorOnce struct {
 	innerData       error
 	initializerFunc func() error
-	isInitialized   issetter.Value
+	isInitialized   bool
 }
 
 func NewErrorOnce(initializerFunc func() error) ErrorOnce {
@@ -27,107 +26,113 @@ func NewErrorOncePtr(initializerFunc func() error) *ErrorOnce {
 	}
 }
 
-func (receiver *ErrorOnce) MarshalJSON() ([]byte, error) {
-	if receiver.IsNullOrEmpty() {
+func (it *ErrorOnce) MarshalJSON() ([]byte, error) {
+	if it.IsNullOrEmpty() {
 		return json.Marshal("")
 	}
 
-	return json.Marshal(receiver.Value().Error())
+	return json.Marshal(it.Value().Error())
 }
 
-func (receiver *ErrorOnce) UnmarshalJSON(data []byte) error {
-	receiver.isInitialized = issetter.True
+func (it *ErrorOnce) UnmarshalJSON(data []byte) error {
+	it.isInitialized = true
 	var str string
 
 	err := json.Unmarshal(data, &str)
-	receiver.innerData = errors.New(str)
+	it.innerData = errors.New(str)
 
 	return err
 }
 
-func (receiver *ErrorOnce) HasError() bool {
-	return !receiver.IsNullOrEmpty()
+func (it *ErrorOnce) HasError() bool {
+	return !it.IsNullOrEmpty()
 }
 
-func (receiver *ErrorOnce) IsNull() bool {
-	return receiver.Value() == nil
+func (it *ErrorOnce) IsNull() bool {
+	return it.Value() == nil
 }
 
-func (receiver *ErrorOnce) IsNullOrEmpty() bool {
-	err := receiver.Value()
+func (it *ErrorOnce) IsNullOrEmpty() bool {
+	err := it.Value()
 
 	return err == nil || err.Error() == ""
 }
 
-func (receiver *ErrorOnce) Message() string {
-	if receiver.IsNull() {
+func (it *ErrorOnce) Message() string {
+	if it.IsNull() {
 		return constants.EmptyString
 	}
 
-	return receiver.Value().Error()
+	return it.Value().Error()
 }
 
-func (receiver *ErrorOnce) IsMessageEqual(msg string) bool {
-	if receiver.IsNull() {
+func (it *ErrorOnce) IsMessageEqual(msg string) bool {
+	if it.IsNull() {
 		return false
 	}
 
-	return receiver.Message() == msg
+	return it.Message() == msg
 }
 
 // HandleError with panic if error exist or else skip
 //
 // Skip if no error type (NoError).
-func (receiver *ErrorOnce) HandleError() {
-	if receiver.IsNullOrEmpty() {
+func (it *ErrorOnce) HandleError() {
+	if it.IsNullOrEmpty() {
 		return
 	}
 
-	panic(receiver.Value())
+	panic(it.Value())
 }
 
 // HandleErrorWith by concatenating message and then panic if error exist or else skip
 //
 // Skip if no error type (NoError).
-func (receiver *ErrorOnce) HandleErrorWith(messages ...string) {
-	if receiver.IsNullOrEmpty() {
+func (it *ErrorOnce) HandleErrorWith(messages ...string) {
+	if it.IsNullOrEmpty() {
 		return
 	}
 
-	panic(receiver.ConcatNewString(messages...))
+	panic(it.ConcatNewString(messages...))
 }
 
-func (receiver *ErrorOnce) ConcatNewString(messages ...string) string {
+func (it *ErrorOnce) ConcatNewString(messages ...string) string {
 	additionalMessages :=
 		converters.StringsToCsv(
 			false,
 			messages...,
 		)
 
-	if receiver.IsNullOrEmpty() {
+	if it.IsNullOrEmpty() {
 		return additionalMessages
 	}
 
-	return receiver.Value().Error() +
+	return it.Value().Error() +
 		constants.NewLineUnix +
 		additionalMessages
 }
 
-func (receiver *ErrorOnce) ConcatNew(messages ...string) error {
-	return errors.New(receiver.ConcatNewString(messages...))
+func (it *ErrorOnce) ConcatNew(messages ...string) error {
+	return errors.New(it.ConcatNewString(messages...))
 }
 
-func (receiver *ErrorOnce) Value() error {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *ErrorOnce) Value() error {
+	if it.isInitialized {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = true
 
-	return receiver.innerData
+	return it.innerData
 }
 
-func (receiver *ErrorOnce) String() string {
-	return receiver.Value().Error()
+func (it *ErrorOnce) String() string {
+	return it.Value().Error()
+}
+
+func (it *ErrorOnce) Serialize() ([]byte, error) {
+	value := it.Value()
+
+	return json.Marshal(value)
 }

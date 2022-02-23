@@ -71,6 +71,26 @@ const (
 	Enforce
 )
 
+func (it Request) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Request) OnlySupportedErr(names ...string) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Request) OnlySupportedMsgErr(message string, names ...string) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Request) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Request) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
 func (it Request) MaxMaxAny() (min, max interface{}) {
 	return BasicEnumImpl.MaxMaxAny()
 }

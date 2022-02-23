@@ -38,3 +38,16 @@ type RangeValidateChecker interface {
 	// IsInvalidRange Is out of the ranges expected.
 	IsInvalidRange() bool
 }
+
+type IsStartChecker interface {
+	IsStart() bool
+}
+
+type IsEndChecker interface {
+	IsEnd() bool
+}
+
+type IsStartEndChecker interface {
+	IsStartChecker
+	IsEndChecker
+}

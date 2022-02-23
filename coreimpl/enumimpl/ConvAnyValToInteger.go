@@ -7,10 +7,11 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-func convAnyValToInteger(val interface{}) int {
+func ConvEnumAnyValToInteger(val interface{}) int {
 	_, isStr := val.(string)
 
 	if isStr {
+		// already a string represents string type enum
 		return constants.MinInt
 	}
 
@@ -33,6 +34,10 @@ func convAnyValToInteger(val interface{}) int {
 		return int(casted.Value())
 	case exactValueInt8er:
 		return int(casted.ValueInt8())
+	case valueUInt16er:
+		return int(casted.Value())
+	case exactValueUInt16er:
+		return int(casted.ValueUInt16())
 	}
 
 	str := fmt.Sprintf(

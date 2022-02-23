@@ -83,7 +83,7 @@ func (it DynamicMap) AllValuesIntegers() []int {
 
 	index := 0
 	for _, value := range it {
-		allValues[index] = convAnyValToInteger(value)
+		allValues[index] = ConvEnumAnyValToInteger(value)
 
 		index++
 	}
@@ -109,7 +109,7 @@ func (it DynamicMap) MapIntegerString() (
 
 	index := 0
 	for key, value := range it {
-		valInt := convAnyValToInteger(value)
+		valInt := ConvEnumAnyValToInteger(value)
 		rangeMap[valInt] = key
 		allKeysSorted[index] = valInt
 

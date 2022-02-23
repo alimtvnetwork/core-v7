@@ -3,14 +3,12 @@ package coreonce
 import (
 	"encoding/json"
 	"strconv"
-
-	"gitlab.com/evatix-go/core/issetter"
 )
 
 type BoolOnce struct {
 	innerData       bool
 	initializerFunc func() bool
-	isInitialized   issetter.Value
+	isInitialized   bool
 }
 
 func NewBoolOnce(initializerFunc func() bool) BoolOnce {
@@ -25,27 +23,33 @@ func NewBoolOncePtr(initializerFunc func() bool) *BoolOnce {
 	}
 }
 
-func (receiver *BoolOnce) MarshalJSON() ([]byte, error) {
-	return json.Marshal(receiver.Value())
+func (it *BoolOnce) MarshalJSON() ([]byte, error) {
+	return json.Marshal(it.Value())
 }
 
-func (receiver *BoolOnce) UnmarshalJSON(data []byte) error {
-	receiver.isInitialized = issetter.True
+func (it *BoolOnce) UnmarshalJSON(data []byte) error {
+	it.isInitialized = true
 
-	return json.Unmarshal(data, &receiver.innerData)
+	return json.Unmarshal(data, &it.innerData)
 }
 
-func (receiver *BoolOnce) Value() bool {
-	if receiver.isInitialized.IsTrue() {
-		return receiver.innerData
+func (it *BoolOnce) Value() bool {
+	if it.isInitialized {
+		return it.innerData
 	}
 
-	receiver.innerData = receiver.initializerFunc()
-	receiver.isInitialized = issetter.True
+	it.innerData = it.initializerFunc()
+	it.isInitialized = true
 
-	return receiver.innerData
+	return it.innerData
 }
 
-func (receiver *BoolOnce) String() string {
-	return strconv.FormatBool(receiver.Value())
+func (it *BoolOnce) String() string {
+	return strconv.FormatBool(it.Value())
+}
+
+func (it *BoolOnce) Serialize() ([]byte, error) {
+	value := it.Value()
+
+	return json.Marshal(value)
 }

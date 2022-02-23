@@ -4,15 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
-
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/issetter"
 )
 
 type StringOnce struct {
 	innerData       string
 	initializerFunc func() string
-	isInitialized   issetter.Value
+	isInitialized   bool
 }
 
 func NewStringOnce(initializerFunc func() string) StringOnce {
@@ -32,7 +29,7 @@ func (it *StringOnce) MarshalJSON() ([]byte, error) {
 }
 
 func (it *StringOnce) UnmarshalJSON(data []byte) error {
-	it.isInitialized = issetter.True
+	it.isInitialized = true
 
 	return json.Unmarshal(data, &it.innerData)
 }
@@ -44,12 +41,12 @@ func (it *StringOnce) ValuePtr() *string {
 }
 
 func (it *StringOnce) Value() string {
-	if it.isInitialized.IsTrue() {
+	if it.isInitialized {
 		return it.innerData
 	}
 
 	it.innerData = it.initializerFunc()
-	it.isInitialized = issetter.True
+	it.isInitialized = true
 
 	return it.innerData
 }
@@ -67,7 +64,7 @@ func (it *StringOnce) IsEmpty() bool {
 }
 
 func (it *StringOnce) IsEmptyOrWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.Value())
+	return strings.TrimSpace(it.Value()) == ""
 }
 
 func (it *StringOnce) Bytes() []byte {
@@ -80,4 +77,10 @@ func (it *StringOnce) Error() error {
 
 func (it *StringOnce) String() string {
 	return it.Value()
+}
+
+func (it *StringOnce) Serialize() ([]byte, error) {
+	value := it.Value()
+
+	return json.Marshal(value)
 }

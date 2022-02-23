@@ -14,6 +14,7 @@ type BasicEnumValuer interface {
 	ValueInt() int
 	ValueInt8() int8
 	ValueInt16() int16
+	ValueUInt16() uint16
 	ValueInt32() int32
 	// ValueString
 	//

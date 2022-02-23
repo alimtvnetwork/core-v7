@@ -191,6 +191,26 @@ func (it *KeyVal) ValueString() string {
 	)
 }
 
+func (it *KeyVal) KeyReflectSet(toPointer interface{}) error {
+	if it == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("KeyVal is nil or null")
+	}
+
+	return ReflectSetFromTo(it.Key, toPointer)
+}
+
+func (it *KeyVal) ValueReflectSet(toPointer interface{}) error {
+	if it == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("KeyVal is nil or null")
+	}
+
+	return ReflectSetFromTo(it.Value, toPointer)
+}
+
 func (it *KeyVal) ReflectSet(toPointer interface{}) error {
 	if it == nil {
 		return errcore.
