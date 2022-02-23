@@ -3,6 +3,7 @@ package enumimpl
 import (
 	"errors"
 	"fmt"
+	"sort"
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/coreonce"
@@ -48,7 +49,17 @@ func newNumberEnumBase(
 		return IntegersRangesOfAnyVal(actualRangesAnyType)
 	})
 
+	_, isString := actualRangesAnyType.([]string)
+
 	rangesToCsvOnce := coreonce.NewStringOnce(func() string {
+		if isString {
+			clonedList := utilstringinternal.Clone(nameRanges)
+			sort.Strings(clonedList)
+
+			return csvinternal.StringsToStringDefaultNoQuotations(
+				clonedList...)
+		}
+
 		allKeyValues := KeyAnyValues(
 			nameRanges,
 			actualRangesAnyType)

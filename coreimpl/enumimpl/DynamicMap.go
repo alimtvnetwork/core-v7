@@ -3,6 +3,7 @@ package enumimpl
 import (
 	"fmt"
 	"math"
+	"reflect"
 	"sort"
 	"strconv"
 	"strings"
@@ -107,6 +108,10 @@ func (it DynamicMap) MapIntegerString() (
 		[]int,
 		it.Length())
 
+	if it.IsValueString() {
+		return it.stringValueMapIntegerString(rangeMap, allKeysSorted)
+	}
+
 	index := 0
 	for key, value := range it {
 		valInt := ConvEnumAnyValToInteger(value)
@@ -156,6 +161,10 @@ func (it DynamicMap) SortedKeyAnyValues() (
 		[]KeyAnyVal,
 		it.Length())
 
+	if it.IsValueString() {
+		return it.sortedKeyAnyValuesString()
+	}
+
 	rangesMap, AllKeysSorted := it.MapIntegerString()
 
 	for i, keyInt := range AllKeysSorted {
@@ -167,6 +176,27 @@ func (it DynamicMap) SortedKeyAnyValues() (
 	}
 
 	return keyAnyValues
+}
+
+func (it DynamicMap) First() (key string, valInf interface{}) {
+	for key, valInf = range it {
+		return key, valInf
+	}
+
+	return "", nil
+}
+
+func (it DynamicMap) IsValueTypeOf(rfType reflect.Type) bool {
+	_, v := it.First()
+
+	return reflect.TypeOf(v) == rfType
+}
+
+func (it DynamicMap) IsValueString() bool {
+	_, v := it.First()
+	_, isString := v.(string)
+
+	return isString
 }
 
 func (it *DynamicMap) Length() int {
@@ -719,4 +749,31 @@ func (it DynamicMap) String() string {
 	return strings.Join(
 		it.Strings(),
 		constants.DefaultLine)
+}
+
+func (it DynamicMap) sortedKeyAnyValuesString() []KeyAnyVal {
+	allStringsSorted := it.AllKeysSorted()
+	newSlice := make([]KeyAnyVal, len(allStringsSorted))
+
+	for i, keyName := range allStringsSorted {
+		newSlice[i] = KeyAnyVal{
+			Key:      keyName,
+			AnyValue: keyName,
+		}
+	}
+
+	return newSlice
+}
+
+func (it DynamicMap) stringValueMapIntegerString(
+	rangeMap map[int]string, allNumberSorted []int,
+) (integerToStringMap map[int]string, sortedIntegers []int) {
+	allNames := it.AllKeysSorted()
+
+	for i, name := range allNames {
+		rangeMap[constants.MinInt] = name
+		allNumberSorted[i] = constants.MinInt
+	}
+
+	return rangeMap, allNumberSorted
 }
