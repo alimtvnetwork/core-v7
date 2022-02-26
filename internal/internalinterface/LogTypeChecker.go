@@ -12,6 +12,9 @@ type LogTypeChecker interface {
 	IsPanic() bool
 	IsSuccess() bool
 	IsInvalid() bool
+	IsCustom() bool
+	IsFile() bool
+	HasPattern(pattern string) bool
 	IsErrorLogical() bool
 	IsErrorFatalLogical() bool
 	IsErrorFatalPanicLogical() bool

@@ -46,6 +46,9 @@ type StandardLogger interface {
 
 	ReflectSetter
 
+	InfoOrError(isError bool) SingleLogger
+	Log(loggerType LoggerTyperGetter) StandardLogger
+
 	ErrorJsoner(jsoner corejson.Jsoner) StandardLogger
 	DebugJsoner(jsoner corejson.Jsoner) StandardLogger
 	ErrorJsonerTitle(title string, jsoner corejson.Jsoner) StandardLogger
