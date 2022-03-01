@@ -36,4 +36,5 @@ const (
 	PrefixStackTraceNewLine                       = constants.DefaultLine + PrefixStackTrace
 	NewLineCodeStacksHeader                       = "\nCode Stacks :\n"
 	CodeStacksHeaderNewLine                       = "Code Stacks :\n"
+	ShouldBeMessageFormat                         = "\"%v\" {actual} should be \"%v\" {expecting}" // actual, expecting
 )

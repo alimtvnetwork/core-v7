@@ -272,3 +272,19 @@ type VoidIfLogger interface {
 type CompiledVoidLogger interface {
 	internalinterface.CompiledVoidLogger
 }
+
+type ShouldBeErrorVerifier interface {
+	ShouldBeError(right interface{}) error
+}
+
+type ShouldBeMessageVerifier interface {
+	ShouldBe(right interface{}) string
+}
+
+type LeftShouldBeMessageVerifier interface {
+	ShouldBe(left, right interface{}) string
+}
+
+type LeftShouldBeErrorVerifier interface {
+	ShouldBeError(left, right interface{}) error
+}
