@@ -7,6 +7,6 @@ const (
 	typeNameTemplateKey                 = "type-name"
 	nameKey                             = "name"
 	valueKey                            = "value"
-	diffBetweenMapShouldBeMessageFormat = "Difference Between Map:\n\n{%s}"
+	diffBetweenMapShouldBeMessageFormat = "%s\n\nDifference Between Map:\n\n{%s}"     // title, diff string
 	actualVsExpectingMessageFormat      = "%s :\n\nActual:\n%s\n\nExpecting:\n%s\n\n" // title, actual, expecting
 )

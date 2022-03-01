@@ -354,7 +354,7 @@ func (it *DynamicMap) DiffRaw(
 		rightValInf, has := rightMap[key]
 
 		if !has {
-			diffMap[key] = rightValInf
+			diffMap[key] = leftValInf
 
 			continue
 		}
@@ -363,7 +363,7 @@ func (it *DynamicMap) DiffRaw(
 			isRegardlessType,
 			leftValInf,
 			rightValInf) {
-			diffMap[key] = rightValInf
+			diffMap[key] = leftValInf
 		}
 	}
 
@@ -391,6 +391,7 @@ func (it *DynamicMap) DiffJsonMessage(
 
 func (it *DynamicMap) ShouldDiffMessage(
 	isRegardlessType bool,
+	title string,
 	rightMap map[string]interface{},
 ) string {
 	diffMessage := it.DiffJsonMessage(
@@ -403,6 +404,7 @@ func (it *DynamicMap) ShouldDiffMessage(
 
 	return fmt.Sprintf(
 		diffBetweenMapShouldBeMessageFormat,
+		title,
 		diffMessage)
 }
 
