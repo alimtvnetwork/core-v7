@@ -2,6 +2,7 @@ package corestr
 
 import (
 	"encoding/json"
+	"sort"
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
@@ -12,6 +13,36 @@ import (
 
 type KeyValueCollection struct {
 	KeyValuePairs []*KeyValuePair `json:"KeyValuePairs,omitempty"`
+}
+
+func (it *KeyValueCollection) AllKeysSorted() []string {
+	keys := it.AllKeys()
+
+	sort.Strings(keys)
+
+	return keys
+}
+
+func (it *KeyValueCollection) KeysHashset() map[string]bool {
+	panic("implement me")
+}
+
+func (it *KeyValueCollection) HasKey(key string) bool {
+	for _, pair := range it.KeyValuePairs {
+		if pair.IsKey(key) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it KeyValueCollection) SerializeMust() (jsonBytes []byte) {
+	return corejson.NewPtr(it).RawMust()
+}
+
+func (it *KeyValueCollection) Compile() string {
+	return it.String()
 }
 
 func (it *KeyValueCollection) Count() int {

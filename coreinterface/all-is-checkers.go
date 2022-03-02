@@ -362,3 +362,15 @@ type IsCompletedLockUnlockChecker interface {
 	IsCompletedChecker
 	IsCompletedLockChecker
 }
+
+type IsMissingKeyChecker interface {
+	IsMissingKey(key string) bool
+}
+
+type IsValueStringChecker interface {
+	IsValueString() bool
+}
+
+type IsValueTypeOfChecker interface {
+	IsValueTypeOf(rfType reflect.Type) bool
+}

@@ -280,3 +280,15 @@ type KeysHashsetGetter interface {
 type HashmapGetter interface {
 	Hashmap() map[string]string
 }
+
+type AllValuesStringsGetter interface {
+	AllValuesStrings() []string
+}
+
+type AllValuesIntegersGetter interface {
+	AllValuesIntegers() []int
+}
+
+type KeyStringNameGetter interface {
+	KeyName() string
+}

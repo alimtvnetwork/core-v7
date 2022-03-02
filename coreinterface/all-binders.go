@@ -35,3 +35,23 @@ type CountStateTrackerBinder interface {
 	CountStateTracker
 	AsCountStateTrackerBinder() CountStateTrackerBinder
 }
+
+type KeyValueStringDefinerBinder interface {
+	KeyValueStringDefiner
+	AsKeyValueStringDefinerBinder() KeyValueStringDefinerBinder
+}
+
+type KeyAnyValueDefinerBinder interface {
+	KeyAnyValueDefiner
+	AsKeyAnyValueDefinerBinder() KeyAnyValueDefinerBinder
+}
+
+type KeyStringValuesCollectionDefinerBinder interface {
+	KeyStringValuesCollectionDefiner
+	AsKeyStringValuesCollectionDefinerBinder() KeyStringValuesCollectionDefinerBinder
+}
+
+type KeyAnyValuesCollectionDefinerBinder interface {
+	KeyAnyValuesCollectionDefiner
+	AsKeyAnyValuesCollectionDefinerBinder() KeyAnyValuesCollectionDefinerBinder
+}

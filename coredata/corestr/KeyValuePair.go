@@ -7,10 +7,51 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 )
 
 type KeyValuePair struct {
 	Key, Value string
+}
+
+func (it KeyValuePair) KeyName() string {
+	return it.Key
+}
+
+func (it KeyValuePair) VariableName() string {
+	return it.Key
+}
+
+func (it KeyValuePair) ValueString() string {
+	return it.Value
+}
+
+func (it KeyValuePair) IsVariableNameEqual(name string) bool {
+	return it.Key == name
+}
+
+func (it KeyValuePair) IsValueEqual(valueString string) bool {
+	return it.Value == valueString
+}
+
+func (it KeyValuePair) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it KeyValuePair) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it KeyValuePair) Serialize() ([]byte, error) {
+	return corejson.NewPtr(it).Raw()
+}
+
+func (it KeyValuePair) SerializeMust() (jsonBytes []byte) {
+	return corejson.NewPtr(it).RawMust()
+}
+
+func (it KeyValuePair) Compile() string {
+	return it.String()
 }
 
 func (it *KeyValuePair) IsKeyEmpty() bool {
@@ -144,6 +185,9 @@ func (it *KeyValuePair) IsKeyValueAnyEmpty() bool {
 	return it == nil || it.Key == "" || it.Value == ""
 }
 
+// FormatString
+//
+//  First %v is key and next one is value
 func (it *KeyValuePair) FormatString(format string) string {
 	return fmt.Sprintf(
 		format,

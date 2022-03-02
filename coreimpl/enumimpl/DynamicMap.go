@@ -367,6 +367,28 @@ func (it *DynamicMap) DiffRaw(
 		}
 	}
 
+	if len(diffMap) == 0 && it.Length() == len(rightMap) {
+		return diffMap
+	}
+
+	leftMap := *it
+	for rightKey, rightAnyVal := range rightMap {
+		leftVal, has := leftMap[rightKey]
+
+		if !has {
+			diffMap[rightKey] = rightAnyVal
+
+			continue
+		}
+
+		if it.isNotEqual(
+			isRegardlessType,
+			rightAnyVal,
+			leftVal) {
+			diffMap[rightKey] = rightAnyVal
+		}
+	}
+
 	return diffMap
 }
 
@@ -477,7 +499,7 @@ func (it *DynamicMap) IsKeysEqualOnly(
 		return false
 	}
 
-	for key, _ := range *it {
+	for key := range *it {
 		_, has := rightMap[key]
 
 		if !has {

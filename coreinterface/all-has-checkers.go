@@ -46,3 +46,11 @@ type HasFlagByNameChecker interface {
 type HasKeyChecker interface {
 	HasKey(key string) bool
 }
+
+type HasAllKeysChecker interface {
+	HasAllKeys(keys ...string) bool
+}
+
+type HasAnyKeysChecker interface {
+	HasAnyKeys(keys ...string) bool
+}

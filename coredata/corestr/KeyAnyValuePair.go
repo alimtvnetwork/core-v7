@@ -15,6 +15,30 @@ type KeyAnyValuePair struct {
 	Value       interface{}
 }
 
+func (it *KeyAnyValuePair) KeyName() string {
+	return it.Key
+}
+
+func (it *KeyAnyValuePair) VariableName() string {
+	return it.Key
+}
+
+func (it *KeyAnyValuePair) ValueAny() interface{} {
+	return it.Value
+}
+
+func (it *KeyAnyValuePair) IsVariableNameEqual(name string) bool {
+	return it.Key == name
+}
+
+func (it KeyAnyValuePair) SerializeMust() (jsonBytes []byte) {
+	return corejson.NewPtr(it).RawMust()
+}
+
+func (it *KeyAnyValuePair) Compile() string {
+	return it.String()
+}
+
 func (it *KeyAnyValuePair) IsValueNull() bool {
 	return it == nil || reflectinternal.IsNull(it.Value)
 }
