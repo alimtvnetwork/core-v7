@@ -73,6 +73,7 @@ type BaseErrorOrCollectionWrapper interface {
 	IsInvalidChecker
 	HasErrorOrHasAnyErrorChecker
 	HasAnyIssues() bool
+	IsDefined() bool
 
 	// StringCompiler
 	//

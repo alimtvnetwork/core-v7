@@ -141,6 +141,10 @@ type IsEmptyChecker interface {
 	internalinterface.IsEmptyChecker
 }
 
+type IsDefinedChecker interface {
+	IsDefined() bool
+}
+
 type IsEmptyErrorChecker interface {
 	IsEmptyError() bool
 }

@@ -206,6 +206,8 @@ type Referencer interface {
 	coreinterface.AllSerializer
 
 	IsEqualReferencer(ref Referencer) bool
+
+	coreinterface.ReflectSetter
 }
 
 type StringsGetter interface {
@@ -214,10 +216,10 @@ type StringsGetter interface {
 
 type ReferenceCollectionDefiner interface {
 	ReferencerCollection() []Referencer
-	HasAnyItem() bool
-	IsEmpty() string
-	Length() int
-	Count() int
+	coreinterface.HasAnyItemChecker
+	coreinterface.IsEmptyChecker
+	coreinterface.LengthGetter
+	coreinterface.CountGetter
 
 	AddVarVal(varName string, val interface{}) ReferenceCollectionDefiner
 	AddReferencer(ref Referencer) ReferenceCollectionDefiner
@@ -341,6 +343,14 @@ type MustBeEmptier interface {
 	HandleError()
 }
 
+type CompleteSuccessJsoner interface {
+	CompleteSuccessJson() *corejson.Result
+}
+
+type CompleteFailureJsoner interface {
+	CompleteFailureJson() *corejson.Result
+}
+
 type ErrorCompleter interface {
 	CompleteReceiveError(completionTyper enuminf.CompletionStateTyper) error
 	CompleteUsingErrReceiveError(completionTyper enuminf.CompletionStateTyper) error
@@ -349,6 +359,9 @@ type ErrorCompleter interface {
 	CompleteFailurer
 	MustCompleteSuccesser
 	MustCompleteFailurer
+
+	CompleteSuccessJsoner
+	CompleteFailureJsoner
 
 	Complete(completionTyper enuminf.CompletionStateTyper) BaseErrorOrCollectionWrapper
 	CompleteUsingErr(err error) BaseErrorOrCollectionWrapper
