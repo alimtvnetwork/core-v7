@@ -238,6 +238,7 @@ type ReferenceCollectionDefiner interface {
 
 type BasicErrWrapper interface {
 	internalinterface.BasicErrWrapper
+	BaseErrorOrCollectionWrapper
 	ErrorTypeAsBasicErrorTyper() BasicErrorTyper
 	ReferencesCollection() ReferenceCollectionDefiner
 }
