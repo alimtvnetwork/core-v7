@@ -389,7 +389,7 @@ func (it *Dynamic) Bytes() (rawBytes []byte, isSuccess bool) {
 	return rawBytes, err != nil
 }
 
-func (it *Dynamic) ReflectSet(toPointer interface{}) error {
+func (it *Dynamic) ReflectSetTo(toPointer interface{}) error {
 	if it == nil {
 		return defaulterr.NilResult
 	}

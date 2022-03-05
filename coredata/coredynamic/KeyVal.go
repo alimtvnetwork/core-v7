@@ -211,7 +211,7 @@ func (it *KeyVal) ValueReflectSet(toPointer interface{}) error {
 	return ReflectSetFromTo(it.Value, toPointer)
 }
 
-func (it *KeyVal) ReflectSet(toPointer interface{}) error {
+func (it *KeyVal) ReflectSetTo(toPointer interface{}) error {
 	if it == nil {
 		return errcore.
 			CannotBeNilOrEmptyType.
@@ -221,8 +221,8 @@ func (it *KeyVal) ReflectSet(toPointer interface{}) error {
 	return ReflectSetFromTo(it.Value, toPointer)
 }
 
-func (it *KeyVal) ReflectSetMust(toPointer interface{}) {
-	err := it.ReflectSet(toPointer)
+func (it *KeyVal) ReflectSetToMust(toPointer interface{}) {
+	err := it.ReflectSetTo(toPointer)
 	errcore.MustBeEmpty(err)
 }
 

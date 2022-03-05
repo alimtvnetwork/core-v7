@@ -265,5 +265,5 @@ func (it serializerLogic) ToPrettyStringIncludingErr(
 ) string {
 	result := it.Apply(anyItem)
 
-	return result.PrettyJsonStringWithErr()
+	return result.PrettyJsonStringOrErrString()
 }

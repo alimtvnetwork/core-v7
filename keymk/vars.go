@@ -108,4 +108,5 @@ var (
 
 	NewKey           = &newKeyCreator{}
 	NewKeyWithLegend = &newKeyWithLegendCreator{}
+	FixedLegend      = fixedLegend{}
 )
