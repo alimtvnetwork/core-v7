@@ -22,11 +22,23 @@ type Result struct {
 	TypeName   string
 }
 
-func (it Result) JsonString() string {
-	return *it.JsonStringPtr()
+func (it Result) BytesTypeName() string {
+	return it.TypeName
+}
+
+func (it Result) SafeBytesTypeName() string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return it.TypeName
 }
 
 func (it Result) SafeString() string {
+	return *it.JsonStringPtr()
+}
+
+func (it Result) JsonString() string {
 	return *it.JsonStringPtr()
 }
 
@@ -82,7 +94,7 @@ func (it Result) PrettyJsonString() string {
 	return prettyJSON.String()
 }
 
-func (it *Result) PrettyJsonStringWithErr() string {
+func (it *Result) PrettyJsonStringOrErrString() string {
 	if it == nil {
 		return "json result: nil cannot have json string"
 	}
@@ -151,6 +163,10 @@ func (it *Result) SafeBytes() []byte {
 		return []byte{}
 	}
 
+	return it.Bytes
+}
+
+func (it *Result) Values() []byte {
 	return it.Bytes
 }
 
@@ -350,6 +366,10 @@ func (it *Result) IsEmptyJsonBytes() bool {
 
 func (it *Result) IsEmpty() bool {
 	return it == nil || len(it.Bytes) == 0
+}
+
+func (it Result) HasAnyItem() bool {
+	return !it.IsEmpty()
 }
 
 func (it *Result) IsEmptyJson() bool {
@@ -632,7 +652,7 @@ func (it *Result) IsEqualPtr(another *Result) bool {
 	return bytes.Equal(it.Bytes, another.Bytes)
 }
 
-func (it *Result) CombineErrorWithRef(references ...string) string {
+func (it *Result) CombineErrorWithRefString(references ...string) string {
 	if it.IsEmptyError() {
 		return ""
 	}
@@ -650,7 +670,7 @@ func (it *Result) CombineErrorWithRefError(references ...string) error {
 		return nil
 	}
 
-	errorString := it.CombineErrorWithRef(
+	errorString := it.CombineErrorWithRefString(
 		references...)
 
 	return errors.New(errorString)
@@ -737,15 +757,15 @@ func (it Result) Clone(isDeepClone bool) Result {
 		it.TypeName)
 }
 
-func (it *Result) AsJsonContractsBinder() JsonContractsBinder {
-	return it
+func (it Result) AsJsonContractsBinder() JsonContractsBinder {
+	return &it
 }
 
-func (it *Result) AsJsoner() Jsoner {
-	return it
+func (it Result) AsJsoner() Jsoner {
+	return &it
 }
 
-func (it *Result) JsonParseSelfInject(
+func (it Result) JsonParseSelfInject(
 	jsonResultIn *Result,
 ) error {
 	_, err := it.ParseInjectUsingJson(jsonResultIn)
@@ -753,6 +773,6 @@ func (it *Result) JsonParseSelfInject(
 	return err
 }
 
-func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
-	return it
+func (it Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
+	return &it
 }

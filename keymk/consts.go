@@ -10,4 +10,5 @@ const (
 	relative                 = "relative"
 	id                       = "id"
 	prefix                   = "prefix"
+	LegendChainSample        = "{root}-{package}-{group}-{state}-{user}-{item}" // item refers to the final element like id or file name
 )

@@ -2,7 +2,7 @@ package loggerinf
 
 // ReflectSetter
 //
-// ReflectSet
+// ReflectSetTo
 //  sets current object to something else by casting,
 //  reflection, by unmarshalling or by marshalling
 //
@@ -28,7 +28,7 @@ package loggerinf
 //  - Reflection String Set Example : https://go.dev/play/p/fySLYuOvoRK.go?download=true
 //  - Method document screenshot    : https://prnt.sc/26dmf5g
 type ReflectSetter interface {
-	// ReflectSet
+	// ReflectSetTo
 	//
 	// ReflectSetter
 	//  sets current object to something else by casting,
@@ -55,5 +55,5 @@ type ReflectSetter interface {
 	// Reference:
 	//  - Reflection String Set Example : https://go.dev/play/p/fySLYuOvoRK.go?download=true
 	//  - Method document screenshot    : https://prnt.sc/26dmf5g
-	ReflectSet(toPointer interface{}) error
+	ReflectSetTo(toPointer interface{}) error
 }

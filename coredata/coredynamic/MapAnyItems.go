@@ -50,7 +50,7 @@ func (it *MapAnyItems) HasKey(key string) bool {
 	return has
 }
 
-func (it *MapAnyItems) ReflectSet(
+func (it *MapAnyItems) ReflectSetTo(
 	key string,
 	toPointerOrBytes interface{},
 ) error {
@@ -67,11 +67,11 @@ func (it *MapAnyItems) ReflectSet(
 		toPointerOrBytes)
 }
 
-func (it *MapAnyItems) ReflectSetMust(
+func (it *MapAnyItems) ReflectSetToMust(
 	key string,
 	toPointerOrBytes interface{},
 ) {
-	err := it.ReflectSet(key, toPointerOrBytes)
+	err := it.ReflectSetTo(key, toPointerOrBytes)
 	errcore.HandleErr(err)
 }
 

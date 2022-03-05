@@ -45,12 +45,23 @@ type IsNullOrAnyNullChecker interface {
 	internalinterface.IsNullOrAnyNullChecker
 }
 
+type GetAsBasicWrapperGetter interface {
+	GetAsBasicWrapper() BasicErrWrapper
+}
+
+type GetAsBasicWrapperUsingTyperGetter interface {
+	GetAsBasicWrapperUsingTyper(errorTyper BasicErrorTyper) BasicErrWrapper
+}
+
 type BaseErrorOrCollectionWrapper interface {
 	internalinterface.BaseErrorOrCollectionWrapper
 	IsCollect(another BaseErrorOrCollectionWrapper) bool
 	IsCollectedAny(anotherItems ...BaseErrorOrCollectionWrapper) bool
 	IsCollectOn(isCollect bool, another BaseErrorOrCollectionWrapper) bool
 	IsEmptyAll(anotherItems ...BaseErrorOrCollectionWrapper) bool
+
+	GetAsBasicWrapperGetter
+	GetAsBasicWrapperUsingTyperGetter
 }
 
 type AddErrorer interface {
@@ -188,6 +199,7 @@ type VariableValueStringGetter interface {
 type VariableValueDynamicGetter interface {
 	VariableValueDynamic() (varName string, value interface{})
 }
+
 type StringWithoutTyper interface {
 	StringWithoutType() string
 }
@@ -214,6 +226,10 @@ type StringsGetter interface {
 	Strings() []string
 }
 
+type ReferencesListGetter interface {
+	ReferencesList() []Referencer
+}
+
 type ReferenceCollectionDefiner interface {
 	ReferencerCollection() []Referencer
 	coreinterface.HasAnyItemChecker
@@ -234,6 +250,7 @@ type ReferenceCollectionDefiner interface {
 	Compile() string
 
 	coreinterface.ReflectSetter
+	ReferencesListGetter
 }
 
 type BasicErrWrapper interface {
@@ -241,6 +258,8 @@ type BasicErrWrapper interface {
 	BaseErrorOrCollectionWrapper
 	ErrorTypeAsBasicErrorTyper() BasicErrorTyper
 	ReferencesCollection() ReferenceCollectionDefiner
+	coreinterface.ReflectSetter
+	ReferencesListGetter
 }
 
 type CompiledBasicErrWrapper interface {
