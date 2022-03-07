@@ -2,25 +2,111 @@ package corepayload
 
 import (
 	"bytes"
-	"errors"
-	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/coreinterface"
+	"gitlab.com/evatix-go/core/coreinstruction"
+	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/payloadinf"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 )
 
 type Attributes struct {
-	ErrorMessage     string                   `json:"ErrorMessage,omitempty"`
-	AuthInfo         *AuthInfo                `json:"AuthInfo,omitempty"`
-	PagingInfo       *PagingInfo              `json:"PagingInfo,omitempty"`
-	KeyValuePairs    *corestr.Hashmap         `json:"KeyValuePairs,omitempty"`
-	AnyKeyValuePairs *coredynamic.MapAnyItems `json:"AnyKeyValuePairs,omitempty"`
-	DynamicPayloads  []byte                   `json:"DynamicPayloads,omitempty"`
+	BasicErrWrapper  errcoreinf.BasicErrWrapper `json:"BasicErrWrapper,omitempty"`
+	AuthInfo         *AuthInfo                  `json:"AuthInfo,omitempty"`
+	PagingInfo       *PagingInfo                `json:"PagingInfo,omitempty"`
+	KeyValuePairs    *corestr.Hashmap           `json:"KeyValuePairs,omitempty"`
+	AnyKeyValuePairs *coredynamic.MapAnyItems   `json:"AnyKeyValuePairs,omitempty"`
+	FromTo           *coreinstruction.FromTo    `json:"FromTo,omitempty"`
+	DynamicPayloads  []byte                     `json:"DynamicPayloads,omitempty"`
+}
+
+func (it *Attributes) IsNull() bool {
+	return it == nil
+}
+
+func (it *Attributes) HasSafeItems() bool {
+	return !it.HasIssuesOrEmpty()
+}
+
+func (it *Attributes) HandleErr() {
+	if it.HasError() {
+		it.BasicErrWrapper.HandleError()
+	}
+}
+
+func (it *Attributes) HasStringKey(key string) bool {
+	if it.HasKeyValuePairs() {
+		return it.KeyValuePairs.Has(key)
+	}
+
+	return false
+}
+
+func (it *Attributes) HasAnyKey(key string) bool {
+	if it.HasAnyKeyValuePairs() {
+		return it.AnyKeyValuePairs.HasKey(key)
+	}
+
+	return false
+}
+
+func (it *Attributes) AddNewStringKeyValueOnly(key, value string) (isAdded bool) {
+	if it == nil || it.KeyValuePairs == nil {
+		return false
+	}
+
+	it.KeyValuePairs.AddOrUpdate(key, value)
+
+	return true
+}
+
+func (it *Attributes) AddNewAnyKeyValueOnly(key string, value interface{}) (isAdded bool) {
+	if it == nil || it.AnyKeyValuePairs == nil {
+		return false
+	}
+
+	it.AnyKeyValuePairs.Add(key, value)
+
+	return true
+}
+
+func (it *Attributes) GetStringKeyValue(key string) (value string, isFound bool) {
+	if it == nil || it.KeyValuePairs == nil {
+		return "", false
+	}
+
+	return it.KeyValuePairs.Get(key)
+}
+
+func (it *Attributes) GetAnyKeyValue(key string) (valueAny interface{}, isFound bool) {
+	if it == nil || it.KeyValuePairs == nil {
+		return nil, false
+	}
+
+	return it.AnyKeyValuePairs.Get(key)
+}
+
+func (it *Attributes) AnyKeyReflectSetTo(key string, toPtr interface{}) error {
+	if it == nil || it.KeyValuePairs == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.ErrorNoRefs(
+			"KeyValuePairs is nil")
+	}
+
+	return it.AnyKeyValuePairs.ReflectSetTo(key, toPtr)
+}
+
+func (it *Attributes) HandleError() {
+	if it.HasError() {
+		it.BasicErrWrapper.HandleError()
+	}
+}
+
+func (it *Attributes) ReflectSetTo(toPointer interface{}) error {
+	return coredynamic.ReflectSetFromTo(it, toPointer)
 }
 
 func (it *Attributes) Payloads() []byte {
@@ -32,7 +118,11 @@ func (it *Attributes) Payloads() []byte {
 }
 
 func (it *Attributes) AnyKeyValMap() map[string]interface{} {
-	panic("implement me")
+	if it.IsEmpty() {
+		return map[string]interface{}{}
+	}
+
+	return it.AnyKeyValuePairs.Items
 }
 
 func (it *Attributes) Hashmap() map[string]string {
@@ -47,8 +137,15 @@ func (it *Attributes) CompiledError() error {
 	return it.Error()
 }
 
+func (it *Attributes) HasIssuesOrEmpty() bool {
+	return it.IsEmpty() ||
+		!it.IsValid() ||
+		it.BasicErrWrapper != nil &&
+			it.BasicErrWrapper.HasError()
+}
+
 func (it *Attributes) IsSafeValid() bool {
-	panic("implement me")
+	return it.HasIssuesOrEmpty()
 }
 
 func (it *Attributes) JsonString() string {
@@ -87,22 +184,23 @@ func (it *Attributes) HasKeyValuePairs() bool {
 	return it != nil && it.KeyValuePairs.HasAnyItem()
 }
 
+func (it *Attributes) HasFromTo() bool {
+	return it != nil && it.FromTo != nil
+}
+
 func (it *Attributes) IsValid() bool {
-	return it != nil && it.ErrorMessage == ""
+	return it != nil &&
+		it.IsEmptyError()
 }
 
 func (it *Attributes) IsInvalid() bool {
-	return it == nil || it.ErrorMessage != ""
+	return it == nil || it.HasIssuesOrEmpty()
 }
 
 func (it *Attributes) HasError() bool {
-	return it != nil && it.ErrorMessage != ""
-}
-
-func (it *Attributes) HandleErr() {
-	if it.ErrorMessage != "" {
-		panic(it.ErrorMessage)
-	}
+	return it != nil &&
+		it.BasicErrWrapper != nil &&
+		it.BasicErrWrapper.HasError()
 }
 
 func (it *Attributes) Error() error {
@@ -110,7 +208,9 @@ func (it *Attributes) Error() error {
 		return nil
 	}
 
-	return errors.New(it.ErrorMessage)
+	return it.
+		BasicErrWrapper.
+		CompiledErrorWithStackTraces()
 }
 
 func (it *Attributes) MustBeEmptyError() {
@@ -118,15 +218,15 @@ func (it *Attributes) MustBeEmptyError() {
 		return
 	}
 
-	panic(it.ErrorMessage)
+	panic(it.Error())
 }
 
-// DeserializeErrorMessage
+// BasicErrorDeserializedTo
 //
 // Expectation Attributes.ErrorMessage needs to
 // be in json format and unmarshalToPointer
 // should match reflection types
-func (it *Attributes) DeserializeErrorMessage(
+func (it *Attributes) BasicErrorDeserializedTo(
 	unmarshalToPointer interface{},
 ) error {
 	if it.IsEmptyError() {
@@ -135,8 +235,8 @@ func (it *Attributes) DeserializeErrorMessage(
 
 	return corejson.
 		Deserialize.
-		UsingString(
-			it.ErrorMessage,
+		UsingBytes(
+			it.BasicErrWrapper.SerializeMust(),
 			unmarshalToPointer)
 }
 
@@ -158,10 +258,6 @@ func (it *Attributes) DeserializeDynamicPayloadsToAttributes() (
 		it.DynamicPayloads,
 		newAttr)
 
-	if err != nil {
-		newAttr.AttachOrAppendErrorMessage(err.Error())
-	}
-
 	return newAttr, err
 }
 
@@ -172,11 +268,6 @@ func (it *Attributes) DeserializeDynamicPayloadsToPayloadWrapper() (
 	err = corejson.Deserialize.UsingBytes(
 		it.DynamicPayloads,
 		payloadWrapper)
-
-	if err != nil {
-		payloadWrapper.Attributes.AttachOrAppendErrorMessage(
-			err.Error())
-	}
 
 	return payloadWrapper, err
 }
@@ -200,7 +291,9 @@ func (it *Attributes) DeserializeDynamicPayloadsMust(
 }
 
 func (it *Attributes) IsEmptyError() bool {
-	return it == nil || it.ErrorMessage == ""
+	return it == nil ||
+		it.BasicErrWrapper == nil ||
+		it.BasicErrWrapper.IsEmpty()
 }
 
 func (it *Attributes) DynamicBytesLength() int {
@@ -236,11 +329,6 @@ func (it *Attributes) IsEmpty() bool {
 
 func (it *Attributes) HasItems() bool {
 	return !it.IsEmpty()
-}
-
-func (it *Attributes) IsErrorMessageEmpty() bool {
-	return it == nil ||
-		it.ErrorMessage == ""
 }
 
 func (it *Attributes) IsPagingInfoEmpty() bool {
@@ -448,36 +536,10 @@ func (it *Attributes) JsonParseSelfInject(
 	return err
 }
 
-func (it *Attributes) AttachOrAppendError(
-	err error,
-) coreinterface.AttributesBinder {
-	if err == nil {
-		return it
-	}
-
-	return it.AttachOrAppendErrorMessage(
-		err.Error())
-}
-
-func (it *Attributes) AttachOrAppendErrorMessage(
-	appendingNewErrorMessage string,
-) *Attributes {
-	if it == nil {
-		return New.
-			Attributes.
-			UsingErrMsg(appendingNewErrorMessage)
-	}
-
-	if it.IsEmptyError() {
-		it.ErrorMessage = appendingNewErrorMessage
-
-		return it
-	}
-
-	it.ErrorMessage = fmt.Sprintf(
-		constants.SprintFormatWithNewLine,
-		it.ErrorMessage,
-		appendingNewErrorMessage)
+func (it *Attributes) SetBasicErr(
+	basicErr errcoreinf.BasicErrWrapper,
+) payloadinf.AttributesBinder {
+	it.BasicErrWrapper = basicErr
 
 	return it
 }
@@ -513,11 +575,7 @@ func (it *Attributes) IsEqual(attributes *Attributes) bool {
 		return true
 	}
 
-	if it.ErrorMessage != attributes.ErrorMessage {
-		return false
-	}
-
-	if it.ErrorMessage != attributes.ErrorMessage {
+	if it.IsErrorDifferent(attributes.BasicErrWrapper) {
 		return false
 	}
 
@@ -578,7 +636,9 @@ func (it *Attributes) ClonePtr(
 			it.AnyKeyValuePairs,
 			it.PagingInfo,
 			it.DynamicPayloads,
-			errcore.ToError(it.ErrorMessage)), nil
+			it.FromTo,
+			it.BasicErrWrapper,
+		), nil
 }
 
 func (it *Attributes) deepClonePtr() (*Attributes, error) {
@@ -586,6 +646,12 @@ func (it *Attributes) deepClonePtr() (*Attributes, error) {
 
 	if err != nil {
 		return nil, err
+	}
+
+	var basicErr errcoreinf.BasicErrWrapper
+
+	if it.HasError() {
+		basicErr = it.BasicErrWrapper.CloneInterface()
 	}
 
 	return New.
@@ -596,13 +662,26 @@ func (it *Attributes) deepClonePtr() (*Attributes, error) {
 			anyMap,
 			it.PagingInfo.ClonePtr(),
 			corejson.BytesDeepClone(it.DynamicPayloads),
-			errcore.ToError(it.ErrorMessage)), nil
+			it.FromTo.ClonePtr(),
+			basicErr), nil
 }
 
 func (it Attributes) NonPtr() Attributes {
 	return it
 }
 
-func (it Attributes) AsAttributesBinder() coreinterface.AttributesBinder {
+func (it Attributes) AsAttributesBinder() payloadinf.AttributesBinder {
 	return &it
+}
+
+func (it *Attributes) IsErrorDifferent(basicErr errcoreinf.BasicErrWrapper) bool {
+	return !it.IsErrorEqual(basicErr)
+}
+
+func (it *Attributes) IsErrorEqual(basicErr errcoreinf.BasicErrWrapper) bool {
+	if it.IsEmptyError() || basicErr == nil || basicErr.IsEmpty() {
+		return true
+	}
+
+	return it.BasicErrWrapper.IsBasicErrEqual(basicErr)
 }

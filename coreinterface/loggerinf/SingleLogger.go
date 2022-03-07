@@ -7,6 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface/entityinf"
 	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
 )
 
 type SingleLogger interface {
@@ -35,6 +36,26 @@ type SingleLogger interface {
 	RawJson(title string, rawJson []byte) SingleLogger
 	Err(err error) SingleLogger
 	AnErr(title string, err error) SingleLogger
+
+	SimpleBytesResulter(
+		title string,
+		result serializerinf.SimpleBytesResulter,
+	) MetaAttributesStacker
+
+	BaseJsonResulter(
+		title string,
+		result serializerinf.BaseJsonResulter,
+	) MetaAttributesStacker
+
+	BasicJsonResulter(
+		title string,
+		result serializerinf.BasicJsonResulter,
+	) MetaAttributesStacker
+	JsonResulter(
+		title string,
+		result serializerinf.JsonResulter,
+	) MetaAttributesStacker
+
 	ErrWithType(title string, errType errcoreinf.BasicErrorTyper, err error) SingleLogger
 	Meta(title string, metaAttr MetaAttributesCompiler) SingleLogger
 
@@ -109,6 +130,21 @@ type SingleLogger interface {
 	OnlyMapIntAny(mapAny map[int]interface{}) SingleLogger
 	OnlyMapIntString(mapAny map[int]string) SingleLogger
 	OnlyMapJsonResult(mapAny map[string]corejson.Result) SingleLogger
+
+	OnlySimpleBytesResulter(
+		result serializerinf.SimpleBytesResulter,
+	) SingleLogger
+
+	OnlyBaseJsonResulter(
+		result serializerinf.BaseJsonResulter,
+	) SingleLogger
+
+	OnlyBasicJsonResulter(
+		result serializerinf.BasicJsonResulter,
+	) SingleLogger
+	OnlyJsonResulter(
+		result serializerinf.JsonResulter,
+	) SingleLogger
 
 	AnyJsonLog(anyItem interface{}) SingleLogger
 	Any(anyItem interface{}) SingleLogger

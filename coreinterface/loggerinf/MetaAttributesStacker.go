@@ -8,6 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface/entityinf"
 	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
 )
 
 type MetaAttributesStacker interface {
@@ -30,6 +31,25 @@ type MetaAttributesStacker interface {
 	RawJson(title string, rawJsonBytes []byte) MetaAttributesStacker
 	Error(title string, err error) MetaAttributesStacker
 	AnErr(key string, err error) MetaAttributesStacker
+
+	SimpleBytesResulter(
+		title string,
+		result serializerinf.SimpleBytesResulter,
+	) MetaAttributesStacker
+
+	BaseJsonResulter(
+		title string,
+		result serializerinf.BaseJsonResulter,
+	) MetaAttributesStacker
+
+	BasicJsonResulter(
+		title string,
+		result serializerinf.BasicJsonResulter,
+	) MetaAttributesStacker
+	JsonResulter(
+		title string,
+		result serializerinf.JsonResulter,
+	) MetaAttributesStacker
 
 	MapIntegerAny(title string, mapAny map[int]interface{}) MetaAttributesStacker
 	Meta(title string, metaAttr MetaAttributesCompiler) MetaAttributesStacker
@@ -55,13 +75,14 @@ type MetaAttributesStacker interface {
 	OnErrWrapperOrCollectionStackTraces(errWrapperOrCollection errcoreinf.BaseErrorOrCollectionWrapper) MetaAttributesStacker
 
 	FullStringer(
-		fullStringer errcoreinf.FullStringer,
-	) MetaAttributesStacker
-
-	FullStringerTitle(
 		title string,
 		fullStringer errcoreinf.FullStringer,
 	) MetaAttributesStacker
+
+	OnlyFullStringer(
+		fullStringer errcoreinf.FullStringer,
+	) MetaAttributesStacker
+
 	FullTraceAsAttr(
 		title string,
 		attrFullStringWithTraces errcoreinf.FullStringWithTracesGetter,
@@ -74,8 +95,8 @@ type MetaAttributesStacker interface {
 	RawErrCollection(key string, err errcoreinf.BaseRawErrCollectionDefiner) MetaAttributesStacker
 	CompiledBasicErrWrapper(compiler errcoreinf.CompiledBasicErrWrapper) MetaAttributesStacker
 
-	Namer(namer enuminf.Namer) MetaAttributesStacker
-	NamerTitle(title string, namer enuminf.Namer) MetaAttributesStacker
+	Namer(title string, namer enuminf.Namer) MetaAttributesStacker
+	OnlyNamer(namer enuminf.Namer) MetaAttributesStacker
 
 	EnumTitleEnum(title enuminf.SimpleEnumer, enum enuminf.BasicEnumer) MetaAttributesStacker
 	SimpleEnumTitleEnum(title enuminf.SimpleEnumer, enum enuminf.SimpleEnumer) MetaAttributesStacker
@@ -94,6 +115,21 @@ type MetaAttributesStacker interface {
 	OnlyBytes(rawBytes []byte) MetaAttributesStacker
 	OnlyRawJson(rawBytes []byte) MetaAttributesStacker
 	OnlyBytesErr(rawBytes []byte, err error) MetaAttributesStacker
+
+	OnlySimpleBytesResulter(
+		result serializerinf.SimpleBytesResulter,
+	) MetaAttributesStacker
+
+	OnlyBaseJsonResulter(
+		result serializerinf.BaseJsonResulter,
+	) MetaAttributesStacker
+
+	OnlyBasicJsonResulter(
+		result serializerinf.BasicJsonResulter,
+	) MetaAttributesStacker
+	OnlyJsonResulter(
+		result serializerinf.JsonResulter,
+	) MetaAttributesStacker
 
 	OnlyAny(anyItem interface{}) MetaAttributesStacker
 	OnlyAnyItems(values ...interface{}) MetaAttributesStacker

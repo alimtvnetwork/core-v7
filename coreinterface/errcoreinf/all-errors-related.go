@@ -53,6 +53,16 @@ type GetAsBasicWrapperUsingTyperGetter interface {
 	GetAsBasicWrapperUsingTyper(errorTyper BasicErrorTyper) BasicErrWrapper
 }
 
+type StackTracer interface {
+	StackTracesJsonResult() *corejson.Result
+	StackTraces() string
+
+	NewStackTraces(stackSkip int) string
+	NewDefaultStackTraces() string
+	NewStackTracesJsonResult(stackSkip int) *corejson.Result
+	NewDefaultStackTracesJsonResult() *corejson.Result
+}
+
 type BaseErrorOrCollectionWrapper interface {
 	internalinterface.BaseErrorOrCollectionWrapper
 	IsCollect(another BaseErrorOrCollectionWrapper) bool
@@ -62,6 +72,10 @@ type BaseErrorOrCollectionWrapper interface {
 
 	GetAsBasicWrapperGetter
 	GetAsBasicWrapperUsingTyperGetter
+	StackTracer
+
+	coreinterface.ReflectSetter
+	corejson.Jsoner
 }
 
 type AddErrorer interface {
@@ -242,6 +256,7 @@ type ReferenceCollectionDefiner interface {
 	AddReferences(references ...Referencer) ReferenceCollectionDefiner
 
 	coreinterface.MapStringAnyGetter
+	coreinterface.MapStringStringGetter
 	coreinterface.AllSerializer
 	corejson.Jsoner
 
@@ -251,6 +266,8 @@ type ReferenceCollectionDefiner interface {
 
 	coreinterface.ReflectSetter
 	ReferencesListGetter
+
+	CloneNewDefiner() ReferenceCollectionDefiner
 }
 
 type BasicErrWrapper interface {
@@ -260,11 +277,18 @@ type BasicErrWrapper interface {
 	ReferencesCollection() ReferenceCollectionDefiner
 	coreinterface.ReflectSetter
 	ReferencesListGetter
+
+	IsBasicErrEqual(another BasicErrWrapper) bool
+	MergeNewErrInf(right BaseErrorOrCollectionWrapper) BaseErrorOrCollectionWrapper
+	MergeNewMessage(newMessage string) BaseErrorOrCollectionWrapper
+	CloneInterface() BasicErrWrapper
 }
 
 type CompiledBasicErrWrapper interface {
 	CompiledToGenericBasicErrWrapper() BasicErrWrapper
 	CompiledToBasicErrWrapper(errType BasicErrorTyper) BasicErrWrapper
+
+	CompiledToErrorWithTraces(errType BasicErrorTyper) error
 }
 
 type BaseErrorWrapperCollectionDefiner interface {

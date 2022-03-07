@@ -51,6 +51,34 @@ func EmptyTraceCollection() *TraceCollection {
 	return NewTraceCollection(0)
 }
 
+func (it TraceCollection) StackTracesJsonResult() *corejson.Result {
+	return it.JsonPtr()
+}
+
+func (it TraceCollection) StackTraces() string {
+	return it.CodeStacksString()
+}
+
+func (it TraceCollection) NewStackTraces(stackSkip int) string {
+	return NewStacksDefaultCount(stackSkip + defaultInternalSkip).
+		CodeStacksString()
+}
+
+func (it TraceCollection) NewDefaultStackTraces() string {
+	return NewStacksDefaultCount(defaultInternalSkip).
+		CodeStacksString()
+}
+
+func (it TraceCollection) NewStackTracesJsonResult(stackSkip int) *corejson.Result {
+	return NewStacksDefaultCount(defaultInternalSkip + stackSkip).
+		JsonPtr()
+}
+
+func (it TraceCollection) NewDefaultStackTracesJsonResult() *corejson.Result {
+	return NewStacksDefaultCount(defaultInternalSkip).
+		JsonPtr()
+}
+
 func (it *TraceCollection) Add(
 	trace Trace,
 ) *TraceCollection {
@@ -643,7 +671,7 @@ func (it *TraceCollection) ShortStrings() []string {
 //
 // Example :
 //  - Compiled joined string of slice []String{"Method (LineNumber) -> FileFullPath:LineNumber"}
-func (it *TraceCollection) JoinShortStrings(joiner string) string {
+func (it TraceCollection) JoinShortStrings(joiner string) string {
 	return strings.Join(it.ShortStrings(), joiner)
 }
 
@@ -671,7 +699,7 @@ func (it *TraceCollection) Reverse() *TraceCollection {
 	return it
 }
 
-func (it *TraceCollection) JsonStrings() []string {
+func (it TraceCollection) JsonStrings() []string {
 	list := make([]string, it.Length())
 
 	for i, item := range it.Items {
@@ -681,11 +709,11 @@ func (it *TraceCollection) JsonStrings() []string {
 	return list
 }
 
-func (it *TraceCollection) JoinFileWithLinesStrings(joiner string) string {
+func (it TraceCollection) JoinFileWithLinesStrings(joiner string) string {
 	return strings.Join(it.FileWithLinesStrings(), joiner)
 }
 
-func (it *TraceCollection) JoinJsonStrings(joiner string) string {
+func (it TraceCollection) JoinJsonStrings(joiner string) string {
 	return strings.Join(it.JsonStrings(), joiner)
 }
 
@@ -698,7 +726,7 @@ func (it *TraceCollection) JoinJsonStrings(joiner string) string {
 //
 // Sample :
 //  - "Code Stack :\n- JoinLinesWith(\n- )"
-func (it *TraceCollection) CodeStacksString() string {
+func (it TraceCollection) CodeStacksString() string {
 	if it.IsEmpty() {
 		return constants.EmptyString
 	}
@@ -720,7 +748,7 @@ func (it *TraceCollection) FileWithLinesString() string {
 	return toString
 }
 
-func (it *TraceCollection) CodeStacksStringLimit(limit int) string {
+func (it TraceCollection) CodeStacksStringLimit(limit int) string {
 	if it.IsEmpty() {
 		return constants.EmptyString
 	}
@@ -730,19 +758,19 @@ func (it *TraceCollection) CodeStacksStringLimit(limit int) string {
 	return collection.CodeStacksString()
 }
 
-func (it *TraceCollection) Join(joiner string) string {
+func (it TraceCollection) Join(joiner string) string {
 	return strings.Join(it.Strings(), joiner)
 }
 
-func (it *TraceCollection) JoinLines() string {
+func (it TraceCollection) JoinLines() string {
 	return strings.Join(it.Strings(), constants.NewLineUnix)
 }
 
-func (it *TraceCollection) JoinCsv() string {
+func (it TraceCollection) JoinCsv() string {
 	return strings.Join(it.CsvStrings(), constants.Comma)
 }
 
-func (it *TraceCollection) JoinCsvLine() string {
+func (it TraceCollection) JoinCsvLine() string {
 	return strings.Join(it.CsvStrings(), constants.CommaUnixNewLine)
 }
 
@@ -786,7 +814,7 @@ func (it *TraceCollection) IsEqualItems(lines ...Trace) bool {
 	return true
 }
 
-func (it *TraceCollection) JsonString() string {
+func (it TraceCollection) JsonString() string {
 	if it.IsEmpty() {
 		return constants.EmptyString
 	}
@@ -794,7 +822,7 @@ func (it *TraceCollection) JsonString() string {
 	return it.Json().JsonString()
 }
 
-func (it *TraceCollection) String() string {
+func (it TraceCollection) String() string {
 	if it.IsEmpty() {
 		return constants.EmptyString
 	}
@@ -802,7 +830,7 @@ func (it *TraceCollection) String() string {
 	return it.JoinLines()
 }
 
-func (it *TraceCollection) CsvStrings() []string {
+func (it TraceCollection) CsvStrings() []string {
 	if it.IsEmpty() {
 		return []string{}
 	}
@@ -818,11 +846,11 @@ func (it *TraceCollection) CsvStrings() []string {
 	return newSlice
 }
 
-func (it *TraceCollection) JsonModel() []Trace {
+func (it TraceCollection) JsonModel() []Trace {
 	return it.Items
 }
 
-func (it *TraceCollection) JsonModelAny() interface{} {
+func (it TraceCollection) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
@@ -872,8 +900,8 @@ func (it *TraceCollection) ParseInjectUsingJsonMust(
 	return hashSet
 }
 
-func (it *TraceCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
-	return it
+func (it TraceCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return &it
 }
 
 func (it *TraceCollection) AsJsoner() corejson.Jsoner {

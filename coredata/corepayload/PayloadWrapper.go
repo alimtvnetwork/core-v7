@@ -8,6 +8,8 @@ import (
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface/entityinf"
+	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/payloadinf"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
 )
@@ -23,6 +25,114 @@ type PayloadWrapper struct {
 	Attributes     *Attributes `json:"AnyAttributes,omitempty"`
 }
 
+func (it *PayloadWrapper) HasSafeItems() bool {
+	if it.IsEmpty() || it.HasError() {
+		return false
+	}
+
+	return true
+}
+
+func (it *PayloadWrapper) DynamicPayloads() []byte {
+	if it == nil {
+		return []byte{}
+	}
+
+	return it.Payloads
+}
+
+func (it *PayloadWrapper) SetDynamicPayloads(payloads []byte) error {
+	if it == nil {
+		return defaulterr.NilResult
+	}
+
+	it.Payloads = payloads
+
+	return nil
+}
+
+func (it *PayloadWrapper) AttrAsBinder() payloadinf.AttributesBinder {
+	return it.Attributes
+}
+
+func (it *PayloadWrapper) InitializeAttributesOnNull() payloadinf.AttributesBinder {
+	if it.Attributes == nil {
+		it.Attributes = New.Attributes.Empty()
+	}
+
+	return it.Attributes
+}
+
+func (it *PayloadWrapper) BasicError() errcoreinf.BasicErrWrapper {
+	if it.HasError() {
+		return it.Attributes.BasicErrWrapper
+	}
+
+	return nil
+}
+
+func (it *PayloadWrapper) PayloadDeserializeToPayloadBinder() (payloadinf.PayloadsBinder, error) {
+	if it.IsNull() {
+		return nil, defaulterr.NilResult
+	}
+
+	if it.HasError() {
+		return nil, it.Attributes.BasicErrWrapper.CompiledError()
+	}
+
+	return it.DeserializePayloadsToPayloadWrapper()
+}
+
+func (it *PayloadWrapper) All() (id, name, entity, category string, dynamicPayloads []byte) {
+	return it.Identifier, it.Name, it.EntityType, it.CategoryName, it.Payloads
+}
+
+func (it *PayloadWrapper) AllSafe() (id, name, entity, category string, dynamicPayloads []byte) {
+	if it.IsNull() {
+		return "", "", "", "", []byte{}
+	}
+
+	return it.All()
+}
+
+func (it *PayloadWrapper) PayloadName() string {
+	return it.Name
+}
+
+func (it *PayloadWrapper) PayloadCategory() string {
+	return it.CategoryName
+}
+
+func (it *PayloadWrapper) PayloadTaskType() string {
+	return it.TaskTypeName
+}
+
+func (it *PayloadWrapper) PayloadEntityType() string {
+	return it.EntityType
+}
+
+func (it *PayloadWrapper) PayloadDynamic() []byte {
+	return it.Payloads
+}
+
+func (it *PayloadWrapper) PayloadProperties() payloadinf.PayloadPropertiesDefiner {
+	return &payloadProperties{it}
+}
+
+func (it *PayloadWrapper) HandleError() {
+	if it.HasError() {
+		it.BasicError().HandleError()
+	}
+}
+
+func (it *PayloadWrapper) ReflectSetTo(
+	toPointer interface{},
+) error {
+	return coredynamic.ReflectSetFromTo(
+		it,
+		toPointer)
+}
+
 func (it *PayloadWrapper) AnyAttributes() interface{} {
 	return it.Attributes
 }
@@ -31,7 +141,8 @@ func (it *PayloadWrapper) ReflectSetAttributes(
 	toPointer interface{},
 ) error {
 	return coredynamic.ReflectSetFromTo(
-		it.Attributes, toPointer)
+		it.Attributes,
+		toPointer)
 }
 
 func (it *PayloadWrapper) IdString() string {
@@ -486,6 +597,10 @@ func (it PayloadWrapper) NonPtr() PayloadWrapper {
 	return it
 }
 
-func (it *PayloadWrapper) AsStandardTaskEntityDefinerContractsBinder() entityinf.StandardTaskEntityDefinerContractsBinder {
-	return it
+func (it PayloadWrapper) AsStandardTaskEntityDefinerContractsBinder() entityinf.StandardTaskEntityDefinerContractsBinder {
+	return &it
+}
+
+func (it PayloadWrapper) AsPayloadsBinder() payloadinf.PayloadsBinder {
+	return &it
 }

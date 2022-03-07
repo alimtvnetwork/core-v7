@@ -64,6 +64,14 @@ type GenericSubscriber interface {
 		),
 	) *sync.WaitGroup
 
+	CategorySimpleBytesResulter(
+		subscribedFunc SimpleBytesResulterSubscribeFunc,
+	)
+
+	CategoryJsonResulter(
+		subscribedFunc JsonResulterSubscribeFunc,
+	)
+
 	Success() GenericSubscriber
 	Info() GenericSubscriber
 	Debug() GenericSubscriber
@@ -94,6 +102,16 @@ type GenericSubscriber interface {
 
 	DirectSubscriber
 	FilterSubscriber
+}
+
+type Middleware interface {
+	GenericSubscriber
+}
+
+type PublisherSubscriber interface {
+	Subscriber() GenericSubscriber
+	Middleware() Middleware
+	Publisher() PublisherSubscriber
 }
 
 type DirectSubscriber interface {
@@ -134,6 +152,14 @@ type DirectSubscriber interface {
 
 	JsonBytes(
 		subscribedFunc DirectModelJsonSubscribeFunc,
+	)
+
+	SimpleBytesResulter(
+		subscribedFunc DirectSimpleBytesResulterSubscribeFunc,
+	)
+
+	JsonResulter(
+		subscribedFunc DirectJsonResulterSubscribeFunc,
 	)
 
 	HashmapSubscriberFunc(

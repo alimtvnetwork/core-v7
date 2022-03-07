@@ -45,6 +45,30 @@ func (it *Rename) SourceDestination() *SourceDestination {
 	}
 }
 
+func (it Rename) FromName() string {
+	return it.Existing
+}
+
+func (it Rename) ExistingName() string {
+	return it.Existing
+}
+
+func (it Rename) NewName() string {
+	return it.New
+}
+
+func (it Rename) ToName() string {
+	return it.New
+}
+
+func (it *Rename) SetFromName(form string) {
+	it.Existing = form
+}
+
+func (it *Rename) SetToName(to string) {
+	it.New = to
+}
+
 func (it *Rename) FromTo() *FromTo {
 	if it == nil {
 		return nil

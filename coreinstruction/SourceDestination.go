@@ -34,6 +34,22 @@ func (it SourceDestination) String() string {
 		it.Destination)
 }
 
+func (it SourceDestination) FromName() string {
+	return it.Source
+}
+
+func (it SourceDestination) ToName() string {
+	return it.Destination
+}
+
+func (it *SourceDestination) SetFromName(form string) {
+	it.Source = form
+}
+
+func (it *SourceDestination) SetToName(to string) {
+	it.Destination = to
+}
+
 func (it *SourceDestination) FromTo() *FromTo {
 	if it == nil {
 		return nil
