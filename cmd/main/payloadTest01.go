@@ -37,7 +37,7 @@ func payloadTest01() {
 		},
 	}
 
-	payload := corepayload.New.PayloadWrapper.UsingCreateInstruction(
+	payload, err := corepayload.New.PayloadWrapper.UsingCreateInstruction(
 		&corepayload.PayloadCreateInstruction{
 			Name:           "name -- as payload",
 			Identifier:     "id",
@@ -47,10 +47,11 @@ func payloadTest01() {
 			HasManyRecords: false,
 			Payloads:       &line,
 			Attributes: &corepayload.Attributes{
-				ErrorMessage: "some err",
-				AuthInfo:     authInfo.Ptr(),
+				AuthInfo: authInfo.Ptr(),
 			},
 		})
+
+	errcore.MustBeEmpty(err)
 
 	jsResult := payload.JsonPtr()
 	println(jsResult.PrettyJsonString())
@@ -61,10 +62,11 @@ func payloadTest01() {
 	println(payload2.JsonPtr().PrettyJsonString())
 	println(payload2.BytesConverter().SafeCastString())
 
-	payload3 := corepayload.New.PayloadWrapper.Create(
+	payload3, err3 := corepayload.New.PayloadWrapper.Create(
 		"name3",
 		"id3", "taskname3", "category3", jsResult.Bytes)
 
+	errcore.HandleErr(err3)
 	println(payload3.JsonPtr().PrettyJsonString())
 	println(payload3.DeserializePayloadsToPayloadWrapperMust().JsonPtr().PrettyJsonString())
 	pay4, err := payload3.ClonePtr(true)

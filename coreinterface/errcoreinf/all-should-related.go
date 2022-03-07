@@ -179,6 +179,8 @@ type errorShouldBer interface {
 type ShouldBeChainer interface {
 	On(isCollect bool) ShouldBeChainer
 	OnString(actual, expected string) ShouldBeChainer
+	OnNull(anyItem interface{}) ShouldBeChainer
+	OnDefined(anyItem interface{}) ShouldBeChainer
 
 	IsCompleted() bool
 	IsFrozen() bool

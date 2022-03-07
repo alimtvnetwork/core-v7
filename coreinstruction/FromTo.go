@@ -34,6 +34,22 @@ func (it FromTo) String() string {
 		it.To)
 }
 
+func (it FromTo) FromName() string {
+	return it.From
+}
+
+func (it FromTo) ToName() string {
+	return it.To
+}
+
+func (it *FromTo) SetFromName(form string) {
+	it.From = form
+}
+
+func (it *FromTo) SetToName(to string) {
+	it.To = to
+}
+
 func (it *FromTo) SourceDestination() *SourceDestination {
 	if it == nil {
 		return nil
@@ -56,7 +72,14 @@ func (it *FromTo) Rename() *Rename {
 	}
 }
 
-func (it *FromTo) Clone() *FromTo {
+func (it FromTo) Clone() FromTo {
+	return FromTo{
+		From: it.From,
+		To:   it.To,
+	}
+}
+
+func (it *FromTo) ClonePtr() *FromTo {
 	if it == nil {
 		return nil
 	}

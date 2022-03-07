@@ -5,7 +5,7 @@ type IdGetter interface {
 }
 
 type IdIntGetter interface {
-	IdInt() int
+	IdInteger() int
 }
 
 // NameGetter

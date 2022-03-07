@@ -1254,3 +1254,9 @@ func (it Hashmap) Clone() Hashmap {
 
 	return *empty.ParseInjectUsingJsonMust(jsonResult)
 }
+
+func (it *Hashmap) Get(key string) (val string, isFound bool) {
+	val, isFound = it.items[key]
+
+	return val, isFound
+}

@@ -1,14 +1,11 @@
 package corepayload
 
 import (
-	"strings"
-
-	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/coreinstruction"
+	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
 )
 
 type newAttributesCreator struct{}
@@ -61,12 +58,12 @@ func (it *newAttributesCreator) DeserializeUsingJsonResult(
 }
 
 func (it *newAttributesCreator) Create(
-	err error,
+	basicErrWrapper errcoreinf.BasicErrWrapper,
 	authInfo *AuthInfo,
 	dynamicPayloads []byte,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
+		BasicErrWrapper:  basicErrWrapper,
 		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
@@ -74,17 +71,31 @@ func (it *newAttributesCreator) Create(
 	}
 }
 
+func (it *newAttributesCreator) ErrFromTo(
+	basicErrWrapper errcoreinf.BasicErrWrapper,
+	fromTo *coreinstruction.FromTo,
+	dynamicPayloads []byte,
+) *Attributes {
+	return &Attributes{
+		BasicErrWrapper:  basicErrWrapper,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+		FromTo:           fromTo,
+		DynamicPayloads:  dynamicPayloads,
+	}
+}
+
 func (it *newAttributesCreator) UsingAuthInfoJsonResult(
 	authInfo *AuthInfo,
 	jsonResult *corejson.Result,
-) *Attributes {
+) (*Attributes, error) {
 	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
-		AuthInfo:         authInfo,
-		KeyValuePairs:    corestr.Empty.Hashmap(),
-		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  jsonResult.Bytes,
-	}
+			AuthInfo:         authInfo,
+			KeyValuePairs:    corestr.Empty.Hashmap(),
+			AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+			DynamicPayloads:  jsonResult.Bytes,
+		},
+		jsonResult.MeaningfulError()
 }
 
 func (it *newAttributesCreator) UsingAuthInfoDynamicBytes(
@@ -96,45 +107,6 @@ func (it *newAttributesCreator) UsingAuthInfoDynamicBytes(
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  dynamicPayloads,
-	}
-}
-
-func (it *newAttributesCreator) UsingErrMsg(
-	errMsg string,
-) *Attributes {
-	if errMsg == "" {
-		return it.Empty()
-	}
-
-	return &Attributes{
-		ErrorMessage:     errMsg,
-		KeyValuePairs:    corestr.Empty.Hashmap(),
-		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
-	}
-}
-
-func (it *newAttributesCreator) UsingErrMessages(
-	errMessages ...string,
-) *Attributes {
-	return &Attributes{
-		ErrorMessage: strings.Join(
-			stringslice.NonEmptySlice(errMessages),
-			constants.DefaultLine),
-		KeyValuePairs:    corestr.Empty.Hashmap(),
-		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
-	}
-}
-
-func (it *newAttributesCreator) UsingErr(
-	err error,
-) *Attributes {
-	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
-		KeyValuePairs:    corestr.Empty.Hashmap(),
-		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
 	}
 }
 
@@ -154,36 +126,34 @@ func (it *newAttributesCreator) AllAny(
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
 	anyItem interface{},
-) *Attributes {
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
 	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
 		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
 		DynamicPayloads:  jsonResult.SafeBytes(),
-	}
+	}, jsonResult.MeaningfulError()
 }
 
 func (it *newAttributesCreator) PageInfoAny(
 	pagingInfo *PagingInfo,
 	anyItem interface{},
-) *Attributes {
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
 	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  jsonResult.SafeBytes(),
-	}
+	}, jsonResult.MeaningfulError()
 }
 
 func (it *newAttributesCreator) All(
@@ -192,14 +162,16 @@ func (it *newAttributesCreator) All(
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
 	dynamicPayloads []byte,
-	err error,
+	fromTo *coreinstruction.FromTo,
+	basicErr errcoreinf.BasicErrWrapper,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
+		BasicErrWrapper:  basicErr,
 		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
+		FromTo:           fromTo,
 		DynamicPayloads:  dynamicPayloads,
 	}
 }
@@ -217,18 +189,19 @@ func (it *newAttributesCreator) UsingAuthInfo(
 func (it *newAttributesCreator) UsingDynamicPayloadAny(
 	authInfo *AuthInfo,
 	anyItem interface{},
-) *Attributes {
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
-	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+	attr := &Attributes{
 		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  jsonResult.SafeBytes(),
 	}
+
+	return attr, jsonResult.MeaningfulError()
 }
 
 func (it *newAttributesCreator) UsingKeyValues(
@@ -295,11 +268,11 @@ func (it *newAttributesCreator) UsingAnyKeyValuesPlusDynamic(
 	}
 }
 
-func (it *newAttributesCreator) UsingErrors(
-	errorItems ...error,
+func (it *newAttributesCreator) UsingBasicError(
+	basicErrWrapper errcoreinf.BasicErrWrapper,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.MergeErrorsToStringDefault(errorItems...),
+		BasicErrWrapper:  basicErrWrapper,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  []byte{},

@@ -5,6 +5,7 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
 	"gitlab.com/evatix-go/core/coreinterface/loggerinf"
+	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
 )
 
 type (
@@ -46,6 +47,21 @@ type (
 		message string,
 	)
 
+	SimpleBytesResulterSubscribeFunc func(
+		categoryRevealer coreinterface.CategoryRevealer,
+		result serializerinf.SimpleBytesResulter,
+	)
+
+	BaseJsonResulterSubscribeFunc func(
+		categoryRevealer coreinterface.CategoryRevealer,
+		result serializerinf.BaseJsonResulter,
+	)
+
+	JsonResulterSubscribeFunc func(
+		categoryRevealer coreinterface.CategoryRevealer,
+		result serializerinf.JsonResulter,
+	)
+
 	DirectBytesSubscribeFunc func(
 		rawBytes []byte,
 	)
@@ -76,6 +92,18 @@ type (
 
 	DirectBooleanSubscribeFunc func(
 		isResult bool,
+	)
+
+	DirectSimpleBytesResulterSubscribeFunc func(
+		result serializerinf.SimpleBytesResulter,
+	)
+
+	DirectBaseJsonResulterSubscribeFunc func(
+		result serializerinf.BaseJsonResulter,
+	)
+
+	DirectJsonResulterSubscribeFunc func(
+		result serializerinf.JsonResulter,
 	)
 
 	SimpleSubscribeFunc                 func(communicate CommunicateModeler)

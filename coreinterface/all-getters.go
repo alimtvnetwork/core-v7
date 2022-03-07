@@ -257,6 +257,18 @@ type MapStringAnyGetter interface {
 	MapStringAny() map[string]interface{}
 }
 
+type MapStringStringGetter interface {
+	MapStringString() map[string]string
+}
+
+type MapStringFuncGetter interface {
+	MapStringString() map[string]func()
+}
+
+type MapStringErrorFuncGetter interface {
+	MapStringString() map[string]func() error
+}
+
 type VariableNameStringGetter interface {
 	VariableName() string
 }
