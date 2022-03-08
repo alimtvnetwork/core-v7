@@ -17,7 +17,7 @@ func (it integerWithin) ToUnsignedInt32(value int) bool {
 }
 
 func (it integerWithin) ToUnsignedInt64(value int) bool {
-	return value >= 0 && value <= math.MaxUint64
+	return value >= 0
 }
 
 func (it integerWithin) ToInt8(value int) bool {

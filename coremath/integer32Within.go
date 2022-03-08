@@ -2,8 +2,6 @@ package coremath
 
 import (
 	"math"
-
-	"gitlab.com/evatix-go/core/constants"
 )
 
 type integer32Within struct{}
@@ -21,7 +19,7 @@ func (it integer32Within) ToUnsignedInt32(value int32) bool {
 }
 
 func (it integer32Within) ToUnsignedInt64(value int32) bool {
-	return value >= 0 && value <= math.MaxUint64
+	return value >= 0
 }
 
 func (it integer32Within) ToInt8(value int32) bool {
@@ -37,5 +35,5 @@ func (it integer32Within) ToInt32(value int32) bool {
 }
 
 func (it integer32Within) ToInt(value int32) bool {
-	return value >= int32(constants.MinInt) && value <= int32(constants.MaxInt)
+	return value >= math.MinInt32 && value <= math.MaxInt32
 }
