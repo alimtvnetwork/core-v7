@@ -12,7 +12,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/issetter"
 )
 
@@ -153,7 +153,7 @@ func (it *SimpleStringOnce) IsEmpty() bool {
 }
 
 func (it *SimpleStringOnce) IsWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.value)
+	return strutilinternal.IsEmptyOrWhitespace(it.value)
 }
 
 func (it *SimpleStringOnce) Trim() string {

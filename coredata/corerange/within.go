@@ -79,7 +79,14 @@ func (it *within) StringRangeUint32(
 		math.MaxUint32,
 		input)
 
-	return uint32(finalInt), isInRange
+	// fix https://t.ly/6aoW,
+	// https://gitlab.com/evatix-go/core/-/issues/81
+	// use MaxInt32 instead of uint32Max
+	if finalInt <= math.MaxInt32 {
+		return uint32(finalInt), isInRange
+	}
+
+	return 0, isInRange
 }
 
 func (it *within) StringRangeIntegerDefault(

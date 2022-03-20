@@ -8,7 +8,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type ValidValue struct {
@@ -97,7 +97,7 @@ func (it *ValidValue) IsEmpty() bool {
 }
 
 func (it *ValidValue) IsWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.Value)
+	return strutilinternal.IsEmptyOrWhitespace(it.Value)
 }
 
 func (it *ValidValue) Trim() string {

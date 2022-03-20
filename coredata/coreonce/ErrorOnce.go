@@ -48,6 +48,50 @@ func (it *ErrorOnce) HasError() bool {
 	return !it.IsNullOrEmpty()
 }
 
+func (it *ErrorOnce) IsEmpty() bool {
+	return it.IsNullOrEmpty()
+}
+
+func (it *ErrorOnce) IsEmptyError() bool {
+	return it.IsNullOrEmpty()
+}
+
+func (it *ErrorOnce) HasAnyItem() bool {
+	return !it.IsNullOrEmpty()
+}
+
+func (it *ErrorOnce) IsDefined() bool {
+	return !it.IsNullOrEmpty()
+}
+
+// IsInvalid
+//
+//  represents has error
+func (it *ErrorOnce) IsInvalid() bool {
+	return !it.IsNullOrEmpty()
+}
+
+// IsValid
+//
+//  represents empty error
+func (it *ErrorOnce) IsValid() bool {
+	return it.IsNullOrEmpty()
+}
+
+// IsSuccess
+//
+//  represents empty error
+func (it *ErrorOnce) IsSuccess() bool {
+	return it.IsNullOrEmpty()
+}
+
+// IsFailed
+//
+//  represents has error
+func (it *ErrorOnce) IsFailed() bool {
+	return !it.IsNullOrEmpty()
+}
+
 func (it *ErrorOnce) IsNull() bool {
 	return it.Value() == nil
 }
@@ -98,7 +142,7 @@ func (it *ErrorOnce) HandleErrorWith(messages ...string) {
 
 func (it *ErrorOnce) ConcatNewString(messages ...string) string {
 	additionalMessages :=
-		converters.StringsToCsv(
+		converters.StringsTo.Csv(
 			false,
 			messages...,
 		)
@@ -125,6 +169,10 @@ func (it *ErrorOnce) Value() error {
 	it.isInitialized = true
 
 	return it.innerData
+}
+
+func (it *ErrorOnce) Execute() error {
+	return it.Value()
 }
 
 func (it *ErrorOnce) String() string {

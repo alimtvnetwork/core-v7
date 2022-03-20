@@ -43,6 +43,10 @@ func (it *BytesOnce) Value() []byte {
 	return it.innerData
 }
 
+func (it *BytesOnce) Execute() []byte {
+	return it.Value()
+}
+
 // IsEmpty returns true if zero
 func (it *BytesOnce) IsEmpty() bool {
 	return it == nil || it.initializerFunc == nil || len(it.Value()) == 0

@@ -11,8 +11,8 @@ import (
 
 func versionCompareTest(leftVersion, rightVersion string) corecomparator.Compare {
 	fmt.Println("left, right = ", leftVersion, rightVersion)
-	leftV := coreversion.New(leftVersion)
-	rightV := coreversion.New(rightVersion)
+	leftV := coreversion.New.Create(leftVersion)
+	rightV := coreversion.New.Create(rightVersion)
 
 	fmt.Println("   left, right = ", leftV, rightV)
 	r1 := leftV.Compare(rightV)

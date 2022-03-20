@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface"
 )
 
@@ -11,17 +12,50 @@ type VersionsCollection struct {
 	Versions []*Version
 }
 
-func (it *VersionsCollection) AddVersionsRaw(versions ...string) *VersionsCollection {
+func (it *VersionsCollection) Add(
+	version string,
+) *VersionsCollection {
+	it.Versions = append(
+		it.Versions,
+		New.Create(version))
+
+	return it
+}
+
+func (it *VersionsCollection) AddSkipInvalid(
+	version string,
+) *VersionsCollection {
+	v := New.Create(version)
+
+	if v.IsEmptyOrInvalid() {
+		return it
+	}
+
+	it.Versions = append(
+		it.Versions,
+		v)
+
+	return it
+}
+
+func (it *VersionsCollection) AddVersionsRaw(
+	versions ...string,
+) *VersionsCollection {
 	for _, v := range versions {
-		it.Versions = append(it.Versions, New(v))
+		it.Versions = append(
+			it.Versions,
+			New.Create(v))
 	}
 
 	return it
 }
 
-func (it *VersionsCollection) AddVersions(versions ...*Version) *VersionsCollection {
+func (it *VersionsCollection) AddVersions(
+	versions ...*Version,
+) *VersionsCollection {
 	for _, v := range versions {
-		it.Versions = append(it.Versions, v)
+		it.Versions = append(
+			it.Versions, v)
 	}
 
 	return it
@@ -83,10 +117,13 @@ func (it *VersionsCollection) VersionsStrings() []string {
 	return slice
 }
 
-func (it *VersionsCollection) IndexOf(versionString string) int {
+func (it *VersionsCollection) IndexOf(
+	versionString string,
+) int {
+	lookupVersion := New.Create(versionString)
+
 	for i, version := range it.Versions {
-		if version.VersionCompact == versionString ||
-			version.VersionDisplay() == versionString {
+		if version.VersionCompact == lookupVersion.VersionCompact {
 			return i
 		}
 	}
@@ -94,11 +131,15 @@ func (it *VersionsCollection) IndexOf(versionString string) int {
 	return constants.InvalidValue
 }
 
-func (it *VersionsCollection) IsContainsVersion(versionString string) bool {
+func (it *VersionsCollection) IsContainsVersion(
+	versionString string,
+) bool {
 	return it.IndexOf(versionString) > constants.InvalidValue
 }
 
-func (it *VersionsCollection) IsEqual(another *VersionsCollection) bool {
+func (it *VersionsCollection) IsEqual(
+	another *VersionsCollection,
+) bool {
 	if it == nil && another == nil {
 		return true
 	}
@@ -114,7 +155,7 @@ func (it *VersionsCollection) IsEqual(another *VersionsCollection) bool {
 	for i, version := range it.Versions {
 		anotherV := another.Versions[i]
 
-		if version.VersionCompact != anotherV.VersionCompact {
+		if version.IsVersionCompareNotEqual(anotherV.VersionCompact) {
 			return false
 		}
 	}
@@ -124,6 +165,22 @@ func (it *VersionsCollection) IsEqual(another *VersionsCollection) bool {
 
 func (it *VersionsCollection) String() string {
 	return strings.Join(it.VersionsStrings(), constants.NewLineUnix)
+}
+
+func (it *VersionsCollection) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it *VersionsCollection) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it *VersionsCollection) JsonParseSelfInject(jsonResult *corejson.Result) error {
+	return jsonResult.Deserialize(it)
+}
+
+func (it *VersionsCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return it
 }
 
 func (it *VersionsCollection) AsBasicSliceContractsBinder() coreinterface.BasicSlicerContractsBinder {

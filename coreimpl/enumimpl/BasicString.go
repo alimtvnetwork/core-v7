@@ -186,8 +186,14 @@ func (it BasicString) AppendPrependJoinNamer(
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (it BasicString) ToEnumJsonBytes(value string) []byte {
-	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it BasicString) ToEnumJsonBytes(value string) ([]byte, error) {
+	jsonBytes, has := it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+
+	if has {
+		return jsonBytes, nil
+	}
+
+	return []byte{}, it.notFoundJsonBytesError(value)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON

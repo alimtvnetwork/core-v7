@@ -15,7 +15,7 @@ import (
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/simplewrap"
 )
 
@@ -201,7 +201,7 @@ func (it *Collection) AddNonEmpty(str string) *Collection {
 }
 
 func (it *Collection) AddNonEmptyWhitespace(str string) *Collection {
-	if utilstringinternal.IsEmptyOrWhitespace(str) {
+	if strutilinternal.IsEmptyOrWhitespace(str) {
 		return it
 	}
 

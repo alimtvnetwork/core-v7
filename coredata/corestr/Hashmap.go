@@ -10,6 +10,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
 )
 
 type Hashmap struct {
@@ -151,6 +152,37 @@ func (it *Hashmap) AddOrUpdate(key, val string) (isAddedNewly bool) {
 	it.hasMapUpdated = true
 
 	return !isAlreadyExist
+}
+
+func (it *Hashmap) Set(key, val string) (isAddedNewly bool) {
+	_, isAlreadyExist := it.items[key]
+
+	it.items[key] = val
+	it.hasMapUpdated = true
+
+	return !isAlreadyExist
+}
+
+func (it *Hashmap) SetTrim(key, val string) (isAddedNewly bool) {
+	key = strings.TrimSpace(key)
+	val = strings.TrimSpace(val)
+
+	return it.Set(key, val)
+}
+
+func (it *Hashmap) SetBySplitter(
+	splitter, line string,
+) (isAddedNewly bool) {
+	splits := strings.SplitN(
+		line, splitter, constants.Two)
+
+	if len(splits) >= 2 {
+		// all okay
+
+		return it.Set(splits[0], splits[len(splits)-1])
+	}
+
+	return it.Set(splits[0], "")
 }
 
 func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
@@ -523,6 +555,22 @@ func (it *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 	return true
 }
 
+func (it *Hashmap) DiffRaw(
+	rightMap map[string]string,
+) map[string]string {
+	mapDiffer := mapdiffinternal.HashmapDiff(rightMap)
+
+	return mapDiffer.DiffRaw(rightMap)
+}
+
+func (it *Hashmap) Diff(
+	rightMap *Hashmap,
+) *Hashmap {
+	rawMap := it.DiffRaw(rightMap.Items())
+
+	return New.Hashmap.UsingMap(rawMap)
+}
+
 // HasAllCollectionItems return false on items is nil or Empty.
 func (it *Hashmap) HasAllCollectionItems(
 	collection *Collection,
@@ -647,6 +695,14 @@ func (it *Hashmap) GetKeysFilteredCollection(
 }
 
 func (it *Hashmap) Items() map[string]string {
+	return it.items
+}
+
+func (it *Hashmap) SafeItems() map[string]string {
+	if it == nil {
+		return nil
+	}
+
 	return it.items
 }
 

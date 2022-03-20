@@ -50,6 +50,10 @@ func (it Compare) ToNumberString() string {
 	return strconv.Itoa(int(it))
 }
 
+func (it Compare) IsDefined() bool {
+	return it != Inconclusive
+}
+
 func (it Compare) IsValid() bool {
 	return it != Inconclusive
 }
@@ -86,11 +90,31 @@ func (it Compare) IsLeftLessEqual() bool {
 	return it == LeftLessEqual
 }
 
+// IsLeftLessOrLessEqualOrEqual
+//
+//   it == Equal || it == LeftLess || it == LeftLessEqual
 func (it Compare) IsLeftLessOrLessEqualOrEqual() bool {
 	return it == Equal || it == LeftLess || it == LeftLessEqual
 }
 
+// IsLeftLessEqualLogically
+//
+//  it == Equal || it == LeftLess || it == LeftLessEqual
+func (it Compare) IsLeftLessEqualLogically() bool {
+	return it == Equal || it == LeftLess || it == LeftLessEqual
+}
+
+// IsLeftGreaterOrGreaterEqualOrEqual
+//
+//  it == Equal || it == LeftGreater || it == LeftGreaterEqual
 func (it Compare) IsLeftGreaterOrGreaterEqualOrEqual() bool {
+	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
+}
+
+// IsLeftGreaterEqualLogically
+//
+//   it == Equal || it == LeftGreater || it == LeftGreaterEqual
+func (it Compare) IsLeftGreaterEqualLogically() bool {
 	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
 }
 
@@ -98,8 +122,18 @@ func (it Compare) IsNotEqual() bool {
 	return it == NotEqual
 }
 
+// IsNotEqualLogically
+//
+//  return it != Equal
 func (it Compare) IsNotEqualLogically() bool {
 	return it != Equal
+}
+
+// IsDefinedPlus
+//
+//  return  it != Inconclusive && it == right
+func (it Compare) IsDefinedPlus(right Compare) bool {
+	return it != Inconclusive && it == right
 }
 
 func (it Compare) IsInconclusive() bool {
@@ -191,6 +225,24 @@ func (it *Compare) UnmarshalJSON(data []byte) error {
 
 func (it Compare) Value() byte {
 	return byte(it)
+}
+
+func (it Compare) IsCompareEqualLogically(
+	expectedCompare Compare,
+) bool {
+	if it == expectedCompare {
+		return true
+	}
+
+	if expectedCompare.IsLeftGreaterEqualLogically() {
+		return it.IsLeftGreaterEqualLogically()
+	}
+
+	if expectedCompare.IsLeftLessEqualLogically() {
+		return it.IsLeftLessEqualLogically()
+	}
+
+	return false
 }
 
 func (it Compare) OnlySupportedErr(

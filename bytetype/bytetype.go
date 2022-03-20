@@ -152,7 +152,7 @@ func (it Variant) UnmarshallToValue(jsonUnmarshallingValue []byte) (byte, error)
 }
 
 func (it Variant) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {

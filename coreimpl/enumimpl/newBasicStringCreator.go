@@ -3,8 +3,7 @@ package enumimpl
 import (
 	"fmt"
 	"reflect"
-
-	"gitlab.com/evatix-go/core/converters"
+	"strings"
 )
 
 type newBasicStringCreator struct{}
@@ -30,6 +29,42 @@ func (it newBasicStringCreator) CreateDefault(
 		typeName,
 		actualRangesNames,
 		nil,
+	)
+}
+
+func (it newBasicStringCreator) CreateUsingSlicePlusAliasMapOptions(
+	isIncludeUppercaseLowercase bool, // lowercase, uppercase all
+	firstItem interface{},
+	actualRangesNames []string,
+	aliasingMap map[string]string,
+) *BasicString {
+	finalAliasMap := it.generateUppercaseLowercaseAliasMap(
+		isIncludeUppercaseLowercase,
+		actualRangesNames,
+		aliasingMap)
+
+	return it.CreateAliasMapOnly(
+		reflect.TypeOf(firstItem).String(),
+		actualRangesNames,
+		finalAliasMap,
+	)
+}
+
+func (it newBasicStringCreator) CreateUsingMapPlusAliasMapOptions(
+	isIncludeUppercaseLowercase bool, // lowercase, uppercase all
+	firstItem interface{},
+	actualRangesNames []string,
+	aliasingMap map[string]string,
+) *BasicString {
+	finalAliasMap := it.generateUppercaseLowercaseAliasMap(
+		isIncludeUppercaseLowercase,
+		actualRangesNames,
+		aliasingMap)
+
+	return it.CreateAliasMapOnly(
+		reflect.TypeOf(firstItem).String(),
+		actualRangesNames,
+		finalAliasMap,
 	)
 }
 
@@ -184,11 +219,60 @@ func (it newBasicStringCreator) CreateUsingAliasMap(
 	}
 
 	return &BasicString{
-		numberEnumBase: enumBase,
-		minVal:         min,
-		maxVal:         max,
-		jsonDoubleQuoteNameToValueHashMap: *converters.
-			StringsToMap(&stringRangesNames),
+		numberEnumBase:                           enumBase,
+		minVal:                                   min,
+		maxVal:                                   max,
+		jsonDoubleQuoteNameToValueHashMap:        stringsToHashSet(stringRangesNames),
 		valueToJsonDoubleQuoteStringBytesHashmap: valueToJsonDoubleQuoteStringBytesHashmap,
 	}
+}
+
+func (it newBasicStringCreator) generateUppercaseLowercaseAliasMap(
+	isIncludeUppercaseLowercase bool,
+	names []string,
+	aliasingMap map[string]string,
+) map[string]string {
+	if !isIncludeUppercaseLowercase {
+		return aliasingMap
+	}
+
+	finalAliasMap := make(
+		map[string]string,
+		len(names)*3+len(aliasingMap)*3+2)
+
+	for _, valueAsName := range names {
+		toUpper := strings.ToUpper(valueAsName)
+		toLower := strings.ToLower(valueAsName)
+		finalAliasMap[toUpper] = valueAsName
+		finalAliasMap[toLower] = valueAsName
+		finalAliasMap[valueAsName] = valueAsName
+	}
+
+	if len(aliasingMap) == 0 {
+		return finalAliasMap
+	}
+
+	for keyAsName, valueAsActualName := range aliasingMap {
+		toUpper := strings.ToUpper(keyAsName)
+		toLower := strings.ToLower(keyAsName)
+		finalAliasMap[toUpper] = valueAsActualName
+		finalAliasMap[toLower] = valueAsActualName
+		finalAliasMap[keyAsName] = valueAsActualName
+	}
+
+	return finalAliasMap
+}
+
+func (it newBasicStringCreator) sliceNamesToMap(
+	names []string,
+) map[byte]string {
+	newMap := make(
+		map[byte]string,
+		len(names))
+
+	for i, name := range names {
+		newMap[byte(i)] = name
+	}
+
+	return newMap
 }

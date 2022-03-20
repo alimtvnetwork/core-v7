@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"errors"
 	"strings"
+
+	"gitlab.com/evatix-go/core/constants"
 )
 
 type StringOnce struct {
@@ -51,8 +53,68 @@ func (it *StringOnce) Value() string {
 	return it.innerData
 }
 
+func (it *StringOnce) Execute() string {
+	return it.Value()
+}
+
 func (it *StringOnce) IsEqual(equalString string) bool {
 	return it.Value() == equalString
+}
+
+func (it *StringOnce) HasPrefix(prefix string) bool {
+	return strings.HasPrefix(
+		it.Value(), prefix)
+}
+
+func (it *StringOnce) IsStartsWith(startsWith string) bool {
+	return strings.HasPrefix(
+		it.Value(), startsWith)
+}
+
+func (it *StringOnce) HasSuffix(suffix string) bool {
+	return strings.HasSuffix(
+		it.Value(), suffix)
+}
+
+func (it *StringOnce) IsEndsWith(
+	endsWith string,
+) bool {
+	return strings.HasSuffix(
+		it.Value(), endsWith)
+}
+
+func (it *StringOnce) SplitBy(
+	splitter string,
+) []string {
+	return strings.Split(it.Value(), splitter)
+}
+
+func (it *StringOnce) SplitLeftRightTrim(
+	splitter string,
+) (left, right string) {
+	left, right = it.SplitLeftRight(splitter)
+
+	return strings.TrimSpace(left), strings.TrimSpace(right)
+}
+
+func (it *StringOnce) SplitLeftRight(
+	splitter string,
+) (left, right string) {
+	items := strings.SplitN(
+		it.Value(),
+		splitter,
+		constants.Two)
+
+	if len(items) == 2 {
+		return items[0], items[1]
+	}
+
+	if len(items) > 2 {
+		return items[0], items[len(items)]
+	}
+
+	// len <= 1
+	return items[0], ""
 }
 
 func (it *StringOnce) IsContains(equalString string) bool {

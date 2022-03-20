@@ -188,7 +188,7 @@ func (it *Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, e
 }
 
 func (it *Variant) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {

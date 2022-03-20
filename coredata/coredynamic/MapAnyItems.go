@@ -11,6 +11,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaulterr"
 	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
 )
 
@@ -26,6 +27,16 @@ func NewMapAnyItems(capacity int) *MapAnyItems {
 	slice := make(map[string]interface{}, capacity)
 
 	return &MapAnyItems{Items: slice}
+}
+
+func NewMapAnyItemsUsingItems(
+	itemsMap map[string]interface{},
+) *MapAnyItems {
+	if len(itemsMap) == 0 {
+		return EmptyMapAnyItems()
+	}
+
+	return &MapAnyItems{Items: itemsMap}
 }
 
 func (it *MapAnyItems) Length() int {
@@ -271,6 +282,17 @@ func (it *MapAnyItems) GetItemRef(
 }
 
 func (it *MapAnyItems) Add(
+	key string,
+	valInf interface{},
+) (isNewlyAdded bool) {
+	_, isAlreadyExist := it.Items[key]
+
+	it.Items[key] = valInf
+
+	return !isAlreadyExist
+}
+
+func (it *MapAnyItems) Set(
 	key string,
 	valInf interface{},
 ) (isNewlyAdded bool) {
@@ -584,6 +606,29 @@ func (it *MapAnyItems) AllValues() []interface{} {
 	}
 
 	return values
+}
+
+func (it *MapAnyItems) DiffRaw(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) map[string]interface{} {
+	mapDiffer := mapdiffinternal.MapStringAnyDiff(
+		rightMap)
+
+	return mapDiffer.DiffRaw(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) Diff(
+	isRegardlessType bool,
+	rightMap *MapAnyItems,
+) *MapAnyItems {
+	rawMap := it.DiffRaw(
+		isRegardlessType,
+		rightMap.Items)
+
+	return NewMapAnyItemsUsingItems(rawMap)
 }
 
 func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {

@@ -812,7 +812,7 @@ func (it *Request) ToSimple() Request {
 }
 
 func (it Request) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
 func (it Request) EnumType() enuminf.EnumTyper {

@@ -44,6 +44,10 @@ func (it *IntegerOnce) Value() int {
 	return it.innerData
 }
 
+func (it *IntegerOnce) Execute() int {
+	return it.Value()
+}
+
 // IsEmpty returns true if zero
 func (it *IntegerOnce) IsEmpty() bool {
 	return it.Value() == 0
@@ -51,6 +55,46 @@ func (it *IntegerOnce) IsEmpty() bool {
 
 func (it *IntegerOnce) IsZero() bool {
 	return it.Value() == 0
+}
+
+func (it *IntegerOnce) IsAboveZero() bool {
+	return it.Value() > 0
+}
+
+func (it *IntegerOnce) IsAboveEqualZero() bool {
+	return it.Value() >= 0
+}
+
+func (it *IntegerOnce) IsLessThanZero() bool {
+	return it.Value() < 0
+}
+
+func (it *IntegerOnce) IsLessThanEqualZero() bool {
+	return it.Value() <= 0
+}
+
+func (it *IntegerOnce) IsAbove(i int) bool {
+	return it.Value() > i
+}
+
+func (it *IntegerOnce) IsAboveEqual(i int) bool {
+	return it.Value() >= i
+}
+
+func (it *IntegerOnce) IsLessThan(i int) bool {
+	return it.Value() < i
+}
+
+func (it *IntegerOnce) IsLessThanEqual(i int) bool {
+	return it.Value() <= i
+}
+
+func (it *IntegerOnce) IsInvalidIndex() bool {
+	return it.Value() < 0
+}
+
+func (it *IntegerOnce) IsValidIndex() bool {
+	return it.Value() >= 0
 }
 
 func (it *IntegerOnce) IsNegative() bool {

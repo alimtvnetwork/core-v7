@@ -6,7 +6,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type SimpleResult struct {
@@ -81,7 +81,7 @@ func (it *SimpleResult) InvalidError() error {
 		return it.err
 	}
 
-	if utilstringinternal.IsEmptyOrWhitespace(it.Message) {
+	if strutilinternal.IsEmptyOrWhitespace(it.Message) {
 		return nil
 	}
 

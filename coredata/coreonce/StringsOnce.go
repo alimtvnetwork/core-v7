@@ -77,6 +77,10 @@ func (it *StringsOnce) Value() []string {
 	return it.innerData
 }
 
+func (it *StringsOnce) Execute() []string {
+	return it.Value()
+}
+
 func (it *StringsOnce) Length() int {
 	values := it.Value()
 
@@ -146,7 +150,9 @@ func (it *StringsOnce) Has(search string) bool {
 }
 
 func (it *StringsOnce) IsContains(search string) bool {
-	for _, s := range it.innerData {
+	values := it.Values()
+
+	for _, s := range values {
 		if s == search {
 			return true
 		}

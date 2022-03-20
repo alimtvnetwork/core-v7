@@ -167,7 +167,7 @@ func (it Index) TypeName() string {
 }
 
 func (it Index) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.ValueByte())
 }
 
 func (it *Index) UnmarshalJSON(data []byte) error {
