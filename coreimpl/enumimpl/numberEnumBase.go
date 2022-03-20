@@ -9,7 +9,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/coreonce"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type numberEnumBase struct {
@@ -53,7 +53,7 @@ func newNumberEnumBase(
 
 	rangesToCsvOnce := coreonce.NewStringOnce(func() string {
 		if isString {
-			clonedList := utilstringinternal.Clone(nameRanges)
+			clonedList := strutilinternal.Clone(nameRanges)
 			sort.Strings(clonedList)
 
 			return csvinternal.StringsToStringDefaultNoQuotations(
@@ -196,6 +196,17 @@ func (it *numberEnumBase) RangesDynamicMap() map[string]interface{} {
 
 func (it *numberEnumBase) DynamicMap() DynamicMap {
 	return it.RangesDynamicMap()
+}
+
+func (it *numberEnumBase) notFoundJsonBytesError(
+	currentValueInf interface{},
+) error {
+	compiledMessage := fmt.Sprintf(
+		currentValueNotFoundInJsonMapFormat,
+		currentValueInf,
+		it.RangesInvalidMessage())
+
+	return errors.New(compiledMessage)
 }
 
 func (it *numberEnumBase) RangesIntegerStringMap() map[int]string {

@@ -14,7 +14,7 @@ import (
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/messages"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/issetter"
 )
 
@@ -94,7 +94,7 @@ func (it *Dynamic) StructStringPtr() *string {
 		return it.innerDataString
 	}
 
-	toString := utilstringinternal.AnyToString(it.innerData)
+	toString := strutilinternal.AnyToString(it.innerData)
 	it.innerDataString = &toString
 
 	return it.innerDataString
@@ -182,12 +182,12 @@ func (it *Dynamic) IsValueType() bool {
 }
 
 func (it *Dynamic) IsStructStringNullOrEmpty() bool {
-	return it.IsNull() || utilstringinternal.IsNullOrEmpty(
+	return it.IsNull() || strutilinternal.IsNullOrEmpty(
 		it.StructStringPtr())
 }
 
 func (it *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
-	return it.IsNull() || utilstringinternal.IsNullOrEmptyOrWhitespace(
+	return it.IsNull() || strutilinternal.IsNullOrEmptyOrWhitespace(
 		it.StructStringPtr())
 }
 

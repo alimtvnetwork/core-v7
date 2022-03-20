@@ -24,7 +24,7 @@ type BasicByter interface {
 	) bool
 	ToEnumJsonBytes(
 		value byte,
-	) []byte
+	) ([]byte, error)
 	ToEnumString(
 		value byte,
 	) string

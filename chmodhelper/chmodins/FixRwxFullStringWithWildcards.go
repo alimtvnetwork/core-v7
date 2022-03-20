@@ -2,7 +2,7 @@ package chmodins
 
 import (
 	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 // FixRwxFullStringWithWildcards can be less than 10 and can be
@@ -19,7 +19,7 @@ func FixRwxFullStringWithWildcards(rwxFull string) (fixedRwx string) {
 		return AllWildCardsRwxFullString
 	}
 
-	return utilstringinternal.MaskLine(
+	return strutilinternal.MaskLine(
 		AllWildCardsRwxFullString,
 		rwxFull)
 }

@@ -104,6 +104,22 @@ func (it *IntegersOnce) RangesBoolMap() map[int]bool {
 	return newMap
 }
 
+func (it *IntegersOnce) UniqueMap() map[int]bool {
+	values := it.Value()
+
+	if len(values) == 0 {
+		return map[int]bool{}
+	}
+
+	newMap := make(map[int]bool, len(values))
+
+	for _, value := range values {
+		newMap[value] = true
+	}
+
+	return newMap
+}
+
 func (it *IntegersOnce) Serialize() ([]byte, error) {
 	values := it.Value()
 
@@ -144,6 +160,10 @@ func (it *IntegersOnce) String() string {
 }
 
 func (it *IntegersOnce) Values() []int {
+	return it.Value()
+}
+
+func (it *IntegersOnce) Execute() []int {
 	return it.Value()
 }
 

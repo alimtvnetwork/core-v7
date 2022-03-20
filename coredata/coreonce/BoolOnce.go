@@ -44,6 +44,10 @@ func (it *BoolOnce) Value() bool {
 	return it.innerData
 }
 
+func (it *BoolOnce) Execute() bool {
+	return it.Value()
+}
+
 func (it *BoolOnce) String() string {
 	return strconv.FormatBool(it.Value())
 }

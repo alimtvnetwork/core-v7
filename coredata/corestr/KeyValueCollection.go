@@ -8,7 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type KeyValueCollection struct {
@@ -174,7 +174,7 @@ func (it *KeyValueCollection) StringsUsingFormat(
 }
 
 func (it *KeyValueCollection) String() string {
-	return utilstringinternal.AnyToString(it.Strings())
+	return strutilinternal.AnyToString(it.Strings())
 }
 
 func (it *KeyValueCollection) Length() int {

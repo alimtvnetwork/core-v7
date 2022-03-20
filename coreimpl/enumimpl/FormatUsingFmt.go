@@ -1,6 +1,6 @@
 package enumimpl
 
-import "gitlab.com/evatix-go/core/internal/utilstringinternal"
+import "gitlab.com/evatix-go/core/internal/strutilinternal"
 
 // FormatUsingFmt
 //
@@ -27,7 +27,7 @@ func FormatUsingFmt(
 		valueKey:            fmt.ValueString(),
 	}
 
-	return utilstringinternal.ReplaceTemplateMap(
+	return strutilinternal.ReplaceTemplateMap(
 		true,
 		format,
 		replacerMap)

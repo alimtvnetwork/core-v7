@@ -14,7 +14,7 @@ import (
 	"gitlab.com/evatix-go/core/coreindexes"
 	"gitlab.com/evatix-go/core/coresort/strsort"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type CollectionPtr struct {
@@ -203,7 +203,7 @@ func (it *CollectionPtr) AddNonEmptyWhitespace(str string) *CollectionPtr {
 		return it
 	}
 
-	if utilstringinternal.IsEmptyOrWhitespace(str) {
+	if strutilinternal.IsEmptyOrWhitespace(str) {
 		return it
 	}
 
@@ -604,7 +604,7 @@ func (it *CollectionPtr) InsertItemsAt(index int, stringItems *[]string) *Collec
 		return it.AddStringsPtr(stringItems)
 	}
 
-	pointerStrings := converters.StringsToPointerStrings(stringItems)
+	pointerStrings := converters.StringsTo.PointerStrings(stringItems)
 
 	// https://bit.ly/3pIDfRY
 	it.items =

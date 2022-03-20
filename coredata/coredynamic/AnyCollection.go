@@ -13,7 +13,7 @@ import (
 	"gitlab.com/evatix-go/core/defaultcapacity"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/pagingutil"
 )
 
@@ -207,7 +207,7 @@ func (it *AnyCollection) ListStringsPtr(isIncludeFieldName bool) *[]string {
 	slice := make([]string, constants.Zero, it.Length()+1)
 
 	for _, anyItem := range it.items {
-		str := utilstringinternal.AnyToStringUsing(
+		str := strutilinternal.AnyToStringUsing(
 			isIncludeFieldName,
 			anyItem)
 

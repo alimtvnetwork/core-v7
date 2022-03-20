@@ -105,8 +105,14 @@ func (it BasicInt16) IsValidRange(value int16) bool {
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (it BasicInt16) ToEnumJsonBytes(value int16) []byte {
-	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it BasicInt16) ToEnumJsonBytes(value int16) ([]byte, error) {
+	jsonBytes, has := it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+
+	if has {
+		return jsonBytes, nil
+	}
+
+	return []byte{}, it.notFoundJsonBytesError(value)
 }
 
 func (it BasicInt16) ToEnumString(value int16) string {

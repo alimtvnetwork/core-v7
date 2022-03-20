@@ -153,7 +153,7 @@ func (it Group) Byte() byte {
 }
 
 func (it Group) MarshalJSON() ([]byte, error) {
-	return basicEnumImplOsGroup.ToEnumJsonBytes(it.Value()), nil
+	return basicEnumImplOsGroup.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Group) UnmarshalJSON(data []byte) error {

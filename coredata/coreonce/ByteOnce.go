@@ -44,6 +44,10 @@ func (it *ByteOnce) Value() byte {
 	return it.innerData
 }
 
+func (it *ByteOnce) Execute() byte {
+	return it.Value()
+}
+
 func (it *ByteOnce) Int() int {
 	return int(it.Value())
 }

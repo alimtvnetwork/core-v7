@@ -260,7 +260,7 @@ func (it Variant) IsNotMatchRegex() bool {
 }
 
 func (it Variant) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.ValueByte()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.ValueByte())
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {

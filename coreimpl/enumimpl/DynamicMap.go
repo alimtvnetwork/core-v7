@@ -14,6 +14,44 @@ import (
 
 type DynamicMap map[string]interface{}
 
+func (it DynamicMap) AddOrUpdate(key string, val interface{}) (isAddNewly bool) {
+	_, isAlreadyExist := it[key]
+	it[key] = val
+
+	return !isAlreadyExist
+}
+
+func (it *DynamicMap) Set(key string, val interface{}) (isAddNewly bool) {
+	if it == nil {
+		// mutating because it is part of
+		*it = make(map[string]interface{}, constants.Capacity5)
+	}
+
+	_, isAlreadyExist := (*it)[key]
+	(*it)[key] = val
+
+	return !isAlreadyExist
+}
+
+// AddNewOnly
+//
+//  Don't update existing
+func (it *DynamicMap) AddNewOnly(key string, val interface{}) (isAdded bool) {
+	if it == nil {
+		// mutating because it is part of
+		*it = make(map[string]interface{}, constants.Capacity5)
+	}
+
+	_, isAlreadyExist := (*it)[key]
+	if isAlreadyExist {
+		return false
+	}
+
+	(*it)[key] = val
+
+	return true
+}
+
 func (it DynamicMap) AllKeys() []string {
 	if it.IsEmpty() {
 		return []string{}
@@ -994,11 +1032,44 @@ func (it DynamicMap) ConvMapInt64String() map[int64]string {
 		valInt := it.KeyValueIntDefault(
 			key)
 
-		if valInt < math.MinInt64 || valInt > math.MaxInt64 {
-			continue
+		// fix https://t.ly/6aoW,
+		// https://gitlab.com/evatix-go/core/-/issues/81
+		// changed condition placing
+		if valInt >= math.MinInt64 && valInt <= math.MaxInt64 {
+			newMap[int64(valInt)] = key
 		}
+	}
 
-		newMap[int64(valInt)] = key
+	return newMap
+}
+
+func (it DynamicMap) ConcatNew(
+	isOverrideExisting bool,
+	another DynamicMap,
+) DynamicMap {
+	if it.IsEmpty() && another.IsEmpty() {
+		return map[string]interface{}{}
+	}
+
+	var newMap DynamicMap = make(
+		map[string]interface{},
+		it.Length()+another.Length()+1)
+
+	if it.HasAnyItem() {
+		for key, val := range it {
+			newMap[key] = val
+		}
+	}
+
+	hasAnother := another.HasAnyItem()
+	if hasAnother && isOverrideExisting {
+		for key, val := range another {
+			newMap[key] = val
+		}
+	} else if hasAnother && !isOverrideExisting {
+		for key, val := range another {
+			newMap.AddNewOnly(key, val)
+		}
 	}
 
 	return newMap

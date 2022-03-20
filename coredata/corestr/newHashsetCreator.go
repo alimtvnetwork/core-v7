@@ -93,10 +93,10 @@ func (it *newHashsetCreator) Strings(
 		return it.Empty()
 	}
 
-	maps := converters.StringsToMap(&inputArray)
+	maps := converters.StringsTo.Hashset(inputArray)
 
 	return it.UsingMap(
-		*maps)
+		maps)
 }
 
 func (it *newHashsetCreator) SimpleSlice(
@@ -106,10 +106,10 @@ func (it *newHashsetCreator) SimpleSlice(
 		return it.Empty()
 	}
 
-	maps := converters.StringsToMap(&simpleSlice.Items)
+	maps := converters.StringsTo.Hashset(simpleSlice.Items)
 
 	return it.UsingMap(
-		*maps)
+		maps)
 }
 
 func (it *newHashsetCreator) StringsSpreadItems(
@@ -119,12 +119,12 @@ func (it *newHashsetCreator) StringsSpreadItems(
 		return it.Empty()
 	}
 
-	maps := converters.StringsToMap(&inputArray)
+	maps := converters.StringsTo.Hashset(inputArray)
 
 	return it.UsingMapOption(
 		constants.Zero,
 		false,
-		*maps)
+		maps)
 }
 
 // StringsPtr addCapacity will not work if it is not a clone.
@@ -135,12 +135,12 @@ func (it *newHashsetCreator) StringsPtr(
 		return it.Empty()
 	}
 
-	maps := converters.StringsToMap(inputArray)
+	maps := converters.StringsTo.Hashset(*inputArray)
 
 	return it.UsingMapOption(
 		constants.Zero,
 		false,
-		*maps,
+		maps,
 	)
 }
 

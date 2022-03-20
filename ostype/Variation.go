@@ -243,7 +243,7 @@ func (it Variation) IsDragonFly() bool {
 }
 
 func (it Variation) MarshalJSON() ([]byte, error) {
-	return basicEnumImplOsType.ToEnumJsonBytes(it.Value()), nil
+	return basicEnumImplOsType.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Variation) UnmarshalJSON(data []byte) error {

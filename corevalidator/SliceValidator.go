@@ -7,7 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/enums/stringcompareas"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
 type SliceValidator struct {
@@ -53,7 +53,7 @@ func NewSliceValidatorUsingAny(
 	isSortStringsBySpace bool,
 	compareAs stringcompareas.Variant,
 ) *SliceValidator {
-	anyToString := utilstringinternal.AnyToString(anyValActual)
+	anyToString := strutilinternal.AnyToString(anyValActual)
 	splitLines := strings.Split(anyToString, constants.NewLineUnix)
 	compareLines := strings.Split(
 		compareLinesContentExpected,

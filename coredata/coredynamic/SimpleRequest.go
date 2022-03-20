@@ -6,7 +6,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/evatix-go/core/internal/strutilinternal"
 	"gitlab.com/evatix-go/core/issetter"
 )
 
@@ -102,7 +102,7 @@ func (receiver *SimpleRequest) InvalidError() error {
 		return receiver.err
 	}
 
-	if utilstringinternal.IsEmptyOrWhitespace(receiver.message) {
+	if strutilinternal.IsEmptyOrWhitespace(receiver.message) {
 		return nil
 	}
 

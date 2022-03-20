@@ -3,6 +3,7 @@ package enumimpl
 import (
 	"reflect"
 	"strconv"
+	"strings"
 
 	"gitlab.com/evatix-go/core/constants"
 )
@@ -52,6 +53,44 @@ func (it newBasicByteCreator) CreateUsingMapPlusAliasMap(
 		aliasingMap, // aliasing map
 		min,         // zero
 		max,
+	)
+}
+
+func (it newBasicByteCreator) CreateUsingSlicePlusAliasMapOptions(
+	isIncludeUppercaseLowercase bool, // lowercase, uppercase all
+	firstItem interface{},
+	names []string,
+	aliasingMap map[string]byte,
+) *BasicByte {
+	actualRangesMap := it.sliceNamesToMap(names)
+
+	finalAliasMap := it.generateUppercaseLowercaseAliasMap(
+		isIncludeUppercaseLowercase,
+		actualRangesMap,
+		aliasingMap)
+
+	return it.CreateUsingMapPlusAliasMap(
+		reflect.TypeOf(firstItem).String(),
+		actualRangesMap,
+		finalAliasMap,
+	)
+}
+
+func (it newBasicByteCreator) CreateUsingMapPlusAliasMapOptions(
+	isIncludeUppercaseLowercase bool, // lowercase, uppercase all
+	firstItem interface{},
+	actualRangesMap map[byte]string,
+	aliasingMap map[string]byte,
+) *BasicByte {
+	finalAliasMap := it.generateUppercaseLowercaseAliasMap(
+		isIncludeUppercaseLowercase,
+		actualRangesMap,
+		aliasingMap)
+
+	return it.CreateUsingMapPlusAliasMap(
+		reflect.TypeOf(firstItem).String(),
+		actualRangesMap,
+		finalAliasMap,
 	)
 }
 
@@ -188,4 +227,54 @@ func (it newBasicByteCreator) DefaultWithAliasMap(
 		indexedSliceWithValues[:],
 		aliasingMap, // aliasingMap
 	)
+}
+
+func (it newBasicByteCreator) generateUppercaseLowercaseAliasMap(
+	isIncludeUppercaseLowercase bool,
+	rangesMap map[byte]string,
+	aliasingMap map[string]byte,
+) map[string]byte {
+	if !isIncludeUppercaseLowercase {
+		return aliasingMap
+	}
+
+	finalAliasMap := make(
+		map[string]byte,
+		len(rangesMap)*3+len(aliasingMap)*3+2)
+
+	for keyAsByte, valueAsName := range rangesMap {
+		toUpper := strings.ToUpper(valueAsName)
+		toLower := strings.ToLower(valueAsName)
+		finalAliasMap[toUpper] = keyAsByte
+		finalAliasMap[toLower] = keyAsByte
+		finalAliasMap[valueAsName] = keyAsByte
+	}
+
+	if len(aliasingMap) == 0 {
+		return finalAliasMap
+	}
+
+	for keyAsName, valueAsByte := range aliasingMap {
+		toUpper := strings.ToUpper(keyAsName)
+		toLower := strings.ToLower(keyAsName)
+		finalAliasMap[toUpper] = valueAsByte
+		finalAliasMap[toLower] = valueAsByte
+		finalAliasMap[keyAsName] = valueAsByte
+	}
+
+	return finalAliasMap
+}
+
+func (it newBasicByteCreator) sliceNamesToMap(
+	names []string,
+) map[byte]string {
+	newMap := make(
+		map[byte]string,
+		len(names))
+
+	for i, name := range names {
+		newMap[byte(i)] = name
+	}
+
+	return newMap
 }

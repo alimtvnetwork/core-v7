@@ -115,8 +115,14 @@ func (it BasicByte) IsValidRange(
 // ToEnumJsonBytes used for MarshalJSON from map
 func (it BasicByte) ToEnumJsonBytes(
 	value byte,
-) []byte {
-	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+) ([]byte, error) {
+	jsonBytes, has := it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+
+	if has {
+		return jsonBytes, nil
+	}
+
+	return []byte{}, it.notFoundJsonBytesError(value)
 }
 
 func (it BasicByte) ToEnumString(
@@ -149,6 +155,10 @@ func (it BasicByte) ToNumberString(
 	return fmt.Sprintf(
 		constants.SprintValueFormat,
 		valueInNumberFormat)
+}
+
+func (it BasicByte) JsonMap() map[string]byte {
+	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
