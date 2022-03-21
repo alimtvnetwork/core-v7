@@ -346,3 +346,22 @@ func (it *ValidValue) FullString() string {
 		constants.SprintPropertyNameValueFormat,
 		*it)
 }
+
+func (it *ValidValue) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Value = ""
+	it.valueBytes = nil
+	it.IsValid = false
+	it.Message = ""
+}
+
+func (it *ValidValue) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}

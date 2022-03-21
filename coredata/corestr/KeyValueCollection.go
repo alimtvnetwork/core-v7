@@ -440,3 +440,28 @@ func (it *KeyValueCollection) JsonParseSelfInject(
 func (it *KeyValueCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
 	return it
 }
+
+func (it *KeyValueCollection) Clear() {
+	if it == nil {
+		return
+	}
+
+	tempItems := it.KeyValuePairs
+	clearFunc := func() {
+		for i := 0; i < len(tempItems); i++ {
+			tempItems[i].Dispose()
+			tempItems[i] = nil
+		}
+	}
+
+	go clearFunc()
+	it.KeyValuePairs = []*KeyValuePair{}
+}
+
+func (it *KeyValueCollection) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}

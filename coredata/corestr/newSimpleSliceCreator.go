@@ -16,6 +16,17 @@ func (it *newSimpleSliceCreator) Cap(capacity int) *SimpleSlice {
 	}
 }
 
+// Default
+//
+//  Capacity 10
+func (it *newSimpleSliceCreator) Default() *SimpleSlice {
+	slice := make([]string, 0, constants.Capacity10)
+
+	return &SimpleSlice{
+		slice,
+	}
+}
+
 func (it *newSimpleSliceCreator) UsingLines(
 	isClone bool,
 	lines ...string,

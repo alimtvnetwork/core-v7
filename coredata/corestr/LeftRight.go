@@ -206,3 +206,22 @@ func (it *LeftRight) Clone() *LeftRight {
 		Message: it.Message,
 	}
 }
+
+func (it *LeftRight) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Left = ""
+	it.Right = ""
+	it.IsValid = false
+	it.Message = ""
+}
+
+func (it *LeftRight) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}

@@ -143,3 +143,21 @@ func (it KeyAnyValuePair) String() string {
 		it.Key,
 		it.Value)
 }
+
+func (it *KeyAnyValuePair) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Key = ""
+	it.Value = nil
+	it.valueString.Dispose()
+}
+
+func (it *KeyAnyValuePair) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}

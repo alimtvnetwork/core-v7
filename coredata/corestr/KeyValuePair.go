@@ -201,3 +201,20 @@ func (it *KeyValuePair) String() string {
 		it.Key,
 		it.Value)
 }
+
+func (it *KeyValuePair) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Key = ""
+	it.Value = ""
+}
+
+func (it *KeyValuePair) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}

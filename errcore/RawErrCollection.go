@@ -14,6 +14,90 @@ type RawErrCollection struct {
 	Items []error
 }
 
+func (it RawErrCollection) AddMsg(message string) {
+	it.AddString(message)
+}
+
+func (it RawErrCollection) AddMessages(
+	messages ...string,
+) {
+	if len(messages) == 0 {
+		return
+	}
+
+	compiled := strings.Join(
+		messages, constants.Space)
+
+	it.AddString(compiled)
+}
+
+func (it RawErrCollection) AddErrorWithMessage(
+	err error,
+	message string,
+) {
+	if err == nil {
+		return
+	}
+
+	it.Add(ConcatMessageWithErr(message, err))
+}
+
+func (it RawErrCollection) AddErrorWithMessageRef(
+	err error,
+	message string,
+	reference interface{},
+) {
+	if err == nil {
+		return
+	}
+
+	referenceString := constants.NilAngelBracket
+	if reference != nil {
+		referenceString = fmt.Sprintf(
+			constants.ReferenceWrapFormat,
+			referenceString)
+	}
+
+	it.AddErrorWithMessage(
+		ConcatMessageWithErr(message, err), referenceString)
+}
+
+func (it RawErrCollection) Fmt(format string, v ...interface{}) {
+	if format == "" && len(v) == 0 {
+		return
+	}
+
+	message := fmt.Sprintf(
+		format,
+		v...)
+
+	it.AddString(message)
+}
+
+func (it RawErrCollection) FmtIf(
+	isAdd bool,
+	format string,
+	v ...interface{},
+) {
+	if !isAdd {
+		return
+	}
+
+	it.Fmt(format, v...)
+}
+
+func (it RawErrCollection) References(
+	message string,
+	v ...interface{},
+) {
+	referencesCompiled := fmt.Sprintf(
+		constants.MessageReferenceWrapFormat,
+		message,
+		v)
+
+	it.AddString(referencesCompiled)
+}
+
 func (it RawErrCollection) MustBeSafe() {
 	if it.IsEmpty() {
 		return
@@ -365,7 +449,9 @@ func (it *RawErrCollection) Adds(
 			continue
 		}
 
-		it.Items = append(it.Items, err)
+		it.Items = append(
+			it.Items,
+			err)
 	}
 }
 

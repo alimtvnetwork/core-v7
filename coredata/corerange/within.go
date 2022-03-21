@@ -76,7 +76,7 @@ func (it *within) StringRangeUint32(
 	finalInt, isInRange := it.StringRangeInteger(
 		true,
 		constants.Zero,
-		math.MaxUint32,
+		math.MaxInt32,
 		input)
 
 	// fix https://t.ly/6aoW,
@@ -93,18 +93,29 @@ func (it *within) StringRangeIntegerDefault(
 	min, max int,
 	input string,
 ) (val int, isInRange bool) {
-	toInt, err := strconv.Atoi(input)
+	toInt, err := strconv.ParseInt(
+		input,
+		10,
+		64)
 
 	if err != nil {
 		return constants.Zero, false
 	}
 
-	return it.RangeInteger(
-		true,
-		min,
-		max,
-		toInt)
+	isInRange = toInt >= int64(min) &&
+		toInt <= int64(max)
 
+	if isInRange {
+		return int(toInt), isInRange
+	}
+
+	isLessMin := toInt < int64(min)
+	if isLessMin {
+		return min, false
+	}
+
+	// above
+	return max, false
 }
 
 func (it *within) StringRangeInteger(

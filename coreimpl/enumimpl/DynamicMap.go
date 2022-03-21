@@ -1032,12 +1032,7 @@ func (it DynamicMap) ConvMapInt64String() map[int64]string {
 		valInt := it.KeyValueIntDefault(
 			key)
 
-		// fix https://t.ly/6aoW,
-		// https://gitlab.com/evatix-go/core/-/issues/81
-		// changed condition placing
-		if valInt >= math.MinInt64 && valInt <= math.MaxInt64 {
-			newMap[int64(valInt)] = key
-		}
+		newMap[int64(valInt)] = key
 	}
 
 	return newMap

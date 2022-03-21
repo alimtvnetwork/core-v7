@@ -183,6 +183,13 @@ type IsErrorsCollected interface {
 type BaseRawErrCollectionDefiner interface {
 	BaseErrorOrCollectionWrapper
 	Add(err error)
+	AddMessages(messages ...string)
+	AddMsg(message string)
+	AddErrorWithMessage(err error, message string)
+	AddErrorWithMessageRef(err error, message string, reference interface{})
+	Fmt(format string, v ...interface{})
+	FmtIf(isAdd bool, format string, v ...interface{})
+	References(message string, v ...interface{})
 	AddErrorer
 	IsErrorsCollected
 	AddWithTraceRef(
