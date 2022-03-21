@@ -258,7 +258,7 @@ func (it Value) Value() byte {
 }
 
 func (it Value) StringValue() string {
-	return string(it)
+	return strconv.Itoa(it.ValueInt())
 }
 
 func (it Value) String() string {
