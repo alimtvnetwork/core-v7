@@ -57,9 +57,21 @@ type StackTracer interface {
 	StackTracesJsonResult() *corejson.Result
 	StackTraces() string
 
+	// NewStackTraces
+	//
+	// returns new code stack (only) traces string
 	NewStackTraces(stackSkip int) string
+	// NewDefaultStackTraces
+	//
+	// returns new code stack (only) traces string
 	NewDefaultStackTraces() string
+	// NewStackTracesJsonResult
+	//
+	// returns new code stack (only) traces json
 	NewStackTracesJsonResult(stackSkip int) *corejson.Result
+	// NewDefaultStackTracesJsonResult
+	//
+	// returns new code stack (only) traces json
 	NewDefaultStackTracesJsonResult() *corejson.Result
 }
 
