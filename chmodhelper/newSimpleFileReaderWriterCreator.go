@@ -87,7 +87,7 @@ func (it newSimpleFileReaderWriterCreator) Path(
 	}
 }
 
-// Path
+// PathCondition
 //
 //  Default chmod dir - 0755, file - 0644
 func (it newSimpleFileReaderWriterCreator) PathCondition(
