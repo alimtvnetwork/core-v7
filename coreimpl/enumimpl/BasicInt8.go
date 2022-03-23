@@ -7,6 +7,7 @@ import (
 	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type BasicInt8 struct {
@@ -83,6 +84,31 @@ func (it BasicInt8) GetValueByName(name string) (int8, error) {
 		it.TypeName(),
 		name,
 		it.RangeNamesCsv())
+}
+
+func (it BasicInt8) ExpectingEnumValueError(
+	rawString string,
+	expectedEnum interface{},
+) error {
+	expectedEnumName := it.ToName(expectedEnum)
+	expectedValue := it.GetValueByString(expectedEnumName)
+	convValue, err := it.GetValueByName(rawString)
+
+	if err != nil {
+		return errcore.ExpectingErrorSimpleNoType(
+			"Expecting enum: "+expectedEnumName,
+			expectedEnumName,
+			rawString+err.Error())
+	}
+
+	if convValue == expectedValue {
+		return nil
+	}
+
+	return errcore.ExpectingErrorSimpleNoType(
+		"Expecting enum: "+expectedEnumName,
+		expectedEnumName,
+		rawString+it.RangesInvalidMessage())
 }
 
 func (it BasicInt8) GetStringValue(input int8) string {

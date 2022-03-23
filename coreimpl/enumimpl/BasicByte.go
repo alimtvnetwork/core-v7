@@ -6,6 +6,7 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/evatix-go/core/defaulterr"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 type BasicByte struct {
@@ -92,6 +93,31 @@ func (it BasicByte) GetStringValue(
 	input byte,
 ) string {
 	return it.StringRanges()[input]
+}
+
+func (it BasicByte) ExpectingEnumValueError(
+	rawString string,
+	expectedEnum interface{},
+) error {
+	expectedEnumName := it.ToName(expectedEnum)
+	expectedValue := it.GetValueByString(expectedEnumName)
+	convValue, err := it.GetValueByName(rawString)
+
+	if err != nil {
+		return errcore.ExpectingErrorSimpleNoType(
+			"Expecting enum: "+expectedEnumName,
+			expectedEnumName,
+			rawString+err.Error())
+	}
+
+	if convValue == expectedValue {
+		return nil
+	}
+
+	return errcore.ExpectingErrorSimpleNoType(
+		"Expecting enum: "+expectedEnumName,
+		expectedEnumName,
+		rawString+it.RangesInvalidMessage())
 }
 
 func (it BasicByte) Ranges() []byte {
