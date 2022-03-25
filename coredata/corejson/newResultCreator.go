@@ -73,11 +73,21 @@ func (it newResultCreator) UsingBytes(
 	}
 }
 
-func (it newResultCreator) UsingErrType(
+func (it newResultCreator) UsingBytesType(
 	typeName string,
 	jsonBytes []byte,
 ) Result {
 	return Result{
+		Bytes:    jsonBytes,
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingBytesTypePtr(
+	typeName string,
+	jsonBytes []byte,
+) *Result {
+	return &Result{
 		Bytes:    jsonBytes,
 		TypeName: typeName,
 	}
@@ -95,15 +105,36 @@ func (it newResultCreator) UsingBytesPtr(
 	}
 }
 
-func (it newResultCreator) UsingBytesErrPtr(
+func (it newResultCreator) UsingBytesPtrErrPtr(
 	jsonBytes *[]byte, err error, typeName string,
 ) *Result {
 	if jsonBytes == nil || *jsonBytes == nil {
-		return &Result{}
+		return &Result{
+			Error:    err,
+			TypeName: typeName,
+		}
 	}
 
 	return &Result{
 		Bytes:    *jsonBytes,
+		Error:    err,
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingBytesErrPtr(
+	jsonBytes []byte, err error, typeName string,
+) *Result {
+	if len(jsonBytes) == 0 {
+		return &Result{
+			Bytes:    []byte{},
+			Error:    err,
+			TypeName: typeName,
+		}
+	}
+
+	return &Result{
+		Bytes:    jsonBytes,
 		Error:    err,
 		TypeName: typeName,
 	}
@@ -370,4 +401,47 @@ func (it newResultCreator) Marshal(
 		Error:    err,
 		TypeName: typeName,
 	}
+}
+
+func (it newResultCreator) UsingSerializer(
+	serializer bytesSerializer,
+) *Result {
+	if serializer == nil {
+		return nil
+	}
+
+	allBytes, err := serializer.Serialize()
+
+	return &Result{
+		Bytes: allBytes,
+		Error: err,
+		TypeName: reflectinternal.TypeName(
+			serializer),
+	}
+}
+
+func (it newResultCreator) UsingSerializerFunc(
+	serializerFunc func() ([]byte, error),
+) *Result {
+	if serializerFunc == nil {
+		return nil
+	}
+
+	allBytes, err := serializerFunc()
+
+	return &Result{
+		Bytes:    allBytes,
+		Error:    err,
+		TypeName: reflectinternal.TypeName(serializerFunc),
+	}
+}
+
+func (it newResultCreator) UsingJsoner(
+	jsoner Jsoner,
+) *Result {
+	if jsoner == nil {
+		return nil
+	}
+
+	return jsoner.JsonPtr()
 }

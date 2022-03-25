@@ -5,6 +5,7 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface"
 	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
 	"gitlab.com/evatix-go/core/internal/internalinterface"
 )
 
@@ -35,6 +36,8 @@ type SingleLogModeler interface {
 
 	SpecificValuerGetter
 	ErrorAsBasicErrWrapperGetter
+	ReflectSetter
+	serializerinf.Deserializer
 
 	corejson.JsonContractsBinder
 }

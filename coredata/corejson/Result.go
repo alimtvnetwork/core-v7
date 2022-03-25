@@ -647,11 +647,19 @@ func (it *Result) CloneError() error {
 	return nil
 }
 
-func (it *Result) Ptr() *Result {
-	return it
+func (it Result) Ptr() *Result {
+	return &it
 }
 
 func (it Result) NonPtr() Result {
+	return it
+}
+
+func (it Result) ToPtr() *Result {
+	return &it
+}
+
+func (it Result) ToNonPtr() Result {
 	return it
 }
 

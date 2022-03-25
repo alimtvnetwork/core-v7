@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/evatix-go/core/isany"
 )
 
 type newUserCreator struct{}
@@ -24,6 +26,24 @@ func (it newUserCreator) Deserialize(
 
 	// has error
 	return nil, err
+}
+
+func (it newUserCreator) CastOrDeserializeFrom(
+	anyItem interface{},
+) (*User, error) {
+	if isany.Null(anyItem) {
+		return nil, errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs(
+				"given any item is nil failed to convert to user")
+	}
+
+	toUser := &User{}
+	err := corejson.CastAny.FromToDefault(
+		anyItem,
+		toUser)
+
+	return toUser, err
 }
 
 func (it newUserCreator) Empty() *User {

@@ -367,6 +367,10 @@ func (it *DynamicMap) IsRawEqual(
 	return true
 }
 
+func (it DynamicMap) Raw() map[string]interface{} {
+	return it
+}
+
 func (it *DynamicMap) DiffRaw(
 	isRegardlessType bool,
 	rightMap map[string]interface{},

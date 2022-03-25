@@ -10,6 +10,10 @@ import (
 	"gitlab.com/evatix-go/core/errcore"
 )
 
+// BytesCollection
+//
+//  Only collects json byes nothing else.
+//  errors will be ignored or returned during add.
 type BytesCollection struct {
 	Items [][]byte `json:"JsonBytesCollection"`
 }
@@ -176,6 +180,60 @@ func (it *BytesCollection) UnmarshalAt(
 	return json.Unmarshal(
 		rawBytes,
 		any)
+}
+
+func (it *BytesCollection) AddSerializer(
+	serializer bytesSerializer,
+) *BytesCollection {
+	if serializer == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializer(
+		serializer)
+
+	return it.AddResultPtr(result)
+}
+
+func (it *BytesCollection) AddSerializers(
+	serializers ...bytesSerializer,
+) *BytesCollection {
+	if len(serializers) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializers {
+		it.AddSerializer(serializer)
+	}
+
+	return it
+}
+
+func (it *BytesCollection) AddSerializerFunc(
+	serializerFunc func() ([]byte, error),
+) *BytesCollection {
+	if serializerFunc == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializerFunc(
+		serializerFunc)
+
+	return it.AddResultPtr(result)
+}
+
+func (it *BytesCollection) AddSerializerFunctions(
+	serializerFunctions ...func() ([]byte, error),
+) *BytesCollection {
+	if len(serializerFunctions) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializerFunctions {
+		it.AddSerializerFunc(serializer)
+	}
+
+	return it
 }
 
 func (it *BytesCollection) InjectIntoAt(
@@ -602,13 +660,34 @@ func (it *BytesCollection) GetSinglePageCollection(
 }
 
 //goland:noinspection GoLinterLocal
-func (it *BytesCollection) JsonModel() *BytesCollection {
-	return it
+func (it *BytesCollection) JsonModel() [][]byte {
+	return it.Items
 }
 
 //goland:noinspection GoLinterLocal
 func (it *BytesCollection) JsonModelAny() interface{} {
 	return it.JsonModel()
+}
+
+func (it BytesCollection) MarshalJSON() ([]byte, error) {
+	return Serialize.UsingAny(
+		it.JsonModel()).
+		Raw()
+}
+
+func (it BytesCollection) UnmarshalJSON(
+	rawJsonBytes []byte,
+) error {
+	var items [][]byte
+	err := Deserialize.UsingBytes(
+		rawJsonBytes,
+		&items)
+
+	if err == nil {
+		it.Items = items
+	}
+
+	return err
 }
 
 func (it BytesCollection) Json() Result {

@@ -15,7 +15,6 @@ type MetaAttributesStacker interface {
 	enuminf.LoggerTyperGetter
 
 	On(isLog bool) MetaAttributesStacker
-	OnTitle(isLog bool, title string) MetaAttributesWithoutTileStacker
 
 	IsSilent() bool
 

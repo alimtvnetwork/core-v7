@@ -16,6 +16,8 @@ var (
 	NewBytesCollection      = newBytesCollectionCreator{}
 	NewResultsPtrCollection = newResultsPtrCollectionCreator{}
 	NewMapResults           = newMapResultsCreator{}
+	CastAny                 = castingAny{}
+	AnyTo                   = anyTo{}
 	StaticJsonError         = errcore.
 				EmptyResultCannotMakeJsonType.
 				ErrorNoRefs(constants.EmptyString)

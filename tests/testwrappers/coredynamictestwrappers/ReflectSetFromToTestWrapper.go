@@ -50,7 +50,7 @@ func (it ReflectSetFromToTestWrapper) Actual() interface{} {
 }
 
 func (it ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapper() coretests.SimpleTestCaseWrapper {
-	return it
+	return &it
 }
 
 func (it *ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapperContractsBinder() coretests.SimpleTestCaseWrapperContractsBinder {

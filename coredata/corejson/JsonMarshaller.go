@@ -1,6 +1,12 @@
 package corejson
 
 type JsonMarshaller interface {
-	MarshalJSON() ([]byte, error)
-	UnmarshalJSON(data []byte) error
+	// MarshalJSON
+	//
+	//  alias for Serialize (from any to json)
+	MarshalJSON() (jsonBytes []byte, parsedErr error)
+	// UnmarshalJSON
+	//
+	//  alias for Deserialize (from json to any)
+	UnmarshalJSON(rawJsonBytes []byte) error
 }

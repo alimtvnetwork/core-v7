@@ -1,10 +1,12 @@
 package coretests
 
 import (
+	"errors"
 	"fmt"
 	"reflect"
 	"testing"
 
+	"github.com/smartystreets/goconvey/convey"
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -41,7 +43,7 @@ func (it *BaseTestCase) TypeValidationError() error {
 	if reflectinternal.IsNotNull(it.ArrangeInput) && arrangeInputActualType != it.ArrangeExpectedType {
 		sliceErr = append(
 			sliceErr,
-			errcore.Expecting(
+			errcore.ExpectingSimpleNoType(
 				"Arrange Type Mismatch",
 				it.ArrangeExpectedType,
 				arrangeInputActualType))
@@ -50,7 +52,7 @@ func (it *BaseTestCase) TypeValidationError() error {
 	if reflectinternal.IsNotNull(it.ActualInput) && actualInputActualType != it.ActualExpectedType {
 		sliceErr = append(
 			sliceErr,
-			errcore.Expecting(
+			errcore.ExpectingSimpleNoType(
 				"Actual Type Mismatch",
 				it.ActualExpectedType,
 				actualInputActualType))
@@ -59,7 +61,7 @@ func (it *BaseTestCase) TypeValidationError() error {
 	if reflectinternal.IsNotNull(it.ExpectedInput) && expectedInputActualType != it.ExpectedTypeOfExpected {
 		sliceErr = append(
 			sliceErr,
-			errcore.Expecting(
+			errcore.ExpectingSimpleNoType(
 				"Expected Type Mismatch",
 				it.ExpectedTypeOfExpected,
 				expectedInputActualType))
@@ -105,6 +107,55 @@ func (it *BaseTestCase) SetActual(actual interface{}) {
 func (it *BaseTestCase) String(caseIndex int) string {
 	return GetAssertMessageUsingSimpleTestCaseWrapper(
 		caseIndex, it)
+}
+
+func (it *BaseTestCase) ShouldBe(
+	caseIndex int,
+	t *testing.T,
+	assert convey.Assertion,
+	actual interface{},
+) {
+	it.ShouldBeExplicit(
+		true,
+		caseIndex,
+		t,
+		it.Title,
+		actual,
+		assert,
+		it.Expected())
+}
+
+func (it *BaseTestCase) ShouldBeExplicit(
+	isValidateType bool,
+	caseIndex int,
+	t *testing.T,
+	title string,
+	actual interface{},
+	assert convey.Assertion,
+	expected interface{},
+) {
+	it.SetActual(actual)
+
+	convey.Convey(title, t, func() {
+		convey.SoMsg(it.String(caseIndex), actual, assert, expected)
+	})
+
+	if !isValidateType {
+		return
+	}
+
+	err := it.TypeValidationError()
+	errHeader := fmt.Sprintf(
+		"case %d : test case type validation must passes",
+		caseIndex)
+
+	if err != nil {
+		err = errors.New(errHeader + err.Error() + ", case title : " + title)
+	}
+
+	convey.Convey(errHeader, t, func() {
+		convey.So(err, convey.ShouldBeNil)
+	})
 }
 
 func (it *BaseTestCase) AsSimpleTestCaseWrapper() SimpleTestCaseWrapper {

@@ -1,6 +1,9 @@
 package coredynamic
 
 import (
+	"fmt"
+
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
 )
 
@@ -56,6 +59,12 @@ func (it *MapAnyItemDiff) HashmapDiffUsingRaw(
 	}
 
 	return diffMap
+}
+
+func (it *MapAnyItemDiff) MapAnyItems() *MapAnyItems {
+	return &MapAnyItems{
+		Items: it.Raw(),
+	}
 }
 
 func (it *MapAnyItemDiff) DiffRaw(
@@ -127,4 +136,36 @@ func (it *MapAnyItemDiff) Raw() map[string]interface{} {
 	}
 
 	return *it
+}
+
+func (it *MapAnyItemDiff) Clear() MapAnyItemDiff {
+	if it == nil {
+		return map[string]interface{}{}
+	}
+
+	*it = map[string]interface{}{}
+
+	return *it
+}
+
+func (it MapAnyItemDiff) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it MapAnyItemDiff) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it MapAnyItemDiff) PrettyJsonString() string {
+	return corejson.NewPtr(it).PrettyJsonString()
+}
+
+func (it MapAnyItemDiff) LogPrettyJsonString() {
+	if it.IsEmpty() {
+		fmt.Println("Empty Map")
+	}
+
+	prettyJson := it.Json().PrettyJsonString()
+
+	fmt.Println(prettyJson)
 }

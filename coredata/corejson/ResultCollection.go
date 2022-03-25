@@ -372,6 +372,60 @@ func (it *ResultsCollection) Adds(
 	return it
 }
 
+func (it *ResultsCollection) AddSerializer(
+	serializer bytesSerializer,
+) *ResultsCollection {
+	if serializer == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializer(
+		serializer)
+
+	return it.AddSkipOnNil(result)
+}
+
+func (it *ResultsCollection) AddSerializers(
+	serializers ...bytesSerializer,
+) *ResultsCollection {
+	if len(serializers) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializers {
+		it.AddSerializer(serializer)
+	}
+
+	return it
+}
+
+func (it *ResultsCollection) AddSerializerFunc(
+	serializerFunc func() ([]byte, error),
+) *ResultsCollection {
+	if serializerFunc == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializerFunc(
+		serializerFunc)
+
+	return it.AddSkipOnNil(result)
+}
+
+func (it *ResultsCollection) AddSerializerFunctions(
+	serializerFunctions ...func() ([]byte, error),
+) *ResultsCollection {
+	if len(serializerFunctions) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializerFunctions {
+		it.AddSerializerFunc(serializer)
+	}
+
+	return it
+}
+
 func (it *ResultsCollection) AddMapResults(
 	mapResults *MapResults,
 ) *ResultsCollection {

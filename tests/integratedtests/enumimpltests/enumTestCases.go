@@ -91,8 +91,8 @@ var enumTestCases = []TestWrapper{
 		EnumMap: map[string]interface{}{
 			"Invalid":    0,
 			"Something2": 15,
-			"Something":  20,
 			"B":          15,
+			"Something":  20,
 		},
 		EnumType: enumtype.String,
 	},

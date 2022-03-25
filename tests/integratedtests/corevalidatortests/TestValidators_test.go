@@ -47,11 +47,6 @@ func Test_TestValidators(t *testing.T) {
 		}
 
 		// Act
-		// validationFinalError := sliceValidator.AllVerifyErrorUptoLength(
-		// 	caseIndex,
-		// 	false,
-		// 	testCase.IsIgnoreCase,
-		// 	len(testCase.ExpectationLines) - 1)
 		validationFinalError := sliceValidator.AllVerifyError(
 			&paramsBase2)
 

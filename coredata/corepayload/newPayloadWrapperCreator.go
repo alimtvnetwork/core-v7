@@ -8,6 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/evatix-go/core/isany"
 )
 
 type newPayloadWrapperCreator struct{}
@@ -34,6 +35,24 @@ func (it newPayloadWrapperCreator) Deserialize(
 	}
 
 	return empty, nil
+}
+
+func (it newPayloadWrapperCreator) CastOrDeserializeFrom(
+	anyItem interface{},
+) (*PayloadWrapper, error) {
+	if isany.Null(anyItem) {
+		return nil, errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs(
+				"given any item is nil failed to convert to payload-wrapper")
+	}
+
+	toPayloadWrapper := &PayloadWrapper{}
+	err := corejson.CastAny.FromToDefault(
+		anyItem,
+		toPayloadWrapper)
+
+	return toPayloadWrapper, err
 }
 
 func (it newPayloadWrapperCreator) DeserializeToMany(

@@ -36,7 +36,7 @@ func assertBasicString(testCase TestWrapper) {
 
 	// Assert
 	So(actualMin, ShouldEqual, "")
-	So(actualMax, ShouldEqual, "Something")
+	So(actualMax, ShouldEqual, "Something2") // it depends on string max than number max
 }
 
 func assertBasicUnsignedInteger16(testCase TestWrapper) {
