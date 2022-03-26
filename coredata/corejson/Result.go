@@ -423,7 +423,7 @@ func (it *Result) InjectInto(
 // Deserialize
 //
 // Same as Unmarshal, just alias
-func (it *Result) Deserialize(
+func (it Result) Deserialize(
 	anyPointer interface{},
 ) error {
 	return it.Unmarshal(anyPointer)
@@ -432,7 +432,7 @@ func (it *Result) Deserialize(
 // DeserializeMust
 //
 // Same as UnmarshalMust, just alias
-func (it *Result) DeserializeMust(
+func (it Result) DeserializeMust(
 	anyPointer interface{},
 ) {
 	err := it.Unmarshal(anyPointer)
@@ -442,7 +442,7 @@ func (it *Result) DeserializeMust(
 	}
 }
 
-func (it *Result) UnmarshalMust(
+func (it Result) UnmarshalMust(
 	anyPointer interface{},
 ) {
 	err := it.Unmarshal(anyPointer)
@@ -452,6 +452,9 @@ func (it *Result) UnmarshalMust(
 	}
 }
 
+// Unmarshal
+//
+//  deserializes current safe bytes to given pointer
 func (it *Result) Unmarshal(
 	anyPointer interface{},
 ) error {
@@ -504,7 +507,7 @@ func (it *Result) Unmarshal(
 // SerializeSkipExistingIssues
 //
 // Ignores and returns nil if HasIssuesOrEmpty satisfied
-func (it *Result) SerializeSkipExistingIssues() (
+func (it Result) SerializeSkipExistingIssues() (
 	[]byte, error,
 ) {
 	if it.HasIssuesOrEmpty() {

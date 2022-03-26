@@ -1316,3 +1316,11 @@ func (it *Hashmap) Get(key string) (val string, isFound bool) {
 
 	return val, isFound
 }
+
+func (it *Hashmap) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *Hashmap) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.Json().Deserialize(toPtr)
+}

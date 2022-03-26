@@ -312,6 +312,25 @@ func (it *SimpleSlice) Count() int {
 	return it.Length()
 }
 
+func (it *SimpleSlice) CountFunc(
+	counterFunc func(index int, item string) (isCount bool),
+) int {
+	if it.IsEmpty() {
+		return 0
+	}
+
+	counter := 0
+	for i, item := range it.Items {
+		isCount := counterFunc(i, item)
+
+		if isCount {
+			counter++
+		}
+	}
+
+	return counter
+}
+
 func (it *SimpleSlice) IsEmpty() bool {
 	return it == nil || it.Length() == 0
 }

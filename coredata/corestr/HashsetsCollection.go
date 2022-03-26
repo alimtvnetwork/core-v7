@@ -370,3 +370,7 @@ func (it *HashsetsCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfIn
 func (it *HashsetsCollection) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
 }
+
+func (it HashsetsCollection) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.Json().Deserialize(toPtr)
+}

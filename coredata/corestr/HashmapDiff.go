@@ -1,6 +1,7 @@
 package corestr
 
 import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
 )
 
@@ -140,4 +141,12 @@ func (it *HashmapDiff) Raw() map[string]string {
 	}
 
 	return *it
+}
+
+func (it *HashmapDiff) Serialize() ([]byte, error) {
+	return corejson.New(it.Raw()).Raw()
+}
+
+func (it *HashmapDiff) Deserialize(toPtr interface{}) (parsingErr error) {
+	return corejson.New(it.Raw()).Deserialize(toPtr)
 }

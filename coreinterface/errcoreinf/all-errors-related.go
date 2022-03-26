@@ -77,6 +77,12 @@ type StackTracer interface {
 
 type BaseErrorOrCollectionWrapper interface {
 	internalinterface.BaseErrorOrCollectionWrapper
+
+	// JsonResultWithoutTraces
+	//
+	// Mostly used for testing cases
+	JsonResultWithoutTraces() *corejson.Result
+
 	IsCollect(another BaseErrorOrCollectionWrapper) bool
 	IsCollectedAny(anotherItems ...BaseErrorOrCollectionWrapper) bool
 	IsCollectOn(isCollect bool, another BaseErrorOrCollectionWrapper) bool
@@ -306,6 +312,12 @@ type CompiledBasicErrWrapper interface {
 type BaseErrorWrapperCollectionDefiner interface {
 	BaseErrorOrCollectionWrapper
 	internalinterface.BaseErrorWrapperCollectionDefiner
+
+	// LinesWithoutTraces
+	//
+	//  returns lines without traces
+	LinesWithoutTraces() []string
+
 	CompiledBasicErrWrapper
 	AddErrorUsingBasicType(errType BasicErrorTyper, err error) BaseErrorWrapperCollectionDefiner
 	AddBasicErrWrapper(basicErrWrapper BasicErrWrapper) BaseErrorWrapperCollectionDefiner
