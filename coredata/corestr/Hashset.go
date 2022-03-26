@@ -8,8 +8,10 @@ import (
 	"sync"
 
 	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/evatix-go/core/converters"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coredata/stringslice"
+	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
 	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
@@ -976,6 +978,26 @@ func (it *Hashset) List() []string {
 	return *it.ListPtr()
 }
 
+func (it *Hashset) MapStringAny() map[string]interface{} {
+	if it.IsEmpty() {
+		return map[string]interface{}{}
+	}
+
+	newMap := make(
+		map[string]interface{},
+		it.Length()+1)
+
+	for name, isSet := range it.items {
+		newMap[name] = isSet
+	}
+
+	return newMap
+}
+
+func (it *Hashset) MapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	return it.MapStringAny()
+}
+
 func (it *Hashset) JoinSorted(joiner string) string {
 	if it.IsEmpty() {
 		return constants.EmptyString
@@ -1165,7 +1187,7 @@ func (it *Hashset) RemoveWithLock(key string) *Hashset {
 	return it
 }
 
-func (it *Hashset) String() string {
+func (it Hashset) String() string {
 	if it.IsEmpty() {
 		return commonJoiner + NoElements
 	}
@@ -1190,13 +1212,13 @@ func (it *Hashset) StringLock() string {
 			commonJoiner)
 }
 
-func (it *Hashset) Join(
+func (it Hashset) Join(
 	joiner string,
 ) string {
 	return strings.Join(*it.ListPtr(), joiner)
 }
 
-func (it *Hashset) NonEmptyJoins(
+func (it Hashset) NonEmptyJoins(
 	joiner string,
 ) string {
 	return stringslice.NonEmptyJoinPtr(
@@ -1204,7 +1226,7 @@ func (it *Hashset) NonEmptyJoins(
 		joiner)
 }
 
-func (it *Hashset) NonWhitespaceJoins(
+func (it Hashset) NonWhitespaceJoins(
 	joiner string,
 ) string {
 	return stringslice.NonWhitespaceJoinPtr(
@@ -1213,16 +1235,20 @@ func (it *Hashset) NonWhitespaceJoins(
 }
 
 //goland:noinspection GoLinterLocal
-func (it *Hashset) JsonModel() map[string]bool {
+func (it Hashset) JsonModel() map[string]bool {
+	if it.IsEmpty() {
+		return map[string]bool{}
+	}
+
 	return it.items
 }
 
 //goland:noinspection GoLinterLocal
-func (it *Hashset) JsonModelAny() interface{} {
+func (it Hashset) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it *Hashset) MarshalJSON() ([]byte, error) {
+func (it Hashset) MarshalJSON() ([]byte, error) {
 	return json.Marshal(it.JsonModel())
 }
 
@@ -1298,4 +1324,106 @@ func (it *Hashset) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
 
 func (it *Hashset) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
+}
+
+func (it *Hashset) DistinctDiffLinesRaw(
+	rightLines ...string,
+) []string {
+	isLeftEmpty := it.IsEmpty()
+
+	if isLeftEmpty && len(rightLines) == 0 {
+		return []string{}
+	}
+
+	if !isLeftEmpty && len(rightLines) == 0 {
+		return it.List()
+	}
+
+	if isLeftEmpty && len(rightLines) > 0 {
+		return rightLines
+	}
+
+	diffLines := make(
+		[]string,
+		0,
+		it.Length()+len(rightLines))
+
+	for _, rightItem := range rightLines {
+		_, has := it.items[rightItem]
+
+		if !has {
+			diffLines = append(diffLines, rightItem)
+		}
+	}
+
+	rightHashset := converters.StringsTo.Hashset(
+		rightLines)
+
+	for leftItem := range it.items {
+		_, has := rightHashset[leftItem]
+
+		if !has {
+			diffLines = append(diffLines, leftItem)
+		}
+	}
+
+	return diffLines
+}
+
+func (it *Hashset) DistinctDiffHashset(
+	rightHashset *Hashset,
+) map[string]bool {
+	return it.DistinctDiffLines(
+		rightHashset.Lines()...)
+}
+
+func (it *Hashset) DistinctDiffLines(
+	rightLines ...string,
+) map[string]bool {
+	isLeftEmpty := it.IsEmpty()
+
+	if isLeftEmpty && len(rightLines) == 0 {
+		return map[string]bool{}
+	}
+
+	if !isLeftEmpty && len(rightLines) == 0 {
+		return it.Items()
+	}
+
+	if isLeftEmpty && len(rightLines) > 0 {
+		return converters.StringsTo.Hashset(rightLines)
+	}
+
+	diffMap := make(
+		map[string]bool,
+		it.Length()+len(rightLines))
+
+	for _, rightItem := range rightLines {
+		_, has := it.items[rightItem]
+
+		if !has {
+			diffMap[rightItem] = true
+		}
+	}
+
+	rightHashset := converters.StringsTo.Hashset(
+		rightLines)
+
+	for leftItem := range it.items {
+		_, has := rightHashset[leftItem]
+
+		if !has {
+			diffMap[leftItem] = true
+		}
+	}
+
+	return diffMap
+}
+
+func (it *Hashset) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *Hashset) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

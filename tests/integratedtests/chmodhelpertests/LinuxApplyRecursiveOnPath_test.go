@@ -17,7 +17,6 @@ func Test_LinuxApplyRecursiveOnPath_Unix(t *testing.T) {
 		caseMessenger := testCase.AsTestCaseMessenger()
 		testHeader := coretests.GetTestHeader(
 			caseMessenger)
-		// expected := testCase.ExpectedAsRwxOwnerGroupOtherInstruction()
 		chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 			true,
 			&testCase.CreatePaths)

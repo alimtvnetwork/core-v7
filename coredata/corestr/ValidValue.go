@@ -8,6 +8,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/internal/strutilinternal"
 )
 
@@ -364,4 +365,33 @@ func (it *ValidValue) Dispose() {
 	}
 
 	it.Clear()
+}
+
+func (it ValidValue) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it ValidValue) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it *ValidValue) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*ValidValue, error) {
+	err := jsonResult.Deserialize(it)
+
+	if err == nil {
+		return it, err
+	}
+
+	// has err
+	return nil, err
+}
+
+func (it *ValidValue) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *ValidValue) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

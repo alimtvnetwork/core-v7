@@ -1,7 +1,6 @@
 package issetter
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
@@ -751,16 +750,15 @@ func (it *Value) UnmarshalJSON(data []byte) error {
 }
 
 func (it Value) Serialize() ([]byte, error) {
-	name := it.Name()
-
-	return json.Marshal(name)
+	return it.MarshalJSON()
 }
 
 func (it Value) TypeName() string {
 	return typeName
 }
 
-func (it Value) IsAnyValuesEqual(anyByteValues ...byte) bool {
+func (it Value) IsAnyValuesEqual(
+	anyByteValues ...byte) bool {
 	for _, value := range anyByteValues {
 		if it.Value() == value {
 			return true
@@ -770,10 +768,22 @@ func (it Value) IsAnyValuesEqual(anyByteValues ...byte) bool {
 	return false
 }
 
-func (it Value) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+func (it Value) UnmarshallEnumToValue(
+	jsonUnmarshallingValue []byte) (byte, error) {
 	err := it.UnmarshalJSON(jsonUnmarshallingValue)
 
 	return it.ValueByte(), err
+}
+
+func (it Value) Deserialize(
+	jsonBytes []byte) (Value, error) {
+	currentVal, err := it.UnmarshallEnumToValue(jsonBytes)
+
+	if err != nil {
+		return Uninitialized, err
+	}
+
+	return Value(currentVal), err
 }
 
 func (it Value) MaxByte() byte {

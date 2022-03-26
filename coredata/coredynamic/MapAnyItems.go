@@ -29,6 +29,25 @@ func NewMapAnyItems(capacity int) *MapAnyItems {
 	return &MapAnyItems{Items: slice}
 }
 
+func NewMapAnyItemsUsingAnyTypeMap(
+	anyTypeOfMap interface{},
+) (*MapAnyItems, error) {
+	if reflectinternal.IsNull(anyTypeOfMap) {
+		return EmptyMapAnyItems(), errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("given any map was nil, cannot process it.")
+	}
+
+	rv := reflect.ValueOf(anyTypeOfMap)
+	convertedMap, err := AnyTypeMapToMapStringAny(rv)
+
+	if err != nil {
+		return EmptyMapAnyItems(), err
+	}
+
+	return &MapAnyItems{Items: convertedMap}, nil
+}
+
 func NewMapAnyItemsUsingItems(
 	itemsMap map[string]interface{},
 ) *MapAnyItems {
@@ -631,6 +650,96 @@ func (it *MapAnyItems) Diff(
 	return NewMapAnyItemsUsingItems(rawMap)
 }
 
+func (it *MapAnyItems) IsRawEqual(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.
+		IsRawEqual(
+			isRegardlessType,
+			rightMap)
+}
+
+func (it *MapAnyItems) HashmapDiffUsingRaw(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) MapAnyItemDiff {
+	diffMap := it.DiffRaw(
+		isRegardlessType,
+		rightMap)
+
+	if len(diffMap) == 0 {
+		return map[string]interface{}{}
+	}
+
+	return diffMap
+}
+
+func (it *MapAnyItems) MapAnyItems() *MapAnyItems {
+	return it
+}
+
+func (it *MapAnyItems) HasAnyChanges(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	return !it.IsRawEqual(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) MapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	return it.Items
+}
+
+func (it *MapAnyItems) DiffJsonMessage(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) string {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.DiffJsonMessage(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) ToStringsSliceOfDiffMap(
+	diffMap map[string]interface{},
+) (diffSlice []string) {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.ToStringsSliceOfDiffMap(
+		diffMap)
+}
+
+func (it *MapAnyItems) ShouldDiffMessage(
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) string {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.ShouldDiffMessage(
+		isRegardlessType,
+		title,
+		rightMap)
+}
+
+func (it *MapAnyItems) LogShouldDiffMessage(
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) (diffMessage string) {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.LogShouldDiffMessage(
+		isRegardlessType,
+		title,
+		rightMap)
+}
+
 func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {
 	mapResults := corejson.NewMapResults.UsingCap(it.Length())
 
@@ -861,4 +970,12 @@ func (it *MapAnyItems) ClonePtr() (*MapAnyItems, error) {
 		jsonResult.Bytes)
 
 	return bytesConv.ToMapAnyItems()
+}
+
+func (it *MapAnyItems) RawMapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	if it == nil {
+		return map[string]interface{}{}
+	}
+
+	return it.Items
 }

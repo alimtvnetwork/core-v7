@@ -67,6 +67,19 @@ func (it *MapAnyItemDiff) MapAnyItems() *MapAnyItems {
 	}
 }
 
+func (it *MapAnyItemDiff) HasAnyChanges(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	return !it.IsRawEqual(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItemDiff) RawMapDiffer() mapdiffinternal.MapStringAnyDiff {
+	return it.Raw()
+}
+
 func (it *MapAnyItemDiff) DiffRaw(
 	isRegardlessType bool,
 	rightMap map[string]interface{},

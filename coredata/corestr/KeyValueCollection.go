@@ -198,7 +198,48 @@ func (it *KeyValueCollection) Add(key, val string) *KeyValueCollection {
 	return it
 }
 
-func (it *KeyValueCollection) Adds(keyValues ...KeyValuePair) *KeyValueCollection {
+func (it *KeyValueCollection) AddIf(
+	isAdd bool,
+	key, val string,
+) *KeyValueCollection {
+	if !isAdd {
+		return it
+	}
+
+	it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
+		Key:   key,
+		Value: val,
+	})
+
+	return it
+}
+
+func (it *KeyValueCollection) AddStringBySplit(
+	splitter,
+	line string,
+) *KeyValueCollection {
+	key, val := strutilinternal.SplitLeftRight(
+		splitter,
+		line)
+
+	return it.Add(key, val)
+}
+
+
+func (it *KeyValueCollection) AddStringBySplitTrim(
+	splitter,
+	line string,
+) *KeyValueCollection {
+	key, val := strutilinternal.SplitLeftRightTrim(
+		splitter,
+		line)
+
+	return it.Add(key, val)
+}
+
+func (it *KeyValueCollection) Adds(
+	keyValues ...KeyValuePair,
+) *KeyValueCollection {
 	if len(keyValues) == 0 {
 		return it
 	}
@@ -301,6 +342,7 @@ func (it *KeyValueCollection) Map() map[string]string {
 
 	return hashmap.items
 }
+
 func (it *KeyValueCollection) AddsHashmaps(
 	hashmaps ...*Hashmap,
 ) *KeyValueCollection {
@@ -464,4 +506,8 @@ func (it *KeyValueCollection) Dispose() {
 	}
 
 	it.Clear()
+}
+
+func (it *KeyValueCollection) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

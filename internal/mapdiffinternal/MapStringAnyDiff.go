@@ -51,6 +51,23 @@ func (it MapStringAnyDiff) AllKeysSorted() []string {
 	return allKeys
 }
 
+func (it MapStringAnyDiff) Raw() map[string]interface{} {
+	if it == nil {
+		return map[string]interface{}{}
+	}
+
+	return it
+}
+
+func (it *MapStringAnyDiff) HasAnyChanges(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	return !it.IsRawEqual(
+		isRegardlessType,
+		rightMap)
+}
+
 func (it *MapStringAnyDiff) IsRawEqual(
 	isRegardlessType bool,
 	rightMap map[string]interface{},

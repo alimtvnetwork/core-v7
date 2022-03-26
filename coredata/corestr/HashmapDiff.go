@@ -30,6 +30,33 @@ func (it HashmapDiff) AllKeysSorted() []string {
 	return mapdiffinternal.HashmapDiff(it.Raw()).AllKeysSorted()
 }
 
+func (it *HashmapDiff) MapAnyItems() map[string]interface{} {
+	if it == nil || len(*it) == 0 {
+		return map[string]interface{}{}
+	}
+
+	newMap := make(
+		map[string]interface{},
+		it.Length()+1)
+
+	for name, value := range *it {
+		newMap[name] = value
+	}
+
+	return newMap
+}
+
+func (it *HashmapDiff) HasAnyChanges(
+	rightMap map[string]string,
+) bool {
+	return !it.IsRawEqual(
+		rightMap)
+}
+
+func (it *HashmapDiff) RawMapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	return it.MapAnyItems()
+}
+
 func (it *HashmapDiff) IsRawEqual(
 	rightMap map[string]string,
 ) bool {

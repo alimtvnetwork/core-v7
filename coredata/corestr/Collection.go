@@ -2296,3 +2296,11 @@ func (it *Collection) AsJsonMarshaller() corejson.JsonMarshaller {
 func (it *Collection) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
 }
+
+func (it *Collection) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *Collection) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
+}

@@ -638,7 +638,7 @@ func (it *SimpleSlice) JoinWith(
 	return joiner + strings.Join(it.Items, joiner)
 }
 
-func (it *SimpleSlice) JsonModel() []string {
+func (it SimpleSlice) JsonModel() []string {
 	return it.Items
 }
 
@@ -673,11 +673,11 @@ func (it *SimpleSlice) Reverse() *SimpleSlice {
 	return it
 }
 
-func (it *SimpleSlice) JsonModelAny() interface{} {
+func (it SimpleSlice) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it *SimpleSlice) MarshalJSON() ([]byte, error) {
+func (it SimpleSlice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(it.JsonModel())
 }
 
@@ -938,4 +938,54 @@ func (it SimpleSlice) IsEqualByFuncLinesSplit(
 	}
 
 	return true
+}
+
+func (it *SimpleSlice) DistinctDiffRaw(
+	rightLines ...string,
+) []string {
+	if it == nil && rightLines == nil {
+		return []string{}
+	}
+
+	if it == nil && rightLines != nil {
+		return rightLines
+	}
+
+	if it != nil && rightLines == nil {
+		return it.Items
+	}
+
+	return New.
+		Hashset.
+		Strings(it.Items).
+		DistinctDiffLinesRaw(rightLines...)
+}
+
+func (it *SimpleSlice) DistinctDiff(
+	rightSlice *SimpleSlice,
+) []string {
+	if it == nil && rightSlice == nil {
+		return []string{}
+	}
+
+	if it == nil && rightSlice != nil {
+		return rightSlice.Items
+	}
+
+	if it != nil && rightSlice == nil {
+		return it.Items
+	}
+
+	return New.
+		Hashset.
+		Strings(it.Items).
+		DistinctDiffLinesRaw(rightSlice.Items...)
+}
+
+func (it *SimpleSlice) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *SimpleSlice) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

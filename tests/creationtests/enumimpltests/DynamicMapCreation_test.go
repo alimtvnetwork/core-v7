@@ -17,6 +17,7 @@ func Test_DynamicMapCreationDiff(t *testing.T) {
 		mapAnyDiffer := coredynamic.MapAnyItemDiff(
 			arrangeInput.Left)
 
+		// Act
 		anotherDiff := mapAnyDiffer.
 			DiffRaw(
 				true,
@@ -43,6 +44,8 @@ func Test_DynamicMapCreationDiffMessage(t *testing.T) {
 	for caseIndex, testCase := range dynamicMapDiffMessageTestCases {
 		// Arrange
 		arrangeInput := testCase.ArrangeAsLeftRightDynamicMap()
+		
+		// Act
 		diffJsonMessage := arrangeInput.Left.ShouldDiffMessage(
 			true,
 			testCase.CaseTitle(),

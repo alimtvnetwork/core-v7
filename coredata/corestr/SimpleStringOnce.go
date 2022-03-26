@@ -644,10 +644,11 @@ func (it *SimpleStringOnce) MarshalJSON() ([]byte, error) {
 }
 
 func (it *SimpleStringOnce) UnmarshalJSON(
-	data []byte,
+	jsonBytes []byte,
 ) error {
 	var dataModel SimpleStringOnceModel
-	err := json.Unmarshal(data, &dataModel)
+	err := corejson.Deserialize.UsingBytes(
+		jsonBytes, &dataModel)
 
 	if err == nil {
 		it.value = dataModel.Value
@@ -715,4 +716,12 @@ func (it *SimpleStringOnce) AsJsonParseSelfInjector() corejson.JsonParseSelfInje
 
 func (it *SimpleStringOnce) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
+}
+
+func (it *SimpleStringOnce) Serialize() ([]byte, error) {
+	return it.Json().Raw()
+}
+
+func (it *SimpleStringOnce) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }
