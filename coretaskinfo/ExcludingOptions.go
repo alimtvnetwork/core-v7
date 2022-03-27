@@ -27,9 +27,7 @@ func (it *ExcludingOptions) SetSecure() *ExcludingOptions {
 
 func (it *ExcludingOptions) SetPlainText() *ExcludingOptions {
 	if it == nil {
-		return &ExcludingOptions{
-			IsSecureText: false,
-		}
+		return &ExcludingOptions{} // plain text
 	}
 
 	it.IsSecureText = false

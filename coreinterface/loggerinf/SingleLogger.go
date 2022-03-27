@@ -13,6 +13,8 @@ import (
 type SingleLogger interface {
 	enuminf.LoggerTyperGetter
 
+	IsSilent() bool
+
 	Stack() MetaAttributesStacker
 	StackTitle(title string) MetaAttributesStacker
 

@@ -5,6 +5,7 @@ import (
 
 	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/evatix-go/core/coredata/corestr"
 )
 
 type Info struct {
@@ -20,12 +21,29 @@ type Info struct {
 
 func (it *Info) SetSecure() *Info {
 	if it == nil {
-		return nil
+		return &Info{
+			ExcludeOptions: ExcludingOptions{
+				IsSecureText: true,
+			},
+		}
 	}
 
 	it.ExcludeOptions = it.
 		ExcludeOptions.
 		SetSecure().
+		ToNonPtr()
+
+	return it
+}
+
+func (it *Info) SetPlain() *Info {
+	if it == nil {
+		return &Info{} // plain text
+	}
+
+	it.ExcludeOptions = it.
+		ExcludeOptions.
+		SetPlainText().
 		ToNonPtr()
 
 	return it
@@ -61,8 +79,11 @@ func (it *Info) IsIncludeErrorUrl() bool {
 		it.ErrorUrl != ""
 }
 
+// IsIncludeAdditionalErrorWrap
+//
+//  returns true on null or it.ExcludeOptions.IsIncludeAdditionalErrorWrap
 func (it *Info) IsIncludeAdditionalErrorWrap() bool {
-	return it != nil &&
+	return it == nil ||
 		it.ExcludeOptions.IsIncludeAdditionalErrorWrap()
 }
 
@@ -174,6 +195,14 @@ func (it *Info) SafeChainingExample() string {
 	}
 
 	return it.ExampleUrl
+}
+
+func (it *Info) ExamplesAsSlice() *corestr.SimpleSlice {
+	if it.IsNull() {
+		return corestr.Empty.SimpleSlice()
+	}
+
+	return corestr.New.SimpleSlice.Strings(it.Examples)
 }
 
 func (it Info) Options() ExcludingOptions {
@@ -444,6 +473,10 @@ func (it *Info) LazyMap() map[string]string {
 }
 
 func (it *Info) String() string {
+	if it == nil {
+		return ""
+	}
+
 	return it.PrettyJsonString()
 }
 
