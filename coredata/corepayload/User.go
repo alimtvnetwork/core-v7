@@ -95,20 +95,20 @@ func (it User) String() string {
 	return it.Json().JsonString()
 }
 
-func (it User) PrettyJsonString() string {
+func (it *User) PrettyJsonString() string {
 	return it.Json().PrettyJsonString()
 }
 
-func (it User) Json() corejson.Result {
+func (it *User) Json() corejson.Result {
 	return corejson.New(it)
 }
 
-func (it User) JsonPtr() *corejson.Result {
+func (it *User) JsonPtr() *corejson.Result {
 	return corejson.NewPtr(it)
 }
 
-func (it User) Serialize() ([]byte, error) {
-	return corejson.New(it).Raw()
+func (it *User) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *User) Deserialize(rawJsonBytes []byte) error {

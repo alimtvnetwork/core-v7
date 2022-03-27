@@ -356,7 +356,7 @@ func (it *Info) ClonePtr() *Info {
 }
 
 func (it *Info) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *Info) Deserialize(toPtr interface{}) (parsingErr error) {

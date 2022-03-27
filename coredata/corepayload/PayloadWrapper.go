@@ -174,7 +174,7 @@ func (it *PayloadWrapper) ValueReflectSet(
 }
 
 func (it *PayloadWrapper) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *PayloadWrapper) SerializeMust() []byte {

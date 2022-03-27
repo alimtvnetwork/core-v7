@@ -418,7 +418,7 @@ func (it *KeyValueCollection) JsonModelAny() interface{} {
 }
 
 func (it *KeyValueCollection) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *KeyValueCollection) MarshalJSON() ([]byte, error) {

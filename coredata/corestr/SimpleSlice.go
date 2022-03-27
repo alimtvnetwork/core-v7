@@ -1005,7 +1005,7 @@ func (it *SimpleSlice) DistinctDiff(
 }
 
 func (it *SimpleSlice) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *SimpleSlice) Deserialize(toPtr interface{}) (parsingErr error) {

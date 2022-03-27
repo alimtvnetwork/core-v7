@@ -130,6 +130,22 @@ func (it serializerLogic) UsingAny(
 	return it.Apply(anyItem).NonPtr()
 }
 
+func (it serializerLogic) Raw(
+	anyItem interface{},
+) ([]byte, error) {
+	jsonResult := it.Apply(anyItem)
+
+	return jsonResult.Raw()
+}
+
+func (it serializerLogic) Marshal(
+	anyItem interface{},
+) ([]byte, error) {
+	jsonResult := it.Apply(anyItem)
+
+	return jsonResult.Raw()
+}
+
 func (it serializerLogic) ApplyMust(
 	anyItem interface{},
 ) *Result {

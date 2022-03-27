@@ -496,7 +496,7 @@ func (it SimpleFileReaderWriter) MarshalJSON() ([]byte, error) {
 		FilePath:  it.FilePath,
 	}
 
-	return corejson.New(model).Raw()
+	return corejson.Serialize.Raw(model)
 }
 
 func (it *SimpleFileReaderWriter) UnmarshalJSON(jsonBytes []byte) error {

@@ -719,7 +719,7 @@ func (it *SimpleStringOnce) AsJsonMarshaller() corejson.JsonMarshaller {
 }
 
 func (it *SimpleStringOnce) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *SimpleStringOnce) Deserialize(toPtr interface{}) (parsingErr error) {

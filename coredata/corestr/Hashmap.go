@@ -1318,9 +1318,9 @@ func (it *Hashmap) Get(key string) (val string, isFound bool) {
 }
 
 func (it *Hashmap) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *Hashmap) Deserialize(toPtr interface{}) (parsingErr error) {
-	return it.Json().Deserialize(toPtr)
+	return it.JsonPtr().Deserialize(toPtr)
 }

@@ -2298,7 +2298,7 @@ func (it *Collection) AsJsonContractsBinder() corejson.JsonContractsBinder {
 }
 
 func (it *Collection) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *Collection) Deserialize(toPtr interface{}) (parsingErr error) {

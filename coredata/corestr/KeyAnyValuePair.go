@@ -78,7 +78,7 @@ func (it *KeyAnyValuePair) ValueString() string {
 }
 
 func (it *KeyAnyValuePair) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *KeyAnyValuePair) ParseInjectUsingJson(

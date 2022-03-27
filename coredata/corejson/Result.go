@@ -207,27 +207,26 @@ func (it *Result) SafeValuesPtr() *[]byte {
 	return &it.Bytes
 }
 
-func (it Result) Raw() ([]byte, error) {
+func (it *Result) Raw() ([]byte, error) {
+	if it == nil {
+		return []byte{}, defaulterr.JsonResultNull
+	}
+
 	return it.SafeBytes(), it.MeaningfulError()
 }
 
 func (it *Result) RawMust() []byte {
-	if it == nil {
-		return []byte{}
-	}
+	allBytes, err := it.Raw()
+	errcore.HandleErr(err)
 
-	if it.HasError() {
-		panic(it.MeaningfulErrorMessage())
-	}
-
-	return it.Bytes
+	return allBytes
 }
 
-func (it Result) RawString() (jsonString string, err error) {
+func (it *Result) RawString() (jsonString string, err error) {
 	return it.JsonString(), it.MeaningfulError()
 }
 
-func (it Result) RawStringMust() (jsonString string) {
+func (it *Result) RawStringMust() (jsonString string) {
 	jsonString, err := it.RawString()
 
 	if err != nil {
@@ -237,15 +236,15 @@ func (it Result) RawStringMust() (jsonString string) {
 	return jsonString
 }
 
-func (it Result) RawErrString() (rawJsonBytes []byte, errorMsg string) {
+func (it *Result) RawErrString() (rawJsonBytes []byte, errorMsg string) {
 	return it.Bytes, it.MeaningfulErrorMessage()
 }
 
-func (it Result) RawPrettyString() (jsonString string, err error) {
+func (it *Result) RawPrettyString() (jsonString string, err error) {
 	return it.PrettyJsonString(), it.MeaningfulError()
 }
 
-func (it Result) MeaningfulErrorMessage() string {
+func (it *Result) MeaningfulErrorMessage() string {
 	err := it.MeaningfulError()
 
 	if err == nil {
@@ -255,34 +254,45 @@ func (it Result) MeaningfulErrorMessage() string {
 	return err.Error()
 }
 
-// MeaningfulError create error even if results are nil.
+// MeaningfulError
+//
+//  create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
 		return defaulterr.JsonResultNull
 	}
 
-	if it.IsEmptyError() && it.HasJsonBytes() {
+	if it.Error == nil && len(it.Bytes) > 0 {
+		// everything is okay
+
 		return nil
 	}
 
 	if it.IsEmptyJsonBytes() {
+		// error may or may not exist
 		errMsg := errcore.BytesAreNilOrEmptyType.String() +
-			" Additional: " + it.Error.Error() + ", type:"
+			" Additional: " +
+			errcore.ToString(it.Error) + // error may or may not exist
+			", type:"
 
 		return errcore.
 			FailedToParseType.
 			Error(errMsg, it.TypeName)
 	}
 
-	// must error
+	// must error and payload may or may not exist
 	return errcore.
 		FailedToParseType.
 		Error(
-			it.Error.Error()+", type:"+it.TypeName+", payload:",
+			errcore.ToString(it.Error)+", type:"+it.TypeName+", payload:",
 			it.safeJsonStringInternal())
 }
 
 func (it *Result) safeJsonStringInternal() string {
+	if it == nil {
+		return ""
+	}
+
 	var safeJsonString string
 	if it != nil && len(it.Bytes) > 0 {
 		safeJsonString = string(it.Bytes)
@@ -303,7 +313,7 @@ func (it *Result) IsEmptyError() bool {
 //  and has non-Empty json (other than length 0 or "{}")
 //
 // Invert of HasIssuesOrEmpty
-func (it Result) HasSafeItems() bool {
+func (it *Result) HasSafeItems() bool {
 	return !it.HasIssuesOrEmpty()
 }
 
@@ -326,18 +336,18 @@ func (it *Result) IsAnyNull() bool {
 // Result.IsAnyNull() ||
 // Result.HasError() ||
 // Result.IsEmptyJsonBytes()
-func (it Result) HasIssuesOrEmpty() bool {
-	return it.IsAnyNull() || it.HasError() || it.IsEmptyJsonBytes()
+func (it *Result) HasIssuesOrEmpty() bool {
+	return it == nil || it.Error != nil || it.IsEmptyJsonBytes()
 }
 
-func (it Result) HandleError() {
+func (it *Result) HandleError() {
 	if it.HasIssuesOrEmpty() {
 		panic(it.MeaningfulError())
 	}
 }
 
 // MustBeSafe alias for HandleError
-func (it Result) MustBeSafe() {
+func (it *Result) MustBeSafe() {
 	if it.HasIssuesOrEmpty() {
 		panic(it.MeaningfulError())
 	}
@@ -423,7 +433,7 @@ func (it *Result) InjectInto(
 // Deserialize
 //
 // Same as Unmarshal, just alias
-func (it Result) Deserialize(
+func (it *Result) Deserialize(
 	anyPointer interface{},
 ) error {
 	return it.Unmarshal(anyPointer)
@@ -432,7 +442,7 @@ func (it Result) Deserialize(
 // DeserializeMust
 //
 // Same as UnmarshalMust, just alias
-func (it Result) DeserializeMust(
+func (it *Result) DeserializeMust(
 	anyPointer interface{},
 ) {
 	err := it.Unmarshal(anyPointer)
@@ -442,7 +452,7 @@ func (it Result) DeserializeMust(
 	}
 }
 
-func (it Result) UnmarshalMust(
+func (it *Result) UnmarshalMust(
 	anyPointer interface{},
 ) {
 	err := it.Unmarshal(anyPointer)
@@ -507,7 +517,7 @@ func (it *Result) Unmarshal(
 // SerializeSkipExistingIssues
 //
 // Ignores and returns nil if HasIssuesOrEmpty satisfied
-func (it Result) SerializeSkipExistingIssues() (
+func (it *Result) SerializeSkipExistingIssues() (
 	[]byte, error,
 ) {
 	if it.HasIssuesOrEmpty() {
@@ -551,7 +561,7 @@ func (it *Result) Serialize() ([]byte, error) {
 	return it.serializeInternal()
 }
 
-func (it Result) SerializeMust() []byte {
+func (it *Result) SerializeMust() []byte {
 	rs, err := it.Serialize()
 	errcore.MustBeEmpty(err)
 
@@ -597,8 +607,14 @@ func (it *Result) UnmarshalResult() (*Result, error) {
 }
 
 //goland:noinspection GoLinterLocal
-func (it Result) JsonModel() Result {
-	return it
+func (it *Result) JsonModel() Result {
+	if it == nil {
+		return Result{
+			Error: defaulterr.JsonResultNull,
+		}
+	}
+
+	return *it
 }
 
 //goland:noinspection GoLinterLocal
@@ -606,10 +622,16 @@ func (it *Result) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+// Json
+//
+//  creates json result of self
 func (it Result) Json() Result {
 	return NewResult.Any(it)
 }
 
+// JsonPtr
+//
+//  creates json result of self
 func (it Result) JsonPtr() *Result {
 	return NewResult.AnyPtr(it)
 }

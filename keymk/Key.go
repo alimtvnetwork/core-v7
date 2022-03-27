@@ -510,7 +510,7 @@ func (it *Key) JsonModelAny() interface{} {
 }
 
 func (it Key) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *Key) MarshalJSON() ([]byte, error) {

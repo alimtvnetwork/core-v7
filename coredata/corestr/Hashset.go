@@ -1421,7 +1421,7 @@ func (it *Hashset) DistinctDiffLines(
 }
 
 func (it *Hashset) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *Hashset) Deserialize(toPtr interface{}) (parsingErr error) {

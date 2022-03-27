@@ -863,7 +863,7 @@ func (it TraceCollection) JsonPtr() *corejson.Result {
 }
 
 func (it TraceCollection) Serializer() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it TraceCollection) StackTracesBytes() []byte {

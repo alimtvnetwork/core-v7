@@ -670,9 +670,7 @@ func (it *BytesCollection) JsonModelAny() interface{} {
 }
 
 func (it BytesCollection) MarshalJSON() ([]byte, error) {
-	return Serialize.UsingAny(
-		it.JsonModel()).
-		Raw()
+	return Serialize.Raw(it.JsonModel())
 }
 
 func (it BytesCollection) UnmarshalJSON(

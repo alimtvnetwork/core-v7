@@ -342,7 +342,7 @@ func (it *HashsetsCollection) Join(
 }
 
 func (it *HashsetsCollection) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *HashsetsCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
@@ -372,5 +372,5 @@ func (it *HashsetsCollection) AsJsonMarshaller() corejson.JsonMarshaller {
 }
 
 func (it HashsetsCollection) Deserialize(toPtr interface{}) (parsingErr error) {
-	return it.Json().Deserialize(toPtr)
+	return it.JsonPtr().Deserialize(toPtr)
 }

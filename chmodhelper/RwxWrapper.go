@@ -612,7 +612,7 @@ func (it RwxWrapper) MarshalJSON() ([]byte, error) {
 		RwxFull: it.ToFullRwxValueString(),
 	}
 
-	return corejson.New(model).Raw()
+	return corejson.Serialize.Raw(model)
 }
 
 func (it *RwxWrapper) UnmarshalJSON(jsonBytes []byte) error {

@@ -389,7 +389,7 @@ func (it *ValidValue) ParseInjectUsingJson(
 }
 
 func (it *ValidValue) Serialize() ([]byte, error) {
-	return it.Json().Raw()
+	return corejson.Serialize.Raw(it)
 }
 
 func (it *ValidValue) Deserialize(toPtr interface{}) (parsingErr error) {

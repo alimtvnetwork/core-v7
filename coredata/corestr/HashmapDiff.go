@@ -144,9 +144,9 @@ func (it *HashmapDiff) Raw() map[string]string {
 }
 
 func (it *HashmapDiff) Serialize() ([]byte, error) {
-	return corejson.New(it.Raw()).Raw()
+	return corejson.Serialize.Raw(it.Raw())
 }
 
 func (it *HashmapDiff) Deserialize(toPtr interface{}) (parsingErr error) {
-	return corejson.New(it.Raw()).Deserialize(toPtr)
+	return corejson.NewPtr(it.Raw()).Deserialize(toPtr)
 }
