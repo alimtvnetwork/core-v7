@@ -164,7 +164,10 @@ func (it *SimpleSlice) AddAsTitleValueIf(
 	return it
 }
 
-func (it *SimpleSlice) InsertAt(index int, item string) *SimpleSlice {
+func (it *SimpleSlice) InsertAt(
+	index int,
+	item string,
+) *SimpleSlice {
 	it.Items = append(it.Items[:index+1], it.Items[index:]...)
 	it.Items[index] = item
 

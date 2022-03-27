@@ -44,7 +44,7 @@ func Test_DynamicMapCreationDiffMessage(t *testing.T) {
 	for caseIndex, testCase := range dynamicMapDiffMessageTestCases {
 		// Arrange
 		arrangeInput := testCase.ArrangeAsLeftRightDynamicMap()
-		
+
 		// Act
 		diffJsonMessage := arrangeInput.Left.ShouldDiffMessage(
 			true,

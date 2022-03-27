@@ -758,7 +758,8 @@ func (it Value) TypeName() string {
 }
 
 func (it Value) IsAnyValuesEqual(
-	anyByteValues ...byte) bool {
+	anyByteValues ...byte,
+) bool {
 	for _, value := range anyByteValues {
 		if it.Value() == value {
 			return true
@@ -769,14 +770,16 @@ func (it Value) IsAnyValuesEqual(
 }
 
 func (it Value) UnmarshallEnumToValue(
-	jsonUnmarshallingValue []byte) (byte, error) {
+	jsonUnmarshallingValue []byte,
+) (byte, error) {
 	err := it.UnmarshalJSON(jsonUnmarshallingValue)
 
 	return it.ValueByte(), err
 }
 
 func (it Value) Deserialize(
-	jsonBytes []byte) (Value, error) {
+	jsonBytes []byte,
+) (Value, error) {
 	currentVal, err := it.UnmarshallEnumToValue(jsonBytes)
 
 	if err != nil {

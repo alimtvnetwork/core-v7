@@ -4,7 +4,11 @@ import (
 	"gitlab.com/evatix-go/core/constants"
 )
 
-func Combine(genericMsg, otherMsg, reference string) string {
+func Combine(
+	genericMsg,
+	otherMsg,
+	reference string,
+) string {
 	return genericMsg +
 		constants.Space +
 		otherMsg +

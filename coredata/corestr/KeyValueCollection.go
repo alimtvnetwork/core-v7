@@ -225,7 +225,6 @@ func (it *KeyValueCollection) AddStringBySplit(
 	return it.Add(key, val)
 }
 
-
 func (it *KeyValueCollection) AddStringBySplitTrim(
 	splitter,
 	line string,
