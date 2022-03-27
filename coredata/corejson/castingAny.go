@@ -87,7 +87,7 @@ func (it castingAny) FromToOption(
 		return Deserialize.UsingBytes(
 			allBytes,
 			castedToPtr)
-	case func() ([]byte, error):
+	case func() ([]byte, error): // serializer func
 		jsonResult := NewResult.UsingSerializerFunc(
 			castedFrom)
 

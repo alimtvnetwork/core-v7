@@ -1,8 +1,32 @@
 package coretaskinfo
 
+import (
+	"gitlab.com/evatix-go/core/coredata/corejson"
+)
+
 type newInfoCreator struct {
 	Plain  newInfoPlainTextCreator
 	Secure newInfoSecureTextCreator
+}
+
+func (it newInfoCreator) Deserialized(
+	rawBytes []byte,
+) (parsedInfo *Info, parsingErr error) {
+	emptyInfo := Info{}
+	parsingErr = corejson.Deserialize.UsingBytes(
+		rawBytes, &emptyInfo)
+
+	return emptyInfo.ToPtr(), parsingErr
+}
+
+func (it newInfoCreator) DeserializedUsingJsonResult(
+	jsonResult *corejson.Result,
+) (parsedInfo *Info, parsingErr error) {
+	emptyInfo := Info{}
+	parsingErr = jsonResult.Deserialize(
+		&emptyInfo)
+
+	return emptyInfo.ToPtr(), parsingErr
 }
 
 func (it newInfoCreator) Default(

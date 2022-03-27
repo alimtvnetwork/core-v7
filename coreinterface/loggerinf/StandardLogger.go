@@ -13,6 +13,18 @@ type StandardLogger interface {
 	FullLogger() FullLogger
 	EnvOptioner() enuminf.EnvironmentOptioner
 
+	TaskNamedLogger(
+		taskName string,
+	) StandardLogger
+
+	TaskWithPayloadLogger(
+		taskName string,
+		payloadAny interface{}, // can be bytes, payloadWrapper, can be any
+	) StandardLogger
+
+	GetLoggerByTaskName(taskName string) StandardLogger
+	GetLoggerByTaskNamer(taskNamer enuminf.Namer) StandardLogger
+
 	Success(args ...interface{}) StandardLogger
 	Info(args ...interface{}) StandardLogger
 	Trace(args ...interface{}) StandardLogger

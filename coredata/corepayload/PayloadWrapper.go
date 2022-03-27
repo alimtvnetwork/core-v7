@@ -459,19 +459,19 @@ func (it *PayloadWrapper) DeserializePayloadsToPayloadWrapperMust() (
 	return rs
 }
 
-func (it PayloadWrapper) JsonModel() PayloadWrapper {
-	return it
+func (it *PayloadWrapper) JsonModel() PayloadWrapper {
+	return it.NonPtr()
 }
 
 func (it *PayloadWrapper) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it PayloadWrapper) Json() corejson.Result {
+func (it *PayloadWrapper) Json() corejson.Result {
 	return corejson.New(it)
 }
 
-func (it PayloadWrapper) JsonPtr() *corejson.Result {
+func (it *PayloadWrapper) JsonPtr() *corejson.Result {
 	return corejson.NewPtr(it)
 }
 
@@ -593,8 +593,19 @@ func (it *PayloadWrapper) ClonePtr(
 	}, nil
 }
 
-func (it PayloadWrapper) NonPtr() PayloadWrapper {
-	return it
+func (it *PayloadWrapper) NonPtr() PayloadWrapper {
+	if it == nil {
+		return PayloadWrapper{}
+	}
+
+	return *it
+}
+
+// ToPtr
+//
+// can panic if nil
+func (it PayloadWrapper) ToPtr() *PayloadWrapper {
+	return &it
 }
 
 func (it PayloadWrapper) AsStandardTaskEntityDefinerContractsBinder() entityinf.StandardTaskEntityDefinerContractsBinder {

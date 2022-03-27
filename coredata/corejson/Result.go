@@ -462,7 +462,7 @@ func (it *Result) Unmarshal(
 		return errcore.
 			UnMarshallingFailedType.
 			Error(
-				"cannot unmarshal if JsonResult is nil or null, type",
+				"cannot unmarshal null json result, to pointer type",
 				reflectinternal.TypeName(anyPointer))
 	}
 
@@ -654,8 +654,14 @@ func (it Result) Ptr() *Result {
 	return &it
 }
 
-func (it Result) NonPtr() Result {
-	return it
+func (it *Result) NonPtr() Result {
+	if it == nil {
+		return Result{
+			Error: errors.New("nil json result"),
+		}
+	}
+
+	return *it
 }
 
 func (it Result) ToPtr() *Result {

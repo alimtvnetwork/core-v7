@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"gitlab.com/evatix-go/core/coretaskinfo"
+	"gitlab.com/evatix-go/core/errcore"
 )
 
 func main() {
@@ -90,4 +91,14 @@ func infoCreateExample01() {
 	)
 
 	fmt.Println(infoNoExamples.LazyMapPrettyJsonString())
+
+	infoNoExamples2, parseErr := coretaskinfo.New.Info.Deserialized(
+		infoNoExamples.JsonPtr().Bytes)
+
+	errcore.HandleErr(parseErr)
+	fmt.Println(infoNoExamples2.PrettyJsonStringWithPayloads([]byte("some payloads2")))
+
+	infoNoExamples2 = nil
+
+	fmt.Println(infoNoExamples2.PrettyJsonStringWithPayloads([]byte("some payloads3")))
 }

@@ -176,6 +176,7 @@ type SingleLogger interface {
 	Int(title string, i int) SingleLogger
 	Integers(title string, integerItems ...int) SingleLogger
 
+	FmtIf(isLog bool, format string, v ...interface{}) SingleLogger
 	Fmt(format string, v ...interface{}) SingleLogger
 	AttrFmt(title string, attrFormat string, attrValues ...interface{}) SingleLogger
 

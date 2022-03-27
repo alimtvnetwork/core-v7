@@ -84,19 +84,23 @@ func (it *Info) IsIncludeExamples() bool {
 		len(it.Examples) > 0
 }
 
-func (it Info) IsSecure() bool {
-	return it.ExcludeOptions.IsSecureText
+func (it *Info) IsSecure() bool {
+	return it != nil && it.ExcludeOptions.IsSecureText
 }
 
-func (it Info) IsPlainText() bool {
-	return it.ExcludeOptions.IsIncludePayloads()
+func (it *Info) IsPlainText() bool {
+	return it == nil || it.ExcludeOptions.IsIncludePayloads()
 }
 
-func (it Info) IsIncludePayloads() bool {
-	return it.ExcludeOptions.IsIncludePayloads()
+func (it *Info) IsIncludePayloads() bool {
+	return it == nil || it.ExcludeOptions.IsIncludePayloads()
 }
 
-func (it Info) Name() string {
+func (it *Info) Name() string {
+	if it.IsNull() {
+		return ""
+	}
+
 	return it.RootName
 }
 
@@ -116,7 +120,7 @@ func (it *Info) IsName(name string) bool {
 	return it != nil && it.RootName == name
 }
 
-func (it Info) SafeName() string {
+func (it *Info) SafeName() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -124,7 +128,7 @@ func (it Info) SafeName() string {
 	return it.RootName
 }
 
-func (it Info) SafeDescription() string {
+func (it *Info) SafeDescription() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -132,7 +136,7 @@ func (it Info) SafeDescription() string {
 	return it.Description
 }
 
-func (it Info) SafeUrl() string {
+func (it *Info) SafeUrl() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -140,7 +144,7 @@ func (it Info) SafeUrl() string {
 	return it.Url
 }
 
-func (it Info) SafeHintUrl() string {
+func (it *Info) SafeHintUrl() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -148,7 +152,7 @@ func (it Info) SafeHintUrl() string {
 	return it.HintUrl
 }
 
-func (it Info) SafeErrorUrl() string {
+func (it *Info) SafeErrorUrl() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -156,7 +160,7 @@ func (it Info) SafeErrorUrl() string {
 	return it.ErrorUrl
 }
 
-func (it Info) SafeExampleUrl() string {
+func (it *Info) SafeExampleUrl() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -164,7 +168,7 @@ func (it Info) SafeExampleUrl() string {
 	return it.ExampleUrl
 }
 
-func (it Info) SafeChainingExample() string {
+func (it *Info) SafeChainingExample() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -278,7 +282,15 @@ func (it Info) JsonString() string {
 	return it.JsonPtr().JsonString()
 }
 
-func (it Info) PrettyJsonString() string {
+func (it *Info) PrettyJsonStringWithPayloads(
+	payloads []byte,
+) string {
+	return corejson.
+		NewPtr(it.MapWithPayload(payloads)).
+		PrettyJsonString()
+}
+
+func (it *Info) PrettyJsonString() string {
 	if it.IsNull() {
 		return ""
 	}
@@ -288,7 +300,7 @@ func (it Info) PrettyJsonString() string {
 		PrettyJsonString()
 }
 
-func (it Info) LazyMapPrettyJsonString() string {
+func (it *Info) LazyMapPrettyJsonString() string {
 	lazyMap := it.LazyMap()
 
 	return corejson.
@@ -325,7 +337,11 @@ func (it Info) Clone() Info {
 	}
 }
 
-func (it Info) ClonePtr() *Info {
+func (it *Info) ClonePtr() *Info {
+	if it == nil {
+		return nil
+	}
+
 	return &Info{
 		RootName:       it.RootName,
 		Description:    it.Description,
@@ -339,15 +355,15 @@ func (it Info) ClonePtr() *Info {
 	}
 }
 
-func (it Info) Serialize() ([]byte, error) {
+func (it *Info) Serialize() ([]byte, error) {
 	return it.Json().Raw()
 }
 
-func (it Info) Deserialize(toPtr interface{}) (parsingErr error) {
+func (it *Info) Deserialize(toPtr interface{}) (parsingErr error) {
 	return it.JsonPtr().Deserialize(toPtr)
 }
 
-func (it Info) ExamplesAsString() (compiledString string) {
+func (it *Info) ExamplesAsString() (compiledString string) {
 	if it.IsNull() {
 		return ""
 	}
@@ -357,7 +373,7 @@ func (it Info) ExamplesAsString() (compiledString string) {
 		constants.CommaSpace)
 }
 
-func (it Info) Map() map[string]string {
+func (it *Info) Map() map[string]string {
 	if it.IsNull() {
 		return map[string]string{}
 	}
@@ -401,7 +417,19 @@ func (it Info) Map() map[string]string {
 	return newMap
 }
 
-func (it Info) LazyMap() map[string]string {
+func (it *Info) MapWithPayload(
+	payloads []byte,
+) map[string]string {
+	compiledMap := it.Map()
+
+	if it.IsIncludePayloads() {
+		compiledMap["Payloads"] = corejson.BytesToString(payloads)
+	}
+
+	return compiledMap
+}
+
+func (it *Info) LazyMap() map[string]string {
 	if it.IsNull() {
 		return map[string]string{}
 	}
@@ -415,7 +443,7 @@ func (it Info) LazyMap() map[string]string {
 	return it.lazyMap
 }
 
-func (it Info) String() string {
+func (it *Info) String() string {
 	return it.PrettyJsonString()
 }
 

@@ -5,5 +5,11 @@ import (
 )
 
 func TypeName(any interface{}) string {
-	return reflect.TypeOf(any).String()
+	rfType := reflect.TypeOf(any)
+
+	if rfType == nil {
+		return ""
+	}
+
+	return rfType.String()
 }
