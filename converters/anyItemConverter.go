@@ -1,6 +1,7 @@
 package converters
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"reflect"
@@ -287,4 +288,32 @@ func (it anyItemConverter) ToFullNameValueString(
 	return fmt.Sprintf(
 		constants.SprintFullPropertyNameValueFormat,
 		any)
+}
+
+// ToPrettyJson
+//
+// Warning:
+//  swallows error
+func (it anyItemConverter) ToPrettyJson(
+	anyItem interface{},
+) string {
+	if anyItem == nil {
+		return ""
+	}
+
+	allBytes, err := json.Marshal(anyItem)
+
+	if err != nil || len(allBytes) == 0 {
+		return ""
+	}
+
+	var prettyJSON bytes.Buffer
+
+	json.Indent(
+		&prettyJSON,
+		allBytes,
+		constants.EmptyString,
+		constants.Tab)
+
+	return prettyJSON.String()
 }

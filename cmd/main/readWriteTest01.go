@@ -20,8 +20,8 @@ func readWriteTest01() {
 		"dwdddw")
 	err := anotherRw.JsonParseSelfInject(jsonResult.Ptr())
 	errcore.HandleErr(err)
-	fmt.Println("unmarshalled", anotherRw.Json().JsonString())
+	fmt.Println("unmarshalled", anotherRw.JsonPtr().JsonString())
 
-	fmt.Println(thisFileRw.Json().JsonString())
+	fmt.Println(thisFileRw.JsonPtr().JsonString())
 	fmt.Println(thisFileRw.ReadStringMust())
 }

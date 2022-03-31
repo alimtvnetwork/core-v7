@@ -598,6 +598,12 @@ func (it *RwxWrapper) IsEqualFileMode(
 	return toString == wrapperString
 }
 
+func (it *RwxWrapper) IsNotEqualFileMode(
+	mode os.FileMode,
+) bool {
+	return !it.IsEqualFileMode(mode)
+}
+
 func (it RwxWrapper) ToPtr() *RwxWrapper {
 	return &it
 }

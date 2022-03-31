@@ -53,17 +53,51 @@ func (it *Attributes) HasAnyKey(key string) bool {
 	return false
 }
 
+// SetAuthInfo
+//
+//  On nil create new attributes
+func (it *Attributes) SetAuthInfo(authInfo *AuthInfo) *Attributes {
+	if it == nil {
+		return New.
+			Attributes.
+			UsingAuthInfo(authInfo)
+	}
+
+	it.AuthInfo = authInfo
+
+	return it
+}
+
+func (it *Attributes) SetUserInfo(
+	userInfo *UserInfo,
+) *Attributes {
+	if it == nil {
+		return &Attributes{
+			AuthInfo: &AuthInfo{
+				UserInfo: userInfo,
+			},
+		}
+	}
+
+	it.AuthInfo.SetUserInfo(userInfo)
+
+	return it
+}
+
 func (it *Attributes) AddNewStringKeyValueOnly(key, value string) (isAdded bool) {
 	if it == nil || it.KeyValuePairs == nil {
 		return false
 	}
 
-	it.KeyValuePairs.AddOrUpdate(key, value)
+	it.KeyValuePairs.
+		AddOrUpdate(key, value)
 
 	return true
 }
 
-func (it *Attributes) AddNewAnyKeyValueOnly(key string, value interface{}) (isAdded bool) {
+func (it *Attributes) AddNewAnyKeyValueOnly(
+	key string, value interface{},
+) (isAdded bool) {
 	if it == nil || it.AnyKeyValuePairs == nil {
 		return false
 	}
@@ -73,7 +107,9 @@ func (it *Attributes) AddNewAnyKeyValueOnly(key string, value interface{}) (isAd
 	return true
 }
 
-func (it *Attributes) GetStringKeyValue(key string) (value string, isFound bool) {
+func (it *Attributes) GetStringKeyValue(
+	key string,
+) (value string, isFound bool) {
 	if it == nil || it.KeyValuePairs == nil {
 		return "", false
 	}
@@ -81,7 +117,9 @@ func (it *Attributes) GetStringKeyValue(key string) (value string, isFound bool)
 	return it.KeyValuePairs.Get(key)
 }
 
-func (it *Attributes) GetAnyKeyValue(key string) (valueAny interface{}, isFound bool) {
+func (it *Attributes) GetAnyKeyValue(
+	key string,
+) (valueAny interface{}, isFound bool) {
 	if it == nil || it.KeyValuePairs == nil {
 		return nil, false
 	}
@@ -89,7 +127,10 @@ func (it *Attributes) GetAnyKeyValue(key string) (valueAny interface{}, isFound 
 	return it.AnyKeyValuePairs.Get(key)
 }
 
-func (it *Attributes) AnyKeyReflectSetTo(key string, toPtr interface{}) error {
+func (it *Attributes) AnyKeyReflectSetTo(
+	key string,
+	toPtr interface{},
+) error {
 	if it == nil || it.KeyValuePairs == nil {
 		return errcore.
 			CannotBeNilOrEmptyType.ErrorNoRefs(
@@ -105,7 +146,9 @@ func (it *Attributes) HandleError() {
 	}
 }
 
-func (it *Attributes) ReflectSetTo(toPointer interface{}) error {
+func (it *Attributes) ReflectSetTo(
+	toPointer interface{},
+) error {
 	return coredynamic.ReflectSetFromTo(it, toPointer)
 }
 
@@ -115,6 +158,32 @@ func (it *Attributes) Payloads() []byte {
 	}
 
 	return it.DynamicPayloads
+}
+
+func (it *Attributes) PayloadsString() string {
+	if it.IsEmpty() || len(it.DynamicPayloads) == 0 {
+		return ""
+	}
+
+	return string(it.DynamicPayloads)
+}
+
+func (it *Attributes) PayloadsPrettyString() string {
+	if it.IsEmpty() || len(it.DynamicPayloads) == 0 {
+		return ""
+	}
+
+	return corejson.BytesToPrettyString(it.DynamicPayloads)
+}
+
+func (it *Attributes) PayloadsJsonResult() *corejson.Result {
+	if it.IsEmpty() || len(it.DynamicPayloads) == 0 {
+		return corejson.Empty.ResultPtr()
+	}
+
+	return corejson.NewResult.UsingTypeBytesPtr(
+		attributesTypeName,
+		it.DynamicPayloads)
 }
 
 func (it *Attributes) AnyKeyValMap() map[string]interface{} {
@@ -149,11 +218,14 @@ func (it *Attributes) IsSafeValid() bool {
 }
 
 func (it *Attributes) JsonString() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Attributes) JsonStringMust() string {
-	return it.Json().JsonString()
+	jsonResult := it.JsonPtr()
+	jsonResult.MustBeSafe()
+
+	return jsonResult.JsonString()
 }
 
 func (it *Attributes) HasAnyItem() bool {
@@ -224,10 +296,10 @@ func (it *Attributes) MustBeEmptyError() {
 // BasicErrorDeserializedTo
 //
 // Expectation Attributes.ErrorMessage needs to
-// be in json format and unmarshalToPointer
+// be in json format and toPtr
 // should match reflection types
 func (it *Attributes) BasicErrorDeserializedTo(
-	unmarshalToPointer interface{},
+	toPtr interface{},
 ) error {
 	if it.IsEmptyError() {
 		return nil
@@ -237,17 +309,17 @@ func (it *Attributes) BasicErrorDeserializedTo(
 		Deserialize.
 		UsingBytes(
 			it.BasicErrWrapper.SerializeMust(),
-			unmarshalToPointer)
+			toPtr)
 }
 
 func (it *Attributes) DeserializeDynamicPayloads(
-	unmarshalToPointer interface{},
+	toPtr interface{},
 ) error {
 	return corejson.
 		Deserialize.
 		UsingBytes(
 			it.DynamicPayloads,
-			unmarshalToPointer)
+			toPtr)
 }
 
 func (it *Attributes) DeserializeDynamicPayloadsToAttributes() (
@@ -282,12 +354,12 @@ func (it *Attributes) DeserializeDynamicPayloadsToPayloadWrappersCollection() (
 }
 
 func (it *Attributes) DeserializeDynamicPayloadsMust(
-	unmarshalToPointer interface{},
+	toPtr interface{},
 ) {
 	corejson.Deserialize.
 		UsingBytesMust(
 			it.DynamicPayloads,
-			unmarshalToPointer)
+			toPtr)
 }
 
 func (it *Attributes) IsEmptyError() bool {
@@ -482,19 +554,19 @@ func (it *Attributes) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it Attributes) String() string {
+func (it *Attributes) String() string {
 	return it.JsonString()
 }
 
-func (it Attributes) PrettyJsonString() string {
+func (it *Attributes) PrettyJsonString() string {
 	return it.JsonPtr().PrettyJsonString()
 }
 
-func (it Attributes) Json() corejson.Result {
+func (it *Attributes) Json() corejson.Result {
 	return corejson.New(it)
 }
 
-func (it Attributes) JsonPtr() *corejson.Result {
+func (it *Attributes) JsonPtr() *corejson.Result {
 	return corejson.NewPtr(it)
 }
 
@@ -536,9 +608,17 @@ func (it *Attributes) JsonParseSelfInject(
 	return err
 }
 
+// SetBasicErr
+//
+//  on nil creates and attach new error and returns the attributes
 func (it *Attributes) SetBasicErr(
 	basicErr errcoreinf.BasicErrWrapper,
 ) payloadinf.AttributesBinder {
+	if it == nil {
+		return New.Attributes.UsingBasicError(
+			basicErr)
+	}
+
 	it.BasicErrWrapper = basicErr
 
 	return it
@@ -558,8 +638,8 @@ func (it *Attributes) Dispose() {
 	it.Clear()
 }
 
-func (it *Attributes) AsJsonContractsBinder() corejson.JsonContractsBinder {
-	return it
+func (it Attributes) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return &it
 }
 
 func (it *Attributes) IsEqual(attributes *Attributes) bool {

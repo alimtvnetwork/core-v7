@@ -10,7 +10,7 @@ func MatchUsingFuncErrorLock(
 	regexPattern, comparing string,
 	matchFunc RegexValidationFunc,
 ) error {
-	regEx, err := NewLock(regexPattern)
+	regEx, err := CreateLock(regexPattern)
 
 	if regEx != nil && matchFunc(regEx, comparing) {
 		return nil

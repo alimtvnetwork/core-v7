@@ -22,11 +22,98 @@ type Result struct {
 	TypeName   string
 }
 
-func (it Result) BytesTypeName() string {
+func (it *Result) Map() map[string]string {
+	if it == nil {
+		return map[string]string{}
+	}
+
+	newMap := make(
+		map[string]string,
+		constants.Capacity3)
+
+	if len(it.Bytes) > 0 {
+		newMap[bytesFieldName] = it.JsonString()
+	}
+
+	if it.Error != nil {
+		newMap[errorFieldName] = it.Error.Error()
+	}
+
+	if it.TypeName != "" {
+		newMap[typeFieldName] = it.TypeName
+	}
+
+	return newMap
+}
+
+func (it *Result) DeserializedFieldsToMap() (
+	fieldsMap map[string]interface{},
+	parsingErr error,
+) {
+	if it == nil || len(it.Bytes) == 0 {
+		return map[string]interface{}{}, nil
+	}
+
+	parsingErr = it.Deserialize(fieldsMap)
+
+	return fieldsMap, parsingErr
+}
+
+// SafeDeserializedFieldsToMap
+//
+// Warning:
+//  - Swallows the error
+func (it *Result) SafeDeserializedFieldsToMap() (
+	fieldsMap map[string]interface{},
+) {
+	fieldsMap, _ = it.DeserializedFieldsToMap()
+
+	return fieldsMap
+}
+
+func (it *Result) FieldsNames() (
+	fieldsNames []string,
+	parsingErr error,
+) {
+	fieldsMap, parsingErr := it.DeserializedFieldsToMap()
+
+	if len(fieldsMap) == 0 {
+		return []string{}, parsingErr
+	}
+
+	fieldsNames = make([]string, len(fieldsMap))
+	index := 0
+
+	for fieldNameKey := range fieldsMap {
+		fieldsNames[index] = fieldNameKey
+
+		index++
+	}
+
+	return fieldsNames, parsingErr
+}
+
+// SafeFieldsNames
+//
+// Warning:
+//  - Swallows the error
+func (it *Result) SafeFieldsNames() (
+	fieldsNames []string,
+) {
+	fieldsNames, _ = it.FieldsNames()
+
+	return fieldsNames
+}
+
+func (it *Result) BytesTypeName() string {
+	if it == nil {
+		return ""
+	}
+
 	return it.TypeName
 }
 
-func (it Result) SafeBytesTypeName() string {
+func (it *Result) SafeBytesTypeName() string {
 	if it.IsEmpty() {
 		return ""
 	}
@@ -34,11 +121,11 @@ func (it Result) SafeBytesTypeName() string {
 	return it.TypeName
 }
 
-func (it Result) SafeString() string {
+func (it *Result) SafeString() string {
 	return *it.JsonStringPtr()
 }
 
-func (it Result) JsonString() string {
+func (it *Result) JsonString() string {
 	return *it.JsonStringPtr()
 }
 
@@ -62,7 +149,7 @@ func (it *Result) JsonStringPtr() *string {
 	return it.jsonString
 }
 
-func (it Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
+func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
 	var prettyJSON bytes.Buffer
 
 	if it.IsEmpty() {
@@ -78,8 +165,8 @@ func (it Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) 
 	return &prettyJSON, err
 }
 
-func (it Result) PrettyJsonString() string {
-	if it.IsEmptyJson() {
+func (it *Result) PrettyJsonString() string {
+	if it == nil || it.IsEmptyJson() {
 		return ""
 	}
 

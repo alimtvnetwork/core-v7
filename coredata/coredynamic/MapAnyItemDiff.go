@@ -178,7 +178,7 @@ func (it MapAnyItemDiff) LogPrettyJsonString() {
 		fmt.Println("Empty Map")
 	}
 
-	prettyJson := it.Json().PrettyJsonString()
+	prettyJson := it.JsonPtr().PrettyJsonString()
 
 	fmt.Println(prettyJson)
 }

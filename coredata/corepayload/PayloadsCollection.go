@@ -650,7 +650,7 @@ func (it *PayloadsCollection) JsonString() string {
 		return constants.EmptyString
 	}
 
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *PayloadsCollection) String() string {
@@ -658,7 +658,7 @@ func (it *PayloadsCollection) String() string {
 		return constants.EmptyString
 	}
 
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *PayloadsCollection) PrettyJsonString() string {

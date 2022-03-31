@@ -4,7 +4,7 @@ package regexnew
 // and then calls match
 // if doesn't match or invalid regex then returns false.
 func IsMatchLock(regex, comparing string) bool {
-	regEx, _ := NewLock(regex)
+	regEx, _ := CreateLock(regex)
 
 	if regEx != nil && regEx.MatchString(comparing) {
 		return true

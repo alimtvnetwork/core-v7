@@ -27,7 +27,7 @@ type AttributesBinder interface {
 	HandleErr()
 
 	DeserializeDynamicPayloads(
-		unmarshalToPointer interface{},
+		toPtr interface{},
 	) error
 	IsEmptyError() bool
 	DynamicBytesLength() int

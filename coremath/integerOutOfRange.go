@@ -22,7 +22,7 @@ func (it integerOutOfRange) ToUnsignedInt32(value int) bool {
 		return !(value >= 0 && value <= math.MaxInt32)
 	}
 
-	return !(value >= 0 && value <= math.MaxUint32)
+	return !(value >= 0 && value <= math.MaxInt32)
 }
 
 func (it integerOutOfRange) ToUnsignedInt64(value int) bool {

@@ -488,4 +488,9 @@ const (
 	Localhost                                = "localhost"
 	LocalhostPublicPort                      = "localhost:80"
 	NewLineTabTab                            = "\n\t\t"
+	UnknownType                              = "Unknown type"
+	DotString                                = ".string"
+	DotStringTitleCase                       = ".String"
+	UnknownStringType                        = "Unknown type.String"
+	PayloadsFieldName                        = "Payloads"
 )

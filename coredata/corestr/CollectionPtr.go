@@ -47,7 +47,7 @@ func (it *CollectionPtr) ListStrings() []string {
 }
 
 func (it *CollectionPtr) StringJSON() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *CollectionPtr) RemoveAt(index int) (isSuccess bool) {
@@ -2071,11 +2071,11 @@ func (it *CollectionPtr) AsJsonMarshaller() corejson.JsonMarshaller {
 }
 
 func (it *CollectionPtr) JsonString() (jsonString string, err error) {
-	return it.Json().JsonString(), nil
+	return it.JsonPtr().JsonString(), nil
 }
 
 func (it *CollectionPtr) JsonStringMust() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *CollectionPtr) AsJsonContractsBinder() corejson.JsonContractsBinder {

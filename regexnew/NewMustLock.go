@@ -6,5 +6,5 @@ func NewMustLock(regularExpressionSyntax string) *regexp.Regexp {
 	regexMutex.Lock()
 	defer regexMutex.Unlock()
 
-	return NewMust(regularExpressionSyntax)
+	return CreateMust(regularExpressionSyntax)
 }

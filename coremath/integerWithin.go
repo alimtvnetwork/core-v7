@@ -18,10 +18,18 @@ func (it integerWithin) ToUnsignedInt16(value int) bool {
 
 func (it integerWithin) ToUnsignedInt32(value int) bool {
 	if osconsts.IsX32Architecture {
-		return value >= 0 && value <= math.MaxInt32
+		return it.isUint32On32BitArch(value)
 	}
 
+	return it.isUint32(value)
+}
+
+func (it integerWithin) isUint32(value int) bool {
 	return value >= 0 && value <= math.MaxUint32
+}
+
+func (it integerWithin) isUint32On32BitArch(value int) bool {
+	return value >= 0 && value <= math.MaxInt32
 }
 
 func (it integerWithin) ToUnsignedInt64(value int) bool {

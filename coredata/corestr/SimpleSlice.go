@@ -359,11 +359,42 @@ func (it *SimpleSlice) Hashset() *Hashset {
 }
 
 func (it *SimpleSlice) Join(joiner string) string {
+	if it.IsEmpty() {
+		return ""
+	}
+
 	return strings.Join(it.Items, joiner)
 }
 
 func (it *SimpleSlice) JoinLine() string {
-	return strings.Join(it.Items, constants.NewLineUnix)
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return strings.Join(
+		it.Items,
+		constants.DefaultLine)
+}
+
+// JoinLineEofLine
+//
+//  contains new line at the end of the file
+func (it *SimpleSlice) JoinLineEofLine() string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	joined := strings.Join(
+		it.Items,
+		constants.DefaultLine)
+
+	if strings.HasSuffix(joined, constants.DefaultLine) {
+		// already contains
+
+		return joined
+	}
+
+	return joined + constants.DefaultLine
 }
 
 func (it *SimpleSlice) JoinSpace() string {
@@ -704,10 +735,10 @@ func (it SimpleSlice) MarshalJSON() ([]byte, error) {
 }
 
 func (it *SimpleSlice) UnmarshalJSON(
-	data []byte,
+	rawBytes []byte,
 ) error {
 	var dataModel []string
-	err := json.Unmarshal(data, &dataModel)
+	err := json.Unmarshal(rawBytes, &dataModel)
 
 	if err == nil {
 		it.Items = dataModel
@@ -983,6 +1014,33 @@ func (it *SimpleSlice) DistinctDiffRaw(
 		DistinctDiffLinesRaw(rightLines...)
 }
 
+func (it *SimpleSlice) AddedRemovedLinesDiff(
+	rightLines ...string,
+) (addedLines, removedLines []string) {
+	if it == nil && rightLines == nil {
+		return addedLines, removedLines
+	}
+
+	oldDomainsHashSet := New.Hashset.Strings(it.SafeStrings())
+	newDomainsHashSet := New.Hashset.Strings(rightLines)
+
+	addedDomainsPtr := newDomainsHashSet.
+		GetAllExceptHashset(oldDomainsHashSet)
+	deletedDomainsPtr := oldDomainsHashSet.
+		GetAllExceptHashset(newDomainsHashSet)
+
+	if addedDomainsPtr != nil {
+		addedLines = addedDomainsPtr
+	}
+
+	if deletedDomainsPtr != nil {
+		removedLines = deletedDomainsPtr
+	}
+
+	return addedLines, removedLines
+
+}
+
 func (it *SimpleSlice) DistinctDiff(
 	rightSlice *SimpleSlice,
 ) []string {
@@ -1010,4 +1068,12 @@ func (it *SimpleSlice) Serialize() ([]byte, error) {
 
 func (it *SimpleSlice) Deserialize(toPtr interface{}) (parsingErr error) {
 	return it.JsonPtr().Deserialize(toPtr)
+}
+
+func (it *SimpleSlice) SafeStrings() []string {
+	if it == nil || it.Items == nil {
+		return []string{}
+	}
+
+	return it.Items
 }

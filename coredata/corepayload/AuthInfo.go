@@ -96,19 +96,146 @@ func (it *AuthInfo) HasSessionInfo() bool {
 	return !it.IsSessionInfoEmpty()
 }
 
-func (it AuthInfo) String() string {
-	return it.Json().JsonString()
+func (it *AuthInfo) String() string {
+	return it.JsonPtr().JsonString()
 }
 
-func (it AuthInfo) PrettyJsonString() string {
+// SetUserInfo
+//
+// on null creates new
+func (it *AuthInfo) SetUserInfo(
+	userInfo *UserInfo,
+) *AuthInfo {
+	if it == nil {
+		return &AuthInfo{
+			UserInfo: userInfo,
+		}
+	}
+
+	it.UserInfo = userInfo
+
+	return it
+}
+
+func (it *AuthInfo) SetActionType(
+	actionType string,
+) *AuthInfo {
+	if it == nil {
+		return &AuthInfo{
+			ActionType: actionType,
+		}
+	}
+
+	it.ActionType = actionType
+
+	return it
+}
+
+func (it *AuthInfo) SetResourceName(
+	resourceName string,
+) *AuthInfo {
+	if it == nil {
+		return &AuthInfo{
+			ResourceName: resourceName,
+		}
+	}
+
+	it.ResourceName = resourceName
+
+	return it
+}
+
+func (it *AuthInfo) SetIdentifier(
+	identifier string,
+) *AuthInfo {
+	if it == nil {
+		return &AuthInfo{
+			Identifier: identifier,
+		}
+	}
+
+	it.Identifier = identifier
+
+	return it
+}
+
+func (it *AuthInfo) SetSessionInfo(
+	sessionInfo *SessionInfo,
+) *AuthInfo {
+	if it == nil {
+		return &AuthInfo{
+			SessionInfo: sessionInfo,
+		}
+	}
+
+	it.SessionInfo = sessionInfo
+
+	return it
+}
+
+func (it *AuthInfo) SetUserSystemUser(
+	user, systemUser *User,
+) *AuthInfo {
+	if it == nil {
+		empty := &AuthInfo{}
+		empty.UserInfo = &UserInfo{}
+		empty.UserInfo.SetUserSystemUser(user, systemUser)
+
+		return empty
+	}
+
+	it.UserInfo.SetUserSystemUser(user, systemUser)
+
+	return it
+}
+
+// SetUser
+//
+// on null creates new
+func (it *AuthInfo) SetUser(
+	user *User,
+) *AuthInfo {
+	if it == nil {
+		empty := &AuthInfo{}
+		empty.UserInfo = &UserInfo{}
+		empty.UserInfo.SetUser(user)
+
+		return empty
+	}
+
+	it.UserInfo.SetUser(user)
+
+	return it
+}
+
+// SetSystemUser
+//
+// on null creates new
+func (it *AuthInfo) SetSystemUser(
+	systemUser *User,
+) *AuthInfo {
+	if it == nil {
+		empty := &AuthInfo{}
+		empty.UserInfo = &UserInfo{}
+		empty.UserInfo.SetSystemUser(systemUser)
+
+		return empty
+	}
+
+	it.UserInfo.SetSystemUser(systemUser)
+
+	return it
+}
+
+func (it *AuthInfo) PrettyJsonString() string {
 	return it.JsonPtr().PrettyJsonString()
 }
 
-func (it AuthInfo) Json() corejson.Result {
+func (it *AuthInfo) Json() corejson.Result {
 	return corejson.New(it)
 }
 
-func (it AuthInfo) JsonPtr() *corejson.Result {
+func (it *AuthInfo) JsonPtr() *corejson.Result {
 	return corejson.NewPtr(it)
 }
 

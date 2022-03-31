@@ -17,7 +17,9 @@ func BytesToPrettyString(
 		return ""
 	}
 
-	return Result{
+	rs := Result{
 		Bytes: jsonBytes,
-	}.PrettyJsonString()
+	}
+
+	return rs.PrettyJsonString()
 }

@@ -89,21 +89,30 @@ func (it *RwxInstructionExecutor) CompiledRwxWrapperUsingFixedRwxWrapper(
 			wrapper.String())
 }
 
+// ApplyOnPath
+//
+// Warning:
+//  swallows error if chmodins.RwxInstruction. IsSkipOnInvalid or
+//  chmodins.RwxInstruction.IsExitOnInvalid() comes as negative
 func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
-	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(location)
+	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(
+		location)
 
-	if err != nil {
+	if it.rwxInstruction.IsExitOnInvalid() && err != nil {
 		return errcore.PathErrorType.Error(messages.FailedToGetFileModeRwx, location)
+	} else if it.rwxInstruction.IsSkipOnInvalid && err != nil {
+		// nothing apply got an error
+		return nil
 	}
 
-	compiledWrapper, err2 := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
+	compiledWrapper, compiledErr := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
 
-	if err2 != nil {
+	if compiledErr != nil {
 		funcWithLoc := "ApplyOnPath" + constants.HyphenAngelRight + location
 
 		return errcore.
 			MeaningfulError(
-				errcore.PathErrorType, funcWithLoc, err2)
+				errcore.PathErrorType, funcWithLoc, compiledErr)
 	}
 
 	if it.rwxInstruction.IsRecursive {
@@ -173,7 +182,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsContinueOnError(
 ) error {
 	var sliceErr []string
 
-	if resultsMap.Error != nil && !it.rwxInstruction.IsSkipOnInvalid {
+	if resultsMap.Error != nil && it.rwxInstruction.IsCollectErrorOnInvalid() {
 		sliceErr = append(
 			sliceErr,
 			resultsMap.Error.Error())
@@ -222,7 +231,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
 				"failed to verify rwxInstruction for - "+filePath)
 		}
 
-		if fixedRwxWrapper != nil && !fixedRwxWrapper.IsEqualFileMode(fileMode) {
+		if fixedRwxWrapper.IsDefined() && fixedRwxWrapper.IsNotEqualFileMode(fileMode) {
 			expectingMsg := errcore.ExpectingSimpleNoType(
 				"Path:"+filePath,
 				fixedRwxWrapper.ToFullRwxValueStringExceptHyphen(),

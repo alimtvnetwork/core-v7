@@ -2,7 +2,7 @@ package regexnew
 
 import "regexp"
 
-func NewMustLockIf(
+func CreateMustLockIf(
 	isLock bool,
 	regularExpressionSyntax string,
 ) *regexp.Regexp {
@@ -12,5 +12,5 @@ func NewMustLockIf(
 		defer regexMutex.Unlock()
 	}
 
-	return NewMust(regularExpressionSyntax)
+	return CreateMust(regularExpressionSyntax)
 }

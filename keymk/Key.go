@@ -540,7 +540,7 @@ func (it Key) JsonPtr() *corejson.Result {
 }
 
 func (it Key) JsonString() string {
-	return corejson.New(it).JsonString()
+	return corejson.NewPtr(it).JsonString()
 }
 
 // ParseInjectUsingJson It will not update the self but creates a new one.

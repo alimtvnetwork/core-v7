@@ -819,7 +819,7 @@ func (it TraceCollection) JsonString() string {
 		return constants.EmptyString
 	}
 
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it TraceCollection) String() string {

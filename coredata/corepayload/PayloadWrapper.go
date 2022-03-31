@@ -8,6 +8,7 @@ import (
 	"gitlab.com/evatix-go/core/coredata/coredynamic"
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface/entityinf"
+	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
 	"gitlab.com/evatix-go/core/coreinterface/payloadinf"
 	"gitlab.com/evatix-go/core/defaulterr"
@@ -23,6 +24,70 @@ type PayloadWrapper struct {
 	HasManyRecords bool        `json:"HasManyRecords,omitempty"`
 	Payloads       []byte      `json:"Payloads,omitempty"`
 	Attributes     *Attributes `json:"AnyAttributes,omitempty"`
+}
+
+func (it *PayloadWrapper) MarshalJSON() (jsonBytes []byte, parsedErr error) {
+	if it == nil {
+		return nil, errcore.
+			MarshallingFailedType.
+			ErrorNoRefs("payloadWrapper was nil and tried to marshal")
+	}
+
+	model := payloadWrapperModel{
+		Name:           it.Name,
+		Identifier:     it.Identifier,
+		TaskTypeName:   it.TaskTypeName,
+		EntityType:     it.EntityType,
+		CategoryName:   it.CategoryName,
+		HasManyRecords: it.HasManyRecords,
+		Payloads:       it.PayloadsString(),
+		Attributes:     it.Attributes,
+	}
+
+	return corejson.Serialize.Raw(model)
+}
+
+func (it *PayloadWrapper) UnmarshalJSON(rawJsonBytes []byte) error {
+	if it == nil {
+		return errcore.
+			UnMarshallingFailedType.
+			ErrorNoRefs("payloadWrapper was nil and tried to Unmarshal or deserialize")
+	}
+
+	var payloadWrapperModelInstance payloadWrapperModel
+	err := corejson.Deserialize.UsingBytes(
+		rawJsonBytes,
+		&payloadWrapperModelInstance)
+
+	if err == nil {
+		it.Name = payloadWrapperModelInstance.Name
+		it.Identifier = payloadWrapperModelInstance.Identifier
+		it.TaskTypeName = payloadWrapperModelInstance.TaskTypeName
+		it.EntityType = payloadWrapperModelInstance.EntityType
+		it.CategoryName = payloadWrapperModelInstance.CategoryName
+		it.HasManyRecords = payloadWrapperModelInstance.HasManyRecords
+		it.Payloads = []byte(payloadWrapperModelInstance.Payloads)
+		it.Attributes = payloadWrapperModelInstance.Attributes
+	}
+
+	return err
+}
+
+func (it *PayloadWrapper) ReCreateUsingJsonBytes(
+	rawJsonBytes []byte,
+) (payloadWrapper *PayloadWrapper, parsingErr error) {
+	return New.
+		PayloadWrapper.
+		Deserialize(rawJsonBytes)
+}
+
+func (it *PayloadWrapper) ReCreateUsingJsonResult(
+	jsonResult *corejson.Result,
+) (payloadWrapper *PayloadWrapper, parsingErr error) {
+	return New.
+		PayloadWrapper.
+		DeserializeUsingJsonResult(
+			jsonResult)
 }
 
 func (it *PayloadWrapper) HasSafeItems() bool {
@@ -113,6 +178,107 @@ func (it *PayloadWrapper) PayloadEntityType() string {
 
 func (it *PayloadWrapper) PayloadDynamic() []byte {
 	return it.Payloads
+}
+
+func (it *PayloadWrapper) SetPayloadDynamic(
+	dynamicPayload []byte,
+) *PayloadWrapper {
+	if it == nil {
+		it.InitializeAttributesOnNull()
+	}
+
+	it.Payloads = dynamicPayload
+
+	return it
+}
+
+// SetPayloadDynamicAny
+//
+// Casting happens:
+// - self or self pointer returns directly
+// - []Bytes to Result
+// - string (json) to Result
+// - Jsoner to Result
+// - bytesSerializer to Result
+// - error to Result
+// - AnyItem
+func (it *PayloadWrapper) SetPayloadDynamicAny(
+	dynamicPayloadAny interface{},
+) (*PayloadWrapper, error) {
+	if it == nil {
+		it.InitializeAttributesOnNull()
+	}
+
+	jsonResult := corejson.AnyTo.SerializedJsonResult(
+		dynamicPayloadAny)
+
+	if jsonResult.HasError() {
+		return nil, jsonResult.MeaningfulError()
+	}
+
+	it.Payloads = jsonResult.Bytes
+
+	return it, nil
+}
+
+func (it *PayloadWrapper) SetAuthInfo(
+	authInfo *AuthInfo,
+) *PayloadWrapper {
+	if it == nil {
+		it.InitializeAttributesOnNull()
+	}
+
+	it.Attributes.SetAuthInfo(authInfo)
+
+	return it
+}
+
+func (it *PayloadWrapper) SetUserInfo(
+	userInfo *UserInfo,
+) *PayloadWrapper {
+	if it == nil {
+		it.InitializeAttributesOnNull()
+	}
+
+	it.Attributes.SetUserInfo(userInfo)
+
+	return it
+}
+
+func (it *PayloadWrapper) SetUser(
+	user *User,
+) *PayloadWrapper {
+	it.initializeAuthOnDemand()
+
+	it.Attributes.AuthInfo.UserInfo.SetUser(
+		user)
+
+	return it
+}
+
+func (it *PayloadWrapper) SetSysUser(
+	sysUser *User,
+) *PayloadWrapper {
+	it.initializeAuthOnDemand()
+
+	it.Attributes.AuthInfo.UserInfo.SetSystemUser(
+		sysUser)
+
+	return it
+}
+
+func (it *PayloadWrapper) initializeAuthOnDemand() {
+	if it == nil {
+		it.InitializeAttributesOnNull()
+	}
+
+	if it.Attributes == nil {
+		it.Attributes = &Attributes{}
+	}
+
+	if it.Attributes.AuthInfo == nil {
+		it.Attributes.AuthInfo = &AuthInfo{}
+	}
 }
 
 func (it *PayloadWrapper) PayloadProperties() payloadinf.PayloadPropertiesDefiner {
@@ -277,8 +443,20 @@ func (it *PayloadWrapper) IsEntityType(entityType string) bool {
 	return it != nil && it.EntityType == entityType
 }
 
+func (it *PayloadWrapper) IsEntityTypeNamer(entityTyper enuminf.Namer) bool {
+	return it != nil &&
+		entityTyper != nil &&
+		it.EntityType == entityTyper.Name()
+}
+
 func (it *PayloadWrapper) IsCategory(category string) bool {
 	return it != nil && it.CategoryName == category
+}
+
+func (it *PayloadWrapper) IsCategoryNamer(categoryNamer enuminf.Namer) bool {
+	return it != nil &&
+		categoryNamer != nil &&
+		it.EntityType == categoryNamer.Name()
 }
 
 func (it PayloadWrapper) String() string {
@@ -290,11 +468,11 @@ func (it PayloadWrapper) PrettyJsonString() string {
 }
 
 func (it *PayloadWrapper) JsonString() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *PayloadWrapper) JsonStringMust() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *PayloadWrapper) HasAnyItem() bool {
@@ -454,6 +632,7 @@ func (it *PayloadWrapper) DeserializePayloadsToPayloadWrapperMust() (
 	rs, err := New.
 		PayloadWrapper.
 		Deserialize(it.Payloads)
+
 	errcore.HandleErr(err)
 
 	return rs
@@ -511,6 +690,32 @@ func (it *PayloadWrapper) JsonParseSelfInject(
 	)
 
 	return err
+}
+
+func (it *PayloadWrapper) PayloadsString() string {
+	if it.IsEmpty() || len(it.Payloads) == 0 {
+		return ""
+	}
+
+	return string(it.Payloads)
+}
+
+func (it *PayloadWrapper) PayloadsPrettyString() string {
+	if it.IsEmpty() || len(it.Payloads) == 0 {
+		return ""
+	}
+
+	return corejson.BytesToPrettyString(it.Payloads)
+}
+
+func (it *PayloadWrapper) PayloadsJsonResult() *corejson.Result {
+	if it.IsEmpty() || len(it.Payloads) == 0 {
+		return corejson.Empty.ResultPtr()
+	}
+
+	return corejson.NewResult.UsingTypeBytesPtr(
+		attributesTypeName,
+		it.Payloads)
 }
 
 func (it *PayloadWrapper) Clear() {
@@ -613,5 +818,8 @@ func (it PayloadWrapper) AsStandardTaskEntityDefinerContractsBinder() entityinf.
 }
 
 func (it PayloadWrapper) AsPayloadsBinder() payloadinf.PayloadsBinder {
+	return &it
+}
+func (it PayloadWrapper) AsJsonMarshaller() corejson.JsonMarshaller {
 	return &it
 }

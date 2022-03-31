@@ -2,10 +2,10 @@ package regexnew
 
 import "regexp"
 
-// New creates regex if not already exist in dictionary.
+// Create creates regex if not already exist in dictionary.
 //
 // if any error then doesn't save to map and returns the error
-func New(regularExpressionPattern string) (*regexp.Regexp, error) {
+func Create(regularExpressionPattern string) (*regexp.Regexp, error) {
 	regex, has := regexMaps[regularExpressionPattern]
 
 	if has {

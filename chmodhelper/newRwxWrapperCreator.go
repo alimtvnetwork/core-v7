@@ -99,6 +99,10 @@ func (it newRwxWrapperCreator) UsingChmod(
 func (it newRwxWrapperCreator) UsingFileModePtr(
 	fileMode os.FileMode,
 ) *RwxWrapper {
+	if fileMode == 0 {
+		return it.Empty()
+	}
+
 	str := fileMode.String()
 	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
 	owner := str[1:4]
@@ -123,6 +127,10 @@ func (it newRwxWrapperCreator) UsingFileModePtr(
 func (it newRwxWrapperCreator) UsingFileMode(
 	fileMode os.FileMode,
 ) RwxWrapper {
+	if fileMode == 0 {
+		return it.Empty().ToNonPtr()
+	}
+
 	str := fileMode.String()
 	// Reference : https://play.golang.org/p/Qq_rKl_pAqe
 	owner := str[1:4]
@@ -151,9 +159,9 @@ func (it newRwxWrapperCreator) UsingSpecificByte(
 	owner, group, other byte,
 ) RwxWrapper {
 	wrapper := RwxWrapper{
-		Owner: New.Attribute.UsingByte(owner),
-		Group: New.Attribute.UsingByte(group),
-		Other: New.Attribute.UsingByte(other),
+		Owner: New.Attribute.UsingByteMust(owner),
+		Group: New.Attribute.UsingByteMust(group),
+		Other: New.Attribute.UsingByteMust(other),
 	}
 
 	return wrapper
@@ -163,9 +171,9 @@ func (it newRwxWrapperCreator) UsingAttrVariants(
 	owner, group, other AttrVariant,
 ) RwxWrapper {
 	wrapper := RwxWrapper{
-		Owner: New.Attribute.UsingVariant(owner),
-		Group: New.Attribute.UsingVariant(group),
-		Other: New.Attribute.UsingVariant(other),
+		Owner: New.Attribute.UsingVariantMust(owner),
+		Group: New.Attribute.UsingVariantMust(group),
+		Other: New.Attribute.UsingVariantMust(other),
 	}
 
 	return wrapper
@@ -339,4 +347,59 @@ func (it newRwxWrapperCreator) Instruction(
 	}
 
 	return rwxWrapper.ToRwxInstruction(&condition), nil
+}
+
+func (it newRwxWrapperCreator) UsingExistingFile(
+	filePath string,
+) (*RwxWrapper, error) {
+	existingChmod, err := GetExistingChmodRwxWrapper(filePath)
+
+	return existingChmod.ToPtr(), err
+}
+
+// UsingExistingFileSkipInvalidFile
+//
+// Warning:
+//  swallows the error and invalid file
+func (it newRwxWrapperCreator) UsingExistingFileSkipInvalidFile(
+	filePath string,
+) (rwxWrapper *RwxWrapper, isInvalidFile bool) {
+	existingChmod, isInvalidFile := GetExistingChmodOfValidFile(filePath)
+
+	if !isInvalidFile {
+		// valid
+		return it.UsingFileModePtr(existingChmod), isInvalidFile
+	}
+
+	return it.Empty(), isInvalidFile
+}
+
+// UsingExistingFileOption
+//
+// Warning:
+//  swallows the error and invalid file
+func (it newRwxWrapperCreator) UsingExistingFileOption(
+	isSkipInvalidFile bool,
+	filePath string,
+) (rwxWrapper *RwxWrapper, err error, isInvalidFile bool) {
+	if isSkipInvalidFile {
+		rwxWrapper, isInvalidFile = it.UsingExistingFileSkipInvalidFile(
+			filePath)
+
+		return rwxWrapper, nil, isInvalidFile
+	}
+
+	existingChmod, err := GetExistingChmod(filePath)
+
+	if err != nil || existingChmod == 0 {
+		return it.Empty(), err, true
+	}
+
+	return it.UsingFileModePtr(existingChmod),
+		err,
+		err != nil && existingChmod != 0
+}
+
+func (it newRwxWrapperCreator) Empty() *RwxWrapper {
+	return &RwxWrapper{}
 }

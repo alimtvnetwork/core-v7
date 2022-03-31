@@ -105,6 +105,53 @@ func (it *MapAnyItems) ReflectSetToMust(
 	errcore.HandleErr(err)
 }
 
+func (it *MapAnyItems) GetValue(
+	key string,
+) (any interface{}) {
+	valInf, has := it.Items[key]
+
+	if has {
+		return valInf
+	}
+
+	return nil
+}
+
+func (it *MapAnyItems) GetFieldsMap(
+	key string,
+) (
+	fieldMap map[string]interface{},
+	parsingErr error,
+	isFound bool,
+) {
+	valInf, has := it.Items[key]
+
+	if has {
+		fieldsMap, parsingErr := corejson.
+			Deserialize.
+			AnyToFieldsMap(valInf)
+
+		return fieldsMap, parsingErr, true
+	}
+
+	return nil, nil, false
+}
+
+// GetSafeFieldsMap
+//
+// Warning:
+//  Swallows the parsing err if any
+func (it *MapAnyItems) GetSafeFieldsMap(
+	key string,
+) (
+	fieldMap map[string]interface{},
+	isFound bool,
+) {
+	fieldMap, _, isFound = it.GetFieldsMap(key)
+
+	return fieldMap, isFound
+}
+
 func (it *MapAnyItems) Get(
 	key string,
 ) (any interface{}, has bool) {
@@ -429,7 +476,10 @@ func (it *MapAnyItems) GetPagedCollection(
 	return collectionOfCollection
 }
 
-func (it *MapAnyItems) AddMapResultsUsingCloneOption(
+// AddMapResult
+//
+//  apply override on existing result
+func (it *MapAnyItems) AddMapResult(
 	mapResults map[string]interface{},
 ) *MapAnyItems {
 	if len(mapResults) == 0 {
@@ -438,6 +488,49 @@ func (it *MapAnyItems) AddMapResultsUsingCloneOption(
 
 	for key, result := range mapResults {
 		it.Items[key] = result
+	}
+
+	return it
+}
+
+func (it *MapAnyItems) AddMapResultOption(
+	isOverride bool,
+	mapResults map[string]interface{},
+) *MapAnyItems {
+	if len(mapResults) == 0 {
+		return it
+	}
+
+	if isOverride {
+		return it.AddMapResult(mapResults)
+	}
+
+	// no override
+	for key, result := range mapResults {
+		_, isFound := it.Items[key]
+
+		if !isFound {
+			continue
+		}
+
+		it.Items[key] = result
+	}
+
+	return it
+}
+
+func (it *MapAnyItems) AddManyMapResultsUsingOption(
+	isOverridingExisting bool,
+	mapsOfMapsResults ...map[string]interface{},
+) *MapAnyItems {
+	if len(mapsOfMapsResults) == 0 {
+		return it
+	}
+
+	for _, mapResult := range mapsOfMapsResults {
+		it.AddMapResultOption(
+			isOverridingExisting,
+			mapResult)
 	}
 
 	return it

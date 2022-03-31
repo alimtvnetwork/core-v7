@@ -5,6 +5,56 @@ type UserInfo struct {
 	SystemUser *User `json:"SystemUser,omitempty"` // System or OS user
 }
 
+func (it *UserInfo) SetUserSystemUser(
+	user, systemUser *User,
+) *UserInfo {
+	if it == nil {
+		return &UserInfo{
+			User:       user,
+			SystemUser: systemUser,
+		}
+	}
+
+	it.User = user
+	it.SystemUser = systemUser
+
+	return it
+}
+
+// SetUser
+//
+// on null creates new
+func (it *UserInfo) SetUser(
+	user *User,
+) *UserInfo {
+	if it == nil {
+		return &UserInfo{
+			User: user,
+		}
+	}
+
+	it.User = user
+
+	return it
+}
+
+// SetSystemUser
+//
+// on null creates new
+func (it *UserInfo) SetSystemUser(
+	systemUser *User,
+) *UserInfo {
+	if it == nil {
+		return &UserInfo{
+			SystemUser: systemUser,
+		}
+	}
+
+	it.SystemUser = systemUser
+
+	return it
+}
+
 func (it *UserInfo) HasUser() bool {
 	return it != nil && it.User.IsValidUser()
 }
@@ -42,4 +92,12 @@ func (it *UserInfo) ClonePtr() *UserInfo {
 
 func (it UserInfo) Ptr() *UserInfo {
 	return &it
+}
+
+func (it *UserInfo) ToNonPtr() UserInfo {
+	if it == nil {
+		return UserInfo{}
+	}
+
+	return *it
 }

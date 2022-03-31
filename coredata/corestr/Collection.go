@@ -25,11 +25,11 @@ type Collection struct {
 }
 
 func (it *Collection) JsonString() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) JsonStringMust() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) HasAnyItem() bool {
@@ -53,7 +53,7 @@ func (it *Collection) ListStrings() []string {
 }
 
 func (it *Collection) StringJSON() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) RemoveAt(index int) (isSuccess bool) {

@@ -92,11 +92,11 @@ func (it *User) IsTypeEmpty() bool {
 }
 
 func (it User) String() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *User) PrettyJsonString() string {
-	return it.Json().PrettyJsonString()
+	return it.JsonPtr().PrettyJsonString()
 }
 
 func (it *User) Json() corejson.Result {

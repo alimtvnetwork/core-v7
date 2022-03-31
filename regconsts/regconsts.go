@@ -81,4 +81,9 @@ const (
 	RedHatNameChecker                      = `[\( ]([\d\.]+)`                                         // https://t.ly/VsNo
 	FirstNumberAnyWhere                    = `(\d+){1}`                                               // https://regex101.com/r/7euGv5/1
 	WindowsVersionNumberChecker            = FirstNumberAnyWhere                                      // https://regex101.com/r/7euGv5/1
+	IpEthernet                             = `(\d{1,3}\.){3}\d{1,3}`
+	IpWithSubnet                           = `(\d{1,3}\.){3}\d{1,3}\/\d{1,2}` // Ref: https://regexr.com/5om44
+	Ipv6WithSubnet                         = `(([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4})`
+	IpWithPort                             = `(\d{1,3}\.){3}\d{1,3}:\d{1,6}`
+	ValidMac                               = `^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$` // 00-0C-29-EA-31-5B
 )

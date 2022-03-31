@@ -9,16 +9,21 @@ import (
 )
 
 type Info struct {
-	RootName          string
-	Description, Url  string
-	HintUrl, ErrorUrl string
-	ExampleUrl        string
-	SingleExample     string
-	Examples          []string // proves sample examples to call things correctly
-	ExcludeOptions    ExcludingOptions
-	lazyMap           map[string]string
+	RootName       string           `json:"RootName,omitempty"`
+	Description    string           `json:"Description,omitempty"`
+	Url            string           `json:"Url,omitempty"`
+	HintUrl        string           `json:"HintUrl,omitempty"`
+	ErrorUrl       string           `json:"ErrorUrl,omitempty"`
+	ExampleUrl     string           `json:"ExampleUrl,omitempty"`
+	SingleExample  string           `json:"SingleExample,omitempty"`
+	Examples       []string         `json:"Examples,omitempty"` // proves sample examples to call things correctly
+	ExcludeOptions ExcludingOptions `json:"ExcludeOptions,omitempty"`
+	lazyMap        map[string]string
 }
 
+// SetSecure
+//
+//  on nil creates and returns new info with secure flag
 func (it *Info) SetSecure() *Info {
 	if it == nil {
 		return &Info{
@@ -36,6 +41,10 @@ func (it *Info) SetSecure() *Info {
 	return it
 }
 
+// SetPlain
+//
+//  on nil creates and returns
+//  new info which is plain not secure
 func (it *Info) SetPlain() *Info {
 	if it == nil {
 		return &Info{} // plain text
@@ -115,6 +124,95 @@ func (it *Info) IsPlainText() bool {
 
 func (it *Info) IsIncludePayloads() bool {
 	return it == nil || it.ExcludeOptions.IsIncludePayloads()
+}
+
+// IsExcludeRootName
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeRootName
+//
+//  return false on null
+func (it *Info) IsExcludeRootName() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeRootName
+}
+
+// IsExcludeDescription
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeDescription
+//
+//  return false on null
+func (it *Info) IsExcludeDescription() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeDescription
+}
+
+// IsExcludeUrl
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeUrl
+//
+//  return false on null
+func (it *Info) IsExcludeUrl() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeUrl
+}
+
+// IsExcludeHintUrl
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeHintUrl
+//
+//  return false on null
+func (it *Info) IsExcludeHintUrl() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeHintUrl
+}
+
+// IsExcludeErrorUrl
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeErrorUrl
+//
+//  return false on null
+func (it *Info) IsExcludeErrorUrl() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeErrorUrl
+}
+
+// IsExcludeAdditionalErrorWrap
+//
+//  returns true on defined (not null) and
+//  it.ExcludeOptions.IsExcludeAdditionalErrorWrap
+//
+//  return false on null
+func (it *Info) IsExcludeAdditionalErrorWrap() bool {
+	return it != nil && it.ExcludeOptions.IsExcludeAdditionalErrorWrap
+}
+
+// IsExcludeExampleUrl
+//
+//  return true on null
+func (it *Info) IsExcludeExampleUrl() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeExampleUrl
+}
+
+// IsExcludeSingleExample
+//
+//  return true on null
+func (it *Info) IsExcludeSingleExample() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeSingleExample
+}
+
+// IsExcludeExamples
+//
+//  return true on null
+func (it *Info) IsExcludeExamples() bool {
+	return it != nil &&
+		it.ExcludeOptions.IsExcludeExamples
 }
 
 func (it *Info) Name() string {
@@ -412,35 +510,35 @@ func (it *Info) Map() map[string]string {
 		constants.Capacity8)
 
 	if it.IsIncludeRootName() {
-		newMap["Name"] = it.RootName
+		newMap[infoFieldName] = it.RootName
 	}
 
 	if it.IsIncludeDescription() {
-		newMap["Description"] = it.Description
+		newMap[infoFieldDescription] = it.Description
 	}
 
 	if it.IsIncludeUrl() {
-		newMap["Url"] = it.Url
+		newMap[infoFieldUrl] = it.Url
 	}
 
 	if it.IsIncludeHintUrl() {
-		newMap["HintUrl"] = it.HintUrl
+		newMap[infoFieldHintUrl] = it.HintUrl
 	}
 
 	if it.IsIncludeErrorUrl() {
-		newMap["ErrorUrl"] = it.ErrorUrl
+		newMap[infoFieldErrorUrl] = it.ErrorUrl
 	}
 
 	if it.IsIncludeExampleUrl() {
-		newMap["ExampleUrl"] = it.ExampleUrl
+		newMap[infoFieldExampleUrl] = it.ExampleUrl
 	}
 
 	if it.IsIncludeSingleExample() {
-		newMap["SingleExample"] = it.SingleExample
+		newMap[infoFieldSingleExample] = it.SingleExample
 	}
 
 	if it.IsIncludeExamples() {
-		newMap["Examples"] = it.ExamplesAsString()
+		newMap[infoFieldExamples] = it.ExamplesAsString()
 	}
 
 	return newMap
@@ -452,7 +550,7 @@ func (it *Info) MapWithPayload(
 	compiledMap := it.Map()
 
 	if it.IsIncludePayloads() {
-		compiledMap["Payloads"] = corejson.BytesToString(payloads)
+		compiledMap[payloadsField] = corejson.BytesToString(payloads)
 	}
 
 	return compiledMap

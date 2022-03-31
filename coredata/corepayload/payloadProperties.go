@@ -21,7 +21,7 @@ func (it *payloadProperties) BasicError() errcoreinf.BasicErrWrapper {
 }
 
 func (it *payloadProperties) ReflectSetTo(toPointer interface{}) error {
-	return coredynamic.ReflectSetFromTo(it, toPointer)
+	return coredynamic.ReflectSetFromTo(it.payloadWrapper, toPointer)
 }
 
 func (it payloadProperties) AllSafe() (id, name, entity, category string, dynamicPayloads []byte) {
@@ -133,6 +133,7 @@ func (it *payloadProperties) SetDynamicPayloadsMust(dynamicPayloads []byte) {
 func (it payloadProperties) Json() corejson.Result {
 	return it.payloadWrapper.Json()
 }
+
 func (it payloadProperties) JsonPtr() *corejson.Result {
 	return it.payloadWrapper.JsonPtr()
 }

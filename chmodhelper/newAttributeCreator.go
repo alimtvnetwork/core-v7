@@ -54,6 +54,30 @@ func (it newAttributeCreator) UsingRwxString(
 	}
 }
 
+// UsingByteMust
+//
+//  Byte can be at most 0 to 7
+//
+// 1 - Execute true
+// 2 - Write true
+// 3 - Write + Execute true
+// 4 - Read true
+// 5 - Read + Execute true
+// 6 - Read + Write true
+// 7 - Read + Write + Execute all true
+//
+// Warning:
+//  Panics if more than 7
+func (it newAttributeCreator) UsingByteMust(v7 byte) Attribute {
+	attr, err := it.UsingByte(v7)
+
+	if err != nil {
+		panic(attr)
+	}
+
+	return attr
+}
+
 // UsingByte
 //
 //  Byte can be at most 0 to 7
@@ -65,15 +89,16 @@ func (it newAttributeCreator) UsingRwxString(
 // 5 - Read + Execute true
 // 6 - Read + Write true
 // 7 - Read + Write + Execute all true
-func (it newAttributeCreator) UsingByte(v7 byte) Attribute {
+//
+// Warning:
+//  Panics if more than 7
+func (it newAttributeCreator) UsingByte(v7 byte) (Attribute, error) {
 	if ReadWriteExecute.IsGreaterThan(v7) {
-		msg := errcore.
+		return Attribute{}, errcore.
 			ShouldBeLessThanEqualType.
-			Combine(
+			Error(
 				"v7 byte should not be more than "+ReadWriteExecute.String(),
 				v7)
-
-		panic(msg)
 	}
 
 	// TODO optimize logic in future.
@@ -88,9 +113,19 @@ func (it newAttributeCreator) UsingByte(v7 byte) Attribute {
 		IsRead:    isRead,
 		IsWrite:   isWrite,
 		IsExecute: isExecute,
-	}
+	}, nil
 }
 
-func (it newAttributeCreator) UsingVariant(v AttrVariant) Attribute {
+// UsingVariantMust
+//
+// safe because converting AttrVariant should never exceed 7
+//
+// Warning:
+//  Panics if more than 7
+func (it newAttributeCreator) UsingVariantMust(v AttrVariant) Attribute {
+	return it.UsingByteMust(v.Value())
+}
+
+func (it newAttributeCreator) UsingVariant(v AttrVariant) (Attribute, error) {
 	return it.UsingByte(v.Value())
 }

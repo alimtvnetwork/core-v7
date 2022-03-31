@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 
+	"gitlab.com/evatix-go/core/constants"
 	"gitlab.com/evatix-go/core/coredata"
 	"gitlab.com/evatix-go/core/errcore"
 	"gitlab.com/evatix-go/core/internal/reflectinternal"
@@ -48,13 +49,15 @@ func (it newResultCreator) DeserializeUsingResult(
 	jsonResult *Result,
 ) *Result {
 	if jsonResult.HasIssuesOrEmpty() {
-		return it.ErrorPtr(jsonResult.MeaningfulError())
+		return it.ErrorPtr(jsonResult.Error)
 	}
 
 	empty := it.TypeName(resultTypeName)
 
 	err := Deserialize.
-		UsingBytes(jsonResult.SafeBytes(), empty)
+		UsingBytes(
+			jsonResult.SafeBytes(),
+			empty)
 
 	if err == nil {
 		return empty
@@ -74,8 +77,8 @@ func (it newResultCreator) UsingBytes(
 }
 
 func (it newResultCreator) UsingBytesType(
-	typeName string,
 	jsonBytes []byte,
+	typeName string,
 ) Result {
 	return Result{
 		Bytes:    jsonBytes,
@@ -84,6 +87,16 @@ func (it newResultCreator) UsingBytesType(
 }
 
 func (it newResultCreator) UsingBytesTypePtr(
+	jsonBytes []byte,
+	typeName string,
+) *Result {
+	return &Result{
+		Bytes:    jsonBytes,
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingTypeBytesPtr(
 	typeName string,
 	jsonBytes []byte,
 ) *Result {
@@ -193,6 +206,89 @@ func (it newResultCreator) Ptr(
 	}
 }
 
+func (it newResultCreator) UsingJsonBytesTypeError(
+	jsonBytes []byte,
+	err error,
+	typeName string,
+) *Result {
+	return &Result{
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingJsonBytesError(
+	jsonBytes []byte,
+	err error,
+) *Result {
+	return &Result{
+		Bytes:    jsonBytes,
+		Error:    err,
+		TypeName: constants.UnknownType,
+	}
+}
+
+func (it newResultCreator) UsingTypePlusString(
+	typeName string,
+	jsonString string,
+) *Result {
+	return &Result{
+		Bytes:    []byte(jsonString),
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingTypePlusStringPtr(
+	typeName string,
+	jsonStringPtr *string,
+) *Result {
+	if jsonStringPtr == nil || len(*jsonStringPtr) == 0 {
+		return &Result{
+			Bytes: []byte{},
+		}
+	}
+
+	return &Result{
+		Bytes:    []byte(*jsonStringPtr),
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingStringWithType(
+	jsonString string,
+	typeName string,
+) *Result {
+	return &Result{
+		Bytes:    []byte(jsonString),
+		TypeName: typeName,
+	}
+}
+
+func (it newResultCreator) UsingString(
+	jsonString string,
+) *Result {
+	return &Result{
+		Bytes:    []byte(jsonString),
+		TypeName: constants.UnknownStringType,
+	}
+}
+
+func (it newResultCreator) UsingStringPtr(
+	jsonStringPtr *string,
+) *Result {
+	if jsonStringPtr == nil || len(*jsonStringPtr) == 0 {
+		return &Result{
+			Bytes: []byte{},
+		}
+	}
+
+	return &Result{
+		Bytes:    []byte(*jsonStringPtr),
+		TypeName: constants.UnknownStringType,
+	}
+}
+
 func (it newResultCreator) CreatePtr(
 	jsonBytes []byte,
 	err error,
@@ -255,6 +351,15 @@ func (it newResultCreator) PtrUsingBytesPtr(
 		Error:    nil,
 		TypeName: typeName,
 	}
+}
+
+// CastingAny
+//
+//  if already in JsonResult then returns it
+func (it newResultCreator) CastingAny(
+	castingAnyToJsonResultPtr interface{},
+) *Result {
+	return AnyTo.SerializedJsonResult(castingAnyToJsonResultPtr)
 }
 
 func (it newResultCreator) Any(
@@ -444,4 +549,19 @@ func (it newResultCreator) UsingJsoner(
 	}
 
 	return jsoner.JsonPtr()
+}
+
+// AnyToCastingResult
+//
+// accepted types (usages anyTo.SerializedJsonResult):
+//  - Result, *Result
+//  - []byte
+//  - string
+//  - jsoner
+//  - bytesSerializer
+//  - anyItem
+func (it newResultCreator) AnyToCastingResult(
+	anyItem interface{},
+) *Result {
+	return AnyTo.SerializedJsonResult(anyItem)
 }

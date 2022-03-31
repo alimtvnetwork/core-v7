@@ -8,8 +8,16 @@ import (
 )
 
 var (
-	regexMutex = sync.Mutex{}
-	regexMaps  = make(
+	regexMutex    = sync.Mutex{}
+	lazyRegexLock = sync.Mutex{}
+	regexMaps     = make(
 		map[string]*regexp.Regexp,
-		constants.ArbitraryCapacity50)
+		constants.ArbitraryCapacity30)
+	lazyRegexOnceMap = lazyRegexMap{
+		items: make(
+			map[string]*LazyRegex,
+			constants.ArbitraryCapacity30),
+	}
+
+	New = newCreator{}
 )
