@@ -161,11 +161,15 @@ func (it *LazyRegex) FullString() (detail string) {
 		return ""
 	}
 
+	isApplicable := it.IsApplicable()
+	isCompiled := it.IsCompiled()
+	compiledErr := it.CompiledError()
+
 	newMap := map[string]interface{}{
 		"pattern":      it.Pattern(),
-		"isCompiled":   it.IsCompiled(),
-		"isApplicable": it.IsApplicable(),
-		"error":        it.CompiledError(),
+		"isCompiled":   isCompiled,
+		"isApplicable": isApplicable,
+		"error":        compiledErr,
 	}
 
 	return prettyJson(newMap)

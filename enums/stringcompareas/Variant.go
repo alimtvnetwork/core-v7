@@ -445,6 +445,7 @@ func (it Variant) EnumType() enuminf.EnumTyper {
 func (it Variant) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
 	return &it
 }
+
 func (it Variant) AsStringCompareTyper() enuminf.StringCompareTyper {
 	return &it
 }

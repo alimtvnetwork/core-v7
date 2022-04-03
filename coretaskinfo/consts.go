@@ -10,4 +10,5 @@ const (
 	infoFieldSingleExample = "SingleExample"
 	infoFieldExamples      = "Examples"
 	payloadsField          = "Payloads"
+	payloadsErrField       = "Payloads.SerializingErr"
 )

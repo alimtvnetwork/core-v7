@@ -126,6 +126,10 @@ func (it *Info) IsIncludePayloads() bool {
 	return it == nil || it.ExcludeOptions.IsIncludePayloads()
 }
 
+func (it *Info) IsExcludePayload() bool {
+	return it != nil && it.ExcludeOptions.IsSecureText
+}
+
 // IsExcludeRootName
 //
 //  returns true on defined (not null) and
@@ -501,7 +505,7 @@ func (it *Info) ExamplesAsString() (compiledString string) {
 }
 
 func (it *Info) Map() map[string]string {
-	if it.IsNull() {
+	if it.IsNull() || it.IsExcludeAdditionalErrorWrap() {
 		return map[string]string{}
 	}
 
@@ -556,8 +560,60 @@ func (it *Info) MapWithPayload(
 	return compiledMap
 }
 
+func (it *Info) LazyMapWithPayload(
+	payloads []byte,
+) map[string]string {
+	compiledMap := it.LazyMap()
+
+	if it.IsIncludePayloads() {
+		compiledMap[payloadsField] = corejson.BytesToString(payloads)
+	}
+
+	return compiledMap
+}
+
+func (it *Info) MapWithPayloadAsAny(
+	payloadsAny interface{},
+) map[string]string {
+	compiledMap := it.Map()
+
+	if it.IsExcludePayload() {
+		return compiledMap
+	}
+
+	jsonResult := corejson.
+		AnyTo.
+		SerializedJsonResult(payloadsAny)
+	if jsonResult.HasError() {
+		compiledMap[payloadsErrField] = jsonResult.MeaningfulErrorMessage()
+	}
+	compiledMap[payloadsField] = jsonResult.JsonString()
+
+	return compiledMap
+}
+
+func (it *Info) LazyMapWithPayloadAsAny(
+	payloadsAny interface{},
+) map[string]string {
+	compiledMap := it.LazyMap()
+
+	if it.IsExcludePayload() {
+		return compiledMap
+	}
+
+	jsonResult := corejson.
+		AnyTo.
+		SerializedJsonResult(payloadsAny)
+	if jsonResult.HasError() {
+		compiledMap[payloadsErrField] = jsonResult.MeaningfulErrorMessage()
+	}
+	compiledMap[payloadsField] = jsonResult.JsonString()
+
+	return compiledMap
+}
+
 func (it *Info) LazyMap() map[string]string {
-	if it.IsNull() {
+	if it.IsNull() || it.IsExcludeAdditionalErrorWrap() {
 		return map[string]string{}
 	}
 

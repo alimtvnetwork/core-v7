@@ -61,3 +61,14 @@ type AcceptRejectOrSkipper interface {
 type YesNoAcceptRejecter interface {
 	internalinterface.YesNoAcceptRejecter
 }
+
+type EnhanceYesNoAcceptRejecter interface {
+	YesNoAcceptRejecter
+	IsAcceptOrReject() bool
+	IsNotAcceptOrReject() bool
+	IsDefinedAccepted() bool
+}
+
+type IsReviewChecker interface {
+	IsReview() bool
+}

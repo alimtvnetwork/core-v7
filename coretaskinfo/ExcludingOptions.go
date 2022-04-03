@@ -113,15 +113,34 @@ func (it ExcludingOptions) ToNonPtr() ExcludingOptions {
 
 func (it ExcludingOptions) Clone() ExcludingOptions {
 	return ExcludingOptions{
-		IsExcludeRootName:            false,
-		IsExcludeDescription:         false,
-		IsExcludeUrl:                 false,
-		IsExcludeHintUrl:             false,
-		IsExcludeErrorUrl:            false,
-		IsExcludeAdditionalErrorWrap: false,
-		IsExcludeExampleUrl:          false,
-		IsExcludeSingleExample:       false,
-		IsExcludeExamples:            false,
-		IsSecureText:                 false,
+		IsExcludeRootName:            it.IsExcludeRootName,
+		IsExcludeDescription:         it.IsExcludeDescription,
+		IsExcludeUrl:                 it.IsExcludeUrl,
+		IsExcludeHintUrl:             it.IsExcludeHintUrl,
+		IsExcludeErrorUrl:            it.IsExcludeErrorUrl,
+		IsExcludeAdditionalErrorWrap: it.IsExcludeAdditionalErrorWrap,
+		IsExcludeExampleUrl:          it.IsExcludeExampleUrl,
+		IsExcludeSingleExample:       it.IsExcludeSingleExample,
+		IsExcludeExamples:            it.IsExcludeExamples,
+		IsSecureText:                 it.IsSecureText,
+	}
+}
+
+func (it *ExcludingOptions) ClonePtr() *ExcludingOptions {
+	if it == nil {
+		return &ExcludingOptions{}
+	}
+
+	return &ExcludingOptions{
+		IsExcludeRootName:            it.IsExcludeRootName,
+		IsExcludeDescription:         it.IsExcludeDescription,
+		IsExcludeUrl:                 it.IsExcludeUrl,
+		IsExcludeHintUrl:             it.IsExcludeHintUrl,
+		IsExcludeErrorUrl:            it.IsExcludeErrorUrl,
+		IsExcludeAdditionalErrorWrap: it.IsExcludeAdditionalErrorWrap,
+		IsExcludeExampleUrl:          it.IsExcludeExampleUrl,
+		IsExcludeSingleExample:       it.IsExcludeSingleExample,
+		IsExcludeExamples:            it.IsExcludeExamples,
+		IsSecureText:                 it.IsSecureText,
 	}
 }

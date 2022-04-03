@@ -988,7 +988,7 @@ func (it DynamicMap) ConvMapUInt16String() map[uint16]string {
 		valInt := it.KeyValueIntDefault(
 			key)
 
-		if valInt < 0 || valInt > math.MaxUint16 {
+		if valInt < 0 || valInt > math.MaxInt16 {
 			continue
 		}
 

@@ -1,8 +1,8 @@
 package corejson
 
 const (
-	errTypeString ="ErrorType.String"
+	errTypeString  = "ErrorType.String"
 	bytesFieldName = "Bytes"
 	errorFieldName = "Error"
-	typeFieldName = "Type"
+	typeFieldName  = "Type"
 )

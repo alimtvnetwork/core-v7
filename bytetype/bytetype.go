@@ -1,11 +1,46 @@
 package bytetype
 
 import (
+	"math"
+
 	"gitlab.com/evatix-go/core/coredata/corejson"
 	"gitlab.com/evatix-go/core/coreinterface/enuminf"
 )
 
 type Variant byte
+
+const (
+	Zero  Variant = 0
+	Min   Variant = 0
+	One   Variant = 1
+	Two   Variant = 2
+	Three Variant = 3
+	Max   Variant = math.MaxUint8
+)
+
+func (it Variant) IsZero() bool {
+	return it == Zero
+}
+
+func (it Variant) IsOne() bool {
+	return it == One
+}
+
+func (it Variant) IsTwo() bool {
+	return it == Two
+}
+
+func (it Variant) IsThree() bool {
+	return it == Three
+}
+
+func (it Variant) IsMin() bool {
+	return it == Min
+}
+
+func (it Variant) IsMax() bool {
+	return it == Max
+}
 
 func (it Variant) AllNameValues() []string {
 	return BasicEnumImpl.AllNameValues()
@@ -207,6 +242,21 @@ func (it Variant) Value() byte {
 
 func (it Variant) StringValue() string {
 	return string(it)
+}
+
+func (it Variant) HasIndexInStrings(sliceOfStrings ...string) (val string, isValid bool) {
+	if len(sliceOfStrings) == 0 {
+		return "", false
+	}
+
+	enumVal := it.ValueInt()
+	isValid = len(sliceOfStrings)-1 >= enumVal
+
+	if isValid {
+		return sliceOfStrings[enumVal], isValid
+	}
+
+	return "", false
 }
 
 // Add v + n
