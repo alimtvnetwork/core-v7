@@ -9,7 +9,7 @@ func (it newInfoSecureTextCreator) Default(
 		RootName:    name,
 		Description: desc,
 		Url:         url,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -22,7 +22,7 @@ func (it newInfoSecureTextCreator) NameDescUrl(
 		RootName:    name,
 		Description: desc,
 		Url:         url,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -37,7 +37,7 @@ func (it newInfoSecureTextCreator) NameDescUrlExamples(
 		Description: desc,
 		Url:         url,
 		Examples:    examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -52,7 +52,7 @@ func (it newInfoSecureTextCreator) NewNameDescUrlErrorUrl(
 		Description: desc,
 		Url:         url,
 		ErrorUrl:    errUrl,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -69,7 +69,7 @@ func (it newInfoSecureTextCreator) NameDescUrlErrUrlExamples(
 		Url:         url,
 		ErrorUrl:    errUrl,
 		Examples:    examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -83,7 +83,7 @@ func (it newInfoSecureTextCreator) NameDescExamples(
 		RootName:    name,
 		Description: desc,
 		Examples:    examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -97,7 +97,7 @@ func (it newInfoSecureTextCreator) Examples(
 		RootName:    name,
 		Description: desc,
 		Examples:    examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -108,7 +108,7 @@ func (it newInfoSecureTextCreator) ExamplesOnly(
 ) *Info {
 	return &Info{
 		Examples: examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -119,7 +119,7 @@ func (it newInfoSecureTextCreator) UrlOnly(
 ) *Info {
 	return &Info{
 		Url: url,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -130,7 +130,7 @@ func (it newInfoSecureTextCreator) ErrorUrlOnly(
 ) *Info {
 	return &Info{
 		ErrorUrl: errUrl,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -141,7 +141,7 @@ func (it newInfoSecureTextCreator) HintUrlOnly(
 ) *Info {
 	return &Info{
 		HintUrl: hintUrl,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -162,7 +162,7 @@ func (it newInfoSecureTextCreator) NameHintUrlOnly(
 	return &Info{
 		RootName: name,
 		HintUrl:  hintUrl,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -173,7 +173,7 @@ func (it newInfoSecureTextCreator) SingleExampleOnly(
 ) *Info {
 	return &Info{
 		SingleExample: singleExample,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -191,7 +191,7 @@ func (it newInfoSecureTextCreator) AllUrlExamples(
 		HintUrl:     hintUrl,
 		ErrorUrl:    errUrl,
 		Examples:    examples,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -207,7 +207,7 @@ func (it newInfoSecureTextCreator) AllUrl(
 		Url:         url,
 		HintUrl:     hintUrl,
 		ErrorUrl:    errUrl,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -223,7 +223,7 @@ func (it newInfoSecureTextCreator) UrlSingleExample(
 		Description:   desc,
 		Url:           url,
 		SingleExample: chainingExample,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -237,7 +237,7 @@ func (it newInfoSecureTextCreator) SingleExample(
 		RootName:      name,
 		Description:   desc,
 		SingleExample: singleExample,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -253,7 +253,7 @@ func (it newInfoSecureTextCreator) ExampleUrl(
 		Description:   desc,
 		ExampleUrl:    exampleUrl,
 		SingleExample: singleExample,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -269,7 +269,7 @@ func (it newInfoSecureTextCreator) ExampleUrlSingleExample(
 		Description:   desc,
 		ExampleUrl:    exampleUrl,
 		SingleExample: singleExample,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
@@ -286,7 +286,7 @@ func (it newInfoSecureTextCreator) NewExampleUrlSecure(
 		ExampleUrl:    exampleUrl,
 		SingleExample: chainingExample,
 		Examples:      nil,
-		ExcludeOptions: ExcludingOptions{
+		ExcludeOptions: &ExcludingOptions{
 			IsSecureText: true,
 		},
 	}
