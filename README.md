@@ -203,4 +203,4 @@ Any other packages used
 
 ## License
 
-[Evatix MIT License](/LICENSE)
+[MIT License](/LICENSE)
