@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/smartystreets/goconvey/convey"
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
+	"gitlab.com/auk-go/core/chmodhelper"
+	"gitlab.com/auk-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
 func Test_RwxCompileValue(t *testing.T) {

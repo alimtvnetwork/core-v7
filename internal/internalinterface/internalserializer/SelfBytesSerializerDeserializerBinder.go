@@ -1,0 +1,6 @@
+package internalserializer
+
+type SelfBytesSerializerDeserializerBinder interface {
+	SelfBytesSerializerDeserializer
+	AsSelfBytesSerializerDeserializerBinder() SelfBytesSerializerDeserializerBinder
+}

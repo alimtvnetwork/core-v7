@@ -1,8 +1,8 @@
 package coreindexes
 
-func Of(indexes []int, currentIndex int) int {
+func Of(indexes []int, seekingValue int) int {
 	for i, indexValue := range indexes {
-		if indexValue == currentIndex {
+		if indexValue == seekingValue {
 			return i
 		}
 	}

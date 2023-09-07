@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type serializerLogic struct{}
@@ -128,6 +128,22 @@ func (it serializerLogic) UsingAny(
 	anyItem interface{},
 ) Result {
 	return it.Apply(anyItem).NonPtr()
+}
+
+func (it serializerLogic) Raw(
+	anyItem interface{},
+) ([]byte, error) {
+	jsonResult := it.Apply(anyItem)
+
+	return jsonResult.Raw()
+}
+
+func (it serializerLogic) Marshal(
+	anyItem interface{},
+) ([]byte, error) {
+	jsonResult := it.Apply(anyItem)
+
+	return jsonResult.Raw()
 }
 
 func (it serializerLogic) ApplyMust(
@@ -265,5 +281,5 @@ func (it serializerLogic) ToPrettyStringIncludingErr(
 ) string {
 	result := it.Apply(anyItem)
 
-	return result.PrettyJsonStringWithErr()
+	return result.PrettyJsonStringOrErrString()
 }

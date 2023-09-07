@@ -3,5 +3,11 @@ package coredynamic
 import "reflect"
 
 func TypeName(any interface{}) string {
-	return reflect.TypeOf(any).String()
+	rf := reflect.TypeOf(any)
+
+	if rf == nil {
+		return ""
+	}
+
+	return rf.String()
 }

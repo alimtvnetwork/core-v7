@@ -1,8 +1,8 @@
 package messages
 
 import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 var (

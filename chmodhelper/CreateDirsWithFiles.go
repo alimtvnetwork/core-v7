@@ -5,13 +5,13 @@ import "os"
 func CreateDirsWithFiles(
 	isRemoveAllDirBeforeCreate bool,
 	fileChmod os.FileMode,
-	dirsWithFiles *[]DirWithFiles,
+	dirsWithFiles ...DirWithFiles,
 ) error {
-	if dirsWithFiles == nil || len(*dirsWithFiles) == 0 {
+	if dirsWithFiles == nil || len(dirsWithFiles) == 0 {
 		return nil
 	}
 
-	for _, dirWithFile := range *dirsWithFiles {
+	for _, dirWithFile := range dirsWithFiles {
 		err := CreateDirWithFiles(
 			isRemoveAllDirBeforeCreate,
 			fileChmod,

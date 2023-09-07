@@ -1,13 +1,13 @@
 package chmodclasstype
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
 )
 
 type Variant byte
 
 const (
-	UnInitialized Variant = iota
+	Invalid Variant = iota
 	All
 	Owner
 	Group
@@ -17,8 +17,122 @@ const (
 	OwnerOther
 )
 
+func (it Variant) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Variant) OnlySupportedErr(names ...string) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Variant) OnlySupportedMsgErr(message string, names ...string) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Variant) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variant) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
+func (it Variant) MinMaxAny() (min, max interface{}) {
+	return BasicEnumImpl.MinMaxAny()
+}
+
+func (it Variant) MinValueString() string {
+	return BasicEnumImpl.MinValueString()
+}
+
+func (it Variant) MaxValueString() string {
+	return BasicEnumImpl.MaxValueString()
+}
+
+func (it Variant) MaxInt() int {
+	return BasicEnumImpl.MaxInt()
+}
+
+func (it Variant) MinInt() int {
+	return BasicEnumImpl.MinInt()
+}
+
+func (it Variant) RangesDynamicMap() map[string]interface{} {
+	return BasicEnumImpl.RangesDynamicMap()
+}
+
+func (it Variant) IsByteValueEqual(value byte) bool {
+	return byte(it) == value
+}
+
+func (it Variant) Format(format string) (compiled string) {
+	return BasicEnumImpl.Format(format, it)
+}
+
+func (it Variant) IsEnumEqual(enum enuminf.BasicEnumer) bool {
+	return it.Value() == enum.ValueByte()
+}
+
+func (it *Variant) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
+	for _, enum := range enums {
+		if it.IsEnumEqual(enum) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variant) IsNameEqual(name string) bool {
+	return it.Name() == name
+}
+
+func (it Variant) IsAnyNamesOf(names ...string) bool {
+	for _, name := range names {
+		if it.IsNameEqual(name) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variant) IsValueEqual(value byte) bool {
+	return it.ValueByte() == value
+}
+
+func (it Variant) IsAnyValuesEqual(anyByteValues ...byte) bool {
+	for _, currentVal := range anyByteValues {
+		if it.IsValueEqual(currentVal) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variant) ValueInt() int {
+	return int(it)
+}
+
+func (it Variant) ValueInt8() int8 {
+	return int8(it)
+}
+
+func (it Variant) ValueInt16() int16 {
+	return int16(it)
+}
+
+func (it Variant) ValueInt32() int32 {
+	return int32(it)
+}
+
+func (it Variant) ValueString() string {
+	return it.ToNumberString()
+}
+
 func (it Variant) IsUnInitialized() bool {
-	return it == UnInitialized
+	return it == Invalid
 }
 
 func (it Variant) IsAll() bool {
@@ -49,6 +163,14 @@ func (it Variant) IsOwnerOther() bool {
 	return it == OwnerOther
 }
 
+func (it Variant) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Variant) IsInvalid() bool {
+	return it == Invalid
+}
+
 func (it *Variant) Name() string {
 	return BasicEnumImpl.ToEnumString(it.ValueByte())
 }
@@ -66,7 +188,7 @@ func (it *Variant) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, e
 }
 
 func (it *Variant) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Variant) UnmarshalJSON(data []byte) error {
@@ -91,8 +213,8 @@ func (it Variant) NameValue() string {
 	return BasicEnumImpl.NameWithValue(it)
 }
 
-func (it *Variant) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+func (it Variant) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
+	return &it
 }
 
 func (it *Variant) MaxByte() byte {
@@ -115,6 +237,10 @@ func (it *Variant) RangesByte() []byte {
 	return BasicEnumImpl.Ranges()
 }
 
-func (it *Variant) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Variant) EnumType() enuminf.EnumTyper {
+	return BasicEnumImpl.EnumType()
+}
+
+func (it Variant) AsBasicByteEnumContractsBinder() enuminf.BasicByteEnumContractsBinder {
+	return &it
 }

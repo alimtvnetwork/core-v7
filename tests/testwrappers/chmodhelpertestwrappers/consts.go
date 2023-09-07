@@ -1,6 +1,6 @@
 package chmodhelpertestwrappers
 
-import "gitlab.com/evatix-go/core/coretests"
+import "gitlab.com/auk-go/core/coretests"
 
 const (
 	RwxApplyOnPath                coretests.TestFuncName = "RwxApplyOnPath"

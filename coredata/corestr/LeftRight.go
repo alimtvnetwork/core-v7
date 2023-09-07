@@ -4,8 +4,8 @@ import (
 	"regexp"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LeftRight struct {
@@ -117,11 +117,11 @@ func (it *LeftRight) IsRightEmpty() bool {
 }
 
 func (it *LeftRight) IsRightWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.Right)
+	return strutilinternal.IsEmptyOrWhitespace(it.Right)
 }
 
 func (it *LeftRight) IsLeftWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.Left)
+	return strutilinternal.IsEmptyOrWhitespace(it.Left)
 }
 
 func (it *LeftRight) HasValidNonEmptyLeft() bool {
@@ -205,4 +205,23 @@ func (it *LeftRight) Clone() *LeftRight {
 		IsValid: it.IsValid,
 		Message: it.Message,
 	}
+}
+
+func (it *LeftRight) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Left = ""
+	it.Right = ""
+	it.IsValid = false
+	it.Message = ""
+}
+
+func (it *LeftRight) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
 }

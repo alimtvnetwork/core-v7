@@ -3,7 +3,7 @@ package converters
 import (
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/constants/bitsize"
 )
 
 func StringToFloat64Default(

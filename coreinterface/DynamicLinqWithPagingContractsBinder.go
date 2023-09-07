@@ -1,6 +1,1 @@
 package coreinterface
-
-type DynamicLinqWithPagingContractsBinder interface {
-	DynamicLinqWithPaging
-	AsDynamicLinqWithPagingContractsBinder() DynamicLinqWithPagingContractsBinder
-}

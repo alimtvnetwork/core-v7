@@ -1,12 +1,14 @@
 package stringutil
 
-// IsEnds searches for case sensitive terms
+// IsEnds
+//
+// searches for case-sensitive terms
 func IsEnds(
 	content,
-	startsWith string,
+	endsWith string,
 ) bool {
 	return IsEndsWith(
 		content,
-		startsWith,
+		endsWith,
 		false)
 }

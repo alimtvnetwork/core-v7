@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/csvinternal"
 )
 
 type RawErrorType string
@@ -39,7 +39,7 @@ const (
 	FailedToParseType                          RawErrorType = "Failed : request failed to parse!"
 	FailedToConvertType                        RawErrorType = "Failed : request failed to convert!"
 	CannotRemoveIndexesFromEmptyCollectionType RawErrorType = "Invalid operation: cannot remove indexes (either indexes are nil) or cannot remove indexes from the empty collection."
-	CannotBeNegativeIndexType                  RawErrorType = "Invalid operation / index: index cannot be negative, operations canceled."
+	CannotBeNegativeIndexType                  RawErrorType = "Invalid operation or index: index cannot be negative, operations canceled."
 	CannotBeNegativeType                       RawErrorType = "Values or value cannot be negative value."
 	CannotBeNilOrEmptyType                     RawErrorType = "Values or value cannot be nil or null or empty."
 	AlreadyInitializedType                     RawErrorType = "Value is already initialized."
@@ -77,19 +77,19 @@ const (
 	WindowsIgnoreType                          RawErrorType = "Unix tests ignored in Windows."
 	ComparatorShouldBeWithinRangeType          RawErrorType = "Comparator should be within the range."
 	CannotModifyCompleteResourceType           RawErrorType = "Cannot modify complete or frozen resource."
-	EnumValuesOutOfRangeType                   RawErrorType = "Out of Range / Invalid Range: Enum values are are not within the range as per the expectation."
+	EnumValuesOutOfRangeType                   RawErrorType = "Out of Range or Invalid Range: Enum values are are not within the range as per the expectation."
 	SearchInputEmptyType                       RawErrorType = "Search Input is either null or empty."
 	SearchInputOrSearchTermEmptyType           RawErrorType = "Search Input or search term either null or empty."
 	EmptyResultCannotMakeJsonType              RawErrorType = "Empty result, cannot make json out of it."
-	MarshallingFailedType                      RawErrorType = "Failed to marshal / parse / serialize."
-	UnMarshallingFailedType                    RawErrorType = "Failed to unmarshal / parse / deserialize."
+	MarshallingFailedType                      RawErrorType = "Failed to marshal or serialize."
+	UnMarshallingFailedType                    RawErrorType = "Failed to unmarshal or deserialize."
 	Serialize                                  RawErrorType = "Failed to serialize or marshal convert to bytes."
 	Deserialize                                RawErrorType = "Failed to deserialize or unmarshal convert to object from bytes."
 	ParsingFailedType                          RawErrorType = "Failed to parse."
 	TypeMismatchType                           RawErrorType = "TypeMismatchType: Type is not as expected."
-	NotImplementedType                         RawErrorType = "Not Implemented: Feature / method is not implemented yet."
-	NotSupportedType                           RawErrorType = "Not Supported: Feature / method is not supported yet."
-	RangesOnlySupportedType                    RawErrorType = "Only Ranges: Only selected ranges supported for the function / feature."
+	NotImplementedType                         RawErrorType = "Not Implemented: Feature or method is not implemented yet."
+	NotSupportedType                           RawErrorType = "Not Supported: Feature or method is not supported yet."
+	RangesOnlySupportedType                    RawErrorType = "Only Ranges: Only selected ranges supported for the function or feature."
 	PathsMissingOrHavingIssuesType             RawErrorType = "Path missing or having other access issues!"
 	BytesAreNilOrEmptyType                     RawErrorType = "Bytes data either nil or empty."
 	ValidataionFailedType                      RawErrorType = "Validation failed!"
@@ -190,6 +190,79 @@ func (it RawErrorType) Error(otherMsg string, reference interface{}) error {
 	msg := CombineWithMsgType(it, otherMsg, reference)
 
 	return errors.New(msg)
+}
+
+func (it RawErrorType) Fmt(
+	format string,
+	v ...interface{},
+) error {
+	if format == "" && len(v) == 0 {
+		return it.ErrorRefOnly(nil)
+	}
+
+	compiledMessage := fmt.Sprintf(
+		format,
+		v...)
+
+	msg := CombineWithMsgType(it, compiledMessage, nil)
+
+	return errors.New(msg)
+}
+
+func (it RawErrorType) FmtIf(
+	isError bool,
+	format string,
+	v ...interface{},
+) error {
+	if !isError {
+		return nil
+	}
+
+	return it.Fmt(format, v...)
+}
+
+func (it RawErrorType) MergeError(
+	err error,
+) error {
+	if err == nil {
+		return nil
+	}
+
+	return it.ErrorNoRefs(err.Error())
+}
+
+func (it RawErrorType) MergeErrorWithMessage(
+	err error,
+	message string,
+) error {
+	if err == nil {
+		return nil
+	}
+
+	return it.ErrorNoRefs(message + err.Error())
+}
+
+func (it RawErrorType) MergeErrorWithMessageRef(
+	err error,
+	message string,
+	reference interface{},
+) error {
+	if err == nil {
+		return nil
+	}
+
+	return it.Error(message+err.Error(), reference)
+}
+
+func (it RawErrorType) MergeErrorWithRef(
+	err error,
+	reference interface{},
+) error {
+	if err == nil {
+		return nil
+	}
+
+	return it.Error(err.Error(), reference)
 }
 
 func (it RawErrorType) MsgCsvRef(

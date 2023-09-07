@@ -11,7 +11,7 @@ func MatchUsingCustomizeErrorFuncLock(
 	matchFunc RegexValidationFunc,
 	customizeErrFunc CustomizeErr, // can be nil, if nil then use default one
 ) error {
-	regEx, err := NewLock(regexPattern)
+	regEx, err := CreateLock(regexPattern)
 
 	if regEx != nil && matchFunc(regEx, comparing) {
 		return nil

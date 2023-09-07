@@ -3,15 +3,15 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/fsinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/fsinternal"
 )
 
 // GetFilteredExistsFilesInfosOnly
 //
 // Warning: File related errors will be swallowed
 func GetFilteredExistsFilesInfosOnly(
-	locations []string,
+	locations ...string,
 ) map[string]os.FileInfo {
 	if len(locations) == 0 {
 		return map[string]os.FileInfo{}

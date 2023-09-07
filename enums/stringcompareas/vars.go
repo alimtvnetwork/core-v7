@@ -1,8 +1,7 @@
 package stringcompareas
 
 import (
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
 )
 
 var (
@@ -20,11 +19,15 @@ var (
 		NotContains:   "NotContains",
 		NotAnyChars:   "NotAnyChars",
 		NotMatchRegex: "NotMatchRegex",
+		Invalid:       "Invalid",
 	}
 
-	basicEnumImpl = enumimpl.
-			NewBasicByteUsingIndexedSlice(
-			reflectinternal.TypeName(Equal), stringRanges[:])
+	BasicEnumImpl = enumimpl.
+			New.
+			BasicByte.
+			Default(
+			Equal,
+			stringRanges[:])
 
 	rangesMap = map[Variant]IsLineCompareFunc{
 		Equal:         isEqualFunc,

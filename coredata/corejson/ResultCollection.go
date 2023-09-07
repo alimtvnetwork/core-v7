@@ -6,9 +6,9 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type ResultsCollection struct {
@@ -372,6 +372,60 @@ func (it *ResultsCollection) Adds(
 	return it
 }
 
+func (it *ResultsCollection) AddSerializer(
+	serializer bytesSerializer,
+) *ResultsCollection {
+	if serializer == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializer(
+		serializer)
+
+	return it.AddSkipOnNil(result)
+}
+
+func (it *ResultsCollection) AddSerializers(
+	serializers ...bytesSerializer,
+) *ResultsCollection {
+	if len(serializers) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializers {
+		it.AddSerializer(serializer)
+	}
+
+	return it
+}
+
+func (it *ResultsCollection) AddSerializerFunc(
+	serializerFunc func() ([]byte, error),
+) *ResultsCollection {
+	if serializerFunc == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializerFunc(
+		serializerFunc)
+
+	return it.AddSkipOnNil(result)
+}
+
+func (it *ResultsCollection) AddSerializerFunctions(
+	serializerFunctions ...func() ([]byte, error),
+) *ResultsCollection {
+	if len(serializerFunctions) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializerFunctions {
+		it.AddSerializerFunc(serializer)
+	}
+
+	return it
+}
+
 func (it *ResultsCollection) AddMapResults(
 	mapResults *MapResults,
 ) *ResultsCollection {
@@ -453,7 +507,9 @@ func (it *ResultsCollection) AddAnyItems(
 	return it
 }
 
-// AddAnyItems Skip on nil
+// AddAnyItemsSlice
+//
+//  Skip on nil
 func (it *ResultsCollection) AddAnyItemsSlice(
 	anyItems []interface{},
 ) *ResultsCollection {
@@ -474,7 +530,9 @@ func (it *ResultsCollection) AddAnyItemsSlice(
 	return it
 }
 
-// AddResultsCollection skip on nil items
+// AddResultsCollection
+//
+//  skip on nil items
 func (it *ResultsCollection) AddResultsCollection(
 	collection *ResultsCollection,
 ) *ResultsCollection {

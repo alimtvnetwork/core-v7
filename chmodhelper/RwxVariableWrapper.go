@@ -3,9 +3,9 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type RwxVariableWrapper struct {
@@ -15,13 +15,19 @@ type RwxVariableWrapper struct {
 }
 
 // NewRwxVariableWrapper
-// partialRwx can be any length in
-// between 0-10 (rest will be fixed by wildcard)
+//
+//  partialRwx can be any length in
+//  between 1-10 (rest will be fixed by wildcard)
+//
+//  Hyphened prefix MUST.
 //
 // rwxPartial:
-//  - "-rwx" will be "-rwx******"
+//  - "-rwx"    will be "-rwx******"
 //  - "-rwxr-x" will be "-rwxr-x***"
 //  - "-rwxr-x" will be "-rwxr-x***"
+//
+// Restrictions:
+//  - cannot have first char other than hyphen(-) or else things will not work
 func NewRwxVariableWrapper(partialRwx string) (*RwxVariableWrapper, error) {
 	fullRwxWithWildcard := chmodins.FixRwxFullStringWithWildcards(partialRwx)
 
@@ -159,9 +165,11 @@ func (varWrapper *RwxVariableWrapper) IsOtherPartialMatch(rwx string) bool {
 func (varWrapper *RwxVariableWrapper) ApplyRwxOnLocations(
 	isContinueOnError,
 	isSkipOnInvalid bool,
-	locations []string,
+	locations ...string,
 ) error {
-	existsFilteredPathFileInfoMap := GetExistsFilteredPathFileInfoMap(isSkipOnInvalid, locations)
+	existsFilteredPathFileInfoMap := GetExistsFilteredPathFileInfoMap(
+		isSkipOnInvalid,
+		locations...)
 	if !isContinueOnError && existsFilteredPathFileInfoMap.Error != nil {
 		return existsFilteredPathFileInfoMap.Error
 	}
@@ -218,7 +226,9 @@ func (varWrapper *RwxVariableWrapper) RwxMatchingStatus(
 	isSkipOnInvalid bool,
 	locations []string,
 ) *RwxMatchingStatus {
-	existsFilteredPathFileInfoMap := GetExistsFilteredPathFileInfoMap(isSkipOnInvalid, locations)
+	existsFilteredPathFileInfoMap := GetExistsFilteredPathFileInfoMap(
+		isSkipOnInvalid,
+		locations...)
 	if !isContinueOnError && existsFilteredPathFileInfoMap.Error != nil {
 		return InvalidRwxMatchingStatus(existsFilteredPathFileInfoMap.Error)
 	}
@@ -252,9 +262,11 @@ func (varWrapper *RwxVariableWrapper) RwxMatchingStatus(
 	}
 }
 
-// IsEqualPartialRwxPartial will make the partial to full rwx and then calls IsEqualPartialFullRwx
-// partialRwx can be any length in
-// between 0-10 (rest will be fixed by wildcard)
+// IsEqualPartialRwxPartial
+//
+//  will make the partial to full rwx and then calls IsEqualPartialFullRwx
+//  partialRwx can be any length in
+//  between 1-10 (rest will be fixed by wildcard)
 //
 // rwxPartial:
 //  - "-rwx" will be "-rwx******"

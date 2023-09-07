@@ -3,8 +3,8 @@ package corestr
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LeftMiddleRight struct {
@@ -36,50 +36,67 @@ func InvalidLeftMiddleRight(message string) *LeftMiddleRight {
 	}
 }
 
-func (receiver *LeftMiddleRight) MiddleTrim() string {
-	return strings.TrimSpace(receiver.Middle)
+func (it *LeftMiddleRight) MiddleTrim() string {
+	return strings.TrimSpace(it.Middle)
 }
 
-func (receiver *LeftMiddleRight) MiddleBytes() []byte {
-	return []byte(receiver.Middle)
+func (it *LeftMiddleRight) MiddleBytes() []byte {
+	return []byte(it.Middle)
 }
 
-func (receiver *LeftMiddleRight) IsMiddleEmpty() bool {
-	return receiver.Middle == ""
+func (it *LeftMiddleRight) IsMiddleEmpty() bool {
+	return it.Middle == ""
 }
 
-func (receiver *LeftMiddleRight) IsMiddleWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(receiver.Middle)
+func (it *LeftMiddleRight) IsMiddleWhitespace() bool {
+	return strutilinternal.IsEmptyOrWhitespace(it.Middle)
 }
 
-func (receiver *LeftMiddleRight) HasValidNonEmptyMiddle() bool {
-	return receiver.IsValid && !receiver.IsMiddleEmpty()
+func (it *LeftMiddleRight) HasValidNonEmptyMiddle() bool {
+	return it.IsValid && !it.IsMiddleEmpty()
 }
 
-func (receiver *LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
-	return receiver.IsValid && !receiver.IsMiddleWhitespace()
+func (it *LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
+	return it.IsValid && !it.IsMiddleWhitespace()
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
 //		!receiver.IsLeftEmpty() &&
 //		!receiver.IsMiddleEmpty() &&
 //		!receiver.IsRightEmpty()
-func (receiver *LeftMiddleRight) HasSafeNonEmpty() bool {
-	return receiver.IsValid &&
-		!receiver.IsLeftEmpty() &&
-		!receiver.IsMiddleEmpty() &&
-		!receiver.IsRightEmpty()
+func (it *LeftMiddleRight) HasSafeNonEmpty() bool {
+	return it.IsValid &&
+		!it.IsLeftEmpty() &&
+		!it.IsMiddleEmpty() &&
+		!it.IsRightEmpty()
 }
 
-func (receiver *LeftMiddleRight) IsAll(left, mid, right string) bool {
-	return receiver.Left == left &&
-		receiver.Right == right &&
-		receiver.Middle == mid
+func (it *LeftMiddleRight) IsAll(left, mid, right string) bool {
+	return it.Left == left &&
+		it.Right == right &&
+		it.Middle == mid
 }
 
-func (receiver *LeftMiddleRight) Clone() *LeftMiddleRight {
+func (it *LeftMiddleRight) Clone() *LeftMiddleRight {
 	return &LeftMiddleRight{
-		LeftRight: *receiver.LeftRight.Clone(),
-		Middle:    receiver.Middle,
+		LeftRight: *it.LeftRight.Clone(),
+		Middle:    it.Middle,
 	}
+}
+
+func (it *LeftMiddleRight) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.LeftRight.Clear()
+	it.Middle = ""
+}
+
+func (it *LeftMiddleRight) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
 }

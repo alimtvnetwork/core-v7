@@ -36,5 +36,5 @@ func (attrVariant AttrVariant) Value() byte {
 }
 
 func (attrVariant AttrVariant) ToAttribute() Attribute {
-	return NewAttributeUsingVariant(attrVariant)
+	return New.Attribute.UsingVariantMust(attrVariant)
 }

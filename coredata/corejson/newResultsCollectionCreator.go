@@ -1,7 +1,7 @@
 package corejson
 
 import (
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type newResultsCollectionCreator struct{}
@@ -211,4 +211,30 @@ func (it newResultsCollectionCreator) UsingResults(
 	return it.UsingResultsPlusCap(
 		constants.Capacity2,
 		results...)
+}
+
+func (it newResultsCollectionCreator) Serializers(
+	serializers ...bytesSerializer,
+) *ResultsCollection {
+	if len(serializers) == 0 {
+		return it.Empty()
+	}
+
+	collection := it.UsingCap(len(serializers))
+
+	return collection.AddSerializers(
+		serializers...)
+}
+
+func (it newResultsCollectionCreator) SerializerFunctions(
+	serializerFunctions ...func() ([]byte, error),
+) *ResultsCollection {
+	if len(serializerFunctions) == 0 {
+		return it.Empty()
+	}
+
+	collection := it.UsingCap(len(serializerFunctions))
+
+	return collection.AddSerializerFunctions(
+		serializerFunctions...)
 }

@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type BaseIdentifier struct {
@@ -24,7 +24,7 @@ func (identifier *BaseIdentifier) IsIdEmpty() bool {
 }
 
 func (identifier *BaseIdentifier) IsIdWhitespace() bool {
-	return utilstringinternal.IsNullOrEmptyOrWhitespace(&identifier.Id)
+	return strutilinternal.IsNullOrEmptyOrWhitespace(&identifier.Id)
 }
 
 func (identifier *BaseIdentifier) IsId(id string) bool {

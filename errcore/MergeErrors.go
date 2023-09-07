@@ -1,7 +1,7 @@
 package errcore
 
 import (
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func MergeErrors(errorItems ...error) error {

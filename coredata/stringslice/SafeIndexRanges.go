@@ -1,6 +1,6 @@
 package stringslice
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 // SafeIndexRanges get safe index range values
 // If index range is out of range or not found then empty string will be added to response

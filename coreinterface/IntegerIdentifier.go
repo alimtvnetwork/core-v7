@@ -1,5 +1,7 @@
 package coreinterface
 
+import "gitlab.com/auk-go/core/internal/internalinterface"
+
 type IntegerIdentifier interface {
-	IdInteger() int
+	internalinterface.IntegerIdGetter
 }

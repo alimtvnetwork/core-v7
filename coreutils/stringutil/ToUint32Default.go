@@ -4,7 +4,7 @@ import (
 	"math"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func ToUint32Default(
@@ -16,7 +16,10 @@ func ToUint32Default(
 		return constants.Zero
 	}
 
-	if toInt >= constants.Zero && toInt <= math.MaxUint32 {
+	// fix https://t.ly/6aoW,
+	// https://gitlab.com/auk-go/core/-/issues/81
+	// use MaxInt32 instead of uint32Max
+	if toInt >= 0 && toInt <= math.MaxInt32 {
 		return uint32(toInt)
 	}
 

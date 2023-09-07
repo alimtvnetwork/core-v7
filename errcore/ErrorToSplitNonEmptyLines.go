@@ -1,9 +1,9 @@
 package errcore
 
-import "gitlab.com/evatix-go/core/internal/utilstringinternal"
+import "gitlab.com/auk-go/core/internal/strutilinternal"
 
 func ErrorToSplitNonEmptyLines(err error) []string {
 	lines := ErrorToSplitLines(err)
 
-	return utilstringinternal.NonEmptySlice(lines)
+	return strutilinternal.NonEmptySlice(lines)
 }

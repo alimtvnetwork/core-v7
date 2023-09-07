@@ -3,15 +3,15 @@ package converters
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
-func AnyToValueString(any interface{}) string {
-	if any == nil {
+func AnyToValueString(anyItem interface{}) string {
+	if anyItem == nil {
 		return ""
 	}
 
 	return fmt.Sprintf(
 		constants.SprintValueFormat,
-		any)
+		anyItem)
 }

@@ -3,7 +3,7 @@ package stringutil
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func AnyToString(any interface{}) string {

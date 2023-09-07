@@ -6,9 +6,9 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type ResultsPtrCollection struct {
@@ -355,6 +355,57 @@ func (it *ResultsPtrCollection) Add(
 	it.Items = append(
 		it.Items,
 		result)
+
+	return it
+}
+
+func (it *ResultsPtrCollection) AddSerializer(
+	serializer bytesSerializer,
+) *ResultsPtrCollection {
+	if serializer == nil {
+		return it
+	}
+
+	return it.Add(NewResult.UsingSerializer(serializer))
+}
+
+func (it *ResultsPtrCollection) AddSerializers(
+	serializers ...bytesSerializer,
+) *ResultsPtrCollection {
+	if len(serializers) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializers {
+		it.AddSerializer(serializer)
+	}
+
+	return it
+}
+
+func (it *ResultsPtrCollection) AddSerializerFunc(
+	serializerFunc func() ([]byte, error),
+) *ResultsPtrCollection {
+	if serializerFunc == nil {
+		return it
+	}
+
+	result := NewResult.UsingSerializerFunc(
+		serializerFunc)
+
+	return it.AddSkipOnNil(result)
+}
+
+func (it *ResultsPtrCollection) AddSerializerFunctions(
+	serializerFunctions ...func() ([]byte, error),
+) *ResultsPtrCollection {
+	if len(serializerFunctions) == 0 {
+		return it
+	}
+
+	for _, serializer := range serializerFunctions {
+		it.AddSerializerFunc(serializer)
+	}
 
 	return it
 }

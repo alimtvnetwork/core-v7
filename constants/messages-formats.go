@@ -6,6 +6,7 @@ const (
 	SprintNumberFormat                           = "%d"
 	SprintFullPropertyNameValueFormat            = "%#v"
 	SprintPropertyNameValueFormat                = "%+v"
+	SprintPropertyValueWithTypeFormat            = "%+v (%T)"
 	SprintTypeFormat                             = "%T"
 	SprintTypeInParenthesisFormat                = "(type : %T)"
 	SprintNilValueTypeInParenthesisFormat        = "<nil> (type : %T)"
@@ -17,6 +18,7 @@ const (
 	KeyValuePariSimpleFormat                     = "{ Key (Type - %T): %v} - { Value (Type - %T) : %v  }"
 	SprintFormatNumberWithColon                  = "%d:%d"
 	SprintFormatAnyValueWithColon                = "%v:%v"
+	TitleValueFormat                             = "%s : %v"
 	CurlyTitleWrapFormat                         = "%v: {%v}"        // Title, Value
 	QuotationTitleWrapFormat                     = "%v: \"%v\""      // Title, Value
 	QuotationTitleMetaWrapFormat                 = "%v: \"%v\" (%v)" // Title, Value, Meta
@@ -35,8 +37,9 @@ const (
 	BracketWrapFormat                            = "[%v]"
 	BracketQuotationWrapFormat                   = "[\"%v\"]"
 	CurlyWrapFormat                              = "{%v}"
-	CurlyQuotationWrapFormat                     = "{\"%v\"}"
+	SquareWrapFormat                             = "[%v]"
 	ParenthesisWrapFormat                        = "(%v)"
+	CurlyQuotationWrapFormat                     = "{\"%v\"}"
 	ParenthesisQuotationWrap                     = "(\"%v\")"
 	ReferenceWrapFormat                          = "Ref (s) { %v }"
 	MessageReferenceWrapFormat                   = "%s Ref (s) { %v }"
@@ -48,6 +51,9 @@ const (
 	StringWithDoubleQuoteFormat                  = "\"%s\""
 	StringWithSingleQuoteFormat                  = "'%s'"
 	MessageWrapMessageFormat                     = "%s (%s)"
+	FromToFormat                                 = "{From : %q, To: %q}"            // From, To name
+	SourceDestinationFormat                      = "{Source : %q, Destination: %q}" // source, destination
+	RenameFormat                                 = "{Existing : %q, New: %q}"       // existing, new
 	ValueWrapValueFormat                         = "%v (%v)"
 	FilePathEmpty                                = "File path was empty(\"\")."
 	EnumOnlySupportedFormat                      = "enum: %T, " +

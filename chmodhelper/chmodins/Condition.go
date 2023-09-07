@@ -31,22 +31,36 @@ func DefaultAllFalseExceptRecurse() *Condition {
 	}
 }
 
-func (receiver *Condition) Clone() *Condition {
-	if receiver == nil {
+// IsExitOnInvalid
+//
+//  returns true Condition is null or invert of IsSkipOnInvalid
+func (it *Condition) IsExitOnInvalid() bool {
+	return it == nil || !it.IsSkipOnInvalid
+}
+
+// IsCollectErrorOnInvalid
+//
+//  returns true Condition is null or invert of IsSkipOnInvalid
+func (it *Condition) IsCollectErrorOnInvalid() bool {
+	return it == nil || !it.IsSkipOnInvalid
+}
+
+func (it *Condition) Clone() *Condition {
+	if it == nil {
 		return nil
 	}
 
 	return &Condition{
-		IsSkipOnInvalid:   receiver.IsSkipOnInvalid,
-		IsContinueOnError: receiver.IsContinueOnError,
-		IsRecursive:       receiver.IsRecursive,
+		IsSkipOnInvalid:   it.IsSkipOnInvalid,
+		IsContinueOnError: it.IsContinueOnError,
+		IsRecursive:       it.IsRecursive,
 	}
 }
 
-func (receiver Condition) CloneNonPtr() Condition {
+func (it Condition) CloneNonPtr() Condition {
 	return Condition{
-		IsSkipOnInvalid:   receiver.IsSkipOnInvalid,
-		IsContinueOnError: receiver.IsContinueOnError,
-		IsRecursive:       receiver.IsRecursive,
+		IsSkipOnInvalid:   it.IsSkipOnInvalid,
+		IsContinueOnError: it.IsContinueOnError,
+		IsRecursive:       it.IsRecursive,
 	}
 }

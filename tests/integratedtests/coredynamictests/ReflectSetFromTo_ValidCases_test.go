@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/tests/testwrappers/coredynamictestwrappers"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coretests"
+	"gitlab.com/auk-go/core/tests/testwrappers/coredynamictestwrappers"
 )
 
 // Test_ReflectSetFromTo_ValidCases

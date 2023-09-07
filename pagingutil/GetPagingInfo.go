@@ -1,6 +1,6 @@
 package pagingutil
 
-import "gitlab.com/evatix-go/core/errcore"
+import "gitlab.com/auk-go/core/errcore"
 
 func GetPagingInfo(request PagingRequest) PagingInfo {
 	length := request.Length

@@ -3,14 +3,14 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/fsinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/fsinternal"
 )
 
 func GetExistsFilteredPathFileInfoMap(
 	isSkipOnInvalid bool,
-	locations []string,
+	locations ...string,
 ) *FilteredPathFileInfoMap {
 	if len(locations) == 0 {
 		return InvalidFilteredPathFileInfoMap()

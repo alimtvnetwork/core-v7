@@ -3,8 +3,8 @@ package corestr
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/converters"
 )
 
 type newCollectionPtrCreator struct{}
@@ -41,7 +41,7 @@ func (it *newCollectionPtrCreator) Strings(
 	stringItems []string,
 ) *CollectionPtr {
 	return &CollectionPtr{
-		items: *converters.StringsToPointerStrings(&stringItems),
+		items: *converters.StringsTo.PointerStrings(&stringItems),
 	}
 }
 
@@ -61,7 +61,7 @@ func (it *newCollectionPtrCreator) StringsPtr(
 	}
 
 	collection := &CollectionPtr{
-		items: *converters.StringsToPointerStrings(stringItems),
+		items: *converters.StringsTo.PointerStrings(stringItems),
 	}
 
 	return collection.AddStringsPtr(stringItems)
@@ -71,7 +71,7 @@ func (it *newCollectionPtrCreator) LineUsingSep(sep, line string) *CollectionPtr
 	lines := strings.Split(line, sep)
 
 	return &CollectionPtr{
-		items: *converters.StringsToPointerStrings(&lines),
+		items: *converters.StringsTo.PointerStrings(&lines),
 	}
 }
 
@@ -81,7 +81,7 @@ func (it *newCollectionPtrCreator) LineDefault(compiledLine string) *CollectionP
 		constants.DefaultLine)
 
 	return &CollectionPtr{
-		items: *converters.StringsToPointerStrings(&lines),
+		items: *converters.StringsTo.PointerStrings(&lines),
 	}
 }
 

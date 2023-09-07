@@ -1,9 +1,9 @@
 package chmodhelpertestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/coretests"
+	"gitlab.com/auk-go/core/chmodhelper"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/coretests"
 )
 
 type RwxInstructionTestWrapper struct {

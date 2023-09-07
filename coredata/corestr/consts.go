@@ -1,6 +1,6 @@
 package corestr
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 const (
 	charCollectionDefaultCapacity               = constants.ArbitraryCapacity10
@@ -31,4 +31,5 @@ const (
 		"----------------\n" +
 		"Is Equals: %+v\n" +
 		"Length: %d | %d\n"
+	expectedLeftRightLength = constants.Two
 )

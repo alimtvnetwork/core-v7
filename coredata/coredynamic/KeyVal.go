@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"reflect"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type KeyVal struct {
@@ -191,7 +191,17 @@ func (it *KeyVal) ValueString() string {
 	)
 }
 
-func (it *KeyVal) ReflectSet(toPointer interface{}) error {
+func (it *KeyVal) KeyReflectSet(toPointer interface{}) error {
+	if it == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("KeyVal is nil or null")
+	}
+
+	return ReflectSetFromTo(it.Key, toPointer)
+}
+
+func (it *KeyVal) ValueReflectSet(toPointer interface{}) error {
 	if it == nil {
 		return errcore.
 			CannotBeNilOrEmptyType.
@@ -201,8 +211,18 @@ func (it *KeyVal) ReflectSet(toPointer interface{}) error {
 	return ReflectSetFromTo(it.Value, toPointer)
 }
 
-func (it *KeyVal) ReflectSetMust(toPointer interface{}) {
-	err := it.ReflectSet(toPointer)
+func (it *KeyVal) ReflectSetTo(toPointer interface{}) error {
+	if it == nil {
+		return errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("KeyVal is nil or null")
+	}
+
+	return ReflectSetFromTo(it.Value, toPointer)
+}
+
+func (it *KeyVal) ReflectSetToMust(toPointer interface{}) {
+	err := it.ReflectSetTo(toPointer)
 	errcore.MustBeEmpty(err)
 }
 

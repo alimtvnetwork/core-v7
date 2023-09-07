@@ -4,17 +4,17 @@ import (
 	"errors"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type Request byte
 
 // https://www.restapitutorial.com/lessons/httpmethods.html
 const (
-	Uninitialized Request = iota
+	Invalid Request = iota
 	Create
 	Read
 	Update
@@ -66,14 +66,211 @@ const (
 	InheritOnly
 	InheritPlusOverride
 	DynamicAction
+	Overwrite
+	Override
+	Enforce
 )
+
+func (it Request) IsStopEnableStart() bool {
+	return false
+}
+
+func (it Request) IsStopDisable() bool {
+	return false
+}
+
+func (it Request) IsUndefined() bool {
+	return it == Invalid
+}
+
+func (it Request) AllNameValues() []string {
+	return BasicEnumImpl.AllNameValues()
+}
+
+func (it Request) OnlySupportedErr(names ...string) error {
+	return BasicEnumImpl.OnlySupportedErr(names...)
+}
+
+func (it Request) OnlySupportedMsgErr(message string, names ...string) error {
+	return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Request) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Request) IntegerEnumRanges() []int {
+	return BasicEnumImpl.IntegerEnumRanges()
+}
+
+func (it Request) MinMaxAny() (min, max interface{}) {
+	return BasicEnumImpl.MinMaxAny()
+}
+
+func (it Request) MinValueString() string {
+	return BasicEnumImpl.MinValueString()
+}
+
+func (it Request) MaxValueString() string {
+	return BasicEnumImpl.MaxValueString()
+}
+
+func (it Request) MaxInt() int {
+	return BasicEnumImpl.MaxInt()
+}
+
+func (it Request) MinInt() int {
+	return BasicEnumImpl.MinInt()
+}
+
+func (it Request) RangesDynamicMap() map[string]interface{} {
+	return BasicEnumImpl.RangesDynamicMap()
+}
+
+func (it Request) IsNone() bool {
+	return it == Invalid
+}
+
+func (it Request) IsCreateLogically() bool {
+	return createMap[it]
+}
+
+func (it Request) IsCreateOrUpdateLogically() bool {
+	return createUpdateMap[it]
+}
+
+func (it Request) IsDropLogically() bool {
+	return dropMap[it]
+}
+
+func (it Request) IsCrudOnlyLogically() bool {
+	return crudMap[it]
+}
+
+func (it Request) IsNotCrudOnlyLogically() bool {
+	return !crudMap[it]
+}
+
+func (it Request) IsReadOrEditLogically() bool {
+	return readOrEditMap[it]
+}
+
+func (it Request) IsReadOrUpdateLogically() bool {
+	return readOrEditMap[it]
+}
+
+func (it Request) IsEditOrUpdateLogically() bool {
+	return editOrUpdateMap[it]
+}
+
+func (it Request) IsOnExistCheckLogically() bool {
+	return isExistOrSkipOnExistMap[it]
+}
+
+func (it Request) IsOnExistOrSkipOnNonExistLogically() bool {
+	return isExistOrSkipOnExistMap[it]
+}
+
+func (it Request) IsUpdateOrRemoveLogically() bool {
+	return updateOrRemoveMap[it]
+}
+
+func (it Request) IsOverwrite() bool {
+	return it == Overwrite
+}
+
+func (it Request) IsOverride() bool {
+	return it == Override
+}
+
+func (it Request) IsEnforce() bool {
+	return it == Enforce
+}
+
+func (it Request) IsOverrideOrOverwriteOrEnforce() bool {
+	return overrideLogicallyMap[it]
+}
+
+func (it Request) Format(format string) (compiled string) {
+	return BasicEnumImpl.Format(format, it)
+}
+
+func (it Request) IsEnumEqual(enum enuminf.BasicEnumer) bool {
+	return it.Value() == enum.ValueByte()
+}
+
+func (it Request) IsByteValueEqual(value byte) bool {
+	return byte(it) == value
+}
+
+func (it *Request) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
+	for _, enum := range enums {
+		if it.IsEnumEqual(enum) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Request) IsNameEqual(name string) bool {
+	return it.Name() == name
+}
+
+func (it Request) IsAnyNamesOf(names ...string) bool {
+	for _, name := range names {
+		if it.IsNameEqual(name) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Request) IsValueEqual(value byte) bool {
+	return it.ValueByte() == value
+}
+
+func (it Request) IsAnyValuesEqual(anyByteValues ...byte) bool {
+	for _, currentVal := range anyByteValues {
+		if it.IsValueEqual(currentVal) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Request) ValueInt8() int8 {
+	return int8(it)
+}
+
+func (it Request) ValueInt16() int16 {
+	return int16(it)
+}
+
+func (it Request) ValueInt32() int32 {
+	return int32(it)
+}
+
+func (it Request) ValueString() string {
+	return it.ToNumberString()
+}
+
+func (it Request) IsValid() bool {
+	return it != Invalid
+}
+
+func (it Request) IsInvalid() bool {
+	return it == Invalid
+}
 
 func (it Request) NameValue() string {
 	return BasicEnumImpl.NameWithValue(it)
 }
 
 func (it Request) IsUninitialized() bool {
-	return it == Uninitialized
+	return it == Invalid
 }
 
 func (it Request) RangeNamesCsv() string {
@@ -284,7 +481,9 @@ func (it Request) IsInheritPlusOverride() bool {
 	return it == InheritPlusOverride
 }
 
-// IsRestartOrReload  receiver. IsRestart() || receiver. IsReload()
+// IsRestartOrReload
+//
+//  Request. IsRestart() || Request. IsReload()
 func (it Request) IsRestartOrReload() bool {
 	return it.IsRestart() || it.IsReload()
 }
@@ -308,7 +507,14 @@ func (it Request) IsAnyApplyOnExist() bool {
 		it.IsDropOnExist()
 }
 
-// IsCrud returns true if Read, Update, Create, Delete, IsCreateOrUpdate
+// IsCrud
+//
+//  returns true if
+//      Read,
+//      Update,
+//      Create,
+//      Delete,
+//      IsCreateOrUpdate
 func (it Request) IsCrud() bool {
 	return it.IsRead() ||
 		it.IsCreate() ||
@@ -378,17 +584,33 @@ func (it Request) IsAnyCreate() bool {
 		it.IsDropCreate()
 }
 
-// IsHttp
+// IsAnyHttp
 //
 // returns true if
 // IsGetHttp, IsPostHttp, IsPutHttp,
 // IsDeleteHttp, IsPatchHttp
-func (it Request) IsHttp() bool {
-	return it.IsGetHttp() ||
-		it.IsPostHttp() ||
-		it.IsPutHttp() ||
-		it.IsDeleteHttp() ||
-		it.IsPatchHttp()
+func (it Request) IsAnyHttp() bool {
+	return httpRequests[it]
+}
+
+func (it Request) IsAnyAction() bool {
+	return actionRequests[it]
+}
+
+func (it Request) IsNotAnyAction() bool {
+	return !it.IsAnyAction()
+}
+
+func (it Request) IsAnyHttpMethod(methodNames ...string) bool {
+	return it.IsAnyHttp() && it.IsAnyNamesOf(methodNames...)
+}
+
+func (it Request) IsNotHttpMethod() bool {
+	return !it.IsAnyHttp()
+}
+
+func (it Request) IsNotOverrideOrOverwriteOrEnforce() bool {
+	return !it.IsOverrideOrOverwriteOrEnforce()
 }
 
 func (it Request) Name() string {
@@ -480,7 +702,6 @@ func (it Request) GetStatusAnyOf(reqs ...Request) *ResultStatus {
 			IsSuccess:  true,
 			IndexMatch: constants.InvalidNotFoundCase,
 			Ranges:     reqs,
-			Error:      nil,
 		}
 	}
 
@@ -490,15 +711,14 @@ func (it Request) GetStatusAnyOf(reqs ...Request) *ResultStatus {
 				IsSuccess:  true,
 				IndexMatch: i,
 				Ranges:     reqs,
-				Error:      nil,
 			}
 		}
 	}
 
 	errMsg := errcore.RangeNotMeet(
 		"Failed GetStatusAnyOf",
-		start(&reqs),
-		end(&reqs),
+		start(reqs),
+		end(reqs),
 		reqs)
 
 	return &ResultStatus{
@@ -585,24 +805,44 @@ func (it Request) ToPtr() *Request {
 
 func (it *Request) ToSimple() Request {
 	if it == nil {
-		return Uninitialized
+		return Invalid
 	}
 
 	return *it
 }
 
 func (it Request) MarshalJSON() ([]byte, error) {
-	return BasicEnumImpl.ToEnumJsonBytes(it.Value()), nil
+	return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
-func (it *Request) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+func (it Request) EnumType() enuminf.EnumTyper {
+	return BasicEnumImpl.EnumType()
+}
+
+func (it Request) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
+	return &it
 }
 
 func (it *Request) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
 }
 
-func (it *Request) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Request) AsBasicByteEnumContractsBinder() enuminf.BasicByteEnumContractsBinder {
+	return &it
+}
+
+func (it Request) AsCrudTyper() enuminf.CrudTyper {
+	return &it
+}
+
+func (it Request) AsOverwriteOrRideOrEnforcer() enuminf.OverwriteOrRideOrEnforcer {
+	return &it
+}
+
+func (it Request) AsHttpMethodTyper() enuminf.HttpMethodTyper {
+	return &it
+}
+
+func (it Request) AsActionTyper() enuminf.ActionTyper {
+	return &it
 }

@@ -3,7 +3,7 @@ package stringslice
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func NonEmptyJoin(slice []string, joiner string) string {

@@ -43,4 +43,10 @@ const (
 	X755                                         os.FileMode = 0755
 	X766                                         os.FileMode = 0766
 	X777                                         os.FileMode = 0777
+	FileDefault                                  os.FileMode = 0644 // cannot execute by everyone OwnerCanReadWriteGroupOtherCanReadOnly
+	DirDefault                                   os.FileMode = 0755 // can execute by everyone OwnerCanDoAllExecuteGroupOtherCanReadExecute
+	OwnerFullAccessOnly                          os.FileMode = 0700
+	OwnerGroupFullAccessOnly                     os.FileMode = 0770
+	CacheFullAccess                              os.FileMode = 0777
+	FullAccess                                   os.FileMode = 0777
 )

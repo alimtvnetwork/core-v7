@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/keymk"
+	"gitlab.com/auk-go/core/keymk"
 )
 
 func keyLegendsTest() {
@@ -20,21 +20,21 @@ func keyLegendsTest() {
 	// fmt.Println(k.Group("g"))
 	// fmt.Println(k.GroupString("g"))
 
-	// fmt.Println(k.Item("itemId1"))
+	// fmt.Println(k.ItemWithoutUser("itemId1"))
 	// fmt.Println(k.ItemIntRange(5, 10))
 	fmt.Println(k.GroupIntRange(5, 10))
 	// fmt.Println(k.GroupItem("mygroup", "item"))
 	//
 	// fmt.Println(k.GroupItem("g", "id"))
-	// fmt.Println(k.Item("id"))
-	// fmt.Println(k.Item("idx"))
+	// fmt.Println(k.ItemWithoutUser("id"))
+	// fmt.Println(k.ItemWithoutUser("idx"))
 	// fmt.Println(k.GroupItemIntRange("newg", 5, 10))
 	// fmt.Println(k.GroupItemIntRange("newG#s", 5, 10))
 	//
 	// fmt.Println(k.GroupIntRange(5, 10))
 	// fmt.Println(k.GroupName())
-	// fmt.Println(k.UptoGroup(""))
+	// fmt.Println(k.UserStringWithoutState(""))
 	// fmt.Println(k.ItemIntRange( 10, 20))
-	fmt.Println(k.UptoGroup("mynewuser1"))
-	fmt.Println(k.UptoState("my-user"))
+	fmt.Println(k.UserStringWithoutState("mynewuser1"))
+	fmt.Println(k.UpToState("my-user"))
 }

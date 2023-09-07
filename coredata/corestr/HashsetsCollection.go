@@ -5,8 +5,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type HashsetsCollection struct {
@@ -341,6 +341,10 @@ func (it *HashsetsCollection) Join(
 		separator)
 }
 
+func (it *HashsetsCollection) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
+}
+
 func (it *HashsetsCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
 }
@@ -365,4 +369,8 @@ func (it *HashsetsCollection) AsJsonParseSelfInjector() corejson.JsonParseSelfIn
 
 func (it *HashsetsCollection) AsJsonMarshaller() corejson.JsonMarshaller {
 	return it
+}
+
+func (it HashsetsCollection) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

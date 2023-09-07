@@ -1,5 +1,7 @@
 package coreinterface
 
+import "gitlab.com/auk-go/core/internal/internalinterface"
+
 type DynamicLinq interface {
 	CountGetter
 	LengthGetter
@@ -11,4 +13,8 @@ type DynamicLinq interface {
 	TakeDynamic(takeDynamicItems int) interface{}
 	// LimitDynamic alias for TakeDynamic
 	LimitDynamic(limit int) interface{}
+}
+
+type DyanmicLinqer interface {
+	internalinterface.DyanmicLinqer
 }

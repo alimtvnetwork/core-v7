@@ -1,6 +1,6 @@
 package corevalidatortestwrappers
 
-import "gitlab.com/evatix-go/core/corevalidator"
+import "gitlab.com/auk-go/core/corevalidator"
 
 type SegmentValidatorWrapper struct {
 	Header                string

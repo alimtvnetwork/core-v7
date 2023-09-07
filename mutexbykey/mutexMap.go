@@ -3,7 +3,7 @@ package mutexbykey
 import (
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type mutexMap struct {
@@ -11,6 +11,7 @@ type mutexMap struct {
 }
 
 var globalMutex = sync.Mutex{}
+
 var items = make(
 	map[string]*sync.Mutex,
 	constants.ArbitraryCapacity10)

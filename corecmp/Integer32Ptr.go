@@ -1,6 +1,6 @@
 package corecmp
 
-import "gitlab.com/evatix-go/core/corecomparator"
+import "gitlab.com/auk-go/core/corecomparator"
 
 func Integer32Ptr(left, right *int32) corecomparator.Compare {
 	if left == nil && right == nil {

@@ -7,7 +7,7 @@ package regexnew
 // On condition mismatch returns error
 // or else nil
 func MatchError(regex, comparing string) error {
-	regEx, err := New(regex)
+	regEx, err := Create(regex)
 
 	if regEx != nil && regEx.MatchString(comparing) {
 		return nil

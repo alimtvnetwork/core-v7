@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type FilteredPathFileInfoMap struct {
@@ -84,7 +84,7 @@ func (it *FilteredPathFileInfoMap) ValidLocationFileInfoRwxWrappers() []Location
 		slice[index] = LocationFileInfoRwxWrapper{
 			Location:   location,
 			FileInfo:   fileInfo,
-			RwxWrapper: NewUsingFileModePtr(fileInfo.Mode()),
+			RwxWrapper: New.RwxWrapper.UsingFileModePtr(fileInfo.Mode()),
 		}
 
 		index++

@@ -1,23 +1,23 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/errcore"
+import "gitlab.com/auk-go/core/errcore"
 
 func GetExistingChmodRwxWrappers(
 	isContinueOnError bool,
-	filePaths ...string,
-) (filePathToRwxWrapper *map[string]*RwxWrapper, err error) {
+	locations ...string,
+) (filePathToRwxWrapper map[string]*RwxWrapper, err error) {
 	results := make(
 		map[string]*RwxWrapper,
-		len(filePaths))
+		len(locations))
 
-	if len(filePaths) == 0 {
-		return &results, nil
+	if len(locations) == 0 {
+		return results, nil
 	}
 
 	if isContinueOnError {
 		var sliceErr []string
 
-		for _, location := range filePaths {
+		for _, location := range locations {
 			wrapperPtr, err2 := GetExistingChmodRwxWrapperPtr(
 				location)
 
@@ -30,20 +30,20 @@ func GetExistingChmodRwxWrappers(
 			}
 		}
 
-		return &results, errcore.SliceToError(sliceErr)
+		return results, errcore.SliceToError(sliceErr)
 	}
 
 	// immediate exit
-	for _, location := range filePaths {
+	for _, location := range locations {
 		wrapperPtr, err2 := GetExistingChmodRwxWrapperPtr(
 			location)
 
 		if err2 != nil {
-			return &results, err2
+			return results, err2
 		} else {
 			results[location] = wrapperPtr
 		}
 	}
 
-	return &results, nil
+	return results, nil
 }

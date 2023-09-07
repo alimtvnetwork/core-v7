@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/codestack"
+	"gitlab.com/auk-go/core/codestack"
 )
 
 func stackTrackerTest2() {

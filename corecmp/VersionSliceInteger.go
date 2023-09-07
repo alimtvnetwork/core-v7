@@ -1,6 +1,6 @@
 package corecmp
 
-import "gitlab.com/evatix-go/core/corecomparator"
+import "gitlab.com/auk-go/core/corecomparator"
 
 func VersionSliceInteger(leftVersions, rightVersions []int) corecomparator.Compare {
 	if leftVersions == nil && rightVersions == nil {

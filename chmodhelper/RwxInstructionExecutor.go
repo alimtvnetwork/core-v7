@@ -4,10 +4,10 @@ import (
 	"errors"
 	"os"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/messages"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/messages"
 )
 
 type RwxInstructionExecutor struct {
@@ -57,7 +57,7 @@ func (it *RwxInstructionExecutor) CompiledWrapper(mode os.FileMode) (*RwxWrapper
 	}
 
 	if it.IsVarWrapper() {
-		fixedWrapper := NewUsingFileMode(mode)
+		fixedWrapper := New.RwxWrapper.UsingFileMode(mode)
 
 		return it.
 			varWrapper.
@@ -89,21 +89,30 @@ func (it *RwxInstructionExecutor) CompiledRwxWrapperUsingFixedRwxWrapper(
 			wrapper.String())
 }
 
+// ApplyOnPath
+//
+// Warning:
+//  swallows error if chmodins.RwxInstruction. IsSkipOnInvalid or
+//  chmodins.RwxInstruction.IsExitOnInvalid() comes as negative
 func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
-	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(location)
+	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(
+		location)
 
-	if err != nil {
+	if it.rwxInstruction.IsExitOnInvalid() && err != nil {
 		return errcore.PathErrorType.Error(messages.FailedToGetFileModeRwx, location)
+	} else if it.rwxInstruction.IsSkipOnInvalid && err != nil {
+		// nothing apply got an error
+		return nil
 	}
 
-	compiledWrapper, err2 := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
+	compiledWrapper, compiledErr := it.CompiledRwxWrapperUsingFixedRwxWrapper(existingRwxFileModWrapper)
 
-	if err2 != nil {
+	if compiledErr != nil {
 		funcWithLoc := "ApplyOnPath" + constants.HyphenAngelRight + location
 
 		return errcore.
 			MeaningfulError(
-				errcore.PathErrorType, funcWithLoc, err2)
+				errcore.PathErrorType, funcWithLoc, compiledErr)
 	}
 
 	if it.rwxInstruction.IsRecursive {
@@ -161,7 +170,9 @@ func (it *RwxInstructionExecutor) getVerifyRwxInternalError(
 			locations)
 	}
 
-	resultsMap := GetExistsFilteredPathFileInfoMap(it.rwxInstruction.IsSkipOnInvalid, locations)
+	resultsMap := GetExistsFilteredPathFileInfoMap(
+		it.rwxInstruction.IsSkipOnInvalid,
+		locations...)
 
 	return resultsMap, nil
 }
@@ -171,7 +182,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsContinueOnError(
 ) error {
 	var sliceErr []string
 
-	if resultsMap.Error != nil && !it.rwxInstruction.IsSkipOnInvalid {
+	if resultsMap.Error != nil && it.rwxInstruction.IsCollectErrorOnInvalid() {
 		sliceErr = append(
 			sliceErr,
 			resultsMap.Error.Error())
@@ -220,7 +231,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
 				"failed to verify rwxInstruction for - "+filePath)
 		}
 
-		if fixedRwxWrapper != nil && !fixedRwxWrapper.IsEqualFileMode(fileMode) {
+		if fixedRwxWrapper.IsDefined() && fixedRwxWrapper.IsNotEqualFileMode(fileMode) {
 			expectingMsg := errcore.ExpectingSimpleNoType(
 				"Path:"+filePath,
 				fixedRwxWrapper.ToFullRwxValueStringExceptHyphen(),

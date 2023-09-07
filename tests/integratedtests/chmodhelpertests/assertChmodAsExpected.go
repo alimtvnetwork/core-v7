@@ -3,7 +3,7 @@ package chmodhelpertests
 import (
 	"testing"
 
-	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
+	"gitlab.com/auk-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
 func assertTestCaseChmodAsExpected(

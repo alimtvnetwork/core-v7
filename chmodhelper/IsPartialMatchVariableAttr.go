@@ -1,7 +1,15 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
+// IsPartialMatchVariableAttr
+//
+//  @givenVarAttr can have wildcards "*"
+//   On wildcard present comparison will ignore for that segment.
+//
+//  Example (will consider this a match):
+//   - givenVarAttr: (rwx : "r*x"),
+//   - rwx         : (rwx : "r-x")
 func IsPartialMatchVariableAttr(
 	givenVarAttr *VarAttribute,
 	rwx string,

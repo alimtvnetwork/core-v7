@@ -1,6 +1,6 @@
 package keymk
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 var (
 	PipeJoinerOption = &Option{
@@ -25,6 +25,14 @@ var (
 		IsUseBrackets:    true,
 		StartBracket:     constants.Pipe + constants.SquareStart,
 		EndBracket:       constants.SquareEnd + constants.Pipe,
+	}
+
+	CurlyBracePathJoinerOption = &Option{
+		Joiner:           constants.PathSeparator,
+		IsSkipEmptyEntry: true,
+		IsUseBrackets:    true,
+		StartBracket:     constants.CurlyStart,
+		EndBracket:       constants.CurlyEnd,
 	}
 
 	CurlyBraceJoinerOption = &Option{
@@ -100,4 +108,5 @@ var (
 
 	NewKey           = &newKeyCreator{}
 	NewKeyWithLegend = &newKeyWithLegendCreator{}
+	FixedLegend      = fixedLegend{}
 )

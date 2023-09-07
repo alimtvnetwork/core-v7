@@ -3,57 +3,35 @@ package enumimpl
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/converters"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type BasicString struct {
-	*numberEnumBase
+	numberEnumBase
+	nameWithIndexMap                         map[string]int
 	jsonDoubleQuoteNameToValueHashMap        map[string]bool   // contains names double quotes to value
 	valueToJsonDoubleQuoteStringBytesHashmap map[string][]byte // contains value to string bytes with double quotes
 	minVal, maxVal                           string
 }
 
-func NewBasicString(
-	typeName string,
-	stringRanges []string,
-	min, max string,
-) *BasicString {
-	enumBase := newNumberEnumBase(
-		typeName,
-		stringRanges,
-		stringRanges,
-		min,
-		max)
-
-	jsonDoubleQuoteNameToValueHashMap := make(
-		map[string]string,
-		len(stringRanges))
-	valueToJsonDoubleQuoteStringBytesHashmap := make(
-		map[string][]byte,
-		len(stringRanges))
-
-	for i, actualVal := range stringRanges {
-		key := stringRanges[i]
-		jsonName := simplewrap.WithDoubleQuote(key)
-		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
-		valueToJsonDoubleQuoteStringBytesHashmap[key] = []byte(jsonName)
+func (it BasicString) IsAnyNamesOf(
+	valueName string,
+	names ...string,
+) bool {
+	for _, name := range names {
+		if name == valueName {
+			return true
+		}
 	}
 
-	return &BasicString{
-		numberEnumBase: enumBase,
-		minVal:         min,
-		maxVal:         max,
-		jsonDoubleQuoteNameToValueHashMap: *converters.
-			StringsToMap(&stringRanges),
-		valueToJsonDoubleQuoteStringBytesHashmap: valueToJsonDoubleQuoteStringBytesHashmap,
-	}
+	return false
 }
 
-func (it *BasicString) IsAnyOf(value string, checkingItems ...string) bool {
+func (it BasicString) IsAnyOf(value string, checkingItems ...string) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -67,27 +45,84 @@ func (it *BasicString) IsAnyOf(value string, checkingItems ...string) bool {
 	return false
 }
 
-func (it *BasicString) Max() string {
+func (it BasicString) Max() string {
 	return it.maxVal
 }
 
-func (it *BasicString) Min() string {
+func (it BasicString) Min() string {
 	return it.minVal
 }
 
-func (it *BasicString) Ranges() []string {
+func (it BasicString) Ranges() []string {
 	return it.actualValueRanges.([]string)
 }
 
-func (it *BasicString) Hashset() map[string]bool {
+func (it BasicString) HasAnyItem() bool {
+	return it.Length() > 0
+}
+
+func (it BasicString) MaxIndex() int {
+	return it.Length() - 1
+}
+
+func (it BasicString) GetNameByIndex(index int) string {
+	lastIndex := it.Length() - 1
+
+	if lastIndex >= index && index > 0 {
+		return it.StringRanges()[index]
+	}
+
+	return constants.EmptyString
+}
+
+// GetIndexByName
+//
+//  constants.InvalidValue refers to the invalid index
+func (it BasicString) GetIndexByName(name string) int {
+	if name == "" {
+		return constants.InvalidValue
+	}
+
+	lastIndex := it.Length() - 1
+
+	if lastIndex < 0 {
+		return constants.InvalidValue
+	}
+
+	index, has := it.nameWithIndexMap[name]
+
+	if has {
+		return index
+	}
+
+	return constants.InvalidValue
+}
+
+func (it BasicString) NameWithIndexMap() map[string]int {
+	return it.nameWithIndexMap
+}
+
+func (it BasicString) RangesIntegers() []int {
+	length := it.Length()
+
+	slice := make([]int, length)
+
+	for i := 0; i < length; i++ {
+		slice[i] = i
+	}
+
+	return slice
+}
+
+func (it BasicString) Hashset() map[string]bool {
 	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it *BasicString) HashsetPtr() *map[string]bool {
+func (it BasicString) HashsetPtr() *map[string]bool {
 	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it *BasicString) GetValueByName(name string) (string, error) {
+func (it BasicString) GetValueByName(name string) (string, error) {
 	_, has := it.jsonDoubleQuoteNameToValueHashMap[name]
 
 	if has {
@@ -111,11 +146,28 @@ func (it *BasicString) GetValueByName(name string) (string, error) {
 		it.RangeNamesCsv())
 }
 
-func (it *BasicString) IsValidRange(value string) bool {
+func (it BasicString) IsValidRange(value string) bool {
 	return it.jsonDoubleQuoteNameToValueHashMap[value]
 }
 
-func (it *BasicString) AppendPrependJoinValue(
+func (it BasicString) OnlySupportedErr(
+	supportedNames ...string,
+) error {
+	return OnlySupportedErr(
+		it.StringRanges(),
+		supportedNames...)
+}
+
+func (it BasicString) OnlySupportedMsgErr(
+	errMessage string,
+	supportedNames ...string,
+) error {
+	return errcore.ConcatMessageWithErr(
+		errMessage,
+		it.OnlySupportedErr(supportedNames...))
+}
+
+func (it BasicString) AppendPrependJoinValue(
 	joiner string,
 	appendVal, prependVal string,
 ) string {
@@ -124,7 +176,7 @@ func (it *BasicString) AppendPrependJoinValue(
 		it.ToEnumString(appendVal)
 }
 
-func (it *BasicString) AppendPrependJoinNamer(
+func (it BasicString) AppendPrependJoinNamer(
 	joiner string,
 	appendVal, prependVal coreinterface.ToNamer,
 ) string {
@@ -134,14 +186,20 @@ func (it *BasicString) AppendPrependJoinNamer(
 }
 
 // ToEnumJsonBytes used for MarshalJSON from map
-func (it *BasicString) ToEnumJsonBytes(value string) []byte {
-	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+func (it BasicString) ToEnumJsonBytes(value string) ([]byte, error) {
+	jsonBytes, has := it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+
+	if has {
+		return jsonBytes, nil
+	}
+
+	return []byte{}, it.notFoundJsonBytesError(value)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (it *BasicString) UnmarshallToValue(
+func (it BasicString) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
 ) (string, error) {
@@ -160,4 +218,8 @@ func (it *BasicString) UnmarshallToValue(
 	}
 
 	return it.GetValueByName(str)
+}
+
+func (it BasicString) EnumType() enumtype.Variant {
+	return enumtype.String
 }

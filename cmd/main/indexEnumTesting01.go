@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/enums/versionindexes"
+	"gitlab.com/auk-go/core/enums/versionindexes"
 )
 
 func indexEnumTesting01() {

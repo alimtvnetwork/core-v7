@@ -3,7 +3,7 @@ package simplewrap
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // WithDoubleQuote " + source + " , also take care of any double if available next.

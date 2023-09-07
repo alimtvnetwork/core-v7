@@ -3,7 +3,7 @@ package intsort
 import (
 	"sort"
 
-	"gitlab.com/evatix-go/core/coredata"
+	"gitlab.com/auk-go/core/coredata"
 )
 
 // QuickPtr Warning: Data gets mutated inside.

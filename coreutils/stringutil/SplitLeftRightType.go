@@ -3,8 +3,8 @@ package stringutil
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corestr"
 )
 
 func SplitLeftRightType(s, separator string) *corestr.LeftRight {

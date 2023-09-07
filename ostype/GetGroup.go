@@ -1,7 +1,7 @@
 package ostype
 
 import (
-	"gitlab.com/evatix-go/core/osconsts"
+	"gitlab.com/auk-go/core/osconsts"
 )
 
 // GetGroup rawRuntimeGoos = runtime.GOOS
@@ -20,5 +20,5 @@ func GetGroup(rawRuntimeGoos string) Group {
 		return UnixGroup
 	}
 
-	return UnknownGroup
+	return InvalidGroup
 }

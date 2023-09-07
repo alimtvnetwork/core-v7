@@ -6,16 +6,16 @@ import (
 	"reflect"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/coreonce"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/coreonce"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/messages"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 type Dynamic struct {
@@ -94,7 +94,7 @@ func (it *Dynamic) StructStringPtr() *string {
 		return it.innerDataString
 	}
 
-	toString := utilstringinternal.AnyToString(it.innerData)
+	toString := strutilinternal.AnyToString(it.innerData)
 	it.innerDataString = &toString
 
 	return it.innerDataString
@@ -182,12 +182,12 @@ func (it *Dynamic) IsValueType() bool {
 }
 
 func (it *Dynamic) IsStructStringNullOrEmpty() bool {
-	return it.IsNull() || utilstringinternal.IsNullOrEmpty(
+	return it.IsNull() || strutilinternal.IsNullOrEmpty(
 		it.StructStringPtr())
 }
 
 func (it *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
-	return it.IsNull() || utilstringinternal.IsNullOrEmptyOrWhitespace(
+	return it.IsNull() || strutilinternal.IsNullOrEmptyOrWhitespace(
 		it.StructStringPtr())
 }
 
@@ -389,7 +389,7 @@ func (it *Dynamic) Bytes() (rawBytes []byte, isSuccess bool) {
 	return rawBytes, err != nil
 }
 
-func (it *Dynamic) ReflectSet(toPointer interface{}) error {
+func (it *Dynamic) ReflectSetTo(toPointer interface{}) error {
 	if it == nil {
 		return defaulterr.NilResult
 	}

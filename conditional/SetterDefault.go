@@ -1,6 +1,6 @@
 package conditional
 
-import "gitlab.com/evatix-go/core/issetter"
+import "gitlab.com/auk-go/core/issetter"
 
 func SetterDefault(
 	currentSetter issetter.Value,

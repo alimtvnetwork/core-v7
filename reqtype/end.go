@@ -1,11 +1,11 @@
 package reqtype
 
 func end(
-	reqs *[]Request,
+	reqs []Request,
 ) interface{} {
-	if reqs == nil || len(*reqs) == 0 {
+	if len(reqs) == 0 {
 		return nil
 	}
 
-	return (*reqs)[len(*reqs)-1]
+	return (reqs)[len(reqs)-1]
 }

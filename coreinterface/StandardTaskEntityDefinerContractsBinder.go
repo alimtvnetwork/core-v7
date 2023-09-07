@@ -1,6 +1,0 @@
-package coreinterface
-
-type StandardTaskEntityDefinerContractsBinder interface {
-	StandardTaskEntityDefiner
-	AsStandardTaskEntityDefinerContractsBinder() StandardTaskEntityDefinerContractsBinder
-}

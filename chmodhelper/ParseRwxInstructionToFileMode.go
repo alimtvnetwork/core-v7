@@ -3,7 +3,7 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
 )
 
 func ParseRwxOwnerGroupOtherToFileModeMust(

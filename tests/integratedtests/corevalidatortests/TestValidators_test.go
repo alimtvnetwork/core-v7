@@ -4,11 +4,11 @@ import (
 	"testing"
 
 	"github.com/smartystreets/goconvey/convey"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/corevalidator"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/tests/testwrappers/corevalidatortestwrappers"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/corevalidator"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/tests/testwrappers/corevalidatortestwrappers"
 )
 
 func Test_TestValidators(t *testing.T) {
@@ -47,11 +47,6 @@ func Test_TestValidators(t *testing.T) {
 		}
 
 		// Act
-		// validationFinalError := sliceValidator.AllVerifyErrorUptoLength(
-		// 	caseIndex,
-		// 	false,
-		// 	testCase.IsIgnoreCase,
-		// 	len(testCase.ExpectationLines) - 1)
 		validationFinalError := sliceValidator.AllVerifyError(
 			&paramsBase2)
 

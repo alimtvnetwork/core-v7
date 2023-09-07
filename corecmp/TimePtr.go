@@ -3,7 +3,7 @@ package corecmp
 import (
 	"time"
 
-	"gitlab.com/evatix-go/core/corecomparator"
+	"gitlab.com/auk-go/core/corecomparator"
 )
 
 func TimePtr(left, right *time.Time) corecomparator.Compare {

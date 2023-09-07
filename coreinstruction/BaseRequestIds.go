@@ -1,6 +1,6 @@
 package coreinstruction
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 type BaseRequestIds struct {
 	RequestIds []IdentifierWithIsGlobal `json:"RequestIds,omitempty"`

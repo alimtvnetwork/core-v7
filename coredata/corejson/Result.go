@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type Result struct {
@@ -22,11 +22,110 @@ type Result struct {
 	TypeName   string
 }
 
-func (it Result) JsonString() string {
+func (it *Result) Map() map[string]string {
+	if it == nil {
+		return map[string]string{}
+	}
+
+	newMap := make(
+		map[string]string,
+		constants.Capacity3)
+
+	if len(it.Bytes) > 0 {
+		newMap[bytesFieldName] = it.JsonString()
+	}
+
+	if it.Error != nil {
+		newMap[errorFieldName] = it.Error.Error()
+	}
+
+	if it.TypeName != "" {
+		newMap[typeFieldName] = it.TypeName
+	}
+
+	return newMap
+}
+
+func (it *Result) DeserializedFieldsToMap() (
+	fieldsMap map[string]interface{},
+	parsingErr error,
+) {
+	if it == nil || len(it.Bytes) == 0 {
+		return map[string]interface{}{}, nil
+	}
+
+	parsingErr = it.Deserialize(fieldsMap)
+
+	return fieldsMap, parsingErr
+}
+
+// SafeDeserializedFieldsToMap
+//
+// Warning:
+//  - Swallows the error
+func (it *Result) SafeDeserializedFieldsToMap() (
+	fieldsMap map[string]interface{},
+) {
+	fieldsMap, _ = it.DeserializedFieldsToMap()
+
+	return fieldsMap
+}
+
+func (it *Result) FieldsNames() (
+	fieldsNames []string,
+	parsingErr error,
+) {
+	fieldsMap, parsingErr := it.DeserializedFieldsToMap()
+
+	if len(fieldsMap) == 0 {
+		return []string{}, parsingErr
+	}
+
+	fieldsNames = make([]string, len(fieldsMap))
+	index := 0
+
+	for fieldNameKey := range fieldsMap {
+		fieldsNames[index] = fieldNameKey
+
+		index++
+	}
+
+	return fieldsNames, parsingErr
+}
+
+// SafeFieldsNames
+//
+// Warning:
+//  - Swallows the error
+func (it *Result) SafeFieldsNames() (
+	fieldsNames []string,
+) {
+	fieldsNames, _ = it.FieldsNames()
+
+	return fieldsNames
+}
+
+func (it *Result) BytesTypeName() string {
+	if it == nil {
+		return ""
+	}
+
+	return it.TypeName
+}
+
+func (it *Result) SafeBytesTypeName() string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return it.TypeName
+}
+
+func (it *Result) SafeString() string {
 	return *it.JsonStringPtr()
 }
 
-func (it Result) SafeString() string {
+func (it *Result) JsonString() string {
 	return *it.JsonStringPtr()
 }
 
@@ -53,7 +152,7 @@ func (it *Result) JsonStringPtr() *string {
 func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error) {
 	var prettyJSON bytes.Buffer
 
-	if it == nil || len(it.Bytes) == 0 {
+	if it.IsEmpty() {
 		return &prettyJSON, nil
 	}
 
@@ -67,7 +166,7 @@ func (it *Result) PrettyJsonBuffer(prefix, indent string) (*bytes.Buffer, error)
 }
 
 func (it *Result) PrettyJsonString() string {
-	if it.IsEmptyJson() {
+	if it == nil || it.IsEmptyJson() {
 		return ""
 	}
 
@@ -82,7 +181,7 @@ func (it *Result) PrettyJsonString() string {
 	return prettyJSON.String()
 }
 
-func (it *Result) PrettyJsonStringWithErr() string {
+func (it *Result) PrettyJsonStringOrErrString() string {
 	if it == nil {
 		return "json result: nil cannot have json string"
 	}
@@ -130,12 +229,33 @@ func (it *Result) IsErrorEqual(err error) bool {
 	return false
 }
 
-func (it *Result) String() string {
-	if it.HasIssuesOrEmpty() {
+func (it Result) String() string {
+	if it.IsAnyNull() {
 		return constants.EmptyString
 	}
 
-	return it.JsonString()
+	var currentMap map[string]string
+
+	if it.HasError() {
+		currentMap = map[string]string{
+			"Json":  it.JsonString(),
+			"Type":  it.TypeName,
+			"Error": it.MeaningfulErrorMessage(),
+		}
+	} else {
+		currentMap = map[string]string{
+			"Json": it.JsonString(),
+			"Type": it.TypeName,
+		}
+	}
+
+	toString := fmt.Sprintf(
+		constants.SprintValueFormat,
+		currentMap)
+
+	currentMap = nil
+
+	return toString
 }
 
 func (it *Result) SafeNonIssueBytes() []byte {
@@ -151,6 +271,10 @@ func (it *Result) SafeBytes() []byte {
 		return []byte{}
 	}
 
+	return it.Bytes
+}
+
+func (it *Result) Values() []byte {
 	return it.Bytes
 }
 
@@ -171,11 +295,32 @@ func (it *Result) SafeValuesPtr() *[]byte {
 }
 
 func (it *Result) Raw() ([]byte, error) {
+	if it == nil {
+		return []byte{}, defaulterr.JsonResultNull
+	}
+
 	return it.SafeBytes(), it.MeaningfulError()
+}
+
+func (it *Result) RawMust() []byte {
+	allBytes, err := it.Raw()
+	errcore.HandleErr(err)
+
+	return allBytes
 }
 
 func (it *Result) RawString() (jsonString string, err error) {
 	return it.JsonString(), it.MeaningfulError()
+}
+
+func (it *Result) RawStringMust() (jsonString string) {
+	jsonString, err := it.RawString()
+
+	if err != nil {
+		panic(err)
+	}
+
+	return jsonString
 }
 
 func (it *Result) RawErrString() (rawJsonBytes []byte, errorMsg string) {
@@ -196,30 +341,51 @@ func (it *Result) MeaningfulErrorMessage() string {
 	return err.Error()
 }
 
-// MeaningfulError create error even if results are nil.
+// MeaningfulError
+//
+//  create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
 		return defaulterr.JsonResultNull
 	}
 
-	if it.IsEmptyError() && it.HasJsonBytes() {
+	if it.Error == nil && len(it.Bytes) > 0 {
+		// everything is okay
+
 		return nil
 	}
 
 	if it.IsEmptyJsonBytes() {
+		// error may or may not exist
 		errMsg := errcore.BytesAreNilOrEmptyType.String() +
-			" Additional: " + it.Error.Error() + ", type:"
+			" Additional: " +
+			errcore.ToString(it.Error) + // error may or may not exist
+			", type:"
 
 		return errcore.
 			FailedToParseType.
 			Error(errMsg, it.TypeName)
 	}
 
+	// must error and payload may or may not exist
 	return errcore.
 		FailedToParseType.
 		Error(
-			it.Error.Error()+", type:",
-			it.TypeName)
+			errcore.ToString(it.Error)+", type:"+it.TypeName+", payload:",
+			it.safeJsonStringInternal())
+}
+
+func (it *Result) safeJsonStringInternal() string {
+	if it == nil {
+		return ""
+	}
+
+	var safeJsonString string
+	if it != nil && len(it.Bytes) > 0 {
+		safeJsonString = string(it.Bytes)
+	}
+
+	return safeJsonString
 }
 
 func (it *Result) IsEmptyError() bool {
@@ -258,38 +424,26 @@ func (it *Result) IsAnyNull() bool {
 // Result.HasError() ||
 // Result.IsEmptyJsonBytes()
 func (it *Result) HasIssuesOrEmpty() bool {
-	return it.IsAnyNull() || it.HasError() || it.IsEmptyJsonBytes()
+	return it == nil || it.Error != nil || it.IsEmptyJsonBytes()
 }
 
 func (it *Result) HandleError() {
-	if it == nil || it.IsEmptyError() {
-		return
+	if it.HasIssuesOrEmpty() {
+		panic(it.MeaningfulError())
 	}
-
-	panic(it.MeaningfulError())
 }
 
 // MustBeSafe alias for HandleError
 func (it *Result) MustBeSafe() {
-	if it == nil || it.IsEmptyError() {
-		return
+	if it.HasIssuesOrEmpty() {
+		panic(it.MeaningfulError())
 	}
-
-	panic(it.MeaningfulError())
 }
 
 func (it *Result) HandleErrorWithMsg(msg string) {
-	if it.IsEmptyError() {
-		return
+	if it.HasIssuesOrEmpty() {
+		panic(msg + constants.DefaultLine + it.MeaningfulErrorMessage())
 	}
-
-	err := it.MeaningfulError()
-
-	if err != nil && msg != "" {
-		panic(msg + err.Error())
-	}
-
-	panic(err)
 }
 
 // HasBytes
@@ -342,6 +496,10 @@ func (it *Result) IsEmpty() bool {
 	return it == nil || len(it.Bytes) == 0
 }
 
+func (it Result) HasAnyItem() bool {
+	return !it.IsEmpty()
+}
+
 func (it *Result) IsEmptyJson() bool {
 	return it.IsEmptyJsonBytes()
 }
@@ -391,6 +549,9 @@ func (it *Result) UnmarshalMust(
 	}
 }
 
+// Unmarshal
+//
+//  deserializes current safe bytes to given pointer
 func (it *Result) Unmarshal(
 	anyPointer interface{},
 ) error {
@@ -398,37 +559,46 @@ func (it *Result) Unmarshal(
 		return errcore.
 			UnMarshallingFailedType.
 			Error(
-				"cannot unmarshal if JsonResult is nil or null, type",
+				"cannot unmarshal null json result, to pointer type",
 				reflectinternal.TypeName(anyPointer))
 	}
 
 	if it.HasError() {
-		reference := errcore.VarThreeNoType(
-			"JsonResult Error", it.Error,
-			"Source Type", it.TypeName,
-			"To Reference Type", reflectinternal.TypeName(anyPointer))
+		compiledMessage := errcore.MessageVarMap(
+			"json unmarshal failed with existing error",
+			map[string]interface{}{
+				"err":     it.Error,
+				"src":     it.TypeName,
+				"dst":     reflectinternal.TypeName(anyPointer),
+				"payload": it.safeJsonStringInternal(),
+			})
 
 		return errcore.
 			UnMarshallingFailedType.
-			Error(
-				"cannot unmarshal if JsonResult has already error.",
-				reference)
+			ErrorNoRefs(compiledMessage)
 	}
 
-	err := json.Unmarshal(it.Bytes, anyPointer)
+	err := json.Unmarshal(
+		it.Bytes,
+		anyPointer)
 
 	if err == nil {
 		return nil
 	}
 
-	reference := errcore.VarThreeNoType(
-		"Unmarshall Error", err.Error(),
-		"Source Type", it.TypeName,
-		"To Reference Type", reflectinternal.TypeName(anyPointer))
+	// unmarshal caught error
+	compiledMessage := errcore.MessageVarMap(
+		"json unmarshal failed",
+		map[string]interface{}{
+			"err":     it.Error,
+			"src":     it.TypeName,
+			"dst":     reflectinternal.TypeName(anyPointer),
+			"payload": it.safeJsonStringInternal(),
+		})
 
 	return errcore.
 		UnMarshallingFailedType.
-		ErrorRefOnly(reference)
+		ErrorNoRefs(compiledMessage)
 }
 
 // SerializeSkipExistingIssues
@@ -455,8 +625,8 @@ func (it *Result) serializeInternal() (
 
 	// has error
 	reference := errcore.VarTwoNoType(
-		"Marshal/Serialize Error", err.Error(),
-		"Source Type", it.TypeName,
+		"marshal or serialize Error", err.Error(),
+		"src", it.TypeName,
 	)
 
 	return nil, errcore.
@@ -468,20 +638,11 @@ func (it *Result) Serialize() ([]byte, error) {
 	if it == nil {
 		return nil, errcore.
 			Serialize.
-			ErrorNoRefs("cannot marshal if JsonResult is nil or null")
+			ErrorNoRefs("cannot marshal if JsonResult is null")
 	}
 
-	if it.HasError() {
-		reference := errcore.VarTwoNoType(
-			"JsonResult Error", it.Error,
-			"Source Type", it.TypeName,
-		)
-
-		return nil, errcore.
-			Serialize.
-			Error(
-				"cannot marshal if JsonResult has already error.",
-				reference)
+	if it.Error != nil {
+		return []byte{}, it.MeaningfulError()
 	}
 
 	return it.serializeInternal()
@@ -498,26 +659,31 @@ func (it *Result) SerializeMust() []byte {
 //
 // Ignores and returns nil if HasIssuesOrEmpty satisfied
 func (it *Result) UnmarshalSkipExistingIssues(
-	anyItem interface{},
+	toPointer interface{},
 ) error {
 	if it.HasIssuesOrEmpty() {
 		return nil
 	}
 
-	err := json.Unmarshal(it.Bytes, anyItem)
+	err := json.Unmarshal(it.Bytes, toPointer)
 
 	if err == nil {
 		return nil
 	}
 
-	reference := errcore.VarThreeNoType(
-		"Unmarshall Error", err.Error(),
-		"Source Type", it.TypeName,
-		"To Reference Type", reflectinternal.TypeName(anyItem))
+	// unmarshal caught error
+	compiledMessage := errcore.MessageVarMap(
+		"json unmarshal failed",
+		map[string]interface{}{
+			"err":     err,
+			"src":     it.TypeName,
+			"dst":     reflectinternal.TypeName(toPointer),
+			"payload": it.safeJsonStringInternal(),
+		})
 
 	return errcore.
 		UnMarshallingFailedType.
-		ErrorRefOnly(reference)
+		ErrorNoRefs(compiledMessage)
 }
 
 func (it *Result) UnmarshalResult() (*Result, error) {
@@ -528,8 +694,14 @@ func (it *Result) UnmarshalResult() (*Result, error) {
 }
 
 //goland:noinspection GoLinterLocal
-func (it Result) JsonModel() Result {
-	return it
+func (it *Result) JsonModel() Result {
+	if it == nil {
+		return Result{
+			Error: defaulterr.JsonResultNull,
+		}
+	}
+
+	return *it
 }
 
 //goland:noinspection GoLinterLocal
@@ -537,10 +709,16 @@ func (it *Result) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
+// Json
+//
+//  creates json result of self
 func (it Result) Json() Result {
 	return NewResult.Any(it)
 }
 
+// JsonPtr
+//
+//  creates json result of self
 func (it Result) JsonPtr() *Result {
 	return NewResult.AnyPtr(it)
 }
@@ -581,11 +759,25 @@ func (it *Result) CloneError() error {
 	return nil
 }
 
-func (it *Result) Ptr() *Result {
-	return it
+func (it Result) Ptr() *Result {
+	return &it
 }
 
-func (it Result) NonPtr() Result {
+func (it *Result) NonPtr() Result {
+	if it == nil {
+		return Result{
+			Error: errors.New("nil json result"),
+		}
+	}
+
+	return *it
+}
+
+func (it Result) ToPtr() *Result {
+	return &it
+}
+
+func (it Result) ToNonPtr() Result {
 	return it
 }
 
@@ -622,7 +814,7 @@ func (it *Result) IsEqualPtr(another *Result) bool {
 	return bytes.Equal(it.Bytes, another.Bytes)
 }
 
-func (it *Result) CombineErrorWithRef(references ...string) string {
+func (it *Result) CombineErrorWithRefString(references ...string) string {
 	if it.IsEmptyError() {
 		return ""
 	}
@@ -640,7 +832,7 @@ func (it *Result) CombineErrorWithRefError(references ...string) error {
 		return nil
 	}
 
-	errorString := it.CombineErrorWithRef(
+	errorString := it.CombineErrorWithRefString(
 		references...)
 
 	return errors.New(errorString)
@@ -727,15 +919,15 @@ func (it Result) Clone(isDeepClone bool) Result {
 		it.TypeName)
 }
 
-func (it *Result) AsJsonContractsBinder() JsonContractsBinder {
-	return it
+func (it Result) AsJsonContractsBinder() JsonContractsBinder {
+	return &it
 }
 
-func (it *Result) AsJsoner() Jsoner {
-	return it
+func (it Result) AsJsoner() Jsoner {
+	return &it
 }
 
-func (it *Result) JsonParseSelfInject(
+func (it Result) JsonParseSelfInject(
 	jsonResultIn *Result,
 ) error {
 	_, err := it.ParseInjectUsingJson(jsonResultIn)
@@ -743,6 +935,6 @@ func (it *Result) JsonParseSelfInject(
 	return err
 }
 
-func (it *Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
-	return it
+func (it Result) AsJsonParseSelfInjector() JsonParseSelfInjector {
+	return &it
 }

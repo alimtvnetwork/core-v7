@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/conditional"
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/conditional"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type Attribute struct {
@@ -11,8 +11,39 @@ type Attribute struct {
 	IsExecute bool
 }
 
-func (attribute *Attribute) ToAttributeValue() AttributeValue {
-	read, write, exe, sum := attribute.ToSpecificBytes()
+func (it *Attribute) IsNull() bool {
+	return it == nil
+}
+
+func (it *Attribute) IsAnyNull() bool {
+	return it == nil
+}
+
+func (it *Attribute) IsEmpty() bool {
+	return it == nil ||
+		!it.IsRead &&
+			!it.IsWrite &&
+			!it.IsExecute
+}
+
+func (it *Attribute) IsZero() bool {
+	return it.IsEmpty()
+}
+
+func (it *Attribute) IsInvalid() bool {
+	return it.IsEmpty()
+}
+
+func (it *Attribute) IsDefined() bool {
+	return !it.IsEmpty()
+}
+
+func (it *Attribute) HasAnyItem() bool {
+	return !it.IsEmpty()
+}
+
+func (it *Attribute) ToAttributeValue() AttributeValue {
+	read, write, exe, sum := it.ToSpecificBytes()
 
 	return AttributeValue{
 		Read:    read,
@@ -22,45 +53,45 @@ func (attribute *Attribute) ToAttributeValue() AttributeValue {
 	}
 }
 
-func (attribute *Attribute) ToSpecificBytes() (read, write, exe, sum byte) {
-	read = conditional.Byte(attribute.IsRead, ReadValue, constants.Zero)
-	write = conditional.Byte(attribute.IsWrite, WriteValue, constants.Zero)
-	exe = conditional.Byte(attribute.IsExecute, ExecuteValue, constants.Zero)
+func (it *Attribute) ToSpecificBytes() (read, write, exe, sum byte) {
+	read = conditional.Byte(it.IsRead, ReadValue, constants.Zero)
+	write = conditional.Byte(it.IsWrite, WriteValue, constants.Zero)
+	exe = conditional.Byte(it.IsExecute, ExecuteValue, constants.Zero)
 
 	return read, write, exe, read + write + exe
 }
 
 // ToByte refers to the compiled byte value in between 0-7
-func (attribute *Attribute) ToByte() byte {
-	r := conditional.Byte(attribute.IsRead, ReadValue, constants.Zero)
-	w := conditional.Byte(attribute.IsWrite, WriteValue, constants.Zero)
-	e := conditional.Byte(attribute.IsExecute, ExecuteValue, constants.Zero)
+func (it *Attribute) ToByte() byte {
+	r := conditional.Byte(it.IsRead, ReadValue, constants.Zero)
+	w := conditional.Byte(it.IsWrite, WriteValue, constants.Zero)
+	e := conditional.Byte(it.IsExecute, ExecuteValue, constants.Zero)
 
 	return r + w + e
 }
 
 // ToSum refers to the compiled byte value in between 0-7
-func (attribute *Attribute) ToSum() byte {
-	return attribute.ToByte()
+func (it *Attribute) ToSum() byte {
+	return it.ToByte()
 }
 
-func (attribute *Attribute) ToRwx() [3]byte {
+func (it *Attribute) ToRwx() [3]byte {
 	return [3]byte{
-		conditional.Byte(attribute.IsRead, ReadChar, constants.HyphenChar),
-		conditional.Byte(attribute.IsWrite, WriteChar, constants.HyphenChar),
-		conditional.Byte(attribute.IsExecute, ExecuteChar, constants.HyphenChar),
+		conditional.Byte(it.IsRead, ReadChar, constants.HyphenChar),
+		conditional.Byte(it.IsWrite, WriteChar, constants.HyphenChar),
+		conditional.Byte(it.IsExecute, ExecuteChar, constants.HyphenChar),
 	}
 }
 
 // ToRwxString returns "rwx"
-func (attribute *Attribute) ToRwxString() string {
-	rwxBytes := attribute.ToRwx()
+func (it *Attribute) ToRwxString() string {
+	rwxBytes := it.ToRwx()
 
 	return string(rwxBytes[:])
 }
 
-func (attribute *Attribute) ToVariant() AttrVariant {
-	b := attribute.ToByte()
+func (it *Attribute) ToVariant() AttrVariant {
+	b := it.ToByte()
 
 	return AttrVariant(b)
 }
@@ -68,44 +99,44 @@ func (attribute *Attribute) ToVariant() AttrVariant {
 // ToStringByte returns the compiled byte value as Char byte value
 //
 // It is not restricted between 0-7 but 0-7 + char '0', which makes it string 0-7
-func (attribute *Attribute) ToStringByte() byte {
-	return attribute.ToByte() + constants.ZeroChar
+func (it *Attribute) ToStringByte() byte {
+	return it.ToByte() + constants.ZeroChar
 }
 
-func (attribute *Attribute) Clone() *Attribute {
-	if attribute == nil {
+func (it *Attribute) Clone() *Attribute {
+	if it == nil {
 		return nil
 	}
 
 	return &Attribute{
-		IsRead:    attribute.IsRead,
-		IsWrite:   attribute.IsWrite,
-		IsExecute: attribute.IsExecute,
+		IsRead:    it.IsRead,
+		IsWrite:   it.IsWrite,
+		IsExecute: it.IsExecute,
 	}
 }
 
-func (attribute *Attribute) IsEqualPtr(next *Attribute) bool {
-	if attribute == nil && next == nil {
+func (it *Attribute) IsEqualPtr(next *Attribute) bool {
+	if it == nil && next == nil {
 		return true
 	}
 
-	if attribute == nil || next == nil {
+	if it == nil || next == nil {
 		return false
 	}
 
-	isRead := attribute.IsRead == next.IsRead
-	isWrite := attribute.IsWrite == next.IsWrite
-	isExecute := attribute.IsExecute == next.IsExecute
+	isRead := it.IsRead == next.IsRead
+	isWrite := it.IsWrite == next.IsWrite
+	isExecute := it.IsExecute == next.IsExecute
 
 	return isRead &&
 		isWrite &&
 		isExecute
 }
 
-func (attribute Attribute) IsEqual(next Attribute) bool {
-	isRead := attribute.IsRead == next.IsRead
-	isWrite := attribute.IsWrite == next.IsWrite
-	isExecute := attribute.IsExecute == next.IsExecute
+func (it Attribute) IsEqual(next Attribute) bool {
+	isRead := it.IsRead == next.IsRead
+	isWrite := it.IsWrite == next.IsWrite
+	isExecute := it.IsExecute == next.IsExecute
 
 	return isRead &&
 		isWrite &&

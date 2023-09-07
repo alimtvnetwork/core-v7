@@ -1,6 +1,6 @@
 package errcore
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 const (
 	ReferenceStart                           = "Reference(s) ("
@@ -36,4 +36,5 @@ const (
 	PrefixStackTraceNewLine                       = constants.DefaultLine + PrefixStackTrace
 	NewLineCodeStacksHeader                       = "\nCode Stacks :\n"
 	CodeStacksHeaderNewLine                       = "Code Stacks :\n"
+	ShouldBeMessageFormat                         = "\"%v\" {actual} should be \"%v\" {expecting}" // actual, expecting
 )

@@ -4,10 +4,10 @@ import (
 	"errors"
 	"reflect"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 type SimpleRequest struct {
@@ -102,7 +102,7 @@ func (receiver *SimpleRequest) InvalidError() error {
 		return receiver.err
 	}
 
-	if utilstringinternal.IsEmptyOrWhitespace(receiver.message) {
+	if strutilinternal.IsEmptyOrWhitespace(receiver.message) {
 		return nil
 	}
 

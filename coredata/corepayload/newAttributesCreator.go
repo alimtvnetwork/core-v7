@@ -1,19 +1,36 @@
 package corepayload
 
 import (
-	"strings"
-
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coreinstruction"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/isany"
 )
 
 type newAttributesCreator struct{}
 
-func (it *newAttributesCreator) Deserialize(
+func (it newAttributesCreator) CastOrDeserializeFrom(
+	anyItem interface{},
+) (*Attributes, error) {
+	if isany.Null(anyItem) {
+		return nil, errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs(
+				"given any item is nil failed to convert to attributes")
+	}
+
+	toAttributes := &Attributes{}
+	err := corejson.CastAny.FromToDefault(
+		anyItem,
+		toAttributes)
+
+	return toAttributes, err
+}
+
+func (it newAttributesCreator) Deserialize(
 	rawBytes []byte,
 ) (*Attributes, error) {
 	empty := &Attributes{}
@@ -29,7 +46,7 @@ func (it *newAttributesCreator) Deserialize(
 	return nil, err
 }
 
-func (it *newAttributesCreator) DeserializeMany(
+func (it newAttributesCreator) DeserializeMany(
 	rawBytes []byte,
 ) (attrSlice []*Attributes, err error) {
 	err = corejson.
@@ -44,7 +61,7 @@ func (it *newAttributesCreator) DeserializeMany(
 	return nil, err
 }
 
-func (it *newAttributesCreator) DeserializeUsingJsonResult(
+func (it newAttributesCreator) DeserializeUsingJsonResult(
 	jsonResult *corejson.Result,
 ) (*Attributes, error) {
 	empty := &Attributes{}
@@ -60,58 +77,60 @@ func (it *newAttributesCreator) DeserializeUsingJsonResult(
 	return nil, err
 }
 
-func (it *newAttributesCreator) Create(
-	err error,
+func (it newAttributesCreator) Create(
+	basicErrWrapper errcoreinf.BasicErrWrapper,
+	authInfo *AuthInfo,
 	dynamicPayloads []byte,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
+		BasicErrWrapper:  basicErrWrapper,
+		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  dynamicPayloads,
 	}
 }
 
-func (it *newAttributesCreator) UsingErrMsg(
-	errMsg string,
+func (it newAttributesCreator) ErrFromTo(
+	basicErrWrapper errcoreinf.BasicErrWrapper,
+	fromTo *coreinstruction.FromTo,
+	dynamicPayloads []byte,
 ) *Attributes {
-	if errMsg == "" {
-		return it.Empty()
-	}
-
 	return &Attributes{
-		ErrorMessage:     errMsg,
+		BasicErrWrapper:  basicErrWrapper,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
+		FromTo:           fromTo,
+		DynamicPayloads:  dynamicPayloads,
 	}
 }
 
-func (it *newAttributesCreator) UsingErrMessages(
-	errMessages ...string,
+func (it newAttributesCreator) UsingAuthInfoJsonResult(
+	authInfo *AuthInfo,
+	jsonResult *corejson.Result,
+) (*Attributes, error) {
+	return &Attributes{
+			AuthInfo:         authInfo,
+			KeyValuePairs:    corestr.Empty.Hashmap(),
+			AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+			DynamicPayloads:  jsonResult.Bytes,
+		},
+		jsonResult.MeaningfulError()
+}
+
+func (it newAttributesCreator) UsingAuthInfoDynamicBytes(
+	authInfo *AuthInfo,
+	dynamicPayloads []byte,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage: strings.Join(
-			stringslice.NonEmptySlice(errMessages),
-			constants.DefaultLine),
+		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
+		DynamicPayloads:  dynamicPayloads,
 	}
 }
 
-func (it *newAttributesCreator) UsingErr(
-	err error,
-) *Attributes {
-	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
-		KeyValuePairs:    corestr.Empty.Hashmap(),
-		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
-		DynamicPayloads:  []byte{},
-	}
-}
-
-func (it *newAttributesCreator) UsingDynamicPayloadBytes(
+func (it newAttributesCreator) UsingDynamicPayloadBytes(
 	dynamicPayloads []byte,
 ) *Attributes {
 	return &Attributes{
@@ -121,74 +140,91 @@ func (it *newAttributesCreator) UsingDynamicPayloadBytes(
 	}
 }
 
-func (it *newAttributesCreator) AllAny(
+func (it newAttributesCreator) AllAny(
+	authInfo *AuthInfo,
 	keyValues *corestr.Hashmap,
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
 	anyItem interface{},
-) *Attributes {
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
 	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
 		DynamicPayloads:  jsonResult.SafeBytes(),
-	}
+	}, jsonResult.MeaningfulError()
 }
 
-func (it *newAttributesCreator) PageInfoAny(
+func (it newAttributesCreator) PageInfoAny(
 	pagingInfo *PagingInfo,
 	anyItem interface{},
-) *Attributes {
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
 	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  jsonResult.SafeBytes(),
-	}
+	}, jsonResult.MeaningfulError()
 }
 
-func (it *newAttributesCreator) All(
+func (it newAttributesCreator) All(
+	authInfo *AuthInfo,
 	keyValues *corestr.Hashmap,
 	anyKeyValues *coredynamic.MapAnyItems,
 	pagingInfo *PagingInfo,
 	dynamicPayloads []byte,
-	err error,
+	fromTo *coreinstruction.FromTo,
+	basicErr errcoreinf.BasicErrWrapper,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.ToString(err),
+		BasicErrWrapper:  basicErr,
+		AuthInfo:         authInfo,
 		PagingInfo:       pagingInfo,
 		KeyValuePairs:    keyValues,
 		AnyKeyValuePairs: anyKeyValues,
+		FromTo:           fromTo,
 		DynamicPayloads:  dynamicPayloads,
 	}
 }
 
-func (it *newAttributesCreator) UsingDynamicAny(
-	anyItem interface{},
+func (it newAttributesCreator) UsingAuthInfo(
+	authInfo *AuthInfo,
 ) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+	}
+}
+
+func (it newAttributesCreator) UsingDynamicPayloadAny(
+	authInfo *AuthInfo,
+	anyItem interface{},
+) (*Attributes, error) {
 	jsonResult := corejson.
 		Serialize.
 		UsingAny(anyItem)
 
-	return &Attributes{
-		ErrorMessage:     jsonResult.MeaningfulErrorMessage(),
+	attr := &Attributes{
+		AuthInfo:         authInfo,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  jsonResult.SafeBytes(),
 	}
+
+	return attr, jsonResult.MeaningfulError()
 }
 
-func (it *newAttributesCreator) UsingKeyValues(
+func (it newAttributesCreator) UsingKeyValues(
 	keyValues *corestr.Hashmap,
 ) *Attributes {
 	return &Attributes{
@@ -198,7 +234,19 @@ func (it *newAttributesCreator) UsingKeyValues(
 	}
 }
 
-func (it *newAttributesCreator) UsingKeyValuesPlusDynamic(
+func (it newAttributesCreator) UsingAuthInfoKeyValues(
+	authInfo *AuthInfo,
+	keyValues *corestr.Hashmap,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    keyValues,
+		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
+		DynamicPayloads:  []byte{},
+	}
+}
+
+func (it newAttributesCreator) UsingKeyValuesPlusDynamic(
 	keyValues *corestr.Hashmap,
 	dynamicPayloads []byte,
 ) *Attributes {
@@ -209,7 +257,19 @@ func (it *newAttributesCreator) UsingKeyValuesPlusDynamic(
 	}
 }
 
-func (it *newAttributesCreator) UsingAnyKeyValues(
+func (it newAttributesCreator) UsingAuthInfoAnyKeyValues(
+	authInfo *AuthInfo,
+	anyKeyValues *coredynamic.MapAnyItems,
+) *Attributes {
+	return &Attributes{
+		AuthInfo:         authInfo,
+		KeyValuePairs:    corestr.Empty.Hashmap(),
+		AnyKeyValuePairs: anyKeyValues,
+		DynamicPayloads:  []byte{},
+	}
+}
+
+func (it newAttributesCreator) UsingAnyKeyValues(
 	anyKeyValues *coredynamic.MapAnyItems,
 ) *Attributes {
 	return it.UsingAnyKeyValuesPlusDynamic(
@@ -217,7 +277,7 @@ func (it *newAttributesCreator) UsingAnyKeyValues(
 		[]byte{})
 }
 
-func (it *newAttributesCreator) UsingAnyKeyValuesPlusDynamic(
+func (it newAttributesCreator) UsingAnyKeyValuesPlusDynamic(
 	anyKeyValues *coredynamic.MapAnyItems,
 	dynamicPayloads []byte,
 ) *Attributes {
@@ -228,18 +288,18 @@ func (it *newAttributesCreator) UsingAnyKeyValuesPlusDynamic(
 	}
 }
 
-func (it *newAttributesCreator) UsingErrors(
-	errorItems ...error,
+func (it newAttributesCreator) UsingBasicError(
+	basicErrWrapper errcoreinf.BasicErrWrapper,
 ) *Attributes {
 	return &Attributes{
-		ErrorMessage:     errcore.MergeErrorsToStringDefault(errorItems...),
+		BasicErrWrapper:  basicErrWrapper,
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),
 		DynamicPayloads:  []byte{},
 	}
 }
 
-func (it *newAttributesCreator) Empty() *Attributes {
+func (it newAttributesCreator) Empty() *Attributes {
 	return &Attributes{
 		KeyValuePairs:    corestr.Empty.Hashmap(),
 		AnyKeyValuePairs: coredynamic.EmptyMapAnyItems(),

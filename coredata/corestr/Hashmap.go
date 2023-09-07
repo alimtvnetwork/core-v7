@@ -7,9 +7,10 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/mapdiffinternal"
 )
 
 type Hashmap struct {
@@ -151,6 +152,37 @@ func (it *Hashmap) AddOrUpdate(key, val string) (isAddedNewly bool) {
 	it.hasMapUpdated = true
 
 	return !isAlreadyExist
+}
+
+func (it *Hashmap) Set(key, val string) (isAddedNewly bool) {
+	_, isAlreadyExist := it.items[key]
+
+	it.items[key] = val
+	it.hasMapUpdated = true
+
+	return !isAlreadyExist
+}
+
+func (it *Hashmap) SetTrim(key, val string) (isAddedNewly bool) {
+	key = strings.TrimSpace(key)
+	val = strings.TrimSpace(val)
+
+	return it.Set(key, val)
+}
+
+func (it *Hashmap) SetBySplitter(
+	splitter, line string,
+) (isAddedNewly bool) {
+	splits := strings.SplitN(
+		line, splitter, constants.Two)
+
+	if len(splits) >= 2 {
+		// all okay
+
+		return it.Set(splits[0], splits[len(splits)-1])
+	}
+
+	return it.Set(splits[0], "")
 }
 
 func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
@@ -523,6 +555,22 @@ func (it *Hashmap) HasAllStringsPtr(keys *[]string) bool {
 	return true
 }
 
+func (it *Hashmap) DiffRaw(
+	rightMap map[string]string,
+) map[string]string {
+	mapDiffer := mapdiffinternal.HashmapDiff(rightMap)
+
+	return mapDiffer.DiffRaw(rightMap)
+}
+
+func (it *Hashmap) Diff(
+	rightMap *Hashmap,
+) *Hashmap {
+	rawMap := it.DiffRaw(rightMap.Items())
+
+	return New.Hashmap.UsingMap(rawMap)
+}
+
 // HasAllCollectionItems return false on items is nil or Empty.
 func (it *Hashmap) HasAllCollectionItems(
 	collection *Collection,
@@ -650,6 +698,14 @@ func (it *Hashmap) Items() map[string]string {
 	return it.items
 }
 
+func (it *Hashmap) SafeItems() map[string]string {
+	if it == nil {
+		return nil
+	}
+
+	return it.items
+}
+
 //goland:noinspection GoLinterLocal
 func (it *Hashmap) ItemsCopyLock() *map[string]string {
 	it.Lock()
@@ -700,7 +756,7 @@ func (it *Hashmap) KeysValuesCollection() (
 	wg.Add(2)
 
 	go func() {
-		keys = New.Collection.StringsPtr(
+		keys = New.Collection.Strings(
 			it.Keys(),
 		)
 
@@ -721,7 +777,7 @@ func (it *Hashmap) KeysValuesCollection() (
 }
 
 func (it *Hashmap) KeysValuesList() (
-	keys, values *[]string,
+	keys, values []string,
 ) {
 	wg := sync.WaitGroup{}
 	wg.Add(2)
@@ -732,7 +788,7 @@ func (it *Hashmap) KeysValuesList() (
 	}()
 
 	go func() {
-		values = it.ValuesListPtr()
+		values = it.ValuesList()
 		wg.Done()
 	}()
 
@@ -741,12 +797,12 @@ func (it *Hashmap) KeysValuesList() (
 	return keys, values
 }
 
-func (it *Hashmap) KeysValuePairs() *[]KeyValuePair {
-	pairs := make([]KeyValuePair, it.Length())
+func (it *Hashmap) KeysValuePairs() []*KeyValuePair {
+	pairs := make([]*KeyValuePair, it.Length())
 
 	i := 0
 	for k, v := range it.items {
-		pairs[i] = KeyValuePair{
+		pairs[i] = &KeyValuePair{
 			Key:   k,
 			Value: v,
 		}
@@ -754,11 +810,20 @@ func (it *Hashmap) KeysValuePairs() *[]KeyValuePair {
 		i++
 	}
 
-	return &pairs
+	return pairs
+}
+func (it *Hashmap) KeysValuePairsCollection() *KeyValueCollection {
+	pairs := New.KeyValues.Cap(it.Length())
+
+	for k, v := range it.items {
+		pairs.Add(k, v)
+	}
+
+	return pairs
 }
 
 func (it *Hashmap) KeysValuesListLock() (
-	keys, values *[]string,
+	keys, values []string,
 ) {
 	it.Lock()
 	wg := sync.WaitGroup{}
@@ -769,7 +834,7 @@ func (it *Hashmap) KeysValuesListLock() (
 		wg.Done()
 	}()
 	go func() {
-		values = it.ValuesListPtr()
+		values = it.ValuesList()
 		wg.Done()
 	}()
 
@@ -796,24 +861,22 @@ func (it *Hashmap) AllKeys() []string {
 	return keys
 }
 
-func (it *Hashmap) Keys() *[]string {
-	keys := it.AllKeys()
-
-	return &keys
+func (it *Hashmap) Keys() []string {
+	return it.AllKeys()
 }
 
 func (it *Hashmap) KeysCollection() *Collection {
-	return New.Collection.StringsPtr(
+	return New.Collection.Strings(
 		it.Keys(),
 	)
 }
 
-func (it *Hashmap) KeysLock() *[]string {
+func (it *Hashmap) KeysLock() []string {
 	length := it.LengthLock()
 	keys := make([]string, length)
 
 	if length == 0 {
-		return &keys
+		return keys
 	}
 
 	i := 0
@@ -825,10 +888,12 @@ func (it *Hashmap) KeysLock() *[]string {
 
 	it.Unlock()
 
-	return &keys
+	return keys
 }
 
-// ValuesListCopyPtrLock  a slice must returned
+// ValuesListCopyPtrLock
+//
+//  a slice must be returned
 func (it *Hashmap) ValuesListCopyPtrLock() *[]string {
 	it.Lock()
 	defer it.Unlock()
@@ -858,7 +923,7 @@ func (it *Hashmap) setCached() {
 	it.cachedList = list
 }
 
-// ValuesToLower Create a new items with all lower strings
+// ValuesToLower CreateUsingAliasMap a new items with all lower strings
 func (it *Hashmap) ValuesToLower() *Hashmap {
 	newMap := make(map[string]string, it.Length())
 
@@ -1078,7 +1143,7 @@ func (it *Hashmap) Join(
 func (it *Hashmap) JoinKeys(
 	separator string,
 ) string {
-	return strings.Join(*it.Keys(), separator)
+	return strings.Join(it.Keys(), separator)
 }
 
 func (it *Hashmap) JsonModel() map[string]string {
@@ -1244,4 +1309,18 @@ func (it Hashmap) Clone() Hashmap {
 	jsonResult := it.JsonPtr()
 
 	return *empty.ParseInjectUsingJsonMust(jsonResult)
+}
+
+func (it *Hashmap) Get(key string) (val string, isFound bool) {
+	val, isFound = it.items[key]
+
+	return val, isFound
+}
+
+func (it *Hashmap) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
+}
+
+func (it *Hashmap) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

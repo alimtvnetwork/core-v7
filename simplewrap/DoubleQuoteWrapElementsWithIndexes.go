@@ -3,7 +3,7 @@ package simplewrap
 import (
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // DoubleQuoteWrapElementsWithIndexes Returns new empty slice if nil or empty slice given.

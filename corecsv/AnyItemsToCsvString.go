@@ -3,7 +3,7 @@ package corecsv
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // AnyItemsToCsvString
@@ -19,7 +19,7 @@ import (
 func AnyItemsToCsvString(
 	joiner string,
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	references ...interface{},
 ) string {
 	if len(references) == 0 {

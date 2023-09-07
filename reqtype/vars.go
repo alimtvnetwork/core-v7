@@ -1,14 +1,14 @@
 package reqtype
 
 import (
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 var (
 	Ranges = [...]string{
-		Uninitialized:                    "Uninitialized",
-		Create:                           "Create",
+		Invalid:                          "Invalid",
+		Create:                           "CreateUsingAliasMap",
 		Read:                             "Read",
 		Update:                           "Update",
 		Delete:                           "Delete",
@@ -59,11 +59,32 @@ var (
 		InheritOnly:                      "InheritOnly",
 		InheritPlusOverride:              "InheritPlusOverride",
 		DynamicAction:                    "DynamicAction",
+		Override:                         "Override",
+		Overwrite:                        "Overwrite",
+		Enforce:                          "Enforce",
+	}
+
+	httpRequests = [...]bool{
+		GetHttp:    true,
+		PutHttp:    true,
+		PostHttp:   true,
+		DeleteHttp: true,
+		PatchHttp:  true,
+	}
+
+	actionRequests = [...]bool{
+		Start:   true,
+		Stop:    true,
+		Restart: true,
+		Reload:  true,
+		Suspend: true,
+		Pause:   true,
+		Resumed: true,
 	}
 
 	RangesMap = map[string]Request{
-		"Uninitialized":                    Uninitialized,
-		"Create":                           Create,
+		"Invalid":                          Invalid,
+		"CreateUsingAliasMap":              Create,
 		"Read":                             Read,
 		"Update":                           Update,
 		"Delete":                           Delete,
@@ -114,9 +135,101 @@ var (
 		"InheritOnly":                      InheritOnly,
 		"InheritPlusOverride":              InheritPlusOverride,
 		"DynamicAction":                    DynamicAction,
+		"Overwrite":                        Overwrite,
+		"Override":                         Override,
+		"Enforce":                          Enforce,
 	}
 
-	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
-		reflectinternal.TypeName(Uninitialized),
+	overrideLogicallyMap = map[Request]bool{
+		Overwrite: true,
+		Override:  true,
+		Enforce:   true,
+	}
+
+	createMap = map[Request]bool{
+		Create:              true,
+		CreateOrUpdate:      true,
+		CreateOrSkipOnExist: true,
+		DropCreate:          true,
+	}
+
+	createUpdateMap = map[Request]bool{
+		Create:                 true,
+		Update:                 true,
+		CreateOrUpdate:         true,
+		CreateOrSkipOnExist:    true,
+		UpdateOrSkipOnNonExist: true,
+		UpdateOnExist:          true,
+		CreateOrAppend:         true,
+	}
+
+	dropMap = map[Request]bool{
+		Drop:                   true,
+		DeleteOrSkipOnNonExist: true,
+		DropOrSkipOnNonExist:   true,
+		DropOnExist:            true,
+		DropCreate:             true,
+	}
+
+	readOrEditMap = map[Request]bool{
+		Read:                   true,
+		Update:                 true,
+		CreateOrUpdate:         true,
+		CreateOrSkipOnExist:    true,
+		UpdateOrSkipOnNonExist: true,
+		UpdateOnExist:          true,
+		Rename:                 true,
+		Change:                 true,
+	}
+
+	crudMap = map[Request]bool{
+		Create:                 true,
+		Read:                   true,
+		Update:                 true,
+		Delete:                 true,
+		Drop:                   true,
+		CreateOrUpdate:         true,
+		CreateOrSkipOnExist:    true,
+		UpdateOrSkipOnNonExist: true,
+		DeleteOrSkipOnNonExist: true,
+		DropOrSkipOnNonExist:   true,
+		UpdateOnExist:          true,
+		DropOnExist:            true,
+		DropCreate:             true,
+	}
+
+	editOrUpdateMap = map[Request]bool{
+		Create:                 true,
+		Update:                 true,
+		Delete:                 true,
+		CreateOrUpdate:         true,
+		CreateOrSkipOnExist:    true,
+		UpdateOrSkipOnNonExist: true,
+		UpdateOnExist:          true,
+		DropCreate:             true,
+	}
+
+	updateOrRemoveMap = map[Request]bool{
+		Update:               true,
+		CreateOrUpdate:       true,
+		DropOrSkipOnNonExist: true,
+		UpdateOnExist:        true,
+		DropOnExist:          true,
+		DropCreate:           true,
+	}
+
+	isExistOrSkipOnExistMap = map[Request]bool{
+		ExistCheck:             true,
+		SkipOnExist:            true,
+		CreateOrSkipOnExist:    true,
+		UpdateOrSkipOnNonExist: true,
+		DeleteOrSkipOnNonExist: true,
+		DropOrSkipOnNonExist:   true,
+		UpdateOnExist:          true,
+		DropOnExist:            true,
+	}
+
+	BasicEnumImpl = enumimpl.New.BasicByte.UsingTypeSlice(
+		reflectinternal.TypeName(Invalid),
 		Ranges[:])
 )

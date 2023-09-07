@@ -1,9 +1,9 @@
 package corevalidatortestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corerange"
-	"gitlab.com/evatix-go/core/corevalidator"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/coredata/corerange"
+	"gitlab.com/auk-go/core/corevalidator"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
 )
 
 var SegmentValidatorTestCases = []SegmentValidatorWrapper{

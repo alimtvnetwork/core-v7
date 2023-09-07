@@ -1,8 +1,8 @@
 package ostype
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
 )
 
 type Variation byte
@@ -28,6 +28,128 @@ const (
 	IOs
 	Aix
 )
+
+func (it Variation) AllNameValues() []string {
+	return basicEnumImplOsType.AllNameValues()
+}
+
+func (it Variation) OnlySupportedErr(names ...string) error {
+	return basicEnumImplOsType.OnlySupportedErr(names...)
+}
+
+func (it Variation) OnlySupportedMsgErr(message string, names ...string) error {
+	return basicEnumImplOsType.OnlySupportedMsgErr(message, names...)
+}
+
+func (it Variation) ValueUInt16() uint16 {
+	return uint16(it)
+}
+
+func (it Variation) IntegerEnumRanges() []int {
+	return basicEnumImplOsType.IntegerEnumRanges()
+}
+
+func (it Variation) MinMaxAny() (min, max interface{}) {
+	return basicEnumImplOsType.MinMaxAny()
+}
+
+func (it Variation) MinValueString() string {
+	return basicEnumImplOsType.MinValueString()
+}
+
+func (it Variation) MaxValueString() string {
+	return basicEnumImplOsType.MaxValueString()
+}
+
+func (it Variation) MaxInt() int {
+	return basicEnumImplOsType.MaxInt()
+}
+
+func (it Variation) MinInt() int {
+	return basicEnumImplOsType.MinInt()
+}
+
+func (it Variation) RangesDynamicMap() map[string]interface{} {
+	return basicEnumImplOsType.RangesDynamicMap()
+}
+
+func (it Variation) IsByteValueEqual(value byte) bool {
+	return byte(it) == value
+}
+
+func (it Variation) Format(format string) (compiled string) {
+	return basicEnumImplOsType.Format(format, it)
+}
+
+func (it Variation) IsEnumEqual(enum enuminf.BasicEnumer) bool {
+	return it.Value() == enum.ValueByte()
+}
+
+func (it *Variation) IsAnyEnumsEqual(enums ...enuminf.BasicEnumer) bool {
+	for _, enum := range enums {
+		if it.IsEnumEqual(enum) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variation) IsNameEqual(name string) bool {
+	return it.Name() == name
+}
+
+func (it Variation) IsAnyNamesOf(names ...string) bool {
+	for _, name := range names {
+		if it.IsNameEqual(name) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variation) IsValueEqual(value byte) bool {
+	return it.ValueByte() == value
+}
+
+func (it Variation) IsAnyValuesEqual(anyByteValues ...byte) bool {
+	for _, currentVal := range anyByteValues {
+		if it.IsValueEqual(currentVal) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Variation) ValueInt() int {
+	return int(it)
+}
+
+func (it Variation) ValueInt8() int8 {
+	return int8(it)
+}
+
+func (it Variation) ValueInt16() int16 {
+	return int16(it)
+}
+
+func (it Variation) ValueInt32() int32 {
+	return int32(it)
+}
+
+func (it Variation) ValueString() string {
+	return it.ToNumberString()
+}
+
+func (it Variation) IsValid() bool {
+	return it.Value() != 0
+}
+
+func (it Variation) IsInvalid() bool {
+	return it.Value() == 0
+}
 
 func (it Variation) IsByte(another byte) bool {
 	return it == Variation(another)
@@ -121,7 +243,7 @@ func (it Variation) IsDragonFly() bool {
 }
 
 func (it Variation) MarshalJSON() ([]byte, error) {
-	return basicEnumImplOsType.ToEnumJsonBytes(it.Value()), nil
+	return basicEnumImplOsType.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Variation) UnmarshalJSON(data []byte) error {
@@ -188,14 +310,22 @@ func (it Variation) String() string {
 	return basicEnumImplOsType.ToEnumString(it.Value())
 }
 
-func (it *Variation) AsBasicEnumContractsBinder() coreinterface.BasicEnumContractsBinder {
-	return it
+func (it Variation) EnumType() enuminf.EnumTyper {
+	return basicEnumImplOsType.EnumType()
 }
 
-func (it *Variation) AsJsonContractsBinder() corejson.JsonMarshaller {
-	return it
+func (it Variation) AsBasicEnumContractsBinder() enuminf.BasicEnumContractsBinder {
+	return &it
 }
 
-func (it *Variation) AsBasicByteEnumContractsBinder() coreinterface.BasicByteEnumContractsBinder {
-	return it
+func (it Variation) AsJsonContractsBinder() corejson.JsonMarshaller {
+	return &it
+}
+
+func (it Variation) AsBasicByteEnumContractsBinder() enuminf.BasicByteEnumContractsBinder {
+	return &it
+}
+
+func (it Variation) ToPtr() *Variation {
+	return &it
 }

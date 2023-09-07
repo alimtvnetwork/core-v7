@@ -1,7 +1,7 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 type VarAttribute struct {
@@ -12,76 +12,80 @@ type VarAttribute struct {
 	isExecute   issetter.Value
 }
 
-func (varAttribute *VarAttribute) IsFixedType() bool {
-	return varAttribute.isFixedType
+func (it *VarAttribute) IsFixedType() bool {
+	return it.isFixedType
 }
 
-func (varAttribute *VarAttribute) HasWildcard() bool {
-	return !varAttribute.isFixedType
+func (it *VarAttribute) HasWildcard() bool {
+	return !it.isFixedType
 }
 
-// ToCompileFixAttr must check IsFixedType, before calling.
-func (varAttribute *VarAttribute) ToCompileFixAttr() *Attribute {
-	if varAttribute.isFixedType {
+// ToCompileFixAttr
+//
+//  must check IsFixedType, before calling.
+func (it *VarAttribute) ToCompileFixAttr() *Attribute {
+	if it.isFixedType {
 		return &Attribute{
-			IsRead:    varAttribute.isRead.IsTrue(),
-			IsWrite:   varAttribute.isWrite.IsTrue(),
-			IsExecute: varAttribute.isExecute.IsTrue(),
+			IsRead:    it.isRead.IsTrue(),
+			IsWrite:   it.isWrite.IsTrue(),
+			IsExecute: it.isExecute.IsTrue(),
 		}
 	}
 
 	return nil
 }
 
-// ToCompileAttr if fixed type then fixed param can be nil
-func (varAttribute *VarAttribute) ToCompileAttr(fixed *Attribute) Attribute {
-	if varAttribute.isFixedType {
+// ToCompileAttr
+//
+//  if fixed type then fixed param can be nil
+func (it *VarAttribute) ToCompileAttr(fixed *Attribute) Attribute {
+	if it.isFixedType {
 		return Attribute{
-			IsRead:    varAttribute.isRead.IsTrue(),
-			IsWrite:   varAttribute.isWrite.IsTrue(),
-			IsExecute: varAttribute.isExecute.IsTrue(),
+			IsRead:    it.isRead.IsTrue(),
+			IsWrite:   it.isWrite.IsTrue(),
+			IsExecute: it.isExecute.IsTrue(),
 		}
 	}
 
 	return Attribute{
-		IsRead:    varAttribute.isRead.WildcardApply(fixed.IsRead),
-		IsWrite:   varAttribute.isWrite.WildcardApply(fixed.IsWrite),
-		IsExecute: varAttribute.isExecute.WildcardApply(fixed.IsExecute),
+		IsRead:    it.isRead.WildcardApply(fixed.IsRead),
+		IsWrite:   it.isWrite.WildcardApply(fixed.IsWrite),
+		IsExecute: it.isExecute.WildcardApply(fixed.IsExecute),
 	}
 }
 
-func (varAttribute *VarAttribute) Clone() *VarAttribute {
-	if varAttribute == nil {
+func (it *VarAttribute) Clone() *VarAttribute {
+	if it == nil {
 		return nil
 	}
 
 	return &VarAttribute{
-		rawInput:    varAttribute.rawInput,
-		isFixedType: varAttribute.IsFixedType(),
-		isRead:      varAttribute.isRead,
-		isWrite:     varAttribute.isWrite,
-		isExecute:   varAttribute.isExecute,
+		rawInput:    it.rawInput,
+		isFixedType: it.IsFixedType(),
+		isRead:      it.isRead,
+		isWrite:     it.isWrite,
+		isExecute:   it.isExecute,
 	}
 }
 
-func (varAttribute *VarAttribute) IsEqualPtr(next *VarAttribute) bool {
-	if varAttribute == nil && next == nil {
+func (it *VarAttribute) IsEqualPtr(next *VarAttribute) bool {
+	if it == nil && next == nil {
 		return true
 	}
 
-	if varAttribute == nil || next == nil {
+	if it == nil || next == nil {
 		return false
 	}
 
-	isRead := next.isRead == varAttribute.isRead
-	isWrite := next.isWrite == varAttribute.isWrite
-	isExecute := next.isExecute == varAttribute.isExecute
+	isRead := next.isRead == it.isRead
+	isWrite := next.isWrite == it.isWrite
+	isExecute := next.isExecute == it.isExecute
 
 	return isRead &&
 		isWrite &&
 		isExecute
 }
 
-func (varAttribute *VarAttribute) String() string {
-	return varAttribute.rawInput
+func (it *VarAttribute) String() string {
+	return it.rawInput
 }

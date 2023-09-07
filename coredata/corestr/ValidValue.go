@@ -6,9 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type ValidValue struct {
@@ -34,7 +35,9 @@ func NewValidValueUsingAny(
 	}
 }
 
-// NewValidValueUsingAnyAutoValid IsValid to false on nil or Empty string
+// NewValidValueUsingAnyAutoValid
+//
+//	IsValid to false on nil or Empty string
 func NewValidValueUsingAnyAutoValid(
 	isIncludeFieldName bool,
 	any interface{},
@@ -97,7 +100,7 @@ func (it *ValidValue) IsEmpty() bool {
 }
 
 func (it *ValidValue) IsWhitespace() bool {
-	return utilstringinternal.IsEmptyOrWhitespace(it.Value)
+	return strutilinternal.IsEmptyOrWhitespace(it.Value)
 }
 
 func (it *ValidValue) Trim() string {
@@ -149,8 +152,12 @@ func (it *ValidValue) ValueDefInt() int {
 func (it *ValidValue) ValueByte(defVal byte) byte {
 	toInt, err := strconv.Atoi(it.Value)
 
-	if err != nil || toInt > constants.MaxUnit8AsInt {
-		return defVal
+	if err != nil || toInt < 0 {
+		return constants.Zero
+	}
+
+	if toInt > constants.MaxUnit8AsInt {
+		return constants.MaxUnit8
 	}
 
 	return byte(toInt)
@@ -159,8 +166,12 @@ func (it *ValidValue) ValueByte(defVal byte) byte {
 func (it *ValidValue) ValueDefByte() byte {
 	toInt, err := strconv.Atoi(it.Value)
 
-	if err != nil || toInt > constants.MaxUnit8AsInt {
+	if err != nil || toInt < 0 {
 		return constants.Zero
+	}
+
+	if toInt > constants.MaxUnit8AsInt {
+		return constants.MaxUnit8
 	}
 
 	return byte(toInt)
@@ -181,9 +192,10 @@ func (it *ValidValue) ValueDefFloat64() float64 {
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
-//		!receiver.IsLeftEmpty() &&
-//		!receiver.IsMiddleEmpty() &&
-//		!receiver.IsRightEmpty()
+//
+//	!receiver.IsLeftEmpty() &&
+//	!receiver.IsMiddleEmpty() &&
+//	!receiver.IsRightEmpty()
 func (it *ValidValue) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsEmpty()
@@ -345,4 +357,52 @@ func (it *ValidValue) FullString() string {
 	return fmt.Sprintf(
 		constants.SprintPropertyNameValueFormat,
 		*it)
+}
+
+func (it *ValidValue) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Value = ""
+	it.valueBytes = nil
+	it.IsValid = false
+	it.Message = ""
+}
+
+func (it *ValidValue) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
+}
+
+func (it ValidValue) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it ValidValue) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it *ValidValue) ParseInjectUsingJson(
+	jsonResult *corejson.Result,
+) (*ValidValue, error) {
+	err := jsonResult.Deserialize(it)
+
+	if err == nil {
+		return it, err
+	}
+
+	// has err
+	return nil, err
+}
+
+func (it *ValidValue) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
+}
+
+func (it *ValidValue) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

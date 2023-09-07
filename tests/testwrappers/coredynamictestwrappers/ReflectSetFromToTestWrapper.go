@@ -1,8 +1,8 @@
 package coredynamictestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/corevalidator"
+	"gitlab.com/auk-go/core/coretests"
+	"gitlab.com/auk-go/core/corevalidator"
 )
 
 type ReflectSetFromToTestWrapper struct {
@@ -50,7 +50,7 @@ func (it ReflectSetFromToTestWrapper) Actual() interface{} {
 }
 
 func (it ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapper() coretests.SimpleTestCaseWrapper {
-	return it
+	return &it
 }
 
 func (it *ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapperContractsBinder() coretests.SimpleTestCaseWrapperContractsBinder {

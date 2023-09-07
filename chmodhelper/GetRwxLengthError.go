@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/errcore"
+import "gitlab.com/auk-go/core/errcore"
 
 func GetRwxLengthError(rwx string) error {
 	if len(rwx) != SingleRwxLength {

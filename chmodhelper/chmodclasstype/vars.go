@@ -1,23 +1,23 @@
 package chmodclasstype
 
 import (
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 var (
 	Ranges = [...]string{
-		UnInitialized: "UnInitialized",
-		All:           "All",
-		Owner:         "Owner",
-		Group:         "Group",
-		Other:         "Other",
-		OwnerGroup:    "OwnerGroup",
-		GroupOther:    "GroupOther",
-		OwnerOther:    "OwnerOther",
+		Invalid:    "Invalid",
+		All:        "All",
+		Owner:      "Owner",
+		Group:      "Group",
+		Other:      "Other",
+		OwnerGroup: "OwnerGroup",
+		GroupOther: "GroupOther",
+		OwnerOther: "OwnerOther",
 	}
 
-	BasicEnumImpl = enumimpl.NewBasicByteUsingIndexedSlice(
-		reflectinternal.TypeName(UnInitialized),
+	BasicEnumImpl = enumimpl.New.BasicByte.UsingTypeSlice(
+		reflectinternal.TypeName(Invalid),
 		Ranges[:])
 )

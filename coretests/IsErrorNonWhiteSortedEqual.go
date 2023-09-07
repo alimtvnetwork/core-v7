@@ -1,6 +1,6 @@
 package coretests
 
-import "gitlab.com/evatix-go/core/errcore"
+import "gitlab.com/auk-go/core/errcore"
 
 func IsErrorNonWhiteSortedEqual(
 	isPrintOnFail bool,

@@ -3,16 +3,16 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/corecmp"
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/coreversion"
-	"gitlab.com/evatix-go/core/enums/versionindexes"
+	"gitlab.com/auk-go/core/corecmp"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/coreversion"
+	"gitlab.com/auk-go/core/enums/versionindexes"
 )
 
 func versionCompareTest(leftVersion, rightVersion string) corecomparator.Compare {
 	fmt.Println("left, right = ", leftVersion, rightVersion)
-	leftV := coreversion.New(leftVersion)
-	rightV := coreversion.New(rightVersion)
+	leftV := coreversion.New.Create(leftVersion)
+	rightV := coreversion.New.Create(rightVersion)
 
 	fmt.Println("   left, right = ", leftV, rightV)
 	r1 := leftV.Compare(rightV)

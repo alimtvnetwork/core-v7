@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type Compare byte
@@ -24,6 +24,50 @@ const (
 
 func (it Compare) Is(other Compare) bool {
 	return it == other
+}
+
+func (it Compare) IsLess() bool {
+	return it == LeftLess
+}
+
+func (it Compare) IsLessEqual() bool {
+	return it == LeftLess || it == Equal
+}
+
+func (it Compare) IsGreater() bool {
+	return it == LeftGreater
+}
+
+func (it Compare) IsGreaterEqual() bool {
+	return it == LeftGreater || it == Equal
+}
+
+func (it Compare) IsNameEqual(name string) bool {
+	return it.Name() == name
+}
+
+func (it Compare) ToNumberString() string {
+	return strconv.Itoa(int(it))
+}
+
+func (it Compare) IsDefined() bool {
+	return it != Inconclusive
+}
+
+func (it Compare) IsValid() bool {
+	return it != Inconclusive
+}
+
+func (it Compare) IsInvalid() bool {
+	return it == Inconclusive
+}
+
+func (it Compare) RangeNamesCsv() string {
+	return RangeNamesCsv()
+}
+
+func (it Compare) IsValueEqual(value byte) bool {
+	return byte(it) == value
 }
 
 func (it Compare) IsEqual() bool {
@@ -46,11 +90,31 @@ func (it Compare) IsLeftLessEqual() bool {
 	return it == LeftLessEqual
 }
 
+// IsLeftLessOrLessEqualOrEqual
+//
+//   it == Equal || it == LeftLess || it == LeftLessEqual
 func (it Compare) IsLeftLessOrLessEqualOrEqual() bool {
 	return it == Equal || it == LeftLess || it == LeftLessEqual
 }
 
+// IsLeftLessEqualLogically
+//
+//  it == Equal || it == LeftLess || it == LeftLessEqual
+func (it Compare) IsLeftLessEqualLogically() bool {
+	return it == Equal || it == LeftLess || it == LeftLessEqual
+}
+
+// IsLeftGreaterOrGreaterEqualOrEqual
+//
+//  it == Equal || it == LeftGreater || it == LeftGreaterEqual
 func (it Compare) IsLeftGreaterOrGreaterEqualOrEqual() bool {
+	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
+}
+
+// IsLeftGreaterEqualLogically
+//
+//   it == Equal || it == LeftGreater || it == LeftGreaterEqual
+func (it Compare) IsLeftGreaterEqualLogically() bool {
 	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
 }
 
@@ -58,8 +122,18 @@ func (it Compare) IsNotEqual() bool {
 	return it == NotEqual
 }
 
+// IsNotEqualLogically
+//
+//  return it != Equal
 func (it Compare) IsNotEqualLogically() bool {
 	return it != Equal
+}
+
+// IsDefinedPlus
+//
+//  return  it != Inconclusive && it == right
+func (it Compare) IsDefinedPlus(right Compare) bool {
+	return it != Inconclusive && it == right
 }
 
 func (it Compare) IsInconclusive() bool {
@@ -153,6 +227,24 @@ func (it Compare) Value() byte {
 	return byte(it)
 }
 
+func (it Compare) IsCompareEqualLogically(
+	expectedCompare Compare,
+) bool {
+	if it == expectedCompare {
+		return true
+	}
+
+	if expectedCompare.IsLeftGreaterEqualLogically() {
+		return it.IsLeftGreaterEqualLogically()
+	}
+
+	if expectedCompare.IsLeftLessEqualLogically() {
+		return it.IsLeftLessEqualLogically()
+	}
+
+	return false
+}
+
 func (it Compare) OnlySupportedErr(
 	message string,
 	onlySupportedCompares ...Compare,
@@ -215,4 +307,42 @@ func (it Compare) StringValue() string {
 
 func (it Compare) String() string {
 	return CompareNames[it]
+}
+
+func (it Compare) IsAnyNamesOf(names ...string) bool {
+	for _, name := range names {
+		if it.IsNameEqual(name) {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it Compare) ValueByte() byte {
+	return byte(it)
+}
+
+func (it Compare) ValueInt() int {
+	return int(it)
+}
+
+func (it Compare) ValueInt8() int8 {
+	return int8(it)
+}
+
+func (it Compare) ValueInt16() int16 {
+	return int16(it)
+}
+
+func (it Compare) ValueInt32() int32 {
+	return int32(it)
+}
+
+func (it Compare) ValueString() string {
+	return it.ToNumberString()
+}
+
+func (it Compare) Format(format string) (compiled string) {
+	panic("Not implemented for compare purposefully : " + format)
 }

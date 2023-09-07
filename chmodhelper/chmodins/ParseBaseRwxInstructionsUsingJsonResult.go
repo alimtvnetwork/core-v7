@@ -1,8 +1,8 @@
 package chmodins
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func ParseBaseRwxInstructionsUsingJsonResult(

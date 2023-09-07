@@ -1,7 +1,7 @@
 package errcore
 
 import (
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 func MeaningfulErrorWithData(
@@ -16,5 +16,5 @@ func MeaningfulErrorWithData(
 
 	return rawErrType.Error(
 		funcName,
-		err.Error()+utilstringinternal.AnyToString(data))
+		err.Error()+strutilinternal.AnyToString(data))
 }

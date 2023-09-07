@@ -1,6 +1,16 @@
 package coreinstruction
 
 type BaseFromTo struct {
-	From string `json:"From,omitempty"`
-	To   string `json:"To,omitempty"`
+	FromTo
+}
+
+func NewBaseFromTo(
+	from, to string,
+) BaseFromTo {
+	return BaseFromTo{
+		FromTo{
+			From: from,
+			To:   to,
+		},
+	}
 }

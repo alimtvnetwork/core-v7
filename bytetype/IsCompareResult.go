@@ -1,8 +1,8 @@
 package bytetype
 
 import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/internal/messages"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/internal/messages"
 )
 
 // IsCompareResult Here left is v, and right is `n`

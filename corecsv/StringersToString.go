@@ -8,7 +8,7 @@ import (
 func StringersToString(
 	joiner string,
 	isIncludeQuote,
-	isIncludeSingleQuote bool,
+	isIncludeSingleQuote bool, // disable this will give double quote
 	stringerFunctions ...fmt.Stringer,
 ) string {
 	slice := StringersToCsvStrings(

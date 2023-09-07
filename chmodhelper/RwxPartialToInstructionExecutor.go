@@ -1,11 +1,12 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 // RwxPartialToInstructionExecutor
+//
 // rwxPartial can be any length in
 // between 0-10 (rest will be fixed by wildcard)
 //

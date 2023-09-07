@@ -9,14 +9,14 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/stringslice"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/simplewrap"
 )
 
 type Collection struct {
@@ -25,11 +25,11 @@ type Collection struct {
 }
 
 func (it *Collection) JsonString() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) JsonStringMust() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) HasAnyItem() bool {
@@ -53,7 +53,7 @@ func (it *Collection) ListStrings() []string {
 }
 
 func (it *Collection) StringJSON() string {
-	return it.Json().JsonString()
+	return it.JsonPtr().JsonString()
 }
 
 func (it *Collection) RemoveAt(index int) (isSuccess bool) {
@@ -83,7 +83,7 @@ func (it *Collection) Capacity() int {
 }
 
 func (it *Collection) Length() int {
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
@@ -94,7 +94,7 @@ func (it *Collection) LengthLock() int {
 	it.Lock()
 	defer it.Unlock()
 
-	if it.items == nil {
+	if it == nil || it.items == nil {
 		return 0
 	}
 
@@ -201,7 +201,7 @@ func (it *Collection) AddNonEmpty(str string) *Collection {
 }
 
 func (it *Collection) AddNonEmptyWhitespace(str string) *Collection {
-	if utilstringinternal.IsEmptyOrWhitespace(str) {
+	if strutilinternal.IsEmptyOrWhitespace(str) {
 		return it
 	}
 
@@ -925,7 +925,7 @@ func (it *Collection) GetPagedCollection(
 			oneBasedPageIndex,
 		)
 
-		(*collectionOfCollection.items)[oneBasedPageIndex-1] = pagedCollection
+		collectionOfCollection.items[oneBasedPageIndex-1] = pagedCollection
 
 		wg.Done()
 	}
@@ -2295,4 +2295,12 @@ func (it *Collection) AsJsonMarshaller() corejson.JsonMarshaller {
 
 func (it *Collection) AsJsonContractsBinder() corejson.JsonContractsBinder {
 	return it
+}
+
+func (it *Collection) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
+}
+
+func (it *Collection) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
 }

@@ -3,8 +3,8 @@ package corerange
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreindexes"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreindexes"
 )
 
 type StartEndString struct {

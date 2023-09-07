@@ -2,82 +2,41 @@ package enumimpl
 
 import (
 	"fmt"
-	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type BasicInt8 struct {
-	*numberEnumBase
+	numberEnumBase
 	jsonDoubleQuoteNameToValueHashMap        map[string]int8 // contains names double quotes to value
 	valueToJsonDoubleQuoteStringBytesHashmap map[int8][]byte // contains value to string bytes with double quotes
 	valueNameHashmap                         map[int8]string // contains name without double quotes
 	minVal, maxVal                           int8
 }
 
-func NewBasicInt8(
-	typeName string,
-	actualValueRanges []int8,
-	stringRanges []string,
-	min, max int8,
-) *BasicInt8 {
-	enumBase := newNumberEnumBase(
-		typeName,
-		actualValueRanges,
-		stringRanges,
-		min,
-		max)
+func (it BasicInt8) IsAnyNamesOf(
+	value int8,
+	names ...string,
+) bool {
+	currentName := it.ToEnumString(value)
 
-	jsonDoubleQuoteNameToValueHashMap := make(map[string]int8, len(actualValueRanges))
-	valueToJsonDoubleQuoteStringBytesHashmap := make(map[int8][]byte, len(actualValueRanges))
-	valueNameHashmap := make(map[int8]string, len(actualValueRanges))
-
-	for i, actualVal := range actualValueRanges {
-		key := stringRanges[i]
-		indexJson := simplewrap.WithDoubleQuoteAny(i)
-		indexString := strconv.Itoa(i)
-		jsonName := simplewrap.WithDoubleQuote(key)
-		jsonDoubleQuoteNameToValueHashMap[jsonName] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexJson] = actualVal
-		jsonDoubleQuoteNameToValueHashMap[indexString] = actualVal
-		valueToJsonDoubleQuoteStringBytesHashmap[actualVal] = []byte(jsonName)
-		valueNameHashmap[actualVal] = key
+	for _, name := range names {
+		if name == currentName {
+			return true
+		}
 	}
 
-	return &BasicInt8{
-		numberEnumBase:                           enumBase,
-		minVal:                                   min,
-		maxVal:                                   max,
-		jsonDoubleQuoteNameToValueHashMap:        jsonDoubleQuoteNameToValueHashMap,
-		valueToJsonDoubleQuoteStringBytesHashmap: valueToJsonDoubleQuoteStringBytesHashmap,
-		valueNameHashmap:                         valueNameHashmap,
-	}
+	return false
 }
 
-func NewBasicInt8UsingIndexedSlice(
-	typeName string,
-	indexedSliceWithValues []string,
-) *BasicInt8 {
-	min := constants.Zero
-	max := len(indexedSliceWithValues)
-
-	actualValues := make([]int8, max)
-	for i := range indexedSliceWithValues {
-		actualValues[i] = int8(i)
-	}
-
-	return NewBasicInt8(
-		typeName,
-		actualValues,
-		indexedSliceWithValues,
-		int8(min),
-		int8(max))
-}
-
-func (it *BasicInt8) IsAnyOf(value int8, checkingItems ...int8) bool {
+func (it BasicInt8) IsAnyOf(
+	value int8,
+	checkingItems ...int8,
+) bool {
 	if len(checkingItems) == 0 {
 		return true
 	}
@@ -91,19 +50,19 @@ func (it *BasicInt8) IsAnyOf(value int8, checkingItems ...int8) bool {
 	return false
 }
 
-func (it *BasicInt8) Max() int8 {
+func (it BasicInt8) Max() int8 {
 	return it.maxVal
 }
 
-func (it *BasicInt8) Min() int8 {
+func (it BasicInt8) Min() int8 {
 	return it.minVal
 }
 
-func (it *BasicInt8) GetValueByString(valueString string) int8 {
+func (it BasicInt8) GetValueByString(valueString string) int8 {
 	return it.jsonDoubleQuoteNameToValueHashMap[valueString]
 }
 
-func (it *BasicInt8) GetValueByName(name string) (int8, error) {
+func (it BasicInt8) GetValueByName(name string) (int8, error) {
 	v, has := it.jsonDoubleQuoteNameToValueHashMap[name]
 
 	if has {
@@ -127,36 +86,69 @@ func (it *BasicInt8) GetValueByName(name string) (int8, error) {
 		it.RangeNamesCsv())
 }
 
-func (it *BasicInt8) GetStringValue(input int8) string {
+func (it BasicInt8) ExpectingEnumValueError(
+	rawString string,
+	expectedEnum interface{},
+) error {
+	expectedEnumName := it.ToName(expectedEnum)
+	expectedValue := it.GetValueByString(expectedEnumName)
+	convValue, err := it.GetValueByName(rawString)
+
+	if err != nil {
+		return errcore.ExpectingErrorSimpleNoType(
+			"Expecting enum: "+expectedEnumName,
+			expectedEnumName,
+			rawString+err.Error())
+	}
+
+	if convValue == expectedValue {
+		return nil
+	}
+
+	return errcore.ExpectingErrorSimpleNoType(
+		"Expecting enum: "+expectedEnumName,
+		expectedEnumName,
+		rawString+it.RangesInvalidMessage())
+}
+
+func (it BasicInt8) GetStringValue(input int8) string {
 	return it.StringRanges()[input]
 }
 
-func (it *BasicInt8) Ranges() []int8 {
+func (it BasicInt8) Ranges() []int8 {
 	return it.actualValueRanges.([]int8)
 }
 
-func (it *BasicInt8) Hashmap() map[string]int8 {
+func (it BasicInt8) Hashmap() map[string]int8 {
 	return it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it *BasicInt8) HashmapPtr() *map[string]int8 {
+func (it BasicInt8) HashmapPtr() *map[string]int8 {
 	return &it.jsonDoubleQuoteNameToValueHashMap
 }
 
-func (it *BasicInt8) IsValidRange(value int8) bool {
+func (it BasicInt8) IsValidRange(value int8) bool {
 	return value >= it.minVal && value <= it.maxVal
 }
 
-// ToEnumJsonBytes used for MarshalJSON from map
-func (it *BasicInt8) ToEnumJsonBytes(value int8) []byte {
-	return it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+// ToEnumJsonBytes
+//
+//  used for MarshalJSON from map
+func (it BasicInt8) ToEnumJsonBytes(value int8) ([]byte, error) {
+	jsonBytes, has := it.valueToJsonDoubleQuoteStringBytesHashmap[value]
+
+	if has {
+		return jsonBytes, nil
+	}
+
+	return []byte{}, it.notFoundJsonBytesError(value)
 }
 
-func (it *BasicInt8) ToEnumString(value int8) string {
+func (it BasicInt8) ToEnumString(value int8) string {
 	return it.valueNameHashmap[value]
 }
 
-func (it *BasicInt8) AppendPrependJoinValue(
+func (it BasicInt8) AppendPrependJoinValue(
 	joiner string,
 	appendVal, prependVal int8,
 ) string {
@@ -165,7 +157,7 @@ func (it *BasicInt8) AppendPrependJoinValue(
 		it.ToEnumString(appendVal)
 }
 
-func (it *BasicInt8) AppendPrependJoinNamer(
+func (it BasicInt8) AppendPrependJoinNamer(
 	joiner string,
 	appendVal, prependVal coreinterface.ToNamer,
 ) string {
@@ -174,14 +166,14 @@ func (it *BasicInt8) AppendPrependJoinNamer(
 		appendVal.Name()
 }
 
-func (it *BasicInt8) ToNumberString(valueInRawFormat interface{}) string {
+func (it BasicInt8) ToNumberString(valueInRawFormat interface{}) string {
 	return fmt.Sprintf(constants.SprintValueFormat, valueInRawFormat)
 }
 
 // UnmarshallToValue Mostly used for UnmarshalJSON
 //
 // Given bytes string enum value and transpile to exact enum raw value using map
-func (it *BasicInt8) UnmarshallToValue(
+func (it BasicInt8) UnmarshallToValue(
 	isMappedToFirstIfEmpty bool,
 	jsonUnmarshallingValue []byte,
 ) (int8, error) {
@@ -201,4 +193,8 @@ func (it *BasicInt8) UnmarshallToValue(
 	}
 
 	return it.GetValueByName(str)
+}
+
+func (it BasicInt8) EnumType() enumtype.Variant {
+	return enumtype.Integer8
 }

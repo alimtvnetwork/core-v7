@@ -5,6 +5,11 @@ package chmodhelper
 //  - existingRwx : Usually refers to fixed rwx values like "rwx", "--x", "-w-" etc.
 //  - rwxWildcardInput : Usually refers to fixed rwx values like "rw*", "*-x", "-w-" etc.
 //      Wildcard means keep the existing value as is.
+//
+//  Example:
+//   - existingRwx        : (rwx : "r-x"),
+//   - rwxWildcardInput   : (rwx : "r*-")
+//   - @returns           : "r--"
 func MergeRwxWildcardWithFixedRwx(
 	existingRwx,
 	rwxWildcardInput string,
@@ -30,7 +35,7 @@ func MergeRwxWildcardWithFixedRwx(
 		return nil, err
 	}
 
-	attr := NewAttributeUsingRwx(existingRwx)
+	attr := New.Attribute.UsingRwxString(existingRwx)
 	fixedAttr := varAttr.ToCompileAttr(&attr)
 
 	return &fixedAttr, nil

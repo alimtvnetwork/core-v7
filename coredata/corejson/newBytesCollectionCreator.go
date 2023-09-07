@@ -76,3 +76,47 @@ func (it newBytesCollectionCreator) AnyItems(
 
 	return collection, err
 }
+
+func (it newBytesCollectionCreator) JsonersPlusCap(
+	isIgnoreNilOrErr bool,
+	capacity int,
+	jsoners ...Jsoner,
+) *BytesCollection {
+	length := capacity + len(jsoners)
+
+	if length == 0 || len(jsoners) == 0 {
+		return it.UsingCap(length)
+	}
+
+	collection := it.UsingCap(length)
+
+	return collection.AddJsoners(
+		isIgnoreNilOrErr,
+		jsoners...)
+}
+
+func (it newBytesCollectionCreator) Jsoners(
+	jsoners ...Jsoner,
+) *BytesCollection {
+	return it.JsonersPlusCap(
+		true,
+		0,
+		jsoners...)
+}
+
+func (it newBytesCollectionCreator) Serializers(
+	serializers ...bytesSerializer,
+) *BytesCollection {
+	if len(serializers) == 0 {
+		return it.Empty()
+	}
+
+	collection := it.UsingCap(
+		len(serializers))
+
+	for _, serializer := range serializers {
+		collection.AddSerializer(serializer)
+	}
+
+	return collection
+}

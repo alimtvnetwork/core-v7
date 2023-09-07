@@ -3,8 +3,8 @@ package conditional
 import (
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func executeErrorFunctions(functions []func() error) error {

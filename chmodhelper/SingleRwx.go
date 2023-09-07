@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodclasstype"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/chmodhelper/chmodclasstype"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type SingleRwx struct {
@@ -42,24 +42,24 @@ func NewSingleRwx(
 	}, nil
 }
 
-func (receiver *SingleRwx) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
-	switch receiver.ClassType {
+func (it *SingleRwx) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
+	switch it.ClassType {
 	case chmodclasstype.All:
 		return &chmodins.RwxOwnerGroupOther{
-			Owner: receiver.Rwx,
-			Group: receiver.Rwx,
-			Other: receiver.Rwx,
+			Owner: it.Rwx,
+			Group: it.Rwx,
+			Other: it.Rwx,
 		}
 	case chmodclasstype.Owner:
 		return &chmodins.RwxOwnerGroupOther{
-			Owner: receiver.Rwx,
+			Owner: it.Rwx,
 			Group: AllWildcards,
 			Other: AllWildcards,
 		}
 	case chmodclasstype.Group:
 		return &chmodins.RwxOwnerGroupOther{
 			Owner: AllWildcards,
-			Group: receiver.Rwx,
+			Group: it.Rwx,
 			Other: AllWildcards,
 		}
 
@@ -67,28 +67,28 @@ func (receiver *SingleRwx) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
 		return &chmodins.RwxOwnerGroupOther{
 			Owner: AllWildcards,
 			Group: AllWildcards,
-			Other: receiver.Rwx,
+			Other: it.Rwx,
 		}
 
 	case chmodclasstype.OwnerGroup:
 		return &chmodins.RwxOwnerGroupOther{
-			Owner: receiver.Rwx,
-			Group: receiver.Rwx,
+			Owner: it.Rwx,
+			Group: it.Rwx,
 			Other: AllWildcards,
 		}
 
 	case chmodclasstype.GroupOther:
 		return &chmodins.RwxOwnerGroupOther{
 			Owner: AllWildcards,
-			Group: receiver.Rwx,
-			Other: receiver.Rwx,
+			Group: it.Rwx,
+			Other: it.Rwx,
 		}
 
 	case chmodclasstype.OwnerOther:
 		return &chmodins.RwxOwnerGroupOther{
-			Owner: receiver.Rwx,
+			Owner: it.Rwx,
 			Group: AllWildcards,
-			Other: receiver.Rwx,
+			Other: it.Rwx,
 		}
 
 	default:
@@ -96,10 +96,10 @@ func (receiver *SingleRwx) ToRwxOwnerGroupOther() *chmodins.RwxOwnerGroupOther {
 	}
 }
 
-func (receiver *SingleRwx) ToRwxInstruction(
+func (it *SingleRwx) ToRwxInstruction(
 	conditionalIns *chmodins.Condition,
 ) *chmodins.RwxInstruction {
-	rwxOwnerGroupOther := receiver.ToRwxOwnerGroupOther()
+	rwxOwnerGroupOther := it.ToRwxOwnerGroupOther()
 
 	return &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *rwxOwnerGroupOther,
@@ -107,21 +107,22 @@ func (receiver *SingleRwx) ToRwxInstruction(
 	}
 }
 
-func (receiver *SingleRwx) ToVarRwxWrapper() (*RwxVariableWrapper, error) {
-	rwxOwnerGroupOther := receiver.ToRwxOwnerGroupOther()
+func (it *SingleRwx) ToVarRwxWrapper() (*RwxVariableWrapper, error) {
+	rwxOwnerGroupOther := it.ToRwxOwnerGroupOther()
 
 	return ParseRwxOwnerGroupOtherToRwxVariableWrapper(rwxOwnerGroupOther)
 }
 
-func (receiver *SingleRwx) ToDisabledRwxWrapper() (*RwxWrapper, error) {
-	rwxOwnerGroupOther := receiver.ToRwxOwnerGroupOther()
+func (it *SingleRwx) ToDisabledRwxWrapper() (*RwxWrapper, error) {
+	rwxOwnerGroupOther := it.ToRwxOwnerGroupOther()
 	rwxFullString := rwxOwnerGroupOther.String()
 	rwxFullString = strings.ReplaceAll(
 		rwxFullString,
 		constants.WildcardSymbol,
 		constants.Hyphen)
 
-	rwxWrapper, err := NewUsingHyphenedRwxFullString(rwxFullString)
+	rwxWrapper, err := New.RwxWrapper.RwxFullString(
+		rwxFullString)
 
 	if err != nil {
 		return nil, err
@@ -130,14 +131,16 @@ func (receiver *SingleRwx) ToDisabledRwxWrapper() (*RwxWrapper, error) {
 	return &rwxWrapper, err
 }
 
-func (receiver *SingleRwx) ToRwxWrapper() (*RwxWrapper, error) {
-	if !receiver.ClassType.IsAll() {
-		return nil, errcore.MeaningfulError(errcore.CannotConvertToRwxWhereVarRwxPossibleType,
-			"ToRwxWrapper", errors.New("use ToVarRwx"))
+func (it *SingleRwx) ToRwxWrapper() (*RwxWrapper, error) {
+	if !it.ClassType.IsAll() {
+		return nil, errcore.MeaningfulError(
+			errcore.CannotConvertToRwxWhereVarRwxPossibleType,
+			"ToRwxWrapper",
+			errors.New("use ToVarRwx"))
 	}
 
-	rwxWrapper, err := NewUsingRwxOwnerGroupOther(
-		receiver.ToRwxOwnerGroupOther())
+	rwxWrapper, err := New.RwxWrapper.UsingRwxOwnerGroupOther(
+		it.ToRwxOwnerGroupOther())
 
 	if err != nil {
 		return nil, err
@@ -146,7 +149,7 @@ func (receiver *SingleRwx) ToRwxWrapper() (*RwxWrapper, error) {
 	return &rwxWrapper, err
 }
 
-func (receiver *SingleRwx) ApplyOnMany(
+func (it *SingleRwx) ApplyOnMany(
 	condition *chmodins.Condition,
 	locations ...string,
 ) error {
@@ -154,7 +157,7 @@ func (receiver *SingleRwx) ApplyOnMany(
 		return nil
 	}
 
-	toRwxInstruction := receiver.ToRwxInstruction(condition)
+	toRwxInstruction := it.ToRwxInstruction(condition)
 	executor, err := ParseRwxInstructionToExecutor(toRwxInstruction)
 
 	if err != nil {

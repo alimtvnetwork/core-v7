@@ -1,7 +1,7 @@
 package corestr
 
 import (
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type newCollectionsOfCollectionCreator struct{}
@@ -12,7 +12,7 @@ func (it *newCollectionsOfCollectionCreator) Cap(
 	collection := make([]*Collection, constants.Zero, capacity)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -20,7 +20,7 @@ func (it *newCollectionsOfCollectionCreator) Empty() *CollectionsOfCollection {
 	collection := make([]*Collection, constants.Zero)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }
 
@@ -142,6 +142,6 @@ func (it *newCollectionsOfCollectionCreator) LenCap(
 		capacity)
 
 	return &CollectionsOfCollection{
-		items: &collection,
+		items: collection,
 	}
 }

@@ -31,18 +31,21 @@ const (
 	X777                                Variant = "777"
 )
 
-func (variant *Variant) String() string {
-	return string(*variant)
+func (it Variant) String() string {
+	return string(it)
 }
 
-func (variant *Variant) ExpandOctalByte() (r7, w7, x7 byte) {
-	return ExpandCharRwx(string(*variant))
+// ExpandOctalByte
+//
+//  returns byte values at most 7 for each.
+func (it Variant) ExpandOctalByte() (r7, w7, x7 byte) {
+	return ExpandCharRwx(string(it))
 }
 
-func (variant *Variant) ToWrapper() (RwxWrapper, error) {
-	return NewUsingVariant(*variant)
+func (it Variant) ToWrapper() (RwxWrapper, error) {
+	return New.RwxWrapper.UsingVariant(it)
 }
 
-func (variant *Variant) ToWrapperPtr() (*RwxWrapper, error) {
-	return NewUsingVariantPtr(*variant)
+func (it Variant) ToWrapperPtr() (*RwxWrapper, error) {
+	return New.RwxWrapper.UsingVariantPtr(it)
 }

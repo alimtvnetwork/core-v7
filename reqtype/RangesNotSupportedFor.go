@@ -1,7 +1,7 @@
 package reqtype
 
 import (
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func RangesNotSupportedFor(

@@ -4,8 +4,8 @@ import (
 	"math"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
 )
 
 type within struct{}
@@ -76,28 +76,46 @@ func (it *within) StringRangeUint32(
 	finalInt, isInRange := it.StringRangeInteger(
 		true,
 		constants.Zero,
-		math.MaxUint32,
+		math.MaxInt32,
 		input)
 
-	return uint32(finalInt), isInRange
+	// fix https://t.ly/6aoW,
+	// https://gitlab.com/auk-go/core/-/issues/81
+	// use MaxInt32 instead of uint32Max
+	if finalInt <= math.MaxInt32 {
+		return uint32(finalInt), isInRange
+	}
+
+	return 0, isInRange
 }
 
 func (it *within) StringRangeIntegerDefault(
 	min, max int,
 	input string,
 ) (val int, isInRange bool) {
-	toInt, err := strconv.Atoi(input)
+	toInt, err := strconv.ParseInt(
+		input,
+		10,
+		64)
 
 	if err != nil {
 		return constants.Zero, false
 	}
 
-	return it.RangeInteger(
-		true,
-		min,
-		max,
-		toInt)
+	isInRange = toInt >= int64(min) &&
+		toInt <= int64(max)
 
+	if isInRange {
+		return int(toInt), isInRange
+	}
+
+	isLessMin := toInt < int64(min)
+	if isLessMin {
+		return min, false
+	}
+
+	// above
+	return max, false
 }
 
 func (it *within) StringRangeInteger(

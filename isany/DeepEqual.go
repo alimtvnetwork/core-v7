@@ -1,7 +1,7 @@
 package isany
 
 import (
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 func DeepEqual(

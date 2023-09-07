@@ -1,5 +1,7 @@
 package main
 
+import "strconv"
+
 func main() {
 	// x := corestr.SimpleSlice{Items: []string{"a", "b"}}
 	// result := x.Json()
@@ -44,9 +46,23 @@ func main() {
 	// pathStatTest01()
 	// pathStatTest02()
 	// nullTesting02()
-
 	// keyLegendsTest()
 	// coreDynamicMapAnyItems()
 	// enumTesting()
-	payloadTest01()
+	// payloadTest01()
+	// println(codestack.JoinPackageNameWithRelative("reqtype.Request", "Invalid"))
+
+	// fmt.Println(reqtype.BasicEnumImpl.DynamicMap().SortedKeyAnyValues())
+	// fmt.Println(reqtype.Read.RangeNamesCsv())
+	// fmt.Println(issetter.True.RangeNamesCsv())
+	// fmt.Println(reqtype.BasicEnumImpl.AllNameValues())
+	// fmt.Println(issetter.True.AllNameValues())
+
+	// SimpleStringOnceChecker(100)
+	x := 65
+	println(strconv.Itoa(x))
+	// readWriteTest01()
+	// infoCreateExample01()
+	// lazyRegExTester01()
+	// fmt.Println(bytetype.New(1).StringValue())
 }

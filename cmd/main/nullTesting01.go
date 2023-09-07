@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/isany"
+	"gitlab.com/auk-go/core/isany"
 )
 
 func nullTesting01() {

@@ -7,11 +7,12 @@ import (
 	"sort"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/mapdiffinternal"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type MapAnyItems struct {
@@ -26,6 +27,35 @@ func NewMapAnyItems(capacity int) *MapAnyItems {
 	slice := make(map[string]interface{}, capacity)
 
 	return &MapAnyItems{Items: slice}
+}
+
+func NewMapAnyItemsUsingAnyTypeMap(
+	anyTypeOfMap interface{},
+) (*MapAnyItems, error) {
+	if reflectinternal.IsNull(anyTypeOfMap) {
+		return EmptyMapAnyItems(), errcore.
+			CannotBeNilOrEmptyType.
+			ErrorNoRefs("given any map was nil, cannot process it.")
+	}
+
+	rv := reflect.ValueOf(anyTypeOfMap)
+	convertedMap, err := AnyTypeMapToMapStringAny(rv)
+
+	if err != nil {
+		return EmptyMapAnyItems(), err
+	}
+
+	return &MapAnyItems{Items: convertedMap}, nil
+}
+
+func NewMapAnyItemsUsingItems(
+	itemsMap map[string]interface{},
+) *MapAnyItems {
+	if len(itemsMap) == 0 {
+		return EmptyMapAnyItems()
+	}
+
+	return &MapAnyItems{Items: itemsMap}
 }
 
 func (it *MapAnyItems) Length() int {
@@ -50,7 +80,7 @@ func (it *MapAnyItems) HasKey(key string) bool {
 	return has
 }
 
-func (it *MapAnyItems) ReflectSet(
+func (it *MapAnyItems) ReflectSetTo(
 	key string,
 	toPointerOrBytes interface{},
 ) error {
@@ -67,12 +97,59 @@ func (it *MapAnyItems) ReflectSet(
 		toPointerOrBytes)
 }
 
-func (it *MapAnyItems) ReflectSetMust(
+func (it *MapAnyItems) ReflectSetToMust(
 	key string,
 	toPointerOrBytes interface{},
 ) {
-	err := it.ReflectSet(key, toPointerOrBytes)
+	err := it.ReflectSetTo(key, toPointerOrBytes)
 	errcore.HandleErr(err)
+}
+
+func (it *MapAnyItems) GetValue(
+	key string,
+) (any interface{}) {
+	valInf, has := it.Items[key]
+
+	if has {
+		return valInf
+	}
+
+	return nil
+}
+
+func (it *MapAnyItems) GetFieldsMap(
+	key string,
+) (
+	fieldMap map[string]interface{},
+	parsingErr error,
+	isFound bool,
+) {
+	valInf, has := it.Items[key]
+
+	if has {
+		fieldsMap, parsingErr := corejson.
+			Deserialize.
+			AnyToFieldsMap(valInf)
+
+		return fieldsMap, parsingErr, true
+	}
+
+	return nil, nil, false
+}
+
+// GetSafeFieldsMap
+//
+// Warning:
+//  Swallows the parsing err if any
+func (it *MapAnyItems) GetSafeFieldsMap(
+	key string,
+) (
+	fieldMap map[string]interface{},
+	isFound bool,
+) {
+	fieldMap, _, isFound = it.GetFieldsMap(key)
+
+	return fieldMap, isFound
 }
 
 func (it *MapAnyItems) Get(
@@ -281,6 +358,17 @@ func (it *MapAnyItems) Add(
 	return !isAlreadyExist
 }
 
+func (it *MapAnyItems) Set(
+	key string,
+	valInf interface{},
+) (isNewlyAdded bool) {
+	_, isAlreadyExist := it.Items[key]
+
+	it.Items[key] = valInf
+
+	return !isAlreadyExist
+}
+
 func (it *MapAnyItems) AddKeyAny(
 	keyAny corejson.KeyAny,
 ) (isNewlyAdded bool) {
@@ -388,7 +476,10 @@ func (it *MapAnyItems) GetPagedCollection(
 	return collectionOfCollection
 }
 
-func (it *MapAnyItems) AddMapResultsUsingCloneOption(
+// AddMapResult
+//
+//  apply override on existing result
+func (it *MapAnyItems) AddMapResult(
 	mapResults map[string]interface{},
 ) *MapAnyItems {
 	if len(mapResults) == 0 {
@@ -397,6 +488,49 @@ func (it *MapAnyItems) AddMapResultsUsingCloneOption(
 
 	for key, result := range mapResults {
 		it.Items[key] = result
+	}
+
+	return it
+}
+
+func (it *MapAnyItems) AddMapResultOption(
+	isOverride bool,
+	mapResults map[string]interface{},
+) *MapAnyItems {
+	if len(mapResults) == 0 {
+		return it
+	}
+
+	if isOverride {
+		return it.AddMapResult(mapResults)
+	}
+
+	// no override
+	for key, result := range mapResults {
+		_, isFound := it.Items[key]
+
+		if !isFound {
+			continue
+		}
+
+		it.Items[key] = result
+	}
+
+	return it
+}
+
+func (it *MapAnyItems) AddManyMapResultsUsingOption(
+	isOverridingExisting bool,
+	mapsOfMapsResults ...map[string]interface{},
+) *MapAnyItems {
+	if len(mapsOfMapsResults) == 0 {
+		return it
+	}
+
+	for _, mapResult := range mapsOfMapsResults {
+		it.AddMapResultOption(
+			isOverridingExisting,
+			mapResult)
 	}
 
 	return it
@@ -584,6 +718,119 @@ func (it *MapAnyItems) AllValues() []interface{} {
 	}
 
 	return values
+}
+
+func (it *MapAnyItems) DiffRaw(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) map[string]interface{} {
+	mapDiffer := mapdiffinternal.MapStringAnyDiff(
+		rightMap)
+
+	return mapDiffer.DiffRaw(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) Diff(
+	isRegardlessType bool,
+	rightMap *MapAnyItems,
+) *MapAnyItems {
+	rawMap := it.DiffRaw(
+		isRegardlessType,
+		rightMap.Items)
+
+	return NewMapAnyItemsUsingItems(rawMap)
+}
+
+func (it *MapAnyItems) IsRawEqual(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.
+		IsRawEqual(
+			isRegardlessType,
+			rightMap)
+}
+
+func (it *MapAnyItems) HashmapDiffUsingRaw(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) MapAnyItemDiff {
+	diffMap := it.DiffRaw(
+		isRegardlessType,
+		rightMap)
+
+	if len(diffMap) == 0 {
+		return map[string]interface{}{}
+	}
+
+	return diffMap
+}
+
+func (it *MapAnyItems) MapAnyItems() *MapAnyItems {
+	return it
+}
+
+func (it *MapAnyItems) HasAnyChanges(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) bool {
+	return !it.IsRawEqual(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) MapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	return it.Items
+}
+
+func (it *MapAnyItems) DiffJsonMessage(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) string {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.DiffJsonMessage(
+		isRegardlessType,
+		rightMap)
+}
+
+func (it *MapAnyItems) ToStringsSliceOfDiffMap(
+	diffMap map[string]interface{},
+) (diffSlice []string) {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.ToStringsSliceOfDiffMap(
+		diffMap)
+}
+
+func (it *MapAnyItems) ShouldDiffMessage(
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) string {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.ShouldDiffMessage(
+		isRegardlessType,
+		title,
+		rightMap)
+}
+
+func (it *MapAnyItems) LogShouldDiffMessage(
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) (diffMessage string) {
+	differ := it.RawMapStringAnyDiff()
+
+	return differ.LogShouldDiffMessage(
+		isRegardlessType,
+		title,
+		rightMap)
 }
 
 func (it *MapAnyItems) JsonMapResults() (*corejson.MapResults, error) {
@@ -816,4 +1063,12 @@ func (it *MapAnyItems) ClonePtr() (*MapAnyItems, error) {
 		jsonResult.Bytes)
 
 	return bytesConv.ToMapAnyItems()
+}
+
+func (it *MapAnyItems) RawMapStringAnyDiff() mapdiffinternal.MapStringAnyDiff {
+	if it == nil {
+		return map[string]interface{}{}
+	}
+
+	return it.Items
 }

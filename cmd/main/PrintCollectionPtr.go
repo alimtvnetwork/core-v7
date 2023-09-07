@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coredata/corestr"
 )
 
 func PrintCollectionPtr(collectionPtr *corestr.CollectionPtr) {

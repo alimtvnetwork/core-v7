@@ -1,9 +1,9 @@
 package chmodhelper
 
 func GetExistingChmodRwxWrapperMustPtr(
-	filePath string,
+	location string,
 ) *RwxWrapper {
-	wrapperPtr, err := GetExistingChmodRwxWrapperPtr(filePath)
+	wrapperPtr, err := GetExistingChmodRwxWrapperPtr(location)
 
 	if err != nil {
 		panic(err)

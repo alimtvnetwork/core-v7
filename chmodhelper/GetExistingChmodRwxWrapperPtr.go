@@ -3,18 +3,18 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func GetExistingChmodRwxWrapperPtr(
-	filePath string,
+	location string,
 ) (*RwxWrapper, error) {
-	fileInfo, err := os.Stat(filePath)
+	fileInfo, err := os.Stat(location)
 
 	if err != nil {
 		return nil, errcore.PathErrorType.
-			Error(err.Error(), ", file:"+filePath)
+			Error(err.Error(), ", file:"+location)
 	}
 
-	return NewUsingFileModePtr(fileInfo.Mode()), err
+	return New.RwxWrapper.UsingFileModePtr(fileInfo.Mode()), err
 }

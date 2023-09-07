@@ -1,5 +1,5 @@
 package reqtype
 
 func Min() Request {
-	return Uninitialized
+	return Invalid
 }

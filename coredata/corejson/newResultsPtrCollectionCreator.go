@@ -1,7 +1,7 @@
 package corejson
 
 import (
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type newResultsPtrCollectionCreator struct{}
@@ -155,4 +155,20 @@ func (it newResultsPtrCollectionCreator) Jsoners(
 		true,
 		0,
 		jsoners...)
+}
+
+func (it newResultsPtrCollectionCreator) Serializers(
+	serializers ...bytesSerializer,
+) *ResultsPtrCollection {
+	if len(serializers) == 0 {
+		return it.Empty()
+	}
+
+	collection := it.UsingCap(len(serializers))
+
+	for _, serializer := range serializers {
+		collection.AddSerializer(serializer)
+	}
+
+	return collection
 }

@@ -1,16 +1,19 @@
 package bytetype
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 var (
-	BasicEnumImpl = enumimpl.NewBasicByte(
+	BasicEnumImpl = enumimpl.New.BasicByte.CreateUsingMap(
 		reflectinternal.TypeName(Variant(0)),
-		[]byte{},
-		[]string{},
-		constants.Zero,
-		constants.MaxUnit8)
+		map[byte]string{
+			Zero.Value():  "Zero",
+			Min.Value():   "Min",
+			One.Value():   "One",
+			Two.Value():   "Two",
+			Three.Value(): "Three",
+			Max.Value():   "Max",
+		})
 )

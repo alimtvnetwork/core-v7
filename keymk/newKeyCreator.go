@@ -1,6 +1,6 @@
 package keymk
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 type newKeyCreator struct{}
 
@@ -18,6 +18,44 @@ func (it *newKeyCreator) Create(
 	}
 
 	return key
+}
+
+func (it *newKeyCreator) PathTemplate(
+	root string,
+	starterKeyChains ...interface{},
+) *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		starterKeyChains...)
+}
+
+func (it *newKeyCreator) PathTemplateDefault(
+	starterKeyChains ...interface{},
+) *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		constants.PathRootTemplate,
+		starterKeyChains...)
+}
+
+func (it *newKeyCreator) PathTemplatePrefixRelativeIdDefault() *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		prefix,
+		relative,
+		id)
+}
+
+func (it *newKeyCreator) PathTemplatePrefixRelativeIdFileDefault() *Key {
+	return it.All(
+		CurlyBracePathJoinerOption,
+		root,
+		prefix,
+		relative,
+		id,
+		constants.FileKeyword)
 }
 
 func (it *newKeyCreator) All(

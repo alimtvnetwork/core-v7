@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type BaseUsername struct {
@@ -24,7 +24,7 @@ func (it *BaseUsername) IsUsernameEmpty() bool {
 }
 
 func (it *BaseUsername) IsUsernameWhitespace() bool {
-	return it == nil || utilstringinternal.IsNullOrEmptyOrWhitespace(&it.Username)
+	return it == nil || strutilinternal.IsNullOrEmptyOrWhitespace(&it.Username)
 }
 
 func (it *BaseUsername) IsUsername(user string) bool {

@@ -3,12 +3,12 @@ package corevalidator
 import (
 	"errors"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/messages"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LinesValidators struct {
@@ -95,7 +95,7 @@ func (it *LinesValidators) HasIndex(index int) bool {
 }
 
 func (it *LinesValidators) String() string {
-	return utilstringinternal.AnyToFieldNameString(it.Items)
+	return strutilinternal.AnyToFieldNameString(it.Items)
 }
 
 func (it *LinesValidators) IsMatchText(

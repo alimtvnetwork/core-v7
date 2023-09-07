@@ -7,8 +7,8 @@ import (
 	"sort"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type SimpleSlice struct {
@@ -24,7 +24,8 @@ func (it *SimpleSlice) Add(
 }
 
 func (it *SimpleSlice) AddIf(
-	isAdd bool, item string,
+	isAdd bool,
+	item string,
 ) *SimpleSlice {
 	if !isAdd {
 		return it
@@ -47,7 +48,126 @@ func (it *SimpleSlice) Adds(
 	return it
 }
 
-func (it *SimpleSlice) InsertAt(index int, item string) *SimpleSlice {
+func (it *SimpleSlice) Append(
+	items ...string,
+) *SimpleSlice {
+	if len(items) == 0 {
+		return it
+	}
+
+	it.Items = append(it.Items, items...)
+
+	return it
+}
+
+// AppendFmt
+//
+//  Skips empty format + values
+func (it *SimpleSlice) AppendFmt(
+	format string,
+	v ...interface{},
+) *SimpleSlice {
+	if format == "" && len(v) == 0 {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(format, v...))
+
+	return it
+}
+
+// AppendFmtIf
+//
+//  Skips empty format + values
+func (it *SimpleSlice) AppendFmtIf(
+	isAppend bool,
+	format string,
+	v ...interface{},
+) *SimpleSlice {
+	if !isAppend || format == "" && len(v) == 0 {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(format, v...))
+
+	return it
+}
+
+// AddAsTitleValue
+//
+//  Adds Title : value (constants.TitleValueFormat)
+func (it *SimpleSlice) AddAsTitleValue(
+	title string,
+	value interface{},
+) *SimpleSlice {
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(constants.TitleValueFormat, title, value))
+
+	return it
+}
+
+// AddAsCurlyTitleWrap
+//
+//  Adds Title: {value} (constants.CurlyTitleWrapFormat)
+func (it *SimpleSlice) AddAsCurlyTitleWrap(
+	title string,
+	value interface{},
+) *SimpleSlice {
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(constants.CurlyTitleWrapFormat, title, value))
+
+	return it
+}
+
+// AddAsCurlyTitleWrapIf
+//
+//  Adds Title: {value} (constants.CurlyTitleWrapFormat)
+func (it *SimpleSlice) AddAsCurlyTitleWrapIf(
+	isAppend bool,
+	title string,
+	value interface{},
+) *SimpleSlice {
+	if !isAppend {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(constants.CurlyTitleWrapFormat, title, value))
+
+	return it
+}
+
+// AddAsTitleValueIf
+//
+//  Skips if append is false
+//  Adds Title : value (constants.TitleValueFormat)
+func (it *SimpleSlice) AddAsTitleValueIf(
+	isAppend bool,
+	title string,
+	value interface{},
+) *SimpleSlice {
+	if !isAppend {
+		return it
+	}
+
+	it.Items = append(
+		it.Items,
+		fmt.Sprintf(constants.TitleValueFormat, title, value))
+
+	return it
+}
+
+func (it *SimpleSlice) InsertAt(
+	index int,
+	item string,
+) *SimpleSlice {
 	it.Items = append(it.Items[:index+1], it.Items[index:]...)
 	it.Items[index] = item
 
@@ -195,6 +315,25 @@ func (it *SimpleSlice) Count() int {
 	return it.Length()
 }
 
+func (it *SimpleSlice) CountFunc(
+	counterFunc func(index int, item string) (isCount bool),
+) int {
+	if it.IsEmpty() {
+		return 0
+	}
+
+	counter := 0
+	for i, item := range it.Items {
+		isCount := counterFunc(i, item)
+
+		if isCount {
+			counter++
+		}
+	}
+
+	return counter
+}
+
 func (it *SimpleSlice) IsEmpty() bool {
 	return it == nil || it.Length() == 0
 }
@@ -220,11 +359,42 @@ func (it *SimpleSlice) Hashset() *Hashset {
 }
 
 func (it *SimpleSlice) Join(joiner string) string {
+	if it.IsEmpty() {
+		return ""
+	}
+
 	return strings.Join(it.Items, joiner)
 }
 
 func (it *SimpleSlice) JoinLine() string {
-	return strings.Join(it.Items, constants.NewLineUnix)
+	if it.IsEmpty() {
+		return ""
+	}
+
+	return strings.Join(
+		it.Items,
+		constants.DefaultLine)
+}
+
+// JoinLineEofLine
+//
+//  contains new line at the end of the file
+func (it *SimpleSlice) JoinLineEofLine() string {
+	if it.IsEmpty() {
+		return ""
+	}
+
+	joined := strings.Join(
+		it.Items,
+		constants.DefaultLine)
+
+	if strings.HasSuffix(joined, constants.DefaultLine) {
+		// already contains
+
+		return joined
+	}
+
+	return joined + constants.DefaultLine
 }
 
 func (it *SimpleSlice) JoinSpace() string {
@@ -243,7 +413,7 @@ func (it *SimpleSlice) JoinCsvLine() string {
 	return strings.Join(it.CsvStrings(), constants.CommaUnixNewLine)
 }
 
-func (it *SimpleSlice) EachItemSplitBy(splitBy string) []string {
+func (it *SimpleSlice) EachItemSplitBy(splitBy string) (splitItemsOnly []string) {
 	slice := make([]string, 0, it.Length()*constants.Capacity3)
 
 	for _, item := range it.Items {
@@ -413,13 +583,6 @@ func (it *SimpleSlice) IsEqualLines(lines []string) bool {
 	return true
 }
 
-func (it *SimpleSlice) IsDistinctEqual(lines []string) bool {
-	selfHashset := New.Hashset.StringsPtr(&it.Items)
-	linesHashset := New.Hashset.Strings(lines)
-
-	return selfHashset.IsEqualsPtr(linesHashset)
-}
-
 func (it *SimpleSlice) Collection(isClone bool) *Collection {
 	return New.Collection.StringsOptions(
 		isClone,
@@ -528,7 +691,7 @@ func (it *SimpleSlice) JoinWith(
 	return joiner + strings.Join(it.Items, joiner)
 }
 
-func (it *SimpleSlice) JsonModel() []string {
+func (it SimpleSlice) JsonModel() []string {
 	return it.Items
 }
 
@@ -563,19 +726,19 @@ func (it *SimpleSlice) Reverse() *SimpleSlice {
 	return it
 }
 
-func (it *SimpleSlice) JsonModelAny() interface{} {
+func (it SimpleSlice) JsonModelAny() interface{} {
 	return it.JsonModel()
 }
 
-func (it *SimpleSlice) MarshalJSON() ([]byte, error) {
+func (it SimpleSlice) MarshalJSON() ([]byte, error) {
 	return json.Marshal(it.JsonModel())
 }
 
 func (it *SimpleSlice) UnmarshalJSON(
-	data []byte,
+	rawBytes []byte,
 ) error {
 	var dataModel []string
-	err := json.Unmarshal(data, &dataModel)
+	err := json.Unmarshal(rawBytes, &dataModel)
 
 	if err == nil {
 		it.Items = dataModel
@@ -618,11 +781,19 @@ func (it *SimpleSlice) ParseInjectUsingJsonMust(
 	return parsedResult
 }
 
-func (it *SimpleSlice) AsJsonContractsBinder() corejson.JsonContractsBinder {
-	return it
+func (it SimpleSlice) AsJsonContractsBinder() corejson.JsonContractsBinder {
+	return &it
 }
 
-func (it *SimpleSlice) AsJsoner() corejson.Jsoner {
+func (it SimpleSlice) AsJsoner() corejson.Jsoner {
+	return &it
+}
+
+func (it SimpleSlice) ToPtr() *SimpleSlice {
+	return &it
+}
+
+func (it SimpleSlice) ToNonPtr() SimpleSlice {
 	return it
 }
 
@@ -636,12 +807,12 @@ func (it *SimpleSlice) JsonParseSelfInject(
 	return err
 }
 
-func (it *SimpleSlice) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
-	return it
+func (it SimpleSlice) AsJsonParseSelfInjector() corejson.JsonParseSelfInjector {
+	return &it
 }
 
-func (it *SimpleSlice) AsJsonMarshaller() corejson.JsonMarshaller {
-	return it
+func (it SimpleSlice) AsJsonMarshaller() corejson.JsonMarshaller {
+	return &it
 }
 
 func (it *SimpleSlice) Clear() *SimpleSlice {
@@ -665,7 +836,9 @@ func (it *SimpleSlice) Dispose() {
 
 func (it SimpleSlice) Clone(isDeepClone bool) SimpleSlice {
 	return SimpleSlice{
-		Items: CloneSliceIf(isDeepClone, it.Items...),
+		Items: CloneSliceIf(
+			isDeepClone,
+			it.Items...),
 	}
 }
 
@@ -678,4 +851,229 @@ func (it *SimpleSlice) ClonePtr(isDeepClone bool) *SimpleSlice {
 		isDeepClone)
 
 	return &cloned
+}
+
+func (it SimpleSlice) DeepClone() *SimpleSlice {
+	return it.ClonePtr(true)
+}
+
+func (it SimpleSlice) ShadowClone() *SimpleSlice {
+	return it.ClonePtr(false)
+}
+
+func (it SimpleSlice) IsDistinctEqualRaw(rightLines ...string) bool {
+	return it.Hashset().IsEqualsPtr(New.Hashset.Strings(rightLines))
+}
+
+func (it SimpleSlice) IsDistinctEqual(rightSlice *SimpleSlice) bool {
+	return it.Hashset().IsEqualsPtr(rightSlice.Hashset())
+}
+
+// IsUnorderedEqualRaw
+//
+//  sort both and then compare, if length are not equal then mismatch
+//
+//  isClone:
+//      Don't mutate, create copy and then sort and then returns the final result.
+func (it SimpleSlice) IsUnorderedEqualRaw(
+	isClone bool,
+	rightLines ...string,
+) bool {
+	if it.Length() != len(rightLines) {
+		return false
+	}
+
+	if it.Length() == 0 {
+		// no checking required
+		return true
+	}
+
+	if isClone {
+		leftSored := it.DeepClone()
+		leftSored.Sort()
+
+		rightSort := New.SimpleSlice.Direct(true, rightLines)
+		rightSort.Sort()
+
+		return leftSored.IsEqual(rightSort)
+	}
+
+	it.Sort()
+	rightSort := New.SimpleSlice.Direct(
+		false,
+		rightLines)
+	rightSort.Sort()
+
+	return it.IsEqual(rightSort)
+}
+
+// IsUnorderedEqual
+//
+//  sort both and then compare, if length are not equal then mismatch
+//
+//  isClone:
+//      Don't mutate, create copy and then sort and then returns the final result.
+func (it SimpleSlice) IsUnorderedEqual(
+	isClone bool,
+	rightSlice *SimpleSlice,
+) bool {
+	if it.IsEmpty() && rightSlice.IsEmpty() {
+		return true
+	}
+
+	if rightSlice == nil {
+		// is nil left is not empty
+		return false
+	}
+
+	return it.IsUnorderedEqualRaw(
+		isClone,
+		rightSlice.Items...)
+}
+
+// IsEqualByFunc
+//
+//  checks comparison by the given function.
+func (it SimpleSlice) IsEqualByFunc(
+	isMatchCheckerFunc func(index int, left, right string) (isMatch bool),
+	rightLines ...string,
+) bool {
+	if it.Length() != len(rightLines) {
+		return false
+	}
+
+	if it.Length() == 0 {
+		return true
+	}
+
+	for i, rightLine := range rightLines {
+		leftLine := it.Items[i]
+
+		if !isMatchCheckerFunc(i, leftLine, rightLine) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// IsEqualByFuncLinesSplit
+//
+//  first splits the line and then takes
+//  lines and process same as EqualByFunc
+func (it SimpleSlice) IsEqualByFuncLinesSplit(
+	isTrim bool,
+	splitter string,
+	rightLine string,
+	isMatchCheckerFunc func(index int, left, right string) (isMatch bool),
+) bool {
+	rightLines := strings.Split(rightLine, splitter)
+
+	if len(rightLines) != it.Length() {
+		return false
+	}
+
+	if it.IsEmpty() {
+		return true
+	}
+
+	for i, curLeftLine := range it.Items {
+		curRightLine := rightLines[i]
+
+		if isTrim {
+			curLeftLine = strings.TrimSpace(curLeftLine)
+			curRightLine = strings.TrimSpace(curRightLine)
+		}
+
+		if !isMatchCheckerFunc(i, curLeftLine, curRightLine) {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (it *SimpleSlice) DistinctDiffRaw(
+	rightLines ...string,
+) []string {
+	if it == nil && rightLines == nil {
+		return []string{}
+	}
+
+	if it == nil && rightLines != nil {
+		return rightLines
+	}
+
+	if it != nil && rightLines == nil {
+		return it.Items
+	}
+
+	return New.
+		Hashset.
+		Strings(it.Items).
+		DistinctDiffLinesRaw(rightLines...)
+}
+
+func (it *SimpleSlice) AddedRemovedLinesDiff(
+	rightLines ...string,
+) (addedLines, removedLines []string) {
+	if it == nil && rightLines == nil {
+		return addedLines, removedLines
+	}
+
+	oldDomainsHashSet := New.Hashset.Strings(it.SafeStrings())
+	newDomainsHashSet := New.Hashset.Strings(rightLines)
+
+	addedDomainsPtr := newDomainsHashSet.
+		GetAllExceptHashset(oldDomainsHashSet)
+	deletedDomainsPtr := oldDomainsHashSet.
+		GetAllExceptHashset(newDomainsHashSet)
+
+	if addedDomainsPtr != nil {
+		addedLines = addedDomainsPtr
+	}
+
+	if deletedDomainsPtr != nil {
+		removedLines = deletedDomainsPtr
+	}
+
+	return addedLines, removedLines
+
+}
+
+func (it *SimpleSlice) DistinctDiff(
+	rightSlice *SimpleSlice,
+) []string {
+	if it == nil && rightSlice == nil {
+		return []string{}
+	}
+
+	if it == nil && rightSlice != nil {
+		return rightSlice.Items
+	}
+
+	if it != nil && rightSlice == nil {
+		return it.Items
+	}
+
+	return New.
+		Hashset.
+		Strings(it.Items).
+		DistinctDiffLinesRaw(rightSlice.Items...)
+}
+
+func (it *SimpleSlice) Serialize() ([]byte, error) {
+	return corejson.Serialize.Raw(it)
+}
+
+func (it *SimpleSlice) Deserialize(toPtr interface{}) (parsingErr error) {
+	return it.JsonPtr().Deserialize(toPtr)
+}
+
+func (it *SimpleSlice) SafeStrings() []string {
+	if it == nil || it.Items == nil {
+		return []string{}
+	}
+
+	return it.Items
 }

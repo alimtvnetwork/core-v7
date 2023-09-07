@@ -1,13 +1,13 @@
 package reqtype
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 func start(
-	reqs *[]Request,
+	reqs []Request,
 ) interface{} {
-	if reqs == nil || len(*reqs) == 0 {
+	if len(reqs) == 0 {
 		return nil
 	}
 
-	return (*reqs)[constants.Zero]
+	return (reqs)[constants.Zero]
 }

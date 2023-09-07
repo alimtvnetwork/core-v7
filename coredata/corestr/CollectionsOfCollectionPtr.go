@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type CollectionsOfCollectionPtr struct {

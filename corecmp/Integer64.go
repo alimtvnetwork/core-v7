@@ -1,6 +1,6 @@
 package corecmp
 
-import "gitlab.com/evatix-go/core/corecomparator"
+import "gitlab.com/auk-go/core/corecomparator"
 
 func Integer64(left, right int64) corecomparator.Compare {
 	if left == right {

@@ -1,6 +1,6 @@
 package coreapi
 
-import "gitlab.com/evatix-go/core/coredata/coredynamic"
+import "gitlab.com/auk-go/core/coredata/coredynamic"
 
 type SimpleGenericRequest struct {
 	Attribute *RequestAttribute          `json:"Attribute,omitempty"`

@@ -1,10 +1,10 @@
 package corestr
 
 import (
-	"gitlab.com/evatix-go/core/conditional"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/conditional"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type ValidValues struct {
@@ -175,7 +175,7 @@ func (it *ValidValues) FullStrings() []string {
 }
 
 func (it *ValidValues) String() string {
-	return utilstringinternal.AnyToString(it.Strings())
+	return strutilinternal.AnyToString(it.Strings())
 }
 
 func (it *ValidValues) Length() int {

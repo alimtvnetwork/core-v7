@@ -1,12 +1,12 @@
 package corevalidator
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type TextValidators struct {
@@ -107,7 +107,7 @@ func (it *TextValidators) HasIndex(index int) bool {
 }
 
 func (it *TextValidators) String() string {
-	return utilstringinternal.AnyToFieldNameString(
+	return strutilinternal.AnyToFieldNameString(
 		it.Items)
 }
 

@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type RwxInstructionExecutors struct {
@@ -18,66 +18,66 @@ func NewRwxInstructionExecutors(capacity int) *RwxInstructionExecutors {
 }
 
 // Add skips nil
-func (receiver *RwxInstructionExecutors) Add(
+func (it *RwxInstructionExecutors) Add(
 	rwxInstructionExecutor *RwxInstructionExecutor,
 ) *RwxInstructionExecutors {
 	if rwxInstructionExecutor == nil {
-		return receiver
+		return it
 	}
 
-	*receiver.items = append(*receiver.items, rwxInstructionExecutor)
+	*it.items = append(*it.items, rwxInstructionExecutor)
 
-	return receiver
+	return it
 }
 
 // Adds skips nil
-func (receiver *RwxInstructionExecutors) Adds(
+func (it *RwxInstructionExecutors) Adds(
 	rwxInstructionExecutors ...*RwxInstructionExecutor,
 ) *RwxInstructionExecutors {
 	if rwxInstructionExecutors == nil {
-		return receiver
+		return it
 	}
 
-	items := *receiver.items
+	items := *it.items
 
 	for _, executor := range rwxInstructionExecutors {
 		items = append(items, executor)
 	}
 
-	*receiver.items = items
+	*it.items = items
 
-	return receiver
+	return it
 }
 
-func (receiver *RwxInstructionExecutors) Length() int {
-	if receiver.items == nil {
+func (it *RwxInstructionExecutors) Length() int {
+	if it.items == nil {
 		return constants.Zero
 	}
 
-	return len(*receiver.items)
+	return len(*it.items)
 }
 
-func (receiver *RwxInstructionExecutors) Count() int {
-	return receiver.Length()
+func (it *RwxInstructionExecutors) Count() int {
+	return it.Length()
 }
 
-func (receiver *RwxInstructionExecutors) IsEmpty() bool {
-	return receiver.Length() == 0
+func (it *RwxInstructionExecutors) IsEmpty() bool {
+	return it.Length() == 0
 }
 
-func (receiver *RwxInstructionExecutors) HasAnyItem() bool {
-	return receiver.Length() > 0
+func (it *RwxInstructionExecutors) HasAnyItem() bool {
+	return it.Length() > 0
 }
 
-func (receiver *RwxInstructionExecutors) LastIndex() int {
-	return receiver.Length() - 1
+func (it *RwxInstructionExecutors) LastIndex() int {
+	return it.Length() - 1
 }
 
-func (receiver *RwxInstructionExecutors) HasIndex(index int) bool {
-	return receiver.LastIndex() >= index
+func (it *RwxInstructionExecutors) HasIndex(index int) bool {
+	return it.LastIndex() >= index
 }
 
-func (receiver *RwxInstructionExecutors) VerifyRwxModifiers(
+func (it *RwxInstructionExecutors) VerifyRwxModifiers(
 	isContinueOnErr,
 	isRecursiveIgnore bool,
 	locations []string,
@@ -87,12 +87,12 @@ func (receiver *RwxInstructionExecutors) VerifyRwxModifiers(
 	}
 
 	if isContinueOnErr {
-		return receiver.verifyChmodErrorContinueOnErr(
+		return it.verifyChmodErrorContinueOnErr(
 			isRecursiveIgnore,
 			locations)
 	}
 
-	for _, executor := range *receiver.items {
+	for _, executor := range *it.items {
 		err := executor.VerifyRwxModifiers(
 			isRecursiveIgnore,
 			locations)
@@ -105,13 +105,13 @@ func (receiver *RwxInstructionExecutors) VerifyRwxModifiers(
 	return nil
 }
 
-func (receiver *RwxInstructionExecutors) verifyChmodErrorContinueOnErr(
+func (it *RwxInstructionExecutors) verifyChmodErrorContinueOnErr(
 	isRecursiveIgnore bool,
 	locations []string,
 ) error {
 	var sliceErr []string
 
-	for _, executor := range *receiver.items {
+	for _, executor := range *it.items {
 		err := executor.VerifyRwxModifiers(
 			isRecursiveIgnore,
 			locations)
@@ -126,16 +126,16 @@ func (receiver *RwxInstructionExecutors) verifyChmodErrorContinueOnErr(
 	return errcore.SliceToError(sliceErr)
 }
 
-func (receiver *RwxInstructionExecutors) Items() *[]*RwxInstructionExecutor {
-	return receiver.items
+func (it *RwxInstructionExecutors) Items() *[]*RwxInstructionExecutor {
+	return it.items
 }
 
-func (receiver *RwxInstructionExecutors) ApplyOnPath(location string) error {
-	if receiver.IsEmpty() {
+func (it *RwxInstructionExecutors) ApplyOnPath(location string) error {
+	if it.IsEmpty() {
 		return nil
 	}
 
-	for _, executor := range *receiver.items {
+	for _, executor := range *it.items {
 		err := executor.ApplyOnPath(location)
 
 		if err != nil {
@@ -147,20 +147,20 @@ func (receiver *RwxInstructionExecutors) ApplyOnPath(location string) error {
 	return nil
 }
 
-func (receiver *RwxInstructionExecutors) ApplyOnPaths(locations []string) error {
+func (it *RwxInstructionExecutors) ApplyOnPaths(locations []string) error {
 	if len(locations) == 0 {
 		return nil
 	}
 
-	return receiver.ApplyOnPathsPtr(&locations)
+	return it.ApplyOnPathsPtr(&locations)
 }
 
-func (receiver *RwxInstructionExecutors) ApplyOnPathsPtr(locations *[]string) error {
-	if receiver.IsEmpty() {
+func (it *RwxInstructionExecutors) ApplyOnPathsPtr(locations *[]string) error {
+	if it.IsEmpty() {
 		return nil
 	}
 
-	for _, executor := range *receiver.items {
+	for _, executor := range *it.items {
 		err := executor.ApplyOnPathsPtr(locations)
 
 		if err != nil {

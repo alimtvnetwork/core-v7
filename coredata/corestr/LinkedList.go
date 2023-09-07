@@ -6,11 +6,11 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/utilstringinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LinkedList struct {
@@ -251,7 +251,7 @@ func (it *LinkedList) AddNonEmpty(item string) *LinkedList {
 }
 
 func (it *LinkedList) AddNonEmptyWhitespace(item string) *LinkedList {
-	if utilstringinternal.IsEmptyOrWhitespace(item) {
+	if strutilinternal.IsEmptyOrWhitespace(item) {
 		return it
 	}
 

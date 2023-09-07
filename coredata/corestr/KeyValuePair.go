@@ -5,19 +5,53 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type KeyValuePair struct {
 	Key, Value string
 }
 
-func NewKeyValuePairTrimmed(key, val string) *KeyValuePair {
-	return &KeyValuePair{
-		Key:   strings.TrimSpace(key),
-		Value: strings.TrimSpace(val),
-	}
+func (it KeyValuePair) KeyName() string {
+	return it.Key
+}
+
+func (it KeyValuePair) VariableName() string {
+	return it.Key
+}
+
+func (it KeyValuePair) ValueString() string {
+	return it.Value
+}
+
+func (it KeyValuePair) IsVariableNameEqual(name string) bool {
+	return it.Key == name
+}
+
+func (it KeyValuePair) IsValueEqual(valueString string) bool {
+	return it.Value == valueString
+}
+
+func (it KeyValuePair) Json() corejson.Result {
+	return corejson.New(it)
+}
+
+func (it KeyValuePair) JsonPtr() *corejson.Result {
+	return corejson.NewPtr(it)
+}
+
+func (it KeyValuePair) Serialize() ([]byte, error) {
+	return corejson.NewPtr(it).Raw()
+}
+
+func (it KeyValuePair) SerializeMust() (jsonBytes []byte) {
+	return corejson.NewPtr(it).RawMust()
+}
+
+func (it KeyValuePair) Compile() string {
+	return it.String()
 }
 
 func (it *KeyValuePair) IsKeyEmpty() bool {
@@ -136,21 +170,24 @@ func (it *KeyValuePair) ValueValidOptions(
 }
 
 func (it *KeyValuePair) Is(key, val string) bool {
-	return it.Key == key && it.Value == val
+	return it != nil && it.Key == key && it.Value == val
 }
 
 func (it *KeyValuePair) IsKey(key string) bool {
-	return it.Key == key
+	return it != nil && it.Key == key
 }
 
 func (it *KeyValuePair) IsVal(val string) bool {
-	return it.Value == val
+	return it != nil && it.Value == val
 }
 
 func (it *KeyValuePair) IsKeyValueAnyEmpty() bool {
-	return it.Key == "" || it.Value == ""
+	return it == nil || it.Key == "" || it.Value == ""
 }
 
+// FormatString
+//
+//  First %v is key and next one is value
 func (it *KeyValuePair) FormatString(format string) string {
 	return fmt.Sprintf(
 		format,
@@ -163,4 +200,21 @@ func (it *KeyValuePair) String() string {
 		keyValuePrintFormat,
 		it.Key,
 		it.Value)
+}
+
+func (it *KeyValuePair) Clear() {
+	if it == nil {
+		return
+	}
+
+	it.Key = ""
+	it.Value = ""
+}
+
+func (it *KeyValuePair) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Clear()
 }

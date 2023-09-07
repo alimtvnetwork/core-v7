@@ -3,15 +3,41 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/corepayload"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corepayload"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func payloadTest01() {
 	line := []byte("some payload")
+	sysUser := corepayload.New.User.System(
+		"sys-1",
+		"system-user-type")
 
-	payload := corepayload.New.PayloadWrapper.UsingCreateInstruction(
+	regularUser := corepayload.New.User.All(
+		false,
+		"some user id",
+		"regular-2",
+		"system-user-type",
+		"authToken",
+		"passhash")
+
+	authInfo := corepayload.AuthInfo{
+		Identifier:   "authid",
+		ActionType:   "actionType",
+		ResourceName: "resourceIdentity",
+		SessionInfo: &corepayload.SessionInfo{
+			Id:          "session id",
+			User:        regularUser,
+			SessionPath: "sesssion path",
+		},
+		UserInfo: &corepayload.UserInfo{
+			User:       regularUser,
+			SystemUser: sysUser,
+		},
+	}
+
+	payload, err := corepayload.New.PayloadWrapper.UsingCreateInstruction(
 		&corepayload.PayloadCreateInstruction{
 			Name:           "name -- as payload",
 			Identifier:     "id",
@@ -21,9 +47,11 @@ func payloadTest01() {
 			HasManyRecords: false,
 			Payloads:       &line,
 			Attributes: &corepayload.Attributes{
-				ErrorMessage: "some err",
+				AuthInfo: authInfo.Ptr(),
 			},
 		})
+
+	errcore.MustBeEmpty(err)
 
 	jsResult := payload.JsonPtr()
 	println(jsResult.PrettyJsonString())
@@ -34,10 +62,11 @@ func payloadTest01() {
 	println(payload2.JsonPtr().PrettyJsonString())
 	println(payload2.BytesConverter().SafeCastString())
 
-	payload3 := corepayload.New.PayloadWrapper.Create(
+	payload3, err3 := corepayload.New.PayloadWrapper.Create(
 		"name3",
 		"id3", "taskname3", "category3", jsResult.Bytes)
 
+	errcore.HandleErr(err3)
 	println(payload3.JsonPtr().PrettyJsonString())
 	println(payload3.DeserializePayloadsToPayloadWrapperMust().JsonPtr().PrettyJsonString())
 	pay4, err := payload3.ClonePtr(true)
@@ -75,5 +104,5 @@ func payloadTest01() {
 
 	payloadsSlice2 := corepayload.New.PayloadsCollection.UsingWrappers(
 		sliceOfPayloads...)
-	fmt.Println("new slice2", payloadsSlice2)
+	fmt.Println("new slice2", payloadsSlice2.PrettyJsonString())
 }

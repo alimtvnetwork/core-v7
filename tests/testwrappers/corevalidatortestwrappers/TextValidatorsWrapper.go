@@ -1,7 +1,7 @@
 package corevalidatortestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/corevalidator"
+	"gitlab.com/auk-go/core/corevalidator"
 )
 
 type TextValidatorsWrapper struct {

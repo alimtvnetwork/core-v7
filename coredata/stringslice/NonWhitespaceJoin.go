@@ -3,7 +3,7 @@ package stringslice
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func NonWhitespaceJoin(slice []string, joiner string) string {

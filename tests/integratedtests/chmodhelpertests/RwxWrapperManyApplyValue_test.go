@@ -4,13 +4,16 @@ import (
 	"fmt"
 	"testing"
 
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
+	"gitlab.com/auk-go/core/chmodhelper"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/coretests"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
+// Test_RwxWrapperManyApplyValue_Unix
+//
+//  for directory `-` will be placed not `d`
 func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 	coretests.SkipOnWindows(t)
 
@@ -36,10 +39,10 @@ func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 
 		// Act
 		err2 := rwxWrapper.ApplyLinuxChmodOnMany(condition, paths...)
+		errcore.SimpleHandleErr(
+			err2,
+			"rwxWrapper.ApplyLinuxChmodOnMany failed")
 
-		errcore.SimpleHandleErr(err2, "rwxWrapper.ApplyLinuxChmodOnMany failed")
-
-		// for directory `-` will be placed not `d`
 		// Assert
 		assertSingleChmod(
 			t,
