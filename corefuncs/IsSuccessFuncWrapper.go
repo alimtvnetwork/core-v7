@@ -1,6 +1,6 @@
 package corefuncs
 
-import "gitlab.com/evatix-go/core/errcore"
+import "gitlab.com/auk-go/core/errcore"
 
 type IsSuccessFuncWrapper struct {
 	Name   string

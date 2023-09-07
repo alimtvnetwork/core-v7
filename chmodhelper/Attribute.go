@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/conditional"
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/conditional"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type Attribute struct {

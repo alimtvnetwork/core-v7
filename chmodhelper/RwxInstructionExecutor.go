@@ -4,10 +4,10 @@ import (
 	"errors"
 	"os"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/messages"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/messages"
 )
 
 type RwxInstructionExecutor struct {

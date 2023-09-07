@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sort"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type IntegersOnce struct {

@@ -3,11 +3,11 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/namevalue"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/namevalue"
 )
 
 func coreDynamicMapAnyItems() {

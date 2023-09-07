@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/corepayload"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corepayload"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func payloadTest01() {

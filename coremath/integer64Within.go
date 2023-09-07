@@ -3,7 +3,7 @@ package coremath
 import (
 	"math"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type integer64Within struct{}

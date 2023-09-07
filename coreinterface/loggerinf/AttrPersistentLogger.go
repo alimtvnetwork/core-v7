@@ -1,9 +1,9 @@
 package loggerinf
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
-	"gitlab.com/evatix-go/core/coreinterface/pathextendinf"
-	"gitlab.com/evatix-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/coreinterface/pathextendinf"
+	"gitlab.com/auk-go/core/internal/internalinterface"
 )
 
 type AttrPersistentLogger interface {

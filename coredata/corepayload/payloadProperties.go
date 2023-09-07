@@ -1,10 +1,10 @@
 package corepayload
 
 import (
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/coreinterface/payloadinf"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/coreinterface/payloadinf"
 )
 
 type payloadProperties struct {

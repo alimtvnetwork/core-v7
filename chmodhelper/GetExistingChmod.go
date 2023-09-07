@@ -3,7 +3,7 @@ package chmodhelper
 import (
 	"os"
 
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func GetExistingChmod(filePath string) (os.FileMode, error) {

@@ -1,9 +1,9 @@
 package entityinf
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/internal/internalinterface"
 )
 
 type TaskEntityDefiner interface {

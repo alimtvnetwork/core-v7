@@ -3,8 +3,8 @@ package coreinstruction
 import (
 	"regexp"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corestr"
 )
 
 type BaseTags struct {

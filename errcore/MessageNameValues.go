@@ -3,7 +3,7 @@ package errcore
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/namevalue"
+	"gitlab.com/auk-go/core/namevalue"
 )
 
 func MessageNameValues(

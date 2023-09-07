@@ -1,8 +1,8 @@
 package defaultcapacity
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/percentconst"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/percentconst"
 )
 
 // PredictiveDefault Result must be positive possibleLen * multiplier + constants.ArbitraryCapacity50.

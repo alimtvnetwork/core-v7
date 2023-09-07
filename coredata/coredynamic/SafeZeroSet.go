@@ -3,7 +3,7 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 func SafeZeroSet(rv reflect.Value) {

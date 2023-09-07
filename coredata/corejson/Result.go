@@ -6,13 +6,13 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type Result struct {

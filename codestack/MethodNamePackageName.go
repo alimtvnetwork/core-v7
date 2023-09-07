@@ -3,8 +3,8 @@ package codestack
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/stringslice"
 )
 
 func MethodNamePackageName(fullFuncName string) (fullMethodName, packageName, methodName string) {

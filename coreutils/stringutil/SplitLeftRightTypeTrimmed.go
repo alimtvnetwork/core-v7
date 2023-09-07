@@ -1,7 +1,7 @@
 package stringutil
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coredata/corestr"
 )
 
 func SplitLeftRightTypeTrimmed(s, separator string) *corestr.LeftRight {

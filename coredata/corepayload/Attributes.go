@@ -3,14 +3,14 @@ package corepayload
 import (
 	"bytes"
 
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/coreinstruction"
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/coreinterface/payloadinf"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coreinstruction"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/coreinterface/payloadinf"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type Attributes struct {

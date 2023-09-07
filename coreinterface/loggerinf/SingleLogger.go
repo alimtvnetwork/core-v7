@@ -3,11 +3,11 @@ package loggerinf
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface/entityinf"
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface/entityinf"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/coreinterface/serializerinf"
 )
 
 type SingleLogger interface {

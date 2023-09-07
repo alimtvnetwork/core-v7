@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
 )
 
 func Test_DynamicMapCreationDiff(t *testing.T) {

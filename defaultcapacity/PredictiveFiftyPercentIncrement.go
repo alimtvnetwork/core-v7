@@ -1,7 +1,7 @@
 package defaultcapacity
 
 import (
-	"gitlab.com/evatix-go/core/constants/percentconst"
+	"gitlab.com/auk-go/core/constants/percentconst"
 )
 
 // PredictiveFiftyPercentIncrement Result must be positive possibleLen * multiplier + additionalCap.

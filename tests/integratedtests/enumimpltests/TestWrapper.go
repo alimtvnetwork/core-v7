@@ -1,9 +1,9 @@
 package enumimpltests
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corerange"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/auk-go/core/coredata/corerange"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
 )
 
 type TestWrapper struct {

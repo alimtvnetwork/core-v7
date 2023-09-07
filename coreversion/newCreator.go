@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/converters"
-	"gitlab.com/evatix-go/core/enums/versionindexes"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/converters"
+	"gitlab.com/auk-go/core/enums/versionindexes"
 )
 
 type newCreator struct{}

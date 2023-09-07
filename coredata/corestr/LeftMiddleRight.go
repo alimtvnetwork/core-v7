@@ -3,8 +3,8 @@ package corestr
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LeftMiddleRight struct {

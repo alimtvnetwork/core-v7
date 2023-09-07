@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/fsinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/fsinternal"
 )
 
 func GetFilteredExistsPaths(locations []string) (

@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodclasstype"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/chmodhelper/chmodclasstype"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type SingleRwx struct {

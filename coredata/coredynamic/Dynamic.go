@@ -6,16 +6,16 @@ import (
 	"reflect"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/coreonce"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/messages"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/coreonce"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/messages"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 type Dynamic struct {

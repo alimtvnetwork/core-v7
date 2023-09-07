@@ -5,9 +5,9 @@ import (
 	"math"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 // BytesCollection

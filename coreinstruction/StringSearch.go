@@ -1,9 +1,9 @@
 package coreinstruction
 
 import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/regexnew"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/regexnew"
 )
 
 type StringSearch struct {

@@ -1,6 +1,6 @@
 package isany
 
-import "gitlab.com/evatix-go/core/internal/reflectinternal"
+import "gitlab.com/auk-go/core/internal/reflectinternal"
 
 // Zero
 //

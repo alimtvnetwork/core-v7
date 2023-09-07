@@ -1,6 +1,6 @@
 package pathextendinf
 
-import "gitlab.com/evatix-go/core/coreinterface/errcoreinf"
+import "gitlab.com/auk-go/core/coreinterface/errcoreinf"
 
 type ActionExecutor interface {
 	HasAnyAction() bool

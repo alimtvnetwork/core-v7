@@ -1,6 +1,6 @@
 package stringcompareas
 
-import "gitlab.com/evatix-go/core/coreutils/stringutil"
+import "gitlab.com/auk-go/core/coreutils/stringutil"
 
 var isNotStartsWithFunc = func(
 	contentLine,

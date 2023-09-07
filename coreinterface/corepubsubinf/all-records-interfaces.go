@@ -1,12 +1,12 @@
 package corepubsubinf
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/coreinterface/loggerinf"
-	"gitlab.com/evatix-go/core/coreinterface/pathextendinf"
-	"gitlab.com/evatix-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/coreinterface/loggerinf"
+	"gitlab.com/auk-go/core/coreinterface/pathextendinf"
+	"gitlab.com/auk-go/core/internal/internalinterface"
 )
 
 type IdAsStringer interface {

@@ -4,11 +4,11 @@ import (
 	"io"
 	"sync"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/coreinterface/loggerinf"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/coreinterface/loggerinf"
 )
 
 type GenericSubscriber interface {

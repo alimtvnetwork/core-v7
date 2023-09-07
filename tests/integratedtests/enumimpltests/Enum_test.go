@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
 )
 
 func Test_Enum(t *testing.T) {

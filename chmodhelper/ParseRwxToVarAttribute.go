@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 func ParseRwxToVarAttribute(rwx string) (varAttribute *VarAttribute, err error) {

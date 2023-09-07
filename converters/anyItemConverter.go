@@ -7,9 +7,9 @@ import (
 	"reflect"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreappend"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreappend"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type anyItemConverter struct{}

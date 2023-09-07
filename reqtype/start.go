@@ -1,6 +1,6 @@
 package reqtype
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 func start(
 	reqs []Request,

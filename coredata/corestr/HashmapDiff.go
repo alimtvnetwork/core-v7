@@ -1,8 +1,8 @@
 package corestr
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/internal/mapdiffinternal"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/internal/mapdiffinternal"
 )
 
 type HashmapDiff map[string]string

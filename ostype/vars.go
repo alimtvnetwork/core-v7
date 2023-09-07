@@ -1,8 +1,8 @@
 package ostype
 
 import (
-	"gitlab.com/evatix-go/core/coredata/coredynamic"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/coredata/coredynamic"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
 )
 
 var (

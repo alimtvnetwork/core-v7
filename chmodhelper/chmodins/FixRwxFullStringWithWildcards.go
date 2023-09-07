@@ -1,8 +1,8 @@
 package chmodins
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 // FixRwxFullStringWithWildcards can be less than 10 and can be

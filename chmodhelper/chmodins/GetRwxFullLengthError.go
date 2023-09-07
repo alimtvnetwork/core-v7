@@ -1,7 +1,7 @@
 package chmodins
 
 import (
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 // GetRwxFullLengthError must be 10 chars length

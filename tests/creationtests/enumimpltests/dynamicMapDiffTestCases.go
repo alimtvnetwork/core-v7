@@ -3,8 +3,8 @@ package enumimpltests
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/coretests"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/coretests"
 )
 
 var dynamicMapDiffTestCases = []EnumImplDynamicMapTestWrapper{

@@ -1,8 +1,8 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/coredata/corestr"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 // GetFilesChmodRwxFullMap returns filePath -> "-rwxrwxrwx"

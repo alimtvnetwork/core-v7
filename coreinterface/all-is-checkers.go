@@ -3,7 +3,7 @@ package coreinterface
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/internal/internalinterface"
 )
 
 type IsReflectionTypeChecker interface {

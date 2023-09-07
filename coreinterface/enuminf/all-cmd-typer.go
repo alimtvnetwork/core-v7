@@ -1,6 +1,6 @@
 package enuminf
 
-import "gitlab.com/evatix-go/core/internal/internalinterface/internalenuminf"
+import "gitlab.com/auk-go/core/internal/internalinterface/internalenuminf"
 
 type BaseCmdTyper interface {
 	BasicEnumer

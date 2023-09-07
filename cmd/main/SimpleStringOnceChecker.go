@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/coredata/corestr"
+	"gitlab.com/auk-go/core/coredata/corestr"
 )
 
 type simpleStringTester struct {

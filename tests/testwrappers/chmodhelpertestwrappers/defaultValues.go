@@ -1,7 +1,7 @@
 package chmodhelpertestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
 )
 
 var (

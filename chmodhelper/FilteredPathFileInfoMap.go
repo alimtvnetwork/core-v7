@@ -4,7 +4,7 @@ import (
 	"os"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type FilteredPathFileInfoMap struct {

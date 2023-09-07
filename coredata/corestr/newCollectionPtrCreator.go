@@ -3,8 +3,8 @@ package corestr
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/converters"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/converters"
 )
 
 type newCollectionPtrCreator struct{}

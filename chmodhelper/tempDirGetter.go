@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/internal/osconstsinternal"
+import "gitlab.com/auk-go/core/internal/osconstsinternal"
 
 type tempDirGetter struct{}
 

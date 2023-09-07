@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strings"
 
-	"gitlab.com/evatix-go/core/coredata/stringslice"
+	"gitlab.com/auk-go/core/coredata/stringslice"
 )
 
 func GetTrimmedNonEmptySpaceSplit(

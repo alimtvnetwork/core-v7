@@ -4,8 +4,8 @@ import (
 	"math"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
 )
 
 type within struct{}
@@ -80,7 +80,7 @@ func (it *within) StringRangeUint32(
 		input)
 
 	// fix https://t.ly/6aoW,
-	// https://gitlab.com/evatix-go/core/-/issues/81
+	// https://gitlab.com/auk-go/core/-/issues/81
 	// use MaxInt32 instead of uint32Max
 	if finalInt <= math.MaxInt32 {
 		return uint32(finalInt), isInRange

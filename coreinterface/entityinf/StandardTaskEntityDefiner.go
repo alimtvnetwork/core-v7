@@ -1,8 +1,8 @@
 package entityinf
 
 import (
-	"gitlab.com/evatix-go/core/internal/internalinterface"
-	"gitlab.com/evatix-go/core/internal/internalinterface/internalserializer"
+	"gitlab.com/auk-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/internal/internalinterface/internalserializer"
 )
 
 type StandardTaskEntityDefiner interface {

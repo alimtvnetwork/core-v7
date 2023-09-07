@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/corecomparator"
+	"gitlab.com/auk-go/core/corecomparator"
 )
 
 func compareEnumTesting02() {

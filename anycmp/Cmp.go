@@ -1,8 +1,8 @@
 package anycmp
 
 import (
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/isany"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/isany"
 )
 
 func Cmp(left, right interface{}) corecomparator.Compare {

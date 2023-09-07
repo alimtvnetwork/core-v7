@@ -1,7 +1,7 @@
 package stringslice
 
 import (
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // LinesProcess split text using constants.NewLineUnix

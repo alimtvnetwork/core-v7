@@ -1,7 +1,7 @@
 package chmodhelper
 
 import (
-	"gitlab.com/evatix-go/core/issetter"
+	"gitlab.com/auk-go/core/issetter"
 )
 
 type VarAttribute struct {

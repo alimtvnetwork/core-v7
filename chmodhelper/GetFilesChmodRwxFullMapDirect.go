@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/coredata/corestr"
+import "gitlab.com/auk-go/core/coredata/corestr"
 
 // GetFilesChmodRwxFullMapDirect returns filePath -> "-rwxrwxrwx"
 func GetFilesChmodRwxFullMapDirect(

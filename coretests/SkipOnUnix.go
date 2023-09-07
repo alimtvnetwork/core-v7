@@ -3,8 +3,8 @@ package coretests
 import (
 	"testing"
 
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/osconsts"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/osconsts"
 )
 
 // SkipOnUnix Skip on Unix

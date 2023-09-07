@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitlab.com/evatix-go/core/corecmp"
+	"gitlab.com/auk-go/core/corecmp"
 )
 
 func timeCompareTest() {

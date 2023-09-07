@@ -1,6 +1,6 @@
 package corerange
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 type MinMaxInt8 struct {
 	Min, Max int8

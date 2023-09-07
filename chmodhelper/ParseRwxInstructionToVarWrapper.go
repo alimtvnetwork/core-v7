@@ -1,6 +1,6 @@
 package chmodhelper
 
-import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
+import "gitlab.com/auk-go/core/chmodhelper/chmodins"
 
 func ParseRwxInstructionToVarWrapper(
 	rwxInstruction *chmodins.RwxInstruction,

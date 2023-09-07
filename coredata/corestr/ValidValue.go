@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type ValidValue struct {
@@ -35,7 +35,9 @@ func NewValidValueUsingAny(
 	}
 }
 
-// NewValidValueUsingAnyAutoValid IsValid to false on nil or Empty string
+// NewValidValueUsingAnyAutoValid
+//
+//	IsValid to false on nil or Empty string
 func NewValidValueUsingAnyAutoValid(
 	isIncludeFieldName bool,
 	any interface{},
@@ -150,8 +152,12 @@ func (it *ValidValue) ValueDefInt() int {
 func (it *ValidValue) ValueByte(defVal byte) byte {
 	toInt, err := strconv.Atoi(it.Value)
 
-	if err != nil || toInt > constants.MaxUnit8AsInt {
-		return defVal
+	if err != nil || toInt < 0 {
+		return constants.Zero
+	}
+
+	if toInt > constants.MaxUnit8AsInt {
+		return constants.MaxUnit8
 	}
 
 	return byte(toInt)
@@ -160,8 +166,12 @@ func (it *ValidValue) ValueByte(defVal byte) byte {
 func (it *ValidValue) ValueDefByte() byte {
 	toInt, err := strconv.Atoi(it.Value)
 
-	if err != nil || toInt > constants.MaxUnit8AsInt {
+	if err != nil || toInt < 0 {
 		return constants.Zero
+	}
+
+	if toInt > constants.MaxUnit8AsInt {
+		return constants.MaxUnit8
 	}
 
 	return byte(toInt)
@@ -182,9 +192,10 @@ func (it *ValidValue) ValueDefFloat64() float64 {
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
-//		!receiver.IsLeftEmpty() &&
-//		!receiver.IsMiddleEmpty() &&
-//		!receiver.IsRightEmpty()
+//
+//	!receiver.IsLeftEmpty() &&
+//	!receiver.IsMiddleEmpty() &&
+//	!receiver.IsRightEmpty()
 func (it *ValidValue) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsEmpty()

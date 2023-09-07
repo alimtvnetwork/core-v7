@@ -1,6 +1,6 @@
 package corepayload
 
-import "gitlab.com/evatix-go/core/coredata/coredynamic"
+import "gitlab.com/auk-go/core/coredata/coredynamic"
 
 var (
 	Empty              = emptyCreator{}

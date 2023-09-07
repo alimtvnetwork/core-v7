@@ -3,7 +3,7 @@ package coretests
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func IsStrMsgNonWhiteSortedEqual(

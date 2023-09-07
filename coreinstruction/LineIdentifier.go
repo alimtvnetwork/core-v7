@@ -1,8 +1,8 @@
 package coreinstruction
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/reqtype"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/reqtype"
 )
 
 type LineIdentifier struct {

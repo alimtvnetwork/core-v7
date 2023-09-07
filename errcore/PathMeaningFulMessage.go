@@ -3,7 +3,7 @@ package errcore
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // PathMeaningfulMessage skip error if messages empty or length 0

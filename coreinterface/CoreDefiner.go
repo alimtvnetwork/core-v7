@@ -3,7 +3,7 @@ package coreinterface
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type CoreDefiner interface {

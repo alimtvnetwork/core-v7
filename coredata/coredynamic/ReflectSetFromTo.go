@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
-	"gitlab.com/evatix-go/core/isany"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/isany"
 )
 
 // ReflectSetFromTo

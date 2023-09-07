@@ -3,8 +3,8 @@ package issetter
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/simplewrap"
 )
 
 var (

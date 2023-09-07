@@ -3,8 +3,8 @@ package coredynamic
 import (
 	"reflect"
 
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type reflectGetter struct{}

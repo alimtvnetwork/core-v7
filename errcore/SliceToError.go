@@ -4,7 +4,7 @@ import (
 	"errors"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func SliceToError(errorSlice []string) error {

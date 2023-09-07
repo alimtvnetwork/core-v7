@@ -1,7 +1,7 @@
 package regexnew
 
 import (
-	"gitlab.com/evatix-go/core/regconsts"
+	"gitlab.com/auk-go/core/regconsts"
 )
 
 var (

@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 type KeyValuePair struct {

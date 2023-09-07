@@ -9,9 +9,9 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/internal/osconstsinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/internal/osconstsinternal"
 )
 
 type simpleFileWriter struct{}

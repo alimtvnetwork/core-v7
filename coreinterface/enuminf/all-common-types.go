@@ -1,8 +1,8 @@
 package enuminf
 
 import (
-	"gitlab.com/evatix-go/core/internal/internalinterface"
-	"gitlab.com/evatix-go/core/internal/internalinterface/internalenuminf"
+	"gitlab.com/auk-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/internal/internalinterface/internalenuminf"
 )
 
 type EnvironmentFlagTyper interface {

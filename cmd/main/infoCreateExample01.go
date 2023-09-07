@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coretaskinfo"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coretaskinfo"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 func infoCreateExample01() {

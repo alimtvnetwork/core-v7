@@ -1,6 +1,6 @@
 package coreinstruction
 
-import "gitlab.com/evatix-go/core/coredata/corestr"
+import "gitlab.com/auk-go/core/coredata/corestr"
 
 type NameRequests struct {
 	Name     string               `json:"Name,omitempty"`

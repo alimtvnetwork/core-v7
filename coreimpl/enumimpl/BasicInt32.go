@@ -3,11 +3,11 @@ package enumimpl
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl/enumtype"
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type BasicInt32 struct {

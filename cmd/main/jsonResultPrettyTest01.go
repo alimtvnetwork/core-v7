@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/corejson"
 )
 
 func jsonResultPrettyTest01() {

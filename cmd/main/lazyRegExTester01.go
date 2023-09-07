@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"gitlab.com/evatix-go/core/regexnew"
+	"gitlab.com/auk-go/core/regexnew"
 )
 
 func lazyRegExTester01() {

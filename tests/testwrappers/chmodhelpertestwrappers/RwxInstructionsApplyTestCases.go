@@ -1,6 +1,6 @@
 package chmodhelpertestwrappers
 
-import "gitlab.com/evatix-go/core/chmodhelper/chmodins"
+import "gitlab.com/auk-go/core/chmodhelper/chmodins"
 
 // RwxInstructionsApplyTestCases https://ss64.com/bash/chmod.html
 var RwxInstructionsApplyTestCases = []RwxInstructionTestWrapper{

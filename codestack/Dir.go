@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func Dir(skipStack int) string {

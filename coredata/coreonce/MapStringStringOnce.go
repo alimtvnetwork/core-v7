@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type MapStringStringOnce struct {

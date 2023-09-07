@@ -1,7 +1,7 @@
 package coreapi
 
 import (
-	"gitlab.com/evatix-go/core/reqtype"
+	"gitlab.com/auk-go/core/reqtype"
 )
 
 type RequestAttribute struct {

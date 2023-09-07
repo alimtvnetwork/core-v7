@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/keymk"
+	"gitlab.com/auk-go/core/keymk"
 )
 
 func keyLegendsTest() {

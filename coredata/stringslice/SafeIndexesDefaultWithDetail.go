@@ -1,8 +1,8 @@
 package stringslice
 
 import (
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/defaultcapacity"
 )
 
 // SafeIndexesDefaultWithDetail Only indexes which are present values will be included.

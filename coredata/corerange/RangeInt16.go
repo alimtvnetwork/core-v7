@@ -3,7 +3,7 @@ package corerange
 import (
 	"math"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type RangeInt16 struct {

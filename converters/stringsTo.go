@@ -5,13 +5,13 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/converters/coreconverted"
-	"gitlab.com/evatix-go/core/defaulterr"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/converters/coreconverted"
+	"gitlab.com/auk-go/core/defaulterr"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/simplewrap"
 )
 
 type stringsTo struct{}

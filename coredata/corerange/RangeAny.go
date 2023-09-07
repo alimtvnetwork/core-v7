@@ -1,6 +1,6 @@
 package corerange
 
-import "gitlab.com/evatix-go/core/internal/strutilinternal"
+import "gitlab.com/auk-go/core/internal/strutilinternal"
 
 type RangeAny struct {
 	*BaseRange

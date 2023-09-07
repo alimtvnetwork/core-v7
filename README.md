@@ -1,50 +1,76 @@
 # `Core` Intro
 
-![Use Package logo](https://gitlab.com/evatix-go/core/uploads/486811aa7446cd43b17ff167ceaf90d1/core-250.png)
+![Use Package logo](assets/core-250.png)
 
 All common core infrastructure and constants combined package.
 
 ## Git Clone
 
-`git clone https://gitlab.com/evatix-go/core.git`
-
-### 2FA enabled, for linux
-
-`git clone https://[YourGitLabUserName]:[YourGitlabAcessTokenGenerateFromGitlabsTokens]@gitlab.com/evatix-go/core.git`
+`git clone https://gitlab.com/auk-go/core.git`
 
 ### Prerequisites
 
 - Update git to latest 2.29
-- Update or install the latest of Go 1.15.2
+- Update or install the latest of Go 1.17.8
 - Either add your ssh key to your gitlab account
 - Or, use your access token to clone it.
 
 ## Installation
 
-`go get gitlab.com/evatix-go/core`
-
-### Go get issue for private package
-
-- Update git to 2.29
-- Enable go modules. (Windows : `go env -w GO111MODULE=on`, Unix : `export GO111MODULE=on`)
-- Add `gitlab.com/evatix-go` to go env private
-
-To set for Windows:
-
-`go env -w GOPRIVATE=[AddExistingOnes;]gitlab.com/evatix-go`
-
-To set for Unix:
-
-`expoort GOPRIVATE=[AddExistingOnes;]gitlab.com/evatix-go`
+`go get gitlab.com/auk-go/core`
 
 ## Why `core?`
 
-It makes our other go-packages DRY and concise.
+It makes our other go-packages DRY and concise. It was the first package in the auk-go ecosystem that is core of everything.
 
-## Examples Videos
+It was first designed for constants, later it got enhanced with:
+- codestack
+  - very powerful to deal with codestack
+- chmodhelper
+- enums
+  - base logic for generating stuff
+- coresort
+  - sorting functionalities
+- coremath
+  - deals with integer, ..., all type - min, max
+- coretests
+  - deals with basic functionality for test
+- corevalidator
+  - deals with validation
+- coreversion
+  - deals with version (major, minor, patch -- data type)
+- regexnew
+  - lazyregex - doesn't compile until needed but only once (lock / non lock)
+- converters (move from type to type)
+- corecsv
+- issetter
+  - 3 / 4 phase enum treat as 3 / 4 phase selector (better than bool pointer)
+- coredata
+  - coreapi
+  - coredynamic - dynamic data type
+  - corejson
+  - coreonce - data which generate once
+  - corepayload - deals with enhance payloads
+  - corerange - works with ranges
+  - corestr - string related core functionalities and data-types
+    - hashmap
+    - hashset - lock features for `map[string]bool`
+    - Collection - List like C# / ArrayList like Java - enhance APIs
+    - CollectionsOfCollection
+    - LinkedList
+    - HashDiff
+    - CloneSlice
+    - CharCollectionMap - `map[byte]*Collection`
+    - HashsetsCollection
+    - KeyValueCollection
+    - LeftRight - Left, Right string
+    - LeftMiddleRight
+    - SimpleStringOnce
+    - ValidValue
+    - ValidValues
+    - ValueStatus
+    - AnyToString
 
-- [Core Basics Intro](https://drive.google.com/file/d/1CA4817zaehhWqgtAGI2UH7Tojtngcyjw/view)
-- [Core Usage Video](https://drive.google.com/file/d/1kwC_3R-QIZE1pNK_9F7hFdYuGB0CSGYh/view?usp=sharing)
 
 ## Examples
 
@@ -169,7 +195,7 @@ Any other packages used
 
 ## Issues
 
-- [Create your issues](https://gitlab.com/evatix-go/core/-/issues)
+- [Create your issues](https://gitlab.com/auk-go/core/-/issues)
 
 ## Notes
 

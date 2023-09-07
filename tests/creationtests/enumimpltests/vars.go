@@ -1,8 +1,8 @@
 package enumimpltests
 
 import (
-	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/coretests"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type EnumImplDynamicMapTestWrapper struct {

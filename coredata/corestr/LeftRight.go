@@ -4,8 +4,8 @@ import (
 	"regexp"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type LeftRight struct {

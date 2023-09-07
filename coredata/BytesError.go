@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/internal/csvinternal"
 )
 
 type BytesError struct {

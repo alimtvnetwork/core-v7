@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreutils/stringutil"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/msgformats"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreutils/stringutil"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/msgformats"
 )
 
 type TextValidator struct {

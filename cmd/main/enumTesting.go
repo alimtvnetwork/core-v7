@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"gitlab.com/evatix-go/core/bytetype"
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/ostype"
+	"gitlab.com/auk-go/core/bytetype"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/ostype"
 )
 
 func enumTesting() {

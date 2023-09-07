@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-
-	"gitlab.com/evatix-go/core/bytetype"
-)
+import "strconv"
 
 func main() {
 	// x := corestr.SimpleSlice{Items: []string{"a", "b"}}
@@ -63,8 +59,10 @@ func main() {
 	// fmt.Println(issetter.True.AllNameValues())
 
 	// SimpleStringOnceChecker(100)
-	readWriteTest01()
-	infoCreateExample01()
-	lazyRegExTester01()
-	fmt.Println(bytetype.New(1).StringValue())
+	x := 65
+	println(strconv.Itoa(x))
+	// readWriteTest01()
+	// infoCreateExample01()
+	// lazyRegExTester01()
+	// fmt.Println(bytetype.New(1).StringValue())
 }

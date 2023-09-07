@@ -1,6 +1,6 @@
 package stringcompareas
 
-import "gitlab.com/evatix-go/core/regexnew"
+import "gitlab.com/auk-go/core/regexnew"
 
 // NotMatchRegex no use of isCaseSensitive
 //

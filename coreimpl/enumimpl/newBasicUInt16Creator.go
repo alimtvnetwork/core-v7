@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 type newBasicUInt16Creator struct{}

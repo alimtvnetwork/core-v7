@@ -1,8 +1,8 @@
 package loggerinf
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface"
-	"gitlab.com/evatix-go/core/coreinterface/serializerinf"
+	"gitlab.com/auk-go/core/coreinterface"
+	"gitlab.com/auk-go/core/coreinterface/serializerinf"
 )
 
 type StandardLoggerGetter interface {

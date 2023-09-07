@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"errors"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 type newResultCreator struct{}

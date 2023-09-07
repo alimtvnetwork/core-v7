@@ -3,8 +3,8 @@ package chmodhelper
 import (
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/errcore"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/errcore"
 )
 
 type RwxMatchingStatus struct {

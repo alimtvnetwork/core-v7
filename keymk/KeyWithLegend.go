@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
 )
 
 // KeyWithLegend

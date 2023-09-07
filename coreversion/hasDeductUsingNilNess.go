@@ -1,6 +1,6 @@
 package coreversion
 
-import "gitlab.com/evatix-go/core/corecomparator"
+import "gitlab.com/auk-go/core/corecomparator"
 
 func hasDeductUsingNilNess(left *Version, right *Version) (r corecomparator.Compare, isApplicable bool) {
 	if left == nil && right == nil {

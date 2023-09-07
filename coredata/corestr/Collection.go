@@ -9,14 +9,14 @@ import (
 	"strings"
 	"sync"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/coredata/stringslice"
-	"gitlab.com/evatix-go/core/coreindexes"
-	"gitlab.com/evatix-go/core/defaultcapacity"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
-	"gitlab.com/evatix-go/core/simplewrap"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/coredata/stringslice"
+	"gitlab.com/auk-go/core/coreindexes"
+	"gitlab.com/auk-go/core/defaultcapacity"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/simplewrap"
 )
 
 type Collection struct {

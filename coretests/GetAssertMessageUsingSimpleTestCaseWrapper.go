@@ -3,7 +3,7 @@ package coretests
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/internal/msgformats"
+	"gitlab.com/auk-go/core/internal/msgformats"
 )
 
 // GetAssertMessageUsingSimpleTestCaseWrapper

@@ -1,6 +1,6 @@
 package isany
 
-import "gitlab.com/evatix-go/core/internal/strutilinternal"
+import "gitlab.com/auk-go/core/internal/strutilinternal"
 
 func StringEqual(
 	left, right interface{},

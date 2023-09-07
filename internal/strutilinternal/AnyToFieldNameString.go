@@ -3,7 +3,7 @@ package strutilinternal
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 func AnyToFieldNameString(any interface{}) string {

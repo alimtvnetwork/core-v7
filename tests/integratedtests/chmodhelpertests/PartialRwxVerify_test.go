@@ -6,9 +6,9 @@ import (
 
 	. "github.com/smartystreets/goconvey/convey"
 
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/tests/testwrappers/chmodhelpertestwrappers"
+	"gitlab.com/auk-go/core/chmodhelper"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
 func Test_PartialRwxVerify(t *testing.T) {

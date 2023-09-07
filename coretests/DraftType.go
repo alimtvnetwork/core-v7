@@ -6,7 +6,7 @@ import (
 	"errors"
 	"fmt"
 
-	"gitlab.com/evatix-go/core/corecmp"
+	"gitlab.com/auk-go/core/corecmp"
 )
 
 type DraftType struct {

@@ -1,8 +1,8 @@
 package loggerinf
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface/errcoreinf"
-	"gitlab.com/evatix-go/core/internal/internalinterface"
+	"gitlab.com/auk-go/core/coreinterface/errcoreinf"
+	"gitlab.com/auk-go/core/internal/internalinterface"
 )
 
 type ModelBytesGetter interface {

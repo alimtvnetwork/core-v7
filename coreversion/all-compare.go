@@ -1,8 +1,8 @@
 package coreversion
 
 import (
-	"gitlab.com/evatix-go/core/corecmp"
-	"gitlab.com/evatix-go/core/corecomparator"
+	"gitlab.com/auk-go/core/corecmp"
+	"gitlab.com/auk-go/core/corecomparator"
 )
 
 func Compare(

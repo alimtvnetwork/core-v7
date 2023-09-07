@@ -3,11 +3,11 @@ package coreversion
 import (
 	"strconv"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/corecmp"
-	"gitlab.com/evatix-go/core/corecomparator"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/enums/versionindexes"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/corecmp"
+	"gitlab.com/auk-go/core/corecomparator"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/enums/versionindexes"
 )
 
 type Version struct {

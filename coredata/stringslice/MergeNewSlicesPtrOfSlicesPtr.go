@@ -1,6 +1,6 @@
 package stringslice
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 // MergeNewSlicesPtrOfSlicesPtr Don't include nil or length 0 slices
 func MergeNewSlicesPtrOfSlicesPtr(slices *[]*[]string) *[]string {

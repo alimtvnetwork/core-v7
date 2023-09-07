@@ -1,7 +1,7 @@
 package chmodclasstype
 
 import (
-	"gitlab.com/evatix-go/core/coreinterface/enuminf"
+	"gitlab.com/auk-go/core/coreinterface/enuminf"
 )
 
 type Variant byte

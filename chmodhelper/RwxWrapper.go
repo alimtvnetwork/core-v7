@@ -9,14 +9,14 @@ import (
 	"os/exec"
 	"strconv"
 
-	"gitlab.com/evatix-go/core/chmodhelper/chmodins"
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/constants/bitsize"
-	"gitlab.com/evatix-go/core/coredata/corejson"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/fsinternal"
-	"gitlab.com/evatix-go/core/internal/osconstsinternal"
-	"gitlab.com/evatix-go/core/osconsts"
+	"gitlab.com/auk-go/core/chmodhelper/chmodins"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/constants/bitsize"
+	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/fsinternal"
+	"gitlab.com/auk-go/core/internal/osconstsinternal"
+	"gitlab.com/auk-go/core/osconsts"
 )
 
 type RwxWrapper struct {

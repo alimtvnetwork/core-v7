@@ -1,8 +1,8 @@
 package versionindexes
 
 import (
-	"gitlab.com/evatix-go/core/coreimpl/enumimpl"
-	"gitlab.com/evatix-go/core/internal/reflectinternal"
+	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 var (

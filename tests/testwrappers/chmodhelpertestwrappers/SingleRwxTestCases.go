@@ -1,8 +1,8 @@
 package chmodhelpertestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/chmodhelper"
-	"gitlab.com/evatix-go/core/chmodhelper/chmodclasstype"
+	"gitlab.com/auk-go/core/chmodhelper"
+	"gitlab.com/auk-go/core/chmodhelper/chmodclasstype"
 )
 
 var SingleRwxTestCases = []chmodhelper.SingleRwx{

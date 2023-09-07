@@ -5,11 +5,11 @@ import (
 	"fmt"
 	"sort"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/coredata/coreonce"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/csvinternal"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/coredata/coreonce"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/csvinternal"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type numberEnumBase struct {

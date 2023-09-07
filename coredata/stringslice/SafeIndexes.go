@@ -1,6 +1,6 @@
 package stringslice
 
-import "gitlab.com/evatix-go/core/constants"
+import "gitlab.com/auk-go/core/constants"
 
 // SafeIndexes get safe indexes slice based on indexes given
 //

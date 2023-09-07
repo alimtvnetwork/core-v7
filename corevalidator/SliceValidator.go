@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strings"
 
-	"gitlab.com/evatix-go/core/constants"
-	"gitlab.com/evatix-go/core/enums/stringcompareas"
-	"gitlab.com/evatix-go/core/errcore"
-	"gitlab.com/evatix-go/core/internal/strutilinternal"
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/enums/stringcompareas"
+	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
 type SliceValidator struct {

@@ -1,6 +1,6 @@
 package enuminf
 
-import "gitlab.com/evatix-go/core/internal/internalinterface"
+import "gitlab.com/auk-go/core/internal/internalinterface"
 
 type SplitNameValueByteGetter interface {
 	enumNameStinger

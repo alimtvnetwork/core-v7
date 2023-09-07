@@ -3,7 +3,7 @@ package errcore
 import (
 	"fmt"
 
-	"gitlab.com/evatix-go/core/internal/msgformats"
+	"gitlab.com/auk-go/core/internal/msgformats"
 )
 
 func GetSearchLineNumberExpectationMessage(

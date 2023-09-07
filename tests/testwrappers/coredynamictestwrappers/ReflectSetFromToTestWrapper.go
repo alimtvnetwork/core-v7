@@ -1,8 +1,8 @@
 package coredynamictestwrappers
 
 import (
-	"gitlab.com/evatix-go/core/coretests"
-	"gitlab.com/evatix-go/core/corevalidator"
+	"gitlab.com/auk-go/core/coretests"
+	"gitlab.com/auk-go/core/corevalidator"
 )
 
 type ReflectSetFromToTestWrapper struct {

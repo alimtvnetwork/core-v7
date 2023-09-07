@@ -3,7 +3,7 @@ package osconstsinternal
 import (
 	"runtime"
 
-	"gitlab.com/evatix-go/core/constants"
+	"gitlab.com/auk-go/core/constants"
 )
 
 // GOOS values https://stackoverflow.com/a/20728862
