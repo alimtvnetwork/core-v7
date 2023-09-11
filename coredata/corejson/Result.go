@@ -62,7 +62,7 @@ func (it *Result) DeserializedFieldsToMap() (
 // SafeDeserializedFieldsToMap
 //
 // Warning:
-//  - Swallows the error
+//   - Swallows the error
 func (it *Result) SafeDeserializedFieldsToMap() (
 	fieldsMap map[string]interface{},
 ) {
@@ -96,7 +96,7 @@ func (it *Result) FieldsNames() (
 // SafeFieldsNames
 //
 // Warning:
-//  - Swallows the error
+//   - Swallows the error
 func (it *Result) SafeFieldsNames() (
 	fieldsNames []string,
 ) {
@@ -343,7 +343,7 @@ func (it *Result) MeaningfulErrorMessage() string {
 
 // MeaningfulError
 //
-//  create error even if results are nil.
+//	create error even if results are nil.
 func (it *Result) MeaningfulError() error {
 	if it == nil {
 		return defaulterr.JsonResultNull
@@ -394,10 +394,10 @@ func (it *Result) IsEmptyError() bool {
 
 // HasSafeItems
 //
-//  Returns true if
-//  Result is not null
-//  and has NO error
-//  and has non-Empty json (other than length 0 or "{}")
+//	Returns true if
+//	Result is not null
+//	and has NO error
+//	and has non-Empty json (other than length 0 or "{}")
 //
 // Invert of HasIssuesOrEmpty
 func (it *Result) HasSafeItems() bool {
@@ -406,19 +406,19 @@ func (it *Result) HasSafeItems() bool {
 
 // IsAnyNull
 //
-//  Returns true
-//  if Result is null
-//  or Bytes is null
+//	Returns true
+//	if Result is null
+//	or Bytes is null
 func (it *Result) IsAnyNull() bool {
 	return it == nil || it.Bytes == nil
 }
 
 // HasIssuesOrEmpty
 //
-//  Returns true
-//  if Result is null
-//  or has any error
-//  or has empty json (length 0 or "{}")
+//	Returns true
+//	if Result is null
+//	or has any error
+//	or has empty json (length 0 or "{}")
 //
 // Result.IsAnyNull() ||
 // Result.HasError() ||
@@ -449,7 +449,8 @@ func (it *Result) HandleErrorWithMsg(msg string) {
 // HasBytes
 //
 // Invert of Result.IsEmptyJsonBytes()
-//  Represents has at least valid json data other than length 0 or "{}"
+//
+//	Represents has at least valid json data other than length 0 or "{}"
 func (it *Result) HasBytes() bool {
 	return !it.IsEmptyJsonBytes()
 }
@@ -457,7 +458,8 @@ func (it *Result) HasBytes() bool {
 // HasJsonBytes
 //
 // Invert of Result.IsEmptyJsonBytes()
-//  Represents has at least valid json data other than length 0 or "{}"
+//
+//	Represents has at least valid json data other than length 0 or "{}"
 func (it *Result) HasJsonBytes() bool {
 	return !it.IsEmptyJsonBytes()
 }
@@ -551,7 +553,7 @@ func (it *Result) UnmarshalMust(
 
 // Unmarshal
 //
-//  deserializes current safe bytes to given pointer
+//	deserializes current safe bytes to given pointer
 func (it *Result) Unmarshal(
 	anyPointer interface{},
 ) error {
@@ -567,7 +569,7 @@ func (it *Result) Unmarshal(
 		compiledMessage := errcore.MessageVarMap(
 			"json unmarshal failed with existing error",
 			map[string]interface{}{
-				"err":     it.Error,
+				"err":     it.ErrorString(),
 				"src":     it.TypeName,
 				"dst":     reflectinternal.TypeName(anyPointer),
 				"payload": it.safeJsonStringInternal(),
@@ -590,7 +592,7 @@ func (it *Result) Unmarshal(
 	compiledMessage := errcore.MessageVarMap(
 		"json unmarshal failed",
 		map[string]interface{}{
-			"err":     it.Error,
+			"err":     it.ErrorString(),
 			"src":     it.TypeName,
 			"dst":     reflectinternal.TypeName(anyPointer),
 			"payload": it.safeJsonStringInternal(),
@@ -711,14 +713,14 @@ func (it *Result) JsonModelAny() interface{} {
 
 // Json
 //
-//  creates json result of self
+//	creates json result of self
 func (it Result) Json() Result {
 	return NewResult.Any(it)
 }
 
 // JsonPtr
 //
-//  creates json result of self
+//	creates json result of self
 func (it Result) JsonPtr() *Result {
 	return NewResult.AnyPtr(it)
 }

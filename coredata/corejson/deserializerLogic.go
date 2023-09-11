@@ -51,7 +51,7 @@ func (it deserializerLogic) UsingError(
 
 // UsingErrorWhichJsonResult
 //
-//  given error is in json format for json result
+//	given error is in json format for json result
 func (it deserializerLogic) UsingErrorWhichJsonResult(
 	errInJsonResultJson error,
 	toPtr interface{},
@@ -112,15 +112,15 @@ func (it deserializerLogic) FromString(
 // Warning: must check nil before for from, to both.
 //
 // Casting from to steps:
-//  - reflection first if equal type + right ptr and not nil.
-//  - []byte
-//  - string
-//  - Jsoner
-//  - Result
-//  - *Result
-//  - bytesSerializer
-//  - serializerFunc
-//  - error to string then cast from json string then to actual unmarshal
+//   - reflection first if equal type + right ptr and not nil.
+//   - []byte
+//   - string
+//   - Jsoner
+//   - Result
+//   - *Result
+//   - bytesSerializer
+//   - serializerFunc
+//   - error to string then cast from json string then to actual unmarshal
 func (it deserializerLogic) FromTo(
 	fromAny interface{},
 	toPtr interface{},
@@ -348,7 +348,7 @@ func (it deserializerLogic) UsingDeserializerToOption(
 
 // UsingDeserializerDefined
 //
-//  on deserializer null it will not do anything but return nil error
+//	on deserializer null it will not do anything but return nil error
 //
 // only deserialize if deserializer is not null.
 func (it deserializerLogic) UsingDeserializerDefined(
@@ -363,7 +363,7 @@ func (it deserializerLogic) UsingDeserializerDefined(
 
 // UsingDeserializerFuncDefined
 //
-//  on deserializer null it will not do anything but return nil error
+//	on deserializer null it will not do anything but return nil error
 //
 // only deserialize if deserializer is not null.
 func (it deserializerLogic) UsingDeserializerFuncDefined(
@@ -380,6 +380,26 @@ func (it deserializerLogic) UsingDeserializerFuncDefined(
 }
 
 func (it deserializerLogic) UsingJsonerToAny(
+	isSkipOnNullJsoner bool,
+	jsoner Jsoner,
+	toPtr interface{},
+) error {
+	if isSkipOnNullJsoner && jsoner == nil {
+		return nil
+	}
+
+	if jsoner == nil {
+		return errcore.
+			CannotBeNilType.
+			ErrorNoRefs("jsoner given as nil cannot deserialize to")
+	}
+
+	jsonResult := jsoner.JsonPtr()
+
+	return jsonResult.Deserialize(toPtr)
+}
+
+func (it deserializerLogic) UsingJsonerToAnyMust(
 	isSkipOnNullJsoner bool,
 	jsoner Jsoner,
 	toPtr interface{},

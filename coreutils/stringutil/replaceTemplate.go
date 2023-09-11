@@ -124,6 +124,9 @@ func (it *replaceTemplate) CurlyTwoItem(
 		})
 }
 
+// DirectKeyUsingMap
+//
+//	Don't use wrap just use the Key and it will be replaced.
 func (it *replaceTemplate) DirectKeyUsingMap(
 	format string, // key-text...
 	mapToReplace map[string]string,
@@ -154,14 +157,14 @@ func (it *replaceTemplate) CurlyKeyUsingMap(
 
 // UsingMapOptions
 //
-//  Replaces format template using the map given.
+//	Replaces format template using the map given.
 //
-//  format : {key}-text-something/{path}...
+//	format : {key}-text-something/{path}...
 //
 // Options:
-//  - isConvKeysToCurlyBraceKeys : true
-//      will convert map keys to {key} and then use
-//      recursive replace to reduce the template format.
+//   - isConvKeysToCurlyBraceKeys : true
+//     will convert map keys to {key} and then use
+//     recursive replace to reduce the template format.
 func (it *replaceTemplate) UsingMapOptions(
 	isConvKeysToCurlyBraceKeys bool, // true: conv key to {key} before replace
 	format string, // Template-format: {key}-text-something/{path}...
@@ -266,10 +269,10 @@ func (it *replaceTemplate) UsingStringerMapOptions(
 
 // UsingWrappedTemplate
 //
-//  Replaces all constants.WrappedTemplate {wrapped} with replaceText
+//	Replaces all constants.WrappedTemplate {wrapped} with replaceText
 //
-//  Format:
-//      - "some format {wrapped} text here."
+//	Format:
+//	    - "some format {wrapped} text here."
 func (it *replaceTemplate) UsingWrappedTemplate(
 	format,
 	replacingText string,
@@ -286,10 +289,10 @@ func (it *replaceTemplate) UsingWrappedTemplate(
 
 // UsingBracketsWrappedTemplate
 //
-//  Replaces all constants.BracketsWrappedTemplate {brackets-wrapped} with replaceText
+//	Replaces all constants.BracketsWrappedTemplate {brackets-wrapped} with replaceText
 //
-//  Format:
-//      - "some format {brackets-wrapped} text here."
+//	Format:
+//	    - "some format {brackets-wrapped} text here."
 func (it *replaceTemplate) UsingBracketsWrappedTemplate(
 	format,
 	replacingText string,
@@ -306,10 +309,10 @@ func (it *replaceTemplate) UsingBracketsWrappedTemplate(
 
 // UsingQuotesWrappedTemplate
 //
-//  Replaces all constants.QuotesWrappedTemplate "{quotes-wrapped}" with replaceText
+//	Replaces all constants.QuotesWrappedTemplate "{quotes-wrapped}" with replaceText
 //
-//  Format:
-//      - "some format {quotes-wrapped} text here."
+//	Format:
+//	    - "some format {quotes-wrapped} text here."
 func (it *replaceTemplate) UsingQuotesWrappedTemplate(
 	format,
 	replacingText string,
@@ -326,10 +329,10 @@ func (it *replaceTemplate) UsingQuotesWrappedTemplate(
 
 // UsingValueTemplate
 //
-//  Replaces all constants.ValueTemplate "{value}" with replaceText
+//	Replaces all constants.ValueTemplate "{value}" with replaceText
 //
-//  Format:
-//      - "some format {value} text here."
+//	Format:
+//	    - "some format {value} text here."
 func (it *replaceTemplate) UsingValueTemplate(
 	format,
 	replacingText string,
@@ -346,10 +349,10 @@ func (it *replaceTemplate) UsingValueTemplate(
 
 // UsingValueWithFieldsTemplate
 //
-//  Replaces all constants.ValueWithFieldsTemplate "{value-fields}" with replaceText
+//	Replaces all constants.ValueWithFieldsTemplate "{value-fields}" with replaceText
 //
-//  Format:
-//      - "some format {value-fields} text here."
+//	Format:
+//	    - "some format {value-fields} text here."
 func (it *replaceTemplate) UsingValueWithFieldsTemplate(
 	format,
 	replacingText string,
