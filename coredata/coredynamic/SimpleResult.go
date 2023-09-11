@@ -94,7 +94,7 @@ func (it *SimpleResult) InvalidError() error {
 
 func (it *SimpleResult) Clone() SimpleResult {
 	return SimpleResult{
-		Dynamic: it.Dynamic,
+		Dynamic: it.Dynamic.Clone(),
 		Result:  it.Result,
 		Message: it.Message,
 	}
@@ -106,7 +106,7 @@ func (it *SimpleResult) ClonePtr() *SimpleResult {
 	}
 
 	return &SimpleResult{
-		Dynamic: it.Dynamic,
+		Dynamic: it.Dynamic.Clone(),
 		Result:  it.Result,
 		Message: it.Message,
 	}
