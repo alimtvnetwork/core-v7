@@ -18,7 +18,7 @@ func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
 	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
-		&createPathInstructions)
+		createPathInstructions)
 
 	for caseIndex, testCase := range chmodhelpertestwrappers.VerifyRwxChmodUsingRwxInstructionsTestCases {
 		// Arrange

@@ -5,17 +5,17 @@ type RwxInstruction struct {
 	Condition
 }
 
-func (receiver *RwxInstruction) Clone() *RwxInstruction {
-	if receiver == nil {
+func (it *RwxInstruction) Clone() *RwxInstruction {
+	if it == nil {
 		return nil
 	}
 
 	return &RwxInstruction{
-		RwxOwnerGroupOther: *receiver.RwxOwnerGroupOther.Clone(),
+		RwxOwnerGroupOther: *it.RwxOwnerGroupOther.Clone(),
 		Condition: Condition{
-			IsSkipOnInvalid:   receiver.IsSkipOnInvalid,
-			IsContinueOnError: receiver.IsContinueOnError,
-			IsRecursive:       receiver.IsRecursive,
+			IsSkipOnInvalid:   it.IsSkipOnInvalid,
+			IsContinueOnError: it.IsContinueOnError,
+			IsRecursive:       it.IsRecursive,
 		},
 	}
 }

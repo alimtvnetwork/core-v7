@@ -10,7 +10,7 @@ type RwxInstructionTestWrapper struct {
 	RwxInstructions []chmodins.RwxInstruction
 	DefaultRwx      *chmodins.RwxOwnerGroupOther
 	IsErrorExpected bool
-	CreatePaths     []*chmodhelper.DirFilesWithRwxPermission
+	CreatePaths     []chmodhelper.DirFilesWithRwxPermission
 	funcName        coretests.TestFuncName
 	expected        chmodins.RwxOwnerGroupOther
 	actual          interface{}

@@ -1,5 +1,7 @@
 package enumimpl
 
 var (
-	New = newCreator{}
+	New                      = newCreator{}
+	DefaultDiffCheckerImpl   = &differCheckerImpl{}
+	LeftRightDiffCheckerImpl = &leftRightDiffCheckerImpl{}
 )

@@ -13,7 +13,7 @@ import (
 func assertSingleChmod(
 	t *testing.T,
 	testHeader string,
-	createPath *chmodhelper.DirFilesWithRwxPermission,
+	createPath chmodhelper.DirFilesWithRwxPermission,
 	expectedChmodRwxFullString string,
 ) {
 	fileChmodMap := createPath.GetFilesChmodMap()

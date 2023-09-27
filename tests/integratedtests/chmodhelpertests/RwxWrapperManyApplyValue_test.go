@@ -13,7 +13,7 @@ import (
 
 // Test_RwxWrapperManyApplyValue_Unix
 //
-//  for directory `-` will be placed not `d`
+//	for directory `-` will be placed not `d`
 func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 	coretests.SkipOnWindows(t)
 
@@ -21,7 +21,7 @@ func Test_RwxWrapperManyApplyValue_Unix(t *testing.T) {
 	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
-		&createPathInstructions)
+		createPathInstructions)
 	firstCreationIns := createPathInstructions[0]
 	paths := firstCreationIns.GetPaths()
 	condition := chmodins.DefaultAllTrueCondition()
