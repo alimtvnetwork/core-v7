@@ -17,7 +17,7 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
-		&createPathInstructions)
+		createPathInstructions)
 	for caseIndex, testCase := range chmodhelpertestwrappers.VerifyRwxPartialChmodLocationsTestCases {
 		header := testCase.Header
 		expectationMessage := testCase.ExpectationErrorMessage

@@ -59,3 +59,24 @@ func Test_DynamicMapCreationDiffMessage(t *testing.T) {
 			diffJsonMessage)
 	}
 }
+
+func Test_DynamicMapCreationDiffMessageV2(t *testing.T) {
+	for caseIndex, testCase := range dynamicMapDiffMessageTestCasesV2 {
+		// Arrange
+		arrangeInput := testCase.ArrangeAsLeftRightDynamicMapWithDefaultChecker()
+
+		// Act
+		diffJsonMessage := arrangeInput.Left.ShouldDiffLeftRightMessageUsingDifferChecker(
+			arrangeInput.DifferChecker,
+			true,
+			testCase.CaseTitle(),
+			arrangeInput.Right)
+
+		// Assert
+		testCase.ShouldBe(
+			caseIndex,
+			t,
+			ShouldResemble,
+			diffJsonMessage)
+	}
+}

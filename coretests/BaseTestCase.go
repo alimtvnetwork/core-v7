@@ -12,12 +12,27 @@ import (
 	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
+// BaseTestCase
+//
+//   - Title : Test case header
+//   - ArrangeInput : Preparing input
+//   - ActualInput : Input for the act method
+//   - ExpectedInput : Set expectations for the unit test (what we are going receive from invoking something)
+//   - Will verify type at ArrangeExpectedType
+//   - Set by Developer expectation or assumptions
+//   - ArrangeExpectedType : Verify type for the ActualInput
+//   - ActualExpectedType : Verify type for the ExpectedInput
+//   - ExpectedTypeOfExpected : Verify type for the actual method return type, ExpectedInput type == ActualExpectedType == ExpectedTypeOfExpected (all 3 should match)
 type BaseTestCase struct {
-	Title                                                           string // consider as header
-	ArrangeInput, ActualInput, ExpectedInput                        interface{}
-	ArrangeExpectedType, ActualExpectedType, ExpectedTypeOfExpected reflect.Type
-	HasError                                                        bool
-	IsValidateError                                                 bool
+	Title                  string       // consider as header
+	ArrangeInput           interface{}  // preparing input
+	ActualInput            interface{}  // input for the act method
+	ExpectedInput          interface{}  // expectation set from the test
+	ArrangeExpectedType    reflect.Type // Verify type for the ActualInput
+	ActualExpectedType     reflect.Type // Verify type for the expectation set input (ExpectedInput)
+	ExpectedTypeOfExpected reflect.Type // What actual function returned what is the type of it, verify
+	HasError               bool
+	IsValidateError        bool
 }
 
 func (it *BaseTestCase) CaseTitle() string {
@@ -70,12 +85,17 @@ func (it *BaseTestCase) TypeValidationError() error {
 	return errcore.SliceToError(sliceErr)
 }
 
+// ArrangeString
+//
+//	returns ArrangeInput in string
+//	format using constants.SprintValueFormat
 func (it *BaseTestCase) ArrangeString() string {
 	return fmt.Sprintf(
 		constants.SprintValueFormat,
 		it.ArrangeInput)
 }
 
+// Input returns ArrangeInput
 func (it *BaseTestCase) Input() interface{} {
 	return it.ArrangeInput
 }
@@ -104,6 +124,10 @@ func (it *BaseTestCase) SetActual(actual interface{}) {
 	it.ActualInput = actual
 }
 
+// String
+//
+//	returns a string format using GetAssertMessageUsingSimpleTestCaseWrapper
+//	- https://prnt.sc/lxUV0eYk_qlg
 func (it *BaseTestCase) String(caseIndex int) string {
 	return GetAssertMessageUsingSimpleTestCaseWrapper(
 		caseIndex, it)
@@ -146,7 +170,7 @@ func (it *BaseTestCase) ShouldBeExplicit(
 
 	err := it.TypeValidationError()
 	errHeader := fmt.Sprintf(
-		"case %d : test case type validation must passes",
+		"case %d : test case type validation must passes - ",
 		caseIndex)
 
 	if err != nil {

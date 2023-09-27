@@ -2,21 +2,22 @@ package isany
 
 func DefinedItems(
 	anyItems ...interface{},
-) (isAllDefined bool, nonNullItems []interface{}) {
+) (isAllDefined bool, definedItems []interface{}) {
 	if len(anyItems) == 0 {
 		return false, nil
 	}
 
 	isAllDefined = true
-	nonNullItems = make([]interface{}, 0, len(anyItems))
+	definedItems = make([]interface{}, 0, len(anyItems))
 
 	for _, anyItem := range anyItems {
 		if Null(anyItem) {
 			isAllDefined = false
+		} else {
+			// defined
+			definedItems = append(definedItems, anyItem)
 		}
-
-		nonNullItems = append(nonNullItems, anyItem)
 	}
 
-	return isAllDefined, nonNullItems
+	return isAllDefined, definedItems
 }

@@ -37,3 +37,9 @@ type formatter interface {
 	Name() string
 	ValueString() string
 }
+
+type DifferChecker interface {
+	GetSingleDiffResult(isLeft bool, l, r interface{}) interface{}
+	GetResultOnKeyMissingInRightExistInLeft(lKey string, lVal interface{}) interface{}
+	IsEqual(isRegardless bool, l, r interface{}) bool
+}

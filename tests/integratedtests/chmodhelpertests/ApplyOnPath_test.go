@@ -20,7 +20,7 @@ func Test_ApplyOnPath_Unix(t *testing.T) {
 			caseMessenger)
 		chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 			true,
-			&testCase.CreatePaths)
+			testCase.CreatePaths)
 
 		// Act
 		actualErr := applyPathInstructions(&testCase)

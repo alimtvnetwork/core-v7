@@ -2,7 +2,7 @@ package chmodhelpertestwrappers
 
 import "gitlab.com/auk-go/core/chmodhelper"
 
-var CreatePathInstruction1 = []*chmodhelper.DirFilesWithRwxPermission{
+var CreatePathInstruction1 = []chmodhelper.DirFilesWithRwxPermission{
 	{
 		DirWithFiles: chmodhelper.DirWithFiles{
 			Dir: "/temp/core/test-cases",

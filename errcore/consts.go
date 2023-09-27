@@ -16,9 +16,9 @@ const (
 	// actual (type:[%T]) : [\"%v\"]"
 	expectingMessageFormat = "%s - expecting (type:[%T]) : [\"%v\"], but received " +
 		"or actual (type:[%T]) : [\"%v\"]"
-	expectingSimpleMessageFormat                  = "%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
-	expectingSimpleNoTypeMessageFormat            = "%s - Expect [\"%v\"] != [\"%v\"] Actual"
-	expectingNotMatchingSimpleNoTypeMessageFormat = "%s - Expect [\"%v\"] Not Matching [\"%v\"] Actual"
+	expectingSimpleMessageFormat                  = "%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Left"
+	expectingSimpleNoTypeMessageFormat            = "%s - Expect [\"%v\"] != [\"%v\"] Left"
+	expectingNotMatchingSimpleNoTypeMessageFormat = "%s - Expect [\"%v\"] Not Matching [\"%v\"] Left"
 	var2Format                                    = "(%s, %s) = (%v, %v)"
 	var2WithTypeFormat                            = "(%s [t:%T], %s[t:%T]) = (%v, %v)"
 	var3Format                                    = "(%s, %s, %s) = (%v, %v, %v)"

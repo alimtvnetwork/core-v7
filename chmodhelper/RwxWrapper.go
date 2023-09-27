@@ -94,7 +94,9 @@ func (it *RwxWrapper) ToUint32Octal() uint32 {
 	return uint32(octal)
 }
 
-// ToCompiledOctalBytes4Digits return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
+// ToCompiledOctalBytes4Digits
+//
+// return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 0777, 0555, 0755 NOT 0rwx
 func (it *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
@@ -112,12 +114,16 @@ func (it *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	return allBytes
 }
 
-// ToCompiledOctalBytes3Digits return '0'(Owner + '0')(Group + '0')(Other + '0')
+// ToCompiledOctalBytes3Digits
+//
+// return '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 777, 555, 755 NOT rwx
+//
 // return
-//      owner -> (0 - 7 value)
-//      group -> (0 - 7 value)
-//      other -> (0 - 7 value)
+//
+//   - owner -> (0 - 7 value)
+//   - group -> (0 - 7 value)
+//   - other -> (0 - 7 value)
 func (it *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner := it.Owner.ToStringByte()
@@ -134,11 +140,14 @@ func (it *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 }
 
 // ToCompiledSplitValues
+//
 // return
-//      owner -> (0 - 7 value)
-//      group -> (0 - 7 value)
-//      other -> (0 - 7 value)
-//      eg. 777, 755 etc
+//
+//   - owner -> (0 - 7 value)
+//   - group -> (0 - 7 value)
+//   - other -> (0 - 7 value)
+//
+// eg. 777, 755 etc
 func (it *RwxWrapper) ToCompiledSplitValues() (owner, group, other byte) {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner = it.Owner.ToStringByte()
@@ -166,7 +175,7 @@ func (it *RwxWrapper) ToRwxCompiledStr() string {
 
 // ToFullRwxValueString
 //
-//  returns "-rwxrwxrwx" / RwxFull (10)
+//	returns "-rwxrwxrwx" / RwxFull (10)
 func (it *RwxWrapper) ToFullRwxValueString() string {
 	owner := it.Owner.ToRwxString()
 	group := it.Group.ToRwxString()
@@ -210,6 +219,10 @@ func (it *RwxWrapper) ApplyChmod(
 	isSkipOnInvalid bool,
 	location string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	isPathInvalid := fsinternal.IsPathInvalid(
 		location)
 
@@ -299,6 +312,10 @@ func (it *RwxWrapper) LinuxApplyRecursive(
 	isSkipOnInvalid bool,
 	location string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	isPathExists := fsinternal.IsPathExists(location)
 
 	if isSkipOnInvalid && !isPathExists {
@@ -402,6 +419,10 @@ func (it *RwxWrapper) ApplyRecursive(
 }
 
 func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	cmd := it.getLinuxRecursiveCmdForChmod(location)
 
 	if cmd == nil {
@@ -490,6 +511,10 @@ func (it *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsContinueOnError {
 		// continue on error
 		return it.applyLinuxChmodNonRecursiveManyContinueOnError(
@@ -514,6 +539,10 @@ func (it *RwxWrapper) ApplyLinuxChmodOnMany(
 	condition *chmodins.Condition,
 	locations ...string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsRecursive {
 		return it.applyLinuxChmodOnManyRecursive(
 			condition,
@@ -528,6 +557,10 @@ func (it *RwxWrapper) applyLinuxChmodOnManyRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsContinueOnError {
 		// continue on error
 		return it.applyLinuxChmodRecursiveManyContinueOnError(
@@ -552,6 +585,10 @@ func (it *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	var errSlice []string
 
 	for _, location := range locations {
@@ -698,8 +735,8 @@ func (it *RwxWrapper) UnmarshalJSON(jsonBytes []byte) error {
 
 // FriendlyDisplay
 //
-//  fileModeStringFriendlyDisplayFormat : "{chmod : \"%s (%s)\"}"
-//  fileModeStringFriendlyDisplayFormat : "{chmod : \"0777 (-rw...)\"}"
+//   - fileModeStringFriendlyDisplayFormat : "{chmod : \"%s (%s)\"}"
+//   - fileModeStringFriendlyDisplayFormat : "{chmod : \"0777 (-rw...)\"}"
 func (it RwxWrapper) FriendlyDisplay() string {
 	return fmt.Sprintf(
 		fileModeStringFriendlyDisplayFormat,
