@@ -2,7 +2,7 @@ package simplewrap
 
 import (
 	"fmt"
-
+	
 	"gitlab.com/auk-go/core/constants"
 )
 
@@ -11,12 +11,10 @@ func CurlyWrapIf(
 	source interface{},
 ) string {
 	if !isCurly {
-		return fmt.Sprintf(
-			constants.SprintValueFormat,
-			source)
+		return toString(source)
 	}
-
+	
 	return fmt.Sprintf(
 		constants.CurlyWrapFormat,
-		source)
+		toString(source))
 }

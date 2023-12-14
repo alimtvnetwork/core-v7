@@ -8,9 +8,10 @@ func (it *newKeyValuesCreator) Cap(
 	capacity int,
 ) *KeyValueCollection {
 	collection := make(
-		[]*KeyValuePair,
+		[]KeyValuePair,
 		constants.Zero,
-		capacity)
+		capacity,
+	)
 
 	return &KeyValueCollection{
 		KeyValuePairs: collection,
@@ -19,9 +20,9 @@ func (it *newKeyValuesCreator) Cap(
 
 func (it *newKeyValuesCreator) Empty() *KeyValueCollection {
 	collection := make(
-		[]*KeyValuePair,
+		[]KeyValuePair,
 		constants.Zero,
-		constants.Zero)
+	)
 
 	return &KeyValueCollection{
 		KeyValuePairs: collection,

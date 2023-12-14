@@ -2,8 +2,8 @@ package baseactioninf
 
 // ValidationErrorGetter
 //
-//  Returns validation related error
-//  only
+//	Returns validation related error
+//	only
 type ValidationErrorGetter interface {
 	// ValidationError
 	//

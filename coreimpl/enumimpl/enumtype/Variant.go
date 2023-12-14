@@ -132,7 +132,7 @@ func (it Variant) IsInteger() bool {
 
 // IsNumber
 //
-//  Is any type of number
+//	Is any type of number
 func (it Variant) IsNumber() bool {
 	return numbersMap[it]
 }

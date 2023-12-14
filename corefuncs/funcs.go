@@ -13,6 +13,7 @@ type (
 	StringerWithErrorActionFunc func() (result string, err error)
 	ActionFunc                  func()
 	IsApplyFunc                 func() (isSuccess bool)
+	IsBooleanFunc               func() bool
 	InOutFunc                   func(input interface{}) (output interface{})
 	InOutErrFunc                func(input interface{}) (output interface{}, err error)
 	SerializeOutputFunc         func(input interface{}) (serializedBytes []byte, err error)

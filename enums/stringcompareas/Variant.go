@@ -299,19 +299,20 @@ func (it *Variant) RangesByte() []byte {
 // pattern for case sensitive or insensitive search
 //
 // Functions Mapping:
-//  Equal:         isEqualFunc,
-//  StartsWith:    isStartsWithFunc,
-//  EndsWith:      isEndsWithFunc,
-//  Anywhere:      isAnywhereFunc,
-//  AnyChars:      isAnyCharsFunc,
-//  Contains:      isAnywhereFunc,
-//  Regex:         isRegexFunc,
-//  NotEqual:      isNotEqualFunc,
-//  NotStartsWith: isNotStartsWithFunc,
-//  NotEndsWith:   isNotEndsWithFunc,
-//  NotContains:   isNotContainsFunc,
-//  NotAnyChars:   isNotAnyCharsFunc,
-//  NotMatchRegex: isNotMatchRegex,
+//
+//	Equal:         isEqualFunc,
+//	StartsWith:    isStartsWithFunc,
+//	EndsWith:      isEndsWithFunc,
+//	Anywhere:      isAnywhereFunc,
+//	AnyChars:      isAnyCharsFunc,
+//	Contains:      isAnywhereFunc,
+//	Regex:         isRegexFunc,
+//	NotEqual:      isNotEqualFunc,
+//	NotStartsWith: isNotStartsWithFunc,
+//	NotEndsWith:   isNotEndsWithFunc,
+//	NotContains:   isNotContainsFunc,
+//	NotAnyChars:   isNotAnyCharsFunc,
+//	NotMatchRegex: isNotMatchRegex,
 func (it Variant) IsLineCompareFunc() IsLineCompareFunc {
 	return rangesMap[it]
 }

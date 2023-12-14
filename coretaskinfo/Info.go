@@ -23,7 +23,7 @@ type Info struct {
 
 // SetSecure
 //
-//  on nil creates and returns new info with secure flag
+//	on nil creates and returns new info with secure flag
 func (it *Info) SetSecure() *Info {
 	if it == nil {
 		return &Info{
@@ -42,8 +42,8 @@ func (it *Info) SetSecure() *Info {
 
 // SetPlain
 //
-//  on nil creates and returns
-//  new info which is plain not secure
+//	on nil creates and returns
+//	new info which is plain not secure
 func (it *Info) SetPlain() *Info {
 	if it == nil {
 		return &Info{} // plain text
@@ -88,7 +88,7 @@ func (it *Info) IsIncludeErrorUrl() bool {
 
 // IsIncludeAdditionalErrorWrap
 //
-//  returns true on null or it.ExcludeOptions.IsIncludeAdditionalErrorWrap
+//	returns true on null or it.ExcludeOptions.IsIncludeAdditionalErrorWrap
 func (it *Info) IsIncludeAdditionalErrorWrap() bool {
 	return it == nil ||
 		it.ExcludeOptions.IsIncludeAdditionalErrorWrap()
@@ -130,10 +130,10 @@ func (it *Info) IsExcludePayload() bool {
 
 // IsExcludeRootName
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeRootName
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeRootName
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeRootName() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeRootName()
@@ -141,10 +141,10 @@ func (it *Info) IsExcludeRootName() bool {
 
 // IsExcludeDescription
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeDescription
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeDescription
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeDescription() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeDescription()
@@ -152,10 +152,10 @@ func (it *Info) IsExcludeDescription() bool {
 
 // IsExcludeUrl
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeUrl
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeUrl
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeUrl() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeUrl()
@@ -163,10 +163,10 @@ func (it *Info) IsExcludeUrl() bool {
 
 // IsExcludeHintUrl
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeHintUrl
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeHintUrl
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeHintUrl() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeHintUrl()
@@ -174,10 +174,10 @@ func (it *Info) IsExcludeHintUrl() bool {
 
 // IsExcludeErrorUrl
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeErrorUrl
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeErrorUrl
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeErrorUrl() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeErrorUrl()
@@ -185,10 +185,10 @@ func (it *Info) IsExcludeErrorUrl() bool {
 
 // IsExcludeAdditionalErrorWrap
 //
-//  returns true on defined (not null) and
-//  it.ExcludeOptions.IsExcludeAdditionalErrorWrap
+//	returns true on defined (not null) and
+//	it.ExcludeOptions.IsExcludeAdditionalErrorWrap
 //
-//  return false on null
+//	return false on null
 func (it *Info) IsExcludeAdditionalErrorWrap() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeAdditionalErrorWrap()
@@ -196,7 +196,7 @@ func (it *Info) IsExcludeAdditionalErrorWrap() bool {
 
 // IsExcludeExampleUrl
 //
-//  return true on null
+//	return true on null
 func (it *Info) IsExcludeExampleUrl() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeExampleUrl()
@@ -204,7 +204,7 @@ func (it *Info) IsExcludeExampleUrl() bool {
 
 // IsExcludeSingleExample
 //
-//  return true on null
+//	return true on null
 func (it *Info) IsExcludeSingleExample() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeSingleExample()
@@ -212,7 +212,7 @@ func (it *Info) IsExcludeSingleExample() bool {
 
 // IsExcludeExamples
 //
-//  return true on null
+//	return true on null
 func (it *Info) IsExcludeExamples() bool {
 	return it != nil &&
 		it.ExcludeOptions.IsSafeExcludeExamples()

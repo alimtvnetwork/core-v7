@@ -9,15 +9,15 @@ func MergeNewSimple(simpleSlices ...[]string) []string {
 		return []string{}
 	}
 
-	slicesPtr := make([]*[]string, constants.Zero, sliceLength)
+	slicesPtr := make([][]string, constants.Zero, sliceLength)
 
 	for _, slice := range simpleSlices {
 		if len(slice) == 0 {
 			continue
 		}
 
-		slicesPtr = append(slicesPtr, &slice)
+		slicesPtr = append(slicesPtr, slice)
 	}
 
-	return *MergeNewSlicesPtrOfSlicesPtr(&slicesPtr)
+	return MergeSlicesOfSlices(slicesPtr...)
 }

@@ -15,23 +15,24 @@ type chmodVerifier struct{}
 
 // IsEqualRwxFull
 //
-//  expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
+//	expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
 //
-//  Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - https://ss64.com/bash/chmod.html
+//   - https://ss64.com/bash/chmod.html
 func (it chmodVerifier) IsEqualRwxFull(
 	location string,
 	expectedHyphenedRwx string,
@@ -43,24 +44,25 @@ func (it chmodVerifier) IsEqualRwxFull(
 
 // IsEqualRwxFullSkipInvalid
 //
-//  On invalid path it is assumed to be equal.
-//  expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
+//	On invalid path it is assumed to be equal.
+//	expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
 //
-//  Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - https://ss64.com/bash/chmod.html
+//   - https://ss64.com/bash/chmod.html
 func (it chmodVerifier) IsEqualRwxFullSkipInvalid(
 	location string,
 	expectedHyphenedRwx string,
@@ -85,7 +87,7 @@ func (it chmodVerifier) IsEqual(
 
 // IsEqualSkipInvalid
 //
-//  On invalid path it is assumed to be equal.
+//	On invalid path it is assumed to be equal.
 func (it chmodVerifier) IsEqualSkipInvalid(
 	location string,
 	expectedFileMode os.FileMode,
@@ -128,31 +130,32 @@ func (it chmodVerifier) MismatchErrorUsingRwxFull(
 
 // GetRwxFull
 //
-//  Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 func (it chmodVerifier) GetRwxFull(fileMode os.FileMode) string {
 	return fileMode.String()
 }
 
 // GetRwx9
 //
-//  return "rwxrwxrwx"
+//	return "rwxrwxrwx"
 //
-//  Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
-//  then substring "-rwxrwxrwx"[1:] to return "rwxrwxrwx"
+//	Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
+//	then substring "-rwxrwxrwx"[1:] to return "rwxrwxrwx"
 //
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Format (length must be 9)
-//  "rwxrwxrwx"
+//
+//	"rwxrwxrwx"
 //
 // Understanding Examples:
-//  - owner all enabled only "rwx------"
-//  - group all enabled only "---rwx---"
+//   - owner all enabled only "rwx------"
+//   - group all enabled only "---rwx---"
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it chmodVerifier) GetRwx9(fileMode os.FileMode) string {
 	rwxFull := fileMode.String()
 
@@ -230,22 +233,23 @@ func (it chmodVerifier) Path(
 
 // RwxFull
 //
-//  expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
-//  Hint. os.FileMode.String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	expectedHyphenedRwx must be 10 chars in "-rwxrwxrwx"
+//	Hint. os.FileMode.String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - https://ss64.com/bash/chmod.html
+//   - https://ss64.com/bash/chmod.html
 func (it chmodVerifier) RwxFull(
 	location,
 	expectedHyphenedRwx string,
@@ -288,16 +292,16 @@ func (it chmodVerifier) RwxFull(
 // between 1-10 (rest will be fixed by wildcard)
 //
 // partialRwx:
-//  - "-rwx"    will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx"    will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 //
 // partialRwx Restrictions:
-//  - cannot have first char other than hyphen(-) or else things will not work
+//   - cannot have first char other than hyphen(-) or else things will not work
 //
 // Options:
-//  - isContinueOnError : on true don't stop until all locations are captured.
-//  - isSkipOnInvalid   : on true invalid paths will not be considered into expectation.
+//   - isContinueOnError : on true don't stop until all locations are captured.
+//   - isSkipOnInvalid   : on true invalid paths will not be considered into expectation.
 func (it chmodVerifier) PathsUsingPartialRwxOptions(
 	isContinueOnError,
 	isSkipOnInvalid bool,
@@ -347,7 +351,7 @@ func (it chmodVerifier) PathsUsingFileModeContinueOnError(
 // PathsUsingFileMode
 //
 // Options:
-//  - isContinueOnError : on true don't stop until all locations are captured.
+//   - isContinueOnError : on true don't stop until all locations are captured.
 func (it chmodVerifier) PathsUsingFileMode(
 	isContinueOnError bool,
 	fileMode os.FileMode,
@@ -362,22 +366,23 @@ func (it chmodVerifier) PathsUsingFileMode(
 // PathsUsingRwxFull
 //
 // expectedHyphenedRwx Format (length must be 10)
-//  "-rwxrwxrwx"
-//  Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//
+//	"-rwxrwxrwx"
+//	Hint. os.FileMode. String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // expectedHyphenedRwx Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // expectedHyphenedRwx Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - https://ss64.com/bash/chmod.html
+//   - https://ss64.com/bash/chmod.html
 //
 // Options:
-//  - isContinueOnError : on true don't stop until all locations are captured.
+//   - isContinueOnError : on true don't stop until all locations are captured.
 func (it chmodVerifier) PathsUsingRwxFull(
 	isContinueOnError bool,
 	expectedHyphenedRwx string,
@@ -412,20 +417,21 @@ func (it chmodVerifier) PathsUsingRwxFull(
 
 // UsingHashmap
 //
-//  Key - > Path, Value -> RwxFullString (10 chars, "-rwx------")
+//	Key - > Path, Value -> RwxFullString (10 chars, "-rwx------")
 //
 // map[key]RwxFullValue - RwxFullValue - Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // RwxFullString Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // RwxFullString Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // RwxFullString Reference:
-//  - https://ss64.com/bash/chmod.html
+//   - https://ss64.com/bash/chmod.html
 //
 // Multiple files verification error will be returned as once.
 // nil will be returned if no error

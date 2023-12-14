@@ -9,9 +9,9 @@ import (
 // StringsToCsvStrings
 //
 // Formats :
-//  - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
-//  - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
-//  - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
+//   - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
+//   - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
+//   - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
 func StringsToCsvStrings(
 	isIncludeQuote,
 	isIncludeSingleQuote bool,

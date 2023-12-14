@@ -29,27 +29,49 @@ func (it *SimpleStringOnce) IsInitialized() bool {
 	return it.isInitialize
 }
 
-// IsUnInit Not initialized yet
+func (it *SimpleStringOnce) IsDefined() bool {
+	return it.isInitialize
+}
+
+// IsUninitialized
+//
+// not initialized yet
 //
 // !it.isInitialize
-func (it *SimpleStringOnce) IsUnInit() bool {
+func (it *SimpleStringOnce) IsUninitialized() bool {
 	return !it.isInitialize
 }
 
 // Invalidate
 //
-// Will make initialize to false
+// Will make initialize to false, a fresh start, resets.
+// Alias to Reset.
 func (it *SimpleStringOnce) Invalidate() {
 	it.isInitialize = false
+	it.value = ""
+}
+
+// Reset
+//
+// Will make initialize to false, a fresh start, resets.
+// Alias to Invalidate.
+func (it *SimpleStringOnce) Reset() {
+	it.isInitialize = false
+	it.value = ""
 }
 
 // IsInvalid
 //
-//  !it.isInitialize || it.value == ""
+//	it is null or !it.isInitialize || it.value == ""
 func (it *SimpleStringOnce) IsInvalid() bool {
-	return !it.isInitialize || it.value == ""
+	return it == nil ||
+		!it.isInitialize ||
+		it.value == ""
 }
 
+// ValueBytes
+//
+// Use SetOnUninitialized to set value.
 func (it *SimpleStringOnce) ValueBytes() []byte {
 	return []byte(it.value)
 }
@@ -60,7 +82,11 @@ func (it *SimpleStringOnce) ValueBytesPtr() *[]byte {
 	return &allBytes
 }
 
-func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
+// SetOnUninitialized
+//
+// Set this value only if uninitialized,
+// if already init, then returns error
+func (it *SimpleStringOnce) SetOnUninitialized(setVal string) error {
 	if it.isInitialize {
 		return errcore.
 			AlreadyInitializedType.
@@ -73,20 +99,36 @@ func (it *SimpleStringOnce) SetOnUninitializedError(setVal string) error {
 	return nil
 }
 
-func (it *SimpleStringOnce) GetPlusSetOnUninitialized(
-	setValPlusGetOnUnInit string,
+// GetSetOnce
+//
+// If initialized then return the existing value.
+//
+// Or, else set this value once and return this value.
+//
+// No Error, if looking for error, please use SetOnUninitialized
+func (it *SimpleStringOnce) GetSetOnce(
+	setOnUninitializedOnly string,
 ) (valGet string) {
 	if it.isInitialize {
 		return it.value
 	}
 
-	it.value = setValPlusGetOnUnInit
+	it.value = setOnUninitializedOnly
 	it.SetInitialize()
 
 	return it.value
 }
 
-func (it *SimpleStringOnce) GetPlusSetEmptyOnUninitialized() (valGet string) {
+// GetOnce
+//
+// Returns the initialized value (if already initialized)
+// Or else, it sets empty and returns the empty value forever.
+//
+// on empty set it is fixed doesn't allow to rewrite again,
+// unless Invalidate is called.
+//
+// Use SetOnUninitialized / GetOnceFunc to set value for the first time.
+func (it *SimpleStringOnce) GetOnce() (valGet string) {
 	if it.isInitialize {
 		return it.value
 	}
@@ -97,20 +139,20 @@ func (it *SimpleStringOnce) GetPlusSetEmptyOnUninitialized() (valGet string) {
 	return it.value
 }
 
-func (it *SimpleStringOnce) GetPlusSetOnUninitializedFunc(
-	setValPlusGetOnUnInitFunc func() string,
+func (it *SimpleStringOnce) GetOnceFunc(
+	setValueOnlyOnceIfUninitialized func() string,
 ) (valGet string) {
 	if it.isInitialize {
 		return it.value
 	}
 
-	it.value = setValPlusGetOnUnInitFunc()
+	it.value = setValueOnlyOnceIfUninitialized()
 	it.SetInitialize()
 
 	return it.value
 }
 
-func (it *SimpleStringOnce) SetOnUninitialized(setVal string) (isSet bool) {
+func (it *SimpleStringOnce) SetOnceIfUninitialized(setVal string) (isSet bool) {
 	if it.isInitialize {
 		return false
 	}
@@ -129,7 +171,9 @@ func (it *SimpleStringOnce) SetUnInit() {
 	it.isInitialize = false
 }
 
-func (it *SimpleStringOnce) ConcatNew(appendingText string) SimpleStringOnce {
+func (it *SimpleStringOnce) ConcatNew(
+	appendingText string,
+) SimpleStringOnce {
 	return SimpleStringOnce{
 		value:        it.value + appendingText,
 		isInitialize: it.isInitialize,
@@ -184,7 +228,8 @@ func (it *SimpleStringOnce) Uint16() (val uint16, isInRange bool) {
 	toUint16, isInRange := it.WithinRange(
 		true,
 		constants.Zero,
-		math.MaxUint16)
+		math.MaxUint16,
+	)
 
 	return uint16(toUint16), isInRange
 }
@@ -193,7 +238,8 @@ func (it *SimpleStringOnce) Uint32() (val uint32, isInRange bool) {
 	converted, isInRange := it.WithinRange(
 		true,
 		constants.Zero,
-		math.MaxInt)
+		math.MaxInt,
+	)
 
 	return uint32(converted), isInRange
 }
@@ -204,7 +250,8 @@ func (it *SimpleStringOnce) WithinRangeDefault(
 	return it.WithinRange(
 		true,
 		min,
-		max)
+		max,
+	)
 }
 
 func (it *SimpleStringOnce) WithinRange(
@@ -292,8 +339,13 @@ func (it *SimpleStringOnce) BooleanDefault() bool {
 	return it.Boolean(true)
 }
 
+// Boolean
+//
+//   - isConsiderInit is true then having IsUninitialized will return false.
+//   - y, 1, yes, Yes, YES, true => true
+//   - empty string or anything else returns false.
 func (it *SimpleStringOnce) Boolean(isConsiderInit bool) bool {
-	if isConsiderInit && it.IsUnInit() {
+	if isConsiderInit && it.IsUninitialized() {
 		return false
 	}
 
@@ -311,8 +363,14 @@ func (it *SimpleStringOnce) Boolean(isConsiderInit bool) bool {
 	return parsedBool
 }
 
+// IsSetter
+//
+//   - isConsiderInit is true then having IsUninitialized will return false.
+//   - y, 1, yes, Yes, YES, true => true
+//   - empty string or anything else returns false.
+//   - having error returns issetter.Uninitialized
 func (it *SimpleStringOnce) IsSetter(isConsiderInit bool) issetter.Value {
-	if isConsiderInit && it.IsUnInit() {
+	if isConsiderInit && it.IsUninitialized() {
 		return issetter.False
 	}
 
@@ -393,8 +451,9 @@ func (it *SimpleStringOnce) Ptr() *SimpleStringOnce {
 }
 
 // HasSafeNonEmpty
-//      it.isInitialize &&
-//		!it.IsEmpty()
+//
+//	     it.isInitialize &&
+//			!it.IsEmpty()
 func (it *SimpleStringOnce) HasSafeNonEmpty() bool {
 	return it.isInitialize &&
 		!it.IsEmpty()
@@ -469,7 +528,8 @@ func (it *SimpleStringOnce) RegexFindAllStringsWithFlag(
 	}
 
 	items := regexp.FindAllString(
-		it.value, n)
+		it.value, n,
+	)
 
 	return items, len(items) > 0
 }
@@ -511,7 +571,8 @@ func (it *SimpleStringOnce) SplitLeftRight(
 	splits := strings.SplitN(
 		it.String(),
 		sep,
-		expectedLeftRightLength)
+		expectedLeftRightLength,
+	)
 
 	length := len(splits)
 	first := splits[coreindexes.First]
@@ -528,7 +589,8 @@ func (it *SimpleStringOnce) SplitLeftRightTrim(
 ) (left, right string) {
 	splits := strings.SplitN(
 		it.String(), sep,
-		expectedLeftRightLength)
+		expectedLeftRightLength,
+	)
 
 	length := len(splits)
 	first := splits[coreindexes.First]
@@ -648,7 +710,8 @@ func (it *SimpleStringOnce) UnmarshalJSON(
 ) error {
 	var dataModel SimpleStringOnceModel
 	err := corejson.Deserialize.UsingBytes(
-		jsonBytes, &dataModel)
+		jsonBytes, &dataModel,
+	)
 
 	if err == nil {
 		it.value = dataModel.Value

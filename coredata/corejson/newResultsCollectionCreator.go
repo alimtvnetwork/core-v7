@@ -8,10 +8,10 @@ type newResultsCollectionCreator struct{}
 
 // UnmarshalUsingBytes
 //
-//  Aka. alias for DeserializeUsingBytes
+//	Aka. alias for DeserializeUsingBytes
 //
-//  Should be used when ResultsCollection itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when ResultsCollection itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultsCollectionCreator) UnmarshalUsingBytes(
 	deserializingBytes []byte,
 ) (*ResultsCollection, error) {
@@ -20,8 +20,8 @@ func (it newResultsCollectionCreator) UnmarshalUsingBytes(
 
 // DeserializeUsingBytes
 //
-//  Should be used when ResultsCollection itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when ResultsCollection itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultsCollectionCreator) DeserializeUsingBytes(
 	deserializingBytes []byte,
 ) (*ResultsCollection, error) {

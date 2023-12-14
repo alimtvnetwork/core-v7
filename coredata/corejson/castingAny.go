@@ -16,7 +16,8 @@ func (it castingAny) FromToDefault(
 	return it.FromToOption(
 		true,
 		fromAny,
-		castedToPtr)
+		castedToPtr,
+	)
 }
 
 func (it castingAny) FromToReflection(
@@ -26,7 +27,8 @@ func (it castingAny) FromToReflection(
 	return it.FromToOption(
 		true,
 		fromAny,
-		castedToPtr)
+		castedToPtr,
+	)
 }
 
 // FromToOption
@@ -36,15 +38,15 @@ func (it castingAny) FromToReflection(
 // Warning: must check nil before for from, to both.
 //
 // Casting from to steps:
-//  - reflection first if equal type + right ptr and not nil.
-//  - []byte
-//  - string
-//  - Jsoner
-//  - Result
-//  - *Result
-//  - bytesSerializer
-//  - serializerFunc
-//  - error to string then cast from json string then to actual unmarshal
+//   - reflection first if equal type + right ptr and not nil.
+//   - []byte
+//   - string
+//   - Jsoner
+//   - Result
+//   - *Result
+//   - bytesSerializer
+//   - serializerFunc
+//   - error to string then cast from json string then to actual unmarshal
 func (it castingAny) FromToOption(
 	isUseReflection bool,
 	fromAny,
@@ -53,7 +55,8 @@ func (it castingAny) FromToOption(
 	err, isApplicable := it.reflectionCasting(
 		isUseReflection,
 		fromAny,
-		castedToPtr)
+		castedToPtr,
+	)
 	if isApplicable {
 		return err
 	}
@@ -62,11 +65,13 @@ func (it castingAny) FromToOption(
 	case []byte:
 		return Deserialize.UsingBytes(
 			castedFrom,
-			castedToPtr)
+			castedToPtr,
+		)
 	case string:
 		return Deserialize.UsingBytes(
 			[]byte(castedFrom),
-			castedToPtr)
+			castedToPtr,
+		)
 	case Jsoner:
 		jsonResult := castedFrom.Json()
 
@@ -86,10 +91,12 @@ func (it castingAny) FromToOption(
 
 		return Deserialize.UsingBytes(
 			allBytes,
-			castedToPtr)
+			castedToPtr,
+		)
 	case func() ([]byte, error): // serializer func
 		jsonResult := NewResult.UsingSerializerFunc(
-			castedFrom)
+			castedFrom,
+		)
 
 		return jsonResult.Deserialize(castedToPtr)
 	case error:
@@ -99,12 +106,14 @@ func (it castingAny) FromToOption(
 
 		parsingErr := Deserialize.UsingBytes(
 			[]byte(castedFrom.Error()),
-			castedToPtr)
+			castedToPtr,
+		)
 
 		if parsingErr != nil {
 			return errors.New(
 				castedFrom.Error() +
-					parsingErr.Error())
+					parsingErr.Error(),
+			)
 		}
 
 		return nil
@@ -112,16 +121,18 @@ func (it castingAny) FromToOption(
 
 	// from
 	serializeJsonResult := Serialize.Apply(
-		fromAny)
+		fromAny,
+	)
 
 	// to
 	return serializeJsonResult.Deserialize(
-		castedToPtr)
+		castedToPtr,
+	)
 }
 
 // reflectionCasting
 //
-//  todo refactor return err
+//	todo refactor return err
 func (it castingAny) reflectionCasting(
 	isUseReflection bool,
 	fromAny interface{},
@@ -136,7 +147,8 @@ func (it castingAny) reflectionCasting(
 		// having type to nil will not be captured here.
 		// intentionally not taking it -- not a mistake
 		return errors.New(
-			"cannot cast from to if any from or to is null"), false
+			"cannot cast from to if any from or to is null",
+		), false
 	}
 
 	leftType := reflect.TypeOf(fromAny)
@@ -152,13 +164,13 @@ func (it castingAny) reflectionCasting(
 		return nil, false
 	}
 
-	isLeftDefined := reflectinternal.IsNotNull(fromAny)
+	isLeftDefined := reflectinternal.Is.Defined(fromAny)
 
 	if !isLeftDefined {
 		return nil, false
 	}
 
-	isRightDefined := reflectinternal.IsNotNull(castedToPtr)
+	isRightDefined := reflectinternal.Is.Defined(castedToPtr)
 
 	if !isRightDefined {
 		return nil, false

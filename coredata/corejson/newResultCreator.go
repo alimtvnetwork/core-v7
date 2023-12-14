@@ -14,10 +14,10 @@ type newResultCreator struct{}
 
 // UnmarshalUsingBytes
 //
-//  Aka. alias for DeserializeUsingBytes
+//	Aka. alias for DeserializeUsingBytes
 //
-//  Should be used when Result itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when Result itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultCreator) UnmarshalUsingBytes(
 	deserializingBytes []byte,
 ) *Result {
@@ -26,8 +26,8 @@ func (it newResultCreator) UnmarshalUsingBytes(
 
 // DeserializeUsingBytes
 //
-//  Should be used when Result itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when Result itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultCreator) DeserializeUsingBytes(
 	deserializingBytes []byte,
 ) *Result {
@@ -355,7 +355,7 @@ func (it newResultCreator) PtrUsingBytesPtr(
 
 // CastingAny
 //
-//  if already in JsonResult then returns it
+//	if already in JsonResult then returns it
 func (it newResultCreator) CastingAny(
 	castingAnyToJsonResultPtr interface{},
 ) *Result {
@@ -554,12 +554,12 @@ func (it newResultCreator) UsingJsoner(
 // AnyToCastingResult
 //
 // accepted types (usages anyTo.SerializedJsonResult):
-//  - Result, *Result
-//  - []byte
-//  - string
-//  - jsoner
-//  - bytesSerializer
-//  - anyItem
+//   - Result, *Result
+//   - []byte
+//   - string
+//   - jsoner
+//   - bytesSerializer
+//   - anyItem
 func (it newResultCreator) AnyToCastingResult(
 	anyItem interface{},
 ) *Result {

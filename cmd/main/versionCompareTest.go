@@ -15,10 +15,11 @@ func versionCompareTest(leftVersion, rightVersion string) corecomparator.Compare
 	rightV := coreversion.New.Create(rightVersion)
 
 	fmt.Println("   left, right = ", leftV, rightV)
-	r1 := leftV.Compare(rightV)
+	r1 := leftV.Compare(&rightV)
 	r2 := leftV.ComparisonValueIndexes(
-		rightV,
-		versionindexes.AllVersionIndexes...)
+		&rightV,
+		versionindexes.AllVersionIndexes...,
+	)
 	leftVersionValues := leftV.AllVersionValues()
 	rightVersionValues := rightV.AllVersionValues()
 
@@ -28,7 +29,8 @@ func versionCompareTest(leftVersion, rightVersion string) corecomparator.Compare
 
 	r3 := corecmp.VersionSliceInteger(
 		leftVersionValues,
-		rightVersionValues)
+		rightVersionValues,
+	)
 
 	fmt.Println("   (r3) left, right = ", r3)
 

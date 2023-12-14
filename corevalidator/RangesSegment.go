@@ -9,5 +9,5 @@ type RangesSegment struct {
 	corerange.RangeInt
 	ExpectedLines []string
 	CompareAs     stringcompareas.Variant
-	ValidatorCoreCondition
+	Condition
 }

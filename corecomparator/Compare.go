@@ -92,28 +92,28 @@ func (it Compare) IsLeftLessEqual() bool {
 
 // IsLeftLessOrLessEqualOrEqual
 //
-//   it == Equal || it == LeftLess || it == LeftLessEqual
+//	it == Equal || it == LeftLess || it == LeftLessEqual
 func (it Compare) IsLeftLessOrLessEqualOrEqual() bool {
 	return it == Equal || it == LeftLess || it == LeftLessEqual
 }
 
 // IsLeftLessEqualLogically
 //
-//  it == Equal || it == LeftLess || it == LeftLessEqual
+//	it == Equal || it == LeftLess || it == LeftLessEqual
 func (it Compare) IsLeftLessEqualLogically() bool {
 	return it == Equal || it == LeftLess || it == LeftLessEqual
 }
 
 // IsLeftGreaterOrGreaterEqualOrEqual
 //
-//  it == Equal || it == LeftGreater || it == LeftGreaterEqual
+//	it == Equal || it == LeftGreater || it == LeftGreaterEqual
 func (it Compare) IsLeftGreaterOrGreaterEqualOrEqual() bool {
 	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
 }
 
 // IsLeftGreaterEqualLogically
 //
-//   it == Equal || it == LeftGreater || it == LeftGreaterEqual
+//	it == Equal || it == LeftGreater || it == LeftGreaterEqual
 func (it Compare) IsLeftGreaterEqualLogically() bool {
 	return it == Equal || it == LeftGreater || it == LeftGreaterEqual
 }
@@ -124,14 +124,14 @@ func (it Compare) IsNotEqual() bool {
 
 // IsNotEqualLogically
 //
-//  return it != Equal
+//	return it != Equal
 func (it Compare) IsNotEqualLogically() bool {
 	return it != Equal
 }
 
 // IsDefinedPlus
 //
-//  return  it != Inconclusive && it == right
+//	return  it != Inconclusive && it == right
 func (it Compare) IsDefinedPlus(right Compare) bool {
 	return it != Inconclusive && it == right
 }
@@ -232,6 +232,14 @@ func (it Compare) IsCompareEqualLogically(
 ) bool {
 	if it == expectedCompare {
 		return true
+	}
+
+	if expectedCompare == Equal {
+		return it.IsEqual()
+	}
+
+	if expectedCompare == NotEqual {
+		return it.IsNotEqualLogically()
 	}
 
 	if expectedCompare.IsLeftGreaterEqualLogically() {

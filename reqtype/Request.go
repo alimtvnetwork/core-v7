@@ -483,7 +483,7 @@ func (it Request) IsInheritPlusOverride() bool {
 
 // IsRestartOrReload
 //
-//  Request. IsRestart() || Request. IsReload()
+//	Request. IsRestart() || Request. IsReload()
 func (it Request) IsRestartOrReload() bool {
 	return it.IsRestart() || it.IsReload()
 }
@@ -509,12 +509,12 @@ func (it Request) IsAnyApplyOnExist() bool {
 
 // IsCrud
 //
-//  returns true if
-//      Read,
-//      Update,
-//      Create,
-//      Delete,
-//      IsCreateOrUpdate
+//	returns true if
+//	    Read,
+//	    Update,
+//	    Create,
+//	    Delete,
+//	    IsCreateOrUpdate
 func (it Request) IsCrud() bool {
 	return it.IsRead() ||
 		it.IsCreate() ||

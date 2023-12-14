@@ -57,7 +57,8 @@ func (it *PayloadWrapper) UnmarshalJSON(rawJsonBytes []byte) error {
 	var payloadWrapperModelInstance payloadWrapperModel
 	err := corejson.Deserialize.UsingBytes(
 		rawJsonBytes,
-		&payloadWrapperModelInstance)
+		&payloadWrapperModelInstance,
+	)
 
 	if err == nil {
 		it.Name = payloadWrapperModelInstance.Name
@@ -87,7 +88,8 @@ func (it *PayloadWrapper) ReCreateUsingJsonResult(
 	return New.
 		PayloadWrapper.
 		DeserializeUsingJsonResult(
-			jsonResult)
+			jsonResult,
+		)
 }
 
 func (it *PayloadWrapper) HasSafeItems() bool {
@@ -210,7 +212,8 @@ func (it *PayloadWrapper) SetPayloadDynamicAny(
 	}
 
 	jsonResult := corejson.AnyTo.SerializedJsonResult(
-		dynamicPayloadAny)
+		dynamicPayloadAny,
+	)
 
 	if jsonResult.HasError() {
 		return nil, jsonResult.MeaningfulError()
@@ -251,7 +254,8 @@ func (it *PayloadWrapper) SetUser(
 	it.initializeAuthOnDemand()
 
 	it.Attributes.AuthInfo.UserInfo.SetUser(
-		user)
+		user,
+	)
 
 	return it
 }
@@ -262,7 +266,8 @@ func (it *PayloadWrapper) SetSysUser(
 	it.initializeAuthOnDemand()
 
 	it.Attributes.AuthInfo.UserInfo.SetSystemUser(
-		sysUser)
+		sysUser,
+	)
 
 	return it
 }
@@ -296,7 +301,8 @@ func (it *PayloadWrapper) ReflectSetTo(
 ) error {
 	return coredynamic.ReflectSetFromTo(
 		it,
-		toPointer)
+		toPointer,
+	)
 }
 
 func (it *PayloadWrapper) AnyAttributes() interface{} {
@@ -308,7 +314,8 @@ func (it *PayloadWrapper) ReflectSetAttributes(
 ) error {
 	return coredynamic.ReflectSetFromTo(
 		it.Attributes,
-		toPointer)
+		toPointer,
+	)
 }
 
 func (it *PayloadWrapper) IdString() string {
@@ -336,7 +343,8 @@ func (it *PayloadWrapper) ValueReflectSet(
 ) error {
 	return coredynamic.ReflectSetFromTo(
 		it.Payloads,
-		setterPtr)
+		setterPtr,
+	)
 }
 
 func (it *PayloadWrapper) Serialize() ([]byte, error) {
@@ -543,9 +551,10 @@ func (it *PayloadWrapper) IdentifierInteger() int {
 		return constants.InvalidValue
 	}
 
-	idInt, _ := converters.StringToIntegerWithDefault(
+	idInt, _ := converters.StringTo.IntegerWithDefault(
 		it.Identifier,
-		constants.InvalidValue)
+		constants.InvalidValue,
+	)
 
 	return idInt
 }
@@ -574,7 +583,8 @@ func (it *PayloadWrapper) Deserialize(
 		Deserialize.
 		UsingBytes(
 			it.Payloads,
-			unmarshallingPointer)
+			unmarshallingPointer,
+		)
 }
 
 func (it *PayloadWrapper) DeserializeMust(
@@ -584,7 +594,8 @@ func (it *PayloadWrapper) DeserializeMust(
 		Deserialize.
 		UsingBytesMust(
 			it.Payloads,
-			unmarshallingPointer)
+			unmarshallingPointer,
+		)
 }
 
 func (it *PayloadWrapper) PayloadDeserialize(
@@ -592,7 +603,8 @@ func (it *PayloadWrapper) PayloadDeserialize(
 ) error {
 	return corejson.Deserialize.UsingBytes(
 		it.Payloads,
-		unmarshallingPointer)
+		unmarshallingPointer,
+	)
 }
 
 func (it *PayloadWrapper) PayloadDeserializeMust(
@@ -602,7 +614,8 @@ func (it *PayloadWrapper) PayloadDeserializeMust(
 		Deserialize.
 		UsingBytes(
 			it.Payloads,
-			unmarshallingPointer)
+			unmarshallingPointer,
+		)
 
 	if err != nil {
 		panic(err)
@@ -623,7 +636,8 @@ func (it *PayloadWrapper) DeserializePayloadsToPayloadWrapper() (
 	return New.
 		PayloadWrapper.
 		Deserialize(
-			it.Payloads)
+			it.Payloads,
+		)
 }
 
 func (it *PayloadWrapper) DeserializePayloadsToPayloadWrapperMust() (
@@ -668,6 +682,7 @@ func (it *PayloadWrapper) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *PayloadWrapper) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
@@ -715,7 +730,8 @@ func (it *PayloadWrapper) PayloadsJsonResult() *corejson.Result {
 
 	return corejson.NewResult.UsingTypeBytesPtr(
 		attributesTypeName,
-		it.Payloads)
+		it.Payloads,
+	)
 }
 
 func (it *PayloadWrapper) Clear() {
@@ -780,7 +796,8 @@ func (it *PayloadWrapper) ClonePtr(
 			CategoryName:   it.CategoryName,
 			HasManyRecords: it.HasManyRecords,
 			Payloads: corejson.BytesDeepClone(
-				it.Payloads),
+				it.Payloads,
+			),
 			Attributes: attrCloned,
 		}, nil
 	}

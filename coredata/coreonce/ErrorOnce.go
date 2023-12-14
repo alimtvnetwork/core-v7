@@ -66,28 +66,28 @@ func (it *ErrorOnce) IsDefined() bool {
 
 // IsInvalid
 //
-//  represents has error
+//	represents has error
 func (it *ErrorOnce) IsInvalid() bool {
 	return !it.IsNullOrEmpty()
 }
 
 // IsValid
 //
-//  represents empty error
+//	represents empty error
 func (it *ErrorOnce) IsValid() bool {
 	return it.IsNullOrEmpty()
 }
 
 // IsSuccess
 //
-//  represents empty error
+//	represents empty error
 func (it *ErrorOnce) IsSuccess() bool {
 	return it.IsNullOrEmpty()
 }
 
 // IsFailed
 //
-//  represents has error
+//	represents has error
 func (it *ErrorOnce) IsFailed() bool {
 	return !it.IsNullOrEmpty()
 }

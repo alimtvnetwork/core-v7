@@ -77,7 +77,7 @@ func (it BasicString) GetNameByIndex(index int) string {
 
 // GetIndexByName
 //
-//  constants.InvalidValue refers to the invalid index
+//	constants.InvalidValue refers to the invalid index
 func (it BasicString) GetIndexByName(name string) int {
 	if name == "" {
 		return constants.InvalidValue

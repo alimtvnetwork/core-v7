@@ -9,7 +9,7 @@ import (
 )
 
 type VersionsCollection struct {
-	Versions []*Version
+	Versions []Version
 }
 
 func (it *VersionsCollection) Add(
@@ -51,7 +51,7 @@ func (it *VersionsCollection) AddVersionsRaw(
 }
 
 func (it *VersionsCollection) AddVersions(
-	versions ...*Version,
+	versions ...Version,
 ) *VersionsCollection {
 	for _, v := range versions {
 		it.Versions = append(

@@ -1,6 +1,6 @@
 package stringslice
 
-func AllElemLengthSlices(slices ...*[]string) int {
+func AllElemLengthSlices(slices ...[]string) int {
 	if len(slices) == 0 {
 		return 0
 	}
@@ -12,7 +12,7 @@ func AllElemLengthSlices(slices ...*[]string) int {
 			continue
 		}
 
-		countOfAll += len(*slice)
+		countOfAll += len(slice)
 	}
 
 	return countOfAll

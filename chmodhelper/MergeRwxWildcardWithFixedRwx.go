@@ -2,13 +2,17 @@ package chmodhelper
 
 // MergeRwxWildcardWithFixedRwx
 //
-//  - existingRwx : Usually refers to fixed rwx values like "rwx", "--x", "-w-" etc.
-//  - rwxWildcardInput : Usually refers to fixed rwx values like "rw*", "*-x", "-w-" etc.
-//      Wildcard means keep the existing value as is.
+//   - existingRwx : Usually refers to fixed rwx values like "rwx", "--x", "-w-" etc.
 //
-//  Example:
+//   - rwxWildcardInput : Usually refers to fixed rwx values like "rw*", "*-x", "-w-" etc.
+//     Wildcard means keep the existing value as is.
+//
+//     Example:
+//
 //   - existingRwx        : (rwx : "r-x"),
+//
 //   - rwxWildcardInput   : (rwx : "r*-")
+//
 //   - @returns           : "r--"
 func MergeRwxWildcardWithFixedRwx(
 	existingRwx,

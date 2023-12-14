@@ -36,7 +36,8 @@ func InvalidDynamic() Dynamic {
 func InvalidDynamicPtr() *Dynamic {
 	return NewDynamicPtr(
 		nil,
-		false)
+		false,
+	)
 }
 
 func NewDynamicValid(
@@ -59,16 +60,20 @@ func NewDynamicPtr(
 	return &Dynamic{
 		innerData: data,
 		isValid:   isValid,
-		typeName: coreonce.NewStringOnce(func() string {
-			return fmt.Sprintf(constants.SprintTypeFormat, data)
-		}),
-		length: coreonce.NewIntegerOnce(func() int {
-			if data == nil {
-				return 0
-			}
+		typeName: coreonce.NewStringOnce(
+			func() string {
+				return fmt.Sprintf(constants.SprintTypeFormat, data)
+			},
+		),
+		length: coreonce.NewIntegerOnce(
+			func() int {
+				if data == nil {
+					return 0
+				}
 
-			return LengthOfReflect(reflect.ValueOf(data))
-		}),
+				return LengthOfReflect(reflect.ValueOf(data))
+			},
+		),
 	}
 }
 
@@ -82,7 +87,7 @@ func (it *Dynamic) Value() interface{} {
 
 // Length Returns length of a slice, map, array
 //
-// It will also reduce from pointer
+// # It will also reduce from pointer
 //
 // Reference : https://cutt.ly/PnaWAFn | https://cutt.ly/jnaEig8 | https://play.golang.org/p/UCORoShXlv1
 func (it *Dynamic) Length() int {
@@ -171,7 +176,8 @@ func (it *Dynamic) IsReflectKind(checkingKind reflect.Kind) bool {
 func (it *Dynamic) IsPointer() bool {
 	if it.isPointer.IsUninitialized() {
 		it.isPointer = issetter.GetBool(
-			it.IsReflectKind(reflect.Ptr))
+			it.IsReflectKind(reflect.Ptr),
+		)
 	}
 
 	return it.isPointer.IsTrue()
@@ -183,21 +189,23 @@ func (it *Dynamic) IsValueType() bool {
 
 func (it *Dynamic) IsStructStringNullOrEmpty() bool {
 	return it.IsNull() || strutilinternal.IsNullOrEmpty(
-		it.StructStringPtr())
+		it.StructStringPtr(),
+	)
 }
 
 func (it *Dynamic) IsStructStringNullOrEmptyOrWhitespace() bool {
 	return it.IsNull() || strutilinternal.IsNullOrEmptyOrWhitespace(
-		it.StructStringPtr())
+		it.StructStringPtr(),
+	)
 }
 
 func (it *Dynamic) IsPrimitive() bool {
-	return reflectinternal.IsPrimitive(it.ReflectKind())
+	return reflectinternal.Is.Primitive(it.ReflectKind())
 }
 
 // IsNumber true if float (any), byte, int (any), uint(any)
 func (it *Dynamic) IsNumber() bool {
-	return reflectinternal.IsNumber(it.ReflectKind())
+	return reflectinternal.Is.Number(it.ReflectKind())
 }
 
 func (it *Dynamic) IntDefault(defaultInt int) (val int, isSuccess bool) {
@@ -220,7 +228,8 @@ func (it *Dynamic) Float64() (val float64, err error) {
 		return constants.Zero, errcore.
 			ParsingFailedType.Error(
 			messages.DynamicFailedToParseToFloat64BecauseNull,
-			it.String())
+			it.String(),
+		)
 	}
 
 	stringVal := it.StructString()
@@ -234,7 +243,8 @@ func (it *Dynamic) Float64() (val float64, err error) {
 		return constants.Zero, errcore.
 			ParsingFailedType.Error(
 			errcore.FailedToConvertType.String(),
-			reference)
+			reference,
+		)
 	}
 
 	return valFloat, err
@@ -291,7 +301,8 @@ func (it *Dynamic) Loop(
 	for i := 0; i < length; i++ {
 		isBreak := loopProcessorFunc(
 			i,
-			rv.Index(i).Interface())
+			rv.Index(i).Interface(),
+		)
 
 		if isBreak {
 			return true
@@ -319,7 +330,8 @@ func (it *Dynamic) FilterAsDynamicCollection(
 
 		isTake, isBreak := filterFunc(
 			i,
-			currentDynamic)
+			currentDynamic,
+		)
 
 		if isTake {
 			dynamicCollection.Add(currentDynamic)
@@ -396,7 +408,8 @@ func (it *Dynamic) ReflectSetTo(toPointer interface{}) error {
 
 	return ReflectSetFromTo(
 		it.innerData,
-		toPointer)
+		toPointer,
+	)
 }
 
 func (it *Dynamic) Deserialize(jsonBytes []byte) (deserialized *Dynamic, err error) {
@@ -495,6 +508,7 @@ func (it *Dynamic) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *Dynamic) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
@@ -560,7 +574,8 @@ func (it *Dynamic) JsonStringMust() string {
 func (it Dynamic) Clone() Dynamic {
 	return NewDynamic(
 		it.innerData,
-		it.isValid)
+		it.isValid,
+	)
 }
 
 func (it *Dynamic) ClonePtr() *Dynamic {
@@ -570,7 +585,8 @@ func (it *Dynamic) ClonePtr() *Dynamic {
 
 	return NewDynamicPtr(
 		it.innerData,
-		it.isValid)
+		it.isValid,
+	)
 }
 
 func (it *Dynamic) ValueInt() int {
@@ -630,7 +646,7 @@ func (it *Dynamic) ValueNullErr() error {
 			ErrorNoRefs("Dynamic is nil or null")
 	}
 
-	if reflectinternal.IsNull(it.innerData) {
+	if reflectinternal.Is.Null(it.innerData) {
 		return errcore.
 			CannotBeNilOrEmptyType.
 			ErrorNoRefs("Dynamic internal data is nil.")

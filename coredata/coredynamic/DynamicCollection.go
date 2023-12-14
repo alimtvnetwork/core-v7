@@ -11,6 +11,7 @@ import (
 	"gitlab.com/auk-go/core/coredata/corejson"
 	"gitlab.com/auk-go/core/defaultcapacity"
 	"gitlab.com/auk-go/core/errcore"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 	"gitlab.com/auk-go/core/pagingutil"
 )
 
@@ -207,7 +208,8 @@ func (it *DynamicCollection) RemoveAt(index int) (isSuccess bool) {
 	items := it.items
 	it.items = append(
 		items[:index],
-		items[index+constants.One:]...)
+		items[index+constants.One:]...,
+	)
 
 	return true
 }
@@ -229,7 +231,8 @@ func (it *DynamicCollection) AddAnyItemsWithTypeValidation(
 			err := it.AddAnyWithTypeValidation(
 				isNullNotAllowed,
 				expectedType,
-				anyItem)
+				anyItem,
+			)
 
 			if err != nil {
 				sliceErr = append(sliceErr, err.Error())
@@ -243,7 +246,8 @@ func (it *DynamicCollection) AddAnyItemsWithTypeValidation(
 		err := it.AddAnyWithTypeValidation(
 			isNullNotAllowed,
 			expectedType,
-			anyItem)
+			anyItem,
+		)
 
 		if err != nil {
 			return err
@@ -261,7 +265,8 @@ func (it *DynamicCollection) AddAnyWithTypeValidation(
 	err := ReflectTypeValidation(
 		isNullNotAllowed,
 		expectedType,
-		anyItem)
+		anyItem,
+	)
 
 	if err != nil {
 		return err
@@ -269,7 +274,8 @@ func (it *DynamicCollection) AddAnyWithTypeValidation(
 
 	it.items = append(
 		it.items,
-		NewDynamic(anyItem, true))
+		NewDynamic(anyItem, true),
+	)
 
 	return nil
 }
@@ -279,7 +285,8 @@ func (it *DynamicCollection) AddAny(
 ) *DynamicCollection {
 	it.items = append(
 		it.items,
-		NewDynamic(anyItem, isValid))
+		NewDynamic(anyItem, isValid),
+	)
 
 	return it
 }
@@ -293,7 +300,8 @@ func (it *DynamicCollection) AddAnyNonNull(
 
 	it.items = append(
 		it.items,
-		NewDynamic(anyItem, isValid))
+		NewDynamic(anyItem, isValid),
+	)
 
 	return it
 }
@@ -308,7 +316,8 @@ func (it *DynamicCollection) AddAnyMany(
 	for _, item := range anyItems {
 		it.items = append(
 			it.items,
-			NewDynamic(item, true))
+			NewDynamic(item, true),
+		)
 	}
 
 	return it
@@ -374,11 +383,14 @@ func (it *DynamicCollection) AddAnySliceFromSingleItem(
 		return it
 	}
 
-	items := AnySliceValToInterfacesAsync(sliceList)
+	items := reflectinternal.
+		SliceConverter.
+		ToAnyItemsAsync(sliceList)
 	for _, item := range items {
 		it.items = append(
 			it.items,
-			NewDynamic(item, isValid))
+			NewDynamic(item, isValid),
+		)
 	}
 
 	return it
@@ -440,7 +452,8 @@ func (it *DynamicCollection) JsonResultsCollection() *corejson.ResultsCollection
 
 	for _, dynamicInstance := range it.items {
 		jsonResultsCollection.AddAny(
-			dynamicInstance.Value())
+			dynamicInstance.Value(),
+		)
 	}
 
 	return jsonResultsCollection
@@ -457,7 +470,8 @@ func (it *DynamicCollection) JsonResultsPtrCollection() *corejson.ResultsPtrColl
 
 	for _, dynamicInstance := range it.items {
 		jsonResultsCollection.AddAny(
-			dynamicInstance.Value())
+			dynamicInstance.Value(),
+		)
 	}
 
 	return jsonResultsCollection
@@ -489,7 +503,8 @@ func (it *DynamicCollection) GetPagedCollection(
 	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
 	collectionOfCollection := make(
 		[]*DynamicCollection,
-		pagesPossibleCeiling)
+		pagesPossibleCeiling,
+	)
 
 	wg := sync.WaitGroup{}
 	addPagedItemsFunc := func(oneBasedPageIndex int) {
@@ -517,11 +532,13 @@ func (it *DynamicCollection) GetPagingInfo(
 	eachPageSize int,
 	pageIndex int,
 ) pagingutil.PagingInfo {
-	return pagingutil.GetPagingInfo(pagingutil.PagingRequest{
-		Length:       it.Length(),
-		PageIndex:    pageIndex,
-		EachPageSize: eachPageSize,
-	})
+	return pagingutil.GetPagingInfo(
+		pagingutil.PagingRequest{
+			Length:       it.Length(),
+			PageIndex:    pageIndex,
+			EachPageSize: eachPageSize,
+		},
+	)
 }
 
 // GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
@@ -537,7 +554,8 @@ func (it *DynamicCollection) GetSinglePageCollection(
 
 	pageInfo := it.GetPagingInfo(
 		eachPageSize,
-		pageIndex)
+		pageIndex,
+	)
 
 	list := it.items[pageInfo.SkipItems:pageInfo.EndingLength]
 

@@ -104,14 +104,14 @@ type CompiledErrorWithStackTracesGetter interface {
 
 // CompiledJsonErrorWithStackTracesGetter
 //
-//  returns error in json format with stack traces
+//	returns error in json format with stack traces
 type CompiledJsonErrorWithStackTracesGetter interface {
 	CompiledJsonErrorWithStackTraces() error
 }
 
 // CompiledJsonStringWithStackTracesGetter
 //
-//  returns error in json format with stack traces
+//	returns error in json format with stack traces
 type CompiledJsonStringWithStackTracesGetter interface {
 	CompiledJsonStringWithStackTraces() (jsonString string)
 }
@@ -122,8 +122,8 @@ type FullStringWithTracesGetter interface {
 
 // FullStringWithTracesIfGetter
 //
-//  Returns full string with stack traces if given as true
-//  Or, else just FullString returns
+//	Returns full string with stack traces if given as true
+//	Or, else just FullString returns
 type FullStringWithTracesIfGetter interface {
 	// FullStringWithTracesIf
 	//

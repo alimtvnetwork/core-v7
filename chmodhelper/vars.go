@@ -1,8 +1,9 @@
 package chmodhelper
 
 import (
-	"os"
 	"sync"
+
+	"gitlab.com/auk-go/core/internal/pathinternal"
 )
 
 var (
@@ -11,6 +12,7 @@ var (
 	ChmodApply       = chmodApplier{}
 	ChmodVerify      = chmodVerifier{}
 	globalMutex      = sync.Mutex{}
-	TempDirDefault   = os.TempDir() // eg. unix : /tmp, windows: %temp%
+	TempDirDefault   = pathinternal.GetTemp() // eg. unix : /tmp, windows: %temp%
 	TempDirGetter    = tempDirGetter{}
+	newError         = errorCreator{}
 )

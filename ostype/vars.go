@@ -1,8 +1,8 @@
 package ostype
 
 import (
-	"gitlab.com/auk-go/core/coredata/coredynamic"
 	"gitlab.com/auk-go/core/coreimpl/enumimpl"
+	"gitlab.com/auk-go/core/internal/reflectinternal"
 )
 
 var (
@@ -21,10 +21,12 @@ var (
 	}
 
 	basicEnumImplOsType = enumimpl.New.BasicByte.UsingTypeSlice(
-		coredynamic.TypeName(Any),
-		osTypesStrings[:])
+		reflectinternal.TypeName(Any),
+		osTypesStrings[:],
+	)
 
 	basicEnumImplOsGroup = enumimpl.New.BasicByte.UsingTypeSlice(
-		coredynamic.TypeName(WindowsGroup),
-		osGroups)
+		reflectinternal.TypeName(WindowsGroup),
+		osGroups,
+	)
 )

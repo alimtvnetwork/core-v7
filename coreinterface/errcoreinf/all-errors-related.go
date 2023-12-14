@@ -118,8 +118,8 @@ type FullStringWithTracesIfGetter interface {
 
 // FullOrErrorMessageGetter
 //
-//  isErrorMessage : true will return only the error or else full string
-//  isWithRef : refers to include reference or not
+//	isErrorMessage : true will return only the error or else full string
+//	isWithRef : refers to include reference or not
 type FullOrErrorMessageGetter interface {
 	internalinterface.FullOrErrorMessageGetter
 }
@@ -134,7 +134,7 @@ type ReferencesCompiledStringGetter interface {
 
 // ExplicitCodeValueNamer
 //
-// 	returns string in format "(Code - #%d) : %s"
+//	returns string in format "(Code - #%d) : %s"
 type ExplicitCodeValueNamer interface {
 	// ExplicitCodeValueName
 	//

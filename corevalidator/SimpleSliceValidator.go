@@ -8,24 +8,25 @@ import (
 type SimpleSliceValidator struct {
 	Expected *corestr.SimpleSlice
 	actual   *corestr.SimpleSlice
-	ValidatorCoreCondition
+	Condition
 	CompareAs stringcompareas.Variant
 }
 
 func (it *SimpleSliceValidator) SetActual(lines []string) *SimpleSliceValidator {
 	it.actual = corestr.New.SimpleSlice.Direct(
 		false,
-		lines)
+		lines,
+	)
 
 	return it
 }
 
 func (it *SimpleSliceValidator) SliceValidator() *SliceValidator {
 	sliceValidator := SliceValidator{
-		CompareAs:              it.CompareAs,
-		ValidatorCoreCondition: it.ValidatorCoreCondition,
-		ActualLines:            it.actual.Items,
-		ExpectedLines:          it.Expected.Items,
+		CompareAs:     it.CompareAs,
+		Condition:     it.Condition,
+		ActualLines:   it.actual.Strings(),
+		ExpectedLines: it.Expected.Strings(),
 	}
 
 	return &sliceValidator
@@ -33,7 +34,7 @@ func (it *SimpleSliceValidator) SliceValidator() *SliceValidator {
 
 func (it *SimpleSliceValidator) VerifyAll(
 	actual []string,
-	params *ValidatorParamsBase,
+	params *Parameter,
 ) error {
 	sliceValidator := it.SliceValidator()
 	sliceValidator.ActualLines = actual
@@ -43,7 +44,7 @@ func (it *SimpleSliceValidator) VerifyAll(
 
 func (it *SimpleSliceValidator) VerifyFirst(
 	actual []string,
-	params *ValidatorParamsBase,
+	params *Parameter,
 ) error {
 	sliceValidator := it.SliceValidator()
 	sliceValidator.ActualLines = actual
@@ -53,7 +54,7 @@ func (it *SimpleSliceValidator) VerifyFirst(
 
 func (it *SimpleSliceValidator) VerifyUpto(
 	actual []string,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	length int,
 ) error {
 	sliceValidator := it.SliceValidator()
@@ -62,5 +63,6 @@ func (it *SimpleSliceValidator) VerifyUpto(
 	return sliceValidator.AllVerifyErrorUptoLength(
 		false,
 		params,
-		length)
+		length,
+	)
 }

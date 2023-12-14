@@ -13,9 +13,9 @@ import (
 // Final join whole lines with the joiner given (... joiner item)
 //
 // Formats :
-//  - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
-//  - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
-//  - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
+//   - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
+//   - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
+//   - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
 func StringsToCsvString(
 	joiner string,
 	isIncludeQuote,

@@ -2,7 +2,7 @@ package simplewrap
 
 import (
 	"fmt"
-
+	
 	"gitlab.com/auk-go/core/constants"
 	"gitlab.com/auk-go/core/internal/csvinternal"
 )
@@ -13,9 +13,9 @@ func MsgCsvItems(
 ) string {
 	csvString := csvinternal.AnyItemsToStringDefault(
 		csvItems...)
-
+	
 	return fmt.Sprintf(
-		constants.ValueWrapValueFormat,
+		constants.StringWrapValueFormat,
 		msg,
 		csvString)
 }

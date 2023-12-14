@@ -11,17 +11,22 @@ import (
 )
 
 type Version struct {
-	VersionCompact string // ex : 1.0.1
-	VersionMajor   int
-	VersionMinor   int
-	VersionPatch   int
-	VersionBuild   int
+	VersionCompact string `json:"Compact,omitempty"`   // ex : 1.0.1
+	Compiled       string `json:"Compiled,omitempty"`  // ex : v1.0.1
+	IsInvalid      bool   `json:"IsInvalid,omitempty"` // JSON export field for serialize
+	VersionMajor   int    `json:"Major,omitempty"`
+	VersionMinor   int    `json:"Minor,omitempty"`
+	VersionPatch   int    `json:"Patch,omitempty"`
+	VersionBuild   int    `json:"Build,omitempty"`
 }
 
-func (it *Version) String() string {
-	return it.VersionDisplay()
+func (it Version) String() string {
+	return it.CompiledVersion()
 }
 
+// VersionDisplay
+//
+// Display with a prefix of `v`
 func (it *Version) VersionDisplay() string {
 	if it == nil || it.VersionCompact == "" {
 		return constants.EmptyString
@@ -30,8 +35,24 @@ func (it *Version) VersionDisplay() string {
 	return VSymbol + it.VersionCompact
 }
 
+// CompiledVersion
+//
+// It is similar to DisplayVersion, however,
+// it gets generated during the creation time
+// from the parsed major, minor, patch, build versions
+func (it *Version) CompiledVersion() string {
+	if it == nil || it.Compiled == "" {
+		return constants.EmptyString
+	}
+
+	return it.Compiled
+}
+
 func (it *Version) VersionDisplayMajor() string {
-	if it == nil || it.VersionCompact == "" || it.IsMajorInvalid() {
+	if it == nil ||
+		it.VersionCompact == "" ||
+		it.IsMajorInvalid() ||
+		it.IsSafeInvalidCheck() {
 		return constants.EmptyString
 	}
 
@@ -151,14 +172,16 @@ func (it *Version) IsBuildInvalidOrZero() bool {
 }
 
 func (it *Version) isInvalidOrEmptyAll() bool {
-	return it.IsMajorInvalidOrZero() &&
-		it.IsMinorInvalidOrZero() &&
-		it.IsPatchInvalidOrZero() &&
-		it.IsBuildInvalidOrZero()
+	return it.IsInvalid == true ||
+		it.IsMajorInvalidOrZero() &&
+			it.IsMinorInvalidOrZero() &&
+			it.IsPatchInvalidOrZero() &&
+			it.IsBuildInvalidOrZero()
 }
 
 func (it *Version) IsEmptyOrInvalid() bool {
 	return it == nil ||
+		it.IsInvalid == true ||
 		it.VersionDisplay() == "" ||
 		it.isInvalidOrEmptyAll()
 }
@@ -171,7 +194,7 @@ func (it *Version) IsDefined() bool {
 	return !it.IsEmptyOrInvalid()
 }
 
-func (it *Version) IsInvalid() bool {
+func (it *Version) IsSafeInvalidCheck() bool {
 	return it.IsEmptyOrInvalid()
 }
 
@@ -262,12 +285,19 @@ func (it *Version) IsMajorStringAtLeast(comparingMajor string) bool {
 		IsLeftGreaterOrGreaterEqualOrEqual()
 }
 
+// IsMajorMinorAtLeast
+//
+// Current major version and minor is greater or equal to the given ones.
 func (it *Version) IsMajorMinorAtLeast(
 	major, minor int,
 ) bool {
 	return it.MajorMinor(major, minor).
 		IsLeftGreaterOrGreaterEqualOrEqual()
 }
+
+// IsMajorBuildAtLeast
+//
+// Current major version and build is greater or equal to the given ones.
 func (it *Version) IsMajorBuildAtLeast(
 	major, build int,
 ) bool {
@@ -494,91 +524,94 @@ func (it *Version) IsLeftLessThanOrEqual(
 func (it *Version) IsLeftGreaterThanOrEqual(
 	right *Version,
 ) bool {
-	return Compare(it, right).IsLeftGreaterOrGreaterEqualOrEqual()
+	return Compare(it, right).
+		IsLeftGreaterOrGreaterEqualOrEqual()
 }
 
 func (it *Version) IsExpectedComparison(
 	expectedComparison corecomparator.Compare,
 	right *Version,
 ) bool {
-	return expectedComparison.IsCompareEqualLogically(
-		Compare(it, right))
+	c := Compare(it, right)
+
+	return c.
+		IsCompareEqualLogically(expectedComparison)
 }
 
-// IsExpectedComparisonUsingVersionString
+// IsExpectedComparisonRawVersion
 //
-//  @Description: it returns the expected comparison result
-//  @param expectedComparison
-//  @param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
+//	@Description: it returns the expected comparison result
+//	@param expectedComparison
+//	@param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
 //
-//  @return bool
-func (it *Version) IsExpectedComparisonUsingVersionString(
+//	@return bool
+func (it *Version) IsExpectedComparisonRawVersion(
 	expectedComparison corecomparator.Compare,
 	rightVersion string,
 ) bool {
 	return it.IsExpectedComparison(
 		expectedComparison,
-		New.Default(rightVersion),
+		New.DefaultPtr(rightVersion),
 	)
 }
 
 // IsAtLeast
 //
-//  @Description: it returns the true if current version is at same or above as the given one or more
-//  @param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
+//	@Description: it returns the true if current version is at same or above as the given one or more
+//	@param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
 //
-//  @return bool
+//	@return bool
 func (it *Version) IsAtLeast(
 	rightVersion string,
 ) bool {
 	return it.IsExpectedComparison(
 		corecomparator.LeftGreaterEqual,
-		New.Default(rightVersion),
+		New.DefaultPtr(rightVersion),
 	)
 }
 
 // IsEqualVersionString
 //
-//  @Description: it returns the true if current version same by deduction
-//  @param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
+//	@Description: it returns the true if current version same by deduction
+//	@param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
 //
-//  @return bool
+//	@return bool
 func (it *Version) IsEqualVersionString(
 	rightVersion string,
 ) bool {
 	return it.IsExpectedComparison(
 		corecomparator.Equal,
-		New.Default(rightVersion),
+		New.DefaultPtr(rightVersion),
 	)
 }
 
 // IsLowerVersionString
 //
-//  @Description: it returns the true if current version less than the given version.
-//  @param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
+//	@Description: it returns the true if current version less than the given version.
+//	@param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
 //
-//  @return bool
+//	@return bool
 func (it *Version) IsLowerVersionString(
 	rightVersion string,
 ) bool {
 	return it.IsExpectedComparison(
 		corecomparator.LeftLess,
-		New.Default(rightVersion),
+		New.DefaultPtr(rightVersion),
 	)
 }
 
 // IsLowerEqualVersionString
 //
-//  @Description: it returns the true if current version less or equal than the given version.
-//  @param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
+//	@Description: it returns the true if current version less or equal than the given version.
+//	@param rightVersion : can have "v0.0.0" or "0.0.0" or "v0.0.0.0" or "v0" or "v0.1"
 //
-//  @return bool
+//	@return bool
 func (it *Version) IsLowerEqualVersionString(
 	rightVersion string,
 ) bool {
 	return it.IsExpectedComparison(
 		corecomparator.LeftLessEqual,
-		New.Default(rightVersion),
+		New.DefaultPtr(rightVersion),
 	)
 }
 
@@ -607,6 +640,8 @@ func (it *Version) ComparisonValueIndexes(
 func (it Version) Clone() Version {
 	return Version{
 		VersionCompact: it.VersionCompact,
+		Compiled:       it.Compiled,
+		IsInvalid:      it.IsInvalid,
 		VersionMajor:   it.VersionMajor,
 		VersionMinor:   it.VersionMinor,
 		VersionPatch:   it.VersionPatch,
@@ -619,13 +654,9 @@ func (it *Version) ClonePtr() *Version {
 		return nil
 	}
 
-	return &Version{
-		VersionCompact: it.VersionCompact,
-		VersionMajor:   it.VersionMajor,
-		VersionMinor:   it.VersionMinor,
-		VersionPatch:   it.VersionPatch,
-		VersionBuild:   it.VersionBuild,
-	}
+	toVersion := it.Clone()
+
+	return &toVersion
 }
 
 func (it Version) NonPtr() Version {

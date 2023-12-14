@@ -26,6 +26,7 @@ const (
 	InvalidValueType                           RawErrorType = "Invalid : value cannot process it."
 	InvalidCharType                            RawErrorType = "Invalid : character cannot process it."
 	InvalidArgumentsType                       RawErrorType = "Invalid : arguments or argument cannot process it."
+	NotFound                                   RawErrorType = "not found"
 	InvalidAnyPathEmptyType                    RawErrorType = "Invalid : any of the given path was empty, thus cannot process it."
 	UnsupportedOperatingSystemType             RawErrorType = "Unsupported : given operating system is not supported by the executable or system!"
 	UnsupportedArchitectureType                RawErrorType = "Unsupported : given operating system architecture is not supported by the executable or system!"
@@ -129,10 +130,13 @@ func (it RawErrorType) CombineWithAnother(
 	otherMsg string,
 	reference interface{},
 ) RawErrorType {
-	return RawErrorType(CombineWithMsgType(
-		it,
-		otherMsg+constants.NewLineUnix+another.String(),
-		reference))
+	return RawErrorType(
+		CombineWithMsgType(
+			it,
+			otherMsg+constants.NewLineUnix+another.String(),
+			reference,
+		),
+	)
 }
 
 func (it RawErrorType) Combine(
@@ -149,7 +153,9 @@ func (it RawErrorType) TypesAttach(
 		it,
 		otherMsg,
 		typesNamesString(
-			reflectionTypes...))
+			reflectionTypes...,
+		),
+	)
 }
 
 func (it RawErrorType) TypesAttachErr(
@@ -168,7 +174,8 @@ func (it RawErrorType) SrcDestination(
 ) string {
 	reference := VarTwoNoType(
 		srcName, srcValue,
-		destinationName, destinationValue)
+		destinationName, destinationValue,
+	)
 
 	return CombineWithMsgType(it, otherMsg, reference)
 }
@@ -181,7 +188,8 @@ func (it RawErrorType) SrcDestinationErr(
 	wholeMessage := it.SrcDestination(
 		otherMsg,
 		srcName, srcValue,
-		destinationName, destinationValue)
+		destinationName, destinationValue,
+	)
 
 	return errors.New(wholeMessage)
 }
@@ -189,7 +197,7 @@ func (it RawErrorType) SrcDestinationErr(
 func (it RawErrorType) Error(otherMsg string, reference interface{}) error {
 	msg := CombineWithMsgType(it, otherMsg, reference)
 
-	return errors.New(msg)
+	return StackEnhance.MsgToErrSkip(1, msg)
 }
 
 func (it RawErrorType) Fmt(
@@ -202,11 +210,12 @@ func (it RawErrorType) Fmt(
 
 	compiledMessage := fmt.Sprintf(
 		format,
-		v...)
+		v...,
+	)
 
 	msg := CombineWithMsgType(it, compiledMessage, nil)
 
-	return errors.New(msg)
+	return StackEnhance.MsgToErrSkip(1, msg)
 }
 
 func (it RawErrorType) FmtIf(
@@ -274,20 +283,23 @@ func (it RawErrorType) MsgCsvRef(
 	}
 
 	csvString := csvinternal.AnyItemsToStringDefault(
-		csvReferenceItems...)
+		csvReferenceItems...,
+	)
 
 	if otherMsg == "" {
 		return fmt.Sprintf(
 			messageWithRefWithoutQuoteFormat,
 			it.String(),
-			csvString)
+			csvString,
+		)
 	}
 
 	return fmt.Sprintf(
 		messageWithOtherMsgWithRefWithoutQuoteFormat,
 		it.String(),
 		otherMsg,
-		csvString)
+		csvString,
+	)
 }
 
 func (it RawErrorType) MsgCsvRefError(
@@ -309,7 +321,8 @@ func (it RawErrorType) Expecting(expecting, actual interface{}) error {
 	msg := Expecting(
 		it.String(),
 		expecting,
-		actual)
+		actual,
+	)
 
 	return errors.New(msg)
 }
@@ -331,7 +344,7 @@ func (it RawErrorType) ErrorNoRefs(otherMsg string) error {
 
 	msg := CombineWithMsgType(it, otherMsg, nil)
 
-	return errors.New(msg)
+	return StackEnhance.MsgToErrSkip(1, msg)
 }
 
 func (it RawErrorType) HandleUsingPanic(otherMsg string, reference interface{}) {

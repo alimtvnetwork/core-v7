@@ -11,18 +11,14 @@ var SegmentValidatorTestCases = []SegmentValidatorWrapper{
 		Header:                "",
 		IsSkipOnContentsEmpty: false,
 		IsCaseSensitive:       true,
-		SimpleSliceRangeValidator: corevalidator.SimpleSliceRangeValidator{
+		RangeSegmentsValidator: corevalidator.RangeSegmentsValidator{
 			VerifierSegments: []corevalidator.RangesSegment{
+
 				{
 					RangeInt:      corerange.RangeInt{},
 					ExpectedLines: nil,
 					CompareAs:     stringcompareas.Equal,
-					ValidatorCoreCondition: corevalidator.ValidatorCoreCondition{
-						IsTrimCompare:        false,
-						IsUniqueWordOnly:     false,
-						IsNonEmptyWhitespace: false,
-						IsSortStringsBySpace: false,
-					},
+					Condition:     corevalidator.DefaultDisabledCoreCondition,
 				},
 			},
 		},

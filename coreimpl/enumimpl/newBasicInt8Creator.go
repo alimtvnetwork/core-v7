@@ -221,7 +221,7 @@ func (it newBasicInt8Creator) DefaultWithAliasMap(
 
 // DefaultAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicInt8Creator) DefaultAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,
@@ -236,7 +236,7 @@ func (it newBasicInt8Creator) DefaultAllCases(
 
 // DefaultWithAliasMapAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicInt8Creator) DefaultWithAliasMapAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,

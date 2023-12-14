@@ -18,5 +18,5 @@ func RegexTrimmedSplitNonEmptyAll(
 		return []string{}
 	}
 
-	return NonWhitespaceTrimSlice(items)
+	return TrimmedEachWords(items)
 }

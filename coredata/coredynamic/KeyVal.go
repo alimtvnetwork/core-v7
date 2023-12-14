@@ -32,15 +32,15 @@ func (it *KeyVal) ValueDynamicPtr() *Dynamic {
 }
 
 func (it *KeyVal) IsKeyNull() bool {
-	return reflectinternal.IsNull(it.Key)
+	return reflectinternal.Is.Null(it.Key)
 }
 
 func (it *KeyVal) IsKeyNullOrEmptyString() bool {
-	return reflectinternal.IsNull(it.Key) || it.Key.(string) == ""
+	return reflectinternal.Is.Null(it.Key) || it.Key.(string) == ""
 }
 
 func (it *KeyVal) IsValueNull() bool {
-	return reflectinternal.IsNull(it.Value)
+	return reflectinternal.Is.Null(it.Value)
 }
 
 func (it *KeyVal) String() string {
@@ -49,7 +49,8 @@ func (it *KeyVal) String() string {
 		it.Key,
 		it.Key,
 		it.Value,
-		it.Value)
+		it.Value,
+	)
 }
 
 func (it *KeyVal) ValueReflectValue() reflect.Value {
@@ -144,7 +145,7 @@ func (it *KeyVal) ValueNullErr() error {
 			ErrorNoRefs("KeyVal is nil or null")
 	}
 
-	if reflectinternal.IsNull(it.Value) {
+	if reflectinternal.Is.Null(it.Value) {
 		return errcore.
 			CannotBeNilOrEmptyType.
 			Error("KeyVal.Value is nil or null, doesn't expect to be null.", "Key : "+it.KeyString())
@@ -160,7 +161,7 @@ func (it *KeyVal) KeyNullErr() error {
 			ErrorNoRefs("KeyVal is nil or null")
 	}
 
-	if reflectinternal.IsNull(it.Key) {
+	if reflectinternal.Is.Null(it.Key) {
 		return errcore.
 			CannotBeNilOrEmptyType.
 			Error("KeyVal.Key is nil or null, doesn't expect to be null.", "Value : "+it.ValueString())
@@ -256,6 +257,7 @@ func (it *KeyVal) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *KeyVal) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,

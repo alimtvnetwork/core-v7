@@ -15,10 +15,12 @@ func Test_RwxCompileValue(t *testing.T) {
 		// Arrange
 		existingRwxWrapper, _ :=
 			chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
-				&testCase.Existing)
+				&testCase.Existing,
+			)
 		expectedVariableWrapper, _ :=
 			chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
-				&testCase.Expected)
+				&testCase.Expected,
+			)
 		existing := testCase.Existing.ToString(false)
 		input := testCase.Input.ToString(false)
 		expected := testCase.Expected.ToString(false)
@@ -30,23 +32,27 @@ func Test_RwxCompileValue(t *testing.T) {
 			"Existing [%s] Applied by [%s] should result [%s]",
 			existing,
 			input,
-			expected)
+			expected,
+		)
 
 		// Act
 		actualVarWrapper, _ :=
 			chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(
-				&testCase.Input)
+				&testCase.Input,
+			)
 		actualRwxWrapper := actualVarWrapper.
 			ToCompileWrapper(existingRwxWrapper.ToCompileFixedPtr())
 		actualFullRwx := actualRwxWrapper.ToFullRwxValueString()
 
 		// Assert
-		convey.Convey(header, t, func() {
-			if actualFullRwx != expectedFullRwx {
-				log.Println(header)
-			}
+		convey.Convey(
+			header, t, func() {
+				if actualFullRwx != expectedFullRwx {
+					log.Println(header)
+				}
 
-			convey.So(actualFullRwx, convey.ShouldEqual, expectedFullRwx)
-		})
+				convey.So(actualFullRwx, convey.ShouldEqual, expectedFullRwx)
+			},
+		)
 	}
 }

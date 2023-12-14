@@ -8,13 +8,13 @@ import (
 
 // RangeNamesWithValuesIndexesCsvString
 //
-//  Returns a new slice to joined
-//  string using RangeNamesWithValuesIndexes
+//	Returns a new slice to joined
+//	string using RangeNamesWithValuesIndexes
 //
-//  format
-//   - `name[ValueIndex]` + ", "
-//  example
-//   - `SomeName[1]` + ", "
+//	format
+//	 - `name[ValueIndex]` + ", "
+//	example
+//	 - `SomeName[1]` + ", "
 func RangeNamesWithValuesIndexesCsvString(
 	rangedItems ...string,
 ) string {

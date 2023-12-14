@@ -4,10 +4,10 @@ import "os"
 
 // GetExistingChmodOfValidFile
 //
-//  on file invalid returns 0
+//	on file invalid returns 0
 //
 // Warning:
-//  - error swallowed.
+//   - error swallowed.
 func GetExistingChmodOfValidFile(filePath string) (chmod os.FileMode, isInvalid bool) {
 	fileInfo, err := os.Stat(filePath)
 

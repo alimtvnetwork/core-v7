@@ -8,14 +8,14 @@ type newCreator struct {
 
 // Lazy
 //
-//  used to create from vars
+//	used to create from vars
 func (it newCreator) Lazy(pattern string) *LazyRegex {
 	return it.LazyRegex.New(pattern)
 }
 
 // LazyLock
 //
-//  used from method inside to create
+//	used from method inside to create
 func (it newCreator) LazyLock(pattern string) *LazyRegex {
 	return it.LazyRegex.NewLock(pattern)
 }

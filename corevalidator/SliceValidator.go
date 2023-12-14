@@ -2,16 +2,26 @@ package corevalidator
 
 import (
 	"errors"
+	"fmt"
 	"strings"
+	"testing"
 
+	"github.com/smarty/assertions/should"
+	"github.com/smartystreets/goconvey/convey"
 	"gitlab.com/auk-go/core/constants"
 	"gitlab.com/auk-go/core/enums/stringcompareas"
 	"gitlab.com/auk-go/core/errcore"
 	"gitlab.com/auk-go/core/internal/strutilinternal"
 )
 
+// SliceValidator
+//
+// Use this only for one time verification only.
+//
+// If IsUsedAlready, don't mutate the ActualLines or ExpectedLines
+// it will not work.
 type SliceValidator struct {
-	ValidatorCoreCondition
+	Condition
 	CompareAs stringcompareas.Variant
 	// ActualLines considered to be actual
 	// ExpectedLines considered to be expected
@@ -30,12 +40,13 @@ func NewSliceValidatorUsingErr(
 	inputLines := errcore.ErrorToSplitLines(errActual)
 	compareLines := strings.Split(
 		compareLinesContentAsExpected,
-		constants.NewLineUnix)
+		constants.NewLineUnix,
+	)
 
 	return &SliceValidator{
 		ActualLines:   inputLines,
 		ExpectedLines: compareLines,
-		ValidatorCoreCondition: ValidatorCoreCondition{
+		Condition: Condition{
 			IsTrimCompare:        isTrimLineCompare,
 			IsNonEmptyWhitespace: isNonEmptyWhitespace,
 			IsSortStringsBySpace: isSortStringsBySpace,
@@ -57,12 +68,13 @@ func NewSliceValidatorUsingAny(
 	splitLines := strings.Split(anyToString, constants.NewLineUnix)
 	compareLines := strings.Split(
 		compareLinesContentExpected,
-		constants.NewLineUnix)
+		constants.NewLineUnix,
+	)
 
 	return &SliceValidator{
 		ActualLines:   splitLines,
 		ExpectedLines: compareLines,
-		ValidatorCoreCondition: ValidatorCoreCondition{
+		Condition: Condition{
 			IsTrimCompare:        isTrimLineCompare,
 			IsNonEmptyWhitespace: isNonEmptyWhitespace,
 			IsSortStringsBySpace: isSortStringsBySpace,
@@ -70,6 +82,14 @@ func NewSliceValidatorUsingAny(
 		CompareAs:           compareAs,
 		comparingValidators: nil,
 	}
+}
+
+func (it *SliceValidator) IsUsedAlready() bool {
+	if it == nil {
+		return false
+	}
+
+	return it.comparingValidators != nil
 }
 
 func (it *SliceValidator) ActualLinesLength() int {
@@ -91,7 +111,8 @@ func (it *SliceValidator) IsValidOtherLines(
 	return it.
 		isValidLines(
 			isCaseSensitive,
-			otherActualLines)
+			otherActualLines,
+		)
 }
 
 func (it *SliceValidator) SetActual(
@@ -117,7 +138,8 @@ func (it *SliceValidator) ActualLinesString() string {
 	}
 
 	return errcore.StringLinesToQuoteLinesToSingle(
-		it.ActualLines)
+		it.ActualLines,
+	)
 }
 
 func (it *SliceValidator) ExpectingLinesString() string {
@@ -126,7 +148,8 @@ func (it *SliceValidator) ExpectingLinesString() string {
 	}
 
 	return errcore.StringLinesToQuoteLinesToSingle(
-		it.ExpectedLines)
+		it.ExpectedLines,
+	)
 }
 
 func (it *SliceValidator) ExpectingLinesLength() int {
@@ -145,11 +168,13 @@ func (it *SliceValidator) ComparingValidators() *TextValidators {
 	validators := NewTextValidators(it.ExpectingLinesLength())
 
 	for _, line := range it.ExpectedLines {
-		validators.Add(TextValidator{
-			Search:                 line,
-			ValidatorCoreCondition: it.ValidatorCoreCondition,
-			SearchAs:               it.CompareAs,
-		})
+		validators.Add(
+			TextValidator{
+				Search:    line,
+				Condition: it.Condition,
+				SearchAs:  it.CompareAs,
+			},
+		)
 	}
 
 	it.comparingValidators = validators
@@ -164,7 +189,8 @@ func (it *SliceValidator) IsValid(isCaseSensitive bool) bool {
 
 	return it.isValidLines(
 		isCaseSensitive,
-		it.ActualLines)
+		it.ActualLines,
+	)
 }
 
 func (it *SliceValidator) isValidLines(
@@ -195,7 +221,8 @@ func (it *SliceValidator) isValidLines(
 	for i, validator := range validators.Items {
 		isNotMatch := !validator.IsMatch(
 			lines[i],
-			isCaseSensitive)
+			isCaseSensitive,
+		)
 
 		if isNotMatch {
 			return false
@@ -206,19 +233,20 @@ func (it *SliceValidator) isValidLines(
 }
 
 func (it *SliceValidator) VerifyFirstError(
-	paramsBase *ValidatorParamsBase,
+	parameter *Parameter,
 ) error {
 	if it == nil {
 		return nil
 	}
 
 	return it.VerifyFirstLengthUptoError(
-		paramsBase,
-		it.ExpectingLinesLength())
+		parameter,
+		it.ExpectingLinesLength(),
+	)
 }
 
 func (it *SliceValidator) VerifyFirstLengthUptoError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	lengthUpTo int,
 ) error {
 	if it == nil {
@@ -228,11 +256,64 @@ func (it *SliceValidator) VerifyFirstLengthUptoError(
 	return it.AllVerifyErrorUptoLength(
 		true,
 		params,
-		lengthUpTo)
+		lengthUpTo,
+	)
+}
+
+func (it *SliceValidator) AssertAllQuick(
+	t *testing.T,
+	caseIndex int,
+	header string,
+	actualElements ...string,
+) {
+	if it == nil {
+		return
+	}
+
+	toErr := it.AllVerifyErrorQuick(
+		caseIndex,
+		header,
+		actualElements...,
+	)
+
+	convey.Convey(
+		header, t, func() {
+			convey.So(
+				toErr,
+				should.BeNil,
+			)
+		},
+	)
+}
+
+func (it *SliceValidator) AllVerifyErrorQuick(
+	caseIndex int,
+	header string,
+	actualElements ...string,
+) error {
+	if it == nil {
+		return nil
+	}
+
+	var params = Parameter{
+		CaseIndex:                  caseIndex,
+		Header:                     header,
+		IsSkipCompareOnActualEmpty: true,
+		IsAttachUserInputs:         true,
+		IsCaseSensitive:            true,
+	}
+
+	it.SetActual(actualElements)
+
+	return it.AllVerifyErrorUptoLength(
+		false,
+		&params,
+		it.ExpectingLinesLength(),
+	)
 }
 
 func (it *SliceValidator) AllVerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 ) error {
 	if it == nil {
 		return nil
@@ -241,36 +322,43 @@ func (it *SliceValidator) AllVerifyError(
 	return it.AllVerifyErrorUptoLength(
 		false,
 		params,
-		it.ExpectingLinesLength())
+		it.ExpectingLinesLength(),
+	)
 }
 
 func (it *SliceValidator) AllVerifyErrorTestCase(
 	caseIndex int,
+	header string,
 	isCaseSensitive bool,
 ) error {
 	if it == nil {
 		return nil
 	}
 
-	params := ValidatorParamsBase{
-		CaseIndex:                         caseIndex,
-		IsIgnoreCompareOnActualInputEmpty: false,
-		IsAttachUserInputs:                true,
-		IsCaseSensitive:                   isCaseSensitive,
+	params := Parameter{
+		CaseIndex:                  caseIndex,
+		Header:                     header,
+		IsSkipCompareOnActualEmpty: false,
+		IsAttachUserInputs:         true,
+		IsCaseSensitive:            isCaseSensitive,
 	}
 
 	err := it.AllVerifyErrorUptoLength(
 		false,
 		&params,
-		it.ExpectingLinesLength())
+		it.ExpectingLinesLength(),
+	)
 
-	errcore.ErrPrintWithTestIndex(caseIndex, err)
+	errcore.PrintErrorWithTestIndex(caseIndex, header, err)
 
 	return err
 }
 
+// AllVerifyErrorExceptLast
+//
+// Verify up to the second last item.
 func (it *SliceValidator) AllVerifyErrorExceptLast(
-	params *ValidatorParamsBase,
+	params *Parameter,
 ) error {
 	if it == nil {
 		return nil
@@ -279,12 +367,13 @@ func (it *SliceValidator) AllVerifyErrorExceptLast(
 	return it.AllVerifyErrorUptoLength(
 		false,
 		params,
-		it.ExpectingLinesLength()-1)
+		it.ExpectingLinesLength()-1,
+	)
 }
 
 func (it *SliceValidator) AllVerifyErrorUptoLength(
 	isFirstOnly bool,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	lengthUpto int,
 ) error {
 	if it == nil {
@@ -297,7 +386,8 @@ func (it *SliceValidator) AllVerifyErrorUptoLength(
 
 	initialVerifyErr := it.initialVerifyErrorWithMerged(
 		params,
-		lengthUpto)
+		lengthUpto,
+	)
 
 	if initialVerifyErr != nil {
 		return initialVerifyErr
@@ -314,12 +404,14 @@ func (it *SliceValidator) AllVerifyErrorUptoLength(
 		err := validator.VerifySimpleError(
 			i,
 			params,
-			it.ActualLines[i])
+			it.ActualLines[i],
+		)
 
 		if err != nil {
 			sliceErr = append(
 				sliceErr,
-				err.Error())
+				err.Error(),
+			)
 		}
 
 		if isFirstOnly && err != nil {
@@ -330,14 +422,18 @@ func (it *SliceValidator) AllVerifyErrorUptoLength(
 	if params.IsAttachUserInputs && len(sliceErr) > constants.Zero {
 		sliceErr = append(
 			sliceErr,
-			it.ActualInputWithExpectingMessage(params.Header))
+			it.ActualInputWithExpectingMessage(
+				params.CaseIndex,
+				params.Header,
+			),
+		)
 	}
 
 	return errcore.SliceToError(sliceErr)
 }
 
 func (it *SliceValidator) lengthVerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	lengthUpto int,
 ) error {
 	hasLengthUpto := lengthUpto > constants.InvalidValue
@@ -354,7 +450,8 @@ func (it *SliceValidator) lengthVerifyError(
 	if comparingLengthError != nil {
 		return it.UserInputsMergeWithError(
 			params,
-			comparingLengthError)
+			comparingLengthError,
+		)
 	}
 
 	var inputLengthErr error
@@ -368,7 +465,8 @@ func (it *SliceValidator) lengthVerifyError(
 	if inputLengthErr != nil {
 		return it.UserInputsMergeWithError(
 			params,
-			inputLengthErr)
+			inputLengthErr,
+		)
 	}
 
 	return nil
@@ -386,7 +484,7 @@ func (it *SliceValidator) initialVerifyError(
 		it.ExpectedLines == nil
 
 	if isAnyNilCase {
-		return errcore.ExpectingErrorSimpleNoType(
+		return errcore.ExpectingErrorSimpleNoTypeNewLineEnds(
 			"ActualLines, ExpectedLines any is nil and other is not.",
 			it.ActualLines,
 			it.ExpectedLines,
@@ -394,8 +492,8 @@ func (it *SliceValidator) initialVerifyError(
 	}
 
 	if !it.isLengthOkay(lengthUpto) {
-		return errcore.ExpectingErrorSimpleNoType(
-			"ActualLines, ExpectedLines Length is not equal",
+		return errcore.ExpectingErrorSimpleNoTypeNewLineEnds(
+			"ActualLines, ExpectedLines Length is not equal.",
 			len(it.ActualLines),
 			len(it.ExpectedLines),
 		)
@@ -424,59 +522,113 @@ func (it *SliceValidator) isLengthOkay(lengthUpto int) bool {
 }
 
 func (it *SliceValidator) initialVerifyErrorWithMerged(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	lengthUpto int,
 ) error {
 	initialVerifyErr := it.initialVerifyError(
-		lengthUpto)
+		lengthUpto,
+	)
 
 	if initialVerifyErr != nil {
 		return it.UserInputsMergeWithError(
 			params,
-			initialVerifyErr)
+			initialVerifyErr,
+		)
 	}
 
 	return nil
 }
 
-func (it *SliceValidator) ActualInputWithExpectingMessage(header string) string {
-	return it.ActualInputMessage(header) +
-		it.UserExpectingMessage()
+func (it *SliceValidator) ActualInputWithExpectingMessage(caseIndex int, header string) string {
+	actualInputMessage := it.ActualInputMessage(
+		caseIndex,
+		header,
+	)
+	userExpectingMessage := it.UserExpectingMessage(
+		caseIndex,
+		header,
+	)
+	finalMessage := actualInputMessage + constants.NewLineUnix + userExpectingMessage
+
+	return finalMessage
 }
 
-func (it *SliceValidator) ActualInputMessage(header string) string {
+func (it *SliceValidator) ActualInputMessage(
+	caseIndex int,
+	header string,
+) string {
+	finalHeader := fmt.Sprintf(
+		actualUserInputsV2MessageFormat,
+		caseIndex,
+		header,
+	)
+
 	return errcore.MsgHeaderPlusEnding(
-		actualUserInputsMessage+header,
-		it.ActualLinesString())
+		finalHeader,
+		it.ActualLinesString(),
+	)
 }
 
-func (it *SliceValidator) UserExpectingMessage() string {
+func (it *SliceValidator) UserExpectingMessage(
+	caseIndex int,
+	header string,
+) string {
+	finalHeader := fmt.Sprintf(
+		expectingLinesV2MessageFormat,
+		caseIndex,
+		header,
+	)
+
 	return errcore.MsgHeaderPlusEnding(
-		expectingLinesMessage,
-		it.ExpectingLinesString())
+		finalHeader,
+		it.ExpectingLinesString(),
+	)
 }
 
 func (it *SliceValidator) isEmptyIgnoreCase(
-	params *ValidatorParamsBase,
+	params *Parameter,
 ) bool {
-	return params.IsIgnoreCompareOnActualInputEmpty &&
+	return params.IsSkipCompareOnActualEmpty &&
 		len(it.ActualLines) == 0
 }
 
+// UserInputsMergeWithError
+//
+//   - Returns a combine error of actual and expecting inputs.
+//   - If all validation successful then no error.
 func (it *SliceValidator) UserInputsMergeWithError(
-	paramsBase *ValidatorParamsBase,
+	parameter *Parameter,
 	err error,
 ) error {
-	if !paramsBase.IsAttachUserInputs {
+	if !parameter.IsAttachUserInputs {
 		return err
 	}
 
-	if err == nil {
-		return errors.New(it.ActualInputWithExpectingMessage(paramsBase.Header))
+	toStr := it.ActualInputWithExpectingMessage(
+		parameter.CaseIndex,
+		parameter.Header,
+	)
+
+	if err == nil && len(toStr) == 0 {
+		return nil
 	}
 
-	msg := err.Error() +
-		it.ActualInputWithExpectingMessage(paramsBase.Header)
+	if err == nil && len(toStr) >= 0 {
+		return errors.New(toStr)
+	}
+
+	msg := err.Error() + toStr
 
 	return errors.New(msg)
+}
+
+func (it *SliceValidator) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.ActualLines = nil
+	it.ExpectedLines = nil
+	it.comparingValidators.Dispose()
+	it.comparingValidators = nil
 }

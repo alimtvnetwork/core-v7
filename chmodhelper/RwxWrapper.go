@@ -88,13 +88,16 @@ func (it *RwxWrapper) ToUint32Octal() uint32 {
 			MeaningfulErrorHandle(
 				errcore.PathChmodConvertFailedType,
 				"ToUint32Octal",
-				err)
+				err,
+			)
 	}
 
 	return uint32(octal)
 }
 
-// ToCompiledOctalBytes4Digits return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
+// ToCompiledOctalBytes4Digits
+//
+// return 0rwx, '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 0777, 0555, 0755 NOT 0rwx
 func (it *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
@@ -112,12 +115,16 @@ func (it *RwxWrapper) ToCompiledOctalBytes4Digits() [4]byte {
 	return allBytes
 }
 
-// ToCompiledOctalBytes3Digits return '0'(Owner + '0')(Group + '0')(Other + '0')
+// ToCompiledOctalBytes3Digits
+//
+// return '0'(Owner + '0')(Group + '0')(Other + '0')
 // eg. 777, 555, 755 NOT rwx
+//
 // return
-//      owner -> (0 - 7 value)
-//      group -> (0 - 7 value)
-//      other -> (0 - 7 value)
+//
+//   - owner -> (0 - 7 value)
+//   - group -> (0 - 7 value)
+//   - other -> (0 - 7 value)
 func (it *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner := it.Owner.ToStringByte()
@@ -134,11 +141,14 @@ func (it *RwxWrapper) ToCompiledOctalBytes3Digits() [3]byte {
 }
 
 // ToCompiledSplitValues
+//
 // return
-//      owner -> (0 - 7 value)
-//      group -> (0 - 7 value)
-//      other -> (0 - 7 value)
-//      eg. 777, 755 etc
+//
+//   - owner -> (0 - 7 value)
+//   - group -> (0 - 7 value)
+//   - other -> (0 - 7 value)
+//
+// eg. 777, 755 etc
 func (it *RwxWrapper) ToCompiledSplitValues() (owner, group, other byte) {
 	// # https://play.golang.org/p/dX-wsvJmFie
 	owner = it.Owner.ToStringByte()
@@ -166,7 +176,7 @@ func (it *RwxWrapper) ToRwxCompiledStr() string {
 
 // ToFullRwxValueString
 //
-//  returns "-rwxrwxrwx" / RwxFull (10)
+//	returns "-rwxrwxrwx" / RwxFull (10)
 func (it *RwxWrapper) ToFullRwxValueString() string {
 	owner := it.Owner.ToRwxString()
 	group := it.Group.ToRwxString()
@@ -210,8 +220,13 @@ func (it *RwxWrapper) ApplyChmod(
 	isSkipOnInvalid bool,
 	location string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	isPathInvalid := fsinternal.IsPathInvalid(
-		location)
+		location,
+	)
 
 	if isSkipOnInvalid && isPathInvalid {
 		return nil
@@ -225,14 +240,16 @@ func (it *RwxWrapper) ApplyChmod(
 
 	err := os.Chmod(
 		location,
-		fileMode)
+		fileMode,
+	)
 
 	if err != nil {
-		return pathError(
+		return newError.pathError(
 			"apply chmod failed",
 			fileMode,
 			location,
-			err)
+			err,
+		)
 	}
 
 	return nil
@@ -242,11 +259,12 @@ func (it *RwxWrapper) invalidPathErr(
 	fileMode os.FileMode,
 	location string,
 ) error {
-	return pathError(
+	return newError.pathError(
 		"apply chmod failed because path doesn't exist and skip on invalid is not enabled",
 		fileMode,
 		location,
-		errors.New("invalid path"))
+		errors.New("invalid path"),
+	)
 }
 
 func (it *RwxWrapper) ApplyChmodOptions(
@@ -283,7 +301,8 @@ func (it *RwxWrapper) ApplyChmodOptions(
 	// unix, apply anyway, or mismatch.
 	return it.ApplyChmod(
 		false,
-		location)
+		location,
+	)
 }
 
 func (it *RwxWrapper) ApplyChmodSkipInvalid(
@@ -291,7 +310,8 @@ func (it *RwxWrapper) ApplyChmodSkipInvalid(
 ) error {
 	return it.ApplyChmod(
 		true,
-		location)
+		location,
+	)
 }
 
 // LinuxApplyRecursive skip if it is a non dir path
@@ -299,6 +319,10 @@ func (it *RwxWrapper) LinuxApplyRecursive(
 	isSkipOnInvalid bool,
 	location string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	isPathExists := fsinternal.IsPathExists(location)
 
 	if isSkipOnInvalid && !isPathExists {
@@ -308,12 +332,15 @@ func (it *RwxWrapper) LinuxApplyRecursive(
 	if !isSkipOnInvalid && !isPathExists {
 		return errcore.
 			PathInvalidErrorType.
-			Error(pathInvalidMessage,
-				location)
+			Error(
+				pathInvalidMessage,
+				location,
+			)
 	}
 
 	return it.applyLinuxRecursiveChmodUsingCmd(
-		location)
+		location,
+	)
 }
 
 // ApplyRecursive skip if it is a non dir path
@@ -330,14 +357,17 @@ func (it *RwxWrapper) ApplyRecursive(
 	if !isSkipOnInvalid && !stat.IsExist {
 		return errcore.
 			PathInvalidErrorType.
-			Error(pathInvalidMessage,
-				location)
+			Error(
+				pathInvalidMessage,
+				location,
+			)
 	}
 
 	if osconsts.IsLinux {
 		return it.LinuxApplyRecursive(
 			false,
-			location)
+			location,
+		)
 	}
 
 	mode := it.ToFileMode()
@@ -357,7 +387,9 @@ func (it *RwxWrapper) ApplyRecursive(
 					errcore.
 						PathInvalidErrorType.Combine(
 						err.Error()+pathInvalidMessage,
-						currentPath))
+						currentPath,
+					),
+				)
 
 				return err
 			}
@@ -368,7 +400,9 @@ func (it *RwxWrapper) ApplyRecursive(
 					errcore.
 						PathInvalidErrorType.Combine(
 						pathInvalidMessage,
-						currentPath))
+						currentPath,
+					),
+				)
 
 				return err
 			}
@@ -381,13 +415,16 @@ func (it *RwxWrapper) ApplyRecursive(
 					errcore.
 						PathInvalidErrorType.Combine(
 						err2.Error()+pathInvalidMessage,
-						currentPath))
+						currentPath,
+					),
+				)
 
 				return err2
 			}
 
 			return nil
-		})
+		},
+	)
 
 	if finalErr != nil {
 		sliceErr = append(
@@ -395,20 +432,27 @@ func (it *RwxWrapper) ApplyRecursive(
 			errcore.
 				PathInvalidErrorType.Combine(
 				finalErr.Error()+pathInvalidMessage,
-				location))
+				location,
+			),
+		)
 	}
 
 	return errcore.SliceToError(sliceErr)
 }
 
 func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	cmd := it.getLinuxRecursiveCmdForChmod(location)
 
 	if cmd == nil {
 		return errcore.
 			FailedToCreateCmdType.Error(
 			constants.BashCommandline,
-			location)
+			location,
+		)
 	}
 
 	var stderr bytes.Buffer
@@ -419,7 +463,8 @@ func (it *RwxWrapper) applyLinuxRecursiveChmodUsingCmd(location string) error {
 		return errcore.
 			FailedToCreateCmdType.Error(
 			constants.ChmodCommand,
-			err.Error()+constants.NewLineUnix+stderr.String()+"location:"+location)
+			err.Error()+constants.NewLineUnix+stderr.String()+"location:"+location,
+		)
 	}
 
 	return nil
@@ -437,21 +482,26 @@ func (it *RwxWrapper) getLinuxRecursiveCmdForChmod(dirPath string) *exec.Cmd {
 	return exec.Command(
 		constants.BinShellCmd,
 		constants.NonInteractiveFlag,
-		instructionLine)
+		instructionLine,
+	)
 }
 
 func (it *RwxWrapper) MustApplyChmod(fileOrDirectoryPath string) {
 	err := os.Chmod(
 		fileOrDirectoryPath,
-		it.ToFileMode())
+		it.ToFileMode(),
+	)
 
 	if err != nil {
 		finalErr := errors.New(err.Error() + fileOrDirectoryPath)
 
-		panic(errcore.MeaningfulError(
-			errcore.PathChmodApplyType,
-			"MustApplyChmod",
-			finalErr))
+		panic(
+			errcore.MeaningfulError(
+				errcore.PathChmodApplyType,
+				"MustApplyChmod",
+				finalErr,
+			),
+		)
 	}
 }
 
@@ -490,17 +540,23 @@ func (it *RwxWrapper) applyLinuxChmodOnManyNonRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsContinueOnError {
 		// continue on error
 		return it.applyLinuxChmodNonRecursiveManyContinueOnError(
 			condition,
-			locations)
+			locations,
+		)
 	}
 
 	for _, location := range locations {
 		err := it.ApplyChmod(
 			condition.IsSkipOnInvalid,
-			location)
+			location,
+		)
 
 		if err != nil {
 			return err
@@ -514,31 +570,43 @@ func (it *RwxWrapper) ApplyLinuxChmodOnMany(
 	condition *chmodins.Condition,
 	locations ...string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsRecursive {
 		return it.applyLinuxChmodOnManyRecursive(
 			condition,
-			locations)
+			locations,
+		)
 	}
 
 	return it.applyLinuxChmodOnManyNonRecursive(
-		condition, locations)
+		condition, locations,
+	)
 }
 
 func (it *RwxWrapper) applyLinuxChmodOnManyRecursive(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	if condition.IsContinueOnError {
 		// continue on error
 		return it.applyLinuxChmodRecursiveManyContinueOnError(
 			condition,
-			locations)
+			locations,
+		)
 	}
 
 	for _, location := range locations {
 		err := it.LinuxApplyRecursive(
 			condition.IsSkipOnInvalid,
-			location)
+			location,
+		)
 
 		if err != nil {
 			return err
@@ -552,12 +620,17 @@ func (it *RwxWrapper) applyLinuxChmodRecursiveManyContinueOnError(
 	condition *chmodins.Condition,
 	locations []string,
 ) error {
+	if osconsts.IsWindows {
+		return nil
+	}
+
 	var errSlice []string
 
 	for _, location := range locations {
 		err := it.LinuxApplyRecursive(
 			condition.IsSkipOnInvalid,
-			location)
+			location,
+		)
 
 		if err != nil {
 			errSlice = append(errSlice, err.Error())
@@ -576,7 +649,8 @@ func (it *RwxWrapper) applyLinuxChmodNonRecursiveManyContinueOnError(
 	for _, location := range locations {
 		err := it.ApplyChmod(
 			condition.IsSkipOnInvalid,
-			location)
+			location,
+		)
 
 		if err != nil {
 			errSlice = append(errSlice, err.Error())
@@ -595,7 +669,8 @@ func (it *RwxWrapper) IsEqualVarWrapper(
 	}
 
 	return rwxVariableWrapper.IsEqualRwxWrapperPtr(
-		it)
+		it,
+	)
 }
 
 // IsRwxEqualFileInfo if fileInfo nil then returns false
@@ -607,7 +682,8 @@ func (it *RwxWrapper) IsRwxEqualFileInfo(
 	}
 
 	return it.IsRwxFullEqual(
-		fileInfo.Mode().String())
+		fileInfo.Mode().String(),
+	)
 }
 
 func (it *RwxWrapper) IsRwxEqualLocation(
@@ -620,7 +696,8 @@ func (it *RwxWrapper) IsRwxEqualLocation(
 	}
 
 	return it.IsRwxFullEqual(
-		fileInfo.Mode().String())
+		fileInfo.Mode().String(),
+	)
 }
 
 func (it *RwxWrapper) IsRwxFullEqual(
@@ -684,7 +761,8 @@ func (it RwxWrapper) MarshalJSON() ([]byte, error) {
 func (it *RwxWrapper) UnmarshalJSON(jsonBytes []byte) error {
 	var model rwxWrapperModel
 	err := corejson.Deserialize.UsingBytes(
-		jsonBytes, &model)
+		jsonBytes, &model,
+	)
 
 	if err == nil {
 		// success
@@ -698,13 +776,14 @@ func (it *RwxWrapper) UnmarshalJSON(jsonBytes []byte) error {
 
 // FriendlyDisplay
 //
-//  fileModeStringFriendlyDisplayFormat : "{chmod : \"%s (%s)\"}"
-//  fileModeStringFriendlyDisplayFormat : "{chmod : \"0777 (-rw...)\"}"
+//   - fileModeStringFriendlyDisplayFormat : "{chmod : \"%s (%s)\"}"
+//   - fileModeStringFriendlyDisplayFormat : "{chmod : \"0777 (-rw...)\"}"
 func (it RwxWrapper) FriendlyDisplay() string {
 	return fmt.Sprintf(
 		fileModeStringFriendlyDisplayFormat,
 		it.ToFileModeString(),
-		it.ToFullRwxValueString())
+		it.ToFullRwxValueString(),
+	)
 }
 
 func (it RwxWrapper) Json() corejson.Result {

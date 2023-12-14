@@ -1,5 +1,9 @@
 package corestr
 
+import (
+	"gitlab.com/auk-go/core/converters"
+)
+
 type newLinkedListCollectionsCreator struct{}
 
 func (it *newLinkedListCollectionsCreator) Create() *LinkedCollections {
@@ -18,9 +22,11 @@ func (it *newLinkedListCollectionsCreator) PointerStringsPtr(
 	}
 
 	linkedList := it.Create()
+	slice := converters.
+		StringsTo.
+		PtrOfPtrToPtrStrings(stringItems)
 
-	return linkedList.
-		AddPointerStringsPtr(stringItems)
+	return linkedList.AddStrings(*slice...)
 }
 
 func (it *newLinkedListCollectionsCreator) UsingCollections(
@@ -35,53 +41,12 @@ func (it *newLinkedListCollectionsCreator) UsingCollections(
 	return linkedList.
 		AppendCollectionsPointers(
 			true,
-			&collections)
-}
-
-func (it *newLinkedListCollectionsCreator) StringsPtr(
-	isMakeClone bool,
-	stringItems *[]string,
-) *LinkedCollections {
-	if stringItems == nil {
-		return &LinkedCollections{}
-	}
-
-	linkedList := it.Create()
-
-	return linkedList.
-		AddStringsPtr(isMakeClone, stringItems)
-}
-
-func (it *newLinkedListCollectionsCreator) StringsOptions(
-	isClone bool,
-	stringItems []string,
-) *LinkedCollections {
-	linkedList := &LinkedCollections{}
-
-	if len(stringItems) == 0 {
-		return linkedList
-	}
-
-	return linkedList.
-		AddStringsPtr(isClone, &stringItems)
-}
-
-func (it *newLinkedListCollectionsCreator) StringsPtrOptions(
-	isClone bool,
-	stringItems *[]string,
-) *LinkedCollections {
-	linkedList := &LinkedCollections{}
-
-	if stringItems == nil || len(*stringItems) == 0 {
-		return linkedList
-	}
-
-	return linkedList.
-		AddStringsPtr(isClone, stringItems)
+			&collections,
+		)
 }
 
 func (it *newLinkedListCollectionsCreator) Strings(
-	stringItems []string,
+	stringItems ...string,
 ) *LinkedCollections {
 	linkedList := &LinkedCollections{}
 
@@ -89,8 +54,5 @@ func (it *newLinkedListCollectionsCreator) Strings(
 		return linkedList
 	}
 
-	return linkedList.
-		AddStringsPtr(
-			false,
-			&stringItems)
+	return linkedList.AddStrings(stringItems...)
 }

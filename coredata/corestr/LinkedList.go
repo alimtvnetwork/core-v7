@@ -68,24 +68,16 @@ func (it *LinkedList) LengthLock() int {
 	return it.length
 }
 
-//goland:noinspection GoVetCopyLock
 func (it *LinkedList) IsEquals(
-	anotherLinkedList LinkedList,
-) bool {
-	return it.IsEqualsWithSensitivePtr(
-		&anotherLinkedList,
-		true)
-}
-
-func (it *LinkedList) IsEqualsPtr(
 	anotherLinkedList *LinkedList,
 ) bool {
-	return it.IsEqualsWithSensitivePtr(
+	return it.IsEqualsWithSensitive(
 		anotherLinkedList,
-		true)
+		true,
+	)
 }
 
-func (it *LinkedList) IsEqualsWithSensitivePtr(
+func (it *LinkedList) IsEqualsWithSensitive(
 	anotherLinkedList *LinkedList,
 	isCaseSensitive bool,
 ) bool {
@@ -266,7 +258,7 @@ func (it *LinkedList) AddIf(isAdd bool, item string) *LinkedList {
 	return it.Add(item)
 }
 
-func (it *LinkedList) AddIfMany(
+func (it *LinkedList) AddsIf(
 	isAdd bool,
 	addingStrings ...string,
 ) *LinkedList {
@@ -274,7 +266,7 @@ func (it *LinkedList) AddIfMany(
 		return it
 	}
 
-	return it.AddStringsPtr(&addingStrings)
+	return it.Adds(addingStrings...)
 }
 
 func (it *LinkedList) AddFunc(f func() string) *LinkedList {
@@ -350,7 +342,8 @@ func (it *LinkedList) AddCollectionToNode(
 	return it.AddStringsPtrToNode(
 		isSkipOnNull,
 		node,
-		collection.ListPtr())
+		collection.ListPtr(),
+	)
 }
 
 func (it *LinkedList) Loop(
@@ -499,7 +492,8 @@ func (it *LinkedList) RemoveNodeByIndex(
 			CannotBeNegativeIndexType.
 			HandleUsingPanic(
 				"removeIndex was less than 0.",
-				removingIndex)
+				removingIndex,
+			)
 	}
 
 	var singleProcessor LinkedListSimpleProcessor = func(
@@ -575,7 +569,8 @@ func (it *LinkedList) RemoveNodeByIndexes(
 				IsKeep:  true,
 				IsBreak: false,
 			}
-		})
+		},
+	)
 
 	nonChainedCollection := &NonChainedLinkedListNodes{
 		items:             nonChainedNodes,
@@ -603,16 +598,18 @@ func (it *LinkedList) GetCompareSummary(
 		linkedListCollectionCompareHeaderLeft,
 		leftName,
 		lLen,
-		it)
+		it,
+	)
 
 	rightStr := fmt.Sprintf(
 		linkedListCollectionCompareHeaderRight,
 		rightName,
 		rLen,
 		right,
-		it.IsEqualsPtr(right),
+		it.IsEquals(right),
 		lLen,
-		rLen)
+		rLen,
+	)
 
 	return leftStr + rightStr
 }
@@ -670,7 +667,8 @@ func (it *LinkedList) AddStringsPtrToNode(
 			CannotBeNilType.
 			HandleUsingPanic(
 				"node cannot be nil.",
-				nil)
+				nil,
+			)
 	}
 
 	length := len(*items)
@@ -720,21 +718,8 @@ func (it *LinkedList) AddAfterNode(
 	return newNode
 }
 
-// AddStringsPtr add to back
-func (it *LinkedList) AddStringsPtr(items *[]string) *LinkedList {
-	if items == nil {
-		return it
-	}
-
-	for _, item := range *items {
-		it.Add(item)
-	}
-
-	return it
-}
-
-// AddStrings items add to back
-func (it *LinkedList) AddStrings(items ...string) *LinkedList {
+// Adds items add to back
+func (it *LinkedList) Adds(items ...string) *LinkedList {
 	if len(items) == 0 {
 		return it
 	}
@@ -746,12 +731,24 @@ func (it *LinkedList) AddStrings(items ...string) *LinkedList {
 	return it
 }
 
-// AddStringsPtrLock add to back
-func (it *LinkedList) AddStringsPtrLock(items *[]string) *LinkedList {
+func (it *LinkedList) AddStrings(items []string) *LinkedList {
+	if len(items) == 0 {
+		return it
+	}
+
+	for _, item := range items {
+		it.Add(item)
+	}
+
+	return it
+}
+
+// AddsLock add to back
+func (it *LinkedList) AddsLock(items ...string) *LinkedList {
 	it.Lock()
 	defer it.Unlock()
 
-	return it.AddStringsPtr(items)
+	return it.Adds(items...)
 }
 
 // IndexAt Expensive operation BigO(n)
@@ -764,7 +761,8 @@ func (it *LinkedList) IndexAt(index int) *LinkedListNode {
 	if length == 0 || length-1 < index {
 		errcore.OutOfRangeType.HandleUsingPanic(
 			"Given index is out of range. Whereas length:",
-			length)
+			length,
+		)
 	}
 
 	if index == 0 {
@@ -870,7 +868,8 @@ func (it *LinkedList) GetNextNodes(count int) *[]*LinkedListNode {
 				IsKeep:  true,
 				IsBreak: isBreak,
 			}
-		})
+		},
+	)
 }
 
 func (it *LinkedList) GetAllLinkedNodes() *[]*LinkedListNode {
@@ -883,7 +882,8 @@ func (it *LinkedList) GetAllLinkedNodes() *[]*LinkedListNode {
 				IsKeep:  true,
 				IsBreak: false,
 			}
-		})
+		},
+	)
 }
 
 // AddPointerStringsPtr skip on nil, add to back
@@ -940,7 +940,8 @@ func (it *LinkedList) List() []string {
 	list := make(
 		[]string,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	if it.IsEmpty() {
 		return list
@@ -980,7 +981,8 @@ func (it *LinkedList) String() string {
 	return commonJoiner +
 		strings.Join(
 			it.List(),
-			commonJoiner)
+			commonJoiner,
+		)
 }
 
 func (it *LinkedList) StringLock() string {
@@ -994,7 +996,8 @@ func (it *LinkedList) StringLock() string {
 	return commonJoiner +
 		strings.Join(
 			*it.ListPtr(),
-			commonJoiner)
+			commonJoiner,
+		)
 }
 
 func (it *LinkedList) Join(
@@ -1020,9 +1023,11 @@ func (it *LinkedList) Joins(
 		return strings.Join(items, separator)
 	}
 
-	collection := it.ToCollection(len(items) +
-		constants.ArbitraryCapacity2)
-	collection.AddStringsPtr(&items)
+	collection := it.ToCollection(
+		len(items) +
+			constants.ArbitraryCapacity2,
+	)
+	collection.AddStrings(items)
 
 	return collection.Join(separator)
 }
@@ -1045,7 +1050,7 @@ func (it *LinkedList) UnmarshalJSON(data []byte) error {
 
 	if err == nil {
 		it.Clear()
-		it.AddStrings(dataModelStrings...)
+		it.Adds(dataModelStrings...)
 	}
 
 	return err

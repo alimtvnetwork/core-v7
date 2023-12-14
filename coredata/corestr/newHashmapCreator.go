@@ -22,30 +22,30 @@ func (it *newHashmapCreator) Cap(length int) *Hashmap {
 	}
 }
 
-func (it *newHashmapCreator) KeyAnyValuesPtr(
-	keyAnyValues *[]KeyAnyValuePair,
+func (it *newHashmapCreator) KeyAnyValues(
+	keyAnyValues ...KeyAnyValuePair,
 ) *Hashmap {
-	if keyAnyValues == nil || *keyAnyValues == nil {
+	if len(keyAnyValues) == 0 {
 		return it.Cap(defaultHashsetItems)
 	}
 
-	length := len(*keyAnyValues)
+	length := len(keyAnyValues)
 	hashMap := it.Cap(length + constants.ArbitraryCapacity10)
 
-	return hashMap.AddOrUpdateKeyAnyValsPtr(keyAnyValues)
+	return hashMap.AddOrUpdateKeyAnyValues(keyAnyValues...)
 }
 
-func (it *newHashmapCreator) KeyValuesPtr(
-	keyValues *[]KeyValuePair,
+func (it *newHashmapCreator) KeyValues(
+	keyValues ...KeyValuePair,
 ) *Hashmap {
-	if keyValues == nil || *keyValues == nil {
+	if len(keyValues) == 0 {
 		return it.Cap(defaultHashsetItems)
 	}
 
-	length := len(*keyValues)
+	length := len(keyValues)
 	hashMap := it.Cap(length + constants.ArbitraryCapacity10)
 
-	return hashMap.AddOrUpdateKeyValsPtr(keyValues)
+	return hashMap.AddOrUpdateKeyValues(keyValues...)
 }
 
 func (it *newHashmapCreator) KeyValuesCollection(
@@ -55,12 +55,12 @@ func (it *newHashmapCreator) KeyValuesCollection(
 		return it.Empty()
 	}
 
-	itemsMap := converters.KeysValuesStringsToMapPtr(
-		keys.ListPtr(),
-		values.ListPtr())
+	itemsMap := converters.KeyValuesTo.ToMap(
+		keys.List(),
+		values.List(),
+	)
 
-	return it.UsingMap(
-		*itemsMap)
+	return it.UsingMap(itemsMap)
 }
 
 func (it *newHashmapCreator) KeyValuesStrings(
@@ -70,12 +70,12 @@ func (it *newHashmapCreator) KeyValuesStrings(
 		return it.Empty()
 	}
 
-	itemsMap := converters.KeysValuesStringsToMapPtr(
-		&keys,
-		&values)
+	itemsMap := converters.KeyValuesTo.ToMap(
+		keys,
+		values,
+	)
 
-	return it.UsingMap(
-		*itemsMap)
+	return it.UsingMap(itemsMap)
 }
 
 func (it *newHashmapCreator) UsingMap(

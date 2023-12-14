@@ -9,6 +9,11 @@ import (
 	"gitlab.com/auk-go/core/corecmp"
 )
 
+// DraftType
+//
+// Draft type is used for dummy values and reflection testing.
+//
+// Can be compared and do the verification as well.
 type DraftType struct {
 	SampleString1, SampleString2 string
 	SampleInteger                int

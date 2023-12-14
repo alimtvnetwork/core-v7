@@ -2,15 +2,15 @@ package simplewrap
 
 import (
 	"fmt"
-
+	
 	"gitlab.com/auk-go/core/constants"
 )
 
 // TitleSquareMeta
 //
 // Example :
-//  - constants.SquareTitleMetaWrapFormat
-//  -  "%v: [%v] (%v)"
+//   - constants.SquareTitleMetaWrapFormat
+//   - "%v: [%v] (%v)"
 func TitleSquareMeta(
 	title,
 	value,
@@ -18,7 +18,7 @@ func TitleSquareMeta(
 ) string {
 	return fmt.Sprintf(
 		constants.SquareTitleMetaWrapFormat,
-		title,
-		value,
+		toString(title),
+		toString(value),
 		meta)
 }

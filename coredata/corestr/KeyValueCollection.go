@@ -12,7 +12,7 @@ import (
 )
 
 type KeyValueCollection struct {
-	KeyValuePairs []*KeyValuePair `json:"KeyValuePairs,omitempty"`
+	KeyValuePairs []KeyValuePair `json:"KeyValuePairs,omitempty"`
 }
 
 func (it *KeyValueCollection) AllKeysSorted() []string {
@@ -64,7 +64,7 @@ func (it *KeyValueCollection) HasIndex(
 }
 
 func (it *KeyValueCollection) First() *KeyValuePair {
-	return it.KeyValuePairs[0]
+	return &it.KeyValuePairs[0]
 }
 
 func (it *KeyValueCollection) FirstOrDefault() *KeyValuePair {
@@ -72,11 +72,11 @@ func (it *KeyValueCollection) FirstOrDefault() *KeyValuePair {
 		return nil
 	}
 
-	return it.KeyValuePairs[0]
+	return &it.KeyValuePairs[0]
 }
 
 func (it *KeyValueCollection) Last() *KeyValuePair {
-	return it.KeyValuePairs[it.LastIndex()]
+	return &it.KeyValuePairs[it.LastIndex()]
 }
 
 func (it *KeyValueCollection) LastOrDefault() *KeyValuePair {
@@ -88,23 +88,24 @@ func (it *KeyValueCollection) LastOrDefault() *KeyValuePair {
 }
 
 func (it *KeyValueCollection) Find(
-	finder func(index int, currentKeyVal *KeyValuePair) (foundItem *KeyValuePair, isFound, isBreak bool),
-) []*KeyValuePair {
+	finder func(index int, currentKeyVal KeyValuePair) (foundItem KeyValuePair, isFound, isBreak bool),
+) []KeyValuePair {
 	length := it.Length()
 
 	if length == 0 {
-		return []*KeyValuePair{}
+		return []KeyValuePair{}
 	}
 
 	slice := make(
-		[]*KeyValuePair,
+		[]KeyValuePair,
 		0,
-		defaultcapacity.OfSearch(length))
+		defaultcapacity.OfSearch(length),
+	)
 
 	for i, item := range it.KeyValuePairs {
 		foundItem, isFound, isBreak := finder(i, item)
 
-		if isFound && foundItem != nil {
+		if isFound {
 			slice = append(slice, foundItem)
 		}
 
@@ -190,10 +191,12 @@ func (it *KeyValueCollection) IsEmpty() bool {
 }
 
 func (it *KeyValueCollection) Add(key, val string) *KeyValueCollection {
-	it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-		Key:   key,
-		Value: val,
-	})
+	it.KeyValuePairs = append(
+		it.KeyValuePairs, KeyValuePair{
+			Key:   key,
+			Value: val,
+		},
+	)
 
 	return it
 }
@@ -206,10 +209,12 @@ func (it *KeyValueCollection) AddIf(
 		return it
 	}
 
-	it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-		Key:   key,
-		Value: val,
-	})
+	it.KeyValuePairs = append(
+		it.KeyValuePairs, KeyValuePair{
+			Key:   key,
+			Value: val,
+		},
+	)
 
 	return it
 }
@@ -220,7 +225,8 @@ func (it *KeyValueCollection) AddStringBySplit(
 ) *KeyValueCollection {
 	key, val := strutilinternal.SplitLeftRight(
 		splitter,
-		line)
+		line,
+	)
 
 	return it.Add(key, val)
 }
@@ -231,7 +237,8 @@ func (it *KeyValueCollection) AddStringBySplitTrim(
 ) *KeyValueCollection {
 	key, val := strutilinternal.SplitLeftRightTrim(
 		splitter,
-		line)
+		line,
+	)
 
 	return it.Add(key, val)
 }
@@ -244,10 +251,12 @@ func (it *KeyValueCollection) Adds(
 	}
 
 	for _, keyVal := range keyValues {
-		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-			Key:   keyVal.Key,
-			Value: keyVal.Value,
-		})
+		it.KeyValuePairs = append(
+			it.KeyValuePairs, KeyValuePair{
+				Key:   keyVal.Key,
+				Value: keyVal.Value,
+			},
+		)
 	}
 
 	return it
@@ -261,10 +270,12 @@ func (it *KeyValueCollection) AddMap(
 	}
 
 	for key, val := range inputMap {
-		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-			Key:   key,
-			Value: val,
-		})
+		it.KeyValuePairs = append(
+			it.KeyValuePairs, KeyValuePair{
+				Key:   key,
+				Value: val,
+			},
+		)
 	}
 
 	return it
@@ -278,10 +289,12 @@ func (it *KeyValueCollection) AddHashsetMap(
 	}
 
 	for key := range inputMap {
-		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-			Key:   key,
-			Value: key,
-		})
+		it.KeyValuePairs = append(
+			it.KeyValuePairs, KeyValuePair{
+				Key:   key,
+				Value: key,
+			},
+		)
 	}
 
 	return it
@@ -295,10 +308,12 @@ func (it *KeyValueCollection) AddHashset(
 	}
 
 	for key := range inputHashset.items {
-		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-			Key:   key,
-			Value: key,
-		})
+		it.KeyValuePairs = append(
+			it.KeyValuePairs, KeyValuePair{
+				Key:   key,
+				Value: key,
+			},
+		)
 	}
 
 	return it
@@ -312,10 +327,12 @@ func (it *KeyValueCollection) AddsHashmap(
 	}
 
 	for key, val := range hashmap.items {
-		it.KeyValuePairs = append(it.KeyValuePairs, &KeyValuePair{
-			Key:   key,
-			Value: val,
-		})
+		it.KeyValuePairs = append(
+			it.KeyValuePairs, KeyValuePair{
+				Key:   key,
+				Value: val,
+			},
+		)
 	}
 
 	return it
@@ -334,6 +351,26 @@ func (it *KeyValueCollection) Hashmap() *Hashmap {
 	}
 
 	return hashmap
+}
+
+func (it *KeyValueCollection) IsContains(key string) bool {
+	for _, pair := range it.KeyValuePairs {
+		if pair.Key == key {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (it *KeyValueCollection) Get(key string) (string, bool) {
+	for _, pair := range it.KeyValuePairs {
+		if pair.Key == key {
+			return pair.Value, true
+		}
+	}
+
+	return "", false
 }
 
 func (it *KeyValueCollection) Map() map[string]string {
@@ -409,7 +446,7 @@ func (it *KeyValueCollection) JoinValues(
 	return strings.Join(it.AllValues(), separator)
 }
 
-func (it *KeyValueCollection) JsonModel() []*KeyValuePair {
+func (it *KeyValueCollection) JsonModel() []KeyValuePair {
 	return it.KeyValuePairs
 }
 
@@ -426,15 +463,16 @@ func (it *KeyValueCollection) MarshalJSON() ([]byte, error) {
 }
 
 func (it *KeyValueCollection) UnmarshalJSON(data []byte) error {
-	var dataModelItems []*KeyValuePair
+	var dataModelItems []KeyValuePair
 	err := corejson.Deserialize.UsingBytes(
 		data,
-		&dataModelItems)
+		&dataModelItems,
+	)
 
 	if err == nil && len(dataModelItems) > 0 {
 		it.KeyValuePairs = dataModelItems
 	} else if err == nil {
-		it.KeyValuePairs = []*KeyValuePair{}
+		it.KeyValuePairs = []KeyValuePair{}
 	}
 
 	return err
@@ -491,12 +529,11 @@ func (it *KeyValueCollection) Clear() {
 	clearFunc := func() {
 		for i := 0; i < len(tempItems); i++ {
 			tempItems[i].Dispose()
-			tempItems[i] = nil
 		}
 	}
 
 	go clearFunc()
-	it.KeyValuePairs = []*KeyValuePair{}
+	it.KeyValuePairs = []KeyValuePair{}
 }
 
 func (it *KeyValueCollection) Dispose() {

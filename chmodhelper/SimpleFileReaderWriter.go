@@ -13,12 +13,14 @@ import (
 
 	"gitlab.com/auk-go/core/constants"
 	"gitlab.com/auk-go/core/coredata/corejson"
+	"gitlab.com/auk-go/core/internal/pathinternal"
 )
 
 type SimpleFileReaderWriter struct {
 	ChmodDir, ChmodFile    os.FileMode
 	ParentDir              string // full path to the parent dir
 	FilePath               string // full path to the actual file to write to or read from.
+	IsRemoveBeforeWrite    bool   // if true then removes only if the file exist
 	IsMustChmodApplyOnFile bool
 	IsApplyChmodOnMismatch bool
 }
@@ -69,7 +71,7 @@ func (it SimpleFileReaderWriter) IsParentDirInvalid() bool {
 
 // HasAnyIssues
 //
-//  it.IsPathInvalid() || it.IsParentDirInvalid()
+//	it.IsPathInvalid() || it.IsParentDirInvalid()
 func (it SimpleFileReaderWriter) HasAnyIssues() bool {
 	return it.IsPathInvalid() || it.IsParentDirInvalid()
 }
@@ -87,15 +89,69 @@ func (it *SimpleFileReaderWriter) ChmodVerifier() fwChmodVerifier {
 }
 
 func (it SimpleFileReaderWriter) Write(allBytes []byte) error {
-	err := SimpleFileWriter.WriteFile(
+	err := SimpleFileWriter.FileWriter.All(
 		it.ChmodDir,
 		it.ChmodFile,
+		it.IsRemoveBeforeWrite,
 		it.IsMustChmodApplyOnFile,
 		it.IsApplyChmodOnMismatch,
 		true,
 		it.ParentDir,
 		it.FilePath,
-		allBytes)
+		allBytes,
+	)
+
+	if err == nil {
+		return nil
+	}
+
+	return it.errorWrap(err)
+}
+
+func (it SimpleFileReaderWriter) WritePath(
+	isRemoveBeforeWrite bool,
+	filePath string,
+	allBytes []byte,
+) error {
+	parentDir := pathinternal.ParentDir(filePath)
+
+	err := SimpleFileWriter.FileWriter.All(
+		it.ChmodDir,
+		it.ChmodFile,
+		isRemoveBeforeWrite,
+		it.IsMustChmodApplyOnFile,
+		it.IsApplyChmodOnMismatch,
+		true,
+		parentDir,
+		filePath,
+		allBytes,
+	)
+
+	if err == nil {
+		return nil
+	}
+
+	return it.errorWrap(err)
+}
+
+func (it SimpleFileReaderWriter) WriteRelativePath(
+	isRemoveBeforeWrite bool,
+	relPath string,
+	allBytes []byte,
+) error {
+	finalPath := pathinternal.Join(it.ParentDir, relPath)
+
+	err := SimpleFileWriter.FileWriter.All(
+		it.ChmodDir,
+		it.ChmodFile,
+		isRemoveBeforeWrite,
+		it.IsMustChmodApplyOnFile,
+		it.IsApplyChmodOnMismatch,
+		true,
+		it.ParentDir,
+		finalPath,
+		allBytes,
+	)
 
 	if err == nil {
 		return nil
@@ -106,44 +162,56 @@ func (it SimpleFileReaderWriter) Write(allBytes []byte) error {
 
 func (it SimpleFileReaderWriter) InitializeDefaultNew() (newRw *SimpleFileReaderWriter) {
 	return New.SimpleFileReaderWriter.Default(
-		it.FilePath)
+		it.IsRemoveBeforeWrite,
+		it.FilePath,
+	)
 }
 
 func (it SimpleFileReaderWriter) NewPath(
+	isRemoveBeforeWrite bool,
 	newLocation string,
 ) (newRw *SimpleFileReaderWriter) {
 	return New.SimpleFileReaderWriter.Path(
+		isRemoveBeforeWrite,
 		it.ChmodDir,
 		it.ChmodFile,
-		newLocation)
+		newLocation,
+	)
 }
 
 func (it SimpleFileReaderWriter) NewPathJoin(
+	isRemoveBeforeWrite bool,
 	newLocationsFromParentDir ...string,
 ) (newRw *SimpleFileReaderWriter) {
 	joined := strings.Join(
 		newLocationsFromParentDir,
-		constants.ForwardSlash)
+		constants.ForwardSlash,
+	)
 	newLocation := filepath.Join(
 		it.ParentDir,
-		joined)
+		joined,
+	)
 
 	return New.SimpleFileReaderWriter.Path(
+		isRemoveBeforeWrite,
 		it.ChmodDir,
 		it.ChmodFile,
-		newLocation)
+		newLocation,
+	)
 }
 
 func (it SimpleFileReaderWriter) WriteString(content string) error {
-	err := SimpleFileWriter.WriteFileString(
+	err := SimpleFileWriter.FileWriter.All(
 		it.ChmodDir,
 		it.ChmodFile,
+		it.IsRemoveBeforeWrite,
 		it.IsMustChmodApplyOnFile,
 		it.IsApplyChmodOnMismatch,
 		true,
 		it.ParentDir,
 		it.FilePath,
-		content)
+		[]byte(content),
+	)
 
 	if err == nil {
 		return nil
@@ -169,12 +237,17 @@ func (it SimpleFileReaderWriter) errorWrap(err error) error {
 func (it SimpleFileReaderWriter) WriteAny(
 	anyItem interface{},
 ) error {
-	err := SimpleFileWriter.WriteAnyItem(
-		it.ChmodDir,
-		it.ChmodFile,
-		it.ParentDir,
-		it.FilePath,
-		anyItem)
+	err := SimpleFileWriter.
+		FileWriter.
+		Any.
+		Chmod(
+			it.IsRemoveBeforeWrite,
+			it.ChmodDir,
+			it.ChmodFile,
+			it.ParentDir,
+			it.FilePath,
+			anyItem,
+		)
 
 	if err == nil {
 		return nil
@@ -304,7 +377,8 @@ func (it SimpleFileReaderWriter) ReadWrite(
 ) error {
 	return it.GetSet(
 		readToPtr,
-		onInvalidGenerateFunc)
+		onInvalidGenerateFunc,
+	)
 }
 
 func (it SimpleFileReaderWriter) ReadWriteLock(
@@ -313,7 +387,8 @@ func (it SimpleFileReaderWriter) ReadWriteLock(
 ) error {
 	return it.GetSetLock(
 		readToPtr,
-		onInvalidGenerateFunc)
+		onInvalidGenerateFunc,
+	)
 }
 
 func (it SimpleFileReaderWriter) GetSetLock(
@@ -324,7 +399,8 @@ func (it SimpleFileReaderWriter) GetSetLock(
 	defer SimpleFileWriter.Unlock()
 
 	return it.GetSet(
-		toPtr, onInvalidGenerateFunc)
+		toPtr, onInvalidGenerateFunc,
+	)
 }
 
 func (it SimpleFileReaderWriter) GetSet(
@@ -357,7 +433,8 @@ func (it SimpleFileReaderWriter) CacheGetSet(
 ) error {
 	return it.GetSet(
 		toPtr,
-		onInvalidGenerateFunc)
+		onInvalidGenerateFunc,
+	)
 }
 
 func (it SimpleFileReaderWriter) CacheGetSetLock(
@@ -366,12 +443,13 @@ func (it SimpleFileReaderWriter) CacheGetSetLock(
 ) error {
 	return it.GetSetLock(
 		toPtr,
-		onInvalidGenerateFunc)
+		onInvalidGenerateFunc,
+	)
 }
 
 // Deserialize
 //
-//  alias for Get
+//	alias for Get
 func (it SimpleFileReaderWriter) Deserialize(
 	toPtr interface{},
 ) error {
@@ -380,7 +458,7 @@ func (it SimpleFileReaderWriter) Deserialize(
 
 // DeserializeLock
 //
-//  alias for Get
+//	alias for Get
 func (it SimpleFileReaderWriter) DeserializeLock(
 	toPtr interface{},
 ) error {
@@ -389,21 +467,21 @@ func (it SimpleFileReaderWriter) DeserializeLock(
 
 // Serialize
 //
-//  alias for ReadOnExist
+//	alias for ReadOnExist
 func (it SimpleFileReaderWriter) Serialize() ([]byte, error) {
 	return it.ReadOnExist()
 }
 
 // SerializeLock
 //
-//  alias for ReadOnExist
+//	alias for ReadOnExist
 func (it SimpleFileReaderWriter) SerializeLock() ([]byte, error) {
 	return it.ReadOnExistLock()
 }
 
 // Set
 //
-//  alias for WriteAny
+//	alias for WriteAny
 func (it SimpleFileReaderWriter) Set(toPtr interface{}) error {
 	return it.WriteAny(toPtr)
 }
@@ -414,8 +492,8 @@ func (it SimpleFileReaderWriter) SetLock(toPtr interface{}) error {
 
 // Expire
 //
-//  Removes file on exist only
-//  alias for RemoveOnExist
+//	Removes file on exist only
+//	alias for RemoveOnExist
 func (it SimpleFileReaderWriter) Expire() error {
 	if it.IsExist() {
 		return os.RemoveAll(it.FilePath)
@@ -426,8 +504,8 @@ func (it SimpleFileReaderWriter) Expire() error {
 
 // ExpireLock
 //
-//  Removes file on exist only
-//  alias for RemoveOnExist
+//	Removes file on exist only
+//	alias for RemoveOnExist
 func (it SimpleFileReaderWriter) ExpireLock() error {
 	SimpleFileWriter.Lock()
 	defer SimpleFileWriter.Unlock()
@@ -437,14 +515,14 @@ func (it SimpleFileReaderWriter) ExpireLock() error {
 
 // OsFile
 //
-//  Os open files must be closed
+//	Os open files must be closed
 func (it SimpleFileReaderWriter) OsFile() (*os.File, error) {
 	return os.Open(it.FilePath)
 }
 
 // ExpireParentDir
 //
-//  warning: recursive process remove all files in it, undoable.
+//	warning: recursive process remove all files in it, undoable.
 func (it SimpleFileReaderWriter) ExpireParentDir() error {
 	if it.IsParentExist() {
 		return os.RemoveAll(it.ParentDir)
@@ -455,7 +533,7 @@ func (it SimpleFileReaderWriter) ExpireParentDir() error {
 
 // ExpireParentDirLock
 //
-//  warning: recursive process remove all files in it, undoable.
+//	warning: recursive process remove all files in it, undoable.
 func (it SimpleFileReaderWriter) ExpireParentDirLock() error {
 	SimpleFileWriter.Lock()
 	defer SimpleFileWriter.Unlock()
@@ -469,8 +547,8 @@ func (it SimpleFileReaderWriter) RemoveOnExist() error {
 
 // RemoveDirOnExist
 //
-//  alias for ExpireParentDir
-//  warning: recursive process remove all files in it, undoable.
+//	alias for ExpireParentDir
+//	warning: recursive process remove all files in it, undoable.
 func (it SimpleFileReaderWriter) RemoveDirOnExist() error {
 	return it.ExpireParentDir()
 }
@@ -484,7 +562,8 @@ func (it SimpleFileReaderWriter) getOnExist(toPtr interface{}) error {
 
 	return corejson.Deserialize.UsingBytes(
 		allBytes,
-		toPtr)
+		toPtr,
+	)
 }
 
 func (it SimpleFileReaderWriter) String() string {
@@ -533,7 +612,8 @@ func (it SimpleFileReaderWriter) MarshalJSON() ([]byte, error) {
 func (it *SimpleFileReaderWriter) UnmarshalJSON(jsonBytes []byte) error {
 	var model simpleFileReaderWriterModel
 	err := corejson.Deserialize.UsingBytes(
-		jsonBytes, &model)
+		jsonBytes, &model,
+	)
 
 	if err == nil {
 		// success

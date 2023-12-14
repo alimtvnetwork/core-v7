@@ -5,54 +5,55 @@ import (
 	"gitlab.com/auk-go/core/corevalidator"
 )
 
-type ReflectSetFromToTestWrapper struct {
+type FromToTestWrapper struct {
 	Header                          string
 	From, To, ExpectedValue, actual interface{}
 	IsUsePointerInFrom              bool
-	IsErrorExpected                 bool
+	IsExpectingError                bool
+	HasPanic                        bool
 	Validator                       corevalidator.TextValidator
 }
 
-func (it ReflectSetFromToTestWrapper) CaseTitle() string {
+func (it FromToTestWrapper) CaseTitle() string {
 	return it.Header
 }
 
-func (it ReflectSetFromToTestWrapper) Input() interface{} {
-	return it
+func (it FromToTestWrapper) Input() interface{} {
+	return it.From
 }
 
-func (it ReflectSetFromToTestWrapper) Expected() interface{} {
+func (it FromToTestWrapper) Expected() interface{} {
 	return it.ExpectedValue
 }
 
-func (it ReflectSetFromToTestWrapper) ToFieldToDraftType() *coretests.DraftType {
+func (it FromToTestWrapper) ToFieldToDraftType() *coretests.DraftType {
 	return coretests.AnyToDraftType(it.To)
 }
 
-func (it ReflectSetFromToTestWrapper) ToFieldToBytes() []byte {
+func (it FromToTestWrapper) ToFieldToBytes() []byte {
 	return coretests.AnyToBytes(it.To)
 }
 
-func (it ReflectSetFromToTestWrapper) ExpectedFieldToDraftType() *coretests.DraftType {
+func (it FromToTestWrapper) ExpectedFieldToDraftType() *coretests.DraftType {
 	return coretests.AnyToDraftType(it.ExpectedValue)
 }
 
-func (it ReflectSetFromToTestWrapper) ExpectedFieldToBytes() []byte {
+func (it FromToTestWrapper) ExpectedFieldToBytes() []byte {
 	return coretests.AnyToBytes(it.ExpectedValue)
 }
 
-func (it ReflectSetFromToTestWrapper) SetActual(actual interface{}) {
+func (it FromToTestWrapper) SetActual(actual interface{}) {
 	it.actual = actual
 }
 
-func (it ReflectSetFromToTestWrapper) Actual() interface{} {
+func (it FromToTestWrapper) Actual() interface{} {
 	return it.actual
 }
 
-func (it ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapper() coretests.SimpleTestCaseWrapper {
+func (it FromToTestWrapper) AsSimpleTestCaseWrapper() coretests.SimpleTestCaseWrapper {
 	return &it
 }
 
-func (it *ReflectSetFromToTestWrapper) AsSimpleTestCaseWrapperContractsBinder() coretests.SimpleTestCaseWrapperContractsBinder {
+func (it *FromToTestWrapper) AsSimpleTestCaseWrapperContractsBinder() coretests.SimpleTestCaseWrapperContractsBinder {
 	return it
 }

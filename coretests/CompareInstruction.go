@@ -30,12 +30,13 @@ func (it *ComparingInstruction) ActualHashset() *corestr.Hashset {
 		return it.actualHashset
 	}
 
-	whitespaceRemovedSplits := GetMessageToSortedArray(
+	whitespaceRemovedSplits := GetAssert.SortedArray(
 		false,
 		true,
-		it.Actual())
+		it.Actual(),
+	)
 
-	it.actualHashset = corestr.New.Hashset.StringsPtr(&whitespaceRemovedSplits)
+	it.actualHashset = corestr.New.Hashset.Strings(whitespaceRemovedSplits)
 
 	return it.actualHashset
 }
@@ -49,7 +50,8 @@ func (it *ComparingInstruction) IsMatch(
 		isMatchesEqual = item.IsMatch(
 			caseIndexPlusIsPrint.IsPrint,
 			i,
-			it) &&
+			it,
+		) &&
 			isMatchesEqual
 	}
 
@@ -73,5 +75,6 @@ func (it *ComparingInstruction) isMatchingEqual(caseIndexPlusIsPrint *CaseIndexP
 	return IsStrMsgNonWhiteSortedEqual(
 		caseIndexPlusIsPrint.IsPrint,
 		it.actual,
-		expectation)
+		expectation,
+	)
 }

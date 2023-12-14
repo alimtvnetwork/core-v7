@@ -7,8 +7,8 @@ type tempDirGetter struct{}
 // TempDefault
 //
 // Example:
-//  - unix    : /tmp
-//  - windows : %temp%
+//   - unix    : /tmp
+//   - windows : %temp%
 func (it tempDirGetter) TempDefault() string {
 	return TempDirDefault
 }
@@ -16,13 +16,13 @@ func (it tempDirGetter) TempDefault() string {
 // TempPermanent
 //
 // Windows:
-//  - c:\\windows\\temp
+//   - c:\\windows\\temp
 //
 // unix:
-//  - /var/tmp/
+//   - /var/tmp/
 //
 // Reference:
-//  - Why "/var/tmp/" : https://prnt.sc/gW0DA5d4jt6R
+//   - Why "/var/tmp/" : https://prnt.sc/gW0DA5d4jt6R
 func (it tempDirGetter) TempPermanent() string {
 	if osconstsinternal.IsWindows {
 		return osconstsinternal.WindowsPermanentTemp

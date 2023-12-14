@@ -11,9 +11,9 @@ import (
 // between 0-10 (rest will be fixed by wildcard)
 //
 // rwxPartial:
-//  - "-rwx" will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx" will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 func RwxPartialToInstructionExecutor(
 	rwxPartial string,
 	condition *chmodins.Condition,

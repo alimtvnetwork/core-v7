@@ -55,7 +55,7 @@ func (it *Attributes) HasAnyKey(key string) bool {
 
 // SetAuthInfo
 //
-//  On nil create new attributes
+//	On nil create new attributes
 func (it *Attributes) SetAuthInfo(authInfo *AuthInfo) *Attributes {
 	if it == nil {
 		return New.
@@ -584,6 +584,7 @@ func (it *Attributes) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *Attributes) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,
@@ -610,7 +611,7 @@ func (it *Attributes) JsonParseSelfInject(
 
 // SetBasicErr
 //
-//  on nil creates and attach new error and returns the attributes
+//	on nil creates and attach new error and returns the attributes
 func (it *Attributes) SetBasicErr(
 	basicErr errcoreinf.BasicErrWrapper,
 ) payloadinf.AttributesBinder {

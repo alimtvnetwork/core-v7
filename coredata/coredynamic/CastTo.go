@@ -20,7 +20,8 @@ func CastTo(
 
 	isMatchingAcceptedType := IsAnyTypesOf(
 		currentRfType,
-		acceptedTypes...)
+		acceptedTypes...,
+	)
 
 	if !isMatchingAcceptedType {
 		// not matching
@@ -28,11 +29,14 @@ func CastTo(
 			sliceErr,
 			errcore.UnsupportedType.Combine(
 				"none matches, current type:"+currentRfType.String(),
-				TypeNamesStringUsingReflectType(true, acceptedTypes...)))
+				getTypeNamesUsingReflectFunc(true, acceptedTypes...),
+			),
+		)
 	}
 
-	isNull := input == nil || reflectinternal.IsNullUsingReflectValue(
-		rv)
+	isNull := input == nil || reflectinternal.Is.NullRv(
+		rv,
+	)
 	isOutNonPointer := !isOutputPointer
 	hasNonPointerIssue := isNull && isOutNonPointer
 
@@ -47,7 +51,9 @@ func CastTo(
 				SrcDestination(
 					"cannot output non pointer if pointer is null",
 					"Value", constants.NilAngelBracket,
-					"Type", currentRfType.String()))
+					"Type", currentRfType.String(),
+				),
+		)
 
 		// ending process
 		return CastedResult{
@@ -65,7 +71,8 @@ func CastTo(
 
 	val, _ := PointerOrNonPointerUsingReflectValue(
 		isOutputPointer,
-		rv)
+		rv,
+	)
 
 	return CastedResult{
 		Casted:                 val,

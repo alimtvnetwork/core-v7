@@ -1,6 +1,11 @@
 package corerange
 
-import "gitlab.com/auk-go/core/constants"
+import (
+	"fmt"
+
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/convertinteranl"
+)
 
 type MinMaxInt64 struct {
 	Min, Max int64
@@ -44,7 +49,7 @@ func (it *MinMaxInt64) DifferenceAbsolute() int64 {
 	diff := it.Difference()
 
 	if diff < 0 {
-		return diff
+		return diff * -1
 	}
 
 	return diff
@@ -101,8 +106,8 @@ func (it *MinMaxInt64) RangeLength() int64 {
 
 // RangesInt
 //
-//  returns empty integers if IsInvalid
-//  return range int values
+//	returns empty integers if IsInvalid
+//	return range int values
 func (it *MinMaxInt64) RangesInt() []int {
 	actualRanges := it.Ranges()
 	rangesIntegers := make(
@@ -118,14 +123,13 @@ func (it *MinMaxInt64) RangesInt() []int {
 
 // Ranges
 //
-//  returns empty integers if IsInvalid
-//  return range int values
+//	returns empty integers if IsInvalid
+//	return range int values
 func (it *MinMaxInt64) Ranges() []int64 {
 	length := it.RangeLength()
 	start := it.Min
 	slice := make(
 		[]int64,
-		constants.Zero,
 		length)
 
 	var i int64
@@ -137,9 +141,53 @@ func (it *MinMaxInt64) Ranges() []int64 {
 	return slice
 }
 
-// IsWithinRange r.Min >= value && value <= r.Max
+func (it *MinMaxInt64) CreateRanges(minMaxRanges ...MinMaxInt64) []int64 {
+	if len(minMaxRanges) == 0 {
+		return it.Ranges()
+	}
+
+	firstRanges := it.Ranges()
+	totalPossible := len(firstRanges)
+	for _, maxRange := range minMaxRanges {
+		totalPossible += int(maxRange.DifferenceAbsolute())
+	}
+
+	slice := make([]int64, 0, totalPossible)
+	slice = append(slice, firstRanges...)
+	for _, maxRange := range minMaxRanges {
+		slice = append(slice, maxRange.Ranges()...)
+	}
+
+	return slice
+}
+
+// RangesExcept
+//
+// Returns ranges only without the except items
+func (it *MinMaxInt64) RangesExcept(exceptItems ...int) []int64 {
+	length := it.RangeLength()
+	start := it.Min
+	slice := make([]int64, 0, length)
+	toHashmap := convertinteranl.
+		Integers.
+		ToMapBool(exceptItems...)
+
+	for i := 0; i < int(length); i++ {
+		id := start + int64(i)
+		if toHashmap[int(id)] {
+			continue
+		}
+
+		// add not exist
+		slice = append(slice, id)
+	}
+
+	return slice
+}
+
+// IsWithinRange it.Min <= value && value <= it.Max
 func (it *MinMaxInt64) IsWithinRange(value int64) bool {
-	return it != nil && it.Min >= value && value <= it.Max
+	return it != nil && it.Min <= value && value <= it.Max
 }
 
 // IsInvalidValue  !r.IsWithinRange(value)
@@ -184,4 +232,11 @@ func (it *MinMaxInt64) IsEqual(right *MinMaxInt64) bool {
 
 	return it.Max == right.Max &&
 		it.Min == right.Min
+}
+
+func (it MinMaxInt64) String() string {
+	return fmt.Sprintf(
+		constants.SprintFormatNumberWithHyphen,
+		it.Min,
+		it.Max)
 }

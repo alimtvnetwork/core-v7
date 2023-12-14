@@ -14,29 +14,28 @@ func CreateDirWithFiles(
 ) error {
 	const funcName = "CreateDirWithFiles"
 	dir := dirWithFile.Dir
-	var removeErr error
 
-	if isRemoveAllDirBeforeCreate && IsPathExists(dir) {
-		removeErr = os.RemoveAll(dir)
-	}
+	removeDirErr := removeDirIf(
+		isRemoveAllDirBeforeCreate,
+		dir,
+		funcName,
+	)
 
-	if removeErr != nil {
-		return errcore.PathMeaningfulError(
-			errcore.PathCreateFailedType,
-			funcName,
-			removeErr,
-			dir)
+	if removeDirErr != nil {
+		return removeDirErr
 	}
 
 	mkDirErr := os.MkdirAll(
-		dir, fileChmod)
+		dir, fileChmod,
+	)
 
 	if mkDirErr != nil {
 		return errcore.PathMeaningfulError(
 			errcore.PathCreateFailedType,
 			funcName,
 			mkDirErr,
-			dir)
+			dir,
+		)
 	}
 
 	var fileManipulateErr error
@@ -54,7 +53,8 @@ func CreateDirWithFiles(
 				errcore.PathCreateFailedType,
 				funcName,
 				err,
-				dir)
+				dir,
+			)
 		}
 
 		if osFile != nil {
@@ -66,19 +66,22 @@ func CreateDirWithFiles(
 				errcore.FileCloseFailedType,
 				funcName,
 				fileManipulateErr,
-				compiledPath)
+				compiledPath,
+			)
 		}
 
 		chmodErr := os.Chmod(
 			compiledPath,
-			fileChmod)
+			fileChmod,
+		)
 
 		if chmodErr != nil {
 			return errcore.PathMeaningfulError(
 				errcore.PathChmodApplyType,
 				funcName,
 				chmodErr,
-				compiledPath)
+				compiledPath,
+			)
 		}
 	}
 

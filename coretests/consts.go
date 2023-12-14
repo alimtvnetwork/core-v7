@@ -11,4 +11,6 @@ const (
 	notEqualComparisonMessageFormat = "Compare :\n" +
 		" Left  = %s f1String=%s f2Int=%d\n" +
 		" Right = %s f1String=%s f2Int=%d\n"
+
+	skippedMsgFormat = " %d - %s."
 )

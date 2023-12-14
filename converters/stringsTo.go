@@ -36,7 +36,8 @@ func (it stringsTo) HashmapTrimColon(
 		SliceToMapConverter(lines).
 		LineSplitMapOptions(
 			true,
-			constants.Colon)
+			constants.Colon,
+		)
 }
 
 func (it stringsTo) HashmapTrimHyphen(
@@ -46,7 +47,8 @@ func (it stringsTo) HashmapTrimHyphen(
 		SliceToMapConverter(lines).
 		LineSplitMapOptions(
 			true,
-			constants.Hyphen)
+			constants.Hyphen,
+		)
 }
 
 func (it stringsTo) HashmapOptions(
@@ -58,7 +60,8 @@ func (it stringsTo) HashmapOptions(
 		SliceToMapConverter(lines).
 		LineSplitMapOptions(
 			isTrim,
-			splitter)
+			splitter,
+		)
 }
 
 func (it stringsTo) HashmapTrim(
@@ -72,7 +75,7 @@ func (it stringsTo) HashmapTrim(
 
 // HashmapUsingFuncOptions
 //
-//  Skips if empty after trim
+//	Skips if empty after trim
 func (it stringsTo) HashmapUsingFuncOptions(
 	isTrimBefore bool,
 	processorFunc func(line string) (key, val string),
@@ -82,12 +85,13 @@ func (it stringsTo) HashmapUsingFuncOptions(
 		SliceToMapConverter(lines).
 		LineProcessorMapOptions(
 			isTrimBefore,
-			processorFunc)
+			processorFunc,
+		)
 }
 
 // HashmapUsingFuncTrim
 //
-//  Skips if empty after trim
+//	Skips if empty after trim
 func (it stringsTo) HashmapUsingFuncTrim(
 	processorFunc func(line string) (key, val string),
 	lines ...string,
@@ -96,12 +100,13 @@ func (it stringsTo) HashmapUsingFuncTrim(
 		SliceToMapConverter(lines).
 		LineProcessorMapOptions(
 			true,
-			processorFunc)
+			processorFunc,
+		)
 }
 
 // MapStringIntegerUsingFunc
 //
-//  Skips if empty after trim
+//	Skips if empty after trim
 func (it stringsTo) MapStringIntegerUsingFunc(
 	isTrimBefore bool,
 	processorFunc func(line string) (key string, val int),
@@ -111,12 +116,13 @@ func (it stringsTo) MapStringIntegerUsingFunc(
 		SliceToMapConverter(lines).
 		LineProcessorMapStringIntegerOptions(
 			isTrimBefore,
-			processorFunc)
+			processorFunc,
+		)
 }
 
 // MapStringAnyUsingFunc
 //
-//  Skips if empty after trim
+//	Skips if empty after trim
 func (it stringsTo) MapStringAnyUsingFunc(
 	isTrimBefore bool,
 	processorFunc func(line string) (key string, val interface{}),
@@ -126,7 +132,8 @@ func (it stringsTo) MapStringAnyUsingFunc(
 		SliceToMapConverter(lines).
 		LineProcessorMapStringAnyOptions(
 			isTrimBefore,
-			processorFunc)
+			processorFunc,
+		)
 }
 
 func (it stringsTo) MapConverter(
@@ -137,10 +144,10 @@ func (it stringsTo) MapConverter(
 
 // PointerStrings
 //
-//  Will give empty or converted results array (not nil)
-//  It doesn't copy but points to same string address in the array
+//	Will give empty or converted results array (not nil)
+//	It doesn't copy but points to same string address in the array
 //
-//  Example code : https://play.golang.org/p/_OkY82E2kO9
+//	Example code : https://play.golang.org/p/_OkY82E2kO9
 func (it stringsTo) PointerStrings(pointerToStrings *[]string) *[]*string {
 	if pointerToStrings == nil || *pointerToStrings == nil {
 		var emptyResult []*string
@@ -160,8 +167,8 @@ func (it stringsTo) PointerStrings(pointerToStrings *[]string) *[]*string {
 
 // PointerStringsCopy
 //
-//  will give empty or converted results array (not nil)
-//  Copy each item to the new array
+//	will give empty or converted results array (not nil)
+//	Copy each item to the new array
 func (it stringsTo) PointerStringsCopy(pointerToStrings *[]string) *[]*string {
 	if pointerToStrings == nil || *pointerToStrings == nil {
 		var emptyResult []*string
@@ -220,7 +227,8 @@ func (it stringsTo) IntegersWithDefaults(
 				err.Error()
 			errMessages = append(
 				errMessages,
-				errMessage)
+				errMessage,
+			)
 
 			continue
 		}
@@ -242,7 +250,7 @@ func (it stringsTo) IntegersWithDefaults(
 
 // IntegersOptionPanic
 //
-//  panic if not a number
+//	panic if not a number
 func (it stringsTo) IntegersOptionPanic(
 	isPanic bool,
 	lines ...string,
@@ -266,13 +274,64 @@ func (it stringsTo) IntegersOptionPanic(
 
 // IntegersSkipErrors
 //
-//  no errors captured.
+//	no errors captured.
 func (it stringsTo) IntegersSkipErrors(
 	lines ...string,
 ) []int {
 	return it.IntegersOptionPanic(
 		false,
-		lines...)
+		lines...,
+	)
+}
+
+func (it stringsTo) IntegersSkipMapAndDefaultValue(
+	defaultVal int,
+	skipValues map[string]bool,
+	lines ...string,
+) []int {
+	results := make([]int, len(lines))
+
+	for i, v := range lines {
+		if skipValues[v] {
+			continue
+		}
+
+		vInt, err := strconv.Atoi(strings.TrimSpace(v))
+
+		if err != nil {
+			results[i] = defaultVal
+			continue
+		}
+
+		results[i] = vInt
+	}
+
+	return results
+}
+
+func (it stringsTo) IntegersSkipAndDefaultValue(
+	defaultVal int,
+	skipValue string,
+	lines ...string,
+) []int {
+	results := make([]int, len(lines))
+
+	for i, v := range lines {
+		if skipValue == v {
+			continue
+		}
+
+		vInt, err := strconv.Atoi(v)
+
+		if err != nil {
+			results[i] = defaultVal
+			continue
+		}
+
+		results[i] = vInt
+	}
+
+	return results
 }
 
 // BytesConditional only take if isTake returns true, breaks and exits if isBreak to true
@@ -299,7 +358,7 @@ func (it stringsTo) BytesConditional(
 
 // BytesWithDefaults
 //
-//  panic if not a number or more than 255
+//	panic if not a number or more than 255
 func (it stringsTo) BytesWithDefaults(
 	defaultByte byte,
 	stringsSlice ...string,
@@ -318,7 +377,8 @@ func (it stringsTo) BytesWithDefaults(
 				strconv.Itoa(i)
 			sliceErr = append(
 				sliceErr,
-				msg)
+				msg,
+			)
 
 			results[i] = defaultByte
 
@@ -333,7 +393,8 @@ func (it stringsTo) BytesWithDefaults(
 				strconv.Itoa(i)
 			sliceErr = append(
 				sliceErr,
-				msg)
+				msg,
+			)
 
 			results[i] = defaultByte
 
@@ -352,7 +413,8 @@ func (it stringsTo) BytesWithDefaults(
 func (it stringsTo) Csv(isSkipQuoteOnlyOnExistence bool, stringsSlice ...string) string {
 	csvLines := simplewrap.DoubleQuoteWrapElements(
 		isSkipQuoteOnlyOnExistence,
-		stringsSlice...)
+		stringsSlice...,
+	)
 
 	return strings.Join(csvLines, constants.Comma)
 }
@@ -380,12 +442,12 @@ func (it stringsTo) CsvWithIndexes(lines []string) string {
 
 // BytesMust
 //
-//  panic if not a number or more than 255 or less than 0
+//	panic if not a number or more than 255 or less than 0
 func (it stringsTo) BytesMust(lines ...string) []byte {
 	results := make([]byte, len(lines))
 
 	for i, v := range lines {
-		vInt, err := StringToByte(v)
+		vInt, err := StringTo.Byte(v)
 
 		if err != nil {
 			panic(err)
@@ -399,7 +461,7 @@ func (it stringsTo) BytesMust(lines ...string) []byte {
 
 // Float64sMust
 //
-//  panic if not a number
+//	panic if not a number
 func (it stringsTo) Float64sMust(lines ...string) []float64 {
 	results := make([]float64, len(lines))
 
@@ -418,7 +480,7 @@ func (it stringsTo) Float64sMust(lines ...string) []float64 {
 
 // Float64sConditional
 //
-//  handle convert from processor function either throw or ignore
+//	handle convert from processor function either throw or ignore
 func (it stringsTo) Float64sConditional(
 	processor func(in string) (out float64, isTake, isBreak bool),
 	lines []string,
@@ -438,4 +500,54 @@ func (it stringsTo) Float64sConditional(
 	}
 
 	return results
+}
+
+// PtrOfPtrToPtrStrings will give empty or converted results array (not nil)
+func (it stringsTo) PtrOfPtrToPtrStrings(pointerStringOfArray *[]*string) *[]string {
+	if pointerStringOfArray == nil || *pointerStringOfArray == nil {
+		var emptyResult []string
+
+		return &emptyResult
+	}
+
+	newArray := make([]string, len(*pointerStringOfArray))
+
+	for i, value := range *pointerStringOfArray {
+		newArray[i] = *value
+	}
+
+	return &newArray
+}
+
+func (it stringsTo) PtrOfPtrToMapStringBool(inputArray *[]*string) map[string]bool {
+	if inputArray == nil || len(*inputArray) == 0 {
+		return map[string]bool{}
+	}
+
+	length := len(*inputArray)
+	hashset := make(map[string]bool, length)
+
+	for _, s := range *inputArray {
+		sC := *s
+		hashset[sC] = true
+	}
+
+	return hashset
+}
+
+func (it stringsTo) CloneIf(
+	isClone bool,
+	items ...string,
+) []string {
+	if len(items) == 0 || isClone {
+		return items
+	}
+
+	newArray := make([]string, len(items))
+
+	for i, value := range items {
+		newArray[i] = value
+	}
+
+	return newArray
 }

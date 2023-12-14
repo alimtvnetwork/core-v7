@@ -23,9 +23,10 @@ func (it *User) IdentifierInteger() int {
 		return constants.InvalidValue
 	}
 
-	idInt, _ := converters.StringToIntegerWithDefault(
+	idInt, _ := converters.StringTo.IntegerWithDefault(
 		it.Identifier,
-		constants.InvalidValue)
+		constants.InvalidValue,
+	)
 
 	return idInt
 }

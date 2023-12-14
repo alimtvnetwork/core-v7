@@ -5,4 +5,5 @@ type SimpleTestCaseWrapper interface {
 	Input() interface{}
 	Expected() interface{}
 	Actual() interface{}
+	SetActual(actual interface{})
 }

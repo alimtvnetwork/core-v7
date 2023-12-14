@@ -12,8 +12,8 @@ import (
 
 // BytesCollection
 //
-//  Only collects json byes nothing else.
-//  errors will be ignored or returned during add.
+//	Only collects json byes nothing else.
+//	errors will be ignored or returned during add.
 type BytesCollection struct {
 	Items [][]byte `json:"JsonBytesCollection"`
 }

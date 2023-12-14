@@ -5,6 +5,7 @@ import (
 )
 
 // GOOS values https://stackoverflow.com/a/20728862
+//
 //goland:noinspection ALL
 const (
 	LsbCommand                = osconstsinternal.LsbCommand

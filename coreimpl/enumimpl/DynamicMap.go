@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/msgcreator"
 )
 
 type DynamicMap map[string]interface{}
@@ -35,7 +36,7 @@ func (it *DynamicMap) Set(key string, val interface{}) (isAddNewly bool) {
 
 // AddNewOnly
 //
-//  Don't update existing
+//	Don't update existing
 func (it *DynamicMap) AddNewOnly(key string, val interface{}) (isAdded bool) {
 	if it == nil {
 		// mutating because it is part of
@@ -59,7 +60,8 @@ func (it DynamicMap) AllKeys() []string {
 
 	allKeys := make(
 		[]string,
-		it.Length())
+		it.Length(),
+	)
 
 	index := 0
 	for key := range it {
@@ -88,13 +90,15 @@ func (it DynamicMap) AllValuesStrings() []string {
 
 	allValues := make(
 		[]string,
-		it.Length())
+		it.Length(),
+	)
 
 	index := 0
 	for _, value := range it {
 		allValues[index] = fmt.Sprintf(
 			constants.SprintValueFormat,
-			value)
+			value,
+		)
 		index++
 	}
 
@@ -119,7 +123,8 @@ func (it DynamicMap) AllValuesIntegers() []int {
 
 	allValues := make(
 		[]int,
-		it.Length())
+		it.Length(),
+	)
 
 	index := 0
 	for _, value := range it {
@@ -141,11 +146,13 @@ func (it DynamicMap) MapIntegerString() (
 
 	rangeMap = make(
 		map[int]string,
-		it.Length()+2)
+		it.Length()+2,
+	)
 
 	allKeysSorted = make(
 		[]int,
-		it.Length())
+		it.Length(),
+	)
 
 	if it.IsValueString() {
 		return it.stringValueMapIntegerString(rangeMap, allKeysSorted)
@@ -174,7 +181,8 @@ func (it DynamicMap) SortedKeyValues() (
 
 	keyValues = make(
 		[]KeyValInteger,
-		it.Length())
+		it.Length(),
+	)
 
 	rangesMap, AllKeysSorted := it.MapIntegerString()
 
@@ -198,7 +206,8 @@ func (it DynamicMap) SortedKeyAnyValues() (
 
 	keyAnyValues = make(
 		[]KeyAnyVal,
-		it.Length())
+		it.Length(),
+	)
 
 	if it.IsValueString() {
 		return it.sortedKeyAnyValuesString()
@@ -330,7 +339,8 @@ func (it *DynamicMap) IsEqual(
 
 	return it.IsRawEqual(
 		isRegardlessType,
-		*rightMap)
+		*rightMap,
+	)
 }
 
 func (it *DynamicMap) IsRawEqual(
@@ -359,7 +369,8 @@ func (it *DynamicMap) IsRawEqual(
 		if it.isNotEqual(
 			isRegardlessType,
 			leftValInf,
-			rightValInf) {
+			rightValInf,
+		) {
 			return false
 		}
 	}
@@ -372,6 +383,20 @@ func (it DynamicMap) Raw() map[string]interface{} {
 }
 
 func (it *DynamicMap) DiffRaw(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) DynamicMap {
+	diffMap := it.DiffRawUsingDifferChecker(
+		DefaultDiffCheckerImpl,
+		isRegardlessType,
+		rightMap,
+	)
+
+	return diffMap
+}
+
+func (it *DynamicMap) DiffRawUsingDifferChecker(
+	differChecker DifferChecker,
 	isRegardlessType bool,
 	rightMap map[string]interface{},
 ) DynamicMap {
@@ -390,22 +415,33 @@ func (it *DynamicMap) DiffRaw(
 	length := it.Length() / 3
 	diffMap := make(
 		map[string]interface{},
-		length)
+		length,
+	)
 
 	for key, leftValInf := range *it {
 		rightValInf, has := rightMap[key]
 
 		if !has {
-			diffMap[key] = leftValInf
+			diffMap[key] = differChecker.GetResultOnKeyMissingInRightExistInLeft(
+				key,
+				leftValInf,
+			)
 
 			continue
 		}
 
-		if it.isNotEqual(
+		isNotEqual := !differChecker.IsEqual(
 			isRegardlessType,
 			leftValInf,
-			rightValInf) {
-			diffMap[key] = leftValInf
+			rightValInf,
+		)
+
+		if isNotEqual {
+			diffMap[key] = differChecker.GetSingleDiffResult(
+				true,
+				leftValInf,
+				rightValInf,
+			)
 		}
 	}
 
@@ -426,20 +462,129 @@ func (it *DynamicMap) DiffRaw(
 		leftVal, has := leftMap[rightKey]
 
 		if !has {
-			diffMap[rightKey] = rightAnyVal
+			diffMap[rightKey] = differChecker.GetSingleDiffResult(
+				false,
+				leftVal,
+				rightAnyVal,
+			)
 
 			continue
 		}
 
-		if it.isNotEqual(
+		isNotEqual := !differChecker.IsEqual(
 			isRegardlessType,
+			leftVal,
 			rightAnyVal,
-			leftVal) {
-			diffMap[rightKey] = rightAnyVal
+		)
+
+		if isNotEqual {
+			diffMap[rightKey] = differChecker.GetSingleDiffResult(
+				false,
+				leftVal,
+				rightAnyVal,
+			)
 		}
 	}
 
 	return diffMap
+}
+
+// DiffRawLeftRightUsingDifferChecker
+//
+// Returns
+//   - lDiff : contains what differs in right
+//   - rDiff : contains what differs in left
+func (it *DynamicMap) DiffRawLeftRightUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) (lDiff, rDiff DynamicMap) {
+	if it == nil && rightMap == nil {
+		return map[string]interface{}{}, map[string]interface{}{}
+	}
+
+	if it == nil && rightMap != nil {
+		return rightMap, map[string]interface{}{}
+	}
+
+	if it != nil && rightMap == nil {
+		return *it, map[string]interface{}{}
+	}
+
+	length := it.Length() / 3
+	rDiff = make(
+		map[string]interface{},
+		length,
+	)
+
+	for key, leftValInf := range *it {
+		rightValInf, has := rightMap[key]
+
+		if !has {
+			rDiff[key] = differChecker.GetResultOnKeyMissingInRightExistInLeft(
+				key,
+				leftValInf,
+			)
+
+			continue
+		}
+
+		isNotEqual := !differChecker.IsEqual(
+			isRegardlessType,
+			leftValInf,
+			rightValInf,
+		)
+
+		if isNotEqual {
+			rDiff[key] = differChecker.GetSingleDiffResult(
+				true,
+				leftValInf,
+				rightValInf,
+			)
+		}
+	}
+
+	// no changes so far and count matches
+	// means there is are no changes.
+	if len(rDiff) == 0 && it.Length() == len(rightMap) {
+		return map[string]interface{}{}, rDiff
+	}
+
+	lDiff = make(
+		map[string]interface{},
+		length,
+	)
+
+	leftMap := *it
+	for rightKey, rightAnyVal := range rightMap {
+		leftVal, has := leftMap[rightKey]
+
+		if !has {
+			lDiff[rightKey] = differChecker.GetSingleDiffResult(
+				false,
+				leftVal,
+				rightAnyVal,
+			)
+
+			continue
+		}
+
+		isNotEqual := !differChecker.IsEqual(
+			isRegardlessType,
+			leftVal,
+			rightAnyVal,
+		)
+
+		if isNotEqual {
+			lDiff[rightKey] = differChecker.GetSingleDiffResult(
+				false,
+				leftVal,
+				rightAnyVal,
+			)
+		}
+	}
+
+	return lDiff, rDiff
 }
 
 func (it *DynamicMap) DiffJsonMessage(
@@ -452,14 +597,126 @@ func (it *DynamicMap) DiffJsonMessage(
 		return ""
 	}
 
-	slice := toStringsSliceOfDiffMap(diffMap)
-	compiledString := strings.Join(
-		slice,
-		constants.CommaUnixNewLine)
+	return toStringPrintableDynamicMap(diffMap)
+}
+
+func (it *DynamicMap) DiffJsonMessageUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) string {
+	diffMap := it.DiffRawUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		rightMap,
+	)
+
+	if diffMap.Length() == 0 {
+		return ""
+	}
+
+	return toStringPrintableDynamicMap(diffMap)
+}
+
+func (it *DynamicMap) DiffJsonMessageLeftRight(
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) string {
+	return it.DiffJsonMessageLeftRightUsingDifferChecker(
+		DefaultDiffCheckerImpl,
+		isRegardlessType,
+		rightMap,
+	)
+}
+
+func (it *DynamicMap) DiffJsonMessageLeftRightUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	rightMap map[string]interface{},
+) string {
+	lDiff, rDiff := it.DiffRawLeftRightUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		rightMap,
+	)
+
+	if lDiff.Length() == 0 && rDiff.Length() == 0 {
+		return ""
+	}
+
+	leftJson := toStringPrintableDynamicMapLines(lDiff)
+	rightJson := toStringPrintableDynamicMapLines(rDiff)
+	leftJsonLines := msgcreator.Assert.ToStringsWithSpaceDefault(
+		leftJson,
+	)
+
+	rightJsonLines := msgcreator.Assert.ToStringsWithSpaceDefault(
+		rightJson,
+	)
+
+	var slice []string
+
+	if len(leftJson) > 0 {
+		toMsg := "\n- Left Map - Has Diff from Right Map:\n"
+		slice = append(slice, toMsg)
+
+		slice = append(slice, leftJsonLines...)
+	}
+
+	if len(rightJson) > 0 {
+		toMsg := "\n- Right Map - Has Diff from Left Map:\n"
+		slice = append(slice, toMsg)
+
+		slice = append(slice, rightJsonLines...)
+	}
+
+	return strings.Join(slice, "\n")
+}
+
+func (it *DynamicMap) ShouldDiffMessageUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) string {
+	diffMessage := it.DiffJsonMessageUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		rightMap,
+	)
+
+	if diffMessage == "" {
+		return ""
+	}
 
 	return fmt.Sprintf(
-		curlyWrapFormat,
-		compiledString)
+		diffBetweenMapShouldBeMessageFormat,
+		title,
+		diffMessage,
+	)
+}
+
+func (it *DynamicMap) ShouldDiffLeftRightMessageUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) string {
+	diffMessage := it.DiffJsonMessageLeftRightUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		rightMap,
+	)
+
+	if diffMessage == "" {
+		return ""
+	}
+
+	return fmt.Sprintf(
+		diffBetweenMapShouldBeMessageFormat,
+		title,
+		diffMessage,
+	)
 }
 
 func (it *DynamicMap) ShouldDiffMessage(
@@ -469,7 +726,8 @@ func (it *DynamicMap) ShouldDiffMessage(
 ) string {
 	diffMessage := it.DiffJsonMessage(
 		isRegardlessType,
-		rightMap)
+		rightMap,
+	)
 
 	if diffMessage == "" {
 		return ""
@@ -478,7 +736,8 @@ func (it *DynamicMap) ShouldDiffMessage(
 	return fmt.Sprintf(
 		diffBetweenMapShouldBeMessageFormat,
 		title,
-		diffMessage)
+		diffMessage,
+	)
 }
 
 func (it *DynamicMap) LogShouldDiffMessage(
@@ -489,7 +748,65 @@ func (it *DynamicMap) LogShouldDiffMessage(
 	diffMessage = it.ShouldDiffMessage(
 		isRegardlessType,
 		title,
-		rightMap)
+		rightMap,
+	)
+
+	if diffMessage == "" {
+		return
+	}
+
+	fmt.Println(diffMessage)
+
+	return diffMessage
+}
+
+func (it *DynamicMap) LogShouldDiffLeftRightMessage(
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) (diffMessage string) {
+	return it.LogShouldDiffLeftRightMessageUsingDifferChecker(
+		DefaultDiffCheckerImpl,
+		isRegardlessType,
+		title,
+		rightMap,
+	)
+}
+
+func (it *DynamicMap) LogShouldDiffMessageUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) (diffMessage string) {
+	diffMessage = it.ShouldDiffMessageUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		title,
+		rightMap,
+	)
+
+	if diffMessage == "" {
+		return
+	}
+
+	fmt.Println(diffMessage)
+
+	return diffMessage
+}
+
+func (it *DynamicMap) LogShouldDiffLeftRightMessageUsingDifferChecker(
+	differChecker DifferChecker,
+	isRegardlessType bool,
+	title string,
+	rightMap map[string]interface{},
+) (diffMessage string) {
+	diffMessage = it.ShouldDiffLeftRightMessageUsingDifferChecker(
+		differChecker,
+		isRegardlessType,
+		title,
+		rightMap,
+	)
 
 	if diffMessage == "" {
 		return
@@ -543,15 +860,38 @@ func (it *DynamicMap) isNotEqual(
 	if isRegardlessType {
 		leftString := fmt.Sprintf(
 			constants.SprintPropertyNameValueFormat,
-			left)
+			left,
+		)
 		rightString := fmt.Sprintf(
 			constants.SprintPropertyNameValueFormat,
-			right)
+			right,
+		)
 
 		return leftString != rightString
 	}
 
 	return !reflect.DeepEqual(left, right)
+}
+
+func (it *DynamicMap) isEqualSingle(
+	isRegardlessType bool,
+	left,
+	right interface{},
+) bool {
+	if isRegardlessType {
+		leftString := fmt.Sprintf(
+			constants.SprintPropertyNameValueFormat,
+			left,
+		)
+		rightString := fmt.Sprintf(
+			constants.SprintPropertyNameValueFormat,
+			right,
+		)
+
+		return leftString == rightString
+	}
+
+	return reflect.DeepEqual(left, right)
 }
 
 func (it *DynamicMap) IsKeysEqualOnly(
@@ -596,7 +936,8 @@ func (it DynamicMap) KeyValueString(
 	if isFound {
 		convString := fmt.Sprintf(
 			constants.SprintValueFormat,
-			valInf)
+			valInf,
+		)
 
 		return convString, isFound
 	}
@@ -651,7 +992,8 @@ func (it DynamicMap) KeyValueByte(
 
 	toString := fmt.Sprintf(
 		constants.SprintValueFormat,
-		valInf)
+		valInf,
+	)
 
 	toInt, err := strconv.Atoi(toString)
 
@@ -708,7 +1050,8 @@ func (it DynamicMap) KeyValueInt(
 
 	toString := fmt.Sprintf(
 		constants.SprintValueFormat,
-		valInf)
+		valInf,
+	)
 
 	toInt, err := strconv.Atoi(toString)
 
@@ -723,7 +1066,8 @@ func (it DynamicMap) KeyValueInt(
 func (it DynamicMap) BasicByte(typeName string) *BasicByte {
 	return New.BasicByte.CreateUsingMap(
 		typeName,
-		it.ConvMapByteString())
+		it.ConvMapByteString(),
+	)
 }
 
 func (it DynamicMap) BasicByteUsingAliasMap(
@@ -733,7 +1077,8 @@ func (it DynamicMap) BasicByteUsingAliasMap(
 	return New.BasicByte.CreateUsingMapPlusAliasMap(
 		typeName,
 		it.ConvMapByteString(),
-		aliasingMap)
+		aliasingMap,
+	)
 }
 
 func (it DynamicMap) BasicInt8(typeName string) *BasicInt8 {
@@ -741,7 +1086,8 @@ func (it DynamicMap) BasicInt8(typeName string) *BasicInt8 {
 		BasicInt8.
 		CreateUsingMap(
 			typeName,
-			it.ConvMapInt8String())
+			it.ConvMapInt8String(),
+		)
 }
 
 func (it DynamicMap) BasicInt8UsingAliasMap(
@@ -753,7 +1099,8 @@ func (it DynamicMap) BasicInt8UsingAliasMap(
 		CreateUsingMapPlusAliasMap(
 			typeName,
 			it.ConvMapInt8String(),
-			aliasingMap)
+			aliasingMap,
+		)
 }
 
 func (it DynamicMap) BasicInt16(
@@ -763,7 +1110,8 @@ func (it DynamicMap) BasicInt16(
 		BasicInt16.
 		CreateUsingMap(
 			typeName,
-			it.ConvMapInt16String())
+			it.ConvMapInt16String(),
+		)
 }
 
 func (it DynamicMap) BasicInt16UsingAliasMap(
@@ -773,7 +1121,8 @@ func (it DynamicMap) BasicInt16UsingAliasMap(
 	return New.BasicInt16.CreateUsingMapPlusAliasMap(
 		typeName,
 		it.ConvMapInt16String(),
-		aliasingMap)
+		aliasingMap,
+	)
 }
 
 func (it DynamicMap) BasicInt32(
@@ -783,7 +1132,8 @@ func (it DynamicMap) BasicInt32(
 		BasicInt32.
 		CreateUsingMap(
 			typeName,
-			it.ConvMapInt32String())
+			it.ConvMapInt32String(),
+		)
 }
 
 func (it DynamicMap) BasicInt32UsingAliasMap(
@@ -795,7 +1145,8 @@ func (it DynamicMap) BasicInt32UsingAliasMap(
 		CreateUsingMapPlusAliasMap(
 			typeName,
 			it.ConvMapInt32String(),
-			aliasingMap)
+			aliasingMap,
+		)
 }
 
 func (it DynamicMap) BasicString(
@@ -805,7 +1156,8 @@ func (it DynamicMap) BasicString(
 		BasicString.
 		Create(
 			typeName,
-			it.AllKeysSorted())
+			it.AllKeysSorted(),
+		)
 }
 
 func (it DynamicMap) BasicStringUsingAliasMap(
@@ -817,7 +1169,8 @@ func (it DynamicMap) BasicStringUsingAliasMap(
 		CreateAliasMapOnly(
 			typeName,
 			it.AllKeysSorted(),
-			aliasingMap)
+			aliasingMap,
+		)
 }
 
 func (it DynamicMap) BasicUInt16(
@@ -827,7 +1180,8 @@ func (it DynamicMap) BasicUInt16(
 		BasicUInt16.
 		CreateUsingMap(
 			typeName,
-			it.ConvMapUInt16String())
+			it.ConvMapUInt16String(),
+		)
 }
 
 func (it DynamicMap) BasicUInt16UsingAliasMap(
@@ -839,12 +1193,13 @@ func (it DynamicMap) BasicUInt16UsingAliasMap(
 		CreateUsingMapPlusAliasMap(
 			typeName,
 			it.ConvMapUInt16String(),
-			aliasingMap)
+			aliasingMap,
+		)
 }
 
 // ConvMapStringInteger
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapStringInteger() map[string]int {
 	if it.IsEmpty() {
 		return map[string]int{}
@@ -862,7 +1217,7 @@ func (it DynamicMap) ConvMapStringInteger() map[string]int {
 
 // ConvMapIntegerString
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapIntegerString() map[int]string {
 	if it.IsEmpty() {
 		return map[int]string{}
@@ -880,7 +1235,7 @@ func (it DynamicMap) ConvMapIntegerString() map[int]string {
 
 // ConvMapByteString
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapByteString() map[byte]string {
 	if it.IsEmpty() {
 		return map[byte]string{}
@@ -890,7 +1245,8 @@ func (it DynamicMap) ConvMapByteString() map[byte]string {
 
 	for key := range it {
 		valByte, isFound, isFailed := it.KeyValueByte(
-			key)
+			key,
+		)
 
 		if !isFound || isFailed {
 			continue
@@ -904,7 +1260,7 @@ func (it DynamicMap) ConvMapByteString() map[byte]string {
 
 // ConvMapInt8String
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapInt8String() map[int8]string {
 	if it.IsEmpty() {
 		return map[int8]string{}
@@ -914,7 +1270,8 @@ func (it DynamicMap) ConvMapInt8String() map[int8]string {
 
 	for key := range it {
 		valInt := it.KeyValueIntDefault(
-			key)
+			key,
+		)
 
 		if valInt < math.MinInt8 || valInt > math.MaxInt8 {
 			continue
@@ -928,7 +1285,7 @@ func (it DynamicMap) ConvMapInt8String() map[int8]string {
 
 // ConvMapInt16String
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapInt16String() map[int16]string {
 	if it.IsEmpty() {
 		return map[int16]string{}
@@ -938,7 +1295,8 @@ func (it DynamicMap) ConvMapInt16String() map[int16]string {
 
 	for key := range it {
 		valInt := it.KeyValueIntDefault(
-			key)
+			key,
+		)
 
 		if valInt < math.MinInt16 || valInt > math.MaxInt16 {
 			continue
@@ -952,7 +1310,7 @@ func (it DynamicMap) ConvMapInt16String() map[int16]string {
 
 // ConvMapInt32String
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapInt32String() map[int32]string {
 	if it.IsEmpty() {
 		return map[int32]string{}
@@ -962,7 +1320,8 @@ func (it DynamicMap) ConvMapInt32String() map[int32]string {
 
 	for key := range it {
 		valInt := it.KeyValueIntDefault(
-			key)
+			key,
+		)
 
 		if valInt < math.MinInt32 || valInt > math.MaxInt32 {
 			continue
@@ -976,7 +1335,7 @@ func (it DynamicMap) ConvMapInt32String() map[int32]string {
 
 // ConvMapUInt16String
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapUInt16String() map[uint16]string {
 	if it.IsEmpty() {
 		return map[uint16]string{}
@@ -986,7 +1345,8 @@ func (it DynamicMap) ConvMapUInt16String() map[uint16]string {
 
 	for key := range it {
 		valInt := it.KeyValueIntDefault(
-			key)
+			key,
+		)
 
 		if valInt < 0 || valInt > math.MaxInt16 {
 			continue
@@ -1000,7 +1360,7 @@ func (it DynamicMap) ConvMapUInt16String() map[uint16]string {
 
 // ConvMapStringString
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapStringString() map[string]string {
 	if it.IsEmpty() {
 		return map[string]string{}
@@ -1010,7 +1370,8 @@ func (it DynamicMap) ConvMapStringString() map[string]string {
 
 	for key := range it {
 		valString, isFound := it.KeyValueString(
-			key)
+			key,
+		)
 
 		if !isFound {
 			continue
@@ -1024,7 +1385,7 @@ func (it DynamicMap) ConvMapStringString() map[string]string {
 
 // ConvMapInt64String
 //
-//  Conv value to key and key to value.
+//	Conv value to key and key to value.
 func (it DynamicMap) ConvMapInt64String() map[int64]string {
 	if it.IsEmpty() {
 		return map[int64]string{}
@@ -1034,7 +1395,8 @@ func (it DynamicMap) ConvMapInt64String() map[int64]string {
 
 	for key := range it {
 		valInt := it.KeyValueIntDefault(
-			key)
+			key,
+		)
 
 		newMap[int64(valInt)] = key
 	}
@@ -1052,7 +1414,8 @@ func (it DynamicMap) ConcatNew(
 
 	var newMap DynamicMap = make(
 		map[string]interface{},
-		it.Length()+another.Length()+1)
+		it.Length()+another.Length()+1,
+	)
 
 	if it.HasAnyItem() {
 		for key, val := range it {
@@ -1089,7 +1452,8 @@ func (it DynamicMap) Strings() []string {
 		slice[index] = fmt.Sprintf(
 			constants.KeyValJsonFormat,
 			key,
-			val)
+			val,
+		)
 
 		index++
 	}
@@ -1112,7 +1476,8 @@ func (it DynamicMap) StringsUsingFmt(
 		slice[i] = formatter(
 			i,
 			key,
-			val)
+			val,
+		)
 	}
 
 	return slice
@@ -1121,7 +1486,8 @@ func (it DynamicMap) StringsUsingFmt(
 func (it DynamicMap) String() string {
 	return strings.Join(
 		it.Strings(),
-		constants.DefaultLine)
+		constants.DefaultLine,
+	)
 }
 
 func (it DynamicMap) IsStringEqual(anotherMapString string) bool {

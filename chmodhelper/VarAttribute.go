@@ -22,7 +22,7 @@ func (it *VarAttribute) HasWildcard() bool {
 
 // ToCompileFixAttr
 //
-//  must check IsFixedType, before calling.
+//	must check IsFixedType, before calling.
 func (it *VarAttribute) ToCompileFixAttr() *Attribute {
 	if it.isFixedType {
 		return &Attribute{
@@ -37,7 +37,7 @@ func (it *VarAttribute) ToCompileFixAttr() *Attribute {
 
 // ToCompileAttr
 //
-//  if fixed type then fixed param can be nil
+//	if fixed type then fixed param can be nil
 func (it *VarAttribute) ToCompileAttr(fixed *Attribute) Attribute {
 	if it.isFixedType {
 		return Attribute{

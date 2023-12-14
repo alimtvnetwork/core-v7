@@ -63,7 +63,7 @@ func (it newBasicInt16Creator) CreateUsingMapPlusAliasMap(
 
 // CreateUsingAliasMap
 //
-//  Length : must match stringRanges and actualRangesAnyType
+//	Length : must match stringRanges and actualRangesAnyType
 func (it newBasicInt16Creator) CreateUsingAliasMap(
 	typeName string,
 	actualValueRanges []int16,
@@ -221,7 +221,7 @@ func (it newBasicInt16Creator) DefaultWithAliasMap(
 
 // DefaultAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicInt16Creator) DefaultAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,
@@ -236,7 +236,7 @@ func (it newBasicInt16Creator) DefaultAllCases(
 
 // DefaultWithAliasMapAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicInt16Creator) DefaultWithAliasMapAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,

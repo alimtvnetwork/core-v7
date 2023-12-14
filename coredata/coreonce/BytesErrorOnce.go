@@ -58,7 +58,7 @@ func (it *BytesErrorOnce) MustHaveSafeItems() {
 
 // Error
 //
-//  Runs the execution and returns the error.
+//	Runs the execution and returns the error.
 func (it *BytesErrorOnce) Error() error {
 	if it.isInitialized {
 		return it.err
@@ -93,14 +93,14 @@ func (it *BytesErrorOnce) IsEmptyError() bool {
 
 // IsEmpty
 //
-//  represent values and error both empty
+//	represent values and error both empty
 func (it *BytesErrorOnce) IsEmpty() bool {
 	return it == nil || it.IsNull() && it.IsEmptyError()
 }
 
 // IsEmptyBytes
 //
-//  represent values
+//	represent values
 func (it *BytesErrorOnce) IsEmptyBytes() bool {
 	return it == nil || it.Length() == 0
 }
@@ -119,28 +119,28 @@ func (it *BytesErrorOnce) IsDefined() bool {
 
 // IsInvalid
 //
-//  represents has error
+//	represents has error
 func (it *BytesErrorOnce) IsInvalid() bool {
 	return it.HasError()
 }
 
 // IsValid
 //
-//  represents empty error
+//	represents empty error
 func (it *BytesErrorOnce) IsValid() bool {
 	return it.IsEmptyError()
 }
 
 // IsSuccess
 //
-//  represents empty error
+//	represents empty error
 func (it *BytesErrorOnce) IsSuccess() bool {
 	return it.IsEmptyError()
 }
 
 // IsFailed
 //
-//  represents has error
+//	represents has error
 func (it *BytesErrorOnce) IsFailed() bool {
 	return !it.IsEmptyError()
 }

@@ -30,10 +30,10 @@ func (it newAttributeCreator) Default(
 // "rwx" should be put for attributes.
 //
 // Examples:
-//  - read enable all disable    : "r--"
-//  - write enable all disable   : "-w-"
-//  - execute enable all disable : "--x"
-//  - all enabled                : "rwx"
+//   - read enable all disable    : "r--"
+//   - write enable all disable   : "-w-"
+//   - execute enable all disable : "--x"
+//   - all enabled                : "rwx"
 func (it newAttributeCreator) UsingRwxString(
 	rwx string,
 ) Attribute {
@@ -56,7 +56,7 @@ func (it newAttributeCreator) UsingRwxString(
 
 // UsingByteMust
 //
-//  Byte can be at most 0 to 7
+//	Byte can be at most 0 to 7
 //
 // 1 - Execute true
 // 2 - Write true
@@ -67,7 +67,8 @@ func (it newAttributeCreator) UsingRwxString(
 // 7 - Read + Write + Execute all true
 //
 // Warning:
-//  Panics if more than 7
+//
+//	Panics if more than 7
 func (it newAttributeCreator) UsingByteMust(v7 byte) Attribute {
 	attr, err := it.UsingByte(v7)
 
@@ -80,7 +81,7 @@ func (it newAttributeCreator) UsingByteMust(v7 byte) Attribute {
 
 // UsingByte
 //
-//  Byte can be at most 0 to 7
+//	Byte can be at most 0 to 7
 //
 // 1 - Execute true
 // 2 - Write true
@@ -91,7 +92,8 @@ func (it newAttributeCreator) UsingByteMust(v7 byte) Attribute {
 // 7 - Read + Write + Execute all true
 //
 // Warning:
-//  Panics if more than 7
+//
+//	Panics if more than 7
 func (it newAttributeCreator) UsingByte(v7 byte) (Attribute, error) {
 	if ReadWriteExecute.IsGreaterThan(v7) {
 		return Attribute{}, errcore.
@@ -121,7 +123,8 @@ func (it newAttributeCreator) UsingByte(v7 byte) (Attribute, error) {
 // safe because converting AttrVariant should never exceed 7
 //
 // Warning:
-//  Panics if more than 7
+//
+//	Panics if more than 7
 func (it newAttributeCreator) UsingVariantMust(v AttrVariant) Attribute {
 	return it.UsingByteMust(v.Value())
 }

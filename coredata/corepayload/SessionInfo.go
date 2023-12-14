@@ -19,9 +19,10 @@ func (it *SessionInfo) IdentifierInteger() int {
 		return constants.InvalidValue
 	}
 
-	idInt, _ := converters.StringToIntegerWithDefault(
+	idInt, _ := converters.StringTo.IntegerWithDefault(
 		it.Id,
-		constants.InvalidValue)
+		constants.InvalidValue,
+	)
 
 	return idInt
 }

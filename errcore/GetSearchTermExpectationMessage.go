@@ -8,30 +8,33 @@ import (
 
 func GetSearchTermExpectationMessage(
 	counter int,
+	header string,
 	expectationMessage string,
 	lineProcessingIndex int,
-	contentProcessed interface{},
-	searchTermProcessed interface{},
+	actual interface{},
+	expected interface{},
 	additionalInfo interface{}, // can be nil
 ) string {
 	if additionalInfo == nil {
 		return fmt.Sprintf(
 			msgformats.PrintHeaderForSearchWithActualAndExpectedProcessedWithoutAdditionalFormat,
 			counter,
+			header,
 			expectationMessage,
 			lineProcessingIndex,
-			contentProcessed,
-			searchTermProcessed,
+			actual,
+			expected,
 		)
 	}
 
 	return fmt.Sprintf(
 		msgformats.PrintHeaderForSearchWithActualAndExpectedProcessedFormat,
 		counter,
+		header,
 		expectationMessage,
 		lineProcessingIndex,
-		contentProcessed,
-		searchTermProcessed,
+		actual,
+		expected,
 		additionalInfo,
 	)
 }

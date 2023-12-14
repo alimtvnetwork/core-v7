@@ -37,7 +37,7 @@ func (it Variant) String() string {
 
 // ExpandOctalByte
 //
-//  returns byte values at most 7 for each.
+//	returns byte values at most 7 for each.
 func (it Variant) ExpandOctalByte() (r7, w7, x7 byte) {
 	return ExpandCharRwx(string(it))
 }

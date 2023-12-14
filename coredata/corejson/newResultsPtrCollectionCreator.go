@@ -8,10 +8,10 @@ type newResultsPtrCollectionCreator struct{}
 
 // UnmarshalUsingBytes
 //
-//  Aka. alias for DeserializeUsingBytes
+//	Aka. alias for DeserializeUsingBytes
 //
-//  Should be used when ResultsPtrCollection itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when ResultsPtrCollection itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultsPtrCollectionCreator) UnmarshalUsingBytes(
 	deserializingBytes []byte,
 ) (*ResultsPtrCollection, error) {
@@ -20,8 +20,8 @@ func (it newResultsPtrCollectionCreator) UnmarshalUsingBytes(
 
 // DeserializeUsingBytes
 //
-//  Should be used when ResultsPtrCollection itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when ResultsPtrCollection itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newResultsPtrCollectionCreator) DeserializeUsingBytes(
 	deserializingBytes []byte,
 ) (*ResultsPtrCollection, error) {

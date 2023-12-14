@@ -8,20 +8,12 @@ func (it *emptyCreator) Collection() *Collection {
 	}
 }
 
-func (it *emptyCreator) CollectionPtr() *CollectionPtr {
-	return &CollectionPtr{
-		items: []*string{},
-	}
-}
-
 func (it *emptyCreator) LinkedList() *LinkedList {
 	return &LinkedList{}
 }
 
 func (it *emptyCreator) SimpleSlice() *SimpleSlice {
-	return &SimpleSlice{
-		Items: nil,
-	}
+	return New.SimpleSlice.Empty()
 }
 
 func (it *emptyCreator) KeyAnyValuePair() *KeyAnyValuePair {
@@ -34,7 +26,7 @@ func (it *emptyCreator) KeyValuePair() *KeyValuePair {
 
 func (it *emptyCreator) KeyValueCollection() *KeyValueCollection {
 	return &KeyValueCollection{
-		KeyValuePairs: []*KeyValuePair{},
+		KeyValuePairs: []KeyValuePair{},
 	}
 }
 
@@ -85,12 +77,6 @@ func (it *emptyCreator) CharCollectionMap() *CharCollectionMap {
 func (it *emptyCreator) KeyValuesCollection() *KeyValueCollection {
 	return &KeyValueCollection{
 		KeyValuePairs: nil,
-	}
-}
-
-func (it *emptyCreator) CollectionsOfCollectionPtr() *CollectionsOfCollectionPtr {
-	return &CollectionsOfCollectionPtr{
-		items: nil,
 	}
 }
 

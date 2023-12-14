@@ -3,21 +3,28 @@ package internalpathextender
 // PathInfoer
 //
 // FullPath:
-//  - Refers to the FullPath (dir or filename through absolute path).
+//   - Refers to the FullPath (dir or filename through absolute path).
+//
 // FileName:
-//  - Refers to the file name at the end
+//   - Refers to the file name at the end
+//
 // DirName:
-//  - Refers to the file name at the end
+//   - Refers to the file name at the end
+//
 // Name:
-//  - Refers to the end of name could be file or dir.
+//   - Refers to the end of name could be file or dir.
+//
 // Extension:
-//  - Refers to dot extension (.db, .back etc)
+//   - Refers to dot extension (.db, .back etc)
+//
 // RootDir:
-//  - Refers to root dir where things started from.
+//   - Refers to root dir where things started from.
+//
 // Relative:
-//  - Refers to relative from RootDir
+//   - Refers to relative from RootDir
+//
 // ParentDir:
-//  - Refers to parent dir of the FullPath and different from RootDir
+//   - Refers to parent dir of the FullPath and different from RootDir
 type PathInfoer interface {
 	FullPath() string
 	FileName() string

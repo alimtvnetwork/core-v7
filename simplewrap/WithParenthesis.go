@@ -2,7 +2,7 @@ package simplewrap
 
 import (
 	"fmt"
-
+	
 	"gitlab.com/auk-go/core/constants"
 )
 
@@ -12,5 +12,7 @@ import (
 func WithParenthesis(
 	source interface{},
 ) string {
-	return fmt.Sprintf(constants.ParenthesisWrapFormat, source)
+	return fmt.Sprintf(
+		constants.ParenthesisWrapFormat,
+		toString(source))
 }

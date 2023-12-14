@@ -81,6 +81,7 @@ func (it *FileWithLine) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *FileWithLine) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,

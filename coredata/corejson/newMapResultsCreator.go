@@ -4,10 +4,10 @@ type newMapResultsCreator struct{}
 
 // UnmarshalUsingBytes
 //
-//  Aka. alias for UnmarshalUsingBytes
+//	Aka. alias for UnmarshalUsingBytes
 //
-//  Should be used when MapResults itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when MapResults itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newMapResultsCreator) UnmarshalUsingBytes(
 	deserializingBytes []byte,
 ) (*MapResults, error) {
@@ -16,8 +16,8 @@ func (it newMapResultsCreator) UnmarshalUsingBytes(
 
 // DeserializeUsingBytes
 //
-//  Should be used when MapResults itself is Serialized
-//  and save to somewhere and then unmarshal or deserialize
+//	Should be used when MapResults itself is Serialized
+//	and save to somewhere and then unmarshal or deserialize
 func (it newMapResultsCreator) DeserializeUsingBytes(
 	deserializingBytes []byte,
 ) (*MapResults, error) {

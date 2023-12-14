@@ -21,7 +21,7 @@ func (it *simpleStringTester) Something() (val string, count int) {
 
 	return it.
 			simple.
-			GetPlusSetOnUninitialized("some value " + strconv.Itoa(it.count)),
+			GetSetOnce("some value " + strconv.Itoa(it.count)),
 		it.count
 }
 

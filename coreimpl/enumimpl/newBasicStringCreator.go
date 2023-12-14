@@ -82,7 +82,7 @@ func (it newBasicStringCreator) UsingFirstItemSliceCaseOptions(
 
 // UsingFirstItemSliceAllCases
 //
-//  Includes both cases upper, lower case unmarshalling
+//	Includes both cases upper, lower case unmarshalling
 func (it newBasicStringCreator) UsingFirstItemSliceAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,

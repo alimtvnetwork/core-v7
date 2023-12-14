@@ -4,10 +4,10 @@ import "gitlab.com/auk-go/core/internal/csvinternal"
 
 // TitleSquareCsvMeta
 //
-//  Usages TitleSquareMeta to give the final output
+//	Usages TitleSquareMeta to give the final output
 //
 // Example :
-//  - Title : [Value] (csv meta items)
+//   - Title : [Value] (csv meta items)
 func TitleSquareCsvMeta(
 	title string,
 	value interface{},

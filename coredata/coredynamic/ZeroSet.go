@@ -9,7 +9,7 @@ import "reflect"
 // It only makes all fields to nil or zero values.
 //
 // Warning :
-//  - Must be set as a pointer reflect value.
+//   - Must be set as a pointer reflect value.
 func ZeroSet(rvPointer reflect.Value) {
 	elem := rvPointer.Elem()
 

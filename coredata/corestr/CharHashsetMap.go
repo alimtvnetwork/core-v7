@@ -38,7 +38,8 @@ func (it *CharHashsetMap) HashsetsCollectionByChars(
 	hashsets := make(
 		[]*Hashset,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	for _, char := range chars {
 		hashset := it.HashsetByChar(char)
@@ -63,7 +64,8 @@ func (it *CharHashsetMap) HashsetsCollectionByStringsFirstChar(
 	hashsets := make(
 		[]*Hashset,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	for _, item := range stringItems {
 		char := it.GetChar(item)
@@ -87,7 +89,8 @@ func (it *CharHashsetMap) HashsetsCollection() *HashsetsCollection {
 	hashsets := make(
 		[]Hashset,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	for _, hashset := range it.items {
 		//goland:noinspection ALL
@@ -97,34 +100,29 @@ func (it *CharHashsetMap) HashsetsCollection() *HashsetsCollection {
 	return New.HashsetsCollection.UsingHashsets(hashsets...)
 }
 
-func (it *CharHashsetMap) GetCharOfPtr(
-	str *string,
+func (it *CharHashsetMap) GetCharOf(
+	str string,
 ) byte {
-	if str == nil || *str == "" {
+	if len(str) == 0 {
 		return emptyChar
 	}
 
-	return (*str)[coreindexes.First]
+	return str[coreindexes.First]
 }
 
-func (it *CharHashsetMap) GetCharsPtrGroups(
-	items *[]string,
+func (it *CharHashsetMap) GetCharsGroups(
+	items ...string,
 ) *CharHashsetMap {
-	if items == nil || *items == nil {
+	if len(items) == 0 {
 		return it
 	}
 
-	length := len(*items)
-
-	if length == 0 {
-		return nil
-	}
-
 	hashsetMap := New.CharHashsetMap.Cap(
-		length,
-		length/3)
+		len(items),
+		len(items)/3,
+	)
 
-	return hashsetMap.AddStringsPtr(items)
+	return hashsetMap.AddStrings(items...)
 }
 
 func (it *CharHashsetMap) GetMap() map[byte]*Hashset {
@@ -148,13 +146,15 @@ func (it *CharHashsetMap) SummaryStringLock() string {
 	length := it.LengthLock()
 	hashsetOfHashset := make(
 		[]string,
-		length+1)
+		length+1,
+	)
 
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		it,
 		length,
-		coreindexes.First)
+		coreindexes.First,
+	)
 
 	i := 1
 	for key, hashset := range it.GetCopyMapLock() {
@@ -162,26 +162,30 @@ func (it *CharHashsetMap) SummaryStringLock() string {
 			charHashsetMapSingleItemFormat,
 			i,
 			string(key),
-			hashset.LengthLock())
+			hashset.LengthLock(),
+		)
 
 		i++
 	}
 
 	return strings.Join(
 		hashsetOfHashset,
-		constants.EmptyString)
+		constants.EmptyString,
+	)
 }
 
 func (it *CharHashsetMap) SummaryString() string {
 	hashsetOfHashset := make(
 		[]string,
-		it.Length()+1)
+		it.Length()+1,
+	)
 
 	hashsetOfHashset[coreindexes.First] = fmt.Sprintf(
 		summaryOfCharHashsetMapLengthFormat,
 		it,
 		it.Length(),
-		coreindexes.First)
+		coreindexes.First,
+	)
 
 	i := 1
 	for key, hashset := range it.items {
@@ -189,20 +193,23 @@ func (it *CharHashsetMap) SummaryString() string {
 			charHashsetMapSingleItemFormat,
 			i,
 			string(key),
-			hashset.Length())
+			hashset.Length(),
+		)
 
 		i++
 	}
 
 	return strings.Join(
 		hashsetOfHashset,
-		constants.EmptyString)
+		constants.EmptyString,
+	)
 }
 
 func (it *CharHashsetMap) String() string {
 	hashsetOfHashset := make(
 		[]string,
-		it.Length()*2+1)
+		it.Length()*2+1,
+	)
 
 	hashsetOfHashset[coreindexes.First] =
 		it.SummaryString()
@@ -211,7 +218,8 @@ func (it *CharHashsetMap) String() string {
 	for key, hashset := range it.items {
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapLengthFormat,
-			string(key))
+			string(key),
+		)
 
 		i++
 		hashsetOfHashset[i] = hashset.String()
@@ -220,13 +228,15 @@ func (it *CharHashsetMap) String() string {
 
 	return strings.Join(
 		hashsetOfHashset,
-		constants.EmptyString)
+		constants.EmptyString,
+	)
 }
 
 func (it *CharHashsetMap) StringLock() string {
 	hashsetOfHashset := make(
 		[]string,
-		it.LengthLock()*2+1)
+		it.LengthLock()*2+1,
+	)
 
 	hashsetOfHashset[coreindexes.First] =
 		it.SummaryStringLock()
@@ -236,7 +246,8 @@ func (it *CharHashsetMap) StringLock() string {
 
 		hashsetOfHashset[i] = fmt.Sprintf(
 			charHashsetMapLengthFormat,
-			string(key))
+			string(key),
+		)
 
 		i++
 
@@ -246,7 +257,8 @@ func (it *CharHashsetMap) StringLock() string {
 
 	return strings.Join(
 		hashsetOfHashset,
-		constants.EmptyString)
+		constants.EmptyString,
+	)
 }
 
 func (it *CharHashsetMap) List() *[]string {
@@ -467,8 +479,7 @@ func (it *CharHashsetMap) AddCharCollectionMapItems(
 		return it
 	}
 
-	it.AddStringsPtr(
-		charCollectionMap.List())
+	it.AddStrings(charCollectionMap.List()...)
 
 	return it
 }
@@ -482,7 +493,8 @@ func (it *CharHashsetMap) AddCollectionItems(
 	}
 
 	it.AddStrings(
-		collectionWithDiffStarts.items...)
+		collectionWithDiffStarts.items...,
+	)
 
 	return it
 }
@@ -496,9 +508,10 @@ func (it *CharHashsetMap) AddCollectionItemsAsyncLock(
 		return it
 	}
 
-	go it.AddStringsPtrAsyncLock(
-		&collectionWithDiffStarts.items,
-		onComplete)
+	go it.AddStringsAsyncLock(
+		collectionWithDiffStarts.items,
+		onComplete,
+	)
 
 	return it
 }
@@ -522,17 +535,16 @@ func (it *CharHashsetMap) LengthLock() int {
 	return len(it.items)
 }
 
-func (it *CharHashsetMap) IsEqualsPtrLock(
+func (it *CharHashsetMap) IsEqualsLock(
 	another *CharHashsetMap,
 ) bool {
 	it.Lock()
 	defer it.Unlock()
 
-	return it.IsEqualsPtr(
-		another)
+	return it.IsEquals(another)
 }
 
-func (it *CharHashsetMap) IsEqualsPtr(
+func (it *CharHashsetMap) IsEquals(
 	another *CharHashsetMap,
 ) bool {
 	if another == nil {
@@ -565,7 +577,7 @@ func (it *CharHashsetMap) IsEqualsPtr(
 			return false
 		}
 
-		if !rHashset.IsEqualsPtr(hashset) {
+		if !rHashset.IsEquals(hashset) {
 			return false
 		}
 	}
@@ -618,63 +630,16 @@ func (it *CharHashsetMap) Add(
 	return it
 }
 
-func (it *CharHashsetMap) AddStringPtr(
-	str *string,
-) *CharHashsetMap {
-	char := it.GetCharOfPtr(str)
-
-	hashset, has := it.items[char]
-
-	if has {
-		hashset.AddPtr(str)
-
-		return it
-	}
-
-	newHashset := New.Hashset.Cap(it.eachHashsetCapacity)
-	newHashset.AddPtr(str)
-	it.items[char] = newHashset
-
-	return it
-}
-
-func (it *CharHashsetMap) AddStringPtrLock(
-	str *string,
-) *CharHashsetMap {
-	defer it.Unlock()
-	char := it.GetCharOfPtr(str)
-
-	it.Lock()
-	hashset, has := it.items[char]
-	it.Unlock()
-
-	if has {
-		hashset.AddPtrLock(str)
-
-		return it
-	}
-
-	newHashset := New.Hashset.Cap(it.eachHashsetCapacity)
-	newHashset.AddPtr(str)
-
-	it.Lock()
-	it.items[char] = newHashset
-	it.Unlock()
-
-	return it
-}
-
 // AddSameStartingCharItems Assuming all items starts with same chars
 func (it *CharHashsetMap) AddSameStartingCharItems(
 	char byte,
-	allItemsWithSameChar *[]string,
+	allItemsWithSameChar []string,
 ) *CharHashsetMap {
-	if allItemsWithSameChar == nil ||
-		*allItemsWithSameChar == nil {
+	if len(allItemsWithSameChar) == 0 {
 		return it
 	}
 
-	length := len(*allItemsWithSameChar)
+	length := len(allItemsWithSameChar)
 
 	if length == 0 {
 		return it
@@ -683,47 +648,43 @@ func (it *CharHashsetMap) AddSameStartingCharItems(
 	values, has := it.items[char]
 
 	if has {
-		values.AddStringsPtr(allItemsWithSameChar)
+		values.AddStrings(allItemsWithSameChar)
 
 		return it
 	}
 
 	it.items[char] =
-		New.Hashset.StringsPtr(
-			allItemsWithSameChar)
+		New.Hashset.Strings(
+			allItemsWithSameChar,
+		)
 
 	return it
 }
 
-func (it *CharHashsetMap) AddPtrStringsLock(
-	simpleStrings *[]*string,
+func (it *CharHashsetMap) AddStringsLock(
+	simpleStrings ...string,
 ) *CharHashsetMap {
-	if simpleStrings == nil ||
-		*simpleStrings == nil ||
-		len(*simpleStrings) == 0 {
+	if len(simpleStrings) == 0 {
 		return it
 	}
 
-	for _, item := range *simpleStrings {
+	for _, item := range simpleStrings {
 		foundHashset := it.GetHashsetLock(
-			*item, true)
+			true,
+			item,
+		)
 
-		foundHashset.AddPtrLock(item)
+		foundHashset.AddLock(item)
 	}
 
 	return it
 }
 
-func (it *CharHashsetMap) AddStringsPtrAsyncLock(
-	largeStringsHashset *[]string,
+func (it *CharHashsetMap) AddStringsAsyncLock(
+	largeStringsHashset []string,
 	onComplete OnCompleteCharHashsetMap,
 ) *CharHashsetMap {
-	if largeStringsHashset == nil ||
-		*largeStringsHashset == nil {
-		return it
-	}
-
-	length := len(*largeStringsHashset)
+	length := len(largeStringsHashset)
 
 	if length == 0 {
 		return it
@@ -736,17 +697,19 @@ func (it *CharHashsetMap) AddStringsPtrAsyncLock(
 	if isListIsTooLargeAndHasExistingData {
 		return it.
 			efficientAddOfLargeItems(
-				largeStringsHashset,
-				onComplete)
+				onComplete,
+				largeStringsHashset...,
+			)
 	}
 
 	wg := &sync.WaitGroup{}
 	wg.Add(length)
 
-	for _, item := range *largeStringsHashset {
+	for _, item := range largeStringsHashset {
 		foundHashset := it.GetHashsetLock(
+			true,
 			item,
-			true)
+		)
 
 		go foundHashset.AddWithWgLock(
 			item,
@@ -764,19 +727,19 @@ func (it *CharHashsetMap) AddStringsPtrAsyncLock(
 }
 
 func (it *CharHashsetMap) efficientAddOfLargeItems(
-	largeStringsHashset *[]string,
 	onComplete OnCompleteCharHashsetMap,
+	largeStringsHashset ...string,
 ) *CharHashsetMap {
-	allCharsMap := it.
-		GetCharsPtrGroups(largeStringsHashset)
+	allCharsMap := it.GetCharsGroups(largeStringsHashset...)
 
 	wg := &sync.WaitGroup{}
 	wg.Add(allCharsMap.Length())
 
 	for key, hashset := range allCharsMap.items {
 		foundHashset := it.GetHashsetLock(
+			true,
 			string(key),
-			true)
+		)
 
 		go foundHashset.AddHashsetWgLock(
 			hashset,
@@ -793,22 +756,6 @@ func (it *CharHashsetMap) efficientAddOfLargeItems(
 	return it
 }
 
-func (it *CharHashsetMap) AddStringsPtr(
-	items *[]string,
-) *CharHashsetMap {
-	if items == nil ||
-		*items == nil ||
-		len(*items) == 0 {
-		return it
-	}
-
-	for _, item := range *items {
-		it.AddStringPtr(&item)
-	}
-
-	return it
-}
-
 func (it *CharHashsetMap) AddStrings(
 	items ...string,
 ) *CharHashsetMap {
@@ -818,7 +765,7 @@ func (it *CharHashsetMap) AddStrings(
 	}
 
 	for _, item := range items {
-		it.AddStringPtr(&item)
+		it.Add(item)
 	}
 
 	return it
@@ -847,15 +794,16 @@ func (it *CharHashsetMap) GetHashset(
 }
 
 func (it *CharHashsetMap) GetHashsetLock(
-	strFirstChar string,
 	isAddNewOnEmpty bool,
+	strFirstChar string,
 ) *Hashset {
 	it.Lock()
 	defer it.Unlock()
 
 	return it.GetHashset(
 		strFirstChar,
-		isAddNewOnEmpty)
+		isAddNewOnEmpty,
+	)
 }
 
 func (it *CharHashsetMap) AddSameCharsCollection(
@@ -867,7 +815,8 @@ func (it *CharHashsetMap) AddSameCharsCollection(
 
 	foundHashset := it.GetHashset(
 		str,
-		false)
+		false,
+	)
 
 	has := foundHashset != nil
 	isAddToHashset := has && !isNilOrEmptyHashsetGiven
@@ -886,7 +835,8 @@ func (it *CharHashsetMap) AddSameCharsCollection(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := New.Hashset.Cap(
-			it.eachHashsetCapacity)
+			it.eachHashsetCapacity,
+		)
 		it.items[char] = newHashset
 
 		return newHashset
@@ -909,7 +859,8 @@ func (it *CharHashsetMap) AddSameCharsHashset(
 
 	foundHashset := it.GetHashset(
 		str,
-		false)
+		false,
+	)
 
 	has := foundHashset != nil
 	isAddToHashset := has && !isNilOrEmptyHashsetGiven
@@ -928,7 +879,8 @@ func (it *CharHashsetMap) AddSameCharsHashset(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := New.Hashset.Cap(
-			it.eachHashsetCapacity)
+			it.eachHashsetCapacity,
+		)
 		it.items[char] = newHashset
 
 		return newHashset
@@ -944,13 +896,13 @@ func (it *CharHashsetMap) AddSameCharsHashset(
 func (it *CharHashsetMap) AddHashsetItems(
 	hashsetWithDiffStarts *Hashset,
 ) *CharHashsetMap {
-	if hashsetWithDiffStarts == nil ||
-		hashsetWithDiffStarts.IsEmpty() {
+	if hashsetWithDiffStarts.IsEmpty() {
 		return it
 	}
 
-	it.AddStringsPtr(
-		hashsetWithDiffStarts.ListPtr())
+	it.AddStrings(
+		hashsetWithDiffStarts.List()...,
+	)
 
 	return it
 }
@@ -964,9 +916,10 @@ func (it *CharHashsetMap) AddHashsetItemsAsyncLock(
 		return it
 	}
 
-	go it.AddStringsPtrAsyncLock(
-		hashsetWithDiffStarts.ListCopyPtrLock(),
-		onComplete)
+	go it.AddStringsAsyncLock(
+		hashsetWithDiffStarts.ListCopyLock(),
+		onComplete,
+	)
 
 	return it
 }
@@ -979,8 +932,9 @@ func (it *CharHashsetMap) AddSameCharsCollectionLock(
 		stringsWithSameStartChar.IsEmpty()
 
 	foundHashset := it.GetHashsetLock(
+		false,
 		str,
-		false)
+	)
 	has := foundHashset != nil
 	isAddToHashset := has &&
 		!isNilOrEmptyHashsetGiven
@@ -991,8 +945,7 @@ func (it *CharHashsetMap) AddSameCharsCollectionLock(
 		list := stringsWithSameStartChar.
 			ListCopyPtrLock()
 
-		foundHashset.
-			AddStringsPtrLock(&list)
+		foundHashset.AddStringsLock(list)
 
 		return foundHashset
 	} else if hasHashsetHoweverNothingToAdd {
@@ -1004,7 +957,8 @@ func (it *CharHashsetMap) AddSameCharsCollectionLock(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := New.Hashset.Cap(
-			it.eachHashsetCapacity)
+			it.eachHashsetCapacity,
+		)
 		it.Lock()
 		it.items[char] = newHashset
 		it.Unlock()
@@ -1032,16 +986,18 @@ func (it *CharHashsetMap) AddHashsetLock(
 		stringsWithSameStartChar.IsEmpty()
 
 	foundHashset := it.GetHashsetLock(
+		false,
 		str,
-		false)
+	)
 	has := foundHashset != nil
 	isAddToHashset := has && !isNilOrEmptyHashsetGiven
 	hasHashsetHoweverNothingToAdd := has && isNilOrEmptyHashsetGiven
 
 	if isAddToHashset {
 		//goland:noinspection GoNilness
-		foundHashset.AddStringsPtrLock(
-			stringsWithSameStartChar.ListPtr())
+		foundHashset.AddStringsLock(
+			stringsWithSameStartChar.List(),
+		)
 
 		return foundHashset
 	} else if hasHashsetHoweverNothingToAdd {
@@ -1054,7 +1010,8 @@ func (it *CharHashsetMap) AddHashsetLock(
 	if isNilOrEmptyHashsetGiven {
 		// create new
 		newHashset := New.Hashset.Cap(
-			it.eachHashsetCapacity)
+			it.eachHashsetCapacity,
+		)
 		it.Lock()
 		it.items[char] = newHashset
 		it.Unlock()

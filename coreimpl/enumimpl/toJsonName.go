@@ -8,7 +8,7 @@ import (
 
 // toJsonName
 //
-//  " + source + " , also take care of any double if available next.
+//	" + source + " , also take care of any double if available next.
 func toJsonName(source interface{}) string {
 	return fmt.Sprintf(
 		constants.SprintValueDoubleQuotationFormat,

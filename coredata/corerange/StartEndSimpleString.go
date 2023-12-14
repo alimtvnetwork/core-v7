@@ -101,7 +101,10 @@ func (it *StartEndSimpleString) RangeInt(minMax *MinMaxInt) *RangeInt {
 }
 
 func (it *StartEndSimpleString) RangeInt16(minMax *MinMaxInt16) *RangeInt16 {
-	return NewRangeInt16(it.StringColon(), constants.Colon, minMax)
+	return NewRangeInt16(
+		it.StringColon(),
+		constants.Colon,
+		minMax)
 }
 
 func (it *StartEndSimpleString) RangeInt8(minMax *MinMaxInt8) *RangeInt8 {

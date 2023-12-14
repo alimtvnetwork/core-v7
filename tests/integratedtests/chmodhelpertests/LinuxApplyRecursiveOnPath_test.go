@@ -6,33 +6,37 @@ import (
 	"github.com/smartystreets/goconvey/convey"
 	"gitlab.com/auk-go/core/chmodhelper"
 	"gitlab.com/auk-go/core/coretests"
-	"gitlab.com/auk-go/core/tests/testwrappers/chmodhelpertestwrappers"
 )
 
 func Test_LinuxApplyRecursiveOnPath_Unix(t *testing.T) {
 	coretests.SkipOnWindows(t)
 
-	for _, testCase := range chmodhelpertestwrappers.RwxInstructionsUnixApplyRecursivelyTestCases {
+	for _, testCase := range rwxInstructionsUnixApplyRecursivelyTestCases {
 		// Arrange
 		caseMessenger := testCase.AsTestCaseMessenger()
 		testHeader := coretests.GetTestHeader(
-			caseMessenger)
+			caseMessenger,
+		)
 		chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 			true,
-			&testCase.CreatePaths)
+			testCase.CreatePaths,
+		)
 
 		// Act
 		actualErr := linuxApplyRecursivePathInstructions(&testCase)
 		testCase.SetActual(actualErr)
 
 		// Assert
-		convey.Convey(testHeader, t, func() {
-			convey.So(actualErr, convey.ShouldBeNil)
-		})
+		convey.Convey(
+			testHeader, t, func() {
+				convey.So(actualErr, convey.ShouldBeNil)
+			},
+		)
 
 		assertTestCaseChmodAsExpected(
 			t,
 			&testCase,
-			testHeader)
+			testHeader,
+		)
 	}
 }

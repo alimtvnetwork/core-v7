@@ -10,7 +10,8 @@ import (
 // prettyJson
 //
 // Warning:
-//  swallows error
+//
+//	swallows error
 func prettyJson(anyItem interface{}) string {
 	if anyItem == nil {
 		return ""

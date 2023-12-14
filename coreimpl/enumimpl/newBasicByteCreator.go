@@ -186,7 +186,7 @@ func (it newBasicByteCreator) UsingFirstItemSliceCaseOptions(
 
 // UsingFirstItemSliceAllCases
 //
-//  Includes both cases upper, lower case unmarshalling
+//	Includes both cases upper, lower case unmarshalling
 func (it newBasicByteCreator) UsingFirstItemSliceAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,
@@ -257,7 +257,7 @@ func (it newBasicByteCreator) DefaultWithAliasMap(
 
 // DefaultAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicByteCreator) DefaultAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,
@@ -272,7 +272,7 @@ func (it newBasicByteCreator) DefaultAllCases(
 
 // DefaultWithAliasMapAllCases
 //
-//  includes both lowercase and uppercase parsing.
+//	includes both lowercase and uppercase parsing.
 func (it newBasicByteCreator) DefaultWithAliasMapAllCases(
 	firstItem interface{},
 	indexedSliceWithValues []string,

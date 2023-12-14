@@ -2,7 +2,9 @@ package coreversion
 
 import "gitlab.com/auk-go/core/corecomparator"
 
-func hasDeductUsingNilNess(left *Version, right *Version) (r corecomparator.Compare, isApplicable bool) {
+func hasDeductUsingNilNess(
+	left *Version, right *Version,
+) (r corecomparator.Compare, isApplicable bool) {
 	if left == nil && right == nil {
 		return corecomparator.Equal, true
 	}

@@ -1,6 +1,7 @@
 package regconsts
 
 // Taken from https://bit.ly/2X3EFcS
+//
 //goland:noinspection ALL
 const (
 	Alpha                                  = "^[a-zA-Z]+$"                                                                                                                                                                                                                             // Alpha represents regular expression for alpha characters

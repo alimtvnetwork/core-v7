@@ -15,10 +15,11 @@ func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
 	coretests.SkipOnWindows(t)
 
 	// Setup
-	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
+	createPathInstructions := pathInstructionsV2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
-		&createPathInstructions)
+		createPathInstructions,
+	)
 
 	for caseIndex, testCase := range chmodhelpertestwrappers.VerifyRwxChmodUsingRwxInstructionsTestCases {
 		// Arrange
@@ -30,7 +31,8 @@ func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
 		// Act
 		actualErr := executor.VerifyRwxModifiersDirect(
 			false,
-			testCase.Locations...)
+			testCase.Locations...,
+		)
 
 		expectation := &errcore.ExpectationMessageDef{
 			CaseIndex:      caseIndex,
@@ -42,13 +44,16 @@ func Test_VerifyRwxChmodUsingRwxInstructions_Unix(t *testing.T) {
 		}
 
 		// Assert
-		Convey(testCase.Header, t, func() {
-			isEqual := coretests.IsErrorNonWhiteSortedEqual(
-				true,
-				actualErr,
-				expectation)
+		Convey(
+			testCase.Header, t, func() {
+				isEqual := coretests.IsErrorNonWhiteSortedEqual(
+					true,
+					actualErr,
+					expectation,
+				)
 
-			So(isEqual, ShouldBeTrue)
-		})
+				So(isEqual, ShouldBeTrue)
+			},
+		)
 	}
 }

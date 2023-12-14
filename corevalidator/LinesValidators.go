@@ -150,7 +150,7 @@ func (it *LinesValidators) IsMatch(
 
 // VerifyFirstDefaultLineNumberError index considers to be the line number
 func (it *LinesValidators) VerifyFirstDefaultLineNumberError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contentsWithLines ...corestr.TextWithLineNumber,
 ) error {
 	if it.IsEmpty() {
@@ -159,9 +159,9 @@ func (it *LinesValidators) VerifyFirstDefaultLineNumberError(
 
 	length := len(contentsWithLines)
 	const funcName = "VerifyFirstDefaultLineNumberError"
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
-	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
+	} else if length == 0 && !params.IsSkipCompareOnActualEmpty {
 		return errcore.MeaningfulErrorWithData(
 			errcore.ValidataionFailedType,
 			funcName,
@@ -183,7 +183,7 @@ func (it *LinesValidators) VerifyFirstDefaultLineNumberError(
 }
 
 func (it *LinesValidators) AllVerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contentsWithLines ...corestr.TextWithLineNumber,
 ) error {
 	if it.IsEmpty() {
@@ -192,9 +192,9 @@ func (it *LinesValidators) AllVerifyError(
 
 	length := len(contentsWithLines)
 	const funcName = "AllVerifyError"
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
-	} else if length == 0 && !params.IsIgnoreCompareOnActualInputEmpty {
+	} else if length == 0 && !params.IsSkipCompareOnActualEmpty {
 		return errcore.MeaningfulErrorWithData(
 			errcore.ValidataionFailedType,
 			funcName,

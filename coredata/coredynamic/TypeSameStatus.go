@@ -12,8 +12,8 @@ func TypeSameStatus(
 	leftType := reflect.TypeOf(left)
 	rightType := reflect.TypeOf(right)
 
-	isLeftUnknownNull := reflectinternal.IsNull(leftType)
-	isRightUnknownNull := reflectinternal.IsNull(rightType)
+	isLeftUnknownNull := reflectinternal.Is.Null(leftType)
+	isRightUnknownNull := reflectinternal.Is.Null(rightType)
 
 	return TypeStatus{
 		IsSame:             leftType == rightType,

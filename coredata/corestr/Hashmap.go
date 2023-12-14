@@ -49,15 +49,6 @@ func (it *Hashmap) IsEmptyLock() bool {
 	return it.IsEmpty()
 }
 
-func (it *Hashmap) AddOrUpdatePtr(
-	key, val *string,
-) *Hashmap {
-	it.items[*key] = *val
-	it.hasMapUpdated = true
-
-	return it
-}
-
 func (it *Hashmap) AddOrUpdateWithWgLock(
 	key, val string,
 	group *sync.WaitGroup,
@@ -69,19 +60,6 @@ func (it *Hashmap) AddOrUpdateWithWgLock(
 
 	it.Unlock()
 	group.Done()
-
-	return it
-}
-
-func (it *Hashmap) AddOrUpdatePtrLock(
-	key, val *string,
-) *Hashmap {
-	it.Lock()
-
-	it.items[*key] = *val
-	it.hasMapUpdated = true
-
-	it.Unlock()
 
 	return it
 }
@@ -174,7 +152,8 @@ func (it *Hashmap) SetBySplitter(
 	splitter, line string,
 ) (isAddedNewly bool) {
 	splits := strings.SplitN(
-		line, splitter, constants.Two)
+		line, splitter, constants.Two,
+	)
 
 	if len(splits) >= 2 {
 		// all okay
@@ -186,15 +165,26 @@ func (it *Hashmap) SetBySplitter(
 }
 
 func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
-	keys, values *[]string, wg *sync.WaitGroup,
+	wg *sync.WaitGroup,
+	keys, values []string,
 ) *Hashmap {
-	if keys == nil || values == nil {
+	if len(keys) != len(values) {
+		panic(
+			fmt.Sprintf(
+				"cannot add keys (%d) and values (%d) with different lengths",
+				len(keys),
+				len(values),
+			),
+		)
+	}
+
+	if len(keys) == 0 {
 		return it
 	}
 
 	it.Lock()
-	for i, key := range *keys {
-		it.items[key] = (*values)[i]
+	for i, key := range keys {
+		it.items[key] = values[i]
 	}
 
 	it.hasMapUpdated = true
@@ -204,48 +194,14 @@ func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
 	return it
 }
 
-func (it *Hashmap) AddOrUpdateStringsPtr(
-	keys, values *[]string,
-) *Hashmap {
-	if keys == nil || values == nil {
-		return it
-	}
-
-	for i, key := range *keys {
-		it.items[key] = (*values)[i]
-	}
-
-	it.hasMapUpdated = true
-
-	return it
-}
-
-func (it *Hashmap) AddOrUpdateStringsPtrLock(
-	keys, values *[]string,
-) *Hashmap {
-	if keys == nil || values == nil {
-		return it
-	}
-
-	it.Lock()
-	for i, key := range *keys {
-		it.items[key] = (*values)[i]
-	}
-
-	it.hasMapUpdated = true
-	it.Unlock()
-
-	return it
-}
-
 func (it *Hashmap) AddOrUpdateHashmap(
-	hashmap2 *Hashmap,
+	nextHashmap *Hashmap,
 ) *Hashmap {
-	if hashmap2 == nil {
+	if nextHashmap == nil {
 		return it
 	}
 
-	for key, val := range hashmap2.items {
+	for key, val := range nextHashmap.items {
 		it.items[key] = val
 	}
 
@@ -270,22 +226,6 @@ func (it *Hashmap) AddOrUpdateMap(
 	return it
 }
 
-func (it *Hashmap) AddOrUpdateMapPtr(
-	itemsMap *map[string]string,
-) *Hashmap {
-	if itemsMap == nil || len(*itemsMap) == 0 {
-		return it
-	}
-
-	for key, val := range *itemsMap {
-		it.items[key] = val
-	}
-
-	it.hasMapUpdated = true
-
-	return it
-}
-
 func (it *Hashmap) AddsOrUpdates(
 	KeyValuePair ...KeyValuePair,
 ) *Hashmap {
@@ -302,14 +242,14 @@ func (it *Hashmap) AddsOrUpdates(
 	return it
 }
 
-func (it *Hashmap) AddOrUpdateKeyAnyValsPtr(
-	pairs *[]KeyAnyValuePair,
+func (it *Hashmap) AddOrUpdateKeyAnyValues(
+	pairs ...KeyAnyValuePair,
 ) *Hashmap {
-	if pairs == nil || *pairs == nil {
+	if len(pairs) == 0 {
 		return it
 	}
 
-	for _, pair := range *pairs {
+	for _, pair := range pairs {
 		it.items[pair.Key] = pair.ValueString()
 	}
 
@@ -318,14 +258,14 @@ func (it *Hashmap) AddOrUpdateKeyAnyValsPtr(
 	return it
 }
 
-func (it *Hashmap) AddOrUpdateKeyValsPtr(
-	pairs *[]KeyValuePair,
+func (it *Hashmap) AddOrUpdateKeyValues(
+	pairs ...KeyValuePair,
 ) *Hashmap {
-	if pairs == nil || *pairs == nil {
+	if len(pairs) == 0 {
 		return it
 	}
 
-	for _, pair := range *pairs {
+	for _, pair := range pairs {
 		it.items[pair.Key] = pair.Value
 	}
 
@@ -459,7 +399,8 @@ func (it *Hashmap) ConcatNew(
 
 	for _, hashmap2 := range hashmaps {
 		newHashmap.AddOrUpdateHashmap(
-			hashmap2)
+			hashmap2,
+		)
 	}
 
 	return newHashmap
@@ -467,7 +408,7 @@ func (it *Hashmap) ConcatNew(
 
 func (it *Hashmap) ConcatNewUsingMaps(
 	isCloneOnEmptyAsWell bool,
-	hashmaps ...*map[string]string,
+	hashmaps ...map[string]string,
 ) *Hashmap {
 	if len(hashmaps) == 0 {
 		return New.Hashmap.UsingMapOptions(
@@ -484,7 +425,7 @@ func (it *Hashmap) ConcatNewUsingMaps(
 			continue
 		}
 
-		length += len(*h)
+		length += len(h)
 	}
 
 	newHashmap := New.Hashmap.UsingMapOptions(
@@ -495,9 +436,10 @@ func (it *Hashmap) ConcatNewUsingMaps(
 
 	newHashmap.AddOrUpdateHashmap(it)
 
-	for _, hashmap2 := range hashmaps {
-		newHashmap.AddOrUpdateMapPtr(
-			hashmap2)
+	for _, nextMap := range hashmaps {
+		newHashmap.AddOrUpdateMap(
+			nextMap,
+		)
 	}
 
 	return newHashmap
@@ -515,6 +457,20 @@ func (it *Hashmap) AddOrUpdateLock(key, value string) *Hashmap {
 
 func (it *Hashmap) Has(key string) bool {
 	_, isFound := it.items[key]
+
+	return isFound
+}
+
+func (it *Hashmap) Contains(key string) bool {
+	_, isFound := it.items[key]
+
+	return isFound
+}
+
+func (it *Hashmap) ContainsLock(key string) bool {
+	it.Lock()
+	_, isFound := it.items[key]
+	it.Unlock()
 
 	return isFound
 }
@@ -541,8 +497,8 @@ func (it *Hashmap) HasLock(key string) bool {
 	return isFound
 }
 
-func (it *Hashmap) HasAllStringsPtr(keys *[]string) bool {
-	for _, key := range *keys {
+func (it *Hashmap) HasAllStrings(keys ...string) bool {
+	for _, key := range keys {
 		_, isFound := it.items[key]
 
 		if !isFound {
@@ -579,7 +535,7 @@ func (it *Hashmap) HasAllCollectionItems(
 		return false
 	}
 
-	return it.HasAllStringsPtr(collection.ListPtr())
+	return it.HasAllStrings(collection.List()...)
 }
 
 func (it *Hashmap) HasAll(keys ...string) bool {
@@ -634,7 +590,8 @@ func (it *Hashmap) GetKeysFilteredItems(
 	filteredList := make(
 		[]string,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	i := 0
 	for key := range it.items {
@@ -648,7 +605,8 @@ func (it *Hashmap) GetKeysFilteredItems(
 
 		filteredList = append(
 			filteredList,
-			result)
+			result,
+		)
 
 		if isBreak {
 			return &filteredList
@@ -669,7 +627,8 @@ func (it *Hashmap) GetKeysFilteredCollection(
 	filteredList := make(
 		[]string,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	i := 0
 	for key := range it.items {
@@ -682,16 +641,19 @@ func (it *Hashmap) GetKeysFilteredCollection(
 
 		filteredList = append(
 			filteredList,
-			result)
+			result,
+		)
 
 		if isBreak {
 			return New.Collection.StringsOptions(
-				false, filteredList)
+				false, filteredList,
+			)
 		}
 	}
 
 	return New.Collection.StringsOptions(
-		false, filteredList)
+		false, filteredList,
+	)
 }
 
 func (it *Hashmap) Items() map[string]string {
@@ -719,34 +681,34 @@ func (it *Hashmap) ItemsCopyLock() *map[string]string {
 
 func (it *Hashmap) ValuesCollection() *Collection {
 	return New.Collection.StringsOptions(
-		false, it.ValuesList())
+		false, it.ValuesList(),
+	)
 }
 
 func (it *Hashmap) ValuesHashset() *Hashset {
-	return New.Hashset.StringsPtr(
-		it.ValuesListPtr())
+	return New.Hashset.Strings(
+		it.ValuesList(),
+	)
 }
 
 func (it *Hashmap) ValuesCollectionLock() *Collection {
 	return New.Collection.StringsOptions(
-		false, *it.ValuesListCopyPtrLock())
+		false, it.ValuesListCopyLock(),
+	)
 }
 
 func (it *Hashmap) ValuesHashsetLock() *Hashset {
-	return New.Hashset.StringsPtr(
-		it.ValuesListCopyPtrLock())
+	return New.Hashset.Strings(
+		it.ValuesListCopyLock(),
+	)
 }
 
 func (it *Hashmap) ValuesList() []string {
-	return *it.ValuesListPtr()
-}
-
-func (it *Hashmap) ValuesListPtr() *[]string {
 	if it.hasMapUpdated || it.cachedList == nil {
 		it.setCached()
 	}
 
-	return &it.cachedList
+	return it.cachedList
 }
 
 func (it *Hashmap) KeysValuesCollection() (
@@ -764,8 +726,8 @@ func (it *Hashmap) KeysValuesCollection() (
 	}()
 
 	go func() {
-		values = New.Collection.StringsPtr(
-			it.ValuesListPtr(),
+		values = New.Collection.Strings(
+			it.ValuesList(),
 		)
 
 		wg.Done()
@@ -893,12 +855,12 @@ func (it *Hashmap) KeysLock() []string {
 
 // ValuesListCopyPtrLock
 //
-//  a slice must be returned
-func (it *Hashmap) ValuesListCopyPtrLock() *[]string {
+//	a slice must be returned
+func (it *Hashmap) ValuesListCopyLock() []string {
 	it.Lock()
 	defer it.Unlock()
 
-	return &(*it.ValuesListPtr())
+	return it.ValuesList()
 }
 
 func (it *Hashmap) setCached() {
@@ -1035,7 +997,8 @@ func (it *Hashmap) String() string {
 	return commonJoiner +
 		strings.Join(
 			it.ValuesList(),
-			commonJoiner)
+			commonJoiner,
+		)
 }
 
 func (it *Hashmap) StringLock() string {
@@ -1048,8 +1011,9 @@ func (it *Hashmap) StringLock() string {
 
 	return commonJoiner +
 		strings.Join(
-			*it.ValuesListPtr(),
-			commonJoiner)
+			it.ValuesList(),
+			commonJoiner,
+		)
 }
 
 // GetValuesExceptKeysInHashset Get all Collection except the mentioned ones.
@@ -1059,15 +1023,16 @@ func (it *Hashmap) StringLock() string {
 // Set B = anotherHashset given in parameters.
 func (it *Hashmap) GetValuesExceptKeysInHashset(
 	anotherHashset *Hashset,
-) *[]string {
+) []string {
 	if anotherHashset == nil || anotherHashset.IsEmpty() {
-		return it.ValuesListPtr()
+		return it.ValuesList()
 	}
 
 	finalList := make(
 		[]string,
 		0,
-		it.Length())
+		it.Length(),
+	)
 
 	for key, value := range it.items {
 		if anotherHashset.Has(key) {
@@ -1076,10 +1041,11 @@ func (it *Hashmap) GetValuesExceptKeysInHashset(
 
 		finalList = append(
 			finalList,
-			value)
+			value,
+		)
 	}
 
-	return &finalList
+	return finalList
 }
 
 // GetValuesKeysExcept Get all items except the mentioned ones.
@@ -1088,17 +1054,19 @@ func (it *Hashmap) GetValuesExceptKeysInHashset(
 // Set A = this Hashmap
 // Set B = items given in parameters.
 func (it *Hashmap) GetValuesKeysExcept(
-	items *[]string,
-) *[]string {
+	items []string,
+) []string {
 	if items == nil {
-		return it.ValuesListPtr()
+		return it.ValuesList()
 	}
 
-	newCollection := New.Hashset.StringsPtr(
-		items)
+	newCollection := New.Hashset.Strings(
+		items,
+	)
 
 	return it.GetValuesExceptKeysInHashset(
-		newCollection)
+		newCollection,
+	)
 }
 
 // GetAllExceptCollection Get all Hashmap items except the mentioned ones in collection.
@@ -1108,36 +1076,21 @@ func (it *Hashmap) GetValuesKeysExcept(
 // Set B = collection given in parameters.
 func (it *Hashmap) GetAllExceptCollection(
 	collection *Collection,
-) *[]string {
+) []string {
 	if collection == nil {
-		return it.ValuesListPtr()
+		return it.ValuesList()
 	}
 
 	return it.GetValuesExceptKeysInHashset(
-		collection.HashsetAsIs())
-}
-
-// GetAllExceptCollectionPtr Get all items except the mentioned ones in collectionPtr.
-// Always returns a copy of new strings.
-// It is like set A - B
-// Set A = this Hashmap
-// Set B = collectionPtr given in parameters.
-func (it *Hashmap) GetAllExceptCollectionPtr(
-	collectionPtr *CollectionPtr,
-) *[]string {
-	if collectionPtr == nil {
-		return it.ValuesListPtr()
-	}
-
-	return it.GetValuesExceptKeysInHashset(
-		collectionPtr.HashsetAsIs())
+		collection.HashsetAsIs(),
+	)
 }
 
 // Join values
 func (it *Hashmap) Join(
 	separator string,
 ) string {
-	return strings.Join(*it.ValuesListPtr(), separator)
+	return strings.Join(it.ValuesList(), separator)
 }
 
 func (it *Hashmap) JoinKeys(
@@ -1213,13 +1166,16 @@ func (it *Hashmap) ToError(sep string) error {
 
 func (it *Hashmap) ToDefaultError() error {
 	return errcore.SliceError(
-		constants.NewLineUnix, it.KeyValStringLines())
+		constants.NewLineUnix, it.KeyValStringLines(),
+	)
 }
 
 func (it *Hashmap) KeyValStringLines() *[]string {
-	return it.ToStringsUsingCompiler(func(key, val string) string {
-		return key + constants.HyphenAngelRight + val
-	})
+	return it.ToStringsUsingCompiler(
+		func(key, val string) string {
+			return key + constants.HyphenAngelRight + val
+		},
+	)
 }
 
 func (it *Hashmap) Clear() *Hashmap {

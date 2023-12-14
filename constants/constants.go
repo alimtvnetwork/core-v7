@@ -435,8 +435,6 @@ const (
 	WhereClauseStart                         = " WHERE "
 	DoubleStars                              = "**"
 	Export                                   = "export"
-	ProductName                              = "Cimux"
-	ProductNameLower                         = "cimux"
 	RedisDefaultAddress                      = "localhost:6379"
 	DefaultConcurrency                       = 10
 	DefaultMaxTrySmall                       = 3
@@ -483,7 +481,7 @@ const (
 	LogLowerString                           = "log"
 	JsonLowerString                          = "json"
 	AvailableLowerString                     = "available"
-	DefaultString                            = "Default"
+	DefaultString                            = "Prefix"
 	AllCapitalDefaultString                  = "DEFAULT"
 	Localhost                                = "localhost"
 	LocalhostPublicPort                      = "localhost:80"
@@ -493,4 +491,5 @@ const (
 	DotStringTitleCase                       = ".String"
 	UnknownStringType                        = "Unknown type.String"
 	PayloadsFieldName                        = "Payloads"
+	NewLineBulletWithSpaceIndent             = "\n    - "
 )

@@ -1,7 +1,5 @@
 package main
 
-import "strconv"
-
 func main() {
 	// x := corestr.SimpleSlice{Items: []string{"a", "b"}}
 	// result := x.Json()
@@ -59,10 +57,12 @@ func main() {
 	// fmt.Println(issetter.True.AllNameValues())
 
 	// SimpleStringOnceChecker(100)
-	x := 65
-	println(strconv.Itoa(x))
+	// x := 65
+	// println(strconv.Itoa(x))
 	// readWriteTest01()
 	// infoCreateExample01()
 	// lazyRegExTester01()
 	// fmt.Println(bytetype.New(1).StringValue())
+
+	unitTestGenerator{}.Generate()
 }

@@ -40,9 +40,9 @@ func (it *HashsetsCollection) List() []*Hashset {
 	return it.items
 }
 
-func (it *HashsetsCollection) StringsList() *[]string {
+func (it *HashsetsCollection) StringsList() []string {
 	if it.IsEmpty() {
-		return constants.EmptyStringsPtr
+		return []string{}
 	}
 
 	completeLength := 0
@@ -60,7 +60,7 @@ func (it *HashsetsCollection) StringsList() *[]string {
 		}
 	}
 
-	return &stringsList
+	return stringsList
 }
 
 // HasAll items returns false
@@ -152,7 +152,8 @@ func (it *HashsetsCollection) Add(
 ) *HashsetsCollection {
 	it.items = append(
 		it.items,
-		hashset)
+		hashset,
+	)
 
 	return it
 }
@@ -196,7 +197,8 @@ func (it *HashsetsCollection) Adds(
 
 		it.items = append(
 			it.items,
-			hashset)
+			hashset,
+		)
 	}
 
 	return it
@@ -250,7 +252,7 @@ func (it *HashsetsCollection) IsEqualPtr(another *HashsetsCollection) bool {
 	for i, hashset := range it.items {
 		anotherHashset := another.items[i]
 
-		if !hashset.IsEqualsPtr(anotherHashset) {
+		if !hashset.IsEquals(anotherHashset) {
 			return false
 		}
 	}
@@ -330,15 +332,17 @@ func (it *HashsetsCollection) String() string {
 
 	return strings.Join(
 		strList,
-		"")
+		"",
+	)
 }
 
 func (it *HashsetsCollection) Join(
 	separator string,
 ) string {
 	return strings.Join(
-		*it.StringsList(),
-		separator)
+		it.StringsList(),
+		separator,
+	)
 }
 
 func (it *HashsetsCollection) Serialize() ([]byte, error) {

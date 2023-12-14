@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
+	
 	"gitlab.com/auk-go/core/constants"
 	"gitlab.com/auk-go/core/coreimpl/enumimpl/enumtype"
 	"gitlab.com/auk-go/core/coreinterface/enuminf"
@@ -15,15 +15,15 @@ import (
 
 // Value
 //
-//  Used evaluate lazy boolean valuesNames.
+//	Used evaluate lazy boolean valuesNames.
 //
 // Values:
-//  - Uninitialized Value = 0
-//  - True          Value = 1
-//  - False         Value = 2
-//  - Unset         Value = 3
-//  - Set           Value = 4
-//  - Wildcard      Value = 5
+//   - Uninitialized Value = 0
+//   - True          Value = 1
+//   - False         Value = 2
+//   - Unset         Value = 3
+//   - Set           Value = 4
+//   - Wildcard      Value = 5
 type Value byte
 
 const (
@@ -37,11 +37,11 @@ const (
 
 func (it Value) AllNameValues() []string {
 	slice := make([]string, len(valuesNames))
-
+	
 	for i := range valuesNames {
 		slice[i] = Value(i).NameValue()
 	}
-
+	
 	return slice
 }
 
@@ -49,33 +49,33 @@ func (it Value) OnlySupportedErr(names ...string) error {
 	if len(names) == 0 {
 		return nil
 	}
-
+	
 	hashset := toHashset(names...)
 	var unsupportedNames []string
-
+	
 	for _, name := range valuesNames {
 		_, has := hashset[name]
-
+		
 		if !has {
 			unsupportedNames = append(unsupportedNames, name)
 		}
 	}
-
+	
 	if len(unsupportedNames) > 0 {
 		return errors.New(csvinternal.StringsToStringDefault(unsupportedNames...) + " not supported")
 	}
-
+	
 	return nil
-
+	
 }
 
 func (it Value) OnlySupportedMsgErr(message string, names ...string) error {
 	err := it.OnlySupportedErr(names...)
-
+	
 	if err == nil {
 		return nil
 	}
-
+	
 	return errors.New(message + err.Error())
 }
 
@@ -135,37 +135,45 @@ func (it Value) IsLater() bool {
 	return it.IsUndefinedLogically()
 }
 
+// IsNot
+//
+// True for all other values but the given ones. Use it carefully.
+// Negatives are always, use positive ones.
+func (it Value) IsNot(of Value) bool {
+	return it != of
+}
+
 // IsNo
 //
-//  Returns true if False or Unset
+//	Returns true if False or Unset
 func (it Value) IsNo() bool {
 	return falseMap[it]
 }
 
 // IsAsk
 //
-//  Returns true if Uninitialized or Wildcard
+//	Returns true if Uninitialized or Wildcard
 func (it Value) IsAsk() bool {
 	return undefinedMap[it]
 }
 
 // IsIndeterminate
 //
-//  Returns true if Uninitialized or Wildcard
+//	Returns true if Uninitialized or Wildcard
 func (it Value) IsIndeterminate() bool {
 	return undefinedMap[it]
 }
 
 // IsAccept
 //
-//  Returns true if True or Set
+//	Returns true if True or Set
 func (it Value) IsAccept() bool {
 	return trueMap[it]
 }
 
 // IsReject
 //
-//  Returns true if False or Unset
+//	Returns true if False or Unset
 func (it Value) IsReject() bool {
 	return falseMap[it]
 }
@@ -180,7 +188,7 @@ func (it Value) IsSuccess() bool {
 
 // IsSkip
 //
-//  Returns true if Uninitialized or Wildcard
+//	Returns true if Uninitialized or Wildcard
 func (it Value) IsSkip() bool {
 	return undefinedMap[it]
 }
@@ -202,7 +210,7 @@ func (it Value) IsAnyNamesOf(names ...string) bool {
 			return true
 		}
 	}
-
+	
 	return false
 }
 
@@ -240,11 +248,11 @@ func (it Value) Format(format string) (compiled string) {
 		"{name}":      it.Name(),
 		"{value}":     it.ValueString(),
 	}
-
+	
 	for search, replacer := range newMap {
 		format = strings.ReplaceAll(format, search, replacer)
 	}
-
+	
 	return format
 }
 
@@ -380,9 +388,9 @@ func (it *Value) GetSetBoolOnInvalid(
 	if it.IsDefinedBoolean() {
 		return it.IsTrue()
 	}
-
+	
 	*it = GetBool(setterValue)
-
+	
 	return it.IsTrue()
 }
 
@@ -392,9 +400,9 @@ func (it *Value) GetSetBoolOnInvalidFunc(
 	if it.IsDefinedBoolean() {
 		return it.IsTrue()
 	}
-
+	
 	*it = GetBool(setterFunc())
-
+	
 	return it.IsTrue()
 }
 
@@ -416,10 +424,10 @@ func (it *Value) LazyEvaluateBool(
 	if it.IsDefinedBoolean() {
 		return false
 	}
-
+	
 	evaluatorFunc()
 	*it = True
-
+	
 	return it.IsTrue()
 }
 
@@ -433,10 +441,10 @@ func (it *Value) LazyEvaluateSet(
 	if it.IsInitSet() {
 		return false
 	}
-
+	
 	evaluatorFunc()
 	*it = Set
-
+	
 	return it.IsSet()
 }
 
@@ -451,7 +459,7 @@ func (it Value) IsWildcardOrBool(isBool bool) bool {
 	if it.IsWildcard() {
 		return true
 	}
-
+	
 	return isBool
 }
 
@@ -459,11 +467,11 @@ func (it Value) ToByteCondition(trueVal, falseVal, invalid byte) byte {
 	if it.IsTrue() {
 		return trueVal
 	}
-
+	
 	if it.IsFalse() {
 		return falseVal
 	}
-
+	
 	return invalid
 }
 
@@ -471,7 +479,7 @@ func (it Value) ToByteConditionWithWildcard(wildcard, trueVal, falseVal, invalid
 	if it.IsWildcard() {
 		return wildcard
 	}
-
+	
 	return it.ToByteCondition(trueVal, falseVal, invalid)
 }
 
@@ -479,15 +487,16 @@ func (it Value) ToByteConditionWithWildcard(wildcard, trueVal, falseVal, invalid
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputVal
+//	return inputVal
+//
 // else
 //
-//      return v. IsTrue()
+//	return v. IsTrue()
 func (it Value) WildcardApply(inputBool bool) bool {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputBool
 	}
-
+	
 	return it.IsTrue()
 }
 
@@ -495,15 +504,16 @@ func (it Value) WildcardApply(inputBool bool) bool {
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputVal
+//	return inputVal
+//
 // else
 //
-//      return v. IsTrue()
+//	return v. IsTrue()
 func (it Value) WildcardValueApply(inputVal Value) bool {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputVal.IsTrue()
 	}
-
+	
 	return it.IsTrue()
 }
 
@@ -511,15 +521,16 @@ func (it Value) WildcardValueApply(inputVal Value) bool {
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputBool
+//	return inputBool
+//
 // else
 //
-//      return v. IsTrue() || inputBool
+//	return v. IsTrue() || inputBool
 func (it Value) OrBool(inputBool bool) bool {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputBool
 	}
-
+	
 	return it.IsTrue() || inputBool
 }
 
@@ -527,15 +538,16 @@ func (it Value) OrBool(inputBool bool) bool {
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputVal
+//	return inputVal
+//
 // else
 //
-//      return v. IsTrue() || inputVal. IsTrue()
+//	return v. IsTrue() || inputVal. IsTrue()
 func (it Value) OrValue(inputVal Value) bool {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputVal.IsTrue()
 	}
-
+	
 	return it.IsTrue() || inputVal.IsTrue()
 }
 
@@ -543,15 +555,16 @@ func (it Value) OrValue(inputVal Value) bool {
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputVal
+//	return inputVal
+//
 // else
 //
-//      return v. IsTrue() && inputBool
+//	return v. IsTrue() && inputBool
 func (it Value) AndBool(inputBool bool) bool {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputBool
 	}
-
+	
 	return it.IsTrue() && inputBool
 }
 
@@ -559,15 +572,16 @@ func (it Value) AndBool(inputBool bool) bool {
 //
 // if IsWildcard() || IsUnSetOrUninitialized() then
 //
-//      return inputVal
+//	return inputVal
+//
 // else
 //
-//      return GetBool(v. IsTrue() && inputVal. IsTrue())
+//	return GetBool(v. IsTrue() && inputVal. IsTrue())
 func (it Value) And(inputVal Value) Value {
 	if it.IsWildcard() || it.IsUnSetOrUninitialized() {
 		return inputVal
 	}
-
+	
 	return GetBool(it.IsTrue() && inputVal.IsTrue())
 }
 
@@ -598,14 +612,14 @@ func (it Value) IsPositive() bool {
 // IsBetween val >= start &&  val <= end
 func (it Value) IsBetween(start, end byte) bool {
 	val := it.Value()
-
+	
 	return val >= start && val <= end
 }
 
 // IsBetweenInt val >= start &&  val <= end
 func (it Value) IsBetweenInt(start, end int) bool {
 	val := it.Value()
-
+	
 	return val >= byte(start) && val <= byte(end)
 }
 
@@ -676,7 +690,7 @@ func (it Value) GetErrorOnOutOfRange(n byte, msg string) error {
 	if IsOutOfRange(n) {
 		return errors.New(msg)
 	}
-
+	
 	return nil
 }
 
@@ -688,11 +702,11 @@ func (it Value) YesNoMappedValue() string {
 	if it.IsUninitialized() {
 		return constants.EmptyString
 	}
-
+	
 	if it.IsTrueOrSet() {
 		return Yes
 	}
-
+	
 	return No
 }
 
@@ -732,10 +746,10 @@ func (it *Value) UnmarshalJSON(data []byte) error {
 	if data == nil {
 		return defaulterr.UnmarshallingFailedDueToNilOrEmpty
 	}
-
+	
 	str := string(data)
 	val, has := jsonValuesMap[str]
-
+	
 	if !has {
 		//goland:noinspection SpellCheckingInspection
 		return errors.New(
@@ -743,9 +757,9 @@ func (it *Value) UnmarshalJSON(data []byte) error {
 				str +
 				" to issetter.Value")
 	}
-
+	
 	*it = val
-
+	
 	return nil
 }
 
@@ -765,7 +779,7 @@ func (it Value) IsAnyValuesEqual(
 			return true
 		}
 	}
-
+	
 	return false
 }
 
@@ -773,7 +787,7 @@ func (it Value) UnmarshallEnumToValue(
 	jsonUnmarshallingValue []byte,
 ) (byte, error) {
 	err := it.UnmarshalJSON(jsonUnmarshallingValue)
-
+	
 	return it.ValueByte(), err
 }
 
@@ -781,11 +795,11 @@ func (it Value) Deserialize(
 	jsonBytes []byte,
 ) (Value, error) {
 	currentVal, err := it.UnmarshallEnumToValue(jsonBytes)
-
+	
 	if err != nil {
 		return Uninitialized, err
 	}
-
+	
 	return Value(currentVal), err
 }
 

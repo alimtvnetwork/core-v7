@@ -1,18 +1,22 @@
 package enumimpl
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func toStringsSliceOfDiffMap(diffMap DynamicMap) (diffSlice []string) {
 	isString := diffMap.IsValueString()
 	isNumber := !isString
 	slice := make([]string, diffMap.Length())
+	spaceIndent := strings.Repeat(" ", 2)
 
 	if isNumber {
 		sortedKeyValueIntegers := diffMap.SortedKeyValues()
 		for index, keyValInteger := range sortedKeyValueIntegers {
 			valueString := strconv.Itoa(keyValInteger.ValueInteger)
 			line := keyValInteger.WrapKey() + ":" + valueString
-			slice[index] = line
+			slice[index] = spaceIndent + line
 		}
 
 		return slice
@@ -23,7 +27,7 @@ func toStringsSliceOfDiffMap(diffMap DynamicMap) (diffSlice []string) {
 	for index, anyKeyVal := range sortedKeysAnyValues {
 		line := anyKeyVal.WrapKey() + ":" +
 			anyKeyVal.WrapValue()
-		slice[index] = line
+		slice[index] = spaceIndent + line
 	}
 
 	return slice

@@ -6,14 +6,15 @@ import "gitlab.com/auk-go/core/constants"
 //
 // Owner, Group, Other:
 // String Index Values
-//  - 0: 'r'/'*'/'-'
-//  - 1: 'w'/'*'/'-'
-//  - 2: 'x'/'*'/'-'
+//   - 0: 'r'/'*'/'-'
+//   - 1: 'w'/'*'/'-'
+//   - 2: 'x'/'*'/'-'
+//
 // Examples can be :
-//  - "rwx" or
-//  - "*wx" or
-//  - "rw*" or
-//  - "***"
+//   - "rwx" or
+//   - "*wx" or
+//   - "rw*" or
+//   - "***"
 //
 // Length must be 3. Not more not less.
 type RwxOwnerGroupOther struct {
@@ -57,17 +58,18 @@ type RwxOwnerGroupOther struct {
 
 // NewRwxOwnerGroupOther
 //
-// Each arg ownerRwx, groupRwx, otherRwx should have
+// # Each arg ownerRwx, groupRwx, otherRwx should have
 //
 // Index Values
-//  - 0: 'r'/'*'/'-'
-//  - 1: 'w'/'*'/'-'
-//  - 2: 'x'/'*'/'-'
+//   - 0: 'r'/'*'/'-'
+//   - 1: 'w'/'*'/'-'
+//   - 2: 'x'/'*'/'-'
+//
 // Examples can be :
-//  - "rwx" or
-//  - "*wx" or
-//  - "rw*" or
-//  - "***"
+//   - "rwx" or
+//   - "*wx" or
+//   - "rw*" or
+//   - "***"
 //
 // Length must be 3. Not more not less.
 func NewRwxOwnerGroupOther(
@@ -142,9 +144,10 @@ func (receiver *RwxOwnerGroupOther) ToString(isIncludeHyphen bool) string {
 
 // String : Includes hyphen in-front
 // constants.Hyphen +
-//		receiver.Owner +
-//		receiver.Group +
-//		receiver.Other
+//
+//	receiver.Owner +
+//	receiver.Group +
+//	receiver.Other
 func (receiver *RwxOwnerGroupOther) String() string {
 	return constants.Hyphen +
 		receiver.Owner +

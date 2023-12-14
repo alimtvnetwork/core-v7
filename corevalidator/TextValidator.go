@@ -15,7 +15,7 @@ import (
 type TextValidator struct {
 	Search   string `json:"Search,omitempty"`
 	SearchAs stringcompareas.Variant
-	ValidatorCoreCondition
+	Condition
 	searchTextFinalized *string
 }
 
@@ -29,7 +29,8 @@ func (it *TextValidator) ToString(isSingleLine bool) string {
 			it.IsSplitByWhitespace(),
 			it.IsUniqueWordOnly,
 			it.IsNonEmptyWhitespace,
-			it.IsSortStringsBySpace)
+			it.IsSortStringsBySpace,
+		)
 	}
 
 	return fmt.Sprintf(
@@ -40,7 +41,8 @@ func (it *TextValidator) ToString(isSingleLine bool) string {
 		it.IsSplitByWhitespace(),
 		it.IsUniqueWordOnly,
 		it.IsNonEmptyWhitespace,
-		it.IsSortStringsBySpace)
+		it.IsSortStringsBySpace,
+	)
 }
 
 func (it *TextValidator) String() string {
@@ -58,7 +60,8 @@ func (it *TextValidator) SearchTextFinalizedPtr() *string {
 
 	searchTerm := it.GetCompiledTermBasedOnConditions(
 		it.Search,
-		it.IsUniqueWordOnly) // for unique word, use lowercase
+		it.IsUniqueWordOnly,
+	) // for unique word, use lowercase
 
 	it.searchTextFinalized = &searchTerm
 
@@ -82,11 +85,13 @@ func (it *TextValidator) GetCompiledTermBasedOnConditions(
 			it.IsNonEmptyWhitespace,
 			it.IsSortStringsBySpace,
 			it.IsUniqueWordOnly,
-			!isCaseSensitive)
+			!isCaseSensitive,
+		)
 
 		return strings.Join(
 			compiledStringSplits,
-			constants.Space)
+			constants.Space,
+		)
 	}
 
 	return searchTerm
@@ -99,7 +104,8 @@ func (it *TextValidator) IsMatch(
 	search := it.SearchTextFinalized()
 	processedContent := it.GetCompiledTermBasedOnConditions(
 		content,
-		isCaseSensitive)
+		isCaseSensitive,
+	)
 
 	isIgnoreCase := !isCaseSensitive
 
@@ -133,7 +139,7 @@ func (it *TextValidator) IsMatchMany(
 }
 
 func (it *TextValidator) VerifyDetailError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	content string,
 ) error {
 	if it == nil {
@@ -143,12 +149,13 @@ func (it *TextValidator) VerifyDetailError(
 	return it.verifyDetailErrorUsingLineProcessing(
 		constants.InvalidValue,
 		params,
-		content)
+		content,
+	)
 }
 
 func (it *TextValidator) verifyDetailErrorUsingLineProcessing(
 	lineProcessingIndex int,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	content string,
 ) error {
 	if it == nil {
@@ -158,7 +165,8 @@ func (it *TextValidator) verifyDetailErrorUsingLineProcessing(
 	processedSearch := it.SearchTextFinalized()
 	processedContent := it.GetCompiledTermBasedOnConditions(
 		content,
-		params.IsCaseSensitive)
+		params.IsCaseSensitive,
+	)
 
 	isMatch := it.SearchAs.IsCompareSuccess(
 		params.IsIgnoreCase(),
@@ -174,11 +182,13 @@ func (it *TextValidator) verifyDetailErrorUsingLineProcessing(
 
 	msg := errcore.GetSearchTermExpectationMessage(
 		params.CaseIndex,
+		params.Header,
 		expectationMethod,
 		lineProcessingIndex,
 		processedContent,
 		processedSearch,
-		it.String())
+		it.String(),
+	)
 
 	return errors.New(msg)
 }
@@ -189,7 +199,7 @@ func (it *TextValidator) MethodName() string {
 
 func (it *TextValidator) VerifySimpleError(
 	processingIndex int,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	content string,
 ) error {
 	if it == nil {
@@ -199,7 +209,8 @@ func (it *TextValidator) VerifySimpleError(
 	processedSearch := it.SearchTextFinalized()
 	processedContent := it.GetCompiledTermBasedOnConditions(
 		content,
-		params.IsCaseSensitive)
+		params.IsCaseSensitive,
+	)
 
 	isMatch := it.SearchAs.IsCompareSuccess(
 		params.IsIgnoreCase(),
@@ -218,29 +229,32 @@ func (it *TextValidator) VerifySimpleError(
 		method,
 		processingIndex,
 		processedContent,
-		processedSearch)
+		processedSearch,
+	)
 
 	return errors.New(msg)
 }
 
 func (it *TextValidator) VerifyMany(
 	isContinueOnError bool,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if isContinueOnError {
 		return it.AllVerifyError(
 			params,
-			contents...)
+			contents...,
+		)
 	}
 
 	return it.VerifyFirstError(
 		params,
-		contents...)
+		contents...,
+	)
 }
 
 func (it *TextValidator) VerifyFirstError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if it == nil {
@@ -248,7 +262,7 @@ func (it *TextValidator) VerifyFirstError(
 	}
 
 	length := len(contents)
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
 	}
 
@@ -268,7 +282,7 @@ func (it *TextValidator) VerifyFirstError(
 }
 
 func (it *TextValidator) AllVerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if it == nil {
@@ -276,7 +290,7 @@ func (it *TextValidator) AllVerifyError(
 	}
 
 	length := len(contents)
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
 	}
 
@@ -292,10 +306,12 @@ func (it *TextValidator) AllVerifyError(
 		if err != nil {
 			sliceErr = append(
 				sliceErr,
-				err.Error())
+				err.Error(),
+			)
 		}
 	}
 
 	return errcore.SliceToError(
-		sliceErr)
+		sliceErr,
+	)
 }

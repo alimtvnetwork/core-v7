@@ -19,10 +19,11 @@ func (it *Compare) SortedStrings() []string {
 		return it.sortedStrings
 	}
 
-	it.sortedStrings = GetMessageToSortedArray(
+	it.sortedStrings = GetAssert.SortedArray(
 		false,
 		true,
-		strings.TrimSpace(it.StringContains))
+		strings.TrimSpace(it.StringContains),
+	)
 
 	return it.sortedStrings
 }
@@ -35,7 +36,8 @@ func (it *Compare) SortedString() string {
 	sortedStrings := it.SortedStrings()
 	sortedString := strings.Join(
 		sortedStrings,
-		commonJoiner)
+		commonJoiner,
+	)
 
 	it.sortedString = &sortedString
 
@@ -47,7 +49,8 @@ func (it *Compare) GetPrintMessage(index int) string {
 		"\n\tIndex:%d\n\tString Contains:%s\n\tString Processed:%s",
 		index,
 		it.StringContains,
-		it.SortedString())
+		it.SortedString(),
+	)
 }
 
 func (it *Compare) IsMatch(

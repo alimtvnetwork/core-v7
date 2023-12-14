@@ -23,8 +23,10 @@ func (it *replaceTemplate) CurlyOne(
 		map[string]string{
 			firstKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				firstValue),
-		})
+				firstValue,
+			),
+		},
+	)
 }
 
 func (it *replaceTemplate) Curly(
@@ -38,7 +40,8 @@ func (it *replaceTemplate) Curly(
 	return it.UsingMapOptions(
 		true,
 		format,
-		mapToReplace)
+		mapToReplace,
+	)
 
 }
 
@@ -57,11 +60,14 @@ func (it *replaceTemplate) CurlyTwo(
 		map[string]string{
 			firstKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				firstValue),
+				firstValue,
+			),
 			secondKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				secondValue),
-		})
+				secondValue,
+			),
+		},
+	)
 }
 
 func (it *replaceTemplate) DirectOne(
@@ -77,7 +83,9 @@ func (it *replaceTemplate) DirectOne(
 		firstKey,
 		fmt.Sprintf(
 			constants.SprintValueFormat,
-			firstValue))
+			firstValue,
+		),
+	)
 }
 
 func (it *replaceTemplate) DirectTwoItem(
@@ -95,11 +103,14 @@ func (it *replaceTemplate) DirectTwoItem(
 		map[string]string{
 			firstKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				firstValue),
+				firstValue,
+			),
 			secondKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				secondValue),
-		})
+				secondValue,
+			),
+		},
+	)
 }
 
 func (it *replaceTemplate) CurlyTwoItem(
@@ -117,11 +128,14 @@ func (it *replaceTemplate) CurlyTwoItem(
 		map[string]string{
 			firstKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				firstValue),
+				firstValue,
+			),
 			secondKey: fmt.Sprintf(
 				constants.SprintValueFormat,
-				secondValue),
-		})
+				secondValue,
+			),
+		},
+	)
 }
 
 // DirectKeyUsingMap
@@ -138,7 +152,17 @@ func (it *replaceTemplate) DirectKeyUsingMap(
 	return it.UsingMapOptions(
 		false,
 		format,
-		mapToReplace)
+		mapToReplace,
+	)
+}
+
+func (it *replaceTemplate) DirectKeyUsingMapTrim(
+	format string, // key-text...
+	mapToReplace map[string]string,
+) string {
+	result := it.DirectKeyUsingMap(format, mapToReplace)
+
+	return strings.TrimSpace(result)
 }
 
 func (it *replaceTemplate) CurlyKeyUsingMap(
@@ -152,7 +176,8 @@ func (it *replaceTemplate) CurlyKeyUsingMap(
 	return it.UsingMapOptions(
 		true,
 		format,
-		mapToReplace)
+		mapToReplace,
+	)
 }
 
 // UsingMapOptions
@@ -178,12 +203,14 @@ func (it *replaceTemplate) UsingMapOptions(
 		for key, valueToReplace := range mapToReplace {
 			keyCurly := fmt.Sprintf(
 				constants.CurlyWrapFormat,
-				key)
+				key,
+			)
 
 			format = strings.ReplaceAll(
 				format,
 				keyCurly,
-				valueToReplace)
+				valueToReplace,
+			)
 		}
 
 		return format
@@ -193,7 +220,8 @@ func (it *replaceTemplate) UsingMapOptions(
 		format = strings.ReplaceAll(
 			format,
 			key,
-			valueToReplace)
+			valueToReplace,
+		)
 	}
 
 	return format
@@ -212,12 +240,14 @@ func (it *replaceTemplate) UsingNamerMapOptions(
 		for key, valueToReplace := range mapToReplace {
 			keyCurly := fmt.Sprintf(
 				constants.CurlyWrapFormat,
-				key)
+				key,
+			)
 
 			format = strings.ReplaceAll(
 				format,
 				keyCurly,
-				valueToReplace)
+				valueToReplace,
+			)
 		}
 
 		return format
@@ -227,7 +257,8 @@ func (it *replaceTemplate) UsingNamerMapOptions(
 		format = strings.ReplaceAll(
 			format,
 			keyNamer.Name(),
-			valueToReplace)
+			valueToReplace,
+		)
 	}
 
 	return format
@@ -246,12 +277,14 @@ func (it *replaceTemplate) UsingStringerMapOptions(
 		for key, valueToReplace := range mapToReplace {
 			keyCurly := fmt.Sprintf(
 				constants.CurlyWrapFormat,
-				key)
+				key,
+			)
 
 			format = strings.ReplaceAll(
 				format,
 				keyCurly,
-				valueToReplace)
+				valueToReplace,
+			)
 		}
 
 		return format
@@ -261,7 +294,8 @@ func (it *replaceTemplate) UsingStringerMapOptions(
 		format = strings.ReplaceAll(
 			format,
 			keyStringer.String(),
-			valueToReplace)
+			valueToReplace,
+		)
 	}
 
 	return format
@@ -284,7 +318,8 @@ func (it *replaceTemplate) UsingWrappedTemplate(
 	return strings.ReplaceAll(
 		format,
 		constants.WrappedTemplate,
-		replacingText)
+		replacingText,
+	)
 }
 
 // UsingBracketsWrappedTemplate
@@ -304,7 +339,8 @@ func (it *replaceTemplate) UsingBracketsWrappedTemplate(
 	return strings.ReplaceAll(
 		format,
 		constants.BracketsWrappedTemplate,
-		replacingText)
+		replacingText,
+	)
 }
 
 // UsingQuotesWrappedTemplate
@@ -324,7 +360,8 @@ func (it *replaceTemplate) UsingQuotesWrappedTemplate(
 	return strings.ReplaceAll(
 		format,
 		constants.QuotesWrappedTemplate,
-		replacingText)
+		replacingText,
+	)
 }
 
 // UsingValueTemplate
@@ -344,7 +381,8 @@ func (it *replaceTemplate) UsingValueTemplate(
 	return strings.ReplaceAll(
 		format,
 		constants.ValueTemplate,
-		replacingText)
+		replacingText,
+	)
 }
 
 // UsingValueWithFieldsTemplate
@@ -364,5 +402,6 @@ func (it *replaceTemplate) UsingValueWithFieldsTemplate(
 	return strings.ReplaceAll(
 		format,
 		constants.ValueWithFieldsTemplate,
-		replacingText)
+		replacingText,
+	)
 }

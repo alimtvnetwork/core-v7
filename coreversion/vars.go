@@ -1,5 +1,10 @@
 package coreversion
 
 var (
-	New = newCreator{}
+	New           = newCreator{}
+	skipValuesMap = map[string]bool{
+		"*": true,
+		"":  true,
+		" ": true,
+	}
 )

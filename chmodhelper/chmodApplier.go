@@ -247,9 +247,9 @@ func (it chmodApplier) PathsUsingFileModeConditions(
 // between 0-10 (rest will be fixed by wildcard)
 //
 // rwxPartial:
-//  - "-rwx" will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx" will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 func (it chmodApplier) RwxPartial(
 	rwxPartial string,
 	condition *chmodins.Condition,
@@ -273,7 +273,7 @@ func (it chmodApplier) RwxPartial(
 
 // RwxStringApplyChmod
 //
-//  rwxFullString 10 chars "-rwxrwxrwx"
+//	rwxFullString 10 chars "-rwxrwxrwx"
 func RwxStringApplyChmod(
 	rwxFullString string, // rwxFullString 10 chars "-rwxrwxrwx"
 	condition *chmodins.Condition,

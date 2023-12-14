@@ -21,265 +21,267 @@ All common core infrastructure and constants combined package.
 
 ## Why `core?`
 
-It makes our other go-packages DRY and concise. It was the first package in the auk-go ecosystem that is core of everything.
+It makes our other go-packages DRY and concise. It was the first package in the auk-go ecosystem that is core of
+everything.
 
 It was first designed for constants, later it got enhanced with:
+
 - [codestack](/codestack)
-  - very powerful to deal with codestack
+    - very powerful to deal with codestack
 - chmodhelper
 - [enums](/enums)
-  - base logic for generating stuff
+    - base logic for generating stuff
 - coresort
-  - sorting functionalities
+    - sorting functionalities
 - [coremath](/coremath)
-  - deals with integer, ..., all type - min, max
+    - deals with integer, ..., all type - min, max
 - coretests
-  - deals with basic functionality for test
+    - deals with basic functionality for test
 - [corevalidator](/corevalidator)
-  - [LineValidator](/corevalidator/LineValidator.go)
-    - Deals with validation
-    - Helps to do integration tests
+    - [LineValidator](/corevalidator/LineValidator.go)
+        - Deals with validation
+        - Helps to do integration tests
 - [coreversion](/coreversion/Version.go) - deals with all kinds of versioning stuff.
-  - deals with version (major, minor, patch -- data type)
+    - deals with version (major, minor, patch -- data type)
 - [regexnew](/regexnew)
-  - [LazyRegex](/regexnew/LazyRegex.go) - doesn't compile until needed but only once (lock / non lock)
-  - [CreateLock](/regexnew/CreateLock.go) - Create Lazy lock in a loop or running process.
-  - [Create](/regexnew/Create.go) - Create - use create to get lazyregex when created in global vars
+    - [LazyRegex](/regexnew/LazyRegex.go) - doesn't compile until needed but only once (lock / non lock)
+    - [CreateLock](/regexnew/CreateLock.go) - Create Lazy lock in a loop or running process.
+    - [Create](/regexnew/Create.go) - Create - use create to get lazyregex when created in global vars
 - converters (move from type to type)
 - [corecsv](/corecsv)
 - [errorcore](/errcore)
 - coreutils
-  - [stringutil](/coreutils/stringutil)
-    - [AnyToTypeString](/coreutils/stringutil/AnyToTypeString.go)
-    - [AnyToString](/coreutils/stringutil/AnyToString.go)
-    - [ClonePtr](/coreutils/stringutil/ClonePtr.go)
-    - [FirstChar](/coreutils/stringutil/FirstChar.go)
-    - [IsAnyEndsWith](/coreutils/stringutil/IsAnyEndsWith.go)
-    - [IsAnyStartsWith](/coreutils/stringutil/IsAnyStartsWith.go)
-    - [IsBlank](/coreutils/stringutil/IsBlank.go)
-    - [IsBlankPtr](/coreutils/stringutil/IsBlankPtr.go)
-    - [IsContains](/coreutils/stringutil/IsContains.go)
-    - [IsContainsPtr](/coreutils/stringutil/IsContainsPtr.go)
-    - [IsContainsPtrSimple](/coreutils/stringutil/IsContainsPtrSimple.go)
-    - [IsDefined](/coreutils/stringutil/IsDefined.go)
-    - [IsDefinedPtr](/coreutils/stringutil/IsDefinedPtr.go)
-    - [IsEmpty](/coreutils/stringutil/IsEmpty.go)
-    - [IsEmptyOrWhitespace](/coreutils/stringutil/IsEmptyOrWhitespace.go)
-    - [IsEmptyOrWhitespacePtr](/coreutils/stringutil/IsEmptyOrWhitespacePtr.go)
-    - [IsEmptyPtr](/coreutils/stringutil/IsEmptyPtr.go)
-    - [IsEnds](/coreutils/stringutil/IsEnds.go)
-    - [IsEndsChar](/coreutils/stringutil/IsEndsChar.go)
-    - [IsEndsRune](/coreutils/stringutil/IsEndsRune.go)
-    - [IsEndsWith](/coreutils/stringutil/IsEndsWith.go)
-    - [IsNotEmpty](/coreutils/stringutil/IsNotEmpty.go)
-    - [IsNullOrEmptyPtr](/coreutils/stringutil/IsNullOrEmptyPtr.go)
-    - [IsStarts](/coreutils/stringutil/IsStarts.go)
-    - [IsStartsAndEndsWithChar](/coreutils/stringutil/IsStartsAndEndsChar.go)
-    - [IsStartsAndEndsWith](/coreutils/stringutil/IsStartsAndEndsWith.go)
-    - [IsStartsChar](/coreutils/stringutil/IsStartsChar.go)
-    - [IsEndsRune](/coreutils/stringutil/IsEndsRune.go)
-    - [IsStartsWith](/coreutils/stringutil/IsStartsWith.go)
-    - [MaskLine](/coreutils/stringutil/MaskLine.go)
-    - [MaskLines](/coreutils/stringutil/MaskLines.go)
-    - [MaskTrimLine](/coreutils/stringutil/MaskTrimLine.go)
-    - [MaskTrimLines](/coreutils/stringutil/MaskTrimLines.go)
-    - [RemoveMany](/coreutils/stringutil/RemoveMany.go)
-    - [RemoveManuBySplitting](/coreutils/stringutil/RemoveManyBySplitting.go)
-    - [SafeClonePtr](/coreutils/stringutil/SafeClonePtr.go)
-    - [SafeSubstring](/coreutils/stringutil/SafeSubstring.go)
-    - [SafeSubstringEnds](/coreutils/stringutil/SafeSubstringEnds.go)
-    - [SafeSubstringStarts](/coreutils/stringutil/SafeSubstringStarts.go)
-    - [SplitContentsByWhitespaceConditions](/coreutils/stringutil/SplitContentsByWhitespaceConditions.go)
-    - [SplitFirstLast](/coreutils/stringutil/SplitFirstLast.go)
-    - [SplitLeftRight](/coreutils/stringutil/SplitLeftRight.go)
-    - [SplitLeftRightsTrims](/coreutils/stringutil/SplitLeftRightsTrims.go)
-    - [SplitLeftRightTrimmed](/coreutils/stringutil/SplitLeftRightTrimmed.go)
-    - [SplitLeftRightType](/coreutils/stringutil/SplitLeftRightType.go)
-    - [SplitLeftRightTypeTrimmed](/coreutils/stringutil/SplitLeftRightTypeTrimmed.go)
-    - [ToBool](/coreutils/stringutil/ToBool.go)
-    - [ToByte](/coreutils/stringutil/ToByte.go)
-    - [ToByteDefault](/coreutils/stringutil/ToByteDefault.go)
-    - [ToInt](/coreutils/stringutil/ToInt.go)
-    - [ToInt8](/coreutils/stringutil/ToInt8.go)
-    - [ToInt8Def](/coreutils/stringutil/ToInt8Def.go)
-    - [ToInt16](/coreutils/stringutil/ToInt16.go)
-    - [ToInt16Default](/coreutils/stringutil/ToInt16Default.go)
-    - [ToInt32](/coreutils/stringutil/ToInt32.go)
-    - [ToInt32Def](/coreutils/stringutil/ToInt32Def.go)
-    - [ToIntDef](/coreutils/stringutil/ToIntDef.go)
-    - [ToIntDefault](/coreutils/stringutil/ToIntDefault.go)
-    - [ToIntUsingRegexMatch](/coreutils/stringutil/ToIntUsingRegexMatch.go)
-    - [ToUint16Default](/coreutils/stringutil/ToUint16Default.go)
-    - [ToUint32Default](/coreutils/stringutil/ToUint32Default.go)
-    - [ReplaceTemplate](/coreutils/stringutil/replaceTemplate.go)
-      - CurlyOne
-      - Curly
-      - CurlyTwo
-      - DirectOne
-      - DirectTwoItem
-      - CurlyTwoItem
-      - DirectKeyUsingMap
-      - CurlyKeyUsingMap
-      - UsingMapOptions
-      - UsingNamerMapOptions
-      - UsingStringerMapOptions
-      - UsingWrappedTemplate
-      - UsingBracketsWrappedTemplate
-      - UsingQuotesWrappedTemplate
-      - UsingValueTemplate
-      - UsingValueWithFieldsTemplate
+    - [stringutil](/coreutils/stringutil)
+        - [AnyToTypeString](/coreutils/stringutil/AnyToTypeString.go)
+        - [AnyToString](/coreutils/stringutil/AnyToString.go)
+        - [ClonePtr](/coreutils/stringutil/ClonePtr.go)
+        - [FirstChar](/coreutils/stringutil/FirstChar.go)
+        - [IsAnyEndsWith](/coreutils/stringutil/IsAnyEndsWith.go)
+        - [IsAnyStartsWith](/coreutils/stringutil/IsAnyStartsWith.go)
+        - [IsBlank](/coreutils/stringutil/IsBlank.go)
+        - [IsBlankPtr](/coreutils/stringutil/IsBlankPtr.go)
+        - [IsContains](/coreutils/stringutil/IsContains.go)
+        - [IsContainsPtr](/coreutils/stringutil/IsContainsPtr.go)
+        - [IsContainsPtrSimple](/coreutils/stringutil/IsContainsPtrSimple.go)
+        - [IsDefined](/coreutils/stringutil/IsDefined.go)
+        - [IsDefinedPtr](/coreutils/stringutil/IsDefinedPtr.go)
+        - [IsEmpty](/coreutils/stringutil/IsEmpty.go)
+        - [IsEmptyOrWhitespace](/coreutils/stringutil/IsEmptyOrWhitespace.go)
+        - [IsEmptyOrWhitespacePtr](/coreutils/stringutil/IsEmptyOrWhitespacePtr.go)
+        - [IsEmptyPtr](/coreutils/stringutil/IsEmptyPtr.go)
+        - [IsEnds](/coreutils/stringutil/IsEnds.go)
+        - [IsEndsChar](/coreutils/stringutil/IsEndsChar.go)
+        - [IsEndsRune](/coreutils/stringutil/IsEndsRune.go)
+        - [IsEndsWith](/coreutils/stringutil/IsEndsWith.go)
+        - [IsNotEmpty](/coreutils/stringutil/IsNotEmpty.go)
+        - [IsNullOrEmptyPtr](/coreutils/stringutil/IsNullOrEmptyPtr.go)
+        - [IsStarts](/coreutils/stringutil/IsStarts.go)
+        - [IsStartsAndEndsWithChar](/coreutils/stringutil/IsStartsAndEndsChar.go)
+        - [IsStartsAndEndsWith](/coreutils/stringutil/IsStartsAndEndsWith.go)
+        - [IsStartsChar](/coreutils/stringutil/IsStartsChar.go)
+        - [IsEndsRune](/coreutils/stringutil/IsEndsRune.go)
+        - [IsStartsWith](/coreutils/stringutil/IsStartsWith.go)
+        - [MaskLine](/coreutils/stringutil/MaskLine.go)
+        - [MaskLines](/coreutils/stringutil/MaskLines.go)
+        - [MaskTrimLine](/coreutils/stringutil/MaskTrimLine.go)
+        - [MaskTrimLines](/coreutils/stringutil/MaskTrimLines.go)
+        - [RemoveMany](/coreutils/stringutil/RemoveMany.go)
+        - [RemoveManuBySplitting](/coreutils/stringutil/RemoveManyBySplitting.go)
+        - [SafeClonePtr](/coreutils/stringutil/SafeClonePtr.go)
+        - [SafeSubstring](/coreutils/stringutil/SafeSubstring.go)
+        - [SafeSubstringEnds](/coreutils/stringutil/SafeSubstringEnds.go)
+        - [SafeSubstringStarts](/coreutils/stringutil/SafeSubstringStarts.go)
+        - [SplitContentsByWhitespaceConditions](/coreutils/stringutil/SplitContentsByWhitespaceConditions.go)
+        - [SplitFirstLast](/coreutils/stringutil/SplitFirstLast.go)
+        - [SplitLeftRight](/coreutils/stringutil/SplitLeftRight.go)
+        - [SplitLeftRightsTrims](/coreutils/stringutil/SplitLeftRightsTrims.go)
+        - [SplitLeftRightTrimmed](/coreutils/stringutil/SplitLeftRightTrimmed.go)
+        - [SplitLeftRightType](/coreutils/stringutil/SplitLeftRightType.go)
+        - [SplitLeftRightTypeTrimmed](/coreutils/stringutil/SplitLeftRightTypeTrimmed.go)
+        - [ToBool](/coreutils/stringutil/ToBool.go)
+        - [ToByte](/coreutils/stringutil/ToByte.go)
+        - [ToByteDefault](/coreutils/stringutil/ToByteDefault.go)
+        - [ToInt](/coreutils/stringutil/ToInt.go)
+        - [ToInt8](/coreutils/stringutil/ToInt8.go)
+        - [ToInt8Def](/coreutils/stringutil/ToInt8Def.go)
+        - [ToInt16](/coreutils/stringutil/ToInt16.go)
+        - [ToInt16Default](/coreutils/stringutil/ToInt16Default.go)
+        - [ToInt32](/coreutils/stringutil/ToInt32.go)
+        - [ToInt32Def](/coreutils/stringutil/ToInt32Def.go)
+        - [ToIntDef](/coreutils/stringutil/ToIntDef.go)
+        - [ToIntDefault](/coreutils/stringutil/ToIntDefault.go)
+        - [ToIntUsingRegexMatch](/coreutils/stringutil/ToIntUsingRegexMatch.go)
+        - [ToUint16Default](/coreutils/stringutil/ToUint16Default.go)
+        - [ToUint32Default](/coreutils/stringutil/ToUint32Default.go)
+        - [ReplaceTemplate](/coreutils/stringutil/replaceTemplate.go)
+            - CurlyOne
+            - Curly
+            - CurlyTwo
+            - DirectOne
+            - DirectTwoItem
+            - CurlyTwoItem
+            - DirectKeyUsingMap
+            - CurlyKeyUsingMap
+            - UsingMapOptions
+            - UsingNamerMapOptions
+            - UsingStringerMapOptions
+            - UsingWrappedTemplate
+            - UsingBracketsWrappedTemplate
+            - UsingQuotesWrappedTemplate
+            - UsingValueTemplate
+            - UsingValueWithFieldsTemplate
 - [issetter.value](/issetter/Value.go) - 4 Valued Booleans, instead using bool* use this.
-  - 4 Valued Booleans
-    - One Approach
-      - Uninitialized
-      - True
-      - False
-      - Wildcard / Any
-    - Or,
-      - Uninitialized
-      - Set
-      - Unset
-      - Wildcard / Any
+    - 4 Valued Booleans
+        - One Approach
+            - Uninitialized
+            - True
+            - False
+            - Wildcard / Any
+        - Or,
+            - Uninitialized
+            - Set
+            - Unset
+            - Wildcard / Any
 - [coredata](/coredata)
-  - [coreapi](/coredata/coreapi)
-  - [coredynamic](/coredata/coredynamic) - dynamic data type
-    - [AnyCollection](/coredata/coredynamic/AnyCollection.go) - deals with collection of interface means any
-    - AnySliceValToInterfacesAsync
-    - AnyToReflectVal
-    - AnyTypeMapToMapStringAny
-    - BytesConverter
-    - CastedResult
-    - CastTo
-    - Dynamic
-    - DynamicCollection
-    - DynamicStatus
-    - [funcs](/coredata/coredynamic/funcs.go) - smart converter functions
-    - IsAnyTypesOf
-    - KeyVal
-    - KeyValCollection
-    - LeftRight
-    - LengthOfReflect
-    - MapAnyItemsDiff
-    - MapAsKeyValSlice
-    - MapKeysStringSlice
-    - MapKeysStringSliceAnyMust
-    - MapKeysStringSliceAnySorted
-    - MapKeysStringSliceAnySortedMust
-    - MustBeAcceptedTypes
-    - NotAcceptedTypesErr
-    - PonterOrNonPointer
-    - PointerOrNonPointerUsingReflectValue
-    - ReflectInterfaceVal
-    - ReflectKindValidation
-    - ReflectSetFromTo
-    - ReflectTypeValidation
-    - ReflectValToInterfaces
-    - ReflectValToInterfacesAsync
-    - ReflectValToInterfacesUsingProcessor
-    - SafeTypeName
-    - SafeZeroSet
-    - SimpleRequest
-    - SimpleResult
-    - SliceItemsAsStrings
-    - SliceItemsAsStringsAny
-    - SliceItemsAsStringsAnyMust
-    - SliceItemsProcessorAsStrings
-    - SliceItemsSimpleProcessorAsStrings
-    - Type
-    - TypeMustBeSame
-    - TypeName
-    - TypeNames
-    - TypeNamesReferenceString
-    - TypeNamesString
-    - TypeNamesStringUsingReflectType
-    - TypeNamesUsingReflectType
-    - TypeNotEqualErr
-    - TypeSameStatus
-    - TypeIndexOf
-    - TypeStatus
-    - ValueStatus
-    - ZeroSet
-    - ZeroSetAny
-  - [corejson](/coredata/corejson)
-    - Result
-    - ResultCollection
-    - [SerializerLogic (corejson.Serialize.Method)](/coredata/corejson/serializerLogic.go)
-      - corejson.Serialize.StringsApply
-      - corejson.Serialize.Apply
-      - corejson.Serialize.FromBytes
-      - corejson.Serialize.FromStrings
-      - corejson.Serialize.FromStringsSpread
-      - corejson.Serialize.FromString
-      - corejson.Serialize.FromInteger
-      - corejson.Serialize.FromInteger64
-      - corejson.Serialize.FromBool
-      - corejson.Serialize.FromIntegers
-      - corejson.Serialize.FromStringer
-      - corejson.Serialize.UsingAnyPtr
-      - corejson.Serialize.UsingAny
-      - corejson.Serialize.Raw
-      - corejson.Serialize.Marshal
-      - corejson.Serialize.ApplyMust
-      - corejson.Serialize.ToBytesMust
-      - corejson.Serialize.ToSafeBytesMust
-      - corejson.Serialize.ToSafeBytesSwallowErr
-      - corejson.Serialize.ToBytesSwallowErr
-      - corejson.Serialize.ToBytesErr
-      - corejson.Serialize.ToString
-      - corejson.Serialize.ToStringMust
-      - corejson.Serialize.ToStringErr
-      - corejson.Serialize.ToPrettyStringErr
-      - corejson.Serialize.ToPrettyStringIncludingErr
-    - [DeserializerLogic (corejson.Deserialize.Method)](/coredata/corejson/deserializerLogic.go)
-      - corejson.Deserialize.StringsApply
-      - corejson.Deserialize.Apply
-      - corejson.Deserialize.UsingStringPtr
-      - corejson.Deserialize.UsingError
-      - corejson.Deserialize.UsingErrorWhichJsonResult
-      - corejson.Deserialize.UsingResult
-      - corejson.Deserialize.ApplyMust
-      - corejson.Deserialize.UsingString
-      - corejson.Deserialize.FromString
-      - corejson.Deserialize.FromTo
-      - corejson.Deserialize.MapAnyToPointer
-      - corejson.Deserialize.UsingStringOption
-      - corejson.Deserialize.UsingStringIgnoreEmpty
-      - corejson.Deserialize.UsingBytes
-      - corejson.Deserialize.UsingBytesPointerMust
-      - corejson.Deserialize.UsingBytesIf
-      - corejson.Deserialize.UsingBytesPointerIf
-      - corejson.Deserialize.UsingBytesPointer
-      - corejson.Deserialize.UsingBytesMust
-      - corejson.Deserialize.UsingSafeBytesMust
-      - corejson.Deserialize.AnyToFieldsMap
-      - corejson.Deserialize.UsingSerializerTo
-      - corejson.Deserialize.UsingSerializerFuncTo
-      - corejson.Deserialize.UsingDeserializerToOption
-      - corejson.Deserialize.UsingDeserializerDefined
-      - corejson.Deserialize.UsingDeserializerFuncDefined
-      - corejson.Deserialize.UsingJsonerToAny
-  - [coreonce - data which generate once](/coredata/coreonce)
-  - [corepayload - deals with enhance payloads](/coredata/corepayload)
-  - [corerange - works with ranges](/coredata/corerange)
-  - [ostype](/ostype)
-  - corestr - string related core functionalities and data-types
-    - hashmap
-    - hashset - lock features for `map[string]bool`
-    - Collection - List like C# / ArrayList like Java - enhance APIs
-    - CollectionsOfCollection
-    - LinkedList
-    - HashDiff
-    - CloneSlice
-    - CharCollectionMap - `map[byte]*Collection`
-    - HashsetsCollection
-    - KeyValueCollection
-    - LeftRight - Left, Right string
-    - LeftMiddleRight
-    - SimpleStringOnce
-    - ValidValue
-    - ValidValues
-    - ValueStatus
-    - AnyToString
+    - [coreapi](/coredata/coreapi)
+    - [coredynamic](/coredata/coredynamic) - dynamic data type
+        - [AnyCollection](/coredata/coredynamic/AnyCollection.go) - deals with collection of interface means any
+        - AnySliceValToInterfacesAsync
+        - AnyToReflectVal
+        - AnyTypeMapToMapStringAny
+        - BytesConverter
+        - CastedResult
+        - CastTo
+        - Dynamic
+        - DynamicCollection
+        - DynamicStatus
+        - [funcs](/coredata/coredynamic/funcs.go) - smart converter functions
+        - IsAnyTypesOf
+        - KeyVal
+        - KeyValCollection
+        - LeftRight
+        - LengthOfReflect
+        - MapAnyItemsDiff
+        - MapAsKeyValSlice
+        - MapKeysStringSlice
+        - MapKeysStringSliceAnyMust
+        - MapKeysStringSliceAnySorted
+        - MapKeysStringSliceAnySortedMust
+        - MustBeAcceptedTypes
+        - NotAcceptedTypesErr
+        - PonterOrNonPointer
+        - PointerOrNonPointerUsingReflectValue
+        - ReflectInterfaceVal
+        - ReflectKindValidation
+        - ReflectSetFromTo
+        - ReflectTypeValidation
+        - ReflectValToInterfaces
+        - ReflectValToInterfacesAsync
+        - ReflectValToInterfacesUsingProcessor
+        - SafeTypeName
+        - SafeZeroSet
+        - SimpleRequest
+        - SimpleResult
+        - SliceItemsAsStrings
+        - SliceItemsAsStringsAny
+        - SliceItemsAsStringsAnyMust
+        - SliceItemsProcessorAsStrings
+        - SliceItemsSimpleProcessorAsStrings
+        - Type
+        - TypeMustBeSame
+        - TypeName
+        - TypeNames
+        - TypeNamesReferenceString
+        - TypeNamesString
+        - TypeNamesStringUsingReflectType
+        - TypeNamesUsingReflectType
+        - TypeNotEqualErr
+        - TypeSameStatus
+        - TypeIndexOf
+        - TypeStatus
+        - ValueStatus
+        - ZeroSet
+        - ZeroSetAny
+    - [corejson](/coredata/corejson)
+        - Result
+        - ResultCollection
+        - [SerializerLogic (corejson.Serialize.Method)](/coredata/corejson/serializerLogic.go)
+            - corejson.Serialize.StringsApply
+            - corejson.Serialize.Apply
+            - corejson.Serialize.FromBytes
+            - corejson.Serialize.FromStrings
+            - corejson.Serialize.FromStringsSpread
+            - corejson.Serialize.FromString
+            - corejson.Serialize.FromInteger
+            - corejson.Serialize.FromInteger64
+            - corejson.Serialize.FromBool
+            - corejson.Serialize.FromIntegers
+            - corejson.Serialize.FromStringer
+            - corejson.Serialize.UsingAnyPtr
+            - corejson.Serialize.UsingAny
+            - corejson.Serialize.Raw
+            - corejson.Serialize.Marshal
+            - corejson.Serialize.ApplyMust
+            - corejson.Serialize.ToBytesMust
+            - corejson.Serialize.ToSafeBytesMust
+            - corejson.Serialize.ToSafeBytesSwallowErr
+            - corejson.Serialize.ToBytesSwallowErr
+            - corejson.Serialize.ToBytesErr
+            - corejson.Serialize.ToString
+            - corejson.Serialize.ToStringMust
+            - corejson.Serialize.ToStringErr
+            - corejson.Serialize.ToPrettyStringErr
+            - corejson.Serialize.ToPrettyStringIncludingErr
+        - [DeserializerLogic (corejson.Deserialize.Method)](/coredata/corejson/deserializerLogic.go)
+            - corejson.Deserialize.StringsApply
+            - corejson.Deserialize.Apply
+            - corejson.Deserialize.UsingStringPtr
+            - corejson.Deserialize.UsingError
+            - corejson.Deserialize.UsingErrorWhichJsonResult
+            - corejson.Deserialize.UsingResult
+            - corejson.Deserialize.ApplyMust
+            - corejson.Deserialize.UsingString
+            - corejson.Deserialize.FromString
+            - corejson.Deserialize.FromTo
+            - corejson.Deserialize.MapAnyToPointer
+            - corejson.Deserialize.UsingStringOption
+            - corejson.Deserialize.UsingStringIgnoreEmpty
+            - corejson.Deserialize.UsingBytes
+            - corejson.Deserialize.UsingBytesPointerMust
+            - corejson.Deserialize.UsingBytesIf
+            - corejson.Deserialize.UsingBytesPointerIf
+            - corejson.Deserialize.UsingBytesPointer
+            - corejson.Deserialize.UsingBytesMust
+            - corejson.Deserialize.UsingSafeBytesMust
+            - corejson.Deserialize.AnyToFieldsMap
+            - corejson.Deserialize.UsingSerializerTo
+            - corejson.Deserialize.UsingSerializerFuncTo
+            - corejson.Deserialize.UsingDeserializerToOption
+            - corejson.Deserialize.UsingDeserializerDefined
+            - corejson.Deserialize.UsingDeserializerFuncDefined
+            - corejson.Deserialize.UsingJsonerToAny
+    - [coreonce - data which generate once](/coredata/coreonce)
+    - [corepayload - deals with enhance payloads](/coredata/corepayload)
+    - [corerange - works with ranges](/coredata/corerange)
+    - [ostype](/ostype)
+    - corestr - string related core functionalities and data-types
+        - hashmap
+        - hashset - lock features for `map[string]bool`
+        - Collection - List like C# / ArrayList like Java - enhance APIs
+        - CollectionsOfCollection
+        - LinkedList
+        - HashDiff
+        - CloneSlice
+        - CharCollectionMap - `map[byte]*Collection`
+        - HashsetsCollection
+        - KeyValueCollection
+        - LeftRight - Left, Right string
+        - LeftMiddleRight
+        - SimpleStringOnce
+        - ValidValue
+        - ValidValues
+        - ValueStatus
+        - AnyToString
 
 ## Examples Json - Deserializer
 

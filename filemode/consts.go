@@ -4,6 +4,7 @@ import "os"
 
 // When used 0, golang treats it as octal not decimal anymore.
 // Reference : https://ss64.com/bash/chmod.html
+//
 //goland:noinspection ALL
 const (
 	AllPermission                                os.FileMode = 0777

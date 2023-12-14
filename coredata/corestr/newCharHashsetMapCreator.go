@@ -23,7 +23,8 @@ func (it *newCharHashsetMapCreator) Cap(
 
 	mapElements := make(
 		map[byte]*Hashset,
-		capacity)
+		capacity,
+	)
 
 	if selfHashsetCapacity < limit {
 		selfHashsetCapacity = limit
@@ -35,22 +36,13 @@ func (it *newCharHashsetMapCreator) Cap(
 	}
 }
 
-func (it *newCharHashsetMapCreator) CapItemsPtr(
-	capacity, selfHashsetCapacity int,
-	items *[]string,
-) *CharHashsetMap {
-	charHashsetMap := it.Cap(
-		capacity, selfHashsetCapacity)
-
-	return charHashsetMap.AddStringsPtr(items)
-}
-
 func (it *newCharHashsetMapCreator) CapItems(
 	capacity, selfHashsetCapacity int,
-	items []string,
+	items ...string,
 ) *CharHashsetMap {
 	charHashsetMap := it.Cap(
-		capacity, selfHashsetCapacity)
+		capacity, selfHashsetCapacity,
+	)
 
 	return charHashsetMap.AddStrings(items...)
 }
@@ -62,33 +54,17 @@ func (it *newCharHashsetMapCreator) Strings(
 	if items == nil {
 		return it.Cap(
 			constants.ArbitraryCapacity5,
-			selfHashsetCapacity)
+			selfHashsetCapacity,
+		)
 	}
 
 	length := len(items)
 	charHashsetMap := it.Cap(
 		length,
-		selfHashsetCapacity)
+		selfHashsetCapacity,
+	)
 
 	charHashsetMap.AddStrings(items...)
 
 	return charHashsetMap
-}
-
-func (it *newCharHashsetMapCreator) StringsPtr(
-	selfHashsetCapacity int,
-	items *[]string,
-) *CharHashsetMap {
-	if items == nil {
-		return it.Cap(
-			constants.ArbitraryCapacity5,
-			selfHashsetCapacity)
-	}
-
-	length := len(*items)
-	charHashsetMap := it.Cap(
-		length,
-		selfHashsetCapacity)
-
-	return charHashsetMap.AddStringsPtr(items)
 }

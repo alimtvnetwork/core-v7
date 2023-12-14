@@ -4,7 +4,7 @@ import "gitlab.com/auk-go/core/regexnew"
 
 // NotMatchRegex no use of isCaseSensitive
 //
-// Tided with NotMatchRegex, invert of isRegexFunc
+// # Tided with NotMatchRegex, invert of isRegexFunc
 //
 // isCaseSensitive is kept for consistency and calling ability
 var isNotMatchRegex = func(

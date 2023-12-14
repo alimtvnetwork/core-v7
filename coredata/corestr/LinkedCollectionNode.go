@@ -12,110 +12,112 @@ type LinkedCollectionNode struct {
 	next    *LinkedCollectionNode
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) IsEmpty() bool {
-	return linkedCollectionNode.Element == nil
+func (it *LinkedCollectionNode) IsEmpty() bool {
+	return it == nil || it.Element == nil
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) HasElement() bool {
-	return linkedCollectionNode.Element != nil
+func (it *LinkedCollectionNode) HasElement() bool {
+	return it.Element != nil
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) HasNext() bool {
-	return linkedCollectionNode.next != nil
+func (it *LinkedCollectionNode) HasNext() bool {
+	return it.next != nil
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) Next() *LinkedCollectionNode {
-	return linkedCollectionNode.next
+func (it *LinkedCollectionNode) Next() *LinkedCollectionNode {
+	return it.next
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) AddNext(
+func (it *LinkedCollectionNode) AddNext(
 	linkedCollection *LinkedCollections,
 	collection *Collection,
 ) *LinkedCollectionNode {
 	newNode := &LinkedCollectionNode{
 		Element: collection,
-		next:    linkedCollectionNode.Next(),
+		next:    it.Next(),
 	}
 
-	linkedCollectionNode.next = newNode
+	it.next = newNode
 
 	linkedCollection.incrementLength()
 
 	return newNode
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) AddStringsPtrToNode(
+func (it *LinkedCollectionNode) AddStringsToNode(
 	linkedCollection *LinkedCollections,
 	isSkipOnNull bool,
-	items *[]string,
+	items []string,
 	isMakeClone bool,
 ) *LinkedCollections {
 	collection := New.
 		Collection.
-		StringsPtrOption(isMakeClone, items)
+		StringsOptions(isMakeClone, items)
 
 	return linkedCollection.AddCollectionToNode(
 		isSkipOnNull,
-		linkedCollectionNode,
-		collection)
+		it,
+		collection,
+	)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) AddCollectionToNode(
+func (it *LinkedCollectionNode) AddCollectionToNode(
 	linkedCollection *LinkedCollections,
 	isSkipOnNull bool,
 	collection *Collection,
 ) *LinkedCollections {
 	return linkedCollection.AddCollectionToNode(
 		isSkipOnNull,
-		linkedCollectionNode,
-		collection)
+		it,
+		collection,
+	)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) AddNextNode(
+func (it *LinkedCollectionNode) AddNextNode(
 	linkedCollection *LinkedCollections,
 	nextNode *LinkedCollectionNode,
 ) *LinkedCollectionNode {
-	nextNode.next = linkedCollectionNode.Next()
-	linkedCollectionNode.next = nextNode
+	nextNode.next = it.Next()
+	it.next = nextNode
 
 	linkedCollection.incrementLength()
 
 	return nextNode
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) IsChainEqual(another *LinkedCollectionNode) bool {
-	if linkedCollectionNode == another {
+func (it *LinkedCollectionNode) IsChainEqual(another *LinkedCollectionNode) bool {
+	if it == another {
 		return true
 	}
 
-	if another == nil && linkedCollectionNode == nil {
+	if another == nil && it == nil {
 		return true
 	}
 
-	if another == nil || linkedCollectionNode == nil {
+	if another == nil || it == nil {
 		return false
 	}
 
-	return linkedCollectionNode.IsEqual(another) &&
-		linkedCollectionNode.isNextChainEqual(another)
+	return it.IsEqual(another) &&
+		it.isNextChainEqual(another)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) IsEqual(another *LinkedCollectionNode) bool {
-	if linkedCollectionNode == nil && nil == another {
+func (it *LinkedCollectionNode) IsEqual(another *LinkedCollectionNode) bool {
+	if it == nil && nil == another {
 		return true
 	}
 
-	if linkedCollectionNode == nil || nil == another {
+	if it == nil || nil == another {
 		return false
 	}
 
-	if linkedCollectionNode == another {
+	if it == another {
 		return true
 	}
 
 	//goland:noinspection GoNilness
 
-	elem1 := linkedCollectionNode.Element
+	elem1 := it.Element
 	elem2 := another.Element
 
 	//goland:noinspection GoNilness
@@ -131,16 +133,16 @@ func (linkedCollectionNode *LinkedCollectionNode) IsEqual(another *LinkedCollect
 		return true
 	}
 
-	isElementSame := elem1.IsEqualsPtr(elem2)
+	isElementSame := elem1.IsEquals(elem2)
 
 	return isElementSame &&
-		linkedCollectionNode.isNextEqual(another)
+		it.isNextEqual(another)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) isNextEqual(
+func (it *LinkedCollectionNode) isNextEqual(
 	another *LinkedCollectionNode,
 ) bool {
-	next1 := linkedCollectionNode.Next()
+	next1 := it.Next()
 	next2 := another.Next()
 
 	if next1 == nil && nil == next2 {
@@ -157,14 +159,15 @@ func (linkedCollectionNode *LinkedCollectionNode) isNextEqual(
 
 	return next1.
 		Element.
-		IsEqualsPtr(
-			next2.Element)
+		IsEquals(
+			next2.Element,
+		)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) isNextChainEqual(
+func (it *LinkedCollectionNode) isNextChainEqual(
 	another *LinkedCollectionNode,
 ) bool {
-	next1 := linkedCollectionNode.Next()
+	next1 := it.Next()
 	next2 := another.Next()
 
 	if next1 == nil && nil == next2 {
@@ -178,8 +181,8 @@ func (linkedCollectionNode *LinkedCollectionNode) isNextChainEqual(
 	return next1.IsChainEqual(next2)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) IsEqualValue(collection *Collection) bool {
-	elem1 := linkedCollectionNode.Element
+func (it *LinkedCollectionNode) IsEqualValue(collection *Collection) bool {
+	elem1 := it.Element
 
 	//goland:noinspection GoNilness
 	if elem1 == nil && nil == collection {
@@ -194,14 +197,14 @@ func (linkedCollectionNode *LinkedCollectionNode) IsEqualValue(collection *Colle
 		return true
 	}
 
-	return elem1.IsEqualsPtr(collection)
+	return elem1.IsEquals(collection)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) EndOfChain() (
+func (it *LinkedCollectionNode) EndOfChain() (
 	endOfChain *LinkedCollectionNode,
 	length int,
 ) {
-	node := linkedCollectionNode
+	node := it
 	length++
 
 	for node.HasNext() {
@@ -212,10 +215,10 @@ func (linkedCollectionNode *LinkedCollectionNode) EndOfChain() (
 	return node, length
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
+func (it *LinkedCollectionNode) LoopEndOfChain(
 	processor LinkedCollectionSimpleProcessor,
 ) (endOfLoop *LinkedCollectionNode, length int) {
-	node := linkedCollectionNode
+	node := it
 	arg := &LinkedCollectionProcessorParameter{
 		Index:         0,
 		CurrentNode:   node,
@@ -258,26 +261,26 @@ func (linkedCollectionNode *LinkedCollectionNode) LoopEndOfChain(
 	return node, length
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) CreateLinkedList() *LinkedCollections {
+func (it *LinkedCollectionNode) CreateLinkedList() *LinkedCollections {
 	return Empty.LinkedCollections().
-		AppendChainOfNodes(linkedCollectionNode)
+		AppendChainOfNodes(it)
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) Clone() *LinkedCollectionNode {
+func (it *LinkedCollectionNode) Clone() *LinkedCollectionNode {
 	return &LinkedCollectionNode{
-		Element: linkedCollectionNode.Element,
+		Element: it.Element,
 		next:    nil,
 	}
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) String() string {
-	return linkedCollectionNode.Element.String()
+func (it *LinkedCollectionNode) String() string {
+	return it.Element.String()
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) ListPtr() *[]string {
+func (it *LinkedCollectionNode) ListPtr() *[]string {
 	list := make([]string, 0, constants.ArbitraryCapacity100)
 
-	node := linkedCollectionNode
+	node := it
 	list = append(list, node.Element.List()...)
 
 	for node.HasNext() {
@@ -289,21 +292,21 @@ func (linkedCollectionNode *LinkedCollectionNode) ListPtr() *[]string {
 	return &list
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) Join(separator string) *string {
-	list := linkedCollectionNode.ListPtr()
+func (it *LinkedCollectionNode) Join(separator string) *string {
+	list := it.ListPtr()
 	toString := strings.Join(*list, separator)
 
 	return &toString
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) StringListPtr(header string) *string {
+func (it *LinkedCollectionNode) StringListPtr(header string) *string {
 	finalString := header +
-		*linkedCollectionNode.Join(commonJoiner)
+		*it.Join(commonJoiner)
 
 	return &finalString
 }
 
-func (linkedCollectionNode *LinkedCollectionNode) Print(header string) {
-	finalString := linkedCollectionNode.StringListPtr(header)
+func (it *LinkedCollectionNode) Print(header string) {
+	finalString := it.StringListPtr(header)
 	fmt.Println(finalString)
 }

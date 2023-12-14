@@ -38,9 +38,9 @@ func (it *RwxInstructionExecutor) IsEqualRwxWrapper(rwxWrapper *RwxWrapper) bool
 // IsEqualRwxPartial
 //
 // rwxPartial:
-//  - "-rwx" will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx" will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 func (it *RwxInstructionExecutor) IsEqualRwxPartial(rwxPartial string) bool {
 	return it.varWrapper.IsEqualPartialRwxPartial(rwxPartial)
 }
@@ -92,8 +92,9 @@ func (it *RwxInstructionExecutor) CompiledRwxWrapperUsingFixedRwxWrapper(
 // ApplyOnPath
 //
 // Warning:
-//  swallows error if chmodins.RwxInstruction. IsSkipOnInvalid or
-//  chmodins.RwxInstruction.IsExitOnInvalid() comes as negative
+//
+//	swallows error if chmodins.RwxInstruction. IsSkipOnInvalid or
+//	chmodins.RwxInstruction.IsExitOnInvalid() comes as negative
 func (it *RwxInstructionExecutor) ApplyOnPath(location string) error {
 	existingRwxFileModWrapper, err := GetExistingChmodRwxWrapperPtr(
 		location)

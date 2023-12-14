@@ -17,5 +17,5 @@ func NonWhitespaceJoinPtr(slice *[]string, joiner string) string {
 		return constants.EmptyString
 	}
 
-	return strings.Join(*NonWhitespaceSlicePtr(slice), joiner)
+	return strings.Join(*NonWhitespacePtr(slice), joiner)
 }

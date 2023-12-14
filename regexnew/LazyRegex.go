@@ -7,7 +7,7 @@ import (
 
 // LazyRegex
 //
-//  lazy regex for future unwrapping or compiled but only once.
+//	lazy regex for future unwrapping or compiled but only once.
 type LazyRegex struct {
 	isCompiled   bool
 	isApplicable bool // no err, pattern defined, not null
@@ -33,7 +33,7 @@ func (it *LazyRegex) IsUndefined() bool {
 
 // IsApplicable
 //
-//  it unwraps the regex and compiles so take memory for once.
+//	it unwraps the regex and compiles so take memory for once.
 func (it *LazyRegex) IsApplicable() bool {
 	if it.isApplicable {
 		return true
@@ -53,7 +53,7 @@ func (it *LazyRegex) IsApplicable() bool {
 
 // Compile
 //
-//  it is done through the locking mechanism
+//	it is done through the locking mechanism
 func (it *LazyRegex) Compile() (regex *regexp.Regexp, err error) {
 	if it.IsCompiled() {
 		return it.regex, it.compiledErr
@@ -199,10 +199,10 @@ func (it *LazyRegex) MatchError(matchingPattern string) error {
 
 // MatchUsingFuncError
 //
-//  creates new regex using lock
-//  and then calls match.
-//  On condition mismatch returns error
-//  or else nil
+//	creates new regex using lock
+//	and then calls match.
+//	On condition mismatch returns error
+//	or else nil
 func (it *LazyRegex) MatchUsingFuncError(
 	comparing string,
 	matchFunc RegexValidationFunc,

@@ -40,15 +40,15 @@ func (it *KeyAnyValuePair) Compile() string {
 }
 
 func (it *KeyAnyValuePair) IsValueNull() bool {
-	return it == nil || reflectinternal.IsNull(it.Value)
+	return it == nil || reflectinternal.Is.Null(it.Value)
 }
 
 func (it *KeyAnyValuePair) HasNonNull() bool {
-	return it != nil && reflectinternal.IsNotNull(it.Value)
+	return it != nil && reflectinternal.Is.Defined(it.Value)
 }
 
 func (it *KeyAnyValuePair) HasValue() bool {
-	return it != nil && reflectinternal.IsNotNull(it.Value)
+	return it != nil && reflectinternal.Is.Defined(it.Value)
 }
 
 func (it *KeyAnyValuePair) IsValueEmptyString() bool {
@@ -69,12 +69,12 @@ func (it *KeyAnyValuePair) ValueString() string {
 
 		return it.
 			valueString.
-			GetPlusSetOnUninitialized(valueString)
+			GetSetOnce(valueString)
 	}
 
 	return it.
 		valueString.
-		GetPlusSetEmptyOnUninitialized()
+		GetOnce()
 }
 
 func (it *KeyAnyValuePair) Serialize() ([]byte, error) {
@@ -141,7 +141,8 @@ func (it KeyAnyValuePair) String() string {
 	return fmt.Sprintf(
 		keyValuePrintFormat,
 		it.Key,
-		it.Value)
+		it.Value,
+	)
 }
 
 func (it *KeyAnyValuePair) Clear() {

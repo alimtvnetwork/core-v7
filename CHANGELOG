@@ -1,0 +1,26 @@
+# v1.5.0 : Args, coretestcases, added error stack, Revamp - Redesign, coretest, Add tests, Refactor - Converters, reflectinernal, convertinternal, chmodhelper, codestack
+
+- #1 : Add Args Package for Testing
+- #2 : Add - New - coretestscases package for enhanced testcases
+- #3 : Refactor - CoreDynamic
+- #4 : Add New - CodeStack - reflectinternal, support to errcore to have stack straces, optimize codestack package by reusing from reflectinternal
+- #5 : Add New - looper - reflectinternal
+- #6 : Add New - isChecker - reflectinternal
+- #7 : Add New - mapConverter - reflectinternal
+- #8 : Add New - reflectPath - in reflectinternal package
+- #9 : Add New - getFunc- in reflectinternal package
+- #10 : Add New - reflectTypeConverter / ReflectType - in reflectinternal package
+- #11 : Add New - reflectGetUsingReflectValue - in reflectinternal package
+- #12 : Add New - msgcreator pkg
+- #13 : Add new pathinternal
+- #14 : Improve corevalidator - SliceValidator, TextValidator, RangeValidator naming
+- #15 : Add - codegen - feature
+ 
+
+## Tests / Integration Tests
+
+- #16 : Tests - Add - isany pkg
+- #17 : Tests - Add - coreversiontests pkg
+- #18 : Tests - Add - corevalidatortests pkg
+- #19 : Tests - Add - corerangestests pkg
+- #20 : Tests - Add - corecsvtests pkg

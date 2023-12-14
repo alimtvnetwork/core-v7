@@ -141,8 +141,9 @@ func (it *LeftRight) HasValidNonWhitespaceRight() bool {
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
-//		!receiver.IsLeftEmpty() &&
-//		!receiver.IsRightEmpty()
+//
+//	!receiver.IsLeftEmpty() &&
+//	!receiver.IsRightEmpty()
 func (it *LeftRight) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsLeftEmpty() &&

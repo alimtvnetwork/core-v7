@@ -2,16 +2,16 @@ package chmodhelper
 
 func CreateDirFilesWithRwxPermissions(
 	isRemoveAllDirBeforeCreate bool,
-	dirFilesWithRwxPermissions *[]*DirFilesWithRwxPermission,
+	dirFilesWithRwxPermissions []DirFilesWithRwxPermission,
 ) error {
-	if dirFilesWithRwxPermissions == nil || len(*dirFilesWithRwxPermissions) == 0 {
+	if dirFilesWithRwxPermissions == nil || len(dirFilesWithRwxPermissions) == 0 {
 		return nil
 	}
 
-	for _, pathCreate := range *dirFilesWithRwxPermissions {
+	for _, pathCreate := range dirFilesWithRwxPermissions {
 		err2 := CreateDirFilesWithRwxPermission(
 			isRemoveAllDirBeforeCreate,
-			pathCreate)
+			&pathCreate)
 
 		if err2 != nil {
 			return err2

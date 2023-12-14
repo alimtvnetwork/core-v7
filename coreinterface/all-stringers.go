@@ -44,11 +44,11 @@ type ToValueStringer interface {
 
 // ToNumberStringer
 //
-//  It returns string number value.
+//	It returns string number value.
 //
 // Examples:
-//  - ToNumberString() -> "1"  if the value is 1
-//  - ToNumberString() -> "10" if the value is 10
+//   - ToNumberString() -> "1"  if the value is 1
+//   - ToNumberString() -> "10" if the value is 10
 type ToNumberStringer interface {
 	// ToNumberString
 	//

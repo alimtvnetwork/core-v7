@@ -16,10 +16,6 @@ type DirFilesWithRwxPermission struct {
 }
 
 func (it *DirFilesWithRwxPermission) GetPaths() []string {
-	return *it.GetPathsPtr()
-}
-
-func (it *DirFilesWithRwxPermission) GetPathsPtr() *[]string {
 	collection := corestr.New.Collection.Cap(constants.ArbitraryCapacity50)
 
 	for _, file := range it.Files {
@@ -27,17 +23,18 @@ func (it *DirFilesWithRwxPermission) GetPathsPtr() *[]string {
 		collection.Add(compiledPath)
 	}
 
-	return collection.ListPtr()
+	return collection.List()
 }
 
 func (it *DirFilesWithRwxPermission) GetFilesChmodMap() *corestr.Hashmap {
-	files := it.GetPathsPtr()
+	files := it.GetPaths()
 
-	hashmap, err := GetFilesChmodRwxFullMap(*files)
+	hashmap, err := GetFilesChmodRwxFullMap(files)
 
 	errcore.SimpleHandleErr(
 		err,
-		"GetFilesChmodMap() failed to retrive hashmap from file paths")
+		"GetFilesChmodMap() failed to retrieve hashmap from file paths",
+	)
 
 	return hashmap
 }
@@ -47,14 +44,16 @@ func (it *DirFilesWithRwxPermission) CreatePaths(
 ) error {
 	return CreateDirFilesWithRwxPermission(
 		isRemoveBeforeCreate,
-		it)
+		it,
+	)
 }
 
-func (it *DirFilesWithRwxPermission) CreatePathsUsingFileMode(
+func (it *DirFilesWithRwxPermission) CreateUsingFileMode(
 	isRemoveBeforeCreate bool,
 	fileMode os.FileMode,
 ) error {
 	return it.DirWithFiles.CreatePaths(
 		isRemoveBeforeCreate,
-		fileMode)
+		fileMode,
+	)
 }

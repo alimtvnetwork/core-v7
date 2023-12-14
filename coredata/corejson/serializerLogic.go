@@ -176,13 +176,13 @@ func (it serializerLogic) ToSafeBytesMust(
 // ToSafeBytesSwallowErr
 //
 // Warning or Danger:
-//  - shallow err by not throwing or returning (could be dangerous as well)
+//   - shallow err by not throwing or returning (could be dangerous as well)
 //
 // Notes :
-//  - To inform use Err or Apply or must methods
+//   - To inform use Err or Apply or must methods
 //
 // Use case (rarely):
-//  - When don't care about the error just proceed with the value.
+//   - When don't care about the error just proceed with the value.
 func (it serializerLogic) ToSafeBytesSwallowErr(
 	anyItem interface{},
 ) []byte {
@@ -194,13 +194,13 @@ func (it serializerLogic) ToSafeBytesSwallowErr(
 // ToBytesSwallowErr
 //
 // Warning or Danger:
-//  - shallow err by not throwing or returning (could be dangerous as well)
+//   - shallow err by not throwing or returning (could be dangerous as well)
 //
 // Notes :
-//  - To inform use Err or Apply or must methods
+//   - To inform use Err or Apply or must methods
 //
 // Use case (rarely):
-//  - When don't care about the error just proceed with the value.
+//   - When don't care about the error just proceed with the value.
 func (it serializerLogic) ToBytesSwallowErr(
 	anyItem interface{},
 ) []byte {
@@ -220,16 +220,16 @@ func (it serializerLogic) ToBytesErr(
 // ToString
 //
 // Warning:
-//  - Shallow err by not throwing or
-//      returning (could be dangerous as well)
-//  - However, with this version
-//      if error occurred then error will be returned as string.
+//   - Shallow err by not throwing or
+//     returning (could be dangerous as well)
+//   - However, with this version
+//     if error occurred then error will be returned as string.
 //
 // Notes :
-//  - To inform use Err or Apply or must methods
+//   - To inform use Err or Apply or must methods
 //
 // Use case (rarely):
-//  - When don't care about the error just proceed with the value.
+//   - When don't care about the error just proceed with the value.
 func (it serializerLogic) ToString(
 	anyItem interface{},
 ) string {
@@ -266,16 +266,16 @@ func (it serializerLogic) ToPrettyStringErr(
 // ToPrettyStringIncludingErr
 //
 // Warning:
-//  - Shallow err by not throwing or
-//      returning (could be dangerous as well)
-//  - However, with this version
-//      if error occurred then error will be returned as string.
+//   - Shallow err by not throwing or
+//     returning (could be dangerous as well)
+//   - However, with this version
+//     if error occurred then error will be returned as string.
 //
 // Notes :
-//  - To inform use Err or Apply or must methods
+//   - To inform use Err or Apply or must methods
 //
 // Use case (rarely):
-//  - When don't care about the error just proceed with the value.
+//   - When don't care about the error just proceed with the value.
 func (it serializerLogic) ToPrettyStringIncludingErr(
 	anyItem interface{},
 ) string {

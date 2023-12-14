@@ -11,8 +11,8 @@ type LeftRight struct {
 
 func (it *LeftRight) IsEmpty() bool {
 	return it == nil ||
-		reflectinternal.IsNull(it.Left) &&
-			reflectinternal.IsNull(it.Right)
+		reflectinternal.Is.Null(it.Left) &&
+			reflectinternal.Is.Null(it.Right)
 }
 
 func (it *LeftRight) HasAnyItem() bool {
@@ -21,22 +21,22 @@ func (it *LeftRight) HasAnyItem() bool {
 
 func (it *LeftRight) HasLeft() bool {
 	return it != nil &&
-		reflectinternal.IsNull(it.Left)
+		reflectinternal.Is.Null(it.Left)
 }
 
 func (it *LeftRight) HasRight() bool {
 	return it != nil &&
-		reflectinternal.IsNull(it.Right)
+		reflectinternal.Is.Null(it.Right)
 }
 
 func (it *LeftRight) IsLeftEmpty() bool {
 	return it == nil ||
-		reflectinternal.IsNull(it.Left)
+		reflectinternal.Is.Null(it.Left)
 }
 
 func (it *LeftRight) IsRightEmpty() bool {
 	return it == nil ||
-		reflectinternal.IsNull(it.Right)
+		reflectinternal.Is.Null(it.Right)
 }
 
 func (it *LeftRight) LeftReflectSet(

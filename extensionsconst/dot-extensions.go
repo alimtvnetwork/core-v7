@@ -1,6 +1,7 @@
 package extensionsconst
 
 // References : https://t.ly/4dWf
+//
 //goland:noinspection ALL
 const (
 	AllFiles                string = "*.*"

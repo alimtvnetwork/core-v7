@@ -8,55 +8,61 @@ import (
 	"gitlab.com/auk-go/core/corevalidator"
 	"gitlab.com/auk-go/core/enums/stringcompareas"
 	"gitlab.com/auk-go/core/errcore"
-	"gitlab.com/auk-go/core/tests/testwrappers/corevalidatortestwrappers"
 )
 
 func Test_TestValidators(t *testing.T) {
-	for caseIndex, testCase := range corevalidatortestwrappers.TextValidatorsTestCases {
+	for caseIndex, testCase := range textValidatorsTestCases {
 		// Arrange
-		paramsBase := corevalidator.ValidatorParamsBase{
-			CaseIndex:                         constants.Zero, // fixing test case number here as it is fixed data
-			IsIgnoreCompareOnActualInputEmpty: testCase.IsSkipOnContentsEmpty,
-			IsAttachUserInputs:                true,
-			IsCaseSensitive:                   testCase.IsCaseSensitive,
+		parameter := corevalidator.Parameter{
+			CaseIndex:                  constants.Zero, // fixing test case number here as it is fixed data
+			Header:                     testCase.Header,
+			IsSkipCompareOnActualEmpty: testCase.IsSkipOnContentsEmpty,
+			IsAttachUserInputs:         true,
+			IsCaseSensitive:            testCase.IsCaseSensitive,
 		}
 
 		err := testCase.Validators.AllVerifyErrorMany(
-			&paramsBase,
-			testCase.ComparingLines...)
+			&parameter,
+			testCase.ComparingLines...,
+		)
 
 		errorLines := errcore.ErrorToSplitLines(
-			err)
+			err,
+		)
 
 		sliceValidator := corevalidator.SliceValidator{
+			Condition:     corevalidator.DefaultDisabledCoreCondition,
+			CompareAs:     stringcompareas.Equal,
 			ActualLines:   errorLines,
 			ExpectedLines: testCase.ExpectationLines,
-			ValidatorCoreCondition: corevalidator.ValidatorCoreCondition{
-				IsTrimCompare:        false,
-				IsNonEmptyWhitespace: false,
-				IsSortStringsBySpace: false,
-			},
-			CompareAs: stringcompareas.Equal,
 		}
 
-		paramsBase2 := corevalidator.ValidatorParamsBase{
-			CaseIndex:                         caseIndex,
-			IsIgnoreCompareOnActualInputEmpty: false,
-			IsAttachUserInputs:                true,
-			IsCaseSensitive:                   testCase.IsCaseSensitive,
+		nextBaseParam := corevalidator.Parameter{
+			CaseIndex:                  caseIndex,
+			Header:                     testCase.Header,
+			IsSkipCompareOnActualEmpty: false,
+			IsAttachUserInputs:         true,
+			IsCaseSensitive:            testCase.IsCaseSensitive,
 		}
 
 		// Act
 		validationFinalError := sliceValidator.AllVerifyError(
-			&paramsBase2)
+			&nextBaseParam,
+		)
 
 		isValid := validationFinalError == nil
 
 		// Assert
-		convey.Convey(testCase.Header, t, func() {
-			errcore.ErrPrintWithTestIndex(caseIndex, validationFinalError)
+		convey.Convey(
+			testCase.Header, t, func() {
+				errcore.PrintErrorWithTestIndex(
+					caseIndex,
+					testCase.Header,
+					validationFinalError,
+				)
 
-			convey.So(isValid, convey.ShouldBeTrue)
-		})
+				convey.So(isValid, convey.ShouldBeTrue)
+			},
+		)
 	}
 }

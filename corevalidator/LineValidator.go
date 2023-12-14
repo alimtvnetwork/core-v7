@@ -62,7 +62,7 @@ func (it *LineValidator) IsMatchMany(
 //
 // having LineValidator.LineNumber = -1 is also means the same
 func (it *LineValidator) VerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	processingLineNumber int,
 	content string,
 ) error {
@@ -86,7 +86,7 @@ func (it *LineValidator) VerifyError(
 
 func (it *LineValidator) VerifyMany(
 	isContinueOnError bool,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contentsWithLine ...corestr.TextWithLineNumber,
 ) error {
 	if isContinueOnError {
@@ -101,7 +101,7 @@ func (it *LineValidator) VerifyMany(
 }
 
 func (it *LineValidator) VerifyFirstError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contentsWithLine ...corestr.TextWithLineNumber,
 ) error {
 	if it == nil {
@@ -109,7 +109,7 @@ func (it *LineValidator) VerifyFirstError(
 	}
 
 	length := len(contentsWithLine)
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
 	}
 
@@ -129,7 +129,7 @@ func (it *LineValidator) VerifyFirstError(
 }
 
 func (it *LineValidator) AllVerifyError(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contentsWithLine ...corestr.TextWithLineNumber,
 ) error {
 	if it == nil {
@@ -137,7 +137,7 @@ func (it *LineValidator) AllVerifyError(
 	}
 
 	length := len(contentsWithLine)
-	if length == 0 && params.IsIgnoreCompareOnActualInputEmpty {
+	if length == 0 && params.IsSkipCompareOnActualEmpty {
 		return nil
 	}
 

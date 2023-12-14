@@ -46,7 +46,8 @@ func (it *TextValidators) Add(
 ) *TextValidators {
 	it.Items = append(
 		it.Items,
-		validator)
+		validator,
+	)
 
 	return it
 }
@@ -60,7 +61,8 @@ func (it *TextValidators) Adds(
 
 	it.Items = append(
 		it.Items,
-		validators...)
+		validators...,
+	)
 
 	return it
 }
@@ -69,17 +71,19 @@ func (it *TextValidators) AddSimple(
 	searchTerm string,
 	compareAs stringcompareas.Variant,
 ) *TextValidators {
-	return it.Add(TextValidator{
-		Search:   searchTerm,
-		SearchAs: compareAs,
-	})
+	return it.Add(
+		TextValidator{
+			Search:   searchTerm,
+			SearchAs: compareAs,
+		},
+	)
 }
 
 func (it *TextValidators) AddSimpleAllTrue(
 	searchTerm string,
 	compareAs stringcompareas.Variant,
 ) *TextValidators {
-	coreCondition := ValidatorCoreCondition{
+	coreCondition := Condition{
 		IsTrimCompare:        true,
 		IsNonEmptyWhitespace: true,
 		IsSortStringsBySpace: true,
@@ -88,10 +92,11 @@ func (it *TextValidators) AddSimpleAllTrue(
 
 	return it.Add(
 		TextValidator{
-			Search:                 searchTerm,
-			SearchAs:               compareAs,
-			ValidatorCoreCondition: coreCondition,
-		})
+			Search:    searchTerm,
+			SearchAs:  compareAs,
+			Condition: coreCondition,
+		},
+	)
 }
 
 func (it *TextValidators) HasAnyItem() bool {
@@ -108,7 +113,8 @@ func (it *TextValidators) HasIndex(index int) bool {
 
 func (it *TextValidators) String() string {
 	return strutilinternal.AnyToFieldNameString(
-		it.Items)
+		it.Items,
+	)
 }
 
 func (it *TextValidators) IsMatch(
@@ -122,7 +128,8 @@ func (it *TextValidators) IsMatch(
 	for _, validator := range it.Items {
 		if !validator.IsMatch(
 			content,
-			isCaseSensitive) {
+			isCaseSensitive,
+		) {
 			return false
 		}
 	}
@@ -143,7 +150,8 @@ func (it *TextValidators) IsMatchMany(
 		isNotMatched := !validator.IsMatchMany(
 			isSkipOnContentsEmpty,
 			isCaseSensitive,
-			contents...)
+			contents...,
+		)
 
 		if isNotMatched {
 			return isNotMatched
@@ -162,11 +170,11 @@ func (it *TextValidators) VerifyFirstError(
 		return nil
 	}
 
-	params := ValidatorParamsBase{
-		CaseIndex:                         caseIndex,
-		IsIgnoreCompareOnActualInputEmpty: false,
-		IsAttachUserInputs:                false,
-		IsCaseSensitive:                   isCaseSensitive,
+	params := Parameter{
+		CaseIndex:                  caseIndex,
+		IsSkipCompareOnActualEmpty: false,
+		IsAttachUserInputs:         false,
+		IsCaseSensitive:            isCaseSensitive,
 	}
 
 	for _, validator := range it.Items {
@@ -185,7 +193,7 @@ func (it *TextValidators) VerifyFirstError(
 
 func (it *TextValidators) VerifyErrorMany(
 	isContinueOnError bool,
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if it == nil {
@@ -195,16 +203,18 @@ func (it *TextValidators) VerifyErrorMany(
 	if isContinueOnError {
 		return it.AllVerifyErrorMany(
 			params,
-			contents...)
+			contents...,
+		)
 	}
 
 	return it.VerifyFirstErrorMany(
 		params,
-		contents...)
+		contents...,
+	)
 }
 
 func (it *TextValidators) VerifyFirstErrorMany(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if it.IsEmpty() {
@@ -226,7 +236,7 @@ func (it *TextValidators) VerifyFirstErrorMany(
 }
 
 func (it *TextValidators) AllVerifyErrorMany(
-	params *ValidatorParamsBase,
+	params *Parameter,
 	contents ...string,
 ) error {
 	if it.IsEmpty() {
@@ -237,7 +247,8 @@ func (it *TextValidators) AllVerifyErrorMany(
 	errorSlice := make(
 		[]string,
 		0,
-		capacity)
+		capacity,
+	)
 
 	for _, item := range it.Items {
 		err := item.AllVerifyError(
@@ -248,12 +259,14 @@ func (it *TextValidators) AllVerifyErrorMany(
 		if err != nil {
 			errorSlice = append(
 				errorSlice,
-				err.Error())
+				err.Error(),
+			)
 		}
 	}
 
 	return errcore.SliceToError(
-		errorSlice)
+		errorSlice,
+	)
 }
 
 func (it *TextValidators) AllVerifyError(
@@ -269,19 +282,21 @@ func (it *TextValidators) AllVerifyError(
 	errorSlice := make(
 		[]string,
 		0,
-		capacity)
+		capacity,
+	)
 
-	params := ValidatorParamsBase{
-		CaseIndex:                         caseIndex,
-		IsIgnoreCompareOnActualInputEmpty: false,
-		IsAttachUserInputs:                false,
-		IsCaseSensitive:                   isCaseSensitive,
+	params := Parameter{
+		CaseIndex:                  caseIndex,
+		IsSkipCompareOnActualEmpty: false,
+		IsAttachUserInputs:         false,
+		IsCaseSensitive:            isCaseSensitive,
 	}
 
 	for _, item := range it.Items {
 		err := item.VerifyDetailError(
 			&params,
-			content)
+			content,
+		)
 
 		if err != nil {
 			errorSlice = append(errorSlice, err.Error())
@@ -289,4 +304,12 @@ func (it *TextValidators) AllVerifyError(
 	}
 
 	return errcore.SliceToError(errorSlice)
+}
+
+func (it *TextValidators) Dispose() {
+	if it == nil {
+		return
+	}
+
+	it.Items = nil
 }

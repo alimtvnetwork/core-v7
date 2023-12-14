@@ -9,22 +9,24 @@ import (
 
 func Test_Enum(t *testing.T) {
 	for _, testCase := range enumTestCases {
-		Convey(testCase.Header, t, func() {
-			switch testCase.EnumType {
-			case enumtype.Byte:
-				assertBasicByte(testCase)
-			case enumtype.Integer8:
-				assertBasicInteger8(testCase)
-			case enumtype.Integer16:
-				assertBasicInteger16(testCase)
-			case enumtype.Integer32:
-				assertBasicInteger32(testCase)
-			case enumtype.UnsignedInteger16:
-				assertBasicUnsignedInteger16(testCase)
-			case enumtype.String:
-				assertBasicString(testCase)
-			}
-		})
+		Convey(
+			testCase.Header, t, func() {
+				switch testCase.EnumType {
+				case enumtype.Byte:
+					assertBasicByte(testCase)
+				case enumtype.Integer8:
+					assertBasicInteger8(testCase)
+				case enumtype.Integer16:
+					assertBasicInteger16(testCase)
+				case enumtype.Integer32:
+					assertBasicInteger32(testCase)
+				case enumtype.UnsignedInteger16:
+					assertBasicUnsignedInteger16(testCase)
+				case enumtype.String:
+					assertBasicString(testCase)
+				}
+			},
+		)
 	}
 }
 

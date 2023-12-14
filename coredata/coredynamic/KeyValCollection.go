@@ -324,6 +324,7 @@ func (it *KeyValCollection) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *KeyValCollection) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,

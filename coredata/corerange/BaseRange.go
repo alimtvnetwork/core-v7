@@ -13,31 +13,31 @@ type BaseRange struct {
 	HasStart, HasEnd bool
 }
 
-func (receiver *BaseRange) CreateRangeInt(minMax *MinMaxInt) *RangeInt {
+func (it *BaseRange) CreateRangeInt(minMax *MinMaxInt) *RangeInt {
 	return NewRangeInt(
-		receiver.RawInput,
-		receiver.Separator,
+		it.RawInput,
+		it.Separator,
 		minMax)
 }
 
-func (receiver *BaseRange) IsInvalid() bool {
-	return !receiver.IsValid
+func (it *BaseRange) IsInvalid() bool {
+	return !it.IsValid
 }
 
-func (receiver *BaseRange) BaseRangeClone() *BaseRange {
+func (it *BaseRange) BaseRangeClone() *BaseRange {
 	return &BaseRange{
-		RawInput:  receiver.RawInput,
-		Separator: receiver.Separator,
-		IsValid:   receiver.IsValid,
-		HasStart:  receiver.HasStart,
-		HasEnd:    receiver.HasEnd,
+		RawInput:  it.RawInput,
+		Separator: it.Separator,
+		IsValid:   it.IsValid,
+		HasStart:  it.HasStart,
+		HasEnd:    it.HasEnd,
 	}
 }
 
-func (receiver *BaseRange) String(start, end interface{}) string {
+func (it *BaseRange) String(start, end interface{}) string {
 	format := constants.SprintValueFormat +
-		receiver.Separator +
+		it.Separator +
 		constants.SprintValueFormat
 
-	return fmt.Sprint(format, start, end)
+	return fmt.Sprintf(format, start, end)
 }

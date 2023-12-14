@@ -105,6 +105,19 @@ func (it deserializerLogic) FromString(
 		toPtr)
 }
 
+func (it deserializerLogic) FromStringMust(
+	jsonString string,
+	toPtr interface{},
+) {
+	err := it.UsingBytes(
+		[]byte(jsonString),
+		toPtr)
+
+	if err != nil {
+		panic(err)
+	}
+}
+
 // FromTo
 //
 // Giving nil is not support from to.

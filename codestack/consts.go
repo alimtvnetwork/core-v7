@@ -41,5 +41,4 @@ const (
 	Skip18              = 18
 	Skip19              = 19
 	Skip20              = 20
-	gitlabDotCom        = "gitlab.com"
 )

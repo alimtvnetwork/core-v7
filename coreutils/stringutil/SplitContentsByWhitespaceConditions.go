@@ -23,15 +23,17 @@ func SplitContentsByWhitespaceConditions(
 	compiledStringSplits := strings.Fields(input)
 
 	if isNonEmptyWhitespace && isTrimEachLine {
-		compiledStringSplits = stringslice.NonWhitespaceTrimSlice(
-			compiledStringSplits)
+		compiledStringSplits = stringslice.TrimmedEachWords(
+			compiledStringSplits,
+		)
 	} else if isNonEmptyWhitespace && !isTrimEachLine {
-		compiledStringSplits = stringslice.NonWhitespaceSlice(
-			compiledStringSplits)
+		compiledStringSplits = stringslice.NonWhitespace(
+			compiledStringSplits,
+		)
 	}
 
 	if isUnique {
-		hashset := corestr.New.Hashset.StringsPtr(&compiledStringSplits)
+		hashset := corestr.New.Hashset.Strings(compiledStringSplits)
 		compiledStringSplits = hashset.List()
 	}
 

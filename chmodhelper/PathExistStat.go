@@ -186,8 +186,8 @@ func (it *PathExistStat) MessageWithPathWrapped(
 // NotAFileError
 //
 // Get error on:
-//  - Path has issues or not exist
-//  - Expecting file, if not file then error
+//   - Path has issues or not exist
+//   - Expecting file, if not file then error
 func (it *PathExistStat) NotAFileError() error {
 	if it == nil {
 		return nil
@@ -210,8 +210,8 @@ func (it *PathExistStat) NotAFileError() error {
 // NotADirError
 //
 // Get error on:
-//  - Path has issues or not exist
-//  - Expecting dir, if not dir then error
+//   - Path has issues or not exist
+//   - Expecting dir, if not dir then error
 func (it *PathExistStat) NotADirError() error {
 	if it == nil {
 		return nil

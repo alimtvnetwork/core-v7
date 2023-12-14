@@ -33,14 +33,14 @@ func DefaultAllFalseExceptRecurse() *Condition {
 
 // IsExitOnInvalid
 //
-//  returns true Condition is null or invert of IsSkipOnInvalid
+//	returns true Condition is null or invert of IsSkipOnInvalid
 func (it *Condition) IsExitOnInvalid() bool {
 	return it == nil || !it.IsSkipOnInvalid
 }
 
 // IsCollectErrorOnInvalid
 //
-//  returns true Condition is null or invert of IsSkipOnInvalid
+//	returns true Condition is null or invert of IsSkipOnInvalid
 func (it *Condition) IsCollectErrorOnInvalid() bool {
 	return it == nil || !it.IsSkipOnInvalid
 }

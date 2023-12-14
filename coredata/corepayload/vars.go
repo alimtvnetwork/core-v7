@@ -1,9 +1,11 @@
 package corepayload
 
-import "gitlab.com/auk-go/core/coredata/coredynamic"
+import (
+	"gitlab.com/auk-go/core/internal/reflectinternal"
+)
 
 var (
 	Empty              = emptyCreator{}
 	New                = newCreator{}
-	attributesTypeName = coredynamic.TypeName(Attributes{})
+	attributesTypeName = reflectinternal.TypeName(Attributes{})
 )

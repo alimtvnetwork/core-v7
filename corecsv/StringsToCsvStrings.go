@@ -9,9 +9,9 @@ import (
 // StringsToCsvStrings
 //
 // Formats :
-//  - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
-//  - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
-//  - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
+//   - isIncludeQuote && isIncludeSingleQuote = '%v' will be added
+//   - isIncludeQuote && !isIncludeSingleQuote = "'%v'" will be added
+//   - !isIncludeQuote && !isIncludeSingleQuote = %v will be added
 func StringsToCsvStrings(
 	isIncludeQuote,
 	isIncludeSingleQuote bool, // disable this will give double quote
@@ -27,7 +27,7 @@ func StringsToCsvStrings(
 		// single quote
 		for i, currentReference := range references {
 			slice[i] = fmt.Sprintf(
-				constants.ValueWithSingleQuoteFormat,
+				constants.StringWithSingleQuoteFormat,
 				currentReference)
 		}
 
@@ -36,7 +36,7 @@ func StringsToCsvStrings(
 		// double quote
 		for i, currentReference := range references {
 			slice[i] = fmt.Sprintf(
-				constants.ValueWithDoubleQuoteFormat,
+				constants.StringWithDoubleQuoteFormat,
 				currentReference)
 		}
 
@@ -46,7 +46,7 @@ func StringsToCsvStrings(
 	// no quote
 	for i, currentReference := range references {
 		slice[i] = fmt.Sprintf(
-			constants.SprintValueFormat,
+			constants.SprintStringFormat,
 			currentReference)
 	}
 

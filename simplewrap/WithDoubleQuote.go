@@ -9,6 +9,8 @@ import (
 // WithDoubleQuote " + source + " , also take care of any double if available next.
 func WithDoubleQuote(source string) string {
 	return fmt.Sprintf(
-		constants.SprintDoubleQuoteFormat,
-		source)
+		constants.SprintStartStringEndCharFormat,
+		constants.DoubleQuoteChar,
+		source,
+		constants.DoubleQuoteChar)
 }

@@ -7,7 +7,7 @@ import (
 
 var enumTestCases = []TestWrapper{
 	{
-		Header: "Byte enum example min 0, max 10",
+		Header: "Byte enum example min 0, max 10 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: 0,
 			Max: 10,
@@ -22,7 +22,7 @@ var enumTestCases = []TestWrapper{
 		EnumType: enumtype.Byte,
 	},
 	{
-		Header: "Integer8 enum example min -2, max 12",
+		Header: "Integer8 enum example min -2, max 12 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: -2,
 			Max: 12,
@@ -37,7 +37,7 @@ var enumTestCases = []TestWrapper{
 		EnumType: enumtype.Integer8,
 	},
 	{
-		Header: "Integer16 enum example min -3, max 14",
+		Header: "Integer16 enum example min -3, max 14 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: -3,
 			Max: 14,
@@ -52,10 +52,9 @@ var enumTestCases = []TestWrapper{
 		EnumType: enumtype.Integer16,
 	},
 	{
-		Header: "Integer32 enum example min -4, max 15",
+		Header: "Integer32 enum example min -4, max 15 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: -4,
-
 			Max: 15,
 		},
 		EnumMap: map[string]interface{}{
@@ -69,7 +68,7 @@ var enumTestCases = []TestWrapper{
 	},
 
 	{
-		Header: "UnsignedInteger16 enum example min 0, max 20",
+		Header: "UnsignedInteger16 enum example min 0, max 20 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: 0,
 			Max: 20,
@@ -83,7 +82,7 @@ var enumTestCases = []TestWrapper{
 		EnumType: enumtype.UnsignedInteger16,
 	},
 	{
-		Header: "String enum example min 0, max 20",
+		Header: "String enum example min 0, max 20 -- generates min, max from given map[string]interface and interface as ints",
 		ExpectedMinMax: corerange.MinMaxInt64{
 			Min: 0,
 			Max: 20,

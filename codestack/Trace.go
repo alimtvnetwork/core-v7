@@ -28,7 +28,7 @@ func (it *Trace) Message() string {
 
 	return it.
 		message.
-		GetPlusSetOnUninitializedFunc(
+		GetOnceFunc(
 			it.getCompiledMessage)
 }
 
@@ -38,10 +38,10 @@ func (it *Trace) Message() string {
 // using format shortStringFormat "%s (%d) -> %s:%d"
 //
 // Format :
-//  - https://prnt.sc/25ypcyc : "%s (%d) -> %s:%d"
+//   - https://prnt.sc/25ypcyc : "%s (%d) -> %s:%d"
 //
 // Example :
-//  - "Method (LineNumber) -> FileFullPath:LineNumber"
+//   - "Method (LineNumber) -> FileFullPath:LineNumber"
 func (it *Trace) ShortString() string {
 	if it.shortString.IsInitialized() {
 		return it.shortString.String()
@@ -56,7 +56,7 @@ func (it *Trace) ShortString() string {
 
 	return it.
 		shortString.
-		GetPlusSetOnUninitialized(
+		GetSetOnce(
 			shortString)
 }
 
@@ -112,10 +112,10 @@ func (it *Trace) LineNumber() int {
 // FileWithLineString
 //
 // Format :
-//  - https://prnt.sc/25yorfh : "%s:%d"
+//   - https://prnt.sc/25yorfh : "%s:%d"
 //
 // Example :
-//  - "FilePath:LineNumber"
+//   - "FilePath:LineNumber"
 func (it *Trace) FileWithLineString() string {
 	return fmt.Sprintf(
 		fileWithLineFormat,
@@ -184,6 +184,7 @@ func (it *Trace) ParseInjectUsingJson(
 }
 
 // ParseInjectUsingJsonMust Panic if error
+//
 //goland:noinspection GoLinterLocal
 func (it *Trace) ParseInjectUsingJsonMust(
 	jsonResult *corejson.Result,

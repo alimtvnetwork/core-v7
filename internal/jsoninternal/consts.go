@@ -1,0 +1,5 @@
+package jsoninternal
+
+const (
+	indent = "  "
+)

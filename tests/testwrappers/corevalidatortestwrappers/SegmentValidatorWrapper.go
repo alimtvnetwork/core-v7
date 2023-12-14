@@ -6,5 +6,5 @@ type SegmentValidatorWrapper struct {
 	Header                string
 	IsSkipOnContentsEmpty bool
 	IsCaseSensitive       bool
-	corevalidator.SimpleSliceRangeValidator
+	corevalidator.RangeSegmentsValidator
 }

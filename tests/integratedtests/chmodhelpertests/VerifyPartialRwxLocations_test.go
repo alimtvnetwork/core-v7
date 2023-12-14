@@ -14,10 +14,11 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 	coretests.SkipOnWindows(t)
 
 	// Arrange
-	createPathInstructions := chmodhelpertestwrappers.CreatePathInstruction2
+	createPathInstructions := pathInstructionsV2
 	chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 		true,
-		&createPathInstructions)
+		createPathInstructions,
+	)
 	for caseIndex, testCase := range chmodhelpertestwrappers.VerifyRwxPartialChmodLocationsTestCases {
 		header := testCase.Header
 		expectationMessage := testCase.ExpectationErrorMessage
@@ -27,7 +28,8 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 			testCase.IsContinueOnError,
 			testCase.IsSkipOnInvalid,
 			testCase.ExpectedPartialRwx,
-			testCase.Locations...)
+			testCase.Locations...,
+		)
 
 		expectation := &errcore.ExpectationMessageDef{
 			CaseIndex:      caseIndex,
@@ -39,13 +41,16 @@ func Test_VerifyRwxPartialChmodLocations_Unix(t *testing.T) {
 		}
 
 		// Assert
-		Convey(header, t, func() {
-			isEqual := coretests.IsErrorNonWhiteSortedEqual(
-				true,
-				err,
-				expectation)
+		Convey(
+			header, t, func() {
+				isEqual := coretests.IsErrorNonWhiteSortedEqual(
+					true,
+					err,
+					expectation,
+				)
 
-			So(isEqual, ShouldBeTrue)
-		})
+				So(isEqual, ShouldBeTrue)
+			},
+		)
 	}
 }

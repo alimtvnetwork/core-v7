@@ -16,18 +16,18 @@ type RwxVariableWrapper struct {
 
 // NewRwxVariableWrapper
 //
-//  partialRwx can be any length in
-//  between 1-10 (rest will be fixed by wildcard)
+//	partialRwx can be any length in
+//	between 1-10 (rest will be fixed by wildcard)
 //
-//  Hyphened prefix MUST.
+//	Hyphened prefix MUST.
 //
 // rwxPartial:
-//  - "-rwx"    will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx"    will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 //
 // Restrictions:
-//  - cannot have first char other than hyphen(-) or else things will not work
+//   - cannot have first char other than hyphen(-) or else things will not work
 func NewRwxVariableWrapper(partialRwx string) (*RwxVariableWrapper, error) {
 	fullRwxWithWildcard := chmodins.FixRwxFullStringWithWildcards(partialRwx)
 
@@ -264,14 +264,14 @@ func (varWrapper *RwxVariableWrapper) RwxMatchingStatus(
 
 // IsEqualPartialRwxPartial
 //
-//  will make the partial to full rwx and then calls IsEqualPartialFullRwx
-//  partialRwx can be any length in
-//  between 1-10 (rest will be fixed by wildcard)
+//	will make the partial to full rwx and then calls IsEqualPartialFullRwx
+//	partialRwx can be any length in
+//	between 1-10 (rest will be fixed by wildcard)
 //
 // rwxPartial:
-//  - "-rwx" will be "-rwx******"
-//  - "-rwxr-x" will be "-rwxr-x***"
-//  - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwx" will be "-rwx******"
+//   - "-rwxr-x" will be "-rwxr-x***"
+//   - "-rwxr-x" will be "-rwxr-x***"
 func (varWrapper *RwxVariableWrapper) IsEqualPartialRwxPartial(
 	rwxPartial string,
 ) bool {

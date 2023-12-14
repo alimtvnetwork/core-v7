@@ -18,50 +18,64 @@ const (
 	//
 	// Index, Input, Actual, Expected
 	QuickIndexInputActualExpectedMessageFormat = "----------------------\n" +
-		"%d )\tWhen:%#v\n\t\t" +
-		"  Actual:`%#v` ,\n\t\t" +
-		"Expected:`%#v`"
+		"%d )  When: %s,\n" +
+		"   Actual: %s,\n" +
+		" Expected: %s"
 
 	// QuickIndexTitleInputActualExpectedMessageFormat
 	//
 	// Index, Title, Input, Actual, Expected
 	QuickIndexTitleInputActualExpectedMessageFormat = "----------------------\n" +
-		"%d )\tTitle:%#v\n\t\t" +
-		"   Input:`%#v` ,\n\t\t" +
-		"  Actual:`%#v` ,\n\t\t" +
-		"Expected:`%#v`"
+		"%d )  Title:%#v\n" +
+		"      Input:`%#v` ,\n\n" +
+		"  Actual:\n  `%#v` ,\n\n" +
+		"Expected:\n  `%#v`"
+
+	QuickLinesFormat = "----------------------\n" +
+		"%d )  Title: %s\n\n" +
+		"=================>\n" +
+		"%d ) Actual: %s\n" +
+		"=================>\n" +
+		"[]string{\n" +
+		"%s\n},\n" +
+		"=================>\n" +
+		"%d ) Expected: %s\n" +
+		"=================>\n" +
+		"%s\n\n"
 
 	PrintWhenActualAndExpectedProcessedFormat = "" +
 		"\n%d )" +
 		"   When: %#v\n  " +
-		"    Func:`%#v` ,\n  " +
-		"  Actual:`%#v` ,\n  " +
-		"Expected:`%#v`\n  " +
-		"  Actual-Processed:`%#v`,\n  " +
-		"Expected-Processed:`%#v`,\n  " +
-		"    TestCase:`%#v` ,\n  "
+		"    Func:`%#v` ,\n\n  " +
+		"  Actual:\n  `%#v`,\n\n  " +
+		"Expected:\n  `%#v`,\n\n\n  " +
+		"  Actual-Processed:\n   `%#v`,\n\n" +
+		"Expected-Processed:\n   `%#v`,\n\n" +
+		"    TestCase:\n   %#v ,\n  "
 
 	PrintActualAndExpectedProcessedFormat = "----------------------" +
-		"\n%d )\t" +
+		"\n\n%d )\t" +
 		"  Actual:`%#v` ,\n\t\t" +
 		"Expected:`%#v`\n\t\t" +
 		"  Actual-Processed:`%#v` ,\n\t\t" +
-		"Expected-Processed:`%#v`"
+		"Expected-Processed:`%#v`\n"
 
 	SearchTermExpectedFormat = `Expecting (left) TextValidator %s ~= %s search term (right), method %s`
 
 	PrintHeaderForSearchWithActualAndExpectedProcessedFormat = "" +
-		"%d )\t" +
-		"  Expectation failed: Using CompareMethod `%#v`, Line Index: %d\n  " +
-		"   Content-Processed:`%#v`\n  " +
-		"SearchTerm-Processed:`%#v`\n  " +
-		"          Additional:`%#v`"
+		"\n" +
+		"%d )   Header: `%s`\n" +
+		"----- Method: `%#v`, Line Index: %d\n\n" +
+		"--------------- Actual:\n`%#v`\n\n" +
+		"--- Expected or Search:\n`%#v`\n\n" +
+		"Additional: `%v`"
 
 	PrintHeaderForSearchWithActualAndExpectedProcessedWithoutAdditionalFormat = "" +
-		"%d )\t" +
-		"         Expectation:`%s`, Line Index: %d\n  " +
-		"   Content-Processed:`%#v`\n  " +
-		"SearchTerm-Processed:`%#v`\n  "
+		"\n" +
+		"%d ) Header: `%s`\n  " +
+		"Expectation: `%s`, Line Index: %d\n  " +
+		"     Actual: `%#v`\n\n" +
+		"   Expected: `%#v`\n\n"
 
 	PrintHeaderForSearchActualAndExpectedProcessedSimpleFormat = "%d )\t" +
 		"ExpectationLines failed: Failed match method [%#v], Index : [%#v]\n  " +

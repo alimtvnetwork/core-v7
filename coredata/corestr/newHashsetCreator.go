@@ -23,6 +23,7 @@ func (it *newHashsetCreator) Cap(length int) *Hashset {
 }
 
 // StringsOption addCapacity will not work if it is not a clone.
+//
 //goland:noinspection ALL
 func (it *newHashsetCreator) StringsOption(
 	addCapacity int,
@@ -38,7 +39,8 @@ func (it *newHashsetCreator) StringsOption(
 	}
 
 	return it.Strings(
-		items)
+		items,
+	)
 }
 
 func (it *newHashsetCreator) PointerStrings(
@@ -48,11 +50,9 @@ func (it *newHashsetCreator) PointerStrings(
 		return it.Empty()
 	}
 
-	maps := converters.StringsPointersToStringBoolMap(&inputArray)
+	maps := converters.StringsTo.PtrOfPtrToMapStringBool(&inputArray)
 
-	return it.UsingMap(
-		*maps,
-	)
+	return it.UsingMap(maps)
 }
 
 // PointerStringsPtrOption addCapacity will not work if it is not a clone.
@@ -65,12 +65,12 @@ func (it *newHashsetCreator) PointerStringsPtrOption(
 		return it.Cap(addCapacity)
 	}
 
-	maps := converters.StringsPointersToStringBoolMap(inputArray)
+	maps := converters.StringsTo.PtrOfPtrToMapStringBool(inputArray)
 
 	return it.UsingMapOption(
 		addCapacity,
 		isMakeClone,
-		*maps,
+		maps,
 	)
 }
 
@@ -83,7 +83,8 @@ func (it *newHashsetCreator) UsingCollection(
 	}
 
 	return it.Strings(
-		collection.items)
+		collection.items,
+	)
 }
 
 func (it *newHashsetCreator) Strings(
@@ -96,7 +97,8 @@ func (it *newHashsetCreator) Strings(
 	maps := converters.StringsTo.Hashset(inputArray)
 
 	return it.UsingMap(
-		maps)
+		maps,
+	)
 }
 
 func (it *newHashsetCreator) SimpleSlice(
@@ -106,10 +108,11 @@ func (it *newHashsetCreator) SimpleSlice(
 		return it.Empty()
 	}
 
-	maps := converters.StringsTo.Hashset(simpleSlice.Items)
+	maps := converters.StringsTo.Hashset(simpleSlice.Strings())
 
 	return it.UsingMap(
-		maps)
+		maps,
+	)
 }
 
 func (it *newHashsetCreator) StringsSpreadItems(
@@ -120,22 +123,6 @@ func (it *newHashsetCreator) StringsSpreadItems(
 	}
 
 	maps := converters.StringsTo.Hashset(inputArray)
-
-	return it.UsingMapOption(
-		constants.Zero,
-		false,
-		maps)
-}
-
-// StringsPtr addCapacity will not work if it is not a clone.
-func (it *newHashsetCreator) StringsPtr(
-	inputArray *[]string,
-) *Hashset {
-	if inputArray == nil || *inputArray == nil {
-		return it.Empty()
-	}
-
-	maps := converters.StringsTo.Hashset(*inputArray)
 
 	return it.UsingMapOption(
 		constants.Zero,

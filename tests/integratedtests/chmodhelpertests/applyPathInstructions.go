@@ -10,12 +10,13 @@ func applyPathInstructions(
 	testCase *chmodhelpertestwrappers.RwxInstructionTestWrapper,
 ) error {
 	executors, err := chmodhelper.ParseRwxInstructionsToExecutors(
-		testCase.RwxInstructions)
+		testCase.RwxInstructions,
+	)
 
 	errcore.SimpleHandleErr(err, "applyPathInstructions")
 
 	for _, createPath := range testCase.CreatePaths {
-		err2 := executors.ApplyOnPathsPtr(createPath.GetPathsPtr())
+		err2 := executors.ApplyOnPaths(createPath.GetPaths())
 
 		if err2 != nil {
 			return err2

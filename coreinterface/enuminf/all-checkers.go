@@ -20,7 +20,7 @@ type IsNameEqualer interface {
 
 // IsAnyNameOfChecker
 //
-//  Returns true if any of the name matches.
+//	Returns true if any of the name matches.
 type IsAnyNameOfChecker interface {
 	// IsAnyNamesOf
 	//

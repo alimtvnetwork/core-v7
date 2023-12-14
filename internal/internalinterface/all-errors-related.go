@@ -43,7 +43,7 @@ type TypeCodeNameStringer interface {
 
 // SerializeWithoutTracesGetter
 //
-//  Stack traces will be SKIPPED from the json bytes
+//	Stack traces will be SKIPPED from the json bytes
 type SerializeWithoutTracesGetter interface {
 	SerializeWithoutTraces() ([]byte, error)
 }
@@ -124,7 +124,7 @@ type BaseErrorOrCollectionWrapper interface {
 
 // IsCollectionTyper
 //
-//   returns true if current type is collection
+//	returns true if current type is collection
 type IsCollectionTyper interface {
 	// IsCollectionType
 	//
@@ -135,13 +135,14 @@ type IsCollectionTyper interface {
 // BasicErrWrapper
 //
 // IsEmpty:
-//  Refers to no error for print or doesn't treat this as error.
 //
-//  Conditions (true):
-//      - if Wrapper nil, Or,
-//      - if Wrapper is StaticEmptyPtr, Or,
-//      - if Wrapper .errorType is IsNoError(), Or,
-//      - if Wrapper .currentError NOT nil and Wrapper .references.IsEmpty()
+//	Refers to no error for print or doesn't treat this as error.
+//
+//	Conditions (true):
+//	    - if Wrapper nil, Or,
+//	    - if Wrapper is StaticEmptyPtr, Or,
+//	    - if Wrapper .errorType is IsNoError(), Or,
+//	    - if Wrapper .currentError NOT nil and Wrapper .references.IsEmpty()
 type BasicErrWrapper interface {
 	BaseErrorOrCollectionWrapper
 	IsReferencesEmptyChecker

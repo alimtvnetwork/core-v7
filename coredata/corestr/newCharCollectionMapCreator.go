@@ -40,33 +40,17 @@ func (it *newCharCollectionMapCreator) Empty() *CharCollectionMap {
 func (it *newCharCollectionMapCreator) Items(
 	items []string,
 ) *CharCollectionMap {
-	if items == nil {
+	if len(items) == 0 {
 		return it.Empty()
 	}
 
-	return it.ItemsPtr(
-		&items)
-}
-
-func (it *newCharCollectionMapCreator) ItemsPtr(
-	items *[]string,
-) *CharCollectionMap {
-	if items == nil {
-		return it.Empty()
-	}
-
-	length := len(*items)
-	if length == 0 {
-		return it.Empty()
-	}
-
-	mapElements := make(map[byte]*Collection, length)
+	mapElements := make(map[byte]*Collection, len(items))
 	charCollectionMap := &CharCollectionMap{
 		items:                  mapElements,
 		eachCollectionCapacity: constants.Zero,
 	}
 
-	charCollectionMap.AddStringsPtr(items)
+	charCollectionMap.AddStrings(items...)
 
 	return charCollectionMap
 }
@@ -74,18 +58,18 @@ func (it *newCharCollectionMapCreator) ItemsPtr(
 func (it *newCharCollectionMapCreator) ItemsPtrWithCap(
 	additionalCapacity int,
 	eachCollectionCap int,
-	items *[]string,
+	items []string,
 ) *CharCollectionMap {
-	isDefined := items != nil && *items != nil
-	length := 0
-	if items != nil && *items != nil {
-		length = len(*items)
+	length := len(items)
+	isDefined := length > 0
+	if isDefined {
 		additionalCapacity += length
 	}
 
 	mapElements := make(
 		map[byte]*Collection,
-		additionalCapacity)
+		additionalCapacity,
+	)
 
 	charCollectionMap := &CharCollectionMap{
 		items:                  mapElements,
@@ -96,6 +80,5 @@ func (it *newCharCollectionMapCreator) ItemsPtrWithCap(
 		return charCollectionMap
 	}
 
-	return charCollectionMap.
-		AddStringsPtr(items)
+	return charCollectionMap.AddStrings(items...)
 }

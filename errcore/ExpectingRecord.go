@@ -14,7 +14,8 @@ type ExpectingRecord struct {
 // Expecting
 //
 // returns
-//      "%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
+//
+//	"%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
 func (it *ExpectingRecord) Message(actual interface{}) string {
 	return fmt.Sprintf(
 		expectingMessageFormat,
@@ -27,7 +28,8 @@ func (it *ExpectingRecord) Message(actual interface{}) string {
 // Expecting
 //
 // returns
-//      "%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
+//
+//	"%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
 func (it *ExpectingRecord) MessageSimple(actual interface{}) string {
 	return ExpectingSimple(
 		it.ExpectingTitle,
@@ -38,7 +40,8 @@ func (it *ExpectingRecord) MessageSimple(actual interface{}) string {
 // MessageSimpleNoType
 //
 // returns
-//      "%s - Expect [\"%v\"] != [\"%v\"] Actual"
+//
+//	"%s - Expect [\"%v\"] != [\"%v\"] Actual"
 func (it *ExpectingRecord) MessageSimpleNoType(actual interface{}) string {
 	return ExpectingSimpleNoType(
 		it.ExpectingTitle,
@@ -50,7 +53,8 @@ func (it *ExpectingRecord) MessageSimpleNoType(actual interface{}) string {
 // Expecting
 //
 // returns
-//      "%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
+//
+//	"%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
 func (it *ExpectingRecord) Error(actual interface{}) error {
 	return errors.New(it.Message(actual))
 }
@@ -59,7 +63,8 @@ func (it *ExpectingRecord) Error(actual interface{}) error {
 // Expecting
 //
 // returns
-//      "%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
+//
+//	"%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
 func (it *ExpectingRecord) ErrorSimple(actual interface{}) error {
 	return errors.New(it.MessageSimple(actual))
 }
@@ -68,7 +73,8 @@ func (it *ExpectingRecord) ErrorSimple(actual interface{}) error {
 // Expecting
 //
 // returns
-//      "%s - Expect [\"%v\"] != [\"%v\"] Actual"
+//
+//	"%s - Expect [\"%v\"] != [\"%v\"] Actual"
 func (it *ExpectingRecord) ErrorSimpleNoType(actual interface{}) error {
 	return errors.New(it.MessageSimpleNoType(actual))
 }

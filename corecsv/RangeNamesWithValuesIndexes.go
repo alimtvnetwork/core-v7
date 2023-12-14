@@ -8,11 +8,11 @@ import (
 
 // RangeNamesWithValuesIndexes
 //
-//  Returns a new slice where
-//  format
-//   - `name[ValueIndex]`
-//  example
-//   - `SomeName[1]`
+//	Returns a new slice where
+//	format
+//	 - `name[ValueIndex]`
+//	example
+//	 - `SomeName[1]`
 func RangeNamesWithValuesIndexes(
 	rangedItems ...string,
 ) []string {

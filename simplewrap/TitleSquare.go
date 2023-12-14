@@ -2,7 +2,7 @@ package simplewrap
 
 import (
 	"fmt"
-
+	
 	"gitlab.com/auk-go/core/constants"
 )
 
@@ -11,6 +11,6 @@ func TitleSquare(
 ) string {
 	return fmt.Sprintf(
 		constants.SquareTitleWrapFormat,
-		title,
-		value)
+		toString(title),
+		toString(value))
 }

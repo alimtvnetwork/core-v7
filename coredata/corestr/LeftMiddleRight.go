@@ -61,9 +61,10 @@ func (it *LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
 }
 
 // HasSafeNonEmpty receiver.IsValid &&
-//		!receiver.IsLeftEmpty() &&
-//		!receiver.IsMiddleEmpty() &&
-//		!receiver.IsRightEmpty()
+//
+//	!receiver.IsLeftEmpty() &&
+//	!receiver.IsMiddleEmpty() &&
+//	!receiver.IsRightEmpty()
 func (it *LeftMiddleRight) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsLeftEmpty() &&

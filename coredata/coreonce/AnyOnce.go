@@ -46,34 +46,34 @@ func (it *AnyOnce) Execute() interface{} {
 
 // ValueStringOnly
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyOnce) ValueStringOnly() (val string) {
 	return it.ValueString()
 }
 
 // SafeString
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyOnce) SafeString() (val string) {
 	return it.ValueStringOnly()
 }
 
 // ValueStringMust
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 //
-//  Panic if error exist.
+//	Panic if error exist.
 func (it *AnyOnce) ValueStringMust() (val string) {
 	return it.ValueString()
 }
 
 // ValueString
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyOnce) ValueString() (val string) {
 	if it.compiledString != nil {
 		return *it.compiledString

@@ -59,8 +59,8 @@ func (it *IntegersOnce) IsZero() bool {
 
 // Sorted
 //
-//  Warning : Current values will be mutated,
-//  so better to make a clone of it.
+//	Warning : Current values will be mutated,
+//	so better to make a clone of it.
 func (it *IntegersOnce) Sorted() []int {
 	if it.sortedValues != nil {
 		return it.sortedValues

@@ -32,7 +32,7 @@ func NewAnyErrorOncePtr(initializerFunc func() (interface{}, error)) *AnyErrorOn
 
 // Error
 //
-//  Runs the execution and returns the error.
+//	Runs the execution and returns the error.
 func (it *AnyErrorOnce) Error() error {
 	if it.isInitialized {
 		return it.err
@@ -53,7 +53,7 @@ func (it *AnyErrorOnce) IsEmptyError() bool {
 
 // IsEmpty
 //
-//  represent values and error both empty
+//	represent values and error both empty
 func (it *AnyErrorOnce) IsEmpty() bool {
 	return it == nil || it.IsNull() && it.IsEmptyError()
 }
@@ -68,28 +68,28 @@ func (it *AnyErrorOnce) IsDefined() bool {
 
 // IsInvalid
 //
-//  represents has error
+//	represents has error
 func (it *AnyErrorOnce) IsInvalid() bool {
 	return it.HasError()
 }
 
 // IsValid
 //
-//  represents empty error
+//	represents empty error
 func (it *AnyErrorOnce) IsValid() bool {
 	return it.IsEmptyError()
 }
 
 // IsSuccess
 //
-//  represents empty error
+//	represents empty error
 func (it *AnyErrorOnce) IsSuccess() bool {
 	return it.IsEmptyError()
 }
 
 // IsFailed
 //
-//  represents has error
+//	represents has error
 func (it *AnyErrorOnce) IsFailed() bool {
 	return !it.IsEmptyError()
 }
@@ -135,8 +135,8 @@ func (it *AnyErrorOnce) Value() (interface{}, error) {
 
 // ValueStringOnly
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyErrorOnce) ValueStringOnly() (val string) {
 	val, _ = it.ValueString()
 
@@ -145,18 +145,18 @@ func (it *AnyErrorOnce) ValueStringOnly() (val string) {
 
 // SafeString
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyErrorOnce) SafeString() (val string) {
 	return it.ValueStringOnly()
 }
 
 // ValueStringMust
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 //
-//  Panic if error exist.
+//	Panic if error exist.
 func (it *AnyErrorOnce) ValueStringMust() (val string) {
 	val, err := it.ValueString()
 
@@ -169,8 +169,8 @@ func (it *AnyErrorOnce) ValueStringMust() (val string) {
 
 // ValueString
 //
-//  Usages SPrintf to get the string,
-//  mostly use the String() func to get the value
+//	Usages SPrintf to get the string,
+//	mostly use the String() func to get the value
 func (it *AnyErrorOnce) ValueString() (val string, err error) {
 	if it.compiledString != nil {
 		return *it.compiledString, it.err

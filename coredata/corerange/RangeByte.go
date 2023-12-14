@@ -54,40 +54,41 @@ func NewRangeByte(
 		CreateRangeByte()
 }
 
-func (r *RangeByte) Difference() byte {
-	return r.End - r.Start
-}
-
-func (r *RangeByte) DifferenceAbsolute() byte {
-	diff := r.Difference()
-
-	if diff < 0 {
-		return diff
+// Difference
+//
+// Checks comparison wise which one is bigger than does the diff.
+func (it *RangeByte) Difference() byte {
+	if it.End > it.Start {
+		return it.End - it.Start
 	}
 
-	return diff
+	return it.Start - it.End
+}
+
+func (it *RangeByte) DifferenceAbsolute() byte {
+	return it.Difference()
 }
 
 // RangeLength (5 - 3 = 2) + 1
-func (r *RangeByte) RangeLength() byte {
-	return r.DifferenceAbsolute() + 1
+func (it *RangeByte) RangeLength() byte {
+	return it.DifferenceAbsolute() + 1
 }
 
 // RangesInt returns empty ints if IsInvalid
 // return range int values
-func (r *RangeByte) RangesInt() *[]byte {
-	return r.Ranges()
+func (it *RangeByte) RangesInt() *[]byte {
+	return it.Ranges()
 }
 
 // Ranges returns empty ints if IsInvalid
 // return range int values
-func (r *RangeByte) Ranges() *[]byte {
-	if r.IsInvalid() {
+func (it *RangeByte) Ranges() *[]byte {
+	if it.IsInvalid() {
 		return &[]byte{}
 	}
 
-	length := r.RangeLength()
-	start := r.Start
+	length := it.RangeLength()
+	start := it.Start
 	slice := make([]byte, constants.Zero, length)
 	var i byte
 
@@ -98,21 +99,21 @@ func (r *RangeByte) Ranges() *[]byte {
 	return &slice
 }
 
-// IsWithinRange r.Start >= value && value <= r.End
-func (r *RangeByte) IsWithinRange(value byte) bool {
-	return r.Start >= value && value <= r.End
+// IsWithinRange it.Start <= value && value <= it.End
+func (it *RangeByte) IsWithinRange(value byte) bool {
+	return it.Start <= value && value <= it.End
 }
 
 // IsValidPlusWithinRange r.IsValid && r.IsWithinRange(value)
-func (r *RangeByte) IsValidPlusWithinRange(value byte) bool {
-	return r.IsValid && r.IsWithinRange(value)
+func (it *RangeByte) IsValidPlusWithinRange(value byte) bool {
+	return it.IsValid && it.IsWithinRange(value)
 }
 
 // IsInvalidValue !r.IsValid || !r.IsWithinRange(value)
-func (r *RangeByte) IsInvalidValue(value byte) bool {
-	return !r.IsValid || !r.IsWithinRange(value)
+func (it *RangeByte) IsInvalidValue(value byte) bool {
+	return !it.IsValid || !it.IsWithinRange(value)
 }
 
-func (r *RangeByte) String() string {
-	return r.BaseRange.String(r.Start, r.End)
+func (it *RangeByte) String() string {
+	return it.BaseRange.String(it.Start, it.End)
 }

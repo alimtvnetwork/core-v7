@@ -29,8 +29,9 @@ func (it *TypeStatus) IsValid() bool {
 
 	it.isValid = issetter.GetBool(
 		it != nil &&
-			!reflectinternal.IsNull(it.Left) &&
-			!reflectinternal.IsNull(it.Right))
+			!reflectinternal.Is.Null(it.Left) &&
+			!reflectinternal.Is.Null(it.Right),
+	)
 
 	return it.isValid.IsTrue()
 }
@@ -86,11 +87,12 @@ func (it TypeStatus) IsSameRegardlessPointer() bool {
 func (it TypeStatus) NotEqualSrcDestinationMessage() string {
 	return it.NotMatchMessage(
 		constants.SourceLower,
-		constants.DestinationLower)
+		constants.DestinationLower,
+	)
 }
 
 func (it TypeStatus) LeftName() string {
-	if reflectinternal.IsNull(it.Left) {
+	if reflectinternal.Is.Null(it.Left) {
 		return constants.NilAngelBracket
 	}
 
@@ -98,7 +100,7 @@ func (it TypeStatus) LeftName() string {
 }
 
 func (it TypeStatus) RightName() string {
-	if reflectinternal.IsNull(it.Right) {
+	if reflectinternal.Is.Null(it.Right) {
 		return constants.NilAngelBracket
 	}
 
@@ -106,7 +108,7 @@ func (it TypeStatus) RightName() string {
 }
 
 func (it TypeStatus) LeftFullName() string {
-	if reflectinternal.IsNull(it.Left) {
+	if reflectinternal.Is.Null(it.Left) {
 		return constants.NilAngelBracket
 	}
 
@@ -114,7 +116,7 @@ func (it TypeStatus) LeftFullName() string {
 }
 
 func (it TypeStatus) RightFullName() string {
-	if reflectinternal.IsNull(it.Right) {
+	if reflectinternal.Is.Null(it.Right) {
 		return constants.NilAngelBracket
 	}
 
@@ -134,7 +136,8 @@ func (it TypeStatus) NotMatchMessage(
 		SrcDestination(
 			"type validation failed!",
 			leftName, it.LeftFullName(),
-			rightName, it.RightFullName())
+			rightName, it.RightFullName(),
+		)
 }
 
 func (it TypeStatus) NotMatchErr(
@@ -153,7 +156,17 @@ func (it TypeStatus) MustBeSame() {
 		return
 	}
 
-	panic(it.NotMatchMessage(constants.LeftLower, constants.RightLower))
+	panic(it.ValidationError())
+}
+
+func (it TypeStatus) ValidationError() error {
+	if it.IsSame {
+		return nil
+	}
+
+	msg := it.NotMatchMessage(constants.LeftLower, constants.RightLower)
+
+	return errors.New(msg)
 }
 
 func (it TypeStatus) SrcDestinationMustBeSame() {
@@ -167,7 +180,8 @@ func (it TypeStatus) SrcDestinationMustBeSame() {
 func (it TypeStatus) NotEqualSrcDestinationErr() error {
 	return it.NotMatchErr(
 		constants.SourceLower,
-		constants.DestinationLower)
+		constants.DestinationLower,
+	)
 }
 
 func (it *TypeStatus) IsEqual(next *TypeStatus) bool {

@@ -10,7 +10,7 @@ type IdIntGetter interface {
 
 // NameGetter
 //
-//  Meaningful name to the path or the meaningful identifier
+//	Meaningful name to the path or the meaningful identifier
 type NameGetter interface {
 	// Name
 	//

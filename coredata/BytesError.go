@@ -114,8 +114,8 @@ func (it *BytesError) IsEmptyOrErrorBytes() bool {
 
 	if length == 2 {
 		// empty json
-		return (it.Bytes)[coreindexes.First] == 123 &&
-			(it.Bytes)[coreindexes.Second] == 125
+		return it.Bytes[coreindexes.First] == 123 &&
+			it.Bytes[coreindexes.Second] == 125
 	}
 
 	return false

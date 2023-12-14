@@ -7,7 +7,7 @@ import (
 )
 
 func SafeZeroSet(rv reflect.Value) {
-	if reflectinternal.IsNull(rv) {
+	if reflectinternal.Is.Null(rv) {
 		return
 	}
 

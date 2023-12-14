@@ -10,38 +10,38 @@ type RwxInstructionTestWrapper struct {
 	RwxInstructions []chmodins.RwxInstruction
 	DefaultRwx      *chmodins.RwxOwnerGroupOther
 	IsErrorExpected bool
-	CreatePaths     []*chmodhelper.DirFilesWithRwxPermission
-	funcName        coretests.TestFuncName
-	expected        chmodins.RwxOwnerGroupOther
+	CreatePaths     []chmodhelper.DirFilesWithRwxPermission
+	TestFuncName    coretests.TestFuncName
+	WhatIsExpected  chmodins.RwxOwnerGroupOther
 	actual          interface{}
 }
 
-func (receiver *RwxInstructionTestWrapper) Actual() interface{} {
-	return receiver.actual
+func (it *RwxInstructionTestWrapper) Actual() interface{} {
+	return it.actual
 }
 
-func (receiver *RwxInstructionTestWrapper) SetActual(actual interface{}) {
-	receiver.actual = actual
+func (it *RwxInstructionTestWrapper) SetActual(actual interface{}) {
+	it.actual = actual
 }
 
-func (receiver *RwxInstructionTestWrapper) FuncName() string {
-	return receiver.funcName.Value()
+func (it *RwxInstructionTestWrapper) GetFuncName() string {
+	return it.TestFuncName.Value()
 }
 
-func (receiver *RwxInstructionTestWrapper) Value() interface{} {
-	return receiver
+func (it *RwxInstructionTestWrapper) Value() interface{} {
+	return it
 }
 
-func (receiver *RwxInstructionTestWrapper) Expected() interface{} {
-	return receiver.expected
+func (it *RwxInstructionTestWrapper) Expected() interface{} {
+	return it.WhatIsExpected
 }
 
-func (receiver *RwxInstructionTestWrapper) ExpectedAsRwxOwnerGroupOtherInstruction() chmodins.RwxOwnerGroupOther {
-	return receiver.expected
+func (it *RwxInstructionTestWrapper) ExpectedAsRwxOwnerGroupOtherInstruction() chmodins.RwxOwnerGroupOther {
+	return it.WhatIsExpected
 }
 
-func (receiver *RwxInstructionTestWrapper) AsTestCaseMessenger() coretests.TestCaseMessenger {
-	var testCaseMessenger coretests.TestCaseMessenger = receiver
+func (it *RwxInstructionTestWrapper) AsTestCaseMessenger() coretests.TestCaseMessenger {
+	var testCaseMessenger coretests.TestCaseMessenger = it
 
 	return testCaseMessenger
 }

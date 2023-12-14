@@ -13,9 +13,9 @@ type newRwxWrapperCreator struct{}
 
 // CreatePtr
 //
-//  mode length needs to 3, not more not less
-//  mode chars should be digits only (0-7)
-//  example "777", "755", "655"
+//	mode length needs to 3, not more not less
+//	mode chars should be digits only (0-7)
+//	example "777", "755", "655"
 func (it newRwxWrapperCreator) CreatePtr(mode string) (*RwxWrapper, error) {
 	rwx, err := it.Create(mode)
 
@@ -28,9 +28,9 @@ func (it newRwxWrapperCreator) CreatePtr(mode string) (*RwxWrapper, error) {
 
 // Create
 //
-//  mode length needs to 3, not more not less
-//  mode chars should be digits only (0-7)
-//  example "777", "755", "655"
+//	mode length needs to 3, not more not less
+//	mode chars should be digits only (0-7)
+//	example "777", "755", "655"
 func (it newRwxWrapperCreator) Create(mode string) (RwxWrapper, error) {
 	length := len(mode)
 
@@ -66,7 +66,7 @@ func (it newRwxWrapperCreator) Create(mode string) (RwxWrapper, error) {
 
 // UsingBytes
 //
-//  each byte should not be more than 7
+//	each byte should not be more than 7
 func (it newRwxWrapperCreator) UsingBytes(allBytes [3]byte) RwxWrapper {
 	return it.UsingSpecificByte(
 		allBytes[OwnerIndex],
@@ -90,12 +90,12 @@ func (it newRwxWrapperCreator) UsingChmod(
 
 // UsingFileModePtr
 //
-//  Hint. os.FileMode.String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	Hint. os.FileMode.String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) UsingFileModePtr(
 	fileMode os.FileMode,
 ) *RwxWrapper {
@@ -118,12 +118,12 @@ func (it newRwxWrapperCreator) UsingFileModePtr(
 
 // UsingFileMode
 //
-//  Hint. os.FileMode String() returns "-rwxrwxrwx" full rwx
-//  https://go.dev/play/p/Qq_rKl_pAqe
+//	Hint. os.FileMode String() returns "-rwxrwxrwx" full rwx
+//	https://go.dev/play/p/Qq_rKl_pAqe
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) UsingFileMode(
 	fileMode os.FileMode,
 ) RwxWrapper {
@@ -154,7 +154,7 @@ func (it newRwxWrapperCreator) UsingRwxOwnerGroupOther(
 
 // UsingSpecificByte
 //
-//  each byte should not be more than 7
+//	each byte should not be more than 7
 func (it newRwxWrapperCreator) UsingSpecificByte(
 	owner, group, other byte,
 ) RwxWrapper {
@@ -193,21 +193,22 @@ func (it newRwxWrapperCreator) UsingAttrs(
 
 // Rwx10
 //
-//  alias for RwxFullString
+//	alias for RwxFullString
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) Rwx10(
 	hyphenedRwxRwxRwx string,
 ) (RwxWrapper, error) {
@@ -219,18 +220,19 @@ func (it newRwxWrapperCreator) Rwx10(
 // alias of RwxFullStringWtHyphen
 //
 // Format (length must be 9)
-//  "rwxrwxrwx"
+//
+//	"rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "rwx------"
-//  - group all enabled only "---rwx---"
+//   - owner all enabled only "rwx------"
+//   - group all enabled only "---rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 9.
+//   - string length must be 9.
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) Rwx9(
 	rwxRwxRwx string,
 ) (RwxWrapper, error) {
@@ -241,18 +243,19 @@ func (it newRwxWrapperCreator) Rwx9(
 // RwxFullString
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) RwxFullString(
 	hyphenedRwxRwxRwx string,
 ) (RwxWrapper, error) {
@@ -269,18 +272,19 @@ func (it newRwxWrapperCreator) RwxFullString(
 // RwxFullStringWtHyphen
 //
 // Format (length must be 9)
-//  "rwxrwxrwx"
+//
+//	"rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "rwx------"
-//  - group all enabled only "---rwx---"
+//   - owner all enabled only "rwx------"
+//   - group all enabled only "---rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 9.
+//   - string length must be 9.
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) RwxFullStringWtHyphen(
 	rwxFullStringWithoutHyphen string,
 ) (RwxWrapper, error) {
@@ -321,21 +325,22 @@ func (it newRwxWrapperCreator) UsingVariantPtr(
 
 // Instruction
 //
-//  rwxFullString must be 10 chars in "-rwxrwxrwx"
+//	rwxFullString must be 10 chars in "-rwxrwxrwx"
 //
 // Format (length must be 10)
-//  "-rwxrwxrwx"
+//
+//	"-rwxrwxrwx"
 //
 // Example:
-//  - owner all enabled only "-rwx------"
-//  - group all enabled only "----rwx---"
+//   - owner all enabled only "-rwx------"
+//   - group all enabled only "----rwx---"
 //
 // Must have or restrictions:
-//  - string length must be 10.
+//   - string length must be 10.
 //
 // Reference:
-//  - Chmod examples      : https://ss64.com/bash/chmod.html
-//  - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
+//   - Chmod examples      : https://ss64.com/bash/chmod.html
+//   - FileMode to RwxFull : https://go.dev/play/p/Qq_rKl_pAqe
 func (it newRwxWrapperCreator) Instruction(
 	rwxFullString string,
 	condition chmodins.Condition,
@@ -360,7 +365,8 @@ func (it newRwxWrapperCreator) UsingExistingFile(
 // UsingExistingFileSkipInvalidFile
 //
 // Warning:
-//  swallows the error and invalid file
+//
+//	swallows the error and invalid file
 func (it newRwxWrapperCreator) UsingExistingFileSkipInvalidFile(
 	filePath string,
 ) (rwxWrapper *RwxWrapper, isInvalidFile bool) {
@@ -377,7 +383,8 @@ func (it newRwxWrapperCreator) UsingExistingFileSkipInvalidFile(
 // UsingExistingFileOption
 //
 // Warning:
-//  swallows the error and invalid file
+//
+//	swallows the error and invalid file
 func (it newRwxWrapperCreator) UsingExistingFileOption(
 	isSkipInvalidFile bool,
 	filePath string,

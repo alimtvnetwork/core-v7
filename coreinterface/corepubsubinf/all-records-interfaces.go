@@ -30,7 +30,7 @@ type SubscriptionMainRecorder interface {
 
 	// DefaultDelayMillis
 	//
-	//  Default delay in milliseconds
+	//  Chmod delay in milliseconds
 	DefaultDelayMillis() int
 }
 

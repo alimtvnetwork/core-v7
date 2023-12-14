@@ -17,13 +17,15 @@ func (it fwChmodApplier) OnParent() error {
 func (it fwChmodApplier) OnDir(dir string) error {
 	return it.Apply(
 		it.rw.ChmodDir,
-		dir)
+		dir,
+	)
 }
 
 func (it fwChmodApplier) OnFile() error {
 	return it.Apply(
 		it.rw.ChmodFile,
-		it.rw.FilePath)
+		it.rw.FilePath,
+	)
 }
 
 func (it fwChmodApplier) Apply(
@@ -32,23 +34,25 @@ func (it fwChmodApplier) Apply(
 ) error {
 	err := os.Chmod(
 		location,
-		fileMode)
+		fileMode,
+	)
 
 	if err == nil {
 		return nil
 	}
 
 	// has error
-	return pathError(
+	return newError.pathError(
 		"applying chmod failed",
 		fileMode,
 		location,
-		err)
+		err,
+	)
 }
 
 // OnDiffFile
 //
-//  apply chmod on file if file doesn't have the save chmod
+//	apply chmod on file if file doesn't have the save chmod
 func (it fwChmodApplier) OnDiffFile(
 	isSkipOnInvalidFile bool,
 	filePath string,
@@ -66,7 +70,7 @@ func (it fwChmodApplier) OnDiffFile(
 
 // OnDiffDir
 //
-//  apply chmod on file if file doesn't have the save chmod
+//	apply chmod on file if file doesn't have the save chmod
 func (it fwChmodApplier) OnDiffDir(
 	isSkipOnInvalidDir bool,
 	dirPath string,
@@ -84,7 +88,7 @@ func (it fwChmodApplier) OnDiffDir(
 
 // OnAll
 //
-//  both file, parent dir
+//	both file, parent dir
 func (it fwChmodApplier) OnAll() error {
 	err := it.OnParent()
 
@@ -107,7 +111,8 @@ func (it fwChmodApplier) DirRecursive(
 func (it fwChmodApplier) OnParentRecursive() error {
 	return it.DirRecursive(
 		false,
-		it.rw.ParentDir)
+		it.rw.ParentDir,
+	)
 }
 
 func (it fwChmodApplier) OnMismatch(

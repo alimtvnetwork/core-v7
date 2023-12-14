@@ -1,6 +1,11 @@
 package corerange
 
-import "gitlab.com/auk-go/core/constants"
+import (
+	"fmt"
+
+	"gitlab.com/auk-go/core/constants"
+	"gitlab.com/auk-go/core/internal/convertinteranl"
+)
 
 type MinMaxInt struct {
 	Min, Max int
@@ -36,11 +41,13 @@ func (it *MinMaxInt) Difference() int {
 func (it *MinMaxInt) DifferenceAbsolute() int {
 	diff := it.Difference()
 
-	if diff < 0 {
+	if diff > 0 {
 		return diff
 	}
 
-	return diff
+	// negative
+
+	return diff * -1
 }
 
 func (it *MinMaxInt) IsMinEqual(val int) bool {
@@ -94,8 +101,8 @@ func (it *MinMaxInt) RangeLength() int {
 
 // RangesInt
 //
-//  returns empty integers if IsInvalid
-//  return range int values
+//	returns empty integers if IsInvalid
+//	return range int values
 func (it *MinMaxInt) RangesInt() []int {
 	actualRanges := it.Ranges()
 	rangesIntegers := make(
@@ -111,12 +118,12 @@ func (it *MinMaxInt) RangesInt() []int {
 
 // Ranges
 //
-//  returns empty integers if IsInvalid
-//  return range int values
+//	returns empty integers if IsInvalid
+//	return range int values
 func (it *MinMaxInt) Ranges() []int {
 	length := it.RangeLength()
 	start := it.Min
-	slice := make([]int, constants.Zero, length)
+	slice := make([]int, length)
 
 	for i := 0; i < length; i++ {
 		slice[i] = start + i
@@ -125,9 +132,53 @@ func (it *MinMaxInt) Ranges() []int {
 	return slice
 }
 
-// IsWithinRange r.Min >= value && value <= r.Max
+func (it *MinMaxInt) CreateRanges(minMaxRanges ...MinMaxInt) []int {
+	if len(minMaxRanges) == 0 {
+		return it.Ranges()
+	}
+
+	firstRanges := it.Ranges()
+	totalPossible := len(firstRanges)
+	for _, maxRange := range minMaxRanges {
+		totalPossible += maxRange.DifferenceAbsolute()
+	}
+
+	slice := make([]int, 0, totalPossible)
+	slice = append(slice, firstRanges...)
+	for _, maxRange := range minMaxRanges {
+		slice = append(slice, maxRange.Ranges()...)
+	}
+
+	return slice
+}
+
+// RangesExcept
+//
+// Returns ranges only without the except items
+func (it *MinMaxInt) RangesExcept(exceptItems ...int) []int {
+	length := it.RangeLength()
+	start := it.Min
+	slice := make([]int, 0, length)
+	toHashmap := convertinteranl.
+		Integers.
+		ToMapBool(exceptItems...)
+
+	for i := 0; i < length; i++ {
+		id := start + i
+		if toHashmap[id] {
+			continue
+		}
+
+		// add not exist
+		slice = append(slice, id)
+	}
+
+	return slice
+}
+
+// IsWithinRange it.Min <= value && value <= it.Max
 func (it *MinMaxInt) IsWithinRange(value int) bool {
-	return it.Min >= value && value <= it.Max
+	return it.Min <= value && value <= it.Max
 }
 
 // IsInvalidValue  !r.IsWithinRange(value)
@@ -172,4 +223,11 @@ func (it *MinMaxInt) IsEqual(right *MinMaxInt) bool {
 
 	return it.Max == right.Max &&
 		it.Min == right.Min
+}
+
+func (it MinMaxInt) String() string {
+	return fmt.Sprintf(
+		constants.SprintFormatNumberWithHyphen,
+		it.Min,
+		it.Max)
 }

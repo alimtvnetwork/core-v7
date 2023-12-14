@@ -209,7 +209,8 @@ func (it *AnyCollection) ListStringsPtr(isIncludeFieldName bool) *[]string {
 	for _, anyItem := range it.items {
 		str := strutilinternal.AnyToStringUsing(
 			isIncludeFieldName,
-			anyItem)
+			anyItem,
+		)
 
 		slice = append(slice, str)
 	}
@@ -229,7 +230,8 @@ func (it *AnyCollection) RemoveAt(index int) (isSuccess bool) {
 	items := it.items
 	it.items = append(
 		items[:index],
-		items[index+constants.One:]...)
+		items[index+constants.One:]...,
+	)
 
 	return true
 }
@@ -290,7 +292,8 @@ func (it *AnyCollection) LoopDynamic(
 			currentItem := it.items[index]
 			dynamic := NewDynamic(
 				currentItem,
-				reflectinternal.IsNotNull(currentItem))
+				reflectinternal.Is.Defined(currentItem),
+			)
 
 			loopProcessorFunc(index, dynamic)
 
@@ -309,7 +312,8 @@ func (it *AnyCollection) LoopDynamic(
 	for index := 0; index < it.Length(); index++ {
 		dynamic := NewDynamic(
 			it.items[index],
-			reflectinternal.IsNotNull(it.items[index]))
+			reflectinternal.Is.Defined(it.items[index]),
+		)
 		isBreak := loopProcessorFunc(index, dynamic)
 
 		if isBreak {
@@ -323,7 +327,8 @@ func (it *AnyCollection) LoopDynamic(
 func (it *AnyCollection) AddAny(anyItem interface{}, isValid bool) *AnyCollection {
 	it.items = append(
 		it.items,
-		NewDynamic(anyItem, isValid))
+		NewDynamic(anyItem, isValid),
+	)
 
 	return it
 }
@@ -345,7 +350,8 @@ func (it *AnyCollection) AddAnyItemsWithTypeValidation(
 			err := it.AddAnyWithTypeValidation(
 				isNullNotAllowed,
 				expectedType,
-				anyItem)
+				anyItem,
+			)
 
 			if err != nil {
 				sliceErr = append(sliceErr, err.Error())
@@ -359,7 +365,8 @@ func (it *AnyCollection) AddAnyItemsWithTypeValidation(
 		err := it.AddAnyWithTypeValidation(
 			isNullNotAllowed,
 			expectedType,
-			anyItem)
+			anyItem,
+		)
 
 		if err != nil {
 			return err
@@ -377,7 +384,8 @@ func (it *AnyCollection) AddAnyWithTypeValidation(
 	err := ReflectTypeValidation(
 		isNullNotAllowed,
 		expectedType,
-		anyItem)
+		anyItem,
+	)
 
 	if err != nil {
 		return err
@@ -385,7 +393,8 @@ func (it *AnyCollection) AddAnyWithTypeValidation(
 
 	it.items = append(
 		it.items,
-		anyItem)
+		anyItem,
+	)
 
 	return nil
 }
@@ -397,7 +406,8 @@ func (it *AnyCollection) AddNonNull(anyItem interface{}) *AnyCollection {
 
 	it.items = append(
 		it.items,
-		anyItem)
+		anyItem,
+	)
 
 	return it
 }
@@ -409,7 +419,8 @@ func (it *AnyCollection) AddNonNullDynamic(anyItem interface{}, isValid bool) *A
 
 	it.items = append(
 		it.items,
-		NewDynamic(anyItem, isValid))
+		NewDynamic(anyItem, isValid),
+	)
 
 	return it
 }
@@ -422,7 +433,8 @@ func (it *AnyCollection) AddAnyManyDynamic(anyItems ...interface{}) *AnyCollecti
 	for _, item := range anyItems {
 		it.items = append(
 			it.items,
-			NewDynamic(item, true))
+			NewDynamic(item, true),
+		)
 	}
 
 	return it
@@ -441,7 +453,9 @@ func (it *AnyCollection) AddAnySliceFromSingleItem(
 		return it
 	}
 
-	items := AnySliceValToInterfacesAsync(sliceList)
+	items := reflectinternal.
+		SliceConverter.
+		ToAnyItemsAsync(sliceList)
 
 	return it.AddMany(items...)
 }
@@ -508,7 +522,8 @@ func (it *AnyCollection) JsonResultsCollection() *corejson.ResultsCollection {
 
 	for _, dynamicInstance := range it.items {
 		jsonResultsCollection.AddAny(
-			dynamicInstance)
+			dynamicInstance,
+		)
 	}
 
 	return jsonResultsCollection
@@ -525,7 +540,8 @@ func (it *AnyCollection) JsonResultsPtrCollection() *corejson.ResultsPtrCollecti
 
 	for _, dynamicInstance := range it.items {
 		jsonResultsCollection.AddAny(
-			dynamicInstance)
+			dynamicInstance,
+		)
 	}
 
 	return jsonResultsCollection
@@ -557,7 +573,8 @@ func (it *AnyCollection) GetPagedCollection(
 	pagesPossibleCeiling := int(math.Ceil(pagesPossibleFloat))
 	collectionOfCollection := make(
 		[]*AnyCollection,
-		pagesPossibleCeiling)
+		pagesPossibleCeiling,
+	)
 
 	wg := sync.WaitGroup{}
 	addPagedItemsFunc := func(oneBasedPageIndex int) {
@@ -585,11 +602,13 @@ func (it *AnyCollection) GetPagingInfo(
 	eachPageSize int,
 	pageIndex int,
 ) pagingutil.PagingInfo {
-	return pagingutil.GetPagingInfo(pagingutil.PagingRequest{
-		Length:       it.Length(),
-		PageIndex:    pageIndex,
-		EachPageSize: eachPageSize,
-	})
+	return pagingutil.GetPagingInfo(
+		pagingutil.PagingRequest{
+			Length:       it.Length(),
+			PageIndex:    pageIndex,
+			EachPageSize: eachPageSize,
+		},
+	)
 }
 
 // GetSinglePageCollection PageIndex is one based index. Should be above or equal 1
@@ -605,7 +624,8 @@ func (it *AnyCollection) GetSinglePageCollection(
 
 	pageInfo := it.GetPagingInfo(
 		eachPageSize,
-		pageIndex)
+		pageIndex,
+	)
 
 	list := it.items[pageInfo.SkipItems:pageInfo.EndingLength]
 
@@ -675,7 +695,8 @@ func (it *AnyCollection) Strings() []string {
 	for i, item := range it.items {
 		slice[i] = fmt.Sprintf(
 			constants.SprintValueFormat,
-			item)
+			item,
+		)
 	}
 
 	return slice

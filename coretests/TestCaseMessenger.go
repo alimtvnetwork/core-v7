@@ -1,7 +1,7 @@
 package coretests
 
 type TestCaseMessenger interface {
-	FuncName() string
+	GetFuncName() string
 	Value() interface{}
 	Expected() interface{}
 	Actual() interface{}

@@ -4,7 +4,7 @@ type newLazyRegexCreator struct{}
 
 // New
 //
-//  used to create as vars
+//	used to create as vars
 func (it newLazyRegexCreator) New(
 	pattern string,
 ) *LazyRegex {
@@ -16,7 +16,7 @@ func (it newLazyRegexCreator) New(
 
 // NewLock
 //
-//  used to generate inside method
+//	used to generate inside method
 func (it newLazyRegexCreator) NewLock(
 	pattern string,
 ) *LazyRegex {
@@ -68,8 +68,8 @@ func (it newLazyRegexCreator) AllPatternsMap() map[string]*LazyRegex {
 
 // NewLockIf
 //
-//  used to generate inside method
-//  lock must be performed when called from method.
+//	used to generate inside method
+//	lock must be performed when called from method.
 func (it newLazyRegexCreator) NewLockIf(
 	isLock bool,
 	pattern string,

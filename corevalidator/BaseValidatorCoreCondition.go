@@ -1,15 +1,15 @@
 package corevalidator
 
 type BaseValidatorCoreCondition struct {
-	ValidatorCoreCondition *ValidatorCoreCondition `json:"ValidatorCoreCondition,omitempty"`
+	ValidatorCoreCondition *Condition `json:"Condition,omitempty"`
 }
 
-func (it *BaseValidatorCoreCondition) ValidatorCoreConditionDefault() ValidatorCoreCondition {
+func (it *BaseValidatorCoreCondition) ValidatorCoreConditionDefault() Condition {
 	if it.ValidatorCoreCondition != nil {
 		return *it.ValidatorCoreCondition
 	}
 
-	it.ValidatorCoreCondition = &ValidatorCoreCondition{}
+	it.ValidatorCoreCondition = &Condition{}
 
 	return *it.ValidatorCoreCondition
 }

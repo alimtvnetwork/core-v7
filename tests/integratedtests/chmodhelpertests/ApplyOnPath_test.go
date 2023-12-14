@@ -17,23 +17,28 @@ func Test_ApplyOnPath_Unix(t *testing.T) {
 		// Arrange
 		caseMessenger := testCase.AsTestCaseMessenger()
 		testHeader := coretests.GetTestHeader(
-			caseMessenger)
+			caseMessenger,
+		)
 		chmodhelper.CreateDirFilesWithRwxPermissionsMust(
 			true,
-			&testCase.CreatePaths)
+			testCase.CreatePaths,
+		)
 
 		// Act
 		actualErr := applyPathInstructions(&testCase)
 		testCase.SetActual(actualErr)
 
 		// Assert
-		Convey(testHeader, t, func() {
-			So(actualErr, ShouldBeNil)
-		})
+		Convey(
+			testHeader, t, func() {
+				So(actualErr, ShouldBeNil)
+			},
+		)
 
 		assertTestCaseChmodAsExpected(
 			t,
 			&testCase,
-			testHeader)
+			testHeader,
+		)
 	}
 }
