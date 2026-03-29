@@ -228,8 +228,8 @@ func Test_Cov2_RwxPartialToInstructionExecutor_InvalidPartial(t *testing.T) {
 
 func Test_Cov2_RwxInstructionExecutors_ApplyOnPathsPtr_WithExecutors(t *testing.T) {
 	exec := &RwxInstructionExecutor{} // neither fixed nor var
-	items := []*RwxInstructionExecutor{exec}
-	execs := &RwxInstructionExecutors{}
+	execs := NewRwxInstructionExecutors(1)
+	execs.Add(exec)
 
 	err := execs.ApplyOnPaths([]string{"/nonexistent"})
 	// Should error because the executor can't compile a wrapper
