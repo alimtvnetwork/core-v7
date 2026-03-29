@@ -340,12 +340,13 @@ func Test_I17_MatchUsingCustomizeErrorFuncLock_NoMatch_DefaultErr(t *testing.T) 
 }
 
 func Test_I17_MatchUsingCustomizeErrorFuncLock_NoMatch_CustomErr(t *testing.T) {
+	customSentinel := errors.New("custom-sentinel-error")
 	fn := func(r *regexp.Regexp, s string) bool { return r.MatchString(s) }
 	customErr := func(pattern, comparing string, compileErr error, regEx *regexp.Regexp) error {
-		return regexp.ErrInternalError
+		return customSentinel
 	}
 	err := MatchUsingCustomizeErrorFuncLock(`^\d+$`, "abc", fn, customErr)
-	if err != regexp.ErrInternalError {
+	if err != customSentinel {
 		t.Fatal("expected custom error")
 	}
 }
