@@ -1,6 +1,6 @@
 # Plan — Future Work Roadmap
 
-## Last Updated: 2026-03-27T01:45:00+08:00
+## Last Updated: 2026-03-29T16:00:00+08:00
 
 ---
 
@@ -20,100 +20,67 @@
 | Go Modernization (Phases 1-7) | ✅ Done | All 7 phases complete including slog, legacy removal |
 | Test Title Audit (Batches 1-5) | ✅ Done | ~375+ titles renamed |
 | Package READMEs | ✅ Done | All core packages documented |
-| Phase A (Coverage Stabilization) | ✅ Done | 20-iteration plan executed; all non-internal packages covered |
-| Phase B.2 (Spec Reconciliation) | ✅ Done | 9 spec files cleaned |
+| Phase A (Coverage Stabilization) | ✅ Done | 20-iteration plan executed |
+| Phase B (Code Cleanup) | ✅ Done | Codegen removal, spec reconciliation |
+| Phase C (Future Architecture) | ✅ Done | Generic interfaces, iter adoption, CI, module splitting decision |
+| Phase D (Tooling & Runner) | ✅ Done | Test title audit, diagnostic regression tests |
+| Phase E (Unit Coverage Fix) | ✅ Done | All blocked packages resolved, dead-code registry closed |
 
 ---
 
-## Phase B: Code Cleanup
+## Active Work — Prioritized Backlog
 
-### B.1 — Codegen Removal ✅ Done
-- **Objective**: Remove deprecated `codegen/` entirely
-- **Dependencies**: User runs external audit (`grep` across auk-go repos)
-- **Expected outputs**: Deleted `codegen/`, `cmd/main/unitTestGenerator.go`, `tests/integratedtests/codegentests/`, `tests/integratedtests/corepropertytests/`; updated specs
-- **Acceptance criteria**: All exit criteria in `spec/01-app/10-codegen-deprecation-plan.md` met
-- **Completed**: Removed all codegen packages, consumers, and tests. Updated README, repo overview, folder map, and deprecation plan. Confirmed zero remaining Go imports. Shared types in `coretests/` unaffected.
+### Priority 1: Coverage Push — Remaining Packages (S-014)
+- **Objective**: Achieve 100% test coverage for all non-internal packages
+- **Dependencies**: User runs `./run.ps1 TC` for current baseline
+- **Expected outputs**: New `Coverage*_test.go` files in integrated test packages
+- **Acceptance criteria**: All packages at 100% (excluding dead-code registry entries). `./run.ps1 PC` and `TC` pass.
+- **Phase**: Ongoing — one package at a time
+- **Subpackages by risk**:
 
----
+| Package | Current Coverage | Risk | Estimated Sessions |
+|---------|:---:|:---:|:---:|
+| `coreonce` | 95.7% | Low | 1 |
+| `keymk` | 95.6% | Low | 1 |
+| `corerange` | 94.3% | Low | 1 |
+| `enumimpl` | 95.9% | Low | 1 |
+| `corevalidator` | 91.2% | Medium | 1 |
+| `stringslice` | 90.6% | Medium | 1 |
+| `errcore` | 90.2% | Medium | 1 |
+| `reflectmodel` | 72.6% | Medium | 1 |
+| `reflectinternal` | 80.4% | Medium | 1-2 |
+| `corejson` | 45.0% | ⚠️ HIGH | 2-3 |
+| `corepayload` | 56.4% | ⚠️ HIGH | 3-4 |
+| `codestack` | 0.0% | Medium | 1-2 |
+| `corecmp` | 10.8% | Medium | 2 |
+| `corestr` | 3.3% | ⚠️ VERY HIGH | 5-8 |
+| `coredynamic` | 0.9% | ⚠️ VERY HIGH | 5-8 |
 
-## Phase C: Future Architecture (Low Priority)
+### Priority 2: Deprecated API Cleanup (S-009)
+- **Objective**: Remove or sunset 110 deprecated functions/methods across 30+ files
+- **Dependencies**: External consumer audit — user must `grep` across auk-go repos
+- **Expected outputs**: Removed deprecated functions, updated call sites in tests
+- **Acceptance criteria**: Zero `// Deprecated:` markers remain (except documented external consumers). `./run.ps1 PC` and `TC` pass.
 
-### C.1 — Generic Interfaces in `coreinterface/` ✅ Done
-- **Objective**: Evaluate `ValueGetter[T]` generic interfaces
+### Priority 3: Performance Benchmarks (S-010)
+- **Objective**: Add benchmark tests for hot-path operations
 - **Dependencies**: None
-- **Expected outputs**: Architecture decision doc
-- **Acceptance criteria**: Decision documented with rationale
-- **Spec reference**: `spec/01-app/20-generic-interfaces-decision.md`
-- **Completed**: Added `TypedValueGetter[T]`, `TypedValuesGetter[T]`, `TypedKeyValueGetter[K,V]`. Additive adoption — existing interfaces retained.
+- **Expected outputs**: `*_bench_test.go` files in 6+ packages, benchmark summary document
+- **Acceptance criteria**: ≥30 benchmarks across 6+ packages. Results documented.
+- **Subpackages**: `coredata/corestr/Collection`, `coredata/coredynamic`, `errcore`, `codestack`, `regexnew`, `mutexbykey`
 
-### C.2 — `iter` Package Adoption (Go 1.23+) ✅ Done
-- **Objective**: Use `iter.Seq` for collection iteration patterns
+### Priority 4: Pointer Receiver Audit (S-012)
+- **Objective**: Migrate unnecessary pointer receivers to value receivers for idiomatic Go
 - **Dependencies**: None
-- **Expected outputs**: Prototype in `coregeneric/`
-- **Acceptance criteria**: Working iterator pattern with tests
-- **Spec reference**: `spec/01-app/11-go-modernization.md`
-- **Completed**: Added `All()`, `Values()`, `Backward()` iter.Seq/Seq2 methods to Collection, Hashset, Hashmap, SimpleSlice, LinkedList via dedicated `*Iter.go` files.
+- **Expected outputs**: Updated method signatures, spec documenting decisions
+- **Acceptance criteria**: Identified methods migrated without behavior changes. `./run.ps1 TC` passes.
+- **⚠️ Risk**: Types with caching fields MUST keep pointer receivers.
 
-### C.3 — CI Pipeline ✅ Done
-- **Objective**: Add `golangci-lint`, test coverage, and security scanning
-- **Dependencies**: None
-- **Expected outputs**: CI config file, lint config
-- **Acceptance criteria**: CI runs on push, blocks on failures
-- **Completed**: GitHub Actions workflow (`.github/workflows/ci.yml`) with 4 jobs: lint, test+coverage gate (60%), govulncheck, build. `.golangci.yml` updated with gocritic, nilerr, durationcheck, prealloc, gosimple.
-
-### C.4 — Module Splitting ✅ Done
-- **Objective**: Evaluate splitting monorepo into focused Go modules
-- **Dependencies**: All coverage work complete ✅
-- **Expected outputs**: Architecture decision doc
-- **Acceptance criteria**: Decision documented with migration path
-- **Spec reference**: `spec/01-app/26-module-splitting-decision.md`
-- **Completed**: Decision — **keep single module**. High internal coupling (especially `internal/*`, `constants`, `errcore`) makes clean splits impractical. Documented triggers for re-evaluation.
-
----
-
-## Phase D: Tooling & Runner Improvements
-
-### D.1 — Test Title Audit — All Packages ✅ Done
-- **Objective**: Audit all packages for test title consistency
-- **Dependencies**: None
-- **Acceptance criteria**: All test titles follow `"{Function} returns {Result} -- {Input Context}"` format
-- **Completed**: All 15,161 titles across 65 packages now conform. Auto-conformer script applied across all integrated test packages.
-
-### D.2 — Diagnostic Output Regression Tests ✅ Done
-- **Objective**: Create snapshot tests for diagnostic output formatting
-- **Dependencies**: None
-- **Acceptance criteria**: Snapshot tests pass for all formatter outputs
-- **Completed**: Created `errcore/Coverage11_DiagnosticSnapshots_test.go` with 25 snapshot tests covering MapMismatchError, LineDiffToString, LineDiff, SliceDiffSummary, GherkinsString, ExpectingRecord, ExpectationMessageDef, Expecting, ExpectingSimple, ExpectingSimpleNoType.
-
----
-
-## Phase E: Unit Coverage Fix & Test Migration ✅ Done
-
-- **Objective**: Fix all build issues, blocked packages, failing tests; migrate tests to `/tests/integratedtests/`; achieve 100% coverage across all non-internal packages.
-- **Registry**: All justified coverage gaps (unreachable/dead code) documented in [`.lovable/memory/testing/dead-code-registry.md`](.lovable/memory/testing/dead-code-registry.md) — 11 packages, ~30-45 lines total, all ✅ Closed.
-- **Completed**: All blocked packages resolved, all failing tests fixed, all reachable code paths covered. Remaining gaps are architecturally unreachable (platform-specific, `os.Exit`, exhaustive type switches, compiler-required fallbacks).
-
----
-
-## Next Task Selection
-
-All roadmap tasks are complete. 🎉
-
-| Phase | Status |
-|-------|--------|
-| Phases 1–8 (Foundation → Deep Quality) | ✅ Done |
-| Error Modernization, Go Modernization | ✅ Done |
-| Coverage Stabilization (Phase A) | ✅ Done |
-| Code Cleanup (Phase B) | ✅ Done |
-| Future Architecture (Phase C) | ✅ Done |
-| Tooling & Runner (Phase D) | ✅ Done |
-| Unit Coverage Fix & Migration (Phase E) | ✅ Done |
-| Dead Code Registry | ✅ Closed (11 packages) |
-
-**Potential future work** (user-initiated):
-- Performance benchmarking and optimization
-- Additional generic collection types
-- Extended CI/CD (release automation, changelog generation)
+### Priority 5: Sync.Mutex → sync.RWMutex Audit (S-013)
+- **Objective**: Improve concurrent read performance for read-heavy collections
+- **Dependencies**: S-010 (benchmarks needed to measure improvement)
+- **Expected outputs**: Migrated mutex types, before/after benchmark comparison
+- **Acceptance criteria**: Measurable improvement in read-heavy benchmark scenarios.
 
 ---
 
@@ -126,3 +93,41 @@ All roadmap tasks are complete. 🎉
 5. **Do not bulk-create coverage suites.** Especially for `errcore`, `corejson`, `corepayload`, `coredynamic`, `corestr`.
 6. **Honor naming standards.** Coverage tests: `Test_Cov[N]_{Method}_{Context}`. Titles: `"{Function} returns {Result} -- {Input Context}"`.
 7. **Honor project behavior standards.** Vacuous truth (`All*` on empty = true, `Any*` on empty = false), nil-handling, byte-slice clone.
+8. **Version bump.** Any code change bumps at least minor version. Never modify `.release` folder.
+9. **Suggestions tracking.** Every new suggestion goes to `.lovable/memory/suggestions/01-suggestions-tracker.md`. Update status on completion.
+
+---
+
+## Next Task Selection
+
+Pick one of these to implement next:
+
+| # | Task | Risk | Time Estimate |
+|---|------|:---:|:---:|
+| 1 | Coverage: `coreonce` (95.7% → 100%) | Low | 1 session |
+| 2 | Coverage: `keymk` (95.6% → 100%) | Low | 1 session |
+| 3 | Coverage: `corerange` (94.3% → 100%) | Low | 1 session |
+| 4 | Coverage: `enumimpl` (95.9% → 100%) | Low | 1 session |
+| 5 | Coverage: `corevalidator` (91.2% → 100%) | Medium | 1 session |
+| 6 | Coverage: `stringslice` (90.6% → 100%) | Medium | 1 session |
+| 7 | Deprecated API Cleanup — Phase 1 audit | Medium | 1 session |
+| 8 | Performance Benchmarks — first 6 packages | Low-Medium | 1-2 sessions |
+| 9 | Coverage: `codestack` (0% → 100%) | Medium | 1-2 sessions |
+| 10 | Coverage: `corecmp` (10.8% → 100%) | Medium | 2 sessions |
+
+**Recommendation**: Start with tasks 1–4 (low-risk coverage quick wins) to build momentum, then proceed to medium-risk items.
+
+---
+
+## Memory & Reference Index
+
+| Document | Location | Purpose |
+|---|---|---|
+| Reliability Risk Report | `.lovable/memory/reports/01-reliability-risk-report.md` | Failure analysis and success estimates |
+| Suggestions Tracker | `.lovable/memory/suggestions/01-suggestions-tracker.md` | Active/completed suggestions |
+| Coverage Plan | `.lovable/memory/workflow/01-coverage-and-testing-plan.md` | Coverage execution details |
+| API Hallucination Root Cause | `.lovable/memory/workflow/03-api-hallucination-root-cause.md` | Why coverage tests fail |
+| Dead Code Registry | `.lovable/memory/testing/dead-code-registry.md` | Justified coverage gaps |
+| Improvement Plan | `spec/01-app/20-improvement-plan.md` | Full phase-by-phase history |
+| Testing Guidelines | `spec/testing-guidelines/` | Naming, assertions, branch coverage |
+| Bug Audits | `spec/13-app-issues/golang/` | 41 bug audit files |

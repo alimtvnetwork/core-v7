@@ -1,7 +1,15 @@
 # Reliability & Failure-Chance Report
 
-## Date: 2026-03-16 (Refreshed)
+## Date: 2026-03-29 (Refreshed)
 ## Scope: Full spec set for `github.com/alimtvnetwork/core`
+
+---
+
+## Executive Summary
+
+This Go utility framework (`core`) has completed 10+ major phases of modernization, coverage expansion, and quality work. The spec set is **mature and extensive** — 25+ architecture docs, 41 bug audit files, 8 testing guidelines, 18 failing-test analyses, and a full dead-code registry. All major phases (1–8, A–E) are ✅ Done.
+
+**Remaining work** is concentrated in: deprecated API cleanup (S-009), performance benchmarks (S-010), pointer receiver audit (S-012), mutex optimization (S-013), and continued coverage push for low-coverage packages (S-014).
 
 ---
 
@@ -11,16 +19,18 @@
 
 | Tier | Modules | Success Probability | Assumptions |
 |------|---------|:-------------------:|-------------|
-| **Simple** (mechanical, well-scoped) | `interface{}` → `any` ✅, Go 1.24 update ✅, README rewrites ✅, deprecation notices ✅, slog adoption ✅, error modernization ✅ | **95%** | Already completed — confirmed success. |
-| **Medium** (multi-file, API-aware) | File splitting ✅, value receiver migration ✅ (S-006 done), codegen removal (Track B open), per-package READMEs ✅ (S-007 done), test title audit ✅ (S-004 done) | **80%** | Requires reading source to verify method signatures. Codegen removal needs external audit. |
-| **Complex / Agentic** (coverage push, reflection-heavy packages) | 100% coverage push for 20 remaining packages (Tiers 1-3), especially `corestr` (3.3%), `coredynamic` (0.9%), `corejson` (45%), `corepayload` (56%) | **45-55%** | Coverage work has a **documented root cause of repeated failure**: assumed APIs, bulk generation, build cascades. Reflection-heavy packages resist test generation without deep source reading. |
-| **End-to-End** (full verification pipeline) | Write tests → `./run.ps1 PC` → fix mismatches → `./run.ps1 TC` → confirm % | **35-45%** | AI cannot run Go/PowerShell in sandbox. Every cycle requires user-side verification. Latency between write and verify amplifies error accumulation. |
+| **Simple** (mechanical, well-scoped) | Package README creation, constant renaming, deprecation notices, single-file fixes | **95%** | Clear inputs, minimal cross-file impact, low risk of API mismatch. |
+| **Medium** (multi-file, API-aware) | Deprecated API removal (S-009), pointer receiver audit (S-012), benchmark creation (S-010), mutex audit (S-013) | **70–80%** | Requires reading source to verify method signatures and callers. Deprecated removal needs grep across all consumers. Benchmarks need real measurement. |
+| **Complex / Agentic** (coverage push, reflection-heavy) | Coverage for `corestr` (3.3%), `coredynamic` (0.9%), `corejson` (45%), `corepayload` (56%) | **40–50%** | **Documented root cause of repeated failure**: AI hallucinates Go API signatures (see `.lovable/memory/workflow/03-api-hallucination-root-cause.md`). Reflection-heavy packages resist test generation. |
+| **End-to-End** (full verification pipeline) | Write tests → `./run.ps1 PC` → fix → `./run.ps1 TC` → confirm % | **35–45%** | AI cannot compile or run Go tests in sandbox. Every cycle needs user-side verification. Latency amplifies error accumulation. |
 
 ### Key Global Assumptions
 
-1. AI **cannot compile or run Go tests** — all Go work is write-only until user verifies.
+1. AI **cannot compile or run Go tests** — all Go work is write-only until user verifies with `./run.ps1 PC` / `TC`.
 2. AI **must read source before every test edit** — naming-pattern inference is the #1 root cause of failure.
-3. Spec set is extensive (25+ spec files, 40+ bug docs, 8 testing guidelines) but **some cross-references are stale**.
+3. Spec set is extensive but **some cross-references may be stale** after many iterations.
+4. The `.release` folder must never be modified by AI.
+5. Any code change must bump at least the minor version (excluding `.release` folder).
 
 ---
 
@@ -30,22 +40,23 @@
 
 | Module / Workflow | Likelihood | Why | Symptoms |
 |---|:---:|---|---|
-| **Coverage: `coredynamic`** (57 files, 0.9% avg) | **VERY HIGH** | 53 files at 0%. Reflection-heavy, complex generics, Dynamic typing. Largest uncovered package. | Massive API mismatch. Tests won't compile. Build cascade blocks other packages. |
-| **Coverage: `corestr`** (52 files, 3.3% avg) | **VERY HIGH** | 42 files at 0%. Collection/Hashmap/Hashset/LinkedList. Many data structure methods. | Wrong method signatures, missing type fixtures. |
-| **Coverage: `corejson`** (18 files, 45% avg) | **HIGH** | Serialization/deserialization with generics and reflection. | Type assertion failures, wrong generic parameters. |
-| **Coverage: `corepayload`** (23 files, 56% avg) | **HIGH** | Typed generics, complex collection methods, JSON interop. | Wrong factory function signatures, paging logic errors. |
-| **Coverage: Tier 1 quick wins** (6 packages, 90-96%) | **MEDIUM** | Targeted branch coverage. Risk: missing edge cases in nil/boundary logic. | Tests compile but don't cover intended branches. |
-| **Codegen removal** (Track B) | **MEDIUM** | External consumer audit required. AI cannot verify. | Broken imports in unknown downstream repos. |
-| **Batch 4 verification** (6 unverified files) | **MEDIUM** | Written but never compiled. `coreindexes`, `coremath`, `corecsv`, `intunique`, `stringutil`, `conditional`. | API mismatches discovered when user runs `./run.ps1 PC`. |
+| **Coverage: `coredynamic`** (57 files, 0.9%) | **VERY HIGH** | 53 files at 0%. Reflection-heavy, complex generics, Dynamic typing. Largest uncovered package. | Massive API mismatch. Tests won't compile. Build cascade blocks other packages. |
+| **Coverage: `corestr`** (52 files, 3.3%) | **VERY HIGH** | 42 files at 0%. Collection/Hashmap/Hashset/LinkedList with many data structure methods. | Wrong method signatures, missing type fixtures. |
+| **Coverage: `corejson`** (18 files, 45%) | **HIGH** | Serialization/deserialization with generics and reflection. | Type assertion failures, wrong generic parameters. |
+| **Coverage: `corepayload`** (23 files, 56%) | **HIGH** | Typed generics, complex collection methods, JSON interop. | Wrong factory function signatures, paging logic errors. |
+| **Deprecated API removal** (S-009, 110 functions) | **MEDIUM** | Need to confirm no external consumers. Batch removal risks breaking integrated tests. | Compile errors in test packages that use deprecated functions. |
+| **Pointer receiver audit** (S-012, 5224 receivers) | **MEDIUM** | Interface satisfaction may break. Value-receiver migration on types with caching fields causes silent bugs. | Tests pass but runtime behavior regresses (e.g., caching stops working). |
+| **Benchmark creation** (S-010) | **LOW** | Straightforward API calls, but AI may hallucinate method signatures for unfamiliar packages. | Compile errors in benchmark files. |
 
-### 2.2 Cross-File Inconsistency Issues (Resolved vs Remaining)
+### 2.2 Root Causes of AI Failure (from postmortem)
 
-| Issue | Status | Action |
-|---|---|---|
-| `plan.md` showed completed items as pending | **FIXED** in this update | plan.md rewritten with accurate statuses |
-| `20-improvement-plan.md` Phase 6 says "In Progress" but S-006 is done | **FIXED** in this update | Noted in suggestions tracker |
-| `15-code-review-report.md` recommends "update go.mod to 1.22+" (already at 1.24) | **STALE** | Low priority — report is historical |
-| Coverage batches 1-3 ✅ in workflow vs suggestions "blocked by compile" | **CLARIFIED** | Batches 1-3 were written; batch 4 pending verification |
+| Root Cause | Frequency | Mitigation |
+|---|:---:|---|
+| **API hallucination** — AI invents plausible method names/signatures | Very High | Read source → copy exact signatures → write test |
+| **Bulk generation** — one wrong assumption cascades across dozens of call sites | High | One-package-at-a-time gate |
+| **Stale spec references** — completed phases re-attempted | Medium | Check plan.md and suggestions tracker before starting |
+| **No compile feedback** — errors only discovered when user runs PC/TC | High | Minimize batch size, maximize user verification frequency |
+| **Assumed naming patterns** — "similar package = similar API" | Medium | Never infer; always read source file |
 
 ### 2.3 How Failures Manifest
 
@@ -53,48 +64,81 @@
 2. **Coverage regression** — Blocked test packages make coverage numbers drop across the board.
 3. **API mismatch cascade** — One wrong method signature blocks the entire integrated test package.
 4. **Duplicate work** — Stale specs cause AI to re-implement completed phases.
+5. **Value-receiver cache bug** — Migrating pointer→value receiver on caching types silently breaks runtime behavior.
 
 ---
 
 ## 3. Corrective Actions (Prioritized)
 
-| # | Fix | Where | Reliability Gain |
+| # | Fix | Where | Expected Reliability Gain |
 |---|-----|-------|:---:|
-| 1 | **Verify Batch 4 compilation** — Run `./run.ps1 PC` to validate 6 unverified coverage files | User action → report results | +15% — Establishes real baseline |
-| 2 | **One-package-at-a-time gate for Tier 3** — Never bulk-generate coverage for `corestr`, `coredynamic`, `corejson` | Process rule in workflow memory | +15% — Prevents cascade failures |
-| 3 | **Add method signature snapshots** — Before writing tests for any HIGH RISK package, create a method-signature inventory file | New spec per package | +10% — Prevents assumed-API errors |
-| 4 | **Reconcile plan.md** (done in this update) | `plan.md` | +5% — Prevents duplicate work |
-| 5 | **Mark stale code review recommendations** | `spec/01-app/15-code-review-report.md` | +2% — Reduces confusion |
-| 6 | **External codegen audit** — User must run `grep` across auk-go repos before removal | User action | +3% — Prerequisite for Track B |
+| 1 | **Run `./run.ps1 PC` and `TC` before any new work** — Establish current baseline | User action | +15% — Real truth of what compiles and what coverage is |
+| 2 | **One-package-at-a-time gate** — Never bulk-generate coverage for HIGH RISK packages | Process rule (enforced in memory) | +15% — Prevents cascade failures |
+| 3 | **Method signature inventory** — Before writing tests for any HIGH RISK package, create signature snapshot | New file per package | +10% — Prevents API hallucination |
+| 4 | **Version bump discipline** — Any code change bumps minor version; `.release` folder untouched | Process rule | +3% — Prevents version confusion |
+| 5 | **Stale spec cleanup** — Mark historical code review reports as archived | `spec/01-app/15-*.md`, `16-*.md`, `17-*.md` | +2% — Reduces confusion for new AI |
+| 6 | **External consumer audit** — Grep across auk-go repos before deprecated API removal (S-009) | User action | +5% — Prevents breaking downstream |
 
 ---
 
 ## 4. Readiness Decision
 
-### Verdict: **CONDITIONALLY READY** ⚠️
+### Verdict: **READY — with process enforcement** ✅
 
 **Strengths:**
-- ✅ Comprehensive spec set (25+ architecture docs, 40+ bug audits, 8 testing guidelines)
-- ✅ Well-documented postmortem explaining root cause of repeated failures
-- ✅ Clear improvement plan with 8 completed phases
-- ✅ Testing framework with AAA pattern, naming conventions, and branch coverage strategy
-- ✅ Suggestions tracker with structured completion handling
+- ✅ 25+ architecture spec files covering every major subsystem
+- ✅ 41 bug audit files documenting every found issue with root cause and fix
+- ✅ Comprehensive testing guidelines (8 files) with naming conventions, AAA patterns, branch coverage strategy
+- ✅ Full dead-code registry (11 packages, all ✅ Closed) justifying every coverage gap
+- ✅ Detailed postmortem documenting why coverage work failed and how to prevent it
+- ✅ API hallucination root cause documented with 8+ concrete examples
+- ✅ Well-structured suggestions tracker with completion archives
+- ✅ All major phases (1–8, A–E) completed
+- ✅ CI pipeline with lint, test, coverage gate, govulncheck
 
 **Before starting implementation:**
-1. **MUST**: Run `./run.ps1 PC` to validate Batch 4 files (S-001)
+1. **MUST**: Run `./run.ps1 PC` and `./run.ps1 TC` to establish current baseline
 2. **MUST**: Follow one-package-at-a-time gate for all coverage work
-3. **SHOULD**: Create method signature inventory for HIGH RISK packages before writing tests
-4. **SHOULD**: Accept that coverage for `coredynamic` and `corestr` will take 5-8 sessions each
+3. **MUST**: Read source before every test edit — never infer APIs
+4. **MUST**: Bump at least minor version on any code change (not `.release`)
+5. **SHOULD**: Create method signature inventory for HIGH RISK packages
+6. **SHOULD**: Accept that `coredynamic` and `corestr` coverage will take 5-8 sessions each
 
 ### Overall Success Rate
 
 | Scenario | Estimate |
 |:---|:---:|
-| Handed to another AI as-is (before corrective fixes) | **50-55%** |
-| After corrective fixes + process enforcement | **70-75%** |
-| With user-side verification loop (./run.ps1 PC/TC after each batch) | **80-85%** |
+| Handed to another AI as-is (no process enforcement) | **55–60%** |
+| With process enforcement (read-first, one-at-a-time gate) | **72–78%** |
+| With process enforcement + user verification loop (PC/TC after each batch) | **82–88%** |
 
-The 30% gap between as-is and best-case is: stale specs (~5%), assumed APIs (~10%), no compile verification (~10%), cascade from bulk generation (~5%).
+The gap is: API hallucination (~10%), no compile feedback (~8%), stale references (~3%), bulk generation (~4%).
+
+---
+
+## 5. Spec Coverage Analysis
+
+### What's Well-Specified ✅
+
+| Area | Spec Files | Quality |
+|---|---|---|
+| Repository architecture | `00-repo-overview.md`, `01-folder-map.md` | Excellent — complete folder tree with descriptions |
+| Package-level docs | 12 folders specs, 13+ package READMEs | Good — most packages documented |
+| Bug audits | 41 files in `spec/13-app-issues/golang/` | Excellent — root cause, fix, impact for each |
+| Testing patterns | 8 files in `spec/testing-guidelines/` | Excellent — naming, assertions, branch coverage |
+| Improvement roadmap | `20-improvement-plan.md` (246 lines) | Good — all phases documented |
+| Coverage workflow | 11 workflow files, 2 completed | Good — detailed session logs |
+| Dead code justification | `dead-code-registry.md` (285 lines, 11 packages) | Excellent — every gap justified |
+
+### What's Weak or Missing ⚠️
+
+| Gap | Risk | Recommendation |
+|---|---|---|
+| No spec for `coreinstruction/` package beyond source | Low | Create folder spec if modification planned |
+| No spec for `mutexbykey/` concurrency model | Medium | Document lock semantics before S-013 |
+| No formal API contract spec (method signatures) | High for coverage work | Create signature inventories for HIGH RISK packages |
+| `spec/01-app/15-17` code review reports are historical | Low | Mark as archived to prevent confusion |
+| No benchmark baselines | Low | Will be addressed by S-010 |
 
 ---
 
@@ -102,6 +146,7 @@ The 30% gap between as-is and best-case is: stale specs (~5%), assumed APIs (~10
 
 - [Improvement Plan](../../spec/01-app/20-improvement-plan.md)
 - [Coverage Remediation Root Cause](../workflow/completed/02-coverage-remediation-root-cause.md)
-- [Coverage File-Level Plan](../workflow/03-coverage-file-level-plan.md)
-- [Branch Coverage Strategy](../../spec/01-app/23-branch-coverage-strategy.md)
+- [API Hallucination Root Cause](../workflow/03-api-hallucination-root-cause.md)
+- [Dead Code Registry](../testing/dead-code-registry.md)
 - [Suggestions Tracker](../suggestions/01-suggestions-tracker.md)
+- [Plan.md](../../plan.md)
