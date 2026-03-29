@@ -65,6 +65,10 @@ if (-not $PSBoundParameters.ContainsKey('Command')) {
     }
 }
 
+# -- Encoding (fix garbled Unicode on Windows terminals) --
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+$OutputEncoding            = [System.Text.Encoding]::UTF8
+
 $ErrorActionPreference = "Stop"
 
 # -- Colors --
