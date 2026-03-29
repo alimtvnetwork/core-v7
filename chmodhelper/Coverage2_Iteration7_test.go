@@ -16,9 +16,9 @@ import (
 func Test_Cov2_CreateDirFilesWithRwxPermissions_ErrorPath(t *testing.T) {
 	items := []DirFilesWithRwxPermission{
 		{
-			DirWithFiles: DirWithFiles{
-				DirPath: "/dev/null/impossible_dir",
-			},
+		DirWithFiles: DirWithFiles{
+			Dir: "/dev/null/impossible_dir",
+		},
 		},
 	}
 	err := CreateDirFilesWithRwxPermissions(false, items)
@@ -39,9 +39,9 @@ func Test_Cov2_CreateDirFilesWithRwxPermissionsMust_PanicPath(t *testing.T) {
 	}()
 	items := []DirFilesWithRwxPermission{
 		{
-			DirWithFiles: DirWithFiles{
-				DirPath: "/dev/null/impossible_dir",
-			},
+		DirWithFiles: DirWithFiles{
+			Dir: "/dev/null/impossible_dir",
+		},
 		},
 	}
 	CreateDirFilesWithRwxPermissionsMust(false, items)
@@ -143,7 +143,7 @@ func Test_Cov2_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov2_RwxVariableWrapper_ApplyRwxOnLocations_NonexistentPath(t *testing.T) {
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -159,7 +159,7 @@ func Test_Cov2_RwxVariableWrapper_ApplyRwxOnLocations_ValidPath(t *testing.T) {
 	tmpFile := filepath.Join(tmpDir, "test.txt")
 	os.WriteFile(tmpFile, []byte("test"), 0o644)
 
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -175,7 +175,7 @@ func Test_Cov2_RwxVariableWrapper_ApplyRwxOnLocations_ValidPath(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov2_RwxVariableWrapper_Parse_Error(t *testing.T) {
-	_, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("X")
+	_, err := NewRwxVariableWrapper("X")
 	if err == nil {
 		t.Fatal("expected error for invalid input")
 	}
@@ -228,8 +228,8 @@ func Test_Cov2_RwxPartialToInstructionExecutor_InvalidPartial(t *testing.T) {
 
 func Test_Cov2_RwxInstructionExecutors_ApplyOnPathsPtr_WithExecutors(t *testing.T) {
 	exec := &RwxInstructionExecutor{} // neither fixed nor var
-	items := []RwxInstructionExecutor{*exec}
-	execs := &RwxInstructionExecutors{items: &items}
+	execs := NewRwxInstructionExecutors(1)
+	execs.Add(exec)
 
 	err := execs.ApplyOnPaths([]string{"/nonexistent"})
 	// Should error because the executor can't compile a wrapper

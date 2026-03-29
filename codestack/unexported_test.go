@@ -882,7 +882,7 @@ func TestInternal_I15_TraceCollection_PagedItems_NegativeIndex(t *testing.T) {
 	}()
 	tc := New.traces.Default()
 	tc.Adds(New.Create(0))
-	tc.PagedItems(-1, 10)
+	tc.GetSinglePageCollection(10, -1)
 }
 
 func TestInternal_I15_TraceCollection_FilterWithLimit_BreakBranch(t *testing.T) {

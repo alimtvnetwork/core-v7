@@ -707,7 +707,7 @@ func Test_Cov4_RwxWrapper_ApplyChmod_ValidPath(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyOnMismatch_Equal(t *testing.T) {
+func Test_Cov4_RwxWrapper_ApplyChmodOptions_Equal(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -718,8 +718,8 @@ func Test_Cov4_RwxWrapper_ApplyOnMismatch_Equal(t *testing.T) {
 	os.WriteFile(fp, []byte("x"), 0644)
 	rwx := New.RwxWrapper.UsingFileMode(0644)
 
-	// Act — should skip because chmod already matches
-	err := rwx.ApplyOnMismatch(true, false, fp)
+	// Act — should skip because chmod already matches (isApplyOnMismatch=true)
+	err := rwx.ApplyChmodOptions(true, true, false, fp)
 
 	// Assert
 	if err != nil {
@@ -727,7 +727,7 @@ func Test_Cov4_RwxWrapper_ApplyOnMismatch_Equal(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyOnMismatch_Mismatch(t *testing.T) {
+func Test_Cov4_RwxWrapper_ApplyChmodOptions_Mismatch(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -739,7 +739,7 @@ func Test_Cov4_RwxWrapper_ApplyOnMismatch_Mismatch(t *testing.T) {
 	rwx := New.RwxWrapper.UsingFileMode(0600)
 
 	// Act
-	err := rwx.ApplyOnMismatch(true, false, fp)
+	err := rwx.ApplyChmodOptions(true, true, false, fp)
 
 	// Assert
 	if err != nil {
@@ -747,7 +747,7 @@ func Test_Cov4_RwxWrapper_ApplyOnMismatch_Mismatch(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyOnMismatch_InvalidPath(t *testing.T) {
+func Test_Cov4_RwxWrapper_ApplyChmodOptions_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -756,7 +756,7 @@ func Test_Cov4_RwxWrapper_ApplyOnMismatch_InvalidPath(t *testing.T) {
 	rwx := New.RwxWrapper.UsingFileMode(0644)
 
 	// Act
-	err := rwx.ApplyOnMismatch(false, false, "/nonexistent/xyz")
+	err := rwx.ApplyChmodOptions(true, false, false, "/nonexistent/xyz")
 
 	// Assert
 	if err == nil {
@@ -1075,7 +1075,7 @@ func Test_Cov4_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 	items := []DirFilesWithRwxPermission{
 		{
 			DirWithFiles: DirWithFiles{
-				DirPath: "/dev/null/impossible",
+				Dir: "/dev/null/impossible",
 			},
 			ApplyRwx: chmodins.RwxOwnerGroupOther{
 				Owner: "INVALID",
@@ -1105,7 +1105,7 @@ func Test_Cov4_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 	items := []DirFilesWithRwxPermission{
 		{
 			DirWithFiles: DirWithFiles{
-				DirPath: "/dev/null/impossible",
+				Dir: "/dev/null/impossible",
 			},
 			ApplyRwx: chmodins.RwxOwnerGroupOther{
 				Owner: "INVALID",
@@ -1126,7 +1126,7 @@ func Test_Cov4_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 func Test_Cov4_CreateDirWithFiles_MkDirError(t *testing.T) {
 	// Arrange
 	dw := &DirWithFiles{
-		DirPath: "/dev/null/impossible/dir",
+		Dir: "/dev/null/impossible/dir",
 		Files:   []string{},
 	}
 
@@ -1144,7 +1144,7 @@ func Test_Cov4_CreateDirWithFiles_WithFiles(t *testing.T) {
 	dir := t.TempDir()
 	subDir := filepath.Join(dir, "sub")
 	dw := &DirWithFiles{
-		DirPath: subDir,
+		Dir: subDir,
 		Files:   []string{"a.txt", "b.txt"},
 	}
 
@@ -1166,7 +1166,7 @@ func Test_Cov4_CreateDirWithFiles_ChmodError(t *testing.T) {
 	dir := t.TempDir()
 	subDir := filepath.Join(dir, "sub_chmod_err")
 	dw := &DirWithFiles{
-		DirPath: subDir,
+		Dir: subDir,
 		Files:   []string{"a.txt"},
 	}
 
@@ -1188,9 +1188,7 @@ func Test_Cov4_DirFilesWithContent_Create_RemoveDirError(t *testing.T) {
 
 	// Arrange — create a path that can't be removed
 	dfwc := &DirFilesWithContent{
-		DirWithFiles: DirWithFiles{
-			Dir: "/dev/null/impossible/dir",
-		},
+		Dir: "/dev/null/impossible/dir",
 		DirFileMode: 0755,
 	}
 
@@ -1207,14 +1205,12 @@ func Test_Cov4_DirFilesWithContent_Create_FileWriteError(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	dfwc := &DirFilesWithContent{
-		DirWithFiles: DirWithFiles{
-			Dir: dir,
-		},
+		Dir:         dir,
 		DirFileMode: 0755,
 		Files: []FileWithContent{
 			{
 				RelativePath: "test.txt",
-				Content:      "hello",
+				Content:      []string{"hello"},
 				FileMode:     0644,
 			},
 		},
@@ -1279,7 +1275,7 @@ func Test_Cov4_RwxVariableWrapper_NewError(t *testing.T) {
 
 func Test_Cov4_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	// Arrange
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -1295,7 +1291,7 @@ func Test_Cov4_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T)
 
 func Test_Cov4_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	// Arrange
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -1411,7 +1407,7 @@ func Test_Cov4_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
 
 func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
 	// Arrange & Act
-	result := TempDir.TempPermanent()
+	result := TempDirGetter.TempPermanent()
 
 	// Assert
 	if result == "" {
@@ -1421,7 +1417,7 @@ func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
 
 func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
 	// Arrange & Act
-	result := TempDir.TempOption(true)
+	result := TempDirGetter.TempOption(true)
 
 	// Assert
 	if result == "" {
@@ -1434,11 +1430,10 @@ func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_VarAttribute_IsEqualPtr_OneNil(t *testing.T) {
-	// Arrange
-	attr := &VarAttribute{
-		ReadAttr:    AttrEnabled,
-		WriteAttr:   AttrEnabled,
-		ExecuteAttr: AttrEnabled,
+	// Arrange — parse a valid VarAttribute
+	attr, err := ParseRwxToVarAttribute("rwx")
+	if err != nil {
+		t.Fatal("unexpected parse error:", err)
 	}
 
 	// Act

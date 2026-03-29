@@ -426,7 +426,7 @@ func Test_Cov3_SimpleFileReaderWriter_ReadBytes(t *testing.T) {
 	}
 
 	// Act
-	bytes, err := rw.ReadBytes()
+	bytes, err := rw.Read()
 
 	// Assert
 	if err != nil {
@@ -468,7 +468,7 @@ func Test_Cov3_SimpleFileReaderWriter_ReadBytes_NonExistent(t *testing.T) {
 	}
 
 	// Act
-	_, err := rw.ReadBytes()
+	_, err := rw.Read()
 
 	// Assert
 	if err == nil {
@@ -480,18 +480,15 @@ func Test_Cov3_SimpleFileReaderWriter_ReadBytes_NonExistent(t *testing.T) {
 // DirFilesWithContent — error paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_CreateDefaultPaths_ErrorPath(t *testing.T) {
+func Test_Cov3_DirFilesWithContent_Create_ErrorPath(t *testing.T) {
 	// Arrange
-	items := []DirFilesWithContent{
-		{
-			DirWithFiles: DirWithFiles{
-				DirPath: "/dev/null/impossible",
-			},
-		},
+	dfwc := &DirFilesWithContent{
+		Dir:         "/dev/null/impossible",
+		DirFileMode: 0755,
 	}
 
 	// Act
-	err := CreateDefaultPaths(false, items)
+	err := dfwc.Create(false)
 
 	// Assert
 	if err == nil {
@@ -503,20 +500,19 @@ func Test_Cov3_CreateDefaultPaths_ErrorPath(t *testing.T) {
 // VarAttribute — HasWildcard error branch
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_VarAttribute_IsAllWildcards(t *testing.T) {
-	// Arrange
-	attr := &VarAttribute{
-		ReadAttr:    AttrWildcard,
-		WriteAttr:   AttrWildcard,
-		ExecuteAttr: AttrWildcard,
+func Test_Cov3_VarAttribute_HasWildcard(t *testing.T) {
+	// Arrange — use ParseRwxToVarAttribute to get a wildcard VarAttribute
+	attr, err := ParseRwxToVarAttribute("r-*")
+	if err != nil {
+		t.Fatal("unexpected parse error:", err)
 	}
 
 	// Act
-	result := attr.IsAllWildcards()
+	result := attr.HasWildcard()
 
 	// Assert
 	if !result {
-		t.Fatal("expected all wildcards")
+		t.Fatal("expected HasWildcard to be true")
 	}
 }
 
@@ -524,9 +520,9 @@ func Test_Cov3_VarAttribute_IsAllWildcards(t *testing.T) {
 // errorCreator — remaining paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_ErrorCreator_DirCreateFailed(t *testing.T) {
+func Test_Cov3_ErrorCreator_PathError_NilErr(t *testing.T) {
 	// Arrange & Act
-	err := newError.dirCreateFailed(0755, "/tmp/x", nil)
+	err := newError.pathError("test", 0755, "/tmp/x", nil)
 
 	// Assert
 	if err != nil {
@@ -534,9 +530,9 @@ func Test_Cov3_ErrorCreator_DirCreateFailed(t *testing.T) {
 	}
 }
 
-func Test_Cov3_ErrorCreator_FileWriteFailed(t *testing.T) {
+func Test_Cov3_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 	// Arrange & Act
-	err := newError.fileWriteFailed(0644, "/tmp/x", nil)
+	err := newError.chmodApplyFailed(0644, "/tmp/x", nil)
 
 	// Assert
 	if err != nil {
@@ -548,13 +544,13 @@ func Test_Cov3_ErrorCreator_FileWriteFailed(t *testing.T) {
 // dirCreator — ByCheckingWithChmod error path
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov3_DirCreator_ByCheckingWithChmod_InvalidPath(t *testing.T) {
+func Test_Cov3_DirCreator_ByChecking_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
 
 	// Arrange & Act
-	err := internalDirCreator.ByCheckingWithChmod(0755, 0644, "/dev/null/impossible/path")
+	err := internalDirCreator.ByChecking(0755, "/dev/null/impossible/path")
 
 	// Assert
 	if err == nil {
@@ -572,7 +568,7 @@ func Test_Cov3_RwxVariableWrapper_ApplyRwxOnLocations_SkipContinue(t *testing.T)
 	}
 
 	// Arrange
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -590,7 +586,7 @@ func Test_Cov3_RwxVariableWrapper_ApplyRwxOnLocations_NoContinueNoSkip(t *testin
 	}
 
 	// Arrange
-	w, err := ParseRwxOwnerGroupOtherInstructionToRwxVariableWrapper("rwxrwxrwx")
+	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
 		t.Fatal("unexpected parse error:", err)
 	}
@@ -631,25 +627,32 @@ func Test_Cov3_GetRecursivePaths_NoSkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov3_GetRecursivePathsContinueOnError_SkipInvalid(t *testing.T) {
+func Test_Cov3_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
 	// Arrange & Act
-	paths, err := GetRecursivePathsContinueOnError(true, "/nonexistent/xyz")
+	paths, err := GetRecursivePathsContinueOnError("/nonexistent/xyz")
 
-	// Assert
-	if err != nil {
-		t.Fatal("expected nil error on skip-invalid:", err)
+	// Assert — non-existent path returns error
+	if err == nil {
+		t.Fatal("expected error for non-existent path")
 	}
 	if len(paths) != 0 {
 		t.Fatal("expected empty paths")
 	}
 }
 
-func Test_Cov3_GetRecursivePathsContinueOnError_NoSkipInvalid(t *testing.T) {
-	// Arrange & Act
-	_, err := GetRecursivePathsContinueOnError(false, "/nonexistent/xyz")
+func Test_Cov3_GetRecursivePathsContinueOnError_ValidDir(t *testing.T) {
+	// Arrange
+	dir := t.TempDir()
+	os.WriteFile(filepath.Join(dir, "f.txt"), []byte("x"), 0644)
+
+	// Act
+	paths, err := GetRecursivePathsContinueOnError(dir)
 
 	// Assert
-	if err == nil {
-		t.Fatal("expected error for non-existent without skip")
+	if err != nil {
+		t.Fatal("expected no error:", err)
+	}
+	if len(paths) == 0 {
+		t.Fatal("expected non-empty paths")
 	}
 }

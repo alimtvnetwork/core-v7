@@ -1,7 +1,6 @@
 package args
 
 import (
-	"errors"
 	"fmt"
 	"testing"
 )
@@ -12,7 +11,7 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_DynamicFunc_Get_NilReturn(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		Params: Map{"key1": "value1"},
 	}
 	item, isValid := df.Get("nonexistent")
@@ -22,7 +21,7 @@ func Test_Cov9_DynamicFunc_Get_NilReturn(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_GetAsInt_Invalid(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		Params: Map{"key1": "not-int"},
 	}
 	_, isValid := df.GetAsInt("nonexistent")
@@ -32,7 +31,7 @@ func Test_Cov9_DynamicFunc_GetAsInt_Invalid(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_GetAsString_Invalid(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		Params: Map{"key1": 123},
 	}
 	_, isValid := df.GetAsString("nonexistent")
@@ -42,7 +41,7 @@ func Test_Cov9_DynamicFunc_GetAsString_Invalid(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_GetAsStrings_Invalid(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		Params: Map{"key1": 123},
 	}
 	_, isValid := df.GetAsStrings("nonexistent")
@@ -52,7 +51,7 @@ func Test_Cov9_DynamicFunc_GetAsStrings_Invalid(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_GetAsAnyItems_Invalid(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		Params: Map{"key1": 123},
 	}
 	_, isValid := df.GetAsAnyItems("nonexistent")
@@ -62,7 +61,7 @@ func Test_Cov9_DynamicFunc_GetAsAnyItems_Invalid(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_Invoke(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		WorkFunc: sampleGreet,
 		Params:   Map{},
 	}
@@ -76,7 +75,7 @@ func Test_Cov9_DynamicFunc_Invoke(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_InvokeMust(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		WorkFunc: sampleGreet,
 		Params:   Map{},
 	}
@@ -87,7 +86,7 @@ func Test_Cov9_DynamicFunc_InvokeMust(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		WorkFunc: sampleGreet,
 		Params:   Map{"input-String1": "ValidArg"},
 	}
@@ -101,7 +100,7 @@ func Test_Cov9_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
 }
 
 func Test_Cov9_DynamicFunc_InvokeArgs(t *testing.T) {
-	df := &DynamicFunc[string]{
+	df := &DynamicFunc[func(string) string]{
 		WorkFunc: sampleGreet,
 		Params:   Map{"name": "ArgsVal"},
 	}
@@ -120,7 +119,7 @@ func Test_Cov9_DynamicFunc_InvokeArgs(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Dynamic_GetWorkFunc(t *testing.T) {
-	d := &Dynamic[string]{
+	d := &Dynamic[func(string) string]{
 		Params: Map{"func": sampleGreet},
 	}
 	wf := d.GetWorkFunc()
@@ -130,7 +129,7 @@ func Test_Cov9_Dynamic_GetWorkFunc(t *testing.T) {
 }
 
 func Test_Cov9_Dynamic_Invoke(t *testing.T) {
-	d := &Dynamic[string]{
+	d := &Dynamic[func(string) string]{
 		Params: Map{"func": sampleGreet},
 	}
 	results, err := d.Invoke("World")
@@ -143,7 +142,7 @@ func Test_Cov9_Dynamic_Invoke(t *testing.T) {
 }
 
 func Test_Cov9_Dynamic_InvokeMust(t *testing.T) {
-	d := &Dynamic[string]{
+	d := &Dynamic[func(string) string]{
 		Params: Map{"func": sampleGreet},
 	}
 	results := d.InvokeMust("Test")
@@ -583,7 +582,7 @@ func Test_Cov9_Map_InvokeWithValidArgs(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Holder_Invoke(t *testing.T) {
-	h := &Holder[string]{
+	h := &Holder[func(string) string]{
 		First:    "World",
 		WorkFunc: sampleGreet,
 	}
@@ -597,7 +596,7 @@ func Test_Cov9_Holder_Invoke(t *testing.T) {
 }
 
 func Test_Cov9_Holder_InvokeMust(t *testing.T) {
-	h := &Holder[string]{First: "Test", WorkFunc: sampleGreet}
+	h := &Holder[func(string) string]{First: "Test", WorkFunc: sampleGreet}
 	results := h.InvokeMust("Test")
 	if results[0] != "Hello Test" {
 		t.Errorf("got %v", results[0])
@@ -605,7 +604,7 @@ func Test_Cov9_Holder_InvokeMust(t *testing.T) {
 }
 
 func Test_Cov9_Holder_InvokeWithValidArgs(t *testing.T) {
-	h := &Holder[string]{First: "VA", WorkFunc: sampleGreet}
+	h := &Holder[func(string) string]{First: "VA", WorkFunc: sampleGreet}
 	results, err := h.InvokeWithValidArgs()
 	if err != nil {
 		t.Fatalf("error: %v", err)
@@ -616,7 +615,7 @@ func Test_Cov9_Holder_InvokeWithValidArgs(t *testing.T) {
 }
 
 func Test_Cov9_Holder_InvokeArgs(t *testing.T) {
-	h := &Holder[string]{First: "Args", WorkFunc: sampleGreet}
+	h := &Holder[func(string) string]{First: "Args", WorkFunc: sampleGreet}
 	results, err := h.InvokeArgs(1)
 	if err != nil {
 		t.Fatalf("error: %v", err)
