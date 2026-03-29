@@ -1,6 +1,6 @@
 # Plan — Future Work Roadmap
 
-## Last Updated: 2026-03-20T12:00:00+08:00
+## Last Updated: 2026-03-27T01:45:00+08:00
 
 ---
 
@@ -87,6 +87,14 @@
 
 ---
 
+## Phase E: Unit Coverage Fix & Test Migration ✅ Done
+
+- **Objective**: Fix all build issues, blocked packages, failing tests; migrate tests to `/tests/integratedtests/`; achieve 100% coverage across all non-internal packages.
+- **Registry**: All justified coverage gaps (unreachable/dead code) documented in [`.lovable/memory/testing/dead-code-registry.md`](.lovable/memory/testing/dead-code-registry.md) — 11 packages, ~30-45 lines total, all ✅ Closed.
+- **Completed**: All blocked packages resolved, all failing tests fixed, all reachable code paths covered. Remaining gaps are architecturally unreachable (platform-specific, `os.Exit`, exhaustive type switches, compiler-required fallbacks).
+
+---
+
 ## Next Task Selection
 
 All roadmap tasks are complete. 🎉
@@ -99,6 +107,8 @@ All roadmap tasks are complete. 🎉
 | Code Cleanup (Phase B) | ✅ Done |
 | Future Architecture (Phase C) | ✅ Done |
 | Tooling & Runner (Phase D) | ✅ Done |
+| Unit Coverage Fix & Migration (Phase E) | ✅ Done |
+| Dead Code Registry | ✅ Closed (11 packages) |
 
 **Potential future work** (user-initiated):
 - Performance benchmarking and optimization

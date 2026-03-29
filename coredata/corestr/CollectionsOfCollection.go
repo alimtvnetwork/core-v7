@@ -65,6 +65,10 @@ func (it *CollectionsOfCollection) List(additionalCapacity int) []string {
 	}
 
 	for _, collection := range it.items {
+		if collection == nil || collection.IsEmpty() {
+			continue
+		}
+
 		for _, s := range collection.List() {
 			list = append(list, s)
 		}

@@ -511,7 +511,7 @@ var covS06CharCollMapEqualsTestCases = []coretestcases.CaseV1{
 	{
 		Title: "IsEquals returns false -- nil other",
 		ArrangeInput: args.Map{
-			"items1":    []string{"apple"},
+			"items1":      []string{"apple"},
 			"useNilOther": true,
 		},
 		ExpectedInput: args.Map{
@@ -545,22 +545,22 @@ var covS06HasWithCollectionTestCases = []coretestcases.CaseV1{
 	{
 		Title: "HasWithCollection returns true with collection -- item exists",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple", "avocado"},
+			"items":    []string{"apple", "avocado"},
 			"checkStr": "apple",
 		},
 		ExpectedInput: args.Map{
-			"found":           true,
+			"found":            true,
 			"collectionNotNil": true,
 		},
 	},
 	{
 		Title: "HasWithCollection returns false -- item missing",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple"},
+			"items":    []string{"apple"},
 			"checkStr": "banana",
 		},
 		ExpectedInput: args.Map{
-			"found":           false,
+			"found":            false,
 			"collectionNotNil": true,
 		},
 	},
@@ -571,7 +571,7 @@ var covS06HasWithCollectionTestCases = []coretestcases.CaseV1{
 			"checkStr": "apple",
 		},
 		ExpectedInput: args.Map{
-			"found":           false,
+			"found":            false,
 			"collectionNotNil": true,
 		},
 	},
@@ -582,8 +582,8 @@ var covS06GetCollectionTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetCollection returns collection -- char exists",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "a-test",
+			"items":           []string{"apple"},
+			"checkStr":        "a-test",
 			"isAddNewOnEmpty": false,
 		},
 		ExpectedInput: args.Map{
@@ -593,8 +593,8 @@ var covS06GetCollectionTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetCollection returns nil -- char missing no-add",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "z-test",
+			"items":           []string{"apple"},
+			"checkStr":        "z-test",
 			"isAddNewOnEmpty": false,
 		},
 		ExpectedInput: args.Map{
@@ -604,8 +604,8 @@ var covS06GetCollectionTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetCollection creates new -- char missing with add",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "z-test",
+			"items":           []string{"apple"},
+			"checkStr":        "z-test",
 			"isAddNewOnEmpty": true,
 		},
 		ExpectedInput: args.Map{
@@ -930,7 +930,7 @@ var covS06AddSameCharsCollTestCases = []coretestcases.CaseV1{
 	{
 		Title: "AddSameCharsCollection returns existing -- char exists empty collection",
 		ArrangeInput: args.Map{
-			"initialItems":   []string{"apple"},
+			"initialItems":    []string{"apple"},
 			"useNilCollToAdd": true,
 		},
 		ExpectedInput: args.Map{
@@ -940,9 +940,9 @@ var covS06AddSameCharsCollTestCases = []coretestcases.CaseV1{
 	{
 		Title: "AddSameCharsCollection creates new empty -- char missing nil collection",
 		ArrangeInput: args.Map{
-			"initialItems":   []string{"banana"},
+			"initialItems":    []string{"banana"},
 			"useNilCollToAdd": true,
-			"checkStr":       "apple",
+			"checkStr":        "apple",
 		},
 		ExpectedInput: args.Map{
 			"collectionNotNil": true,
@@ -1019,8 +1019,8 @@ var covS06NewCreatorTestCases = []coretestcases.CaseV1{
 	{
 		Title: "ItemsPtrWithCap returns map -- with items and cap",
 		ArrangeInput: args.Map{
-			"useItemsPtr":  true,
-			"items":        []string{"alpha"},
+			"useItemsPtr":   true,
+			"items":         []string{"alpha"},
 			"additionalCap": 5,
 			"eachCap":       3,
 		},
@@ -1032,8 +1032,8 @@ var covS06NewCreatorTestCases = []coretestcases.CaseV1{
 	{
 		Title: "ItemsPtrWithCap returns empty -- no items",
 		ArrangeInput: args.Map{
-			"useItemsPtr":  true,
-			"items":        []string{},
+			"useItemsPtr":   true,
+			"items":         []string{},
 			"additionalCap": 5,
 			"eachCap":       3,
 		},

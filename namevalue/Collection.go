@@ -382,7 +382,7 @@ func (it Collection[K, V]) JsonString() string {
 
 	jsonBytes, err := json.Marshal(it)
 
-	if err != nil || jsonBytes == nil {
+	if err != nil || len(jsonBytes) == 0 {
 		return constants.EmptyString
 	}
 

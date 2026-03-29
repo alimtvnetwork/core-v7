@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/alimtvnetwork/core/coretests/args"
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // helper to create CharHashsetMap from items
@@ -18,30 +18,32 @@ func covS07MakeMap(items []string) *corestr.CharHashsetMap {
 // ============================================================
 
 func Test_CovS07_CharHashsetDataModel_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07CharHashsetDataModelTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		direction, _ := input.GetAsString("direction")
+	safeTest(t, "Test_CovS07_CharHashsetDataModel_Verification", func() {
+		for caseIndex, tc := range covS07CharHashsetDataModelTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			direction, _ := input.GetAsString("direction")
 
-		// Act
-		var actual args.Map
-		if direction == "toModel" {
-			items := input["items"].([]string)
-			m := covS07MakeMap(items)
-			dm := corestr.NewCharHashsetMapDataModelUsing(m)
-			actual = args.Map{"isNotNil": dm != nil}
-		} else {
-			dm := &corestr.CharHashsetDataModel{
-				EachHashsetCapacity: 5,
-				Items:               map[byte]*corestr.Hashset{},
+			// Act
+			var actual args.Map
+			if direction == "toModel" {
+				items := input["items"].([]string)
+				m := covS07MakeMap(items)
+				dm := corestr.NewCharHashsetMapDataModelUsing(m)
+				actual = args.Map{"isNotNil": dm != nil}
+			} else {
+				dm := &corestr.CharHashsetDataModel{
+					EachHashsetCapacity: 5,
+					Items:               map[byte]*corestr.Hashset{},
+				}
+				m := corestr.NewCharHashsetMapUsingDataModel(dm)
+				actual = args.Map{"isNotNil": m != nil}
 			}
-			m := corestr.NewCharHashsetMapUsingDataModel(dm)
-			actual = args.Map{"isNotNil": m != nil}
-		}
 
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
+		}
+	})
 }
 
 // ============================================================
@@ -49,26 +51,28 @@ func Test_CovS07_CharHashsetDataModel_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_GetChar_Verification(t *testing.T) {
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_GetChar_Verification", func() {
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	for caseIndex, tc := range covS07GetCharTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		inputStr, _ := input.GetAsString("input")
-		useGetOf := input.GetAsBoolDefault("useGetOf", false)
+		for caseIndex, tc := range covS07GetCharTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			inputStr, _ := input.GetAsString("input")
+			useGetOf := input.GetAsBoolDefault("useGetOf", false)
 
-		// Act
-		var result byte
-		if useGetOf {
-			result = m.GetCharOf(inputStr)
-		} else {
-			result = m.GetChar(inputStr)
+			// Act
+			var result byte
+			if useGetOf {
+				result = m.GetCharOf(inputStr)
+			} else {
+				result = m.GetChar(inputStr)
+			}
+			actual := args.Map{"char": string(result)}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-		actual := args.Map{"char": string(result)}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -76,30 +80,32 @@ func Test_CovS07_GetChar_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_Basic_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07BasicTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
+	safeTest(t, "Test_CovS07_Basic_Verification", func() {
+		for caseIndex, tc := range covS07BasicTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			actual := args.Map{
+				"isEmpty":       m.IsEmpty(),
+				"hasItems":      m.HasItems(),
+				"length":        m.Length(),
+				"allLengthsSum": m.AllLengthsSum(),
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		actual := args.Map{
-			"isEmpty":       m.IsEmpty(),
-			"hasItems":      m.HasItems(),
-			"length":        m.Length(),
-			"allLengthsSum": m.AllLengthsSum(),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -107,26 +113,28 @@ func Test_CovS07_Basic_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_Has_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07HasTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
-		checkStr := input["checkStr"].(string)
+	safeTest(t, "Test_CovS07_Has_Verification", func() {
+		for caseIndex, tc := range covS07HasTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
+			checkStr := input["checkStr"].(string)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			actual := args.Map{"has": m.Has(checkStr)}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		actual := args.Map{"has": m.Has(checkStr)}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -134,30 +142,32 @@ func Test_CovS07_Has_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_HasWithHashset_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07HasWithHashsetTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
-		checkStr := input["checkStr"].(string)
+	safeTest(t, "Test_CovS07_HasWithHashset_Verification", func() {
+		for caseIndex, tc := range covS07HasWithHashsetTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
+			checkStr := input["checkStr"].(string)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			found, hs := m.HasWithHashset(checkStr)
+			actual := args.Map{
+				"found":    found,
+				"hsNotNil": hs != nil,
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		found, hs := m.HasWithHashset(checkStr)
-		actual := args.Map{
-			"found":    found,
-			"hsNotNil": hs != nil,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -165,33 +175,35 @@ func Test_CovS07_HasWithHashset_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_LengthOf_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07LengthOfTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
+	safeTest(t, "Test_CovS07_LengthOf_Verification", func() {
+		for caseIndex, tc := range covS07LengthOfTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			var actual args.Map
+			if _, ok := expected["lengthFromChar"]; ok {
+				checkStr := input["checkStr"].(string)
+				actual = args.Map{"lengthFromChar": m.LengthOfHashsetFromFirstChar(checkStr)}
+			} else {
+				charStr := input["char"].(string)
+				actual = args.Map{"lengthOf": m.LengthOf(charStr[0])}
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		var actual args.Map
-		if _, ok := expected["lengthFromChar"]; ok {
-			checkStr := input["checkStr"].(string)
-			actual = args.Map{"lengthFromChar": m.LengthOfHashsetFromFirstChar(checkStr)}
-		} else {
-			charStr := input["char"].(string)
-			actual = args.Map{"lengthOf": m.LengthOf(charStr[0])}
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -199,37 +211,39 @@ func Test_CovS07_LengthOf_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_Add_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07AddTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_Add_Verification", func() {
+		for caseIndex, tc := range covS07AddTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-		if addItem, ok := input["addItem"]; ok {
-			m.Add(addItem.(string))
-		}
-		if addItems, ok := input["addItems"]; ok {
-			m.AddStrings(addItems.([]string)...)
-		}
-
-		// Act
-		var actual args.Map
-		if _, ok := expected["has"]; ok {
-			addItem := input["addItem"].(string)
-			actual = args.Map{
-				"has":    m.Has(addItem),
-				"length": m.Length(),
+			if addItem, ok := input["addItem"]; ok {
+				m.Add(addItem.(string))
 			}
-		} else {
-			actual = args.Map{
-				"allLengthsSum": m.AllLengthsSum(),
-				"charGroups":    m.Length(),
+			if addItems, ok := input["addItems"]; ok {
+				m.AddStrings(addItems.([]string)...)
 			}
-		}
 
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+			// Act
+			var actual args.Map
+			if _, ok := expected["has"]; ok {
+				addItem := input["addItem"].(string)
+				actual = args.Map{
+					"has":    m.Has(addItem),
+					"length": m.Length(),
+				}
+			} else {
+				actual = args.Map{
+					"allLengthsSum": m.AllLengthsSum(),
+					"charGroups":    m.Length(),
+				}
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
+		}
+	})
 }
 
 // ============================================================
@@ -237,21 +251,23 @@ func Test_CovS07_Add_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharItems_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07AddSameCharTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		initialItems := input["initialItems"].([]string)
-		newItems := input["newItems"].([]string)
-		charStr := input["char"].(string)
-		m := covS07MakeMap(initialItems)
+	safeTest(t, "Test_CovS07_AddSameCharItems_Verification", func() {
+		for caseIndex, tc := range covS07AddSameCharTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			initialItems := input["initialItems"].([]string)
+			newItems := input["newItems"].([]string)
+			charStr := input["char"].(string)
+			m := covS07MakeMap(initialItems)
 
-		// Act
-		m.AddSameStartingCharItems(charStr[0], newItems)
-		actual := args.Map{"allLengthsSum": m.AllLengthsSum()}
+			// Act
+			m.AddSameStartingCharItems(charStr[0], newItems)
+			actual := args.Map{"allLengthsSum": m.AllLengthsSum()}
 
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
+		}
+	})
 }
 
 // ============================================================
@@ -259,40 +275,42 @@ func Test_CovS07_AddSameCharItems_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_IsEquals_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07IsEqualsTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useSelf := input.GetAsBoolDefault("useSelf", false)
-		useNilOther := input.GetAsBoolDefault("useNilOther", false)
-		useEmpty1 := input.GetAsBoolDefault("useEmpty1", false)
-		useEmpty2 := input.GetAsBoolDefault("useEmpty2", false)
+	safeTest(t, "Test_CovS07_IsEquals_Verification", func() {
+		for caseIndex, tc := range covS07IsEqualsTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useSelf := input.GetAsBoolDefault("useSelf", false)
+			useNilOther := input.GetAsBoolDefault("useNilOther", false)
+			useEmpty1 := input.GetAsBoolDefault("useEmpty1", false)
+			useEmpty2 := input.GetAsBoolDefault("useEmpty2", false)
 
-		var m1 *corestr.CharHashsetMap
-		if useEmpty1 {
-			m1 = corestr.Empty.CharHashsetMap()
-		} else if items1, ok := input["items1"]; ok {
-			m1 = covS07MakeMap(items1.([]string))
+			var m1 *corestr.CharHashsetMap
+			if useEmpty1 {
+				m1 = corestr.Empty.CharHashsetMap()
+			} else if items1, ok := input["items1"]; ok {
+				m1 = covS07MakeMap(items1.([]string))
+			}
+
+			// Act
+			var isEquals bool
+			if useSelf {
+				isEquals = m1.IsEquals(m1)
+			} else if useNilOther {
+				isEquals = m1.IsEquals(nil)
+			} else if useEmpty2 {
+				m2 := corestr.Empty.CharHashsetMap()
+				isEquals = m1.IsEquals(m2)
+			} else {
+				items2 := input["items2"].([]string)
+				m2 := covS07MakeMap(items2)
+				isEquals = m1.IsEquals(m2)
+			}
+			actual := args.Map{"isEquals": isEquals}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		var isEquals bool
-		if useSelf {
-			isEquals = m1.IsEquals(m1)
-		} else if useNilOther {
-			isEquals = m1.IsEquals(nil)
-		} else if useEmpty2 {
-			m2 := corestr.Empty.CharHashsetMap()
-			isEquals = m1.IsEquals(m2)
-		} else {
-			items2 := input["items2"].([]string)
-			m2 := covS07MakeMap(items2)
-			isEquals = m1.IsEquals(m2)
-		}
-		actual := args.Map{"isEquals": isEquals}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -300,21 +318,23 @@ func Test_CovS07_IsEquals_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_GetHashset_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07GetHashsetTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		items := input["items"].([]string)
-		checkStr := input["checkStr"].(string)
-		isAddNew := input.GetAsBoolDefault("isAddNewOnEmpty", false)
-		m := covS07MakeMap(items)
+	safeTest(t, "Test_CovS07_GetHashset_Verification", func() {
+		for caseIndex, tc := range covS07GetHashsetTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			items := input["items"].([]string)
+			checkStr := input["checkStr"].(string)
+			isAddNew := input.GetAsBoolDefault("isAddNewOnEmpty", false)
+			m := covS07MakeMap(items)
 
-		// Act
-		hs := m.GetHashset(checkStr, isAddNew)
-		actual := args.Map{"isNotNil": hs != nil}
+			// Act
+			hs := m.GetHashset(checkStr, isAddNew)
+			actual := args.Map{"isNotNil": hs != nil}
 
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
+		}
+	})
 }
 
 // ============================================================
@@ -322,27 +342,29 @@ func Test_CovS07_GetHashset_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_GetCharsGroups_Verification(t *testing.T) {
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_GetCharsGroups_Verification", func() {
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	for caseIndex, tc := range covS07GetCharsGroupsTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		items := input["items"].([]string)
+		for caseIndex, tc := range covS07GetCharsGroupsTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			items := input["items"].([]string)
 
-		// Act
-		result := m.GetCharsGroups(items...)
+			// Act
+			result := m.GetCharsGroups(items...)
 
-		var actual args.Map
-		if _, ok := expected["hasItems"]; ok {
-			actual = args.Map{"hasItems": result != nil && result.HasItems()}
-		} else {
-			actual = args.Map{"isNotNil": result != nil}
+			var actual args.Map
+			if _, ok := expected["hasItems"]; ok {
+				actual = args.Map{"hasItems": result != nil && result.HasItems()}
+			} else {
+				actual = args.Map{"isNotNil": result != nil}
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -350,38 +372,40 @@ func Test_CovS07_GetCharsGroups_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_List_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07ListTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		items := input["items"].([]string)
-		m := covS07MakeMap(items)
+	safeTest(t, "Test_CovS07_List_Verification", func() {
+		for caseIndex, tc := range covS07ListTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			items := input["items"].([]string)
+			m := covS07MakeMap(items)
 
-		sortedDir, _ := input.GetAsString("sorted")
+			sortedDir, _ := input.GetAsString("sorted")
 
-		// Act
-		var actual args.Map
-		if sortedDir == "asc" {
-			list := m.SortedListAsc()
-			first := ""
-			if len(list) > 0 {
-				first = list[0]
+			// Act
+			var actual args.Map
+			if sortedDir == "asc" {
+				list := m.SortedListAsc()
+				first := ""
+				if len(list) > 0 {
+					first = list[0]
+				}
+				actual = args.Map{"first": first}
+			} else if sortedDir == "dsc" {
+				list := m.SortedListDsc()
+				first := ""
+				if len(list) > 0 {
+					first = list[0]
+				}
+				actual = args.Map{"first": first}
+			} else {
+				list := m.List()
+				actual = args.Map{"length": len(list)}
 			}
-			actual = args.Map{"first": first}
-		} else if sortedDir == "dsc" {
-			list := m.SortedListDsc()
-			first := ""
-			if len(list) > 0 {
-				first = list[0]
-			}
-			actual = args.Map{"first": first}
-		} else {
-			list := m.List()
-			actual = args.Map{"length": len(list)}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -389,32 +413,34 @@ func Test_CovS07_List_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_Json_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07JsonTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		items := input["items"].([]string)
-		m := covS07MakeMap(items)
+	safeTest(t, "Test_CovS07_Json_Verification", func() {
+		for caseIndex, tc := range covS07JsonTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			items := input["items"].([]string)
+			m := covS07MakeMap(items)
 
-		// Act
-		var actual args.Map
-		if _, ok := expected["roundTrip"]; ok {
-			jsonResult := m.Json()
-			m2 := corestr.New.CharHashsetMap.Cap(10, 5)
-			_, err := m2.ParseInjectUsingJson(&jsonResult)
-			isEqual := m2.AllLengthsSum() == m.AllLengthsSum()
-			actual = args.Map{"roundTrip": err == nil && isEqual}
-		} else {
-			jsonResult := m.Json()
-			actual = args.Map{
-				"hasBytes": jsonResult.SafeBytes() != nil && len(jsonResult.SafeBytes()) > 0,
-				"hasError": jsonResult.HasError(),
+			// Act
+			var actual args.Map
+			if _, ok := expected["roundTrip"]; ok {
+				jsonResult := m.Json()
+				m2 := corestr.New.CharHashsetMap.Cap(10, 5)
+				_, err := m2.ParseInjectUsingJson(&jsonResult)
+				isEqual := m2.AllLengthsSum() == m.AllLengthsSum()
+				actual = args.Map{"roundTrip": err == nil && isEqual}
+			} else {
+				jsonResult := m.Json()
+				actual = args.Map{
+					"hasBytes": jsonResult.SafeBytes() != nil && len(jsonResult.SafeBytes()) > 0,
+					"hasError": jsonResult.HasError(),
+				}
 			}
-		}
 
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
+		}
+	})
 }
 
 // ============================================================
@@ -422,39 +448,41 @@ func Test_CovS07_Json_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharsColl_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07AddSameCharsCollTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		initialItems := input["initialItems"].([]string)
-		useNilColl := input.GetAsBoolDefault("useNilCollToAdd", false)
-		m := covS07MakeMap(initialItems)
+	safeTest(t, "Test_CovS07_AddSameCharsColl_Verification", func() {
+		for caseIndex, tc := range covS07AddSameCharsCollTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			initialItems := input["initialItems"].([]string)
+			useNilColl := input.GetAsBoolDefault("useNilCollToAdd", false)
+			m := covS07MakeMap(initialItems)
 
-		checkStr := "apple"
-		if cs, ok := input["checkStr"]; ok {
-			checkStr = cs.(string)
+			checkStr := "apple"
+			if cs, ok := input["checkStr"]; ok {
+				checkStr = cs.(string)
+			}
+
+			// Act
+			var resultHs *corestr.Hashset
+			if useNilColl {
+				resultHs = m.AddSameCharsCollection(checkStr, nil)
+			} else {
+				addItems := input["addItems"].([]string)
+				coll := corestr.New.Collection.Strings(addItems)
+				resultHs = m.AddSameCharsCollection(checkStr, coll)
+			}
+
+			var actual args.Map
+			if _, ok := expected["hsNotNil"]; ok {
+				actual = args.Map{"hsNotNil": resultHs != nil}
+			} else {
+				actual = args.Map{"allLengthsSum": m.AllLengthsSum()}
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		var resultHs *corestr.Hashset
-		if useNilColl {
-			resultHs = m.AddSameCharsCollection(checkStr, nil)
-		} else {
-			addItems := input["addItems"].([]string)
-			coll := corestr.New.Collection.Strings(addItems)
-			resultHs = m.AddSameCharsCollection(checkStr, coll)
-		}
-
-		var actual args.Map
-		if _, ok := expected["hsNotNil"]; ok {
-			actual = args.Map{"hsNotNil": resultHs != nil}
-		} else {
-			actual = args.Map{"allLengthsSum": m.AllLengthsSum()}
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -462,39 +490,41 @@ func Test_CovS07_AddSameCharsColl_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharsHashset_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07AddSameCharsHashsetTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		initialItems := input["initialItems"].([]string)
-		useNilHashset := input.GetAsBoolDefault("useNilHashset", false)
-		m := covS07MakeMap(initialItems)
+	safeTest(t, "Test_CovS07_AddSameCharsHashset_Verification", func() {
+		for caseIndex, tc := range covS07AddSameCharsHashsetTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			initialItems := input["initialItems"].([]string)
+			useNilHashset := input.GetAsBoolDefault("useNilHashset", false)
+			m := covS07MakeMap(initialItems)
 
-		checkStr := "apple"
-		if cs, ok := input["checkStr"]; ok {
-			checkStr = cs.(string)
+			checkStr := "apple"
+			if cs, ok := input["checkStr"]; ok {
+				checkStr = cs.(string)
+			}
+
+			// Act
+			var resultHs *corestr.Hashset
+			if useNilHashset {
+				resultHs = m.AddSameCharsHashset(checkStr, nil)
+			} else {
+				addItems := input["addItems"].([]string)
+				hs := corestr.New.Hashset.Strings(addItems)
+				resultHs = m.AddSameCharsHashset(checkStr, hs)
+			}
+
+			var actual args.Map
+			if _, ok := expected["hsNotNil"]; ok {
+				actual = args.Map{"hsNotNil": resultHs != nil}
+			} else {
+				actual = args.Map{"allLengthsSum": m.AllLengthsSum()}
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		var resultHs *corestr.Hashset
-		if useNilHashset {
-			resultHs = m.AddSameCharsHashset(checkStr, nil)
-		} else {
-			addItems := input["addItems"].([]string)
-			hs := corestr.New.Hashset.Strings(addItems)
-			resultHs = m.AddSameCharsHashset(checkStr, hs)
-		}
-
-		var actual args.Map
-		if _, ok := expected["hsNotNil"]; ok {
-			actual = args.Map{"hsNotNil": resultHs != nil}
-		} else {
-			actual = args.Map{"allLengthsSum": m.AllLengthsSum()}
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -502,39 +532,41 @@ func Test_CovS07_AddSameCharsHashset_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddFromSource_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07AddFromSourceTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		source, _ := input.GetAsString("source")
-		m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddFromSource_Verification", func() {
+		for caseIndex, tc := range covS07AddFromSourceTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			source, _ := input.GetAsString("source")
+			m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-		// Act
-		switch source {
-		case "collection":
-			items := input["items"].([]string)
-			coll := corestr.New.Collection.Strings(items)
-			m.AddCollectionItems(coll)
-		case "collectionNil":
-			m.AddCollectionItems(nil)
-		case "charCollMap":
-			items := input["items"].([]string)
-			ccm := corestr.New.CharCollectionMap.Items(items)
-			m.AddCharCollectionMapItems(ccm)
-		case "charCollMapNil":
-			m.AddCharCollectionMapItems(nil)
-		case "hashset":
-			items := input["items"].([]string)
-			hs := corestr.New.Hashset.Strings(items)
-			m.AddHashsetItems(hs)
-		case "hashsetEmpty":
-			hs := corestr.New.Hashset.Empty()
-			m.AddHashsetItems(hs)
+			// Act
+			switch source {
+			case "collection":
+				items := input["items"].([]string)
+				coll := corestr.New.Collection.Strings(items)
+				m.AddCollectionItems(coll)
+			case "collectionNil":
+				m.AddCollectionItems(nil)
+			case "charCollMap":
+				items := input["items"].([]string)
+				ccm := corestr.New.CharCollectionMap.Items(items)
+				m.AddCharCollectionMapItems(ccm)
+			case "charCollMapNil":
+				m.AddCharCollectionMapItems(nil)
+			case "hashset":
+				items := input["items"].([]string)
+				hs := corestr.New.Hashset.Strings(items)
+				m.AddHashsetItems(hs)
+			case "hashsetEmpty":
+				hs := corestr.New.Hashset.Empty()
+				m.AddHashsetItems(hs)
+			}
+			actual := args.Map{"allLengthsSum": m.AllLengthsSum()}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-		actual := args.Map{"allLengthsSum": m.AllLengthsSum()}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -542,26 +574,28 @@ func Test_CovS07_AddFromSource_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_HashsetsColl_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07HashsetsCollTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
+	safeTest(t, "Test_CovS07_HashsetsColl_Verification", func() {
+		for caseIndex, tc := range covS07HashsetsCollTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			hsColl := m.HashsetsCollection()
+			actual := args.Map{"hasItems": hsColl != nil && hsColl.Length() > 0}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		hsColl := m.HashsetsCollection()
-		actual := args.Map{"hasItems": hsColl != nil && hsColl.Length() > 0}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -569,33 +603,35 @@ func Test_CovS07_HashsetsColl_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_Clear_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07ClearTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		useEmpty := input.GetAsBoolDefault("useEmpty", false)
-		useRemove := input.GetAsBoolDefault("useRemove", false)
+	safeTest(t, "Test_CovS07_Clear_Verification", func() {
+		for caseIndex, tc := range covS07ClearTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			useEmpty := input.GetAsBoolDefault("useEmpty", false)
+			useRemove := input.GetAsBoolDefault("useRemove", false)
 
-		var m *corestr.CharHashsetMap
-		if useEmpty {
-			m = corestr.Empty.CharHashsetMap()
-		} else {
-			items := input["items"].([]string)
-			m = covS07MakeMap(items)
+			var m *corestr.CharHashsetMap
+			if useEmpty {
+				m = corestr.Empty.CharHashsetMap()
+			} else {
+				items := input["items"].([]string)
+				m = covS07MakeMap(items)
+			}
+
+			// Act
+			if useRemove {
+				m.RemoveAll()
+			} else {
+				m.Clear()
+			}
+			// Small delay to let async goroutine in Clear() finish
+			time.Sleep(5 * time.Millisecond)
+			actual := args.Map{"isEmpty": m.IsEmpty()}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		// Act
-		if useRemove {
-			m.RemoveAll()
-		} else {
-			m.Clear()
-		}
-		// Small delay to let async goroutine in Clear() finish
-		time.Sleep(5 * time.Millisecond)
-		actual := args.Map{"isEmpty": m.IsEmpty()}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -603,25 +639,27 @@ func Test_CovS07_Clear_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_StringOutput_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07StringOutputTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		items := input["items"].([]string)
-		useSummary := input.GetAsBoolDefault("summary", false)
-		m := covS07MakeMap(items)
+	safeTest(t, "Test_CovS07_StringOutput_Verification", func() {
+		for caseIndex, tc := range covS07StringOutputTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			items := input["items"].([]string)
+			useSummary := input.GetAsBoolDefault("summary", false)
+			m := covS07MakeMap(items)
 
-		// Act
-		var result string
-		if useSummary {
-			result = m.SummaryString()
-		} else {
-			result = m.String()
+			// Act
+			var result string
+			if useSummary {
+				result = m.SummaryString()
+			} else {
+				result = m.String()
+			}
+			actual := args.Map{"hasOutput": result != ""}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-		actual := args.Map{"hasOutput": result != ""}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -629,17 +667,19 @@ func Test_CovS07_StringOutput_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_PrintSkip(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"test"})
+	safeTest(t, "Test_CovS07_PrintSkip", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"test"})
 
-	// Act — isPrint=false skips
-	m.Print(false)
-	m.PrintLock(false)
+		// Act — isPrint=false skips
+		m.Print(false)
+		m.PrintLock(false)
 
-	// Assert — no panic
-	if m.IsEmpty() {
-		t.Error("unexpected empty after print skip")
-	}
+		// Assert — no panic
+		if m.IsEmpty() {
+			t.Error("unexpected empty after print skip")
+		}
+	})
 }
 
 // ============================================================
@@ -647,35 +687,37 @@ func Test_CovS07_PrintSkip(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_LockVariants(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha", "bravo"})
+	safeTest(t, "Test_CovS07_LockVariants", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha", "bravo"})
 
-	// Act
-	lenLock := m.LengthLock()
-	isEmptyLock := m.IsEmptyLock()
-	allSumLock := m.AllLengthsSumLock()
-	lenOfLock := m.LengthOfLock('a')
-	_ = m.GetCopyMapLock()
-	_ = m.SummaryStringLock()
-	_ = m.StringLock()
-	isEqLock := m.IsEqualsLock(m)
+		// Act
+		lenLock := m.LengthLock()
+		isEmptyLock := m.IsEmptyLock()
+		allSumLock := m.AllLengthsSumLock()
+		lenOfLock := m.LengthOfLock('a')
+		_ = m.GetCopyMapLock()
+		_ = m.SummaryStringLock()
+		_ = m.StringLock()
+		isEqLock := m.IsEqualsLock(m)
 
-	// Assert
-	if lenLock <= 0 {
-		t.Error("LengthLock should be > 0")
-	}
-	if isEmptyLock {
-		t.Error("IsEmptyLock should be false")
-	}
-	if allSumLock <= 0 {
-		t.Error("AllLengthsSumLock should be > 0")
-	}
-	if lenOfLock <= 0 {
-		t.Error("LengthOfLock should be > 0")
-	}
-	if !isEqLock {
-		t.Error("IsEqualsLock(self) should be true")
-	}
+		// Assert
+		if lenLock <= 0 {
+			t.Error("LengthLock should be > 0")
+		}
+		if isEmptyLock {
+			t.Error("IsEmptyLock should be false")
+		}
+		if allSumLock <= 0 {
+			t.Error("AllLengthsSumLock should be > 0")
+		}
+		if lenOfLock <= 0 {
+			t.Error("LengthOfLock should be > 0")
+		}
+		if !isEqLock {
+			t.Error("IsEqualsLock(self) should be true")
+		}
+	})
 }
 
 // ============================================================
@@ -683,19 +725,21 @@ func Test_CovS07_LockVariants(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_HasWithHashsetLock(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha", "avocado"})
+	safeTest(t, "Test_CovS07_HasWithHashsetLock", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha", "avocado"})
 
-	// Act
-	found, hs := m.HasWithHashsetLock("alpha")
+		// Act
+		found, hs := m.HasWithHashsetLock("alpha")
 
-	// Assert
-	if !found {
-		t.Error("HasWithHashsetLock should find 'alpha'")
-	}
-	if hs == nil {
-		t.Error("HasWithHashsetLock should return non-nil hashset")
-	}
+		// Assert
+		if !found {
+			t.Error("HasWithHashsetLock should find 'alpha'")
+		}
+		if hs == nil {
+			t.Error("HasWithHashsetLock should return non-nil hashset")
+		}
+	})
 }
 
 // ============================================================
@@ -703,17 +747,19 @@ func Test_CovS07_HasWithHashsetLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddLock(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddLock", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	// Act
-	m.AddLock("alpha")
-	m.AddLock("avocado") // same char group
+		// Act
+		m.AddLock("alpha")
+		m.AddLock("avocado") // same char group
 
-	// Assert
-	if m.AllLengthsSum() != 2 {
-		t.Errorf("AddLock: expected 2 items, got %d", m.AllLengthsSum())
-	}
+		// Assert
+		if m.AllLengthsSum() != 2 {
+			t.Errorf("AddLock: expected 2 items, got %d", m.AllLengthsSum())
+		}
+	})
 }
 
 // ============================================================
@@ -721,16 +767,18 @@ func Test_CovS07_AddLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddStringsLock(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddStringsLock", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	// Act
-	m.AddStringsLock("alpha", "bravo", "avocado")
+		// Act
+		m.AddStringsLock("alpha", "bravo", "avocado")
 
-	// Assert
-	if m.AllLengthsSum() != 3 {
-		t.Errorf("AddStringsLock: expected 3, got %d", m.AllLengthsSum())
-	}
+		// Assert
+		if m.AllLengthsSum() != 3 {
+			t.Errorf("AddStringsLock: expected 3, got %d", m.AllLengthsSum())
+		}
+	})
 }
 
 // ============================================================
@@ -738,36 +786,38 @@ func Test_CovS07_AddStringsLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_HashsetByChar(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha", "avocado"})
+	safeTest(t, "Test_CovS07_HashsetByChar", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha", "avocado"})
 
-	// Act
-	hs1 := m.HashsetByChar('a')
-	hs2 := m.HashsetByCharLock('a')
-	hs3 := m.HashsetByStringFirstChar("alpha")
-	hs4 := m.HashsetByStringFirstCharLock("alpha")
-	hs5 := m.GetHashsetByChar('a')
-	hsMissing := m.HashsetByCharLock('z')
+		// Act
+		hs1 := m.HashsetByChar('a')
+		hs2 := m.HashsetByCharLock('a')
+		hs3 := m.HashsetByStringFirstChar("alpha")
+		hs4 := m.HashsetByStringFirstCharLock("alpha")
+		hs5 := m.GetHashsetByChar('a')
+		hsMissing := m.HashsetByCharLock('z')
 
-	// Assert
-	if hs1 == nil {
-		t.Error("HashsetByChar('a') should be non-nil")
-	}
-	if hs2 == nil {
-		t.Error("HashsetByCharLock('a') should be non-nil")
-	}
-	if hs3 == nil {
-		t.Error("HashsetByStringFirstChar should be non-nil")
-	}
-	if hs4 == nil {
-		t.Error("HashsetByStringFirstCharLock should be non-nil")
-	}
-	if hs5 == nil {
-		t.Error("GetHashsetByChar('a') should be non-nil")
-	}
-	if hsMissing == nil {
-		t.Error("HashsetByCharLock('z') should return empty hashset, not nil")
-	}
+		// Assert
+		if hs1 == nil {
+			t.Error("HashsetByChar('a') should be non-nil")
+		}
+		if hs2 == nil {
+			t.Error("HashsetByCharLock('a') should be non-nil")
+		}
+		if hs3 == nil {
+			t.Error("HashsetByStringFirstChar should be non-nil")
+		}
+		if hs4 == nil {
+			t.Error("HashsetByStringFirstCharLock should be non-nil")
+		}
+		if hs5 == nil {
+			t.Error("GetHashsetByChar('a') should be non-nil")
+		}
+		if hsMissing == nil {
+			t.Error("HashsetByCharLock('z') should return empty hashset, not nil")
+		}
+	})
 }
 
 // ============================================================
@@ -775,20 +825,22 @@ func Test_CovS07_HashsetByChar(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_HashsetsCollByCharsAndStr(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha", "bravo", "avocado"})
+	safeTest(t, "Test_CovS07_HashsetsCollByCharsAndStr", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha", "bravo", "avocado"})
 
-	// Act
-	hsByChars := m.HashsetsCollectionByChars('a', 'b')
-	hsByStr := m.HashsetsCollectionByStringsFirstChar("alpha", "bravo")
+		// Act
+		hsByChars := m.HashsetsCollectionByChars('a', 'b')
+		hsByStr := m.HashsetsCollectionByStringsFirstChar("alpha", "bravo")
 
-	// Assert
-	if hsByChars == nil || hsByChars.Length() == 0 {
-		t.Error("HashsetsCollectionByChars should return non-empty")
-	}
-	if hsByStr == nil || hsByStr.Length() == 0 {
-		t.Error("HashsetsCollectionByStringsFirstChar should return non-empty")
-	}
+		// Assert
+		if hsByChars == nil || hsByChars.Length() == 0 {
+			t.Error("HashsetsCollectionByChars should return non-empty")
+		}
+		if hsByStr == nil || hsByStr.Length() == 0 {
+			t.Error("HashsetsCollectionByStringsFirstChar should return non-empty")
+		}
+	})
 }
 
 // ============================================================
@@ -796,16 +848,18 @@ func Test_CovS07_HashsetsCollByCharsAndStr(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_GetMap(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
+	safeTest(t, "Test_CovS07_GetMap", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
 
-	// Act
-	rawMap := m.GetMap()
+		// Act
+		rawMap := m.GetMap()
 
-	// Assert
-	if rawMap == nil {
-		t.Error("GetMap should return non-nil")
-	}
+		// Assert
+		if rawMap == nil {
+			t.Error("GetMap should return non-nil")
+		}
+	})
 }
 
 // ============================================================
@@ -813,21 +867,23 @@ func Test_CovS07_GetMap(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_InterfaceAdapters(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
+	safeTest(t, "Test_CovS07_InterfaceAdapters", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
 
-	// Act
-	binder := m.AsJsonContractsBinder()
-	jsoner := m.AsJsoner()
-	marshaller := m.AsJsonMarshaller()
-	injector := m.AsJsonParseSelfInjector()
-	_ = m.JsonModelAny()
-	_ = m.JsonModel()
+		// Act
+		binder := m.AsJsonContractsBinder()
+		jsoner := m.AsJsoner()
+		marshaller := m.AsJsonMarshaller()
+		injector := m.AsJsonParseSelfInjector()
+		_ = m.JsonModelAny()
+		_ = m.JsonModel()
 
-	// Assert
-	if binder == nil || jsoner == nil || marshaller == nil || injector == nil {
-		t.Error("Interface adapters should return non-nil")
-	}
+		// Assert
+		if binder == nil || jsoner == nil || marshaller == nil || injector == nil {
+			t.Error("Interface adapters should return non-nil")
+		}
+	})
 }
 
 // ============================================================
@@ -835,21 +891,23 @@ func Test_CovS07_InterfaceAdapters(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_MarshalUnmarshal(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha", "bravo"})
+	safeTest(t, "Test_CovS07_MarshalUnmarshal", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha", "bravo"})
 
-	// Act
-	bytes, err := m.MarshalJSON()
-	m2 := corestr.New.CharHashsetMap.Cap(10, 5)
-	err2 := m2.UnmarshalJSON(bytes)
+		// Act
+		bytes, err := m.MarshalJSON()
+		m2 := corestr.New.CharHashsetMap.Cap(10, 5)
+		err2 := m2.UnmarshalJSON(bytes)
 
-	// Assert
-	if err != nil || len(bytes) == 0 {
-		t.Errorf("MarshalJSON failed: %v", err)
-	}
-	if err2 != nil {
-		t.Errorf("UnmarshalJSON failed: %v", err2)
-	}
+		// Assert
+		if err != nil || len(bytes) == 0 {
+			t.Errorf("MarshalJSON failed: %v", err)
+		}
+		if err2 != nil {
+			t.Errorf("UnmarshalJSON failed: %v", err2)
+		}
+	})
 }
 
 // ============================================================
@@ -857,18 +915,20 @@ func Test_CovS07_MarshalUnmarshal(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_JsonParseSelfInject(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
-	jsonResult := m.Json()
+	safeTest(t, "Test_CovS07_JsonParseSelfInject", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
+		jsonResult := m.Json()
 
-	// Act
-	m2 := corestr.New.CharHashsetMap.Cap(10, 5)
-	err := m2.JsonParseSelfInject(&jsonResult)
+		// Act
+		m2 := corestr.New.CharHashsetMap.Cap(10, 5)
+		err := m2.JsonParseSelfInject(&jsonResult)
 
-	// Assert
-	if err != nil {
-		t.Errorf("JsonParseSelfInject should not error: %v", err)
-	}
+		// Assert
+		if err != nil {
+			t.Errorf("JsonParseSelfInject should not error: %v", err)
+		}
+	})
 }
 
 // ============================================================
@@ -876,18 +936,20 @@ func Test_CovS07_JsonParseSelfInject(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_ParseInjectMust_Valid(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
-	jsonResult := m.Json()
+	safeTest(t, "Test_CovS07_ParseInjectMust_Valid", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
+		jsonResult := m.Json()
 
-	// Act
-	m2 := corestr.New.CharHashsetMap.Cap(10, 5)
-	result := m2.ParseInjectUsingJsonMust(&jsonResult)
+		// Act
+		m2 := corestr.New.CharHashsetMap.Cap(10, 5)
+		result := m2.ParseInjectUsingJsonMust(&jsonResult)
 
-	// Assert
-	if result == nil {
-		t.Error("ParseInjectUsingJsonMust should return non-nil")
-	}
+		// Assert
+		if result == nil {
+			t.Error("ParseInjectUsingJsonMust should return non-nil")
+		}
+	})
 }
 
 // ============================================================
@@ -895,16 +957,18 @@ func Test_CovS07_ParseInjectMust_Valid(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_JsonPtr(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
+	safeTest(t, "Test_CovS07_JsonPtr", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
 
-	// Act
-	result := m.JsonPtr()
+		// Act
+		result := m.JsonPtr()
 
-	// Assert
-	if result == nil {
-		t.Error("JsonPtr should return non-nil")
-	}
+		// Assert
+		if result == nil {
+			t.Error("JsonPtr should return non-nil")
+		}
+	})
 }
 
 // ============================================================
@@ -912,20 +976,22 @@ func Test_CovS07_JsonPtr(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharsCollLock(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
-	coll := corestr.New.Collection.Strings([]string{"avocado", "apricot"})
+	safeTest(t, "Test_CovS07_AddSameCharsCollLock", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
+		coll := corestr.New.Collection.Strings([]string{"avocado", "apricot"})
 
-	// Act
-	result := m.AddSameCharsCollectionLock("apple", coll)
+		// Act
+		result := m.AddSameCharsCollectionLock("apple", coll)
 
-	// Assert
-	if result == nil {
-		t.Error("AddSameCharsCollectionLock should return non-nil")
-	}
-	if m.AllLengthsSum() < 3 {
-		t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-	}
+		// Assert
+		if result == nil {
+			t.Error("AddSameCharsCollectionLock should return non-nil")
+		}
+		if m.AllLengthsSum() < 3 {
+			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
+		}
+	})
 }
 
 // ============================================================
@@ -933,16 +999,18 @@ func Test_CovS07_AddSameCharsCollLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharsCollLock_NilColl_NewChar(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"banana"})
+	safeTest(t, "Test_CovS07_AddSameCharsCollLock_NilColl_NewChar", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"banana"})
 
-	// Act — nil collection with new char creates empty hashset
-	result := m.AddSameCharsCollectionLock("apple", nil)
+		// Act — nil collection with new char creates empty hashset
+		result := m.AddSameCharsCollectionLock("apple", nil)
 
-	// Assert
-	if result == nil {
-		t.Error("should return non-nil hashset")
-	}
+		// Assert
+		if result == nil {
+			t.Error("should return non-nil hashset")
+		}
+	})
 }
 
 // ============================================================
@@ -950,20 +1018,22 @@ func Test_CovS07_AddSameCharsCollLock_NilColl_NewChar(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddSameCharsCollLock_NewChar_WithData(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"banana"})
-	coll := corestr.New.Collection.Strings([]string{"apple", "avocado"})
+	safeTest(t, "Test_CovS07_AddSameCharsCollLock_NewChar_WithData", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"banana"})
+		coll := corestr.New.Collection.Strings([]string{"apple", "avocado"})
 
-	// Act
-	result := m.AddSameCharsCollectionLock("apple", coll)
+		// Act
+		result := m.AddSameCharsCollectionLock("apple", coll)
 
-	// Assert
-	if result == nil {
-		t.Error("should return non-nil hashset")
-	}
-	if m.AllLengthsSum() < 3 {
-		t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-	}
+		// Assert
+		if result == nil {
+			t.Error("should return non-nil hashset")
+		}
+		if m.AllLengthsSum() < 3 {
+			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
+		}
+	})
 }
 
 // ============================================================
@@ -971,17 +1041,19 @@ func Test_CovS07_AddSameCharsCollLock_NewChar_WithData(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddHashsetLock(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
-	hs := corestr.New.Hashset.Strings([]string{"avocado"})
+	safeTest(t, "Test_CovS07_AddHashsetLock", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
+		hs := corestr.New.Hashset.Strings([]string{"avocado"})
 
-	// Act
-	result := m.AddHashsetLock("apple", hs)
+		// Act
+		result := m.AddHashsetLock("apple", hs)
 
-	// Assert
-	if result == nil {
-		t.Error("AddHashsetLock should return non-nil")
-	}
+		// Assert
+		if result == nil {
+			t.Error("AddHashsetLock should return non-nil")
+		}
+	})
 }
 
 // ============================================================
@@ -989,16 +1061,18 @@ func Test_CovS07_AddHashsetLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddHashsetLock_NilHashset_NewChar(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"banana"})
+	safeTest(t, "Test_CovS07_AddHashsetLock_NilHashset_NewChar", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"banana"})
 
-	// Act
-	result := m.AddHashsetLock("apple", nil)
+		// Act
+		result := m.AddHashsetLock("apple", nil)
 
-	// Assert
-	if result == nil {
-		t.Error("should return non-nil hashset")
-	}
+		// Assert
+		if result == nil {
+			t.Error("should return non-nil hashset")
+		}
+	})
 }
 
 // ============================================================
@@ -1006,20 +1080,22 @@ func Test_CovS07_AddHashsetLock_NilHashset_NewChar(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddHashsetLock_NewChar_WithData(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"banana"})
-	hs := corestr.New.Hashset.Strings([]string{"apple", "avocado"})
+	safeTest(t, "Test_CovS07_AddHashsetLock_NewChar_WithData", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"banana"})
+		hs := corestr.New.Hashset.Strings([]string{"apple", "avocado"})
 
-	// Act
-	result := m.AddHashsetLock("apple", hs)
+		// Act
+		result := m.AddHashsetLock("apple", hs)
 
-	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
-	if m.AllLengthsSum() < 3 {
-		t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-	}
+		// Assert
+		if result == nil {
+			t.Error("should return non-nil")
+		}
+		if m.AllLengthsSum() < 3 {
+			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
+		}
+	})
 }
 
 // ============================================================
@@ -1027,20 +1103,22 @@ func Test_CovS07_AddHashsetLock_NewChar_WithData(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_GetHashsetLock(t *testing.T) {
-	// Arrange
-	m := covS07MakeMap([]string{"alpha"})
+	safeTest(t, "Test_CovS07_GetHashsetLock", func() {
+		// Arrange
+		m := covS07MakeMap([]string{"alpha"})
 
-	// Act
-	hs := m.GetHashsetLock(true, "alpha")
-	hsMissing := m.GetHashsetLock(false, "zzz")
+		// Act
+		hs := m.GetHashsetLock(true, "alpha")
+		hsMissing := m.GetHashsetLock(false, "zzz")
 
-	// Assert
-	if hs == nil {
-		t.Error("GetHashsetLock should return non-nil for existing char")
-	}
-	if hsMissing != nil {
-		t.Error("GetHashsetLock should return nil for missing char with isAddNew=false")
-	}
+		// Assert
+		if hs == nil {
+			t.Error("GetHashsetLock should return non-nil for existing char")
+		}
+		if hsMissing != nil {
+			t.Error("GetHashsetLock should return nil for missing char with isAddNew=false")
+		}
+	})
 }
 
 // ============================================================
@@ -1048,41 +1126,43 @@ func Test_CovS07_GetHashsetLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_NewCreator_Verification(t *testing.T) {
-	for caseIndex, tc := range covS07NewCreatorTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		expected := tc.ExpectedInput.(args.Map)
-		method, _ := input.GetAsString("method")
+	safeTest(t, "Test_CovS07_NewCreator_Verification", func() {
+		for caseIndex, tc := range covS07NewCreatorTestCases {
+			// Arrange
+			input := tc.ArrangeInput.(args.Map)
+			expected := tc.ExpectedInput.(args.Map)
+			method, _ := input.GetAsString("method")
 
-		// Act
-		var m *corestr.CharHashsetMap
-		switch method {
-		case "cap":
-			cap := input["cap"].(int)
-			selfCap := input["selfCap"].(int)
-			m = corestr.New.CharHashsetMap.Cap(cap, selfCap)
-		case "capItems":
-			cap := input["cap"].(int)
-			selfCap := input["selfCap"].(int)
-			items := input["items"].([]string)
-			m = corestr.New.CharHashsetMap.CapItems(cap, selfCap, items...)
-		case "strings":
-			selfCap := input["selfCap"].(int)
-			items := input["items"].([]string)
-			m = corestr.New.CharHashsetMap.Strings(selfCap, items)
-		case "stringsNil":
-			selfCap := input["selfCap"].(int)
-			m = corestr.New.CharHashsetMap.Strings(selfCap, nil)
+			// Act
+			var m *corestr.CharHashsetMap
+			switch method {
+			case "cap":
+				cap := input["cap"].(int)
+				selfCap := input["selfCap"].(int)
+				m = corestr.New.CharHashsetMap.Cap(cap, selfCap)
+			case "capItems":
+				cap := input["cap"].(int)
+				selfCap := input["selfCap"].(int)
+				items := input["items"].([]string)
+				m = corestr.New.CharHashsetMap.CapItems(cap, selfCap, items...)
+			case "strings":
+				selfCap := input["selfCap"].(int)
+				items := input["items"].([]string)
+				m = corestr.New.CharHashsetMap.Strings(selfCap, items)
+			case "stringsNil":
+				selfCap := input["selfCap"].(int)
+				m = corestr.New.CharHashsetMap.Strings(selfCap, nil)
+			}
+
+			actual := args.Map{"isNotNil": m != nil}
+			if _, ok := expected["isEmpty"]; ok {
+				actual["isEmpty"] = m.IsEmpty()
+			}
+
+			// Assert
+			tc.ShouldBeEqualMap(t, caseIndex, actual)
 		}
-
-		actual := args.Map{"isNotNil": m != nil}
-		if _, ok := expected["isEmpty"]; ok {
-			actual["isEmpty"] = m.IsEmpty()
-		}
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
+	})
 }
 
 // ============================================================
@@ -1090,26 +1170,29 @@ func Test_CovS07_NewCreator_Verification(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddCollectionItemsAsyncLock(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
-	coll := corestr.New.Collection.Strings([]string{"alpha", "bravo"})
+	safeTest(t, "Test_CovS07_AddCollectionItemsAsyncLock", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
+		coll := corestr.New.Collection.Strings([]string{"alpha", "bravo"})
 
-	// Act
-	done := make(chan bool, 1)
-	m.AddCollectionItemsAsyncLock(coll, func(chm *corestr.CharHashsetMap) {
-		done <- true
+		// Act
+		done := make(chan bool, 1)
+		m.AddCollectionItemsAsyncLock(coll, func(chm *corestr.CharHashsetMap) {
+			done <- true
+		})
+
+		// Wait for async completion
+		select {
+		case <-done:
+		case <-time.After(2 * time.Second):
+		}
+
+		// Assert
+		if m.AllLengthsSum() < 2 {
+			// async may not have completed, but at least no panic
+			_ = 0
+		}
 	})
-
-	// Wait for async completion
-	select {
-	case <-done:
-	case <-time.After(2 * time.Second):
-	}
-
-	// Assert
-	if m.AllLengthsSum() < 2 {
-		// async may not have completed, but at least no panic
-	}
 }
 
 // ============================================================
@@ -1117,16 +1200,18 @@ func Test_CovS07_AddCollectionItemsAsyncLock(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddCollectionItemsAsyncLock_Nil", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	// Act
-	m.AddCollectionItemsAsyncLock(nil, nil)
+		// Act
+		m.AddCollectionItemsAsyncLock(nil, nil)
 
-	// Assert — no panic
-	if m.AllLengthsSum() != 0 {
-		t.Error("should remain empty")
-	}
+		// Assert — no panic
+		if m.AllLengthsSum() != 0 {
+			t.Error("should remain empty")
+		}
+	})
 }
 
 // ============================================================
@@ -1134,16 +1219,18 @@ func Test_CovS07_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddHashsetItemsAsyncLock_Nil(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddHashsetItemsAsyncLock_Nil", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	// Act
-	m.AddHashsetItemsAsyncLock(nil, nil)
+		// Act
+		m.AddHashsetItemsAsyncLock(nil, nil)
 
-	// Assert — no panic
-	if m.AllLengthsSum() != 0 {
-		t.Error("should remain empty")
-	}
+		// Assert — no panic
+		if m.AllLengthsSum() != 0 {
+			t.Error("should remain empty")
+		}
+	})
 }
 
 // ============================================================
@@ -1151,16 +1238,18 @@ func Test_CovS07_AddHashsetItemsAsyncLock_Nil(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddStringsAsyncLock_Empty(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
+	safeTest(t, "Test_CovS07_AddStringsAsyncLock_Empty", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
 
-	// Act
-	m.AddStringsAsyncLock(nil, nil)
+		// Act
+		m.AddStringsAsyncLock(nil, nil)
 
-	// Assert — no panic
-	if m.AllLengthsSum() != 0 {
-		t.Error("should remain empty")
-	}
+		// Assert — no panic
+		if m.AllLengthsSum() != 0 {
+			t.Error("should remain empty")
+		}
+	})
 }
 
 // ============================================================
@@ -1168,23 +1257,26 @@ func Test_CovS07_AddStringsAsyncLock_Empty(t *testing.T) {
 // ============================================================
 
 func Test_CovS07_AddStringsAsyncLock_SmallList(t *testing.T) {
-	// Arrange
-	m := corestr.New.CharHashsetMap.Cap(10, 5)
-	items := []string{"alpha", "bravo", "charlie"}
+	safeTest(t, "Test_CovS07_AddStringsAsyncLock_SmallList", func() {
+		// Arrange
+		m := corestr.New.CharHashsetMap.Cap(10, 5)
+		items := []string{"alpha", "bravo", "charlie"}
 
-	// Act
-	done := make(chan bool, 1)
-	m.AddStringsAsyncLock(items, func(chm *corestr.CharHashsetMap) {
-		done <- true
+		// Act
+		done := make(chan bool, 1)
+		m.AddStringsAsyncLock(items, func(chm *corestr.CharHashsetMap) {
+			done <- true
+		})
+
+		select {
+		case <-done:
+		case <-time.After(2 * time.Second):
+		}
+
+		// Assert
+		if m.AllLengthsSum() < 3 {
+			// may be async
+			_ = 0
+		}
 	})
-
-	select {
-	case <-done:
-	case <-time.After(2 * time.Second):
-	}
-
-	// Assert
-	if m.AllLengthsSum() < 3 {
-		// may be async
-	}
 }

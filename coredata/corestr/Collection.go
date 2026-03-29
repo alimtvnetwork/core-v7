@@ -758,14 +758,14 @@ func (it *Collection) FirstOrDefault() string {
 func (it *Collection) Take(
 	take int,
 ) *Collection {
+	if take <= 0 {
+		return Empty.Collection()
+	}
+
 	length := it.Length()
 
 	if length <= take {
 		return it
-	}
-
-	if take == 0 {
-		return Empty.Collection()
 	}
 
 	list := it.items[:take]
@@ -780,6 +780,10 @@ func (it *Collection) Take(
 func (it *Collection) Skip(
 	skip int,
 ) *Collection {
+	if skip <= 0 {
+		return it
+	}
+
 	length := it.Length()
 
 	if length < skip {
@@ -789,10 +793,6 @@ func (it *Collection) Skip(
 				"Length is lower than skip value. Skip:",
 				skip,
 			)
-	}
-
-	if skip == 0 {
-		return it
 	}
 
 	list := it.items[skip:]

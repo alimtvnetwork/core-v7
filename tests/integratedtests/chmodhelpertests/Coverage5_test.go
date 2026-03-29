@@ -3,6 +3,7 @@ package chmodhelpertests
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 
 	"github.com/alimtvnetwork/core/chmodhelper"
@@ -326,6 +327,9 @@ func Test_Cov5_RwxWrapper_AsJsonContractsBinder(t *testing.T) {
 }
 
 func Test_Cov5_RwxWrapper_VerifyPaths(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	dir := t.TempDir()
 	_ = os.Chmod(dir, 0755)
 	rwx, _ := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")

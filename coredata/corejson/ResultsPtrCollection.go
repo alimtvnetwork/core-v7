@@ -776,7 +776,7 @@ func (it *ResultsPtrCollection) Clone(
 	newResults := NewResultsPtrCollection.UsingCap(
 		it.Length())
 
-	if newResults.Length() == 0 {
+	if it.Length() == 0 {
 		return newResults
 	}
 

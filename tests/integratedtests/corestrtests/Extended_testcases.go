@@ -30,7 +30,7 @@ var extCollectionJoinTestCases = []coretestcases.CaseV1{
 	{
 		Title: "Collection Join with comma",
 		ArrangeInput: args.Map{
-			"items":   []string{"a", "b", "c"},
+			"items":  []string{"a", "b", "c"},
 			"joiner": ",",
 		},
 		ExpectedInput: "a,b,c",

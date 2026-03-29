@@ -315,7 +315,7 @@ func (it *SimpleSlice) LastOrDefault() string {
 }
 
 func (it *SimpleSlice) SkipDynamic(skippingItemsCount int) any {
-	if it == nil || skippingItemsCount >= it.Length() {
+	if it == nil || skippingItemsCount < 0 || skippingItemsCount >= it.Length() {
 		return []string{}
 	}
 
@@ -323,7 +323,7 @@ func (it *SimpleSlice) SkipDynamic(skippingItemsCount int) any {
 }
 
 func (it *SimpleSlice) Skip(skippingItemsCount int) []string {
-	if skippingItemsCount >= it.Length() {
+	if skippingItemsCount < 0 || skippingItemsCount >= it.Length() {
 		return []string{}
 	}
 
@@ -331,7 +331,7 @@ func (it *SimpleSlice) Skip(skippingItemsCount int) []string {
 }
 
 func (it *SimpleSlice) TakeDynamic(takeDynamicItems int) any {
-	if it == nil {
+	if it == nil || takeDynamicItems < 0 {
 		return []string{}
 	}
 
@@ -343,7 +343,7 @@ func (it *SimpleSlice) TakeDynamic(takeDynamicItems int) any {
 }
 
 func (it *SimpleSlice) Take(takeDynamicItems int) []string {
-	if takeDynamicItems >= it.Length() {
+	if takeDynamicItems < 0 || takeDynamicItems >= it.Length() {
 		return *it
 	}
 

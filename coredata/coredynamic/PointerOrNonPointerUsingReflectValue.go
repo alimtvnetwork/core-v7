@@ -15,7 +15,7 @@ func PointerOrNonPointerUsingReflectValue(
 	}
 
 	if isPointerOutput && k != reflect.Ptr {
-		val := finalReflectVal.Interface()
+		val := rv.Interface()
 
 		return &val, rv
 	}

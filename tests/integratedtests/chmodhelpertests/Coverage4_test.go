@@ -431,6 +431,9 @@ func Test_Cov4_ChmodVerifier_GetRwx9(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_IsEqual_ValidPath(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "verify.txt")
 	_ = os.WriteFile(filePath, []byte("x"), 0644)
@@ -482,6 +485,9 @@ func Test_Cov4_ChmodVerifier_PathIf_False(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_PathIf_True(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "pathif.txt")
 	_ = os.WriteFile(filePath, []byte("x"), 0644)
@@ -493,6 +499,9 @@ func Test_Cov4_ChmodVerifier_PathIf_True(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_Path(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "path.txt")
 	_ = os.WriteFile(filePath, []byte("x"), 0644)
@@ -504,6 +513,9 @@ func Test_Cov4_ChmodVerifier_Path(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_IsEqualRwxFull(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "rwxfull.txt")
 	_ = os.WriteFile(filePath, []byte("x"), 0644)
@@ -568,6 +580,9 @@ func Test_Cov4_ChmodVerifier_GetExistingRwxWrapperMust(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_PathsUsingFileModeImmediateReturn(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	f1 := filepath.Join(tmpDir, "f1.txt")
 	_ = os.WriteFile(f1, []byte("x"), 0644)
@@ -579,6 +594,9 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileModeImmediateReturn(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_PathsUsingFileModeContinueOnError(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	f1 := filepath.Join(tmpDir, "f2.txt")
 	_ = os.WriteFile(f1, []byte("x"), 0644)
@@ -590,6 +608,9 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileModeContinueOnError(t *testing.T) {
 }
 
 func Test_Cov4_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	f1 := filepath.Join(tmpDir, "f3.txt")
 	_ = os.WriteFile(f1, []byte("x"), 0644)
@@ -1295,6 +1316,9 @@ func Test_Cov4_FwChmodApplier_OnAll(t *testing.T) {
 }
 
 func Test_Cov4_FwChmodVerifier_IsEqualFile(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("chmod verification differs on Windows")
+	}
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "fw-verify.txt")
 	_ = os.WriteFile(filePath, []byte("x"), 0644)

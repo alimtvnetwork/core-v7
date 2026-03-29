@@ -13,83 +13,99 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_Filter(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"aa", "b", "cc"})
-	result := c.Filter(func(s string, i int) (string, bool, bool) {
-		return s, len(s) == 2, false
+	safeTest(t, "Test_I32_Collection_Filter", func() {
+		c := corestr.New.Collection.Strings([]string{"aa", "b", "cc"})
+		result := c.Filter(func(s string, i int) (string, bool, bool) {
+			return s, len(s) == 2, false
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Filter", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Filter", actual)
 }
 
 func Test_I32_Collection_Filter_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	result := c.Filter(func(s string, i int) (string, bool, bool) {
-		return s, true, false
+	safeTest(t, "Test_I32_Collection_Filter_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		result := c.Filter(func(s string, i int) (string, bool, bool) {
+			return s, true, false
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- Filter empty", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Filter empty", actual)
 }
 
 func Test_I32_Collection_Filter_Break(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	result := c.Filter(func(s string, i int) (string, bool, bool) {
-		return s, true, i == 0
+	safeTest(t, "Test_I32_Collection_Filter_Break", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		result := c.Filter(func(s string, i int) (string, bool, bool) {
+			return s, true, i == 0
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Filter break", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Filter break", actual)
 }
 
 func Test_I32_Collection_FilterLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "bb"})
-	result := c.FilterLock(func(s string, i int) (string, bool, bool) {
-		return s, len(s) == 1, false
+	safeTest(t, "Test_I32_Collection_FilterLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "bb"})
+		result := c.FilterLock(func(s string, i int) (string, bool, bool) {
+			return s, len(s) == 1, false
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterLock", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterLock", actual)
 }
 
 func Test_I32_Collection_FilterLock_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	result := c.FilterLock(func(s string, i int) (string, bool, bool) {
-		return s, true, false
+	safeTest(t, "Test_I32_Collection_FilterLock_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		result := c.FilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, false
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterLock empty", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterLock empty", actual)
 }
 
 func Test_I32_Collection_FilterLock_Break(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	result := c.FilterLock(func(s string, i int) (string, bool, bool) {
-		return s, true, i == 1
+	safeTest(t, "Test_I32_Collection_FilterLock_Break", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		result := c.FilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, i == 1
+		})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterLock break", actual)
 	})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterLock break", actual)
 }
 
 func Test_I32_Collection_FilteredCollection(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "bb"})
-	fc := c.FilteredCollection(func(s string, i int) (string, bool, bool) {
-		return s, len(s) == 1, false
+	safeTest(t, "Test_I32_Collection_FilteredCollection", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "bb"})
+		fc := c.FilteredCollection(func(s string, i int) (string, bool, bool) {
+			return s, len(s) == 1, false
+		})
+		actual := args.Map{"len": fc.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilteredCollection", actual)
 	})
-	actual := args.Map{"len": fc.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilteredCollection", actual)
 }
 
 func Test_I32_Collection_FilteredCollectionLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "bb"})
-	fc := c.FilteredCollectionLock(func(s string, i int) (string, bool, bool) {
-		return s, len(s) == 2, false
+	safeTest(t, "Test_I32_Collection_FilteredCollectionLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "bb"})
+		fc := c.FilteredCollectionLock(func(s string, i int) (string, bool, bool) {
+			return s, len(s) == 2, false
+		})
+		actual := args.Map{"len": fc.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilteredCollectionLock", actual)
 	})
-	actual := args.Map{"len": fc.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilteredCollectionLock", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -97,63 +113,75 @@ func Test_I32_Collection_FilteredCollectionLock(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_FilterPtr(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "bb"})
-	result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
-		return s, len(*s) == 1, false
+	safeTest(t, "Test_I32_Collection_FilterPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "bb"})
+		result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
+			return s, len(*s) == 1, false
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtr", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtr", actual)
 }
 
 func Test_I32_Collection_FilterPtr_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
-		return s, true, false
+	safeTest(t, "Test_I32_Collection_FilterPtr_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
+			return s, true, false
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterPtr empty", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterPtr empty", actual)
 }
 
 func Test_I32_Collection_FilterPtr_Break(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
-		return s, true, i == 0
+	safeTest(t, "Test_I32_Collection_FilterPtr_Break", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		result := c.FilterPtr(func(s *string, i int) (*string, bool, bool) {
+			return s, true, i == 0
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtr break", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtr break", actual)
 }
 
 func Test_I32_Collection_FilterPtrLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "bb"})
-	result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
-		return s, len(*s) == 2, false
+	safeTest(t, "Test_I32_Collection_FilterPtrLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "bb"})
+		result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
+			return s, len(*s) == 2, false
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtrLock", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtrLock", actual)
 }
 
 func Test_I32_Collection_FilterPtrLock_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
-		return s, true, false
+	safeTest(t, "Test_I32_Collection_FilterPtrLock_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
+			return s, true, false
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterPtrLock empty", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- FilterPtrLock empty", actual)
 }
 
 func Test_I32_Collection_FilterPtrLock_Break(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
-		return s, true, i == 1
+	safeTest(t, "Test_I32_Collection_FilterPtrLock_Break", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
+			return s, true, i == 1
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtrLock break", actual)
 	})
-	actual := args.Map{"len": len(*result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- FilterPtrLock break", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -161,63 +189,75 @@ func Test_I32_Collection_FilterPtrLock_Break(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_AppendAnysUsingFilter(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
-		return s, len(s) > 0, false
-	}, "hello", nil, "world")
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilter", actual)
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilter", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
+			return s, len(s) > 0, false
+		}, "hello", nil, "world")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilter", actual)
+	})
 }
 
 func Test_I32_Collection_AppendAnysUsingFilter_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
-		return s, true, false
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilter_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
+			return s, true, false
+		})
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- AppendAnysUsingFilter empty", actual)
 	})
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- AppendAnysUsingFilter empty", actual)
 }
 
 func Test_I32_Collection_AppendAnysUsingFilter_Break(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
-		return s, true, true
-	}, "a", "b")
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilter break", actual)
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilter_Break", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilter(func(s string, i int) (string, bool, bool) {
+			return s, true, true
+		}, "a", "b")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilter break", actual)
+	})
 }
 
 func Test_I32_Collection_AppendAnysUsingFilterLock(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
-		return s, true, false
-	}, "hello")
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilterLock", actual)
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilterLock", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, false
+		}, "hello")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilterLock", actual)
+	})
 }
 
 func Test_I32_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
-		return s, true, false
-	}, nil...)
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- AppendAnysUsingFilterLock nil", actual)
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilterLock_Nil", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, false
+		}, nil...)
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- AppendAnysUsingFilterLock nil", actual)
+	})
 }
 
 func Test_I32_Collection_AppendAnysUsingFilterLock_Break(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
-		return s, true, true
-	}, "a", "b")
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilterLock break", actual)
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilterLock_Break", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, true
+		}, "a", "b")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilterLock break", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -225,31 +265,39 @@ func Test_I32_Collection_AppendAnysUsingFilterLock_Break(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_NonEmptyList(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-	actual := args.Map{"len": len(c.NonEmptyList()), "ptrLen": len(*c.NonEmptyListPtr())}
-	expected := args.Map{"len": 2, "ptrLen": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList", actual)
+	safeTest(t, "Test_I32_Collection_NonEmptyList", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		actual := args.Map{"len": len(c.NonEmptyList()), "ptrLen": len(*c.NonEmptyListPtr())}
+		expected := args.Map{"len": 2, "ptrLen": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList", actual)
+	})
 }
 
 func Test_I32_Collection_NonEmptyList_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"len": len(c.NonEmptyList())}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList empty", actual)
+	safeTest(t, "Test_I32_Collection_NonEmptyList_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"len": len(c.NonEmptyList())}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList empty", actual)
+	})
 }
 
 func Test_I32_Collection_NonEmptyItems(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-	actual := args.Map{"len": len(c.NonEmptyItems()), "ptrLen": len(c.NonEmptyItemsPtr())}
-	expected := args.Map{"len": 2, "ptrLen": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItems", actual)
+	safeTest(t, "Test_I32_Collection_NonEmptyItems", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		actual := args.Map{"len": len(c.NonEmptyItems()), "ptrLen": len(c.NonEmptyItemsPtr())}
+		expected := args.Map{"len": 2, "ptrLen": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItems", actual)
+	})
 }
 
 func Test_I32_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "  ", ""})
-	actual := args.Map{"len": len(c.NonEmptyItemsOrNonWhitespace()), "ptrLen": len(c.NonEmptyItemsOrNonWhitespacePtr())}
-	expected := args.Map{"len": 1, "ptrLen": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItemsOrNonWhitespace", actual)
+	safeTest(t, "Test_I32_Collection_NonEmptyItemsOrNonWhitespace", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "  ", ""})
+		actual := args.Map{"len": len(c.NonEmptyItemsOrNonWhitespace()), "ptrLen": len(c.NonEmptyItemsOrNonWhitespacePtr())}
+		expected := args.Map{"len": 1, "ptrLen": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItemsOrNonWhitespace", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -257,31 +305,39 @@ func Test_I32_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_UniqueBoolMap(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
-	actual := args.Map{"len": len(c.UniqueBoolMap())}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueBoolMap", actual)
+	safeTest(t, "Test_I32_Collection_UniqueBoolMap", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
+		actual := args.Map{"len": len(c.UniqueBoolMap())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueBoolMap", actual)
+	})
 }
 
 func Test_I32_Collection_UniqueBoolMapLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "a"})
-	actual := args.Map{"len": len(c.UniqueBoolMapLock())}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueBoolMapLock", actual)
+	safeTest(t, "Test_I32_Collection_UniqueBoolMapLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "a"})
+		actual := args.Map{"len": len(c.UniqueBoolMapLock())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueBoolMapLock", actual)
+	})
 }
 
 func Test_I32_Collection_UniqueList(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
-	actual := args.Map{"len": len(c.UniqueList())}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueList", actual)
+	safeTest(t, "Test_I32_Collection_UniqueList", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
+		actual := args.Map{"len": len(c.UniqueList())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueList", actual)
+	})
 }
 
 func Test_I32_Collection_UniqueListLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "a", "b"})
-	actual := args.Map{"len": len(c.UniqueListLock())}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueListLock", actual)
+	safeTest(t, "Test_I32_Collection_UniqueListLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "a", "b"})
+		actual := args.Map{"len": len(c.UniqueListLock())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UniqueListLock", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -289,61 +345,77 @@ func Test_I32_Collection_UniqueListLock(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_Has(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"has": c.Has("a"), "missing": c.Has("x")}
-	expected := args.Map{"has": true, "missing": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Has", actual)
+	safeTest(t, "Test_I32_Collection_Has", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"has": c.Has("a"), "missing": c.Has("x")}
+		expected := args.Map{"has": true, "missing": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Has", actual)
+	})
 }
 
 func Test_I32_Collection_Has_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"has": c.Has("a")}
-	expected := args.Map{"has": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Has empty", actual)
+	safeTest(t, "Test_I32_Collection_Has_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"has": c.Has("a")}
+		expected := args.Map{"has": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- Has empty", actual)
+	})
 }
 
 func Test_I32_Collection_HasLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"has": c.HasLock("a")}
-	expected := args.Map{"has": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasLock", actual)
+	safeTest(t, "Test_I32_Collection_HasLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"has": c.HasLock("a")}
+		expected := args.Map{"has": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasLock", actual)
+	})
 }
 
 func Test_I32_Collection_HasPtr(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	s := "a"
-	actual := args.Map{"has": c.HasPtr(&s), "nil": c.HasPtr(nil)}
-	expected := args.Map{"has": true, "nil": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasPtr", actual)
+	safeTest(t, "Test_I32_Collection_HasPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		s := "a"
+		actual := args.Map{"has": c.HasPtr(&s), "nil": c.HasPtr(nil)}
+		expected := args.Map{"has": true, "nil": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasPtr", actual)
+	})
 }
 
 func Test_I32_Collection_HasPtr_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	s := "a"
-	actual := args.Map{"has": c.HasPtr(&s)}
-	expected := args.Map{"has": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- HasPtr empty", actual)
+	safeTest(t, "Test_I32_Collection_HasPtr_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		s := "a"
+		actual := args.Map{"has": c.HasPtr(&s)}
+		expected := args.Map{"has": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- HasPtr empty", actual)
+	})
 }
 
 func Test_I32_Collection_HasAll(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	actual := args.Map{"all": c.HasAll("a", "b"), "missing": c.HasAll("a", "x")}
-	expected := args.Map{"all": true, "missing": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasAll", actual)
+	safeTest(t, "Test_I32_Collection_HasAll", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		actual := args.Map{"all": c.HasAll("a", "b"), "missing": c.HasAll("a", "x")}
+		expected := args.Map{"all": true, "missing": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasAll", actual)
+	})
 }
 
 func Test_I32_Collection_HasAll_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"has": c.HasAll("a")}
-	expected := args.Map{"has": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- HasAll empty", actual)
+	safeTest(t, "Test_I32_Collection_HasAll_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"has": c.HasAll("a")}
+		expected := args.Map{"has": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- HasAll empty", actual)
+	})
 }
 
 func Test_I32_Collection_HasUsingSensitivity(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"Hello"})
-	actual := args.Map{"sensitive": c.HasUsingSensitivity("hello", true), "insensitive": c.HasUsingSensitivity("hello", false)}
-	expected := args.Map{"sensitive": false, "insensitive": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasUsingSensitivity", actual)
+	safeTest(t, "Test_I32_Collection_HasUsingSensitivity", func() {
+		c := corestr.New.Collection.Strings([]string{"Hello"})
+		actual := args.Map{"sensitive": c.HasUsingSensitivity("hello", true), "insensitive": c.HasUsingSensitivity("hello", false)}
+		expected := args.Map{"sensitive": false, "insensitive": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasUsingSensitivity", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -351,47 +423,59 @@ func Test_I32_Collection_HasUsingSensitivity(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_IsContainsPtr(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	s := "a"
-	actual := args.Map{"has": c.IsContainsPtr(&s), "nil": c.IsContainsPtr(nil)}
-	expected := args.Map{"has": true, "nil": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsPtr", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		s := "a"
+		actual := args.Map{"has": c.IsContainsPtr(&s), "nil": c.IsContainsPtr(nil)}
+		expected := args.Map{"has": true, "nil": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsPtr", actual)
+	})
 }
 
 func Test_I32_Collection_IsContainsPtr_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	s := "a"
-	actual := args.Map{"has": c.IsContainsPtr(&s)}
-	expected := args.Map{"has": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsPtr empty", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsPtr_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		s := "a"
+		actual := args.Map{"has": c.IsContainsPtr(&s)}
+		expected := args.Map{"has": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsPtr empty", actual)
+	})
 }
 
 func Test_I32_Collection_IsContainsAll(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"all": c.IsContainsAll("a", "b"), "miss": c.IsContainsAll("a", "x"), "nil": c.IsContainsAll(nil...)}
-	expected := args.Map{"all": true, "miss": false, "nil": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsAll", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsAll", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"all": c.IsContainsAll("a", "b"), "miss": c.IsContainsAll("a", "x"), "nil": c.IsContainsAll(nil...)}
+		expected := args.Map{"all": true, "miss": false, "nil": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsAll", actual)
+	})
 }
 
 func Test_I32_Collection_IsContainsAllSlice_Empty(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"empty": c.IsContainsAllSlice([]string{})}
-	expected := args.Map{"empty": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsAllSlice empty", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsAllSlice_Empty", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"empty": c.IsContainsAllSlice([]string{})}
+		expected := args.Map{"empty": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsAllSlice empty", actual)
+	})
 }
 
 func Test_I32_Collection_IsContainsAllSlice_EmptyCollection(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"has": c.IsContainsAllSlice([]string{"a"})}
-	expected := args.Map{"has": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsAllSlice empty collection", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsAllSlice_EmptyCollection", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"has": c.IsContainsAllSlice([]string{"a"})}
+		expected := args.Map{"has": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- IsContainsAllSlice empty collection", actual)
+	})
 }
 
 func Test_I32_Collection_IsContainsAllLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"all": c.IsContainsAllLock("a", "b"), "nil": c.IsContainsAllLock(nil...)}
-	expected := args.Map{"all": true, "nil": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsAllLock", actual)
+	safeTest(t, "Test_I32_Collection_IsContainsAllLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"all": c.IsContainsAllLock("a", "b"), "nil": c.IsContainsAllLock(nil...)}
+		expected := args.Map{"all": true, "nil": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- IsContainsAllLock", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -399,19 +483,23 @@ func Test_I32_Collection_IsContainsAllLock(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_GetHashsetPlusHasAll(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	hs, hasAll := c.GetHashsetPlusHasAll([]string{"a", "b"})
-	actual := args.Map{"hasAll": hasAll, "hsLen": hs.Length()}
-	expected := args.Map{"hasAll": true, "hsLen": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetHashsetPlusHasAll", actual)
+	safeTest(t, "Test_I32_Collection_GetHashsetPlusHasAll", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		hs, hasAll := c.GetHashsetPlusHasAll([]string{"a", "b"})
+		actual := args.Map{"hasAll": hasAll, "hsLen": hs.Length()}
+		expected := args.Map{"hasAll": true, "hsLen": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetHashsetPlusHasAll", actual)
+	})
 }
 
 func Test_I32_Collection_GetHashsetPlusHasAll_Nil(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	_, hasAll := c.GetHashsetPlusHasAll(nil)
-	actual := args.Map{"hasAll": hasAll}
-	expected := args.Map{"hasAll": false}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetHashsetPlusHasAll nil", actual)
+	safeTest(t, "Test_I32_Collection_GetHashsetPlusHasAll_Nil", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		_, hasAll := c.GetHashsetPlusHasAll(nil)
+		actual := args.Map{"hasAll": hasAll}
+		expected := args.Map{"hasAll": false}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetHashsetPlusHasAll nil", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -419,58 +507,72 @@ func Test_I32_Collection_GetHashsetPlusHasAll_Nil(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_SortedListAsc(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"c", "a", "b"})
-	result := c.SortedListAsc()
-	actual := args.Map{"first": result[0], "last": result[2]}
-	expected := args.Map{"first": "a", "last": "c"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedListAsc", actual)
+	safeTest(t, "Test_I32_Collection_SortedListAsc", func() {
+		c := corestr.New.Collection.Strings([]string{"c", "a", "b"})
+		result := c.SortedListAsc()
+		actual := args.Map{"first": result[0], "last": result[2]}
+		expected := args.Map{"first": "a", "last": "c"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedListAsc", actual)
+	})
 }
 
 func Test_I32_Collection_SortedListAsc_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"len": len(c.SortedListAsc())}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedListAsc empty", actual)
+	safeTest(t, "Test_I32_Collection_SortedListAsc_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"len": len(c.SortedListAsc())}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedListAsc empty", actual)
+	})
 }
 
 func Test_I32_Collection_SortedAsc(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"c", "a"})
-	c.SortedAsc()
-	actual := args.Map{"first": c.First()}
-	expected := args.Map{"first": "a"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedAsc", actual)
+	safeTest(t, "Test_I32_Collection_SortedAsc", func() {
+		c := corestr.New.Collection.Strings([]string{"c", "a"})
+		c.SortedAsc()
+		actual := args.Map{"first": c.First()}
+		expected := args.Map{"first": "a"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedAsc", actual)
+	})
 }
 
 func Test_I32_Collection_SortedAsc_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.SortedAsc()
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedAsc empty", actual)
+	safeTest(t, "Test_I32_Collection_SortedAsc_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.SortedAsc()
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedAsc empty", actual)
+	})
 }
 
 func Test_I32_Collection_SortedAscLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"b", "a"})
-	c.SortedAscLock()
-	actual := args.Map{"first": c.First()}
-	expected := args.Map{"first": "a"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedAscLock", actual)
+	safeTest(t, "Test_I32_Collection_SortedAscLock", func() {
+		c := corestr.New.Collection.Strings([]string{"b", "a"})
+		c.SortedAscLock()
+		actual := args.Map{"first": c.First()}
+		expected := args.Map{"first": "a"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedAscLock", actual)
+	})
 }
 
 func Test_I32_Collection_SortedAscLock_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.SortedAscLock()
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedAscLock empty", actual)
+	safeTest(t, "Test_I32_Collection_SortedAscLock_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.SortedAscLock()
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- SortedAscLock empty", actual)
+	})
 }
 
 func Test_I32_Collection_SortedListDsc(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "c", "b"})
-	result := c.SortedListDsc()
-	actual := args.Map{"first": result[0], "last": result[2]}
-	expected := args.Map{"first": "c", "last": "a"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedListDsc", actual)
+	safeTest(t, "Test_I32_Collection_SortedListDsc", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "c", "b"})
+		result := c.SortedListDsc()
+		actual := args.Map{"first": result[0], "last": result[2]}
+		expected := args.Map{"first": "c", "last": "a"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortedListDsc", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -478,27 +580,33 @@ func Test_I32_Collection_SortedListDsc(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_HashsetAsIs(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	hs := c.HashsetAsIs()
-	actual := args.Map{"len": hs.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HashsetAsIs", actual)
+	safeTest(t, "Test_I32_Collection_HashsetAsIs", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		hs := c.HashsetAsIs()
+		actual := args.Map{"len": hs.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HashsetAsIs", actual)
+	})
 }
 
 func Test_I32_Collection_HashsetWithDoubleLength(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	hs := c.HashsetWithDoubleLength()
-	actual := args.Map{"has": hs.Has("a")}
-	expected := args.Map{"has": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- HashsetWithDoubleLength", actual)
+	safeTest(t, "Test_I32_Collection_HashsetWithDoubleLength", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		hs := c.HashsetWithDoubleLength()
+		actual := args.Map{"has": hs.Has("a")}
+		expected := args.Map{"has": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- HashsetWithDoubleLength", actual)
+	})
 }
 
 func Test_I32_Collection_HashsetLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	hs := c.HashsetLock()
-	actual := args.Map{"has": hs.Has("a")}
-	expected := args.Map{"has": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HashsetLock", actual)
+	safeTest(t, "Test_I32_Collection_HashsetLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		hs := c.HashsetLock()
+		actual := args.Map{"has": hs.Has("a")}
+		expected := args.Map{"has": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HashsetLock", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -506,44 +614,54 @@ func Test_I32_Collection_HashsetLock(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_GetAllExceptCollection(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	except := corestr.New.Collection.Strings([]string{"b"})
-	result := c.GetAllExceptCollection(except)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetAllExceptCollection", actual)
+	safeTest(t, "Test_I32_Collection_GetAllExceptCollection", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		except := corestr.New.Collection.Strings([]string{"b"})
+		result := c.GetAllExceptCollection(except)
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetAllExceptCollection", actual)
+	})
 }
 
 func Test_I32_Collection_GetAllExceptCollection_Nil(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	result := c.GetAllExceptCollection(nil)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetAllExceptCollection nil", actual)
+	safeTest(t, "Test_I32_Collection_GetAllExceptCollection_Nil", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		result := c.GetAllExceptCollection(nil)
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetAllExceptCollection nil", actual)
+	})
 }
 
 func Test_I32_Collection_GetAllExceptCollection_Empty(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	result := c.GetAllExceptCollection(corestr.New.Collection.Cap(5))
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- GetAllExceptCollection empty", actual)
+	safeTest(t, "Test_I32_Collection_GetAllExceptCollection_Empty", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		result := c.GetAllExceptCollection(corestr.New.Collection.Cap(5))
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- GetAllExceptCollection empty", actual)
+	})
 }
 
 func Test_I32_Collection_GetAllExcept(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-	result := c.GetAllExcept([]string{"a"})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetAllExcept", actual)
+	safeTest(t, "Test_I32_Collection_GetAllExcept", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		result := c.GetAllExcept([]string{"a"})
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetAllExcept", actual)
+	})
 }
 
 func Test_I32_Collection_GetAllExcept_Nil(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	result := c.GetAllExcept(nil)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetAllExcept nil", actual)
+	safeTest(t, "Test_I32_Collection_GetAllExcept_Nil", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		result := c.GetAllExcept(nil)
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- GetAllExcept nil", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -551,22 +669,26 @@ func Test_I32_Collection_GetAllExcept_Nil(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_AddsAsync(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	wg := &sync.WaitGroup{}
-	wg.Add(1)
-	c.AddsAsync(wg, "a", "b")
-	wg.Wait()
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddsAsync", actual)
+	safeTest(t, "Test_I32_Collection_AddsAsync", func() {
+		c := corestr.New.Collection.Cap(5)
+		wg := &sync.WaitGroup{}
+		wg.Add(1)
+		c.AddsAsync(wg, "a", "b")
+		wg.Wait()
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddsAsync", actual)
+	})
 }
 
 func Test_I32_Collection_AddsAsync_Nil(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddsAsync(nil, nil...)
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- AddsAsync nil", actual)
+	safeTest(t, "Test_I32_Collection_AddsAsync_Nil", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddsAsync(nil, nil...)
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- AddsAsync nil", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -574,77 +696,95 @@ func Test_I32_Collection_AddsAsync_Nil(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_New(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	n := c.New("a", "b")
-	actual := args.Map{"len": n.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- New", actual)
+	safeTest(t, "Test_I32_Collection_New", func() {
+		c := corestr.New.Collection.Cap(5)
+		n := c.New("a", "b")
+		actual := args.Map{"len": n.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- New", actual)
+	})
 }
 
 func Test_I32_Collection_New_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	n := c.New()
-	actual := args.Map{"empty": n.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- New empty", actual)
+	safeTest(t, "Test_I32_Collection_New_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		n := c.New()
+		actual := args.Map{"empty": n.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- New empty", actual)
+	})
 }
 
 func Test_I32_Collection_AddNonEmptyStrings(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddNonEmptyStrings("a", "", "b")
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct length -- AddNonEmptyStrings filters empty", actual)
+	safeTest(t, "Test_I32_Collection_AddNonEmptyStrings", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddNonEmptyStrings("a", "", "b")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct length -- AddNonEmptyStrings filters empty", actual)
+	})
 }
 
 func Test_I32_Collection_AddNonEmptyStrings_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddNonEmptyStrings()
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- AddNonEmptyStrings empty", actual)
+	safeTest(t, "Test_I32_Collection_AddNonEmptyStrings_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddNonEmptyStrings()
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- AddNonEmptyStrings empty", actual)
+	})
 }
 
 func Test_I32_Collection_AddFuncResult(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddFuncResult(func() string { return "x" })
-	actual := args.Map{"first": c.First()}
-	expected := args.Map{"first": "x"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddFuncResult", actual)
+	safeTest(t, "Test_I32_Collection_AddFuncResult", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddFuncResult(func() string { return "x" })
+		actual := args.Map{"first": c.First()}
+		expected := args.Map{"first": "x"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddFuncResult", actual)
+	})
 }
 
 func Test_I32_Collection_AddFuncResult_Nil(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddFuncResult(nil...)
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- AddFuncResult nil", actual)
+	safeTest(t, "Test_I32_Collection_AddFuncResult_Nil", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddFuncResult(nil...)
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- AddFuncResult nil", actual)
+	})
 }
 
 func Test_I32_Collection_AddStringsByFuncChecking(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.AddStringsByFuncChecking([]string{"a", "bb", "c"}, func(s string) bool { return len(s) == 1 })
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddStringsByFuncChecking", actual)
+	safeTest(t, "Test_I32_Collection_AddStringsByFuncChecking", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AddStringsByFuncChecking([]string{"a", "bb", "c"}, func(s string) bool { return len(s) == 1 })
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AddStringsByFuncChecking", actual)
+	})
 }
 
 func Test_I32_Collection_ExpandSlicePlusAdd(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.ExpandSlicePlusAdd([]string{"a,b"}, func(s string) []string {
-		return []string{s + "!"}
+	safeTest(t, "Test_I32_Collection_ExpandSlicePlusAdd", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.ExpandSlicePlusAdd([]string{"a,b"}, func(s string) []string {
+			return []string{s + "!"}
+		})
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- ExpandSlicePlusAdd", actual)
 	})
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- ExpandSlicePlusAdd", actual)
 }
 
 func Test_I32_Collection_MergeSlicesOfSlice(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	c.MergeSlicesOfSlice([]string{"a"}, []string{"b"})
-	actual := args.Map{"len": c.Length()}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- MergeSlicesOfSlice", actual)
+	safeTest(t, "Test_I32_Collection_MergeSlicesOfSlice", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.MergeSlicesOfSlice([]string{"a"}, []string{"b"})
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- MergeSlicesOfSlice", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -652,25 +792,31 @@ func Test_I32_Collection_MergeSlicesOfSlice(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_CharCollectionMap(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"abc", "axy"})
-	ccm := c.CharCollectionMap()
-	actual := args.Map{"notNil": ccm != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CharCollectionMap", actual)
+	safeTest(t, "Test_I32_Collection_CharCollectionMap", func() {
+		c := corestr.New.Collection.Strings([]string{"abc", "axy"})
+		ccm := c.CharCollectionMap()
+		actual := args.Map{"notNil": ccm != nil}
+		expected := args.Map{"notNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CharCollectionMap", actual)
+	})
 }
 
 func Test_I32_Collection_SummaryString(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notEmpty": c.SummaryString(1) != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SummaryString", actual)
+	safeTest(t, "Test_I32_Collection_SummaryString", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notEmpty": c.SummaryString(1) != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SummaryString", actual)
+	})
 }
 
 func Test_I32_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"notEmpty": c.SummaryStringWithHeader("H:") != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- SummaryStringWithHeader empty", actual)
+	safeTest(t, "Test_I32_Collection_SummaryStringWithHeader_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"notEmpty": c.SummaryStringWithHeader("H:") != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- SummaryStringWithHeader empty", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -678,87 +824,111 @@ func Test_I32_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_String(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notEmpty": c.String() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- String", actual)
+	safeTest(t, "Test_I32_Collection_String", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notEmpty": c.String() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- String", actual)
+	})
 }
 
 func Test_I32_Collection_String_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"notEmpty": c.String() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- String empty", actual)
+	safeTest(t, "Test_I32_Collection_String_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"notEmpty": c.String() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- String empty", actual)
+	})
 }
 
 func Test_I32_Collection_StringLock(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notEmpty": c.StringLock() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- StringLock", actual)
+	safeTest(t, "Test_I32_Collection_StringLock", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notEmpty": c.StringLock() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- StringLock", actual)
+	})
 }
 
 func Test_I32_Collection_StringLock_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"notEmpty": c.StringLock() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- StringLock empty", actual)
+	safeTest(t, "Test_I32_Collection_StringLock_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"notEmpty": c.StringLock() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- StringLock empty", actual)
+	})
 }
 
 func Test_I32_Collection_Join(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"val": c.Join(",")}
-	expected := args.Map{"val": "a,b"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Join", actual)
+	safeTest(t, "Test_I32_Collection_Join", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"val": c.Join(",")}
+		expected := args.Map{"val": "a,b"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Join", actual)
+	})
 }
 
 func Test_I32_Collection_Join_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"val": c.Join(",")}
-	expected := args.Map{"val": ""}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Join empty", actual)
+	safeTest(t, "Test_I32_Collection_Join_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"val": c.Join(",")}
+		expected := args.Map{"val": ""}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- Join empty", actual)
+	})
 }
 
 func Test_I32_Collection_JoinLine(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"notEmpty": c.JoinLine() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JoinLine", actual)
+	safeTest(t, "Test_I32_Collection_JoinLine", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"notEmpty": c.JoinLine() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JoinLine", actual)
+	})
 }
 
 func Test_I32_Collection_JoinLine_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"val": c.JoinLine()}
-	expected := args.Map{"val": ""}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- JoinLine empty", actual)
+	safeTest(t, "Test_I32_Collection_JoinLine_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"val": c.JoinLine()}
+		expected := args.Map{"val": ""}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- JoinLine empty", actual)
+	})
 }
 
 func Test_I32_Collection_Joins(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"val": c.Joins(",", "b")}
-	expected := args.Map{"val": "a,b"}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Joins", actual)
+	safeTest(t, "Test_I32_Collection_Joins", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"val": c.Joins(",", "b")}
+		expected := args.Map{"val": "a,b"}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Joins", actual)
+	})
 }
 
 func Test_I32_Collection_Joins_NoExtra(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"val": c.Joins(",")}
-	expected := args.Map{"val": "a,b"}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Joins no extra", actual)
+	safeTest(t, "Test_I32_Collection_Joins_NoExtra", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"val": c.Joins(",")}
+		expected := args.Map{"val": "a,b"}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- Joins no extra", actual)
+	})
 }
 
 func Test_I32_Collection_NonEmptyJoins(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-	actual := args.Map{"notEmpty": c.NonEmptyJoins(",") != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyJoins", actual)
+	safeTest(t, "Test_I32_Collection_NonEmptyJoins", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		actual := args.Map{"notEmpty": c.NonEmptyJoins(",") != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyJoins", actual)
+	})
 }
 
 func Test_I32_Collection_NonWhitespaceJoins(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "  ", "b"})
-	actual := args.Map{"notEmpty": c.NonWhitespaceJoins(",") != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- NonWhitespaceJoins", actual)
+	safeTest(t, "Test_I32_Collection_NonWhitespaceJoins", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "  ", "b"})
+		actual := args.Map{"notEmpty": c.NonWhitespaceJoins(",") != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- NonWhitespaceJoins", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -766,45 +936,57 @@ func Test_I32_Collection_NonWhitespaceJoins(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_Csv(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	actual := args.Map{"notEmpty": c.Csv() != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Csv", actual)
+	safeTest(t, "Test_I32_Collection_Csv", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		actual := args.Map{"notEmpty": c.Csv() != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Csv", actual)
+	})
 }
 
 func Test_I32_Collection_Csv_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"val": c.Csv()}
-	expected := args.Map{"val": ""}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- Csv empty", actual)
+	safeTest(t, "Test_I32_Collection_Csv_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"val": c.Csv()}
+		expected := args.Map{"val": ""}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- Csv empty", actual)
+	})
 }
 
 func Test_I32_Collection_CsvOptions(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notEmpty": c.CsvOptions(true) != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvOptions", actual)
+	safeTest(t, "Test_I32_Collection_CsvOptions", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notEmpty": c.CsvOptions(true) != ""}
+		expected := args.Map{"notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvOptions", actual)
+	})
 }
 
 func Test_I32_Collection_CsvOptions_Empty(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	actual := args.Map{"val": c.CsvOptions(false)}
-	expected := args.Map{"val": ""}
-	expected.ShouldBeEqual(t, 0, "Collection returns empty -- CsvOptions empty", actual)
+	safeTest(t, "Test_I32_Collection_CsvOptions_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"val": c.CsvOptions(false)}
+		expected := args.Map{"val": ""}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- CsvOptions empty", actual)
+	})
 }
 
 func Test_I32_Collection_CsvLines(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"len": len(c.CsvLines())}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvLines", actual)
+	safeTest(t, "Test_I32_Collection_CsvLines", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"len": len(c.CsvLines())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvLines", actual)
+	})
 }
 
 func Test_I32_Collection_CsvLinesOptions(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"len": len(c.CsvLinesOptions(true))}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvLinesOptions", actual)
+	safeTest(t, "Test_I32_Collection_CsvLinesOptions", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"len": len(c.CsvLinesOptions(true))}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvLinesOptions", actual)
+	})
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -812,139 +994,171 @@ func Test_I32_Collection_CsvLinesOptions(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_JsonModel(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"len": len(c.JsonModel()), "anyNotNil": c.JsonModelAny() != nil}
-	expected := args.Map{"len": 1, "anyNotNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonModel", actual)
+	safeTest(t, "Test_I32_Collection_JsonModel", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"len": len(c.JsonModel()), "anyNotNil": c.JsonModelAny() != nil}
+		expected := args.Map{"len": 1, "anyNotNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonModel", actual)
+	})
 }
 
 func Test_I32_Collection_MarshalJSON(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	b, err := c.MarshalJSON()
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(b) > 0}
-	expected := args.Map{"noErr": true, "notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- MarshalJSON", actual)
+	safeTest(t, "Test_I32_Collection_MarshalJSON", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		b, err := c.MarshalJSON()
+		actual := args.Map{"noErr": err == nil, "notEmpty": len(b) > 0}
+		expected := args.Map{"noErr": true, "notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- MarshalJSON", actual)
+	})
 }
 
 func Test_I32_Collection_UnmarshalJSON(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	err := c.UnmarshalJSON([]byte(`["x","y"]`))
-	actual := args.Map{"noErr": err == nil, "len": c.Length()}
-	expected := args.Map{"noErr": true, "len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UnmarshalJSON", actual)
+	safeTest(t, "Test_I32_Collection_UnmarshalJSON", func() {
+		c := corestr.New.Collection.Cap(5)
+		err := c.UnmarshalJSON([]byte(`["x","y"]`))
+		actual := args.Map{"noErr": err == nil, "len": c.Length()}
+		expected := args.Map{"noErr": true, "len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- UnmarshalJSON", actual)
+	})
 }
 
 func Test_I32_Collection_UnmarshalJSON_Err(t *testing.T) {
-	c := corestr.New.Collection.Cap(5)
-	err := c.UnmarshalJSON([]byte(`{bad`))
-	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns error -- UnmarshalJSON err", actual)
+	safeTest(t, "Test_I32_Collection_UnmarshalJSON_Err", func() {
+		c := corestr.New.Collection.Cap(5)
+		err := c.UnmarshalJSON([]byte(`{bad`))
+		actual := args.Map{"hasErr": err != nil}
+		expected := args.Map{"hasErr": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns error -- UnmarshalJSON err", actual)
+	})
 }
 
 func Test_I32_Collection_Json(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	j := c.Json()
-	actual := args.Map{"notNil": j.Bytes != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Json", actual)
+	safeTest(t, "Test_I32_Collection_Json", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		j := c.Json()
+		actual := args.Map{"notNil": j.Bytes != nil}
+		expected := args.Map{"notNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Json", actual)
+	})
 }
 
 func Test_I32_Collection_JsonPtr(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	jp := c.JsonPtr()
-	actual := args.Map{"notNil": jp != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonPtr", actual)
+	safeTest(t, "Test_I32_Collection_JsonPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		jp := c.JsonPtr()
+		actual := args.Map{"notNil": jp != nil}
+		expected := args.Map{"notNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonPtr", actual)
+	})
 }
 
 func Test_I32_Collection_Serialize(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	b, err := c.Serialize()
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(b) > 0}
-	expected := args.Map{"noErr": true, "notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Serialize", actual)
+	safeTest(t, "Test_I32_Collection_Serialize", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		b, err := c.Serialize()
+		actual := args.Map{"noErr": err == nil, "notEmpty": len(b) > 0}
+		expected := args.Map{"noErr": true, "notEmpty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Serialize", actual)
+	})
 }
 
 func Test_I32_Collection_Deserialize(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	var target []string
-	err := c.Deserialize(&target)
-	actual := args.Map{"noErr": err == nil, "len": len(target)}
-	expected := args.Map{"noErr": true, "len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Deserialize", actual)
+	safeTest(t, "Test_I32_Collection_Deserialize", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		var target []string
+		err := c.Deserialize(&target)
+		actual := args.Map{"noErr": err == nil, "len": len(target)}
+		expected := args.Map{"noErr": true, "len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Deserialize", actual)
+	})
 }
 
 func Test_I32_Collection_ParseInjectUsingJson(t *testing.T) {
-	src := corestr.New.Collection.Strings([]string{"a", "b"})
-	jr := src.JsonPtr()
-	target := corestr.New.Collection.Cap(5)
-	result, err := target.ParseInjectUsingJson(jr)
-	actual := args.Map{"noErr": err == nil, "len": result.Length()}
-	expected := args.Map{"noErr": true, "len": 2}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- ParseInjectUsingJson", actual)
+	safeTest(t, "Test_I32_Collection_ParseInjectUsingJson", func() {
+		src := corestr.New.Collection.Strings([]string{"a", "b"})
+		jr := src.JsonPtr()
+		target := corestr.New.Collection.Cap(5)
+		result, err := target.ParseInjectUsingJson(jr)
+		actual := args.Map{"noErr": err == nil, "len": result.Length()}
+		expected := args.Map{"noErr": true, "len": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- ParseInjectUsingJson", actual)
+	})
 }
 
 func Test_I32_Collection_JsonParseSelfInject(t *testing.T) {
-	src := corestr.New.Collection.Strings([]string{"a"})
-	jr := src.JsonPtr()
-	target := corestr.New.Collection.Cap(5)
-	err := target.JsonParseSelfInject(jr)
-	actual := args.Map{"noErr": err == nil, "len": target.Length()}
-	expected := args.Map{"noErr": true, "len": 1}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonParseSelfInject", actual)
+	safeTest(t, "Test_I32_Collection_JsonParseSelfInject", func() {
+		src := corestr.New.Collection.Strings([]string{"a"})
+		jr := src.JsonPtr()
+		target := corestr.New.Collection.Cap(5)
+		err := target.JsonParseSelfInject(jr)
+		actual := args.Map{"noErr": err == nil, "len": target.Length()}
+		expected := args.Map{"noErr": true, "len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonParseSelfInject", actual)
+	})
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// Collection pt2 — AsJsonMarshaller / AsJsonContractsBinder
-// ══════════════════════════════════════════════════════════════════════════════
+	// ══════════════════════════════════════════════════════════════════════════════
+	// Collection pt2 — AsJsonMarshaller / AsJsonContractsBinder
+	// ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_AsJsonMarshaller(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notNil": c.AsJsonMarshaller() != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AsJsonMarshaller", actual)
+	safeTest(t, "Test_I32_Collection_AsJsonMarshaller", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notNil": c.AsJsonMarshaller() != nil}
+		expected := args.Map{"notNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AsJsonMarshaller", actual)
+	})
 }
 
 func Test_I32_Collection_AsJsonContractsBinder(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	actual := args.Map{"notNil": c.AsJsonContractsBinder() != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AsJsonContractsBinder", actual)
+	safeTest(t, "Test_I32_Collection_AsJsonContractsBinder", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"notNil": c.AsJsonContractsBinder() != nil}
+		expected := args.Map{"notNil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AsJsonContractsBinder", actual)
+	})
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// Collection pt2 — Clear / Dispose
-// ══════════════════════════════════════════════════════════════════════════════
+	// ══════════════════════════════════════════════════════════════════════════════
+	// Collection pt2 — Clear / Dispose
+	// ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I32_Collection_Clear(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a", "b"})
-	c.Clear()
-	actual := args.Map{"empty": c.IsEmpty()}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Clear", actual)
+	safeTest(t, "Test_I32_Collection_Clear", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "b"})
+		c.Clear()
+		actual := args.Map{"empty": c.IsEmpty()}
+		expected := args.Map{"empty": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Clear", actual)
+	})
 }
 
 func Test_I32_Collection_Clear_Nil(t *testing.T) {
-	var c *corestr.Collection
-	result := c.Clear()
-	actual := args.Map{"nil": result == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- Clear nil", actual)
+	safeTest(t, "Test_I32_Collection_Clear_Nil", func() {
+		var c *corestr.Collection
+		result := c.Clear()
+		actual := args.Map{"nil": result == nil}
+		expected := args.Map{"nil": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- Clear nil", actual)
+	})
 }
 
 func Test_I32_Collection_Dispose(t *testing.T) {
-	c := corestr.New.Collection.Strings([]string{"a"})
-	c.Dispose()
-	actual := args.Map{"ok": true}
-	expected := args.Map{"ok": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Dispose", actual)
+	safeTest(t, "Test_I32_Collection_Dispose", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		c.Dispose()
+		actual := args.Map{"ok": true}
+		expected := args.Map{"ok": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Dispose", actual)
+	})
 }
 
 func Test_I32_Collection_Dispose_Nil(t *testing.T) {
-	var c *corestr.Collection
-	c.Dispose() // should not panic
-	actual := args.Map{"ok": true}
-	expected := args.Map{"ok": true}
-	expected.ShouldBeEqual(t, 0, "Collection returns nil -- Dispose nil", actual)
+	safeTest(t, "Test_I32_Collection_Dispose_Nil", func() {
+		var c *corestr.Collection
+		c.Dispose() // should not panic
+		actual := args.Map{"ok": true}
+		expected := args.Map{"ok": true}
+		expected.ShouldBeEqual(t, 0, "Collection returns nil -- Dispose nil", actual)
+	})
 }

@@ -57,7 +57,7 @@ var covS07GetCharTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetCharOf returns first byte -- non-empty string",
 		ArrangeInput: args.Map{
-			"input":   "world",
+			"input":    "world",
 			"useGetOf": true,
 		},
 		ExpectedInput: args.Map{
@@ -67,7 +67,7 @@ var covS07GetCharTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetCharOf returns emptyChar -- empty string",
 		ArrangeInput: args.Map{
-			"input":   "",
+			"input":    "",
 			"useGetOf": true,
 		},
 		ExpectedInput: args.Map{
@@ -115,7 +115,7 @@ var covS07HasTestCases = []coretestcases.CaseV1{
 	{
 		Title: "Has returns true -- item exists",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple", "banana"},
+			"items":    []string{"apple", "banana"},
 			"checkStr": "apple",
 		},
 		ExpectedInput: args.Map{
@@ -125,7 +125,7 @@ var covS07HasTestCases = []coretestcases.CaseV1{
 	{
 		Title: "Has returns false -- item missing",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple"},
+			"items":    []string{"apple"},
 			"checkStr": "banana",
 		},
 		ExpectedInput: args.Map{
@@ -145,7 +145,7 @@ var covS07HasTestCases = []coretestcases.CaseV1{
 	{
 		Title: "Has returns false -- char group exists but item not in it",
 		ArrangeInput: args.Map{
-			"items":   []string{"alpha"},
+			"items":    []string{"alpha"},
 			"checkStr": "avocado",
 		},
 		ExpectedInput: args.Map{
@@ -159,18 +159,18 @@ var covS07HasWithHashsetTestCases = []coretestcases.CaseV1{
 	{
 		Title: "HasWithHashset returns true with hashset -- item exists",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple", "avocado"},
+			"items":    []string{"apple", "avocado"},
 			"checkStr": "apple",
 		},
 		ExpectedInput: args.Map{
-			"found":       true,
-			"hsNotNil":    true,
+			"found":    true,
+			"hsNotNil": true,
 		},
 	},
 	{
 		Title: "HasWithHashset returns false -- char missing",
 		ArrangeInput: args.Map{
-			"items":   []string{"apple"},
+			"items":    []string{"apple"},
 			"checkStr": "banana",
 		},
 		ExpectedInput: args.Map{
@@ -353,7 +353,7 @@ var covS07IsEqualsTestCases = []coretestcases.CaseV1{
 	{
 		Title: "IsEquals returns false -- nil other",
 		ArrangeInput: args.Map{
-			"items1":     []string{"apple"},
+			"items1":      []string{"apple"},
 			"useNilOther": true,
 		},
 		ExpectedInput: args.Map{
@@ -383,7 +383,7 @@ var covS07IsEqualsTestCases = []coretestcases.CaseV1{
 	{
 		Title: "IsEquals returns false -- one empty one not",
 		ArrangeInput: args.Map{
-			"items1":   []string{"apple"},
+			"items1":    []string{"apple"},
 			"useEmpty2": true,
 		},
 		ExpectedInput: args.Map{
@@ -420,8 +420,8 @@ var covS07GetHashsetTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetHashset returns hashset -- char exists",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "a-test",
+			"items":           []string{"apple"},
+			"checkStr":        "a-test",
 			"isAddNewOnEmpty": false,
 		},
 		ExpectedInput: args.Map{
@@ -431,8 +431,8 @@ var covS07GetHashsetTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetHashset returns nil -- char missing no-add",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "z-test",
+			"items":           []string{"apple"},
+			"checkStr":        "z-test",
 			"isAddNewOnEmpty": false,
 		},
 		ExpectedInput: args.Map{
@@ -442,8 +442,8 @@ var covS07GetHashsetTestCases = []coretestcases.CaseV1{
 	{
 		Title: "GetHashset creates new -- char missing with add",
 		ArrangeInput: args.Map{
-			"items":          []string{"apple"},
-			"checkStr":       "z-test",
+			"items":           []string{"apple"},
+			"checkStr":        "z-test",
 			"isAddNewOnEmpty": true,
 		},
 		ExpectedInput: args.Map{
@@ -557,7 +557,7 @@ var covS07AddSameCharsCollTestCases = []coretestcases.CaseV1{
 	{
 		Title: "AddSameCharsCollection returns existing -- char exists nil collection",
 		ArrangeInput: args.Map{
-			"initialItems":   []string{"apple"},
+			"initialItems":    []string{"apple"},
 			"useNilCollToAdd": true,
 		},
 		ExpectedInput: args.Map{
@@ -567,9 +567,9 @@ var covS07AddSameCharsCollTestCases = []coretestcases.CaseV1{
 	{
 		Title: "AddSameCharsCollection creates new empty -- char missing nil collection",
 		ArrangeInput: args.Map{
-			"initialItems":   []string{"banana"},
+			"initialItems":    []string{"banana"},
 			"useNilCollToAdd": true,
-			"checkStr":       "apple",
+			"checkStr":        "apple",
 		},
 		ExpectedInput: args.Map{
 			"hsNotNil": true,

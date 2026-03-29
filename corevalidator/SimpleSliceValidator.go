@@ -22,10 +22,15 @@ func (it *SimpleSliceValidator) SetActual(lines []string) *SimpleSliceValidator 
 }
 
 func (it *SimpleSliceValidator) SliceValidator() *SliceValidator {
+	var actualLines []string
+	if it.actual != nil {
+		actualLines = it.actual.Strings()
+	}
+
 	sliceValidator := SliceValidator{
 		CompareAs:     it.CompareAs,
 		Condition:     it.Condition,
-		ActualLines:   it.actual.Strings(),
+		ActualLines:   actualLines,
 		ExpectedLines: it.Expected.Strings(),
 	}
 

@@ -21,7 +21,7 @@ func (it *Info) JsonParseSelfInject(
 	return jsonResult.Deserialize(it)
 }
 
-func (it Info) JsonString() string {
+func (it *Info) JsonString() string {
 	if it.IsNull() {
 		return ""
 	}

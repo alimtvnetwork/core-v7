@@ -137,16 +137,6 @@ func (it *Key) onCompleteCompileInternalStrings(
 	return strings.Join(compiledTerms, joiner)
 }
 
-func (it *Key) compileSingleItem(
-	item string,
-) string {
-	if it.option.IsUseBrackets {
-		return it.option.StartBracket + item + it.option.EndBracket
-	}
-
-	return item
-}
-
 // CompileReplaceCurlyKeyMap
 //
 // Keys will be converted to {Key} then replaced
@@ -268,10 +258,6 @@ func (it *Key) JoinUsingOption(
 }
 
 func (it *Key) compileCompleteAdditional(joiner string, items ...any) string {
-	if len(items) == 0 {
-		return constants.EmptyString
-	}
-
 	finalSlice := make([]string, 0, len(items))
 	finalSlice = appendAnyItemsWithBaseStrings(
 		it.option.IsSkipEmptyEntry,
@@ -282,10 +268,6 @@ func (it *Key) compileCompleteAdditional(joiner string, items ...any) string {
 }
 
 func (it *Key) compileCompleteAdditionalStrings(joiner string, items ...string) string {
-	if len(items) == 0 {
-		return constants.EmptyString
-	}
-
 	finalSlice := make([]string, 0, len(items))
 	finalSlice = stringslice.AppendStringsWithMainSlice(
 		it.option.IsSkipEmptyEntry,

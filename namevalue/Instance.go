@@ -16,7 +16,7 @@ func (it *Instance[K, V]) IsNull() bool {
 	return it == nil
 }
 
-func (it Instance[K, V]) String() string {
+func (it *Instance[K, V]) String() string {
 	if it.IsNull() {
 		return constants.EmptyString
 	}
@@ -27,7 +27,7 @@ func (it Instance[K, V]) String() string {
 		it.Value)
 }
 
-func (it Instance[K, V]) JsonString() string {
+func (it *Instance[K, V]) JsonString() string {
 	if it.IsNull() {
 		return constants.EmptyString
 	}

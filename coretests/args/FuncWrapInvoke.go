@@ -15,7 +15,7 @@ import (
 // VoidCallNoReturn invokes the function ignoring return values.
 func (it *FuncWrap[T]) VoidCallNoReturn(args ...any) (processingErr error) {
 	it.MustBeValid()
-	_, err := it.Invoke(args)
+	_, err := it.Invoke(args...)
 
 	return err
 }
@@ -132,7 +132,7 @@ func (it *FuncWrap[T]) InvokeFirstAndError(
 	}
 
 	first := results[0]
-	second := results[1].(error)
+	second, _ := results[1].(error)
 
 	return first, second, processingErr
 }
