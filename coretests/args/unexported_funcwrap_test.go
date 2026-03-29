@@ -1,7 +1,6 @@
 package args
 
 import (
-	"errors"
 	"fmt"
 	"testing"
 )
