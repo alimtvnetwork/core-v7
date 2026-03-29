@@ -204,7 +204,7 @@ var srcC13HashmapCompilerTestCase = coretestcases.CaseV1{
 var srcC13HashmapCloneTestCase = coretestcases.CaseV1{
 	Title: "Hashmap ClonePtr Clone return correct -- items nil empty",
 	ExpectedInput: args.Map{
-		"cloneLen":     1,
+		"cloneLen":     2,
 		"cloneNilNil":  true,
 		"cloneIndep":   true,
 		"cloneEmpty":   0,

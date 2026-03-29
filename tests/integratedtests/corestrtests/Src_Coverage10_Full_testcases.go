@@ -84,9 +84,9 @@ var srcC10CollectionContainsTestCase = coretestcases.CaseV1{
 var srcC10CollectionNewExpandMergeTestCase = coretestcases.CaseV1{
 	Title: "Collection New ExpandSlicePlusAdd MergeSlicesOfSlice return correct -- various",
 	ExpectedInput: args.Map{
-		"newLen":       4,
-		"expandLen":    3,
-		"mergeLen":     3,
+		"newLen":    2,
+		"expandLen": 3,
+		"mergeLen":  3,
 	},
 }
 

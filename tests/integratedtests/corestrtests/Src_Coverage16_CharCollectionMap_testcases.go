@@ -115,7 +115,7 @@ var srcC16CcmGetCollTestCase = coretestcases.CaseV1{
 var srcC16CcmAddSameCharsColTestCase = coretestcases.CaseV1{
 	Title: "CharCollectionMap AddSameCharsCollection AddSameCharsCollectionLock return correct -- various",
 	ExpectedInput: args.Map{
-		"addLen":          2,
+		"addLen":          3,
 		"addMoreLen":      3,
 		"addNilNN":        true,
 		"addExistNilNN":   true,

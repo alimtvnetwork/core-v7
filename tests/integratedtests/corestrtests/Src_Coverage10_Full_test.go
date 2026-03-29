@@ -687,7 +687,7 @@ func Test_SrcC10_Hashmap_Set_Verification(t *testing.T) {
 		hm2.SetTrim(" a ", " 1 ")
 		trimVal, _ := hm2.GetValue("a")
 		hm3 := corestr.New.Hashmap.Cap(5)
-		hm3.SetBySplitter("key=value", "=")
+		hm3.SetBySplitter("=", "key=value")
 		splitVal, _ := hm3.GetValue("key")
 		actual := args.Map{
 			"setLen":   hm1.Length(),

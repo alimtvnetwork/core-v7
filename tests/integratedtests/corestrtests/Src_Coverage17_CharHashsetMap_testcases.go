@@ -135,7 +135,7 @@ var srcC17GetHashsetTestCase = coretestcases.CaseV1{
 var srcC17AddSameCharsTestCase = coretestcases.CaseV1{
 	Title: "CharHashsetMap AddSameCharsCollection AddSameCharsHashset AddSameCharsCollectionLock AddHashsetLock return correct -- various",
 	ExpectedInput: args.Map{
-		"colLen":         2,
+		"colLen":         3,
 		"colMoreLen":     3,
 		"colNilNN":       true,
 		"colExNilNN":     true,

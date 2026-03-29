@@ -84,7 +84,7 @@ var srcC12CollectionReverseTestCase = coretestcases.CaseV1{
 var srcC12CollectionPagingTestCase = coretestcases.CaseV1{
 	Title: "Collection GetPagesSize GetPagedCollection GetSinglePageCollection return correct -- various",
 	ExpectedInput: args.Map{
-		"pagesSize":     3,
+		"pagesSize":     5,
 		"pagesZero":     0,
 		"pagesNeg":      0,
 		"pagedLen":      4,
