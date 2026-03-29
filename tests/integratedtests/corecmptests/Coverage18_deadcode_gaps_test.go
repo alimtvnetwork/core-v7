@@ -1,0 +1,398 @@
+package corecmptests
+
+import (
+	"testing"
+	"time"
+
+	"github.com/alimtvnetwork/core/corecmp"
+	"github.com/alimtvnetwork/core/corecomparator"
+)
+
+// ══════════════════════════════════════════════════════════════════════════════
+// DEAD CODE DOCUMENTATION
+//
+// The following functions all have a final `return corecomparator.NotEqual`
+// that is UNREACHABLE because the preceding if-else chain exhausts all
+// possibilities (==, <, >):
+//
+//   - Byte (line 14)
+//   - Integer (line 14)
+//   - Integer8 (line 14)
+//   - Integer16 (line 14)
+//   - Integer32 (line 14)
+//   - Integer64 (line 14)
+//   - Time (line 18)
+//   - VersionSliceByte (line 41)
+//   - VersionSliceInteger (line 41)
+//
+// These are defensive fallbacks that can never execute. All reachable
+// branches are tested below.
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ---------- Byte ----------
+
+func Test_Cov18_Byte_Equal(t *testing.T) {
+	// Arrange
+	var a, b byte = 5, 5
+
+	// Act
+	result := corecmp.Byte(a, b)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Byte_LeftLess(t *testing.T) {
+	// Arrange
+	var a, b byte = 3, 7
+
+	// Act
+	result := corecmp.Byte(a, b)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Byte_LeftGreater(t *testing.T) {
+	// Arrange
+	var a, b byte = 9, 2
+
+	// Act
+	result := corecmp.Byte(a, b)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Integer ----------
+
+func Test_Cov18_Integer_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer(10, 10)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Integer_LeftLess(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer(1, 10)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Integer_LeftGreater(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer(10, 1)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Integer8 ----------
+
+func Test_Cov18_Integer8_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer8(5, 5)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Integer8_LeftLess(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer8(1, 5)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Integer8_LeftGreater(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer8(5, 1)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Integer16 ----------
+
+func Test_Cov18_Integer16_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer16(100, 100)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Integer16_LeftLess(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer16(10, 100)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Integer16_LeftGreater(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer16(100, 10)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Integer32 ----------
+
+func Test_Cov18_Integer32_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer32(1000, 1000)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Integer32_LeftLess(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer32(100, 1000)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Integer32_LeftGreater(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer32(1000, 100)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Integer64 ----------
+
+func Test_Cov18_Integer64_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer64(10000, 10000)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Integer64_LeftLess(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer64(1000, 10000)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Integer64_LeftGreater(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.Integer64(10000, 1000)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- Time ----------
+
+func Test_Cov18_Time_Equal(t *testing.T) {
+	// Arrange
+	now := time.Now()
+
+	// Act
+	result := corecmp.Time(now, now)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_Time_LeftLess(t *testing.T) {
+	// Arrange
+	earlier := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
+	later := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
+
+	// Act
+	result := corecmp.Time(earlier, later)
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_Time_LeftGreater(t *testing.T) {
+	// Arrange
+	earlier := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
+	later := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
+
+	// Act
+	result := corecmp.Time(later, earlier)
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- VersionSliceByte ----------
+
+func Test_Cov18_VersionSliceByte_BothNil(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte(nil, nil)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_VersionSliceByte_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2, 3})
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_VersionSliceByte_LeftLess_ByElement(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte([]byte{1, 1}, []byte{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_VersionSliceByte_LeftGreater_ByElement(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte([]byte{1, 3}, []byte{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+func Test_Cov18_VersionSliceByte_LeftLess_ByLength(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte([]byte{1, 2}, []byte{1, 2, 3})
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_VersionSliceByte_LeftGreater_ByLength(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+// ---------- VersionSliceInteger ----------
+
+func Test_Cov18_VersionSliceInteger_BothNil(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger(nil, nil)
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_VersionSliceInteger_Equal(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2, 3})
+
+	// Assert
+	if result != corecomparator.Equal {
+		t.Fatal("expected Equal")
+	}
+}
+
+func Test_Cov18_VersionSliceInteger_LeftLess_ByElement(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger([]int{1, 1}, []int{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_VersionSliceInteger_LeftGreater_ByElement(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger([]int{1, 3}, []int{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
+
+func Test_Cov18_VersionSliceInteger_LeftLess_ByLength(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger([]int{1, 2}, []int{1, 2, 3})
+
+	// Assert
+	if result != corecomparator.LeftLess {
+		t.Fatal("expected LeftLess")
+	}
+}
+
+func Test_Cov18_VersionSliceInteger_LeftGreater_ByLength(t *testing.T) {
+	// Arrange & Act
+	result := corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2})
+
+	// Assert
+	if result != corecomparator.LeftGreater {
+		t.Fatal("expected LeftGreater")
+	}
+}
