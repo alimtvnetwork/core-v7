@@ -1609,8 +1609,9 @@ function copyForAI(){
                 Write-Host "  │  $($entry2.Pct)%`t$($entry2.Name)" -ForegroundColor $color
             }
             Write-Host "  │" -ForegroundColor Cyan
-            if ($totalLine) {
-                Write-Host "  │  $totalLine" -ForegroundColor Cyan
+            if ($totalLine -and $totalLine -match "(\d+\.\d+)%") {
+                $totalPctDisplay = $Matches[1]
+                Write-Host "  │  total: (statements)  $totalPctDisplay%" -ForegroundColor Cyan
             }
             if ($lowCovFuncs.Count -gt 0) {
                 Write-Host "  │  ⚠ $($lowCovFuncs.Count) function(s) below 50% coverage" -ForegroundColor Yellow
@@ -1993,8 +1994,9 @@ function Invoke-PackageTestCoverage {
         Set-Content -Path $coverSummary -Value ($summaryLines -join "`n") -Encoding UTF8
 
         Write-Host ""
-        if ($totalLine) {
-            Write-Host "  $totalLine" -ForegroundColor Cyan
+        if ($totalLine -and $totalLine -match "(\d+\.\d+)%") {
+            $totalPctDisplay2 = $Matches[1]
+            Write-Host "  total: (statements)  $totalPctDisplay2%" -ForegroundColor Cyan
         }
         Write-Host ""
         Write-Success "Coverage profile:  $coverProfile"
