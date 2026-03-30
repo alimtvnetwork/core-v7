@@ -2106,6 +2106,58 @@ function Invoke-PackageTestCoverage {
             Write-Host "  ⚠ $($lowCovFuncs.Count) function(s) below 50% coverage" -ForegroundColor Yellow
         }
 
+        # ── Coverage Comparison (dashboard diff) ──
+        if (Get-Command Write-CoverageComparison -ErrorAction SilentlyContinue) {
+            # Build current coverage array from funcOutput lines
+            $currentCovData = @()
+            foreach ($fLine in $funcOutput) {
+                if ($fLine -match "^(.+?):\s+\S+\s+(\d+\.\d+)%\s*$" -and $fLine -notmatch "^total:") {
+                    # Extract source package name from path
+                    $fPath = $Matches[1]
+                    $fPct = [double]$Matches[2]
+                    if ($fPath -match '/([^/]+)/[^/]+$') {
+                        $srcPkg = $Matches[1]
+                    } else {
+                        $srcPkg = $fPath
+                    }
+                    # We'll aggregate below
+                }
+            }
+            # Simpler: use totalLine for single-package, build from funcOutput aggregated by source pkg
+            $srcPkgMap = @{}
+            foreach ($fLine in $funcOutput) {
+                if ($fLine -match "^(\S+):\s+(\S+)\s+(\d+\.\d+)%\s*$" -and $fLine -notmatch "^total:") {
+                    $filePath = $Matches[1]
+                    $fPct = [double]$Matches[3]
+                    # Extract package from file path (e.g. github.com/org/repo/pkg/file.go → pkg)
+                    $pathParts = $filePath -split '/'
+                    $srcPkg = $pathParts[-2]  # directory containing the file
+                    if (-not $srcPkgMap.ContainsKey($srcPkg)) {
+                        $srcPkgMap[$srcPkg] = [System.Collections.Generic.List[double]]::new()
+                    }
+                    $srcPkgMap[$srcPkg].Add($fPct)
+                }
+            }
+            $currentCovData = @($srcPkgMap.GetEnumerator() | ForEach-Object {
+                $avg = ($_.Value | Measure-Object -Average).Average
+                @{ Package = $_.Key; Coverage = [math]::Round($avg, 1) }
+            })
+
+            if ($currentCovData.Count -gt 0) {
+                $previousCovData = $null
+                if (Get-Command Load-CoverageSnapshot -ErrorAction SilentlyContinue) {
+                    $previousCovData = Load-CoverageSnapshot
+                }
+
+                Write-Host ""
+                Write-CoverageComparison -Current $currentCovData -Previous $previousCovData
+
+                if (Get-Command Save-CoverageSnapshot -ErrorAction SilentlyContinue) {
+                    Save-CoverageSnapshot -CoverageData $currentCovData
+                }
+            }
+        }
+
         # ── Generate AI coverage prompts (per-package) ──────────────
         $promptScript = Join-Path $PSScriptRoot "scripts" "coverage" "Generate-CoveragePrompts.ps1"
         if (Test-Path $promptScript) {
