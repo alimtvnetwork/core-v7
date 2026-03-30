@@ -2486,6 +2486,21 @@ function Invoke-PreCommitCheck {
     $jsonReport | ConvertTo-Json -Depth 5 | Set-Content -Path $jsonPath -Encoding UTF8
     Write-Host "  Report → $jsonPath" -ForegroundColor Gray
 
+    # Register compile check phase
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+        if ($allPassed) {
+            Register-Phase "API Compile Check" "pass" "$passedCount/$($goTestPkgs.Count) passed"
+        } else {
+            Register-Phase "API Compile Check" "fail" "$($failures.Count) failed, $passedCount passed"
+        }
+    }
+
+    # ── Dashboard Phase Summary ──
+    if (Get-Command Write-PhaseSummaryBox -ErrorAction SilentlyContinue) {
+        Write-Host ""
+        Write-PhaseSummaryBox
+    }
+
     if (-not $allPassed) { exit 1 }
 }
 
