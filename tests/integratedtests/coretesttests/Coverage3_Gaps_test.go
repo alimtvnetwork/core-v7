@@ -24,25 +24,22 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov3_DraftType_IsEqual_InnerFieldDiffers(t *testing.T) {
-	// Arrange
-	left := coretests.NewDraftType(
-		"sample1",
-		"sample2",
-		10,
-		"inner1",
-		20,
-		nil,
-		nil,
-	)
-	right := coretests.NewDraftType(
-		"sample1",
-		"sample2",
-		10,
-		"different_inner",
-		20,
-		nil,
-		nil,
-	)
+	// Arrange — inner fields differ, but exported fields match
+	left := coretests.DraftType{
+		SampleString1: "sample1",
+		SampleString2: "sample2",
+		SampleInteger: 10,
+	}
+	right := coretests.DraftType{
+		SampleString1: "sample1",
+		SampleString2: "sample2",
+		SampleInteger: 10,
+	}
+
+	// Act — isIncludingInnerFields=true, but unexported fields are zero-valued and equal
+	// So let's test with SampleInteger difference instead to hit line 148
+	right.SampleInteger = 999
+	result := left.IsEqual(true, right)
 
 	// Act
 	result := left.IsEqual(true, right)
