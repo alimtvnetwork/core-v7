@@ -2278,10 +2278,13 @@ function Invoke-PreCommitCheck {
         $braceOut = & go run ./scripts/bracecheck/ 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host ($braceOut | Out-String) -ForegroundColor Red
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "fail" "bracecheck failed" }
             Write-Fail "Go syntax check failed. Fix reported issues before PC."
             exit 1
         } else {
-            Write-Success ($braceOut | Out-String).Trim()
+            $braceStr3 = ($braceOut | Out-String).Trim()
+            Write-Success $braceStr3
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "pass" $braceStr3 }
         }
 
         # ── Write syntax-issues.txt report ────────────────────────────
