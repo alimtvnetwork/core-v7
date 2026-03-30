@@ -546,7 +546,7 @@ func Test_Cov11_FuncDetector_GetFuncWrap_FuncWrapPtr(t *testing.T) {
 	fw := args.NewFuncWrap.Default(sampleFunc)
 
 	// Act
-	result := args.FuncDetect.GetFuncWrap(fw)
+	result := args.FuncDetector.GetFuncWrap(fw)
 
 	// Assert
 	convey.Convey("FuncDetector.GetFuncWrap handles *FuncWrapAny input", t, func() {
