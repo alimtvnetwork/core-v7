@@ -17,7 +17,7 @@ import (
 
 func Test_Cov11_FuncMap_Add_Nil(t *testing.T) {
 	// Arrange
-	fm := args.FuncMap(nil)
+	_ = args.FuncMap(nil)
 
 	// The nil-receiver FuncMap.Add does *it = make(...)
 	// This panics because *it on a nil pointer dereferences nil.
