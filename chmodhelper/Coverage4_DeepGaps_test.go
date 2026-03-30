@@ -1393,7 +1393,8 @@ func Test_Cov4_ChmodApplier_RwxPartial_InvalidRwx(t *testing.T) {
 
 func Test_Cov4_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
 	// Arrange & Act — use an invalid variant
-	_, err := New.RwxWrapper.UsingVariantPtr(Variant(255))
+	invalidVariant := Variant("invalid_variant_255")
+	_, err := New.RwxWrapper.UsingVariantPtr(&invalidVariant)
 
 	// Assert
 	if err == nil {
