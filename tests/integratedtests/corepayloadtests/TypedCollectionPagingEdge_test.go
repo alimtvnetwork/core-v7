@@ -9,11 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/errcore"
 )
 
-type testUser struct {
-	Name  string `json:"name"`
-	Email string `json:"email"`
-	Age   int    `json:"age"`
-}
+// testUser is declared in TypedCollection_testcases.go
 
 func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser] {
 	wrappers := make([]*corepayload.TypedPayloadWrapper[testUser], 0, count)
