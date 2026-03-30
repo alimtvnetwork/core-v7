@@ -995,17 +995,32 @@ function Load-CoverageSnapshot {
 
 Returns `@()` if the file does not exist (first run).
 
-### 15.3 Integration in TC
+### 15.3 Integration in TC and PC
 
-At the end of `Invoke-TestCoverage`, after coverage data is collected:
+Both `Invoke-TestCoverage` (TC) and `Invoke-PackageTestCoverage` (PC) wire up the comparison flow after coverage data is collected:
 
 ```powershell
-$prev = Load-CoverageSnapshot
-Write-CoverageComparison -Current $coverageData -Previous $prev
-Save-CoverageSnapshot -CoverageData $coverageData
+if (Get-Command Write-CoverageComparison -ErrorAction SilentlyContinue) {
+    $previousCovData = $null
+    if (Get-Command Load-CoverageSnapshot -ErrorAction SilentlyContinue) {
+        $previousCovData = Load-CoverageSnapshot
+    }
+    Write-CoverageComparison -Current $currentCovData -Previous $previousCovData
+    if (Get-Command Save-CoverageSnapshot -ErrorAction SilentlyContinue) {
+        Save-CoverageSnapshot -CoverageData $currentCovData
+    }
+}
 ```
 
-This gives automatic regression detection on every `./run.ps1 TC` run.
+All calls are guarded per the error-guarding pattern (§17).
+
+- **TC**: builds `$currentCovData` from the `$srcPkgStmts` hashtable (statement-level aggregation).
+- **PC**: aggregates per-source-package coverage from `go tool cover -func` output lines.
+
+> **Console output spec**: The rendered diff table is documented as **Section 4: Coverage Diff** in
+> [`spec/03-powershell-test-run/07-tc-console-output.md`](../03-powershell-test-run/07-tc-console-output.md#section-4-coverage-diff).
+
+This gives automatic regression detection on every `./run.ps1 TC` or `./run.ps1 TCP <pkg>` run.
 
 ### 15.4 Summary Footer
 
