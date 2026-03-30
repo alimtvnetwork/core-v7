@@ -1677,6 +1677,34 @@ function copyForAI(){
             Write-Host "  └─────────────────────────────────────────────────" -ForegroundColor Cyan
         }
 
+        # ── Coverage Comparison (dashboard diff) ──
+        if (Get-Command Write-CoverageComparison -ErrorAction SilentlyContinue) {
+            # Build current coverage array in the format expected by DashboardUI
+            $currentCovData = @()
+            if ($srcPkgStmts.Count -gt 0) {
+                $currentCovData = @($srcPkgStmts.GetEnumerator() | ForEach-Object {
+                    $pctCmp = if ($_.Value.Stmts -gt 0) { [math]::Round(($_.Value.Covered / $_.Value.Stmts) * 100, 1) } else { 0 }
+                    @{ Package = $_.Key; Coverage = $pctCmp }
+                })
+            }
+
+            if ($currentCovData.Count -gt 0) {
+                # Load previous snapshot
+                $previousCovData = $null
+                if (Get-Command Load-CoverageSnapshot -ErrorAction SilentlyContinue) {
+                    $previousCovData = Load-CoverageSnapshot
+                }
+
+                Write-Host ""
+                Write-CoverageComparison -Current $currentCovData -Previous $previousCovData
+
+                # Save current as the new snapshot for next run
+                if (Get-Command Save-CoverageSnapshot -ErrorAction SilentlyContinue) {
+                    Save-CoverageSnapshot -CoverageData $currentCovData
+                }
+            }
+        }
+
         # ── Written Files Summary (console) ──
         # Consolidate ALL build errors: blocked-package compile errors + coverage-run errors
         $buildErrorsFile = Join-Path $coverDir "build-errors.txt"
