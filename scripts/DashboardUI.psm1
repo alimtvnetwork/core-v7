@@ -687,6 +687,12 @@ function Write-Dashboard {
         Write-Host ""
     }
 
+    # §14 Per-package coverage table
+    if ($Data.CoverageData -and $Data.CoverageData.Count -gt 0) {
+        Write-CoverageTable -CoverageData $Data.CoverageData
+        Write-Host ""
+    }
+
     # §12.8 Blocked details
     if ($Data.BlockedDetails -and $Data.BlockedDetails.Count -gt 0) {
         Write-BlockedDetails -BlockedDetails $Data.BlockedDetails
