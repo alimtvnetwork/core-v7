@@ -945,15 +945,16 @@ func Test_CovPL_S3_96_BytesCreateInstruction(t *testing.T) {
 	}
 }
 
+type seg3Stringer struct{ v string }
+
+func (s seg3Stringer) String() string { return s.v }
+
 func Test_CovPL_S3_97_PayloadTypeExpander(t *testing.T) {
-	type localStringer struct{ v string }
 	pe := corepayload.PayloadTypeExpander{
-		CategoryStringer: localStringer{"cat"},
-		TaskTypeStringer: localStringer{"task"},
+		CategoryStringer: seg3Stringer{"cat"},
+		TaskTypeStringer: seg3Stringer{"task"},
 	}
 	if pe.CategoryStringer.String() != "cat" {
 		t.Fatal("expected cat")
 	}
 }
-
-func (s localStringer) String() string { return s.v }
