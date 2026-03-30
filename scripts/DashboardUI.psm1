@@ -883,6 +883,285 @@ function Write-CoverageTable {
     Write-BoxBottom -Width $w
 }
 
+function Write-CoverageComparison {
+    <#
+    .SYNOPSIS
+        Show coverage diff between current and previous run for regression detection.
+        Highlights packages that improved, regressed, became 100%, or dropped from 100%.
+
+    .PARAMETER Current
+        Array of @{ Package = "name"; Coverage = 98.5 } for the current run.
+
+    .PARAMETER Previous
+        Array of @{ Package = "name"; Coverage = 97.2 } for the previous run.
+        If omitted, attempts to load from PreviousJsonPath.
+
+    .PARAMETER PreviousJsonPath
+        Path to a JSON file containing the previous run's per-package coverage array.
+        Each entry should have "Package" and "Coverage" keys.
+
+    .PARAMETER Threshold
+        Minimum absolute change to display a row. Default: 0.0 (show all changes).
+
+    .PARAMETER Title
+        Box title. Default: "C O V E R A G E   D I F F"
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [array]$Current,
+
+        [array]$Previous,
+
+        [string]$PreviousJsonPath,
+
+        [double]$Threshold = 0.0,
+
+        [string]$Title = "C O V E R A G E   D I F F"
+    )
+
+    # Load previous from JSON if not passed directly
+    if ((-not $Previous -or $Previous.Count -eq 0) -and $PreviousJsonPath -and (Test-Path $PreviousJsonPath)) {
+        try {
+            $Previous = Get-Content $PreviousJsonPath -Raw | ConvertFrom-Json
+        } catch {
+            Write-Host "  $($script:cYellow)⚠$($script:cReset) $($script:cMuted)Could not load previous coverage from: $PreviousJsonPath$($script:cReset)"
+            return
+        }
+    }
+
+    if (-not $Previous -or $Previous.Count -eq 0) {
+        Write-Host "  $($script:cMuted)No previous coverage data available for comparison.$($script:cReset)"
+        return
+    }
+
+    # Build lookup maps
+    $prevMap = @{}
+    foreach ($entry in $Previous) {
+        $prevMap[$entry.Package] = [double]$entry.Coverage
+    }
+    $currMap = @{}
+    foreach ($entry in $Current) {
+        $currMap[$entry.Package] = [double]$entry.Coverage
+    }
+
+    # Compute diffs
+    $diffs = [System.Collections.Generic.List[hashtable]]::new()
+    $allPackages = @($currMap.Keys) + @($prevMap.Keys) | Sort-Object -Unique
+
+    foreach ($pkg in $allPackages) {
+        $hasCurr = $currMap.ContainsKey($pkg)
+        $hasPrev = $prevMap.ContainsKey($pkg)
+        $curr = if ($hasCurr) { $currMap[$pkg] } else { $null }
+        $prev = if ($hasPrev) { $prevMap[$pkg] } else { $null }
+
+        if ($null -ne $curr -and $null -ne $prev) {
+            $delta = $curr - $prev
+            if ([math]::Abs($delta) -ge $Threshold) {
+                $diffs.Add(@{
+                    Package  = $pkg
+                    Current  = $curr
+                    Previous = $prev
+                    Delta    = $delta
+                    Status   = if ($delta -gt 0) { "up" } elseif ($delta -lt 0) { "down" } else { "same" }
+                })
+            }
+        } elseif ($null -ne $curr -and $null -eq $prev) {
+            $diffs.Add(@{
+                Package  = $pkg
+                Current  = $curr
+                Previous = $null
+                Delta    = $null
+                Status   = "new"
+            })
+        } elseif ($null -eq $curr -and $null -ne $prev) {
+            $diffs.Add(@{
+                Package  = $pkg
+                Current  = $null
+                Previous = $prev
+                Delta    = $null
+                Status   = "removed"
+            })
+        }
+    }
+
+    if ($diffs.Count -eq 0) {
+        Write-Host "  $($script:cLime)✓$($script:cReset) $($script:cMuted)No coverage changes detected.$($script:cReset)"
+        return
+    }
+
+    # Sort: regressions first (most negative), then improvements
+    $sorted = $diffs | Sort-Object { if ($null -ne $_.Delta) { $_.Delta } else { -999 } }
+
+    # Column widths
+    $pkgCol   = 24
+    $prevCol  = 7   # "100.0%"
+    $currCol  = 7
+    $deltaCol = 8   # "+10.0%" or " NEW"
+    $w = [math]::Max($script:BoxWidth, $pkgCol + $prevCol + $currCol + $deltaCol + 8)
+
+    # Render
+    Write-BoxTop -Width $w
+    Write-BoxLineCenter -Text $Title -Width $w
+    Write-BoxDivider -Width $w
+    Write-BoxEmptyLine -Width $w
+
+    # Column headers
+    $hPkg   = "Package".PadRight($pkgCol)
+    $hPrev  = "Prev".PadLeft($prevCol)
+    $hCurr  = "Curr".PadLeft($currCol)
+    $hDelta = "Delta".PadLeft($deltaCol)
+    $hdrVisLen = 1 + $pkgCol + 1 + $prevCol + 1 + $currCol + 1 + $deltaCol
+    Write-BoxLine -Content "$($script:cMuted)$hPkg $hPrev $hCurr $hDelta$($script:cReset)" -Width $w -VisualLength $hdrVisLen
+    Write-BoxLine -Content "$($script:cMuted)$("─" * $pkgCol) $("─" * $prevCol) $("─" * $currCol) $("─" * $deltaCol)$($script:cReset)" -Width $w -VisualLength $hdrVisLen
+
+    # Counters
+    $regressions  = 0
+    $improvements = 0
+    $newPkgs      = 0
+    $lost100      = 0
+    $gained100    = 0
+
+    foreach ($d in $sorted) {
+        $pkg = "$($d.Package)"
+        if ($pkg.Length -gt $pkgCol) { $pkg = $pkg.Substring(0, $pkgCol - 2) + ".." }
+        $pkgStr = $pkg.PadRight($pkgCol)
+
+        # Previous column
+        $prevStr = if ($null -ne $d.Previous) { ("{0:F1}%" -f $d.Previous).PadLeft($prevCol) } else { "—".PadLeft($prevCol) }
+
+        # Current column
+        $currStr = if ($null -ne $d.Current) { ("{0:F1}%" -f $d.Current).PadLeft($currCol) } else { "—".PadLeft($currCol) }
+
+        # Delta column + row color
+        switch ($d.Status) {
+            "up" {
+                $improvements++
+                $deltaStr = ("+{0:F1}%" -f $d.Delta).PadLeft($deltaCol)
+                $icon = "▲"
+                $rowColor = $script:cLime
+                if ($d.Current -ge 100.0 -and $d.Previous -lt 100.0) { $gained100++ }
+            }
+            "down" {
+                $regressions++
+                $deltaStr = ("{0:F1}%" -f $d.Delta).PadLeft($deltaCol)
+                $icon = "▼"
+                $rowColor = $script:cRed
+                if ($d.Previous -ge 100.0 -and $d.Current -lt 100.0) { $lost100++ }
+            }
+            "same" {
+                $deltaStr = "0.0%".PadLeft($deltaCol)
+                $icon = "─"
+                $rowColor = $script:cMuted
+            }
+            "new" {
+                $newPkgs++
+                $deltaStr = "NEW".PadLeft($deltaCol)
+                $icon = "★"
+                $rowColor = $script:cCyan
+            }
+            "removed" {
+                $deltaStr = "GONE".PadLeft($deltaCol)
+                $icon = "✗"
+                $rowColor = $script:cYellow
+            }
+        }
+
+        $rowContent = "$rowColor$icon $pkgStr$($script:cReset) $($script:cMuted)$prevStr$($script:cReset) $rowColor$currStr$($script:cReset) $rowColor$deltaStr$($script:cReset)"
+        $rowVisLen = 2 + $pkgCol + 1 + $prevCol + 1 + $currCol + 1 + $deltaCol
+        Write-BoxLine -Content $rowContent -Width $w -VisualLength $rowVisLen
+    }
+
+    Write-BoxEmptyLine -Width $w
+    Write-BoxDivider -Width $w
+    Write-BoxEmptyLine -Width $w
+
+    # Summary
+    $summaryPad = $pkgCol + 2
+    $line1 = "".PadRight(1)
+    if ($regressions -gt 0) {
+        $line1 += "$($script:cRed)▼ $regressions regressions$($script:cReset)"
+    } else {
+        $line1 += "$($script:cLime)✓ 0 regressions$($script:cReset)"
+    }
+    $line1 += "  $($script:cLime)▲ $improvements improved$($script:cReset)"
+    if ($newPkgs -gt 0) {
+        $line1 += "  $($script:cCyan)★ $newPkgs new$($script:cReset)"
+    }
+    Write-BoxLine -Content $line1 -Width $w -VisualLength ($summaryPad + 40)
+
+    if ($lost100 -gt 0) {
+        Write-BoxLine -Content " $($script:cRed)$($script:cBold)⚠ $lost100 package(s) dropped from 100%$($script:cReset)" -Width $w -VisualLength ($summaryPad + 35)
+    }
+    if ($gained100 -gt 0) {
+        Write-BoxLine -Content " $($script:cLime)★ $gained100 package(s) reached 100%$($script:cReset)" -Width $w -VisualLength ($summaryPad + 30)
+    }
+
+    Write-BoxEmptyLine -Width $w
+    Write-BoxBottom -Width $w
+}
+
+function Save-CoverageSnapshot {
+    <#
+    .SYNOPSIS
+        Save current coverage data as JSON for future comparison.
+    .PARAMETER CoverageData
+        Array of @{ Package = "name"; Coverage = 98.5 }.
+    .PARAMETER Path
+        Output JSON file path. Default: data/coverage/coverage-previous.json
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][array]$CoverageData,
+        [string]$Path
+    )
+
+    if (-not $Path) {
+        $Path = Join-Path $PSScriptRoot ".." "data" "coverage" "coverage-previous.json"
+    }
+
+    $dir = Split-Path $Path -Parent
+    if ($dir -and -not (Test-Path $dir)) {
+        New-Item -ItemType Directory -Path $dir -Force | Out-Null
+    }
+
+    $snapshot = @{
+        timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ")
+        packages  = $CoverageData
+    }
+
+    $snapshot | ConvertTo-Json -Depth 5 | Set-Content -Path $Path -Encoding UTF8
+    Write-Host "  $($script:cMuted)Coverage snapshot saved → $Path$($script:cReset)"
+}
+
+function Load-CoverageSnapshot {
+    <#
+    .SYNOPSIS
+        Load a previously saved coverage snapshot.
+    .PARAMETER Path
+        JSON file path. Default: data/coverage/coverage-previous.json
+    .OUTPUTS
+        Array of @{ Package = "name"; Coverage = 98.5 } or $null.
+    #>
+    [CmdletBinding()]
+    [OutputType([array])]
+    param([string]$Path)
+
+    if (-not $Path) {
+        $Path = Join-Path $PSScriptRoot ".." "data" "coverage" "coverage-previous.json"
+    }
+
+    if (-not (Test-Path $Path)) { return $null }
+
+    try {
+        $json = Get-Content $Path -Raw | ConvertFrom-Json
+        if ($json.packages) { return $json.packages }
+        return $json
+    } catch {
+        return $null
+    }
+}
+
 # ═══════════════════════════════════════════════════════════════════════════════
 # Module Exports
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -919,8 +1198,11 @@ Export-ModuleMember -Function @(
     'Write-PhaseEnd'
     'Write-PhaseSummaryBox'
 
-    # Coverage table
+    # Coverage
     'Write-CoverageTable'
+    'Write-CoverageComparison'
+    'Save-CoverageSnapshot'
+    'Load-CoverageSnapshot'
 
     # Composite
     'Write-Dashboard'
