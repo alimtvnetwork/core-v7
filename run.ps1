@@ -675,10 +675,12 @@ function Invoke-TestCoverage {
         Write-Host "  Running safeTest boundary + empty-if lint check..." -ForegroundColor Yellow
         & $boundaryScript
         if ($LASTEXITCODE -ne 0) {
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "fail" "boundary check failed" }
             Write-Fail "safeTest boundary check failed. Fix reported issues before TC."
             exit 1
         }
     }
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "pass" "all clean" }
 
     # ── Go auto-fixer ─────────────────────────────────────────────────
     $skipAutofix = $ExtraArgs -and ($ExtraArgs -contains '--no-autofix')
