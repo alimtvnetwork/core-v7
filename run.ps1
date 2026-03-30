@@ -1871,6 +1871,12 @@ function copyForAI(){
     }
     Open-FailingTestsIfAny
 
+    # Register coverage phases
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+        Register-Phase "Coverage Run" "pass" "$($testPkgs.Count) packages"
+        Register-Phase "Coverage Report" "pass" "generated"
+    }
+
     # ── Cleanup split subfolders ──
     if ($splitCleanupDirs.Count -gt 0) {
         Write-Host ""
@@ -1881,6 +1887,12 @@ function copyForAI(){
             }
         }
         Write-Host "  ✓ Split subfolders removed" -ForegroundColor Green
+    }
+
+    # ── Dashboard Phase Summary ──
+    if (Get-Command Write-PhaseSummaryBox -ErrorAction SilentlyContinue) {
+        Write-Host ""
+        Write-PhaseSummaryBox
     }
 }
 
