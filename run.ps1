@@ -712,15 +712,19 @@ function Invoke-TestCoverage {
     # ── Go syntax pre-check (bracecheck) ──────────────────────────────
     if ($skipBrace) {
         # already logged above
+        if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "skip" "skipped (--skip-bracecheck)" }
     } else {
         Write-Host "  Running Go syntax pre-check (bracecheck)..." -ForegroundColor Yellow
         $braceOut = & go run ./scripts/bracecheck/ 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host ($braceOut | Out-String) -ForegroundColor Red
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "fail" "bracecheck failed" }
             Write-Fail "Go syntax check failed. Fix reported issues before TC."
             exit 1
         } else {
-            Write-Success ($braceOut | Out-String).Trim()
+            $braceStr2 = ($braceOut | Out-String).Trim()
+            Write-Success $braceStr2
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "pass" $braceStr2 }
         }
 
         # ── Write syntax-issues.txt report ────────────────────────────
