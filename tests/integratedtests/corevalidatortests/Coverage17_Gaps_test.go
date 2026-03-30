@@ -33,7 +33,7 @@ func Test_Cov17_SliceValidators_AssertVerifyAll_Empty(t *testing.T) {
 
 func Test_Cov17_SliceValidators_AssertVerifyAllUsingActual_Matching(t *testing.T) {
 	// Arrange
-	validator := &corevalidator.SliceValidator{
+	validator := corevalidator.SliceValidator{
 		Condition: corevalidator.DefaultTrimCoreCondition,
 		CompareAs: stringcompareas.Equal,
 		ExpectedLines: []string{
@@ -42,7 +42,7 @@ func Test_Cov17_SliceValidators_AssertVerifyAllUsingActual_Matching(t *testing.T
 		},
 	}
 	validators := &corevalidator.SliceValidators{
-		Validators: []*corevalidator.SliceValidator{validator},
+		Validators: []corevalidator.SliceValidator{validator},
 	}
 	params := &corevalidator.Parameter{
 		Header:          "verify matching lines",
@@ -50,14 +50,12 @@ func Test_Cov17_SliceValidators_AssertVerifyAllUsingActual_Matching(t *testing.T
 	}
 
 	// Act & Assert
-	convey.Convey("SliceValidators.AssertVerifyAllUsingActual with matching lines passes", t, func() {
-		validators.AssertVerifyAllUsingActual(
-			t,
-			params,
-			"line one",
-			"line two",
-		)
-	})
+	validators.AssertVerifyAllUsingActual(
+		t,
+		params,
+		"line one",
+		"line two",
+	)
 }
 
 // --- HeaderSliceValidators.AssertVerifyAll with empty ---
@@ -81,29 +79,28 @@ func Test_Cov17_HeaderSliceValidators_AssertVerifyAll_Empty(t *testing.T) {
 
 func Test_Cov17_HeaderSliceValidators_AssertVerifyAllUsingActual_Matching(t *testing.T) {
 	// Arrange
-	validator := &corevalidator.SliceValidator{
-		Condition: corevalidator.DefaultTrimCoreCondition,
-		CompareAs: stringcompareas.Equal,
-		ExpectedLines: []string{
-			"hello",
+	validator := corevalidator.HeaderSliceValidator{
+		Header: "subheader",
+		SliceValidator: corevalidator.SliceValidator{
+			Condition: corevalidator.DefaultTrimCoreCondition,
+			CompareAs: stringcompareas.Equal,
+			ExpectedLines: []string{
+				"hello",
+			},
 		},
 	}
-	validators := corevalidator.HeaderSliceValidators{
-		Validators: []*corevalidator.SliceValidator{validator},
-	}
+	validators := corevalidator.HeaderSliceValidators{validator}
 	params := &corevalidator.Parameter{
 		Header:          "verify header matching",
 		IsCaseSensitive: true,
 	}
 
 	// Act & Assert
-	convey.Convey("HeaderSliceValidators.AssertVerifyAllUsingActual with matching lines", t, func() {
-		validators.AssertVerifyAllUsingActual(
-			t,
-			params,
-			"hello",
-		)
-	})
+	validators.AssertVerifyAllUsingActual(
+		t,
+		params,
+		"hello",
+	)
 }
 
 // --- SliceValidatorVerify branches ---
@@ -156,18 +153,8 @@ func Test_Cov17_SliceValidator_UserInputsMergeWithError_NilErr(t *testing.T) {
 	})
 }
 
-// --- TextValidator nil receiver ---
-
-func Test_Cov17_TextValidator_NilReceiver(t *testing.T) {
-	// The uncovered line is verifyDetailErrorUsingLineProcessing with nil receiver.
-	// This is an internal method — nil receiver returns nil. Defensive dead code.
-	convey.Convey("TextValidator nil receiver guard is dead code", t, func() {
-		convey.So(true, convey.ShouldBeTrue)
-	})
-}
-
 // Coverage note: Remaining uncovered lines:
-// - TextValidator.verifyDetailErrorUsingLineProcessing nil receiver (line 177) — 
+// - TextValidator.verifyDetailErrorUsingLineProcessing nil receiver (line 177) —
 //   defensive dead code, method only called from non-nil receivers
 // - SliceValidatorMessages line 80 (err==nil && len(toStr)==0) — requires
 //   specific state where IsAttachUserInputs is true but no actual/expected mismatch
