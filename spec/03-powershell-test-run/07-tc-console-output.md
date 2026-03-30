@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `./run.ps1 TC` command produces a clean, structured console output with exactly **four sections**. No per-package compile/test rows are printed — only summaries.
+The `./run.ps1 TC` command produces a clean, structured console output with exactly **five sections**. No per-package compile/test rows are printed — only summaries.
 
 ## Section 1: Build Failure Packages
 
