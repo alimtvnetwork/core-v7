@@ -736,6 +736,148 @@ function Test-DashboardTheme {
 }
 
 # ═══════════════════════════════════════════════════════════════════════════════
+# §14  Per-Package Coverage Results Table
+# ═══════════════════════════════════════════════════════════════════════════════
+
+function Write-CoverageTable {
+    <#
+    .SYNOPSIS
+        Render a bordered per-package coverage table with progress bars.
+        Packages are sorted by coverage % ascending (lowest first).
+
+    .PARAMETER CoverageData
+        Array of hashtables, each with:
+          - Package  [string]  short package name (e.g. "corestr")
+          - Coverage [double]  coverage percentage (0-100)
+          - Tests    [int]     number of tests (optional, for display)
+
+    .PARAMETER Title
+        Box title. Default: "P A C K A G E   C O V E R A G E"
+
+    .PARAMETER ShowTarget
+        If $true, shows a target line at 100%. Default: $true.
+
+    .PARAMETER BarWidth
+        Width of progress bars. Default: 12.
+    #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)]
+        [array]$CoverageData,
+
+        [string]$Title = "P A C K A G E   C O V E R A G E",
+        [bool]$ShowTarget = $true,
+        [int]$BarWidth = 12
+    )
+
+    if (-not $CoverageData -or $CoverageData.Count -eq 0) { return }
+
+    # Sort ascending by coverage (worst first)
+    $sorted = $CoverageData | Sort-Object { [double]$_.Coverage }
+
+    # Column widths
+    $pkgCol   = 24   # package name
+    $pctCol   = 7    # "100.0%"
+    $testCol  = 5    # test count
+
+    # Calculate box width to fit: "║ pkg  pct  bar  tests ║"
+    # 1 + pkgCol + 1 + pctCol + 2 + barWidth + 2 + testCol + 1 = content
+    $contentWidth = 1 + $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol + 1
+    $w = [math]::Max($script:BoxWidth, $contentWidth)
+
+    # Header
+    Write-BoxTop -Width $w
+    Write-BoxLineCenter -Text $Title -Width $w
+    Write-BoxDivider -Width $w
+    Write-BoxEmptyLine -Width $w
+
+    # Column headers
+    $hdrPkg   = "Package".PadRight($pkgCol)
+    $hdrPct   = "Cov %".PadLeft($pctCol)
+    $hdrBar   = "".PadRight($BarWidth)
+    $hdrTests = "Tests".PadLeft($testCol)
+    $hdrLine  = "$($script:cMuted)$hdrPkg $hdrPct  $hdrBar  $hdrTests$($script:cReset)"
+    $hdrVisLen = 1 + $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
+    Write-BoxLine -Content $hdrLine -Width $w -VisualLength $hdrVisLen
+
+    # Separator under headers
+    $sepLine = "$($script:cMuted)$("─" * $pkgCol) $("─" * $pctCol)  $("─" * $BarWidth)  $("─" * $testCol)$($script:cReset)"
+    Write-BoxLine -Content $sepLine -Width $w -VisualLength $hdrVisLen
+
+    # Data rows
+    $totalCoverage = 0.0
+    $at100Count    = 0
+    $below100Count = 0
+
+    foreach ($entry in $sorted) {
+        $pkg = "$($entry.Package)"
+        $cov = [double]$entry.Coverage
+        $tests = if ($null -ne $entry.Tests) { [int]$entry.Tests } else { 0 }
+
+        $totalCoverage += $cov
+        if ($cov -ge 100.0) { $at100Count++ } else { $below100Count++ }
+
+        # Truncate long package names
+        if ($pkg.Length -gt $pkgCol) {
+            $pkg = $pkg.Substring(0, $pkgCol - 2) + ".."
+        }
+        $pkgStr = $pkg.PadRight($pkgCol)
+
+        # Format percentage
+        $pctStr = ("{0:F1}%" -f $cov).PadLeft($pctCol)
+
+        # Color based on coverage level
+        $rowColor = if ($cov -ge 100.0) {
+            $script:cLime
+        } elseif ($cov -ge 98.0) {
+            $script:cWhite
+        } elseif ($cov -ge 95.0) {
+            $script:cYellow
+        } else {
+            $script:cRed
+        }
+
+        # Progress bar
+        $bar = Get-ProgressBar -Score ([int][math]::Round($cov)) -BarWidth $BarWidth
+
+        # Test count
+        $testStr = "$tests".PadLeft($testCol)
+
+        $rowContent = "$rowColor$pkgStr$($script:cReset) $rowColor$pctStr$($script:cReset)  $bar  $($script:cMuted)$testStr$($script:cReset)"
+        $rowVisLen = 1 + $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
+        Write-BoxLine -Content $rowContent -Width $w -VisualLength $rowVisLen
+    }
+
+    Write-BoxEmptyLine -Width $w
+    Write-BoxDivider -Width $w
+    Write-BoxEmptyLine -Width $w
+
+    # Summary row
+    $avgCoverage = if ($sorted.Count -gt 0) { $totalCoverage / $sorted.Count } else { 0 }
+    $summaryLabel = "AVERAGE".PadRight($pkgCol)
+    $summaryPct   = ("{0:F1}%" -f $avgCoverage).PadLeft($pctCol)
+    $summaryBar   = Get-ProgressBar -Score ([int][math]::Round($avgCoverage)) -BarWidth $BarWidth
+    $summaryTests = "$($sorted.Count)".PadLeft($testCol)
+    $summaryVisLen = 1 + $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
+    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$summaryLabel$($script:cReset) $($script:cWhite)$($script:cBold)$summaryPct$($script:cReset)  $summaryBar  $($script:cMuted)$summaryTests$($script:cReset)" -Width $w -VisualLength $summaryVisLen
+
+    # 100% vs below counts
+    $countLabel = "".PadRight($pkgCol)
+    $countText  = "$($script:cLime)$at100Count$($script:cReset)$($script:cMuted) at 100%$($script:cReset)  $($script:cYellow)$below100Count$($script:cReset)$($script:cMuted) below$($script:cReset)"
+    $countVisLen = 1 + $pkgCol + 10 + 10  # approximate
+    Write-BoxLine -Content "$countLabel$countText" -Width $w -VisualLength $countVisLen
+
+    if ($ShowTarget) {
+        $targetLabel = "TARGET".PadRight($pkgCol)
+        $targetText  = "$($script:cLime)$($script:cBold)100.0%$($script:cReset)$($script:cMuted) (non-internal packages)$($script:cReset)"
+        Write-BoxLine -Content "$($script:cWhite)$targetLabel$($script:cReset)$targetText" -Width $w -VisualLength ($pkgCol + 30)
+    }
+
+    Write-BoxEmptyLine -Width $w
+    Write-BoxBottom -Width $w
+}
+
+# ═══════════════════════════════════════════════════════════════════════════════
 # Module Exports
 # ═══════════════════════════════════════════════════════════════════════════════
 
