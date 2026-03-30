@@ -505,10 +505,8 @@ func Test_Cov11_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 
 func Test_Cov11_DynamicFunc_InvokeMust_Valid(t *testing.T) {
 	// Arrange
-	df := &args.DynamicFunc[string]{
-		Params: args.Dynamic[string]{
-			WorkFunc: func() string { return "hello" },
-		},
+	df := &args.DynamicFunc[func() string]{
+		WorkFunc: func() string { return "hello" },
 	}
 
 	// Act & Assert
