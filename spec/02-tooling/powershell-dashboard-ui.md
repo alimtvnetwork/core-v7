@@ -1014,3 +1014,90 @@ The comparison table ends with a summary line:
 ```
   ▲ 3 improved  ▼ 1 regressed  ★ 2 new  ✗ 0 removed  = 12 unchanged
 ```
+
+---
+
+## 16. Phase Tracking Integration (TC & PC)
+
+Both `Invoke-TestCoverage` (TC) and `Invoke-PreCommitCheck` (PC) integrate the phase-tracking system (`Register-Phase` / `Write-PhaseSummaryBox`) to render a bordered execution summary at the end of each run.
+
+### 16.1 Lifecycle
+
+Each command follows the same pattern:
+
+```powershell
+# At the start of the command
+if (Get-Command Reset-Phases -ErrorAction SilentlyContinue) { Reset-Phases }
+
+# After each logical phase completes
+if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+    Register-Phase "<PhaseName>" "<status>" "<detail>"
+}
+
+# At the very end of the command
+if (Get-Command Write-PhaseSummaryBox -ErrorAction SilentlyContinue) {
+    Write-Host ""
+    Write-PhaseSummaryBox
+}
+```
+
+All calls are guarded with `Get-Command ... -ErrorAction SilentlyContinue` so `run.ps1` remains functional even if `DashboardUI.psm1` is not loaded.
+
+### 16.2 TC Phases
+
+`Invoke-TestCoverage` registers **10 phases** in execution order:
+
+| #  | Phase Name       | Possible Statuses        | Detail Examples                              |
+|----|------------------|--------------------------|----------------------------------------------|
+| 1  | Git Pull         | `pass`                   | `pulled from remote`                         |
+| 2  | Dependencies     | `pass`                   | `up to date`                                 |
+| 3  | Data Cleanup     | `pass`                   | `cleaned`                                    |
+| 4  | SafeTest Lint    | `pass`, `fail`           | `all clean` / `boundary check failed`        |
+| 5  | Auto-Fixer       | `pass`, `warn`, `skip`   | `no fixable issues` / `errors encountered` / `skipped (--no-autofix)` |
+| 6  | Syntax Check     | `pass`, `fail`, `skip`   | bracecheck output / `skipped (--skip-bracecheck)` |
+| 7  | Compile Check    | `pass`, `warn`           | `42/42 passed` / `40/42 passed, 2 blocked`   |
+| 8  | Split Recovery   | `pass`, `skip`           | `3 subfolders recovered` / `not needed`      |
+| 9  | Coverage Run     | `pass`, `fail`           | `42 packages` / `no packages to run`         |
+| 10 | Coverage Report  | `pass`                   | coverage summary stats                       |
+
+### 16.3 PC Phases
+
+`Invoke-PreCommitCheck` registers **5 phases** in execution order:
+
+| #  | Phase Name        | Possible Statuses      | Detail Examples                              |
+|----|-------------------|------------------------|----------------------------------------------|
+| 1  | Regression Guard  | `pass`, `fail`         | `no regressions` / `regressions detected`    |
+| 2  | SafeTest Lint     | `pass`, `fail`         | `all clean` / `boundary check failed`        |
+| 3  | Auto-Fixer        | `pass`, `warn`, `skip` | `no fixable issues` / `skipped (--no-autofix)` |
+| 4  | Syntax Check      | `pass`, `fail`, `skip` | bracecheck output / `skipped (--skip-bracecheck)` |
+| 5  | API Compile Check | `pass`, `fail`         | `12/12 passed` / `3 failed, 9 passed`        |
+
+### 16.4 Status-to-Color Mapping
+
+Phase statuses map to design tokens as defined in §8:
+
+| Status | Color    | Icon |
+|--------|----------|------|
+| `pass` | `$cLime` | `✓`  |
+| `fail` | `$cRed`  | `✗`  |
+| `warn` | `$cYellow` | `⚠` |
+| `skip` | `$cMuted`  | `○` |
+
+### 16.5 Example Output
+
+```
+╔══════════════════════════════════════════════════════╗
+║  Phase Summary                                       ║
+╠══════════════════════════════════════════════════════╣
+║  ✓ Git Pull .............. pulled from remote        ║
+║  ✓ Dependencies .......... up to date                ║
+║  ✓ Data Cleanup .......... cleaned                   ║
+║  ✓ SafeTest Lint ......... all clean                 ║
+║  ✓ Auto-Fixer ............ no fixable issues         ║
+║  ✓ Syntax Check .......... all clear                 ║
+║  ✓ Compile Check ......... 42/42 passed              ║
+║  ○ Split Recovery ........ not needed                ║
+║  ✓ Coverage Run .......... 42 packages               ║
+║  ✓ Coverage Report ....... 98.4% average             ║
+╚══════════════════════════════════════════════════════╝
+```
