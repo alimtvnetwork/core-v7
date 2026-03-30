@@ -1003,6 +1003,7 @@ function Invoke-TestCoverage {
         if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
             Register-Phase "Split Recovery" "skip" "not needed"
         }
+    }
 
     # Print blocked summary
     if ($blockedPkgs.Count -gt 0) {
