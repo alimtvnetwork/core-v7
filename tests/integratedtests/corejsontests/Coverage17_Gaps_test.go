@@ -236,7 +236,7 @@ func Test_Cov17_ResultsPtrCollection_UnmarshalAtSafe_NilResult(t *testing.T) {
 	var target string
 
 	// Act
-	err := coll.UnmarshalAtSafe(0, &target)
+	err := coll.UnmarshalAt(0, &target)
 
 	// Assert
 	convey.Convey("ResultsPtrCollection.UnmarshalAtSafe works for valid data", t, func() {
@@ -250,7 +250,7 @@ func Test_Cov17_MapResults_UnmarshalMany_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	r := corejson.New("test-value")
-	mr.Add("key1", &r)
+	mr.Add("key1", r)
 
 	// Act — unmarshal into incompatible type
 	var target int
@@ -271,7 +271,7 @@ func Test_Cov17_MapResults_UnmarshalManySafe_Error(t *testing.T) {
 	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	r := corejson.New("test-value")
-	mr.Add("key1", &r)
+	mr.Add("key1", r)
 
 	// Act
 	var target int

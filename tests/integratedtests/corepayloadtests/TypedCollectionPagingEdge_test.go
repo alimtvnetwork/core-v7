@@ -6,7 +6,37 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/corepayload"
 	"github.com/alimtvnetwork/core/coretests/args"
+	"github.com/alimtvnetwork/core/errcore"
 )
+
+type testUser struct {
+	Name  string `json:"name"`
+	Email string `json:"email"`
+	Age   int    `json:"age"`
+}
+
+func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser] {
+	wrappers := make([]*corepayload.TypedPayloadWrapper[testUser], 0, count)
+
+	for i := 0; i < count; i++ {
+		user := testUser{
+			Name:  fmt.Sprintf("User%d", i),
+			Email: fmt.Sprintf("user%d@test.com", i),
+			Age:   20 + i,
+		}
+
+		typed, err := corepayload.TypedPayloadWrapperNameIdRecord[testUser](
+			user.Name,
+			fmt.Sprintf("user-%d", i),
+			user,
+		)
+		errcore.HandleErr(err)
+
+		wrappers = append(wrappers, typed)
+	}
+
+	return corepayload.TypedPayloadCollectionFrom[testUser](wrappers)
+}
 
 // =============================================================================
 // Tests: GetPagedCollection edge cases

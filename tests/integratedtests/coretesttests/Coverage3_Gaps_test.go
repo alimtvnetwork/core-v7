@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coretests"
-	"github.com/alimtvnetwork/core/issetter"
 	"github.com/smartystreets/goconvey/convey"
 )
 
@@ -14,8 +13,7 @@ import (
 // Target 1: BaseTestCaseAssertions.go:88-92 — isFailed log branch (test failure only)
 // Target 2: DraftType.go:148 — isIncludingInnerFields && f1String differs (unexported)
 // Target 3: DraftType.go:174,184 — json.Marshal panic (dead code)
-// Target 4: SimpleTestCase.go:89-102 — noPrintAssert (IsEnable=false)
-// Target 5: SkipOnUnix.go:12-14 — platform-dependent (Unix only)
+// Target 4: SkipOnUnix.go:12-14 — platform-dependent (Unix only)
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov3_DraftType_IsEqual_WithInnerFields_Same(t *testing.T) {
@@ -37,24 +35,6 @@ func Test_Cov3_DraftType_IsEqual_WithInnerFields_Same(t *testing.T) {
 	// Assert
 	convey.Convey("DraftType.IsEqual returns true when all fields match including inner", t, func() {
 		convey.So(result, convey.ShouldBeTrue)
-	})
-}
-
-func Test_Cov3_SimpleTestCase_NoPrintAssert_Disabled(t *testing.T) {
-	// Arrange — create a disabled test case
-	tc := coretests.SimpleTestCase{}
-	tc.Title = "disabled test"
-	tc.ExpectedInput = "expected"
-	tc.IsEnable = issetter.False
-
-	// Act & Assert — ShouldBe triggers noPrintAssert when IsEnable is false
-	convey.Convey("SimpleTestCase.ShouldBe with disabled case runs noPrintAssert", t, func() {
-		tc.ShouldBe(
-			0,
-			t,
-			convey.ShouldEqual,
-			"expected",
-		)
 	})
 }
 

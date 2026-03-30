@@ -17,7 +17,7 @@ import (
 
 func Test_Cov11_FuncMap_Add_Nil(t *testing.T) {
 	// Arrange
-	fm := args.FuncMap(nil)
+	_ = args.FuncMap(nil)
 
 	// The nil-receiver FuncMap.Add does *it = make(...)
 	// This panics because *it on a nil pointer dereferences nil.
@@ -505,10 +505,8 @@ func Test_Cov11_Dynamic_GetWorkFunc_Nil(t *testing.T) {
 
 func Test_Cov11_DynamicFunc_InvokeMust_Valid(t *testing.T) {
 	// Arrange
-	df := &args.DynamicFunc[string]{
-		Params: args.Dynamic[string]{
-			WorkFunc: func() string { return "hello" },
-		},
+	df := &args.DynamicFunc[func() string]{
+		WorkFunc: func() string { return "hello" },
 	}
 
 	// Act & Assert
