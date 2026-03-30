@@ -83,7 +83,7 @@ func Test_Cov15_RawErrCollection_CompiledJsonStringWithStackTraces_Empty(t *test
 
 func Test_Cov15_RawErrCollection_AddCompiledErrorGetters_NilGetter(t *testing.T) {
 	// Arrange
-	coll := errcore.NewRawErrCollection.Empty()
+	coll := &errcore.RawErrCollection{}
 
 	// Act — pass nil getter
 	coll.AddCompiledErrorGetters(nil)
@@ -96,7 +96,7 @@ func Test_Cov15_RawErrCollection_AddCompiledErrorGetters_NilGetter(t *testing.T)
 
 func Test_Cov15_RawErrCollection_AddCompiledErrorGetters_NoErrorGetter(t *testing.T) {
 	// Arrange
-	coll := errcore.NewRawErrCollection.Empty()
+	coll := &errcore.RawErrCollection{}
 	getter := &mockCompiledErrorGetter{err: nil}
 
 	// Act
@@ -110,7 +110,7 @@ func Test_Cov15_RawErrCollection_AddCompiledErrorGetters_NoErrorGetter(t *testin
 
 func Test_Cov15_RawErrCollection_AddErrorGetters_NilGetter(t *testing.T) {
 	// Arrange
-	coll := errcore.NewRawErrCollection.Empty()
+	coll := &errcore.RawErrCollection{}
 
 	// Act
 	coll.AddErrorGetters(nil)
@@ -123,7 +123,7 @@ func Test_Cov15_RawErrCollection_AddErrorGetters_NilGetter(t *testing.T) {
 
 func Test_Cov15_RawErrCollection_AddErrorGetters_NoErrorGetter(t *testing.T) {
 	// Arrange
-	coll := errcore.NewRawErrCollection.Empty()
+	coll := &errcore.RawErrCollection{}
 	getter := &mockErrorGetter{err: nil}
 
 	// Act
@@ -137,7 +137,7 @@ func Test_Cov15_RawErrCollection_AddErrorGetters_NoErrorGetter(t *testing.T) {
 
 func Test_Cov15_RawErrCollection_LogIf_False(t *testing.T) {
 	// Arrange
-	coll := errcore.NewRawErrCollection.Empty()
+	coll := &errcore.RawErrCollection{}
 	coll.Add(errors.New("test error"))
 
 	// Act & Assert — LogIf(false) should NOT call LogFatal
