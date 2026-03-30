@@ -2191,6 +2191,9 @@ function Invoke-GoConvey {
 function Invoke-PreCommitCheck {
     param([string]$singlePkg)
 
+    # Reset phase tracker for this run
+    if (Get-Command Reset-Phases -ErrorAction SilentlyContinue) { Reset-Phases }
+
     Write-Header "Pre-commit API mismatch checker"
 
     $isSyncMode = $false
