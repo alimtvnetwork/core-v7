@@ -611,13 +611,24 @@ function Invoke-PackageTests([string]$pkg) {
 
 function Invoke-TestCoverage {
     Write-Header "Running tests with coverage"
+
+    # Reset phase tracker for this run
+    if (Get-Command Reset-Phases -ErrorAction SilentlyContinue) { Reset-Phases }
+
     Invoke-FetchLatest
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+        Register-Phase "Git Pull" "pass" "pulled from remote"
+        Register-Phase "Dependencies" "pass" "up to date"
+    }
 
     # Clean data folder before running tests
     $dataDir = Join-Path $PSScriptRoot "data"
     if (Test-Path $dataDir) {
         Remove-Item -Recurse -Force $dataDir
         Write-Host "  Cleaned data/ folder" -ForegroundColor Yellow
+    }
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+        Register-Phase "Data Cleanup" "pass" "cleaned"
     }
 
     $coverDir = Join-Path $PSScriptRoot "data" "coverage"
