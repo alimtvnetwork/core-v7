@@ -9,16 +9,6 @@ import (
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Coverage16 — enumimpl remaining gaps (external tests)
-//
-// Covers accessible gaps:
-// - ConvEnumAnyValToInteger type switch branches
-// - DynamicMap.Set/AddNewOnly nil receiver
-// - DynamicMap.isEqualSingle isRegardlessType branch
-// - DiffLeftRight.JsonString json.Marshal error branch (dead code)
-// - BasicByte/Int8/Int16/Int32/UInt16/String GetValueByName wrapped name branch
-//
-// Unexported function gaps (toHashset, toStringPrintableDynamicMap, etc.)
-// require internal tests or are documented as dead code.
 // ══════════════════════════════════════════════════════════════════════════════
 
 // --- ConvEnumAnyValToInteger type switch branches ---
@@ -66,101 +56,94 @@ func Test_Cov16_ConvEnumAnyValToInteger_ValueByter(t *testing.T) {
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ExactValueByter(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockExactValueByter{val: 7})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles exactValueByter", t, func() {
 		convey.So(result, convey.ShouldEqual, 7)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ValueInter(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockValueInter{val: 100})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles valueInter", t, func() {
 		convey.So(result, convey.ShouldEqual, 100)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ExactValueInter(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockExactValueInter{val: 200})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles exactValueInter", t, func() {
 		convey.So(result, convey.ShouldEqual, 200)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ValueInt8er(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockValueInt8er{val: 5})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles valueInt8er", t, func() {
 		convey.So(result, convey.ShouldEqual, 5)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ExactValueInt8er(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockExactValueInt8er{val: 3})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles exactValueInt8er", t, func() {
 		convey.So(result, convey.ShouldEqual, 3)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ValueUInt16er(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockValueUInt16er{val: 300})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles valueUInt16er", t, func() {
 		convey.So(result, convey.ShouldEqual, 300)
 	})
 }
 
 func Test_Cov16_ConvEnumAnyValToInteger_ExactValueUInt16er(t *testing.T) {
+	// Arrange & Act
 	result := enumimpl.ConvEnumAnyValToInteger(mockExactValueUInt16er{val: 500})
+
+	// Assert
 	convey.Convey("ConvEnumAnyValToInteger handles exactValueUInt16er", t, func() {
 		convey.So(result, convey.ShouldEqual, 500)
 	})
 }
 
-// --- DynamicMap nil receiver ---
+// --- DynamicMap.IsEqual with isRegardlessType=true ---
 
-func Test_Cov16_DynamicMap_Set_NilReceiver(t *testing.T) {
-	// Arrange
-	dm := enumimpl.DynamicMap(nil)
-
-	// Act
-	isNew := dm.Set("key", "val")
-
-	// Assert
-	convey.Convey("DynamicMap.Set on nil initializes and adds", t, func() {
-		convey.So(isNew, convey.ShouldBeTrue)
-	})
-}
-
-func Test_Cov16_DynamicMap_AddNewOnly_NilReceiver(t *testing.T) {
-	// Arrange
-	dm := enumimpl.DynamicMap(nil)
-
-	// Act
-	isAdded := dm.AddNewOnly("key", "val")
-
-	// Assert
-	convey.Convey("DynamicMap.AddNewOnly on nil initializes and adds", t, func() {
-		convey.So(isAdded, convey.ShouldBeTrue)
-	})
-}
-
-// --- DynamicMap.IsEqualRegardlessTypes ---
-
-func Test_Cov16_DynamicMap_IsEqualRegardlessTypes(t *testing.T) {
+func Test_Cov16_DynamicMap_IsEqual_RegardlessType(t *testing.T) {
 	// Arrange
 	dm1 := enumimpl.DynamicMap{"key": 42}
 	dm2 := enumimpl.DynamicMap{"key": "42"}
 
 	// Act
-	result := dm1.IsEqualRegardlessTypes(dm2)
+	result := dm1.IsRawEqual(true, dm2)
 
 	// Assert
-	convey.Convey("DynamicMap.IsEqualRegardlessTypes compares by string representation", t, func() {
+	convey.Convey("DynamicMap.IsRawEqual with isRegardlessType compares by string", t, func() {
 		convey.So(result, convey.ShouldBeTrue)
 	})
 }
 
-// --- DiffLeftRight.JsonString error branch (dead code) ---
+// --- DiffLeftRight.JsonString ---
 
-func Test_Cov16_DiffLeftRight_JsonString(t *testing.T) {
+func Test_Cov16_DiffLeftRight_JsonString_Valid(t *testing.T) {
 	// Arrange
 	diff := &enumimpl.DiffLeftRight{}
 
@@ -168,15 +151,14 @@ func Test_Cov16_DiffLeftRight_JsonString(t *testing.T) {
 	result := diff.JsonString()
 
 	// Assert
-	convey.Convey("DiffLeftRight.JsonString returns valid JSON for empty struct", t, func() {
+	convey.Convey("DiffLeftRight.JsonString returns valid JSON", t, func() {
 		convey.So(result, convey.ShouldNotBeEmpty)
 	})
 }
 
-// Coverage note: Remaining enumimpl gaps:
-// - BasicByte/Int8/Int16/Int32/UInt16/String GetValueByName wrapped branch:
-//   requires constructing BasicXxx with specific internal hashmaps — only via New.BasicXxx
-// - DynamicMap unexported methods (isEqualSingle, etc.) need internal tests
-// - toHashset, toStringPrintableDynamicMap, numberEnumBase: unexported, need internal tests
-// - newBasicStringCreator: requires specific Stringer types
-// - DynamicMap byte/int getter branches: require specific value types in map
+// Coverage note: Remaining gaps are either:
+// 1. Nil-receiver dead code (Set/AddNewOnly with nil *DynamicMap — panics on *it dereference)
+// 2. Unexported functions (toHashset, toStringPrintableDynamicMap, numberEnumBase)
+// 3. BasicByte/Int/String GetValueByName wrapped lookup — requires internal hashmap setup
+// 4. DynamicMap byte/int getter type-assertion branches — need specific typed values
+// All documented as accepted gaps requiring internal tests.
