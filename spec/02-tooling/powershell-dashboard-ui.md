@@ -1101,3 +1101,59 @@ Phase statuses map to design tokens as defined in §8:
 ║  ✓ Coverage Report ....... 98.4% average             ║
 ╚══════════════════════════════════════════════════════╝
 ```
+
+---
+
+## 17. Error-Guarding Pattern (Module Availability)
+
+`run.ps1` is designed to function correctly even when `DashboardUI.psm1` is not loaded (e.g., missing file, import failure, minimal environments). Every call to a DashboardUI function is wrapped in a guard that silently skips the call if the function is unavailable.
+
+### 17.1 Guard Pattern
+
+```powershell
+if (Get-Command <FunctionName> -ErrorAction SilentlyContinue) {
+    <FunctionName> [arguments]
+}
+```
+
+`Get-Command` with `-ErrorAction SilentlyContinue` returns `$null` when the function is not defined, causing the `if` block to be skipped without throwing an error or producing output.
+
+### 17.2 Guarded Functions
+
+All exported `DashboardUI.psm1` functions used in `run.ps1` are guarded:
+
+| Function                  | Usage Context                     |
+|---------------------------|-----------------------------------|
+| `Reset-Phases`            | Start of TC / PC commands         |
+| `Register-Phase`          | After each phase boundary         |
+| `Write-PhaseSummaryBox`   | End of TC / PC commands           |
+| `Write-CoverageTable`     | After coverage data is collected  |
+| `Write-CoverageComparison`| After coverage snapshot comparison|
+| `Load-CoverageSnapshot`   | Before coverage comparison        |
+| `Save-CoverageSnapshot`   | After coverage comparison         |
+
+### 17.3 Why Not Try/Catch
+
+The `Get-Command` guard is preferred over `try/catch` because:
+
+1. **No exception overhead** — avoids the cost of throwing and catching `CommandNotFoundException`
+2. **No noise** — `try/catch` with `-ErrorAction Stop` can still emit partial error records in some PowerShell hosts
+3. **Readable intent** — the guard clearly communicates "run only if available" rather than "run and recover from failure"
+4. **Granular control** — each call site independently decides whether to skip, unlike a module-level try/catch that would be all-or-nothing
+
+### 17.4 Module Import Guard
+
+The module import itself in `run.ps1` also uses a safe pattern:
+
+```powershell
+$dashboardModule = Join-Path $PSScriptRoot "scripts" "DashboardUI.psm1"
+if (Test-Path $dashboardModule) {
+    Import-Module $dashboardModule -Force -ErrorAction SilentlyContinue
+}
+```
+
+This ensures the script does not fail at startup if the module file is missing or contains syntax errors.
+
+### 17.5 Design Principle
+
+> **DashboardUI is always additive, never required.** All core functionality (testing, coverage, compilation) must work identically with or without the module. The dashboard layer provides enhanced visual feedback but never gates execution.
