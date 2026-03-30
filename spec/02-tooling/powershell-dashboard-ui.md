@@ -878,3 +878,139 @@ Relative Luminance (ITU-R BT.709):
 ```
 
 Threshold can be adjusted. `0.5` works for most terminals. Lower values (e.g., `0.4`) bias toward dark detection.
+
+---
+
+## 14. Per-Package Coverage Table
+
+### 14.1 Purpose
+
+Render a bordered, color-coded table of per-package coverage results at the end of `TC` runs. Packages are sorted ascending by coverage (lowest first) to highlight gaps.
+
+### 14.2 Function Signature
+
+```powershell
+function Write-CoverageTable {
+    param(
+        [Parameter(Mandatory)]
+        [hashtable[]]$CoverageData    # Each: @{ Package="..."; Coverage=95.2; Tests=12 }
+    )
+}
+```
+
+### 14.3 Color Thresholds
+
+| Coverage       | Color     | Token      |
+|----------------|-----------|------------|
+| ≥ 100%         | Lime      | `$cLime`   |
+| ≥ 98%          | White     | `$cWhite`  |
+| ≥ 95%          | Yellow    | `$cYellow` |
+| < 95%          | Red       | `$cRed`    |
+
+### 14.4 Progress Bar
+
+Each row includes a 20-character progress bar using `█` (filled) and `░` (empty), colored per the threshold above.
+
+### 14.5 Summary Footer
+
+After the table, display:
+- Average coverage across all packages
+- Count of packages at 100% vs. below
+- Target threshold line (default: 100%)
+
+### 14.6 Integration
+
+Called automatically by `Write-Dashboard` when `$Data.CoverageData` is populated.
+
+---
+
+## 15. Coverage Comparison (Regression Detection)
+
+### 15.1 Purpose
+
+Compare current coverage results against a previously saved snapshot to detect regressions, improvements, new packages, and removed packages. This enables run-over-run tracking without external tools.
+
+### 15.2 Functions
+
+#### `Write-CoverageComparison`
+
+Renders a diff table between current and previous coverage arrays.
+
+```powershell
+function Write-CoverageComparison {
+    param(
+        [Parameter(Mandatory)]
+        [hashtable[]]$Current,        # Current run coverage data
+
+        [Parameter()]
+        [hashtable[]]$Previous = @()  # Previous run snapshot (empty = first run)
+    )
+}
+```
+
+**Diff indicators:**
+
+| Symbol | Meaning          | Color     |
+|--------|------------------|-----------|
+| `▲`    | Coverage improved | Lime      |
+| `▼`    | Coverage regressed | Red      |
+| `★`    | New package       | Cyan      |
+| `✗`    | Removed package   | Yellow    |
+| `=`    | No change         | Muted     |
+
+**Special flags:**
+- Packages dropping **from** 100% are flagged `⚠ LOST 100%` in red
+- Packages reaching 100% are flagged `🎯 REACHED 100%` in lime
+
+**Sort order:** Regressions first (largest drop), then improvements, then unchanged.
+
+#### `Save-CoverageSnapshot`
+
+Persists current coverage data to a JSON file for future comparison.
+
+```powershell
+function Save-CoverageSnapshot {
+    param(
+        [Parameter(Mandatory)]
+        [hashtable[]]$CoverageData,
+
+        [string]$Path = "data/coverage/coverage-previous.json"
+    )
+}
+```
+
+Creates the directory if missing. Writes an array of `{ Package, Coverage, Tests }` objects.
+
+#### `Load-CoverageSnapshot`
+
+Loads the last saved snapshot for comparison.
+
+```powershell
+function Load-CoverageSnapshot {
+    param(
+        [string]$Path = "data/coverage/coverage-previous.json"
+    )
+}
+```
+
+Returns `@()` if the file does not exist (first run).
+
+### 15.3 Integration in TC
+
+At the end of `Invoke-TestCoverage`, after coverage data is collected:
+
+```powershell
+$prev = Load-CoverageSnapshot
+Write-CoverageComparison -Current $coverageData -Previous $prev
+Save-CoverageSnapshot -CoverageData $coverageData
+```
+
+This gives automatic regression detection on every `./run.ps1 TC` run.
+
+### 15.4 Summary Footer
+
+The comparison table ends with a summary line:
+
+```
+  ▲ 3 improved  ▼ 1 regressed  ★ 2 new  ✗ 0 removed  = 12 unchanged
+```
