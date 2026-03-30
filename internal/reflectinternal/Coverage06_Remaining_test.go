@@ -3,6 +3,8 @@ package reflectinternal
 import (
 	"reflect"
 	"testing"
+
+	"github.com/alimtvnetwork/core/reflectcore/reflectmodel"
 )
 
 // ======= reflectGetter =======
