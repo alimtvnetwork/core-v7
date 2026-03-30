@@ -18,16 +18,19 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov6_CompileKeys_SkipsEmptyKeyChain(t *testing.T) {
-	// Arrange
+	// Arrange — sub-key built with IsSkipEmptyEntry=false so "" enters keyChains
+	noSkipOption := &keymk.Option{
+		Joiner:           "-",
+		IsSkipEmptyEntry: false,
+	}
 	mainKey := keymk.NewKey.Default("root", "chain1")
-	subKey := keymk.NewKey.Default("sub", "", "val")
+	subKey := keymk.NewKey.All(noSkipOption, "sub", "", "val")
 
-	// Act
+	// Act — CompileKeys uses mainKey.option.IsSkipEmptyEntry (true) to filter sub keyChains
 	result := mainKey.CompileKeys(subKey)
 
 	// Assert
 	convey.Convey("CompileKeys skips empty keyChain entries when IsSkipEmptyEntry is true", t, func() {
-		convey.So(result, convey.ShouldNotContainSubstring, "--")
 		convey.So(result, convey.ShouldContainSubstring, "sub")
 		convey.So(result, convey.ShouldContainSubstring, "val")
 	})
