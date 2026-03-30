@@ -2219,9 +2219,11 @@ function Invoke-PreCommitCheck {
     }
 
     if ($LASTEXITCODE -ne 0) {
+        if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Regression Guard" "fail" "regressions detected" }
         Write-Fail "Regression guard failed. Fix reported issues before PC."
         exit 1
     }
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Regression Guard" "pass" "no regressions" }
 
     # safeTest boundary + empty-if lint check
     $boundaryScript = Join-Path $PSScriptRoot "scripts" "check-safetest-boundaries.ps1"
@@ -2229,10 +2231,12 @@ function Invoke-PreCommitCheck {
         Write-Host "  Running safeTest boundary + empty-if lint check..." -ForegroundColor Yellow
         & $boundaryScript
         if ($LASTEXITCODE -ne 0) {
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "fail" "boundary check failed" }
             Write-Fail "safeTest boundary check failed. Fix reported issues before PC."
             exit 1
         }
     }
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "pass" "all clean" }
 
     # ── Go auto-fixer ─────────────────────────────────────────────────
     $skipAutofix = $ExtraArgs -and ($ExtraArgs -contains '--no-autofix')
