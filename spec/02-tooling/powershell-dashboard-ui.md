@@ -1,5 +1,27 @@
 # PowerShell Dashboard UI Spec
 
+## Table of Contents
+
+1. [Environment Setup](#1-environment-setup)
+2. [Design Tokens](#2-design-tokens)
+3. [Unicode Characters](#3-unicode-characters)
+4. [Progress Bar Function](#4-progress-bar-function)
+5. [Layout Engine](#5-layout-engine)
+6. [Output Sections (Top-to-Bottom)](#6-output-sections-top-to-bottom)
+7. [Indentation Rules](#7-indentation-rules)
+8. [Data Contract](#8-data-contract)
+9. [Composability](#9-composability)
+10. [Terminal Compatibility Notes](#10-terminal-compatibility-notes)
+11. [Complete Rendering Example](#11-complete-rendering-example)
+12. [Adapting to run.ps1 Phases](#12-adapting-to-runps1-phases)
+13. [Theme Variants (Dark / Light) with Auto-Detection](#13-theme-variants-dark--light-with-auto-detection)
+14. [Per-Package Coverage Table](#14-per-package-coverage-table)
+15. [Coverage Comparison (Regression Detection)](#15-coverage-comparison-regression-detection)
+16. [Phase Tracking Integration (TC & PC)](#16-phase-tracking-integration-tc--pc)
+17. [Error-Guarding Pattern (Module Availability)](#17-error-guarding-pattern-module-availability)
+
+---
+
 ## Overview
 
 Transform standard sequential `Write-Host` console output into a structured, bordered, color-coded dashboard UI using ANSI escape sequences and Unicode box-drawing characters. This spec is self-contained — any AI or developer can implement it for any PowerShell script.
