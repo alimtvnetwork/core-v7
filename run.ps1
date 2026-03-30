@@ -71,17 +71,39 @@ $OutputEncoding            = [System.Text.Encoding]::UTF8
 
 $ErrorActionPreference = "Stop"
 
-# -- Colors --
+# -- Dashboard UI Module --
+$dashboardModule = Join-Path $PSScriptRoot "scripts" "DashboardUI.psm1"
+if (Test-Path $dashboardModule) {
+    Import-Module $dashboardModule -Force -DisableNameChecking
+    # Auto-detect theme, or honor --light / --dark flags
+    $themeOverride = $null
+    if ($ExtraArgs -contains '--light') { $themeOverride = "light" }
+    if ($ExtraArgs -contains '--dark')  { $themeOverride = "dark" }
+    if ($themeOverride) {
+        Initialize-DashboardUI -Theme $themeOverride
+    } else {
+        Initialize-DashboardUI
+    }
+}
+
+# -- Colors (ANSI-aware wrappers using DashboardUI tokens) --
+$ESC = [char]27
+
 function Write-Header([string]$msg) {
-    Write-Host "`n=== $msg ===" -ForegroundColor Cyan
+    if (Get-Command Write-DashboardHeader -ErrorAction SilentlyContinue) {
+        Write-Host ""
+        Write-PhaseStart -Name $msg
+    } else {
+        Write-Host "`n=== $msg ===" -ForegroundColor Cyan
+    }
 }
 
 function Write-Success([string]$msg) {
-    Write-Host "  ✓ $msg" -ForegroundColor Green
+    Write-Host "  $($script:cLime)✓$($script:cReset) $($script:cLime)$msg$($script:cReset)"
 }
 
 function Write-Fail([string]$msg) {
-    Write-Host "  ✗ $msg" -ForegroundColor Red
+    Write-Host "  $($script:cRed)✗$($script:cReset) $($script:cRed)$msg$($script:cReset)"
 }
 
 # -- Test Log Directory --
