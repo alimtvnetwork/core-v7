@@ -3,6 +3,8 @@ package reflectinternal
 import (
 	"reflect"
 	"testing"
+
+	"github.com/alimtvnetwork/core/reflectcore/reflectmodel"
 )
 
 // ======= reflectGetter =======
@@ -357,7 +359,7 @@ func TestUtils_IsReflectTypeMatch(t *testing.T) {
 
 func TestLooper_FieldsFor(t *testing.T) {
 	type s struct{ Name string }
-	err := Looper.FieldsFor(s{Name: "test"}, func(f interface{ Name string; Index int }) error {
+	err := Looper.FieldsFor(s{Name: "test"}, func(f *reflectmodel.FieldProcessor) error {
 		return nil
 	})
 	_ = err // just exercise it
