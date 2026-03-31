@@ -87,11 +87,18 @@ if (Test-Path $dashboardModule) {
 }
 
 
+# -- Utilities Module --
+$utilitiesModule = Join-Path $PSScriptRoot "scripts" "Utilities.psm1"
+if (Test-Path $utilitiesModule) {
+    Import-Module $utilitiesModule -Force -DisableNameChecking
+}
+
 # -- Test Log Writer Module --
 $testLogWriterModule = Join-Path $PSScriptRoot "scripts" "TestLogWriter.psm1"
 if (Test-Path $testLogWriterModule) {
     Import-Module $testLogWriterModule -Force -DisableNameChecking
 }
+
 
 # -- Test Log Directory --
 $TestLogDir = Join-Path $PSScriptRoot "data" "test-logs"
