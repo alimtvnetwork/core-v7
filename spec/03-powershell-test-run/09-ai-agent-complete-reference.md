@@ -895,6 +895,7 @@ Raw `go test -c` output contains noise. Filter to actionable errors only:
 | `spec/01-app/27-unit-coverage-fix.md` | Unit coverage fix workflow spec |
 | `spec/05-failing-tests/01-blocked-packages-fixes.md` | Real-world blocked package fix examples |
 | `.lovable/memory/workflow/06-unit-coverage-fix-protocol.md` | Protocol memory (for AI agents) |
+| `scripts/README.md` | Module architecture, dependency graph, how to add commands |
 
 ---
 
@@ -902,4 +903,5 @@ Raw `go test -c` output contains noise. Filter to actionable errors only:
 
 | Date | Change |
 |------|--------|
+| 2026-03-31 | Updated directory layout, added §8 modular architecture, Go syntax validation docs |
 | 2026-03-30 | Initial creation — consolidated from run.ps1 overview, generic runner spec, testing guidelines, and unit coverage fix protocol |
