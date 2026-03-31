@@ -4,6 +4,33 @@
 # Dependencies: DashboardTheme.psm1 (script-scope color variables)
 # ─────────────────────────────────────────────────────────────────────────────
 
+function Get-AnsiVisualLength {
+    <# .SYNOPSIS Calculate visual column width of a string, stripping ANSI escape codes and accounting for wide Unicode chars (e.g. ⚠ = 2 columns). #>
+    [CmdletBinding()]
+    [OutputType([int])]
+    param([Parameter(Mandatory)][string]$Text)
+    # Strip ANSI escape sequences: ESC[...m and ESC[...;...m etc.
+    $stripped = $Text -replace "$([char]27)\[[0-9;]*m", ''
+    $len = 0
+    foreach ($ch in $stripped.GetEnumerator()) {
+        $cp = [int]$ch
+        # Wide characters: CJK, fullwidth, and specific symbols like ⚠ (U+26A0)
+        if ($cp -eq 0x26A0 -or
+            ($cp -ge 0x2600 -and $cp -le 0x26FF) -or   # Misc Symbols
+            ($cp -ge 0x2700 -and $cp -le 0x27BF) -or   # Dingbats
+            ($cp -ge 0xFE00 -and $cp -le 0xFE0F) -or   # Variation Selectors
+            ($cp -ge 0x1F300 -and $cp -le 0x1F9FF) -or  # Emoji
+            ($cp -ge 0x3000 -and $cp -le 0x9FFF) -or    # CJK
+            ($cp -ge 0xF900 -and $cp -le 0xFAFF) -or    # CJK Compat
+            ($cp -ge 0xFF01 -and $cp -le 0xFF60)) {     # Fullwidth
+            $len += 2
+        } else {
+            $len += 1
+        }
+    }
+    return $len
+}
+
 function Get-ProgressBar {
     <# .SYNOPSIS Returns a colored progress bar string using ANSI + Unicode block chars. #>
     [CmdletBinding()]
@@ -46,12 +73,9 @@ function Write-BoxEmptyLine {
 function Write-BoxLine {
     [CmdletBinding()]
     param([string]$Content, [int]$Width = $script:BoxWidth, [int]$VisualLength = -1)
-    if ($VisualLength -ge 0) {
-        $rightPad = [math]::Max(0, $Width - $VisualLength - 1)
-        Write-Host "$($script:cBorder)║$($script:cReset) $Content$(" " * $rightPad)$($script:cBorder)║$($script:cReset)"
-    } else {
-        Write-Host "$($script:cBorder)║$($script:cReset) $Content"
-    }
+    if ($VisualLength -lt 0) { $VisualLength = Get-AnsiVisualLength $Content }
+    $rightPad = [math]::Max(0, $Width - $VisualLength - 1)
+    Write-Host "$($script:cBorder)║$($script:cReset) $Content$(" " * $rightPad)$($script:cBorder)║$($script:cReset)"
 }
 
 function Write-BoxLineCenter {
@@ -66,6 +90,7 @@ function Write-BoxLineCenter {
 }
 
 Export-ModuleMember -Function @(
+    'Get-AnsiVisualLength',
     'Get-ProgressBar', 'Write-BoxTop', 'Write-BoxBottom', 'Write-BoxDivider',
     'Write-BoxEmptyLine', 'Write-BoxLine', 'Write-BoxLineCenter'
 )
