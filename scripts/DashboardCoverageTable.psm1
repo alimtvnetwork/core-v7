@@ -39,7 +39,7 @@ function Write-CoverageTable {
         $rowColor = if ($cov -ge 100.0) { $script:cLime } elseif ($cov -ge 98.0) { $script:cWhite } elseif ($cov -ge 95.0) { $script:cYellow } else { $script:cRed }
         $bar = Get-ProgressBar -Score ([int][math]::Round($cov)) -BarWidth $BarWidth
         $testStr = "$tests".PadLeft($testCol)
-        Write-BoxLine -Content "$rowColor$pkgStr$($script:cReset) $rowColor$pctStr$($script:cReset)  $bar  $($script:cMuted)$testStr$($script:cReset)" -Width $w -VisualLength $hdrVisLen
+        Write-BoxLine -Content "$rowColor$pkgStr$($script:cReset) $rowColor$pctStr$($script:cReset)  $bar  $($script:cMuted)$testStr$($script:cReset)" -Width $w
     }
 
     Write-BoxEmptyLine -Width $w; Write-BoxDivider -Width $w; Write-BoxEmptyLine -Width $w
