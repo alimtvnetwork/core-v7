@@ -71,71 +71,30 @@ $OutputEncoding            = [System.Text.Encoding]::UTF8
 
 $ErrorActionPreference = "Stop"
 
-# -- Dashboard UI Module --
-$dashboardModule = Join-Path $PSScriptRoot "scripts" "DashboardUI.psm1"
-if (Test-Path $dashboardModule) {
-    Import-Module $dashboardModule -Force -DisableNameChecking
-    # Auto-detect theme, or honor --light / --dark flags
+# -- Module Loading --
+# Load all modules in dependency order via a single loop
+$moduleOrder = @(
+    "DashboardTheme", "DashboardBoxes", "DashboardPhases", "DashboardCoverage", "DashboardUI",
+    "Utilities", "ErrorParser", "TestLogWriter", "TestRunner",
+    "CoveragePreChecks", "CoverageCompileCheck", "CoverageProfileMerger", "CoverageReport", "PackageCoverage", "CoverageRunner",
+    "BuildTools", "GoConvey", "PreCommitCheck", "Help"
+)
+foreach ($mod in $moduleOrder) {
+    $modPath = Join-Path $PSScriptRoot "scripts" "$mod.psm1"
+    if (Test-Path $modPath) { Import-Module $modPath -Force -DisableNameChecking }
+}
+
+# Auto-detect theme, or honor --light / --dark flags
+if (Get-Command Initialize-DashboardUI -ErrorAction SilentlyContinue) {
     $themeOverride = $null
     if ($ExtraArgs -contains '--light') { $themeOverride = "light" }
     if ($ExtraArgs -contains '--dark')  { $themeOverride = "dark" }
-    if ($themeOverride) {
-        Initialize-DashboardUI -Theme $themeOverride
-    } else {
-        Initialize-DashboardUI
-    }
+    if ($themeOverride) { Initialize-DashboardUI -Theme $themeOverride }
+    else { Initialize-DashboardUI }
 }
 
 # -- Shared Variables --
 $TestLogDir = Join-Path $PSScriptRoot "data" "test-logs"
-
-# -- Utilities Module --
-$utilitiesModule = Join-Path $PSScriptRoot "scripts" "Utilities.psm1"
-if (Test-Path $utilitiesModule) {
-    Import-Module $utilitiesModule -Force -DisableNameChecking
-}
-
-# -- Test Log Writer Module --
-$testLogWriterModule = Join-Path $PSScriptRoot "scripts" "TestLogWriter.psm1"
-if (Test-Path $testLogWriterModule) {
-    Import-Module $testLogWriterModule -Force -DisableNameChecking
-}
-
-# -- Test Runner Module --
-$testRunnerModule = Join-Path $PSScriptRoot "scripts" "TestRunner.psm1"
-if (Test-Path $testRunnerModule) {
-    Import-Module $testRunnerModule -Force -DisableNameChecking
-}
-
-# -- Coverage Modules --
-foreach ($covMod in @("CoveragePreChecks", "CoverageCompileCheck", "CoverageProfileMerger", "CoverageReport", "PackageCoverage", "CoverageRunner")) {
-    $covModPath = Join-Path $PSScriptRoot "scripts" "$covMod.psm1"
-    if (Test-Path $covModPath) { Import-Module $covModPath -Force -DisableNameChecking }
-}
-
-# -- Build Tools Module --
-$buildToolsModule = Join-Path $PSScriptRoot "scripts" "BuildTools.psm1"
-if (Test-Path $buildToolsModule) {
-    Import-Module $buildToolsModule -Force -DisableNameChecking
-}
-
-# -- GoConvey Module --
-$goConveyModule = Join-Path $PSScriptRoot "scripts" "GoConvey.psm1"
-if (Test-Path $goConveyModule) {
-    Import-Module $goConveyModule -Force -DisableNameChecking
-}
-
-# -- PreCommit Check Module --
-$preCommitModule = Join-Path $PSScriptRoot "scripts" "PreCommitCheck.psm1"
-if (Test-Path $preCommitModule) {
-    Import-Module $preCommitModule -Force -DisableNameChecking
-}
-
-# -- Help Module --
-$helpModule = Join-Path $PSScriptRoot "scripts" "Help.psm1"
-if (Test-Path $helpModule) {
-    Import-Module $helpModule -Force -DisableNameChecking
-}
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # Command Dispatch
