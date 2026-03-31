@@ -107,10 +107,10 @@ if (Test-Path $testRunnerModule) {
     Import-Module $testRunnerModule -Force -DisableNameChecking
 }
 
-# -- Coverage Runner Module --
-$coverageRunnerModule = Join-Path $PSScriptRoot "scripts" "CoverageRunner.psm1"
-if (Test-Path $coverageRunnerModule) {
-    Import-Module $coverageRunnerModule -Force -DisableNameChecking
+# -- Coverage Modules --
+foreach ($covMod in @("CoveragePreChecks", "CoverageCompileCheck", "CoverageProfileMerger", "CoverageReport", "PackageCoverage", "CoverageRunner")) {
+    $covModPath = Join-Path $PSScriptRoot "scripts" "$covMod.psm1"
+    if (Test-Path $covModPath) { Import-Module $covModPath -Force -DisableNameChecking }
 }
 
 # -- Build Tools Module --

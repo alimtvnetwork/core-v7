@@ -6,30 +6,40 @@ The `run.ps1` dispatcher (≤200 lines) imports all modules from this directory 
 
 ## Module Reference
 
-| Module | Purpose | Key Functions |
-|---|---|---|
-| `DashboardUI.psm1` | ANSI box-drawing dashboard, phase tracking, coverage diff | `Initialize-DashboardUI`, `Register-Phase`, `Write-PhaseSummaryBox`, `Write-CoverageDiffBox` |
-| `Utilities.psm1` | Console output helpers, error extraction, line filtering | `Write-Header`, `Write-Success`, `Write-Fail`, `ParseCompileErrors` |
-| `TestLogWriter.psm1` | Parse Go test output → structured log files | `Write-TestLogs` |
-| `TestRunner.psm1` | Go test execution, build checks, git operations | `Invoke-AllTests`, `Invoke-PackageTests`, `Invoke-BuildCheck` |
-| `CoverageRunner.psm1` | Full and per-package coverage pipelines | `Invoke-TestCoverage` (TC), `Invoke-PackageTestCoverage` (TCP) |
-| `BuildTools.psm1` | Build, run, format, vet, tidy, clean | `Invoke-Build`, `Invoke-Format`, `Invoke-Vet` |
-| `GoConvey.psm1` | Launch browser-based GoConvey test runner | `Invoke-GoConvey` |
-| `PreCommitCheck.psm1` | Pre-commit API mismatch checker | `Invoke-PreCommitCheck` |
-| `Help.psm1` | Help display, fail log viewer, integrated tests | `Show-Help`, `Invoke-ShowFailLog`, `Invoke-IntegratedTests` |
+| Module | Lines | Purpose | Key Functions |
+|---|---|---|---|
+| `DashboardUI.psm1` | ~1234 | ANSI box-drawing dashboard, phase tracking, coverage diff | `Initialize-DashboardUI`, `Register-Phase`, `Write-PhaseSummaryBox` |
+| `Utilities.psm1` | ~482 | Console output helpers, error extraction, line filtering | `Write-Header`, `Write-Success`, `Write-Fail`, `ParseCompileErrors` |
+| `TestLogWriter.psm1` | ~214 | Parse Go test output → structured log files | `Write-TestLogs` |
+| `TestRunner.psm1` | ~276 | Go test execution, build checks, git operations | `Invoke-AllTests`, `Invoke-PackageTests`, `Invoke-BuildCheck` |
+| `CoveragePreChecks.psm1` | ~128 | Pre-coverage validation (safetest, autofix, bracecheck) | `Invoke-CoveragePreChecks` |
+| `CoverageCompileCheck.psm1` | ~273 | Compile checks & per-file split recovery | `Invoke-CoverageCompileCheck`, `Invoke-CoverageSplitRecovery` |
+| `CoverageProfileMerger.psm1` | ~120 | Profile merging & missing profile detection | `Merge-CoverageProfiles`, `Find-MissingCoverageProfiles` |
+| `CoverageReport.psm1` | ~554 | Report generation (TXT, JSON, HTML, AI button) | `Write-CoverageSummaryReport`, `Write-CoverageJsonReport`, etc. |
+| `CoverageRunner.psm1` | ~298 | TC orchestrator — calls all coverage sub-modules | `Invoke-TestCoverage` |
+| `PackageCoverage.psm1` | ~171 | Single-package coverage command (TCP) | `Invoke-PackageTestCoverage` |
+| `BuildTools.psm1` | ~137 | Build, run, format, vet, tidy, clean | `Invoke-Build`, `Invoke-Format`, `Invoke-Vet` |
+| `GoConvey.psm1` | ~57 | Launch browser-based GoConvey test runner | `Invoke-GoConvey` |
+| `PreCommitCheck.psm1` | ~357 | Pre-commit API mismatch checker | `Invoke-PreCommitCheck` |
+| `Help.psm1` | ~140 | Help display, fail log viewer, integrated tests | `Show-Help`, `Invoke-ShowFailLog` |
 
 ## Dependency Graph
 
 ```
-DashboardUI          (standalone — ANSI/box-drawing)
-Utilities            (standalone — basic helpers)
-TestLogWriter        (→ Utilities)
-TestRunner           (→ Utilities, TestLogWriter)
-CoverageRunner       (→ Utilities, TestLogWriter, TestRunner, DashboardUI)
-BuildTools           (→ Utilities)
-GoConvey             (standalone)
-PreCommitCheck       (→ Utilities, DashboardUI)
-Help                 (→ Utilities, TestLogWriter, TestRunner)
+DashboardUI              (standalone — ANSI/box-drawing)
+Utilities                (standalone — basic helpers)
+TestLogWriter            (→ Utilities)
+TestRunner               (→ Utilities, TestLogWriter)
+CoveragePreChecks        (→ Utilities, DashboardUI)
+CoverageCompileCheck     (→ Utilities)
+CoverageProfileMerger    (standalone)
+CoverageReport           (→ Utilities, DashboardUI)
+CoverageRunner           (→ all Coverage*, Utilities, TestLogWriter, TestRunner, DashboardUI)
+PackageCoverage          (→ CoveragePreChecks, CoverageReport, TestRunner, Utilities)
+BuildTools               (→ Utilities)
+GoConvey                 (standalone)
+PreCommitCheck           (→ Utilities, DashboardUI)
+Help                     (→ Utilities, TestLogWriter, TestRunner)
 ```
 
 ## How the Dispatch Works
