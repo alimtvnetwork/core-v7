@@ -49,7 +49,7 @@ function Write-ScoreBox {
                 $colored = if ($valStr -eq "PASS") { "$($script:cLime)$($script:cBold)$valStr$($script:cReset)" }
                     elseif ($valStr -eq "FAIL") { "$($script:cRed)$($script:cBold)$valStr$($script:cReset)" }
                     else { "$($script:cWhite)$valStr$($script:cReset)" }
-                Write-BoxLine -Content "$($script:cWhite)$label $colored" -Width $w -VisualLength ($labelCol + 1 + $valStr.Length)
+                Write-BoxLine -Content "$($script:cWhite)$label $colored" -Width $w
             }
         }
     }
