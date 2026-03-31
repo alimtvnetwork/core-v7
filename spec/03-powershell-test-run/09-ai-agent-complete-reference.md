@@ -791,6 +791,32 @@ $OutputEncoding            = [System.Text.Encoding]::UTF8
 
 ## 8. PowerShell Runner Internals
 
+### Modular Architecture
+
+`run.ps1` is a thin dispatcher (~167 lines) that imports `.psm1` modules from `scripts/`:
+
+| Module | Key Functions | Responsibility |
+|--------|--------------|----------------|
+| `Utilities.psm1` | `Write-Header`, `Write-Success`, `ParseCompileErrors` | Common helpers |
+| `TestLogWriter.psm1` | `Write-TestLogs` | Parse Go test output → log files |
+| `TestRunner.psm1` | `Invoke-AllTests`, `Invoke-BuildCheck` | Test execution |
+| `CoverageRunner.psm1` | `Invoke-TestCoverage`, `Invoke-PackageTestCoverage` | TC + TCP pipelines |
+| `BuildTools.psm1` | `Invoke-Build`, `Invoke-Format`, `Invoke-Vet` | Build commands |
+| `PreCommitCheck.psm1` | `Invoke-PreCommitCheck` | PC pipeline |
+| `DashboardUI.psm1` | `Register-Phase`, `Write-PhaseSummaryBox` | ANSI dashboard (optional) |
+| `Help.psm1` | `Show-Help` | Help display |
+
+All DashboardUI calls are guarded with `Get-Command ... -ErrorAction SilentlyContinue` so the runner works without the UI module.
+
+### Go Syntax Validation
+
+Two Go tools validate syntax before compilation:
+
+1. **bracecheck** (`scripts/bracecheck/main.go`): Scans all `.go` files for unbalanced braces, brackets, and parentheses. Run via `go run ./scripts/bracecheck/`.
+2. **autofix** (`scripts/autofix/main.go`): Automatically fixes common syntax issues (trailing commas, missing imports). Run via `go run ./scripts/autofix/`. Supports `--dry-run`.
+
+Both are executed as phases in TC and PC pipelines (skippable via `--skip-bracecheck`).
+
 ### Profile Merging (MAX Count)
 
 When merging partial coverage profiles, use **MAX count** per line, not last-write-wins:
