@@ -117,9 +117,9 @@ function Write-PhaseSummaryBox {
     Write-BoxEmptyLine -Width $w; Write-BoxDivider -Width $w; Write-BoxEmptyLine -Width $w
 
     $total = $Phases.Count
-    $phasesLabel = "PHASES".PadRight($phaseLabelWidth - 6)
+    $phasesLabel = "PHASES".PadRight($phaseLabelWidth)
     $phasesVal = "$passCount/$total passed"
-    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$phasesLabel$($script:cReset) $($script:cWhite)$phasesVal$($script:cReset)" -Width $w -VisualLength (1 + $phasesLabel.Length + $phasesVal.Length)
+    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$phasesLabel$($script:cReset)$($script:cWhite)$phasesVal$($script:cReset)" -Width $w -VisualLength ($phasesLabel.Length + $phasesVal.Length)
 
     $statusLabel = "STATUS".PadRight($phasesLabel.Length)
     if ($failCount -gt 0) {
