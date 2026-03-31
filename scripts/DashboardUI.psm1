@@ -185,24 +185,28 @@ function Get-ProgressBar {
 # ═══════════════════════════════════════════════════════════════════════════════
 
 function Write-BoxTop {
+    <# .SYNOPSIS Draw the top border of a dashboard box. #>
     [CmdletBinding()]
     param([int]$Width = $script:BoxWidth)
     Write-Host "$($script:cBorder)╔$("═" * $Width)╗$($script:cReset)"
 }
 
 function Write-BoxBottom {
+    <# .SYNOPSIS Draw the bottom border of a dashboard box. #>
     [CmdletBinding()]
     param([int]$Width = $script:BoxWidth)
     Write-Host "$($script:cBorder)╚$("═" * $Width)╝$($script:cReset)"
 }
 
 function Write-BoxDivider {
+    <# .SYNOPSIS Draw a horizontal divider inside a dashboard box. #>
     [CmdletBinding()]
     param([int]$Width = $script:BoxWidth)
     Write-Host "$($script:cBorder)╠$("═" * $Width)╣$($script:cReset)"
 }
 
 function Write-BoxEmptyLine {
+    <# .SYNOPSIS Draw an empty line inside a dashboard box. #>
     [CmdletBinding()]
     param([int]$Width = $script:BoxWidth)
     Write-Host "$($script:cBorder)║$($script:cReset)$(" " * $Width)$($script:cBorder)║$($script:cReset)"

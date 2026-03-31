@@ -28,6 +28,15 @@
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Invoke-TestCoverage {
+    <#
+    .SYNOPSIS
+        Run full test coverage across all packages (TC command).
+    .DESCRIPTION
+        Executes the complete coverage pipeline: pre-checks (safetest, autofix,
+        bracecheck), parallel/sync compile checks, test execution with coverage
+        profiling, report generation (HTML/JSON/TXT), coverage diff comparison,
+        and AI prompt generation.
+    #>
     Write-Header "Running tests with coverage"
 
     # Reset phase tracker for this run
@@ -1344,6 +1353,14 @@ function copyForAI(){
 }
 
 function Invoke-PackageTestCoverage {
+    <#
+    .SYNOPSIS
+        Run coverage for a single test package (TCP command).
+    .PARAMETER pkg
+        The test package directory name under tests/integratedtests/.
+    .EXAMPLE
+        Invoke-PackageTestCoverage "regexnewtests"
+    #>
     param([string]$pkg)
 
     if (-not $pkg) {
