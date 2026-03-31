@@ -27,11 +27,22 @@
 
 ```
 <project-root>/
-├── run.ps1                              # Entry point — all commands
+├── run.ps1                              # Thin dispatcher (~167 lines)
 ├── scripts/
+│   ├── README.md                        # Module documentation + dependency graph
+│   ├── DashboardUI.psm1                 # ANSI dashboard rendering, phase tracking
+│   ├── Utilities.psm1                   # Console helpers, error extraction
+│   ├── TestLogWriter.psm1               # Go test output → structured log files
+│   ├── TestRunner.psm1                  # Test execution, build checks, git ops
+│   ├── CoverageRunner.psm1             # TC + TCP coverage pipelines
+│   ├── BuildTools.psm1                  # Build, format, vet, tidy, clean
+│   ├── PreCommitCheck.psm1              # PC pre-commit validation
+│   ├── GoConvey.psm1                    # GoConvey browser test runner
+│   ├── Help.psm1                        # Help, fail log, integrated tests
 │   ├── bracecheck/main.go               # Go syntax pre-checker
 │   ├── autofix/main.go                  # Auto-fixer for common syntax issues
 │   ├── check-safetest-boundaries.ps1    # SafeTest lint checker
+│   ├── check-integrated-regressions.ps1 # API-drift regression scanner
 │   └── coverage/
 │       └── Export-UncoveredMethodsJson.ps1
 ├── data/
@@ -43,6 +54,7 @@
 │   │   ├── per-package-coverage.json    # Per-package breakdown
 │   │   ├── blocked-packages.txt         # Compile failures
 │   │   ├── blocked-packages.json        # Machine-readable blocked
+│   │   ├── coverage-previous.json       # Snapshot for regression diff
 │   │   └── build-errors.txt             # Build error details
 │   └── test-logs/                       # Test output (generated)
 │       ├── raw-output.txt               # Full go test output

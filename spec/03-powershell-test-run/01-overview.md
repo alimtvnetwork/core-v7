@@ -217,6 +217,8 @@ Pass `--no-open` to skip auto-opening the HTML report:
 
 ## Command Dispatch
 
+`run.ps1` is a thin dispatcher (~167 lines) that imports specialized `.psm1` modules from `scripts/` and routes commands to the appropriate function.
+
 All three forms are equivalent and case-insensitive:
 
 ```powershell
@@ -225,7 +227,23 @@ All three forms are equivalent and case-insensitive:
 ./run.ps1 test    # long name
 ```
 
-The dispatch table in `run.ps1` normalizes all forms via `$Command.ToLower()` and matches against a set of aliases.
+The dispatch table normalizes all forms via `$Command.ToLower()` and matches against a set of aliases.
+
+### Module Architecture
+
+| Module | Functions | Description |
+|--------|-----------|-------------|
+| `DashboardUI.psm1` | Phase tracking, coverage tables, box rendering | ANSI dashboard UI |
+| `Utilities.psm1` | `Write-Header`, `Write-Success`, `ParseCompileErrors`, etc. | Common helpers |
+| `TestLogWriter.psm1` | `Write-TestLogs` | Go test output → log files |
+| `TestRunner.psm1` | `Invoke-AllTests`, `Invoke-PackageTests`, `Invoke-BuildCheck` | Test execution |
+| `CoverageRunner.psm1` | `Invoke-TestCoverage`, `Invoke-PackageTestCoverage` | TC + TCP pipelines |
+| `BuildTools.psm1` | `Invoke-Build`, `Invoke-Format`, `Invoke-Vet`, etc. | Build commands |
+| `PreCommitCheck.psm1` | `Invoke-PreCommitCheck` | PC pipeline |
+| `GoConvey.psm1` | `Invoke-GoConvey` | GoConvey launcher |
+| `Help.psm1` | `Show-Help`, `Invoke-ShowFailLog`, `Invoke-IntegratedTests` | Help + misc |
+
+See [`scripts/README.md`](/scripts/README.md) for full dependency graph and module documentation.
 
 ## Cleanup
 

@@ -34,8 +34,21 @@ Go project without prior context.
 
 ```
 <project-root>/
-├── run.ps1                          # Entry point
+├── run.ps1                          # Entry point — thin dispatcher (~167 lines)
 ├── scripts/
+│   ├── README.md                          # Module documentation
+│   ├── DashboardUI.psm1                   # ANSI dashboard rendering
+│   ├── Utilities.psm1                     # Common helpers
+│   ├── TestLogWriter.psm1                 # Test output → log files
+│   ├── TestRunner.psm1                    # Test execution + build checks
+│   ├── CoverageRunner.psm1               # TC + TCP coverage pipelines
+│   ├── BuildTools.psm1                    # Build, format, vet, tidy, clean
+│   ├── PreCommitCheck.psm1                # PC pre-commit validation
+│   ├── GoConvey.psm1                      # GoConvey launcher
+│   ├── Help.psm1                          # Help display + misc commands
+│   ├── bracecheck/main.go                 # Go syntax pre-checker
+│   ├── autofix/main.go                    # Auto-fixer for common syntax issues
+│   ├── check-safetest-boundaries.ps1      # SafeTest lint checker
 │   ├── check-integrated-regressions.ps1   # API-drift regression scanner
 │   └── coverage/
 │       └── Export-UncoveredMethodsJson.ps1 # Coverage gap JSON exporter
@@ -50,6 +63,7 @@ Go project without prior context.
 │   │   ├── per-package-coverage.json
 │   │   ├── blocked-packages.txt     # Compile failures (if any)
 │   │   ├── blocked-packages.json
+│   │   ├── coverage-previous.json   # Snapshot for regression diff
 │   │   └── uncovered-method-lines.json
 │   ├── test-logs/
 │   │   ├── raw-output.txt           # Full go test stdout/stderr
