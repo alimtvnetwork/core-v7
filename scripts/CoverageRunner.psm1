@@ -149,7 +149,7 @@ function Invoke-TestCoverage {
             Write-Fail "Go syntax check failed. Fix reported issues before TC."
             exit 1
         } else {
-            $braceStr2 = ($braceOut | Out-String).Trim()
+            $braceStr2 = ($braceOut | Out-String).Trim() -replace '^\s*✓\s*', ''
             Write-Success $braceStr2
             if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "pass" $braceStr2 }
         }
