@@ -86,6 +86,8 @@ if (Test-Path $dashboardModule) {
     }
 }
 
+# -- Shared Variables --
+$TestLogDir = Join-Path $PSScriptRoot "data" "test-logs"
 
 # -- Utilities Module --
 $utilitiesModule = Join-Path $PSScriptRoot "scripts" "Utilities.psm1"
