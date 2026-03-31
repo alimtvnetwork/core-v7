@@ -25,8 +25,8 @@ function Write-CoverageTable {
 
     $hdrVisLen = $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
     $barHeader = ''.PadRight($BarWidth)
-    Write-BoxLine -Content "$($script:cMuted)$("Package".PadRight($pkgCol)) $("Cov %".PadLeft($pctCol))  $barHeader  $("Tests".PadLeft($testCol))$($script:cReset)" -Width $w -VisualLength $hdrVisLen
-    Write-BoxLine -Content "$($script:cMuted)$("─" * $pkgCol) $("─" * $pctCol)  $("─" * $BarWidth)  $("─" * $testCol)$($script:cReset)" -Width $w -VisualLength $hdrVisLen
+    Write-BoxLine -Content "$($script:cMuted)$("Package".PadRight($pkgCol)) $("Cov %".PadLeft($pctCol))  $barHeader  $("Tests".PadLeft($testCol))$($script:cReset)" -Width $w
+    Write-BoxLine -Content "$($script:cMuted)$("─" * $pkgCol) $("─" * $pctCol)  $("─" * $BarWidth)  $("─" * $testCol)$($script:cReset)" -Width $w
 
     $totalCoverage = 0.0; $at100Count = 0; $below100Count = 0
     foreach ($entry in $sorted) {
