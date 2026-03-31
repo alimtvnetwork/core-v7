@@ -109,9 +109,8 @@ function Write-PhaseSummaryBox {
         }
 
         $label = $key.PadRight($phaseLabelWidth)
-        $iconW = Get-IconVisualWidth $status
-        $visLen = $iconW + 1 + $phaseLabelWidth + $detail.Length
-        Write-BoxLine -Content "$icon $($script:cWhite)$label$($script:cReset)$($script:cMuted)$detail$($script:cReset)" -Width $w -VisualLength $visLen
+        $line = "$icon $($script:cWhite)$label$($script:cReset)$($script:cMuted)$detail$($script:cReset)"
+        Write-BoxLine -Content $line -Width $w
     }
 
     Write-BoxEmptyLine -Width $w; Write-BoxDivider -Width $w; Write-BoxEmptyLine -Width $w
@@ -119,21 +118,19 @@ function Write-PhaseSummaryBox {
     $total = $Phases.Count
     $phasesLabel = "PHASES".PadRight($phaseLabelWidth)
     $phasesVal = "$passCount/$total passed"
-    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$phasesLabel$($script:cReset)$($script:cWhite)$phasesVal$($script:cReset)" -Width $w -VisualLength ($phasesLabel.Length + $phasesVal.Length)
+    $phasesLine = "$($script:cWhite)$($script:cBold)$phasesLabel$($script:cReset)$($script:cWhite)$phasesVal$($script:cReset)"
+    Write-BoxLine -Content $phasesLine -Width $w
 
     $statusLabel = "STATUS".PadRight($phaseLabelWidth)
     if ($failCount -gt 0) {
         $statusIcon = "$($script:cRed)✗$($script:cReset)"; $statusText = "$($script:cRed)BLOCKED$($script:cReset)"
-        $statusIconW = 1
     } elseif ($warnCount -gt 0) {
         $statusIcon = "$($script:cYellow)⚠$($script:cReset)"; $statusText = "$($script:cYellow)REVIEW$($script:cReset)"
-        $statusIconW = 2
     } else {
         $statusIcon = "$($script:cLime)✓$($script:cReset)"; $statusText = "$($script:cLime)READY TO COMMIT$($script:cReset)"
-        $statusIconW = 1
     }
-    $statusTextPlain = if ($failCount -gt 0) { "BLOCKED" } elseif ($warnCount -gt 0) { "REVIEW" } else { "READY TO COMMIT" }
-    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$statusLabel$($script:cReset)$statusIcon $statusText" -Width $w -VisualLength ($statusLabel.Length + $statusIconW + 1 + $statusTextPlain.Length)
+    $statusLine = "$($script:cWhite)$($script:cBold)$statusLabel$($script:cReset)$statusIcon $statusText"
+    Write-BoxLine -Content $statusLine -Width $w
 
     Write-BoxEmptyLine -Width $w
     Write-BoxBottom -Width $w
