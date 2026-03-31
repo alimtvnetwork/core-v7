@@ -12,6 +12,8 @@ function Test-IsWideVisualCodePoint {
     return (
         ($CodePoint -ge 0x1100 -and $CodePoint -le 0x115F) -or
         ($CodePoint -ge 0x2329 -and $CodePoint -le 0x232A) -or
+        ($CodePoint -ge 0x2600 -and $CodePoint -le 0x26FF) -or   # Misc Symbols (⚠ ⚡ etc.)
+        ($CodePoint -ge 0x2700 -and $CodePoint -le 0x27BF) -or   # Dingbats (✓ ✗ etc.)
         ($CodePoint -ge 0x2E80 -and $CodePoint -le 0xA4CF) -or
         ($CodePoint -ge 0xAC00 -and $CodePoint -le 0xD7A3) -or
         ($CodePoint -ge 0xF900 -and $CodePoint -le 0xFAFF) -or
