@@ -927,6 +927,192 @@ When an AI creates a new enum package:
 
 ---
 
+## `UnmarshallEnumToValue` — Deep Dive
+
+The JSON unmarshalling chain works in three layers:
+
+```
+UnmarshalJSON(data)           ← Go's json package calls this (pointer receiver)
+  └→ UnmarshallEnumToValue*(data)   ← enum method, type-specific name
+       └→ BasicEnumImpl.UnmarshallToValue(true, data)  ← shared impl in enumimpl
+```
+
+### How `BasicEnumImpl.UnmarshallToValue` Works Internally
+
+```
+1. If data is nil and isMappedToFirstIfEmpty=false → return error
+2. If data is nil and isMappedToFirstIfEmpty=true  → return minVal (first enum value)
+3. If data is "" or `""` and isMappedToFirstIfEmpty=true → return minVal
+4. Otherwise → call GetValueByName(string(data))
+   a. Try exact match in jsonDoubleQuoteNameToValueHashMap
+   b. Try wrapping in double quotes and retry
+   c. If not found → return error with type name + valid ranges CSV
+```
+
+The hashmap is pre-populated with: `"Name"`, `"\"Name\""`, `"0"`, `"\"0\""` for each member, plus any alias entries.
+
+### Implementation Per Backing Type
+
+Each type has a differently-named method to avoid Go interface conflicts:
+
+#### Byte
+
+```go
+// The type-specific unmarshaller — name matches enuminf.UnmarshallEnumToValueByter
+func (it Status) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+// Go's JSON hook — MUST be pointer receiver
+func (it *Status) UnmarshalJSON(data []byte) error {
+    val, err := it.UnmarshallEnumToValue(data)
+    if err == nil {
+        *it = Status(val)
+    }
+    return err
+}
+```
+
+#### Int8
+
+```go
+func (it Severity) UnmarshallEnumToValueInt8(jsonUnmarshallingValue []byte) (int8, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+func (it *Severity) UnmarshalJSON(data []byte) error {
+    val, err := it.UnmarshallEnumToValueInt8(data)
+    if err == nil {
+        *it = Severity(val)
+    }
+    return err
+}
+```
+
+#### Int16
+
+```go
+func (it Region) UnmarshallEnumToValueInt16(jsonUnmarshallingValue []byte) (int16, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+func (it *Region) UnmarshalJSON(data []byte) error {
+    val, err := it.UnmarshallEnumToValueInt16(data)
+    if err == nil {
+        *it = Region(val)
+    }
+    return err
+}
+```
+
+#### Int32
+
+```go
+func (it ErrorCode) UnmarshallEnumToValueInt32(jsonUnmarshallingValue []byte) (int32, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+func (it *ErrorCode) UnmarshalJSON(data []byte) error {
+    val, err := it.UnmarshallEnumToValueInt32(data)
+    if err == nil {
+        *it = ErrorCode(val)
+    }
+    return err
+}
+```
+
+### Method Naming Convention
+
+| Backing Type | Unmarshall Method Name | Interface |
+|---|---|---|
+| `byte` | `UnmarshallEnumToValue([]byte) (byte, error)` | `enuminf.UnmarshallEnumToValueByter` |
+| `int8` | `UnmarshallEnumToValueInt8([]byte) (int8, error)` | `enuminf.BasicInt8Enumer` |
+| `int16` | `UnmarshallEnumToValueInt16([]byte) (int16, error)` | `enuminf.BasicInt16Enumer` |
+| `int32` | `UnmarshallEnumToValueInt32([]byte) (int32, error)` | `enuminf.BasicInt32Enumer` |
+
+### `isMappedToFirstIfEmpty` Parameter
+
+- **`true`** (default for most enums) — nil/empty JSON → first enum value (usually `Invalid`/`Unknown`). Use this when you want graceful degradation.
+- **`false`** — nil/empty JSON → returns error. Use this when you want strict parsing and missing values should be rejected.
+
+---
+
+## `Format()` — Deep Dive
+
+The `Format` method outputs a human-readable string by replacing placeholders in a format template.
+
+### Placeholder Keys
+
+| Placeholder | Replaced With | Example Value |
+|---|---|---|
+| `{type-name}` | `TypeName()` — the full Go type name | `status.Status` |
+| `{name}` | `Name()` — the enum member name | `Ready` |
+| `{value}` | `ValueString()` — the numeric value as string | `2` |
+
+### Implementation
+
+The enum method delegates to `numberEnumBase.Format()`:
+
+```go
+// On the enum type
+func (it Status) Format(format string) string {
+    return BasicEnumImpl.Format(format, it.Value())
+}
+
+// Inside numberEnumBase (what actually runs)
+func (it numberEnumBase) Format(format string, value any) string {
+    return Format(
+        it.TypeName(),      // replaces {type-name}
+        it.ToName(value),   // replaces {name}
+        it.ValueString(value), // replaces {value}
+        format,
+    )
+}
+```
+
+### Usage Examples
+
+```go
+s := status.Ready
+
+// Basic info string
+s.Format("Enum: {name} ({value})")
+// → "Enum: Ready (2)"
+
+// Full diagnostic
+s.Format("Enum of {type-name} - {name} - {value}")
+// → "Enum of status.Status - Ready - 2"
+
+// Log line
+s.Format("[{type-name}] current={name}")
+// → "[status.Status] current=Ready"
+
+// Error message
+s.Format("invalid state: expected Ready, got {name} (raw={value})")
+// → "invalid state: expected Ready, got Failed (raw=3)"
+
+// Just the name
+s.Format("{name}")
+// → "Ready"
+
+// Works the same on any backing type
+severity := severity.Critical
+severity.Format("{type-name}::{name}={value}")
+// → "severity.Severity::Critical=4"
+```
+
+### When to Use Format vs Name/String
+
+| Need | Use |
+|---|---|
+| Just the member name | `Name()` or `String()` |
+| Name with value in parens | `NameValue()` → `"Ready (2)"` |
+| Just the numeric value | `ToNumberString()` or `ValueString()` |
+| Custom template with type info | `Format("{type-name} - {name} - {value}")` |
+| Logging / diagnostics | `Format(...)` with your log template |
+
+---
+
 ## Related Docs
 
 - [coreimpl/enumimpl/readme.md](/coreimpl/enumimpl/readme.md)
