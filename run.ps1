@@ -101,8 +101,6 @@ if (Test-Path $testLogWriterModule) {
     Import-Module $testLogWriterModule -Force -DisableNameChecking
 }
 
-
-
 # -- Test Runner Module --
 $testRunnerModule = Join-Path $PSScriptRoot "scripts" "TestRunner.psm1"
 if (Test-Path $testRunnerModule) {
