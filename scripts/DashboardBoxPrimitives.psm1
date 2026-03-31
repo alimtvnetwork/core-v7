@@ -90,6 +90,7 @@ function Write-BoxLineCenter {
 }
 
 Export-ModuleMember -Function @(
+    'Get-AnsiVisualLength',
     'Get-ProgressBar', 'Write-BoxTop', 'Write-BoxBottom', 'Write-BoxDivider',
     'Write-BoxEmptyLine', 'Write-BoxLine', 'Write-BoxLineCenter'
 )
