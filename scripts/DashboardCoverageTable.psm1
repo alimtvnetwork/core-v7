@@ -23,7 +23,7 @@ function Write-CoverageTable {
     Write-BoxTop -Width $w; Write-BoxLineCenter -Text $Title -Width $w
     Write-BoxDivider -Width $w; Write-BoxEmptyLine -Width $w
 
-    $hdrVisLen = 1 + $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
+    $hdrVisLen = $pkgCol + 1 + $pctCol + 2 + $BarWidth + 2 + $testCol
     Write-BoxLine -Content "$($script:cMuted)$("Package".PadRight($pkgCol)) $("Cov %".PadLeft($pctCol))  $("".PadRight($BarWidth))  $("Tests".PadLeft($testCol))$($script:cReset)" -Width $w -VisualLength $hdrVisLen
     Write-BoxLine -Content "$($script:cMuted)$("─" * $pkgCol) $("─" * $pctCol)  $("─" * $BarWidth)  $("─" * $testCol)$($script:cReset)" -Width $w -VisualLength $hdrVisLen
 
