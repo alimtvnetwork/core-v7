@@ -1028,7 +1028,7 @@ Returns `@()` if the file does not exist (first run).
 
 ### 15.3 Integration in TC and PC
 
-Both `Invoke-TestCoverage` (TC) and `Invoke-PackageTestCoverage` (PC) wire up the comparison flow after coverage data is collected:
+Both `Invoke-TestCoverage` (in `scripts/CoverageRunner.psm1`) and `Invoke-PackageTestCoverage` (in `scripts/CoverageRunner.psm1`) wire up the comparison flow after coverage data is collected:
 
 ```powershell
 if (Get-Command Write-CoverageComparison -ErrorAction SilentlyContinue) {
@@ -1045,8 +1045,9 @@ if (Get-Command Write-CoverageComparison -ErrorAction SilentlyContinue) {
 
 All calls are guarded per the error-guarding pattern (§17).
 
-- **TC**: builds `$currentCovData` from the `$srcPkgStmts` hashtable (statement-level aggregation).
-- **PC**: aggregates per-source-package coverage from `go tool cover -func` output lines.
+- **TC** (`Invoke-TestCoverage` in `scripts/CoverageRunner.psm1`): builds `$currentCovData` from the `$srcPkgStmts` hashtable (statement-level aggregation).
+- **TCP** (`Invoke-PackageTestCoverage` in `scripts/CoverageRunner.psm1`): aggregates per-source-package coverage from `go tool cover -func` output lines.
+- **PC** (`Invoke-PreCommitCheck` in `scripts/PreCommitCheck.psm1`): does not produce coverage data.
 
 > **Console output spec**: The rendered diff table is documented as **Section 4: Coverage Diff** in
 > [`spec/03-powershell-test-run/07-tc-console-output.md`](../03-powershell-test-run/07-tc-console-output.md#section-4-coverage-diff).
