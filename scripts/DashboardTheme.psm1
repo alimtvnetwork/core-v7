@@ -109,6 +109,18 @@ function Set-ThemeColors {
     }
 }
 
+function Get-DashboardBoxWidth {
+    [CmdletBinding()]
+    [OutputType([int])]
+    param()
+
+    if ($script:BoxWidth -is [int] -and $script:BoxWidth -gt 0) {
+        return [int]$script:BoxWidth
+    }
+
+    return 48
+}
+
 function Initialize-DashboardUI {
     <#
     .SYNOPSIS
@@ -154,5 +166,6 @@ Export-ModuleMember -Function @(
     'Initialize-DashboardUI',
     'Get-TerminalTheme',
     'Set-ThemeColors',
+    'Get-DashboardBoxWidth',
     'Test-DashboardTheme'
 )
