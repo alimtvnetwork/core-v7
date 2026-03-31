@@ -619,10 +619,10 @@ When packages are blocked, render an error detail section below the dashboard bo
 
 ### 12.9 Integration Points
 
-To integrate into `run.ps1`, add `Register-Phase` calls at each phase boundary:
+Since `run.ps1` uses a modular architecture, `Register-Phase` calls live inside the individual modules (not in `run.ps1` itself):
 
 ```powershell
-# Example: in Invoke-FetchLatest
+# Example: in scripts/TestRunner.psm1 — Invoke-FetchLatest
 function Invoke-FetchLatest {
     Invoke-GitPull
     Register-Phase "Git Pull" "pass" "pulled from remote"
@@ -634,13 +634,22 @@ function Invoke-FetchLatest {
     } else {
         Register-Phase "Dependencies" "fail" "go mod tidy failed"
     }
-    # ... rest of function
 }
 
-# At end of TC or PC, render the dashboard:
-Write-PhaseSummaryBox $phases
-Write-Dashboard $dashboardData
+# At end of TC (in scripts/CoverageRunner.psm1) or PC (in scripts/PreCommitCheck.psm1):
+if (Get-Command Write-PhaseSummaryBox -ErrorAction SilentlyContinue) {
+    Write-Host ""
+    Write-PhaseSummaryBox
+}
 ```
+
+**Module locations for phase-producing commands:**
+
+| Command | Module | Function |
+|---------|--------|----------|
+| TC | `scripts/CoverageRunner.psm1` | `Invoke-TestCoverage` |
+| TCP | `scripts/CoverageRunner.psm1` | `Invoke-PackageTestCoverage` |
+| PC | `scripts/PreCommitCheck.psm1` | `Invoke-PreCommitCheck` |
 
 ### 12.10 Shared vs Command-Specific Phases
 
