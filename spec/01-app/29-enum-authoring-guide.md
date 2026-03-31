@@ -1,4 +1,4 @@
-# Enum Authoring Guide — Reusing `enumimpl` for Byte Enums
+# Enum Authoring Guide — Reusing `enumimpl` & `enuminf`
 
 ## Goal
 
@@ -8,128 +8,219 @@ Use this guide when you want a package like `reqtype`, `ostype`, or `enums/versi
 
 ---
 
-## Default Recommendation
+## Table of Contents
 
-For a normal byte-backed enum, use this pattern:
-
-1. `type MyEnum byte`
-2. `const (...)` with contiguous values
-3. `Ranges = [...]string{...}`
-4. `RangesMap = map[string]MyEnum{...}`
-5. `BasicEnumImpl = enumimpl.New.BasicByte.UsingTypeSlice(...)`
-6. Delegate shared enum behavior to `BasicEnumImpl`
-7. Keep only domain-specific logic on the enum type itself
-
-This is the standard path.
-
----
-
-## When to Use `enumimpl.New.BasicByte`
-
-Use `BasicByte` when all of these are true:
-
-- The enum is a **single byte value**
-- The values are **contiguous** or can be treated as a simple ordered range
-- You want shared behaviors like:
-  - `Name()` / `String()`
-  - `MarshalJSON()` / `UnmarshalJSON()`
-  - `RangeNamesCsv()`
-  - `MinMaxAny()`
-  - string-to-value mapping
-  - enum formatting helpers
-
-Examples:
-
-- request types
-- OS variants
-- version index positions
-- state/status enums
+1. [Architecture Overview](#architecture-overview)
+2. [Available Backing Types](#available-backing-types)
+3. [Interface Hierarchy](#interface-hierarchy)
+4. [Byte Enum — Full Pattern](#byte-enum--full-pattern)
+5. [Int8 Enum — Full Pattern](#int8-enum--full-pattern)
+6. [Int16 Enum — Full Pattern](#int16-enum--full-pattern)
+7. [Int32 Enum — Full Pattern](#int32-enum--full-pattern)
+8. [Alias-Aware Enum Pattern](#alias-aware-enum-pattern)
+9. [Explicit Non-Contiguous Values Pattern](#explicit-non-contiguous-values-pattern)
+10. [Case-Insensitive Parsing](#case-insensitive-parsing)
+11. [Formula Rule — Safe vs Unsafe](#formula-rule--safe-vs-unsafe)
+12. [AI Authoring Checklist](#ai-authoring-checklist)
 
 ---
 
-## When **Not** to Use a Standard Byte Enum
+## Architecture Overview
 
-Do **not** model bit-flags or combinable masks as a normal `BasicByte` enum.
+```
+enumimpl.New                          ← factory entry point (singleton)
+  ├── .BasicByte   → *BasicByte      ← byte-backed enum impl
+  ├── .BasicInt8   → *BasicInt8      ← int8-backed enum impl
+  ├── .BasicInt16  → *BasicInt16     ← int16-backed enum impl
+  ├── .BasicInt32  → *BasicInt32     ← int32-backed enum impl
+  ├── .BasicUInt16 → *BasicUInt16    ← uint16-backed enum impl
+  └── .BasicString → *BasicString    ← string-backed enum impl
 
-Examples:
+All number variants embed numberEnumBase which provides:
+  TypeName(), RangeNamesCsv(), MinMaxAny(), MinInt(), MaxInt(),
+  MinValueString(), MaxValueString(), AllNameValues(),
+  IntegerEnumRanges(), RangesDynamicMap(), StringRanges(),
+  StringRangesPtr(), Format(), OnlySupportedErr(), OnlySupportedMsgErr(),
+  RangesInvalidMessage(), RangesInvalidErr()
 
-- permission bits: `4 = read`, `2 = write`, `1 = execute`
-- flags built from `1 << n`
-- values that can be OR-combined like `1 | 2 | 4`
+Each typed variant adds:
+  ToEnumString(T), ToEnumJsonBytes(T), UnmarshallToValue(bool,[]byte)(T,error),
+  Min(), Max(), Ranges(), Hashmap(), IsValidRange(T), EnumType()
+```
 
-Why:
+---
 
-- `BasicByte` is designed around a **single enum value**
-- its range validation is min/max based, not full set-membership validation
-- bitmask/flags usually need composition logic, not only enum lookup
+## Available Backing Types
 
-For flags, use a dedicated helper/value object instead.
+| Type    | Go Type  | Creator                    | Impl Struct      | `EnumType()` returns    |
+|---------|----------|----------------------------|------------------|-------------------------|
+| Byte    | `byte`   | `enumimpl.New.BasicByte`   | `*BasicByte`     | `enumtype.Byte`         |
+| Int8    | `int8`   | `enumimpl.New.BasicInt8`   | `*BasicInt8`     | `enumtype.Integer8`     |
+| Int16   | `int16`  | `enumimpl.New.BasicInt16`  | `*BasicInt16`    | `enumtype.Integer16`    |
+| Int32   | `int32`  | `enumimpl.New.BasicInt32`  | `*BasicInt32`    | `enumtype.Integer32`    |
+| UInt16  | `uint16` | `enumimpl.New.BasicUInt16` | `*BasicUInt16`   | `enumtype.UnsignedInteger16` |
+| String  | `string` | `enumimpl.New.BasicString` | `*BasicString`   | `enumtype.String`       |
 
-**Example in this repo:** `chmodhelper/newAttributeCreator.go` converts the byte formula `4/2/1` into a richer `Attribute` object instead of pretending that combinations are ordinary enum members.
+Choose the **smallest type** that fits your value range.
+
+---
+
+## Interface Hierarchy
+
+Understanding which interfaces your enum must satisfy:
+
+### `enuminf.BaseEnumer` (required for all enums)
+
+```go
+type BaseEnumer interface {
+    // from enumNameStinger (unexported)
+    String() string                          // human-readable, delegates to ToEnumString
+
+    // SimpleEnumer
+    Name() string                            // enum member name ("Ready")
+    TypeName() string                        // full type name ("status.Status")
+    ValueByte() byte                         // raw byte value
+    IsValid() bool
+    IsInvalid() bool
+
+    // NameValuer
+    NameValue() string                       // "Ready (2)" format
+
+    // IsNameEqualer
+    IsNameEqual(name string) bool
+
+    // IsAnyNameOfChecker
+    IsAnyNamesOf(names ...string) bool
+
+    // ToNumberStringer
+    ToNumberString() string                  // value as number string: "2"
+
+    // IsValidInvalidChecker
+    IsValid() bool
+    IsInvalid() bool
+
+    // BasicEnumValuer — ALL these must be implemented
+    ValueByte() byte
+    ValueInt() int
+    ValueInt8() int8
+    ValueInt16() int16
+    ValueUInt16() uint16
+    ValueInt32() int32
+    ValueString() string                     // number as string, NOT name
+
+    // RangeNamesCsvGetter
+    RangeNamesCsv() string
+
+    // corejson.JsonMarshaller
+    MarshalJSON() ([]byte, error)
+    UnmarshalJSON(data []byte) error
+}
+```
+
+### `enuminf.BasicEnumer` (extends BaseEnumer)
+
+```go
+type BasicEnumer interface {
+    BaseEnumer
+    EnumFormatter                            // Format(format string) string
+    MinMaxAny() (min, max any)
+    MinValueString() string
+    MaxValueString() string
+    MaxInt() int
+    MinInt() int
+    RangesDynamicMapGetter                   // RangesDynamicMap() map[string]any
+    AllNameValues() []string                 // ["Invalid (0)", "Ready (1)", ...]
+    OnlySupportedNamesErrorer                // OnlySupportedErr(...string) error
+    IntegerEnumRangesGetter                  // IntegerEnumRanges() []int
+    EnumType() EnumTyper
+}
+```
+
+### `enuminf.StandardEnumer` (extends BasicEnumer)
+
+```go
+type StandardEnumer interface {
+    BasicEnumer
+    StringRangesGetter                       // StringRanges(), StringRangesPtr()
+    RangeValidateChecker                     // IsValidRange(), IsInvalidRange(), RangesInvalidMessage(), RangesInvalidErr()
+    corejson.JsonContractsBinder
+}
+```
+
+### Type-Specific Interfaces (`enuminf.BasicByteEnumer`, etc.)
+
+Each backing type has a dedicated interface with typed min/max/ranges/unmarshal:
+
+```go
+// enuminf.BasicByteEnumer
+type BasicByteEnumer interface {
+    UnmarshallEnumToValueByter               // UnmarshallEnumToValue([]byte) (byte, error)
+    MaxByte() byte
+    MinByte() byte
+    ValueByte() byte
+    RangesByte() []byte
+}
+
+// enuminf.BasicInt8Enumer
+type BasicInt8Enumer interface {
+    UnmarshallEnumToValueInt8([]byte) (int8, error)
+    MaxInt8() int8
+    MinInt8() int8
+    ValueInt8() int8
+    RangesInt8() []int8
+    ToEnumString(input int8) string
+}
+
+// enuminf.BasicInt16Enumer
+type BasicInt16Enumer interface {
+    UnmarshallEnumToValueInt16([]byte) (int16, error)
+    MaxInt16() int16
+    MinInt16() int16
+    ValueInt16() int16
+    RangesInt16() []int16
+    ToEnumString(input int16) string
+}
+
+// enuminf.BasicInt32Enumer
+type BasicInt32Enumer interface {
+    UnmarshallEnumToValueInt32([]byte) (int32, error)
+    MaxInt32() int32
+    MinInt32() int32
+    ValueInt32() int32
+    RangesInt32() []int32
+    ToEnumString(input int32) string
+}
+```
 
 ---
 
 ## Package Shape
 
-For a reusable enum package, prefer this structure:
-
 ```text
 mypackage/
 ├── MyEnum.go         # enum type + methods
-├── vars.go           # Ranges, RangesMap, grouping maps, BasicEnumImpl
+├── vars.go           # Ranges, RangesMap, BasicEnumImpl
 ├── consts.go         # package constants if needed
-├── readme.md         # package overview and examples
-└── extra files       # range helpers, logical groups, result structs, etc.
+└── readme.md         # package overview
 ```
 
-If the main enum file becomes large, split it by responsibility.
-
-Good split examples:
-
-- `MyEnum.naming.go`
-- `MyEnum.json.go`
-- `MyEnum.checkers.go`
-- `MyEnum.logical-groups.go`
-
-This matters because large single enum files become hard for AI handoff.
+For large enums, split by responsibility:
+- `MyEnum.naming.go` — Name, String, Format, NameValue
+- `MyEnum.json.go` — MarshalJSON, UnmarshalJSON, UnmarshallEnumToValue
+- `MyEnum.checkers.go` — IsValid, IsFailed, domain checkers
+- `MyEnum.values.go` — Value*, Min*, Max*, Ranges*
 
 ---
 
-## Required Reuse Points
+## Byte Enum — Full Pattern
 
-Most byte enums in this codebase should reuse these components:
-
-- `coreimpl/enumimpl.BasicByte`
-- `enumimpl.New.BasicByte.*`
-- `coreinterface/enuminf`
-- `reflectinternal.TypeName(...)` for the type name
-
-Core idea:
-
-```go
-var BasicEnumImpl = enumimpl.New.BasicByte.UsingTypeSlice(
-    reflectinternal.TypeName(Invalid),
-    Ranges[:],
-)
-```
-
-Then the enum methods mostly delegate to `BasicEnumImpl`.
-
----
-
-## Canonical Sequential Byte Enum Pattern
-
-### 1) Define the enum type
+### `consts.go`
 
 ```go
 package status
 
 type Status byte
-```
 
-### 2) Define contiguous constants
-
-```go
 const (
     Invalid Status = iota
     Pending
@@ -138,7 +229,7 @@ const (
 )
 ```
 
-### 3) Define the shared lookup data in `vars.go`
+### `vars.go`
 
 ```go
 package status
@@ -170,102 +261,450 @@ var (
 )
 ```
 
-### 4) Implement the minimum reusable methods
+### `Status.go` — Complete Method Set
 
 ```go
 package status
 
 import "github.com/alimtvnetwork/core/coreinterface/enuminf"
 
-func (it Status) Value() byte {
-    return byte(it)
+// ── Value accessors (BasicEnumValuer) ──────────────────────────
+
+func (it Status) Value() byte       { return byte(it) }
+func (it Status) ValueByte() byte   { return byte(it) }
+func (it Status) ValueInt() int     { return int(it) }
+func (it Status) ValueInt8() int8   { return int8(it) }
+func (it Status) ValueInt16() int16 { return int16(it) }
+func (it Status) ValueUInt16() uint16 { return uint16(it) }
+func (it Status) ValueInt32() int32 { return int32(it) }
+func (it Status) ValueString() string { return BasicEnumImpl.ToNumberString(it.Value()) }
+
+// ── Naming (enumNameStinger, SimpleEnumer) ─────────────────────
+
+func (it Status) Name() string     { return BasicEnumImpl.ToEnumString(it.Value()) }
+func (it Status) String() string   { return BasicEnumImpl.ToEnumString(it.Value()) }
+func (it Status) TypeName() string { return BasicEnumImpl.TypeName() }
+func (it Status) NameValue() string {
+    return BasicEnumImpl.NameWithValue(it.Value())
+}
+func (it Status) ToNumberString() string {
+    return BasicEnumImpl.ToNumberString(it.Value())
 }
 
-func (it Status) ValueByte() byte {
-    return it.Value()
+// ── Equality & matching ────────────────────────────────────────
+
+func (it Status) IsNameEqual(name string) bool {
+    return it.Name() == name
 }
 
-func (it Status) ValueInt() int {
-    return int(it)
+func (it Status) IsAnyNamesOf(names ...string) bool {
+    currentName := it.Name()
+    for _, n := range names {
+        if n == currentName {
+            return true
+        }
+    }
+    return false
 }
 
-func (it Status) Name() string {
-    return BasicEnumImpl.ToEnumString(it.Value())
+func (it Status) IsByteValueEqual(value byte) bool {
+    return byte(it) == value
 }
 
-func (it Status) String() string {
-    return BasicEnumImpl.ToEnumString(it.Value())
+func (it Status) IsAnyValuesEqual(anyByteValues ...byte) bool {
+    v := byte(it)
+    for _, b := range anyByteValues {
+        if v == b {
+            return true
+        }
+    }
+    return false
 }
 
-func (it Status) TypeName() string {
-    return BasicEnumImpl.TypeName()
+func (it Status) IsValueEqual(value byte) bool {
+    return byte(it) == value
 }
 
-func (it Status) RangeNamesCsv() string {
-    return BasicEnumImpl.RangeNamesCsv()
+// ── Valid/Invalid ──────────────────────────────────────────────
+
+func (it Status) IsValid() bool   { return it != Invalid }
+func (it Status) IsInvalid() bool { return it == Invalid }
+
+// ── Range info (BasicEnumer) ───────────────────────────────────
+
+func (it Status) RangeNamesCsv() string              { return BasicEnumImpl.RangeNamesCsv() }
+func (it Status) MinMaxAny() (min, max any)          { return BasicEnumImpl.MinMaxAny() }
+func (it Status) MinValueString() string             { return BasicEnumImpl.MinValueString() }
+func (it Status) MaxValueString() string             { return BasicEnumImpl.MaxValueString() }
+func (it Status) MaxInt() int                        { return BasicEnumImpl.MaxInt() }
+func (it Status) MinInt() int                        { return BasicEnumImpl.MinInt() }
+func (it Status) RangesDynamicMap() map[string]any   { return BasicEnumImpl.RangesDynamicMap() }
+func (it Status) AllNameValues() []string            { return BasicEnumImpl.AllNameValues() }
+func (it Status) IntegerEnumRanges() []int           { return BasicEnumImpl.IntegerEnumRanges() }
+
+// ── OnlySupportedNamesErrorer ──────────────────────────────────
+
+func (it Status) OnlySupportedErr(names ...string) error {
+    return BasicEnumImpl.OnlySupportedErr(names...)
+}
+func (it Status) OnlySupportedMsgErr(message string, names ...string) error {
+    return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
 }
 
-func (it Status) MinMaxAny() (min, max any) {
-    return BasicEnumImpl.MinMaxAny()
+// ── Format (EnumFormatter) ─────────────────────────────────────
+// Format string keys: {type-name}, {name}, {value}
+// Example: "Enum of {type-name} - {name} - {value}"
+//       →  "Enum of status.Status - Ready - 2"
+
+func (it Status) Format(format string) string {
+    return BasicEnumImpl.Format(format, it.Value())
 }
 
-func (it Status) RangesDynamicMap() map[string]any {
-    return BasicEnumImpl.RangesDynamicMap()
-}
+// ── Type-specific: BasicByteEnumer ─────────────────────────────
 
-func (it Status) IsValid() bool {
-    return it != Invalid
-}
+func (it Status) MaxByte() byte    { return BasicEnumImpl.Max() }
+func (it Status) MinByte() byte    { return BasicEnumImpl.Min() }
+func (it Status) RangesByte() []byte { return BasicEnumImpl.Ranges() }
 
-func (it Status) IsInvalid() bool {
-    return it == Invalid
-}
+// ── Range validation (StandardEnumer) ──────────────────────────
+
+func (it Status) IsValidRange() bool          { return BasicEnumImpl.IsValidRange(it.Value()) }
+func (it Status) IsInvalidRange() bool        { return !it.IsValidRange() }
+func (it Status) RangesInvalidMessage() string { return BasicEnumImpl.RangesInvalidMessage() }
+func (it Status) RangesInvalidErr() error     { return BasicEnumImpl.RangesInvalidErr() }
+
+// ── String ranges (StandardEnumer) ─────────────────────────────
+
+func (it Status) StringRanges() []string    { return BasicEnumImpl.StringRanges() }
+func (it Status) StringRangesPtr() []string { return BasicEnumImpl.StringRangesPtr() }
+
+// ── JSON marshalling ───────────────────────────────────────────
 
 func (it Status) MarshalJSON() ([]byte, error) {
     return BasicEnumImpl.ToEnumJsonBytes(it.Value())
 }
 
 func (it *Status) UnmarshalJSON(data []byte) error {
-    dataConv, err := it.UnmarshallEnumToValue(data)
-
+    val, err := it.UnmarshallEnumToValue(data)
     if err == nil {
-        *it = Status(dataConv)
+        *it = Status(val)
     }
-
     return err
 }
+
+func (it Status) UnmarshallEnumToValue(jsonUnmarshallingValue []byte) (byte, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+// ── EnumType ───────────────────────────────────────────────────
 
 func (it Status) EnumType() enuminf.EnumTyper {
     return BasicEnumImpl.EnumType()
 }
+
+// ── Domain-specific checkers (custom per enum) ─────────────────
+
+func (it Status) IsPending() bool { return it == Pending }
+func (it Status) IsReady() bool   { return it == Ready }
+func (it Status) IsFailed() bool  { return it == Failed }
 ```
 
-### 5) Add domain checkers as plain methods
+---
+
+## Int8 Enum — Full Pattern
+
+Use `int8` when you need more than 255 values or want signed range semantics with a small footprint.
+
+### `consts.go`
 
 ```go
-func (it Status) IsPending() bool {
-    return it == Pending
+package severity
+
+type Severity int8
+
+const (
+    Unknown  Severity = iota
+    Low
+    Medium
+    High
+    Critical
+)
+```
+
+### `vars.go`
+
+```go
+package severity
+
+import (
+    "github.com/alimtvnetwork/core/coreimpl/enumimpl"
+    "github.com/alimtvnetwork/core/internal/reflectinternal"
+)
+
+var (
+    Ranges = [...]string{
+        Unknown:  "Unknown",
+        Low:      "Low",
+        Medium:   "Medium",
+        High:     "High",
+        Critical: "Critical",
+    }
+
+    BasicEnumImpl = enumimpl.New.BasicInt8.UsingTypeSlice(
+        reflectinternal.TypeName(Unknown),
+        Ranges[:],
+    )
+)
+```
+
+### `Severity.go` — Complete Method Set
+
+```go
+package severity
+
+import "github.com/alimtvnetwork/core/coreinterface/enuminf"
+
+// ── Value accessors (BasicEnumValuer) ──────────────────────────
+
+func (it Severity) Value() int8       { return int8(it) }
+func (it Severity) ValueByte() byte   { return byte(it) }
+func (it Severity) ValueInt() int     { return int(it) }
+func (it Severity) ValueInt8() int8   { return int8(it) }
+func (it Severity) ValueInt16() int16 { return int16(it) }
+func (it Severity) ValueUInt16() uint16 { return uint16(it) }
+func (it Severity) ValueInt32() int32 { return int32(it) }
+func (it Severity) ValueString() string { return BasicEnumImpl.ToNumberString(it.Value()) }
+
+// ── Naming ─────────────────────────────────────────────────────
+
+func (it Severity) Name() string     { return BasicEnumImpl.ToEnumString(it.Value()) }
+func (it Severity) String() string   { return BasicEnumImpl.ToEnumString(it.Value()) }
+func (it Severity) TypeName() string { return BasicEnumImpl.TypeName() }
+func (it Severity) NameValue() string { return BasicEnumImpl.NameWithValue(it.Value()) }
+func (it Severity) ToNumberString() string { return BasicEnumImpl.ToNumberString(it.Value()) }
+
+// ── Equality & matching ────────────────────────────────────────
+
+func (it Severity) IsNameEqual(name string) bool { return it.Name() == name }
+func (it Severity) IsAnyNamesOf(names ...string) bool {
+    n := it.Name()
+    for _, name := range names { if name == n { return true } }
+    return false
+}
+func (it Severity) IsValueEqual(value int8) bool { return int8(it) == value }
+func (it Severity) IsAnyValuesEqual(anyValues ...int8) bool {
+    v := int8(it)
+    for _, val := range anyValues { if v == val { return true } }
+    return false
 }
 
-func (it Status) IsReady() bool {
-    return it == Ready
+// ── Valid/Invalid ──────────────────────────────────────────────
+
+func (it Severity) IsValid() bool   { return it != Unknown }
+func (it Severity) IsInvalid() bool { return it == Unknown }
+
+// ── Range info (BasicEnumer) — all delegate to BasicEnumImpl ───
+
+func (it Severity) RangeNamesCsv() string            { return BasicEnumImpl.RangeNamesCsv() }
+func (it Severity) MinMaxAny() (min, max any)        { return BasicEnumImpl.MinMaxAny() }
+func (it Severity) MinValueString() string           { return BasicEnumImpl.MinValueString() }
+func (it Severity) MaxValueString() string           { return BasicEnumImpl.MaxValueString() }
+func (it Severity) MaxInt() int                      { return BasicEnumImpl.MaxInt() }
+func (it Severity) MinInt() int                      { return BasicEnumImpl.MinInt() }
+func (it Severity) RangesDynamicMap() map[string]any { return BasicEnumImpl.RangesDynamicMap() }
+func (it Severity) AllNameValues() []string          { return BasicEnumImpl.AllNameValues() }
+func (it Severity) IntegerEnumRanges() []int         { return BasicEnumImpl.IntegerEnumRanges() }
+
+func (it Severity) OnlySupportedErr(names ...string) error {
+    return BasicEnumImpl.OnlySupportedErr(names...)
+}
+func (it Severity) OnlySupportedMsgErr(message string, names ...string) error {
+    return BasicEnumImpl.OnlySupportedMsgErr(message, names...)
 }
 
-func (it Status) IsFailed() bool {
-    return it == Failed
+// ── Format ─────────────────────────────────────────────────────
+
+func (it Severity) Format(format string) string {
+    return BasicEnumImpl.Format(format, it.Value())
+}
+
+// ── Type-specific: BasicInt8Enumer ─────────────────────────────
+
+func (it Severity) MaxInt8() int8      { return BasicEnumImpl.Max() }
+func (it Severity) MinInt8() int8      { return BasicEnumImpl.Min() }
+func (it Severity) RangesInt8() []int8 { return BasicEnumImpl.Ranges() }
+func (it Severity) ToEnumString(input int8) string { return BasicEnumImpl.ToEnumString(input) }
+
+// ── Range validation ───────────────────────────────────────────
+
+func (it Severity) IsValidRange() bool          { return BasicEnumImpl.IsValidRange(it.Value()) }
+func (it Severity) IsInvalidRange() bool        { return !it.IsValidRange() }
+func (it Severity) RangesInvalidMessage() string { return BasicEnumImpl.RangesInvalidMessage() }
+func (it Severity) RangesInvalidErr() error     { return BasicEnumImpl.RangesInvalidErr() }
+
+func (it Severity) StringRanges() []string    { return BasicEnumImpl.StringRanges() }
+func (it Severity) StringRangesPtr() []string { return BasicEnumImpl.StringRangesPtr() }
+
+// ── JSON ───────────────────────────────────────────────────────
+
+func (it Severity) MarshalJSON() ([]byte, error) {
+    return BasicEnumImpl.ToEnumJsonBytes(it.Value())
+}
+
+func (it *Severity) UnmarshalJSON(data []byte) error {
+    val, err := it.UnmarshallEnumToValueInt8(data)
+    if err == nil { *it = Severity(val) }
+    return err
+}
+
+func (it Severity) UnmarshallEnumToValueInt8(jsonUnmarshallingValue []byte) (int8, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, jsonUnmarshallingValue)
+}
+
+// ── EnumType ───────────────────────────────────────────────────
+
+func (it Severity) EnumType() enuminf.EnumTyper {
+    return BasicEnumImpl.EnumType()
 }
 ```
 
-### 6) Add logical grouping maps only when they add meaning
+---
+
+## Int16 Enum — Full Pattern
+
+Use `int16` when values exceed `int8` range (-128..127) or you need a larger ordinal space.
+
+### `vars.go`
 
 ```go
-var finalStates = map[Status]bool{
-    Ready:  true,
-    Failed: true,
+package region
+
+import (
+    "github.com/alimtvnetwork/core/coreimpl/enumimpl"
+    "github.com/alimtvnetwork/core/internal/reflectinternal"
+)
+
+type Region int16
+
+const (
+    Unknown Region = iota
+    USEast
+    USWest
+    Europe
+    AsiaPacific
+)
+
+var (
+    Ranges = [...]string{
+        Unknown:     "Unknown",
+        USEast:      "USEast",
+        USWest:      "USWest",
+        Europe:      "Europe",
+        AsiaPacific: "AsiaPacific",
+    }
+
+    BasicEnumImpl = enumimpl.New.BasicInt16.UsingTypeSlice(
+        reflectinternal.TypeName(Unknown),
+        Ranges[:],
+    )
+)
+```
+
+### Key Differences from Int8
+
+The method set is identical to Int8 except:
+
+```go
+// Value accessor returns int16
+func (it Region) Value() int16 { return int16(it) }
+
+// Type-specific interface: BasicInt16Enumer
+func (it Region) MaxInt16() int16      { return BasicEnumImpl.Max() }
+func (it Region) MinInt16() int16      { return BasicEnumImpl.Min() }
+func (it Region) RangesInt16() []int16 { return BasicEnumImpl.Ranges() }
+func (it Region) ToEnumString(input int16) string { return BasicEnumImpl.ToEnumString(input) }
+
+// Typed equality
+func (it Region) IsValueEqual(value int16) bool { return int16(it) == value }
+func (it Region) IsAnyValuesEqual(anyValues ...int16) bool {
+    v := int16(it)
+    for _, val := range anyValues { if v == val { return true } }
+    return false
 }
 
-func (it Status) IsFinal() bool {
-    return finalStates[it]
+// JSON unmarshal
+func (it Region) UnmarshallEnumToValueInt16(data []byte) (int16, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, data)
+}
+```
+
+All other methods (Name, String, TypeName, MarshalJSON, Format, Range*, etc.) are identical — just delegate to `BasicEnumImpl` the same way.
+
+---
+
+## Int32 Enum — Full Pattern
+
+Use `int32` for enums with large value ranges or when interoperating with systems that use 32-bit identifiers.
+
+### `vars.go`
+
+```go
+package errorcode
+
+import (
+    "github.com/alimtvnetwork/core/coreimpl/enumimpl"
+    "github.com/alimtvnetwork/core/internal/reflectinternal"
+)
+
+type ErrorCode int32
+
+const (
+    None          ErrorCode = iota
+    NotFound
+    Unauthorized
+    ServerError
+    RateLimited
+)
+
+var (
+    Ranges = [...]string{
+        None:         "None",
+        NotFound:     "NotFound",
+        Unauthorized: "Unauthorized",
+        ServerError:  "ServerError",
+        RateLimited:  "RateLimited",
+    }
+
+    BasicEnumImpl = enumimpl.New.BasicInt32.UsingTypeSlice(
+        reflectinternal.TypeName(None),
+        Ranges[:],
+    )
+)
+```
+
+### Key Differences from Int8/Int16
+
+```go
+// Value accessor returns int32
+func (it ErrorCode) Value() int32 { return int32(it) }
+
+// Type-specific interface: BasicInt32Enumer
+func (it ErrorCode) MaxInt32() int32      { return BasicEnumImpl.Max() }
+func (it ErrorCode) MinInt32() int32      { return BasicEnumImpl.Min() }
+func (it ErrorCode) RangesInt32() []int32 { return BasicEnumImpl.Ranges() }
+func (it ErrorCode) ToEnumString(input int32) string { return BasicEnumImpl.ToEnumString(input) }
+
+// Typed equality
+func (it ErrorCode) IsValueEqual(value int32) bool { return int32(it) == value }
+func (it ErrorCode) IsAnyValuesEqual(anyValues ...int32) bool {
+    v := int32(it)
+    for _, val := range anyValues { if v == val { return true } }
+    return false
+}
+
+// JSON unmarshal
+func (it ErrorCode) UnmarshallEnumToValueInt32(data []byte) (int32, error) {
+    return BasicEnumImpl.UnmarshallToValue(true, data)
 }
 ```
 
@@ -273,40 +712,80 @@ func (it Status) IsFinal() bool {
 
 ## Alias-Aware Enum Pattern
 
-If JSON or user input should accept aliases, use an alias map when building `BasicEnumImpl`.
+Aliases let JSON/user input accept multiple names for the same value.
+
+### Byte with Aliases
 
 ```go
 var BasicEnumImpl = enumimpl.New.BasicByte.CreateUsingSlicePlusAliasMapOptions(
-    true,
+    true,        // include uppercase/lowercase
     Invalid,
     Ranges[:],
     map[string]byte{
-        "ok":    Ready.Value(),
-        "error": Failed.Value(),
+        "ok":    byte(Ready),
+        "error": byte(Failed),
     },
 )
 ```
 
-Use this when you want inputs such as:
+### Int8 with Aliases
 
-- `"Ready"`
-- `"ready"`
-- `"READY"`
-- `"ok"`
+```go
+var BasicEnumImpl = enumimpl.New.BasicInt8.DefaultWithAliasMap(
+    Unknown,
+    Ranges[:],
+    map[string]int8{
+        "warn": int8(Medium),
+        "crit": int8(Critical),
+    },
+)
+```
 
-all to resolve to the same enum value.
+### Int32 with Aliases
+
+```go
+var BasicEnumImpl = enumimpl.New.BasicInt32.DefaultWithAliasMap(
+    None,
+    Ranges[:],
+    map[string]int32{
+        "404": int32(NotFound),
+        "401": int32(Unauthorized),
+    },
+)
+```
 
 ---
 
-## Explicit Byte Values Pattern
+## Case-Insensitive Parsing
 
-Use this only when values must be assigned explicitly and still behave like a single enum value.
-
-Example:
+For enums that must parse `"ready"`, `"READY"`, and `"Ready"` identically, use the `AllCases` factory variants (available on int8):
 
 ```go
-type Priority byte
+// Int8 — case insensitive
+var BasicEnumImpl = enumimpl.New.BasicInt8.DefaultAllCases(
+    Unknown,
+    Ranges[:],
+)
 
+// Int8 — case insensitive with aliases
+var BasicEnumImpl = enumimpl.New.BasicInt8.DefaultWithAliasMapAllCases(
+    Unknown,
+    Ranges[:],
+    map[string]int8{"warn": int8(Medium)},
+)
+```
+
+For byte enums, use `CreateUsingSlicePlusAliasMapOptions` with `isIncludeUppercaseLowercase = true`.
+
+---
+
+## Explicit Non-Contiguous Values Pattern
+
+When values must be assigned explicitly (not iota):
+
+### Byte
+
+```go
 const (
     Low    Priority = 1
     Medium Priority = 2
@@ -325,139 +804,126 @@ var BasicEnumImpl = enumimpl.New.BasicByte.CreateUsingMapPlusAliasMapOptions(
 )
 ```
 
-Use this pattern when values are explicit but still represent **one chosen state**, not combined flags.
+### Int8
+
+```go
+var BasicEnumImpl = enumimpl.New.BasicInt8.CreateUsingMap(
+    reflectinternal.TypeName(Unknown),
+    map[int8]string{
+        0:  "Unknown",
+        10: "Low",
+        20: "Medium",
+        30: "High",
+    },
+)
+```
+
+### Int32
+
+```go
+var BasicEnumImpl = enumimpl.New.BasicInt32.CreateUsingMap(
+    reflectinternal.TypeName(None),
+    map[int32]string{
+        0:   "None",
+        404: "NotFound",
+        401: "Unauthorized",
+        500: "ServerError",
+    },
+)
+```
 
 ---
 
-## Formula Rule for Byte Enums
+## Formula Rule — Safe vs Unsafe
 
-Use this rule before generating code:
+### Safe for `BasicByte` / `BasicInt8` / `BasicInt16` / `BasicInt32`
 
-### Safe for `BasicByte`
-
-- `0, 1, 2, 3, ...`
+- `0, 1, 2, 3, ...` (iota)
 - `1, 2, 3, ...`
-- any byte values that represent **one selected member**
+- Any values representing **one selected member**
+- Non-contiguous values via `CreateUsingMap`
 
-### Not safe as a normal enum
+### NOT safe as a normal enum
 
-- `1 << 0`, `1 << 1`, `1 << 2` when values are meant to be combined
-- permission-style formulas like `4`, `2`, `1`, `7`
-- bitwise flag sets
+- `1 << 0`, `1 << 1`, `1 << 2` — combinable bitmasks
+- Permission formulas like `4`, `2`, `1`, `7`
+- Bitwise flag sets
 
-If the design is combinable, build a **flags helper** instead of a normal enum package.
+For flags, build a **flags helper** instead. See `chmodhelper/newAttributeCreator.go` for a real example.
 
 ---
 
-## Methods That Should Usually Delegate to `BasicEnumImpl`
+## Creator Factory Methods Reference
 
-Prefer delegation for all generic enum behavior.
+All creators share the same method names. Substitute the type:
 
-Typical delegation set:
+| Method | Description |
+|--------|-------------|
+| `UsingTypeSlice(typeName, names[])` | Contiguous iota enum from string slice |
+| `Default(firstItem, names[])` | Same but infers typeName via reflection |
+| `DefaultWithAliasMap(firstItem, names[], aliasMap)` | Contiguous + aliases |
+| `DefaultAllCases(firstItem, names[])` | Contiguous + upper/lower parsing *(int8 only)* |
+| `DefaultWithAliasMapAllCases(firstItem, names[], aliasMap)` | All cases + aliases *(int8 only)* |
+| `CreateUsingMap(typeName, map[T]string)` | Non-contiguous explicit values |
+| `CreateUsingMapPlusAliasMap(typeName, map[T]string, aliasMap)` | Explicit + aliases |
+| `CreateUsingAliasMap(typeName, values[], names[], aliasMap, min, max)` | Full manual control |
+| `UsingFirstItemSliceAliasMap(firstItem, names[], aliasMap)` | Infer type + aliases |
 
-- `Name()`
-- `String()`
-- `NameValue()`
-- `TypeName()`
-- `RangeNamesCsv()`
-- `RangesDynamicMap()`
-- `MinMaxAny()`
-- `IntegerEnumRanges()`
-- `MarshalJSON()`
-- `UnmarshalJSON()`
-- `Format(...)`
-- `EnumType()`
+---
 
-Only keep custom business semantics local, such as:
+## Methods Delegation Quick Reference
 
-- `IsCreateLogically()`
-- `IsFinal()`
-- `IsHttpMethod()`
-- `IsRetryAction()`
+This table shows which `BasicEnumImpl` method each enum method delegates to:
+
+| Enum Method | Delegates To |
+|-------------|-------------|
+| `Name()` | `BasicEnumImpl.ToEnumString(it.Value())` |
+| `String()` | `BasicEnumImpl.ToEnumString(it.Value())` |
+| `TypeName()` | `BasicEnumImpl.TypeName()` |
+| `NameValue()` | `BasicEnumImpl.NameWithValue(it.Value())` |
+| `ToNumberString()` | `BasicEnumImpl.ToNumberString(it.Value())` |
+| `ValueString()` | `BasicEnumImpl.ToNumberString(it.Value())` |
+| `RangeNamesCsv()` | `BasicEnumImpl.RangeNamesCsv()` |
+| `MinMaxAny()` | `BasicEnumImpl.MinMaxAny()` |
+| `MinValueString()` | `BasicEnumImpl.MinValueString()` |
+| `MaxValueString()` | `BasicEnumImpl.MaxValueString()` |
+| `MaxInt()` | `BasicEnumImpl.MaxInt()` |
+| `MinInt()` | `BasicEnumImpl.MinInt()` |
+| `RangesDynamicMap()` | `BasicEnumImpl.RangesDynamicMap()` |
+| `AllNameValues()` | `BasicEnumImpl.AllNameValues()` |
+| `IntegerEnumRanges()` | `BasicEnumImpl.IntegerEnumRanges()` |
+| `Format(fmt)` | `BasicEnumImpl.Format(fmt, it.Value())` |
+| `OnlySupportedErr(...)` | `BasicEnumImpl.OnlySupportedErr(...)` |
+| `MarshalJSON()` | `BasicEnumImpl.ToEnumJsonBytes(it.Value())` |
+| `UnmarshalJSON()` | via `UnmarshallEnumToValue*` → `BasicEnumImpl.UnmarshallToValue(true, data)` |
+| `EnumType()` | `BasicEnumImpl.EnumType()` |
+| `Max*()` / `Min*()` | `BasicEnumImpl.Max()` / `BasicEnumImpl.Min()` |
+| `Ranges*()` | `BasicEnumImpl.Ranges()` |
+| `IsValidRange()` | `BasicEnumImpl.IsValidRange(it.Value())` |
+| `RangesInvalidMessage()` | `BasicEnumImpl.RangesInvalidMessage()` |
+| `RangesInvalidErr()` | `BasicEnumImpl.RangesInvalidErr()` |
+| `StringRanges()` | `BasicEnumImpl.StringRanges()` |
 
 ---
 
 ## AI Authoring Checklist
 
-When an AI creates a new enum package, it should follow this checklist:
+When an AI creates a new enum package:
 
-1. Choose `byte` only if the enum is byte-sized and single-valued
-2. Prefer contiguous constants with `iota`
-3. Put shared lookup data in `vars.go`
-4. Build `BasicEnumImpl` with `enumimpl.New.BasicByte.*`
-5. Delegate generic enum behavior to `BasicEnumImpl`
-6. Add custom `IsX()` methods only for domain meaning
-7. Add logical grouping maps only when reused by 2+ methods
-8. Keep read-only methods on value receivers
-9. Split large enum files by responsibility
-10. Do not model bitmask flags as a plain enum package
-
----
-
-## Quick Copy Template
-
-```go
-package myenum
-
-import (
-    "github.com/alimtvnetwork/core/coreimpl/enumimpl"
-    "github.com/alimtvnetwork/core/coreinterface/enuminf"
-    "github.com/alimtvnetwork/core/internal/reflectinternal"
-)
-
-type MyEnum byte
-
-const (
-    Invalid MyEnum = iota
-    First
-    Second
-)
-
-var (
-    Ranges = [...]string{
-        Invalid: "Invalid",
-        First:   "First",
-        Second:  "Second",
-    }
-
-    RangesMap = map[string]MyEnum{
-        "Invalid": Invalid,
-        "First":   First,
-        "Second":  Second,
-    }
-
-    BasicEnumImpl = enumimpl.New.BasicByte.UsingTypeSlice(
-        reflectinternal.TypeName(Invalid),
-        Ranges[:],
-    )
-)
-
-func (it MyEnum) Value() byte { return byte(it) }
-
-func (it MyEnum) ValueByte() byte { return it.Value() }
-
-func (it MyEnum) Name() string { return BasicEnumImpl.ToEnumString(it.Value()) }
-
-func (it MyEnum) String() string { return BasicEnumImpl.ToEnumString(it.Value()) }
-
-func (it MyEnum) TypeName() string { return BasicEnumImpl.TypeName() }
-
-func (it MyEnum) MarshalJSON() ([]byte, error) {
-    return BasicEnumImpl.ToEnumJsonBytes(it.Value())
-}
-
-func (it *MyEnum) UnmarshalJSON(data []byte) error {
-    dataConv, err := it.UnmarshallEnumToValue(data)
-
-    if err == nil {
-        *it = MyEnum(dataConv)
-    }
-
-    return err
-}
-
-func (it MyEnum) EnumType() enuminf.EnumTyper { return BasicEnumImpl.EnumType() }
-```
+1. **Choose backing type** — byte (≤255), int8 (≤127), int16, int32
+2. **Prefer contiguous constants** with `iota`; use `CreateUsingMap` only for non-contiguous
+3. **Put lookup data** in `vars.go` — Ranges array, optional RangesMap, BasicEnumImpl
+4. **Build BasicEnumImpl** with `enumimpl.New.Basic<Type>.*`
+5. **Implement ALL `BasicEnumValuer` methods** — `ValueByte`, `ValueInt`, `ValueInt8`, `ValueInt16`, `ValueUInt16`, `ValueInt32`, `ValueString`
+6. **Implement ALL `BaseEnumer` methods** — `Name`, `String`, `TypeName`, `NameValue`, `ToNumberString`, `IsNameEqual`, `IsAnyNamesOf`
+7. **Implement ALL `BasicEnumer` methods** — `Format`, `MinMaxAny`, `Min/MaxValueString`, `Min/MaxInt`, `RangesDynamicMap`, `AllNameValues`, `IntegerEnumRanges`, `OnlySupportedErr`, `OnlySupportedMsgErr`, `EnumType`
+8. **Implement type-specific interface** — `BasicByteEnumer`, `BasicInt8Enumer`, etc.
+9. **Implement JSON** — `MarshalJSON`, `UnmarshalJSON`, `UnmarshallEnumToValue*`
+10. **Implement range validation** — `IsValidRange`, `IsInvalidRange`, `RangesInvalidMessage`, `RangesInvalidErr`
+11. **Implement string ranges** — `StringRanges`, `StringRangesPtr`
+12. **Add domain `IsX()` methods** only for business logic
+13. **Do NOT model bitmask flags** as a plain enum
+14. **Split large files** by responsibility
 
 ---
 
