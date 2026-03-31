@@ -1205,3 +1205,40 @@ This ensures the script does not fail at startup if the module file is missing o
 ### 17.5 Design Principle
 
 > **DashboardUI is always additive, never required.** All core functionality (testing, coverage, compilation) must work identically with or without the module. The dashboard layer provides enhanced visual feedback but never gates execution.
+
+---
+
+## 18. Modular Architecture
+
+As of the Task 10 refactor, `run.ps1` is a thin dispatcher (≤200 lines) that imports specialized `.psm1` modules from the `scripts/` directory. DashboardUI is one of these modules.
+
+### 18.1 Module Map
+
+| Module | Responsibility | DashboardUI Dependency |
+|--------|---------------|----------------------|
+| `DashboardUI.psm1` | ANSI rendering, phase tracking, coverage tables | — (this IS the module) |
+| `Utilities.psm1` | Console helpers, error extraction | Optional (graceful fallback) |
+| `TestLogWriter.psm1` | Go test output → log files | None |
+| `TestRunner.psm1` | Test execution, build checks, git ops | None |
+| `CoverageRunner.psm1` | TC + TCP coverage pipelines | Yes (phase tracking, coverage tables, diff) |
+| `BuildTools.psm1` | Build, format, vet, tidy, clean | None |
+| `PreCommitCheck.psm1` | PC pre-commit validation | Yes (phase tracking, summary box) |
+| `GoConvey.psm1` | GoConvey launcher | None |
+| `Help.psm1` | Help display, fail log, integrated tests | None |
+
+### 18.2 How DashboardUI Is Consumed
+
+Modules that use DashboardUI functions (primarily `CoverageRunner` and `PreCommitCheck`) guard every call:
+
+```powershell
+if (Get-Command Register-Phase -ErrorAction SilentlyContinue) {
+    Register-Phase "Compile Check" "pass" "42/42 passed"
+}
+```
+
+This means the dashboard UI layer can be removed, replaced, or broken without affecting test/coverage functionality.
+
+### 18.3 Reference
+
+Full module documentation: [`scripts/README.md`](../../scripts/README.md)
+Refactoring roadmap: [`.lovable/memory/workflow/06-powershell-refactor-plan.md`](../../.lovable/memory/workflow/06-powershell-refactor-plan.md)
