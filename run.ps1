@@ -2401,33 +2401,8 @@ function Invoke-PreCommitCheck {
     if (-not $allPassed) { exit 1 }
 }
 
-function ParseCompileErrors([string[]]$output) {
-    $errors = [System.Collections.Generic.List[object]]::new()
-    foreach ($line in $output) {
-        if ($line -match '^(.+?\.go):(\d+)(?::\d+)?:\s*(.+)$') {
-            $file = Split-Path $Matches[1] -Leaf
-            $lineNum = [int]$Matches[2]
-            $msg = $Matches[3].Trim()
 
-            # Classify error
-            $category = "other"
-            if ($msg -match 'too many arguments|not enough arguments') { $category = "arg-count" }
-            elseif ($msg -match 'undefined:') { $category = "undefined" }
-            elseif ($msg -match 'cannot use .* as') { $category = "type-mismatch" }
-            elseif ($msg -match 'has no field or method') { $category = "missing-member" }
-            elseif ($msg -match 'cannot call non-function') { $category = "field-vs-method" }
-
-            $errors.Add(@{
-                file     = $file
-                line     = $lineNum
-                message  = $msg
-                category = $category
-                raw      = $line
-            })
-        }
-    }
-    return $errors.ToArray()
-}
+# ParseCompileErrors — moved to scripts/Utilities.psm1
 
 function Invoke-Clean {
     Write-Header "Cleaning build artifacts"
