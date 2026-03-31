@@ -59,43 +59,39 @@ function Write-CoverageHtmlWithAiButton {
 
     if (Test-Path $CoverHtml) {
         $htmlContent = Get-Content -Path $CoverHtml -Raw
-        $buttonHtml = @'
-<div id="ai-copy-panel" style="position:fixed;top:12px;right:12px;z-index:9999;font-family:system-ui,sans-serif;">
-<button onclick="copyForAI()" style="
-  background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;
-  padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;
-  cursor:pointer;box-shadow:0 4px 12px rgba(99,102,241,0.4);
-  display:flex;align-items:center;gap:6px;transition:all 0.2s;
-" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-  Copy for AI
-</button>
-<span id="ai-copy-status" style="display:none;color:#22c55e;font-size:13px;margin-top:4px;text-align:center;">Copied!</span>
-</div>
-<script>
-var __aiCoverageText =
-'@
-        $scriptEnd = @'
-';
-function copyForAI(){
-  try {
-    var ta = document.createElement("textarea");
-    ta.value = __aiCoverageText;
-    ta.style.position = "fixed";
-    ta.style.left = "-9999px";
-    document.body.appendChild(ta);
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
-    var s = document.getElementById("ai-copy-status");
-    s.style.display = "block";
-    setTimeout(function(){ s.style.display = "none"; }, 2000);
-  } catch(e) {
-    alert("Copy failed: " + e.message);
-  }
-}
-</script>
-'@
+        $buttonHtml = '<div id="ai-copy-panel" style="position:fixed;top:12px;right:12px;z-index:9999;font-family:system-ui,sans-serif;">' +
+            '<button onclick="copyForAI()" style="' +
+            'background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;' +
+            'padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;' +
+            'cursor:pointer;box-shadow:0 4px 12px rgba(99,102,241,0.4);' +
+            'display:flex;align-items:center;gap:6px;transition:all 0.2s;' +
+            '" onmouseover="this.style.transform=''scale(1.05)''" onmouseout="this.style.transform=''scale(1)''">' +
+            '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>' +
+            '  Copy for AI' +
+            '</button>' +
+            '<span id="ai-copy-status" style="display:none;color:#22c55e;font-size:13px;margin-top:4px;text-align:center;">Copied!</span>' +
+            '</div>' +
+            '<script>' +
+            'var __aiCoverageText ='
+        $scriptEnd = "'" + ';' +
+            'function copyForAI(){' +
+            '  try {' +
+            '    var ta = document.createElement("textarea");' +
+            '    ta.value = __aiCoverageText;' +
+            '    ta.style.position = "fixed";' +
+            '    ta.style.left = "-9999px";' +
+            '    document.body.appendChild(ta);' +
+            '    ta.select();' +
+            '    document.execCommand("copy");' +
+            '    document.body.removeChild(ta);' +
+            '    var s = document.getElementById("ai-copy-status");' +
+            '    s.style.display = "block";' +
+            '    setTimeout(function(){ s.style.display = "none"; }, 2000);' +
+            '  } catch(e) {' +
+            '    alert("Copy failed: " + e.message);' +
+            '  }' +
+            '}' +
+            '</script>'
         $injectedHtml = $buttonHtml + $aiTextEscaped + $scriptEnd
         $htmlContent = $htmlContent -replace '</body>', ($injectedHtml + "`n</body>")
         Set-Content -Path $CoverHtml -Value $htmlContent -Encoding UTF8
