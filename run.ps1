@@ -74,9 +74,13 @@ $ErrorActionPreference = "Stop"
 # -- Module Loading --
 # Load all modules in dependency order via a single loop
 $moduleOrder = @(
-    "DashboardTheme", "DashboardBoxes", "DashboardPhases", "DashboardCoverage", "DashboardUI",
-    "Utilities", "ErrorParser", "TestLogWriter", "TestRunner",
-    "CoveragePreChecks", "CoverageCompileCheck", "CoverageProfileMerger", "CoverageReport", "PackageCoverage", "CoverageRunner",
+    "DashboardTheme", "DashboardBoxPrimitives", "DashboardSections", "DashboardPhases",
+    "DashboardCoverageTable", "DashboardCoverageDiff", "DashboardUI",
+    "Utilities", "ErrorExtractor", "ErrorParser", "TestLogWriter",
+    "TestRunnerCore", "TestRunner",
+    "CoveragePreChecks", "CoverageCompileCheck", "CoverageSplitRecovery",
+    "CoverageProfileMerger", "CoverageReportTxt", "CoverageReportJson", "CoverageReportHtml",
+    "PackageCoverage", "CoverageRunner",
     "BuildTools", "GoConvey", "PreCommitCheck", "Help"
 )
 foreach ($mod in $moduleOrder) {
