@@ -1409,7 +1409,7 @@ function Invoke-PackageTestCoverage {
             Write-Host ($fixOut | Out-String) -ForegroundColor Red
             Write-Fail "Go auto-fixer encountered errors."
         } else {
-            $fixStr = ($fixOut | Out-String).Trim()
+            $fixStr = ($fixOut | Out-String).Trim() -replace '^\s*✓\s*', ''
             if ($fixStr) { Write-Success $fixStr }
         }
     }
