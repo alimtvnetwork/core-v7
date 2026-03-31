@@ -56,7 +56,7 @@ function Write-ScoreBox {
     Write-BoxEmptyLine -Width $w; Write-BoxDivider -Width $w; Write-BoxEmptyLine -Width $w
     $overallLabel = "OVERALL".PadRight($labelCol)
     $overallVal = if ($null -ne $Data.OverallScore) { "$($Data.OverallScore)/100" } else { "—" }
-    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$overallLabel $($overallVal.PadLeft($scoreCol))$($script:cReset)" -Width $w -VisualLength (1 + $labelCol + 1 + $scoreCol)
+    Write-BoxLine -Content "$($script:cWhite)$($script:cBold)$overallLabel $($overallVal.PadLeft($scoreCol))$($script:cReset)" -Width $w -VisualLength ($labelCol + 1 + $scoreCol)
     $statusLabel = "STATUS".PadRight($labelCol)
     $statusText = if ($Data.Status) { $Data.Status } else { "UNKNOWN" }
     $statusReady = if ($null -ne $Data.StatusReady) { $Data.StatusReady } else { $false }
