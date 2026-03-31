@@ -70,49 +70,75 @@ function Get-ProgressBar {
     return "$($script:cLime)$filled$($script:cBarE)$empty$($script:cReset)"
 }
 
+function Resolve-DashboardBoxWidth {
+    [CmdletBinding()]
+    [OutputType([int])]
+    param([int]$Width = 0)
+
+    if ($Width -gt 0) {
+        return $Width
+    }
+
+    if (Get-Command Get-DashboardBoxWidth -ErrorAction SilentlyContinue) {
+        return [int](Get-DashboardBoxWidth)
+    }
+
+    if ($script:BoxWidth -is [int] -and $script:BoxWidth -gt 0) {
+        return [int]$script:BoxWidth
+    }
+
+    return 48
+}
+
 function Write-BoxTop {
     [CmdletBinding()]
-    param([int]$Width = $script:BoxWidth)
+    param([int]$Width = 0)
+    $Width = Resolve-DashboardBoxWidth -Width $Width
     Write-Host "$($script:cBorder)╔$("═" * $Width)╗$($script:cReset)"
 }
-
+ 
 function Write-BoxBottom {
     [CmdletBinding()]
-    param([int]$Width = $script:BoxWidth)
+    param([int]$Width = 0)
+    $Width = Resolve-DashboardBoxWidth -Width $Width
     Write-Host "$($script:cBorder)╚$("═" * $Width)╝$($script:cReset)"
 }
-
+ 
 function Write-BoxDivider {
     [CmdletBinding()]
-    param([int]$Width = $script:BoxWidth)
+    param([int]$Width = 0)
+    $Width = Resolve-DashboardBoxWidth -Width $Width
     Write-Host "$($script:cBorder)╠$("═" * $Width)╣$($script:cReset)"
 }
-
+ 
 function Write-BoxEmptyLine {
     [CmdletBinding()]
-    param([int]$Width = $script:BoxWidth)
+    param([int]$Width = 0)
+    $Width = Resolve-DashboardBoxWidth -Width $Width
     Write-Host "$($script:cBorder)║$($script:cReset)$(" " * $Width)$($script:cBorder)║$($script:cReset)"
 }
-
+ 
 function Write-BoxLine {
     [CmdletBinding()]
-    param([string]$Content, [int]$Width = $script:BoxWidth, [int]$VisualLength = -1)
-    if ($VisualLength -lt 0) { $VisualLength = Get-AnsiVisualLength $Content }
+    param([string]$Content, [int]$Width = 0, [int]$VisualLength = -1)
+    $Width = Resolve-DashboardBoxWidth -Width $Width
+    if ($VisualLength -lt 0) { $VisualLength = Get-AnsiVisualLength -Text $Content }
     $rightPad = [math]::Max(0, $Width - $VisualLength - 1)
     Write-Host "$($script:cBorder)║$($script:cReset) $Content$(" " * $rightPad)$($script:cBorder)║$($script:cReset)"
 }
-
+ 
 function Write-BoxLineCenter {
     [CmdletBinding()]
-    param([string]$Text, [int]$Width = $script:BoxWidth, [string]$Color = "")
+    param([string]$Text, [int]$Width = 0, [string]$Color = "")
+    $Width = Resolve-DashboardBoxWidth -Width $Width
     if (-not $Color) { $Color = $script:cWhite }
-    $textLen = $Text.Length
+    $textLen = Get-AnsiVisualLength -Text $Text
     $leftPad = [math]::Max(0, [math]::Floor(($Width - $textLen) / 2))
     $rightPad = [math]::Max(0, $Width - $textLen - $leftPad)
     $line = (" " * $leftPad) + $Text + (" " * $rightPad)
     Write-Host "$($script:cBorder)║$($script:cReset)$Color$($script:cBold)$line$($script:cReset)$($script:cBorder)║$($script:cReset)"
 }
-
+ 
 Export-ModuleMember -Function @(
     'Get-AnsiVisualLength',
     'Get-ProgressBar', 'Write-BoxTop', 'Write-BoxBottom', 'Write-BoxDivider',
