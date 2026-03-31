@@ -19,6 +19,7 @@
 15. [Coverage Comparison (Regression Detection)](#15-coverage-comparison-regression-detection)
 16. [Phase Tracking Integration (TC & PC)](#16-phase-tracking-integration-tc--pc)
 17. [Error-Guarding Pattern (Module Availability)](#17-error-guarding-pattern-module-availability)
+18. [Modular Architecture](#18-modular-architecture)
 
 ---
 
