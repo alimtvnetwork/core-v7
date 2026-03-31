@@ -51,7 +51,7 @@ function Write-CoverageTable {
     Write-BoxLine -Content "$countPad$countText" -Width $w
     if ($ShowTarget) {
         $targetText = "$($script:cLime)$($script:cBold)100.0%$($script:cReset)$($script:cMuted) (non-internal packages)$($script:cReset)"
-        Write-BoxLine -Content "$($script:cWhite)$("TARGET".PadRight($pkgCol))$($script:cReset)$targetText" -Width $w -VisualLength ($pkgCol + 30)
+        Write-BoxLine -Content "$($script:cWhite)$("TARGET".PadRight($pkgCol))$($script:cReset)$targetText" -Width $w
     }
     Write-BoxEmptyLine -Width $w; Write-BoxBottom -Width $w
 }

@@ -62,7 +62,7 @@ function Write-ScoreBox {
     $statusReady = if ($null -ne $Data.StatusReady) { $Data.StatusReady } else { $false }
     $statusIcon = "$($script:cYellow)[?]$($script:cReset) "
     $statusColor = if ($statusReady) { $script:cLime } else { $script:cRed }
-    Write-BoxLine -Content "$($script:cWhite)$statusLabel $statusIcon$statusColor$statusText$($script:cReset)" -Width $w -VisualLength ($labelCol + 1 + 4 + $statusText.Length)
+    Write-BoxLine -Content "$($script:cWhite)$statusLabel $statusIcon$statusColor$statusText$($script:cReset)" -Width $w
     Write-BoxEmptyLine -Width $w; Write-BoxBottom -Width $w
 }
 
