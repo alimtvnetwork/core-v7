@@ -86,202 +86,18 @@ if (Test-Path $dashboardModule) {
     }
 }
 
-# -- Colors (ANSI-aware wrappers using DashboardUI tokens) --
+
+# -- Utilities Module --
+$utilitiesModule = Join-Path $PSScriptRoot "scripts" "Utilities.psm1"
+if (Test-Path $utilitiesModule) {
+    Import-Module $utilitiesModule -Force -DisableNameChecking
+}
+
+# -- Colors (ANSI-aware fallback if Utilities not loaded) --
 $ESC = [char]27
-
-function Write-Header([string]$msg) {
-    if (Get-Command Write-DashboardHeader -ErrorAction SilentlyContinue) {
-        Write-Host ""
-        Write-PhaseStart -Name $msg
-    } else {
-        Write-Host "`n=== $msg ===" -ForegroundColor Cyan
-    }
-}
-
-function Write-Success([string]$msg) {
-    Write-Host "  $($script:cLime)✓$($script:cReset) $($script:cLime)$msg$($script:cReset)"
-}
-
-function Write-Fail([string]$msg) {
-    Write-Host "  $($script:cRed)✗$($script:cReset) $($script:cRed)$msg$($script:cReset)"
-}
 
 # -- Test Log Directory --
 $TestLogDir = Join-Path $PSScriptRoot "data" "test-logs"
-
-function Ensure-TestLogDir {
-    if (-not (Test-Path $TestLogDir)) {
-        New-Item -ItemType Directory -Path $TestLogDir -Force | Out-Null
-    }
-}
-function Filter-TestWarnings([string[]]$lines) {
-    return $lines | Where-Object {
-        $_ -notmatch '^\s*warning: no packages being tested depend on matches for pattern'
-    }
-}
-
-function Merge-UniqueOutputLines([string[]]$primary, [string[]]$secondary) {
-    $merged = [System.Collections.Generic.List[string]]::new()
-    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
-
-    foreach ($line in @($primary + $secondary)) {
-        if ($null -eq $line) { continue }
-        $normalized = $line.ToString().TrimEnd("`r")
-        if (-not $normalized) { continue }
-        if ($seen.Add($normalized)) {
-            $merged.Add($normalized) | Out-Null
-        }
-    }
-
-    return $merged.ToArray()
-}
-
-function Filter-BlockedCompileLines([string[]]$lines) {
-    $filtered = [System.Collections.Generic.List[string]]::new()
-
-    foreach ($raw in $lines) {
-        if ($null -eq $raw) { continue }
-
-        $line = $raw.ToString().TrimEnd("`r")
-        $trimmed = $line.Trim()
-
-        if (-not $trimmed) { continue }
-
-        # Strip "warning: no packages being tested..." noise
-        if ($trimmed -match '^\s*warning:\s*no packages being tested depend on matches for pattern') { continue }
-
-        # Strip bare package headers like "# github.com/org/repo [...]" without file:line
-        if ($trimmed -match '^#\s+\S+' -and $trimmed -notmatch '\.go:\d+') { continue }
-
-        # Strip bare package path lines (github/gitlab) without file:line
-        if ($trimmed -match '^(github\.com|gitlab\.com)/\S+(\s+\[[^\]]+\])?$' -and $trimmed -notmatch '\.go:\d+') { continue }
-
-        $filtered.Add($line) | Out-Null
-    }
-
-    return $filtered.ToArray()
-}
-
-function Extract-BuildErrorLines([string[]]$lines) {
-    $candidates = Filter-BlockedCompileLines $lines
-    $errors = [System.Collections.Generic.List[string]]::new()
-    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
-
-    foreach ($raw in $candidates) {
-        if ($null -eq $raw) { continue }
-
-        $line = $raw.ToString().TrimEnd("`r")
-        $trimmed = $line.Trim()
-        if (-not $trimmed) { continue }
-
-        if ($trimmed -match '\.go:\d+(?::\d+)?:' -or
-            $trimmed -match '^#\s+\S+' -or
-            $trimmed -match '\[build failed\]' -or
-            $trimmed -match '(?i)\bbuild failed\b') {
-            if ($seen.Add($line)) {
-                $errors.Add($line) | Out-Null
-            }
-        }
-    }
-
-    return $errors.ToArray()
-}
-
-function Extract-ExecutionFailureLines([string[]]$lines) {
-    $candidates = Filter-BlockedCompileLines $lines
-    $errors = [System.Collections.Generic.List[string]]::new()
-    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
-
-    foreach ($raw in $candidates) {
-        if ($null -eq $raw) { continue }
-
-        $line = $raw.ToString().TrimEnd("`r")
-        $trimmed = $line.Trim()
-        if (-not $trimmed) { continue }
-
-        if ($trimmed -match '\.go:\d+(?::\d+)?:' -or
-            $trimmed -match '^#\s+\S+' -or
-            $trimmed -match '\[build failed\]' -or
-            $trimmed -match '(?i)\bbuild failed\b' -or
-            $trimmed -match '^(?i)panic:' -or
-            $trimmed -match '^(?i)fatal error:' -or
-            $trimmed -match '^--- FAIL:\s+' -or
-            $trimmed -match '^\s*FAIL\s+\S+' -or
-            $trimmed -match '^\s*exit status \d+\s*$') {
-            if ($seen.Add($line)) {
-                $errors.Add($line) | Out-Null
-            }
-        }
-    }
-
-    return $errors.ToArray()
-}
-
-function Extract-RuntimeFailureLines([string[]]$lines) {
-    # Captures ONLY runtime failures: panics, fatal errors, test crashes, os.Exit.
-    # Does NOT include compile errors (.go:line: syntax) or [build failed].
-    $candidates = Filter-BlockedCompileLines $lines
-    $errors = [System.Collections.Generic.List[string]]::new()
-    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
-
-    foreach ($raw in $candidates) {
-        if ($null -eq $raw) { continue }
-
-        $line = $raw.ToString().TrimEnd("`r")
-        $trimmed = $line.Trim()
-        if (-not $trimmed) { continue }
-
-        if ($trimmed -match '^(?i)panic:' -or
-            $trimmed -match '^(?i)fatal error:' -or
-            $trimmed -match '^(?i)goroutine \d+' -or
-            $trimmed -match '^--- FAIL:\s+' -or
-            $trimmed -match '^\s*FAIL\s+\S+' -or
-            $trimmed -match '^\s*exit status \d+\s*$' -or
-            $trimmed -match '(?i)signal:\s+' -or
-            $trimmed -match '(?i)runtime error:') {
-            if ($seen.Add($line)) {
-                $errors.Add($line) | Out-Null
-            }
-        }
-    }
-
-    return $errors.ToArray()
-}
-
-function Add-BuildErrorsForPackage([hashtable]$BuildErrorMap, [string]$PackageName, [string[]]$Lines) {
-    if (-not $BuildErrorMap -or -not $PackageName) { return }
-
-    # Only add compile-time errors (not runtime failures)
-    $buildLines = Extract-BuildErrorLines $Lines
-    if (-not $buildLines -or $buildLines.Count -eq 0) { return }
-
-    if (-not $BuildErrorMap.ContainsKey($PackageName)) {
-        $BuildErrorMap[$PackageName] = [System.Collections.Generic.List[string]]::new()
-    }
-
-    foreach ($line in $buildLines) {
-        if (-not $BuildErrorMap[$PackageName].Contains($line)) {
-            $BuildErrorMap[$PackageName].Add($line) | Out-Null
-        }
-    }
-}
-
-function Add-RuntimeFailuresForPackage([hashtable]$FailureMap, [string]$PackageName, [string[]]$Lines) {
-    if (-not $FailureMap -or -not $PackageName) { return }
-
-    $runtimeLines = Extract-RuntimeFailureLines $Lines
-    if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { return }
-
-    if (-not $FailureMap.ContainsKey($PackageName)) {
-        $FailureMap[$PackageName] = [System.Collections.Generic.List[string]]::new()
-    }
-
-    foreach ($line in $runtimeLines) {
-        if (-not $FailureMap[$PackageName].Contains($line)) {
-            $FailureMap[$PackageName].Add($line) | Out-Null
-        }
-    }
-}
 
 function Write-TestLogs([string[]]$rawOutput) {
     Ensure-TestLogDir
@@ -2585,33 +2401,8 @@ function Invoke-PreCommitCheck {
     if (-not $allPassed) { exit 1 }
 }
 
-function ParseCompileErrors([string[]]$output) {
-    $errors = [System.Collections.Generic.List[object]]::new()
-    foreach ($line in $output) {
-        if ($line -match '^(.+?\.go):(\d+)(?::\d+)?:\s*(.+)$') {
-            $file = Split-Path $Matches[1] -Leaf
-            $lineNum = [int]$Matches[2]
-            $msg = $Matches[3].Trim()
 
-            # Classify error
-            $category = "other"
-            if ($msg -match 'too many arguments|not enough arguments') { $category = "arg-count" }
-            elseif ($msg -match 'undefined:') { $category = "undefined" }
-            elseif ($msg -match 'cannot use .* as') { $category = "type-mismatch" }
-            elseif ($msg -match 'has no field or method') { $category = "missing-member" }
-            elseif ($msg -match 'cannot call non-function') { $category = "field-vs-method" }
-
-            $errors.Add(@{
-                file     = $file
-                line     = $lineNum
-                message  = $msg
-                category = $category
-                raw      = $line
-            })
-        }
-    }
-    return $errors.ToArray()
-}
+# ParseCompileErrors — moved to scripts/Utilities.psm1
 
 function Invoke-Clean {
     Write-Header "Cleaning build artifacts"
