@@ -187,6 +187,7 @@ Runs as a Go program: `go run ./scripts/autofix/`
 - Fixes: trailing commas, missing imports, formatting
 - Supports `--dry-run` for preview mode
 - Registers as `Auto-Fixer` phase
+- **Important**: The Go tool output may already contain a `✓` prefix. Always strip leading `✓` from output before passing to `Write-Success` (which adds its own `✓`) to avoid double checkmarks: `$str = ($out | Out-String).Trim() -replace '^\s*✓\s*', ''`
 
 ### Bracecheck
 
@@ -197,6 +198,7 @@ Runs as a Go program: `go run ./scripts/bracecheck/`
 - Reports file:line for mismatches
 - Writes results to `data/coverage/syntax-issues.txt`
 - Registers as `Syntax Check` phase
+- **Important**: Same `✓`-stripping rule as Auto-Fixer applies here
 
 ---
 
