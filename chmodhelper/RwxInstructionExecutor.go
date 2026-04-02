@@ -17,11 +17,19 @@ type RwxInstructionExecutor struct {
 
 // IsVarWrapper if it has any wildcard symbol in it
 func (it *RwxInstructionExecutor) IsVarWrapper() bool {
+	if it.varWrapper == nil {
+		return false
+	}
+
 	return !it.varWrapper.IsFixedType()
 }
 
 // IsFixedWrapper true indicates no wildcard symbol
 func (it *RwxInstructionExecutor) IsFixedWrapper() bool {
+	if it.varWrapper == nil {
+		return false
+	}
+
 	return it.varWrapper.IsFixedType()
 }
 

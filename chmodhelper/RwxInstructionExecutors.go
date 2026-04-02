@@ -41,6 +41,10 @@ func (it *RwxInstructionExecutors) Adds(
 	items := *it.items
 
 	for _, executor := range rwxInstructionExecutors {
+		if executor == nil {
+			continue
+		}
+
 		items = append(items, executor)
 	}
 

@@ -81,7 +81,7 @@ func (it *FuncMap) Add(i any) *FuncMap {
 
 // Adds wraps multiple function values and adds them to the map.
 func (it *FuncMap) Adds(iFunctions ...any) *FuncMap {
-	if it == nil {
+	if *it == nil {
 		*it = map[string]FuncWrapAny{}
 	}
 

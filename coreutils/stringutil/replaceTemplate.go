@@ -317,7 +317,7 @@ func (it *replaceTemplate) UsingNamerMapOptions(
 		for key, valueToReplace := range mapToReplace {
 			keyCurly := fmt.Sprintf(
 				constants.CurlyWrapFormat,
-				key,
+				key.Name(),
 			)
 
 			format = strings.ReplaceAll(
