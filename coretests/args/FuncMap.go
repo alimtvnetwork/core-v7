@@ -66,7 +66,7 @@ func (it FuncMap) Get(name string) *FuncWrapAny {
 
 // Add wraps a function value and adds it to the map by its detected name.
 func (it *FuncMap) Add(i any) *FuncMap {
-	if it == nil {
+	if *it == nil {
 		*it = map[string]FuncWrapAny{}
 	}
 
