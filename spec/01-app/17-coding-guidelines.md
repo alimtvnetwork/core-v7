@@ -754,6 +754,203 @@ NonEmptyIf.go             # Conditional filter dispatch
 
 ---
 
+## Method Writing: Pointer Variants (`*Ptr` Suffix)
+
+When a method returns a value, provide a `*Ptr` variant that returns a **pointer** to that value. When a method accepts a value, provide a `*Ptr` variant that accepts a **pointer** (with nil-safety). This eliminates `&result` / nil-check boilerplate at call sites.
+
+### The Rule
+
+> **If a method returns `T`, create a `*Ptr` variant returning `*T`.**
+> **If a method accepts `T` for checking/comparison, create a `*Ptr` variant accepting `*T` with nil handling.**
+
+### Pattern 1: Return Value → Return Pointer
+
+The most common case. The `*Ptr` variant calls the value version and returns its address.
+
+```go
+// Json returns a serialized JSON result (value).
+func (it Version) Json() corejson.Result {
+    return corejson.New(it)
+}
+
+// JsonPtr returns a pointer to the serialized JSON result.
+func (it Version) JsonPtr() *corejson.Result {
+    return corejson.NewPtr(it)
+}
+```
+
+```go
+// Clone returns a deep copy (value).
+func (it Version) Clone() Version {
+    return Version{Major: it.Major, Minor: it.Minor, Patch: it.Patch}
+}
+
+// ClonePtr returns a pointer to a deep copy.
+func (it *Version) ClonePtr() *Version {
+    if it == nil {
+        return nil
+    }
+    clone := it.Clone()
+    return &clone
+}
+```
+
+### Pattern 2: Accept Value → Accept Pointer (Checkers)
+
+For checking/validation functions, the `*Ptr` variant accepts a pointer and handles `nil`:
+
+```go
+// IsEmpty checks if a string is empty.
+func IsEmpty(str string) bool {
+    return str == ""
+}
+
+// IsEmptyPtr checks if a string pointer is nil or points to "".
+func IsEmptyPtr(str *string) bool {
+    return str == nil || *str == ""
+}
+```
+
+```go
+// IsEmptyOrWhitespace checks if str is empty or whitespace-only.
+func IsEmptyOrWhitespace(str string) bool {
+    return str == "" || str == " " || str == "\n" || strings.TrimSpace(str) == ""
+}
+
+// IsEmptyOrWhitespacePtr — nil-safe pointer variant.
+func IsEmptyOrWhitespacePtr(stringPtr *string) bool {
+    return stringPtr == nil || IsEmptyOrWhitespace(*stringPtr)
+}
+```
+
+```go
+// IsBlank — alias for IsEmptyOrWhitespace.
+func IsBlank(str string) bool { ... }
+
+// IsBlankPtr — nil-safe pointer variant.
+func IsBlankPtr(s *string) bool {
+    return s == nil || IsBlank(*s)
+}
+```
+
+### Pattern 3: Negated Pointer Variants (`IsDefined` / `IsDefinedPtr`)
+
+When the value version has an inverse (e.g., `IsDefined` = NOT `IsEmptyOrWhitespace`), the `*Ptr` variant follows the same nil-handling pattern:
+
+```go
+// IsDefined — alias for NOT IsEmptyOrWhitespace.
+func IsDefined(str string) bool {
+    return !(str == "" || strings.TrimSpace(str) == "")
+}
+
+// IsDefinedPtr — nil-safe: nil is "not defined".
+func IsDefinedPtr(str *string) bool {
+    return !(str == nil || IsEmptyOrWhitespace(*str))
+}
+```
+
+### Pattern 4: Collection/Slice Pointer Variants
+
+Collections provide `*Ptr` variants returning pointers to their internal data:
+
+```go
+// List returns the keys as a new slice.
+func (it *Hashset[T]) List() []T { ... }
+
+// ListPtr returns a pointer to the keys slice.
+func (it *Hashset[T]) ListPtr() *[]T {
+    list := it.List()
+    return &list
+}
+```
+
+```go
+// Value returns the cached value.
+func (it *StringOnce) Value() string { ... }
+
+// ValuePtr returns a pointer to the cached value.
+func (it *StringOnce) ValuePtr() *string {
+    val := it.Value()
+    return &val
+}
+```
+
+### Pattern 5: `ToPtr` / `NonPtr` Identity Methods
+
+Structs that may be used as both value and pointer provide identity conversion methods:
+
+```go
+// ToPtr returns a pointer to this value.
+func (it Variant) ToPtr() *Variant {
+    return &it
+}
+
+// NonPtr returns the value (identity — useful when you have a *T and want T).
+func (it Version) NonPtr() Version {
+    return it
+}
+
+// Ptr returns the pointer (identity — chains with pointer receivers).
+func (it *Version) Ptr() *Version {
+    return it
+}
+```
+
+### Nil-Safety Rules for `*Ptr` Methods
+
+1. **Pointer-receiver `*Ptr` methods** must handle `nil` receiver:
+   ```go
+   func (it *Version) ClonePtr() *Version {
+       if it == nil {
+           return nil
+       }
+       ...
+   }
+   ```
+
+2. **Checker `*Ptr` functions** treat `nil` as the "empty/absent" case:
+   ```go
+   func IsEmptyPtr(str *string) bool {
+       return str == nil || *str == ""  // nil = empty
+   }
+   ```
+
+3. **Value-receiver methods** don't need nil guards (Go copies the value):
+   ```go
+   func (it Version) ToPtr() *Version {
+       return &it  // safe — it is a copy
+   }
+   ```
+
+### File Naming Convention
+
+Each `*Ptr` variant lives in its own file:
+
+```
+IsEmpty.go               # IsEmpty(str string) bool
+IsEmptyPtr.go            # IsEmptyPtr(str *string) bool
+IsBlank.go               # IsBlank(str string) bool
+IsBlankPtr.go            # IsBlankPtr(s *string) bool
+IsDefined.go             # IsDefined(str string) bool
+IsDefinedPtr.go          # IsDefinedPtr(str *string) bool
+Clone.go                 # Clone() T
+ClonePtr.go              # ClonePtr() *T
+Json.go                  # Json() corejson.Result
+JsonPtr.go               # JsonPtr() *corejson.Result
+```
+
+### Summary Table
+
+| Suffix | When | Returns | Nil Handling |
+|--------|------|---------|--------------|
+| `*Ptr` (return) | Caller needs `*T` instead of `T` | `*T` | Pointer-receiver: check `it == nil` |
+| `*Ptr` (accept) | Caller has `*T`, function checks value | `bool` | `nil` treated as empty/absent |
+| `ToPtr` | Convert value to pointer | `*T` | N/A (value receiver) |
+| `NonPtr` | Convert pointer back to value | `T` | Identity on value receiver |
+| `ClonePtr` | Deep copy as pointer | `*T` | `nil` → `nil` |
+
+---
+
 ## Related Docs
 
 - [Design Philosophy](/spec/01-app/00-repo-overview.md)

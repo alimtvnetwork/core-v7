@@ -686,6 +686,28 @@ joined := stringslice.NonWhitespaceJoin(input, "\n")
 
 See **[Coding Guidelines — Method Writing](/spec/01-app/17-coding-guidelines.md#method-writing-split-boolean-flag-methods-into-expressive-pairs)** for full details and all patterns.
 
+### Pointer Variants (`*Ptr` Suffix)
+
+Methods provide `*Ptr` variants for pointer return types and nil-safe pointer acceptance:
+
+```go
+// Return pointer variant
+func (it Version) Json() corejson.Result    { return corejson.New(it) }
+func (it Version) JsonPtr() *corejson.Result { return corejson.NewPtr(it) }
+
+// Nil-safe checker variant
+func IsEmpty(str string) bool        { return str == "" }
+func IsEmptyPtr(str *string) bool    { return str == nil || *str == "" }
+
+// Identity conversion
+func (it Variant) ToPtr() *Variant   { return &it }
+func (it Version) NonPtr() Version   { return it }
+```
+
+**Rules**: (1) `*Ptr` checkers treat `nil` as empty/absent. (2) Pointer-receiver `*Ptr` methods must guard `nil`. (3) Each variant in its own file (`IsEmpty.go` / `IsEmptyPtr.go`).
+
+See **[Coding Guidelines — Pointer Variants](/spec/01-app/17-coding-guidelines.md#method-writing-pointer-variants-ptr-suffix)** for all five patterns.
+
 ---
 
 ## Interface Conventions

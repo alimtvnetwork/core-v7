@@ -931,6 +931,50 @@ stringslice.NonWhitespaceJoin(slice, "\n")
 
 **Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file. (5) Delegate upward — `AddNonEmpty` calls `Add`.
 
+### Method Writing: Pointer Variants (`*Ptr` Suffix)
+
+When a method returns `T`, provide a `*Ptr` variant returning `*T`. When a checker accepts `T`, provide a `*Ptr` variant accepting `*T` with nil-safety.
+
+```go
+// Pattern 1: Return pointer — *Ptr calls value version, returns &result
+func (it Version) Json() corejson.Result     { return corejson.New(it) }
+func (it Version) JsonPtr() *corejson.Result  { return corejson.NewPtr(it) }
+
+func (it *Version) ClonePtr() *Version {
+    if it == nil { return nil }  // nil-safe
+    clone := it.Clone()
+    return &clone
+}
+
+// Pattern 2: Checker pointer — nil treated as empty/absent
+func IsEmpty(str string) bool      { return str == "" }
+func IsEmptyPtr(str *string) bool  { return str == nil || *str == "" }
+
+func IsBlank(str string) bool      { ... }
+func IsBlankPtr(s *string) bool    { return s == nil || IsBlank(*s) }
+
+func IsDefined(str string) bool       { return !(str == "" || strings.TrimSpace(str) == "") }
+func IsDefinedPtr(str *string) bool   { return !(str == nil || IsEmptyOrWhitespace(*str)) }
+
+// Pattern 3: Identity conversion — ToPtr / NonPtr
+func (it Variant) ToPtr() *Variant   { return &it }
+func (it Version) NonPtr() Version   { return it }
+
+// Pattern 4: Collection pointer — ListPtr, ValuePtr
+func (it *Hashset[T]) List() []T      { ... }
+func (it *Hashset[T]) ListPtr() *[]T  { list := it.List(); return &list }
+```
+
+| Suffix | When | Nil Handling |
+|--------|------|--------------|
+| `*Ptr` (return) | Caller needs `*T` | Pointer-receiver: check `it == nil` |
+| `*Ptr` (accept) | Caller has `*T` | `nil` = empty/absent |
+| `ToPtr` | Value → pointer | N/A (value receiver) |
+| `NonPtr` | Pointer → value | Identity |
+| `ClonePtr` | Deep copy as `*T` | `nil` → `nil` |
+
+**File naming**: Each variant in its own file — `IsEmpty.go` / `IsEmptyPtr.go`, `Clone.go` / `ClonePtr.go`.
+
 ---
 
 ## Common Mistakes to Avoid
