@@ -1,5 +1,28 @@
 # Coding Guidelines
 
+## Table of Contents
+
+1. [Receiver Types: Prefer Value Receivers](#receiver-types-prefer-value-receivers-future-direction)
+2. [`interface{}` → `any` Migration](#interface--any-migration)
+3. [One File Per Function](#one-file-per-function)
+4. [Struct-as-Namespace Pattern](#struct-as-namespace-pattern)
+5. [Zero-Nil Safety](#zero-nil-safety)
+6. [Interface Naming](#interface-naming)
+7. [The `newCreator` Convention](#the-newcreator-convention-hierarchical-factory-pattern)
+8. [Conditional Formatting & Readability](#conditional-formatting--readability)
+9. [Function Call Argument Formatting](#function-call-argument-formatting)
+10. [First-Item Assertion Convenience Methods](#first-item-assertion-convenience-methods)
+11. [Variable Naming Conventions](#variable-naming-conventions)
+12. [Method Writing: Split Boolean-Flag Methods](#method-writing-split-boolean-flag-methods-into-expressive-pairs)
+13. [Method Writing: Pointer Variants (`*Ptr`)](#method-writing-pointer-variants-ptr-suffix)
+14. [Method Writing: `*Must` Suffix](#method-writing-must-suffix-panic-on-error)
+15. [Method Writing: `*Slice` vs Variadic](#method-writing-slice-vs-variadic-t)
+16. [Method Writing: `*Or*` Fallback Pattern](#method-writing-or-fallback-pattern)
+17. [Deprecation Convention](#deprecation-convention)
+18. [Related Docs](#related-docs)
+
+---
+
 ## Receiver Types: Prefer Value Receivers (Future Direction)
 
 > **Status**: Guideline for new code. Existing pointer receivers will be migrated incrementally.
