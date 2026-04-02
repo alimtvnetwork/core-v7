@@ -882,8 +882,65 @@ This is the **single source of truth** for all method naming suffixes in the cod
 |--------|----------|---------|---------|
 | `*OrDefault` | Fallback | Returns zero value if empty/missing | `First` → `FirstOrDefault` |
 | `*OrDefaultWith` | Fallback | Returns custom default value | `FirstOrDefault` → `FirstOrDefaultWith(slice, "N/A")` |
+| `*OrExisting` | Fallback | Create-or-retrieve; returns `(*T, bool)` | `Create` → `CreateOrExisting` |
 | `*New` | Immutability | Returns a new slice/collection (no mutation) | `Append` → `AppendLineNew`, `MergeNew` |
 | `*Join` | Transform | Filters then joins with separator | `NonEmpty` → `NonEmptyJoin` |
+
+##### `*Or*` Fallback Examples
+
+```go
+// FirstOrDefault returns zero value if empty.
+func (it *Collection[T]) FirstOrDefault() T {
+    if it.IsEmpty() {
+        var zero T
+        return zero
+    }
+    return it.items[0]
+}
+
+// FirstOrDefaultWith returns a caller-provided fallback if empty.
+func FirstOrDefaultWith(slice []string, defaultVal string) string {
+    if len(slice) == 0 {
+        return defaultVal
+    }
+    return slice[0]
+}
+
+// GetOrDefault returns a fallback when key is missing.
+func (it *Hashmap[K, V]) GetOrDefault(key K, defaultVal V) V {
+    val, found := it.items[key]
+    if !found {
+        return defaultVal
+    }
+    return val
+}
+
+// CreateOrExisting returns an existing entry or creates a new one.
+// Returns (instance, isExisting).
+func (it *lazyRegexMap) CreateOrExisting(
+    patternName string,
+) (lazyRegex *LazyRegex, isExisting bool) {
+    existing, found := it.items[patternName]
+    if found {
+        return existing, true
+    }
+
+    newRegex := NewLazyRegex(patternName)
+    it.items[patternName] = newRegex
+
+    return newRegex, false
+}
+
+// CreateOrExistingLock — thread-safe variant (delegates to base).
+func (it *lazyRegexMap) CreateOrExistingLock(
+    patternName string,
+) (*LazyRegex, bool) {
+    it.Lock()
+    defer it.Unlock()
+
+    return it.CreateOrExisting(patternName)
+}
+```
 
 #### Pair/Opposite Suffixes
 
