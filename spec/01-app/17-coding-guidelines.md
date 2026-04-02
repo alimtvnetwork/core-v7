@@ -730,6 +730,118 @@ NonEmptyIf.go             # Conditional filter dispatch
 6. **`*Join` suffix** for filter-then-join — filters first, then `strings.Join`.
 7. **`*If` suffix** for conditional dispatch — `NonEmptyIf(isNonEmpty, slice)`.
 
+### Pattern 7: Combined Suffixes & Ordering Convention
+
+When multiple behaviors combine into one method, suffixes are **concatenated in a fixed order**. This ensures every developer (and every AI agent) can predict the method name without guessing.
+
+#### Suffix Ordering Rule
+
+> **Method** + **Filter** + **Type** + **Lock** + **If**
+
+| Position | Suffix | Purpose | Example |
+|----------|--------|---------|---------|
+| 1 | Base name | The core action | `Add`, `Adds`, `Create` |
+| 2 | Filter | What gets skipped | `NonEmpty`, `NonEmptyWhitespace` |
+| 3 | Type modifier | Input shape or pointer | `Strings`, `Slice`, `Ptr` |
+| 4 | Lock | Thread safety | `Lock` |
+| 5 | If | Conditional dispatch | `If` |
+
+#### Real Examples from the Codebase
+
+```
+Add                         # base
+AddNonEmpty                 # base + filter
+AddNonEmptyWhitespace       # base + filter
+AddNonEmptyStrings          # base + filter + type
+AddNonEmptyStringsSlice     # base + filter + type
+AddsNonEmptyPtrLock         # base + filter + type + lock
+AddLock                     # base + lock
+AddsLock                    # base + lock
+AddPointerCollectionsLock   # base + type + lock
+CreateOrExistingLockIf      # base + lock + if
+AddIf                       # base + if
+NonEmptyJoin                # filter + action (standalone function)
+```
+
+#### Combined Lock + Filter Example
+
+When a method both filters (skips empty/whitespace) AND locks, combine them in order:
+
+```go
+// AddsNonEmptyPtrLock — filters empty, dereferences pointers, with mutex.
+// Order: base(Adds) + filter(NonEmpty) + type(Ptr) + lock(Lock)
+func (it *Collection) AddsNonEmptyPtrLock(
+    itemsPtr ...*string,
+) *Collection {
+    it.Lock()
+    defer it.Unlock()
+
+    for _, ptr := range itemsPtr {
+        if ptr == nil {
+            continue
+        }
+
+        s := *ptr
+        if s == "" {
+            continue
+        }
+
+        it.items = append(it.items, s)
+    }
+
+    return it
+}
+```
+
+#### Delegation Chain
+
+Combined methods should delegate to simpler variants where possible:
+
+```go
+// ✅ Good: Lock variant delegates to non-lock variant
+func (it *Collection) AddNonEmptyLock(str string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+
+    return it.AddNonEmpty(str)
+}
+
+// ✅ Good: If variant delegates to unconditional variant
+func (it *Collection) AddNonEmptyIf(isAdd bool, str string) *Collection {
+    if !isAdd {
+        return it
+    }
+
+    return it.AddNonEmpty(str)
+}
+
+// ✅ Good: Full chain — If delegates to Lock delegates to base
+func (it *Collection) AddNonEmptyLockIf(
+    isLock bool,
+    str string,
+) *Collection {
+    if isLock {
+        return it.AddNonEmptyLock(str)
+    }
+
+    return it.AddNonEmpty(str)
+}
+```
+
+#### File Naming for Combined Suffixes
+
+Each combined variant lives in its own file, named with the full suffix chain:
+
+```
+Add.go                        # Add
+AddNonEmpty.go                # AddNonEmpty
+AddNonEmptyLock.go            # AddNonEmptyLock
+AddNonEmptyLockIf.go          # AddNonEmptyLockIf
+AddsNonEmptyPtrLock.go        # AddsNonEmptyPtrLock
+AddNonEmptyStrings.go         # AddNonEmptyStrings
+AddNonEmptyStringsSlice.go    # AddNonEmptyStringsSlice
+```
+
 ### Summary Table
 
 | Suffix | When to Use | Example |
@@ -743,6 +855,9 @@ NonEmptyIf.go             # Conditional filter dispatch
 | `*NonWhitespace` | Same as above (standalone functions) | `NonEmptyStrings` → `NonWhitespace` |
 | `*Trimmed*` | Trims then filters empty results | `TrimmedEachWords` |
 | `*Join` | Filters then joins | `NonEmptyJoin`, `NonWhitespaceJoin` |
+| `*Ptr` | Pointer return or nil-safe pointer accept | `Json` → `JsonPtr` |
+| `*NonEmpty*Lock` | Filter + thread-safe | `AddNonEmpty` → `AddNonEmptyLock` |
+| `*NonEmpty*Ptr*Lock` | Filter + pointer + thread-safe | `AddsNonEmptyPtrLock` |
 
 ### Rules
 
@@ -751,6 +866,7 @@ NonEmptyIf.go             # Conditional filter dispatch
 3. **Use `is*` prefix** for all boolean parameters — never `flag`, `option`, `mode`.
 4. **The `*If` variant calls the unconditional one** — don't duplicate logic.
 5. **Each variant lives in its own file** — `Add.go`, `AddLock.go`, `AddIf.go`.
+6. **Suffix order is fixed**: Base + Filter + Type + Lock + If — never rearrange.
 
 ---
 

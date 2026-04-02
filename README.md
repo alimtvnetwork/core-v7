@@ -870,6 +870,30 @@ func (it Status) IsInvalid() bool { return it == Invalid }
 | `*NonEmpty` | Skip empty strings | `Add` → `AddNonEmpty` |
 | `*NonEmptyWhitespace` | Skip empty + whitespace | `Add` → `AddNonEmptyWhitespace` |
 | `*Join` | Filter then join | `NonEmptyJoin`, `NonWhitespaceJoin` |
+| `*NonEmpty*Lock` | Filter + thread-safe | `AddsNonEmptyPtrLock` |
+
+### Combined Suffix Ordering Convention
+
+When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If**.
+
+```
+Add                         # base
+AddNonEmpty                 # base + filter
+AddNonEmptyStrings          # base + filter + type
+AddsNonEmptyPtrLock         # base + filter + type + lock
+CreateOrExistingLockIf      # base + lock + if
+```
+
+Combined methods delegate to simpler variants:
+
+```go
+// AddNonEmptyLock = filter + lock — delegates to AddNonEmpty
+func (it *Collection) AddNonEmptyLock(str string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+    return it.AddNonEmpty(str)
+}
+```
 
 ### Filtering Variants (`*NonEmpty`, `*NonEmptyWhitespace`)
 

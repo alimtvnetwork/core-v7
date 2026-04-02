@@ -1168,6 +1168,43 @@ stringslice.NonWhitespaceJoin(slice, "\n")
 
 **Naming rules**: (1) `NonEmpty` = rejects `""` only. (2) `NonEmptyWhitespace`/`NonWhitespace` = rejects `""` + whitespace. (3) `Trimmed*` = trims then rejects empty. (4) `*Strings` suffix for variadic. (5) `*Join` for filter-then-join. (6) `*If` for conditional dispatch. (7) Each variant in its own file.
 
+#### Pattern 7: Combined Suffixes & Ordering
+
+When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If**.
+
+| Position | Suffix | Example |
+|----------|--------|---------|
+| 1 | Base name | `Add`, `Adds`, `Create` |
+| 2 | Filter | `NonEmpty`, `NonEmptyWhitespace` |
+| 3 | Type modifier | `Strings`, `Slice`, `Ptr` |
+| 4 | Lock | `Lock` |
+| 5 | If | `If` |
+
+Real examples: `Add` → `AddNonEmpty` → `AddNonEmptyStrings` → `AddsNonEmptyPtrLock` → `CreateOrExistingLockIf`.
+
+```go
+// Combined Lock + Filter — delegates to simpler variant
+func (it *Collection) AddNonEmptyLock(str string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+    return it.AddNonEmpty(str)
+}
+
+// Full chain example from codebase:
+// AddsNonEmptyPtrLock = base(Adds) + filter(NonEmpty) + type(Ptr) + lock(Lock)
+func (it *Collection) AddsNonEmptyPtrLock(itemsPtr ...*string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+    for _, ptr := range itemsPtr {
+        if ptr == nil { continue }
+        s := *ptr
+        if s == "" { continue }
+        it.items = append(it.items, s)
+    }
+    return it
+}
+```
+
 #### Summary
 
 | Suffix | When | Example |
@@ -1181,8 +1218,10 @@ stringslice.NonWhitespaceJoin(slice, "\n")
 | `*NonWhitespace` | Same (standalone functions) | `NonWhitespace(slice)` |
 | `*Trimmed*` | Trim then filter | `TrimmedEachWords` |
 | `*Join` | Filter then join | `NonEmptyJoin` |
+| `*Ptr` | Pointer variant | `Json` → `JsonPtr` |
+| `*NonEmpty*Lock` | Filter + thread-safe | `AddsNonEmptyPtrLock` |
 
-**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file. (5) Delegate upward — `AddNonEmpty` calls `Add`.
+**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file. (5) Delegate upward — `AddNonEmpty` calls `Add`. (6) **Suffix order is fixed**: Base + Filter + Type + Lock + If — never rearrange.
 
 ### Method Writing: Pointer Variants (`*Ptr` Suffix)
 
