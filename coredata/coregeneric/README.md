@@ -1,5 +1,22 @@
 # coregeneric — Generic Data Structures
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Architecture](#architecture)
+3. [Entry Points](#entry-points)
+4. [Generic Types](#generic-types)
+5. [Typed Creator Pattern](#typed-creator-pattern)
+6. [Generic Functions](#generic-functions)
+   - [funcs.go — any Constraint](#funcsgo--any-constraint)
+   - [comparablefuncs.go — comparable Constraint](#comparablefuncsgo--comparable-constraint)
+   - [orderedfuncs.go — cmp.Ordered Constraint](#orderedfuncsgo--cmpordered-constraint)
+7. [Type Aliases](#type-aliases)
+8. [Supported Primitive Types](#supported-primitive-types)
+9. [Key Patterns](#key-patterns)
+10. [How to Extend Safely](#how-to-extend-safely)
+11. [Related Docs](#related-docs)
+
 ## Overview
 
 The `coregeneric` package provides **type-parameterized** versions of all core collection data structures. It serves as the foundational layer that type-specific packages like `corestr` build upon, offering code reuse, consistency, compile-time type safety, and IDE discoverability via the New Creator pattern.
