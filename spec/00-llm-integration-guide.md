@@ -806,6 +806,84 @@ func Test_MyFunction(t *testing.T) {
 | Interfaces | Define in `coreinterface/` with `-er` suffix; keep small and composable |
 | Package vars | Use `var` blocks in `vars.go` for singletons and factories |
 | Split large files | By responsibility: `.naming.go`, `.json.go`, `.checkers.go`, `.values.go` |
+| Bool-flag methods | Split into expressive pairs — never use a `bool` to switch behavior |
+
+### Method Writing: Split Boolean-Flag Methods
+
+**Critical rule**: When a method's behavior changes based on a `bool` parameter, create **two separate methods** with names that express each behavior. The caller's code reads like documentation — no need to check what `true` or `false` means.
+
+#### Pattern 1: Lock vs No-Lock (`*Lock`)
+
+```go
+// ✅ Good: Named variants
+func (it *Collection) Add(str string) *Collection { ... }      // no lock
+func (it *Collection) AddLock(str string) *Collection {         // thread-safe
+    it.Lock()
+    defer it.Unlock()
+    return it.Add(str)
+}
+
+// ❌ Bad: Boolean flag
+func (it *Collection) Add(str string, useLock bool) *Collection { ... }
+```
+
+#### Pattern 2: Conditional Execution (`*If`)
+
+```go
+// ✅ Good: Always-execute + conditional variant
+func FmtDebug(format string, items ...any) {
+    slog.Debug(fmt.Sprintf(format, items...))
+}
+
+func FmtDebugIf(isDebug bool, format string, items ...any) {
+    if !isDebug { return }
+    FmtDebug(format, items...)
+}
+```
+
+#### Pattern 3: Behavioral Pairs
+
+```go
+// ✅ Good: Opposite states as separate methods
+func (it Status) IsValid() bool   { return it != Invalid }
+func (it Status) IsInvalid() bool { return it == Invalid }
+
+// ❌ Bad: Single method with negation flag
+func (it Status) IsValid(negate bool) bool { ... }
+```
+
+#### Pattern 4: Conditional Locking (`*LockIf`)
+
+```go
+func (it *lazyRegexMap) CreateOrExisting(pattern string) (*LazyRegex, bool) { ... }
+func (it *lazyRegexMap) CreateOrExistingLock(pattern string) (*LazyRegex, bool) { ... }
+func (it *lazyRegexMap) CreateOrExistingLockIf(isLock bool, pattern string) (*LazyRegex, bool) {
+    if isLock { return it.CreateOrExistingLock(pattern) }
+    return it.CreateOrExisting(pattern)
+}
+```
+
+#### Pattern 5: Collection Conditionals (`AddIf`, `AppendIf`)
+
+```go
+func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
+    isSkip := !isAdd
+    if isSkip { return it }
+    return it.Add(key)
+}
+```
+
+#### Summary
+
+| Suffix | When | Example |
+|--------|------|---------|
+| `*Lock` | Thread-safe variant | `Add` → `AddLock` |
+| `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
+| `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
+| (pair) | Opposite states | `IsValid` + `IsInvalid` |
+| `*NonEmpty` | Skip empty/nil inputs | `Add` → `AddNonEmpty` |
+
+**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file.
 
 ---
 
@@ -821,11 +899,11 @@ func Test_MyFunction(t *testing.T) {
 | `if x { return a } return b` | `conditional.If[T](x, a, b)` |
 | Hardcoded enum string | Implement full enum with `enumimpl` |
 | `*` pointer receiver on read methods | Value receiver (`func (it T)`) |
-| Store roles in profile table | Separate `user_roles` table |
 | `func New()` as bare constructor | `newCreator` struct with `New` var |
 | Import `internal/` from outside | Use public API only |
 | Model bitmask flags as enum | Build flags helper (see `chmodhelper/`) |
 | Return `nil` slice | Return `make([]T, 0)` or `core.EmptySlice[T]()` |
+| `func Do(flag bool)` for 2 behaviors | Two methods: `Do()` + `DoLock()` or `Do()` + `DoIf()` |
 
 ---
 

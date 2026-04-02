@@ -399,6 +399,210 @@ func VarTwo(
 
 ---
 
+## Method Writing: Split Boolean-Flag Methods into Expressive Pairs
+
+When a method's behavior changes based on a boolean parameter, **do not write one method with a `bool` flag**. Instead, create **two separate methods** with names that express each behavior. The caller's code then reads like documentation — no need to check what `true` or `false` means.
+
+### The Rule
+
+> **If a `bool` parameter selects between two behaviors, create two functions — one per behavior.**
+>
+> The `bool`-flag version may still exist as a **dispatcher** (for internal or generic use), but callers should use the named variants.
+
+### Pattern 1: Lock vs No-Lock (Thread Safety)
+
+The most common case in this codebase. Every mutable method has a non-locking version (for use when the caller already holds the lock or in single-threaded contexts) and a `*Lock` version (thread-safe).
+
+```go
+// ✅ Good: Two expressive methods — caller picks based on context
+
+// Add appends a string (no locking — caller must manage concurrency).
+func (it *Collection) Add(str string) *Collection {
+    it.items = append(it.items, str)
+
+    return it
+}
+
+// AddLock appends a string with mutex protection (thread-safe).
+func (it *Collection) AddLock(str string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+
+    it.items = append(it.items, str)
+
+    return it
+}
+
+// ❌ Bad: Boolean flag — caller must guess what `true` means
+func (it *Collection) Add(str string, useLock bool) *Collection {
+    if useLock {
+        it.Lock()
+        defer it.Unlock()
+    }
+
+    it.items = append(it.items, str)
+
+    return it
+}
+```
+
+**Naming convention**: `MethodName` (no lock) + `MethodNameLock` (with lock).
+
+### Pattern 2: Conditional Execution (`*If` suffix)
+
+When an action should only execute under a condition, create the unconditional version plus an `*If` variant. The `*If` method takes the condition as the **first parameter**.
+
+```go
+// ✅ Good: Two methods — unconditional + conditional
+
+// FmtDebug always logs a debug message.
+func FmtDebug(
+    format string,
+    items ...any,
+) {
+    slog.Debug(fmt.Sprintf(format, items...))
+}
+
+// FmtDebugIf logs a debug message only when isDebug is true.
+func FmtDebugIf(
+    isDebug bool,
+    format string,
+    items ...any,
+) {
+    if !isDebug {
+        return
+    }
+
+    slog.Debug(fmt.Sprintf(format, items...))
+}
+```
+
+**Naming convention**: `MethodName` (always executes) + `MethodNameIf` (conditional).
+
+### Pattern 3: Behavioral Variants (Separate Named Methods)
+
+When a boolean selects between two **different behaviors** (not just "do it" vs "skip it"), create two methods whose names describe the behavior.
+
+```go
+// ✅ Good: Behavior expressed in the name
+
+// MsgHeader formats items with a header wrapper.
+func MsgHeader(items ...any) string {
+    return fmt.Sprintf(msgformats.MsgHeaderFormat, items...)
+}
+
+// MsgHeaderIf formats with header when isHeader=true,
+// otherwise returns plain fmt.Sprint.
+func MsgHeaderIf(
+    isHeader bool,
+    items ...any,
+) string {
+    if isHeader {
+        return MsgHeader(items...)
+    }
+
+    return fmt.Sprint(items...)
+}
+
+// ✅ Good: IsValid / IsInvalid instead of IsValid(bool negate)
+func (it Status) IsValid() bool   { return it != Invalid }
+func (it Status) IsInvalid() bool { return it == Invalid }
+
+// ❌ Bad: Single method with negation flag
+func (it Status) IsValid(negate bool) bool {
+    if negate {
+        return it == Invalid
+    }
+    return it != Invalid
+}
+```
+
+### Pattern 4: Lock + Conditional Combined (`*LockIf`)
+
+When both locking and conditional behavior are needed, the `*LockIf` variant takes `isLock bool` as the first parameter and delegates to the appropriate path.
+
+```go
+// ✅ Good: Three tiers — no lock, lock, conditional lock
+
+// CreateOrExisting creates a new lazy regex or returns the existing one.
+func (it *lazyRegexMap) CreateOrExisting(
+    patternName string,
+) (*LazyRegex, bool) { ... }
+
+// CreateOrExistingLock same as above, with mutex protection.
+func (it *lazyRegexMap) CreateOrExistingLock(
+    patternName string,
+) (*LazyRegex, bool) {
+    it.Lock()
+    defer it.Unlock()
+
+    return it.CreateOrExisting(patternName)
+}
+
+// CreateOrExistingLockIf conditionally applies mutex based on isLock.
+func (it *lazyRegexMap) CreateOrExistingLockIf(
+    isLock bool,
+    patternName string,
+) (*LazyRegex, bool) {
+    if isLock {
+        return it.CreateOrExistingLock(patternName)
+    }
+
+    return it.CreateOrExisting(patternName)
+}
+```
+
+### Pattern 5: Collection Operations (`AddIf`, `AddsIf`, `PrependIf`)
+
+Collection types provide conditional add/prepend/append variants. The condition is always the **first parameter** named with an `is*` prefix.
+
+```go
+// ✅ Good: Conditional collection operations
+
+func (it *Collection[K, V]) AppendIf(
+    isAppend bool,
+    items ...Instance[K, V],
+) *Collection[K, V] {
+    isSkip := !isAppend
+
+    if isSkip {
+        return it
+    }
+
+    return it.Append(items...)
+}
+
+func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
+    isSkip := !isAdd
+
+    if isSkip {
+        return it
+    }
+
+    return it.Add(key)
+}
+```
+
+### Summary Table
+
+| Suffix | When to Use | Example |
+|--------|-------------|---------|
+| `*Lock` | Thread-safe variant of a non-locking method | `Add` → `AddLock` |
+| `*If` | Executes only when a condition is true | `FmtDebug` → `FmtDebugIf` |
+| `*LockIf` | Conditionally applies locking | `Create` → `CreateLockIf` |
+| No suffix (pair) | Two methods expressing opposite states | `IsValid` + `IsInvalid` |
+| `*NonEmpty` | Variant that skips empty/nil inputs | `Add` → `AddNonEmpty` |
+
+### Rules
+
+1. **Name expresses behavior** — the caller should never need to look up what a `bool` parameter means.
+2. **Condition parameter is always first** — `isAdd`, `isLock`, `isDebug`, `isHeader`.
+3. **Use `is*` prefix** for all boolean parameters — never `flag`, `option`, `mode`.
+4. **The `*If` variant calls the unconditional one** — don't duplicate logic.
+5. **Each variant lives in its own file** — `Add.go`, `AddLock.go`, `AddIf.go`.
+
+---
+
 ## Related Docs
 
 - [Design Philosophy](/spec/01-app/00-repo-overview.md)

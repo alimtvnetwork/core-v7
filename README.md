@@ -610,6 +610,55 @@ func Test_MyFunction_Verification(t *testing.T) {
 
 ---
 
+## Method Writing: Split Boolean-Flag Methods
+
+When a method's behavior changes based on a `bool` parameter, **create two separate methods** with expressive names instead of one method with a flag. The caller's code reads like documentation.
+
+### Lock vs No-Lock
+
+```go
+// Add appends without locking — caller manages concurrency.
+func (it *Collection) Add(str string) *Collection { ... }
+
+// AddLock appends with mutex protection (thread-safe).
+func (it *Collection) AddLock(str string) *Collection {
+    it.Lock()
+    defer it.Unlock()
+    return it.Add(str)
+}
+```
+
+### Conditional Execution (`*If`)
+
+```go
+// FmtDebug always logs.
+func FmtDebug(format string, items ...any) { slog.Debug(fmt.Sprintf(format, items...)) }
+
+// FmtDebugIf logs only when isDebug is true.
+func FmtDebugIf(isDebug bool, format string, items ...any) {
+    if !isDebug { return }
+    FmtDebug(format, items...)
+}
+```
+
+### Behavioral Pairs
+
+```go
+func (it Status) IsValid() bool   { return it != Invalid }
+func (it Status) IsInvalid() bool { return it == Invalid }
+```
+
+| Suffix | Pattern | Example |
+|--------|---------|---------|
+| `*Lock` | Thread-safe variant | `Add` → `AddLock` |
+| `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
+| `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
+| (pair) | Opposite states | `IsValid` + `IsInvalid` |
+
+See **[Coding Guidelines — Method Writing](/spec/01-app/17-coding-guidelines.md#method-writing-split-boolean-flag-methods-into-expressive-pairs)** for full details and all five patterns.
+
+---
+
 ## Interface Conventions
 
 All interfaces in `coreinterface/` follow Go's `-er` suffix convention:
