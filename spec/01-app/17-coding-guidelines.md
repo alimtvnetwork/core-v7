@@ -1327,6 +1327,16 @@ func (it *lazyRegexMap) CreateOrExisting(
     return created, false
 }
 
+// CreateOrExistingLock — thread-safe variant (delegates to base).
+func (it *lazyRegexMap) CreateOrExistingLock(
+    patternName string,
+) (*LazyRegex, bool) {
+    it.Lock()
+    defer it.Unlock()
+
+    return it.CreateOrExisting(patternName)
+}
+
 // CreateOrExistingLockIf — combined: base + lock + if
 func (it *lazyRegexMap) CreateOrExistingLockIf(
     isLock bool,
