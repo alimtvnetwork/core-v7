@@ -37,7 +37,7 @@ function Invoke-PackageTestCoverage {
 
     # Pre-checks
     $coverDir = Join-Path $global:DataDir "coverage"
-    $preCheckOk = Invoke-CoveragePreChecks -ScriptRoot $PSScriptRoot -ExtraArgs $ExtraArgs -CoverDir $coverDir
+    $preCheckOk = Invoke-CoveragePreChecks -ScriptRoot $global:ProjectRoot -ExtraArgs $ExtraArgs -CoverDir $coverDir
     if (-not $preCheckOk) { exit 1 }
 
     # Build check
