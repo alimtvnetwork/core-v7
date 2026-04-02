@@ -32,7 +32,7 @@ function Invoke-PreCommitCheck {
     $isSyncMode = $ExtraArgs -and ($ExtraArgs -contains "--sync")
 
     # ── Regression guard ──
-    $regressionScript = Join-Path $PSScriptRoot "scripts" "check-integrated-regressions.ps1"
+    $regressionScript = Join-Path $global:ProjectRoot "scripts" "check-integrated-regressions.ps1"
     if (-not (Test-Path $regressionScript)) {
         Write-Fail "Regression guard script not found: $regressionScript"
         exit 1
