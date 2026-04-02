@@ -1643,6 +1643,213 @@ for k, v := range hm.All() { ... }      // iter.Seq2[K, V]
 for k := range hm.Keys() { ... }        // iter.Seq[K]  (via HashmapIter.go)
 ```
 
+### SimpleSlice[T any]
+
+Thin generic slice wrapper. Uses `[T any]` constraint; for ordered operations (Sort, Min, Max), use package-level `SortSimpleSlice[T cmp.Ordered]()` functions.
+
+```go
+ss := coregeneric.New.SimpleSlice.String.Empty()
+ss := coregeneric.New.SimpleSlice.Int.Cap(100)
+ss := coregeneric.New.SimpleSlice.Float64.Items(1.0, 2.5, 3.7)
+ss := coregeneric.New.SimpleSlice.String.From(existingSlice)   // no copy
+ss := coregeneric.New.SimpleSlice.String.Clone(existingSlice)  // copies
+```
+
+**Package-level constructors** (for custom types):
+
+```go
+ss := coregeneric.EmptySimpleSlice[MyType]()
+ss := coregeneric.NewSimpleSlice[MyType](capacity)
+ss := coregeneric.SimpleSliceFrom[MyType](items)    // no copy
+ss := coregeneric.SimpleSliceClone[MyType](items)   // copies
+```
+
+**API quick reference:**
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Add(item)` | `*SimpleSlice` | Append single item |
+| `Adds(items...)` | `*SimpleSlice` | Append variadic items |
+| `AddSlice([]T)` | `*SimpleSlice` | Append from slice |
+| `AddIf(bool, item)` | `*SimpleSlice` | Conditional append |
+| `AddsIf(bool, items...)` | `*SimpleSlice` | Conditional variadic append |
+| `AddFunc(func() T)` | `*SimpleSlice` | Append function result |
+| `InsertAt(index, item)` | `*SimpleSlice` | Insert at position |
+| `First()` / `Last()` | `T` | First/last element (panics if empty) |
+| `FirstOrDefault()` / `LastOrDefault()` | `T` | First/last or zero value |
+| `Skip(n)` / `Take(n)` | `[]T` | Subsequence helpers |
+| `Length()` / `Count()` | `int` | Number of elements |
+| `IsEmpty()` / `HasAnyItem()` / `HasItems()` | `bool` | Emptiness checks |
+| `HasIndex(i)` | `bool` | Valid index check |
+| `LastIndex()` | `int` | Index of last element |
+| `Items()` | `[]T` | Underlying slice |
+| `Filter(predicate)` | `*SimpleSlice` | New filtered slice |
+| `CountFunc(predicate)` | `int` | Count matching items |
+| `ForEach(fn)` | — | Iterate with index |
+| `Clone()` | `*SimpleSlice` | Deep copy |
+| `String()` | `string` | String representation |
+
+**Iterators (Go 1.23+):**
+
+```go
+for i, item := range ss.All() { ... }    // iter.Seq2[int, T]
+for item := range ss.Values() { ... }    // iter.Seq[T]
+```
+
+---
+
+### LinkedList[T any]
+
+Generic singly-linked list with head/tail pointers and embedded `sync.Mutex`.
+
+```go
+ll := coregeneric.New.LinkedList.String.Empty()
+ll := coregeneric.New.LinkedList.Int.From([]int{1, 2, 3})
+ll := coregeneric.New.LinkedList.Float64.Items(1.0, 2.5, 3.7)
+```
+
+**Package-level constructors:**
+
+```go
+ll := coregeneric.EmptyLinkedList[MyType]()
+ll := coregeneric.LinkedListFrom[MyType](items)
+```
+
+**API quick reference:**
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Add(item)` / `Push(item)` / `PushBack(item)` | `*LinkedList` | Append to back |
+| `AddLock(item)` | `*LinkedList` | Thread-safe append |
+| `Adds(items...)` | `*LinkedList` | Append variadic |
+| `AddSlice([]T)` | `*LinkedList` | Append from slice |
+| `AddIf(bool, item)` | `*LinkedList` | Conditional append |
+| `AddsIf(bool, items...)` | `*LinkedList` | Conditional variadic append |
+| `AddFunc(func() T)` | `*LinkedList` | Append function result |
+| `AddFront(item)` / `PushFront(item)` | `*LinkedList` | Prepend to front |
+| `AppendNode(node)` | `*LinkedList` | Append existing node |
+| `AppendChainOfNodes(head)` | `*LinkedList` | Append a chain of nodes |
+| `First()` / `Last()` | `T` | First/last element (panics if empty) |
+| `FirstOrDefault()` / `LastOrDefault()` | `T` | First/last or zero value |
+| `Head()` / `Tail()` | `*LinkedListNode` | Head/tail node access |
+| `IndexAt(i)` | `*LinkedListNode` | Node at index — O(n) |
+| `Length()` / `LengthLock()` | `int` | Size (with/without mutex) |
+| `IsEmpty()` / `IsEmptyLock()` | `bool` | Empty check |
+| `HasItems()` | `bool` | Has at least one item |
+| `Items()` | `[]T` | Collect all to slice |
+| `Collection()` | `*Collection[T]` | Convert to Collection |
+| `ForEach(fn)` | — | Iterate with index |
+| `ForEachBreak(fn)` | — | Iterate; stop if fn returns true |
+| `String()` | `string` | String representation |
+
+**LinkedListNode[T] methods:**
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Element` | `T` | The stored value (public field) |
+| `HasNext()` | `bool` | Has a next node |
+| `Next()` | `*LinkedListNode` | Next node |
+| `EndOfChain()` | `(*LinkedListNode, int)` | Last node + chain length |
+| `Clone()` | `*LinkedListNode` | Copy (without chain) |
+| `ListPtr()` | `*[]T` | Collect chain to slice |
+
+**Iterators (Go 1.23+):**
+
+```go
+for i, value := range ll.All() { ... }    // iter.Seq2[int, T]
+for value := range ll.Values() { ... }    // iter.Seq[T]
+```
+
+---
+
+### Pair[L any, R any]
+
+Generic two-value container with validity tracking. Generalizes `corestr.LeftRight`.
+
+```go
+// Direct construction
+pair := coregeneric.NewPair("key", 42)              // Pair[string, int]
+pair := coregeneric.NewPairOf(10, 20)                // Pair[int, int] (same-type shortcut)
+
+// Via New Creator
+pair := coregeneric.New.Pair.StringString("a", "b")
+pair := coregeneric.New.Pair.StringInt("name", 42)
+pair := coregeneric.New.Pair.StringAny("key", value)
+pair := coregeneric.New.Pair.Any("left", "right")
+
+// Invalid pairs
+pair := coregeneric.InvalidPair[string, int]("reason")
+pair := coregeneric.InvalidPairNoMessage[string, int]()
+
+// String splitting
+pair := coregeneric.New.Pair.Split("key=value", "=")           // Left="key", Right="value"
+pair := coregeneric.New.Pair.SplitTrimmed(" key = value ", "=") // trimmed
+pair := coregeneric.New.Pair.SplitFull("a:b:c:d", ":")          // Left="a", Right="b:c:d"
+pair := coregeneric.New.Pair.FromSlice([]string{"a", "b"})
+
+// Number division
+pair := coregeneric.New.Pair.DivideInt(11)                     // {5, 6}
+pair := coregeneric.New.Pair.DivideIntWeighted(100, 0.3)       // {30, 70}
+```
+
+**API quick reference:**
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Left` / `Right` | `L`, `R` | Public fields |
+| `IsValid` / `Message` | `bool`, `string` | Validity tracking fields |
+| `Values()` | `(L, R)` | Both values |
+| `IsInvalid()` | `bool` | Nil-safe invalid check |
+| `HasMessage()` | `bool` | Has non-empty message |
+| `Clone()` | `*Pair` | Shallow copy |
+| `IsEqual(other)` | `bool` | Compare via `fmt.Sprintf` |
+| `String()` | `string` | Formatted representation |
+| `Clear()` / `Dispose()` | — | Reset to zero values |
+
+---
+
+### Triple[A any, B any, C any]
+
+Generic three-value container with validity tracking. Generalizes `corestr.LeftMiddleRight`.
+
+```go
+// Direct construction
+triple := coregeneric.NewTriple("left", 42, true)        // Triple[string, int, bool]
+triple := coregeneric.NewTripleOf(1, 2, 3)               // Triple[int, int, int] (same-type)
+
+// Via New Creator
+triple := coregeneric.New.Triple.StringStringString("a", "b", "c")
+triple := coregeneric.New.Triple.Any("a", 42, true)
+
+// Invalid triples
+triple := coregeneric.InvalidTriple[string, int, bool]("reason")
+triple := coregeneric.InvalidTripleNoMessage[string, int, bool]()
+
+// String splitting
+triple := coregeneric.New.Triple.Split("a.b.c", ".")            // Left="a", Middle="b", Right="c"
+triple := coregeneric.New.Triple.SplitN("a:b:c:d:e", ":")       // Left="a", Middle="b", Right="c:d:e"
+triple := coregeneric.New.Triple.SplitTrimmed(" a . b . c ", ".")
+triple := coregeneric.New.Triple.FromSlice([]string{"a", "b", "c"})
+
+// Number division
+triple := coregeneric.New.Triple.DivideInt(10)                  // {3, 3, 4}
+triple := coregeneric.New.Triple.DivideIntWeighted(100, 0.2, 0.3) // {20, 30, 50}
+```
+
+**API quick reference:**
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Left` / `Middle` / `Right` | `A`, `B`, `C` | Public fields |
+| `IsValid` / `Message` | `bool`, `string` | Validity tracking fields |
+| `Values()` | `(A, B, C)` | All three values |
+| `IsInvalid()` | `bool` | Nil-safe invalid check |
+| `HasMessage()` | `bool` | Has non-empty message |
+| `Clone()` | `*Triple` | Shallow copy |
+| `IsEqual(other)` | `bool` | Compare via `fmt.Sprintf` |
+| `String()` | `string` | Formatted representation |
+| `Clear()` / `Dispose()` | — | Reset to zero values |
+
 ---
 
 ## Further Reading
