@@ -58,7 +58,7 @@ function Ensure-TestLogDir {
     #>
     [CmdletBinding()]
     param()
-    if (-not (Test-Path $TestLogDir)) {
+    if (-not (Test-Path $global:TestLogDir)) {
         New-Item -ItemType Directory -Path $TestLogDir -Force | Out-Null
     }
 }
