@@ -3,6 +3,7 @@ package chmodhelper
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 )
 
