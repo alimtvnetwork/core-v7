@@ -1312,9 +1312,19 @@ func (it creator) DeserializeMust(bytes []byte) *T {
     errcore.HandleErr(err)
     return result
 }
+
+// SerializeMust — nil-guard then delegate to Serialize
+func (it *TypedPayloadWrapper[T]) SerializeMust() []byte {
+    if it == nil || it.Wrapper == nil {
+        panic(defaulterr.NilResult)
+    }
+    bytes, err := it.Serialize()
+    errcore.HandleErr(err)
+    return bytes
+}
 ```
 
-**Rules**: (1) Always panics via `errcore.HandleErr`. (2) Delegates to error-returning version. (3) File: `Deserialize.go` / `DeserializeMust.go`. (4) Combine with `*Ptr`: `ResultPtrMust`.
+**Rules**: (1) `*Must` always panics — never log, return a default, or swallow the error. (2) Use `errcore.HandleErr(err)` — not bare `panic(err)`. (3) The `*Must` variant calls the error-returning version — never duplicate logic. (4) File naming: `Deserialize.go` / `DeserializeMust.go`. (5) Combine with `*Ptr`: `ResultMust` returns `T`, `ResultPtrMust` returns `*T`.
 
 ### Method Writing: `*Slice` vs Variadic
 
