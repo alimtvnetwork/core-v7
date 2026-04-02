@@ -1170,7 +1170,7 @@ stringslice.NonWhitespaceJoin(slice, "\n")
 
 #### Pattern 7: Combined Suffixes & Ordering
 
-When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If**.
+When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If + Must**.
 
 | Position | Suffix | Example |
 |----------|--------|---------|
@@ -1179,6 +1179,7 @@ When multiple suffixes combine, they follow a **fixed order**: **Base + Filter +
 | 3 | Type modifier | `Strings`, `Slice`, `Ptr` |
 | 4 | Lock | `Lock` |
 | 5 | If | `If` |
+| 6 | Must | `Must` |
 
 Real examples: `Add` → `AddNonEmpty` → `AddNonEmptyStrings` → `AddsNonEmptyPtrLock` → `CreateOrExistingLockIf`.
 
