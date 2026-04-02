@@ -1,5 +1,21 @@
 # corestr — String-Centric Collections
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Entry Points](#entry-points)
+3. [Core Types](#core-types)
+4. [New Creator Pattern](#new-creator-pattern)
+5. [Key Capabilities](#key-capabilities)
+   - [String-Specific Methods](#string-specific-methods-not-in-coregeneric)
+   - [Data Models](#data-models)
+6. [File Organization](#file-organization)
+7. [How to Extend Safely](#how-to-extend-safely)
+8. [Contributors](#contributors)
+9. [Issues for Future Reference](#issues-for-future-reference)
+
+---
+
 ## Overview
 
 The `corestr` package provides string-specialized collection types with rich string manipulation methods (Join, EqualFold, Trim, Split, etc.). It is the primary data structure package for string-based workflows and sits atop `coregeneric` in the type hierarchy.
