@@ -885,7 +885,7 @@ func (it Status) IsInvalid() bool { return it == Invalid }
 
 ### Combined Suffix Ordering Convention
 
-When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If**.
+When multiple suffixes combine, they follow a **fixed order**: **Base + Filter + Type + Lock + If + Must**.
 
 ```
 Add                         # base
@@ -893,6 +893,8 @@ AddNonEmpty                 # base + filter
 AddNonEmptyStrings          # base + filter + type
 AddsNonEmptyPtrLock         # base + filter + type + lock
 CreateOrExistingLockIf      # base + lock + if
+DeserializeMust             # base + must
+ResultPtrMust               # base + type + must
 ```
 
 Combined methods delegate to simpler variants:
