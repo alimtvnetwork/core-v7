@@ -1342,16 +1342,72 @@ func (it *Collection) AddNonEmptyStringsSlice(items []string) *Collection {
 
 ### Method Writing: `*Or*` Fallback Pattern
 
+**Fallback hierarchy:**
+
+| Suffix | Fallback | Example |
+|--------|----------|---------|
+| `First` | Panics if empty | `it.items[0]` |
+| `FirstOrDefault` | Returns zero value of `T` | `var zero T; return zero` |
+| `FirstOrDefaultWith(fallback)` | Returns caller-provided fallback | `return fallback` |
+| `GetOrDefault(key, fallback)` | Map fallback | `return defaultVal` |
+| `CreateOrExisting(name)` | Create-or-retrieve; returns `(*T, bool)` | Cache/registry pattern |
+
 ```go
 // First() panics. FirstOrDefault() returns zero. FirstOrDefaultWith() returns custom.
 func (it *Collection[T]) First() T             { return it.items[0] }
 func (it *Collection[T]) FirstOrDefault() T    { if it.IsEmpty() { var z T; return z }; return it.items[0] }
 func FirstOrDefaultWith(s []string, d string) string { if len(s)==0 { return d }; return s[0] }
 
-// *OrExisting — create-or-retrieve from cache
-func (it *lazyRegexMap) CreateOrExisting(name string) (*LazyRegex, bool) { ... }
-func (it *lazyRegexMap) CreateOrExistingLockIf(isLock bool, name string) (*LazyRegex, bool) { ... }
+// GetOrDefault — map fallback
+func (it *Hashmap[K, V]) GetOrDefault(key K, defaultVal V) V {
+    val, found := it.items[key]
+    if !found { return defaultVal }
+    return val
+}
 ```
+
+#### `*OrExisting` Pattern
+
+Used when creating-or-retrieving from a cache/registry:
+
+```go
+// CreateOrExisting returns an existing LazyRegex or creates a new one.
+func (it *lazyRegexMap) CreateOrExisting(
+    patternName string,
+) (lazyRegex *LazyRegex, isExisting bool) {
+    existing, found := it.items[patternName]
+    if found {
+        return existing, true
+    }
+    created := NewLazyRegex(patternName)
+    it.items[patternName] = created
+    return created, false
+}
+
+// CreateOrExistingLock — thread-safe variant (delegates to base).
+func (it *lazyRegexMap) CreateOrExistingLock(
+    patternName string,
+) (*LazyRegex, bool) {
+    it.Lock()
+    defer it.Unlock()
+    return it.CreateOrExisting(patternName)
+}
+
+// CreateOrExistingLockIf — combined: base + lock + if
+func (it *lazyRegexMap) CreateOrExistingLockIf(
+    isLock bool,
+    patternName string,
+) (*LazyRegex, bool) {
+    if isLock {
+        return it.CreateOrExistingLock(patternName)
+    }
+    return it.CreateOrExisting(patternName)
+}
+```
+
+**File naming**: `CreateOrExisting.go` / `CreateOrExistingLock.go` / `CreateOrExistingLockIf.go`.
+
+> **`*OrDefault` returns zero value. `*OrDefaultWith` accepts custom fallback. `*OrExisting` returns existing instance instead of creating new.**
 
 ### Deprecation Convention
 

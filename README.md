@@ -972,13 +972,63 @@ func (it *Collection) AddNonEmptyStringsSlice(items []string) *Collection {
 
 ### `*Or*` Fallback Pattern
 
+**Fallback hierarchy:**
+
+| Suffix | Fallback | Example |
+|--------|----------|---------|
+| `First` | Panics if empty | `it.items[0]` |
+| `FirstOrDefault` | Returns zero value of `T` | `var zero T; return zero` |
+| `FirstOrDefaultWith(fallback)` | Returns caller-provided fallback | `return fallback` |
+| `GetOrDefault(key, fallback)` | Map fallback | `return defaultVal` |
+| `CreateOrExisting(name)` | Create-or-retrieve; returns `(*T, bool)` | Cache/registry pattern |
+
 ```go
 func (it *Collection[T]) First() T              { return it.items[0] }           // panics
 func (it *Collection[T]) FirstOrDefault() T     { ... }                          // zero value
 func FirstOrDefaultWith(s []string, d string) string { ... }                     // custom default
 func (it *Hashmap[K,V]) GetOrDefault(key K, d V) V { ... }                      // map fallback
-func (it *cache) CreateOrExisting(name string) (*T, bool) { ... }               // create-or-retrieve
 ```
+
+#### `*OrExisting` Pattern
+
+Used when creating-or-retrieving from a cache/registry:
+
+```go
+// CreateOrExisting returns an existing LazyRegex or creates a new one.
+func (it *lazyRegexMap) CreateOrExisting(
+    patternName string,
+) (lazyRegex *LazyRegex, isExisting bool) {
+    existing, found := it.items[patternName]
+    if found {
+        return existing, true
+    }
+    created := NewLazyRegex(patternName)
+    it.items[patternName] = created
+    return created, false
+}
+
+// CreateOrExistingLock — thread-safe variant (delegates to base).
+func (it *lazyRegexMap) CreateOrExistingLock(
+    patternName string,
+) (*LazyRegex, bool) {
+    it.Lock()
+    defer it.Unlock()
+    return it.CreateOrExisting(patternName)
+}
+
+// CreateOrExistingLockIf — combined: base + lock + if
+func (it *lazyRegexMap) CreateOrExistingLockIf(
+    isLock bool,
+    patternName string,
+) (*LazyRegex, bool) {
+    if isLock {
+        return it.CreateOrExistingLock(patternName)
+    }
+    return it.CreateOrExisting(patternName)
+}
+```
+
+**File naming**: `CreateOrExisting.go` / `CreateOrExistingLock.go` / `CreateOrExistingLockIf.go`.
 
 ### Deprecation Convention
 
