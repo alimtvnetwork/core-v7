@@ -873,6 +873,48 @@ func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
 }
 ```
 
+#### Pattern 6: Filtering Variants (`*NonEmpty`, `*NonEmptyWhitespace`)
+
+String methods provide filtering variants that silently skip items failing a check. Strictness hierarchy:
+
+| Variant | Rejects | Accepts |
+|---------|---------|---------|
+| `Add` | nothing | everything |
+| `AddNonEmpty` | `""` | `" "`, `"a"` |
+| `AddNonEmptyWhitespace` | `""`, `" "`, `"\n"` | `"a"` |
+
+```go
+// AddNonEmpty — skip empty strings only
+func (it *Collection) AddNonEmpty(str string) *Collection {
+    if str == "" { return it }
+    return it.Add(str)
+}
+
+// AddNonEmptyWhitespace — skip empty + whitespace-only
+func (it *Collection) AddNonEmptyWhitespace(str string) *Collection {
+    if strutilinternal.IsEmptyOrWhitespace(str) { return it }
+    return it.Add(str)
+}
+
+// Variadic: AddNonEmptyStrings filters each element
+func (it *Collection) AddNonEmptyStrings(items ...string) *Collection { ... }
+
+// Standalone slice functions (package stringslice):
+stringslice.NonEmptyStrings(slice)    // removes ""
+stringslice.NonWhitespace(slice)      // removes "" and whitespace
+stringslice.TrimmedEachWords(slice)   // trims + removes empty
+
+// Conditional dispatch:
+stringslice.NonEmptyIf(isNonEmpty, slice)
+stringslice.TrimmedEachWordsIf(isTrim, slice)
+
+// Filter + join:
+stringslice.NonEmptyJoin(slice, ", ")
+stringslice.NonWhitespaceJoin(slice, "\n")
+```
+
+**Naming rules**: (1) `NonEmpty` = rejects `""` only. (2) `NonEmptyWhitespace`/`NonWhitespace` = rejects `""` + whitespace. (3) `Trimmed*` = trims then rejects empty. (4) `*Strings` suffix for variadic. (5) `*Join` for filter-then-join. (6) `*If` for conditional dispatch. (7) Each variant in its own file.
+
 #### Summary
 
 | Suffix | When | Example |
@@ -881,9 +923,13 @@ func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
 | `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
 | `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
 | (pair) | Opposite states | `IsValid` + `IsInvalid` |
-| `*NonEmpty` | Skip empty/nil inputs | `Add` → `AddNonEmpty` |
+| `*NonEmpty` | Skip empty strings | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Skip empty + whitespace | `Add` → `AddNonEmptyWhitespace` |
+| `*NonWhitespace` | Same (standalone functions) | `NonWhitespace(slice)` |
+| `*Trimmed*` | Trim then filter | `TrimmedEachWords` |
+| `*Join` | Filter then join | `NonEmptyJoin` |
 
-**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file.
+**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file. (5) Delegate upward — `AddNonEmpty` calls `Add`.
 
 ---
 

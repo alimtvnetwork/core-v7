@@ -583,6 +583,153 @@ func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
 }
 ```
 
+### Pattern 6: Filtering Variants (`*NonEmpty`, `*NonEmptyWhitespace`)
+
+When a method accepts string input, create **filtering variants** that silently skip items failing a check. This eliminates defensive `if` blocks at every call site. The hierarchy of strictness:
+
+| Variant | Rejects | Accepts |
+|---------|---------|---------|
+| `Add` | nothing | everything including `""` |
+| `AddNonEmpty` | `""` | `" "`, `"a"` |
+| `AddNonEmptyWhitespace` | `""`, `" "`, `"\n"`, `"\t"` | `"a"` |
+
+#### Single-Item Methods
+
+```go
+// Add always appends — no filtering.
+func (it *Collection) Add(str string) *Collection {
+    it.items = append(it.items, str)
+    return it
+}
+
+// AddNonEmpty appends only if str is not empty ("").
+func (it *Collection) AddNonEmpty(str string) *Collection {
+    if str == "" {
+        return it
+    }
+
+    return it.Add(str)
+}
+
+// AddNonEmptyWhitespace appends only if str is not empty and not whitespace-only.
+func (it *Collection) AddNonEmptyWhitespace(str string) *Collection {
+    if strutilinternal.IsEmptyOrWhitespace(str) {
+        return it
+    }
+
+    return it.Add(str)
+}
+```
+
+#### Slice/Variadic Methods (`*Strings` suffix)
+
+The same pattern extends to variadic/slice methods. The slice variant filters **each element** individually:
+
+```go
+// AddStrings appends all strings — no filtering.
+func (it *Collection) AddStrings(items ...string) *Collection {
+    it.items = append(it.items, items...)
+    return it
+}
+
+// AddNonEmptyStrings appends only non-empty strings from the input.
+func (it *Collection) AddNonEmptyStrings(items ...string) *Collection {
+    return it.AddNonEmptyStringsSlice(items)
+}
+
+// AddNonEmptyStringsSlice — slice version of AddNonEmptyStrings.
+func (it *Collection) AddNonEmptyStringsSlice(slice []string) *Collection {
+    for _, s := range slice {
+        if s == "" {
+            continue
+        }
+        it.items = append(it.items, s)
+    }
+    return it
+}
+```
+
+#### Standalone Slice Functions (package `stringslice`)
+
+The same philosophy appears as **pure functions** that return filtered copies:
+
+```go
+// NonEmptyStrings returns a new slice excluding empty strings.
+func NonEmptyStrings(slice []string) []string { ... }
+
+// NonWhitespace returns a new slice excluding empty and whitespace-only strings.
+func NonWhitespace(slice []string) []string { ... }
+
+// TrimmedEachWords trims each element and excludes those that become empty.
+func TrimmedEachWords(slice []string) []string { ... }
+```
+
+#### Conditional Filtering (`*If` + `*NonEmpty`)
+
+Combine filtering with conditional dispatch using `*If`:
+
+```go
+// NonEmptyIf returns NonEmptySlice when isNonEmpty is true,
+// otherwise returns the slice with only nil-safety applied.
+func NonEmptyIf(
+    isNonEmpty bool,
+    slice []string,
+) []string {
+    if isNonEmpty {
+        return NonEmptySlice(slice)
+    }
+    return NonNullStrings(slice)
+}
+
+// TrimmedEachWordsIf conditionally trims+filters or just nil-safes.
+func TrimmedEachWordsIf(
+    isNonWhitespaceTrim bool,
+    slice []string,
+) []string {
+    if isNonWhitespaceTrim {
+        return TrimmedEachWords(slice)
+    }
+    return NonNullStrings(slice)
+}
+```
+
+#### Join Variants
+
+The filter-then-join pattern uses the same naming:
+
+```go
+// NonEmptyJoin filters empty strings, then joins with joiner.
+func NonEmptyJoin(slice []string, joiner string) string { ... }
+
+// NonWhitespaceJoin filters empty/whitespace strings, then joins.
+func NonWhitespaceJoin(slice []string, joiner string) string { ... }
+```
+
+#### File Naming Convention
+
+Each variant lives in its own file:
+
+```
+Add.go                    # Add (no filtering)
+AddNonEmpty.go            # AddNonEmpty (skip "")
+AddNonEmptyWhitespace.go  # AddNonEmptyWhitespace (skip "" and whitespace)
+AddNonEmptyStrings.go     # AddNonEmptyStrings (variadic, skip "")
+NonEmptyStrings.go        # Standalone slice filter
+NonWhitespace.go          # Standalone slice filter (stricter)
+NonEmptyJoin.go           # Filter + join
+NonEmptyIf.go             # Conditional filter dispatch
+```
+
+#### Naming Rules
+
+1. **`NonEmpty`** = rejects only `""` (empty string).
+2. **`NonEmptyWhitespace`** or **`NonWhitespace`** = rejects `""` + whitespace-only (`" "`, `"\n"`, `"\t"`).
+3. **`Trimmed*`** = trims each element with `strings.TrimSpace`, then rejects empty results.
+4. **Delegate upward** — `AddNonEmpty` calls `Add`, `AddNonEmptyWhitespace` uses `IsEmptyOrWhitespace` then calls `Add`.
+5. **`*Strings` suffix** for variadic/slice versions — `AddNonEmptyStrings(items ...string)`.
+6. **`*Join` suffix** for filter-then-join — filters first, then `strings.Join`.
+7. **`*If` suffix** for conditional dispatch — `NonEmptyIf(isNonEmpty, slice)`.
+
 ### Summary Table
 
 | Suffix | When to Use | Example |
@@ -591,7 +738,11 @@ func (it *Hashset[T]) AddIf(isAdd bool, key T) *Hashset[T] {
 | `*If` | Executes only when a condition is true | `FmtDebug` → `FmtDebugIf` |
 | `*LockIf` | Conditionally applies locking | `Create` → `CreateLockIf` |
 | No suffix (pair) | Two methods expressing opposite states | `IsValid` + `IsInvalid` |
-| `*NonEmpty` | Variant that skips empty/nil inputs | `Add` → `AddNonEmpty` |
+| `*NonEmpty` | Skips empty strings | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Skips empty + whitespace-only strings | `Add` → `AddNonEmptyWhitespace` |
+| `*NonWhitespace` | Same as above (standalone functions) | `NonEmptyStrings` → `NonWhitespace` |
+| `*Trimmed*` | Trims then filters empty results | `TrimmedEachWords` |
+| `*Join` | Filters then joins | `NonEmptyJoin`, `NonWhitespaceJoin` |
 
 ### Rules
 

@@ -654,8 +654,37 @@ func (it Status) IsInvalid() bool { return it == Invalid }
 | `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
 | `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
 | (pair) | Opposite states | `IsValid` + `IsInvalid` |
+| `*NonEmpty` | Skip empty strings | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Skip empty + whitespace | `Add` → `AddNonEmptyWhitespace` |
+| `*Join` | Filter then join | `NonEmptyJoin`, `NonWhitespaceJoin` |
 
-See **[Coding Guidelines — Method Writing](/spec/01-app/17-coding-guidelines.md#method-writing-split-boolean-flag-methods-into-expressive-pairs)** for full details and all five patterns.
+### Filtering Variants (`*NonEmpty`, `*NonEmptyWhitespace`)
+
+String methods provide **filtering variants** that silently skip invalid items:
+
+```go
+// AddNonEmpty skips "" only
+c.AddNonEmpty("")    // skipped
+c.AddNonEmpty("a")   // added
+
+// AddNonEmptyWhitespace skips "" and whitespace-only
+c.AddNonEmptyWhitespace("   ")  // skipped
+c.AddNonEmptyWhitespace("a")    // added
+
+// Standalone slice functions
+filtered := stringslice.NonEmptyStrings(input)   // removes ""
+filtered := stringslice.NonWhitespace(input)      // removes "" and whitespace
+filtered := stringslice.TrimmedEachWords(input)    // trims + removes empty
+
+// Conditional dispatch
+result := stringslice.NonEmptyIf(shouldFilter, input)
+
+// Filter + join
+joined := stringslice.NonEmptyJoin(input, ", ")
+joined := stringslice.NonWhitespaceJoin(input, "\n")
+```
+
+See **[Coding Guidelines — Method Writing](/spec/01-app/17-coding-guidelines.md#method-writing-split-boolean-flag-methods-into-expressive-pairs)** for full details and all patterns.
 
 ---
 
