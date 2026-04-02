@@ -10,29 +10,7 @@ import (
 )
 
 // testUser is declared in TypedCollection_testcases.go
-
-func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser] {
-	wrappers := make([]*corepayload.TypedPayloadWrapper[testUser], 0, count)
-
-	for i := 0; i < count; i++ {
-		user := testUser{
-			Name:  fmt.Sprintf("User%d", i),
-			Email: fmt.Sprintf("user%d@test.com", i),
-			Age:   20 + i,
-		}
-
-		typed, err := corepayload.TypedPayloadWrapperNameIdRecord[testUser](
-			user.Name,
-			fmt.Sprintf("user-%d", i),
-			user,
-		)
-		errcore.HandleErr(err)
-
-		wrappers = append(wrappers, typed)
-	}
-
-	return corepayload.TypedPayloadCollectionFrom[testUser](wrappers)
-}
+// createNumberedUsers is declared in TypedCollectionPaging_test.go
 
 // =============================================================================
 // Tests: GetPagedCollection edge cases
