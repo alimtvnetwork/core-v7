@@ -40,9 +40,9 @@ function Write-TestLogs {
 
     Ensure-TestLogDir
 
-    $passingFile = Join-Path $TestLogDir "passing-tests.txt"
-    $failingFile = Join-Path $TestLogDir "failing-tests.txt"
-    $rawFile     = Join-Path $TestLogDir "raw-output.txt"
+    $passingFile = Join-Path $global:TestLogDir "passing-tests.txt"
+    $failingFile = Join-Path $global:TestLogDir "failing-tests.txt"
+    $rawFile     = Join-Path $global:TestLogDir "raw-output.txt"
 
     # Clear previous log files before writing new results
     @($passingFile, $failingFile, $rawFile) | ForEach-Object {

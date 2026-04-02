@@ -37,8 +37,8 @@ function Invoke-BuildCheck {
     if ($exitCode -ne 0) {
         Write-Fail "Build failed — skipping tests"
         Ensure-TestLogDir
-        $failingFile = Join-Path $TestLogDir "failing-tests.txt"
-        $rawFile     = Join-Path $TestLogDir "raw-output.txt"
+        $failingFile = Join-Path $global:TestLogDir "failing-tests.txt"
+        $rawFile     = Join-Path $global:TestLogDir "raw-output.txt"
         $timestamp   = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
         $buildErrors = Extract-BuildErrorLines $output
         $errorCount = if ($buildErrors.Count -gt 0) { $buildErrors.Count } else { 1 }
@@ -69,7 +69,7 @@ function Open-FailingTestsIfAny {
     <# .SYNOPSIS Open the failing-tests log file if it contains failures. #>
     [CmdletBinding()]
     param()
-    $failingFile = Join-Path $TestLogDir "failing-tests.txt"
+    $failingFile = Join-Path $global:TestLogDir "failing-tests.txt"
     if ((Test-Path $failingFile)) {
         $content = Get-Content $failingFile -Raw
         if ($content -and $content -notmatch '# Count: 0') {

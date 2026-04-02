@@ -52,7 +52,7 @@ function Invoke-ShowFailLog {
     [CmdletBinding()]
     param()
 
-    $failingFile = Join-Path $TestLogDir "failing-tests.txt"
+    $failingFile = Join-Path $global:TestLogDir "failing-tests.txt"
     if (-not (Test-Path $failingFile)) {
         Write-Header "No failing tests log found"
         Write-Host "  Run tests first: ./run.ps1 T" -ForegroundColor Yellow
