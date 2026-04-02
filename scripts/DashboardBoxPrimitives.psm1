@@ -4,10 +4,59 @@
 # Dependencies: DashboardTheme.psm1 (script-scope color variables)
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Ambiguous-width overrides: code points that East Asian Width tables call
+# "wide" but render as 1 column in many Western terminals (e.g. Windows
+# Terminal with Cascadia Code, VS Code integrated terminal, iTerm2 default).
+# Add/remove entries to match your environment.
+$script:AmbiguousWidthOverrides = @{
+    0x2713 = 1   # ✓ CHECK MARK
+    0x2714 = 1   # ✔ HEAVY CHECK MARK
+    0x2717 = 1   # ✗ BALLOT X
+    0x2718 = 1   # ✘ HEAVY BALLOT X
+    0x26A0 = 1   # ⚠ WARNING SIGN
+    0x2716 = 1   # ✖ HEAVY MULTIPLICATION X
+}
+
+function Set-AmbiguousWidthOverride {
+    <# .SYNOPSIS Add or update a code-point width override.
+       .PARAMETER CodePoint Unicode code point (integer, e.g. 0x2713).
+       .PARAMETER Width     Visual column width (1 or 2).
+       .EXAMPLE Set-AmbiguousWidthOverride -CodePoint 0x26A0 -Width 2 #>
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory)][int]$CodePoint,
+        [Parameter(Mandatory)][ValidateSet(1,2)][int]$Width
+    )
+    $script:AmbiguousWidthOverrides[$CodePoint] = $Width
+}
+
+function Remove-AmbiguousWidthOverride {
+    <# .SYNOPSIS Remove a code-point width override so it falls back to range tables.
+       .PARAMETER CodePoint Unicode code point to remove. #>
+    [CmdletBinding()]
+    param([Parameter(Mandatory)][int]$CodePoint)
+    if ($script:AmbiguousWidthOverrides.ContainsKey($CodePoint)) {
+        $script:AmbiguousWidthOverrides.Remove($CodePoint)
+    }
+}
+
+function Get-AmbiguousWidthOverrides {
+    <# .SYNOPSIS Return the current override table (read-only copy). #>
+    [CmdletBinding()]
+    [OutputType([hashtable])]
+    param()
+    return $script:AmbiguousWidthOverrides.Clone()
+}
+
 function Test-IsWideVisualCodePoint {
     [CmdletBinding()]
     [OutputType([bool])]
     param([Parameter(Mandatory)][int]$CodePoint)
+
+    # Check override table first — fast path for ambiguous characters
+    if ($script:AmbiguousWidthOverrides.ContainsKey($CodePoint)) {
+        return ($script:AmbiguousWidthOverrides[$CodePoint] -eq 2)
+    }
 
     return (
         ($CodePoint -ge 0x1100 -and $CodePoint -le 0x115F) -or
@@ -141,6 +190,7 @@ function Write-BoxLineCenter {
  
 Export-ModuleMember -Function @(
     'Get-AnsiVisualLength',
+    'Set-AmbiguousWidthOverride', 'Remove-AmbiguousWidthOverride', 'Get-AmbiguousWidthOverrides',
     'Get-ProgressBar', 'Write-BoxTop', 'Write-BoxBottom', 'Write-BoxDivider',
     'Write-BoxEmptyLine', 'Write-BoxLine', 'Write-BoxLineCenter'
 )
