@@ -736,7 +736,7 @@ When multiple behaviors combine into one method, suffixes are **concatenated in 
 
 #### Suffix Ordering Rule
 
-> **Method** + **Filter** + **Type** + **Lock** + **If**
+> **Method** + **Filter** + **Type** + **Lock** + **If** + **Must**
 
 | Position | Suffix | Purpose | Example |
 |----------|--------|---------|---------|
@@ -745,6 +745,7 @@ When multiple behaviors combine into one method, suffixes are **concatenated in 
 | 3 | Type modifier | Input shape or pointer | `Strings`, `Slice`, `Ptr` |
 | 4 | Lock | Thread safety | `Lock` |
 | 5 | If | Conditional dispatch | `If` |
+| 6 | Must | Panic on error | `Must` |
 
 #### Real Examples from the Codebase
 
