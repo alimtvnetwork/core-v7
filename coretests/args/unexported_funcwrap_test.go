@@ -218,8 +218,8 @@ func Test_Cov9_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if result != 7 {
-		t.Errorf("got %v, want 7", result)
+	if result != int64(7) {
+		t.Errorf("got %v (%T), want int64(7)", result, result)
 	}
 }
 

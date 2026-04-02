@@ -83,7 +83,7 @@ func Test_Cov9_TwoFunc_Invoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	if results[0] != 3 {
+	if results[0] != int64(3) {
 		t.Errorf("got %v, want 3", results[0])
 	}
 }
@@ -91,7 +91,7 @@ func Test_Cov9_TwoFunc_Invoke(t *testing.T) {
 func Test_Cov9_TwoFunc_InvokeMust(t *testing.T) {
 	tf := &TwoFunc[int, int]{First: 1, Second: 2, WorkFunc: sampleAdd}
 	results := tf.InvokeMust(1, 2)
-	if results[0] != 3 {
+	if results[0] != int64(3) {
 		t.Errorf("got %v, want 3", results[0])
 	}
 }
@@ -102,7 +102,7 @@ func Test_Cov9_TwoFunc_InvokeArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 3 {
+	if results[0] != int64(3) {
 		t.Errorf("got %v, want 3", results[0])
 	}
 }
@@ -129,7 +129,7 @@ func Test_Cov9_ThreeFunc_Invoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 6 {
+	if results[0] != int64(6) {
 		t.Errorf("got %v, want 6", results[0])
 	}
 }
@@ -137,7 +137,7 @@ func Test_Cov9_ThreeFunc_Invoke(t *testing.T) {
 func Test_Cov9_ThreeFunc_InvokeMust(t *testing.T) {
 	tf := &ThreeFunc[int, int, int]{First: 1, Second: 2, Third: 3, WorkFunc: sampleThreeArgs}
 	results := tf.InvokeMust(1, 2, 3)
-	if results[0] != 6 {
+	if results[0] != int64(6) {
 		t.Errorf("got %v, want 6", results[0])
 	}
 }
@@ -148,7 +148,7 @@ func Test_Cov9_ThreeFunc_InvokeArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 6 {
+	if results[0] != int64(6) {
 		t.Errorf("got %v, want 6", results[0])
 	}
 }
@@ -184,7 +184,7 @@ func Test_Cov9_FourFunc_Invoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 10 {
+	if results[0] != int64(10) {
 		t.Errorf("got %v, want 10", results[0])
 	}
 }
@@ -192,7 +192,7 @@ func Test_Cov9_FourFunc_Invoke(t *testing.T) {
 func Test_Cov9_FourFunc_InvokeMust(t *testing.T) {
 	ff := &FourFunc[int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, WorkFunc: sampleFourArgs}
 	results := ff.InvokeMust(1, 2, 3, 4)
-	if results[0] != 10 {
+	if results[0] != int64(10) {
 		t.Errorf("got %v, want 10", results[0])
 	}
 }
@@ -203,7 +203,7 @@ func Test_Cov9_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 10 {
+	if results[0] != int64(10) {
 		t.Errorf("got %v, want 10", results[0])
 	}
 }
@@ -214,7 +214,7 @@ func Test_Cov9_FourFunc_InvokeArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 10 {
+	if results[0] != int64(10) {
 		t.Errorf("got %v, want 10", results[0])
 	}
 }
@@ -249,7 +249,7 @@ func Test_Cov9_FiveFunc_Invoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 15 {
+	if results[0] != int64(15) {
 		t.Errorf("got %v, want 15", results[0])
 	}
 }
@@ -257,7 +257,7 @@ func Test_Cov9_FiveFunc_Invoke(t *testing.T) {
 func Test_Cov9_FiveFunc_InvokeMust(t *testing.T) {
 	ff := &FiveFunc[int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, WorkFunc: sampleFiveArgs}
 	results := ff.InvokeMust(1, 2, 3, 4, 5)
-	if results[0] != 15 {
+	if results[0] != int64(15) {
 		t.Errorf("got %v, want 15", results[0])
 	}
 }
@@ -268,7 +268,7 @@ func Test_Cov9_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 15 {
+	if results[0] != int64(15) {
 		t.Errorf("got %v, want 15", results[0])
 	}
 }
@@ -279,7 +279,7 @@ func Test_Cov9_FiveFunc_InvokeArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 15 {
+	if results[0] != int64(15) {
 		t.Errorf("got %v, want 15", results[0])
 	}
 }
@@ -314,7 +314,7 @@ func Test_Cov9_SixFunc_Invoke(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 21 {
+	if results[0] != int64(21) {
 		t.Errorf("got %v, want 21", results[0])
 	}
 }
@@ -322,7 +322,7 @@ func Test_Cov9_SixFunc_Invoke(t *testing.T) {
 func Test_Cov9_SixFunc_InvokeMust(t *testing.T) {
 	sf := &SixFunc[int, int, int, int, int, int]{First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5, Sixth: 6, WorkFunc: sampleSixArgs}
 	results := sf.InvokeMust(1, 2, 3, 4, 5, 6)
-	if results[0] != 21 {
+	if results[0] != int64(21) {
 		t.Errorf("got %v, want 21", results[0])
 	}
 }
@@ -333,7 +333,7 @@ func Test_Cov9_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 21 {
+	if results[0] != int64(21) {
 		t.Errorf("got %v, want 21", results[0])
 	}
 }
@@ -344,7 +344,7 @@ func Test_Cov9_SixFunc_InvokeArgs(t *testing.T) {
 	if err != nil {
 		t.Fatalf("error: %v", err)
 	}
-	if results[0] != 21 {
+	if results[0] != int64(21) {
 		t.Errorf("got %v, want 21", results[0])
 	}
 }

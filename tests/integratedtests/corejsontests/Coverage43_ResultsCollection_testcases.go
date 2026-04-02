@@ -235,9 +235,9 @@ var resultsCollectionDisposeTestCase = coretestcases.CaseV1{
 }
 
 var resultsCollectionCloneTestCase = coretestcases.CaseV1{
-	Title: "ResultsCollection Clone returns 0 -- Clone bug checks newResults.Length not it.Length",
+	Title: "ResultsCollection Clone returns 1 -- Clone correctly copies items",
 	ExpectedInput: args.Map{
-		"length": 0,
+		"length": 1,
 	},
 }
 

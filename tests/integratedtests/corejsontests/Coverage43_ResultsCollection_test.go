@@ -500,14 +500,13 @@ func Test_Cov43_ResultsCollection_Clone_Deep(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.New("a"))
 
-	// Act — Clone creates newResults with UsingCap, then checks newResults.Length() (always 0)
-	// Production bug: should check it.Length() not newResults.Length(). Returns empty clone.
+	// Act — Clone correctly copies items (bug was fixed: checks it.Length() not newResults.Length())
 	cloned := c.Clone(true)
 	actual := args.Map{
 		"length": cloned.Length(),
 	}
 
-	// Assert — expect 0 due to early return bug in Clone
+	// Assert — expect 1 (clone preserves items)
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 

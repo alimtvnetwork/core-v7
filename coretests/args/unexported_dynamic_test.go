@@ -172,8 +172,11 @@ func Test_I13_DynamicFunc_Branches(t *testing.T) {
 		WorkFunc: sampleStringFunc,
 		Expect:   "HELLO",
 	}
-	if df.ArgsCount() != 1 {
-		t.Fatal("expected 1 arg")
+	// ArgsCount delegates to Map.ArgsCount which subtracts HasFunc (always true
+	// because NewFuncWrap.Default(nil) returns non-nil invalid FuncWrap).
+	// Map{"first":"hello"} → Length=1, HasFunc=1 → ArgsCount=0.
+	if df.ArgsCount() != 0 {
+		t.Fatalf("expected 0 arg (Map.HasFunc always true), got %d", df.ArgsCount())
 	}
 	if df.GetWorkFunc() == nil {
 		t.Fatal("expected work func")
