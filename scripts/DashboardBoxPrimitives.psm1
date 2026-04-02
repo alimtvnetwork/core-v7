@@ -190,6 +190,7 @@ function Write-BoxLineCenter {
  
 Export-ModuleMember -Function @(
     'Get-AnsiVisualLength',
+    'Set-AmbiguousWidthOverride', 'Remove-AmbiguousWidthOverride', 'Get-AmbiguousWidthOverrides',
     'Get-ProgressBar', 'Write-BoxTop', 'Write-BoxBottom', 'Write-BoxDivider',
     'Write-BoxEmptyLine', 'Write-BoxLine', 'Write-BoxLineCenter'
 )
