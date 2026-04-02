@@ -98,7 +98,7 @@ func (it *FuncMap) Adds(iFunctions ...any) *FuncMap {
 
 // AddStructFunctions extracts all public methods from structs and adds them to the map.
 func (it *FuncMap) AddStructFunctions(iStructs ...any) error {
-	if it == nil {
+	if *it == nil {
 		*it = map[string]FuncWrapAny{}
 	}
 
