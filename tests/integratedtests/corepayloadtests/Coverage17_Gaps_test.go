@@ -85,8 +85,8 @@ func Test_Cov17_Attributes_HandleError_NoError(t *testing.T) {
 }
 
 func Test_Cov17_Attributes_AddNewStringKeyValueOnly_NilKV(t *testing.T) {
-	// Arrange — empty attributes has nil KeyValuePairs
-	attr := corepayload.New.Attributes.Empty()
+	// Arrange — attributes with nil KeyValuePairs (not using Empty() which initializes KV)
+	attr := &corepayload.Attributes{}
 
 	// Act
 	isAdded := attr.AddNewStringKeyValueOnly("key", "value")
