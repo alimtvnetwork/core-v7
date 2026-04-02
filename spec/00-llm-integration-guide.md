@@ -1205,23 +1205,58 @@ func (it *Collection) AddsNonEmptyPtrLock(itemsPtr ...*string) *Collection {
 }
 ```
 
-#### Summary
+#### Master Suffix Reference Table
 
-| Suffix | When | Example |
-|--------|------|---------|
-| `*Lock` | Thread-safe variant | `Add` → `AddLock` |
-| `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
+**Behavioral:**
+
+| Suffix | Purpose | Example |
+|--------|---------|---------|
+| `*Lock` | Wraps with mutex | `Add` → `AddLock` |
+| `*If` | Conditional on `is*` bool | `FmtDebug` → `FmtDebugIf` |
 | `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
+| `*Must` | Panics on error | `Deserialize` → `DeserializeMust` |
 | (pair) | Opposite states | `IsValid` + `IsInvalid` |
-| `*NonEmpty` | Skip empty strings | `Add` → `AddNonEmpty` |
-| `*NonEmptyWhitespace` | Skip empty + whitespace | `Add` → `AddNonEmptyWhitespace` |
-| `*NonWhitespace` | Same (standalone functions) | `NonWhitespace(slice)` |
-| `*Trimmed*` | Trim then filter | `TrimmedEachWords` |
-| `*Join` | Filter then join | `NonEmptyJoin` |
-| `*Ptr` | Pointer variant | `Json` → `JsonPtr` |
-| `*NonEmpty*Lock` | Filter + thread-safe | `AddsNonEmptyPtrLock` |
 
-**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version — no duplicate logic. (4) Each variant in its own file. (5) Delegate upward — `AddNonEmpty` calls `Add`. (6) **Suffix order is fixed**: Base + Filter + Type + Lock + If — never rearrange.
+**Filtering (string-specific):**
+
+| Suffix | Purpose | Example |
+|--------|---------|---------|
+| `*NonEmpty` | Skips `""` | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Skips `""` + whitespace | `Add` → `AddNonEmptyWhitespace` |
+| `*Trimmed*` | Trims then filters empty | `TrimmedEachWords` |
+| `*Join` | Filter then join | `NonEmptyJoin` |
+
+**Type modifiers:**
+
+| Suffix | Purpose | Example |
+|--------|---------|---------|
+| `*Ptr` | Returns/accepts pointer with nil-safety | `Json` → `JsonPtr` |
+| `ToPtr` | Value receiver → pointer | `(it Value) ToPtr() *Value` |
+| `*Strings` | Variadic `...string` | `AddNonEmptyStrings` |
+| `*Slice` | Accepts `[]T` | `AddNonEmptyStringsSlice` |
+| `*Collection(s)` | Accepts `*Collection` | `AddCollection`, `AddCollections` |
+
+**Result modifiers:**
+
+| Suffix | Purpose | Example |
+|--------|---------|---------|
+| `*OrDefault` | Returns zero value if missing | `First` → `FirstOrDefault` |
+| `*OrDefaultWith` | Custom fallback value | `FirstOrDefaultWith(slice, "N/A")` |
+| `*New` | Returns new slice (no mutation) | `AppendLineNew`, `MergeNew` |
+
+**Constructors:**
+
+| Pattern | Purpose | Example |
+|---------|---------|---------|
+| `New*` | Factory | `NewCollection(cap)` |
+| `*Using*` | From specific input | `UsingCap(n)` |
+| `*From*` | Conversion | `FromSlice(parts)` |
+| `ParseInjectUsingJson*` | JSON → existing struct | `ParseInjectUsingJsonMust` |
+| `Serialize*` / `Deserialize*` | JSON round-trip | `SerializeMust()` |
+
+**Suffix order** (mandatory): **Base + Filter + Type + Lock + If + Must**
+
+**Rules**: (1) Name expresses behavior. (2) Bool param always first, uses `is*` prefix. (3) `*If` calls the unconditional version. (4) Each variant in its own file. (5) Delegate upward. (6) Suffix order is fixed — never rearrange. (7) `*Must` always panics. (8) `*OrDefault` returns zero; `*OrDefaultWith` accepts custom fallback. (9) `ToPtr` is value-receiver only.
 
 ### Method Writing: Pointer Variants (`*Ptr` Suffix)
 

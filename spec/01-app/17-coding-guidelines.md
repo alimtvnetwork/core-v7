@@ -842,22 +842,92 @@ AddNonEmptyStrings.go         # AddNonEmptyStrings
 AddNonEmptyStringsSlice.go    # AddNonEmptyStringsSlice
 ```
 
-### Summary Table
+### Master Suffix Reference Table
 
-| Suffix | When to Use | Example |
-|--------|-------------|---------|
-| `*Lock` | Thread-safe variant of a non-locking method | `Add` → `AddLock` |
-| `*If` | Executes only when a condition is true | `FmtDebug` → `FmtDebugIf` |
-| `*LockIf` | Conditionally applies locking | `Create` → `CreateLockIf` |
-| No suffix (pair) | Two methods expressing opposite states | `IsValid` + `IsInvalid` |
-| `*NonEmpty` | Skips empty strings | `Add` → `AddNonEmpty` |
-| `*NonEmptyWhitespace` | Skips empty + whitespace-only strings | `Add` → `AddNonEmptyWhitespace` |
-| `*NonWhitespace` | Same as above (standalone functions) | `NonEmptyStrings` → `NonWhitespace` |
-| `*Trimmed*` | Trims then filters empty results | `TrimmedEachWords` |
-| `*Join` | Filters then joins | `NonEmptyJoin`, `NonWhitespaceJoin` |
-| `*Ptr` | Pointer return or nil-safe pointer accept | `Json` → `JsonPtr` |
-| `*NonEmpty*Lock` | Filter + thread-safe | `AddNonEmpty` → `AddNonEmptyLock` |
-| `*NonEmpty*Ptr*Lock` | Filter + pointer + thread-safe | `AddsNonEmptyPtrLock` |
+This is the **single source of truth** for all method naming suffixes in the codebase.
+
+#### Behavioral Suffixes
+
+| Suffix | Category | Purpose | Example |
+|--------|----------|---------|---------|
+| `*Lock` | Concurrency | Wraps with `mutex.Lock()`/`Unlock()` | `Add` → `AddLock` |
+| `*If` | Conditional | Executes only when `is*` bool param is true | `FmtDebug` → `FmtDebugIf` |
+| `*LockIf` | Combined | Conditionally applies locking | `Create` → `CreateLockIf` |
+| `*Must` | Error handling | Panics on error instead of returning `error` | `Deserialize` → `DeserializeMust` |
+
+#### Filtering Suffixes (String-Specific)
+
+| Suffix | Category | Purpose | Example |
+|--------|----------|---------|---------|
+| `*NonEmpty` | Filter | Skips `""` values | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Filter | Skips `""` and whitespace-only | `Add` → `AddNonEmptyWhitespace` |
+| `*NonWhitespace` | Filter | Same as above (standalone functions) | `NonWhitespace(slice)` |
+| `*Trimmed*` | Filter | Trims then filters empty results | `TrimmedEachWords` |
+| `*NonNull*` | Filter | Skips nil/null values | `NonNullStrings(slice)` |
+
+#### Type Modifier Suffixes
+
+| Suffix | Category | Purpose | Example |
+|--------|----------|---------|---------|
+| `*Ptr` | Type | Returns `*T` instead of `T`, or accepts `*T` with nil-safety | `Json` → `JsonPtr` |
+| `ToPtr` | Conversion | Converts value receiver to pointer `&it` | `(it Value) ToPtr() *Value` |
+| `*Strings` | Type | Accepts variadic `...string` | `AddNonEmpty` → `AddNonEmptyStrings` |
+| `*Slice` | Type | Accepts `[]T` instead of variadic | `AddNonEmptyStrings` → `AddNonEmptyStringsSlice` |
+| `*Collection` | Type | Accepts another `*Collection` | `Add` → `AddCollection` |
+| `*Collections` | Type | Accepts variadic `...*Collection` | `Add` → `AddCollections` |
+
+#### Result Modifier Suffixes
+
+| Suffix | Category | Purpose | Example |
+|--------|----------|---------|---------|
+| `*OrDefault` | Fallback | Returns zero value if empty/missing | `First` → `FirstOrDefault` |
+| `*OrDefaultWith` | Fallback | Returns custom default value | `FirstOrDefault` → `FirstOrDefaultWith(slice, "N/A")` |
+| `*New` | Immutability | Returns a new slice/collection (no mutation) | `Append` → `AppendLineNew`, `MergeNew` |
+| `*Join` | Transform | Filters then joins with separator | `NonEmpty` → `NonEmptyJoin` |
+
+#### Pair/Opposite Suffixes
+
+| Suffix | Category | Purpose | Example |
+|--------|----------|---------|---------|
+| (pair) | Clarity | Two methods expressing opposite states | `IsValid` + `IsInvalid` |
+| `Is*` / `Has*` | Query | Boolean accessors | `IsEmpty`, `HasAnyItem` |
+
+#### Combined Suffix Examples
+
+| Combined Suffix | Breakdown | Example |
+|----------------|-----------|---------|
+| `*NonEmpty*Lock` | filter + lock | `AddNonEmptyLock` |
+| `*NonEmpty*Ptr*Lock` | filter + type + lock | `AddsNonEmptyPtrLock` |
+| `*NonEmpty*If` | filter + conditional | `AddNonEmptyIf` |
+| `*NonEmpty*Lock*If` | filter + lock + conditional | `AddNonEmptyLockIf` |
+| `*OrDefault*Ptr` | fallback + pointer | `FirstOrDefaultPtr` |
+| `*Ptr*Must` | type + error handling | `ResultPtrMust` |
+
+#### Suffix Ordering Rule (Mandatory)
+
+When combining suffixes, they **must** follow this fixed order:
+
+> **Base** + **Filter** + **Type** + **Lock** + **If** + **Must**
+
+| Position | Slot | Values |
+|----------|------|--------|
+| 1 | Base name | `Add`, `Adds`, `Create`, `Get`, `First`, `Last` |
+| 2 | Filter | `NonEmpty`, `NonEmptyWhitespace`, `Trimmed` |
+| 3 | Type modifier | `Strings`, `Slice`, `Ptr`, `Collection` |
+| 4 | Lock | `Lock` |
+| 5 | If | `If` |
+| 6 | Must | `Must` (only for error-returning bases) |
+
+#### Special Standalone Patterns
+
+| Pattern | Purpose | Example |
+|---------|---------|---------|
+| `New*` | Constructor/factory | `NewCollection(cap)`, `NewHashmap()` |
+| `*Using*` | Constructor from specific input | `UsingCap(n)`, `UsingByte(b)` |
+| `*From*` | Conversion constructor | `FromSlice(parts)`, `FromBytes(b)` |
+| `ParseInjectUsingJson*` | JSON deserialization into existing struct | `ParseInjectUsingJsonMust(result)` |
+| `Serialize*` | JSON serialization | `Serialize()`, `SerializeMust()` |
+| `Deserialize*` | JSON deserialization to new struct | `Deserialize(bytes)`, `DeserializeMust(bytes)` |
 
 ### Rules
 
@@ -866,7 +936,10 @@ AddNonEmptyStringsSlice.go    # AddNonEmptyStringsSlice
 3. **Use `is*` prefix** for all boolean parameters — never `flag`, `option`, `mode`.
 4. **The `*If` variant calls the unconditional one** — don't duplicate logic.
 5. **Each variant lives in its own file** — `Add.go`, `AddLock.go`, `AddIf.go`.
-6. **Suffix order is fixed**: Base + Filter + Type + Lock + If — never rearrange.
+6. **Suffix order is fixed**: Base + Filter + Type + Lock + If + Must — never rearrange.
+7. **`*Must` always panics** — never log or return a default; use `errcore.HandleErr(err)`.
+8. **`*OrDefault` returns zero value** — `*OrDefaultWith` accepts a custom fallback.
+9. **`ToPtr` is value-receiver only** — `func (it T) ToPtr() *T { return &it }`.
 
 ---
 

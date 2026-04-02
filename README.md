@@ -861,16 +861,27 @@ func (it Status) IsValid() bool   { return it != Invalid }
 func (it Status) IsInvalid() bool { return it == Invalid }
 ```
 
-| Suffix | Pattern | Example |
+#### Master Suffix Table
+
+| Suffix | Purpose | Example |
 |--------|---------|---------|
-| `*Lock` | Thread-safe variant | `Add` → `AddLock` |
-| `*If` | Conditional execution | `FmtDebug` → `FmtDebugIf` |
-| `*LockIf` | Conditional locking | `Create` → `CreateLockIf` |
-| (pair) | Opposite states | `IsValid` + `IsInvalid` |
-| `*NonEmpty` | Skip empty strings | `Add` → `AddNonEmpty` |
-| `*NonEmptyWhitespace` | Skip empty + whitespace | `Add` → `AddNonEmptyWhitespace` |
+| `*Lock` | Thread-safe (mutex) | `Add` → `AddLock` |
+| `*If` | Conditional on `is*` bool | `FmtDebug` → `FmtDebugIf` |
+| `*Must` | Panics on error | `Deserialize` → `DeserializeMust` |
+| `*NonEmpty` | Skips `""` | `Add` → `AddNonEmpty` |
+| `*NonEmptyWhitespace` | Skips `""` + whitespace | `Add` → `AddNonEmptyWhitespace` |
+| `*Trimmed*` | Trim then filter empty | `TrimmedEachWords` |
 | `*Join` | Filter then join | `NonEmptyJoin`, `NonWhitespaceJoin` |
-| `*NonEmpty*Lock` | Filter + thread-safe | `AddsNonEmptyPtrLock` |
+| `*Ptr` | Pointer return/accept | `Json` → `JsonPtr` |
+| `ToPtr` | Value → pointer | `(it Value) ToPtr() *Value` |
+| `*Strings` / `*Slice` | Variadic / slice input | `AddNonEmptyStrings`, `AddNonEmptyStringsSlice` |
+| `*OrDefault` | Returns zero if missing | `First` → `FirstOrDefault` |
+| `*OrDefaultWith` | Custom fallback | `FirstOrDefaultWith(slice, "N/A")` |
+| `*New` | Returns new (no mutation) | `AppendLineNew`, `MergeNew` |
+| `*Collection(s)` | Accepts collection type | `AddCollection`, `AddCollections` |
+| (pair) | Opposite states | `IsValid` + `IsInvalid` |
+
+**Suffix order**: Base + Filter + Type + Lock + If + Must (e.g., `AddsNonEmptyPtrLock`).
 
 ### Combined Suffix Ordering Convention
 
