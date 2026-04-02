@@ -1416,6 +1416,233 @@ coll := corestr.NewCollectionPtrUsingStrings(&items, constants.Zero)
 coll.AddsLock("new item")
 ```
 
+### Recipe: PayloadWrapper Creation & Deserialization
+
+```go
+// Empty wrapper
+pw := corepayload.New.PayloadWrapper.Empty()
+
+// From a single record (serializes to JSON internally)
+pw, err := corepayload.New.PayloadWrapper.Create(
+    "user-update", "42", "UpdateTask", "users", myStruct,
+)
+
+// From raw JSON bytes
+pw, err := corepayload.New.PayloadWrapper.Deserialize(jsonBytes)
+
+// Using BytesCreateInstruction
+pw := corepayload.New.PayloadWrapper.UsingBytesCreateInstruction(&corepayload.BytesCreateInstruction{
+    Name: "order", Identifier: "99", TaskTypeName: "Process",
+    EntityType: "Order", Payloads: rawBytes,
+})
+
+// Deserialize payloads into a target struct
+var order Order
+err := pw.Deserialize(&order)       // returns error
+pw.DeserializeMust(&order)          // panics on error
+
+// Clone
+cloned, err := pw.ClonePtr(true)    // deep clone
+cloned, err := pw.ClonePtr(false)   // shallow clone
+```
+
+### Recipe: PayloadsCollection Usage
+
+```go
+// Create
+col := corepayload.New.PayloadsCollection.Empty()
+col := corepayload.New.PayloadsCollection.UsingCap(10)
+col, err := corepayload.New.PayloadsCollection.Deserialize(jsonBytes)
+
+// Mutate (fluent)
+col.Add(wrapper).Adds(w1, w2).AddsPtr(ptrW1, ptrW2)
+col.InsertAt(0, wrapper)
+col.Reverse()
+
+// Query
+col.Length()                        // int
+col.IsEmpty()                       // bool
+col.First()                         // *PayloadWrapper (nil if empty)
+col.Last()                          // *PayloadWrapper
+col.FirstOrDefault()                // nil-safe
+col.Skip(5)                         // []*PayloadWrapper
+col.Take(3)                         // []*PayloadWrapper
+
+// Filter
+col.FirstById("42")                 // *PayloadWrapper
+col.FirstByCategory("orders")       // *PayloadWrapper
+col.FilterCategoryCollection("orders") // *PayloadsCollection
+col.FilterEntityTypeCollection("Order") // *PayloadsCollection
+col.Filter(func(pw *PayloadWrapper) (isTake, isBreak bool) { ... })
+
+// Clone & Concat
+cloned := col.Clone()               // value copy
+col.ConcatNew(w1, w2)               // new collection
+```
+
+---
+
+## coregeneric — Generic Data Structures API Reference
+
+### Collection[T any]
+
+Slice-backed collection with embedded `sync.Mutex`. Constraint: `T any`.
+
+```go
+// Construction via New Creator
+col := coregeneric.New.Collection.String.Cap(10)
+col := coregeneric.New.Collection.Int.Items(1, 2, 3)
+col := coregeneric.New.Collection.Float64.Empty()
+
+// Or via package-level functions
+col := coregeneric.EmptyCollection[string]()
+col := coregeneric.NewCollection[MyStruct](20)
+col := coregeneric.CollectionFrom(existingSlice)   // no copy
+col := coregeneric.CollectionClone(existingSlice)   // copies
+```
+
+**Mutation (fluent, returns `*Collection[T]`)**:
+
+| Method | Description |
+|--------|-------------|
+| `Add(item)` | Append one item |
+| `AddLock(item)` | Append with mutex |
+| `Adds(items...)` | Append variadic |
+| `AddsLock(items...)` | Variadic with mutex |
+| `AddSlice([]T)` | Append from slice |
+| `AddIf(bool, item)` | Conditional append |
+| `AddIfMany(bool, items...)` | Conditional variadic |
+| `AddFunc(func() T)` | Append function result |
+| `AddCollection(*Collection[T])` | Merge another collection |
+| `AddCollections(...*Collection[T])` | Merge multiple |
+| `RemoveAt(index) bool` | Remove by index |
+| `SortFunc(less)` | In-place sort |
+| `Reverse()` | In-place reverse |
+| `ConcatNew(items...)` | New collection = this + items |
+| `Clone()` | Deep copy |
+
+**Query**:
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Length()` / `Count()` | `int` | Number of items |
+| `LengthLock()` | `int` | Thread-safe length |
+| `IsEmpty()` / `IsEmptyLock()` | `bool` | Empty check |
+| `HasItems()` / `HasAnyItem()` | `bool` | Non-empty check |
+| `HasIndex(i)` | `bool` | Bounds check |
+| `Items()` | `[]T` | Underlying slice |
+| `First()` / `Last()` | `T` | Panics if empty |
+| `FirstOrDefault()` / `LastOrDefault()` | `T` | Zero-value if empty |
+| `SafeAt(i)` | `T` | Zero-value if OOB |
+| `Skip(n)` / `Take(n)` | `[]T` | Slice operations |
+| `Filter(pred)` | `*Collection[T]` | New filtered collection |
+| `CountFunc(pred)` | `int` | Count matching |
+| `ForEach(fn)` | — | Iterate with index |
+| `ForEachBreak(fn)` | — | Iterate with early exit |
+
+**Iterators** (Go 1.23+ `iter` package):
+
+```go
+for i, item := range col.All() { ... }     // iter.Seq2[int, T]
+for item := range col.Values() { ... }     // iter.Seq[T]
+```
+
+**Package-level generic functions** (`funcs.go`, `comparablefuncs.go`):
+
+| Function | Constraint | Description |
+|----------|-----------|-------------|
+| `MapCollection(src, fn)` | `T→U` | Transform Collection[T] → Collection[U] |
+| `FlatMapCollection(src, fn)` | `T→[]U` | Flatten-transform |
+| `ReduceCollection(src, init, fn)` | `T→U` | Fold to single value |
+| `GroupByCollection(src, keyFn)` | `K comparable` | Group into map[K]*Collection[T] |
+| `ContainsFunc(src, pred)` | `T any` | Predicate search |
+| `ContainsItem(src, item)` | `T comparable` | Direct equality search |
+| `IndexOfFunc(src, pred)` / `IndexOfItem(src, item)` | — | Find index |
+| `Distinct(src)` | `T comparable` | New deduped collection |
+| `ContainsAll(src, items...)` | `T comparable` | All items present? |
+| `ContainsAny(src, items...)` | `T comparable` | Any item present? |
+| `RemoveItem(src, item)` | `T comparable` | Remove first occurrence |
+| `RemoveAllItems(src, item)` | `T comparable` | Remove all occurrences |
+| `ToHashset(src)` | `T comparable` | Convert to Hashset[T] |
+
+### Hashset[T comparable]
+
+Set backed by `map[T]bool` with embedded `sync.Mutex`.
+
+```go
+hs := coregeneric.New.Hashset.String.Empty()
+hs := coregeneric.New.Hashset.Int.Cap(100)
+hs := coregeneric.HashsetFrom([]string{"a", "b"})
+hs := coregeneric.HashsetFromMap(existingMap)
+```
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Add(key)` | `*Hashset[T]` | Add item (fluent) |
+| `AddBool(key)` | `bool` | Returns true if already existed |
+| `AddLock(key)` | `*Hashset[T]` | Thread-safe add |
+| `Adds(keys...)` | `*Hashset[T]` | Variadic add |
+| `AddSlice([]T)` / `AddSliceLock([]T)` | `*Hashset[T]` | Add from slice |
+| `AddIf(bool, key)` / `AddIfMany(bool, keys...)` | `*Hashset[T]` | Conditional |
+| `AddHashsetItems(other)` | `*Hashset[T]` | Merge sets |
+| `Has(key)` / `Contains(key)` / `ContainsLock(key)` | `bool` | Membership |
+| `HasAll(keys...)` / `HasAny(keys...)` | `bool` | Bulk membership |
+| `Remove(key)` / `RemoveLock(key)` | `bool` | Remove (returns existed) |
+| `Length()` / `LengthLock()` | `int` | Size |
+| `IsEmpty()` / `IsEmptyLock()` | `bool` | Empty check |
+| `List()` | `[]T` | All keys as slice |
+| `Map()` | `map[T]bool` | Underlying map |
+| `Collection()` | `*Collection[T]` | Convert to Collection |
+| `Resize(cap)` | `*Hashset[T]` | Grow internal map |
+| `IsEquals(other)` | `bool` | Set equality |
+
+**Iterators**:
+
+```go
+for item, _ := range hs.All() { ... }   // iter.Seq2[T, bool]
+for item := range hs.Values() { ... }   // iter.Seq[T]
+```
+
+### Hashmap[K comparable, V any]
+
+Map wrapper with embedded `sync.Mutex`.
+
+```go
+hm := coregeneric.New.Hashmap.StringString.Cap(10)
+hm := coregeneric.New.Hashmap.StringAny.Empty()
+hm := coregeneric.HashmapFrom(existingMap)     // no copy
+hm := coregeneric.HashmapClone(existingMap)    // copies
+```
+
+| Method | Returns | Description |
+|--------|---------|-------------|
+| `Set(key, val)` | `bool` (isNew) | Add or update |
+| `SetLock(key, val)` | `*Hashmap` | Thread-safe set |
+| `Get(key)` | `(V, bool)` | Retrieve |
+| `GetOrDefault(key, default)` | `V` | Retrieve with fallback |
+| `GetLock(key)` | `(V, bool)` | Thread-safe get |
+| `Has(key)` / `Contains(key)` / `ContainsLock(key)` | `bool` | Key check |
+| `IsKeyMissing(key)` | `bool` | Negated Has |
+| `Remove(key)` / `RemoveLock(key)` | `bool` | Delete (returns existed) |
+| `AddOrUpdateMap(map[K]V)` | `*Hashmap` | Merge from raw map |
+| `AddOrUpdateHashmap(other)` | `*Hashmap` | Merge from Hashmap |
+| `Keys()` | `[]K` | All keys |
+| `Values()` | `[]V` | All values |
+| `Map()` | `map[K]V` | Underlying map |
+| `ForEach(fn)` / `ForEachBreak(fn)` | — | Iterate |
+| `ConcatNew(others...)` | `*Hashmap` | New merged hashmap |
+| `Clone()` | `*Hashmap` | Copy |
+| `Length()` / `LengthLock()` | `int` | Size |
+| `IsEmpty()` / `IsEmptyLock()` | `bool` | Empty check |
+| `IsEquals(other)` | `bool` | Key equality check |
+
+**Iterators**:
+
+```go
+for k, v := range hm.All() { ... }      // iter.Seq2[K, V]
+for k := range hm.Keys() { ... }        // iter.Seq[K]  (via HashmapIter.go)
+```
+
 ---
 
 ## Further Reading
