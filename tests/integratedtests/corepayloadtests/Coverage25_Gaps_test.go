@@ -11,6 +11,9 @@ import (
 	"github.com/alimtvnetwork/core/errcore"
 )
 
+// Helpers for this file: uses testUserCov23, makeTypedWrapperCov23, makeCollectionCov23
+// from Coverage23_TypedFuncs_test.go
+
 // ── Attributes.IsEqual — error different ──
 
 func Test_Cov25_Attributes_IsEqual_ErrorDifferent(t *testing.T) {
