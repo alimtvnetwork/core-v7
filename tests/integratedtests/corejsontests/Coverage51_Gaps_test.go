@@ -1,0 +1,749 @@
+package corejsontests
+
+import (
+	"testing"
+
+	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
+)
+
+// ── BytesCollection — AddSerializer ──
+
+func Test_Cov51_BytesCollection_AddSerializer(t *testing.T) {
+	// Arrange
+	item := exampleStruct{Name: "Alice", Age: 30}
+	result := corejson.New(item)
+	coll := corejson.NewBytesCollection.Empty()
+
+	// Act
+	coll.AddSerializer(&result)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddSerializer adds 1 item -- valid serializer", actual)
+}
+
+// ── BytesCollection — AddSerializers ──
+
+func Test_Cov51_BytesCollection_AddSerializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+	coll := corejson.NewBytesCollection.Empty()
+
+	// Act
+	coll.AddSerializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "AddSerializers adds 2 items -- two valid serializers", actual)
+}
+
+// ── BytesCollection — AddJsoners with error ──
+
+func Test_Cov51_BytesCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+	// Arrange
+	coll := corejson.NewBytesCollection.Empty()
+	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
+
+	// Act — pass isIgnoreNilOrError=true with a nil jsoner
+	coll.AddJsoners(true, &good)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddJsoners adds 1 -- good item only", actual)
+}
+
+// ── BytesCollection — GetPagedItems negative index panic ──
+
+func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+	// Arrange
+	coll := corejson.NewBytesCollection.AnyItemsMust("a", "b", "c")
+	didPanic := false
+
+	// Act
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		coll.GetPagedItems(2, 0) // pageIndex 0 => skipItems = 2*(0-1) = -2 => panic
+	}()
+
+	// Assert
+	actual := args.Map{"didPanic": didPanic}
+	expected := args.Map{"didPanic": true}
+	expected.ShouldBeEqual(t, 0, "GetPagedItems panics -- zero page index", actual)
+}
+
+// ── MapResults — SafeUnmarshal fallthrough ──
+
+func Test_Cov51_MapResults_SafeUnmarshal_NotFound(t *testing.T) {
+	// Arrange
+	mr := corejson.NewMapResults.Empty()
+
+	// Act
+	err := mr.SafeUnmarshal("missing-key", nil)
+
+	// Assert
+	actual := args.Map{"errNil": err == nil}
+	expected := args.Map{"errNil": true}
+	expected.ShouldBeEqual(t, 0, "SafeUnmarshal returns nil -- key not found", actual)
+}
+
+// ── MapResults — AddAnyItem error ──
+
+func Test_Cov51_MapResults_AddAnyItem_Error(t *testing.T) {
+	// Arrange
+	mr := corejson.NewMapResults.Empty()
+
+	// Act
+	err := mr.AddAnyItem("key", make(chan int))
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "AddAnyItem returns error -- un-serializable", actual)
+}
+
+// ── MapResults — GetPagedItems negative index panic ──
+
+func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+	// Arrange
+	mr := corejson.NewMapResults.Empty()
+	mr.Add("a", corejson.New("val"))
+	didPanic := false
+
+	// Act
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		mr.GetPagedItems(2, 0)
+	}()
+
+	// Assert
+	actual := args.Map{"didPanic": didPanic}
+	expected := args.Map{"didPanic": true}
+	expected.ShouldBeEqual(t, 0, "GetPagedItems panics -- zero page index", actual)
+}
+
+// ── Result — MeaningfulError with error and payload ──
+
+func Test_Cov51_Result_MeaningfulError_WithErrorAndPayload(t *testing.T) {
+	// Arrange
+	r := corejson.Result{
+		Bytes:    []byte(`{"data":"test"}`),
+		TypeName: "TestType",
+	}
+	r.Error = corejson.Deserialize.UsingBytes([]byte(`{invalid`), &struct{}{})
+
+	// Act
+	err := r.MeaningfulError()
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "MeaningfulError returns error -- has error + payload", actual)
+}
+
+// ── Result — IsEqualPtr with matching jsonString ──
+
+func Test_Cov51_Result_IsEqualPtr_JsonStringMatch(t *testing.T) {
+	// Arrange
+	r1 := corejson.New("hello")
+	r2 := corejson.New("hello")
+
+	// Act
+	result := r1.IsEqualPtr(&r2)
+
+	// Assert
+	actual := args.Map{"isEqual": result}
+	expected := args.Map{"isEqual": true}
+	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns true -- same content", actual)
+}
+
+// ── Result — IsEqual with matching jsonString ──
+
+func Test_Cov51_Result_IsEqual_JsonStringMatch(t *testing.T) {
+	// Arrange
+	r1 := corejson.New("hello")
+	r2 := corejson.New("hello")
+
+	// Act
+	result := r1.IsEqual(r2)
+
+	// Assert
+	actual := args.Map{"isEqual": result}
+	expected := args.Map{"isEqual": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual returns true -- same content", actual)
+}
+
+// ── ResultCollection — AddSerializer ──
+
+func Test_Cov51_ResultCollection_AddSerializer(t *testing.T) {
+	// Arrange
+	item := corejson.New(exampleStruct{Name: "A", Age: 1})
+	coll := corejson.NewResultsCollection.Empty()
+
+	// Act
+	coll.AddSerializer(&item)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddSerializer adds 1 -- valid serializer", actual)
+}
+
+// ── ResultCollection — AddSerializers ──
+
+func Test_Cov51_ResultCollection_AddSerializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+	coll := corejson.NewResultsCollection.Empty()
+
+	// Act
+	coll.AddSerializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "AddSerializers adds 2 -- two valid serializers", actual)
+}
+
+// ── ResultCollection — AddJsoners with error ──
+
+func Test_Cov51_ResultCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+	// Arrange
+	coll := corejson.NewResultsCollection.Empty()
+	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
+
+	// Act
+	coll.AddJsoners(true, &good)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddJsoners adds 1 -- good item only", actual)
+}
+
+// ── ResultCollection — GetPagedItems negative index panic ──
+
+func Test_Cov51_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+	// Arrange
+	coll := corejson.NewResultsCollection.AnyItems("a", "b")
+	didPanic := false
+
+	// Act
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		coll.GetPagedItems(2, 0)
+	}()
+
+	// Assert
+	actual := args.Map{"didPanic": didPanic}
+	expected := args.Map{"didPanic": true}
+	expected.ShouldBeEqual(t, 0, "GetPagedItems panics -- zero page index", actual)
+}
+
+// ── ResultsPtrCollection — AddSerializer ──
+
+func Test_Cov51_ResultsPtrCollection_AddSerializer(t *testing.T) {
+	// Arrange
+	item := corejson.New(exampleStruct{Name: "A", Age: 1})
+	coll := corejson.NewResultsPtrCollection.Empty()
+
+	// Act
+	coll.AddSerializer(&item)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddSerializer adds 1 -- valid serializer", actual)
+}
+
+// ── ResultsPtrCollection — AddSerializers ──
+
+func Test_Cov51_ResultsPtrCollection_AddSerializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+	coll := corejson.NewResultsPtrCollection.Empty()
+
+	// Act
+	coll.AddSerializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "AddSerializers adds 2 -- two valid serializers", actual)
+}
+
+// ── ResultsPtrCollection — AddJsoners with error ──
+
+func Test_Cov51_ResultsPtrCollection_AddJsoners_ErrorIgnored(t *testing.T) {
+	// Arrange
+	coll := corejson.NewResultsPtrCollection.Empty()
+	good := corejson.NewResult.UsingBytes([]byte(`{"name":"ok"}`))
+
+	// Act
+	coll.AddJsoners(true, &good)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 1}
+	expected.ShouldBeEqual(t, 0, "AddJsoners adds 1 -- good item only", actual)
+}
+
+// ── ResultsPtrCollection — GetPagedItems negative index panic ──
+
+func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
+	// Arrange
+	coll := corejson.NewResultsPtrCollection.AnyItems("a", "b")
+	didPanic := false
+
+	// Act
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		coll.GetPagedItems(2, 0)
+	}()
+
+	// Assert
+	actual := args.Map{"didPanic": didPanic}
+	expected := args.Map{"didPanic": true}
+	expected.ShouldBeEqual(t, 0, "GetPagedItems panics -- zero page index", actual)
+}
+
+// ── CastAny — Result type switch ──
+
+func Test_Cov51_CastAny_Result(t *testing.T) {
+	// Arrange
+	r := corejson.New("hello")
+	var target string
+
+	// Act
+	err := corejson.CastAny.Deserialize(r, &target)
+
+	// Assert
+	actual := args.Map{
+		"err":    err == nil,
+		"target": target,
+	}
+	expected := args.Map{
+		"err":    true,
+		"target": "hello",
+	}
+	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize works -- Result type", actual)
+}
+
+// ── CastAny — *Result type switch ──
+
+func Test_Cov51_CastAny_ResultPtr(t *testing.T) {
+	// Arrange
+	r := corejson.New("world")
+	var target string
+
+	// Act
+	err := corejson.CastAny.Deserialize(&r, &target)
+
+	// Assert
+	actual := args.Map{
+		"err":    err == nil,
+		"target": target,
+	}
+	expected := args.Map{
+		"err":    true,
+		"target": "world",
+	}
+	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize works -- *Result type", actual)
+}
+
+// ── CastAny — bytesSerializer type switch ──
+
+func Test_Cov51_CastAny_BytesSerializer(t *testing.T) {
+	// Arrange
+	item := corejson.New(exampleStruct{Name: "Test", Age: 5})
+	var target exampleStruct
+
+	// Act — Result implements Serialize() ([]byte, error)
+	err := corejson.CastAny.Deserialize(&item, &target)
+
+	// Assert
+	actual := args.Map{
+		"err":  err == nil,
+		"name": target.Name,
+	}
+	expected := args.Map{
+		"err":  true,
+		"name": "Test",
+	}
+	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize works -- bytesSerializer via *Result", actual)
+}
+
+// ── CastAny — serializer func type switch ──
+
+func Test_Cov51_CastAny_SerializerFunc(t *testing.T) {
+	// Arrange
+	serializerFunc := func() ([]byte, error) {
+		return []byte(`"funcResult"`), nil
+	}
+	var target string
+
+	// Act
+	err := corejson.CastAny.Deserialize(serializerFunc, &target)
+
+	// Assert
+	actual := args.Map{
+		"err":    err == nil,
+		"target": target,
+	}
+	expected := args.Map{
+		"err":    true,
+		"target": "funcResult",
+	}
+	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize works -- serializer func", actual)
+}
+
+// ── CastAny — error nil type switch ──
+
+func Test_Cov51_CastAny_ErrorNil(t *testing.T) {
+	// Arrange
+	var errInput error
+	var target string
+
+	// Act
+	err := corejson.CastAny.Deserialize(errInput, &target)
+
+	// Assert
+	actual := args.Map{"errNil": err == nil}
+	expected := args.Map{"errNil": true}
+	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize returns nil -- nil error input", actual)
+}
+
+// ── DeserializeFromBytesTo — StringsMust panic ──
+
+func Test_Cov51_DeserializeFromBytesTo_StringsMust_Panic(t *testing.T) {
+	// Arrange
+	didPanic := false
+
+	// Act
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		corejson.Deserialize.FromBytesTo.StringsMust([]byte(`{invalid`))
+	}()
+
+	// Assert
+	actual := args.Map{"didPanic": didPanic}
+	expected := args.Map{"didPanic": true}
+	expected.ShouldBeEqual(t, 0, "StringsMust panics -- invalid json", actual)
+}
+
+// ── DeserializerLogic — UsingMapSkipOnEmpty error ──
+
+func Test_Cov51_DeserializerLogic_UsingMapSkipOnEmpty_Error(t *testing.T) {
+	// Arrange
+	badMap := map[string]any{"ch": make(chan int)}
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingMapSkipOnEmpty(false, badMap, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "UsingMapSkipOnEmpty returns error -- un-serializable map", actual)
+}
+
+// ── DeserializerLogic — UsingDeserializer nil ──
+
+func Test_Cov51_DeserializerLogic_UsingDeserializer_Nil(t *testing.T) {
+	// Arrange — passing nil deserializer
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingDeserializer(nil, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "UsingDeserializer returns error -- nil deserializer", actual)
+}
+
+// ── DeserializerLogic — UsingJsoner nil ──
+
+func Test_Cov51_DeserializerLogic_UsingJsoner_Nil(t *testing.T) {
+	// Arrange
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingJsoner(nil, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "UsingJsoner returns error -- nil jsoner", actual)
+}
+
+// ── NewBytesCollectionCreator — Deserialize error ──
+
+func Test_Cov51_NewBytesCollectionCreator_Deserialize_Error(t *testing.T) {
+	// Arrange
+	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+
+	// Act
+	coll, err := corejson.NewBytesCollection.Deserialize(&badResult)
+
+	// Assert
+	actual := args.Map{
+		"collNil": coll == nil,
+		"hasErr":  err != nil,
+	}
+	expected := args.Map{
+		"collNil": true,
+		"hasErr":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "Deserialize returns error -- invalid json", actual)
+}
+
+// ── NewBytesCollectionCreator — Serializers ──
+
+func Test_Cov51_NewBytesCollectionCreator_Serializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+
+	// Act
+	coll := corejson.NewBytesCollection.Serializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "Serializers creates 2-item collection -- two serializers", actual)
+}
+
+// ── NewMapResultsCreator — Deserialize error ──
+
+func Test_Cov51_NewMapResultsCreator_Deserialize_Error(t *testing.T) {
+	// Arrange
+	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+
+	// Act
+	mr, err := corejson.NewMapResults.Deserialize(&badResult)
+
+	// Assert
+	actual := args.Map{
+		"mrNil":  mr == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"mrNil":  true,
+		"hasErr":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "Deserialize returns error -- invalid json", actual)
+}
+
+// ── NewResultCreator — Deserialize error ──
+
+func Test_Cov51_NewResultCreator_Deserialize_Error(t *testing.T) {
+	// Arrange
+	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+
+	// Act
+	result := corejson.NewResult.Deserialize(&badResult)
+
+	// Assert
+	actual := args.Map{"hasErr": result.HasError()}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "Deserialize returns result with error -- invalid json", actual)
+}
+
+// ── NewResultCreator — UsingJsoner nil ──
+
+func Test_Cov51_NewResultCreator_UsingJsoner_Nil(t *testing.T) {
+	// Arrange & Act
+	result := corejson.NewResult.UsingJsoner(nil)
+
+	// Assert
+	actual := args.Map{"isNil": result == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "UsingJsoner returns nil -- nil input", actual)
+}
+
+// ── NewResultsCollectionCreator — Deserialize error ──
+
+func Test_Cov51_NewResultsCollectionCreator_Deserialize_Error(t *testing.T) {
+	// Arrange
+	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+
+	// Act
+	coll, err := corejson.NewResultsCollection.Deserialize(&badResult)
+
+	// Assert
+	actual := args.Map{
+		"collNil": coll == nil,
+		"hasErr":  err != nil,
+	}
+	expected := args.Map{
+		"collNil": true,
+		"hasErr":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "Deserialize returns error -- invalid json", actual)
+}
+
+// ── NewResultsCollectionCreator — UsingResultsPtrPlusCap empty ──
+
+func Test_Cov51_NewResultsCollectionCreator_UsingResultsPtrPlusCap_Empty(t *testing.T) {
+	// Arrange
+	var emptyPtrs []*corejson.Result
+
+	// Act
+	coll := corejson.NewResultsCollection.UsingResultsPtrPlusCap(2, emptyPtrs...)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 0}
+	expected.ShouldBeEqual(t, 0, "UsingResultsPtrPlusCap returns empty -- empty input", actual)
+}
+
+// ── NewResultsCollectionCreator — UsingResultsPlusCap empty ──
+
+func Test_Cov51_NewResultsCollectionCreator_UsingResultsPlusCap_Empty(t *testing.T) {
+	// Arrange
+	var emptyResults []corejson.Result
+
+	// Act
+	coll := corejson.NewResultsCollection.UsingResultsPlusCap(2, emptyResults...)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 0}
+	expected.ShouldBeEqual(t, 0, "UsingResultsPlusCap returns empty -- empty input", actual)
+}
+
+// ── NewResultsCollectionCreator — Serializers ──
+
+func Test_Cov51_NewResultsCollectionCreator_Serializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+
+	// Act
+	coll := corejson.NewResultsCollection.Serializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "Serializers creates 2-item collection -- two serializers", actual)
+}
+
+// ── NewResultsPtrCollectionCreator — Deserialize error ──
+
+func Test_Cov51_NewResultsPtrCollectionCreator_Deserialize_Error(t *testing.T) {
+	// Arrange
+	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+
+	// Act
+	coll, err := corejson.NewResultsPtrCollection.Deserialize(&badResult)
+
+	// Assert
+	actual := args.Map{
+		"collNil": coll == nil,
+		"hasErr":  err != nil,
+	}
+	expected := args.Map{
+		"collNil": true,
+		"hasErr":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "Deserialize returns error -- invalid json", actual)
+}
+
+// ── NewResultsPtrCollectionCreator — Serializers ──
+
+func Test_Cov51_NewResultsPtrCollectionCreator_Serializers(t *testing.T) {
+	// Arrange
+	item1 := corejson.New(exampleStruct{Name: "A", Age: 1})
+	item2 := corejson.New(exampleStruct{Name: "B", Age: 2})
+
+	// Act
+	coll := corejson.NewResultsPtrCollection.Serializers(&item1, &item2)
+
+	// Assert
+	actual := args.Map{"length": coll.Length()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "Serializers creates 2-item collection -- two serializers", actual)
+}
+
+// ── AnyTo — bytesSerializer branch ──
+
+func Test_Cov51_AnyTo_SerializedJsonResult_BytesSerializer(t *testing.T) {
+	// Arrange
+	item := corejson.New(exampleStruct{Name: "Test", Age: 5})
+
+	// Act — Result implements bytesSerializer
+	result := corejson.AnyTo.SerializedJsonResult(&item)
+
+	// Assert
+	actual := args.Map{
+		"hasErr":  result.HasError(),
+		"hasData": len(result.Bytes) > 0,
+	}
+	expected := args.Map{
+		"hasErr":  false,
+		"hasData": true,
+	}
+	expected.ShouldBeEqual(t, 0, "SerializedJsonResult works -- bytesSerializer type", actual)
+}
+
+// ── ResultsPtrCollection — SafeUnmarshalAt with error result ──
+
+func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
+	// Arrange
+	errResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
+	errResult.Error = corejson.Deserialize.UsingBytes([]byte(`{bad`), &struct{}{})
+	coll := corejson.NewResultsPtrCollection.UsingResultsPtr(&errResult)
+	var target exampleStruct
+
+	// Act
+	err := coll.SafeUnmarshalAt(0, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns error -- error result at index", actual)
+}
+
+// ── ResultsPtrCollection — SafeUnmarshalAt with empty bytes ──
+
+func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
+	// Arrange
+	emptyResult := corejson.NewResult.UsingBytes([]byte{})
+	coll := corejson.NewResultsPtrCollection.UsingResultsPtr(&emptyResult)
+	var target exampleStruct
+
+	// Act
+	err := coll.SafeUnmarshalAt(0, &target)
+
+	// Assert
+	actual := args.Map{"errNil": err == nil}
+	expected := args.Map{"errNil": true}
+	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns nil -- empty bytes result", actual)
+}
