@@ -506,9 +506,9 @@ func Test_Cov25_PayloadsCollection_FilterWithLimit(t *testing.T) {
 	col := corepayload.New.PayloadsCollection.UsingWrappers(pw1, pw2, pw3)
 
 	// Act — take all but limit to 2
-	result := col.FilterWithLimit(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
+	result := col.FilterWithLimit(2, func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
 		return true, false
-	}, 2)
+	})
 
 	// Assert
 	actual := args.Map{"length": len(result)}
