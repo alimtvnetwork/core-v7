@@ -943,6 +943,19 @@ $callerSource = "CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck (para
   ✗ Blocked: subpkg/foo (source: CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck)
 ```
 
+### Error Extraction Pipeline (4-Tier Fallback)
+
+When a blocked or failing package produces output, diagnostic lines are extracted via a 4-tier fallback chain (first non-empty result wins):
+
+| Tier | Function | What it captures |
+|------|----------|-----------------|
+| 1 | `Extract-BuildErrorLines` | `.go:line:` errors, `[build failed]`, `[setup failed]`, `# pkg` headers |
+| 2 | `Extract-ExecutionFailureLines` | Tier 1 + `panic:`, `fatal error:`, `--- FAIL:`, `FAIL pkg`, `exit status` |
+| 3 | `Extract-SetupFailedContext` | Walks backward from `[setup failed]`/`[build failed]` FAIL lines, captures up to 10 preceding context lines (plain-text error messages) |
+| 4 | `Get-RawFallbackLines` | All non-empty lines after noise removal (last resort — nothing is lost) |
+
+All four functions are defined in `ErrorExtractor.psm1`. The chain is used by `ErrorParser.psm1` (accumulation), `CoverageReportJson.psm1` (reports), and `CoverageRunner.psm1` (blocked-packages files).
+
 ---
 
 ## 10. Related Spec Files
@@ -966,6 +979,6 @@ $callerSource = "CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck (para
 
 | Date | Change |
 |------|--------|
-| 2026-04-03 | Expanded §9 Error Attribution — now covers all 16 modules with attribution |
+| 2026-04-03 | Added §9 Error Extraction Pipeline (4-tier fallback) with `Extract-SetupFailedContext` |
 | 2026-03-31 | Updated directory layout, added §8 modular architecture, Go syntax validation docs |
 | 2026-03-30 | Initial creation — consolidated from run.ps1 overview, generic runner spec, testing guidelines, and unit coverage fix protocol |

@@ -383,6 +383,39 @@ $source = Get-CallerSource
 2. **Hardcode the source string** in parallel (`ForEach-Object -Parallel`) blocks, since `Get-CallerSource` cannot cross thread boundaries
 3. **Never omit attribution** — every error path must include a source reference
 
+### Error Extraction Pipeline (4-Tier Fallback)
+
+When a package fails (`[build failed]`, `[setup failed]`, or runtime crash), the toolchain extracts diagnostic lines using a 4-tier fallback chain. Each tier is tried in order; the first to return non-empty results wins.
+
+| Tier | Function | Module | What it captures |
+|------|----------|--------|-----------------|
+| 1 | `Extract-BuildErrorLines` | `ErrorExtractor.psm1` | `.go:line:` errors, `[build failed]`, `[setup failed]`, `# pkg` headers |
+| 2 | `Extract-ExecutionFailureLines` | `ErrorExtractor.psm1` | Tier 1 + `panic:`, `fatal error:`, `--- FAIL:`, `FAIL pkg`, `exit status` |
+| 3 | `Extract-SetupFailedContext` | `ErrorExtractor.psm1` | Walks backward from `[setup failed]`/`[build failed]` FAIL lines, captures up to 10 preceding context lines |
+| 4 | `Get-RawFallbackLines` | `ErrorExtractor.psm1` | All non-empty lines after noise removal (last resort) |
+
+**Why 4 tiers?** Go's `[setup failed]` output includes plain-text error messages (e.g., missing fixtures, `init()` errors) that don't follow `.go:line:` or `panic:` patterns. Tiers 1–2 miss these. Tier 3 captures them by walking backward from the FAIL marker. Tier 4 ensures nothing is ever silently lost.
+
+#### `Extract-SetupFailedContext`
+
+```powershell
+$context = Extract-SetupFailedContext $rawOutput -ContextLineCount 10
+# Returns preceding context lines + the FAIL line for each [setup failed] occurrence
+```
+
+- Scans for lines matching `[setup failed]` or `[build failed]` with `FAIL`
+- Walks backward up to N lines (default 10) to capture the error reason
+- Deduplicates and strips noise lines (warnings, empty lines)
+
+#### Where the Fallback Chain is Used
+
+| Module | Function | Report |
+|--------|----------|--------|
+| `ErrorParser.psm1` | `Add-BuildErrorsForPackage` | Per-package build error accumulation |
+| `ErrorParser.psm1` | `Add-RuntimeFailuresForPackage` | Per-package runtime failure accumulation |
+| `CoverageReportJson.psm1` | `Write-BuildErrorsReport` | `build-errors.txt` / `build-errors.json` |
+| `CoverageRunner.psm1` | Blocked packages writer | `blocked-packages.txt` / `blocked-packages.json` |
+
 ---
 
 ## 9. AI Agent Interaction Guide
@@ -429,5 +462,5 @@ $source = Get-CallerSource
 
 | Date | Change |
 |------|--------|
-| 2026-04-03 | Expanded §8 Error Attribution — now covers all 16 modules with attribution |
+| 2026-04-03 | Added §8 Error Extraction Pipeline (4-tier fallback) with `Extract-SetupFailedContext` |
 | 2026-03-31 | Initial creation — documents modular architecture post-refactor |
