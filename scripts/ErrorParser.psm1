@@ -12,6 +12,7 @@ function Add-BuildErrorsForPackage {
     if (-not $BuildErrorMap -or -not $PackageName) { return }
     $buildLines = Extract-BuildErrorLines $Lines
     if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-ExecutionFailureLines $Lines }
+    if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-SetupFailedContext $Lines }
     if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Get-RawFallbackLines $Lines }
     if (-not $buildLines -or $buildLines.Count -eq 0) { return }
     if (-not $BuildErrorMap.ContainsKey($PackageName)) { $BuildErrorMap[$PackageName] = [System.Collections.Generic.List[string]]::new() }
