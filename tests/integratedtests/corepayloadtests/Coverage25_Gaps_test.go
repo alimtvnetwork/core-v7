@@ -30,8 +30,8 @@ func Test_Cov25_Attributes_IsEqual_BothNilError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"isEqual": result}
-	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsEqual returns false -- different errors", actual)
+	expected := args.Map{"isEqual": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual returns true -- both nil errors", actual)
 }
 
 // ── Attributes.IsEqual — paging different ──
