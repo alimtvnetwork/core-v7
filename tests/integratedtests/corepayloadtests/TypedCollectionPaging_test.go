@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/alimtvnetwork/core/coredata/corepayload"
 	"github.com/alimtvnetwork/core/coretests/args"
-	"github.com/alimtvnetwork/core/errcore"
 )
 
 // createNumberedUsers is defined in shared_typed_helpers.go

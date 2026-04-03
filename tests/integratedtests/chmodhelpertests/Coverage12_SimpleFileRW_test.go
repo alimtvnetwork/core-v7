@@ -5,8 +5,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"testing"
-
-	"github.com/alimtvnetwork/core/chmodhelper"
 )
 
 // newTestRW is defined in shared_coverage_helpers.go
