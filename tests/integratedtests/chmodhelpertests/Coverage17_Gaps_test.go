@@ -3,6 +3,7 @@ package chmodhelpertests
 import (
 	"os"
 	"path/filepath"
+	"runtime"
 	"testing"
 
 	"github.com/alimtvnetwork/core/chmodhelper"
@@ -75,6 +76,10 @@ func Test_Cov17_ChmodVerify_GetRwx9_Valid(t *testing.T) {
 }
 
 func Test_Cov17_ChmodVerify_PathIf_VerifyTrue(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange — valid file
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "test.txt")
@@ -90,6 +95,10 @@ func Test_Cov17_ChmodVerify_PathIf_VerifyTrue(t *testing.T) {
 }
 
 func Test_Cov17_ChmodVerify_PathsUsingFileModeImmediateReturn(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "a.txt")
@@ -105,6 +114,10 @@ func Test_Cov17_ChmodVerify_PathsUsingFileModeImmediateReturn(t *testing.T) {
 }
 
 func Test_Cov17_ChmodVerify_PathsUsingFileModeContinueOnError(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "b.txt")
@@ -120,6 +133,10 @@ func Test_Cov17_ChmodVerify_PathsUsingFileModeContinueOnError(t *testing.T) {
 }
 
 func Test_Cov17_ChmodVerify_PathsUsingFileMode(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "c.txt")
@@ -295,6 +312,10 @@ func Test_Cov17_SimpleFileReaderWriter_WriteRelativePath_Error(t *testing.T) {
 // ── fwChmodVerifier ──────────────────────────────────────────────────────────
 
 func Test_Cov17_FwChmodVerifier_IsEqualFile(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "test.txt")
@@ -335,14 +356,14 @@ func Test_Cov17_PathExistStat_MeaningfulError_HasError(t *testing.T) {
 // ── RwxPartialToInstructionExecutor ──────────────────────────────────────────
 
 func Test_Cov17_RwxPartialToInstructionExecutor_ParseError(t *testing.T) {
-	// Arrange & Act — rwxPartial that will fail parsing
+	// Arrange & Act — nil condition triggers CannotBeNilOrEmpty error
 	_, err := chmodhelper.RwxPartialToInstructionExecutor(
-		"",
-		&chmodins.Condition{},
+		"-rwxr-xr-x",
+		nil,
 	)
 
 	// Assert
-	convey.Convey("RwxPartialToInstructionExecutor returns error for empty partial", t, func() {
+	convey.Convey("RwxPartialToInstructionExecutor returns error for nil condition", t, func() {
 		convey.So(err, convey.ShouldNotBeNil)
 	})
 }

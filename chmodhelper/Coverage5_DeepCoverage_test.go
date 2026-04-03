@@ -177,20 +177,20 @@ func Test_Cov5_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 // ── RwxInstructionExecutor uncovered branches ──────────────
 
 func Test_Cov5_RwxInstructionExecutor_CompiledWrapper_Fallthrough(t *testing.T) {
-	// Test the dead code branch where neither fixed nor var
-	exec := &RwxInstructionExecutor{
-		varWrapper: &RwxVariableWrapper{
-			isFixedType: true,
-			Owner:       VarAttribute{},
-			Group:       VarAttribute{},
-			Other:       VarAttribute{},
-		},
+	// Test the fixed-type branch through CompiledWrapper
+	w, parseErr := NewRwxVariableWrapper("-rwxr-xr-x")
+	if parseErr != nil {
+		t.Fatal(parseErr)
 	}
-	w, err := exec.CompiledWrapper(0644)
+
+	exec := &RwxInstructionExecutor{
+		varWrapper: w,
+	}
+	result, err := exec.CompiledWrapper(0644)
 	if err != nil {
 		t.Fatal("unexpected error:", err)
 	}
-	if w == nil {
+	if result == nil {
 		t.Fatal("expected non-nil wrapper")
 	}
 }
