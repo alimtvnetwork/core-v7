@@ -90,7 +90,7 @@ func Test_Cov2_ParseRwxOwnerGroupOtherToFileModeMust_Nil(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov2_TempDirGetter_Value(t *testing.T) {
-	val := TempDirGetter.Value()
+	val := TempDirGetter.TempDefault()
 	if val == "" {
 		t.Log("temp dir is empty string on this platform")
 	}
