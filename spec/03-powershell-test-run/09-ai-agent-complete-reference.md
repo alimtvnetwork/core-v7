@@ -17,7 +17,8 @@
 6. [Coverage Push Iteration Workflow](#6-coverage-push-iteration-workflow)
 7. [Common Error Patterns & Fixes](#7-common-error-patterns--fixes)
 8. [PowerShell Runner Internals](#8-powershell-runner-internals)
-9. [Related Spec Files](#9-related-spec-files)
+9. [Error Attribution System](#9-error-attribution-system)
+10. [Related Spec Files](#10-related-spec-files)
 
 ---
 
