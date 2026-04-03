@@ -456,20 +456,7 @@ func Test_Cov18_DirFilesWithContent_Create_InvalidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Create returns error -- invalid dir path", actual)
 }
 
-// ── dirCreator — IfMissing with invalid path ──
-
-func Test_Cov18_DirCreator_IfMissing_InvalidPath(t *testing.T) {
-	// Arrange
-	invalidPath := string([]byte{0})
-
-	// Act
-	err := chmodhelper.New.Dir.IfMissing(0755, invalidPath)
-
-	// Assert
-	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "IfMissing returns error -- invalid path", actual)
-}
+// ── dirCreator — unexported, tested via in-package tests ──
 
 // ── RwxWrapper — ApplyChmodSafe skip invalid ──
 
