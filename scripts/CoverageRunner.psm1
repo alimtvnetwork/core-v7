@@ -120,7 +120,7 @@ function Invoke-TestCoverage {
         $blockedJsonItems = [System.Collections.Generic.List[object]]::new()
         foreach ($bp in $sortedBlocked) {
             $errText = ""; if ($blockedErrors.ContainsKey($bp)) { $errText = $blockedErrors[$bp] }
-            $errLines = @(); if ($errText) { $errLines = Extract-BuildErrorLines ($errText -split "`n"); if ($errLines.Count -eq 0) { $errLines = Extract-ExecutionFailureLines ($errText -split "`n") }; if ($errLines.Count -eq 0) { $errLines = Get-RawFallbackLines ($errText -split "`n") } }
+            $errLines = @(); if ($errText) { $errLines = Extract-BuildErrorLines ($errText -split "`n"); if ($errLines.Count -eq 0) { $errLines = Extract-ExecutionFailureLines ($errText -split "`n") }; if ($errLines.Count -eq 0) { $errLines = Extract-SetupFailedContext ($errText -split "`n") }; if ($errLines.Count -eq 0) { $errLines = Get-RawFallbackLines ($errText -split "`n") } }
             $blockedJsonItems.Add(@{ package = $bp; errorCount = $errLines.Count; errors = $errLines })
         }
         @{ timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"); blockedCount = $blockedPkgs.Count; compiledCount = $testPkgs.Count; totalCount = $allTestPkgs.Count; blockedPackages = $blockedJsonItems.ToArray(); missingProfiles = @() } |
