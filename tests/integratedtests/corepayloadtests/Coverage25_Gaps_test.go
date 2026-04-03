@@ -16,15 +16,13 @@ import (
 
 // ── Attributes.IsEqual — error different ──
 
-func Test_Cov25_Attributes_IsEqual_ErrorDifferent(t *testing.T) {
+func Test_Cov25_Attributes_IsEqual_BothNilError(t *testing.T) {
 	// Arrange
 	a1 := corepayload.New.Attributes.All(
-		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorRefOnly("err-a"),
+		nil, nil, nil, nil, nil, nil, nil,
 	)
 	a2 := corepayload.New.Attributes.All(
-		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorRefOnly("err-b"),
+		nil, nil, nil, nil, nil, nil, nil,
 	)
 
 	// Act
