@@ -8,7 +8,6 @@ import (
 	"github.com/alimtvnetwork/core/coredata/corepayload"
 	"github.com/alimtvnetwork/core/coredata/corestr"
 	"github.com/alimtvnetwork/core/coretests/args"
-	"github.com/alimtvnetwork/core/errcore"
 )
 
 // Helpers for this file: uses testUserCov23, makeTypedWrapperCov23, makeCollectionCov23
