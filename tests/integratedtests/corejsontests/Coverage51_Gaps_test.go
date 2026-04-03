@@ -495,7 +495,7 @@ func Test_Cov51_DeserializerLogic_UsingJsoner_Nil(t *testing.T) {
 	var target exampleStruct
 
 	// Act
-	err := corejson.Deserialize.UsingJsoner(nil, &target)
+	err := corejson.Deserialize.UsingJsonerToAny(false, nil, &target)
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
