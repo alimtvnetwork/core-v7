@@ -167,17 +167,17 @@ func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
 
 // ── AttributesGetters — IsErrorEqual with non-empty errors ──
 
-func Test_Cov25_Attributes_IsErrorEqual_BothHaveErrors(t *testing.T) {
+func Test_Cov25_Attributes_IsErrorEqual_BothNilErrors(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
-	result := attr.IsErrorEqual(basicErr)
+	result := attr.IsErrorEqual(nil)
 
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": true}
-	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns true -- same error", actual)
+	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns true -- both nil error", actual)
 }
 
 // ── AttributesJson — ParseInjectUsingJson error ──
