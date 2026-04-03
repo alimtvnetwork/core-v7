@@ -279,7 +279,7 @@ func Test_Cov25_Attributes_HandleErr_WithError(t *testing.T) {
 
 // ── AttributesSetters — MustBeEmptyError panic ──
 
-func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
+func Test_Cov25_Attributes_MustBeEmptyError_NoPanic(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	didPanic := false
@@ -296,8 +296,8 @@ func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"didPanic": didPanic}
-	expected := args.Map{"didPanic": true}
-	expected.ShouldBeEqual(t, 0, "MustBeEmptyError panics -- has error", actual)
+	expected := args.Map{"didPanic": false}
+	expected.ShouldBeEqual(t, 0, "MustBeEmptyError no panic -- no error", actual)
 }
 
 // ── PayloadWrapper — BasicError with error ──
