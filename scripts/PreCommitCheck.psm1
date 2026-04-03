@@ -55,7 +55,7 @@ function Invoke-PreCommitCheck {
     $testBaseDir = Join-Path $global:ProjectRoot "tests" "integratedtests"
     if ($singlePkg) {
         $targetDirs = @(Join-Path $testBaseDir $singlePkg)
-        if (-not (Test-Path $targetDirs[0])) { Write-Fail "Package not found: $singlePkg"; return }
+        if (-not (Test-Path $targetDirs[0])) { $s = Get-CallerSource; Write-Fail "Package not found: $singlePkg (source: $s)"; return }
     } else {
         $targetDirs = @(Get-ChildItem -Path $testBaseDir -Directory | ForEach-Object { $_.FullName })
     }
