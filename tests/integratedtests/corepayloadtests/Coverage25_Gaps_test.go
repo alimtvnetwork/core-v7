@@ -488,7 +488,7 @@ func Test_Cov25_PayloadsCollection_Filter_Break(t *testing.T) {
 			return true, true
 		}
 		return false, false
-	}, 10)
+	})
 
 	// Assert
 	actual := args.Map{"length": len(result)}
@@ -496,9 +496,9 @@ func Test_Cov25_PayloadsCollection_Filter_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns 1 item -- break after first match", actual)
 }
 
-// ── PayloadsCollection — Filter with length limit ──
+// ── PayloadsCollection — FilterWithLimit ──
 
-func Test_Cov25_PayloadsCollection_Filter_LengthLimit(t *testing.T) {
+func Test_Cov25_PayloadsCollection_FilterWithLimit(t *testing.T) {
 	// Arrange
 	pw1 := &corepayload.PayloadWrapper{Name: "a"}
 	pw2 := &corepayload.PayloadWrapper{Name: "b"}
@@ -506,14 +506,14 @@ func Test_Cov25_PayloadsCollection_Filter_LengthLimit(t *testing.T) {
 	col := corepayload.New.PayloadsCollection.UsingWrappers(pw1, pw2, pw3)
 
 	// Act — take all but limit to 2
-	result := col.Filter(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
+	result := col.FilterWithLimit(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
 		return true, false
 	}, 2)
 
 	// Assert
 	actual := args.Map{"length": len(result)}
 	expected := args.Map{"length": 2}
-	expected.ShouldBeEqual(t, 0, "Filter returns 2 items -- length limit", actual)
+	expected.ShouldBeEqual(t, 0, "FilterWithLimit returns 2 items -- length limit", actual)
 }
 
 // ── PayloadsCollection — IsEqualItems nil left ──
