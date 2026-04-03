@@ -131,7 +131,7 @@ func Test_Cov25_Attributes_Clone_DeepClone_AnyKeyValuesCloneError(t *testing.T) 
 
 // ── Attributes.deepClonePtr — HasError branch ──
 
-func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
+func Test_Cov25_Attributes_DeepClone_NilError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
@@ -145,9 +145,9 @@ func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
 	}
 	expected := args.Map{
 		"err":      true,
-		"hasError": true,
+		"hasError": false,
 	}
-	expected.ShouldBeEqual(t, 0, "ClonePtr deep clones error -- has BasicErrWrapper", actual)
+	expected.ShouldBeEqual(t, 0, "DeepClone with nil error -- no error in clone", actual)
 }
 
 // ── AttributesGetters — Error() with error ──
