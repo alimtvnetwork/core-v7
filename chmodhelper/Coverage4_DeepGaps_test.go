@@ -51,6 +51,7 @@ func Test_Cov4_FileWriter_All_CleanUpError(t *testing.T) {
 func Test_Cov4_FileWriter_All_WriteFailure(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
+	invalidPath := string([]byte{0}) + "/impossible/file.txt"
 
 	// Act — write to an impossible path
 	err := fw.All(
@@ -60,8 +61,8 @@ func Test_Cov4_FileWriter_All_WriteFailure(t *testing.T) {
 		false, // isApplyChmodMust
 		false, // isApplyChmodOnMismatch
 		false, // isCreateDirOnRequired
-		"/dev/null",
-		"/dev/null/impossible/file.txt",
+		string([]byte{0}),
+		invalidPath,
 		[]byte("data"),
 	)
 
