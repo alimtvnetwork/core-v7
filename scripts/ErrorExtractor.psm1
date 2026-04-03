@@ -265,9 +265,34 @@ function Resolve-BlockedPackageDiagnosticOutput {
     $loaderLines = Get-PackageLoaderDiagnosticLines $PackagePath
     if (-not $loaderLines -or $loaderLines.Count -eq 0) { return $lines }
 
+    $orderedLines = [System.Collections.Generic.List[string]]::new()
+    $insertedLoaderLines = $false
+    foreach ($raw in $lines) {
+        if ($null -eq $raw) { continue }
+
+        $line = $raw.ToString().TrimEnd("`r")
+        $trimmed = $line.Trim()
+        if (-not $insertedLoaderLines -and $trimmed -match '^\s*FAIL\s+\S+\s+\[(setup failed|build failed)\]\s*$') {
+            foreach ($loaderRaw in $loaderLines) {
+                if ($null -eq $loaderRaw) { continue }
+                $orderedLines.Add($loaderRaw.ToString().TrimEnd("`r")) | Out-Null
+            }
+            $insertedLoaderLines = $true
+        }
+
+        $orderedLines.Add($line) | Out-Null
+    }
+
+    if (-not $insertedLoaderLines) {
+        foreach ($loaderRaw in $loaderLines) {
+            if ($null -eq $loaderRaw) { continue }
+            $orderedLines.Add($loaderRaw.ToString().TrimEnd("`r")) | Out-Null
+        }
+    }
+
     $merged = [System.Collections.Generic.List[string]]::new()
     $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
-    foreach ($raw in @($lines + $loaderLines)) {
+    foreach ($raw in $orderedLines) {
         if ($null -eq $raw) { continue }
         $line = $raw.ToString().TrimEnd("`r")
         if (-not $line.Trim()) { continue }
