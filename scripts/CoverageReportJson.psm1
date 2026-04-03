@@ -2,7 +2,7 @@
 # CoverageReportJson.psm1 — JSON report generation + error/failure reports
 #
 # Dependencies: CoverageReportTxt.psm1 (Get-LowCoverageFunctions),
-#               ErrorParser.psm1 (Extract-BuildErrorLines, Extract-ExecutionFailureLines)
+#               ErrorExtractor.psm1 (Resolve-BuildDiagnosticLines)
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Write-CoverageJsonReport {
