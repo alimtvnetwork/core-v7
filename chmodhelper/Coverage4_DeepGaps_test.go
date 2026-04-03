@@ -525,8 +525,8 @@ func Test_Cov4_SimpleFileReaderWriter_WriteString_Error(t *testing.T) {
 	rw := SimpleFileReaderWriter{
 		ChmodDir:               0755,
 		ChmodFile:              0644,
-		ParentDir:              "/dev/null/impossible",
-		FilePath:               "/dev/null/impossible/file.txt",
+		ParentDir:              string([]byte{0}),
+		FilePath:               string([]byte{0}) + "/file.txt",
 		IsRemoveBeforeWrite:    false,
 		IsMustChmodApplyOnFile: false,
 		IsApplyChmodOnMismatch: false,
