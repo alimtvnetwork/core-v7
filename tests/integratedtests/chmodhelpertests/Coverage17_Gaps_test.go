@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/chmodhelper"
+	"github.com/alimtvnetwork/core/chmodhelper/chmodclasstype"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
 	"github.com/smartystreets/goconvey/convey"
 )
