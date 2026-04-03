@@ -22,7 +22,7 @@ function Invoke-FetchLatest {
     Invoke-GitPull
     Write-Header "Fetching latest dependencies"
     go mod tidy
-    if ($LASTEXITCODE -eq 0) { Write-Success "Dependencies up to date" } else { Write-Fail "go mod tidy failed" }
+    if ($LASTEXITCODE -eq 0) { Write-Success "Dependencies up to date" } else { $s = Get-CallerSource; Write-Fail "go mod tidy failed (source: $s)" }
 }
 
 function Invoke-BuildCheck {
