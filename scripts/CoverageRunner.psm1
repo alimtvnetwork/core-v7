@@ -105,10 +105,7 @@ function Invoke-TestCoverage {
             $blockedContent += "## $bp"
             if ($blockedErrors.ContainsKey($bp)) {
                 $rawErrLines = $blockedErrors[$bp] -split "`n"
-                $filtered = Extract-BuildErrorLines $rawErrLines
-                if ($filtered.Count -eq 0) { $filtered = Extract-ExecutionFailureLines $rawErrLines }
-                if ($filtered.Count -eq 0) { $filtered = Extract-SetupFailedContext $rawErrLines }
-                if ($filtered.Count -eq 0) { $filtered = Get-RawFallbackLines $rawErrLines }
+                $filtered = Resolve-BuildDiagnosticLines $rawErrLines
                 if ($filtered.Count -gt 0) { $blockedContent += ($filtered -join "`n") } else { $blockedContent += "(no actionable compile errors captured)" }
             }
             $blockedContent += ""
@@ -120,7 +117,7 @@ function Invoke-TestCoverage {
         $blockedJsonItems = [System.Collections.Generic.List[object]]::new()
         foreach ($bp in $sortedBlocked) {
             $errText = ""; if ($blockedErrors.ContainsKey($bp)) { $errText = $blockedErrors[$bp] }
-            $errLines = @(); if ($errText) { $errLines = Extract-BuildErrorLines ($errText -split "`n"); if ($errLines.Count -eq 0) { $errLines = Extract-ExecutionFailureLines ($errText -split "`n") }; if ($errLines.Count -eq 0) { $errLines = Extract-SetupFailedContext ($errText -split "`n") }; if ($errLines.Count -eq 0) { $errLines = Get-RawFallbackLines ($errText -split "`n") } }
+            $errLines = @(); if ($errText) { $errLines = Resolve-BuildDiagnosticLines ($errText -split "`n") }
             $blockedJsonItems.Add(@{ package = $bp; errorCount = $errLines.Count; errors = $errLines })
         }
         @{ timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"); blockedCount = $blockedPkgs.Count; compiledCount = $testPkgs.Count; totalCount = $allTestPkgs.Count; blockedPackages = $blockedJsonItems.ToArray(); missingProfiles = @() } |

@@ -10,10 +10,7 @@ function Add-BuildErrorsForPackage {
     [CmdletBinding()]
     param([hashtable]$BuildErrorMap, [string]$PackageName, [string[]]$Lines)
     if (-not $BuildErrorMap -or -not $PackageName) { return }
-    $buildLines = Extract-BuildErrorLines $Lines
-    if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-ExecutionFailureLines $Lines }
-    if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-SetupFailedContext $Lines }
-    if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Get-RawFallbackLines $Lines }
+    $buildLines = Resolve-BuildDiagnosticLines $Lines
     if (-not $buildLines -or $buildLines.Count -eq 0) { return }
     if (-not $BuildErrorMap.ContainsKey($PackageName)) { $BuildErrorMap[$PackageName] = [System.Collections.Generic.List[string]]::new() }
     foreach ($line in $buildLines) {
@@ -26,9 +23,7 @@ function Add-RuntimeFailuresForPackage {
     [CmdletBinding()]
     param([hashtable]$FailureMap, [string]$PackageName, [string[]]$Lines)
     if (-not $FailureMap -or -not $PackageName) { return }
-    $runtimeLines = Extract-RuntimeFailureLines $Lines
-    if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { $runtimeLines = Extract-SetupFailedContext $Lines }
-    if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { $runtimeLines = Get-RawFallbackLines $Lines }
+    $runtimeLines = Resolve-RuntimeDiagnosticLines $Lines
     if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { return }
     if (-not $FailureMap.ContainsKey($PackageName)) { $FailureMap[$PackageName] = [System.Collections.Generic.List[string]]::new() }
     foreach ($line in $runtimeLines) {

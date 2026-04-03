@@ -2,7 +2,7 @@
 # CoverageReportJson.psm1 — JSON report generation + error/failure reports
 #
 # Dependencies: CoverageReportTxt.psm1 (Get-LowCoverageFunctions),
-#               ErrorParser.psm1 (Extract-BuildErrorLines, Extract-ExecutionFailureLines)
+#               ErrorExtractor.psm1 (Resolve-BuildDiagnosticLines)
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Write-CoverageJsonReport {
@@ -70,10 +70,7 @@ function Write-BuildErrorsReport {
         foreach ($bp in ($BlockedPkgs | Sort-Object)) {
             if ($BlockedErrors.ContainsKey($bp)) {
                 $rawErrLines = $BlockedErrors[$bp] -split "`n"
-                $filteredErrLines = Extract-BuildErrorLines $rawErrLines
-                if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Extract-ExecutionFailureLines $rawErrLines }
-                if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Extract-SetupFailedContext $rawErrLines }
-                if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Get-RawFallbackLines $rawErrLines }
+                $filteredErrLines = Resolve-BuildDiagnosticLines $rawErrLines
                 if ($filteredErrLines.Count -gt 0) {
                     if (-not $BuildErrorsByPackage.ContainsKey($bp)) { $BuildErrorsByPackage[$bp] = [System.Collections.Generic.List[string]]::new() }
                     foreach ($errLine in $filteredErrLines) {
