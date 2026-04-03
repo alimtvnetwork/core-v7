@@ -201,7 +201,7 @@ function Write-TestLogs {
 
     Write-Host ""
     if ($passCount -gt 0) { Write-Success "$passCount passing test(s) → $passingFile" }
-    if ($failCount -gt 0) { Write-Fail "$failCount failing test(s) → $failingFile" }
+    if ($failCount -gt 0) { $s = Get-CallerSource; Write-Fail "$failCount failing test(s) → $failingFile (source: $s)" }
     elseif ($failCount -eq 0) { Write-Success "No failing tests" }
     Write-Host "  Raw output → $rawFile" -ForegroundColor Gray
 }
