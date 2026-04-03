@@ -19,7 +19,7 @@ func Test_Cov18_GetRecursivePaths_InvalidRoot(t *testing.T) {
 	invalidPath := string([]byte{0})
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(invalidPath)
+	paths, err := chmodhelper.GetRecursivePaths(false, invalidPath)
 
 	// Assert
 	actual := args.Map{
