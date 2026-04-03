@@ -61,7 +61,7 @@ func Test_Cov51_BytesCollection_AddJsoners_ErrorIgnored(t *testing.T) {
 
 func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 	// Arrange
-	coll := corejson.NewBytesCollection.AnyItemsMust("a", "b", "c")
+	coll, _ := corejson.NewBytesCollection.AnyItems("a", "b", "c")
 	didPanic := false
 
 	// Act
