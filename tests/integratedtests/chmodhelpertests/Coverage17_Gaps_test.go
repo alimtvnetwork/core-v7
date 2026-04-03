@@ -95,6 +95,10 @@ func Test_Cov17_ChmodVerify_PathIf_VerifyTrue(t *testing.T) {
 }
 
 func Test_Cov17_ChmodVerify_PathsUsingFileModeImmediateReturn(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("Windows does not support Unix file permissions")
+	}
+
 	// Arrange
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "a.txt")
