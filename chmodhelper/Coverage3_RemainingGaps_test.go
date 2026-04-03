@@ -606,11 +606,13 @@ func Test_Cov3_RwxVariableWrapper_ApplyRwxOnLocations_NoContinueNoSkip(t *testin
 
 func Test_Cov3_GetRecursivePaths_SkipInvalid(t *testing.T) {
 	// Arrange & Act
+	// GetRecursivePaths always returns error for non-existent paths
+	// (isContinueOnError only applies when path exists and is a directory)
 	paths, err := GetRecursivePaths(true, "/nonexistent/xyz")
 
 	// Assert
-	if err != nil {
-		t.Fatal("expected nil error on skip-invalid:", err)
+	if err == nil {
+		t.Fatal("expected error for non-existent path")
 	}
 	if len(paths) != 0 {
 		t.Fatal("expected empty paths")

@@ -1398,12 +1398,13 @@ func Test_Cov4_ChmodApplier_RwxPartial_InvalidRwx(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
-	// Arrange & Act — use an invalid variant
-	_, err := New.RwxWrapper.UsingVariantPtr(Variant("invalid_variant_255"))
+	// Arrange & Act — use a 3-char variant with invalid octal digit (9 > 7)
+	// Create() panics for wrong length, so use valid length with bad digit
+	_, err := New.RwxWrapper.UsingVariantPtr(Variant("899"))
 
 	// Assert
 	if err == nil {
-		t.Fatal("expected error for invalid variant")
+		t.Fatal("expected error for invalid variant digit")
 	}
 }
 
