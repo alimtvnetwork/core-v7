@@ -423,7 +423,7 @@ func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 	initialized := rw.InitializeDefault(false)
 
 	// Act
-	err := initialized.WriteBytes([]byte("test"))
+	err := initialized.Write([]byte("test"))
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
