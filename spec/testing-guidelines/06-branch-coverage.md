@@ -225,3 +225,25 @@ This includes (but is not limited to):
 - **Do not remove** existing internal tests — they may serve business/integration purposes.
 - Business-critical tests for internal packages are acceptable, but must **not** be motivated by coverage goals.
 - Any future package placed inside `internal/` automatically inherits this exclusion.
+
+---
+
+## In-Package Test Import Restrictions
+
+**In-package test files** (`_test.go` files living inside a source package) must use only the standard `testing` package. They must **never** import heavy test frameworks such as `coretests/args`, `goconvey`, or any package with a large transitive dependency tree.
+
+### Why
+
+When `go test -coverpkg=./...` instruments all packages, heavy transitive imports in low-level source packages can cause the test binary loader to fail silently with `[setup failed]` — producing zero diagnostic output and blocking the entire package from coverage.
+
+### Rule
+
+| Location | Allowed Imports | Heavy Frameworks |
+|----------|----------------|-----------------|
+| `mypkg/foo_test.go` (in-package) | `testing`, `strings`, stdlib only | ❌ Forbidden |
+| `tests/integratedtests/mypkgtests/` | Anything | ✅ OK |
+
+### If You Hit `[setup failed]` With No Logs
+
+1. Check if the failing package has in-package `_test.go` files with framework imports.
+2. Rewrite them using only `testing` + `t.Errorf`, or move them to `tests/integratedtests/`.

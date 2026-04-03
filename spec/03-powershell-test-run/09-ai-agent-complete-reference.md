@@ -788,6 +788,20 @@ Follow all rules from Section 4. Cover:
 $OutputEncoding            = [System.Text.Encoding]::UTF8
 ```
 
+### Pattern 7: `[setup failed]` From Heavy Test Framework Imports in In-Package Tests
+
+**Symptom**: `go test -coverpkg=./...` reports `[setup failed]` for a package with no build errors visible. The blocked-packages report shows `FAIL` with an empty diagnostic log.
+
+**Root cause**: An in-package test file (a `_test.go` file living inside the source package itself, e.g., `internal/mapdiffinternal/isStringType_test.go`) imports heavy test framework packages such as `coretests/args`, `goconvey`, or other transitive dependency chains. When `go test` runs with `-coverpkg=./...` instrumentation, the Go toolchain must resolve and instrument all transitive dependencies of every test binary. Heavy framework imports inside low-level packages create circular or excessively deep dependency graphs that cause the test binary loader to fail silently with `[setup failed]`.
+
+**Why it's hard to diagnose**: The standard `go test` output contains only the terminal `FAIL pkg [setup failed]` line with zero preceding context. `go list -e -deps -test` may also return clean results because the issue only manifests under `-coverpkg` instrumentation.
+
+**Fix**:
+1. **Preferred**: Rewrite the in-package test to use only the standard `testing` package — no external test frameworks.
+2. **Alternative**: Move the test to `tests/integratedtests/{pkg}tests/` where heavy framework imports are expected and the dependency graph is isolated.
+
+**Prevention rule**: In-package test files (`_test.go` inside source packages) must **never** import `coretests/`, `goconvey`, or any package with a large transitive dependency tree. Keep in-package tests minimal — standard `testing` + `t.Errorf` only.
+
 ---
 
 ## 8. PowerShell Runner Internals
