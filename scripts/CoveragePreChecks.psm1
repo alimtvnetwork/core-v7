@@ -37,7 +37,7 @@ function Invoke-CoveragePreChecks {
         & $boundaryScript
         if ($LASTEXITCODE -ne 0) {
             if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "fail" "boundary check failed" }
-            Write-Fail "safeTest boundary check failed. Fix reported issues before TC."
+            $s = Get-CallerSource; Write-Fail "safeTest boundary check failed. Fix reported issues before TC. (source: $s)"
             return $false
         }
     }
