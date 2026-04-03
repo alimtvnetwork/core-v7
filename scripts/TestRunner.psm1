@@ -19,7 +19,7 @@ function Invoke-AllTests {
         Filter-TestWarnings $output | ForEach-Object { Write-Host $_ }
         Write-TestLogs $output
         if ($exitCode -eq 0) { Write-Success "All tests passed" }
-        else { Write-Fail "Some tests failed (exit code: $exitCode)" }
+        else { $s = Get-CallerSource; Write-Fail "Some tests failed (exit code: $exitCode) (source: $s)" }
     }
     finally { Pop-Location }
     Open-FailingTestsIfAny
