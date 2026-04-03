@@ -152,7 +152,7 @@ func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
 
 // ── AttributesGetters — Error() with error ──
 
-func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
+func Test_Cov25_Attributes_Error_NilError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
@@ -161,8 +161,8 @@ func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "Error returns non-nil -- has BasicErrWrapper", actual)
+	expected := args.Map{"hasErr": false}
+	expected.ShouldBeEqual(t, 0, "Error returns nil -- no BasicErrWrapper", actual)
 }
 
 // ── AttributesGetters — IsErrorEqual with non-empty errors ──
