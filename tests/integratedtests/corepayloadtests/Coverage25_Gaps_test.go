@@ -20,11 +20,11 @@ func Test_Cov25_Attributes_IsEqual_ErrorDifferent(t *testing.T) {
 	// Arrange
 	a1 := corepayload.New.Attributes.All(
 		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorNoRefs("err-a"),
+		errcore.MarshallingFailedType.ErrorRefOnly("err-a"),
 	)
 	a2 := corepayload.New.Attributes.All(
 		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorNoRefs("err-b"),
+		errcore.MarshallingFailedType.ErrorRefOnly("err-b"),
 	)
 
 	// Act
@@ -133,7 +133,7 @@ func Test_Cov25_Attributes_Clone_DeepClone_AnyKeyValuesCloneError(t *testing.T) 
 
 func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 
 	// Act
@@ -155,7 +155,7 @@ func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
 
 func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 
 	// Act
@@ -171,7 +171,7 @@ func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
 
 func Test_Cov25_Attributes_IsErrorEqual_BothHaveErrors(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("same")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("same")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 
 	// Act
@@ -309,7 +309,7 @@ func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
 
 func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
@@ -326,7 +326,7 @@ func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
 
 func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_Error(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
@@ -395,7 +395,7 @@ func Test_Cov25_PayloadWrapper_IsStandardTaskEntityEqual_CastFail(t *testing.T) 
 
 func Test_Cov25_PayloadWrapper_Error_WithError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
