@@ -465,7 +465,7 @@ func Test_Cov51_DeserializerLogic_UsingMapSkipOnEmpty_Error(t *testing.T) {
 	var target exampleStruct
 
 	// Act
-	err := corejson.Deserialize.UsingMapSkipOnEmpty(false, badMap, &target)
+	err := corejson.Deserialize.MapAnyToPointer(false, badMap, &target)
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
