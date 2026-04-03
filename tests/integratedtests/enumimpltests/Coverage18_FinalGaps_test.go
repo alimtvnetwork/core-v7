@@ -265,6 +265,8 @@ func Test_Cov18_NumberEnumBase_NilNameRangesPanics(t *testing.T) {
 		"TestNilRanges",
 		nil,
 		nil,
+		0,
+		0,
 	)
 }
 
