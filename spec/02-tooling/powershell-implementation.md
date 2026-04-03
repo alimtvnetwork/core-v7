@@ -15,7 +15,8 @@
 5. [Go Syntax Validation Pipeline](#5-go-syntax-validation-pipeline)
 6. [Go Test Patterns](#6-go-test-patterns)
 7. [Coverage Generation Workflow](#7-coverage-generation-workflow)
-8. [AI Agent Interaction Guide](#8-ai-agent-interaction-guide)
+8. [Error Attribution System](#8-error-attribution-system)
+9. [AI Agent Interaction Guide](#9-ai-agent-interaction-guide)
 
 ---
 
@@ -312,7 +313,7 @@ Same as TC but scoped to a single package. Uses the same diff/snapshot flow.
 
 ---
 
-## 8. AI Agent Interaction Guide
+## 9. AI Agent Interaction Guide
 
 ### How to Modify the Toolchain
 
@@ -352,8 +353,71 @@ Same as TC but scoped to a single package. Uses the same diff/snapshot flow.
 
 ---
 
+## 8. Error Attribution System
+
+### Overview
+
+Every error report — build failures, runtime failures, blocked packages — includes **source attribution** identifying the exact `.psm1` module and function that triggered the failure. This enables rapid root-cause analysis when reviewing logs.
+
+### `Get-CallerSource` Function
+
+Defined in `Utilities.psm1`. Walks `Get-PSCallStack` to find the first caller outside `Utilities.psm1` itself.
+
+```powershell
+$source = Get-CallerSource
+# Returns: "CoverageRunner.psm1 → Invoke-TestCoverage"
+```
+
+**Behaviour:**
+- Skips internal frames (`<ScriptBlock>`, `Get-CallerSource`, `Utilities.psm1`)
+- Returns `"ModuleName.psm1 → FunctionName"` when both are available
+- Falls back to script name or function name alone
+- Returns `"unknown"` if no meaningful frame is found
+
+### Where Attribution Appears
+
+| Module | Context | Format |
+|--------|---------|--------|
+| `TestRunnerCore.psm1` | `Invoke-BuildCheck` build failure | `# Source:` header in `failing-tests.txt` + console `Write-Fail` |
+| `TestLogWriter.psm1` | `Write-TestLogs` pass/fail logs | `# Source:` header in `passing-tests.txt` and `failing-tests.txt` |
+| `CoverageReportJson.psm1` | JSON reports | `"source"` field in `build-errors.json` and `runtime-failures.json` |
+| `CoverageReportJson.psm1` | Text reports | `# Source:` header in `build-errors.txt` and `runtime-failures.txt` |
+| `CoverageRunner.psm1` | Blocked packages list | `# Source:` header in `blocked-packages.txt` |
+| `CoverageCompileCheck.psm1` | Compile-check failures | Console `Write-Fail` with source for both sync and parallel modes |
+
+### Report Format Examples
+
+**Text reports:**
+```
+# Source: CoverageRunner.psm1 → Invoke-TestCoverage
+```
+
+**JSON reports:**
+```json
+{
+  "source": "CoverageRunner.psm1 → Invoke-TestCoverage",
+  "generatedAt": "2026-04-03T12:00:00",
+  ...
+}
+```
+
+**Console output:**
+```
+  ✗ Build failed — skipping tests (source: TestRunnerCore.psm1 → Invoke-BuildCheck)
+  ✗ Blocked: subpkg/foo (source: CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck)
+```
+
+### Design Rules
+
+1. **Always use `Get-CallerSource`** in sync code paths where the call stack is available
+2. **Hardcode the source string** in parallel (`ForEach-Object -Parallel`) blocks, since `Get-CallerSource` cannot cross thread boundaries
+3. **Never omit attribution** — every error path must include a source reference
+
+---
+
 ## Version History
 
 | Date | Change |
 |------|--------|
+| 2026-04-03 | Added §8 Error Attribution System — `Get-CallerSource` and report integration |
 | 2026-03-31 | Initial creation — documents modular architecture post-refactor |
