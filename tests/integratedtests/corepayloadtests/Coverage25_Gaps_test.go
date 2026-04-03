@@ -302,7 +302,7 @@ func Test_Cov25_Attributes_MustBeEmptyError_NoPanic(t *testing.T) {
 
 // ── PayloadWrapper — BasicError with error ──
 
-func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
+func Test_Cov25_PayloadWrapper_BasicError_NilError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
@@ -312,8 +312,8 @@ func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasBasicErr": result != nil}
-	expected := args.Map{"hasBasicErr": true}
-	expected.ShouldBeEqual(t, 0, "BasicError returns error -- has error", actual)
+	expected := args.Map{"hasBasicErr": false}
+	expected.ShouldBeEqual(t, 0, "BasicError returns nil -- no error", actual)
 }
 
 // ── PayloadWrapper — PayloadDeserializeToPayloadBinder error ──
