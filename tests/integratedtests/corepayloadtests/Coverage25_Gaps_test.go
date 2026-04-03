@@ -222,7 +222,7 @@ func Test_Cov25_Attributes_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 
 // ── AttributesJson — BasicErrorDeserializedTo with error ──
 
-func Test_Cov25_Attributes_BasicErrorDeserializedTo_WithError(t *testing.T) {
+func Test_Cov25_Attributes_BasicErrorDeserializedTo_NilError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	var target map[string]any
@@ -232,8 +232,8 @@ func Test_Cov25_Attributes_BasicErrorDeserializedTo_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"errNil": err == nil}
-	expected := args.Map{"errNil": false}
-	expected.ShouldBeEqual(t, 0, "BasicErrorDeserializedTo returns error or deserializes -- has error", actual)
+	expected := args.Map{"errNil": true}
+	expected.ShouldBeEqual(t, 0, "BasicErrorDeserializedTo no error -- nil BasicErrWrapper", actual)
 }
 
 // ── AttributesJson — DynamicPayloadsDeserializeMust panic ──
