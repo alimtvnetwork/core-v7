@@ -493,26 +493,26 @@ func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "WriteBytes returns error -- invalid file path", actual)
 }
 
-// ── DirFilesWithContent — CreateAll with invalid path ──
+// ── DirFilesWithContent — Create with invalid path ──
 
-func Test_Cov18_DirFilesWithContent_CreateAll_InvalidPath(t *testing.T) {
+func Test_Cov18_DirFilesWithContent_Create_InvalidPath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	content := chmodhelper.DirFilesWithContent{
-		DirPath:     invalidPath,
+		Dir:         invalidPath,
 		DirFileMode: 0755,
 		Files: []chmodhelper.FileWithContent{
-			{FileName: "test.txt", Content: "hello", FileMode: 0644},
+			{RelativePath: "test.txt", Content: []string{"hello"}, FileMode: 0644},
 		},
 	}
 
 	// Act
-	err := content.CreateAll(false)
+	err := content.Create(false)
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
 	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "CreateAll returns error -- invalid dir path", actual)
+	expected.ShouldBeEqual(t, 0, "Create returns error -- invalid dir path", actual)
 }
 
 // ── dirCreator — ByChecking with invalid path ──
