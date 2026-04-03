@@ -214,9 +214,9 @@ func Test_Cov18_DynamicMap_ConvMapStringString_NonStringValue(t *testing.T) {
 
 // ── newBasicStringCreator.CreateUsingStringersSpread: exercises branches ──
 
-type testStringer struct{ name string }
+type testStringerCov18 struct{ name string }
 
-func (s testStringer) String() string { return s.name }
+func (s testStringerCov18) String() string { return s.name }
 
 func Test_Cov18_CreateUsingStringersSpread(t *testing.T) {
 	// Arrange

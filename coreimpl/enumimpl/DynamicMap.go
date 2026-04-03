@@ -42,7 +42,10 @@ func (it *DynamicMap) Set(key string, val any) (isAddNewly bool) {
 //	Don't update existing
 func (it *DynamicMap) AddNewOnly(key string, val any) (isAdded bool) {
 	if it == nil {
-		// mutating because it is part of
+		return false
+	}
+
+	if *it == nil {
 		*it = make(map[string]any, constants.Capacity5)
 	}
 
