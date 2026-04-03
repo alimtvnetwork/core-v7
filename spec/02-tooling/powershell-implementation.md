@@ -313,46 +313,6 @@ Same as TC but scoped to a single package. Uses the same diff/snapshot flow.
 
 ---
 
-## 9. AI Agent Interaction Guide
-
-### How to Modify the Toolchain
-
-1. **Identify the module** — use `scripts/README.md` dependency graph
-2. **Read the module** before editing — never infer function signatures
-3. **Follow the export pattern** — `Export-ModuleMember -Function @('Name')`
-4. **Add doc blocks** — `.SYNOPSIS`, `.PARAMETER`, `.EXAMPLE` on every function
-5. **Guard DashboardUI calls** — always wrap with `Get-Command ... -ErrorAction SilentlyContinue`
-
-### Adding a New Command
-
-1. Create or extend a module in `scripts/`
-2. Export the function via `Export-ModuleMember`
-3. Add a switch case in `run.ps1`
-4. Update `Show-Help` in `Help.psm1`
-5. Update `scripts/README.md`
-
-### Common Pitfalls
-
-| Pitfall | Prevention |
-|---------|------------|
-| Circular module dependency | Check dependency graph before importing |
-| Missing `$ErrorActionPreference = "Continue"` around `go` calls | `go test` returns non-zero on test failure; `"Stop"` would throw |
-| Forgetting to restore `$ErrorActionPreference` | Always reset after the `go` call block |
-| DashboardUI call without guard | Module may not be loaded — always guard |
-| Non-deterministic parallel output | Always `Sort-Object Pkg` after parallel execution |
-
-### Key Files for Context
-
-| File | Purpose |
-|------|---------|
-| `run.ps1` | Thin dispatcher — read this first |
-| `scripts/README.md` | Module map + dependency graph |
-| `spec/02-tooling/powershell-dashboard-ui.md` | UI rendering spec |
-| `spec/03-powershell-test-run/09-ai-agent-complete-reference.md` | Complete AI agent reference |
-| `.lovable/memory/workflow/06-powershell-refactor-plan.md` | Refactoring roadmap |
-
----
-
 ## 8. Error Attribution System
 
 ### Overview
@@ -412,6 +372,46 @@ $source = Get-CallerSource
 1. **Always use `Get-CallerSource`** in sync code paths where the call stack is available
 2. **Hardcode the source string** in parallel (`ForEach-Object -Parallel`) blocks, since `Get-CallerSource` cannot cross thread boundaries
 3. **Never omit attribution** — every error path must include a source reference
+
+---
+
+## 9. AI Agent Interaction Guide
+
+### How to Modify the Toolchain
+
+1. **Identify the module** — use `scripts/README.md` dependency graph
+2. **Read the module** before editing — never infer function signatures
+3. **Follow the export pattern** — `Export-ModuleMember -Function @('Name')`
+4. **Add doc blocks** — `.SYNOPSIS`, `.PARAMETER`, `.EXAMPLE` on every function
+5. **Guard DashboardUI calls** — always wrap with `Get-Command ... -ErrorAction SilentlyContinue`
+
+### Adding a New Command
+
+1. Create or extend a module in `scripts/`
+2. Export the function via `Export-ModuleMember`
+3. Add a switch case in `run.ps1`
+4. Update `Show-Help` in `Help.psm1`
+5. Update `scripts/README.md`
+
+### Common Pitfalls
+
+| Pitfall | Prevention |
+|---------|------------|
+| Circular module dependency | Check dependency graph before importing |
+| Missing `$ErrorActionPreference = "Continue"` around `go` calls | `go test` returns non-zero on test failure; `"Stop"` would throw |
+| Forgetting to restore `$ErrorActionPreference` | Always reset after the `go` call block |
+| DashboardUI call without guard | Module may not be loaded — always guard |
+| Non-deterministic parallel output | Always `Sort-Object Pkg` after parallel execution |
+
+### Key Files for Context
+
+| File | Purpose |
+|------|---------|
+| `run.ps1` | Thin dispatcher — read this first |
+| `scripts/README.md` | Module map + dependency graph |
+| `spec/02-tooling/powershell-dashboard-ui.md` | UI rendering spec |
+| `spec/03-powershell-test-run/09-ai-agent-complete-reference.md` | Complete AI agent reference |
+| `.lovable/memory/workflow/06-powershell-refactor-plan.md` | Refactoring roadmap |
 
 ---
 
