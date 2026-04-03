@@ -8,18 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-type caseV1Compat struct {
-	Name     string
-	Expected any
-	Actual   any
-	Args     args.Map
-}
-
-func (it caseV1Compat) ShouldBeEqual(t *testing.T) {
-	expected := args.Map{"value": it.Expected}
-	actual := args.Map{"value": it.Actual}
-	expected.ShouldBeEqual(t, 0, it.Name, actual)
-}
+// caseV1Compat is defined in shared_compat_helpers.go
 
 // ─── CharCollectionMap: IsEmpty / HasItems / Length ──────────────
 

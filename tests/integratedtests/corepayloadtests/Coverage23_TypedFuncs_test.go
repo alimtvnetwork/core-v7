@@ -8,27 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-type testUserCov23 struct {
-	Name  string `json:"Name"`
-	Email string `json:"Email"`
-	Age   int    `json:"Age"`
-}
-
-func makeTypedWrapperCov23(name, id string, data testUserCov23) *corepayload.TypedPayloadWrapper[testUserCov23] {
-	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUserCov23](name, id, "testUser", data)
-	if err != nil {
-		panic(err)
-	}
-	return tw
-}
-
-func makeCollectionCov23() *corepayload.TypedPayloadCollection[testUserCov23] {
-	col := corepayload.NewTypedPayloadCollection[testUserCov23](3)
-	col.Add(makeTypedWrapperCov23("user", "1", testUserCov23{Name: "Alice", Email: "a@a.com", Age: 30}))
-	col.Add(makeTypedWrapperCov23("user", "2", testUserCov23{Name: "Bob", Email: "b@b.com", Age: 25}))
-	col.Add(makeTypedWrapperCov23("user", "3", testUserCov23{Name: "Carol", Email: "c@c.com", Age: 35}))
-	return col
-}
+// testUserCov23, makeTypedWrapperCov23, makeCollectionCov23 are defined in shared_typed_helpers.go
 
 // ── MapTypedPayloads ──
 

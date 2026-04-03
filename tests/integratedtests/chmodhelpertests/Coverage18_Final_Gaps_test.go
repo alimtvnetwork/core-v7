@@ -19,7 +19,7 @@ func Test_Cov18_GetRecursivePaths_InvalidRoot(t *testing.T) {
 	invalidPath := string([]byte{0})
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(invalidPath)
+	paths, err := chmodhelper.GetRecursivePaths(false, invalidPath)
 
 	// Assert
 	actual := args.Map{
@@ -423,7 +423,7 @@ func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 	initialized := rw.InitializeDefault(false)
 
 	// Act
-	err := initialized.WriteBytes([]byte("test"))
+	err := initialized.Write([]byte("test"))
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
@@ -510,6 +510,7 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	dirWithFile := chmodhelper.DirWithFiles{
+		Dir:   invalidPath,
 		Files: []string{"test.txt"},
 	}
 
@@ -517,7 +518,6 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(
 		true,
 		0755,
-		invalidPath,
 		&dirWithFile,
 	)
 
@@ -537,7 +537,7 @@ func Test_Cov18_GetRecursivePaths_ValidDir(t *testing.T) {
 	_ = os.WriteFile(filepath.Join(subDir, "file.txt"), []byte("hi"), 0644)
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(tmpDir)
+	paths, err := chmodhelper.GetRecursivePaths(false, tmpDir)
 
 	// Assert
 	actual := args.Map{

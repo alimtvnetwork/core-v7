@@ -285,21 +285,21 @@ func Test_Cov74_MapAnyItems_ClonePtr_MarshalError(t *testing.T) {
 	_ = err
 }
 
-// ── MapAnyItems.ToKeyValCollection: exercises error branch ──
+// ── MapAnyItems.JsonMapResults: exercises conversion ──
 
-func Test_Cov74_MapAnyItems_ToKeyValCollection_Normal(t *testing.T) {
+func Test_Cov74_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": "1", "b": "2"}}
 
 	// Act
-	kvc, err := m.ToKeyValCollection()
+	mr, err := m.JsonMapResults()
 
 	// Assert
 	if err != nil {
 		t.Errorf("unexpected error: %v", err)
 	}
-	if kvc == nil {
-		t.Error("expected non-nil KeyValCollection")
+	if mr == nil {
+		t.Error("expected non-nil MapResults")
 	}
 }
 

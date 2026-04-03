@@ -71,7 +71,7 @@ func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) 
 				didPanic = true
 			}
 		}()
-		coll.GetPagedItems(2, 0) // pageIndex 0 => skipItems = 2*(0-1) = -2 => panic
+		coll.GetPagedCollection(2, 0) // pageIndex 0 => skipItems = 2*(0-1) = -2 => panic
 	}()
 
 	// Assert
@@ -125,7 +125,7 @@ func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 				didPanic = true
 			}
 		}()
-		mr.GetPagedItems(2, 0)
+		mr.GetPagedCollection(2, 0)
 	}()
 
 	// Assert
@@ -248,7 +248,7 @@ func Test_Cov51_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T)
 				didPanic = true
 			}
 		}()
-		coll.GetPagedItems(2, 0)
+		coll.GetPagedCollection(2, 0)
 	}()
 
 	// Assert
@@ -320,7 +320,7 @@ func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testin
 				didPanic = true
 			}
 		}()
-		coll.GetPagedItems(2, 0)
+		coll.GetPagedCollection(2, 0)
 	}()
 
 	// Assert
@@ -337,7 +337,7 @@ func Test_Cov51_CastAny_Result(t *testing.T) {
 	var target string
 
 	// Act
-	err := corejson.CastAny.Deserialize(r, &target)
+	err := corejson.CastAny.OrDeserializeTo(r, &target)
 
 	// Assert
 	actual := args.Map{
@@ -359,7 +359,7 @@ func Test_Cov51_CastAny_ResultPtr(t *testing.T) {
 	var target string
 
 	// Act
-	err := corejson.CastAny.Deserialize(&r, &target)
+	err := corejson.CastAny.OrDeserializeTo(&r, &target)
 
 	// Assert
 	actual := args.Map{
@@ -381,7 +381,7 @@ func Test_Cov51_CastAny_BytesSerializer(t *testing.T) {
 	var target exampleStruct
 
 	// Act — Result implements Serialize() ([]byte, error)
-	err := corejson.CastAny.Deserialize(&item, &target)
+	err := corejson.CastAny.OrDeserializeTo(&item, &target)
 
 	// Assert
 	actual := args.Map{
@@ -405,7 +405,7 @@ func Test_Cov51_CastAny_SerializerFunc(t *testing.T) {
 	var target string
 
 	// Act
-	err := corejson.CastAny.Deserialize(serializerFunc, &target)
+	err := corejson.CastAny.OrDeserializeTo(serializerFunc, &target)
 
 	// Assert
 	actual := args.Map{
@@ -427,7 +427,7 @@ func Test_Cov51_CastAny_ErrorNil(t *testing.T) {
 	var target string
 
 	// Act
-	err := corejson.CastAny.Deserialize(errInput, &target)
+	err := corejson.CastAny.OrDeserializeTo(errInput, &target)
 
 	// Assert
 	actual := args.Map{"errNil": err == nil}
@@ -719,7 +719,7 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	// Arrange
 	errResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 	errResult.Error = corejson.Deserialize.UsingBytes([]byte(`{bad`), &struct{}{})
-	coll := corejson.NewResultsPtrCollection.UsingResultsPtr(&errResult)
+	coll := corejson.NewResultsPtrCollection.UsingResults(&errResult)
 	var target exampleStruct
 
 	// Act
@@ -736,7 +736,7 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	// Arrange
 	emptyResult := corejson.NewResult.UsingBytes([]byte{})
-	coll := corejson.NewResultsPtrCollection.UsingResultsPtr(&emptyResult)
+	coll := corejson.NewResultsPtrCollection.UsingResults(&emptyResult)
 	var target exampleStruct
 
 	// Act
