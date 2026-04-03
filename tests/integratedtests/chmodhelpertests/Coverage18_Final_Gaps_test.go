@@ -206,12 +206,9 @@ func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_ExistingFile(t *testing.
 	expected.ShouldBeEqual(t, 0, "IsEqualUsingLocation returns bool -- existing file", actual)
 }
 
-// ── SingleRwx — ToRwxWrapper not all class type ──
-// NOTE: SingleRwx construction requires in-package access (chmodins.NewRwxInstruction is unexported).
+// ── SingleRwx — ToRwxWrapper / ApplyOnMany ──
+// NOTE: SingleRwx construction requires in-package access.
 // Covered by in-package tests. Documented in Coverage7_DeadCode_doc.go.
-		expected.ShouldBeEqual(t, 0, "ApplyOnMany skipped -- Windows", actual)
-	}
-}
 
 // ── fwChmodVerifier — IsEqualFile ──
 
