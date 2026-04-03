@@ -29,6 +29,20 @@ function Invoke-CoveragePreChecks {
         [string]$CoverDir
     )
 
+    # ── In-package import lint check ──────────────────────────────────
+    $inpkgScript = Join-Path $ScriptRoot "scripts" "check-inpkg-imports.ps1"
+    if (Test-Path $inpkgScript) {
+        Write-Host ""
+        Write-Host "  Running in-package import lint check..." -ForegroundColor Yellow
+        & $inpkgScript
+        if ($LASTEXITCODE -ne 0) {
+            if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "InPkg Import Lint" "fail" "forbidden imports found" }
+            $s = Get-CallerSource; Write-Fail "In-package import check failed. Move heavy imports to tests/integratedtests/. (source: $s)"
+            return $false
+        }
+    }
+    if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "InPkg Import Lint" "pass" "all clean" }
+
     # ── safeTest boundary + empty-if lint check ────────────────────
     $boundaryScript = Join-Path $ScriptRoot "scripts" "check-safetest-boundaries.ps1"
     if (Test-Path $boundaryScript) {

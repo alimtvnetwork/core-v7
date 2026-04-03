@@ -17,7 +17,10 @@ The `run.ps1` dispatcher (≤130 lines) imports all modules from this directory 
 | `ErrorParser.psm1` | 195 | Build/runtime error extraction & classification |
 | `TestLogWriter.psm1` | 214 | Parse Go test output → structured log files |
 | `TestRunner.psm1` | 276 | Go test execution, build checks, git ops |
-| `CoveragePreChecks.psm1` | 128 | safetest, autofix, bracecheck validation |
+| `CoveragePreChecks.psm1` | 145 | safetest, autofix, bracecheck, in-pkg import validation |
+| `check-inpkg-imports.ps1` | — | Lint: forbid heavy framework imports in in-package tests |
+| `check-safetest-boundaries.ps1` | — | Lint: safeTest closure boundaries |
+| `check-integrated-regressions.ps1` | — | API-drift regression scanner |
 | `CoverageCompileCheck.psm1` | 273 | Compile checks & per-file split recovery |
 | `CoverageProfileMerger.psm1` | 120 | Profile merging & missing profile detection |
 | `CoverageReport.psm1` | 554 | Report generation (TXT, JSON, HTML, AI) |
