@@ -126,10 +126,12 @@ function Write-RuntimeFailuresReport {
     $runtimeFailuresFile = Join-Path $CoverDir "runtime-failures.txt"
     $runtimeFailuresJsonFile = Join-Path $CoverDir "runtime-failures.json"
     $runtimeFailurePkgs = @($RuntimeFailuresByPackage.Keys | Sort-Object)
+    $callerSource = Get-CallerSource
     $rtLines = [System.Collections.Generic.List[string]]::new()
     $rtLines.Add("# Runtime Failures — $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')")
     $rtLines.Add("# Panics, os.Exit, test binary crashes, fatal errors")
-    $rtLines.Add("# Count: $($runtimeFailurePkgs.Count) package(s)"); $rtLines.Add("")
+    $rtLines.Add("# Count: $($runtimeFailurePkgs.Count) package(s)")
+    $rtLines.Add("# Source: $callerSource (CoverageReportJson.psm1 → Write-RuntimeFailuresReport)"); $rtLines.Add("")
     $rtJsonItems = [System.Collections.Generic.List[object]]::new()
 
     if ($runtimeFailurePkgs.Count -eq 0) { $rtLines.Add("No runtime failures captured.") }
