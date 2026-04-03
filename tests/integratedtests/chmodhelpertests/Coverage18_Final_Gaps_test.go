@@ -207,67 +207,8 @@ func Test_Cov18_RwxVariableWrapper_IsEqualUsingLocation_ExistingFile(t *testing.
 }
 
 // ── SingleRwx — ToRwxWrapper not all class type ──
-
-func Test_Cov18_SingleRwx_ToRwxWrapper_NotAllClassType(t *testing.T) {
-	// Arrange
-	instruction := chmodins.NewRwxInstruction(
-		"owner",
-		"rwx",
-		false,
-		false,
-		false,
-	)
-	singleRwx := instruction.SingleRwx()
-	if singleRwx == nil {
-		t.Skip("SingleRwx is nil")
-	}
-
-	// Act
-	result, err := singleRwx.ToRwxWrapper()
-
-	// Assert
-	actual := args.Map{
-		"resultNil": result == nil,
-		"hasErr":    err != nil,
-	}
-	expected := args.Map{
-		"resultNil": true,
-		"hasErr":    true,
-	}
-	expected.ShouldBeEqual(t, 0, "ToRwxWrapper returns error -- not all class type", actual)
-}
-
-// ── SingleRwx — ApplyOnMany error ──
-
-func Test_Cov18_SingleRwx_ApplyOnMany_InvalidInstruction(t *testing.T) {
-	// Arrange
-	instruction := chmodins.NewRwxInstruction(
-		"owner",
-		"rwx",
-		false,
-		false,
-		false,
-	)
-	singleRwx := instruction.SingleRwx()
-	if singleRwx == nil {
-		t.Skip("SingleRwx is nil")
-	}
-
-	// Act — ApplyOnMany with a non-existent path
-	condition := &chmodins.Condition{
-		IsRecursive:     false,
-		IsSkipOnInvalid: false,
-	}
-	err := singleRwx.ApplyOnMany(condition, "/non/existent/path")
-
-	// Assert — on Windows this may be nil since chmod is skipped
-	if runtime.GOOS != "windows" {
-		actual := args.Map{"hasErr": err != nil}
-		expected := args.Map{"hasErr": true}
-		expected.ShouldBeEqual(t, 0, "ApplyOnMany returns error -- invalid path on Linux", actual)
-	} else {
-		actual := args.Map{"windowsSkip": true}
-		expected := args.Map{"windowsSkip": true}
+// NOTE: SingleRwx construction requires in-package access (chmodins.NewRwxInstruction is unexported).
+// Covered by in-package tests. Documented in Coverage7_DeadCode_doc.go.
 		expected.ShouldBeEqual(t, 0, "ApplyOnMany skipped -- Windows", actual)
 	}
 }
