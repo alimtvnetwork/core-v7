@@ -747,3 +747,78 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	expected := args.Map{"errNil": true}
 	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns nil -- empty bytes result", actual)
 }
+
+// ── DeserializerLogic — UsingDeserializerToOption with valid deserializer (line 363) ──
+
+func Test_Cov51_DeserializerLogic_UsingDeserializerToOption_Valid(t *testing.T) {
+	// Arrange
+	r := corejson.New(exampleStruct{Name: "Test", Age: 5})
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingDeserializerToOption(false, &r, &target)
+
+	// Assert
+	actual := args.Map{
+		"errNil": err == nil,
+		"name":   target.Name,
+	}
+	expected := args.Map{
+		"errNil": true,
+		"name":   "Test",
+	}
+	expected.ShouldBeEqual(t, 0, "UsingDeserializerToOption deserializes -- valid deserializer", actual)
+}
+
+// ── DeserializerLogic — UsingJsonerToAnyMust nil (lines 434-436) ──
+
+func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Nil(t *testing.T) {
+	// Arrange
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingJsonerToAnyMust(false, nil, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "UsingJsonerToAnyMust returns error -- nil jsoner", actual)
+}
+
+// ── DeserializerLogic — UsingJsonerToAnyMust valid (line 434) ──
+
+func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Valid(t *testing.T) {
+	// Arrange
+	r := corejson.New(exampleStruct{Name: "Valid", Age: 10})
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.UsingJsonerToAnyMust(false, &r, &target)
+
+	// Assert
+	actual := args.Map{
+		"errNil": err == nil,
+		"name":   target.Name,
+	}
+	expected := args.Map{
+		"errNil": true,
+		"name":   "Valid",
+	}
+	expected.ShouldBeEqual(t, 0, "UsingJsonerToAnyMust deserializes -- valid jsoner", actual)
+}
+
+// ── DeserializerLogic — MapAnyToPointer error on HasIssuesOrEmpty (line 157-159) ──
+
+func Test_Cov51_DeserializerLogic_MapAnyToPointer_UnserializableMap(t *testing.T) {
+	// Arrange
+	badMap := map[string]any{"ch": make(chan int)}
+	var target exampleStruct
+
+	// Act
+	err := corejson.Deserialize.MapAnyToPointer(false, badMap, &target)
+
+	// Assert
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "MapAnyToPointer returns error -- un-serializable map value", actual)
+}
