@@ -53,10 +53,9 @@ func Test_Cov18_BasicInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) 
 
 func Test_Cov18_BasicInt32_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt32.Create(
+	bi := enumimpl.New.BasicInt32.CreateUsingMap(
 		"TestInt32Enum",
-		[]string{"X", "Y"},
-		nil,
+		map[int32]string{0: "X", 1: "Y"},
 	)
 
 	// Act
@@ -70,10 +69,9 @@ func Test_Cov18_BasicInt32_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) 
 
 func Test_Cov18_BasicInt8_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt8.Create(
+	bi := enumimpl.New.BasicInt8.CreateUsingMap(
 		"TestInt8Enum",
-		[]string{"A", "B"},
-		nil,
+		map[int8]string{0: "A", 1: "B"},
 	)
 
 	// Act
@@ -87,10 +85,9 @@ func Test_Cov18_BasicInt8_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 
 func Test_Cov18_BasicUInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicUInt16.Create(
+	bi := enumimpl.New.BasicUInt16.CreateUsingMap(
 		"TestUInt16Enum",
-		[]string{"P", "Q"},
-		nil,
+		map[uint16]string{0: "P", 1: "Q"},
 	)
 
 	// Act
@@ -107,15 +104,14 @@ func Test_Cov18_BasicString_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T)
 	bs := enumimpl.New.BasicString.Create(
 		"TestStrEnum",
 		[]string{"Hello", "World"},
-		nil,
 	)
 
 	// Act
-	_, err := bs.ValueByName("\"Absent\"")
+	idx := bs.GetIndexByName("\"Absent\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
+	if idx != -1 {
+		t.Error("expected -1 for unrecognized double-quoted name")
 	}
 }
 
