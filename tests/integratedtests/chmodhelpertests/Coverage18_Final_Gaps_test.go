@@ -536,7 +536,7 @@ func Test_Cov18_GetRecursivePaths_ValidDir(t *testing.T) {
 	_ = os.WriteFile(filepath.Join(subDir, "file.txt"), []byte("hi"), 0644)
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(tmpDir)
+	paths, err := chmodhelper.GetRecursivePaths(false, tmpDir)
 
 	// Assert
 	actual := args.Map{
