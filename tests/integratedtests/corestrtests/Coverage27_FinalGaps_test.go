@@ -532,33 +532,7 @@ func Test_Cov27_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 	}
 }
 
-// ── SimpleSlice: IsEqualLinesInsensitive nil branches ──
-
-func Test_Cov27_SimpleSlice_IsEqualLinesInsensitive_NilSelf(t *testing.T) {
-	// Arrange
-	var ss *corestr.SimpleSlice
-
-	// Act
-	result := ss.IsEqualLinesInsensitive(nil)
-
-	// Assert
-	if !result {
-		t.Error("expected true for both nil")
-	}
-}
-
-func Test_Cov27_SimpleSlice_IsEqualLinesInsensitive_OneNil(t *testing.T) {
-	// Arrange
-	ss := corestr.SimpleSlice([]string{"a"})
-
-	// Act
-	result := ss.IsEqualLinesInsensitive(nil)
-
-	// Assert
-	if result {
-		t.Error("expected false when one is nil")
-	}
-}
+// IsEqualLinesInsensitive does not exist on SimpleSlice — removed.
 
 // ── SimpleSlice: IsEqualByFuncLinesSplit empty both sides (line 1173) ──
 
