@@ -285,7 +285,7 @@ func Test_Cov25_Attributes_HandleErr_WithError(t *testing.T) {
 
 func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 	didPanic := false
 
