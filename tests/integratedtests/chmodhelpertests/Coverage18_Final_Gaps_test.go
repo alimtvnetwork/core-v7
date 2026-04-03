@@ -517,7 +517,6 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(
 		true,
 		0755,
-		invalidPath,
 		&dirWithFile,
 	)
 
