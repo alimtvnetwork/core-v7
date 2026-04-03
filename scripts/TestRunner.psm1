@@ -30,7 +30,7 @@ function Invoke-PackageTests {
     [CmdletBinding()]
     param([string]$pkg)
     if (-not $pkg) {
-        Write-Fail "Package name required. Usage: ./run.ps1 TP <package>"
+        $s = Get-CallerSource; Write-Fail "Package name required. Usage: ./run.ps1 TP <package> (source: $s)"
         Write-Host "  Available packages:" -ForegroundColor Yellow
         Get-ChildItem -Path tests/integratedtests -Directory | ForEach-Object { Write-Host "    - $($_.Name)" -ForegroundColor Gray }
         return
