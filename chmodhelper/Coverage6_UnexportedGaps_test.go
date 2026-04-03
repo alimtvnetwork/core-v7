@@ -263,3 +263,47 @@ func Test_Cov6_FileWriter_ApplyDirChmod_ChmodFails(t *testing.T) {
 		t.Fatal("expected error when chmod on non-existent dir")
 	}
 }
+
+// ── SimpleFileReaderWriter (unexported) ──────────────────────────────────────
+
+func Test_Cov6_SimpleFileReaderWriter_GetOnExist_ReadError(t *testing.T) {
+	// Arrange — file doesn't exist
+	rw := SimpleFileReaderWriter{
+		FilePath: "/nonexistent/file.txt",
+	}
+
+	// Act
+	var target map[string]string
+	err := rw.getOnExist(&target)
+
+	// Assert
+	if err == nil {
+		t.Fatal("expected error for non-existent file")
+	}
+}
+
+func Test_Cov6_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr(t *testing.T) {
+	// Arrange
+	rw := SimpleFileReaderWriter{FilePath: "/tmp/test.txt"}
+
+	// Act
+	err := rw.errorWrapFilePath(nil, "/tmp/test.txt")
+
+	// Assert
+	if err != nil {
+		t.Fatal("expected nil for nil error")
+	}
+}
+
+func Test_Cov6_SimpleFileReaderWriter_Name_NilReceiver(t *testing.T) {
+	// Arrange
+	var rw *SimpleFileReaderWriter
+
+	// Act
+	result := rw.name()
+
+	// Assert
+	if result != "" {
+		t.Fatal("expected empty string for nil receiver")
+	}
+}
