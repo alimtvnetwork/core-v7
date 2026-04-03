@@ -448,7 +448,7 @@ func Test_Cov51_DeserializeFromBytesTo_StringsMust_Panic(t *testing.T) {
 				didPanic = true
 			}
 		}()
-		corejson.Deserialize.FromBytesTo.StringsMust([]byte(`{invalid`))
+		corejson.Deserialize.BytesTo.StringsMust([]byte(`{invalid`))
 	}()
 
 	// Assert
