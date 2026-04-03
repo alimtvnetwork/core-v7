@@ -24,7 +24,10 @@ func (it DynamicMap) AddOrUpdate(key string, val any) (isAddNewly bool) {
 
 func (it *DynamicMap) Set(key string, val any) (isAddNewly bool) {
 	if it == nil {
-		// mutating because it is part of
+		return false
+	}
+
+	if *it == nil {
 		*it = make(map[string]any, constants.Capacity5)
 	}
 
