@@ -430,7 +430,7 @@ func Test_Cov27_LinkedCollections_IsEqual_OneEmpty(t *testing.T) {
 func Test_Cov27_LinkedCollections_AddLock(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a", "b")
+	col := corestr.New.Collection.Strings([]string{"a", "b"})
 
 	// Act
 	lc.AddLock(col)
@@ -461,7 +461,7 @@ func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a", "b")
+	col := corestr.New.Collection.Strings([]string{"a", "b"})
 	lc.Add(col)
 
 	// Act
@@ -476,7 +476,7 @@ func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 func Test_Cov27_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("x")
+	col := corestr.New.Collection.Strings([]string{"x"})
 	lc.Add(col)
 
 	// Act
@@ -610,7 +610,7 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T
 func Test_Cov27_KeyValueCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
-	jsonResult := corestr.New.Collection.Strings("not json").Json()
+	jsonResult := corestr.New.Collection.Strings([]string{"not json"}).Json()
 
 	// Act
 	_, err := kvc.ParseInjectUsingJson(&jsonResult)

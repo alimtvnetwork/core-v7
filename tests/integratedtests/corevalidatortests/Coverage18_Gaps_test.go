@@ -17,7 +17,7 @@ func Test_Cov18_SliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
 			{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ActualLines:   []string{"actual"},
 				ExpectedLines: []string{"expected"},
 			},
@@ -65,7 +65,7 @@ func Test_Cov18_SliceValidators_VerifyAllErrorUsingActual_WithError(t *testing.T
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
 			{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ExpectedLines: []string{"expected"},
 			},
 		},
@@ -99,7 +99,7 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 	hsv := corevalidator.HeaderSliceValidators{
 		{
 			SliceValidator: corevalidator.SliceValidator{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ActualLines:   []string{"actual"},
 				ExpectedLines: []string{"expected"},
 			},
@@ -145,7 +145,7 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAllUsingActual_Empty(t *testin
 func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
-		CompareAs:     stringcompareas.EqualTextCompare,
+		CompareAs:     stringcompareas.Equal,
 		ActualLines:   []string{},
 		ExpectedLines: []string{},
 	}
@@ -176,7 +176,7 @@ func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testin
 func Test_Cov18_SliceValidator_LengthVerify_ActualNotEmptyComparingZero(t *testing.T) {
 	// Arrange — actual lines present but no expected lines set
 	sv := &corevalidator.SliceValidator{
-		CompareAs:     stringcompareas.EqualTextCompare,
+		CompareAs:     stringcompareas.Equal,
 		ActualLines:   []string{"line1", "line2"},
 		ExpectedLines: []string{}, // comparing length = 0
 	}
