@@ -396,13 +396,13 @@ func Test_Cov27_LinkedList_GetNextNodes_EmptyOrZero(t *testing.T) {
 
 // ── LinkedCollections: equality branches ──
 
-func Test_Cov27_LinkedCollections_IsEqual_BothEmpty(t *testing.T) {
+func Test_Cov27_LinkedCollections_IsEqualsPtr_BothEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
 	lc2 := corestr.Empty.LinkedCollections()
 
 	// Act
-	result := lc1.IsEqual(lc2)
+	result := lc1.IsEqualsPtr(lc2)
 
 	// Assert
 	if !result {
@@ -410,14 +410,14 @@ func Test_Cov27_LinkedCollections_IsEqual_BothEmpty(t *testing.T) {
 	}
 }
 
-func Test_Cov27_LinkedCollections_IsEqual_OneEmpty(t *testing.T) {
+func Test_Cov27_LinkedCollections_IsEqualsPtr_OneEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a")
+	col := corestr.New.Collection.Strings([]string{"a"})
 	lc2 := corestr.Empty.LinkedCollections().Add(col)
 
 	// Act
-	result := lc1.IsEqual(lc2)
+	result := lc1.IsEqualsPtr(lc2)
 
 	// Assert
 	if result {

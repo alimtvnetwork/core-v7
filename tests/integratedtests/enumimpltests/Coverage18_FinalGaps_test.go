@@ -214,14 +214,14 @@ func Test_Cov18_DynamicMap_ConvMapStringString_NonStringValue(t *testing.T) {
 
 // ── newBasicStringCreator.CreateUsingStringersSpread: exercises branches ──
 
-type testStringer struct{ name string }
+type testStringerCov18 struct{ name string }
 
-func (s testStringer) String() string { return s.name }
+func (s testStringerCov18) String() string { return s.name }
 
 func Test_Cov18_CreateUsingStringersSpread(t *testing.T) {
 	// Arrange
-	s1 := testStringer{name: "Zebra"}
-	s2 := testStringer{name: "Apple"}
+	s1 := testStringerCov18{name: "Zebra"}
+	s2 := testStringerCov18{name: "Apple"}
 
 	// Act
 	bs := enumimpl.New.BasicString.CreateUsingStringersSpread(
@@ -271,7 +271,7 @@ func Test_Cov18_NumberEnumBase_NilNameRangesPanics(t *testing.T) {
 }
 
 // Verify fmt.Stringer pattern works (satisfies compiler)
-var _ fmt.Stringer = testStringer{}
+var _ fmt.Stringer = testStringerCov18{}
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Accepted Gaps Documentation
