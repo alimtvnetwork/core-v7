@@ -1,7 +1,10 @@
 package corepayloadtests
 
 import (
+	"fmt"
+
 	"github.com/alimtvnetwork/core/coredata/corepayload"
+	"github.com/alimtvnetwork/core/errcore"
 )
 
 // testUserCov23 is a sample struct used across Coverage23/24/25 test files.
@@ -34,21 +37,21 @@ func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser
 	wrappers := make([]*corepayload.TypedPayloadWrapper[testUser], 0, count)
 
 	for i := 0; i < count; i++ {
-		name := "User" + string(rune('A'+i))
-		tw, err := corepayload.NewTypedPayloadWrapperFrom[testUser](
-			name, string(rune('1'+i)), "testUser",
-			testUser{Name: name, Email: name + "@test.com"},
-		)
-		if err != nil {
-			panic(err)
+		user := testUser{
+			Name:  fmt.Sprintf("User%d", i),
+			Email: fmt.Sprintf("user%d@test.com", i),
+			Age:   20 + i,
 		}
-		wrappers = append(wrappers, tw)
+
+		typed, err := corepayload.TypedPayloadWrapperNameIdRecord[testUser](
+			user.Name,
+			fmt.Sprintf("user-%d", i),
+			user,
+		)
+		errcore.HandleErr(err)
+
+		wrappers = append(wrappers, typed)
 	}
 
-	col := corepayload.NewTypedPayloadCollection[testUser](count)
-	for _, w := range wrappers {
-		col.Add(w)
-	}
-
-	return col
+	return corepayload.TypedPayloadCollectionFrom[testUser](wrappers)
 }
