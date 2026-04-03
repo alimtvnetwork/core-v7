@@ -34,7 +34,7 @@ function Invoke-PreCommitCheck {
     # ── Regression guard ──
     $regressionScript = Join-Path $global:ProjectRoot "scripts" "check-integrated-regressions.ps1"
     if (-not (Test-Path $regressionScript)) {
-        Write-Fail "Regression guard script not found: $regressionScript"
+        $s = Get-CallerSource; Write-Fail "Regression guard script not found: $regressionScript (source: $s)"
         exit 1
     }
     Write-Host "  Running regression guard scan..." -ForegroundColor Yellow
