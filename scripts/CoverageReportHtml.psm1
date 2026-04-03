@@ -15,7 +15,8 @@ function Write-CoverageHtmlWithAiButton {
     $htmlExitCode = $LASTEXITCODE
 
     if ($htmlExitCode -ne 0 -or -not (Test-Path $CoverHtml)) {
-        Write-Host "  ⚠ Failed to generate HTML report via 'go tool cover -html' (exit: $htmlExitCode)" -ForegroundColor Red
+        $s = Get-CallerSource
+        Write-Host "  ⚠ Failed to generate HTML report via 'go tool cover -html' (exit: $htmlExitCode) (source: $s)" -ForegroundColor Red
         if ($htmlErr) { Write-Host "  Error: $htmlErr" -ForegroundColor Red }
         $fallbackHtml = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Coverage Report</title>' +
             '<style>body{font-family:monospace;padding:20px;background:#1e1e2e;color:#cdd6f4}' +

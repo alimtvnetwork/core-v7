@@ -86,7 +86,8 @@ function Invoke-CoverageSplitRecovery {
             $subFail = @($subfolderResults | Where-Object { $_.ExitCode -ne 0 })
             Write-Host "    ✓ $($subPass.Count) subfolders compile OK" -ForegroundColor Green
             if ($subFail.Count -gt 0) {
-                Write-Host "    ✗ $($subFail.Count) subfolders failed:" -ForegroundColor Red
+                $s = Get-CallerSource
+                Write-Host "    ✗ $($subFail.Count) subfolders failed (source: $s):" -ForegroundColor Red
                 foreach ($sf in $subFail) { Write-Host "      ✗ $($sf.Name)" -ForegroundColor Red; $splitBlockedFiles.Add("$bp/$($sf.Name)") }
             }
 

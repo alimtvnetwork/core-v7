@@ -36,7 +36,7 @@ function Invoke-IntegratedTests {
         Write-TestLogs $output
 
         if ($exitCode -eq 0) { Write-Success "Integrated tests passed" }
-        else { Write-Fail "Integrated tests failed (exit code: $exitCode)" }
+        else { $s = Get-CallerSource; Write-Fail "Integrated tests failed (exit code: $exitCode) (source: $s)" }
     }
     finally { Pop-Location }
     Open-FailingTestsIfAny

@@ -31,7 +31,7 @@ function Invoke-GoConvey {
         Write-Host "  GoConvey not found. Installing..." -ForegroundColor Yellow
         go install github.com/smartystreets/goconvey@latest
         if ($LASTEXITCODE -ne 0) {
-            Write-Fail "Failed to install GoConvey"
+            $s = Get-CallerSource; Write-Fail "Failed to install GoConvey (source: $s)"
             return
         }
         Write-Success "GoConvey installed"

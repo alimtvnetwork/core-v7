@@ -132,7 +132,7 @@ function Invoke-TestCoverage {
     }
 
     if ($testPkgs.Count -eq 0) {
-        Write-Fail "No packages compiled — aborting coverage run"
+        $s = Get-CallerSource; Write-Fail "No packages compiled — aborting coverage run (source: $s)"
         if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Coverage Run" "fail" "no packages to run" }
         return
     }

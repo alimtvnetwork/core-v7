@@ -34,14 +34,14 @@ function Invoke-PreCommitCheck {
     # ── Regression guard ──
     $regressionScript = Join-Path $global:ProjectRoot "scripts" "check-integrated-regressions.ps1"
     if (-not (Test-Path $regressionScript)) {
-        Write-Fail "Regression guard script not found: $regressionScript"
+        $s = Get-CallerSource; Write-Fail "Regression guard script not found: $regressionScript (source: $s)"
         exit 1
     }
     Write-Host "  Running regression guard scan..." -ForegroundColor Yellow
     if ($singlePkg) { & $regressionScript -SinglePackage $singlePkg } else { & $regressionScript }
     if ($LASTEXITCODE -ne 0) {
         if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Regression Guard" "fail" "regressions detected" }
-        Write-Fail "Regression guard failed. Fix reported issues before PC."
+        $s = Get-CallerSource; Write-Fail "Regression guard failed. Fix reported issues before PC. (source: $s)"
         exit 1
     }
     if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Regression Guard" "pass" "no regressions" }
@@ -55,7 +55,7 @@ function Invoke-PreCommitCheck {
     $testBaseDir = Join-Path $global:ProjectRoot "tests" "integratedtests"
     if ($singlePkg) {
         $targetDirs = @(Join-Path $testBaseDir $singlePkg)
-        if (-not (Test-Path $targetDirs[0])) { Write-Fail "Package not found: $singlePkg"; return }
+        if (-not (Test-Path $targetDirs[0])) { $s = Get-CallerSource; Write-Fail "Package not found: $singlePkg (source: $s)"; return }
     } else {
         $targetDirs = @(Get-ChildItem -Path $testBaseDir -Directory | ForEach-Object { $_.FullName })
     }
@@ -165,7 +165,8 @@ function Invoke-PreCommitCheck {
     }
 
     # JSON report
-    $jsonReport = @{ timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"); passed = $allPassed; checkedCount = $goTestPkgs.Count; passedCount = $passedCount; failedCount = $failures.Count; failures = $failures.ToArray() }
+    $pcSource = Get-CallerSource
+    $jsonReport = @{ timestamp = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssZ"); passed = $allPassed; checkedCount = $goTestPkgs.Count; passedCount = $passedCount; failedCount = $failures.Count; source = $pcSource; failures = $failures.ToArray() }
     $jsonPath = Join-Path $compileTemp "api-check.json"
     $jsonReport | ConvertTo-Json -Depth 5 | Set-Content -Path $jsonPath -Encoding UTF8
     Write-Host "  Report → $jsonPath" -ForegroundColor Gray

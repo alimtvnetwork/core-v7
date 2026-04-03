@@ -37,7 +37,7 @@ function Invoke-CoveragePreChecks {
         & $boundaryScript
         if ($LASTEXITCODE -ne 0) {
             if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "SafeTest Lint" "fail" "boundary check failed" }
-            Write-Fail "safeTest boundary check failed. Fix reported issues before TC."
+            $s = Get-CallerSource; Write-Fail "safeTest boundary check failed. Fix reported issues before TC. (source: $s)"
             return $false
         }
     }
@@ -61,7 +61,7 @@ function Invoke-CoveragePreChecks {
         $fixOut = & go run @fixArgs 2>&1
         if ($LASTEXITCODE -ne 0) {
             Write-Host ($fixOut | Out-String) -ForegroundColor Red
-            Write-Fail "Go auto-fixer encountered errors."
+            $s = Get-CallerSource; Write-Fail "Go auto-fixer encountered errors. (source: $s)"
             if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Auto-Fixer" "warn" "errors encountered" }
         } else {
             $fixStr = ($fixOut | Out-String).Trim() -replace '^\s*✓\s*', ''
@@ -79,7 +79,7 @@ function Invoke-CoveragePreChecks {
         if ($LASTEXITCODE -ne 0) {
             Write-Host ($braceOut | Out-String) -ForegroundColor Red
             if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Syntax Check" "fail" "bracecheck failed" }
-            Write-Fail "Go syntax check failed. Fix reported issues before TC."
+            $s = Get-CallerSource; Write-Fail "Go syntax check failed. Fix reported issues before TC. (source: $s)"
             return $false
         } else {
             $braceStr2 = ($braceOut | Out-String).Trim() -replace '^\s*✓\s*', ''

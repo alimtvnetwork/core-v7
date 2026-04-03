@@ -20,7 +20,7 @@ function Invoke-PackageTestCoverage {
     param([string]$pkg)
 
     if (-not $pkg) {
-        Write-Fail "Usage: ./run.ps1 TCP <package-name>"
+        $s = Get-CallerSource; Write-Fail "Usage: ./run.ps1 TCP <package-name> (source: $s)"
         Write-Host "  Example: ./run.ps1 TCP regexnewtests" -ForegroundColor Gray
         return
     }

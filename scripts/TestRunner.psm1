@@ -19,7 +19,7 @@ function Invoke-AllTests {
         Filter-TestWarnings $output | ForEach-Object { Write-Host $_ }
         Write-TestLogs $output
         if ($exitCode -eq 0) { Write-Success "All tests passed" }
-        else { Write-Fail "Some tests failed (exit code: $exitCode)" }
+        else { $s = Get-CallerSource; Write-Fail "Some tests failed (exit code: $exitCode) (source: $s)" }
     }
     finally { Pop-Location }
     Open-FailingTestsIfAny
@@ -30,7 +30,7 @@ function Invoke-PackageTests {
     [CmdletBinding()]
     param([string]$pkg)
     if (-not $pkg) {
-        Write-Fail "Package name required. Usage: ./run.ps1 TP <package>"
+        $s = Get-CallerSource; Write-Fail "Package name required. Usage: ./run.ps1 TP <package> (source: $s)"
         Write-Host "  Available packages:" -ForegroundColor Yellow
         Get-ChildItem -Path tests/integratedtests -Directory | ForEach-Object { Write-Host "    - $($_.Name)" -ForegroundColor Gray }
         return
@@ -46,7 +46,7 @@ function Invoke-PackageTests {
         Filter-TestWarnings $output | ForEach-Object { Write-Host $_ }
         Write-TestLogs $output
         if ($exitCode -eq 0) { Write-Success "Package tests passed" }
-        else { Write-Fail "Package tests failed (exit code: $exitCode)" }
+        else { $s = Get-CallerSource; Write-Fail "Package tests failed (exit code: $exitCode) (source: $s)" }
     }
     finally { Pop-Location }
     Open-FailingTestsIfAny

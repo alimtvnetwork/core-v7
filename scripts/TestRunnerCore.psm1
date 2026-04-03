@@ -11,7 +11,7 @@ function Invoke-GitPull {
     Write-Header "Pulling latest from remote"
     $prevPref = $ErrorActionPreference; $ErrorActionPreference = "Continue"
     git pull 2>&1 | ForEach-Object { Write-Host "  $_" -ForegroundColor Gray }
-    if ($LASTEXITCODE -eq 0) { Write-Success "Git pull complete" } else { Write-Fail "git pull failed (continuing anyway)" }
+    if ($LASTEXITCODE -eq 0) { Write-Success "Git pull complete" } else { $s = Get-CallerSource; Write-Fail "git pull failed (continuing anyway) (source: $s)" }
     $ErrorActionPreference = $prevPref
 }
 
@@ -22,7 +22,7 @@ function Invoke-FetchLatest {
     Invoke-GitPull
     Write-Header "Fetching latest dependencies"
     go mod tidy
-    if ($LASTEXITCODE -eq 0) { Write-Success "Dependencies up to date" } else { Write-Fail "go mod tidy failed" }
+    if ($LASTEXITCODE -eq 0) { Write-Success "Dependencies up to date" } else { $s = Get-CallerSource; Write-Fail "go mod tidy failed (source: $s)" }
 }
 
 function Invoke-BuildCheck {
