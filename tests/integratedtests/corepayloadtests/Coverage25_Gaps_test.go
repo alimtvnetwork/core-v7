@@ -482,7 +482,7 @@ func Test_Cov25_PayloadsCollection_Filter_Break(t *testing.T) {
 	pw1 := &corepayload.PayloadWrapper{Name: "a"}
 	pw2 := &corepayload.PayloadWrapper{Name: "b"}
 	pw3 := &corepayload.PayloadWrapper{Name: "c"}
-	col := corepayload.New.PayloadsCollection.UsingItems(pw1, pw2, pw3)
+	col := corepayload.New.PayloadsCollection.UsingWrappers(pw1, pw2, pw3)
 
 	// Act — break after first match
 	result := col.Filter(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
