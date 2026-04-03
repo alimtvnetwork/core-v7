@@ -190,9 +190,97 @@ function Resolve-RuntimeDiagnosticLines {
     return Get-RawFallbackLines $lines
 }
 
+function Test-IsGenericSetupFailureOutput {
+    <# .SYNOPSIS Detect when diagnostics only contain package headers plus a setup/build FAIL marker. #>
+    [CmdletBinding()]
+    [OutputType([bool])]
+    param([string[]]$lines)
+
+    $diagnosticLines = Resolve-BuildDiagnosticLines $lines
+    if (-not $diagnosticLines -or $diagnosticLines.Count -eq 0) { return $false }
+
+    $hasSetupOrBuildFail = $false
+    foreach ($raw in $diagnosticLines) {
+        if ($null -eq $raw) { continue }
+        $line = $raw.ToString().TrimEnd("`r")
+        $trimmed = $line.Trim()
+        if (-not $trimmed) { continue }
+        if ($trimmed -match '^\s*FAIL\s+\S+\s+\[(setup failed|build failed)\]\s*$') {
+            $hasSetupOrBuildFail = $true
+            continue
+        }
+        if ($trimmed -match '^#\s+\S+(\s+\[[^\]]+\])?\s*$') { continue }
+        return $false
+    }
+
+    return $hasSetupOrBuildFail
+}
+
+function Get-PackageLoaderDiagnosticLines {
+    <#
+    .SYNOPSIS
+        Query go list for package-loader diagnostics when go test returns only generic setup/build failure markers.
+    .PARAMETER PackagePath
+        Import path or relative package path to inspect.
+    #>
+    [CmdletBinding()]
+    [OutputType([string[]])]
+    param([string]$PackagePath)
+
+    if (-not $PackagePath) { return @() }
+
+    $template = @'
+{{if or .Error (gt (len .DepsErrors) 0)}}package-load: {{.ImportPath}}{{if .ForTest}} [for {{.ForTest}}]{{end}}
+{{with .Error}}{{if .Pos}}position: {{.Pos}}
+{{end}}{{.Err}}
+{{end}}{{range .DepsErrors}}package-load: {{$.ImportPath}}{{if $.ForTest}} [for {{$.ForTest}}]{{end}}
+{{if .ImportStack}}import-stack: {{range $index, $pkg := .ImportStack}}{{if $index}} -> {{end}}{{$pkg}}{{end}}
+{{end}}{{if .Pos}}position: {{.Pos}}
+{{end}}{{.Err}}
+{{end}}
+{{end}}
+'@
+
+    $prevPref = $ErrorActionPreference
+    $ErrorActionPreference = "Continue"
+    $raw = & go list -e -deps -test -f $template "$PackagePath" 2>&1 | ForEach-Object { $_.ToString() }
+    $ErrorActionPreference = $prevPref
+
+    return Get-RawFallbackLines $raw
+}
+
+function Resolve-BlockedPackageDiagnosticOutput {
+    <#
+    .SYNOPSIS
+        Merge package-loader diagnostics into blocked package output when go test only reports generic setup/build failure markers.
+    #>
+    [CmdletBinding()]
+    [OutputType([string[]])]
+    param([string]$PackagePath, [string[]]$lines)
+
+    if (-not $lines -or $lines.Count -eq 0) { return @() }
+    if (-not $PackagePath) { return $lines }
+    if (-not (Test-IsGenericSetupFailureOutput $lines)) { return $lines }
+
+    $loaderLines = Get-PackageLoaderDiagnosticLines $PackagePath
+    if (-not $loaderLines -or $loaderLines.Count -eq 0) { return $lines }
+
+    $merged = [System.Collections.Generic.List[string]]::new()
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+    foreach ($raw in @($lines + $loaderLines)) {
+        if ($null -eq $raw) { continue }
+        $line = $raw.ToString().TrimEnd("`r")
+        if (-not $line.Trim()) { continue }
+        if ($seen.Add($line)) { $merged.Add($line) | Out-Null }
+    }
+
+    return $merged.ToArray()
+}
+
 Export-ModuleMember -Function @(
     'Filter-BlockedCompileLines', 'Extract-BuildErrorLines',
     'Extract-ExecutionFailureLines', 'Extract-RuntimeFailureLines',
     'Extract-SetupFailedContext', 'Get-RawFallbackLines',
-    'Resolve-BuildDiagnosticLines', 'Resolve-RuntimeDiagnosticLines'
+    'Resolve-BuildDiagnosticLines', 'Resolve-RuntimeDiagnosticLines',
+    'Resolve-BlockedPackageDiagnosticOutput'
 )
