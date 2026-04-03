@@ -139,5 +139,6 @@ function Merge-UniqueOutputLines {
 
 Export-ModuleMember -Function @(
     'Write-Header', 'Write-Success', 'Write-Fail',
-    'Ensure-TestLogDir', 'Filter-TestWarnings', 'Merge-UniqueOutputLines'
+    'Ensure-TestLogDir', 'Filter-TestWarnings', 'Merge-UniqueOutputLines',
+    'Get-CallerSource'
 )
