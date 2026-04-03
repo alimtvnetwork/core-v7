@@ -17,7 +17,8 @@
 6. [Coverage Push Iteration Workflow](#6-coverage-push-iteration-workflow)
 7. [Common Error Patterns & Fixes](#7-common-error-patterns--fixes)
 8. [PowerShell Runner Internals](#8-powershell-runner-internals)
-9. [Related Spec Files](#9-related-spec-files)
+9. [Error Attribution System](#9-error-attribution-system)
+10. [Related Spec Files](#10-related-spec-files)
 
 ---
 
@@ -883,12 +884,64 @@ Raw `go test -c` output contains noise. Filter to actionable errors only:
 
 ---
 
-## 9. Related Spec Files
+## 9. Error Attribution System
+
+Every error report includes **source attribution** — the `.psm1` module and function that triggered the failure. This is critical for diagnosing whether a failure originates from the build check, coverage compile check, test log writer, or coverage report generation.
+
+### `Get-CallerSource` (Utilities.psm1)
+
+Walks `Get-PSCallStack` to return the originating module and function:
+
+```powershell
+$source = Get-CallerSource
+# → "CoverageRunner.psm1 → Invoke-TestCoverage"
+```
+
+- Skips internal frames (`<ScriptBlock>`, `Utilities.psm1`)
+- Falls back to script name or function name alone
+- Returns `"unknown"` if no meaningful frame found
+
+### Integration Points
+
+| Module | Function | Report File | Field |
+|--------|----------|-------------|-------|
+| `TestRunnerCore.psm1` | `Invoke-BuildCheck` | `failing-tests.txt` | `# Source:` header |
+| `TestLogWriter.psm1` | `Write-TestLogs` | `passing-tests.txt`, `failing-tests.txt` | `# Source:` header |
+| `CoverageReportJson.psm1` | JSON/text export | `build-errors.json/.txt`, `runtime-failures.json/.txt` | `"source"` / `# Source:` |
+| `CoverageRunner.psm1` | Blocked packages | `blocked-packages.txt` | `# Source:` header |
+| `CoverageCompileCheck.psm1` | Compile check | Console only | `Write-Fail` with source |
+
+### Parallel Mode Caveat
+
+`Get-CallerSource` uses `Get-PSCallStack`, which does **not** cross `ForEach-Object -Parallel` thread boundaries. In parallel blocks, **hardcode** the source string:
+
+```powershell
+# Inside parallel block — cannot use Get-CallerSource
+$callerSource = "CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck (parallel)"
+```
+
+### Report Examples
+
+```
+# Text: failing-tests.txt
+# Source: TestRunnerCore.psm1 → Invoke-BuildCheck
+
+# JSON: build-errors.json
+{ "source": "CoverageRunner.psm1 → Invoke-TestCoverage", ... }
+
+# Console
+  ✗ Blocked: subpkg/foo (source: CoverageCompileCheck.psm1 → Invoke-CoverageCompileCheck)
+```
+
+---
+
+## 10. Related Spec Files
 
 | Path | Purpose |
 |------|---------|
 | `spec/03-powershell-test-run/01-overview.md` | run.ps1 command reference |
 | `spec/03-powershell-test-run/08-generic-go-test-coverage-runner.md` | Generic runner architecture with sample script |
+| `spec/02-tooling/powershell-implementation.md` | Full implementation spec (includes §8 Error Attribution) |
 | `spec/testing-guidelines/README.md` | Testing guidelines index |
 | `spec/testing-guidelines/07-good-vs-bad.md` | Good vs bad test examples |
 | `spec/01-app/16-testing-guidelines.md` | Comprehensive testing reference (CaseV1, args.Map, assertions) |
@@ -903,5 +956,6 @@ Raw `go test -c` output contains noise. Filter to actionable errors only:
 
 | Date | Change |
 |------|--------|
+| 2026-04-03 | Added §9 Error Attribution System — `Get-CallerSource`, integration points, parallel caveat |
 | 2026-03-31 | Updated directory layout, added §8 modular architecture, Go syntax validation docs |
 | 2026-03-30 | Initial creation — consolidated from run.ps1 overview, generic runner spec, testing guidelines, and unit coverage fix protocol |
