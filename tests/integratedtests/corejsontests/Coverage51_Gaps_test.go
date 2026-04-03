@@ -568,7 +568,7 @@ func Test_Cov51_NewResultCreator_Deserialize_Error(t *testing.T) {
 	badResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 
 	// Act
-	result := corejson.NewResult.Deserialize(&badResult)
+	result := corejson.NewResult.DeserializeUsingResult(&badResult)
 
 	// Assert
 	actual := args.Map{"hasErr": result.HasError()}
