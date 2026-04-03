@@ -227,7 +227,7 @@ func Test_Cov25_Attributes_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 
 func Test_Cov25_Attributes_BasicErrorDeserializedTo_WithError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
+	basicErr := errcore.MarshallingFailedType.ErrorRefOnly("test-err")
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
 	var target map[string]any
 
