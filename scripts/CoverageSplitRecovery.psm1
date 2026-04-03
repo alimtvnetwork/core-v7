@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # CoverageSplitRecovery.psm1 — Per-file split recovery for blocked packages
 #
-# Dependencies: Utilities.psm1, ErrorParser.psm1, DashboardPhases.psm1
+# Dependencies: Utilities.psm1, ErrorParser.psm1, ErrorExtractor.psm1, DashboardPhases.psm1
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Invoke-CoverageSplitRecovery {
@@ -65,15 +65,19 @@ function Invoke-CoverageSplitRecovery {
             if ($IsSyncMode) {
                 foreach ($sd in $subDirs) {
                     $subPkg = "./tests/integratedtests/$bp/$($sd.Name)/"
-                    $prevPref = $ErrorActionPreference; $ErrorActionPreference = "Continue"
+                    $prevPref = $ErrorActionPreference
+                    $ErrorActionPreference = "Continue"
                     $subOut = & go test -count=1 -run '^$' -gcflags=all=-e "-coverpkg=$CovPkgList" "$subPkg" 2>&1 | ForEach-Object { $_.ToString() }
-                    $subExit = $LASTEXITCODE; $ErrorActionPreference = $prevPref
+                    $subExit = $LASTEXITCODE
+                    $ErrorActionPreference = $prevPref
                     $subfolderResults.Add([pscustomobject]@{ Name = $sd.Name; Pkg = $subPkg; ExitCode = $subExit; Output = $subOut })
                 }
             } else {
                 $throttle = [Math]::Min($subDirs.Count, [Environment]::ProcessorCount * 2)
                 $parallelResults = $subDirs | ForEach-Object -ThrottleLimit $throttle -Parallel {
-                    $sd = $_; $bpName = $using:bp; $covPkgs = $using:CovPkgList
+                    $sd = $_
+                    $bpName = $using:bp
+                    $covPkgs = $using:CovPkgList
                     $subPkg = "./tests/integratedtests/$bpName/$($sd.Name)/"
                     $ErrorActionPreference = "Continue"
                     $subOut = & go test -count=1 -run '^$' -gcflags=all=-e "-coverpkg=$covPkgs" "$subPkg" 2>&1 | ForEach-Object { $_.ToString() }
@@ -88,24 +92,34 @@ function Invoke-CoverageSplitRecovery {
             if ($subFail.Count -gt 0) {
                 $s = Get-CallerSource
                 Write-Host "    ✗ $($subFail.Count) subfolders failed (source: $s):" -ForegroundColor Red
-                foreach ($sf in $subFail) { Write-Host "      ✗ $($sf.Name)" -ForegroundColor Red; $splitBlockedFiles.Add("$bp/$($sf.Name)") }
+                foreach ($sf in $subFail) {
+                    Write-Host "      ✗ $($sf.Name)" -ForegroundColor Red
+                    $splitBlockedFiles.Add("$bp/$($sf.Name)")
+                }
             }
 
             foreach ($sp in $subPass) {
                 $fullSubPkg = $AllTestPkgs | Where-Object { $_ -match "integratedtests/$bp$" } | Select-Object -First 1
                 $subFullPkg = if ($fullSubPkg) { $fullSubPkg + "/" + $sp.Name } else { $sp.Pkg }
-                $testPkgs.Add($subFullPkg); $splitRecoveredCount++
+                $testPkgs.Add($subFullPkg)
+                $splitRecoveredCount++
             }
 
-            $blockedPkgs.Remove($bp); $blockedErrors.Remove($bp)
+            $blockedPkgs.Remove($bp)
+            $blockedErrors.Remove($bp)
             foreach ($sf in $subFail) {
                 $failName = "$bp/$($sf.Name)"
-                $blockedPkgs.Add($failName); $blockedErrors[$failName] = ($sf.Output -join "`n")
-                Add-BuildErrorsForPackage $buildErrorsByPackage $failName $sf.Output
+                $resolvedOutput = Resolve-BlockedPackageDiagnosticOutput -PackagePath $sf.Pkg -Lines $sf.Output
+                $blockedPkgs.Add($failName)
+                $blockedErrors[$failName] = ($resolvedOutput -join "`n")
+                Add-BuildErrorsForPackage $buildErrorsByPackage $failName $resolvedOutput
             }
         }
 
-        if ($splitRecoveredCount -gt 0) { Write-Host ""; Write-Success "Recovered $splitRecoveredCount subfolders from blocked packages via per-file split" }
+        if ($splitRecoveredCount -gt 0) {
+            Write-Host ""
+            Write-Success "Recovered $splitRecoveredCount subfolders from blocked packages via per-file split"
+        }
         if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Split Recovery" "pass" "$splitRecoveredCount subfolders recovered" }
     } else {
         if (Get-Command Register-Phase -ErrorAction SilentlyContinue) { Register-Phase "Split Recovery" "skip" "not needed" }
