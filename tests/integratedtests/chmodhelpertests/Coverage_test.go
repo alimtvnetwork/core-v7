@@ -12,22 +12,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/coretestcases"
 )
 
-// ── helpers ──
-
-func covTempDir(t *testing.T) string {
-	t.Helper()
-	return t.TempDir()
-}
-
-func covWriteFile(t *testing.T, dir, name, content string) string {
-	t.Helper()
-	p := filepath.Join(dir, name)
-	err := os.WriteFile(p, []byte(content), 0644)
-	if err != nil {
-		t.Fatal(err)
-	}
-	return p
-}
+// covTempDir and covWriteFile are defined in shared_coverage_helpers.go
 
 // ── tempDirGetter ──
 

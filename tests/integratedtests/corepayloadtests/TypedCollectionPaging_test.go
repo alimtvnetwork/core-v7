@@ -9,32 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/errcore"
 )
 
-// =============================================================================
-// Helpers
-// =============================================================================
-
-func createNumberedUsers(count int) *corepayload.TypedPayloadCollection[testUser] {
-	wrappers := make([]*corepayload.TypedPayloadWrapper[testUser], 0, count)
-
-	for i := 0; i < count; i++ {
-		user := testUser{
-			Name:  fmt.Sprintf("User%d", i),
-			Email: fmt.Sprintf("user%d@test.com", i),
-			Age:   20 + i,
-		}
-
-		typed, err := corepayload.TypedPayloadWrapperNameIdRecord[testUser](
-			user.Name,
-			fmt.Sprintf("user-%d", i),
-			user,
-		)
-		errcore.HandleErr(err)
-
-		wrappers = append(wrappers, typed)
-	}
-
-	return corepayload.TypedPayloadCollectionFrom[testUser](wrappers)
-}
+// createNumberedUsers is defined in shared_typed_helpers.go
 
 // =============================================================================
 // Tests: GetPagesSize

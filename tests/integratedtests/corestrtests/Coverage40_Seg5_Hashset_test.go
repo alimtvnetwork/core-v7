@@ -116,9 +116,7 @@ func Test_Seg5_HS_AddFuncErr_Error(t *testing.T) {
 	})
 }
 
-type testErr struct{}
-
-func (e *testErr) Error() string { return "test" }
+// testErr is defined in shared_compat_helpers.go
 
 func Test_Seg5_HS_Adds(t *testing.T) {
 	safeTest(t, "Test_Seg5_HS_Adds", func() {

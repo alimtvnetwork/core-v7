@@ -9,16 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/chmodhelper"
 )
 
-func newTestRW(dir, file string) chmodhelper.SimpleFileReaderWriter {
-	return chmodhelper.SimpleFileReaderWriter{
-		ChmodDir:               0755,
-		ChmodFile:              0644,
-		ParentDir:              dir,
-		FilePath:               filepath.Join(dir, file),
-		IsMustChmodApplyOnFile: true,
-		IsApplyChmodOnMismatch: true,
-	}
-}
+// newTestRW is defined in shared_coverage_helpers.go
 
 // ── SimpleFileReaderWriter.Write ──
 
