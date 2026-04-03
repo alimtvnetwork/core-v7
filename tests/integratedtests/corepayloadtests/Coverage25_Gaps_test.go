@@ -318,18 +318,24 @@ func Test_Cov25_PayloadWrapper_BasicError_NilError(t *testing.T) {
 
 // ── PayloadWrapper — PayloadDeserializeToPayloadBinder error ──
 
-func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_Error(t *testing.T) {
+func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_NilPayload(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
 	// Act
-	_, err := pw.PayloadDeserializeToPayloadBinder()
+	binder, err := pw.PayloadDeserializeToPayloadBinder()
 
 	// Assert
-	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder returns error -- has error attr", actual)
+	actual := args.Map{
+		"hasErr":    err != nil,
+		"binderNil": binder == nil,
+	}
+	expected := args.Map{
+		"hasErr":    false,
+		"binderNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder -- nil payload", actual)
 }
 
 // ── PayloadWrapper — SetPayloadDynamicAny error ──
