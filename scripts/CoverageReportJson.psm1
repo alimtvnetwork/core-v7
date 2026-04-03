@@ -72,6 +72,7 @@ function Write-BuildErrorsReport {
                 $rawErrLines = $BlockedErrors[$bp] -split "`n"
                 $filteredErrLines = Extract-BuildErrorLines $rawErrLines
                 if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Extract-ExecutionFailureLines $rawErrLines }
+                if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Extract-SetupFailedContext $rawErrLines }
                 if ($filteredErrLines.Count -eq 0) { $filteredErrLines = Get-RawFallbackLines $rawErrLines }
                 if ($filteredErrLines.Count -gt 0) {
                     if (-not $BuildErrorsByPackage.ContainsKey($bp)) { $BuildErrorsByPackage[$bp] = [System.Collections.Generic.List[string]]::new() }

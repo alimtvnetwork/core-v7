@@ -1,7 +1,8 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # ErrorParser.psm1 — Error accumulation + compile error parser
 #
-# Dependencies: ErrorExtractor.psm1 (Extract-BuildErrorLines, Extract-RuntimeFailureLines)
+# Dependencies: ErrorExtractor.psm1 (Extract-BuildErrorLines, Extract-RuntimeFailureLines,
+#               Extract-SetupFailedContext, Get-RawFallbackLines)
 # ─────────────────────────────────────────────────────────────────────────────
 
 function Add-BuildErrorsForPackage {
@@ -11,6 +12,7 @@ function Add-BuildErrorsForPackage {
     if (-not $BuildErrorMap -or -not $PackageName) { return }
     $buildLines = Extract-BuildErrorLines $Lines
     if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-ExecutionFailureLines $Lines }
+    if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Extract-SetupFailedContext $Lines }
     if (-not $buildLines -or $buildLines.Count -eq 0) { $buildLines = Get-RawFallbackLines $Lines }
     if (-not $buildLines -or $buildLines.Count -eq 0) { return }
     if (-not $BuildErrorMap.ContainsKey($PackageName)) { $BuildErrorMap[$PackageName] = [System.Collections.Generic.List[string]]::new() }
@@ -25,6 +27,7 @@ function Add-RuntimeFailuresForPackage {
     param([hashtable]$FailureMap, [string]$PackageName, [string[]]$Lines)
     if (-not $FailureMap -or -not $PackageName) { return }
     $runtimeLines = Extract-RuntimeFailureLines $Lines
+    if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { $runtimeLines = Extract-SetupFailedContext $Lines }
     if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { $runtimeLines = Get-RawFallbackLines $Lines }
     if (-not $runtimeLines -or $runtimeLines.Count -eq 0) { return }
     if (-not $FailureMap.ContainsKey($PackageName)) { $FailureMap[$PackageName] = [System.Collections.Generic.List[string]]::new() }

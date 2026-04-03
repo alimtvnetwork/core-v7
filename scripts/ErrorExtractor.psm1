@@ -86,6 +86,57 @@ function Extract-RuntimeFailureLines {
     return $errors.ToArray()
 }
 
+function Extract-SetupFailedContext {
+    <#
+    .SYNOPSIS
+        Capture preceding context lines before a [setup failed] or [build failed] FAIL line.
+    .DESCRIPTION
+        Go outputs plain-text error messages before the final "FAIL pkg [setup failed]" line.
+        Standard extractors miss these because they don't match .go:line: or panic: patterns.
+        This function walks backward from each FAIL marker and captures up to N preceding
+        non-empty lines as diagnostic context.
+    .PARAMETER lines
+        Raw Go test output lines.
+    .PARAMETER ContextLineCount
+        Max number of preceding lines to capture per FAIL marker (default 10).
+    .EXAMPLE
+        $context = Extract-SetupFailedContext $rawOutput
+        # Returns context lines + the FAIL line for each [setup failed] occurrence
+    #>
+    [CmdletBinding()]
+    [OutputType([string[]])]
+    param(
+        [string[]]$lines,
+        [int]$ContextLineCount = 10
+    )
+
+    if (-not $lines -or $lines.Count -eq 0) { return @() }
+
+    $result = [System.Collections.Generic.List[string]]::new()
+    $seen = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::Ordinal)
+
+    for ($i = 0; $i -lt $lines.Count; $i++) {
+        $raw = $lines[$i]
+        if ($null -eq $raw) { continue }
+        $trimmed = $raw.ToString().TrimEnd("`r").Trim()
+        if ($trimmed -match '\[setup failed\]' -or ($trimmed -match '\[build failed\]' -and $trimmed -match '^\s*FAIL\s+')) {
+            # Walk backward to capture context
+            $startIdx = [Math]::Max(0, $i - $ContextLineCount)
+            for ($j = $startIdx; $j -le $i; $j++) {
+                $ctxRaw = $lines[$j]
+                if ($null -eq $ctxRaw) { continue }
+                $ctxLine = $ctxRaw.ToString().TrimEnd("`r")
+                if (-not $ctxLine.Trim()) { continue }
+                # Skip noise lines
+                if ($ctxLine.Trim() -match '^\s*warning:\s*no packages being tested') { continue }
+                if ($seen.Add($ctxLine)) { $result.Add($ctxLine) | Out-Null }
+            }
+        }
+    }
+
+    return $result.ToArray()
+}
+
 function Get-RawFallbackLines {
     <#
     .SYNOPSIS
@@ -109,5 +160,5 @@ function Get-RawFallbackLines {
 Export-ModuleMember -Function @(
     'Filter-BlockedCompileLines', 'Extract-BuildErrorLines',
     'Extract-ExecutionFailureLines', 'Extract-RuntimeFailureLines',
-    'Get-RawFallbackLines'
+    'Extract-SetupFailedContext', 'Get-RawFallbackLines'
 )
