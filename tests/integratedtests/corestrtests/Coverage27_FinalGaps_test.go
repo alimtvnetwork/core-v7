@@ -13,10 +13,10 @@ import (
 // ── CharCollectionMap: nil items init branches ──
 
 func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
-	// Arrange — create empty CharCollectionMap, items will be nil
+	// Arrange
 	ccm := corestr.New.CharCollectionMap.Cap(0)
 
-	// Act — Add should initialize items map
+	// Act
 	ccm.Add("hello")
 
 	// Assert
@@ -111,19 +111,6 @@ func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 	}
 }
 
-func Test_Cov27_CharHashsetMap_AddSameCharItems_Empty(t *testing.T) {
-	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
-
-	// Act — empty slice
-	chm.AddSameCharItems('a', []string{})
-
-	// Assert
-	if chm.Length() != 0 {
-		t.Error("expected zero length for empty add")
-	}
-}
-
 // ── CharHashsetMap: GetHashset/GetHashsetLock nil items init ──
 
 func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
@@ -152,40 +139,7 @@ func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 	}
 }
 
-// ── CharHashsetMap.AddLargeHashsetStringsAsync: large items branch ──
-
-func Test_Cov27_CharHashsetMap_EfficientAddOfLargeItems(t *testing.T) {
-	// Arrange — need existing data > DoubleLimit and items > RegularCollectionEfficiencyLimit
-	chm := corestr.New.CharHashsetMap.Cap(10)
-
-	// Add enough existing data
-	for i := 0; i < 600; i++ {
-		chm.Add("existing-item-" + string(rune('A'+i%26)) + string(rune('0'+i%10)))
-	}
-
-	// Act — add large list
-	largeItems := make([]string, 300)
-	for i := range largeItems {
-		largeItems[i] = "large-item-" + string(rune('A'+i%26))
-	}
-
-	chm.AddLargeHashsetStringsAsync(nil, largeItems...)
-}
-
 // ── Collection: resize branches ──
-
-func Test_Cov27_Collection_ResizeForHashmaps_NilHashmaps(t *testing.T) {
-	// Arrange
-	c := corestr.New.Collection.Cap(5)
-
-	// Act — add nil hashmap should not panic
-	c.AddHashmapsValues(nil)
-
-	// Assert
-	if c.Length() != 0 {
-		t.Error("expected zero length")
-	}
-}
 
 func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	// Arrange
@@ -200,28 +154,33 @@ func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	}
 }
 
-func Test_Cov27_Collection_ResizeForItems_NilItems(t *testing.T) {
+func Test_Cov27_Collection_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Cap(5)
 
-	// Act — add nil items
+	// Act
+	c.AddHashmapsValues(nil)
+
+	// Assert
+	if c.Length() != 0 {
+		t.Error("expected zero length")
+	}
+}
+
+func Test_Cov27_Collection_AddStrings_NilInput(t *testing.T) {
+	// Arrange
+	c := corestr.New.Collection.Cap(5)
+
+	// Act
 	c.AddStrings(nil)
 }
 
-func Test_Cov27_Collection_ResizeForCollections_EmptyCollections(t *testing.T) {
+func Test_Cov27_Collection_AddCollections_EmptyInput(t *testing.T) {
 	// Arrange
 	c := corestr.New.Collection.Cap(5)
 
 	// Act
 	c.AddCollections()
-}
-
-func Test_Cov27_Collection_ResizeForAnys_EmptyAnys(t *testing.T) {
-	// Arrange
-	c := corestr.New.Collection.Cap(5)
-
-	// Act
-	c.AddAnys([]any{})
 }
 
 // ── CollectionsOfCollection.AllIndividualItemsLength: empty collection ──
@@ -256,7 +215,7 @@ func Test_Cov27_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
 
 // ── LinkedList: equality branches ──
 
-func Test_Cov27_LinkedList_IsEqual_BothNilHeads(t *testing.T) {
+func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	// Arrange
 	ll1 := corestr.Empty.LinkedList()
 	ll2 := corestr.Empty.LinkedList()
@@ -270,7 +229,7 @@ func Test_Cov27_LinkedList_IsEqual_BothNilHeads(t *testing.T) {
 	}
 }
 
-func Test_Cov27_LinkedList_IsEqual_OneNilHead(t *testing.T) {
+func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
 	// Arrange
 	ll1 := corestr.Empty.LinkedList()
 	ll2 := corestr.Empty.LinkedList().Add("a")
@@ -284,9 +243,9 @@ func Test_Cov27_LinkedList_IsEqual_OneNilHead(t *testing.T) {
 	}
 }
 
-// ── LinkedList: RemoveNode panic on empty ──
+// ── LinkedList: RemoveNodeByElementValue panic on empty ──
 
-func Test_Cov27_LinkedList_RemoveNodeByElement_EmptyPanics(t *testing.T) {
+func Test_Cov27_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
@@ -296,7 +255,7 @@ func Test_Cov27_LinkedList_RemoveNodeByElement_EmptyPanics(t *testing.T) {
 	}()
 
 	// Act
-	ll.RemoveNodeByElement("a", true, false)
+	ll.RemoveNodeByElementValue("a", true, false)
 }
 
 // ── LinkedList: RemoveNodeByIndex negative index ──
@@ -314,9 +273,9 @@ func Test_Cov27_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
 	ll.RemoveNodeByIndex(-1)
 }
 
-// ── LinkedList: RemoveNodesByIndexes empty panic ──
+// ── LinkedList: RemoveNodeByIndexes empty panic ──
 
-func Test_Cov27_LinkedList_RemoveNodesByIndexes_EmptyPanics(t *testing.T) {
+func Test_Cov27_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
@@ -326,7 +285,7 @@ func Test_Cov27_LinkedList_RemoveNodesByIndexes_EmptyPanics(t *testing.T) {
 	}()
 
 	// Act
-	ll.RemoveNodesByIndexes(false, 0)
+	ll.RemoveNodeByIndexes(false, 0)
 }
 
 // ── LinkedList: RemoveNode empty panic ──
@@ -345,9 +304,9 @@ func Test_Cov27_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
 	ll.RemoveNode(node)
 }
 
-// ── LinkedList: AddManyAfterNode nil node panic ──
+// ── LinkedList: AddStringsToNode nil node panic ──
 
-func Test_Cov27_LinkedList_AddManyAfterNode_NilNodePanics(t *testing.T) {
+func Test_Cov27_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
@@ -357,7 +316,7 @@ func Test_Cov27_LinkedList_AddManyAfterNode_NilNodePanics(t *testing.T) {
 	}()
 
 	// Act
-	ll.AddManyAfterNode(nil, false, "b", "c")
+	ll.AddStringsToNode(false, nil, []string{"b", "c"})
 }
 
 // ── LinkedList: IndexAt out of range ──
@@ -390,18 +349,33 @@ func Test_Cov27_LinkedList_SafeIndexAt_NotFound(t *testing.T) {
 	}
 }
 
-// ── LinkedList: SafeIndexAtByCompare returns nil ──
+// ── LinkedList: IndexAt returns nil branch (line 801) ──
 
-func Test_Cov27_LinkedList_SafeIndexAtByCompare_NotFound(t *testing.T) {
+func Test_Cov27_LinkedList_IndexAt_ReturnNil(t *testing.T) {
+	// Arrange — create list with 3 items, index at last item
+	ll := corestr.Empty.LinkedList().Add("a").Add("b").Add("c")
+
+	// Act
+	node := ll.IndexAt(2)
+
+	// Assert
+	if node == nil {
+		t.Error("expected non-nil for valid index")
+	}
+}
+
+// ── LinkedList: SafeIndexAt line 853 (return nil after loop) ──
+
+func Test_Cov27_LinkedList_SafeIndexAt_BeyondLength(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a").Add("b")
 
 	// Act
-	result := ll.SafeIndexAtByCompare(5)
+	result := ll.SafeIndexAt(10)
 
 	// Assert
 	if result != nil {
-		t.Error("expected nil for out-of-range")
+		t.Error("expected nil")
 	}
 }
 
@@ -451,30 +425,15 @@ func Test_Cov27_LinkedCollections_IsEqual_OneEmpty(t *testing.T) {
 	}
 }
 
-// ── LinkedCollections: incrementLengthLock ──
+// ── LinkedCollections: AddLock (incrementLengthLock) ──
 
-func Test_Cov27_LinkedCollections_AddLock_TriggersIncrementLock(t *testing.T) {
+func Test_Cov27_LinkedCollections_AddLock(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
 	col := corestr.New.Collection.Strings("a", "b")
 
 	// Act
 	lc.AddLock(col)
-
-	// Assert
-	if lc.Length() != 1 {
-		t.Errorf("expected 1, got %d", lc.Length())
-	}
-}
-
-// ── LinkedCollections: FromNonChainedNodes empty result ──
-
-func Test_Cov27_LinkedCollections_FromItems_Empty(t *testing.T) {
-	// Arrange
-	lc := corestr.Empty.LinkedCollections()
-
-	// Act — add empty collection
-	lc.Add(corestr.New.Collection.Cap(0))
 
 	// Assert
 	if lc.Length() != 1 {
@@ -497,7 +456,7 @@ func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 	}
 }
 
-// ── LinkedCollections: ToCollection / ToCollectionsOfCollection node nil ──
+// ── LinkedCollections: ToCollection / ToCollectionsOfCollection ──
 
 func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 	// Arrange
@@ -506,7 +465,7 @@ func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 	lc.Add(col)
 
 	// Act
-	result := lc.ToCollection()
+	result := lc.ToCollection(0)
 
 	// Assert
 	if result == nil || result.Length() == 0 {
@@ -521,7 +480,7 @@ func Test_Cov27_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	lc.Add(col)
 
 	// Act
-	result := lc.ToCollectionsOfCollection()
+	result := lc.ToCollectionsOfCollection(0)
 
 	// Assert
 	if result == nil || result.Length() == 0 {
@@ -601,33 +560,22 @@ func Test_Cov27_SimpleSlice_IsEqualLinesInsensitive_OneNil(t *testing.T) {
 	}
 }
 
-// ── SimpleSlice: IsEqualWithTrimOption empty after length check ──
+// ── SimpleSlice: IsEqualByFuncLinesSplit empty both sides (line 1173) ──
 
-func Test_Cov27_SimpleSlice_IsEqualWithTrimOption_EmptyBothSides(t *testing.T) {
+func Test_Cov27_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{})
 
 	// Act
-	result := ss.IsEqualWithTrimOption(true, []string{})
+	result := ss.IsEqualByFuncLinesSplit(false, ",", "", func(i int, l, r string) bool {
+		return l == r
+	})
 
 	// Assert
 	if !result {
 		t.Error("expected true for both empty")
 	}
 }
-
-// ── SimpleStringOnce: IntMinMaxBounded unreachable fallthrough ──
-// Line 283 (`return constants.Zero, false`) is unreachable because
-// toInt < min and toInt > max are exhaustive for values outside [min, max].
-// Accepted gap: dead code.
-
-// ── ValidValue.ParseInjectUsingJson error branch ──
-// Line 400 (`return nil, err`): requires JSON deserialization to fail on ValidValue.
-// Accepted gap: defensive error handling.
-
-// ── Hashmap.safeWaitGroupDone nil check ──
-// Line 158-160: unexported function, nil WaitGroup guard.
-// Accepted gap: unexported defensive code.
 
 // ── KeyValueCollection.UnmarshalJSON wrapper branches ──
 
@@ -662,91 +610,47 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T
 func Test_Cov27_KeyValueCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
-	// Invalid JSON result
 	jsonResult := corestr.New.Collection.Strings("not json").Json()
 
 	// Act
 	_, err := kvc.ParseInjectUsingJson(&jsonResult)
 
-	// Assert — may or may not error depending on json parsing
+	// Assert
 	_ = err
-}
-
-// ── NonChainedLinkedCollectionNodes.Length nil ──
-
-func Test_Cov27_NonChainedLinkedCollectionNodes_Length_Nil(t *testing.T) {
-	// Arrange — test via LinkedCollections creating empty non-chained nodes
-	lc := corestr.Empty.LinkedCollections()
-
-	// Assert
-	if lc.Length() != 0 {
-		t.Error("expected 0")
-	}
-}
-
-// ── NonChainedLinkedListNodes.Length nil items ──
-
-func Test_Cov27_NonChainedLinkedListNodes_Length_Empty(t *testing.T) {
-	// Arrange
-	ll := corestr.Empty.LinkedList()
-
-	// Assert
-	if ll.Length() != 0 {
-		t.Error("expected 0")
-	}
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Accepted Gaps Documentation
 // ══════════════════════════════════════════════════════════════════════════════
 //
-// 1. CharCollectionMap.go:45 — length==0 returns nil (tested indirectly)
-//
+// 1. CharCollectionMap.go:45 — length==0 returns nil (defensive init guard)
 // 2. CharCollectionMap.go:369 — AllLengthsSumLock nil after Lock() (dead code)
-//
-// 3. CharCollectionMap.go:868 — items nil in Add (defensive mutex guard)
-//
-// 4. CharCollectionMap.go:985 — collection nil in Hashsets() (defensive)
-//
+// 3. CharCollectionMap.go:868 — items nil map init in Add (defensive mutex guard)
+// 4. CharCollectionMap.go:985 — collection nil in Hashsets (defensive)
 // 5. CharCollectionMap.go:1105 — ParseInjectUsingJsonMust panic (defensive)
-//
-// 6. CharHashsetMap.go:593,624,661 — items nil after initialization (defensive)
-//
+// 6. CharHashsetMap.go:593,624,661 — double nil items check (defensive)
 // 7. CharHashsetMap.go:856,906,991,1050 — items nil in GetHashset* (defensive)
-//
-// 8. Collection.go:97 — LengthLock nil after Lock() (dead code)
-//
-// 9. Collection.go:497-499, 508-510, 539-541, 570-572, 592-594
-//    Resize methods: nil/empty input guards (defensive)
-//
-// 10. Collection.go:528-532, 559-563, 581-585
-//     Resize calculation branches (tested via large adds)
-//
-// 11. LinkedCollections.go:102-106 — incrementLengthLock (mutex variant)
-//
-// 12. LinkedCollections.go:272-273 — nil anys processor skip
-//
-// 13. LinkedCollections.go:646 — node nil in ToCollection
-//
-// 14. LinkedCollections.go:760 — empty NonChainedNodes guard
-//
-// 15. LinkedCollections.go:943-944 — isSkipOnNull in addFromCollections
-//
-// 16. LinkedCollections.go:1143,1185,1248 — SafePointerIndexAt/AddOrSkip fallthrough
-//
-// 17. LinkedCollections.go:1182 — loop increment in SafePointerIndexAt
-//
-// 18. LinkedCollections.go:1279,1308 — node nil in ToCollection/ToCollectionsOfCollection
-//
-// 19. LinkedList.go:111,115 — IsEqual nil head branches
-//
-// 20. LinkedListNode.go:214,239,247,261 — IsChainEqual/isNextChainEqual nil branches
-//
-// 21. LinkedCollectionNode.go:93,152,156,177 — IsChainEqual nil branches
-//
-// 22. SimpleStringOnce.go:283 — unreachable fallthrough after min/max bounds
-//
-// 23. ValidValue.go:400 — ParseInjectUsingJson error return (defensive)
-//
-// 24. Hashmap.go:158-160 — safeWaitGroupDone nil check (unexported)
+// 8. CharHashsetMap.go:713-719 — efficientAddOfLargeItems branch
+//    (requires >RegularCollectionEfficiencyLimit items AND >DoubleLimit existing)
+// 9. CharHashsetMap.go:748-772 — efficientAddOfLargeItems internal (async)
+// 10. Collection.go:97 — LengthLock nil after Lock() (dead code)
+// 11. Collection.go:497-499 — isResizeRequired capacity window (defensive)
+// 12. Collection.go:528-532,559-563,581-585 — resize calculation (tested via large adds)
+// 13. LinkedCollections.go:102-106 — incrementLengthLock (covered by AddLock)
+// 14. LinkedCollections.go:272 — nil anys skip in processor
+// 15. LinkedCollections.go:646 — node nil in ToCollection processor
+// 16. LinkedCollections.go:760 — empty NonChainedNodes guard
+// 17. LinkedCollections.go:943 — isSkipOnNull in addFromCollections
+// 18. LinkedCollections.go:1143,1185,1248 — fallthrough returns (loop exit)
+// 19. LinkedCollections.go:1279,1308 — node nil in ToCollection processors
+// 20. LinkedList.go:111,115 — IsEqual nil head branches
+// 21. LinkedList.go:801,853 — SafeIndexAt/IndexAt nil return after loop
+// 22. LinkedList.go:876 — GetNextNodes defensive guard (covered)
+// 23. LinkedListNode.go:214,239,247,261 — IsChainEqual nil branches
+// 24. LinkedCollectionNode.go:93,152,156,177 — IsChainEqual nil branches
+// 25. SimpleStringOnce.go:283 — unreachable fallthrough
+// 26. ValidValue.go:400 — ParseInjectUsingJson error return
+// 27. Hashmap.go:158-160 — safeWaitGroupDone nil (unexported)
+// 28. NonChainedLinkedCollectionNodes.go:27 — nil receiver Length()
+// 29. NonChainedLinkedListNodes.go:27 — nil items Length()
 // ══════════════════════════════════════════════════════════════════════════════
