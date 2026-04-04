@@ -33,16 +33,15 @@ func Test_Cov18_BasicByte_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T
 	}
 }
 
-func Test_Cov18_BasicInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicInt16_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt16.Create(
+	bi := enumimpl.New.BasicInt16.CreateUsingMap(
 		"TestInt16Enum",
-		[]string{"One", "Two"},
-		nil,
+		map[int16]string{0: "One", 1: "Two"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Missing\"")
+	_, err := bi.GetValueByName("\"Missing\"")
 
 	// Assert
 	if err == nil {
