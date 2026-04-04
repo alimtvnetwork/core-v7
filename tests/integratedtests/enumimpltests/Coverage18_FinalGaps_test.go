@@ -17,16 +17,15 @@ import (
 //    unwrapped map and also not in the double-quoted map.
 // ──
 
-func Test_Cov18_BasicByte_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicByte_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bb := enumimpl.New.BasicByte.Create(
+	bb := enumimpl.New.BasicByte.CreateUsingMap(
 		"TestBytEnum",
-		[]string{"Alpha", "Beta"},
-		nil,
+		map[byte]string{0: "Alpha", 1: "Beta"},
 	)
 
 	// Act
-	_, err := bb.ValueByName("\"NonExistent\"")
+	_, err := bb.GetValueByName("\"NonExistent\"")
 
 	// Assert
 	if err == nil {
@@ -34,16 +33,15 @@ func Test_Cov18_BasicByte_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	}
 }
 
-func Test_Cov18_BasicInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicInt16_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt16.Create(
+	bi := enumimpl.New.BasicInt16.CreateUsingMap(
 		"TestInt16Enum",
-		[]string{"One", "Two"},
-		nil,
+		map[int16]string{0: "One", 1: "Two"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Missing\"")
+	_, err := bi.GetValueByName("\"Missing\"")
 
 	// Assert
 	if err == nil {
@@ -59,7 +57,7 @@ func Test_Cov18_BasicInt32_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) 
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NoMatch\"")
+	_, err := bi.GetValueByName("\"NoMatch\"")
 
 	// Assert
 	if err == nil {
@@ -75,7 +73,7 @@ func Test_Cov18_BasicInt8_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Unknown\"")
+	_, err := bi.GetValueByName("\"Unknown\"")
 
 	// Assert
 	if err == nil {
@@ -91,7 +89,7 @@ func Test_Cov18_BasicUInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T)
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NotHere\"")
+	_, err := bi.GetValueByName("\"NotHere\"")
 
 	// Assert
 	if err == nil {

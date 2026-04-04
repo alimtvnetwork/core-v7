@@ -14,7 +14,7 @@ import (
 
 func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(0)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	ccm.Add("hello")
@@ -27,7 +27,7 @@ func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
 
 func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(0)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	sum := ccm.AllLengthsSumLock()
@@ -42,7 +42,7 @@ func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 
 func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsValues(nil)
@@ -57,7 +57,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 
 func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsKeysOrValuesBothUsingFilter(nil, nil)
@@ -72,7 +72,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *test
 
 func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsKeysValuesBoth(nil)
@@ -87,7 +87,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.
 
 func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.AddLock("test")
@@ -100,7 +100,7 @@ func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 
 func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.Add("test")
@@ -115,10 +115,10 @@ func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 
 func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
-	hs := chm.GetHashset(true, "a")
+	hs := chm.GetHashset("a", true)
 
 	// Assert
 	if hs == nil {
@@ -128,7 +128,7 @@ func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 
 func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	hs := chm.GetHashsetLock(true, "a")
@@ -143,7 +143,7 @@ func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 
 func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	// Arrange
-	c := corestr.New.Collection.Strings("a", "b", "c")
+	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 	// Act
 	length := c.LengthLock()
@@ -221,7 +221,7 @@ func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	ll2 := corestr.Empty.LinkedList()
 
 	// Act
-	result := ll1.IsEqual(ll2, true)
+	result := ll1.IsEquals(ll2)
 
 	// Assert
 	if !result {
@@ -235,7 +235,7 @@ func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
 	ll2 := corestr.Empty.LinkedList().Add("a")
 
 	// Act
-	result := ll1.IsEqual(ll2, true)
+	result := ll1.IsEquals(ll2)
 
 	// Assert
 	if result {

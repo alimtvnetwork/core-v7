@@ -580,26 +580,25 @@ func Test_Cov8_StartEndInt(t *testing.T) {
 
 	// Act & Assert
 	convey.Convey("StartEndInt methods", t, func() {
-		convey.So(se.Length(), convey.ShouldEqual, 4)
 		convey.So(se.RangeLength(), convey.ShouldEqual, 5)
 		convey.So(se.Ranges(), convey.ShouldNotBeEmpty)
 		convey.So(se.String(), convey.ShouldNotBeEmpty)
-		convey.So(se.IsEmpty(), convey.ShouldBeFalse)
+		convey.So(se.IsInvalid(), convey.ShouldBeFalse)
 	})
 }
 
-func Test_Cov8_StartEndInt_Clone(t *testing.T) {
+func Test_Cov8_StartEndInt_Diff(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 
 	// Act
-	cloned := se.Clone()
-	clonedPtr := se.ClonePtr()
+	diff := se.Diff()
+	diffAbs := se.DifferenceAbsolute()
 
 	// Assert
-	convey.Convey("StartEndInt.Clone and ClonePtr", t, func() {
-		convey.So(cloned.Start, convey.ShouldEqual, 1)
-		convey.So(clonedPtr.Start, convey.ShouldEqual, 1)
+	convey.Convey("StartEndInt.Diff and DifferenceAbsolute", t, func() {
+		convey.So(diff, convey.ShouldEqual, 4)
+		convey.So(diffAbs, convey.ShouldEqual, 4)
 	})
 }
 

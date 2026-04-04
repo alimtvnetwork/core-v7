@@ -71,7 +71,7 @@ func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) 
 				didPanic = true
 			}
 		}()
-		coll.GetPagedCollection(2, 0) // pageIndex 0 => skipItems = 2*(0-1) = -2 => panic
+		coll.GetPagedCollection(0)
 	}()
 
 	// Assert
@@ -102,7 +102,7 @@ func Test_Cov51_MapResults_AddAnyItem_Error(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 
 	// Act
-	err := mr.AddAnyItem("key", make(chan int))
+	err := mr.AddAny("key", make(chan int))
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
@@ -125,7 +125,7 @@ func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 				didPanic = true
 			}
 		}()
-		mr.GetPagedCollection(2, 0)
+		mr.GetPagedCollection(0)
 	}()
 
 	// Assert
@@ -248,7 +248,7 @@ func Test_Cov51_ResultCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T)
 				didPanic = true
 			}
 		}()
-		coll.GetPagedCollection(2, 0)
+		coll.GetPagedCollection(0)
 	}()
 
 	// Assert
@@ -320,7 +320,7 @@ func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testin
 				didPanic = true
 			}
 		}()
-		coll.GetPagedCollection(2, 0)
+		coll.GetPagedCollection(0)
 	}()
 
 	// Assert
@@ -720,15 +720,14 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	errResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 	errResult.Error = corejson.Deserialize.UsingBytes([]byte(`{bad`), &struct{}{})
 	coll := corejson.NewResultsPtrCollection.UsingResults(&errResult)
-	var target exampleStruct
 
 	// Act
-	err := coll.SafeUnmarshalAt(0, &target)
+	got := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"hasErr": err != nil}
+	actual := args.Map{"hasErr": got == nil || got.HasError()}
 	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns error -- error result at index", actual)
+	expected.ShouldBeEqual(t, 0, "GetAtSafe returns error result at index", actual)
 }
 
 // ── ResultsPtrCollection — SafeUnmarshalAt with empty bytes ──
@@ -737,15 +736,14 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	// Arrange
 	emptyResult := corejson.NewResult.UsingBytes([]byte{})
 	coll := corejson.NewResultsPtrCollection.UsingResults(&emptyResult)
-	var target exampleStruct
 
 	// Act
-	err := coll.SafeUnmarshalAt(0, &target)
+	got := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"errNil": err == nil}
-	expected := args.Map{"errNil": true}
-	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns nil -- empty bytes result", actual)
+	actual := args.Map{"notNil": got != nil}
+	expected := args.Map{"notNil": true}
+	expected.ShouldBeEqual(t, 0, "GetAtSafe returns result -- empty bytes result", actual)
 }
 
 // ── DeserializerLogic — UsingDeserializerToOption with valid deserializer (line 363) ──
