@@ -793,7 +793,7 @@ func Test_Cov51_DeserializerLogic_UsingJsonerToAnyMust_Valid(t *testing.T) {
 		"hasErr": err != nil,
 	}
 	expected := args.Map{
-		"hasErr": true,
+		"hasErr": false,
 	}
 	expected.ShouldBeEqual(t, 0, "UsingJsonerToAnyMust deserializes -- valid jsoner", actual)
 }
