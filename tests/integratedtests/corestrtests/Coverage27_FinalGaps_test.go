@@ -42,7 +42,7 @@ func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 
 func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsValues(nil)
