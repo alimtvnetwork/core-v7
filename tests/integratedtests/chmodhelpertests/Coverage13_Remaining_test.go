@@ -854,8 +854,9 @@ func Test_Cov13_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 
 func Test_Cov13_DirFilesWithContent_Create_RemoveError(t *testing.T) {
 	skipOnWindows(t)
+	invalidDir := filepath.Join("/proc", "nonexistent_cov13", "dfc")
 	dfc := &chmodhelper.DirFilesWithContent{
-		Dir:         "/nonexistent/cov13/dfc",
+		Dir:         invalidDir,
 		DirFileMode: 0755,
 		Files: []chmodhelper.FileWithContent{
 			{RelativePath: "a.txt", FileMode: 0644, Content: []string{"hello"}},

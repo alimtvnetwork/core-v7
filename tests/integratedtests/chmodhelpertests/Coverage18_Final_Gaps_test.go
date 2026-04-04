@@ -467,9 +467,11 @@ func Test_Cov18_RwxWrapper_ApplyChmodSkipInvalid_InvalidPath(t *testing.T) {
 	if err != nil {
 		t.Skip("RwxWrapper creation failed")
 	}
+	// Use truly non-existent path (os.IsNotExist returns true)
+	nonExistent := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
-	err = wrapper.ApplyChmodSkipInvalid(string([]byte{0}))
+	err = wrapper.ApplyChmodSkipInvalid(nonExistent)
 
 	// Assert
 	actual := args.Map{"errNil": err == nil}

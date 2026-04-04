@@ -530,7 +530,8 @@ func Test_Cov4_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T)
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid("/nonexistent", "-rw-r--r--")
+	nonExistent := filepath.Join(t.TempDir(), "no_such_file")
+	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(nonExistent, "-rw-r--r--")
 	actual := args.Map{"assumedEqual": result}
 	expected := args.Map{"assumedEqual": true}
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqualRwxFullSkipInvalid returns error -- invalid path", actual)
@@ -540,7 +541,8 @@ func Test_Cov4_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid("/nonexistent", 0644)
+	nonExistent := filepath.Join(t.TempDir(), "no_such_file")
+	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(nonExistent, 0644)
 	actual := args.Map{"assumedEqual": result}
 	expected := args.Map{"assumedEqual": true}
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.IsEqualSkipInvalid returns error -- invalid path", actual)
