@@ -73,7 +73,7 @@ func Test_Cov18_BasicInt8_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Unknown\"")
+	_, err := bi.GetValueByName("\"Unknown\"")
 
 	// Assert
 	if err == nil {
