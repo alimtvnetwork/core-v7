@@ -118,7 +118,7 @@ func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 	chm := corestr.New.CharHashsetMap.Cap(0)
 
 	// Act
-	hs := chm.GetHashset(true, "a")
+	hs := chm.GetHashset("a", true)
 
 	// Assert
 	if hs == nil {
