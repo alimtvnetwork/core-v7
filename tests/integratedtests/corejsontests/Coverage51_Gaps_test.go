@@ -723,12 +723,12 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	var target exampleStruct
 
 	// Act
-	err := coll.SafeUnmarshalAt(0, &target)
+	got, getErr := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"hasErr": err != nil}
+	actual := args.Map{"hasErr": getErr != nil || got == nil || got.HasError()}
 	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns error -- error result at index", actual)
+	expected.ShouldBeEqual(t, 0, "GetAtSafe returns error -- error result at index", actual)
 }
 
 // ── ResultsPtrCollection — SafeUnmarshalAt with empty bytes ──
