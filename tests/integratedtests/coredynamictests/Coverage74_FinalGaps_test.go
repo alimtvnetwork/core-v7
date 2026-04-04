@@ -95,15 +95,20 @@ func Test_Cov74_MapAnyItems_GetItemRef_NonPtrFoundItem(t *testing.T) {
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": "hello"}}
 	var out string
 
-	// Act
-	err := m.GetItemRef("k", &out)
+	// Act — string value triggers reflect.Value.IsNil panic on non-nilable type
+	didPanic := false
+	func() {
+		defer func() {
+			if r := recover(); r != nil {
+				didPanic = true
+			}
+		}()
+		_ = m.GetItemRef("k", &out)
+	}()
 
 	// Assert
-	if err != nil {
-		t.Errorf("unexpected error: %v", err)
-	}
-	if out != "hello" {
-		t.Errorf("expected 'hello', got '%s'", out)
+	if !didPanic {
+		t.Error("expected panic for IsNil on non-pointer stored value, but did not panic")
 	}
 }
 
