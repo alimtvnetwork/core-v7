@@ -89,7 +89,7 @@ func Test_Cov18_BasicUInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T)
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NotHere\"")
+	_, err := bi.GetValueByName("\"NotHere\"")
 
 	// Assert
 	if err == nil {
