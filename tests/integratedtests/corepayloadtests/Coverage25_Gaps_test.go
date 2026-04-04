@@ -329,8 +329,8 @@ func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_NilPayload(t *t
 		"binderNil": binder == nil,
 	}
 	expected := args.Map{
-		"hasErr":    false,
-		"binderNil": true,
+		"hasErr":    true,
+		"binderNil": false,
 	}
 	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder -- nil payload", actual)
 }

@@ -15,7 +15,8 @@ func Test_Cov12_Write_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.Write([]byte("hello"))
 	if err == nil {
 		t.Fatal("expected error")
@@ -40,8 +41,9 @@ func Test_Cov12_WritePath_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
-	err := rw.WritePath(false, "/nonexistent/cov12/wp.txt", []byte("x"))
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
+	err := rw.WritePath(false, filepath.Join(invalidDir, "wp.txt"), []byte("x"))
 	if err == nil {
 		t.Fatal("expected error")
 	}
@@ -66,7 +68,8 @@ func Test_Cov12_WriteRelativePath_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.WriteRelativePath(false, "rel.txt", []byte("x"))
 	if err == nil {
 		t.Fatal("expected error")
@@ -91,7 +94,8 @@ func Test_Cov12_WriteString_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.WriteString("hello")
 	if err == nil {
 		t.Fatal("expected error")
@@ -116,7 +120,8 @@ func Test_Cov12_WriteAny_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.json")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.json")
 	err := rw.WriteAny(map[string]string{"k": "v"})
 	if err == nil {
 		t.Fatal("expected error")
@@ -129,7 +134,8 @@ func Test_Cov12_Read_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	_, err := rw.Read()
 	if err == nil {
 		t.Fatal("expected error")
@@ -164,7 +170,8 @@ func Test_Cov12_ReadMust_Panic(t *testing.T) {
 			t.Fatal("expected panic")
 		}
 	}()
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	rw.ReadMust()
 }
 
@@ -174,7 +181,8 @@ func Test_Cov12_ReadString_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	_, err := rw.ReadString()
 	if err == nil {
 		t.Fatal("expected error")
@@ -206,7 +214,8 @@ func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
 			t.Fatal("expected panic")
 		}
 	}()
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	rw.ReadStringMust()
 }
 
@@ -257,7 +266,8 @@ func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
 	}
 	// name() is unexported; it's called inside errorWrapFilePath
 	// which is triggered by any Write error
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.Write([]byte("x"))
 	if err == nil {
 		t.Fatal("expected error")
