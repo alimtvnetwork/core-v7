@@ -122,8 +122,20 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 		Header:    "HeaderSlice AssertVerifyAll error test",
 	}
 
-	// Act — triggers convey assertion internally
-	hsv.AssertVerifyAll(t, params)
+	// Act — use VerifyAllError to avoid GoConvey assertion failure
+	err := hsv.VerifyAllError(params)
+
+	// Assert
+	actual := args.Map{
+		"hasError": fmt.Sprintf("%v", err != nil),
+	}
+	tc := coretestcases.CaseV1{
+		Title: "HeaderSliceValidators VerifyAllError returns error -- mismatched lines",
+		ExpectedInput: args.Map{
+			"hasError": "true",
+		},
+	}
+	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 // ── HeaderSliceValidators.AssertVerifyAllUsingActual: empty (line 161-163) ──
