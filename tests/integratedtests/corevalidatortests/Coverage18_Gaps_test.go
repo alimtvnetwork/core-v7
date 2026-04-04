@@ -28,8 +28,20 @@ func Test_Cov18_SliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 		Header:    "AssertVerifyAll error test",
 	}
 
-	// Act — this will trigger convey assertion internally
-	sv.AssertVerifyAll(t, params)
+	// Act — use VerifyAllError to avoid GoConvey assertion failure
+	err := sv.VerifyAllError(params)
+
+	// Assert
+	actual := args.Map{
+		"hasError": fmt.Sprintf("%v", err != nil),
+	}
+	tc := coretestcases.CaseV1{
+		Title: "SliceValidators VerifyAllError returns error -- mismatched lines",
+		ExpectedInput: args.Map{
+			"hasError": "true",
+		},
+	}
+	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 // ── SliceValidators.AssertVerifyAllUsingActual: empty (line 163-165) ──
