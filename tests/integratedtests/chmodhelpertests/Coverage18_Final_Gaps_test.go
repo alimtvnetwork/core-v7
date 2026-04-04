@@ -301,8 +301,8 @@ func Test_Cov18_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
 // ── chmodVerifier — IsEqualRwxFullSkipInvalid with invalid path ──
 
 func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
-	// Arrange
-	invalidPath := string([]byte{0})
+	// Arrange — use truly non-existent path (os.IsNotExist returns true)
+	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(invalidPath, "-rwxrwxrwx")
@@ -316,8 +316,8 @@ func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T
 // ── chmodVerifier — IsEqualSkipInvalid with invalid path ──
 
 func Test_Cov18_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
-	// Arrange
-	invalidPath := string([]byte{0})
+	// Arrange — use truly non-existent path
+	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(invalidPath, 0755)
