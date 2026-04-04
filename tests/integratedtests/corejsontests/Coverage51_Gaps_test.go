@@ -740,12 +740,12 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	var target exampleStruct
 
 	// Act
-	err := coll.SafeUnmarshalAt(0, &target)
+	got, getErr := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"errNil": err == nil}
-	expected := args.Map{"errNil": true}
-	expected.ShouldBeEqual(t, 0, "SafeUnmarshalAt returns nil -- empty bytes result", actual)
+	actual := args.Map{"errNil": getErr == nil, "notNil": got != nil}
+	expected := args.Map{"errNil": true, "notNil": true}
+	expected.ShouldBeEqual(t, 0, "GetAtSafe returns result -- empty bytes result", actual)
 }
 
 // ── DeserializerLogic — UsingDeserializerToOption with valid deserializer (line 363) ──

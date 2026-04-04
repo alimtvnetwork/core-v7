@@ -55,8 +55,8 @@ func Test_Cov25_Attributes_IsEqual_PagingDifferent(t *testing.T) {
 
 func Test_Cov25_Attributes_IsEqual_KeyValuePairsDifferent(t *testing.T) {
 	// Arrange
-	kv1 := corestr.New.Hashmap.UsingPairs("k", "v1")
-	kv2 := corestr.New.Hashmap.UsingPairs("k", "v2")
+	kv1 := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v1"})
+	kv2 := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v2"})
 	a1 := corepayload.New.Attributes.All(nil, kv1, nil, nil, nil, nil, nil)
 	a2 := corepayload.New.Attributes.All(nil, kv2, nil, nil, nil, nil, nil)
 

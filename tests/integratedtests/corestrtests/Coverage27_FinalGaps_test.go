@@ -27,7 +27,7 @@ func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
 
 func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(0)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	sum := ccm.AllLengthsSumLock()

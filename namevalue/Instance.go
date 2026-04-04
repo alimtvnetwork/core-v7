@@ -22,7 +22,7 @@ func (it *Instance[K, V]) String() string {
 	}
 
 	return fmt.Sprintf(
-		constants.KeyValShortFormat,
+		"%v = %v",
 		it.Name,
 		it.Value)
 }
