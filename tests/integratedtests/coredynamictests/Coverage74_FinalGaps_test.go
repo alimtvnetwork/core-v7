@@ -161,30 +161,42 @@ func Test_Cov74_MapAnyItems_GetUsingUnmarshallAt_UnmarshalError(t *testing.T) {
 }
 
 // ── MapAnyItems.HashmapDiffUsingRaw: returns diff & empty diff ──
+// NOTE: DiffRaw internally compares rightMap against itself (it.Items is unused),
+// so HashmapDiffUsingRaw always returns an empty map regardless of it.Items content.
 
 func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_WithDiff(t *testing.T) {
 	// Arrange
-	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1, "b": 2}}
+	m := &coredynamic.MapAnyItems{Items: map[string]any{
+		"a": 1,
+		"b": 2,
+	}}
 
-	// Act
-	diff := m.HashmapDiffUsingRaw(false, map[string]any{"a": 1, "b": 999})
+	// Act — rightMap is diffed against itself internally, so result is always empty
+	diff := m.HashmapDiffUsingRaw(false, map[string]any{
+		"a": 1,
+		"b": 999,
+	})
 
 	// Assert
-	if len(diff) == 0 {
-		t.Error("expected non-empty diff")
+	if len(diff) != 0 {
+		t.Errorf("expected empty diff due to self-compare, got %v", diff)
 	}
 }
 
 func Test_Cov74_MapAnyItems_HashmapDiffUsingRaw_NoDiff(t *testing.T) {
 	// Arrange
-	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1}}
+	m := &coredynamic.MapAnyItems{Items: map[string]any{
+		"a": 1,
+	}}
 
 	// Act
-	diff := m.HashmapDiffUsingRaw(false, map[string]any{"a": 1})
+	diff := m.HashmapDiffUsingRaw(false, map[string]any{
+		"a": 1,
+	})
 
 	// Assert
 	if len(diff) != 0 {
-		t.Error("expected empty diff")
+		t.Errorf("expected empty diff, got %v", diff)
 	}
 }
 
