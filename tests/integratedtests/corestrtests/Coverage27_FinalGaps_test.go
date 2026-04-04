@@ -143,7 +143,7 @@ func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 
 func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	// Arrange
-	c := corestr.New.Collection.Strings("a", "b", "c")
+	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 	// Act
 	length := c.LengthLock()

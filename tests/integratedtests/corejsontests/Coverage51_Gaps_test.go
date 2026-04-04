@@ -125,7 +125,7 @@ func Test_Cov51_MapResults_GetPagedItems_NegativeIndex_Panic(t *testing.T) {
 				didPanic = true
 			}
 		}()
-		mr.GetPagedCollection(2, 0)
+		mr.GetPagedCollection(0)
 	}()
 
 	// Assert
