@@ -87,7 +87,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.
 
 func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.AddLock("test")
@@ -100,7 +100,7 @@ func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 
 func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.Add("test")
