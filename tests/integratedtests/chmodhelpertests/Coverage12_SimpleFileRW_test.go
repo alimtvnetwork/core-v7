@@ -214,7 +214,8 @@ func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
 			t.Fatal("expected panic")
 		}
 	}()
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	rw.ReadStringMust()
 }
 
