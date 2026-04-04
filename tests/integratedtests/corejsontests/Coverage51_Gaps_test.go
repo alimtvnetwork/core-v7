@@ -320,7 +320,7 @@ func Test_Cov51_ResultsPtrCollection_GetPagedItems_NegativeIndex_Panic(t *testin
 				didPanic = true
 			}
 		}()
-		coll.GetPagedCollection(2, 0)
+		coll.GetPagedCollection(0)
 	}()
 
 	// Assert
