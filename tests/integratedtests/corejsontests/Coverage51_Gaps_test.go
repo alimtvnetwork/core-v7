@@ -102,7 +102,7 @@ func Test_Cov51_MapResults_AddAnyItem_Error(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 
 	// Act
-	err := mr.AddAnyItem("key", make(chan int))
+	err := mr.AddAny("key", make(chan int))
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
