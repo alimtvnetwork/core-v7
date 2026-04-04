@@ -736,7 +736,6 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	// Arrange
 	emptyResult := corejson.NewResult.UsingBytes([]byte{})
 	coll := corejson.NewResultsPtrCollection.UsingResults(&emptyResult)
-	var target exampleStruct
 
 	// Act
 	got, getErr := coll.GetAtSafe(0)
