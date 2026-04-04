@@ -57,7 +57,7 @@ func Test_Cov18_BasicInt32_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) 
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NoMatch\"")
+	_, err := bi.GetValueByName("\"NoMatch\"")
 
 	// Assert
 	if err == nil {
