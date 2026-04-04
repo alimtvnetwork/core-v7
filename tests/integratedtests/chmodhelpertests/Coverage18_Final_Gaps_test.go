@@ -59,7 +59,7 @@ func Test_Cov18_GetRecursivePathsContinueOnError_InvalidRoot(t *testing.T) {
 func Test_Cov18_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 	// Arrange
 	existingRwx := "rwx"
-	invalidWildcard := "zzz" // invalid rwx chars
+	invalidWildcard := "zzzz" // invalid length (not 3)
 
 	// Act
 	result, err := chmodhelper.MergeRwxWildcardWithFixedRwx(existingRwx, invalidWildcard)
