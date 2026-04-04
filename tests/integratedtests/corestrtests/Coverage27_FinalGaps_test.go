@@ -221,7 +221,7 @@ func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	ll2 := corestr.Empty.LinkedList()
 
 	// Act
-	result := ll1.IsEqual(ll2, true)
+	result := ll1.IsEquals(ll2)
 
 	// Assert
 	if !result {
