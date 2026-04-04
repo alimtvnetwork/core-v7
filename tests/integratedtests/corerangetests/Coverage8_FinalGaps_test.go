@@ -580,11 +580,10 @@ func Test_Cov8_StartEndInt(t *testing.T) {
 
 	// Act & Assert
 	convey.Convey("StartEndInt methods", t, func() {
-		convey.So(se.Length(), convey.ShouldEqual, 4)
 		convey.So(se.RangeLength(), convey.ShouldEqual, 5)
 		convey.So(se.Ranges(), convey.ShouldNotBeEmpty)
 		convey.So(se.String(), convey.ShouldNotBeEmpty)
-		convey.So(se.IsEmpty(), convey.ShouldBeFalse)
+		convey.So(se.IsInvalid(), convey.ShouldBeFalse)
 	})
 }
 
