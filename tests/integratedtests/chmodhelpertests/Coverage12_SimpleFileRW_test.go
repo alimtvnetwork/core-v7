@@ -120,7 +120,8 @@ func Test_Cov12_WriteAny_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
-	rw := newTestRW("/nonexistent/cov12", "test.json")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.json")
 	err := rw.WriteAny(map[string]string{"k": "v"})
 	if err == nil {
 		t.Fatal("expected error")
