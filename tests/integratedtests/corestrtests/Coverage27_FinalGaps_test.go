@@ -72,7 +72,7 @@ func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *test
 
 func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsKeysValuesBoth(nil)
