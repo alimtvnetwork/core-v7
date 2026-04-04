@@ -266,7 +266,8 @@ func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
 	}
 	// name() is unexported; it's called inside errorWrapFilePath
 	// which is triggered by any Write error
-	rw := newTestRW("/nonexistent/cov12", "test.txt")
+	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
+	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.Write([]byte("x"))
 	if err == nil {
 		t.Fatal("expected error")
