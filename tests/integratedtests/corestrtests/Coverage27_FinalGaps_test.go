@@ -540,14 +540,15 @@ func Test_Cov27_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{})
 
-	// Act
+	// Act — strings.Split("", ",") returns [""] (length 1), but ss.Length() is 0
+	// So lengths don't match → returns false
 	result := ss.IsEqualByFuncLinesSplit(false, ",", "", func(i int, l, r string) bool {
 		return l == r
 	})
 
 	// Assert
-	if !result {
-		t.Error("expected true for both empty")
+	if result {
+		t.Error("expected false for length mismatch (empty slice vs split-of-empty-string)")
 	}
 }
 

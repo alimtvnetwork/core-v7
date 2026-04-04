@@ -204,9 +204,9 @@ func Test_Cov18_DynamicMap_ConvMapStringString_NonStringValue(t *testing.T) {
 	// Act
 	result := dm.ConvMapStringString()
 
-	// Assert — key "k" should be skipped since value is not a string
-	if len(result) != 0 {
-		t.Errorf("expected empty map, got %d entries", len(result))
+	// Assert — KeyValueString uses Sprintf, so int 123 becomes "123"; entry is added
+	if len(result) != 1 {
+		t.Errorf("expected 1 entry (Sprintf converts non-strings), got %d entries", len(result))
 	}
 }
 
