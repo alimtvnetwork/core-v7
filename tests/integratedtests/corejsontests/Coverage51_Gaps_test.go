@@ -71,7 +71,7 @@ func Test_Cov51_BytesCollection_GetPagedItems_NegativeIndex_Panic(t *testing.T) 
 				didPanic = true
 			}
 		}()
-		coll.GetPagedCollection(2, 0) // pageIndex 0 => skipItems = 2*(0-1) = -2 => panic
+		coll.GetPagedCollection(0)
 	}()
 
 	// Assert

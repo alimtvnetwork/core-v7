@@ -128,7 +128,7 @@ func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 
 func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	hs := chm.GetHashsetLock(true, "a")
