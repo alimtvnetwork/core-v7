@@ -722,12 +722,12 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	coll := corejson.NewResultsPtrCollection.UsingResults(&errResult)
 
 	// Act
-	got, getErr := coll.GetAtSafe(0)
+	got := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"hasErr": getErr != nil || got == nil || got.HasError()}
+	actual := args.Map{"hasErr": got == nil || got.HasError()}
 	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "GetAtSafe returns error -- error result at index", actual)
+	expected.ShouldBeEqual(t, 0, "GetAtSafe returns error result at index", actual)
 }
 
 // ── ResultsPtrCollection — SafeUnmarshalAt with empty bytes ──
