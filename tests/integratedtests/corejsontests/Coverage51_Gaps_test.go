@@ -738,11 +738,11 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_EmptyBytes(t *testing.T) {
 	coll := corejson.NewResultsPtrCollection.UsingResults(&emptyResult)
 
 	// Act
-	got, getErr := coll.GetAtSafe(0)
+	got := coll.GetAtSafe(0)
 
 	// Assert
-	actual := args.Map{"errNil": getErr == nil, "notNil": got != nil}
-	expected := args.Map{"errNil": true, "notNil": true}
+	actual := args.Map{"notNil": got != nil}
+	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "GetAtSafe returns result -- empty bytes result", actual)
 }
 

@@ -37,8 +37,8 @@ func Test_Cov25_Attributes_IsEqual_BothNilError(t *testing.T) {
 
 func Test_Cov25_Attributes_IsEqual_PagingDifferent(t *testing.T) {
 	// Arrange
-	p1 := &corepayload.PagingInfo{PageIndex: 1, PageSize: 10}
-	p2 := &corepayload.PagingInfo{PageIndex: 2, PageSize: 10}
+	p1 := &corepayload.PagingInfo{CurrentPageIndex: 1, PerPageItems: 10}
+	p2 := &corepayload.PagingInfo{CurrentPageIndex: 2, PerPageItems: 10}
 	a1 := corepayload.New.Attributes.All(nil, nil, nil, p1, nil, nil, nil)
 	a2 := corepayload.New.Attributes.All(nil, nil, nil, p2, nil, nil, nil)
 
