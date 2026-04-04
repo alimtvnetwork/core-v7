@@ -187,9 +187,9 @@ func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testin
 		"hasError": fmt.Sprintf("%v", err != nil),
 	}
 	tc := coretestcases.CaseV1{
-		Title: "UserInputsMergeWithError returns nil -- nil err and empty message",
+		Title: "UserInputsMergeWithError returns error -- nil err but non-empty formatting message",
 		ExpectedInput: args.Map{
-			"hasError": "false",
+			"hasError": "true",
 		},
 	}
 	tc.ShouldBeEqualMapFirst(t, actual)
