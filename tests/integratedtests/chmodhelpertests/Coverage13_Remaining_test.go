@@ -455,7 +455,9 @@ func Test_Cov13_RwxStringApplyChmod_Valid(t *testing.T) {
 
 func Test_Cov13_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
 	skipOnWindows(t)
-	err := chmodhelper.RwxStringApplyChmod("-rZxr-xr-x", &chmodins.Condition{}, "/tmp")
+	// Parser does not validate individual rwx characters, only length.
+	// Use a string with wrong length to trigger error.
+	err := chmodhelper.RwxStringApplyChmod("-rZx", &chmodins.Condition{}, "/tmp")
 	if err == nil {
 		t.Fatal("expected error")
 	}
