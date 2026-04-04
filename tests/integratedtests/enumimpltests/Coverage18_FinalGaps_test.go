@@ -17,16 +17,15 @@ import (
 //    unwrapped map and also not in the double-quoted map.
 // ──
 
-func Test_Cov18_BasicByte_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicByte_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bb := enumimpl.New.BasicByte.Create(
+	bb := enumimpl.New.BasicByte.CreateUsingMap(
 		"TestBytEnum",
-		[]string{"Alpha", "Beta"},
-		nil,
+		map[byte]string{0: "Alpha", 1: "Beta"},
 	)
 
 	// Act
-	_, err := bb.ValueByName("\"NonExistent\"")
+	_, err := bb.GetValueByName("\"NonExistent\"")
 
 	// Assert
 	if err == nil {
