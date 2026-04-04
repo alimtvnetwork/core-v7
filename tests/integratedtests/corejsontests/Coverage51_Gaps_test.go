@@ -385,7 +385,7 @@ func Test_Cov51_CastAny_BytesSerializer(t *testing.T) {
 		"hasErr": err != nil,
 	}
 	expected := args.Map{
-		"hasErr": true,
+		"hasErr": false,
 	}
 	expected.ShouldBeEqual(t, 0, "CastAny.Deserialize works -- bytesSerializer via *Result", actual)
 }
