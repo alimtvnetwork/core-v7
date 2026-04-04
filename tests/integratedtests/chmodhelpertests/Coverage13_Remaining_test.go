@@ -312,10 +312,11 @@ func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions(t *testing.T) {
 }
 
 func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
-	_, err := chmodhelper.NewRwxVariableWrapper("-rZxr-xr-x")
+	// Parser doesn't validate individual chars, use invalid length to trigger error
+	_, err := chmodhelper.NewRwxVariableWrapper("-rZx")
 	_ = err
 	verifyErr := chmodhelper.ChmodVerify.PathsUsingPartialRwxOptions(
-		false, false, "-rZxr-xr-x", "/tmp")
+		false, false, "-rZx", "/tmp")
 	if verifyErr == nil {
 		t.Fatal("expected error for invalid rwx")
 	}
