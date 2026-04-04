@@ -720,7 +720,6 @@ func Test_Cov51_ResultsPtrCollection_SafeUnmarshalAt_ErrorResult(t *testing.T) {
 	errResult := corejson.NewResult.UsingBytes([]byte(`{invalid`))
 	errResult.Error = corejson.Deserialize.UsingBytes([]byte(`{bad`), &struct{}{})
 	coll := corejson.NewResultsPtrCollection.UsingResults(&errResult)
-	var target exampleStruct
 
 	// Act
 	got, getErr := coll.GetAtSafe(0)
