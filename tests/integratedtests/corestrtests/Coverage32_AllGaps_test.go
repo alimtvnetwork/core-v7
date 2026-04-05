@@ -82,21 +82,21 @@ func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T
 	actual.ShouldBeEqual(t, 1, "LinkedCollections SafePointerIndexAt out of range", expected)
 }
 
-// ── LinkedCollections.FlattenToSingleCollection (line 646) ──
+// ── LinkedCollections.ToCollection (line 1265) ──
 
-func Test_Cov32_LinkedCollections_FlattenToSingleCollection_I29(t *testing.T) {
+func Test_Cov32_LinkedCollections_ToCollection_I29(t *testing.T) {
 	// Arrange
 	lc := corestr.New.LinkedCollection.Create()
 	lc.Add(corestr.New.Collection.Strings([]string{"v1", "v2"}))
 	lc.Add(corestr.New.Collection.Strings([]string{"v3"}))
 
 	// Act
-	flattened := lc.FlattenToSingleCollection(0)
+	merged := lc.ToCollection(0)
 
 	// Assert
-	actual := args.Map{"length": flattened.Length()}
+	actual := args.Map{"length": merged.Length()}
 	expected := args.Map{"length": 3}
-	actual.ShouldBeEqual(t, 1, "LinkedCollections FlattenToSingleCollection", expected)
+	actual.ShouldBeEqual(t, 1, "LinkedCollections ToCollection", expected)
 }
 
 // ── LinkedCollections: remaining dead-code paths ──
