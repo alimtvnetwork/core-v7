@@ -102,7 +102,7 @@ func Test_I28_PayloadWrapper_HandleError_NoError(t *testing.T) {
 func Test_I28_PayloadWrapper_IsStandardTaskEntityEqual_Different(t *testing.T) {
 	// Arrange
 	pw1 := corepayload.New.PayloadWrapper.Empty()
-	pw2 := corepayload.New.PayloadWrapper.NameIdentifier("other", "id-99")
+	pw2 := corepayload.New.PayloadWrapper.Create("other", "id-99", "task", "cat", "data")
 
 	// Act
 	result := pw1.IsStandardTaskEntityEqual(pw2)
