@@ -318,9 +318,9 @@ func Test_I28_LinkedCollections_ToCollection(t *testing.T) {
 func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollectionsOfCollection", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
-		lc.Add(corestr.New.Collection.Strings("a", "b"))
-		lc.Add(corestr.New.Collection.Strings("c"))
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
+		lc.Add(corestr.New.Collection.Strings([]string{"c"}))
 
 		// Act
 		result := lc.ToCollectionsOfCollection(0)
