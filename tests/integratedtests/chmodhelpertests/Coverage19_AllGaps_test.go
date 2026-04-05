@@ -556,7 +556,10 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 	subDir := filepath.Join(tmpDir, "inner")
 	_ = os.Mkdir(subDir, 0o755)
 	_ = os.WriteFile(filepath.Join(subDir, "f.txt"), []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 
 	// Act
 	err := wrapper.LinuxApplyRecursive(false, tmpDir)
