@@ -355,7 +355,7 @@ func Test_I28_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 
 func Test_I28_PayloadsCollection_FilterEmpty(t *testing.T) {
 	// Arrange
-	pc := corepayload.New.PayloadsCollection.Cap(0)
+	pc := corepayload.New.PayloadsCollection.UsingCap(0)
 
 	// Act
 	result := pc.Filter(func(index int, pw *corepayload.PayloadWrapper) bool {
