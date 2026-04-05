@@ -138,7 +138,7 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 
 func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
-	d := coredynamic.NewDynamic("test")
+	d := coredynamic.NewDynamic("test", true)
 	jsonResult := corejson.New(d)
 
 	// Act
