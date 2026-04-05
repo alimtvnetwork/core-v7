@@ -71,7 +71,7 @@ func Test_Cov32_Collection_JsonString_I29(t *testing.T) {
 func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T) {
 	// Arrange
 	lc := corestr.New.LinkedCollection.Create()
-	lc.Add("a", corestr.New.Collection.Strings([]string{"x"}))
+	lc.Add(corestr.New.Collection.Strings([]string{"x"}))
 
 	// Act
 	result := lc.SafePointerIndexAt(99)
