@@ -574,7 +574,10 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 
 func Test_Cov19_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullString("rwxr-xr-x")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 
 	// Act
 	result := wrapper.IsEqualVarWrapper(nil)
