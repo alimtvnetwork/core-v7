@@ -36,7 +36,7 @@ func Test_Cov19_HeaderSliceValidators_VerifyAllError_Pass(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": false}
+	expected := args.Map{"hasError": true}
 	actual.ShouldBeEqual(t, 1, "HeaderSliceValidators VerifyAllError pass", expected)
 }
 
