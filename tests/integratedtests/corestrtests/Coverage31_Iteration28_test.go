@@ -128,7 +128,7 @@ func Test_I28_CharHashsetMap_AddAll_Empty(t *testing.T) {
 		chm := corestr.New.CharHashsetMap.Cap(4)
 
 		// Act
-		result := chm.AddAll(0, nil)
+		result := chm.AddStrings()
 
 		// Assert
 		actual := args.Map{"length": result.Length()}
@@ -224,8 +224,8 @@ func Test_I28_ValidValue_ParseInjectUsingJson_Error(t *testing.T) {
 func Test_I28_LinkedCollections_SafeIndexAt_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_SafeIndexAt_OutOfRange", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
-		c1 := corestr.New.Collection.Strings("a", "b")
+		lc := corestr.New.LinkedCollection.Create()
+		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
 		lc.Add(c1)
 
 		// Act
@@ -243,8 +243,8 @@ func Test_I28_LinkedCollections_SafeIndexAt_OutOfRange(t *testing.T) {
 func Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
-		c1 := corestr.New.Collection.Strings("a", "b")
+		lc := corestr.New.LinkedCollection.Create()
+		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
 		lc.Add(c1)
 
 		// Act
@@ -262,11 +262,11 @@ func Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
 func Test_I28_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_IsChainEqual_BothEmpty", func() {
 		// Arrange
-		lc1 := corestr.New.LinkedCollections.Create()
-		lc2 := corestr.New.LinkedCollections.Create()
+		lc1 := corestr.New.LinkedCollection.Create()
+		lc2 := corestr.New.LinkedCollection.Create()
 
 		// Act
-		result := lc1.IsChainEqual(lc2)
+		result := lc1.IsEqualsPtr(lc2)
 
 		// Assert
 		actual := args.Map{"isEqual": result}
@@ -285,7 +285,7 @@ func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 		lc2.Add(corestr.New.Collection.Strings([]string{"a"}))
 
 		// Act
-		result := lc1.IsChainEqual(lc2)
+			result := lc1.IsEqualsPtr(lc2)
 
 		// Assert
 		actual := args.Map{"isEqual": result}

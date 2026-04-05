@@ -12,6 +12,15 @@ import (
 	"github.com/smartystreets/goconvey/convey"
 )
 
+func mustRwxWrapper(rwx string) chmodhelper.RwxWrapper {
+	wrapper, err := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen(rwx)
+	if err != nil {
+		panic(err)
+	}
+
+	return wrapper
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 // Coverage19 — chmodhelper final 95 lines
 // ══════════════════════════════════════════════════════════════════════════════
@@ -172,7 +181,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_ValidFile(t *testing.T) {
 	testFile := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.ApplyChmod(false, testFile)
@@ -191,7 +200,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.ApplyChmod(false, "/no/such/path/ever")
@@ -210,7 +219,7 @@ func Test_Cov19_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.ApplyChmod(true, "/no/such/path/ever")
@@ -229,7 +238,7 @@ func Test_Cov19_RwxWrapper_ApplyChmodSkipInvalid(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.ApplyChmodSkipInvalid("/no/such/path/ever")
@@ -252,7 +261,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_ValidDir(t *testing.T) {
 	subDir := filepath.Join(tmpDir, "sub")
 	_ = os.Mkdir(subDir, 0o755)
 	_ = os.WriteFile(filepath.Join(subDir, "a.txt"), []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper := mustRwxWrapper("rwxrwxrwx")
 
 	// Act
 	err := wrapper.LinuxApplyRecursive(false, tmpDir)
@@ -271,7 +280,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidNotSkip(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.LinuxApplyRecursive(false, "/no/such/path/ever")
@@ -290,7 +299,7 @@ func Test_Cov19_RwxWrapper_LinuxApplyRecursive_InvalidSkip(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.LinuxApplyRecursive(true, "/no/such/path/ever")
@@ -311,7 +320,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_ValidDir(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	_ = os.WriteFile(filepath.Join(tmpDir, "a.txt"), []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper := mustRwxWrapper("rwxrwxrwx")
 
 	// Act
 	err := wrapper.ApplyRecursive(false, tmpDir)
@@ -330,7 +339,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_InvalidNotSkip(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	err := wrapper.ApplyRecursive(false, "/no/such/path/ever")
@@ -352,7 +361,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_SingleFile(t *testing.T) {
 	tmpDir := t.TempDir()
 	testFile := filepath.Join(tmpDir, "single.txt")
 	_ = os.WriteFile(testFile, []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper := mustRwxWrapper("rwxrwxrwx")
 
 	// Act
 	err := wrapper.ApplyRecursive(false, testFile)
@@ -574,10 +583,7 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 
 func Test_Cov19_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
-	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullString("rwxr-xr-x")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	wrapper := mustRwxWrapper("rwxr-xr-x")
 
 	// Act
 	result := wrapper.IsEqualVarWrapper(nil)
