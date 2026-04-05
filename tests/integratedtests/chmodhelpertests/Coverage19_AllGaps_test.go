@@ -600,9 +600,15 @@ func Test_Cov19_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.
 	testFile := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r*xr-xr-x")
+	if ogoErr != nil {
+		t.Fatalf("unexpected ogo error: %v", ogoErr)
+	}
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "r*xr-xr-x",
-		IsSkipOnInvalid:    false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
