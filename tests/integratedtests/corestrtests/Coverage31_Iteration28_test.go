@@ -332,20 +332,20 @@ func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	})
 }
 
-// ---------- LinkedCollections: AddFirstNonNil all nil ----------
+// ---------- LinkedCollections: AddCollections all nil ----------
 
-func Test_I28_LinkedCollections_AddFirstNonNil_AllNil(t *testing.T) {
-	safeTest(t, "Test_I28_LinkedCollections_AddFirstNonNil_AllNil", func() {
+func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
+	safeTest(t, "Test_I28_LinkedCollections_AddCollections_AllNil", func() {
 		// Arrange
 		lc := corestr.New.LinkedCollections.Create()
 
 		// Act
-		result := lc.AddFirstNonNil(nil, nil, nil)
+		result := lc.AddCollections([]*corestr.Collection{nil, nil, nil})
 
 		// Assert
 		actual := args.Map{"isEmpty": result.IsEmpty()}
 		expected := args.Map{"isEmpty": true}
-		expected.ShouldBeEqual(t, 0, "AddFirstNonNil returns self -- all nil", actual)
+		expected.ShouldBeEqual(t, 0, "AddCollections returns self -- all nil", actual)
 	})
 }
 
