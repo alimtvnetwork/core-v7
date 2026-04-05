@@ -87,8 +87,8 @@ func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T
 func Test_Cov32_LinkedCollections_FlattenToSingleCollection_I29(t *testing.T) {
 	// Arrange
 	lc := corestr.New.LinkedCollection.Create()
-	lc.Add("key1", corestr.New.Collection.Strings([]string{"v1", "v2"}))
-	lc.Add("key2", corestr.New.Collection.Strings([]string{"v3"}))
+	lc.Add(corestr.New.Collection.Strings([]string{"v1", "v2"}))
+	lc.Add(corestr.New.Collection.Strings([]string{"v3"}))
 
 	// Act
 	flattened := lc.FlattenToSingleCollection(0)
