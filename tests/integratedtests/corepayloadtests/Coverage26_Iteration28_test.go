@@ -238,7 +238,7 @@ func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
 
 // ---------- TypedPayloadCollection: ClonePtr ----------
 
-func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
+func Test_I28_TypedPayloadCollection_Clone_SingleItem(t *testing.T) {
 	// Arrange
 	type simpleUser struct {
 		Name string `json:"name"`
@@ -253,7 +253,7 @@ func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
 	}
 
 	// Act
-	cloned, err := collection.ClonePtr()
+	cloned, err := collection.Clone()
 
 	// Assert
 	actual := args.Map{
@@ -264,7 +264,7 @@ func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
 		"errNil":   true,
 		"notNil":   true,
 	}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns valid copy -- single item", actual)
+	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- single item", actual)
 }
 
 // ---------- TypedPayloadWrapper: ClonePtr ----------
