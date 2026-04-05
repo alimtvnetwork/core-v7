@@ -105,7 +105,7 @@ func Test_Cov19_RwxInstructionExecutor_VerifyMismatch(t *testing.T) {
 	testFile := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(testFile, []byte("data"), 0o777)
 
-	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r--------")
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-r--------")
 	if ogoErr != nil {
 		panic(ogoErr)
 	}
@@ -149,7 +149,7 @@ func Test_Cov19_RwxVariableWrapper_VerifyWithNilRwx(t *testing.T) {
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
 	// Create a var wrapper with wildcard
-	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r*xr-xr-x")
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-r*xr-xr-x")
 	if ogoErr != nil {
 		panic(ogoErr)
 	}
