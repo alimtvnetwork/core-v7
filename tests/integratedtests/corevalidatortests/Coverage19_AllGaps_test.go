@@ -17,14 +17,12 @@ import (
 func Test_Cov19_HeaderSliceValidators_VerifyAllError_Pass(t *testing.T) {
 	// Arrange
 	hsv := corevalidator.HeaderSliceValidators{
-		Validators: []corevalidator.HeaderSliceValidator{
-			{
-				Header: "test-header",
-				SliceValidator: corevalidator.SliceValidator{
-					CompareAs:     stringcompareas.Equal,
-					ActualLines:   []string{"hello"},
-					ExpectedLines: []string{"hello"},
-				},
+		{
+			Header: "test-header",
+			SliceValidator: corevalidator.SliceValidator{
+				CompareAs:     stringcompareas.Equal,
+				ActualLines:   []string{"hello"},
+				ExpectedLines: []string{"hello"},
 			},
 		},
 	}
@@ -58,12 +56,12 @@ func Test_Cov19_SliceValidatorMessages_UserInputsMergeWithError(t *testing.T) {
 	}
 
 	// Act
-	err := sv.VerifyAllError(params)
+	err := sv.VerifyFirstError(params)
 
 	// Assert
 	actual := args.Map{"hasError": err != nil}
 	expected := args.Map{"hasError": true}
-	actual.ShouldBeEqual(t, 1, "SliceValidator VerifyAllError mismatch", expected)
+	actual.ShouldBeEqual(t, 1, "SliceValidator VerifyFirstError mismatch", expected)
 }
 
 // ── SliceValidatorVerify: ActualLinesLength > 0 but comparingLength == 0 (line 220-225) ──
@@ -82,7 +80,7 @@ func Test_Cov19_SliceValidatorVerify_NonEmptyActualButEmptyExpected(t *testing.T
 	}
 
 	// Act
-	err := sv.VerifyAllError(params)
+	err := sv.VerifyFirstError(params)
 
 	// Assert
 	actual := args.Map{"hasError": err != nil}

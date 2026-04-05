@@ -24,7 +24,7 @@ func Test_Cov32_CharHashsetMap_EfficientAdd_I29(t *testing.T) {
 	chm := corestr.New.CharHashsetMap.Cap(3, 3)
 
 	// Act — add large strings to trigger efficient add path
-	chm.AddStrings(nil, "alpha", "beta", "gamma", "delta", "epsilon")
+	chm.AddStrings("alpha", "beta", "gamma", "delta", "epsilon")
 
 	// Assert
 	actual := args.Map{
@@ -47,16 +47,14 @@ func Test_Cov32_Collection_JsonString_I29(t *testing.T) {
 	coll := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 	// Act
-	jsonStr, err := coll.JsonString()
+	jsonStr := coll.JsonString()
 
 	// Assert
 	actual := args.Map{
 		"hasContent": len(jsonStr) > 0,
-		"hasError":   err != nil,
 	}
 	expected := args.Map{
 		"hasContent": true,
-		"hasError":   false,
 	}
 	actual.ShouldBeEqual(t, 1, "Collection JsonString valid", expected)
 }
@@ -72,8 +70,8 @@ func Test_Cov32_Collection_JsonString_I29(t *testing.T) {
 
 func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T) {
 	// Arrange
-	lc := corestr.New.LinkedCollection.Cap(2)
-	lc.Add("a", corestr.New.Collection.Strings([]string{"x"}))
+	lc := corestr.New.LinkedCollection.Create()
+	lc.Add(corestr.New.Collection.Strings([]string{"x"}))
 
 	// Act
 	result := lc.SafePointerIndexAt(99)
@@ -84,21 +82,21 @@ func Test_Cov32_LinkedCollections_SafePointerIndexAt_OutOfRange_I29(t *testing.T
 	actual.ShouldBeEqual(t, 1, "LinkedCollections SafePointerIndexAt out of range", expected)
 }
 
-// ── LinkedCollections.FlattenToSingleCollection (line 646) ──
+// ── LinkedCollections.ToCollection (line 1265) ──
 
-func Test_Cov32_LinkedCollections_FlattenToSingleCollection_I29(t *testing.T) {
+func Test_Cov32_LinkedCollections_ToCollection_I29(t *testing.T) {
 	// Arrange
-	lc := corestr.New.LinkedCollection.Cap(2)
-	lc.Add("key1", corestr.New.Collection.Strings([]string{"v1", "v2"}))
-	lc.Add("key2", corestr.New.Collection.Strings([]string{"v3"}))
+	lc := corestr.New.LinkedCollection.Create()
+	lc.Add(corestr.New.Collection.Strings([]string{"v1", "v2"}))
+	lc.Add(corestr.New.Collection.Strings([]string{"v3"}))
 
 	// Act
-	flattened := lc.FlattenToSingleCollection(0)
+	merged := lc.ToCollection(0)
 
 	// Assert
-	actual := args.Map{"length": flattened.Length()}
+	actual := args.Map{"length": merged.Length()}
 	expected := args.Map{"length": 3}
-	actual.ShouldBeEqual(t, 1, "LinkedCollections FlattenToSingleCollection", expected)
+	actual.ShouldBeEqual(t, 1, "LinkedCollections ToCollection", expected)
 }
 
 // ── LinkedCollections: remaining dead-code paths ──

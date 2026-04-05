@@ -238,7 +238,7 @@ func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
 
 // ---------- TypedPayloadCollection: ClonePtr ----------
 
-func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
+func Test_I28_TypedPayloadCollection_Clone_SingleItem(t *testing.T) {
 	// Arrange
 	type simpleUser struct {
 		Name string `json:"name"`
@@ -253,7 +253,7 @@ func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
 	}
 
 	// Act
-	cloned, err := collection.ClonePtr()
+	cloned, err := collection.Clone()
 
 	// Assert
 	actual := args.Map{
@@ -264,7 +264,7 @@ func Test_I28_TypedPayloadCollection_ClonePtr(t *testing.T) {
 		"errNil":   true,
 		"notNil":   true,
 	}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns valid copy -- single item", actual)
+	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- single item", actual)
 }
 
 // ---------- TypedPayloadWrapper: ClonePtr ----------
@@ -275,7 +275,7 @@ func Test_I28_TypedPayloadWrapper_ClonePtr(t *testing.T) {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "test"}
-	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData](data)
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
 	}
@@ -303,7 +303,7 @@ func Test_I28_TypedPayloadWrapper_Clone(t *testing.T) {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "test"}
-	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData](data)
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
 	}
@@ -330,7 +330,7 @@ func Test_I28_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "initial"}
-	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData](data)
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
 	}
@@ -355,7 +355,7 @@ func Test_I28_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 
 func Test_I28_PayloadsCollection_FilterEmpty(t *testing.T) {
 	// Arrange
-	pc := corepayload.New.PayloadsCollection.Cap(0)
+	pc := corepayload.New.PayloadsCollection.UsingCap(0)
 
 	// Act
 	result := pc.Filter(func(index int, pw *corepayload.PayloadWrapper) bool {

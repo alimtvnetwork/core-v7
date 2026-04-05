@@ -108,7 +108,7 @@ func Test_Cov75_CollectionLock_RemoveAtLock_InvalidIndex_I29(t *testing.T) {
 func Test_Cov75_DynamicCollection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	dc := coredynamic.NewDynamicCollection(3)
-	dc.AddAny("hello")
+	dc.AddAny("hello", true)
 
 	// Act
 	jsonStr := dc.JsonStringMust()
@@ -138,7 +138,7 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 
 func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
-	d := coredynamic.NewDynamic("test")
+	d := coredynamic.NewDynamic("test", true)
 	jsonResult := corejson.New(d)
 
 	// Act
@@ -154,7 +154,7 @@ func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 
 func Test_Cov75_Dynamic_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
-	d := coredynamic.NewDynamic("hello")
+	d := coredynamic.NewDynamic("hello", true)
 
 	// Act
 	result := d.JsonStringMust()
