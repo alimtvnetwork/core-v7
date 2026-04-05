@@ -422,42 +422,42 @@ func Test_I28_LinkedList_SafeIndexAtLock_OutOfRange(t *testing.T) {
 	})
 }
 
-// ---------- CollectionsOfCollection: AllLengthsSum with empty collection ----------
+// ---------- CollectionsOfCollection: AllIndividualItemsLength with empty collection ----------
 
-func Test_I28_CollectionsOfCollection_AllLengthsSum_EmptyCollectionSkip(t *testing.T) {
-	safeTest(t, "Test_I28_CollectionsOfCollection_AllLengthsSum_EmptyCollectionSkip", func() {
+func Test_I28_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSkip(t *testing.T) {
+	safeTest(t, "Test_I28_CollectionsOfCollection_AllIndividualItemsLength_EmptyCollectionSkip", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Cap(4)
-		coc.Add(corestr.New.Collection.Strings("a", "b"))
+		coc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
 		coc.Add(corestr.New.Collection.Cap(0)) // empty
-		coc.Add(corestr.New.Collection.Strings("c"))
+		coc.Add(corestr.New.Collection.Strings([]string{"c"}))
 
 		// Act
-		result := coc.AllLengthsSum()
+		result := coc.AllIndividualItemsLength()
 
 		// Assert
 		actual := args.Map{"sum": result}
 		expected := args.Map{"sum": 3}
-		expected.ShouldBeEqual(t, 0, "AllLengthsSum skips empty -- mixed collections", actual)
+		expected.ShouldBeEqual(t, 0, "AllIndividualItemsLength skips empty -- mixed collections", actual)
 	})
 }
 
-// ---------- CollectionsOfCollection: ToStrings nil/empty skip ----------
+// ---------- CollectionsOfCollection: List nil/empty skip ----------
 
-func Test_I28_CollectionsOfCollection_ToStrings_NilEmptySkip(t *testing.T) {
-	safeTest(t, "Test_I28_CollectionsOfCollection_ToStrings_NilEmptySkip", func() {
+func Test_I28_CollectionsOfCollection_List_NilEmptySkip(t *testing.T) {
+	safeTest(t, "Test_I28_CollectionsOfCollection_List_NilEmptySkip", func() {
 		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Cap(4)
-		coc.Add(corestr.New.Collection.Strings("a"))
+		coc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		coc.Add(nil) // nil
-		coc.Add(corestr.New.Collection.Strings("b"))
+		coc.Add(corestr.New.Collection.Strings([]string{"b"}))
 
 		// Act
-		result := coc.ToStrings()
+		result := coc.List(0)
 
 		// Assert
 		actual := args.Map{"length": len(result)}
 		expected := args.Map{"length": 2}
-		expected.ShouldBeEqual(t, 0, "ToStrings skips nil -- mixed items", actual)
+		expected.ShouldBeEqual(t, 0, "List skips nil -- mixed items", actual)
 	})
 }
