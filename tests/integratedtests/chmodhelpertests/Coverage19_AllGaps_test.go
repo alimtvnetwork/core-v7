@@ -403,11 +403,14 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T)
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
-		IsRecursive:     false,
+		IsRecursive:       false,
 		IsContinueOnError: false,
-		IsSkipOnInvalid: false,
+		IsSkipOnInvalid:   false,
 	}
 
 	// Act
