@@ -376,11 +376,14 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	f2 := filepath.Join(tmpDir, "b.txt")
 	_ = os.WriteFile(f1, []byte("x"), 0o644)
 	_ = os.WriteFile(f2, []byte("y"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
-		IsRecursive:     false,
+		IsRecursive:       false,
 		IsContinueOnError: false,
-		IsSkipOnInvalid: false,
+		IsSkipOnInvalid:   false,
 	}
 
 	// Act
@@ -400,11 +403,14 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T)
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
-		IsRecursive:     false,
+		IsRecursive:       false,
 		IsContinueOnError: false,
-		IsSkipOnInvalid: false,
+		IsSkipOnInvalid:   false,
 	}
 
 	// Act
@@ -427,11 +433,14 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	tmpDir := t.TempDir()
 	subDir := filepath.Join(tmpDir, "sub")
 	_ = os.Mkdir(subDir, 0o755)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
-		IsRecursive:     true,
+		IsRecursive:       true,
 		IsContinueOnError: false,
-		IsSkipOnInvalid: false,
+		IsSkipOnInvalid:   false,
 	}
 
 	// Act
@@ -451,11 +460,14 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
-		IsRecursive:     true,
+		IsRecursive:       true,
 		IsContinueOnError: false,
-		IsSkipOnInvalid: false,
+		IsSkipOnInvalid:   false,
 	}
 
 	// Act
@@ -476,7 +488,10 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveContinueOnError(t *tes
 
 	// Arrange
 	tmpDir := t.TempDir()
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
 		IsRecursive:       true,
 		IsContinueOnError: true,
@@ -505,7 +520,10 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveContinueOnError(t *
 	tmpDir := t.TempDir()
 	validFile := filepath.Join(tmpDir, "ok.txt")
 	_ = os.WriteFile(validFile, []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
 		IsRecursive:       false,
 		IsContinueOnError: true,
@@ -538,7 +556,10 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 	subDir := filepath.Join(tmpDir, "inner")
 	_ = os.Mkdir(subDir, 0o755)
 	_ = os.WriteFile(filepath.Join(subDir, "f.txt"), []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 
 	// Act
 	err := wrapper.LinuxApplyRecursive(false, tmpDir)
@@ -553,7 +574,10 @@ func Test_Cov19_RwxWrapper_ApplyRecursive_Dir_CmdPath(t *testing.T) {
 
 func Test_Cov19_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullString("rwxr-xr-x")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 
 	// Act
 	result := wrapper.IsEqualVarWrapper(nil)
@@ -576,9 +600,15 @@ func Test_Cov19_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.
 	testFile := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r*xr-xr-x")
+	if ogoErr != nil {
+		t.Fatalf("unexpected ogo error: %v", ogoErr)
+	}
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "r*xr-xr-x",
-		IsSkipOnInvalid:    false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 

@@ -280,9 +280,9 @@ func Test_I28_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
 func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_IsChainEqual_OneEmpty", func() {
 		// Arrange
-		lc1 := corestr.New.LinkedCollections.Create()
-		lc2 := corestr.New.LinkedCollections.Create()
-		lc2.Add(corestr.New.Collection.Strings("a"))
+		lc1 := corestr.New.LinkedCollection.Create()
+		lc2 := corestr.New.LinkedCollection.Create()
+		lc2.Add(corestr.New.Collection.Strings([]string{"a"}))
 
 		// Act
 		result := lc1.IsChainEqual(lc2)
@@ -299,9 +299,9 @@ func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 func Test_I28_LinkedCollections_ToCollection(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollection", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
-		lc.Add(corestr.New.Collection.Strings("a", "b"))
-		lc.Add(corestr.New.Collection.Strings("c"))
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
+		lc.Add(corestr.New.Collection.Strings([]string{"c"}))
 
 		// Act
 		result := lc.ToCollection(0)
@@ -318,9 +318,9 @@ func Test_I28_LinkedCollections_ToCollection(t *testing.T) {
 func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_ToCollectionsOfCollection", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
-		lc.Add(corestr.New.Collection.Strings("a", "b"))
-		lc.Add(corestr.New.Collection.Strings("c"))
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
+		lc.Add(corestr.New.Collection.Strings([]string{"c"}))
 
 		// Act
 		result := lc.ToCollectionsOfCollection(0)
@@ -337,7 +337,7 @@ func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_AddCollections_AllNil", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
+		lc := corestr.New.LinkedCollection.Create()
 
 		// Act
 		result := lc.AddCollections([]*corestr.Collection{nil, nil, nil})

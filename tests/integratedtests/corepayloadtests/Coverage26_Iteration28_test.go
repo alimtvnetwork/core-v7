@@ -97,19 +97,20 @@ func Test_I28_PayloadWrapper_HandleError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HandleError completes -- no error", actual)
 }
 
-// ---------- PayloadWrapper: IsEqualInterface cast fail ----------
+// ---------- PayloadWrapper: IsStandardTaskEntityEqual different wrapper ----------
 
-func Test_I28_PayloadWrapper_IsEqualInterface_CastFail(t *testing.T) {
+func Test_I28_PayloadWrapper_IsStandardTaskEntityEqual_Different(t *testing.T) {
 	// Arrange
-	pw := corepayload.New.PayloadWrapper.Empty()
+	pw1 := corepayload.New.PayloadWrapper.Empty()
+	pw2 := corepayload.New.PayloadWrapper.Create("other", "id-99", "task", "cat", "data")
 
 	// Act
-	result := pw.IsEqualInterface("not-a-payload-wrapper")
+	result := pw1.IsStandardTaskEntityEqual(pw2)
 
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsEqualInterface returns false -- cast fail", actual)
+	expected.ShouldBeEqual(t, 0, "IsStandardTaskEntityEqual returns false -- different wrapper", actual)
 }
 
 // ---------- PayloadWrapper: Error no error ----------
@@ -135,7 +136,7 @@ func Test_I28_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "test"}
-	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData](data)
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id-1", "task", "cat", data)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
 	}
@@ -358,12 +359,12 @@ func Test_I28_PayloadsCollection_FilterEmpty(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.UsingCap(0)
 
 	// Act
-	result := pc.Filter(func(index int, pw *corepayload.PayloadWrapper) bool {
-		return true
+	result := pc.Filter(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
+		return true, false
 	})
 
 	// Assert
-	actual := args.Map{"isEmpty": result.IsEmpty()}
+	actual := args.Map{"isEmpty": len(result) == 0}
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Filter returns empty -- empty collection", actual)
 }

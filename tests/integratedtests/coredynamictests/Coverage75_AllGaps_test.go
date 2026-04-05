@@ -137,12 +137,14 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 // ── Dynamic.ParseInjectUsingJsonMust valid (line 123) ──
 
 func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
-	// Arrange
-	d := coredynamic.NewDynamic("test", true)
+	// Arrange — create a Dynamic with a map so it round-trips cleanly
+	innerMap := map[string]any{"key": "value"}
+	d := coredynamic.NewDynamic(innerMap, true)
 	jsonResult := corejson.New(d)
 
 	// Act
-	result := d.ParseInjectUsingJsonMust(&jsonResult)
+	target := coredynamic.NewDynamic(map[string]any{}, false)
+	result := target.ParseInjectUsingJsonMust(&jsonResult)
 
 	// Assert
 	actual := args.Map{"notNil": result != nil}
