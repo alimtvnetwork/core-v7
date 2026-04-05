@@ -104,7 +104,7 @@ func Test_I28_PayloadWrapper_IsEqualInterface_CastFail(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.Empty()
 
 	// Act
-	result := pw.IsEqualInterface("not-a-payload-wrapper")
+	result := pw.IsStandardTaskEntityEqual("not-a-payload-wrapper")
 
 	// Assert
 	actual := args.Map{"isEqual": result}
