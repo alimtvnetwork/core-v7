@@ -349,40 +349,40 @@ func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
 	})
 }
 
-// ---------- LinkedList: IsChainEqual both empty ----------
+// ---------- LinkedListNode: IsChainEqual both nil ----------
 
-func Test_I28_LinkedList_IsChainEqual_BothEmpty(t *testing.T) {
-	safeTest(t, "Test_I28_LinkedList_IsChainEqual_BothEmpty", func() {
+func Test_I28_LinkedListNode_IsChainEqual_BothNil(t *testing.T) {
+	safeTest(t, "Test_I28_LinkedListNode_IsChainEqual_BothNil", func() {
 		// Arrange
-		ll1 := corestr.New.LinkedList.Create()
-		ll2 := corestr.New.LinkedList.Create()
+		var n1 *corestr.LinkedListNode
+		var n2 *corestr.LinkedListNode
 
 		// Act
-		result := ll1.IsChainEqual(true, ll2)
+		result := n1.IsChainEqual(n2, true)
 
 		// Assert
 		actual := args.Map{"isEqual": result}
 		expected := args.Map{"isEqual": true}
-		expected.ShouldBeEqual(t, 0, "IsChainEqual returns true -- both empty", actual)
+		expected.ShouldBeEqual(t, 0, "IsChainEqual returns true -- both nil", actual)
 	})
 }
 
-// ---------- LinkedList: IsChainEqual one empty ----------
+// ---------- LinkedListNode: IsChainEqual one nil ----------
 
-func Test_I28_LinkedList_IsChainEqual_OneEmpty(t *testing.T) {
-	safeTest(t, "Test_I28_LinkedList_IsChainEqual_OneEmpty", func() {
+func Test_I28_LinkedListNode_IsChainEqual_OneNil(t *testing.T) {
+	safeTest(t, "Test_I28_LinkedListNode_IsChainEqual_OneNil", func() {
 		// Arrange
-		ll1 := corestr.New.LinkedList.Create()
-		ll2 := corestr.New.LinkedList.Create()
-		ll2.Add("a")
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		n1 := ll.Head()
 
 		// Act
-		result := ll1.IsChainEqual(true, ll2)
+		result := n1.IsChainEqual(nil, true)
 
 		// Assert
 		actual := args.Map{"isEqual": result}
 		expected := args.Map{"isEqual": false}
-		expected.ShouldBeEqual(t, 0, "IsChainEqual returns false -- one empty", actual)
+		expected.ShouldBeEqual(t, 0, "IsChainEqual returns false -- one nil", actual)
 	})
 }
 
