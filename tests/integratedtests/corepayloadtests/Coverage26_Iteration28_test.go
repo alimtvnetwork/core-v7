@@ -97,19 +97,20 @@ func Test_I28_PayloadWrapper_HandleError_NoError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "HandleError completes -- no error", actual)
 }
 
-// ---------- PayloadWrapper: IsEqualInterface cast fail ----------
+// ---------- PayloadWrapper: IsStandardTaskEntityEqual different wrapper ----------
 
-func Test_I28_PayloadWrapper_IsEqualInterface_CastFail(t *testing.T) {
+func Test_I28_PayloadWrapper_IsStandardTaskEntityEqual_Different(t *testing.T) {
 	// Arrange
-	pw := corepayload.New.PayloadWrapper.Empty()
+	pw1 := corepayload.New.PayloadWrapper.Empty()
+	pw2 := corepayload.New.PayloadWrapper.NameIdentifier("other", "id-99")
 
 	// Act
-	result := pw.IsStandardTaskEntityEqual("not-a-payload-wrapper")
+	result := pw1.IsStandardTaskEntityEqual(pw2)
 
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsStandardTaskEntityEqual returns false -- cast fail", actual)
+	expected.ShouldBeEqual(t, 0, "IsStandardTaskEntityEqual returns false -- different wrapper", actual)
 }
 
 // ---------- PayloadWrapper: Error no error ----------
