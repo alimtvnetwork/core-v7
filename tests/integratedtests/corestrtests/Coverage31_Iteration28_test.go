@@ -69,20 +69,20 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *te
 	})
 }
 
-// ---------- CharCollectionMap: AddHashmapsAll nil ----------
+// ---------- CharCollectionMap: AddHashmapsKeysValuesBoth nil ----------
 
-func Test_I28_CharCollectionMap_AddHashmapsAll_Nil(t *testing.T) {
-	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsAll_Nil", func() {
+func Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
+	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil", func() {
 		// Arrange
 		ccm := corestr.New.CharCollectionMap.Cap(4)
 
 		// Act
-		result := ccm.AddHashmapsAll(nil)
+		result := ccm.AddHashmapsKeysValuesBoth(nil)
 
 		// Assert
 		actual := args.Map{"isNil": result == nil}
 		expected := args.Map{"isNil": false}
-		expected.ShouldBeEqual(t, 0, "AddHashmapsAll returns self -- nil input", actual)
+		expected.ShouldBeEqual(t, 0, "AddHashmapsKeysValuesBoth returns self -- nil input", actual)
 	})
 }
 
