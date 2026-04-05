@@ -14,9 +14,9 @@ import (
 // Coverage75 — coredynamic remaining 29 lines
 // ══════════════════════════════════════════════════════════════════════════════
 
-// ── AnyCollection.JsonStringMust panic on marshal error (line 495) ──
+// ── AnyCollection.JsonStringMust valid (line 495) ──
 
-func Test_Cov75_AnyCollection_JsonStringMust_Valid(t *testing.T) {
+func Test_Cov75_AnyCollection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewAnyCollection(3)
 	coll.Add("hello")
@@ -31,12 +31,9 @@ func Test_Cov75_AnyCollection_JsonStringMust_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "AnyCollection JsonStringMust valid", expected)
 }
 
-// ── AnyCollection.JsonString error returns empty (line 485) ──
-// json.Marshal on []any with valid data won't fail; this is dead code.
+// ── Collection.JsonString valid (line 355) ──
 
-// ── Collection.JsonString error path (line 355) ──
-
-func Test_Cov75_Collection_JsonString_Valid(t *testing.T) {
+func Test_Cov75_Collection_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](3)
 	coll.Add("a")
@@ -57,9 +54,9 @@ func Test_Cov75_Collection_JsonString_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Collection JsonString valid", expected)
 }
 
-// ── Collection.JsonStringMust panic path (line 364) ──
+// ── Collection.JsonStringMust valid (line 364) ──
 
-func Test_Cov75_Collection_JsonStringMust_Valid(t *testing.T) {
+func Test_Cov75_Collection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](2)
 	coll.Add("test")
@@ -73,10 +70,9 @@ func Test_Cov75_Collection_JsonStringMust_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Collection JsonStringMust valid", expected)
 }
 
-// ── CollectionLock.LengthLock nil guard (line 15) ──
-// nil receiver guard — dead code on non-nil instance
+// ── CollectionLock.LengthLock (line 15) ──
 
-func Test_Cov75_CollectionLock_LengthLock(t *testing.T) {
+func Test_Cov75_CollectionLock_LengthLock_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[int](5)
 	coll.Add(1)
@@ -93,7 +89,7 @@ func Test_Cov75_CollectionLock_LengthLock(t *testing.T) {
 
 // ── CollectionLock.RemoveAtLock invalid index (line 125) ──
 
-func Test_Cov75_CollectionLock_RemoveAtLock_InvalidIndex(t *testing.T) {
+func Test_Cov75_CollectionLock_RemoveAtLock_InvalidIndex_I29(t *testing.T) {
 	// Arrange
 	coll := coredynamic.NewCollection[string](2)
 	coll.Add("a")
@@ -107,12 +103,12 @@ func Test_Cov75_CollectionLock_RemoveAtLock_InvalidIndex(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "CollectionLock RemoveAtLock invalid index", expected)
 }
 
-// ── DynamicCollection.JsonStringMust panic path (line 426) ──
+// ── DynamicCollection.JsonStringMust valid (line 426) ──
 
-func Test_Cov75_DynamicCollection_JsonStringMust_Valid(t *testing.T) {
+func Test_Cov75_DynamicCollection_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
-	dc := coredynamic.NewDynamicCollectionPtr(3)
-	dc.AddDynamic(coredynamic.NewDynamic("hello"))
+	dc := coredynamic.NewDynamicCollection(3)
+	dc.AddAny("hello")
 
 	// Act
 	jsonStr := dc.JsonStringMust()
@@ -123,12 +119,9 @@ func Test_Cov75_DynamicCollection_JsonStringMust_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "DynamicCollection JsonStringMust valid", expected)
 }
 
-// ── DynamicCollection.JsonString error return (line 416-418) ──
-// Marshal on valid []Dynamic data shouldn't fail — dead code path
+// ── Dynamic.UnmarshalJSON on nil receiver (line 54) ──
 
-// ── DynamicJson: UnmarshalJSON on nil receiver (line 54) ──
-
-func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver(t *testing.T) {
+func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 	// Arrange
 	var d *coredynamic.Dynamic
 
@@ -141,14 +134,14 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Dynamic UnmarshalJSON nil receiver", expected)
 }
 
-// ── DynamicJson: ParseInjectUsingJsonMust panic on error (line 123) ──
+// ── Dynamic.ParseInjectUsingJsonMust valid (line 123) ──
 
-func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid(t *testing.T) {
+func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("test")
 	jsonResult := corejson.New(d)
 
-	// Act — should not panic
+	// Act
 	result := d.ParseInjectUsingJsonMust(&jsonResult)
 
 	// Assert
@@ -157,12 +150,9 @@ func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "Dynamic ParseInjectUsingJsonMust valid", expected)
 }
 
-// ── DynamicJson: JsonString error path (line 139-141) ──
-// Marshal error on valid data — dead code
+// ── Dynamic.JsonStringMust valid (line 149-163) ──
 
-// ── DynamicJson: JsonStringMust error path (line 149-151, 159-163) ──
-
-func Test_Cov75_Dynamic_JsonStringMust_Valid(t *testing.T) {
+func Test_Cov75_Dynamic_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("hello")
 
@@ -177,7 +167,7 @@ func Test_Cov75_Dynamic_JsonStringMust_Valid(t *testing.T) {
 
 // ── KeyVal.CastKeyVal nil receiver (line 134) ──
 
-func Test_Cov75_KeyVal_CastKeyVal_NilReceiver(t *testing.T) {
+func Test_Cov75_KeyVal_CastKeyVal_NilReceiver_I29(t *testing.T) {
 	// Arrange
 	var kv *coredynamic.KeyVal
 
@@ -194,7 +184,7 @@ func Test_Cov75_KeyVal_CastKeyVal_NilReceiver(t *testing.T) {
 
 // ── KeyVal.JsonParseSelfInject (line 300) ──
 
-func Test_Cov75_KeyVal_JsonParseSelfInject(t *testing.T) {
+func Test_Cov75_KeyVal_JsonParseSelfInject_I29(t *testing.T) {
 	// Arrange
 	kv := &coredynamic.KeyVal{Key: "a", Value: "b"}
 	jsonResult := corejson.New(kv)
@@ -208,9 +198,9 @@ func Test_Cov75_KeyVal_JsonParseSelfInject(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyVal JsonParseSelfInject", expected)
 }
 
-// ── KeyValCollection.ParseInjectUsingJson legacy path (line 342-344) ──
+// ── KeyValCollection operations ──
 
-func Test_Cov75_KeyValCollection_ParseInjectUsingJson_Valid(t *testing.T) {
+func Test_Cov75_KeyValCollection_ParseInjectUsingJson_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(3)
 	kvc.Add(coredynamic.KeyVal{Key: "k1", Value: "v1"})
@@ -231,9 +221,7 @@ func Test_Cov75_KeyValCollection_ParseInjectUsingJson_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection ParseInjectUsingJson valid", expected)
 }
 
-// ── KeyValCollection.JsonParseSelfInject (line 365) ──
-
-func Test_Cov75_KeyValCollection_JsonParseSelfInject(t *testing.T) {
+func Test_Cov75_KeyValCollection_JsonParseSelfInject_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "x", Value: "y"})
@@ -248,9 +236,7 @@ func Test_Cov75_KeyValCollection_JsonParseSelfInject(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection JsonParseSelfInject", expected)
 }
 
-// ── KeyValCollection.Serialize error path (line 385-387) ──
-
-func Test_Cov75_KeyValCollection_Serialize_Valid(t *testing.T) {
+func Test_Cov75_KeyValCollection_Serialize_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: "b"})
@@ -270,9 +256,7 @@ func Test_Cov75_KeyValCollection_Serialize_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection Serialize valid", expected)
 }
 
-// ── KeyValCollection.JsonString error path (line 395-397) ──
-
-func Test_Cov75_KeyValCollection_JsonString_Valid(t *testing.T) {
+func Test_Cov75_KeyValCollection_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: "b"})
@@ -292,15 +276,13 @@ func Test_Cov75_KeyValCollection_JsonString_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection JsonString valid", expected)
 }
 
-// ── KeyValCollection.ParseInjectUsingJsonMust panic (line 139-141) ──
-
-func Test_Cov75_KeyValCollection_ParseInjectUsingJsonMust_Valid(t *testing.T) {
+func Test_Cov75_KeyValCollection_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
 	jsonResult := corejson.New(kvc)
 
-	// Act — should not panic
+	// Act
 	result := kvc.ParseInjectUsingJsonMust(&jsonResult)
 
 	// Assert
@@ -309,16 +291,16 @@ func Test_Cov75_KeyValCollection_ParseInjectUsingJsonMust_Valid(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "KeyValCollection ParseInjectUsingJsonMust valid", expected)
 }
 
-// ── MapAnyItems: MapResultsCollection error path (line 903) ──
+// ── MapAnyItems.JsonMapResults (line 903) ──
 
-func Test_Cov75_MapAnyItems_MapResultsCollection_Valid(t *testing.T) {
+func Test_Cov75_MapAnyItems_JsonMapResults_Valid_I29(t *testing.T) {
 	// Arrange
 	m := coredynamic.NewMapAnyItems(3)
 	m.Add("key1", "val1")
 	m.Add("key2", 42)
 
 	// Act
-	results, err := m.MapResultsCollection()
+	results, err := m.JsonMapResults()
 
 	// Assert
 	actual := args.Map{
@@ -329,20 +311,32 @@ func Test_Cov75_MapAnyItems_MapResultsCollection_Valid(t *testing.T) {
 		"notNil":   true,
 		"hasError": false,
 	}
-	actual.ShouldBeEqual(t, 1, "MapAnyItems MapResultsCollection valid", expected)
+	actual.ShouldBeEqual(t, 1, "MapAnyItems JsonMapResults valid", expected)
 }
 
-// ── MapAnyItems: HashmapDiffUsingRaw returns diff map (line 819) ──
-// Already documented as self-comparison dead code
+// ── MapAnyItems.GetUsingUnmarshallAt type mismatch (line 350) ──
 
-// ── ReflectInterfaceVal: non-ptr non-interface path (line 20) ──
-
-func Test_Cov75_ReflectInterfaceVal_NonPtr(t *testing.T) {
+func Test_Cov75_MapAnyItems_GetUsingUnmarshallAt_TypeMismatch_I29(t *testing.T) {
 	// Arrange
-	val := reflect.ValueOf(42)
+	m := coredynamic.NewMapAnyItems(3)
+	m.Add("key1", "stringValue")
+
+	var target int
 
 	// Act
-	result := coredynamic.ReflectInterfaceVal(val)
+	err := m.GetUsingUnmarshallAt("key1", &target)
+
+	// Assert
+	actual := args.Map{"hasError": err != nil}
+	expected := args.Map{"hasError": true}
+	actual.ShouldBeEqual(t, 1, "MapAnyItems GetUsingUnmarshallAt type mismatch", expected)
+}
+
+// ── ReflectInterfaceVal non-ptr (line 20) ──
+
+func Test_Cov75_ReflectInterfaceVal_NonPtr_I29(t *testing.T) {
+	// Arrange / Act
+	result := coredynamic.ReflectInterfaceVal(42)
 
 	// Assert
 	actual := args.Map{"result": result}
@@ -350,9 +344,9 @@ func Test_Cov75_ReflectInterfaceVal_NonPtr(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "ReflectInterfaceVal non-ptr", expected)
 }
 
-// ── ReflectSetFromTo: []byte → struct via JSON (line 159-167) ──
+// ── ReflectSetFromTo: []byte → struct (line 159-167) ──
 
-func Test_Cov75_ReflectSetFromTo_BytesToStruct(t *testing.T) {
+func Test_Cov75_ReflectSetFromTo_BytesToStruct_I29(t *testing.T) {
 	// Arrange
 	type sample struct {
 		Name string `json:"name"`
@@ -375,9 +369,9 @@ func Test_Cov75_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "ReflectSetFromTo bytes to struct", expected)
 }
 
-// ── ReflectSetFromTo: struct → *[]byte via Marshal (line 174-180) ──
+// ── ReflectSetFromTo: struct → *[]byte (line 174-180) ──
 
-func Test_Cov75_ReflectSetFromTo_StructToBytes(t *testing.T) {
+func Test_Cov75_ReflectSetFromTo_StructToBytes_I29(t *testing.T) {
 	// Arrange
 	type sample struct {
 		Name string `json:"name"`
@@ -400,11 +394,11 @@ func Test_Cov75_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "ReflectSetFromTo struct to bytes", expected)
 }
 
-// ── SafeZeroSet: non-pointer kind (line 18) ──
+// ── SafeZeroSet non-pointer (line 18) ──
 
-func Test_Cov75_SafeZeroSet_NonPointer(t *testing.T) {
+func Test_Cov75_SafeZeroSet_NonPointer_I29(t *testing.T) {
 	// Arrange
-	val := 42
+	val := reflect.ValueOf(42)
 
 	// Act — should not panic on non-pointer
 	coredynamic.SafeZeroSet(val)
@@ -415,10 +409,9 @@ func Test_Cov75_SafeZeroSet_NonPointer(t *testing.T) {
 	actual.ShouldBeEqual(t, 1, "SafeZeroSet non-pointer", expected)
 }
 
-// ── TypedDynamic.JsonString error path (line 117) ──
-// json.Marshal on simple types won't fail — dead code
+// ── TypedDynamic.JsonString valid (line 117) ──
 
-func Test_Cov75_TypedDynamic_JsonString_Valid(t *testing.T) {
+func Test_Cov75_TypedDynamic_JsonString_Valid_I29(t *testing.T) {
 	// Arrange
 	td := coredynamic.NewTypedDynamic[string]("hello", true)
 
@@ -435,22 +428,4 @@ func Test_Cov75_TypedDynamic_JsonString_Valid(t *testing.T) {
 		"hasError":   false,
 	}
 	actual.ShouldBeEqual(t, 1, "TypedDynamic JsonString valid", expected)
-}
-
-// ── MapAnyItems: UnmarshalAt type mismatch (line 350-354) ──
-
-func Test_Cov75_MapAnyItems_UnmarshalAt_TypeMismatch(t *testing.T) {
-	// Arrange
-	m := coredynamic.NewMapAnyItems(3)
-	m.Add("key1", "stringValue")
-
-	var target int
-
-	// Act
-	err := m.UnmarshalAt("key1", &target)
-
-	// Assert
-	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": true}
-	actual.ShouldBeEqual(t, 1, "MapAnyItems UnmarshalAt type mismatch", expected)
 }
