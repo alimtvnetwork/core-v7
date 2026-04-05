@@ -109,7 +109,7 @@ func Test_I28_PayloadWrapper_IsEqualInterface_CastFail(t *testing.T) {
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsEqualInterface returns false -- cast fail", actual)
+	expected.ShouldBeEqual(t, 0, "IsStandardTaskEntityEqual returns false -- cast fail", actual)
 }
 
 // ---------- PayloadWrapper: Error no error ----------
