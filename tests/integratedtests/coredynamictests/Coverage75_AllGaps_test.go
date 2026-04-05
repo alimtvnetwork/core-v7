@@ -139,10 +139,15 @@ func Test_Cov75_Dynamic_UnmarshalJSON_NilReceiver_I29(t *testing.T) {
 func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewDynamic("test", true)
-	jsonResult := corejson.New(d)
+	jsonBytes, marshalErr := d.MarshalJSON()
+	if marshalErr != nil {
+		t.Fatalf("unexpected marshal error: %v", marshalErr)
+	}
+	target := coredynamic.NewDynamic(nil, false)
+	jsonResult := corejson.NewFromBytes(jsonBytes)
 
 	// Act
-	result := d.ParseInjectUsingJsonMust(&jsonResult)
+	result := target.ParseInjectUsingJsonMust(&jsonResult)
 
 	// Assert
 	actual := args.Map{"notNil": result != nil}

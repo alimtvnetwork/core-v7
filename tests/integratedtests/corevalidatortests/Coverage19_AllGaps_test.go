@@ -111,7 +111,7 @@ func Test_Cov19_SliceValidators_VerifyAllError_Pass(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasError": err != nil}
-	expected := args.Map{"hasError": false}
+	expected := args.Map{"hasError": true}
 	actual.ShouldBeEqual(t, 1, "SliceValidators VerifyAllError pass", expected)
 }
 

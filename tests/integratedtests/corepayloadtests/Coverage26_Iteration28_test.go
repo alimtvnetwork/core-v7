@@ -358,12 +358,12 @@ func Test_I28_PayloadsCollection_FilterEmpty(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.UsingCap(0)
 
 	// Act
-	result := pc.Filter(func(index int, pw *corepayload.PayloadWrapper) bool {
-		return true
+	result := pc.Filter(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
+		return true, false
 	})
 
 	// Assert
-	actual := args.Map{"isEmpty": result.IsEmpty()}
+	actual := args.Map{"isEmpty": len(result) == 0}
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Filter returns empty -- empty collection", actual)
 }

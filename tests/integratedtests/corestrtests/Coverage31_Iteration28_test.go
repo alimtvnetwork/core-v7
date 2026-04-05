@@ -337,7 +337,7 @@ func Test_I28_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 func Test_I28_LinkedCollections_AddCollections_AllNil(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_AddCollections_AllNil", func() {
 		// Arrange
-		lc := corestr.New.LinkedCollections.Create()
+		lc := corestr.New.LinkedCollection.Create()
 
 		// Act
 		result := lc.AddCollections([]*corestr.Collection{nil, nil, nil})
