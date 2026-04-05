@@ -52,15 +52,15 @@ func Test_I28_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 	})
 }
 
-// ---------- CharCollectionMap: AddHashmapsKeys nil ----------
+// ---------- CharCollectionMap: AddHashmapsKeysOrValuesBothUsingFilter nil ----------
 
-func Test_I28_CharCollectionMap_AddHashmapsKeys_Nil(t *testing.T) {
-	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeys_Nil", func() {
+func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
+	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil", func() {
 		// Arrange
 		ccm := corestr.New.CharCollectionMap.Cap(4)
 
 		// Act
-		result := ccm.AddHashmapsKeys(nil)
+		result := ccm.AddHashmapsKeysOrValuesBothUsingFilter(nil, nil)
 
 		// Assert
 		actual := args.Map{"isNil": result == nil}
