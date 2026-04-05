@@ -303,7 +303,7 @@ func Test_I28_TypedPayloadWrapper_Clone(t *testing.T) {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "test"}
-	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData](data)
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
 	}
