@@ -520,7 +520,10 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveContinueOnError(t *
 	tmpDir := t.TempDir()
 	validFile := filepath.Join(tmpDir, "ok.txt")
 	_ = os.WriteFile(validFile, []byte("x"), 0o644)
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxrwxrwx")
+	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
+	if wErr != nil {
+		t.Fatalf("unexpected parse error: %v", wErr)
+	}
 	cond := &chmodins.Condition{
 		IsRecursive:       false,
 		IsContinueOnError: true,
