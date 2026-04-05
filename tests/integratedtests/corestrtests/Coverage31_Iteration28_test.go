@@ -65,7 +65,7 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *te
 		// Assert
 		actual := args.Map{"isNil": result == nil}
 		expected := args.Map{"isNil": false}
-		expected.ShouldBeEqual(t, 0, "AddHashmapsKeys returns self -- nil input", actual)
+		expected.ShouldBeEqual(t, 0, "AddHashmapsKeysOrValuesBothUsingFilter returns self -- nil input", actual)
 	})
 }
 
