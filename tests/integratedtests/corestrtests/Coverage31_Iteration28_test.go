@@ -40,7 +40,7 @@ import (
 func Test_I28_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsValues_Nil", func() {
 		// Arrange
-		ccm := corestr.New.CharCollectionMap.Cap(4)
+		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
 
 		// Act
 		result := ccm.AddHashmapsValues(nil)
@@ -57,7 +57,7 @@ func Test_I28_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil", func() {
 		// Arrange
-		ccm := corestr.New.CharCollectionMap.Cap(4)
+		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
 
 		// Act
 		result := ccm.AddHashmapsKeysOrValuesBothUsingFilter(nil, nil)
@@ -74,7 +74,7 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *te
 func Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 	safeTest(t, "Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil", func() {
 		// Arrange
-		ccm := corestr.New.CharCollectionMap.Cap(4)
+		ccm := corestr.New.CharCollectionMap.CapSelfCap(4, 4)
 
 		// Act
 		result := ccm.AddHashmapsKeysValuesBoth(nil)
@@ -91,7 +91,7 @@ func Test_I28_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 func Test_I28_CharHashsetMap_AddLock_NilItemsInit(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_AddLock_NilItemsInit", func() {
 		// Arrange
-		chm := corestr.New.CharHashsetMap.Cap(4)
+		chm := corestr.New.CharHashsetMap.Cap(4, 4)
 
 		// Act
 		chm.AddLock("apple")
@@ -108,7 +108,7 @@ func Test_I28_CharHashsetMap_AddLock_NilItemsInit(t *testing.T) {
 func Test_I28_CharHashsetMap_Add_NilItemsInit(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_Add_NilItemsInit", func() {
 		// Arrange
-		chm := corestr.New.CharHashsetMap.Cap(4)
+		chm := corestr.New.CharHashsetMap.Cap(4, 4)
 
 		// Act
 		chm.Add("banana")
@@ -125,7 +125,7 @@ func Test_I28_CharHashsetMap_Add_NilItemsInit(t *testing.T) {
 func Test_I28_CharHashsetMap_AddAll_Empty(t *testing.T) {
 	safeTest(t, "Test_I28_CharHashsetMap_AddAll_Empty", func() {
 		// Arrange
-		chm := corestr.New.CharHashsetMap.Cap(4)
+		chm := corestr.New.CharHashsetMap.Cap(4, 4)
 
 		// Act
 		result := chm.AddStrings()
@@ -248,7 +248,12 @@ func Test_I28_LinkedCollections_SafeIndexAtLock_OutOfRange(t *testing.T) {
 		lc.Add(c1)
 
 		// Act
-		node := lc.SafeIndexAtLock(999)
+		var node *corestr.LinkedCollectionNode
+		func() {
+			lc.Lock()
+			defer lc.Unlock()
+			node = lc.SafeIndexAt(999)
+		}()
 
 		// Assert
 		actual := args.Map{"isNil": node == nil}

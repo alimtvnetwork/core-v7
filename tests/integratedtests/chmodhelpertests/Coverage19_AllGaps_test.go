@@ -33,20 +33,16 @@ func Test_Cov19_CreateDirWithFiles_FileCreateError(t *testing.T) {
 	}
 
 	// Arrange
-	tmpDir := t.TempDir()
-	invalidDir := filepath.Join(tmpDir, "noexist", "sub")
-
-	dwf := chmodhelper.DirWithFiles{
-		DirFullPath:    invalidDir,
-		DirFileMode:    0o755,
-		FilesRwxFileMode: 0o644,
-		FileContents: []chmodhelper.FileWithContent{
-			{FileName: "a.txt", Content: "hello"},
+	invalidDir := string([]byte{0}) + "/noexist/sub"
+	dwf := &chmodhelper.DirWithFiles{
+		Dir: invalidDir,
+		Files: []string{
+			"a.txt",
 		},
 	}
 
 	// Act
-	err := dwf.CreateDirFilesWrite()
+	err := chmodhelper.CreateDirWithFiles(false, 0o644, dwf)
 
 	// Assert
 	actual := args.Map{"hasError": err != nil}
@@ -109,9 +105,16 @@ func Test_Cov19_RwxInstructionExecutor_VerifyMismatch(t *testing.T) {
 	testFile := filepath.Join(tmpDir, "test.txt")
 	_ = os.WriteFile(testFile, []byte("data"), 0o777)
 
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r--------")
+	if ogoErr != nil {
+		panic(ogoErr)
+	}
+
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "r--------",
-		IsSkipOnInvalid:    false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
@@ -146,9 +149,16 @@ func Test_Cov19_RwxVariableWrapper_VerifyWithNilRwx(t *testing.T) {
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
 	// Create a var wrapper with wildcard
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("r*xr-xr-x")
+	if ogoErr != nil {
+		panic(ogoErr)
+	}
+
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "r*xr-xr-x",
-		IsSkipOnInvalid:    false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
