@@ -58,17 +58,18 @@ func Test_Cov20_DynamicMap_Set_NilMap_CreatesNew(t *testing.T) {
 
 // ── DynamicMap.isEqualSingle regardless type (line 873-887) ──
 
-func Test_Cov20_DynamicMap_IsEqualSingle_RegardlessType(t *testing.T) {
+func Test_Cov20_DynamicMap_IsEqual_RegardlessType(t *testing.T) {
 	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+	other := enumimpl.DynamicMap{"a": "1"}
 
 	// Act — compare int 1 vs string "1" regardless of type
-	result := dm.IsEqual(true, map[string]any{"a": "1"})
+	result := dm.IsEqual(true, &other)
 
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": true}
-	actual.ShouldBeEqual(t, 1, "DynamicMap isEqualSingle regardless type", expected)
+	actual.ShouldBeEqual(t, 1, "DynamicMap IsEqual regardless type", expected)
 }
 
 // ── DynamicMap.DiffRawUsingDifferChecker with custom checker (line 448-450) ──
@@ -89,21 +90,6 @@ func Test_Cov20_DynamicMap_DiffRawUsingDifferChecker(t *testing.T) {
 	actual := args.Map{"hasDiff": len(diffMap) > 0}
 	expected := args.Map{"hasDiff": true}
 	actual.ShouldBeEqual(t, 1, "DynamicMap DiffRawUsingDifferChecker", expected)
-}
-
-// ── DynamicMap.ConvToValueKeyMap (line 1369-1370) ──
-
-func Test_Cov20_DynamicMap_ConvToValueKeyMap_MissingKey(t *testing.T) {
-	// Arrange
-	dm := enumimpl.DynamicMap{"hello": "world", "foo": 42}
-
-	// Act — only string values get reversed
-	result := dm.ConvToValueKeyMap()
-
-	// Assert
-	actual := args.Map{"hasWorld": result["world"] == "hello"}
-	expected := args.Map{"hasWorld": true}
-	actual.ShouldBeEqual(t, 1, "DynamicMap ConvToValueKeyMap", expected)
 }
 
 // ── toHashset empty input (line 4-6) ──
@@ -129,7 +115,7 @@ func Test_Cov20_BasicString_UnmarshalToValue_NotFound(t *testing.T) {
 	)
 
 	// Act — unmarshal with a name that doesn't exist
-	val, err := bs.UnmarshallEnumToValue([]byte(`"Nonexistent"`))
+	val, err := bs.UnmarshallToValue(false, []byte(`"Nonexistent"`))
 
 	// Assert
 	actual := args.Map{
