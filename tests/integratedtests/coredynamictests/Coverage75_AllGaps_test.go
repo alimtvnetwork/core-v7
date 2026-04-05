@@ -154,7 +154,7 @@ func Test_Cov75_Dynamic_ParseInjectUsingJsonMust_Valid_I29(t *testing.T) {
 
 func Test_Cov75_Dynamic_JsonStringMust_Valid_I29(t *testing.T) {
 	// Arrange
-	d := coredynamic.NewDynamic("hello")
+	d := coredynamic.NewDynamic("hello", true)
 
 	// Act
 	result := d.JsonStringMust()

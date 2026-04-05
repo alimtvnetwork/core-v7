@@ -43,8 +43,8 @@ func Test_Cov27_PayloadWrapper_Serialize_Valid_I29(t *testing.T) {
 func Test_Cov27_PayloadWrapper_ParseInjectUsingJson_I29(t *testing.T) {
 	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
-	pw.Id = "id1"
-	pw.Category = "cat1"
+	pw.Identifier = "id1"
+	pw.CategoryName = "cat1"
 	bytes, _ := pw.Serialize()
 	jsonResult := corejson.NewResult.UsingBytes(bytes)
 

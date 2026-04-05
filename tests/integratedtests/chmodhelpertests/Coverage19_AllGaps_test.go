@@ -607,13 +607,16 @@ func Test_Cov19_RwxWrapper_ApplyChmod_InvalidPath_NotSkip(t *testing.T) {
 	}
 
 	// Arrange
-	wrapper := chmodhelper.New.RwxWrapper.UsingRwxFullString("rwxr-xr-x")
+	wrapper, err := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxr-xr-x")
+	if err != nil {
+		t.Fatalf("unexpected parse error: %v", err)
+	}
 
 	// Act — path doesn't exist
-	err := wrapper.ApplyChmod(false, "/nonexistent/path/file.txt")
+	applyErr := wrapper.ApplyChmod(false, "/nonexistent/path/file.txt")
 
 	// Assert
-	actual := args.Map{"hasError": err != nil}
+	actual := args.Map{"hasError": applyErr != nil}
 	expected := args.Map{"hasError": true}
 	actual.ShouldBeEqual(t, 1, "ApplyChmod invalidPathErr", expected)
 }
@@ -626,10 +629,16 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	}
 
 	// Arrange
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("rwxr-xr-x")
+	if ogoErr != nil {
+		t.Fatalf("unexpected ogo error: %v", ogoErr)
+	}
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "rwxr-xr-x",
-		IsSkipOnInvalid:    false,
-		IsRecursive:        false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+			IsRecursive:     false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
@@ -659,10 +668,16 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	}
 
 	// Arrange
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("rwxr-xr-x")
+	if ogoErr != nil {
+		t.Fatalf("unexpected ogo error: %v", ogoErr)
+	}
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "rwxr-xr-x",
-		IsSkipOnInvalid:    true,
-		IsRecursive:        false,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: true,
+			IsRecursive:     false,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
@@ -694,10 +709,16 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	// Arrange
 	tmpDir := t.TempDir()
 	_ = os.WriteFile(filepath.Join(tmpDir, "f.txt"), []byte("x"), 0o644)
+	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("rwxrwxrwx")
+	if ogoErr != nil {
+		t.Fatalf("unexpected ogo error: %v", ogoErr)
+	}
 	ins := chmodins.RwxInstruction{
-		RwxOwnerGroupOther: "rwxrwxrwx",
-		IsSkipOnInvalid:    false,
-		IsRecursive:        true,
+		RwxOwnerGroupOther: *ogo,
+		Condition: chmodins.Condition{
+			IsSkipOnInvalid: false,
+			IsRecursive:     true,
+		},
 	}
 	executor, parseErr := chmodhelper.ParseRwxInstructionToExecutor(&ins)
 
