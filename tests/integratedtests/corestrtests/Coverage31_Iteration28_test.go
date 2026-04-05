@@ -280,9 +280,9 @@ func Test_I28_LinkedCollections_IsChainEqual_BothEmpty(t *testing.T) {
 func Test_I28_LinkedCollections_IsChainEqual_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_I28_LinkedCollections_IsChainEqual_OneEmpty", func() {
 		// Arrange
-		lc1 := corestr.New.LinkedCollections.Create()
-		lc2 := corestr.New.LinkedCollections.Create()
-		lc2.Add(corestr.New.Collection.Strings("a"))
+		lc1 := corestr.New.LinkedCollection.Create()
+		lc2 := corestr.New.LinkedCollection.Create()
+		lc2.Add(corestr.New.Collection.Strings([]string{"a"}))
 
 		// Act
 		result := lc1.IsChainEqual(lc2)
