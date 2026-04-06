@@ -707,18 +707,6 @@ func (it *LinkedList) AddStringsToNode(
 	return it
 }
 
-// Deprecated: Use AddStringsToNode instead.
-func (it *LinkedList) AddStringsPtrToNode(
-	isSkipOnNull bool,
-	node *LinkedListNode,
-	items *[]string,
-) *LinkedList {
-	if items == nil {
-		return it
-	}
-
-	return it.AddStringsToNode(isSkipOnNull, node, *items)
-}
 
 func (it *LinkedList) AddAfterNode(
 	node *LinkedListNode,
