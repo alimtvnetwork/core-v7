@@ -4,27 +4,27 @@ Updated: 2026-03-26
 ## Audit Summary
 
 ### Issue 1: Tests Inside Source Packages (WRONG LOCATION)
-**92 files** across **14 packages** need to move to `tests/integratedtests/{pkg}tests/`.
+**Originally 92 files** across **14 packages** needed to move to `tests/integratedtests/{pkg}tests/`.
 Internal packages are excluded per rules.
 
 | Source Package | Files | Status | Notes |
 |---|---|---|---|
 | `coredata/corejson/` | 25 | ✅ DONE | Moved to `Src_*` in corejsontests, originals deleted |
-| `coredata/corestr/` | 20 | TODO | |
-| `coredata/coredynamic/` | 11 | TODO | |
-| `errcore/` | 11 | TODO | |
-| `codestack/` | 5 | TODO | |
-| `coredata/corepayload/` | 5 | TODO | |
-| `coretests/args/` | 3 | TODO | |
-| `coredata/stringslice/` | 2 | TODO | |
+| `coredata/corestr/` | 20→4 | ⏭️ SKIP | 16 moved previously; 4 remaining use unexported symbols |
+| `coredata/coredynamic/` | 11→1 | ⏭️ SKIP | 10 moved previously; 1 benchmark uses unexported symbols |
+| `errcore/` | 11→2 | ⏭️ SKIP | 9 moved previously; 2 remaining use unexported symbols |
+| `codestack/` | 5→2 | ⏭️ SKIP | 3 moved previously; 2 remaining use unexported symbols |
+| `coredata/corepayload/` | 5 | ✅ DONE | All moved |
+| `coretests/args/` | 3 | ⏭️ SKIP | All 3 use unexported symbols |
+| `coredata/stringslice/` | 2 | ✅ DONE | All moved |
 | `corecmp/` | 2 | ✅ DONE | Already duplicated in integrated tests; source deleted |
 | `chmodhelper/` | 2 | ⏭️ SKIP | Uses unexported symbols; left in source per user decision |
 | `regexnew/` | 2 | ⏭️ SKIP | Uses unexported symbols; left in source per user decision |
 | `reflectcore/reflectmodel/` | 1 | ⏭️ SKIP | Internal test (`_internal_test.go`); left in source per user decision |
-| `coretests/` | 1 | TODO | |
+| `coretests/` | 1 | ⏭️ SKIP | Uses unexported symbols |
 | `coreinstruction/` | 1 | ✅ DONE | Moved to `Src_*` in coreinstructiontests, original deleted |
 
-**Remaining to migrate: ~58 files across 7 packages**
+**Remaining in-package: 13 files — ALL use unexported symbols or are benchmarks. Phase 1 COMPLETE.**
 
 **Moving steps per file:**
 1. Change `package` declaration from source pkg to `{pkg}tests`
