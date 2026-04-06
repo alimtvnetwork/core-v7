@@ -36,10 +36,9 @@ func Test_DynamicMapCreationDiff(t *testing.T) {
 		anotherLines := dynamicMapToSortedLines(enumimpl.DynamicMap(anotherDiff))
 		errcore.AssertDiffOnMismatch(t, caseIndex, tc.Title+" (both diff equal)", anotherLines, actLines)
 
-		if len(actLines) != len(anotherLines) {
-			t.Errorf("[case %d] %s: both diff methods line count mismatch got %d, want %d",
-				caseIndex, tc.Title, len(anotherLines), len(actLines))
-		}
+		lineCountActual := args.Map{"lineCount": len(actLines)}
+		lineCountExpected := args.Map{"lineCount": len(anotherLines)}
+		lineCountExpected.ShouldBeEqual(t, caseIndex, "both diff methods line count matches", lineCountActual)
 	}
 }
 
