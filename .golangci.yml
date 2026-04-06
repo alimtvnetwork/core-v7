@@ -22,9 +22,24 @@ linters:
     - nilerr
     - durationcheck
 
+    # Security
+    - gosec
+
     # Performance
     - prealloc
     - gocritic
+
+    # Code hygiene
+    - bodyclose
+    - copyloopvar
+    - usestdlibvars
+    - reassign
+    - makezero
+    - nilnil
+    - unparam
+    - unused
+    - whitespace
+    - gofmt
 
 linters-settings:
   revive:
@@ -109,12 +124,35 @@ linters-settings:
     enabled-tags:
       - diagnostic
       - performance
+      - style
     disabled-checks:
-      - hugeParam
-      - rangeValCopy
+      - hugeParam       # framework passes large structs by design
+      - rangeValCopy    # acceptable in this codebase
+      - commentFormatting # noisy with existing comment style
+      - ifElseChain     # project uses explicit if-else patterns intentionally
+
+  gosec:
+    excludes:
+      - G101 # hardcoded credentials — false positives on constant names
+      - G404 # weak random — not a crypto project
+    severity: warning
+    confidence: medium
 
   misspell:
     locale: US
+
+  unparam:
+    check-exported: false # don't flag exported func params — they're framework API
+
+  errcheck:
+    check-type-assertions: true
+    check-blank: false # allow _ = err in intentional cases
+
+  govet:
+    enable-all: true
+    disable:
+      - fieldalignment # framework structs prioritize readability over alignment
+      - shadow         # too noisy for this codebase
 
 issues:
   exclude-rules:
@@ -130,11 +168,26 @@ issues:
         - revive
       text: "function-length"
 
+    # Relax security checks in tests
+    - path: _test\.go
+      linters:
+        - gosec
+
+    # Relax unused params in tests
+    - path: _test\.go
+      linters:
+        - unparam
+
     # Exclude cmd/main/ from strict naming (scratch/demo files)
     - path: cmd/main/
       linters:
         - revive
       text: "var-naming"
+
+    # Allow unchecked errors in test files
+    - path: _test\.go
+      linters:
+        - errcheck
 
   max-issues-per-linter: 50
   max-same-issues: 10
