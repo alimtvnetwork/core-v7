@@ -1540,10 +1540,6 @@ func (it *Collection) NonEmptyItems() []string {
 	return stringslice.NonEmptySlice(it.items)
 }
 
-// Deprecated: Use NonEmptyItems instead.
-func (it *Collection) NonEmptyItemsPtr() []string {
-	return stringslice.NonEmptySlicePtr(it.items)
-}
 
 // NonEmptyItemsOrNonWhitespace returns items that are non-empty and non-whitespace.
 func (it *Collection) NonEmptyItemsOrNonWhitespace() []string {
