@@ -186,10 +186,6 @@ func (it *ResultsPtrCollection) GetErrorsStrings() []string {
 	return errStrList
 }
 
-// Deprecated: Use GetErrorsStrings instead.
-func (it *ResultsPtrCollection) GetErrorsStringsPtr() []string {
-	return it.GetErrorsStrings()
-}
 
 func (it *ResultsPtrCollection) GetErrorsAsSingleString() string {
 	errStrList := it.GetErrorsStrings()
