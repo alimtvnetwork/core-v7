@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── Result.go uncovered branches ──
@@ -25,18 +26,18 @@ func Test_Gap_Result_Unmarshal_BadPayload(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("hello")
 	var out int
 	err := r.Unmarshal(&out)
-	if err == nil {
-		t.Fatal("expected unmarshal error for type mismatch")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected unmarshal error for type mismatch", actual)
 }
 
 func Test_Gap_Result_UnmarshalSkipExistingIssues_BadPayload(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("hello")
 	var out int
 	err := r.UnmarshalSkipExistingIssues(&out)
-	if err == nil {
-		t.Fatal("expected error for bad payload")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for bad payload", actual)
 }
 
 func Test_Gap_Result_MeaningfulError_EmptyBytesWithError(t *testing.T) {
@@ -47,9 +48,9 @@ func Test_Gap_Result_MeaningfulError_EmptyBytesWithError(t *testing.T) {
 		TypeName: "TestType",
 	}
 	err := r.MeaningfulError()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Gap_Result_MeaningfulError_HasErrorAndPayload(t *testing.T) {
@@ -60,17 +61,17 @@ func Test_Gap_Result_MeaningfulError_HasErrorAndPayload(t *testing.T) {
 		TypeName: "TestType",
 	}
 	err := r.MeaningfulError()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Gap_Result_String_WithNilBytes(t *testing.T) {
 	r := corejson.Result{}
 	s := r.String()
-	if s != "" {
-		t.Fatal("expected empty for nil bytes")
-	}
+	actual := args.Map{"result": s != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for nil bytes", actual)
 }
 
 // ── deserializerLogic uncovered methods ──
@@ -79,9 +80,9 @@ func Test_Gap_Deserialize_UsingSerializerFuncTo(t *testing.T) {
 	fn := func() ([]byte, error) { return []byte(`"hello"`), nil }
 	var s string
 	err := corejson.Deserialize.UsingSerializerFuncTo(fn, &s)
-	if err != nil || s != "hello" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || s != "hello"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Gap_Deserialize_UsingSerializerFuncTo_Nil(t *testing.T) {
@@ -98,12 +99,12 @@ func Test_Gap_BytesTo_ResultCollection(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	b, _ := corejson.Serialize.Raw(c)
 	rc, err := corejson.Deserialize.BytesTo.ResultCollection(b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 func Test_Gap_BytesTo_ResultCollectionMust(t *testing.T) {
@@ -111,9 +112,9 @@ func Test_Gap_BytesTo_ResultCollectionMust(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	b, _ := corejson.Serialize.Raw(c)
 	rc := corejson.Deserialize.BytesTo.ResultCollectionMust(b)
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 func Test_Gap_BytesTo_ResultsPtrCollection(t *testing.T) {
@@ -121,9 +122,9 @@ func Test_Gap_BytesTo_ResultsPtrCollection(t *testing.T) {
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	b, _ := corejson.Serialize.Raw(c)
 	rc, err := corejson.Deserialize.BytesTo.ResultsPtrCollection(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	_ = rc
 }
 
@@ -140,9 +141,9 @@ func Test_Gap_BytesTo_MapResults(t *testing.T) {
 	m.Add("k", corejson.NewResult.Any("v"))
 	b, _ := corejson.Serialize.Raw(m)
 	mr, err := corejson.Deserialize.BytesTo.MapResults(b)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	_ = mr
 }
 
@@ -161,12 +162,12 @@ func Test_Gap_ResultTo_ResultCollection(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	rc, err := corejson.Deserialize.ResultTo.ResultCollection(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 func Test_Gap_ResultTo_ResultCollectionMust(t *testing.T) {
@@ -174,9 +175,9 @@ func Test_Gap_ResultTo_ResultCollectionMust(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	rc := corejson.Deserialize.ResultTo.ResultCollectionMust(jr)
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 func Test_Gap_ResultTo_ResultsPtrCollection(t *testing.T) {
@@ -184,9 +185,9 @@ func Test_Gap_ResultTo_ResultsPtrCollection(t *testing.T) {
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	_, err := corejson.Deserialize.ResultTo.ResultsPtrCollection(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_ResultTo_ResultsPtrCollectionMust(t *testing.T) {
@@ -256,28 +257,28 @@ func Test_Gap_NewResult_UsingBytesError_NonNil(t *testing.T) {
 	// import coredata for BytesError is needed - use creator with valid data
 	r := corejson.NewResult.Any("hello")
 	be := r.BytesError()
-	if be == nil {
-		t.Fatal("expected non-nil BytesError")
-	}
+	actual := args.Map{"result": be == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil BytesError", actual)
 	r2 := corejson.NewResult.UsingBytesError(be)
-	if r2.HasError() {
-		t.Fatal("unexpected error")
-	}
+	actual := args.Map{"result": r2.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
 func Test_Gap_NewResult_UsingBytesError_Nil(t *testing.T) {
 	r := corejson.NewResult.UsingBytesError(nil)
-	if r.Bytes != nil {
-		t.Fatal("expected nil bytes")
-	}
+	actual := args.Map{"result": r.Bytes != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil bytes", actual)
 }
 
 func Test_Gap_NewResult_DeserializeUsingResult_WithIssues(t *testing.T) {
 	errResult := corejson.NewResult.ErrorPtr(errors.New("bad"))
 	r := corejson.NewResult.DeserializeUsingResult(errResult)
-	if r == nil || !r.HasError() {
-		t.Fatal("expected error result")
-	}
+	actual := args.Map{"result": r == nil || !r.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error result", actual)
 }
 
 func Test_Gap_NewResult_FromStringer(t *testing.T) {
@@ -302,20 +303,20 @@ func Test_Gap_CastAny_FromToOption_NilTo(t *testing.T) {
 func Test_Gap_CastAny_FromToOption_Error(t *testing.T) {
 	var out string
 	err := corejson.CastAny.FromToOption(false, errors.New(`"hello"`), &out)
-	if err != nil {
-		t.Fatal("expected nil for error-to-string deserialization")
-	}
-	if out != "hello" {
-		t.Fatal("expected hello, got", out)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for error-to-string deserialization", actual)
+	actual := args.Map{"result": out}
+	expected := args.Map{"result": "hello"}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_Gap_CastAny_FromToOption_ErrorInvalidJson(t *testing.T) {
 	var out string
 	err := corejson.CastAny.FromToOption(false, errors.New("not json"), &out)
-	if err == nil {
-		t.Fatal("expected error for invalid json in error message")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for invalid json in error message", actual)
 }
 
 func Test_Gap_CastAny_FromToOption_NilError(t *testing.T) {
@@ -349,20 +350,20 @@ func Test_Gap_NewResultsCollection_DeserializeUsingResult(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	rc, err := corejson.NewResultsCollection.DeserializeUsingResult(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 func Test_Gap_NewResultsCollection_DeserializeUsingResult_Issues(t *testing.T) {
 	errResult := corejson.NewResult.ErrorPtr(errors.New("bad"))
 	_, err := corejson.NewResultsCollection.DeserializeUsingResult(errResult)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Gap_NewResultsCollection_UnmarshalUsingBytes(t *testing.T) {
@@ -370,12 +371,12 @@ func Test_Gap_NewResultsCollection_UnmarshalUsingBytes(t *testing.T) {
 	c.Add(corejson.NewResult.Any("x"))
 	b, _ := corejson.Serialize.Raw(c)
 	rc, err := corejson.NewResultsCollection.UnmarshalUsingBytes(b)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if rc.Length() == 0 {
-		t.Fatal("expected items")
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": rc.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected items", actual)
 }
 
 // ── newResultsPtrCollectionCreator uncovered ──
@@ -385,9 +386,9 @@ func Test_Gap_NewResultsPtrCollection_DeserializeUsingResult(t *testing.T) {
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	_, err := corejson.NewResultsPtrCollection.DeserializeUsingResult(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_NewResultsPtrCollection_Jsoners(t *testing.T) {
@@ -405,17 +406,17 @@ func Test_Gap_NewMapResults_DeserializeUsingResult(t *testing.T) {
 	m.Add("k", corejson.NewResult.Any("v"))
 	jr := corejson.NewResult.AnyPtr(m)
 	_, err := corejson.NewMapResults.DeserializeUsingResult(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_NewMapResults_DeserializeUsingResult_Issues(t *testing.T) {
 	errResult := corejson.NewResult.ErrorPtr(errors.New("bad"))
 	_, err := corejson.NewMapResults.DeserializeUsingResult(errResult)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── newBytesCollectionCreator uncovered ──
@@ -437,7 +438,7 @@ func Test_Gap_NewBytesCollection_Jsoners(t *testing.T) {
 func Test_Gap_Serialize_Apply_MarshalError(t *testing.T) {
 	ch := make(chan int)
 	r := corejson.Serialize.Apply(ch)
-	if !r.HasError() {
-		t.Fatal("expected error for channel")
-	}
+	actual := args.Map{"result": r.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected error for channel", actual)
 }

@@ -5,13 +5,16 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── ResultsCollection remaining methods ──
 
 func Test_C27_RC_Length_Nil(t *testing.T) {
 	var rc *corejson.ResultsCollection
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 func Test_C27_RC_LastIndex(t *testing.T) { _ = corejson.NewResultsCollection.Empty().LastIndex() }
 func Test_C27_RC_IsEmpty(t *testing.T) { _ = corejson.NewResultsCollection.Empty().IsEmpty() }
@@ -47,7 +50,9 @@ func Test_C27_RC_Take(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.New("a")).Add(corejson.New("b"))
 	taken := rc.Take(1)
-	if taken.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": taken.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C27_RC_Take_Empty(t *testing.T) {
@@ -120,16 +125,22 @@ func Test_C27_RC_GetAtSafeUsingLength(t *testing.T) {
 
 func Test_C27_RC_HasError(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.HasError() { t.Fatal("expected false") }
+	actual := args.Map{"result": rc.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rc.Add(corejson.NewResult.Create(nil, errors.New("e"), ""))
-	if !rc.HasError() { t.Fatal("expected true") }
+	actual := args.Map{"result": rc.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_C27_RC_AllErrors(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Create(nil, errors.New("e"), ""))
 	errs, has := rc.AllErrors()
-	if !has || len(errs) == 0 { t.Fatal("expected errors") }
+	actual := args.Map{"result": has || len(errs) == 0}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected errors", actual)
 }
 
 func Test_C27_RC_GetErrorsStrings(t *testing.T) {
@@ -235,22 +246,30 @@ func Test_C27_RC_GetStrings_Empty(t *testing.T) {
 func Test_C27_RC_GetPagesSize(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 5; i++ { rc.Add(corejson.New(i)) }
-	if rc.GetPagesSize(2) != 3 { t.Fatal("expected 3") }
-	if rc.GetPagesSize(0) != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.GetPagesSize(2) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
+	actual := args.Map{"result": rc.GetPagesSize(0) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C27_RC_GetPagedCollection(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 5; i++ { rc.Add(corejson.New(i)) }
 	pages := rc.GetPagedCollection(2)
-	if len(pages) != 3 { t.Fatal("expected 3") }
+	actual := args.Map{"result": len(pages) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C27_RC_GetPagedCollection_Small(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.New("x"))
 	pages := rc.GetPagedCollection(5)
-	if len(pages) != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": len(pages) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C27_RC_InjectIntoAt(t *testing.T) {
@@ -315,7 +334,9 @@ func Test_C27_RC_ParseInjectUsingJson_Error(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	bad := corejson.NewResult.UsingString(`invalid`)
 	_, err := rc.ParseInjectUsingJson(bad)
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C27_RC_ParseInjectUsingJsonMust_Panic(t *testing.T) {
@@ -335,7 +356,9 @@ func Test_C27_RC_Clone(t *testing.T) {
 
 func Test_C27_RC_ClonePtr_Nil(t *testing.T) {
 	var rc *corejson.ResultsCollection
-	if rc.ClonePtr(true) != nil { t.Fatal("expected nil") }
+	actual := args.Map{"result": rc.ClonePtr(true) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C27_RC_ClonePtr_Valid(t *testing.T) {
@@ -353,7 +376,9 @@ func Test_C27_RC_AddJsoners(t *testing.T) {
 
 func Test_C27_RPC_Length_Nil(t *testing.T) {
 	var rpc *corejson.ResultsPtrCollection
-	if rpc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rpc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 func Test_C27_RPC_LastIndex(t *testing.T) { _ = corejson.NewResultsPtrCollection.Empty().LastIndex() }
 func Test_C27_RPC_IsEmpty(t *testing.T) { _ = corejson.NewResultsPtrCollection.Empty().IsEmpty() }
@@ -504,16 +529,22 @@ func Test_C27_RPC_GetAtSafeUsingLength(t *testing.T) {
 
 func Test_C27_RPC_HasError(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
-	if rpc.HasError() { t.Fatal("expected false") }
+	actual := args.Map{"result": rpc.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rpc.Add(corejson.NewResult.ErrorPtr(errors.New("e")))
-	if !rpc.HasError() { t.Fatal("expected true") }
+	actual := args.Map{"result": rpc.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_C27_RPC_AllErrors(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.Add(corejson.NewResult.ErrorPtr(errors.New("e")))
 	errs, has := rpc.AllErrors()
-	if !has || len(errs) == 0 { t.Fatal("expected errors") }
+	actual := args.Map{"result": has || len(errs) == 0}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected errors", actual)
 }
 
 func Test_C27_RPC_GetErrorsStrings(t *testing.T) {
@@ -597,7 +628,9 @@ func Test_C27_RPC_ParseInjectUsingJson_Error(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	bad := corejson.NewResult.UsingString(`invalid`)
 	_, err := rpc.ParseInjectUsingJson(bad)
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C27_RPC_ParseInjectUsingJsonMust_Panic(t *testing.T) {
@@ -622,22 +655,30 @@ func Test_C27_RPC_Clone_Empty(t *testing.T) {
 func Test_C27_RPC_GetPagesSize(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	for i := 0; i < 5; i++ { rpc.Add(corejson.New(i).Ptr()) }
-	if rpc.GetPagesSize(2) != 3 { t.Fatal("expected 3") }
-	if rpc.GetPagesSize(0) != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rpc.GetPagesSize(2) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
+	actual := args.Map{"result": rpc.GetPagesSize(0) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C27_RPC_GetPagedCollection(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	for i := 0; i < 5; i++ { rpc.Add(corejson.New(i).Ptr()) }
 	pages := rpc.GetPagedCollection(2)
-	if len(pages) != 3 { t.Fatal("expected 3") }
+	actual := args.Map{"result": len(pages) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C27_RPC_GetPagedCollection_Small(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.Add(corejson.New("x").Ptr())
 	pages := rpc.GetPagedCollection(5)
-	if len(pages) != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": len(pages) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C27_RPC_AddJsoners(t *testing.T) {

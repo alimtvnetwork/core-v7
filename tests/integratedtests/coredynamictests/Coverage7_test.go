@@ -841,9 +841,9 @@ func Test_Cov7_TypeNotEqualErr(t *testing.T) {
 func Test_Cov7_TypeMustBeSame_NoPanic(t *testing.T) {
 	defer func() {
 		r := recover()
-		if r != nil {
-			t.Errorf("unexpected panic: %v", r)
-		}
+		actual := args.Map{"result": r != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected panic:", actual)
 	}()
 	coredynamic.TypeMustBeSame("a", "b")
 }
