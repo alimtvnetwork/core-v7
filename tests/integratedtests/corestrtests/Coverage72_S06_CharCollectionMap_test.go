@@ -826,9 +826,9 @@ func Test_CovS06_CharCollMap_PrintSkip(t *testing.T) {
 
 		// Assert — no panic means success
 		expected := args.Map{"skipped": true}
-		if actual["skipped"] != expected["skipped"] {
-			t.Errorf("Print skip test failed")
-		}
+		actual := args.Map{"result": actual["skipped"] != expected["skipped"]}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Print skip test failed", actual)
 	})
 }
 
@@ -884,9 +884,9 @@ func Test_CovS06_CharCollMap_MarshalUnmarshal(t *testing.T) {
 			"marshalOk":   true,
 			"unmarshalOk": true,
 		}
-		if actual["marshalOk"] != expected["marshalOk"] || actual["unmarshalOk"] != expected["unmarshalOk"] {
-			t.Errorf("MarshalJSON/UnmarshalJSON failed: %v", actual)
-		}
+		actual := args.Map{"result": actual["marshalOk"] != expected["marshalOk"] || actual["unmarshalOk"] != expected["unmarshalOk"]}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "MarshalJSON/UnmarshalJSON failed:", actual)
 	})
 }
 
@@ -1001,9 +1001,9 @@ func Test_CovS06_CharCollMap_LockVariants(t *testing.T) {
 			"isEqCSLock":   true,
 		}
 		for k, v := range expected {
-			if actual[k] != v {
-				t.Errorf("LockVariants %s: got %v, want %v", k, actual[k], v)
-			}
+			actual := args.Map{"result": actual[k] != v}
+			expected := args.Map{"result": false}
+			expected.ShouldBeEqual(t, 0, "LockVariants: got, want", actual)
 		}
 	})
 }
@@ -1021,12 +1021,12 @@ func Test_CovS06_CharCollMap_HasWithCollectionLock(t *testing.T) {
 		found, coll := m.HasWithCollectionLock("alpha")
 
 		// Assert
-		if !found {
-			t.Error("HasWithCollectionLock should find 'alpha'")
-		}
-		if coll == nil {
-			t.Error("HasWithCollectionLock should return non-nil collection")
-		}
+		actual := args.Map{"result": found}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock should find 'alpha'", actual)
+		actual := args.Map{"result": coll == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock should return non-nil collection", actual)
 	})
 }
 
@@ -1046,15 +1046,15 @@ func Test_CovS06_CharCollMap_HashsetVariants(t *testing.T) {
 		hs4 := m.HashsetByCharLock('z') // missing char
 
 		// Assert
-		if hs1 == nil || hs1.IsEmpty() {
-			t.Error("HashsetByCharLock('a') should return non-empty")
-		}
-		if hs2 == nil {
-			t.Error("HashsetByStringFirstChar should return non-nil")
-		}
-		if hs3 == nil {
-			t.Error("HashsetByStringFirstCharLock should return non-nil")
-		}
+		actual := args.Map{"result": hs1 == nil || hs1.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('a') should return non-empty", actual)
+		actual := args.Map{"result": hs2 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstChar should return non-nil", actual)
+		actual := args.Map{"result": hs3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstCharLock should return non-nil", actual)
 		if hs4 == nil || !hs4.IsEmpty() {
 			// missing char returns Empty hashset
 			_ = 0
@@ -1076,12 +1076,12 @@ func Test_CovS06_CharCollMap_HashsetsCollByCharsAndStr(t *testing.T) {
 		hsByStr := m.HashsetsCollectionByStringFirstChar("alpha", "bravo")
 
 		// Assert
-		if hsByChars == nil || hsByChars.Length() == 0 {
-			t.Error("HashsetsCollectionByChars should return non-empty")
-		}
-		if hsByStr == nil || hsByStr.Length() == 0 {
-			t.Error("HashsetsCollectionByStringFirstChar should return non-empty")
-		}
+		actual := args.Map{"result": hsByChars == nil || hsByChars.Length() == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByChars should return non-empty", actual)
+		actual := args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByStringFirstChar should return non-empty", actual)
 	})
 }
 
@@ -1099,9 +1099,9 @@ func Test_CovS06_CharCollMap_AddLock(t *testing.T) {
 		m.AddLock("avocado") // same char group, existing path
 
 		// Assert
-		if m.AllLengthsSum() != 2 {
-			t.Errorf("AddLock: expected 2 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddLock: expected 2 items", actual)
 	})
 }
 
@@ -1119,12 +1119,12 @@ func Test_CovS06_CharCollMap_AddSameCharsCollLock(t *testing.T) {
 		result := m.AddSameCharsCollectionLock("apple", coll)
 
 		// Assert
-		if result == nil {
-			t.Error("AddSameCharsCollectionLock should return non-nil")
-		}
-		if m.AllLengthsSum() < 3 {
-			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddSameCharsCollectionLock should return non-nil", actual)
+		actual := args.Map{"result": m.AllLengthsSum() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
 
@@ -1141,9 +1141,9 @@ func Test_CovS06_CharCollMap_GetCollectionByChar(t *testing.T) {
 		coll := m.GetCollectionByChar('a')
 
 		// Assert
-		if coll == nil {
-			t.Error("GetCollectionByChar('a') should return non-nil")
-		}
+		actual := args.Map{"result": coll == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetCollectionByChar('a') should return non-nil", actual)
 	})
 }
 
@@ -1162,9 +1162,9 @@ func Test_CovS06_CharCollMap_JsonParseSelfInject(t *testing.T) {
 		err := m2.JsonParseSelfInject(&jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("JsonParseSelfInject should not error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "JsonParseSelfInject should not error:", actual)
 	})
 }
 
@@ -1183,9 +1183,9 @@ func Test_CovS06_CharCollMap_ParseInjectMust_Valid(t *testing.T) {
 		result := m2.ParseInjectUsingJsonMust(&jsonResult)
 
 		// Assert
-		if result == nil {
-			t.Error("ParseInjectUsingJsonMust should return non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust should return non-nil", actual)
 	})
 }
 
@@ -1211,9 +1211,9 @@ func Test_CovS06_CharCollMap_AddHashmapsFilter(t *testing.T) {
 		)
 
 		// Assert
-		if m.AllLengthsSum() != 2 {
-			t.Errorf("Expected 2 items from filter, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 2 items from filter", actual)
 	})
 }
 
@@ -1242,9 +1242,9 @@ func Test_CovS06_CharCollMap_AddHashmapsFilter_Break(t *testing.T) {
 		)
 
 		// Assert — should have stopped early
-		if m.AllLengthsSum() > 3 {
-			t.Errorf("Break filter should have limited additions")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() > 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Break filter should have limited additions", actual)
 	})
 }
 
@@ -1305,9 +1305,9 @@ func Test_CovS06_CharCollMap_GetMap(t *testing.T) {
 		rawMap := m.GetMap()
 
 		// Assert
-		if rawMap == nil {
-			t.Error("GetMap should return non-nil")
-		}
+		actual := args.Map{"result": rawMap == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetMap should return non-nil", actual)
 	})
 }
 
@@ -1324,9 +1324,9 @@ func Test_CovS06_CharCollMap_JsonPtr(t *testing.T) {
 		result := m.JsonPtr()
 
 		// Assert
-		if result == nil {
-			t.Error("JsonPtr should return non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr should return non-nil", actual)
 	})
 }
 
@@ -1344,9 +1344,9 @@ func Test_CovS06_CharCollMap_IsEquals_LenMismatch(t *testing.T) {
 		result := m1.IsEquals(m2)
 
 		// Assert
-		if result {
-			t.Error("IsEquals should return false for different lengths")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsEquals should return false for different lengths", actual)
 	})
 }
 
@@ -1364,9 +1364,9 @@ func Test_CovS06_CharCollMap_IsEquals_OneEmpty(t *testing.T) {
 		result := m1.IsEquals(m2)
 
 		// Assert
-		if result {
-			t.Error("IsEquals should return false when one is empty")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsEquals should return false when one is empty", actual)
 	})
 }
 
@@ -1384,9 +1384,9 @@ func Test_CovS06_CharCollMap_IsEquals_KeyMissing(t *testing.T) {
 		result := m1.IsEqualsCaseSensitive(true, m2)
 
 		// Assert
-		if result {
-			t.Error("IsEquals should return false when keys differ")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsEquals should return false when keys differ", actual)
 	})
 }
 

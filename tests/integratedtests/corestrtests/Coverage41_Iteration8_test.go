@@ -7,6 +7,7 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================================================
@@ -18,17 +19,39 @@ func Test_I8_Collection_BasicOps(t *testing.T) {
 		c := corestr.New.Collection.Cap(10)
 		c.Add("a").Add("b").Add("c")
 
-		if c.Length() != 3 { t.Fatal("expected 3") }
-		if c.Count() != 3 { t.Fatal("count mismatch") }
-		if c.Capacity() < 3 { t.Fatal("capacity too small") }
-		if !c.HasAnyItem() { t.Fatal("expected has items") }
-		if c.IsEmpty() { t.Fatal("not empty") }
-		if c.HasItems() != true { t.Fatal("has items") }
-		if c.LastIndex() != 2 { t.Fatal("last index") }
-		if !c.HasIndex(0) { t.Fatal("has index 0") }
-		if !c.HasIndex(2) { t.Fatal("has index 2") }
-		if c.HasIndex(3) { t.Fatal("no index 3") }
-		if c.HasIndex(-1) { t.Fatal("no negative index") }
+		actual := args.Map{"result": c.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
+		actual := args.Map{"result": c.Count() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "count mismatch", actual)
+		actual := args.Map{"result": c.Capacity() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "capacity too small", actual)
+		actual := args.Map{"result": c.HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has items", actual)
+		actual := args.Map{"result": c.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
+		actual := args.Map{"result": c.HasItems() != true}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "has items", actual)
+		actual := args.Map{"result": c.LastIndex() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last index", actual)
+		actual := args.Map{"result": c.HasIndex(0)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has index 0", actual)
+		actual := args.Map{"result": c.HasIndex(2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has index 2", actual)
+		actual := args.Map{"result": c.HasIndex(3)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "no index 3", actual)
+		actual := args.Map{"result": c.HasIndex(-1)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "no negative index", actual)
 	})
 }
 
@@ -59,7 +82,9 @@ func Test_I8_Collection_AddVariants(t *testing.T) {
 		c.AddFuncErr(func() (string, error) { return "h", nil }, func(errInput error) {})
 		c.AddError(nil)
 
-		if c.Length() < 7 { t.Fatal("expected at least 7 items") }
+		actual := args.Map{"result": c.Length() < 7}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 7 items", actual)
 	})
 }
 
@@ -75,17 +100,27 @@ func Test_I8_Collection_Adds(t *testing.T) {
 		c.AddCollection(other)
 		c.AddCollections(other)
 
-		if c.Length() < 10 { t.Fatal("expected at least 10") }
+		actual := args.Map{"result": c.Length() < 10}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 10", actual)
 	})
 }
 
 func Test_I8_Collection_RemoveAt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_RemoveAt", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-		if !c.RemoveAt(1) { t.Fatal("expected success") }
-		if c.RemoveAt(-1) { t.Fatal("expected fail for negative") }
-		if c.RemoveAt(99) { t.Fatal("expected fail for out of bounds") }
-		if c.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": c.RemoveAt(1)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected success", actual)
+		actual := args.Map{"result": c.RemoveAt(-1)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected fail for negative", actual)
+		actual := args.Map{"result": c.RemoveAt(99)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected fail for out of bounds", actual)
+		actual := args.Map{"result": c.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -93,7 +128,9 @@ func Test_I8_Collection_ChainRemoveAt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ChainRemoveAt", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		c.ChainRemoveAt(0)
-		if c.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": c.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -101,7 +138,9 @@ func Test_I8_Collection_InsertAt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_InsertAt", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "c"})
 		c.InsertAt(1, "b")
-		if c.Length() != 3 { t.Fatal("expected 3") }
+		actual := args.Map{"result": c.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -118,22 +157,40 @@ func Test_I8_Collection_RemoveItemsIndexes(t *testing.T) {
 func Test_I8_Collection_FirstLastSingleTakeSkip(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_FirstLastSingleTakeSkip", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-		if c.First() != "a" { t.Fatal("first") }
-		if c.Last() != "c" { t.Fatal("last") }
-		if c.FirstOrDefault() != "a" { t.Fatal("first or default") }
-		if c.LastOrDefault() != "c" { t.Fatal("last or default") }
+		actual := args.Map{"result": c.First() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "first", actual)
+		actual := args.Map{"result": c.Last() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last", actual)
+		actual := args.Map{"result": c.FirstOrDefault() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "first or default", actual)
+		actual := args.Map{"result": c.LastOrDefault() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last or default", actual)
 
 		taken := c.Take(2)
-		if taken.Length() != 2 { t.Fatal("take 2") }
+		actual := args.Map{"result": taken.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "take 2", actual)
 		skipped := c.Skip(1)
-		if skipped.Length() != 2 { t.Fatal("skip 1") }
+		actual := args.Map{"result": skipped.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "skip 1", actual)
 
 		empty := corestr.New.Collection.Empty()
-		if empty.FirstOrDefault() != "" { t.Fatal("empty first") }
-		if empty.LastOrDefault() != "" { t.Fatal("empty last") }
+		actual := args.Map{"result": empty.FirstOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty first", actual)
+		actual := args.Map{"result": empty.LastOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty last", actual)
 
 		single := corestr.New.Collection.Strings([]string{"only"})
-		if single.Single() != "only" { t.Fatal("single") }
+		actual := args.Map{"result": single.Single() != "only"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "single", actual)
 	})
 }
 
@@ -141,15 +198,21 @@ func Test_I8_Collection_Reverse(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Reverse", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		r := c.Reverse()
-		if r.First() != "c" { t.Fatal("reverse first") }
+		actual := args.Map{"result": r.First() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "reverse first", actual)
 	})
 }
 
 func Test_I8_Collection_IndexAt(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_IndexAt", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
-		if c.IndexAt(0) != "a" { t.Fatal("index 0") }
-		if c.SafeIndexAtUsingLength("", 3, 0) != "a" { t.Fatal("safe index 0") }
+		actual := args.Map{"result": c.IndexAt(0) != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "index 0", actual)
+		actual := args.Map{"result": c.SafeIndexAtUsingLength("", 3, 0) != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "safe index 0", actual)
 	})
 }
 
@@ -158,9 +221,15 @@ func Test_I8_Collection_IsEquals(t *testing.T) {
 		a := corestr.New.Collection.Strings([]string{"a", "b"})
 		b := corestr.New.Collection.Strings([]string{"a", "b"})
 		c := corestr.New.Collection.Strings([]string{"a", "c"})
-		if !a.IsEquals(b) { t.Fatal("expected equal") }
-		if a.IsEquals(c) { t.Fatal("expected not equal") }
-		if a.IsEquals(nil) { t.Fatal("expected not equal to nil") }
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
+		actual := args.Map{"result": a.IsEquals(c)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
+		actual := args.Map{"result": a.IsEquals(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal to nil", actual)
 
 		_ = a.IsEqualsWithSensitive(false, b)
 	})
@@ -169,7 +238,9 @@ func Test_I8_Collection_IsEquals(t *testing.T) {
 func Test_I8_Collection_LengthLock(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_LengthLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
-		if c.LengthLock() != 1 { t.Fatal("expected 1") }
+		actual := args.Map{"result": c.LengthLock() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		if !c.IsEmptyLock() == true { /* expected non-empty */ }
 	})
 }
@@ -197,7 +268,9 @@ func Test_I8_Collection_Filter(t *testing.T) {
 		filtered := c.Filter(func(s string, i int) (string, bool, bool) {
 			return s, len(s) == 2, false
 		})
-		if len(filtered) != 2 { t.Fatalf("expected 2, got %d", len(filtered)) }
+		actual := args.Map{"result": len(filtered)}
+		expected := args.Map{"result": 2}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		_ = c.FilterLock(func(s string, i int) (string, bool, bool) {
 			return s, true, false
@@ -221,7 +294,9 @@ func Test_I8_Collection_Unique(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Unique", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
 		uniq := c.UniqueList()
-		if len(uniq) != 2 { t.Fatal("expected 2 unique") }
+		actual := args.Map{"result": len(uniq) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 unique", actual)
 		_ = c.UniqueListLock()
 		_ = c.UniqueBoolMap()
 		_ = c.UniqueBoolMapLock()
@@ -244,12 +319,18 @@ func Test_I8_Collection_NonEmpty(t *testing.T) {
 func Test_I8_Collection_Has(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Has", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
-		if !c.Has("a") { t.Fatal("expected has a") }
-		if c.Has("z") { t.Fatal("expected no z") }
+		actual := args.Map{"result": c.Has("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has a", actual)
+		actual := args.Map{"result": c.Has("z")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no z", actual)
 		_ = c.HasLock("a")
 		s := "a"
 		_ = c.HasPtr(&s)
-		if !c.HasAll("a", "b") { t.Fatal("expected has all") }
+		actual := args.Map{"result": c.HasAll("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has all", actual)
 		_ = c.HasUsingSensitivity("A", false)
 		_ = c.IsContainsAll("a", "b")
 		_ = c.IsContainsAllLock("a")
@@ -264,9 +345,13 @@ func Test_I8_Collection_Sort(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Sort", func() {
 		c := corestr.New.Collection.Strings([]string{"c", "a", "b"})
 		asc := c.SortedListAsc()
-		if asc[0] != "a" { t.Fatal("expected a first") }
+		actual := args.Map{"result": asc[0] != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a first", actual)
 		dsc := c.SortedListDsc()
-		if dsc[0] != "c" { t.Fatal("expected c first") }
+		actual := args.Map{"result": dsc[0] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected c first", actual)
 		_ = c.SortedAsc()
 		_ = c.SortedAscLock()
 	})
@@ -276,7 +361,9 @@ func Test_I8_Collection_Hashset(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Hashset", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		h := c.HashsetAsIs()
-		if h.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": h.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_ = c.HashsetWithDoubleLength()
 		_ = c.HashsetLock()
 	})
@@ -334,7 +421,9 @@ func Test_I8_Collection_Serialize(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Serialize", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		b, err := c.Serialize()
-		if err != nil { t.Fatal(err) }
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 		var target []string
 		_ = c.Deserialize(&target)
 		_ = b
@@ -357,7 +446,9 @@ func Test_I8_Collection_EachItemSplitBy(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_EachItemSplitBy", func() {
 		c := corestr.New.Collection.Strings([]string{"a,b", "c,d"})
 		split := c.EachItemSplitBy(",")
-		if len(split) != 4 { t.Fatalf("expected 4, got %d", len(split)) }
+		actual := args.Map{"result": len(split)}
+		expected := args.Map{"result": 4}
+		expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	})
 }
 
@@ -365,7 +456,9 @@ func Test_I8_Collection_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ConcatNew", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		c2 := c.ConcatNew(0, "b", "c")
-		if c2.Length() != 3 { t.Fatal("expected 3") }
+		actual := args.Map{"result": c2.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -393,11 +486,15 @@ func Test_I8_Collection_GetAllExcept(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_GetAllExcept", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 		result := c.GetAllExcept([]string{"b"})
-		if len(result) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(result) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		exc := corestr.New.Collection.Strings([]string{"a"})
 		result2 := c.GetAllExceptCollection(exc)
-		if len(result2) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(result2) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -405,7 +502,9 @@ func Test_I8_Collection_Paging(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Paging", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c", "d", "e"})
 		pages := c.GetPagesSize(2)
-		if pages != 3 { t.Fatalf("expected 3, got %d", pages) }
+		actual := args.Map{"result": pages}
+		expected := args.Map{"result": 3}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		page := c.GetPagedCollection(2)
 		_ = page
 		single := c.GetSinglePageCollection(2, 1)
@@ -417,7 +516,9 @@ func Test_I8_Collection_New(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_New", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		c2 := c.New()
-		if c2.Length() != 0 { t.Fatal("expected empty new") }
+		actual := args.Map{"result": c2.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty new", actual)
 	})
 }
 
@@ -458,7 +559,9 @@ func Test_I8_Collection_CharCollectionMap(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_CharCollectionMap", func() {
 		c := corestr.New.Collection.Strings([]string{"apple", "avocado", "banana"})
 		m := c.CharCollectionMap()
-		if m.IsEmpty() { t.Fatal("expected non-empty") }
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -474,7 +577,9 @@ func Test_I8_Collection_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ClearDispose", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		c.Clear()
-		if c.Length() != 0 { t.Fatal("expected 0 after clear") }
+		actual := args.Map{"result": c.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 after clear", actual)
 
 		c2 := corestr.New.Collection.Strings([]string{"a"})
 		c2.Dispose()
@@ -485,7 +590,9 @@ func Test_I8_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		cp := c.ListCopyPtrLock()
-		if len(cp) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(cp) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -512,7 +619,9 @@ func Test_I8_Collection_AddPointerCollectionsLock(t *testing.T) {
 func Test_I8_Collection_NilLength(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_NilLength", func() {
 		var c *corestr.Collection
-		if c.Length() != 0 { t.Fatal("expected 0 for nil") }
+		actual := args.Map{"result": c.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for nil", actual)
 	})
 }
 
@@ -521,7 +630,9 @@ func Test_I8_Collection_ParseInjectUsingJsonMust(t *testing.T) {
 		c := corestr.New.Collection.Empty()
 		r := corejson.New([]string{"a", "b"})
 		c.ParseInjectUsingJsonMust(&r)
-		if c.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": c.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -536,10 +647,18 @@ func Test_I8_Hashmap_BasicOps(t *testing.T) {
 		h.Set("b", "2")
 		h.SetTrim(" c ", " 3 ")
 
-		if h.IsEmpty() { t.Fatal("not empty") }
-		if !h.HasItems() { t.Fatal("has items") }
-		if !h.HasAnyItem() { t.Fatal("has any") }
-		if h.Length() < 3 { t.Fatal("expected >= 3") }
+		actual := args.Map{"result": h.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
+		actual := args.Map{"result": h.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has items", actual)
+		actual := args.Map{"result": h.HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has any", actual)
+		actual := args.Map{"result": h.Length() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected >= 3", actual)
 		_ = h.LengthLock()
 		_ = h.IsEmptyLock()
 	})
@@ -590,15 +709,25 @@ func Test_I8_Hashmap_Has(t *testing.T) {
 		h.AddOrUpdate("a", "1")
 		h.AddOrUpdate("b", "2")
 
-		if !h.Has("a") { t.Fatal("expected has a") }
-		if !h.Contains("b") { t.Fatal("expected contains b") }
+		actual := args.Map{"result": h.Has("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has a", actual)
+		actual := args.Map{"result": h.Contains("b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected contains b", actual)
 		_ = h.ContainsLock("a")
-		if h.IsKeyMissing("a") { t.Fatal("not missing") }
+		actual := args.Map{"result": h.IsKeyMissing("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not missing", actual)
 		_ = h.IsKeyMissingLock("a")
 		_ = h.HasLock("a")
 		_ = h.HasWithLock("a")
-		if !h.HasAllStrings("a", "b") { t.Fatal("has all") }
-		if !h.HasAll("a", "b") { t.Fatal("has all") }
+		actual := args.Map{"result": h.HasAllStrings("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has all", actual)
+		actual := args.Map{"result": h.HasAll("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has all", actual)
 		_ = h.HasAny("a", "z")
 
 		coll := corestr.New.Collection.Strings([]string{"a"})
@@ -611,11 +740,17 @@ func Test_I8_Hashmap_Get(t *testing.T) {
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("key", "val")
 		v, found := h.Get("key")
-		if !found || v != "val" { t.Fatal("get failed") }
+		actual := args.Map{"result": found || v != "val"}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "get failed", actual)
 		v2, found2 := h.GetValue("key")
-		if !found2 || v2 != "val" { t.Fatal("getvalue failed") }
+		actual := args.Map{"result": found2 || v2 != "val"}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "getvalue failed", actual)
 		_, f := h.Get("missing")
-		if f { t.Fatal("should not find") }
+		actual := args.Map{"result": f}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should not find", actual)
 	})
 }
 
@@ -685,7 +820,9 @@ func Test_I8_Hashmap_IsEqual(t *testing.T) {
 		h1.AddOrUpdate("a", "1")
 		h2 := corestr.New.Hashmap.Empty()
 		h2.AddOrUpdate("a", "1")
-		if !h1.IsEqualPtr(h2) { t.Fatal("expected equal") }
+		actual := args.Map{"result": h1.IsEqualPtr(h2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		_ = h1.IsEqualPtrLock(h2)
 	})
 }
@@ -909,14 +1046,24 @@ func Test_I8_Hashset_AddCollections(t *testing.T) {
 func Test_I8_Hashset_Has(t *testing.T) {
 	safeTest(t, "Test_I8_Hashset_Has", func() {
 		h := corestr.New.Hashset.StringsSpreadItems("a", "b", "c")
-		if !h.Has("a") { t.Fatal("expected has a") }
-		if !h.Contains("b") { t.Fatal("expected contains b") }
+		actual := args.Map{"result": h.Has("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has a", actual)
+		actual := args.Map{"result": h.Contains("b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected contains b", actual)
 		_ = h.HasLock("a")
 		_ = h.HasWithLock("a")
-		if h.IsMissing("a") { t.Fatal("not missing") }
+		actual := args.Map{"result": h.IsMissing("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not missing", actual)
 		_ = h.IsMissingLock("a")
-		if !h.HasAllStrings([]string{"a", "b"}) { t.Fatal("has all strings") }
-		if !h.HasAll("a", "b") { t.Fatal("has all") }
+		actual := args.Map{"result": h.HasAllStrings([]string{"a", "b"})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has all strings", actual)
+		actual := args.Map{"result": h.HasAll("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has all", actual)
 		_ = h.HasAny("a", "z")
 		_ = h.IsAllMissing("x", "y")
 		coll := corestr.New.Collection.Strings([]string{"a"})
@@ -944,7 +1091,9 @@ func Test_I8_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_I8_Hashset_Filter", func() {
 		h := corestr.New.Hashset.StringsSpreadItems("aa", "b", "cc")
 		f := h.Filter(func(s string) bool { return len(s) > 1 })
-		if f.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": f.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		_ = h.GetFilteredItems(corestr.IsStringFilter(func(str string, index int) (string, bool, bool) { return str, true, false }))
 		_ = h.GetFilteredCollection(corestr.IsStringFilter(func(str string, index int) (string, bool, bool) { return str, true, false }))
@@ -976,7 +1125,9 @@ func Test_I8_Hashset_IsEqual(t *testing.T) {
 	safeTest(t, "Test_I8_Hashset_IsEqual", func() {
 		a := corestr.New.Hashset.StringsSpreadItems("a", "b")
 		b := corestr.New.Hashset.StringsSpreadItems("a", "b")
-		if !a.IsEqual(b) { t.Fatal("expected equal") }
+		actual := args.Map{"result": a.IsEqual(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		_ = a.IsEquals(b)
 		_ = a.IsEqualsLock(b)
 	})
@@ -1090,18 +1241,30 @@ func Test_I8_SimpleSlice_BasicOps(t *testing.T) {
 func Test_I8_SimpleSlice_FirstLast(t *testing.T) {
 	safeTest(t, "Test_I8_SimpleSlice_FirstLast", func() {
 		s := corestr.New.SimpleSlice.SpreadStrings("a", "b", "c")
-		if s.First() != "a" { t.Fatal("first") }
-		if s.Last() != "c" { t.Fatal("last") }
-		if s.FirstOrDefault() != "a" { t.Fatal("first or default") }
-		if s.LastOrDefault() != "c" { t.Fatal("last or default") }
+		actual := args.Map{"result": s.First() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "first", actual)
+		actual := args.Map{"result": s.Last() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last", actual)
+		actual := args.Map{"result": s.FirstOrDefault() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "first or default", actual)
+		actual := args.Map{"result": s.LastOrDefault() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last or default", actual)
 		_ = s.FirstDynamic()
 		_ = s.LastDynamic()
 		_ = s.FirstOrDefaultDynamic()
 		_ = s.LastOrDefaultDynamic()
 
 		e := corestr.New.SimpleSlice.Empty()
-		if e.FirstOrDefault() != "" { t.Fatal("empty first") }
-		if e.LastOrDefault() != "" { t.Fatal("empty last") }
+		actual := args.Map{"result": e.FirstOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty first", actual)
+		actual := args.Map{"result": e.LastOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty last", actual)
 	})
 }
 
@@ -1120,12 +1283,24 @@ func Test_I8_SimpleSlice_SkipTakeLimit(t *testing.T) {
 func Test_I8_SimpleSlice_Properties(t *testing.T) {
 	safeTest(t, "Test_I8_SimpleSlice_Properties", func() {
 		s := corestr.New.SimpleSlice.SpreadStrings("a", "b")
-		if s.Length() != 2 { t.Fatal("length") }
-		if s.Count() != 2 { t.Fatal("count") }
-		if s.IsEmpty() { t.Fatal("not empty") }
-		if !s.HasAnyItem() { t.Fatal("has items") }
-		if s.LastIndex() != 1 { t.Fatal("last index") }
-		if !s.HasIndex(0) { t.Fatal("has index") }
+		actual := args.Map{"result": s.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "length", actual)
+		actual := args.Map{"result": s.Count() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "count", actual)
+		actual := args.Map{"result": s.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
+		actual := args.Map{"result": s.HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has items", actual)
+		actual := args.Map{"result": s.LastIndex() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "last index", actual)
+		actual := args.Map{"result": s.HasIndex(0)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has index", actual)
 		_ = s.Strings()
 		_ = s.List()
 	})
@@ -1134,8 +1309,12 @@ func Test_I8_SimpleSlice_Properties(t *testing.T) {
 func Test_I8_SimpleSlice_Contains(t *testing.T) {
 	safeTest(t, "Test_I8_SimpleSlice_Contains", func() {
 		s := corestr.New.SimpleSlice.SpreadStrings("a", "b")
-		if !s.IsContains("a") { t.Fatal("contains a") }
-		if s.IsContains("z") { t.Fatal("no z") }
+		actual := args.Map{"result": s.IsContains("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "contains a", actual)
+		actual := args.Map{"result": s.IsContains("z")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "no z", actual)
 		_ = s.IndexOf("b")
 		_ = s.IndexOf("z")
 		_ = s.CountFunc(func(index int, item string) bool { return index >= 0 && item != "" })
@@ -1182,7 +1361,9 @@ func Test_I8_SimpleSlice_Hashset(t *testing.T) {
 	safeTest(t, "Test_I8_SimpleSlice_Hashset", func() {
 		s := corestr.New.SimpleSlice.SpreadStrings("a", "b")
 		h := s.Hashset()
-		if h.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": h.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1203,13 +1384,23 @@ func Test_I8_LinkedList_BasicOps(t *testing.T) {
 		ll := corestr.New.LinkedList.Empty()
 		ll.Add("a").Add("b").Add("c")
 
-		if ll.Length() != 3 { t.Fatal("expected 3") }
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		_ = ll.LengthLock()
-		if ll.IsEmpty() { t.Fatal("not empty") }
-		if !ll.HasItems() { t.Fatal("has items") }
+		actual := args.Map{"result": ll.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
+		actual := args.Map{"result": ll.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has items", actual)
 		_ = ll.IsEmptyLock()
-		if ll.Head() == nil { t.Fatal("head nil") }
-		if ll.Tail() == nil { t.Fatal("tail nil") }
+		actual := args.Map{"result": ll.Head() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "head nil", actual)
+		actual := args.Map{"result": ll.Tail() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "tail nil", actual)
 	})
 }
 
@@ -1239,7 +1430,9 @@ func Test_I8_LinkedList_IsEquals(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_IsEquals", func() {
 		a := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		b := corestr.New.LinkedList.Strings([]string{"a", "b"})
-		if !a.IsEquals(b) { t.Fatal("expected equal") }
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		_ = a.IsEqualsWithSensitive(b, false)
 	})
 }
@@ -1248,7 +1441,9 @@ func Test_I8_LinkedList_InsertAt(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_InsertAt", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "c"})
 		ll.InsertAt(1, "b")
-		if ll.Length() != 3 { t.Fatal("expected 3") }
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1260,7 +1455,9 @@ func Test_I8_LinkedList_Loop(t *testing.T) {
 			count++
 			return false
 		})
-		if count != 3 { t.Fatal("expected 3 iterations") }
+		actual := args.Map{"result": count != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3 iterations", actual)
 	})
 }
 
@@ -1274,7 +1471,9 @@ func Test_I8_LinkedList_Filter(t *testing.T) {
 				IsBreak: false,
 			}
 		})
-		if len(filtered) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(filtered) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1282,7 +1481,9 @@ func Test_I8_LinkedList_RemoveByIndex(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_RemoveByIndex", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
 		ll.RemoveNodeByIndex(1)
-		if ll.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1290,7 +1491,9 @@ func Test_I8_LinkedList_RemoveByValue(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_RemoveByValue", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
 		ll.RemoveNodeByElementValue("b", true, false)
-		if ll.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1298,7 +1501,9 @@ func Test_I8_LinkedList_RemoveByIndexes(t *testing.T) {
 	safeTest(t, "Test_I8_LinkedList_RemoveByIndexes", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c", "d"})
 		ll.RemoveNodeByIndexes(false, 0, 2)
-		if ll.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1317,7 +1522,9 @@ func Test_I8_LinkedList_GetCompareSummary(t *testing.T) {
 func Test_I8_ValidValue(t *testing.T) {
 	safeTest(t, "Test_I8_ValidValue", func() {
 		v := corestr.ValidValue{Value: "hello", IsValid: true}
-		if !v.IsValid { t.Fatal("expected valid") }
+		actual := args.Map{"result": v.IsValid}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 		_ = v.Value
 	})
 }
@@ -1368,7 +1575,9 @@ func Test_I8_KeyValueCollection(t *testing.T) {
 		kvc := corestr.New.KeyValues.Empty()
 		kvc.Add("a", "1")
 		kvc.Add("b", "2")
-		if kvc.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1415,10 +1624,14 @@ func Test_I8_CloneSlice(t *testing.T) {
 	safeTest(t, "Test_I8_CloneSlice", func() {
 		orig := []string{"a", "b"}
 		c := corestr.CloneSlice(orig)
-		if len(c) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(c) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		c2 := corestr.CloneSlice(nil)
-		if len(c2) != 0 { t.Fatal("expected empty for nil") }
+		actual := args.Map{"result": len(c2) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	})
 }
 
@@ -1426,9 +1639,13 @@ func Test_I8_CloneSliceIf(t *testing.T) {
 	safeTest(t, "Test_I8_CloneSliceIf", func() {
 		orig := []string{"a", "b"}
 		c := corestr.CloneSliceIf(true, orig...)
-		if len(c) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(c) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		c2 := corestr.CloneSliceIf(false, orig...)
-		if len(c2) != 2 { t.Fatal("expected passthrough len 2 when not cloning") }
+		actual := args.Map{"result": len(c2) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected passthrough len 2 when not cloning", actual)
 	})
 }
 
@@ -1447,7 +1664,9 @@ func Test_I8_AllIndividualStringsOfStringsLength(t *testing.T) {
 		// Fix: function counts items (3), not character lengths (6).
 		// See issues/corestrtests-allindividualslength-wrong-expectation.md
 		result := corestr.AllIndividualStringsOfStringsLength(&strs)
-		if result != 3 { t.Fatalf("expected 3, got %d", result) }
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": 3}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1458,7 +1677,9 @@ func Test_I8_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 		// Fix: function counts items (3), not character lengths (6).
 		// See issues/corestrtests-allindividualslength-wrong-expectation.md
 		result := corestr.AllIndividualsLengthOfSimpleSlices(s1, s2)
-		if result != 3 { t.Fatalf("expected 3, got %d", result) }
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": 3}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1469,9 +1690,15 @@ func Test_I8_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 func Test_I8_SimpleStringOnce(t *testing.T) {
 	safeTest(t, "Test_I8_SimpleStringOnce", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hello")
-		if sso.Value() != "hello" { t.Fatal("expected hello") }
-		if !sso.IsDefined() { t.Fatal("expected defined") }
-		if sso.IsEmpty() { t.Fatal("expected not empty") }
+		actual := args.Map{"result": sso.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
+		actual := args.Map{"result": sso.IsDefined()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected defined", actual)
+		actual := args.Map{"result": sso.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
 
@@ -1482,8 +1709,12 @@ func Test_I8_SimpleStringOnce(t *testing.T) {
 func Test_I8_CharCollectionMap_Ops(t *testing.T) {
 	safeTest(t, "Test_I8_CharCollectionMap_Ops", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "avocado", "banana"})
-		if m.IsEmpty() { t.Fatal("not empty") }
-		if !m.HasItems() { t.Fatal("has items") }
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
+		actual := args.Map{"result": m.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "has items", actual)
 		_ = m.Length()
 		_ = m.LengthLock()
 		_ = m.AllLengthsSum()
@@ -1543,7 +1774,9 @@ func Test_I8_CharCollectionMap_Add(t *testing.T) {
 func Test_I8_CharHashsetMap_Ops(t *testing.T) {
 	safeTest(t, "Test_I8_CharHashsetMap_Ops", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 5, "apple", "avocado", "banana")
-		if m.IsEmpty() { t.Fatal("not empty") }
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "not empty", actual)
 		_ = m.Length()
 		_ = m.LengthLock()
 		_ = m.IsEmptyLock()
@@ -1566,19 +1799,23 @@ func Test_I8_CharHashsetMap_Ops(t *testing.T) {
 func Test_I8_LeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_I8_LeftRightFromSplit", func() {
 		lr := corestr.LeftRightFromSplit("a=b", "=")
-		if lr.Left != "a" || lr.Right != "b" { t.Fatal("split failed") }
+		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "split failed", actual)
 
 		lr2 := corestr.LeftRightFromSplit("noSep", "=")
-		if lr2.Left != "noSep" { t.Fatal("no sep should set left") }
+		actual := args.Map{"result": lr2.Left != "noSep"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "no sep should set left", actual)
 	})
 }
 
 func Test_I8_LeftMiddleRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_I8_LeftMiddleRightFromSplit", func() {
 		lmr := corestr.LeftMiddleRightFromSplit("a:b:c", ":")
-		if lmr.Left != "a" || lmr.Middle != "b" || lmr.Right != "c" {
-			t.Fatal("split failed")
-		}
+		actual := args.Map{"result": lmr.Left != "a" || lmr.Middle != "b" || lmr.Right != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "split failed", actual)
 	})
 }
 
@@ -1607,7 +1844,9 @@ func Test_I8_CollectionsOfCollection(t *testing.T) {
 		cc := corestr.New.CollectionsOfCollection.Empty()
 		c1 := corestr.New.Collection.Strings([]string{"a"})
 		cc.Add(c1)
-		if cc.Length() != 1 { t.Fatal("expected 1") }
+		actual := args.Map{"result": cc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1620,6 +1859,8 @@ func Test_I8_HashsetsCollection(t *testing.T) {
 		hc := corestr.New.HashsetsCollection.Empty()
 		h := corestr.New.Hashset.StringsSpreadItems("a")
 		hc.Add(h)
-		if hc.Length() != 1 { t.Fatal("expected 1") }
+		actual := args.Map{"result": hc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

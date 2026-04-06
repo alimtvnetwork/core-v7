@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════
@@ -20,9 +21,9 @@ func Test_S11_01_SimpleSlice_Add(t *testing.T) {
 		ss.Add("a")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -35,9 +36,9 @@ func Test_S11_02_SimpleSlice_AddSplit(t *testing.T) {
 		ss.AddSplit("a,b,c", ",")
 
 		// Assert
-		if ss.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ss.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -51,9 +52,9 @@ func Test_S11_03_SimpleSlice_AddIf(t *testing.T) {
 		ss.AddIf(false, "no")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -66,9 +67,9 @@ func Test_S11_04_SimpleSlice_Adds(t *testing.T) {
 		ss.Adds("a", "b")
 
 		// Assert
-		if ss.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -81,9 +82,9 @@ func Test_S11_05_SimpleSlice_Adds_Empty(t *testing.T) {
 		ss.Adds()
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -96,9 +97,9 @@ func Test_S11_06_SimpleSlice_Append(t *testing.T) {
 		ss.Append("a")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -111,9 +112,9 @@ func Test_S11_07_SimpleSlice_Append_Empty(t *testing.T) {
 		ss.Append()
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -126,9 +127,9 @@ func Test_S11_08_SimpleSlice_AppendFmt(t *testing.T) {
 		ss.AppendFmt("hello %s", "world")
 
 		// Assert
-		if ss.Length() != 1 || ss.First() != "hello world" {
-			t.Fatal("expected 'hello world'")
-		}
+		actual := args.Map{"result": ss.Length() != 1 || ss.First() != "hello world"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'hello world'", actual)
 	})
 }
 
@@ -141,9 +142,9 @@ func Test_S11_09_SimpleSlice_AppendFmt_EmptySkip(t *testing.T) {
 		ss.AppendFmt("")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -157,9 +158,9 @@ func Test_S11_10_SimpleSlice_AppendFmtIf(t *testing.T) {
 		ss.AppendFmtIf(false, "skip")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -172,9 +173,9 @@ func Test_S11_11_SimpleSlice_AppendFmtIf_EmptyFormatSkip(t *testing.T) {
 		ss.AppendFmtIf(true, "")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -187,9 +188,9 @@ func Test_S11_12_SimpleSlice_AddAsTitleValue(t *testing.T) {
 		ss.AddAsTitleValue("Name", "John")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -202,9 +203,9 @@ func Test_S11_13_SimpleSlice_AddAsCurlyTitleWrap(t *testing.T) {
 		ss.AddAsCurlyTitleWrap("Key", "Val")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -218,9 +219,9 @@ func Test_S11_14_SimpleSlice_AddAsCurlyTitleWrapIf(t *testing.T) {
 		ss.AddAsCurlyTitleWrapIf(false, "K2", "V2")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -234,9 +235,9 @@ func Test_S11_15_SimpleSlice_AddAsTitleValueIf(t *testing.T) {
 		ss.AddAsTitleValueIf(false, "K2", "V2")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -249,9 +250,9 @@ func Test_S11_16_SimpleSlice_InsertAt(t *testing.T) {
 		ss.InsertAt(1, "b")
 
 		// Assert
-		if ss.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ss.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -265,9 +266,9 @@ func Test_S11_17_SimpleSlice_InsertAt_OutOfRange(t *testing.T) {
 		ss.InsertAt(100, "y")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1 — out of range skipped")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 — out of range skipped", actual)
 	})
 }
 
@@ -281,9 +282,9 @@ func Test_S11_18_SimpleSlice_AddStruct(t *testing.T) {
 		ss.AddStruct(false, nil) // nil skipped
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -297,9 +298,9 @@ func Test_S11_19_SimpleSlice_AddPointer(t *testing.T) {
 		ss.AddPointer(false, nil) // nil skipped
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -313,9 +314,9 @@ func Test_S11_20_SimpleSlice_AddsIf(t *testing.T) {
 		ss.AddsIf(false, "c")
 
 		// Assert
-		if ss.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -329,9 +330,9 @@ func Test_S11_21_SimpleSlice_AddError(t *testing.T) {
 		ss.AddError(&testErr{})
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -344,9 +345,9 @@ func Test_S11_22_SimpleSlice_AsDefaultError(t *testing.T) {
 		err := ss.AsDefaultError()
 
 		// Assert
-		if err == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -359,9 +360,9 @@ func Test_S11_23_SimpleSlice_AsError_Empty(t *testing.T) {
 		err := ss.AsError(",")
 
 		// Assert
-		if err != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -371,18 +372,18 @@ func Test_S11_24_SimpleSlice_FirstAndLast(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 
 		// Act & Assert
-		if ss.First() != "a" {
-			t.Fatal("expected a")
-		}
-		if ss.Last() != "c" {
-			t.Fatal("expected c")
-		}
-		if ss.FirstDynamic().(string) != "a" {
-			t.Fatal("expected a dynamic")
-		}
-		if ss.LastDynamic().(string) != "c" {
-			t.Fatal("expected c dynamic")
-		}
+		actual := args.Map{"result": ss.First() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
+		actual := args.Map{"result": ss.Last() != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected c", actual)
+		actual := args.Map{"result": ss.FirstDynamic().(string) != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a dynamic", actual)
+		actual := args.Map{"result": ss.LastDynamic().(string) != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected c dynamic", actual)
 	})
 }
 
@@ -393,15 +394,15 @@ func Test_S11_25_SimpleSlice_FirstOrDefault(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Strings([]string{"x"})
 
 		// Act & Assert
-		if ss.FirstOrDefault() != "" {
-			t.Fatal("expected empty")
-		}
-		if ss.FirstOrDefaultDynamic().(string) != "" {
-			t.Fatal("expected empty dynamic")
-		}
-		if ss2.FirstOrDefault() != "x" {
-			t.Fatal("expected x")
-		}
+		actual := args.Map{"result": ss.FirstOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": ss.FirstOrDefaultDynamic().(string) != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty dynamic", actual)
+		actual := args.Map{"result": ss2.FirstOrDefault() != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected x", actual)
 	})
 }
 
@@ -412,15 +413,15 @@ func Test_S11_26_SimpleSlice_LastOrDefault(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Strings([]string{"x"})
 
 		// Act & Assert
-		if ss.LastOrDefault() != "" {
-			t.Fatal("expected empty")
-		}
-		if ss.LastOrDefaultDynamic().(string) != "" {
-			t.Fatal("expected empty dynamic")
-		}
-		if ss2.LastOrDefault() != "x" {
-			t.Fatal("expected x")
-		}
+		actual := args.Map{"result": ss.LastOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": ss.LastOrDefaultDynamic().(string) != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty dynamic", actual)
+		actual := args.Map{"result": ss2.LastOrDefault() != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected x", actual)
 	})
 }
 
@@ -434,12 +435,12 @@ func Test_S11_27_SimpleSlice_Skip(t *testing.T) {
 		skippedAll := ss.Skip(10)
 
 		// Assert
-		if len(skipped) != 2 {
-			t.Fatal("expected 2")
-		}
-		if len(skippedAll) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(skipped) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+		actual := args.Map{"result": len(skippedAll) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -452,9 +453,9 @@ func Test_S11_28_SimpleSlice_SkipDynamic(t *testing.T) {
 		result := ss.SkipDynamic(1)
 
 		// Assert
-		if result == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -468,12 +469,12 @@ func Test_S11_29_SimpleSlice_Take(t *testing.T) {
 		takenAll := ss.Take(10)
 
 		// Assert
-		if len(taken) != 2 {
-			t.Fatal("expected 2")
-		}
-		if len(takenAll) != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": len(taken) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+		actual := args.Map{"result": len(takenAll) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -486,9 +487,9 @@ func Test_S11_30_SimpleSlice_TakeDynamic(t *testing.T) {
 		result := ss.TakeDynamic(1)
 
 		// Assert
-		if result == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -498,12 +499,12 @@ func Test_S11_31_SimpleSlice_LimitDynamic(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if ss.LimitDynamic(1) == nil {
-			t.Fatal("expected non-nil")
-		}
-		if len(ss.Limit(1)) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.LimitDynamic(1) == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+		actual := args.Map{"result": len(ss.Limit(1)) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -513,9 +514,9 @@ func Test_S11_32_SimpleSlice_Length_Count(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 
 		// Act & Assert
-		if ss.Length() != 1 || ss.Count() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1 || ss.Count() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -525,9 +526,9 @@ func Test_S11_33_SimpleSlice_Length_Nil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if ss.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -542,9 +543,9 @@ func Test_S11_34_SimpleSlice_CountFunc(t *testing.T) {
 		})
 
 		// Assert
-		if count != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": count != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -557,18 +558,18 @@ func Test_S11_35_SimpleSlice_CountFunc_Empty(t *testing.T) {
 		count := ss.CountFunc(func(index int, item string) bool { return true })
 
 		// Assert
-		if count != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": count != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_S11_36_SimpleSlice_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_S11_36_SimpleSlice_IsEmpty", func() {
 		// Act & Assert
-		if !corestr.Empty.SimpleSlice().IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -578,15 +579,15 @@ func Test_S11_37_SimpleSlice_IsContains(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if !ss.IsContains("a") {
-			t.Fatal("expected true")
-		}
-		if ss.IsContains("z") {
-			t.Fatal("expected false")
-		}
-		if corestr.Empty.SimpleSlice().IsContains("a") {
-			t.Fatal("expected false for empty")
-		}
+		actual := args.Map{"result": ss.IsContains("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": ss.IsContains("z")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().IsContains("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -596,12 +597,12 @@ func Test_S11_38_SimpleSlice_IsContainsFunc(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"abc"})
 
 		// Act & Assert
-		if !ss.IsContainsFunc("ab", strings.Contains) {
-			t.Fatal("expected true")
-		}
-		if corestr.Empty.SimpleSlice().IsContainsFunc("a", strings.Contains) {
-			t.Fatal("expected false for empty")
-		}
+		actual := args.Map{"result": ss.IsContainsFunc("ab", strings.Contains)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().IsContainsFunc("a", strings.Contains)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -611,15 +612,15 @@ func Test_S11_39_SimpleSlice_IndexOf(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if ss.IndexOf("b") != 1 {
-			t.Fatal("expected 1")
-		}
-		if ss.IndexOf("z") != -1 {
-			t.Fatal("expected -1")
-		}
-		if corestr.Empty.SimpleSlice().IndexOf("a") != -1 {
-			t.Fatal("expected -1 for empty")
-		}
+		actual := args.Map{"result": ss.IndexOf("b") != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": ss.IndexOf("z") != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().IndexOf("a") != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1 for empty", actual)
 	})
 }
 
@@ -632,21 +633,21 @@ func Test_S11_40_SimpleSlice_IndexOfFunc(t *testing.T) {
 		idx := ss.IndexOfFunc("de", strings.Contains)
 
 		// Assert
-		if idx != 1 {
-			t.Fatalf("expected 1, got %d", idx)
-		}
-		if corestr.Empty.SimpleSlice().IndexOfFunc("a", strings.Contains) != -1 {
-			t.Fatal("expected -1 for empty")
-		}
+		actual := args.Map{"result": idx != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().IndexOfFunc("a", strings.Contains) != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1 for empty", actual)
 	})
 }
 
 func Test_S11_41_SimpleSlice_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_S11_41_SimpleSlice_HasAnyItem", func() {
 		// Act & Assert
-		if !corestr.New.SimpleSlice.Strings([]string{"a"}).HasAnyItem() {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": corestr.New.SimpleSlice.Strings([]string{"a"}).HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -656,15 +657,15 @@ func Test_S11_42_SimpleSlice_LastIndex_HasIndex(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if ss.LastIndex() != 1 {
-			t.Fatal("expected 1")
-		}
-		if !ss.HasIndex(0) || !ss.HasIndex(1) {
-			t.Fatal("expected true")
-		}
-		if ss.HasIndex(2) || ss.HasIndex(-1) {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": ss.LastIndex() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": ss.HasIndex(0) || !ss.HasIndex(1)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": ss.HasIndex(2) || ss.HasIndex(-1)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -674,9 +675,9 @@ func Test_S11_43_SimpleSlice_Strings_List(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 
 		// Act & Assert
-		if len(ss.Strings()) != 1 || len(ss.List()) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(ss.Strings()) != 1 || len(ss.List()) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -686,45 +687,45 @@ func Test_S11_44_SimpleSlice_WrapDoubleQuote(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 
 		// Act & Assert
-		if ss.WrapDoubleQuote().Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.WrapDoubleQuote().Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_S11_45_SimpleSlice_WrapSingleQuote(t *testing.T) {
 	safeTest(t, "Test_S11_45_SimpleSlice_WrapSingleQuote", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
-		if ss.WrapSingleQuote().Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.WrapSingleQuote().Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_S11_46_SimpleSlice_WrapTildaQuote(t *testing.T) {
 	safeTest(t, "Test_S11_46_SimpleSlice_WrapTildaQuote", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
-		if ss.WrapTildaQuote().Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.WrapTildaQuote().Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_S11_47_SimpleSlice_WrapDoubleQuoteIfMissing(t *testing.T) {
 	safeTest(t, "Test_S11_47_SimpleSlice_WrapDoubleQuoteIfMissing", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
-		if ss.WrapDoubleQuoteIfMissing().Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.WrapDoubleQuoteIfMissing().Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_S11_48_SimpleSlice_WrapSingleQuoteIfMissing(t *testing.T) {
 	safeTest(t, "Test_S11_48_SimpleSlice_WrapSingleQuoteIfMissing", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
-		if ss.WrapSingleQuoteIfMissing().Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.WrapSingleQuoteIfMissing().Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -737,9 +738,9 @@ func Test_S11_49_SimpleSlice_Transpile(t *testing.T) {
 		result := ss.Transpile(strings.ToUpper)
 
 		// Assert
-		if result.First() != "A" {
-			t.Fatal("expected A")
-		}
+		actual := args.Map{"result": result.First() != "A"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected A", actual)
 	})
 }
 
@@ -752,9 +753,9 @@ func Test_S11_50_SimpleSlice_Transpile_Empty(t *testing.T) {
 		result := ss.Transpile(strings.ToUpper)
 
 		// Assert
-		if result.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": result.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -767,9 +768,9 @@ func Test_S11_51_SimpleSlice_TranspileJoin(t *testing.T) {
 		result := ss.TranspileJoin(strings.ToUpper, ",")
 
 		// Assert
-		if result != "A,B" {
-			t.Fatalf("expected 'A,B', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "A,B"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'A,B', got ''", actual)
 	})
 }
 
@@ -782,9 +783,9 @@ func Test_S11_52_SimpleSlice_Hashset(t *testing.T) {
 		hs := ss.Hashset()
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -794,12 +795,12 @@ func Test_S11_53_SimpleSlice_Join(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if ss.Join(",") != "a,b" {
-			t.Fatal("expected a,b")
-		}
-		if corestr.Empty.SimpleSlice().Join(",") != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": ss.Join(",") != "a,b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a,b", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().Join(",") != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -809,12 +810,12 @@ func Test_S11_54_SimpleSlice_JoinLine(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 
 		// Act & Assert
-		if ss.JoinLine() == "" {
-			t.Fatal("expected non-empty")
-		}
-		if corestr.Empty.SimpleSlice().JoinLine() != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": ss.JoinLine() == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinLine() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -827,12 +828,12 @@ func Test_S11_55_SimpleSlice_JoinLineEofLine(t *testing.T) {
 		result := ss.JoinLineEofLine()
 
 		// Assert
-		if !strings.HasSuffix(result, "\n") {
-			t.Fatal("expected newline at end")
-		}
-		if corestr.Empty.SimpleSlice().JoinLineEofLine() != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": strings.HasSuffix(result, "\n")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected newline at end", actual)
+		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinLineEofLine() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -845,27 +846,27 @@ func Test_S11_56_SimpleSlice_JoinLineEofLine_AlreadyHas(t *testing.T) {
 		result := ss.JoinLineEofLine()
 
 		// Assert
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
 func Test_S11_57_SimpleSlice_JoinSpace(t *testing.T) {
 	safeTest(t, "Test_S11_57_SimpleSlice_JoinSpace", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
-		if ss.JoinSpace() != "a b" {
-			t.Fatal("expected 'a b'")
-		}
+		actual := args.Map{"result": ss.JoinSpace() != "a b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a b'", actual)
 	})
 }
 
 func Test_S11_58_SimpleSlice_JoinComma(t *testing.T) {
 	safeTest(t, "Test_S11_58_SimpleSlice_JoinComma", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
-		if ss.JoinComma() != "a,b" {
-			t.Fatal("expected 'a,b'")
-		}
+		actual := args.Map{"result": ss.JoinComma() != "a,b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a,b'", actual)
 	})
 }
 
@@ -873,18 +874,18 @@ func Test_S11_59_SimpleSlice_JoinCsv(t *testing.T) {
 	safeTest(t, "Test_S11_59_SimpleSlice_JoinCsv", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 		result := ss.JoinCsv()
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
 func Test_S11_60_SimpleSlice_JoinCsvLine(t *testing.T) {
 	safeTest(t, "Test_S11_60_SimpleSlice_JoinCsvLine", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
-		if ss.JoinCsvLine() == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": ss.JoinCsvLine() == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -897,9 +898,9 @@ func Test_S11_61_SimpleSlice_EachItemSplitBy(t *testing.T) {
 		result := ss.EachItemSplitBy(",")
 
 		// Assert
-		if result.Length() != 4 {
-			t.Fatalf("expected 4, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() != 4}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	})
 }
 
@@ -907,9 +908,9 @@ func Test_S11_62_SimpleSlice_PrependJoin(t *testing.T) {
 	safeTest(t, "Test_S11_62_SimpleSlice_PrependJoin", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"b"})
 		result := ss.PrependJoin(",", "a")
-		if result != "a,b" {
-			t.Fatalf("expected 'a,b', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "a,b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
 }
 
@@ -917,9 +918,9 @@ func Test_S11_63_SimpleSlice_AppendJoin(t *testing.T) {
 	safeTest(t, "Test_S11_63_SimpleSlice_AppendJoin", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 		result := ss.AppendJoin(",", "b")
-		if result != "a,b" {
-			t.Fatalf("expected 'a,b', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "a,b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
 }
 
@@ -932,9 +933,9 @@ func Test_S11_64_SimpleSlice_PrependAppend(t *testing.T) {
 		ss.PrependAppend([]string{"a"}, []string{"c"})
 
 		// Assert
-		if ss.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ss.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -947,8 +948,8 @@ func Test_S11_65_SimpleSlice_PrependAppend_Empty(t *testing.T) {
 		ss.PrependAppend(nil, nil)
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

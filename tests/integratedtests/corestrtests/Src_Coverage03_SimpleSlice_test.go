@@ -323,12 +323,12 @@ func Test_SrcC03_SimpleSlice_ContainsFunc_Verification(t *testing.T) {
 		notFound := empty.IsContainsFunc("a", func(item, searching string) bool { return true })
 
 		// Assert
-		if !found {
-			t.Fatal("expected found")
-		}
-		if notFound {
-			t.Fatal("expected not found")
-		}
+		actual := args.Map{"result": found}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected found", actual)
+		actual := args.Map{"result": notFound}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not found", actual)
 	})
 }
 
@@ -368,12 +368,12 @@ func Test_SrcC03_SimpleSlice_IndexOfFunc_Verification(t *testing.T) {
 		emptyIdx := empty.IndexOfFunc("a", func(item, searching string) bool { return true })
 
 		// Assert
-		if idx != 1 {
-			t.Fatal("expected 1")
-		}
-		if emptyIdx != -1 {
-			t.Fatal("expected -1")
-		}
+		actual := args.Map{"result": idx != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": emptyIdx != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
 

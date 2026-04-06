@@ -289,9 +289,9 @@ func Test_SrcC04_ValidValue_AdditionalFactories_Verification(t *testing.T) {
 		v6 := corestr.NewValidValueUsingAnyAutoValid(false, "hello")
 
 		// Assert
-		if v5.Value == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": v5.Value == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		_ = v6
 	})
 }
@@ -311,9 +311,9 @@ func Test_SrcC04_ValidValue_OverflowByte_Verification(t *testing.T) {
 
 		// Assert
 		vf := &corestr.ValidValue{Value: "3.14", IsValid: true}
-		if vf.ValueFloat64(0) == 0 || vf.ValueDefFloat64() == 0 {
-			t.Fatal("expected non-zero float")
-		}
+		actual := args.Map{"result": vf.ValueFloat64(0) == 0 || vf.ValueDefFloat64() == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-zero float", actual)
 	})
 }
 
@@ -548,9 +548,9 @@ func Test_SrcC04_KeyValuePair_ClearDispose_Verification(t *testing.T) {
 		})
 
 		// Assert
-		if !noPanic {
-			t.Fatal("expected no panic")
-		}
+		actual := args.Map{"result": noPanic}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected no panic", actual)
 	})
 }
 

@@ -676,9 +676,9 @@ func Test_CovS07_PrintSkip(t *testing.T) {
 		m.PrintLock(false)
 
 		// Assert — no panic
-		if m.IsEmpty() {
-			t.Error("unexpected empty after print skip")
-		}
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected empty after print skip", actual)
 	})
 }
 
@@ -702,21 +702,21 @@ func Test_CovS07_LockVariants(t *testing.T) {
 		isEqLock := m.IsEqualsLock(m)
 
 		// Assert
-		if lenLock <= 0 {
-			t.Error("LengthLock should be > 0")
-		}
-		if isEmptyLock {
-			t.Error("IsEmptyLock should be false")
-		}
-		if allSumLock <= 0 {
-			t.Error("AllLengthsSumLock should be > 0")
-		}
-		if lenOfLock <= 0 {
-			t.Error("LengthOfLock should be > 0")
-		}
-		if !isEqLock {
-			t.Error("IsEqualsLock(self) should be true")
-		}
+		actual := args.Map{"result": lenLock <= 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LengthLock should be > 0", actual)
+		actual := args.Map{"result": isEmptyLock}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsEmptyLock should be false", actual)
+		actual := args.Map{"result": allSumLock <= 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AllLengthsSumLock should be > 0", actual)
+		actual := args.Map{"result": lenOfLock <= 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LengthOfLock should be > 0", actual)
+		actual := args.Map{"result": isEqLock}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsEqualsLock(self) should be true", actual)
 	})
 }
 
@@ -733,12 +733,12 @@ func Test_CovS07_HasWithHashsetLock(t *testing.T) {
 		found, hs := m.HasWithHashsetLock("alpha")
 
 		// Assert
-		if !found {
-			t.Error("HasWithHashsetLock should find 'alpha'")
-		}
-		if hs == nil {
-			t.Error("HasWithHashsetLock should return non-nil hashset")
-		}
+		actual := args.Map{"result": found}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasWithHashsetLock should find 'alpha'", actual)
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HasWithHashsetLock should return non-nil hashset", actual)
 	})
 }
 
@@ -756,9 +756,9 @@ func Test_CovS07_AddLock(t *testing.T) {
 		m.AddLock("avocado") // same char group
 
 		// Assert
-		if m.AllLengthsSum() != 2 {
-			t.Errorf("AddLock: expected 2 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddLock: expected 2 items", actual)
 	})
 }
 
@@ -775,9 +775,9 @@ func Test_CovS07_AddStringsLock(t *testing.T) {
 		m.AddStringsLock("alpha", "bravo", "avocado")
 
 		// Assert
-		if m.AllLengthsSum() != 3 {
-			t.Errorf("AddStringsLock: expected 3, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddStringsLock: expected 3", actual)
 	})
 }
 
@@ -799,24 +799,24 @@ func Test_CovS07_HashsetByChar(t *testing.T) {
 		hsMissing := m.HashsetByCharLock('z')
 
 		// Assert
-		if hs1 == nil {
-			t.Error("HashsetByChar('a') should be non-nil")
-		}
-		if hs2 == nil {
-			t.Error("HashsetByCharLock('a') should be non-nil")
-		}
-		if hs3 == nil {
-			t.Error("HashsetByStringFirstChar should be non-nil")
-		}
-		if hs4 == nil {
-			t.Error("HashsetByStringFirstCharLock should be non-nil")
-		}
-		if hs5 == nil {
-			t.Error("GetHashsetByChar('a') should be non-nil")
-		}
-		if hsMissing == nil {
-			t.Error("HashsetByCharLock('z') should return empty hashset, not nil")
-		}
+		actual := args.Map{"result": hs1 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByChar('a') should be non-nil", actual)
+		actual := args.Map{"result": hs2 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('a') should be non-nil", actual)
+		actual := args.Map{"result": hs3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstChar should be non-nil", actual)
+		actual := args.Map{"result": hs4 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstCharLock should be non-nil", actual)
+		actual := args.Map{"result": hs5 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetHashsetByChar('a') should be non-nil", actual)
+		actual := args.Map{"result": hsMissing == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('z') should return empty hashset, not nil", actual)
 	})
 }
 
@@ -834,12 +834,12 @@ func Test_CovS07_HashsetsCollByCharsAndStr(t *testing.T) {
 		hsByStr := m.HashsetsCollectionByStringsFirstChar("alpha", "bravo")
 
 		// Assert
-		if hsByChars == nil || hsByChars.Length() == 0 {
-			t.Error("HashsetsCollectionByChars should return non-empty")
-		}
-		if hsByStr == nil || hsByStr.Length() == 0 {
-			t.Error("HashsetsCollectionByStringsFirstChar should return non-empty")
-		}
+		actual := args.Map{"result": hsByChars == nil || hsByChars.Length() == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByChars should return non-empty", actual)
+		actual := args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByStringsFirstChar should return non-empty", actual)
 	})
 }
 
@@ -856,9 +856,9 @@ func Test_CovS07_GetMap(t *testing.T) {
 		rawMap := m.GetMap()
 
 		// Assert
-		if rawMap == nil {
-			t.Error("GetMap should return non-nil")
-		}
+		actual := args.Map{"result": rawMap == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetMap should return non-nil", actual)
 	})
 }
 
@@ -880,9 +880,9 @@ func Test_CovS07_InterfaceAdapters(t *testing.T) {
 		_ = m.JsonModel()
 
 		// Assert
-		if binder == nil || jsoner == nil || marshaller == nil || injector == nil {
-			t.Error("Interface adapters should return non-nil")
-		}
+		actual := args.Map{"result": binder == nil || jsoner == nil || marshaller == nil || injector == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Interface adapters should return non-nil", actual)
 	})
 }
 
@@ -901,12 +901,12 @@ func Test_CovS07_MarshalUnmarshal(t *testing.T) {
 		err2 := m2.UnmarshalJSON(bytes)
 
 		// Assert
-		if err != nil || len(bytes) == 0 {
-			t.Errorf("MarshalJSON failed: %v", err)
-		}
-		if err2 != nil {
-			t.Errorf("UnmarshalJSON failed: %v", err2)
-		}
+		actual := args.Map{"result": err != nil || len(bytes) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "MarshalJSON failed:", actual)
+		actual := args.Map{"result": err2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UnmarshalJSON failed:", actual)
 	})
 }
 
@@ -925,9 +925,9 @@ func Test_CovS07_JsonParseSelfInject(t *testing.T) {
 		err := m2.JsonParseSelfInject(&jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("JsonParseSelfInject should not error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "JsonParseSelfInject should not error:", actual)
 	})
 }
 
@@ -946,9 +946,9 @@ func Test_CovS07_ParseInjectMust_Valid(t *testing.T) {
 		result := m2.ParseInjectUsingJsonMust(&jsonResult)
 
 		// Assert
-		if result == nil {
-			t.Error("ParseInjectUsingJsonMust should return non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust should return non-nil", actual)
 	})
 }
 
@@ -965,9 +965,9 @@ func Test_CovS07_JsonPtr(t *testing.T) {
 		result := m.JsonPtr()
 
 		// Assert
-		if result == nil {
-			t.Error("JsonPtr should return non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr should return non-nil", actual)
 	})
 }
 
@@ -985,12 +985,12 @@ func Test_CovS07_AddSameCharsCollLock(t *testing.T) {
 		result := m.AddSameCharsCollectionLock("apple", coll)
 
 		// Assert
-		if result == nil {
-			t.Error("AddSameCharsCollectionLock should return non-nil")
-		}
-		if m.AllLengthsSum() < 3 {
-			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddSameCharsCollectionLock should return non-nil", actual)
+		actual := args.Map{"result": m.AllLengthsSum() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
 
@@ -1007,9 +1007,9 @@ func Test_CovS07_AddSameCharsCollLock_NilColl_NewChar(t *testing.T) {
 		result := m.AddSameCharsCollectionLock("apple", nil)
 
 		// Assert
-		if result == nil {
-			t.Error("should return non-nil hashset")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should return non-nil hashset", actual)
 	})
 }
 
@@ -1027,12 +1027,12 @@ func Test_CovS07_AddSameCharsCollLock_NewChar_WithData(t *testing.T) {
 		result := m.AddSameCharsCollectionLock("apple", coll)
 
 		// Assert
-		if result == nil {
-			t.Error("should return non-nil hashset")
-		}
-		if m.AllLengthsSum() < 3 {
-			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should return non-nil hashset", actual)
+		actual := args.Map{"result": m.AllLengthsSum() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
 
@@ -1050,9 +1050,9 @@ func Test_CovS07_AddHashsetLock(t *testing.T) {
 		result := m.AddHashsetLock("apple", hs)
 
 		// Assert
-		if result == nil {
-			t.Error("AddHashsetLock should return non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddHashsetLock should return non-nil", actual)
 	})
 }
 
@@ -1069,9 +1069,9 @@ func Test_CovS07_AddHashsetLock_NilHashset_NewChar(t *testing.T) {
 		result := m.AddHashsetLock("apple", nil)
 
 		// Assert
-		if result == nil {
-			t.Error("should return non-nil hashset")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should return non-nil hashset", actual)
 	})
 }
 
@@ -1089,12 +1089,12 @@ func Test_CovS07_AddHashsetLock_NewChar_WithData(t *testing.T) {
 		result := m.AddHashsetLock("apple", hs)
 
 		// Assert
-		if result == nil {
-			t.Error("should return non-nil")
-		}
-		if m.AllLengthsSum() < 3 {
-			t.Errorf("Expected at least 3 items, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
+		actual := args.Map{"result": m.AllLengthsSum() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
 
@@ -1112,12 +1112,12 @@ func Test_CovS07_GetHashsetLock(t *testing.T) {
 		hsMissing := m.GetHashsetLock(false, "zzz")
 
 		// Assert
-		if hs == nil {
-			t.Error("GetHashsetLock should return non-nil for existing char")
-		}
-		if hsMissing != nil {
-			t.Error("GetHashsetLock should return nil for missing char with isAddNew=false")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetHashsetLock should return non-nil for existing char", actual)
+		actual := args.Map{"result": hsMissing != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "GetHashsetLock should return nil for missing char with isAddNew=false", actual)
 	})
 }
 
@@ -1208,9 +1208,9 @@ func Test_CovS07_AddCollectionItemsAsyncLock_Nil(t *testing.T) {
 		m.AddCollectionItemsAsyncLock(nil, nil)
 
 		// Assert — no panic
-		if m.AllLengthsSum() != 0 {
-			t.Error("should remain empty")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should remain empty", actual)
 	})
 }
 
@@ -1227,9 +1227,9 @@ func Test_CovS07_AddHashsetItemsAsyncLock_Nil(t *testing.T) {
 		m.AddHashsetItemsAsyncLock(nil, nil)
 
 		// Assert — no panic
-		if m.AllLengthsSum() != 0 {
-			t.Error("should remain empty")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should remain empty", actual)
 	})
 }
 
@@ -1246,9 +1246,9 @@ func Test_CovS07_AddStringsAsyncLock_Empty(t *testing.T) {
 		m.AddStringsAsyncLock(nil, nil)
 
 		// Assert — no panic
-		if m.AllLengthsSum() != 0 {
-			t.Error("should remain empty")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should remain empty", actual)
 	})
 }
 

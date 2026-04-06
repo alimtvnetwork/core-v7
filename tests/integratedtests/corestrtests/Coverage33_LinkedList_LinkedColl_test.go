@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── LinkedList ──
@@ -12,8 +13,12 @@ import (
 func Test_C33_LL_Empty(t *testing.T) {
 	safeTest(t, "Test_C33_LL_Empty", func() {
 		ll := corestr.New.LinkedList.Empty()
-		if !ll.IsEmpty() { t.Fatal("expected empty") }
-		if ll.HasItems() { t.Fatal("expected no items") }
+		actual := args.Map{"result": ll.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": ll.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no items", actual)
 	})
 }
 
@@ -22,21 +27,27 @@ func Test_C33_LL_Add(t *testing.T) {
 		ll := corestr.New.LinkedList.Empty()
 		ll.Add("a")
 		ll.Add("b")
-		if ll.Length() != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_C33_LL_Head(t *testing.T) {
 	safeTest(t, "Test_C33_LL_Head", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
-		if ll.Head().Element != "a" { t.Fatal("expected a") }
+		actual := args.Map{"result": ll.Head().Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
 
 func Test_C33_LL_Tail(t *testing.T) {
 	safeTest(t, "Test_C33_LL_Tail", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
-		if ll.Tail().Element != "b" { t.Fatal("expected b") }
+		actual := args.Map{"result": ll.Tail().Element != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
 }
 
@@ -51,7 +62,9 @@ func Test_C33_LL_IsEquals(t *testing.T) {
 	safeTest(t, "Test_C33_LL_IsEquals", func() {
 		a := corestr.New.LinkedList.Strings([]string{"a"})
 		b := corestr.New.LinkedList.Strings([]string{"a"})
-		if !a.IsEquals(b) { t.Fatal("expected true") }
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -59,15 +72,21 @@ func Test_C33_LL_IsEqualsWithSensitive(t *testing.T) {
 	safeTest(t, "Test_C33_LL_IsEqualsWithSensitive", func() {
 		a := corestr.New.LinkedList.Strings([]string{"A"})
 		b := corestr.New.LinkedList.Strings([]string{"a"})
-		if a.IsEqualsWithSensitive(b, true) { t.Fatal("expected false") }
-		if !a.IsEqualsWithSensitive(b, false) { t.Fatal("expected true") }
+		actual := args.Map{"result": a.IsEqualsWithSensitive(b, true)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": a.IsEqualsWithSensitive(b, false)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_C33_LL_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_C33_LL_IsEquals_Nil", func() {
 		var a, b *corestr.LinkedList
-		if !a.IsEqualsWithSensitive(b, true) { t.Fatal("expected true") }
+		actual := args.Map{"result": a.IsEqualsWithSensitive(b, true)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -138,7 +157,9 @@ func Test_C33_LL_List(t *testing.T) {
 	safeTest(t, "Test_C33_LL_List", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		r := ll.List()
-		if len(r) != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": len(r) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2 := corestr.New.LinkedList.Empty()
 		_ = ll2.List()
 	})
@@ -155,7 +176,9 @@ func Test_C33_LL_ToCollection(t *testing.T) {
 	safeTest(t, "Test_C33_LL_ToCollection", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
 		c := ll.ToCollection(0)
-		if c == nil { t.Fatal("expected non-nil collection") }
+		actual := args.Map{"result": c == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil collection", actual)
 	})
 }
 
@@ -241,7 +264,9 @@ func Test_C33_NLLC_PointerStringsPtr(t *testing.T) {
 func Test_C33_LC_Empty(t *testing.T) {
 	safeTest(t, "Test_C33_LC_Empty", func() {
 		lc := corestr.New.LinkedCollection.Empty()
-		if !lc.IsEmpty() { t.Fatal("expected empty") }
+		actual := args.Map{"result": lc.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -249,7 +274,9 @@ func Test_C33_LC_Add(t *testing.T) {
 	safeTest(t, "Test_C33_LC_Add", func() {
 		lc := corestr.New.LinkedCollection.Empty()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
-		if lc.Length() != 1 { t.Fatal("expected 1") }
+		actual := args.Map{"result": lc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -447,7 +474,9 @@ func Test_C33_NLLCC_UsingCollections(t *testing.T) {
 func Test_C33_LLN_HasNext(t *testing.T) {
 	safeTest(t, "Test_C33_LLN_HasNext", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
-		if !ll.Head().HasNext() { t.Fatal("expected true") }
+		actual := args.Map{"result": ll.Head().HasNext()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -462,7 +491,9 @@ func Test_C33_LLN_EndOfChain(t *testing.T) {
 	safeTest(t, "Test_C33_LLN_EndOfChain", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		_, l := ll.Head().EndOfChain()
-		if l != 2 { t.Fatal("expected 2") }
+		actual := args.Map{"result": l != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 

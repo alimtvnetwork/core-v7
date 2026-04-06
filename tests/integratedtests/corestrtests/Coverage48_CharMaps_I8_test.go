@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ===================== CharCollectionMap =====================
@@ -12,9 +13,9 @@ import (
 func Test_C48_CharCollectionMap_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
-		if !m.IsEmpty() || m.HasItems() || m.Length() != 0 {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmpty() || m.HasItems() || m.Length() != 0}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -24,9 +25,9 @@ func Test_C48_CharCollectionMap_Add(t *testing.T) {
 		m.Add("apple")
 		m.Add("apricot")
 		m.Add("banana")
-		if m.Length() != 2 {
-			t.Fatalf("expected 2 char groups, got %d", m.Length())
-		}
+		actual := args.Map{"result": m.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 char groups", actual)
 	})
 }
 
@@ -34,9 +35,9 @@ func Test_C48_CharCollectionMap_AddLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_AddLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddLock("abc")
-		if m.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -44,30 +45,30 @@ func Test_C48_CharCollectionMap_AddStrings(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_AddStrings", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddStrings("apple", "banana", "avocado")
-		if m.Length() != 2 {
-			t.Fatalf("expected 2, got %d", m.Length())
-		}
+		actual := args.Map{"result": m.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_C48_CharCollectionMap_Has(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Has", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
-		if !m.Has("apple") {
-			t.Fatal("should have apple")
-		}
-		if m.Has("cherry") {
-			t.Fatal("should not have cherry")
-		}
+		actual := args.Map{"result": m.Has("apple")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have apple", actual)
+		actual := args.Map{"result": m.Has("cherry")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should not have cherry", actual)
 	})
 }
 
 func Test_C48_CharCollectionMap_Has_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Has_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
-		if m.Has("x") {
-			t.Fatal("empty map should not have anything")
-		}
+		actual := args.Map{"result": m.Has("x")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty map should not have anything", actual)
 	})
 }
 
@@ -75,13 +76,13 @@ func Test_C48_CharCollectionMap_HasWithCollection(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HasWithCollection", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		has, col := m.HasWithCollection("apple")
-		if !has || col == nil {
-			t.Fatal("should have apple with collection")
-		}
+		actual := args.Map{"result": has || col == nil}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have apple with collection", actual)
 		has2, _ := m.HasWithCollection("missing")
-		if has2 {
-			t.Fatal("should not find missing")
-		}
+		actual := args.Map{"result": has2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should not find missing", actual)
 	})
 }
 
@@ -89,9 +90,9 @@ func Test_C48_CharCollectionMap_HasWithCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HasWithCollection_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		has, _ := m.HasWithCollection("x")
-		if has {
-			t.Fatal("empty should not have")
-		}
+		actual := args.Map{"result": has}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty should not have", actual)
 	})
 }
 
@@ -99,9 +100,9 @@ func Test_C48_CharCollectionMap_HasWithCollectionLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HasWithCollectionLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		has, _ := m.HasWithCollectionLock("apple")
-		if !has {
-			t.Fatal("should have apple")
-		}
+		actual := args.Map{"result": has}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have apple", actual)
 	})
 }
 
@@ -109,13 +110,13 @@ func Test_C48_CharCollectionMap_LengthOf(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_LengthOf", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "apricot"})
 		l := m.LengthOf('a')
-		if l != 2 {
-			t.Fatalf("expected 2, got %d", l)
-		}
+		actual := args.Map{"result": l != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		l2 := m.LengthOf('z')
-		if l2 != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": l2 != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -123,9 +124,9 @@ func Test_C48_CharCollectionMap_LengthOfLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_LengthOfLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		l := m.LengthOfLock('a')
-		if l != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": l != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -133,9 +134,9 @@ func Test_C48_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_LengthOfCollectionFromFirstChar", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "apricot"})
 		l := m.LengthOfCollectionFromFirstChar("any")
-		if l != 2 {
-			t.Fatalf("expected 2, got %d", l)
-		}
+		actual := args.Map{"result": l != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -143,9 +144,9 @@ func Test_C48_CharCollectionMap_AllLengthsSum(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_AllLengthsSum", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "apricot", "banana"})
 		sum := m.AllLengthsSum()
-		if sum != 3 {
-			t.Fatalf("expected 3, got %d", sum)
-		}
+		actual := args.Map{"result": sum != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -153,9 +154,9 @@ func Test_C48_CharCollectionMap_AllLengthsSumLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_AllLengthsSumLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		sum := m.AllLengthsSumLock()
-		if sum != 1 {
-			t.Fatalf("expected 1, got %d", sum)
-		}
+		actual := args.Map{"result": sum != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -163,13 +164,13 @@ func Test_C48_CharCollectionMap_GetChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetChar", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		c := m.GetChar("hello")
-		if c != 'h' {
-			t.Fatal("expected h")
-		}
+		actual := args.Map{"result": c != 'h'}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected h", actual)
 		c2 := m.GetChar("")
-		if c2 != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": c2 != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -177,17 +178,17 @@ func Test_C48_CharCollectionMap_GetCollection(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCollection", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		col := m.GetCollection("any", false)
-		if col == nil {
-			t.Fatal("expected collection for 'a'")
-		}
+		actual := args.Map{"result": col == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected collection for 'a'", actual)
 		col2 := m.GetCollection("zzz", false)
-		if col2 != nil {
-			t.Fatal("expected nil for 'z'")
-		}
+		actual := args.Map{"result": col2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for 'z'", actual)
 		col3 := m.GetCollection("zzz", true)
-		if col3 == nil {
-			t.Fatal("expected new collection for 'z' with addNew=true")
-		}
+		actual := args.Map{"result": col3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected new collection for 'z' with addNew=true", actual)
 	})
 }
 
@@ -195,9 +196,9 @@ func Test_C48_CharCollectionMap_GetCollectionLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCollectionLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		col := m.GetCollectionLock("apple", false)
-		if col == nil {
-			t.Fatal("expected collection")
-		}
+		actual := args.Map{"result": col == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected collection", actual)
 	})
 }
 
@@ -205,9 +206,9 @@ func Test_C48_CharCollectionMap_GetCollectionByChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCollectionByChar", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		col := m.GetCollectionByChar('a')
-		if col == nil {
-			t.Fatal("expected collection for 'a'")
-		}
+		actual := args.Map{"result": col == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected collection for 'a'", actual)
 	})
 }
 
@@ -215,27 +216,27 @@ func Test_C48_CharCollectionMap_IsEquals(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEquals", func() {
 		m1 := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m2 := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if !m1.IsEquals(m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEquals(m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
 func Test_C48_CharCollectionMap_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEquals_Nil", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if m.IsEquals(nil) {
-			t.Fatal("nil should not be equal")
-		}
+		actual := args.Map{"result": m.IsEquals(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 	})
 }
 
 func Test_C48_CharCollectionMap_IsEquals_SameRef(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEquals_SameRef", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if !m.IsEquals(m) {
-			t.Fatal("same ref should be equal")
-		}
+		actual := args.Map{"result": m.IsEquals(m)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "same ref should be equal", actual)
 	})
 }
 
@@ -243,9 +244,9 @@ func Test_C48_CharCollectionMap_IsEquals_DiffLength(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEquals_DiffLength", func() {
 		m1 := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m2 := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
-		if m1.IsEquals(m2) {
-			t.Fatal("diff length should not be equal")
-		}
+		actual := args.Map{"result": m1.IsEquals(m2)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "diff length should not be equal", actual)
 	})
 }
 
@@ -253,9 +254,9 @@ func Test_C48_CharCollectionMap_IsEqualsLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEqualsLock", func() {
 		m1 := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m2 := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if !m1.IsEqualsLock(m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEqualsLock(m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
@@ -263,9 +264,9 @@ func Test_C48_CharCollectionMap_IsEqualsCaseSensitive(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEqualsCaseSensitive", func() {
 		m1 := corestr.New.CharCollectionMap.Items([]string{"Apple"})
 		m2 := corestr.New.CharCollectionMap.Items([]string{"Apple"})
-		if !m1.IsEqualsCaseSensitive(true, m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEqualsCaseSensitive(true, m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
@@ -273,9 +274,9 @@ func Test_C48_CharCollectionMap_IsEqualsCaseSensitiveLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEqualsCaseSensitiveLock", func() {
 		m1 := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m2 := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if !m1.IsEqualsCaseSensitiveLock(true, m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEqualsCaseSensitiveLock(true, m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
@@ -283,13 +284,13 @@ func Test_C48_CharCollectionMap_AddSameStartingCharItems(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_AddSameStartingCharItems", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		m.AddSameStartingCharItems('a', []string{"apple", "avocado"}, false)
-		if m.LengthOf('a') != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.LengthOf('a') != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		m.AddSameStartingCharItems('a', []string{"apricot"}, false)
-		if m.LengthOf('a') != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": m.LengthOf('a') != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -307,9 +308,9 @@ func Test_C48_CharCollectionMap_AddHashmapsValues(t *testing.T) {
 		hm.AddOrUpdate("k1", "apple")
 		hm.AddOrUpdate("k2", "banana")
 		m.AddHashmapsValues(hm)
-		if m.AllLengthsSum() != 2 {
-			t.Fatalf("expected 2, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -326,9 +327,9 @@ func Test_C48_CharCollectionMap_AddHashmapsKeysValuesBoth(t *testing.T) {
 		hm := corestr.New.Hashmap.Cap(5)
 		hm.AddOrUpdate("apple", "avocado")
 		m.AddHashmapsKeysValuesBoth(hm)
-		if m.AllLengthsSum() != 2 {
-			t.Fatalf("expected 2, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -337,9 +338,9 @@ func Test_C48_CharCollectionMap_AddCollectionItems(t *testing.T) {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := corestr.New.Collection.Strings([]string{"apple", "banana"})
 		m.AddCollectionItems(col)
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -355,9 +356,9 @@ func Test_C48_CharCollectionMap_AddCharHashsetMap(t *testing.T) {
 		m := corestr.New.CharCollectionMap.Empty()
 		chm := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
 		m.AddCharHashsetMap(chm)
-		if m.AllLengthsSum() != 2 {
-			t.Fatalf("expected 2, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -365,9 +366,9 @@ func Test_C48_CharCollectionMap_Resize(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Resize", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"a1"})
 		m.Resize(100)
-		if m.Length() != 1 {
-			t.Fatal("resize should preserve items")
-		}
+		actual := args.Map{"result": m.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "resize should preserve items", actual)
 		// resize with smaller - no change
 		m.Resize(0)
 	})
@@ -391,9 +392,9 @@ func Test_C48_CharCollectionMap_List(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_List", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
 		list := m.List()
-		if len(list) != 2 {
-			t.Fatalf("expected 2, got %d", len(list))
-		}
+		actual := args.Map{"result": len(list) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -401,9 +402,9 @@ func Test_C48_CharCollectionMap_ListLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_ListLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		list := m.ListLock()
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(list) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -411,12 +412,12 @@ func Test_C48_CharCollectionMap_SortedListAsc(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_SortedListAsc", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"banana", "apple"})
 		list := m.SortedListAsc()
-		if len(list) != 2 {
-			t.Fatal("expected 2")
-		}
-		if list[0] != "apple" {
-			t.Fatalf("expected apple first, got %s", list[0])
-		}
+		actual := args.Map{"result": len(list) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+		actual := args.Map{"result": list[0] != "apple"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected apple first", actual)
 	})
 }
 
@@ -424,9 +425,9 @@ func Test_C48_CharCollectionMap_SortedListAsc_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_SortedListAsc_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		list := m.SortedListAsc()
-		if len(list) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(list) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -434,9 +435,9 @@ func Test_C48_CharCollectionMap_String(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_String", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		s := m.String()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -444,9 +445,9 @@ func Test_C48_CharCollectionMap_SummaryString(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_SummaryString", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		s := m.SummaryString()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -454,9 +455,9 @@ func Test_C48_CharCollectionMap_StringLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_StringLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		s := m.StringLock()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -464,9 +465,9 @@ func Test_C48_CharCollectionMap_SummaryStringLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_SummaryStringLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		s := m.SummaryStringLock()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -489,18 +490,18 @@ func Test_C48_CharCollectionMap_PrintLock(t *testing.T) {
 func Test_C48_CharCollectionMap_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_IsEmptyLock", func() {
 		m := corestr.New.CharCollectionMap.Empty()
-		if !m.IsEmptyLock() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmptyLock()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
 func Test_C48_CharCollectionMap_LengthLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_LengthLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
-		if m.LengthLock() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.LengthLock() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -508,13 +509,13 @@ func Test_C48_CharCollectionMap_HashsetByChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetByChar", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		hs := m.HashsetByChar('a')
-		if hs == nil || hs.IsEmpty() {
-			t.Fatal("expected hashset with items")
-		}
+		actual := args.Map{"result": hs == nil || hs.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset with items", actual)
 		hs2 := m.HashsetByChar('z')
-		if hs2 != nil {
-			t.Fatal("expected nil for missing char")
-		}
+		actual := args.Map{"result": hs2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for missing char", actual)
 	})
 }
 
@@ -522,13 +523,13 @@ func Test_C48_CharCollectionMap_HashsetByCharLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetByCharLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		hs := m.HashsetByCharLock('a')
-		if hs == nil || hs.IsEmpty() {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil || hs.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 		hs2 := m.HashsetByCharLock('z')
-		if hs2 == nil {
-			t.Fatal("expected empty hashset, not nil")
-		}
+		actual := args.Map{"result": hs2 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty hashset, not nil", actual)
 	})
 }
 
@@ -536,9 +537,9 @@ func Test_C48_CharCollectionMap_HashsetByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetByStringFirstChar", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		hs := m.HashsetByStringFirstChar("anything")
-		if hs == nil {
-			t.Fatal("expected hashset for 'a'")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset for 'a'", actual)
 	})
 }
 
@@ -546,9 +547,9 @@ func Test_C48_CharCollectionMap_HashsetByStringFirstCharLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetByStringFirstCharLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		hs := m.HashsetByStringFirstCharLock("anything")
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -556,9 +557,9 @@ func Test_C48_CharCollectionMap_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetsCollection", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
 		hsc := m.HashsetsCollection()
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -566,9 +567,9 @@ func Test_C48_CharCollectionMap_HashsetsCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetsCollection_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		hsc := m.HashsetsCollection()
-		if !hsc.IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -576,9 +577,9 @@ func Test_C48_CharCollectionMap_HashsetsCollectionByChars(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetsCollectionByChars", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple", "banana"})
 		hsc := m.HashsetsCollectionByChars('a')
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -586,9 +587,9 @@ func Test_C48_CharCollectionMap_HashsetsCollectionByStringFirstChar(t *testing.T
 	safeTest(t, "Test_C48_CharCollectionMap_HashsetsCollectionByStringFirstChar", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		hsc := m.HashsetsCollectionByStringFirstChar("anything")
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -597,9 +598,9 @@ func Test_C48_CharCollectionMap_AddSameCharsCollection(t *testing.T) {
 		m := corestr.New.CharCollectionMap.Empty()
 		col := corestr.New.Collection.Strings([]string{"apple", "avocado"})
 		result := m.AddSameCharsCollection("abc", col)
-		if result == nil {
-			t.Fatal("expected collection")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected collection", actual)
 		// Add to existing
 		col2 := corestr.New.Collection.Strings([]string{"apricot"})
 		m.AddSameCharsCollection("abc", col2)
@@ -622,9 +623,9 @@ func Test_C48_CharCollectionMap_GetCharsGroups(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCharsGroups", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.GetCharsGroups([]string{"apple", "banana"})
-		if result == nil {
-			t.Fatal("expected result")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected result", actual)
 	})
 }
 
@@ -632,9 +633,9 @@ func Test_C48_CharCollectionMap_GetCharsGroups_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCharsGroups_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		result := m.GetCharsGroups([]string{})
-		if result != m {
-			t.Fatal("expected self")
-		}
+		actual := args.Map{"result": result != m}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected self", actual)
 	})
 }
 
@@ -642,9 +643,9 @@ func Test_C48_CharCollectionMap_GetCopyMapLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCopyMapLock", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		cm := m.GetCopyMapLock()
-		if len(cm) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(cm) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -652,9 +653,9 @@ func Test_C48_CharCollectionMap_GetCopyMapLock_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetCopyMapLock_Empty", func() {
 		m := corestr.New.CharCollectionMap.Empty()
 		cm := m.GetCopyMapLock()
-		if len(cm) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(cm) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -662,9 +663,9 @@ func Test_C48_CharCollectionMap_GetMap(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_GetMap", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		gm := m.GetMap()
-		if len(gm) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(gm) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -672,9 +673,9 @@ func Test_C48_CharCollectionMap_Clear(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Clear", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m.Clear()
-		if !m.IsEmpty() {
-			t.Fatal("expected empty after clear")
-		}
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty after clear", actual)
 	})
 }
 
@@ -704,12 +705,12 @@ func Test_C48_CharCollectionMap_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_MarshalJSON", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		data, err := json.Marshal(m)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if len(data) == 0 {
-			t.Fatal("expected non-empty json")
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
+		actual := args.Map{"result": len(data) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 	})
 }
 
@@ -719,9 +720,9 @@ func Test_C48_CharCollectionMap_UnmarshalJSON(t *testing.T) {
 		data, _ := json.Marshal(m)
 		m2 := corestr.New.CharCollectionMap.Empty()
 		err := json.Unmarshal(data, m2)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -729,9 +730,9 @@ func Test_C48_CharCollectionMap_Json(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_Json", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		j := m.Json()
-		if j.Error != nil {
-			t.Fatal(j.Error)
-		}
+		actual := args.Map{"result": j.Error}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "j.Error", actual)
 	})
 }
 
@@ -739,9 +740,9 @@ func Test_C48_CharCollectionMap_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_JsonPtr", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		j := m.JsonPtr()
-		if j == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": j == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -749,9 +750,9 @@ func Test_C48_CharCollectionMap_JsonModel(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_JsonModel", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		jm := m.JsonModel()
-		if jm == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": jm == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -759,9 +760,9 @@ func Test_C48_CharCollectionMap_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMap_JsonModelAny", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		a := m.JsonModelAny()
-		if a == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": a == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -771,9 +772,9 @@ func Test_C48_CharCollectionMap_ParseInjectUsingJson(t *testing.T) {
 		j := m.Json()
 		m2 := corestr.New.CharCollectionMap.Empty()
 		_, err := m2.ParseInjectUsingJson(&j)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -792,9 +793,9 @@ func Test_C48_CharCollectionMap_JsonParseSelfInject(t *testing.T) {
 		j := m.Json()
 		m2 := corestr.New.CharCollectionMap.Empty()
 		err := m2.JsonParseSelfInject(&j)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -812,36 +813,36 @@ func Test_C48_CharCollectionMap_AsInterfaces(t *testing.T) {
 func Test_C48_CharCollectionMapCreator_CapSelfCap(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMapCreator_CapSelfCap", func() {
 		m := corestr.New.CharCollectionMap.CapSelfCap(20, 15)
-		if m == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": m == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
 func Test_C48_CharCollectionMapCreator_ItemsPtrWithCap(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMapCreator_ItemsPtrWithCap", func() {
 		m := corestr.New.CharCollectionMap.ItemsPtrWithCap(5, 10, []string{"apple"})
-		if m.AllLengthsSum() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_C48_CharCollectionMapCreator_ItemsPtrWithCap_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMapCreator_ItemsPtrWithCap_Empty", func() {
 		m := corestr.New.CharCollectionMap.ItemsPtrWithCap(5, 10, []string{})
-		if m.AllLengthsSum() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_C48_CharCollectionMapCreator_Items_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharCollectionMapCreator_Items_Empty", func() {
 		m := corestr.New.CharCollectionMap.Items([]string{})
-		if !m.IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -851,9 +852,9 @@ func Test_C48_CharCollectionDataModel(t *testing.T) {
 		m := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		dm := corestr.NewCharCollectionMapDataModelUsing(m)
 		m2 := corestr.NewCharCollectionMapUsingDataModel(dm)
-		if m2.AllLengthsSum() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m2.AllLengthsSum() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -861,9 +862,9 @@ func Test_C48_CharCollectionDataModel(t *testing.T) {
 func Test_C48_EmptyCreator_CharCollectionMap(t *testing.T) {
 	safeTest(t, "Test_C48_EmptyCreator_CharCollectionMap", func() {
 		m := corestr.Empty.CharCollectionMap()
-		if m == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": m == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -872,45 +873,45 @@ func Test_C48_EmptyCreator_CharCollectionMap(t *testing.T) {
 func Test_C48_CharHashsetMap_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Empty", func() {
 		m := corestr.Empty.CharHashsetMap()
-		if m == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": m == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_Cap(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Cap", func() {
 		m := corestr.New.CharHashsetMap.Cap(20, 15)
-		if m == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": m == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_CapItems(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_CapItems", func() {
 		m := corestr.New.CharHashsetMap.CapItems(20, 15, "apple", "banana")
-		if m.AllLengthsSum() != 2 {
-			t.Fatalf("expected 2, got %d", m.AllLengthsSum())
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_Strings(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Strings", func() {
 		m := corestr.New.CharHashsetMap.Strings(10, []string{"apple", "banana"})
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_Strings_Nil(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Strings_Nil", func() {
 		m := corestr.New.CharHashsetMap.Strings(10, nil)
-		if m.AllLengthsSum() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -920,9 +921,9 @@ func Test_C48_CharHashsetMap_Add(t *testing.T) {
 		m.Add("apple")
 		m.Add("apricot")
 		m.Add("banana")
-		if m.Length() != 2 {
-			t.Fatalf("expected 2, got %d", m.Length())
-		}
+		actual := args.Map{"result": m.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -930,9 +931,9 @@ func Test_C48_CharHashsetMap_AddLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AddLock", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		m.AddLock("abc")
-		if m.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -940,9 +941,9 @@ func Test_C48_CharHashsetMap_AddStrings(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AddStrings", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		m.AddStrings("apple", "banana")
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -957,9 +958,9 @@ func Test_C48_CharHashsetMap_AddStringsLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AddStringsLock", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		m.AddStringsLock("apple")
-		if m.AllLengthsSum() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -973,21 +974,21 @@ func Test_C48_CharHashsetMap_AddStringsLock_Empty(t *testing.T) {
 func Test_C48_CharHashsetMap_Has(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Has", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if !m.Has("apple") {
-			t.Fatal("should have apple")
-		}
-		if m.Has("cherry") {
-			t.Fatal("should not have cherry")
-		}
+		actual := args.Map{"result": m.Has("apple")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have apple", actual)
+		actual := args.Map{"result": m.Has("cherry")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should not have cherry", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_Has_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Has_Empty", func() {
 		m := corestr.Empty.CharHashsetMap()
-		if m.Has("x") {
-			t.Fatal("empty should not have")
-		}
+		actual := args.Map{"result": m.Has("x")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty should not have", actual)
 	})
 }
 
@@ -995,13 +996,13 @@ func Test_C48_CharHashsetMap_HasWithHashset(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HasWithHashset", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		has, hs := m.HasWithHashset("apple")
-		if !has || hs == nil {
-			t.Fatal("should have")
-		}
+		actual := args.Map{"result": has || hs == nil}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have", actual)
 		has2, _ := m.HasWithHashset("missing")
-		if has2 {
-			t.Fatal("should not have")
-		}
+		actual := args.Map{"result": has2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "should not have", actual)
 	})
 }
 
@@ -1009,9 +1010,9 @@ func Test_C48_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HasWithHashset_Empty", func() {
 		m := corestr.Empty.CharHashsetMap()
 		has, _ := m.HasWithHashset("x")
-		if has {
-			t.Fatal("empty should not have")
-		}
+		actual := args.Map{"result": has}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty should not have", actual)
 	})
 }
 
@@ -1019,81 +1020,81 @@ func Test_C48_CharHashsetMap_HasWithHashsetLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HasWithHashsetLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		has, _ := m.HasWithHashsetLock("apple")
-		if !has {
-			t.Fatal("should have")
-		}
+		actual := args.Map{"result": has}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_LengthOf(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_LengthOf", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if m.LengthOf('a') != 1 {
-			t.Fatal("expected 1")
-		}
-		if m.LengthOf('z') != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": m.LengthOf('a') != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": m.LengthOf('z') != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_LengthOfLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_LengthOfLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if m.LengthOfLock('a') != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.LengthOfLock('a') != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_LengthOfHashsetFromFirstChar", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if m.LengthOfHashsetFromFirstChar("any") != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.LengthOfHashsetFromFirstChar("any") != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_AllLengthsSum(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AllLengthsSum", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_AllLengthsSumLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AllLengthsSumLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if m.AllLengthsSumLock() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.AllLengthsSumLock() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_GetChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetChar", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
-		if m.GetChar("hello") != 'h' {
-			t.Fatal("expected h")
-		}
-		if m.GetChar("") != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": m.GetChar("hello") != 'h'}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected h", actual)
+		actual := args.Map{"result": m.GetChar("") != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_GetCharOf(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetCharOf", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
-		if m.GetCharOf("hello") != 'h' {
-			t.Fatal("expected h")
-		}
-		if m.GetCharOf("") != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": m.GetCharOf("hello") != 'h'}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected h", actual)
+		actual := args.Map{"result": m.GetCharOf("") != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1101,17 +1102,17 @@ func Test_C48_CharHashsetMap_GetHashset(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetHashset", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.GetHashset("any", false)
-		if hs == nil {
-			t.Fatal("expected hashset for 'a'")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset for 'a'", actual)
 		hs2 := m.GetHashset("zzz", false)
-		if hs2 != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": hs2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		hs3 := m.GetHashset("zzz", true)
-		if hs3 == nil {
-			t.Fatal("expected new hashset")
-		}
+		actual := args.Map{"result": hs3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected new hashset", actual)
 	})
 }
 
@@ -1119,9 +1120,9 @@ func Test_C48_CharHashsetMap_GetHashsetLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetHashsetLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.GetHashsetLock(false, "apple")
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -1129,9 +1130,9 @@ func Test_C48_CharHashsetMap_GetHashsetByChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetHashsetByChar", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.GetHashsetByChar('a')
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -1139,9 +1140,9 @@ func Test_C48_CharHashsetMap_HashsetByChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetByChar", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.HashsetByChar('a')
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -1149,13 +1150,13 @@ func Test_C48_CharHashsetMap_HashsetByCharLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetByCharLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.HashsetByCharLock('a')
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 		hs2 := m.HashsetByCharLock('z')
-		if hs2 == nil {
-			t.Fatal("expected empty hashset")
-		}
+		actual := args.Map{"result": hs2 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty hashset", actual)
 	})
 }
 
@@ -1163,9 +1164,9 @@ func Test_C48_CharHashsetMap_HashsetByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetByStringFirstChar", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.HashsetByStringFirstChar("anything")
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -1173,9 +1174,9 @@ func Test_C48_CharHashsetMap_HashsetByStringFirstCharLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetByStringFirstCharLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hs := m.HashsetByStringFirstCharLock("anything")
-		if hs == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": hs == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 	})
 }
 
@@ -1183,27 +1184,27 @@ func Test_C48_CharHashsetMap_IsEquals(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_IsEquals", func() {
 		m1 := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		m2 := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if !m1.IsEquals(m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEquals(m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_IsEquals_Nil(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_IsEquals_Nil", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if m.IsEquals(nil) {
-			t.Fatal("nil should not be equal")
-		}
+		actual := args.Map{"result": m.IsEquals(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_IsEquals_SameRef(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_IsEquals_SameRef", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if !m.IsEquals(m) {
-			t.Fatal("same ref")
-		}
+		actual := args.Map{"result": m.IsEquals(m)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "same ref", actual)
 	})
 }
 
@@ -1211,9 +1212,9 @@ func Test_C48_CharHashsetMap_IsEqualsLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_IsEqualsLock", func() {
 		m1 := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		m2 := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if !m1.IsEqualsLock(m2) {
-			t.Fatal("should be equal")
-		}
+		actual := args.Map{"result": m1.IsEqualsLock(m2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should be equal", actual)
 	})
 }
 
@@ -1221,9 +1222,9 @@ func Test_C48_CharHashsetMap_List(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_List", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
 		list := m.List()
-		if len(list) != 2 {
-			t.Fatalf("expected 2, got %d", len(list))
-		}
+		actual := args.Map{"result": len(list) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1231,9 +1232,9 @@ func Test_C48_CharHashsetMap_SortedListAsc(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_SortedListAsc", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "banana", "apple")
 		list := m.SortedListAsc()
-		if len(list) != 2 || list[0] != "apple" {
-			t.Fatal("expected sorted")
-		}
+		actual := args.Map{"result": len(list) != 2 || list[0] != "apple"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 	})
 }
 
@@ -1241,9 +1242,9 @@ func Test_C48_CharHashsetMap_SortedListDsc(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_SortedListDsc", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
 		list := m.SortedListDsc()
-		if len(list) != 2 || list[0] != "banana" {
-			t.Fatal("expected descending")
-		}
+		actual := args.Map{"result": len(list) != 2 || list[0] != "banana"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected descending", actual)
 	})
 }
 
@@ -1251,9 +1252,9 @@ func Test_C48_CharHashsetMap_String(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_String", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		s := m.String()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1261,9 +1262,9 @@ func Test_C48_CharHashsetMap_StringLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_StringLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		s := m.StringLock()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1286,18 +1287,18 @@ func Test_C48_CharHashsetMap_PrintLock(t *testing.T) {
 func Test_C48_CharHashsetMap_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_IsEmptyLock", func() {
 		m := corestr.Empty.CharHashsetMap()
-		if !m.IsEmptyLock() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmptyLock()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
 func Test_C48_CharHashsetMap_HasItems(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HasItems", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
-		if !m.HasItems() {
-			t.Fatal("should have items")
-		}
+		actual := args.Map{"result": m.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have items", actual)
 	})
 }
 
@@ -1305,9 +1306,9 @@ func Test_C48_CharHashsetMap_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetsCollection", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple", "banana")
 		hsc := m.HashsetsCollection()
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1315,9 +1316,9 @@ func Test_C48_CharHashsetMap_HashsetsCollection_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetsCollection_Empty", func() {
 		m := corestr.Empty.CharHashsetMap()
 		hsc := m.HashsetsCollection()
-		if !hsc.IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1325,9 +1326,9 @@ func Test_C48_CharHashsetMap_HashsetsCollectionByChars(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetsCollectionByChars", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hsc := m.HashsetsCollectionByChars('a')
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1335,9 +1336,9 @@ func Test_C48_CharHashsetMap_HashsetsCollectionByStringsFirstChar(t *testing.T) 
 	safeTest(t, "Test_C48_CharHashsetMap_HashsetsCollectionByStringsFirstChar", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		hsc := m.HashsetsCollectionByStringsFirstChar("anything")
-		if hsc.IsEmpty() {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": hsc.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1345,9 +1346,9 @@ func Test_C48_CharHashsetMap_GetCharsGroups(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetCharsGroups", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		result := m.GetCharsGroups("apple", "banana")
-		if result.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": result.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1355,9 +1356,9 @@ func Test_C48_CharHashsetMap_GetCharsGroups_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetCharsGroups_Empty", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		result := m.GetCharsGroups()
-		if result != m {
-			t.Fatal("expected self")
-		}
+		actual := args.Map{"result": result != m}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected self", actual)
 	})
 }
 
@@ -1365,9 +1366,9 @@ func Test_C48_CharHashsetMap_GetMap(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetMap", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		gm := m.GetMap()
-		if len(gm) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(gm) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1375,9 +1376,9 @@ func Test_C48_CharHashsetMap_GetCopyMapLock(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetCopyMapLock", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		cm := m.GetCopyMapLock()
-		if len(cm) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(cm) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1385,9 +1386,9 @@ func Test_C48_CharHashsetMap_GetCopyMapLock_Empty(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_GetCopyMapLock_Empty", func() {
 		m := corestr.Empty.CharHashsetMap()
 		cm := m.GetCopyMapLock()
-		if len(cm) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(cm) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1395,13 +1396,13 @@ func Test_C48_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_AddSameStartingCharItems", func() {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		m.AddSameStartingCharItems('a', []string{"apple"})
-		if m.LengthOf('a') != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.LengthOf('a') != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		m.AddSameStartingCharItems('a', []string{"avocado"})
-		if m.LengthOf('a') != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.LengthOf('a') != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1417,9 +1418,9 @@ func Test_C48_CharHashsetMap_AddCollectionItems(t *testing.T) {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		col := corestr.New.Collection.Strings([]string{"apple", "banana"})
 		m.AddCollectionItems(col)
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1435,9 +1436,9 @@ func Test_C48_CharHashsetMap_AddCharCollectionMapItems(t *testing.T) {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		ccm := corestr.New.CharCollectionMap.Items([]string{"apple"})
 		m.AddCharCollectionMapItems(ccm)
-		if m.AllLengthsSum() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1453,9 +1454,9 @@ func Test_C48_CharHashsetMap_AddHashsetItems(t *testing.T) {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		hs := corestr.New.Hashset.Strings([]string{"apple", "banana"})
 		m.AddHashsetItems(hs)
-		if m.AllLengthsSum() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": m.AllLengthsSum() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1464,9 +1465,9 @@ func Test_C48_CharHashsetMap_AddSameCharsCollection(t *testing.T) {
 		m := corestr.New.CharHashsetMap.Cap(10, 10)
 		col := corestr.New.Collection.Strings([]string{"apple"})
 		result := m.AddSameCharsCollection("abc", col)
-		if result == nil {
-			t.Fatal("expected hashset")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 		// Add to existing
 		col2 := corestr.New.Collection.Strings([]string{"avocado"})
 		m.AddSameCharsCollection("abc", col2)
@@ -1512,9 +1513,9 @@ func Test_C48_CharHashsetMap_RemoveAll(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_RemoveAll", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		m.RemoveAll()
-		if !m.IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1529,9 +1530,9 @@ func Test_C48_CharHashsetMap_Clear(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Clear", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		m.Clear()
-		if !m.IsEmpty() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": m.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1547,12 +1548,12 @@ func Test_C48_CharHashsetMap_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_MarshalJSON", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		data, err := json.Marshal(m)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if len(data) == 0 {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
+		actual := args.Map{"result": len(data) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1562,9 +1563,9 @@ func Test_C48_CharHashsetMap_UnmarshalJSON(t *testing.T) {
 		data, _ := json.Marshal(m)
 		m2 := corestr.New.CharHashsetMap.Cap(10, 10)
 		err := json.Unmarshal(data, m2)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -1572,9 +1573,9 @@ func Test_C48_CharHashsetMap_Json(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_Json", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		j := m.Json()
-		if j.Error != nil {
-			t.Fatal(j.Error)
-		}
+		actual := args.Map{"result": j.Error}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "j.Error", actual)
 	})
 }
 
@@ -1582,9 +1583,9 @@ func Test_C48_CharHashsetMap_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_JsonPtr", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		j := m.JsonPtr()
-		if j == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": j == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -1592,9 +1593,9 @@ func Test_C48_CharHashsetMap_JsonModel(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_JsonModel", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		jm := m.JsonModel()
-		if jm == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": jm == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -1602,9 +1603,9 @@ func Test_C48_CharHashsetMap_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_C48_CharHashsetMap_JsonModelAny", func() {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		a := m.JsonModelAny()
-		if a == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": a == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -1614,9 +1615,9 @@ func Test_C48_CharHashsetMap_ParseInjectUsingJson(t *testing.T) {
 		j := m.Json()
 		m2 := corestr.New.CharHashsetMap.Cap(10, 10)
 		_, err := m2.ParseInjectUsingJson(&j)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -1635,9 +1636,9 @@ func Test_C48_CharHashsetMap_JsonParseSelfInject(t *testing.T) {
 		j := m.Json()
 		m2 := corestr.New.CharHashsetMap.Cap(10, 10)
 		err := m2.JsonParseSelfInject(&j)
-		if err != nil {
-			t.Fatal(err)
-		}
+		actual := args.Map{"result": err}
+		expected := args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
 
@@ -1657,8 +1658,8 @@ func Test_C48_CharHashsetDataModel(t *testing.T) {
 		m := corestr.New.CharHashsetMap.CapItems(10, 10, "apple")
 		dm := corestr.NewCharHashsetMapDataModelUsing(m)
 		m2 := corestr.NewCharHashsetMapUsingDataModel(dm)
-		if m2.AllLengthsSum() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": m2.AllLengthsSum() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -14,70 +15,70 @@ import (
 func Test_CovLL1_01_IsEmpty_HasItems_Length(t *testing.T) {
 	safeTest(t, "Test_CovLL1_01_IsEmpty_HasItems_Length", func() {
 		ll := corestr.Empty.LinkedList()
-		if !ll.IsEmpty() {
-			t.Fatal("expected empty")
-		}
-		if ll.HasItems() {
-			t.Fatal("expected no items")
-		}
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": ll.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no items", actual)
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.Add("a")
-		if ll.IsEmpty() {
-			t.Fatal("expected not empty")
-		}
-		if !ll.HasItems() {
-			t.Fatal("expected items")
-		}
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
+		actual := args.Map{"result": ll.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected items", actual)
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_CovLL1_02_IsEmptyLock_LengthLock(t *testing.T) {
 	safeTest(t, "Test_CovLL1_02_IsEmptyLock_LengthLock", func() {
 		ll := corestr.Empty.LinkedList()
-		if !ll.IsEmptyLock() {
-			t.Fatal("expected empty")
-		}
-		if ll.LengthLock() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.IsEmptyLock()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": ll.LengthLock() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.Add("x")
-		if ll.IsEmptyLock() {
-			t.Fatal("expected not empty")
-		}
-		if ll.LengthLock() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.IsEmptyLock()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
+		actual := args.Map{"result": ll.LengthLock() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_CovLL1_03_Head_Tail(t *testing.T) {
 	safeTest(t, "Test_CovLL1_03_Head_Tail", func() {
 		ll := corestr.Empty.LinkedList()
-		if ll.Head() != nil {
-			t.Fatal("expected nil")
-		}
-		if ll.Tail() != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": ll.Head() != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
+		actual := args.Map{"result": ll.Tail() != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		ll.Add("a")
-		if ll.Head() == nil || ll.Head().Element != "a" {
-			t.Fatal("expected a")
-		}
-		if ll.Tail() == nil || ll.Tail().Element != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": ll.Head() == nil || ll.Head().Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
+		actual := args.Map{"result": ll.Tail() == nil || ll.Tail().Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		ll.Add("b")
-		if ll.Head().Element != "a" {
-			t.Fatal("expected a")
-		}
-		if ll.Tail().Element != "b" {
-			t.Fatal("expected b")
-		}
+		actual := args.Map{"result": ll.Head().Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
+		actual := args.Map{"result": ll.Tail().Element != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
 }
 
@@ -85,13 +86,13 @@ func Test_CovLL1_04_Add_Multiple(t *testing.T) {
 	safeTest(t, "Test_CovLL1_04_Add_Multiple", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a").Add("b").Add("c")
-		if ll.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		items := ll.List()
-		if items[0] != "a" || items[1] != "b" || items[2] != "c" {
-			t.Fatal("unexpected order")
-		}
+		actual := args.Map{"result": items[0] != "a" || items[1] != "b" || items[2] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected order", actual)
 	})
 }
 
@@ -99,9 +100,9 @@ func Test_CovLL1_05_AddLock(t *testing.T) {
 	safeTest(t, "Test_CovLL1_05_AddLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddLock("a")
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -109,9 +110,9 @@ func Test_CovLL1_06_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_CovLL1_06_AddItemsMap", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddItemsMap(map[string]bool{"a": true, "b": false})
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		ll.AddItemsMap(nil)
 		ll.AddItemsMap(map[string]bool{})
@@ -124,20 +125,20 @@ func Test_CovLL1_07_AddFront_PushFront(t *testing.T) {
 		ll.Add("b")
 		ll.AddFront("a")
 		items := ll.List()
-		if items[0] != "a" || items[1] != "b" {
-			t.Fatal("unexpected order")
-		}
+		actual := args.Map{"result": items[0] != "a" || items[1] != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected order", actual)
 		// AddFront on empty
 		ll2 := corestr.Empty.LinkedList()
 		ll2.AddFront("x")
-		if ll2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll2.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// PushFront
 		ll2.PushFront("y")
-		if ll2.Head().Element != "y" {
-			t.Fatal("expected y")
-		}
+		actual := args.Map{"result": ll2.Head().Element != "y"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected y", actual)
 	})
 }
 
@@ -146,9 +147,9 @@ func Test_CovLL1_08_Push_PushBack(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Push("a")
 		ll.PushBack("b")
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -156,13 +157,13 @@ func Test_CovLL1_09_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_CovLL1_09_AddNonEmpty", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddNonEmpty("")
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.AddNonEmpty("a")
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -170,13 +171,13 @@ func Test_CovLL1_10_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovLL1_10_AddNonEmptyWhitespace", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddNonEmptyWhitespace("   ")
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.AddNonEmptyWhitespace("a")
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -184,13 +185,13 @@ func Test_CovLL1_11_AddIf(t *testing.T) {
 	safeTest(t, "Test_CovLL1_11_AddIf", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddIf(false, "a")
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.AddIf(true, "a")
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -198,13 +199,13 @@ func Test_CovLL1_12_AddsIf(t *testing.T) {
 	safeTest(t, "Test_CovLL1_12_AddsIf", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddsIf(false, "a", "b")
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.AddsIf(true, "a", "b")
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -212,9 +213,9 @@ func Test_CovLL1_13_AddFunc(t *testing.T) {
 	safeTest(t, "Test_CovLL1_13_AddFunc", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddFunc(func() string { return "hello" })
-		if ll.Length() != 1 || ll.Head().Element != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": ll.Length() != 1 || ll.Head().Element != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
@@ -226,17 +227,17 @@ func Test_CovLL1_14_AddFuncErr(t *testing.T) {
 			func() (string, error) { return "ok", nil },
 			func(err error) { t.Fatal("unexpected error") },
 		)
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// error
 		ll.AddFuncErr(
 			func() (string, error) { return "", fmt.Errorf("fail") },
 			func(err error) {},
 		)
-		if ll.Length() != 1 {
-			t.Fatal("expected still 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 	})
 }
 
@@ -244,15 +245,15 @@ func Test_CovLL1_15_Adds_AddStrings(t *testing.T) {
 	safeTest(t, "Test_CovLL1_15_Adds_AddStrings", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
-		if ll.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		ll.Adds()
 		ll2 := corestr.Empty.LinkedList()
 		ll2.AddStrings([]string{"x", "y"})
-		if ll2.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll2.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2.AddStrings(nil)
 	})
 }
@@ -261,9 +262,9 @@ func Test_CovLL1_16_AddsLock(t *testing.T) {
 	safeTest(t, "Test_CovLL1_16_AddsLock", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddsLock("a", "b")
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -273,14 +274,14 @@ func Test_CovLL1_17_InsertAt(t *testing.T) {
 		ll.Adds("a", "c")
 		ll.InsertAt(1, "b")
 		items := ll.List()
-		if len(items) < 3 {
-			t.Fatal("expected 3 items")
-		}
+		actual := args.Map{"result": len(items) < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3 items", actual)
 		// index < 1 → AddFront
 		ll.InsertAt(-1, "z")
-		if ll.Head().Element != "z" {
-			t.Fatal("expected z at front")
-		}
+		actual := args.Map{"result": ll.Head().Element != "z"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected z at front", actual)
 	})
 }
 
@@ -289,15 +290,15 @@ func Test_CovLL1_18_AppendNode_AddBackNode(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		node := &corestr.LinkedListNode{Element: "a"}
 		ll.AppendNode(node)
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// not empty
 		node2 := &corestr.LinkedListNode{Element: "b"}
 		ll.AddBackNode(node2)
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -308,16 +309,16 @@ func Test_CovLL1_19_AppendChainOfNodes(t *testing.T) {
 		chain := corestr.Empty.LinkedList()
 		chain.Adds("a", "b", "c")
 		ll.AppendChainOfNodes(chain.Head())
-		if ll.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// append to non-empty
 		chain2 := corestr.Empty.LinkedList()
 		chain2.Adds("d", "e")
 		ll.AppendChainOfNodes(chain2.Head())
-		if ll.Length() != 5 {
-			t.Fatal("expected 5")
-		}
+		actual := args.Map{"result": ll.Length() != 5}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	})
 }
 
@@ -326,9 +327,9 @@ func Test_CovLL1_20_AddPointerStringsPtr(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		a := "a"
 		ll.AddPointerStringsPtr([]*string{&a, nil})
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -336,14 +337,14 @@ func Test_CovLL1_21_AddCollection(t *testing.T) {
 	safeTest(t, "Test_CovLL1_21_AddCollection", func() {
 		ll := corestr.Empty.LinkedList()
 		ll.AddCollection(nil)
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": ll.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 		ll.AddCollection(col)
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -354,19 +355,19 @@ func Test_CovLL1_22_AttachWithNode(t *testing.T) {
 		node := ll.Head()
 		addNode := &corestr.LinkedListNode{Element: "b"}
 		err := ll.AttachWithNode(node, addNode)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		// nil current
 		err2 := ll.AttachWithNode(nil, addNode)
-		if err2 == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err2 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 		// current.next not nil
 		err3 := ll.AttachWithNode(node, addNode)
-		if err3 == nil {
-			t.Fatal("expected error for non-nil next")
-		}
+		actual := args.Map{"result": err3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for non-nil next", actual)
 	})
 }
 
@@ -376,9 +377,9 @@ func Test_CovLL1_23_AddStringsToNode(t *testing.T) {
 		ll.Add("a")
 		node := ll.Head()
 		ll.AddStringsToNode(false, node, []string{"b", "c"})
-		if ll.Length() < 3 {
-			t.Fatal("expected at least 3")
-		}
+		actual := args.Map{"result": ll.Length() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 		// single item
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Add("a")
@@ -407,9 +408,9 @@ func Test_CovLL1_25_AddCollectionToNode(t *testing.T) {
 		ll.Add("a")
 		col := corestr.New.Collection.Strings([]string{"b", "c"})
 		ll.AddCollectionToNode(true, ll.Head(), col)
-		if ll.Length() < 3 {
-			t.Fatal("expected at least 3")
-		}
+		actual := args.Map{"result": ll.Length() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	})
 }
 
@@ -422,9 +423,9 @@ func Test_CovLL1_26_Loop(t *testing.T) {
 			count++
 			return false
 		})
-		if count != 0 {
-			t.Fatal("expected 0 iterations")
-		}
+		actual := args.Map{"result": count != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 iterations", actual)
 		// with items
 		ll.Adds("a", "b", "c")
 		count = 0
@@ -432,27 +433,27 @@ func Test_CovLL1_26_Loop(t *testing.T) {
 			count++
 			return false
 		})
-		if count != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": count != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// break
 		count = 0
 		ll.Loop(func(arg *corestr.LinkedListProcessorParameter) bool {
 			count++
 			return true
 		})
-		if count != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": count != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// break on second
 		count = 0
 		ll.Loop(func(arg *corestr.LinkedListProcessorParameter) bool {
 			count++
 			return arg.Index == 1
 		})
-		if count != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": count != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -463,38 +464,38 @@ func Test_CovLL1_27_Filter(t *testing.T) {
 		r := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true}
 		})
-		if len(r) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(r) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.Adds("a", "b", "c")
 		// keep all
 		r2 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true}
 		})
-		if len(r2) != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": len(r2) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// break on first
 		r3 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true, IsBreak: true}
 		})
-		if len(r3) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": len(r3) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// skip all
 		r4 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: false}
 		})
-		if len(r4) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(r4) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// break on loop iteration
 		r5 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true, IsBreak: arg.Index == 1}
 		})
-		if len(r5) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": len(r5) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -503,23 +504,23 @@ func Test_CovLL1_28_RemoveNodeByElementValue(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		ll.RemoveNodeByElementValue("a", true, false)
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// case insensitive
 		ll.RemoveNodeByElementValue("B", false, false)
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// not found
 		ll.RemoveNodeByElementValue("z", true, true)
 		// remove non-first
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Adds("x", "y", "z")
 		ll2.RemoveNodeByElementValue("y", true, false)
-		if ll2.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll2.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -529,21 +530,21 @@ func Test_CovLL1_29_RemoveNodeByIndex(t *testing.T) {
 		ll.Adds("a", "b", "c")
 		// remove first
 		ll.RemoveNodeByIndex(0)
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// remove last
 		ll.RemoveNodeByIndex(1)
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// remove middle
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Adds("a", "b", "c")
 		ll2.RemoveNodeByIndex(1)
-		if ll2.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll2.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -552,9 +553,9 @@ func Test_CovLL1_30_RemoveNodeByIndexes(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c", "d")
 		ll.RemoveNodeByIndexes(false, 1, 3)
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// empty indexes
 		ll.RemoveNodeByIndexes(false)
 		// ignore panic on empty
@@ -569,20 +570,20 @@ func Test_CovLL1_31_RemoveNode(t *testing.T) {
 		ll.Adds("a", "b", "c")
 		// nil → skip
 		ll.RemoveNode(nil)
-		if ll.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": ll.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// remove head
 		ll.RemoveNode(ll.Head())
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ll.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// remove non-head
 		node := ll.Head().Next()
 		ll.RemoveNode(node)
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ll.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -593,9 +594,9 @@ func Test_CovLL1_32_GetCompareSummary(t *testing.T) {
 		b := corestr.Empty.LinkedList()
 		b.Adds("a", "b")
 		s := a.GetCompareSummary(b, "left", "right")
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": s == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -604,18 +605,18 @@ func Test_CovLL1_33_IndexAt(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		node := ll.IndexAt(0)
-		if node.Element != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": node.Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		node2 := ll.IndexAt(2)
-		if node2.Element != "c" {
-			t.Fatal("expected c")
-		}
+		actual := args.Map{"result": node2.Element != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected c", actual)
 		// negative
 		n := ll.IndexAt(-1)
-		if n != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": n != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -625,36 +626,36 @@ func Test_CovLL1_34_SafeIndexAt_SafePointerIndexAt(t *testing.T) {
 		ll.Adds("a", "b")
 		// found
 		node := ll.SafeIndexAt(0)
-		if node == nil || node.Element != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": node == nil || node.Element != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		node1 := ll.SafeIndexAt(1)
-		if node1 == nil || node1.Element != "b" {
-			t.Fatal("expected b")
-		}
+		actual := args.Map{"result": node1 == nil || node1.Element != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b", actual)
 		// not found
 		n := ll.SafeIndexAt(-1)
-		if n != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": n != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		n2 := ll.SafeIndexAt(99)
-		if n2 != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": n2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		// empty
 		e := corestr.Empty.LinkedList()
-		if e.SafeIndexAt(0) != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": e.SafeIndexAt(0) != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		// pointer
 		p := ll.SafePointerIndexAt(0)
-		if p == nil || *p != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": p == nil || *p != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		p2 := ll.SafePointerIndexAt(-1)
-		if p2 != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": p2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -663,13 +664,13 @@ func Test_CovLL1_35_SafePointerIndexAtUsingDefault(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		v := ll.SafePointerIndexAtUsingDefault(0, "def")
-		if v != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": v != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		v2 := ll.SafePointerIndexAtUsingDefault(99, "def")
-		if v2 != "def" {
-			t.Fatal("expected def")
-		}
+		actual := args.Map{"result": v2 != "def"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected def", actual)
 	})
 }
 
@@ -678,13 +679,13 @@ func Test_CovLL1_36_SafeIndexAtLock_SafePointerIndexAtUsingDefaultLock(t *testin
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		n := ll.SafeIndexAtLock(0)
-		if n == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": n == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		v := ll.SafePointerIndexAtUsingDefaultLock(0, "def")
-		if v != "a" {
-			t.Fatal("expected a")
-		}
+		actual := args.Map{"result": v != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
 
@@ -693,12 +694,12 @@ func Test_CovLL1_37_GetNextNodes_GetAllLinkedNodes(t *testing.T) {
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		r := ll.GetNextNodes(2)
-		if len(r) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": len(r) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		all := ll.GetAllLinkedNodes()
-		if len(all) != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": len(all) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
