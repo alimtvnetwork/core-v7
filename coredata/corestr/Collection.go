@@ -1496,13 +1496,6 @@ func (it *Collection) FilterPtr(filterPtr IsStringPointerFilter) *[]*string {
 	return &list
 }
 
-// NonEmptyListPtr returns non-empty items as a slice.
-//
-// Deprecated: Use NonEmptyList instead.
-func (it *Collection) NonEmptyListPtr() *[]string {
-	list := it.NonEmptyList()
-	return &list
-}
 
 // NonEmptyList returns all non-empty string items.
 func (it *Collection) NonEmptyList() []string {
