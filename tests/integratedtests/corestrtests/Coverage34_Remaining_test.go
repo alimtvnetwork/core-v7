@@ -465,6 +465,23 @@ func Test_C34_LMRFS_Methods(t *testing.T) {
 		_ = corestr.LeftMiddleRightFromSplitNTrimmed("a : b : c", ":")
 	})
 }
+
+// ── ValidValue ──
+
+func Test_C34_VV_Methods(t *testing.T) {
+	safeTest(t, "Test_C34_VV_Methods", func() {
+		vv := corestr.NewValidValue("hello")
+		_ = vv.IsEmpty()
+		_ = vv.ValueBytesOnce()
+		_ = vv.ValueBytesOncePtr()
+		_ = vv.Clone()
+		_ = vv.String()
+		vv.Clear()
+		vv2 := corestr.NewValidValue("x")
+		vv2.Dispose()
+	})
+}
+
 func Test_C34_VV_Creators(t *testing.T) {
 	safeTest(t, "Test_C34_VV_Creators", func() {
 		_ = corestr.NewValidValue("x")
@@ -953,6 +970,35 @@ func Test_C34_NCOCC_StringsOption(t *testing.T) {
 		_ = corestr.New.CollectionsOfCollection.StringsOption(false, 5, []string{"a"})
 	})
 }
+
+// ── HashsetsCollection ──
+
+func Test_C34_HC_Methods(t *testing.T) {
+	safeTest(t, "Test_C34_HC_Methods", func() {
+		hc := corestr.New.HashsetsCollection.Empty()
+		_ = hc.IsEmpty()
+		_ = hc.HasItems()
+		_ = hc.Length()
+		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
+		_ = hc.IndexOf(0)
+		_ = hc.ListPtr()
+		_ = hc.List()
+		_ = hc.StringsList()
+		_ = hc.HasAll("a")
+		_ = hc.ListDirectPtr()
+		_ = hc.Json()
+		_ = hc.JsonPtr()
+		_ = hc.JsonModel()
+		_ = hc.JsonModelAny()
+		_, _ = hc.MarshalJSON()
+		_ = hc.AsJsonContractsBinder()
+		_ = hc.AsJsoner()
+		_ = hc.AsJsonMarshaller()
+		_ = hc.AsJsonParseSelfInjector()
+		_ = hc.String()
+	})
+}
+
 func Test_C34_HC_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_C34_HC_AddNonEmpty", func() {
 		hc := corestr.New.HashsetsCollection.Empty()

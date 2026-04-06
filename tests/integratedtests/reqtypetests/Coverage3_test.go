@@ -35,6 +35,48 @@ func Test_Cov3_Request_ValueTypes(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Value returns correct value -- type accessors", actual)
 }
+
+func Test_Cov3_Request_EnumMethods(t *testing.T) {
+	// Act
+	actual := args.Map{
+		"integerRanges": len(reqtype.Create.IntegerEnumRanges()) > 0,
+		"rangeNamesCsv": reqtype.Create.RangeNamesCsv() != "",
+		"typeName":      reqtype.Create.TypeName() != "",
+		"nameValue":     reqtype.Create.NameValue() != "",
+		"isValid":       reqtype.Create.IsValid(),
+		"isInvalid":     reqtype.Invalid.IsInvalid(),
+		"isUndefined":   reqtype.Invalid.IsUndefined(),
+		"isNone":        reqtype.Invalid.IsNone(),
+		"isUninitialized": reqtype.Invalid.IsUninitialized(),
+		"minValueString": reqtype.Create.MinValueString() != "",
+		"maxValueString": reqtype.Create.MaxValueString() != "",
+		"rangesByte":    len(reqtype.Create.RangesByte()) > 0,
+		"maxByte":       reqtype.Create.MaxByte() > 0,
+		"isValidRange":  reqtype.Create.IsValidRange(),
+		"rangeDynMap":   len(reqtype.Create.RangesDynamicMap()) > 0,
+	}
+
+	// Assert
+	expected := args.Map{
+		"integerRanges": true,
+		"rangeNamesCsv": true,
+		"typeName":      true,
+		"nameValue":     true,
+		"isValid":       true,
+		"isInvalid":     true,
+		"isUndefined":   true,
+		"isNone":        true,
+		"isUninitialized": true,
+		"minValueString": true,
+		"maxValueString": true,
+		"rangesByte":    true,
+		"maxByte":       true,
+		"isValidRange":  true,
+		"rangeDynMap":   true,
+	}
+	expected.ShouldBeEqual(t, 0, "Enum returns correct value -- methods", actual)
+}
+
 func Test_Cov3_Request_MinMaxAny(t *testing.T) {
 	// Act
 	min, max := reqtype.Create.MinMaxAny()

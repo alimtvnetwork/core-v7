@@ -41,6 +41,16 @@ func Test_C04_AnyToBytes_FromStruct(t *testing.T) {
 		convey.So(string(result), convey.ShouldContainSubstring, "test")
 	})
 }
+
+func Test_C05_AnyToBytesPtr(t *testing.T) {
+	convey.Convey("AnyToBytesPtr delegates to AnyToBytes", t, func() {
+		result := coretests.AnyToBytesPtr("hello")
+		convey.So(string(result), convey.ShouldEqual, "hello")
+	})
+}
+
+// ─── AnyToDraftType ──────────────────────────────────────────────────────────
+
 func Test_C06_AnyToDraftType_FromValue(t *testing.T) {
 	convey.Convey("AnyToDraftType from DraftType value", t, func() {
 		d := coretests.DraftType{SampleString1: "a"}
@@ -296,6 +306,25 @@ func Test_C34_DraftType_Clone(t *testing.T) {
 		convey.So(clone.RawBytes, convey.ShouldResemble, d.RawBytes)
 	})
 }
+
+func Test_C35_DraftType_ClonePtr(t *testing.T) {
+	convey.Convey("DraftType ClonePtr", t, func() {
+		d := &coretests.DraftType{SampleString1: "x"}
+		clone := d.ClonePtr()
+		convey.So(clone, convey.ShouldNotEqual, d)
+		convey.So(clone.SampleString1, convey.ShouldEqual, "x")
+	})
+}
+
+func Test_C36_DraftType_ClonePtr_Nil(t *testing.T) {
+	convey.Convey("DraftType ClonePtr nil", t, func() {
+		var d *coretests.DraftType
+		clone := d.ClonePtr()
+		convey.So(clone, convey.ShouldBeNil)
+	})
+}
+
+func Test_C37_DraftType_RawBytesLength_LinesLength(t *testing.T) {
 	convey.Convey("DraftType RawBytesLength and LinesLength", t, func() {
 		d := &coretests.DraftType{
 			RawBytes: []byte("abc"),

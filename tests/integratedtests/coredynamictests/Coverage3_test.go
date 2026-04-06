@@ -568,6 +568,35 @@ func Test_Cov3_CastedResult_Methods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "CastedResult methods -- valid result", actual)
 }
+
+// ==========================================================================
+// Dynamic — Clone, NonPtr, Ptr
+// ==========================================================================
+
+func Test_Cov3_Dynamic_Clone(t *testing.T) {
+	d := coredynamic.NewDynamicValid("hello")
+	cloned := d.Clone()
+	clonedPtr := d.ClonePtr()
+	var nilD *coredynamic.Dynamic
+	nilClone := nilD.ClonePtr()
+	actual := args.Map{
+		"cloneData":   cloned.Data(),
+		"ptrNotNil":   clonedPtr != nil,
+		"nilClone":    nilClone == nil,
+		"nonPtrData":  d.NonPtr().Data(),
+		"ptrNotNil2":  d.Ptr() != nil,
+	}
+	expected := args.Map{
+		"cloneData": "hello", "ptrNotNil": true,
+		"nilClone": true, "nonPtrData": "hello", "ptrNotNil2": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Dynamic Clone/NonPtr/Ptr -- string", actual)
+}
+
+// ==========================================================================
+// Dynamic — InvalidDynamic constructor
+// ==========================================================================
+
 func Test_Cov3_Dynamic_InvalidDynamic(t *testing.T) {
 	d := coredynamic.InvalidDynamic()
 	actual := args.Map{"isValid": d.IsValid(), "isNull": d.IsNull()}

@@ -65,6 +65,37 @@ func Test_PayloadWrapper_DeserializeRoundtrip_Verification(t *testing.T) {
 		})
 	}
 }
+
+func Test_PayloadWrapper_Clone_Verification(t *testing.T) {
+	for caseIndex, testCase := range payloadWrapperCloneTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		name, _ := input.GetAsString("name")
+		id, _ := input.GetAsString("id")
+		newName, _ := input.GetAsString("new_name")
+		line := []byte("clone payload")
+
+		// Act
+		original, err := corepayload.New.PayloadWrapper.Create(
+			name, id, "task-type", "category", line,
+		)
+		errcore.HandleErr(err)
+
+		cloned, cloneErr := original.ClonePtr(true)
+		errcore.HandleErr(cloneErr)
+
+		cloned.Name = newName
+		originalUnchanged := original.Name != cloned.Name
+
+		// Assert
+		testCase.ShouldBeEqualMap(t, caseIndex, args.Map{
+			"originalName":  original.Name,
+			"clonedName":    cloned.Name,
+			"isIndependent": originalUnchanged,
+		})
+	}
+}
+
 func Test_PayloadWrapper_DeserializeToMany_Verification(t *testing.T) {
 	for caseIndex, testCase := range payloadWrapperDeserializeToManyTestCases {
 		// Arrange

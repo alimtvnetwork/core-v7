@@ -257,6 +257,20 @@ func Test_Cov4_StringsOnce_IsEqual(t *testing.T) {
 	expected := args.Map{"same": true, "diff": false, "diffLen": false}
 	expected.ShouldBeEqual(t, 0, "StringsOnce IsEqual -- various", actual)
 }
+
+func Test_Cov4_StringsOnce_Aliases(t *testing.T) {
+	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
+	actual := args.Map{
+		"strings": len(so.Strings()),
+		"list":    len(so.List()),
+		"values":  len(so.Values()),
+		"valPtr":  len(so.ValuesPtr()),
+		"execute": len(so.Execute()),
+	}
+	expected := args.Map{"strings": 1, "list": 1, "values": 1, "valPtr": 1, "execute": 1}
+	expected.ShouldBeEqual(t, 0, "StringsOnce aliases -- 1 item", actual)
+}
+
 func Test_Cov4_StringsOnce_Serialize(t *testing.T) {
 	so := coreonce.NewStringsOnce(func() []string { return []string{"a"} })
 	bytes, err := so.Serialize()
@@ -370,6 +384,31 @@ func Test_Cov4_MapStringStringOnce_Strings_Empty(t *testing.T) {
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce Strings empty -- empty", actual)
 }
+
+func Test_Cov4_MapStringStringOnce_Aliases(t *testing.T) {
+	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
+		return map[string]string{"k": "v"}
+	})
+	actual := args.Map{
+		"list":    len(mso.List()),
+		"items":   len(mso.ItemsMap()),
+		"values":  len(mso.Values()),
+		"valPtr":  len(*mso.ValuesPtr()),
+		"execute": len(mso.Execute()),
+		"hasAny":  mso.HasAnyItem(),
+		"has":     mso.Has("k"),
+		"hasAll":  mso.HasAll("k"),
+		"string":  mso.String() != "",
+		"jsonStr": mso.JsonStringMust() != "",
+	}
+	expected := args.Map{
+		"list": 1, "items": 1, "values": 1, "valPtr": 1,
+		"execute": 1, "hasAny": true, "has": true, "hasAll": true,
+		"string": true, "jsonStr": true,
+	}
+	expected.ShouldBeEqual(t, 0, "MapStringStringOnce aliases -- 1 entry", actual)
+}
+
 func Test_Cov4_MapStringStringOnce_HasAll_Missing(t *testing.T) {
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}

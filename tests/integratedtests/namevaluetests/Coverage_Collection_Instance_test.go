@@ -106,6 +106,14 @@ func Test_Cov_Collection_ErrorUsingMessage(t *testing.T) {
 		t.Error("expected error")
 	}
 }
+
+func Test_Cov_Collection_ClonePtr_Nil(t *testing.T) {
+	var c *namevalue.Collection[string, string]
+	if c.ClonePtr() != nil {
+		t.Error("expected nil")
+	}
+}
+
 func Test_Cov_Collection_Clear_Nil(t *testing.T) {
 	var c *namevalue.Collection[string, string]
 	if c.Clear() != nil {

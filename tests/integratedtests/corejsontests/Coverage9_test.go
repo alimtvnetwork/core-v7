@@ -74,6 +74,15 @@ func Test_Cov9_Empty_Result(t *testing.T) {
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "Empty.Result returns empty -- with args", actual)
 }
+
+func Test_Cov9_Result_Clone_NilPtr(t *testing.T) {
+	var r *corejson.Result
+	cloned := r.ClonePtr(true)
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
 func Test_Cov9_CastAny_FromToDefault(t *testing.T) {
 	// CastAny.FromToDefault serializes source then deserializes into target
 	var casted map[string]string

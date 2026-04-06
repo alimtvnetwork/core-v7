@@ -382,12 +382,35 @@ func Test_C6_Collection_ConcatNew(t *testing.T) {
 	if c2.Length() != 2 { t.Fatal("expected 2") }
 	if c.Length() != 1 { t.Fatal("original should be unchanged") }
 }
+
+func Test_C6_Collection_ConcatNewPtr(t *testing.T) {
+	c := namevalue.NewCollection()
+	c.Add(namevalue.StringAny{Name: "a", Value: 1})
+	item := namevalue.StringAny{Name: "b", Value: 2}
+	c2 := c.ConcatNewPtr(&item)
+	if c2.Length() != 2 { t.Fatal("expected 2") }
+}
+
+// ── Collection Clone / ClonePtr / Clear / Dispose ──
+
 func Test_C6_Collection_Clone(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	clone := c.Clone()
 	if clone.Length() != 1 { t.Fatal("expected 1") }
 }
+
+func Test_C6_Collection_ClonePtr(t *testing.T) {
+	c := namevalue.NewCollection()
+	c.Add(namevalue.StringAny{Name: "a", Value: 1})
+	clone := c.ClonePtr()
+	if clone.Length() != 1 { t.Fatal("expected 1") }
+
+	var nilC *namevalue.Collection[string, any]
+	nilClone := nilC.ClonePtr()
+	if nilClone != nil { t.Fatal("expected nil for nil ptr") }
+}
+
 func Test_C6_Collection_Clear(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})

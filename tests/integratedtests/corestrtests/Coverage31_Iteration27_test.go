@@ -81,6 +81,16 @@ func Test_I27_ValidValue_ValueBytesOnce(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValueBytesOnce returns correct value -- with args", actual)
 	})
 }
+
+func Test_I27_ValidValue_ValueBytesOncePtr(t *testing.T) {
+	safeTest(t, "Test_I27_ValidValue_ValueBytesOncePtr", func() {
+		vv := corestr.NewValidValue("xy")
+		actual := args.Map{"len": len(vv.ValueBytesOncePtr())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "ValueBytesOncePtr returns correct value -- with args", actual)
+	})
+}
+
 func Test_I27_ValidValue_IsEmpty_IsWhitespace_Trim(t *testing.T) {
 	safeTest(t, "Test_I27_ValidValue_IsEmpty_IsWhitespace_Trim", func() {
 		vv := corestr.NewValidValue("  hi  ")

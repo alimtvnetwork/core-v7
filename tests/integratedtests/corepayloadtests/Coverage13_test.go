@@ -349,6 +349,24 @@ func Test_Cov13_TPW_SetTypedData_Valid(t *testing.T) {
 	expected := args.Map{"noErr": true, "name": "b"}
 	expected.ShouldBeEqual(t, 0, "SetTypedData returns non-empty -- valid", actual)
 }
+
+func Test_Cov13_TPW_ClonePtr_Nil(t *testing.T) {
+	var tw *corepayload.TypedPayloadWrapper[testUser]
+	c, err := tw.ClonePtr(true)
+	actual := args.Map{"nil": c == nil, "noErr": err == nil}
+	expected := args.Map{"nil": true, "noErr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
+func Test_Cov13_TPW_ClonePtr_Valid(t *testing.T) {
+	tw := newTypedWrapper("n", "id", testUser{Name: "a"})
+	c, err := tw.ClonePtr(true)
+	actual := args.Map{"noErr": err == nil, "name": c.Data().Name}
+	expected := args.Map{"noErr": true, "name": "a"}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns non-empty -- valid", actual)
+}
+
+func Test_Cov13_TPW_ToPayloadWrapper(t *testing.T) {
 	tw := newTypedWrapper("n", "id", testUser{Name: "a"})
 	pw := tw.ToPayloadWrapper()
 	actual := args.Map{"notNil": pw != nil, "name": pw.Name}

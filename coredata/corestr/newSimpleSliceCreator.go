@@ -157,6 +157,16 @@ func (it *newSimpleSliceCreator) Strings(
 	return &slice
 }
 
+// Deprecated: Use Strings instead.
+func (it *newSimpleSliceCreator) StringsPtr(
+	lines []string,
+) *SimpleSlice {
+	if len(lines) == 0 {
+		return it.Empty()
+	}
+
+	return it.Strings(lines)
+}
 
 // Deprecated: Use Strings or StringsClone instead.
 func (it *newSimpleSliceCreator) StringsOptions(

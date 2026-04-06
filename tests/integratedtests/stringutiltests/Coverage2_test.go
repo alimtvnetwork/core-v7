@@ -47,6 +47,40 @@ func Test_Cov2_IsBlank_Whitespace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "IsBlank returns correct value -- whitespace only", actual)
 }
 
+func Test_Cov2_IsBlank_NonEmpty(t *testing.T) {
+	actual := args.Map{"result": stringutil.IsBlank("hello")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsBlank returns empty -- non-empty", actual)
+}
+
+// ── IsEmptyPtr / IsBlankPtr ──
+
+func Test_Cov2_IsEmptyPtr_Nil(t *testing.T) {
+	actual := args.Map{"result": stringutil.IsEmptyPtr(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns nil -- nil", actual)
+}
+
+func Test_Cov2_IsEmptyPtr_Empty(t *testing.T) {
+	s := ""
+	actual := args.Map{"result": stringutil.IsEmptyPtr(&s)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- empty", actual)
+}
+
+func Test_Cov2_IsEmptyPtr_NonEmpty(t *testing.T) {
+	s := "hello"
+	actual := args.Map{"result": stringutil.IsEmptyPtr(&s)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- non-empty", actual)
+}
+
+func Test_Cov2_IsBlankPtr_Nil(t *testing.T) {
+	actual := args.Map{"result": stringutil.IsBlankPtr(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsBlankPtr returns nil -- nil", actual)
+}
+
 func Test_Cov2_IsBlankPtr_Whitespace(t *testing.T) {
 	s := "   "
 	actual := args.Map{"result": stringutil.IsBlankPtr(&s)}
@@ -307,6 +341,35 @@ func Test_Cov2_IsContainsPtr_Nil(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsContainsPtr returns nil -- nil", actual)
 }
+
+func Test_Cov2_IsContainsPtr_Match(t *testing.T) {
+	s := []string{"hello", "world"}
+	find := "world"
+	actual := args.Map{"result": stringutil.IsContainsPtr(&s, &find, 0, true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtr returns correct value -- match", actual)
+}
+
+// ── ClonePtr / SafeClonePtr ──
+
+func Test_Cov2_ClonePtr_Nil(t *testing.T) {
+	actual := args.Map{"isNil": stringutil.ClonePtr(nil) == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
+func Test_Cov2_ClonePtr_NonNil(t *testing.T) {
+	s := "hello"
+	cloned := stringutil.ClonePtr(&s)
+	actual := args.Map{"value": *cloned, "diffPtr": cloned != &s}
+	expected := args.Map{"value": "hello", "diffPtr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- non-nil", actual)
+}
+
+func Test_Cov2_SafeClonePtr_Nil(t *testing.T) {
+	result := stringutil.SafeClonePtr(nil)
+	actual := args.Map{"notNil": result != nil, "value": *result}
+	expected := args.Map{"notNil": true, "value": ""}
 	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns nil -- nil", actual)
 }
 

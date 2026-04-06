@@ -305,6 +305,24 @@ func Test_Cov_TypedResponseResult_Message(t *testing.T) {
 		t.Error("should return message")
 	}
 }
+
+func Test_Cov_TypedResponseResult_ClonePtr_Nil(t *testing.T) {
+	var rr *coreapi.TypedResponseResult[string]
+	if rr.ClonePtr() != nil {
+		t.Error("nil clone should return nil")
+	}
+}
+
+func Test_Cov_TypedResponseResult_ClonePtr(t *testing.T) {
+	attr := &coreapi.ResponseAttribute{IsValid: true}
+	rr := coreapi.NewTypedResponseResult(attr, "data")
+	c := rr.ClonePtr()
+	if c == nil || c.Response != "data" {
+		t.Error("should clone")
+	}
+}
+
+func Test_Cov_TypedResponseResult_ToTypedResponse_Nil(t *testing.T) {
 	var rr *coreapi.TypedResponseResult[string]
 	if rr.ToTypedResponse() != nil {
 		t.Error("nil should return nil")

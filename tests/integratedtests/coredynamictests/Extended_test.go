@@ -63,6 +63,24 @@ func Test_Dynamic_Clone_Ext(t *testing.T) {
 		t.Error("clone data mismatch")
 	}
 }
+
+func Test_Dynamic_ClonePtr(t *testing.T) {
+	d := coredynamic.NewDynamicPtr("hello", true)
+	cloned := d.ClonePtr()
+	if cloned == nil || cloned.Data() != "hello" {
+		t.Error("clonePtr data mismatch")
+	}
+}
+
+func Test_Dynamic_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.Dynamic
+	cloned := d.ClonePtr()
+	if cloned != nil {
+		t.Error("nil clone should return nil")
+	}
+}
+
+func Test_Dynamic_NonPtr_Ext(t *testing.T) {
 	d := coredynamic.NewDynamicValid("hello")
 	n := d.NonPtr()
 	if n.Data() != "hello" {

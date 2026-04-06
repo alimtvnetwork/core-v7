@@ -61,6 +61,27 @@ func Test_Cov20_MapResults_GetByKey(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
+
+func Test_Cov20_MapResults_Errors(t *testing.T) {
+	m := corejson.NewMapResults.Empty()
+	m.Add("ok", corejson.NewResult.Any("v"))
+	m.Add("err", corejson.NewResult.Error(errors.New("e")))
+	if !m.HasError() {
+		t.Fatal("expected error")
+	}
+	errs, hasErr := m.AllErrors()
+	if !hasErr || len(errs) == 0 {
+		t.Fatal("expected errors")
+	}
+	strs := m.GetErrorsStrings()
+	if len(strs) == 0 {
+		t.Fatal("expected strings")
+	}
+	_ = m.GetErrorsStringsPtr()
+	_ = m.GetErrorsAsSingleString()
+	_ = m.GetErrorsAsSingle()
+}
+
 func Test_Cov20_MapResults_Keys(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.Add("b", corejson.NewResult.Any("2"))
@@ -85,6 +106,17 @@ func Test_Cov20_MapResults_AllValues(t *testing.T) {
 	_ = m.AllResults()
 	_ = m.AllResultsCollection()
 }
+
+func Test_Cov20_MapResults_GetStrings(t *testing.T) {
+	m := corejson.NewMapResults.Empty()
+	m.Add("k", corejson.NewResult.Any("v"))
+	strs := m.GetStrings()
+	if len(strs) != 1 {
+		t.Fatal("expected 1")
+	}
+	_ = m.GetStringsPtr()
+}
+
 func Test_Cov20_MapResults_AddKeyWithResult(t *testing.T) {
 	m := corejson.NewMapResults.Empty()
 	m.AddKeyWithResult(corejson.KeyWithResult{Key: "k", Result: corejson.NewResult.Any("v")})
@@ -570,6 +602,65 @@ func Test_Cov20_Deserializer_Methods(t *testing.T) {
 	_ = corejson.Deserialize.FromTo("hello", &s)
 	_ = corejson.Deserialize.UsingErrorWhichJsonResult(nil, &s)
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// NewResult creator — additional coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
+func Test_Cov20_NewResult_Various(t *testing.T) {
+	_ = corejson.NewResult.UsingBytes([]byte(`"x"`))
+	_ = corejson.NewResult.UsingBytesType([]byte(`"x"`), "T")
+	_ = corejson.NewResult.UsingBytesTypePtr([]byte(`"x"`), "T")
+	_ = corejson.NewResult.UsingTypeBytesPtr("T", []byte(`"x"`))
+	_ = corejson.NewResult.UsingBytesPtr(nil)
+	_ = corejson.NewResult.UsingBytesPtr([]byte(`"x"`))
+	_ = corejson.NewResult.UsingBytesPtrErrPtr(nil, errors.New("e"), "T")
+	_ = corejson.NewResult.UsingBytesPtrErrPtr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.UsingBytesErrPtr(nil, errors.New("e"), "T")
+	_ = corejson.NewResult.UsingBytesErrPtr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.PtrUsingStringPtr(nil, "T")
+	str := `"hello"`
+	_ = corejson.NewResult.PtrUsingStringPtr(&str, "T")
+	_ = corejson.NewResult.UsingErrorStringPtr(nil, &str, "T")
+	_ = corejson.NewResult.UsingErrorStringPtr(errors.New("e"), nil, "T")
+	_ = corejson.NewResult.Ptr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.UsingJsonBytesTypeError([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.UsingJsonBytesError([]byte(`"x"`), nil)
+	_ = corejson.NewResult.UsingTypePlusString("T", `"x"`)
+	_ = corejson.NewResult.UsingTypePlusStringPtr("T", nil)
+	_ = corejson.NewResult.UsingTypePlusStringPtr("T", &str)
+	_ = corejson.NewResult.UsingStringWithType(`"x"`, "T")
+	_ = corejson.NewResult.UsingString(`"x"`)
+	_ = corejson.NewResult.UsingStringPtr(nil)
+	_ = corejson.NewResult.UsingStringPtr(&str)
+	_ = corejson.NewResult.CreatePtr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.NonPtr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.Create([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.PtrUsingBytesPtr(nil, errors.New("e"), "T")
+	_ = corejson.NewResult.PtrUsingBytesPtr(nil, nil, "T")
+	_ = corejson.NewResult.PtrUsingBytesPtr([]byte(`"x"`), nil, "T")
+	_ = corejson.NewResult.CastingAny("hello")
+	_ = corejson.NewResult.Error(errors.New("e"))
+	_ = corejson.NewResult.ErrorPtr(errors.New("e"))
+	_ = corejson.NewResult.Empty()
+	_ = corejson.NewResult.EmptyPtr()
+	_ = corejson.NewResult.TypeName("T")
+	_ = corejson.NewResult.TypeNameBytes("T")
+	_ = corejson.NewResult.Many("a", "b")
+	_ = corejson.NewResult.Serialize("hello")
+	_ = corejson.NewResult.Marshal("hello")
+	_ = corejson.NewResult.UsingSerializer(nil)
+	_ = corejson.NewResult.UsingSerializerFunc(nil)
+	_ = corejson.NewResult.UsingJsoner(nil)
+	_ = corejson.NewResult.AnyToCastingResult("hello")
+	_ = corejson.NewResult.UnmarshalUsingBytes([]byte(`{}`))
+	_ = corejson.NewResult.DeserializeUsingBytes([]byte(`{}`))
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// CastAny — additional coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov20_CastAny_FromToDefault(t *testing.T) {
 	var out string
 	err := corejson.CastAny.FromToDefault([]byte(`"hello"`), &out)

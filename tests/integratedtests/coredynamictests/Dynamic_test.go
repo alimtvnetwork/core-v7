@@ -91,6 +91,42 @@ func Test_Dynamic_Constructor_NewDynamicPtr(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
+// ==========================================================================
+// Test: Clone
+// ==========================================================================
+
+func Test_Dynamic_Clone(t *testing.T) {
+	tc := dynamicCloneTestCase
+	original := refNewDynamicValid("data")
+	cloned := original.Clone()
+
+	actual := args.Map{
+		"clonedValue":   fmt.Sprintf("%v", cloned.Value()),
+		"isIndependent": cloned.IsValid(),
+	}
+
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+// Note: ClonePtr nil receiver test migrated to NilReceiver_test.go using CaseNilSafe pattern.
+
+func Test_Dynamic_ClonePtr_Valid(t *testing.T) {
+	tc := dynamicClonePtrValidTestCase
+	original := refNewDynamicPtr("data", true)
+	cloned := original.ClonePtr()
+
+	actual := args.Map{
+		"isNotNilPtr": cloned != nil,
+		"clonedValue": fmt.Sprintf("%v", cloned.Value()),
+	}
+
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+func Test_Dynamic_NonPtr(t *testing.T) {
+	tc := dynamicNonPtrTestCase
+	d := refNewDynamicValid("x")
+
 	np := d.NonPtr()
 	actLines := []string{fmt.Sprintf("%v", np.Value())}
 

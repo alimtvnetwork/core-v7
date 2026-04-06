@@ -420,6 +420,24 @@ func Test_I10_SFRW_Clone(t *testing.T) {
 		t.Fatal("expected same file path")
 	}
 }
+
+func Test_I10_SFRW_ClonePtr(t *testing.T) {
+	rw := newRW(t, "cptr")
+	cp := rw.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+}
+
+func Test_I10_SFRW_ClonePtr_Nil(t *testing.T) {
+	var rw *chmodhelper.SimpleFileReaderWriter
+	cp := rw.ClonePtr()
+	if cp != nil {
+		t.Fatal("expected nil")
+	}
+}
+
+func Test_I10_SFRW_String(t *testing.T) {
 	rw := newRW(t, "str")
 	s := rw.String()
 	if s == "" {

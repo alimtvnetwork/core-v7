@@ -1267,6 +1267,22 @@ func Test_Cov13_SimpleSlice_Sort_Reverse(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov13_SimpleSlice_Clone(t *testing.T) {
+	safeTest(t, "Test_Cov13_SimpleSlice_Clone", func() {
+		s := corestr.New.SimpleSlice.Lines("a", "b")
+		cloned := s.Clone(true)
+
+		if cloned.Length() != 2 {
+			t.Fatal("expected 2")
+		}
+
+		_ = s.DeepClone()
+		_ = s.ShadowClone()
+		_ = s.ClonePtr(true)
+	})
+}
+
 func Test_Cov13_SimpleSlice_RemoveIndexes(t *testing.T) {
 	safeTest(t, "Test_Cov13_SimpleSlice_RemoveIndexes", func() {
 		s := corestr.New.SimpleSlice.Lines("a", "b", "c")
@@ -1437,6 +1453,97 @@ func Test_Cov13_ValidValue_Constructors(t *testing.T) {
 		_ = corestr.NewValidValueUsingAnyAutoValid(false, "val")
 	})
 }
+
+func Test_Cov13_ValidValue_AllMethods(t *testing.T) {
+	safeTest(t, "Test_Cov13_ValidValue_AllMethods", func() {
+		v := corestr.NewValidValue("42")
+
+		if v.IsEmpty() || !v.IsValid || !v.HasValidNonEmpty() || !v.HasSafeNonEmpty() {
+			t.Fatal("expected valid non-empty")
+		}
+
+		if v.IsWhitespace() || !v.HasValidNonWhitespace() {
+			t.Fatal("expected non-whitespace")
+		}
+
+		_ = v.ValueBytesOnce()
+		_ = v.ValueBytesOncePtr()
+		_ = v.Trim()
+
+		if v.ValueInt(0) != 42 {
+			t.Fatal("expected 42")
+		}
+
+		if v.ValueDefInt() != 42 {
+			t.Fatal("expected 42")
+		}
+
+		_ = v.ValueByte(0)
+		_ = v.ValueDefByte()
+
+		fv := corestr.NewValidValue("3.14")
+		_ = fv.ValueFloat64(0)
+		_ = fv.ValueDefFloat64()
+
+		bv := corestr.NewValidValue("true")
+		if !bv.ValueBool() {
+			t.Fatal("expected true")
+		}
+
+		if !v.Is("42") || v.Is("43") {
+			t.Fatal("Is failed")
+		}
+
+		if !v.IsAnyOf("42", "43") {
+			t.Fatal("expected true")
+		}
+
+		if !v.IsAnyOf() {
+			t.Fatal("expected true for empty")
+		}
+
+		if !v.IsContains("4") {
+			t.Fatal("expected contains")
+		}
+
+		if !v.IsAnyContains("4", "x") {
+			t.Fatal("expected true")
+		}
+
+		if !v.IsEqualNonSensitive("42") {
+			t.Fatal("expected equal")
+		}
+
+		re := regexp.MustCompile(`\d+`)
+		if !v.IsRegexMatches(re) {
+			t.Fatal("expected match")
+		}
+		if v.IsRegexMatches(nil) {
+			t.Fatal("expected false for nil")
+		}
+
+		_ = v.RegexFindString(re)
+		_ = v.RegexFindString(nil)
+		_, _ = v.RegexFindAllStringsWithFlag(re, -1)
+		_ = v.RegexFindAllStrings(re, -1)
+
+		_ = v.Split(",")
+		_ = v.SplitNonEmpty(",")
+		_ = v.SplitTrimNonWhitespace(",")
+
+		_ = v.Clone()
+		_ = v.String()
+		_ = v.FullString()
+
+		v.Clear()
+		v.Dispose()
+	})
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// ValidValues — coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov13_ValidValues_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov13_ValidValues_AllMethods", func() {
 		vv := corestr.NewValidValues(5)

@@ -5,6 +5,21 @@ import (
 
 	"github.com/alimtvnetwork/core/conditional"
 )
+
+func Test_NilCheck_Extended_Verification(t *testing.T) {
+	// nil case
+	result := conditional.NilCheck(nil, "wasNil", "wasNotNil")
+	if result != "wasNil" {
+		t.Error("nil should return onNil")
+	}
+
+	// non-nil case
+	result2 := conditional.NilCheck("something", "wasNil", "wasNotNil")
+	if result2 != "wasNotNil" {
+		t.Error("non-nil should return onNonNil")
+	}
+}
+
 func Test_DefOnNil_Extended_Verification(t *testing.T) {
 	// nil case
 	result := conditional.DefOnNil(nil, "default")

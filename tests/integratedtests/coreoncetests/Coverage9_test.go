@@ -141,6 +141,15 @@ func Test_Cov9_MapStringStringOnce_String(t *testing.T) {
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- returns csv-like output", actual)
 }
+
+func Test_Cov9_MapStringStringOnce_ValuesPtr(t *testing.T) {
+	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return map[string]string{"a": "1"} })
+	vp := mo.ValuesPtr()
+	actual := args.Map{"notNil": vp != nil}
+	expected := args.Map{"notNil": true}
+	expected.ShouldBeEqual(t, 0, "ValuesPtr returns non-empty -- returns ptr", actual)
+}
+
 func Test_Cov9_MapStringStringOnce_Length_Nil(t *testing.T) {
 	mo := coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil })
 	actual := args.Map{"len": mo.Length()}

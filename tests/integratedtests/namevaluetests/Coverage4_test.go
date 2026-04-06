@@ -189,6 +189,15 @@ func Test_Cov4_Collection_Dispose_Nil(t *testing.T) {
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "Collection returns nil -- Dispose nil", actual)
 }
+
+func Test_Cov4_Collection_ClonePtr_Nil(t *testing.T) {
+	var c *namevalue.Collection[string, string]
+	result := c.ClonePtr()
+	actual := args.Map{"isNil": result == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Collection returns nil -- ClonePtr nil", actual)
+}
+
 func Test_Cov4_Collection_HasCompiledString(t *testing.T) {
 	c := namevalue.NewGenericCollectionDefault[string, string]()
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})

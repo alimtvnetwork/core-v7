@@ -81,6 +81,22 @@ func Test_NonEmptySlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NonEmptySlice returns empty -- with args", actual)
 }
 
+func Test_NonEmptySlicePtr(t *testing.T) {
+	// Arrange & Act
+	result := strutilinternal.NonEmptySlicePtr([]string{"a", "", "b"})
+	emptyResult := strutilinternal.NonEmptySlicePtr([]string{})
+
+	// Assert
+	actual := args.Map{
+		"resultLen": len(result),
+		"emptyLen":  len(emptyResult),
+	}
+	expected := args.Map{
+		"resultLen": 2,
+		"emptyLen":  0,
+	}
+	expected.ShouldBeEqual(t, 0, "NonEmptySlicePtr returns empty -- with args", actual)
+}
 
 func Test_NonEmptyJoin(t *testing.T) {
 	// Arrange & Act

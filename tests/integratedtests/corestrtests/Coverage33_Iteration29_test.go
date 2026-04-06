@@ -848,6 +848,29 @@ func Test_I29_Hashmap_Clone(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Clone", actual)
 	})
 }
+
+func Test_I29_Hashmap_ClonePtr(t *testing.T) {
+	safeTest(t, "Test_I29_Hashmap_ClonePtr", func() {
+		hm := corestr.New.Hashmap.Cap(5)
+		hm.AddOrUpdate("a", "1")
+		cp := hm.ClonePtr()
+		actual := args.Map{"notNil": cp != nil, "has": cp.Has("a")}
+		expected := args.Map{"notNil": true, "has": true}
+		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ClonePtr", actual)
+	})
+}
+
+func Test_I29_Hashmap_ClonePtr_Nil(t *testing.T) {
+	safeTest(t, "Test_I29_Hashmap_ClonePtr_Nil", func() {
+		var hm *corestr.Hashmap
+		cp := hm.ClonePtr()
+		actual := args.Map{"nil": cp == nil}
+		expected := args.Map{"nil": true}
+		expected.ShouldBeEqual(t, 0, "Hashmap returns nil -- ClonePtr nil", actual)
+	})
+}
+
+func Test_I29_Hashmap_Clone_Empty(t *testing.T) {
 	safeTest(t, "Test_I29_Hashmap_Clone_Empty", func() {
 		hm := corestr.New.Hashmap.Cap(5)
 		c := hm.Clone()
@@ -910,6 +933,22 @@ func Test_I29_Hashmap_KeysToLower(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- KeysToLower", actual)
 	})
 }
+
+func Test_I29_Hashmap_ValuesToLower(t *testing.T) {
+	safeTest(t, "Test_I29_Hashmap_ValuesToLower", func() {
+		hm := corestr.New.Hashmap.Cap(5)
+		hm.AddOrUpdate("ABC", "1")
+		lower := hm.ValuesToLower()
+		actual := args.Map{"has": lower.Has("abc")}
+		expected := args.Map{"has": true}
+		expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- ValuesToLower deprecated", actual)
+	})
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Hashmap — JSON / Serialize / Deserialize
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_I29_Hashmap_JsonModel(t *testing.T) {
 	safeTest(t, "Test_I29_Hashmap_JsonModel", func() {
 		hm := corestr.New.Hashmap.Cap(5)

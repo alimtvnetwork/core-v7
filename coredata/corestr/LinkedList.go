@@ -707,6 +707,18 @@ func (it *LinkedList) AddStringsToNode(
 	return it
 }
 
+// Deprecated: Use AddStringsToNode instead.
+func (it *LinkedList) AddStringsPtrToNode(
+	isSkipOnNull bool,
+	node *LinkedListNode,
+	items *[]string,
+) *LinkedList {
+	if items == nil {
+		return it
+	}
+
+	return it.AddStringsToNode(isSkipOnNull, node, *items)
+}
 
 func (it *LinkedList) AddAfterNode(
 	node *LinkedListNode,
@@ -964,6 +976,10 @@ func (it *LinkedList) List() []string {
 	return list
 }
 
+// Deprecated: Use List instead.
+func (it *LinkedList) ListPtr() []string {
+	return it.List()
+}
 
 // ListLock returns the list with mutex protection.
 func (it *LinkedList) ListLock() []string {
@@ -973,6 +989,13 @@ func (it *LinkedList) ListLock() []string {
 	return it.List()
 }
 
+// Deprecated: Use ListLock instead.
+func (it *LinkedList) ListPtrLock() []string {
+	it.Lock()
+	defer it.Unlock()
+
+	return it.List()
+}
 
 func (it *LinkedList) String() string {
 	if it.IsEmpty() {

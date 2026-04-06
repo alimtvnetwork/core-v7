@@ -297,6 +297,21 @@ func Test_Cov19_SimpleSlice_RemoveIndexes(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- RemoveIndexes", actual)
 	})
 }
+
+func Test_Cov19_SimpleSlice_Clone(t *testing.T) {
+	safeTest(t, "Test_Cov19_SimpleSlice_Clone", func() {
+		s := corestr.New.SimpleSlice.Lines("a", "b")
+		_ = s.Clone(true)
+		_ = s.ClonePtr(true)
+		_ = s.DeepClone()
+		_ = s.ShadowClone()
+		var nilS *corestr.SimpleSlice
+		actual := args.Map{"nilClone": nilS.ClonePtr(true) == nil}
+		expected := args.Map{"nilClone": true}
+		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- Clone", actual)
+	})
+}
+
 func Test_Cov19_SimpleSlice_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov19_SimpleSlice_ClearDispose", func() {
 		s := corestr.New.SimpleSlice.Lines("a")
@@ -385,6 +400,23 @@ func Test_Cov19_LinkedList_AddStrings(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- AddStrings", actual)
 	})
 }
+
+func Test_Cov19_LinkedList_List(t *testing.T) {
+	safeTest(t, "Test_Cov19_LinkedList_List", func() {
+		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
+		actual := args.Map{"listLen": len(ll.List())}
+		_ = ll.ListPtr()
+		_ = ll.ListLock()
+		_ = ll.ListPtrLock()
+		_ = ll.String()
+		_ = ll.StringLock()
+		_ = ll.Join(",")
+		_ = ll.JoinLock(",")
+		expected := args.Map{"listLen": 3}
+		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- List", actual)
+	})
+}
+
 func Test_Cov19_LinkedList_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov19_LinkedList_ToCollection", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -498,6 +530,32 @@ func Test_Cov19_LinkedList_JsonAndMarshal(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- Json", actual)
 	})
 }
+
+func Test_Cov19_LinkedListNode_Methods(t *testing.T) {
+	safeTest(t, "Test_Cov19_LinkedListNode_Methods", func() {
+		n := &corestr.LinkedListNode{Element: "a"}
+		actual := args.Map{
+			"noNext":  !n.HasNext(),
+			"str":     n.String() == "a",
+			"isEqual": n.IsEqualValue("a"),
+			"isSens":  n.IsEqualValueSensitive("A", false),
+		}
+		c := n.Clone()
+		_ = c
+		_ = n.List()
+		_ = n.ListPtr()
+		_ = n.Join(",")
+		_ = n.StringList("header: ")
+		_ = n.CreateLinkedList()
+		expected := args.Map{"noNext": true, "str": true, "isEqual": true, "isSens": true}
+		expected.ShouldBeEqual(t, 0, "LinkedListNode returns correct value -- with args", actual)
+	})
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// KeyValueCollection
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov19_KeyValueCollection(t *testing.T) {
 	safeTest(t, "Test_Cov19_KeyValueCollection", func() {
 		kv := corestr.New.KeyValues.Empty()
@@ -621,6 +679,45 @@ func Test_Cov19_NewCollectionCreator(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NewCollectionCreator returns correct value -- with args", actual)
 	})
 }
+
+func Test_Cov19_NewSimpleSliceCreator(t *testing.T) {
+	safeTest(t, "Test_Cov19_NewSimpleSliceCreator", func() {
+		_ = corestr.New.SimpleSlice.Empty()
+		_ = corestr.New.SimpleSlice.Cap(10)
+		_ = corestr.New.SimpleSlice.Cap(-1)
+		_ = corestr.New.SimpleSlice.Default()
+		_ = corestr.New.SimpleSlice.Lines("a", "b")
+		_ = corestr.New.SimpleSlice.SpreadStrings("a")
+		_ = corestr.New.SimpleSlice.Strings([]string{"a"})
+		_ = corestr.New.SimpleSlice.Create([]string{"a"})
+		_ = corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+		_ = corestr.New.SimpleSlice.StringsPtr(nil)
+		_ = corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
+		_ = corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
+		_ = corestr.New.SimpleSlice.StringsOptions(false, nil)
+		_ = corestr.New.SimpleSlice.StringsClone([]string{"a"})
+		_ = corestr.New.SimpleSlice.StringsClone(nil)
+		_ = corestr.New.SimpleSlice.Direct(true, []string{"a"})
+		_ = corestr.New.SimpleSlice.Direct(false, []string{"a"})
+		_ = corestr.New.SimpleSlice.Direct(true, nil)
+		_ = corestr.New.SimpleSlice.UsingLines(true, "a")
+		_ = corestr.New.SimpleSlice.UsingLines(false, "a")
+		_ = corestr.New.SimpleSlice.UsingLines(true)
+		_ = corestr.New.SimpleSlice.Split("a,b", ",")
+		_ = corestr.New.SimpleSlice.SplitLines("a\nb")
+		_ = corestr.New.SimpleSlice.UsingSeparatorLine(",", "a,b")
+		_ = corestr.New.SimpleSlice.UsingLine("a\nb")
+		_ = corestr.New.SimpleSlice.ByLen([]string{"a", "b"})
+		hs := corestr.New.Hashset.StringsSpreadItems("a", "b")
+		_ = corestr.New.SimpleSlice.Hashset(hs)
+		_ = corestr.New.SimpleSlice.Map(map[string]int{"a": 1})
+		_ = corestr.New.SimpleSlice.Map(nil)
+		actual := args.Map{"done": true}
+		expected := args.Map{"done": true}
+		expected.ShouldBeEqual(t, 0, "NewSimpleSliceCreator returns correct value -- with args", actual)
+	})
+}
+
 func Test_Cov19_NewHashmapCreator(t *testing.T) {
 	safeTest(t, "Test_Cov19_NewHashmapCreator", func() {
 		_ = corestr.New.Hashmap.Empty()
@@ -984,6 +1081,49 @@ func Test_Cov19_CollectionsOfCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "CollectionsOfCollection returns correct value -- with args", actual)
 	})
 }
+
+func Test_Cov19_HashsetsCollection(t *testing.T) {
+	safeTest(t, "Test_Cov19_HashsetsCollection", func() {
+		hc := corestr.New.HashsetsCollection.Empty()
+		h1 := corestr.New.Hashset.StringsSpreadItems("a")
+		h2 := corestr.New.Hashset.StringsSpreadItems("b")
+		hc.Add(h1)
+		hc.AddNonNil(h2)
+		hc.AddNonNil(nil)
+		hc.AddNonEmpty(corestr.New.Hashset.Empty())
+		hc.Adds(corestr.New.Hashset.StringsSpreadItems("c"))
+		_ = hc.LastIndex()
+		_ = hc.List()
+		_ = hc.ListPtr()
+		_ = hc.ListDirectPtr()
+		_ = hc.StringsList()
+		_ = hc.String()
+		_ = hc.Join(",")
+		_ = hc.IsEqual(*hc)
+		_ = hc.IsEqualPtr(hc)
+		_ = hc.JsonModel()
+		_ = hc.JsonModelAny()
+		_, _ = hc.MarshalJSON()
+		_, _ = hc.Serialize()
+		_ = hc.AsJsoner()
+		_ = hc.AsJsonContractsBinder()
+		_ = hc.AsJsonParseSelfInjector()
+		_ = hc.AsJsonMarshaller()
+		_ = hc.HasAll("a", "b")
+		_ = hc.HasAll("z")
+
+		hc2 := corestr.New.HashsetsCollection.Empty()
+		hc2.Add(corestr.New.Hashset.StringsSpreadItems("d"))
+		_ = hc.ConcatNew(hc2)
+		_ = hc.ConcatNew()
+		hc.AddHashsetsCollection(hc2)
+		hc.AddHashsetsCollection(nil)
+		actual := args.Map{"done": true}
+		expected := args.Map{"done": true}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollection returns correct value -- with args", actual)
+	})
+}
+
 func Test_Cov19_NonChainedLinkedListNodes(t *testing.T) {
 	safeTest(t, "Test_Cov19_NonChainedLinkedListNodes", func() {
 		nc := corestr.NewNonChainedLinkedListNodes(5)

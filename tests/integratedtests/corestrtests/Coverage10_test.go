@@ -266,6 +266,19 @@ func Test_Cov10_ValidValue_TypeConversions(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- type conversions", actual)
 	})
 }
+
+func Test_Cov10_ValidValue_BytesOnce(t *testing.T) {
+	safeTest(t, "Test_Cov10_ValidValue_BytesOnce", func() {
+		vv := corestr.NewValidValue("hello")
+		b1 := vv.ValueBytesOnce()
+		b2 := vv.ValueBytesOnce() // cached
+		b3 := vv.ValueBytesOncePtr()
+		actual := args.Map{"len": len(b1), "cached": len(b2) == len(b1), "ptrLen": len(b3)}
+		expected := args.Map{"len": 5, "cached": true, "ptrLen": 5}
+		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- BytesOnce", actual)
+	})
+}
+
 func Test_Cov10_ValidValue_Split(t *testing.T) {
 	safeTest(t, "Test_Cov10_ValidValue_Split", func() {
 		vv := corestr.NewValidValue("a,b,c")

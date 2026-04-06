@@ -152,6 +152,19 @@ func Test_CovHM2_11_AllKeys_Keys_KeysCollection_KeysLock(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovHM2_12_KeysToLower_ValuesToLower(t *testing.T) {
+	safeTest(t, "Test_CovHM2_12_KeysToLower_ValuesToLower", func() {
+		hm := corestr.Empty.Hashmap()
+		hm.AddOrUpdate("ABC", "val")
+		lower := hm.KeysToLower()
+		if !lower.Has("abc") {
+			t.Fatal("expected abc")
+		}
+		_ = hm.ValuesToLower()
+	})
+}
+
 func Test_CovHM2_13_Length_LengthLock(t *testing.T) {
 	safeTest(t, "Test_CovHM2_13_Length_LengthLock", func() {
 		hm := corestr.Empty.Hashmap()
@@ -452,6 +465,28 @@ func Test_CovHM2_31_JsonParseSelfInject(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovHM2_32_Clone_ClonePtr(t *testing.T) {
+	safeTest(t, "Test_CovHM2_32_Clone_ClonePtr", func() {
+		hm := corestr.Empty.Hashmap()
+		hm.AddOrUpdate("a", "1")
+		c := hm.Clone()
+		if c.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		cp := hm.ClonePtr()
+		if cp.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		// empty clone
+		e := corestr.Empty.Hashmap()
+		ec := e.Clone()
+		if ec.Length() != 0 {
+			t.Fatal("expected 0")
+		}
+	})
+}
+
 func Test_CovHM2_33_Get_GetValue(t *testing.T) {
 	safeTest(t, "Test_CovHM2_33_Get_GetValue", func() {
 		hm := corestr.Empty.Hashmap()

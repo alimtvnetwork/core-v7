@@ -20,6 +20,23 @@ func SliceByCapacity[T any](length, cap int) []T {
 	return make([]T, length, cap)
 }
 
+// Deprecated: Use EmptySlice instead.
+func EmptySlicePtr[T any]() *[]T {
+	s := make([]T, 0)
+	return &s
+}
+
+// Deprecated: Use SliceByLength instead.
+func SlicePtrByLength[T any](length int) *[]T {
+	s := make([]T, length)
+	return &s
+}
+
+// Deprecated: Use SliceByCapacity instead.
+func SlicePtrByCapacity[T any](length, cap int) *[]T {
+	s := make([]T, length, cap)
+	return &s
+}
 
 // EmptyMapPtr returns a pointer to an empty map of type map[K]V.
 // It replaces EmptyStringsMapPtr, EmptyStringToIntMapPtr and similar per-type functions.

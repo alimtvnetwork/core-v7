@@ -48,6 +48,24 @@ func Test_I20_Result_Clone_Empty(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+
+func Test_I20_Result_ClonePtr_Nil(t *testing.T) {
+	var r *corejson.Result
+	c := r.ClonePtr(true)
+	if c != nil {
+		t.Fatal("expected nil")
+	}
+}
+
+func Test_I20_Result_ClonePtr_Valid(t *testing.T) {
+	r := corejson.NewResult.AnyPtr("test")
+	c := r.ClonePtr(true)
+	if c == nil || c.Length() == 0 {
+		t.Fatal("expected cloned ptr")
+	}
+}
+
+func Test_I20_Result_PrettyJsonStringOrErrString_Nil(t *testing.T) {
 	var r *corejson.Result
 	s := r.PrettyJsonStringOrErrString()
 	if s == "" {
@@ -550,6 +568,22 @@ func Test_I20_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+
+func Test_I20_Result_SafeValuesPtr(t *testing.T) {
+	r := corejson.NewResult.AnyPtr("ok")
+	if len(r.SafeValuesPtr()) == 0 {
+		t.Fatal("expected bytes")
+	}
+}
+
+func Test_I20_Result_SafeValuesPtr_HasIssues(t *testing.T) {
+	r := corejson.NewResult.ErrorPtr(errors.New("e"))
+	if len(r.SafeValuesPtr()) != 0 {
+		t.Fatal("expected empty")
+	}
+}
+
+func Test_I20_Result_Values(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("ok")
 	if len(r.Values()) == 0 {
 		t.Fatal("expected bytes")
@@ -591,6 +625,14 @@ func Test_I20_Result_String_HasError(t *testing.T) {
 		t.Fatal("expected non-empty string with error")
 	}
 }
+
+func Test_I20_Result_SafeBytesTypeName_Empty(t *testing.T) {
+	r := corejson.NewResult.EmptyPtr()
+	if r.SafeBytesTypeName() != "" {
+		t.Fatal("expected empty")
+	}
+}
+
 func Test_I20_Result_BytesTypeName_Nil(t *testing.T) {
 	var r *corejson.Result
 	if r.BytesTypeName() != "" {

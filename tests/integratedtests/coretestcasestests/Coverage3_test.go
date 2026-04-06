@@ -106,6 +106,33 @@ func Test_Cov3_CaseNilSafe_Invoke(t *testing.T) {
 	}
 	verify.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Cov3_CaseNilSafe_InvokeNil(t *testing.T) {
+	// Arrange
+	tc := coretestcases.CaseNilSafe{
+		Title: "invoke with nil receiver",
+		Func:  (*coretests.DraftType).ClonePtr,
+	}
+
+	// Act
+	result := tc.InvokeNil()
+
+	// Assert
+	actual := args.Map{
+		"panicked": fmt.Sprintf("%v", result.Panicked),
+	}
+
+	verify := coretestcases.CaseV1{
+		Title:         "CaseNilSafe.InvokeNil does not panic -- ClonePtr handles nil",
+		ExpectedInput: args.Map{
+			"panicked": "false",
+		},
+	}
+	verify.ShouldBeEqualMapFirst(t, actual)
+}
+
+// ── CaseV1 additional methods ──
+
 func Test_Cov3_CaseV1_ArrangeTypeName(t *testing.T) {
 	// Arrange
 	c := coretestcases.CaseV1{

@@ -868,6 +868,24 @@ func Test_Cov55_Hashmap_ValuesHashsetLock(t *testing.T) {
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
+
+func Test_Cov55_Hashmap_ValuesToLower(t *testing.T) {
+	safeTest(t, "Test_Cov55_Hashmap_ValuesToLower", func() {
+		// Arrange
+		h := corestr.New.Hashmap.Empty()
+		h.AddOrUpdate("KEY", "VAL")
+		// Act
+		result := h.ValuesToLower()
+		// Assert
+		tc := coretestcases.CaseV1{
+			Title:         "ValuesToLower (deprecated alias)",
+			ExpectedInput: args.Map{"HasLower": true},
+		}
+		actual := args.Map{"HasLower": result.Has("key")}
+		tc.ShouldBeEqualMap(t, 0, actual)
+	})
+}
+
 func Test_Cov55_Hashmap_StringLock(t *testing.T) {
 	safeTest(t, "Test_Cov55_Hashmap_StringLock", func() {
 		// Arrange
@@ -1208,6 +1226,20 @@ func Test_Cov55_Hashmap_GetAllExceptCollection_Nil(t *testing.T) {
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
+
+func Test_Cov55_Hashmap_ClonePtr_Nil(t *testing.T) {
+	safeTest(t, "Test_Cov55_Hashmap_ClonePtr_Nil", func() {
+		// Arrange
+		var h *corestr.Hashmap
+		// Act
+		result := h.ClonePtr()
+		// Assert
+		convey.Convey("ClonePtr nil", t, func() {
+			convey.So(result, convey.ShouldBeNil)
+		})
+	})
+}
+
 func Test_Cov55_Hashmap_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov55_Hashmap_IsEqual", func() {
 		// Arrange

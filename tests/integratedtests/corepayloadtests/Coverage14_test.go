@@ -113,6 +113,15 @@ func Test_Cov14_User_NonSysCreate(t *testing.T) {
 	expected := args.Map{"name": "alice", "type": "admin", "sys": false}
 	expected.ShouldBeEqual(t, 0, "User returns correct value -- NonSysCreate", actual)
 }
+
+func Test_Cov14_User_ClonePtr(t *testing.T) {
+	u := corepayload.New.User.NonSysCreate("alice", "admin")
+	c := u.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "name": c.Name}
+	expected := args.Map{"notNil": true, "name": "alice"}
+	expected.ShouldBeEqual(t, 0, "User returns correct value -- ClonePtr", actual)
+}
+
 func Test_Cov14_TypedPayloadCollection_ToPayloadsCollectionJson(t *testing.T) {
 	tc := corepayload.NewTypedPayloadCollection[testUser](5)
 	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUser]("n", "id", "testUser", testUser{Name: "alice"})

@@ -647,6 +647,27 @@ func Test_S08b_37_Collection_FilterPtr_Empty(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_38_Collection_FilterPtr_Break(t *testing.T) {
+	safeTest(t, "Test_S08b_38_Collection_FilterPtr_Break", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+		filter := func(sp *string, index int) (*string, bool, bool) {
+			return sp, true, true
+		}
+
+		// Act
+		result := col.FilterPtr(filter)
+
+		// Assert
+		if len(*result) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
+// ── NonEmptyListPtr / NonEmptyList ───────────────────────────
+
 func Test_S08b_39_Collection_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_S08b_39_Collection_NonEmptyList", func() {
 		// Arrange
@@ -676,6 +697,24 @@ func Test_S08b_40_Collection_NonEmptyList_Empty(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_41_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_S08b_41_Collection_NonEmptyListPtr", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"a", ""})
+
+		// Act
+		listPtr := col.NonEmptyListPtr()
+
+		// Assert
+		if len(*listPtr) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
+// ── HashsetAsIs / HashsetWithDoubleLength / HashsetLock ──────
+
 func Test_S08b_42_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_S08b_42_Collection_HashsetAsIs", func() {
 		// Arrange
@@ -705,6 +744,24 @@ func Test_S08b_43_Collection_HashsetWithDoubleLength(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_44_Collection_HashsetLock(t *testing.T) {
+	safeTest(t, "Test_S08b_44_Collection_HashsetLock", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"x"})
+
+		// Act
+		hs := col.HashsetLock()
+
+		// Assert
+		if hs.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
+// ── NonEmptyItems / NonEmptyItemsPtr / NonEmptyItemsOrNonWhitespace / NonEmptyItemsOrNonWhitespacePtr ──
+
 func Test_S08b_45_Collection_NonEmptyItems(t *testing.T) {
 	safeTest(t, "Test_S08b_45_Collection_NonEmptyItems", func() {
 		// Arrange
@@ -719,6 +776,22 @@ func Test_S08b_45_Collection_NonEmptyItems(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_46_Collection_NonEmptyItemsPtr(t *testing.T) {
+	safeTest(t, "Test_S08b_46_Collection_NonEmptyItemsPtr", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"a", ""})
+
+		// Act
+		items := col.NonEmptyItemsPtr()
+
+		// Assert
+		if len(items) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_S08b_47_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_S08b_47_Collection_NonEmptyItemsOrNonWhitespace", func() {
 		// Arrange
@@ -733,6 +806,24 @@ func Test_S08b_47_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_48_Collection_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
+	safeTest(t, "Test_S08b_48_Collection_NonEmptyItemsOrNonWhitespacePtr", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"a", " "})
+
+		// Act
+		items := col.NonEmptyItemsOrNonWhitespacePtr()
+
+		// Assert
+		if len(items) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
+// ── Items / ListPtr / ListCopyPtrLock ────────────────────────
+
 func Test_S08b_49_Collection_Items(t *testing.T) {
 	safeTest(t, "Test_S08b_49_Collection_Items", func() {
 		// Arrange
@@ -744,6 +835,19 @@ func Test_S08b_49_Collection_Items(t *testing.T) {
 		}
 	})
 }
+
+func Test_S08b_50_Collection_ListPtr(t *testing.T) {
+	safeTest(t, "Test_S08b_50_Collection_ListPtr", func() {
+		// Arrange
+		col := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act & Assert
+		if len(col.ListPtr()) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_S08b_51_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_S08b_51_Collection_ListCopyPtrLock", func() {
 		// Arrange

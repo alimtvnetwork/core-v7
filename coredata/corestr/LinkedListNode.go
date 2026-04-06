@@ -114,6 +114,21 @@ func (linkedListNode *LinkedListNode) AddStringsToNode(
 		items)
 }
 
+// Deprecated: Use AddStringsToNode instead.
+func (linkedListNode *LinkedListNode) AddStringsPtrToNode(
+	linkedListForIncrement *LinkedList,
+	isSkipOnNull bool,
+	items *[]string,
+) *LinkedList {
+	if items == nil {
+		return linkedListForIncrement
+	}
+
+	return linkedListNode.AddStringsToNode(
+		linkedListForIncrement,
+		isSkipOnNull,
+		*items)
+}
 
 func (linkedListNode *LinkedListNode) AddCollectionToNode(
 	linkedListForIncrement *LinkedList,
@@ -288,6 +303,10 @@ func (linkedListNode *LinkedListNode) List() []string {
 	return list
 }
 
+// Deprecated: Use List instead.
+func (linkedListNode *LinkedListNode) ListPtr() []string {
+	return linkedListNode.List()
+}
 
 func (linkedListNode *LinkedListNode) Join(separator string) string {
 	return strings.Join(linkedListNode.List(), separator)

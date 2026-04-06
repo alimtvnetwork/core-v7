@@ -129,6 +129,20 @@ func Test_Trace_Clone(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
+
+func Test_Trace_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var trace *codestack.Trace
+
+	// Act
+	cloned := trace.ClonePtr()
+
+	// Assert
+	if cloned != nil {
+		t.Error("expected nil ClonePtr to return nil")
+	}
+}
+
 func Test_Trace_Message_And_ShortString(t *testing.T) {
 	// Arrange
 	trace := &codestack.Trace{

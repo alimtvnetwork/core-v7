@@ -183,6 +183,20 @@ func Test_Cov17_ResultsCollection_Clone_Empty(t *testing.T) {
 		convey.So(cloned.IsEmpty(), convey.ShouldBeTrue)
 	})
 }
+
+func Test_Cov17_ResultsCollection_ClonePtr_Empty(t *testing.T) {
+	// Arrange
+	coll := corejson.NewResultsCollection.Empty()
+
+	// Act
+	cloned := coll.ClonePtr(true)
+
+	// Assert
+	convey.Convey("ResultsCollection.ClonePtr empty returns empty", t, func() {
+		convey.So(cloned.IsEmpty(), convey.ShouldBeTrue)
+	})
+}
+
 func Test_Cov17_ResultsCollection_Clone_WithItems(t *testing.T) {
 	// Arrange
 	coll := corejson.NewResultsCollection.Empty()

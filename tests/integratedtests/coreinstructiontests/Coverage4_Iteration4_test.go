@@ -70,6 +70,30 @@ func Test_Cov4_IsIncludePayload(t *testing.T) {
 	expected := args.Map{"includePayload": true}
 	expected.ShouldBeEqual(t, 0, "IsIncludePayload returns correct value -- when not secure", actual)
 }
+
+// ── BaseTags ──
+
+func Test_Cov4_NewTagsPtr_NonEmpty(t *testing.T) {
+	// Arrange & Act
+	tags := coreinstruction.NewTagsPtr([]string{"alpha", "beta"})
+
+	// Assert
+	actual := args.Map{"length": tags.TagsLength()}
+	expected := args.Map{"length": 2}
+	expected.ShouldBeEqual(t, 0, "NewTagsPtr returns empty -- non-empty", actual)
+}
+
+func Test_Cov4_NewTagsPtr_Empty(t *testing.T) {
+	// Arrange & Act
+	tags := coreinstruction.NewTagsPtr([]string{})
+
+	// Assert
+	actual := args.Map{"length": tags.TagsLength()}
+	expected := args.Map{"length": 0}
+	expected.ShouldBeEqual(t, 0, "NewTagsPtr returns empty -- empty", actual)
+}
+
+func Test_Cov4_TagsLength_NilTags(t *testing.T) {
 	// Arrange
 	bt := coreinstruction.BaseTags{}
 

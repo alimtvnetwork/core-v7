@@ -493,6 +493,15 @@ func Test_Cov12_PW_Clone_Deep(t *testing.T) {
 	expected := args.Map{"name": "n", "noErr": true}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- deep", actual)
 }
+
+func Test_Cov12_PW_ClonePtr_Nil(t *testing.T) {
+	var pw *corepayload.PayloadWrapper
+	c, err := pw.ClonePtr(false)
+	actual := args.Map{"nil": c == nil, "noErr": err == nil}
+	expected := args.Map{"nil": true, "noErr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
 func Test_Cov12_PW_NonPtr_Nil(t *testing.T) {
 	var pw *corepayload.PayloadWrapper
 	np := pw.NonPtr()
@@ -679,6 +688,14 @@ func Test_Cov12_PC_Clone(t *testing.T) {
 	expected := args.Map{"len": 1, "name": "test"}
 	expected.ShouldBeEqual(t, 0, "PC returns correct value -- Clone", actual)
 }
+
+func Test_Cov12_PC_ClonePtr_Nil(t *testing.T) {
+	var pc *corepayload.PayloadsCollection
+	actual := args.Map{"nil": pc.ClonePtr() == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "PC returns nil -- ClonePtr nil", actual)
+}
+
 func Test_Cov12_PC_Clear_Nil(t *testing.T) {
 	var pc *corepayload.PayloadsCollection
 	result := pc.Clear()

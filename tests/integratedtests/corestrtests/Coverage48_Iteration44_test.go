@@ -488,6 +488,15 @@ func Test_Cov48_Collection_Items(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
+
+func Test_Cov48_Collection_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov48_Collection_ListPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		tc := caseV1Compat{Name: "ListPtr", Expected: 1, Actual: len(c.ListPtr()), Args: args.Map{}}
+		tc.ShouldBeEqual(t)
+	})
+}
+
 func Test_Cov48_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_Cov48_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -521,6 +530,16 @@ func Test_Cov48_Collection_NonEmptyList_Empty(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
+
+func Test_Cov48_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov48_Collection_NonEmptyListPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a", ""})
+		result := c.NonEmptyListPtr()
+		tc := caseV1Compat{Name: "NonEmptyListPtr", Expected: 1, Actual: len(*result), Args: args.Map{}}
+		tc.ShouldBeEqual(t)
+	})
+}
+
 func Test_Cov48_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_Cov48_Collection_HashsetAsIs", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})

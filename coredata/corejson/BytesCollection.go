@@ -325,6 +325,16 @@ func (it *BytesCollection) GetAtSafe(
 	return nil
 }
 
+// Deprecated: Use GetAtSafe instead.
+func (it *BytesCollection) GetAtSafePtr(
+	index int,
+) []byte {
+	if index > constants.InvalidNotFoundCase && index <= it.Length()-1 {
+		return it.Items[index]
+	}
+
+	return nil
+}
 
 func (it *BytesCollection) GetResultAtSafe(
 	index int,
@@ -530,6 +540,10 @@ func (it *BytesCollection) Strings() []string {
 	return list
 }
 
+// Deprecated: Use Strings instead.
+func (it *BytesCollection) StringsPtr() []string {
+	return it.Strings()
+}
 
 // AddJsoners skip on nil
 func (it *BytesCollection) AddJsoners(

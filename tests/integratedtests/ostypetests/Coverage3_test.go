@@ -79,6 +79,65 @@ func Test_Cov3_GetCurrentVariant(t *testing.T) {
 	expected := args.Map{"nameNotEmpty": true}
 	expected.ShouldBeEqual(t, 0, "GetCurrentVariant returns correct value -- with args", actual)
 }
+
+// ── Group enum methods ──
+
+func Test_Cov3_Group_AllMethods(t *testing.T) {
+	g := ostype.WindowsGroup
+	actual := args.Map{
+		"name":            g.Name(),
+		"nameValue":       g.NameValue() != "",
+		"typeName":        g.TypeName() != "",
+		"rangeNamesCsv":   g.RangeNamesCsv() != "",
+		"toNumberString":  g.ToNumberString(),
+		"allNameValues":   len(g.AllNameValues()) > 0,
+		"integerRanges":   len(g.IntegerEnumRanges()) > 0,
+		"rangesDynamic":   len(g.RangesDynamicMap()) > 0,
+		"isNameEqual":     g.IsNameEqual("WindowsGroup"),
+		"isAnyNamesOf":    g.IsAnyNamesOf("WindowsGroup", "UnixGroup"),
+		"isValueEqual":    g.IsValueEqual(byte(ostype.WindowsGroup)),
+		"isAnyValsEqual":  g.IsAnyValuesEqual(byte(ostype.WindowsGroup)),
+		"isByteValEqual":  g.IsByteValueEqual(byte(ostype.WindowsGroup)),
+		"format":          g.Format("%s") != "",
+		"valueInt":        g.ValueInt(),
+		"valueInt8":       g.ValueInt8(),
+		"valueInt16":      g.ValueInt16(),
+		"valueInt32":      g.ValueInt32(),
+		"valueString":     g.ValueString(),
+		"valueUInt16":     g.ValueUInt16(),
+		"value":           g.Value(),
+		"valueByte":       g.ValueByte(),
+		"maxByte":         g.MaxByte() > 0,
+		"minByte":         g.MinByte(),
+		"rangesByte":      len(g.RangesByte()) > 0,
+		"isValid":         g.IsValid(),
+		"isInvalid":       g.IsInvalid(),
+		"string":          g.String(),
+		"isWindows":       g.IsWindows(),
+		"isUnix":          g.IsUnix(),
+		"isAndroid":       g.IsAndroid(),
+		"isInvalidGroup":  g.IsInvalidGroup(),
+		"is":              g.Is(ostype.WindowsGroup),
+		"toPtr":           g.ToPtr() != nil,
+	}
+	expected := args.Map{
+		"name": "WindowsGroup", "nameValue": true, "typeName": true,
+		"rangeNamesCsv": true, "toNumberString": "0", "allNameValues": true,
+		"integerRanges": true, "rangesDynamic": true,
+		"isNameEqual": true, "isAnyNamesOf": true,
+		"isValueEqual": true, "isAnyValsEqual": true, "isByteValEqual": true,
+		"format": true, "valueInt": 0, "valueInt8": int8(0),
+		"valueInt16": int16(0), "valueInt32": int32(0),
+		"valueString": "0", "valueUInt16": uint16(0),
+		"value": byte(0), "valueByte": byte(0),
+		"maxByte": true, "minByte": byte(0), "rangesByte": true,
+		"isValid": true, "isInvalid": false, "string": "WindowsGroup",
+		"isWindows": true, "isUnix": false, "isAndroid": false,
+		"isInvalidGroup": false, "is": true, "toPtr": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Group returns correct value -- all methods", actual)
+}
+
 func Test_Cov3_Group_EnumEqual(t *testing.T) {
 	g := ostype.WindowsGroup
 	u := ostype.UnixGroup

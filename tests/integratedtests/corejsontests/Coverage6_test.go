@@ -335,6 +335,31 @@ func Test_Cov6_Result_Serialize(t *testing.T) {
 	expected := args.Map{"hasBytes": true, "errNil": true, "nilBytes": true, "nilErrNN": true}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Serialize", actual)
 }
+
+// ═══════════════════════════════════════════
+// Result — Clone
+// ═══════════════════════════════════════════
+
+func Test_Cov6_Result_Clone(t *testing.T) {
+	r := corejson.NewPtr("hello")
+	cloned := r.Clone(true)
+	clonedShallow := r.Clone(false)
+	clonedPtr := r.ClonePtr(true)
+	var nilR *corejson.Result
+	nilClonePtr := nilR.ClonePtr(true)
+	actual := args.Map{
+		"clonedLen":    cloned.Length(),
+		"shallowLen":   clonedShallow.Length(),
+		"ptrNotNil":    clonedPtr != nil,
+		"nilCloneNil":  nilClonePtr == nil,
+	}
+	expected := args.Map{
+		"clonedLen": 7, "shallowLen": 7,
+		"ptrNotNil": true, "nilCloneNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Clone", actual)
+}
+
 func Test_Cov6_Result_CloneIf(t *testing.T) {
 	r := corejson.New("hello")
 	cloned := r.CloneIf(true, true)
@@ -605,6 +630,47 @@ func Test_Cov6_Result_UnmarshalResult(t *testing.T) {
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- UnmarshalResult", actual)
 }
+
+// ═══════════════════════════════════════════
+// Result — ParseInjectUsingJson
+// ═══════════════════════════════════════════
+
+func Test_Cov6_Result_ParseInjectUsingJson(t *testing.T) {
+	r := corejson.NewPtr("hello")
+	jsonR := r.JsonPtr()
+	target := corejson.NewPtr("world")
+	parsed, err := target.ParseInjectUsingJson(jsonR)
+	actual := args.Map{
+		"parsedNN": parsed != nil,
+		"errNil":   err == nil,
+	}
+	expected := args.Map{"parsedNN": true, "errNil": true}
+	expected.ShouldBeEqual(t, 0, "Result returns correct value -- ParseInjectUsingJson", actual)
+}
+
+// ═══════════════════════════════════════════
+// Result — SafeNonIssueBytes / SafeValuesPtr
+// ═══════════════════════════════════════════
+
+func Test_Cov6_Result_SafeNonIssueBytes(t *testing.T) {
+	r := corejson.NewPtr("hello")
+	actual := args.Map{
+		"safeNonIssue": len(r.SafeNonIssueBytes()) > 0,
+		"safeValsPtr":  len(r.SafeValuesPtr()) > 0,
+	}
+	expected := args.Map{"safeNonIssue": true, "safeValsPtr": true}
+	expected.ShouldBeEqual(t, 0, "Result returns correct value -- SafeNonIssueBytes", actual)
+}
+
+// ═══════════════════════════════════════════
+// Result — PrettyJsonBuffer
+// ═══════════════════════════════════════════
+
+func Test_Cov6_Result_PrettyJsonBuffer(t *testing.T) {
+	r := corejson.NewPtr(map[string]any{"key": "val"})
+	buf, err := r.PrettyJsonBuffer("", "  ")
+	actual := args.Map{
+		"bufNN":  buf != nil,
 		"errNil": err == nil,
 		"bufLen": buf.Len() > 0,
 	}

@@ -117,6 +117,32 @@ func Test_Cov4_Trace_Clone(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Trace.Clone returns same data -- default", actual)
 }
+
+func Test_Cov4_Trace_ClonePtr(t *testing.T) {
+	trace := codestack.New.Ptr(0)
+	cloned := trace.ClonePtr()
+	actual := args.Map{
+		"notNil":     cloned != nil,
+		"notSamePtr": cloned != trace,
+		"sameMethod": cloned.MethodName == trace.MethodName,
+	}
+	expected := args.Map{
+		"notNil":     true,
+		"notSamePtr": true,
+		"sameMethod": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns different ptr same data -- default", actual)
+}
+
+func Test_Cov4_Trace_ClonePtr_Nil(t *testing.T) {
+	var trace *codestack.Trace
+	cloned := trace.ClonePtr()
+	actual := args.Map{"isNil": cloned == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns nil -- nil receiver", actual)
+}
+
+func Test_Cov4_Trace_JsonModel(t *testing.T) {
 	trace := codestack.New.Default()
 	model := trace.JsonModel()
 	actual := args.Map{"hasMethod": model.MethodName != "" || model.MethodName == ""}

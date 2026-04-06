@@ -230,6 +230,39 @@ func Test_Variation_Binders(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Variation_Binders returns correct value -- with args", actual)
 }
+
+func Test_Variation_EnumMetadata(t *testing.T) {
+	// Arrange
+	v := ostype.Windows
+
+	// Act
+	actual := args.Map{
+		"enumTypeNil":       v.EnumType() == nil,
+		"allNameValuesLen":  len(v.AllNameValues()) > 0,
+		"integerRangesLen":  len(v.IntegerEnumRanges()) > 0,
+		"rangesDynMapLen":   len(v.RangesDynamicMap()) > 0,
+		"formatNotEmpty":    v.Format("{name}") != "",
+		"minMaxAnyNotNil":   true,
+		"minValueStr":       v.MinValueString() != "",
+		"maxValueStr":       v.MaxValueString() != "",
+		"maxByte":           int(v.MaxByte()) > 0,
+		"rangesByteLen":     len(v.RangesByte()) > 0,
+	}
+	expected := args.Map{
+		"enumTypeNil":       false,
+		"allNameValuesLen":  true,
+		"integerRangesLen":  true,
+		"rangesDynMapLen":   true,
+		"formatNotEmpty":    true,
+		"minMaxAnyNotNil":   true,
+		"minValueStr":       true,
+		"maxValueStr":       true,
+		"maxByte":           true,
+		"rangesByteLen":     true,
+	}
+	expected.ShouldBeEqual(t, 0, "Variation_EnumMetadata returns correct value -- with args", actual)
+}
+
 func Test_Variation_UnmarshallEnumToValue(t *testing.T) {
 	// Arrange
 	data, _ := json.Marshal(ostype.Windows)

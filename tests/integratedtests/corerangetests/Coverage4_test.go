@@ -495,6 +495,27 @@ func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "MinMaxByte returns correct value -- methods", actual)
 }
+
+func Test_Cov4_MinMaxByte_Clone(t *testing.T) {
+	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
+	cloned := mb.ClonePtr()
+	clonedV := mb.Clone()
+	var nilMB *corerange.MinMaxByte
+	actual := args.Map{
+		"clonedMin": int(cloned.Min),
+		"clonedMax": int(cloned.Max),
+		"valueMin":  int(clonedV.Min),
+		"nilClone":  nilMB.ClonePtr() == nil,
+	}
+	expected := args.Map{
+		"clonedMin": 1, "clonedMax": 10,
+		"valueMin": 1, "nilClone": true,
+	}
+	expected.ShouldBeEqual(t, 0, "MinMaxByte returns correct value -- Clone", actual)
+}
+
+// ── RangeByte ──
+
 func Test_Cov4_RangeByte_Difference(t *testing.T) {
 	rb := corerange.NewRangeByteMinMax("1|5", "|", 0, 255)
 	actual := args.Map{

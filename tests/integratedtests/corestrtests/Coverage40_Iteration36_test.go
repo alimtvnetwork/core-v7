@@ -1046,6 +1046,17 @@ func Test_Cov40_HC_LastIndex(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov40_HC_List_ListPtr_ListDirectPtr(t *testing.T) {
+	safeTest(t, "Test_Cov40_HC_List_ListPtr_ListDirectPtr", func() {
+		hc := corestr.New.HashsetsCollection.Empty()
+		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
+		if len(hc.List()) != 1 || hc.ListPtr() == nil || hc.ListDirectPtr() == nil {
+			t.Error("unexpected")
+		}
+	})
+}
+
 func Test_Cov40_HC_StringsList(t *testing.T) {
 	safeTest(t, "Test_Cov40_HC_StringsList", func() {
 		hc := corestr.New.HashsetsCollection.Empty()

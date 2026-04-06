@@ -215,6 +215,54 @@ func Test_Info_Nil_NullCheck_Verification(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
+
+// ==========================================
+// Test: Nil info — EmptyCheck
+// ==========================================
+
+func Test_Info_Nil_EmptyCheck_Verification(t *testing.T) {
+	for caseIndex, testCase := range infoNilEmptyCheckTestCases {
+		// Arrange
+		var info *coretaskinfo.Info
+
+		// Act
+		actual := args.Map{
+			"isEmpty":    fmt.Sprintf("%v", info.IsEmpty()),
+			"hasAnyItem": fmt.Sprintf("%v", info.HasAnyItem()),
+		}
+
+		// Assert
+		testCase.ShouldBeEqualMap(t, caseIndex, actual)
+	}
+}
+
+// ==========================================
+// Test: Nil info — ClonePtr
+// ==========================================
+
+func Test_Info_Nil_ClonePtr_Verification(t *testing.T) {
+	for caseIndex, testCase := range infoNilClonePtrTestCases {
+		// Arrange
+		var info *coretaskinfo.Info
+
+		// Act
+		cloned := info.ClonePtr()
+		result := fmt.Sprintf("%v", cloned == nil)
+
+		// Assert
+		testCase.ShouldBeEqual(t, caseIndex, result)
+	}
+}
+
+// ==========================================
+// Test: Nil info — PrettyJsonString
+// ==========================================
+
+func Test_Info_Nil_PrettyJsonString_Verification(t *testing.T) {
+	for caseIndex, testCase := range infoNilPrettyJsonTestCases {
+		// Arrange
+		var info *coretaskinfo.Info
+
 		// Act
 		result := info.PrettyJsonString()
 

@@ -399,6 +399,31 @@ func Test_SrcC12_Collection_FilterDeep_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC12_Collection_NonEmptyDeep_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC12_Collection_NonEmptyDeep_Verification", func() {
+		// Arrange
+		tc := srcC12CollectionNonEmptyDeepTestCase
+
+		// Act
+		actual := args.Map{
+			"nonEmptyList":     len(corestr.New.Collection.Strings([]string{"a", "", "b"}).NonEmptyList()),
+			"nonEmptyListE":    len(corestr.New.Collection.Cap(0).NonEmptyList()),
+			"nonEmptyListPtr":  len(*corestr.New.Collection.Strings([]string{"a", ""}).NonEmptyListPtr()),
+			"hashsetAsIs":      !corestr.New.Collection.Strings([]string{"a", "b"}).HashsetAsIs().IsEmpty(),
+			"hashsetDouble":    !corestr.New.Collection.Strings([]string{"a"}).HashsetWithDoubleLength().IsEmpty(),
+			"hashsetLock":      !corestr.New.Collection.Strings([]string{"a"}).HashsetLock().IsEmpty(),
+			"nonEmptyItems":    len(corestr.New.Collection.Strings([]string{"a", "", "b"}).NonEmptyItems()),
+			"nonEmptyItemsPtr": len(corestr.New.Collection.Strings([]string{"a", ""}).NonEmptyItemsPtr()),
+			"nonEmptyWS":       len(corestr.New.Collection.Strings([]string{"a", "  ", "b"}).NonEmptyItemsOrNonWhitespace()),
+			"nonEmptyWSPtr":    len(corestr.New.Collection.Strings([]string{"a", "  "}).NonEmptyItemsOrNonWhitespacePtr()),
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC12_Collection_HasDeep_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC12_Collection_HasDeep_Verification", func() {
 		// Arrange
@@ -607,6 +632,28 @@ func Test_SrcC12_Collection_ClearDisposeDeep_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC12_Collection_Misc_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC12_Collection_Misc_Verification", func() {
+		// Arrange
+		tc := srcC12CollectionMiscTestCase
+
+		// Act
+		cPCL := corestr.New.Collection.Cap(5)
+		cPCL.AddPointerCollectionsLock(corestr.New.Collection.Strings([]string{"a"}))
+		actual := args.Map{
+			"ptrColLock":    cPCL.Length(),
+			"listCopy":      len(corestr.New.Collection.Strings([]string{"a"}).ListCopyPtrLock()),
+			"listCopyEmpty": len(corestr.New.Collection.Cap(0).ListCopyPtrLock()),
+			"itemsLen":      len(corestr.New.Collection.Strings([]string{"a"}).Items()),
+			"listPtrLen":    len(corestr.New.Collection.Strings([]string{"a"}).ListPtr()),
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC12_Collection_SortedDeep_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC12_Collection_SortedDeep_Verification", func() {
 		// Arrange

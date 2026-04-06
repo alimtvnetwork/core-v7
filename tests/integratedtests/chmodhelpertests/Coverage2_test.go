@@ -788,6 +788,40 @@ func Test_Cov2_SimpleFileReaderWriter_String(t *testing.T) {
 	expected := args.Map{"notEmpty": "true"}
 	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.String returns non-empty -- with data", actual)
 }
+
+func Test_Cov2_SimpleFileReaderWriter_Clone(t *testing.T) {
+	rw := chmodhelper.SimpleFileReaderWriter{
+		ChmodDir:  0755,
+		ChmodFile: 0644,
+		ParentDir: "/tmp",
+		FilePath:  "/tmp/test.txt",
+	}
+
+	cloned := rw.Clone()
+	clonedPtr := rw.ClonePtr()
+
+	actual := args.Map{
+		"pathMatch":  fmt.Sprintf("%v", cloned.FilePath == rw.FilePath),
+		"ptrNotNil":  fmt.Sprintf("%v", clonedPtr != nil),
+	}
+	expected := args.Map{
+		"pathMatch":  "true",
+		"ptrNotNil":  "true",
+	}
+	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.Clone preserves data -- cloned", actual)
+}
+
+func Test_Cov2_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
+	var rw *chmodhelper.SimpleFileReaderWriter
+
+	result := rw.ClonePtr()
+
+	actual := args.Map{"isNil": fmt.Sprintf("%v", result == nil)}
+	expected := args.Map{"isNil": "true"}
+	expected.ShouldBeEqual(t, 0, "SimpleFileReaderWriter.ClonePtr returns nil -- nil receiver", actual)
+}
+
+func Test_Cov2_SimpleFileReaderWriter_Json(t *testing.T) {
 	rw := chmodhelper.SimpleFileReaderWriter{
 		ChmodDir:  0755,
 		ChmodFile: 0644,

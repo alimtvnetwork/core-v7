@@ -368,6 +368,20 @@ func Test_C37_Collection_SafeIndexAtUsingLength(t *testing.T) {
 		if c.SafeIndexAtUsingLength("def", 1, 5) != "def" { t.Fatal("expected def") }
 	})
 }
+
+func Test_C37_Collection_List_Items_ListStrings(t *testing.T) {
+	safeTest(t, "Test_C37_Collection_List_Items_ListStrings", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		if len(c.List()) != 1 { t.Fatal() }
+		if len(c.Items()) != 1 { t.Fatal() }
+		if len(c.ListStrings()) != 1 { t.Fatal() }
+		if len(c.ListStringsPtr()) != 1 { t.Fatal() }
+		if len(c.ListPtr()) != 1 { t.Fatal() }
+	})
+}
+
+// ── Collection transform ──
+
 func Test_C37_Collection_Take(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_Take", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
@@ -840,12 +854,29 @@ func Test_C37_Collection_NonEmptyList(t *testing.T) {
 		if corestr.Empty.Collection().NonEmptyList() == nil { t.Fatal() }
 	})
 }
+
+func Test_C37_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_C37_Collection_NonEmptyListPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a", ""})
+		ne := c.NonEmptyListPtr()
+		if len(*ne) != 1 { t.Fatal("expected 1") }
+	})
+}
+
 func Test_C37_Collection_NonEmptyItems(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_NonEmptyItems", func() {
 		c := corestr.New.Collection.Strings([]string{"a", ""})
 		if len(c.NonEmptyItems()) != 1 { t.Fatal("expected 1") }
 	})
 }
+
+func Test_C37_Collection_NonEmptyItemsPtr(t *testing.T) {
+	safeTest(t, "Test_C37_Collection_NonEmptyItemsPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a", ""})
+		_ = c.NonEmptyItemsPtr()
+	})
+}
+
 func Test_C37_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_NonEmptyItemsOrNonWhitespace", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "  "})
@@ -853,6 +884,16 @@ func Test_C37_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		if len(r) != 1 { t.Fatal("expected 1") }
 	})
 }
+
+func Test_C37_Collection_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
+	safeTest(t, "Test_C37_Collection_NonEmptyItemsOrNonWhitespacePtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		_ = c.NonEmptyItemsOrNonWhitespacePtr()
+	})
+}
+
+// ── Collection add non-empty ──
+
 func Test_C37_Collection_AddsNonEmpty(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_AddsNonEmpty", func() {
 		c := corestr.New.Collection.Empty()

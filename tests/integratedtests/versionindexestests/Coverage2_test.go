@@ -47,6 +47,23 @@ func Test_Cov2_Index_MinMaxValueString(t *testing.T) {
 	expected := args.Map{"minStr": true, "maxStr": true, "minInt": true, "maxInt": true}
 	expected.ShouldBeEqual(t, 0, "Index returns non-empty -- MinMaxValueString", actual)
 }
+
+func Test_Cov2_Index_RangesDynamic(t *testing.T) {
+	v := versionindexes.Major
+	actual := args.Map{
+		"rangesMap": len(v.RangesDynamicMap()) > 0,
+		"intRanges": len(v.IntegerEnumRanges()) > 0,
+		"rangesByte": len(v.RangesByte()) > 0,
+		"maxByte":   v.MaxByte() > 0,
+		"minByte":   v.MinByte(),
+	}
+	expected := args.Map{
+		"rangesMap": true, "intRanges": true, "rangesByte": true,
+		"maxByte": true, "minByte": byte(0),
+	}
+	expected.ShouldBeEqual(t, 0, "Index returns correct value -- RangesDynamic", actual)
+}
+
 func Test_Cov2_Index_OnlySupportedErr(t *testing.T) {
 	noErr := versionindexes.Major.OnlySupportedErr("Major")
 	hasErr := versionindexes.Invalid.OnlySupportedMsgErr("msg", "Major")

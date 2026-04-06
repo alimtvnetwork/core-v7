@@ -608,6 +608,26 @@ func Test_Cov45_BytesColl_GetAtSafeUsingLength_Out(t *testing.T) {
 	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Cov45_BytesColl_GetAtSafePtr_OutOfRange(t *testing.T) {
+	tc := bytesCollGetAtSafePtrOutOfRangeTestCase
+
+	// Arrange
+	c := corejson.NewBytesCollection.Empty()
+
+	// Act
+	actual := args.Map{
+		"isNil": c.GetAtSafePtr(5) == nil,
+	}
+
+	// Assert
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+// =============================================================================
+// BytesCollection — Clear / Dispose / Clone / ClonePtr
+// =============================================================================
+
 func Test_Cov45_BytesColl_Clear(t *testing.T) {
 	tc := bytesCollClearTestCase
 
@@ -674,6 +694,45 @@ func Test_Cov45_BytesColl_Clone(t *testing.T) {
 	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Cov45_BytesColl_ClonePtr_Nil(t *testing.T) {
+	tc := bytesCollClonePtrNilTestCase
+
+	// Arrange
+	var c *corejson.BytesCollection
+
+	// Act
+	r := c.ClonePtr(false)
+	actual := args.Map{
+		"isNil": r == nil,
+	}
+
+	// Assert
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+func Test_Cov45_BytesColl_ClonePtr_Valid(t *testing.T) {
+	tc := bytesCollClonePtrValidTestCase
+
+	// Arrange
+	c := corejson.NewBytesCollection.Empty()
+	c.Add([]byte(`"a"`))
+
+	// Act
+	cloned := c.ClonePtr(true)
+	actual := args.Map{
+		"length": cloned.Length(),
+	}
+
+	// Assert
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+// =============================================================================
+// BytesCollection — Strings / Json / Paging / UnmarshalAt
+// =============================================================================
+
+func Test_Cov45_BytesColl_Strings_Empty(t *testing.T) {
 	tc := bytesCollStringsEmptyTestCase
 
 	// Arrange

@@ -77,6 +77,17 @@ func Test_C27_07_ValidValue_ValueBytesOnce(t *testing.T) {
 		}
 	})
 }
+
+func Test_C27_08_ValidValue_ValueBytesOncePtr(t *testing.T) {
+	safeTest(t, "Test_C27_08_ValidValue_ValueBytesOncePtr", func() {
+		v := corestr.NewValidValue("hi")
+		b := v.ValueBytesOncePtr()
+		if string(b) != "hi" {
+			t.Error("expected hi")
+		}
+	})
+}
+
 func Test_C27_09_ValidValue_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C27_09_ValidValue_IsEmpty", func() {
 		v := corestr.NewValidValueEmpty()

@@ -63,6 +63,32 @@ func Test_Cov2_PagingInfo_Clone(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "PagingInfo returns correct value -- clone", actual)
 }
+
+func Test_Cov2_PagingInfo_ClonePtr(t *testing.T) {
+	p := &corepayload.PagingInfo{TotalPages: 3, TotalItems: 30}
+	cloned := p.ClonePtr()
+
+	actual := args.Map{
+		"notNil":  cloned != nil,
+		"isEqual": p.IsEqual(cloned),
+	}
+	expected := args.Map{
+		"notNil":  true,
+		"isEqual": true,
+	}
+	expected.ShouldBeEqual(t, 0, "PagingInfo returns correct value -- clonePtr", actual)
+}
+
+func Test_Cov2_PagingInfo_ClonePtr_Nil(t *testing.T) {
+	var p *corepayload.PagingInfo
+	cloned := p.ClonePtr()
+
+	actual := args.Map{"isNil": cloned == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "PagingInfo returns nil -- clonePtr nil", actual)
+}
+
+func Test_Cov2_PagingInfo_InvalidChecks(t *testing.T) {
 	p := corepayload.PagingInfo{}
 
 	actual := args.Map{

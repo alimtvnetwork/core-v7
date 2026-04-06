@@ -101,6 +101,17 @@ func Test_C40_ValidValue_Split(t *testing.T) {
 		_ = v.SplitTrimNonWhitespace(",")
 	})
 }
+
+func Test_C40_ValidValue_ValueBytesOnce(t *testing.T) {
+	safeTest(t, "Test_C40_ValidValue_ValueBytesOnce", func() {
+		v := corestr.NewValidValue("hi")
+		b1 := v.ValueBytesOnce()
+		b2 := v.ValueBytesOnce() // cached
+		if len(b1) != 2 || len(b2) != 2 { t.Fatal() }
+		_ = v.ValueBytesOncePtr()
+	})
+}
+
 func Test_C40_ValidValue_Clone_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Clone_Clear_Dispose", func() {
 		v := corestr.NewValidValue("hi")

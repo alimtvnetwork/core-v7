@@ -306,6 +306,19 @@ func Test_I5_SC29_Variant_RangeNamesCsv(t *testing.T) {
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Variant_RangeNamesCsv returns correct value -- with args", actual)
 }
+
+func Test_I5_SC30_Variant_MaxByte_MinByte_ValueByte_RangesByte(t *testing.T) {
+	v := stringcompareas.Equal
+	actual := args.Map{
+		"maxGe0":     int(v.MaxByte()) >= 0,
+		"minGe0":     int(v.MinByte()) >= 0,
+		"valueByte0": int(v.ValueByte()) == 0,
+		"rangesLen":  len(v.RangesByte()) > 0,
+	}
+	expected := args.Map{"maxGe0": true, "minGe0": true, "valueByte0": true, "rangesLen": true}
+	expected.ShouldBeEqual(t, 0, "Variant_MaxByte_MinByte_ValueByte_RangesByte returns correct value -- with args", actual)
+}
+
 func Test_I5_SC31_Variant_UnmarshallEnumToValue(t *testing.T) {
 	v := stringcompareas.Equal
 	val, err := v.UnmarshallEnumToValue([]byte(`"Equal"`))

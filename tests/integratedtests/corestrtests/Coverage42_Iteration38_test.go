@@ -1002,6 +1002,23 @@ func Test_Cov42_Collection_Serialize(t *testing.T) {
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
+
+func Test_Cov42_Collection_Deserialize(t *testing.T) {
+	safeTest(t, "Test_Cov42_Collection_Deserialize", func() {
+		col := corestr.New.Collection.Strings([]string{"hello"})
+		var target []string
+		err := col.Deserialize(&target)
+		tc := coretestcases.CaseV1{
+			Title:         "Deserialize success",
+			ExpectedInput: true,
+			ActualInput:   err == nil && len(target) == 1,
+		}
+		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
+	})
+}
+
+// ─── Collection: NonEmptyList / NonEmptyListPtr ──────
+
 func Test_Cov42_Collection_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_NonEmptyList", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
@@ -1014,6 +1031,22 @@ func Test_Cov42_Collection_NonEmptyList(t *testing.T) {
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
+
+func Test_Cov42_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov42_Collection_NonEmptyListPtr", func() {
+		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		listPtr := col.NonEmptyListPtr()
+		tc := coretestcases.CaseV1{
+			Title:         "NonEmptyListPtr non-nil",
+			ExpectedInput: true,
+			ActualInput:   listPtr != nil,
+		}
+		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
+	})
+}
+
+// ─── Collection: StringLock ──────
+
 func Test_Cov42_Collection_StringLock_NonEmpty(t *testing.T) {
 	safeTest(t, "Test_Cov42_Collection_StringLock_NonEmpty", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})

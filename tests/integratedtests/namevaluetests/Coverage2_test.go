@@ -444,6 +444,14 @@ func Test_Collection_Dispose_Nil_Cov2(t *testing.T) {
 	var c *namevalue.Collection[string, string]
 	c.Dispose() // should not panic
 }
+
+func Test_Collection_ClonePtr_Nil_Cov2(t *testing.T) {
+	var c *namevalue.Collection[string, string]
+	if c.ClonePtr() != nil {
+		t.Error("expected nil")
+	}
+}
+
 func Test_AppendsIf_True_Cov2(t *testing.T) {
 	items := []namevalue.Instance[string, string]{{Name: "a", Value: "1"}}
 	result := namevalue.AppendsIf(true, items, namevalue.Instance[string, string]{Name: "b", Value: "2"})

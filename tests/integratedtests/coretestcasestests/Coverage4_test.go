@@ -107,6 +107,36 @@ func Test_Cov4_CaseV1_ShouldContainsFirst(t *testing.T) {
 	}
 	c.ShouldContainsFirst(t, "hello world")
 }
+
+// ── CaseNilSafe: ShouldBeSafe ──
+
+func Test_Cov4_CaseNilSafe_ShouldBeSafe(t *testing.T) {
+	tc := coretestcases.CaseNilSafe{
+		Title: "ClonePtr nil safe",
+		Func:  (*coretests.DraftType).ClonePtr,
+		Expected: results.ResultAny{
+			Panicked: false,
+		},
+		CompareFields: []string{"panicked"},
+	}
+	tc.ShouldBeSafe(t, 0)
+}
+
+func Test_Cov4_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
+	tc := coretestcases.CaseNilSafe{
+		Title: "ClonePtr nil safe first",
+		Func:  (*coretests.DraftType).ClonePtr,
+		Expected: results.ResultAny{
+			Panicked: false,
+		},
+		CompareFields: []string{"panicked"},
+	}
+	tc.ShouldBeSafeFirst(t)
+}
+
+// ── CaseV1 VerifyTypeOfMatch with disabled verify ──
+
+func Test_Cov4_CaseV1_VerifyTypeOfMatch_SkipVerify(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "skip verify",
 		ExpectedInput: "hello returns correct value -- with args",

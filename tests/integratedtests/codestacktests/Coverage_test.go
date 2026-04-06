@@ -232,6 +232,25 @@ func Test_Cov_Trace_StringUsingFmt(t *testing.T) {
 		t.Error("StringUsingFmt should not be empty")
 	}
 }
+
+func Test_Cov_Trace_Clone(t *testing.T) {
+	// Arrange
+	trace := codestack.New.Default()
+
+	// Act
+	cloned := trace.Clone()
+
+	// Assert
+	if cloned.PackageMethodName != trace.PackageMethodName {
+		t.Error("Clone PackageMethodName mismatch")
+	}
+
+	clonedPtr := trace.ClonePtr()
+	if clonedPtr == nil {
+		t.Error("ClonePtr should not be nil")
+	}
+}
+
 func Test_Cov_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
@@ -561,6 +580,20 @@ func Test_Cov_TraceCollection_IsEqual(t *testing.T) {
 		t.Error("collection should be equal to itself")
 	}
 }
+
+func Test_Cov_TraceCollection_Clone(t *testing.T) {
+	tc := codestack.TraceCollection{}
+	tc.Add(codestack.Trace{PackageName: "a"})
+	cloned := tc.Clone()
+	if cloned.Length() != tc.Length() {
+		t.Error("Clone should preserve length")
+	}
+	clonedPtr := tc.ClonePtr()
+	if clonedPtr == nil {
+		t.Error("ClonePtr should not be nil")
+	}
+}
+
 func Test_Cov_TraceCollection_ClearDispose(t *testing.T) {
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})

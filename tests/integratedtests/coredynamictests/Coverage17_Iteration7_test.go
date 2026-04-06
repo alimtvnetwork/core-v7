@@ -515,6 +515,27 @@ func Test_C17_KeyValCollection_Serialize_JsonString_JsonStringMust(t *testing.T)
 	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Serialize/JsonString", actual)
 }
+
+func Test_C17_KeyValCollection_Clone(t *testing.T) {
+	kvc := coredynamic.NewKeyValCollection(1)
+	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
+	clone := kvc.Clone()
+	cloneP := kvc.ClonePtr()
+	var nilKvc *coredynamic.KeyValCollection
+	nilClone := nilKvc.ClonePtr()
+	np := clone.NonPtr()
+	pp := kvc.Ptr()
+	actual := args.Map{
+		"cloneLen": clone.Length(), "ptrLen": cloneP.Length(),
+		"nilClone": nilClone == nil, "npLen": np.Length(), "ppNotNil": pp != nil,
+	}
+	expected := args.Map{
+		"cloneLen": 1, "ptrLen": 1,
+		"nilClone": true, "npLen": 1, "ppNotNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Clone", actual)
+}
+
 func Test_C17_KeyValCollection_ParseInjectUsingJson(t *testing.T) {
 	kvc := coredynamic.NewKeyValCollection(1)
 	jr := corejson.NewPtr([]coredynamic.KeyVal{{Key: "x", Value: "y"}})
@@ -957,6 +978,35 @@ func Test_C17_LeftRight_TypeStatus(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- TypeStatus", actual)
 }
+
+// ==========================================================================
+// Dynamic Clone/NonPtr/Ptr
+// ==========================================================================
+
+func Test_C17_Dynamic_ClonePtr(t *testing.T) {
+	d := coredynamic.NewDynamicValid("hello")
+	cp := d.ClonePtr()
+	np := d.NonPtr()
+	pp := d.Ptr()
+	var nilD *coredynamic.Dynamic
+	nilCp := nilD.ClonePtr()
+	actual := args.Map{
+		"cpValid": cp.IsValid(),
+		"npValid": np.IsValid(),
+		"ppNotNil": pp != nil,
+		"nilCp": nilCp == nil,
+	}
+	expected := args.Map{
+		"cpValid": true, "npValid": true,
+		"ppNotNil": true, "nilCp": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ClonePtr/NonPtr/Ptr", actual)
+}
+
+// ==========================================================================
+// Dynamic type check methods
+// ==========================================================================
+
 func Test_C17_Dynamic_TypeChecks(t *testing.T) {
 	dStr := coredynamic.NewDynamicValid("hello")
 	dInt := coredynamic.NewDynamicValid(42)

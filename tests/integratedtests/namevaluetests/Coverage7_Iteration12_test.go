@@ -215,6 +215,41 @@ func Test_I12_StringInt_ErrorMethods(t *testing.T) {
 	expected := args.Map{"nilErr": true, "nilMsgErr": true, "hasErr": true, "hasMsgErr": true}
 	expected.ShouldBeEqual(t, 0, "StringInt returns error -- error methods", actual)
 }
+
+func Test_I12_StringInt_ConcatCloneClearDispose(t *testing.T) {
+	c := namevalue.NewGenericCollectionDefault[string, int]()
+	c.Add(namevalue.StringInt{Name: "a", Value: 1})
+
+	cn := c.ConcatNew(namevalue.StringInt{Name: "b", Value: 2})
+	item := namevalue.StringInt{Name: "c", Value: 3}
+	cnp := c.ConcatNewPtr(&item)
+	cl := c.Clone()
+	clp := c.ClonePtr()
+
+	var nilC *namevalue.Collection[string, int]
+	nilClp := nilC.ClonePtr()
+
+	actual := args.Map{
+		"concatLen": cn.Length(), "concatPtrLen": cnp.Length(),
+		"cloneLen": cl.Length(), "clonePtrLen": clp.Length(),
+		"nilClone": nilClp == nil, "origLen": c.Length(),
+	}
+	expected := args.Map{
+		"concatLen": 2, "concatPtrLen": 2,
+		"cloneLen": 1, "clonePtrLen": 1,
+		"nilClone": true, "origLen": 1,
+	}
+	expected.ShouldBeEqual(t, 0, "StringInt returns correct value -- concat/clone", actual)
+
+	c.Clear()
+	actual2 := args.Map{"afterClear": c.IsEmpty()}
+	expected2 := args.Map{"afterClear": true}
+	expected2.ShouldBeEqual(t, 0, "StringInt returns correct value -- clear", actual2)
+
+	nilC.Clear()  // should not panic
+	nilC.Dispose() // should not panic
+}
+
 func Test_I12_StringInt_CsvStrings_Empty(t *testing.T) {
 	c := namevalue.NewGenericCollectionDefault[string, int]()
 	actual := args.Map{"len": len(c.CsvStrings())}

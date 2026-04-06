@@ -593,6 +593,14 @@ func Test_C31_57_Dynamic_Clone(t *testing.T) {
 		t.Errorf("expected hello")
 	}
 }
+
+func Test_C31_58_Dynamic_ClonePtr_NilReceiver(t *testing.T) {
+	var d *coredynamic.Dynamic
+	if d.ClonePtr() != nil {
+		t.Errorf("expected nil")
+	}
+}
+
 func Test_C31_59_Dynamic_NonPtr_Ptr(t *testing.T) {
 	d := coredynamic.NewDynamicValid(42)
 	np := d.NonPtr()
@@ -1655,6 +1663,19 @@ func Test_C31_156_DynamicStatus_Clone(t *testing.T) {
 		t.Errorf("expected test msg")
 	}
 }
+
+func Test_C31_157_DynamicStatus_ClonePtr(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("msg")
+	cp := ds.ClonePtr()
+	if cp == nil || cp.Message != "msg" {
+		t.Errorf("expected msg")
+	}
+	var nilDS *coredynamic.DynamicStatus
+	if nilDS.ClonePtr() != nil {
+		t.Errorf("expected nil")
+	}
+}
+
 func Test_C31_158_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 	if ds.Message != "" {

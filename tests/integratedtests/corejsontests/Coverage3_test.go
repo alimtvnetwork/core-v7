@@ -123,6 +123,14 @@ func Test_Cov3_Result_SafeValues(t *testing.T) {
 	expected := args.Map{"gt0": true, "nilLen": 0}
 	expected.ShouldBeEqual(t, 0, "Result SafeValues -- valid and nil", actual)
 }
+
+func Test_Cov3_Result_SafeValuesPtr(t *testing.T) {
+	r := corejson.New("hello")
+	actual := args.Map{"gt0": len(r.SafeValuesPtr()) > 0}
+	expected := args.Map{"gt0": true}
+	expected.ShouldBeEqual(t, 0, "Result SafeValuesPtr -- has bytes", actual)
+}
+
 func Test_Cov3_Result_Raw(t *testing.T) {
 	r := corejson.New("hello")
 	bytes, err := r.Raw()

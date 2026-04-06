@@ -26,6 +26,29 @@ func Test_CovLL2_01_ToCollection(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovLL2_02_List_ListPtr_ListLock_ListPtrLock(t *testing.T) {
+	safeTest(t, "Test_CovLL2_02_List_ListPtr_ListLock_ListPtrLock", func() {
+		ll := corestr.Empty.LinkedList()
+		if len(ll.List()) != 0 {
+			t.Fatal("expected 0")
+		}
+		ll.Adds("a", "b")
+		if len(ll.List()) != 2 {
+			t.Fatal("expected 2")
+		}
+		if len(ll.ListPtr()) != 2 {
+			t.Fatal("expected 2")
+		}
+		if len(ll.ListLock()) != 2 {
+			t.Fatal("expected 2")
+		}
+		if len(ll.ListPtrLock()) != 2 {
+			t.Fatal("expected 2")
+		}
+	})
+}
+
 func Test_CovLL2_03_String_StringLock(t *testing.T) {
 	safeTest(t, "Test_CovLL2_03_String_StringLock", func() {
 		ll := corestr.Empty.LinkedList()
@@ -343,6 +366,18 @@ func Test_CovLL2_20_Node_AddStringsToNode(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovLL2_21_Node_AddStringsPtrToNode(t *testing.T) {
+	safeTest(t, "Test_CovLL2_21_Node_AddStringsPtrToNode", func() {
+		ll := corestr.Empty.LinkedList()
+		ll.Add("a")
+		items := []string{"b"}
+		ll.Head().AddStringsPtrToNode(ll, false, &items)
+		// nil
+		ll.Head().AddStringsPtrToNode(ll, false, nil)
+	})
+}
+
 func Test_CovLL2_22_Node_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_CovLL2_22_Node_AddCollectionToNode", func() {
 		ll := corestr.Empty.LinkedList()
@@ -493,6 +528,22 @@ func Test_CovLL2_29_Node_String(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovLL2_30_Node_List_ListPtr(t *testing.T) {
+	safeTest(t, "Test_CovLL2_30_Node_List_ListPtr", func() {
+		ll := corestr.Empty.LinkedList()
+		ll.Adds("a", "b")
+		items := ll.Head().List()
+		if len(items) != 2 {
+			t.Fatal("expected 2")
+		}
+		items2 := ll.Head().ListPtr()
+		if len(items2) != 2 {
+			t.Fatal("expected 2")
+		}
+	})
+}
+
 func Test_CovLL2_31_Node_Join_StringList_Print(t *testing.T) {
 	safeTest(t, "Test_CovLL2_31_Node_Join_StringList_Print", func() {
 		ll := corestr.Empty.LinkedList()

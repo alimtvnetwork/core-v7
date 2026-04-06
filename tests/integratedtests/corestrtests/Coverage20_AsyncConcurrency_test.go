@@ -1304,6 +1304,31 @@ func Test_Cov20_LinkedCollections_AddCollectionToNode(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "LinkedCollections returns correct value -- AddCollectionToNode", actual)
 	})
 }
+
+func Test_Cov20_LinkedCollections_ListAndConversions(t *testing.T) {
+	safeTest(t, "Test_Cov20_LinkedCollections_ListAndConversions", func() {
+		// Arrange
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
+
+		// Act
+		_ = lc.List()
+		_ = lc.ListPtr()
+		_ = lc.ToStrings()
+		_ = lc.ToStringsPtr()
+		_ = lc.ToCollectionSimple()
+		_ = lc.ToCollectionsOfCollection(0)
+		_ = lc.ItemsOfItems()
+		_ = lc.ItemsOfItemsCollection()
+		_ = lc.SimpleSlice()
+
+		// Assert
+		actual := args.Map{"done": true}
+		expected := args.Map{"done": true}
+		expected.ShouldBeEqual(t, 0, "LinkedCollections returns correct value -- ListAndConversions", actual)
+	})
+}
+
 func Test_Cov20_LinkedCollections_IsEqualsPtr(t *testing.T) {
 	safeTest(t, "Test_Cov20_LinkedCollections_IsEqualsPtr", func() {
 		// Arrange

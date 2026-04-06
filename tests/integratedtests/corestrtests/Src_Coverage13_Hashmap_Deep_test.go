@@ -175,6 +175,24 @@ func Test_SrcC13_Hashmap_Keys_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC13_Hashmap_Lower_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC13_Hashmap_Lower_Verification", func() {
+		// Arrange
+		tc := srcC13HashmapLowerTestCase
+		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "ABC", Value: "1"})
+
+		// Act
+		actual := args.Map{
+			"keysLower": hm.KeysToLower().Has("abc"),
+			"valsLower": hm.ValuesToLower().Has("abc"),
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC13_Hashmap_Length_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC13_Hashmap_Length_Verification", func() {
 		// Arrange
@@ -382,6 +400,30 @@ func Test_SrcC13_Hashmap_Compiler_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC13_Hashmap_Clone_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC13_Hashmap_Clone_Verification", func() {
+		// Arrange
+		tc := srcC13HashmapCloneTestCase
+		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "a", Value: "1"})
+		var nilHm *corestr.Hashmap
+
+		// Act
+		cloned := hm.Clone()
+		hm.Set("b", "2")
+		cloneEmpty := corestr.New.Hashmap.Cap(0).Clone()
+		actual := args.Map{
+			"cloneLen":    hm.ClonePtr().Length(),
+			"cloneNilNil": nilHm.ClonePtr() == nil,
+			"cloneIndep":  !(&cloned).Has("b"),
+			"cloneEmpty":  (&cloneEmpty).Length(),
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC13_Hashmap_Get_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC13_Hashmap_Get_Verification", func() {
 		// Arrange

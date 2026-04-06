@@ -289,6 +289,63 @@ func Test_FirstCharOrDefault_Verification(t *testing.T) {
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%d", result))
 	}
 }
+
+// ==========================================
+// LastCharOrDefault
+// ==========================================
+
+func Test_LastCharOrDefault_Verification(t *testing.T) {
+	for caseIndex, testCase := range extLastCharTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		inputStr, _ := input.GetAsString("input")
+
+		// Act
+		result := stringutil.LastCharOrDefault(inputStr)
+
+		// Assert
+		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%d", result))
+	}
+}
+
+// ==========================================
+// ClonePtr
+// ==========================================
+
+func Test_ClonePtr_Verification(t *testing.T) {
+	for caseIndex, testCase := range extClonePtrTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		isNilRaw, _ := input.Get("isNil")
+		isNil := isNilRaw == true
+
+		var result *string
+		if isNil {
+			// Act
+			result = stringutil.ClonePtr(nil)
+
+			// Assert
+			testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result == nil))
+		} else {
+			value, _ := input.GetAsString("value")
+			// Act
+			result = stringutil.ClonePtr(&value)
+
+			// Assert
+			testCase.ShouldBeEqual(t, caseIndex, *result)
+		}
+	}
+}
+
+// ==========================================
+// SafeClonePtr
+// ==========================================
+
+func Test_SafeClonePtr_Verification(t *testing.T) {
+	for caseIndex, testCase := range extSafeClonePtrTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		isNilRaw, _ := input.Get("isNil")
 		isNil := isNilRaw == true
 
 		var result *string
@@ -305,6 +362,60 @@ func Test_FirstCharOrDefault_Verification(t *testing.T) {
 		testCase.ShouldBeEqual(t, caseIndex, *result)
 	}
 }
+
+// ==========================================
+// Ptr functions
+// ==========================================
+
+func Test_PtrFunctions_Verification(t *testing.T) {
+	for caseIndex, testCase := range extPtrFunctionsTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		funcName, _ := input.GetAsString("func")
+		isNilRaw, _ := input.Get("isNil")
+		isNil := isNilRaw == true
+
+		var actual bool
+		if isNil {
+			// Act
+			switch funcName {
+			case "IsEmptyPtr":
+				actual = stringutil.IsEmptyPtr(nil)
+			case "IsBlankPtr":
+				actual = stringutil.IsBlankPtr(nil)
+			case "IsEmptyOrWhitespacePtr":
+				actual = stringutil.IsEmptyOrWhitespacePtr(nil)
+			case "IsNullOrEmptyPtr":
+				actual = stringutil.IsNullOrEmptyPtr(nil)
+			case "IsDefinedPtr":
+				actual = stringutil.IsDefinedPtr(nil)
+			}
+		} else {
+			value, _ := input.GetAsString("value")
+			// Act
+			switch funcName {
+			case "IsEmptyPtr":
+				actual = stringutil.IsEmptyPtr(&value)
+			case "IsBlankPtr":
+				actual = stringutil.IsBlankPtr(&value)
+			case "IsEmptyOrWhitespacePtr":
+				actual = stringutil.IsEmptyOrWhitespacePtr(&value)
+			case "IsNullOrEmptyPtr":
+				actual = stringutil.IsNullOrEmptyPtr(&value)
+			case "IsDefinedPtr":
+				actual = stringutil.IsDefinedPtr(&value)
+			}
+		}
+
+		// Assert
+		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", actual))
+	}
+}
+
+// ==========================================
+// ToBool
+// ==========================================
+
 func Test_ToBool_Verification(t *testing.T) {
 	for caseIndex, testCase := range extToBoolTestCases {
 		// Arrange

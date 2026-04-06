@@ -452,6 +452,24 @@ func Test_I19_MapAnyItems_IsEqual_OneNil(t *testing.T) {
 	expected := args.Map{"eq": false}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- IsEqual one nil", actual)
 }
+
+func Test_I19_MapAnyItems_ClonePtr(t *testing.T) {
+	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
+	cloned, err := m.ClonePtr()
+	actual := args.Map{"noErr": err == nil, "notNil": cloned != nil}
+	expected := args.Map{"noErr": true, "notNil": true}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ClonePtr", actual)
+}
+
+func Test_I19_MapAnyItems_ClonePtr_Nil(t *testing.T) {
+	var m *coredynamic.MapAnyItems
+	_, err := m.ClonePtr()
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems returns nil -- ClonePtr nil", actual)
+}
+
+func Test_I19_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
 	var m *coredynamic.MapAnyItems
 	diff := m.RawMapStringAnyDiff()
 	actual := args.Map{"notNil": diff != nil}

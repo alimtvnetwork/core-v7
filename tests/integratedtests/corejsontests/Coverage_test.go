@@ -104,6 +104,13 @@ func Test_Result_Clone_Cov(t *testing.T) {
 	expected := args.Map{"hasError": false, "hasBytes": true}
 	expected.ShouldBeEqual(t, 0, "Result_Clone returns correct value -- with args", actual)
 }
+
+func Test_Result_ClonePtr_Cov(t *testing.T) {
+	actual := args.Map{"notNil": corejson.NewPtr(42).ClonePtr(false) != nil}
+	expected := args.Map{"notNil": true}
+	expected.ShouldBeEqual(t, 0, "Result_ClonePtr returns correct value -- with args", actual)
+}
+
 func Test_Result_IsEqual_Cov(t *testing.T) {
 	r1 := corejson.New(42)
 	r2 := corejson.New(42)

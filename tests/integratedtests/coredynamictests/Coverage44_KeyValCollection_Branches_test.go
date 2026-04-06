@@ -402,6 +402,20 @@ func Test_Cov44_KVC_JsonResultsPtrCollection_Empty(t *testing.T) {
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "KVC JsonResultsPtrCollection empty", actual)
 }
+
+func Test_Cov44_KVC_JsonResultsPtrCollection_Valid(t *testing.T) {
+	kvc := coredynamic.EmptyKeyValCollection()
+	kvc.Add(coredynamic.KeyVal{Key: "a", Value: "hello"})
+	rc := kvc.JsonResultsPtrCollection()
+	actual := args.Map{"empty": rc.IsEmpty()}
+	expected := args.Map{"empty": false}
+	expected.ShouldBeEqual(t, 0, "KVC JsonResultsPtrCollection valid", actual)
+}
+
+// =============================================================================
+// Clone / ClonePtr / NonPtr / Ptr
+// =============================================================================
+
 func Test_Cov44_KVC_Clone(t *testing.T) {
 	kvc := coredynamic.EmptyKeyValCollection()
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
@@ -410,6 +424,24 @@ func Test_Cov44_KVC_Clone(t *testing.T) {
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "KVC Clone", actual)
 }
+
+func Test_Cov44_KVC_ClonePtr_Nil(t *testing.T) {
+	var kvc *coredynamic.KeyValCollection
+	actual := args.Map{"isNil": kvc.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "KVC ClonePtr nil", actual)
+}
+
+func Test_Cov44_KVC_ClonePtr_Valid(t *testing.T) {
+	kvc := coredynamic.EmptyKeyValCollection()
+	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
+	c := kvc.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "len": c.Length()}
+	expected := args.Map{"notNil": true, "len": 1}
+	expected.ShouldBeEqual(t, 0, "KVC ClonePtr valid", actual)
+}
+
+func Test_Cov44_KVC_NonPtr(t *testing.T) {
 	kvc := coredynamic.EmptyKeyValCollection()
 	np := kvc.NonPtr()
 	actual := args.Map{"len": np.Length()}

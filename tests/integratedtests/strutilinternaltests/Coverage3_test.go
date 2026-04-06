@@ -203,6 +203,14 @@ func Test_Cov3_NonEmptyJoin(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "NonEmptyJoin returns empty -- with args", actual)
 }
 
+// ── NonEmptySlicePtr ──
+
+func Test_Cov3_NonEmptySlicePtr(t *testing.T) {
+	result := strutilinternal.NonEmptySlicePtr([]string{"a", "", "b"})
+	actual := args.Map{"len": len(result)}
+	expected := args.Map{"len": 2}
+	expected.ShouldBeEqual(t, 0, "NonEmptySlicePtr returns empty -- with args", actual)
+}
 
 // ── NonWhitespaceSlice ──
 

@@ -1020,6 +1020,36 @@ func Test_Cov60_LC_AddAfterNode(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "AddAfterNode inserts after node", actual)
 	})
 }
+
+func Test_Cov60_LC_AddAfterNodeAsync(t *testing.T) {
+	safeTest(t, "Test_Cov60_LC_AddAfterNodeAsync", func() {
+		lc := newLC([]string{"a"})
+		wg := &sync.WaitGroup{}
+		wg.Add(1)
+		node := lc.Head()
+		col := corestr.New.Collection.Strings([]string{"b"})
+		lc.AddAfterNodeAsync(wg, node, col)
+		wg.Wait()
+		actual := args.Map{"len": lc.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "AddAfterNodeAsync inserts async", actual)
+	})
+}
+
+// =============================================================================
+// LinkedCollections.go — Seg-01 Part B: Lines 800–1551
+// Covers: ConcatNew, AddAsyncFuncItems, AddAsyncFuncItemsPointer,
+//         AddStringsOfStrings, IndexAt, SafePointerIndexAt, SafeIndexAt,
+//         AddStringsAsync, AddCollection, AddCollectionsPtr, AddCollections,
+//         ToStringsPtr, ToStrings, ToCollectionSimple, ToCollection,
+//         ToCollectionsOfCollection, ItemsOfItems, ItemsOfItemsCollection,
+//         SimpleSlice, ListPtr, List, String, StringLock, Join, Joins,
+//         JsonModel, JsonModelAny, MarshalJSON, UnmarshalJSON, RemoveAll,
+//         Clear, Json, JsonPtr, ParseInjectUsingJson, ParseInjectUsingJsonMust,
+//         GetCompareSummary, JsonParseSelfInject, AsJsonContractsBinder,
+//         AsJsoner, AsJsonParseSelfInjector, AsJsonMarshaller
+// =============================================================================
+
 func Test_Cov60_LC_ConcatNew_EmptyClone(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ConcatNew_EmptyClone", func() {
 		lc := newLC([]string{"a"})
@@ -1331,6 +1361,17 @@ func Test_Cov60_LC_AddCollections_SkipNil(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "AddCollections skips nil", actual)
 	})
 }
+
+func Test_Cov60_LC_ToStringsPtr(t *testing.T) {
+	safeTest(t, "Test_Cov60_LC_ToStringsPtr", func() {
+		lc := newLC([]string{"a", "b"})
+		r := lc.ToStringsPtr()
+		actual := args.Map{"len": len(*r)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "ToStringsPtr returns pointer to strings", actual)
+	})
+}
+
 func Test_Cov60_LC_ToStrings(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_ToStrings", func() {
 		lc := newLC([]string{"a"}, []string{"b"})
@@ -1430,6 +1471,17 @@ func Test_Cov60_LC_SimpleSlice(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns SimpleSlice", actual)
 	})
 }
+
+func Test_Cov60_LC_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov60_LC_ListPtr", func() {
+		lc := newLC([]string{"a"})
+		r := lc.ListPtr()
+		actual := args.Map{"len": len(*r)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ListPtr returns pointer to list", actual)
+	})
+}
+
 func Test_Cov60_LC_List(t *testing.T) {
 	safeTest(t, "Test_Cov60_LC_List", func() {
 		lc := newLC([]string{"a"}, []string{"b"})

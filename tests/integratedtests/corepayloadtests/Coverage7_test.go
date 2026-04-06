@@ -54,6 +54,33 @@ func Test_Cov7_SessionInfo_Valid(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "SessionInfo returns non-empty -- valid", actual)
 }
+
+func Test_Cov7_SessionInfo_Clone(t *testing.T) {
+	si := corepayload.SessionInfo{
+		Id: "1", User: &corepayload.User{Name: "u"}, SessionPath: "/p",
+	}
+	cloned := si.Clone()
+	ptr := si.Ptr()
+	clonedPtr := si.ClonePtr()
+	var nilSI *corepayload.SessionInfo
+	nilClone := nilSI.ClonePtr()
+	actual := args.Map{
+		"clonedId":     cloned.Id,
+		"ptrNotNil":    ptr != nil,
+		"clonePtrNN":   clonedPtr != nil,
+		"nilCloneNil":  nilClone == nil,
+	}
+	expected := args.Map{
+		"clonedId": "1", "ptrNotNil": true,
+		"clonePtrNN": true, "nilCloneNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "SessionInfo returns correct value -- clone", actual)
+}
+
+// ═══════════════════════════════════════════
+// AuthInfo
+// ═══════════════════════════════════════════
+
 func Test_Cov7_AuthInfo_Empty(t *testing.T) {
 	ai := corepayload.AuthInfo{}
 	var nilAI *corepayload.AuthInfo
@@ -130,6 +157,29 @@ func Test_Cov7_AuthInfo_NilSetters(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns nil -- nil setters", actual)
 }
+
+func Test_Cov7_AuthInfo_Clone(t *testing.T) {
+	ai := corepayload.AuthInfo{
+		Identifier: "1", ActionType: "a", ResourceName: "r",
+	}
+	cloned := ai.Clone()
+	ptr := ai.Ptr()
+	clonePtr := ai.ClonePtr()
+	var nilAI *corepayload.AuthInfo
+	nilClone := nilAI.ClonePtr()
+	actual := args.Map{
+		"clonedId":    cloned.Identifier,
+		"ptrNN":       ptr != nil,
+		"clonePtrNN":  clonePtr != nil,
+		"nilCloneNil": nilClone == nil,
+	}
+	expected := args.Map{
+		"clonedId": "1", "ptrNN": true,
+		"clonePtrNN": true, "nilCloneNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- clone", actual)
+}
+
 func Test_Cov7_AuthInfo_Json(t *testing.T) {
 	ai := corepayload.AuthInfo{ActionType: "test"}
 	j := ai.Json()
@@ -197,6 +247,39 @@ func Test_Cov7_UserInfo_NilSetters(t *testing.T) {
 	expected := args.Map{"r1NN": true, "r2NN": true, "r3NN": true}
 	expected.ShouldBeEqual(t, 0, "UserInfo returns nil -- nil setters", actual)
 }
+
+func Test_Cov7_UserInfo_Clone(t *testing.T) {
+	ui := corepayload.UserInfo{
+		User:       &corepayload.User{Name: "u"},
+		SystemUser: &corepayload.User{Name: "s"},
+	}
+	cloned := ui.Clone()
+	ptr := ui.Ptr()
+	clonePtr := ui.ClonePtr()
+	nonPtr := ui.ToNonPtr()
+	var nilUI *corepayload.UserInfo
+	nilClone := nilUI.ClonePtr()
+	nilNonPtr := nilUI.ToNonPtr()
+	actual := args.Map{
+		"clonedHasU":  cloned.HasUser(),
+		"ptrNN":       ptr != nil,
+		"clonePtrNN":  clonePtr != nil,
+		"nonPtrHasU":  nonPtr.HasUser(),
+		"nilCloneNil": nilClone == nil,
+		"nilNonPtrE":  nilNonPtr.IsEmpty(),
+	}
+	expected := args.Map{
+		"clonedHasU": true, "ptrNN": true,
+		"clonePtrNN": true, "nonPtrHasU": true,
+		"nilCloneNil": true, "nilNonPtrE": true,
+	}
+	expected.ShouldBeEqual(t, 0, "UserInfo returns correct value -- clone", actual)
+}
+
+// ═══════════════════════════════════════════
+// payloadProperties via PayloadWrapper
+// ═══════════════════════════════════════════
+
 func Test_Cov7_PayloadProperties_Basic(t *testing.T) {
 	pw := &corepayload.PayloadWrapper{
 		Identifier: "42", Name: "test",

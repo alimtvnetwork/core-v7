@@ -719,6 +719,17 @@ func Test_S12_63_LinkedList_List(t *testing.T) {
 		}
 	})
 }
+
+func Test_S12_64_LinkedList_ListPtr(t *testing.T) {
+	safeTest(t, "Test_S12_64_LinkedList_ListPtr", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		if len(ll.ListPtr()) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_S12_65_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_S12_65_LinkedList_ListLock", func() {
 		ll := corestr.New.LinkedList.Create()
@@ -728,6 +739,17 @@ func Test_S12_65_LinkedList_ListLock(t *testing.T) {
 		}
 	})
 }
+
+func Test_S12_66_LinkedList_ListPtrLock(t *testing.T) {
+	safeTest(t, "Test_S12_66_LinkedList_ListPtrLock", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		if len(ll.ListPtrLock()) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_S12_67_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_S12_67_LinkedList_String", func() {
 		ll := corestr.New.LinkedList.Create()
@@ -1084,6 +1106,30 @@ func Test_S12_99_LinkedList_AddStringsToNode_Multiple(t *testing.T) {
 		}
 	})
 }
+
+func Test_S12_100_LinkedList_AddStringsPtrToNode(t *testing.T) {
+	safeTest(t, "Test_S12_100_LinkedList_AddStringsPtrToNode", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		items := []string{"b"}
+		ll.AddStringsPtrToNode(false, ll.Head(), &items)
+		if ll.Length() < 2 {
+			t.Fatal("expected at least 2")
+		}
+	})
+}
+
+func Test_S12_101_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
+	safeTest(t, "Test_S12_101_LinkedList_AddStringsPtrToNode_Nil", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.AddStringsPtrToNode(true, nil, nil)
+		if ll.Length() != 0 {
+			t.Fatal("expected 0")
+		}
+	})
+}
+
+func Test_S12_102_LinkedList_AddAsync(t *testing.T) {
 	safeTest(t, "Test_S12_102_LinkedList_AddAsync", func() {
 		ll := corestr.New.LinkedList.Create()
 		wg := &sync.WaitGroup{}

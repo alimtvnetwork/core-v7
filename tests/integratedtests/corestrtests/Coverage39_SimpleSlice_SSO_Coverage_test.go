@@ -413,6 +413,21 @@ func Test_C39_SimpleSlice_ConcatNewSimpleSlices(t *testing.T) {
 		if cn.Length() != 2 { t.Fatal() }
 	})
 }
+
+func Test_C39_SimpleSlice_Clone(t *testing.T) {
+	safeTest(t, "Test_C39_SimpleSlice_Clone", func() {
+		ss := corestr.New.SimpleSlice.Lines("a", "b")
+		c := ss.Clone(true)
+		if c.Length() != 2 { t.Fatal() }
+		cp := ss.ClonePtr(true)
+		if cp.Length() != 2 { t.Fatal() }
+		_ = ss.DeepClone()
+		_ = ss.ShadowClone()
+		var nilSS *corestr.SimpleSlice
+		if nilSS.ClonePtr(true) != nil { t.Fatal() }
+	})
+}
+
 func Test_C39_SimpleSlice_Collection_Hashset(t *testing.T) {
 	safeTest(t, "Test_C39_SimpleSlice_Collection_Hashset", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
@@ -563,6 +578,64 @@ func Test_C39_SimpleSlice_Serialize_Deserialize(t *testing.T) {
 }
 
 	// ── newSimpleSliceCreator ──
+
+func Test_C39_NewSimpleSliceCreator(t *testing.T) {
+	safeTest(t, "Test_C39_NewSimpleSliceCreator", func() {
+		s1 := corestr.New.SimpleSlice.Cap(5)
+		if s1.Length() != 0 { t.Fatal() }
+		s2 := corestr.New.SimpleSlice.Cap(-1)
+		if s2.Length() != 0 { t.Fatal() }
+		s3 := corestr.New.SimpleSlice.Default()
+		if s3 == nil { t.Fatal() }
+		s4 := corestr.New.SimpleSlice.Lines("a", "b")
+		if s4.Length() != 2 { t.Fatal() }
+		s5 := corestr.New.SimpleSlice.SpreadStrings("a")
+		if s5.Length() != 1 { t.Fatal() }
+		s6 := corestr.New.SimpleSlice.Create([]string{"a"})
+		if s6.Length() != 1 { t.Fatal() }
+		s7 := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+		if s7.Length() != 1 { t.Fatal() }
+		s8 := corestr.New.SimpleSlice.StringsPtr(nil)
+		if s8.Length() != 0 { t.Fatal() }
+		s9 := corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
+		if s9.Length() != 1 { t.Fatal() }
+		s10 := corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
+		if s10.Length() != 1 { t.Fatal() }
+		s11 := corestr.New.SimpleSlice.StringsClone([]string{"a"})
+		if s11.Length() != 1 { t.Fatal() }
+		s12 := corestr.New.SimpleSlice.StringsClone(nil)
+		if s12.Length() != 0 { t.Fatal() }
+		s13 := corestr.New.SimpleSlice.Direct(true, []string{"a"})
+		if s13.Length() != 1 { t.Fatal() }
+		s14 := corestr.New.SimpleSlice.Direct(false, []string{"a"})
+		if s14.Length() != 1 { t.Fatal() }
+		s15 := corestr.New.SimpleSlice.Direct(false, nil)
+		if s15.Length() != 0 { t.Fatal() }
+		s16 := corestr.New.SimpleSlice.UsingLines(true, "a")
+		if s16.Length() != 1 { t.Fatal() }
+		s17 := corestr.New.SimpleSlice.UsingLines(false, "a")
+		if s17.Length() != 1 { t.Fatal() }
+		s18 := corestr.New.SimpleSlice.Split("a,b", ",")
+		if s18.Length() != 2 { t.Fatal() }
+		s19 := corestr.New.SimpleSlice.SplitLines("a\nb")
+		if s19.Length() != 2 { t.Fatal() }
+		s20 := corestr.New.SimpleSlice.UsingSeparatorLine(",", "a,b")
+		if s20.Length() != 2 { t.Fatal() }
+		s21 := corestr.New.SimpleSlice.UsingLine("a\nb")
+		if s21.Length() != 2 { t.Fatal() }
+		s22 := corestr.New.SimpleSlice.Hashset(corestr.New.Hashset.StringsSpreadItems("a"))
+		if s22.Length() != 1 { t.Fatal() }
+		s23 := corestr.New.SimpleSlice.Hashset(corestr.Empty.Hashset())
+		if s23.Length() != 0 { t.Fatal() }
+		s24 := corestr.New.SimpleSlice.Map(map[string]string{"a": "1"})
+		if s24.Length() != 1 { t.Fatal() }
+		s25 := corestr.New.SimpleSlice.ByLen([]string{"a", "b"})
+		if s25 == nil { t.Fatal() }
+	})
+}
+
+	// ═══ SimpleStringOnce ═══
+
 func Test_C39_SSO_SetGet(t *testing.T) {
 	safeTest(t, "Test_C39_SSO_SetGet", func() {
 		sso := corestr.New.SimpleStringOnce.Create("hello", true)
@@ -765,6 +838,21 @@ func Test_C39_SSO_ConcatNewUsingStrings(t *testing.T) {
 		if cn.Value() == "" { t.Fatal() }
 	})
 }
+
+func Test_C39_SSO_Clone(t *testing.T) {
+	safeTest(t, "Test_C39_SSO_Clone", func() {
+		sso := corestr.New.SimpleStringOnce.Init("hello")
+		c := sso.Clone()
+		if c.Value() != "hello" { t.Fatal() }
+		cp := sso.ClonePtr()
+		if cp.Value() != "hello" { t.Fatal() }
+		cu := sso.CloneUsingNewVal("world")
+		if cu.Value() != "world" { t.Fatal() }
+		var nilSSO *corestr.SimpleStringOnce
+		if nilSSO.ClonePtr() != nil { t.Fatal() }
+	})
+}
+
 func Test_C39_SSO_NonPtr_Ptr(t *testing.T) {
 	safeTest(t, "Test_C39_SSO_NonPtr_Ptr", func() {
 		sso := corestr.New.SimpleStringOnce.Init("h")

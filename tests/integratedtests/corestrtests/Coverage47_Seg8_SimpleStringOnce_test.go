@@ -829,6 +829,29 @@ func Test_Seg8_SSO_Clone(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Clone -- copy", actual)
 	})
 }
+
+func Test_Seg8_SSO_ClonePtr(t *testing.T) {
+	safeTest(t, "Test_Seg8_SSO_ClonePtr", func() {
+		sso := &corestr.SimpleStringOnce{}
+		_ = sso.SetOnUninitialized("hello")
+		c := sso.ClonePtr()
+		actual := args.Map{"val": c.Value(), "diff": c != sso}
+		expected := args.Map{"val": "hello", "diff": true}
+		expected.ShouldBeEqual(t, 0, "ClonePtr -- new ptr", actual)
+	})
+}
+
+func Test_Seg8_SSO_ClonePtr_Nil(t *testing.T) {
+	safeTest(t, "Test_Seg8_SSO_ClonePtr_Nil", func() {
+		var sso *corestr.SimpleStringOnce
+		c := sso.ClonePtr()
+		actual := args.Map{"nil": c == nil}
+		expected := args.Map{"nil": true}
+		expected.ShouldBeEqual(t, 0, "ClonePtr nil -- nil", actual)
+	})
+}
+
+func Test_Seg8_SSO_CloneUsingNewVal(t *testing.T) {
 	safeTest(t, "Test_Seg8_SSO_CloneUsingNewVal", func() {
 		sso := &corestr.SimpleStringOnce{}
 		_ = sso.SetOnUninitialized("old")

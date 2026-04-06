@@ -95,7 +95,9 @@ const (
 	RangesOnlySupportedType                    RawErrorType = "Only Ranges: Only selected ranges supported for the function or feature."
 	PathsMissingOrHavingIssuesType             RawErrorType = "Path missing or having other access issues!"
 	BytesAreNilOrEmptyType                     RawErrorType = "Bytes data either nil or empty."
-	ValidationFailedType RawErrorType = "Validation failed!"
+	// Deprecated: Use ValidationFailedType instead.
+	ValidataionFailedType RawErrorType = "Validation failed!"
+	ValidationFailedType  RawErrorType = "Validation failed!"
 	LengthIssueType       RawErrorType = "Length Issue!"
 )
 

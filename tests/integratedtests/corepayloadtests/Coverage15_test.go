@@ -303,6 +303,32 @@ func Test_C15_TypedPayloadWrapper_SetTypedDataMust(t *testing.T) {
 	expected := args.Map{"name": "Charlie"}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- SetTypedDataMust", actual)
 }
+
+func Test_C15_TypedPayloadWrapper_Clone(t *testing.T) {
+	tw := makeTypedWrapper(t)
+	cloneP, err := tw.ClonePtr(true)
+	clone, err2 := tw.Clone(true)
+	var nilTW *corepayload.TypedPayloadWrapper[testUser]
+	nilClone, nilErr := nilTW.ClonePtr(true)
+	actual := args.Map{
+		"noErr":       err == nil,
+		"cloneName":   cloneP.Data().Name,
+		"noErr2":      err2 == nil,
+		"cloneName2":  clone.Data().Name,
+		"nilClone":    nilClone == nil,
+		"nilErr":      nilErr == nil,
+	}
+	expected := args.Map{
+		"noErr":       true,
+		"cloneName":   "Alice",
+		"noErr2":      true,
+		"cloneName2":  "Alice",
+		"nilClone":    true,
+		"nilErr":      true,
+	}
+	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- Clone", actual)
+}
+
 func Test_C15_TypedPayloadWrapper_ToPayloadWrapper(t *testing.T) {
 	tw := makeTypedWrapper(t)
 	pw := tw.ToPayloadWrapper()

@@ -390,6 +390,31 @@ func Test_Request_IsEnumEqual_Ext(t *testing.T) {
 	}
 }
 
+func Test_Request_IsAnyEnumsEqual_Ext(t *testing.T) {
+	r := reqtype.Create
+	if !r.IsAnyEnumsEqual(reqtype.Read.AsBasicEnumContractsBinder(), reqtype.Create.AsBasicEnumContractsBinder()) {
+		t.Error("should match Create")
+	}
+}
+
+// ==========================================
+// Additional coverage: MinByte
+// ==========================================
+
+func Test_Request_MinByte_Ext(t *testing.T) {
+	_ = reqtype.Create.MinByte()
+}
+
+// ==========================================
+// Additional coverage: NameValue / RangeNamesCsv / TypeName
+// ==========================================
+
+func Test_Request_NameValue_Ext(t *testing.T) {
+	if reqtype.Create.NameValue() == "" {
+		t.Error("NameValue should not be empty")
+	}
+}
+
 func Test_Request_RangeNamesCsv_Ext(t *testing.T) {
 	if reqtype.Create.RangeNamesCsv() == "" {
 		t.Error("RangeNamesCsv should not be empty")

@@ -130,6 +130,24 @@ func Test_CovJsonS2_RC05_HasError_AllErrors(t *testing.T) {
 		t.Fatal("expected no errors")
 	}
 }
+
+func Test_CovJsonS2_RC06_GetErrorsStrings_GetErrorsAsSingle(t *testing.T) {
+	rc := newTestRC()
+	ss := rc.GetErrorsStrings()
+	if len(ss) != 0 {
+		t.Fatal("expected 0")
+	}
+	_ = rc.GetErrorsStringsPtr()
+	_ = rc.GetErrorsAsSingleString()
+	_ = rc.GetErrorsAsSingle()
+	// empty
+	empty := corejson.NewResultsCollection.Empty()
+	ss2 := empty.GetErrorsStrings()
+	if len(ss2) != 0 {
+		t.Fatal("expected 0")
+	}
+}
+
 func Test_CovJsonS2_RC07_GetAt_GetAtSafe_GetAtSafeUsingLength(t *testing.T) {
 	rc := newTestRC()
 	_ = rc.GetAt(0)
@@ -190,6 +208,22 @@ func Test_CovJsonS2_RC11_Dispose_Clear(t *testing.T) {
 	var nilRC *corejson.ResultsCollection
 	nilRC.Dispose()
 }
+
+func Test_CovJsonS2_RC12_GetStrings(t *testing.T) {
+	rc := newTestRC()
+	ss := rc.GetStrings()
+	if len(ss) != 2 {
+		t.Fatal("expected 2")
+	}
+	_ = rc.GetStringsPtr()
+	// empty
+	empty := corejson.NewResultsCollection.Empty()
+	ss2 := empty.GetStrings()
+	if len(ss2) != 0 {
+		t.Fatal("expected 0")
+	}
+}
+
 func Test_CovJsonS2_RC13_GetPagesSize_GetPagedCollection_GetSinglePageCollection(t *testing.T) {
 	// build 15 items
 	rc := corejson.NewResultsCollection.UsingCap(20)
@@ -251,6 +285,24 @@ func Test_CovJsonS2_RC15_ParseInjectUsingJson(t *testing.T) {
 		t.Fatal("expected no error")
 	}
 }
+
+func Test_CovJsonS2_RC16_Clone_ShadowClone_ClonePtr(t *testing.T) {
+	rc := newTestRC()
+	c := rc.ShadowClone()
+	_ = c
+	c2 := rc.Clone(true)
+	_ = c2
+	cp := rc.ClonePtr(true)
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	// nil
+	var nilRC *corejson.ResultsCollection
+	if nilRC.ClonePtr(true) != nil {
+		t.Fatal("expected nil")
+	}
+}
+
 func Test_CovJsonS2_RC17_UnmarshalAt(t *testing.T) {
 	rc := newTestRC()
 	var m map[string]int
@@ -357,6 +409,26 @@ func Test_CovJsonS2_RPC04_AddSkipOnNil_AddNonNilNonError(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
+
+func Test_CovJsonS2_RPC05_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
+	rpc := newTestRPC()
+	if rpc.HasError() {
+		t.Fatal("expected false")
+	}
+	errs, hasAny := rpc.AllErrors()
+	if hasAny || len(errs) > 0 {
+		t.Fatal("expected no errors")
+	}
+	_ = rpc.GetErrorsStrings()
+	_ = rpc.GetErrorsStringsPtr()
+	_ = rpc.GetErrorsAsSingleString()
+	_ = rpc.GetErrorsAsSingle()
+	// empty
+	empty := corejson.NewResultsPtrCollection.Empty()
+	_, _ = empty.AllErrors()
+	_ = empty.GetErrorsStrings()
+}
+
 func Test_CovJsonS2_RPC06_GetAt_GetAtSafe(t *testing.T) {
 	rpc := newTestRPC()
 	_ = rpc.GetAt(0)
@@ -467,6 +539,26 @@ func Test_CovJsonS2_MR02_AddSkipOnNil_GetByKey(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
+
+func Test_CovJsonS2_MR03_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
+	mr := newTestMR()
+	if mr.HasError() {
+		t.Fatal("expected false")
+	}
+	errs, hasAny := mr.AllErrors()
+	if hasAny || len(errs) > 0 {
+		t.Fatal("expected none")
+	}
+	_ = mr.GetErrorsStrings()
+	_ = mr.GetErrorsStringsPtr()
+	_ = mr.GetErrorsAsSingleString()
+	_ = mr.GetErrorsAsSingle()
+	// empty
+	empty := corejson.NewMapResults.Empty()
+	_, _ = empty.AllErrors()
+	_ = empty.GetErrorsStrings()
+}
+
 func Test_CovJsonS2_MR04_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 	mr := newTestMR()
 	keys := mr.AllKeys()
@@ -498,6 +590,21 @@ func Test_CovJsonS2_MR04_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
+
+func Test_CovJsonS2_MR05_GetStrings(t *testing.T) {
+	mr := newTestMR()
+	ss := mr.GetStrings()
+	if len(ss) != 2 {
+		t.Fatal("expected 2")
+	}
+	_ = mr.GetStringsPtr()
+	// empty
+	empty := corejson.NewMapResults.Empty()
+	if len(empty.GetStrings()) != 0 {
+		t.Fatal("expected 0")
+	}
+}
+
 func Test_CovJsonS2_MR06_Add_AddPtr_AddAny_AddAnySkipOnNil(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 	mr.AddPtr("k", nil)
@@ -934,6 +1041,54 @@ func Test_CovJsonS2_CR01_Empty(t *testing.T) {
 	_ = corejson.Empty.ResultsPtrCollection()
 	_ = corejson.Empty.MapResults()
 }
+
+func Test_CovJsonS2_CR02_NewResult(t *testing.T) {
+	_ = corejson.NewResult.UsingBytes([]byte(`1`))
+	_ = corejson.NewResult.UsingBytesType([]byte(`1`), "int")
+	_ = corejson.NewResult.UsingBytesTypePtr([]byte(`1`), "int")
+	_ = corejson.NewResult.UsingTypeBytesPtr("int", []byte(`1`))
+	_ = corejson.NewResult.UsingBytesPtr(nil)
+	_ = corejson.NewResult.UsingBytesPtr([]byte(`1`))
+	_ = corejson.NewResult.UsingBytesPtrErrPtr(nil, errors.New("e"), "t")
+	_ = corejson.NewResult.UsingBytesPtrErrPtr([]byte(`1`), nil, "t")
+	_ = corejson.NewResult.UsingBytesErrPtr(nil, nil, "t")
+	_ = corejson.NewResult.UsingBytesErrPtr([]byte(`1`), nil, "t")
+	s := `{"a":1}`
+	_ = corejson.NewResult.PtrUsingStringPtr(&s, "t")
+	_ = corejson.NewResult.PtrUsingStringPtr(nil, "t")
+	_ = corejson.NewResult.UsingErrorStringPtr(nil, &s, "t")
+	_ = corejson.NewResult.UsingErrorStringPtr(errors.New("e"), nil, "t")
+	_ = corejson.NewResult.Ptr(nil, nil, "t")
+	_ = corejson.NewResult.UsingJsonBytesTypeError(nil, nil, "t")
+	_ = corejson.NewResult.UsingJsonBytesError(nil, nil)
+	_ = corejson.NewResult.UsingTypePlusString("t", s)
+	_ = corejson.NewResult.UsingTypePlusStringPtr("t", nil)
+	_ = corejson.NewResult.UsingTypePlusStringPtr("t", &s)
+	_ = corejson.NewResult.UsingStringWithType(s, "t")
+	_ = corejson.NewResult.UsingString(s)
+	_ = corejson.NewResult.UsingStringPtr(nil)
+	_ = corejson.NewResult.UsingStringPtr(&s)
+	_ = corejson.NewResult.CreatePtr(nil, nil, "t")
+	_ = corejson.NewResult.NonPtr(nil, nil, "t")
+	_ = corejson.NewResult.Create(nil, nil, "t")
+	_ = corejson.NewResult.PtrUsingBytesPtr(nil, errors.New("e"), "t")
+	_ = corejson.NewResult.PtrUsingBytesPtr(nil, nil, "t")
+	_ = corejson.NewResult.PtrUsingBytesPtr([]byte(`1`), nil, "t")
+	_ = corejson.NewResult.CastingAny(1)
+	_ = corejson.NewResult.Any(1)
+	_ = corejson.NewResult.AnyPtr(1)
+	_ = corejson.NewResult.Error(errors.New("e"))
+	_ = corejson.NewResult.ErrorPtr(errors.New("e"))
+	_ = corejson.NewResult.Empty()
+	_ = corejson.NewResult.EmptyPtr()
+	_ = corejson.NewResult.TypeName("t")
+	_ = corejson.NewResult.TypeNameBytes("t")
+	_ = corejson.NewResult.Many(1, 2, 3)
+	_ = corejson.NewResult.Serialize(1)
+	_ = corejson.NewResult.Marshal(1)
+	_ = corejson.NewResult.Serialize(1) // ApplyMust does not exist, use Serialize
+}
+
 func Test_CovJsonS2_CR03_NewResultCreator_DeserializeUsingBytes_DeserializeUsingResult(t *testing.T) {
 	r := corejson.New(map[string]int{"a": 1})
 	b, _ := r.Serialize()
@@ -1116,6 +1271,21 @@ func Test_CovJsonS2_BC04_AddResult_AddResultPtr_AddAny_AddAnyItems(t *testing.T)
 	}
 	_ = bc.AddAnyItems()
 }
+
+func Test_CovJsonS2_BC05_GetAt_GetAtSafe_JsonResultAt(t *testing.T) {
+	bc := corejson.NewBytesCollection.UsingCap(2)
+	bc.Add([]byte(`1`))
+	_ = bc.GetAt(0)
+	_ = bc.GetAtSafe(0)
+	_ = bc.GetAtSafePtr(0)
+	_ = bc.GetResultAtSafe(0)
+	_ = bc.GetAtSafeUsingLength(0, 1)
+	if bc.GetAtSafe(-2) != nil {
+		t.Fatal("expected nil")
+	}
+	_ = bc.JsonResultAt(0)
+}
+
 func Test_CovJsonS2_BC06_UnmarshalAt_UnmarshalIntoSameIndex(t *testing.T) {
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`1`))
@@ -1129,6 +1299,33 @@ func Test_CovJsonS2_BC06_UnmarshalAt_UnmarshalIntoSameIndex(t *testing.T) {
 	_ = errs
 	bc.UnmarshalIntoSameIndex(nil)
 }
+
+func Test_CovJsonS2_BC07_Strings_Clone_Dispose(t *testing.T) {
+	bc := corejson.NewBytesCollection.UsingCap(2)
+	bc.Add([]byte(`"a"`))
+	ss := bc.Strings()
+	if len(ss) != 1 {
+		t.Fatal("expected 1")
+	}
+	_ = bc.StringsPtr()
+	c := bc.Clone(true)
+	_ = c
+	_ = bc.ShadowClone()
+	cp := bc.ClonePtr(true)
+	_ = cp
+	var nilBC *corejson.BytesCollection
+	if nilBC.ClonePtr(true) != nil {
+		t.Fatal("expected nil")
+	}
+	bc.Dispose()
+	var nilBC2 *corejson.BytesCollection
+	nilBC2.Dispose()
+	// empty clone
+	empty := corejson.NewBytesCollection.Empty()
+	_ = empty.Clone(true)
+	_ = empty.Strings()
+}
+
 func Test_CovJsonS2_BC08_GetPagesSize_GetPagedCollection(t *testing.T) {
 	bc := corejson.NewBytesCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {

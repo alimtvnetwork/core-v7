@@ -91,6 +91,12 @@ func Test_C23_MR_GetErrorsStrings_WithErrors(t *testing.T) {
 	s := mr.GetErrorsStrings()
 	if len(s) != 1 { t.Fatal("expected 1") }
 }
+
+func Test_C23_MR_GetErrorsStringsPtr(t *testing.T) {
+	mr := corejson.NewMapResults.Empty()
+	_ = mr.GetErrorsStringsPtr()
+}
+
 func Test_C23_MR_GetErrorsAsSingleString(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 	_ = mr.GetErrorsAsSingleString()
@@ -385,6 +391,12 @@ func Test_C23_MR_GetStrings_Empty(t *testing.T) {
 	s := mr.GetStrings()
 	if len(s) != 0 { t.Fatal("expected 0") }
 }
+
+func Test_C23_MR_GetStringsPtr(t *testing.T) {
+	mr := corejson.NewMapResults.Empty()
+	_ = mr.GetStringsPtr()
+}
+
 func Test_C23_MR_AddJsoner_Nil(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 	mr.AddJsoner("k", nil)

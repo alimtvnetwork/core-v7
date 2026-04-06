@@ -712,6 +712,47 @@ func Test_Cov38_MapAnyItems_Dispose_Nil(t *testing.T) {
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Dispose nil", actual)
 }
+
+func Test_Cov38_MapAnyItems_Dispose_Valid(t *testing.T) {
+	m := coredynamic.EmptyMapAnyItems()
+	m.Add("a", 1)
+	m.Dispose()
+	actual := args.Map{"ok": true}
+	expected := args.Map{"ok": true}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems Dispose valid", actual)
+}
+
+// =============================================================================
+// MapAnyItems — ClonePtr
+// =============================================================================
+
+func Test_Cov38_MapAnyItems_ClonePtr_Nil(t *testing.T) {
+	var m *coredynamic.MapAnyItems
+	_, err := m.ClonePtr()
+	actual := args.Map{"hasErr": err != nil}
+	expected := args.Map{"hasErr": true}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems ClonePtr nil", actual)
+}
+
+func Test_Cov38_MapAnyItems_ClonePtr_Valid(t *testing.T) {
+	m := coredynamic.EmptyMapAnyItems()
+	m.Add("a", 1)
+	c, err := m.ClonePtr()
+	actual := args.Map{"noErr": err == nil, "len": c.Length()}
+	expected := args.Map{"noErr": true, "len": 1}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems ClonePtr valid", actual)
+}
+
+// =============================================================================
+// MapAnyItems — Misc
+// =============================================================================
+
+func Test_Cov38_MapAnyItems_RawMapStringAnyDiff_Nil(t *testing.T) {
+	var m *coredynamic.MapAnyItems
+	r := m.RawMapStringAnyDiff()
+	actual := args.Map{"len": len(r)}
+	expected := args.Map{"len": 0}
+	expected.ShouldBeEqual(t, 0, "MapAnyItems RawMapStringAnyDiff nil", actual)
 }
 
 func Test_Cov38_MapAnyItems_String_Valid(t *testing.T) {

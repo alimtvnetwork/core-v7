@@ -199,6 +199,29 @@ func Test_CovSS2_14_Clear_Dispose(t *testing.T) {
 		ss2.Dispose()
 	})
 }
+
+func Test_CovSS2_15_Clone_ClonePtr_DeepClone_ShadowClone(t *testing.T) {
+	safeTest(t, "Test_CovSS2_15_Clone_ClonePtr_DeepClone_ShadowClone", func() {
+		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
+		c := ss.Clone(true)
+		if c.Length() != 2 {
+			t.Fatal("expected 2")
+		}
+		cp := ss.ClonePtr(true)
+		if cp.Length() != 2 {
+			t.Fatal("expected 2")
+		}
+		dc := ss.DeepClone()
+		if dc.Length() != 2 {
+			t.Fatal("expected 2")
+		}
+		sc := ss.ShadowClone()
+		if sc.Length() != 2 {
+			t.Fatal("expected 2")
+		}
+	})
+}
+
 func Test_CovSS2_16_IsDistinctEqualRaw_IsDistinctEqual(t *testing.T) {
 	safeTest(t, "Test_CovSS2_16_IsDistinctEqualRaw_IsDistinctEqual", func() {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})

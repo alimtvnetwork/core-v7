@@ -247,9 +247,64 @@ func Test_I32_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Collection returns nil -- AppendAnysUsingFilterLock nil", actual)
 	})
 }
+
+func Test_I32_Collection_AppendAnysUsingFilterLock_Break(t *testing.T) {
+	safeTest(t, "Test_I32_Collection_AppendAnysUsingFilterLock_Break", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.AppendAnysUsingFilterLock(func(s string, i int) (string, bool, bool) {
+			return s, true, true
+		}, "a", "b")
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- AppendAnysUsingFilterLock break", actual)
+	})
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Collection pt2 — NonEmptyList / NonEmptyListPtr / NonEmptyItems
+// ══════════════════════════════════════════════════════════════════════════════
+
+func Test_I32_Collection_NonEmptyList(t *testing.T) {
+	safeTest(t, "Test_I32_Collection_NonEmptyList", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		actual := args.Map{"len": len(c.NonEmptyList()), "ptrLen": len(*c.NonEmptyListPtr())}
+		expected := args.Map{"len": 2, "ptrLen": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList", actual)
+	})
+}
+
+func Test_I32_Collection_NonEmptyList_Empty(t *testing.T) {
+	safeTest(t, "Test_I32_Collection_NonEmptyList_Empty", func() {
+		c := corestr.New.Collection.Cap(5)
+		actual := args.Map{"len": len(c.NonEmptyList())}
+		expected := args.Map{"len": 0}
 		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyList empty", actual)
 	})
 }
+
+func Test_I32_Collection_NonEmptyItems(t *testing.T) {
+	safeTest(t, "Test_I32_Collection_NonEmptyItems", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
+		actual := args.Map{"len": len(c.NonEmptyItems()), "ptrLen": len(c.NonEmptyItemsPtr())}
+		expected := args.Map{"len": 2, "ptrLen": 2}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItems", actual)
+	})
+}
+
+func Test_I32_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
+	safeTest(t, "Test_I32_Collection_NonEmptyItemsOrNonWhitespace", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "  ", ""})
+		actual := args.Map{"len": len(c.NonEmptyItemsOrNonWhitespace()), "ptrLen": len(c.NonEmptyItemsOrNonWhitespacePtr())}
+		expected := args.Map{"len": 1, "ptrLen": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns empty -- NonEmptyItemsOrNonWhitespace", actual)
+	})
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Collection pt2 — Unique
+// ══════════════════════════════════════════════════════════════════════════════
+
+func Test_I32_Collection_UniqueBoolMap(t *testing.T) {
 	safeTest(t, "Test_I32_Collection_UniqueBoolMap", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "a"})
 		actual := args.Map{"len": len(c.UniqueBoolMap())}

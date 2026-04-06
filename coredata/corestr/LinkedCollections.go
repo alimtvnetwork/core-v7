@@ -1248,6 +1248,11 @@ func (it *LinkedCollections) AddCollections(
 	return it
 }
 
+// Deprecated: Use ToStrings instead.
+func (it *LinkedCollections) ToStringsPtr() *[]string {
+	list := it.ToStrings()
+	return &list
+}
 
 func (it *LinkedCollections) ToStrings() []string {
 	return it.ToCollectionSimple().List()
@@ -1354,6 +1359,11 @@ func (it *LinkedCollections) SimpleSlice() *SimpleSlice {
 	return &list
 }
 
+// Deprecated: Use List instead.
+func (it *LinkedCollections) ListPtr() *[]string {
+	list := it.List()
+	return &list
+}
 
 // List must return slice.
 func (it *LinkedCollections) List() []string {

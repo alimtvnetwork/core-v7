@@ -524,6 +524,32 @@ func Test_Cov64_LinkedList_AddStringsToNode_Multiple(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "AddStringsToNode multiple", actual)
 	})
 }
+
+func Test_Cov64_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
+	safeTest(t, "Test_Cov64_LinkedList_AddStringsPtrToNode_Nil", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.AddStringsPtrToNode(true, nil, nil)
+		actual := args.Map{"len": ll.Length()}
+		expected := args.Map{"len": 0}
+		expected.ShouldBeEqual(t, 0, "AddStringsPtrToNode nil", actual)
+	})
+}
+
+func Test_Cov64_LinkedList_AddStringsPtrToNode_NonNil(t *testing.T) {
+	safeTest(t, "Test_Cov64_LinkedList_AddStringsPtrToNode_NonNil", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		items := []string{"b"}
+		ll.AddStringsPtrToNode(false, ll.Head(), &items)
+		actual := args.Map{"len": ll.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "AddStringsPtrToNode non-nil", actual)
+	})
+}
+
+// ── AddCollectionToNode ──
+
+func Test_Cov64_LinkedList_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Create()
 		ll.Add("a")
@@ -1080,6 +1106,17 @@ func Test_Cov64_LinkedList_List_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "List empty", actual)
 	})
 }
+
+func Test_Cov64_LinkedList_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov64_LinkedList_ListPtr", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		actual := args.Map{"len": len(ll.ListPtr())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ListPtr", actual)
+	})
+}
+
 func Test_Cov64_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_ListLock", func() {
 		ll := corestr.New.LinkedList.Create()
@@ -1089,6 +1126,19 @@ func Test_Cov64_LinkedList_ListLock(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ListLock", actual)
 	})
 }
+
+func Test_Cov64_LinkedList_ListPtrLock(t *testing.T) {
+	safeTest(t, "Test_Cov64_LinkedList_ListPtrLock", func() {
+		ll := corestr.New.LinkedList.Create()
+		ll.Add("a")
+		actual := args.Map{"len": len(ll.ListPtrLock())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ListPtrLock", actual)
+	})
+}
+
+// ── String / StringLock / Join / JoinLock / Joins ──
+
 func Test_Cov64_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_Cov64_LinkedList_String", func() {
 		ll := corestr.New.LinkedList.Create()

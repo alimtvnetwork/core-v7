@@ -332,6 +332,24 @@ func Test_Cov6_BaseIsCaseSensitive_Clone(t *testing.T) {
 	expected := args.Map{"isCaseSensitive": true}
 	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive returns correct value -- Clone", actual)
 }
+
+func Test_Cov6_BaseIsCaseSensitive_ClonePtr(t *testing.T) {
+	b := &corecomparator.BaseIsCaseSensitive{IsCaseSensitive: true}
+	cloned := b.ClonePtr()
+	actual := args.Map{"notNil": cloned != nil, "val": cloned.IsCaseSensitive}
+	expected := args.Map{"notNil": true, "val": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive returns correct value -- ClonePtr", actual)
+}
+
+func Test_Cov6_BaseIsCaseSensitive_ClonePtr_Nil(t *testing.T) {
+	var b *corecomparator.BaseIsCaseSensitive
+	cloned := b.ClonePtr()
+	actual := args.Map{"isNil": cloned == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive returns nil -- ClonePtr nil", actual)
+}
+
+func Test_Cov6_BaseIsIgnoreCase(t *testing.T) {
 	b := corecomparator.BaseIsIgnoreCase{IsIgnoreCase: true}
 	actual := args.Map{
 		"isCaseSensitive": b.IsCaseSensitive(),
@@ -347,4 +365,20 @@ func Test_Cov6_BaseIsIgnoreCase_Clone(t *testing.T) {
 	actual := args.Map{"isIgnoreCase": cloned.IsIgnoreCase}
 	expected := args.Map{"isIgnoreCase": true}
 	expected.ShouldBeEqual(t, 0, "BaseIsIgnoreCase returns correct value -- Clone", actual)
+}
+
+func Test_Cov6_BaseIsIgnoreCase_ClonePtr(t *testing.T) {
+	b := &corecomparator.BaseIsIgnoreCase{IsIgnoreCase: true}
+	cloned := b.ClonePtr()
+	actual := args.Map{"notNil": cloned != nil, "val": cloned.IsIgnoreCase}
+	expected := args.Map{"notNil": true, "val": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsIgnoreCase returns correct value -- ClonePtr", actual)
+}
+
+func Test_Cov6_BaseIsIgnoreCase_ClonePtr_Nil(t *testing.T) {
+	var b *corecomparator.BaseIsIgnoreCase
+	cloned := b.ClonePtr()
+	actual := args.Map{"isNil": cloned == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsIgnoreCase returns nil -- ClonePtr nil", actual)
 }

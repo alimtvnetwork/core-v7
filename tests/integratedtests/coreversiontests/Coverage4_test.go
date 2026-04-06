@@ -188,6 +188,48 @@ func Test_Cov4_InvalidCompactVersion(t *testing.T) {
 	expected := args.Map{"compact": "bad", "invalid": true}
 	expected.ShouldBeEqual(t, 0, "InvalidCompactVersion returns error -- with args", actual)
 }
+
+// ==========================================================================
+// Version — nil receiver methods
+// ==========================================================================
+
+func Test_Cov4_Version_NilReceiver(t *testing.T) {
+	var v *coreversion.Version
+	actual := args.Map{
+		"display":   v.VersionDisplay(),
+		"compiled":  v.CompiledVersion(),
+		"major":     v.MajorString(),
+		"minor":     v.MinorString(),
+		"patch":     v.PatchString(),
+		"build":     v.BuildString(),
+		"hasMajor":  v.HasMajor(),
+		"hasMinor":  v.HasMinor(),
+		"hasPatch":  v.HasPatch(),
+		"hasBuild":  v.HasBuild(),
+		"emptyOrInv": v.IsEmptyOrInvalid(),
+		"cloneNil":  v.ClonePtr() == nil,
+	}
+	expected := args.Map{
+		"display":   "",
+		"compiled":  "",
+		"major":     "",
+		"minor":     "",
+		"patch":     "",
+		"build":     "",
+		"hasMajor":  false,
+		"hasMinor":  false,
+		"hasPatch":  false,
+		"hasBuild":  false,
+		"emptyOrInv": true,
+		"cloneNil":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "Version returns nil -- nil receiver methods", actual)
+}
+
+// ==========================================================================
+// Version — comparison methods
+// ==========================================================================
+
 func Test_Cov4_Version_IsMajorBuildAtLeast(t *testing.T) {
 	v := coreversion.New.Create("v2.0.0.5")
 	actual := args.Map{

@@ -264,6 +264,19 @@ func Test_Cov39_Result_String_WithError(t *testing.T) {
 	expected := args.Map{"hasContent": true}
 	expected.ShouldBeEqual(t, 0, "Result String with error", actual)
 }
+
+func Test_Cov39_Result_String_NoError(t *testing.T) {
+	r := corejson.New("hello")
+	s := r.String()
+	actual := args.Map{"hasContent": len(s) > 0}
+	expected := args.Map{"hasContent": true}
+	expected.ShouldBeEqual(t, 0, "Result String no error", actual)
+}
+
+// =============================================================================
+// Result — SafeNonIssueBytes, SafeBytes, Values, SafeValues, SafeValuesPtr
+// =============================================================================
+
 func Test_Cov39_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
 	r := &corejson.Result{Error: errors.New("x")}
 	actual := args.Map{"len": len(r.SafeNonIssueBytes())}
@@ -291,6 +304,18 @@ func Test_Cov39_Result_SafeValues_Nil(t *testing.T) {
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeValues nil", actual)
 }
+
+func Test_Cov39_Result_SafeValuesPtr_HasIssues(t *testing.T) {
+	r := &corejson.Result{}
+	actual := args.Map{"len": len(r.SafeValuesPtr())}
+	expected := args.Map{"len": 0}
+	expected.ShouldBeEqual(t, 0, "SafeValuesPtr has issues", actual)
+}
+
+// =============================================================================
+// Result — Raw, RawMust, RawString, RawStringMust, RawErrString, RawPrettyString
+// =============================================================================
+
 func Test_Cov39_Result_Raw_Nil(t *testing.T) {
 	var r *corejson.Result
 	b, err := r.Raw()
@@ -650,6 +675,23 @@ func Test_Cov39_Result_ParseInjectUsingJson_Fail(t *testing.T) {
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson fail", actual)
 }
+
+func Test_Cov39_Result_ParseInjectUsingJsonMust_Panics(t *testing.T) {
+	defer func() {
+		r := recover()
+		actual := args.Map{"panicked": r != nil}
+		expected := args.Map{"panicked": true}
+		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust panics", actual)
+	}()
+	bad := &corejson.Result{Error: errors.New("fail")}
+	target := corejson.Empty.ResultPtr()
+	target.ParseInjectUsingJsonMust(bad)
+}
+
+// =============================================================================
+// Result — Clone / ClonePtr / CloneIf / CloneError
+// =============================================================================
+
 func Test_Cov39_Result_Clone_Empty(t *testing.T) {
 	r := corejson.Result{}
 	c := r.Clone(true)
@@ -673,6 +715,14 @@ func Test_Cov39_Result_Clone_DeepCopy(t *testing.T) {
 	expected := args.Map{"hasBytes": true}
 	expected.ShouldBeEqual(t, 0, "Clone deep", actual)
 }
+
+func Test_Cov39_Result_ClonePtr_Nil(t *testing.T) {
+	var r *corejson.Result
+	actual := args.Map{"isNil": r.ClonePtr(true) == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr nil", actual)
+}
+
 func Test_Cov39_Result_CloneIf_True(t *testing.T) {
 	r := corejson.New("hello")
 	c := r.CloneIf(true, true)

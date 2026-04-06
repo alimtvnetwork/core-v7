@@ -150,6 +150,19 @@ func Test_C01_Result_SafeNonIssueBytes(t *testing.T) {
 	rErr := corejson.NewResult.Error(errors.New("e"))
 	if len(rErr.SafeNonIssueBytes()) != 0 { t.Fatal("expected empty bytes for error result") }
 }
+
+func Test_C01_Result_SafeBytes_Values_SafeValues(t *testing.T) {
+	r := corejson.NewResult.Any(1)
+	if len(r.SafeBytes()) == 0 { t.Fatal("expected bytes") }
+	if len(r.Values()) == 0 { t.Fatal("expected values") }
+	if len(r.SafeValues()) == 0 { t.Fatal("expected safe values") }
+	if len(r.SafeValuesPtr()) == 0 { t.Fatal("expected safe values ptr") }
+
+	var nilR *corejson.Result
+	if len(nilR.SafeBytes()) != 0 { t.Fatal("expected empty for nil") }
+	if len(nilR.SafeValues()) != 0 { t.Fatal("expected empty for nil") }
+}
+
 func Test_C01_Result_Raw(t *testing.T) {
 	r := corejson.NewResult.Any("x")
 	b, err := r.Raw()
@@ -422,6 +435,15 @@ func Test_C01_Result_CloneIf(t *testing.T) {
 	_ = r.CloneIf(true, false)
 	_ = r.CloneIf(false, false)
 }
+
+func Test_C01_Result_ClonePtr(t *testing.T) {
+	r := corejson.NewResult.AnyPtr("x")
+	c := r.ClonePtr(true)
+	if c == nil { t.Fatal("expected non-nil clone") }
+	var nilR *corejson.Result
+	if nilR.ClonePtr(true) != nil { t.Fatal("expected nil for nil") }
+}
+
 func Test_C01_Result_InjectInto(t *testing.T) {
 	r := corejson.NewResult.Any("x")
 	target := &corejson.Result{}

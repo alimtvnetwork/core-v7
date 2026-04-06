@@ -114,6 +114,40 @@ func Test_StringsIndexVal_True_Cov5(t *testing.T) {
 	expected := args.Map{"result": "a"}
 	expected.ShouldBeEqual(t, 0, "StringsIndexVal returns trueIndex -- true", actual)
 }
+
+func Test_StringsIndexVal_False_Cov5(t *testing.T) {
+	slice := []string{"a", "b", "c"}
+	actual := args.Map{"result": conditional.StringsIndexVal(false, slice, 0, 2)}
+	expected := args.Map{"result": "c"}
+	expected.ShouldBeEqual(t, 0, "StringsIndexVal returns falseIndex -- false", actual)
+}
+
+// ============================================================================
+// NilCheck
+// ============================================================================
+
+func Test_NilCheck_Nil_Cov5(t *testing.T) {
+	actual := args.Map{"result": conditional.NilCheck(nil, "nil-val", "non-nil-val")}
+	expected := args.Map{"result": "nil-val"}
+	expected.ShouldBeEqual(t, 0, "NilCheck returns onNil -- nil input", actual)
+}
+
+func Test_NilCheck_NonNil_Cov5(t *testing.T) {
+	actual := args.Map{"result": conditional.NilCheck("something", "nil-val", "non-nil-val")}
+	expected := args.Map{"result": "non-nil-val"}
+	expected.ShouldBeEqual(t, 0, "NilCheck returns onNonNil -- non-nil input", actual)
+}
+
+// ============================================================================
+// DefOnNil
+// ============================================================================
+
+func Test_DefOnNil_Nil_Cov5(t *testing.T) {
+	actual := args.Map{"result": conditional.DefOnNil(nil, "default")}
+	expected := args.Map{"result": "default"}
+	expected.ShouldBeEqual(t, 0, "DefOnNil returns default -- nil input", actual)
+}
+
 func Test_DefOnNil_NonNil_Cov5(t *testing.T) {
 	actual := args.Map{"result": conditional.DefOnNil("val", "default")}
 	expected := args.Map{"result": "val"}

@@ -130,6 +130,46 @@ func Test_Cov_Variant_IsAnyEnumsEqual(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Variant IsAnyEnumsEqual -- match and no match", actual)
 }
+
+// ── Variant enum metadata ──
+
+func Test_Cov_Variant_Metadata(t *testing.T) {
+	v := chmodclasstype.Owner
+	actual := args.Map{
+		"allNamesLen": len(v.AllNameValues()) > 0,
+		"rangesLen":   len(v.IntegerEnumRanges()) > 0,
+		"rangesCsv":   v.RangeNamesCsv() != "",
+		"rangesMap":   len(v.RangesDynamicMap()) > 0,
+		"rangesByte":  len(v.RangesByte()) > 0,
+		"maxByte":     int(v.MaxByte()) > 0,
+		"minByte":     int(v.MinByte()) == 0,
+		"maxInt":      v.MaxInt() > 0,
+		"minInt":      v.MinInt() == 0,
+		"maxStr":      v.MaxValueString() != "",
+		"minStr":      v.MinValueString() != "",
+		"format":      v.Format("%s") != "",
+		"enumType":    v.EnumType() != nil,
+	}
+	expected := args.Map{
+		"allNamesLen": true,
+		"rangesLen":   true,
+		"rangesCsv":   true,
+		"rangesMap":   true,
+		"rangesByte":  true,
+		"maxByte":     true,
+		"minByte":     true,
+		"maxInt":      true,
+		"minInt":      true,
+		"maxStr":      true,
+		"minStr":      true,
+		"format":      true,
+		"enumType":    true,
+	}
+	expected.ShouldBeEqual(t, 0, "Variant metadata methods -- Owner", actual)
+}
+
+// ── Variant MinMaxAny ──
+
 func Test_Cov_Variant_MinMaxAny(t *testing.T) {
 	v := chmodclasstype.Owner
 	min, max := v.MinMaxAny()

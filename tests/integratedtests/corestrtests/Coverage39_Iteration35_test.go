@@ -993,6 +993,20 @@ func Test_Cov39_LC_GetNextNodes(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov39_LC_GetAllLinkedNodes(t *testing.T) {
+	safeTest(t, "Test_Cov39_LC_GetAllLinkedNodes", func() {
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
+		nodes := lc.GetAllLinkedNodes()
+		if len(nodes) != 1 {
+			t.Errorf("expected 1")
+		}
+	})
+}
+
+// ── ToCollection / ToStrings / ToStringsPtr / ToCollectionSimple ──
+
 func Test_Cov39_LC_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov39_LC_ToCollection", func() {
 		lc := corestr.New.LinkedCollection.Create()
@@ -1032,6 +1046,18 @@ func Test_Cov39_LC_ToStrings(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov39_LC_ToStringsPtr(t *testing.T) {
+	safeTest(t, "Test_Cov39_LC_ToStringsPtr", func() {
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
+		ptr := lc.ToStringsPtr()
+		if ptr == nil || len(*ptr) != 1 {
+			t.Error("unexpected")
+		}
+	})
+}
+
 func Test_Cov39_LC_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_Cov39_LC_ToCollectionsOfCollection", func() {
 		lc := corestr.New.LinkedCollection.Create()
@@ -1075,6 +1101,20 @@ func Test_Cov39_LC_ItemsOfItems_Empty(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov39_LC_ItemsOfItemsCollection(t *testing.T) {
+	safeTest(t, "Test_Cov39_LC_ItemsOfItemsCollection", func() {
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
+		items := lc.ItemsOfItemsCollection()
+		if len(items) != 1 {
+			t.Errorf("expected 1")
+		}
+	})
+}
+
+// ── SimpleSlice / List / ListPtr ──
+
 func Test_Cov39_LC_SimpleSlice(t *testing.T) {
 	safeTest(t, "Test_Cov39_LC_SimpleSlice", func() {
 		lc := corestr.New.LinkedCollection.Create()
@@ -1104,6 +1144,19 @@ func Test_Cov39_LC_List_Empty(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov39_LC_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov39_LC_ListPtr", func() {
+		lc := corestr.New.LinkedCollection.Create()
+		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
+		if lc.ListPtr() == nil {
+			t.Error("expected non-nil")
+		}
+	})
+}
+
+// ── String / StringLock / Join / Joins ──
+
 func Test_Cov39_LC_String(t *testing.T) {
 	safeTest(t, "Test_Cov39_LC_String", func() {
 		lc := corestr.New.LinkedCollection.Create()
@@ -1637,6 +1690,16 @@ func Test_Cov39_LCNode_List(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov39_LCNode_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov39_LCNode_ListPtr", func() {
+		n := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"a"})}
+		if n.ListPtr() == nil {
+			t.Error("expected non-nil")
+		}
+	})
+}
+
 func Test_Cov39_LCNode_Join(t *testing.T) {
 	safeTest(t, "Test_Cov39_LCNode_Join", func() {
 		n := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"a", "b"})}

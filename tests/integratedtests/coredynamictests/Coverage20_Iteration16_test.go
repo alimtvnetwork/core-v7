@@ -385,6 +385,24 @@ func Test_I16_KVC_Clone(t *testing.T) {
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Clone", actual)
 }
+
+func Test_I16_KVC_ClonePtr(t *testing.T) {
+	c := coredynamic.EmptyKeyValCollection()
+	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
+	cloned := c.ClonePtr()
+	actual := args.Map{"notNil": cloned != nil, "len": cloned.Length()}
+	expected := args.Map{"notNil": true, "len": 1}
+	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ClonePtr", actual)
+}
+
+func Test_I16_KVC_ClonePtr_Nil(t *testing.T) {
+	var c *coredynamic.KeyValCollection
+	actual := args.Map{"nil": c.ClonePtr() == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "KVC returns nil -- ClonePtr nil", actual)
+}
+
+func Test_I16_KVC_NonPtr(t *testing.T) {
 	c := coredynamic.EmptyKeyValCollection()
 	np := c.NonPtr()
 	actual := args.Map{"len": np.Length()}

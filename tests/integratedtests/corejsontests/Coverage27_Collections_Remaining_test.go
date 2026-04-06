@@ -131,6 +131,14 @@ func Test_C27_RC_AllErrors(t *testing.T) {
 	errs, has := rc.AllErrors()
 	if !has || len(errs) == 0 { t.Fatal("expected errors") }
 }
+
+func Test_C27_RC_GetErrorsStrings(t *testing.T) {
+	rc := corejson.NewResultsCollection.Empty()
+	rc.Add(corejson.NewResult.Create(nil, errors.New("e"), ""))
+	_ = rc.GetErrorsStrings()
+	_ = rc.GetErrorsStringsPtr()
+}
+
 func Test_C27_RC_GetErrorsAsSingleString(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	_ = rc.GetErrorsAsSingleString()
@@ -212,6 +220,14 @@ func Test_C27_RC_AddSerializers(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSerializers()
 }
+
+func Test_C27_RC_GetStrings(t *testing.T) {
+	rc := corejson.NewResultsCollection.Empty()
+	rc.Add(corejson.New("x"))
+	_ = rc.GetStrings()
+	_ = rc.GetStringsPtr()
+}
+
 func Test_C27_RC_GetStrings_Empty(t *testing.T) {
 	_ = corejson.NewResultsCollection.Empty().GetStrings()
 }
@@ -316,6 +332,19 @@ func Test_C27_RC_Clone(t *testing.T) {
 	rc.Add(corejson.New("x"))
 	_ = rc.Clone(true)
 }
+
+func Test_C27_RC_ClonePtr_Nil(t *testing.T) {
+	var rc *corejson.ResultsCollection
+	if rc.ClonePtr(true) != nil { t.Fatal("expected nil") }
+}
+
+func Test_C27_RC_ClonePtr_Valid(t *testing.T) {
+	rc := corejson.NewResultsCollection.Empty()
+	rc.Add(corejson.New("x"))
+	_ = rc.ClonePtr(true)
+}
+
+func Test_C27_RC_AddJsoners(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddJsoners(true)
 }
@@ -486,8 +515,25 @@ func Test_C27_RPC_AllErrors(t *testing.T) {
 	errs, has := rpc.AllErrors()
 	if !has || len(errs) == 0 { t.Fatal("expected errors") }
 }
+
+func Test_C27_RPC_GetErrorsStrings(t *testing.T) {
+	rpc := corejson.NewResultsPtrCollection.Empty()
+	rpc.Add(corejson.NewResult.ErrorPtr(errors.New("e")))
+	_ = rpc.GetErrorsStrings()
+	_ = rpc.GetErrorsStringsPtr()
+}
+
 func Test_C27_RPC_GetErrorsAsSingleString(t *testing.T) { _ = corejson.NewResultsPtrCollection.Empty().GetErrorsAsSingleString() }
 func Test_C27_RPC_GetErrorsAsSingle(t *testing.T) { _ = corejson.NewResultsPtrCollection.Empty().GetErrorsAsSingle() }
+
+func Test_C27_RPC_GetStrings(t *testing.T) {
+	rpc := corejson.NewResultsPtrCollection.Empty()
+	r := corejson.New("x")
+	rpc.Add(r.Ptr())
+	_ = rpc.GetStrings()
+	_ = rpc.GetStringsPtr()
+}
+
 func Test_C27_RPC_InjectIntoAt(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.Add(corejson.New(map[string]string{"a": "b"}).Ptr())

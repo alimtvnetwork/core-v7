@@ -954,6 +954,20 @@ func Test_I31_Collection_AddCapacity_Nil(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Collection returns nil -- AddCapacity nil", actual)
 	})
 }
+
+// ══════════════════════════════════════════════════════════════════════════════
+// Collection — List / ListStrings / Items
+// ══════════════════════════════════════════════════════════════════════════════
+
+func Test_I31_Collection_List(t *testing.T) {
+	safeTest(t, "Test_I31_Collection_List", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		actual := args.Map{"lLen": len(c.List()), "lsLen": len(c.ListStrings()), "lspLen": len(c.ListStringsPtr()), "iLen": len(c.Items()), "lpLen": len(c.ListPtr())}
+		expected := args.Map{"lLen": 1, "lsLen": 1, "lspLen": 1, "iLen": 1, "lpLen": 1}
+		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- List variants", actual)
+	})
+}
+
 func Test_I31_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_I31_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})

@@ -185,6 +185,24 @@ func Test_Cov11_ValidValue_Split(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- split", actual)
 	})
 }
+
+func Test_Cov11_ValidValue_Bytes(t *testing.T) {
+	safeTest(t, "Test_Cov11_ValidValue_Bytes", func() {
+		vv := corestr.NewValidValue("hello")
+		b1 := vv.ValueBytesOnce()
+		b2 := vv.ValueBytesOnce() // cached
+		b3 := vv.ValueBytesOncePtr()
+		actual := args.Map{
+			"len1":  len(b1),
+			"len2":  len(b2),
+			"len3":  len(b3),
+			"same":  len(b1) == len(b2),
+		}
+		expected := args.Map{"len1": 5, "len2": 5, "len3": 5, "same": true}
+		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- bytes", actual)
+	})
+}
+
 func Test_Cov11_ValidValue_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov11_ValidValue_Clone", func() {
 		vv := corestr.NewValidValue("hello")
@@ -1086,6 +1104,36 @@ func Test_Cov11_CollectionsOfCollection_Basic(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "CollectionsOfCollection returns correct value -- basic", actual)
 	})
 }
+
+// ═══════════════════════════════════════════
+// HashsetsCollection
+// ═══════════════════════════════════════════
+
+func Test_Cov11_HashsetsCollection_Basic(t *testing.T) {
+	safeTest(t, "Test_Cov11_HashsetsCollection_Basic", func() {
+		hs1 := corestr.New.Hashset.Strings([]string{"a", "b"})
+		hs2 := corestr.New.Hashset.Strings([]string{"c"})
+		hsc := corestr.New.HashsetsCollection.UsingHashsetsPointers(hs1, hs2)
+		actual := args.Map{
+			"len":        hsc.Length(),
+			"isEmpty":    hsc.IsEmpty(),
+			"hasItems":   hsc.HasItems(),
+			"listLen":    len(hsc.List()),
+			"listPtrNN":  hsc.ListPtr() != nil,
+			"strListLen": len(hsc.StringsList()),
+		}
+		expected := args.Map{
+			"len": 2, "isEmpty": false, "hasItems": true,
+			"listLen": 2, "listPtrNN": true, "strListLen": 3,
+		}
+		expected.ShouldBeEqual(t, 0, "HashsetsCollection returns correct value -- basic", actual)
+	})
+}
+
+// ═══════════════════════════════════════════
+// KeyValueCollection
+// ═══════════════════════════════════════════
+
 func Test_Cov11_KeyValueCollection_Basic(t *testing.T) {
 	safeTest(t, "Test_Cov11_KeyValueCollection_Basic", func() {
 		kvc := &corestr.KeyValueCollection{}

@@ -104,6 +104,25 @@ func Test_Cov6_DynamicStatus_Invalid(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns error -- Invalid", actual)
 }
+
+func Test_Cov6_DynamicStatus_Clone(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("msg")
+	cloned := ds.Clone()
+	clonedPtr := ds.ClonePtr()
+	var nilDS *coredynamic.DynamicStatus
+	actual := args.Map{
+		"clonedMsg":    cloned.Message,
+		"clonedPtrMsg": clonedPtr.Message,
+		"nilClone":     nilDS.ClonePtr() == nil,
+	}
+	expected := args.Map{
+		"clonedMsg": "msg", "clonedPtrMsg": "msg", "nilClone": true,
+	}
+	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- Clone", actual)
+}
+
+// ── Dynamic — ValueStatus ──
+
 func Test_Cov6_ValueStatus_Invalid(t *testing.T) {
 	vs := coredynamic.InvalidValueStatus("err")
 	vsNoMsg := coredynamic.InvalidValueStatusNoMessage()
@@ -217,4 +236,11 @@ func Test_Cov6_Dynamic_NonPtr_Ptr(t *testing.T) {
 	}
 	expected := args.Map{"nonPtrValid": true, "ptrNotNil": true}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- NonPtr/Ptr", actual)
+}
+
+func Test_Cov6_Dynamic_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.Dynamic
+	actual := args.Map{"isNil": d.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Dynamic returns nil -- ClonePtr nil", actual)
 }

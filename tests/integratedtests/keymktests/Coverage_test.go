@@ -53,6 +53,14 @@ func Test_Cov_Key_Nil(t *testing.T) {
 	expected := args.Map{"length": 0, "keyChains": true, "allRaw": true, "hasIn": false}
 	expected.ShouldBeEqual(t, 0, "Key returns nil -- nil", actual)
 }
+
+func Test_Cov_Key_ClonePtr_Nil(t *testing.T) {
+	var key *keymk.Key
+	actual := args.Map{"isNil": key.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Key returns nil -- ClonePtr nil", actual)
+}
+
 func Test_Cov_Key_AppendChainStrings(t *testing.T) {
 	key := keymk.NewKey.Default("root")
 	key.AppendChainStrings("a", "b")
@@ -104,6 +112,15 @@ func Test_Cov_Key_ConcatNewUsingKeys(t *testing.T) {
 	expected := args.Map{"length": 3, "originalLen": 1}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- ConcatNewUsingKeys", actual)
 }
+
+func Test_Cov_Key_ClonePtr(t *testing.T) {
+	key := keymk.NewKey.Default("root", "a")
+	cloned := key.ClonePtr("b")
+	actual := args.Map{"clonedLen": cloned.Length(), "originalLen": key.Length()}
+	expected := args.Map{"clonedLen": 2, "originalLen": 1}
+	expected.ShouldBeEqual(t, 0, "Key returns correct value -- ClonePtr", actual)
+}
+
 func Test_Cov_Key_Strings(t *testing.T) {
 	key := keymk.NewKey.Default("root", "a", "b")
 	actual := args.Map{"len": len(key.Strings())}
@@ -400,6 +417,14 @@ func Test_Cov_Option_Clone(t *testing.T) {
 	expected := args.Map{"joiner": opt.Joiner}
 	expected.ShouldBeEqual(t, 0, "Option returns correct value -- Clone", actual)
 }
+
+func Test_Cov_Option_ClonePtr_Nil(t *testing.T) {
+	var opt *keymk.Option
+	actual := args.Map{"isNil": opt.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Option returns nil -- ClonePtr nil", actual)
+}
+
 func Test_Cov_Option_IsAddEntryRegardlessOfEmptiness_Nil(t *testing.T) {
 	var opt *keymk.Option
 	actual := args.Map{"result": opt.IsAddEntryRegardlessOfEmptiness()}

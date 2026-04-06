@@ -31,6 +31,18 @@ func Test_I8_Collection_BasicOps(t *testing.T) {
 		if c.HasIndex(-1) { t.Fatal("no negative index") }
 	})
 }
+
+func Test_I8_Collection_ListMethods(t *testing.T) {
+	safeTest(t, "Test_I8_Collection_ListMethods", func() {
+		c := corestr.New.Collection.Strings([]string{"x", "y"})
+		_ = c.ListStringsPtr()
+		_ = c.ListStrings()
+		_ = c.List()
+		_ = c.ListPtr()
+		_ = c.Items()
+	})
+}
+
 func Test_I8_Collection_AddVariants(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_AddVariants", func() {
 		c := corestr.New.Collection.Empty()
@@ -215,6 +227,20 @@ func Test_I8_Collection_Unique(t *testing.T) {
 		_ = c.UniqueBoolMapLock()
 	})
 }
+
+func Test_I8_Collection_NonEmpty(t *testing.T) {
+	safeTest(t, "Test_I8_Collection_NonEmpty", func() {
+		c := corestr.New.Collection.Strings([]string{"a", "", "b", "  "})
+		ne := c.NonEmptyList()
+		_ = ne
+		_ = c.NonEmptyListPtr()
+		_ = c.NonEmptyItems()
+		_ = c.NonEmptyItemsPtr()
+		_ = c.NonEmptyItemsOrNonWhitespace()
+		_ = c.NonEmptyItemsOrNonWhitespacePtr()
+	})
+}
+
 func Test_I8_Collection_Has(t *testing.T) {
 	safeTest(t, "Test_I8_Collection_Has", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -628,6 +654,21 @@ func Test_I8_Hashmap_KeysValues(t *testing.T) {
 		_ = h.KeysValuePairsCollection()
 	})
 }
+
+func Test_I8_Hashmap_Manipulation(t *testing.T) {
+	safeTest(t, "Test_I8_Hashmap_Manipulation", func() {
+		h := corestr.New.Hashmap.Empty()
+		h.AddOrUpdate("a", "1")
+		h.AddOrUpdate("b", "2")
+		h.Remove("a")
+		h.RemoveWithLock("b")
+		h.AddOrUpdate("c", "C")
+		_ = h.ValuesToLower()
+		h.AddOrUpdate("d", "D")
+		_ = h.KeysToLower()
+	})
+}
+
 func Test_I8_Hashmap_String(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_String", func() {
 		h := corestr.New.Hashmap.Empty()
@@ -648,6 +689,18 @@ func Test_I8_Hashmap_IsEqual(t *testing.T) {
 		_ = h1.IsEqualPtrLock(h2)
 	})
 }
+
+func Test_I8_Hashmap_Clone(t *testing.T) {
+	safeTest(t, "Test_I8_Hashmap_Clone", func() {
+		h := corestr.New.Hashmap.Empty()
+		h.AddOrUpdate("a", "1")
+		c := h.Clone()
+		_ = c
+		cp := h.ClonePtr()
+		_ = cp
+	})
+}
+
 func Test_I8_Hashmap_Filter(t *testing.T) {
 	safeTest(t, "Test_I8_Hashmap_Filter", func() {
 		h := corestr.New.Hashmap.Empty()

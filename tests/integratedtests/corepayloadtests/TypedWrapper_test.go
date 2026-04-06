@@ -81,6 +81,40 @@ func Test_TypedPayloadWrapper_RoundTrip(t *testing.T) {
 		})
 	}
 }
+
+func Test_TypedPayloadWrapper_DeepClone(t *testing.T) {
+	for caseIndex, testCase := range typedWrapperCloneTestCases {
+		// Arrange
+		input := testCase.ArrangeInput.(args.Map)
+		original := createTypedProduct(input)
+
+		// Act
+		cloned, cloneErr := original.ClonePtr(true)
+		errcore.HandleErr(cloneErr)
+
+		mutatedProduct := testProduct{
+			SKU:   cloned.Data().SKU,
+			Title: "Modified",
+			Price: cloned.Data().Price,
+		}
+		setErr := cloned.SetTypedData(mutatedProduct)
+		errcore.HandleErr(setErr)
+
+		originalData := original.Data()
+		clonedData := cloned.Data()
+
+		// Assert
+		testCase.ShouldBeEqualMap(t, caseIndex, args.Map{
+			"originalName":  original.Name(),
+			"originalId":    original.Identifier(),
+			"originalSku":   originalData.SKU,
+			"originalTitle": originalData.Title,
+			"originalPrice": fmt.Sprintf("%.2f", originalData.Price),
+			"clonedTitle":   clonedData.Title,
+		})
+	}
+}
+
 func Test_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 	for caseIndex, testCase := range typedWrapperSetDataTestCases {
 		// Arrange

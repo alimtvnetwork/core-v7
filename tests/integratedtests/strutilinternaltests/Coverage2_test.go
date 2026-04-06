@@ -7,6 +7,35 @@ import (
 	"github.com/alimtvnetwork/core/internal/strutilinternal"
 )
 
+// ── NonWhitespaceSlicePtr ──
+
+func Test_Cov2_NonWhitespaceSlicePtr(t *testing.T) {
+	result := strutilinternal.NonWhitespaceSlicePtr([]string{"a", " ", "b"})
+	emptyResult := strutilinternal.NonWhitespaceSlicePtr([]string{})
+	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected.ShouldBeEqual(t, 0, "NonWhitespaceSlicePtr returns correct value -- with args", actual)
+}
+
+// ── NonWhitespaceTrimSlicePtr ──
+
+func Test_Cov2_NonWhitespaceTrimSlicePtr(t *testing.T) {
+	result := strutilinternal.NonWhitespaceTrimSlicePtr([]string{" a ", " "})
+	emptyResult := strutilinternal.NonWhitespaceTrimSlicePtr([]string{})
+	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult), "first": result[0]}
+	expected := args.Map{"len": 1, "emptyLen": 0, "first": "a"}
+	expected.ShouldBeEqual(t, 0, "NonWhitespaceTrimSlicePtr returns correct value -- with args", actual)
+}
+
+// ── NonWhitespaceJoinPtr ──
+
+func Test_Cov2_NonWhitespaceJoinPtr(t *testing.T) {
+	result := strutilinternal.NonWhitespaceJoinPtr([]string{"a", " ", "b"}, ",")
+	emptyResult := strutilinternal.NonWhitespaceJoinPtr([]string{}, ",")
+	actual := args.Map{"result": result, "empty": emptyResult}
+	expected := args.Map{"result": "a,b", "empty": ""}
+	expected.ShouldBeEqual(t, 0, "NonWhitespaceJoinPtr returns correct value -- with args", actual)
+}
 
 // ── SliceToMapConverter extended ──
 

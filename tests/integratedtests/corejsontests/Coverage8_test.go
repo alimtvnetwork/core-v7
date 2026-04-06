@@ -279,6 +279,14 @@ func Test_Cov8_Result_SafeValues_Nil(t *testing.T) {
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeValues returns nil -- nil", actual)
 }
+
+func Test_Cov8_Result_SafeValuesPtr_HasIssues(t *testing.T) {
+	r := &corejson.Result{Error: errors.New("e")}
+	actual := args.Map{"len": len(r.SafeValuesPtr())}
+	expected := args.Map{"len": 0}
+	expected.ShouldBeEqual(t, 0, "SafeValuesPtr returns non-empty -- issues", actual)
+}
+
 func Test_Cov8_Result_Raw_Nil(t *testing.T) {
 	var r *corejson.Result
 	_, err := r.Raw()
@@ -744,6 +752,23 @@ func Test_Cov8_Result_CloneIf_NoClone(t *testing.T) {
 	expected := args.Map{"len": 4}
 	expected.ShouldBeEqual(t, 0, "CloneIf returns empty -- no clone", actual)
 }
+
+func Test_Cov8_Result_ClonePtr_Nil(t *testing.T) {
+	var r *corejson.Result
+	actual := args.Map{"nil": r.ClonePtr(false) == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
+func Test_Cov8_Result_ClonePtr_DeepClone(t *testing.T) {
+	r := &corejson.Result{Bytes: []byte(`"hi"`), TypeName: "T"}
+	cloned := r.ClonePtr(true)
+	actual := args.Map{"notNil": cloned != nil, "len": cloned.Length()}
+	expected := args.Map{"notNil": true, "len": 4}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- deep", actual)
+}
+
+func Test_Cov8_Result_Clone_EmptyLength(t *testing.T) {
 	r := corejson.Result{TypeName: "T"}
 	cloned := r.Clone(false)
 	actual := args.Map{"len": cloned.Length(), "type": cloned.TypeName}
@@ -1380,6 +1405,14 @@ func Test_Cov8_NewResult_Empty(t *testing.T) {
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "NewResult.Empty returns empty -- with args", actual)
 }
+
+func Test_Cov8_NewResult_EmptyPtr(t *testing.T) {
+	r := corejson.NewResult.EmptyPtr()
+	actual := args.Map{"notNil": r != nil}
+	expected := args.Map{"notNil": true}
+	expected.ShouldBeEqual(t, 0, "NewResult.EmptyPtr returns empty -- with args", actual)
+}
+
 func Test_Cov8_NewResult_Any(t *testing.T) {
 	r := corejson.NewResult.Any("hello")
 	actual := args.Map{"noErr": !r.HasError()}

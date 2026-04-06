@@ -183,6 +183,19 @@ func Test_Cov5_ValidValue_String(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValidValue String -- valid and nil", actual)
 	})
 }
+
+func Test_Cov5_ValidValue_ValueBytesOnce(t *testing.T) {
+	safeTest(t, "Test_Cov5_ValidValue_ValueBytesOnce", func() {
+		v := corestr.NewValidValue("hi")
+		b1 := v.ValueBytesOnce()
+		b2 := v.ValueBytesOnce() // cached
+		b3 := v.ValueBytesOncePtr()
+		actual := args.Map{"len": len(b1), "cached": len(b2), "ptr": len(b3)}
+		expected := args.Map{"len": 2, "cached": 2, "ptr": 2}
+		expected.ShouldBeEqual(t, 0, "ValidValue ValueBytesOnce -- cached", actual)
+	})
+}
+
 func Test_Cov5_ValidValue_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov5_ValidValue_ClearDispose", func() {
 		v := corestr.NewValidValue("hello")

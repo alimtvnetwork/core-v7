@@ -80,6 +80,29 @@ func Test_MinMaxByte_Ranges(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "MinMaxByte_Ranges returns correct value -- with args", actual)
 }
+
+func Test_MinMaxByte_Clone(t *testing.T) {
+	// Arrange
+	mm := &corerange.MinMaxByte{Min: 1, Max: 10}
+
+	// Act
+	cloned := mm.Clone()
+	clonedPtr := mm.ClonePtr()
+
+	// Assert
+	actual := args.Map{
+		"clonedMin":    int(cloned.Min),
+		"clonedMax":    int(cloned.Max),
+		"clonedPtrNil": clonedPtr == nil,
+	}
+	expected := args.Map{
+		"clonedMin":    1,
+		"clonedMax":    10,
+		"clonedPtrNil": false,
+	}
+	expected.ShouldBeEqual(t, 0, "MinMaxByte_Clone returns correct value -- with args", actual)
+}
+
 func Test_MinMaxByte_CreateMinMaxInt(t *testing.T) {
 	// Arrange
 	mm := &corerange.MinMaxByte{Min: 3, Max: 7}
@@ -216,6 +239,33 @@ func Test_MinMaxInt_RangesExcept(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt_RangesExcept returns correct value -- with args", actual)
 }
+
+func Test_MinMaxInt_Clone(t *testing.T) {
+	// Arrange
+	mm := &corerange.MinMaxInt{Min: 1, Max: 10}
+
+	// Act
+	cloned := mm.Clone()
+	clonedPtr := mm.ClonePtr()
+	var nilMm *corerange.MinMaxInt
+	nilClone := nilMm.ClonePtr()
+
+	// Assert
+	actual := args.Map{
+		"clonedMin":    cloned.Min,
+		"clonedMax":    cloned.Max,
+		"clonedPtrNil": clonedPtr == nil,
+		"nilCloneNil":  nilClone == nil,
+	}
+	expected := args.Map{
+		"clonedMin":    1,
+		"clonedMax":    10,
+		"clonedPtrNil": false,
+		"nilCloneNil":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "MinMaxInt_Clone returns correct value -- with args", actual)
+}
+
 func Test_MinMaxInt_IsEqual(t *testing.T) {
 	// Arrange
 	mm1 := &corerange.MinMaxInt{Min: 1, Max: 10}

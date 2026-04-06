@@ -1120,6 +1120,20 @@ func Test_Seg5_HM_GetAllExceptCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "GetAllExceptCollection -- 1 remaining", actual)
 	})
 }
+
+func Test_Seg5_HM_GetAllExceptCollection_Nil(t *testing.T) {
+	safeTest(t, "Test_Seg5_HM_GetAllExceptCollection_Nil", func() {
+		h := corestr.New.Hashmap.Cap(2)
+		h.Set("a", "1")
+		result := h.GetAllExceptCollection(nil)
+		actual := args.Map{"len": len(result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "GetAllExceptCollection nil -- all values", actual)
+	})
+}
+
+// ── KeysToLower / ValuesToLower ─────────────────────────────────────────────
+
 func Test_Seg5_HM_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_Seg5_HM_KeysToLower", func() {
 		h := corestr.New.Hashmap.Cap(2)
@@ -1131,6 +1145,21 @@ func Test_Seg5_HM_KeysToLower(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "KeysToLower -- lowered", actual)
 	})
 }
+
+func Test_Seg5_HM_ValuesToLower(t *testing.T) {
+	safeTest(t, "Test_Seg5_HM_ValuesToLower", func() {
+		h := corestr.New.Hashmap.Cap(2)
+		h.Set("ABC", "1")
+		result := h.ValuesToLower()
+		_, found := result.Get("abc")
+		actual := args.Map{"found": found}
+		expected := args.Map{"found": true}
+		expected.ShouldBeEqual(t, 0, "ValuesToLower -- delegates to KeysToLower", actual)
+	})
+}
+
+// ── Diff ────────────────────────────────────────────────────────────────────
+
 func Test_Seg5_HM_Diff(t *testing.T) {
 	safeTest(t, "Test_Seg5_HM_Diff", func() {
 		h := corestr.New.Hashmap.Cap(2)
@@ -1366,6 +1395,28 @@ func Test_Seg5_HM_Clone_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Clone empty -- empty", actual)
 	})
 }
+
+func Test_Seg5_HM_ClonePtr(t *testing.T) {
+	safeTest(t, "Test_Seg5_HM_ClonePtr", func() {
+		h := corestr.New.Hashmap.Cap(2)
+		h.Set("a", "1")
+		c := h.ClonePtr()
+		actual := args.Map{"len": c.Length()}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ClonePtr -- same items", actual)
+	})
+}
+
+func Test_Seg5_HM_ClonePtr_Nil(t *testing.T) {
+	safeTest(t, "Test_Seg5_HM_ClonePtr_Nil", func() {
+		var h *corestr.Hashmap
+		actual := args.Map{"nil": h.ClonePtr() == nil}
+		expected := args.Map{"nil": true}
+		expected.ShouldBeEqual(t, 0, "ClonePtr nil -- returns nil", actual)
+	})
+}
+
+func Test_Seg5_HM_Clear(t *testing.T) {
 	safeTest(t, "Test_Seg5_HM_Clear", func() {
 		h := corestr.New.Hashmap.Cap(2)
 		h.Set("a", "1")

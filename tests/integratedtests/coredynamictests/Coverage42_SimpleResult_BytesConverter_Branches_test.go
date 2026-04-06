@@ -104,6 +104,20 @@ func Test_Cov42_SimpleResult_InvalidError_WithMessage(t *testing.T) {
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidError with message", actual)
 }
+
+func Test_Cov42_SimpleResult_InvalidError_Cached(t *testing.T) {
+	r := coredynamic.NewSimpleResult(nil, false, "bad")
+	e1 := r.InvalidError()
+	e2 := r.InvalidError()
+	actual := args.Map{"same": e1 == e2}
+	expected := args.Map{"same": true}
+	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidError cached", actual)
+}
+
+// =============================================================================
+// SimpleResult — Clone / ClonePtr
+// =============================================================================
+
 func Test_Cov42_SimpleResult_Clone_Nil(t *testing.T) {
 	var r *coredynamic.SimpleResult
 	c := r.Clone()
@@ -119,12 +133,50 @@ func Test_Cov42_SimpleResult_Clone_Valid(t *testing.T) {
 	expected := args.Map{"valid": true, "msg": "msg"}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone valid", actual)
 }
+
+func Test_Cov42_SimpleResult_ClonePtr_Nil(t *testing.T) {
+	var r *coredynamic.SimpleResult
+	actual := args.Map{"isNil": r.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr nil", actual)
+}
+
+func Test_Cov42_SimpleResult_ClonePtr_Valid(t *testing.T) {
+	r := coredynamic.NewSimpleResult("data", true, "")
+	c := r.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "valid": c.IsValid()}
+	expected := args.Map{"notNil": true, "valid": true}
+	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr valid", actual)
+}
+
+// =============================================================================
+// Dynamic — Clone / ClonePtr / NonPtr / Ptr / Constructors
+// =============================================================================
+
+func Test_Cov42_Dynamic_Clone(t *testing.T) {
 	d := coredynamic.NewDynamic("hello", true)
 	c := d.Clone()
 	actual := args.Map{"valid": c.IsValid()}
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "Dynamic Clone", actual)
 }
+
+func Test_Cov42_Dynamic_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.Dynamic
+	actual := args.Map{"isNil": d.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr nil", actual)
+}
+
+func Test_Cov42_Dynamic_ClonePtr_Valid(t *testing.T) {
+	d := coredynamic.NewDynamicPtr("hello", true)
+	c := d.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "valid": c.IsValid()}
+	expected := args.Map{"notNil": true, "valid": true}
+	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr valid", actual)
+}
+
+func Test_Cov42_Dynamic_NonPtr(t *testing.T) {
 	d := coredynamic.NewDynamic(42, true)
 	np := d.NonPtr()
 	actual := args.Map{"valid": np.IsValid()}
@@ -179,6 +231,27 @@ func Test_Cov42_DynamicStatus_Clone(t *testing.T) {
 	expected := args.Map{"msg": "msg"}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone", actual)
 }
+
+func Test_Cov42_DynamicStatus_ClonePtr_Nil(t *testing.T) {
+	var ds *coredynamic.DynamicStatus
+	actual := args.Map{"isNil": ds.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr nil", actual)
+}
+
+func Test_Cov42_DynamicStatus_ClonePtr_Valid(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("msg")
+	c := ds.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "msg": c.Message}
+	expected := args.Map{"notNil": true, "msg": "msg"}
+	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr valid", actual)
+}
+
+// =============================================================================
+// LeftRight — all branches
+// =============================================================================
+
+func Test_Cov42_LeftRight_IsEmpty_Nil(t *testing.T) {
 	var lr *coredynamic.LeftRight
 	actual := args.Map{"r": lr.IsEmpty()}
 	expected := args.Map{"r": true}

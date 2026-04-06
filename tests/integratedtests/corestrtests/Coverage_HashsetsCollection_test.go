@@ -66,6 +66,23 @@ func Test_CovHSC_03_IndexOf(t *testing.T) {
 		_ = r // may be nil due to bounds check logic
 	})
 }
+
+func Test_CovHSC_04_List_ListPtr_ListDirectPtr(t *testing.T) {
+	safeTest(t, "Test_CovHSC_04_List_ListPtr_ListDirectPtr", func() {
+		hsc := newHSC([]string{"a"})
+		if len(hsc.List()) != 1 {
+			t.Fatal("expected 1")
+		}
+		if len(*hsc.ListPtr()) != 1 {
+			t.Fatal("expected 1")
+		}
+		dp := hsc.ListDirectPtr()
+		if len(*dp) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_CovHSC_05_StringsList(t *testing.T) {
 	safeTest(t, "Test_CovHSC_05_StringsList", func() {
 		hsc := corestr.New.HashsetsCollection.Empty()

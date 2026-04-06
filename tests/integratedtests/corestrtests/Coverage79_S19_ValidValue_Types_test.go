@@ -102,6 +102,22 @@ func Test_C79_ValidValue_ValueBytesOnce(t *testing.T) {
 		}
 	})
 }
+
+func Test_C79_ValidValue_ValueBytesOncePtr(t *testing.T) {
+	safeTest(t, "Test_C79_ValidValue_ValueBytesOncePtr", func() {
+		// Arrange
+		vv := corestr.NewValidValue("xyz")
+
+		// Act
+		result := vv.ValueBytesOncePtr()
+
+		// Assert
+		if string(result) != "xyz" {
+			t.Error("bytes mismatch")
+		}
+	})
+}
+
 func Test_C79_ValidValue_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_C79_ValidValue_IsEmpty_IsWhitespace", func() {
 		// Arrange

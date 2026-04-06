@@ -440,6 +440,52 @@ func Test_Cov14_SafeRangeItems_EndBeyondLastIndex(t *testing.T) {
 	})
 }
 
+func Test_Cov14_SafeRangeItems_InvalidStartValue(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "b", "c"}
+
+	// Act
+	result := stringslice.SafeRangeItems(slice, -1, 2)
+
+	// Assert
+	convey.Convey("SafeRangeItems invalid start uses 0", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 2)
+	})
+}
+
+// --- SafeRangeItemsPtr ---
+
+func Test_Cov14_SafeRangeItemsPtr_Empty(t *testing.T) {
+	// Act
+	result := stringslice.SafeRangeItemsPtr([]string{}, 0, 2)
+
+	// Assert
+	convey.Convey("SafeRangeItemsPtr empty returns empty", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 0)
+	})
+}
+
+// --- SafeIndexesPtr ---
+
+func Test_Cov14_SafeIndexesPtr_Empty(t *testing.T) {
+	// Act
+	result := stringslice.SafeIndexesPtr([]string{}, 0)
+
+	// Assert
+	convey.Convey("SafeIndexesPtr empty returns default", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 1)
+	})
+}
+
+// --- IndexesDefault ---
+
+func Test_Cov14_IndexesDefault_Valid(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "b", "c"}
+
+	// Act
+	result := stringslice.IndexesDefault(slice, 0, 2)
+
 	// Assert
 	convey.Convey("IndexesDefault returns values at indexes", t, func() {
 		convey.So(len(result), convey.ShouldEqual, 2)
@@ -629,6 +675,51 @@ func Test_Cov14_TrimmedEachWordsIf_True(t *testing.T) {
 		convey.So(len(result), convey.ShouldEqual, 2)
 	})
 }
+
+func Test_Cov14_TrimmedEachWordsIf_False(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "", "b"}
+
+	// Act
+	result := stringslice.TrimmedEachWordsIf(false, slice)
+
+	// Assert
+	convey.Convey("TrimmedEachWordsIf false returns NonNullStrings", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 2)
+	})
+}
+
+// --- TrimmedEachWordsPtr ---
+
+func Test_Cov14_TrimmedEachWordsPtr(t *testing.T) {
+	// Arrange
+	slice := []string{" a ", " b "}
+
+	// Act
+	result := stringslice.TrimmedEachWordsPtr(slice)
+
+	// Assert
+	convey.Convey("TrimmedEachWordsPtr trims all", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 2)
+	})
+}
+
+func Test_Cov14_TrimmedEachWordsPtr_Empty(t *testing.T) {
+	// Act
+	result := stringslice.TrimmedEachWordsPtr([]string{})
+
+	// Assert
+	convey.Convey("TrimmedEachWordsPtr empty returns empty", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 0)
+	})
+}
+
+// --- TrimmedEachWords nil input ---
+
+func Test_Cov14_TrimmedEachWords_Nil(t *testing.T) {
+	// Act
+	result := stringslice.TrimmedEachWords(nil)
+
 	// Assert
 	convey.Convey("TrimmedEachWords nil returns nil", t, func() {
 		convey.So(result, convey.ShouldBeNil)
@@ -919,6 +1010,54 @@ func Test_Cov14_SafeIndexAtUsingLastIndex_OutOfBounds(t *testing.T) {
 		convey.So(result, convey.ShouldBeEmpty)
 	})
 }
+
+func Test_Cov14_SafeIndexAtUsingLastIndex_NegativeIndex(t *testing.T) {
+	// Arrange
+	slice := []string{"a"}
+
+	// Act
+	result := stringslice.SafeIndexAtUsingLastIndex(slice, 0, -1)
+
+	// Assert
+	convey.Convey("SafeIndexAtUsingLastIndex returns empty for negative", t, func() {
+		convey.So(result, convey.ShouldBeEmpty)
+	})
+}
+
+// --- SafeIndexAtUsingLastIndexPtr ---
+
+func Test_Cov14_SafeIndexAtUsingLastIndexPtr_Valid(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "b"}
+
+	// Act
+	result := stringslice.SafeIndexAtUsingLastIndexPtr(slice, 1, 0)
+
+	// Assert
+	convey.Convey("SafeIndexAtUsingLastIndexPtr returns value", t, func() {
+		convey.So(result, convey.ShouldEqual, "a")
+	})
+}
+
+func Test_Cov14_SafeIndexAtUsingLastIndexPtr_Zero(t *testing.T) {
+	// Arrange
+	slice := []string{"a"}
+
+	// Act
+	result := stringslice.SafeIndexAtUsingLastIndexPtr(slice, 0, 0)
+
+	// Assert
+	convey.Convey("SafeIndexAtUsingLastIndexPtr zero lastIndex returns empty", t, func() {
+		convey.So(result, convey.ShouldBeEmpty)
+	})
+}
+
+// --- SafeIndexAtWith ---
+
+func Test_Cov14_SafeIndexAtWith_Valid(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "b"}
+
 	// Act
 	result := stringslice.SafeIndexAtWith(slice, 0, "default")
 
@@ -927,6 +1066,40 @@ func Test_Cov14_SafeIndexAtUsingLastIndex_OutOfBounds(t *testing.T) {
 		convey.So(result, convey.ShouldEqual, "a")
 	})
 }
+
+func Test_Cov14_SafeIndexAtWith_Default(t *testing.T) {
+	// Arrange
+	slice := []string{"a"}
+
+	// Act
+	result := stringslice.SafeIndexAtWith(slice, 5, "default")
+
+	// Assert
+	convey.Convey("SafeIndexAtWith returns default", t, func() {
+		convey.So(result, convey.ShouldEqual, "default")
+	})
+}
+
+// --- SafeIndexAtWithPtr ---
+
+func Test_Cov14_SafeIndexAtWithPtr_Valid(t *testing.T) {
+	// Arrange
+	slice := []string{"a", "b"}
+
+	// Act
+	result := stringslice.SafeIndexAtWithPtr(slice, 0, "default")
+
+	// Assert
+	convey.Convey("SafeIndexAtWithPtr returns value", t, func() {
+		convey.So(result, convey.ShouldEqual, "a")
+	})
+}
+
+// --- PrependNew ---
+
+func Test_Cov14_PrependNew_Valid(t *testing.T) {
+	// Arrange
+	slice := []string{"b", "c"}
 
 	// Act
 	result := stringslice.PrependNew(slice, "a")
@@ -947,6 +1120,21 @@ func Test_Cov14_PrependNew_Empty(t *testing.T) {
 		convey.So(len(*result), convey.ShouldEqual, 0)
 	})
 }
+
+// --- NonEmptySlicePtr ---
+
+func Test_Cov14_NonEmptySlicePtr_Empty(t *testing.T) {
+	// Act
+	result := stringslice.NonEmptySlicePtr([]string{})
+
+	// Assert
+	convey.Convey("NonEmptySlicePtr empty returns empty", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 0)
+	})
+}
+
+// --- MakeDefault, MakeDefaultPtr, MakeLenPtr, MakePtr ---
+
 func Test_Cov14_MakeDefault(t *testing.T) {
 	// Act
 	result := stringslice.MakeDefault(10)
@@ -955,5 +1143,35 @@ func Test_Cov14_MakeDefault(t *testing.T) {
 	convey.Convey("MakeDefault creates empty with capacity", t, func() {
 		convey.So(len(result), convey.ShouldEqual, 0)
 		convey.So(cap(result), convey.ShouldBeGreaterThan, 0)
+	})
+}
+
+func Test_Cov14_MakeDefaultPtr(t *testing.T) {
+	// Act
+	result := stringslice.MakeDefaultPtr(10)
+
+	// Assert
+	convey.Convey("MakeDefaultPtr creates empty", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 0)
+	})
+}
+
+func Test_Cov14_MakeLenPtr(t *testing.T) {
+	// Act
+	result := stringslice.MakeLenPtr(5)
+
+	// Assert
+	convey.Convey("MakeLenPtr creates with length", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 5)
+	})
+}
+
+func Test_Cov14_MakePtr(t *testing.T) {
+	// Act
+	result := stringslice.MakePtr(2, 10)
+
+	// Assert
+	convey.Convey("MakePtr creates with length and capacity", t, func() {
+		convey.So(len(result), convey.ShouldEqual, 2)
 	})
 }

@@ -1133,6 +1133,16 @@ func Test_Cov61_Hashset_ListPtrSortedDsc(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ListPtrSortedDsc returns sorted desc", actual)
 	})
 }
+
+func Test_Cov61_Hashset_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Cov61_Hashset_ListPtr", func() {
+		hs := corestr.New.Hashset.StringsSpreadItems("a")
+		actual := args.Map{"len": len(hs.ListPtr())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ListPtr returns list", actual)
+	})
+}
+
 func Test_Cov61_Hashset_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov61_Hashset_Clear", func() {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")

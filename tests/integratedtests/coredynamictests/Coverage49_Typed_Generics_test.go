@@ -260,6 +260,23 @@ func Test_Cov49_TD_Clone(t *testing.T) {
 	expected := args.Map{"data": "hello"}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Clone", actual)
 }
+
+func Test_Cov49_TD_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.TypedDynamic[string]
+	actual := args.Map{"isNil": d.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "TypedDynamic ClonePtr nil", actual)
+}
+
+func Test_Cov49_TD_ClonePtr_Valid(t *testing.T) {
+	d := coredynamic.NewTypedDynamicPtr("x", true)
+	c := d.ClonePtr()
+	actual := args.Map{"notNil": c != nil}
+	expected := args.Map{"notNil": true}
+	expected.ShouldBeEqual(t, 0, "TypedDynamic ClonePtr valid", actual)
+}
+
+func Test_Cov49_TD_NonPtr(t *testing.T) {
 	d := coredynamic.NewTypedDynamic("x", true)
 	actual := args.Map{"data": d.NonPtr().Data()}
 	expected := args.Map{"data": "x"}
@@ -410,6 +427,23 @@ func Test_Cov49_TSR_Clone_Nil(t *testing.T) {
 	expected := args.Map{"valid": false}
 	expected.ShouldBeEqual(t, 0, "TSR Clone nil", actual)
 }
+
+func Test_Cov49_TSR_ClonePtr_Nil(t *testing.T) {
+	var r *coredynamic.TypedSimpleResult[string]
+	actual := args.Map{"isNil": r.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "TSR ClonePtr nil", actual)
+}
+
+func Test_Cov49_TSR_ClonePtr_Valid(t *testing.T) {
+	r := coredynamic.NewTypedSimpleResultValid("ok")
+	c := r.ClonePtr()
+	actual := args.Map{"notNil": c != nil, "data": c.Data()}
+	expected := args.Map{"notNil": true, "data": "ok"}
+	expected.ShouldBeEqual(t, 0, "TSR ClonePtr valid", actual)
+}
+
+func Test_Cov49_TSR_ToSimpleResult_Nil(t *testing.T) {
 	var r *coredynamic.TypedSimpleResult[string]
 	sr := r.ToSimpleResult()
 	actual := args.Map{"valid": sr.IsValid()}

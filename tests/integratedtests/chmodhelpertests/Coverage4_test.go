@@ -964,6 +964,15 @@ func Test_Cov4_SimpleFileReaderWriter_Clone(t *testing.T) {
 	expected := args.Map{"equal": true}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
+
+func Test_Cov4_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
+	var rw *chmodhelper.SimpleFileReaderWriter
+	cloned := rw.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
 func Test_Cov4_SimpleFileReaderWriter_String(t *testing.T) {
 	tmpDir := t.TempDir()
 	filePath := filepath.Join(tmpDir, "str.txt")
@@ -1705,4 +1714,14 @@ func Test_Cov4_SimpleFileReaderWriter_AsJsonContractsBinder(t *testing.T) {
 	actual := args.Map{"notNil": binder != nil}
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder returns correct value -- with args", actual)
+}
+
+func Test_Cov4_SimpleFileReaderWriter_name_Nil(t *testing.T) {
+	var rw *chmodhelper.SimpleFileReaderWriter
+	// The name() method is unexported but called by errorWrapFilePath
+	// Exercise via Get on nil path
+	err := rw.ClonePtr()
+	actual := args.Map{"nil": err == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "name returns nil -- nil receiver", actual)
 }

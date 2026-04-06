@@ -31,6 +31,22 @@ func Test_C18_Dynamic_Constructors(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- constructors", actual)
 }
+
+func Test_C18_Dynamic_Clone(t *testing.T) {
+	d := coredynamic.NewDynamic("hello", true)
+	clone := d.Clone()
+	cloneP := d.ClonePtr()
+	_ = d.NonPtr()
+	_ = d.Ptr()
+	if !clone.IsValid() { t.Fatal("clone invalid") }
+	if !cloneP.IsValid() { t.Fatal("cloneP invalid") }
+
+	var nilD *coredynamic.Dynamic
+	if nilD.ClonePtr() != nil { t.Fatal("expected nil") }
+}
+
+// ── DynamicGetters ──
+
 func Test_C18_Dynamic_DataValue(t *testing.T) {
 	d := coredynamic.NewDynamic("hello", true)
 	actual := args.Map{
@@ -386,6 +402,24 @@ func Test_C18_Dynamic_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 	bad := corejson.NewResult.UsingString(`invalid`)
 	d.ParseInjectUsingJsonMust(bad)
 }
+
+// ── DynamicStatus ──
+
+func Test_C18_DynamicStatus(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("err")
+	dsNoMsg := coredynamic.InvalidDynamicStatusNoMessage()
+	clone := ds.Clone()
+	cloneP := ds.ClonePtr()
+	if clone.IsValid() { t.Fatal("expected invalid") }
+	if cloneP == nil { t.Fatal("expected non-nil") }
+	if dsNoMsg.IsValid() { t.Fatal("expected invalid") }
+
+	var nilDS *coredynamic.DynamicStatus
+	if nilDS.ClonePtr() != nil { t.Fatal("expected nil") }
+}
+
+// ── SimpleRequest ──
+
 func Test_C18_SimpleRequest(t *testing.T) {
 	sr := coredynamic.NewSimpleRequest("data", true, "msg")
 	srValid := coredynamic.NewSimpleRequestValid("data")
@@ -470,6 +504,20 @@ func Test_C18_SimpleResult_InvalidError(t *testing.T) {
 	// cached
 	if sr2.InvalidError() == nil { t.Fatal("expected cached") }
 }
+
+func Test_C18_SimpleResult_Clone(t *testing.T) {
+	sr := coredynamic.NewSimpleResultValid("data")
+	clone := sr.Clone()
+	cloneP := sr.ClonePtr()
+	if !clone.IsValid() { t.Fatal("clone invalid") }
+	if cloneP == nil { t.Fatal("expected non-nil") }
+
+	var nilSR *coredynamic.SimpleResult
+	if nilSR.ClonePtr() != nil { t.Fatal("expected nil") }
+}
+
+// ── TypedDynamic ──
+
 func Test_C18_TypedDynamic(t *testing.T) {
 	td := coredynamic.NewTypedDynamic[string]("hello", true)
 	tdValid := coredynamic.NewTypedDynamicValid[string]("world")
@@ -570,6 +618,21 @@ func Test_C18_TypedDynamic_Value_Methods(t *testing.T) {
 	if strTD.ValueInt64() != -1 { t.Fatal("expected -1") }
 	if intTD.ValueString() == "" { t.Fatal("expected non-empty via sprintf") }
 }
+
+func Test_C18_TypedDynamic_Clone(t *testing.T) {
+	td := coredynamic.NewTypedDynamic[string]("hello", true)
+	clone := td.Clone()
+	cloneP := td.ClonePtr()
+	_ = td.NonPtr()
+	_ = td.Ptr()
+	_ = td.ToDynamic()
+	if clone.Data() != "hello" { t.Fatal("clone mismatch") }
+	if cloneP == nil { t.Fatal("expected non-nil") }
+
+	var nilTD *coredynamic.TypedDynamic[string]
+	if nilTD.ClonePtr() != nil { t.Fatal("expected nil") }
+}
+
 func Test_C18_TypedDynamic_Bytes_AsBytes(t *testing.T) {
 	bytesTD := coredynamic.NewTypedDynamic[[]byte]([]byte{1, 2}, true)
 	b, ok := bytesTD.Bytes()
@@ -686,6 +749,15 @@ func Test_C18_KeyValCollection_Full(t *testing.T) {
 		_ = kvc.JsonStringMust()
 	}()
 }
+
+func Test_C18_KeyValCollection_NilItems(t *testing.T) {
+	var nilKVC *coredynamic.KeyValCollection
+	if nilKVC.Length() != 0 { t.Fatal("expected 0") }
+	if nilKVC.Items() != nil { t.Fatal("expected nil") }
+	if nilKVC.String() != "" { t.Fatal("expected empty") }
+	if nilKVC.ClonePtr() != nil { t.Fatal("expected nil") }
+}
+
 func Test_C18_KeyValCollection_Empty(t *testing.T) {
 	kvc := coredynamic.EmptyKeyValCollection()
 	if !kvc.IsEmpty() { t.Fatal("expected empty") }
@@ -697,6 +769,17 @@ func Test_C18_KeyValCollection_Empty(t *testing.T) {
 	_ = kvc.AllKeysSorted()
 	_ = kvc.AllValues()
 }
+
+func Test_C18_KeyValCollection_Clone(t *testing.T) {
+	kvc := coredynamic.NewKeyValCollection(1)
+	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
+	clone := kvc.Clone()
+	cloneP := kvc.ClonePtr()
+	_ = clone.NonPtr()
+	_ = kvc.Ptr()
+	if cloneP.Length() != 1 { t.Fatal("expected 1") }
+}
+
 func Test_C18_KeyValCollection_Paging(t *testing.T) {
 	kvc := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 10; i++ {

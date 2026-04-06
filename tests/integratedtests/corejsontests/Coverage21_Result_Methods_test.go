@@ -674,6 +674,14 @@ func Test_C21_Dispose_Nil(t *testing.T) {
 	var r *corejson.Result
 	r.Dispose() // should not panic
 }
+
+func Test_C21_Dispose_Valid(t *testing.T) {
+	r := corejson.New("x")
+	r.Dispose()
+}
+
+// ── Result.CloneIf / ClonePtr / Clone ──
+
 func Test_C21_CloneIf_NoClone(t *testing.T) {
 	r := corejson.New("x")
 	c := r.CloneIf(false, false)
@@ -685,6 +693,23 @@ func Test_C21_CloneIf_Clone(t *testing.T) {
 	c := r.CloneIf(true, false)
 	_ = c
 }
+
+func Test_C21_ClonePtr_Nil(t *testing.T) {
+	var r *corejson.Result
+	if r.ClonePtr(false) != nil {
+		t.Fatal("expected nil")
+	}
+}
+
+func Test_C21_ClonePtr_Valid(t *testing.T) {
+	r := corejson.New("x")
+	p := r.ClonePtr(true)
+	if p == nil {
+		t.Fatal("expected non-nil")
+	}
+}
+
+func Test_C21_Clone_Empty(t *testing.T) {
 	r := corejson.Result{}
 	c := r.Clone(true)
 	_ = c

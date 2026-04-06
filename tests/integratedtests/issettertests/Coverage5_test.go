@@ -275,6 +275,24 @@ func Test_Cov5_Value_MinMaxAny(t *testing.T) {
 	expected := args.Map{"minNotNil": true, "maxNotNil": true}
 	expected.ShouldBeEqual(t, 0, "Value MinMaxAny -- not nil", actual)
 }
+
+func Test_Cov5_Value_MinMaxStrings(t *testing.T) {
+	actual := args.Map{
+		"minStr":  issetter.True.MinValueString(),
+		"maxStr":  issetter.True.MaxValueString(),
+		"maxInt":  issetter.True.MaxInt(),
+		"minInt":  issetter.True.MinInt(),
+		"maxByte": int(issetter.True.MaxByte()),
+		"minByte": int(issetter.True.MinByte()),
+	}
+	expected := args.Map{
+		"minStr": "0", "maxStr": "5",
+		"maxInt": 5, "minInt": 0,
+		"maxByte": 5, "minByte": 0,
+	}
+	expected.ShouldBeEqual(t, 0, "Value min/max strings and ints -- True", actual)
+}
+
 func Test_Cov5_Value_RangesDynamicMap(t *testing.T) {
 	rdm := issetter.True.RangesDynamicMap()
 	actual := args.Map{"len": len(rdm)}
@@ -508,6 +526,18 @@ func Test_Cov5_GetSetUnset(t *testing.T) {
 	expected := args.Map{"trueIsSet": true, "falseIsUnset": true}
 	expected.ShouldBeEqual(t, 0, "GetSetUnset -- true/false", actual)
 }
+
+func Test_Cov5_Max_Min(t *testing.T) {
+	actual := args.Map{
+		"max":     issetter.Max() == issetter.Wildcard,
+		"min":     issetter.Min() == issetter.Uninitialized,
+		"maxByte": int(issetter.MaxByte()),
+		"minByte": int(issetter.MinByte()),
+	}
+	expected := args.Map{"max": true, "min": true, "maxByte": 4, "minByte": 0}
+	expected.ShouldBeEqual(t, 0, "Max/Min -- expected", actual)
+}
+
 func Test_Cov5_RangeNamesCsv(t *testing.T) {
 	csv := issetter.RangeNamesCsv()
 	actual := args.Map{"notEmpty": csv != ""}

@@ -252,6 +252,24 @@ func Test_Cov_User_Clone(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
+
+func Test_Cov_User_ClonePtr(t *testing.T) {
+	u := &corepayload.User{Name: "test"}
+	c := u.ClonePtr()
+	var nilUser *corepayload.User
+	nilClone := nilUser.ClonePtr()
+
+	actual := args.Map{
+		"name":     c.Name,
+		"nilClone": nilClone == nil,
+	}
+	expected := args.Map{
+		"name":     "test",
+		"nilClone": true,
+	}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
+}
+
 func Test_Cov_User_Ptr(t *testing.T) {
 	u := corepayload.User{Name: "test"}
 	p := u.Ptr()

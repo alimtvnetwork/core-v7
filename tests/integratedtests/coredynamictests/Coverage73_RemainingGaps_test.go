@@ -171,6 +171,32 @@ func Test_Cov73_MapAnyItems_ToMapResults_Valid(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "ToMapResults returns correct -- valid items", actual)
 }
+
+// ── MapAnyItems: CloneUsingJson ──
+
+func Test_Cov73_MapAnyItems_CloneUsingJson(t *testing.T) {
+	// Arrange
+	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{
+		"key": "value",
+	})
+
+	// Act
+	cloned, err := m.ClonePtr()
+
+	// Assert
+	actual := args.Map{
+		"noErr":  err == nil,
+		"notNil": cloned != nil,
+	}
+	expected := args.Map{
+		"noErr":  true,
+		"notNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "CloneUsingJson returns correct -- valid items", actual)
+}
+
+// ── AnyCollection: JsonString ──
+
 func Test_Cov73_AnyCollection_JsonString(t *testing.T) {
 	// Arrange
 	ac := coredynamic.NewAnyCollection(3)

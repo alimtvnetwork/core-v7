@@ -111,6 +111,68 @@ func Test_Cov5_Format_Panics(t *testing.T) {
 	expected := args.Map{"panicked": true}
 	expected.ShouldBeEqual(t, 0, "Format panics -- by design", actual)
 }
+
+// ── BaseIsCaseSensitive / BaseIsIgnoreCase ──
+
+func Test_Cov5_BaseIsCaseSensitive(t *testing.T) {
+	b := corecomparator.BaseIsCaseSensitive{IsCaseSensitive: true}
+	clone := b.Clone()
+	clonePtr := b.ClonePtr()
+	toIgnore := b.BaseIsIgnoreCase()
+	actual := args.Map{
+		"isIgnoreCase":   b.IsIgnoreCase(),
+		"cloneMatch":     clone.IsCaseSensitive,
+		"clonePtrNotNil": clonePtr != nil,
+		"toIgnoreCase":   toIgnore.IsIgnoreCase,
+	}
+	expected := args.Map{
+		"isIgnoreCase":   false,
+		"cloneMatch":     true,
+		"clonePtrNotNil": true,
+		"toIgnoreCase":   false,
+	}
+	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive -- sensitive=true", actual)
+}
+
+func Test_Cov5_BaseIsCaseSensitive_NilClonePtr(t *testing.T) {
+	var b *corecomparator.BaseIsCaseSensitive
+	actual := args.Map{"result": b.ClonePtr() == nil}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsCaseSensitive ClonePtr nil -- nil", actual)
+}
+
+func Test_Cov5_BaseIsIgnoreCase(t *testing.T) {
+	b := corecomparator.BaseIsIgnoreCase{IsIgnoreCase: true}
+	clone := b.Clone()
+	clonePtr := b.ClonePtr()
+	toSensitive := b.BaseIsCaseSensitive()
+	actual := args.Map{
+		"isCaseSensitive":  b.IsCaseSensitive(),
+		"cloneMatch":       clone.IsIgnoreCase,
+		"clonePtrNotNil":   clonePtr != nil,
+		"toSensitiveCase":  toSensitive.IsCaseSensitive,
+	}
+	expected := args.Map{
+		"isCaseSensitive":  false,
+		"cloneMatch":       true,
+		"clonePtrNotNil":   true,
+		"toSensitiveCase":  false,
+	}
+	expected.ShouldBeEqual(t, 0, "BaseIsIgnoreCase -- ignoreCase=true", actual)
+}
+
+func Test_Cov5_BaseIsIgnoreCase_NilClonePtr(t *testing.T) {
+	var b *corecomparator.BaseIsIgnoreCase
+	actual := args.Map{"result": b.ClonePtr() == nil}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "BaseIsIgnoreCase ClonePtr nil -- nil", actual)
+}
+
+// ── RangeNamesCsv ──
+
+func Test_Cov5_RangeNamesCsv(t *testing.T) {
+	csv := corecomparator.RangeNamesCsv()
+	actual := args.Map{"notEmpty": csv != ""}
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangeNamesCsv -- not empty", actual)
 }

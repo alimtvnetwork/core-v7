@@ -237,6 +237,22 @@ func Test_CovJson_S1_17_Result_String(t *testing.T) {
 		t.Fatal("expected non-empty")
 	}
 }
+
+func Test_CovJson_S1_18_Result_SafeBytes_SafeValues_SafeNonIssueBytes_Values(t *testing.T) {
+	r := newTestResult()
+	sb := r.SafeBytes()
+	if len(sb) == 0 {
+		t.Fatal("expected non-empty")
+	}
+	sv := r.SafeValues()
+	if len(sv) == 0 {
+		t.Fatal("expected non-empty")
+	}
+	_ = r.SafeNonIssueBytes()
+	_ = r.Values()
+	_ = r.SafeValuesPtr()
+}
+
 func Test_CovJson_S1_19_Result_Raw_RawMust(t *testing.T) {
 	r := newTestResult()
 	b, err := r.Raw()
@@ -553,6 +569,42 @@ func Test_CovJson_S1_38_Result_Dispose(t *testing.T) {
 	var nilR *corejson.Result
 	nilR.Dispose()
 }
+
+func Test_CovJson_S1_39_Result_CloneIf_Clone_ClonePtr(t *testing.T) {
+	r := corejson.New(map[string]int{"a": 1})
+	c := r.CloneIf(true, true)
+	if c.IsEmpty() {
+		t.Fatal("expected non-empty")
+	}
+	c2 := r.CloneIf(false, false)
+	if c2.IsEmpty() {
+		t.Fatal("expected non-empty")
+	}
+	c3 := r.Clone(true)
+	if c3.IsEmpty() {
+		t.Fatal("expected non-empty")
+	}
+	c4 := r.Clone(false)
+	if c4.IsEmpty() {
+		t.Fatal("expected non-empty")
+	}
+	cp := r.ToPtr().ClonePtr(true)
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	// nil clone
+	var nilR *corejson.Result
+	if nilR.ClonePtr(true) != nil {
+		t.Fatal("expected nil")
+	}
+	// empty result clone
+	emptyR := corejson.Result{}
+	ec := emptyR.Clone(true)
+	if ec.Error != nil {
+		t.Fatal("expected no error")
+	}
+}
+
 func Test_CovJson_S1_40_Result_AsJsonContractsBinder_AsJsoner_AsJsonParseSelfInjector(t *testing.T) {
 	r := corejson.New(map[string]int{"a": 1})
 	_ = r.AsJsonContractsBinder()

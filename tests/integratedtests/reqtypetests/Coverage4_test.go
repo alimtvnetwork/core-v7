@@ -237,6 +237,16 @@ func Test_Cov4_GetInBetweenStatus(t *testing.T) {
 	s2 := reqtype.Append.GetInBetweenStatus(reqtype.Create, reqtype.Delete)
 	if s2.IsSuccess { t.Fatal("expected failure") }
 }
+
+func Test_Cov4_MaxByte(t *testing.T) {
+	if reqtype.Create.MaxByte() == 0 { t.Fatal() }
+}
+
+func Test_Cov4_MinByte(t *testing.T) {
+	_ = reqtype.Create.MinByte()
+}
+
+func Test_Cov4_ValueByte(t *testing.T) {
 	if reqtype.Create.ValueByte() == 0 { t.Fatal() }
 }
 

@@ -145,6 +145,22 @@ func Test_Seg3_Collection_FilterPtrLock_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "FilterPtrLock empty -- returns empty", actual)
 	})
 }
+
+func Test_Seg3_Collection_FilterPtrLock_Break(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_FilterPtrLock_Break", func() {
+		c := corestr.New.Collection.Cap(10)
+		c.Adds("a", "b", "c")
+		result := c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) {
+			return s, true, i == 0
+		})
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "FilterPtrLock break -- stops after first", actual)
+	})
+}
+
+// ── NonEmptyList / NonEmptyListPtr ──────────────────────────────────────────
+
 func Test_Seg3_Collection_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_NonEmptyList", func() {
 		c := corestr.New.Collection.Cap(10)
@@ -163,6 +179,20 @@ func Test_Seg3_Collection_NonEmptyList_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyList empty -- returns empty", actual)
 	})
 }
+
+func Test_Seg3_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_NonEmptyListPtr", func() {
+		c := corestr.New.Collection.Cap(10)
+		c.Adds("a", "", "b")
+		result := c.NonEmptyListPtr()
+		actual := args.Map{"len": len(*result)}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "NonEmptyListPtr -- returns ptr to non-empty", actual)
+	})
+}
+
+// ── NonEmptyItems / NonEmptyItemsOrNonWhitespace ────────────────────────────
+
 func Test_Seg3_Collection_NonEmptyItems(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_NonEmptyItems", func() {
 		c := corestr.New.Collection.Cap(10)
@@ -172,6 +202,17 @@ func Test_Seg3_Collection_NonEmptyItems(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyItems -- skips empty", actual)
 	})
 }
+
+func Test_Seg3_Collection_NonEmptyItemsPtr(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_NonEmptyItemsPtr", func() {
+		c := corestr.New.Collection.Cap(10)
+		c.Adds("a", "", "b")
+		actual := args.Map{"len": len(c.NonEmptyItemsPtr())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "NonEmptyItemsPtr -- skips empty", actual)
+	})
+}
+
 func Test_Seg3_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_NonEmptyItemsOrNonWhitespace", func() {
 		c := corestr.New.Collection.Cap(10)
@@ -181,6 +222,19 @@ func Test_Seg3_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyItemsOrNonWhitespace -- skips ws", actual)
 	})
 }
+
+func Test_Seg3_Collection_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_NonEmptyItemsOrNonWhitespacePtr", func() {
+		c := corestr.New.Collection.Cap(10)
+		c.Adds("a", "   ", "b")
+		actual := args.Map{"len": len(c.NonEmptyItemsOrNonWhitespacePtr())}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "NonEmptyItemsOrNonWhitespacePtr -- skips ws", actual)
+	})
+}
+
+// ── Hashset ─────────────────────────────────────────────────────────────────
+
 func Test_Seg3_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_HashsetAsIs", func() {
 		c := corestr.New.Collection.Cap(10)
@@ -202,6 +256,20 @@ func Test_Seg3_Collection_HashsetWithDoubleLength(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "HashsetWithDoubleLength -- 2 items", actual)
 	})
 }
+
+func Test_Seg3_Collection_HashsetLock(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_HashsetLock", func() {
+		c := corestr.New.Collection.Cap(10)
+		c.Adds("x", "y")
+		hs := c.HashsetLock()
+		actual := args.Map{"len": hs.Length()}
+		expected := args.Map{"len": 2}
+		expected.ShouldBeEqual(t, 0, "HashsetLock -- 2 items", actual)
+	})
+}
+
+// ── Items / ListPtr / ListCopyPtrLock ───────────────────────────────────────
+
 func Test_Seg3_Collection_Items(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_Items", func() {
 		c := corestr.New.Collection.Cap(5)
@@ -211,6 +279,17 @@ func Test_Seg3_Collection_Items(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Items -- returns items", actual)
 	})
 }
+
+func Test_Seg3_Collection_ListPtr(t *testing.T) {
+	safeTest(t, "Test_Seg3_Collection_ListPtr", func() {
+		c := corestr.New.Collection.Cap(5)
+		c.Add("a")
+		actual := args.Map{"len": len(c.ListPtr())}
+		expected := args.Map{"len": 1}
+		expected.ShouldBeEqual(t, 0, "ListPtr -- returns items", actual)
+	})
+}
+
 func Test_Seg3_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_Seg3_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Cap(5)

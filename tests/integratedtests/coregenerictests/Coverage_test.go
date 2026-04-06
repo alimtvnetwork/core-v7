@@ -459,6 +459,15 @@ func Test_LinkedListNode_Clone(t *testing.T) {
 		t.Error("clone should copy element, no next")
 	}
 }
+
+func Test_LinkedListNode_ListPtr(t *testing.T) {
+	ll := coregeneric.LinkedListFrom([]int{1, 2, 3})
+	list := ll.Head().ListPtr()
+	if len(*list) != 3 {
+		t.Error("should collect all elements")
+	}
+}
+
 func Test_LinkedListNode_String(t *testing.T) {
 	node := &coregeneric.LinkedListNode[string]{Element: "hello"}
 	if node.String() != "hello" {
@@ -794,6 +803,15 @@ func Test_Hashset_RemoveLock(t *testing.T) {
 		t.Error("should return true")
 	}
 }
+
+func Test_Hashset_ListPtr(t *testing.T) {
+	hs := coregeneric.HashsetFrom([]string{"a"})
+	p := hs.ListPtr()
+	if len(*p) != 1 {
+		t.Error("should return 1 item")
+	}
+}
+
 func Test_Hashset_Resize(t *testing.T) {
 	hs := coregeneric.HashsetFrom([]string{"a"})
 	hs.Resize(100)

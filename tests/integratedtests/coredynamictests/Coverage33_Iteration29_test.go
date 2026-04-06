@@ -1309,6 +1309,28 @@ func Test_C33_144_SimpleResult_Clone_Nil(t *testing.T) {
 		t.Error("expected nil result")
 	}
 }
+
+func Test_C33_145_SimpleResult_ClonePtr(t *testing.T) {
+	r := coredynamic.NewSimpleResultValid("data")
+	cloned := r.ClonePtr()
+	if cloned == nil || cloned.Result != "data" {
+		t.Error("expected cloned ptr")
+	}
+}
+
+func Test_C33_146_SimpleResult_ClonePtr_Nil(t *testing.T) {
+	var r *coredynamic.SimpleResult
+	cloned := r.ClonePtr()
+	if cloned != nil {
+		t.Error("expected nil")
+	}
+}
+
+// ═══════════════════════════════════════════════════════════════════════
+// DynamicCollection — extended methods
+// ═══════════════════════════════════════════════════════════════════════
+
+func Test_C33_147_DynamicCollection_Skip(t *testing.T) {
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.Add(coredynamic.NewDynamicValid(1))
 	dc.Add(coredynamic.NewDynamicValid(2))

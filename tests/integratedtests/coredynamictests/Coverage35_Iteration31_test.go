@@ -595,6 +595,24 @@ func Test_C35_74_KeyValCollection_Clone(t *testing.T) {
 		t.Error("expected 1")
 	}
 }
+
+func Test_C35_75_KeyValCollection_ClonePtr(t *testing.T) {
+	kvc := coredynamic.NewKeyValCollection(4)
+	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
+	cp := kvc.ClonePtr()
+	if cp == nil || cp.Length() != 1 {
+		t.Error("expected cloned")
+	}
+}
+
+func Test_C35_76_KeyValCollection_ClonePtr_Nil(t *testing.T) {
+	var kvc *coredynamic.KeyValCollection
+	if kvc.ClonePtr() != nil {
+		t.Error("expected nil")
+	}
+}
+
+func Test_C35_77_KeyValCollection_Paging(t *testing.T) {
 	kvc := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 10; i++ {
 		kvc.Add(coredynamic.KeyVal{Key: "k", Value: i})
@@ -1295,6 +1313,23 @@ func Test_C35_158_DynamicStatus_Clone(t *testing.T) {
 		t.Error("expected msg")
 	}
 }
+
+func Test_C35_159_DynamicStatus_ClonePtr(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("msg")
+	cp := ds.ClonePtr()
+	if cp == nil || cp.Message != "msg" {
+		t.Error("expected cloned")
+	}
+}
+
+func Test_C35_160_DynamicStatus_ClonePtr_Nil(t *testing.T) {
+	var ds *coredynamic.DynamicStatus
+	if ds.ClonePtr() != nil {
+		t.Error("expected nil")
+	}
+}
+
+func Test_C35_161_ValueStatus_Invalid(t *testing.T) {
 	vs := coredynamic.InvalidValueStatus("msg")
 	if vs.IsValid {
 		t.Error("expected invalid")

@@ -547,6 +547,20 @@ func Test_Cov10_Collection_String_Cached(t *testing.T) {
 		convey.So(result, convey.ShouldNotBeEmpty)
 	})
 }
+
+func Test_Cov10_Collection_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var col *namevalue.NameValuesCollection
+
+	// Act
+	result := col.ClonePtr()
+
+	// Assert
+	convey.Convey("ClonePtr nil returns nil", t, func() {
+		convey.So(result, convey.ShouldBeNil)
+	})
+}
+
 func Test_Cov10_Collection_HasIndex(t *testing.T) {
 	// Arrange
 	col := namevalue.NewCollection()

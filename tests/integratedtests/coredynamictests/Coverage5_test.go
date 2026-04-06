@@ -43,6 +43,26 @@ func Test_Cov5_InvalidDynamicPtr(t *testing.T) {
 	expected := args.Map{"isInvalid": true}
 	expected.ShouldBeEqual(t, 0, "InvalidDynamicPtr returns error -- returns invalid", actual)
 }
+
+// ── Dynamic Clone ──
+
+func Test_Cov5_Dynamic_Clone(t *testing.T) {
+	d := coredynamic.NewDynamicValid("hello")
+	c := d.Clone()
+	cp := d.ClonePtr()
+	actual := args.Map{"val": c.Data(), "ptrVal": cp.Data()}
+	expected := args.Map{"val": "hello", "ptrVal": "hello"}
+	expected.ShouldBeEqual(t, 0, "Dynamic Clone returns same data -- string", actual)
+}
+
+func Test_Cov5_Dynamic_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.Dynamic
+	actual := args.Map{"isNil": d.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr nil -- returns nil", actual)
+}
+
+func Test_Cov5_Dynamic_NonPtr_Ptr(t *testing.T) {
 	d := coredynamic.NewDynamicValid("hello")
 	actual := args.Map{"nonPtrOk": d.NonPtr().IsValid(), "ptrOk": d.Ptr().IsValid()}
 	expected := args.Map{"nonPtrOk": true, "ptrOk": true}

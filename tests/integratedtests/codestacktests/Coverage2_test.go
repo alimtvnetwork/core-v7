@@ -74,6 +74,14 @@ func Test_Cov2_Trace_NilPtr_Dispose(t *testing.T) {
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "Trace.Dispose returns safely -- nil pointer", actual)
 }
+
+func Test_Cov2_Trace_NilPtr_ClonePtr(t *testing.T) {
+	var trace *codestack.Trace
+	actual := args.Map{"isNil": trace.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Trace.ClonePtr returns nil -- nil pointer", actual)
+}
+
 func Test_Cov2_Trace_Empty_HasIssues(t *testing.T) {
 	trace := codestack.Trace{}
 	actual := args.Map{"hasIssues": trace.HasIssues()}

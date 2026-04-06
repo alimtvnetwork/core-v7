@@ -1190,6 +1190,16 @@ func Test_C35_Collection_NonEmptyList_Empty(t *testing.T) {
 		}
 	})
 }
+
+func Test_C35_Collection_NonEmptyListPtr(t *testing.T) {
+	safeTest(t, "Test_C35_Collection_NonEmptyListPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		if len(*c.NonEmptyListPtr()) != 1 {
+			t.Error("expected 1")
+		}
+	})
+}
+
 func Test_C35_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_C35_Collection_HashsetAsIs", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "a", "b"})
@@ -1228,6 +1238,16 @@ func Test_C35_Collection_NonEmptyItems(t *testing.T) {
 		}
 	})
 }
+
+func Test_C35_Collection_NonEmptyItemsPtr(t *testing.T) {
+	safeTest(t, "Test_C35_Collection_NonEmptyItemsPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"", "a"})
+		if len(c.NonEmptyItemsPtr()) != 1 {
+			t.Error("expected 1")
+		}
+	})
+}
+
 func Test_C35_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_C35_Collection_NonEmptyItemsOrNonWhitespace", func() {
 		c := corestr.New.Collection.Strings([]string{"  ", "a"})
@@ -1236,6 +1256,16 @@ func Test_C35_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		}
 	})
 }
+
+func Test_C35_Collection_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
+	safeTest(t, "Test_C35_Collection_NonEmptyItemsOrNonWhitespacePtr", func() {
+		c := corestr.New.Collection.Strings([]string{"  ", "a"})
+		if len(c.NonEmptyItemsOrNonWhitespacePtr()) != 1 {
+			t.Error("expected 1")
+		}
+	})
+}
+
 func Test_C35_Collection_Items(t *testing.T) {
 	safeTest(t, "Test_C35_Collection_Items", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -1244,6 +1274,16 @@ func Test_C35_Collection_Items(t *testing.T) {
 		}
 	})
 }
+
+func Test_C35_Collection_ListPtr(t *testing.T) {
+	safeTest(t, "Test_C35_Collection_ListPtr", func() {
+		c := corestr.New.Collection.Strings([]string{"a"})
+		if len(c.ListPtr()) != 1 {
+			t.Error("expected 1")
+		}
+	})
+}
+
 func Test_C35_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_C35_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})

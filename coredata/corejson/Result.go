@@ -291,6 +291,14 @@ func (it *Result) SafeValues() []byte {
 	return it.Bytes
 }
 
+// Deprecated: Use SafeValues instead.
+func (it *Result) SafeValuesPtr() []byte {
+	if it.HasIssuesOrEmpty() {
+		return []byte{}
+	}
+
+	return it.Bytes
+}
 
 func (it *Result) Raw() ([]byte, error) {
 	if it == nil {

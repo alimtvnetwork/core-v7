@@ -282,6 +282,19 @@ func Test_Value_UnmarshalJSON_Cov2(t *testing.T) {
 	expected := args.Map{"nilErr": true, "invalidErr": true}
 	expected.ShouldBeEqual(t, 0, "Value_UnmarshalJSON returns correct value -- with args", actual)
 }
+
+func Test_Value_MinMaxByte_Cov2(t *testing.T) {
+	actual := args.Map{
+		"maxByte": int(issetter.True.MaxByte()),
+		"minByte": int(issetter.True.MinByte()),
+	}
+	expected := args.Map{
+		"maxByte": int(issetter.Wildcard.ValueByte()),
+		"minByte": 0,
+	}
+	expected.ShouldBeEqual(t, 0, "Value_MinMaxByte returns correct value -- with args", actual)
+}
+
 func Test_Value_ToPtr_Cov2(t *testing.T) {
 	ptr := issetter.True.ToPtr()
 	actual := args.Map{"notNil": ptr != nil, "isTrue": *ptr == issetter.True}
@@ -306,6 +319,25 @@ func Test_Value_IsWildcardOrBool_False_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Value_IsWildcardOrBool_False returns non-empty -- with args", actual)
 }
+
+func Test_PackageLevelFuncs_Cov2(t *testing.T) {
+	actual := args.Map{
+		"min":           fmt.Sprintf("%v", issetter.Min()),
+		"max":           fmt.Sprintf("%v", issetter.Max()),
+		"minByte":       int(issetter.MinByte()),
+		"maxByte":       int(issetter.MaxByte()),
+		"rangeNotEmpty": issetter.RangeNamesCsv() != "",
+	}
+	expected := args.Map{
+		"min":           fmt.Sprintf("%v", issetter.Uninitialized),
+		"max":           fmt.Sprintf("%v", issetter.Wildcard),
+		"minByte":       0,
+		"maxByte":       int(issetter.Set.Value()),
+		"rangeNotEmpty": true,
+	}
+	expected.ShouldBeEqual(t, 0, "PackageLevelFuncs returns correct value -- with args", actual)
+}
+
 func Test_Value_OnlySupportedErr_Empty_Cov2(t *testing.T) {
 	actual := args.Map{"hasErr": issetter.True.OnlySupportedErr() != nil}
 	expected := args.Map{"hasErr": false}

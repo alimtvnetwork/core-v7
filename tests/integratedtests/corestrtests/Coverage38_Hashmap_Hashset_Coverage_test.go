@@ -516,6 +516,15 @@ func Test_C38_Hashmap_KeysToLower(t *testing.T) {
 		if !lower.Has("upper") { t.Fatal() }
 	})
 }
+
+func Test_C38_Hashmap_ValuesToLower(t *testing.T) {
+	safeTest(t, "Test_C38_Hashmap_ValuesToLower", func() {
+		h := corestr.New.Hashmap.Cap(2)
+		h.AddOrUpdate("UPPER", "val")
+		_ = h.ValuesToLower()
+	})
+}
+
 func Test_C38_Hashmap_ToError(t *testing.T) {
 	safeTest(t, "Test_C38_Hashmap_ToError", func() {
 		h := corestr.New.Hashmap.Cap(2)
@@ -543,6 +552,23 @@ func Test_C38_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 		if len(r2) != 0 { t.Fatal() }
 	})
 }
+
+func Test_C38_Hashmap_Clone(t *testing.T) {
+	safeTest(t, "Test_C38_Hashmap_Clone", func() {
+		h := corestr.New.Hashmap.Cap(2)
+		h.AddOrUpdate("a", "1")
+		c := h.Clone()
+		if c.Length() != 1 { t.Fatal() }
+		cp := h.ClonePtr()
+		if cp.Length() != 1 { t.Fatal() }
+		var nilH *corestr.Hashmap
+		if nilH.ClonePtr() != nil { t.Fatal() }
+		// clone empty
+		ec := corestr.Empty.Hashmap().Clone()
+		if ec.Length() != 0 { t.Fatal() }
+	})
+}
+
 func Test_C38_Hashmap_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_C38_Hashmap_Clear_Dispose", func() {
 		h := corestr.New.Hashmap.Cap(2)
@@ -967,6 +993,22 @@ func Test_C38_Hashset_RemoveWithLock(t *testing.T) {
 		if hs.Length() != 0 { t.Fatal() }
 	})
 }
+
+func Test_C38_Hashset_List_OrderedList_SortedList(t *testing.T) {
+	safeTest(t, "Test_C38_Hashset_List_OrderedList_SortedList", func() {
+		hs := corestr.New.Hashset.StringsSpreadItems("b", "a")
+		if len(hs.List()) != 2 { t.Fatal() }
+		if len(hs.OrderedList()) != 2 { t.Fatal() }
+		if len(hs.SortedList()) != 2 { t.Fatal() }
+		if len(hs.ListPtrSortedAsc()) != 2 { t.Fatal() }
+		if len(hs.ListPtrSortedDsc()) != 2 { t.Fatal() }
+		if len(hs.SafeStrings()) != 2 { t.Fatal() }
+		if len(hs.Lines()) != 2 { t.Fatal() }
+		if len(hs.ListPtr()) != 2 { t.Fatal() }
+		if len(hs.ListCopyLock()) != 2 { t.Fatal() }
+	})
+}
+
 func Test_C38_Hashset_Collection_SimpleSlice(t *testing.T) {
 	safeTest(t, "Test_C38_Hashset_Collection_SimpleSlice", func() {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")

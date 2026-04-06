@@ -385,6 +385,34 @@ func Test_Cov13_Trace_Clone(t *testing.T) {
 		convey.So(cloned.PackageName, convey.ShouldEqual, trace.PackageName)
 	})
 }
+
+func Test_Cov13_Trace_ClonePtr(t *testing.T) {
+	// Arrange
+	trace := codestack.New.Default()
+
+	// Act
+	cloned := trace.ClonePtr()
+
+	// Assert
+	convey.Convey("Trace.ClonePtr returns non-nil", t, func() {
+		convey.So(cloned, convey.ShouldNotBeNil)
+	})
+}
+
+func Test_Cov13_Trace_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var trace *codestack.Trace
+
+	// Act
+	cloned := trace.ClonePtr()
+
+	// Assert
+	convey.Convey("Trace.ClonePtr nil returns nil", t, func() {
+		convey.So(cloned, convey.ShouldBeNil)
+	})
+}
+
+func Test_Cov13_Trace_Dispose(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 

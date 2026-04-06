@@ -195,6 +195,23 @@ func Test_CovPL_S2_10_Reverse(t *testing.T) {
 	triple.Add(*newTestPWForSeg2())
 	triple.Reverse()
 }
+
+func Test_CovPL_S2_11_Clone_ClonePtr(t *testing.T) {
+	pc := newTestPC()
+	c := pc.Clone()
+	if c.Length() != 2 {
+		t.Fatal("expected 2")
+	}
+	cp := pc.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	var nilPC *corepayload.PayloadsCollection
+	if nilPC.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+}
+
 func Test_CovPL_S2_12_Clear_Dispose(t *testing.T) {
 	pc := newTestPC()
 	pc.Clear()
@@ -572,6 +589,35 @@ func Test_CovPL_S2_36_TypedPW_Setters(t *testing.T) {
 		t.Fatal("expected 5")
 	}
 }
+
+func Test_CovPL_S2_37_TypedPW_Clone_ToPayloadWrapper_Reparse(t *testing.T) {
+	type D struct{ A int }
+	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+	cp, err := tw.ClonePtr(true)
+	if err != nil || cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	_, _ = tw.Clone(true)
+	_ = tw.ToPayloadWrapper()
+	_ = tw.PayloadWrapperValue()
+	_ = tw.DynamicPayloads()
+	_ = tw.PayloadsString()
+	_ = tw.Length()
+	if tw.IsNull() {
+		t.Fatal("expected false")
+	}
+	err2 := tw.Reparse()
+	if err2 != nil {
+		t.Fatal("expected no error")
+	}
+	// nil
+	var nilTW *corepayload.TypedPayloadWrapper[D]
+	c, _ := nilTW.ClonePtr(true)
+	if c != nil {
+		t.Fatal("expected nil")
+	}
+}
+
 func Test_CovPL_S2_38_TypedPW_Clear_Dispose(t *testing.T) {
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
@@ -942,6 +988,132 @@ func Test_CovPL_S2_67_TypedPW_DeserializeToMany(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
+
+// --- SessionInfo ---
+
+func Test_CovPL_S2_70_SessionInfo(t *testing.T) {
+	si := corepayload.SessionInfo{Id: "5", User: &corepayload.User{Name: "u"}, SessionPath: "/p"}
+	if si.IdentifierInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if si.IdentifierUnsignedInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if si.IsEmpty() {
+		t.Fatal("expected false")
+	}
+	if !si.IsValid() {
+		t.Fatal("expected true")
+	}
+	if si.IsUserNameEmpty() {
+		t.Fatal("expected false")
+	}
+	if si.IsUserEmpty() {
+		t.Fatal("expected false")
+	}
+	if !si.HasUser() {
+		t.Fatal("expected true")
+	}
+	if !si.IsUsernameEqual("u") {
+		t.Fatal("expected true")
+	}
+	c := si.Clone()
+	_ = c
+	cp := si.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	_ = si.Ptr()
+	// empty
+	empty := corepayload.SessionInfo{}
+	if empty.IdentifierInteger() >= 0 {
+		t.Fatal("expected invalid")
+	}
+	if !empty.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	// nil
+	var nilSI *corepayload.SessionInfo
+	if !nilSI.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	if nilSI.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+}
+
+// --- AuthInfo ---
+
+func Test_CovPL_S2_71_AuthInfo(t *testing.T) {
+	ai := corepayload.AuthInfo{
+		Identifier:   "5",
+		ActionType:   "act",
+		ResourceName: "res",
+		SessionInfo:  &corepayload.SessionInfo{Id: "1"},
+		UserInfo:     &corepayload.UserInfo{User: &corepayload.User{Name: "u"}},
+	}
+	if ai.IdentifierInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if ai.IdentifierUnsignedInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if ai.IsEmpty() {
+		t.Fatal("expected false")
+	}
+	if !ai.HasAnyItem() {
+		t.Fatal("expected true")
+	}
+	if !ai.IsValid() {
+		t.Fatal("expected true")
+	}
+	if !ai.HasActionType() {
+		t.Fatal("expected true")
+	}
+	if !ai.HasResourceName() {
+		t.Fatal("expected true")
+	}
+	if !ai.HasUserInfo() {
+		t.Fatal("expected true")
+	}
+	if !ai.HasSessionInfo() {
+		t.Fatal("expected true")
+	}
+	if ai.IsActionTypeEmpty() {
+		t.Fatal("expected false")
+	}
+	if ai.IsResourceNameEmpty() {
+		t.Fatal("expected false")
+	}
+	_ = ai.String()
+	_ = ai.PrettyJsonString()
+	_ = ai.Json()
+	_ = ai.JsonPtr()
+	c := ai.Clone()
+	_ = c
+	cp := ai.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	_ = ai.Ptr()
+	// nil
+	var nilAI *corepayload.AuthInfo
+	if !nilAI.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	if nilAI.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+	// empty
+	empty := corepayload.AuthInfo{}
+	if empty.IdentifierInteger() >= 0 {
+		t.Fatal("expected invalid")
+	}
+}
+
+func Test_CovPL_S2_72_AuthInfo_Setters(t *testing.T) {
+	ai := &corepayload.AuthInfo{}
+	ai.SetActionType("act")
 	ai.SetResourceName("res")
 	ai.SetIdentifier("5")
 	ai.SetSessionInfo(&corepayload.SessionInfo{Id: "1"})
@@ -964,6 +1136,211 @@ func Test_CovPL_S2_67_TypedPW_DeserializeToMany(t *testing.T) {
 	_ = nilAI.SetSystemUser(u)
 	_ = nilAI.SetUserSystemUser(u, u)
 }
+
+// --- PagingInfo ---
+
+func Test_CovPL_S2_73_PagingInfo(t *testing.T) {
+	pi := corepayload.PagingInfo{
+		CurrentPageIndex: 1,
+		TotalPages:       5,
+		PerPageItems:     10,
+		TotalItems:       50,
+	}
+	if pi.IsEmpty() {
+		t.Fatal("expected false")
+	}
+	if !pi.HasTotalPages() {
+		t.Fatal("expected true")
+	}
+	if !pi.HasCurrentPageIndex() {
+		t.Fatal("expected true")
+	}
+	if !pi.HasPerPageItems() {
+		t.Fatal("expected true")
+	}
+	if !pi.HasTotalItems() {
+		t.Fatal("expected true")
+	}
+	if pi.IsInvalidTotalPages() {
+		t.Fatal("expected false")
+	}
+	if pi.IsInvalidCurrentPageIndex() {
+		t.Fatal("expected false")
+	}
+	if pi.IsInvalidPerPageItems() {
+		t.Fatal("expected false")
+	}
+	if pi.IsInvalidTotalItems() {
+		t.Fatal("expected false")
+	}
+	if !pi.IsEqual(&pi) {
+		t.Fatal("expected true")
+	}
+	c := pi.Clone()
+	_ = c
+	cp := pi.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	// nil
+	var nilPI *corepayload.PagingInfo
+	if !nilPI.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	if nilPI.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+	if !nilPI.IsEqual(nil) {
+		t.Fatal("expected true")
+	}
+	if nilPI.IsEqual(&pi) {
+		t.Fatal("expected false")
+	}
+}
+
+// --- User ---
+
+func Test_CovPL_S2_74_User(t *testing.T) {
+	u := corepayload.User{
+		Identifier:   "5",
+		Name:         "u",
+		Type:         "admin",
+		AuthToken:    "tok",
+		PasswordHash: "hash",
+		IsSystemUser: false,
+	}
+	if u.IdentifierInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if u.IdentifierUnsignedInteger() != 5 {
+		t.Fatal("expected 5")
+	}
+	if !u.HasAuthToken() {
+		t.Fatal("expected true")
+	}
+	if !u.HasPasswordHash() {
+		t.Fatal("expected true")
+	}
+	if u.IsPasswordHashEmpty() {
+		t.Fatal("expected false")
+	}
+	if u.IsAuthTokenEmpty() {
+		t.Fatal("expected false")
+	}
+	if u.IsEmpty() {
+		t.Fatal("expected false")
+	}
+	if !u.IsValidUser() {
+		t.Fatal("expected true")
+	}
+	if u.IsNameEmpty() {
+		t.Fatal("expected false")
+	}
+	if !u.IsNameEqual("u") {
+		t.Fatal("expected true")
+	}
+	if !u.IsNotSystemUser() {
+		t.Fatal("expected true")
+	}
+	if !u.IsVirtualUser() {
+		t.Fatal("expected true")
+	}
+	if !u.HasType() {
+		t.Fatal("expected true")
+	}
+	if u.IsTypeEmpty() {
+		t.Fatal("expected false")
+	}
+	_ = u.String()
+	_ = u.PrettyJsonString()
+	_ = u.Json()
+	_ = u.JsonPtr()
+	_, _ = u.Serialize()
+	_ = u.Deserialize([]byte(`{"Name":"x"}`))
+	c := u.Clone()
+	_ = c
+	cp := u.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	_ = u.Ptr()
+	// nil
+	var nilU *corepayload.User
+	if !nilU.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	if nilU.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+	// empty
+	empty := corepayload.User{}
+	if empty.IdentifierInteger() >= 0 {
+		t.Fatal("expected invalid")
+	}
+}
+
+// --- UserInfo ---
+
+func Test_CovPL_S2_75_UserInfo(t *testing.T) {
+	u := &corepayload.User{Name: "u"}
+	su := &corepayload.User{Name: "sys", IsSystemUser: true}
+	ui := corepayload.UserInfo{User: u, SystemUser: su}
+	if !ui.HasUser() {
+		t.Fatal("expected true")
+	}
+	if !ui.HasSystemUser() {
+		t.Fatal("expected true")
+	}
+	if ui.IsEmpty() {
+		t.Fatal("expected false")
+	}
+	if ui.IsUserEmpty() {
+		t.Fatal("expected false")
+	}
+	if ui.IsSystemUserEmpty() {
+		t.Fatal("expected false")
+	}
+	c := ui.Clone()
+	_ = c
+	cp := ui.ClonePtr()
+	if cp == nil {
+		t.Fatal("expected non-nil")
+	}
+	_ = ui.Ptr()
+	_ = ui.ToNonPtr()
+	// setters
+	ui2 := &corepayload.UserInfo{}
+	ui2.SetUser(u)
+	ui2.SetSystemUser(su)
+	ui2.SetUserSystemUser(u, su)
+	// nil setters
+	var nilUI *corepayload.UserInfo
+	r := nilUI.SetUser(u)
+	if r == nil {
+		t.Fatal("expected non-nil")
+	}
+	_ = nilUI.SetSystemUser(su)
+	_ = nilUI.SetUserSystemUser(u, su)
+	if !nilUI.IsEmpty() {
+		t.Fatal("expected true")
+	}
+	if nilUI.ClonePtr() != nil {
+		t.Fatal("expected nil")
+	}
+	nonPtr := nilUI.ToNonPtr()
+	if nonPtr.HasUser() {
+		t.Fatal("expected false")
+	}
+}
+
+// --- User Creator ---
+
+func Test_CovPL_S2_76_NewUser_Creator(t *testing.T) {
+	_ = corepayload.New.User.Empty()
+	_ = corepayload.New.User.Create(false, "u", "t")
+	_ = corepayload.New.User.NonSysCreate("u", "t")
+	_ = corepayload.New.User.NonSysCreateId("1", "u", "t")
+	_ = corepayload.New.User.System("u", "t")
 	_ = corepayload.New.User.SystemId("1", "u", "t")
 	_ = corepayload.New.User.UsingName("u")
 	_ = corepayload.New.User.All(false, "1", "u", "t", "tok", "hash")

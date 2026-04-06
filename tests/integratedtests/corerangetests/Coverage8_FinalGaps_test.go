@@ -170,6 +170,38 @@ func Test_Cov8_MinMaxByte_IsWithinRange(t *testing.T) {
 		convey.So(mmb.IsOutOfRange(6), convey.ShouldBeTrue)
 	})
 }
+
+func Test_Cov8_MinMaxByte_Clone(t *testing.T) {
+	// Arrange
+	mmb := &corerange.MinMaxByte{Min: 3, Max: 5}
+
+	// Act
+	cloned := mmb.Clone()
+	clonedPtr := mmb.ClonePtr()
+
+	// Assert
+	convey.Convey("MinMaxByte.Clone and ClonePtr", t, func() {
+		convey.So(cloned.Min, convey.ShouldEqual, 3)
+		convey.So(clonedPtr.Min, convey.ShouldEqual, 3)
+	})
+}
+
+func Test_Cov8_MinMaxByte_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var mmb *corerange.MinMaxByte
+
+	// Act
+	result := mmb.ClonePtr()
+
+	// Assert
+	convey.Convey("MinMaxByte.ClonePtr nil returns nil", t, func() {
+		convey.So(result, convey.ShouldBeNil)
+	})
+}
+
+// --- MinMaxInt methods ---
+
+func Test_Cov8_MinMaxInt_Comparison(t *testing.T) {
 	// Arrange
 	mmi := &corerange.MinMaxInt{Min: 5, Max: 10}
 
@@ -318,6 +350,38 @@ func Test_Cov8_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 		convey.So(result, convey.ShouldEqual, int16(5))
 	})
 }
+
+func Test_Cov8_MinMaxInt16_Clone(t *testing.T) {
+	// Arrange
+	mmi := &corerange.MinMaxInt16{Min: 3, Max: 8}
+
+	// Act
+	cloned := mmi.Clone()
+	clonedPtr := mmi.ClonePtr()
+
+	// Assert
+	convey.Convey("MinMaxInt16.Clone and ClonePtr", t, func() {
+		convey.So(cloned.Min, convey.ShouldEqual, int16(3))
+		convey.So(clonedPtr.Min, convey.ShouldEqual, int16(3))
+	})
+}
+
+func Test_Cov8_MinMaxInt16_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var mmi *corerange.MinMaxInt16
+
+	// Act
+	result := mmi.ClonePtr()
+
+	// Assert
+	convey.Convey("MinMaxInt16.ClonePtr nil returns nil", t, func() {
+		convey.So(result, convey.ShouldBeNil)
+	})
+}
+
+// --- RangeInt methods ---
+
+func Test_Cov8_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 	// Arrange
 	ri := corerange.NewRangeIntUsingValues(10, 5, true)
 
@@ -522,6 +586,25 @@ func Test_Cov8_StartEndInt(t *testing.T) {
 		convey.So(se.IsInvalid(), convey.ShouldBeFalse)
 	})
 }
+
+func Test_Cov8_StartEndInt_Diff(t *testing.T) {
+	// Arrange
+	se := &corerange.StartEndInt{Start: 1, End: 5}
+
+	// Act
+	diff := se.Diff()
+	diffAbs := se.DifferenceAbsolute()
+
+	// Assert
+	convey.Convey("StartEndInt.Diff and DifferenceAbsolute", t, func() {
+		convey.So(diff, convey.ShouldEqual, 4)
+		convey.So(diffAbs, convey.ShouldEqual, 4)
+	})
+}
+
+// StartEndInt.ClonePtr, StartEndString.IsEmpty, StartEndSimpleString.Length/IsEmpty/String/Clone/ClonePtr,
+// and Within.StringRangeInt do not exist — removed.
+
 func Test_Cov8_StartEndString_String(t *testing.T) {
 	// Arrange
 	ses := &corerange.StartEndString{

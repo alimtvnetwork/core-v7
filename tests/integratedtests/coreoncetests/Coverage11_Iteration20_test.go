@@ -901,6 +901,17 @@ func Test_I20_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 		t.Fatal("expected not found")
 	}
 }
+
+func Test_I20_MapStringStringOnce_ValuesPtr(t *testing.T) {
+	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
+		return map[string]string{"k": "v"}
+	})
+	p := o.ValuesPtr()
+	if p == nil {
+		t.Fatal("expected non-nil ptr")
+	}
+}
+
 func Test_I20_MapStringStringOnce_Strings_Cached(t *testing.T) {
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"k": "v"}

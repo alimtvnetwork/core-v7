@@ -123,6 +123,28 @@ func Test_Cov3_StringTo_Float64Default_Valid(t *testing.T) {
 	expected := args.Map{"gt3": true, "ok": true}
 	expected.ShouldBeEqual(t, 0, "Float64Default returns non-empty -- valid", actual)
 }
+
+func Test_Cov3_StringTo_Float64Default_Invalid(t *testing.T) {
+	val, ok := converters.StringTo.Float64Default("abc", 9.9)
+	actual := args.Map{"val": val, "ok": ok}
+	expected := args.Map{"val": 9.9, "ok": false}
+	expected.ShouldBeEqual(t, 0, "Float64Default returns error -- invalid", actual)
+}
+
+// ── StringTo: Float64Conditional (deprecated alias) ──
+
+func Test_Cov3_StringTo_Float64Conditional(t *testing.T) {
+	val, ok := converters.StringTo.Float64Conditional("3.14", 0.0)
+	actual := args.Map{"gt3": val > 3.0, "ok": ok}
+	expected := args.Map{"gt3": true, "ok": true}
+	expected.ShouldBeEqual(t, 0, "Float64Conditional returns non-empty -- valid", actual)
+}
+
+// ── StringTo: ByteWithDefault ──
+
+func Test_Cov3_StringTo_ByteWithDefault_Valid(t *testing.T) {
+	val, ok := converters.StringTo.ByteWithDefault("42", 0)
+	actual := args.Map{"val": int(val), "ok": ok}
 	expected := args.Map{"val": 42, "ok": true}
 	expected.ShouldBeEqual(t, 0, "ByteWithDefault returns non-empty -- valid", actual)
 }
@@ -597,6 +619,15 @@ func Test_Cov3_UnsafeBytesToString(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "UnsafeBytesToString returns correct value -- with args", actual)
 }
+
+func Test_Cov3_UnsafeBytesToStrings(t *testing.T) {
+	result := converters.UnsafeBytesToStrings([]byte{65, 66})
+	nilResult := converters.UnsafeBytesToStrings(nil)
+	actual := args.Map{"len": len(result), "nilIsNil": nilResult == nil}
+	expected := args.Map{"len": 2, "nilIsNil": true}
+	expected.ShouldBeEqual(t, 0, "UnsafeBytesToStrings returns correct value -- with args", actual)
+}
+
 func Test_Cov3_UnsafeBytesToStringPtr(t *testing.T) {
 	result := converters.UnsafeBytesToStringPtr([]byte("hi"))
 	nilResult := converters.UnsafeBytesToStringPtr(nil)

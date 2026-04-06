@@ -329,6 +329,25 @@ func Test_Cov3_BaseUsername_IsEqual(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "BaseUsername_IsEqual returns correct value -- with args", actual)
 }
+
+func Test_Cov3_BaseUsername_Clone(t *testing.T) {
+	u := coreinstruction.NewUsername("test")
+	cloned := u.ClonePtr()
+	val := u.Clone()
+
+	actual := args.Map{"ptrName": cloned.Username, "valName": val.Username}
+	expected := args.Map{"ptrName": "test", "valName": "test"}
+	expected.ShouldBeEqual(t, 0, "BaseUsername_Clone returns correct value -- with args", actual)
+}
+
+func Test_Cov3_BaseUsername_ClonePtr_Nil(t *testing.T) {
+	var u *coreinstruction.BaseUsername
+	actual := args.Map{"isNil": u.ClonePtr() == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "BaseUsername_ClonePtr_Nil returns nil -- with args", actual)
+}
+
+func Test_Cov3_BaseUsername_Regex(t *testing.T) {
 	u := coreinstruction.NewUsername("user123")
 	re := regexpCompile(`\d+`)
 	actual := args.Map{"match": u.IsUsernameRegexMatches(re)}

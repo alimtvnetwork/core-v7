@@ -235,6 +235,20 @@ func Test_Cov3_StackTrace_Nil(t *testing.T) {
 	expected := args.Map{"isNil": true, "notNil": false, "str": "", "hasIss": true}
 	expected.ShouldBeEqual(t, 0, "StackTrace returns nil -- Nil", actual)
 }
+
+func Test_Cov3_StackTrace_Clone(t *testing.T) {
+	st := &reflectinternal.StackTrace{PackageName: "pkg", Line: 42}
+	cloned := st.Clone()
+	clonedPtr := st.ClonePtr()
+	var nilSt *reflectinternal.StackTrace
+	actual := args.Map{
+		"pkg": cloned.PackageName, "ptrPkg": clonedPtr.PackageName,
+		"nilClone": nilSt.ClonePtr() == nil,
+	}
+	expected := args.Map{"pkg": "pkg", "ptrPkg": "pkg", "nilClone": true}
+	expected.ShouldBeEqual(t, 0, "StackTrace returns correct value -- Clone", actual)
+}
+
 func Test_Cov3_StackTrace_Dispose(t *testing.T) {
 	st := &reflectinternal.StackTrace{PackageName: "pkg"}
 	st.Dispose()

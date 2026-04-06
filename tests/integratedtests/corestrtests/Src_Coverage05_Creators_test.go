@@ -47,6 +47,58 @@ func Test_SrcC05_CollectionCreator_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC05_SimpleSliceCreator_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC05_SimpleSliceCreator_Verification", func() {
+		// Arrange
+		tc := srcC05SimpleSliceCreatorTestCase
+
+		// Act
+		s := corestr.New.SimpleSlice.Empty()
+		s2 := corestr.New.SimpleSlice.Cap(10)
+		s5 := corestr.New.SimpleSlice.Lines("a", "b")
+		noPanic := !callPanicsSrcC05(func() {
+			_ = corestr.New.SimpleSlice.Cap(-1)
+			_ = corestr.New.SimpleSlice.Default()
+			_ = corestr.New.SimpleSlice.SpreadStrings("a")
+			_ = corestr.New.SimpleSlice.Strings([]string{"a"})
+			_ = corestr.New.SimpleSlice.Create([]string{"a"})
+			_ = corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+			_ = corestr.New.SimpleSlice.StringsPtr(nil)
+			_ = corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
+			_ = corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
+			_ = corestr.New.SimpleSlice.StringsOptions(false, nil)
+			_ = corestr.New.SimpleSlice.StringsClone([]string{"a"})
+			_ = corestr.New.SimpleSlice.StringsClone(nil)
+			_ = corestr.New.SimpleSlice.Direct(true, []string{"a"})
+			_ = corestr.New.SimpleSlice.Direct(false, []string{"a"})
+			_ = corestr.New.SimpleSlice.Direct(true, nil)
+			_ = corestr.New.SimpleSlice.UsingLines(true, "a")
+			_ = corestr.New.SimpleSlice.UsingLines(false, "a")
+			_ = corestr.New.SimpleSlice.UsingLines(true)
+			_ = corestr.New.SimpleSlice.Split("a,b", ",")
+			_ = corestr.New.SimpleSlice.SplitLines("a\nb")
+			_ = corestr.New.SimpleSlice.UsingSeparatorLine(",", "a,b")
+			_ = corestr.New.SimpleSlice.UsingLine("a\nb")
+			_ = corestr.New.SimpleSlice.ByLen([]string{"a", "b"})
+			hs := corestr.New.Hashset.StringsSpreadItems("a", "b")
+			_ = corestr.New.SimpleSlice.Hashset(hs)
+			_ = corestr.New.SimpleSlice.Map(map[string]int{"a": 1})
+			_ = corestr.New.SimpleSlice.Map(nil)
+		})
+
+		actual := args.Map{
+			"emptyIsEmpty": s.IsEmpty(),
+			"cap10Len":     s2.Length(),
+			"linesLen":     s5.Length(),
+			"noPanic":      noPanic,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC05_SimpleStringOnceCreator_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC05_SimpleStringOnceCreator_Verification", func() {
 		// Arrange

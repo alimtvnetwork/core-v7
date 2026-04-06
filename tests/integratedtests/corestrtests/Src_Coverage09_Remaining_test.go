@@ -263,6 +263,43 @@ func Test_SrcC09_SimpleStringOnce_Split_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC09_SimpleStringOnce_Various_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC09_SimpleStringOnce_Various_Verification", func() {
+		// Arrange
+		tc := srcC09SimpleStringOnceVariousTestCase
+		s := corestr.New.SimpleStringOnce.Init("hello")
+		var nilS *corestr.SimpleStringOnce
+
+		// Act
+		noPanic := !callPanicsSrcC09(func() {
+			_ = s.LinesSimpleSlice()
+			_ = s.SimpleSlice(",")
+			_ = s.IsRegexMatches(nil)
+			_ = s.RegexFindString(nil)
+			_, _ = s.RegexFindAllStringsWithFlag(nil, -1)
+			_ = s.RegexFindAllStrings(nil, -1)
+			_ = s.NonPtr()
+			_ = s.Ptr()
+			_ = s.String()
+			_ = s.StringPtr()
+			_ = s.Clone()
+			_ = s.ClonePtr()
+			_ = s.CloneUsingNewVal("new")
+			s.Dispose()
+		})
+		actual := args.Map{
+			"noPanic":      noPanic,
+			"nilString":    nilS.String(),
+			"nilStringPtr": nilS.StringPtr() != nil,
+			"nilClonePtr":  nilS.ClonePtr() == nil,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC09_SimpleStringOnce_Json_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC09_SimpleStringOnce_Json_Verification", func() {
 		// Arrange
@@ -565,6 +602,50 @@ func Test_SrcC09_CollectionsOfCollection_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+// ── HashsetsCollection ──
+
+func Test_SrcC09_HashsetsCollection_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC09_HashsetsCollection_Verification", func() {
+		// Arrange
+		tc := srcC09HashsetsCollectionTestCase
+		hc := corestr.New.HashsetsCollection.Empty()
+
+		// Act
+		hc.Add(corestr.New.Hashset.StringsSpreadItems("a"))
+		hc.AddNonNil(corestr.New.Hashset.StringsSpreadItems("b"))
+		hc.AddNonNil(nil)
+		hc.AddNonEmpty(corestr.New.Hashset.Empty())
+		hc.Adds(corestr.New.Hashset.StringsSpreadItems("c"))
+		noPanic := !callPanicsSrcC09(func() {
+			_ = hc.LastIndex()
+			_ = hc.List()
+			_ = hc.ListPtr()
+			_ = hc.ListDirectPtr()
+			_ = hc.StringsList()
+			_ = hc.String()
+			_ = hc.Join(",")
+			_ = hc.IsEqual(*hc)
+			_ = hc.IsEqualPtr(hc)
+			_ = hc.JsonModel()
+			_ = hc.JsonModelAny()
+			_, _ = hc.MarshalJSON()
+			_, _ = hc.Serialize()
+			_ = hc.AsJsoner()
+			_ = hc.AsJsonContractsBinder()
+			_ = hc.AsJsonParseSelfInjector()
+			_ = hc.AsJsonMarshaller()
+		})
+		actual := args.Map{
+			"noPanic":   noPanic,
+			"lengthGe3": hc.Length() >= 3,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC09_HashsetsCollection_HasAll_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC09_HashsetsCollection_HasAll_Verification", func() {
 		// Arrange
@@ -1129,6 +1210,31 @@ func Test_SrcC09_SimpleSlice_RemoveIndexes_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC09_SimpleSlice_Clone_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC09_SimpleSlice_Clone_Verification", func() {
+		// Arrange
+		tc := srcC09SimpleSliceCloneTestCase
+		var nilS *corestr.SimpleSlice
+
+		// Act
+		noPanic := !callPanicsSrcC09(func() {
+			s := corestr.New.SimpleSlice.Lines("a", "b")
+			_ = s.Clone(true)
+			_ = s.ClonePtr(true)
+			_ = s.DeepClone()
+			_ = s.ShadowClone()
+		})
+		actual := args.Map{
+			"noPanic":     noPanic,
+			"nilClonePtr": nilS.ClonePtr(true) == nil,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC09_SimpleSlice_ClearDispose_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC09_SimpleSlice_ClearDispose_Verification", func() {
 		// Arrange

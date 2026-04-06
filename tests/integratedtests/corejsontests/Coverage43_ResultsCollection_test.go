@@ -509,6 +509,23 @@ func Test_Cov43_ResultsCollection_Clone_Deep(t *testing.T) {
 	// Assert — expect 1 (clone preserves items)
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Cov43_ResultsCollection_ClonePtr_Nil(t *testing.T) {
+	tc := resultsCollectionClonePtrNilTestCase
+
+	// Arrange
+	var c *corejson.ResultsCollection
+
+	// Act
+	r := c.ClonePtr(false)
+	actual := args.Map{
+		"isNil": r == nil,
+	}
+
+	// Assert
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
 func Test_Cov43_ResultsCollection_Json(t *testing.T) {
 	tc := resultsCollectionJsonTestCase
 

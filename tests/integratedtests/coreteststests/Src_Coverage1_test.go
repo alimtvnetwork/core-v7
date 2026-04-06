@@ -85,6 +85,109 @@ func Test_Src_DraftType_PtrOrNonPtr_NilReceiver(t *testing.T) {
 		convey.So(result, should.BeNil)
 	})
 }
+
+func Test_Src_DraftType_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var d *coretests.DraftType
+
+	// Act
+	result := d.ClonePtr()
+
+	// Assert
+	tc := srcDraftTypeClonePtrNilTestCase
+	tc.ShouldBeEqualMap(t, 0, args.Map{
+		"isNil": result == nil,
+	})
+}
+
+func Test_Src_DraftType_IsEqual_Verification(t *testing.T) {
+	base := &coretests.DraftType{
+		SampleString1: "a",
+		SampleString2: "b",
+		SampleInteger: 1,
+		Lines:         []string{"x"},
+		RawBytes:      []byte("r"),
+	}
+
+	for caseIndex, tc := range srcDraftTypeIsEqualTestCases {
+		// Arrange
+		input := tc.ArrangeInput.(args.Map)
+		scenario := input["scenario"].(string)
+
+		var result bool
+		switch scenario {
+		case "equal":
+			// Act
+			d2 := base.ClonePtr()
+			result = base.IsEqualAll(d2)
+		case "diffString2":
+			d3 := base.ClonePtr()
+			d3.SampleString2 = "c"
+			result = base.IsEqual(false, d3)
+		case "diffInteger":
+			d4 := base.ClonePtr()
+			d4.SampleInteger = 99
+			result = base.IsEqual(false, d4)
+		case "diffRawBytes":
+			d5 := base.ClonePtr()
+			d5.RawBytes = []byte("different")
+			result = base.IsEqual(false, d5)
+		case "diffLines":
+			d6 := base.ClonePtr()
+			d6.Lines = []string{"y"}
+			result = base.IsEqual(false, d6)
+		case "bothNil":
+			var n1, n2 *coretests.DraftType
+			result = n1.IsEqual(false, n2)
+		case "nilVsNonNil":
+			var n1 *coretests.DraftType
+			result = n1.IsEqual(false, base)
+		case "samePtr":
+			result = base.IsEqual(false, base)
+		}
+
+		// Assert
+		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
+			"result": result,
+		})
+	}
+}
+
+func Test_Src_DraftType_VerifyNotEqual(t *testing.T) {
+	// Arrange
+	d1 := &coretests.DraftType{SampleString1: "a", Lines: []string{}, RawBytes: []byte{}}
+	d2 := &coretests.DraftType{SampleString1: "b", Lines: []string{}, RawBytes: []byte{}}
+
+	// Act
+	msg := d1.VerifyAllNotEqualMessage(d2)
+	err := d1.VerifyAllNotEqualErr(d2)
+	err2 := d1.VerifyNotEqualExcludingInnerFieldsErr(d2)
+
+	// Assert
+	convey.Convey("VerifyAllNotEqualMessage returns non-empty -- different drafts", t, func() {
+		convey.So(msg, should.NotBeEmpty)
+	})
+	convey.Convey("VerifyAllNotEqualErr returns error -- different drafts", t, func() {
+		convey.So(err, should.NotBeNil)
+	})
+	convey.Convey("VerifyNotEqualExcludingInnerFieldsErr returns error -- different drafts", t, func() {
+		convey.So(err2, should.NotBeNil)
+	})
+
+	// Arrange (equal case)
+	d3 := d1.ClonePtr()
+
+	// Act
+	err3 := d1.VerifyAllNotEqualErr(d3)
+
+	// Assert
+	convey.Convey("VerifyAllNotEqualErr returns nil -- equal drafts", t, func() {
+		convey.So(err3, should.BeNil)
+	})
+}
+
+func Test_Src_DraftType_JsonAndSetters(t *testing.T) {
+	// Arrange
 	d := coretests.DraftType{SampleString1: "x"}
 
 	// Act

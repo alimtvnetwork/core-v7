@@ -228,6 +228,21 @@ func Test_Cov2_Request_IsAnyEnumsEqual(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsAnyEnumsEqual returns correct value -- with args", actual)
 }
+
+func Test_Cov2_Request_MinInt_MaxInt(t *testing.T) {
+	actual := args.Map{
+		"minValid": reqtype.Create.MinInt() >= 0,
+		"maxValid": reqtype.Create.MaxInt() > 0,
+		"minByte":  reqtype.Create.MinByte() == 0,
+	}
+	expected := args.Map{
+		"minValid": true,
+		"maxValid": true,
+		"minByte":  true,
+	}
+	expected.ShouldBeEqual(t, 0, "MinInt returns correct value -- MaxInt MinByte", actual)
+}
+
 func Test_Cov2_Request_Format(t *testing.T) {
 	actual := args.Map{"notEmpty": reqtype.Create.Format("%s") != ""}
 	expected := args.Map{"notEmpty": true}

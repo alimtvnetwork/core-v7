@@ -967,6 +967,16 @@ func Test_Cov9_Attributes_Clone_Deep(t *testing.T) {
 		t.Fatal("expected cloned data")
 	}
 }
+
+func Test_Cov9_Attributes_ClonePtr_Nil(t *testing.T) {
+	var nilAttr *corepayload.Attributes
+	cloned, err := nilAttr.ClonePtr(true)
+
+	if err != nil || cloned != nil {
+		t.Fatal("nil ClonePtr should return nil, nil")
+	}
+}
+
 func Test_Cov9_Attributes_Clone_NilReturnsEmpty(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	cloned, err := nilAttr.Clone(true)
@@ -1570,6 +1580,16 @@ func Test_Cov9_PayloadWrapper_Clone_Deep(t *testing.T) {
 		t.Fatal("expected cloned with name test")
 	}
 }
+
+func Test_Cov9_PayloadWrapper_ClonePtr_Nil(t *testing.T) {
+	var nilPW *corepayload.PayloadWrapper
+	cloned, err := nilPW.ClonePtr(true)
+
+	if err != nil || cloned != nil {
+		t.Fatal("nil ClonePtr should return nil, nil")
+	}
+}
+
 func Test_Cov9_PayloadWrapper_NonPtr_ToPtr(t *testing.T) {
 	var nilPW *corepayload.PayloadWrapper
 	nonPtr := nilPW.NonPtr()
@@ -2332,6 +2352,31 @@ func Test_Cov9_PayloadsCollection_Reverse(t *testing.T) {
 		t.Fatal("expected a")
 	}
 }
+
+func Test_Cov9_PayloadsCollection_Clone_ClonePtr(t *testing.T) {
+	col := corepayload.New.PayloadsCollection.Empty()
+	col.Add(corepayload.PayloadWrapper{Name: "a"})
+
+	cloned := col.Clone()
+
+	if cloned.Length() != 1 {
+		t.Fatal("expected 1")
+	}
+
+	clonedPtr := col.ClonePtr()
+
+	if clonedPtr.Length() != 1 {
+		t.Fatal("expected 1")
+	}
+
+	// nil ClonePtr
+	var nilCol *corepayload.PayloadsCollection
+
+	if nilCol.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+}
+
 func Test_Cov9_PayloadsCollection_Clear_Dispose(t *testing.T) {
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
@@ -2640,6 +2685,28 @@ func Test_Cov9_User_String_Json_Serialize_Deserialize(t *testing.T) {
 		t.Fatal("expected Alice")
 	}
 }
+
+func Test_Cov9_User_Clone_ClonePtr(t *testing.T) {
+	u := corepayload.New.User.All(false, "1", "Alice", "admin", "token", "hash")
+	cloned := u.Clone()
+
+	if cloned.Name != "Alice" {
+		t.Fatal("expected Alice")
+	}
+
+	clonedPtr := u.ClonePtr()
+
+	if clonedPtr.Name != "Alice" {
+		t.Fatal("expected Alice")
+	}
+
+	var nilUser *corepayload.User
+
+	if nilUser.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+}
+
 func Test_Cov9_User_Ptr(t *testing.T) {
 	u := corepayload.User{Name: "Alice"}
 	ptr := u.Ptr()
@@ -2740,6 +2807,35 @@ func Test_Cov9_UserInfo_SetUser_SetSystemUser(t *testing.T) {
 		t.Fatal("expected non-nil")
 	}
 }
+
+func Test_Cov9_UserInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	ui := &corepayload.UserInfo{User: corepayload.New.User.UsingName("Alice")}
+	cloned := ui.Clone()
+
+	if cloned.User.Name != "Alice" {
+		t.Fatal("expected Alice")
+	}
+
+	clonedPtr := ui.ClonePtr()
+
+	if clonedPtr.User.Name != "Alice" {
+		t.Fatal("expected Alice")
+	}
+
+	var nilUI *corepayload.UserInfo
+
+	if nilUI.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+
+	uiVal := corepayload.UserInfo{User: corepayload.New.User.UsingName("Bob")}
+	ptr := uiVal.Ptr()
+
+	if ptr.User.Name != "Bob" {
+		t.Fatal("expected Bob")
+	}
+}
+
 func Test_Cov9_UserInfo_ToNonPtr(t *testing.T) {
 	ui := &corepayload.UserInfo{User: corepayload.New.User.UsingName("Alice")}
 	nonPtr := ui.ToNonPtr()
@@ -2994,6 +3090,38 @@ func Test_Cov9_AuthInfo_String_PrettyJsonString_Json_JsonPtr(t *testing.T) {
 	_ = ai.Json()
 	_ = ai.JsonPtr()
 }
+
+func Test_Cov9_AuthInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	ai := corepayload.AuthInfo{Identifier: "1", ActionType: "login"}
+	cloned := ai.Clone()
+
+	if cloned.ActionType != "login" {
+		t.Fatal("expected login")
+	}
+
+	ptr := ai.Ptr()
+
+	if ptr.ActionType != "login" {
+		t.Fatal("expected login")
+	}
+
+	clonedPtr := ptr.ClonePtr()
+
+	if clonedPtr.ActionType != "login" {
+		t.Fatal("expected login")
+	}
+
+	var nilAI *corepayload.AuthInfo
+
+	if nilAI.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SessionInfo — Full coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov9_SessionInfo_IdentifierInteger(t *testing.T) {
 	si := corepayload.SessionInfo{Id: "42"}
 
@@ -3077,6 +3205,38 @@ func Test_Cov9_SessionInfo_IsUsernameEqual(t *testing.T) {
 		t.Fatal("nil should return false")
 	}
 }
+
+func Test_Cov9_SessionInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	si := corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice"), SessionPath: "/path"}
+	cloned := si.Clone()
+
+	if cloned.Id != "s1" || cloned.SessionPath != "/path" {
+		t.Fatal("expected cloned values")
+	}
+
+	ptr := si.Ptr()
+
+	if ptr.Id != "s1" {
+		t.Fatal("expected s1")
+	}
+
+	clonedPtr := ptr.ClonePtr()
+
+	if clonedPtr.Id != "s1" {
+		t.Fatal("expected s1")
+	}
+
+	var nilSI *corepayload.SessionInfo
+
+	if nilSI.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// PagingInfo — Full coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov9_PagingInfo_IsEmpty(t *testing.T) {
 	var nilPI *corepayload.PagingInfo
 
@@ -3161,6 +3321,33 @@ func Test_Cov9_PagingInfo_IsInvalidMethods(t *testing.T) {
 		t.Fatal("nil should be invalid")
 	}
 }
+
+func Test_Cov9_PagingInfo_Clone_ClonePtr(t *testing.T) {
+	pi := corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 2, PerPageItems: 10, TotalItems: 50}
+	cloned := pi.Clone()
+
+	if cloned.TotalPages != 5 {
+		t.Fatal("expected 5")
+	}
+
+	ptr := &pi
+	clonedPtr := ptr.ClonePtr()
+
+	if clonedPtr.TotalPages != 5 {
+		t.Fatal("expected 5")
+	}
+
+	var nilPI *corepayload.PagingInfo
+
+	if nilPI.ClonePtr() != nil {
+		t.Fatal("nil ClonePtr should return nil")
+	}
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// payloadProperties — Full coverage
+// ══════════════════════════════════════════════════════════════════════════════
+
 func Test_Cov9_PayloadProperties_AllMethods(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"

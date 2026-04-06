@@ -1619,6 +1619,16 @@ func Test_Cov37_Dispose(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov37_Dispose_Nil(t *testing.T) {
+	safeTest(t, "Test_Cov37_Dispose_Nil", func() {
+		var s *corestr.SimpleSlice
+		s.Dispose() // should not panic
+	})
+}
+
+// ── Clone / ClonePtr / DeepClone / ShadowClone ──
+
 func Test_Cov37_Clone_Deep(t *testing.T) {
 	safeTest(t, "Test_Cov37_Clone_Deep", func() {
 		s := corestr.New.SimpleSlice.Lines("a", "b")
@@ -1638,6 +1648,27 @@ func Test_Cov37_Clone_Shallow(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov37_ClonePtr(t *testing.T) {
+	safeTest(t, "Test_Cov37_ClonePtr", func() {
+		s := corestr.New.SimpleSlice.Lines("a")
+		cloned := s.ClonePtr(true)
+		if cloned == nil || cloned.Length() != 1 {
+			t.Errorf("unexpected")
+		}
+	})
+}
+
+func Test_Cov37_ClonePtr_Nil(t *testing.T) {
+	safeTest(t, "Test_Cov37_ClonePtr_Nil", func() {
+		var s *corestr.SimpleSlice
+		if s.ClonePtr(true) != nil {
+			t.Error("expected nil")
+		}
+	})
+}
+
+func Test_Cov37_DeepClone(t *testing.T) {
 	safeTest(t, "Test_Cov37_DeepClone", func() {
 		s := corestr.New.SimpleSlice.Lines("a")
 		cloned := s.DeepClone()
@@ -1980,6 +2011,26 @@ func Test_Cov37_Creator_Strings(t *testing.T) {
 		}
 	})
 }
+
+func Test_Cov37_Creator_StringsPtr(t *testing.T) {
+	safeTest(t, "Test_Cov37_Creator_StringsPtr", func() {
+		s := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+		if s.Length() != 1 {
+			t.Errorf("expected 1")
+		}
+	})
+}
+
+func Test_Cov37_Creator_StringsPtr_Empty(t *testing.T) {
+	safeTest(t, "Test_Cov37_Creator_StringsPtr_Empty", func() {
+		s := corestr.New.SimpleSlice.StringsPtr([]string{})
+		if !s.IsEmpty() {
+			t.Error("expected empty")
+		}
+	})
+}
+
+func Test_Cov37_Creator_StringsOptions_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov37_Creator_StringsOptions_Clone", func() {
 		s := corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
 		if s.Length() != 1 {

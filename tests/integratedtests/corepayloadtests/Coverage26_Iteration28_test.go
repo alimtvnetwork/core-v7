@@ -195,6 +195,68 @@ func Test_I28_TypedPayloadCollection_ErrorMethods_NoErrors(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Error methods return clean -- no errors in collection", actual)
 }
+
+// ---------- TypedPayloadCollection: Clone ----------
+
+func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
+	// Arrange
+	type simpleUser struct {
+		Name string `json:"name"`
+	}
+	items := []simpleUser{{Name: "alice"}}
+	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
+	if err != nil {
+		t.Fatalf("unexpected err: %v", err)
+	}
+
+	// Act
+	cloned, err := collection.Clone()
+
+	// Assert
+	actual := args.Map{
+		"errNil": err == nil,
+		"length": cloned.Length(),
+	}
+	expected := args.Map{
+		"errNil": true,
+		"length": 1,
+	}
+	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- single item", actual)
+}
+
+// ---------- TypedPayloadWrapper: ClonePtr ----------
+
+func Test_I28_TypedPayloadWrapper_ClonePtr(t *testing.T) {
+	// Arrange
+	type simpleData struct {
+		Val string `json:"val"`
+	}
+	data := simpleData{Val: "test"}
+	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
+	if err != nil {
+		t.Fatalf("unexpected err: %v", err)
+	}
+
+	// Act
+	cloned, err := tw.ClonePtr(true)
+
+	// Assert
+	actual := args.Map{
+		"errNil": err == nil,
+		"notNil": cloned != nil,
+	}
+	expected := args.Map{
+		"errNil": true,
+		"notNil": true,
+	}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns valid copy -- deep clone", actual)
+}
+
+// ---------- TypedPayloadWrapper: Clone ----------
+
+func Test_I28_TypedPayloadWrapper_Clone(t *testing.T) {
+	// Arrange
+	type simpleData struct {
 		Val string `json:"val"`
 	}
 	data := simpleData{Val: "test"}

@@ -349,6 +349,22 @@ func Test_S01_ValidValue_SplitTrimNonWhitespace(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "SplitTrimNonWhitespace returns correct value -- trims whitespace", actual)
 	})
 }
+
+// ── ValueBytesOnce ──
+
+func Test_S01_ValidValue_ValueBytesOnce(t *testing.T) {
+	safeTest(t, "Test_S01_ValidValue_ValueBytesOnce", func() {
+		v := corestr.NewValidValue("hi")
+		b := v.ValueBytesOnce()
+		b2 := v.ValueBytesOncePtr()
+		actual := args.Map{"len": len(b), "lenPtr": len(b2), "eq": string(b) == string(b2)}
+		expected := args.Map{"len": 2, "lenPtr": 2, "eq": true}
+		expected.ShouldBeEqual(t, 0, "ValueBytesOnce returns correct value -- caches bytes", actual)
+	})
+}
+
+// ── Clone / Clear / Dispose / String / FullString ──
+
 func Test_S01_ValidValue_Clone(t *testing.T) {
 	safeTest(t, "Test_S01_ValidValue_Clone", func() {
 		v := corestr.NewValidValue("hello")

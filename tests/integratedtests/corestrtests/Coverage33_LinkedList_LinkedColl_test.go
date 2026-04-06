@@ -208,6 +208,17 @@ func Test_C33_LL_AddCollectionToNode(t *testing.T) {
 		ll.AddCollectionToNode(false, ll.Head(), corestr.New.Collection.Strings([]string{"b"}))
 	})
 }
+
+func Test_C33_LL_AddStringsPtrToNode(t *testing.T) {
+	safeTest(t, "Test_C33_LL_AddStringsPtrToNode", func() {
+		ll := corestr.New.LinkedList.Strings([]string{"a"})
+		items := []string{"b"}
+		ll.AddStringsPtrToNode(false, ll.Head(), &items)
+	})
+}
+
+// ── newLinkedListCreator ──
+
 func Test_C33_NLLC_Empty(t *testing.T)   { _ = corestr.New.LinkedList.Empty() }
 func Test_C33_NLLC_Create(t *testing.T)  { _ = corestr.New.LinkedList.Create() }
 func Test_C33_NLLC_Strings(t *testing.T) { _ = corestr.New.LinkedList.Strings([]string{"a"}) }
@@ -498,6 +509,15 @@ func Test_C33_LLN_AddStringsToNode(t *testing.T) {
 		ll.Head().AddStringsToNode(ll, false, []string{"b"})
 	})
 }
+
+func Test_C33_LLN_AddStringsPtrToNode(t *testing.T) {
+	safeTest(t, "Test_C33_LLN_AddStringsPtrToNode", func() {
+		ll := corestr.New.LinkedList.Strings([]string{"a"})
+		items := []string{"b"}
+		ll.Head().AddStringsPtrToNode(ll, false, &items)
+	})
+}
+
 func Test_C33_LLN_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_C33_LLN_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})

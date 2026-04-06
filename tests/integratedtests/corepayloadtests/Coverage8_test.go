@@ -530,6 +530,15 @@ func Test_Cov8_Attributes_Clone_Deep(t *testing.T) {
 	expected := args.Map{"noErr": true, "notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- deep", actual)
 }
+
+func Test_Cov8_Attributes_ClonePtr_Nil(t *testing.T) {
+	var attr *corepayload.Attributes
+	cloned, err := attr.ClonePtr(false)
+	actual := args.Map{"nil": cloned == nil, "noErr": err == nil}
+	expected := args.Map{"nil": true, "noErr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
 func Test_Cov8_Attributes_IsEqual(t *testing.T) {
 	a := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("x"))
 	b := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("x"))
@@ -663,6 +672,26 @@ func Test_Cov8_AuthInfo_SetMethods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns nil -- set methods nil receiver", actual)
 }
+
+func Test_Cov8_AuthInfo_Clone(t *testing.T) {
+	info := &corepayload.AuthInfo{ActionType: "login"}
+	cloned := info.ClonePtr()
+	actual := args.Map{"notNil": cloned != nil, "action": cloned.ActionType}
+	expected := args.Map{"notNil": true, "action": "login"}
+	expected.ShouldBeEqual(t, 0, "AuthInfo.ClonePtr returns correct value -- with args", actual)
+}
+
+func Test_Cov8_AuthInfo_ClonePtr_Nil(t *testing.T) {
+	var info *corepayload.AuthInfo
+	cloned := info.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "AuthInfo.ClonePtr returns nil -- nil", actual)
+}
+
+// ── SessionInfo ──
+
+func Test_Cov8_SessionInfo_Methods(t *testing.T) {
 	info := &corepayload.SessionInfo{Id: "s1", User: &corepayload.User{Name: "u1"}, SessionPath: "/path"}
 	actual := args.Map{
 		"isEmpty":   info.IsEmpty(),
@@ -691,6 +720,26 @@ func Test_Cov8_SessionInfo_IdentifierUnsignedInteger(t *testing.T) {
 	expected := args.Map{"id": uint(0)}
 	expected.ShouldBeEqual(t, 0, "SessionInfo.IdentifierUnsignedInteger returns correct value -- with args", actual)
 }
+
+func Test_Cov8_SessionInfo_Clone(t *testing.T) {
+	info := &corepayload.SessionInfo{Id: "s1"}
+	cloned := info.ClonePtr()
+	actual := args.Map{"id": cloned.Id}
+	expected := args.Map{"id": "s1"}
+	expected.ShouldBeEqual(t, 0, "SessionInfo.Clone returns correct value -- with args", actual)
+}
+
+func Test_Cov8_SessionInfo_ClonePtr_Nil(t *testing.T) {
+	var info *corepayload.SessionInfo
+	cloned := info.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "SessionInfo.ClonePtr returns nil -- nil", actual)
+}
+
+// ── User ──
+
+func Test_Cov8_User_Methods(t *testing.T) {
 	user := &corepayload.User{Name: "test", Type: "admin", AuthToken: "token", PasswordHash: "hash", Identifier: "1"}
 	actual := args.Map{
 		"hasAuth":     user.HasAuthToken(),
@@ -732,6 +781,26 @@ func Test_Cov8_User_IdentifierUnsignedInteger(t *testing.T) {
 	expected := args.Map{"id": uint(0)}
 	expected.ShouldBeEqual(t, 0, "User.IdentifierUnsignedInteger returns correct value -- with args", actual)
 }
+
+func Test_Cov8_User_Clone(t *testing.T) {
+	user := &corepayload.User{Name: "test"}
+	cloned := user.ClonePtr()
+	actual := args.Map{"name": cloned.Name}
+	expected := args.Map{"name": "test"}
+	expected.ShouldBeEqual(t, 0, "User.Clone returns correct value -- with args", actual)
+}
+
+func Test_Cov8_User_ClonePtr_Nil(t *testing.T) {
+	var user *corepayload.User
+	cloned := user.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "User.ClonePtr returns nil -- nil", actual)
+}
+
+// ── UserInfo ──
+
+func Test_Cov8_UserInfo_Methods(t *testing.T) {
 	info := &corepayload.UserInfo{
 		User:       &corepayload.User{Name: "u"},
 		SystemUser: &corepayload.User{Name: "sys"},
@@ -769,6 +838,17 @@ func Test_Cov8_UserInfo_ToNonPtr(t *testing.T) {
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "UserInfo.ToNonPtr returns nil -- nil", actual)
 }
+
+func Test_Cov8_UserInfo_ClonePtr_Nil(t *testing.T) {
+	var info *corepayload.UserInfo
+	cloned := info.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "UserInfo.ClonePtr returns nil -- nil", actual)
+}
+
+// ── PagingInfo ──
+
 func Test_Cov8_PagingInfo_Methods(t *testing.T) {
 	pi := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 1, PerPageItems: 10, TotalItems: 50}
 	actual := args.Map{
@@ -959,6 +1039,15 @@ func Test_Cov8_PayloadWrapper_Clone_Deep(t *testing.T) {
 	expected := args.Map{"noErr": true, "name": "deep"}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- deep", actual)
 }
+
+func Test_Cov8_PayloadWrapper_ClonePtr_Nil(t *testing.T) {
+	var pw *corepayload.PayloadWrapper
+	cloned, err := pw.ClonePtr(false)
+	actual := args.Map{"nil": cloned == nil, "noErr": err == nil}
+	expected := args.Map{"nil": true, "noErr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
 func Test_Cov8_PayloadWrapper_NonPtr_Nil(t *testing.T) {
 	var pw *corepayload.PayloadWrapper
 	result := pw.NonPtr()
@@ -1332,6 +1421,25 @@ func Test_Cov8_PayloadsCollection_ConcatNew(t *testing.T) {
 	expected := args.Map{"origLen": 1, "newLen": 2}
 	expected.ShouldBeEqual(t, 0, "ConcatNew returns correct value -- with args", actual)
 }
+
+func Test_Cov8_PayloadsCollection_ClonePtr_Nil(t *testing.T) {
+	var coll *corepayload.PayloadsCollection
+	cloned := coll.ClonePtr()
+	actual := args.Map{"nil": cloned == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
+}
+
+func Test_Cov8_PayloadsCollection_IsEqual(t *testing.T) {
+	a := corepayload.New.PayloadsCollection.Empty()
+	a.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("x")})
+	b := a.ClonePtr()
+	actual := args.Map{"equal": a.IsEqual(b)}
+	expected := args.Map{"equal": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- with args", actual)
+}
+
+func Test_Cov8_PayloadsCollection_SafeLimitCollection(t *testing.T) {
 	coll := corepayload.New.PayloadsCollection.Empty()
 	coll.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("x")})
 	coll.Add(corepayload.PayloadWrapper{Name: "b", Payloads: []byte("y")})

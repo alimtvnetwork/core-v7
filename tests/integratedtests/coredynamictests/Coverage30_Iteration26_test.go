@@ -222,6 +222,24 @@ func Test_I26_TypedDynamic_Clone(t *testing.T) {
 	expected := args.Map{"data": "x", "valid": true}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Clone", actual)
 }
+
+func Test_I26_TypedDynamic_ClonePtr_Nil(t *testing.T) {
+	var d *coredynamic.TypedDynamic[string]
+	cp := d.ClonePtr()
+	actual := args.Map{"nil": cp == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "TypedDynamic returns nil -- nil ClonePtr", actual)
+}
+
+func Test_I26_TypedDynamic_ClonePtr(t *testing.T) {
+	d := coredynamic.NewTypedDynamicPtr[int](5, true)
+	cp := d.ClonePtr()
+	actual := args.Map{"data": cp.Data(), "valid": cp.IsValid()}
+	expected := args.Map{"data": 5, "valid": true}
+	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ClonePtr", actual)
+}
+
+func Test_I26_TypedDynamic_NonPtr_Ptr(t *testing.T) {
 	d := coredynamic.NewTypedDynamic[int](1, true)
 	np := d.NonPtr()
 	p := d.Ptr()
@@ -541,6 +559,17 @@ func Test_I26_TypedSimpleResult_Clone(t *testing.T) {
 	expected := args.Map{"data": "c", "valid": true, "nilData": ""}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Clone", actual)
 }
+
+func Test_I26_TypedSimpleResult_ClonePtr(t *testing.T) {
+	r := coredynamic.NewTypedSimpleResultValid[string]("cp")
+	cp := r.ClonePtr()
+	var rn *coredynamic.TypedSimpleResult[string]
+	cpn := rn.ClonePtr()
+	actual := args.Map{"data": cp.Data(), "nilClone": cpn == nil}
+	expected := args.Map{"data": "cp", "nilClone": true}
+	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ClonePtr", actual)
+}
+
 func Test_I26_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	r := coredynamic.NewTypedSimpleResultValid[string]("sr")
 	sr := r.ToSimpleResult()
@@ -1125,6 +1154,28 @@ func Test_I26_DynamicStatus_Clone(t *testing.T) {
 	expected := args.Map{"msg": "clone", "valid": false}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- Clone", actual)
 }
+
+func Test_I26_DynamicStatus_ClonePtr_Nil(t *testing.T) {
+	var ds *coredynamic.DynamicStatus
+	cp := ds.ClonePtr()
+	actual := args.Map{"nil": cp == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "DynamicStatus returns nil -- nil ClonePtr", actual)
+}
+
+func Test_I26_DynamicStatus_ClonePtr(t *testing.T) {
+	ds := coredynamic.InvalidDynamicStatus("cp")
+	cp := ds.ClonePtr()
+	actual := args.Map{"msg": cp.Message, "valid": cp.IsValid()}
+	expected := args.Map{"msg": "cp", "valid": false}
+	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- ClonePtr", actual)
+}
+
+// ══════════════════════════════════════════════════════════════════════════════
+// SimpleRequest — constructors, methods
+// ══════════════════════════════════════════════════════════════════════════════
+
+func Test_I26_SimpleRequest_Constructors(t *testing.T) {
 	r1 := coredynamic.InvalidSimpleRequestNoMessage()
 	r2 := coredynamic.InvalidSimpleRequest("msg")
 	r3 := coredynamic.NewSimpleRequest("data", true, "")
@@ -1261,6 +1312,17 @@ func Test_I26_SimpleResult_Clone(t *testing.T) {
 	expected := args.Map{"msg": "m", "valid": true, "nilMsg": ""}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- Clone", actual)
 }
+
+func Test_I26_SimpleResult_ClonePtr(t *testing.T) {
+	r := coredynamic.NewSimpleResult("c", true, "m")
+	cp := r.ClonePtr()
+	var rn *coredynamic.SimpleResult
+	cpn := rn.ClonePtr()
+	actual := args.Map{"msg": cp.Message, "nilClone": cpn == nil}
+	expected := args.Map{"msg": "m", "nilClone": true}
+	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- ClonePtr", actual)
+}
+
 func Test_I26_SimpleResult_GetErrorOnTypeMismatch_Nil(t *testing.T) {
 	var r *coredynamic.SimpleResult
 	err := r.GetErrorOnTypeMismatch(reflect.TypeOf(""), true)

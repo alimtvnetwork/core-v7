@@ -373,6 +373,21 @@ func Test_Hashset_ResizeLarger(t *testing.T) {
 
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Hashset_ResizeSmaller(t *testing.T) {
+	tc := hashsetResizeSmallerTestCase
+	hs := coregeneric.HashsetFrom([]int{1, 2, 3})
+	hs.Resize(1)
+
+	actual := args.Map{"length": hs.Length()}
+
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
+// ==========================================================================
+// Test: Hashset — List / ListPtr / Map / Collection / String
+// ==========================================================================
+
 func Test_Hashset_OutputList(t *testing.T) {
 	tc := hashsetOutputListTestCase
 	hs := coregeneric.HashsetFrom([]int{1, 2, 3})
@@ -390,6 +405,16 @@ func Test_Hashset_OutputListEmpty(t *testing.T) {
 
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Hashset_OutputListPtr(t *testing.T) {
+	tc := hashsetOutputListPtrTestCase
+	hs := coregeneric.HashsetFrom([]int{1, 2, 3})
+
+	actual := args.Map{"isNotNil": hs.ListPtr() != nil}
+
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
 func Test_Hashset_OutputMap(t *testing.T) {
 	tc := hashsetOutputMapTestCase
 	hs := coregeneric.HashsetFrom([]int{1, 2, 3})

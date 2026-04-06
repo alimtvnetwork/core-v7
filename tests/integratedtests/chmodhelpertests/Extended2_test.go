@@ -1817,6 +1817,20 @@ func Test_SimpleFileReaderWriter_Clone_Ext2(t *testing.T) {
 		t.Error("cloned FilePath should match")
 	}
 }
+
+func Test_SimpleFileReaderWriter_ClonePtr_Nil_Ext2(t *testing.T) {
+	// Arrange
+	var rw *chmodhelper.SimpleFileReaderWriter
+
+	// Act
+	cloned := rw.ClonePtr()
+
+	// Assert
+	if cloned != nil {
+		t.Error("nil ClonePtr should return nil")
+	}
+}
+
 func Test_SimpleFileReaderWriter_JSON_Ext2(t *testing.T) {
 	// Arrange
 	rw := chmodhelper.New.SimpleFileReaderWriter.Default(true, "/tmp/test.txt")

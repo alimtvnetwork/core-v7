@@ -87,6 +87,37 @@ func Test_Cov7_Trace_StringUsingFmt(t *testing.T) {
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- StringUsingFmt", actual)
 }
+
+func Test_Cov7_Trace_CloneDispose(t *testing.T) {
+	// Arrange
+	trace := codestack.New.Default()
+	// Act
+	cloned := trace.Clone()
+	clonedPtr := trace.ClonePtr()
+	// Assert
+	actual := args.Map{
+		"clonedPkg":    cloned.PackageName == trace.PackageName,
+		"clonedPtrNil": clonedPtr != nil,
+	}
+	expected := args.Map{"clonedPkg": true, "clonedPtrNil": true}
+	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
+	// Cleanup
+	trace.Dispose()
+	clonedPtr.Dispose()
+}
+
+func Test_Cov7_Trace_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var nilTrace *codestack.Trace
+	// Act
+	result := nilTrace.ClonePtr()
+	// Assert
+	actual := args.Map{"isNil": result == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
+}
+
+func Test_Cov7_Trace_Json(t *testing.T) {
 	// Arrange
 	trace := codestack.New.Default()
 	// Act

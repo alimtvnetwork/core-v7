@@ -1564,6 +1564,28 @@ func Test_Cov_SimpleFileReaderWriter_Clone(t *testing.T) {
 	}
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
+
+func Test_Cov_SimpleFileReaderWriter_ClonePtr_Nil(t *testing.T) {
+	// Arrange
+	var rw *chmodhelper.SimpleFileReaderWriter
+
+	// Act
+	result := rw.ClonePtr()
+
+	// Assert
+	actual := args.Map{
+		"isNil": fmt.Sprintf("%v", result == nil),
+	}
+
+	tc := coretestcases.CaseV1{
+		Title:         "SimpleFileReaderWriter.ClonePtr returns nil for nil receiver",
+		ExpectedInput: args.Map{
+			"isNil": "true",
+		},
+	}
+	tc.ShouldBeEqualMapFirst(t, actual)
+}
+
 func Test_Cov_SimpleFileReaderWriter_String(t *testing.T) {
 	// Arrange
 	dir := covTempDir(t)

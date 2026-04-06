@@ -259,6 +259,16 @@ func Test_CovJsonS5_BC03_BytesCollection_GetMethods(t *testing.T) {
 	_ = empty.FirstOrDefault()
 	_ = empty.LastOrDefault()
 }
+
+func Test_CovJsonS5_BC04_BytesCollection_Strings(t *testing.T) {
+	bc := corejson.NewBytesCollection.UsingCap(2)
+	bc.Add([]byte("a"))
+	_ = bc.Strings()
+	_ = bc.StringsPtr()
+	empty := corejson.NewBytesCollection.UsingCap(0)
+	_ = empty.Strings()
+}
+
 func Test_CovJsonS5_BC05_BytesCollection_Json(t *testing.T) {
 	bc := corejson.NewBytesCollection.UsingCap(1)
 	bc.Add([]byte("a"))
@@ -312,6 +322,20 @@ func Test_CovJsonS5_BC09_BytesCollection_Clear_Dispose(t *testing.T) {
 	nilBC.Clear()
 	nilBC.Dispose()
 }
+
+func Test_CovJsonS5_BC10_BytesCollection_Clone(t *testing.T) {
+	bc := corejson.NewBytesCollection.UsingCap(2)
+	bc.Add([]byte("a"))
+	_ = bc.Clone(true)
+	_ = bc.Clone(false)
+	_ = bc.ClonePtr(true)
+	_ = bc.ClonePtr(false)
+	var nilBC *corejson.BytesCollection
+	if nilBC.ClonePtr(true) != nil {
+		t.Fatal("expected nil")
+	}
+}
+
 func Test_CovJsonS5_BC11_BytesCollection_Take_Limit_Skip(t *testing.T) {
 	bc := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ {
@@ -326,6 +350,15 @@ func Test_CovJsonS5_BC11_BytesCollection_Take_Limit_Skip(t *testing.T) {
 	_ = empty.Limit(0)
 	_ = empty.Skip(0)
 }
+
+func Test_CovJsonS5_BC12_BytesCollection_AddPtr(t *testing.T) {
+	bc := corejson.NewBytesCollection.UsingCap(1)
+	bc.AddPtr([]byte("a"))
+	_ = bc.StringsPtr()
+}
+
+// --- funcs ---
+
 func Test_CovJsonS5_F01_BytesCloneIf(t *testing.T) {
 	b := []byte("hello")
 	_ = corejson.BytesCloneIf(true, b)

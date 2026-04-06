@@ -207,6 +207,43 @@ func Test_IfPtr_True(t *testing.T) {
 	}
 }
 
+func Test_IfPtr_False(t *testing.T) {
+	a, b := 1, 2
+	r := conditional.IfPtr[int](false, &a, &b)
+	if *r != 2 {
+		t.Errorf("expected 2, got %d", *r)
+	}
+}
+
+// ==========================================
+// NilCheck (deprecated but still needs coverage)
+// ==========================================
+
+func Test_NilCheck_Nil(t *testing.T) {
+	r := conditional.NilCheck(nil, "onNil", "onNonNil")
+	if r != "onNil" {
+		t.Errorf("expected 'onNil', got '%v'", r)
+	}
+}
+
+func Test_NilCheck_NonNil(t *testing.T) {
+	r := conditional.NilCheck("val", "onNil", "onNonNil")
+	if r != "onNonNil" {
+		t.Errorf("expected 'onNonNil', got '%v'", r)
+	}
+}
+
+// ==========================================
+// DefOnNil
+// ==========================================
+
+func Test_DefOnNil_Nil(t *testing.T) {
+	r := conditional.DefOnNil(nil, "default")
+	if r != "default" {
+		t.Errorf("expected 'default', got '%v'", r)
+	}
+}
+
 func Test_DefOnNil_NonNil(t *testing.T) {
 	r := conditional.DefOnNil("value", "default")
 	if r != "value" {

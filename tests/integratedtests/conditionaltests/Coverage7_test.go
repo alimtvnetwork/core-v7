@@ -6,6 +6,26 @@ import (
 	"github.com/alimtvnetwork/core/conditional"
 	"github.com/alimtvnetwork/core/coretests/args"
 )
+
+// ── NilCheck ──
+
+func Test_Cov7_NilCheck_Nil(t *testing.T) {
+	result := conditional.NilCheck(nil, "default", "nonnil")
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": "default"}
+	expected.ShouldBeEqual(t, 0, "NilCheck nil -- default", actual)
+}
+
+func Test_Cov7_NilCheck_NonNil(t *testing.T) {
+	result := conditional.NilCheck("val", "default", "nonnil")
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": "nonnil"}
+	expected.ShouldBeEqual(t, 0, "NilCheck nonnil -- nonnil", actual)
+}
+
+// ── DefOnNil ──
+
+func Test_Cov7_DefOnNil_Nil(t *testing.T) {
 	result := conditional.DefOnNil(nil, "fallback")
 	actual := args.Map{"result": result}
 	expected := args.Map{"result": "fallback"}

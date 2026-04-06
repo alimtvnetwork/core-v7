@@ -276,6 +276,18 @@ func Test_Cov18_Hashmap_StringAndJson(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- StringAndJson", actual)
 	})
 }
+
+func Test_Cov18_Hashmap_KeysToLower(t *testing.T) {
+	safeTest(t, "Test_Cov18_Hashmap_KeysToLower", func() {
+		h := corestr.New.Hashmap.UsingMap(map[string]string{"ABC": "1"})
+		lower := h.KeysToLower()
+		_ = h.ValuesToLower()
+		actual := args.Map{"hasLower": lower.Has("abc")}
+		expected := args.Map{"hasLower": true}
+		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- KeysToLower", actual)
+	})
+}
+
 func Test_Cov18_Hashmap_GetExcept(t *testing.T) {
 	safeTest(t, "Test_Cov18_Hashmap_GetExcept", func() {
 		h := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1", "b": "2"})
@@ -342,6 +354,19 @@ func Test_Cov18_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ToStringsUsingCompiler", actual)
 	})
 }
+
+func Test_Cov18_Hashmap_Clone(t *testing.T) {
+	safeTest(t, "Test_Cov18_Hashmap_Clone", func() {
+		h := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1"})
+		c := h.Clone()
+		cp := h.ClonePtr()
+		var nilH *corestr.Hashmap
+		actual := args.Map{"cLen": c.Length(), "cpLen": cp.Length(), "nilClone": nilH.ClonePtr() == nil}
+		expected := args.Map{"cLen": 1, "cpLen": 1, "nilClone": true}
+		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Clone", actual)
+	})
+}
+
 func Test_Cov18_Hashmap_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov18_Hashmap_ClearDispose", func() {
 		h := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1"})
@@ -530,6 +555,30 @@ func Test_Cov18_Hashset_Remove(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- Remove", actual)
 	})
 }
+
+func Test_Cov18_Hashset_List(t *testing.T) {
+	safeTest(t, "Test_Cov18_Hashset_List", func() {
+		h := corestr.New.Hashset.StringsSpreadItems("a")
+		_ = h.List()
+		_ = h.ListPtr()
+		_ = h.Lines()
+		_ = h.SafeStrings()
+		_ = h.ListPtrSortedAsc()
+		_ = h.ListPtrSortedDsc()
+		_ = h.OrderedList()
+		_ = h.SortedList()
+		_ = h.ListCopyLock()
+		_ = h.SimpleSlice()
+		_ = h.Items()
+		_ = h.Collection()
+		_ = h.MapStringAny()
+		_ = h.MapStringAnyDiff()
+		actual := args.Map{"done": true}
+		expected := args.Map{"done": true}
+		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- List", actual)
+	})
+}
+
 func Test_Cov18_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov18_Hashset_Filter", func() {
 		h := corestr.New.Hashset.StringsSpreadItems("abc", "def")

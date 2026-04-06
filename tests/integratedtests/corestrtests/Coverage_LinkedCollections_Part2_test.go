@@ -274,6 +274,22 @@ func Test_CovLC2_15_AddCollectionsPtr_AddCollections(t *testing.T) {
 		lc2.AddCollections(cols2)
 	})
 }
+
+func Test_CovLC2_16_ToStringsPtr_ToStrings(t *testing.T) {
+	safeTest(t, "Test_CovLC2_16_ToStringsPtr_ToStrings", func() {
+		lc := corestr.Empty.LinkedCollections()
+		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
+		ptr := lc.ToStringsPtr()
+		if len(*ptr) != 2 {
+			t.Fatal("expected 2")
+		}
+		strs := lc.ToStrings()
+		if len(strs) != 2 {
+			t.Fatal("expected 2")
+		}
+	})
+}
+
 func Test_CovLC2_17_ToCollectionSimple_ToCollection(t *testing.T) {
 	safeTest(t, "Test_CovLC2_17_ToCollectionSimple_ToCollection", func() {
 		lc := corestr.Empty.LinkedCollections()
@@ -354,6 +370,27 @@ func Test_CovLC2_21_SimpleSlice(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovLC2_22_ListPtr_List(t *testing.T) {
+	safeTest(t, "Test_CovLC2_22_ListPtr_List", func() {
+		lc := corestr.Empty.LinkedCollections()
+		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
+		ptr := lc.ListPtr()
+		if len(*ptr) != 1 {
+			t.Fatal("expected 1")
+		}
+		list := lc.List()
+		if len(list) != 1 {
+			t.Fatal("expected 1")
+		}
+		// empty
+		e := corestr.Empty.LinkedCollections()
+		if len(e.List()) != 0 {
+			t.Fatal("expected 0")
+		}
+	})
+}
+
 func Test_CovLC2_23_String(t *testing.T) {
 	safeTest(t, "Test_CovLC2_23_String", func() {
 		lc := corestr.Empty.LinkedCollections()

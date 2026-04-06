@@ -317,6 +317,23 @@ func Test_Version_Clone(t *testing.T) {
 		t.Error("should clone")
 	}
 }
+
+func Test_Version_ClonePtr(t *testing.T) {
+	v := coreversion.New.Create("1.2.3")
+	c := v.ClonePtr()
+	if c == nil || c.VersionCompact != "1.2.3" {
+		t.Error("should clone ptr")
+	}
+}
+
+func Test_Version_ClonePtr_Nil(t *testing.T) {
+	var v *coreversion.Version
+	if v.ClonePtr() != nil {
+		t.Error("nil should return nil")
+	}
+}
+
+func Test_Version_NonPtr(t *testing.T) {
 	v := coreversion.New.Create("1.2.3")
 	np := v.NonPtr()
 	if np.VersionCompact != "1.2.3" {

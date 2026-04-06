@@ -211,6 +211,26 @@ func Test_Cov24_TypedPayloadWrapper_Reparse(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Reparse succeeds -- valid payload", actual)
 }
+
+func Test_Cov24_TypedPayloadWrapper_ClonePtr(t *testing.T) {
+	// Arrange
+	tw := makeTypedWrapperCov23("user", "1", testUserCov23{Name: "Alice"})
+
+	// Act
+	cloned, err := tw.ClonePtr(true)
+
+	// Assert
+	actual := args.Map{
+		"noError": err == nil,
+		"name":    cloned.Data().Name,
+	}
+	expected := args.Map{
+		"noError": true,
+		"name":    "Alice",
+	}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns deep clone -- valid", actual)
+}
+
 func Test_Cov24_TypedPayloadWrapper_Clone(t *testing.T) {
 	// Arrange
 	tw := makeTypedWrapperCov23("user", "1", testUserCov23{Name: "Alice"})

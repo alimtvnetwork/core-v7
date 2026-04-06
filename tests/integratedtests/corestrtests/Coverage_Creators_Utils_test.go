@@ -302,6 +302,40 @@ func Test_CovSSCreator_02_Strings_Create_Lines(t *testing.T) {
 		}
 	})
 }
+
+func Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone(t *testing.T) {
+	safeTest(t, "Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone", func() {
+		ss := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+		if ss.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		ss2 := corestr.New.SimpleSlice.StringsPtr([]string{})
+		if ss2.Length() != 0 {
+			t.Fatal("expected 0")
+		}
+		ss3 := corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
+		if ss3.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		ss4 := corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
+		if ss4.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		ss5 := corestr.New.SimpleSlice.StringsOptions(true, []string{})
+		if ss5.Length() != 0 {
+			t.Fatal("expected 0")
+		}
+		ss6 := corestr.New.SimpleSlice.StringsClone([]string{"a"})
+		if ss6.Length() != 1 {
+			t.Fatal("expected 1")
+		}
+		ss7 := corestr.New.SimpleSlice.StringsClone(nil)
+		if ss7.Length() != 0 {
+			t.Fatal("expected 0")
+		}
+	})
+}
+
 func Test_CovSSCreator_04_Direct_UsingLines(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_04_Direct_UsingLines", func() {
 		ss := corestr.New.SimpleSlice.Direct(true, []string{"a"})

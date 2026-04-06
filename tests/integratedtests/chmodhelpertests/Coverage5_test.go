@@ -773,6 +773,14 @@ func Test_Cov5_SimpleFileRW_Clone(t *testing.T) {
 	expected := args.Map{"path": "/tmp/test.txt"}
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- Clone", actual)
 }
+
+func Test_Cov5_SimpleFileRW_ClonePtr_Nil(t *testing.T) {
+	var rw *chmodhelper.SimpleFileReaderWriter
+	actual := args.Map{"nil": rw.ClonePtr() == nil}
+	expected := args.Map{"nil": true}
+	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns nil -- ClonePtr nil", actual)
+}
+
 func Test_Cov5_SimpleFileRW_Json(t *testing.T) {
 	rw := chmodhelper.SimpleFileReaderWriter{ChmodDir: 0755, ChmodFile: 0644, FilePath: "/tmp/test.txt"}
 	r := rw.Json()

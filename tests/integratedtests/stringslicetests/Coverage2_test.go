@@ -429,6 +429,22 @@ func Test_Cov2_NonEmptySlicePtr_Mixed(t *testing.T) {
 	expected := args.Map{"len": 2}
 	expected.ShouldBeEqual(t, 0, "NonEmptySlicePtr filters empty -- mixed", actual)
 }
+
+// ============================================================================
+// NonEmptySlice — extra
+// ============================================================================
+
+func Test_Cov2_NonEmptySlice_AllEmpty(t *testing.T) {
+	result := stringslice.NonEmptySlice([]string{"", ""})
+	actual := args.Map{"len": len(result)}
+	expected := args.Map{"len": 0}
+	expected.ShouldBeEqual(t, 0, "NonEmptySlice returns empty -- all empty", actual)
+}
+
+// ============================================================================
+// FirstOrDefault / FirstOrDefaultPtr / LastOrDefault / LastOrDefaultPtr
+// ============================================================================
+
 func Test_Cov2_FirstOrDefault_NonEmpty(t *testing.T) {
 	actual := args.Map{"result": stringslice.FirstOrDefault([]string{"a", "b"})}
 	expected := args.Map{"result": "a"}

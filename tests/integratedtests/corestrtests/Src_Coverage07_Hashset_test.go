@@ -197,6 +197,39 @@ func Test_SrcC07_Hashset_Remove_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC07_Hashset_List_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC07_Hashset_List_Verification", func() {
+		// Arrange
+		tc := srcC07HashsetListTestCase
+		h := corestr.New.Hashset.StringsSpreadItems("a")
+
+		// Act
+		noPanic := !callPanicsSrcC07(func() {
+			_ = h.List()
+			_ = h.ListPtr()
+			_ = h.Lines()
+			_ = h.SafeStrings()
+			_ = h.ListPtrSortedAsc()
+			_ = h.ListPtrSortedDsc()
+			_ = h.OrderedList()
+			_ = h.SortedList()
+			_ = h.ListCopyLock()
+			_ = h.SimpleSlice()
+			_ = h.Items()
+			_ = h.Collection()
+			_ = h.MapStringAny()
+			_ = h.MapStringAnyDiff()
+		})
+		actual := args.Map{
+			"noPanic": noPanic,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC07_Hashset_Filter_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC07_Hashset_Filter_Verification", func() {
 		// Arrange

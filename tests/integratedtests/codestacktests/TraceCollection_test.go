@@ -386,6 +386,43 @@ func Test_TraceCollection_Clone(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
+
+func Test_TraceCollection_ClonePtr(t *testing.T) {
+	for caseIndex, testCase := range traceCollectionClonePtrTestCases {
+		// Arrange
+		collection := newTestCollection()
+
+		// Act
+		cloned := collection.ClonePtr()
+
+		actual := args.Map{
+			"isNil":  cloned == nil,
+			"length": cloned.Length(),
+		}
+
+		// Assert
+		testCase.ShouldBeEqualMap(t, caseIndex, actual)
+	}
+}
+
+func Test_TraceCollection_ClonePtr_Nil(t *testing.T) {
+	for caseIndex, testCase := range traceCollectionClonePtrNilTestCases {
+		// Arrange
+		var collection *codestack.TraceCollection
+
+		// Act
+		cloned := collection.ClonePtr()
+
+		actual := args.Map{
+			"isNil": cloned == nil,
+		}
+
+		// Assert
+		testCase.ShouldBeEqualMap(t, caseIndex, actual)
+	}
+}
+
+func Test_TraceCollection_IsEqual(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionIsEqualTestCases {
 		// Arrange
 		c1 := newTestCollection()

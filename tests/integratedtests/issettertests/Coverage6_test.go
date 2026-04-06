@@ -174,6 +174,37 @@ func Test_Cov6_NewBool(t *testing.T) {
 	expected := args.Map{"true": true, "false": true}
 	expected.ShouldBeEqual(t, 0, "NewBool returns correct value -- with args", actual)
 }
+
+func Test_Cov6_NewMust_Valid(t *testing.T) {
+	result := issetter.NewMust("True")
+	actual := args.Map{"isTrue": result == issetter.True}
+	expected := args.Map{"isTrue": true}
+	expected.ShouldBeEqual(t, 0, "NewMust valid -- True", actual)
+}
+
+// ── Min / Max / MinByte / MaxByte / RangeNamesCsv ──
+
+func Test_Cov6_MinMax(t *testing.T) {
+	actual := args.Map{
+		"min":     issetter.Min() == issetter.Uninitialized,
+		"max":     issetter.Max() == issetter.Wildcard,
+		"minByte": int(issetter.MinByte()),
+		"maxByte": int(issetter.MaxByte()),
+		"csv":     issetter.RangeNamesCsv() != "",
+	}
+	expected := args.Map{
+		"min": true, "max": true,
+		"minByte": 0, "maxByte": 4,
+		"csv": true,
+	}
+	expected.ShouldBeEqual(t, 0, "Min/Max/MinByte/MaxByte/RangeNamesCsv returns correct value -- with args", actual)
+}
+
+// ── IsUnSetOrUninitialized ──
+
+func Test_Cov6_IsUnSetOrUninitialized(t *testing.T) {
+	actual := args.Map{
+		"uninit": issetter.Uninitialized.IsUnSetOrUninitialized(),
 		"unset":  issetter.Unset.IsUnSetOrUninitialized(),
 		"true":   issetter.True.IsUnSetOrUninitialized(),
 	}

@@ -94,6 +94,33 @@ func Test_SrcC08_LinkedList_Adds_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC08_LinkedList_List_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC08_LinkedList_List_Verification", func() {
+		// Arrange
+		tc := srcC08LinkedListListTestCase
+		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
+
+		// Act
+		noPanic := !callPanicsSrcC08(func() {
+			_ = ll.ListPtr()
+			_ = ll.ListLock()
+			_ = ll.ListPtrLock()
+			_ = ll.String()
+			_ = ll.StringLock()
+			_ = ll.Join(",")
+			_ = ll.JoinLock(",")
+		})
+		actual := args.Map{
+			"listLen": len(ll.List()),
+			"noPanic": noPanic,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC08_LinkedList_ToCollection_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC08_LinkedList_ToCollection_Verification", func() {
 		// Arrange
@@ -325,6 +352,37 @@ func Test_SrcC08_LinkedList_AppendChain_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
+
+func Test_SrcC08_LinkedListNode_Methods_Verification(t *testing.T) {
+	safeTest(t, "Test_SrcC08_LinkedListNode_Methods_Verification", func() {
+		// Arrange
+		tc := srcC08LinkedListNodeTestCase
+		n := &corestr.LinkedListNode{Element: "a"}
+
+		// Act
+		c := n.Clone()
+		noPanic := !callPanicsSrcC08(func() {
+			_ = n.List()
+			_ = n.ListPtr()
+			_ = n.Join(",")
+			_ = n.StringList("header: ")
+			_ = n.CreateLinkedList()
+		})
+		actual := args.Map{
+			"hasNext":          n.HasNext(),
+			"string":           n.String(),
+			"isEqualValue":     n.IsEqualValue("a"),
+			"isSensitiveTrue":  n.IsEqualValueSensitive("a", true),
+			"isSensitiveFalse": n.IsEqualValueSensitive("A", false),
+			"cloneElement":     c.Element,
+			"noPanic":          noPanic,
+		}
+
+		// Assert
+		tc.ShouldBeEqualMapFirst(t, actual)
+	})
+}
+
 func Test_SrcC08_LinkedListNode_EndOfChain_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC08_LinkedListNode_EndOfChain_Verification", func() {
 		// Arrange

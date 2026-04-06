@@ -130,6 +130,37 @@ func Test_Cov5_IsContainsPtrSimple_Found(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple returns true -- found", actual)
 }
+
+func Test_Cov5_IsContainsPtrSimple_CaseInsensitive(t *testing.T) {
+	lines := []string{"Hello"}
+	actual := args.Map{"result": stringutil.IsContainsPtrSimple(&lines, "hello", 0, false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple returns true -- case insensitive", actual)
+}
+
+// ═══════════════════════════════════════════
+// IsEmpty / IsEmptyPtr / IsNotEmpty / IsDefined / IsDefinedPtr
+// ═══════════════════════════════════════════
+
+func Test_Cov5_IsEmptyPtr_Nil(t *testing.T) {
+	actual := args.Map{"result": stringutil.IsEmptyPtr(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns true -- nil", actual)
+}
+
+func Test_Cov5_IsEmptyPtr_Empty(t *testing.T) {
+	s := ""
+	actual := args.Map{"result": stringutil.IsEmptyPtr(&s)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns true -- empty string", actual)
+}
+
+func Test_Cov5_IsNotEmpty(t *testing.T) {
+	actual := args.Map{
+		"empty":    stringutil.IsNotEmpty(""),
+		"nonEmpty": stringutil.IsNotEmpty("hello"),
+	}
+	expected := args.Map{"empty": false, "nonEmpty": true}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns bool -- both cases", actual)
 }
 
@@ -309,6 +340,42 @@ func Test_Cov5_IsStartsAndEnds(t *testing.T) {
 	expected := args.Map{"both": true, "neither": false}
 	expected.ShouldBeEqual(t, 0, "IsStartsAndEnds returns bool -- both cases", actual)
 }
+
+func Test_Cov5_IsStartsAndEndsChar(t *testing.T) {
+	actual := args.Map{
+		"both":  stringutil.IsStartsAndEndsChar("[x]", '[', ']'),
+		"no":    stringutil.IsStartsAndEndsChar("hello", '[', ']'),
+		"empty": stringutil.IsStartsAndEndsChar("", '[', ']'),
+	}
+	expected := args.Map{"both": true, "no": false, "empty": false}
+	expected.ShouldBeEqual(t, 0, "IsStartsAndEndsChar returns bool -- various cases", actual)
+}
+
+// ═══════════════════════════════════════════
+// ClonePtr / SafeClonePtr
+// ═══════════════════════════════════════════
+
+func Test_Cov5_ClonePtr_NonNil(t *testing.T) {
+	s := "hello"
+	result := stringutil.ClonePtr(&s)
+	actual := args.Map{"notNil": result != nil, "value": *result, "notSamePtr": result != &s}
+	expected := args.Map{"notNil": true, "value": "hello", "notSamePtr": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns clone -- non-nil", actual)
+}
+
+func Test_Cov5_ClonePtr_Nil(t *testing.T) {
+	result := stringutil.ClonePtr(nil)
+	actual := args.Map{"isNil": result == nil}
+	expected := args.Map{"isNil": true}
+	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil input", actual)
+}
+
+func Test_Cov5_SafeClonePtr_NonNil(t *testing.T) {
+	s := "hello"
+	result := stringutil.SafeClonePtr(&s)
+	actual := args.Map{"notNil": result != nil, "value": *result}
+	expected := args.Map{"notNil": true, "value": "hello"}
+	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns clone -- non-nil", actual)
 }
 
 func Test_Cov5_SafeClonePtr_Nil(t *testing.T) {

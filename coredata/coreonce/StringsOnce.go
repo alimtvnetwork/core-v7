@@ -60,6 +60,11 @@ func (it *StringsOnce) Values() []string {
 	return it.Value()
 }
 
+// Deprecated: Use Values instead.
+func (it *StringsOnce) ValuesPtr() []string {
+	return it.Value()
+}
+
 func (it *StringsOnce) Value() []string {
 	if it.isInitialized == true {
 		return it.innerData

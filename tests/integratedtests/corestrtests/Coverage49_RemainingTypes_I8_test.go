@@ -76,6 +76,17 @@ func Test_C49_ValidValue_ValueBytesOnce(t *testing.T) {
 		}
 	})
 }
+
+func Test_C49_ValidValue_ValueBytesOncePtr(t *testing.T) {
+	safeTest(t, "Test_C49_ValidValue_ValueBytesOncePtr", func() {
+		vv := corestr.NewValidValue("ab")
+		b := vv.ValueBytesOncePtr()
+		if len(b) != 2 {
+			t.Fatal("expected 2")
+		}
+	})
+}
+
 func Test_C49_ValidValue_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_C49_ValidValue_IsWhitespace", func() {
 		vv := corestr.NewValidValue("   ")
@@ -1327,6 +1338,18 @@ func Test_C49_HashsetsCollection_LastIndex(t *testing.T) {
 		}
 	})
 }
+
+func Test_C49_HashsetsCollection_ListPtr(t *testing.T) {
+	safeTest(t, "Test_C49_HashsetsCollection_ListPtr", func() {
+		hsc := corestr.Empty.HashsetsCollection()
+		hsc.Add(corestr.New.Hashset.Strings([]string{"a"}))
+		p := hsc.ListPtr()
+		if p == nil || len(*p) != 1 {
+			t.Fatal("expected 1")
+		}
+	})
+}
+
 func Test_C49_HashsetsCollection_ListDirectPtr(t *testing.T) {
 	safeTest(t, "Test_C49_HashsetsCollection_ListDirectPtr", func() {
 		hsc := corestr.Empty.HashsetsCollection()
