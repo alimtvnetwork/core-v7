@@ -319,10 +319,16 @@ func Test_Cov4_Conclusive_SameValues(t *testing.T) {
 	isEq, isConcl := isany.Conclusive(42, 42)
 
 	// Act
-	actual := args.Map{"isEqual": isEq, "isConcl": isConcl}
+	actual := args.Map{
+		"isEqual": isEq,
+		"isConcl": isConcl,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": true, "isConcl": true}
+	expected := args.Map{
+		"isEqual": true,
+		"isConcl": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns non-empty -- same int values equal", actual)
 }
 
@@ -353,6 +359,9 @@ func Test_Cov4_DeepEqual_Structs(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+	}
 	expected.ShouldBeEqual(t, 0, "DeepEqual returns correct value -- structs", actual)
 }

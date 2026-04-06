@@ -18,10 +18,16 @@ func Test_Seg5_HM_IsEmpty(t *testing.T) {
 		h := corestr.New.Hashmap.Cap(0)
 
 		// Act
-		actual := args.Map{"empty": h.IsEmpty(), "hasItems": h.HasItems()}
+		actual := args.Map{
+			"empty": h.IsEmpty(),
+			"hasItems": h.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -34,10 +40,18 @@ func Test_Seg5_HM_AddOrUpdate(t *testing.T) {
 		isNew2 := h.AddOrUpdate("k", "v2")
 
 		// Act
-		actual := args.Map{"isNew": isNew, "isNew2": isNew2, "len": h.Length()}
+		actual := args.Map{
+			"isNew": isNew,
+			"isNew2": isNew2,
+			"len": h.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isNew": true, "isNew2": false, "len": 1}
+		expected := args.Map{
+			"isNew": true,
+			"isNew2": false,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "AddOrUpdate -- new then update", actual)
 	})
 }
@@ -65,10 +79,16 @@ func Test_Seg5_HM_SetTrim(t *testing.T) {
 		val, found := h.Get("a")
 
 		// Act
-		actual := args.Map{"found": found, "val": val}
+		actual := args.Map{
+			"found": found,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "1"}
+		expected := args.Map{
+			"found": true,
+			"val": "1",
+		}
 		expected.ShouldBeEqual(t, 0, "SetTrim -- trimmed key and val", actual)
 	})
 }
@@ -81,10 +101,16 @@ func Test_Seg5_HM_SetBySplitter(t *testing.T) {
 		val, found := h.Get("key")
 
 		// Act
-		actual := args.Map{"found": found, "val": val}
+		actual := args.Map{
+			"found": found,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "value"}
+		expected := args.Map{
+			"found": true,
+			"val": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "SetBySplitter -- split key=value", actual)
 	})
 }
@@ -97,10 +123,16 @@ func Test_Seg5_HM_SetBySplitter_NoValue(t *testing.T) {
 		val, found := h.Get("keyonly")
 
 		// Act
-		actual := args.Map{"found": found, "val": val}
+		actual := args.Map{
+			"found": found,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": ""}
+		expected := args.Map{
+			"found": true,
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SetBySplitter no value -- empty val", actual)
 	})
 }
@@ -526,7 +558,10 @@ func Test_Seg5_HM_HasAllStrings(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings -- all and missing", actual)
 	})
 }
@@ -538,10 +573,16 @@ func Test_Seg5_HM_HasAll(t *testing.T) {
 		h.Set("a", "1")
 
 		// Act
-		actual := args.Map{"has": h.HasAll("a"), "miss": h.HasAll("z")}
+		actual := args.Map{
+			"has": h.HasAll("a"),
+			"miss": h.HasAll("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAll -- found and missing", actual)
 	})
 }
@@ -554,10 +595,16 @@ func Test_Seg5_HM_HasAllCollectionItems(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"has": h.HasAllCollectionItems(c), "nil": h.HasAllCollectionItems(nil)}
+		actual := args.Map{
+			"has": h.HasAllCollectionItems(c),
+			"nil": h.HasAllCollectionItems(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllCollectionItems -- found and nil", actual)
 	})
 }
@@ -569,10 +616,16 @@ func Test_Seg5_HM_HasAny(t *testing.T) {
 		h.Set("a", "1")
 
 		// Act
-		actual := args.Map{"any": h.HasAny("z", "a"), "none": h.HasAny("x", "y")}
+		actual := args.Map{
+			"any": h.HasAny("z", "a"),
+			"none": h.HasAny("x", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"any": true, "none": false}
+		expected := args.Map{
+			"any": true,
+			"none": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAny -- found and none", actual)
 	})
 }
@@ -603,10 +656,20 @@ func Test_Seg5_HM_Get(t *testing.T) {
 		val2, found2 := h.GetValue("a")
 
 		// Act
-		actual := args.Map{"val": val, "found": found, "val2": val2, "found2": found2}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+			"val2": val2,
+			"found2": found2,
+		}
 
 		// Assert
-		expected := args.Map{"val": "1", "found": true, "val2": "1", "found2": true}
+		expected := args.Map{
+			"val": "1",
+			"found": true,
+			"val2": "1",
+			"found2": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Get/GetValue -- found", actual)
 	})
 }
@@ -649,10 +712,16 @@ func Test_Seg5_HM_Keys(t *testing.T) {
 		h.Set("a", "1")
 
 		// Act
-		actual := args.Map{"len": len(h.Keys()), "allLen": len(h.AllKeys())}
+		actual := args.Map{
+			"len": len(h.Keys()),
+			"allLen": len(h.AllKeys()),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "allLen": 1}
+		expected := args.Map{
+			"len": 1,
+			"allLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Keys/AllKeys -- 1 key", actual)
 	})
 }
@@ -725,10 +794,16 @@ func Test_Seg5_HM_KeysValuesList(t *testing.T) {
 		keys, values := h.KeysValuesList()
 
 		// Act
-		actual := args.Map{"kLen": len(keys), "vLen": len(values)}
+		actual := args.Map{
+			"kLen": len(keys),
+			"vLen": len(values),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesList -- 1 each", actual)
 	})
 }
@@ -741,10 +816,16 @@ func Test_Seg5_HM_KeysValuesCollection(t *testing.T) {
 		keys, values := h.KeysValuesCollection()
 
 		// Act
-		actual := args.Map{"kLen": keys.Length(), "vLen": values.Length()}
+		actual := args.Map{
+			"kLen": keys.Length(),
+			"vLen": values.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesCollection -- 1 each", actual)
 	})
 }
@@ -816,10 +897,16 @@ func Test_Seg5_HM_KeysValuesListLock(t *testing.T) {
 		keys, vals := h.KeysValuesListLock()
 
 		// Act
-		actual := args.Map{"kLen": len(keys), "vLen": len(vals)}
+		actual := args.Map{
+			"kLen": len(keys),
+			"vLen": len(vals),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesListLock -- 1 each", actual)
 	})
 }
@@ -1689,10 +1776,16 @@ func Test_Seg5_HM_MarshalJSON(t *testing.T) {
 		b, err := h.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1704,10 +1797,16 @@ func Test_Seg5_HM_UnmarshalJSON(t *testing.T) {
 		err := h.UnmarshalJSON([]byte(`{"a":"1"}`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": h.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": h.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -1737,10 +1836,16 @@ func Test_Seg5_HM_ParseInjectUsingJson(t *testing.T) {
 		result, err := h2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": result.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": result.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- round trip", actual)
 	})
 }
@@ -1771,10 +1876,16 @@ func Test_Seg5_HM_Serialize(t *testing.T) {
 		b, err := h.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1788,10 +1899,16 @@ func Test_Seg5_HM_Deserialize(t *testing.T) {
 		err := h.Deserialize(&dest)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": len(dest)}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": len(dest),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize -- success", actual)
 	})
 }
@@ -1925,10 +2042,16 @@ func Test_Seg5_HM_ToStringsUsingCompiler(t *testing.T) {
 		result := h.ToStringsUsingCompiler(func(k, v string) string { return k + "=" + v })
 
 		// Act
-		actual := args.Map{"len": len(result), "val": result[0]}
+		actual := args.Map{
+			"len": len(result),
+			"val": result[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "val": "a=1"}
+		expected := args.Map{
+			"len": 1,
+			"val": "a=1",
+		}
 		expected.ShouldBeEqual(t, 0, "ToStringsUsingCompiler -- formatted", actual)
 	})
 }
@@ -2126,10 +2249,20 @@ func Test_Seg5_HMD_Length(t *testing.T) {
 		d := corestr.HashmapDiff(map[string]string{"a": "1"})
 
 		// Act
-		actual := args.Map{"len": d.Length(), "empty": d.IsEmpty(), "hasAny": d.HasAnyItem(), "last": d.LastIndex()}
+		actual := args.Map{
+			"len": d.Length(),
+			"empty": d.IsEmpty(),
+			"hasAny": d.HasAnyItem(),
+			"last": d.LastIndex(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "empty": false, "hasAny": true, "last": 0}
+		expected := args.Map{
+			"len": 1,
+			"empty": false,
+			"hasAny": true,
+			"last": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "HashmapDiff -- basic props", actual)
 	})
 }
@@ -2231,7 +2364,10 @@ func Test_Seg5_HMD_IsRawEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsRawEqual -- match and mismatch", actual)
 	})
 }
@@ -2377,10 +2513,16 @@ func Test_Seg5_HMD_Serialize(t *testing.T) {
 		b, err := d.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashmapDiff Serialize -- success", actual)
 	})
 }

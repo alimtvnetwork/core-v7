@@ -399,10 +399,16 @@ func Test_Cov7_DoubleQuoteWrapElements_NonEmpty(t *testing.T) {
 	result := simplewrap.DoubleQuoteWrapElements(false, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": `"a"`}
+	expected := args.Map{
+		"len": 2,
+		"first": `"a"`,
+	}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns empty -- non-empty", actual)
 }
 

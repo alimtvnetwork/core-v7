@@ -13,7 +13,10 @@ import (
 
 func Test_ArgsMap_Length(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"len": m.Length()}
@@ -25,7 +28,10 @@ func Test_ArgsMap_Length(t *testing.T) {
 
 func Test_ArgsMap_ArgsCount_NoFuncNoExpect(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"count": m.ArgsCount()}
@@ -97,7 +103,10 @@ func Test_ArgsMap_HasDefined_NilMap(t *testing.T) {
 
 func Test_ArgsMap_HasDefinedAll_Present(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"has": m.HasDefinedAll("a", "b")}
@@ -198,10 +207,16 @@ func Test_ArgsMap_Get_Present(t *testing.T) {
 	item, isValid := m.Get("key")
 
 	// Act
-	actual := args.Map{"item": item, "isValid": isValid}
+	actual := args.Map{
+		"item": item,
+		"isValid": isValid,
+	}
 
 	// Assert
-	expected := args.Map{"item": "val", "isValid": true}
+	expected := args.Map{
+		"item": "val",
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Get present", actual)
 }
 
@@ -224,10 +239,16 @@ func Test_ArgsMap_GetAsInt(t *testing.T) {
 	val, ok := m.GetAsInt("num")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsInt", actual)
 }
 
@@ -237,10 +258,16 @@ func Test_ArgsMap_GetAsInt_Missing(t *testing.T) {
 	val, ok := m.GetAsInt("num")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 0, "ok": false}
+	expected := args.Map{
+		"val": 0,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsInt missing", actual)
 }
 
@@ -274,10 +301,16 @@ func Test_ArgsMap_GetAsBool(t *testing.T) {
 	val, ok := m.GetAsBool("flag")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsBool", actual)
 }
 
@@ -287,10 +320,16 @@ func Test_ArgsMap_GetAsBool_Missing(t *testing.T) {
 	val, ok := m.GetAsBool("flag")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": false, "ok": false}
+	expected := args.Map{
+		"val": false,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsBool missing", actual)
 }
 
@@ -312,10 +351,16 @@ func Test_ArgsMap_GetAsString(t *testing.T) {
 	val, ok := m.GetAsString("name")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsString", actual)
 }
 
@@ -337,10 +382,16 @@ func Test_ArgsMap_GetAsStrings(t *testing.T) {
 	items, ok := m.GetAsStrings("items")
 
 	// Act
-	actual := args.Map{"len": len(items), "ok": ok}
+	actual := args.Map{
+		"len": len(items),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "ok": true}
+	expected := args.Map{
+		"len": 2,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsStrings", actual)
 }
 
@@ -350,10 +401,16 @@ func Test_ArgsMap_GetAsStrings_Missing(t *testing.T) {
 	items, ok := m.GetAsStrings("items")
 
 	// Act
-	actual := args.Map{"len": len(items), "ok": ok}
+	actual := args.Map{
+		"len": len(items),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "ok": false}
+	expected := args.Map{
+		"len": 0,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsStrings missing", actual)
 }
 
@@ -363,10 +420,16 @@ func Test_ArgsMap_GetAsAnyItems(t *testing.T) {
 	items, ok := m.GetAsAnyItems("items")
 
 	// Act
-	actual := args.Map{"len": len(items), "ok": ok}
+	actual := args.Map{
+		"len": len(items),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "ok": true}
+	expected := args.Map{
+		"len": 2,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsAnyItems", actual)
 }
 
@@ -376,10 +439,16 @@ func Test_ArgsMap_GetAsAnyItems_Missing(t *testing.T) {
 	items, ok := m.GetAsAnyItems("items")
 
 	// Act
-	actual := args.Map{"len": len(items), "ok": ok}
+	actual := args.Map{
+		"len": len(items),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "ok": false}
+	expected := args.Map{
+		"len": 0,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- GetAsAnyItems missing", actual)
 }
 
@@ -476,36 +545,60 @@ func Test_ArgsMap_SortedKeys_Empty(t *testing.T) {
 	keys, err := m.SortedKeys()
 
 	// Act
-	actual := args.Map{"len": len(keys), "isNil": err == nil}
+	actual := args.Map{
+		"len": len(keys),
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isNil": true}
+	expected := args.Map{
+		"len": 0,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns empty -- SortedKeys empty", actual)
 }
 
 func Test_ArgsMap_SortedKeys_NonEmpty(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys, _ := m.SortedKeys()
 
 	// Act
-	actual := args.Map{"first": keys[0], "second": keys[1]}
+	actual := args.Map{
+		"first": keys[0],
+		"second": keys[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- SortedKeys sorted", actual)
 }
 
 func Test_ArgsMap_CompileToStrings(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	lines := m.CompileToStrings()
 
 	// Act
-	actual := args.Map{"len": len(lines), "first": lines[0]}
+	actual := args.Map{
+		"len": len(lines),
+		"first": lines[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a : 1"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a : 1",
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- CompileToStrings", actual)
 }
 
@@ -576,7 +669,10 @@ func Test_ArgsMap_GoLiteralString(t *testing.T) {
 
 func Test_ArgsMap_GetByIndex(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	result := m.GetByIndex(0)
 
 	// Act
@@ -641,7 +737,10 @@ func Test_ArgsMap_Raw(t *testing.T) {
 
 func Test_ArgsMap_Args(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	result := m.Args("a", "b")
 
 	// Act
@@ -814,10 +913,16 @@ func Test_ArgsOne_LeftRight(t *testing.T) {
 	lr := one.LeftRight()
 
 	// Act
-	actual := args.Map{"left": lr.Left, "expect": lr.Expect}
+	actual := args.Map{
+		"left": lr.Left,
+		"expect": lr.Expect,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "expect": "exp"}
+	expected := args.Map{
+		"left": "hello",
+		"expect": "exp",
+	}
 	expected.ShouldBeEqual(t, 0, "One returns correct value -- LeftRight", actual)
 }
 
@@ -827,10 +932,16 @@ func Test_ArgsOne_ArgTwo(t *testing.T) {
 	two := one.ArgTwo()
 
 	// Act
-	actual := args.Map{"first": two.First, "expect": two.Expect}
+	actual := args.Map{
+		"first": two.First,
+		"expect": two.Expect,
+	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "expect": "exp"}
+	expected := args.Map{
+		"first": "hello",
+		"expect": "exp",
+	}
 	expected.ShouldBeEqual(t, 0, "One returns correct value -- ArgTwo", actual)
 }
 
@@ -897,7 +1008,11 @@ func Test_ArgsTwo_Args(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"args0": 0, "args1": 1, "args2": 2}
+	expected := args.Map{
+		"args0": 0,
+		"args1": 1,
+		"args2": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Two returns correct value -- Args", actual)
 }
 
@@ -907,10 +1022,16 @@ func Test_ArgsTwo_LeftRight(t *testing.T) {
 	lr := two.LeftRight()
 
 	// Act
-	actual := args.Map{"left": lr.Left, "right": lr.Right}
+	actual := args.Map{
+		"left": lr.Left,
+		"right": lr.Right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "a", "right": "b"}
+	expected := args.Map{
+		"left": "a",
+		"right": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "Two returns correct value -- LeftRight", actual)
 }
 
@@ -945,10 +1066,16 @@ func Test_ArgsThree_ArgTwo(t *testing.T) {
 	two := three.ArgTwo()
 
 	// Act
-	actual := args.Map{"first": two.First, "second": two.Second}
+	actual := args.Map{
+		"first": two.First,
+		"second": two.Second,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "Three returns correct value -- ArgTwo", actual)
 }
 
@@ -993,7 +1120,11 @@ func Test_ArgsFour_All(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"fourth": "d", "hasFourth": true, "argsCount": 4}
+	expected := args.Map{
+		"fourth": "d",
+		"hasFourth": true,
+		"argsCount": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- all methods", actual)
 }
 
@@ -1051,7 +1182,11 @@ func Test_ArgsFive_All(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"fifth": "e", "hasFifth": true, "count": 5}
+	expected := args.Map{
+		"fifth": "e",
+		"hasFifth": true,
+		"count": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "Five returns correct value -- all methods", actual)
 }
 
@@ -1096,7 +1231,11 @@ func Test_ArgsSix_All(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"sixth": "f", "hasSixth": true, "count": 6}
+	expected := args.Map{
+		"sixth": "f",
+		"hasSixth": true,
+		"count": 6,
+	}
 	expected.ShouldBeEqual(t, 0, "Six returns correct value -- all methods", actual)
 }
 
@@ -1160,10 +1299,16 @@ func Test_ArgsLeftRight_Clone(t *testing.T) {
 	cloned := lr.Clone()
 
 	// Act
-	actual := args.Map{"left": cloned.Left, "right": cloned.Right}
+	actual := args.Map{
+		"left": cloned.Left,
+		"right": cloned.Right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "a", "right": "b"}
+	expected := args.Map{
+		"left": "a",
+		"right": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Clone", actual)
 }
 
@@ -1200,10 +1345,16 @@ func Test_ArgsString_IsEmptyTrue(t *testing.T) {
 	s := args.String("")
 
 	// Act
-	actual := args.Map{"isEmpty": s.IsEmpty(), "isEW": s.IsEmptyOrWhitespace()}
+	actual := args.Map{
+		"isEmpty": s.IsEmpty(),
+		"isEW": s.IsEmptyOrWhitespace(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "isEW": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"isEW": true,
+	}
 	expected.ShouldBeEqual(t, 0, "String returns empty -- empty", actual)
 }
 
@@ -1374,7 +1525,11 @@ func Test_NewFuncWrap_Default(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "argsCount": 1, "retLen": 1}
+	expected := args.Map{
+		"isValid": true,
+		"argsCount": 1,
+		"retLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- Default", actual)
 }
 
@@ -1395,10 +1550,16 @@ func Test_NewFuncWrap_Default_NotFunc(t *testing.T) {
 	fw := args.NewFuncWrap.Default("not a func")
 
 	// Act
-	actual := args.Map{"isValid": fw.IsValid(), "isInvalid": fw.IsInvalid()}
+	actual := args.Map{
+		"isValid": fw.IsValid(),
+		"isInvalid": fw.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isInvalid": true}
+	expected := args.Map{
+		"isValid": false,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- Default not func", actual)
 }
 
@@ -1420,10 +1581,16 @@ func Test_FuncWrap_Invoke(t *testing.T) {
 	results, err := fw.Invoke("hello")
 
 	// Act
-	actual := args.Map{"result": results[0], "err": err == nil}
+	actual := args.Map{
+		"result": results[0],
+		"err": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"result": 5, "err": true}
+	expected := args.Map{
+		"result": 5,
+		"err": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- Invoke", actual)
 }
 
@@ -1568,10 +1735,16 @@ func Test_FuncWrap_GetInArgsTypesNames(t *testing.T) {
 	names := fw.GetInArgsTypesNames()
 
 	// Act
-	actual := args.Map{"len": len(names), "first": names[0]}
+	actual := args.Map{
+		"len": len(names),
+		"first": names[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "string"}
+	expected := args.Map{
+		"len": 1,
+		"first": "string",
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- GetInArgsTypesNames", actual)
 }
 
@@ -1581,10 +1754,16 @@ func Test_FuncWrap_GetOutArgsTypesNames(t *testing.T) {
 	names := fw.GetOutArgsTypesNames()
 
 	// Act
-	actual := args.Map{"len": len(names), "first": names[0]}
+	actual := args.Map{
+		"len": len(names),
+		"first": names[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "int"}
+	expected := args.Map{
+		"len": 1,
+		"first": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- GetOutArgsTypesNames", actual)
 }
 
@@ -1668,10 +1847,16 @@ func Test_FuncWrap_InvokeAsBool(t *testing.T) {
 	val, err := fw.InvokeAsBool()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "noErr": true}
+	expected := args.Map{
+		"val": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsBool", actual)
 }
 
@@ -1681,10 +1866,16 @@ func Test_FuncWrap_InvokeAsString(t *testing.T) {
 	val, err := fw.InvokeAsString()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hi", "noErr": true}
+	expected := args.Map{
+		"val": "hi",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsString", actual)
 }
 
@@ -1694,10 +1885,16 @@ func Test_FuncWrap_InvokeAsAny(t *testing.T) {
 	val, err := fw.InvokeAsAny()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "noErr": true}
+	expected := args.Map{
+		"val": 42,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- InvokeAsAny", actual)
 }
 
@@ -1708,10 +1905,16 @@ func Test_FuncWrap_VoidCall(t *testing.T) {
 	_, err := fw.VoidCall()
 
 	// Act
-	actual := args.Map{"called": called, "noErr": err == nil}
+	actual := args.Map{
+		"called": called,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "noErr": true}
+	expected := args.Map{
+		"called": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns correct value -- VoidCall", actual)
 }
 
@@ -1947,7 +2150,11 @@ func Test_FuncMap_Has(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"has": true, "hasMissing": false, "isContains": true}
+	expected := args.Map{
+		"has": true,
+		"hasMissing": false,
+		"isContains": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- Has", actual)
 }
 

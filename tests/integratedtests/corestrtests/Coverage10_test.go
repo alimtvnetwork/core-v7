@@ -70,10 +70,16 @@ func Test_Cov10_LinkedList_AddFront(t *testing.T) {
 		ll.PushFront("z")
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "head": "z"}
+		expected := args.Map{
+			"len": 3,
+			"head": "z",
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- AddFront", actual)
 	})
 }
@@ -85,10 +91,16 @@ func Test_Cov10_LinkedList_AddLock(t *testing.T) {
 		ll.AddLock("a")
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "emptyLock": ll.IsEmptyLock()}
+		actual := args.Map{
+			"len": ll.Length(),
+			"emptyLock": ll.IsEmptyLock(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "emptyLock": false}
+		expected := args.Map{
+			"len": 1,
+			"emptyLock": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- AddLock", actual)
 	})
 }
@@ -113,7 +125,12 @@ func Test_Cov10_LinkedList_IsEquals(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"equal": true, "notEqual": false, "nilBoth": true, "nilOne": false}
+		expected := args.Map{
+			"equal": true,
+			"notEqual": false,
+			"nilBoth": true,
+			"nilOne": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- IsEquals", actual)
 	})
 }
@@ -285,7 +302,11 @@ func Test_Cov10_ValidValue_IsAnyOf(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"found": true, "notFound": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"notFound": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- IsAnyOf", actual)
 	})
 }
@@ -303,7 +324,11 @@ func Test_Cov10_ValidValue_IsAnyContains(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"found": true, "notFound": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"notFound": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- IsAnyContains", actual)
 	})
 }
@@ -351,10 +376,18 @@ func Test_Cov10_ValidValue_BytesOnce(t *testing.T) {
 		b3 := vv.ValueBytesOncePtr()
 
 		// Act
-		actual := args.Map{"len": len(b1), "cached": len(b2) == len(b1), "ptrLen": len(b3)}
+		actual := args.Map{
+			"len": len(b1),
+			"cached": len(b2) == len(b1),
+			"ptrLen": len(b3),
+		}
 
 		// Assert
-		expected := args.Map{"len": 5, "cached": true, "ptrLen": 5}
+		expected := args.Map{
+			"len": 5,
+			"cached": true,
+			"ptrLen": 5,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- BytesOnce", actual)
 	})
 }
@@ -375,7 +408,11 @@ func Test_Cov10_ValidValue_Split(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"partsLen": 3, "neLen": 3, "trimLen": 3}
+		expected := args.Map{
+			"partsLen": 3,
+			"neLen": 3,
+			"trimLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- Split", actual)
 	})
 }
@@ -394,7 +431,10 @@ func Test_Cov10_ValidValue_Clone(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"cloneVal": "hello", "nilClone": true}
+		expected := args.Map{
+			"cloneVal": "hello",
+			"nilClone": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- Clone", actual)
 	})
 }
@@ -414,7 +454,12 @@ func Test_Cov10_ValidValue_String(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"str": "hello", "fullStr": true, "nilStr": "", "nilFull": ""}
+		expected := args.Map{
+			"str": "hello",
+			"fullStr": true,
+			"nilStr": "",
+			"nilFull": "",
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- String", actual)
 	})
 }
@@ -429,10 +474,16 @@ func Test_Cov10_ValidValue_ClearDispose(t *testing.T) {
 		nilVV.Dispose() // should not panic
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "valid": false}
+		expected := args.Map{
+			"val": "",
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- Clear/Dispose", actual)
 	})
 }
@@ -452,7 +503,12 @@ func Test_Cov10_ValidValue_JSON(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jHas": true, "jpNN": true, "bLen": true, "noErr": true}
+		expected := args.Map{
+			"jHas": true,
+			"jpNN": true,
+			"bLen": true,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- JSON", actual)
 	})
 }
@@ -470,7 +526,11 @@ func Test_Cov10_ValidValue_Regex(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"nilRegex": false, "nilFind": "", "nilAll": 0}
+		expected := args.Map{
+			"nilRegex": false,
+			"nilFind": "",
+			"nilAll": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns nil -- Regex nil", actual)
 	})
 }
@@ -605,7 +665,12 @@ func Test_Cov10_KeyValuePair_JSON(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jHas": true, "jpNN": true, "bLen": true, "noErr": true}
+		expected := args.Map{
+			"jHas": true,
+			"jpNN": true,
+			"bLen": true,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair returns correct value -- JSON", actual)
 	})
 }
@@ -620,10 +685,16 @@ func Test_Cov10_KeyValuePair_ClearDispose(t *testing.T) {
 		nilKV.Dispose() // should not panic
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "", "val": ""}
+		expected := args.Map{
+			"key": "",
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair returns correct value -- Clear/Dispose", actual)
 	})
 }
@@ -674,10 +745,16 @@ func Test_Cov10_LeftRight(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- with args", actual)
 	})
 }
@@ -695,10 +772,16 @@ func Test_Cov10_ValueStatus(t *testing.T) {
 		}
 
 		// Act
-		actual := args.Map{"val": vs.ValueValid.Value, "idx": vs.Index}
+		actual := args.Map{
+			"val": vs.ValueValid.Value,
+			"idx": vs.Index,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "idx": 0}
+		expected := args.Map{
+			"val": "hello",
+			"idx": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus returns non-empty -- with args", actual)
 	})
 }
@@ -713,10 +796,16 @@ func Test_Cov10_TextWithLineNumber(t *testing.T) {
 		tln := corestr.TextWithLineNumber{Text: "hello", LineNumber: 1}
 
 		// Act
-		actual := args.Map{"text": tln.Text, "lineNum": tln.LineNumber}
+		actual := args.Map{
+			"text": tln.Text,
+			"lineNum": tln.LineNumber,
+		}
 
 		// Assert
-		expected := args.Map{"text": "hello", "lineNum": 1}
+		expected := args.Map{
+			"text": "hello",
+			"lineNum": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "TextWithLineNumber returns non-empty -- with args", actual)
 	})
 }
@@ -739,7 +828,11 @@ func Test_Cov10_SimpleSlice_HasIndex(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"hasIdx0": true, "hasIdx1": true, "hasIdx5": false}
+		expected := args.Map{
+			"hasIdx0": true,
+			"hasIdx1": true,
+			"hasIdx5": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- HasIndex", actual)
 	})
 }
@@ -779,10 +872,16 @@ func Test_Cov10_Hashset_SortedList(t *testing.T) {
 		sorted := h.SortedList()
 
 		// Act
-		actual := args.Map{"first": sorted[0], "last": sorted[2]}
+		actual := args.Map{
+			"first": sorted[0],
+			"last": sorted[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- SortedList", actual)
 	})
 }
@@ -804,7 +903,10 @@ func Test_Cov10_Hashset_IsEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"equal": true, "notEqual": false}
+		expected := args.Map{
+			"equal": true,
+			"notEqual": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- IsEqual", actual)
 	})
 }
@@ -839,10 +941,18 @@ func Test_Cov10_Hashmap_GetValue(t *testing.T) {
 		_, notFound := h.GetValue("x")
 
 		// Act
-		actual := args.Map{"v": v, "found": found, "notFound": notFound}
+		actual := args.Map{
+			"v": v,
+			"found": found,
+			"notFound": notFound,
+		}
 
 		// Assert
-		expected := args.Map{"v": "v", "found": true, "notFound": false}
+		expected := args.Map{
+			"v": "v",
+			"found": true,
+			"notFound": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- GetValue", actual)
 	})
 }

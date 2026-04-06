@@ -48,7 +48,11 @@ func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
 	actual["nilResult"] = nilD.PtrOrNonPtr(true) == nil
 
 	// Assert
-	expected := args.Map{"ptrNotNil": true, "nonPtrNotNil": true, "nilResult": true}
+	expected := args.Map{
+		"ptrNotNil": true,
+		"nonPtrNotNil": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- PtrOrNonPtr", actual)
 }
 
@@ -67,7 +71,11 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"name": "a", "cpName": "a", "nilCp": true}
+	expected := args.Map{
+		"name": "a",
+		"cpName": "a",
+		"nilCp": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- Clone", actual)
 }
 
@@ -169,7 +177,11 @@ func Test_Cov_AnyToDraftType(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"fromVal": "a", "fromPtr": "b", "fromNil": true}
+	expected := args.Map{
+		"fromVal": "a",
+		"fromPtr": "b",
+		"fromNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType returns correct value -- with args", actual)
 }
 
@@ -180,10 +192,16 @@ func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
 	c := &coretests.CaseIndexPlusIsPrint{IsPrint: true, CaseIndex: 5}
 
 	// Act
-	actual := args.Map{"isPrint": c.IsPrint, "index": c.CaseIndex}
+	actual := args.Map{
+		"isPrint": c.IsPrint,
+		"index": c.CaseIndex,
+	}
 
 	// Assert
-	expected := args.Map{"isPrint": true, "index": 5}
+	expected := args.Map{
+		"isPrint": true,
+		"index": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "CaseIndexPlusIsPrint returns correct value -- with args", actual)
 }
 
@@ -200,7 +218,10 @@ func Test_Cov_SomeString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"str": "hello", "stringer": "hello"}
+	expected := args.Map{
+		"str": "hello",
+		"stringer": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "SomeString returns correct value -- with args", actual)
 }
 
@@ -227,10 +248,16 @@ func Test_Cov_Compare_SortedStrings(t *testing.T) {
 	sortedStr := c.SortedString()
 
 	// Act
-	actual := args.Map{"len": len(sorted) > 0, "strNotEmpty": sortedStr != ""}
+	actual := args.Map{
+		"len": len(sorted) > 0,
+		"strNotEmpty": sortedStr != "",
+	}
 
 	// Assert
-	expected := args.Map{"len": true, "strNotEmpty": true}
+	expected := args.Map{
+		"len": true,
+		"strNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Compare returns correct value -- SortedStrings", actual)
 }
 
@@ -265,7 +292,10 @@ func Test_Cov_ComparingInstruction(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"actual": "hello world", "hashsetNotNil": true}
+	expected := args.Map{
+		"actual": "hello world",
+		"hashsetNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ComparingInstruction returns correct value -- with args", actual)
 }
 
@@ -362,10 +392,18 @@ func Test_Cov_BaseTestCase_HashmapParam(t *testing.T) {
 	hasItem2, _ := bt2.HashmapParam()
 
 	// Act
-	actual := args.Map{"hasItem": hasItem, "len": len(hm), "noParam": hasItem2}
+	actual := args.Map{
+		"hasItem": hasItem,
+		"len": len(hm),
+		"noParam": hasItem2,
+	}
 
 	// Assert
-	expected := args.Map{"hasItem": true, "len": 1, "noParam": false}
+	expected := args.Map{
+		"hasItem": true,
+		"len": 1,
+		"noParam": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- HashmapParam", actual)
 }
 
@@ -393,7 +431,10 @@ func Test_Cov_BaseTestCase_FormTitle(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"formTitle": true, "customTitle": true}
+	expected := args.Map{
+		"formTitle": true,
+		"customTitle": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- FormTitle", actual)
 }
 
@@ -408,7 +449,10 @@ func Test_Cov_BaseTestCase_Contracts(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"simpleWrapper": true, "baseWrapper": true}
+	expected := args.Map{
+		"simpleWrapper": true,
+		"baseWrapper": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- Contracts", actual)
 }
 
@@ -423,6 +467,9 @@ func Test_Cov_BaseTestCase_ActualExpectedLines(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"actualLen": 2, "expectedLen": 2}
+	expected := args.Map{
+		"actualLen": 2,
+		"expectedLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseTestCase returns correct value -- ActualExpectedLines", actual)
 }

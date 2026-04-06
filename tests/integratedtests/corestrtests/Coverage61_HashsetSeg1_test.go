@@ -20,10 +20,16 @@ func Test_Cov61_Hashset_IsEmpty(t *testing.T) {
 		hs := corestr.New.Hashset.Empty()
 
 		// Act
-		actual := args.Map{"empty": hs.IsEmpty(), "hasItems": hs.HasItems()}
+		actual := args.Map{
+			"empty": hs.IsEmpty(),
+			"hasItems": hs.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty/HasItems on empty", actual)
 	})
 }
@@ -34,10 +40,16 @@ func Test_Cov61_Hashset_IsEmpty_NonEmpty(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 
 		// Act
-		actual := args.Map{"empty": hs.IsEmpty(), "hasItems": hs.HasItems()}
+		actual := args.Map{
+			"empty": hs.IsEmpty(),
+			"hasItems": hs.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": false, "hasItems": true}
+		expected := args.Map{
+			"empty": false,
+			"hasItems": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty/HasItems on non-empty", actual)
 	})
 }
@@ -201,10 +213,16 @@ func Test_Cov61_Hashset_ConcatNewHashsets(t *testing.T) {
 		r := a.ConcatNewHashsets(false, b)
 
 		// Act
-		actual := args.Map{"hasA": r.Has("a"), "hasB": r.Has("b")}
+		actual := args.Map{
+			"hasA": r.Has("a"),
+			"hasB": r.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": true}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ConcatNewHashsets merges", actual)
 	})
 }
@@ -246,10 +264,16 @@ func Test_Cov61_Hashset_ConcatNewStrings(t *testing.T) {
 		r := a.ConcatNewStrings(false, []string{"b", "c"})
 
 		// Act
-		actual := args.Map{"hasB": r.Has("b"), "hasC": r.Has("c")}
+		actual := args.Map{
+			"hasB": r.Has("b"),
+			"hasC": r.Has("c"),
+		}
 
 		// Assert
-		expected := args.Map{"hasB": true, "hasC": true}
+		expected := args.Map{
+			"hasB": true,
+			"hasC": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ConcatNewStrings adds strings", actual)
 	})
 }
@@ -341,10 +365,16 @@ func Test_Cov61_Hashset_AddBool_New(t *testing.T) {
 		existed := hs.AddBool("a")
 
 		// Act
-		actual := args.Map{"existed": existed, "has": hs.Has("a")}
+		actual := args.Map{
+			"existed": existed,
+			"has": hs.Has("a"),
+		}
 
 		// Assert
-		expected := args.Map{"existed": false, "has": true}
+		expected := args.Map{
+			"existed": false,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddBool new returns false", actual)
 	})
 }
@@ -405,10 +435,16 @@ func Test_Cov61_Hashset_AddIf(t *testing.T) {
 		hs.AddIf(false, "b")
 
 		// Act
-		actual := args.Map{"hasA": hs.Has("a"), "hasB": hs.Has("b")}
+		actual := args.Map{
+			"hasA": hs.Has("a"),
+			"hasB": hs.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": false}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": false,
+		}
 		expected.ShouldBeEqual(t, 0, "AddIf conditionally adds", actual)
 	})
 }
@@ -473,10 +509,16 @@ func Test_Cov61_Hashset_AddFuncErr_WithError(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": hs.Length(), "handled": handled}
+		actual := args.Map{
+			"len": hs.Length(),
+			"handled": handled,
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "handled": true}
+		expected := args.Map{
+			"len": 0,
+			"handled": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFuncErr handles error", actual)
 	})
 }
@@ -537,10 +579,16 @@ func Test_Cov61_Hashset_AddItemsMap(t *testing.T) {
 		hs.AddItemsMap(map[string]bool{"a": true, "b": false})
 
 		// Act
-		actual := args.Map{"hasA": hs.Has("a"), "hasB": hs.Has("b")}
+		actual := args.Map{
+			"hasA": hs.Has("a"),
+			"hasB": hs.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": false}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": false,
+		}
 		expected.ShouldBeEqual(t, 0, "AddItemsMap only adds true values", actual)
 	})
 }
@@ -571,10 +619,16 @@ func Test_Cov61_Hashset_AddItemsMapWgLock(t *testing.T) {
 		wg.Wait()
 
 		// Act
-		actual := args.Map{"hasA": hs.Has("a"), "hasB": hs.Has("b")}
+		actual := args.Map{
+			"hasA": hs.Has("a"),
+			"hasB": hs.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": false}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": false,
+		}
 		expected.ShouldBeEqual(t, 0, "AddItemsMapWgLock adds with lock", actual)
 	})
 }
@@ -937,10 +991,16 @@ func Test_Cov61_Hashset_AddsUsingFilter(t *testing.T) {
 		hs.AddsUsingFilter(filter, "a", "b")
 
 		// Act
-		actual := args.Map{"hasA": hs.Has("a!"), "hasB": hs.Has("b!")}
+		actual := args.Map{
+			"hasA": hs.Has("a!"),
+			"hasB": hs.Has("b!"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": true}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddsUsingFilter transforms and adds", actual)
 	})
 }
@@ -1013,10 +1073,16 @@ func Test_Cov61_Hashset_IsMissing(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 
 		// Act
-		actual := args.Map{"missing": hs.IsMissing("z"), "found": hs.IsMissing("a")}
+		actual := args.Map{
+			"missing": hs.IsMissing("z"),
+			"found": hs.IsMissing("a"),
+		}
 
 		// Assert
-		expected := args.Map{"missing": true, "found": false}
+		expected := args.Map{
+			"missing": true,
+			"found": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsMissing checks absence", actual)
 	})
 }
@@ -1041,10 +1107,16 @@ func Test_Cov61_Hashset_Has(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 
 		// Act
-		actual := args.Map{"has": hs.Has("a"), "miss": hs.Has("z")}
+		actual := args.Map{
+			"has": hs.Has("a"),
+			"miss": hs.Has("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Has checks containment", actual)
 	})
 }
@@ -1085,10 +1157,16 @@ func Test_Cov61_Hashset_SortedList(t *testing.T) {
 		r := hs.SortedList()
 
 		// Act
-		actual := args.Map{"first": r[0], "last": r[2]}
+		actual := args.Map{
+			"first": r[0],
+			"last": r[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "SortedList returns sorted", actual)
 	})
 }
@@ -1128,10 +1206,16 @@ func Test_Cov61_Hashset_HasAllStrings(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a", "b", "c")
 
 		// Act
-		actual := args.Map{"all": hs.HasAllStrings([]string{"a", "b"}), "miss": hs.HasAllStrings([]string{"a", "z"})}
+		actual := args.Map{
+			"all": hs.HasAllStrings([]string{"a", "b"}),
+			"miss": hs.HasAllStrings([]string{"a", "z"}),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings checks all", actual)
 	})
 }
@@ -1143,10 +1227,16 @@ func Test_Cov61_Hashset_HasAllCollectionItems(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"has": hs.HasAllCollectionItems(col), "nil": hs.HasAllCollectionItems(nil)}
+		actual := args.Map{
+			"has": hs.HasAllCollectionItems(col),
+			"nil": hs.HasAllCollectionItems(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllCollectionItems checks", actual)
 	})
 }
@@ -1157,10 +1247,16 @@ func Test_Cov61_Hashset_HasAll(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a", "b")
 
 		// Act
-		actual := args.Map{"all": hs.HasAll("a", "b"), "miss": hs.HasAll("a", "z")}
+		actual := args.Map{
+			"all": hs.HasAll("a", "b"),
+			"miss": hs.HasAll("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAll checks all variadic", actual)
 	})
 }
@@ -1171,10 +1267,16 @@ func Test_Cov61_Hashset_IsAllMissing(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 
 		// Act
-		actual := args.Map{"all": hs.IsAllMissing("x", "y"), "partial": hs.IsAllMissing("a", "x")}
+		actual := args.Map{
+			"all": hs.IsAllMissing("x", "y"),
+			"partial": hs.IsAllMissing("a", "x"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "partial": false}
+		expected := args.Map{
+			"all": true,
+			"partial": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAllMissing checks all absent", actual)
 	})
 }
@@ -1185,10 +1287,16 @@ func Test_Cov61_Hashset_HasAny(t *testing.T) {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 
 		// Act
-		actual := args.Map{"any": hs.HasAny("a", "z"), "none": hs.HasAny("x", "y")}
+		actual := args.Map{
+			"any": hs.HasAny("a", "z"),
+			"none": hs.HasAny("x", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"any": true, "none": false}
+		expected := args.Map{
+			"any": true,
+			"none": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAny checks any present", actual)
 	})
 }
@@ -1214,10 +1322,16 @@ func Test_Cov61_Hashset_OrderedList(t *testing.T) {
 		r := hs.OrderedList()
 
 		// Act
-		actual := args.Map{"first": r[0], "last": r[2]}
+		actual := args.Map{
+			"first": r[0],
+			"last": r[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "OrderedList returns sorted", actual)
 	})
 }
@@ -1770,10 +1884,16 @@ func Test_Cov61_Hashset_ToLowerSet(t *testing.T) {
 		r := hs.ToLowerSet()
 
 		// Act
-		actual := args.Map{"hasHello": r.Has("hello"), "hasWorld": r.Has("world")}
+		actual := args.Map{
+			"hasHello": r.Has("hello"),
+			"hasWorld": r.Has("world"),
+		}
 
 		// Assert
-		expected := args.Map{"hasHello": true, "hasWorld": true}
+		expected := args.Map{
+			"hasHello": true,
+			"hasWorld": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ToLowerSet lowercases all keys", actual)
 	})
 }
@@ -1916,10 +2036,16 @@ func Test_Cov61_Hashset_Remove(t *testing.T) {
 		hs.Remove("a")
 
 		// Act
-		actual := args.Map{"has": hs.Has("a"), "len": hs.Length()}
+		actual := args.Map{
+			"has": hs.Has("a"),
+			"len": hs.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "len": 1}
+		expected := args.Map{
+			"has": false,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Remove deletes item", actual)
 	})
 }
@@ -2123,10 +2249,16 @@ func Test_Cov61_Hashset_MarshalJSON(t *testing.T) {
 		b, err := hs.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON returns bytes", actual)
 	})
 }
@@ -2138,10 +2270,16 @@ func Test_Cov61_Hashset_UnmarshalJSON(t *testing.T) {
 		err := hs.UnmarshalJSON([]byte(`{"a":true,"b":true}`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": hs.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": hs.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON parses items", actual)
 	})
 }
@@ -2199,10 +2337,16 @@ func Test_Cov61_Hashset_ParseInjectUsingJson(t *testing.T) {
 		r, err := hs.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson parses", actual)
 	})
 }
@@ -2478,10 +2622,16 @@ func Test_Cov61_Hashset_Serialize(t *testing.T) {
 		b, err := hs.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize returns bytes", actual)
 	})
 }
@@ -2494,10 +2644,16 @@ func Test_Cov61_Hashset_Deserialize(t *testing.T) {
 		err := hs.Deserialize(&target)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": len(target)}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": len(target),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize parses to target", actual)
 	})
 }

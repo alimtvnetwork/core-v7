@@ -180,10 +180,16 @@ func Test_Cov9_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 	result, err := fw.InvokeResultOfIndex(1)
 
 	// Act
-	actual := args.Map{"result": result, "noErr": err == nil}
+	actual := args.Map{
+		"result": result,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"result": 42, "noErr": true}
+	expected := args.Map{
+		"result": 42,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex returns indexed result", actual)
 }
 
@@ -216,10 +222,16 @@ func Test_Cov9_FuncDetector_DirectFuncWrap(t *testing.T) {
 	result := args.FuncDetector.GetFuncWrap(fw)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "valid": result.IsValid()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"valid": result.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetFuncWrap returns same instance -- direct FuncWrap", actual)
 }
 
@@ -233,10 +245,16 @@ func Test_Cov9_FuncDetector_RawFunc(t *testing.T) {
 	result := args.FuncDetector.GetFuncWrap(fn)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "valid": result.IsValid()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"valid": result.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetFuncWrap creates new FuncWrap -- raw function", actual)
 }
 
@@ -248,10 +266,16 @@ func Test_Cov9_NewFuncWrap_MethodToFunc_Nil(t *testing.T) {
 	fw, err := args.NewFuncWrap.MethodToFunc(nil)
 
 	// Act
-	actual := args.Map{"invalid": fw.IsInvalid(), "hasErr": err != nil}
+	actual := args.Map{
+		"invalid": fw.IsInvalid(),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"invalid": true, "hasErr": true}
+	expected := args.Map{
+		"invalid": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodToFunc returns invalid -- nil method", actual)
 }
 
@@ -269,10 +293,16 @@ func Test_Cov9_NewFuncWrap_StructToMap(t *testing.T) {
 	fm, err := args.NewFuncWrap.StructToMap(s)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasEntries": len(fm) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasEntries": len(fm) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasEntries": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasEntries": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StructToMap creates FuncMap -- valid struct", actual)
 }
 
@@ -306,10 +336,16 @@ func Test_Cov9_OneFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := of.InvokeWithValidArgs()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OneFunc InvokeWithValidArgs returns result", actual)
 }
 
@@ -323,10 +359,16 @@ func Test_Cov9_OneFunc_InvokeArgs(t *testing.T) {
 	results, err := of.InvokeArgs(1)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OneFunc InvokeArgs returns result", actual)
 }
 
@@ -358,10 +400,16 @@ func Test_Cov9_Holder_InvokeWithValidArgs(t *testing.T) {
 	results, err := h.InvokeWithValidArgs()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Holder InvokeWithValidArgs returns result", actual)
 }
 
@@ -374,10 +422,16 @@ func Test_Cov9_Holder_InvokeArgs(t *testing.T) {
 	results, err := h.InvokeArgs(0)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Holder InvokeArgs returns result", actual)
 }
 
@@ -394,10 +448,16 @@ func Test_Cov9_Dynamic_Invoke(t *testing.T) {
 	results, err := d.Invoke()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Invoke returns result", actual)
 }
 
@@ -428,9 +488,15 @@ func Test_Cov9_Dynamic_InvokeWithValidArgs(t *testing.T) {
 	results, err := d.InvokeWithValidArgs()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasResult": len(results) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasResult": len(results) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasResult": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic InvokeWithValidArgs returns result", actual)
 }

@@ -92,10 +92,16 @@ func Test_Cov4_LazyRegex_Compile(t *testing.T) {
 	r, err := lr.Compile()
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": r != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- Compile", actual)
 }
 
@@ -318,7 +324,10 @@ func Test_Cov4_LazyRegex_IsMatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- IsMatch", actual)
 }
 
@@ -333,7 +342,10 @@ func Test_Cov4_LazyRegex_IsMatchBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- IsMatchBytes", actual)
 }
 
@@ -348,7 +360,10 @@ func Test_Cov4_LazyRegex_IsFailedMatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"failOnAlpha": true, "failOnDigits": false}
+	expected := args.Map{
+		"failOnAlpha": true,
+		"failOnDigits": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- IsFailedMatch", actual)
 }
 
@@ -363,7 +378,10 @@ func Test_Cov4_LazyRegex_IsFailedMatchBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"failOnAlpha": true, "failOnDigits": false}
+	expected := args.Map{
+		"failOnAlpha": true,
+		"failOnDigits": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- IsFailedMatchBytes", actual)
 }
 
@@ -373,10 +391,16 @@ func Test_Cov4_LazyRegex_FirstMatchLine(t *testing.T) {
 	match, isInvalid := lr.FirstMatchLine("abc 123 def")
 
 	// Act
-	actual := args.Map{"match": match, "isInvalid": isInvalid}
+	actual := args.Map{
+		"match": match,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"match": "123", "isInvalid": false}
+	expected := args.Map{
+		"match": "123",
+		"isInvalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns correct value -- FirstMatchLine", actual)
 }
 
@@ -386,10 +410,16 @@ func Test_Cov4_LazyRegex_FirstMatchLine_NoMatch(t *testing.T) {
 	match, isInvalid := lr.FirstMatchLine("abc def")
 
 	// Act
-	actual := args.Map{"match": match, "isInvalid": isInvalid}
+	actual := args.Map{
+		"match": match,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"match": "", "isInvalid": true}
+	expected := args.Map{
+		"match": "",
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns empty -- FirstMatchLine no match", actual)
 }
 
@@ -399,10 +429,16 @@ func Test_Cov4_LazyRegex_FirstMatchLine_Invalid(t *testing.T) {
 	match, isInvalid := lr.FirstMatchLine("abc")
 
 	// Act
-	actual := args.Map{"match": match, "isInvalid": isInvalid}
+	actual := args.Map{
+		"match": match,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"match": "", "isInvalid": true}
+	expected := args.Map{
+		"match": "",
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns error -- FirstMatchLine invalid regex", actual)
 }
 
@@ -417,10 +453,16 @@ func Test_Cov4_MatchCustomErr_WithCustom(t *testing.T) {
 	err := regexnew.MatchUsingCustomizeErrorFuncLock(`^\d+$`, "abc", matchFunc, customErr)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isCustom": err.Error() == "custom: abc"}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isCustom": err.Error() == "custom: abc",
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "isCustom": true}
+	expected := args.Map{
+		"hasErr": true,
+		"isCustom": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MatchCustomErr returns error -- with custom func", actual)
 }
 
@@ -445,10 +487,16 @@ func Test_Cov4_Create_Valid(t *testing.T) {
 	r, err := regexnew.Create(`^[a-z]+$`)
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": r != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Create returns non-empty -- valid", actual)
 }
 
@@ -469,10 +517,16 @@ func Test_Cov4_CreateLock_Valid(t *testing.T) {
 	r, err := regexnew.CreateLock(`^[A-Z]+$`)
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": r != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLock returns non-empty -- valid", actual)
 }
 
@@ -497,7 +551,11 @@ func Test_Cov4_IsMatchLock_Valid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false, "invalid": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatchLock returns correct value -- with args", actual)
 }
 
@@ -508,10 +566,16 @@ func Test_Cov4_NewLazy_NoLock(t *testing.T) {
 	lr := regexnew.New.Lazy(`^\d+$`)
 
 	// Act
-	actual := args.Map{"isDefined": lr.IsDefined(), "isApplicable": lr.IsApplicable()}
+	actual := args.Map{
+		"isDefined": lr.IsDefined(),
+		"isApplicable": lr.IsApplicable(),
+	}
 
 	// Assert
-	expected := args.Map{"isDefined": true, "isApplicable": true}
+	expected := args.Map{
+		"isDefined": true,
+		"isApplicable": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewLazy returns correct value -- NoLock", actual)
 }
 

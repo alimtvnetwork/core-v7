@@ -18,10 +18,18 @@ func Test_Seg8_VV_NewValidValue(t *testing.T) {
 		vv := corestr.NewValidValue("hello")
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid, "msg": vv.Message}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+			"msg": vv.Message,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "valid": true, "msg": ""}
+		expected := args.Map{
+			"val": "hello",
+			"valid": true,
+			"msg": "",
+		}
 		expected.ShouldBeEqual(t, 0, "NewValidValue -- valid", actual)
 	})
 }
@@ -32,10 +40,16 @@ func Test_Seg8_VV_NewValidValueEmpty(t *testing.T) {
 		vv := corestr.NewValidValueEmpty()
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "valid": true}
+		expected := args.Map{
+			"val": "",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewValidValueEmpty -- empty valid", actual)
 	})
 }
@@ -46,10 +60,16 @@ func Test_Seg8_VV_InvalidValidValue(t *testing.T) {
 		vv := corestr.InvalidValidValue("err msg")
 
 		// Act
-		actual := args.Map{"valid": vv.IsValid, "msg": vv.Message}
+		actual := args.Map{
+			"valid": vv.IsValid,
+			"msg": vv.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": "err msg"}
+		expected := args.Map{
+			"valid": false,
+			"msg": "err msg",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidValidValue -- invalid with message", actual)
 	})
 }
@@ -60,10 +80,16 @@ func Test_Seg8_VV_InvalidValidValueNoMessage(t *testing.T) {
 		vv := corestr.InvalidValidValueNoMessage()
 
 		// Act
-		actual := args.Map{"valid": vv.IsValid, "msg": vv.Message}
+		actual := args.Map{
+			"valid": vv.IsValid,
+			"msg": vv.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": ""}
+		expected := args.Map{
+			"valid": false,
+			"msg": "",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidValidValueNoMessage -- invalid no msg", actual)
 	})
 }
@@ -74,10 +100,16 @@ func Test_Seg8_VV_NewValidValueUsingAny(t *testing.T) {
 		vv := corestr.NewValidValueUsingAny(false, true, "test")
 
 		// Act
-		actual := args.Map{"valid": vv.IsValid, "nonEmpty": vv.Value != ""}
+		actual := args.Map{
+			"valid": vv.IsValid,
+			"nonEmpty": vv.Value != "",
+		}
 
 		// Assert
-		expected := args.Map{"valid": true, "nonEmpty": true}
+		expected := args.Map{
+			"valid": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewValidValueUsingAny -- valid", actual)
 	})
 }
@@ -104,10 +136,16 @@ func Test_Seg8_VV_ValueBytesOnce(t *testing.T) {
 		b2 := vv.ValueBytesOnce()
 
 		// Act
-		actual := args.Map{"len": len(b1), "same": &b1[0] == &b2[0]}
+		actual := args.Map{
+			"len": len(b1),
+			"same": &b1[0] == &b2[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "same": true}
+		expected := args.Map{
+			"len": 3,
+			"same": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueBytesOnce -- cached", actual)
 	})
 }
@@ -132,10 +170,16 @@ func Test_Seg8_VV_IsEmpty_IsWhitespace(t *testing.T) {
 		vv := corestr.NewValidValueEmpty()
 
 		// Act
-		actual := args.Map{"empty": vv.IsEmpty(), "ws": vv.IsWhitespace()}
+		actual := args.Map{
+			"empty": vv.IsEmpty(),
+			"ws": vv.IsWhitespace(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "ws": true}
+		expected := args.Map{
+			"empty": true,
+			"ws": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty/IsWhitespace -- empty", actual)
 	})
 }
@@ -160,10 +204,18 @@ func Test_Seg8_VV_HasValidNonEmpty(t *testing.T) {
 		vv := corestr.NewValidValue("val")
 
 		// Act
-		actual := args.Map{"nonEmpty": vv.HasValidNonEmpty(), "nonWS": vv.HasValidNonWhitespace(), "safe": vv.HasSafeNonEmpty()}
+		actual := args.Map{
+			"nonEmpty": vv.HasValidNonEmpty(),
+			"nonWS": vv.HasValidNonWhitespace(),
+			"safe": vv.HasSafeNonEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"nonEmpty": true, "nonWS": true, "safe": true}
+		expected := args.Map{
+			"nonEmpty": true,
+			"nonWS": true,
+			"safe": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasValidNonEmpty -- true", actual)
 	})
 }
@@ -176,10 +228,18 @@ func Test_Seg8_VV_ValueBool(t *testing.T) {
 		vv3 := corestr.NewValidValue("xyz")
 
 		// Act
-		actual := args.Map{"true": vv1.ValueBool(), "empty": vv2.ValueBool(), "invalid": vv3.ValueBool()}
+		actual := args.Map{
+			"true": vv1.ValueBool(),
+			"empty": vv2.ValueBool(),
+			"invalid": vv3.ValueBool(),
+		}
 
 		// Assert
-		expected := args.Map{"true": true, "empty": false, "invalid": false}
+		expected := args.Map{
+			"true": true,
+			"empty": false,
+			"invalid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueBool -- various", actual)
 	})
 }
@@ -190,10 +250,16 @@ func Test_Seg8_VV_ValueInt(t *testing.T) {
 		vv := corestr.NewValidValue("42")
 
 		// Act
-		actual := args.Map{"val": vv.ValueInt(0), "def": vv.ValueDefInt()}
+		actual := args.Map{
+			"val": vv.ValueInt(0),
+			"def": vv.ValueDefInt(),
+		}
 
 		// Assert
-		expected := args.Map{"val": 42, "def": 42}
+		expected := args.Map{
+			"val": 42,
+			"def": 42,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueInt -- 42", actual)
 	})
 }
@@ -204,10 +270,16 @@ func Test_Seg8_VV_ValueInt_Invalid(t *testing.T) {
 		vv := corestr.NewValidValue("abc")
 
 		// Act
-		actual := args.Map{"val": vv.ValueInt(99), "def": vv.ValueDefInt()}
+		actual := args.Map{
+			"val": vv.ValueInt(99),
+			"def": vv.ValueDefInt(),
+		}
 
 		// Assert
-		expected := args.Map{"val": 99, "def": 0}
+		expected := args.Map{
+			"val": 99,
+			"def": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueInt invalid -- defaults", actual)
 	})
 }
@@ -218,10 +290,16 @@ func Test_Seg8_VV_ValueByte(t *testing.T) {
 		vv := corestr.NewValidValue("100")
 
 		// Act
-		actual := args.Map{"val": vv.ValueByte(0), "def": vv.ValueDefByte()}
+		actual := args.Map{
+			"val": vv.ValueByte(0),
+			"def": vv.ValueDefByte(),
+		}
 
 		// Assert
-		expected := args.Map{"val": byte(100), "def": byte(100)}
+		expected := args.Map{
+			"val": byte(100),
+			"def": byte(100),
+		}
 		expected.ShouldBeEqual(t, 0, "ValueByte -- 100", actual)
 	})
 }
@@ -260,10 +338,16 @@ func Test_Seg8_VV_ValueFloat64(t *testing.T) {
 		vv := corestr.NewValidValue("3.14")
 
 		// Act
-		actual := args.Map{"val": vv.ValueFloat64(0.0), "def": vv.ValueDefFloat64()}
+		actual := args.Map{
+			"val": vv.ValueFloat64(0.0),
+			"def": vv.ValueDefFloat64(),
+		}
 
 		// Assert
-		expected := args.Map{"val": 3.14, "def": 3.14}
+		expected := args.Map{
+			"val": 3.14,
+			"def": 3.14,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueFloat64 -- 3.14", actual)
 	})
 }
@@ -288,10 +372,16 @@ func Test_Seg8_VV_Is(t *testing.T) {
 		vv := corestr.NewValidValue("hello")
 
 		// Act
-		actual := args.Map{"is": vv.Is("hello"), "not": vv.Is("world")}
+		actual := args.Map{
+			"is": vv.Is("hello"),
+			"not": vv.Is("world"),
+		}
 
 		// Assert
-		expected := args.Map{"is": true, "not": false}
+		expected := args.Map{
+			"is": true,
+			"not": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Is -- correct", actual)
 	})
 }
@@ -302,10 +392,18 @@ func Test_Seg8_VV_IsAnyOf(t *testing.T) {
 		vv := corestr.NewValidValue("b")
 
 		// Act
-		actual := args.Map{"found": vv.IsAnyOf("a", "b"), "not": vv.IsAnyOf("x"), "empty": vv.IsAnyOf()}
+		actual := args.Map{
+			"found": vv.IsAnyOf("a", "b"),
+			"not": vv.IsAnyOf("x"),
+			"empty": vv.IsAnyOf(),
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "not": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"not": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAnyOf -- correct", actual)
 	})
 }
@@ -316,10 +414,16 @@ func Test_Seg8_VV_IsContains(t *testing.T) {
 		vv := corestr.NewValidValue("hello world")
 
 		// Act
-		actual := args.Map{"yes": vv.IsContains("world"), "no": vv.IsContains("xyz")}
+		actual := args.Map{
+			"yes": vv.IsContains("world"),
+			"no": vv.IsContains("xyz"),
+		}
 
 		// Assert
-		expected := args.Map{"yes": true, "no": false}
+		expected := args.Map{
+			"yes": true,
+			"no": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsContains -- correct", actual)
 	})
 }
@@ -330,10 +434,18 @@ func Test_Seg8_VV_IsAnyContains(t *testing.T) {
 		vv := corestr.NewValidValue("hello world")
 
 		// Act
-		actual := args.Map{"found": vv.IsAnyContains("xyz", "world"), "not": vv.IsAnyContains("abc"), "empty": vv.IsAnyContains()}
+		actual := args.Map{
+			"found": vv.IsAnyContains("xyz", "world"),
+			"not": vv.IsAnyContains("abc"),
+			"empty": vv.IsAnyContains(),
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "not": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"not": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAnyContains -- correct", actual)
 	})
 }
@@ -359,10 +471,16 @@ func Test_Seg8_VV_IsRegexMatches(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 
 		// Act
-		actual := args.Map{"match": vv.IsRegexMatches(re), "nil": vv.IsRegexMatches(nil)}
+		actual := args.Map{
+			"match": vv.IsRegexMatches(re),
+			"nil": vv.IsRegexMatches(nil),
+		}
 
 		// Assert
-		expected := args.Map{"match": true, "nil": false}
+		expected := args.Map{
+			"match": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsRegexMatches -- correct", actual)
 	})
 }
@@ -374,10 +492,16 @@ func Test_Seg8_VV_RegexFindString(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 
 		// Act
-		actual := args.Map{"found": vv.RegexFindString(re), "nil": vv.RegexFindString(nil)}
+		actual := args.Map{
+			"found": vv.RegexFindString(re),
+			"nil": vv.RegexFindString(nil),
+		}
 
 		// Assert
-		expected := args.Map{"found": "123", "nil": ""}
+		expected := args.Map{
+			"found": "123",
+			"nil": "",
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindString -- correct", actual)
 	})
 }
@@ -389,10 +513,16 @@ func Test_Seg8_VV_RegexFindAllStrings(t *testing.T) {
 		re := regexp.MustCompile(`\d`)
 
 		// Act
-		actual := args.Map{"len": len(vv.RegexFindAllStrings(re, -1)), "nil": len(vv.RegexFindAllStrings(nil, -1))}
+		actual := args.Map{
+			"len": len(vv.RegexFindAllStrings(re, -1)),
+			"nil": len(vv.RegexFindAllStrings(nil, -1)),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "nil": 0}
+		expected := args.Map{
+			"len": 2,
+			"nil": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindAllStrings -- correct", actual)
 	})
 }
@@ -406,10 +536,20 @@ func Test_Seg8_VV_RegexFindAllStringsWithFlag(t *testing.T) {
 		nilItems, nilHas := vv.RegexFindAllStringsWithFlag(nil, -1)
 
 		// Act
-		actual := args.Map{"len": len(items), "has": has, "nilLen": len(nilItems), "nilHas": nilHas}
+		actual := args.Map{
+			"len": len(items),
+			"has": has,
+			"nilLen": len(nilItems),
+			"nilHas": nilHas,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "has": true, "nilLen": 0, "nilHas": false}
+		expected := args.Map{
+			"len": 2,
+			"has": true,
+			"nilLen": 0,
+			"nilHas": false,
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindAllStringsWithFlag -- correct", actual)
 	})
 }
@@ -465,10 +605,18 @@ func Test_Seg8_VV_Clone(t *testing.T) {
 		c := vv.Clone()
 
 		// Act
-		actual := args.Map{"val": c.Value, "valid": c.IsValid, "diff": c != vv}
+		actual := args.Map{
+			"val": c.Value,
+			"valid": c.IsValid,
+			"diff": c != vv,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "valid": true, "diff": true}
+		expected := args.Map{
+			"val": "hello",
+			"valid": true,
+			"diff": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- copy", actual)
 	})
 }
@@ -551,10 +699,16 @@ func Test_Seg8_VV_Clear(t *testing.T) {
 		vv.Clear()
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "valid": false}
+		expected := args.Map{
+			"val": "",
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Clear -- reset", actual)
 	})
 }
@@ -612,10 +766,16 @@ func Test_Seg8_VV_ParseInjectUsingJson(t *testing.T) {
 		result, err := vv2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"notNil": result != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "notNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"notNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- success", actual)
 	})
 }
@@ -627,10 +787,16 @@ func Test_Seg8_VV_Serialize(t *testing.T) {
 		b, err := vv.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -643,10 +809,16 @@ func Test_Seg8_VV_Deserialize(t *testing.T) {
 		err := vv.Deserialize(&target)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "val": target.Value}
+		actual := args.Map{
+			"noErr": err == nil,
+			"val": target.Value,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "val": "hello"}
+		expected := args.Map{
+			"noErr": true,
+			"val": "hello",
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize -- success", actual)
 	})
 }
@@ -661,10 +833,20 @@ func Test_Seg8_VVS_Empty(t *testing.T) {
 		vvs := corestr.EmptyValidValues()
 
 		// Act
-		actual := args.Map{"empty": vvs.IsEmpty(), "len": vvs.Length(), "count": vvs.Count(), "hasAny": vvs.HasAnyItem()}
+		actual := args.Map{
+			"empty": vvs.IsEmpty(),
+			"len": vvs.Length(),
+			"count": vvs.Count(),
+			"hasAny": vvs.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0, "count": 0, "hasAny": false}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+			"count": 0,
+			"hasAny": false,
+		}
 		expected.ShouldBeEqual(t, 0, "EmptyValidValues -- empty", actual)
 	})
 }
@@ -720,10 +902,16 @@ func Test_Seg8_VVS_Add(t *testing.T) {
 		vvs.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"len": vvs.Length(), "lastIdx": vvs.LastIndex()}
+		actual := args.Map{
+			"len": vvs.Length(),
+			"lastIdx": vvs.LastIndex(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "lastIdx": 1}
+		expected := args.Map{
+			"len": 2,
+			"lastIdx": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 items", actual)
 	})
 }
@@ -813,10 +1001,18 @@ func Test_Seg8_VVS_HasIndex(t *testing.T) {
 		vvs.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"has0": vvs.HasIndex(0), "has1": vvs.HasIndex(1), "has2": vvs.HasIndex(2)}
+		actual := args.Map{
+			"has0": vvs.HasIndex(0),
+			"has1": vvs.HasIndex(1),
+			"has2": vvs.HasIndex(2),
+		}
 
 		// Assert
-		expected := args.Map{"has0": true, "has1": true, "has2": false}
+		expected := args.Map{
+			"has0": true,
+			"has1": true,
+			"has2": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasIndex -- correct", actual)
 	})
 }
@@ -828,10 +1024,18 @@ func Test_Seg8_VVS_SafeValueAt(t *testing.T) {
 		vvs.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"at0": vvs.SafeValueAt(0), "at1": vvs.SafeValueAt(1), "out": vvs.SafeValueAt(5)}
+		actual := args.Map{
+			"at0": vvs.SafeValueAt(0),
+			"at1": vvs.SafeValueAt(1),
+			"out": vvs.SafeValueAt(5),
+		}
 
 		// Assert
-		expected := args.Map{"at0": "a", "at1": "b", "out": ""}
+		expected := args.Map{
+			"at0": "a",
+			"at1": "b",
+			"out": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValueAt -- correct", actual)
 	})
 }
@@ -843,10 +1047,16 @@ func Test_Seg8_VVS_SafeValidValueAt(t *testing.T) {
 		vvs.Add("a").AddFull(false, "b", "")
 
 		// Act
-		actual := args.Map{"at0": vvs.SafeValidValueAt(0), "at1": vvs.SafeValidValueAt(1)}
+		actual := args.Map{
+			"at0": vvs.SafeValidValueAt(0),
+			"at1": vvs.SafeValidValueAt(1),
+		}
 
 		// Assert
-		expected := args.Map{"at0": "a", "at1": ""}
+		expected := args.Map{
+			"at0": "a",
+			"at1": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValidValueAt -- only valid returned", actual)
 	})
 }
@@ -859,10 +1069,18 @@ func Test_Seg8_VVS_SafeValuesAtIndexes(t *testing.T) {
 		result := vvs.SafeValuesAtIndexes(0, 2)
 
 		// Act
-		actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+		actual := args.Map{
+			"len": len(result),
+			"first": result[0],
+			"second": result[1],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a", "second": "c"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+			"second": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValuesAtIndexes -- correct", actual)
 	})
 }
@@ -891,10 +1109,16 @@ func Test_Seg8_VVS_SafeValidValuesAtIndexes(t *testing.T) {
 		result := vvs.SafeValidValuesAtIndexes(0, 1)
 
 		// Act
-		actual := args.Map{"first": result[0], "second": result[1]}
+		actual := args.Map{
+			"first": result[0],
+			"second": result[1],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "second": ""}
+		expected := args.Map{
+			"first": "a",
+			"second": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValidValuesAtIndexes -- correct", actual)
 	})
 }
@@ -1242,10 +1466,18 @@ func Test_Seg8_VS_InvalidValueStatus(t *testing.T) {
 		vs := corestr.InvalidValueStatus("err")
 
 		// Act
-		actual := args.Map{"valid": vs.ValueValid.IsValid, "msg": vs.ValueValid.Message, "idx": vs.Index}
+		actual := args.Map{
+			"valid": vs.ValueValid.IsValid,
+			"msg": vs.ValueValid.Message,
+			"idx": vs.Index,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": "err", "idx": -1}
+		expected := args.Map{
+			"valid": false,
+			"msg": "err",
+			"idx": -1,
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidValueStatus -- invalid with message", actual)
 	})
 }
@@ -1256,10 +1488,16 @@ func Test_Seg8_VS_InvalidValueStatusNoMessage(t *testing.T) {
 		vs := corestr.InvalidValueStatusNoMessage()
 
 		// Act
-		actual := args.Map{"valid": vs.ValueValid.IsValid, "idx": vs.Index}
+		actual := args.Map{
+			"valid": vs.ValueValid.IsValid,
+			"idx": vs.Index,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "idx": -1}
+		expected := args.Map{
+			"valid": false,
+			"idx": -1,
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidValueStatusNoMessage -- invalid", actual)
 	})
 }
@@ -1271,10 +1509,18 @@ func Test_Seg8_VS_Clone(t *testing.T) {
 		c := vs.Clone()
 
 		// Act
-		actual := args.Map{"msg": c.ValueValid.Message, "idx": c.Index, "diff": c != vs}
+		actual := args.Map{
+			"msg": c.ValueValid.Message,
+			"idx": c.Index,
+			"diff": c != vs,
+		}
 
 		// Assert
-		expected := args.Map{"msg": "err", "idx": -1, "diff": true}
+		expected := args.Map{
+			"msg": "err",
+			"idx": -1,
+			"diff": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- copy", actual)
 	})
 }
@@ -1289,10 +1535,16 @@ func Test_Seg8_TWLN_HasLineNumber(t *testing.T) {
 		twln := &corestr.TextWithLineNumber{LineNumber: 5, Text: "hello"}
 
 		// Act
-		actual := args.Map{"has": twln.HasLineNumber(), "invalid": twln.IsInvalidLineNumber()}
+		actual := args.Map{
+			"has": twln.HasLineNumber(),
+			"invalid": twln.IsInvalidLineNumber(),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "invalid": false}
+		expected := args.Map{
+			"has": true,
+			"invalid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasLineNumber -- valid", actual)
 	})
 }
@@ -1303,10 +1555,16 @@ func Test_Seg8_TWLN_InvalidLineNumber(t *testing.T) {
 		twln := &corestr.TextWithLineNumber{LineNumber: -1, Text: "hello"}
 
 		// Act
-		actual := args.Map{"has": twln.HasLineNumber(), "invalid": twln.IsInvalidLineNumber()}
+		actual := args.Map{
+			"has": twln.HasLineNumber(),
+			"invalid": twln.IsInvalidLineNumber(),
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "invalid": true}
+		expected := args.Map{
+			"has": false,
+			"invalid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLineNumber -- invalid", actual)
 	})
 }
@@ -1429,10 +1687,16 @@ func Test_Seg8_TWLN_HasLineNumber_Nil(t *testing.T) {
 		var twln *corestr.TextWithLineNumber
 
 		// Act
-		actual := args.Map{"has": twln.HasLineNumber(), "invalid": twln.IsInvalidLineNumber()}
+		actual := args.Map{
+			"has": twln.HasLineNumber(),
+			"invalid": twln.IsInvalidLineNumber(),
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "invalid": true}
+		expected := args.Map{
+			"has": false,
+			"invalid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasLineNumber nil -- false/true", actual)
 	})
 }

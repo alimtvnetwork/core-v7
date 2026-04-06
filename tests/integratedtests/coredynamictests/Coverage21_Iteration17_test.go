@@ -32,10 +32,16 @@ func Test_I17_BytesConverter_NewUsingJsonResult(t *testing.T) {
 	bc, err := coredynamic.NewBytesConverterUsingJsonResult(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": bc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": bc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBytesConverterUsingJsonResult returns correct value -- with args", actual)
 }
 
@@ -45,10 +51,16 @@ func Test_I17_BytesConverter_NewUsingJsonResult_Error(t *testing.T) {
 	bc, err := coredynamic.NewBytesConverterUsingJsonResult(jr)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "nil": bc == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"nil": bc == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBytesConverterUsingJsonResult returns error -- error", actual)
 }
 
@@ -63,10 +75,16 @@ func Test_I17_BytesConverter_Deserialize(t *testing.T) {
 	err := bc.Deserialize(&target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- Deserialize", actual)
 }
 
@@ -94,10 +112,16 @@ func Test_I17_BytesConverter_ToBool(t *testing.T) {
 	val, err := bc.ToBool()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": true}
+	expected := args.Map{
+		"noErr": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToBool", actual)
 }
 
@@ -148,10 +172,16 @@ func Test_I17_BytesConverter_CastString(t *testing.T) {
 	val, err := bc.CastString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "raw text"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "raw text",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- CastString", actual)
 }
 
@@ -174,10 +204,16 @@ func Test_I17_BytesConverter_ToString(t *testing.T) {
 	val, err := bc.ToString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToString", actual)
 }
 
@@ -200,10 +236,16 @@ func Test_I17_BytesConverter_ToStrings(t *testing.T) {
 	val, err := bc.ToStrings()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(val)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 3}
+	expected := args.Map{
+		"noErr": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToStrings", actual)
 }
 
@@ -230,10 +272,16 @@ func Test_I17_BytesConverter_ToInt64(t *testing.T) {
 	val, err := bc.ToInt64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": int64(999)}
+	expected := args.Map{
+		"noErr": true,
+		"val": int64(999),
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToInt64", actual)
 }
 
@@ -260,10 +308,16 @@ func Test_I17_BytesConverter_ToHashmap(t *testing.T) {
 	hm, err := bc.ToHashmap()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": hm != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": hm != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToHashmap", actual)
 }
 
@@ -273,10 +327,16 @@ func Test_I17_BytesConverter_ToHashmap_Invalid(t *testing.T) {
 	hm, err := bc.ToHashmap()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "nil": hm == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"nil": hm == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns error -- ToHashmap invalid", actual)
 }
 
@@ -300,10 +360,16 @@ func Test_I17_BytesConverter_ToHashset(t *testing.T) {
 	hs, err := bc.ToHashset()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": hs != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": hs != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToHashset", actual)
 }
 
@@ -313,10 +379,16 @@ func Test_I17_BytesConverter_ToHashset_Invalid(t *testing.T) {
 	hs, err := bc.ToHashset()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "nil": hs == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"nil": hs == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns error -- ToHashset invalid", actual)
 }
 
@@ -339,10 +411,16 @@ func Test_I17_BytesConverter_ToCollection(t *testing.T) {
 	c, err := bc.ToCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": c != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": c != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToCollection", actual)
 }
 
@@ -352,10 +430,16 @@ func Test_I17_BytesConverter_ToCollection_Invalid(t *testing.T) {
 	c, err := bc.ToCollection()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "nil": c == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"nil": c == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns error -- ToCollection invalid", actual)
 }
 
@@ -378,10 +462,16 @@ func Test_I17_BytesConverter_ToSimpleSlice(t *testing.T) {
 	ss, err := bc.ToSimpleSlice()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": ss != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": ss != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToSimpleSlice", actual)
 }
 
@@ -391,10 +481,16 @@ func Test_I17_BytesConverter_ToSimpleSlice_Invalid(t *testing.T) {
 	ss, err := bc.ToSimpleSlice()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "nil": ss == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"nil": ss == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns error -- ToSimpleSlice invalid", actual)
 }
 
@@ -420,10 +516,16 @@ func Test_I17_BytesConverter_ToKeyValCollection(t *testing.T) {
 	result, err := bc.ToKeyValCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToKeyValCollection", actual)
 }
 
@@ -446,10 +548,16 @@ func Test_I17_BytesConverter_ToAnyCollection(t *testing.T) {
 	ac, err := bc.ToAnyCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": ac != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": ac != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToAnyCollection", actual)
 }
 
@@ -472,10 +580,16 @@ func Test_I17_BytesConverter_ToMapAnyItems(t *testing.T) {
 	m, err := bc.ToMapAnyItems()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": m != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": m != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToMapAnyItems", actual)
 }
 
@@ -498,10 +612,16 @@ func Test_I17_BytesConverter_ToDynamicCollection(t *testing.T) {
 	result, err := bc.ToDynamicCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToDynamicCollection", actual)
 }
 
@@ -524,10 +644,16 @@ func Test_I17_BytesConverter_ToJsonResultCollection(t *testing.T) {
 	rc, err := bc.ToJsonResultCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToJsonResultCollection", actual)
 }
 
@@ -550,10 +676,16 @@ func Test_I17_BytesConverter_ToJsonMapResults(t *testing.T) {
 	mr, err := bc.ToJsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToJsonMapResults", actual)
 }
 
@@ -576,10 +708,16 @@ func Test_I17_BytesConverter_ToBytesCollection(t *testing.T) {
 	bColl, err := bc.ToBytesCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": bColl != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": bColl != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToBytesCollection", actual)
 }
 
@@ -606,10 +744,16 @@ func Test_I17_SimpleResult_Clone(t *testing.T) {
 	cloned := sr.Clone()
 
 	// Act
-	actual := args.Map{"valid": cloned.IsValid(), "msg": cloned.Message}
+	actual := args.Map{
+		"valid": cloned.IsValid(),
+		"msg": cloned.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "msg": ""}
+	expected := args.Map{
+		"valid": true,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- Clone", actual)
 }
 
@@ -632,10 +776,16 @@ func Test_I17_SimpleResult_ClonePtr(t *testing.T) {
 	cloned := sr.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "valid": cloned.IsValid()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"valid": cloned.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- ClonePtr", actual)
 }
 
@@ -800,10 +950,16 @@ func Test_I17_SimpleRequest_InvalidError_Cached(t *testing.T) {
 	err2 := sr.InvalidError()
 
 	// Act
-	actual := args.Map{"same": err1 == err2, "hasErr": err1 != nil}
+	actual := args.Map{
+		"same": err1 == err2,
+		"hasErr": err1 != nil,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "hasErr": true}
+	expected := args.Map{
+		"same": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns error -- InvalidError cached", actual)
 }
 
@@ -841,10 +997,16 @@ func Test_I17_SimpleRequest_IsPointer_Cached(t *testing.T) {
 	p2 := sr.IsPointer() // cached
 
 	// Act
-	actual := args.Map{"p1": p1, "p2": p2}
+	actual := args.Map{
+		"p1": p1,
+		"p2": p2,
+	}
 
 	// Assert
-	expected := args.Map{"p1": true, "p2": true}
+	expected := args.Map{
+		"p1": true,
+		"p2": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- IsPointer cached", actual)
 }
 
@@ -859,10 +1021,16 @@ func Test_I17_MapAsKeyValSlice_Success(t *testing.T) {
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": kvc.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": kvc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice returns correct value -- success", actual)
 }
 
@@ -943,10 +1111,16 @@ func Test_I17_AnyToReflectVal(t *testing.T) {
 	rv := coredynamic.AnyToReflectVal(42)
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "val": rv.Interface()}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"val": rv.Interface(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": 42}
+	expected := args.Map{
+		"valid": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToReflectVal returns correct value -- with args", actual)
 }
 

@@ -153,8 +153,14 @@ func Test_Cov9_TraceCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	result, err := stacks.ParseInjectUsingJson(badResult)
 
 	// Assert
-	actual := args.Map{"hasError": err != nil, "isEmpty": result.IsEmpty()}
-	expected := args.Map{"hasError": true, "isEmpty": true}
+	actual := args.Map{
+		"hasError": err != nil,
+		"isEmpty": result.IsEmpty(),
+	}
+	expected := args.Map{
+		"hasError": true,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns error -- ParseInjectUsingJson error", actual)
 }
 

@@ -357,7 +357,11 @@ func Test_Cov2_Key_ParseInjectUsingJson(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true, "mainName": mainName}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+		"mainName": mainName,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- ParseInjectUsingJson", actual)
 }
 

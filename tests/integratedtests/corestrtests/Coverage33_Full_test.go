@@ -40,10 +40,16 @@ func Test_C33_Collection_HasAnyItem(t *testing.T) {
 		empty := corestr.New.Collection.Empty()
 
 		// Act
-		actual := args.Map{"has": c.HasAnyItem(), "empty": empty.HasAnyItem()}
+		actual := args.Map{
+			"has": c.HasAnyItem(),
+			"empty": empty.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "empty": false}
+		expected := args.Map{
+			"has": true,
+			"empty": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAnyItem returns correct value -- with args", actual)
 	})
 }
@@ -62,7 +68,12 @@ func Test_C33_Collection_LastIndex_HasIndex(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"lastIdx": 1, "hasIdx0": true, "hasIdx5": false, "hasIdxN1": false}
+		expected := args.Map{
+			"lastIdx": 1,
+			"hasIdx0": true,
+			"hasIdx5": false,
+			"hasIdxN1": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LastIndex/HasIndex returns correct value -- with args", actual)
 	})
 }
@@ -173,7 +184,10 @@ func Test_C33_Collection_IsEquals(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"equal": true, "notEqual": false}
+		expected := args.Map{
+			"equal": true,
+			"notEqual": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection.IsEquals returns correct value -- with args", actual)
 	})
 }
@@ -284,7 +298,12 @@ func Test_C33_ValidValue_ValueBool(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"true": true, "false": false, "bad": false, "empty": false}
+		expected := args.Map{
+			"true": true,
+			"false": false,
+			"bad": false,
+			"empty": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- ValueBool", actual)
 	})
 }
@@ -304,7 +323,12 @@ func Test_C33_ValidValue_ValueInt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"good": 42, "bad": 99, "defInt": 42, "badDef": 0}
+		expected := args.Map{
+			"good": 42,
+			"bad": 99,
+			"defInt": 42,
+			"badDef": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- ValueInt", actual)
 	})
 }
@@ -337,7 +361,11 @@ func Test_C33_ValidValue_ValueFloat64(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"good": 3.14, "bad": 1.0, "defF64": 3.14}
+		expected := args.Map{
+			"good": 3.14,
+			"bad": 1.0,
+			"defF64": 3.14,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- float64", actual)
 	})
 }
@@ -631,7 +659,12 @@ func Test_C33_LeftRight_IsEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"equal": true, "notEqual": false, "nilBoth": true, "nilLeft": false}
+		expected := args.Map{
+			"equal": true,
+			"notEqual": false,
+			"nilBoth": true,
+			"nilLeft": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- IsEqual", actual)
 	})
 }
@@ -696,7 +729,11 @@ func Test_C33_LeftMiddleRight_Constructors(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"valid": true, "inv": true, "invNoMsg": true}
+		expected := args.Map{
+			"valid": true,
+			"inv": true,
+			"invNoMsg": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LMR returns correct value -- constructors", actual)
 	})
 }
@@ -772,10 +809,16 @@ func Test_C33_Hashmap_IsEmpty_HasItems(t *testing.T) {
 		hm := corestr.New.Hashmap.Empty()
 
 		// Act
-		actual := args.Map{"empty": hm.IsEmpty(), "hasItems": hm.HasItems()}
+		actual := args.Map{
+			"empty": hm.IsEmpty(),
+			"hasItems": hm.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns empty -- empty", actual)
 	})
 }
@@ -837,10 +880,16 @@ func Test_C33_Hashset_IsEmpty_HasItems(t *testing.T) {
 		hs := corestr.New.Hashset.Empty()
 
 		// Act
-		actual := args.Map{"empty": hs.IsEmpty(), "hasItems": hs.HasItems()}
+		actual := args.Map{
+			"empty": hs.IsEmpty(),
+			"hasItems": hs.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset returns empty -- empty", actual)
 	})
 }

@@ -153,10 +153,16 @@ func Test_Cov2_Trace_Message_CalledTwice(t *testing.T) {
 	msg2 := trace.Message()
 
 	// Act
-	actual := args.Map{"equal": msg1 == msg2, "notEmpty": msg1 != ""}
+	actual := args.Map{
+		"equal": msg1 == msg2,
+		"notEmpty": msg1 != "",
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEmpty": true}
+	expected := args.Map{
+		"equal": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace.Message returns cached -- called twice", actual)
 }
 
@@ -167,10 +173,16 @@ func Test_Cov2_Trace_ShortString_CalledTwice(t *testing.T) {
 	s2 := trace.ShortString()
 
 	// Act
-	actual := args.Map{"equal": s1 == s2, "notEmpty": s1 != ""}
+	actual := args.Map{
+		"equal": s1 == s2,
+		"notEmpty": s1 != "",
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEmpty": true}
+	expected := args.Map{
+		"equal": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace.ShortString returns cached -- called twice", actual)
 }
 
@@ -321,10 +333,16 @@ func Test_Cov2_NewCreator_Create(t *testing.T) {
 	trace := codestack.New.Create(0)
 
 	// Act
-	actual := args.Map{"isOkay": trace.IsOkay, "notEmpty": trace.PackageName != ""}
+	actual := args.Map{
+		"isOkay": trace.IsOkay,
+		"notEmpty": trace.PackageName != "",
+	}
 
 	// Assert
-	expected := args.Map{"isOkay": true, "notEmpty": true}
+	expected := args.Map{
+		"isOkay": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "newCreator.Create returns valid trace -- skip 0", actual)
 }
 
@@ -357,10 +375,16 @@ func Test_Cov2_NewCreator_Ptr(t *testing.T) {
 	ptr := codestack.New.Ptr(0)
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "isOkay": ptr.IsOkay}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"isOkay": ptr.IsOkay,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isOkay": true}
+	expected := args.Map{
+		"notNil": true,
+		"isOkay": true,
+	}
 	expected.ShouldBeEqual(t, 0, "newCreator.Ptr returns valid pointer -- skip 0", actual)
 }
 
@@ -371,10 +395,18 @@ func Test_Cov2_NameOf_All_EmptyInput(t *testing.T) {
 	full, pkg, method := codestack.NameOf.All("")
 
 	// Act
-	actual := args.Map{"full": full, "pkg": pkg, "method": method}
+	actual := args.Map{
+		"full": full,
+		"pkg": pkg,
+		"method": method,
+	}
 
 	// Assert
-	expected := args.Map{"full": "", "pkg": "", "method": ""}
+	expected := args.Map{
+		"full": "",
+		"pkg": "",
+		"method": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns empty -- empty input", actual)
 }
 
@@ -404,10 +436,16 @@ func Test_Cov2_Trace_AsFileLiner(t *testing.T) {
 	liner := trace.AsFileLiner()
 
 	// Act
-	actual := args.Map{"notNil": liner != nil, "pathNotEmpty": liner.FullFilePath() != ""}
+	actual := args.Map{
+		"notNil": liner != nil,
+		"pathNotEmpty": liner.FullFilePath() != "",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "pathNotEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"pathNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace.AsFileLiner returns valid FileWithLiner -- default trace", actual)
 }
 
@@ -419,10 +457,16 @@ func Test_Cov2_FileWithLine_AsFileLiner(t *testing.T) {
 	liner := fwl.AsFileLiner()
 
 	// Act
-	actual := args.Map{"notNil": liner != nil, "line": liner.LineNumber()}
+	actual := args.Map{
+		"notNil": liner != nil,
+		"line": liner.LineNumber(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "line": 10}
+	expected := args.Map{
+		"notNil": true,
+		"line": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine.AsFileLiner returns valid FileWithLiner -- with data", actual)
 }
 

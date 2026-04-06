@@ -319,10 +319,16 @@ func Test_Cov6_BasicInt32_CreateUsingMap(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"typeName": bi.TypeName(), "length": bi.Length()}
+	actual := args.Map{
+		"typeName": bi.TypeName(),
+		"length": bi.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"typeName": "testInt32Enum", "length": 2}
+	expected := args.Map{
+		"typeName": "testInt32Enum",
+		"length": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt32_CreateUsingMap returns correct value -- with args", actual)
 }
 
@@ -338,10 +344,16 @@ func Test_Cov6_BasicInt32_WithAliasMap(t *testing.T) {
 	val, err := bi.GetValueByName("on")
 
 	// Act
-	actual := args.Map{"aliasVal": val, "noErr": err == nil}
+	actual := args.Map{
+		"aliasVal": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"aliasVal": int32(1), "noErr": true}
+	expected := args.Map{
+		"aliasVal": int32(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt32_WithAliasMap returns non-empty -- with args", actual)
 }
 
@@ -703,10 +715,16 @@ func Test_Cov6_BasicUInt16_CreateUsingMap(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"typeName": bi.TypeName(), "length": bi.Length()}
+	actual := args.Map{
+		"typeName": bi.TypeName(),
+		"length": bi.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"typeName": "testUInt16Enum", "length": 2}
+	expected := args.Map{
+		"typeName": "testUInt16Enum",
+		"length": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicUInt16_CreateUsingMap returns correct value -- with args", actual)
 }
 
@@ -722,10 +740,16 @@ func Test_Cov6_BasicUInt16_WithAliasMap(t *testing.T) {
 	val, err := bi.GetValueByName("on")
 
 	// Act
-	actual := args.Map{"aliasVal": val, "noErr": err == nil}
+	actual := args.Map{
+		"aliasVal": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"aliasVal": uint16(1), "noErr": true}
+	expected := args.Map{
+		"aliasVal": uint16(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicUInt16_WithAliasMap returns non-empty -- with args", actual)
 }
 
@@ -1007,10 +1031,16 @@ func Test_Cov6_DynamicMap_KeyValueIntDefault(t *testing.T) {
 	missing := dm.KeyValueIntDefault("z")
 
 	// Act
-	actual := args.Map{"val": val, "missing": missing < 0}
+	actual := args.Map{
+		"val": val,
+		"missing": missing < 0,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "missing": true}
+	expected := args.Map{
+		"val": 42,
+		"missing": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap_KeyValueIntDefault returns correct value -- with args", actual)
 }
 
@@ -1035,10 +1065,18 @@ func Test_Cov6_DynamicMap_IsRawEqual(t *testing.T) {
 	diffLen := dm.IsRawEqual(false, map[string]any{"a": 1, "b": 2})
 
 	// Act
-	actual := args.Map{"same": same, "diff": diff, "diffLen": diffLen}
+	actual := args.Map{
+		"same": same,
+		"diff": diff,
+		"diffLen": diffLen,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false, "diffLen": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+		"diffLen": false,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap_IsRawEqual returns correct value -- with args", actual)
 }
 
@@ -1521,10 +1559,16 @@ func Test_Cov6_DynamicMap_ShouldDiffUsingDifferChecker(t *testing.T) {
 		enumimpl.DefaultDiffCheckerImpl, false, "title", map[string]any{"a": 2})
 
 	// Act
-	actual := args.Map{"noDiff": noDiff == "", "hasDiff": hasDiff != ""}
+	actual := args.Map{
+		"noDiff": noDiff == "",
+		"hasDiff": hasDiff != "",
+	}
 
 	// Assert
-	expected := args.Map{"noDiff": true, "hasDiff": true}
+	expected := args.Map{
+		"noDiff": true,
+		"hasDiff": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap_ShouldDiffUsingDifferChecker returns correct value -- with args", actual)
 }
 
@@ -1537,10 +1581,16 @@ func Test_Cov6_DynamicMap_ShouldDiffLeftRightUsingDifferChecker(t *testing.T) {
 		enumimpl.DefaultDiffCheckerImpl, false, "title", map[string]any{"a": 1, "b": 2})
 
 	// Act
-	actual := args.Map{"noDiff": noDiff == "", "hasDiff": hasDiff != ""}
+	actual := args.Map{
+		"noDiff": noDiff == "",
+		"hasDiff": hasDiff != "",
+	}
 
 	// Assert
-	expected := args.Map{"noDiff": true, "hasDiff": true}
+	expected := args.Map{
+		"noDiff": true,
+		"hasDiff": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap_ShouldDiffLeftRightUsingDifferChecker returns correct value -- with args", actual)
 }
 
@@ -1751,10 +1801,16 @@ func Test_Cov6_DynamicMap_DiffJsonMessageUsingDifferChecker(t *testing.T) {
 		enumimpl.DefaultDiffCheckerImpl, false, map[string]any{"a": 2})
 
 	// Act
-	actual := args.Map{"noDiff": noDiff == "", "hasDiff": hasDiff != ""}
+	actual := args.Map{
+		"noDiff": noDiff == "",
+		"hasDiff": hasDiff != "",
+	}
 
 	// Assert
-	expected := args.Map{"noDiff": true, "hasDiff": true}
+	expected := args.Map{
+		"noDiff": true,
+		"hasDiff": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap_DiffJsonMessageUsingDifferChecker returns correct value -- with args", actual)
 }
 

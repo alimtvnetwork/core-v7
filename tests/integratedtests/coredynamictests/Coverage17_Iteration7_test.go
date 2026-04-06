@@ -135,10 +135,16 @@ func Test_C17_KeyVal_ValueReflectValue(t *testing.T) {
 	rv := kv.ValueReflectValue()
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "kind": rv.Kind() == reflect.Int}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"kind": rv.Kind() == reflect.Int,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "kind": true}
+	expected := args.Map{
+		"valid": true,
+		"kind": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ValueReflectValue", actual)
 }
 
@@ -148,10 +154,16 @@ func Test_C17_KeyVal_ValueInt(t *testing.T) {
 	kvBad := coredynamic.KeyVal{Key: "k", Value: "nope"}
 
 	// Act
-	actual := args.Map{"ok": kv.ValueInt(), "bad": kvBad.ValueInt()}
+	actual := args.Map{
+		"ok": kv.ValueInt(),
+		"bad": kvBad.ValueInt(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": 42, "bad": -1}
+	expected := args.Map{
+		"ok": 42,
+		"bad": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ValueInt", actual)
 }
 
@@ -161,10 +173,16 @@ func Test_C17_KeyVal_ValueUInt(t *testing.T) {
 	kvBad := coredynamic.KeyVal{Key: "k", Value: "nope"}
 
 	// Act
-	actual := args.Map{"ok": kv.ValueUInt(), "bad": kvBad.ValueUInt()}
+	actual := args.Map{
+		"ok": kv.ValueUInt(),
+		"bad": kvBad.ValueUInt(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": uint(5), "bad": uint(0)}
+	expected := args.Map{
+		"ok": uint(5),
+		"bad": uint(0),
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ValueUInt", actual)
 }
 
@@ -174,10 +192,16 @@ func Test_C17_KeyVal_ValueStrings(t *testing.T) {
 	kvBad := coredynamic.KeyVal{Key: "k", Value: 42}
 
 	// Act
-	actual := args.Map{"ok": len(kv.ValueStrings()), "bad": kvBad.ValueStrings() == nil}
+	actual := args.Map{
+		"ok": len(kv.ValueStrings()),
+		"bad": kvBad.ValueStrings() == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": 2, "bad": true}
+	expected := args.Map{
+		"ok": 2,
+		"bad": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns non-empty -- ValueStrings", actual)
 }
 
@@ -187,10 +211,16 @@ func Test_C17_KeyVal_ValueBool(t *testing.T) {
 	kvBad := coredynamic.KeyVal{Key: "k", Value: "nope"}
 
 	// Act
-	actual := args.Map{"ok": kv.ValueBool(), "bad": kvBad.ValueBool()}
+	actual := args.Map{
+		"ok": kv.ValueBool(),
+		"bad": kvBad.ValueBool(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "bad": false}
+	expected := args.Map{
+		"ok": true,
+		"bad": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ValueBool", actual)
 }
 
@@ -200,10 +230,16 @@ func Test_C17_KeyVal_ValueInt64(t *testing.T) {
 	kvBad := coredynamic.KeyVal{Key: "k", Value: "nope"}
 
 	// Act
-	actual := args.Map{"ok": kv.ValueInt64(), "bad": kvBad.ValueInt64()}
+	actual := args.Map{
+		"ok": kv.ValueInt64(),
+		"bad": kvBad.ValueInt64(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": int64(99), "bad": int64(-1)}
+	expected := args.Map{
+		"ok": int64(99),
+		"bad": int64(-1),
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ValueInt64", actual)
 }
 
@@ -233,10 +269,16 @@ func Test_C17_KeyVal_ReflectSetKey(t *testing.T) {
 	err := kv.ReflectSetKey(&k)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "k": k}
+	actual := args.Map{
+		"noErr": err == nil,
+		"k": k,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "k": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"k": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- ReflectSetKey", actual)
 
 	var nilKv *coredynamic.KeyVal
@@ -345,7 +387,11 @@ func Test_C17_KeyVal_KeyReflectSet_ValueReflectSet_ReflectSetTo(t *testing.T) {
 		"e2": nilKv.ValueReflectSet(&v) != nil,
 		"e3": nilKv.ReflectSetTo(&v2) != nil,
 	}
-	expected2 := args.Map{"e1": true, "e2": true, "e3": true}
+	expected2 := args.Map{
+		"e1": true,
+		"e2": true,
+		"e3": true,
+	}
 	expected2.ShouldBeEqual(t, 1, "KeyVal returns nil -- ReflectSet nil", actual2)
 }
 
@@ -423,10 +469,16 @@ func Test_C17_KeyVal_Serialize(t *testing.T) {
 	b, err := kv.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasData": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasData": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal returns correct value -- Serialize", actual)
 }
 
@@ -517,10 +569,16 @@ func Test_C17_KeyValCollection_JsonMapResults(t *testing.T) {
 	mr, err := kvc.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- JsonMapResults", actual)
 }
 
@@ -639,10 +697,16 @@ func Test_C17_KeyValCollection_String(t *testing.T) {
 	sNil := nilKvc.String()
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilEmpty": sNil == ""}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilEmpty": sNil == "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilEmpty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- String", actual)
 }
 
@@ -1154,7 +1218,11 @@ func Test_C17_MapAnyItemDiff_Json(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jOk": true, "jpOk": true, "pjOk": true}
+	expected := args.Map{
+		"jOk": true,
+		"jpOk": true,
+		"pjOk": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Json", actual)
 }
 

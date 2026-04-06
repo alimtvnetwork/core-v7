@@ -75,10 +75,16 @@ func Test_Cov5_FromResultAny_SingleResult(t *testing.T) {
 	r := results.FromResultAny[string, int](ra)
 
 	// Act
-	actual := args.Map{"val": r.Value, "val2": r.Result2}
+	actual := args.Map{
+		"val": r.Value,
+		"val2": r.Result2,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "val2": 0}
+	expected := args.Map{
+		"val": "hello",
+		"val2": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns first only -- single result", actual)
 }
 

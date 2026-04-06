@@ -18,10 +18,20 @@ func Test_Cov12_Collection_NewAndEmpty(t *testing.T) {
 	e := coredynamic.EmptyCollection[string]()
 
 	// Act
-	actual := args.Map{"cLen": c.Length(), "cEmpty": c.IsEmpty(), "eLen": e.Length(), "eEmpty": e.IsEmpty()}
+	actual := args.Map{
+		"cLen": c.Length(),
+		"cEmpty": c.IsEmpty(),
+		"eLen": e.Length(),
+		"eEmpty": e.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"cLen": 0, "cEmpty": true, "eLen": 0, "eEmpty": true}
+	expected := args.Map{
+		"cLen": 0,
+		"cEmpty": true,
+		"eLen": 0,
+		"eEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New/Empty returns empty -- with args", actual)
 }
 
@@ -42,10 +52,18 @@ func Test_Cov12_Collection_From(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": c.Length(), "first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"len": c.Length(),
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionFrom returns correct value -- with args", actual)
 }
 
@@ -54,10 +72,16 @@ func Test_Cov12_Collection_Clone(t *testing.T) {
 	c := coredynamic.CollectionClone([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": c.Length(), "first": c.First()}
+	actual := args.Map{
+		"len": c.Length(),
+		"first": c.First(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionClone returns correct value -- with args", actual)
 }
 
@@ -66,10 +90,18 @@ func Test_Cov12_Collection_At_SafeAt(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b", "c"})
 
 	// Act
-	actual := args.Map{"at": c.At(1), "safe": c.SafeAt(1), "oob": c.SafeAt(99)}
+	actual := args.Map{
+		"at": c.At(1),
+		"safe": c.SafeAt(1),
+		"oob": c.SafeAt(99),
+	}
 
 	// Assert
-	expected := args.Map{"at": "b", "safe": "b", "oob": ""}
+	expected := args.Map{
+		"at": "b",
+		"safe": "b",
+		"oob": "",
+	}
 	expected.ShouldBeEqual(t, 0, "At/SafeAt returns correct value -- with args", actual)
 }
 
@@ -83,10 +115,28 @@ func Test_Cov12_Collection_FirstOrDefault(t *testing.T) {
 	el, elOK := e.LastOrDefault()
 
 	// Act
-	actual := args.Map{"f": *f, "fOK": fOK, "l": *l, "lOK": lOK, "efNil": ef == nil, "efOK": efOK, "elNil": el == nil, "elOK": elOK}
+	actual := args.Map{
+		"f": *f,
+		"fOK": fOK,
+		"l": *l,
+		"lOK": lOK,
+		"efNil": ef == nil,
+		"efOK": efOK,
+		"elNil": el == nil,
+		"elOK": elOK,
+	}
 
 	// Assert
-	expected := args.Map{"f": "a", "fOK": true, "l": "a", "lOK": true, "efNil": true, "efOK": false, "elNil": true, "elOK": false}
+	expected := args.Map{
+		"f": "a",
+		"fOK": true,
+		"l": "a",
+		"lOK": true,
+		"efNil": true,
+		"efOK": false,
+		"elNil": true,
+		"elOK": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefault returns correct value -- with args", actual)
 }
 
@@ -107,10 +157,20 @@ func Test_Cov12_Collection_Length_Nil(t *testing.T) {
 	var c *coredynamic.Collection[string]
 
 	// Act
-	actual := args.Map{"len": c.Length(), "count": c.Count(), "empty": c.IsEmpty(), "has": c.HasAnyItem()}
+	actual := args.Map{
+		"len": c.Length(),
+		"count": c.Count(),
+		"empty": c.IsEmpty(),
+		"has": c.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "count": 0, "empty": true, "has": false}
+	expected := args.Map{
+		"len": 0,
+		"count": 0,
+		"empty": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Length returns nil -- nil", actual)
 }
 
@@ -119,10 +179,22 @@ func Test_Cov12_Collection_HasIndex(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"v0": c.HasIndex(0), "v1": c.HasIndex(1), "v2": c.HasIndex(2), "neg": c.HasIndex(-1), "last": c.LastIndex()}
+	actual := args.Map{
+		"v0": c.HasIndex(0),
+		"v1": c.HasIndex(1),
+		"v2": c.HasIndex(2),
+		"neg": c.HasIndex(-1),
+		"last": c.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"v0": true, "v1": true, "v2": false, "neg": false, "last": 1}
+	expected := args.Map{
+		"v0": true,
+		"v1": true,
+		"v2": false,
+		"neg": false,
+		"last": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "HasIndex returns correct value -- with args", actual)
 }
 
@@ -168,10 +240,18 @@ func Test_Cov12_Collection_RemoveAt(t *testing.T) {
 	bad := c.RemoveAt(99)
 
 	// Act
-	actual := args.Map{"ok": ok, "bad": bad, "len": c.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"bad": bad,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "bad": false, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"bad": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveAt returns correct value -- with args", actual)
 }
 
@@ -286,10 +366,16 @@ func Test_Cov12_Collection_Paging(t *testing.T) {
 	zero := c.GetPagesSize(0)
 
 	// Act
-	actual := args.Map{"pages": pages, "zero": zero}
+	actual := args.Map{
+		"pages": pages,
+		"zero": zero,
+	}
 
 	// Assert
-	expected := args.Map{"pages": 3, "zero": 0}
+	expected := args.Map{
+		"pages": 3,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "GetPagesSize returns correct value -- with args", actual)
 }
 
@@ -340,10 +426,22 @@ func Test_Cov12_Collection_Json(t *testing.T) {
 	b, merr := c.MarshalJSON()
 
 	// Act
-	actual := args.Map{"jsNE": js != "", "noErr": err == nil, "jmNE": jm != "", "bLen": len(b) > 0, "merrNil": merr == nil}
+	actual := args.Map{
+		"jsNE": js != "",
+		"noErr": err == nil,
+		"jmNE": jm != "",
+		"bLen": len(b) > 0,
+		"merrNil": merr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"jsNE": true, "noErr": true, "jmNE": true, "bLen": true, "merrNil": true}
+	expected := args.Map{
+		"jsNE": true,
+		"noErr": true,
+		"jmNE": true,
+		"bLen": true,
+		"merrNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Json", actual)
 }
 
@@ -353,10 +451,16 @@ func Test_Cov12_Collection_UnmarshalJSON(t *testing.T) {
 	err := c.UnmarshalJSON([]byte(`["x","y"]`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": c.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON returns correct value -- with args", actual)
 }
 
@@ -367,10 +471,16 @@ func Test_Cov12_Collection_Strings(t *testing.T) {
 	str := c.String()
 
 	// Act
-	actual := args.Map{"len": len(strs), "strNE": str != ""}
+	actual := args.Map{
+		"len": len(strs),
+		"strNE": str != "",
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "strNE": true}
+	expected := args.Map{
+		"len": 2,
+		"strNE": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Strings returns correct value -- with args", actual)
 }
 
@@ -439,10 +549,16 @@ func Test_Cov12_CollectionMethods_ConcatNew(t *testing.T) {
 	c2 := c.ConcatNew("b", "c")
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "newLen": c2.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"newLen": c2.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 1, "newLen": 3}
+	expected := args.Map{
+		"origLen": 1,
+		"newLen": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNew returns correct value -- with args", actual)
 }
 
@@ -465,10 +581,16 @@ func Test_Cov12_CollectionMethods_Capacity(t *testing.T) {
 	var nilC *coredynamic.Collection[string]
 
 	// Act
-	actual := args.Map{"cap": c.Capacity() >= 10, "nilCap": nilC.Capacity()}
+	actual := args.Map{
+		"cap": c.Capacity() >= 10,
+		"nilCap": nilC.Capacity(),
+	}
 
 	// Assert
-	expected := args.Map{"cap": true, "nilCap": 0}
+	expected := args.Map{
+		"cap": true,
+		"nilCap": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Capacity returns correct value -- with args", actual)
 }
 
@@ -506,10 +628,16 @@ func Test_Cov12_CollectionMethods_Reverse(t *testing.T) {
 	c.Reverse()
 
 	// Act
-	actual := args.Map{"first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "Reverse returns correct value -- with args", actual)
 }
 
@@ -532,10 +660,16 @@ func Test_Cov12_CollectionMethods_InsertAt(t *testing.T) {
 	c.InsertAt(1, "b")
 
 	// Act
-	actual := args.Map{"len": c.Length(), "at1": c.At(1)}
+	actual := args.Map{
+		"len": c.Length(),
+		"at1": c.At(1),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "at1": "b"}
+	expected := args.Map{
+		"len": 3,
+		"at1": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "InsertAt returns correct value -- with args", actual)
 }
 
@@ -560,10 +694,18 @@ func Test_Cov12_CollectionMethods_IndexOfFunc(t *testing.T) {
 	has := c.ContainsFunc(func(s string) bool { return s == "b" })
 
 	// Act
-	actual := args.Map{"idx": idx, "missing": missing, "has": has}
+	actual := args.Map{
+		"idx": idx,
+		"missing": missing,
+		"has": has,
+	}
 
 	// Assert
-	expected := args.Map{"idx": 1, "missing": -1, "has": true}
+	expected := args.Map{
+		"idx": 1,
+		"missing": -1,
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IndexOfFunc returns correct value -- with args", actual)
 }
 
@@ -632,7 +774,10 @@ func Test_Cov12_CollectionSearch_Lock(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"contains": true, "indexOf": 0}
+	expected := args.Map{
+		"contains": true,
+		"indexOf": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Search returns correct value -- Lock", actual)
 }
 
@@ -646,10 +791,16 @@ func Test_Cov12_CollectionSort_SortFunc(t *testing.T) {
 	c.SortFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- with args", actual)
 }
 
@@ -685,10 +836,16 @@ func Test_Cov12_CollectionSort_SortedFunc(t *testing.T) {
 	sorted := c.SortedFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"origFirst": c.First(), "sortedFirst": sorted.First()}
+	actual := args.Map{
+		"origFirst": c.First(),
+		"sortedFirst": sorted.First(),
+	}
 
 	// Assert
-	expected := args.Map{"origFirst": 3, "sortedFirst": 1}
+	expected := args.Map{
+		"origFirst": 3,
+		"sortedFirst": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedFunc returns correct value -- with args", actual)
 }
 
@@ -733,10 +890,16 @@ func Test_Cov12_CollectionSort_SortedAscDesc(t *testing.T) {
 	desc := coredynamic.SortedDesc(c)
 
 	// Act
-	actual := args.Map{"ascFirst": asc.First(), "descFirst": desc.First()}
+	actual := args.Map{
+		"ascFirst": asc.First(),
+		"descFirst": desc.First(),
+	}
 
 	// Assert
-	expected := args.Map{"ascFirst": 1, "descFirst": 3}
+	expected := args.Map{
+		"ascFirst": 1,
+		"descFirst": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedAsc/Desc returns correct value -- with args", actual)
 }
 
@@ -753,7 +916,11 @@ func Test_Cov12_CollectionSort_IsSorted(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"asc": true, "desc": false, "singleAsc": true}
+	expected := args.Map{
+		"asc": true,
+		"desc": false,
+		"singleAsc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSorted returns correct value -- with args", actual)
 }
 
@@ -771,10 +938,22 @@ func Test_Cov12_CollectionDistinct(t *testing.T) {
 	id := coredynamic.IsDistinct(c)
 
 	// Act
-	actual := args.Map{"dLen": d.Length(), "uLen": u.Length(), "dlLen": dl.Length(), "dc": dc, "id": id}
+	actual := args.Map{
+		"dLen": d.Length(),
+		"uLen": u.Length(),
+		"dlLen": dl.Length(),
+		"dc": dc,
+		"id": id,
+	}
 
 	// Assert
-	expected := args.Map{"dLen": 3, "uLen": 3, "dlLen": 3, "dc": 3, "id": false}
+	expected := args.Map{
+		"dLen": 3,
+		"uLen": 3,
+		"dlLen": 3,
+		"dc": 3,
+		"id": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Distinct returns correct value -- with args", actual)
 }
 
@@ -785,10 +964,16 @@ func Test_Cov12_CollectionDistinct_Empty(t *testing.T) {
 	dc := coredynamic.DistinctCount(c)
 
 	// Act
-	actual := args.Map{"len": d.Length(), "dc": dc}
+	actual := args.Map{
+		"len": d.Length(),
+		"dc": dc,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "dc": 0}
+	expected := args.Map{
+		"len": 0,
+		"dc": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Distinct returns empty -- empty", actual)
 }
 
@@ -840,10 +1025,16 @@ func Test_Cov12_CollectionGroupBy_Count(t *testing.T) {
 	counts := coredynamic.GroupByCount(c, func(s string) string { return s })
 
 	// Act
-	actual := args.Map{"a": counts["a"], "b": counts["b"]}
+	actual := args.Map{
+		"a": counts["a"],
+		"b": counts["b"],
+	}
 
 	// Assert
-	expected := args.Map{"a": 2, "b": 1}
+	expected := args.Map{
+		"a": 2,
+		"b": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupByCount returns correct value -- with args", actual)
 }
 
@@ -947,10 +1138,16 @@ func Test_Cov12_CollectionLock_LengthLock(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": c.LengthLock(), "empty": c.IsEmptyLock()}
+	actual := args.Map{
+		"len": c.LengthLock(),
+		"empty": c.IsEmptyLock(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "empty": false}
+	expected := args.Map{
+		"len": 2,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LengthLock returns correct value -- with args", actual)
 }
 
@@ -1018,10 +1215,18 @@ func Test_Cov12_CollectionLock_RemoveAtLock(t *testing.T) {
 	bad := c.RemoveAtLock(99)
 
 	// Act
-	actual := args.Map{"ok": ok, "bad": bad, "len": c.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"bad": bad,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "bad": false, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"bad": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveAtLock returns correct value -- with args", actual)
 }
 
@@ -1056,10 +1261,16 @@ func Test_Cov12_CollectionLock_FirstLastLock(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"first": c.FirstLock(), "last": c.LastLock()}
+	actual := args.Map{
+		"first": c.FirstLock(),
+		"last": c.LastLock(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "b"}
+	expected := args.Map{
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastLock returns correct value -- with args", actual)
 }
 

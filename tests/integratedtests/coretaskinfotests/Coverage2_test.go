@@ -58,10 +58,16 @@ func Test_Cov2_Info_JsonString_Nil(t *testing.T) {
 	result := info.JsonString()
 
 	// Act
-	actual := args.Map{"notPanic": true, "hasResult": result != ""}
+	actual := args.Map{
+		"notPanic": true,
+		"hasResult": result != "",
+	}
 
 	// Assert
-	expected := args.Map{"notPanic": true, "hasResult": actual["hasResult"]}
+	expected := args.Map{
+		"notPanic": true,
+		"hasResult": actual["hasResult"],
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns nil -- JsonString nil", actual)
 }
 
@@ -131,10 +137,16 @@ func Test_Cov2_Info_Serialize(t *testing.T) {
 	bytes, err := info.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Serialize", actual)
 }
 
@@ -215,10 +227,16 @@ func Test_Cov2_Info_LazyMap(t *testing.T) {
 	m2 := info.LazyMap() // cached
 
 	// Act
-	actual := args.Map{"len": len(m1), "sameRef": len(m2) == len(m1)}
+	actual := args.Map{
+		"len": len(m1),
+		"sameRef": len(m2) == len(m1),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "sameRef": true}
+	expected := args.Map{
+		"len": 1,
+		"sameRef": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- LazyMap", actual)
 }
 
@@ -417,10 +435,16 @@ func Test_Cov2_NewInfo_Deserialized(t *testing.T) {
 	parsed, err := coretaskinfo.New.Info.Deserialized(bytes)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": parsed.Name()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": parsed.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- Deserialized", actual)
 }
 
@@ -431,10 +455,16 @@ func Test_Cov2_NewInfo_DeserializedUsingJsonResult(t *testing.T) {
 	parsed, err := coretaskinfo.New.Info.DeserializedUsingJsonResult(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": parsed.Name()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": parsed.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "NewInfo returns correct value -- DeserializedUsingJsonResult", actual)
 }
 
@@ -527,10 +557,16 @@ func Test_Cov2_Info_JsonParseSelfInject(t *testing.T) {
 	err := parsed.JsonParseSelfInject(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": parsed.Name()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": parsed.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- JsonParseSelfInject", actual)
 }
 
@@ -543,9 +579,15 @@ func Test_Cov2_Info_Deserialize(t *testing.T) {
 	err := info.Deserialize(&parsed)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": parsed.Name()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": parsed.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Deserialize", actual)
 }

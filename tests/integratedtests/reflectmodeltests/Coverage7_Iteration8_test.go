@@ -386,11 +386,17 @@ func Test_I8_MP_InvokeFirstAndError_Success(t *testing.T) {
 	}()
 
 	// Act
-	actual := args.Map{"didPanic": didPanic, "firstIfNoPanic": first}
+	actual := args.Map{
+		"didPanic": didPanic,
+		"firstIfNoPanic": first,
+	}
 	if didPanic {
 
 	// Assert
-		expected := args.Map{"didPanic": true, "firstIfNoPanic": nil}
+		expected := args.Map{
+			"didPanic": true,
+			"firstIfNoPanic": nil,
+		}
 		expected.ShouldBeEqual(t, 0, "InvokeFirstAndError panics -- nil error interface cast", actual)
 	} else {
 		actual := args.Map{"result": first.(int) != 10}

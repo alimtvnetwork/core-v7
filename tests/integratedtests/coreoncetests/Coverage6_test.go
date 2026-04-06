@@ -16,10 +16,20 @@ func Test_Cov6_StringOnce_SplitLeftRight(t *testing.T) {
 	lt, rt := so.SplitLeftRightTrim("=")
 
 	// Act
-	actual := args.Map{"left": l, "right": r, "leftTrim": lt, "rightTrim": rt}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+		"leftTrim": lt,
+		"rightTrim": rt,
+	}
 
 	// Assert
-	expected := args.Map{"left": "key", "right": "value", "leftTrim": "key", "rightTrim": "value"}
+	expected := args.Map{
+		"left": "key",
+		"right": "value",
+		"leftTrim": "key",
+		"rightTrim": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- SplitLeftRight", actual)
 }
 
@@ -29,10 +39,16 @@ func Test_Cov6_StringOnce_SplitLeftRight_NoSep(t *testing.T) {
 	l, r := so.SplitLeftRight("=")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": "nosep", "right": ""}
+	expected := args.Map{
+		"left": "nosep",
+		"right": "",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns empty -- SplitLeftRight no separator", actual)
 }
 
@@ -96,10 +112,16 @@ func Test_Cov6_StringOnce_Serialize(t *testing.T) {
 	data, err := so.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- Serialize", actual)
 }
 
@@ -117,7 +139,11 @@ func Test_Cov6_StringOnce_MarshalUnmarshalJSON(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "value": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"value": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
@@ -135,7 +161,11 @@ func Test_Cov6_BoolOnce_Execute(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"val": true, "exec": true, "string": "true"}
+	expected := args.Map{
+		"val": true,
+		"exec": true,
+		"string": "true",
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Execute", actual)
 }
 
@@ -145,10 +175,16 @@ func Test_Cov6_BoolOnce_Serialize(t *testing.T) {
 	data, err := bo.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Serialize", actual)
 }
 
@@ -160,10 +196,18 @@ func Test_Cov6_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
 	err2 := bo2.UnmarshalJSON(data)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "noErr2": err2 == nil, "val": bo2.Value()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"noErr2": err2 == nil,
+		"val": bo2.Value(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "val": true}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
@@ -215,10 +259,16 @@ func Test_Cov6_IntegerOnce_Serialize(t *testing.T) {
 	data, err := io.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerOnce returns correct value -- Serialize", actual)
 }
 

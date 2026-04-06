@@ -69,12 +69,18 @@ var extVoidFunctionsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "VoidFunctions true -- executes true funcs",
 		ArrangeInput:  args.Map{"isTrue": true},
-		ExpectedInput: args.Map{"trueCount": 2, "falseCount": 1},
+		ExpectedInput: args.Map{
+			"trueCount": 2,
+			"falseCount": 1,
+		},
 	},
 	{
 		Title:         "VoidFunctions false -- executes false funcs only",
 		ArrangeInput:  args.Map{"isTrue": false},
-		ExpectedInput: args.Map{"trueCount": 0, "falseCount": 1},
+		ExpectedInput: args.Map{
+			"trueCount": 0,
+			"falseCount": 1,
+		},
 	},
 }
 
@@ -119,17 +125,26 @@ var extErrorFunctionResultTestCases = []coretestcases.CaseV1{
 var extErrorFunctionsExecTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ErrorFunctionsExecuteResults true no errors -- nil",
-		ArrangeInput:  args.Map{"isTrue": true, "hasError": false},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{"isNil": true},
 	},
 	{
 		Title:         "ErrorFunctionsExecuteResults true with error -- has error",
-		ArrangeInput:  args.Map{"isTrue": true, "hasError": true},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"hasError": true,
+		},
 		ExpectedInput: args.Map{"isNil": false},
 	},
 	{
 		Title:         "ErrorFunctionsExecuteResults empty funcs -- nil",
-		ArrangeInput:  args.Map{"isTrue": true, "empty": true},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"empty": true,
+		},
 		ExpectedInput: args.Map{"isNil": true},
 	},
 }
@@ -158,22 +173,34 @@ var extAnyFunctionsTestCases = []coretestcases.CaseV1{
 var extAnyFunctionsExecTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "AnyFunctionsExecuteResults true take all -- collects results",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "take-all"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "take-all",
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "AnyFunctionsExecuteResults with break -- stops early",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "break-early"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "break-early",
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "AnyFunctionsExecuteResults with nil func -- skips nil",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "with-nil"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "with-nil",
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "AnyFunctionsExecuteResults empty -- returns nil",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "empty"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "empty",
+		},
 		ExpectedInput: args.Map{"length": 0},
 	},
 }
@@ -185,17 +212,26 @@ var extAnyFunctionsExecTestCases = []coretestcases.CaseV1{
 var extFunctionsExecTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "FunctionsExecuteResults true take all -- collects typed results",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "take-all"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "take-all",
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "FunctionsExecuteResults with break -- stops early",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "break-early"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "break-early",
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "FunctionsExecuteResults false -- uses false funcs",
-		ArrangeInput:  args.Map{"isTrue": false, "scenario": "take-all"},
+		ArrangeInput:  args.Map{
+			"isTrue": false,
+			"scenario": "take-all",
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 }
@@ -224,23 +260,47 @@ var extFunctionsSelectorTestCases = []coretestcases.CaseV1{
 var extTypedErrorFunctionsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "TypedErrorFunctionsExecuteResults true no errors -- collects results",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "success"},
-		ExpectedInput: args.Map{"resultLen": 2, "hasError": false},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "success",
+		},
+		ExpectedInput: args.Map{
+			"resultLen": 2,
+			"hasError": false,
+		},
 	},
 	{
 		Title:         "TypedErrorFunctionsExecuteResults true with errors -- partial results",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "mixed"},
-		ExpectedInput: args.Map{"resultLen": 1, "hasError": true},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "mixed",
+		},
+		ExpectedInput: args.Map{
+			"resultLen": 1,
+			"hasError": true,
+		},
 	},
 	{
 		Title:         "TypedErrorFunctionsExecuteResults empty -- nil results",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "empty"},
-		ExpectedInput: args.Map{"resultLen": 0, "hasError": false},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "empty",
+		},
+		ExpectedInput: args.Map{
+			"resultLen": 0,
+			"hasError": false,
+		},
 	},
 	{
 		Title:         "TypedErrorFunctionsExecuteResults with nil func -- skips nil",
-		ArrangeInput:  args.Map{"isTrue": true, "scenario": "with-nil"},
-		ExpectedInput: args.Map{"resultLen": 1, "hasError": false},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"scenario": "with-nil",
+		},
+		ExpectedInput: args.Map{
+			"resultLen": 1,
+			"hasError": false,
+		},
 	},
 }
 
@@ -252,12 +312,19 @@ var extTypedErrorFunctionsTestCases = []coretestcases.CaseV1{
 var extNilDefStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilDefString nil -- returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": "fallback"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": "fallback",
+		},
 		ExpectedInput: "fallback",
 	},
 	{
 		Title:         "NilDefString non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": "actual", "defVal": "fallback"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "actual",
+			"defVal": "fallback",
+		},
 		ExpectedInput: "actual",
 	},
 }
@@ -265,12 +332,19 @@ var extNilDefStringTestCases = []coretestcases.CaseV1{
 var extNilDefPtrStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilDefPtrString nil -- returns ptr to default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": "fb"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": "fb",
+		},
 		ExpectedInput: "fb",
 	},
 	{
 		Title:         "NilDefPtrString non-nil -- returns original ptr",
-		ArrangeInput:  args.Map{"isNil": false, "value": "orig", "defVal": "fb"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "orig",
+			"defVal": "fb",
+		},
 		ExpectedInput: "orig",
 	},
 }
@@ -283,7 +357,10 @@ var extValueOrZeroStringTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "ValueOrZeroString non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": "hi"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "hi",
+		},
 		ExpectedInput: "hi",
 	},
 }
@@ -296,7 +373,10 @@ var extPtrOrZeroStringTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "PtrOrZeroString non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": "world"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "world",
+		},
 		ExpectedInput: "world",
 	},
 }
@@ -304,12 +384,21 @@ var extPtrOrZeroStringTestCases = []coretestcases.CaseV1{
 var extNilValStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilValString nil -- returns onNil",
-		ArrangeInput:  args.Map{"isNil": true, "onNil": "n", "onNonNil": "s"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"onNil": "n",
+			"onNonNil": "s",
+		},
 		ExpectedInput: "n",
 	},
 	{
 		Title:         "NilValString non-nil -- returns onNonNil",
-		ArrangeInput:  args.Map{"isNil": false, "value": "x", "onNil": "n", "onNonNil": "s"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "x",
+			"onNil": "n",
+			"onNonNil": "s",
+		},
 		ExpectedInput: "s",
 	},
 }
@@ -317,12 +406,21 @@ var extNilValStringTestCases = []coretestcases.CaseV1{
 var extNilValPtrStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilValPtrString nil -- returns ptr to onNil",
-		ArrangeInput:  args.Map{"isNil": true, "onNil": "n", "onNonNil": "s"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"onNil": "n",
+			"onNonNil": "s",
+		},
 		ExpectedInput: "n",
 	},
 	{
 		Title:         "NilValPtrString non-nil -- returns ptr to onNonNil",
-		ArrangeInput:  args.Map{"isNil": false, "value": "x", "onNil": "n", "onNonNil": "s"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "x",
+			"onNil": "n",
+			"onNonNil": "s",
+		},
 		ExpectedInput: "s",
 	},
 }
@@ -330,12 +428,19 @@ var extNilValPtrStringTestCases = []coretestcases.CaseV1{
 var extNilDefBoolTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilDefBool nil -- returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "NilDefBool non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": false, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": false,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 }
@@ -343,12 +448,19 @@ var extNilDefBoolTestCases = []coretestcases.CaseV1{
 var extNilDefIntTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilDefInt nil -- returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": 42},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": 42,
+		},
 		ExpectedInput: args.Map{"result": 42},
 	},
 	{
 		Title:         "NilDefInt non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": 7, "defVal": 42},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": 7,
+			"defVal": 42,
+		},
 		ExpectedInput: args.Map{"result": 7},
 	},
 }
@@ -356,12 +468,19 @@ var extNilDefIntTestCases = []coretestcases.CaseV1{
 var extNilDefByteTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilDefByte nil -- returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": byte(0xFF)},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": byte(0xFF),
+		},
 		ExpectedInput: args.Map{"result": byte(0xFF)},
 	},
 	{
 		Title:         "NilDefByte non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": byte(0x0A), "defVal": byte(0xFF)},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": byte(0x0A),
+			"defVal": byte(0xFF),
+		},
 		ExpectedInput: args.Map{"result": byte(0x0A)},
 	},
 }
@@ -374,7 +493,10 @@ var extValueOrZeroBoolTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "ValueOrZeroBool non-nil true -- returns true",
-		ArrangeInput:  args.Map{"isNil": false, "value": true},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 }
@@ -387,7 +509,10 @@ var extValueOrZeroIntTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "ValueOrZeroInt non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": 99},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": 99,
+		},
 		ExpectedInput: args.Map{"result": 99},
 	},
 }
@@ -400,7 +525,10 @@ var extValueOrZeroByteTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "ValueOrZeroByte non-nil -- returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": byte(42)},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": byte(42),
+		},
 		ExpectedInput: args.Map{"result": byte(42)},
 	},
 }
@@ -408,12 +536,21 @@ var extValueOrZeroByteTestCases = []coretestcases.CaseV1{
 var extNilValBoolTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilValBool nil -- returns onNil",
-		ArrangeInput:  args.Map{"isNil": true, "onNil": true, "onNonNil": false},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"onNil": true,
+			"onNonNil": false,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "NilValBool non-nil -- returns onNonNil",
-		ArrangeInput:  args.Map{"isNil": false, "value": true, "onNil": true, "onNonNil": false},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": true,
+			"onNil": true,
+			"onNonNil": false,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 }
@@ -421,12 +558,21 @@ var extNilValBoolTestCases = []coretestcases.CaseV1{
 var extNilValIntTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilValInt nil -- returns onNil",
-		ArrangeInput:  args.Map{"isNil": true, "onNil": -1, "onNonNil": 1},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"onNil": -1,
+			"onNonNil": 1,
+		},
 		ExpectedInput: args.Map{"result": -1},
 	},
 	{
 		Title:         "NilValInt non-nil -- returns onNonNil",
-		ArrangeInput:  args.Map{"isNil": false, "value": 50, "onNil": -1, "onNonNil": 1},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": 50,
+			"onNil": -1,
+			"onNonNil": 1,
+		},
 		ExpectedInput: args.Map{"result": 1},
 	},
 }
@@ -434,12 +580,21 @@ var extNilValIntTestCases = []coretestcases.CaseV1{
 var extNilValByteTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "NilValByte nil -- returns onNil",
-		ArrangeInput:  args.Map{"isNil": true, "onNil": byte(0), "onNonNil": byte(1)},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"onNil": byte(0),
+			"onNonNil": byte(1),
+		},
 		ExpectedInput: args.Map{"result": byte(0)},
 	},
 	{
 		Title:         "NilValByte non-nil -- returns onNonNil",
-		ArrangeInput:  args.Map{"isNil": false, "value": byte(5), "onNil": byte(0), "onNonNil": byte(1)},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": byte(5),
+			"onNil": byte(0),
+			"onNonNil": byte(1),
+		},
 		ExpectedInput: args.Map{"result": byte(1)},
 	},
 }
@@ -448,12 +603,20 @@ var extNilValByteTestCases = []coretestcases.CaseV1{
 var extIfStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IfString true -- returns trueValue",
-		ArrangeInput:  args.Map{"isTrue": true, "trueValue": "yes", "falseValue": "no"},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"trueValue": "yes",
+			"falseValue": "no",
+		},
 		ExpectedInput: "yes",
 	},
 	{
 		Title:         "IfString false -- returns falseValue",
-		ArrangeInput:  args.Map{"isTrue": false, "trueValue": "yes", "falseValue": "no"},
+		ArrangeInput:  args.Map{
+			"isTrue": false,
+			"trueValue": "yes",
+			"falseValue": "no",
+		},
 		ExpectedInput: "no",
 	},
 }
@@ -462,12 +625,18 @@ var extIfStringTestCases = []coretestcases.CaseV1{
 var extIfTrueFuncIntTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IfTrueFuncInt true -- returns trueFunc value",
-		ArrangeInput:  args.Map{"isTrue": true, "trueValue": 42},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"trueValue": 42,
+		},
 		ExpectedInput: args.Map{"result": 42},
 	},
 	{
 		Title:         "IfTrueFuncInt false -- returns zero",
-		ArrangeInput:  args.Map{"isTrue": false, "trueValue": 42},
+		ArrangeInput:  args.Map{
+			"isTrue": false,
+			"trueValue": 42,
+		},
 		ExpectedInput: args.Map{"result": 0},
 	},
 }
@@ -476,12 +645,20 @@ var extIfTrueFuncIntTestCases = []coretestcases.CaseV1{
 var extIfFuncByteTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IfFuncByte true -- returns trueFunc value",
-		ArrangeInput:  args.Map{"isTrue": true, "trueValue": byte(1), "falseValue": byte(0)},
+		ArrangeInput:  args.Map{
+			"isTrue": true,
+			"trueValue": byte(1),
+			"falseValue": byte(0),
+		},
 		ExpectedInput: args.Map{"result": byte(1)},
 	},
 	{
 		Title:         "IfFuncByte false -- returns falseFunc value",
-		ArrangeInput:  args.Map{"isTrue": false, "trueValue": byte(1), "falseValue": byte(0)},
+		ArrangeInput:  args.Map{
+			"isTrue": false,
+			"trueValue": byte(1),
+			"falseValue": byte(0),
+		},
 		ExpectedInput: args.Map{"result": byte(0)},
 	},
 }

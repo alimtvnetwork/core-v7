@@ -43,10 +43,16 @@ func Test_Cov6_New_Default(t *testing.T) {
 	trace := codestack.New.Default()
 
 	// Act
-	actual := args.Map{"isOkay": trace.IsOkay, "pkgNotEmpty": trace.PackageName != ""}
+	actual := args.Map{
+		"isOkay": trace.IsOkay,
+		"pkgNotEmpty": trace.PackageName != "",
+	}
 
 	// Assert
-	expected := args.Map{"isOkay": true, "pkgNotEmpty": true}
+	expected := args.Map{
+		"isOkay": true,
+		"pkgNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Default returns correct value -- with args", actual)
 }
 
@@ -55,10 +61,16 @@ func Test_Cov6_New_Ptr(t *testing.T) {
 	trace := codestack.New.Ptr(0)
 
 	// Act
-	actual := args.Map{"notNil": trace != nil, "isOkay": trace.IsOkay}
+	actual := args.Map{
+		"notNil": trace != nil,
+		"isOkay": trace.IsOkay,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isOkay": true}
+	expected := args.Map{
+		"notNil": true,
+		"isOkay": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Ptr returns correct value -- with args", actual)
 }
 
@@ -140,10 +152,16 @@ func Test_Cov6_Trace_Clone(t *testing.T) {
 	clonedPtr := trace.ClonePtr()
 
 	// Act
-	actual := args.Map{"pkg": cloned.PackageName, "ptrPkg": clonedPtr.PackageName != ""}
+	actual := args.Map{
+		"pkg": cloned.PackageName,
+		"ptrPkg": clonedPtr.PackageName != "",
+	}
 
 	// Assert
-	expected := args.Map{"pkg": trace.PackageName, "ptrPkg": true}
+	expected := args.Map{
+		"pkg": trace.PackageName,
+		"ptrPkg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
 }
 
@@ -179,10 +197,16 @@ func Test_Cov6_Trace_JsonModel(t *testing.T) {
 	modelAny := trace.JsonModelAny()
 
 	// Act
-	actual := args.Map{"pkg": model.PackageName != "", "anyNotNil": modelAny != nil}
+	actual := args.Map{
+		"pkg": model.PackageName != "",
+		"anyNotNil": modelAny != nil,
+	}
 
 	// Assert
-	expected := args.Map{"pkg": true, "anyNotNil": true}
+	expected := args.Map{
+		"pkg": true,
+		"anyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- JsonModel", actual)
 }
 
@@ -193,10 +217,16 @@ func Test_Cov6_Trace_Json(t *testing.T) {
 	rp := trace.JsonPtr()
 
 	// Act
-	actual := args.Map{"hasBytes": r.HasBytes(), "ptrNotNil": rp != nil}
+	actual := args.Map{
+		"hasBytes": r.HasBytes(),
+		"ptrNotNil": rp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Json", actual)
 }
 
@@ -230,10 +260,16 @@ func Test_Cov6_FileWithLine_Nil(t *testing.T) {
 	var fwl *codestack.FileWithLine
 
 	// Act
-	actual := args.Map{"isNil": fwl.IsNil(), "str": fwl.String()}
+	actual := args.Map{
+		"isNil": fwl.IsNil(),
+		"str": fwl.String(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "str": ""}
+	expected := args.Map{
+		"isNil": true,
+		"str": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- nil", actual)
 }
 
@@ -242,10 +278,16 @@ func Test_Cov6_FileWithLine_Clone(t *testing.T) {
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 42}
 
 	// Act
-	actual := args.Map{"path": fwl.FilePath, "line": fwl.Line}
+	actual := args.Map{
+		"path": fwl.FilePath,
+		"line": fwl.Line,
+	}
 
 	// Assert
-	expected := args.Map{"path": "/tmp/test.go", "line": 42}
+	expected := args.Map{
+		"path": "/tmp/test.go",
+		"line": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- fields", actual)
 }
 
@@ -256,10 +298,16 @@ func Test_Cov6_FileWithLine_JsonModel(t *testing.T) {
 	modelAny := fwl.JsonModelAny()
 
 	// Act
-	actual := args.Map{"path": model.FilePath, "anyNotNil": modelAny != nil}
+	actual := args.Map{
+		"path": model.FilePath,
+		"anyNotNil": modelAny != nil,
+	}
 
 	// Assert
-	expected := args.Map{"path": "/tmp/test.go", "anyNotNil": true}
+	expected := args.Map{
+		"path": "/tmp/test.go",
+		"anyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonModel", actual)
 }
 
@@ -283,10 +331,16 @@ func Test_Cov6_FileWithLine_Json(t *testing.T) {
 	rp := fwl.JsonPtr()
 
 	// Act
-	actual := args.Map{"hasBytes": r.HasBytes(), "ptrNotNil": rp != nil}
+	actual := args.Map{
+		"hasBytes": r.HasBytes(),
+		"ptrNotNil": rp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- Json", actual)
 }
 

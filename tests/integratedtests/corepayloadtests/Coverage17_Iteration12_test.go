@@ -40,10 +40,16 @@ func Test_Cov17_Attributes_Clone_NilPtr(t *testing.T) {
 	cloned, err := a.Clone(false)
 
 	// Act
-	actual := args.Map{"isEmpty": cloned.IsEmpty(), "noErr": err == nil}
+	actual := args.Map{
+		"isEmpty": cloned.IsEmpty(),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "noErr": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns empty -- nil receiver", actual)
 }
 
@@ -59,10 +65,16 @@ func Test_Cov17_Attributes_DeepClone(t *testing.T) {
 	cloned, err := a.ClonePtr(true)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": cloned != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": cloned != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeepClonePtr returns cloned -- valid attrs", actual)
 }
 
@@ -173,10 +185,16 @@ func Test_Cov17_PayloadWrapper_PayloadDeserializeToPayloadBinder_Null(t *testing
 	// depends on whether null returns error
 
 	// Act
-	actual := args.Map{"checked": true, "errChecked": err == nil || err != nil}
+	actual := args.Map{
+		"checked": true,
+		"errChecked": err == nil || err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"checked": true, "errChecked": true}
+	expected := args.Map{
+		"checked": true,
+		"errChecked": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder -- null payload", actual)
 }
 
@@ -189,10 +207,16 @@ func Test_Cov17_PayloadWrapper_SetPayloadDynamic(t *testing.T) {
 	result := pw.SetPayloadDynamic([]byte(`{"x":1}`))
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "hasPayloads": len(result.Payloads) > 0}
+	actual := args.Map{
+		"notNil": result != nil,
+		"hasPayloads": len(result.Payloads) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasPayloads": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasPayloads": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SetPayloadDynamic sets payloads -- valid bytes", actual)
 }
 
@@ -205,10 +229,16 @@ func Test_Cov17_PayloadWrapper_SetPayloadDynamicAny(t *testing.T) {
 	result, err := pw.SetPayloadDynamicAny(map[string]string{"key": "value"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SetPayloadDynamicAny sets payloads -- valid any", actual)
 }
 
@@ -437,10 +467,16 @@ func Test_Cov17_PayloadWrapper_Clone_Success(t *testing.T) {
 	cloned, err := pw.Clone(false)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": cloned.Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": cloned.Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "test"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns valid clone -- shallow", actual)
 }
 

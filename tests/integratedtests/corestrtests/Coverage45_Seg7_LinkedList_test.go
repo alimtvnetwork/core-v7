@@ -18,10 +18,16 @@ func Test_Seg7_LL_IsEmpty(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 
 		// Act
-		actual := args.Map{"empty": ll.IsEmpty(), "hasItems": ll.HasItems()}
+		actual := args.Map{
+			"empty": ll.IsEmpty(),
+			"hasItems": ll.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -33,10 +39,18 @@ func Test_Seg7_LL_Add(t *testing.T) {
 		ll.Add("a").Add("b").Add("c")
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element, "tail": ll.Tail().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+			"tail": ll.Tail().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "head": "a", "tail": "c"}
+		expected := args.Map{
+			"len": 3,
+			"head": "a",
+			"tail": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 3 items", actual)
 	})
 }
@@ -138,10 +152,16 @@ func Test_Seg7_LL_AddFront(t *testing.T) {
 		ll.Add("b").AddFront("a")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 2}
+		expected := args.Map{
+			"head": "a",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFront -- prepended", actual)
 	})
 }
@@ -153,10 +173,16 @@ func Test_Seg7_LL_AddFront_Empty(t *testing.T) {
 		ll.AddFront("a")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 1}
+		expected := args.Map{
+			"head": "a",
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFront empty -- added as head", actual)
 	})
 }
@@ -310,10 +336,16 @@ func Test_Seg7_LL_AddFuncErr_Error(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "called": called}
+		actual := args.Map{
+			"len": ll.Length(),
+			"called": called,
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "called": true}
+		expected := args.Map{
+			"len": 0,
+			"called": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFuncErr error -- handler called", actual)
 	})
 }
@@ -356,10 +388,16 @@ func Test_Seg7_LL_AppendNode(t *testing.T) {
 		ll.AppendNode(node)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "a"}
+		expected := args.Map{
+			"len": 1,
+			"head": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendNode -- added", actual)
 	})
 }
@@ -373,10 +411,16 @@ func Test_Seg7_LL_AppendNode_NonEmpty(t *testing.T) {
 		ll.AppendNode(node)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "tail": ll.Tail().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"tail": ll.Tail().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "tail": "b"}
+		expected := args.Map{
+			"len": 2,
+			"tail": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendNode non-empty -- appended", actual)
 	})
 }
@@ -485,10 +529,16 @@ func Test_Seg7_LL_List(t *testing.T) {
 		ll.Adds("a", "b")
 
 		// Act
-		actual := args.Map{"len": len(ll.List()), "first": ll.List()[0]}
+		actual := args.Map{
+			"len": len(ll.List()),
+			"first": ll.List()[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "List -- correct", actual)
 	})
 }
@@ -597,7 +647,12 @@ func Test_Seg7_LL_SafeIndexAt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"at0": "a", "at2": "c", "neg": true, "outOf": true}
+		expected := args.Map{
+			"at0": "a",
+			"at2": "c",
+			"neg": true,
+			"outOf": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SafeIndexAt -- various", actual)
 	})
 }
@@ -626,10 +681,16 @@ func Test_Seg7_LL_SafePointerIndexAt(t *testing.T) {
 		nilP := ll.SafePointerIndexAt(5)
 
 		// Act
-		actual := args.Map{"val": *p, "nilP": nilP == nil}
+		actual := args.Map{
+			"val": *p,
+			"nilP": nilP == nil,
+		}
 
 		// Assert
-		expected := args.Map{"val": "a", "nilP": true}
+		expected := args.Map{
+			"val": "a",
+			"nilP": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SafePointerIndexAt -- correct", actual)
 	})
 }
@@ -641,10 +702,16 @@ func Test_Seg7_LL_SafePointerIndexAtUsingDefault(t *testing.T) {
 		ll.Adds("a")
 
 		// Act
-		actual := args.Map{"val": ll.SafePointerIndexAtUsingDefault(0, "def"), "def": ll.SafePointerIndexAtUsingDefault(5, "def")}
+		actual := args.Map{
+			"val": ll.SafePointerIndexAtUsingDefault(0, "def"),
+			"def": ll.SafePointerIndexAtUsingDefault(5, "def"),
+		}
 
 		// Assert
-		expected := args.Map{"val": "a", "def": "def"}
+		expected := args.Map{
+			"val": "a",
+			"def": "def",
+		}
 		expected.ShouldBeEqual(t, 0, "SafePointerIndexAtUsingDefault -- correct", actual)
 	})
 }
@@ -717,7 +784,12 @@ func Test_Seg7_LL_IsEquals(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false, "self": true, "nil": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+			"self": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEquals -- various", actual)
 	})
 }
@@ -785,7 +857,10 @@ func Test_Seg7_LL_IsEqualsWithSensitive(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"sensitive": false, "insensitive": true}
+		expected := args.Map{
+			"sensitive": false,
+			"insensitive": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualsWithSensitive -- case matters", actual)
 	})
 }
@@ -1051,10 +1126,16 @@ func Test_Seg7_LL_MarshalJSON(t *testing.T) {
 		b, err := ll.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1069,10 +1150,16 @@ func Test_Seg7_LL_UnmarshalJSON(t *testing.T) {
 		err := ll2.UnmarshalJSON(b)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": ll2.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": ll2.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -1215,10 +1302,16 @@ func Test_Seg7_LL_RemoveNodeByElementValue_First(t *testing.T) {
 		ll.RemoveNodeByElementValue("a", true, false)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "b"}
+		expected := args.Map{
+			"len": 1,
+			"head": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNodeByElementValue first -- removed", actual)
 	})
 }
@@ -1263,10 +1356,16 @@ func Test_Seg7_LL_RemoveNodeByIndex_First(t *testing.T) {
 		ll.RemoveNodeByIndex(0)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "b"}
+		expected := args.Map{
+			"len": 1,
+			"head": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNodeByIndex first -- removed", actual)
 	})
 }
@@ -1361,10 +1460,16 @@ func Test_Seg7_LL_RemoveNode_First(t *testing.T) {
 		ll.RemoveNode(node)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "b"}
+		expected := args.Map{
+			"len": 1,
+			"head": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNode first -- removed head", actual)
 	})
 }

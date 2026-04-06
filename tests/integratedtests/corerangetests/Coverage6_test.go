@@ -23,7 +23,13 @@ func Test_Cov6_NewStartEndStringUsingLines_Valid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "hasStart": true, "hasEnd": true, "start": "hello", "end": "world"}
+	expected := args.Map{
+		"isValid": true,
+		"hasStart": true,
+		"hasEnd": true,
+		"start": "hello",
+		"end": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "NewStartEndStringUsingLines returns valid -- two lines", actual)
 }
 
@@ -40,7 +46,12 @@ func Test_Cov6_NewStartEndStringUsingLines_Single(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "hasStart": true, "hasEnd": false, "start": "only"}
+	expected := args.Map{
+		"isValid": false,
+		"hasStart": true,
+		"hasEnd": false,
+		"start": "only",
+	}
 	expected.ShouldBeEqual(t, 0, "NewStartEndStringUsingLines returns invalid -- single line", actual)
 }
 
@@ -49,10 +60,18 @@ func Test_Cov6_NewStartEndStringUsingLines_Empty(t *testing.T) {
 	ses := corerange.NewStartEndStringUsingLines([]string{})
 
 	// Act
-	actual := args.Map{"isValid": ses.IsValid, "hasStart": ses.HasStart, "hasEnd": ses.HasEnd}
+	actual := args.Map{
+		"isValid": ses.IsValid,
+		"hasStart": ses.HasStart,
+		"hasEnd": ses.HasEnd,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "hasStart": false, "hasEnd": false}
+	expected := args.Map{
+		"isValid": false,
+		"hasStart": false,
+		"hasEnd": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewStartEndStringUsingLines returns invalid -- empty", actual)
 }
 
@@ -68,7 +87,11 @@ func Test_Cov6_NewStartEndStringUsingLines_ThreePlus(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "start": "a", "end": "c"}
+	expected := args.Map{
+		"isValid": false,
+		"start": "a",
+		"end": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "NewStartEndStringUsingLines returns invalid -- three lines", actual)
 }
 
@@ -80,10 +103,18 @@ func Test_Cov6_StartEndString_CreateRangeString(t *testing.T) {
 	rs := ses.CreateRangeString()
 
 	// Act
-	actual := args.Map{"notNil": rs != nil, "start": rs.Start, "end": rs.End}
+	actual := args.Map{
+		"notNil": rs != nil,
+		"start": rs.Start,
+		"end": rs.End,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": "hello", "end": "world"}
+	expected := args.Map{
+		"notNil": true,
+		"start": "hello",
+		"end": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndString CreateRangeString returns valid -- delegates", actual)
 }
 
@@ -155,10 +186,18 @@ func Test_Cov6_RangeAny_CreateStartEndString(t *testing.T) {
 	ses := ra.CreateStartEndString()
 
 	// Act
-	actual := args.Map{"notNil": ses != nil, "start": ses.Start, "end": ses.End}
+	actual := args.Map{
+		"notNil": ses != nil,
+		"start": ses.Start,
+		"end": ses.End,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": "a", "end": "b"}
+	expected := args.Map{
+		"notNil": true,
+		"start": "a",
+		"end": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "RangeAny CreateStartEndString returns valid -- cloned base", actual)
 }
 
@@ -171,10 +210,18 @@ func Test_Cov6_MinMaxInt64_Ranges(t *testing.T) {
 	rangesInt := mm.RangesInt()
 
 	// Act
-	actual := args.Map{"rangesLen": len(ranges), "rangesIntLen": len(rangesInt), "rangeLenInt": mm.RangeLengthInt()}
+	actual := args.Map{
+		"rangesLen": len(ranges),
+		"rangesIntLen": len(rangesInt),
+		"rangeLenInt": mm.RangeLengthInt(),
+	}
 
 	// Assert
-	expected := args.Map{"rangesLen": 5, "rangesIntLen": 5, "rangeLenInt": 5}
+	expected := args.Map{
+		"rangesLen": 5,
+		"rangesIntLen": 5,
+		"rangeLenInt": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Ranges returns 5 -- range 3 to 7", actual)
 }
 
@@ -186,10 +233,16 @@ func Test_Cov6_MinMaxInt64_CreateRanges(t *testing.T) {
 	noExtra := mm.CreateRanges()
 
 	// Act
-	actual := args.Map{"combinedLen": len(combined), "noExtraLen": len(noExtra)}
+	actual := args.Map{
+		"combinedLen": len(combined),
+		"noExtraLen": len(noExtra),
+	}
 
 	// Assert
-	expected := args.Map{"combinedLen": 6, "noExtraLen": 3}
+	expected := args.Map{
+		"combinedLen": 6,
+		"noExtraLen": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 CreateRanges returns combined -- with extra", actual)
 }
 
@@ -220,7 +273,12 @@ func Test_Cov6_MinMaxInt64_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"clonedMin": 1, "clonedMax": 10, "clonedPtrNil": false, "nilCloneNil": true}
+	expected := args.Map{
+		"clonedMin": 1,
+		"clonedMax": 10,
+		"clonedPtrNil": false,
+		"nilCloneNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Clone returns copy -- valid", actual)
 }
 
@@ -400,10 +458,16 @@ func Test_Cov6_NewRangeByte_NilMinMax(t *testing.T) {
 	rb := corerange.NewRangeByte("3:7", ":", nil)
 
 	// Act
-	actual := args.Map{"notNil": rb != nil, "start": int(rb.Start)}
+	actual := args.Map{
+		"notNil": rb != nil,
+		"start": int(rb.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeByte returns valid -- nil minMax uses defaults", actual)
 }
 
@@ -414,10 +478,16 @@ func Test_Cov6_NewRangeInt8_NilMinMax(t *testing.T) {
 	ri8 := corerange.NewRangeInt8("3:7", ":", nil)
 
 	// Act
-	actual := args.Map{"notNil": ri8 != nil, "start": int(ri8.Start)}
+	actual := args.Map{
+		"notNil": ri8 != nil,
+		"start": int(ri8.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt8 returns valid -- nil minMax uses defaults", actual)
 }
 
@@ -428,10 +498,16 @@ func Test_Cov6_NewRangeInt16_NilMinMax(t *testing.T) {
 	ri16 := corerange.NewRangeInt16("3:7", ":", nil)
 
 	// Act
-	actual := args.Map{"notNil": ri16 != nil, "start": int(ri16.Start)}
+	actual := args.Map{
+		"notNil": ri16 != nil,
+		"start": int(ri16.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt16 returns valid -- nil minMax uses defaults", actual)
 }
 
@@ -457,10 +533,16 @@ func Test_Cov6_StartEndInt_DifferenceAbsolute_Negative(t *testing.T) {
 	se := &corerange.StartEndInt{Start: 10, End: 3}
 
 	// Act
-	actual := args.Map{"diffAbs": se.DifferenceAbsolute(), "diff": se.Diff()}
+	actual := args.Map{
+		"diffAbs": se.DifferenceAbsolute(),
+		"diff": se.Diff(),
+	}
 
 	// Assert
-	expected := args.Map{"diffAbs": 7, "diff": -7}
+	expected := args.Map{
+		"diffAbs": 7,
+		"diff": -7,
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndInt DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
@@ -492,10 +574,16 @@ func Test_Cov6_MinMaxInt8_CreateRanges(t *testing.T) {
 	noExtra := mm.CreateRanges()
 
 	// Act
-	actual := args.Map{"combinedLen": len(combined), "noExtraLen": len(noExtra)}
+	actual := args.Map{
+		"combinedLen": len(combined),
+		"noExtraLen": len(noExtra),
+	}
 
 	// Assert
-	expected := args.Map{"combinedLen": 6, "noExtraLen": 3}
+	expected := args.Map{
+		"combinedLen": 6,
+		"noExtraLen": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 CreateRanges returns combined -- with extra", actual)
 }
 
@@ -548,7 +636,12 @@ func Test_Cov6_MinMaxInt8_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"clonedMin": 1, "clonedMax": 10, "clonedPtrNil": false, "nilCloneNil": true}
+	expected := args.Map{
+		"clonedMin": 1,
+		"clonedMax": 10,
+		"clonedPtrNil": false,
+		"nilCloneNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 Clone returns copy -- valid", actual)
 }
 
@@ -575,10 +668,18 @@ func Test_Cov6_NewRangeByteMinMax(t *testing.T) {
 	rb := corerange.NewRangeByteMinMax("3:7", ":", 0, 10)
 
 	// Act
-	actual := args.Map{"notNil": rb != nil, "isValid": rb.IsValid, "start": int(rb.Start)}
+	actual := args.Map{
+		"notNil": rb != nil,
+		"isValid": rb.IsValid,
+		"start": int(rb.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isValid": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"isValid": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeByteMinMax returns valid -- in bounds", actual)
 }
 
@@ -589,10 +690,18 @@ func Test_Cov6_NewRangeInt8MinMax(t *testing.T) {
 	ri8 := corerange.NewRangeInt8MinMax("3:7", ":", 0, 10)
 
 	// Act
-	actual := args.Map{"notNil": ri8 != nil, "isValid": ri8.IsValid, "start": int(ri8.Start)}
+	actual := args.Map{
+		"notNil": ri8 != nil,
+		"isValid": ri8.IsValid,
+		"start": int(ri8.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isValid": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"isValid": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt8MinMax returns valid -- in bounds", actual)
 }
 
@@ -603,9 +712,17 @@ func Test_Cov6_NewRangeInt16MinMax(t *testing.T) {
 	ri16 := corerange.NewRangeInt16MinMax("3:7", ":", 0, 10)
 
 	// Act
-	actual := args.Map{"notNil": ri16 != nil, "isValid": ri16.IsValid, "start": int(ri16.Start)}
+	actual := args.Map{
+		"notNil": ri16 != nil,
+		"isValid": ri16.IsValid,
+		"start": int(ri16.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isValid": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"isValid": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt16MinMax returns valid -- in bounds", actual)
 }

@@ -19,7 +19,11 @@ func Test_Cov3_Is_Number(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": true, "float": true, "string": false}
+	expected := args.Map{
+		"int": true,
+		"float": true,
+		"string": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Number", actual)
 }
 
@@ -31,7 +35,10 @@ func Test_Cov3_Is_String(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"str": true, "int": false}
+	expected := args.Map{
+		"str": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- String", actual)
 }
 
@@ -46,7 +53,10 @@ func Test_Cov3_Is_Pointer(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"ptr": true, "val": false}
+	expected := args.Map{
+		"ptr": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Pointer", actual)
 }
 
@@ -61,7 +71,10 @@ func Test_Cov3_Is_Function(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"func": true, "int": false}
+	expected := args.Map{
+		"func": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Function", actual)
 }
 
@@ -73,7 +86,10 @@ func Test_Cov3_Is_Boolean(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bool": true, "int": false}
+	expected := args.Map{
+		"bool": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Boolean", actual)
 }
 
@@ -86,7 +102,11 @@ func Test_Cov3_Is_Primitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": true, "string": true, "slice": false}
+	expected := args.Map{
+		"int": true,
+		"string": true,
+		"slice": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Primitive", actual)
 }
 
@@ -100,7 +120,12 @@ func Test_Cov3_Is_Zero(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"zero": true, "nonZero": false, "nil": true, "emptyStr": true}
+	expected := args.Map{
+		"zero": true,
+		"nonZero": false,
+		"nil": true,
+		"emptyStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Zero", actual)
 }
 
@@ -116,7 +141,11 @@ func Test_Cov3_Is_Struct(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"struct": true, "ptr": true, "int": false}
+	expected := args.Map{
+		"struct": true,
+		"ptr": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Struct", actual)
 }
 
@@ -130,7 +159,12 @@ func Test_Cov3_Is_AnyEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false, "nilNil": true, "nilNonNil": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+		"nilNil": true,
+		"nilNonNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- AnyEqual", actual)
 }
 
@@ -140,10 +174,18 @@ func Test_Cov3_Is_Conclusive(t *testing.T) {
 	_, concDiff := reflectinternal.Is.Conclusive(42, "x")
 
 	// Act
-	actual := args.Map{"eq": eq, "conc": conc, "concDiff": concDiff}
+	actual := args.Map{
+		"eq": eq,
+		"conc": conc,
+		"concDiff": concDiff,
+	}
 
 	// Assert
-	expected := args.Map{"eq": true, "conc": true, "concDiff": true}
+	expected := args.Map{
+		"eq": true,
+		"conc": true,
+		"concDiff": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Is returns correct value -- Conclusive", actual)
 }
 
@@ -168,7 +210,10 @@ func Test_Cov3_TypeName(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": "int", "nil": ""}
+	expected := args.Map{
+		"int": "int",
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeName returns correct value -- with args", actual)
 }
 
@@ -178,10 +223,16 @@ func Test_Cov3_TypeNames(t *testing.T) {
 	short := reflectinternal.TypeNames(false, 42, "hello")
 
 	// Act
-	actual := args.Map{"fullLen": len(full), "shortLen": len(short)}
+	actual := args.Map{
+		"fullLen": len(full),
+		"shortLen": len(short),
+	}
 
 	// Assert
-	expected := args.Map{"fullLen": 2, "shortLen": 2}
+	expected := args.Map{
+		"fullLen": 2,
+		"shortLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeNames returns correct value -- with args", actual)
 }
 
@@ -215,10 +266,16 @@ func Test_Cov3_TypeNameToValidVariableName(t *testing.T) {
 	empty := reflectinternal.TypeNameToValidVariableName("")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": empty}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": empty,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeNameToValidVariableName returns non-empty -- with args", actual)
 }
 
@@ -270,10 +327,16 @@ func Test_Cov3_FileWithLine_JsonModel(t *testing.T) {
 	modelAny := f.JsonModelAny()
 
 	// Act
-	actual := args.Map{"path": model.FilePath, "anyNotNil": modelAny != nil}
+	actual := args.Map{
+		"path": model.FilePath,
+		"anyNotNil": modelAny != nil,
+	}
 
 	// Assert
-	expected := args.Map{"path": "/tmp/test.go", "anyNotNil": true}
+	expected := args.Map{
+		"path": "/tmp/test.go",
+		"anyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonModel", actual)
 }
 
@@ -318,10 +381,20 @@ func Test_Cov3_StackTrace_Nil(t *testing.T) {
 	var st *reflectinternal.StackTrace
 
 	// Act
-	actual := args.Map{"isNil": st.IsNil(), "notNil": st.IsNotNil(), "str": st.String(), "hasIss": st.HasIssues()}
+	actual := args.Map{
+		"isNil": st.IsNil(),
+		"notNil": st.IsNotNil(),
+		"str": st.String(),
+		"hasIss": st.HasIssues(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "notNil": false, "str": "", "hasIss": true}
+	expected := args.Map{
+		"isNil": true,
+		"notNil": false,
+		"str": "",
+		"hasIss": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackTrace returns nil -- Nil", actual)
 }
 
@@ -339,7 +412,11 @@ func Test_Cov3_StackTrace_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"pkg": "pkg", "ptrPkg": "pkg", "nilClone": true}
+	expected := args.Map{
+		"pkg": "pkg",
+		"ptrPkg": "pkg",
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackTrace returns correct value -- Clone", actual)
 }
 
@@ -365,10 +442,16 @@ func Test_Cov3_StackTrace_JsonModel(t *testing.T) {
 	modelAny := st.JsonModelAny()
 
 	// Act
-	actual := args.Map{"pkg": model.PackageName, "anyNotNil": modelAny != nil}
+	actual := args.Map{
+		"pkg": model.PackageName,
+		"anyNotNil": modelAny != nil,
+	}
 
 	// Assert
-	expected := args.Map{"pkg": "pkg", "anyNotNil": true}
+	expected := args.Map{
+		"pkg": "pkg",
+		"anyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackTrace returns correct value -- JsonModel", actual)
 }
 
@@ -394,10 +477,18 @@ func Test_Cov3_ReflectGetter_PublicValuesMapStruct(t *testing.T) {
 	_, nilErr := reflectinternal.ReflectGetter.PublicValuesMapStruct(nil)
 
 	// Act
-	actual := args.Map{"len": len(m), "noErr": err == nil, "nilErr": nilErr != nil}
+	actual := args.Map{
+		"len": len(m),
+		"noErr": err == nil,
+		"nilErr": nilErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true, "nilErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PublicValuesMapStruct returns non-empty -- with args", actual)
 }
 
@@ -408,10 +499,18 @@ func Test_Cov3_ReflectGetter_FieldNameWithValuesMap(t *testing.T) {
 	_, nilErr := reflectinternal.ReflectGetter.FieldNameWithValuesMap(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(m) > 0, "noErr": err == nil, "nilErr": nilErr != nil}
+	actual := args.Map{
+		"gt0": len(m) > 0,
+		"noErr": err == nil,
+		"nilErr": nilErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "noErr": true, "nilErr": true}
+	expected := args.Map{
+		"gt0": true,
+		"noErr": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldNameWithValuesMap returns non-empty -- with args", actual)
 }
 
@@ -422,10 +521,18 @@ func Test_Cov3_ReflectGetter_FieldNamesMap(t *testing.T) {
 	_, nilErr := reflectinternal.ReflectGetter.FieldNamesMap(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(m) > 0, "noErr": err == nil, "nilErr": nilErr != nil}
+	actual := args.Map{
+		"gt0": len(m) > 0,
+		"noErr": err == nil,
+		"nilErr": nilErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "noErr": true, "nilErr": true}
+	expected := args.Map{
+		"gt0": true,
+		"noErr": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldNamesMap returns correct value -- with args", actual)
 }
 
@@ -436,10 +543,16 @@ func Test_Cov3_ReflectGetter_StructFieldsMap(t *testing.T) {
 	nilM := reflectinternal.ReflectGetter.StructFieldsMap(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(m) > 0, "nilLen": len(nilM)}
+	actual := args.Map{
+		"gt0": len(m) > 0,
+		"nilLen": len(nilM),
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "nilLen": 0}
+	expected := args.Map{
+		"gt0": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StructFieldsMap returns correct value -- with args", actual)
 }
 
@@ -450,10 +563,16 @@ func Test_Cov3_ReflectGetter_NullFieldsMap(t *testing.T) {
 	nilM := reflectinternal.ReflectGetter.NullFieldsMap(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(m) > 0, "nilLen": len(nilM)}
+	actual := args.Map{
+		"gt0": len(m) > 0,
+		"nilLen": len(nilM),
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "nilLen": 0}
+	expected := args.Map{
+		"gt0": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "NullFieldsMap returns correct value -- with args", actual)
 }
 
@@ -464,10 +583,16 @@ func Test_Cov3_ReflectGetter_NullOrZeroFieldsMap(t *testing.T) {
 	nilM := reflectinternal.ReflectGetter.NullOrZeroFieldsMap(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(m) > 0, "nilLen": len(nilM)}
+	actual := args.Map{
+		"gt0": len(m) > 0,
+		"nilLen": len(nilM),
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "nilLen": 0}
+	expected := args.Map{
+		"gt0": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "NullOrZeroFieldsMap returns correct value -- with args", actual)
 }
 
@@ -485,7 +610,11 @@ func Test_Cov3_CodeStack_New(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isOkay": true, "pkgName": true, "method": true}
+	expected := args.Map{
+		"isOkay": true,
+		"pkgName": true,
+		"method": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CodeStack returns correct value -- New", actual)
 }
 
@@ -581,10 +710,16 @@ func Test_Cov3_ReflectConverter_ArgsToReflectValues(t *testing.T) {
 	emptyResult := reflectinternal.Converter.ArgsToReflectValues(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ArgsToReflectValues returns non-empty -- with args", actual)
 }
 

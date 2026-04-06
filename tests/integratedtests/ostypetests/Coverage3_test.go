@@ -195,7 +195,10 @@ func Test_Cov3_Group_EnumEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isEnumEqual": true, "isAnyEnumsEqual": true}
+	expected := args.Map{
+		"isEnumEqual": true,
+		"isAnyEnumsEqual": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- EnumEqual", actual)
 }
 
@@ -207,10 +210,16 @@ func Test_Cov3_Group_MarshalUnmarshalJSON(t *testing.T) {
 	_ = g2.UnmarshalJSON(data)
 
 	// Act
-	actual := args.Map{"notEmpty": len(data) > 0, "name": g2.Name()}
+	actual := args.Map{
+		"notEmpty": len(data) > 0,
+		"name": g2.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "name": "WindowsGroup"}
+	expected := args.Map{
+		"notEmpty": true,
+		"name": "WindowsGroup",
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
@@ -220,10 +229,16 @@ func Test_Cov3_Group_MinMaxAny(t *testing.T) {
 	min, max := g.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- MinMaxAny", actual)
 }
 
@@ -240,7 +255,12 @@ func Test_Cov3_Group_MinMaxValueString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"minStr": true, "maxStr": true, "minInt": true, "maxInt": true}
+	expected := args.Map{
+		"minStr": true,
+		"maxStr": true,
+		"minInt": true,
+		"maxInt": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns non-empty -- MinMaxValueString", actual)
 }
 
@@ -290,7 +310,11 @@ func Test_Cov3_Group_Contracts(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"basicEnumBinder": true, "jsonBinder": true, "basicByteEnumBinder": true}
+	expected := args.Map{
+		"basicEnumBinder": true,
+		"jsonBinder": true,
+		"basicByteEnumBinder": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- contract binders", actual)
 }
 
@@ -342,7 +366,10 @@ func Test_Cov3_Variation_WindowsGroup(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"group": "WindowsGroup", "isPossUnix": false}
+	expected := args.Map{
+		"group": "WindowsGroup",
+		"isPossUnix": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variation returns correct value -- Windows group", actual)
 }
 
@@ -385,10 +412,16 @@ func Test_Cov3_Variation_MinMaxAny(t *testing.T) {
 	min, max := ostype.Linux.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variation returns correct value -- MinMaxAny", actual)
 }
 
@@ -404,7 +437,11 @@ func Test_Cov3_Variation_Contracts(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"basicBinder": true, "jsonBinder": true, "basicByteBinder": true}
+	expected := args.Map{
+		"basicBinder": true,
+		"jsonBinder": true,
+		"basicByteBinder": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variation returns correct value -- contract binders", actual)
 }
 

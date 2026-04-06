@@ -23,7 +23,12 @@ func Test_Cov7_ErrorWithRef(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"withRef": true, "nilErr": "", "nilRef": true, "emptyRef": true}
+	expected := args.Map{
+		"withRef": true,
+		"nilErr": "",
+		"nilRef": true,
+		"emptyRef": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorWithRef returns formatted -- with error and ref", actual)
 }
 
@@ -42,7 +47,12 @@ func Test_Cov7_ErrorWithCompiledTraceRef(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"full": true, "nilErr": "", "emptyTrace": true, "nilRef": true}
+	expected := args.Map{
+		"full": true,
+		"nilErr": "",
+		"emptyTrace": true,
+		"nilRef": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorWithCompiledTraceRef returns non-empty -- with all args", actual)
 }
 
@@ -55,10 +65,16 @@ func Test_Cov7_ErrorWithRefToError(t *testing.T) {
 	nilResult := errcore.ErrorWithRefToError(nil, "ref")
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "nilResult": nilResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"nilResult": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilResult": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorWithRefToError returns error -- with error", actual)
 }
 
@@ -69,10 +85,16 @@ func Test_Cov7_ErrorWithCompiledTraceRefToError(t *testing.T) {
 	nilResult := errcore.ErrorWithCompiledTraceRefToError(nil, "trace", "ref")
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "nilResult": nilResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"nilResult": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilResult": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorWithCompiledTraceRefToError returns error -- with args", actual)
 }
 
@@ -184,10 +206,18 @@ func Test_Cov7_LineDiff(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a", "b"}, []string{"a", "c"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "firstMatch": diffs[0].Status, "secondMismatch": diffs[1].Status}
+	actual := args.Map{
+		"len": len(diffs),
+		"firstMatch": diffs[0].Status,
+		"secondMismatch": diffs[1].Status,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstMatch": "  ", "secondMismatch": "!!"}
+	expected := args.Map{
+		"len": 2,
+		"firstMatch": "  ",
+		"secondMismatch": "!!",
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns diffs -- with lines", actual)
 }
 
@@ -196,10 +226,16 @@ func Test_Cov7_LineDiff_ExtraActual(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a", "b"}, []string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "status": diffs[1].Status}
+	actual := args.Map{
+		"len": len(diffs),
+		"status": diffs[1].Status,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "status": "+"}
+	expected := args.Map{
+		"len": 2,
+		"status": "+",
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns extra-actual -- longer actual", actual)
 }
 
@@ -208,10 +244,16 @@ func Test_Cov7_LineDiff_MissingExpected(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a"}, []string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "status": diffs[1].Status}
+	actual := args.Map{
+		"len": len(diffs),
+		"status": diffs[1].Status,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "status": "-"}
+	expected := args.Map{
+		"len": 2,
+		"status": "-",
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns missing-expected -- shorter actual", actual)
 }
 
@@ -248,7 +290,11 @@ func Test_Cov7_HasAnyMismatchOnLines(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": false, "noMatch": true, "diffLen": true}
+	expected := args.Map{
+		"match": false,
+		"noMatch": true,
+		"diffLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "HasAnyMismatchOnLines returns correct -- with lines", actual)
 }
 
@@ -258,10 +304,16 @@ func Test_Cov7_SliceDiffSummary(t *testing.T) {
 	noMatch := errcore.SliceDiffSummary([]string{"a"}, []string{"b"})
 
 	// Act
-	actual := args.Map{"match": match, "noMatchNotEmpty": noMatch != ""}
+	actual := args.Map{
+		"match": match,
+		"noMatchNotEmpty": noMatch != "",
+	}
 
 	// Assert
-	expected := args.Map{"match": "all lines match", "noMatchNotEmpty": true}
+	expected := args.Map{
+		"match": "all lines match",
+		"noMatchNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceDiffSummary returns correct -- with lines", actual)
 }
 
@@ -271,10 +323,16 @@ func Test_Cov7_ErrorToLinesLineDiff(t *testing.T) {
 	nilResult := errcore.ErrorToLinesLineDiff(0, "test", nil, []string{"a"})
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "nilNotEmpty": nilResult != ""}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"nilNotEmpty": nilResult != "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilNotEmpty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorToLinesLineDiff returns non-empty -- with error", actual)
 }
 
@@ -374,10 +432,16 @@ func Test_Cov7_MergeErrors(t *testing.T) {
 	nilResult := errcore.MergeErrors(nil, nil)
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "nilNil": nilResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"nilNil": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MergeErrors returns correct -- with errors", actual)
 }
 
@@ -401,10 +465,16 @@ func Test_Cov7_SliceToError(t *testing.T) {
 	nilResult := errcore.SliceToError(nil)
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "nilNil": nilResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"nilNil": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToError returns correct -- with slice", actual)
 }
 
@@ -414,10 +484,16 @@ func Test_Cov7_SliceToErrorPtr(t *testing.T) {
 	empty := errcore.SliceToErrorPtr([]string{})
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "emptyNil": empty == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"emptyNil": empty == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "emptyNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"emptyNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToErrorPtr returns correct -- with slice", actual)
 }
 
@@ -627,10 +703,16 @@ func Test_Cov7_ToExitError(t *testing.T) {
 	nilResult := errcore.ToExitError(nil)
 
 	// Act
-	actual := args.Map{"isNil": result == nil, "nilNil": nilResult == nil}
+	actual := args.Map{
+		"isNil": result == nil,
+		"nilNil": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "nilNil": true}
+	expected := args.Map{
+		"isNil": true,
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToExitError returns correct value -- with error type", actual)
 }
 

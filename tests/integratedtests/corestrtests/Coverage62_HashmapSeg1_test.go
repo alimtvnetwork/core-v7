@@ -22,10 +22,16 @@ func Test_Cov62_Hashmap_IsEmpty(t *testing.T) {
 		hm := corestr.New.Hashmap.Empty()
 
 		// Act
-		actual := args.Map{"empty": hm.IsEmpty(), "hasItems": hm.HasItems()}
+		actual := args.Map{
+			"empty": hm.IsEmpty(),
+			"hasItems": hm.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty on empty", actual)
 	})
 }
@@ -37,10 +43,16 @@ func Test_Cov62_Hashmap_IsEmpty_NonEmpty(t *testing.T) {
 		hm.AddOrUpdate("k", "v")
 
 		// Act
-		actual := args.Map{"empty": hm.IsEmpty(), "hasItems": hm.HasItems()}
+		actual := args.Map{
+			"empty": hm.IsEmpty(),
+			"hasItems": hm.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": false, "hasItems": true}
+		expected := args.Map{
+			"empty": false,
+			"hasItems": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty on non-empty", actual)
 	})
 }
@@ -274,10 +286,16 @@ func Test_Cov62_Hashmap_SetTrim(t *testing.T) {
 		v, found := hm.Get("k")
 
 		// Act
-		actual := args.Map{"found": found, "val": v}
+		actual := args.Map{
+			"found": found,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "v"}
+		expected := args.Map{
+			"found": true,
+			"val": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "SetTrim trims", actual)
 	})
 }
@@ -751,10 +769,16 @@ func Test_Cov62_Hashmap_ConcatNew(t *testing.T) {
 		r := a.ConcatNew(false, b)
 
 		// Act
-		actual := args.Map{"hasA": r.Has("a"), "hasB": r.Has("b")}
+		actual := args.Map{
+			"hasA": r.Has("a"),
+			"hasB": r.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"hasA": true, "hasB": true}
+		expected := args.Map{
+			"hasA": true,
+			"hasB": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ConcatNew merges", actual)
 	})
 }
@@ -863,10 +887,16 @@ func Test_Cov62_Hashmap_Has(t *testing.T) {
 		hm.AddOrUpdate("k", "v")
 
 		// Act
-		actual := args.Map{"has": hm.Has("k"), "miss": hm.Has("z")}
+		actual := args.Map{
+			"has": hm.Has("k"),
+			"miss": hm.Has("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Has", actual)
 	})
 }
@@ -908,10 +938,16 @@ func Test_Cov62_Hashmap_IsKeyMissing(t *testing.T) {
 		hm.AddOrUpdate("k", "v")
 
 		// Act
-		actual := args.Map{"missing": hm.IsKeyMissing("z"), "found": hm.IsKeyMissing("k")}
+		actual := args.Map{
+			"missing": hm.IsKeyMissing("z"),
+			"found": hm.IsKeyMissing("k"),
+		}
 
 		// Assert
-		expected := args.Map{"missing": true, "found": false}
+		expected := args.Map{
+			"missing": true,
+			"found": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsKeyMissing", actual)
 	})
 }
@@ -954,10 +990,16 @@ func Test_Cov62_Hashmap_HasAllStrings(t *testing.T) {
 		hm.AddOrUpdate("b", "2")
 
 		// Act
-		actual := args.Map{"all": hm.HasAllStrings("a", "b"), "miss": hm.HasAllStrings("a", "z")}
+		actual := args.Map{
+			"all": hm.HasAllStrings("a", "b"),
+			"miss": hm.HasAllStrings("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings", actual)
 	})
 }
@@ -970,10 +1012,16 @@ func Test_Cov62_Hashmap_HasAllCollectionItems(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"has": hm.HasAllCollectionItems(col), "nil": hm.HasAllCollectionItems(nil)}
+		actual := args.Map{
+			"has": hm.HasAllCollectionItems(col),
+			"nil": hm.HasAllCollectionItems(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllCollectionItems", actual)
 	})
 }
@@ -986,10 +1034,16 @@ func Test_Cov62_Hashmap_HasAll(t *testing.T) {
 		hm.AddOrUpdate("b", "2")
 
 		// Act
-		actual := args.Map{"all": hm.HasAll("a", "b"), "miss": hm.HasAll("a", "z")}
+		actual := args.Map{
+			"all": hm.HasAll("a", "b"),
+			"miss": hm.HasAll("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAll", actual)
 	})
 }
@@ -1015,10 +1069,16 @@ func Test_Cov62_Hashmap_HasAny(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"any": hm.HasAny("a", "z"), "none": hm.HasAny("x", "y")}
+		actual := args.Map{
+			"any": hm.HasAny("a", "z"),
+			"none": hm.HasAny("x", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"any": true, "none": false}
+		expected := args.Map{
+			"any": true,
+			"none": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAny", actual)
 	})
 }
@@ -1331,10 +1391,16 @@ func Test_Cov62_Hashmap_KeysValuesCollection(t *testing.T) {
 		keys, values := hm.KeysValuesCollection()
 
 		// Act
-		actual := args.Map{"keysLen": keys.Length(), "valsLen": values.Length()}
+		actual := args.Map{
+			"keysLen": keys.Length(),
+			"valsLen": values.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"keysLen": 1, "valsLen": 1}
+		expected := args.Map{
+			"keysLen": 1,
+			"valsLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesCollection", actual)
 	})
 }
@@ -1347,10 +1413,16 @@ func Test_Cov62_Hashmap_KeysValuesList(t *testing.T) {
 		keys, values := hm.KeysValuesList()
 
 		// Act
-		actual := args.Map{"keysLen": len(keys), "valsLen": len(values)}
+		actual := args.Map{
+			"keysLen": len(keys),
+			"valsLen": len(values),
+		}
 
 		// Assert
-		expected := args.Map{"keysLen": 1, "valsLen": 1}
+		expected := args.Map{
+			"keysLen": 1,
+			"valsLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesList", actual)
 	})
 }
@@ -1395,10 +1467,16 @@ func Test_Cov62_Hashmap_KeysValuesListLock(t *testing.T) {
 		keys, values := hm.KeysValuesListLock()
 
 		// Act
-		actual := args.Map{"keysLen": len(keys), "valsLen": len(values)}
+		actual := args.Map{
+			"keysLen": len(keys),
+			"valsLen": len(values),
+		}
 
 		// Assert
-		expected := args.Map{"keysLen": 1, "valsLen": 1}
+		expected := args.Map{
+			"keysLen": 1,
+			"valsLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "KeysValuesListLock", actual)
 	})
 }
@@ -2014,10 +2092,16 @@ func Test_Cov62_Hashmap_MarshalJSON(t *testing.T) {
 		b, err := hm.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON", actual)
 	})
 }
@@ -2029,10 +2113,16 @@ func Test_Cov62_Hashmap_UnmarshalJSON(t *testing.T) {
 		err := hm.UnmarshalJSON([]byte(`{"a":"1"}`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": hm.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": hm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON", actual)
 	})
 }
@@ -2092,10 +2182,16 @@ func Test_Cov62_Hashmap_ParseInjectUsingJson(t *testing.T) {
 		r, err := hm.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson", actual)
 	})
 }
@@ -2418,10 +2514,16 @@ func Test_Cov62_Hashmap_ClonePtr(t *testing.T) {
 		r := hm.ClonePtr()
 
 		// Act
-		actual := args.Map{"nonNil": r != nil, "len": r.Length()}
+		actual := args.Map{
+			"nonNil": r != nil,
+			"len": r.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"nonNil": true, "len": 1}
+		expected := args.Map{
+			"nonNil": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "ClonePtr", actual)
 	})
 }
@@ -2451,10 +2553,16 @@ func Test_Cov62_Hashmap_Get(t *testing.T) {
 		val, found := hm.Get("k")
 
 		// Act
-		actual := args.Map{"val": val, "found": found}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v", "found": true}
+		expected := args.Map{
+			"val": "v",
+			"found": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Get", actual)
 	})
 }
@@ -2482,10 +2590,16 @@ func Test_Cov62_Hashmap_GetValue(t *testing.T) {
 		val, found := hm.GetValue("k")
 
 		// Act
-		actual := args.Map{"val": val, "found": found}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v", "found": true}
+		expected := args.Map{
+			"val": "v",
+			"found": true,
+		}
 		expected.ShouldBeEqual(t, 0, "GetValue", actual)
 	})
 }
@@ -2500,10 +2614,16 @@ func Test_Cov62_Hashmap_Serialize(t *testing.T) {
 		b, err := hm.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize", actual)
 	})
 }
@@ -2517,10 +2637,16 @@ func Test_Cov62_Hashmap_Deserialize(t *testing.T) {
 		err := hm.Deserialize(&target)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": len(target)}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": len(target),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize", actual)
 	})
 }

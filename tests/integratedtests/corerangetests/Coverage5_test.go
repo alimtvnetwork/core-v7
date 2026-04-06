@@ -16,8 +16,14 @@ func Test_Cov5_Within_StringRangeUint32_AboveMax(t *testing.T) {
 	val, ok := corerange.Within.StringRangeUint32("2147483648")
 
 	// Assert — should return 0 because finalInt > MaxInt32
-	actual := args.Map{"val": int(val), "ok": ok}
-	expected := args.Map{"val": 2147483647, "ok": false}
+	actual := args.Map{
+		"val": int(val),
+		"ok": ok,
+	}
+	expected := args.Map{
+		"val": 2147483647,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Within StringRangeUint32 returns 0 -- above MaxInt32", actual)
 }
 
@@ -36,8 +42,14 @@ func Test_Cov5_Within_StringRangeFloat_OutOfRange_NoBoundary(t *testing.T) {
 	val, ok := corerange.Within.StringRangeFloat(false, 10.0, 20.0, "5.0")
 
 	// Assert — isInRange=false, isUsageMinMaxBoundary=false → return 0
-	actual := args.Map{"val": val == 0, "ok": ok}
-	expected := args.Map{"val": true, "ok": false}
+	actual := args.Map{
+		"val": val == 0,
+		"ok": ok,
+	}
+	expected := args.Map{
+		"val": true,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Within StringRangeFloat returns zero -- no boundary out of range", actual)
 }
 
@@ -46,8 +58,14 @@ func Test_Cov5_Within_StringRangeFloat_OutOfRange_WithBoundary(t *testing.T) {
 	val, ok := corerange.Within.StringRangeFloat(true, 10.0, 20.0, "5.0")
 
 	// Assert — clamped to min
-	actual := args.Map{"isMin": val == 10.0, "ok": ok}
-	expected := args.Map{"isMin": true, "ok": false}
+	actual := args.Map{
+		"isMin": val == 10.0,
+		"ok": ok,
+	}
+	expected := args.Map{
+		"isMin": true,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Within StringRangeFloat returns min -- boundary below min", actual)
 }
 
@@ -94,8 +112,14 @@ func Test_Cov5_MinMaxInt_DifferenceAbsolute_Negative(t *testing.T) {
 	mm := &corerange.MinMaxInt{Min: 10, Max: 3}
 
 	// Act
-	actual := args.Map{"diffAbs": mm.DifferenceAbsolute(), "diff": mm.Difference()}
-	expected := args.Map{"diffAbs": 7, "diff": -7}
+	actual := args.Map{
+		"diffAbs": mm.DifferenceAbsolute(),
+		"diff": mm.Difference(),
+	}
+	expected := args.Map{
+		"diffAbs": 7,
+		"diff": -7,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt DifferenceAbsolute returns positive -- negative diff", actual)
 }
 
@@ -104,10 +128,16 @@ func Test_Cov5_MinMaxInt_IsInvalidValue(t *testing.T) {
 	mm := &corerange.MinMaxInt{Min: 1, Max: 10}
 
 	// Act
-	actual := args.Map{"invalid0": mm.IsInvalidValue(0), "invalid5": mm.IsInvalidValue(5)}
+	actual := args.Map{
+		"invalid0": mm.IsInvalidValue(0),
+		"invalid5": mm.IsInvalidValue(5),
+	}
 
 	// Assert
-	expected := args.Map{"invalid0": true, "invalid5": false}
+	expected := args.Map{
+		"invalid0": true,
+		"invalid5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt IsInvalidValue returns expected -- boundary check", actual)
 }
 
@@ -194,10 +224,16 @@ func Test_Cov5_MinMaxInt16_DifferenceAbsolute_Negative(t *testing.T) {
 	mm := &corerange.MinMaxInt16{Min: 10, Max: 3}
 
 	// Act
-	actual := args.Map{"diffAbs": int(mm.DifferenceAbsolute()), "diff": int(mm.Difference())}
+	actual := args.Map{
+		"diffAbs": int(mm.DifferenceAbsolute()),
+		"diff": int(mm.Difference()),
+	}
 
 	// Assert
-	expected := args.Map{"diffAbs": 7, "diff": -7}
+	expected := args.Map{
+		"diffAbs": 7,
+		"diff": -7,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt16 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
@@ -232,10 +268,16 @@ func Test_Cov5_MinMaxInt8_DifferenceAbsolute_Negative(t *testing.T) {
 	mm := &corerange.MinMaxInt8{Min: 10, Max: 3}
 
 	// Act
-	actual := args.Map{"diffAbs": int(mm.DifferenceAbsolute()), "diff": int(mm.Difference())}
+	actual := args.Map{
+		"diffAbs": int(mm.DifferenceAbsolute()),
+		"diff": int(mm.Difference()),
+	}
 
 	// Assert
-	expected := args.Map{"diffAbs": 7, "diff": -7}
+	expected := args.Map{
+		"diffAbs": 7,
+		"diff": -7,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
@@ -268,10 +310,16 @@ func Test_Cov5_MinMaxInt8_IsInvalidValue(t *testing.T) {
 	mm := &corerange.MinMaxInt8{Min: 1, Max: 10}
 
 	// Act
-	actual := args.Map{"invalid0": mm.IsInvalidValue(0), "invalid5": mm.IsInvalidValue(5)}
+	actual := args.Map{
+		"invalid0": mm.IsInvalidValue(0),
+		"invalid5": mm.IsInvalidValue(5),
+	}
 
 	// Assert
-	expected := args.Map{"invalid0": true, "invalid5": false}
+	expected := args.Map{
+		"invalid0": true,
+		"invalid5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 IsInvalidValue returns expected -- boundary", actual)
 }
 
@@ -282,10 +330,16 @@ func Test_Cov5_MinMaxInt64_DifferenceAbsolute_Negative(t *testing.T) {
 	mm := &corerange.MinMaxInt64{Min: 10, Max: 3}
 
 	// Act
-	actual := args.Map{"diffAbs": int(mm.DifferenceAbsolute()), "diff": int(mm.Difference())}
+	actual := args.Map{
+		"diffAbs": int(mm.DifferenceAbsolute()),
+		"diff": int(mm.Difference()),
+	}
 
 	// Assert
-	expected := args.Map{"diffAbs": 7, "diff": -7}
+	expected := args.Map{
+		"diffAbs": 7,
+		"diff": -7,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 DifferenceAbsolute returns positive -- reversed range", actual)
 }
 
@@ -318,10 +372,16 @@ func Test_Cov5_MinMaxInt64_IsInvalidValue(t *testing.T) {
 	mm := &corerange.MinMaxInt64{Min: 1, Max: 10}
 
 	// Act
-	actual := args.Map{"invalid0": mm.IsInvalidValue(0), "invalid5": mm.IsInvalidValue(5)}
+	actual := args.Map{
+		"invalid0": mm.IsInvalidValue(0),
+		"invalid5": mm.IsInvalidValue(5),
+	}
 
 	// Assert
-	expected := args.Map{"invalid0": true, "invalid5": false}
+	expected := args.Map{
+		"invalid0": true,
+		"invalid5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 IsInvalidValue returns expected -- boundary", actual)
 }
 
@@ -410,8 +470,14 @@ func Test_Cov5_RangeByte_Ranges_Invalid(t *testing.T) {
 	rangesInt := rb.RangesInt()
 
 	// Assert
-	actual := args.Map{"rangesLen": len(ranges), "rangesIntLen": len(rangesInt)}
-	expected := args.Map{"rangesLen": 0, "rangesIntLen": 0}
+	actual := args.Map{
+		"rangesLen": len(ranges),
+		"rangesIntLen": len(rangesInt),
+	}
+	expected := args.Map{
+		"rangesLen": 0,
+		"rangesIntLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeByte Ranges returns empty -- invalid input", actual)
 }
 
@@ -426,7 +492,10 @@ func Test_Cov5_RangeByte_IsInvalidValue(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"invalidOutside": true, "invalidInside": false}
+	expected := args.Map{
+		"invalidOutside": true,
+		"invalidInside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeByte IsInvalidValue returns expected -- boundary", actual)
 }
 
@@ -448,8 +517,14 @@ func Test_Cov5_RangeByte_NewRangeByte_WithMinMax(t *testing.T) {
 	rb := corerange.NewRangeByte("3:7", ":", mb)
 
 	// Assert
-	actual := args.Map{"notNil": rb != nil, "start": int(rb.Start)}
-	expected := args.Map{"notNil": true, "start": 3}
+	actual := args.Map{
+		"notNil": rb != nil,
+		"start": int(rb.Start),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeByte returns valid -- non-nil minMax", actual)
 }
 
@@ -509,10 +584,16 @@ func Test_Cov5_RangeInt8_NewRangeInt8_WithMinMax(t *testing.T) {
 	ri8 := corerange.NewRangeInt8("3:7", ":", mm)
 
 	// Act
-	actual := args.Map{"notNil": ri8 != nil, "start": int(ri8.Start)}
+	actual := args.Map{
+		"notNil": ri8 != nil,
+		"start": int(ri8.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt8 returns valid -- non-nil minMax", actual)
 }
 
@@ -588,10 +669,16 @@ func Test_Cov5_RangeInt16_NewRangeInt16_WithMinMax(t *testing.T) {
 	ri16 := corerange.NewRangeInt16("3:7", ":", mm)
 
 	// Act
-	actual := args.Map{"notNil": ri16 != nil, "start": int(ri16.Start)}
+	actual := args.Map{
+		"notNil": ri16 != nil,
+		"start": int(ri16.Start),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": 3}
+	expected := args.Map{
+		"notNil": true,
+		"start": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRangeInt16 returns valid -- non-nil minMax", actual)
 }
 
@@ -788,10 +875,16 @@ func Test_Cov5_StartEndSimpleString_StartEndString_BothEmpty(t *testing.T) {
 	result := se.StartEndString()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "isValid": result.IsValid}
+	actual := args.Map{
+		"notNil": result != nil,
+		"isValid": result.IsValid,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isValid": false}
+	expected := args.Map{
+		"notNil": true,
+		"isValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString StartEndString returns invalid -- both empty", actual)
 }
 
@@ -816,10 +909,18 @@ func Test_Cov5_RangeInt_NewRangeInt_SingleElement(t *testing.T) {
 	ri := corerange.NewRangeIntMinMax("5", ":", 0, 10)
 
 	// Act
-	actual := args.Map{"isValid": ri.IsValid, "hasStart": ri.HasStart, "hasEnd": ri.HasEnd}
+	actual := args.Map{
+		"isValid": ri.IsValid,
+		"hasStart": ri.HasStart,
+		"hasEnd": ri.HasEnd,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "hasStart": true, "hasEnd": false}
+	expected := args.Map{
+		"isValid": false,
+		"hasStart": true,
+		"hasEnd": false,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeInt NewRangeInt single element -- no end", actual)
 }
 

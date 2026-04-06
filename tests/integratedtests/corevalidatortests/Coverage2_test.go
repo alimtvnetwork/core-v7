@@ -23,10 +23,16 @@ func Test_Cov2_HeaderSliceValidator_Create(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"header": hsv.Header, "linesLen": len(hsv.ExpectedLines)}
+	actual := args.Map{
+		"header": hsv.Header,
+		"linesLen": len(hsv.ExpectedLines),
+	}
 
 	// Assert
-	expected := args.Map{"header": "test-header", "linesLen": 2}
+	expected := args.Map{
+		"header": "test-header",
+		"linesLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "HeaderSliceValidator returns expected -- valid input", actual)
 }
 
@@ -200,7 +206,10 @@ func Test_Cov2_TextValidators_IsMatch_WithItems(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchTrue": true, "matchFalse": false}
+	expected := args.Map{
+		"matchTrue": true,
+		"matchFalse": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidators IsMatch returns expected -- with validator", actual)
 }
 
@@ -243,10 +252,16 @@ func Test_Cov2_RangeSegmentsValidator_Create(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"title": rsv.Title, "segLen": rsv.LengthOfVerifierSegments()}
+	actual := args.Map{
+		"title": rsv.Title,
+		"segLen": rsv.LengthOfVerifierSegments(),
+	}
 
 	// Assert
-	expected := args.Map{"title": "test-range", "segLen": 0}
+	expected := args.Map{
+		"title": "test-range",
+		"segLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeSegmentsValidator returns expected -- basic", actual)
 }
 

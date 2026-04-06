@@ -14,10 +14,16 @@ func Test_Cov5_TraceCollection_Length(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipNone()
 
 	// Act
-	actual := args.Map{"gt0": tc.Length() > 0, "notEmpty": tc.HasAnyItem()}
+	actual := args.Map{
+		"gt0": tc.Length() > 0,
+		"notEmpty": tc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"gt0": actual["gt0"], "notEmpty": actual["notEmpty"]}
+	expected := args.Map{
+		"gt0": actual["gt0"],
+		"notEmpty": actual["notEmpty"],
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection Length -- default traces", actual)
 }
 
@@ -26,10 +32,16 @@ func Test_Cov5_TraceCollection_IsEmpty(t *testing.T) {
 	tc := codestack.TraceCollection{}
 
 	// Act
-	actual := args.Map{"isEmpty": tc.IsEmpty(), "lastIndex": tc.LastIndex()}
+	actual := args.Map{
+		"isEmpty": tc.IsEmpty(),
+		"lastIndex": tc.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "lastIndex": -1}
+	expected := args.Map{
+		"isEmpty": true,
+		"lastIndex": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection IsEmpty -- empty", actual)
 }
 
@@ -137,10 +149,16 @@ func Test_Cov5_TraceCollection_ClonePtr(t *testing.T) {
 	cloned := tc.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "sameLen": cloned.Length() == tc.Length()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"sameLen": cloned.Length() == tc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "sameLen": true}
+	expected := args.Map{
+		"notNil": true,
+		"sameLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection ClonePtr -- same length", actual)
 }
 
@@ -241,10 +259,16 @@ func Test_Cov5_TraceCollection_StackTracesJsonResult(t *testing.T) {
 	r := tc.StackTracesJsonResult()
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "hasBytes": r.HasBytes()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"hasBytes": r.HasBytes(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasBytes": actual["hasBytes"]}
+	expected := args.Map{
+		"notNil": true,
+		"hasBytes": actual["hasBytes"],
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection StackTracesJsonResult -- valid", actual)
 }
 
@@ -453,10 +477,16 @@ func Test_Cov5_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	result, err := fwl2.ParseInjectUsingJson(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "path": result.FilePath}
+	actual := args.Map{
+		"noErr": err == nil,
+		"path": result.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "path": "/tmp/test.go"}
+	expected := args.Map{
+		"noErr": true,
+		"path": "/tmp/test.go",
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine ParseInjectUsingJson -- roundtrip", actual)
 }
 
@@ -468,10 +498,16 @@ func Test_Cov5_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	err := fwl2.JsonParseSelfInject(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "path": fwl2.FilePath}
+	actual := args.Map{
+		"noErr": err == nil,
+		"path": fwl2.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "path": "/tmp/test.go"}
+	expected := args.Map{
+		"noErr": true,
+		"path": "/tmp/test.go",
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine JsonParseSelfInject -- roundtrip", actual)
 }
 
@@ -498,10 +534,16 @@ func Test_Cov5_Trace_ParseInjectUsingJson(t *testing.T) {
 	result, err := trace2.ParseInjectUsingJson(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasPkg": result.PackageName != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasPkg": result.PackageName != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasPkg": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasPkg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace ParseInjectUsingJson -- roundtrip", actual)
 }
 

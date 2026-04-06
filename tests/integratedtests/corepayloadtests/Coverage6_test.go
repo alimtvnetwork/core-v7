@@ -133,7 +133,11 @@ func Test_Cov6_PayloadWrapper_SetDynamicPayloads(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "payload": "new", "nilErr": true}
+	expected := args.Map{
+		"noErr": true,
+		"payload": "new",
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadWrapper returns correct value -- SetDynamicPayloads", actual)
 }
 
@@ -145,10 +149,22 @@ func Test_Cov6_PayloadWrapper_All(t *testing.T) {
 	id, name, entity, cat, dynP := pw.All()
 
 	// Act
-	actual := args.Map{"id": id, "name": name, "entity": entity, "cat": cat, "dynP": string(dynP)}
+	actual := args.Map{
+		"id": id,
+		"name": name,
+		"entity": entity,
+		"cat": cat,
+		"dynP": string(dynP),
+	}
 
 	// Assert
-	expected := args.Map{"id": "id", "name": "n", "entity": "e", "cat": "c", "dynP": "p"}
+	expected := args.Map{
+		"id": "id",
+		"name": "n",
+		"entity": "e",
+		"cat": "c",
+		"dynP": "p",
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadWrapper returns correct value -- All", actual)
 }
 
@@ -158,10 +174,22 @@ func Test_Cov6_PayloadWrapper_AllSafe_Nil(t *testing.T) {
 	id, name, entity, cat, dynP := pw.AllSafe()
 
 	// Act
-	actual := args.Map{"id": id, "name": name, "entity": entity, "cat": cat, "dynP": string(dynP)}
+	actual := args.Map{
+		"id": id,
+		"name": name,
+		"entity": entity,
+		"cat": cat,
+		"dynP": string(dynP),
+	}
 
 	// Assert
-	expected := args.Map{"id": "", "name": "", "entity": "", "cat": "", "dynP": ""}
+	expected := args.Map{
+		"id": "",
+		"name": "",
+		"entity": "",
+		"cat": "",
+		"dynP": "",
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadWrapper returns nil -- AllSafe nil", actual)
 }
 
@@ -229,7 +257,11 @@ func Test_Cov6_User_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"cloneName": "Alice", "cpName": "Alice", "nilClonePtr": true}
+	expected := args.Map{
+		"cloneName": "Alice",
+		"cpName": "Alice",
+		"nilClonePtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "User returns correct value -- Clone", actual)
 }
 
@@ -247,7 +279,12 @@ func Test_Cov6_User_JSON(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jHas": true, "jpNN": true, "bLen": true, "noErr": true}
+	expected := args.Map{
+		"jHas": true,
+		"jpNN": true,
+		"bLen": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "User returns correct value -- JSON", actual)
 }
 
@@ -302,7 +339,11 @@ func Test_Cov6_AuthInfo_Setters(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"action": "create", "resource": "/api", "id": "id-1"}
+	expected := args.Map{
+		"action": "create",
+		"resource": "/api",
+		"id": "id-1",
+	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- setters", actual)
 }
 
@@ -321,7 +362,11 @@ func Test_Cov6_AuthInfo_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"cloneAction": "create", "cpAction": "create", "nilClone": true}
+	expected := args.Map{
+		"cloneAction": "create",
+		"cpAction": "create",
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Clone", actual)
 }
 
@@ -332,10 +377,16 @@ func Test_Cov6_AuthInfo_JSON(t *testing.T) {
 	jp := ai.JsonPtr()
 
 	// Act
-	actual := args.Map{"jHas": j.HasBytes(), "jpNN": jp != nil}
+	actual := args.Map{
+		"jHas": j.HasBytes(),
+		"jpNN": jp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"jHas": true, "jpNN": true}
+	expected := args.Map{
+		"jHas": true,
+		"jpNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- JSON", actual)
 }
 
@@ -416,7 +467,10 @@ func Test_Cov6_SessionInfo_IsEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "nilEmpty": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"nilEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SessionInfo returns empty -- IsEmpty", actual)
 }
 
@@ -433,6 +487,9 @@ func Test_Cov6_SessionInfo_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"cloneId": "s1", "nilClone": true}
+	expected := args.Map{
+		"cloneId": "s1",
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SessionInfo returns correct value -- Clone", actual)
 }

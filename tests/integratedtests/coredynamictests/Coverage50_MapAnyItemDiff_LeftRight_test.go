@@ -29,10 +29,18 @@ func Test_Cov50_MapAnyItemDiff_Empty(t *testing.T) {
 	d := coredynamic.MapAnyItemDiff{}
 
 	// Act
-	actual := args.Map{"empty": d.IsEmpty(), "hasAny": d.HasAnyItem(), "last": d.LastIndex()}
+	actual := args.Map{
+		"empty": d.IsEmpty(),
+		"hasAny": d.HasAnyItem(),
+		"last": d.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "hasAny": false, "last": -1}
+	expected := args.Map{
+		"empty": true,
+		"hasAny": false,
+		"last": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff empty", actual)
 }
 
@@ -41,10 +49,20 @@ func Test_Cov50_MapAnyItemDiff_WithItems(t *testing.T) {
 	d := coredynamic.MapAnyItemDiff{"a": 1, "b": 2}
 
 	// Act
-	actual := args.Map{"len": d.Length(), "empty": d.IsEmpty(), "hasAny": d.HasAnyItem(), "last": d.LastIndex()}
+	actual := args.Map{
+		"len": d.Length(),
+		"empty": d.IsEmpty(),
+		"hasAny": d.HasAnyItem(),
+		"last": d.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "empty": false, "hasAny": true, "last": 1}
+	expected := args.Map{
+		"len": 2,
+		"empty": false,
+		"hasAny": true,
+		"last": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff with items", actual)
 }
 
@@ -58,10 +76,18 @@ func Test_Cov50_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	keys := d.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"len": len(keys), "first": keys[0], "last": keys[2]}
+	actual := args.Map{
+		"len": len(keys),
+		"first": keys[0],
+		"last": keys[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff AllKeysSorted", actual)
 }
 
@@ -88,10 +114,16 @@ func Test_Cov50_MapAnyItemDiff_IsRawEqual_Different(t *testing.T) {
 	right := map[string]any{"a": 2}
 
 	// Act
-	actual := args.Map{"r": d.IsRawEqual(false, right), "changes": d.HasAnyChanges(false, right)}
+	actual := args.Map{
+		"r": d.IsRawEqual(false, right),
+		"changes": d.HasAnyChanges(false, right),
+	}
 
 	// Assert
-	expected := args.Map{"r": false, "changes": true}
+	expected := args.Map{
+		"r": false,
+		"changes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff IsRawEqual different", actual)
 }
 
@@ -366,10 +398,16 @@ func Test_Cov50_MapAsKeyValSlice_ValidMap(t *testing.T) {
 	coll, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": coll.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": coll.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice valid map", actual)
 }
 
@@ -393,10 +431,16 @@ func Test_Cov50_MapAsKeyValSlice_Pointer(t *testing.T) {
 	coll, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": coll.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": coll.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": false, "len": 0}
+	expected := args.Map{
+		"noErr": false,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice pointer", actual)
 }
 
@@ -476,10 +520,16 @@ func Test_Cov50_LeftRight_LeftReflectSet_Valid(t *testing.T) {
 	err := lr.LeftReflectSet(&dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "dest": dest}
+	actual := args.Map{
+		"noErr": err == nil,
+		"dest": dest,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dest": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"dest": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight LeftReflectSet valid", actual)
 }
 
@@ -503,10 +553,16 @@ func Test_Cov50_LeftRight_RightReflectSet_Valid(t *testing.T) {
 	err := lr.RightReflectSet(&dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "dest": dest}
+	actual := args.Map{
+		"noErr": err == nil,
+		"dest": dest,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dest": "world"}
+	expected := args.Map{
+		"noErr": true,
+		"dest": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight RightReflectSet valid", actual)
 }
 
@@ -630,10 +686,16 @@ func Test_Cov50_LeftRight_TypeStatus_SameType(t *testing.T) {
 	sameTs := lr.TypeStatus()
 
 	// Act
-	actual := args.Map{"valid": ts.IsValid(), "equal": ts.IsEqual(&sameTs)}
+	actual := args.Map{
+		"valid": ts.IsValid(),
+		"equal": ts.IsEqual(&sameTs),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "equal": true}
+	expected := args.Map{
+		"valid": true,
+		"equal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight TypeStatus same type", actual)
 }
 
@@ -715,10 +777,16 @@ func Test_Cov50_PointerOrNonPointerUsingReflectValue_Deref(t *testing.T) {
 	out, frv := coredynamic.PointerOrNonPointerUsingReflectValue(false, rv)
 
 	// Act
-	actual := args.Map{"r": out, "kind": frv.Kind().String()}
+	actual := args.Map{
+		"r": out,
+		"kind": frv.Kind().String(),
+	}
 
 	// Assert
-	expected := args.Map{"r": "hello", "kind": "string"}
+	expected := args.Map{
+		"r": "hello",
+		"kind": "string",
+	}
 	expected.ShouldBeEqual(t, 0, "PointerOrNonPointerUsingReflectValue deref", actual)
 }
 
@@ -728,9 +796,15 @@ func Test_Cov50_PointerOrNonPointerUsingReflectValue_Passthrough(t *testing.T) {
 	out, frv := coredynamic.PointerOrNonPointerUsingReflectValue(false, rv)
 
 	// Act
-	actual := args.Map{"r": out, "kind": frv.Kind().String()}
+	actual := args.Map{
+		"r": out,
+		"kind": frv.Kind().String(),
+	}
 
 	// Assert
-	expected := args.Map{"r": "hello", "kind": "string"}
+	expected := args.Map{
+		"r": "hello",
+		"kind": "string",
+	}
 	expected.ShouldBeEqual(t, 0, "PointerOrNonPointerUsingReflectValue passthrough", actual)
 }

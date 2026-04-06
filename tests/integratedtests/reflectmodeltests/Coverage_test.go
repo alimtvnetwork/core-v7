@@ -92,10 +92,16 @@ func Test_Cov_ReflectValueKind_WithError(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"isInvalid": m.IsInvalid(), "hasError": m.HasError()}
+	actual := args.Map{
+		"isInvalid": m.IsInvalid(),
+		"hasError": m.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"isInvalid": true, "hasError": true}
+	expected := args.Map{
+		"isInvalid": true,
+		"hasError": true,
+	}
 	expected.ShouldBeEqual(t, 0, "WithError returns error -- with args", actual)
 }
 

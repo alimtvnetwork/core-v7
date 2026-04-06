@@ -36,10 +36,16 @@ func Test_Cov13_TPW_NewTypedPayloadWrapper_Valid(t *testing.T) {
 	tw, err := corepayload.NewTypedPayloadWrapper[testUser](pw)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": tw.Data().Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": tw.Data().Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "alice"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "NewTPW returns non-empty -- valid", actual)
 }
 
@@ -48,10 +54,18 @@ func Test_Cov13_TPW_NewTypedPayloadWrapperFrom(t *testing.T) {
 	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUser]("n", "id", "testUser", testUser{Name: "alice"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": tw.Data().Name, "id": tw.Identifier()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": tw.Data().Name,
+		"id": tw.Identifier(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "alice", "id": "id"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "alice",
+		"id": "id",
+	}
 	expected.ShouldBeEqual(t, 0, "NewTPWFrom returns correct value -- with args", actual)
 }
 
@@ -60,10 +74,16 @@ func Test_Cov13_TPW_Data(t *testing.T) {
 	tw := newTypedWrapper("n", "id", testUser{Name: "alice"})
 
 	// Act
-	actual := args.Map{"name": tw.Data().Name, "typed": tw.TypedData().Name}
+	actual := args.Map{
+		"name": tw.Data().Name,
+		"typed": tw.TypedData().Name,
+	}
 
 	// Assert
-	expected := args.Map{"name": "alice", "typed": "alice"}
+	expected := args.Map{
+		"name": "alice",
+		"typed": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "Data returns correct value -- with args", actual)
 }
 
@@ -73,10 +93,16 @@ func Test_Cov13_TPW_IsParsed(t *testing.T) {
 	var tw2 *corepayload.TypedPayloadWrapper[testUser]
 
 	// Act
-	actual := args.Map{"parsed": tw.IsParsed(), "nil": tw2.IsParsed()}
+	actual := args.Map{
+		"parsed": tw.IsParsed(),
+		"nil": tw2.IsParsed(),
+	}
 
 	// Assert
-	expected := args.Map{"parsed": true, "nil": false}
+	expected := args.Map{
+		"parsed": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsParsed returns correct value -- with args", actual)
 }
 
@@ -353,10 +379,16 @@ func Test_Cov13_TPW_MarshalJSON_Valid(t *testing.T) {
 	b, err := tw.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returns non-empty -- valid", actual)
 }
 
@@ -379,10 +411,16 @@ func Test_Cov13_TPW_Serialize_Valid(t *testing.T) {
 	b, err := tw.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns non-empty -- valid", actual)
 }
 
@@ -392,10 +430,16 @@ func Test_Cov13_TPW_GetAsString(t *testing.T) {
 	val, ok := tw.GetAsString()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsString returns correct value -- with args", actual)
 }
 
@@ -405,10 +449,16 @@ func Test_Cov13_TPW_GetAsInt(t *testing.T) {
 	val, ok := tw.GetAsInt()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns correct value -- with args", actual)
 }
 
@@ -418,10 +468,16 @@ func Test_Cov13_TPW_GetAsBool(t *testing.T) {
 	val, ok := tw.GetAsBool()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsBool returns correct value -- with args", actual)
 }
 
@@ -568,10 +624,16 @@ func Test_Cov13_TPW_SetTypedData_Valid(t *testing.T) {
 	err := tw.SetTypedData(testUser{Name: "b"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": tw.Data().Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": tw.Data().Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "b"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SetTypedData returns non-empty -- valid", actual)
 }
 
@@ -581,10 +643,16 @@ func Test_Cov13_TPW_ClonePtr_Nil(t *testing.T) {
 	c, err := tw.ClonePtr(true)
 
 	// Act
-	actual := args.Map{"nil": c == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nil": c == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "noErr": true}
+	expected := args.Map{
+		"nil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
@@ -594,10 +662,16 @@ func Test_Cov13_TPW_ClonePtr_Valid(t *testing.T) {
 	c, err := tw.ClonePtr(true)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": c.Data().Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": c.Data().Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "a"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns non-empty -- valid", actual)
 }
 
@@ -607,10 +681,16 @@ func Test_Cov13_TPW_ToPayloadWrapper(t *testing.T) {
 	pw := tw.ToPayloadWrapper()
 
 	// Act
-	actual := args.Map{"notNil": pw != nil, "name": pw.Name}
+	actual := args.Map{
+		"notNil": pw != nil,
+		"name": pw.Name,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "name": "n"}
+	expected := args.Map{
+		"notNil": true,
+		"name": "n",
+	}
 	expected.ShouldBeEqual(t, 0, "ToPayloadWrapper returns correct value -- with args", actual)
 }
 
@@ -693,10 +773,16 @@ func Test_Cov13_TPW_IsNull(t *testing.T) {
 	tw2 := newTypedWrapper("n", "id", testUser{Name: "a"})
 
 	// Act
-	actual := args.Map{"nil": tw.IsNull(), "notNil": tw2.IsNull()}
+	actual := args.Map{
+		"nil": tw.IsNull(),
+		"notNil": tw2.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "notNil": false}
+	expected := args.Map{
+		"nil": true,
+		"notNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNull returns correct value -- with args", actual)
 }
 
@@ -758,10 +844,16 @@ func Test_Cov13_TPW_TypedDataJsonBytes(t *testing.T) {
 	b, err := tw.TypedDataJsonBytes()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDataJsonBytes returns correct value -- with args", actual)
 }
 
@@ -774,10 +866,18 @@ func Test_Cov13_TPC_Empty(t *testing.T) {
 	tc := corepayload.EmptyTypedPayloadCollection[testUser]()
 
 	// Act
-	actual := args.Map{"empty": tc.IsEmpty(), "len": tc.Length(), "count": tc.Count()}
+	actual := args.Map{
+		"empty": tc.IsEmpty(),
+		"len": tc.Length(),
+		"count": tc.Count(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "len": 0, "count": 0}
+	expected := args.Map{
+		"empty": true,
+		"len": 0,
+		"count": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "TPC returns empty -- Empty", actual)
 }
 
@@ -904,10 +1004,16 @@ func Test_Cov13_TPC_SafeAt(t *testing.T) {
 	tc.Add(tw)
 
 	// Act
-	actual := args.Map{"valid": tc.SafeAt(0) != nil, "oob": tc.SafeAt(5) == nil}
+	actual := args.Map{
+		"valid": tc.SafeAt(0) != nil,
+		"oob": tc.SafeAt(5) == nil,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "oob": true}
+	expected := args.Map{
+		"valid": true,
+		"oob": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeAt returns correct value -- with args", actual)
 }
 
@@ -920,10 +1026,18 @@ func Test_Cov13_TPC_RemoveAt(t *testing.T) {
 	notOk := tc.RemoveAt(99)
 
 	// Act
-	actual := args.Map{"ok": ok, "notOk": notOk, "len": tc.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"notOk": notOk,
+		"len": tc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "notOk": false, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"notOk": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveAt returns correct value -- with args", actual)
 }
 
@@ -935,10 +1049,16 @@ func Test_Cov13_TPC_AllData(t *testing.T) {
 	data := tc.AllData()
 
 	// Act
-	actual := args.Map{"len": len(data), "first": data[0].Name}
+	actual := args.Map{
+		"len": len(data),
+		"first": data[0].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "alice"}
+	expected := args.Map{
+		"len": 2,
+		"first": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "AllData returns correct value -- with args", actual)
 }
 
@@ -962,10 +1082,16 @@ func Test_Cov13_TPC_AllNames(t *testing.T) {
 	names := tc.AllNames()
 
 	// Act
-	actual := args.Map{"len": len(names), "first": names[0]}
+	actual := args.Map{
+		"len": len(names),
+		"first": names[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "myName"}
+	expected := args.Map{
+		"len": 1,
+		"first": "myName",
+	}
 	expected.ShouldBeEqual(t, 0, "AllNames returns correct value -- with args", actual)
 }
 
@@ -976,10 +1102,16 @@ func Test_Cov13_TPC_AllIdentifiers(t *testing.T) {
 	ids := tc.AllIdentifiers()
 
 	// Act
-	actual := args.Map{"len": len(ids), "first": ids[0]}
+	actual := args.Map{
+		"len": len(ids),
+		"first": ids[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "id1"}
+	expected := args.Map{
+		"len": 1,
+		"first": "id1",
+	}
 	expected.ShouldBeEqual(t, 0, "AllIdentifiers returns correct value -- with args", actual)
 }
 
@@ -1016,10 +1148,16 @@ func Test_Cov13_TPC_Clone_Empty(t *testing.T) {
 	c, err := tc.Clone()
 
 	// Act
-	actual := args.Map{"empty": c.IsEmpty(), "noErr": err == nil}
+	actual := args.Map{
+		"empty": c.IsEmpty(),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "noErr": true}
+	expected := args.Map{
+		"empty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TPC returns empty -- Clone empty", actual)
 }
 
@@ -1030,10 +1168,16 @@ func Test_Cov13_TPC_Clone_Valid(t *testing.T) {
 	c, err := tc.Clone()
 
 	// Act
-	actual := args.Map{"len": c.Length(), "noErr": err == nil}
+	actual := args.Map{
+		"len": c.Length(),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TPC returns non-empty -- Clone valid", actual)
 }
 
@@ -1135,10 +1279,16 @@ func Test_Cov13_TPC_GetPagesSize(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"val": tc.GetPagesSize(10), "zero": tc.GetPagesSize(0)}
+	actual := args.Map{
+		"val": tc.GetPagesSize(10),
+		"zero": tc.GetPagesSize(0),
+	}
 
 	// Assert
-	expected := args.Map{"val": 3, "zero": 0}
+	expected := args.Map{
+		"val": 3,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "TPC returns correct value -- GetPagesSize", actual)
 }
 
@@ -1184,10 +1334,16 @@ func Test_Cov13_TPC_FirstByName(t *testing.T) {
 	noItem := tc.FirstByName("unknown")
 
 	// Act
-	actual := args.Map{"found": item != nil, "notFound": noItem == nil}
+	actual := args.Map{
+		"found": item != nil,
+		"notFound": noItem == nil,
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": true}
+	expected := args.Map{
+		"found": true,
+		"notFound": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TPC returns correct value -- FirstByName", actual)
 }
 
@@ -1235,10 +1391,16 @@ func Test_Cov13_MapTypedPayloads(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(names), "first": names[0]}
+	actual := args.Map{
+		"len": len(names),
+		"first": names[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "alice"}
+	expected := args.Map{
+		"len": 1,
+		"first": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloads returns correct value -- with args", actual)
 }
 
@@ -1266,10 +1428,16 @@ func Test_Cov13_MapTypedPayloadData(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(names), "first": names[0]}
+	actual := args.Map{
+		"len": len(names),
+		"first": names[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "alice"}
+	expected := args.Map{
+		"len": 1,
+		"first": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloadData returns correct value -- with args", actual)
 }
 
@@ -1333,10 +1501,16 @@ func Test_Cov13_AnyTypedPayload(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"found": found, "notFound": notFound}
+	actual := args.Map{
+		"found": found,
+		"notFound": notFound,
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTypedPayload returns correct value -- with args", actual)
 }
 
@@ -1364,10 +1538,16 @@ func Test_Cov13_AllTypedPayloads(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"all": all, "notAll": notAll}
+	actual := args.Map{
+		"all": all,
+		"notAll": notAll,
+	}
 
 	// Assert
-	expected := args.Map{"all": true, "notAll": false}
+	expected := args.Map{
+		"all": true,
+		"notAll": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AllTypedPayloads returns correct value -- with args", actual)
 }
 
@@ -1393,10 +1573,16 @@ func Test_Cov13_PartitionTypedPayloads(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"match": matching.Length(), "noMatch": notMatching.Length()}
+	actual := args.Map{
+		"match": matching.Length(),
+		"noMatch": notMatching.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"match": 1, "noMatch": 1}
+	expected := args.Map{
+		"match": 1,
+		"noMatch": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "PartitionTypedPayloads returns correct value -- with args", actual)
 }
 
@@ -1406,10 +1592,16 @@ func Test_Cov13_PartitionTypedPayloads_Empty(t *testing.T) {
 	m, nm := corepayload.PartitionTypedPayloads[testUser](tc, func(_ *corepayload.TypedPayloadWrapper[testUser]) bool { return true })
 
 	// Act
-	actual := args.Map{"m": m.Length(), "nm": nm.Length()}
+	actual := args.Map{
+		"m": m.Length(),
+		"nm": nm.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"m": 0, "nm": 0}
+	expected := args.Map{
+		"m": 0,
+		"nm": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "PartitionTypedPayloads returns empty -- empty", actual)
 }
 
@@ -1473,10 +1665,16 @@ func Test_Cov13_NewTypedPayloadCollectionFromData_Empty(t *testing.T) {
 	tc, err := corepayload.NewTypedPayloadCollectionFromData[testUser]("n", nil)
 
 	// Act
-	actual := args.Map{"empty": tc.IsEmpty(), "noErr": err == nil}
+	actual := args.Map{
+		"empty": tc.IsEmpty(),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "noErr": true}
+	expected := args.Map{
+		"empty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewTPC returns empty -- FromData empty", actual)
 }
 
@@ -1485,9 +1683,15 @@ func Test_Cov13_NewTypedPayloadCollectionFromData_Valid(t *testing.T) {
 	tc, err := corepayload.NewTypedPayloadCollectionFromData[testUser]("n", []testUser{{Name: "a"}, {Name: "b"}})
 
 	// Act
-	actual := args.Map{"len": tc.Length(), "noErr": err == nil}
+	actual := args.Map{
+		"len": tc.Length(),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewTPC returns non-empty -- FromData valid", actual)
 }

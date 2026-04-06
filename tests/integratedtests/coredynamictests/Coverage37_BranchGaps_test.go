@@ -211,10 +211,16 @@ func Test_Cov37_Dynamic_Bytes_NilReceiver(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"nil": b == nil, "ok": ok}
+	actual := args.Map{
+		"nil": b == nil,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "ok": false}
+	expected := args.Map{
+		"nil": true,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Bytes nil receiver", actual)
 }
 
@@ -253,10 +259,16 @@ func Test_Cov37_Dynamic_IntDefault_NilData(t *testing.T) {
 	val, ok := d.IntDefault(42)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": false}
+	expected := args.Map{
+		"val": 42,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault nil data", actual)
 }
 
@@ -266,10 +278,16 @@ func Test_Cov37_Dynamic_IntDefault_NonNumeric(t *testing.T) {
 	val, ok := d.IntDefault(99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "ok": false}
+	expected := args.Map{
+		"val": 99,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault non-numeric", actual)
 }
 
@@ -279,10 +297,16 @@ func Test_Cov37_Dynamic_IntDefault_Valid(t *testing.T) {
 	val, ok := d.IntDefault(0)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 123, "ok": true}
+	expected := args.Map{
+		"val": 123,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault valid", actual)
 }
 
@@ -318,10 +342,16 @@ func Test_Cov37_Dynamic_Float64_Valid(t *testing.T) {
 	val, err := d.Float64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "gt3": val > 3.0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"gt3": val > 3.0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "gt3": true}
+	expected := args.Map{
+		"noErr": true,
+		"gt3": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 valid", actual)
 }
 
@@ -443,10 +473,16 @@ func Test_Cov37_Dynamic_Bytes_Valid(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(b)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(b),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 3}
+	expected := args.Map{
+		"ok": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Bytes valid", actual)
 }
 
@@ -893,10 +929,16 @@ func Test_Cov37_KeyVal_Serialize_Valid(t *testing.T) {
 	b, err := kv.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize valid", actual)
 }
 

@@ -141,10 +141,18 @@ func Test_Cov19_SimpleSlice_AsError(t *testing.T) {
 		hasDef := s.AsDefaultError() != nil
 
 		// Act
-		actual := args.Map{"nilDef": nilDef, "nilSep": nilSep, "hasDef": hasDef}
+		actual := args.Map{
+			"nilDef": nilDef,
+			"nilSep": nilSep,
+			"hasDef": hasDef,
+		}
 
 		// Assert
-		expected := args.Map{"nilDef": true, "nilSep": true, "hasDef": true}
+		expected := args.Map{
+			"nilDef": true,
+			"nilSep": true,
+			"hasDef": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns error -- AsError", actual)
 	})
 }
@@ -177,10 +185,16 @@ func Test_Cov19_SimpleSlice_FirstOrDefault_Empty(t *testing.T) {
 		s := corestr.New.SimpleSlice.Empty()
 
 		// Act
-		actual := args.Map{"first": s.FirstOrDefault(), "last": s.LastOrDefault()}
+		actual := args.Map{
+			"first": s.FirstOrDefault(),
+			"last": s.LastOrDefault(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "", "last": ""}
+		expected := args.Map{
+			"first": "",
+			"last": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns empty -- FirstOrDefault empty", actual)
 	})
 }
@@ -203,7 +217,12 @@ func Test_Cov19_SimpleSlice_SkipTake(t *testing.T) {
 		_ = s.Limit(1)
 
 		// Assert
-		expected := args.Map{"skip1": 2, "skip100": 0, "take2": 2, "take100": 3}
+		expected := args.Map{
+			"skip1": 2,
+			"skip100": 0,
+			"take2": 2,
+			"take100": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- SkipTake", actual)
 	})
 }
@@ -217,10 +236,16 @@ func Test_Cov19_SimpleSlice_CountFunc(t *testing.T) {
 		emptyCount := empty.CountFunc(func(i int, item string) bool { return true })
 
 		// Act
-		actual := args.Map{"count": count, "emptyCount": emptyCount}
+		actual := args.Map{
+			"count": count,
+			"emptyCount": emptyCount,
+		}
 
 		// Assert
-		expected := args.Map{"count": 2, "emptyCount": 0}
+		expected := args.Map{
+			"count": 2,
+			"emptyCount": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- CountFunc", actual)
 	})
 }
@@ -231,10 +256,16 @@ func Test_Cov19_SimpleSlice_IsContains(t *testing.T) {
 		s := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act
-		actual := args.Map{"has": s.IsContains("a"), "notHas": !s.IsContains("c")}
+		actual := args.Map{
+			"has": s.IsContains("a"),
+			"notHas": !s.IsContains("c"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "notHas": true}
+		expected := args.Map{
+			"has": true,
+			"notHas": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- IsContains", actual)
 	})
 }
@@ -245,10 +276,16 @@ func Test_Cov19_SimpleSlice_IndexOf(t *testing.T) {
 		s := corestr.New.SimpleSlice.Lines("a", "b", "c")
 
 		// Act
-		actual := args.Map{"found": s.IndexOf("b"), "notFound": s.IndexOf("z")}
+		actual := args.Map{
+			"found": s.IndexOf("b"),
+			"notFound": s.IndexOf("z"),
+		}
 
 		// Assert
-		expected := args.Map{"found": 1, "notFound": -1}
+		expected := args.Map{
+			"found": 1,
+			"notFound": -1,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- IndexOf", actual)
 	})
 }
@@ -374,10 +411,18 @@ func Test_Cov19_SimpleSlice_RemoveIndexes(t *testing.T) {
 		_, err2 := empty.RemoveIndexes(0)
 
 		// Act
-		actual := args.Map{"len": newS.Length(), "noErr": err == nil, "errEmpty": err2 != nil}
+		actual := args.Map{
+			"len": newS.Length(),
+			"noErr": err == nil,
+			"errEmpty": err2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "noErr": true, "errEmpty": true}
+		expected := args.Map{
+			"len": 2,
+			"noErr": true,
+			"errEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- RemoveIndexes", actual)
 	})
 }
@@ -459,10 +504,18 @@ func Test_Cov19_LinkedList_Basic(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 
 		// Act
-		actual := args.Map{"empty": ll.IsEmpty(), "emptyLock": ll.IsEmptyLock(), "len": ll.Length()}
+		actual := args.Map{
+			"empty": ll.IsEmpty(),
+			"emptyLock": ll.IsEmptyLock(),
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "emptyLock": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"emptyLock": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- basic", actual)
 	})
 }
@@ -489,10 +542,16 @@ func Test_Cov19_LinkedList_Add(t *testing.T) {
 		ll.PushBack("n")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "hasItems": ll.HasItems()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"hasItems": ll.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "m", "hasItems": true}
+		expected := args.Map{
+			"head": "m",
+			"hasItems": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- Add", actual)
 	})
 }
@@ -550,10 +609,16 @@ func Test_Cov19_LinkedList_ToCollection(t *testing.T) {
 		c2 := empty.ToCollection(0)
 
 		// Act
-		actual := args.Map{"len": c.Length(), "emptyLen": c2.Length()}
+		actual := args.Map{
+			"len": c.Length(),
+			"emptyLen": c2.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "emptyLen": 0}
+		expected := args.Map{
+			"len": 2,
+			"emptyLen": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- ToCollection", actual)
 	})
 }
@@ -614,7 +679,11 @@ func Test_Cov19_LinkedList_IndexAt(t *testing.T) {
 		_ = ll.SafeIndexAtLock(0)
 
 		// Assert
-		expected := args.Map{"found": true, "negNil": true, "bigNil": true}
+		expected := args.Map{
+			"found": true,
+			"negNil": true,
+			"bigNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- IndexAt", actual)
 	})
 }
@@ -627,10 +696,16 @@ func Test_Cov19_LinkedList_GetNextNodes(t *testing.T) {
 		all := ll.GetAllLinkedNodes()
 
 		// Act
-		actual := args.Map{"nextLen": len(nodes), "allLen": len(all)}
+		actual := args.Map{
+			"nextLen": len(nodes),
+			"allLen": len(all),
+		}
 
 		// Assert
-		expected := args.Map{"nextLen": 2, "allLen": 3}
+		expected := args.Map{
+			"nextLen": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- GetNextNodes", actual)
 	})
 }
@@ -642,10 +717,16 @@ func Test_Cov19_LinkedList_IsEquals(t *testing.T) {
 		ll2 := corestr.New.LinkedList.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"equal": ll1.IsEquals(ll2), "sensEqual": ll1.IsEqualsWithSensitive(ll2, false)}
+		actual := args.Map{
+			"equal": ll1.IsEquals(ll2),
+			"sensEqual": ll1.IsEqualsWithSensitive(ll2, false),
+		}
 
 		// Assert
-		expected := args.Map{"equal": true, "sensEqual": true}
+		expected := args.Map{
+			"equal": true,
+			"sensEqual": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- IsEquals", actual)
 	})
 }
@@ -721,7 +802,12 @@ func Test_Cov19_LinkedListNode_Methods(t *testing.T) {
 		_ = n.CreateLinkedList()
 
 		// Assert
-		expected := args.Map{"noNext": true, "str": true, "isEqual": true, "isSens": true}
+		expected := args.Map{
+			"noNext": true,
+			"str": true,
+			"isEqual": true,
+			"isSens": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedListNode returns correct value -- with args", actual)
 	})
 }
@@ -774,7 +860,13 @@ func Test_Cov19_KeyValueCollection(t *testing.T) {
 		_ = kv.AsJsonParseSelfInjector()
 
 		// Assert
-		expected := args.Map{"len": 2, "hasKey": true, "contains": true, "found": true, "val": "v1"}
+		expected := args.Map{
+			"len": 2,
+			"hasKey": true,
+			"contains": true,
+			"found": true,
+			"val": "v1",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValueCollection returns correct value -- with args", actual)
 	})
 }
@@ -1320,10 +1412,16 @@ func Test_Cov19_LinkedCollections(t *testing.T) {
 		_ = lc3.IsEqualsPtr(lc4)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "loopCount": count > 0}
+		actual := args.Map{
+			"len": lc.Length(),
+			"loopCount": count > 0,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "loopCount": true}
+		expected := args.Map{
+			"len": 1,
+			"loopCount": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedCollections returns correct value -- with args", actual)
 	})
 }
@@ -1336,7 +1434,10 @@ func Test_Cov19_CollectionsOfCollection(t *testing.T) {
 		coc.Add(corestr.New.Collection.Strings([]string{"c"}))
 
 		// Act
-		actual := args.Map{"len": coc.Length(), "allLen": coc.AllIndividualItemsLength()}
+		actual := args.Map{
+			"len": coc.Length(),
+			"allLen": coc.AllIndividualItemsLength(),
+		}
 		_ = coc.List(0)
 		_ = coc.ToCollection()
 		_ = coc.Items()
@@ -1350,7 +1451,10 @@ func Test_Cov19_CollectionsOfCollection(t *testing.T) {
 		_ = coc.AsJsonMarshaller()
 
 		// Assert
-		expected := args.Map{"len": 2, "allLen": 3}
+		expected := args.Map{
+			"len": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "CollectionsOfCollection returns correct value -- with args", actual)
 	})
 }
@@ -1419,10 +1523,16 @@ func Test_Cov19_NonChainedLinkedListNodes(t *testing.T) {
 		_ = nc.ToChainedNodes()
 
 		// Act
-		actual := args.Map{"len": nc.Length(), "notEmpty": !nc.IsEmpty()}
+		actual := args.Map{
+			"len": nc.Length(),
+			"notEmpty": !nc.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "notEmpty": true}
+		expected := args.Map{
+			"len": 2,
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NonChainedLinkedListNodes returns correct value -- with args", actual)
 	})
 }
@@ -1446,10 +1556,16 @@ func Test_Cov19_NonChainedLinkedCollectionNodes(t *testing.T) {
 		_ = nc.ToChainedNodes()
 
 		// Act
-		actual := args.Map{"len": nc.Length(), "notEmpty": !nc.IsEmpty()}
+		actual := args.Map{
+			"len": nc.Length(),
+			"notEmpty": !nc.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "notEmpty": true}
+		expected := args.Map{
+			"len": 2,
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NonChainedLinkedCollectionNodes returns correct value -- with args", actual)
 	})
 }

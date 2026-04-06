@@ -178,10 +178,16 @@ func Test_Seg2_Collection_Take(t *testing.T) {
 		taken := c.Take(2)
 
 		// Act
-		actual := args.Map{"len": taken.Length(), "first": taken.First()}
+		actual := args.Map{
+			"len": taken.Length(),
+			"first": taken.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Take 2 from 4 -- returns first 2", actual)
 	})
 }
@@ -226,10 +232,16 @@ func Test_Seg2_Collection_Skip(t *testing.T) {
 		skipped := c.Skip(2)
 
 		// Act
-		actual := args.Map{"len": skipped.Length(), "first": skipped.First()}
+		actual := args.Map{
+			"len": skipped.Length(),
+			"first": skipped.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "c"}
+		expected := args.Map{
+			"len": 2,
+			"first": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Skip 2 from 4 -- returns last 2", actual)
 	})
 }
@@ -277,10 +289,16 @@ func Test_Seg2_Collection_Reverse_Many(t *testing.T) {
 		c.Reverse()
 
 		// Act
-		actual := args.Map{"first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "d", "last": "a"}
+		expected := args.Map{
+			"first": "d",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Reverse 4 items -- first/last swapped", actual)
 	})
 }
@@ -293,10 +311,16 @@ func Test_Seg2_Collection_Reverse_Two(t *testing.T) {
 		c.Reverse()
 
 		// Act
-		actual := args.Map{"first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "b", "last": "a"}
+		expected := args.Map{
+			"first": "b",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Reverse 2 items -- swapped", actual)
 	})
 }
@@ -489,10 +513,16 @@ func Test_Seg2_Collection_ChainRemoveAt(t *testing.T) {
 		c.ChainRemoveAt(1)
 
 		// Act
-		actual := args.Map{"len": c.Length(), "second": c.IndexAt(1)}
+		actual := args.Map{
+			"len": c.Length(),
+			"second": c.IndexAt(1),
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "second": "c"}
+		expected := args.Map{
+			"len": 3,
+			"second": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "ChainRemoveAt -- middle removed", actual)
 	})
 }
@@ -507,10 +537,18 @@ func Test_Seg2_Collection_RemoveItemsIndexes(t *testing.T) {
 		c.RemoveItemsIndexes(false, 1, 3)
 
 		// Act
-		actual := args.Map{"len": c.Length(), "first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"len": c.Length(),
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a", "last": "c"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveItemsIndexes -- remove indexes 1,3", actual)
 	})
 }

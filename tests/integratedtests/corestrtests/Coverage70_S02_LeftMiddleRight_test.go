@@ -17,10 +17,20 @@ func Test_Cov70_InvalidLeftMiddleRightNoMessage(t *testing.T) {
 		lmr := corestr.InvalidLeftMiddleRightNoMessage()
 
 		// Act
-		actual := args.Map{"isValid": lmr.IsValid, "left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"isValid": lmr.IsValid,
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"isValid": false, "left": "", "middle": "", "right": ""}
+		expected := args.Map{
+			"isValid": false,
+			"left": "",
+			"middle": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftMiddleRightNoMessage returns invalid -- no message", actual)
 	})
 }
@@ -31,10 +41,16 @@ func Test_Cov70_InvalidLeftMiddleRight(t *testing.T) {
 		lmr := corestr.InvalidLeftMiddleRight("err msg")
 
 		// Act
-		actual := args.Map{"isValid": lmr.IsValid, "hasMsg": lmr.Message != ""}
+		actual := args.Map{
+			"isValid": lmr.IsValid,
+			"hasMsg": lmr.Message != "",
+		}
 
 		// Assert
-		expected := args.Map{"isValid": false, "hasMsg": true}
+		expected := args.Map{
+			"isValid": false,
+			"hasMsg": true,
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftMiddleRight returns invalid -- with message", actual)
 	})
 }
@@ -45,10 +61,20 @@ func Test_Cov70_NewLeftMiddleRight(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 
 		// Act
-		actual := args.Map{"isValid": lmr.IsValid, "left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"isValid": lmr.IsValid,
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"isValid": true, "left": "a", "middle": "b", "right": "c"}
+		expected := args.Map{
+			"isValid": true,
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "NewLeftMiddleRight returns valid -- three strings", actual)
 	})
 }
@@ -415,10 +441,16 @@ func Test_Cov70_LMR_IsAll(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 
 		// Act
-		actual := args.Map{"match": lmr.IsAll("a", "b", "c"), "noMatch": lmr.IsAll("a", "x", "c")}
+		actual := args.Map{
+			"match": lmr.IsAll("a", "b", "c"),
+			"noMatch": lmr.IsAll("a", "x", "c"),
+		}
 
 		// Assert
-		expected := args.Map{"match": true, "noMatch": false}
+		expected := args.Map{
+			"match": true,
+			"noMatch": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAll returns correct -- match and mismatch", actual)
 	})
 }
@@ -429,10 +461,16 @@ func Test_Cov70_LMR_Is(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 
 		// Act
-		actual := args.Map{"match": lmr.Is("a", "c"), "noMatch": lmr.Is("a", "x")}
+		actual := args.Map{
+			"match": lmr.Is("a", "c"),
+			"noMatch": lmr.Is("a", "x"),
+		}
 
 		// Assert
-		expected := args.Map{"match": true, "noMatch": false}
+		expected := args.Map{
+			"match": true,
+			"noMatch": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Is returns correct -- left+right match and mismatch", actual)
 	})
 }
@@ -444,10 +482,20 @@ func Test_Cov70_LMR_Clone(t *testing.T) {
 		c := lmr.Clone()
 
 		// Act
-		actual := args.Map{"left": c.Left, "middle": c.Middle, "right": c.Right, "notSame": c != lmr}
+		actual := args.Map{
+			"left": c.Left,
+			"middle": c.Middle,
+			"right": c.Right,
+			"notSame": c != lmr,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c", "notSame": true}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+			"notSame": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone returns copy -- valid LMR", actual)
 	})
 }
@@ -459,10 +507,18 @@ func Test_Cov70_LMR_ToLeftRight(t *testing.T) {
 		lr := lmr.ToLeftRight()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "isValid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"isValid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "c", "isValid": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "c",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ToLeftRight returns LR -- drops middle", actual)
 	})
 }
@@ -474,10 +530,18 @@ func Test_Cov70_LMR_Clear(t *testing.T) {
 		lmr.Clear()
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "middle": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"middle": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Clear zeroes fields -- valid LMR", actual)
 	})
 }
@@ -504,10 +568,18 @@ func Test_Cov70_LMR_Dispose(t *testing.T) {
 		lmr.Dispose()
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "middle": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"middle": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Dispose clears fields -- valid LMR", actual)
 	})
 }

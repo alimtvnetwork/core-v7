@@ -164,10 +164,16 @@ func Test_Cov_Assert_StringsToWithSpaceLines(t *testing.T) {
 	empty := msgcreator.Assert.StringsToWithSpaceLines(2)
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(empty)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(empty),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsToWithSpaceLines returns non-empty -- with args", actual)
 }
 
@@ -183,9 +189,15 @@ func Test_Cov_Assert_StringsToSpaceStringUsingFunc(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(empty)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(empty),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsToSpaceStringUsingFunc returns correct value -- with args", actual)
 }

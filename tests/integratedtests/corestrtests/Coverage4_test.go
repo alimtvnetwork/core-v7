@@ -40,10 +40,18 @@ func Test_Cov4_Hashmap_Remove(t *testing.T) {
 		hm.Remove("k1")
 
 		// Act
-		actual := args.Map{"length": hm.Length(), "hasK1": hm.Has("k1"), "hasK2": hm.Has("k2")}
+		actual := args.Map{
+			"length": hm.Length(),
+			"hasK1": hm.Has("k1"),
+			"hasK2": hm.Has("k2"),
+		}
 
 		// Assert
-		expected := args.Map{"length": 1, "hasK1": false, "hasK2": true}
+		expected := args.Map{
+			"length": 1,
+			"hasK1": false,
+			"hasK2": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap Remove deletes key -- removed k1", actual)
 	})
 }
@@ -72,10 +80,18 @@ func Test_Cov4_Hashmap_Get(t *testing.T) {
 		_, notFound := hm.Get("missing")
 
 		// Act
-		actual := args.Map{"val": val, "found": found, "notFound": notFound}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+			"notFound": notFound,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v", "found": true, "notFound": false}
+		expected := args.Map{
+			"val": "v",
+			"found": true,
+			"notFound": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap Get returns expected -- hit and miss", actual)
 	})
 }
@@ -89,10 +105,16 @@ func Test_Cov4_Collection_ListStrings(t *testing.T) {
 		strs := col.ListStrings()
 
 		// Act
-		actual := args.Map{"len": len(strs), "first": strs[0]}
+		actual := args.Map{
+			"len": len(strs),
+			"first": strs[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "x"}
+		expected := args.Map{
+			"len": 2,
+			"first": "x",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection ListStrings returns expected -- 2 items", actual)
 	})
 }
@@ -119,10 +141,16 @@ func Test_Cov4_Collection_First_Last(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 		// Act
-		actual := args.Map{"first": col.First(), "last": col.Last()}
+		actual := args.Map{
+			"first": col.First(),
+			"last": col.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection First/Last returns expected -- 3 items", actual)
 	})
 }
@@ -240,7 +268,10 @@ func Test_Cov4_CharHashsetMap_AddAndHas(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isEmpty": false, "length": 2}
+		expected := args.Map{
+			"isEmpty": false,
+			"length": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "CharHashsetMap Add returns expected -- 2 chars", actual)
 	})
 }
@@ -255,10 +286,16 @@ func Test_Cov4_CharCollectionMap_AddAndGet(t *testing.T) {
 		ccm.Add("val2")
 
 		// Act
-		actual := args.Map{"isEmpty": ccm.IsEmpty(), "length": ccm.Length()}
+		actual := args.Map{
+			"isEmpty": ccm.IsEmpty(),
+			"length": ccm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": false, "length": 1}
+		expected := args.Map{
+			"isEmpty": false,
+			"length": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "CharCollectionMap Add returns expected -- 1 char", actual)
 	})
 }
@@ -273,10 +310,16 @@ func Test_Cov4_HashsetsCollection_Add(t *testing.T) {
 		hc.Add(hs)
 
 		// Act
-		actual := args.Map{"isEmpty": hc.IsEmpty(), "length": hc.Length()}
+		actual := args.Map{
+			"isEmpty": hc.IsEmpty(),
+			"length": hc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": false, "length": 1}
+		expected := args.Map{
+			"isEmpty": false,
+			"length": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollection Add returns expected -- 1 hashset", actual)
 	})
 }
@@ -291,10 +334,16 @@ func Test_Cov4_CollectionsOfCollection_Add(t *testing.T) {
 		cc.Add(col)
 
 		// Act
-		actual := args.Map{"isEmpty": cc.IsEmpty(), "length": cc.Length()}
+		actual := args.Map{
+			"isEmpty": cc.IsEmpty(),
+			"length": cc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": false, "length": 1}
+		expected := args.Map{
+			"isEmpty": false,
+			"length": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "CollectionsOfCollection Add returns expected -- 1 collection", actual)
 	})
 }
@@ -329,7 +378,10 @@ func Test_Cov4_LeftMiddleRight_HasSafe(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"hasSafe": true, "isAll": true}
+		expected := args.Map{
+			"hasSafe": true,
+			"isAll": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRight HasSafe/IsAll returns true -- all set", actual)
 	})
 }
@@ -434,7 +486,11 @@ func Test_Cov4_SimpleSlice_FirstOrDefault(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"first": "a", "emptyDefault": "", "lastOrDef": "b"}
+		expected := args.Map{
+			"first": "a",
+			"emptyDefault": "",
+			"lastOrDef": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- FirstOrDefault/LastOrDefault returns expected", actual)
 	})
 }
@@ -457,7 +513,11 @@ func Test_Cov4_SimpleSlice_SafeAt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"hasIdx0": true, "hasIdx99": false, "hasIdxNeg": false}
+		expected := args.Map{
+			"hasIdx0": true,
+			"hasIdx99": false,
+			"hasIdxNeg": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice HasIndex returns expected -- valid and out of bounds", actual)
 	})
 }

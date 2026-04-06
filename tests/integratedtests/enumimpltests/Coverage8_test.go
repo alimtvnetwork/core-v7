@@ -116,10 +116,16 @@ func Test_Cov8_BasicByte_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bb.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(0), "noErr": true}
+	expected := args.Map{
+		"val": byte(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -129,10 +135,16 @@ func Test_Cov8_BasicByte_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bb.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(0), "noErr": true}
+	expected := args.Map{
+		"val": byte(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -207,10 +219,16 @@ func Test_Cov8_BasicString_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bs.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "X", "noErr": true}
+	expected := args.Map{
+		"val": "X",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -220,10 +238,16 @@ func Test_Cov8_BasicString_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bs.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "X", "noErr": true}
+	expected := args.Map{
+		"val": "X",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -271,10 +295,16 @@ func Test_Cov8_BasicStringCreator_CreateUsingStringersSpread(t *testing.T) {
 	bs := enumimpl.New.BasicString.CreateUsingNamesSpread("TestEnum", "Alpha", "Beta", "Gamma")
 
 	// Act
-	actual := args.Map{"len": bs.Length(), "hasAlpha": bs.IsValidRange("Alpha")}
+	actual := args.Map{
+		"len": bs.Length(),
+		"hasAlpha": bs.IsValidRange("Alpha"),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "hasAlpha": true}
+	expected := args.Map{
+		"len": 3,
+		"hasAlpha": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateUsingNamesSpread returns valid enum -- three names", actual)
 }
 
@@ -383,10 +413,16 @@ func Test_Cov8_DynamicMap_AddNewOnly_Existing(t *testing.T) {
 	added := dm.AddNewOnly("a", 2)
 
 	// Act
-	actual := args.Map{"added": added, "val": dm["a"]}
+	actual := args.Map{
+		"added": added,
+		"val": dm["a"],
+	}
 
 	// Assert
-	expected := args.Map{"added": false, "val": 1}
+	expected := args.Map{
+		"added": false,
+		"val": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AddNewOnly returns false -- key exists", actual)
 }
 

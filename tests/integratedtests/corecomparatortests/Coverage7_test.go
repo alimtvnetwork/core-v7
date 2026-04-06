@@ -58,7 +58,10 @@ func Test_Cov7_IsLeftLessEqualLogically_Greater(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"greater": false, "notEq": false}
+	expected := args.Map{
+		"greater": false,
+		"notEq": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsLeftLessEqualLogically non-less values -- false", actual)
 }
 
@@ -72,7 +75,10 @@ func Test_Cov7_IsLeftGreaterEqualLogically_Less(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"less": false, "notEq": false}
+	expected := args.Map{
+		"less": false,
+		"notEq": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsLeftGreaterEqualLogically non-greater values -- false", actual)
 }
 

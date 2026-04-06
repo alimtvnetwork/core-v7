@@ -31,10 +31,18 @@ func Test_Cov9_BaseLinesValidators_LinesValidatorsLength_Empty(t *testing.T) {
 	blv := &corevalidator.BaseLinesValidators{}
 
 	// Act
-	actual := args.Map{"len": blv.LinesValidatorsLength(), "empty": blv.IsEmptyLinesValidators(), "has": blv.HasLinesValidators()}
+	actual := args.Map{
+		"len": blv.LinesValidatorsLength(),
+		"empty": blv.IsEmptyLinesValidators(),
+		"has": blv.HasLinesValidators(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true, "has": false}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators returns empty -- empty", actual)
 }
 
@@ -47,10 +55,18 @@ func Test_Cov9_BaseLinesValidators_WithItems(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"len": blv.LinesValidatorsLength(), "empty": blv.IsEmptyLinesValidators(), "has": blv.HasLinesValidators()}
+	actual := args.Map{
+		"len": blv.LinesValidatorsLength(),
+		"empty": blv.IsEmptyLinesValidators(),
+		"has": blv.HasLinesValidators(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "empty": false, "has": true}
+	expected := args.Map{
+		"len": 1,
+		"empty": false,
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseLinesValidators returns non-empty -- with items", actual)
 }
 
@@ -60,10 +76,16 @@ func Test_Cov9_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
 	lv := blv.ToLinesValidators()
 
 	// Act
-	actual := args.Map{"notNil": lv != nil, "len": lv.Length()}
+	actual := args.Map{
+		"notNil": lv != nil,
+		"len": lv.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 0}
+	expected := args.Map{
+		"notNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToLinesValidators returns empty -- empty", actual)
 }
 
@@ -109,10 +131,16 @@ func Test_Cov9_BaseValidatorCoreCondition_CreateDefault(t *testing.T) {
 	result := bv.ValidatorCoreConditionDefault()
 
 	// Act
-	actual := args.Map{"trim": result.IsTrimCompare, "notNil": bv.ValidatorCoreCondition != nil}
+	actual := args.Map{
+		"trim": result.IsTrimCompare,
+		"notNil": bv.ValidatorCoreCondition != nil,
+	}
 
 	// Assert
-	expected := args.Map{"trim": false, "notNil": true}
+	expected := args.Map{
+		"trim": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ValidatorCoreConditionDefault returns non-empty -- new default", actual)
 }
 
@@ -125,10 +153,18 @@ func Test_Cov9_LinesValidators_NilReceiver(t *testing.T) {
 	var lv *corevalidator.LinesValidators
 
 	// Act
-	actual := args.Map{"len": lv.Length(), "count": lv.Count(), "empty": lv.IsEmpty()}
+	actual := args.Map{
+		"len": lv.Length(),
+		"count": lv.Count(),
+		"empty": lv.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "count": 0, "empty": true}
+	expected := args.Map{
+		"len": 0,
+		"count": 0,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LinesValidators returns nil -- nil receiver", actual)
 }
 
@@ -137,10 +173,20 @@ func Test_Cov9_LinesValidators_NewAndBasicOps(t *testing.T) {
 	lv := corevalidator.NewLinesValidators(5)
 
 	// Act
-	actual := args.Map{"len": lv.Length(), "empty": lv.IsEmpty(), "hasAny": lv.HasAnyItem(), "lastIdx": lv.LastIndex()}
+	actual := args.Map{
+		"len": lv.Length(),
+		"empty": lv.IsEmpty(),
+		"hasAny": lv.HasAnyItem(),
+		"lastIdx": lv.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true, "hasAny": false, "lastIdx": -1}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+		"hasAny": false,
+		"lastIdx": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "NewLinesValidators returns empty -- empty", actual)
 }
 
@@ -150,10 +196,22 @@ func Test_Cov9_LinesValidators_Add(t *testing.T) {
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal}})
 
 	// Act
-	actual := args.Map{"len": lv.Length(), "count": lv.Count(), "hasAny": lv.HasAnyItem(), "hasIdx0": lv.HasIndex(0), "hasIdx5": lv.HasIndex(5)}
+	actual := args.Map{
+		"len": lv.Length(),
+		"count": lv.Count(),
+		"hasAny": lv.HasAnyItem(),
+		"hasIdx0": lv.HasIndex(0),
+		"hasIdx5": lv.HasIndex(5),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "count": 1, "hasAny": true, "hasIdx0": true, "hasIdx5": false}
+	expected := args.Map{
+		"len": 1,
+		"count": 1,
+		"hasAny": true,
+		"hasIdx0": true,
+		"hasIdx5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LinesValidators returns non-empty -- Add", actual)
 }
 
@@ -243,10 +301,16 @@ func Test_Cov9_LinesValidators_IsMatchText_Match(t *testing.T) {
 	lv.Add(corevalidator.LineValidator{TextValidator: corevalidator.TextValidator{Search: "hello", SearchAs: stringcompareas.Equal}})
 
 	// Act
-	actual := args.Map{"match": lv.IsMatchText("hello", true), "noMatch": lv.IsMatchText("world", true)}
+	actual := args.Map{
+		"match": lv.IsMatchText("hello", true),
+		"noMatch": lv.IsMatchText("world", true),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatchText returns non-empty -- with validator", actual)
 }
 
@@ -495,10 +559,16 @@ func Test_Cov9_LineValidator_IsMatch_LineMatches(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"match": lv.IsMatch(5, "hello", true), "lineMismatch": lv.IsMatch(3, "hello", true)}
+	actual := args.Map{
+		"match": lv.IsMatch(5, "hello", true),
+		"lineMismatch": lv.IsMatch(3, "hello", true),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "lineMismatch": false}
+	expected := args.Map{
+		"match": true,
+		"lineMismatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LineValidator returns non-empty -- IsMatch line matches", actual)
 }
 
@@ -1505,10 +1575,18 @@ func Test_Cov9_Vars_DefaultDisabledCoreCondition(t *testing.T) {
 	c := corevalidator.DefaultDisabledCoreCondition
 
 	// Act
-	actual := args.Map{"trim": c.IsTrimCompare, "unique": c.IsUniqueWordOnly, "split": c.IsSplitByWhitespace()}
+	actual := args.Map{
+		"trim": c.IsTrimCompare,
+		"unique": c.IsUniqueWordOnly,
+		"split": c.IsSplitByWhitespace(),
+	}
 
 	// Assert
-	expected := args.Map{"trim": false, "unique": false, "split": false}
+	expected := args.Map{
+		"trim": false,
+		"unique": false,
+		"split": false,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultDisabledCoreCondition returns correct value -- with args", actual)
 }
 
@@ -1529,10 +1607,18 @@ func Test_Cov9_Vars_DefaultSortTrimCoreCondition(t *testing.T) {
 	c := corevalidator.DefaultSortTrimCoreCondition
 
 	// Act
-	actual := args.Map{"trim": c.IsTrimCompare, "nonEmpty": c.IsNonEmptyWhitespace, "sort": c.IsSortStringsBySpace}
+	actual := args.Map{
+		"trim": c.IsTrimCompare,
+		"nonEmpty": c.IsNonEmptyWhitespace,
+		"sort": c.IsSortStringsBySpace,
+	}
 
 	// Assert
-	expected := args.Map{"trim": true, "nonEmpty": true, "sort": true}
+	expected := args.Map{
+		"trim": true,
+		"nonEmpty": true,
+		"sort": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultSortTrimCoreCondition returns correct value -- with args", actual)
 }
 
@@ -1541,10 +1627,20 @@ func Test_Cov9_Vars_DefaultUniqueWordsCoreCondition(t *testing.T) {
 	c := corevalidator.DefaultUniqueWordsCoreCondition
 
 	// Act
-	actual := args.Map{"trim": c.IsTrimCompare, "unique": c.IsUniqueWordOnly, "nonEmpty": c.IsNonEmptyWhitespace, "sort": c.IsSortStringsBySpace}
+	actual := args.Map{
+		"trim": c.IsTrimCompare,
+		"unique": c.IsUniqueWordOnly,
+		"nonEmpty": c.IsNonEmptyWhitespace,
+		"sort": c.IsSortStringsBySpace,
+	}
 
 	// Assert
-	expected := args.Map{"trim": true, "unique": true, "nonEmpty": true, "sort": true}
+	expected := args.Map{
+		"trim": true,
+		"unique": true,
+		"nonEmpty": true,
+		"sort": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultUniqueWordsCoreCondition returns correct value -- with args", actual)
 }
 
@@ -1553,10 +1649,16 @@ func Test_Cov9_Vars_EmptyValidator(t *testing.T) {
 	ev := corevalidator.EmptyValidator
 
 	// Act
-	actual := args.Map{"search": ev.Search, "match": ev.IsMatch("", true)}
+	actual := args.Map{
+		"search": ev.Search,
+		"match": ev.IsMatch("", true),
+	}
 
 	// Assert
-	expected := args.Map{"search": "", "match": true}
+	expected := args.Map{
+		"search": "",
+		"match": true,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyValidator returns empty -- with args", actual)
 }
 

@@ -51,7 +51,12 @@ func Test_Cov9_AnyCollection_Add(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true, "hasIdx": true, "noIdx": false}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+		"hasIdx": true,
+		"noIdx": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Add", actual)
 }
 
@@ -150,7 +155,10 @@ func Test_Cov9_AnyCollection_Items(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"itemsLen": 1, "emptyLen": 0}
+	expected := args.Map{
+		"itemsLen": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Items", actual)
 }
 
@@ -180,7 +188,10 @@ func Test_Cov9_AnyCollection_AtAsDynamic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "isValid": true}
+	expected := args.Map{
+		"val": "hello",
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- AtAsDynamic", actual)
 }
 
@@ -260,7 +271,11 @@ func Test_Cov9_AnyCollection_RemoveAt(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"ok": true, "fail": false, "newLen": 2}
+	expected := args.Map{
+		"ok": true,
+		"fail": false,
+		"newLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- RemoveAt", actual)
 }
 
@@ -279,7 +294,10 @@ func Test_Cov9_AnyCollection_DynamicItems(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"dynLen": 1, "emptyLen": 0}
+	expected := args.Map{
+		"dynLen": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- DynamicItems", actual)
 }
 
@@ -298,7 +316,10 @@ func Test_Cov9_AnyCollection_DynamicCollection(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"dcLen": 1, "emptyLen": 0}
+	expected := args.Map{
+		"dcLen": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- DynamicCollection", actual)
 }
 
@@ -461,7 +482,11 @@ func Test_Cov9_AnyCollection_ListStrings(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"strsLen": 2, "strsFieldLen": 2, "strsPtrLen": 2}
+	expected := args.Map{
+		"strsLen": 2,
+		"strsFieldLen": 2,
+		"strsPtrLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- ListStrings", actual)
 }
 
@@ -483,7 +508,11 @@ func Test_Cov9_AnyCollection_Strings(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"strsLen": 2, "strNotEmpty": true, "emptyLen": 0}
+	expected := args.Map{
+		"strsLen": 2,
+		"strNotEmpty": true,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Strings", actual)
 }
 
@@ -535,7 +564,11 @@ func Test_Cov9_AnyCollection_JsonResultsCollection(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"rcNotNil": true, "rpcNotNil": true, "emptyRCNotNil": true}
+	expected := args.Map{
+		"rcNotNil": true,
+		"rpcNotNil": true,
+		"emptyRCNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- JsonResultsCollection", actual)
 }
 
@@ -555,7 +588,11 @@ func Test_Cov9_AnyCollection_Paging(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"pages": 3, "pagedLen": 3, "singleLen": 2}
+	expected := args.Map{
+		"pages": 3,
+		"pagedLen": 3,
+		"singleLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Paging", actual)
 }
 
@@ -575,7 +612,11 @@ func Test_Cov9_AnyCollection_Paging_SmallSet(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"zeroPage": 0, "pagedSelf": 1, "singleSelf": 1}
+	expected := args.Map{
+		"zeroPage": 0,
+		"pagedSelf": 1,
+		"singleSelf": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Paging small set", actual)
 }
 
@@ -706,7 +747,10 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 2}
+	expected := args.Map{
+		"errNil": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation valid", actual)
 }
 
@@ -723,7 +767,10 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_TypeMismatch(t *testi
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation mismatch stops", actual)
 }
 
@@ -740,7 +787,10 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *te
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns error -- AddAnyItemsWithTypeValidation continueOnError", actual)
 }
 
@@ -751,10 +801,16 @@ func Test_Cov9_AnyCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.T) {
 	err := ac.AddAnyItemsWithTypeValidation(false, false, strType)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "len": ac.Length()}
+	actual := args.Map{
+		"errNil": err == nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 0}
+	expected := args.Map{
+		"errNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- AddAnyItemsWithTypeValidation empty", actual)
 }
 
@@ -779,10 +835,16 @@ func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	err := ac.AddAnyWithTypeValidation(false, strType, "hello")
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "len": ac.Length()}
+	actual := args.Map{
+		"errNil": err == nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 1}
+	expected := args.Map{
+		"errNil": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyWithTypeValidation valid", actual)
 }
 
@@ -793,10 +855,16 @@ func Test_Cov9_AnyCollection_AddAnyWithTypeValidation_TypeMismatch(t *testing.T)
 	err := ac.AddAnyWithTypeValidation(false, strType, 42)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": ac.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyWithTypeValidation mismatch", actual)
 }
 
@@ -817,7 +885,10 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Valid(t *testing.
 	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 2}
+	expected := args.Map{
+		"errNil": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation valid", actual)
 }
 
@@ -834,7 +905,10 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Mismatch(t *testi
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation mismatch", actual)
 }
 
@@ -851,7 +925,10 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns error -- AddAnyItemsWithTypeValidation continueOnError", actual)
 }
 
@@ -862,10 +939,16 @@ func Test_Cov9_DynamicCollection_AddAnyItemsWithTypeValidation_Empty(t *testing.
 	err := dc.AddAnyItemsWithTypeValidation(false, false, strType)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "len": dc.Length()}
+	actual := args.Map{
+		"errNil": err == nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 0}
+	expected := args.Map{
+		"errNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- AddAnyItemsWithTypeValidation empty", actual)
 }
 
@@ -876,10 +959,16 @@ func Test_Cov9_DynamicCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	err := dc.AddAnyWithTypeValidation(false, strType, "hello")
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "len": dc.Length()}
+	actual := args.Map{
+		"errNil": err == nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "len": 1}
+	expected := args.Map{
+		"errNil": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyWithTypeValidation valid", actual)
 }
 
@@ -938,7 +1027,10 @@ func Test_Cov9_MapAnyItems_IsRawEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsRawEqual", actual)
 }
 
@@ -1047,7 +1139,10 @@ func Test_Cov9_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"sortedFirst": "a", "sortedLen": 2}
+	expected := args.Map{
+		"sortedFirst": "a",
+		"sortedLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- AllKeysSorted", actual)
 }
 
@@ -1062,7 +1157,10 @@ func Test_Cov9_MapAnyItemDiff_IsRawEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- IsRawEqual", actual)
 }
 
@@ -1077,7 +1175,10 @@ func Test_Cov9_MapAnyItemDiff_HasAnyChanges(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"changed": true, "notChanged": false}
+	expected := args.Map{
+		"changed": true,
+		"notChanged": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- HasAnyChanges", actual)
 }
 
@@ -1113,10 +1214,16 @@ func Test_Cov9_MapAnyItemDiff_MapAnyItems(t *testing.T) {
 	m := diff.MapAnyItems()
 
 	// Act
-	actual := args.Map{"len": m.Length(), "hasA": m.HasKey("a")}
+	actual := args.Map{
+		"len": m.Length(),
+		"hasA": m.HasKey("a"),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasA": true}
+	expected := args.Map{
+		"len": 1,
+		"hasA": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- MapAnyItems", actual)
 }
 
@@ -1160,7 +1267,10 @@ func Test_Cov9_MapAnyItemDiff_Clear(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"clearedLen": 0, "nilClearedLen": 0}
+	expected := args.Map{
+		"clearedLen": 0,
+		"nilClearedLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Clear", actual)
 }
 
@@ -1179,7 +1289,11 @@ func Test_Cov9_MapAnyItemDiff_Json(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jsonOk": true, "ptrNotNil": true, "prettyNE": true}
+	expected := args.Map{
+		"jsonOk": true,
+		"ptrNotNil": true,
+		"prettyNE": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- Json", actual)
 }
 
@@ -1309,6 +1423,9 @@ func Test_Cov9_AnyCollection_ReflectSetAt(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "target": "hello"}
+	expected := args.Map{
+		"errNil": true,
+		"target": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- ReflectSetAt", actual)
 }

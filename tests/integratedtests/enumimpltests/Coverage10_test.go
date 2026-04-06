@@ -97,10 +97,16 @@ func Test_Cov10_DiffLeftRight_SpecificFullString(t *testing.T) {
 	l, r := dlr.SpecificFullString()
 
 	// Act
-	actual := args.Map{"lNotEmpty": l != "", "rNotEmpty": r != ""}
+	actual := args.Map{
+		"lNotEmpty": l != "",
+		"rNotEmpty": r != "",
+	}
 
 	// Assert
-	expected := args.Map{"lNotEmpty": true, "rNotEmpty": true}
+	expected := args.Map{
+		"lNotEmpty": true,
+		"rNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SpecificFullString returns non-empty -- both sides", actual)
 }
 
@@ -110,10 +116,18 @@ func Test_Cov10_DiffLeftRight_Types(t *testing.T) {
 	l, r := dlr.Types()
 
 	// Act
-	actual := args.Map{"lNotNil": l != nil, "rNotNil": r != nil, "different": l != r}
+	actual := args.Map{
+		"lNotNil": l != nil,
+		"rNotNil": r != nil,
+		"different": l != r,
+	}
 
 	// Assert
-	expected := args.Map{"lNotNil": true, "rNotNil": true, "different": true}
+	expected := args.Map{
+		"lNotNil": true,
+		"rNotNil": true,
+		"different": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Types returns reflect types -- different types", actual)
 }
 
@@ -138,10 +152,18 @@ func Test_Cov10_DynamicMap_ConcatNew_OverrideExisting(t *testing.T) {
 	result := dm.ConcatNew(true, other)
 
 	// Act
-	actual := args.Map{"b": result["b"], "c": result["c"], "a": result["a"]}
+	actual := args.Map{
+		"b": result["b"],
+		"c": result["c"],
+		"a": result["a"],
+	}
 
 	// Assert
-	expected := args.Map{"b": 99, "c": 3, "a": 1}
+	expected := args.Map{
+		"b": 99,
+		"c": 3,
+		"a": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNew overrides existing -- b becomes 99", actual)
 }
 
@@ -152,10 +174,16 @@ func Test_Cov10_DynamicMap_ConcatNew_NoOverride(t *testing.T) {
 	result := dm.ConcatNew(false, other)
 
 	// Act
-	actual := args.Map{"b": result["b"], "c": result["c"]}
+	actual := args.Map{
+		"b": result["b"],
+		"c": result["c"],
+	}
 
 	// Assert
-	expected := args.Map{"b": 2, "c": 3}
+	expected := args.Map{
+		"b": 2,
+		"c": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNew no override -- b stays 2", actual)
 }
 
@@ -213,10 +241,16 @@ func Test_Cov10_DynamicMap_Serialize(t *testing.T) {
 	b, err := dm.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns json bytes -- single item", actual)
 }
 
@@ -314,10 +348,16 @@ func Test_Cov10_DynamicMap_KeyValue_Found(t *testing.T) {
 	val, found := dm.KeyValue("x")
 
 	// Act
-	actual := args.Map{"val": val, "found": found}
+	actual := args.Map{
+		"val": val,
+		"found": found,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "found": true}
+	expected := args.Map{
+		"val": 42,
+		"found": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValue found -- existing key", actual)
 }
 
@@ -340,10 +380,16 @@ func Test_Cov10_DynamicMap_KeyValueString_NotFound(t *testing.T) {
 	val, found := dm.KeyValueString("z")
 
 	// Act
-	actual := args.Map{"val": val, "found": found}
+	actual := args.Map{
+		"val": val,
+		"found": found,
+	}
 
 	// Assert
-	expected := args.Map{"val": "", "found": false}
+	expected := args.Map{
+		"val": "",
+		"found": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueString returns empty -- missing key", actual)
 }
 
@@ -409,10 +455,18 @@ func Test_Cov10_DynamicMap_AddOrUpdate(t *testing.T) {
 	isUpdate := dm.AddOrUpdate("a", 99)
 
 	// Act
-	actual := args.Map{"isNew": isNew, "isUpdate": isUpdate, "aVal": dm["a"]}
+	actual := args.Map{
+		"isNew": isNew,
+		"isUpdate": isUpdate,
+		"aVal": dm["a"],
+	}
 
 	// Assert
-	expected := args.Map{"isNew": true, "isUpdate": false, "aVal": 99}
+	expected := args.Map{
+		"isNew": true,
+		"isUpdate": false,
+		"aVal": 99,
+	}
 	expected.ShouldBeEqual(t, 0, "AddOrUpdate new then update -- correct flags", actual)
 }
 
@@ -605,10 +659,16 @@ func Test_Cov10_DynamicMap_DiffRawLeftRight_BothNil(t *testing.T) {
 	l, r := dm.DiffRawLeftRightUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, nil)
 
 	// Act
-	actual := args.Map{"lLen": l.Length(), "rLen": r.Length()}
+	actual := args.Map{
+		"lLen": l.Length(),
+		"rLen": r.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"lLen": 0, "rLen": 0}
+	expected := args.Map{
+		"lLen": 0,
+		"rLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRawLeftRight both empty -- both nil", actual)
 }
 
@@ -619,10 +679,16 @@ func Test_Cov10_DynamicMap_DiffRawLeftRight_LeftNil(t *testing.T) {
 	l, r := dm.DiffRawLeftRightUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, right)
 
 	// Act
-	actual := args.Map{"lLen": l.Length(), "rLen": r.Length()}
+	actual := args.Map{
+		"lLen": l.Length(),
+		"rLen": r.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"lLen": 1, "rLen": 0}
+	expected := args.Map{
+		"lLen": 1,
+		"rLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRawLeftRight returns right as lDiff -- left nil", actual)
 }
 
@@ -632,10 +698,16 @@ func Test_Cov10_DynamicMap_DiffRawLeftRight_RightNil(t *testing.T) {
 	l, r := dm.DiffRawLeftRightUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, false, nil)
 
 	// Act
-	actual := args.Map{"lLen": l.Length(), "rLen": r.Length()}
+	actual := args.Map{
+		"lLen": l.Length(),
+		"rLen": r.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"lLen": 1, "rLen": 0}
+	expected := args.Map{
+		"lLen": 1,
+		"rLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRawLeftRight returns left as lDiff -- right nil", actual)
 }
 
@@ -836,10 +908,16 @@ func Test_Cov10_DynamicMap_MapIntegerString_StringValues(t *testing.T) {
 	rangeMap, sortedKeys := dm.MapIntegerString()
 
 	// Act
-	actual := args.Map{"mapLen": len(rangeMap), "keysLen": len(sortedKeys)}
+	actual := args.Map{
+		"mapLen": len(rangeMap),
+		"keysLen": len(sortedKeys),
+	}
 
 	// Assert
-	expected := args.Map{"mapLen": 1, "keysLen": 2}
+	expected := args.Map{
+		"mapLen": 1,
+		"keysLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapIntegerString handles string values -- two items", actual)
 }
 
@@ -905,10 +983,18 @@ func Test_Cov10_DynamicMap_KeyValueByte_DirectByte(t *testing.T) {
 	val, isFound, isFailed := dm.KeyValueByte("a")
 
 	// Act
-	actual := args.Map{"val": val, "found": isFound, "failed": isFailed}
+	actual := args.Map{
+		"val": val,
+		"found": isFound,
+		"failed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(42), "found": true, "failed": false}
+	expected := args.Map{
+		"val": byte(42),
+		"found": true,
+		"failed": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueByte returns byte -- direct byte value", actual)
 }
 
@@ -920,10 +1006,18 @@ func Test_Cov10_DynamicMap_KeyValueInt_DirectInt(t *testing.T) {
 	val, isFound, isFailed := dm.KeyValueInt("a")
 
 	// Act
-	actual := args.Map{"val": val, "found": isFound, "failed": isFailed}
+	actual := args.Map{
+		"val": val,
+		"found": isFound,
+		"failed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "found": true, "failed": false}
+	expected := args.Map{
+		"val": 42,
+		"found": true,
+		"failed": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueInt returns int -- direct int value", actual)
 }
 
@@ -933,10 +1027,16 @@ func Test_Cov10_DynamicMap_KeyValueInt_NotFound(t *testing.T) {
 	_, isFound, isFailed := dm.KeyValueInt("z")
 
 	// Act
-	actual := args.Map{"found": isFound, "failed": isFailed}
+	actual := args.Map{
+		"found": isFound,
+		"failed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"found": false, "failed": true}
+	expected := args.Map{
+		"found": false,
+		"failed": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueInt not found -- missing key", actual)
 }
 
@@ -946,10 +1046,18 @@ func Test_Cov10_DynamicMap_KeyValueInt_DirectByte(t *testing.T) {
 	val, isFound, isFailed := dm.KeyValueInt("a")
 
 	// Act
-	actual := args.Map{"val": val, "found": isFound, "failed": isFailed}
+	actual := args.Map{
+		"val": val,
+		"found": isFound,
+		"failed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"val": 5, "found": true, "failed": false}
+	expected := args.Map{
+		"val": 5,
+		"found": true,
+		"failed": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueInt converts byte -- direct byte value", actual)
 }
 
@@ -1018,10 +1126,16 @@ func Test_Cov10_KeyAnyVal_IsString_StringValue(t *testing.T) {
 	kav := enumimpl.KeyAnyVal{Key: "Name", AnyValue: "hello"}
 
 	// Act
-	actual := args.Map{"isString": kav.IsString(), "str": kav.String() != ""}
+	actual := args.Map{
+		"isString": kav.IsString(),
+		"str": kav.String() != "",
+	}
 
 	// Assert
-	expected := args.Map{"isString": true, "str": true}
+	expected := args.Map{
+		"isString": true,
+		"str": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyVal IsString true -- string value", actual)
 }
 
@@ -1031,10 +1145,16 @@ func Test_Cov10_KeyAnyVal_KeyValInteger(t *testing.T) {
 	kvi := kav.KeyValInteger()
 
 	// Act
-	actual := args.Map{"key": kvi.Key, "val": kvi.ValueInteger}
+	actual := args.Map{
+		"key": kvi.Key,
+		"val": kvi.ValueInteger,
+	}
 
 	// Assert
-	expected := args.Map{"key": "Name", "val": 5}
+	expected := args.Map{
+		"key": "Name",
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValInteger converts correctly -- int value", actual)
 }
 
@@ -1084,10 +1204,16 @@ func Test_Cov10_KeyAnyValues_NonEmpty(t *testing.T) {
 	result := enumimpl.KeyAnyValues([]string{"A", "B"}, []byte{0, 1})
 
 	// Act
-	actual := args.Map{"len": len(result), "firstKey": result[0].Key}
+	actual := args.Map{
+		"len": len(result),
+		"firstKey": result[0].Key,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstKey": "A"}
+	expected := args.Map{
+		"len": 2,
+		"firstKey": "A",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyValues returns items -- two entries", actual)
 }
 
@@ -1112,10 +1238,16 @@ func Test_Cov10_IntegersRangesOfAnyVal(t *testing.T) {
 	result := enumimpl.IntegersRangesOfAnyVal([]byte{2, 0, 1})
 
 	// Act
-	actual := args.Map{"first": result[0], "last": result[2]}
+	actual := args.Map{
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": 0, "last": 2}
+	expected := args.Map{
+		"first": 0,
+		"last": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersRangesOfAnyVal sorted -- byte input", actual)
 }
 
@@ -1259,10 +1391,16 @@ func Test_Cov10_BasicString_RangesIntegers(t *testing.T) {
 	result := bs.RangesIntegers()
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "last": 2}
+	expected := args.Map{
+		"len": 3,
+		"last": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "RangesIntegers returns 0-based -- three items", actual)
 }
 
@@ -1271,10 +1409,16 @@ func Test_Cov10_BasicString_Hashset(t *testing.T) {
 	bs := enumimpl.New.BasicString.Create("TestStr", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"hasItems": len(bs.Hashset()) > 0, "ptrNotNil": bs.HashsetPtr() != nil}
+	actual := args.Map{
+		"hasItems": len(bs.Hashset()) > 0,
+		"ptrNotNil": bs.HashsetPtr() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasItems": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasItems": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset and HashsetPtr non-empty -- two items", actual)
 }
 
@@ -1359,10 +1503,16 @@ func Test_Cov10_BasicString_ToEnumJsonBytes_Found(t *testing.T) {
 	b, err := bs.ToEnumJsonBytes("A")
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToEnumJsonBytes found -- valid value", actual)
 }
 
@@ -1398,10 +1548,16 @@ func Test_Cov10_BasicString_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bs.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "A", "noErr": true}
+	expected := args.Map{
+		"val": "A",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped", actual)
 }
 
@@ -1411,10 +1567,16 @@ func Test_Cov10_BasicString_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bs.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "A", "noErr": true}
+	expected := args.Map{
+		"val": "A",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty mapped", actual)
 }
 
@@ -1724,10 +1886,16 @@ func Test_Cov10_DynamicMap_BasicByte(t *testing.T) {
 	bb := dm.BasicByte("TestDM")
 
 	// Act
-	actual := args.Map{"notNil": bb != nil, "typeName": bb.TypeName()}
+	actual := args.Map{
+		"notNil": bb != nil,
+		"typeName": bb.TypeName(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "typeName": "TestDM"}
+	expected := args.Map{
+		"notNil": true,
+		"typeName": "TestDM",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap.BasicByte creates enum -- two items", actual)
 }
 
@@ -1737,10 +1905,16 @@ func Test_Cov10_DynamicMap_BasicString(t *testing.T) {
 	bs := dm.BasicString("TestDM")
 
 	// Act
-	actual := args.Map{"notNil": bs != nil, "typeName": bs.TypeName()}
+	actual := args.Map{
+		"notNil": bs != nil,
+		"typeName": bs.TypeName(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "typeName": "TestDM"}
+	expected := args.Map{
+		"notNil": true,
+		"typeName": "TestDM",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicMap.BasicString creates enum -- two items", actual)
 }
 

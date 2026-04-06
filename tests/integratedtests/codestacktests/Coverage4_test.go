@@ -15,10 +15,16 @@ func Test_Cov4_NewCreator_Default(t *testing.T) {
 	trace := codestack.New.Default()
 
 	// Act
-	actual := args.Map{"notNil": true, "hasMethod": trace.MethodName != ""}
+	actual := args.Map{
+		"notNil": true,
+		"hasMethod": trace.MethodName != "",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasMethod": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasMethod": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Default returns valid Trace -- from test func", actual)
 }
 
@@ -105,10 +111,16 @@ func Test_Cov4_Trace_FileWithLine(t *testing.T) {
 	fwl := trace.FileWithLine()
 
 	// Act
-	actual := args.Map{"hasPath": fwl.FilePath != "", "linePositive": fwl.Line > 0}
+	actual := args.Map{
+		"hasPath": fwl.FilePath != "",
+		"linePositive": fwl.Line > 0,
+	}
 
 	// Assert
-	expected := args.Map{"hasPath": true, "linePositive": true}
+	expected := args.Map{
+		"hasPath": true,
+		"linePositive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace.FileWithLine returns populated value -- default", actual)
 }
 

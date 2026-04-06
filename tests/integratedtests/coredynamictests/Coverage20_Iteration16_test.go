@@ -18,10 +18,18 @@ func Test_I16_KVC_EmptyCollection(t *testing.T) {
 	c := coredynamic.EmptyKeyValCollection()
 
 	// Act
-	actual := args.Map{"len": c.Length(), "isEmpty": c.IsEmpty(), "hasAny": c.HasAnyItem()}
+	actual := args.Map{
+		"len": c.Length(),
+		"isEmpty": c.IsEmpty(),
+		"hasAny": c.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true, "hasAny": false}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+		"hasAny": false,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyKeyValCollection returns empty -- with args", actual)
 }
 
@@ -30,10 +38,16 @@ func Test_I16_KVC_NewWithCapacity(t *testing.T) {
 	c := coredynamic.NewKeyValCollection(5)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "isEmpty": c.IsEmpty()}
+	actual := args.Map{
+		"len": c.Length(),
+		"isEmpty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewKeyValCollection returns correct value -- with args", actual)
 }
 
@@ -415,10 +429,16 @@ func Test_I16_KVC_Serialize(t *testing.T) {
 	bytes, err := c.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- Serialize", actual)
 }
 
@@ -430,10 +450,16 @@ func Test_I16_KVC_JsonString(t *testing.T) {
 	// KVC serializes JsonModel with exported Items.
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonString", actual)
 }
 
@@ -467,10 +493,16 @@ func Test_I16_KVC_JsonMapResults(t *testing.T) {
 	mr, err := c.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- JsonMapResults", actual)
 }
 
@@ -480,10 +512,16 @@ func Test_I16_KVC_JsonMapResults_Empty(t *testing.T) {
 	mr, err := c.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns empty -- JsonMapResults empty", actual)
 }
 
@@ -524,10 +562,16 @@ func Test_I16_KVC_ParseInjectUsingJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -588,10 +632,16 @@ func Test_I16_KVC_ClonePtr(t *testing.T) {
 	cloned := c.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "len": cloned.Length()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"len": cloned.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 1}
+	expected := args.Map{
+		"notNil": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC returns correct value -- ClonePtr", actual)
 }
 
@@ -642,10 +692,20 @@ func Test_I16_DC_EmptyCollection(t *testing.T) {
 	dc := coredynamic.EmptyDynamicCollection()
 
 	// Act
-	actual := args.Map{"len": dc.Length(), "isEmpty": dc.IsEmpty(), "hasAny": dc.HasAnyItem(), "count": dc.Count()}
+	actual := args.Map{
+		"len": dc.Length(),
+		"isEmpty": dc.IsEmpty(),
+		"hasAny": dc.HasAnyItem(),
+		"count": dc.Count(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true, "hasAny": false, "count": 0}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+		"hasAny": false,
+		"count": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyDynamicCollection returns empty -- with args", actual)
 }
 
@@ -654,10 +714,16 @@ func Test_I16_DC_NilReceiver_Length(t *testing.T) {
 	var dc *coredynamic.DynamicCollection
 
 	// Act
-	actual := args.Map{"len": dc.Length(), "isEmpty": dc.IsEmpty()}
+	actual := args.Map{
+		"len": dc.Length(),
+		"isEmpty": dc.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns nil -- nil Length", actual)
 }
 
@@ -682,10 +748,16 @@ func Test_I16_DC_Add_And_At(t *testing.T) {
 	atVal := dc.At(0)
 
 	// Act
-	actual := args.Map{"len": dc.Length(), "atVal": atVal.ValueString()}
+	actual := args.Map{
+		"len": dc.Length(),
+		"atVal": atVal.ValueString(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "atVal": "hello"}
+	expected := args.Map{
+		"len": 1,
+		"atVal": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- Add+At", actual)
 }
 
@@ -824,10 +896,16 @@ func Test_I16_DC_FirstOrDefault_NonEmpty(t *testing.T) {
 	f := dc.FirstOrDefault()
 
 	// Act
-	actual := args.Map{"notNil": f != nil, "firstOrDefaultDyn": dc.FirstOrDefaultDynamic() != nil}
+	actual := args.Map{
+		"notNil": f != nil,
+		"firstOrDefaultDyn": dc.FirstOrDefaultDynamic() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "firstOrDefaultDyn": true}
+	expected := args.Map{
+		"notNil": true,
+		"firstOrDefaultDyn": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- FirstOrDefault non-empty", actual)
 }
 
@@ -850,10 +928,16 @@ func Test_I16_DC_LastOrDefault_NonEmpty(t *testing.T) {
 	l := dc.LastOrDefault()
 
 	// Act
-	actual := args.Map{"notNil": l != nil, "lastOrDefaultDyn": dc.LastOrDefaultDynamic() != nil}
+	actual := args.Map{
+		"notNil": l != nil,
+		"lastOrDefaultDyn": dc.LastOrDefaultDynamic() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "lastOrDefaultDyn": true}
+	expected := args.Map{
+		"notNil": true,
+		"lastOrDefaultDyn": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns empty -- LastOrDefault non-empty", actual)
 }
 
@@ -959,10 +1043,16 @@ func Test_I16_DC_RemoveAt_Success(t *testing.T) {
 	ok := dc.RemoveAt(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": dc.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- RemoveAt success", actual)
 }
 
@@ -1124,10 +1214,16 @@ func Test_I16_DC_AddAnyWithTypeValidation_Success(t *testing.T) {
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), "hello")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": dc.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyWithTypeValidation success", actual)
 }
 
@@ -1137,10 +1233,16 @@ func Test_I16_DC_AddAnyWithTypeValidation_TypeMismatch(t *testing.T) {
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), 42)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyWithTypeValidation mismatch", actual)
 }
 
@@ -1150,10 +1252,16 @@ func Test_I16_DC_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing.T) {
 	err := dc.AddAnyItemsWithTypeValidation(true, false, reflect.TypeOf(""), "ok", 42, "also ok")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyItemsWithTypeValidation continue", actual)
 }
 
@@ -1163,10 +1271,16 @@ func Test_I16_DC_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) {
 	err := dc.AddAnyItemsWithTypeValidation(false, false, reflect.TypeOf(""), "ok", 42, "unreachable")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns non-empty -- AddAnyItemsWithTypeValidation stop", actual)
 }
 
@@ -1194,10 +1308,16 @@ func Test_I16_DC_JsonString(t *testing.T) {
 	s, err := dc.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- JsonString", actual)
 }
 
@@ -1299,10 +1419,16 @@ func Test_I16_DC_GetPagesSize(t *testing.T) {
 	dc.AddAnyMany("a", "b", "c", "d", "e", "f", "g")
 
 	// Act
-	actual := args.Map{"pages": dc.GetPagesSize(3), "zero": dc.GetPagesSize(0)}
+	actual := args.Map{
+		"pages": dc.GetPagesSize(3),
+		"zero": dc.GetPagesSize(0),
+	}
 
 	// Assert
-	expected := args.Map{"pages": 3, "zero": 0}
+	expected := args.Map{
+		"pages": 3,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- GetPagesSize", actual)
 }
 
@@ -1355,10 +1481,16 @@ func Test_I16_DC_MarshalUnmarshalJSON(t *testing.T) {
 	bytes, err := dc.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DC returns correct value -- MarshalJSON", actual)
 }
 

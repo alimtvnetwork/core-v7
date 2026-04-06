@@ -18,8 +18,16 @@ func Test_Cov69_InvalidLeftRightNoMessage(t *testing.T) {
 		lr := corestr.InvalidLeftRightNoMessage()
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": false, "left": "", "right": ""}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": false,
+			"left": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftRightNoMessage returns invalid -- no message", actual)
 	})
 }
@@ -30,8 +38,14 @@ func Test_Cov69_InvalidLeftRight(t *testing.T) {
 		lr := corestr.InvalidLeftRight("test error")
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "hasMsg": lr.Message != ""}
-		expected := args.Map{"isValid": false, "hasMsg": true}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"hasMsg": lr.Message != "",
+		}
+		expected := args.Map{
+			"isValid": false,
+			"hasMsg": true,
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftRight returns invalid -- with message", actual)
 	})
 }
@@ -42,8 +56,16 @@ func Test_Cov69_NewLeftRight(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": true, "left": "a", "right": "b"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": true,
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "NewLeftRight returns valid -- two strings", actual)
 	})
 }
@@ -70,8 +92,16 @@ func Test_Cov69_LeftRightUsingSlice_One(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"only"})
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": false, "left": "only", "right": ""}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": false,
+			"left": "only",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice returns invalid -- one element", actual)
 	})
 }
@@ -82,8 +112,16 @@ func Test_Cov69_LeftRightUsingSlice_Two(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": true, "left": "a", "right": "b"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": true,
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice returns valid -- two elements", actual)
 	})
 }
@@ -94,8 +132,16 @@ func Test_Cov69_LeftRightUsingSlice_Three(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b", "c"})
 
 		// Assert — length != 2 so invalid, takes first and last
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": false, "left": "a", "right": "c"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": false,
+			"left": "a",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice returns invalid -- three elements", actual)
 	})
 }
@@ -134,8 +180,16 @@ func Test_Cov69_LeftRightUsingSlicePtr_Two(t *testing.T) {
 		lr := corestr.LeftRightUsingSlicePtr([]string{"x", "y"})
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": true, "left": "x", "right": "y"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": true,
+			"left": "x",
+			"right": "y",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlicePtr returns valid -- two elements", actual)
 	})
 }
@@ -174,8 +228,14 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_One(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" only "})
 
 		// Assert — single element IS trimmed (source line 56 calls strings.TrimSpace)
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left}
-		expected := args.Map{"isValid": false, "left": "only"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+		}
+		expected := args.Map{
+			"isValid": false,
+			"left": "only",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightTrimmedUsingSlice returns invalid -- one element", actual)
 	})
 }
@@ -186,8 +246,16 @@ func Test_Cov69_LeftRightTrimmedUsingSlice_Two(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 
 		// Assert
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left, "right": lr.Right}
-		expected := args.Map{"isValid": true, "left": "a", "right": "b"}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+			"right": lr.Right,
+		}
+		expected := args.Map{
+			"isValid": true,
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightTrimmedUsingSlice returns valid trimmed -- two elements", actual)
 	})
 }
@@ -202,10 +270,16 @@ func Test_Cov69_LR_LeftBytes(t *testing.T) {
 		lr := corestr.NewLeftRight("abc", "def")
 
 		// Act
-		actual := args.Map{"len": len(lr.LeftBytes()), "first": lr.LeftBytes()[0]}
+		actual := args.Map{
+			"len": len(lr.LeftBytes()),
+			"first": lr.LeftBytes()[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "first": byte('a')}
+		expected := args.Map{
+			"len": 3,
+			"first": byte('a'),
+		}
 		expected.ShouldBeEqual(t, 0, "LeftBytes returns bytes -- valid left", actual)
 	})
 }
@@ -216,10 +290,16 @@ func Test_Cov69_LR_RightBytes(t *testing.T) {
 		lr := corestr.NewLeftRight("abc", "def")
 
 		// Act
-		actual := args.Map{"len": len(lr.RightBytes()), "first": lr.RightBytes()[0]}
+		actual := args.Map{
+			"len": len(lr.RightBytes()),
+			"first": lr.RightBytes()[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "first": byte('d')}
+		expected := args.Map{
+			"len": 3,
+			"first": byte('d'),
+		}
 		expected.ShouldBeEqual(t, 0, "RightBytes returns bytes -- valid right", actual)
 	})
 }
@@ -427,10 +507,16 @@ func Test_Cov69_LR_NonPtr(t *testing.T) {
 		v := lr.NonPtr()
 
 		// Act
-		actual := args.Map{"left": v.Left, "right": v.Right}
+		actual := args.Map{
+			"left": v.Left,
+			"right": v.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "NonPtr returns copy -- valid LR", actual)
 	})
 }
@@ -518,10 +604,16 @@ func Test_Cov69_LR_IsLeft(t *testing.T) {
 		lr := corestr.NewLeftRight("hello", "world")
 
 		// Act
-		actual := args.Map{"yes": lr.IsLeft("hello"), "no": lr.IsLeft("x")}
+		actual := args.Map{
+			"yes": lr.IsLeft("hello"),
+			"no": lr.IsLeft("x"),
+		}
 
 		// Assert
-		expected := args.Map{"yes": true, "no": false}
+		expected := args.Map{
+			"yes": true,
+			"no": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsLeft returns correct -- match and mismatch", actual)
 	})
 }
@@ -532,10 +624,16 @@ func Test_Cov69_LR_IsRight(t *testing.T) {
 		lr := corestr.NewLeftRight("hello", "world")
 
 		// Act
-		actual := args.Map{"yes": lr.IsRight("world"), "no": lr.IsRight("x")}
+		actual := args.Map{
+			"yes": lr.IsRight("world"),
+			"no": lr.IsRight("x"),
+		}
 
 		// Assert
-		expected := args.Map{"yes": true, "no": false}
+		expected := args.Map{
+			"yes": true,
+			"no": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsRight returns correct -- match and mismatch", actual)
 	})
 }
@@ -546,10 +644,16 @@ func Test_Cov69_LR_Is(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 
 		// Act
-		actual := args.Map{"match": lr.Is("a", "b"), "noMatch": lr.Is("a", "x")}
+		actual := args.Map{
+			"match": lr.Is("a", "b"),
+			"noMatch": lr.Is("a", "x"),
+		}
 
 		// Assert
-		expected := args.Map{"match": true, "noMatch": false}
+		expected := args.Map{
+			"match": true,
+			"noMatch": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Is returns correct -- both match and mismatch", actual)
 	})
 }
@@ -619,10 +723,18 @@ func Test_Cov69_LR_Clone(t *testing.T) {
 		c := lr.Clone()
 
 		// Act
-		actual := args.Map{"left": c.Left, "right": c.Right, "notSame": c != lr}
+		actual := args.Map{
+			"left": c.Left,
+			"right": c.Right,
+			"notSame": c != lr,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b", "notSame": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+			"notSame": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone returns copy -- valid LR", actual)
 	})
 }
@@ -634,10 +746,16 @@ func Test_Cov69_LR_Clear(t *testing.T) {
 		lr.Clear()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Clear zeroes fields -- valid LR", actual)
 	})
 }
@@ -664,10 +782,16 @@ func Test_Cov69_LR_Dispose(t *testing.T) {
 		lr.Dispose()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Dispose clears fields -- valid LR", actual)
 	})
 }

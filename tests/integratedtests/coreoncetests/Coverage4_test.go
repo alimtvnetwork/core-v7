@@ -65,10 +65,16 @@ func Test_Cov4_IntegerOnce_Serialize(t *testing.T) {
 	bytes, err := io.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerOnce Serialize -- 42", actual)
 }
 
@@ -80,10 +86,16 @@ func Test_Cov4_IntegerOnce_MarshalUnmarshal(t *testing.T) {
 	err := io2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": io2.Value()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": io2.Value(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 42}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerOnce Marshal/Unmarshal roundtrip -- 42", actual)
 }
 
@@ -105,7 +117,11 @@ func Test_Cov4_IntegersOnce_Sorted(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3, "cached": 1}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+		"cached": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce Sorted returns sorted -- 3,1,2", actual)
 }
 
@@ -122,7 +138,11 @@ func Test_Cov4_IntegersOnce_RangesMap(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"rmLen": 2, "rbmLen": 2, "umLen": 2}
+	expected := args.Map{
+		"rmLen": 2,
+		"rbmLen": 2,
+		"umLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce maps -- 2 items", actual)
 }
 
@@ -134,10 +154,18 @@ func Test_Cov4_IntegersOnce_RangesMap_Empty(t *testing.T) {
 	um := io.UniqueMap()
 
 	// Act
-	actual := args.Map{"rmLen": len(rm), "rbmLen": len(rbm), "umLen": len(um)}
+	actual := args.Map{
+		"rmLen": len(rm),
+		"rbmLen": len(rbm),
+		"umLen": len(um),
+	}
 
 	// Assert
-	expected := args.Map{"rmLen": 0, "rbmLen": 0, "umLen": 0}
+	expected := args.Map{
+		"rmLen": 0,
+		"rbmLen": 0,
+		"umLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce maps empty -- empty", actual)
 }
 
@@ -153,7 +181,11 @@ func Test_Cov4_IntegersOnce_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false, "diffLen": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+		"diffLen": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce IsEqual -- various", actual)
 }
 
@@ -186,10 +218,16 @@ func Test_Cov4_IntegersOnce_Serialize(t *testing.T) {
 	bytes, err := io.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce Serialize -- valid", actual)
 }
 
@@ -201,10 +239,16 @@ func Test_Cov4_IntegersOnce_MarshalUnmarshal(t *testing.T) {
 	err := io2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": len(io2.Value())}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": len(io2.Value()),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "len": 2}
+	expected := args.Map{
+		"hasErr": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce Marshal/Unmarshal -- roundtrip", actual)
 }
 
@@ -220,10 +264,16 @@ func Test_Cov4_StringsOnce_UniqueMap(t *testing.T) {
 	um2 := so.UniqueMap()
 
 	// Act
-	actual := args.Map{"len": len(um), "cached": len(um2)}
+	actual := args.Map{
+		"len": len(um),
+		"cached": len(um2),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "cached": 2}
+	expected := args.Map{
+		"len": 2,
+		"cached": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce UniqueMap -- 2 unique", actual)
 }
 
@@ -252,7 +302,11 @@ func Test_Cov4_StringsOnce_Has(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasA": true, "hasC": false, "containsA": true}
+	expected := args.Map{
+		"hasA": true,
+		"hasC": false,
+		"containsA": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce Has/IsContains -- a and c", actual)
 }
 
@@ -267,7 +321,10 @@ func Test_Cov4_StringsOnce_HasAll(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"allAB": true, "allAD": false}
+	expected := args.Map{
+		"allAB": true,
+		"allAD": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce HasAll -- present and missing", actual)
 }
 
@@ -278,10 +335,16 @@ func Test_Cov4_StringsOnce_Sorted(t *testing.T) {
 	sorted2 := so.Sorted()
 
 	// Act
-	actual := args.Map{"first": sorted[0], "cached": sorted2[0]}
+	actual := args.Map{
+		"first": sorted[0],
+		"cached": sorted2[0],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "cached": "a"}
+	expected := args.Map{
+		"first": "a",
+		"cached": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce Sorted -- c,a,b", actual)
 }
 
@@ -324,7 +387,12 @@ func Test_Cov4_StringsOnce_Csv(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"csv": true, "options": true, "lines": true, "string": true}
+	expected := args.Map{
+		"csv": true,
+		"options": true,
+		"lines": true,
+		"string": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce Csv methods -- 2 items", actual)
 }
 
@@ -364,7 +432,11 @@ func Test_Cov4_StringsOnce_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false, "diffLen": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+		"diffLen": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce IsEqual -- various", actual)
 }
 
@@ -382,7 +454,13 @@ func Test_Cov4_StringsOnce_Aliases(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"strings": 1, "list": 1, "values": 1, "valPtr": 1, "execute": 1}
+	expected := args.Map{
+		"strings": 1,
+		"list": 1,
+		"values": 1,
+		"valPtr": 1,
+		"execute": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce aliases -- 1 item", actual)
 }
 
@@ -392,10 +470,16 @@ func Test_Cov4_StringsOnce_Serialize(t *testing.T) {
 	bytes, err := so.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce Serialize -- valid", actual)
 }
 
@@ -420,10 +504,16 @@ func Test_Cov4_StringsOnce_MarshalUnmarshal(t *testing.T) {
 	err := so2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": len(so2.Value())}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": len(so2.Value()),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "len": 1}
+	expected := args.Map{
+		"hasErr": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce Marshal/Unmarshal -- roundtrip", actual)
 }
 
@@ -472,7 +562,12 @@ func Test_Cov4_MapStringStringOnce_AllKeysSorted(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "a", "cached": "a", "vsLen": 2, "vsCached": 2}
+	expected := args.Map{
+		"first": "a",
+		"cached": "a",
+		"vsLen": 2,
+		"vsCached": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce AllKeysSorted -- b,a sorted", actual)
 }
 
@@ -486,10 +581,20 @@ func Test_Cov4_MapStringStringOnce_GetValue(t *testing.T) {
 	_, missing := mso.GetValueWithStatus("nope")
 
 	// Act
-	actual := args.Map{"val": val, "val2": val2, "has": has, "missing": missing}
+	actual := args.Map{
+		"val": val,
+		"val2": val2,
+		"has": has,
+		"missing": missing,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "val2": "v", "has": true, "missing": false}
+	expected := args.Map{
+		"val": "v",
+		"val2": "v",
+		"has": true,
+		"missing": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce GetValue -- k", actual)
 }
 
@@ -525,10 +630,16 @@ func Test_Cov4_MapStringStringOnce_Strings(t *testing.T) {
 	strs2 := mso.Strings() // cached
 
 	// Act
-	actual := args.Map{"len": len(strs), "cached": len(strs2)}
+	actual := args.Map{
+		"len": len(strs),
+		"cached": len(strs2),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "cached": 1}
+	expected := args.Map{
+		"len": 1,
+		"cached": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce Strings -- 1 entry", actual)
 }
 
@@ -601,7 +712,12 @@ func Test_Cov4_MapStringStringOnce_AllKeys_Empty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"keys": 0, "vals": 0, "keysSorted": 0, "valsSorted": 0}
+	expected := args.Map{
+		"keys": 0,
+		"vals": 0,
+		"keysSorted": 0,
+		"valsSorted": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce empty maps -- empty", actual)
 }
 
@@ -615,10 +731,16 @@ func Test_Cov4_AnyOnce_Serialize(t *testing.T) {
 	bytes, err := ao.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyOnce Serialize -- valid", actual)
 }
 
@@ -641,10 +763,16 @@ func Test_Cov4_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	bytes, err := ao.SerializeSkipExistingError()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyOnce SerializeSkipExistingError -- valid", actual)
 }
 
@@ -656,10 +784,16 @@ func Test_Cov4_AnyOnce_IsInitialized(t *testing.T) {
 	after := ao.IsInitialized()
 
 	// Act
-	actual := args.Map{"before": before, "after": after}
+	actual := args.Map{
+		"before": before,
+		"after": after,
+	}
 
 	// Assert
-	expected := args.Map{"before": false, "after": true}
+	expected := args.Map{
+		"before": false,
+		"after": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyOnce IsInitialized -- before and after", actual)
 }
 
@@ -674,7 +808,10 @@ func Test_Cov4_AnyOnce_IsStringEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "isWs": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"isWs": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyOnce IsStringEmpty -- nil value", actual)
 }
 
@@ -723,7 +860,10 @@ func Test_Cov4_BoolOnce_Methods(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"execute": true, "string": "true"}
+	expected := args.Map{
+		"execute": true,
+		"string": "true",
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce Execute and String -- true", actual)
 }
 
@@ -733,10 +873,16 @@ func Test_Cov4_BoolOnce_Serialize(t *testing.T) {
 	bytes, err := bo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce Serialize -- false", actual)
 }
 
@@ -748,10 +894,16 @@ func Test_Cov4_BoolOnce_MarshalUnmarshal(t *testing.T) {
 	err := bo2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": bo2.Value()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": bo2.Value(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": true}
+	expected := args.Map{
+		"hasErr": false,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce Marshal/Unmarshal -- roundtrip", actual)
 }
 
@@ -771,7 +923,11 @@ func Test_Cov4_ByteOnce_Methods(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": 42, "execute": 42, "string": "42"}
+	expected := args.Map{
+		"int": 42,
+		"execute": 42,
+		"string": "42",
+	}
 	expected.ShouldBeEqual(t, 0, "ByteOnce methods -- 42", actual)
 }
 
@@ -781,10 +937,16 @@ func Test_Cov4_ByteOnce_Serialize(t *testing.T) {
 	bytes, err := bo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ByteOnce Serialize -- 1", actual)
 }
 
@@ -796,10 +958,16 @@ func Test_Cov4_ByteOnce_MarshalUnmarshal(t *testing.T) {
 	err := bo2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": int(bo2.Value())}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": int(bo2.Value()),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 5}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "ByteOnce Marshal/Unmarshal -- roundtrip", actual)
 }
 
@@ -813,10 +981,16 @@ func Test_Cov4_BytesOnce_NilInit(t *testing.T) {
 	val := bo.Value()
 
 	// Act
-	actual := args.Map{"len": len(val), "isEmpty": bo.IsEmpty()}
+	actual := args.Map{
+		"len": len(val),
+		"isEmpty": bo.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesOnce nil init -- no func", actual)
 }
 
@@ -832,7 +1006,11 @@ func Test_Cov4_BytesOnce_Execute(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"execute": "hi", "string": "hi", "length": 2}
+	expected := args.Map{
+		"execute": "hi",
+		"string": "hi",
+		"length": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesOnce Execute/String/Length -- hi", actual)
 }
 
@@ -842,10 +1020,16 @@ func Test_Cov4_BytesOnce_Serialize(t *testing.T) {
 	bytes, err := bo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesOnce Serialize -- test", actual)
 }
 
@@ -857,10 +1041,16 @@ func Test_Cov4_BytesOnce_MarshalUnmarshal(t *testing.T) {
 	err := bo2.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": len(bo2.Value())}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": len(bo2.Value()),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "len": 2}
+	expected := args.Map{
+		"hasErr": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesOnce Marshal/Unmarshal -- roundtrip", actual)
 }
 
@@ -875,10 +1065,16 @@ func Test_Cov4_BytesErrorOnce_Deserialize(t *testing.T) {
 	err := beo.Deserialize(&result)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "result": result}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"result": result,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "result": "hello"}
+	expected := args.Map{
+		"hasErr": false,
+		"result": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce Deserialize -- valid", actual)
 }
 
@@ -921,7 +1117,10 @@ func Test_Cov4_BytesErrorOnce_HasIssuesOrEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasIssues": false, "hasSafe": true}
+	expected := args.Map{
+		"hasIssues": false,
+		"hasSafe": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce HasIssuesOrEmpty -- valid", actual)
 }
 
@@ -931,10 +1130,16 @@ func Test_Cov4_BytesErrorOnce_ValueWithError(t *testing.T) {
 	val, err := beo.ValueWithError()
 
 	// Act
-	actual := args.Map{"hasVal": len(val) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasVal": len(val) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasVal": true, "hasErr": false}
+	expected := args.Map{
+		"hasVal": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce ValueWithError -- valid", actual)
 }
 
@@ -944,10 +1149,16 @@ func Test_Cov4_BytesErrorOnce_Serialize(t *testing.T) {
 	bytes, err := beo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce Serialize -- valid", actual)
 }
 
@@ -957,10 +1168,16 @@ func Test_Cov4_BytesErrorOnce_MarshalJSON(t *testing.T) {
 	bytes, err := beo.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesErrorOnce MarshalJSON -- valid", actual)
 }
 
@@ -998,7 +1215,11 @@ func Test_Cov4_AnyErrorOnce_StringMethods(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isStrEmpty": false, "isStrWs": false, "string": true}
+	expected := args.Map{
+		"isStrEmpty": false,
+		"isStrWs": false,
+		"string": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce string methods -- hello", actual)
 }
 
@@ -1008,10 +1229,16 @@ func Test_Cov4_AnyErrorOnce_ValueOnly(t *testing.T) {
 	val := aeo.ValueOnly()
 
 	// Act
-	actual := args.Map{"val": val, "isInit": aeo.IsInitialized()}
+	actual := args.Map{
+		"val": val,
+		"isInit": aeo.IsInitialized(),
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "isInit": true}
+	expected := args.Map{
+		"val": 42,
+		"isInit": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueOnly -- 42", actual)
 }
 
@@ -1021,10 +1248,16 @@ func Test_Cov4_AnyErrorOnce_Serialize(t *testing.T) {
 	bytes, err := aeo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce Serialize -- valid", actual)
 }
 
@@ -1034,10 +1267,16 @@ func Test_Cov4_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	bytes, err := aeo.SerializeSkipExistingError()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce SerializeSkipExistingError -- 42", actual)
 }
 
@@ -1104,10 +1343,16 @@ func Test_Cov4_ErrorOnce_MarshalJSON_NoError(t *testing.T) {
 	mb, err := eo.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasBytes": len(mb) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(mb) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce MarshalJSON no error -- nil", actual)
 }
 
@@ -1132,10 +1377,16 @@ func Test_Cov4_ErrorOnce_Serialize(t *testing.T) {
 	bytes, err := eo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce Serialize -- nil error", actual)
 }
 

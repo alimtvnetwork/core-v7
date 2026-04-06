@@ -26,17 +26,29 @@ var compileStringersToCsvStringsTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "Single quote mode",
-		ArrangeInput:  args.Map{"count": 1, "includeQuote": true, "singleQuote": true},
+		ArrangeInput:  args.Map{
+			"count": 1,
+			"includeQuote": true,
+			"singleQuote": true,
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "Double quote mode",
-		ArrangeInput:  args.Map{"count": 1, "includeQuote": true, "singleQuote": false},
+		ArrangeInput:  args.Map{
+			"count": 1,
+			"includeQuote": true,
+			"singleQuote": false,
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "No quote mode",
-		ArrangeInput:  args.Map{"count": 1, "includeQuote": false, "singleQuote": false},
+		ArrangeInput:  args.Map{
+			"count": 1,
+			"includeQuote": false,
+			"singleQuote": false,
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 }

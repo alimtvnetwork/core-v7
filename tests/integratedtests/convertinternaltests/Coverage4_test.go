@@ -15,8 +15,14 @@ func Test_Cov4_StringsTo_WithSpaces(t *testing.T) {
 	emptyResult := convertinternal.StringsTo.WithSpaces(2)
 
 	// Assert
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo returns non-empty -- WithSpaces", actual)
 }
 
@@ -32,7 +38,12 @@ func Test_Cov4_StringUtil_IndexToPosition(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "1st", "second": "2nd", "third": "3rd", "fourth": "4th"}
+	expected := args.Map{
+		"first": "1st",
+		"second": "2nd",
+		"third": "3rd",
+		"fourth": "4th",
+	}
 	expected.ShouldBeEqual(t, 0, "IndexToPosition returns correct value -- with args", actual)
 }
 
@@ -46,7 +57,12 @@ func Test_Cov4_StringUtil_PascalCase(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"simple": "Hello", "underscore": "HelloWorld", "empty": "", "single": "A"}
+	expected := args.Map{
+		"simple": "Hello",
+		"underscore": "HelloWorld",
+		"empty": "",
+		"single": "A",
+	}
 	expected.ShouldBeEqual(t, 0, "PascalCase returns correct value -- with args", actual)
 }
 
@@ -60,7 +76,12 @@ func Test_Cov4_StringUtil_CamelCase(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"simple": "hello", "underscore": "helloWorld", "empty": "", "single": "a"}
+	expected := args.Map{
+		"simple": "hello",
+		"underscore": "helloWorld",
+		"empty": "",
+		"single": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "CamelCase returns correct value -- with args", actual)
 }
 
@@ -116,7 +137,10 @@ func Test_Cov4_AnyTo_String_Bool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "true", "false": "false"}
+	expected := args.Map{
+		"true": "true",
+		"false": "false",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- String bool", actual)
 }
 
@@ -192,10 +216,16 @@ func Test_Cov4_AnyTo_ValueString(t *testing.T) {
 	nonNil := convertinternal.AnyTo.ValueString(42)
 
 	// Act
-	actual := args.Map{"nil": result, "nonNilNotEmpty": nonNil != ""}
+	actual := args.Map{
+		"nil": result,
+		"nonNilNotEmpty": nonNil != "",
+	}
 
 	// Assert
-	expected := args.Map{"nil": "", "nonNilNotEmpty": true}
+	expected := args.Map{
+		"nil": "",
+		"nonNilNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns non-empty -- ValueString", actual)
 }
 

@@ -79,10 +79,16 @@ func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
 	result := coretests.AnyToDraftType(dt)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "val": result.SampleString1}
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": result.SampleString1,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": "hello"}
+	expected := args.Map{
+		"notNil": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from value", actual)
 }
 
@@ -92,10 +98,16 @@ func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
 	result := coretests.AnyToDraftType(dt)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "val": result.SampleString1}
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": result.SampleString1,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": "hello"}
+	expected := args.Map{
+		"notNil": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from ptr", actual)
 }
 
@@ -205,10 +217,16 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	clone := dt.Clone()
 
 	// Act
-	actual := args.Map{"val": clone.SampleString1, "linesLen": len(clone.Lines)}
+	actual := args.Map{
+		"val": clone.SampleString1,
+		"linesLen": len(clone.Lines),
+	}
 
 	// Assert
-	expected := args.Map{"val": "test", "linesLen": 1}
+	expected := args.Map{
+		"val": "test",
+		"linesLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType Clone", actual)
 }
 
@@ -220,10 +238,16 @@ func Test_Cov_DraftType_ClonePtr(t *testing.T) {
 	nilClone := nilDt.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": clone != nil, "nilIsNil": nilClone == nil}
+	actual := args.Map{
+		"notNil": clone != nil,
+		"nilIsNil": nilClone == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilIsNil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilIsNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType ClonePtr", actual)
 }
 
@@ -572,10 +596,16 @@ func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"isPrint": c.IsPrint, "index": c.CaseIndex}
+	actual := args.Map{
+		"isPrint": c.IsPrint,
+		"index": c.CaseIndex,
+	}
 
 	// Assert
-	expected := args.Map{"isPrint": true, "index": 5}
+	expected := args.Map{
+		"isPrint": true,
+		"index": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "CaseIndexPlusIsPrint", actual)
 }
 

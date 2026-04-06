@@ -19,10 +19,18 @@ func Test_I29_Hashmap_IsEmpty_New(t *testing.T) {
 		hm := corestr.New.Hashmap.Cap(5)
 
 		// Act
-		actual := args.Map{"empty": hm.IsEmpty(), "items": hm.HasItems(), "len": hm.Length()}
+		actual := args.Map{
+			"empty": hm.IsEmpty(),
+			"items": hm.HasItems(),
+			"len": hm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "items": false, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"items": false,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns empty -- empty", actual)
 	})
 }
@@ -34,10 +42,16 @@ func Test_I29_Hashmap_HasAnyItem(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"hasAny": hm.HasAnyItem(), "len": hm.Length()}
+		actual := args.Map{
+			"hasAny": hm.HasAnyItem(),
+			"len": hm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"hasAny": true, "len": 1}
+		expected := args.Map{
+			"hasAny": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- HasAnyItem", actual)
 	})
 }
@@ -69,10 +83,18 @@ func Test_I29_Hashmap_AddOrUpdate(t *testing.T) {
 		v, _ := hm.Get("k")
 
 		// Act
-		actual := args.Map{"isNew1": isNew1, "isNew2": isNew2, "val": v}
+		actual := args.Map{
+			"isNew1": isNew1,
+			"isNew2": isNew2,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"isNew1": true, "isNew2": false, "val": "v2"}
+		expected := args.Map{
+			"isNew1": true,
+			"isNew2": false,
+			"val": "v2",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- AddOrUpdate", actual)
 	})
 }
@@ -100,10 +122,16 @@ func Test_I29_Hashmap_SetTrim(t *testing.T) {
 		v, found := hm.Get("k")
 
 		// Act
-		actual := args.Map{"found": found, "val": v}
+		actual := args.Map{
+			"found": found,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "v"}
+		expected := args.Map{
+			"found": true,
+			"val": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- SetTrim", actual)
 	})
 }
@@ -116,10 +144,16 @@ func Test_I29_Hashmap_SetBySplitter(t *testing.T) {
 		v, _ := hm.Get("key")
 
 		// Act
-		actual := args.Map{"isNew": isNew, "val": v}
+		actual := args.Map{
+			"isNew": isNew,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"isNew": true, "val": "value"}
+		expected := args.Map{
+			"isNew": true,
+			"val": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- SetBySplitter", actual)
 	})
 }
@@ -132,10 +166,16 @@ func Test_I29_Hashmap_SetBySplitter_NoSplit(t *testing.T) {
 		v, found := hm.Get("keyonly")
 
 		// Act
-		actual := args.Map{"found": found, "val": v}
+		actual := args.Map{
+			"found": found,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": ""}
+		expected := args.Map{
+			"found": true,
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns empty -- SetBySplitter no split", actual)
 	})
 }
@@ -164,10 +204,16 @@ func Test_I29_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
 		v, found := hm.Get("k")
 
 		// Act
-		actual := args.Map{"found": found, "notEmpty": v != ""}
+		actual := args.Map{
+			"found": found,
+			"notEmpty": v != "",
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "notEmpty": true}
+		expected := args.Map{
+			"found": true,
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- AddOrUpdateKeyStrValFloat", actual)
 	})
 }
@@ -180,10 +226,16 @@ func Test_I29_Hashmap_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 		v, found := hm.Get("k")
 
 		// Act
-		actual := args.Map{"found": found, "notEmpty": v != ""}
+		actual := args.Map{
+			"found": found,
+			"notEmpty": v != "",
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "notEmpty": true}
+		expected := args.Map{
+			"found": true,
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- AddOrUpdateKeyStrValFloat64", actual)
 	})
 }
@@ -263,10 +315,16 @@ func Test_I29_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 		hm.AddOrUpdateHashmap(other)
 
 		// Act
-		actual := args.Map{"len": hm.Length(), "hasB": hm.Has("b")}
+		actual := args.Map{
+			"len": hm.Length(),
+			"hasB": hm.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "hasB": true}
+		expected := args.Map{
+			"len": 2,
+			"hasB": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- AddOrUpdateHashmap", actual)
 	})
 }
@@ -427,10 +485,18 @@ func Test_I29_Hashmap_Has_Contains(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"has": hm.Has("a"), "contains": hm.Contains("a"), "missing": hm.IsKeyMissing("b")}
+		actual := args.Map{
+			"has": hm.Has("a"),
+			"contains": hm.Contains("a"),
+			"missing": hm.IsKeyMissing("b"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "contains": true, "missing": true}
+		expected := args.Map{
+			"has": true,
+			"contains": true,
+			"missing": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Has/Contains", actual)
 	})
 }
@@ -442,10 +508,20 @@ func Test_I29_Hashmap_ContainsLock(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"cl": hm.ContainsLock("a"), "hl": hm.HasLock("a"), "hwl": hm.HasWithLock("a"), "mkl": hm.IsKeyMissingLock("z")}
+		actual := args.Map{
+			"cl": hm.ContainsLock("a"),
+			"hl": hm.HasLock("a"),
+			"hwl": hm.HasWithLock("a"),
+			"mkl": hm.IsKeyMissingLock("z"),
+		}
 
 		// Assert
-		expected := args.Map{"cl": true, "hl": true, "hwl": true, "mkl": true}
+		expected := args.Map{
+			"cl": true,
+			"hl": true,
+			"hwl": true,
+			"mkl": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- lock variants", actual)
 	})
 }
@@ -458,10 +534,16 @@ func Test_I29_Hashmap_HasAllStrings(t *testing.T) {
 		hm.AddOrUpdate("b", "2")
 
 		// Act
-		actual := args.Map{"all": hm.HasAllStrings("a", "b"), "missing": hm.HasAllStrings("a", "c")}
+		actual := args.Map{
+			"all": hm.HasAllStrings("a", "b"),
+			"missing": hm.HasAllStrings("a", "c"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "missing": false}
+		expected := args.Map{
+			"all": true,
+			"missing": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- HasAllStrings", actual)
 	})
 }
@@ -473,10 +555,16 @@ func Test_I29_Hashmap_HasAll(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"all": hm.HasAll("a"), "miss": hm.HasAll("a", "z")}
+		actual := args.Map{
+			"all": hm.HasAll("a"),
+			"miss": hm.HasAll("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- HasAll", actual)
 	})
 }
@@ -488,10 +576,16 @@ func Test_I29_Hashmap_HasAny(t *testing.T) {
 		hm.AddOrUpdate("a", "1")
 
 		// Act
-		actual := args.Map{"any": hm.HasAny("z", "a"), "none": hm.HasAny("x", "y")}
+		actual := args.Map{
+			"any": hm.HasAny("z", "a"),
+			"none": hm.HasAny("x", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"any": true, "none": false}
+		expected := args.Map{
+			"any": true,
+			"none": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- HasAny", actual)
 	})
 }
@@ -504,10 +598,16 @@ func Test_I29_Hashmap_HasAllCollectionItems(t *testing.T) {
 		coll := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"all": hm.HasAllCollectionItems(coll), "nil": hm.HasAllCollectionItems(nil)}
+		actual := args.Map{
+			"all": hm.HasAllCollectionItems(coll),
+			"nil": hm.HasAllCollectionItems(nil),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "nil": false}
+		expected := args.Map{
+			"all": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- HasAllCollectionItems", actual)
 	})
 }
@@ -526,10 +626,22 @@ func Test_I29_Hashmap_Get(t *testing.T) {
 		_, notFound := hm.Get("missing")
 
 		// Act
-		actual := args.Map{"val": val, "found": found, "val2": val2, "found2": found2, "notFound": notFound}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+			"val2": val2,
+			"found2": found2,
+			"notFound": notFound,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v", "found": true, "val2": "v", "found2": true, "notFound": false}
+		expected := args.Map{
+			"val": "v",
+			"found": true,
+			"val2": "v",
+			"found2": true,
+			"notFound": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Get/GetValue", actual)
 	})
 }
@@ -577,10 +689,16 @@ func Test_I29_Hashmap_Keys(t *testing.T) {
 		allKeys := hm.AllKeys()
 
 		// Act
-		actual := args.Map{"keysLen": len(keys), "allKeysLen": len(allKeys)}
+		actual := args.Map{
+			"keysLen": len(keys),
+			"allKeysLen": len(allKeys),
+		}
 
 		// Assert
-		expected := args.Map{"keysLen": 2, "allKeysLen": 2}
+		expected := args.Map{
+			"keysLen": 2,
+			"allKeysLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Keys", actual)
 	})
 }
@@ -609,10 +727,16 @@ func Test_I29_Hashmap_ValuesList(t *testing.T) {
 		vl := hm.ValuesList()
 
 		// Act
-		actual := args.Map{"len": len(vl), "val": vl[0]}
+		actual := args.Map{
+			"len": len(vl),
+			"val": vl[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "val": "1"}
+		expected := args.Map{
+			"len": 1,
+			"val": "1",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- ValuesList", actual)
 	})
 }
@@ -673,10 +797,16 @@ func Test_I29_Hashmap_KeysValuesList(t *testing.T) {
 		keys, vals := hm.KeysValuesList()
 
 		// Act
-		actual := args.Map{"kLen": len(keys), "vLen": len(vals)}
+		actual := args.Map{
+			"kLen": len(keys),
+			"vLen": len(vals),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- KeysValuesList", actual)
 	})
 }
@@ -689,10 +819,16 @@ func Test_I29_Hashmap_KeysValuesCollection(t *testing.T) {
 		keys, vals := hm.KeysValuesCollection()
 
 		// Act
-		actual := args.Map{"kLen": keys.Length(), "vLen": vals.Length()}
+		actual := args.Map{
+			"kLen": keys.Length(),
+			"vLen": vals.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- KeysValuesCollection", actual)
 	})
 }
@@ -850,10 +986,16 @@ func Test_I29_Hashmap_KeysValuesListLock(t *testing.T) {
 		keys, vals := hm.KeysValuesListLock()
 
 		// Act
-		actual := args.Map{"kLen": len(keys), "vLen": len(vals)}
+		actual := args.Map{
+			"kLen": len(keys),
+			"vLen": len(vals),
+		}
 
 		// Assert
-		expected := args.Map{"kLen": 1, "vLen": 1}
+		expected := args.Map{
+			"kLen": 1,
+			"vLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- KeysValuesListLock", actual)
 	})
 }
@@ -885,10 +1027,16 @@ func Test_I29_Hashmap_ConcatNew_NoArgs(t *testing.T) {
 		c := hm.ConcatNew(true)
 
 		// Act
-		actual := args.Map{"len": c.Length(), "has": c.Has("a")}
+		actual := args.Map{
+			"len": c.Length(),
+			"has": c.Has("a"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "has": true}
+		expected := args.Map{
+			"len": 1,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns empty -- ConcatNew no args", actual)
 	})
 }
@@ -1211,10 +1359,16 @@ func Test_I29_Hashmap_Clone(t *testing.T) {
 		c := hm.Clone()
 
 		// Act
-		actual := args.Map{"len": c.Length(), "has": c.Has("a")}
+		actual := args.Map{
+			"len": c.Length(),
+			"has": c.Has("a"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "has": true}
+		expected := args.Map{
+			"len": 1,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Clone", actual)
 	})
 }
@@ -1227,10 +1381,16 @@ func Test_I29_Hashmap_ClonePtr(t *testing.T) {
 		cp := hm.ClonePtr()
 
 		// Act
-		actual := args.Map{"notNil": cp != nil, "has": cp.Has("a")}
+		actual := args.Map{
+			"notNil": cp != nil,
+			"has": cp.Has("a"),
+		}
 
 		// Assert
-		expected := args.Map{"notNil": true, "has": true}
+		expected := args.Map{
+			"notNil": true,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ClonePtr", actual)
 	})
 }
@@ -1403,10 +1563,16 @@ func Test_I29_Hashmap_MarshalJSON(t *testing.T) {
 		b, err := hm.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- MarshalJSON", actual)
 	})
 }
@@ -1419,10 +1585,16 @@ func Test_I29_Hashmap_UnmarshalJSON(t *testing.T) {
 		v, _ := hm.Get("x")
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "val": v}
+		actual := args.Map{
+			"noErr": err == nil,
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "val": "y"}
+		expected := args.Map{
+			"noErr": true,
+			"val": "y",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- UnmarshalJSON", actual)
 	})
 }
@@ -1470,8 +1642,14 @@ func Test_I29_Hashmap_Serialize(t *testing.T) {
 		hm := corestr.New.Hashmap.Cap(5)
 		hm.AddOrUpdate("a", "1")
 		b, err := hm.Serialize()
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Serialize", actual)
 	})
 }
@@ -1495,8 +1673,14 @@ func Test_I29_Hashmap_ParseInjectUsingJson(t *testing.T) {
 		jr := hm.JsonPtr()
 		hm2 := corestr.New.Hashmap.Cap(5)
 		result, err := hm2.ParseInjectUsingJson(jr)
-		actual := args.Map{"noErr": err == nil, "has": result.Has("a")}
-		expected := args.Map{"noErr": true, "has": true}
+		actual := args.Map{
+			"noErr": err == nil,
+			"has": result.Has("a"),
+		}
+		expected := args.Map{
+			"noErr": true,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ParseInjectUsingJson", actual)
 	})
 }
@@ -1928,8 +2112,14 @@ func Test_I29_HashsetDataModel_NewFromCollection(t *testing.T) {
 	safeTest(t, "Test_I29_HashsetDataModel_NewFromCollection", func() {
 		hs := corestr.New.Hashset.Strings([]string{"a", "b"})
 		dm := corestr.NewHashsetsDataModelUsing(hs)
-		actual := args.Map{"notNil": dm != nil, "len": len(dm.Items)}
-		expected := args.Map{"notNil": true, "len": 2}
+		actual := args.Map{
+			"notNil": dm != nil,
+			"len": len(dm.Items),
+		}
+		expected := args.Map{
+			"notNil": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetDataModel returns correct value -- NewFromCollection", actual)
 	})
 }

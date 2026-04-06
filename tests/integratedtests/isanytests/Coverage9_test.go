@@ -466,10 +466,16 @@ func Test_Cov9_Conclusive_BothNil(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(nil, nil)
 
 	// Act
-	actual := args.Map{"isEqual": isEqual, "isConclusive": isConclusive}
+	actual := args.Map{
+		"isEqual": isEqual,
+		"isConclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": true, "isConclusive": true}
+	expected := args.Map{
+		"isEqual": true,
+		"isConclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- both nil", actual)
 }
 
@@ -478,10 +484,16 @@ func Test_Cov9_Conclusive_LeftNil(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(nil, "a")
 
 	// Act
-	actual := args.Map{"isEqual": isEqual, "isConclusive": isConclusive}
+	actual := args.Map{
+		"isEqual": isEqual,
+		"isConclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": false, "isConclusive": true}
+	expected := args.Map{
+		"isEqual": false,
+		"isConclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- left nil", actual)
 }
 
@@ -491,10 +503,16 @@ func Test_Cov9_Conclusive_SameValue(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(v, v)
 
 	// Act
-	actual := args.Map{"isEqual": isEqual, "isConclusive": isConclusive}
+	actual := args.Map{
+		"isEqual": isEqual,
+		"isConclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": true, "isConclusive": true}
+	expected := args.Map{
+		"isEqual": true,
+		"isConclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- same value", actual)
 }
 
@@ -503,10 +521,16 @@ func Test_Cov9_Conclusive_DifferentTypes(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(42, "42")
 
 	// Act
-	actual := args.Map{"isEqual": isEqual, "isConclusive": isConclusive}
+	actual := args.Map{
+		"isEqual": isEqual,
+		"isConclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": false, "isConclusive": true}
+	expected := args.Map{
+		"isEqual": false,
+		"isConclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- different types", actual)
 }
 
@@ -515,9 +539,15 @@ func Test_Cov9_Conclusive_Inconclusive(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(1, 2)
 
 	// Act
-	actual := args.Map{"isEqual": isEqual, "isConclusive": isConclusive}
+	actual := args.Map{
+		"isEqual": isEqual,
+		"isConclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": false, "isConclusive": false}
+	expected := args.Map{
+		"isEqual": false,
+		"isConclusive": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- inconclusive", actual)
 }

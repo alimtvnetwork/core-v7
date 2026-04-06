@@ -245,10 +245,16 @@ func Test_Cov12_StackEnhance_Error(t *testing.T) {
 	errNil := errcore.StackEnhance.Error(nil)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.Error returns error -- with error", actual)
 }
 
@@ -258,10 +264,16 @@ func Test_Cov12_StackEnhance_ErrorSkip(t *testing.T) {
 	errNil := errcore.StackEnhance.ErrorSkip(0, nil)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.ErrorSkip returns error -- with error", actual)
 }
 
@@ -271,10 +283,16 @@ func Test_Cov12_StackEnhance_MsgToErrSkip(t *testing.T) {
 	errEmpty := errcore.StackEnhance.MsgToErrSkip(0, "")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errEmpty == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errEmpty == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.MsgToErrSkip returns error -- with message", actual)
 }
 
@@ -284,10 +302,16 @@ func Test_Cov12_StackEnhance_FmtSkip(t *testing.T) {
 	errEmpty := errcore.StackEnhance.FmtSkip(0, "")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errEmpty == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errEmpty == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.FmtSkip returns error -- with format", actual)
 }
 
@@ -297,10 +321,16 @@ func Test_Cov12_StackEnhance_Msg(t *testing.T) {
 	msgEmpty := errcore.StackEnhance.Msg("")
 
 	// Act
-	actual := args.Map{"notEmpty": msg != "", "empty": msgEmpty == ""}
+	actual := args.Map{
+		"notEmpty": msg != "",
+		"empty": msgEmpty == "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.Msg returns non-empty -- with message", actual)
 }
 
@@ -310,10 +340,16 @@ func Test_Cov12_StackEnhance_MsgErrorSkip(t *testing.T) {
 	msgNil := errcore.StackEnhance.MsgErrorSkip(0, "msg", nil)
 
 	// Act
-	actual := args.Map{"notEmpty": msg != "", "empty": msgNil == ""}
+	actual := args.Map{
+		"notEmpty": msg != "",
+		"empty": msgNil == "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.MsgErrorSkip returns non-empty -- with error", actual)
 }
 
@@ -323,10 +359,16 @@ func Test_Cov12_StackEnhance_MsgErrorToErrSkip(t *testing.T) {
 	errNil := errcore.StackEnhance.MsgErrorToErrSkip(0, "msg", nil)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StackEnhance.MsgErrorToErrSkip returns error -- with error", actual)
 }
 
@@ -600,10 +642,16 @@ func Test_Cov12_RawErrorType_Fmt(t *testing.T) {
 	errEmpty := errcore.InvalidType.Fmt("")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "emptyNotNil": errEmpty != nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"emptyNotNil": errEmpty != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "emptyNotNil": true}
+	expected := args.Map{
+		"notNil": true,
+		"emptyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.Fmt returns error -- with format", actual)
 }
 
@@ -613,10 +661,16 @@ func Test_Cov12_RawErrorType_FmtIf(t *testing.T) {
 	errNil := errcore.InvalidType.FmtIf(false, "hello %d", 42)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.FmtIf returns correct value -- with condition", actual)
 }
 
@@ -626,10 +680,16 @@ func Test_Cov12_RawErrorType_MergeError(t *testing.T) {
 	errNil := errcore.InvalidType.MergeError(nil)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.MergeError returns error -- with error", actual)
 }
 
@@ -639,10 +699,16 @@ func Test_Cov12_RawErrorType_MergeErrorWithMessage(t *testing.T) {
 	errNil := errcore.InvalidType.MergeErrorWithMessage(nil, "msg")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.MergeErrorWithMessage returns error -- with error", actual)
 }
 
@@ -652,10 +718,16 @@ func Test_Cov12_RawErrorType_MergeErrorWithMessageRef(t *testing.T) {
 	errNil := errcore.InvalidType.MergeErrorWithMessageRef(nil, "msg", "ref")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.MergeErrorWithMessageRef returns error -- with error", actual)
 }
 
@@ -665,10 +737,16 @@ func Test_Cov12_RawErrorType_MergeErrorWithRef(t *testing.T) {
 	errNil := errcore.InvalidType.MergeErrorWithRef(nil, "ref")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.MergeErrorWithRef returns error -- with error", actual)
 }
 
@@ -736,10 +814,16 @@ func Test_Cov12_RawErrorType_NoRef(t *testing.T) {
 	resultEmpty := errcore.InvalidType.NoRef("")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "emptyNotEmpty": resultEmpty != ""}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"emptyNotEmpty": resultEmpty != "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "emptyNotEmpty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"emptyNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.NoRef returns non-empty -- with msg", actual)
 }
 
@@ -749,10 +833,16 @@ func Test_Cov12_RawErrorType_ErrorNoRefs(t *testing.T) {
 	errEmpty := errcore.InvalidType.ErrorNoRefs("")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "emptyNotNil": errEmpty != nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"emptyNotNil": errEmpty != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "emptyNotNil": true}
+	expected := args.Map{
+		"notNil": true,
+		"emptyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.ErrorNoRefs returns error -- with msg", actual)
 }
 
@@ -782,10 +872,16 @@ func Test_Cov12_GetSet(t *testing.T) {
 	r2 := errcore.GetSet(false, errcore.InvalidType, errcore.NotFound)
 
 	// Act
-	actual := args.Map{"r1": r1, "r2": r2}
+	actual := args.Map{
+		"r1": r1,
+		"r2": r2,
+	}
 
 	// Assert
-	expected := args.Map{"r1": errcore.InvalidType, "r2": errcore.NotFound}
+	expected := args.Map{
+		"r1": errcore.InvalidType,
+		"r2": errcore.NotFound,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSet returns correct value -- with condition", actual)
 }
 
@@ -795,10 +891,16 @@ func Test_Cov12_GetSetVariant(t *testing.T) {
 	r2 := errcore.GetSetVariant(false, "a", "b")
 
 	// Act
-	actual := args.Map{"r1": string(r1), "r2": string(r2)}
+	actual := args.Map{
+		"r1": string(r1),
+		"r2": string(r2),
+	}
 
 	// Assert
-	expected := args.Map{"r1": "a", "r2": "b"}
+	expected := args.Map{
+		"r1": "a",
+		"r2": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetVariant returns correct value -- with condition", actual)
 }
 
@@ -1196,10 +1298,16 @@ func Test_Cov12_MeaningfulError(t *testing.T) {
 	errNil := errcore.MeaningfulError(errcore.InvalidType, "fn", nil)
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "nilNil": errNil == nil}
+	actual := args.Map{
+		"notNil": err != nil,
+		"nilNil": errNil == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilNil": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MeaningfulError returns error -- with error", actual)
 }
 
@@ -1261,10 +1369,16 @@ func Test_Cov12_MsgHeaderIf(t *testing.T) {
 	resultFalse := errcore.MsgHeaderIf(false, "msg")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": resultFalse == ""}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": resultFalse == "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": false}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MsgHeaderIf returns correct value -- with condition", actual)
 }
 

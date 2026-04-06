@@ -79,10 +79,16 @@ func Test_Cov63_CharHashsetMap_IsEmpty(t *testing.T) {
 		chm := corestr.New.CharHashsetMap.Cap(10, 10)
 
 		// Act
-		actual := args.Map{"empty": chm.IsEmpty(), "hasItems": chm.HasItems()}
+		actual := args.Map{
+			"empty": chm.IsEmpty(),
+			"hasItems": chm.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty on new", actual)
 	})
 }
@@ -182,10 +188,16 @@ func Test_Cov63_CharHashsetMap_Add(t *testing.T) {
 		chm.Add("avocado")
 
 		// Act
-		actual := args.Map{"len": chm.Length(), "allLen": chm.AllLengthsSum()}
+		actual := args.Map{
+			"len": chm.Length(),
+			"allLen": chm.AllLengthsSum(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "allLen": 2}
+		expected := args.Map{
+			"len": 1,
+			"allLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Add same char groups", actual)
 	})
 }
@@ -213,10 +225,16 @@ func Test_Cov63_CharHashsetMap_AddStrings(t *testing.T) {
 		chm.AddStrings("apple", "banana", "avocado")
 
 		// Act
-		actual := args.Map{"len": chm.Length(), "allLen": chm.AllLengthsSum()}
+		actual := args.Map{
+			"len": chm.Length(),
+			"allLen": chm.AllLengthsSum(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "allLen": 3}
+		expected := args.Map{
+			"len": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "AddStrings", actual)
 	})
 }
@@ -421,10 +439,16 @@ func Test_Cov63_CharHashsetMap_Has(t *testing.T) {
 		chm.Add("apple")
 
 		// Act
-		actual := args.Map{"has": chm.Has("apple"), "miss": chm.Has("banana")}
+		actual := args.Map{
+			"has": chm.Has("apple"),
+			"miss": chm.Has("banana"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Has", actual)
 	})
 }
@@ -468,10 +492,16 @@ func Test_Cov63_CharHashsetMap_HasWithHashset(t *testing.T) {
 		has, hs := chm.HasWithHashset("apple")
 
 		// Act
-		actual := args.Map{"has": has, "hsNonNil": hs != nil}
+		actual := args.Map{
+			"has": has,
+			"hsNonNil": hs != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "hsNonNil": true}
+		expected := args.Map{
+			"has": true,
+			"hsNonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithHashset found", actual)
 	})
 }
@@ -483,10 +513,16 @@ func Test_Cov63_CharHashsetMap_HasWithHashset_Empty(t *testing.T) {
 		has, hs := chm.HasWithHashset("x")
 
 		// Act
-		actual := args.Map{"has": has, "hsEmpty": hs.IsEmpty()}
+		actual := args.Map{
+			"has": has,
+			"hsEmpty": hs.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "hsEmpty": true}
+		expected := args.Map{
+			"has": false,
+			"hsEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithHashset empty", actual)
 	})
 }
@@ -499,10 +535,16 @@ func Test_Cov63_CharHashsetMap_HasWithHashset_MissChar(t *testing.T) {
 		has, hs := chm.HasWithHashset("banana")
 
 		// Act
-		actual := args.Map{"has": has, "hsEmpty": hs.IsEmpty()}
+		actual := args.Map{
+			"has": has,
+			"hsEmpty": hs.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "hsEmpty": true}
+		expected := args.Map{
+			"has": false,
+			"hsEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithHashset miss char", actual)
 	})
 }
@@ -515,10 +557,16 @@ func Test_Cov63_CharHashsetMap_HasWithHashsetLock(t *testing.T) {
 		has, hs := chm.HasWithHashsetLock("apple")
 
 		// Act
-		actual := args.Map{"has": has, "hsNonNil": hs != nil}
+		actual := args.Map{
+			"has": has,
+			"hsNonNil": hs != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "hsNonNil": true}
+		expected := args.Map{
+			"has": true,
+			"hsNonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithHashsetLock", actual)
 	})
 }
@@ -564,10 +612,16 @@ func Test_Cov63_CharHashsetMap_LengthOf(t *testing.T) {
 		chm.Add("avocado")
 
 		// Act
-		actual := args.Map{"len": chm.LengthOf('a'), "miss": chm.LengthOf('z')}
+		actual := args.Map{
+			"len": chm.LengthOf('a'),
+			"miss": chm.LengthOf('z'),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "miss": 0}
+		expected := args.Map{
+			"len": 2,
+			"miss": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LengthOf", actual)
 	})
 }
@@ -623,10 +677,16 @@ func Test_Cov63_CharHashsetMap_LengthOfHashsetFromFirstChar(t *testing.T) {
 		chm.Add("avocado")
 
 		// Act
-		actual := args.Map{"len": chm.LengthOfHashsetFromFirstChar("abc"), "miss": chm.LengthOfHashsetFromFirstChar("xyz")}
+		actual := args.Map{
+			"len": chm.LengthOfHashsetFromFirstChar("abc"),
+			"miss": chm.LengthOfHashsetFromFirstChar("xyz"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "miss": 0}
+		expected := args.Map{
+			"len": 2,
+			"miss": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LengthOfHashsetFromFirstChar", actual)
 	})
 }
@@ -764,10 +824,16 @@ func Test_Cov63_CharHashsetMap_SortedListAsc(t *testing.T) {
 		list := chm.SortedListAsc()
 
 		// Act
-		actual := args.Map{"first": list[0], "second": list[1]}
+		actual := args.Map{
+			"first": list[0],
+			"second": list[1],
+		}
 
 		// Assert
-		expected := args.Map{"first": "apple", "second": "banana"}
+		expected := args.Map{
+			"first": "apple",
+			"second": "banana",
+		}
 		expected.ShouldBeEqual(t, 0, "SortedListAsc", actual)
 	})
 }
@@ -780,10 +846,16 @@ func Test_Cov63_CharHashsetMap_SortedListDsc(t *testing.T) {
 		list := chm.SortedListDsc()
 
 		// Act
-		actual := args.Map{"first": list[0], "second": list[1]}
+		actual := args.Map{
+			"first": list[0],
+			"second": list[1],
+		}
 
 		// Assert
-		expected := args.Map{"first": "banana", "second": "apple"}
+		expected := args.Map{
+			"first": "banana",
+			"second": "apple",
+		}
 		expected.ShouldBeEqual(t, 0, "SortedListDsc", actual)
 	})
 }
@@ -1652,10 +1724,16 @@ func Test_Cov63_CharHashsetMap_MarshalJSON(t *testing.T) {
 		b, err := chm.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON", actual)
 	})
 }
@@ -1735,10 +1813,16 @@ func Test_Cov63_CharHashsetMap_ParseInjectUsingJson(t *testing.T) {
 		r, err := chm2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson", actual)
 	})
 }
@@ -2011,10 +2095,16 @@ func Test_Cov63_CharHashsetMap_AddStringsAsyncLock_Small(t *testing.T) {
 		})
 
 		// Act
-		actual := args.Map{"called": called, "len": chm.Length()}
+		actual := args.Map{
+			"called": called,
+			"len": chm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"called": true, "len": 2}
+		expected := args.Map{
+			"called": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "AddStringsAsyncLock small", actual)
 	})
 }

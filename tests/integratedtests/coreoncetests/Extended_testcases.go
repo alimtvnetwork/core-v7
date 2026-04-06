@@ -9,12 +9,20 @@ var boolOnceExtendedTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "BoolOnce NewBoolOnce returns true",
 		ArrangeInput:  args.Map{"value": true},
-		ExpectedInput: args.Map{"execute": true, "unmarshalOk": true, "serializeOk": true},
+		ExpectedInput: args.Map{
+			"execute": true,
+			"unmarshalOk": true,
+			"serializeOk": true,
+		},
 	},
 	{
 		Title:         "BoolOnce NewBoolOnce returns false",
 		ArrangeInput:  args.Map{"value": false},
-		ExpectedInput: args.Map{"execute": false, "unmarshalOk": true, "serializeOk": true},
+		ExpectedInput: args.Map{
+			"execute": false,
+			"unmarshalOk": true,
+			"serializeOk": true,
+		},
 	},
 }
 
@@ -22,7 +30,10 @@ var byteOnceExtendedTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ByteOnce Execute and UnmarshalJSON",
 		ArrangeInput:  args.Map{"value": byte(42)},
-		ExpectedInput: args.Map{"execute": byte(42), "unmarshalOk": true},
+		ExpectedInput: args.Map{
+			"execute": byte(42),
+			"unmarshalOk": true,
+		},
 	},
 }
 
@@ -58,7 +69,10 @@ var integerOnceExtendedTestCases = []coretestcases.CaseV1{
 var errorOnceExtendedTestCases = []coretestcases.CaseV1{
 	{
 		Title:        "ErrorOnce with error -- unmarshal, execute, string, serialize, concat",
-		ArrangeInput: args.Map{"hasError": true, "message": "test error"},
+		ArrangeInput: args.Map{
+			"hasError": true,
+			"message": "test error",
+		},
 		ExpectedInput: args.Map{
 			"hasError":    true,
 			"isEmptyErr":  false,
@@ -104,7 +118,10 @@ var anyOnceExtendedTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:        "AnyOnce with nil value",
-		ArrangeInput: args.Map{"value": nil, "isNil": true},
+		ArrangeInput: args.Map{
+			"value": nil,
+			"isNil": true,
+		},
 		ExpectedInput: args.Map{
 			"isNull":          true,
 			"isStringEmpty":   true,
@@ -144,7 +161,10 @@ var anyOnceExtendedTestCases = []coretestcases.CaseV1{
 var anyErrorOnceExtendedTestCases = []coretestcases.CaseV1{
 	{
 		Title:        "AnyErrorOnce with value no error",
-		ArrangeInput: args.Map{"value": "world", "hasError": false},
+		ArrangeInput: args.Map{
+			"value": "world",
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{
 			"valueWithErrorOk": true,
 			"executeMustOk":    true,
@@ -170,28 +190,40 @@ var anyErrorOnceExtendedTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:        "AnyErrorOnce cast map",
-		ArrangeInput: args.Map{"valueType": "map", "hasError": false},
+		ArrangeInput: args.Map{
+			"valueType": "map",
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{
 			"castMapOk": true,
 		},
 	},
 	{
 		Title:        "AnyErrorOnce cast strings",
-		ArrangeInput: args.Map{"valueType": "strings", "hasError": false},
+		ArrangeInput: args.Map{
+			"valueType": "strings",
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{
 			"castStringsOk": true,
 		},
 	},
 	{
 		Title:        "AnyErrorOnce cast bytes",
-		ArrangeInput: args.Map{"valueType": "bytes", "hasError": false},
+		ArrangeInput: args.Map{
+			"valueType": "bytes",
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{
 			"castBytesOk": true,
 		},
 	},
 	{
 		Title:        "AnyErrorOnce cast hashmap",
-		ArrangeInput: args.Map{"valueType": "hashmapMap", "hasError": false},
+		ArrangeInput: args.Map{
+			"valueType": "hashmapMap",
+			"hasError": false,
+		},
 		ExpectedInput: args.Map{
 			"castHashmapOk": true,
 		},

@@ -150,10 +150,16 @@ func Test_Cov6_Conclusive_BothTypedNilDiffType(t *testing.T) {
 	isEq, isConcl := isany.Conclusive(a, b)
 
 	// Act
-	actual := args.Map{"isEqual": isEq, "isConclusive": isConcl}
+	actual := args.Map{
+		"isEqual": isEq,
+		"isConclusive": isConcl,
+	}
 
 	// Assert
-	expected := args.Map{"isEqual": true, "isConclusive": true}
+	expected := args.Map{
+		"isEqual": true,
+		"isConclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- both typed nil diff type", actual)
 }
 

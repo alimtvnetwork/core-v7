@@ -24,9 +24,15 @@ func Test_Cov55_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "AddOrUpdateKeyStrValFloat",
-			ExpectedInput: args.Map{"HasKey": true, "IsEmpty": false},
+			ExpectedInput: args.Map{
+				"HasKey": true,
+				"IsEmpty": false,
+			},
 		}
-		actual := args.Map{"HasKey": h.Has("pi"), "IsEmpty": h.IsEmpty()}
+		actual := args.Map{
+			"HasKey": h.Has("pi"),
+			"IsEmpty": h.IsEmpty(),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -73,9 +79,15 @@ func Test_Cov55_Hashmap_AddOrUpdateKeyValueAny(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "AddOrUpdateKeyValueAny",
-			ExpectedInput: args.Map{"Has": true, "Length": 1},
+			ExpectedInput: args.Map{
+				"Has": true,
+				"Length": 1,
+			},
 		}
-		actual := args.Map{"Has": h.Has("k"), "Length": h.Length()}
+		actual := args.Map{
+			"Has": h.Has("k"),
+			"Length": h.Length(),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -501,9 +513,15 @@ func Test_Cov55_Hashmap_ConcatNew_WithArgs(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "ConcatNew with args",
-			ExpectedInput: args.Map{"HasA": true, "HasB": true},
+			ExpectedInput: args.Map{
+				"HasA": true,
+				"HasB": true,
+			},
 		}
-		actual := args.Map{"HasA": result.Has("a"), "HasB": result.Has("b")}
+		actual := args.Map{
+			"HasA": result.Has("a"),
+			"HasB": result.Has("b"),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -570,9 +588,15 @@ func Test_Cov55_Hashmap_HasAny(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "HasAny",
-			ExpectedInput: args.Map{"Found": true, "NotFound": false},
+			ExpectedInput: args.Map{
+				"Found": true,
+				"NotFound": false,
+			},
 		}
-		actual := args.Map{"Found": found, "NotFound": notFound}
+		actual := args.Map{
+			"Found": found,
+			"NotFound": notFound,
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -607,9 +631,15 @@ func Test_Cov55_Hashmap_HasAllCollectionItems(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "HasAllCollectionItems",
-			ExpectedInput: args.Map{"HasAll": true, "Nil": false},
+			ExpectedInput: args.Map{
+				"HasAll": true,
+				"Nil": false,
+			},
 		}
-		actual := args.Map{"HasAll": result, "Nil": resultNil}
+		actual := args.Map{
+			"HasAll": result,
+			"Nil": resultNil,
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -642,9 +672,15 @@ func Test_Cov55_Hashmap_IsKeyMissing(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "IsKeyMissing",
-			ExpectedInput: args.Map{"Missing": true, "NotMissing": false},
+			ExpectedInput: args.Map{
+				"Missing": true,
+				"NotMissing": false,
+			},
 		}
-		actual := args.Map{"Missing": missing, "NotMissing": notMissing}
+		actual := args.Map{
+			"Missing": missing,
+			"NotMissing": notMissing,
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -692,9 +728,15 @@ func Test_Cov55_Hashmap_KeysValuesCollection(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "KeysValuesCollection",
-			ExpectedInput: args.Map{"KeysLen": 1, "ValsLen": 1},
+			ExpectedInput: args.Map{
+				"KeysLen": 1,
+				"ValsLen": 1,
+			},
 		}
-		actual := args.Map{"KeysLen": keys.Length(), "ValsLen": values.Length()}
+		actual := args.Map{
+			"KeysLen": keys.Length(),
+			"ValsLen": values.Length(),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -709,9 +751,15 @@ func Test_Cov55_Hashmap_KeysValuesList(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "KeysValuesList",
-			ExpectedInput: args.Map{"KeysLen": 1, "ValsLen": 1},
+			ExpectedInput: args.Map{
+				"KeysLen": 1,
+				"ValsLen": 1,
+			},
 		}
-		actual := args.Map{"KeysLen": len(keys), "ValsLen": len(values)}
+		actual := args.Map{
+			"KeysLen": len(keys),
+			"ValsLen": len(values),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -760,9 +808,15 @@ func Test_Cov55_Hashmap_KeysValuesListLock(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "KeysValuesListLock",
-			ExpectedInput: args.Map{"KeysLen": 1, "ValsLen": 1},
+			ExpectedInput: args.Map{
+				"KeysLen": 1,
+				"ValsLen": 1,
+			},
 		}
-		actual := args.Map{"KeysLen": len(keys), "ValsLen": len(values)}
+		actual := args.Map{
+			"KeysLen": len(keys),
+			"ValsLen": len(values),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -1051,9 +1105,15 @@ func Test_Cov55_Hashmap_GetValue(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "GetValue",
-			ExpectedInput: args.Map{"Val": "v", "Found": true},
+			ExpectedInput: args.Map{
+				"Val": "v",
+				"Found": true,
+			},
 		}
-		actual := args.Map{"Val": val, "Found": found}
+		actual := args.Map{
+			"Val": val,
+			"Found": found,
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -1720,9 +1780,15 @@ func Test_Cov55_Hashmap_SetTrim(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "SetTrim",
-			ExpectedInput: args.Map{"IsNew": true, "Has": true},
+			ExpectedInput: args.Map{
+				"IsNew": true,
+				"Has": true,
+			},
 		}
-		actual := args.Map{"IsNew": isNew, "Has": h.Has("key")}
+		actual := args.Map{
+			"IsNew": isNew,
+			"Has": h.Has("key"),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -1736,9 +1802,15 @@ func Test_Cov55_Hashmap_SetBySplitter(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "SetBySplitter",
-			ExpectedInput: args.Map{"IsNew": true, "Has": true},
+			ExpectedInput: args.Map{
+				"IsNew": true,
+				"Has": true,
+			},
 		}
-		actual := args.Map{"IsNew": isNew, "Has": h.Has("key")}
+		actual := args.Map{
+			"IsNew": isNew,
+			"Has": h.Has("key"),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
@@ -1752,9 +1824,15 @@ func Test_Cov55_Hashmap_SetBySplitter_NoSplit(t *testing.T) {
 		// Assert
 		tc := coretestcases.CaseV1{
 			Title:         "SetBySplitter no split",
-			ExpectedInput: args.Map{"IsNew": true, "Has": true},
+			ExpectedInput: args.Map{
+				"IsNew": true,
+				"Has": true,
+			},
 		}
-		actual := args.Map{"IsNew": isNew, "Has": h.Has("nosplit")}
+		actual := args.Map{
+			"IsNew": isNew,
+			"Has": h.Has("nosplit"),
+		}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }

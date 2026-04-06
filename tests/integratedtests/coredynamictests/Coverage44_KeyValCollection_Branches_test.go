@@ -16,10 +16,18 @@ func Test_Cov44_KVC_Empty(t *testing.T) {
 	kvc := coredynamic.EmptyKeyValCollection()
 
 	// Act
-	actual := args.Map{"len": kvc.Length(), "empty": kvc.IsEmpty(), "hasAny": kvc.HasAnyItem()}
+	actual := args.Map{
+		"len": kvc.Length(),
+		"empty": kvc.IsEmpty(),
+		"hasAny": kvc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true, "hasAny": false}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+		"hasAny": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC Empty", actual)
 }
 
@@ -230,10 +238,16 @@ func Test_Cov44_KVC_AllKeys_Valid(t *testing.T) {
 	keys := kvc.AllKeys()
 
 	// Act
-	actual := args.Map{"len": len(keys), "first": keys[0]}
+	actual := args.Map{
+		"len": len(keys),
+		"first": keys[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "KVC AllKeys valid", actual)
 }
 
@@ -257,10 +271,16 @@ func Test_Cov44_KVC_AllKeysSorted_Valid(t *testing.T) {
 	keys := kvc.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"first": keys[0], "second": keys[1]}
+	actual := args.Map{
+		"first": keys[0],
+		"second": keys[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "c"}
+	expected := args.Map{
+		"first": "a",
+		"second": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "KVC AllKeysSorted valid", actual)
 }
 
@@ -459,10 +479,16 @@ func Test_Cov44_KVC_Serialize(t *testing.T) {
 	b, err := kvc.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC Serialize", actual)
 }
 
@@ -473,10 +499,16 @@ func Test_Cov44_KVC_JsonString(t *testing.T) {
 	s, err := kvc.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC JsonString", actual)
 }
 
@@ -503,10 +535,16 @@ func Test_Cov44_KVC_ParseInjectUsingJson(t *testing.T) {
 	result, err := kvc2.ParseInjectUsingJson(&jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC ParseInjectUsingJson", actual)
 }
 
@@ -552,10 +590,16 @@ func Test_Cov44_KVC_JsonMapResults_Empty(t *testing.T) {
 	mr, err := kvc.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "empty": mr.IsEmpty()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": mr.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "empty": true}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC JsonMapResults empty", actual)
 }
 
@@ -566,10 +610,16 @@ func Test_Cov44_KVC_JsonMapResults_Valid(t *testing.T) {
 	mr, err := kvc.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "empty": mr.IsEmpty()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": mr.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "empty": false}
+	expected := args.Map{
+		"noErr": true,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC JsonMapResults valid", actual)
 }
 
@@ -664,10 +714,16 @@ func Test_Cov44_KVC_ClonePtr_Valid(t *testing.T) {
 	c := kvc.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "len": c.Length()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 1}
+	expected := args.Map{
+		"notNil": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC ClonePtr valid", actual)
 }
 

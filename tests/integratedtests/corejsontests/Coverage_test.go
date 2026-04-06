@@ -14,10 +14,20 @@ func Test_New_Simple_Cov(t *testing.T) {
 	r := corejson.New("hello")
 
 	// Act
-	actual := args.Map{"hasError": r.Error != nil, "isEmpty": r.IsEmpty(), "hasBytes": len(r.Bytes) > 0, "typeName": r.TypeName != ""}
+	actual := args.Map{
+		"hasError": r.Error != nil,
+		"isEmpty": r.IsEmpty(),
+		"hasBytes": len(r.Bytes) > 0,
+		"typeName": r.TypeName != "",
+	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "isEmpty": false, "hasBytes": true, "typeName": true}
+	expected := args.Map{
+		"hasError": false,
+		"isEmpty": false,
+		"hasBytes": true,
+		"typeName": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New_Simple returns correct value -- with args", actual)
 }
 
@@ -26,10 +36,16 @@ func Test_NewPtr_Simple_Cov(t *testing.T) {
 	r := corejson.NewPtr("hello")
 
 	// Act
-	actual := args.Map{"isNil": r == nil, "hasError": r.Error != nil}
+	actual := args.Map{
+		"isNil": r == nil,
+		"hasError": r.Error != nil,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": false, "hasError": false}
+	expected := args.Map{
+		"isNil": false,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPtr_Simple returns correct value -- with args", actual)
 }
 
@@ -39,10 +55,20 @@ func Test_New_Struct_Cov(t *testing.T) {
 	r := corejson.New(testS{A: 42})
 
 	// Act
-	actual := args.Map{"hasError": r.Error != nil, "hasBytes": len(r.Bytes) > 0, "stringNotEmpty": r.String() != "", "jsonStringNotNil": r.JsonString() != ""}
+	actual := args.Map{
+		"hasError": r.Error != nil,
+		"hasBytes": len(r.Bytes) > 0,
+		"stringNotEmpty": r.String() != "",
+		"jsonStringNotNil": r.JsonString() != "",
+	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "hasBytes": true, "stringNotEmpty": true, "jsonStringNotNil": true}
+	expected := args.Map{
+		"hasError": false,
+		"hasBytes": true,
+		"stringNotEmpty": true,
+		"jsonStringNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New_Struct returns correct value -- with args", actual)
 }
 
@@ -155,10 +181,16 @@ func Test_Result_Clone_Cov(t *testing.T) {
 	c := corejson.NewPtr(42).Clone(false)
 
 	// Act
-	actual := args.Map{"hasError": c.Error != nil, "hasBytes": len(c.Bytes) > 0}
+	actual := args.Map{
+		"hasError": c.Error != nil,
+		"hasBytes": len(c.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "hasBytes": true}
+	expected := args.Map{
+		"hasError": false,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result_Clone returns correct value -- with args", actual)
 }
 
@@ -178,10 +210,18 @@ func Test_Result_IsEqual_Cov(t *testing.T) {
 	r3 := corejson.New(43)
 
 	// Act
-	actual := args.Map{"same": r1.IsEqual(r2), "diff": r1.IsEqual(r3), "nil": r1.IsEqual(corejson.Result{})}
+	actual := args.Map{
+		"same": r1.IsEqual(r2),
+		"diff": r1.IsEqual(r3),
+		"nil": r1.IsEqual(corejson.Result{}),
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false, "nil": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result_IsEqual returns correct value -- with args", actual)
 }
 
@@ -193,10 +233,16 @@ func Test_Result_Unmarshal_Cov(t *testing.T) {
 	err := r.Unmarshal(&out)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": out.A}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": out.A,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 42}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Result_Unmarshal returns correct value -- with args", actual)
 }
 
@@ -219,10 +265,16 @@ func Test_EmptyResultPtr_Cov(t *testing.T) {
 	r := corejson.Empty.ResultPtr()
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "isEmpty": r.IsEmpty()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"isEmpty": r.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyResultPtr returns empty -- with args", actual)
 }
 
@@ -242,10 +294,16 @@ func Test_Serialize_UsingAnyPtr_Cov(t *testing.T) {
 	r := corejson.Serialize.UsingAnyPtr(42)
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "hasErr": r.HasError()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"hasErr": r.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasErr": false}
+	expected := args.Map{
+		"notNil": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_UsingAnyPtr returns correct value -- with args", actual)
 }
 
@@ -257,10 +315,16 @@ func Test_Deserialize_UsingResult_Cov(t *testing.T) {
 	err := corejson.Deserialize.UsingResult(&r, &out)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": out.A}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": out.A,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 42}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_UsingResult returns correct value -- with args", actual)
 }
 
@@ -271,10 +335,16 @@ func Test_Deserialize_UsingBytes_Cov(t *testing.T) {
 	err := corejson.Deserialize.UsingBytes([]byte(`{"A":42}`), &out)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": out.A}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": out.A,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 42}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_UsingBytes returns correct value -- with args", actual)
 }
 

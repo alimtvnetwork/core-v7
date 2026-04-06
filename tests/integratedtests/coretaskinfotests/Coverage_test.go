@@ -92,7 +92,10 @@ func Test_Cov_Info_IsName(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- IsName", actual)
 }
 
@@ -176,7 +179,11 @@ func Test_Cov_Info_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"name": "task", "desc": "desc", "url": "url"}
+	expected := args.Map{
+		"name": "task",
+		"desc": "desc",
+		"url": "url",
+	}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Clone", actual)
 }
 
@@ -259,7 +266,10 @@ func Test_Cov_Info_SetSecure_Defined(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isSecure": true, "name": "task"}
+	expected := args.Map{
+		"isSecure": true,
+		"name": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "Info SetSecure defined -- sets secure flag", actual)
 }
 

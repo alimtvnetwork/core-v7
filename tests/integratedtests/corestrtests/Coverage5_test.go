@@ -17,10 +17,16 @@ func Test_Cov5_CloneSlice_NonEmpty(t *testing.T) {
 		result := corestr.CloneSlice([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"len": len(result), "first": result[0]}
+		actual := args.Map{
+			"len": len(result),
+			"first": result[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "CloneSlice copies -- non-empty", actual)
 	})
 }
@@ -162,7 +168,11 @@ func Test_Cov5_ValidValue_IsAnyOf(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"match": true, "noMatch": false, "empty": true}
+		expected := args.Map{
+			"match": true,
+			"noMatch": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue IsAnyOf -- various", actual)
 	})
 }
@@ -180,7 +190,11 @@ func Test_Cov5_ValidValue_IsAnyContains(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"match": true, "noMatch": false, "empty": true}
+		expected := args.Map{
+			"match": true,
+			"noMatch": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue IsAnyContains -- various", actual)
 	})
 }
@@ -215,7 +229,10 @@ func Test_Cov5_ValidValue_Clone(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "nilNil": true}
+		expected := args.Map{
+			"val": "hello",
+			"nilNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue Clone -- valid and nil", actual)
 	})
 }
@@ -234,7 +251,11 @@ func Test_Cov5_ValidValue_String(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"string": "hello", "full": true, "nil": ""}
+		expected := args.Map{
+			"string": "hello",
+			"full": true,
+			"nil": "",
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue String -- valid and nil", actual)
 	})
 }
@@ -248,10 +269,18 @@ func Test_Cov5_ValidValue_ValueBytesOnce(t *testing.T) {
 		b3 := v.ValueBytesOncePtr()
 
 		// Act
-		actual := args.Map{"len": len(b1), "cached": len(b2), "ptr": len(b3)}
+		actual := args.Map{
+			"len": len(b1),
+			"cached": len(b2),
+			"ptr": len(b3),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "cached": 2, "ptr": 2}
+		expected := args.Map{
+			"len": 2,
+			"cached": 2,
+			"ptr": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue ValueBytesOnce -- cached", actual)
 	})
 }
@@ -263,10 +292,16 @@ func Test_Cov5_ValidValue_ClearDispose(t *testing.T) {
 		v.Clear()
 
 		// Act
-		actual := args.Map{"empty": v.IsEmpty(), "valid": v.IsValid}
+		actual := args.Map{
+			"empty": v.IsEmpty(),
+			"valid": v.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "valid": false}
+		expected := args.Map{
+			"empty": true,
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue Clear -- cleared", actual)
 	})
 }
@@ -328,7 +363,10 @@ func Test_Cov5_ValidValues_SafeValueAt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"valid": "a", "invalid": ""}
+		expected := args.Map{
+			"valid": "a",
+			"invalid": "",
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues SafeValueAt -- valid and invalid", actual)
 	})
 }
@@ -346,7 +384,10 @@ func Test_Cov5_ValidValues_Strings(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"stringsLen": 2, "string": true}
+		expected := args.Map{
+			"stringsLen": 2,
+			"string": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues Strings -- 2 items", actual)
 	})
 }
@@ -449,7 +490,11 @@ func Test_Cov5_KeyValuePair_Is(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"is": true, "isKey": true, "isVal": true}
+		expected := args.Map{
+			"is": true,
+			"isKey": true,
+			"isVal": true,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair Is methods -- k:v", actual)
 	})
 }
@@ -461,10 +506,16 @@ func Test_Cov5_KeyValuePair_ValueValid(t *testing.T) {
 		vv := kv.ValueValid()
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v", "valid": true}
+		expected := args.Map{
+			"val": "v",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair ValueValid -- v", actual)
 	})
 }
@@ -476,10 +527,16 @@ func Test_Cov5_KeyValuePair_Clear(t *testing.T) {
 		kv.Clear()
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "", "val": ""}
+		expected := args.Map{
+			"key": "",
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair Clear -- cleared", actual)
 	})
 }

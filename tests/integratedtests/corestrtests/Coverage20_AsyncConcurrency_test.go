@@ -203,8 +203,14 @@ func Test_Cov20_Collection_SafeIndexAtUsingLength(t *testing.T) {
 		oob := c.SafeIndexAtUsingLength("def", 2, 5)
 
 		// Assert
-		actual := args.Map{"found": found, "oob": oob}
-		expected := args.Map{"found": "a", "oob": "def"}
+		actual := args.Map{
+			"found": found,
+			"oob": oob,
+		}
+		expected := args.Map{
+			"found": "a",
+			"oob": "def",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SafeIndexAtUsingLength", actual)
 	})
 }
@@ -838,8 +844,14 @@ func Test_Cov20_LinkedCollections_AttachWithNode(t *testing.T) {
 		err := lc.AttachWithNode(current, adding)
 
 		// Assert
-		actual := args.Map{"err": err == nil, "len": lc.Length()}
-		expected := args.Map{"err": true, "len": 2}
+		actual := args.Map{
+			"err": err == nil,
+			"len": lc.Length(),
+		}
+		expected := args.Map{
+			"err": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedCollections returns non-empty -- AttachWithNode", actual)
 	})
 }
@@ -1167,8 +1179,14 @@ func Test_Cov20_LinkedCollections_GetNextNodes(t *testing.T) {
 		all := lc.GetAllLinkedNodes()
 
 		// Assert
-		actual := args.Map{"next": len(nodes), "all": len(all)}
-		expected := args.Map{"next": 2, "all": 3}
+		actual := args.Map{
+			"next": len(nodes),
+			"all": len(all),
+		}
+		expected := args.Map{
+			"next": 2,
+			"all": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedCollections returns correct value -- GetNextNodes", actual)
 	})
 }

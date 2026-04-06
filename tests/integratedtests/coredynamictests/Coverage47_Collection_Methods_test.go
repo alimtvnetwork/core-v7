@@ -129,10 +129,16 @@ func Test_Cov47_ColM_ConcatNew(t *testing.T) {
 	n := c.ConcatNew(3, 4)
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "newLen": n.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"newLen": n.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 2, "newLen": 4}
+	expected := args.Map{
+		"origLen": 2,
+		"newLen": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNew", actual)
 }
 
@@ -160,10 +166,16 @@ func Test_Cov47_ColM_Clone_Valid(t *testing.T) {
 	cl.Add(3)
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "cloneLen": cl.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"cloneLen": cl.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 2, "cloneLen": 3}
+	expected := args.Map{
+		"origLen": 2,
+		"cloneLen": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone valid", actual)
 }
 
@@ -256,10 +268,16 @@ func Test_Cov47_ColM_Reverse_Multi(t *testing.T) {
 	c.Reverse()
 
 	// Act
-	actual := args.Map{"first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 3, "last": 1}
+	expected := args.Map{
+		"first": 3,
+		"last": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Reverse multi", actual)
 }
 
@@ -282,10 +300,16 @@ func Test_Cov47_ColM_InsertAt_Valid(t *testing.T) {
 	c.InsertAt(1, 2)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "at1": c.At(1)}
+	actual := args.Map{
+		"len": c.Length(),
+		"at1": c.At(1),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "at1": 2}
+	expected := args.Map{
+		"len": 3,
+		"at1": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "InsertAt valid", actual)
 }
 
@@ -375,10 +399,16 @@ func Test_Cov47_ColS_Contains(t *testing.T) {
 	c := coredynamic.CollectionFrom([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"found": coredynamic.Contains(c, "b"), "notFound": coredynamic.Contains(c, "z")}
+	actual := args.Map{
+		"found": coredynamic.Contains(c, "b"),
+		"notFound": coredynamic.Contains(c, "z"),
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Contains", actual)
 }
 
@@ -512,10 +542,16 @@ func Test_Cov47_ColSort_SortFunc(t *testing.T) {
 	c.SortFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortFunc", actual)
 }
 
@@ -564,10 +600,16 @@ func Test_Cov47_ColSort_SortedAsc(t *testing.T) {
 	s := coredynamic.SortedAsc(c)
 
 	// Act
-	actual := args.Map{"origFirst": c.First(), "sortedFirst": s.First()}
+	actual := args.Map{
+		"origFirst": c.First(),
+		"sortedFirst": s.First(),
+	}
 
 	// Assert
-	expected := args.Map{"origFirst": 3, "sortedFirst": 1}
+	expected := args.Map{
+		"origFirst": 3,
+		"sortedFirst": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedAsc", actual)
 }
 
@@ -693,10 +735,16 @@ func Test_Cov47_ColMap_Map_Valid(t *testing.T) {
 	r := coredynamic.Map(c, func(i int) int { return i * 2 })
 
 	// Act
-	actual := args.Map{"first": r.First(), "last": r.Last()}
+	actual := args.Map{
+		"first": r.First(),
+		"last": r.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 2, "last": 6}
+	expected := args.Map{
+		"first": 2,
+		"last": 6,
+	}
 	expected.ShouldBeEqual(t, 0, "Map valid", actual)
 }
 
@@ -877,10 +925,16 @@ func Test_Cov47_ColGB_GroupBy_Valid(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"groups": len(r), "evenLen": r["even"].Length()}
+	actual := args.Map{
+		"groups": len(r),
+		"evenLen": r["even"].Length(),
+	}
 
 	// Assert
-	expected := args.Map{"groups": 2, "evenLen": 2}
+	expected := args.Map{
+		"groups": 2,
+		"evenLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupBy valid", actual)
 }
 
@@ -915,10 +969,16 @@ func Test_Cov47_ColGB_GroupByCount_Valid(t *testing.T) {
 	r := coredynamic.GroupByCount(c, func(s string) string { return s })
 
 	// Act
-	actual := args.Map{"a": r["a"], "b": r["b"]}
+	actual := args.Map{
+		"a": r["a"],
+		"b": r["b"],
+	}
 
 	// Assert
-	expected := args.Map{"a": 2, "b": 1}
+	expected := args.Map{
+		"a": 2,
+		"b": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupByCount valid", actual)
 }
 
@@ -1061,10 +1121,16 @@ func Test_Cov47_ColLock_RemoveAtLock_Valid(t *testing.T) {
 	c := coredynamic.CollectionFrom([]int{1, 2})
 
 	// Act
-	actual := args.Map{"ok": c.RemoveAtLock(0), "len": c.Length()}
+	actual := args.Map{
+		"ok": c.RemoveAtLock(0),
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveAtLock valid", actual)
 }
 

@@ -73,10 +73,16 @@ func Test_Cov7_Conclusive_BothNil(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(nil, nil)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "conclusive": true}
+	expected := args.Map{
+		"equal": true,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- both nil", actual)
 }
 
@@ -85,10 +91,16 @@ func Test_Cov7_Conclusive_LeftNil(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(nil, "x")
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "conclusive": true}
+	expected := args.Map{
+		"equal": false,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- left nil", actual)
 }
 
@@ -97,10 +109,16 @@ func Test_Cov7_Conclusive_RightNil(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive("x", nil)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "conclusive": true}
+	expected := args.Map{
+		"equal": false,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- right nil", actual)
 }
 
@@ -110,10 +128,16 @@ func Test_Cov7_Conclusive_SameRef(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(s, s)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "conclusive": true}
+	expected := args.Map{
+		"equal": true,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- same ref", actual)
 }
 
@@ -122,10 +146,16 @@ func Test_Cov7_Conclusive_DiffType(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(1, "1")
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "conclusive": true}
+	expected := args.Map{
+		"equal": false,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- diff type", actual)
 }
 
@@ -135,10 +165,16 @@ func Test_Cov7_Conclusive_BothNilPtr(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(p1, p2)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "conclusive": true}
+	expected := args.Map{
+		"equal": true,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- both nil ptr", actual)
 }
 
@@ -149,10 +185,16 @@ func Test_Cov7_Conclusive_OneNilPtr(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(p1, &v)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "conclusive": true}
+	expected := args.Map{
+		"equal": false,
+		"conclusive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- one nil ptr", actual)
 }
 
@@ -161,10 +203,16 @@ func Test_Cov7_Conclusive_SameTypeDiffValue(t *testing.T) {
 	isEqual, isConclusive := isany.Conclusive(1, 2)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "conclusive": isConclusive}
+	actual := args.Map{
+		"equal": isEqual,
+		"conclusive": isConclusive,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "conclusive": false}
+	expected := args.Map{
+		"equal": false,
+		"conclusive": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive same type diff value -- inconclusive", actual)
 }
 
@@ -195,10 +243,16 @@ func Test_Cov7_DefinedItems_Empty(t *testing.T) {
 	allDefined, items := isany.DefinedItems()
 
 	// Act
-	actual := args.Map{"allDefined": allDefined, "len": len(items)}
+	actual := args.Map{
+		"allDefined": allDefined,
+		"len": len(items),
+	}
 
 	// Assert
-	expected := args.Map{"allDefined": false, "len": 0}
+	expected := args.Map{
+		"allDefined": false,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedItems returns empty -- empty", actual)
 }
 
@@ -207,10 +261,16 @@ func Test_Cov7_DefinedItems_AllDefined(t *testing.T) {
 	allDefined, items := isany.DefinedItems("a", 1, true)
 
 	// Act
-	actual := args.Map{"allDefined": allDefined, "len": len(items)}
+	actual := args.Map{
+		"allDefined": allDefined,
+		"len": len(items),
+	}
 
 	// Assert
-	expected := args.Map{"allDefined": true, "len": 3}
+	expected := args.Map{
+		"allDefined": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedItems returns correct value -- all defined", actual)
 }
 
@@ -219,10 +279,16 @@ func Test_Cov7_DefinedItems_SomeNil(t *testing.T) {
 	allDefined, items := isany.DefinedItems("a", nil, "b")
 
 	// Act
-	actual := args.Map{"allDefined": allDefined, "len": len(items)}
+	actual := args.Map{
+		"allDefined": allDefined,
+		"len": len(items),
+	}
 
 	// Assert
-	expected := args.Map{"allDefined": false, "len": 2}
+	expected := args.Map{
+		"allDefined": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedItems returns nil -- some nil", actual)
 }
 
@@ -233,10 +299,16 @@ func Test_Cov7_DefinedLeftRight_BothDefined(t *testing.T) {
 	l, r := isany.DefinedLeftRight("a", "b")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": true, "right": true}
+	expected := args.Map{
+		"left": true,
+		"right": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedLeftRight returns correct value -- both defined", actual)
 }
 
@@ -245,10 +317,16 @@ func Test_Cov7_DefinedLeftRight_LeftNil(t *testing.T) {
 	l, r := isany.DefinedLeftRight(nil, "b")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": false, "right": true}
+	expected := args.Map{
+		"left": false,
+		"right": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedLeftRight returns nil -- left nil", actual)
 }
 
@@ -259,10 +337,16 @@ func Test_Cov7_NullLeftRight_BothDefined(t *testing.T) {
 	l, r := isany.NullLeftRight("a", "b")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": false, "right": false}
+	expected := args.Map{
+		"left": false,
+		"right": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NullLeftRight returns correct value -- both defined", actual)
 }
 
@@ -449,10 +533,16 @@ func Test_Cov7_Function_NilFunc(t *testing.T) {
 	isFunc, name := isany.Function(fn)
 
 	// Act
-	actual := args.Map{"isFunc": isFunc, "name": name}
+	actual := args.Map{
+		"isFunc": isFunc,
+		"name": name,
+	}
 
 	// Assert
-	expected := args.Map{"isFunc": true, "name": ""}
+	expected := args.Map{
+		"isFunc": true,
+		"name": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Function nil func -- isFunc true name empty", actual)
 }
 
@@ -461,10 +551,16 @@ func Test_Cov7_Function_ValidFunc(t *testing.T) {
 	isFunc, name := isany.Function(isany.Null)
 
 	// Act
-	actual := args.Map{"isFunc": isFunc, "hasName": name != ""}
+	actual := args.Map{
+		"isFunc": isFunc,
+		"hasName": name != "",
+	}
 
 	// Assert
-	expected := args.Map{"isFunc": true, "hasName": true}
+	expected := args.Map{
+		"isFunc": true,
+		"hasName": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Function valid -- isFunc true has name", actual)
 }
 

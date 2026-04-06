@@ -12,7 +12,12 @@ import (
 
 func Test_I6_01_Map_Length_ArgsCount(t *testing.T) {
 	convey.Convey("Map Length and ArgsCount", t, func() {
-		m := args.Map{"first": 1, "second": 2, "expected": "e", "func": nil}
+		m := args.Map{
+			"first": 1,
+			"second": 2,
+			"expected": "e",
+			"func": nil,
+		}
 		convey.So(m.Length(), convey.ShouldEqual, 4)
 	})
 }
@@ -26,7 +31,10 @@ func Test_I6_02_Map_Expected(t *testing.T) {
 
 func Test_I6_03_Map_HasFirst_HasExpect(t *testing.T) {
 	convey.Convey("Map HasFirst and HasExpect", t, func() {
-		m := args.Map{"first": "a", "expected": "b"}
+		m := args.Map{
+			"first": "a",
+			"expected": "b",
+		}
 		convey.So(m.HasFirst(), convey.ShouldBeTrue)
 		convey.So(m.HasExpect(), convey.ShouldBeTrue)
 
@@ -38,7 +46,10 @@ func Test_I6_03_Map_HasFirst_HasExpect(t *testing.T) {
 
 func Test_I6_04_Map_GetByIndex(t *testing.T) {
 	convey.Convey("Map GetByIndex", t, func() {
-		m := args.Map{"a": 1, "b": 2}
+		m := args.Map{
+			"a": 1,
+			"b": 2,
+		}
 		result := m.GetByIndex(0)
 		convey.So(result, convey.ShouldNotBeNil)
 		outOfBounds := m.GetByIndex(100)
@@ -48,7 +59,10 @@ func Test_I6_04_Map_GetByIndex(t *testing.T) {
 
 func Test_I6_05_Map_HasDefined_Has(t *testing.T) {
 	convey.Convey("Map HasDefined and Has", t, func() {
-		m := args.Map{"key": "val", "nilkey": nil}
+		m := args.Map{
+			"key": "val",
+			"nilkey": nil,
+		}
 		convey.So(m.HasDefined("key"), convey.ShouldBeTrue)
 		convey.So(m.Has("key"), convey.ShouldBeTrue)
 		convey.So(m.Has("nilkey"), convey.ShouldBeTrue)
@@ -62,7 +76,10 @@ func Test_I6_05_Map_HasDefined_Has(t *testing.T) {
 
 func Test_I6_06_Map_HasDefinedAll(t *testing.T) {
 	convey.Convey("Map HasDefinedAll", t, func() {
-		m := args.Map{"a": 1, "b": 2}
+		m := args.Map{
+			"a": 1,
+			"b": 2,
+		}
 		convey.So(m.HasDefinedAll("a", "b"), convey.ShouldBeTrue)
 		convey.So(m.HasDefinedAll("a", "c"), convey.ShouldBeFalse)
 		convey.So(m.HasDefinedAll(), convey.ShouldBeFalse)
@@ -74,7 +91,10 @@ func Test_I6_06_Map_HasDefinedAll(t *testing.T) {
 
 func Test_I6_07_Map_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 	convey.Convey("Map IsKeyInvalid and IsKeyMissing", t, func() {
-		m := args.Map{"key": "val", "nilkey": nil}
+		m := args.Map{
+			"key": "val",
+			"nilkey": nil,
+		}
 		convey.So(m.IsKeyInvalid("missing"), convey.ShouldBeTrue)
 		convey.So(m.IsKeyInvalid("nilkey"), convey.ShouldBeTrue)
 		convey.So(m.IsKeyInvalid("key"), convey.ShouldBeFalse)
@@ -89,7 +109,10 @@ func Test_I6_07_Map_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 
 func Test_I6_08_Map_SortedKeys(t *testing.T) {
 	convey.Convey("Map SortedKeys", t, func() {
-		m := args.Map{"b": 2, "a": 1}
+		m := args.Map{
+			"b": 2,
+			"a": 1,
+		}
 		keys, err := m.SortedKeys()
 		convey.So(err, convey.ShouldBeNil)
 		convey.So(keys, convey.ShouldResemble, []string{"a", "b"})
@@ -103,7 +126,10 @@ func Test_I6_08_Map_SortedKeys(t *testing.T) {
 
 func Test_I6_09_Map_When_Title(t *testing.T) {
 	convey.Convey("Map When and Title", t, func() {
-		m := args.Map{"when": "w", "title": "t"}
+		m := args.Map{
+			"when": "w",
+			"title": "t",
+		}
 		convey.So(m.When(), convey.ShouldEqual, "w")
 		convey.So(m.Title(), convey.ShouldEqual, "t")
 	})
@@ -144,7 +170,11 @@ func Test_I6_11_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 
 func Test_I6_12_Map_Expect_Actual_Arrange(t *testing.T) {
 	convey.Convey("Map Expect, Actual, Arrange", t, func() {
-		m := args.Map{"expect": "e", "actual": "a", "arrange": "r"}
+		m := args.Map{
+			"expect": "e",
+			"actual": "a",
+			"arrange": "r",
+		}
 		convey.So(m.Expect(), convey.ShouldEqual, "e")
 		convey.So(m.Actual(), convey.ShouldEqual, "a")
 		convey.So(m.Arrange(), convey.ShouldEqual, "r")
@@ -202,7 +232,10 @@ func Test_I6_16_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 
 func Test_I6_17_Map_GetAsInt(t *testing.T) {
 	convey.Convey("Map GetAsInt and GetAsIntDefault", t, func() {
-		m := args.Map{"num": 42, "str": "hello"}
+		m := args.Map{
+			"num": 42,
+			"str": "hello",
+		}
 		v, ok := m.GetAsInt("num")
 		convey.So(v, convey.ShouldEqual, 42)
 		convey.So(ok, convey.ShouldBeTrue)
@@ -223,7 +256,10 @@ func Test_I6_17_Map_GetAsInt(t *testing.T) {
 
 func Test_I6_18_Map_GetAsBool(t *testing.T) {
 	convey.Convey("Map GetAsBool and GetAsBoolDefault", t, func() {
-		m := args.Map{"flag": true, "str": "hello"}
+		m := args.Map{
+			"flag": true,
+			"str": "hello",
+		}
 		v, ok := m.GetAsBool("flag")
 		convey.So(v, convey.ShouldBeTrue)
 		convey.So(ok, convey.ShouldBeTrue)
@@ -241,7 +277,10 @@ func Test_I6_18_Map_GetAsBool(t *testing.T) {
 
 func Test_I6_19_Map_GetAsString(t *testing.T) {
 	convey.Convey("Map GetAsString and GetAsStringDefault", t, func() {
-		m := args.Map{"name": "hello", "num": 42}
+		m := args.Map{
+			"name": "hello",
+			"num": 42,
+		}
 		v, ok := m.GetAsString("name")
 		convey.So(v, convey.ShouldEqual, "hello")
 		convey.So(ok, convey.ShouldBeTrue)
@@ -283,7 +322,11 @@ func Test_I6_21_Map_GetAsAnyItems(t *testing.T) {
 
 func Test_I6_22_Map_ValidArgs(t *testing.T) {
 	convey.Convey("Map ValidArgs", t, func() {
-		m := args.Map{"a": 1, "b": nil, "func": strings.ToUpper}
+		m := args.Map{
+			"a": 1,
+			"b": nil,
+			"func": strings.ToUpper,
+		}
 		va := m.ValidArgs()
 		convey.So(len(va), convey.ShouldEqual, 1) // only "a"=1, "b"=nil skipped, "func" is a func
 	})
@@ -291,7 +334,10 @@ func Test_I6_22_Map_ValidArgs(t *testing.T) {
 
 func Test_I6_23_Map_Args(t *testing.T) {
 	convey.Convey("Map Args", t, func() {
-		m := args.Map{"a": 1, "b": 2}
+		m := args.Map{
+			"a": 1,
+			"b": 2,
+		}
 		va := m.Args("a", "b")
 		convey.So(len(va), convey.ShouldEqual, 2)
 	})
@@ -333,7 +379,10 @@ func Test_I6_27_Map_GetFirstFuncNameOf(t *testing.T) {
 
 func Test_I6_28_Map_CompileToStrings(t *testing.T) {
 	convey.Convey("Map CompileToStrings", t, func() {
-		m := args.Map{"b": 2, "a": 1}
+		m := args.Map{
+			"b": 2,
+			"a": 1,
+		}
 		lines := m.CompileToStrings()
 		convey.So(len(lines), convey.ShouldEqual, 2)
 		convey.So(lines[0], convey.ShouldEqual, "a : 1")
@@ -353,7 +402,10 @@ func Test_I6_29_Map_CompileToString(t *testing.T) {
 
 func Test_I6_30_Map_GoLiteralLines(t *testing.T) {
 	convey.Convey("Map GoLiteralLines", t, func() {
-		m := args.Map{"name": "hello", "num": 42}
+		m := args.Map{
+			"name": "hello",
+			"num": 42,
+		}
 		lines := m.GoLiteralLines()
 		convey.So(len(lines), convey.ShouldEqual, 2)
 
@@ -601,7 +653,10 @@ func Test_I6_38_LeftRight(t *testing.T) {
 func Test_I6_39_Dynamic(t *testing.T) {
 	convey.Convey("Dynamic all methods", t, func() {
 		d := &args.DynamicAny{
-			Params: args.Map{"first": "a", "second": "b"},
+			Params: args.Map{
+				"first": "a",
+				"second": "b",
+			},
 			Expect: "expected",
 		}
 		convey.So(d.ArgsCount(), convey.ShouldBeGreaterThan, 0)
@@ -661,7 +716,12 @@ func Test_I6_40_Dynamic_NilReceiver(t *testing.T) {
 func Test_I6_41_Dynamic_TypedGetters(t *testing.T) {
 	convey.Convey("Dynamic typed getters", t, func() {
 		d := &args.DynamicAny{
-			Params: args.Map{"num": 42, "name": "hello", "items": []string{"a"}, "anys": []any{1}},
+			Params: args.Map{
+				"num": 42,
+				"name": "hello",
+				"items": []string{"a"},
+				"anys": []any{1},
+			},
 		}
 		v, ok := d.GetAsInt("num")
 		convey.So(v, convey.ShouldEqual, 42)
@@ -696,7 +756,11 @@ func Test_I6_41_Dynamic_TypedGetters(t *testing.T) {
 func Test_I6_42_DynamicFunc(t *testing.T) {
 	convey.Convey("DynamicFunc all methods", t, func() {
 		df := &args.DynamicFuncAny{
-			Params:   args.Map{"first": "a", "when": "w", "title": "t"},
+			Params:   args.Map{
+				"first": "a",
+				"when": "w",
+				"title": "t",
+			},
 			WorkFunc: strings.ToUpper,
 			Expect:   "HELLO",
 		}
@@ -763,7 +827,12 @@ func Test_I6_43_DynamicFunc_NilReceiver(t *testing.T) {
 func Test_I6_44_DynamicFunc_TypedGetters(t *testing.T) {
 	convey.Convey("DynamicFunc typed getters", t, func() {
 		df := &args.DynamicFuncAny{
-			Params: args.Map{"num": 42, "name": "hello", "items": []string{"a"}, "anys": []any{1}},
+			Params: args.Map{
+				"num": 42,
+				"name": "hello",
+				"items": []string{"a"},
+				"anys": []any{1},
+			},
 		}
 		v, ok := df.GetAsInt("num")
 		convey.So(v, convey.ShouldEqual, 42)
@@ -1424,7 +1493,11 @@ func Test_I6_81_Map_WorkFunc_Invoke(t *testing.T) {
 func Test_I6_82_Map_InvokeArgs(t *testing.T) {
 	convey.Convey("Map InvokeArgs", t, func() {
 		addFunc := func(a, b string) string { return a + b }
-		m := args.Map{"func": addFunc, "p1": "hello", "p2": " world"}
+		m := args.Map{
+			"func": addFunc,
+			"p1": "hello",
+			"p2": " world",
+		}
 		results, err := m.InvokeArgs("p1", "p2")
 		convey.So(err, convey.ShouldBeNil)
 		convey.So(results[0], convey.ShouldEqual, "hello world")

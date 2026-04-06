@@ -39,10 +39,16 @@ func Test_Cov2_Index_MinMaxAny(t *testing.T) {
 	min, max := v.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- MinMaxAny", actual)
 }
 
@@ -59,7 +65,12 @@ func Test_Cov2_Index_MinMaxValueString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"minStr": true, "maxStr": true, "minInt": true, "maxInt": true}
+	expected := args.Map{
+		"minStr": true,
+		"maxStr": true,
+		"minInt": true,
+		"maxInt": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns non-empty -- MinMaxValueString", actual)
 }
 
@@ -91,10 +102,16 @@ func Test_Cov2_Index_OnlySupportedErr(t *testing.T) {
 	noErrResult := noErr == nil
 
 	// Act
-	actual := args.Map{"noErr": noErrResult, "hasErr": hasErr != nil}
+	actual := args.Map{
+		"noErr": noErrResult,
+		"hasErr": hasErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": noErrResult, "hasErr": true}
+	expected := args.Map{
+		"noErr": noErrResult,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns error -- OnlySupportedErr", actual)
 }
 
@@ -124,7 +141,10 @@ func Test_Cov2_Index_IsEnumEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- IsEnumEqual", actual)
 }
 
@@ -147,7 +167,10 @@ func Test_Cov2_Index_IsAnyEnumsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- IsAnyEnumsEqual", actual)
 }
 
@@ -159,7 +182,10 @@ func Test_Cov2_Index_IsByteValueEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- IsByteValueEqual", actual)
 }
 
@@ -171,7 +197,10 @@ func Test_Cov2_Index_IsAnyValuesEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns non-empty -- IsAnyValuesEqual", actual)
 }
 
@@ -183,7 +212,10 @@ func Test_Cov2_Index_IsAnyNamesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- IsAnyNamesOf", actual)
 }
 
@@ -208,7 +240,11 @@ func Test_Cov2_Index_Contracts(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"basicBinder": true, "jsonBinder": true, "basicByteBinder": true}
+	expected := args.Map{
+		"basicBinder": true,
+		"jsonBinder": true,
+		"basicByteBinder": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- Contracts", actual)
 }
 
@@ -218,10 +254,16 @@ func Test_Cov2_Index_ToPtr(t *testing.T) {
 	p := v.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": p != nil, "isMajor": p.IsMajor()}
+	actual := args.Map{
+		"notNil": p != nil,
+		"isMajor": p.IsMajor(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isMajor": true}
+	expected := args.Map{
+		"notNil": true,
+		"isMajor": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- ToPtr", actual)
 }
 
@@ -240,7 +282,11 @@ func Test_Cov2_Index_JsonParseSelfInject(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "isMinor": true, "nilErr": true}
+	expected := args.Map{
+		"noErr": true,
+		"isMinor": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- JsonParseSelfInject", actual)
 }
 
@@ -257,7 +303,10 @@ func Test_Cov2_Index_Json(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "ptrNotNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Index returns correct value -- Json", actual)
 }
 

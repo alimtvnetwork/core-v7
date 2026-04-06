@@ -17,10 +17,16 @@ func Test_Cov11_Attributes_IsNull(t *testing.T) {
 	a2 := &corepayload.Attributes{}
 
 	// Act
-	actual := args.Map{"nil": a.IsNull(), "notNil": a2.IsNull()}
+	actual := args.Map{
+		"nil": a.IsNull(),
+		"notNil": a2.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "notNil": false}
+	expected := args.Map{
+		"nil": true,
+		"notNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNull returns correct value -- with args", actual)
 }
 
@@ -42,10 +48,16 @@ func Test_Cov11_Attributes_HasStringKey(t *testing.T) {
 	a.KeyValuePairs.AddOrUpdate("k", "v")
 
 	// Act
-	actual := args.Map{"has": a.HasStringKey("k"), "no": a.HasStringKey("x")}
+	actual := args.Map{
+		"has": a.HasStringKey("k"),
+		"no": a.HasStringKey("x"),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "no": false}
+	expected := args.Map{
+		"has": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasStringKey returns correct value -- with args", actual)
 }
 
@@ -67,10 +79,16 @@ func Test_Cov11_Attributes_HasAnyKey(t *testing.T) {
 	a.AnyKeyValuePairs.Add("k", 42)
 
 	// Act
-	actual := args.Map{"has": a.HasAnyKey("k"), "no": a.HasAnyKey("x")}
+	actual := args.Map{
+		"has": a.HasAnyKey("k"),
+		"no": a.HasAnyKey("x"),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "no": false}
+	expected := args.Map{
+		"has": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasAnyKey returns correct value -- with args", actual)
 }
 
@@ -250,10 +268,16 @@ func Test_Cov11_Attributes_HasPagingInfo(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"has": a.HasPagingInfo(), "nil": a2.HasPagingInfo()}
+	actual := args.Map{
+		"has": a.HasPagingInfo(),
+		"nil": a2.HasPagingInfo(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "nil": false}
+	expected := args.Map{
+		"has": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasPagingInfo returns correct value -- with args", actual)
 }
 
@@ -264,10 +288,16 @@ func Test_Cov11_Attributes_HasKeyValuePairs(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"has": a.HasKeyValuePairs(), "nil": a2.HasKeyValuePairs()}
+	actual := args.Map{
+		"has": a.HasKeyValuePairs(),
+		"nil": a2.HasKeyValuePairs(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "nil": false}
+	expected := args.Map{
+		"has": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasKeyValuePairs returns correct value -- with args", actual)
 }
 
@@ -277,10 +307,16 @@ func Test_Cov11_Attributes_HasFromTo(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"no": a.HasFromTo(), "nil": a2.HasFromTo()}
+	actual := args.Map{
+		"no": a.HasFromTo(),
+		"nil": a2.HasFromTo(),
+	}
 
 	// Assert
-	expected := args.Map{"no": false, "nil": false}
+	expected := args.Map{
+		"no": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasFromTo returns correct value -- with args", actual)
 }
 
@@ -290,10 +326,16 @@ func Test_Cov11_Attributes_IsValid(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"valid": a.IsValid(), "nil": a2.IsValid()}
+	actual := args.Map{
+		"valid": a.IsValid(),
+		"nil": a2.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "nil": false}
+	expected := args.Map{
+		"valid": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- with args", actual)
 }
 
@@ -315,10 +357,16 @@ func Test_Cov11_Attributes_HasError(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"no": a.HasError(), "nil": a2.HasError()}
+	actual := args.Map{
+		"no": a.HasError(),
+		"nil": a2.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"no": false, "nil": false}
+	expected := args.Map{
+		"no": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasError returns error -- with args", actual)
 }
 
@@ -412,10 +460,16 @@ func Test_Cov11_Attributes_IsPagingInfoEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsPagingInfoEmpty(), "nil": a2.IsPagingInfoEmpty()}
+	actual := args.Map{
+		"empty": a.IsPagingInfoEmpty(),
+		"nil": a2.IsPagingInfoEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsPagingInfoEmpty returns empty -- with args", actual)
 }
 
@@ -425,10 +479,16 @@ func Test_Cov11_Attributes_IsKeyValuePairsEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsKeyValuePairsEmpty(), "nil": a2.IsKeyValuePairsEmpty()}
+	actual := args.Map{
+		"empty": a.IsKeyValuePairsEmpty(),
+		"nil": a2.IsKeyValuePairsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsKeyValuePairsEmpty returns empty -- with args", actual)
 }
 
@@ -438,10 +498,16 @@ func Test_Cov11_Attributes_IsAnyKeyValuePairsEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsAnyKeyValuePairsEmpty(), "nil": a2.IsAnyKeyValuePairsEmpty()}
+	actual := args.Map{
+		"empty": a.IsAnyKeyValuePairsEmpty(),
+		"nil": a2.IsAnyKeyValuePairsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyKeyValuePairsEmpty returns empty -- with args", actual)
 }
 
@@ -451,10 +517,16 @@ func Test_Cov11_Attributes_IsUserInfoEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsUserInfoEmpty(), "nil": a2.IsUserInfoEmpty()}
+	actual := args.Map{
+		"empty": a.IsUserInfoEmpty(),
+		"nil": a2.IsUserInfoEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsUserInfoEmpty returns empty -- with args", actual)
 }
 
@@ -536,10 +608,16 @@ func Test_Cov11_Attributes_IsAuthInfoEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsAuthInfoEmpty(), "nil": a2.IsAuthInfoEmpty()}
+	actual := args.Map{
+		"empty": a.IsAuthInfoEmpty(),
+		"nil": a2.IsAuthInfoEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAuthInfoEmpty returns empty -- with args", actual)
 }
 
@@ -549,10 +627,16 @@ func Test_Cov11_Attributes_IsSessionInfoEmpty(t *testing.T) {
 	var a2 *corepayload.Attributes
 
 	// Act
-	actual := args.Map{"empty": a.IsSessionInfoEmpty(), "nil": a2.IsSessionInfoEmpty()}
+	actual := args.Map{
+		"empty": a.IsSessionInfoEmpty(),
+		"nil": a2.IsSessionInfoEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSessionInfoEmpty returns empty -- with args", actual)
 }
 
@@ -708,10 +792,16 @@ func Test_Cov11_Attributes_GetStringKeyValue_Nil(t *testing.T) {
 	v, found := a.GetStringKeyValue("k")
 
 	// Act
-	actual := args.Map{"val": v, "found": found}
+	actual := args.Map{
+		"val": v,
+		"found": found,
+	}
 
 	// Assert
-	expected := args.Map{"val": "", "found": false}
+	expected := args.Map{
+		"val": "",
+		"found": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetStringKeyValue returns nil -- nil", actual)
 }
 
@@ -722,10 +812,16 @@ func Test_Cov11_Attributes_GetStringKeyValue_Valid(t *testing.T) {
 	v, found := a.GetStringKeyValue("k")
 
 	// Act
-	actual := args.Map{"val": v, "found": found}
+	actual := args.Map{
+		"val": v,
+		"found": found,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "found": true}
+	expected := args.Map{
+		"val": "v",
+		"found": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetStringKeyValue returns non-empty -- valid", actual)
 }
 
@@ -994,10 +1090,16 @@ func Test_Cov11_NewAttributes_Empty(t *testing.T) {
 	a := corepayload.New.Attributes.Empty()
 
 	// Act
-	actual := args.Map{"notNil": a != nil, "valid": a.IsValid()}
+	actual := args.Map{
+		"notNil": a != nil,
+		"valid": a.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewAttributes.Empty returns empty -- with args", actual)
 }
 
@@ -1031,10 +1133,16 @@ func Test_Cov11_NewAttributes_UsingAuthInfoDynamicBytes(t *testing.T) {
 	a := corepayload.New.Attributes.UsingAuthInfoDynamicBytes(&corepayload.AuthInfo{ActionType: "x"}, []byte("data"))
 
 	// Act
-	actual := args.Map{"action": a.AuthInfo.ActionType, "len": len(a.DynamicPayloads)}
+	actual := args.Map{
+		"action": a.AuthInfo.ActionType,
+		"len": len(a.DynamicPayloads),
+	}
 
 	// Assert
-	expected := args.Map{"action": "x", "len": 4}
+	expected := args.Map{
+		"action": "x",
+		"len": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "NewAttributes.UsingAuthInfoDynamicBytes returns correct value -- with args", actual)
 }
 
@@ -1045,10 +1153,16 @@ func Test_Cov11_NewAttributes_Deserialize_Valid(t *testing.T) {
 	a2, err := corepayload.New.Attributes.Deserialize(b)
 
 	// Act
-	actual := args.Map{"notNil": a2 != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": a2 != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewAttributes.Deserialize returns correct value -- with args", actual)
 }
 
@@ -1091,8 +1205,16 @@ func Test_Cov11_Empty_Attributes(t *testing.T) {
 
 func Test_Cov11_Empty_AttributesDefaults(t *testing.T) {
 	a := corepayload.Empty.AttributesDefaults()
-	actual := args.Map{"notNil": a != nil, "hasKV": a.KeyValuePairs != nil, "hasAKV": a.AnyKeyValuePairs != nil}
-	expected := args.Map{"notNil": true, "hasKV": true, "hasAKV": true}
+	actual := args.Map{
+		"notNil": a != nil,
+		"hasKV": a.KeyValuePairs != nil,
+		"hasAKV": a.AnyKeyValuePairs != nil,
+	}
+	expected := args.Map{
+		"notNil": true,
+		"hasKV": true,
+		"hasAKV": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.AttributesDefaults returns empty -- with args", actual)
 }
 
@@ -1105,7 +1227,13 @@ func Test_Cov11_Empty_PayloadWrapper(t *testing.T) {
 
 func Test_Cov11_Empty_PayloadsCollection(t *testing.T) {
 	pc := corepayload.Empty.PayloadsCollection()
-	actual := args.Map{"notNil": pc != nil, "empty": pc.IsEmpty()}
-	expected := args.Map{"notNil": true, "empty": true}
+	actual := args.Map{
+		"notNil": pc != nil,
+		"empty": pc.IsEmpty(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.PayloadsCollection returns empty -- with args", actual)
 }

@@ -574,8 +574,14 @@ func Test_Cov6_HeaderSliceValidators_VerifyAllErrorUsingActual_Match(t *testing.
 	err := hsv.VerifyAllErrorUsingActual(params, "a")
 
 	// Assert — just verify no panic
-	actual := args.Map{"completed": true, "hasErr": err != nil}
-	expected := args.Map{"completed": true, "hasErr": err != nil}
+	actual := args.Map{
+		"completed": true,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"completed": true,
+		"hasErr": err != nil,
+	}
 	expected.ShouldBeEqual(t, 0, "VerifyAllErrorUsingActual completes -- non-empty", actual)
 }
 
@@ -895,8 +901,14 @@ func Test_Cov6_SliceValidator_UserInputsMergeWithError_NilErr_EmptyActual(t *tes
 	err := sv.UserInputsMergeWithError(params, nil)
 
 	// Assert — we just verify no panic and capture the result
-	actual := args.Map{"completed": true, "hasErr": err != nil}
-	expected := args.Map{"completed": true, "hasErr": err != nil}
+	actual := args.Map{
+		"completed": true,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"completed": true,
+		"hasErr": err != nil,
+	}
 	expected.ShouldBeEqual(t, 0, "UserInputsMergeWithError completes -- nil err empty actual", actual)
 }
 

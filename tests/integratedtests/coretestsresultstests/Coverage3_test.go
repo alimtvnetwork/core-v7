@@ -25,10 +25,16 @@ func Test_Cov3_SafeInterface_NilMap(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilMap, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"isNil": r.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "isNil": true}
+	expected := args.Map{
+		"panicked": false,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil map -- returns nil", actual)
 }
 
@@ -38,10 +44,16 @@ func Test_Cov3_SafeInterface_NilSlice(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilSlice, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"isNil": r.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "isNil": true}
+	expected := args.Map{
+		"panicked": false,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil slice -- returns nil", actual)
 }
 
@@ -51,10 +63,16 @@ func Test_Cov3_SafeInterface_NilFunc(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilFunc, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"isNil": r.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "isNil": true}
+	expected := args.Map{
+		"panicked": false,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil func -- returns nil", actual)
 }
 
@@ -64,10 +82,16 @@ func Test_Cov3_SafeInterface_NilChan(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilChan, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"isNil": r.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "isNil": true}
+	expected := args.Map{
+		"panicked": false,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil chan -- returns nil", actual)
 }
 
@@ -77,10 +101,16 @@ func Test_Cov3_SafeInterface_NilPtr(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilPtr, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"isNil": r.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "isNil": true}
+	expected := args.Map{
+		"panicked": false,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil ptr -- returns nil", actual)
 }
 
@@ -102,10 +132,16 @@ func Test_Cov3_ExtractError_NilPtrImplementingError(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*cov3PtrErrStruct).ReturnNilPtrError, s)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "hasError": r.HasError()}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"hasError": r.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "hasError": false}
+	expected := args.Map{
+		"panicked": false,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "extractError nil ptr implementing error -- no error", actual)
 }
 
@@ -208,10 +244,16 @@ func Test_Cov3_BuildCallArgs_NoParamFunc(t *testing.T) {
 	r := results.InvokeWithPanicRecovery(fn, nil)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "val": fmt.Sprintf("%v", r.Value)}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"val": fmt.Sprintf("%v", r.Value),
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "val": "hello"}
+	expected := args.Map{
+		"panicked": false,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "buildCallArgs no-param func -- func() string", actual)
 }
 

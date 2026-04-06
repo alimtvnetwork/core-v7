@@ -18,10 +18,16 @@ func Test_Cov2_TitleCurlyMeta(t *testing.T) {
 	r := simplewrap.TitleCurlyMeta("title", "val", "meta")
 
 	// Act
-	actual := args.Map{"notEmpty": r != "", "containsTitle": strings.Contains(r, "title")}
+	actual := args.Map{
+		"notEmpty": r != "",
+		"containsTitle": strings.Contains(r, "title"),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsTitle": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsTitle": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TitleCurlyMeta returns correct value -- with args", actual)
 }
 
@@ -30,10 +36,16 @@ func Test_Cov2_TitleSquareMeta(t *testing.T) {
 	r := simplewrap.TitleSquareMeta("title", "val", "meta")
 
 	// Act
-	actual := args.Map{"notEmpty": r != "", "containsTitle": strings.Contains(r, "title")}
+	actual := args.Map{
+		"notEmpty": r != "",
+		"containsTitle": strings.Contains(r, "title"),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsTitle": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsTitle": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TitleSquareMeta returns correct value -- with args", actual)
 }
 
@@ -42,10 +54,16 @@ func Test_Cov2_TitleQuotationMeta(t *testing.T) {
 	r := simplewrap.TitleQuotationMeta("title", "val", "meta")
 
 	// Act
-	actual := args.Map{"notEmpty": r != "", "containsTitle": strings.Contains(r, "title")}
+	actual := args.Map{
+		"notEmpty": r != "",
+		"containsTitle": strings.Contains(r, "title"),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsTitle": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsTitle": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TitleQuotationMeta returns correct value -- with args", actual)
 }
 

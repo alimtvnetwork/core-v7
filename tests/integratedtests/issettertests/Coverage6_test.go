@@ -155,7 +155,10 @@ func Test_Cov6_GetSet(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": true}
+	expected := args.Map{
+		"true": true,
+		"false": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSet returns correct value -- with args", actual)
 }
 
@@ -167,7 +170,10 @@ func Test_Cov6_GetSetByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": true}
+	expected := args.Map{
+		"true": true,
+		"false": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetByte returns correct value -- with args", actual)
 }
 
@@ -179,7 +185,10 @@ func Test_Cov6_GetSetUnset(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"set": true, "unset": true}
+	expected := args.Map{
+		"set": true,
+		"unset": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetUnset returns correct value -- with args", actual)
 }
 
@@ -216,10 +225,16 @@ func Test_Cov6_New_Valid(t *testing.T) {
 	v, err := issetter.New("True")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"noErr": err == nil,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "isTrue": true}
+	expected := args.Map{
+		"noErr": true,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New valid -- True", actual)
 }
 
@@ -243,7 +258,10 @@ func Test_Cov6_NewBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": true}
+	expected := args.Map{
+		"true": true,
+		"false": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBool returns correct value -- with args", actual)
 }
 
@@ -291,7 +309,11 @@ func Test_Cov6_IsUnSetOrUninitialized(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"uninit": true, "unset": true, "true": false}
+	expected := args.Map{
+		"uninit": true,
+		"unset": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsUnSetOrUninitialized returns correct value -- with args", actual)
 }
 
@@ -305,7 +327,10 @@ func Test_Cov6_GetBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": true}
+	expected := args.Map{
+		"true": true,
+		"false": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetBool returns correct value -- with args", actual)
 }
 

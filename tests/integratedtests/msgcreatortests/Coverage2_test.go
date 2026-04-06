@@ -13,10 +13,16 @@ func Test_Cov2_Assert_SortedArray_Print(t *testing.T) {
 	result := msgcreator.Assert.SortedArray(true, true, "c b a")
 
 	// Act
-	actual := args.Map{"first": result[0], "len": len(result)}
+	actual := args.Map{
+		"first": result[0],
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "len": 3}
+	expected := args.Map{
+		"first": "a",
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedArray returns non-empty -- isPrint=true", actual)
 }
 
@@ -25,10 +31,16 @@ func Test_Cov2_Assert_SortedArray_NoSort(t *testing.T) {
 	result := msgcreator.Assert.SortedArray(false, false, "c b a")
 
 	// Act
-	actual := args.Map{"first": result[0], "len": len(result)}
+	actual := args.Map{
+		"first": result[0],
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "len": 3}
+	expected := args.Map{
+		"first": "c",
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedArray returns non-empty -- isSort=false", actual)
 }
 

@@ -19,10 +19,18 @@ func Test_I23_DynamicCollection_Empty(t *testing.T) {
 	dc := coredynamic.EmptyDynamicCollection()
 
 	// Act
-	actual := args.Map{"empty": dc.IsEmpty(), "len": dc.Length(), "count": dc.Count()}
+	actual := args.Map{
+		"empty": dc.IsEmpty(),
+		"len": dc.Length(),
+		"count": dc.Count(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "len": 0, "count": 0}
+	expected := args.Map{
+		"empty": true,
+		"len": 0,
+		"count": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns empty -- Empty", actual)
 }
 
@@ -32,10 +40,16 @@ func Test_I23_DynamicCollection_AddAny(t *testing.T) {
 	dc.AddAny("hello", true).AddAny("world", true)
 
 	// Act
-	actual := args.Map{"len": dc.Length(), "hasAny": dc.HasAnyItem()}
+	actual := args.Map{
+		"len": dc.Length(),
+		"hasAny": dc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- AddAny", actual)
 }
 
@@ -184,10 +198,16 @@ func Test_I23_DynamicCollection_First_Last(t *testing.T) {
 	dc.AddAny("first", true).AddAny("last", true)
 
 	// Act
-	actual := args.Map{"hasFirst": dc.First().IsValid(), "hasLast": dc.Last().IsValid()}
+	actual := args.Map{
+		"hasFirst": dc.First().IsValid(),
+		"hasLast": dc.Last().IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"hasFirst": true, "hasLast": true}
+	expected := args.Map{
+		"hasFirst": true,
+		"hasLast": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- First/Last", actual)
 }
 
@@ -197,10 +217,16 @@ func Test_I23_DynamicCollection_FirstDynamic_LastDynamic(t *testing.T) {
 	dc.AddAny("a", true).AddAny("b", true)
 
 	// Act
-	actual := args.Map{"firstNotNil": dc.FirstDynamic() != nil, "lastNotNil": dc.LastDynamic() != nil}
+	actual := args.Map{
+		"firstNotNil": dc.FirstDynamic() != nil,
+		"lastNotNil": dc.LastDynamic() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"firstNotNil": true, "lastNotNil": true}
+	expected := args.Map{
+		"firstNotNil": true,
+		"lastNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- FirstDynamic/LastDynamic", actual)
 }
 
@@ -235,10 +261,16 @@ func Test_I23_DynamicCollection_FirstOrDefaultDynamic(t *testing.T) {
 	first, ok := dc.FirstOrDefaultDynamic().(*coredynamic.Dynamic)
 
 	// Act
-	actual := args.Map{"ok": ok, "nil": first == nil}
+	actual := args.Map{
+		"ok": ok,
+		"nil": first == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "nil": true}
+	expected := args.Map{
+		"ok": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- FirstOrDefaultDynamic", actual)
 }
 
@@ -273,10 +305,16 @@ func Test_I23_DynamicCollection_LastOrDefaultDynamic(t *testing.T) {
 	last, ok := dc.LastOrDefaultDynamic().(*coredynamic.Dynamic)
 
 	// Act
-	actual := args.Map{"ok": ok, "nil": last == nil}
+	actual := args.Map{
+		"ok": ok,
+		"nil": last == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "nil": true}
+	expected := args.Map{
+		"ok": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- LastOrDefaultDynamic", actual)
 }
 
@@ -435,10 +473,16 @@ func Test_I23_DynamicCollection_HasIndex(t *testing.T) {
 	dc.AddAny("a", true)
 
 	// Act
-	actual := args.Map{"has0": dc.HasIndex(0), "has1": dc.HasIndex(1)}
+	actual := args.Map{
+		"has0": dc.HasIndex(0),
+		"has1": dc.HasIndex(1),
+	}
 
 	// Assert
-	expected := args.Map{"has0": true, "has1": false}
+	expected := args.Map{
+		"has0": true,
+		"has1": false,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- HasIndex", actual)
 }
 
@@ -502,10 +546,16 @@ func Test_I23_DynamicCollection_RemoveAt(t *testing.T) {
 	ok := dc.RemoveAt(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": dc.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- RemoveAt", actual)
 }
 
@@ -532,10 +582,16 @@ func Test_I23_DynamicCollection_AddAnyWithTypeValidation_Match(t *testing.T) {
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), "hello")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": dc.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyWithTypeValidation match", actual)
 }
 
@@ -545,10 +601,16 @@ func Test_I23_DynamicCollection_AddAnyWithTypeValidation_Mismatch(t *testing.T) 
 	err := dc.AddAnyWithTypeValidation(false, reflect.TypeOf(""), 42)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyWithTypeValidation mismatch", actual)
 }
 
@@ -558,10 +620,16 @@ func Test_I23_DynamicCollection_AddAnyItemsWithTypeValidation_StopOnErr(t *testi
 	err := dc.AddAnyItemsWithTypeValidation(false, false, reflect.TypeOf(""), "a", 42, "c")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation stop", actual)
 }
 
@@ -571,10 +639,16 @@ func Test_I23_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnErr(t *t
 	err := dc.AddAnyItemsWithTypeValidation(true, false, reflect.TypeOf(""), "a", 42, "c")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns non-empty -- AddAnyItemsWithTypeValidation continue", actual)
 }
 
@@ -755,10 +829,16 @@ func Test_I23_DynamicCollection_JsonString(t *testing.T) {
 	s, err := dc.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- JsonString", actual)
 }
 
@@ -783,10 +863,16 @@ func Test_I23_DynamicCollection_MarshalJSON(t *testing.T) {
 	b, err := dc.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- MarshalJSON", actual)
 }
 
@@ -933,10 +1019,16 @@ func Test_I23_DynamicCollection_ParseInjectUsingJson(t *testing.T) {
 	result, err := dc2.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 

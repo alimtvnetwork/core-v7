@@ -17,10 +17,16 @@ func Test_Cov3_AppendsIf_True(t *testing.T) {
 	result := namevalue.AppendsIf(true, items, namevalue.StringAny{Name: "b", Value: 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[1].Name}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[1].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendsIf appends -- isAdd true", actual)
 }
 
@@ -60,10 +66,16 @@ func Test_Cov3_PrependsIf_True(t *testing.T) {
 	result := namevalue.PrependsIf(true, items, namevalue.StringAny{Name: "a", Value: 1})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0].Name}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependsIf prepends -- isAdd true", actual)
 }
 
@@ -89,10 +101,16 @@ func Test_Cov3_NewNameValuesCollection(t *testing.T) {
 	c := namevalue.NewNameValuesCollection(5)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "isEmpty": c.IsEmpty()}
+	actual := args.Map{
+		"len": c.Length(),
+		"isEmpty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewNameValuesCollection creates empty -- cap 5", actual)
 }
 
@@ -203,10 +221,16 @@ func Test_Cov3_Collection_PrependIf_True(t *testing.T) {
 	c.PrependIf(true, namevalue.StringInt{Name: "a", Value: 1})
 
 	// Act
-	actual := args.Map{"first": c.Items[0].Name, "len": c.Length()}
+	actual := args.Map{
+		"first": c.Items[0].Name,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "len": 2}
+	expected := args.Map{
+		"first": "a",
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "PrependIf prepends -- isPrepend true", actual)
 }
 
@@ -285,10 +309,16 @@ func Test_Cov3_Collection_PrependUsingFuncIf_True(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"first": c.Items[0].Name, "len": c.Length()}
+	actual := args.Map{
+		"first": c.Items[0].Name,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "len": 2}
+	expected := args.Map{
+		"first": "a",
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "PrependUsingFuncIf prepends -- true", actual)
 }
 
@@ -364,10 +394,18 @@ func Test_Cov3_Collection_AppendPrependIf_True(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "first": c.Items[0].Name, "last": c.Items[2].Name}
+	actual := args.Map{
+		"len": c.Length(),
+		"first": c.Items[0].Name,
+		"last": c.Items[2].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "first", "last": "last"}
+	expected := args.Map{
+		"len": 3,
+		"first": "first",
+		"last": "last",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendPrependIf prepends and appends -- true", actual)
 }
 
@@ -400,10 +438,16 @@ func Test_Cov3_Collection_CompiledLazyString(t *testing.T) {
 	second := c.CompiledLazyString()
 
 	// Act
-	actual := args.Map{"same": first == second, "hasContent": len(first) > 0}
+	actual := args.Map{
+		"same": first == second,
+		"hasContent": len(first) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "hasContent": true}
+	expected := args.Map{
+		"same": true,
+		"hasContent": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CompiledLazyString caches result -- second call same", actual)
 }
 
@@ -432,10 +476,16 @@ func Test_Cov3_Collection_ConcatNewPtr(t *testing.T) {
 	result := c.ConcatNewPtr(&item)
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "newLen": result.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"newLen": result.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 1, "newLen": 2}
+	expected := args.Map{
+		"origLen": 1,
+		"newLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNewPtr creates new collection with added ptr -- clone + add", actual)
 }
 
@@ -450,10 +500,16 @@ func Test_Cov3_Collection_JsonStrings(t *testing.T) {
 	result := c.JsonStrings()
 
 	// Act
-	actual := args.Map{"len": len(result), "hasContent": len(result[0]) > 0}
+	actual := args.Map{
+		"len": len(result),
+		"hasContent": len(result[0]) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasContent": true}
+	expected := args.Map{
+		"len": 1,
+		"hasContent": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonStrings returns json strings -- one item", actual)
 }
 
@@ -568,9 +624,15 @@ func Test_Cov3_EmptyGenericCollection(t *testing.T) {
 	c := namevalue.EmptyGenericCollection[string, int]()
 
 	// Act
-	actual := args.Map{"len": c.Length(), "isEmpty": c.IsEmpty()}
+	actual := args.Map{
+		"len": c.Length(),
+		"isEmpty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "isEmpty": true}
+	expected := args.Map{
+		"len": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyGenericCollection creates empty -- zero length", actual)
 }

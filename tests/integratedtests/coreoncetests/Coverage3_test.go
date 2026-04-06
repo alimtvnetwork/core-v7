@@ -136,7 +136,10 @@ func Test_Cov3_ErrorOnce_Value(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valueNil": true, "execute": true}
+	expected := args.Map{
+		"valueNil": true,
+		"execute": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce Value/Execute return nil -- no error", actual)
 }
 
@@ -173,10 +176,16 @@ func Test_Cov3_AnyErrorOnce_ValueString_Nil(t *testing.T) {
 	val, err := aeo.ValueString()
 
 	// Act
-	actual := args.Map{"val": val, "hasErr": err != nil}
+	actual := args.Map{
+		"val": val,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "<nil>", "hasErr": false}
+	expected := args.Map{
+		"val": "<nil>",
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueString nil value returns empty -- nil data", actual)
 }
 
@@ -349,7 +358,11 @@ func Test_Cov3_StringsOnce_Empty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "hasAny": false, "length": 0}
+	expected := args.Map{
+		"isEmpty": true,
+		"hasAny": false,
+		"length": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce empty returns expected -- empty slice", actual)
 }
 
@@ -368,7 +381,11 @@ func Test_Cov3_MapStringStringOnce_Empty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "length": 0, "isMissing": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"length": 0,
+		"isMissing": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce empty returns expected -- empty map", actual)
 }
 

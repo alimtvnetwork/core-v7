@@ -181,10 +181,16 @@ func Test_Cov3_SplitLeftRight_TwoParts(t *testing.T) {
 	l, r := strutilinternal.SplitLeftRight("=", "key=value")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": "key", "right": "value"}
+	expected := args.Map{
+		"left": "key",
+		"right": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns correct value -- two parts", actual)
 }
 
@@ -193,10 +199,16 @@ func Test_Cov3_SplitLeftRight_NoParts(t *testing.T) {
 	l, r := strutilinternal.SplitLeftRight("=", "noequals")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": "noequals", "right": ""}
+	expected := args.Map{
+		"left": "noequals",
+		"right": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns empty -- no parts", actual)
 }
 
@@ -205,10 +217,16 @@ func Test_Cov3_SplitLeftRightTrim(t *testing.T) {
 	l, r := strutilinternal.SplitLeftRightTrim("=", " key = value ")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": "key", "right": "value"}
+	expected := args.Map{
+		"left": "key",
+		"right": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrim returns correct value -- with args", actual)
 }
 
@@ -257,10 +275,16 @@ func Test_Cov3_Clone_Items(t *testing.T) {
 	result := strutilinternal.Clone([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- items", actual)
 }
 
@@ -352,10 +376,16 @@ func Test_Cov3_NonWhitespaceTrimSlice(t *testing.T) {
 	result := strutilinternal.NonWhitespaceTrimSlice([]string{" a ", " "})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "NonWhitespaceTrimSlice returns correct value -- with args", actual)
 }
 
@@ -384,7 +414,11 @@ func Test_Cov3_IsEmptyOrWhitespace(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": true, "ws": true, "val": false}
+	expected := args.Map{
+		"empty": true,
+		"ws": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespace returns empty -- with args", actual)
 }
 
@@ -397,7 +431,11 @@ func Test_Cov3_IsNullOrEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "empty": true, "val": false}
+	expected := args.Map{
+		"nil": true,
+		"empty": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmpty returns empty -- with args", actual)
 }
 
@@ -410,7 +448,11 @@ func Test_Cov3_IsNullOrEmptyOrWhitespace(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "ws": true, "val": false}
+	expected := args.Map{
+		"nil": true,
+		"ws": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyOrWhitespace returns empty -- with args", actual)
 }
 

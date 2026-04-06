@@ -263,10 +263,16 @@ func Test_Cov51_BytesConverter_ToBool_Valid(t *testing.T) {
 	r, err := bc.ToBool()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": r}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": r,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": true}
+	expected := args.Map{
+		"noErr": true,
+		"r": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool valid", actual)
 }
 
@@ -325,10 +331,16 @@ func Test_Cov51_BytesConverter_CastString_Valid(t *testing.T) {
 	s, err := bc.CastString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"r": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString valid", actual)
 }
 
@@ -338,10 +350,16 @@ func Test_Cov51_BytesConverter_ToString(t *testing.T) {
 	s, err := bc.ToString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"r": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString", actual)
 }
 
@@ -363,10 +381,16 @@ func Test_Cov51_BytesConverter_ToStrings(t *testing.T) {
 	ss, err := bc.ToStrings()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(ss)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(ss),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings", actual)
 }
 
@@ -389,10 +413,16 @@ func Test_Cov51_BytesConverter_ToInt64(t *testing.T) {
 	v, err := bc.ToInt64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": v}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": int64(42)}
+	expected := args.Map{
+		"noErr": true,
+		"v": int64(42),
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64", actual)
 }
 
@@ -414,10 +444,16 @@ func Test_Cov51_BytesConverter_ToHashmap_Valid(t *testing.T) {
 	h, err := bc.ToHashmap()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": h != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": h != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashmap valid", actual)
 }
 
@@ -441,10 +477,16 @@ func Test_Cov51_BytesConverter_ToHashset_Valid(t *testing.T) {
 	h, err := bc.ToHashset()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": h != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": h != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashset valid", actual)
 }
 
@@ -468,10 +510,16 @@ func Test_Cov51_BytesConverter_ToCollection_Valid(t *testing.T) {
 	c, err := bc.ToCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": c != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": c != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToCollection valid", actual)
 }
 
@@ -495,10 +543,16 @@ func Test_Cov51_BytesConverter_ToSimpleSlice_Valid(t *testing.T) {
 	s, err := bc.ToSimpleSlice()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": s != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": s != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToSimpleSlice valid", actual)
 }
 
@@ -522,10 +576,16 @@ func Test_Cov51_BytesConverter_ToKeyValCollection_Valid(t *testing.T) {
 	c, err := bc.ToKeyValCollection()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": c != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": c != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToKeyValCollection valid", actual)
 }
 
@@ -627,10 +687,16 @@ func Test_Cov51_BytesConverter_Deserialize(t *testing.T) {
 	err := bc.Deserialize(&s)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"r": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize", actual)
 }
 
@@ -654,10 +720,16 @@ func Test_Cov51_NewBytesConverterUsingJsonResult_Valid(t *testing.T) {
 	bc, err := coredynamic.NewBytesConverterUsingJsonResult(r.Ptr())
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": bc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": bc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBytesConverterUsingJsonResult valid", actual)
 }
 

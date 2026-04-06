@@ -38,10 +38,16 @@ func Test_Cov_FirstOrDefaultWith_NonEmpty(t *testing.T) {
 	result, isSuccess := stringslice.FirstOrDefaultWith([]string{"x", "y"}, "def")
 
 	// Act
-	actual := args.Map{"result": result, "isSuccess": isSuccess}
+	actual := args.Map{
+		"result": result,
+		"isSuccess": isSuccess,
+	}
 
 	// Assert
-	expected := args.Map{"result": "x", "isSuccess": true}
+	expected := args.Map{
+		"result": "x",
+		"isSuccess": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefaultWith returns first -- non-empty", actual)
 }
 
@@ -50,10 +56,16 @@ func Test_Cov_FirstOrDefaultWith_Empty(t *testing.T) {
 	result, isSuccess := stringslice.FirstOrDefaultWith([]string{}, "def")
 
 	// Act
-	actual := args.Map{"result": result, "isSuccess": isSuccess}
+	actual := args.Map{
+		"result": result,
+		"isSuccess": isSuccess,
+	}
 
 	// Assert
-	expected := args.Map{"result": "def", "isSuccess": false}
+	expected := args.Map{
+		"result": "def",
+		"isSuccess": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefaultWith returns default -- empty", actual)
 }
 
@@ -66,10 +78,16 @@ func Test_Cov_Make(t *testing.T) {
 	s := stringslice.Make(0, 5)
 
 	// Act
-	actual := args.Map{"len": len(s), "cap": cap(s)}
+	actual := args.Map{
+		"len": len(s),
+		"cap": cap(s),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "cap": 5}
+	expected := args.Map{
+		"len": 0,
+		"cap": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "Make creates slice with cap -- 0,5", actual)
 }
 
@@ -159,10 +177,16 @@ func Test_Cov_AppendLineNew(t *testing.T) {
 	result := stringslice.AppendLineNew([]string{"a"}, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[len(result)-1]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[len(result)-1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendLineNew appends item -- one item", actual)
 }
 
@@ -171,10 +195,16 @@ func Test_Cov_AppendLineNew_Empty(t *testing.T) {
 	result := stringslice.AppendLineNew(nil, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendLineNew appends to nil -- nil slice", actual)
 }
 
@@ -199,10 +229,18 @@ func Test_Cov_MergeNew_NonEmpty(t *testing.T) {
 	result := stringslice.MergeNew([]string{"a"}, "b", "c")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew merges slices -- both non-empty", actual)
 }
 
@@ -227,10 +265,16 @@ func Test_Cov_MergeNewSimple_NonEmpty(t *testing.T) {
 	result := stringslice.MergeNewSimple([]string{"a"}, []string{"b", "c"})
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNewSimple merges slices -- two slices", actual)
 }
 
@@ -255,10 +299,16 @@ func Test_Cov_ClonePtr_NonEmpty(t *testing.T) {
 	result := stringslice.ClonePtr([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns copy -- non-empty", actual)
 }
 
@@ -283,10 +333,16 @@ func Test_Cov_AppendStringsWithMainSlice_SkipEmpty(t *testing.T) {
 	result := stringslice.AppendStringsWithMainSlice(true, []string{"a"}, "", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[len(result)-1]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[len(result)-1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendStringsWithMainSlice skips empty -- isSkipEmpty", actual)
 }
 
@@ -349,10 +405,16 @@ func Test_Cov_InPlaceReverse_Two(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "last": (*result)[1]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"last": (*result)[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "b", "last": "a"}
+	expected := args.Map{
+		"first": "b",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse swaps -- two items", actual)
 }
 
@@ -362,10 +424,16 @@ func Test_Cov_InPlaceReverse_Three(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse reverses -- three items", actual)
 }
 
@@ -378,10 +446,16 @@ func Test_Cov_SortIf_True(t *testing.T) {
 	result := stringslice.SortIf(true, []string{"c", "a", "b"})
 
 	// Act
-	actual := args.Map{"first": result[0], "last": result[2]}
+	actual := args.Map{
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SortIf sorts -- isSort true", actual)
 }
 
@@ -474,10 +548,18 @@ func Test_Cov_MergeSlicesOfSlices_NonEmpty(t *testing.T) {
 	result := stringslice.MergeSlicesOfSlices([]string{"a"}, []string{"b", "c"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeSlicesOfSlices merges -- two slices", actual)
 }
 

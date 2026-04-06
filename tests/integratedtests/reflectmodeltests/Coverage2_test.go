@@ -26,7 +26,11 @@ func Test_Cov2_FieldProcessor_IsFieldType(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isInt": true, "isString": false, "nil": false}
+	expected := args.Map{
+		"isInt": true,
+		"isString": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor returns correct value -- IsFieldType", actual)
 }
 
@@ -45,7 +49,11 @@ func Test_Cov2_FieldProcessor_IsFieldKind(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isInt": true, "isStr": false, "nil": false}
+	expected := args.Map{
+		"isInt": true,
+		"isStr": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor returns correct value -- IsFieldKind", actual)
 }
 

@@ -82,7 +82,10 @@ func Test_Cov5_MergeErrors_OneNil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": true, "second": true}
+	expected := args.Map{
+		"first": true,
+		"second": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MergeErrors one nil -- non-nil", actual)
 }
 
@@ -147,10 +150,16 @@ func Test_Cov5_ConcatMessageWithErr_WithErr(t *testing.T) {
 	err := errcore.ConcatMessageWithErr("prefix", errors.New("inner"))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "containsPrefix": strings.Contains(err.Error(), "prefix")}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"containsPrefix": strings.Contains(err.Error(), "prefix"),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "containsPrefix": true}
+	expected := args.Map{
+		"hasErr": true,
+		"containsPrefix": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatMessageWithErr with err -- prefixed", actual)
 }
 
@@ -226,10 +235,16 @@ func Test_Cov5_ToStringPtr_NonNil(t *testing.T) {
 	result := errcore.ToStringPtr(errors.New("err"))
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "val": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": "err"}
+	expected := args.Map{
+		"notNil": true,
+		"val": "err",
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringPtr non-nil -- err", actual)
 }
 
@@ -249,10 +264,16 @@ func Test_Cov5_ToError_NonEmpty(t *testing.T) {
 	err := errcore.ToError("msg")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "msg": err.Error()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"msg": err.Error(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "msg": "msg"}
+	expected := args.Map{
+		"hasErr": true,
+		"msg": "msg",
+	}
 	expected.ShouldBeEqual(t, 0, "ToError non-empty -- msg", actual)
 }
 

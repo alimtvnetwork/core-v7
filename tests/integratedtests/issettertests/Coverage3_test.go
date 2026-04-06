@@ -93,7 +93,11 @@ func Test_Value_IsLater_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"uninit": true, "true": false, "wild": true}
+	expected := args.Map{
+		"uninit": true,
+		"true": false,
+		"wild": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsLater returns true for undefined -- Uninitialized/Wildcard", actual)
 }
 
@@ -105,7 +109,10 @@ func Test_Value_IsNot_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueNotFalse": true, "trueSame": false}
+	expected := args.Map{
+		"trueNotFalse": true,
+		"trueSame": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNot returns correct -- comparison", actual)
 }
 
@@ -118,7 +125,11 @@ func Test_Value_IsNo_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"false": true, "unset": true, "true": false}
+	expected := args.Map{
+		"false": true,
+		"unset": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNo returns true for False/Unset -- logical no", actual)
 }
 
@@ -131,7 +142,11 @@ func Test_Value_IsAsk_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"uninit": true, "wild": true, "true": false}
+	expected := args.Map{
+		"uninit": true,
+		"wild": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAsk returns true for undefined -- Uninitialized/Wildcard", actual)
 }
 
@@ -143,7 +158,10 @@ func Test_Value_IsIndeterminate_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"uninit": true, "false": false}
+	expected := args.Map{
+		"uninit": true,
+		"false": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsIndeterminate same as IsAsk -- Uninitialized", actual)
 }
 
@@ -156,7 +174,11 @@ func Test_Value_IsAccept_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": true, "unset": false}
+	expected := args.Map{
+		"true": true,
+		"set": true,
+		"unset": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAccept returns true for True/Set -- logical accept", actual)
 }
 
@@ -168,7 +190,10 @@ func Test_Value_IsReject_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"false": true, "true": false}
+	expected := args.Map{
+		"false": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsReject returns true for False -- logical reject", actual)
 }
 
@@ -199,7 +224,11 @@ func Test_Value_IsSkip_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"wild": true, "uninit": true, "set": false}
+	expected := args.Map{
+		"wild": true,
+		"uninit": true,
+		"set": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSkip returns true for undefined -- Wildcard/Uninitialized", actual)
 }
 
@@ -227,7 +256,10 @@ func Test_Value_IsNameEqual_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNameEqual matches name -- True", actual)
 }
 
@@ -239,7 +271,10 @@ func Test_Value_IsAnyNamesOf_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyNamesOf checks multiple names -- True", actual)
 }
 
@@ -350,7 +385,11 @@ func Test_Value_IsTrueOrSet_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": true, "false": false}
+	expected := args.Map{
+		"true": true,
+		"set": true,
+		"false": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsTrueOrSet returns true -- True/Set", actual)
 }
 
@@ -362,7 +401,10 @@ func Test_Value_HasInitialized_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "uninit": false}
+	expected := args.Map{
+		"true": true,
+		"uninit": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasInitialized returns false for Uninitialized -- check", actual)
 }
 
@@ -374,7 +416,10 @@ func Test_Value_HasInitializedAndSet_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"set": true, "true": false}
+	expected := args.Map{
+		"set": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasInitializedAndSet checks Set only -- Set vs True", actual)
 }
 
@@ -386,7 +431,10 @@ func Test_Value_HasInitializedAndTrue_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": false}
+	expected := args.Map{
+		"true": true,
+		"set": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasInitializedAndTrue checks True only -- True vs Set", actual)
 }
 
@@ -423,10 +471,16 @@ func Test_Value_MinMaxAny_Cov3(t *testing.T) {
 	min, max := issetter.True.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxAny returns non-nil -- min/max", actual)
 }
 
@@ -489,7 +543,10 @@ func Test_Value_IsValueEqual_Cov3(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValueEqual compares byte value -- True", actual)
 }
 

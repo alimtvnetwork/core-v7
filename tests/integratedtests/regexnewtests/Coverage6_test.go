@@ -18,10 +18,16 @@ func Test_Cov6_Create_Valid(t *testing.T) {
 	re, err := regexnew.Create(`^\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Create returns non-empty -- valid", actual)
 }
 
@@ -55,10 +61,16 @@ func Test_Cov6_CreateLock_Valid(t *testing.T) {
 	re, err := regexnew.CreateLock(`^cov6lock\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLock returns non-empty -- valid", actual)
 }
 
@@ -67,10 +79,16 @@ func Test_Cov6_CreateLockIf_WithLock(t *testing.T) {
 	re, err := regexnew.CreateLockIf(true, `^cov6lockif\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLockIf returns correct value -- lock", actual)
 }
 
@@ -79,10 +97,16 @@ func Test_Cov6_CreateLockIf_WithoutLock(t *testing.T) {
 	re, err := regexnew.CreateLockIf(false, `^cov6lockifno\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLockIf returns empty -- no lock", actual)
 }
 
@@ -140,10 +164,18 @@ func Test_Cov6_CreateApplicableLock_Valid(t *testing.T) {
 	re, err, ok := regexnew.CreateApplicableLock(`^cov6applock\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil, "ok": ok}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true, "ok": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateApplicableLock returns non-empty -- valid", actual)
 }
 
@@ -152,10 +184,16 @@ func Test_Cov6_CreateApplicableLock_Invalid(t *testing.T) {
 	_, err, ok := regexnew.CreateApplicableLock(`[invalid`)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "ok": ok}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "ok": false}
+	expected := args.Map{
+		"hasErr": true,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateApplicableLock returns error -- invalid", actual)
 }
 
@@ -326,10 +364,16 @@ func Test_Cov6_MatchUsingCustomizeErrorFuncLock_NoMatch_CustomErr(t *testing.T) 
 	err := regexnew.MatchUsingCustomizeErrorFuncLock(`^\d+$`, "abc", matchFn, customErr)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "custom": err.Error() == "custom error for abc"}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"custom": err.Error() == "custom error for abc",
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "custom": true}
+	expected := args.Map{
+		"hasErr": true,
+		"custom": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CustomizeErrLock returns error -- custom err", actual)
 }
 
@@ -416,10 +460,16 @@ func Test_Cov6_LazyRegex_Compile_Valid(t *testing.T) {
 	re, err := lr.Compile()
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex returns non-empty -- Compile valid", actual)
 }
 
@@ -734,10 +784,16 @@ func Test_Cov6_LazyRegex_IsMatch(t *testing.T) {
 	lr := regexnew.New.LazyLock(`^cov6im\d+$`)
 
 	// Act
-	actual := args.Map{"match": lr.IsMatch("cov6im123"), "noMatch": lr.IsMatch("abc")}
+	actual := args.Map{
+		"match": lr.IsMatch("cov6im123"),
+		"noMatch": lr.IsMatch("abc"),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatch returns correct value -- with args", actual)
 }
 
@@ -746,10 +802,16 @@ func Test_Cov6_LazyRegex_IsMatchBytes(t *testing.T) {
 	lr := regexnew.New.LazyLock(`^cov6imb\d+$`)
 
 	// Act
-	actual := args.Map{"match": lr.IsMatchBytes([]byte("cov6imb123")), "noMatch": lr.IsMatchBytes([]byte("abc"))}
+	actual := args.Map{
+		"match": lr.IsMatchBytes([]byte("cov6imb123")),
+		"noMatch": lr.IsMatchBytes([]byte("abc")),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatchBytes returns correct value -- with args", actual)
 }
 
@@ -758,10 +820,16 @@ func Test_Cov6_LazyRegex_IsFailedMatch(t *testing.T) {
 	lr := regexnew.New.LazyLock(`^cov6ifm\d+$`)
 
 	// Act
-	actual := args.Map{"match": lr.IsFailedMatch("cov6ifm123"), "noMatch": lr.IsFailedMatch("abc")}
+	actual := args.Map{
+		"match": lr.IsFailedMatch("cov6ifm123"),
+		"noMatch": lr.IsFailedMatch("abc"),
+	}
 
 	// Assert
-	expected := args.Map{"match": false, "noMatch": true}
+	expected := args.Map{
+		"match": false,
+		"noMatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsFailedMatch returns correct value -- with args", actual)
 }
 
@@ -770,10 +838,16 @@ func Test_Cov6_LazyRegex_IsFailedMatchBytes(t *testing.T) {
 	lr := regexnew.New.LazyLock(`^cov6ifmb\d+$`)
 
 	// Act
-	actual := args.Map{"match": lr.IsFailedMatchBytes([]byte("cov6ifmb123")), "noMatch": lr.IsFailedMatchBytes([]byte("abc"))}
+	actual := args.Map{
+		"match": lr.IsFailedMatchBytes([]byte("cov6ifmb123")),
+		"noMatch": lr.IsFailedMatchBytes([]byte("abc")),
+	}
 
 	// Assert
-	expected := args.Map{"match": false, "noMatch": true}
+	expected := args.Map{
+		"match": false,
+		"noMatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsFailedMatchBytes returns correct value -- with args", actual)
 }
 
@@ -783,10 +857,16 @@ func Test_Cov6_LazyRegex_FirstMatchLine_Match(t *testing.T) {
 	line, invalid := lr.FirstMatchLine("cov6fml123")
 
 	// Act
-	actual := args.Map{"line": line, "invalid": invalid}
+	actual := args.Map{
+		"line": line,
+		"invalid": invalid,
+	}
 
 	// Assert
-	expected := args.Map{"line": "cov6fml123", "invalid": false}
+	expected := args.Map{
+		"line": "cov6fml123",
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstMatchLine returns correct value -- match", actual)
 }
 
@@ -796,10 +876,16 @@ func Test_Cov6_LazyRegex_FirstMatchLine_NoMatch(t *testing.T) {
 	line, invalid := lr.FirstMatchLine("abc")
 
 	// Act
-	actual := args.Map{"line": line, "invalid": invalid}
+	actual := args.Map{
+		"line": line,
+		"invalid": invalid,
+	}
 
 	// Assert
-	expected := args.Map{"line": "", "invalid": true}
+	expected := args.Map{
+		"line": "",
+		"invalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstMatchLine returns empty -- no match", actual)
 }
 
@@ -838,10 +924,16 @@ func Test_Cov6_NewCreator_Lazy(t *testing.T) {
 	lr := regexnew.New.Lazy(`^cov6nclazy\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": lr != nil, "defined": lr.IsDefined()}
+	actual := args.Map{
+		"notNil": lr != nil,
+		"defined": lr.IsDefined(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "defined": true}
+	expected := args.Map{
+		"notNil": true,
+		"defined": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Lazy returns correct value -- with args", actual)
 }
 
@@ -862,10 +954,16 @@ func Test_Cov6_NewCreator_Default(t *testing.T) {
 	re, err := regexnew.New.Default(`^cov6ncdef\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Default returns correct value -- with args", actual)
 }
 
@@ -874,10 +972,16 @@ func Test_Cov6_NewCreator_DefaultLock(t *testing.T) {
 	re, err := regexnew.New.DefaultLock(`^cov6ncdefl\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.DefaultLock returns correct value -- with args", actual)
 }
 
@@ -886,10 +990,16 @@ func Test_Cov6_NewCreator_DefaultLockIf(t *testing.T) {
 	re, err := regexnew.New.DefaultLockIf(true, `^cov6ncdefli\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.DefaultLockIf returns correct value -- with args", actual)
 }
 
@@ -898,10 +1008,18 @@ func Test_Cov6_NewCreator_DefaultApplicableLock(t *testing.T) {
 	re, err, ok := regexnew.New.DefaultApplicableLock(`^cov6ncal\d+$`)
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil, "ok": ok}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true, "ok": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New.DefaultApplicableLock returns correct value -- with args", actual)
 }
 
@@ -910,10 +1028,16 @@ func Test_Cov6_NewLazyRegexCreator_TwoLock(t *testing.T) {
 	first, second := regexnew.New.LazyRegex.TwoLock(`^cov6two1\d+$`, `^cov6two2\d+$`)
 
 	// Act
-	actual := args.Map{"f": first != nil, "s": second != nil}
+	actual := args.Map{
+		"f": first != nil,
+		"s": second != nil,
+	}
 
 	// Assert
-	expected := args.Map{"f": true, "s": true}
+	expected := args.Map{
+		"f": true,
+		"s": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TwoLock returns correct value -- with args", actual)
 }
 
@@ -986,10 +1110,16 @@ func Test_Cov6_RegExMatchValidationError_CompileError(t *testing.T) {
 	err := regexnew.MatchError(`[invalid`, "abc")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "hasCompile": err.Error() != ""}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"hasCompile": err.Error() != "",
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "hasCompile": true}
+	expected := args.Map{
+		"hasErr": true,
+		"hasCompile": true,
+	}
 	expected.ShouldBeEqual(t, 0, "regExMatchValidationError returns error -- compile err", actual)
 }
 

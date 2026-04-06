@@ -20,10 +20,16 @@ func Test_I19_MapAnyItems_Deserialize_Success(t *testing.T) {
 	err := m.Deserialize("k", &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Deserialize", actual)
 }
 
@@ -65,10 +71,18 @@ func Test_I19_MapAnyItems_GetUsingUnmarshallManyAt_Success(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "a": a, "b": b}
+	actual := args.Map{
+		"noErr": err == nil,
+		"a": a,
+		"b": b,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "a": "x", "b": "y"}
+	expected := args.Map{
+		"noErr": true,
+		"a": "x",
+		"b": "y",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetUsingUnmarshallManyAt", actual)
 }
 
@@ -96,10 +110,16 @@ func Test_I19_MapAnyItems_GetItemRef_Success(t *testing.T) {
 	err := m.GetItemRef("k", &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetItemRef", actual)
 }
 
@@ -164,10 +184,18 @@ func Test_I19_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
 	fm, err, found := m.GetFieldsMap("k")
 
 	// Act
-	actual := args.Map{"found": found, "noErr": err == nil, "notNil": fm != nil}
+	actual := args.Map{
+		"found": found,
+		"noErr": err == nil,
+		"notNil": fm != nil,
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "noErr": true, "notNil": true}
+	expected := args.Map{
+		"found": true,
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetFieldsMap", actual)
 }
 
@@ -191,10 +219,16 @@ func Test_I19_MapAnyItems_GetSafeFieldsMap(t *testing.T) {
 	fm, found := m.GetSafeFieldsMap("k")
 
 	// Act
-	actual := args.Map{"found": found, "notNil": fm != nil}
+	actual := args.Map{
+		"found": found,
+		"notNil": fm != nil,
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "notNil": true}
+	expected := args.Map{
+		"found": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetSafeFieldsMap", actual)
 }
 
@@ -204,10 +238,16 @@ func Test_I19_MapAnyItems_AddKeyAny(t *testing.T) {
 	isNew := m.AddKeyAny(corejson.KeyAny{Key: "k", AnyInf: "v"})
 
 	// Act
-	actual := args.Map{"isNew": isNew, "len": m.Length()}
+	actual := args.Map{
+		"isNew": isNew,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"isNew": true, "len": 1}
+	expected := args.Map{
+		"isNew": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AddKeyAny", actual)
 }
 
@@ -330,10 +370,16 @@ func Test_I19_MapAnyItems_ReflectSetTo_Success(t *testing.T) {
 	err := m.ReflectSetTo("k", &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ReflectSetTo", actual)
 }
 
@@ -387,10 +433,16 @@ func Test_I19_MapAnyItems_JsonResultOfKey_Found(t *testing.T) {
 	jr := m.JsonResultOfKey("k")
 
 	// Act
-	actual := args.Map{"notNil": jr != nil, "hasErr": jr.HasError()}
+	actual := args.Map{
+		"notNil": jr != nil,
+		"hasErr": jr.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasErr": false}
+	expected := args.Map{
+		"notNil": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonResultOfKey found", actual)
 }
 
@@ -439,10 +491,16 @@ func Test_I19_MapAnyItems_JsonMapResults(t *testing.T) {
 	mr, err := m.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonMapResults", actual)
 }
 
@@ -452,10 +510,16 @@ func Test_I19_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
 	mr, err := m.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": mr != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": mr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- JsonMapResults empty", actual)
 }
 
@@ -556,10 +620,16 @@ func Test_I19_MapAnyItems_ParseInjectUsingJson(t *testing.T) {
 	result, err := m.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -719,10 +789,16 @@ func Test_I19_MapAnyItems_ClonePtr(t *testing.T) {
 	cloned, err := m.ClonePtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": cloned != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": cloned != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ClonePtr", actual)
 }
 
@@ -769,10 +845,16 @@ func Test_I19_MapAnyItems_NewUsingAnyTypeMap_Success(t *testing.T) {
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": m.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- NewUsingAnyTypeMap", actual)
 }
 
@@ -867,10 +949,16 @@ func Test_I19_CollectionMethods_ConcatNew(t *testing.T) {
 	c2 := c.ConcatNew("b", "c")
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "newLen": c2.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"newLen": c2.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 1, "newLen": 3}
+	expected := args.Map{
+		"origLen": 1,
+		"newLen": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- ConcatNew", actual)
 }
 
@@ -944,10 +1032,16 @@ func Test_I19_CollectionMethods_Reverse(t *testing.T) {
 	c.Reverse()
 
 	// Act
-	actual := args.Map{"first": c.First(), "last": c.Last()}
+	actual := args.Map{
+		"first": c.First(),
+		"last": c.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- Reverse", actual)
 }
 
@@ -958,10 +1052,16 @@ func Test_I19_CollectionMethods_InsertAt(t *testing.T) {
 	items := c.Items()
 
 	// Act
-	actual := args.Map{"len": len(items), "mid": items[1]}
+	actual := args.Map{
+		"len": len(items),
+		"mid": items[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "mid": "b"}
+	expected := args.Map{
+		"len": 3,
+		"mid": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- InsertAt", actual)
 }
 
@@ -1008,10 +1108,16 @@ func Test_I19_CollectionMethods_SafeAt(t *testing.T) {
 	c := coredynamic.New.Collection.String.From([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"valid": c.SafeAt(0), "invalid": c.SafeAt(99)}
+	actual := args.Map{
+		"valid": c.SafeAt(0),
+		"invalid": c.SafeAt(99),
+	}
 
 	// Assert
-	expected := args.Map{"valid": "a", "invalid": ""}
+	expected := args.Map{
+		"valid": "a",
+		"invalid": "",
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionMethods returns correct value -- SafeAt", actual)
 }
 
@@ -1052,10 +1158,16 @@ func Test_I19_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(src, &dst)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": dst}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": dst,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same pointer type", actual)
 }
 
@@ -1065,10 +1177,16 @@ func Test_I19_ReflectSetFromTo_NonPointerToPointer(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(42, &dst)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": dst}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": dst,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": 42}
+	expected := args.Map{
+		"noErr": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns non-empty -- non-ptr to ptr", actual)
 }
 
@@ -1079,10 +1197,16 @@ func Test_I19_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo([]byte(`{"X":5}`), &dst)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": dst.X}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": dst.X,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": 5}
+	expected := args.Map{
+		"noErr": true,
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bytes to struct", actual)
 }
 
@@ -1094,10 +1218,16 @@ func Test_I19_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(src, &dst)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(dst) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(dst) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- struct to bytes", actual)
 }
 

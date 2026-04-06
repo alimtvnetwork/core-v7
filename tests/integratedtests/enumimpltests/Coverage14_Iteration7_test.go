@@ -159,10 +159,18 @@ func Test_Cov14_DynamicMap_KeyValueByte_NotANumber(t *testing.T) {
 	val, isFound, isFailed := dm.KeyValueByte("key")
 
 	// Act
-	actual := args.Map{"val": fmt.Sprintf("%d", val), "isFound": isFound, "isFailed": isFailed}
+	actual := args.Map{
+		"val": fmt.Sprintf("%d", val),
+		"isFound": isFound,
+		"isFailed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"val": "0", "isFound": true, "isFailed": false}
+	expected := args.Map{
+		"val": "0",
+		"isFound": true,
+		"isFailed": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueByte returns correct value -- not-a-number", actual)
 }
 
@@ -172,10 +180,18 @@ func Test_Cov14_DynamicMap_KeyValueByte_OutOfRange(t *testing.T) {
 	val, isFound, isFailed := dm.KeyValueByte("key")
 
 	// Act
-	actual := args.Map{"val": fmt.Sprintf("%d", val), "isFound": isFound, "isFailed": isFailed}
+	actual := args.Map{
+		"val": fmt.Sprintf("%d", val),
+		"isFound": isFound,
+		"isFailed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"val": "0", "isFound": true, "isFailed": true}
+	expected := args.Map{
+		"val": "0",
+		"isFound": true,
+		"isFailed": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueByte returns correct value -- out of range", actual)
 }
 
@@ -185,10 +201,16 @@ func Test_Cov14_DynamicMap_KeyValueInt_NotANumber(t *testing.T) {
 	_, isFound, isFailed := dm.KeyValueInt("key")
 
 	// Act
-	actual := args.Map{"isFound": isFound, "isFailed": isFailed}
+	actual := args.Map{
+		"isFound": isFound,
+		"isFailed": isFailed,
+	}
 
 	// Assert
-	expected := args.Map{"isFound": true, "isFailed": true}
+	expected := args.Map{
+		"isFound": true,
+		"isFailed": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValueInt returns correct value -- not-a-number", actual)
 }
 
@@ -205,8 +227,14 @@ func Test_Cov14_BasicByte_GetValueByName_WrappedQuote(t *testing.T) {
 	// The method first tries exact match, then wraps with quotes
 	val, err := bb.GetValueByName("Alpha")
 
-	actual := args.Map{"val": fmt.Sprintf("%d", val), "hasErr": err != nil}
-	expected := args.Map{"val": "0", "hasErr": false}
+	actual := args.Map{
+		"val": fmt.Sprintf("%d", val),
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"val": "0",
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicByte returns correct value -- GetValueByName", actual)
 }
 
@@ -218,10 +246,16 @@ func Test_Cov14_BasicString_GetValueByName_WrappedQuote(t *testing.T) {
 	val, err := bs.GetValueByName("Alpha")
 
 	// Act
-	actual := args.Map{"val": val, "hasErr": err != nil}
+	actual := args.Map{
+		"val": val,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "Alpha", "hasErr": false}
+	expected := args.Map{
+		"val": "Alpha",
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicString returns correct value -- GetValueByName", actual)
 }
 
@@ -244,10 +278,16 @@ func Test_Cov14_NewBasicStringCreator_CreateUsingStringersSpread(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"typeName": bs.TypeName(), "length": bs.Length()}
+	actual := args.Map{
+		"typeName": bs.TypeName(),
+		"length": bs.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"typeName": "TestStringerEnum", "length": 3}
+	expected := args.Map{
+		"typeName": "TestStringerEnum",
+		"length": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateUsingStringersSpread returns correct value -- with args", actual)
 }
 

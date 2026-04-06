@@ -15,10 +15,16 @@ func Test_Cov2_NonWhitespaceSlicePtr(t *testing.T) {
 	emptyResult := strutilinternal.NonWhitespaceSlicePtr([]string{})
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "NonWhitespaceSlicePtr returns correct value -- with args", actual)
 }
 
@@ -30,10 +36,18 @@ func Test_Cov2_NonWhitespaceTrimSlicePtr(t *testing.T) {
 	emptyResult := strutilinternal.NonWhitespaceTrimSlicePtr([]string{})
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "emptyLen": 0, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"emptyLen": 0,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "NonWhitespaceTrimSlicePtr returns correct value -- with args", actual)
 }
 
@@ -45,10 +59,16 @@ func Test_Cov2_NonWhitespaceJoinPtr(t *testing.T) {
 	emptyResult := strutilinternal.NonWhitespaceJoinPtr([]string{}, ",")
 
 	// Act
-	actual := args.Map{"result": result, "empty": emptyResult}
+	actual := args.Map{
+		"result": result,
+		"empty": emptyResult,
+	}
 
 	// Assert
-	expected := args.Map{"result": "a,b", "empty": ""}
+	expected := args.Map{
+		"result": "a,b",
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NonWhitespaceJoinPtr returns correct value -- with args", actual)
 }
 
@@ -60,10 +80,18 @@ func Test_Cov2_SliceToMapConverter_Hashset(t *testing.T) {
 	hs := conv.Hashset()
 
 	// Act
-	actual := args.Map{"len": len(hs), "hasA": hs["a"], "hasB": hs["b"]}
+	actual := args.Map{
+		"len": len(hs),
+		"hasA": hs["a"],
+		"hasB": hs["b"],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasA": true, "hasB": true}
+	expected := args.Map{
+		"len": 2,
+		"hasA": true,
+		"hasB": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToMapConverter returns correct value -- Hashset", actual)
 }
 
@@ -73,10 +101,16 @@ func Test_Cov2_SliceToMapConverter_LineSplitMap(t *testing.T) {
 	result := conv.LineSplitMap("=")
 
 	// Act
-	actual := args.Map{"key": result["key"], "a": result["a"]}
+	actual := args.Map{
+		"key": result["key"],
+		"a": result["a"],
+	}
 
 	// Assert
-	expected := args.Map{"key": "value", "a": "b"}
+	expected := args.Map{
+		"key": "value",
+		"a": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToMapConverter returns correct value -- LineSplitMap", actual)
 }
 
@@ -106,7 +140,10 @@ func Test_Cov2_SliceToMapConverter_LineSplitMapOptions(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trimLen": 1, "noTrimLen": 1}
+	expected := args.Map{
+		"trimLen": 1,
+		"noTrimLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToMapConverter returns correct value -- LineSplitMapOptions", actual)
 }
 
@@ -139,7 +176,11 @@ func Test_Cov2_SliceToMapConverter_LineProcessorMapOptions(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trimLen": 2, "noTrimLen": 3, "nilLen": 0}
+	expected := args.Map{
+		"trimLen": 2,
+		"noTrimLen": 3,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceToMapConverter returns correct value -- LineProcessorMapOptions", actual)
 }
 
@@ -173,7 +214,11 @@ func Test_Cov2_SliceToMapConverter_LineProcessorMapStringIntegerOptions(t *testi
 	}
 
 	// Assert
-	expected := args.Map{"trimLen": 1, "noTrimLen": 1, "nilLen": 0}
+	expected := args.Map{
+		"trimLen": 1,
+		"noTrimLen": 1,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "LineProcessorMapStringIntegerOptions returns correct value -- with args", actual)
 }
 
@@ -207,7 +252,11 @@ func Test_Cov2_SliceToMapConverter_LineProcessorMapStringAnyOptions(t *testing.T
 	}
 
 	// Assert
-	expected := args.Map{"trimLen": 1, "noTrimLen": 1, "nilLen": 0}
+	expected := args.Map{
+		"trimLen": 1,
+		"noTrimLen": 1,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "LineProcessorMapStringAnyOptions returns correct value -- with args", actual)
 }
 

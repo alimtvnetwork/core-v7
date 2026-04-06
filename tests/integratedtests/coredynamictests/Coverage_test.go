@@ -107,10 +107,16 @@ func Test_Cov_Dynamic_Getters_IntDefault(t *testing.T) {
 	val, ok := d.IntDefault(0)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns 42 -- string 42", actual)
 }
 
@@ -120,10 +126,16 @@ func Test_Cov_Dynamic_Getters_IntDefault_Invalid(t *testing.T) {
 	val, ok := d.IntDefault(99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "ok": false}
+	expected := args.Map{
+		"val": 99,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns default -- invalid string", actual)
 }
 
@@ -133,10 +145,16 @@ func Test_Cov_Dynamic_Getters_IntDefault_Nil(t *testing.T) {
 	val, ok := d.IntDefault(99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "ok": false}
+	expected := args.Map{
+		"val": 99,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic IntDefault returns default -- nil data", actual)
 }
 
@@ -146,10 +164,16 @@ func Test_Cov_Dynamic_Getters_Float64_Valid(t *testing.T) {
 	val, err := d.Float64()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "above3": val > 3.0}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"above3": val > 3.0,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "above3": true}
+	expected := args.Map{
+		"hasErr": false,
+		"above3": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Float64 returns value -- valid float string", actual)
 }
 
@@ -239,7 +263,10 @@ func Test_Cov_Dynamic_Getters_StructStringNull(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isNullOrEmpty": true, "isNullOrEmptyOrWs": true}
+	expected := args.Map{
+		"isNullOrEmpty": true,
+		"isNullOrEmptyOrWs": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic StructString null checks return true -- nil data", actual)
 }
 
@@ -419,10 +446,16 @@ func Test_Cov_Dynamic_Json_Null(t *testing.T) {
 	jsonBytes, jsonErr := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"len": len(jsonBytes), "hasErr": jsonErr != nil}
+	actual := args.Map{
+		"len": len(jsonBytes),
+		"hasErr": jsonErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "hasErr": false}
+	expected := args.Map{
+		"len": 0,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr returns empty -- nil data", actual)
 }
 
@@ -431,10 +464,16 @@ func Test_Cov_Dynamic_Json_JsonModel(t *testing.T) {
 	d := coredynamic.NewDynamicValid("hello")
 
 	// Act
-	actual := args.Map{"notNil": d.JsonModel() != nil, "anyNotNil": d.JsonModelAny() != nil}
+	actual := args.Map{
+		"notNil": d.JsonModel() != nil,
+		"anyNotNil": d.JsonModelAny() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "anyNotNil": true}
+	expected := args.Map{
+		"notNil": true,
+		"anyNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonModel returns non-nil -- valid", actual)
 }
 
@@ -447,10 +486,16 @@ func Test_Cov_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
 	// Act
-	actual := args.Map{"isValid": ds.IsValid(), "message": ds.Message}
+	actual := args.Map{
+		"isValid": ds.IsValid(),
+		"message": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": ""}
+	expected := args.Map{
+		"isValid": false,
+		"message": "",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidNoMessage returns invalid -- no message", actual)
 }
 
@@ -459,10 +504,16 @@ func Test_Cov_DynamicStatus_InvalidWithMessage(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatus("error")
 
 	// Act
-	actual := args.Map{"isValid": ds.IsValid(), "message": ds.Message}
+	actual := args.Map{
+		"isValid": ds.IsValid(),
+		"message": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": "error"}
+	expected := args.Map{
+		"isValid": false,
+		"message": "error",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidWithMessage returns invalid -- with message", actual)
 }
 
@@ -472,10 +523,16 @@ func Test_Cov_DynamicStatus_Clone(t *testing.T) {
 	cloned := ds.Clone()
 
 	// Act
-	actual := args.Map{"isValid": cloned.IsValid(), "message": cloned.Message}
+	actual := args.Map{
+		"isValid": cloned.IsValid(),
+		"message": cloned.Message,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": "error"}
+	expected := args.Map{
+		"isValid": false,
+		"message": "error",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone returns copy -- with message", actual)
 }
 
@@ -486,10 +543,16 @@ func Test_Cov_DynamicStatus_ClonePtr(t *testing.T) {
 	var nilDs *coredynamic.DynamicStatus
 
 	// Act
-	actual := args.Map{"notNil": clonedPtr != nil, "nilClone": nilDs.ClonePtr() == nil}
+	actual := args.Map{
+		"notNil": clonedPtr != nil,
+		"nilClone": nilDs.ClonePtr() == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilClone": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr returns expected -- valid and nil", actual)
 }
 
@@ -502,10 +565,16 @@ func Test_Cov_ValueStatus_InvalidNoMessage(t *testing.T) {
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
 	// Act
-	actual := args.Map{"isValid": vs.IsValid, "message": vs.Message}
+	actual := args.Map{
+		"isValid": vs.IsValid,
+		"message": vs.Message,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": ""}
+	expected := args.Map{
+		"isValid": false,
+		"message": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus InvalidNoMessage returns invalid -- no message", actual)
 }
 
@@ -514,10 +583,18 @@ func Test_Cov_ValueStatus_InvalidWithMessage(t *testing.T) {
 	vs := coredynamic.InvalidValueStatus("error")
 
 	// Act
-	actual := args.Map{"isValid": vs.IsValid, "message": vs.Message, "valNil": vs.Value == nil}
+	actual := args.Map{
+		"isValid": vs.IsValid,
+		"message": vs.Message,
+		"valNil": vs.Value == nil,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": "error", "valNil": true}
+	expected := args.Map{
+		"isValid": false,
+		"message": "error",
+		"valNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus InvalidWithMessage returns invalid -- with message", actual)
 }
 
@@ -590,10 +667,16 @@ func Test_Cov_TypeStatus_NilReceiver(t *testing.T) {
 	var ts *coredynamic.TypeStatus
 
 	// Act
-	actual := args.Map{"isValid": ts.IsValid(), "isInvalid": ts.IsInvalid()}
+	actual := args.Map{
+		"isValid": ts.IsValid(),
+		"isInvalid": ts.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isInvalid": true}
+	expected := args.Map{
+		"isValid": false,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus nil returns safe defaults -- nil receiver", actual)
 }
 
@@ -612,7 +695,12 @@ func Test_Cov_TypeStatus_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"sameValues": true, "diffIsSame": false, "bothNil": true, "leftNil": false}
+	expected := args.Map{
+		"sameValues": true,
+		"diffIsSame": false,
+		"bothNil": true,
+		"leftNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsEqual returns expected -- various", actual)
 }
 
@@ -625,10 +713,16 @@ func Test_Cov_SimpleResult_InvalidNoMessage(t *testing.T) {
 	sr := coredynamic.InvalidSimpleResultNoMessage()
 
 	// Act
-	actual := args.Map{"isValid": sr.IsValid(), "message": sr.Message}
+	actual := args.Map{
+		"isValid": sr.IsValid(),
+		"message": sr.Message,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": ""}
+	expected := args.Map{
+		"isValid": false,
+		"message": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidNoMessage returns invalid -- no message", actual)
 }
 
@@ -637,10 +731,18 @@ func Test_Cov_SimpleResult_InvalidWithMessage(t *testing.T) {
 	sr := coredynamic.InvalidSimpleResult("error")
 
 	// Act
-	actual := args.Map{"isValid": sr.IsValid(), "message": sr.Message, "invalidErr": sr.InvalidError() != nil}
+	actual := args.Map{
+		"isValid": sr.IsValid(),
+		"message": sr.Message,
+		"invalidErr": sr.InvalidError() != nil,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "message": "error", "invalidErr": true}
+	expected := args.Map{
+		"isValid": false,
+		"message": "error",
+		"invalidErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidWithMessage returns invalid -- with message", actual)
 }
 
@@ -649,10 +751,16 @@ func Test_Cov_SimpleResult_Valid(t *testing.T) {
 	sr := coredynamic.NewSimpleResultValid("data")
 
 	// Act
-	actual := args.Map{"isValid": sr.IsValid(), "result": sr.Result}
+	actual := args.Map{
+		"isValid": sr.IsValid(),
+		"result": sr.Result,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "result": "data"}
+	expected := args.Map{
+		"isValid": true,
+		"result": "data",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Valid returns valid -- with data", actual)
 }
 
@@ -662,10 +770,16 @@ func Test_Cov_SimpleResult_Clone(t *testing.T) {
 	cloned := sr.Clone()
 
 	// Act
-	actual := args.Map{"result": cloned.Result, "isValid": cloned.IsValid()}
+	actual := args.Map{
+		"result": cloned.Result,
+		"isValid": cloned.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"result": "data", "isValid": true}
+	expected := args.Map{
+		"result": "data",
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone returns copy -- valid", actual)
 }
 
@@ -676,10 +790,16 @@ func Test_Cov_SimpleResult_ClonePtr(t *testing.T) {
 	var nilSr *coredynamic.SimpleResult
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "nilClone": nilSr.ClonePtr() == nil}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"nilClone": nilSr.ClonePtr() == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilClone": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr returns expected -- valid and nil", actual)
 }
 
@@ -690,9 +810,15 @@ func Test_Cov_SimpleResult_GetErrorOnTypeMismatch(t *testing.T) {
 	errMismatch := sr.GetErrorOnTypeMismatch(reflect.TypeOf(0), true)
 
 	// Act
-	actual := args.Map{"matchErr": errMatch != nil, "mismatchErr": errMismatch != nil}
+	actual := args.Map{
+		"matchErr": errMatch != nil,
+		"mismatchErr": errMismatch != nil,
+	}
 
 	// Assert
-	expected := args.Map{"matchErr": false, "mismatchErr": true}
+	expected := args.Map{
+		"matchErr": false,
+		"mismatchErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult GetErrorOnTypeMismatch returns expected -- string vs int", actual)
 }

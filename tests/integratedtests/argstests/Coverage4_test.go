@@ -46,7 +46,12 @@ func Test_Cov4_Four_GetByIndex(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"idx0": "a", "idx1": 1, "idx2": true, "idx3": 3.14}
+	expected := args.Map{
+		"idx0": "a",
+		"idx1": 1,
+		"idx2": true,
+		"idx3": 3.14,
+	}
 	expected.ShouldBeEqual(t, 0, "Four returns correct value -- GetByIndex", actual)
 }
 
@@ -120,7 +125,12 @@ func Test_Cov4_Six_Basic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "a", "sixth": uint(6), "expected": "yes", "count": 6}
+	expected := args.Map{
+		"first": "a",
+		"sixth": uint(6),
+		"expected": "yes",
+		"count": 6,
+	}
 	expected.ShouldBeEqual(t, 0, "Six returns correct value -- basic", actual)
 }
 
@@ -154,7 +164,13 @@ func Test_Cov4_Dynamic_Basic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "expected": 42, "hasFirst": true, "hasExpect": true, "count": actual["count"]}
+	expected := args.Map{
+		"first": "hello",
+		"expected": 42,
+		"hasFirst": true,
+		"hasExpect": true,
+		"count": actual["count"],
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- basic", actual)
 }
 
@@ -180,10 +196,16 @@ func Test_Cov4_FuncMap_Basic(t *testing.T) {
 	fm.Add(func() {})
 
 	// Act
-	actual := args.Map{"hasAny": fm.HasAnyItem(), "lengthGt0": fm.Length() > 0}
+	actual := args.Map{
+		"hasAny": fm.HasAnyItem(),
+		"lengthGt0": fm.Length() > 0,
+	}
 
 	// Assert
-	expected := args.Map{"hasAny": true, "lengthGt0": true}
+	expected := args.Map{
+		"hasAny": true,
+		"lengthGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncMap returns correct value -- basic", actual)
 }
 
@@ -195,10 +217,16 @@ func Test_Cov4_Map_Get_MissingKey(t *testing.T) {
 	val, ok := m.Get("missing")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": nil, "ok": false}
+	expected := args.Map{
+		"val": nil,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Get missing key", actual)
 }
 
@@ -237,10 +265,16 @@ func Test_Cov4_Holder_NilFunc(t *testing.T) {
 	h := &args.Holder[func() string]{First: "hello"}
 
 	// Act
-	actual := args.Map{"hasFunc": h.HasFunc(), "funcName": h.GetFuncName()}
+	actual := args.Map{
+		"hasFunc": h.HasFunc(),
+		"funcName": h.GetFuncName(),
+	}
 
 	// Assert
-	expected := args.Map{"hasFunc": false, "funcName": ""}
+	expected := args.Map{
+		"hasFunc": false,
+		"funcName": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Holder returns nil -- nil func", actual)
 }
 
@@ -289,10 +323,16 @@ func Test_Cov4_OneFunc(t *testing.T) {
 	of := &args.OneFunc[string]{First: "a", WorkFunc: func() string { return "hello" }}
 
 	// Act
-	actual := args.Map{"first": of.FirstItem(), "hasFunc": of.HasFunc()}
+	actual := args.Map{
+		"first": of.FirstItem(),
+		"hasFunc": of.HasFunc(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "hasFunc": true}
+	expected := args.Map{
+		"first": "a",
+		"hasFunc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OneFunc returns correct value -- with args", actual)
 }
 
@@ -301,10 +341,18 @@ func Test_Cov4_TwoFunc(t *testing.T) {
 	tf := &args.TwoFunc[string, int]{First: "a", Second: 1, WorkFunc: func() string { return "hello" }}
 
 	// Act
-	actual := args.Map{"first": tf.FirstItem(), "second": tf.SecondItem(), "hasFunc": tf.HasFunc()}
+	actual := args.Map{
+		"first": tf.FirstItem(),
+		"second": tf.SecondItem(),
+		"hasFunc": tf.HasFunc(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": 1, "hasFunc": true}
+	expected := args.Map{
+		"first": "a",
+		"second": 1,
+		"hasFunc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TwoFunc returns correct value -- with args", actual)
 }
 
@@ -315,10 +363,16 @@ func Test_Cov4_ThreeFunc(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"first": tf.FirstItem(), "hasFunc": tf.HasFunc()}
+	actual := args.Map{
+		"first": tf.FirstItem(),
+		"hasFunc": tf.HasFunc(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "hasFunc": true}
+	expected := args.Map{
+		"first": "a",
+		"hasFunc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ThreeFunc returns correct value -- with args", actual)
 }
 
@@ -337,7 +391,11 @@ func Test_Cov4_FuncWrap_WithArgs(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"inCount": 2, "outCount": 1, "isValid": true}
+	expected := args.Map{
+		"inCount": 2,
+		"outCount": 1,
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FuncWrap returns non-empty -- with args", actual)
 }
 

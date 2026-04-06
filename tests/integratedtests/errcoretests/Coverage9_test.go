@@ -15,10 +15,16 @@ func Test_Cov9_ToError_NonEmpty(t *testing.T) {
 	err := errcore.ToError("some error")
 
 	// Act
-	actual := args.Map{"notNil": err != nil, "msg": err.Error()}
+	actual := args.Map{
+		"notNil": err != nil,
+		"msg": err.Error(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "msg": "some error"}
+	expected := args.Map{
+		"notNil": true,
+		"msg": "some error",
+	}
 	expected.ShouldBeEqual(t, 0, "ToError returns error -- non-empty string", actual)
 }
 
@@ -67,10 +73,16 @@ func Test_Cov9_ToStringPtr_Nil(t *testing.T) {
 	result := errcore.ToStringPtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "val": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": ""}
+	expected := args.Map{
+		"notNil": true,
+		"val": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringPtr returns empty ptr -- nil error", actual)
 }
 
@@ -251,10 +263,18 @@ func Test_Cov9_SliceErrorsToStrings_WithNils(t *testing.T) {
 	result := errcore.SliceErrorsToStrings(errors.New("a"), nil, errors.New("b"))
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "second": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SliceErrorsToStrings returns filtered -- with nils", actual)
 }
 
@@ -371,10 +391,18 @@ func Test_Cov9_ErrorToSplitLines_WithLines(t *testing.T) {
 	result := errcore.ErrorToSplitLines(errors.New("line1\nline2"))
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "line1", "second": "line2"}
+	expected := args.Map{
+		"len": 2,
+		"first": "line1",
+		"second": "line2",
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorToSplitLines returns lines -- with lines", actual)
 }
 

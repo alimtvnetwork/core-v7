@@ -200,10 +200,16 @@ func Test_Cov8_ErrorOnce_MarshalJSON_WithError(t *testing.T) {
 	mb, err := eo.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasBytes": len(mb) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(mb) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returns error message JSON -- has error", actual)
 }
 
@@ -214,10 +220,16 @@ func Test_Cov8_ErrorOnce_Serialize_WithError(t *testing.T) {
 	b, err := eo.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns bytes -- error value serializes", actual)
 }
 
@@ -333,10 +345,16 @@ func Test_Cov8_BytesErrorOnce_DeserializeMust_NoError(t *testing.T) {
 	panicked := callPanics(func() { beo.DeserializeMust(&result) })
 
 	// Act
-	actual := args.Map{"panicked": panicked, "val": result}
+	actual := args.Map{
+		"panicked": panicked,
+		"val": result,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "val": "hello"}
+	expected := args.Map{
+		"panicked": false,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeMust does not panic -- valid json", actual)
 }
 
@@ -391,10 +409,16 @@ func Test_Cov8_BytesErrorOnce_SerializeMust_NoError(t *testing.T) {
 	panicked := callPanics(func() { result = beo.SerializeMust() })
 
 	// Act
-	actual := args.Map{"panicked": panicked, "hasBytes": len(result) > 0}
+	actual := args.Map{
+		"panicked": panicked,
+		"hasBytes": len(result) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "hasBytes": true}
+	expected := args.Map{
+		"panicked": false,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeMust does not panic -- valid bytes", actual)
 }
 

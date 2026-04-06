@@ -14,10 +14,16 @@ func Test_New_Valid_Cov2(t *testing.T) {
 	v, err := issetter.New("True")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "isTrue": true}
+	expected := args.Map{
+		"hasErr": false,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New_Valid returns non-empty -- with args", actual)
 }
 
@@ -159,10 +165,16 @@ func Test_IsCompareResult_Cov2(t *testing.T) {
 
 func Test_IsOutOfRange_Cov2(t *testing.T) {
 	// Act
-	actual := args.Map{"inRange": issetter.IsOutOfRange(1), "outOfRange": issetter.IsOutOfRange(255)}
+	actual := args.Map{
+		"inRange": issetter.IsOutOfRange(1),
+		"outOfRange": issetter.IsOutOfRange(255),
+	}
 
 	// Assert
-	expected := args.Map{"inRange": false, "outOfRange": true}
+	expected := args.Map{
+		"inRange": false,
+		"outOfRange": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsOutOfRange returns correct value -- with args", actual)
 }
 
@@ -235,10 +247,16 @@ func Test_Value_IsNegative_Cov2(t *testing.T) {
 
 func Test_Value_IsPositive_Cov2(t *testing.T) {
 	// Act
-	actual := args.Map{"true": issetter.True.IsPositive(), "set": issetter.Set.IsPositive()}
+	actual := args.Map{
+		"true": issetter.True.IsPositive(),
+		"set": issetter.Set.IsPositive(),
+	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": true}
+	expected := args.Map{
+		"true": true,
+		"set": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_IsPositive returns correct value -- with args", actual)
 }
 
@@ -250,7 +268,10 @@ func Test_Value_GetErrorOnOutOfRange_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"inRange": true, "outOfRange": true}
+	expected := args.Map{
+		"inRange": true,
+		"outOfRange": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_GetErrorOnOutOfRange returns error -- with args", actual)
 }
 
@@ -290,10 +311,16 @@ func Test_Value_Serialize_Cov2(t *testing.T) {
 	data, err := issetter.True.Serialize()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "hasData": len(data) > 0}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"hasData": len(data) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "hasData": true}
+	expected := args.Map{
+		"hasErr": false,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_Serialize returns correct value -- with args", actual)
 }
 
@@ -314,7 +341,10 @@ func Test_Value_IsAnyValuesEqual_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_IsAnyValuesEqual returns non-empty -- with args", actual)
 }
 
@@ -323,10 +353,16 @@ func Test_Value_UnmarshallEnumToValue_Cov2(t *testing.T) {
 	val, err := issetter.Uninitialized.UnmarshallEnumToValue([]byte(`"True"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": int(val)}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": int(val),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": 1}
+	expected := args.Map{
+		"hasErr": false,
+		"val": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_UnmarshallEnumToValue returns correct value -- with args", actual)
 }
 
@@ -335,10 +371,16 @@ func Test_Value_Deserialize_Cov2(t *testing.T) {
 	v, err := issetter.Uninitialized.Deserialize([]byte(`"True"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "isTrue": true}
+	expected := args.Map{
+		"hasErr": false,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_Deserialize_Valid returns non-empty -- with args", actual)
 }
 
@@ -362,10 +404,16 @@ func Test_Value_UnmarshalJSON_Cov2(t *testing.T) {
 	errInvalid := v2.UnmarshalJSON([]byte(`"UNKNOWN_XYZ"`))
 
 	// Act
-	actual := args.Map{"nilErr": errNil != nil, "invalidErr": errInvalid != nil}
+	actual := args.Map{
+		"nilErr": errNil != nil,
+		"invalidErr": errInvalid != nil,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "invalidErr": true}
+	expected := args.Map{
+		"nilErr": true,
+		"invalidErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_UnmarshalJSON returns correct value -- with args", actual)
 }
 
@@ -389,10 +437,16 @@ func Test_Value_ToPtr_Cov2(t *testing.T) {
 	ptr := issetter.True.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "isTrue": *ptr == issetter.True}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"isTrue": *ptr == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isTrue": true}
+	expected := args.Map{
+		"notNil": true,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_ToPtr returns correct value -- with args", actual)
 }
 
@@ -407,10 +461,16 @@ func Test_Value_ValueUInt16_Cov2(t *testing.T) {
 
 func Test_Value_IsNo_Cov2(t *testing.T) {
 	// Act
-	actual := args.Map{"false": issetter.False.IsNo(), "true": issetter.True.IsNo()}
+	actual := args.Map{
+		"false": issetter.False.IsNo(),
+		"true": issetter.True.IsNo(),
+	}
 
 	// Assert
-	expected := args.Map{"false": true, "true": false}
+	expected := args.Map{
+		"false": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value_IsNo returns correct value -- with args", actual)
 }
 

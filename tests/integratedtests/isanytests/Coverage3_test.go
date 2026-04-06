@@ -236,11 +236,17 @@ func Test_Cov3_Conclusive_BothReflectable(t *testing.T) {
 	isEq, isConcl := isany.Conclusive(&a, &b)
 
 	// Act
-	actual := args.Map{"isEqual": isEq, "isConclusive": isConcl}
+	actual := args.Map{
+		"isEqual": isEq,
+		"isConclusive": isConcl,
+	}
 	// Different pointers, same type, so inconclusive (needs deep equal)
 
 	// Assert
-	expected := args.Map{"isEqual": false, "isConclusive": false}
+	expected := args.Map{
+		"isEqual": false,
+		"isConclusive": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- diff pointers same type", actual)
 }
 
@@ -306,10 +312,16 @@ func Test_Cov3_NullLeftRight_BothNull(t *testing.T) {
 	l, r := isany.NullLeftRight(nil, nil)
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": true, "right": true}
+	expected := args.Map{
+		"left": true,
+		"right": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NullLeftRight returns correct value -- both null", actual)
 }
 
@@ -318,10 +330,16 @@ func Test_Cov3_NullLeftRight_BothDefined(t *testing.T) {
 	l, r := isany.NullLeftRight(42, "hello")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": false, "right": false}
+	expected := args.Map{
+		"left": false,
+		"right": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NullLeftRight returns correct value -- both defined", actual)
 }
 
@@ -332,10 +350,16 @@ func Test_Cov3_DefinedLeftRight_BothDefined(t *testing.T) {
 	l, r := isany.DefinedLeftRight(42, "hello")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": true, "right": true}
+	expected := args.Map{
+		"left": true,
+		"right": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedLeftRight returns correct value -- both defined", actual)
 }
 
@@ -344,10 +368,16 @@ func Test_Cov3_DefinedLeftRight_BothNil(t *testing.T) {
 	l, r := isany.DefinedLeftRight(nil, nil)
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": false, "right": false}
+	expected := args.Map{
+		"left": false,
+		"right": false,
+	}
 	expected.ShouldBeEqual(t, 0, "DefinedLeftRight returns nil -- both nil", actual)
 }
 

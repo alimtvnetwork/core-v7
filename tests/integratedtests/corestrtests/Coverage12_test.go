@@ -115,10 +115,16 @@ func Test_Cov12_Collection_IsEmpty_Nil(t *testing.T) {
 		var c *corestr.Collection
 
 		// Act
-		actual := args.Map{"empty": c.IsEmpty(), "len": c.Length()}
+		actual := args.Map{
+			"empty": c.IsEmpty(),
+			"len": c.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns nil -- nil", actual)
 	})
 }
@@ -153,10 +159,16 @@ func Test_Cov12_Hashmap_Get(t *testing.T) {
 		val, found := hm.Get("k1")
 
 		// Act
-		actual := args.Map{"val": val, "found": found}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+		}
 
 		// Assert
-		expected := args.Map{"val": "v1", "found": true}
+		expected := args.Map{
+			"val": "v1",
+			"found": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.Get returns correct value -- with args", actual)
 	})
 }
@@ -168,10 +180,16 @@ func Test_Cov12_Hashmap_Get_NotFound(t *testing.T) {
 		val, found := hm.Get("k2")
 
 		// Act
-		actual := args.Map{"val": val, "found": found}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "found": false}
+		expected := args.Map{
+			"val": "",
+			"found": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.Get returns correct value -- not found", actual)
 	})
 }
@@ -185,10 +203,18 @@ func Test_Cov12_Hashmap_AddOrUpdate(t *testing.T) {
 		val, _ := hm.Get("k1")
 
 		// Act
-		actual := args.Map{"isNew": isNew, "isUpdate": !isNew2, "val": val}
+		actual := args.Map{
+			"isNew": isNew,
+			"isUpdate": !isNew2,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"isNew": true, "isUpdate": true, "val": "v2"}
+		expected := args.Map{
+			"isNew": true,
+			"isUpdate": true,
+			"val": "v2",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.AddOrUpdate returns correct value -- with args", actual)
 	})
 }
@@ -214,10 +240,18 @@ func Test_Cov12_Hashmap_Nil(t *testing.T) {
 		var hm *corestr.Hashmap
 
 		// Act
-		actual := args.Map{"empty": hm.IsEmpty(), "len": hm.Length(), "hasAny": hm.HasAnyItem()}
+		actual := args.Map{
+			"empty": hm.IsEmpty(),
+			"len": hm.Length(),
+			"hasAny": hm.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0, "hasAny": false}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+			"hasAny": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap returns nil -- nil", actual)
 	})
 }
@@ -229,10 +263,16 @@ func Test_Cov12_Hashmap_Clone(t *testing.T) {
 		cloned := hm.ClonePtr()
 
 		// Act
-		actual := args.Map{"notNil": cloned != nil, "notEmpty": !cloned.IsEmpty()}
+		actual := args.Map{
+			"notNil": cloned != nil,
+			"notEmpty": !cloned.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"notNil": true, "notEmpty": true}
+		expected := args.Map{
+			"notNil": true,
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.Clone returns correct value -- with args", actual)
 	})
 }
@@ -328,10 +368,16 @@ func Test_Cov12_Hashset_Nil(t *testing.T) {
 		var hs *corestr.Hashset
 
 		// Act
-		actual := args.Map{"empty": hs.IsEmpty(), "len": hs.Length()}
+		actual := args.Map{
+			"empty": hs.IsEmpty(),
+			"len": hs.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset returns nil -- nil", actual)
 	})
 }
@@ -364,10 +410,16 @@ func Test_Cov12_SimpleSlice_Nil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act
-		actual := args.Map{"empty": ss.IsEmpty(), "len": ss.Length()}
+		actual := args.Map{
+			"empty": ss.IsEmpty(),
+			"len": ss.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice returns nil -- nil", actual)
 	})
 }
@@ -380,10 +432,16 @@ func Test_Cov12_LeftRight(t *testing.T) {
 		lr := corestr.NewLeftRight("left", "right")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "left", "right": "right"}
+		expected := args.Map{
+			"left": "left",
+			"right": "right",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- with args", actual)
 	})
 }
@@ -396,10 +454,18 @@ func Test_Cov12_LeftMiddleRight(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "l", "middle": "m", "right": "r"}
+		expected := args.Map{
+			"left": "l",
+			"middle": "m",
+			"right": "r",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRight returns correct value -- with args", actual)
 	})
 }
@@ -412,10 +478,16 @@ func Test_Cov12_ValidValue(t *testing.T) {
 		vv := corestr.ValidValue{Value: "hello", IsValid: true}
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "valid": true}
+		expected := args.Map{
+			"val": "hello",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- with args", actual)
 	})
 }
@@ -443,10 +515,16 @@ func Test_Cov12_ValueStatus(t *testing.T) {
 		vs := &corestr.ValueStatus{ValueValid: vv, Index: 0}
 
 		// Act
-		actual := args.Map{"val": vs.ValueValid.Value, "idx": vs.Index}
+		actual := args.Map{
+			"val": vs.ValueValid.Value,
+			"idx": vs.Index,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "idx": 0}
+		expected := args.Map{
+			"val": "hello",
+			"idx": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus returns non-empty -- with args", actual)
 	})
 }
@@ -459,10 +537,16 @@ func Test_Cov12_KeyValuePair(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "val": "v"}
+		expected := args.Map{
+			"key": "k",
+			"val": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair returns correct value -- with args", actual)
 	})
 }
@@ -475,10 +559,16 @@ func Test_Cov12_KeyAnyValuePair(t *testing.T) {
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "val": 42}
+		expected := args.Map{
+			"key": "k",
+			"val": 42,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyAnyValuePair returns correct value -- with args", actual)
 	})
 }
@@ -491,10 +581,16 @@ func Test_Cov12_Empty_Hashmap(t *testing.T) {
 		hm := corestr.Empty.Hashmap()
 
 		// Act
-		actual := args.Map{"notNil": hm != nil, "empty": hm.IsEmpty()}
+		actual := args.Map{
+			"notNil": hm != nil,
+			"empty": hm.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"notNil": true, "empty": true}
+		expected := args.Map{
+			"notNil": true,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Empty.Hashmap returns empty -- with args", actual)
 	})
 }
@@ -505,10 +601,16 @@ func Test_Cov12_Empty_Hashset(t *testing.T) {
 		hs := corestr.Empty.Hashset()
 
 		// Act
-		actual := args.Map{"notNil": hs != nil, "empty": hs.IsEmpty()}
+		actual := args.Map{
+			"notNil": hs != nil,
+			"empty": hs.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"notNil": true, "empty": true}
+		expected := args.Map{
+			"notNil": true,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Empty.Hashset returns empty -- with args", actual)
 	})
 }
@@ -521,10 +623,16 @@ func Test_Cov12_TextWithLineNumber(t *testing.T) {
 		tln := corestr.TextWithLineNumber{Text: "hello", LineNumber: 1}
 
 		// Act
-		actual := args.Map{"text": tln.Text, "num": tln.LineNumber}
+		actual := args.Map{
+			"text": tln.Text,
+			"num": tln.LineNumber,
+		}
 
 		// Assert
-		expected := args.Map{"text": "hello", "num": 1}
+		expected := args.Map{
+			"text": "hello",
+			"num": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "TextWithLineNumber returns non-empty -- with args", actual)
 	})
 }
@@ -537,10 +645,16 @@ func Test_Cov12_HashsetsCollection_Basic(t *testing.T) {
 		hsc := corestr.New.HashsetsCollection.Cap(5)
 
 		// Act
-		actual := args.Map{"isEmpty": hsc.IsEmpty(), "len": hsc.Length()}
+		actual := args.Map{
+			"isEmpty": hsc.IsEmpty(),
+			"len": hsc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollection returns correct value -- basic", actual)
 	})
 }
@@ -567,10 +681,16 @@ func Test_Cov12_HashsetsCollection_Nil(t *testing.T) {
 		var hsc *corestr.HashsetsCollection
 
 		// Act
-		actual := args.Map{"empty": hsc.IsEmpty(), "len": hsc.Length()}
+		actual := args.Map{
+			"empty": hsc.IsEmpty(),
+			"len": hsc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollection returns nil -- nil", actual)
 	})
 }
@@ -583,10 +703,16 @@ func Test_Cov12_CollectionsOfCollection_Basic(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.LenCap(0, 5)
 
 		// Act
-		actual := args.Map{"isEmpty": coc.IsEmpty(), "len": coc.Length()}
+		actual := args.Map{
+			"isEmpty": coc.IsEmpty(),
+			"len": coc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "CollectionsOfCollection returns correct value -- basic", actual)
 	})
 }
@@ -630,10 +756,16 @@ func Test_Cov12_KeyValueCollection_Basic(t *testing.T) {
 		kvc := corestr.New.KeyValues.Cap(5)
 
 		// Act
-		actual := args.Map{"isEmpty": kvc.IsEmpty(), "len": kvc.Length()}
+		actual := args.Map{
+			"isEmpty": kvc.IsEmpty(),
+			"len": kvc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValueCollection returns correct value -- basic", actual)
 	})
 }
@@ -659,10 +791,16 @@ func Test_Cov12_KeyValueCollection_Nil(t *testing.T) {
 		var kvc *corestr.KeyValueCollection
 
 		// Act
-		actual := args.Map{"empty": kvc.IsEmpty(), "len": kvc.Length()}
+		actual := args.Map{
+			"empty": kvc.IsEmpty(),
+			"len": kvc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValueCollection returns nil -- nil", actual)
 	})
 }
@@ -712,10 +850,16 @@ func Test_Cov12_CharCollectionMap_Basic(t *testing.T) {
 		ccm := corestr.New.CharCollectionMap.Empty()
 
 		// Act
-		actual := args.Map{"isEmpty": ccm.IsEmpty(), "len": ccm.Length()}
+		actual := args.Map{
+			"isEmpty": ccm.IsEmpty(),
+			"len": ccm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "CharCollectionMap returns correct value -- basic", actual)
 	})
 }
@@ -726,10 +870,16 @@ func Test_Cov12_CharCollectionMap_Nil(t *testing.T) {
 		var ccm *corestr.CharCollectionMap
 
 		// Act
-		actual := args.Map{"empty": ccm.IsEmpty(), "len": ccm.Length()}
+		actual := args.Map{
+			"empty": ccm.IsEmpty(),
+			"len": ccm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "CharCollectionMap returns nil -- nil", actual)
 	})
 }
@@ -742,10 +892,16 @@ func Test_Cov12_CharHashsetMap_Basic(t *testing.T) {
 		chm := corestr.New.CharHashsetMap.Cap(5, 5)
 
 		// Act
-		actual := args.Map{"isEmpty": chm.IsEmpty(), "len": chm.Length()}
+		actual := args.Map{
+			"isEmpty": chm.IsEmpty(),
+			"len": chm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "CharHashsetMap returns correct value -- basic", actual)
 	})
 }
@@ -756,10 +912,16 @@ func Test_Cov12_CharHashsetMap_Nil(t *testing.T) {
 		var chm *corestr.CharHashsetMap
 
 		// Act
-		actual := args.Map{"empty": chm.IsEmpty(), "len": chm.Length()}
+		actual := args.Map{
+			"empty": chm.IsEmpty(),
+			"len": chm.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "CharHashsetMap returns nil -- nil", actual)
 	})
 }
@@ -774,10 +936,16 @@ func Test_Cov12_CloneSlice(t *testing.T) {
 		original[0] = "X"
 
 		// Act
-		actual := args.Map{"clonedFirst": cloned[0], "len": len(cloned)}
+		actual := args.Map{
+			"clonedFirst": cloned[0],
+			"len": len(cloned),
+		}
 
 		// Assert
-		expected := args.Map{"clonedFirst": "a", "len": 3}
+		expected := args.Map{
+			"clonedFirst": "a",
+			"len": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns correct value -- with args", actual)
 	})
 }
@@ -835,10 +1003,16 @@ func Test_Cov12_LinkedList_Basic(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 
 		// Act
-		actual := args.Map{"isEmpty": ll.IsEmpty(), "len": ll.Length()}
+		actual := args.Map{
+			"isEmpty": ll.IsEmpty(),
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- basic", actual)
 	})
 }
@@ -865,10 +1039,16 @@ func Test_Cov12_LinkedCollections_Basic(t *testing.T) {
 		lc := corestr.New.LinkedCollection.Create()
 
 		// Act
-		actual := args.Map{"isEmpty": lc.IsEmpty(), "len": lc.Length()}
+		actual := args.Map{
+			"isEmpty": lc.IsEmpty(),
+			"len": lc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "len": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedCollections returns correct value -- basic", actual)
 	})
 }
@@ -924,10 +1104,16 @@ func Test_Cov12_HashmapDiff(t *testing.T) {
 		diff := corestr.HashmapDiff(map[string]string{"k": "v"})
 
 		// Act
-		actual := args.Map{"len": diff.Length(), "empty": diff.IsEmpty()}
+		actual := args.Map{
+			"len": diff.Length(),
+			"empty": diff.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "empty": false}
+		expected := args.Map{
+			"len": 1,
+			"empty": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HashmapDiff returns correct value -- with args", actual)
 	})
 }

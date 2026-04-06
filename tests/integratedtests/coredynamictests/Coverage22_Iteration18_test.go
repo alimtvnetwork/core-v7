@@ -128,10 +128,16 @@ func Test_I18_Dynamic_IsValid(t *testing.T) {
 	d := coredynamic.NewDynamic("ok", true)
 
 	// Act
-	actual := args.Map{"valid": d.IsValid(), "invalid": d.IsInvalid()}
+	actual := args.Map{
+		"valid": d.IsValid(),
+		"invalid": d.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns non-empty -- IsValid", actual)
 }
 
@@ -359,10 +365,16 @@ func Test_I18_Dynamic_IntDefault(t *testing.T) {
 	val, ok := d.IntDefault(0)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- IntDefault", actual)
 }
 
@@ -372,10 +384,16 @@ func Test_I18_Dynamic_IntDefault_Nil(t *testing.T) {
 	val, ok := d.IntDefault(99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "ok": false}
+	expected := args.Map{
+		"val": 99,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns nil -- IntDefault nil", actual)
 }
 
@@ -385,10 +403,16 @@ func Test_I18_Dynamic_IntDefault_Invalid(t *testing.T) {
 	val, ok := d.IntDefault(7)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 7, "ok": false}
+	expected := args.Map{
+		"val": 7,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns error -- IntDefault invalid", actual)
 }
 
@@ -398,10 +422,16 @@ func Test_I18_Dynamic_Float64(t *testing.T) {
 	val, err := d.Float64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "close": val > 3.13 && val < 3.15}
+	actual := args.Map{
+		"noErr": err == nil,
+		"close": val > 3.13 && val < 3.15,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "close": true}
+	expected := args.Map{
+		"noErr": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Float64", actual)
 }
 
@@ -558,10 +588,16 @@ func Test_I18_Dynamic_Bytes(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(b)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(b),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 3}
+	expected := args.Map{
+		"ok": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Bytes", actual)
 }
 
@@ -588,10 +624,16 @@ func Test_I18_Dynamic_ReflectValue(t *testing.T) {
 	rv := d.ReflectValue()
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "kind": rv.Kind().String()}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"kind": rv.Kind().String(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "kind": "int"}
+	expected := args.Map{
+		"valid": true,
+		"kind": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ReflectValue", actual)
 }
 
@@ -675,10 +717,16 @@ func Test_I18_Dynamic_ReflectSetTo(t *testing.T) {
 	err := d.ReflectSetTo(&target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ReflectSetTo", actual)
 }
 
@@ -721,10 +769,16 @@ func Test_I18_Dynamic_Loop(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "sum": sum}
+	actual := args.Map{
+		"called": called,
+		"sum": sum,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "sum": 60}
+	expected := args.Map{
+		"called": true,
+		"sum": 60,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Loop", actual)
 }
 
@@ -798,10 +852,16 @@ func Test_I18_Dynamic_LoopMap(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 2}
+	expected := args.Map{
+		"called": true,
+		"count": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- LoopMap", actual)
 }
 
@@ -824,10 +884,16 @@ func Test_I18_Dynamic_MapToKeyVal(t *testing.T) {
 	kvc, err := d.MapToKeyVal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": kvc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": kvc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- MapToKeyVal", actual)
 }
 
@@ -841,10 +907,16 @@ func Test_I18_Dynamic_ValueMarshal(t *testing.T) {
 	b, err := d.ValueMarshal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ValueMarshal", actual)
 }
 
@@ -880,10 +952,16 @@ func Test_I18_Dynamic_JsonBytesPtr(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytesPtr", actual)
 }
 
@@ -893,10 +971,16 @@ func Test_I18_Dynamic_JsonBytesPtr_Null(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "empty": len(b) == 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": len(b) == 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "empty": true}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytesPtr null", actual)
 }
 
@@ -906,10 +990,16 @@ func Test_I18_Dynamic_MarshalJSON(t *testing.T) {
 	b, err := d.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- MarshalJSON", actual)
 }
 
@@ -971,10 +1061,16 @@ func Test_I18_Dynamic_ParseInjectUsingJson(t *testing.T) {
 	result, err := d.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -984,10 +1080,16 @@ func Test_I18_Dynamic_JsonString(t *testing.T) {
 	s, err := d.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonString", actual)
 }
 
@@ -1132,10 +1234,16 @@ func Test_I18_CollectionLock_RemoveAtLock(t *testing.T) {
 	ok := c.RemoveAtLock(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": c.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "CollectionLock returns correct value -- RemoveAtLock", actual)
 }
 
@@ -1289,10 +1397,16 @@ func Test_I18_MapAnyItems_Empty(t *testing.T) {
 	m := coredynamic.EmptyMapAnyItems()
 
 	// Act
-	actual := args.Map{"empty": m.IsEmpty(), "len": m.Length()}
+	actual := args.Map{
+		"empty": m.IsEmpty(),
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "len": 0}
+	expected := args.Map{
+		"empty": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns empty -- Empty", actual)
 }
 
@@ -1301,10 +1415,16 @@ func Test_I18_MapAnyItems_NewUsingItems(t *testing.T) {
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 
 	// Act
-	actual := args.Map{"len": m.Length(), "has": m.HasAnyItem()}
+	actual := args.Map{
+		"len": m.Length(),
+		"has": m.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "has": true}
+	expected := args.Map{
+		"len": 1,
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- NewUsingItems", actual)
 }
 
@@ -1325,10 +1445,16 @@ func Test_I18_MapAnyItems_HasKey(t *testing.T) {
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": "v"})
 
 	// Act
-	actual := args.Map{"has": m.HasKey("k"), "miss": m.HasKey("z")}
+	actual := args.Map{
+		"has": m.HasKey("k"),
+		"miss": m.HasKey("z"),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "miss": false}
+	expected := args.Map{
+		"has": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- HasKey", actual)
 }
 
@@ -1351,10 +1477,18 @@ func Test_I18_MapAnyItems_Add(t *testing.T) {
 	isNew2 := m.Add("k", "v2")
 
 	// Act
-	actual := args.Map{"isNew": isNew, "isNew2": isNew2, "len": m.Length()}
+	actual := args.Map{
+		"isNew": isNew,
+		"isNew2": isNew2,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"isNew": true, "isNew2": false, "len": 1}
+	expected := args.Map{
+		"isNew": true,
+		"isNew2": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Add", actual)
 }
 
@@ -1376,10 +1510,16 @@ func Test_I18_MapAnyItems_GetValue(t *testing.T) {
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"k": 42})
 
 	// Act
-	actual := args.Map{"val": m.GetValue("k"), "nil": m.GetValue("z")}
+	actual := args.Map{
+		"val": m.GetValue("k"),
+		"nil": m.GetValue("z"),
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "nil": nil}
+	expected := args.Map{
+		"val": 42,
+		"nil": nil,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- GetValue", actual)
 }
 
@@ -1390,10 +1530,18 @@ func Test_I18_MapAnyItems_Get(t *testing.T) {
 	_, miss := m.Get("z")
 
 	// Act
-	actual := args.Map{"val": v, "has": has, "miss": miss}
+	actual := args.Map{
+		"val": v,
+		"has": has,
+		"miss": miss,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "has": true, "miss": false}
+	expected := args.Map{
+		"val": "v",
+		"has": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- Get", actual)
 }
 
@@ -1453,10 +1601,16 @@ func Test_I18_MapAnyItems_JsonString(t *testing.T) {
 	s, err := m.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- JsonString", actual)
 }
 
@@ -1479,10 +1633,16 @@ func Test_I18_MapAnyItems_AllKeys(t *testing.T) {
 	keys := m.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"len": len(keys), "first": keys[0]}
+	actual := args.Map{
+		"len": len(keys),
+		"first": keys[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- AllKeysSorted", actual)
 }
 
@@ -1544,10 +1704,16 @@ func Test_I18_MapAnyItems_AddWithValidation_Match(t *testing.T) {
 	err := m.AddWithValidation(reflect.TypeOf(""), "k", "v")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": m.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns non-empty -- AddWithValidation match", actual)
 }
 

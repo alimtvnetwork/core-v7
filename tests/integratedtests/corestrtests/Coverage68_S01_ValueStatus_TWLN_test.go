@@ -39,10 +39,16 @@ func Test_S01_InvalidValueStatusNoMessage(t *testing.T) {
 		vs := corestr.InvalidValueStatusNoMessage()
 
 		// Act
-		actual := args.Map{"valid": vs.ValueValid.IsValid, "msg": vs.ValueValid.Message}
+		actual := args.Map{
+			"valid": vs.ValueValid.IsValid,
+			"msg": vs.ValueValid.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": ""}
+		expected := args.Map{
+			"valid": false,
+			"msg": "",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidValueStatusNoMessage returns correct value -- no message", actual)
 	})
 }
@@ -57,10 +63,18 @@ func Test_S01_ValueStatus_Clone(t *testing.T) {
 		c := vs.Clone()
 
 		// Act
-		actual := args.Map{"val": c.ValueValid.Value, "index": c.Index, "samePtr": vs == c}
+		actual := args.Map{
+			"val": c.ValueValid.Value,
+			"index": c.Index,
+			"samePtr": vs == c,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "index": 5, "samePtr": false}
+		expected := args.Map{
+			"val": "hello",
+			"index": 5,
+			"samePtr": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus.Clone returns correct value -- deep copy", actual)
 	})
 }
@@ -75,10 +89,18 @@ func Test_S01_TWLN_HasLineNumber(t *testing.T) {
 		var tw3 *corestr.TextWithLineNumber
 
 		// Act
-		actual := args.Map{"valid": tw.HasLineNumber(), "invalid": tw2.HasLineNumber(), "nil": tw3.HasLineNumber()}
+		actual := args.Map{
+			"valid": tw.HasLineNumber(),
+			"invalid": tw2.HasLineNumber(),
+			"nil": tw3.HasLineNumber(),
+		}
 
 		// Assert
-		expected := args.Map{"valid": true, "invalid": false, "nil": false}
+		expected := args.Map{
+			"valid": true,
+			"invalid": false,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasLineNumber returns correct value -- valid, invalid, nil", actual)
 	})
 }
@@ -91,10 +113,18 @@ func Test_S01_TWLN_IsInvalidLineNumber(t *testing.T) {
 		var tw3 *corestr.TextWithLineNumber
 
 		// Act
-		actual := args.Map{"valid": tw.IsInvalidLineNumber(), "invalid": tw2.IsInvalidLineNumber(), "nil": tw3.IsInvalidLineNumber()}
+		actual := args.Map{
+			"valid": tw.IsInvalidLineNumber(),
+			"invalid": tw2.IsInvalidLineNumber(),
+			"nil": tw3.IsInvalidLineNumber(),
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "invalid": true, "nil": true}
+		expected := args.Map{
+			"valid": false,
+			"invalid": true,
+			"nil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsInvalidLineNumber returns correct value -- valid, invalid, nil", actual)
 	})
 }
@@ -106,10 +136,16 @@ func Test_S01_TWLN_Length(t *testing.T) {
 		var tw2 *corestr.TextWithLineNumber
 
 		// Act
-		actual := args.Map{"len": tw.Length(), "nilLen": tw2.Length()}
+		actual := args.Map{
+			"len": tw.Length(),
+			"nilLen": tw2.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 5, "nilLen": 0}
+		expected := args.Map{
+			"len": 5,
+			"nilLen": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Length returns correct value -- normal and nil", actual)
 	})
 }
@@ -149,10 +185,18 @@ func Test_S01_TWLN_IsEmptyText(t *testing.T) {
 		var tw3 *corestr.TextWithLineNumber
 
 		// Act
-		actual := args.Map{"hasText": tw.IsEmptyText(), "empty": tw2.IsEmptyText(), "nil": tw3.IsEmptyText()}
+		actual := args.Map{
+			"hasText": tw.IsEmptyText(),
+			"empty": tw2.IsEmptyText(),
+			"nil": tw3.IsEmptyText(),
+		}
 
 		// Assert
-		expected := args.Map{"hasText": false, "empty": true, "nil": true}
+		expected := args.Map{
+			"hasText": false,
+			"empty": true,
+			"nil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmptyText returns correct value -- text, empty, nil", actual)
 	})
 }

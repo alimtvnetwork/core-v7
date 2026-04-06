@@ -17,10 +17,18 @@ func Test_I24_CastTo_MatchingType(t *testing.T) {
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(""))
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "match": result.IsMatchingAcceptedType, "noErr": !result.HasError()}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"match": result.IsMatchingAcceptedType,
+		"noErr": !result.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "match": true, "noErr": true}
+	expected := args.Map{
+		"valid": true,
+		"match": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo returns correct value -- matching", actual)
 }
 
@@ -29,10 +37,16 @@ func Test_I24_CastTo_NonMatchingType(t *testing.T) {
 	result := coredynamic.CastTo(false, "hello", reflect.TypeOf(0))
 
 	// Act
-	actual := args.Map{"match": result.IsMatchingAcceptedType, "hasErr": result.HasError()}
+	actual := args.Map{
+		"match": result.IsMatchingAcceptedType,
+		"hasErr": result.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"match": false, "hasErr": true}
+	expected := args.Map{
+		"match": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo returns non-empty -- non-matching", actual)
 }
 
@@ -42,10 +56,16 @@ func Test_I24_CastTo_PointerOutput(t *testing.T) {
 	result := coredynamic.CastTo(true, &input, reflect.TypeOf((*string)(nil)))
 
 	// Act
-	actual := args.Map{"notNil": result.Casted != nil, "match": result.IsMatchingAcceptedType}
+	actual := args.Map{
+		"notNil": result.Casted != nil,
+		"match": result.IsMatchingAcceptedType,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "match": true}
+	expected := args.Map{
+		"notNil": true,
+		"match": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo returns correct value -- pointer output", actual)
 }
 
@@ -126,10 +146,16 @@ func Test_I24_CastedResult_IsSourceKind(t *testing.T) {
 	cr := &coredynamic.CastedResult{SourceKind: reflect.String}
 
 	// Act
-	actual := args.Map{"isStr": cr.IsSourceKind(reflect.String), "isInt": cr.IsSourceKind(reflect.Int)}
+	actual := args.Map{
+		"isStr": cr.IsSourceKind(reflect.String),
+		"isInt": cr.IsSourceKind(reflect.Int),
+	}
 
 	// Assert
-	expected := args.Map{"isStr": true, "isInt": false}
+	expected := args.Map{
+		"isStr": true,
+		"isInt": false,
+	}
 	expected.ShouldBeEqual(t, 0, "CastedResult returns correct value -- IsSourceKind", actual)
 }
 
@@ -227,10 +253,16 @@ func Test_I24_MapAnyItemDiff_AllKeysSorted(t *testing.T) {
 	keys := m.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"first": keys[0], "second": keys[1]}
+	actual := args.Map{
+		"first": keys[0],
+		"second": keys[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItemDiff returns correct value -- AllKeysSorted", actual)
 }
 
@@ -516,10 +548,16 @@ func Test_I24_MapAsKeyValSlice_Valid(t *testing.T) {
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": kvc.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": kvc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice returns non-empty -- valid", actual)
 }
 
@@ -543,10 +581,16 @@ func Test_I24_MapAsKeyValSlice_Pointer(t *testing.T) {
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasItems": kvc.Length() > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasItems": kvc.Length() > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": false, "hasItems": false}
+	expected := args.Map{
+		"noErr": false,
+		"hasItems": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice returns correct value -- pointer", actual)
 }
 
@@ -622,10 +666,16 @@ func Test_I24_TypeSameStatus_Different(t *testing.T) {
 	ts := coredynamic.TypeSameStatus("a", 1)
 
 	// Act
-	actual := args.Map{"same": ts.IsSame, "leftPtr": ts.IsLeftPointer}
+	actual := args.Map{
+		"same": ts.IsSame,
+		"leftPtr": ts.IsLeftPointer,
+	}
 
 	// Assert
-	expected := args.Map{"same": false, "leftPtr": false}
+	expected := args.Map{
+		"same": false,
+		"leftPtr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- different", actual)
 }
 
@@ -635,10 +685,16 @@ func Test_I24_TypeSameStatus_Pointer(t *testing.T) {
 	ts := coredynamic.TypeSameStatus(&s, "b")
 
 	// Act
-	actual := args.Map{"leftPtr": ts.IsLeftPointer, "rightPtr": ts.IsRightPointer}
+	actual := args.Map{
+		"leftPtr": ts.IsLeftPointer,
+		"rightPtr": ts.IsRightPointer,
+	}
 
 	// Assert
-	expected := args.Map{"leftPtr": true, "rightPtr": false}
+	expected := args.Map{
+		"leftPtr": true,
+		"rightPtr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- pointer", actual)
 }
 
@@ -1055,10 +1111,16 @@ func Test_I24_ValueStatus_Invalid(t *testing.T) {
 	vs := coredynamic.InvalidValueStatus("bad")
 
 	// Act
-	actual := args.Map{"valid": vs.IsValid, "msg": vs.Message}
+	actual := args.Map{
+		"valid": vs.IsValid,
+		"msg": vs.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "bad"}
+	expected := args.Map{
+		"valid": false,
+		"msg": "bad",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus returns error -- invalid", actual)
 }
 
@@ -1067,10 +1129,16 @@ func Test_I24_ValueStatus_InvalidNoMessage(t *testing.T) {
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
 	// Act
-	actual := args.Map{"valid": vs.IsValid, "msg": vs.Message}
+	actual := args.Map{
+		"valid": vs.IsValid,
+		"msg": vs.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus returns empty -- invalid no msg", actual)
 }
 
@@ -1079,10 +1147,16 @@ func Test_I24_DynamicStatus_Invalid(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatus("bad")
 
 	// Act
-	actual := args.Map{"valid": ds.IsValid(), "msg": ds.Message}
+	actual := args.Map{
+		"valid": ds.IsValid(),
+		"msg": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "bad"}
+	expected := args.Map{
+		"valid": false,
+		"msg": "bad",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns error -- invalid", actual)
 }
 
@@ -1091,10 +1165,16 @@ func Test_I24_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
 	// Act
-	actual := args.Map{"valid": ds.IsValid(), "msg": ds.Message}
+	actual := args.Map{
+		"valid": ds.IsValid(),
+		"msg": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns empty -- invalid no msg", actual)
 }
 
@@ -1107,10 +1187,16 @@ func Test_I24_DynamicStatus_Clone(t *testing.T) {
 	cloned := ds.Clone()
 
 	// Act
-	actual := args.Map{"valid": cloned.IsValid(), "msg": cloned.Message}
+	actual := args.Map{
+		"valid": cloned.IsValid(),
+		"msg": cloned.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "msg": "test"}
+	expected := args.Map{
+		"valid": true,
+		"msg": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- Clone", actual)
 }
 
@@ -1123,10 +1209,16 @@ func Test_I24_DynamicStatus_ClonePtr(t *testing.T) {
 	cloned := ds.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "msg": cloned.Message}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"msg": cloned.Message,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "msg": "test"}
+	expected := args.Map{
+		"notNil": true,
+		"msg": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- ClonePtr", actual)
 }
 

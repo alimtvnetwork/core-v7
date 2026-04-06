@@ -19,8 +19,14 @@ func Test_Cov16_ParseVarWrapper_OwnerError(t *testing.T) {
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(rwx)
 
 	// Assert
-	actual := args.Map{"nilResult": result == nil, "hasErr": err != nil}
-	expected := args.Map{"nilResult": true, "hasErr": true}
+	actual := args.Map{
+		"nilResult": result == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"nilResult": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseVarWrapper returns error -- invalid Owner length", actual)
 }
 
@@ -35,8 +41,14 @@ func Test_Cov16_ParseVarWrapper_GroupError(t *testing.T) {
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(rwx)
 
 	// Assert
-	actual := args.Map{"nilResult": result == nil, "hasErr": err != nil}
-	expected := args.Map{"nilResult": true, "hasErr": true}
+	actual := args.Map{
+		"nilResult": result == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"nilResult": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseVarWrapper returns error -- invalid Group length", actual)
 }
 
@@ -51,8 +63,14 @@ func Test_Cov16_ParseVarWrapper_OtherError(t *testing.T) {
 	result, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(rwx)
 
 	// Assert
-	actual := args.Map{"nilResult": result == nil, "hasErr": err != nil}
-	expected := args.Map{"nilResult": true, "hasErr": true}
+	actual := args.Map{
+		"nilResult": result == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"nilResult": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseVarWrapper returns error -- invalid Other length", actual)
 }
 
@@ -76,8 +94,14 @@ func Test_Cov16_ParseInstructionsToExecutors_InvalidInstruction(t *testing.T) {
 	executors, err := chmodhelper.ParseRwxInstructionsToExecutors(instructions)
 
 	// Assert
-	actual := args.Map{"notNil": executors != nil, "hasErr": err != nil}
-	expected := args.Map{"notNil": true, "hasErr": true}
+	actual := args.Map{
+		"notNil": executors != nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"notNil": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseInstructionsToExecutors returns error -- invalid instruction", actual)
 }
 
@@ -117,8 +141,14 @@ func Test_Cov16_MergeRwxWildcard_ParseError(t *testing.T) {
 	result, err := chmodhelper.MergeRwxWildcardWithFixedRwx(fixedRwx, wildcardRwx)
 
 	// Assert
-	actual := args.Map{"nilResult": result == nil, "hasErr": err != nil}
-	expected := args.Map{"nilResult": false, "hasErr": false}
+	actual := args.Map{
+		"nilResult": result == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"nilResult": false,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MergeRwxWildcard returns no error -- valid wildcard chars", actual)
 }
 
@@ -179,8 +209,14 @@ func Test_Cov16_NewRwxVariableWrapper_InvalidChar(t *testing.T) {
 	wrapper, err := chmodhelper.NewRwxVariableWrapper("-zzz")
 
 	// Assert
-	actual := args.Map{"nilWrapper": wrapper == nil, "hasErr": err != nil}
-	expected := args.Map{"nilWrapper": false, "hasErr": false}
+	actual := args.Map{
+		"nilWrapper": wrapper == nil,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"nilWrapper": false,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRwxVariableWrapper returns no error -- valid chars", actual)
 }
 
@@ -260,7 +296,13 @@ func Test_Cov16_RwxWrapper_ToFileModeString(t *testing.T) {
 	octal := wrapper.ToUint32Octal()
 
 	// Assert
-	actual := args.Map{"hasStr": len(str) > 0, "octal": int(octal)}
-	expected := args.Map{"hasStr": true, "octal": 493}
+	actual := args.Map{
+		"hasStr": len(str) > 0,
+		"octal": int(octal),
+	}
+	expected := args.Map{
+		"hasStr": true,
+		"octal": 493,
+	}
 	expected.ShouldBeEqual(t, 0, "ToUint32Octal returns 493 (0755 octal) -- rwxr-xr-x", actual)
 }

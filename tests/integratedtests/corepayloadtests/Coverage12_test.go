@@ -67,10 +67,16 @@ func Test_Cov12_PW_SetDynamicPayloads_Valid(t *testing.T) {
 	err := pw.SetDynamicPayloads([]byte("data"))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(pw.Payloads)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(pw.Payloads),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 4}
+	expected := args.Map{
+		"noErr": true,
+		"len": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "SetDynamicPayloads returns non-empty -- valid", actual)
 }
 
@@ -92,10 +98,16 @@ func Test_Cov12_PW_InitializeAttributesOnNull(t *testing.T) {
 	binder := pw.InitializeAttributesOnNull()
 
 	// Act
-	actual := args.Map{"notNil": binder != nil, "hasAttr": pw.Attributes != nil}
+	actual := args.Map{
+		"notNil": binder != nil,
+		"hasAttr": pw.Attributes != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasAttr": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasAttr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InitializeAttributesOnNull returns correct value -- with args", actual)
 }
 
@@ -117,10 +129,22 @@ func Test_Cov12_PW_All(t *testing.T) {
 	id, name, entity, cat, dyn := pw.All()
 
 	// Act
-	actual := args.Map{"id": id, "name": name, "entity": entity, "cat": cat, "dynLen": len(dyn)}
+	actual := args.Map{
+		"id": id,
+		"name": name,
+		"entity": entity,
+		"cat": cat,
+		"dynLen": len(dyn),
+	}
 
 	// Assert
-	expected := args.Map{"id": "id", "name": "n", "entity": "e", "cat": "c", "dynLen": 1}
+	expected := args.Map{
+		"id": "id",
+		"name": "n",
+		"entity": "e",
+		"cat": "c",
+		"dynLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "All returns correct value -- with args", actual)
 }
 
@@ -130,10 +154,22 @@ func Test_Cov12_PW_AllSafe_Nil(t *testing.T) {
 	id, name, entity, cat, dyn := pw.AllSafe()
 
 	// Act
-	actual := args.Map{"id": id, "name": name, "entity": entity, "cat": cat, "dynLen": len(dyn)}
+	actual := args.Map{
+		"id": id,
+		"name": name,
+		"entity": entity,
+		"cat": cat,
+		"dynLen": len(dyn),
+	}
 
 	// Assert
-	expected := args.Map{"id": "", "name": "", "entity": "", "cat": "", "dynLen": 0}
+	expected := args.Map{
+		"id": "",
+		"name": "",
+		"entity": "",
+		"cat": "",
+		"dynLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AllSafe returns nil -- nil", actual)
 }
 
@@ -227,10 +263,16 @@ func Test_Cov12_PW_HasError(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"no": pw.HasError(), "nil": pw2.HasError()}
+	actual := args.Map{
+		"no": pw.HasError(),
+		"nil": pw2.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"no": false, "nil": false}
+	expected := args.Map{
+		"no": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasError returns error -- with args", actual)
 }
 
@@ -240,10 +282,16 @@ func Test_Cov12_PW_IsEmptyError(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"empty": pw.IsEmptyError(), "nil": pw2.IsEmptyError()}
+	actual := args.Map{
+		"empty": pw.IsEmptyError(),
+		"nil": pw2.IsEmptyError(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyError returns empty -- with args", actual)
 }
 
@@ -253,10 +301,16 @@ func Test_Cov12_PW_HasAttributes(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"has": pw.HasAttributes(), "nil": pw2.HasAttributes()}
+	actual := args.Map{
+		"has": pw.HasAttributes(),
+		"nil": pw2.HasAttributes(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "nil": false}
+	expected := args.Map{
+		"has": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasAttributes returns correct value -- with args", actual)
 }
 
@@ -266,10 +320,16 @@ func Test_Cov12_PW_IsEmptyAttributes(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"empty": pw.IsEmptyAttributes(), "nil": pw2.IsEmptyAttributes()}
+	actual := args.Map{
+		"empty": pw.IsEmptyAttributes(),
+		"nil": pw2.IsEmptyAttributes(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyAttributes returns empty -- with args", actual)
 }
 
@@ -279,10 +339,16 @@ func Test_Cov12_PW_HasSingleRecord(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"single": pw.HasSingleRecord(), "nil": pw2.HasSingleRecord()}
+	actual := args.Map{
+		"single": pw.HasSingleRecord(),
+		"nil": pw2.HasSingleRecord(),
+	}
 
 	// Assert
-	expected := args.Map{"single": true, "nil": false}
+	expected := args.Map{
+		"single": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasSingleRecord returns correct value -- with args", actual)
 }
 
@@ -292,10 +358,16 @@ func Test_Cov12_PW_IsNull(t *testing.T) {
 	pw2 := &corepayload.PayloadWrapper{}
 
 	// Act
-	actual := args.Map{"nil": pw.IsNull(), "notNil": pw2.IsNull()}
+	actual := args.Map{
+		"nil": pw.IsNull(),
+		"notNil": pw2.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "notNil": false}
+	expected := args.Map{
+		"nil": true,
+		"notNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNull returns correct value -- with args", actual)
 }
 
@@ -448,10 +520,16 @@ func Test_Cov12_PW_IsPayloadsEqual(t *testing.T) {
 	pw := &corepayload.PayloadWrapper{Payloads: []byte("data")}
 
 	// Act
-	actual := args.Map{"match": pw.IsPayloadsEqual([]byte("data")), "no": pw.IsPayloadsEqual([]byte("other"))}
+	actual := args.Map{
+		"match": pw.IsPayloadsEqual([]byte("data")),
+		"no": pw.IsPayloadsEqual([]byte("other")),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "no": false}
+	expected := args.Map{
+		"match": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsPayloadsEqual returns correct value -- with args", actual)
 }
 
@@ -461,10 +539,18 @@ func Test_Cov12_PW_IsName(t *testing.T) {
 	var pw2 *corepayload.PayloadWrapper
 
 	// Act
-	actual := args.Map{"match": pw.IsName("test"), "no": pw.IsName("x"), "nil": pw2.IsName("test")}
+	actual := args.Map{
+		"match": pw.IsName("test"),
+		"no": pw.IsName("x"),
+		"nil": pw2.IsName("test"),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "no": false, "nil": false}
+	expected := args.Map{
+		"match": true,
+		"no": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsName returns correct value -- with args", actual)
 }
 
@@ -473,10 +559,16 @@ func Test_Cov12_PW_IsIdentifier(t *testing.T) {
 	pw := &corepayload.PayloadWrapper{Identifier: "id1"}
 
 	// Act
-	actual := args.Map{"match": pw.IsIdentifier("id1"), "no": pw.IsIdentifier("x")}
+	actual := args.Map{
+		"match": pw.IsIdentifier("id1"),
+		"no": pw.IsIdentifier("x"),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "no": false}
+	expected := args.Map{
+		"match": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsIdentifier returns correct value -- with args", actual)
 }
 
@@ -608,10 +700,16 @@ func Test_Cov12_PW_Serialize(t *testing.T) {
 	b, err := pw.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- with args", actual)
 }
 
@@ -635,10 +733,16 @@ func Test_Cov12_PW_Deserialize_Valid(t *testing.T) {
 	err := pw.Deserialize(&s)
 
 	// Act
-	actual := args.Map{"val": s, "noErr": err == nil}
+	actual := args.Map{
+		"val": s,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "noErr": true}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize returns non-empty -- valid", actual)
 }
 
@@ -649,10 +753,16 @@ func Test_Cov12_PW_PayloadDeserialize(t *testing.T) {
 	err := pw.PayloadDeserialize(&s)
 
 	// Act
-	actual := args.Map{"val": s, "noErr": err == nil}
+	actual := args.Map{
+		"val": s,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "noErr": true}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadDeserialize returns correct value -- with args", actual)
 }
 
@@ -714,10 +824,16 @@ func Test_Cov12_PW_ParseInjectUsingJson(t *testing.T) {
 	result, err := pw2.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": result != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson returns correct value -- with args", actual)
 }
 
@@ -794,10 +910,16 @@ func Test_Cov12_PW_Clone_Shallow(t *testing.T) {
 	c, err := pw.Clone(false)
 
 	// Act
-	actual := args.Map{"name": c.Name, "noErr": err == nil}
+	actual := args.Map{
+		"name": c.Name,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "noErr": true}
+	expected := args.Map{
+		"name": "n",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- shallow", actual)
 }
 
@@ -807,10 +929,16 @@ func Test_Cov12_PW_Clone_Deep(t *testing.T) {
 	c, err := pw.Clone(true)
 
 	// Act
-	actual := args.Map{"name": c.Name, "noErr": err == nil}
+	actual := args.Map{
+		"name": c.Name,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "noErr": true}
+	expected := args.Map{
+		"name": "n",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- deep", actual)
 }
 
@@ -820,10 +948,16 @@ func Test_Cov12_PW_ClonePtr_Nil(t *testing.T) {
 	c, err := pw.ClonePtr(false)
 
 	// Act
-	actual := args.Map{"nil": c == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nil": c == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "noErr": true}
+	expected := args.Map{
+		"nil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
@@ -1005,10 +1139,16 @@ func Test_Cov12_PW_PayloadProperties(t *testing.T) {
 	props := pw.PayloadProperties()
 
 	// Act
-	actual := args.Map{"notNil": props != nil, "name": props.Name()}
+	actual := args.Map{
+		"notNil": props != nil,
+		"name": props.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "name": "n"}
+	expected := args.Map{
+		"notNil": true,
+		"name": "n",
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadProperties returns correct value -- with args", actual)
 }
 
@@ -1122,10 +1262,16 @@ func Test_Cov12_PC_Clone(t *testing.T) {
 	c := pc.Clone()
 
 	// Act
-	actual := args.Map{"len": c.Length(), "name": c.First().Name}
+	actual := args.Map{
+		"len": c.Length(),
+		"name": c.First().Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "name": "test"}
+	expected := args.Map{
+		"len": 1,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "PC returns correct value -- Clone", actual)
 }
 
@@ -1175,10 +1321,16 @@ func Test_Cov12_PC_GetPagesSize(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"val": pc.GetPagesSize(10), "zero": pc.GetPagesSize(0)}
+	actual := args.Map{
+		"val": pc.GetPagesSize(10),
+		"zero": pc.GetPagesSize(0),
+	}
 
 	// Assert
-	expected := args.Map{"val": 3, "zero": 0}
+	expected := args.Map{
+		"val": 3,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "PC returns correct value -- GetPagesSize", actual)
 }
 
@@ -1229,10 +1381,16 @@ func Test_Cov12_NewPW_Empty(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.Empty()
 
 	// Act
-	actual := args.Map{"notNil": pw != nil, "hasAttr": pw.Attributes != nil}
+	actual := args.Map{
+		"notNil": pw != nil,
+		"hasAttr": pw.Attributes != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasAttr": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasAttr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPW.Empty returns empty -- with args", actual)
 }
 
@@ -1243,10 +1401,18 @@ func Test_Cov12_NewPW_Deserialize(t *testing.T) {
 	pw2, err := corepayload.New.PayloadWrapper.Deserialize(b)
 
 	// Act
-	actual := args.Map{"notNil": pw2 != nil, "noErr": err == nil, "name": pw2.Name}
+	actual := args.Map{
+		"notNil": pw2 != nil,
+		"noErr": err == nil,
+		"name": pw2.Name,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true, "name": "n"}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+		"name": "n",
+	}
 	expected.ShouldBeEqual(t, 0, "NewPW.Deserialize returns correct value -- with args", actual)
 }
 
@@ -1280,8 +1446,14 @@ func Test_Cov12_NewPW_DeserializeUsingJsonResult(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.UsingBytes("n", "id", "task", "cat", "entity", []byte(`"d"`))
 	jr := pw.JsonPtr()
 	pw2, err := corepayload.New.PayloadWrapper.DeserializeUsingJsonResult(jr)
-	actual := args.Map{"notNil": pw2 != nil, "noErr": err == nil}
-	expected := args.Map{"notNil": true, "noErr": true}
+	actual := args.Map{
+		"notNil": pw2 != nil,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPW.DeserializeUsingJsonResult returns correct value -- with args", actual)
 }
 
@@ -1295,8 +1467,14 @@ func Test_Cov12_NewPW_DeserializeUsingJsonResult_Bad(t *testing.T) {
 
 func Test_Cov12_NewPW_All(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.All("n", "id", "task", "cat", "entity", true, nil, []byte(`"d"`))
-	actual := args.Map{"name": pw.Name, "many": pw.HasManyRecords}
-	expected := args.Map{"name": "n", "many": true}
+	actual := args.Map{
+		"name": pw.Name,
+		"many": pw.HasManyRecords,
+	}
+	expected := args.Map{
+		"name": "n",
+		"many": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPW.All returns correct value -- with args", actual)
 }
 
@@ -1306,15 +1484,27 @@ func Test_Cov12_NewPW_All(t *testing.T) {
 
 func Test_Cov12_NewPC_Empty(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.Empty()
-	actual := args.Map{"notNil": pc != nil, "empty": pc.IsEmpty()}
-	expected := args.Map{"notNil": true, "empty": true}
+	actual := args.Map{
+		"notNil": pc != nil,
+		"empty": pc.IsEmpty(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPC.Empty returns empty -- with args", actual)
 }
 
 func Test_Cov12_NewPC_UsingCap(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.UsingCap(10)
-	actual := args.Map{"notNil": pc != nil, "empty": pc.IsEmpty()}
-	expected := args.Map{"notNil": true, "empty": true}
+	actual := args.Map{
+		"notNil": pc != nil,
+		"empty": pc.IsEmpty(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPC.UsingCap returns correct value -- with args", actual)
 }
 
@@ -1361,8 +1551,14 @@ func Test_Cov12_DeserializePayloadTo_Nil(t *testing.T) {
 func Test_Cov12_DeserializePayloadTo_Valid(t *testing.T) {
 	pw := &corepayload.PayloadWrapper{Payloads: []byte(`"hello"`)}
 	s, err := corepayload.DeserializePayloadTo[string](pw)
-	actual := args.Map{"val": s, "noErr": err == nil}
-	expected := args.Map{"val": "hello", "noErr": true}
+	actual := args.Map{
+		"val": s,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadTo returns non-empty -- valid", actual)
 }
 
@@ -1376,8 +1572,14 @@ func Test_Cov12_DeserializePayloadToSlice_Nil(t *testing.T) {
 func Test_Cov12_DeserializePayloadToSlice_Valid(t *testing.T) {
 	pw := &corepayload.PayloadWrapper{Payloads: []byte(`["a","b"]`)}
 	s, err := corepayload.DeserializePayloadToSlice[string](pw)
-	actual := args.Map{"len": len(s), "noErr": err == nil}
-	expected := args.Map{"len": 2, "noErr": true}
+	actual := args.Map{
+		"len": len(s),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadToSlice returns non-empty -- valid", actual)
 }
 
@@ -1391,8 +1593,14 @@ func Test_Cov12_DeserializeAttributesPayloadTo_Nil(t *testing.T) {
 func Test_Cov12_DeserializeAttributesPayloadTo_Valid(t *testing.T) {
 	a := &corepayload.Attributes{DynamicPayloads: []byte(`"hello"`)}
 	s, err := corepayload.DeserializeAttributesPayloadTo[string](a)
-	actual := args.Map{"val": s, "noErr": err == nil}
-	expected := args.Map{"val": "hello", "noErr": true}
+	actual := args.Map{
+		"val": s,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadTo returns non-empty -- valid", actual)
 }
 
@@ -1406,7 +1614,13 @@ func Test_Cov12_DeserializeAttributesPayloadToSlice_Nil(t *testing.T) {
 func Test_Cov12_DeserializeAttributesPayloadToSlice_Valid(t *testing.T) {
 	a := &corepayload.Attributes{DynamicPayloads: []byte(`["a","b"]`)}
 	s, err := corepayload.DeserializeAttributesPayloadToSlice[string](a)
-	actual := args.Map{"len": len(s), "noErr": err == nil}
-	expected := args.Map{"len": 2, "noErr": true}
+	actual := args.Map{
+		"len": len(s),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToSlice returns non-empty -- valid", actual)
 }

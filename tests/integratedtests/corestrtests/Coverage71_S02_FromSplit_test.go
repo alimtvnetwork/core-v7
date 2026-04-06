@@ -17,10 +17,18 @@ func Test_Cov71_LeftRightFromSplit_Basic(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "isValid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"isValid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value", "isValid": true}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit returns pair -- key=value", actual)
 	})
 }
@@ -31,10 +39,16 @@ func Test_Cov71_LeftRightFromSplit_NoSep(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("nosep", "=")
 
 		// Act
-		actual := args.Map{"isValid": lr.IsValid, "left": lr.Left}
+		actual := args.Map{
+			"isValid": lr.IsValid,
+			"left": lr.Left,
+		}
 
 		// Assert
-		expected := args.Map{"isValid": false, "left": "nosep"}
+		expected := args.Map{
+			"isValid": false,
+			"left": "nosep",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit returns invalid -- no separator", actual)
 	})
 }
@@ -45,10 +59,18 @@ func Test_Cov71_LeftRightFromSplitTrimmed_Basic(t *testing.T) {
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "isValid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"isValid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value", "isValid": true}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitTrimmed returns trimmed pair -- with spaces", actual)
 	})
 }
@@ -59,10 +81,16 @@ func Test_Cov71_LeftRightFromSplitFull_Basic(t *testing.T) {
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b:c:d"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b:c:d",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFull returns first split -- colon separated", actual)
 	})
 }
@@ -73,10 +101,16 @@ func Test_Cov71_LeftRightFromSplitFullTrimmed_Basic(t *testing.T) {
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b : c"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b : c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFullTrimmed returns trimmed -- with spaces", actual)
 	})
 }
@@ -91,10 +125,20 @@ func Test_Cov71_LeftMiddleRightFromSplit_Basic(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right, "isValid": lmr.IsValid}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+			"isValid": lmr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c", "isValid": true}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit returns triple -- dot separated", actual)
 	})
 }
@@ -119,10 +163,18 @@ func Test_Cov71_LeftMiddleRightFromSplitTrimmed_Basic(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitTrimmed(" a . b . c ", ".")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitTrimmed returns trimmed -- with spaces", actual)
 	})
 }
@@ -133,10 +185,18 @@ func Test_Cov71_LeftMiddleRightFromSplitN_Basic(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitN("a:b:c:d:e", ":")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c:d:e"}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c:d:e",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitN returns triple -- remainder in right", actual)
 	})
 }
@@ -147,10 +207,18 @@ func Test_Cov71_LeftMiddleRightFromSplitNTrimmed_Basic(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitNTrimmed(" a : b : c : d ", ":")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c : d"}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c : d",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitNTrimmed returns trimmed -- with spaces", actual)
 	})
 }

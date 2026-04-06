@@ -235,7 +235,10 @@ func Test_Cov5_IsNotEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": false, "nonEmpty": true}
+	expected := args.Map{
+		"empty": false,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns bool -- both cases", actual)
 }
 
@@ -249,7 +252,12 @@ func Test_Cov5_IsDefined(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"defined": true, "empty": false, "space": false, "whitespace": false}
+	expected := args.Map{
+		"defined": true,
+		"empty": false,
+		"space": false,
+		"whitespace": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsDefined returns bool -- various inputs", actual)
 }
 
@@ -264,7 +272,10 @@ func Test_Cov5_IsDefinedPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"defined": true, "nil": false}
+	expected := args.Map{
+		"defined": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsDefinedPtr returns bool -- both cases", actual)
 }
 
@@ -279,7 +290,10 @@ func Test_Cov5_IsEmptyOrWhitespacePtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "space": true}
+	expected := args.Map{
+		"nil": true,
+		"space": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespacePtr returns true -- nil and space", actual)
 }
 
@@ -294,7 +308,10 @@ func Test_Cov5_IsNullOrEmptyPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "empty": true}
+	expected := args.Map{
+		"nil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyPtr returns true -- nil and empty", actual)
 }
 
@@ -310,7 +327,10 @@ func Test_Cov5_IsStarts(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStarts returns bool -- both cases", actual)
 }
 
@@ -322,7 +342,10 @@ func Test_Cov5_IsEnds(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEnds returns bool -- both cases", actual)
 }
 
@@ -336,7 +359,12 @@ func Test_Cov5_IsStartsWith_IgnoreCase(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"ignoreCase": true, "emptyStart": true, "emptyContent": false, "longer": false}
+	expected := args.Map{
+		"ignoreCase": true,
+		"emptyStart": true,
+		"emptyContent": false,
+		"longer": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsWith returns bool -- edge cases", actual)
 }
 
@@ -350,7 +378,12 @@ func Test_Cov5_IsEndsWith_IgnoreCase(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"ignoreCase": true, "emptyEnd": true, "emptyContent": false, "longer": false}
+	expected := args.Map{
+		"ignoreCase": true,
+		"emptyEnd": true,
+		"emptyContent": false,
+		"longer": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEndsWith returns bool -- edge cases", actual)
 }
 
@@ -368,7 +401,12 @@ func Test_Cov5_IsAnyStartsWith_Found(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false, "emptyBoth": true, "emptyTerms": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+		"emptyBoth": true,
+		"emptyTerms": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyStartsWith returns bool -- various cases", actual)
 }
 
@@ -382,7 +420,12 @@ func Test_Cov5_IsAnyEndsWith_Found(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false, "emptyBoth": true, "emptyTerms": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+		"emptyBoth": true,
+		"emptyTerms": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyEndsWith returns bool -- various cases", actual)
 }
 
@@ -399,7 +442,11 @@ func Test_Cov5_IsStartsChar(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false, "empty": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsChar returns bool -- various cases", actual)
 }
 
@@ -412,7 +459,11 @@ func Test_Cov5_IsEndsChar(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false, "empty": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEndsChar returns bool -- various cases", actual)
 }
 
@@ -425,7 +476,11 @@ func Test_Cov5_IsStartsRune(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false, "empty": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsRune returns bool -- various cases", actual)
 }
 
@@ -438,7 +493,11 @@ func Test_Cov5_IsEndsRune(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"yes": true, "no": false, "empty": false}
+	expected := args.Map{
+		"yes": true,
+		"no": false,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEndsRune returns bool -- various cases", actual)
 }
 
@@ -454,7 +513,10 @@ func Test_Cov5_IsStartsAndEndsWith(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"both": true, "neither": false}
+	expected := args.Map{
+		"both": true,
+		"neither": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsAndEndsWith returns bool -- both cases", actual)
 }
 
@@ -466,7 +528,10 @@ func Test_Cov5_IsStartsAndEnds(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"both": true, "neither": false}
+	expected := args.Map{
+		"both": true,
+		"neither": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsAndEnds returns bool -- both cases", actual)
 }
 
@@ -479,7 +544,11 @@ func Test_Cov5_IsStartsAndEndsChar(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"both": true, "no": false, "empty": false}
+	expected := args.Map{
+		"both": true,
+		"no": false,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStartsAndEndsChar returns bool -- various cases", actual)
 }
 
@@ -493,10 +562,18 @@ func Test_Cov5_ClonePtr_NonNil(t *testing.T) {
 	result := stringutil.ClonePtr(&s)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "value": *result, "notSamePtr": result != &s}
+	actual := args.Map{
+		"notNil": result != nil,
+		"value": *result,
+		"notSamePtr": result != &s,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "value": "hello", "notSamePtr": true}
+	expected := args.Map{
+		"notNil": true,
+		"value": "hello",
+		"notSamePtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns clone -- non-nil", actual)
 }
 
@@ -518,10 +595,16 @@ func Test_Cov5_SafeClonePtr_NonNil(t *testing.T) {
 	result := stringutil.SafeClonePtr(&s)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "value": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"value": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "value": "hello"}
+	expected := args.Map{
+		"notNil": true,
+		"value": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns clone -- non-nil", actual)
 }
 
@@ -530,10 +613,16 @@ func Test_Cov5_SafeClonePtr_Nil(t *testing.T) {
 	result := stringutil.SafeClonePtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "value": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"value": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "value": ""}
+	expected := args.Map{
+		"notNil": true,
+		"value": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns empty clone -- nil input", actual)
 }
 
@@ -550,7 +639,11 @@ func Test_Cov5_AnyToString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"string": "hello", "int": true, "nil": ""}
+	expected := args.Map{
+		"string": "hello",
+		"int": true,
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToString returns string -- various types", actual)
 }
 
@@ -605,7 +698,10 @@ func Test_Cov5_ToInt(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": 42, "invalid": -1}
+	expected := args.Map{
+		"valid": 42,
+		"invalid": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt returns int -- valid and invalid", actual)
 }
 
@@ -617,7 +713,10 @@ func Test_Cov5_ToInt8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int8(10), "invalid": int8(-1)}
+	expected := args.Map{
+		"valid": int8(10),
+		"invalid": int8(-1),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt8 returns int8 -- valid and invalid", actual)
 }
 
@@ -629,7 +728,10 @@ func Test_Cov5_ToInt8Def(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int8(10), "invalid": int8(0)}
+	expected := args.Map{
+		"valid": int8(10),
+		"invalid": int8(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt8Def returns int8 -- valid and invalid", actual)
 }
 
@@ -641,7 +743,10 @@ func Test_Cov5_ToInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int16(100), "invalid": int16(-1)}
+	expected := args.Map{
+		"valid": int16(100),
+		"invalid": int16(-1),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt16 returns int16 -- valid and invalid", actual)
 }
 
@@ -653,7 +758,10 @@ func Test_Cov5_ToInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int32(100), "invalid": int32(-1)}
+	expected := args.Map{
+		"valid": int32(100),
+		"invalid": int32(-1),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt32 returns int32 -- valid and invalid", actual)
 }
 
@@ -665,7 +773,10 @@ func Test_Cov5_ToInt32Def(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int32(100), "invalid": int32(0)}
+	expected := args.Map{
+		"valid": int32(100),
+		"invalid": int32(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt32Def returns int32 -- valid and invalid", actual)
 }
 
@@ -677,7 +788,10 @@ func Test_Cov5_ToIntDef(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": 42, "invalid": 0}
+	expected := args.Map{
+		"valid": 42,
+		"invalid": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToIntDef returns int -- valid and invalid", actual)
 }
 
@@ -689,7 +803,10 @@ func Test_Cov5_ToIntDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": 42, "invalid": 0}
+	expected := args.Map{
+		"valid": 42,
+		"invalid": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToIntDefault returns int -- valid and invalid", actual)
 }
 
@@ -702,7 +819,11 @@ func Test_Cov5_ToInt16Default(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": int16(100), "invalid": int16(0), "outMax": int16(0)}
+	expected := args.Map{
+		"valid": int16(100),
+		"invalid": int16(0),
+		"outMax": int16(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToInt16Default returns int16 -- various inputs", actual)
 }
 
@@ -715,7 +836,11 @@ func Test_Cov5_ToUint16Default(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": uint16(100), "invalid": uint16(0), "outMax": uint16(0)}
+	expected := args.Map{
+		"valid": uint16(100),
+		"invalid": uint16(0),
+		"outMax": uint16(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToUint16Default returns uint16 -- various inputs", actual)
 }
 
@@ -728,7 +853,11 @@ func Test_Cov5_ToUint32Default(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": uint32(100), "invalid": uint32(0), "negative": uint32(0)}
+	expected := args.Map{
+		"valid": uint32(100),
+		"invalid": uint32(0),
+		"negative": uint32(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToUint32Default returns uint32 -- various inputs", actual)
 }
 
@@ -741,7 +870,11 @@ func Test_Cov5_ToByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": byte(100), "invalid": byte(42), "outMax": byte(42)}
+	expected := args.Map{
+		"valid": byte(100),
+		"invalid": byte(42),
+		"outMax": byte(42),
+	}
 	expected.ShouldBeEqual(t, 0, "ToByte returns byte -- various inputs", actual)
 }
 
@@ -754,7 +887,11 @@ func Test_Cov5_ToByteDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": byte(100), "invalid": byte(0), "outMax": byte(0)}
+	expected := args.Map{
+		"valid": byte(100),
+		"invalid": byte(0),
+		"outMax": byte(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ToByteDefault returns byte -- various inputs", actual)
 }
 
@@ -774,7 +911,11 @@ func Test_Cov5_ToIntUsingRegexMatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": 42, "noMatch": 0, "nilRegex": 0}
+	expected := args.Map{
+		"valid": 42,
+		"noMatch": 0,
+		"nilRegex": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToIntUsingRegexMatch returns int -- various inputs", actual)
 }
 
@@ -792,7 +933,12 @@ func Test_Cov5_MaskLine(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"normal": "heXXXXX", "empty": "XXXXXXX", "longer": "hello", "emptyMask": "hello"}
+	expected := args.Map{
+		"normal": "heXXXXX",
+		"empty": "XXXXXXX",
+		"longer": "hello",
+		"emptyMask": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MaskLine returns masked -- various inputs", actual)
 }
 
@@ -805,7 +951,11 @@ func Test_Cov5_MaskTrimLine(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"normal": "heXXXXX", "empty": "XXXXXXX", "longer": "hello"}
+	expected := args.Map{
+		"normal": "heXXXXX",
+		"empty": "XXXXXXX",
+		"longer": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MaskTrimLine returns masked -- various inputs", actual)
 }
 
@@ -814,10 +964,18 @@ func Test_Cov5_MaskLines(t *testing.T) {
 	result := stringutil.MaskLines("XXXXXXX", "he", "hel")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "heXXXXX", "second": "helXXXX"}
+	expected := args.Map{
+		"len": 2,
+		"first": "heXXXXX",
+		"second": "helXXXX",
+	}
 	expected.ShouldBeEqual(t, 0, "MaskLines returns masked slice -- two items", actual)
 }
 
@@ -838,10 +996,18 @@ func Test_Cov5_MaskTrimLines(t *testing.T) {
 	result := stringutil.MaskTrimLines("XXXXXXX", "  he  ", "  hel  ")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "heXXXXX", "second": "helXXXX"}
+	expected := args.Map{
+		"len": 2,
+		"first": "heXXXXX",
+		"second": "helXXXX",
+	}
 	expected.ShouldBeEqual(t, 0, "MaskTrimLines returns masked slice -- two items", actual)
 }
 
@@ -854,10 +1020,16 @@ func Test_Cov5_RemoveManyBySplitting(t *testing.T) {
 	result := stringutil.RemoveManyBySplitting("hello--world--test", "--", "")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "hello"}
+	expected := args.Map{
+		"len": 3,
+		"first": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveManyBySplitting returns split -- with separator", actual)
 }
 
@@ -870,10 +1042,16 @@ func Test_Cov5_SplitFirstLast(t *testing.T) {
 	first, last := stringutil.SplitFirstLast("a.b.c", ".")
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitFirstLast returns first and last -- dot separator", actual)
 }
 
@@ -882,10 +1060,16 @@ func Test_Cov5_SplitFirstLast_NoSeparator(t *testing.T) {
 	first, last := stringutil.SplitFirstLast("hello", ".")
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "last": ""}
+	expected := args.Map{
+		"first": "hello",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitFirstLast returns first and empty -- no separator", actual)
 }
 
@@ -898,10 +1082,16 @@ func Test_Cov5_SplitLeftRightTrimmed(t *testing.T) {
 	left, right := stringutil.SplitLeftRightTrimmed(" key = value ", "=")
 
 	// Act
-	actual := args.Map{"left": left, "right": right}
+	actual := args.Map{
+		"left": left,
+		"right": right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "key", "right": "value"}
+	expected := args.Map{
+		"left": "key",
+		"right": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrimmed returns trimmed -- key=value", actual)
 }
 
@@ -910,10 +1100,16 @@ func Test_Cov5_SplitLeftRightTrimmed_NoSeparator(t *testing.T) {
 	left, right := stringutil.SplitLeftRightTrimmed(" hello ", "=")
 
 	// Act
-	actual := args.Map{"left": left, "right": right}
+	actual := args.Map{
+		"left": left,
+		"right": right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "right": ""}
+	expected := args.Map{
+		"left": "hello",
+		"right": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrimmed returns left only -- no separator", actual)
 }
 

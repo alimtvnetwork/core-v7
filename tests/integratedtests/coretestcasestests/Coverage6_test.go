@@ -16,10 +16,16 @@ func Test_Cov6_GenericGherkins_CompareWith_BothNil(t *testing.T) {
 	eq, diff := a.CompareWith(b)
 
 	// Act
-	actual := args.Map{"eq": eq, "diff": diff}
+	actual := args.Map{
+		"eq": eq,
+		"diff": diff,
+	}
 
 	// Assert
-	expected := args.Map{"eq": true, "diff": ""}
+	expected := args.Map{
+		"eq": true,
+		"diff": "",
+	}
 	expected.ShouldBeEqual(t, 0, "CompareWith returns nil -- both nil", actual)
 }
 
@@ -29,10 +35,16 @@ func Test_Cov6_GenericGherkins_CompareWith_OneNil(t *testing.T) {
 	eq, diff := a.CompareWith(nil)
 
 	// Act
-	actual := args.Map{"eq": eq, "diff": diff}
+	actual := args.Map{
+		"eq": eq,
+		"diff": diff,
+	}
 
 	// Assert
-	expected := args.Map{"eq": false, "diff": "one side is nil"}
+	expected := args.Map{
+		"eq": false,
+		"diff": "one side is nil",
+	}
 	expected.ShouldBeEqual(t, 0, "CompareWith returns nil -- one nil", actual)
 }
 
@@ -43,10 +55,16 @@ func Test_Cov6_GenericGherkins_CompareWith_Equal(t *testing.T) {
 	eq, diff := a.CompareWith(b)
 
 	// Act
-	actual := args.Map{"eq": eq, "diff": diff}
+	actual := args.Map{
+		"eq": eq,
+		"diff": diff,
+	}
 
 	// Assert
-	expected := args.Map{"eq": true, "diff": ""}
+	expected := args.Map{
+		"eq": true,
+		"diff": "",
+	}
 	expected.ShouldBeEqual(t, 0, "CompareWith returns non-empty -- equal", actual)
 }
 
@@ -390,10 +408,16 @@ func Test_Cov6_GenericGherkins_GetExtraAsString_Valid(t *testing.T) {
 	val, ok := tc.GetExtraAsString("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "ok": true}
+	expected := args.Map{
+		"val": "v",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsString returns non-empty -- valid", actual)
 }
 
@@ -403,10 +427,16 @@ func Test_Cov6_GenericGherkins_GetExtraAsString_Nil(t *testing.T) {
 	val, ok := tc.GetExtraAsString("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "", "ok": false}
+	expected := args.Map{
+		"val": "",
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsString returns nil -- nil", actual)
 }
 
@@ -416,10 +446,16 @@ func Test_Cov6_GenericGherkins_GetExtraAsBool_Valid(t *testing.T) {
 	val, ok := tc.GetExtraAsBool("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsBool returns non-empty -- valid", actual)
 }
 
@@ -429,10 +465,16 @@ func Test_Cov6_GenericGherkins_GetExtraAsBool_Nil(t *testing.T) {
 	val, ok := tc.GetExtraAsBool("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": false, "ok": false}
+	expected := args.Map{
+		"val": false,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsBool returns nil -- nil", actual)
 }
 
@@ -483,10 +525,16 @@ func Test_Cov6_GenericGherkins_AsTypedTestCaseWrapper(t *testing.T) {
 	w := tc.AsTypedTestCaseWrapper()
 
 	// Act
-	actual := args.Map{"notNil": w != nil, "title": w.CaseTitle()}
+	actual := args.Map{
+		"notNil": w != nil,
+		"title": w.CaseTitle(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "title": "wrapper"}
+	expected := args.Map{
+		"notNil": true,
+		"title": "wrapper",
+	}
 	expected.ShouldBeEqual(t, 0, "AsTypedTestCaseWrapper returns correct value -- with args", actual)
 }
 

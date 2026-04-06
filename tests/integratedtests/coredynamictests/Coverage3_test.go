@@ -50,10 +50,16 @@ func Test_Cov3_TypeSameStatus_NilLeft(t *testing.T) {
 	ts := coredynamic.TypeSameStatus(nil, "hello")
 
 	// Act
-	actual := args.Map{"leftNull": ts.IsLeftUnknownNull, "rightNull": ts.IsRightUnknownNull}
+	actual := args.Map{
+		"leftNull": ts.IsLeftUnknownNull,
+		"rightNull": ts.IsRightUnknownNull,
+	}
 
 	// Assert
-	expected := args.Map{"leftNull": true, "rightNull": false}
+	expected := args.Map{
+		"leftNull": true,
+		"rightNull": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus nil left -- nil string", actual)
 }
 
@@ -63,10 +69,18 @@ func Test_Cov3_TypeSameStatus_Pointers(t *testing.T) {
 	ts := coredynamic.TypeSameStatus(&s, &s)
 
 	// Act
-	actual := args.Map{"leftPtr": ts.IsLeftPointer, "rightPtr": ts.IsRightPointer, "isSame": ts.IsSame}
+	actual := args.Map{
+		"leftPtr": ts.IsLeftPointer,
+		"rightPtr": ts.IsRightPointer,
+		"isSame": ts.IsSame,
+	}
 
 	// Assert
-	expected := args.Map{"leftPtr": true, "rightPtr": true, "isSame": true}
+	expected := args.Map{
+		"leftPtr": true,
+		"rightPtr": true,
+		"isSame": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus pointers -- same ptr type", actual)
 }
 
@@ -339,10 +353,16 @@ func Test_Cov3_AnyToReflectVal(t *testing.T) {
 	rv := coredynamic.AnyToReflectVal(42)
 
 	// Act
-	actual := args.Map{"kind": rv.Kind() == reflect.Int, "val": int(rv.Int())}
+	actual := args.Map{
+		"kind": rv.Kind() == reflect.Int,
+		"val": int(rv.Int()),
+	}
 
 	// Assert
-	expected := args.Map{"kind": true, "val": 42}
+	expected := args.Map{
+		"kind": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToReflectVal returns value -- int", actual)
 }
 
@@ -447,7 +467,10 @@ func Test_Cov3_KeyVal_NullErrors(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valueNullErr": true, "keyNullErr": true}
+	expected := args.Map{
+		"valueNullErr": true,
+		"keyNullErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal null errors nil -- non-null kv", actual)
 }
 
@@ -462,7 +485,10 @@ func Test_Cov3_KeyVal_NullErrors_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valueNullErr": true, "keyNullErr": true}
+	expected := args.Map{
+		"valueNullErr": true,
+		"keyNullErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal null errors return err -- nil receiver", actual)
 }
 
@@ -477,7 +503,10 @@ func Test_Cov3_KeyVal_NilStrings(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"keyString": "", "valueString": ""}
+	expected := args.Map{
+		"keyString": "",
+		"valueString": "",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal nil receiver strings empty -- nil", actual)
 }
 
@@ -516,7 +545,12 @@ func Test_Cov3_KeyVal_ReflectSetMethods_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"keyErr": true, "valErr": true, "setToErr": true, "setKeyErr": true}
+	expected := args.Map{
+		"keyErr": true,
+		"valErr": true,
+		"setToErr": true,
+		"setKeyErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSet nil receiver returns errors -- nil", actual)
 }
 
@@ -548,7 +582,12 @@ func Test_Cov3_KeyVal_Json(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"model": true, "modelAny": true, "jNotNil": true, "jpNotNil": true}
+	expected := args.Map{
+		"model": true,
+		"modelAny": true,
+		"jNotNil": true,
+		"jpNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal Json methods -- valid kv", actual)
 }
 
@@ -558,10 +597,16 @@ func Test_Cov3_KeyVal_Serialize(t *testing.T) {
 	bytes, err := kv.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize returns bytes -- valid", actual)
 }
 
@@ -619,7 +664,10 @@ func Test_Cov3_SimpleRequest_InvalidError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"r1Err": true, "r2Err": true}
+	expected := args.Map{
+		"r1Err": true,
+		"r2Err": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidError -- valid and invalid", actual)
 }
 
@@ -636,7 +684,10 @@ func Test_Cov3_SimpleRequest_GetErrorOnTypeMismatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "mismatch": true}
+	expected := args.Map{
+		"match": true,
+		"mismatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest GetErrorOnTypeMismatch -- match and mismatch", actual)
 }
 
@@ -676,10 +727,16 @@ func Test_Cov3_MapAsKeyValSlice_Valid(t *testing.T) {
 	kvc, err := coredynamic.MapAsKeyValSlice(rv)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": kvc != nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": kvc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAsKeyValSlice valid map -- 2 entries", actual)
 }
 
@@ -761,7 +818,11 @@ func Test_Cov3_CastTo_MatchingType(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "matching": true, "hasAnyIss": false}
+	expected := args.Map{
+		"isValid": true,
+		"matching": true,
+		"hasAnyIss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo matching type -- string", actual)
 }
 
@@ -776,7 +837,10 @@ func Test_Cov3_CastTo_NotMatching(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matching": false, "hasErr": true}
+	expected := args.Map{
+		"matching": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo not matching -- string vs int", actual)
 }
 
@@ -847,10 +911,16 @@ func Test_Cov3_Dynamic_InvalidDynamic(t *testing.T) {
 	d := coredynamic.InvalidDynamic()
 
 	// Act
-	actual := args.Map{"isValid": d.IsValid(), "isNull": d.IsNull()}
+	actual := args.Map{
+		"isValid": d.IsValid(),
+		"isNull": d.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isNull": true}
+	expected := args.Map{
+		"isValid": false,
+		"isNull": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns invalid -- no data", actual)
 }
 
@@ -859,9 +929,15 @@ func Test_Cov3_Dynamic_InvalidDynamicPtr(t *testing.T) {
 	d := coredynamic.InvalidDynamicPtr()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "isValid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"isValid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isValid": false}
+	expected := args.Map{
+		"notNil": true,
+		"isValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidDynamicPtr returns ptr -- invalid", actual)
 }

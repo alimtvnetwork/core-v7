@@ -43,10 +43,16 @@ func Test_Cov2_AnyTo_SmartString_AnySlice(t *testing.T) {
 	emptySlice := convertinternal.AnyTo.SmartString([]any{})
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": emptySlice}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": emptySlice,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SmartString_AnySlice returns correct value -- with args", actual)
 }
 
@@ -165,10 +171,16 @@ func Test_Cov2_AnyTo_String_Error(t *testing.T) {
 	nilResult := convertinternal.AnyTo.String(nilErr)
 
 	// Act
-	actual := args.Map{"val": result, "nil": nilResult}
+	actual := args.Map{
+		"val": result,
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"val": "e", "nil": ""}
+	expected := args.Map{
+		"val": "e",
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "String_Error returns error -- with args", actual)
 }
 
@@ -178,10 +190,16 @@ func Test_Cov2_AnyTo_FullPropertyString(t *testing.T) {
 	nilResult := convertinternal.AnyTo.FullPropertyString(nil)
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "nil": nilResult}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nil": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FullPropertyString returns correct value -- with args", actual)
 }
 
@@ -191,10 +209,16 @@ func Test_Cov2_AnyTo_TypeName(t *testing.T) {
 	nilResult := convertinternal.AnyTo.TypeName(nil)
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "nil": nilResult}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nil": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeName returns correct value -- with args", actual)
 }
 
@@ -205,10 +229,18 @@ func Test_Cov2_Map_KeysValues(t *testing.T) {
 	k, v, err := convertinternal.Map.KeysValues(map[string]string{"a": "1"})
 
 	// Act
-	actual := args.Map{"kLen": len(k), "vLen": len(v), "noErr": err == nil}
+	actual := args.Map{
+		"kLen": len(k),
+		"vLen": len(v),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"kLen": 1, "vLen": 1, "noErr": true}
+	expected := args.Map{
+		"kLen": 1,
+		"vLen": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeysValues returns non-empty -- with args", actual)
 }
 
@@ -229,10 +261,16 @@ func Test_Cov2_Map_SortedKeys(t *testing.T) {
 	result, err := convertinternal.Map.SortedKeys(map[string]string{"b": "2", "a": "1"})
 
 	// Act
-	actual := args.Map{"first": result[0], "noErr": err == nil}
+	actual := args.Map{
+		"first": result[0],
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "noErr": true}
+	expected := args.Map{
+		"first": "a",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedKeys returns correct value -- with args", actual)
 }
 
@@ -241,10 +279,18 @@ func Test_Cov2_Map_SortedKeysValues(t *testing.T) {
 	k, v, err := convertinternal.Map.SortedKeysValues(map[string]string{"b": "2", "a": "1"})
 
 	// Act
-	actual := args.Map{"firstK": k[0], "firstV": v[0], "noErr": err == nil}
+	actual := args.Map{
+		"firstK": k[0],
+		"firstV": v[0],
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"firstK": "a", "firstV": "1", "noErr": true}
+	expected := args.Map{
+		"firstK": "a",
+		"firstV": "1",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedKeysValues returns non-empty -- with args", actual)
 }
 
@@ -336,10 +382,16 @@ func Test_Cov2_KeyValuesTo_ToMap(t *testing.T) {
 	nilResult := convertinternal.KeyValuesTo.ToMap(nil, nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValuesTo_ToMap returns non-empty -- with args", actual)
 }
 
@@ -351,10 +403,16 @@ func Test_Cov2_KeyValuesTo_ToMapPtr(t *testing.T) {
 	nilResult := convertinternal.KeyValuesTo.ToMapPtr(nil, nil)
 
 	// Act
-	actual := args.Map{"len": len(*result), "nilIsEmpty": *nilResult == nil}
+	actual := args.Map{
+		"len": len(*result),
+		"nilIsEmpty": *nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "nilIsEmpty": true}
+	expected := args.Map{
+		"len": 1,
+		"nilIsEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValuesTo_ToMapPtr returns non-empty -- with args", actual)
 }
 
@@ -365,10 +423,16 @@ func Test_Cov2_CodeFormatter_GolangRaw(t *testing.T) {
 	emptyResult, err := convertinternal.CodeFormatter.GolangRaw([]byte{})
 
 	// Act
-	actual := args.Map{"emptyLen": len(emptyResult), "noErr": err == nil}
+	actual := args.Map{
+		"emptyLen": len(emptyResult),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"emptyLen": 0, "noErr": true}
+	expected := args.Map{
+		"emptyLen": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GolangRaw_Empty returns empty -- with args", actual)
 }
 
@@ -377,10 +441,16 @@ func Test_Cov2_CodeFormatter_Golang(t *testing.T) {
 	emptyResult, err := convertinternal.CodeFormatter.Golang("")
 
 	// Act
-	actual := args.Map{"empty": emptyResult, "noErr": err == nil}
+	actual := args.Map{
+		"empty": emptyResult,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"empty": "", "noErr": true}
+	expected := args.Map{
+		"empty": "",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Golang_Empty returns empty -- with args", actual)
 }
 

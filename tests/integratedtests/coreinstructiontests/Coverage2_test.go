@@ -16,10 +16,16 @@ func Test_Cov2_FlatSpec_InvalidFlatSpecification(t *testing.T) {
 	flat := coreinstruction.InvalidFlatSpecification()
 
 	// Act
-	actual := args.Map{"valid": flat.IsValid, "id": flat.Id}
+	actual := args.Map{
+		"valid": flat.IsValid,
+		"id": flat.Id,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "id": ""}
+	expected := args.Map{
+		"valid": false,
+		"id": "",
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidFlatSpecification returns error -- with args", actual)
 }
 
@@ -55,10 +61,16 @@ func Test_Cov2_FlatSpec_SpecCaching(t *testing.T) {
 	s2 := flat.Spec()
 
 	// Act
-	actual := args.Map{"same": s1 == s2, "id": s1.Id}
+	actual := args.Map{
+		"same": s1 == s2,
+		"id": s1.Id,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "id": "x"}
+	expected := args.Map{
+		"same": true,
+		"id": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "FlatSpec_SpecCaching returns correct value -- with args", actual)
 }
 
@@ -226,10 +238,16 @@ func Test_Cov2_NameList_DeepClone(t *testing.T) {
 	cloned := nl.DeepClone()
 
 	// Act
-	actual := args.Map{"name": cloned.Name, "notNil": cloned.List != nil}
+	actual := args.Map{
+		"name": cloned.Name,
+		"notNil": cloned.List != nil,
+	}
 
 	// Assert
-	expected := args.Map{"name": "test", "notNil": true}
+	expected := args.Map{
+		"name": "test",
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NameList_DeepClone returns correct value -- with args", actual)
 }
 
@@ -410,9 +428,15 @@ func Test_Cov2_RequestSpecification_Clone(t *testing.T) {
 	cloned := rs.Clone()
 
 	// Act
-	actual := args.Map{"id": cloned.Id, "tagsLen": len(cloned.Tags)}
+	actual := args.Map{
+		"id": cloned.Id,
+		"tagsLen": len(cloned.Tags),
+	}
 
 	// Assert
-	expected := args.Map{"id": "x", "tagsLen": 1}
+	expected := args.Map{
+		"id": "x",
+		"tagsLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "RequestSpecification_Clone returns correct value -- with args", actual)
 }

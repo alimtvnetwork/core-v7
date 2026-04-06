@@ -240,10 +240,16 @@ func Test_Cov4_TitleCurlyWrap(t *testing.T) {
 	result := simplewrap.TitleCurlyWrap("title", "value")
 
 	// Act
-	actual := args.Map{"containsTitle": strings.Contains(result, "title"), "containsVal": strings.Contains(result, "value")}
+	actual := args.Map{
+		"containsTitle": strings.Contains(result, "title"),
+		"containsVal": strings.Contains(result, "value"),
+	}
 
 	// Assert
-	expected := args.Map{"containsTitle": true, "containsVal": true}
+	expected := args.Map{
+		"containsTitle": true,
+		"containsVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TitleCurlyWrap returns correct value -- with args", actual)
 }
 
@@ -252,10 +258,16 @@ func Test_Cov4_TitleSquare(t *testing.T) {
 	result := simplewrap.TitleSquare("title", "value")
 
 	// Act
-	actual := args.Map{"containsTitle": strings.Contains(result, "title"), "containsVal": strings.Contains(result, "value")}
+	actual := args.Map{
+		"containsTitle": strings.Contains(result, "title"),
+		"containsVal": strings.Contains(result, "value"),
+	}
 
 	// Assert
-	expected := args.Map{"containsTitle": true, "containsVal": true}
+	expected := args.Map{
+		"containsTitle": true,
+		"containsVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TitleSquare returns correct value -- with args", actual)
 }
 
@@ -364,7 +376,10 @@ func Test_Cov4_DoubleQuoteWrapElements_Normal(t *testing.T) {
 	actual := args.Map{"len": len(result), "firstQuoted": strings.HasPrefix(result[0], fmt.Sprintf("%c", '"'))}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstQuoted": true}
+	expected := args.Map{
+		"len": 2,
+		"firstQuoted": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements returns correct value -- normal", actual)
 }
 
@@ -387,9 +402,15 @@ func Test_Cov4_DoubleQuoteWrapElementsWithIndexes_Normal(t *testing.T) {
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "containsIdx": strings.Contains(result[0], "[0]")}
+	actual := args.Map{
+		"len": len(result),
+		"containsIdx": strings.Contains(result[0], "[0]"),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "containsIdx": true}
+	expected := args.Map{
+		"len": 2,
+		"containsIdx": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns non-empty -- normal", actual)
 }

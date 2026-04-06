@@ -18,10 +18,16 @@ func Test_I25_DynamicGetters_Data_Value(t *testing.T) {
 	d := coredynamic.NewDynamic("hello", true)
 
 	// Act
-	actual := args.Map{"data": d.Data(), "value": d.Value()}
+	actual := args.Map{
+		"data": d.Data(),
+		"value": d.Value(),
+	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "value": "hello"}
+	expected := args.Map{
+		"data": "hello",
+		"value": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Data/Value returns correct value -- with args", actual)
 }
 
@@ -68,10 +74,16 @@ func Test_I25_DynamicGetters_StructStringPtr_Cached(t *testing.T) {
 	ptr2 := d.StructStringPtr()
 
 	// Act
-	actual := args.Map{"same": ptr1 == ptr2, "val": *ptr1}
+	actual := args.Map{
+		"same": ptr1 == ptr2,
+		"val": *ptr1,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "val": "hello"}
+	expected := args.Map{
+		"same": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "StructStringPtr returns correct value -- cached", actual)
 }
 
@@ -105,10 +117,16 @@ func Test_I25_DynamicGetters_IsNull(t *testing.T) {
 	d2 := coredynamic.NewDynamic("x", true)
 
 	// Act
-	actual := args.Map{"null": d1.IsNull(), "notNull": d2.IsNull()}
+	actual := args.Map{
+		"null": d1.IsNull(),
+		"notNull": d2.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"null": true, "notNull": false}
+	expected := args.Map{
+		"null": true,
+		"notNull": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNull returns correct value -- with args", actual)
 }
 
@@ -117,10 +135,16 @@ func Test_I25_DynamicGetters_IsValid_IsInvalid(t *testing.T) {
 	d := coredynamic.NewDynamic("x", true)
 
 	// Act
-	actual := args.Map{"valid": d.IsValid(), "invalid": d.IsInvalid()}
+	actual := args.Map{
+		"valid": d.IsValid(),
+		"invalid": d.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValid/IsInvalid returns error -- with args", actual)
 }
 
@@ -194,10 +218,18 @@ func Test_I25_DynamicGetters_IsStructStringNullOrEmpty(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"empty": d1.IsStructStringNullOrEmpty(), "notEmpty": d2.IsStructStringNullOrEmpty(), "nil": d3.IsStructStringNullOrEmpty()}
+	actual := args.Map{
+		"empty": d1.IsStructStringNullOrEmpty(),
+		"notEmpty": d2.IsStructStringNullOrEmpty(),
+		"nil": d3.IsStructStringNullOrEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "notEmpty": false, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"notEmpty": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmpty returns empty -- with args", actual)
 }
 
@@ -208,10 +240,18 @@ func Test_I25_DynamicGetters_IsStructStringNullOrEmptyOrWhitespace(t *testing.T)
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"ws": d1.IsStructStringNullOrEmptyOrWhitespace(), "notWs": d2.IsStructStringNullOrEmptyOrWhitespace(), "nil": d3.IsStructStringNullOrEmptyOrWhitespace()}
+	actual := args.Map{
+		"ws": d1.IsStructStringNullOrEmptyOrWhitespace(),
+		"notWs": d2.IsStructStringNullOrEmptyOrWhitespace(),
+		"nil": d3.IsStructStringNullOrEmptyOrWhitespace(),
+	}
 
 	// Assert
-	expected := args.Map{"ws": true, "notWs": false, "nil": true}
+	expected := args.Map{
+		"ws": true,
+		"notWs": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStructStringNullOrEmptyOrWhitespace returns empty -- with args", actual)
 }
 
@@ -222,10 +262,18 @@ func Test_I25_DynamicGetters_IsPrimitive(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"prim": d1.IsPrimitive(), "notPrim": d2.IsPrimitive(), "nil": d3.IsPrimitive()}
+	actual := args.Map{
+		"prim": d1.IsPrimitive(),
+		"notPrim": d2.IsPrimitive(),
+		"nil": d3.IsPrimitive(),
+	}
 
 	// Assert
-	expected := args.Map{"prim": true, "notPrim": false, "nil": false}
+	expected := args.Map{
+		"prim": true,
+		"notPrim": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsPrimitive returns correct value -- with args", actual)
 }
 
@@ -236,10 +284,18 @@ func Test_I25_DynamicGetters_IsNumber(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"num": d1.IsNumber(), "notNum": d2.IsNumber(), "nil": d3.IsNumber()}
+	actual := args.Map{
+		"num": d1.IsNumber(),
+		"notNum": d2.IsNumber(),
+		"nil": d3.IsNumber(),
+	}
 
 	// Assert
-	expected := args.Map{"num": true, "notNum": false, "nil": false}
+	expected := args.Map{
+		"num": true,
+		"notNum": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNumber returns correct value -- with args", actual)
 }
 
@@ -250,10 +306,18 @@ func Test_I25_DynamicGetters_IsStringType(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"str": d1.IsStringType(), "notStr": d2.IsStringType(), "nil": d3.IsStringType()}
+	actual := args.Map{
+		"str": d1.IsStringType(),
+		"notStr": d2.IsStringType(),
+		"nil": d3.IsStringType(),
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "notStr": false, "nil": false}
+	expected := args.Map{
+		"str": true,
+		"notStr": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStringType returns correct value -- with args", actual)
 }
 
@@ -265,10 +329,18 @@ func Test_I25_DynamicGetters_IsStruct(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"struct": d1.IsStruct(), "notStruct": d2.IsStruct(), "nil": d3.IsStruct()}
+	actual := args.Map{
+		"struct": d1.IsStruct(),
+		"notStruct": d2.IsStruct(),
+		"nil": d3.IsStruct(),
+	}
 
 	// Assert
-	expected := args.Map{"struct": true, "notStruct": false, "nil": false}
+	expected := args.Map{
+		"struct": true,
+		"notStruct": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStruct returns correct value -- with args", actual)
 }
 
@@ -279,10 +351,18 @@ func Test_I25_DynamicGetters_IsFunc(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"fn": d1.IsFunc(), "notFn": d2.IsFunc(), "nil": d3.IsFunc()}
+	actual := args.Map{
+		"fn": d1.IsFunc(),
+		"notFn": d2.IsFunc(),
+		"nil": d3.IsFunc(),
+	}
 
 	// Assert
-	expected := args.Map{"fn": true, "notFn": false, "nil": false}
+	expected := args.Map{
+		"fn": true,
+		"notFn": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsFunc returns correct value -- with args", actual)
 }
 
@@ -293,10 +373,18 @@ func Test_I25_DynamicGetters_IsSliceOrArray(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"slice": d1.IsSliceOrArray(), "notSlice": d2.IsSliceOrArray(), "nil": d3.IsSliceOrArray()}
+	actual := args.Map{
+		"slice": d1.IsSliceOrArray(),
+		"notSlice": d2.IsSliceOrArray(),
+		"nil": d3.IsSliceOrArray(),
+	}
 
 	// Assert
-	expected := args.Map{"slice": true, "notSlice": false, "nil": false}
+	expected := args.Map{
+		"slice": true,
+		"notSlice": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArray returns correct value -- with args", actual)
 }
 
@@ -307,10 +395,18 @@ func Test_I25_DynamicGetters_IsSliceOrArrayOrMap(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"map": d1.IsSliceOrArrayOrMap(), "notMap": d2.IsSliceOrArrayOrMap(), "nil": d3.IsSliceOrArrayOrMap()}
+	actual := args.Map{
+		"map": d1.IsSliceOrArrayOrMap(),
+		"notMap": d2.IsSliceOrArrayOrMap(),
+		"nil": d3.IsSliceOrArrayOrMap(),
+	}
 
 	// Assert
-	expected := args.Map{"map": true, "notMap": false, "nil": false}
+	expected := args.Map{
+		"map": true,
+		"notMap": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSliceOrArrayOrMap returns correct value -- with args", actual)
 }
 
@@ -321,10 +417,18 @@ func Test_I25_DynamicGetters_IsMap(t *testing.T) {
 	var d3 *coredynamic.Dynamic
 
 	// Act
-	actual := args.Map{"map": d1.IsMap(), "notMap": d2.IsMap(), "nil": d3.IsMap()}
+	actual := args.Map{
+		"map": d1.IsMap(),
+		"notMap": d2.IsMap(),
+		"nil": d3.IsMap(),
+	}
 
 	// Assert
-	expected := args.Map{"map": true, "notMap": false, "nil": false}
+	expected := args.Map{
+		"map": true,
+		"notMap": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMap returns correct value -- with args", actual)
 }
 
@@ -334,10 +438,16 @@ func Test_I25_DynamicGetters_IntDefault_Valid(t *testing.T) {
 	val, ok := d.IntDefault(0)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntDefault returns non-empty -- valid", actual)
 }
 
@@ -347,10 +457,16 @@ func Test_I25_DynamicGetters_IntDefault_Nil(t *testing.T) {
 	val, ok := d.IntDefault(99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "ok": false}
+	expected := args.Map{
+		"val": 99,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntDefault returns nil -- nil", actual)
 }
 
@@ -360,10 +476,16 @@ func Test_I25_DynamicGetters_IntDefault_ParseFail(t *testing.T) {
 	val, ok := d.IntDefault(77)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 77, "ok": false}
+	expected := args.Map{
+		"val": 77,
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntDefault returns correct value -- parse fail", actual)
 }
 
@@ -373,10 +495,16 @@ func Test_I25_DynamicGetters_Float64_Valid(t *testing.T) {
 	val, err := d.Float64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "close": val > 3.1 && val < 3.2}
+	actual := args.Map{
+		"noErr": err == nil,
+		"close": val > 3.1 && val < 3.2,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "close": true}
+	expected := args.Map{
+		"noErr": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Float64 returns non-empty -- valid", actual)
 }
 
@@ -605,10 +733,16 @@ func Test_I25_DynamicGetters_Bytes_Valid(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(b)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(b),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 3}
+	expected := args.Map{
+		"ok": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Bytes returns non-empty -- valid", actual)
 }
 
@@ -618,10 +752,16 @@ func Test_I25_DynamicGetters_Bytes_Nil(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "nil": b == nil}
+	actual := args.Map{
+		"ok": ok,
+		"nil": b == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "nil": true}
+	expected := args.Map{
+		"ok": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Bytes returns nil -- nil", actual)
 }
 
@@ -661,10 +801,16 @@ func Test_I25_DynamicJson_ValueMarshal(t *testing.T) {
 	b, err := d.ValueMarshal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ValueMarshal returns correct value -- with args", actual)
 }
 
@@ -700,10 +846,16 @@ func Test_I25_DynamicJson_JsonBytesPtr_Null(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "empty": len(b) == 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": len(b) == 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "empty": true}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonBytesPtr returns correct value -- null", actual)
 }
 
@@ -713,10 +865,16 @@ func Test_I25_DynamicJson_JsonBytesPtr_Valid(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonBytesPtr returns non-empty -- valid", actual)
 }
 
@@ -726,10 +884,16 @@ func Test_I25_DynamicJson_MarshalJSON(t *testing.T) {
 	b, err := d.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returns correct value -- with args", actual)
 }
 
@@ -832,10 +996,16 @@ func Test_I25_DynamicJson_JsonBytes(t *testing.T) {
 	b, err := d.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonBytes returns correct value -- with args", actual)
 }
 
@@ -845,10 +1015,16 @@ func Test_I25_DynamicJson_JsonString(t *testing.T) {
 	s, err := d.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonString returns correct value -- with args", actual)
 }
 
@@ -902,10 +1078,16 @@ func Test_I25_DynamicReflect_MapToKeyVal(t *testing.T) {
 	kvc, err := d.MapToKeyVal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": kvc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": kvc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapToKeyVal returns correct value -- with args", actual)
 }
 
@@ -953,10 +1135,16 @@ func Test_I25_DynamicReflect_IsReflectTypeOf(t *testing.T) {
 	d := coredynamic.NewDynamic("hello", true)
 
 	// Act
-	actual := args.Map{"match": d.IsReflectTypeOf(reflect.TypeOf("")), "noMatch": d.IsReflectTypeOf(reflect.TypeOf(0))}
+	actual := args.Map{
+		"match": d.IsReflectTypeOf(reflect.TypeOf("")),
+		"noMatch": d.IsReflectTypeOf(reflect.TypeOf(0)),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsReflectTypeOf returns correct value -- with args", actual)
 }
 
@@ -965,10 +1153,16 @@ func Test_I25_DynamicReflect_IsReflectKind(t *testing.T) {
 	d := coredynamic.NewDynamic("hello", true)
 
 	// Act
-	actual := args.Map{"str": d.IsReflectKind(reflect.String), "int": d.IsReflectKind(reflect.Int)}
+	actual := args.Map{
+		"str": d.IsReflectKind(reflect.String),
+		"int": d.IsReflectKind(reflect.Int),
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "int": false}
+	expected := args.Map{
+		"str": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsReflectKind returns correct value -- with args", actual)
 }
 
@@ -1061,10 +1255,16 @@ func Test_I25_DynamicReflect_Loop_Slice(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 3}
+	expected := args.Map{
+		"called": true,
+		"count": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- slice", actual)
 }
 
@@ -1153,10 +1353,16 @@ func Test_I25_DynamicReflect_LoopMap(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 2}
+	expected := args.Map{
+		"called": true,
+		"count": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- with args", actual)
 }
 
@@ -1199,10 +1405,16 @@ func Test_I25_NewCreator_Collection_String(t *testing.T) {
 	c := coredynamic.New.Collection.String.Cap(5)
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "len": c.Length()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 0}
+	expected := args.Map{
+		"notNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "New.Collection.String.Cap returns correct value -- with args", actual)
 }
 

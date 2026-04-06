@@ -191,10 +191,16 @@ func Test_Cov10_CountStateChangeTracker_Changed(t *testing.T) {
 	lg.length = 6
 
 	// Act
-	actual := args.Map{"same": tracker.IsSameState(), "changes": tracker.HasChanges()}
+	actual := args.Map{
+		"same": tracker.IsSameState(),
+		"changes": tracker.HasChanges(),
+	}
 
 	// Assert
-	expected := args.Map{"same": false, "changes": true}
+	expected := args.Map{
+		"same": false,
+		"changes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CountStateChangeTracker returns changed state -- length increased", actual)
 }
 
@@ -361,10 +367,16 @@ func Test_Cov10_ExpectationMessageDef_ExpectedSafeString(t *testing.T) {
 	s2 := emd.ExpectedSafeString() // cached
 
 	// Act
-	actual := args.Map{"notEmpty": s1 != "", "same": s1 == s2}
+	actual := args.Map{
+		"notEmpty": s1 != "",
+		"same": s1 == s2,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "same": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ExpectedSafeString returns cached non-empty -- valid expected", actual)
 }
 
@@ -461,10 +473,16 @@ func Test_Cov10_ExpectingFuture(t *testing.T) {
 	r := errcore.ExpectingFuture("title", "expected")
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "title": r.ExpectingTitle}
+	actual := args.Map{
+		"notNil": r != nil,
+		"title": r.ExpectingTitle,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "title": "title"}
+	expected := args.Map{
+		"notNil": true,
+		"title": "title",
+	}
 	expected.ShouldBeEqual(t, 0, "ExpectingFuture returns record -- with title and expected", actual)
 }
 

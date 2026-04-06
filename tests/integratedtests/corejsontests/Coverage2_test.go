@@ -114,10 +114,16 @@ func Test_Cov2_SerializeDeserialize_Roundtrip(t *testing.T) {
 	rawBytes, err := corejson.Serialize.Raw(original)
 
 	// Act
-	actual1 := args.Map{"noErr": err == nil, "hasBytes": len(rawBytes) > 0}
+	actual1 := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(rawBytes) > 0,
+	}
 
 	// Assert
-	expected1 := args.Map{"noErr": true, "hasBytes": true}
+	expected1 := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected1.ShouldBeEqual(t, 0, "Serialize.Raw succeeds -- struct input", actual1)
 
 	var deserialized testStruct
@@ -261,10 +267,16 @@ func Test_Cov2_DeserializeFromBytes_String(t *testing.T) {
 	s, err := corejson.Deserialize.BytesTo.String(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.String roundtrip -- hello", actual)
 }
 
@@ -274,10 +286,16 @@ func Test_Cov2_DeserializeFromBytes_Integer(t *testing.T) {
 	val, err := corejson.Deserialize.BytesTo.Integer(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": 42}
+	expected := args.Map{
+		"noErr": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Integer roundtrip -- 42", actual)
 }
 
@@ -287,10 +305,16 @@ func Test_Cov2_DeserializeFromBytes_Integer64(t *testing.T) {
 	val, err := corejson.Deserialize.BytesTo.Integer64(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": val}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": int64(999)}
+	expected := args.Map{
+		"noErr": true,
+		"val": int64(999),
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Integer64 roundtrip -- 999", actual)
 }
 
@@ -358,10 +382,16 @@ func Test_Cov2_DeserializeFromBytes_Integers(t *testing.T) {
 	val, err := corejson.Deserialize.BytesTo.Integers(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(val)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 3}
+	expected := args.Map{
+		"noErr": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeFromBytes.Integers roundtrip -- 3 ints", actual)
 }
 
@@ -384,9 +414,15 @@ func Test_Cov2_Empty_ResultPtr(t *testing.T) {
 	r := corejson.Empty.ResultPtr()
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "isEmpty": r.IsEmpty()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"isEmpty": r.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr returns empty ptr -- no data", actual)
 }

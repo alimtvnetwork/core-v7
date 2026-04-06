@@ -78,7 +78,10 @@ func Test_Cov2_IntegerWithin_ToByte_Exact(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": true, "max": true}
+	expected := args.Map{
+		"min": true,
+		"max": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerWithin returns non-empty -- ToByte exact boundaries", actual)
 }
 
@@ -138,6 +141,9 @@ func Test_Cov2_UnsignedInt16Within_ToInt8_Boundary(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"exact127": true, "exact128": false}
+	expected := args.Map{
+		"exact127": true,
+		"exact128": false,
+	}
 	expected.ShouldBeEqual(t, 0, "UnsignedInt16Within returns non-empty -- ToInt8 boundary", actual)
 }

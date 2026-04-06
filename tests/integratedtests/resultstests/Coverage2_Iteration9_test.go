@@ -147,10 +147,16 @@ func Test_C2_FromResultAny_TypeAssertionFails(t *testing.T) {
 	// Both assertions fail → zero values
 
 	// Act
-	actual := args.Map{"value": typed.Value, "result2": typed.Result2}
+	actual := args.Map{
+		"value": typed.Value,
+		"result2": typed.Result2,
+	}
 
 	// Assert
-	expected := args.Map{"value": "", "result2": 0}
+	expected := args.Map{
+		"value": "",
+		"result2": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns correct value -- type assertion fails", actual)
 }
 
@@ -163,10 +169,16 @@ func Test_C2_FromResultAny_SingleResult(t *testing.T) {
 	typed := results.FromResultAny[string, int](r)
 
 	// Act
-	actual := args.Map{"value": typed.Value, "result2": typed.Result2}
+	actual := args.Map{
+		"value": typed.Value,
+		"result2": typed.Result2,
+	}
 
 	// Assert
-	expected := args.Map{"value": "hello", "result2": 0}
+	expected := args.Map{
+		"value": "hello",
+		"result2": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns correct value -- single result", actual)
 }
 
@@ -187,10 +199,16 @@ func Test_C2_Invoke_WithReceiver(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*testReceiver).Greet, &testReceiver{Name: "World"})
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "value": fmt.Sprintf("%v", r.Value)}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"value": fmt.Sprintf("%v", r.Value),
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "value": "hello World"}
+	expected := args.Map{
+		"panicked": false,
+		"value": "hello World",
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns non-empty -- with receiver", actual)
 }
 
@@ -220,10 +238,16 @@ func Test_C2_Invoke_FuncReturningOnlyError(t *testing.T) {
 	r := results.InvokeWithPanicRecovery(fn, nil)
 
 	// Act
-	actual := args.Map{"hasError": r.HasError(), "returnCount": r.ReturnCount}
+	actual := args.Map{
+		"hasError": r.HasError(),
+		"returnCount": r.ReturnCount,
+	}
 
 	// Assert
-	expected := args.Map{"hasError": true, "returnCount": 1}
+	expected := args.Map{
+		"hasError": true,
+		"returnCount": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns error -- func returning only error", actual)
 }
 
@@ -233,10 +257,16 @@ func Test_C2_Invoke_FuncReturningNilError(t *testing.T) {
 	r := results.InvokeWithPanicRecovery(fn, nil)
 
 	// Act
-	actual := args.Map{"hasError": r.HasError(), "returnCount": r.ReturnCount}
+	actual := args.Map{
+		"hasError": r.HasError(),
+		"returnCount": r.ReturnCount,
+	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "returnCount": 1}
+	expected := args.Map{
+		"hasError": false,
+		"returnCount": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns nil -- func returning nil error", actual)
 }
 
@@ -253,7 +283,11 @@ func Test_C2_Invoke_FuncReturningIntAndNonError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "returnCount": 2, "hasError": false}
+	expected := args.Map{
+		"panicked": false,
+		"returnCount": 2,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns error -- func with non-error second return", actual)
 }
 
@@ -263,10 +297,16 @@ func Test_C2_Invoke_PanicFunc(t *testing.T) {
 	r := results.InvokeWithPanicRecovery(fn, nil)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "panicVal": fmt.Sprintf("%v", r.PanicValue)}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"panicVal": fmt.Sprintf("%v", r.PanicValue),
+	}
 
 	// Assert
-	expected := args.Map{"panicked": true, "panicVal": "deliberate"}
+	expected := args.Map{
+		"panicked": true,
+		"panicVal": "deliberate",
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke panics -- panic func", actual)
 }
 

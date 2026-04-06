@@ -268,10 +268,16 @@ func Test_Cov4_LinesSimpleProcess(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "hello!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "hello!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesSimpleProcess processes all -- 2 lines", actual)
 }
 
@@ -300,10 +306,16 @@ func Test_Cov4_TrimmedEachWordsPtr(t *testing.T) {
 	result := stringslice.TrimmedEachWordsPtr(items)
 
 	// Act
-	actual := args.Map{"first": result[0], "last": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "last": "world"}
+	expected := args.Map{
+		"first": "hello",
+		"last": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "TrimmedEachWordsPtr trims all -- 2 items", actual)
 }
 
@@ -329,10 +341,16 @@ func Test_Cov4_FirstLastDefaultPtr_HasItems(t *testing.T) {
 	first, last := stringslice.FirstLastDefaultPtr(items)
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultPtr returns first and last -- 3 items", actual)
 }
 
@@ -341,10 +359,16 @@ func Test_Cov4_FirstLastDefaultPtr_Empty(t *testing.T) {
 	first, last := stringslice.FirstLastDefaultPtr([]string{})
 
 	// Act
-	actual := args.Map{"firstEmpty": first == "", "lastEmpty": last == ""}
+	actual := args.Map{
+		"firstEmpty": first == "",
+		"lastEmpty": last == "",
+	}
 
 	// Assert
-	expected := args.Map{"firstEmpty": true, "lastEmpty": true}
+	expected := args.Map{
+		"firstEmpty": true,
+		"lastEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultPtr returns empty -- empty", actual)
 }
 

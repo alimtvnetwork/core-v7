@@ -8,7 +8,10 @@ import (
 // ── LineDiff ──
 
 var lineDiffTestCases = []coretestcases.CaseV1{
-	{Title: "LineDiff returns match status -- equal slices", ExpectedInput: args.Map{"len": 2, "status0": "  "}},
+	{Title: "LineDiff returns match status -- equal slices", ExpectedInput: args.Map{
+		"len": 2,
+		"status0": "  ",
+	}},
 	{Title: "LineDiff returns mismatch status -- different content", ExpectedInput: args.Map{"status0": "!!"}},
 	{Title: "LineDiff returns extra actual -- longer actual", ExpectedInput: args.Map{"status1": "+"}},
 	{Title: "LineDiff returns missing expected -- longer expected", ExpectedInput: args.Map{"status1": "-"}},
@@ -76,7 +79,10 @@ var expectingFutureTestCases = []coretestcases.CaseV1{
 }
 
 var expectationMessageDefTestCases = []coretestcases.CaseV1{
-	{Title: "ExpectationMessageDef.ExpectedSafeString returns non-empty -- valid", ExpectedInput: args.Map{"nonEmpty": true, "cached": true}},
+	{Title: "ExpectationMessageDef.ExpectedSafeString returns non-empty -- valid", ExpectedInput: args.Map{
+		"nonEmpty": true,
+		"cached": true,
+	}},
 	{Title: "ExpectationMessageDef.ExpectedSafeString returns empty -- nil expected", ExpectedInput: args.Map{"isEmpty": true}},
 	{Title: "ExpectationMessageDef.ExpectedStringTrim returns trimmed -- whitespace input", ExpectedInput: args.Map{"result": "hello"}},
 	{Title: "ExpectationMessageDef.ToString returns non-empty -- valid def", ExpectedInput: args.Map{"nonEmpty": true}},

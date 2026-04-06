@@ -1744,7 +1744,10 @@ func Test_C47_LinkedCollections_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": string(data) != `["a","b"]`}
+		actual := args.Map{
+			"result": string(data) != `["a",
+			"b"]`,
+		}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 	})

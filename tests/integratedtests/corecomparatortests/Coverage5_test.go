@@ -16,10 +16,16 @@ func Test_Cov5_UnmarshalJSON_Valid(t *testing.T) {
 	err := c.UnmarshalJSON([]byte("Equal"))
 
 	// Act
-	actual := args.Map{"val": c.String(), "hasErr": err != nil}
+	actual := args.Map{
+		"val": c.String(),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "Equal", "hasErr": actual["hasErr"]}
+	expected := args.Map{
+		"val": "Equal",
+		"hasErr": actual["hasErr"],
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON raw name not in RangesMap -- Equal defaults to zero", actual)
 }
 
@@ -135,7 +141,10 @@ func Test_Cov5_SqlOperatorSymbol(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"eq": "=", "ne": "<>"}
+	expected := args.Map{
+		"eq": "=",
+		"ne": "<>",
+	}
 	expected.ShouldBeEqual(t, 0, "SqlOperatorSymbol -- eq and ne", actual)
 }
 
@@ -296,7 +305,10 @@ func Test_Cov5_Is(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Is -- Equal", actual)
 }
 
@@ -308,7 +320,10 @@ func Test_Cov5_IsValueEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValueEqual -- 0", actual)
 }
 
@@ -339,6 +354,9 @@ func Test_Cov5_IsNotInconclusive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "inconclusive": false}
+	expected := args.Map{
+		"equal": true,
+		"inconclusive": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNotInconclusive -- various", actual)
 }

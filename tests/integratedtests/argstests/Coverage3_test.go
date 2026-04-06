@@ -10,7 +10,10 @@ import (
 
 func Test_Cov3_Map_Length(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"length": m.Length()}
@@ -22,7 +25,11 @@ func Test_Cov3_Map_Length(t *testing.T) {
 
 func Test_Cov3_Map_ArgsCount(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2, "expected": 3}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+		"expected": 3,
+	}
 
 	// Act
 	actual := args.Map{"count": m.ArgsCount()}
@@ -50,10 +57,16 @@ func Test_Cov3_Map_HasExpect(t *testing.T) {
 	m2 := args.Map{"a": 1}
 
 	// Act
-	actual := args.Map{"has": m1.HasExpect(), "notHas": m2.HasExpect()}
+	actual := args.Map{
+		"has": m1.HasExpect(),
+		"notHas": m2.HasExpect(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "notHas": false}
+	expected := args.Map{
+		"has": true,
+		"notHas": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Map.HasExpect returns correct -- with and without", actual)
 }
 
@@ -63,25 +76,43 @@ func Test_Cov3_Map_HasFunc(t *testing.T) {
 	m2 := args.Map{"a": 1}
 
 	// Act
-	actual := args.Map{"has": m1.HasFunc(), "notHas": m2.HasFunc()}
+	actual := args.Map{
+		"has": m1.HasFunc(),
+		"notHas": m2.HasFunc(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "notHas": true}
+	expected := args.Map{
+		"has": true,
+		"notHas": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map.HasFunc returns true -- both defined", actual)
 }
 
 func Test_Cov3_Map_GetAs(t *testing.T) {
 	// Arrange
-	m := args.Map{"name": "hello", "count": 42, "flag": true}
+	m := args.Map{
+		"name": "hello",
+		"count": 42,
+		"flag": true,
+	}
 	name, _ := m.GetAsString("name")
 	count, _ := m.GetAsInt("count")
 	flag, _ := m.GetAsBool("flag")
 
 	// Act
-	actual := args.Map{"name": name, "count": count, "flag": flag}
+	actual := args.Map{
+		"name": name,
+		"count": count,
+		"flag": flag,
+	}
 
 	// Assert
-	expected := args.Map{"name": "hello", "count": 42, "flag": true}
+	expected := args.Map{
+		"name": "hello",
+		"count": 42,
+		"flag": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map.GetAs* returns correct types -- string, int, bool", actual)
 }
 
@@ -140,14 +171,24 @@ func Test_Cov3_Map_GetFirstOfNames(t *testing.T) {
 
 func Test_Cov3_Map_SortedKeys(t *testing.T) {
 	// Arrange
-	m := args.Map{"c": 3, "a": 1, "b": 2}
+	m := args.Map{
+		"c": 3,
+		"a": 1,
+		"b": 2,
+	}
 	keys, _ := m.SortedKeys()
 
 	// Act
-	actual := args.Map{"first": keys[0], "last": keys[2]}
+	actual := args.Map{
+		"first": keys[0],
+		"last": keys[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "Map.SortedKeys returns sorted -- 3 keys", actual)
 }
 
@@ -196,10 +237,16 @@ func Test_Cov3_One_ArgTwo(t *testing.T) {
 	two := one.ArgTwo()
 
 	// Act
-	actual := args.Map{"first": two.First, "expect": two.Expect}
+	actual := args.Map{
+		"first": two.First,
+		"expect": two.Expect,
+	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "expect": 42}
+	expected := args.Map{
+		"first": "hello",
+		"expect": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "One.ArgTwo returns copy -- same data", actual)
 }
 
@@ -261,10 +308,16 @@ func Test_Cov3_One_LeftRight(t *testing.T) {
 	lr := one.LeftRight()
 
 	// Act
-	actual := args.Map{"left": lr.Left, "expect": lr.Expect}
+	actual := args.Map{
+		"left": lr.Left,
+		"expect": lr.Expect,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "expect": "world"}
+	expected := args.Map{
+		"left": "hello",
+		"expect": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "One.LeftRight returns left=first expect=expect -- set", actual)
 }
 
@@ -374,10 +427,16 @@ func Test_Cov3_Two_LeftRight(t *testing.T) {
 	lr := two.LeftRight()
 
 	// Act
-	actual := args.Map{"left": lr.Left, "right": lr.Right}
+	actual := args.Map{
+		"left": lr.Left,
+		"right": lr.Right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "right": 42}
+	expected := args.Map{
+		"left": "hello",
+		"right": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Two.LeftRight returns first and second -- set", actual)
 }
 

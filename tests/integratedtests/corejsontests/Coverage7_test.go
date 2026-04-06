@@ -36,10 +36,16 @@ func Test_Cov7_Result_Ptr(t *testing.T) {
 	result := corejson.NewPtr(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "noErr": !result.HasError()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"noErr": !result.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPtr returns correct value -- with args", actual)
 }
 
@@ -62,10 +68,16 @@ func Test_Cov7_Result_Unmarshal(t *testing.T) {
 	err := result.Unmarshal(&target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "a": target["a"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"a": target["a"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "a": 1}
+	expected := args.Map{
+		"noErr": true,
+		"a": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns correct value -- with args", actual)
 }
 
@@ -76,10 +88,16 @@ func Test_Cov7_Result_Deserialize(t *testing.T) {
 	err := result.Deserialize(&target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "b": target["b"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"b": target["b"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "b": 2}
+	expected := args.Map{
+		"noErr": true,
+		"b": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize returns correct value -- with args", actual)
 }
 
@@ -103,10 +121,16 @@ func Test_Cov7_Serialize_Raw(t *testing.T) {
 	bytes, err := corejson.Serialize.Raw(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize.Raw returns correct value -- with args", actual)
 }
 
@@ -130,10 +154,16 @@ func Test_Cov7_Deserialize_UsingBytes(t *testing.T) {
 	err := corejson.Deserialize.UsingBytes([]byte(`{"a":1}`), &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "a": target["a"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"a": target["a"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "a": 1}
+	expected := args.Map{
+		"noErr": true,
+		"a": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingBytes returns correct value -- with args", actual)
 }
 
@@ -157,10 +187,16 @@ func Test_Cov7_Deserialize_UsingResult(t *testing.T) {
 	err := corejson.Deserialize.UsingResult(&result, &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "a": target["a"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"a": target["a"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "a": 1}
+	expected := args.Map{
+		"noErr": true,
+		"a": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize.UsingResult returns correct value -- with args", actual)
 }
 
@@ -239,10 +275,16 @@ func Test_Cov7_Empty_ResultPtr(t *testing.T) {
 	result := corejson.Empty.ResultPtr()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "isEmpty": result.IsEmpty()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"isEmpty": result.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr returns empty -- with args", actual)
 }
 
@@ -265,10 +307,16 @@ func Test_Cov7_NewResult_UsingTypeBytesPtr(t *testing.T) {
 	result := corejson.NewResult.UsingTypeBytesPtr("TestType", []byte(`{"a":1}`))
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "noErr": !result.HasError()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"noErr": !result.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewResult.UsingTypeBytesPtr returns correct value -- with args", actual)
 }
 
@@ -347,10 +395,16 @@ func Test_Cov7_CastAny_FromToDefault(t *testing.T) {
 	err := corejson.CastAny.FromToDefault(source, &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "a": target["a"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"a": target["a"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "a": 1}
+	expected := args.Map{
+		"noErr": true,
+		"a": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny.FromToDefault returns correct value -- with args", actual)
 }
 
@@ -361,10 +415,16 @@ func Test_Cov7_BytesCollection_Empty(t *testing.T) {
 	bc := corejson.NewBytesCollection.Empty()
 
 	// Act
-	actual := args.Map{"isEmpty": bc.IsEmpty(), "len": bc.Length()}
+	actual := args.Map{
+		"isEmpty": bc.IsEmpty(),
+		"len": bc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "len": 0}
+	expected := args.Map{
+		"isEmpty": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesCollection returns empty -- empty", actual)
 }
 
@@ -375,10 +435,16 @@ func Test_Cov7_BytesCollection_Add(t *testing.T) {
 	bc.Add([]byte("world"))
 
 	// Act
-	actual := args.Map{"len": bc.Length(), "hasAny": bc.HasAnyItem()}
+	actual := args.Map{
+		"len": bc.Length(),
+		"hasAny": bc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesCollection returns correct value -- add", actual)
 }
 
@@ -417,10 +483,16 @@ func Test_Cov7_JsonString(t *testing.T) {
 	js, err := corejson.JsonString(`{"a":1}`)
 
 	// Act
-	actual := args.Map{"str": js, "noErr": err == nil}
+	actual := args.Map{
+		"str": js,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"str": `"{\"a\":1}"`, "noErr": true}
+	expected := args.Map{
+		"str": `"{\"a\":1}"`,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonString returns correct value -- with args", actual)
 }
 
@@ -445,9 +517,15 @@ func Test_Cov7_MapResults_Add(t *testing.T) {
 	mr.Add("key1", result)
 
 	// Act
-	actual := args.Map{"len": mr.Length(), "hasAny": mr.HasAnyItem()}
+	actual := args.Map{
+		"len": mr.Length(),
+		"hasAny": mr.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasAny": true}
+	expected := args.Map{
+		"len": 1,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapResults returns correct value -- add", actual)
 }

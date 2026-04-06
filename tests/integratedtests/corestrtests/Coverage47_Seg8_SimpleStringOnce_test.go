@@ -18,10 +18,20 @@ func Test_Seg8_SSO_ValueAndInit(t *testing.T) {
 		sso := &corestr.SimpleStringOnce{}
 
 		// Act
-		actual := args.Map{"value": sso.Value(), "init": sso.IsInitialized(), "defined": sso.IsDefined(), "uninit": sso.IsUninitialized()}
+		actual := args.Map{
+			"value": sso.Value(),
+			"init": sso.IsInitialized(),
+			"defined": sso.IsDefined(),
+			"uninit": sso.IsUninitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"value": "", "init": false, "defined": false, "uninit": true}
+		expected := args.Map{
+			"value": "",
+			"init": false,
+			"defined": false,
+			"uninit": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Value/Init -- default zero", actual)
 	})
 }
@@ -33,10 +43,18 @@ func Test_Seg8_SSO_SetOnUninitialized(t *testing.T) {
 		err := sso.SetOnUninitialized("hello")
 
 		// Act
-		actual := args.Map{"err": err == nil, "val": sso.Value(), "init": sso.IsInitialized()}
+		actual := args.Map{
+			"err": err == nil,
+			"val": sso.Value(),
+			"init": sso.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"err": true, "val": "hello", "init": true}
+		expected := args.Map{
+			"err": true,
+			"val": "hello",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SetOnUninitialized -- sets value", actual)
 	})
 }
@@ -49,10 +67,16 @@ func Test_Seg8_SSO_SetOnUninitialized_AlreadyInit(t *testing.T) {
 		err := sso.SetOnUninitialized("second")
 
 		// Act
-		actual := args.Map{"hasErr": err != nil, "val": sso.Value()}
+		actual := args.Map{
+			"hasErr": err != nil,
+			"val": sso.Value(),
+		}
 
 		// Assert
-		expected := args.Map{"hasErr": true, "val": "first"}
+		expected := args.Map{
+			"hasErr": true,
+			"val": "first",
+		}
 		expected.ShouldBeEqual(t, 0, "SetOnUninitialized already init -- error", actual)
 	})
 }
@@ -65,10 +89,16 @@ func Test_Seg8_SSO_GetSetOnce(t *testing.T) {
 		val2 := sso.GetSetOnce("second")
 
 		// Act
-		actual := args.Map{"val1": val1, "val2": val2}
+		actual := args.Map{
+			"val1": val1,
+			"val2": val2,
+		}
 
 		// Assert
-		expected := args.Map{"val1": "first", "val2": "first"}
+		expected := args.Map{
+			"val1": "first",
+			"val2": "first",
+		}
 		expected.ShouldBeEqual(t, 0, "GetSetOnce -- only first sticks", actual)
 	})
 }
@@ -80,10 +110,16 @@ func Test_Seg8_SSO_GetOnce(t *testing.T) {
 		val := sso.GetOnce()
 
 		// Act
-		actual := args.Map{"val": val, "init": sso.IsInitialized()}
+		actual := args.Map{
+			"val": val,
+			"init": sso.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "init": true}
+		expected := args.Map{
+			"val": "",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "GetOnce -- sets empty once", actual)
 	})
 }
@@ -96,10 +132,16 @@ func Test_Seg8_SSO_GetOnceFunc(t *testing.T) {
 		val2 := sso.GetOnceFunc(func() string { return "other" })
 
 		// Act
-		actual := args.Map{"val": val, "val2": val2}
+		actual := args.Map{
+			"val": val,
+			"val2": val2,
+		}
 
 		// Assert
-		expected := args.Map{"val": "computed", "val2": "computed"}
+		expected := args.Map{
+			"val": "computed",
+			"val2": "computed",
+		}
 		expected.ShouldBeEqual(t, 0, "GetOnceFunc -- first call wins", actual)
 	})
 }
@@ -112,10 +154,18 @@ func Test_Seg8_SSO_SetOnceIfUninitialized(t *testing.T) {
 		set2 := sso.SetOnceIfUninitialized("second")
 
 		// Act
-		actual := args.Map{"set1": set1, "set2": set2, "val": sso.Value()}
+		actual := args.Map{
+			"set1": set1,
+			"set2": set2,
+			"val": sso.Value(),
+		}
 
 		// Assert
-		expected := args.Map{"set1": true, "set2": false, "val": "first"}
+		expected := args.Map{
+			"set1": true,
+			"set2": false,
+			"val": "first",
+		}
 		expected.ShouldBeEqual(t, 0, "SetOnceIfUninitialized -- first true second false", actual)
 	})
 }
@@ -130,10 +180,16 @@ func Test_Seg8_SSO_SetInitialize_SetUnInit(t *testing.T) {
 		init2 := sso.IsInitialized()
 
 		// Act
-		actual := args.Map{"init1": init1, "init2": init2}
+		actual := args.Map{
+			"init1": init1,
+			"init2": init2,
+		}
 
 		// Assert
-		expected := args.Map{"init1": true, "init2": false}
+		expected := args.Map{
+			"init1": true,
+			"init2": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SetInitialize/SetUnInit -- toggles", actual)
 	})
 }
@@ -146,10 +202,16 @@ func Test_Seg8_SSO_Invalidate(t *testing.T) {
 		sso.Invalidate()
 
 		// Act
-		actual := args.Map{"init": sso.IsInitialized(), "val": sso.Value()}
+		actual := args.Map{
+			"init": sso.IsInitialized(),
+			"val": sso.Value(),
+		}
 
 		// Assert
-		expected := args.Map{"init": false, "val": ""}
+		expected := args.Map{
+			"init": false,
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Invalidate -- resets", actual)
 	})
 }
@@ -162,10 +224,16 @@ func Test_Seg8_SSO_Reset(t *testing.T) {
 		sso.Reset()
 
 		// Act
-		actual := args.Map{"init": sso.IsInitialized(), "val": sso.Value()}
+		actual := args.Map{
+			"init": sso.IsInitialized(),
+			"val": sso.Value(),
+		}
 
 		// Assert
-		expected := args.Map{"init": false, "val": ""}
+		expected := args.Map{
+			"init": false,
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Reset -- resets", actual)
 	})
 }
@@ -179,10 +247,16 @@ func Test_Seg8_SSO_IsInvalid(t *testing.T) {
 		invalid2 := sso.IsInvalid()
 
 		// Act
-		actual := args.Map{"invalid1": invalid1, "invalid2": invalid2}
+		actual := args.Map{
+			"invalid1": invalid1,
+			"invalid2": invalid2,
+		}
 
 		// Assert
-		expected := args.Map{"invalid1": true, "invalid2": false}
+		expected := args.Map{
+			"invalid1": true,
+			"invalid2": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsInvalid -- uninit vs init", actual)
 	})
 }
@@ -208,10 +282,16 @@ func Test_Seg8_SSO_ValueBytes(t *testing.T) {
 		_ = sso.SetOnUninitialized("abc")
 
 		// Act
-		actual := args.Map{"len": len(sso.ValueBytes()), "ptrLen": len(sso.ValueBytesPtr())}
+		actual := args.Map{
+			"len": len(sso.ValueBytes()),
+			"ptrLen": len(sso.ValueBytesPtr()),
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "ptrLen": 3}
+		expected := args.Map{
+			"len": 3,
+			"ptrLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueBytes -- correct", actual)
 	})
 }
@@ -224,10 +304,16 @@ func Test_Seg8_SSO_ConcatNew(t *testing.T) {
 		result := sso.ConcatNew(" world")
 
 		// Act
-		actual := args.Map{"val": result.Value(), "init": result.IsInitialized()}
+		actual := args.Map{
+			"val": result.Value(),
+			"init": result.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello world", "init": true}
+		expected := args.Map{
+			"val": "hello world",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ConcatNew -- appended", actual)
 	})
 }
@@ -254,10 +340,16 @@ func Test_Seg8_SSO_IsEmpty_IsWhitespace(t *testing.T) {
 		sso := &corestr.SimpleStringOnce{}
 
 		// Act
-		actual := args.Map{"empty": sso.IsEmpty(), "ws": sso.IsWhitespace()}
+		actual := args.Map{
+			"empty": sso.IsEmpty(),
+			"ws": sso.IsWhitespace(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "ws": true}
+		expected := args.Map{
+			"empty": true,
+			"ws": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty/IsWhitespace -- empty", actual)
 	})
 }
@@ -284,10 +376,16 @@ func Test_Seg8_SSO_HasValidNonEmpty(t *testing.T) {
 		_ = sso.SetOnUninitialized("val")
 
 		// Act
-		actual := args.Map{"nonEmpty": sso.HasValidNonEmpty(), "nonWS": sso.HasValidNonWhitespace()}
+		actual := args.Map{
+			"nonEmpty": sso.HasValidNonEmpty(),
+			"nonWS": sso.HasValidNonWhitespace(),
+		}
 
 		// Assert
-		expected := args.Map{"nonEmpty": true, "nonWS": true}
+		expected := args.Map{
+			"nonEmpty": true,
+			"nonWS": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasValidNonEmpty/NonWhitespace -- true", actual)
 	})
 }
@@ -298,10 +396,16 @@ func Test_Seg8_SSO_HasValidNonEmpty_Uninit(t *testing.T) {
 		sso := &corestr.SimpleStringOnce{}
 
 		// Act
-		actual := args.Map{"nonEmpty": sso.HasValidNonEmpty(), "nonWS": sso.HasValidNonWhitespace()}
+		actual := args.Map{
+			"nonEmpty": sso.HasValidNonEmpty(),
+			"nonWS": sso.HasValidNonWhitespace(),
+		}
 
 		// Assert
-		expected := args.Map{"nonEmpty": false, "nonWS": false}
+		expected := args.Map{
+			"nonEmpty": false,
+			"nonWS": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasValidNonEmpty uninit -- false", actual)
 	})
 }
@@ -315,10 +419,16 @@ func Test_Seg8_SSO_SafeValue(t *testing.T) {
 		initVal := sso.SafeValue()
 
 		// Act
-		actual := args.Map{"uninit": uninitVal, "init": initVal}
+		actual := args.Map{
+			"uninit": uninitVal,
+			"init": initVal,
+		}
 
 		// Assert
-		expected := args.Map{"uninit": "", "init": "hello"}
+		expected := args.Map{
+			"uninit": "",
+			"init": "hello",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValue -- correct", actual)
 	})
 }
@@ -481,10 +591,16 @@ func Test_Seg8_SSO_Uint16(t *testing.T) {
 		val, inRange := sso.Uint16()
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": uint16(500), "inRange": true}
+		expected := args.Map{
+			"val": uint16(500),
+			"inRange": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Uint16 -- 500", actual)
 	})
 }
@@ -497,10 +613,16 @@ func Test_Seg8_SSO_Uint32(t *testing.T) {
 		val, inRange := sso.Uint32()
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": uint32(70000), "inRange": true}
+		expected := args.Map{
+			"val": uint32(70000),
+			"inRange": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Uint32 -- 70000", actual)
 	})
 }
@@ -513,10 +635,16 @@ func Test_Seg8_SSO_WithinRange_InRange(t *testing.T) {
 		val, inRange := sso.WithinRange(true, 0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 50, "inRange": true}
+		expected := args.Map{
+			"val": 50,
+			"inRange": true,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRange in range -- true", actual)
 	})
 }
@@ -529,10 +657,16 @@ func Test_Seg8_SSO_WithinRange_Below_Boundary(t *testing.T) {
 		val, inRange := sso.WithinRange(true, 0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 0, "inRange": false}
+		expected := args.Map{
+			"val": 0,
+			"inRange": false,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRange below boundary -- clamped to min", actual)
 	})
 }
@@ -545,10 +679,16 @@ func Test_Seg8_SSO_WithinRange_Above_Boundary(t *testing.T) {
 		val, inRange := sso.WithinRange(true, 0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 100, "inRange": false}
+		expected := args.Map{
+			"val": 100,
+			"inRange": false,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRange above boundary -- clamped to max", actual)
 	})
 }
@@ -561,10 +701,16 @@ func Test_Seg8_SSO_WithinRange_NoBoundary(t *testing.T) {
 		val, inRange := sso.WithinRange(false, 0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 200, "inRange": false}
+		expected := args.Map{
+			"val": 200,
+			"inRange": false,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRange no boundary -- raw value", actual)
 	})
 }
@@ -577,10 +723,16 @@ func Test_Seg8_SSO_WithinRange_Invalid(t *testing.T) {
 		val, inRange := sso.WithinRange(true, 0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 0, "inRange": false}
+		expected := args.Map{
+			"val": 0,
+			"inRange": false,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRange invalid -- 0 false", actual)
 	})
 }
@@ -593,10 +745,16 @@ func Test_Seg8_SSO_WithinRangeDefault(t *testing.T) {
 		val, inRange := sso.WithinRangeDefault(0, 100)
 
 		// Act
-		actual := args.Map{"val": val, "inRange": inRange}
+		actual := args.Map{
+			"val": val,
+			"inRange": inRange,
+		}
 
 		// Assert
-		expected := args.Map{"val": 50, "inRange": true}
+		expected := args.Map{
+			"val": 50,
+			"inRange": true,
+		}
 		expected.ShouldBeEqual(t, 0, "WithinRangeDefault -- delegates", actual)
 	})
 }
@@ -922,10 +1080,16 @@ func Test_Seg8_SSO_NonPtr_Ptr(t *testing.T) {
 		nonPtr := sso.NonPtr()
 
 		// Act
-		actual := args.Map{"val": nonPtr.Value(), "ptrSame": sso.Ptr() == sso}
+		actual := args.Map{
+			"val": nonPtr.Value(),
+			"ptrSame": sso.Ptr() == sso,
+		}
 
 		// Assert
-		expected := args.Map{"val": "val", "ptrSame": true}
+		expected := args.Map{
+			"val": "val",
+			"ptrSame": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NonPtr/Ptr -- correct", actual)
 	})
 }
@@ -937,10 +1101,16 @@ func Test_Seg8_SSO_Is(t *testing.T) {
 		_ = sso.SetOnUninitialized("hello")
 
 		// Act
-		actual := args.Map{"is": sso.Is("hello"), "isNot": sso.Is("world")}
+		actual := args.Map{
+			"is": sso.Is("hello"),
+			"isNot": sso.Is("world"),
+		}
 
 		// Assert
-		expected := args.Map{"is": true, "isNot": false}
+		expected := args.Map{
+			"is": true,
+			"isNot": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Is -- correct", actual)
 	})
 }
@@ -959,7 +1129,11 @@ func Test_Seg8_SSO_IsAnyOf(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"found": true, "notFound": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"notFound": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAnyOf -- correct", actual)
 	})
 }
@@ -971,10 +1145,16 @@ func Test_Seg8_SSO_IsContains(t *testing.T) {
 		_ = sso.SetOnUninitialized("hello world")
 
 		// Act
-		actual := args.Map{"contains": sso.IsContains("world"), "not": sso.IsContains("xyz")}
+		actual := args.Map{
+			"contains": sso.IsContains("world"),
+			"not": sso.IsContains("xyz"),
+		}
 
 		// Assert
-		expected := args.Map{"contains": true, "not": false}
+		expected := args.Map{
+			"contains": true,
+			"not": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsContains -- correct", actual)
 	})
 }
@@ -993,7 +1173,11 @@ func Test_Seg8_SSO_IsAnyContains(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"found": true, "notFound": false, "empty": true}
+		expected := args.Map{
+			"found": true,
+			"notFound": false,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAnyContains -- correct", actual)
 	})
 }
@@ -1005,10 +1189,16 @@ func Test_Seg8_SSO_IsEqualNonSensitive(t *testing.T) {
 		_ = sso.SetOnUninitialized("Hello")
 
 		// Act
-		actual := args.Map{"eq": sso.IsEqualNonSensitive("hello"), "neq": sso.IsEqualNonSensitive("world")}
+		actual := args.Map{
+			"eq": sso.IsEqualNonSensitive("hello"),
+			"neq": sso.IsEqualNonSensitive("world"),
+		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualNonSensitive -- correct", actual)
 	})
 }
@@ -1021,10 +1211,16 @@ func Test_Seg8_SSO_IsRegexMatches(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 
 		// Act
-		actual := args.Map{"match": sso.IsRegexMatches(re), "nil": sso.IsRegexMatches(nil)}
+		actual := args.Map{
+			"match": sso.IsRegexMatches(re),
+			"nil": sso.IsRegexMatches(nil),
+		}
 
 		// Assert
-		expected := args.Map{"match": true, "nil": false}
+		expected := args.Map{
+			"match": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsRegexMatches -- correct", actual)
 	})
 }
@@ -1037,10 +1233,16 @@ func Test_Seg8_SSO_RegexFindString(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 
 		// Act
-		actual := args.Map{"found": sso.RegexFindString(re), "nil": sso.RegexFindString(nil)}
+		actual := args.Map{
+			"found": sso.RegexFindString(re),
+			"nil": sso.RegexFindString(nil),
+		}
 
 		// Assert
-		expected := args.Map{"found": "123", "nil": ""}
+		expected := args.Map{
+			"found": "123",
+			"nil": "",
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindString -- correct", actual)
 	})
 }
@@ -1053,10 +1255,16 @@ func Test_Seg8_SSO_RegexFindAllStrings(t *testing.T) {
 		re := regexp.MustCompile(`\d`)
 
 		// Act
-		actual := args.Map{"len": len(sso.RegexFindAllStrings(re, -1)), "nil": len(sso.RegexFindAllStrings(nil, -1))}
+		actual := args.Map{
+			"len": len(sso.RegexFindAllStrings(re, -1)),
+			"nil": len(sso.RegexFindAllStrings(nil, -1)),
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "nil": 0}
+		expected := args.Map{
+			"len": 3,
+			"nil": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindAllStrings -- correct", actual)
 	})
 }
@@ -1071,10 +1279,20 @@ func Test_Seg8_SSO_RegexFindAllStringsWithFlag(t *testing.T) {
 		nilItems, nilHas := sso.RegexFindAllStringsWithFlag(nil, -1)
 
 		// Act
-		actual := args.Map{"len": len(items), "hasAny": hasAny, "nilLen": len(nilItems), "nilHas": nilHas}
+		actual := args.Map{
+			"len": len(items),
+			"hasAny": hasAny,
+			"nilLen": len(nilItems),
+			"nilHas": nilHas,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "hasAny": true, "nilLen": 0, "nilHas": false}
+		expected := args.Map{
+			"len": 2,
+			"hasAny": true,
+			"nilLen": 0,
+			"nilHas": false,
+		}
 		expected.ShouldBeEqual(t, 0, "RegexFindAllStringsWithFlag -- correct", actual)
 	})
 }
@@ -1132,10 +1350,16 @@ func Test_Seg8_SSO_SplitLeftRight(t *testing.T) {
 		left, right := sso.SplitLeftRight("=")
 
 		// Act
-		actual := args.Map{"left": left, "right": right}
+		actual := args.Map{
+			"left": left,
+			"right": right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value"}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "SplitLeftRight -- correct", actual)
 	})
 }
@@ -1148,10 +1372,16 @@ func Test_Seg8_SSO_SplitLeftRight_NoSep(t *testing.T) {
 		left, right := sso.SplitLeftRight("=")
 
 		// Act
-		actual := args.Map{"left": left, "right": right}
+		actual := args.Map{
+			"left": left,
+			"right": right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "nosep", "right": ""}
+		expected := args.Map{
+			"left": "nosep",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SplitLeftRight no sep -- right empty", actual)
 	})
 }
@@ -1164,10 +1394,16 @@ func Test_Seg8_SSO_SplitLeftRightTrim(t *testing.T) {
 		left, right := sso.SplitLeftRightTrim("=")
 
 		// Act
-		actual := args.Map{"left": left, "right": right}
+		actual := args.Map{
+			"left": left,
+			"right": right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value"}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "SplitLeftRightTrim -- trimmed", actual)
 	})
 }
@@ -1212,10 +1448,16 @@ func Test_Seg8_SSO_Clone(t *testing.T) {
 		c := sso.Clone()
 
 		// Act
-		actual := args.Map{"val": c.Value(), "init": c.IsInitialized()}
+		actual := args.Map{
+			"val": c.Value(),
+			"init": c.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "init": true}
+		expected := args.Map{
+			"val": "hello",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- copy", actual)
 	})
 }
@@ -1228,10 +1470,16 @@ func Test_Seg8_SSO_ClonePtr(t *testing.T) {
 		c := sso.ClonePtr()
 
 		// Act
-		actual := args.Map{"val": c.Value(), "diff": c != sso}
+		actual := args.Map{
+			"val": c.Value(),
+			"diff": c != sso,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "diff": true}
+		expected := args.Map{
+			"val": "hello",
+			"diff": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ClonePtr -- new ptr", actual)
 	})
 }
@@ -1259,10 +1507,16 @@ func Test_Seg8_SSO_CloneUsingNewVal(t *testing.T) {
 		c := sso.CloneUsingNewVal("new")
 
 		// Act
-		actual := args.Map{"val": c.Value(), "init": c.IsInitialized()}
+		actual := args.Map{
+			"val": c.Value(),
+			"init": c.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "new", "init": true}
+		expected := args.Map{
+			"val": "new",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "CloneUsingNewVal -- new value same init", actual)
 	})
 }
@@ -1275,10 +1529,16 @@ func Test_Seg8_SSO_Dispose(t *testing.T) {
 		sso.Dispose()
 
 		// Act
-		actual := args.Map{"val": sso.Value(), "init": sso.IsInitialized()}
+		actual := args.Map{
+			"val": sso.Value(),
+			"init": sso.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "init": true}
+		expected := args.Map{
+			"val": "",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Dispose -- empty but still init", actual)
 	})
 }
@@ -1358,10 +1618,16 @@ func Test_Seg8_SSO_JsonModel(t *testing.T) {
 		m := sso.JsonModel()
 
 		// Act
-		actual := args.Map{"val": m.Value, "init": m.IsInitialize}
+		actual := args.Map{
+			"val": m.Value,
+			"init": m.IsInitialize,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "init": true}
+		expected := args.Map{
+			"val": "hello",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "JsonModel -- correct", actual)
 	})
 }
@@ -1388,10 +1654,16 @@ func Test_Seg8_SSO_MarshalJSON(t *testing.T) {
 		b, err := sso.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1406,10 +1678,18 @@ func Test_Seg8_SSO_UnmarshalJSON(t *testing.T) {
 		err := sso2.UnmarshalJSON(b)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "val": sso2.Value(), "init": sso2.IsInitialized()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"val": sso2.Value(),
+			"init": sso2.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "val": "hello", "init": true}
+		expected := args.Map{
+			"noErr": true,
+			"val": "hello",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- roundtrip", actual)
 	})
 }
@@ -1455,10 +1735,16 @@ func Test_Seg8_SSO_ParseInjectUsingJson(t *testing.T) {
 		result, err := sso2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"notNil": result != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "notNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"notNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- success", actual)
 	})
 }
@@ -1513,7 +1799,12 @@ func Test_Seg8_SSO_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true, "marsh": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+			"marsh": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }
@@ -1526,10 +1817,16 @@ func Test_Seg8_SSO_Serialize(t *testing.T) {
 		b, err := sso.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1543,10 +1840,16 @@ func Test_Seg8_SSO_Deserialize(t *testing.T) {
 		err := sso.Deserialize(&target)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "val": target.Value}
+		actual := args.Map{
+			"noErr": err == nil,
+			"val": target.Value,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "val": "hello"}
+		expected := args.Map{
+			"noErr": true,
+			"val": "hello",
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize -- success", actual)
 	})
 }

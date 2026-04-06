@@ -19,10 +19,22 @@ func Test_I31_Collection_IsEmpty(t *testing.T) {
 		c := corestr.New.Collection.Cap(5)
 
 		// Act
-		actual := args.Map{"empty": c.IsEmpty(), "items": c.HasItems(), "len": c.Length(), "count": c.Count(), "hasAny": c.HasAnyItem()}
+		actual := args.Map{
+			"empty": c.IsEmpty(),
+			"items": c.HasItems(),
+			"len": c.Length(),
+			"count": c.Count(),
+			"hasAny": c.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "items": false, "len": 0, "count": 0, "hasAny": false}
+		expected := args.Map{
+			"empty": true,
+			"items": false,
+			"len": 0,
+			"count": 0,
+			"hasAny": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns empty -- empty", actual)
 	})
 }
@@ -33,10 +45,16 @@ func Test_I31_Collection_Length_Nil(t *testing.T) {
 		var c *corestr.Collection
 
 		// Act
-		actual := args.Map{"len": c.Length(), "empty": c.IsEmpty()}
+		actual := args.Map{
+			"len": c.Length(),
+			"empty": c.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "empty": true}
+		expected := args.Map{
+			"len": 0,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns nil -- nil length", actual)
 	})
 }
@@ -104,10 +122,18 @@ func Test_I31_Collection_LastIndex(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"li": c.LastIndex(), "hasIdx": c.HasIndex(1), "noIdx": c.HasIndex(5)}
+		actual := args.Map{
+			"li": c.LastIndex(),
+			"hasIdx": c.HasIndex(1),
+			"noIdx": c.HasIndex(5),
+		}
 
 		// Assert
-		expected := args.Map{"li": 1, "hasIdx": true, "noIdx": false}
+		expected := args.Map{
+			"li": 1,
+			"hasIdx": true,
+			"noIdx": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- LastIndex/HasIndex", actual)
 	})
 }
@@ -123,10 +149,16 @@ func Test_I31_Collection_Add(t *testing.T) {
 		c.Add("a")
 
 		// Act
-		actual := args.Map{"len": c.Length(), "first": c.First()}
+		actual := args.Map{
+			"len": c.Length(),
+			"first": c.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "first": "a"}
+		expected := args.Map{
+			"len": 1,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Add", actual)
 	})
 }
@@ -249,10 +281,16 @@ func Test_I31_Collection_AddFuncErr_Err(t *testing.T) {
 		c.AddFuncErr(func() (string, error) { return "", fmt.Errorf("fail") }, func(e error) { called = true })
 
 		// Act
-		actual := args.Map{"empty": c.IsEmpty(), "called": called}
+		actual := args.Map{
+			"empty": c.IsEmpty(),
+			"called": called,
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "called": true}
+		expected := args.Map{
+			"empty": true,
+			"called": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns error -- AddFuncErr err", actual)
 	})
 }
@@ -568,10 +606,16 @@ func Test_I31_Collection_SafeIndexAtUsingLength(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"safe": c.SafeIndexAtUsingLength("def", 2, 1), "oob": c.SafeIndexAtUsingLength("def", 2, 5)}
+		actual := args.Map{
+			"safe": c.SafeIndexAtUsingLength("def", 2, 1),
+			"oob": c.SafeIndexAtUsingLength("def", 2, 5),
+		}
 
 		// Assert
-		expected := args.Map{"safe": "b", "oob": "def"}
+		expected := args.Map{
+			"safe": "b",
+			"oob": "def",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SafeIndexAtUsingLength", actual)
 	})
 }
@@ -582,10 +626,16 @@ func Test_I31_Collection_First_Last(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 		// Act
-		actual := args.Map{"first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- First/Last", actual)
 	})
 }
@@ -643,10 +693,16 @@ func Test_I31_Collection_Take(t *testing.T) {
 		t1 := c.Take(2)
 
 		// Act
-		actual := args.Map{"len": t1.Length(), "first": t1.First()}
+		actual := args.Map{
+			"len": t1.Length(),
+			"first": t1.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Take", actual)
 	})
 }
@@ -688,10 +744,16 @@ func Test_I31_Collection_Skip(t *testing.T) {
 		s := c.Skip(1)
 
 		// Act
-		actual := args.Map{"len": s.Length(), "first": s.First()}
+		actual := args.Map{
+			"len": s.Length(),
+			"first": s.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "b"}
+		expected := args.Map{
+			"len": 2,
+			"first": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Skip", actual)
 	})
 }
@@ -718,10 +780,16 @@ func Test_I31_Collection_Reverse(t *testing.T) {
 		c.Reverse()
 
 		// Act
-		actual := args.Map{"first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "c", "last": "a"}
+		expected := args.Map{
+			"first": "c",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Reverse", actual)
 	})
 }
@@ -767,10 +835,16 @@ func Test_I31_Collection_RemoveAt(t *testing.T) {
 		ok := c.RemoveAt(1)
 
 		// Act
-		actual := args.Map{"ok": ok, "len": c.Length()}
+		actual := args.Map{
+			"ok": ok,
+			"len": c.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"ok": true, "len": 2}
+		expected := args.Map{
+			"ok": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- RemoveAt", actual)
 	})
 }
@@ -845,10 +919,18 @@ func Test_I31_Collection_GetPagesSize(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c", "d", "e"})
 
 		// Act
-		actual := args.Map{"pages": c.GetPagesSize(2), "zero": c.GetPagesSize(0), "neg": c.GetPagesSize(-1)}
+		actual := args.Map{
+			"pages": c.GetPagesSize(2),
+			"zero": c.GetPagesSize(0),
+			"neg": c.GetPagesSize(-1),
+		}
 
 		// Assert
-		expected := args.Map{"pages": 3, "zero": 0, "neg": 0}
+		expected := args.Map{
+			"pages": 3,
+			"zero": 0,
+			"neg": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetPagesSize", actual)
 	})
 }
@@ -860,10 +942,16 @@ func Test_I31_Collection_GetSinglePageCollection(t *testing.T) {
 		p := c.GetSinglePageCollection(2, 2)
 
 		// Act
-		actual := args.Map{"len": p.Length(), "first": p.First()}
+		actual := args.Map{
+			"len": p.Length(),
+			"first": p.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "c"}
+		expected := args.Map{
+			"len": 2,
+			"first": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetSinglePageCollection", actual)
 	})
 }
@@ -1075,10 +1163,16 @@ func Test_I31_Collection_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
 		c2 := corestr.New.Collection.Strings([]string{"hello"})
 
 		// Act
-		actual := args.Map{"eq": c1.IsEqualsWithSensitive(false, c2), "neq": c1.IsEqualsWithSensitive(true, c2)}
+		actual := args.Map{
+			"eq": c1.IsEqualsWithSensitive(false, c2),
+			"neq": c1.IsEqualsWithSensitive(true, c2),
+		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- IsEqualsWithSensitive", actual)
 	})
 }
@@ -1347,10 +1441,16 @@ func Test_I31_Collection_Resize(t *testing.T) {
 		c.Resize(100)
 
 		// Act
-		actual := args.Map{"cap": c.Capacity() >= 100, "len": c.Length()}
+		actual := args.Map{
+			"cap": c.Capacity() >= 100,
+			"len": c.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"cap": true, "len": 1}
+		expected := args.Map{
+			"cap": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Resize", actual)
 	})
 }
@@ -1410,10 +1510,22 @@ func Test_I31_Collection_List(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"lLen": len(c.List()), "lsLen": len(c.ListStrings()), "lspLen": len(c.ListStringsPtr()), "iLen": len(c.Items()), "lpLen": len(c.ListPtr())}
+		actual := args.Map{
+			"lLen": len(c.List()),
+			"lsLen": len(c.ListStrings()),
+			"lspLen": len(c.ListStringsPtr()),
+			"iLen": len(c.Items()),
+			"lpLen": len(c.ListPtr()),
+		}
 
 		// Assert
-		expected := args.Map{"lLen": 1, "lsLen": 1, "lspLen": 1, "iLen": 1, "lpLen": 1}
+		expected := args.Map{
+			"lLen": 1,
+			"lsLen": 1,
+			"lspLen": 1,
+			"iLen": 1,
+			"lpLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- List variants", actual)
 	})
 }
@@ -1458,10 +1570,18 @@ func Test_I31_Collection_JsonString(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"notEmpty": c.JsonString() != "", "must": c.JsonStringMust() != "", "sj": c.StringJSON() != ""}
+		actual := args.Map{
+			"notEmpty": c.JsonString() != "",
+			"must": c.JsonStringMust() != "",
+			"sj": c.StringJSON() != "",
+		}
 
 		// Assert
-		expected := args.Map{"notEmpty": true, "must": true, "sj": true}
+		expected := args.Map{
+			"notEmpty": true,
+			"must": true,
+			"sj": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonString variants", actual)
 	})
 }

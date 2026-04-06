@@ -264,10 +264,16 @@ func Test_Cov5_NullLeftRight(t *testing.T) {
 	l, r := isany.NullLeftRight(nil, "a")
 
 	// Act
-	actual := args.Map{"left": l, "right": r}
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
 
 	// Assert
-	expected := args.Map{"left": true, "right": false}
+	expected := args.Map{
+		"left": true,
+		"right": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NullLeftRight returns nil -- nil and string", actual)
 }
 
@@ -324,10 +330,16 @@ func Test_Cov5_Function_Func(t *testing.T) {
 	isFunc, name := isany.Function(func() {})
 
 	// Act
-	actual := args.Map{"isFunc": isFunc, "hasName": name != ""}
+	actual := args.Map{
+		"isFunc": isFunc,
+		"hasName": name != "",
+	}
 
 	// Assert
-	expected := args.Map{"isFunc": true, "hasName": true}
+	expected := args.Map{
+		"isFunc": true,
+		"hasName": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Function returns correct value -- func", actual)
 }
 
@@ -336,10 +348,16 @@ func Test_Cov5_Function_NotFunc(t *testing.T) {
 	isFunc, name := isany.Function("hello")
 
 	// Act
-	actual := args.Map{"isFunc": isFunc, "name": name}
+	actual := args.Map{
+		"isFunc": isFunc,
+		"name": name,
+	}
 
 	// Assert
-	expected := args.Map{"isFunc": false, "name": ""}
+	expected := args.Map{
+		"isFunc": false,
+		"name": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Function returns correct value -- not func", actual)
 }
 
@@ -348,10 +366,16 @@ func Test_Cov5_Function_Nil(t *testing.T) {
 	isFunc, name := isany.Function(nil)
 
 	// Act
-	actual := args.Map{"isFunc": isFunc, "name": name}
+	actual := args.Map{
+		"isFunc": isFunc,
+		"name": name,
+	}
 
 	// Assert
-	expected := args.Map{"isFunc": false, "name": ""}
+	expected := args.Map{
+		"isFunc": false,
+		"name": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Function returns nil -- nil", actual)
 }
 

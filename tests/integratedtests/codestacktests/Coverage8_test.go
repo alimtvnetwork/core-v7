@@ -15,10 +15,16 @@ func Test_Cov8_FileWithLine_FullFilePath(t *testing.T) {
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 10}
 
 	// Act
-	actual := args.Map{"path": fwl.FullFilePath(), "line": fwl.LineNumber()}
+	actual := args.Map{
+		"path": fwl.FullFilePath(),
+		"line": fwl.LineNumber(),
+	}
 
 	// Assert
-	expected := args.Map{"path": "/tmp/test.go", "line": 10}
+	expected := args.Map{
+		"path": "/tmp/test.go",
+		"line": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- FullFilePath and LineNumber", actual)
 }
 
@@ -27,10 +33,16 @@ func Test_Cov8_FileWithLine_IsNil(t *testing.T) {
 	var fwl *codestack.FileWithLine
 
 	// Act
-	actual := args.Map{"isNil": fwl.IsNil(), "isNotNil": fwl.IsNotNil()}
+	actual := args.Map{
+		"isNil": fwl.IsNil(),
+		"isNotNil": fwl.IsNotNil(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "isNotNil": false}
+	expected := args.Map{
+		"isNil": true,
+		"isNotNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- IsNil", actual)
 }
 
@@ -39,10 +51,16 @@ func Test_Cov8_FileWithLine_IsNotNil(t *testing.T) {
 	fwl := &codestack.FileWithLine{FilePath: "/tmp/test.go", Line: 1}
 
 	// Act
-	actual := args.Map{"isNil": fwl.IsNil(), "isNotNil": fwl.IsNotNil()}
+	actual := args.Map{
+		"isNil": fwl.IsNil(),
+		"isNotNil": fwl.IsNotNil(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": false, "isNotNil": true}
+	expected := args.Map{
+		"isNil": false,
+		"isNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns nil -- IsNotNil", actual)
 }
 
@@ -169,10 +187,16 @@ func Test_Cov8_FileWithLine_ParseInjectUsingJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "path": result.FilePath}
+	actual := args.Map{
+		"noErr": err == nil,
+		"path": result.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "path": "/tmp/test.go"}
+	expected := args.Map{
+		"noErr": true,
+		"path": "/tmp/test.go",
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- ParseInjectUsingJson", actual)
 }
 
@@ -213,10 +237,16 @@ func Test_Cov8_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "path": target.FilePath}
+	actual := args.Map{
+		"noErr": err == nil,
+		"path": target.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "path": "/tmp/test.go"}
+	expected := args.Map{
+		"noErr": true,
+		"path": "/tmp/test.go",
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- JsonParseSelfInject", actual)
 }
 
@@ -226,10 +256,16 @@ func Test_Cov8_FileWithLine_AsFileLiner(t *testing.T) {
 	liner := fwl.AsFileLiner()
 
 	// Act
-	actual := args.Map{"path": liner.FullFilePath(), "line": liner.LineNumber()}
+	actual := args.Map{
+		"path": liner.FullFilePath(),
+		"line": liner.LineNumber(),
+	}
 
 	// Assert
-	expected := args.Map{"path": "/tmp/test.go", "line": 10}
+	expected := args.Map{
+		"path": "/tmp/test.go",
+		"line": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "FileWithLine returns non-empty -- AsFileLiner", actual)
 }
 
@@ -240,10 +276,16 @@ func Test_Cov8_Trace_New_Create(t *testing.T) {
 	trace := codestack.New.Create(0)
 
 	// Act
-	actual := args.Map{"isOkay": trace.IsOkay, "notNil": trace.IsNotNil()}
+	actual := args.Map{
+		"isOkay": trace.IsOkay,
+		"notNil": trace.IsNotNil(),
+	}
 
 	// Assert
-	expected := args.Map{"isOkay": true, "notNil": true}
+	expected := args.Map{
+		"isOkay": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.Create", actual)
 }
 
@@ -276,10 +318,16 @@ func Test_Cov8_Trace_New_Ptr(t *testing.T) {
 	trace := codestack.New.Ptr(0)
 
 	// Act
-	actual := args.Map{"notNil": trace != nil, "isOkay": trace.IsOkay}
+	actual := args.Map{
+		"notNil": trace != nil,
+		"isOkay": trace.IsOkay,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isOkay": true}
+	expected := args.Map{
+		"notNil": true,
+		"isOkay": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- New.Ptr", actual)
 }
 
@@ -342,10 +390,16 @@ func Test_Cov8_Trace_IsNil(t *testing.T) {
 	var trace *codestack.Trace
 
 	// Act
-	actual := args.Map{"isNil": trace.IsNil(), "isNotNil": trace.IsNotNil()}
+	actual := args.Map{
+		"isNil": trace.IsNil(),
+		"isNotNil": trace.IsNotNil(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "isNotNil": false}
+	expected := args.Map{
+		"isNil": true,
+		"isNotNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns nil -- IsNil", actual)
 }
 
@@ -428,10 +482,16 @@ func Test_Cov8_Trace_FileWithLine(t *testing.T) {
 	fwl := trace.FileWithLine()
 
 	// Act
-	actual := args.Map{"pathNotEmpty": fwl.FilePath != "", "lineGt0": fwl.Line > 0}
+	actual := args.Map{
+		"pathNotEmpty": fwl.FilePath != "",
+		"lineGt0": fwl.Line > 0,
+	}
 
 	// Assert
-	expected := args.Map{"pathNotEmpty": true, "lineGt0": true}
+	expected := args.Map{
+		"pathNotEmpty": true,
+		"lineGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLine", actual)
 }
 
@@ -568,10 +628,16 @@ func Test_Cov8_Trace_ClonePtr(t *testing.T) {
 	cloned := trace.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "samePath": cloned.FilePath == trace.FilePath}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"samePath": cloned.FilePath == trace.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "samePath": true}
+	expected := args.Map{
+		"notNil": true,
+		"samePath": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ClonePtr", actual)
 }
 
@@ -597,10 +663,16 @@ func Test_Cov8_Trace_ParseInjectUsingJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -640,10 +712,16 @@ func Test_Cov8_Trace_Dispose(t *testing.T) {
 	trace.Dispose()
 
 	// Act
-	actual := args.Map{"pathEmpty": trace.FilePath == "", "line": trace.Line}
+	actual := args.Map{
+		"pathEmpty": trace.FilePath == "",
+		"line": trace.Line,
+	}
 
 	// Assert
-	expected := args.Map{"pathEmpty": true, "line": 0}
+	expected := args.Map{
+		"pathEmpty": true,
+		"line": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Dispose", actual)
 }
 
@@ -680,10 +758,18 @@ func Test_Cov8_TraceCollection_Basic(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipNone()
 
 	// Act
-	actual := args.Map{"hasAny": tc.HasAnyItem(), "lenGt0": tc.Length() > 0, "count": tc.Count()}
+	actual := args.Map{
+		"hasAny": tc.HasAnyItem(),
+		"lenGt0": tc.Length() > 0,
+		"count": tc.Count(),
+	}
 
 	// Assert
-	expected := args.Map{"hasAny": true, "lenGt0": true, "count": tc.Length()}
+	expected := args.Map{
+		"hasAny": true,
+		"lenGt0": true,
+		"count": tc.Length(),
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- basic", actual)
 }
 
@@ -692,10 +778,16 @@ func Test_Cov8_TraceCollection_IsEmpty(t *testing.T) {
 	tc := &codestack.TraceCollection{}
 
 	// Act
-	actual := args.Map{"isEmpty": tc.IsEmpty(), "lastIndex": tc.LastIndex()}
+	actual := args.Map{
+		"isEmpty": tc.IsEmpty(),
+		"lastIndex": tc.LastIndex(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "lastIndex": -1}
+	expected := args.Map{
+		"isEmpty": true,
+		"lastIndex": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns empty -- IsEmpty", actual)
 }
 
@@ -719,10 +811,16 @@ func Test_Cov8_TraceCollection_FirstAndLast(t *testing.T) {
 		last := tc.Last()
 
 	// Act
-		actual := args.Map{"firstOk": first.IsOkay, "lastOk": last.IsOkay}
+		actual := args.Map{
+			"firstOk": first.IsOkay,
+			"lastOk": last.IsOkay,
+		}
 
 	// Assert
-		expected := args.Map{"firstOk": true, "lastOk": true}
+		expected := args.Map{
+			"firstOk": true,
+			"lastOk": true,
+		}
 		expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- First and Last", actual)
 	}
 }
@@ -825,10 +923,16 @@ func Test_Cov8_TraceCollection_HasIndex(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipNone()
 
 	// Act
-	actual := args.Map{"has0": tc.HasIndex(0), "hasBig": tc.HasIndex(99999)}
+	actual := args.Map{
+		"has0": tc.HasIndex(0),
+		"hasBig": tc.HasIndex(99999),
+	}
 
 	// Assert
-	expected := args.Map{"has0": true, "hasBig": false}
+	expected := args.Map{
+		"has0": true,
+		"hasBig": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- HasIndex", actual)
 }
 
@@ -981,10 +1085,16 @@ func Test_Cov8_TraceCollection_ClonePtr(t *testing.T) {
 	cloned := tc.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "sameLen": cloned.Length() == tc.Length()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"sameLen": cloned.Length() == tc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "sameLen": true}
+	expected := args.Map{
+		"notNil": true,
+		"sameLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ClonePtr", actual)
 }
 
@@ -1037,10 +1147,16 @@ func Test_Cov8_TraceCollection_Reverse_Two(t *testing.T) {
 	result := tc.Reverse()
 
 	// Act
-	actual := args.Map{"first": result.Items[0].PackageName, "second": result.Items[1].PackageName}
+	actual := args.Map{
+		"first": result.Items[0].PackageName,
+		"second": result.Items[1].PackageName,
+	}
 
 	// Assert
-	expected := args.Map{"first": "b", "second": "a"}
+	expected := args.Map{
+		"first": "b",
+		"second": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Reverse two", actual)
 }
 
@@ -1053,10 +1169,16 @@ func Test_Cov8_TraceCollection_Reverse_Three(t *testing.T) {
 	result := tc.Reverse()
 
 	// Act
-	actual := args.Map{"first": result.Items[0].PackageName, "last": result.Items[2].PackageName}
+	actual := args.Map{
+		"first": result.Items[0].PackageName,
+		"last": result.Items[2].PackageName,
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Reverse three", actual)
 }
 
@@ -1214,10 +1336,16 @@ func Test_Cov8_TraceCollection_GetPagesSize(t *testing.T) {
 	tc := &codestack.TraceCollection{Items: []codestack.Trace{t1, t2, t3}}
 
 	// Act
-	actual := args.Map{"pages": tc.GetPagesSize(2), "zero": tc.GetPagesSize(0)}
+	actual := args.Map{
+		"pages": tc.GetPagesSize(2),
+		"zero": tc.GetPagesSize(0),
+	}
 
 	// Assert
-	expected := args.Map{"pages": 2, "zero": 0}
+	expected := args.Map{
+		"pages": 2,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- GetPagesSize", actual)
 }
 
@@ -1551,10 +1679,16 @@ func Test_Cov8_TraceCollection_Serializer(t *testing.T) {
 	bytes, err := tc.Serializer()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "lenGt0": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"lenGt0": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "lenGt0": true}
+	expected := args.Map{
+		"noErr": true,
+		"lenGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Serializer", actual)
 }
 
@@ -1707,10 +1841,16 @@ func Test_Cov8_TraceCollection_StringsUsingFmt(t *testing.T) {
 	result := tc.StringsUsingFmt(func(trace *codestack.Trace) string { return "x" })
 
 	// Act
-	actual := args.Map{"lenGt0": len(result) > 0, "first": result[0]}
+	actual := args.Map{
+		"lenGt0": len(result) > 0,
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"lenGt0": true, "first": "x"}
+	expected := args.Map{
+		"lenGt0": true,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- StringsUsingFmt", actual)
 }
 
@@ -1892,10 +2032,16 @@ func Test_Cov8_TraceCollection_ConcatNew(t *testing.T) {
 	result := tc.ConcatNew(codestack.Trace{PackageName: "b"})
 
 	// Act
-	actual := args.Map{"len": result.Length(), "origLen": tc.Length()}
+	actual := args.Map{
+		"len": result.Length(),
+		"origLen": tc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "origLen": 1}
+	expected := args.Map{
+		"len": 2,
+		"origLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ConcatNew", actual)
 }
 
@@ -2011,10 +2157,16 @@ func Test_Cov8_TraceCollection_ParseInjectUsingJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "lenGt0": result.Length() > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"lenGt0": result.Length() > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "lenGt0": true}
+	expected := args.Map{
+		"noErr": true,
+		"lenGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -2150,10 +2302,16 @@ func Test_Cov8_TraceCollection_InsertAt(t *testing.T) {
 	tc.InsertAt(0, inserted)
 
 	// Act
-	actual := args.Map{"first": tc.Items[0].PackageName, "len": tc.Length()}
+	actual := args.Map{
+		"first": tc.Items[0].PackageName,
+		"len": tc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "x", "len": 3}
+	expected := args.Map{
+		"first": "x",
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- InsertAt", actual)
 }
 
@@ -2164,10 +2322,18 @@ func Test_Cov8_NameOf_All_Empty(t *testing.T) {
 	full, pkg, method := codestack.NameOf.All("")
 
 	// Act
-	actual := args.Map{"full": full, "pkg": pkg, "method": method}
+	actual := args.Map{
+		"full": full,
+		"pkg": pkg,
+		"method": method,
+	}
 
 	// Assert
-	expected := args.Map{"full": "", "pkg": "", "method": ""}
+	expected := args.Map{
+		"full": "",
+		"pkg": "",
+		"method": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NameOf.All returns empty -- empty", actual)
 }
 
@@ -2339,10 +2505,16 @@ func Test_Cov8_File_PathLineSep(t *testing.T) {
 	path, line := codestack.File.PathLineSep(0)
 
 	// Act
-	actual := args.Map{"pathNotEmpty": path != "", "lineGt0": line > 0}
+	actual := args.Map{
+		"pathNotEmpty": path != "",
+		"lineGt0": line > 0,
+	}
 
 	// Assert
-	expected := args.Map{"pathNotEmpty": true, "lineGt0": true}
+	expected := args.Map{
+		"pathNotEmpty": true,
+		"lineGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "File.PathLineSep returns correct value -- with args", actual)
 }
 
@@ -2351,10 +2523,16 @@ func Test_Cov8_File_PathLineSepDefault(t *testing.T) {
 	path, line := codestack.File.PathLineSepDefault()
 
 	// Act
-	actual := args.Map{"pathNotEmpty": path != "", "lineGt0": line > 0}
+	actual := args.Map{
+		"pathNotEmpty": path != "",
+		"lineGt0": line > 0,
+	}
 
 	// Assert
-	expected := args.Map{"pathNotEmpty": true, "lineGt0": true}
+	expected := args.Map{
+		"pathNotEmpty": true,
+		"lineGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "File.PathLineSepDefault returns correct value -- with args", actual)
 }
 

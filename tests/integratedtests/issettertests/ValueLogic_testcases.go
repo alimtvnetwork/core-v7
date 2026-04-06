@@ -87,37 +87,58 @@ var isOffLogicallyTestCases = []coretestcases.CaseV1{
 var wildcardApplyTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "WildcardApply - Wildcard passes through true",
-		ArrangeInput:  args.Map{"value": issetter.Wildcard, "input": true},
+		ArrangeInput:  args.Map{
+			"value": issetter.Wildcard,
+			"input": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "WildcardApply - Wildcard passes through false",
-		ArrangeInput:  args.Map{"value": issetter.Wildcard, "input": false},
+		ArrangeInput:  args.Map{
+			"value": issetter.Wildcard,
+			"input": false,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 	{
 		Title:         "WildcardApply - Uninitialized passes through true",
-		ArrangeInput:  args.Map{"value": issetter.Uninitialized, "input": true},
+		ArrangeInput:  args.Map{
+			"value": issetter.Uninitialized,
+			"input": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "WildcardApply - Unset passes through false",
-		ArrangeInput:  args.Map{"value": issetter.Unset, "input": false},
+		ArrangeInput:  args.Map{
+			"value": issetter.Unset,
+			"input": false,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 	{
 		Title:         "WildcardApply - True ignores input returns true",
-		ArrangeInput:  args.Map{"value": issetter.True, "input": false},
+		ArrangeInput:  args.Map{
+			"value": issetter.True,
+			"input": false,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "WildcardApply - False ignores input returns false",
-		ArrangeInput:  args.Map{"value": issetter.False, "input": true},
+		ArrangeInput:  args.Map{
+			"value": issetter.False,
+			"input": true,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 	{
 		Title:         "WildcardApply - Set ignores input returns false",
-		ArrangeInput:  args.Map{"value": issetter.Set, "input": true},
+		ArrangeInput:  args.Map{
+			"value": issetter.Set,
+			"input": true,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 }
@@ -129,17 +150,26 @@ var wildcardApplyTestCases = []coretestcases.CaseV1{
 var isWildcardOrBoolTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IsWildcardOrBool - Wildcard always true",
-		ArrangeInput:  args.Map{"value": issetter.Wildcard, "input": false},
+		ArrangeInput:  args.Map{
+			"value": issetter.Wildcard,
+			"input": false,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "IsWildcardOrBool - True with true",
-		ArrangeInput:  args.Map{"value": issetter.True, "input": true},
+		ArrangeInput:  args.Map{
+			"value": issetter.True,
+			"input": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "IsWildcardOrBool - False with false",
-		ArrangeInput:  args.Map{"value": issetter.False, "input": false},
+		ArrangeInput:  args.Map{
+			"value": issetter.False,
+			"input": false,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 }
@@ -151,27 +181,52 @@ var isWildcardOrBoolTestCases = []coretestcases.CaseV1{
 var toByteConditionTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToByteCondition - True returns trueVal",
-		ArrangeInput:  args.Map{"value": issetter.True, "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.True,
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 10},
 	},
 	{
 		Title:         "ToByteCondition - False returns falseVal",
-		ArrangeInput:  args.Map{"value": issetter.False, "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.False,
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 20},
 	},
 	{
 		Title:         "ToByteCondition - Uninitialized returns invalid",
-		ArrangeInput:  args.Map{"value": issetter.Uninitialized, "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.Uninitialized,
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 255},
 	},
 	{
 		Title:         "ToByteCondition - Set returns invalid",
-		ArrangeInput:  args.Map{"value": issetter.Set, "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.Set,
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 255},
 	},
 	{
 		Title:         "ToByteCondition - Wildcard returns invalid",
-		ArrangeInput:  args.Map{"value": issetter.Wildcard, "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.Wildcard,
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 255},
 	},
 }
@@ -183,22 +238,46 @@ var toByteConditionTestCases = []coretestcases.CaseV1{
 var toByteConditionWithWildcardTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToByteConditionWithWildcard - Wildcard returns wildcard byte",
-		ArrangeInput:  args.Map{"value": issetter.Wildcard, "wildcardVal": byte(99), "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.Wildcard,
+			"wildcardVal": byte(99),
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 99},
 	},
 	{
 		Title:         "ToByteConditionWithWildcard - True returns trueVal",
-		ArrangeInput:  args.Map{"value": issetter.True, "wildcardVal": byte(99), "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.True,
+			"wildcardVal": byte(99),
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 10},
 	},
 	{
 		Title:         "ToByteConditionWithWildcard - False returns falseVal",
-		ArrangeInput:  args.Map{"value": issetter.False, "wildcardVal": byte(99), "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.False,
+			"wildcardVal": byte(99),
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 20},
 	},
 	{
 		Title:         "ToByteConditionWithWildcard - Uninitialized returns invalid",
-		ArrangeInput:  args.Map{"value": issetter.Uninitialized, "wildcardVal": byte(99), "trueVal": byte(10), "falseVal": byte(20), "invalidVal": byte(255)},
+		ArrangeInput:  args.Map{
+			"value": issetter.Uninitialized,
+			"wildcardVal": byte(99),
+			"trueVal": byte(10),
+			"falseVal": byte(20),
+			"invalidVal": byte(255),
+		},
 		ExpectedInput: args.Map{"result": 255},
 	},
 }
@@ -358,28 +437,58 @@ var isNegativeTestCases = []coretestcases.CaseV1{
 var getSetBoolTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "GetSetBoolOnInvalid - already True returns true ignores setter",
-		ArrangeInput:  args.Map{"initial": issetter.True, "setter": false},
-		ExpectedInput: args.Map{"result": true, "isTrueOrFalse": true},
+		ArrangeInput:  args.Map{
+			"initial": issetter.True,
+			"setter": false,
+		},
+		ExpectedInput: args.Map{
+			"result": true,
+			"isTrueOrFalse": true,
+		},
 	},
 	{
 		Title:         "GetSetBoolOnInvalid - already False returns false ignores setter",
-		ArrangeInput:  args.Map{"initial": issetter.False, "setter": true},
-		ExpectedInput: args.Map{"result": false, "isTrueOrFalse": true},
+		ArrangeInput:  args.Map{
+			"initial": issetter.False,
+			"setter": true,
+		},
+		ExpectedInput: args.Map{
+			"result": false,
+			"isTrueOrFalse": true,
+		},
 	},
 	{
 		Title:         "GetSetBoolOnInvalid - Uninitialized with true sets True",
-		ArrangeInput:  args.Map{"initial": issetter.Uninitialized, "setter": true},
-		ExpectedInput: args.Map{"result": true, "isTrueOrFalse": true},
+		ArrangeInput:  args.Map{
+			"initial": issetter.Uninitialized,
+			"setter": true,
+		},
+		ExpectedInput: args.Map{
+			"result": true,
+			"isTrueOrFalse": true,
+		},
 	},
 	{
 		Title:         "GetSetBoolOnInvalid - Uninitialized with false sets False",
-		ArrangeInput:  args.Map{"initial": issetter.Uninitialized, "setter": false},
-		ExpectedInput: args.Map{"result": false, "isTrueOrFalse": true},
+		ArrangeInput:  args.Map{
+			"initial": issetter.Uninitialized,
+			"setter": false,
+		},
+		ExpectedInput: args.Map{
+			"result": false,
+			"isTrueOrFalse": true,
+		},
 	},
 	{
 		Title:         "GetSetBoolOnInvalid - Set triggers setter with true",
-		ArrangeInput:  args.Map{"initial": issetter.Set, "setter": true},
-		ExpectedInput: args.Map{"result": true, "isTrueOrFalse": true},
+		ArrangeInput:  args.Map{
+			"initial": issetter.Set,
+			"setter": true,
+		},
+		ExpectedInput: args.Map{
+			"result": true,
+			"isTrueOrFalse": true,
+		},
 	},
 }
 
@@ -391,17 +500,29 @@ var lazyEvaluateBoolTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "LazyEvaluateBool - Uninitialized calls func sets True",
 		ArrangeInput:  args.Map{"initial": issetter.Uninitialized},
-		ExpectedInput: args.Map{"called": true, "returnedTrue": true, "isTrue": true},
+		ExpectedInput: args.Map{
+			"called": true,
+			"returnedTrue": true,
+			"isTrue": true,
+		},
 	},
 	{
 		Title:         "LazyEvaluateBool - already True skips func",
 		ArrangeInput:  args.Map{"initial": issetter.True},
-		ExpectedInput: args.Map{"called": false, "returnedTrue": false, "isTrue": true},
+		ExpectedInput: args.Map{
+			"called": false,
+			"returnedTrue": false,
+			"isTrue": true,
+		},
 	},
 	{
 		Title:         "LazyEvaluateBool - already False skips func",
 		ArrangeInput:  args.Map{"initial": issetter.False},
-		ExpectedInput: args.Map{"called": false, "returnedTrue": false, "isTrue": false},
+		ExpectedInput: args.Map{
+			"called": false,
+			"returnedTrue": false,
+			"isTrue": false,
+		},
 	},
 }
 
@@ -413,16 +534,28 @@ var lazyEvaluateSetTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "LazyEvaluateSet - Uninitialized calls func sets Set",
 		ArrangeInput:  args.Map{"initial": issetter.Uninitialized},
-		ExpectedInput: args.Map{"called": true, "returnedTrue": true, "isSet": true},
+		ExpectedInput: args.Map{
+			"called": true,
+			"returnedTrue": true,
+			"isSet": true,
+		},
 	},
 	{
 		Title:         "LazyEvaluateSet - already Set skips func",
 		ArrangeInput:  args.Map{"initial": issetter.Set},
-		ExpectedInput: args.Map{"called": false, "returnedTrue": false, "isSet": true},
+		ExpectedInput: args.Map{
+			"called": false,
+			"returnedTrue": false,
+			"isSet": true,
+		},
 	},
 	{
 		Title:         "LazyEvaluateSet - already Unset skips func",
 		ArrangeInput:  args.Map{"initial": issetter.Unset},
-		ExpectedInput: args.Map{"called": false, "returnedTrue": false, "isSet": false},
+		ExpectedInput: args.Map{
+			"called": false,
+			"returnedTrue": false,
+			"isSet": false,
+		},
 	},
 }

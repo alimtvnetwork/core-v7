@@ -55,10 +55,16 @@ func Test_Cov43_KeyVal_KeyDynamicPtr_Valid(t *testing.T) {
 	d := kv.KeyDynamicPtr()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal KeyDynamicPtr valid", actual)
 }
 
@@ -80,10 +86,16 @@ func Test_Cov43_KeyVal_ValueDynamicPtr_Valid(t *testing.T) {
 	d := kv.ValueDynamicPtr()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal ValueDynamicPtr valid", actual)
 }
 
@@ -505,10 +517,16 @@ func Test_Cov43_KeyVal_CastKeyVal_Valid(t *testing.T) {
 	err := kv.CastKeyVal(&k, &v)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": v}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": v,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "myval"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "myval",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal CastKeyVal valid", actual)
 }
 
@@ -579,10 +597,16 @@ func Test_Cov43_KeyVal_ReflectSetTo_Valid(t *testing.T) {
 	err := kv.ReflectSetTo(&v)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": v}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"v": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal ReflectSetTo valid", actual)
 }
 
@@ -672,10 +696,16 @@ func Test_Cov43_KeyVal_Serialize(t *testing.T) {
 	b, err := kv.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal Serialize", actual)
 }
 
@@ -687,10 +717,16 @@ func Test_Cov43_KeyVal_ParseInjectUsingJson(t *testing.T) {
 	result, err := kv2.ParseInjectUsingJson(&jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyVal ParseInjectUsingJson", actual)
 }
 

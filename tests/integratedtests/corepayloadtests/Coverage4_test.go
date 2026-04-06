@@ -24,7 +24,12 @@ func Test_Cov4_Attributes_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "self": true, "nilNil": true, "nilNonNil": false}
+	expected := args.Map{
+		"equal": true,
+		"self": true,
+		"nilNil": true,
+		"nilNonNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- IsEqual", actual)
 }
 
@@ -127,10 +132,16 @@ func Test_Cov4_Attributes_GetStringKeyValue(t *testing.T) {
 	_, nilFound := nilA.GetStringKeyValue("x")
 
 	// Act
-	actual := args.Map{"found": found, "nilFound": nilFound}
+	actual := args.Map{
+		"found": found,
+		"nilFound": nilFound,
+	}
 
 	// Assert
-	expected := args.Map{"found": false, "nilFound": false}
+	expected := args.Map{
+		"found": false,
+		"nilFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- GetStringKeyValue", actual)
 }
 
@@ -145,7 +156,10 @@ func Test_Cov4_Attributes_IsErrorEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equalNil": true, "differentNil": false}
+	expected := args.Map{
+		"equalNil": true,
+		"differentNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns error -- IsErrorEqual", actual)
 }
 
@@ -303,7 +317,10 @@ func Test_Cov4_AuthInfo_Clone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"action": "login", "nilClone": true}
+	expected := args.Map{
+		"action": "login",
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Clone", actual)
 }
 
@@ -401,7 +418,11 @@ func Test_Cov4_TypedPayloadWrapper_JSON(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "name": "alice"}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"name": "alice",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- JSON", actual)
 }
 
@@ -414,10 +435,16 @@ func Test_Cov4_TypedPayloadWrapper_Serialize(t *testing.T) {
 	bytes, err := typed.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- Serialize", actual)
 }
 

@@ -142,7 +142,12 @@ func Test_Cov3_Integer16Within_ToByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"zero": true, "max255": true, "over255": false, "negative": false}
+	expected := args.Map{
+		"zero": true,
+		"max255": true,
+		"over255": false,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer16Within ToByte returns bool -- boundary", actual)
 }
 
@@ -154,7 +159,10 @@ func Test_Cov3_Integer16Within_ToUnsignedInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"zero": true, "negative": false}
+	expected := args.Map{
+		"zero": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer16Within ToUnsignedInt16 returns bool -- boundary", actual)
 }
 
@@ -166,7 +174,10 @@ func Test_Cov3_Integer16Within_ToUnsignedInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": true, "negative": false}
+	expected := args.Map{
+		"positive": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer16Within ToUnsignedInt32 returns bool -- boundary", actual)
 }
 
@@ -178,7 +189,10 @@ func Test_Cov3_Integer16Within_ToUnsignedInt64(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": true, "negative": false}
+	expected := args.Map{
+		"positive": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer16Within ToUnsignedInt64 returns bool -- boundary", actual)
 }
 
@@ -190,7 +204,10 @@ func Test_Cov3_Integer16Within_ToInt8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer16Within ToInt8 returns bool -- boundary", actual)
 }
 
@@ -206,7 +223,10 @@ func Test_Cov3_Integer32Within_ToUnsignedInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToUnsignedInt16 returns bool -- boundary", actual)
 }
 
@@ -218,7 +238,10 @@ func Test_Cov3_Integer32Within_ToUnsignedInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": true, "negative": false}
+	expected := args.Map{
+		"positive": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToUnsignedInt32 returns bool -- boundary", actual)
 }
 
@@ -230,7 +253,10 @@ func Test_Cov3_Integer32Within_ToUnsignedInt64(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": true, "negative": false}
+	expected := args.Map{
+		"positive": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToUnsignedInt64 returns bool -- boundary", actual)
 }
 
@@ -242,7 +268,10 @@ func Test_Cov3_Integer32Within_ToInt8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToInt8 returns bool -- boundary", actual)
 }
 
@@ -254,7 +283,10 @@ func Test_Cov3_Integer32Within_ToInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToInt16 returns bool -- boundary", actual)
 }
 
@@ -266,7 +298,10 @@ func Test_Cov3_Integer32Within_ToInt(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer32Within ToInt returns bool -- boundary", actual)
 }
 
@@ -282,7 +317,10 @@ func Test_Cov3_Integer64Within_ToByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToByte returns bool -- boundary", actual)
 }
 
@@ -294,7 +332,10 @@ func Test_Cov3_Integer64Within_ToUnsignedInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToUnsignedInt16 returns bool -- boundary", actual)
 }
 
@@ -306,7 +347,10 @@ func Test_Cov3_Integer64Within_ToUnsignedInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToUnsignedInt32 returns bool -- boundary", actual)
 }
 
@@ -318,7 +362,10 @@ func Test_Cov3_Integer64Within_ToUnsignedInt64(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": true, "negative": false}
+	expected := args.Map{
+		"positive": true,
+		"negative": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToUnsignedInt64 returns bool -- boundary", actual)
 }
 
@@ -330,7 +377,10 @@ func Test_Cov3_Integer64Within_ToInt8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToInt8 returns bool -- boundary", actual)
 }
 
@@ -342,7 +392,10 @@ func Test_Cov3_Integer64Within_ToInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToInt16 returns bool -- boundary", actual)
 }
 
@@ -354,7 +407,10 @@ func Test_Cov3_Integer64Within_ToInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToInt32 returns bool -- boundary", actual)
 }
 
@@ -366,7 +422,10 @@ func Test_Cov3_Integer64Within_ToInt(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "minInt64": true}
+	expected := args.Map{
+		"within": true,
+		"minInt64": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64Within ToInt returns bool -- boundary", actual)
 }
 
@@ -382,7 +441,10 @@ func Test_Cov3_Integer64OutOfRange_Byte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange Byte returns bool -- boundary", actual)
 }
 
@@ -394,7 +456,10 @@ func Test_Cov3_Integer64OutOfRange_UnsignedInt16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange UnsignedInt16 returns bool -- boundary", actual)
 }
 
@@ -406,7 +471,10 @@ func Test_Cov3_Integer64OutOfRange_UnsignedInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange UnsignedInt32 returns bool -- boundary", actual)
 }
 
@@ -418,7 +486,10 @@ func Test_Cov3_Integer64OutOfRange_UnsignedInt64(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"positive": false, "negative": true}
+	expected := args.Map{
+		"positive": false,
+		"negative": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange UnsignedInt64 returns bool -- boundary", actual)
 }
 
@@ -430,7 +501,10 @@ func Test_Cov3_Integer64OutOfRange_Int8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange Int8 returns bool -- boundary", actual)
 }
 
@@ -442,7 +516,10 @@ func Test_Cov3_Integer64OutOfRange_Int16(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64OutOfRange Int16 returns bool -- boundary", actual)
 }
 
@@ -476,7 +553,10 @@ func Test_Cov3_IntegerOutOfRange_ToUnsignedInt32(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": false, "outside": true}
+	expected := args.Map{
+		"within": false,
+		"outside": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerOutOfRange ToUnsignedInt32 returns bool -- boundary", actual)
 }
 
@@ -501,6 +581,9 @@ func Test_Cov3_UnsignedInt16Within_ToByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"within": true, "outside": false}
+	expected := args.Map{
+		"within": true,
+		"outside": false,
+	}
 	expected.ShouldBeEqual(t, 0, "UnsignedInt16Within ToByte returns bool -- boundary", actual)
 }

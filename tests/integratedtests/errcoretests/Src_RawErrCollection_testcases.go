@@ -51,29 +51,73 @@ var rawErrCollAddTestCases = []coretestcases.CaseV1{
 // ── RawErrCollection String/Error methods ──
 
 var rawErrCollStringTestCases = []coretestcases.CaseV1{
-	{Title: "RawErrCollection.Strings returns correct -- empty then one", ExpectedInput: args.Map{"emptyLen": 0, "oneLen": 1}},
-	{Title: "RawErrCollection.String returns correct -- empty then one", ExpectedInput: args.Map{"emptyStr": "", "nonEmpty": true}},
-	{Title: "RawErrCollection.StringUsingJoiner returns correct -- empty then one", ExpectedInput: args.Map{"emptyStr": "", "nonEmpty": true}},
-	{Title: "RawErrCollection.StringUsingJoinerAdditional returns correct -- empty then one", ExpectedInput: args.Map{"emptyStr": "", "nonEmpty": true}},
-	{Title: "RawErrCollection.StringWithAdditionalMessage returns correct -- empty then one", ExpectedInput: args.Map{"emptyStr": "", "nonEmpty": true}},
+	{Title: "RawErrCollection.Strings returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyLen": 0,
+		"oneLen": 1,
+	}},
+	{Title: "RawErrCollection.String returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyStr": "",
+		"nonEmpty": true,
+	}},
+	{Title: "RawErrCollection.StringUsingJoiner returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyStr": "",
+		"nonEmpty": true,
+	}},
+	{Title: "RawErrCollection.StringUsingJoinerAdditional returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyStr": "",
+		"nonEmpty": true,
+	}},
+	{Title: "RawErrCollection.StringWithAdditionalMessage returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyStr": "",
+		"nonEmpty": true,
+	}},
 }
 
 var rawErrCollCompiledTestCases = []coretestcases.CaseV1{
-	{Title: "RawErrCollection.CompiledError returns correct -- empty then one", ExpectedInput: args.Map{"emptyNil": true, "nonNil": true}},
-	{Title: "RawErrCollection.CompiledErrorUsingJoiner returns correct -- empty then one", ExpectedInput: args.Map{"emptyNil": true, "nonNil": true}},
-	{Title: "RawErrCollection.CompiledErrorUsingJoinerAdditionalMessage returns correct -- empty then one", ExpectedInput: args.Map{"emptyNil": true, "nonNil": true}},
-	{Title: "RawErrCollection.CompiledErrorWithStackTraces returns correct -- empty then one", ExpectedInput: args.Map{"emptyNil": true, "nonNil": true}},
+	{Title: "RawErrCollection.CompiledError returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyNil": true,
+		"nonNil": true,
+	}},
+	{Title: "RawErrCollection.CompiledErrorUsingJoiner returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyNil": true,
+		"nonNil": true,
+	}},
+	{Title: "RawErrCollection.CompiledErrorUsingJoinerAdditionalMessage returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyNil": true,
+		"nonNil": true,
+	}},
+	{Title: "RawErrCollection.CompiledErrorWithStackTraces returns correct -- empty then one", ExpectedInput: args.Map{
+		"emptyNil": true,
+		"nonNil": true,
+	}},
 }
 
 var rawErrCollMiscTestCases = []coretestcases.CaseV1{
-	{Title: "RawErrCollection.Serialize returns nil -- empty collection", ExpectedInput: args.Map{"bytesNil": true, "errNil": true}},
-	{Title: "RawErrCollection.SerializeWithoutTraces returns nil -- empty collection", ExpectedInput: args.Map{"bytesNil": true, "errNil": true}},
-	{Title: "RawErrCollection.MarshalJSON returns nil -- empty collection", ExpectedInput: args.Map{"bytesNil": true, "errNil": true}},
+	{Title: "RawErrCollection.Serialize returns nil -- empty collection", ExpectedInput: args.Map{
+		"bytesNil": true,
+		"errNil": true,
+	}},
+	{Title: "RawErrCollection.SerializeWithoutTraces returns nil -- empty collection", ExpectedInput: args.Map{
+		"bytesNil": true,
+		"errNil": true,
+	}},
+	{Title: "RawErrCollection.MarshalJSON returns nil -- empty collection", ExpectedInput: args.Map{
+		"bytesNil": true,
+		"errNil": true,
+	}},
 	{Title: "RawErrCollection.UnmarshalJSON does not panic -- empty array", ExpectedInput: args.Map{"noPanic": true}},
 	{Title: "RawErrCollection.Value returns nil -- empty", ExpectedInput: args.Map{"isNil": true}},
 	{Title: "RawErrCollection.Clear returns 0 -- after add", ExpectedInput: args.Map{"len": 0}},
-	{Title: "RawErrCollection.IsErrorsCollected returns correct -- nil and error", ExpectedInput: args.Map{"nilFalse": true, "errTrue": true}},
+	{Title: "RawErrCollection.IsErrorsCollected returns correct -- nil and error", ExpectedInput: args.Map{
+		"nilFalse": true,
+		"errTrue": true,
+	}},
 	{Title: "RawErrCollection.CountStateChangeTracker returns same -- no changes", ExpectedInput: args.Map{"isSame": true}},
 	{Title: "RawErrCollection.ToRawErrCollection returns non-nil -- valid", ExpectedInput: args.Map{"nonNil": true}},
-	{Title: "RawErrCollection.ReflectSetTo returns error -- value type", ExpectedInput: args.Map{"valueErr": true, "nilPtrErr": true, "validNoErr": true, "otherErr": true}},
+	{Title: "RawErrCollection.ReflectSetTo returns error -- value type", ExpectedInput: args.Map{
+		"valueErr": true,
+		"nilPtrErr": true,
+		"validNoErr": true,
+		"otherErr": true,
+	}},
 }

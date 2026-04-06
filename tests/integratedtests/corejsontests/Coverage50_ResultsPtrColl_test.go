@@ -204,8 +204,14 @@ func Test_Cov50_ResultsPtrColl_ParseInjectUsingJson_Valid(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "hasItems": result.Length() > 0}
-	expected := args.Map{"noErr": true, "hasItems": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasItems": result.Length() > 0,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"hasItems": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson parses -- valid", actual)
 }
 
@@ -250,8 +256,14 @@ func Test_Cov50_ResultsPtrColl_NonPtrPtr(t *testing.T) {
 	ptr := coll.Ptr()
 
 	// Assert
-	actual := args.Map{"nonPtrLen": nonPtr.Length(), "ptrLen": ptr.Length()}
-	expected := args.Map{"nonPtrLen": 1, "ptrLen": 1}
+	actual := args.Map{
+		"nonPtrLen": nonPtr.Length(),
+		"ptrLen": ptr.Length(),
+	}
+	expected := args.Map{
+		"nonPtrLen": 1,
+		"ptrLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "NonPtr/Ptr return same -- 1 item", actual)
 }
 
@@ -331,7 +343,13 @@ func Test_Cov50_NewResultsPtrColl_DeserializeUsingResult(t *testing.T) {
 	result, err := corejson.NewResultsPtrCollection.DeserializeUsingResult(jsonResult)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "hasItems": result != nil && result.Length() > 0}
-	expected := args.Map{"noErr": true, "hasItems": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasItems": result != nil && result.Length() > 0,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"hasItems": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeUsingResult returns coll -- valid", actual)
 }

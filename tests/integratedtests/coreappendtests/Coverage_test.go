@@ -171,7 +171,11 @@ func Test_Cov_MapStringStringAppend_Basic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasA": true, "hasB": true, "hasC": true}
+	expected := args.Map{
+		"hasA": true,
+		"hasB": true,
+		"hasC": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAppend basic -- merged", actual)
 }
 

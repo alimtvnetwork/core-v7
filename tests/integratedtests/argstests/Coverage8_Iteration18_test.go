@@ -11,7 +11,10 @@ import (
 
 func Test_I18_Map_Length(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"result": m.Length() != 2}
@@ -23,7 +26,10 @@ func Test_I18_Map_Length(t *testing.T) {
 
 func Test_I18_Map_ArgsCount(t *testing.T) {
 	// Arrange
-	m := args.Map{"first": 1, "second": 2}
+	m := args.Map{
+		"first": 1,
+		"second": 2,
+	}
 	// ArgsCount subtracts 1 for func (always present as invalid wrapper)
 
 	// Act
@@ -37,7 +43,11 @@ func Test_I18_Map_ArgsCount(t *testing.T) {
 func Test_I18_Map_ArgsCount_WithFuncAndExpect(t *testing.T) {
 	// Arrange
 	fn := func() {}
-	m := args.Map{"first": 1, "func": fn, "expected": "x"}
+	m := args.Map{
+		"first": 1,
+		"func": fn,
+		"expected": "x",
+	}
 	count := m.ArgsCount()
 
 	// Act
@@ -137,7 +147,10 @@ func Test_I18_Map_HasExpect(t *testing.T) {
 
 func Test_I18_Map_GetByIndex(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	item := m.GetByIndex(0)
 
 	// Act
@@ -220,7 +233,10 @@ func Test_I18_Map_Has(t *testing.T) {
 
 func Test_I18_Map_HasDefinedAll(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
@@ -270,7 +286,10 @@ func Test_I18_Map_IsKeyMissing(t *testing.T) {
 
 func Test_I18_Map_SortedKeys(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys, err := m.SortedKeys()
 
 	// Act
@@ -617,7 +636,10 @@ func Test_I18_Map_GetAsAnyItems(t *testing.T) {
 
 func Test_I18_Map_ValidArgs(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	validArgs := m.ValidArgs()
 
 	// Act
@@ -630,7 +652,10 @@ func Test_I18_Map_ValidArgs(t *testing.T) {
 
 func Test_I18_Map_Args(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	a := m.Args("a", "b")
 
 	// Act

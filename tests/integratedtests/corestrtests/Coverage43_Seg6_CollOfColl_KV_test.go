@@ -17,10 +17,16 @@ func Test_Seg6_COC_IsEmpty(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.LenCap(0, 0)
 
 		// Act
-		actual := args.Map{"empty": coc.IsEmpty(), "hasItems": coc.HasItems()}
+		actual := args.Map{
+			"empty": coc.IsEmpty(),
+			"hasItems": coc.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -33,10 +39,16 @@ func Test_Seg6_COC_Add(t *testing.T) {
 		coc.Add(c)
 
 		// Act
-		actual := args.Map{"len": coc.Length(), "allLen": coc.AllIndividualItemsLength()}
+		actual := args.Map{
+			"len": coc.Length(),
+			"allLen": coc.AllIndividualItemsLength(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "allLen": 2}
+		expected := args.Map{
+			"len": 1,
+			"allLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 1 collection 2 items", actual)
 	})
 }
@@ -305,10 +317,16 @@ func Test_Seg6_COC_MarshalJSON(t *testing.T) {
 		b, err := coc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -391,7 +409,12 @@ func Test_Seg6_COC_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true, "marsh": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+			"marsh": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }
@@ -463,10 +486,16 @@ func Test_Seg6_KVC_IsEmpty(t *testing.T) {
 		kvc := &corestr.KeyValueCollection{}
 
 		// Act
-		actual := args.Map{"empty": kvc.IsEmpty(), "hasAny": kvc.HasAnyItem()}
+		actual := args.Map{
+			"empty": kvc.IsEmpty(),
+			"hasAny": kvc.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasAny": false}
+		expected := args.Map{
+			"empty": true,
+			"hasAny": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -478,10 +507,16 @@ func Test_Seg6_KVC_Add(t *testing.T) {
 		kvc.Add("a", "1").Add("b", "2")
 
 		// Act
-		actual := args.Map{"len": kvc.Length(), "count": kvc.Count()}
+		actual := args.Map{
+			"len": kvc.Length(),
+			"count": kvc.Count(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "count": 2}
+		expected := args.Map{
+			"len": 2,
+			"count": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 pairs", actual)
 	})
 }
@@ -699,10 +734,16 @@ func Test_Seg6_KVC_AddStringBySplit(t *testing.T) {
 		val, found := kvc.Get("key")
 
 		// Act
-		actual := args.Map{"found": found, "val": val}
+		actual := args.Map{
+			"found": found,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "value"}
+		expected := args.Map{
+			"found": true,
+			"val": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "AddStringBySplit -- key=value", actual)
 	})
 }
@@ -715,10 +756,16 @@ func Test_Seg6_KVC_AddStringBySplitTrim(t *testing.T) {
 		val, found := kvc.Get("key")
 
 		// Act
-		actual := args.Map{"found": found, "val": val}
+		actual := args.Map{
+			"found": found,
+			"val": val,
+		}
 
 		// Assert
-		expected := args.Map{"found": true, "val": "value"}
+		expected := args.Map{
+			"found": true,
+			"val": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "AddStringBySplitTrim -- trimmed", actual)
 	})
 }
@@ -732,10 +779,18 @@ func Test_Seg6_KVC_First_Last(t *testing.T) {
 		kvc.Add("a", "1").Add("b", "2")
 
 		// Act
-		actual := args.Map{"first": kvc.First().Key, "last": kvc.Last().Key, "lastIdx": kvc.LastIndex()}
+		actual := args.Map{
+			"first": kvc.First().Key,
+			"last": kvc.Last().Key,
+			"lastIdx": kvc.LastIndex(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "b", "lastIdx": 1}
+		expected := args.Map{
+			"first": "a",
+			"last": "b",
+			"lastIdx": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "First/Last -- correct", actual)
 	})
 }
@@ -775,10 +830,16 @@ func Test_Seg6_KVC_HasKey(t *testing.T) {
 		kvc.Add("a", "1")
 
 		// Act
-		actual := args.Map{"has": kvc.HasKey("a"), "miss": kvc.HasKey("z")}
+		actual := args.Map{
+			"has": kvc.HasKey("a"),
+			"miss": kvc.HasKey("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasKey -- found and missing", actual)
 	})
 }
@@ -790,10 +851,16 @@ func Test_Seg6_KVC_IsContains(t *testing.T) {
 		kvc.Add("a", "1")
 
 		// Act
-		actual := args.Map{"has": kvc.IsContains("a"), "miss": kvc.IsContains("z")}
+		actual := args.Map{
+			"has": kvc.IsContains("a"),
+			"miss": kvc.IsContains("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsContains -- found and missing", actual)
 	})
 }
@@ -805,10 +872,16 @@ func Test_Seg6_KVC_HasIndex(t *testing.T) {
 		kvc.Add("a", "1")
 
 		// Act
-		actual := args.Map{"has": kvc.HasIndex(0), "miss": kvc.HasIndex(5)}
+		actual := args.Map{
+			"has": kvc.HasIndex(0),
+			"miss": kvc.HasIndex(5),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasIndex -- found and missing", actual)
 	})
 }
@@ -822,10 +895,20 @@ func Test_Seg6_KVC_Get(t *testing.T) {
 		val2, found2 := kvc.Get("z")
 
 		// Act
-		actual := args.Map{"val": val, "found": found, "val2": val2, "found2": found2}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+			"val2": val2,
+			"found2": found2,
+		}
 
 		// Assert
-		expected := args.Map{"val": "1", "found": true, "val2": "", "found2": false}
+		expected := args.Map{
+			"val": "1",
+			"found": true,
+			"val2": "",
+			"found2": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Get -- found and missing", actual)
 	})
 }
@@ -837,10 +920,16 @@ func Test_Seg6_KVC_SafeValueAt(t *testing.T) {
 		kvc.Add("a", "1")
 
 		// Act
-		actual := args.Map{"val": kvc.SafeValueAt(0), "miss": kvc.SafeValueAt(5)}
+		actual := args.Map{
+			"val": kvc.SafeValueAt(0),
+			"miss": kvc.SafeValueAt(5),
+		}
 
 		// Assert
-		expected := args.Map{"val": "1", "miss": ""}
+		expected := args.Map{
+			"val": "1",
+			"miss": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValueAt -- found and out of bounds", actual)
 	})
 }
@@ -867,10 +956,18 @@ func Test_Seg6_KVC_SafeValuesAtIndexes(t *testing.T) {
 		result := kvc.SafeValuesAtIndexes(0, 1, 5)
 
 		// Act
-		actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+		actual := args.Map{
+			"len": len(result),
+			"first": result[0],
+			"last": result[2],
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "first": "1", "last": ""}
+		expected := args.Map{
+			"len": 3,
+			"first": "1",
+			"last": "",
+		}
 		expected.ShouldBeEqual(t, 0, "SafeValuesAtIndexes -- values", actual)
 	})
 }
@@ -1230,10 +1327,16 @@ func Test_Seg6_KVC_MarshalJSON(t *testing.T) {
 		b, err := kvc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1248,10 +1351,16 @@ func Test_Seg6_KVC_UnmarshalJSON(t *testing.T) {
 		err := kvc2.UnmarshalJSON(b)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": kvc2.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": kvc2.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -1263,10 +1372,16 @@ func Test_Seg6_KVC_UnmarshalJSON_EmptyArray(t *testing.T) {
 		err := kvc.UnmarshalJSON([]byte(`[]`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": kvc.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": kvc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 0}
+		expected := args.Map{
+			"noErr": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON empty array -- empty", actual)
 	})
 }
@@ -1279,10 +1394,16 @@ func Test_Seg6_KVC_Serialize(t *testing.T) {
 		b, err := kvc.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1362,7 +1483,11 @@ func Test_Seg6_KVC_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }
@@ -1456,7 +1581,13 @@ func Test_Seg6_KAVP_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"key": "name", "varName": "name", "valAny": true, "isEqual": true, "notEq": false}
+		expected := args.Map{
+			"key": "name",
+			"varName": "name",
+			"valAny": true,
+			"isEqual": true,
+			"notEq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Basic accessors -- correct", actual)
 	})
 }
@@ -1570,10 +1701,16 @@ func Test_Seg6_KAVP_Serialize(t *testing.T) {
 		b, err := kv.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1606,7 +1743,11 @@ func Test_Seg6_KAVP_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }
@@ -1669,10 +1810,16 @@ func Test_Seg6_KAVP_Clear(t *testing.T) {
 		kv.Clear()
 
 		// Act
-		actual := args.Map{"key": kv.Key, "isNull": kv.IsValueNull()}
+		actual := args.Map{
+			"key": kv.Key,
+			"isNull": kv.IsValueNull(),
+		}
 
 		// Assert
-		expected := args.Map{"key": "", "isNull": true}
+		expected := args.Map{
+			"key": "",
+			"isNull": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clear -- emptied", actual)
 	})
 }
@@ -1780,7 +1927,12 @@ func Test_Seg6_KVP_Is_IsKey_IsVal(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"is": true, "isNot": false, "isKey": true, "isVal": true}
+		expected := args.Map{
+			"is": true,
+			"isNot": false,
+			"isKey": true,
+			"isVal": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Is/IsKey/IsVal -- correct", actual)
 	})
 }
@@ -1791,10 +1943,16 @@ func Test_Seg6_KVP_Trim(t *testing.T) {
 		kv := &corestr.KeyValuePair{Key: " k ", Value: " v "}
 
 		// Act
-		actual := args.Map{"trimKey": kv.TrimKey(), "trimVal": kv.TrimValue()}
+		actual := args.Map{
+			"trimKey": kv.TrimKey(),
+			"trimVal": kv.TrimValue(),
+		}
 
 		// Assert
-		expected := args.Map{"trimKey": "k", "trimVal": "v"}
+		expected := args.Map{
+			"trimKey": "k",
+			"trimVal": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "Trim -- trimmed", actual)
 	})
 }
@@ -1807,10 +1965,18 @@ func Test_Seg6_KVP_ValueBool(t *testing.T) {
 		kvEmpty := &corestr.KeyValuePair{Key: "k", Value: ""}
 
 		// Act
-		actual := args.Map{"true": kvTrue.ValueBool(), "invalid": kvFalse.ValueBool(), "empty": kvEmpty.ValueBool()}
+		actual := args.Map{
+			"true": kvTrue.ValueBool(),
+			"invalid": kvFalse.ValueBool(),
+			"empty": kvEmpty.ValueBool(),
+		}
 
 		// Assert
-		expected := args.Map{"true": true, "invalid": false, "empty": false}
+		expected := args.Map{
+			"true": true,
+			"invalid": false,
+			"empty": false,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueBool -- various", actual)
 	})
 }
@@ -1822,10 +1988,20 @@ func Test_Seg6_KVP_ValueInt(t *testing.T) {
 		kvBad := &corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act
-		actual := args.Map{"val": kv.ValueInt(0), "def": kvBad.ValueInt(99), "defInt": kv.ValueDefInt(), "badDef": kvBad.ValueDefInt()}
+		actual := args.Map{
+			"val": kv.ValueInt(0),
+			"def": kvBad.ValueInt(99),
+			"defInt": kv.ValueDefInt(),
+			"badDef": kvBad.ValueDefInt(),
+		}
 
 		// Assert
-		expected := args.Map{"val": 42, "def": 99, "defInt": 42, "badDef": 0}
+		expected := args.Map{
+			"val": 42,
+			"def": 99,
+			"defInt": 42,
+			"badDef": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueInt -- various", actual)
 	})
 }
@@ -1848,7 +2024,14 @@ func Test_Seg6_KVP_ValueByte(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"val": byte(65), "bad": byte(1), "big": byte(2), "defVal": byte(65), "defBad": byte(0), "defBig": byte(0)}
+		expected := args.Map{
+			"val": byte(65),
+			"bad": byte(1),
+			"big": byte(2),
+			"defVal": byte(65),
+			"defBad": byte(0),
+			"defBig": byte(0),
+		}
 		expected.ShouldBeEqual(t, 0, "ValueByte -- various", actual)
 	})
 }
@@ -1860,10 +2043,18 @@ func Test_Seg6_KVP_ValueFloat64(t *testing.T) {
 		kvBad := &corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act
-		actual := args.Map{"val": kv.ValueFloat64(0), "bad": kvBad.ValueFloat64(9.9), "def": kv.ValueDefFloat64()}
+		actual := args.Map{
+			"val": kv.ValueFloat64(0),
+			"bad": kvBad.ValueFloat64(9.9),
+			"def": kv.ValueDefFloat64(),
+		}
 
 		// Assert
-		expected := args.Map{"val": 1.5, "bad": 9.9, "def": 1.5}
+		expected := args.Map{
+			"val": 1.5,
+			"bad": 9.9,
+			"def": 1.5,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueFloat64 -- various", actual)
 	})
 }
@@ -1875,10 +2066,16 @@ func Test_Seg6_KVP_ValueValid(t *testing.T) {
 		vv := kv.ValueValid()
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "valid": true}
+		expected := args.Map{
+			"val": "hello",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueValid -- valid", actual)
 	})
 }
@@ -1890,10 +2087,18 @@ func Test_Seg6_KVP_ValueValidOptions(t *testing.T) {
 		vv := kv.ValueValidOptions(false, "err")
 
 		// Act
-		actual := args.Map{"val": vv.Value, "valid": vv.IsValid, "msg": vv.Message}
+		actual := args.Map{
+			"val": vv.Value,
+			"valid": vv.IsValid,
+			"msg": vv.Message,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "valid": false, "msg": "err"}
+		expected := args.Map{
+			"val": "hello",
+			"valid": false,
+			"msg": "err",
+		}
 		expected.ShouldBeEqual(t, 0, "ValueValidOptions -- custom", actual)
 	})
 }
@@ -1962,10 +2167,16 @@ func Test_Seg6_KVP_Serialize(t *testing.T) {
 		b, err := kv.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1992,10 +2203,16 @@ func Test_Seg6_KVP_Clear(t *testing.T) {
 		kv.Clear()
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "", "val": ""}
+		expected := args.Map{
+			"key": "",
+			"val": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Clear -- emptied", actual)
 	})
 }

@@ -108,10 +108,16 @@ func Test_Cov_ResultsAny_IsResult2(t *testing.T) {
 	r := results.ResultsAny{Result2: "hello"}
 
 	// Act
-	actual := args.Map{"match": r.IsResult2("hello"), "noMatch": r.IsResult2("x")}
+	actual := args.Map{
+		"match": r.IsResult2("hello"),
+		"noMatch": r.IsResult2("x"),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ResultsAny returns correct value -- IsResult2", actual)
 }
 
@@ -135,10 +141,16 @@ func Test_Cov_FromResultAny_Empty(t *testing.T) {
 	r := results.FromResultAny[string, string](ra)
 
 	// Act
-	actual := args.Map{"val": r.Value, "val2": r.Result2}
+	actual := args.Map{
+		"val": r.Value,
+		"val2": r.Result2,
+	}
 
 	// Assert
-	expected := args.Map{"val": "", "val2": ""}
+	expected := args.Map{
+		"val": "",
+		"val2": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns empty -- empty", actual)
 }
 
@@ -154,10 +166,16 @@ func Test_Cov_Invoke_NilReceiver_Ext(t *testing.T) {
 	// Hello() doesn't dereference receiver, so nil receiver works fine
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "val": r.Value}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"val": r.Value,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "val": "hi"}
+	expected := args.Map{
+		"panicked": false,
+		"val": "hi",
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke panics -- nil receiver panics", actual)
 }
 
@@ -167,10 +185,18 @@ func Test_Cov_Invoke_ValidCall_Ext(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*extCovTestStruct).Hello, s)
 
 	// Act
-	actual := args.Map{"value": fmt.Sprintf("%v", r.Value), "panicked": r.Panicked, "count": r.ReturnCount}
+	actual := args.Map{
+		"value": fmt.Sprintf("%v", r.Value),
+		"panicked": r.Panicked,
+		"count": r.ReturnCount,
+	}
 
 	// Assert
-	expected := args.Map{"value": "hi", "panicked": false, "count": 1}
+	expected := args.Map{
+		"value": "hi",
+		"panicked": false,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns non-empty -- valid", actual)
 }
 
@@ -185,10 +211,16 @@ func Test_Cov_Invoke_ErrorReturn_Ext(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*extCovErrStruct).Fail, s)
 
 	// Act
-	actual := args.Map{"hasError": r.HasError(), "panicked": r.Panicked}
+	actual := args.Map{
+		"hasError": r.HasError(),
+		"panicked": r.Panicked,
+	}
 
 	// Assert
-	expected := args.Map{"hasError": true, "panicked": false}
+	expected := args.Map{
+		"hasError": true,
+		"panicked": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns error -- error return", actual)
 }
 
@@ -198,10 +230,16 @@ func Test_Cov_Invoke_NilErrorReturn_Ext(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*extCovErrStruct).Ok, s)
 
 	// Act
-	actual := args.Map{"hasError": r.HasError(), "panicked": r.Panicked}
+	actual := args.Map{
+		"hasError": r.HasError(),
+		"panicked": r.Panicked,
+	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "panicked": false}
+	expected := args.Map{
+		"hasError": false,
+		"panicked": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns nil -- nil error return", actual)
 }
 
@@ -215,10 +253,16 @@ func Test_Cov_Invoke_VoidReturn_Ext(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*extCovVoidStruct).DoNothing, s)
 
 	// Act
-	actual := args.Map{"count": r.ReturnCount, "panicked": r.Panicked}
+	actual := args.Map{
+		"count": r.ReturnCount,
+		"panicked": r.Panicked,
+	}
 
 	// Assert
-	expected := args.Map{"count": 0, "panicked": false}
+	expected := args.Map{
+		"count": 0,
+		"panicked": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct value -- void", actual)
 }
 
@@ -263,10 +307,16 @@ func Test_Cov_Invoke_NilArg_Ext(t *testing.T) {
 	r := results.InvokeWithPanicRecovery((*extCovArgStruct).WithArg, s, nil)
 
 	// Act
-	actual := args.Map{"panicked": r.Panicked, "count": r.ReturnCount}
+	actual := args.Map{
+		"panicked": r.Panicked,
+		"count": r.ReturnCount,
+	}
 
 	// Assert
-	expected := args.Map{"panicked": false, "count": 1}
+	expected := args.Map{
+		"panicked": false,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns nil -- nil arg", actual)
 }
 
@@ -311,9 +361,17 @@ func Test_Cov_MethodName_Combined_Ext(t *testing.T) {
 	nonFunc := results.MethodName("notafunc")
 
 	// Act
-	actual := args.Map{"name": name, "nil": nilName, "nonFunc": nonFunc}
+	actual := args.Map{
+		"name": name,
+		"nil": nilName,
+		"nonFunc": nonFunc,
+	}
 
 	// Assert
-	expected := args.Map{"name": "Hello", "nil": "", "nonFunc": ""}
+	expected := args.Map{
+		"name": "Hello",
+		"nil": "",
+		"nonFunc": "",
+	}
 	expected.ShouldBeEqual(t, 0, "MethodName returns correct value -- combined", actual)
 }

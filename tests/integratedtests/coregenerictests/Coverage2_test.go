@@ -191,10 +191,16 @@ func Test_Cov2_Collection_Reverse(t *testing.T) {
 	col.Reverse()
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last()}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 3, "last": 1}
+	expected := args.Map{
+		"first": 3,
+		"last": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Reverse returns correct value -- with args", actual)
 }
 
@@ -207,11 +213,17 @@ func Test_Cov2_Hashmap_Set_ReturnsBool(t *testing.T) {
 	isUpdate := hm.Set("a", 2)
 
 	// Act
-	actual := args.Map{"isNew": isNew, "isUpdate": isUpdate}
+	actual := args.Map{
+		"isNew": isNew,
+		"isUpdate": isUpdate,
+	}
 	// Set returns true if newly added
 
 	// Assert
-	expected := args.Map{"isNew": true, "isUpdate": false}
+	expected := args.Map{
+		"isNew": true,
+		"isUpdate": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- Set return", actual)
 }
 
@@ -257,10 +269,16 @@ func Test_Cov2_Hashset_AddBool(t *testing.T) {
 	existed2 := hs.AddBool("a")
 
 	// Act
-	actual := args.Map{"first": existed1, "second": existed2}
+	actual := args.Map{
+		"first": existed1,
+		"second": existed2,
+	}
 
 	// Assert
-	expected := args.Map{"first": false, "second": true}
+	expected := args.Map{
+		"first": false,
+		"second": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- AddBool", actual)
 }
 

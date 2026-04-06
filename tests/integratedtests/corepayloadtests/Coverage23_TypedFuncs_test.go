@@ -24,8 +24,14 @@ func Test_Cov23_MapTypedPayloads(t *testing.T) {
 	)
 
 	// Assert
-	actual := args.Map{"length": len(names), "first": names[0]}
-	expected := args.Map{"length": 3, "first": "Alice"}
+	actual := args.Map{
+		"length": len(names),
+		"first": names[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "Alice",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloads returns names -- 3 items", actual)
 }
 
@@ -58,8 +64,14 @@ func Test_Cov23_MapTypedPayloadData(t *testing.T) {
 	)
 
 	// Assert
-	actual := args.Map{"length": len(emails), "first": emails[0]}
-	expected := args.Map{"length": 3, "first": "a@a.com"}
+	actual := args.Map{
+		"length": len(emails),
+		"first": emails[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "a@a.com",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloadData returns emails -- 3 items", actual)
 }
 
@@ -574,8 +586,14 @@ func Test_Cov23_TypedPayloadCollection_AllIdentifiers(t *testing.T) {
 	ids := col.AllIdentifiers()
 
 	// Assert
-	actual := args.Map{"length": len(ids), "first": ids[0]}
-	expected := args.Map{"length": 3, "first": "1"}
+	actual := args.Map{
+		"length": len(ids),
+		"first": ids[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "1",
+	}
 	expected.ShouldBeEqual(t, 0, "AllIdentifiers returns ids -- 3 items", actual)
 }
 

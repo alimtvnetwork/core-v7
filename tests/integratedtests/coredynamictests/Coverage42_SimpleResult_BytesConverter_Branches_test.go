@@ -18,10 +18,16 @@ func Test_Cov42_SimpleResult_InvalidNoMessage(t *testing.T) {
 	r := coredynamic.InvalidSimpleResultNoMessage()
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult InvalidNoMessage", actual)
 }
 
@@ -30,10 +36,16 @@ func Test_Cov42_SimpleResult_Invalid(t *testing.T) {
 	r := coredynamic.InvalidSimpleResult("fail reason")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "fail reason"}
+	expected := args.Map{
+		"valid": false,
+		"msg": "fail reason",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Invalid", actual)
 }
 
@@ -42,10 +54,16 @@ func Test_Cov42_SimpleResult_NewValid(t *testing.T) {
 	r := coredynamic.NewSimpleResultValid(42)
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "result": r.Result}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"result": r.Result,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "result": 42}
+	expected := args.Map{
+		"valid": true,
+		"result": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult NewValid", actual)
 }
 
@@ -54,10 +72,16 @@ func Test_Cov42_SimpleResult_New(t *testing.T) {
 	r := coredynamic.NewSimpleResult("data", true, "")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "result": r.Result}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"result": r.Result,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "result": "data"}
+	expected := args.Map{
+		"valid": true,
+		"result": "data",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult New", actual)
 }
 
@@ -197,10 +221,16 @@ func Test_Cov42_SimpleResult_Clone_Valid(t *testing.T) {
 	c := r.Clone()
 
 	// Act
-	actual := args.Map{"valid": c.IsValid(), "msg": c.Message}
+	actual := args.Map{
+		"valid": c.IsValid(),
+		"msg": c.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "msg": "msg"}
+	expected := args.Map{
+		"valid": true,
+		"msg": "msg",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone valid", actual)
 }
 
@@ -222,10 +252,16 @@ func Test_Cov42_SimpleResult_ClonePtr_Valid(t *testing.T) {
 	c := r.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "valid": c.IsValid()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"valid": c.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr valid", actual)
 }
 
@@ -264,10 +300,16 @@ func Test_Cov42_Dynamic_ClonePtr_Valid(t *testing.T) {
 	c := d.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "valid": c.IsValid()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"valid": c.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic ClonePtr valid", actual)
 }
 
@@ -330,10 +372,16 @@ func Test_Cov42_DynamicStatus_InvalidNoMessage(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatusNoMessage()
 
 	// Act
-	actual := args.Map{"valid": ds.IsValid(), "msg": ds.Message}
+	actual := args.Map{
+		"valid": ds.IsValid(),
+		"msg": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus InvalidNoMessage", actual)
 }
 
@@ -342,10 +390,16 @@ func Test_Cov42_DynamicStatus_Invalid(t *testing.T) {
 	ds := coredynamic.InvalidDynamicStatus("fail")
 
 	// Act
-	actual := args.Map{"valid": ds.IsValid(), "msg": ds.Message}
+	actual := args.Map{
+		"valid": ds.IsValid(),
+		"msg": ds.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "fail"}
+	expected := args.Map{
+		"valid": false,
+		"msg": "fail",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Invalid", actual)
 }
 
@@ -380,10 +434,16 @@ func Test_Cov42_DynamicStatus_ClonePtr_Valid(t *testing.T) {
 	c := ds.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "msg": c.Message}
+	actual := args.Map{
+		"notNil": c != nil,
+		"msg": c.Message,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "msg": "msg"}
+	expected := args.Map{
+		"notNil": true,
+		"msg": "msg",
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr valid", actual)
 }
 
@@ -629,10 +689,16 @@ func Test_Cov42_LeftRight_LeftToDynamic_Valid(t *testing.T) {
 	d := lr.LeftToDynamic()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight LeftToDynamic valid", actual)
 }
 
@@ -654,10 +720,16 @@ func Test_Cov42_LeftRight_RightToDynamic_Valid(t *testing.T) {
 	d := lr.RightToDynamic()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight RightToDynamic valid", actual)
 }
 
@@ -955,10 +1027,16 @@ func Test_Cov42_BytesConverter_CastString_Valid(t *testing.T) {
 	s, err := bc.CastString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"r": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString valid", actual)
 }
 
@@ -968,10 +1046,16 @@ func Test_Cov42_BytesConverter_ToBool_Valid(t *testing.T) {
 	r, err := bc.ToBool()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": r}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": r,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": true}
+	expected := args.Map{
+		"noErr": true,
+		"r": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool valid", actual)
 }
 
@@ -993,10 +1077,16 @@ func Test_Cov42_BytesConverter_ToString_Valid(t *testing.T) {
 	s, err := bc.ToString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"r": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString valid", actual)
 }
 
@@ -1018,10 +1108,16 @@ func Test_Cov42_BytesConverter_ToStrings_Valid(t *testing.T) {
 	s, err := bc.ToStrings()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(s)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(s),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings valid", actual)
 }
 
@@ -1044,10 +1140,16 @@ func Test_Cov42_BytesConverter_ToInt64_Valid(t *testing.T) {
 	v, err := bc.ToInt64()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": v}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": int64(42)}
+	expected := args.Map{
+		"noErr": true,
+		"v": int64(42),
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64 valid", actual)
 }
 
@@ -1070,10 +1172,16 @@ func Test_Cov42_BytesConverter_Deserialize_Valid(t *testing.T) {
 	err := bc.Deserialize(&out)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": out}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "data"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "data",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize valid", actual)
 }
 
@@ -1099,10 +1207,16 @@ func Test_Cov42_BytesConverter_ToHashmap_Valid(t *testing.T) {
 	hm, err := bc.ToHashmap()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": hm != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": hm != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashmap valid", actual)
 }
 
@@ -1127,10 +1241,16 @@ func Test_Cov42_BytesConverter_ToHashset_Valid(t *testing.T) {
 	hs, err := bc.ToHashset()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": hs != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": hs != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToHashset valid", actual)
 }
 
@@ -1219,10 +1339,16 @@ func Test_Cov42_BytesConverter_ToMapAnyItems_Valid(t *testing.T) {
 	m, err := bc.ToMapAnyItems()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": m.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToMapAnyItems valid", actual)
 }
 

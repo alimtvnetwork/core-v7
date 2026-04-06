@@ -101,10 +101,16 @@ func Test_Cov3_StringJson_Default(t *testing.T) {
 	result, err := jsoninternal.String.Default(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringJson returns correct value -- Default", actual)
 }
 
@@ -125,10 +131,16 @@ func Test_Cov3_StringJson_Pretty(t *testing.T) {
 	result, err := jsoninternal.String.Pretty(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringJson returns correct value -- Pretty", actual)
 }
 
@@ -175,10 +187,16 @@ func Test_Cov3_StringToPretty_Indent(t *testing.T) {
 	result, err := jsoninternal.Pretty.String.Indent("", "  ", `{"a":1}`)
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringToPretty returns correct value -- Indent", actual)
 }
 

@@ -54,10 +54,16 @@ func Test_Cov48_ReflectSetFromTo_SameNonPointerToPointer(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo("hello", &dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "dest": dest}
+	actual := args.Map{
+		"noErr": err == nil,
+		"dest": dest,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dest": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"dest": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo non-ptr to ptr", actual)
 }
 
@@ -68,10 +74,16 @@ func Test_Cov48_ReflectSetFromTo_SamePointerTypes(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(&src, &dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "dest": dest}
+	actual := args.Map{
+		"noErr": err == nil,
+		"dest": dest,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dest": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"dest": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo same ptr types", actual)
 }
 
@@ -83,10 +95,16 @@ func Test_Cov48_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(b, &dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": dest.Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": dest.Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "test"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo bytes to struct", actual)
 }
 
@@ -98,10 +116,16 @@ func Test_Cov48_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(src, &dest)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(dest) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(dest) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo struct to bytes", actual)
 }
 
@@ -253,10 +277,16 @@ func Test_Cov48_AnyToReflectVal(t *testing.T) {
 	rv := coredynamic.AnyToReflectVal("hello")
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "kind": rv.Kind().String()}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"kind": rv.Kind().String(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "kind": "string"}
+	expected := args.Map{
+		"valid": true,
+		"kind": "string",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToReflectVal", actual)
 }
 
@@ -269,10 +299,16 @@ func Test_Cov48_CastTo_Matching(t *testing.T) {
 	r := coredynamic.CastTo(false, "hello", reflect.TypeOf(""))
 
 	// Act
-	actual := args.Map{"valid": r.IsValid, "matching": r.IsMatchingAcceptedType}
+	actual := args.Map{
+		"valid": r.IsValid,
+		"matching": r.IsMatchingAcceptedType,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "matching": true}
+	expected := args.Map{
+		"valid": true,
+		"matching": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo matching", actual)
 }
 
@@ -281,10 +317,16 @@ func Test_Cov48_CastTo_NotMatching(t *testing.T) {
 	r := coredynamic.CastTo(false, "hello", reflect.TypeOf(0))
 
 	// Act
-	actual := args.Map{"matching": r.IsMatchingAcceptedType, "hasErr": r.HasError()}
+	actual := args.Map{
+		"matching": r.IsMatchingAcceptedType,
+		"hasErr": r.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"matching": false, "hasErr": true}
+	expected := args.Map{
+		"matching": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastTo not matching", actual)
 }
 

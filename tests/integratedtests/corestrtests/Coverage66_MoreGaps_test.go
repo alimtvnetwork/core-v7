@@ -431,10 +431,18 @@ func Test_Cov66_LMR_Clone(t *testing.T) {
 		clone := lmr.Clone()
 
 		// Act
-		actual := args.Map{"left": clone.Left, "mid": clone.Middle, "right": clone.Right}
+		actual := args.Map{
+			"left": clone.Left,
+			"mid": clone.Middle,
+			"right": clone.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LMR Clone", actual)
 	})
 }
@@ -446,10 +454,16 @@ func Test_Cov66_LMR_ToLeftRight(t *testing.T) {
 		lr := lmr.ToLeftRight()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LMR ToLeftRight", actual)
 	})
 }
@@ -461,10 +475,18 @@ func Test_Cov66_LMR_Clear(t *testing.T) {
 		lmr.Clear()
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "mid": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"mid": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "LMR Clear", actual)
 	})
 }
@@ -504,10 +526,16 @@ func Test_Cov66_LMR_InvalidWithMessage(t *testing.T) {
 		lmr := corestr.InvalidLeftMiddleRight("bad")
 
 		// Act
-		actual := args.Map{"valid": lmr.IsValid, "msg": lmr.Message}
+		actual := args.Map{
+			"valid": lmr.IsValid,
+			"msg": lmr.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": "bad"}
+		expected := args.Map{
+			"valid": false,
+			"msg": "bad",
+		}
 		expected.ShouldBeEqual(t, 0, "LMR InvalidWithMessage", actual)
 	})
 }
@@ -522,10 +550,18 @@ func Test_Cov66_NCLCN_IsEmpty_Empty(t *testing.T) {
 		n := corestr.NewNonChainedLinkedCollectionNodes(0)
 
 		// Act
-		actual := args.Map{"empty": n.IsEmpty(), "has": n.HasItems(), "len": n.Length()}
+		actual := args.Map{
+			"empty": n.IsEmpty(),
+			"has": n.HasItems(),
+			"len": n.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "has": false, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"has": false,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "NCLCN empty", actual)
 	})
 }
@@ -584,10 +620,18 @@ func Test_Cov66_NCLLN_IsEmpty_Empty(t *testing.T) {
 		n := corestr.NewNonChainedLinkedListNodes(0)
 
 		// Act
-		actual := args.Map{"empty": n.IsEmpty(), "has": n.HasItems(), "len": n.Length()}
+		actual := args.Map{
+			"empty": n.IsEmpty(),
+			"has": n.HasItems(),
+			"len": n.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "has": false, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"has": false,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "NCLLN empty", actual)
 	})
 }
@@ -730,10 +774,16 @@ func Test_Cov66_COC_MarshalJSON(t *testing.T) {
 		b, err := coc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "COC MarshalJSON", actual)
 	})
 }
@@ -766,10 +816,16 @@ func Test_Cov66_COC_ParseInjectUsingJson(t *testing.T) {
 		r, err := coc2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "COC ParseInjectUsingJson", actual)
 	})
 }
@@ -868,10 +924,16 @@ func Test_Cov66_HC_MarshalJSON(t *testing.T) {
 		b, err := hc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HC MarshalJSON", actual)
 	})
 }
@@ -904,10 +966,16 @@ func Test_Cov66_HC_ParseInjectUsingJson(t *testing.T) {
 		r, err := hc2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HC ParseInjectUsingJson", actual)
 	})
 }

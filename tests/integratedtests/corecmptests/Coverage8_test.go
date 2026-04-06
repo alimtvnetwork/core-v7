@@ -320,7 +320,10 @@ func Test_Cov8_IsStringsEqual_NotEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEq": false, "rightNil": false}
+	expected := args.Map{
+		"notEq": false,
+		"rightNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- not equal", actual)
 }
 
@@ -334,7 +337,10 @@ func Test_Cov8_IsStringsEqualPtr_NotEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"rightNil": false, "diffLen": false}
+	expected := args.Map{
+		"rightNil": false,
+		"diffLen": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns correct value -- not equal", actual)
 }
 
@@ -348,7 +354,10 @@ func Test_Cov8_IsIntegersEqual_OneNil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"rightNil": false, "leftNil": false}
+	expected := args.Map{
+		"rightNil": false,
+		"leftNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns nil -- one nil", actual)
 }
 
