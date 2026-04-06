@@ -11,19 +11,9 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 // Coverage26 — corepayload remaining gaps (Iteration 28)
 //
-// Note: Many uncovered lines are nil-receiver guards, internal error paths
-// requiring BasicErrWrapper implementations (internal package), or defensive
-// branches. This file covers all reachable paths through the public API.
-//
-// Targets:
-//   - AttributesSetters: HandleErr, HandleError, MustBeEmptyError (no-error paths)
-//   - PayloadWrapper: BasicError no-error, HandleError no-error
-//   - PayloadWrapper: IsEqualInterface cast fail, Error no-error
-//   - TypedPayloadWrapper: HandleError, UnmarshalJSON invalid data
-//   - TypedPayloadCollection: HasErrors/Errors/FirstError/MergedError (no errors)
-//   - TypedPayloadCollection: Clone, NewFromData
-//   - AttributesGetters: fallthrough paths
-//   - PayloadsCollectionFilter: empty filter
+// API Reference (verified from source):
+//   - corepayload.New.PayloadWrapper.Create(name, id, taskName, category, record)
+//     returns (*PayloadWrapper, error) — TWO return values
 // ══════════════════════════════════════════════════════════════════════════════
 
 // ---------- AttributesSetters: HandleErr no error ----------
@@ -60,7 +50,7 @@ func Test_I28_Attributes_MustBeEmptyError_NoError(t *testing.T) {
 	// Arrange
 	a := corepayload.New.Attributes.Empty()
 
-	// Act & Assert — should not panic (no error = IsEmptyError returns early)
+	// Act & Assert
 	a.MustBeEmptyError()
 
 	actual := args.Map{"completed": true}
@@ -89,7 +79,7 @@ func Test_I28_PayloadWrapper_HandleError_NoError(t *testing.T) {
 	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	// Act & Assert — should not panic
+	// Act & Assert
 	pw.HandleError()
 
 	actual := args.Map{"completed": true}
@@ -102,6 +92,7 @@ func Test_I28_PayloadWrapper_HandleError_NoError(t *testing.T) {
 func Test_I28_PayloadWrapper_IsStandardTaskEntityEqual_Different(t *testing.T) {
 	// Arrange
 	pw1 := corepayload.New.PayloadWrapper.Empty()
+	// Create returns (*PayloadWrapper, error) — handle BOTH return values
 	pw2, err := corepayload.New.PayloadWrapper.Create("other", "id-99", "task", "cat", "data")
 	if err != nil {
 		panic(err)
@@ -144,7 +135,7 @@ func Test_I28_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
 		t.Fatalf("unexpected err: %v", err)
 	}
 
-	// Act & Assert — should not panic
+	// Act & Assert
 	tw.HandleError()
 
 	actual := args.Map{"completed": true}
@@ -177,11 +168,7 @@ func Test_I28_TypedPayloadCollection_ErrorMethods_NoErrors(t *testing.T) {
 	type simpleUser struct {
 		Name string `json:"name"`
 	}
-
-	items := []simpleUser{
-		{Name: "alice"},
-		{Name: "bob"},
-	}
+	items := []simpleUser{{Name: "alice"}, {Name: "bob"}}
 	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
 	if err != nil {
 		t.Fatalf("unexpected err creating collection: %v", err)
@@ -216,10 +203,7 @@ func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
 	type simpleUser struct {
 		Name string `json:"name"`
 	}
-
-	items := []simpleUser{
-		{Name: "alice"},
-	}
+	items := []simpleUser{{Name: "alice"}}
 	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
 	if err != nil {
 		t.Fatalf("unexpected err: %v", err)
@@ -230,43 +214,12 @@ func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
 
 	// Assert
 	actual := args.Map{
-		"errNil":  err == nil,
-		"length":  cloned.Length(),
+		"errNil": err == nil,
+		"length": cloned.Length(),
 	}
 	expected := args.Map{
-		"errNil":  true,
-		"length":  1,
-	}
-	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- single item", actual)
-}
-
-// ---------- TypedPayloadCollection: ClonePtr ----------
-
-func Test_I28_TypedPayloadCollection_Clone_SingleItem(t *testing.T) {
-	// Arrange
-	type simpleUser struct {
-		Name string `json:"name"`
-	}
-
-	items := []simpleUser{
-		{Name: "bob"},
-	}
-	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
-
-	// Act
-	cloned, err := collection.Clone()
-
-	// Assert
-	actual := args.Map{
-		"errNil":   err == nil,
-		"notNil":   cloned != nil,
-	}
-	expected := args.Map{
-		"errNil":   true,
-		"notNil":   true,
+		"errNil": true,
+		"length": 1,
 	}
 	expected.ShouldBeEqual(t, 0, "Clone returns valid copy -- single item", actual)
 }
@@ -289,12 +242,12 @@ func Test_I28_TypedPayloadWrapper_ClonePtr(t *testing.T) {
 
 	// Assert
 	actual := args.Map{
-		"errNil":  err == nil,
-		"notNil":  cloned != nil,
+		"errNil": err == nil,
+		"notNil": cloned != nil,
 	}
 	expected := args.Map{
-		"errNil":  true,
-		"notNil":  true,
+		"errNil": true,
+		"notNil": true,
 	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns valid copy -- deep clone", actual)
 }
@@ -345,12 +298,12 @@ func Test_I28_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 
 	// Assert
 	actual := args.Map{
-		"errNil":    err == nil,
-		"updated":   tw.TypedData().Val,
+		"errNil":  err == nil,
+		"updated": tw.TypedData().Val,
 	}
 	expected := args.Map{
-		"errNil":    true,
-		"updated":   "updated",
+		"errNil":  true,
+		"updated": "updated",
 	}
 	expected.ShouldBeEqual(t, 0, "SetTypedData updates data -- valid data", actual)
 }
