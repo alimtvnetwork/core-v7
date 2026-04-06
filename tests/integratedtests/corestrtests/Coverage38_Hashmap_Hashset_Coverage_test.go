@@ -24,17 +24,17 @@ func Test_C38_Hashmap_CRUD(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": h.Has("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.Has("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": h.Contains("b")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.Contains("b")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": h.IsKeyMissing("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsKeyMissing("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": h.IsKeyMissing("z")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.IsKeyMissing("z")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
