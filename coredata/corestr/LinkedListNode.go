@@ -288,10 +288,6 @@ func (linkedListNode *LinkedListNode) List() []string {
 	return list
 }
 
-// Deprecated: Use List instead.
-func (linkedListNode *LinkedListNode) ListPtr() []string {
-	return linkedListNode.List()
-}
 
 func (linkedListNode *LinkedListNode) Join(separator string) string {
 	return strings.Join(linkedListNode.List(), separator)

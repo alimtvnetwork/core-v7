@@ -293,11 +293,6 @@ func (it *LinkedCollectionNode) List() []string {
 	return list
 }
 
-// Deprecated: Use List instead.
-func (it *LinkedCollectionNode) ListPtr() *[]string {
-	list := it.List()
-	return &list
-}
 
 func (it *LinkedCollectionNode) Join(separator string) string {
 	list := it.List()

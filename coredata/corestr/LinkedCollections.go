@@ -1354,11 +1354,6 @@ func (it *LinkedCollections) SimpleSlice() *SimpleSlice {
 	return &list
 }
 
-// Deprecated: Use List instead.
-func (it *LinkedCollections) ListPtr() *[]string {
-	list := it.List()
-	return &list
-}
 
 // List must return slice.
 func (it *LinkedCollections) List() []string {

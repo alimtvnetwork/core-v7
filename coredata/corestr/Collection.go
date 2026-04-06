@@ -1552,10 +1552,6 @@ func (it *Collection) Items() []string {
 	return it.items
 }
 
-// Deprecated: Use List or Items instead.
-func (it *Collection) ListPtr() []string {
-	return it.items
-}
 
 // ListCopyPtrLock returns a copy of the items
 //
