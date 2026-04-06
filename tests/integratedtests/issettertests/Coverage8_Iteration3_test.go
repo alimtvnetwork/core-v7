@@ -711,7 +711,7 @@ func Test_C8_LazyEvaluateBool_Called(t *testing.T) {
 
 func Test_C8_LazyEvaluateSet_NotCalled(t *testing.T) {
 	v := issetter.Set
-	called := v.LazyEvaluateSet(func() { t.Fatal("should not call") })
+	called := v.LazyEvaluateSet(func() { actual := args.Map{"called": true}; expected := args.Map{"called": false}; expected.ShouldBeEqual(t, 0, "LazyEvaluateSet should not call", actual) })
 	actual := args.Map{"result": called}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
