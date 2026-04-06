@@ -1581,7 +1581,7 @@ func Test_C79_Utils_WrapSingle(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "'x'"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"'x'\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"'x'\"", actual)
 	})
 }
 
@@ -1593,7 +1593,7 @@ func Test_C79_Utils_WrapTilda(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "`x`"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"`x`\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"`x`\"", actual)
 	})
 }
 
@@ -1653,7 +1653,7 @@ func Test_C79_Utils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "'hello'"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"'hello'\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"'hello'\"", actual)
 	})
 }
 

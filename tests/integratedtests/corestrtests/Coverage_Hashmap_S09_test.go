@@ -309,7 +309,8 @@ func Test_S09_18_Hashmap_AddOrUpdateStringsPtrWgLock_Panic(t *testing.T) {
 
 		// Act & Assert
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for mismatched lengths", actual)
 		}()

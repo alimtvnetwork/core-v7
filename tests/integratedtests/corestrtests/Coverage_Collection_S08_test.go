@@ -1155,7 +1155,8 @@ func Test_S08_72_Collection_Single_Panic(t *testing.T) {
 
 		// Act & Assert
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for non-single collection", actual)
 		}()
@@ -1527,7 +1528,8 @@ func Test_S08_95_Collection_RemoveItemsIndexesPtr_EmptyCollValidation(t *testing
 
 		// Act & Assert — should panic with validation on
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for removing from empty with validation", actual)
 		}()

@@ -825,7 +825,8 @@ func Test_CovS23_49_HashsetsCollection_ParseInjectUsingJsonMust_Panics(t *testin
 
 		// Act & Assert
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust should panic on invalid data", actual)
 		}()
