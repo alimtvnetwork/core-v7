@@ -25,32 +25,44 @@ func Test_C02_Serializer_StringsApply(t *testing.T) {
 
 func Test_C02_Serializer_FromBytes(t *testing.T) {
 	r := corejson.Serialize.FromBytes([]byte(`"test"`))
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromStrings(t *testing.T) {
 	r := corejson.Serialize.FromStrings([]string{"a"})
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromStringsSpread(t *testing.T) {
 	r := corejson.Serialize.FromStringsSpread("a", "b")
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromString(t *testing.T) {
 	r := corejson.Serialize.FromString("hello")
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromInteger(t *testing.T) {
 	r := corejson.Serialize.FromInteger(42)
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromInteger64(t *testing.T) {
 	r := corejson.Serialize.FromInteger64(64)
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_FromBool(t *testing.T) {
@@ -62,12 +74,16 @@ func Test_C02_Serializer_FromBool(t *testing.T) {
 
 func Test_C02_Serializer_FromIntegers(t *testing.T) {
 	r := corejson.Serialize.FromIntegers([]int{1, 2, 3})
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_UsingAnyPtr(t *testing.T) {
 	r := corejson.Serialize.UsingAnyPtr("x")
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 	ch := make(chan int)
 	r2 := corejson.Serialize.UsingAnyPtr(ch)
 	actual := args.Map{"result": r2.HasError()}
@@ -77,7 +93,9 @@ func Test_C02_Serializer_UsingAnyPtr(t *testing.T) {
 
 func Test_C02_Serializer_UsingAny(t *testing.T) {
 	r := corejson.Serialize.UsingAny("x")
-	if r.HasError() { t.Fatal(r.Error) }
+	actual := args.Map{"hasError": r.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 }
 
 func Test_C02_Serializer_Raw(t *testing.T) {

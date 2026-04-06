@@ -13,14 +13,20 @@ import (
 func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
 	r := corejson.NewResult.Any("x")
 	jr := corejson.AnyTo.SerializedJsonResult(r)
-	if jr.HasError() { t.Fatal(jr.Error) }
+	actual := args.Map{"hasError": jr.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 
 	rp := corejson.NewResult.AnyPtr("x")
 	jr2 := corejson.AnyTo.SerializedJsonResult(rp)
-	if jr2.HasError() { t.Fatal(jr2.Error) }
+	actual2 := args.Map{"hasError": jr2.HasError()}
+		expected2 := args.Map{"hasError": false}
+		expected2.ShouldBeEqual(t, 0, "result2 has no error", actual2)
 
 	jr3 := corejson.AnyTo.SerializedJsonResult([]byte(`"x"`))
-	if jr3.HasError() { t.Fatal(jr3.Error) }
+	actual3 := args.Map{"hasError": jr3.HasError()}
+		expected3 := args.Map{"hasError": false}
+		expected3.ShouldBeEqual(t, 0, "result3 has no error", actual3)
 
 	jr4 := corejson.AnyTo.SerializedJsonResult("hello")
 	_ = jr4
@@ -31,7 +37,9 @@ func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 
 	jr6 := corejson.AnyTo.SerializedJsonResult(42)
-	if jr6.HasError() { t.Fatal(jr6.Error) }
+	actual6 := args.Map{"hasError": jr6.HasError()}
+		expected6 := args.Map{"hasError": false}
+		expected6.ShouldBeEqual(t, 0, "result6 has no error", actual6)
 
 	jr7 := corejson.AnyTo.SerializedJsonResult(errors.New("oops"))
 	actual := args.Map{"result": jr7 == nil}
