@@ -152,7 +152,11 @@ func BenchmarkCollectionLock_LengthLock(b *testing.B) {
 
 func BenchmarkCollectionLock_ItemsLock(b *testing.B) {
 	c := NewCollection[string](10)
-	c.Adds("a", "b", "c", "d", "e")
+	c.Add("a")
+	c.Add("b")
+	c.Add("c")
+	c.Add("d")
+	c.Add("e")
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c.ItemsLock()
