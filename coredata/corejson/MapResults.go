@@ -124,10 +124,6 @@ func (it *MapResults) GetErrorsStrings() []string {
 	return errStrList
 }
 
-// Deprecated: Use GetErrorsStrings instead.
-func (it *MapResults) GetErrorsStringsPtr() []string {
-	return it.GetErrorsStrings()
-}
 
 func (it *MapResults) GetErrorsAsSingleString() string {
 	errStrList := it.GetErrorsStrings()
