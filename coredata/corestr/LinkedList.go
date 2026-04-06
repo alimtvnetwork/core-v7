@@ -964,10 +964,6 @@ func (it *LinkedList) List() []string {
 	return list
 }
 
-// Deprecated: Use List instead.
-func (it *LinkedList) ListPtr() []string {
-	return it.List()
-}
 
 // ListLock returns the list with mutex protection.
 func (it *LinkedList) ListLock() []string {
