@@ -33,13 +33,13 @@
 - **createdAt**: 2026-03-21
 - **source**: Lovable (codebase audit)
 - **affectedProject**: core
-- **description**: Add `Benchmark*` tests for hot-path operations. Currently zero benchmarks exist. Priority targets: `coredata/corestr/Collection` (Add, Get, Join), `coredata/coredynamic` (type casting), `errcore` (error construction with stack traces), `codestack` (trace capture), `regexnew` (lazy compile), `mutexbykey` (lock contention).
+- **description**: Add `Benchmark*` tests for hot-path operations. Priority targets: `coredata/corestr/Collection` (Add, Get, Join), `coredata/coredynamic` (type casting), `errcore` (error construction with stack traces), `codestack` (trace capture), `regexnew` (lazy compile), `mutexbykey` (lock contention).
 - **rationale**: No performance baseline exists. Regressions are invisible without benchmarks.
-- **proposed change**: Create `*_bench_test.go` files in priority packages. Include `b.ReportAllocs()`.
+- **proposed change**: Create `benchmark_test.go` files in priority packages.
 - **acceptance criteria**: ≥30 benchmarks across 6+ packages. Results documented in benchmark summary.
-- **status**: open
+- **status**: **done** (completed 2026-04-06)
 - **dependencies**: None
-- **completion notes**: —
+- **completion notes**: 38 benchmarks created across 6 packages: corestr (13), coredynamic (13), errcore (5), codestack (6), regexnew (7), mutexbykey (4). Files: `benchmark_test.go` in each package.
 
 ### S-012: Pointer Receiver Audit
 - **suggestionId**: S-012
