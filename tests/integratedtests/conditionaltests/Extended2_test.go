@@ -8,9 +8,14 @@ import (
 )
 
 func Test_NilCheck_Extended_Verification(t *testing.T) {
+	// Arrange
 	// nil case
 	result := conditional.NilCheck(nil, "wasNil", "wasNotNil")
+
+	// Act
 	actual := args.Map{"result": result != "wasNil"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return onNil", actual)
 
@@ -22,9 +27,14 @@ func Test_NilCheck_Extended_Verification(t *testing.T) {
 }
 
 func Test_DefOnNil_Extended_Verification(t *testing.T) {
+	// Arrange
 	// nil case
 	result := conditional.DefOnNil(nil, "default")
+
+	// Act
 	actual := args.Map{"result": result != "default"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return default", actual)
 
@@ -36,9 +46,14 @@ func Test_DefOnNil_Extended_Verification(t *testing.T) {
 }
 
 func Test_NilOrEmptyStr_Extended_Verification(t *testing.T) {
+	// Arrange
 	// nil case
 	result := conditional.NilOrEmptyStr(nil, "empty", "full")
+
+	// Act
 	actual := args.Map{"result": result != "empty"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return onNilOrEmpty", actual)
 
@@ -58,9 +73,14 @@ func Test_NilOrEmptyStr_Extended_Verification(t *testing.T) {
 }
 
 func Test_NilOrEmptyStrPtr_Extended_Verification(t *testing.T) {
+	// Arrange
 	// nil case
 	result := conditional.NilOrEmptyStrPtr(nil, "empty", "full")
+
+	// Act
 	actual := args.Map{"result": result == nil || *result != "empty"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should return pointer to onNilOrEmpty", actual)
 
@@ -73,7 +93,10 @@ func Test_NilOrEmptyStrPtr_Extended_Verification(t *testing.T) {
 }
 
 func Test_BoolByOrder_Extended_Verification(t *testing.T) {
+	// Act
 	actual := args.Map{"result": conditional.BoolByOrder()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return false", actual)
 	actual := args.Map{"result": conditional.BoolByOrder(false, true)}
@@ -85,9 +108,14 @@ func Test_BoolByOrder_Extended_Verification(t *testing.T) {
 }
 
 func Test_StringsIndexVal_Extended_Verification(t *testing.T) {
+	// Arrange
 	slice := []string{"a", "b", "c"}
 	result := conditional.StringsIndexVal(true, slice, 0, 2)
+
+	// Act
 	actual := args.Map{"result": result != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "true should return index 0", actual)
 
@@ -98,8 +126,13 @@ func Test_StringsIndexVal_Extended_Verification(t *testing.T) {
 }
 
 func Test_IfSliceAny_Extended_Verification(t *testing.T) {
+	// Arrange
 	result := conditional.IfSliceAny(true, []any{1, 2}, []any{3})
+
+	// Act
 	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "true should return first slice", actual)
 
@@ -110,8 +143,13 @@ func Test_IfSliceAny_Extended_Verification(t *testing.T) {
 }
 
 func Test_IfFuncAny_Extended_Verification(t *testing.T) {
+	// Arrange
 	result := conditional.IfFuncAny(true, func() any { return "yes" }, func() any { return "no" })
+
+	// Act
 	actual := args.Map{"result": result != "yes"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "true should return yes", actual)
 

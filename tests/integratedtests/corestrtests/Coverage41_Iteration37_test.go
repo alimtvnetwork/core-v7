@@ -37,6 +37,8 @@ func Test_Cov41_CharCollectionMap_IsEmpty_NonEmpty(t *testing.T) {
 			Actual:   m.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -50,6 +52,8 @@ func Test_Cov41_CharCollectionMap_HasItems_Empty(t *testing.T) {
 			Actual:   m.HasItems(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -64,6 +68,8 @@ func Test_Cov41_CharCollectionMap_HasItems_NonEmpty(t *testing.T) {
 			Actual:   m.HasItems(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -77,6 +83,8 @@ func Test_Cov41_CharCollectionMap_Length_Empty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -92,6 +100,8 @@ func Test_Cov41_CharCollectionMap_Length_WithItems(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -105,6 +115,8 @@ func Test_Cov41_CharCollectionMap_IsEmptyLock(t *testing.T) {
 			Actual:   m.IsEmptyLock(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -119,6 +131,8 @@ func Test_Cov41_CharCollectionMap_LengthLock(t *testing.T) {
 			Actual:   m.LengthLock(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -136,6 +150,8 @@ func Test_Cov41_CharCollectionMap_Add_SameChar(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -152,6 +168,8 @@ func Test_Cov41_CharCollectionMap_Add_AllLengthsSum(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -166,6 +184,8 @@ func Test_Cov41_CharCollectionMap_AddStrings_Empty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -180,6 +200,8 @@ func Test_Cov41_CharCollectionMap_AddStrings_Multiple(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -194,6 +216,8 @@ func Test_Cov41_CharCollectionMap_AddLock(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -209,6 +233,8 @@ func Test_Cov41_CharCollectionMap_AddLock_ExistingChar(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -224,6 +250,8 @@ func Test_Cov41_CharCollectionMap_GetChar_NonEmpty(t *testing.T) {
 			Actual:   m.GetChar("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -237,6 +265,8 @@ func Test_Cov41_CharCollectionMap_GetChar_EmptyString(t *testing.T) {
 			Actual:   m.GetChar(""),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -251,6 +281,8 @@ func Test_Cov41_CharCollectionMap_Has_Found(t *testing.T) {
 			Actual:   m.Has("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -265,6 +297,8 @@ func Test_Cov41_CharCollectionMap_Has_NotFound(t *testing.T) {
 			Actual:   m.Has("world"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -278,6 +312,8 @@ func Test_Cov41_CharCollectionMap_Has_Empty(t *testing.T) {
 			Actual:   m.Has("anything"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -293,6 +329,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_Found(t *testing.T) {
 			Actual:   found && col.HasItems(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -308,6 +346,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_NotFound(t *testing.T) {
 			Actual:   found,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -322,6 +362,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollection_Empty(t *testing.T) {
 			Actual:   found,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -337,6 +379,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Found(t *testing.T) {
 			Actual:   found && col.HasItems(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -351,6 +395,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_Empty(t *testing.T) {
 			Actual:   found,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -366,6 +412,8 @@ func Test_Cov41_CharCollectionMap_HasWithCollectionLock_MissingChar(t *testing.T
 			Actual:   found,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -383,6 +431,8 @@ func Test_Cov41_CharCollectionMap_LengthOf_Exists(t *testing.T) {
 			Actual:   m.LengthOf(byte('h')),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -396,6 +446,8 @@ func Test_Cov41_CharCollectionMap_LengthOf_Missing(t *testing.T) {
 			Actual:   m.LengthOf(byte('x')),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -410,6 +462,8 @@ func Test_Cov41_CharCollectionMap_LengthOfLock_Exists(t *testing.T) {
 			Actual:   m.LengthOfLock(byte('h')),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -423,6 +477,8 @@ func Test_Cov41_CharCollectionMap_LengthOfLock_Empty(t *testing.T) {
 			Actual:   m.LengthOfLock(byte('x')),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -438,6 +494,8 @@ func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) 
 			Actual:   m.LengthOfCollectionFromFirstChar("hi"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -451,6 +509,8 @@ func Test_Cov41_CharCollectionMap_LengthOfCollectionFromFirstChar_Missing(t *tes
 			Actual:   m.LengthOfCollectionFromFirstChar("zzz"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -466,6 +526,8 @@ func Test_Cov41_CharCollectionMap_AllLengthsSum_Empty(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -481,6 +543,8 @@ func Test_Cov41_CharCollectionMap_AllLengthsSumLock(t *testing.T) {
 			Actual:   m.AllLengthsSumLock(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -496,6 +560,8 @@ func Test_Cov41_CharCollectionMap_List_Empty(t *testing.T) {
 			Actual:   len(m.List()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -511,6 +577,8 @@ func Test_Cov41_CharCollectionMap_List_WithItems(t *testing.T) {
 			Actual:   len(m.List()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -525,6 +593,8 @@ func Test_Cov41_CharCollectionMap_ListLock(t *testing.T) {
 			Actual:   len(m.ListLock()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -538,6 +608,8 @@ func Test_Cov41_CharCollectionMap_SortedListAsc_Empty(t *testing.T) {
 			Actual:   len(m.SortedListAsc()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -554,6 +626,8 @@ func Test_Cov41_CharCollectionMap_SortedListAsc_Sorted(t *testing.T) {
 			Actual:   sorted[0],
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -570,6 +644,8 @@ func Test_Cov41_CharCollectionMap_GetMap(t *testing.T) {
 			Actual:   len(m.GetMap()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -583,6 +659,8 @@ func Test_Cov41_CharCollectionMap_GetCopyMapLock_Empty(t *testing.T) {
 			Actual:   len(m.GetCopyMapLock()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -597,6 +675,8 @@ func Test_Cov41_CharCollectionMap_GetCopyMapLock_NonEmpty(t *testing.T) {
 			Actual:   len(m.GetCopyMapLock()),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -612,6 +692,8 @@ func Test_Cov41_CharCollectionMap_GetCollection_Exists(t *testing.T) {
 			Actual:   col != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -626,6 +708,8 @@ func Test_Cov41_CharCollectionMap_GetCollection_Missing_NoAdd(t *testing.T) {
 			Actual:   col == nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -640,6 +724,8 @@ func Test_Cov41_CharCollectionMap_GetCollection_Missing_AddNew(t *testing.T) {
 			Actual:   col != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -655,6 +741,8 @@ func Test_Cov41_CharCollectionMap_GetCollectionLock(t *testing.T) {
 			Actual:   col != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -670,6 +758,8 @@ func Test_Cov41_CharCollectionMap_GetCollectionByChar(t *testing.T) {
 			Actual:   col != nil && col.HasItems(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -686,6 +776,8 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_New(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -701,6 +793,8 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Existing(t *testing.T
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -715,6 +809,8 @@ func Test_Cov41_CharCollectionMap_AddSameStartingCharItems_Empty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -732,6 +828,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_New(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -748,6 +846,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_Existing(t *testing.T) 
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -762,6 +862,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_NilCollection(t *testin
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -777,6 +879,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollection_ExistingNilCol(t *testi
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -792,6 +896,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_New(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -808,6 +914,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_Existing(t *testing
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -822,6 +930,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_NilCol(t *testing.T
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -837,6 +947,8 @@ func Test_Cov41_CharCollectionMap_AddSameCharsCollectionLock_ExistingNil(t *test
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -853,6 +965,8 @@ func Test_Cov41_CharCollectionMap_AddCollectionItems_Nil(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -868,6 +982,8 @@ func Test_Cov41_CharCollectionMap_AddCollectionItems_Valid(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -882,6 +998,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsValues_Nil(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -897,6 +1015,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsValues_Valid(t *testing.T) {
 			Actual:   m.Has("val1"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -911,6 +1031,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Nil(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -926,6 +1048,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysValuesBoth_Valid(t *testing.T) 
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -942,6 +1066,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Nil(t *
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -960,6 +1086,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Accept(
 			Actual:   m.Has("v1"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -978,6 +1106,8 @@ func Test_Cov41_CharCollectionMap_AddHashmapsKeysOrValuesBothUsingFilter_Break(t
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -996,6 +1126,8 @@ func Test_Cov41_CharCollectionMap_AddCharHashsetMap(t *testing.T) {
 			Actual:   m.Has("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1012,6 +1144,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_Same(t *testing.T) {
 			Actual:   m.IsEquals(m),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1025,6 +1159,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_Nil(t *testing.T) {
 			Actual:   m.IsEquals(nil),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1039,6 +1175,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_BothEmpty(t *testing.T) {
 			Actual:   m1.IsEquals(m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1054,6 +1192,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_DiffLen(t *testing.T) {
 			Actual:   m1.IsEquals(m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1070,6 +1210,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_DiffContent(t *testing.T) {
 			Actual:   m1.IsEquals(m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1086,6 +1228,8 @@ func Test_Cov41_CharCollectionMap_IsEquals_MissingKey(t *testing.T) {
 			Actual:   m1.IsEquals(m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1102,6 +1246,8 @@ func Test_Cov41_CharCollectionMap_IsEqualsLock(t *testing.T) {
 			Actual:   m1.IsEqualsLock(m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1118,6 +1264,8 @@ func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitive_Insensitive(t *testing.T
 			Actual:   m1.IsEqualsCaseSensitive(false, m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1134,6 +1282,8 @@ func Test_Cov41_CharCollectionMap_IsEqualsCaseSensitiveLock(t *testing.T) {
 			Actual:   m1.IsEqualsCaseSensitiveLock(true, m2),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1151,6 +1301,8 @@ func Test_Cov41_CharCollectionMap_HashsetByChar_Found(t *testing.T) {
 			Actual:   hs != nil && hs.Has("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1165,6 +1317,8 @@ func Test_Cov41_CharCollectionMap_HashsetByChar_Missing(t *testing.T) {
 			Actual:   hs == nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1180,6 +1334,8 @@ func Test_Cov41_CharCollectionMap_HashsetByCharLock_Found(t *testing.T) {
 			Actual:   hs != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1194,6 +1350,8 @@ func Test_Cov41_CharCollectionMap_HashsetByCharLock_Missing(t *testing.T) {
 			Actual:   hs != nil && hs.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1209,6 +1367,8 @@ func Test_Cov41_CharCollectionMap_HashsetByStringFirstChar(t *testing.T) {
 			Actual:   hs != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1224,6 +1384,8 @@ func Test_Cov41_CharCollectionMap_HashsetByStringFirstCharLock(t *testing.T) {
 			Actual:   hs != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1238,6 +1400,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollection_Empty(t *testing.T) {
 			Actual:   hsc.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1254,6 +1418,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollection_NonEmpty(t *testing.T) {
 			Actual:   hsc.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1268,6 +1434,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Empty(t *testing.T) 
 			Actual:   hsc.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1283,6 +1451,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByChars_Valid(t *testing.T) 
 			Actual:   hsc.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1297,6 +1467,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Empty(t *t
 			Actual:   hsc.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1312,6 +1484,8 @@ func Test_Cov41_CharCollectionMap_HashsetsCollectionByStringFirstChar_Valid(t *t
 			Actual:   hsc.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1329,6 +1503,8 @@ func Test_Cov41_CharCollectionMap_Resize_Larger(t *testing.T) {
 			Actual:   m.Has("x"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1343,6 +1519,8 @@ func Test_Cov41_CharCollectionMap_Resize_AlreadyLarger(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1357,6 +1535,8 @@ func Test_Cov41_CharCollectionMap_AddLength(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1371,6 +1551,8 @@ func Test_Cov41_CharCollectionMap_AddLength_Empty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1387,6 +1569,8 @@ func Test_Cov41_CharCollectionMap_GetCharsGroups_Empty(t *testing.T) {
 			Actual:   result.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1401,6 +1585,8 @@ func Test_Cov41_CharCollectionMap_GetCharsGroups_Valid(t *testing.T) {
 			Actual:   result.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1418,6 +1604,8 @@ func Test_Cov41_CharCollectionMap_String(t *testing.T) {
 			Actual:   len(s) > 0,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1433,6 +1621,8 @@ func Test_Cov41_CharCollectionMap_StringLock(t *testing.T) {
 			Actual:   len(s) > 0,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1448,6 +1638,8 @@ func Test_Cov41_CharCollectionMap_SummaryString(t *testing.T) {
 			Actual:   len(s) > 0,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1463,6 +1655,8 @@ func Test_Cov41_CharCollectionMap_SummaryStringLock(t *testing.T) {
 			Actual:   len(s) > 0,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1477,6 +1671,8 @@ func Test_Cov41_CharCollectionMap_Print_Skip(t *testing.T) {
 			Actual:   true,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1491,6 +1687,8 @@ func Test_Cov41_CharCollectionMap_PrintLock_Skip(t *testing.T) {
 			Actual:   true,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1508,6 +1706,8 @@ func Test_Cov41_CharCollectionMap_MarshalJSON(t *testing.T) {
 			Actual:   err == nil && len(bytes) > 0,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1525,6 +1725,8 @@ func Test_Cov41_CharCollectionMap_UnmarshalJSON(t *testing.T) {
 			Actual:   err == nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1540,6 +1742,8 @@ func Test_Cov41_CharCollectionMap_Json(t *testing.T) {
 			Actual:   j.Error == nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1555,6 +1759,8 @@ func Test_Cov41_CharCollectionMap_JsonPtr(t *testing.T) {
 			Actual:   j != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1570,6 +1776,8 @@ func Test_Cov41_CharCollectionMap_JsonModel(t *testing.T) {
 			Actual:   model != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1584,6 +1792,8 @@ func Test_Cov41_CharCollectionMap_JsonModelAny(t *testing.T) {
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1601,6 +1811,8 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJson(t *testing.T) {
 			Actual:   err == nil && result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1616,6 +1828,8 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJson_Error(t *testing.T) {
 			Actual:   err != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1633,6 +1847,8 @@ func Test_Cov41_CharCollectionMap_ParseInjectUsingJsonMust(t *testing.T) {
 			Actual:   result != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1650,6 +1866,8 @@ func Test_Cov41_CharCollectionMap_JsonParseSelfInject(t *testing.T) {
 			Actual:   err == nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1665,6 +1883,8 @@ func Test_Cov41_CharCollectionMap_AsJsoner(t *testing.T) {
 			Actual:   m.AsJsoner() != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1678,6 +1898,8 @@ func Test_Cov41_CharCollectionMap_AsJsonContractsBinder(t *testing.T) {
 			Actual:   m.AsJsonContractsBinder() != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1691,6 +1913,8 @@ func Test_Cov41_CharCollectionMap_AsJsonMarshaller(t *testing.T) {
 			Actual:   m.AsJsonMarshaller() != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1704,6 +1928,8 @@ func Test_Cov41_CharCollectionMap_AsJsonParseSelfInjector(t *testing.T) {
 			Actual:   m.AsJsonParseSelfInjector() != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1720,6 +1946,8 @@ func Test_Cov41_CharCollectionMap_Clear_Empty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1735,6 +1963,8 @@ func Test_Cov41_CharCollectionMap_Clear_NonEmpty(t *testing.T) {
 			Actual:   m.Length(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1750,6 +1980,8 @@ func Test_Cov41_CharCollectionMap_Dispose(t *testing.T) {
 			Actual:   true, // no panic
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1765,6 +1997,8 @@ func Test_Cov41_newCharCollectionMapCreator_Empty(t *testing.T) {
 			Actual:   m != nil && m.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1778,6 +2012,8 @@ func Test_Cov41_newCharCollectionMapCreator_CapSelfCap(t *testing.T) {
 			Actual:   m != nil && m.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1791,6 +2027,8 @@ func Test_Cov41_newCharCollectionMapCreator_CapSelfCap_BelowMin(t *testing.T) {
 			Actual:   m != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1804,6 +2042,8 @@ func Test_Cov41_newCharCollectionMapCreator_Items(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1817,6 +2057,8 @@ func Test_Cov41_newCharCollectionMapCreator_Items_Empty(t *testing.T) {
 			Actual:   m.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1830,6 +2072,8 @@ func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap(t *testing.T) {
 			Actual:   m.AllLengthsSum(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1843,6 +2087,8 @@ func Test_Cov41_newCharCollectionMapCreator_ItemsPtrWithCap_Empty(t *testing.T) 
 			Actual:   m.IsEmpty(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1861,6 +2107,8 @@ func Test_Cov41_NewCharCollectionMapUsingDataModel(t *testing.T) {
 			Actual:   result.Has("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1876,6 +2124,8 @@ func Test_Cov41_NewCharCollectionMapDataModelUsing(t *testing.T) {
 			Actual:   model != nil && model.Items != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1891,6 +2141,8 @@ func Test_Cov41_EmptyCreator_CharCollectionMap(t *testing.T) {
 			Actual:   m != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1904,6 +2156,8 @@ func Test_Cov41_EmptyCreator_CharHashsetMap(t *testing.T) {
 			Actual:   m != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1917,6 +2171,8 @@ func Test_Cov41_EmptyCreator_CollectionsOfCollection(t *testing.T) {
 			Actual:   c != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1930,6 +2186,8 @@ func Test_Cov41_EmptyCreator_KeyValuesCollection(t *testing.T) {
 			Actual:   c != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1943,6 +2201,8 @@ func Test_Cov41_EmptyCreator_SimpleStringOnce(t *testing.T) {
 			Actual:   s.IsUninitialized(),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1956,6 +2216,8 @@ func Test_Cov41_EmptyCreator_SimpleStringOncePtr(t *testing.T) {
 			Actual:   s != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1969,6 +2231,8 @@ func Test_Cov41_EmptyCreator_KeyAnyValuePair(t *testing.T) {
 			Actual:   p != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1982,6 +2246,8 @@ func Test_Cov41_EmptyCreator_KeyValuePair(t *testing.T) {
 			Actual:   p != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -1995,6 +2261,8 @@ func Test_Cov41_EmptyCreator_KeyValueCollection(t *testing.T) {
 			Actual:   c != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2008,6 +2276,8 @@ func Test_Cov41_EmptyCreator_LeftRight(t *testing.T) {
 			Actual:   lr != nil,
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2022,6 +2292,8 @@ func Test_Cov41_StringUtils_WrapDouble(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapDouble("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2034,6 +2306,8 @@ func Test_Cov41_StringUtils_WrapSingle(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapSingle("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2046,6 +2320,8 @@ func Test_Cov41_StringUtils_WrapTilda(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapTilda("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2058,6 +2334,8 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_Already(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapDoubleIfMissing("\"hello\""),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2070,6 +2348,8 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapDoubleIfMissing("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2082,6 +2362,8 @@ func Test_Cov41_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapDoubleIfMissing(""),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2094,6 +2376,8 @@ func Test_Cov41_StringUtils_WrapSingleIfMissing_Already(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapSingleIfMissing("'hello'"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2106,6 +2390,8 @@ func Test_Cov41_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapSingleIfMissing("hello"),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }
@@ -2118,6 +2404,8 @@ func Test_Cov41_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
 			Actual:   corestr.StringUtils.WrapSingleIfMissing(""),
 			Args:     args.Map{},
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t)
 	})
 }

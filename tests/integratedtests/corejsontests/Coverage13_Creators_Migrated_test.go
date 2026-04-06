@@ -88,15 +88,25 @@ func Test_C05_NewResultCreator_UsingErrorStringPtr(t *testing.T) {
 }
 
 func Test_C05_NewResultCreator_UsingSerializer(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingSerializer(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C05_NewResultCreator_UsingSerializerFunc(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingSerializerFunc(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	r2 := corejson.NewResult.UsingSerializerFunc(func() ([]byte, error) {
@@ -108,8 +118,13 @@ func Test_C05_NewResultCreator_UsingSerializerFunc(t *testing.T) {
 }
 
 func Test_C05_NewResultCreator_UsingJsoner(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingJsoner(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
@@ -179,8 +194,13 @@ func Test_C05_BytesCloneIf_Func(t *testing.T) {
 }
 
 func Test_C05_BytesDeepClone_Func(t *testing.T) {
+	// Arrange
 	b := corejson.BytesDeepClone([]byte("hello"))
+
+	// Act
 	actual := args.Map{"result": len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	b2 := corejson.BytesDeepClone([]byte{})
@@ -190,8 +210,13 @@ func Test_C05_BytesDeepClone_Func(t *testing.T) {
 }
 
 func Test_C05_BytesToString_Func(t *testing.T) {
+	// Arrange
 	s := corejson.BytesToString([]byte("hello"))
+
+	// Act
 	actual := args.Map{"result": s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	s2 := corejson.BytesToString([]byte{})
@@ -201,8 +226,13 @@ func Test_C05_BytesToString_Func(t *testing.T) {
 }
 
 func Test_C05_BytesToPrettyString_Func(t *testing.T) {
+	// Arrange
 	s := corejson.BytesToPrettyString([]byte(`{"a":1}`))
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	s2 := corejson.BytesToPrettyString([]byte{})
@@ -212,15 +242,25 @@ func Test_C05_BytesToPrettyString_Func(t *testing.T) {
 }
 
 func Test_C05_JsonString_Func(t *testing.T) {
+	// Arrange
 	s, err := corejson.JsonString("hello")
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C05_JsonStringOrErrMsg_Func(t *testing.T) {
+	// Arrange
 	s := corejson.JsonStringOrErrMsg("hello")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	ch := make(chan int)
@@ -231,7 +271,10 @@ func Test_C05_JsonStringOrErrMsg_Func(t *testing.T) {
 }
 
 func Test_C05_StaticJsonError(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corejson.StaticJsonError == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }

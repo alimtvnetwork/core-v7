@@ -9,8 +9,13 @@ import (
 )
 
 func Test_QW_MergeSlicesOfSlices_Empty(t *testing.T) {
+	// Arrange
 	result := stringslice.MergeSlicesOfSlices()
+
+	// Act
 	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }

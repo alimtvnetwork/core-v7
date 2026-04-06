@@ -10,25 +10,37 @@ import (
 // ── IsEmpty / IsNotEmpty ──
 
 func Test_Cov2_IsEmpty_True(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmpty("")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- empty string", actual)
 }
 
 func Test_Cov2_IsEmpty_False(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmpty("hello")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- non-empty", actual)
 }
 
 func Test_Cov2_IsNotEmpty_True(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsNotEmpty("hello")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns empty -- non-empty", actual)
 }
 
 func Test_Cov2_IsNotEmpty_False(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsNotEmpty("")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns empty -- empty", actual)
 }
@@ -36,19 +48,28 @@ func Test_Cov2_IsNotEmpty_False(t *testing.T) {
 // ── IsBlank ──
 
 func Test_Cov2_IsBlank_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsBlank("")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsBlank returns empty -- empty", actual)
 }
 
 func Test_Cov2_IsBlank_Whitespace(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsBlank("   ")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsBlank returns correct value -- whitespace only", actual)
 }
 
 func Test_Cov2_IsBlank_NonEmpty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsBlank("hello")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsBlank returns empty -- non-empty", actual)
 }
@@ -56,34 +77,55 @@ func Test_Cov2_IsBlank_NonEmpty(t *testing.T) {
 // ── IsEmptyPtr / IsBlankPtr ──
 
 func Test_Cov2_IsEmptyPtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyPtr(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_IsEmptyPtr_Empty(t *testing.T) {
+	// Arrange
 	s := ""
+
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- empty", actual)
 }
 
 func Test_Cov2_IsEmptyPtr_NonEmpty(t *testing.T) {
+	// Arrange
 	s := "hello"
+
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- non-empty", actual)
 }
 
 func Test_Cov2_IsBlankPtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsBlankPtr(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsBlankPtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_IsBlankPtr_Whitespace(t *testing.T) {
+	// Arrange
 	s := "   "
+
+	// Act
 	actual := args.Map{"result": stringutil.IsBlankPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsBlankPtr returns correct value -- whitespace", actual)
 }
@@ -91,25 +133,37 @@ func Test_Cov2_IsBlankPtr_Whitespace(t *testing.T) {
 // ── IsEmptyOrWhitespace / IsEmptyOrWhitespacePtr ──
 
 func Test_Cov2_IsEmptyOrWhitespace_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyOrWhitespace("")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespace returns empty -- empty", actual)
 }
 
 func Test_Cov2_IsEmptyOrWhitespace_Whitespace(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyOrWhitespace("   ")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespace returns empty -- whitespace", actual)
 }
 
 func Test_Cov2_IsEmptyOrWhitespace_NonEmpty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyOrWhitespace("hello")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespace returns empty -- non-empty", actual)
 }
 
 func Test_Cov2_IsEmptyOrWhitespacePtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsEmptyOrWhitespacePtr(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespacePtr returns nil -- nil", actual)
 }
@@ -117,26 +171,40 @@ func Test_Cov2_IsEmptyOrWhitespacePtr_Nil(t *testing.T) {
 // ── IsDefined / IsDefinedPtr ──
 
 func Test_Cov2_IsDefined_True(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsDefined("hello")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsDefined returns empty -- non-empty", actual)
 }
 
 func Test_Cov2_IsDefined_False(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsDefined("")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsDefined returns empty -- empty", actual)
 }
 
 func Test_Cov2_IsDefinedPtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsDefinedPtr(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsDefinedPtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_IsDefinedPtr_NonEmpty(t *testing.T) {
+	// Arrange
 	s := "hello"
+
+	// Act
 	actual := args.Map{"result": stringutil.IsDefinedPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsDefinedPtr returns empty -- non-empty", actual)
 }
@@ -144,21 +212,34 @@ func Test_Cov2_IsDefinedPtr_NonEmpty(t *testing.T) {
 // ── IsNullOrEmptyPtr ──
 
 func Test_Cov2_IsNullOrEmptyPtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": stringutil.IsNullOrEmptyPtr(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyPtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_IsNullOrEmptyPtr_Empty(t *testing.T) {
+	// Arrange
 	s := ""
+
+	// Act
 	actual := args.Map{"result": stringutil.IsNullOrEmptyPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyPtr returns empty -- empty", actual)
 }
 
 func Test_Cov2_IsNullOrEmptyPtr_NonEmpty(t *testing.T) {
+	// Arrange
 	s := "hello"
+
+	// Act
 	actual := args.Map{"result": stringutil.IsNullOrEmptyPtr(&s)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyPtr returns empty -- non-empty", actual)
 }
@@ -166,10 +247,13 @@ func Test_Cov2_IsNullOrEmptyPtr_NonEmpty(t *testing.T) {
 // ── IsStarts / IsEnds / IsContains ──
 
 func Test_Cov2_IsStarts(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStarts("hello world", "hello"),
 		"noMatch": stringutil.IsStarts("hello world", "world"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -178,10 +262,13 @@ func Test_Cov2_IsStarts(t *testing.T) {
 }
 
 func Test_Cov2_IsEnds(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsEnds("hello world", "world"),
 		"noMatch": stringutil.IsEnds("hello world", "hello"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -190,10 +277,13 @@ func Test_Cov2_IsEnds(t *testing.T) {
 }
 
 func Test_Cov2_IsContains_Slice(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsContains([]string{"hello", "world"}, "world", 0, true),
 		"noMatch": stringutil.IsContains([]string{"hello", "world"}, "xyz", 0, true),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -204,10 +294,13 @@ func Test_Cov2_IsContains_Slice(t *testing.T) {
 // ── IsStartsWith / IsEndsWith ──
 
 func Test_Cov2_IsStartsWith(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStartsWith("hello", "hel", false),
 		"noMatch": stringutil.IsStartsWith("hello", "xyz", false),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -216,10 +309,13 @@ func Test_Cov2_IsStartsWith(t *testing.T) {
 }
 
 func Test_Cov2_IsEndsWith(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsEndsWith("hello", "llo", false),
 		"noMatch": stringutil.IsEndsWith("hello", "xyz", false),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -230,11 +326,14 @@ func Test_Cov2_IsEndsWith(t *testing.T) {
 // ── IsStartsChar / IsEndsChar / IsStartsRune / IsEndsRune ──
 
 func Test_Cov2_IsStartsChar(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStartsChar("hello", 'h'),
 		"noMatch": stringutil.IsStartsChar("hello", 'x'),
 		"empty":   stringutil.IsStartsChar("", 'h'),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -244,11 +343,14 @@ func Test_Cov2_IsStartsChar(t *testing.T) {
 }
 
 func Test_Cov2_IsEndsChar(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsEndsChar("hello", 'o'),
 		"noMatch": stringutil.IsEndsChar("hello", 'x'),
 		"empty":   stringutil.IsEndsChar("", 'o'),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -258,10 +360,13 @@ func Test_Cov2_IsEndsChar(t *testing.T) {
 }
 
 func Test_Cov2_IsStartsRune(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStartsRune("hello", 'h'),
 		"noMatch": stringutil.IsStartsRune("hello", 'x'),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -270,10 +375,13 @@ func Test_Cov2_IsStartsRune(t *testing.T) {
 }
 
 func Test_Cov2_IsEndsRune(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsEndsRune("hello", 'o'),
 		"noMatch": stringutil.IsEndsRune("hello", 'x'),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -284,10 +392,13 @@ func Test_Cov2_IsEndsRune(t *testing.T) {
 // ── IsStartsAndEndsChar / IsStartsAndEndsWith ──
 
 func Test_Cov2_IsStartsAndEndsChar(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStartsAndEndsChar("[hello]", '[', ']'),
 		"noMatch": stringutil.IsStartsAndEndsChar("hello", '[', ']'),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -296,10 +407,13 @@ func Test_Cov2_IsStartsAndEndsChar(t *testing.T) {
 }
 
 func Test_Cov2_IsStartsAndEndsWith(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsStartsAndEndsWith("<<hello>>", "<<", ">>", false),
 		"noMatch": stringutil.IsStartsAndEndsWith("hello", "<<", ">>", false),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -310,10 +424,13 @@ func Test_Cov2_IsStartsAndEndsWith(t *testing.T) {
 // ── IsAnyStartsWith / IsAnyEndsWith ──
 
 func Test_Cov2_IsAnyStartsWith(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsAnyStartsWith("hello", false, "xyz", "hel"),
 		"noMatch": stringutil.IsAnyStartsWith("hello", false, "xyz", "abc"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -322,10 +439,13 @@ func Test_Cov2_IsAnyStartsWith(t *testing.T) {
 }
 
 func Test_Cov2_IsAnyEndsWith(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"match":   stringutil.IsAnyEndsWith("hello", false, "xyz", "llo"),
 		"noMatch": stringutil.IsAnyEndsWith("hello", false, "xyz", "abc"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -336,16 +456,26 @@ func Test_Cov2_IsAnyEndsWith(t *testing.T) {
 // ── IsContainsPtr / IsContainsPtrSimple ──
 
 func Test_Cov2_IsContainsPtr_Nil(t *testing.T) {
+	// Arrange
 	find := "hello"
+
+	// Act
 	actual := args.Map{"result": stringutil.IsContainsPtr(nil, &find, 0, true)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsContainsPtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_IsContainsPtr_Match(t *testing.T) {
+	// Arrange
 	s := []string{"hello", "world"}
 	find := "world"
+
+	// Act
 	actual := args.Map{"result": stringutil.IsContainsPtr(&s, &find, 0, true)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsContainsPtr returns correct value -- match", actual)
 }
@@ -353,22 +483,35 @@ func Test_Cov2_IsContainsPtr_Match(t *testing.T) {
 // ── ClonePtr / SafeClonePtr ──
 
 func Test_Cov2_ClonePtr_Nil(t *testing.T) {
+	// Act
 	actual := args.Map{"isNil": stringutil.ClonePtr(nil) == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
 }
 
 func Test_Cov2_ClonePtr_NonNil(t *testing.T) {
+	// Arrange
 	s := "hello"
 	cloned := stringutil.ClonePtr(&s)
+
+	// Act
 	actual := args.Map{"value": *cloned, "diffPtr": cloned != &s}
+
+	// Assert
 	expected := args.Map{"value": "hello", "diffPtr": true}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- non-nil", actual)
 }
 
 func Test_Cov2_SafeClonePtr_Nil(t *testing.T) {
+	// Arrange
 	result := stringutil.SafeClonePtr(nil)
+
+	// Act
 	actual := args.Map{"notNil": result != nil, "value": *result}
+
+	// Assert
 	expected := args.Map{"notNil": true, "value": ""}
 	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns nil -- nil", actual)
 }
@@ -376,10 +519,13 @@ func Test_Cov2_SafeClonePtr_Nil(t *testing.T) {
 // ── FirstChar ──
 
 func Test_Cov2_FirstChar(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"normal": stringutil.FirstChar("hello"),
 		"empty":  stringutil.FirstChar(""),
 	}
+
+	// Assert
 	expected := args.Map{
 		"normal": byte('h'),
 		"empty":  byte(0),
@@ -390,10 +536,13 @@ func Test_Cov2_FirstChar(t *testing.T) {
 // ── SafeSubstring ──
 
 func Test_Cov2_SafeSubstring(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"normal":    stringutil.SafeSubstring("hello", 1, 3),
 		"outOfBound": stringutil.SafeSubstring("hello", 0, 100),
 	}
+
+	// Assert
 	expected := args.Map{
 		"normal":    "el",
 		"outOfBound": "",
@@ -404,12 +553,15 @@ func Test_Cov2_SafeSubstring(t *testing.T) {
 // ── ToBool ──
 
 func Test_Cov2_ToBool(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"true":    stringutil.ToBool("true"),
 		"false":   stringutil.ToBool("false"),
 		"empty":   stringutil.ToBool(""),
 		"invalid": stringutil.ToBool("abc"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"true":    true,
 		"false":   false,
@@ -422,24 +574,37 @@ func Test_Cov2_ToBool(t *testing.T) {
 // ── ToInt / ToIntDef / ToIntDefault ──
 
 func Test_Cov2_ToInt(t *testing.T) {
+	// Arrange
 	result := stringutil.ToInt("42", -1)
+
+	// Act
 	actual := args.Map{"value": result}
+
+	// Assert
 	expected := args.Map{"value": 42}
 	expected.ShouldBeEqual(t, 0, "ToInt returns non-empty -- valid", actual)
 }
 
 func Test_Cov2_ToInt_Invalid(t *testing.T) {
+	// Arrange
 	result := stringutil.ToInt("abc", -1)
+
+	// Act
 	actual := args.Map{"value": result}
+
+	// Assert
 	expected := args.Map{"value": -1}
 	expected.ShouldBeEqual(t, 0, "ToInt returns error -- invalid", actual)
 }
 
 func Test_Cov2_ToIntDefault(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"valid":   stringutil.ToIntDefault("42"),
 		"invalid": stringutil.ToIntDefault("abc"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"valid":   42,
 		"invalid": 0,
@@ -450,11 +615,14 @@ func Test_Cov2_ToIntDefault(t *testing.T) {
 // ── AnyToString ──
 
 func Test_Cov2_AnyToString(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"int":    stringutil.AnyToString(42),
 		"string": stringutil.AnyToString("hello"),
 		"bool":   stringutil.AnyToString(true),
 	}
+
+	// Assert
 	expected := args.Map{
 		"int":    "42",
 		"string": "hello",
@@ -466,15 +634,25 @@ func Test_Cov2_AnyToString(t *testing.T) {
 // ── SplitLeftRight ──
 
 func Test_Cov2_SplitLeftRight(t *testing.T) {
+	// Arrange
 	left, right := stringutil.SplitLeftRight("hello:world", ":")
+
+	// Act
 	actual := args.Map{"left": left, "right": right}
+
+	// Assert
 	expected := args.Map{"left": "hello", "right": "world"}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns correct value -- with args", actual)
 }
 
 func Test_Cov2_SplitLeftRight_NoSep(t *testing.T) {
+	// Arrange
 	left, right := stringutil.SplitLeftRight("hello", ":")
+
+	// Act
 	actual := args.Map{"left": left, "right": right}
+
+	// Assert
 	expected := args.Map{"left": "hello", "right": ""}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns empty -- no sep", actual)
 }
@@ -482,8 +660,13 @@ func Test_Cov2_SplitLeftRight_NoSep(t *testing.T) {
 // ── SplitLeftRightTrimmed ──
 
 func Test_Cov2_SplitLeftRightTrimmed(t *testing.T) {
+	// Arrange
 	left, right := stringutil.SplitLeftRightTrimmed(" hello : world ", ":")
+
+	// Act
 	actual := args.Map{"left": left, "right": right}
+
+	// Assert
 	expected := args.Map{"left": "hello", "right": "world"}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrimmed returns correct value -- with args", actual)
 }
@@ -491,8 +674,13 @@ func Test_Cov2_SplitLeftRightTrimmed(t *testing.T) {
 // ── RemoveMany ──
 
 func Test_Cov2_RemoveMany(t *testing.T) {
+	// Arrange
 	result := stringutil.RemoveMany("hello world foo", "world", "foo")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RemoveMany returns correct value -- with args", actual)
 }

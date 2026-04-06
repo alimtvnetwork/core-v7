@@ -10,7 +10,10 @@ import (
 // ── Info nil-safe getters ──
 
 func Test_Cov_Info_NilGetters(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
+
+	// Act
 	actual := args.Map{
 		"name":        info.Name(),
 		"isNull":      info.IsNull(),
@@ -26,6 +29,8 @@ func Test_Cov_Info_NilGetters(t *testing.T) {
 		"safeExUrl":   info.SafeExampleUrl(),
 		"safeCh":      info.SafeChainingExample(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"name": "", "isNull": true, "isDefined": false,
 		"hasAnyName": false, "isEmpty": true, "hasAnyItem": false,
@@ -38,6 +43,7 @@ func Test_Cov_Info_NilGetters(t *testing.T) {
 // ── Info with values ──
 
 func Test_Cov_Info_DefinedGetters(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{
 		RootName:      "test-task",
 		Description:   "desc",
@@ -48,6 +54,8 @@ func Test_Cov_Info_DefinedGetters(t *testing.T) {
 		SingleExample: "example1",
 		Examples:      []string{"e1", "e2"},
 	}
+
+	// Act
 	actual := args.Map{
 		"name":           info.Name(),
 		"isNull":         info.IsNull(),
@@ -62,6 +70,8 @@ func Test_Cov_Info_DefinedGetters(t *testing.T) {
 		"hasExamples":    info.HasExamples(),
 		"hasExcludeOpts": info.HasExcludeOptions(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"name": "test-task", "isNull": false, "isDefined": true,
 		"hasAnyName": true, "hasDesc": true, "hasUrl": true,
@@ -72,11 +82,16 @@ func Test_Cov_Info_DefinedGetters(t *testing.T) {
 }
 
 func Test_Cov_Info_IsName(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{RootName: "test"}
+
+	// Act
 	actual := args.Map{
 		"match":   info.IsName("test"),
 		"noMatch": info.IsName("other"),
 	}
+
+	// Assert
 	expected := args.Map{"match": true, "noMatch": false}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- IsName", actual)
 }
@@ -84,6 +99,7 @@ func Test_Cov_Info_IsName(t *testing.T) {
 // ── IsInclude / IsExclude checks ──
 
 func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{
 		RootName:      "name",
 		Description:   "desc",
@@ -94,6 +110,8 @@ func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
 		SingleExample: "single",
 		Examples:      []string{"e1"},
 	}
+
+	// Act
 	actual := args.Map{
 		"includeRootName":    info.IsIncludeRootName(),
 		"includeDesc":        info.IsIncludeDescription(),
@@ -114,6 +132,8 @@ func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
 		"excludeHintUrl":     info.IsExcludeHintUrl(),
 		"excludeErrorUrl":    info.IsExcludeErrorUrl(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"includeRootName": true, "includeDesc": true, "includeUrl": true,
 		"includeHintUrl": true, "includeErrorUrl": true, "includeExampleUrl": true,
@@ -126,8 +146,13 @@ func Test_Cov_Info_IsInclude_NoExcludeOptions(t *testing.T) {
 }
 
 func Test_Cov_Info_NilIncludeAdditionalErrorWrap(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
+
+	// Act
 	actual := args.Map{"result": info.IsIncludeAdditionalErrorWrap()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil Info IsIncludeAdditionalErrorWrap -- true", actual)
 }
@@ -135,49 +160,74 @@ func Test_Cov_Info_NilIncludeAdditionalErrorWrap(t *testing.T) {
 // ── Clone ──
 
 func Test_Cov_Info_Clone(t *testing.T) {
+	// Arrange
 	info := coretaskinfo.Info{
 		RootName:    "task",
 		Description: "desc",
 		Url:         "url",
 	}
 	cloned := info.Clone()
+
+	// Act
 	actual := args.Map{
 		"name": cloned.RootName,
 		"desc": cloned.Description,
 		"url":  cloned.Url,
 	}
+
+	// Assert
 	expected := args.Map{"name": "task", "desc": "desc", "url": "url"}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Clone", actual)
 }
 
 func Test_Cov_Info_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
 	cloned := info.ClonePtr()
+
+	// Act
 	actual := args.Map{"isNil": cloned == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "Info ClonePtr nil -- nil", actual)
 }
 
 func Test_Cov_Info_ClonePtr_Defined(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{RootName: "test"}
 	cloned := info.ClonePtr()
+
+	// Act
 	actual := args.Map{"name": cloned.RootName}
+
+	// Assert
 	expected := args.Map{"name": "test"}
 	expected.ShouldBeEqual(t, 0, "Info ClonePtr defined -- cloned", actual)
 }
 
 func Test_Cov_Info_ToPtr(t *testing.T) {
+	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	ptr := info.ToPtr()
+
+	// Act
 	actual := args.Map{"name": ptr.RootName}
+
+	// Assert
 	expected := args.Map{"name": "task"}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- ToPtr", actual)
 }
 
 func Test_Cov_Info_ToNonPtr(t *testing.T) {
+	// Arrange
 	info := coretaskinfo.Info{RootName: "task"}
 	nonPtr := info.ToNonPtr()
+
+	// Act
 	actual := args.Map{"name": nonPtr.RootName}
+
+	// Assert
 	expected := args.Map{"name": "task"}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- ToNonPtr", actual)
 }
@@ -185,37 +235,57 @@ func Test_Cov_Info_ToNonPtr(t *testing.T) {
 // ── SetSecure / SetPlain ──
 
 func Test_Cov_Info_SetSecure_Nil(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
 	result := info.SetSecure()
+
+	// Act
 	actual := args.Map{"isSecure": result.IsSecure()}
+
+	// Assert
 	expected := args.Map{"isSecure": true}
 	expected.ShouldBeEqual(t, 0, "Info SetSecure nil -- creates secure", actual)
 }
 
 func Test_Cov_Info_SetSecure_Defined(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	result := info.SetSecure()
+
+	// Act
 	actual := args.Map{
 		"isSecure": result.IsSecure(),
 		"name":     result.RootName,
 	}
+
+	// Assert
 	expected := args.Map{"isSecure": true, "name": "task"}
 	expected.ShouldBeEqual(t, 0, "Info SetSecure defined -- sets secure flag", actual)
 }
 
 func Test_Cov_Info_SetPlain_Nil(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
 	result := info.SetPlain()
+
+	// Act
 	actual := args.Map{"isPlain": result.IsPlainText()}
+
+	// Assert
 	expected := args.Map{"isPlain": true}
 	expected.ShouldBeEqual(t, 0, "Info SetPlain nil -- creates plain", actual)
 }
 
 func Test_Cov_Info_SetPlain_Defined(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{RootName: "task"}
 	info.SetSecure()
 	result := info.SetPlain()
+
+	// Act
 	actual := args.Map{"isPlain": result.IsPlainText()}
+
+	// Assert
 	expected := args.Map{"isPlain": true}
 	expected.ShouldBeEqual(t, 0, "Info SetPlain defined -- sets plain", actual)
 }
@@ -223,25 +293,40 @@ func Test_Cov_Info_SetPlain_Defined(t *testing.T) {
 // ── Options / ExamplesAsSlice ──
 
 func Test_Cov_Info_Options_Nil(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
 	opts := info.Options()
+
+	// Act
 	actual := args.Map{"notNil": opts != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "Info Options nil -- returns empty", actual)
 }
 
 func Test_Cov_Info_ExamplesAsSlice_Nil(t *testing.T) {
+	// Arrange
 	var info *coretaskinfo.Info
 	slice := info.ExamplesAsSlice()
+
+	// Act
 	actual := args.Map{"notNil": slice != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "Info ExamplesAsSlice nil -- returns empty", actual)
 }
 
 func Test_Cov_Info_ExamplesAsSlice_Defined(t *testing.T) {
+	// Arrange
 	info := &coretaskinfo.Info{Examples: []string{"a", "b"}}
 	slice := info.ExamplesAsSlice()
+
+	// Act
 	actual := args.Map{"len": slice.Length()}
+
+	// Assert
 	expected := args.Map{"len": 2}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- ExamplesAsSlice defined", actual)
 }

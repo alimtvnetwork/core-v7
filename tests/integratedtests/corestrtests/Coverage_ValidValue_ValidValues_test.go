@@ -14,8 +14,13 @@ import (
 
 func Test_CovVV_01_Constructors(t *testing.T) {
 	safeTest(t, "Test_CovVV_01_Constructors", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
+
+		// Act
 		actual := args.Map{"result": vv.Value != "hello" || !vv.IsValid}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected valid hello", actual)
 		ve := corestr.NewValidValueEmpty()
@@ -35,8 +40,13 @@ func Test_CovVV_01_Constructors(t *testing.T) {
 
 func Test_CovVV_02_NewValidValueUsingAny(t *testing.T) {
 	safeTest(t, "Test_CovVV_02_NewValidValueUsingAny", func() {
+		// Arrange
 		vv := corestr.NewValidValueUsingAny(false, true, "test")
+
+		// Act
 		actual := args.Map{"result": vv.IsValid}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	})
@@ -51,9 +61,14 @@ func Test_CovVV_03_NewValidValueUsingAnyAutoValid(t *testing.T) {
 
 func Test_CovVV_04_ValueBytesOnce(t *testing.T) {
 	safeTest(t, "Test_CovVV_04_ValueBytesOnce", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hi")
 		b := vv.ValueBytesOnce()
+
+		// Act
 		actual := args.Map{"result": len(b) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// second call returns cached
@@ -71,8 +86,13 @@ func Test_CovVV_04_ValueBytesOnce(t *testing.T) {
 
 func Test_CovVV_05_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovVV_05_IsEmpty_IsWhitespace", func() {
+		// Arrange
 		vv := corestr.NewValidValue("")
+
+		// Act
 		actual := args.Map{"result": vv.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": vv.IsWhitespace()}
@@ -87,8 +107,13 @@ func Test_CovVV_05_IsEmpty_IsWhitespace(t *testing.T) {
 
 func Test_CovVV_06_Trim(t *testing.T) {
 	safeTest(t, "Test_CovVV_06_Trim", func() {
+		// Arrange
 		vv := corestr.NewValidValue("  hi  ")
+
+		// Act
 		actual := args.Map{"result": vv.Trim() != "hi"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hi", actual)
 	})
@@ -96,8 +121,13 @@ func Test_CovVV_06_Trim(t *testing.T) {
 
 func Test_CovVV_07_HasValidNonEmpty_HasValidNonWhitespace_HasSafeNonEmpty(t *testing.T) {
 	safeTest(t, "Test_CovVV_07_HasValidNonEmpty_HasValidNonWhitespace_HasSafeNonEmpty", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hi")
+
+		// Act
 		actual := args.Map{"result": vv.HasValidNonEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": vv.HasValidNonWhitespace()}
@@ -115,8 +145,13 @@ func Test_CovVV_07_HasValidNonEmpty_HasValidNonWhitespace_HasSafeNonEmpty(t *tes
 
 func Test_CovVV_08_ValueBool(t *testing.T) {
 	safeTest(t, "Test_CovVV_08_ValueBool", func() {
+		// Arrange
 		vv := corestr.NewValidValue("true")
+
+		// Act
 		actual := args.Map{"result": vv.ValueBool()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		vv2 := corestr.NewValidValue("")
@@ -132,8 +167,13 @@ func Test_CovVV_08_ValueBool(t *testing.T) {
 
 func Test_CovVV_09_ValueInt_ValueDefInt(t *testing.T) {
 	safeTest(t, "Test_CovVV_09_ValueInt_ValueDefInt", func() {
+		// Arrange
 		vv := corestr.NewValidValue("42")
+
+		// Act
 		actual := args.Map{"result": vv.ValueInt(0) != 42}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 		actual := args.Map{"result": vv.ValueDefInt() != 42}
@@ -148,8 +188,13 @@ func Test_CovVV_09_ValueInt_ValueDefInt(t *testing.T) {
 
 func Test_CovVV_10_ValueByte_ValueDefByte(t *testing.T) {
 	safeTest(t, "Test_CovVV_10_ValueByte_ValueDefByte", func() {
+		// Arrange
 		vv := corestr.NewValidValue("100")
+
+		// Act
 		actual := args.Map{"result": vv.ValueByte(0) != 100}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 100", actual)
 		actual := args.Map{"result": vv.ValueDefByte() != 100}
@@ -175,8 +220,13 @@ func Test_CovVV_10_ValueByte_ValueDefByte(t *testing.T) {
 
 func Test_CovVV_11_ValueFloat64_ValueDefFloat64(t *testing.T) {
 	safeTest(t, "Test_CovVV_11_ValueFloat64_ValueDefFloat64", func() {
+		// Arrange
 		vv := corestr.NewValidValue("3.14")
+
+		// Act
 		actual := args.Map{"result": vv.ValueFloat64(0) != 3.14}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
 		actual := args.Map{"result": vv.ValueDefFloat64() != 3.14}
@@ -191,8 +241,13 @@ func Test_CovVV_11_ValueFloat64_ValueDefFloat64(t *testing.T) {
 
 func Test_CovVV_12_Is_IsAnyOf(t *testing.T) {
 	safeTest(t, "Test_CovVV_12_Is_IsAnyOf", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
+
+		// Act
 		actual := args.Map{"result": vv.Is("hello")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": vv.Is("world")}
@@ -212,8 +267,13 @@ func Test_CovVV_12_Is_IsAnyOf(t *testing.T) {
 
 func Test_CovVV_13_IsContains_IsAnyContains(t *testing.T) {
 	safeTest(t, "Test_CovVV_13_IsContains_IsAnyContains", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello world")
+
+		// Act
 		actual := args.Map{"result": vv.IsContains("world")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": vv.IsAnyContains("xyz", "world")}
@@ -230,8 +290,13 @@ func Test_CovVV_13_IsContains_IsAnyContains(t *testing.T) {
 
 func Test_CovVV_14_IsEqualNonSensitive(t *testing.T) {
 	safeTest(t, "Test_CovVV_14_IsEqualNonSensitive", func() {
+		// Arrange
 		vv := corestr.NewValidValue("Hello")
+
+		// Act
 		actual := args.Map{"result": vv.IsEqualNonSensitive("hello")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -239,9 +304,14 @@ func Test_CovVV_14_IsEqualNonSensitive(t *testing.T) {
 
 func Test_CovVV_15_Regex(t *testing.T) {
 	safeTest(t, "Test_CovVV_15_Regex", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello123")
 		re := regexp.MustCompile(`\d+`)
+
+		// Act
 		actual := args.Map{"result": vv.IsRegexMatches(re)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": vv.IsRegexMatches(nil)}
@@ -273,9 +343,14 @@ func Test_CovVV_15_Regex(t *testing.T) {
 
 func Test_CovVV_16_Split_SplitNonEmpty_SplitTrimNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovVV_16_Split_SplitNonEmpty_SplitTrimNonWhitespace", func() {
+		// Arrange
 		vv := corestr.NewValidValue("a,b,c")
 		parts := vv.Split(",")
+
+		// Act
 		actual := args.Map{"result": len(parts) != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		vv2 := corestr.NewValidValue("a,,b")
@@ -289,9 +364,14 @@ func Test_CovVV_16_Split_SplitNonEmpty_SplitTrimNonWhitespace(t *testing.T) {
 
 func Test_CovVV_17_Clone(t *testing.T) {
 	safeTest(t, "Test_CovVV_17_Clone", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
 		c := vv.Clone()
+
+		// Act
 		actual := args.Map{"result": c.Value != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		// nil clone
@@ -304,8 +384,13 @@ func Test_CovVV_17_Clone(t *testing.T) {
 
 func Test_CovVV_18_String_FullString(t *testing.T) {
 	safeTest(t, "Test_CovVV_18_String_FullString", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
+
+		// Act
 		actual := args.Map{"result": vv.String() != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		_ = vv.FullString()
@@ -322,9 +407,14 @@ func Test_CovVV_18_String_FullString(t *testing.T) {
 
 func Test_CovVV_19_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_CovVV_19_Clear_Dispose", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
 		vv.Clear()
+
+		// Act
 		actual := args.Map{"result": vv.Value != ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		vv2 := corestr.NewValidValue("hello")
@@ -338,12 +428,17 @@ func Test_CovVV_19_Clear_Dispose(t *testing.T) {
 
 func Test_CovVV_20_Json_ParseInject_Serialize(t *testing.T) {
 	safeTest(t, "Test_CovVV_20_Json_ParseInject_Serialize", func() {
+		// Arrange
 		vv := corestr.NewValidValue("hello")
 		_ = vv.Json()
 		jr := vv.JsonPtr()
 		vv2 := &corestr.ValidValue{}
 		r, err := vv2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil || r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		_, err2 := vv.Serialize()
@@ -364,8 +459,13 @@ func Test_CovVV_20_Json_ParseInject_Serialize(t *testing.T) {
 
 func Test_CovVVs_01_Constructors(t *testing.T) {
 	safeTest(t, "Test_CovVVs_01_Constructors", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
+
+		// Act
 		actual := args.Map{"result": vvs.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		vvs2 := corestr.NewValidValues(5)
@@ -388,8 +488,13 @@ func Test_CovVVs_01_Constructors(t *testing.T) {
 
 func Test_CovVVs_02_Count_HasAnyItem_LastIndex_HasIndex(t *testing.T) {
 	safeTest(t, "Test_CovVVs_02_Count_HasAnyItem_LastIndex_HasIndex", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
+
+		// Act
 		actual := args.Map{"result": vvs.Count() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		actual := args.Map{"result": vvs.HasAnyItem()}
@@ -416,9 +521,14 @@ func Test_CovVVs_02_Count_HasAnyItem_LastIndex_HasIndex(t *testing.T) {
 
 func Test_CovVVs_03_Add_AddFull(t *testing.T) {
 	safeTest(t, "Test_CovVVs_03_Add_AddFull", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
+
+		// Act
 		actual := args.Map{"result": vvs.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		vvs.AddFull(false, "b", "msg")
@@ -430,9 +540,14 @@ func Test_CovVVs_03_Add_AddFull(t *testing.T) {
 
 func Test_CovVVs_04_Adds_AddsPtr(t *testing.T) {
 	safeTest(t, "Test_CovVVs_04_Adds_AddsPtr", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		vvs.Adds(corestr.ValidValue{Value: "a"}, corestr.ValidValue{Value: "b"})
+
+		// Act
 		actual := args.Map{"result": vvs.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		vvs.Adds()
@@ -453,12 +568,17 @@ func Test_CovVVs_04_Adds_AddsPtr(t *testing.T) {
 
 func Test_CovVVs_05_AddValidValues(t *testing.T) {
 	safeTest(t, "Test_CovVVs_05_AddValidValues", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
 		vvs2 := corestr.EmptyValidValues()
 		vvs2.Add("b")
 		vvs.AddValidValues(vvs2)
+
+		// Act
 		actual := args.Map{"result": vvs.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		vvs.AddValidValues(nil)
@@ -474,9 +594,14 @@ func Test_CovVVs_05_AddValidValues(t *testing.T) {
 
 func Test_CovVVs_06_AddHashsetMap_AddHashset(t *testing.T) {
 	safeTest(t, "Test_CovVVs_06_AddHashsetMap_AddHashset", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		vvs.AddHashsetMap(map[string]bool{"a": true, "b": false})
+
+		// Act
 		actual := args.Map{"result": vvs.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		vvs.AddHashsetMap(nil)
@@ -491,11 +616,16 @@ func Test_CovVVs_06_AddHashsetMap_AddHashset(t *testing.T) {
 
 func Test_CovVVs_07_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_CovVVs_07_ConcatNew", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		vvs.Add("a")
 		// no args, clone
 		c := vvs.ConcatNew(true)
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// no args, no clone
@@ -515,12 +645,17 @@ func Test_CovVVs_07_ConcatNew(t *testing.T) {
 
 func Test_CovVVs_08_Find(t *testing.T) {
 	safeTest(t, "Test_CovVVs_08_Find", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		// empty find
 		r := vvs.Find(func(i int, vv *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return vv, true, false
 		})
+
+		// Act
 		actual := args.Map{"result": len(r) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		vvs.Add("a")
@@ -551,8 +686,13 @@ func Test_CovVVs_08_Find(t *testing.T) {
 
 func Test_CovVVs_09_SafeValueAt_SafeValidValueAt_SafeIndexes(t *testing.T) {
 	safeTest(t, "Test_CovVVs_09_SafeValueAt_SafeValidValueAt_SafeIndexes", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
+
+		// Act
 		actual := args.Map{"result": vvs.SafeValueAt(0) != ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": vvs.SafeValidValueAt(0) != ""}
@@ -594,8 +734,13 @@ func Test_CovVVs_09_SafeValueAt_SafeValidValueAt_SafeIndexes(t *testing.T) {
 
 func Test_CovVVs_10_Strings_FullStrings_String(t *testing.T) {
 	safeTest(t, "Test_CovVVs_10_Strings_FullStrings_String", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
+
+		// Act
 		actual := args.Map{"result": len(vvs.Strings()) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		actual := args.Map{"result": len(vvs.FullStrings()) != 0}
@@ -614,9 +759,14 @@ func Test_CovVVs_10_Strings_FullStrings_String(t *testing.T) {
 
 func Test_CovVVs_11_Hashmap_Map(t *testing.T) {
 	safeTest(t, "Test_CovVVs_11_Hashmap_Map", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
 		hm := vvs.Hashmap()
+
+		// Act
 		actual := args.Map{"result": hm.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		vvs.Add("a")
@@ -633,8 +783,13 @@ func Test_CovVVs_11_Hashmap_Map(t *testing.T) {
 
 func Test_CovVVs_12_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_CovVVs_12_IsEmpty", func() {
+		// Arrange
 		vvs := corestr.EmptyValidValues()
+
+		// Act
 		actual := args.Map{"result": vvs.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		vvs.Add("a")
@@ -650,8 +805,13 @@ func Test_CovVVs_12_IsEmpty(t *testing.T) {
 
 func Test_CovLCN_01_IsEmpty_HasElement_HasNext(t *testing.T) {
 	safeTest(t, "Test_CovLCN_01_IsEmpty_HasElement_HasNext", func() {
+		// Arrange
 		node := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"false", "a"})}
+
+		// Act
 		actual := args.Map{"result": node.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 		actual := args.Map{"result": node.HasElement()}
@@ -665,9 +825,14 @@ func Test_CovLCN_01_IsEmpty_HasElement_HasNext(t *testing.T) {
 
 func Test_CovLCN_02_EndOfChain(t *testing.T) {
 	safeTest(t, "Test_CovLCN_02_EndOfChain", func() {
+		// Arrange
 		node := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"false", "a"})}
 		end, length := node.EndOfChain()
+
+		// Act
 		actual := args.Map{"result": end != node || length != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected self, length 1", actual)
 	})
@@ -675,9 +840,14 @@ func Test_CovLCN_02_EndOfChain(t *testing.T) {
 
 func Test_CovLCN_03_Clone(t *testing.T) {
 	safeTest(t, "Test_CovLCN_03_Clone", func() {
+		// Arrange
 		node := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"false", "a"})}
 		c := node.Clone()
+
+		// Act
 		actual := args.Map{"result": c.HasNext()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no next", actual)
 	})
@@ -685,10 +855,15 @@ func Test_CovLCN_03_Clone(t *testing.T) {
 
 func Test_CovLCN_04_IsEqual_IsChainEqual(t *testing.T) {
 	safeTest(t, "Test_CovLCN_04_IsEqual_IsChainEqual", func() {
+		// Arrange
 		col := corestr.New.Collection.Strings([]string{"false", "a"})
 		n1 := &corestr.LinkedCollectionNode{Element: col}
 		n2 := &corestr.LinkedCollectionNode{Element: col}
+
+		// Act
 		actual := args.Map{"result": n1.IsEqual(n2)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": n1.IsChainEqual(n2)}
@@ -714,9 +889,14 @@ func Test_CovLCN_04_IsEqual_IsChainEqual(t *testing.T) {
 
 func Test_CovLCN_05_IsEqualValue(t *testing.T) {
 	safeTest(t, "Test_CovLCN_05_IsEqualValue", func() {
+		// Arrange
 		col := corestr.New.Collection.Strings([]string{"false", "a"})
 		n := &corestr.LinkedCollectionNode{Element: col}
+
+		// Act
 		actual := args.Map{"result": n.IsEqualValue(col)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": n.IsEqualValue(nil)}
@@ -727,11 +907,16 @@ func Test_CovLCN_05_IsEqualValue(t *testing.T) {
 
 func Test_CovLCN_06_String_List_ListPtr_Join_StringList(t *testing.T) {
 	safeTest(t, "Test_CovLCN_06_String_List_ListPtr_Join_StringList", func() {
+		// Arrange
 		col := corestr.New.Collection.Strings([]string{"false", "a", "b"})
 		n := &corestr.LinkedCollectionNode{Element: col}
 		_ = n.String()
 		list := n.List()
+
+		// Act
 		actualListLen := args.Map{"result": len(list)}
+
+		// Assert
 		expectedListLen := args.Map{"result": 3}
 		expectedListLen.ShouldBeEqual(t, 0, "List returns 3 items -- Collection has 3 items", actualListLen)
 		lp := n.ListPtr()
@@ -745,10 +930,15 @@ func Test_CovLCN_06_String_List_ListPtr_Join_StringList(t *testing.T) {
 
 func Test_CovLCN_07_CreateLinkedList(t *testing.T) {
 	safeTest(t, "Test_CovLCN_07_CreateLinkedList", func() {
+		// Arrange
 		col := corestr.New.Collection.Strings([]string{"false", "a"})
 		n := &corestr.LinkedCollectionNode{Element: col}
 		ll := n.CreateLinkedList()
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -758,8 +948,13 @@ func Test_CovLCN_07_CreateLinkedList(t *testing.T) {
 
 func Test_CovNCLCN_01_Basic(t *testing.T) {
 	safeTest(t, "Test_CovNCLCN_01_Basic", func() {
+		// Arrange
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
+
+		// Act
 		actual := args.Map{"result": nc.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": nc.HasItems()}
@@ -776,13 +971,18 @@ func Test_CovNCLCN_01_Basic(t *testing.T) {
 
 func Test_CovNCLCN_02_Adds_First_Last(t *testing.T) {
 	safeTest(t, "Test_CovNCLCN_02_Adds_First_Last", func() {
+		// Arrange
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
 		col1 := corestr.New.Collection.Strings([]string{"false", "a"})
 		col2 := corestr.New.Collection.Strings([]string{"false", "b"})
 		n1 := &corestr.LinkedCollectionNode{Element: col1}
 		n2 := &corestr.LinkedCollectionNode{Element: col2}
 		nc.Adds(n1, n2)
+
+		// Act
 		actual := args.Map{"result": nc.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		actual := args.Map{"result": nc.First() != n1}
@@ -800,8 +1000,13 @@ func Test_CovNCLCN_02_Adds_First_Last(t *testing.T) {
 
 func Test_CovNCLCN_03_FirstOrDefault_LastOrDefault(t *testing.T) {
 	safeTest(t, "Test_CovNCLCN_03_FirstOrDefault_LastOrDefault", func() {
+		// Arrange
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
+
+		// Act
 		actual := args.Map{"result": nc.FirstOrDefault() != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		actual := args.Map{"result": nc.LastOrDefault() != nil}
@@ -820,6 +1025,7 @@ func Test_CovNCLCN_03_FirstOrDefault_LastOrDefault(t *testing.T) {
 
 func Test_CovNCLCN_04_ApplyChaining(t *testing.T) {
 	safeTest(t, "Test_CovNCLCN_04_ApplyChaining", func() {
+		// Arrange
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
 		// empty apply
 		nc.ApplyChaining()
@@ -829,7 +1035,11 @@ func Test_CovNCLCN_04_ApplyChaining(t *testing.T) {
 		n2 := &corestr.LinkedCollectionNode{Element: col2}
 		nc.Adds(n1, n2)
 		nc.ApplyChaining()
+
+		// Act
 		actual := args.Map{"result": nc.IsChainingApplied()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": n1.HasNext()}
@@ -842,10 +1052,15 @@ func Test_CovNCLCN_04_ApplyChaining(t *testing.T) {
 
 func Test_CovNCLCN_05_ToChainedNodes(t *testing.T) {
 	safeTest(t, "Test_CovNCLCN_05_ToChainedNodes", func() {
+		// Arrange
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
 		// empty
 		cn := nc.ToChainedNodes()
+
+		// Act
 		actual := args.Map{"result": cn == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		col1 := corestr.New.Collection.Strings([]string{"false", "a"})

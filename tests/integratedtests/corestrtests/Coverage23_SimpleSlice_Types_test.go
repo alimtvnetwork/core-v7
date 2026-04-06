@@ -14,8 +14,13 @@ import (
 
 func Test_Cov23_SimpleSlice_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_BasicOps", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 3 || ss.IsEmpty() || !ss.HasAnyItem() || ss.LastIndex() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		actual := args.Map{"result": ss.Count() != 3}
@@ -56,8 +61,13 @@ func Test_Cov23_SimpleSlice_AddMethods(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_FirstLast(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_FirstLast", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": ss.First() != "a" || ss.Last() != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 		actual := args.Map{"result": ss.FirstOrDefault() != "a" || ss.LastOrDefault() != "b"}
@@ -76,8 +86,13 @@ func Test_Cov23_SimpleSlice_FirstLast(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_SkipTakeLimit(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_SkipTakeLimit", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "c")
+
+		// Act
 		actual := args.Map{"result": len(ss.Skip(1)) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong skip", actual)
 		actual := args.Map{"result": len(ss.Take(2)) != 2}
@@ -94,8 +109,13 @@ func Test_Cov23_SimpleSlice_SkipTakeLimit(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsContains(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsContains", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": ss.IsContains("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": ss.IsContains("x")}
@@ -106,8 +126,13 @@ func Test_Cov23_SimpleSlice_IsContains(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsContainsFunc(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsContainsFunc", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("abc", "def")
+
+		// Act
 		actual := args.Map{"result": ss.IsContainsFunc("abc", func(a, b string) bool { return a == b })}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -115,8 +140,13 @@ func Test_Cov23_SimpleSlice_IsContainsFunc(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IndexOf(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IndexOf", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": ss.IndexOf("b") != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong index", actual)
 		actual := args.Map{"result": ss.IndexOf("x") != -1}
@@ -127,9 +157,14 @@ func Test_Cov23_SimpleSlice_IndexOf(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IndexOfFunc(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IndexOfFunc", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		idx := ss.IndexOfFunc("b", func(a, b string) bool { return a == b })
+
+		// Act
 		actual := args.Map{"result": idx != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong index", actual)
 	})
@@ -137,8 +172,13 @@ func Test_Cov23_SimpleSlice_IndexOfFunc(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_HasIndex(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_HasIndex", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.HasIndex(0)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": ss.HasIndex(5)}
@@ -149,9 +189,14 @@ func Test_Cov23_SimpleSlice_HasIndex(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_InsertAt(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_InsertAt", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "c")
 		ss.InsertAt(1, "b")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		ss.InsertAt(-1, "x") // out of range, skip
@@ -199,9 +244,14 @@ func Test_Cov23_SimpleSlice_Strings_List(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_Transpile(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_Transpile", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result := ss.Transpile(func(s string) string { return s + "!" })
+
+		// Act
 		actual := args.Map{"result": result.IsContains("a!")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected transpiled", actual)
 	})
@@ -209,9 +259,14 @@ func Test_Cov23_SimpleSlice_Transpile(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_TranspileJoin(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_TranspileJoin", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		s := ss.TranspileJoin(func(s string) string { return s + "!" }, ",")
+
+		// Act
 		actual := args.Map{"result": s == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
@@ -219,9 +274,14 @@ func Test_Cov23_SimpleSlice_TranspileJoin(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_EachItemSplitBy(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_EachItemSplitBy", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a,b", "c")
 		result := ss.EachItemSplitBy(",")
+
+		// Act
 		actual := args.Map{"result": result.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
@@ -229,9 +289,14 @@ func Test_Cov23_SimpleSlice_EachItemSplitBy(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_Concat(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_Concat", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
 		newSS := ss.ConcatNew("b", "c")
+
+		// Act
 		actual := args.Map{"result": newSS.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		_ = ss.ConcatNewStrings("d")
@@ -242,9 +307,14 @@ func Test_Cov23_SimpleSlice_Concat(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_PrependAppend(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_PrependAppend", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("b")
 		ss.PrependAppend([]string{"a"}, []string{"c"})
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
@@ -252,9 +322,14 @@ func Test_Cov23_SimpleSlice_PrependAppend(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_PrependAppendJoin(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_PrependAppendJoin", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("b")
 		s := ss.PrependJoin(",", "a")
+
+		// Act
 		actual := args.Map{"result": s == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		s2 := ss.AppendJoin(",", "c")
@@ -266,9 +341,14 @@ func Test_Cov23_SimpleSlice_PrependAppendJoin(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsEqual", func() {
+		// Arrange
 		a := corestr.New.SimpleSlice.Lines("a", "b")
 		b := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": a.IsEqual(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
@@ -276,8 +356,13 @@ func Test_Cov23_SimpleSlice_IsEqual(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsEqualLines(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsEqualLines", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "b"})}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
@@ -285,8 +370,13 @@ func Test_Cov23_SimpleSlice_IsEqualLines(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsEqualUnorderedLines(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsEqualUnorderedLines", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("b", "a")
+
+		// Act
 		actual := args.Map{"result": ss.IsEqualUnorderedLines([]string{"a", "b"})}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
@@ -294,8 +384,13 @@ func Test_Cov23_SimpleSlice_IsEqualUnorderedLines(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_IsEqualUnorderedLinesClone(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_IsEqualUnorderedLinesClone", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("b", "a")
+
+		// Act
 		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone([]string{"a", "b"})}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
@@ -303,9 +398,14 @@ func Test_Cov23_SimpleSlice_IsEqualUnorderedLinesClone(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_Collection(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_Collection", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
 		c := ss.Collection(false)
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = ss.ToCollection(true)
@@ -314,9 +414,14 @@ func Test_Cov23_SimpleSlice_Collection(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_CountFunc(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_CountFunc", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "bb", "ccc")
 		cnt := ss.CountFunc(func(i int, s string) bool { return len(s) > 1 })
+
+		// Act
 		actual := args.Map{"result": cnt != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -324,9 +429,14 @@ func Test_Cov23_SimpleSlice_CountFunc(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_AsError(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_AsError", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("e1", "e2")
 		err := ss.AsError(",")
+
+		// Act
 		actual := args.Map{"result": err == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 		_ = ss.AsDefaultError()
@@ -339,8 +449,13 @@ func Test_Cov23_SimpleSlice_AsError(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_String(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_String", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.String() == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		empty := corestr.New.SimpleSlice.Empty()
@@ -352,9 +467,14 @@ func Test_Cov23_SimpleSlice_String(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_Sort_Reverse(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_Sort_Reverse", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("c", "a", "b")
 		ss.Sort()
+
+		// Act
 		actual := args.Map{"result": ss.First() != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong sort", actual)
 		ss.Reverse()
@@ -366,9 +486,14 @@ func Test_Cov23_SimpleSlice_Sort_Reverse(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_Hashset(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_Hashset", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		hs := ss.Hashset()
+
+		// Act
 		actual := args.Map{"result": hs.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -376,9 +501,14 @@ func Test_Cov23_SimpleSlice_Hashset(t *testing.T) {
 
 func Test_Cov23_SimpleSlice_CsvStrings(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleSlice_CsvStrings", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		csv := ss.CsvStrings()
+
+		// Act
 		actual := args.Map{"result": len(csv) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -399,8 +529,13 @@ func Test_Cov23_SimpleSlice_JsonModel(t *testing.T) {
 
 func Test_Cov23_CollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_Cov23_CollectionsOfCollection", func() {
+		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Empty()
+
+		// Act
 		actual := args.Map{"result": cc.IsEmpty() || cc.HasItems() || cc.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -427,9 +562,14 @@ func Test_Cov23_CollectionsOfCollection(t *testing.T) {
 
 func Test_Cov23_CollectionsOfCollection_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov23_CollectionsOfCollection_AddStrings", func() {
+		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Empty()
 		cc.AddStrings(true, []string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": cc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -437,9 +577,14 @@ func Test_Cov23_CollectionsOfCollection_AddStrings(t *testing.T) {
 
 func Test_Cov23_CollectionsOfCollection_AddsStringsOfStrings(t *testing.T) {
 	safeTest(t, "Test_Cov23_CollectionsOfCollection_AddsStringsOfStrings", func() {
+		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Empty()
 		cc.AddsStringsOfStrings(true, []string{"a"}, []string{"b"})
+
+		// Act
 		actual := args.Map{"result": cc.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -447,11 +592,16 @@ func Test_Cov23_CollectionsOfCollection_AddsStringsOfStrings(t *testing.T) {
 
 func Test_Cov23_CollectionsOfCollection_AddCollections(t *testing.T) {
 	safeTest(t, "Test_Cov23_CollectionsOfCollection_AddCollections", func() {
+		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Empty()
 		c := *corestr.New.Collection.Strings([]string{"a"})
 		cc.AddCollections(c)
 		cc.Adds(c)
+
+		// Act
 		actual := args.Map{"result": cc.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -459,12 +609,17 @@ func Test_Cov23_CollectionsOfCollection_AddCollections(t *testing.T) {
 
 func Test_Cov23_CollectionsOfCollection_JsonOps(t *testing.T) {
 	safeTest(t, "Test_Cov23_CollectionsOfCollection_JsonOps", func() {
+		// Arrange
 		cc := corestr.New.CollectionsOfCollection.Empty()
 		cc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		_ = cc.JsonModel()
 		_ = cc.JsonModelAny()
 		b, err := cc.MarshalJSON()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		cc2 := corestr.New.CollectionsOfCollection.Empty()
@@ -484,8 +639,13 @@ func Test_Cov23_CollectionsOfCollection_JsonOps(t *testing.T) {
 
 func Test_Cov23_HashmapDiff(t *testing.T) {
 	safeTest(t, "Test_Cov23_HashmapDiff", func() {
+		// Arrange
 		hd := corestr.HashmapDiff{"a": "1", "b": "2"}
+
+		// Act
 		actual := args.Map{"result": hd.IsEmpty() || !hd.HasAnyItem() || hd.Length() != 2 || hd.LastIndex() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		_ = hd.Raw()
@@ -513,8 +673,13 @@ func Test_Cov23_HashmapDiff(t *testing.T) {
 
 func Test_Cov23_KeyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov23_KeyValuePair", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
+
+		// Act
 		actual := args.Map{"result": kv.Key != "k" || kv.Value != "v"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 	})
@@ -522,9 +687,14 @@ func Test_Cov23_KeyValuePair(t *testing.T) {
 
 func Test_Cov23_KeyAnyValuePair(t *testing.T) {
 	safeTest(t, "Test_Cov23_KeyAnyValuePair", func() {
+		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: 42}
 		s := kav.ValueString()
+
+		// Act
 		actual := args.Map{"result": s == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
@@ -536,8 +706,13 @@ func Test_Cov23_KeyAnyValuePair(t *testing.T) {
 
 func Test_Cov23_SimpleStringOnce(t *testing.T) {
 	safeTest(t, "Test_Cov23_SimpleStringOnce", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
+
+		// Act
 		actual := args.Map{"result": sso.IsEmpty() || !sso.IsDefined() || sso.Value() != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		sso2 := corestr.New.SimpleStringOnce.Empty()
@@ -584,8 +759,13 @@ func Test_Cov23_NewCreator(t *testing.T) {
 
 func Test_Cov23_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_Cov23_HashsetsCollection", func() {
+		// Arrange
 		hc := corestr.New.HashsetsCollection.Empty()
+
+		// Act
 		actual := args.Map{"result": hc.IsEmpty() || hc.HasItems() || hc.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		hs := corestr.New.Hashset.Cap(2)

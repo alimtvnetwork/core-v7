@@ -13,8 +13,13 @@ import (
 // --- One ---
 
 func Test_CovArgs_01_One_Basic(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello", Expect: 42}
+
+	// Act
 	actual := args.Map{"result": o.FirstItem() != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	actual := args.Map{"result": o.Expected() != 42}
@@ -32,9 +37,14 @@ func Test_CovArgs_01_One_Basic(t *testing.T) {
 }
 
 func Test_CovArgs_02_One_ValidArgs_Args_Slice(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello", Expect: 42}
 	va := o.ValidArgs()
+
+	// Act
 	actual := args.Map{"result": len(va) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	a := o.Args(1)
@@ -57,27 +67,42 @@ func Test_CovArgs_02_One_ValidArgs_Args_Slice(t *testing.T) {
 }
 
 func Test_CovArgs_03_One_GetByIndex_String(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello"}
 	_ = o.GetByIndex(0)
 	_ = o.GetByIndex(99)
 	s := o.String()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_CovArgs_04_One_LeftRight(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello", Expect: 42}
 	lr := o.LeftRight()
+
+	// Act
 	actual := args.Map{"result": lr.Left != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_CovArgs_05_One_ArgTwo(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello", Expect: 42}
 	a2 := o.ArgTwo()
+
+	// Act
 	actual := args.Map{"result": a2.First != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
@@ -91,8 +116,13 @@ func Test_CovArgs_06_One_AsInterfaces(t *testing.T) {
 // --- Two ---
 
 func Test_CovArgs_07_Two_Basic(t *testing.T) {
+	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b", Expect: 1}
+
+	// Act
 	actual := args.Map{"result": tw.FirstItem() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	actual := args.Map{"result": tw.SecondItem() != "b"}
@@ -116,9 +146,14 @@ func Test_CovArgs_07_Two_Basic(t *testing.T) {
 }
 
 func Test_CovArgs_08_Two_ValidArgs_Args_Slice(t *testing.T) {
+	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b", Expect: 1}
 	va := tw.ValidArgs()
+
+	// Act
 	actual := args.Map{"result": len(va) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a := tw.Args(2)
@@ -136,19 +171,29 @@ func Test_CovArgs_08_Two_ValidArgs_Args_Slice(t *testing.T) {
 }
 
 func Test_CovArgs_09_Two_GetByIndex_String(t *testing.T) {
+	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b"}
 	_ = tw.GetByIndex(0)
 	_ = tw.GetByIndex(99)
 	s := tw.String()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_CovArgs_10_Two_LeftRight_ArgTwo(t *testing.T) {
+	// Arrange
 	tw := &args.TwoAny{First: "a", Second: "b", Expect: 1}
 	lr := tw.LeftRight()
+
+	// Act
 	actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a,b", actual)
 	a2 := tw.ArgTwo()
@@ -166,11 +211,16 @@ func Test_CovArgs_11_Two_AsInterfaces(t *testing.T) {
 // --- Map ---
 
 func Test_CovArgs_12_Map_Basic(t *testing.T) {
+	// Arrange
 	m := args.Map{
 		"first": "hello",
 		"expected": 42,
 	}
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": m.Expected() != 42}
@@ -188,6 +238,7 @@ func Test_CovArgs_12_Map_Basic(t *testing.T) {
 }
 
 func Test_CovArgs_13_Map_ArgsCount(t *testing.T) {
+	// Arrange
 	m := args.Map{
 		"first": "hello",
 		"expected": 42,
@@ -195,15 +246,24 @@ func Test_CovArgs_13_Map_ArgsCount(t *testing.T) {
 	}
 	// ArgsCount excludes expected and func
 	ac := m.ArgsCount()
+
+	// Act
 	actual := args.Map{"result": ac != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovArgs_14_Map_Get_Has_HasDefined(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
 	v, ok := m.Get("key")
+
+	// Act
 	actual := args.Map{"result": ok || v != "val"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 	_, ok2 := m.Get("missing")
@@ -225,8 +285,13 @@ func Test_CovArgs_14_Map_Get_Has_HasDefined(t *testing.T) {
 }
 
 func Test_CovArgs_15_Map_HasDefinedAll_IsKeyInvalid_IsKeyMissing(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": m.HasDefinedAll("a", "missing")}
@@ -244,9 +309,14 @@ func Test_CovArgs_15_Map_HasDefinedAll_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 }
 
 func Test_CovArgs_16_Map_NilMap(t *testing.T) {
+	// Arrange
 	var m args.Map
 	_, ok := m.Get("key")
+
+	// Act
 	actual := args.Map{"result": ok}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	actual := args.Map{"result": m.Has("key")}
@@ -267,9 +337,14 @@ func Test_CovArgs_16_Map_NilMap(t *testing.T) {
 }
 
 func Test_CovArgs_17_Map_SortedKeys(t *testing.T) {
+	// Arrange
 	m := args.Map{"b": 2, "a": 1}
 	keys, err := m.SortedKeys()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(keys) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 keys", actual)
 	actual := args.Map{"result": keys[0] != "a"}
@@ -284,14 +359,20 @@ func Test_CovArgs_17_Map_SortedKeys(t *testing.T) {
 }
 
 func Test_CovArgs_18_Map_SortedKeysMust(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	keys := m.SortedKeysMust()
+
+	// Act
 	actual := args.Map{"result": len(keys) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovArgs_19_Map_Items(t *testing.T) {
+	// Arrange
 	m := args.Map{
 		"first": "a",
 		"second": "b",
@@ -301,7 +382,11 @@ func Test_CovArgs_19_Map_Items(t *testing.T) {
 		"sixth": "f",
 		"seventh": "g",
 	}
+
+	// Act
 	actual := args.Map{"result": m.SecondItem() != "b"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
 	actual := args.Map{"result": m.ThirdItem() != "c"}
@@ -322,9 +407,14 @@ func Test_CovArgs_19_Map_Items(t *testing.T) {
 }
 
 func Test_CovArgs_20_Map_GetLowerCase_GetDirectLower(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
 	v, ok := m.GetLowerCase("KEY")
+
+	// Act
 	actual := args.Map{"result": ok || v != "val"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 	v2 := m.GetDirectLower("KEY")
@@ -338,8 +428,13 @@ func Test_CovArgs_20_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 }
 
 func Test_CovArgs_21_Map_Expect_Actual_Arrange(t *testing.T) {
+	// Arrange
 	m := args.Map{"expect": 1, "actual": 2, "arrange": 3}
+
+	// Act
 	actual := args.Map{"result": m.Expect() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": m.Actual() != 2}
@@ -351,16 +446,26 @@ func Test_CovArgs_21_Map_Expect_Actual_Arrange(t *testing.T) {
 }
 
 func Test_CovArgs_22_Map_SetActual(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	m.SetActual("val")
+
+	// Act
 	actual := args.Map{"result": m.Actual() != "val"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 }
 
 func Test_CovArgs_23_Map_When_Title(t *testing.T) {
+	// Arrange
 	m := args.Map{"when": "w", "title": "t"}
+
+	// Act
 	actual := args.Map{"result": m.When() != "w"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected w", actual)
 	actual := args.Map{"result": m.Title() != "t"}
@@ -369,18 +474,28 @@ func Test_CovArgs_23_Map_When_Title(t *testing.T) {
 }
 
 func Test_CovArgs_24_Map_GetByIndex(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	_ = m.GetByIndex(0)
 	r := m.GetByIndex(99)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_CovArgs_25_Map_Raw_Args_ValidArgs(t *testing.T) {
+	// Arrange
 	m := args.Map{"first": "a", "second": "b"}
 	raw := m.Raw()
+
+	// Act
 	actual := args.Map{"result": len(raw) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a := m.Args("first", "second")
@@ -394,9 +509,14 @@ func Test_CovArgs_25_Map_Raw_Args_ValidArgs(t *testing.T) {
 }
 
 func Test_CovArgs_26_Map_GetFirstOfNames(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	v := m.GetFirstOfNames("missing", "a")
+
+	// Act
 	actual := args.Map{"result": v != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	v2 := m.GetFirstOfNames()
@@ -406,9 +526,14 @@ func Test_CovArgs_26_Map_GetFirstOfNames(t *testing.T) {
 }
 
 func Test_CovArgs_27_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+	// Arrange
 	m := args.Map{"items": []string{"a", "b"}}
 	r := m.GetAsStringSliceFirstOfNames("items")
+
+	// Act
 	actual := args.Map{"result": len(r) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	r2 := m.GetAsStringSliceFirstOfNames("missing")
@@ -424,8 +549,13 @@ func Test_CovArgs_27_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 // --- LeftRight ---
 
 func Test_CovArgs_28_LeftRight(t *testing.T) {
+	// Arrange
 	lr := &args.LeftRightAny{Left: "a", Right: "b", Expect: 1}
+
+	// Act
 	actual := args.Map{"result": lr.FirstItem() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	actual := args.Map{"result": lr.SecondItem() != "b"}
@@ -482,6 +612,7 @@ func Test_CovArgs_28_LeftRight(t *testing.T) {
 // --- Holder ---
 
 func Test_CovArgs_29_Holder(t *testing.T) {
+	// Arrange
 	fn := func(s string) string { return s }
 	h := &args.HolderAny{
 		First:    "a",
@@ -493,7 +624,11 @@ func Test_CovArgs_29_Holder(t *testing.T) {
 		WorkFunc: fn,
 		Expect:   "x",
 	}
+
+	// Act
 	actual := args.Map{"result": h.FirstItem() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	actual := args.Map{"result": h.SecondItem() != "b"}
@@ -569,8 +704,13 @@ func Test_CovArgs_29_Holder(t *testing.T) {
 // --- String ---
 
 func Test_CovArgs_30_String(t *testing.T) {
+	// Arrange
 	s := args.String("hello")
+
+	// Act
 	actual := args.Map{"result": s.String() != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	actual := args.Map{"result": s.Length() != 5}
@@ -609,8 +749,13 @@ func Test_CovArgs_30_String(t *testing.T) {
 }
 
 func Test_CovArgs_31_String_Empty(t *testing.T) {
+	// Arrange
 	s := args.String("")
+
+	// Act
 	actual := args.Map{"result": s.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": s.HasCharacter()}
@@ -622,9 +767,14 @@ func Test_CovArgs_31_String_Empty(t *testing.T) {
 }
 
 func Test_CovArgs_32_String_TrimReplaceMap(t *testing.T) {
+	// Arrange
 	s := args.String("Hello {name}")
 	r := s.TrimReplaceMap(map[string]string{"{name}": "World"})
+
+	// Act
 	actual := args.Map{"result": r.String() != "Hello World"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'Hello World', got ''", actual)
 }

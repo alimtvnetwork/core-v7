@@ -34,14 +34,19 @@ func Test_PointerStrings_Len(t *testing.T) {
 }
 
 func Test_PointerStrings_Less(t *testing.T) {
+	// Arrange
 	// Case 0: both non-nil
 	{
 		a, b := "alpha", "beta"
 		ps := coredata.PointerStrings{&a, &b}
+
+	// Act
 		actual := args.Map{
 			"less01": ps.Less(0, 1),
 			"less10": ps.Less(1, 0),
 		}
+
+	// Assert
 		pointerStringsLessTestCases[0].ShouldBeEqualMap(t, 0, actual)
 	}
 

@@ -145,6 +145,7 @@ func Test_PagingInfo_ClonePtr_Verification(t *testing.T) {
 // === Independence tests ===
 
 func Test_PagingInfo_ClonePtr_Independence(t *testing.T) {
+	// Arrange
 	tc := pagingInfoClonePtrIndependenceTestCase
 	info := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 3, PerPageItems: 10, TotalItems: 50}
 
@@ -152,22 +153,27 @@ func Test_PagingInfo_ClonePtr_Independence(t *testing.T) {
 	clone.TotalPages = 99
 	clone.CurrentPageIndex = 99
 
+	// Act
 	actual := args.Map{
 		"originalTotalPages":  info.TotalPages,
 		"originalCurrentPage": info.CurrentPageIndex,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_PagingInfo_Clone_Independence(t *testing.T) {
+	// Arrange
 	tc := pagingInfoCloneIndependenceTestCase
 	info := corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 3, PerPageItems: 10, TotalItems: 50}
 
 	clone := info.Clone()
 	clone.TotalPages = 99
 
+	// Act
 	actual := args.Map{"originalTotalPages": info.TotalPages}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

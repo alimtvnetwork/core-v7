@@ -9,8 +9,13 @@ import (
 )
 
 func Test_Cov_MergeSlicesOfSlices(t *testing.T) {
+	// Arrange
 	result := stringslice.MergeSlicesOfSlices([]string{"a"}, []string{"b", "c"})
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	// with nil slice
@@ -26,23 +31,38 @@ func Test_Cov_MergeSlicesOfSlices(t *testing.T) {
 }
 
 func Test_Cov_SplitTrimmedNonEmptyAll(t *testing.T) {
+	// Arrange
 	result := stringslice.SplitTrimmedNonEmptyAll("a , b , c", ",")
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov_SplitTrimmedNonEmpty(t *testing.T) {
+	// Arrange
 	result := stringslice.SplitTrimmedNonEmpty("a,b,c", ",", -1)
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov_RegexTrimmedSplitNonEmptyAll(t *testing.T) {
+	// Arrange
 	re := regexp.MustCompile(`[,;]`)
 	result := stringslice.RegexTrimmedSplitNonEmptyAll(re, "a , b ; c")
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }

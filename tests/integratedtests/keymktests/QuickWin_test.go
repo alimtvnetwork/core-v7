@@ -9,9 +9,14 @@ import (
 )
 
 func Test_QW_Key_Compile_WithBrackets(t *testing.T) {
+	// Arrange
 	k := keymk.NewKey.Default(".")
 	result := k.Compile("a", "b")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
@@ -23,10 +28,15 @@ func Test_QW_Key_Compile_Empty(t *testing.T) {
 }
 
 func Test_QW_Key_ParseInjectUsingJson_Error(t *testing.T) {
+	// Arrange
 	k := keymk.NewKey.Default(".")
 	bad := corejson.NewResult.UsingString(`invalid`)
 	_, err := k.ParseInjectUsingJson(bad)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for invalid JSON", actual)
 }

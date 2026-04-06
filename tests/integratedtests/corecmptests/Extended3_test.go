@@ -9,7 +9,10 @@ import (
 )
 
 func Test_Byte_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Byte(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same bytes should be Equal", actual)
 	actual := args.Map{"result": corecmp.Byte(3, 7) != corecomparator.LeftLess}
@@ -21,7 +24,10 @@ func Test_Byte_Direct_Comparison(t *testing.T) {
 }
 
 func Test_BytePtr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.BytePtr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	b := byte(5)
@@ -38,7 +44,10 @@ func Test_BytePtr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer64_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer64(10, 10) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be Equal", actual)
 	actual := args.Map{"result": corecmp.Integer64(5, 10) != corecomparator.LeftLess}
@@ -50,7 +59,10 @@ func Test_Integer64_Direct_Comparison(t *testing.T) {
 }
 
 func Test_IntegerPtr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IntegerPtr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	val := 5
@@ -64,7 +76,10 @@ func Test_IntegerPtr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_IsIntegersEqual_Direct_Verification(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqual(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 	actual := args.Map{"result": corecmp.IsIntegersEqual(nil, []int{1})}
@@ -79,7 +94,10 @@ func Test_IsIntegersEqual_Direct_Verification(t *testing.T) {
 }
 
 func Test_VersionSliceByte_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.VersionSliceByte(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	actual := args.Map{"result": corecmp.VersionSliceByte(nil, []byte{1}) != corecomparator.NotEqual}
@@ -106,7 +124,10 @@ func Test_VersionSliceByte_Direct_Comparison(t *testing.T) {
 }
 
 func Test_IsStringsEqualWithoutOrder_Direct_Verification(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder(nil, []string{"a"})}
@@ -124,7 +145,10 @@ func Test_IsStringsEqualWithoutOrder_Direct_Verification(t *testing.T) {
 }
 
 func Test_Integer8_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer8(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be Equal", actual)
 	actual := args.Map{"result": corecmp.Integer8(3, 7) != corecomparator.LeftLess}
@@ -136,7 +160,10 @@ func Test_Integer8_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer16_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer16(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be Equal", actual)
 	actual := args.Map{"result": corecmp.Integer16(3, 7) != corecomparator.LeftLess}
@@ -145,7 +172,10 @@ func Test_Integer16_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer32_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer32(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be Equal", actual)
 	actual := args.Map{"result": corecmp.Integer32(3, 7) != corecomparator.LeftLess}
@@ -154,7 +184,10 @@ func Test_Integer32_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer8Ptr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer8Ptr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	v := int8(5)
@@ -164,7 +197,10 @@ func Test_Integer8Ptr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer16Ptr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer16Ptr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	v := int16(5)
@@ -174,7 +210,10 @@ func Test_Integer16Ptr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer32Ptr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer32Ptr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	v := int32(5)
@@ -184,7 +223,10 @@ func Test_Integer32Ptr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_Integer64Ptr_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer64Ptr(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	v := int64(5)
@@ -194,7 +236,10 @@ func Test_Integer64Ptr_Direct_Comparison(t *testing.T) {
 }
 
 func Test_IsIntegersEqualPtr_Verification(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqualPtr(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 	a := []int{1, 2}
@@ -208,8 +253,13 @@ func Test_IsIntegersEqualPtr_Verification(t *testing.T) {
 }
 
 func Test_AnyItem_Verification(t *testing.T) {
+	// Arrange
 	result := corecmp.AnyItem("hello", "hello")
+
+	// Act
 	actual := args.Map{"result": result != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same strings should be Equal", actual)
 	result2 := corecmp.AnyItem(1, 2)
@@ -219,7 +269,10 @@ func Test_AnyItem_Verification(t *testing.T) {
 }
 
 func Test_VersionSliceInteger_Direct_Comparison(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.VersionSliceInteger(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be Equal", actual)
 	actual := args.Map{"result": corecmp.VersionSliceInteger([]int{1, 2}, []int{1, 2}) != corecomparator.Equal}

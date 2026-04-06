@@ -695,8 +695,13 @@ func Test_S11_44_SimpleSlice_WrapDoubleQuote(t *testing.T) {
 
 func Test_S11_45_SimpleSlice_WrapSingleQuote(t *testing.T) {
 	safeTest(t, "Test_S11_45_SimpleSlice_WrapSingleQuote", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.WrapSingleQuote().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -704,8 +709,13 @@ func Test_S11_45_SimpleSlice_WrapSingleQuote(t *testing.T) {
 
 func Test_S11_46_SimpleSlice_WrapTildaQuote(t *testing.T) {
 	safeTest(t, "Test_S11_46_SimpleSlice_WrapTildaQuote", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.WrapTildaQuote().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -713,8 +723,13 @@ func Test_S11_46_SimpleSlice_WrapTildaQuote(t *testing.T) {
 
 func Test_S11_47_SimpleSlice_WrapDoubleQuoteIfMissing(t *testing.T) {
 	safeTest(t, "Test_S11_47_SimpleSlice_WrapDoubleQuoteIfMissing", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.WrapDoubleQuoteIfMissing().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -722,8 +737,13 @@ func Test_S11_47_SimpleSlice_WrapDoubleQuoteIfMissing(t *testing.T) {
 
 func Test_S11_48_SimpleSlice_WrapSingleQuoteIfMissing(t *testing.T) {
 	safeTest(t, "Test_S11_48_SimpleSlice_WrapSingleQuoteIfMissing", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.WrapSingleQuoteIfMissing().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -854,8 +874,13 @@ func Test_S11_56_SimpleSlice_JoinLineEofLine_AlreadyHas(t *testing.T) {
 
 func Test_S11_57_SimpleSlice_JoinSpace(t *testing.T) {
 	safeTest(t, "Test_S11_57_SimpleSlice_JoinSpace", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": ss.JoinSpace() != "a b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a b'", actual)
 	})
@@ -863,8 +888,13 @@ func Test_S11_57_SimpleSlice_JoinSpace(t *testing.T) {
 
 func Test_S11_58_SimpleSlice_JoinComma(t *testing.T) {
 	safeTest(t, "Test_S11_58_SimpleSlice_JoinComma", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": ss.JoinComma() != "a,b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b'", actual)
 	})
@@ -872,9 +902,14 @@ func Test_S11_58_SimpleSlice_JoinComma(t *testing.T) {
 
 func Test_S11_59_SimpleSlice_JoinCsv(t *testing.T) {
 	safeTest(t, "Test_S11_59_SimpleSlice_JoinCsv", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 		result := ss.JoinCsv()
+
+		// Act
 		actual := args.Map{"result": result == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
@@ -882,8 +917,13 @@ func Test_S11_59_SimpleSlice_JoinCsv(t *testing.T) {
 
 func Test_S11_60_SimpleSlice_JoinCsvLine(t *testing.T) {
 	safeTest(t, "Test_S11_60_SimpleSlice_JoinCsvLine", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.JoinCsvLine() == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
@@ -906,9 +946,14 @@ func Test_S11_61_SimpleSlice_EachItemSplitBy(t *testing.T) {
 
 func Test_S11_62_SimpleSlice_PrependJoin(t *testing.T) {
 	safeTest(t, "Test_S11_62_SimpleSlice_PrependJoin", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"b"})
 		result := ss.PrependJoin(",", "a")
+
+		// Act
 		actual := args.Map{"result": result != "a,b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
@@ -916,9 +961,14 @@ func Test_S11_62_SimpleSlice_PrependJoin(t *testing.T) {
 
 func Test_S11_63_SimpleSlice_AppendJoin(t *testing.T) {
 	safeTest(t, "Test_S11_63_SimpleSlice_AppendJoin", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a"})
 		result := ss.AppendJoin(",", "b")
+
+		// Act
 		actual := args.Map{"result": result != "a,b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})

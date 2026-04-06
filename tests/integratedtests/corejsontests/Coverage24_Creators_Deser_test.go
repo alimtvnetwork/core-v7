@@ -12,29 +12,49 @@ import (
 // ── New / NewPtr ──
 
 func Test_C24_New_Valid(t *testing.T) {
+	// Arrange
 	r := corejson.New("hello")
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_C24_New_Error(t *testing.T) {
+	// Arrange
 	r := corejson.New(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C24_NewPtr_Valid(t *testing.T) {
+	// Arrange
 	r := corejson.NewPtr("hello")
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_C24_NewPtr_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewPtr(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -54,8 +74,13 @@ func Test_C24_NRC_DeserializeUsingBytes(t *testing.T) {
 }
 
 func Test_C24_NRC_DeserializeUsingBytes_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.DeserializeUsingBytes([]byte(`invalid`))
+
+	// Act
 	actual := args.Map{"result": r.Error == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -74,29 +99,49 @@ func Test_C24_NRC_DeserializeUsingResult_Valid(t *testing.T) {
 }
 
 func Test_C24_NRC_UsingBytesType(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingBytesType([]byte(`"x"`), "TestType")
+
+	// Act
 	actual := args.Map{"result": r.TypeName != "TestType"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "wrong type", actual)
 }
 
 func Test_C24_NRC_UsingBytesPtr_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingBytesPtr(nil)
+
+	// Act
 	actual := args.Map{"result": r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C24_NRC_UsingBytesPtr_Valid(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingBytesPtr([]byte(`"x"`))
+
+	// Act
 	actual := args.Map{"result": r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C24_NRC_UsingBytesPtrErrPtr(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingBytesPtrErrPtr(nil, errors.New("e"), "t")
+
+	// Act
 	actual := args.Map{"result": r.Error == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	r2 := corejson.NewResult.UsingBytesPtrErrPtr([]byte(`"x"`), nil, "t")
@@ -111,8 +156,13 @@ func Test_C24_NRC_UsingBytesErrPtr(t *testing.T) {
 }
 
 func Test_C24_NRC_PtrUsingStringPtr_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.PtrUsingStringPtr(nil, "t")
+
+	// Act
 	actual := args.Map{"result": r.Error == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -220,8 +270,13 @@ func Test_C24_NRC_Any(t *testing.T) {
 }
 
 func Test_C24_NRC_Any_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Any(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -232,8 +287,13 @@ func Test_C24_NRC_AnyPtr(t *testing.T) {
 }
 
 func Test_C24_NRC_AnyPtr_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.AnyPtr(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -277,8 +337,13 @@ func Test_C24_NRC_Serialize(t *testing.T) {
 }
 
 func Test_C24_NRC_Serialize_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Serialize(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -289,38 +354,63 @@ func Test_C24_NRC_Marshal(t *testing.T) {
 }
 
 func Test_C24_NRC_Marshal_Error(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Marshal(make(chan int))
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C24_NRC_UsingSerializer_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingSerializer(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C24_NRC_UsingSerializerFunc_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingSerializerFunc(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C24_NRC_UsingSerializerFunc_Valid(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingSerializerFunc(func() ([]byte, error) {
 		return json.Marshal("test")
 	})
+
+	// Act
 	actual := args.Map{"result": r == nil || r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C24_NRC_UsingJsoner_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.UsingJsoner(nil)
+
+	// Act
 	actual := args.Map{"result": r != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
@@ -332,6 +422,7 @@ func Test_C24_NRC_AnyToCastingResult(t *testing.T) {
 // ── emptyCreator ──
 
 func Test_C24_Empty_Result(t *testing.T) { _ = corejson.Empty.Result() }
+	// Arrange
 func Test_C24_Empty_ResultWithErr(t *testing.T) { _ = corejson.Empty.ResultWithErr("t", errors.New("e")) }
 func Test_C24_Empty_BytesCollection(t *testing.T) { _ = corejson.Empty.BytesCollection() }
 func Test_C24_Empty_BytesCollectionPtr(t *testing.T) { _ = corejson.Empty.BytesCollectionPtr() }
@@ -343,7 +434,11 @@ func Test_C24_Empty_MapResults(t *testing.T) { _ = corejson.Empty.MapResults() }
 
 func Test_C24_BytesCloneIf_NoClone(t *testing.T) {
 	b := corejson.BytesCloneIf(false, []byte("hello"))
+
+	// Act
 	actual := args.Map{"result": len(b) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for no clone", actual)
 }

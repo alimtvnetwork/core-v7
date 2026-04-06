@@ -10,6 +10,7 @@ import (
 // ── Variant identity checks ──
 
 func Test_Cov_Variant_Identity(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"invalidIsInvalid": chmodclasstype.Invalid.IsInvalid(),
 		"invalidIsValid":   chmodclasstype.Invalid.IsValid(),
@@ -22,6 +23,8 @@ func Test_Cov_Variant_Identity(t *testing.T) {
 		"ooIsOwnerOther":   chmodclasstype.OwnerOther.IsOwnerOther(),
 		"uninit":           chmodclasstype.Invalid.IsUnInitialized(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidIsInvalid": true,
 		"invalidIsValid":   false,
@@ -40,7 +43,10 @@ func Test_Cov_Variant_Identity(t *testing.T) {
 // ── Variant value methods ──
 
 func Test_Cov_Variant_Values(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
+
+	// Act
 	actual := args.Map{
 		"valueByte":   int(v.Value()),
 		"valueInt":    v.ValueInt(),
@@ -51,6 +57,8 @@ func Test_Cov_Variant_Values(t *testing.T) {
 		"valueString": v.ValueString() != "",
 		"valueByteFn": int(v.ValueByte()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"valueByte":   int(chmodclasstype.Owner),
 		"valueInt":    int(chmodclasstype.Owner),
@@ -67,13 +75,18 @@ func Test_Cov_Variant_Values(t *testing.T) {
 // ── Variant name methods ──
 
 func Test_Cov_Variant_Names(t *testing.T) {
+	// Arrange
 	owner := chmodclasstype.Owner
+
+	// Act
 	actual := args.Map{
 		"ownerName":   (&owner).Name(),
 		"ownerString": owner.String(),
 		"nameValue":   owner.NameValue() != "",
 		"typeName":    owner.TypeName() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"ownerName":   "Owner",
 		"ownerString": "Owner",
@@ -86,8 +99,11 @@ func Test_Cov_Variant_Names(t *testing.T) {
 // ── Variant comparison methods ──
 
 func Test_Cov_Variant_Comparison(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	ownerEnum := chmodclasstype.Owner
+
+	// Act
 	actual := args.Map{
 		"isNameEqual":    v.IsNameEqual("Owner"),
 		"isNameNotEqual": v.IsNameEqual("Group"),
@@ -99,6 +115,8 @@ func Test_Cov_Variant_Comparison(t *testing.T) {
 		"isAnyValues":    v.IsAnyValuesEqual(byte(chmodclasstype.Owner), byte(chmodclasstype.Group)),
 		"isAnyValFail":   v.IsAnyValuesEqual(byte(chmodclasstype.Group)),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isNameEqual":    true,
 		"isNameNotEqual": false,
@@ -116,14 +134,19 @@ func Test_Cov_Variant_Comparison(t *testing.T) {
 // ── Variant IsAnyEnumsEqual ──
 
 func Test_Cov_Variant_IsAnyEnumsEqual(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	group := chmodclasstype.Group
 	owner := chmodclasstype.Owner
 	other := chmodclasstype.Other
+
+	// Act
 	actual := args.Map{
 		"match":   v.IsAnyEnumsEqual(&group, &owner),
 		"noMatch": v.IsAnyEnumsEqual(&group, &other),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -134,7 +157,10 @@ func Test_Cov_Variant_IsAnyEnumsEqual(t *testing.T) {
 // ── Variant enum metadata ──
 
 func Test_Cov_Variant_Metadata(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
+
+	// Act
 	actual := args.Map{
 		"allNamesLen": len(v.AllNameValues()) > 0,
 		"rangesLen":   len(v.IntegerEnumRanges()) > 0,
@@ -150,6 +176,8 @@ func Test_Cov_Variant_Metadata(t *testing.T) {
 		"format":      v.Format("%s") != "",
 		"enumType":    v.EnumType() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"allNamesLen": true,
 		"rangesLen":   true,
@@ -171,12 +199,17 @@ func Test_Cov_Variant_Metadata(t *testing.T) {
 // ── Variant MinMaxAny ──
 
 func Test_Cov_Variant_MinMaxAny(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	min, max := v.MinMaxAny()
+
+	// Act
 	actual := args.Map{
 		"minNotNil": min != nil,
 		"maxNotNil": max != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"minNotNil": true,
 		"maxNotNil": true,
@@ -187,12 +220,17 @@ func Test_Cov_Variant_MinMaxAny(t *testing.T) {
 // ── Variant JSON ──
 
 func Test_Cov_Variant_MarshalJSON(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	bytes, err := v.MarshalJSON()
+
+	// Act
 	actual := args.Map{
 		"hasBytes": len(bytes) > 0,
 		"noErr":    err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasBytes": true,
 		"noErr":    true,
@@ -201,15 +239,20 @@ func Test_Cov_Variant_MarshalJSON(t *testing.T) {
 }
 
 func Test_Cov_Variant_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	bytes, _ := v.MarshalJSON()
 
 	var target chmodclasstype.Variant
 	err := target.UnmarshalJSON(bytes)
+
+	// Act
 	actual := args.Map{
 		"noErr":   err == nil,
 		"isOwner": target.IsOwner(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":   true,
 		"isOwner": true,
@@ -218,9 +261,14 @@ func Test_Cov_Variant_UnmarshalJSON(t *testing.T) {
 }
 
 func Test_Cov_Variant_UnmarshalJSON_Invalid(t *testing.T) {
+	// Arrange
 	var target chmodclasstype.Variant
 	err := target.UnmarshalJSON([]byte(`"invalid_enum_name"`))
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Variant UnmarshalJSON returns error -- invalid name", actual)
 }
@@ -228,20 +276,30 @@ func Test_Cov_Variant_UnmarshalJSON_Invalid(t *testing.T) {
 // ── Variant OnlySupportedErr ──
 
 func Test_Cov_Variant_OnlySupportedErr(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	// OnlySupportedErr checks ALL enum names against supported list.
 	// Passing a subset means unsupported names exist → error returned.
 	err := v.OnlySupportedErr("Owner", "Group")
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Variant OnlySupportedErr returns error -- subset supported", actual)
 }
 
 func Test_Cov_Variant_OnlySupportedMsgErr(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	// Same: passing a subset means error is returned.
 	err := v.OnlySupportedMsgErr("test message", "Owner")
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Variant OnlySupportedMsgErr returns error -- subset supported", actual)
 }
@@ -249,11 +307,16 @@ func Test_Cov_Variant_OnlySupportedMsgErr(t *testing.T) {
 // ── Variant AsContractsBinder ──
 
 func Test_Cov_Variant_AsContractsBinder(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
+
+	// Act
 	actual := args.Map{
 		"basicBinder":     v.AsBasicEnumContractsBinder() != nil,
 		"basicByteBinder": v.AsBasicByteEnumContractsBinder() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"basicBinder":     true,
 		"basicByteBinder": true,
@@ -264,12 +327,17 @@ func Test_Cov_Variant_AsContractsBinder(t *testing.T) {
 // ── Variant UnmarshallEnumToValue ──
 
 func Test_Cov_Variant_UnmarshallEnumToValue(t *testing.T) {
+	// Arrange
 	v := chmodclasstype.Owner
 	val, err := v.UnmarshallEnumToValue([]byte(`"Owner"`))
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"val":   int(val),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"val":   int(chmodclasstype.Owner),

@@ -10,32 +10,52 @@ import (
 // --- Map ---
 
 func Test_I18_Map_Length(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_I18_Map_ArgsCount(t *testing.T) {
+	// Arrange
 	m := args.Map{"first": 1, "second": 2}
 	// ArgsCount subtracts 1 for func (always present as invalid wrapper)
+
+	// Act
 	actual := args.Map{"result": m.ArgsCount() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 arg (length minus func slot)", actual)
 }
 
 func Test_I18_Map_ArgsCount_WithFuncAndExpect(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	m := args.Map{"first": 1, "func": fn, "expected": "x"}
 	count := m.ArgsCount()
+
+	// Act
 	actual := args.Map{"result": count != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 arg (excluding func and expect)", actual)
 }
 
 func Test_I18_Map_HasFirst(t *testing.T) {
+	// Arrange
 	m := args.Map{"first": "hello"}
+
+	// Act
 	actual := args.Map{"result": m.HasFirst()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasFirst", actual)
 
@@ -46,6 +66,7 @@ func Test_I18_Map_HasFirst(t *testing.T) {
 }
 
 func Test_I18_Map_Items(t *testing.T) {
+	// Arrange
 	m := args.Map{
 		"first":  "a",
 		"second": "b",
@@ -54,7 +75,11 @@ func Test_I18_Map_Items(t *testing.T) {
 		"fifth":  "e",
 		"sixth":  "f",
 	}
+
+	// Act
 	actual := args.Map{"result": m.FirstItem() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "first mismatch", actual)
 	actual := args.Map{"result": m.SecondItem() != "b"}
@@ -75,30 +100,50 @@ func Test_I18_Map_Items(t *testing.T) {
 }
 
 func Test_I18_Map_Seventh(t *testing.T) {
+	// Arrange
 	m := args.Map{"seventh": "g"}
+
+	// Act
 	actual := args.Map{"result": m.Seventh() != "g"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "seventh mismatch", actual)
 }
 
 func Test_I18_Map_Expected(t *testing.T) {
+	// Arrange
 	m := args.Map{"expected": "x"}
+
+	// Act
 	actual := args.Map{"result": m.Expected() != "x"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
 func Test_I18_Map_HasExpect(t *testing.T) {
+	// Arrange
 	m := args.Map{"expected": "x"}
+
+	// Act
 	actual := args.Map{"result": m.HasExpect()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasExpect", actual)
 }
 
 func Test_I18_Map_GetByIndex(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
 	item := m.GetByIndex(0)
+
+	// Act
 	actual := args.Map{"result": item == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected item at index 0", actual)
 
@@ -109,24 +154,39 @@ func Test_I18_Map_GetByIndex(t *testing.T) {
 }
 
 func Test_I18_Map_HasFunc(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	m := args.Map{"func": fn}
+
+	// Act
 	actual := args.Map{"result": m.HasFunc()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasFunc", actual)
 }
 
 func Test_I18_Map_GetFuncName(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	name := m.GetFuncName()
+
+	// Act
 	actual := args.Map{"result": name != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty func name", actual)
 }
 
 func Test_I18_Map_HasDefined(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
+
+	// Act
 	actual := args.Map{"result": m.HasDefined("key")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected defined", actual)
 	actual := args.Map{"result": m.HasDefined("missing")}
@@ -140,8 +200,13 @@ func Test_I18_Map_HasDefined(t *testing.T) {
 }
 
 func Test_I18_Map_Has(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
+
+	// Act
 	actual := args.Map{"result": m.Has("key")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has", actual)
 	actual := args.Map{"result": m.Has("missing")}
@@ -154,8 +219,13 @@ func Test_I18_Map_Has(t *testing.T) {
 }
 
 func Test_I18_Map_HasDefinedAll(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected all defined", actual)
 	actual := args.Map{"result": m.HasDefinedAll("a", "missing")}
@@ -169,8 +239,13 @@ func Test_I18_Map_HasDefinedAll(t *testing.T) {
 }
 
 func Test_I18_Map_IsKeyInvalid(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
+
+	// Act
 	actual := args.Map{"result": m.IsKeyInvalid("key")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid key", actual)
 	actual := args.Map{"result": m.IsKeyInvalid("missing")}
@@ -179,8 +254,13 @@ func Test_I18_Map_IsKeyInvalid(t *testing.T) {
 }
 
 func Test_I18_Map_IsKeyMissing(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
+
+	// Act
 	actual := args.Map{"result": m.IsKeyMissing("key")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not missing", actual)
 	actual := args.Map{"result": m.IsKeyMissing("missing")}
@@ -189,39 +269,64 @@ func Test_I18_Map_IsKeyMissing(t *testing.T) {
 }
 
 func Test_I18_Map_SortedKeys(t *testing.T) {
+	// Arrange
 	m := args.Map{"b": 2, "a": 1}
 	keys, err := m.SortedKeys()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(keys) != 2 || keys[0] != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected sorted keys", actual)
 }
 
 func Test_I18_Map_SortedKeys_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	keys, err := m.SortedKeys()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(keys) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty sorted keys", actual)
 }
 
 func Test_I18_Map_When(t *testing.T) {
+	// Arrange
 	m := args.Map{"when": "now"}
+
+	// Act
 	actual := args.Map{"result": m.When() != "now"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected when=now", actual)
 }
 
 func Test_I18_Map_Title(t *testing.T) {
+	// Arrange
 	m := args.Map{"title": "test"}
+
+	// Act
 	actual := args.Map{"result": m.Title() != "test"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected title=test", actual)
 }
 
 func Test_I18_Map_Get(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
 	item, valid := m.Get("key")
+
+	// Act
 	actual := args.Map{"result": valid || item != "val"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 
@@ -238,17 +343,27 @@ func Test_I18_Map_Get(t *testing.T) {
 }
 
 func Test_I18_Map_GetLowerCase(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
 	item, valid := m.GetLowerCase("KEY")
+
+	// Act
 	actual := args.Map{"result": valid || item != "val"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected lower case match", actual)
 }
 
 func Test_I18_Map_GetDirectLower(t *testing.T) {
+	// Arrange
 	m := args.Map{"key": "val"}
 	item := m.GetDirectLower("KEY")
+
+	// Act
 	actual := args.Map{"result": item != "val"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected lower case match", actual)
 
@@ -259,87 +374,142 @@ func Test_I18_Map_GetDirectLower(t *testing.T) {
 }
 
 func Test_I18_Map_Expect(t *testing.T) {
+	// Arrange
 	m := args.Map{"expect": "x"}
+
+	// Act
 	actual := args.Map{"result": m.Expect() != "x"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected x", actual)
 }
 
 func Test_I18_Map_Actual(t *testing.T) {
+	// Arrange
 	m := args.Map{"actual": "y"}
+
+	// Act
 	actual := args.Map{"result": m.Actual() != "y"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected y", actual)
 }
 
 func Test_I18_Map_Arrange(t *testing.T) {
+	// Arrange
 	m := args.Map{"arrange": "z"}
+
+	// Act
 	actual := args.Map{"result": m.Arrange() != "z"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected z", actual)
 }
 
 func Test_I18_Map_SetActual(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	m.SetActual("val")
+
+	// Act
 	actual := args.Map{"result": m.Actual() != "val"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected set actual", actual)
 }
 
 func Test_I18_Map_WorkFunc(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	m := args.Map{"func": fn}
 	wf := m.WorkFunc()
+
+	// Act
 	actual := args.Map{"result": wf == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil work func", actual)
 }
 
 func Test_I18_Map_GetWorkFunc(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	m := args.Map{"func": fn}
 	wf := m.GetWorkFunc()
+
+	// Act
 	actual := args.Map{"result": wf == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_I18_Map_GetFirstOfNames_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
+
+	// Act
 	actual := args.Map{"result": m.GetFirstOfNames() != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty names", actual)
 }
 
 func Test_I18_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+	// Arrange
 	m := args.Map{"items": []string{"a", "b"}}
 	s := m.GetAsStringSliceFirstOfNames("items")
+
+	// Act
 	actual := args.Map{"result": len(s) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 items", actual)
 }
 
 func Test_I18_Map_GetAsStringSliceFirstOfNames_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	s := m.GetAsStringSliceFirstOfNames()
+
+	// Act
 	actual := args.Map{"result": s != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_I18_Map_GetAsStringSliceFirstOfNames_Undefined(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	s := m.GetAsStringSliceFirstOfNames("missing")
+
+	// Act
 	actual := args.Map{"result": s != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for undefined", actual)
 }
 
 func Test_I18_Map_GetAsInt(t *testing.T) {
+	// Arrange
 	m := args.Map{"n": 42}
 	n, ok := m.GetAsInt("n")
+
+	// Act
 	actual := args.Map{"result": ok || n != 42}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
@@ -350,9 +520,14 @@ func Test_I18_Map_GetAsInt(t *testing.T) {
 }
 
 func Test_I18_Map_GetAsIntDefault(t *testing.T) {
+	// Arrange
 	m := args.Map{"n": 42}
 	n := m.GetAsIntDefault("n", 0)
+
+	// Act
 	actual := args.Map{"result": n != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
@@ -363,105 +538,170 @@ func Test_I18_Map_GetAsIntDefault(t *testing.T) {
 }
 
 func Test_I18_Map_GetAsBool(t *testing.T) {
+	// Arrange
 	m := args.Map{"b": true}
 	b, ok := m.GetAsBool("b")
+
+	// Act
 	actual := args.Map{"result": ok || !b}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_I18_Map_GetAsBoolDefault(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	b := m.GetAsBoolDefault("b", true)
+
+	// Act
 	actual := args.Map{"result": b}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected default true", actual)
 }
 
 func Test_I18_Map_GetAsString(t *testing.T) {
+	// Arrange
 	m := args.Map{"s": "hello"}
 	s, ok := m.GetAsString("s")
+
+	// Act
 	actual := args.Map{"result": ok || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_I18_Map_GetAsStringDefault(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	s := m.GetAsStringDefault("s")
+
+	// Act
 	actual := args.Map{"result": s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty default", actual)
 }
 
 func Test_I18_Map_GetAsStrings(t *testing.T) {
+	// Arrange
 	m := args.Map{"s": []string{"a", "b"}}
 	s, ok := m.GetAsStrings("s")
+
+	// Act
 	actual := args.Map{"result": ok || len(s) != 2}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_I18_Map_GetAsAnyItems(t *testing.T) {
+	// Arrange
 	m := args.Map{"items": []any{1, "two"}}
 	items, ok := m.GetAsAnyItems("items")
+
+	// Act
 	actual := args.Map{"result": ok || len(items) != 2}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_I18_Map_ValidArgs(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
 	validArgs := m.ValidArgs()
+
+	// Act
 	actual := args.Map{"result": len(validArgs) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 valid args", actual)
 }
 
 func Test_I18_Map_Args(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1, "b": 2}
 	a := m.Args("a", "b")
+
+	// Act
 	actual := args.Map{"result": len(a) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 args", actual)
 }
 
 func Test_I18_Map_Raw(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	raw := m.Raw()
+
+	// Act
 	actual := args.Map{"result": raw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil raw", actual)
 }
 
 func Test_I18_Map_Slice(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	s := m.Slice()
+
+	// Act
 	actual := args.Map{"result": len(s) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 }
 
 func Test_I18_Map_String(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	s := m.String()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_I18_Map_GetFirstFuncNameOf(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	name := m.GetFirstFuncNameOf("func")
+
+	// Act
 	actual := args.Map{"result": name != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty name", actual)
 }
 
 func Test_I18_Map_WorkFuncName(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	name := m.WorkFuncName()
+
+	// Act
 	actual := args.Map{"result": name != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -469,8 +709,13 @@ func Test_I18_Map_WorkFuncName(t *testing.T) {
 // --- Dynamic ---
 
 func Test_I18_Dynamic_NilReceiver(t *testing.T) {
+	// Arrange
 	var d *args.DynamicAny
+
+	// Act
 	actual := args.Map{"result": d.ArgsCount() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": d.GetWorkFunc() != nil}
@@ -504,6 +749,7 @@ func Test_I18_Dynamic_NilReceiver(t *testing.T) {
 }
 
 func Test_I18_Dynamic_AllMethods(t *testing.T) {
+	// Arrange
 	d := &args.DynamicAny{
 		Params: args.Map{
 			"first":  "a",
@@ -516,7 +762,10 @@ func Test_I18_Dynamic_AllMethods(t *testing.T) {
 		Expect: "expected",
 	}
 
+	// Act
 	actual := args.Map{"result": d.FirstItem() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "first mismatch", actual)
 	actual := args.Map{"result": d.SecondItem() != "b"}
@@ -596,8 +845,13 @@ func Test_I18_Dynamic_AllMethods(t *testing.T) {
 // --- DynamicFunc ---
 
 func Test_I18_DynamicFunc_NilReceiver(t *testing.T) {
+	// Arrange
 	var df *args.DynamicFuncAny
+
+	// Act
 	actual := args.Map{"result": df.ArgsCount() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": df.Length() != 0}
@@ -631,6 +885,7 @@ func Test_I18_DynamicFunc_NilReceiver(t *testing.T) {
 }
 
 func Test_I18_DynamicFunc_AllMethods(t *testing.T) {
+	// Arrange
 	fn := func(s string) string { return s }
 	df := &args.DynamicFuncAny{
 		Params: args.Map{
@@ -675,7 +930,11 @@ func Test_I18_DynamicFunc_AllMethods(t *testing.T) {
 	_ = df.Args("first")
 
 	s := df.Slice()
+
+	// Act
 	actual := args.Map{"result": len(s) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty slice", actual)
 
@@ -698,8 +957,13 @@ func Test_I18_DynamicFunc_AllMethods(t *testing.T) {
 // --- One ---
 
 func Test_I18_One_AllMethods(t *testing.T) {
+	// Arrange
 	o := &args.OneAny{First: "hello", Expect: "world"}
+
+	// Act
 	actual := args.Map{"result": o.FirstItem() != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "first mismatch", actual)
 	actual := args.Map{"result": o.Expected() != "world"}
@@ -869,6 +1133,7 @@ func Test_I18_Six_AllMethods(t *testing.T) {
 // --- LeftRight ---
 
 func Test_I18_LeftRight_AllMethods(t *testing.T) {
+	// Arrange
 	lr := &args.LeftRightAny{Left: "a", Right: "b", Expect: "c"}
 	_ = lr.ArgsCount()
 	_ = lr.FirstItem()
@@ -886,7 +1151,11 @@ func Test_I18_LeftRight_AllMethods(t *testing.T) {
 	_ = lr.GetByIndex(0)
 	_ = lr.String()
 	clone := lr.Clone()
+
+	// Act
 	actual := args.Map{"result": clone.Left != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "clone mismatch", actual)
 	_ = args.LeftRightAny{}.AsTwoParameter()
@@ -939,6 +1208,7 @@ func Test_I18_Holder_AllMethods(t *testing.T) {
 // --- String ---
 
 func Test_I18_String_AllMethods(t *testing.T) {
+	// Arrange
 	s := args.String("hello")
 	_ = s.Concat(" world")
 	_ = s.Join("-", "a", "b")
@@ -956,7 +1226,11 @@ func Test_I18_String_AllMethods(t *testing.T) {
 	_ = s.TrimSpace()
 	_ = s.ReplaceAll("h", "H")
 	_ = s.Substring(0, 3)
+
+	// Act
 	actual := args.Map{"result": s.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	actual := args.Map{"result": s.HasCharacter()}
@@ -981,9 +1255,14 @@ func Test_I18_String_AllMethods(t *testing.T) {
 }
 
 func Test_I18_String_TrimReplaceMap(t *testing.T) {
+	// Arrange
 	s := args.String("hello {name}")
 	result := s.TrimReplaceMap(map[string]string{"{name}": "world"})
+
+	// Act
 	actual := args.Map{"result": strings.Contains(string(result), "world")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected replacement", actual)
 }
@@ -991,29 +1270,49 @@ func Test_I18_String_TrimReplaceMap(t *testing.T) {
 // --- Empty ---
 
 func Test_I18_Empty_Map(t *testing.T) {
+	// Arrange
 	m := args.Empty.Map()
+
+	// Act
 	actual := args.Map{"result": m == nil || len(m) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty map", actual)
 }
 
 func Test_I18_Empty_FuncWrap(t *testing.T) {
+	// Arrange
 	fw := args.Empty.FuncWrap()
+
+	// Act
 	actual := args.Map{"result": fw == nil || !fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid func wrap", actual)
 }
 
 func Test_I18_Empty_FuncMap(t *testing.T) {
+	// Arrange
 	fm := args.Empty.FuncMap()
+
+	// Act
 	actual := args.Map{"result": fm == nil || len(fm) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty func map", actual)
 }
 
 func Test_I18_Empty_Holder(t *testing.T) {
+	// Arrange
 	h := args.Empty.Holder()
+
+	// Act
 	actual := args.Map{"result": h.HasFirst()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no first", actual)
 }
@@ -1021,9 +1320,14 @@ func Test_I18_Empty_Holder(t *testing.T) {
 // --- FuncWrap ---
 
 func Test_I18_NewTypedFuncWrap_Valid(t *testing.T) {
+	// Arrange
 	fn := func(s string) int { return len(s) }
 	fw := args.NewTypedFuncWrap(fn)
+
+	// Act
 	actual := args.Map{"result": fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	actual := args.Map{"result": fw.ArgsCount() != 1}
@@ -1032,40 +1336,64 @@ func Test_I18_NewTypedFuncWrap_Valid(t *testing.T) {
 }
 
 func Test_I18_NewTypedFuncWrap_Nil(t *testing.T) {
+	// Arrange
 	var fn func()
 	fw := args.NewTypedFuncWrap(fn)
+
+	// Act
 	actual := args.Map{"result": fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid for nil func", actual)
 }
 
 func Test_I18_NewTypedFuncWrap_NotFunc(t *testing.T) {
+	// Arrange
 	fw := args.NewTypedFuncWrap("not a func")
+
+	// Act
 	actual := args.Map{"result": fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid for non-func", actual)
 }
 
 func Test_I18_FuncWrap_GetFuncName_Nil(t *testing.T) {
+	// Arrange
 	var fw *args.FuncWrapAny
+
+	// Act
 	actual := args.Map{"result": fw.GetFuncName() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
 func Test_I18_FuncWrap_GetPascalCaseFuncName_Nil(t *testing.T) {
+	// Arrange
 	var fw *args.FuncWrapAny
+
+	// Act
 	actual := args.Map{"result": fw.GetPascalCaseFuncName() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
 func Test_I18_FuncWrap_IsEqual(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fw1 := args.NewFuncWrap.Default(fn)
 	fw2 := args.NewFuncWrap.Default(fn)
 
+	// Act
 	actual := args.Map{"result": fw1.IsNotEqual(fw2)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
@@ -1107,10 +1435,15 @@ func Test_I18_FuncWrap_FuncDirectInvokeName(t *testing.T) {
 }
 
 func Test_I18_FuncWrap_IsEqualValue(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fw1 := args.NewTypedFuncWrap(fn)
 	fw2 := args.NewTypedFuncWrap(fn)
+
+	// Act
 	actual := args.Map{"result": fw1.IsEqualValue(*fw2)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal value", actual)
 }
@@ -1118,8 +1451,13 @@ func Test_I18_FuncWrap_IsEqualValue(t *testing.T) {
 // --- FuncMap ---
 
 func Test_I18_FuncMap_Basic(t *testing.T) {
+	// Arrange
 	fm := args.FuncMap{}
+
+	// Act
 	actual := args.Map{"result": fm.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	actual := args.Map{"result": fm.Length() != 0}
@@ -1143,11 +1481,15 @@ func Test_I18_FuncMap_Basic(t *testing.T) {
 }
 
 func Test_I18_FuncMap_AddAndInvoke(t *testing.T) {
+	// Arrange
 	fn := func(n int) int { return n * 2 }
 	fm := args.FuncMap{}
 	fm.Add(fn)
 
+	// Act
 	actual := args.Map{"result": fm.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
@@ -1156,9 +1498,14 @@ func Test_I18_FuncMap_AddAndInvoke(t *testing.T) {
 }
 
 func Test_I18_FuncMap_InvalidError(t *testing.T) {
+	// Arrange
 	fm := args.FuncMap{}
 	err := fm.InvalidError()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for empty map", actual)
 }
@@ -1166,16 +1513,26 @@ func Test_I18_FuncMap_InvalidError(t *testing.T) {
 // --- NewFuncWrap creator ---
 
 func Test_I18_NewFuncWrap_Default_Nil(t *testing.T) {
+	// Arrange
 	fw := args.NewFuncWrap.Default(nil)
+
+	// Act
 	actual := args.Map{"result": fw == nil || !fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid for nil", actual)
 }
 
 func Test_I18_NewFuncWrap_Default_Valid(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fw := args.NewFuncWrap.Default(fn)
+
+	// Act
 	actual := args.Map{"result": fw == nil || fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 }
@@ -1183,9 +1540,14 @@ func Test_I18_NewFuncWrap_Default_Valid(t *testing.T) {
 // --- FuncDetector ---
 
 func Test_I18_FuncDetector_GetFuncWrap(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fw := args.FuncDetector.GetFuncWrap(fn)
+
+	// Act
 	actual := args.Map{"result": fw == nil || fw.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid func wrap", actual)
 

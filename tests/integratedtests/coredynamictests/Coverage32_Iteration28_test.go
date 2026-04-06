@@ -15,9 +15,14 @@ import (
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_01_AnyCollection_Basic(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add("a").Add("b").Add("c")
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	actual := args.Map{"result": ac.First() != "a"}
@@ -32,8 +37,13 @@ func Test_C32_01_AnyCollection_Basic(t *testing.T) {
 }
 
 func Test_C32_02_AnyCollection_Empty(t *testing.T) {
+	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
+
+	// Act
 	actual := args.Map{"result": ac.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	actual := args.Map{"result": ac.HasAnyItem()}
@@ -48,8 +58,13 @@ func Test_C32_02_AnyCollection_Empty(t *testing.T) {
 }
 
 func Test_C32_03_AnyCollection_NilReceiver(t *testing.T) {
+	// Arrange
 	var ac *coredynamic.AnyCollection
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": ac.IsEmpty()}
@@ -58,9 +73,14 @@ func Test_C32_03_AnyCollection_NilReceiver(t *testing.T) {
 }
 
 func Test_C32_04_AnyCollection_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
+
+	// Act
 	actual := args.Map{"result": ac.FirstOrDefault() != "x"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected x", actual)
 	actual := args.Map{"result": ac.LastOrDefault() != "x"}
@@ -75,9 +95,14 @@ func Test_C32_04_AnyCollection_FirstOrDefault_LastOrDefault(t *testing.T) {
 }
 
 func Test_C32_05_AnyCollection_FirstDynamic_LastDynamic(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("a").Add("b")
+
+	// Act
 	actual := args.Map{"result": ac.FirstDynamic() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": ac.LastDynamic() == nil}
@@ -86,9 +111,14 @@ func Test_C32_05_AnyCollection_FirstDynamic_LastDynamic(t *testing.T) {
 }
 
 func Test_C32_06_AnyCollection_Skip_Take(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add(1).Add(2).Add(3).Add(4)
+
+	// Act
 	actual := args.Map{"result": len(ac.Skip(2)) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": len(ac.Take(2)) != 2}
@@ -109,10 +139,15 @@ func Test_C32_06_AnyCollection_Skip_Take(t *testing.T) {
 }
 
 func Test_C32_07_AnyCollection_SkipCollection_TakeCollection(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add(1).Add(2).Add(3).Add(4)
 	sc := ac.SkipCollection(2)
+
+	// Act
 	actual := args.Map{"result": sc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	tc := ac.TakeCollection(2)
@@ -130,9 +165,14 @@ func Test_C32_07_AnyCollection_SkipCollection_TakeCollection(t *testing.T) {
 }
 
 func Test_C32_08_AnyCollection_Count_LastIndex_HasIndex(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("a").Add("b")
+
+	// Act
 	actual := args.Map{"result": ac.Count() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": ac.LastIndex() != 1}
@@ -147,9 +187,14 @@ func Test_C32_08_AnyCollection_Count_LastIndex_HasIndex(t *testing.T) {
 }
 
 func Test_C32_09_AnyCollection_RemoveAt(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add("a").Add("b").Add("c")
+
+	// Act
 	actual := args.Map{"result": ac.RemoveAt(1)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
 	actual := args.Map{"result": ac.Length() != 2}
@@ -161,26 +206,41 @@ func Test_C32_09_AnyCollection_RemoveAt(t *testing.T) {
 }
 
 func Test_C32_10_AnyCollection_Items_Empty(t *testing.T) {
+	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	items := ac.Items()
+
+	// Act
 	actual := args.Map{"result": len(items) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C32_11_AnyCollection_Items_NonEmpty(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(1)
+
+	// Act
 	actual := args.Map{"result": len(ac.Items()) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_12_AnyCollection_DynamicItems(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x").Add("y")
 	di := ac.DynamicItems()
+
+	// Act
 	actual := args.Map{"result": len(di) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	empty := coredynamic.EmptyAnyCollection()
@@ -190,10 +250,15 @@ func Test_C32_12_AnyCollection_DynamicItems(t *testing.T) {
 }
 
 func Test_C32_13_AnyCollection_DynamicCollection(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
 	dc := ac.DynamicCollection()
+
+	// Act
 	actual := args.Map{"result": dc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyAnyCollection()
@@ -203,25 +268,36 @@ func Test_C32_13_AnyCollection_DynamicCollection(t *testing.T) {
 }
 
 func Test_C32_14_AnyCollection_AtAsDynamic(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(42)
 	d := ac.AtAsDynamic(0)
+
+	// Act
 	actual := args.Map{"result": d.ValueInt() != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_C32_15_AnyCollection_ReflectSetAt(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("hello")
 	var target string
 	err := ac.ReflectSetAt(0, &target)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 func Test_C32_16_AnyCollection_Loop_Sync(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add(1).Add(2).Add(3)
 	count := 0
@@ -229,12 +305,17 @@ func Test_C32_16_AnyCollection_Loop_Sync(t *testing.T) {
 		count++
 		return false
 	})
+
+	// Act
 	actual := args.Map{"result": count != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C32_17_AnyCollection_Loop_SyncBreak(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add(1).Add(2).Add(3)
 	count := 0
@@ -242,7 +323,11 @@ func Test_C32_17_AnyCollection_Loop_SyncBreak(t *testing.T) {
 		count++
 		return i == 1
 	})
+
+	// Act
 	actual := args.Map{"result": count != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
@@ -256,9 +341,14 @@ func Test_C32_18_AnyCollection_Loop_Async(t *testing.T) {
 }
 
 func Test_C32_19_AnyCollection_Loop_Empty(t *testing.T) {
+	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	ac.Loop(false, func(i int, item any) bool {
+
+	// Act
 		actual := args.Map{"result": false}
+
+	// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should not be called", actual)
 		return false
@@ -266,6 +356,7 @@ func Test_C32_19_AnyCollection_Loop_Empty(t *testing.T) {
 }
 
 func Test_C32_20_AnyCollection_LoopDynamic_Sync(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x").Add("y")
 	count := 0
@@ -273,12 +364,17 @@ func Test_C32_20_AnyCollection_LoopDynamic_Sync(t *testing.T) {
 		count++
 		return false
 	})
+
+	// Act
 	actual := args.Map{"result": count != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C32_21_AnyCollection_LoopDynamic_SyncBreak(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.Add(1).Add(2).Add(3)
 	count := 0
@@ -286,7 +382,11 @@ func Test_C32_21_AnyCollection_LoopDynamic_SyncBreak(t *testing.T) {
 		count++
 		return i == 0
 	})
+
+	// Act
 	actual := args.Map{"result": count != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
@@ -300,9 +400,14 @@ func Test_C32_22_AnyCollection_LoopDynamic_Async(t *testing.T) {
 }
 
 func Test_C32_23_AnyCollection_LoopDynamic_Empty(t *testing.T) {
+	// Arrange
 	ac := coredynamic.EmptyAnyCollection()
 	ac.LoopDynamic(false, func(i int, item coredynamic.Dynamic) bool {
+
+	// Act
 		actual := args.Map{"result": false}
+
+	// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should not be called", actual)
 		return false
@@ -310,17 +415,27 @@ func Test_C32_23_AnyCollection_LoopDynamic_Empty(t *testing.T) {
 }
 
 func Test_C32_24_AnyCollection_AddAny(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.AddAny("val", true)
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_25_AnyCollection_AddNonNull(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.AddNonNull(nil)
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	ac.AddNonNull("x")
@@ -330,9 +445,14 @@ func Test_C32_25_AnyCollection_AddNonNull(t *testing.T) {
 }
 
 func Test_C32_26_AnyCollection_AddNonNullDynamic(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.AddNonNullDynamic(nil, true)
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	ac.AddNonNullDynamic("x", true)
@@ -342,35 +462,55 @@ func Test_C32_26_AnyCollection_AddNonNullDynamic(t *testing.T) {
 }
 
 func Test_C32_27_AnyCollection_AddAnyManyDynamic(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.AddAnyManyDynamic("a", "b")
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C32_28_AnyCollection_AddMany(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.AddMany("a", nil, "b")
+
+	// Act
 	actual := args.Map{"result": ac.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 (nil skipped)", actual)
 }
 
 func Test_C32_29_AnyCollection_AddAnySliceFromSingleItem(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	ac.AddAnySliceFromSingleItem([]string{"a", "b"})
+
+	// Act
 	actual := args.Map{"result": ac.Length() < 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items added", actual)
 	ac.AddAnySliceFromSingleItem(nil)
 }
 
 func Test_C32_30_AnyCollection_ListStrings(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(42).Add("hello")
 	strs := ac.ListStrings(false)
+
+	// Act
 	actual := args.Map{"result": len(strs) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	strsWithName := ac.ListStrings(true)
@@ -380,10 +520,15 @@ func Test_C32_30_AnyCollection_ListStrings(t *testing.T) {
 }
 
 func Test_C32_31_AnyCollection_Strings_String(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("a").Add("b")
 	strs := ac.Strings()
+
+	// Act
 	actual := args.Map{"result": len(strs) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	s := ac.String()
@@ -397,28 +542,43 @@ func Test_C32_31_AnyCollection_Strings_String(t *testing.T) {
 }
 
 func Test_C32_32_AnyCollection_JsonString(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
 	s, err := ac.JsonString()
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error or empty string", actual)
 }
 
 func Test_C32_33_AnyCollection_JsonStringMust(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(1)
 	s := ac.JsonStringMust()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_34_AnyCollection_MarshalUnmarshalJSON(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("hello")
 	b, err := ac.MarshalJSON()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 	ac2 := coredynamic.EmptyAnyCollection()
@@ -429,10 +589,15 @@ func Test_C32_34_AnyCollection_MarshalUnmarshalJSON(t *testing.T) {
 }
 
 func Test_C32_35_AnyCollection_JsonModel_JsonModelAny(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(1)
 	m := ac.JsonModel()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	ma := ac.JsonModelAny()
@@ -442,21 +607,31 @@ func Test_C32_35_AnyCollection_JsonModel_JsonModelAny(t *testing.T) {
 }
 
 func Test_C32_36_AnyCollection_Json_JsonPtr(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
 	j := ac.Json()
 	_ = j
 	jp := ac.JsonPtr()
+
+	// Act
 	actual := args.Map{"result": jp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C32_37_AnyCollection_JsonResultsCollection(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
 	rc := ac.JsonResultsCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyAnyCollection()
@@ -466,10 +641,15 @@ func Test_C32_37_AnyCollection_JsonResultsCollection(t *testing.T) {
 }
 
 func Test_C32_38_AnyCollection_JsonResultsPtrCollection(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add("x")
 	rc := ac.JsonResultsPtrCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyAnyCollection()
@@ -479,11 +659,16 @@ func Test_C32_38_AnyCollection_JsonResultsPtrCollection(t *testing.T) {
 }
 
 func Test_C32_39_AnyCollection_Paging(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(10)
 	for i := 0; i < 10; i++ {
 		ac.Add(i)
 	}
+
+	// Act
 	actual := args.Map{"result": ac.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": ac.GetPagesSize(0) != 0}
@@ -496,39 +681,59 @@ func Test_C32_39_AnyCollection_Paging(t *testing.T) {
 }
 
 func Test_C32_40_AnyCollection_GetSinglePageCollection_Small(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(1).Add(2)
 	page := ac.GetSinglePageCollection(5, 1)
+
+	// Act
 	actual := args.Map{"result": page.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C32_41_AnyCollection_GetPagedCollection(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(7)
 	for i := 0; i < 7; i++ {
 		ac.Add(i)
 	}
 	pages := ac.GetPagedCollection(3)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
 func Test_C32_42_AnyCollection_GetPagedCollection_Small(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(2)
 	ac.Add(1)
 	pages := ac.GetPagedCollection(5)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_43_AnyCollection_AddAnyItemsWithTypeValidation(t *testing.T) {
+	// Arrange
 	ac := coredynamic.NewAnyCollection(4)
 	strType := reflect.TypeOf("")
 	err := ac.AddAnyItemsWithTypeValidation(false, false, strType, "a", "b")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	// type mismatch - stop on first error
@@ -553,10 +758,15 @@ func Test_C32_43_AnyCollection_AddAnyItemsWithTypeValidation(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_44_MapAnyItems_Basic(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.Add("b", 2)
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": m.IsEmpty()}
@@ -574,8 +784,13 @@ func Test_C32_44_MapAnyItems_Basic(t *testing.T) {
 }
 
 func Test_C32_45_MapAnyItems_NilReceiver(t *testing.T) {
+	// Arrange
 	var m *coredynamic.MapAnyItems
+
+	// Act
 	actual := args.Map{"result": m.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": m.IsEmpty()}
@@ -587,8 +802,13 @@ func Test_C32_45_MapAnyItems_NilReceiver(t *testing.T) {
 }
 
 func Test_C32_46_MapAnyItems_GetValue(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": m.GetValue("a") != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": m.GetValue("z") != nil}
@@ -597,9 +817,14 @@ func Test_C32_46_MapAnyItems_GetValue(t *testing.T) {
 }
 
 func Test_C32_47_MapAnyItems_Get(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": "val"})
 	v, has := m.Get("a")
+
+	// Act
 	actual := args.Map{"result": has || v != "val"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected val, has=true", actual)
 	v2, has2 := m.Get("z")
@@ -609,8 +834,13 @@ func Test_C32_47_MapAnyItems_Get(t *testing.T) {
 }
 
 func Test_C32_48_MapAnyItems_EmptyItems(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItemsUsingItems(nil)
+
+	// Act
 	actual := args.Map{"result": m.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{})
@@ -620,9 +850,14 @@ func Test_C32_48_MapAnyItems_EmptyItems(t *testing.T) {
 }
 
 func Test_C32_49_MapAnyItems_Add_Set(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	isNew := m.Add("x", 1)
+
+	// Act
 	actual := args.Map{"result": isNew}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected newly added", actual)
 	isNew2 := m.Add("x", 2)
@@ -636,18 +871,28 @@ func Test_C32_49_MapAnyItems_Add_Set(t *testing.T) {
 }
 
 func Test_C32_50_MapAnyItems_AddKeyAny(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	isNew := m.AddKeyAny(corejson.KeyAny{Key: "k", AnyInf: "v"})
+
+	// Act
 	actual := args.Map{"result": isNew}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 }
 
 func Test_C32_51_MapAnyItems_AddKeyAnyWithValidation(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	strType := reflect.TypeOf("")
 	err := m.AddKeyAnyWithValidation(strType, corejson.KeyAny{Key: "k", AnyInf: "v"})
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	err = m.AddKeyAnyWithValidation(strType, corejson.KeyAny{Key: "k2", AnyInf: 42})
@@ -657,10 +902,15 @@ func Test_C32_51_MapAnyItems_AddKeyAnyWithValidation(t *testing.T) {
 }
 
 func Test_C32_52_MapAnyItems_AddWithValidation(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	strType := reflect.TypeOf("")
 	err := m.AddWithValidation(strType, "k", "v")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	err = m.AddWithValidation(strType, "k2", 42)
@@ -670,10 +920,15 @@ func Test_C32_52_MapAnyItems_AddWithValidation(t *testing.T) {
 }
 
 func Test_C32_53_MapAnyItems_AddJsonResultPtr(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	jr := corejson.NewPtr("hello")
 	m.AddJsonResultPtr("k", jr)
+
+	// Act
 	actual := args.Map{"result": m.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	m.AddJsonResultPtr("k2", nil) // should skip
@@ -683,11 +938,16 @@ func Test_C32_53_MapAnyItems_AddJsonResultPtr(t *testing.T) {
 }
 
 func Test_C32_54_MapAnyItems_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("b", 2)
 	m.Add("a", 1)
 	keys := m.AllKeys()
+
+	// Act
 	actual := args.Map{"result": len(keys) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sortedKeys := m.AllKeysSorted()
@@ -711,11 +971,16 @@ func Test_C32_54_MapAnyItems_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 }
 
 func Test_C32_55_MapAnyItems_ReflectSetTo(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("k", "hello")
 	var target string
 	err := m.ReflectSetTo("k", &target)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	err = m.ReflectSetTo("missing", &target)
@@ -725,11 +990,16 @@ func Test_C32_55_MapAnyItems_ReflectSetTo(t *testing.T) {
 }
 
 func Test_C32_56_MapAnyItems_GetUsingUnmarshallAt(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("name", "John")
 	var result string
 	err := m.GetUsingUnmarshallAt("name", &result)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	err = m.GetUsingUnmarshallAt("missing", &result)
@@ -739,16 +1009,22 @@ func Test_C32_56_MapAnyItems_GetUsingUnmarshallAt(t *testing.T) {
 }
 
 func Test_C32_57_MapAnyItems_Deserialize(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("val", 42)
 	var result int
 	err := m.Deserialize("val", &result)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 func Test_C32_58_MapAnyItems_GetUsingUnmarshallManyAt(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", "hello")
 	m.Add("b", 42)
@@ -758,16 +1034,25 @@ func Test_C32_58_MapAnyItems_GetUsingUnmarshallManyAt(t *testing.T) {
 		corejson.KeyAny{Key: "a", AnyInf: &s},
 		corejson.KeyAny{Key: "b", AnyInf: &n},
 	)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 func Test_C32_59_MapAnyItems_GetFieldsMap(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("obj", map[string]any{"x": 1})
 	fm, err, found := m.GetFieldsMap("obj")
+
+	// Act
 	actual := args.Map{"result": found || err != nil}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected found=true, err=nil, got found= err=", actual)
 	_ = fm
@@ -778,22 +1063,32 @@ func Test_C32_59_MapAnyItems_GetFieldsMap(t *testing.T) {
 }
 
 func Test_C32_60_MapAnyItems_GetSafeFieldsMap(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("obj", map[string]any{"x": 1})
 	fm, found := m.GetSafeFieldsMap("obj")
+
+	// Act
 	actual := args.Map{"result": found}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected found", actual)
 	_ = fm
 }
 
 func Test_C32_61_MapAnyItems_GetItemRef(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	val := "hello"
 	m.Add("k", &val)
 	var target string
 	err := m.GetItemRef("k", &target)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	// missing key
@@ -814,6 +1109,7 @@ func Test_C32_61_MapAnyItems_GetItemRef(t *testing.T) {
 }
 
 func Test_C32_62_MapAnyItems_GetManyItemsRefs(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	val := "hello"
 	m.Add("k", &val)
@@ -821,7 +1117,11 @@ func Test_C32_62_MapAnyItems_GetManyItemsRefs(t *testing.T) {
 	err := m.GetManyItemsRefs(
 		corejson.KeyAny{Key: "k", AnyInf: &target},
 	)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	// empty
@@ -832,9 +1132,14 @@ func Test_C32_62_MapAnyItems_GetManyItemsRefs(t *testing.T) {
 }
 
 func Test_C32_63_MapAnyItems_AddMapResult(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.AddMapResult(map[string]any{"a": 1, "b": 2})
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	m.AddMapResult(nil)
@@ -844,10 +1149,15 @@ func Test_C32_63_MapAnyItems_AddMapResult(t *testing.T) {
 }
 
 func Test_C32_64_MapAnyItems_AddMapResultOption(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.AddMapResultOption(true, map[string]any{"a": 99, "b": 2})
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	m.AddMapResultOption(false, map[string]any{"a": 100})
@@ -855,24 +1165,34 @@ func Test_C32_64_MapAnyItems_AddMapResultOption(t *testing.T) {
 }
 
 func Test_C32_65_MapAnyItems_AddManyMapResultsUsingOption(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.AddManyMapResultsUsingOption(true,
 		map[string]any{"a": 1},
 		map[string]any{"b": 2},
 	)
+
+	// Act
 	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	m.AddManyMapResultsUsingOption(true)
 }
 
 func Test_C32_66_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.Add("b", 2)
 	m.Add("c", 3)
 	sub := m.GetNewMapUsingKeys(false, "a", "c")
+
+	// Act
 	actual := args.Map{"result": sub.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	empty := m.GetNewMapUsingKeys(false)
@@ -887,28 +1207,43 @@ func Test_C32_66_MapAnyItems_GetNewMapUsingKeys(t *testing.T) {
 }
 
 func Test_C32_67_MapAnyItems_JsonString(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("k", "v")
 	s, err := m.JsonString()
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected json string", actual)
 }
 
 func Test_C32_68_MapAnyItems_JsonStringMust(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("k", "v")
 	s := m.JsonStringMust()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_69_MapAnyItems_JsonResultOfKey(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("k", "v")
 	jr := m.JsonResultOfKey("k")
+
+	// Act
 	actual := args.Map{"result": jr == nil || jr.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid result", actual)
 	jr2 := m.JsonResultOfKey("missing")
@@ -918,11 +1253,16 @@ func Test_C32_69_MapAnyItems_JsonResultOfKey(t *testing.T) {
 }
 
 func Test_C32_70_MapAnyItems_JsonResultOfKeys(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.Add("b", 2)
 	mr := m.JsonResultOfKeys("a", "b")
+
+	// Act
 	actual := args.Map{"result": mr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	mr2 := m.JsonResultOfKeys()
@@ -930,11 +1270,16 @@ func Test_C32_70_MapAnyItems_JsonResultOfKeys(t *testing.T) {
 }
 
 func Test_C32_71_MapAnyItems_Paging(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(10)
 	for i := 0; i < 10; i++ {
 		m.Add("k"+string(rune('a'+i)), i)
 	}
+
+	// Act
 	actual := args.Map{"result": m.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": m.GetPagesSize(0) != 0}
@@ -943,28 +1288,43 @@ func Test_C32_71_MapAnyItems_Paging(t *testing.T) {
 }
 
 func Test_C32_72_MapAnyItems_GetPagedCollection_Small(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(2)
 	m.Add("a", 1)
 	pages := m.GetPagedCollection(5)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_73_MapAnyItems_GetSinglePageCollection_Small(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(2)
 	m.Add("a", 1)
 	page := m.GetSinglePageCollection(5, 1, m.AllKeysSorted())
+
+	// Act
 	actual := args.Map{"result": page.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_74_MapAnyItems_IsEqualRaw(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.Add("b", 2)
+
+	// Act
 	actual := args.Map{"result": m.IsEqualRaw(map[string]any{"a": 1, "b": 2})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	actual := args.Map{"result": m.IsEqualRaw(map[string]any{"a": 1, "b": 3})}
@@ -986,9 +1346,14 @@ func Test_C32_74_MapAnyItems_IsEqualRaw(t *testing.T) {
 }
 
 func Test_C32_75_MapAnyItems_IsEqual(t *testing.T) {
+	// Arrange
 	m1 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	m2 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": m1.IsEqual(m2)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	m3 := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 2})
@@ -1009,10 +1374,15 @@ func Test_C32_75_MapAnyItems_IsEqual(t *testing.T) {
 }
 
 func Test_C32_76_MapAnyItems_Clear_DeepClear_Dispose(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	m.Clear()
+
+	// Act
 	actual := args.Map{"result": m.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	m.Add("b", 2)
@@ -1028,10 +1398,15 @@ func Test_C32_76_MapAnyItems_Clear_DeepClear_Dispose(t *testing.T) {
 }
 
 func Test_C32_77_MapAnyItems_Strings_String(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	strs := m.Strings()
+
+	// Act
 	actual := args.Map{"result": len(strs) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	s := m.String()
@@ -1041,41 +1416,66 @@ func Test_C32_77_MapAnyItems_Strings_String(t *testing.T) {
 }
 
 func Test_C32_78_MapAnyItems_MapAnyItems_Self(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
+
+	// Act
 	actual := args.Map{"result": m.MapAnyItems() != m}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected self reference", actual)
 }
 
 func Test_C32_79_MapAnyItems_MapStringAnyDiff(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	diff := m.MapStringAnyDiff()
+
+	// Act
 	actual := args.Map{"result": diff == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C32_80_MapAnyItems_RawMapStringAnyDiff_NilReceiver(t *testing.T) {
+	// Arrange
 	var m *coredynamic.MapAnyItems
 	diff := m.RawMapStringAnyDiff()
+
+	// Act
 	actual := args.Map{"result": len(diff) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty map for nil receiver", actual)
 }
 
 func Test_C32_81_MapAnyItems_IsRawEqual(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
+
+	// Act
 	actual := args.Map{"result": m.IsRawEqual(false, map[string]any{"a": 1})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
 func Test_C32_82_MapAnyItems_HasAnyChanges(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
+
+	// Act
 	actual := args.Map{"result": m.HasAnyChanges(false, map[string]any{"a": 1})}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no changes", actual)
 	actual := args.Map{"result": m.HasAnyChanges(false, map[string]any{"a": 2})}
@@ -1084,21 +1484,31 @@ func Test_C32_82_MapAnyItems_HasAnyChanges(t *testing.T) {
 }
 
 func Test_C32_83_MapAnyItems_Json_JsonPtr(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	j := m.Json()
 	_ = j
 	jp := m.JsonPtr()
+
+	// Act
 	actual := args.Map{"result": jp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C32_84_MapAnyItems_JsonModel_JsonModelAny(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	model := m.JsonModel()
+
+	// Act
 	actual := args.Map{"result": model == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": m.JsonModelAny() == nil}
@@ -1110,10 +1520,15 @@ func Test_C32_84_MapAnyItems_JsonModel_JsonModelAny(t *testing.T) {
 }
 
 func Test_C32_85_MapAnyItems_JsonMapResults(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	mr, err := m.JsonMapResults()
+
+	// Act
 	actual := args.Map{"result": err != nil || mr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	empty := coredynamic.EmptyMapAnyItems()
@@ -1122,10 +1537,15 @@ func Test_C32_85_MapAnyItems_JsonMapResults(t *testing.T) {
 }
 
 func Test_C32_86_MapAnyItems_JsonResultsCollection(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	rc := m.JsonResultsCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyMapAnyItems()
@@ -1135,10 +1555,15 @@ func Test_C32_86_MapAnyItems_JsonResultsCollection(t *testing.T) {
 }
 
 func Test_C32_87_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	rc := m.JsonResultsPtrCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyMapAnyItems()
@@ -1148,10 +1573,15 @@ func Test_C32_87_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
 }
 
 func Test_C32_88_MapAnyItems_ClonePtr(t *testing.T) {
+	// Arrange
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("a", 1)
 	cloned, err := m.ClonePtr()
+
+	// Act
 	actual := args.Map{"result": err != nil || cloned == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error or nil:", actual)
 	var nilM *coredynamic.MapAnyItems
@@ -1162,8 +1592,13 @@ func Test_C32_88_MapAnyItems_ClonePtr(t *testing.T) {
 }
 
 func Test_C32_89_MapAnyItems_NewUsingAnyTypeMap(t *testing.T) {
+	// Arrange
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]int{"a": 1})
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	actual := args.Map{"result": m.Length() != 1}
@@ -1180,8 +1615,13 @@ func Test_C32_89_MapAnyItems_NewUsingAnyTypeMap(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_90_ValueStatus(t *testing.T) {
+	// Arrange
 	vs := coredynamic.InvalidValueStatus("test")
+
+	// Act
 	actual := args.Map{"result": vs.IsValid}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 	actual := args.Map{"result": vs.Message != "test"}
@@ -1198,9 +1638,14 @@ func Test_C32_90_ValueStatus(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_91_KeyVal_KeyDynamic_ValueDynamic(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "name", Value: 42}
 	kd := kv.KeyDynamic()
+
+	// Act
 	actual := args.Map{"result": kd.ValueString() != "name"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected name", actual)
 	vd := kv.ValueDynamic()
@@ -1210,8 +1655,13 @@ func Test_C32_91_KeyVal_KeyDynamic_ValueDynamic(t *testing.T) {
 }
 
 func Test_C32_92_KeyVal_KeyDynamicPtr_ValueDynamicPtr(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
+
+	// Act
 	actual := args.Map{"result": kv.KeyDynamicPtr() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": kv.ValueDynamicPtr() == nil}
@@ -1227,8 +1677,13 @@ func Test_C32_92_KeyVal_KeyDynamicPtr_ValueDynamicPtr(t *testing.T) {
 }
 
 func Test_C32_93_KeyVal_IsKeyNull_IsValueNull(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "a", Value: nil}
+
+	// Act
 	actual := args.Map{"result": kv.IsKeyNull()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	actual := args.Map{"result": kv.IsValueNull()}
@@ -1237,8 +1692,13 @@ func Test_C32_93_KeyVal_IsKeyNull_IsValueNull(t *testing.T) {
 }
 
 func Test_C32_94_KeyVal_IsKeyNullOrEmptyString(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "", Value: nil}
+
+	// Act
 	actual := args.Map{"result": kv.IsKeyNullOrEmptyString()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	kv2 := coredynamic.KeyVal{Key: "x", Value: nil}
@@ -1248,8 +1708,13 @@ func Test_C32_94_KeyVal_IsKeyNullOrEmptyString(t *testing.T) {
 }
 
 func Test_C32_95_KeyVal_ValueInt_ValueUInt_ValueBool_ValueInt64_ValueStrings(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
+
+	// Act
 	actual := args.Map{"result": kv.ValueInt() != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	kv2 := coredynamic.KeyVal{Key: "k", Value: uint(10)}
@@ -1288,23 +1753,38 @@ func Test_C32_95_KeyVal_ValueInt_ValueUInt_ValueBool_ValueInt64_ValueStrings(t *
 }
 
 func Test_C32_96_KeyVal_String_NilReceiver(t *testing.T) {
+	// Arrange
 	var kv *coredynamic.KeyVal
+
+	// Act
 	actual := args.Map{"result": kv.String() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C32_97_KeyVal_String(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "name", Value: "val"}
 	s := kv.String()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_98_KeyVal_KeyString_ValueString(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
+
+	// Act
 	actual := args.Map{"result": kv.KeyString() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": kv.ValueString() == ""}
@@ -1327,16 +1807,26 @@ func Test_C32_98_KeyVal_KeyString_ValueString(t *testing.T) {
 }
 
 func Test_C32_99_KeyVal_ValueReflectValue(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: 42}
 	rv := kv.ValueReflectValue()
+
+	// Act
 	actual := args.Map{"result": rv.Int() != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_C32_100_KeyVal_ValueNullErr_KeyNullErr(t *testing.T) {
+	// Arrange
 	var nilKV *coredynamic.KeyVal
+
+	// Act
 	actual := args.Map{"result": nilKV.ValueNullErr() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	actual := args.Map{"result": nilKV.KeyNullErr() == nil}
@@ -1360,10 +1850,15 @@ func Test_C32_100_KeyVal_ValueNullErr_KeyNullErr(t *testing.T) {
 }
 
 func Test_C32_101_KeyVal_CastKeyVal(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "hello", Value: "world"}
 	var k, v string
 	err := kv.CastKeyVal(&k, &v)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	var nilKV *coredynamic.KeyVal
@@ -1373,10 +1868,15 @@ func Test_C32_101_KeyVal_CastKeyVal(t *testing.T) {
 }
 
 func Test_C32_102_KeyVal_ReflectSetKey(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "hello", Value: "world"}
 	var target string
 	err := kv.ReflectSetKey(&target)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	var nilKV *coredynamic.KeyVal
@@ -1386,9 +1886,14 @@ func Test_C32_102_KeyVal_ReflectSetKey(t *testing.T) {
 }
 
 func Test_C32_103_KeyVal_KeyReflectSet_ValueReflectSet_ReflectSetTo(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "hello", Value: "world"}
 	var k, v string
+
+	// Act
 	actual := args.Map{"result": kv.KeyReflectSet(&k) != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	actual := args.Map{"result": kv.ValueReflectSet(&v) != nil}
@@ -1410,20 +1915,30 @@ func Test_C32_103_KeyVal_KeyReflectSet_ValueReflectSet_ReflectSetTo(t *testing.T
 }
 
 func Test_C32_104_KeyVal_ReflectSetToMust(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	var target string
 	kv.ReflectSetToMust(&target)
+
+	// Act
 	actual := args.Map{"result": target != "v"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected v", actual)
 }
 
 func Test_C32_105_KeyVal_Json(t *testing.T) {
+	// Arrange
 	kv := coredynamic.KeyVal{Key: "k", Value: "v"}
 	j := kv.Json()
 	_ = j
 	jp := kv.JsonPtr()
+
+	// Act
 	actual := args.Map{"result": jp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": kv.JsonModel() == nil}
@@ -1435,9 +1950,14 @@ func Test_C32_105_KeyVal_Json(t *testing.T) {
 }
 
 func Test_C32_106_KeyVal_Serialize(t *testing.T) {
+	// Arrange
 	kv := &coredynamic.KeyVal{Key: "k", Value: "v"}
 	b, err := kv.Serialize()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "serialize failed", actual)
 }
@@ -1447,10 +1967,15 @@ func Test_C32_106_KeyVal_Serialize(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_107_KeyValCollection_Basic(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(4)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	kvc.Add(coredynamic.KeyVal{Key: "b", Value: 2})
+
+	// Act
 	actual := args.Map{"result": kvc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": kvc.IsEmpty()}
@@ -1462,22 +1987,32 @@ func Test_C32_107_KeyValCollection_Basic(t *testing.T) {
 }
 
 func Test_C32_108_KeyValCollection_AddPtr(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(4)
 	kv := &coredynamic.KeyVal{Key: "a", Value: 1}
 	kvc.AddPtr(kv)
 	kvc.AddPtr(nil)
+
+	// Act
 	actual := args.Map{"result": kvc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_109_KeyValCollection_AddMany_AddManyPtr(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(4)
 	kvc.AddMany(
 		coredynamic.KeyVal{Key: "a", Value: 1},
 		coredynamic.KeyVal{Key: "b", Value: 2},
 	)
+
+	// Act
 	actual := args.Map{"result": kvc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	kv := &coredynamic.KeyVal{Key: "c", Value: 3}
@@ -1488,8 +2023,13 @@ func Test_C32_109_KeyValCollection_AddMany_AddManyPtr(t *testing.T) {
 }
 
 func Test_C32_110_KeyValCollection_Items_NilReceiver(t *testing.T) {
+	// Arrange
 	var kvc *coredynamic.KeyValCollection
+
+	// Act
 	actual := args.Map{"result": kvc.Items() != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	actual := args.Map{"result": kvc.Length() != 0}
@@ -1498,11 +2038,16 @@ func Test_C32_110_KeyValCollection_Items_NilReceiver(t *testing.T) {
 }
 
 func Test_C32_111_KeyValCollection_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(4)
 	kvc.Add(coredynamic.KeyVal{Key: "b", Value: 2})
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	keys := kvc.AllKeys()
+
+	// Act
 	actual := args.Map{"result": len(keys) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sorted := kvc.AllKeysSorted()
@@ -1526,10 +2071,15 @@ func Test_C32_111_KeyValCollection_AllKeys_AllKeysSorted_AllValues(t *testing.T)
 }
 
 func Test_C32_112_KeyValCollection_MapAnyItems(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(4)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	m := kvc.MapAnyItems()
+
+	// Act
 	actual := args.Map{"result": m.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyKeyValCollection()
@@ -1539,26 +2089,41 @@ func Test_C32_112_KeyValCollection_MapAnyItems(t *testing.T) {
 }
 
 func Test_C32_113_KeyValCollection_String_NilReceiver(t *testing.T) {
+	// Arrange
 	var kvc *coredynamic.KeyValCollection
+
+	// Act
 	actual := args.Map{"result": kvc.String() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C32_114_KeyValCollection_String(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
 	s := kvc.String()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_115_KeyValCollection_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	c := kvc.Clone()
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	cp := kvc.ClonePtr()
@@ -1572,48 +2137,73 @@ func Test_C32_115_KeyValCollection_Clone_ClonePtr(t *testing.T) {
 }
 
 func Test_C32_116_KeyValCollection_NonPtr_Ptr(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	np := kvc.NonPtr()
 	_ = np
 	p := kvc.Ptr()
+
+	// Act
 	actual := args.Map{"result": p == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C32_117_KeyValCollection_JsonString(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
 	s, err := kvc.JsonString()
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "json string failed", actual)
 }
 
 func Test_C32_118_KeyValCollection_JsonStringMust(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
 	s := kvc.JsonStringMust()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_119_KeyValCollection_Serialize(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "k", Value: "v"})
 	b, err := kvc.Serialize()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "serialize failed", actual)
 }
 
 func Test_C32_120_KeyValCollection_Paging(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 10; i++ {
 		kvc.Add(coredynamic.KeyVal{Key: "k", Value: i})
 	}
+
+	// Act
 	actual := args.Map{"result": kvc.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": kvc.GetPagesSize(0) != 0}
@@ -1622,39 +2212,59 @@ func Test_C32_120_KeyValCollection_Paging(t *testing.T) {
 }
 
 func Test_C32_121_KeyValCollection_GetSinglePageCollection_Small(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	page := kvc.GetSinglePageCollection(5, 1)
+
+	// Act
 	actual := args.Map{"result": page.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_122_KeyValCollection_GetPagedCollection(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(7)
 	for i := 0; i < 7; i++ {
 		kvc.Add(coredynamic.KeyVal{Key: "k", Value: i})
 	}
 	pages := kvc.GetPagedCollection(3)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
 func Test_C32_123_KeyValCollection_GetPagedCollection_Small(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	pages := kvc.GetPagedCollection(5)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_124_KeyValCollection_JsonMapResults(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	mr, err := kvc.JsonMapResults()
+
+	// Act
 	actual := args.Map{"result": err != nil || mr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
 	empty := coredynamic.EmptyKeyValCollection()
@@ -1663,10 +2273,15 @@ func Test_C32_124_KeyValCollection_JsonMapResults(t *testing.T) {
 }
 
 func Test_C32_125_KeyValCollection_JsonResultsCollection(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	rc := kvc.JsonResultsCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyKeyValCollection()
@@ -1676,10 +2291,15 @@ func Test_C32_125_KeyValCollection_JsonResultsCollection(t *testing.T) {
 }
 
 func Test_C32_126_KeyValCollection_JsonResultsPtrCollection(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
 	rc := kvc.JsonResultsPtrCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyKeyValCollection()
@@ -1689,11 +2309,16 @@ func Test_C32_126_KeyValCollection_JsonResultsPtrCollection(t *testing.T) {
 }
 
 func Test_C32_127_KeyValCollection_Json_JsonPtr(t *testing.T) {
+	// Arrange
 	kvc := coredynamic.KeyValCollection{}
 	j := kvc.Json()
 	_ = j
 	jp := kvc.JsonPtr()
+
+	// Act
 	actual := args.Map{"result": jp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": kvc.JsonModel() == nil}
@@ -1709,8 +2334,13 @@ func Test_C32_127_KeyValCollection_Json_JsonPtr(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_128_NewCreator_Collection_String(t *testing.T) {
+	// Arrange
 	c := coredynamic.New.Collection.String.Empty()
+
+	// Act
 	actual := args.Map{"result": c.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	c2 := coredynamic.New.Collection.String.Cap(5)
@@ -1740,9 +2370,14 @@ func Test_C32_128_NewCreator_Collection_String(t *testing.T) {
 }
 
 func Test_C32_129_NewCreator_Collection_Int(t *testing.T) {
+	// Arrange
 	c := coredynamic.New.Collection.Int.Empty()
 	c.Add(1)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c2 := coredynamic.New.Collection.Int.LenCap(2, 5)
@@ -1752,9 +2387,14 @@ func Test_C32_129_NewCreator_Collection_Int(t *testing.T) {
 }
 
 func Test_C32_130_NewCreator_Collection_Int64(t *testing.T) {
+	// Arrange
 	c := coredynamic.New.Collection.Int64.Cap(5)
 	c.Add(int64(1))
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c2 := coredynamic.New.Collection.Int64.LenCap(2, 5)
@@ -1764,9 +2404,14 @@ func Test_C32_130_NewCreator_Collection_Int64(t *testing.T) {
 }
 
 func Test_C32_131_NewCreator_Collection_Byte(t *testing.T) {
+	// Arrange
 	c := coredynamic.New.Collection.Byte.Cap(5)
 	c.Add(byte(1))
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c2 := coredynamic.New.Collection.Byte.LenCap(2, 5)
@@ -1776,9 +2421,14 @@ func Test_C32_131_NewCreator_Collection_Byte(t *testing.T) {
 }
 
 func Test_C32_132_NewCreator_Collection_Any(t *testing.T) {
+	// Arrange
 	c := coredynamic.New.Collection.Any.Empty()
 	c.Add(42)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c2 := coredynamic.New.Collection.Any.Items("a", 1, true)
@@ -1788,9 +2438,14 @@ func Test_C32_132_NewCreator_Collection_Any(t *testing.T) {
 }
 
 func Test_C32_133_NewCreator_Collection_Others(t *testing.T) {
+	// Arrange
 	bs := coredynamic.New.Collection.ByteSlice.Empty()
 	bs.Add([]byte{1})
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	b := coredynamic.New.Collection.Bool.Cap(5)
@@ -1815,10 +2470,15 @@ func Test_C32_133_NewCreator_Collection_Others(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_134_DynCol_AddAnyItemsWithTypeValidation(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	strType := reflect.TypeOf("")
 	err := dc.AddAnyItemsWithTypeValidation(false, false, strType, "a", "b")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	err = dc.AddAnyItemsWithTypeValidation(false, false, strType, 42)
@@ -1836,19 +2496,29 @@ func Test_C32_134_DynCol_AddAnyItemsWithTypeValidation(t *testing.T) {
 }
 
 func Test_C32_135_DynCol_AddAnySliceFromSingleItem(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.AddAnySliceFromSingleItem(true, []string{"a", "b"})
+
+	// Act
 	actual := args.Map{"result": dc.Length() < 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected items", actual)
 	dc.AddAnySliceFromSingleItem(true, nil)
 }
 
 func Test_C32_136_DynCol_JsonResultsCollection(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny("x", true)
 	rc := dc.JsonResultsCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyDynamicCollection()
@@ -1858,10 +2528,15 @@ func Test_C32_136_DynCol_JsonResultsCollection(t *testing.T) {
 }
 
 func Test_C32_137_DynCol_JsonResultsPtrCollection(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny("x", true)
 	rc := dc.JsonResultsPtrCollection()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := coredynamic.EmptyDynamicCollection()
@@ -1871,46 +2546,71 @@ func Test_C32_137_DynCol_JsonResultsPtrCollection(t *testing.T) {
 }
 
 func Test_C32_138_DynCol_JsonString(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny(42, true)
 	s, err := dc.JsonString()
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "json string failed", actual)
 }
 
 func Test_C32_139_DynCol_JsonStringMust(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny(1, true)
 	s := dc.JsonStringMust()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C32_140_DynCol_MarshalUnmarshalJSON(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny("hello", true)
 	b, err := dc.MarshalJSON()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 }
 
 func Test_C32_141_DynCol_SafeLimitCollection(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.AddAny(1, true).AddAny(2, true).AddAny(3, true)
 	slc := dc.SafeLimitCollection(100)
+
+	// Act
 	actual := args.Map{"result": slc.Length() != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C32_142_DynCol_At_First_Last_Accessors(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.AddAny("a", true).AddAny("b", true).AddAny("c", true)
 	atVal := dc.At(1)
+
+	// Act
 	actual := args.Map{"result": atVal.ValueString() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	f := dc.First()
@@ -1932,9 +2632,14 @@ func Test_C32_142_DynCol_At_First_Last_Accessors(t *testing.T) {
 }
 
 func Test_C32_143_DynCol_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny("x", true)
+
+	// Act
 	actual := args.Map{"result": dc.FirstOrDefault() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": dc.LastOrDefault() == nil}
@@ -1956,9 +2661,14 @@ func Test_C32_143_DynCol_FirstOrDefault_LastOrDefault(t *testing.T) {
 }
 
 func Test_C32_144_DynCol_Skip_Take_Limit(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.AddAny(1, true).AddAny(2, true).AddAny(3, true).AddAny(4, true)
+
+	// Act
 	actual := args.Map{"result": len(dc.Skip(2)) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": len(dc.Take(2)) != 2}
@@ -1979,10 +2689,15 @@ func Test_C32_144_DynCol_Skip_Take_Limit(t *testing.T) {
 }
 
 func Test_C32_145_DynCol_SkipCollection_TakeCollection_LimitCollection(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(4)
 	dc.AddAny(1, true).AddAny(2, true).AddAny(3, true)
 	sc := dc.SkipCollection(1)
+
+	// Act
 	actual := args.Map{"result": sc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	tc := dc.TakeCollection(2)
@@ -1996,30 +2711,45 @@ func Test_C32_145_DynCol_SkipCollection_TakeCollection_LimitCollection(t *testin
 }
 
 func Test_C32_146_DynCol_GetPagedCollection(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(10)
 	for i := 0; i < 10; i++ {
 		dc.AddAny(i, true)
 	}
 	pages := dc.GetPagedCollection(3)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4 pages", actual)
 }
 
 func Test_C32_147_DynCol_GetPagedCollection_Small(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny(1, true)
 	pages := dc.GetPagedCollection(5)
+
+	// Act
 	actual := args.Map{"result": len(pages) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C32_148_DynCol_GetSinglePageCollection_Small(t *testing.T) {
+	// Arrange
 	dc := coredynamic.NewDynamicCollection(2)
 	dc.AddAny(1, true)
 	page := dc.GetSinglePageCollection(5, 1)
+
+	// Act
 	actual := args.Map{"result": page.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
@@ -2030,6 +2760,7 @@ func Test_C32_148_DynCol_GetSinglePageCollection_Small(t *testing.T) {
 // ═══════════════════════════════════════════════════════════════════════
 
 func Test_C32_149_Collection_AddWithWgLock_Proper(t *testing.T) {
+	// Arrange
 	c := coredynamic.NewCollection[int](10)
 	wg := &sync.WaitGroup{}
 	wg.Add(3)
@@ -2037,7 +2768,11 @@ func Test_C32_149_Collection_AddWithWgLock_Proper(t *testing.T) {
 	go c.AddWithWgLock(wg, 2)
 	go c.AddWithWgLock(wg, 3)
 	wg.Wait()
+
+	// Act
 	actual := args.Map{"result": c.Length() != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }

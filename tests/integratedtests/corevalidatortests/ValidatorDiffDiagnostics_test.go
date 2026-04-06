@@ -98,6 +98,7 @@ func Test_LineValidator_AllVerifyError_MultipleContents_PrintsDiff(t *testing.T)
 }
 
 func Test_LineValidator_VerifyMany_CollectAll_PrintsDiff(t *testing.T) {
+	// Arrange
 	v := corevalidator.LineValidator{
 		LineNumber: corevalidator.LineNumber{LineNumber: -1},
 		TextValidator: corevalidator.TextValidator{
@@ -121,7 +122,11 @@ func Test_LineValidator_VerifyMany_CollectAll_PrintsDiff(t *testing.T) {
 
 	// isContinueOnError = true -> collect all
 	err := v.VerifyMany(true, params, items...)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected errors for lines 1 and 3", actual)
 
@@ -231,6 +236,7 @@ func Test_LinesValidators_AllVerifyError_MultiValidator_PrintsDiff(t *testing.T)
 }
 
 func Test_LinesValidators_IsMatchText_Multiple_PrintsDiff(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(3)
 	lv.Adds(
 		corevalidator.LineValidator{
@@ -254,7 +260,10 @@ func Test_LinesValidators_IsMatchText_Multiple_PrintsDiff(t *testing.T) {
 	text := "hello universe"
 	result := lv.IsMatchText(text, true)
 
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "'world' is not in 'hello universe', should return false", actual)
 
@@ -273,9 +282,13 @@ func Test_LinesValidators_IsMatchText_Multiple_PrintsDiff(t *testing.T) {
 // ==========================================
 
 func Test_ErrorToLinesLineDiff_NilError(t *testing.T) {
+	// Arrange
+
+	// Assert
 	expected := []string{"line1", "line2"}
 	result := errcore.ErrorToLinesLineDiff(0, "nil error test", nil, expected)
 
+	// Act
 	actual := args.Map{"result": strings.Contains(result, "MISSING EXPECTED")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil error vs expected lines should show missing, got:\n", actual)
@@ -284,11 +297,15 @@ func Test_ErrorToLinesLineDiff_NilError(t *testing.T) {
 }
 
 func Test_ErrorToLinesLineDiff_WithError(t *testing.T) {
+	// Arrange
 	err := fmt.Errorf("error line 1\nerror line 2\nerror line 3")
+
+	// Assert
 	expected := []string{"error line 1", "error line 2", "DIFFERENT"}
 
 	result := errcore.ErrorToLinesLineDiff(0, "error diff test", err, expected)
 
+	// Act
 	actual := args.Map{"result": strings.Contains(result, "MISMATCH")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "line 2 should be mismatch, got:\n", actual)

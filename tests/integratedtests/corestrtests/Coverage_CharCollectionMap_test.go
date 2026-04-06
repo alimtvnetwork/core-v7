@@ -13,8 +13,13 @@ import (
 
 func Test_CovCCM_01_IsEmpty_HasItems(t *testing.T) {
 	safeTest(t, "Test_CovCCM_01_IsEmpty_HasItems", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
+
+		// Act
 		actual := args.Map{"result": ccm.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": ccm.HasItems()}
@@ -32,8 +37,13 @@ func Test_CovCCM_01_IsEmpty_HasItems(t *testing.T) {
 
 func Test_CovCCM_02_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_02_IsEmptyLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
+
+		// Act
 		actual := args.Map{"result": ccm.IsEmptyLock()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
@@ -41,9 +51,14 @@ func Test_CovCCM_02_IsEmptyLock(t *testing.T) {
 
 func Test_CovCCM_03_GetChar(t *testing.T) {
 	safeTest(t, "Test_CovCCM_03_GetChar", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		c := ccm.GetChar("hello")
+
+		// Act
 		actual := args.Map{"result": c != 'h'}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected h", actual)
 		c2 := ccm.GetChar("")
@@ -55,10 +70,15 @@ func Test_CovCCM_03_GetChar(t *testing.T) {
 
 func Test_CovCCM_04_Add_AddLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_04_Add_AddLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		ccm.Add("ant")
+
+		// Act
 		actual := args.Map{"result": ccm.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 char group", actual)
 		ccm.Add("banana")
@@ -77,9 +97,14 @@ func Test_CovCCM_04_Add_AddLock(t *testing.T) {
 
 func Test_CovCCM_05_AddStrings(t *testing.T) {
 	safeTest(t, "Test_CovCCM_05_AddStrings", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddStrings("apple", "ant", "banana")
+
+		// Act
 		actual := args.Map{"result": ccm.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ccm.AddStrings()
@@ -88,9 +113,14 @@ func Test_CovCCM_05_AddStrings(t *testing.T) {
 
 func Test_CovCCM_06_AddSameStartingCharItems(t *testing.T) {
 	safeTest(t, "Test_CovCCM_06_AddSameStartingCharItems", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddSameStartingCharItems('a', []string{"apple", "ant"}, false)
+
+		// Act
 		actual := args.Map{"result": ccm.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// add to existing
@@ -102,8 +132,13 @@ func Test_CovCCM_06_AddSameStartingCharItems(t *testing.T) {
 
 func Test_CovCCM_07_Length_LengthLock_AllLengthsSum(t *testing.T) {
 	safeTest(t, "Test_CovCCM_07_Length_LengthLock_AllLengthsSum", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
+
+		// Act
 		actual := args.Map{"result": ccm.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		actual := args.Map{"result": ccm.LengthLock() != 0}
@@ -124,10 +159,15 @@ func Test_CovCCM_07_Length_LengthLock_AllLengthsSum(t *testing.T) {
 
 func Test_CovCCM_08_LengthOfCollectionFromFirstChar(t *testing.T) {
 	safeTest(t, "Test_CovCCM_08_LengthOfCollectionFromFirstChar", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddStrings("apple", "ant")
 		l := ccm.LengthOfCollectionFromFirstChar("a")
+
+		// Act
 		actual := args.Map{"result": l != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		l2 := ccm.LengthOfCollectionFromFirstChar("z")
@@ -139,9 +179,14 @@ func Test_CovCCM_08_LengthOfCollectionFromFirstChar(t *testing.T) {
 
 func Test_CovCCM_09_LengthOf_LengthOfLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_09_LengthOf_LengthOfLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
+
+		// Act
 		actual := args.Map{"result": ccm.LengthOf('a') != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		actual := args.Map{"result": ccm.LengthOf('z') != 0}
@@ -163,8 +208,13 @@ func Test_CovCCM_09_LengthOf_LengthOfLock(t *testing.T) {
 
 func Test_CovCCM_10_Has(t *testing.T) {
 	safeTest(t, "Test_CovCCM_10_Has", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
+
+		// Act
 		actual := args.Map{"result": ccm.Has("apple")}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		ccm.Add("apple")
@@ -183,10 +233,15 @@ func Test_CovCCM_10_Has(t *testing.T) {
 
 func Test_CovCCM_11_HasWithCollection(t *testing.T) {
 	safeTest(t, "Test_CovCCM_11_HasWithCollection", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		// empty
 		has, col := ccm.HasWithCollection("apple")
+
+		// Act
 		actual := args.Map{"result": has || col == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		ccm.Add("apple")
@@ -204,9 +259,14 @@ func Test_CovCCM_11_HasWithCollection(t *testing.T) {
 
 func Test_CovCCM_12_HasWithCollectionLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_12_HasWithCollectionLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		has, _ := ccm.HasWithCollectionLock("x")
+
+		// Act
 		actual := args.Map{"result": has}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		ccm.Add("apple")
@@ -224,11 +284,16 @@ func Test_CovCCM_12_HasWithCollectionLock(t *testing.T) {
 
 func Test_CovCCM_13_IsEquals_IsEqualsLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_13_IsEquals_IsEqualsLock", func() {
+		// Arrange
 		a := corestr.Empty.CharCollectionMap()
 		a.AddStrings("apple", "banana")
 		b := corestr.Empty.CharCollectionMap()
 		b.AddStrings("apple", "banana")
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": a.IsEqualsLock(b)}
@@ -263,11 +328,16 @@ func Test_CovCCM_13_IsEquals_IsEqualsLock(t *testing.T) {
 
 func Test_CovCCM_14_IsEqualsCaseSensitive(t *testing.T) {
 	safeTest(t, "Test_CovCCM_14_IsEqualsCaseSensitive", func() {
+		// Arrange
 		a := corestr.Empty.CharCollectionMap()
 		a.Add("Apple")
 		b := corestr.Empty.CharCollectionMap()
 		b.Add("Apple")
+
+		// Act
 		actual := args.Map{"result": a.IsEqualsCaseSensitive(true, b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": a.IsEqualsCaseSensitiveLock(true, b)}
@@ -287,10 +357,15 @@ func Test_CovCCM_14_IsEqualsCaseSensitive(t *testing.T) {
 
 func Test_CovCCM_15_GetCollection(t *testing.T) {
 	safeTest(t, "Test_CovCCM_15_GetCollection", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		col := ccm.GetCollection("a", false)
+
+		// Act
 		actual := args.Map{"result": col == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		// not found, no add
@@ -308,10 +383,15 @@ func Test_CovCCM_15_GetCollection(t *testing.T) {
 
 func Test_CovCCM_16_GetCollectionLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_16_GetCollectionLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		col := ccm.GetCollectionLock("a", false)
+
+		// Act
 		actual := args.Map{"result": col == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 	})
@@ -319,10 +399,15 @@ func Test_CovCCM_16_GetCollectionLock(t *testing.T) {
 
 func Test_CovCCM_17_GetCollectionByChar(t *testing.T) {
 	safeTest(t, "Test_CovCCM_17_GetCollectionByChar", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		col := ccm.GetCollectionByChar('a')
+
+		// Act
 		actual := args.Map{"result": col == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		col2 := ccm.GetCollectionByChar('z')
@@ -334,10 +419,15 @@ func Test_CovCCM_17_GetCollectionByChar(t *testing.T) {
 
 func Test_CovCCM_18_GetMap_GetCopyMapLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_18_GetMap_GetCopyMapLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		m := ccm.GetMap()
+
+		// Act
 		actual := args.Map{"result": len(m) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		m2 := ccm.GetCopyMapLock()
@@ -355,9 +445,14 @@ func Test_CovCCM_18_GetMap_GetCopyMapLock(t *testing.T) {
 
 func Test_CovCCM_19_GetCharsGroups(t *testing.T) {
 	safeTest(t, "Test_CovCCM_19_GetCharsGroups", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		r := ccm.GetCharsGroups([]string{"apple", "ant", "banana"})
+
+		// Act
 		actual := args.Map{"result": r.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// empty
@@ -370,8 +465,13 @@ func Test_CovCCM_19_GetCharsGroups(t *testing.T) {
 
 func Test_CovCCM_20_List_ListLock_SortedListAsc(t *testing.T) {
 	safeTest(t, "Test_CovCCM_20_List_ListLock_SortedListAsc", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
+
+		// Act
 		actual := args.Map{"result": len(ccm.List()) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ccm.AddStrings("banana", "apple")
@@ -397,11 +497,16 @@ func Test_CovCCM_20_List_ListLock_SortedListAsc(t *testing.T) {
 
 func Test_CovCCM_21_AddCollectionItems(t *testing.T) {
 	safeTest(t, "Test_CovCCM_21_AddCollectionItems", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddCollectionItems(nil)
 		col := corestr.New.Collection.Strings([]string{"apple", "banana"})
 		ccm.AddCollectionItems(col)
+
+		// Act
 		actual := args.Map{"result": ccm.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -409,11 +514,16 @@ func Test_CovCCM_21_AddCollectionItems(t *testing.T) {
 
 func Test_CovCCM_22_AddHashmapsValues(t *testing.T) {
 	safeTest(t, "Test_CovCCM_22_AddHashmapsValues", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		hm := corestr.Empty.Hashmap()
 		hm.AddOrUpdate("k", "apple")
 		ccm.AddHashmapsValues(hm, nil)
+
+		// Act
 		actual := args.Map{"result": ccm.AllLengthsSum() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ccm.AddHashmapsValues(nil)
@@ -422,6 +532,7 @@ func Test_CovCCM_22_AddHashmapsValues(t *testing.T) {
 
 func Test_CovCCM_23_AddHashmapsKeysOrValuesBothUsingFilter(t *testing.T) {
 	safeTest(t, "Test_CovCCM_23_AddHashmapsKeysOrValuesBothUsingFilter", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		hm := corestr.Empty.Hashmap()
 		hm.AddOrUpdate("key", "val")
@@ -429,7 +540,11 @@ func Test_CovCCM_23_AddHashmapsKeysOrValuesBothUsingFilter(t *testing.T) {
 			return p.Value, true, false
 		}
 		ccm.AddHashmapsKeysOrValuesBothUsingFilter(filter, hm, nil)
+
+		// Act
 		actual := args.Map{"result": ccm.AllLengthsSum() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
@@ -444,11 +559,16 @@ func Test_CovCCM_23_AddHashmapsKeysOrValuesBothUsingFilter(t *testing.T) {
 
 func Test_CovCCM_24_AddHashmapsKeysValuesBoth(t *testing.T) {
 	safeTest(t, "Test_CovCCM_24_AddHashmapsKeysValuesBoth", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		hm := corestr.Empty.Hashmap()
 		hm.AddOrUpdate("key", "val")
 		ccm.AddHashmapsKeysValuesBoth(hm)
+
+		// Act
 		actual := args.Map{"result": ccm.AllLengthsSum() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 		ccm.AddHashmapsKeysValuesBoth(nil)
@@ -457,11 +577,16 @@ func Test_CovCCM_24_AddHashmapsKeysValuesBoth(t *testing.T) {
 
 func Test_CovCCM_25_AddCharHashsetMap(t *testing.T) {
 	safeTest(t, "Test_CovCCM_25_AddCharHashsetMap", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		chm := corestr.Empty.CharHashsetMap()
 		chm.Add("apple")
 		ccm.AddCharHashsetMap(chm)
+
+		// Act
 		actual := args.Map{"result": ccm.AllLengthsSum() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
@@ -471,10 +596,15 @@ func Test_CovCCM_25_AddCharHashsetMap(t *testing.T) {
 
 func Test_CovCCM_26_AddSameCharsCollection(t *testing.T) {
 	safeTest(t, "Test_CovCCM_26_AddSameCharsCollection", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		col := corestr.New.Collection.Strings([]string{"apple", "ant"})
 		r := ccm.AddSameCharsCollection("a", col)
+
+		// Act
 		actual := args.Map{"result": r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected collection", actual)
 		// add more to existing
@@ -498,10 +628,15 @@ func Test_CovCCM_26_AddSameCharsCollection(t *testing.T) {
 
 func Test_CovCCM_27_AddSameCharsCollectionLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_27_AddSameCharsCollectionLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		col := corestr.New.Collection.Strings([]string{"apple"})
 		r := ccm.AddSameCharsCollectionLock("a", col)
+
+		// Act
 		actual := args.Map{"result": r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected collection", actual)
 		// existing, add more
@@ -542,10 +677,15 @@ func Test_CovCCM_28_Resize_AddLength(t *testing.T) {
 
 func Test_CovCCM_29_HashsetByChar_HashsetByCharLock(t *testing.T) {
 	safeTest(t, "Test_CovCCM_29_HashsetByChar_HashsetByCharLock", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		hs := ccm.HashsetByChar('a')
+
+		// Act
 		actual := args.Map{"result": hs == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 		hs2 := ccm.HashsetByChar('z')
@@ -566,10 +706,15 @@ func Test_CovCCM_29_HashsetByChar_HashsetByCharLock(t *testing.T) {
 
 func Test_CovCCM_30_HashsetByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_CovCCM_30_HashsetByStringFirstChar", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		hs := ccm.HashsetByStringFirstChar("a")
+
+		// Act
 		actual := args.Map{"result": hs == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hashset", actual)
 		hs2 := ccm.HashsetByStringFirstCharLock("a")
@@ -581,10 +726,15 @@ func Test_CovCCM_30_HashsetByStringFirstChar(t *testing.T) {
 
 func Test_CovCCM_31_HashsetsCollectionByStringFirstChar(t *testing.T) {
 	safeTest(t, "Test_CovCCM_31_HashsetsCollectionByStringFirstChar", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddStrings("apple", "banana")
 		hsc := ccm.HashsetsCollectionByStringFirstChar("apple", "banana", "cherry")
+
+		// Act
 		actual := args.Map{"result": hsc == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// empty
@@ -598,9 +748,14 @@ func Test_CovCCM_31_HashsetsCollectionByStringFirstChar(t *testing.T) {
 
 func Test_CovCCM_32_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_CovCCM_32_HashsetsCollection", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		hsc := ccm.HashsetsCollection()
+
+		// Act
 		actual := args.Map{"result": hsc == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		ccm.Add("apple")
@@ -613,10 +768,15 @@ func Test_CovCCM_32_HashsetsCollection(t *testing.T) {
 
 func Test_CovCCM_33_HashsetsCollectionByChars(t *testing.T) {
 	safeTest(t, "Test_CovCCM_33_HashsetsCollectionByChars", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		hsc := ccm.HashsetsCollectionByChars('a', 'z')
+
+		// Act
 		actual := args.Map{"result": hsc == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// empty
@@ -630,10 +790,15 @@ func Test_CovCCM_33_HashsetsCollectionByChars(t *testing.T) {
 
 func Test_CovCCM_34_String_StringLock_SummaryString(t *testing.T) {
 	safeTest(t, "Test_CovCCM_34_String_StringLock_SummaryString", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		s := ccm.String()
+
+		// Act
 		actual := args.Map{"result": s == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		sl := ccm.StringLock()
@@ -673,10 +838,15 @@ func Test_CovCCM_36_JsonModel_JsonModelAny(t *testing.T) {
 
 func Test_CovCCM_37_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_CovCCM_37_MarshalJSON_UnmarshalJSON", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		data, err := ccm.MarshalJSON()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		ccm2 := corestr.Empty.CharCollectionMap()
@@ -694,13 +864,18 @@ func Test_CovCCM_37_MarshalJSON_UnmarshalJSON(t *testing.T) {
 
 func Test_CovCCM_38_Json_JsonPtr_ParseInject(t *testing.T) {
 	safeTest(t, "Test_CovCCM_38_Json_JsonPtr_ParseInject", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		_ = ccm.Json()
 		jr := ccm.JsonPtr()
 		ccm2 := corestr.Empty.CharCollectionMap()
 		r, err := ccm2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		actual := args.Map{"result": r.IsEmpty()}
@@ -711,12 +886,17 @@ func Test_CovCCM_38_Json_JsonPtr_ParseInject(t *testing.T) {
 
 func Test_CovCCM_39_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_CovCCM_39_ParseInjectUsingJsonMust", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		jr := ccm.JsonPtr()
 		ccm2 := corestr.Empty.CharCollectionMap()
 		r := ccm2.ParseInjectUsingJsonMust(jr)
+
+		// Act
 		actual := args.Map{"result": r.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
@@ -724,12 +904,17 @@ func Test_CovCCM_39_ParseInjectUsingJsonMust(t *testing.T) {
 
 func Test_CovCCM_40_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_CovCCM_40_JsonParseSelfInject", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.Add("apple")
 		jr := ccm.JsonPtr()
 		ccm2 := corestr.Empty.CharCollectionMap()
 		err := ccm2.JsonParseSelfInject(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
@@ -747,10 +932,15 @@ func Test_CovCCM_41_AsInterfaces(t *testing.T) {
 
 func Test_CovCCM_42_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_CovCCM_42_Clear_Dispose", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 		ccm.AddStrings("apple", "banana")
 		ccm.Clear()
+
+		// Act
 		actual := args.Map{"result": ccm.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		// clear already empty

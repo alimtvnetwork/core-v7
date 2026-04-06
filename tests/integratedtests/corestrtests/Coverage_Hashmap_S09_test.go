@@ -2326,8 +2326,13 @@ func Test_S09_141_Hashmap_ToStringsUsingCompiler_Empty(t *testing.T) {
 
 func Test_S09_142_Hashmap_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_S09_142_Hashmap_AsJsoner", func() {
+		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hm.AsJsoner() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -2335,8 +2340,13 @@ func Test_S09_142_Hashmap_AsJsoner(t *testing.T) {
 
 func Test_S09_143_Hashmap_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_S09_143_Hashmap_AsJsonContractsBinder", func() {
+		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hm.AsJsonContractsBinder() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -2344,8 +2354,13 @@ func Test_S09_143_Hashmap_AsJsonContractsBinder(t *testing.T) {
 
 func Test_S09_144_Hashmap_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_S09_144_Hashmap_AsJsonParseSelfInjector", func() {
+		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hm.AsJsonParseSelfInjector() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -2353,8 +2368,13 @@ func Test_S09_144_Hashmap_AsJsonParseSelfInjector(t *testing.T) {
 
 func Test_S09_145_Hashmap_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_S09_145_Hashmap_AsJsonMarshaller", func() {
+		// Arrange
 		hm := corestr.New.Hashmap.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hm.AsJsonMarshaller() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})

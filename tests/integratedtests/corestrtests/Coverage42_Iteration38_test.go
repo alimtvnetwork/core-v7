@@ -21,6 +21,8 @@ func Test_Cov42_Collection_AddHashmapsKeysValues_Valid(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -34,6 +36,8 @@ func Test_Cov42_Collection_AddHashmapsKeysValues_Nil(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -53,6 +57,8 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Accept(t *testing.T)
 			ExpectedInput: true,
 			ActualInput:   col.Has("v1"),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -70,6 +76,8 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Break(t *testing.T) 
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -83,6 +91,8 @@ func Test_Cov42_Collection_AddHashmapsKeysValuesUsingFilter_Nil(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -99,6 +109,8 @@ func Test_Cov42_Collection_AddPointerCollectionsLock(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -115,6 +127,8 @@ func Test_Cov42_Collection_AppendCollectionPtr(t *testing.T) {
 			ExpectedInput: 3,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -129,6 +143,8 @@ func Test_Cov42_Collection_Single_OneItem(t *testing.T) {
 			ExpectedInput: "only",
 			ActualInput:   col.Single(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -144,6 +160,8 @@ func Test_Cov42_Collection_SortedListDsc(t *testing.T) {
 			ExpectedInput: "cherry",
 			ActualInput:   sorted[0],
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -158,6 +176,8 @@ func Test_Cov42_Collection_HasUsingSensitivity_CaseSensitive(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.HasUsingSensitivity("hello", true),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -170,6 +190,8 @@ func Test_Cov42_Collection_HasUsingSensitivity_CaseInsensitive(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.HasUsingSensitivity("hello", false),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -186,6 +208,8 @@ func Test_Cov42_Collection_AddStringsAsync_Empty(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -201,6 +225,8 @@ func Test_Cov42_Collection_AddNonEmptyStrings_Valid(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -214,6 +240,8 @@ func Test_Cov42_Collection_AddNonEmptyStrings_Empty(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -227,6 +255,8 @@ func Test_Cov42_Collection_AddNonEmptyStringsSlice_Valid(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -240,6 +270,8 @@ func Test_Cov42_Collection_AddNonEmptyStringsSlice_Empty(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -255,6 +287,8 @@ func Test_Cov42_Collection_AddFuncResult_Valid(t *testing.T) {
 			ExpectedInput: "hello",
 			ActualInput:   col.First(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -268,6 +302,8 @@ func Test_Cov42_Collection_AddFuncResult_Nil(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -286,6 +322,8 @@ func Test_Cov42_Collection_AddStringsByFuncChecking_Filter(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -306,6 +344,8 @@ func Test_Cov42_Collection_ExpandSlicePlusAdd(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -321,6 +361,8 @@ func Test_Cov42_Collection_MergeSlicesOfSlice(t *testing.T) {
 			ExpectedInput: 3,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -336,6 +378,8 @@ func Test_Cov42_Collection_CharCollectionMap(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   ccm.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -351,6 +395,8 @@ func Test_Cov42_Collection_CsvLines(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   len(lines),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -364,6 +410,8 @@ func Test_Cov42_Collection_CsvLinesOptions(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   len(lines),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -376,6 +424,8 @@ func Test_Cov42_Collection_Csv_Empty(t *testing.T) {
 			ExpectedInput: "",
 			ActualInput:   col.Csv(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -389,6 +439,8 @@ func Test_Cov42_Collection_Csv_NonEmpty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(csv) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -401,6 +453,8 @@ func Test_Cov42_Collection_CsvOptions_Empty(t *testing.T) {
 			ExpectedInput: "",
 			ActualInput:   col.CsvOptions(true),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -414,6 +468,8 @@ func Test_Cov42_Collection_CsvOptions_NonEmpty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(csv) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -429,6 +485,8 @@ func Test_Cov42_Collection_IsContainsPtr_Found(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.IsContainsPtr(&s),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -441,6 +499,8 @@ func Test_Cov42_Collection_IsContainsPtr_Nil(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsPtr(nil),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -454,6 +514,8 @@ func Test_Cov42_Collection_IsContainsPtr_Empty(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsPtr(&s),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -469,6 +531,8 @@ func Test_Cov42_Collection_GetHashsetPlusHasAll_True(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   hasAll && hs != nil,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -482,6 +546,8 @@ func Test_Cov42_Collection_GetHashsetPlusHasAll_False(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   hasAll,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -496,6 +562,8 @@ func Test_Cov42_Collection_IsContainsAllSlice_True(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.IsContainsAllSlice([]string{"a", "b"}),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -508,6 +576,8 @@ func Test_Cov42_Collection_IsContainsAllSlice_False(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsAllSlice([]string{"a", "c"}),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -520,6 +590,8 @@ func Test_Cov42_Collection_IsContainsAllSlice_Empty(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsAllSlice([]string{}),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -532,6 +604,8 @@ func Test_Cov42_Collection_IsContainsAllSlice_EmptyCollection(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsAllSlice([]string{"a"}),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -546,6 +620,8 @@ func Test_Cov42_Collection_IsContainsAll_True(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.IsContainsAll("a", "b"),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -558,6 +634,8 @@ func Test_Cov42_Collection_IsContainsAllLock_True(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.IsContainsAllLock("a", "b"),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -570,6 +648,8 @@ func Test_Cov42_Collection_IsContainsAllLock_Nil(t *testing.T) {
 			ExpectedInput: false,
 			ActualInput:   col.IsContainsAllLock("x"),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -585,6 +665,8 @@ func Test_Cov42_Collection_New_Empty(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   newCol.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -598,6 +680,8 @@ func Test_Cov42_Collection_New_WithArgs(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   newCol.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -614,6 +698,8 @@ func Test_Cov42_newCollectionCreator_CloneStrings(t *testing.T) {
 			ExpectedInput: "a",
 			ActualInput:   col.First(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -626,6 +712,8 @@ func Test_Cov42_newCollectionCreator_LineUsingSep(t *testing.T) {
 			ExpectedInput: 3,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -638,6 +726,8 @@ func Test_Cov42_newCollectionCreator_LineDefault(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   col.Length() >= 1,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -650,6 +740,8 @@ func Test_Cov42_newCollectionCreator_StringsPlusCap_ZeroCap(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -662,6 +754,8 @@ func Test_Cov42_newCollectionCreator_StringsPlusCap_WithCap(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -674,6 +768,8 @@ func Test_Cov42_newCollectionCreator_CapStrings_ZeroCap(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -686,6 +782,8 @@ func Test_Cov42_newCollectionCreator_CapStrings_WithCap(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -698,6 +796,8 @@ func Test_Cov42_newCollectionCreator_LenCap(t *testing.T) {
 			ExpectedInput: 3,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -710,6 +810,8 @@ func Test_Cov42_newCollectionCreator_Create(t *testing.T) {
 			ExpectedInput: "a",
 			ActualInput:   col.First(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -724,6 +826,8 @@ func Test_Cov42_newCollectionCreator_StringsOptions_Clone(t *testing.T) {
 			ExpectedInput: "x",
 			ActualInput:   col.First(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -736,6 +840,8 @@ func Test_Cov42_newCollectionCreator_StringsOptions_NoClone_Empty(t *testing.T) 
 			ExpectedInput: true,
 			ActualInput:   col.IsEmpty(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -751,6 +857,8 @@ func Test_Cov42_Collection_AppendAnys_WithNilItem(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -769,6 +877,8 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Accept(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -785,6 +895,8 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Break(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -801,6 +913,8 @@ func Test_Cov42_Collection_AppendAnysUsingFilter_Skip(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -819,6 +933,8 @@ func Test_Cov42_Collection_AppendAnysUsingFilterLock_Accept(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -832,6 +948,8 @@ func Test_Cov42_Collection_AppendAnysUsingFilterLock_Nil(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -847,6 +965,8 @@ func Test_Cov42_Collection_AppendNonEmptyAnys_Valid(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -860,6 +980,8 @@ func Test_Cov42_Collection_AppendNonEmptyAnys_Nil(t *testing.T) {
 			ExpectedInput: 0,
 			ActualInput:   col.Length(),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -876,6 +998,8 @@ func Test_Cov42_Collection_GetAllExceptCollection_WithExclude(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   len(result),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -889,6 +1013,8 @@ func Test_Cov42_Collection_GetAllExceptCollection_NilExclude(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   len(result),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -902,6 +1028,8 @@ func Test_Cov42_Collection_GetAllExcept_Valid(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   len(result),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -915,6 +1043,8 @@ func Test_Cov42_Collection_GetAllExcept_Nil(t *testing.T) {
 			ExpectedInput: 1,
 			ActualInput:   len(result),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -930,6 +1060,8 @@ func Test_Cov42_Collection_SummaryString(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(s) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -943,6 +1075,8 @@ func Test_Cov42_Collection_SummaryStringWithHeader_NonEmpty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(s) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -956,6 +1090,8 @@ func Test_Cov42_Collection_SummaryStringWithHeader_Empty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(s) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -971,6 +1107,8 @@ func Test_Cov42_Collection_Joins_WithExtra(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(result) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -984,6 +1122,8 @@ func Test_Cov42_Collection_Joins_NoExtra(t *testing.T) {
 			ExpectedInput: "a,b",
 			ActualInput:   result,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -999,6 +1139,8 @@ func Test_Cov42_Collection_Serialize(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   err == nil && len(bytes) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -1013,6 +1155,8 @@ func Test_Cov42_Collection_Deserialize(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   err == nil && len(target) == 1,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -1028,6 +1172,8 @@ func Test_Cov42_Collection_NonEmptyList(t *testing.T) {
 			ExpectedInput: 2,
 			ActualInput:   len(list),
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -1041,6 +1187,8 @@ func Test_Cov42_Collection_NonEmptyListPtr(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   listPtr != nil,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -1056,6 +1204,8 @@ func Test_Cov42_Collection_StringLock_NonEmpty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(s) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }
@@ -1069,6 +1219,8 @@ func Test_Cov42_Collection_StringLock_Empty(t *testing.T) {
 			ExpectedInput: true,
 			ActualInput:   len(s) > 0,
 		}
+
+		// Assert
 		tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", tc.Actual()))
 	})
 }

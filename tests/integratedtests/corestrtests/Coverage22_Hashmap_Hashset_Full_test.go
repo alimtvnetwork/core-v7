@@ -14,6 +14,7 @@ import (
 
 func Test_Cov22_Hashmap_AddMethods(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddMethods", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(10)
 		h.AddOrUpdate("a", "1")
 		h.AddOrUpdateKeyStrValInt("b", 2)
@@ -27,7 +28,11 @@ func Test_Cov22_Hashmap_AddMethods(t *testing.T) {
 		h.SetBySplitter("=", "key=val")
 		h.SetBySplitter("=", "onlykey")
 		h.AddOrUpdateLock("j", "10")
+
+		// Act
 		actual := args.Map{"result": h.Length() < 10}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 10", actual)
 	})
@@ -35,12 +40,17 @@ func Test_Cov22_Hashmap_AddMethods(t *testing.T) {
 
 func Test_Cov22_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateHashmap", func() {
+		// Arrange
 		h1 := corestr.New.Hashmap.Cap(2)
 		h1.AddOrUpdate("a", "1")
 		h2 := corestr.New.Hashmap.Cap(2)
 		h2.AddOrUpdate("b", "2")
 		h1.AddOrUpdateHashmap(h2)
+
+		// Act
 		actual := args.Map{"result": h1.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		h1.AddOrUpdateHashmap(nil)
@@ -49,9 +59,14 @@ func Test_Cov22_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 
 func Test_Cov22_Hashmap_AddOrUpdateMap(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateMap", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdateMap(map[string]string{"a": "1"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -68,11 +83,16 @@ func Test_Cov22_Hashmap_AddsOrUpdates(t *testing.T) {
 
 func Test_Cov22_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_AddOrUpdateCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		keys := corestr.New.Collection.Strings([]string{"a", "b"})
 		vals := corestr.New.Collection.Strings([]string{"1", "2"})
 		h.AddOrUpdateCollection(keys, vals)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// mismatched lengths
@@ -82,9 +102,14 @@ func Test_Cov22_Hashmap_AddOrUpdateCollection(t *testing.T) {
 
 func Test_Cov22_Hashmap_Lookups(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Lookups", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.Has("a") || !h.Contains("a") || !h.ContainsLock("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		actual := args.Map{"result": h.IsKeyMissing("a") || h.IsKeyMissingLock("a")}
@@ -107,10 +132,15 @@ func Test_Cov22_Hashmap_Lookups(t *testing.T) {
 
 func Test_Cov22_Hashmap_Get(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Get", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		v, ok := h.Get("a")
+
+		// Act
 		actual := args.Map{"result": ok || v != "1"}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 		v2, ok2 := h.GetValue("a")
@@ -122,10 +152,15 @@ func Test_Cov22_Hashmap_Get(t *testing.T) {
 
 func Test_Cov22_Hashmap_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Remove", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		h.Remove("a")
+
+		// Act
 		actual := args.Map{"result": h.Has("a")}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 		h.AddOrUpdate("b", "2")
@@ -158,13 +193,18 @@ func Test_Cov22_Hashmap_Keys_Values(t *testing.T) {
 
 func Test_Cov22_Hashmap_FilterOps(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_FilterOps", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.AddOrUpdate("abc", "1")
 		h.AddOrUpdate("def", "2")
 		items := h.GetKeysFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, s == "abc", false
 		})
+
+		// Act
 		actual := args.Map{"result": len(items) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		col := h.GetKeysFilteredCollection(func(s string, i int) (string, bool, bool) {
@@ -178,12 +218,17 @@ func Test_Cov22_Hashmap_FilterOps(t *testing.T) {
 
 func Test_Cov22_Hashmap_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ConcatNew", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		h2 := corestr.New.Hashmap.Cap(2)
 		h2.AddOrUpdate("b", "2")
 		newH := h.ConcatNew(true, h2)
+
+		// Act
 		actual := args.Map{"result": newH.Length() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
@@ -191,10 +236,15 @@ func Test_Cov22_Hashmap_ConcatNew(t *testing.T) {
 
 func Test_Cov22_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ConcatNewUsingMaps", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		newH := h.ConcatNewUsingMaps(true, map[string]string{"b": "2"})
+
+		// Act
 		actual := args.Map{"result": newH.Length() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
@@ -202,11 +252,16 @@ func Test_Cov22_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 
 func Test_Cov22_Hashmap_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_IsEqual", func() {
+		// Arrange
 		h1 := corestr.New.Hashmap.Cap(2)
 		h1.AddOrUpdate("a", "1")
 		h2 := corestr.New.Hashmap.Cap(2)
 		h2.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h1.IsEqualPtr(h2)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": h1.IsEqualPtrLock(h2)}
@@ -227,10 +282,15 @@ func Test_Cov22_Hashmap_Diff(t *testing.T) {
 
 func Test_Cov22_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_KeysToLower", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("ABC", "1")
 		lower := h.KeysToLower()
+
+		// Act
 		actual := args.Map{"result": lower.Has("abc")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected lowercase key", actual)
 	})
@@ -238,11 +298,16 @@ func Test_Cov22_Hashmap_KeysToLower(t *testing.T) {
 
 func Test_Cov22_Hashmap_GetExcept(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_GetExcept", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(3)
 		h.AddOrUpdate("a", "1")
 		h.AddOrUpdate("b", "2")
 		result := h.GetValuesKeysExcept([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": len(result) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = h.GetAllExceptCollection(nil)
@@ -288,10 +353,15 @@ func Test_Cov22_Hashmap_JsonOps(t *testing.T) {
 
 func Test_Cov22_Hashmap_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Clone", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		c := h.Clone()
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		cp := h.ClonePtr()
@@ -303,10 +373,15 @@ func Test_Cov22_Hashmap_Clone(t *testing.T) {
 
 func Test_Cov22_Hashmap_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ClearDispose", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		h.Clear()
+
+		// Act
 		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddOrUpdate("b", "2")
@@ -336,12 +411,17 @@ func Test_Cov22_Hashmap_SerializeDeserialize(t *testing.T) {
 
 func Test_Cov22_Hashmap_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ParseInjectUsingJson", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		jr := h.JsonPtr()
 		target := corestr.New.Hashmap.Cap(2)
 		_, err := target.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	})
@@ -379,10 +459,15 @@ func Test_Cov22_Hashmap_SafeItems(t *testing.T) {
 
 func Test_Cov22_Hashmap_HasAllCollectionItems(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_HasAllCollectionItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": h.HasAllCollectionItems(c)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -390,10 +475,15 @@ func Test_Cov22_Hashmap_HasAllCollectionItems(t *testing.T) {
 
 func Test_Cov22_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ToStringsUsingCompiler", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		strs := h.ToStringsUsingCompiler(func(k, v string) string { return k + "=" + v })
+
+		// Act
 		actual := args.Map{"result": len(strs) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -419,10 +509,15 @@ func Test_Cov22_Hashmap_AddsOrUpdatesFilters(t *testing.T) {
 
 func Test_Cov22_Hashmap_Collection(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_Collection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		c := h.Collection()
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -459,9 +554,14 @@ func Test_Cov22_Hashset_AddMethods(t *testing.T) {
 
 func Test_Cov22_Hashset_Lookups(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Lookups", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.Add("a")
+
+		// Act
 		actual := args.Map{"result": h.Has("a") || !h.Contains("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		actual := args.Map{"result": h.IsMissing("a") || h.IsMissingLock("a")}
@@ -506,10 +606,15 @@ func Test_Cov22_Hashset_Collection(t *testing.T) {
 
 func Test_Cov22_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Filter", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.Adds("abc", "def", "ghi")
 		filtered := h.Filter(func(s string) bool { return s == "abc" })
+
+		// Act
 		actual := args.Map{"result": filtered.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		items := h.GetFilteredItems(func(s string, i int) (string, bool, bool) {
@@ -529,10 +634,15 @@ func Test_Cov22_Hashset_Filter(t *testing.T) {
 
 func Test_Cov22_Hashset_GetAllExcept(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_GetAllExcept", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(3)
 		h.Adds("a", "b", "c")
 		r := h.GetAllExcept([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": len(r) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_ = h.GetAllExcept(nil)
@@ -544,12 +654,17 @@ func Test_Cov22_Hashset_GetAllExcept(t *testing.T) {
 
 func Test_Cov22_Hashset_Concat(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Concat", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		h2 := corestr.New.Hashset.Cap(2)
 		h2.Add("b")
 		newH := h.ConcatNewHashsets(true, h2)
+
+		// Act
 		actual := args.Map{"result": newH.Length() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 		_ = h.ConcatNewStrings(true, []string{"c"})
@@ -558,11 +673,16 @@ func Test_Cov22_Hashset_Concat(t *testing.T) {
 
 func Test_Cov22_Hashset_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_IsEquals", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Cap(2)
 		h1.Add("a")
 		h2 := corestr.New.Hashset.Cap(2)
 		h2.Add("a")
+
+		// Act
 		actual := args.Map{"result": h1.IsEquals(h2)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": h1.IsEqual(h2)}
@@ -628,10 +748,15 @@ func Test_Cov22_Hashset_JsonOps(t *testing.T) {
 
 func Test_Cov22_Hashset_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_ClearDispose", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		h.Clear()
+
+		// Act
 		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.Add("b")
@@ -652,10 +777,15 @@ func Test_Cov22_Hashset_Resize(t *testing.T) {
 
 func Test_Cov22_Hashset_ToLowerSet(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_ToLowerSet", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("ABC")
 		lower := h.ToLowerSet()
+
+		// Act
 		actual := args.Map{"result": lower.Has("abc")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected lowercase", actual)
 	})
@@ -663,10 +793,15 @@ func Test_Cov22_Hashset_ToLowerSet(t *testing.T) {
 
 func Test_Cov22_Hashset_DistinctDiff(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_DistinctDiff", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(3)
 		h.Adds("a", "b")
 		diff := h.DistinctDiffLinesRaw("b", "c")
+
+		// Act
 		actualDiff := args.Map{"length": len(diff)}
+
+		// Assert
 		expectedDiff := args.Map{"length": 2}
 		expectedDiff.ShouldBeEqual(t, 0, "DistinctDiffLinesRaw returns 2 -- a and c", actualDiff)
 		diffMap := h.DistinctDiffLines("b", "c")
@@ -678,12 +813,17 @@ func Test_Cov22_Hashset_DistinctDiff(t *testing.T) {
 
 func Test_Cov22_Hashset_DistinctDiffHashset(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_DistinctDiffHashset", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Cap(2)
 		h1.Adds("a", "b")
 		h2 := corestr.New.Hashset.Cap(2)
 		h2.Adds("b", "c")
 		diff := h1.DistinctDiffHashset(h2)
+
+		// Act
 		actual := args.Map{"result": len(diff) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -701,12 +841,17 @@ func Test_Cov22_Hashset_SerializeDeserialize(t *testing.T) {
 
 func Test_Cov22_Hashset_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_ParseInjectUsingJson", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		jr := h.JsonPtr()
 		target := corestr.New.Hashset.Cap(2)
 		_, err := target.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	})
@@ -731,10 +876,15 @@ func Test_Cov22_Hashset_WrapQuotes(t *testing.T) {
 
 func Test_Cov22_Hashset_MapStringAny(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_MapStringAny", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		m := h.MapStringAny()
+
+		// Act
 		actual := args.Map{"result": len(m) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = h.MapStringAnyDiff()
@@ -743,11 +893,16 @@ func Test_Cov22_Hashset_MapStringAny(t *testing.T) {
 
 func Test_Cov22_Hashset_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddCollection", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		h.AddCollection(c)
 		h.AddCollections(c, nil)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -755,10 +910,15 @@ func Test_Cov22_Hashset_AddCollection(t *testing.T) {
 
 func Test_Cov22_Hashset_AddSimpleSlice(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddSimpleSlice", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		h.AddSimpleSlice(ss)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -776,9 +936,14 @@ func Test_Cov22_Hashset_AddHashsetItems(t *testing.T) {
 
 func Test_Cov22_Hashset_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddItemsMap", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.AddItemsMap(map[string]bool{"a": true, "b": false})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -786,10 +951,15 @@ func Test_Cov22_Hashset_AddItemsMap(t *testing.T) {
 
 func Test_Cov22_Hashset_HasAllCollectionItems(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_HasAllCollectionItems", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Adds("a", "b")
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": h.HasAllCollectionItems(c)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": h.HasAllCollectionItems(nil)}
@@ -800,12 +970,17 @@ func Test_Cov22_Hashset_HasAllCollectionItems(t *testing.T) {
 
 func Test_Cov22_Hashset_AddFuncErr(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddFuncErr", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.AddFuncErr(
 			func() (string, error) { return "a", nil },
 			func(err error) {},
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -813,12 +988,17 @@ func Test_Cov22_Hashset_AddFuncErr(t *testing.T) {
 
 func Test_Cov22_Hashset_AddsUsingFilter(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddsUsingFilter", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.AddsUsingFilter(
 			func(s string, i int) (string, bool, bool) { return s, s != "", false },
 			"a", "", "b",
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -826,12 +1006,17 @@ func Test_Cov22_Hashset_AddsUsingFilter(t *testing.T) {
 
 func Test_Cov22_Hashset_AddsAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_AddsAnyUsingFilter", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.AddsAnyUsingFilter(
 			func(s string, i int) (string, bool, bool) { return s, true, false },
 			"a", nil, "b",
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -839,10 +1024,15 @@ func Test_Cov22_Hashset_AddsAnyUsingFilter(t *testing.T) {
 
 func Test_Cov22_Hashset_Transpile(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Transpile", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		result := h.Transpile(func(s string) string { return s + "!" })
+
+		// Act
 		actual := args.Map{"result": result.Has("a!")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected transpiled", actual)
 	})

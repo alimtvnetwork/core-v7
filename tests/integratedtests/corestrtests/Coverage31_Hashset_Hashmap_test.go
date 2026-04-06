@@ -13,8 +13,13 @@ import (
 
 func Test_C31_Hashset_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_IsEmpty", func() {
+		// Arrange
 		h := corestr.New.Hashset.Empty()
+
+		// Act
 		actual := args.Map{"result": h.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -22,8 +27,13 @@ func Test_C31_Hashset_IsEmpty(t *testing.T) {
 
 func Test_C31_Hashset_HasItems(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_HasItems", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a")
+
+		// Act
 		actual := args.Map{"result": h.HasItems()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -63,9 +73,14 @@ func Test_C31_Hashset_ResizeLock(t *testing.T) {
 
 func Test_C31_Hashset_Add(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_Add", func() {
+		// Arrange
 		h := corestr.New.Hashset.Empty()
 		h.Add("a")
+
+		// Act
 		actual := args.Map{"result": h.Has("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -174,8 +189,13 @@ func Test_C31_Hashset_RemovesLock(t *testing.T) {
 
 func Test_C31_Hashset_Length(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_Length", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -190,8 +210,13 @@ func Test_C31_Hashset_LengthLock(t *testing.T) {
 
 func Test_C31_Hashset_Has(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_Has", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a")
+
+		// Act
 		actual := args.Map{"result": h.Has("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": h.Has("z")}
@@ -209,8 +234,13 @@ func Test_C31_Hashset_HasLock(t *testing.T) {
 
 func Test_C31_Hashset_HasAll(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_HasAll", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a", "b")
+
+		// Act
 		actual := args.Map{"result": h.HasAll("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": h.HasAll("z")}
@@ -221,8 +251,13 @@ func Test_C31_Hashset_HasAll(t *testing.T) {
 
 func Test_C31_Hashset_HasAllStrings(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_HasAllStrings", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a", "b")
+
+		// Act
 		actual := args.Map{"result": h.HasAllStrings([]string{"a"})}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -230,8 +265,13 @@ func Test_C31_Hashset_HasAllStrings(t *testing.T) {
 
 func Test_C31_Hashset_HasAny(t *testing.T) {
 	safeTest(t, "Test_C31_Hashset_HasAny", func() {
+		// Arrange
 		h := corestr.New.Hashset.StringsSpreadItems("a")
+
+		// Act
 		actual := args.Map{"result": h.HasAny("a", "z")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -458,8 +498,13 @@ func Test_C31_NHC_SimpleSlice(t *testing.T) {
 
 func Test_C31_Hashmap_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C31_Hashmap_IsEmpty", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -467,9 +512,14 @@ func Test_C31_Hashmap_IsEmpty(t *testing.T) {
 
 func Test_C31_Hashmap_HasItems(t *testing.T) {
 	safeTest(t, "Test_C31_Hashmap_HasItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.HasItems()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -575,9 +625,14 @@ func Test_C31_Hashmap_Get(t *testing.T) {
 
 func Test_C31_Hashmap_Has(t *testing.T) {
 	safeTest(t, "Test_C31_Hashmap_Has", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.Has("k")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -593,9 +648,14 @@ func Test_C31_Hashmap_HasLock(t *testing.T) {
 
 func Test_C31_Hashmap_Length(t *testing.T) {
 	safeTest(t, "Test_C31_Hashmap_Length", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -687,11 +747,16 @@ func Test_C31_Hashmap_CopyMapLock(t *testing.T) {
 
 func Test_C31_Hashmap_IsEquals(t *testing.T) {
 	safeTest(t, "Test_C31_Hashmap_IsEquals", func() {
+		// Arrange
 		a := corestr.New.Hashmap.Empty()
 		a.AddOrUpdate("k", "v")
 		b := corestr.New.Hashmap.Empty()
 		b.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": a.IsEqualPtr(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})

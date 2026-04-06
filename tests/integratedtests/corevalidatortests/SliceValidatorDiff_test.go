@@ -55,7 +55,10 @@ func Test_SliceValidator_AllVerifyError_MultiLineMismatch_WithDiff(t *testing.T)
 }
 
 func Test_SliceValidator_AllVerifyError_ExtraActualLines_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"line1", "line2", "line3", "extra-line"}
+
+	// Assert
 	expected := []string{"line1", "line2", "line3"}
 
 	v := corevalidator.SliceValidator{
@@ -84,7 +87,10 @@ func Test_SliceValidator_AllVerifyError_ExtraActualLines_WithDiff(t *testing.T) 
 }
 
 func Test_SliceValidator_AllVerifyError_MissingActualLines_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"line1"}
+
+	// Assert
 	expected := []string{"line1", "line2", "line3"}
 
 	v := corevalidator.SliceValidator{
@@ -114,7 +120,10 @@ func Test_SliceValidator_AllVerifyError_MissingActualLines_WithDiff(t *testing.T
 // ==========================================
 
 func Test_SliceValidator_VerifyFirstError_StopsAtFirst_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"a", "WRONG1", "WRONG2"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 
 	v := corevalidator.SliceValidator{
@@ -150,7 +159,10 @@ func Test_SliceValidator_VerifyFirstError_StopsAtFirst_WithDiff(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyErrorTestCase_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"hello", "world-different"}
+
+	// Assert
 	expected := []string{"hello", "world"}
 
 	v := corevalidator.SliceValidator{
@@ -174,11 +186,14 @@ func Test_SliceValidator_AllVerifyErrorTestCase_WithDiff(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyError_Contains_MultiMismatch(t *testing.T) {
+	// Act
 	actual := []string{
 		"path/to/file.go:10",
 		"some other text",
 		"path/to/other.go:20",
 	}
+
+	// Assert
 	expected := []string{
 		"file.go",
 		"expected-missing",
@@ -217,7 +232,10 @@ func Test_SliceValidator_AllVerifyError_Contains_MultiMismatch(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyError_Trim_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"  hello  ", "  world  "}
+
+	// Assert
 	expected := []string{"hello", "universe"}
 
 	v := corevalidator.SliceValidator{
@@ -246,11 +264,14 @@ func Test_SliceValidator_AllVerifyError_Trim_WithDiff(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyError_Glob_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{
 		"build-20260303/result.json",
 		"build-20260303/output.txt",
 		"build-20260303/data.csv",
 	}
+
+	// Assert
 	expected := []string{
 		"build-*/result.json",
 		"build-*/output.txt",
@@ -284,7 +305,10 @@ func Test_SliceValidator_AllVerifyError_Glob_WithDiff(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyErrorExceptLast_WithDiff(t *testing.T) {
+	// Act
 	actual := []string{"a", "b", "INTENTIONALLY-DIFFERENT"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 
 	v := corevalidator.SliceValidator{
@@ -311,6 +335,7 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_WithDiff(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_Dispose_ThenAllVerifyError(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -324,7 +349,11 @@ func Test_SliceValidator_Dispose_ThenAllVerifyError(t *testing.T) {
 	err := v.AllVerifyError(params)
 
 	// After dispose, both are nil, so nil receiver-like behavior
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "disposed validator with nil lines should not error:", actual)
 }
@@ -334,14 +363,22 @@ func Test_SliceValidator_Dispose_ThenAllVerifyError(t *testing.T) {
 // ==========================================
 
 func Test_LineDiff_BothEmpty(t *testing.T) {
+	// Arrange
 	diffs := errcore.LineDiff([]string{}, []string{})
+
+	// Act
 	actual := args.Map{"result": len(diffs) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both empty should produce 0 diffs", actual)
 }
 
 func Test_LineDiff_ExactMatch(t *testing.T) {
+	// Act
 	actual := []string{"a", "b", "c"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 	diffs := errcore.LineDiff(actual, expected)
 
@@ -356,7 +393,10 @@ func Test_LineDiff_ExactMatch(t *testing.T) {
 }
 
 func Test_LineDiff_Mismatches(t *testing.T) {
+	// Act
 	actual := []string{"a", "WRONG", "c"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 	diffs := errcore.LineDiff(actual, expected)
 
@@ -375,7 +415,10 @@ func Test_LineDiff_Mismatches(t *testing.T) {
 }
 
 func Test_LineDiff_ExtraActual(t *testing.T) {
+	// Act
 	actual := []string{"a", "b", "extra"}
+
+	// Assert
 	expected := []string{"a", "b"}
 	diffs := errcore.LineDiff(actual, expected)
 
@@ -391,7 +434,10 @@ func Test_LineDiff_ExtraActual(t *testing.T) {
 }
 
 func Test_LineDiff_MissingActual(t *testing.T) {
+	// Act
 	actual := []string{"a"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 	diffs := errcore.LineDiff(actual, expected)
 
@@ -407,7 +453,10 @@ func Test_LineDiff_MissingActual(t *testing.T) {
 }
 
 func Test_LineDiffToString_ContainsLineNumbers(t *testing.T) {
+	// Act
 	actual := []string{"a", "WRONG"}
+
+	// Assert
 	expected := []string{"a", "b"}
 
 	result := errcore.LineDiffToString(0, "test header", actual, expected)
@@ -430,36 +479,55 @@ func Test_LineDiffToString_ContainsLineNumbers(t *testing.T) {
 }
 
 func Test_HasAnyMismatchOnLines_True(t *testing.T) {
+	// Act
 	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"b"})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "different content should be mismatch", actual)
 }
 
 func Test_HasAnyMismatchOnLines_DifferentLength(t *testing.T) {
+	// Act
 	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"a", "b"})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "different length should be mismatch", actual)
 }
 
 func Test_HasAnyMismatchOnLines_False(t *testing.T) {
+	// Act
 	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a", "b"}, []string{"a", "b"})}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same content should not be mismatch", actual)
 }
 
 func Test_SliceDiffSummary_AllMatch(t *testing.T) {
+	// Arrange
 	result := errcore.SliceDiffSummary([]string{"a", "b"}, []string{"a", "b"})
+
+	// Act
 	actual := args.Map{"result": result != "all lines match"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'all lines match'", actual)
 }
 
 func Test_SliceDiffSummary_HasMismatches(t *testing.T) {
+	// Arrange
 	result := errcore.SliceDiffSummary(
 		[]string{"a", "WRONG", "c"},
 		[]string{"a", "b", "c"},
 	)
+
+	// Act
 	actual := args.Map{"result": strings.Contains(result, "1 mismatches")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "summary should show mismatch count", actual)
 	actual := args.Map{"result": strings.Contains(result, "line 1")}

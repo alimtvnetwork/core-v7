@@ -13,6 +13,7 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_Collection_All_Iterator(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.String.Items("a", "b", "c")
 	count := 0
 	for i, item := range col.All() {
@@ -20,12 +21,17 @@ func Test_Cov4_Collection_All_Iterator(t *testing.T) {
 		_ = item
 		count++
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 3}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- All iterator", actual)
 }
 
 func Test_Cov4_Collection_All_BreakEarly(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.String.Items("a", "b", "c")
 	count := 0
 	for _, _ = range col.All() {
@@ -34,24 +40,34 @@ func Test_Cov4_Collection_All_BreakEarly(t *testing.T) {
 			break
 		}
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- All break early", actual)
 }
 
 func Test_Cov4_Collection_Values_Iterator(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.String.Items("x", "y")
 	count := 0
 	for item := range col.Values() {
 		_ = item
 		count++
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 2}
 	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- Values iterator", actual)
 }
 
 func Test_Cov4_Collection_Values_BreakEarly(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.String.Items("x", "y", "z")
 	count := 0
 	for _ = range col.Values() {
@@ -60,23 +76,33 @@ func Test_Cov4_Collection_Values_BreakEarly(t *testing.T) {
 			break
 		}
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- Values break", actual)
 }
 
 func Test_Cov4_Collection_Backward_Iterator(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.Int.Items(10, 20, 30)
 	var items []int
 	for _, item := range col.Backward() {
 		items = append(items, item)
 	}
+
+	// Act
 	actual := args.Map{"first": items[0], "last": items[2]}
+
+	// Assert
 	expected := args.Map{"first": 30, "last": 10}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Backward", actual)
 }
 
 func Test_Cov4_Collection_Backward_BreakEarly(t *testing.T) {
+	// Arrange
 	col := coregeneric.New.Collection.Int.Items(10, 20, 30)
 	count := 0
 	for _, _ = range col.Backward() {
@@ -85,7 +111,11 @@ func Test_Cov4_Collection_Backward_BreakEarly(t *testing.T) {
 			break
 		}
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Backward break", actual)
 }
@@ -96,6 +126,7 @@ func Test_Cov4_Collection_Backward_BreakEarly(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_Hashmap_All_Iterator(t *testing.T) {
+	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
 	hm.Set("b", "2")
@@ -103,12 +134,17 @@ func Test_Cov4_Hashmap_All_Iterator(t *testing.T) {
 	for _, _ = range hm.All() {
 		count++
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 2}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- All", actual)
 }
 
 func Test_Cov4_Hashmap_All_BreakEarly(t *testing.T) {
+	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
 	hm.Set("b", "2")
@@ -117,12 +153,17 @@ func Test_Cov4_Hashmap_All_BreakEarly(t *testing.T) {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- All break", actual)
 }
 
 func Test_Cov4_Hashmap_IterKeys_BreakEarly(t *testing.T) {
+	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
 	hm.Set("b", "2")
@@ -131,12 +172,17 @@ func Test_Cov4_Hashmap_IterKeys_BreakEarly(t *testing.T) {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- IterKeys break", actual)
 }
 
 func Test_Cov4_Hashmap_IterValues_BreakEarly(t *testing.T) {
+	// Arrange
 	hm := coregeneric.New.Hashmap.StringString.Cap(2)
 	hm.Set("a", "1")
 	hm.Set("b", "2")
@@ -145,7 +191,11 @@ func Test_Cov4_Hashmap_IterValues_BreakEarly(t *testing.T) {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns non-empty -- IterValues break", actual)
 }
@@ -156,25 +206,35 @@ func Test_Cov4_Hashmap_IterValues_BreakEarly(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_Hashset_All_BreakEarly(t *testing.T) {
+	// Arrange
 	hs := coregeneric.New.Hashset.String.Items("a", "b")
 	count := 0
 	for _, _ = range hs.All() {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- All break", actual)
 }
 
 func Test_Cov4_Hashset_Values_BreakEarly(t *testing.T) {
+	// Arrange
 	hs := coregeneric.New.Hashset.String.Items("a", "b")
 	count := 0
 	for _ = range hs.Values() {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "Hashset returns non-empty -- Values break", actual)
 }
@@ -185,25 +245,35 @@ func Test_Cov4_Hashset_Values_BreakEarly(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_SimpleSlice_All_BreakEarly(t *testing.T) {
+	// Arrange
 	ss := coregeneric.New.SimpleSlice.String.Items("x", "y", "z")
 	count := 0
 	for _, _ = range ss.All() {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- All break", actual)
 }
 
 func Test_Cov4_SimpleSlice_Values_BreakEarly(t *testing.T) {
+	// Arrange
 	ss := coregeneric.New.SimpleSlice.String.Items("x", "y", "z")
 	count := 0
 	for _ = range ss.Values() {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "SimpleSlice returns non-empty -- Values break", actual)
 }
@@ -214,6 +284,7 @@ func Test_Cov4_SimpleSlice_Values_BreakEarly(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_LinkedList_All_Iterator(t *testing.T) {
+	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
 	ll.Add("b")
@@ -222,12 +293,17 @@ func Test_Cov4_LinkedList_All_Iterator(t *testing.T) {
 	for _, _ = range ll.All() {
 		count++
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 3}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- All", actual)
 }
 
 func Test_Cov4_LinkedList_All_BreakEarly(t *testing.T) {
+	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
 	ll.Add("b")
@@ -236,12 +312,17 @@ func Test_Cov4_LinkedList_All_BreakEarly(t *testing.T) {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- All break", actual)
 }
 
 func Test_Cov4_LinkedList_Values_BreakEarly(t *testing.T) {
+	// Arrange
 	ll := coregeneric.New.LinkedList.String.Empty()
 	ll.Add("a")
 	ll.Add("b")
@@ -250,7 +331,11 @@ func Test_Cov4_LinkedList_Values_BreakEarly(t *testing.T) {
 		count++
 		break
 	}
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns non-empty -- Values break", actual)
 }
@@ -269,15 +354,25 @@ func Test_Cov4_LinkedList_Values_BreakEarly(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov4_MaxOf_FirstIsGreater(t *testing.T) {
+	// Arrange
 	result := coregeneric.MaxOf(10, 5)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": 10}
 	expected.ShouldBeEqual(t, 0, "MaxOf returns correct value -- first greater", actual)
 }
 
 func Test_Cov4_MaxOfSlice_MultipleValues(t *testing.T) {
+	// Arrange
 	result := coregeneric.MaxOfSlice([]int{3, 7, 1, 9, 2})
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": 9}
 	expected.ShouldBeEqual(t, 0, "MaxOfSlice returns correct value -- with args", actual)
 }

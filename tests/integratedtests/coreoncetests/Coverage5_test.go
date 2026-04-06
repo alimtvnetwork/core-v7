@@ -10,12 +10,17 @@ import (
 // ── BoolOnce ──
 
 func Test_Cov5_BoolOnce_Value(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
+
+	// Act
 	actual := args.Map{
 		"value":   bo.Value(),
 		"execute": bo.Execute(),
 		"string":  bo.String(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"value":   true,
 		"execute": true,
@@ -25,11 +30,16 @@ func Test_Cov5_BoolOnce_Value(t *testing.T) {
 }
 
 func Test_Cov5_BoolOnce_False(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
+
+	// Act
 	actual := args.Map{
 		"value":  bo.Value(),
 		"string": bo.String(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"value":  false,
 		"string": "false",
@@ -38,12 +48,17 @@ func Test_Cov5_BoolOnce_False(t *testing.T) {
 }
 
 func Test_Cov5_BoolOnce_Serialize(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	b, err := bo.Serialize()
+
+	// Act
 	actual := args.Map{
 		"noErr":    err == nil,
 		"hasBytes": len(b) > 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":    true,
 		"hasBytes": true,
@@ -52,12 +67,17 @@ func Test_Cov5_BoolOnce_Serialize(t *testing.T) {
 }
 
 func Test_Cov5_BoolOnce_MarshalJSON(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	b, err := bo.MarshalJSON()
+
+	// Act
 	actual := args.Map{
 		"noErr":    err == nil,
 		"hasBytes": len(b) > 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":    true,
 		"hasBytes": true,
@@ -66,19 +86,29 @@ func Test_Cov5_BoolOnce_MarshalJSON(t *testing.T) {
 }
 
 func Test_Cov5_BoolOnce_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOncePtr(func() bool { return false })
 	err := bo.UnmarshalJSON([]byte("true"))
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "BoolOnce.UnmarshalJSON succeeds -- true bytes", actual)
 }
 
 func Test_Cov5_BoolOnce_Ptr(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOncePtr(func() bool { return true })
+
+	// Act
 	actual := args.Map{
 		"notNil": bo != nil,
 		"value":  bo.Value(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil": true,
 		"value":  true,

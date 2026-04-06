@@ -14,9 +14,14 @@ import (
 // ── RwxWrapper.ToUint32Octal ──
 
 func Test_Cov9_RwxWrapper_ToUint32Octal(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	oct := rwx.ToUint32Octal()
+
+	// Act
 	actual := args.Map{"result": oct != 0755}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0755, got %o", actual)
 }
@@ -24,37 +29,53 @@ func Test_Cov9_RwxWrapper_ToUint32Octal(t *testing.T) {
 // ── RwxWrapper.ApplyChmod branches ──
 
 func Test_Cov9_RwxWrapper_ApplyChmod_SkipInvalid(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(true, "/nonexistent/cov9/skip")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for skip on invalid", actual)
 }
 
 func Test_Cov9_RwxWrapper_ApplyChmod_NotSkipInvalid(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, "/nonexistent/cov9/noskip")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for non-skip invalid path", actual)
 }
 
 func Test_Cov9_RwxWrapper_ApplyChmod_Success(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov9_apply_chmod.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0644)
 	err := rwx.ApplyChmod(false, tmpFile)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov9_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
+	// Arrange
 	// On most systems, regular chmod doesn't fail on valid paths
 	// This covers the success path with error=nil
 	tmpFile := filepath.Join(os.TempDir(), "cov9_apply_chmod_ok.txt")
@@ -63,7 +84,11 @@ func Test_Cov9_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
 
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0777)
 	err := rwx.ApplyChmod(false, tmpFile)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -71,12 +96,17 @@ func Test_Cov9_RwxWrapper_ApplyChmod_ChmodFail(t *testing.T) {
 // ── RwxWrapper.invalidPathErr ──
 
 func Test_Cov9_RwxWrapper_InvalidPathErr(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, "/nonexistent/cov9/invalid_path")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -84,25 +114,40 @@ func Test_Cov9_RwxWrapper_InvalidPathErr(t *testing.T) {
 // ── RwxWrapper.ApplyChmodOptions ──
 
 func Test_Cov9_ApplyChmodOptions_SkipApply(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(false, true, false, "/any")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil when isApply=false", actual)
 }
 
 func Test_Cov9_ApplyChmodOptions_InvalidSkip(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(true, true, true, "/nonexistent/cov9/opts")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
 func Test_Cov9_ApplyChmodOptions_InvalidNoSkip(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmodOptions(true, true, false, "/nonexistent/cov9/opts2")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for invalid no-skip", actual)
 }
@@ -118,6 +163,7 @@ func Test_Cov9_ApplyChmodOptions_MismatchApply(t *testing.T) {
 }
 
 func Test_Cov9_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov9_opts_match.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -125,7 +171,11 @@ func Test_Cov9_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
 
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0644)
 	err := rwx.ApplyChmodOptions(true, true, false, tmpFile)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -133,20 +183,30 @@ func Test_Cov9_ApplyChmodOptions_AlreadyMatching(t *testing.T) {
 // ── RwxWrapper.LinuxApplyRecursive ──
 
 func Test_Cov9_LinuxApplyRecursive_SkipInvalid_NotExists(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.LinuxApplyRecursive(true, "/nonexistent/cov9/linux_recur")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
 func Test_Cov9_LinuxApplyRecursive_NoSkip_NotExists(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.LinuxApplyRecursive(false, "/nonexistent/cov9/linux_recur2")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -164,17 +224,27 @@ func Test_Cov9_LinuxApplyRecursive_Valid(t *testing.T) {
 // ── RwxWrapper.ApplyRecursive ──
 
 func Test_Cov9_ApplyRecursive_SkipInvalid(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyRecursive(true, "/nonexistent/cov9/recur_skip")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov9_ApplyRecursive_NotExist_NoSkip(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyRecursive(false, "/nonexistent/cov9/recur_noskip")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -212,8 +282,13 @@ func Test_Cov9_MustApplyChmod_Success(t *testing.T) {
 }
 
 func Test_Cov9_MustApplyChmod_Panic(t *testing.T) {
+	// Arrange
 	defer func() {
+
+	// Act
 		actual := args.Map{"result": r := recover(); r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
@@ -286,17 +361,27 @@ func Test_Cov9_ApplyLinuxChmodOnMany_StopOnError_NonRecursive(t *testing.T) {
 // ── RwxWrapper.IsEqualVarWrapper ──
 
 func Test_Cov9_IsEqualVarWrapper_Nil(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
+
+	// Act
 	actual := args.Map{"result": rwx.IsEqualVarWrapper(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
 func Test_Cov9_IsEqualVarWrapper_Match(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	varW, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	result := rwx.IsEqualVarWrapper(varW)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
@@ -304,13 +389,19 @@ func Test_Cov9_IsEqualVarWrapper_Match(t *testing.T) {
 // ── RwxWrapper.IsRwxEqualFileInfo ──
 
 func Test_Cov9_IsRwxEqualFileInfo_Nil(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
+
+	// Act
 	actual := args.Map{"result": rwx.IsRwxEqualFileInfo(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov9_IsRwxEqualFileInfo_Valid(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
@@ -322,7 +413,11 @@ func Test_Cov9_IsRwxEqualFileInfo_Valid(t *testing.T) {
 	info, _ := os.Stat(tmpFile)
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0644)
 	result := rwx.IsRwxEqualFileInfo(info)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
@@ -330,13 +425,19 @@ func Test_Cov9_IsRwxEqualFileInfo_Valid(t *testing.T) {
 // ── RwxWrapper.IsRwxEqualLocation ──
 
 func Test_Cov9_IsRwxEqualLocation_NonExistent(t *testing.T) {
+	// Arrange
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
+
+	// Act
 	actual := args.Map{"result": rwx.IsRwxEqualLocation("/nonexistent/cov9/rwxloc")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov9_IsRwxEqualLocation_Valid(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
@@ -347,7 +448,11 @@ func Test_Cov9_IsRwxEqualLocation_Valid(t *testing.T) {
 
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0644)
 	result := rwx.IsRwxEqualLocation(tmpFile)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }

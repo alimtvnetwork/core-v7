@@ -10,111 +10,187 @@ import (
 // ── Package-level functions ──
 
 func Test_Cov2_Min(t *testing.T) {
+	// Act
 	actual := args.Map{"value": reqtype.Min()}
+
+	// Assert
 	expected := args.Map{"value": reqtype.Invalid}
 	expected.ShouldBeEqual(t, 0, "Min returns error -- returns Invalid", actual)
 }
 
 func Test_Cov2_Max(t *testing.T) {
+	// Act
 	actual := args.Map{"notInvalid": reqtype.Max() != reqtype.Invalid}
+
+	// Assert
 	expected := args.Map{"notInvalid": true}
 	expected.ShouldBeEqual(t, 0, "Max returns error -- returns non-Invalid", actual)
 }
 
 func Test_Cov2_RangesInBetween(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesInBetween(reqtype.Create, reqtype.Delete)
+
+	// Act
 	actual := args.Map{"len": len(result), "firstIsCreate": result[0] == reqtype.Create}
+
+	// Assert
 	expected := args.Map{"len": 4, "firstIsCreate": true}
 	expected.ShouldBeEqual(t, 0, "RangesInBetween returns correct value -- Create-Delete", actual)
 }
 
 func Test_Cov2_RangesStrings(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesStrings(reqtype.Create, reqtype.Read)
+
+	// Act
 	actual := args.Map{"len": len(result), "firstNotEmpty": result[0] != ""}
+
+	// Assert
 	expected := args.Map{"len": 2, "firstNotEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangesStrings returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesStrings_Empty(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesStrings()
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "RangesStrings returns empty -- empty", actual)
 }
 
 func Test_Cov2_RangesString(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesString(", ", reqtype.Create, reqtype.Read)
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangesString returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesStringDefaultJoiner(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesStringDefaultJoiner(reqtype.Create, reqtype.Read)
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangesStringDefaultJoiner returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesNotMeet(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesNotMeet("test msg", reqtype.Create, reqtype.Read)
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotMeet returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesNotMeet_Empty(t *testing.T) {
+	// Arrange
 	result := reqtype.RangesNotMeet("test msg")
+
+	// Act
 	actual := args.Map{"empty": result == ""}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotMeet returns empty -- empty", actual)
 }
 
 func Test_Cov2_RangesNotMeetError(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesNotMeetError("test msg", reqtype.Create)
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotMeetError returns error -- with args", actual)
 }
 
 func Test_Cov2_RangesNotMeetError_Empty(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesNotMeetError("test msg")
+
+	// Act
 	actual := args.Map{"isNil": err == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotMeetError returns empty -- empty", actual)
 }
 
 func Test_Cov2_RangesInvalidErr(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesInvalidErr()
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "RangesInvalidErr returns error -- with args", actual)
 }
 
 func Test_Cov2_RangesNotSupportedFor(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesNotSupportedFor("msg", reqtype.Create)
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotSupportedFor returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesNotSupportedFor_Empty(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesNotSupportedFor("msg")
+
+	// Act
 	actual := args.Map{"isNil": err == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "RangesNotSupportedFor returns empty -- empty", actual)
 }
 
 func Test_Cov2_RangesOnlySupportedFor(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesOnlySupportedFor("msg", reqtype.Create)
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "RangesOnlySupportedFor returns correct value -- with args", actual)
 }
 
 func Test_Cov2_RangesOnlySupportedFor_Empty(t *testing.T) {
+	// Arrange
 	err := reqtype.RangesOnlySupportedFor("msg")
+
+	// Act
 	actual := args.Map{"isNil": err == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "RangesOnlySupportedFor returns empty -- empty", actual)
 }
@@ -122,52 +198,82 @@ func Test_Cov2_RangesOnlySupportedFor_Empty(t *testing.T) {
 // ── Request methods not yet covered ──
 
 func Test_Cov2_Request_IsStopEnableStart(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.Create.IsStopEnableStart()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsStopEnableStart returns non-empty -- always false", actual)
 }
 
 func Test_Cov2_Request_IsStopDisable(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.Create.IsStopDisable()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsStopDisable returns non-empty -- always false", actual)
 }
 
 func Test_Cov2_Request_AllNameValues(t *testing.T) {
+	// Act
 	actual := args.Map{"notEmpty": len(reqtype.Create.AllNameValues()) > 0}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "AllNameValues returns non-empty -- with args", actual)
 }
 
 func Test_Cov2_Request_OnlySupportedErr(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.OnlySupportedErr("Create")
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "OnlySupportedErr returns error -- with args", actual)
 }
 
 func Test_Cov2_Request_OnlySupportedMsgErr(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.OnlySupportedMsgErr("test", "Create")
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "OnlySupportedMsgErr returns error -- with args", actual)
 }
 
 func Test_Cov2_Request_IsReadOrUpdateLogically(t *testing.T) {
+	// Act
 	actual := args.Map{"read": reqtype.Read.IsReadOrUpdateLogically()}
+
+	// Assert
 	expected := args.Map{"read": true}
 	expected.ShouldBeEqual(t, 0, "IsReadOrUpdateLogically returns correct value -- with args", actual)
 }
 
 func Test_Cov2_Request_IsOnExistOrSkipOnNonExistLogically(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.ExistCheck.IsOnExistOrSkipOnNonExistLogically()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsOnExistOrSkipOnNonExistLogically returns correct value -- with args", actual)
 }
 
 func Test_Cov2_Request_CurrentNotImpl(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.CurrentNotImpl(nil)
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "CurrentNotImpl returns nil -- nil ref", actual)
 
@@ -178,37 +284,58 @@ func Test_Cov2_Request_CurrentNotImpl(t *testing.T) {
 }
 
 func Test_Cov2_Request_NotSupportedErr(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.NotSupportedErr("msg", "ref")
+
+	// Act
 	actual := args.Map{"hasError": err != nil}
+
+	// Assert
 	expected := args.Map{"hasError": true}
 	expected.ShouldBeEqual(t, 0, "NotSupportedErr returns error -- with args", actual)
 }
 
 func Test_Cov2_Request_IsNotAnyOfReqs_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsNotAnyOfReqs returns empty -- empty", actual)
 }
 
 func Test_Cov2_Request_IsAnyOfReqs_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsAnyOfReqs returns empty -- empty", actual)
 }
 
 func Test_Cov2_Request_GetStatusAnyOf_Empty(t *testing.T) {
+	// Arrange
 	status := reqtype.Create.GetStatusAnyOf()
+
+	// Act
 	actual := args.Map{"isSuccess": status.IsSuccess}
+
+	// Assert
 	expected := args.Map{"isSuccess": true}
 	expected.ShouldBeEqual(t, 0, "GetStatusAnyOf returns empty -- empty", actual)
 }
 
 func Test_Cov2_Request_IsAnyHttpMethod(t *testing.T) {
+	// Arrange
 	name := reqtype.GetHttp.Name()
+
+	// Act
 	actual := args.Map{
 		"match":   reqtype.GetHttp.IsAnyHttpMethod(name),
 		"noMatch": reqtype.Create.IsAnyHttpMethod(name),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -217,24 +344,35 @@ func Test_Cov2_Request_IsAnyHttpMethod(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsEnumEqual(t *testing.T) {
+	// Act
 	actual := args.Map{"result": reqtype.Create.IsEnumEqual(reqtype.Create.AsBasicEnumContractsBinder())}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsEnumEqual returns correct value -- with args", actual)
 }
 
 func Test_Cov2_Request_IsAnyEnumsEqual(t *testing.T) {
+	// Arrange
 	r := reqtype.Create
+
+	// Act
 	actual := args.Map{"result": r.IsAnyEnumsEqual(reqtype.Read.AsBasicEnumContractsBinder(), reqtype.Create.AsBasicEnumContractsBinder())}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsAnyEnumsEqual returns correct value -- with args", actual)
 }
 
 func Test_Cov2_Request_MinInt_MaxInt(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"minValid": reqtype.Create.MinInt() >= 0,
 		"maxValid": reqtype.Create.MaxInt() > 0,
 		"minByte":  reqtype.Create.MinByte() == 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"minValid": true,
 		"maxValid": true,
@@ -244,13 +382,19 @@ func Test_Cov2_Request_MinInt_MaxInt(t *testing.T) {
 }
 
 func Test_Cov2_Request_Format(t *testing.T) {
+	// Act
 	actual := args.Map{"notEmpty": reqtype.Create.Format("%s") != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Format returns correct value -- with args", actual)
 }
 
 func Test_Cov2_Request_DynamicAction(t *testing.T) {
+	// Act
 	actual := args.Map{"isDynamic": reqtype.DynamicAction.String() != ""}
+
+	// Assert
 	expected := args.Map{"isDynamic": true}
 	expected.ShouldBeEqual(t, 0, "DynamicAction returns correct value -- string", actual)
 }
@@ -258,6 +402,7 @@ func Test_Cov2_Request_DynamicAction(t *testing.T) {
 // ── Identity checks for remaining values ──
 
 func Test_Cov2_Request_RemainingIdentity(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"stopSleepStart":    reqtype.StopSleepStart.IsStopSleepStart(),
 		"suspend":           reqtype.Suspend.IsSuspend(),
@@ -291,6 +436,8 @@ func Test_Cov2_Request_RemainingIdentity(t *testing.T) {
 		"merge":             reqtype.Merge.IsMerge(),
 		"mergeLines":        reqtype.MergeLines.IsMergeLines(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"stopSleepStart":    true,
 		"suspend":           true,
@@ -330,6 +477,7 @@ func Test_Cov2_Request_RemainingIdentity(t *testing.T) {
 // ── Logical group negatives ──
 
 func Test_Cov2_Request_LogicalGroupNegatives(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"readNotCreate":    reqtype.Read.IsCreateLogically(),
 		"readNotDrop":      reqtype.Read.IsDropLogically(),
@@ -339,6 +487,8 @@ func Test_Cov2_Request_LogicalGroupNegatives(t *testing.T) {
 		"touchNotUpdate":   reqtype.Touch.IsUpdateOrRemoveLogically(),
 		"touchNotOverride": reqtype.Touch.IsOverrideOrOverwriteOrEnforce(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"readNotCreate":    false,
 		"readNotDrop":      false,
@@ -354,6 +504,7 @@ func Test_Cov2_Request_LogicalGroupNegatives(t *testing.T) {
 // ── Composite logical groups ──
 
 func Test_Cov2_Request_IsAnyAction_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"stop":    reqtype.Stop.IsAnyAction(),
 		"restart": reqtype.Restart.IsAnyAction(),
@@ -362,6 +513,8 @@ func Test_Cov2_Request_IsAnyAction_Values(t *testing.T) {
 		"pause":   reqtype.Pause.IsAnyAction(),
 		"resumed": reqtype.Resumed.IsAnyAction(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"stop":    true,
 		"restart": true,
@@ -374,12 +527,15 @@ func Test_Cov2_Request_IsAnyAction_Values(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsAnyHttp_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"put":    reqtype.PutHttp.IsAnyHttp(),
 		"post":   reqtype.PostHttp.IsAnyHttp(),
 		"delete": reqtype.DeleteHttp.IsAnyHttp(),
 		"patch":  reqtype.PatchHttp.IsAnyHttp(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"put":    true,
 		"post":   true,
@@ -390,6 +546,7 @@ func Test_Cov2_Request_IsAnyHttp_Values(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsAnyCreate_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"createOrUpdate":  reqtype.CreateOrUpdate.IsAnyCreate(),
 		"createOrAppend":  reqtype.CreateOrAppend.IsAnyCreate(),
@@ -397,6 +554,8 @@ func Test_Cov2_Request_IsAnyCreate_Values(t *testing.T) {
 		"createOrSkip":    reqtype.CreateOrSkipOnExist.IsAnyCreate(),
 		"dropCreate":      reqtype.DropCreate.IsAnyCreate(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"createOrUpdate":  true,
 		"createOrAppend":  true,
@@ -408,6 +567,7 @@ func Test_Cov2_Request_IsAnyCreate_Values(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsAnyDrop_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"delete":      reqtype.Delete.IsAnyDrop(),
 		"deleteSkip":  reqtype.DeleteOrSkipOnNonExist.IsAnyDrop(),
@@ -415,6 +575,8 @@ func Test_Cov2_Request_IsAnyDrop_Values(t *testing.T) {
 		"dropCreate":  reqtype.DropCreate.IsAnyDrop(),
 		"dropSkip":    reqtype.DropOrSkipOnNonExist.IsAnyDrop(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"delete":      true,
 		"deleteSkip":  true,
@@ -426,10 +588,13 @@ func Test_Cov2_Request_IsAnyDrop_Values(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsDropSafe_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"deleteSkip": reqtype.DeleteOrSkipOnNonExist.IsDropSafe(),
 		"dropSkip":   reqtype.DropOrSkipOnNonExist.IsDropSafe(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"deleteSkip": true,
 		"dropSkip":   true,
@@ -438,12 +603,15 @@ func Test_Cov2_Request_IsDropSafe_Values(t *testing.T) {
 }
 
 func Test_Cov2_Request_IsAnySkipOnExist_Values(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"createSkip":   reqtype.CreateOrSkipOnExist.IsAnySkipOnExist(),
 		"updateSkip":   reqtype.UpdateOrSkipOnNonExist.IsAnySkipOnExist(),
 		"deleteSkip":   reqtype.DeleteOrSkipOnNonExist.IsAnySkipOnExist(),
 		"dropSkip":     reqtype.DropOrSkipOnNonExist.IsAnySkipOnExist(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"createSkip":   true,
 		"updateSkip":   true,

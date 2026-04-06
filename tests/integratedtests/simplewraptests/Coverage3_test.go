@@ -11,7 +11,10 @@ import (
 // ── ConditionalWrapWith exhaustive branch coverage ──
 
 func Test_Cov3_ConditionalWrapWith_BothMissing(t *testing.T) {
+	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('{', "hello", '}')}
+
+	// Assert
 	expected := args.Map{"result": "{hello}"}
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith returns non-empty -- both missing", actual)
 }
@@ -23,7 +26,10 @@ func Test_Cov3_ConditionalWrapWith_LeftMissing(t *testing.T) {
 }
 
 func Test_Cov3_ConditionalWrapWith_RightMissing(t *testing.T) {
+	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('{', "{hello", '}')}
+
+	// Assert
 	expected := args.Map{"result": "{hello}"}
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith returns non-empty -- right missing", actual)
 }

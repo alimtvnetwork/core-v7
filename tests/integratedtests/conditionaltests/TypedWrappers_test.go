@@ -22,6 +22,7 @@ func Test_IfBool_Typed_Verification(t *testing.T) {
 
 		result := conditional.IfBool(isTrue, trueVal.(bool), falseVal.(bool))
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -36,6 +37,7 @@ func Test_IfInt_Typed_Verification(t *testing.T) {
 
 		result := conditional.IfInt(isTrue, trueVal, falseVal)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -50,6 +52,7 @@ func Test_IfByte_Typed_Verification(t *testing.T) {
 
 		result := conditional.IfByte(isTrue, trueVal.(byte), falseVal.(byte))
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -64,6 +67,7 @@ func Test_IfFloat64_Typed_Verification(t *testing.T) {
 
 		result := conditional.IfFloat64(isTrue, trueVal.(float64), falseVal.(float64))
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -78,6 +82,7 @@ func Test_IfAny_Typed_Verification(t *testing.T) {
 
 		result := conditional.IfAny(isTrue, trueVal, falseVal)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -100,6 +105,7 @@ func Test_IfFuncBool_Typed_Verification(t *testing.T) {
 			func() bool { return falseVal.(bool) },
 		)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -118,6 +124,7 @@ func Test_IfFuncInt_Typed_Verification(t *testing.T) {
 			func() int { return falseVal },
 		)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -180,6 +187,7 @@ func Test_IfTrueFuncBool_Typed_Verification(t *testing.T) {
 			func() bool { return trueVal.(bool) },
 		)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
@@ -271,6 +279,7 @@ func Test_IfTrueFuncBytes_Typed_Verification(t *testing.T) {
 
 func Test_IfSliceBool_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifSliceBoolTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -278,17 +287,21 @@ func Test_IfSliceBool_Typed_Verification(t *testing.T) {
 		falseVal, _ := input.Get("falseValue")
 
 		result := conditional.IfSliceBool(isTrue, trueVal.([]bool), falseVal.([]bool))
+
+		// Act
 		actual := args.Map{
 			"length": fmt.Sprintf("%v", len(result)),
 			"first":  fmt.Sprintf("%v", result[0]),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
 
 func Test_IfSliceInt_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifSliceIntTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -296,11 +309,14 @@ func Test_IfSliceInt_Typed_Verification(t *testing.T) {
 		falseVal, _ := input.Get("falseValue")
 
 		result := conditional.IfSliceInt(isTrue, trueVal.([]int), falseVal.([]int))
+
+		// Act
 		actual := args.Map{
 			"length": fmt.Sprintf("%v", len(result)),
 			"first":  fmt.Sprintf("%v", result[0]),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -351,6 +367,7 @@ func Test_IfSliceByte_Typed_Verification(t *testing.T) {
 
 func Test_IfSliceAny_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifSliceAnyTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -358,11 +375,14 @@ func Test_IfSliceAny_Typed_Verification(t *testing.T) {
 		falseVal, _ := input.Get("falseValue")
 
 		result := conditional.IfSliceAny(isTrue, trueVal.([]any), falseVal.([]any))
+
+		// Act
 		actual := args.Map{
 			"length": fmt.Sprintf("%v", len(result)),
 			"first":  fmt.Sprintf("%v", result[0]),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -373,6 +393,7 @@ func Test_IfSliceAny_Typed_Verification(t *testing.T) {
 
 func Test_IfPtrString_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifPtrStringTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -380,17 +401,21 @@ func Test_IfPtrString_Typed_Verification(t *testing.T) {
 		falseStr, _ := input.GetAsString("falseValue")
 
 		result := conditional.IfPtrString(isTrue, &trueStr, &falseStr)
+
+		// Act
 		actual := args.Map{
 			"isNotNil": fmt.Sprintf("%v", result != nil),
 			"value":    *result,
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
 
 func Test_IfPtrInt_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifPtrIntTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -398,17 +423,21 @@ func Test_IfPtrInt_Typed_Verification(t *testing.T) {
 		falseVal, _ := input.GetAsInt("falseValue")
 
 		result := conditional.IfPtrInt(isTrue, &trueVal, &falseVal)
+
+		// Act
 		actual := args.Map{
 			"isNotNil": fmt.Sprintf("%v", result != nil),
 			"value":    fmt.Sprintf("%v", *result),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
 
 func Test_IfPtrBool_Typed_Verification(t *testing.T) {
 	for caseIndex, testCase := range ifPtrBoolTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isTrueVal, _ := input.Get("isTrue")
 		isTrue := isTrueVal == true
@@ -418,11 +447,14 @@ func Test_IfPtrBool_Typed_Verification(t *testing.T) {
 		fv := falseVal.(bool)
 
 		result := conditional.IfPtrBool(isTrue, &tv, &fv)
+
+		// Act
 		actual := args.Map{
 			"isNotNil": fmt.Sprintf("%v", result != nil),
 			"value":    fmt.Sprintf("%v", *result),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }

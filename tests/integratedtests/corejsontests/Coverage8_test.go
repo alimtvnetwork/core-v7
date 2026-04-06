@@ -13,14 +13,20 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov8_Result_Map_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"len": len(m)}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "Result.Map returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_Map_WithAll(t *testing.T) {
+	// Arrange
 	// IsEmptyJsonBytes returns true when Error is set, so Map() skips Bytes key
 	r := &corejson.Result{
 		Bytes:    []byte(`{"a":1}`),
@@ -28,459 +34,763 @@ func Test_Cov8_Result_Map_WithAll(t *testing.T) {
 		TypeName: "TestType",
 	}
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"hasBytes": m["Bytes"] != "", "hasError": m["Error"] != "", "hasType": m["Type"] != ""}
+
+	// Assert
 	expected := args.Map{"hasBytes": false, "hasError": true, "hasType": true}
 	expected.ShouldBeEqual(t, 0, "Result.Map returns non-empty -- with all", actual)
 }
 
 func Test_Cov8_Result_Map_Empty(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"len": len(m)}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "Result.Map returns empty -- empty", actual)
 }
 
 func Test_Cov8_Result_BytesTypeName_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"val": r.BytesTypeName()}
+
+	// Assert
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "BytesTypeName returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_BytesTypeName_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{TypeName: "MyType"}
+
+	// Act
 	actual := args.Map{"val": r.BytesTypeName()}
+
+	// Assert
 	expected := args.Map{"val": "MyType"}
 	expected.ShouldBeEqual(t, 0, "BytesTypeName returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_SafeBytesTypeName_Empty(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"val": r.SafeBytesTypeName()}
+
+	// Assert
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "SafeBytesTypeName returns empty -- empty", actual)
 }
 
 func Test_Cov8_Result_SafeBytesTypeName_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`), TypeName: "MyType"}
+
+	// Act
 	actual := args.Map{"val": r.SafeBytesTypeName()}
+
+	// Assert
 	expected := args.Map{"val": "MyType"}
 	expected.ShouldBeEqual(t, 0, "SafeBytesTypeName returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_JsonStringPtr_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	val := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"empty": *val == ""}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "JsonStringPtr returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_JsonStringPtr_WithBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hello"`)}
 	val := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"val": *val}
+
+	// Assert
 	expected := args.Map{"val": `"hello"`}
 	expected.ShouldBeEqual(t, 0, "JsonStringPtr returns non-empty -- with bytes", actual)
 }
 
 func Test_Cov8_Result_JsonStringPtr_NoBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
 	val := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"empty": *val == ""}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "JsonStringPtr returns empty -- no bytes", actual)
 }
 
 func Test_Cov8_Result_JsonStringPtr_Cached(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
 	p1 := r.JsonStringPtr()
 	p2 := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"same": p1 == p2}
+
+	// Assert
 	expected := args.Map{"same": true}
 	expected.ShouldBeEqual(t, 0, "JsonStringPtr returns correct value -- cached", actual)
 }
 
 func Test_Cov8_Result_SafeString(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"val": r.SafeString()}
+
+	// Assert
 	expected := args.Map{"val": `"hi"`}
 	expected.ShouldBeEqual(t, 0, "SafeString returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonBuffer_Empty(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
 	buf, err := r.PrettyJsonBuffer("", "  ")
+
+	// Act
 	actual := args.Map{"empty": buf.Len() == 0, "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"empty": true, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonBuffer returns empty -- empty", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonBuffer_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
 	buf, err := r.PrettyJsonBuffer("", "  ")
+
+	// Act
 	actual := args.Map{"hasData": buf.Len() > 0, "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"hasData": true, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonBuffer returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonString_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"val": r.PrettyJsonString()}
+
+	// Assert
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonString returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonString_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
+
+	// Act
 	actual := args.Map{"notEmpty": r.PrettyJsonString() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonString returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonStringOrErrString_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"notEmpty": r.PrettyJsonStringOrErrString() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonStringOrErrString returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonStringOrErrString_Error(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("fail")}
+
+	// Act
 	actual := args.Map{"notEmpty": r.PrettyJsonStringOrErrString() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonStringOrErrString returns error -- error", actual)
 }
 
 func Test_Cov8_Result_PrettyJsonStringOrErrString_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
+
+	// Act
 	actual := args.Map{"notEmpty": r.PrettyJsonStringOrErrString() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonStringOrErrString returns error -- valid", actual)
 }
 
 func Test_Cov8_Result_Length_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"val": r.Length()}
+
+	// Assert
 	expected := args.Map{"val": 0}
 	expected.ShouldBeEqual(t, 0, "Length returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_Length_NilBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"val": r.Length()}
+
+	// Assert
 	expected := args.Map{"val": 0}
 	expected.ShouldBeEqual(t, 0, "Length returns nil -- nil bytes", actual)
 }
 
 func Test_Cov8_Result_Length_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"val": r.Length()}
+
+	// Assert
 	expected := args.Map{"val": 4}
 	expected.ShouldBeEqual(t, 0, "Length returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_HasError(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{}
 	r2 := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"noErr": r1.HasError(), "hasErr": r2.HasError()}
+
+	// Assert
 	expected := args.Map{"noErr": false, "hasErr": true}
 	expected.ShouldBeEqual(t, 0, "HasError returns error -- with args", actual)
 }
 
 func Test_Cov8_Result_ErrorString_Empty(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"val": r.ErrorString()}
+
+	// Assert
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "ErrorString returns empty -- empty", actual)
 }
 
 func Test_Cov8_Result_ErrorString_WithErr(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("boom")}
+
+	// Act
 	actual := args.Map{"val": r.ErrorString()}
+
+	// Assert
 	expected := args.Map{"val": "boom"}
 	expected.ShouldBeEqual(t, 0, "ErrorString returns error -- with error", actual)
 }
 
 func Test_Cov8_Result_IsErrorEqual_BothNil(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"val": r.IsErrorEqual(nil)}
+
+	// Assert
 	expected := args.Map{"val": true}
 	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns nil -- both nil", actual)
 }
 
 func Test_Cov8_Result_IsErrorEqual_OneNil(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"val": r.IsErrorEqual(nil)}
+
+	// Assert
 	expected := args.Map{"val": false}
 	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns nil -- one nil", actual)
 }
 
 func Test_Cov8_Result_IsErrorEqual_Same(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"val": r.IsErrorEqual(errors.New("e"))}
+
+	// Assert
 	expected := args.Map{"val": true}
 	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns error -- same", actual)
 }
 
 func Test_Cov8_Result_IsErrorEqual_Different(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"val": r.IsErrorEqual(errors.New("f"))}
+
+	// Assert
 	expected := args.Map{"val": false}
 	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns error -- different", actual)
 }
 
 func Test_Cov8_Result_String_Valid(t *testing.T) {
+	// Arrange
 	r := corejson.Result{Bytes: []byte(`"hi"`), TypeName: "T"}
+
+	// Act
 	actual := args.Map{"notEmpty": r.String() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "String returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_String_WithError(t *testing.T) {
+	// Arrange
 	r := corejson.Result{Bytes: []byte(`"hi"`), Error: errors.New("e"), TypeName: "T"}
+
+	// Act
 	actual := args.Map{"notEmpty": r.String() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "String returns error -- with error", actual)
 }
 
 func Test_Cov8_Result_SafeNonIssueBytes_HasIssues(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"len": len(r.SafeNonIssueBytes())}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeNonIssueBytes returns correct value -- issues", actual)
 }
 
 func Test_Cov8_Result_SafeNonIssueBytes_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"len": len(r.SafeNonIssueBytes())}
+
+	// Assert
 	expected := args.Map{"len": 4}
 	expected.ShouldBeEqual(t, 0, "SafeNonIssueBytes returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_SafeBytes_AnyNull(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"len": len(r.SafeBytes())}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeBytes returns correct value -- null", actual)
 }
 
 func Test_Cov8_Result_Values(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`)}
+
+	// Act
 	actual := args.Map{"len": len(r.Values())}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "Values returns non-empty -- with args", actual)
 }
 
 func Test_Cov8_Result_SafeValues_Nil(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"len": len(r.SafeValues())}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeValues returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_SafeValuesPtr_HasIssues(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"len": len(r.SafeValuesPtr())}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "SafeValuesPtr returns non-empty -- issues", actual)
 }
 
 func Test_Cov8_Result_Raw_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	_, err := r.Raw()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Raw returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_Raw_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
 	b, err := r.Raw()
+
+	// Act
 	actual := args.Map{"len": len(b), "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"len": 4, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "Raw returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_RawString(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
 	s, err := r.RawString()
+
+	// Act
 	actual := args.Map{"val": s, "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"val": `"hi"`, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "RawString returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_RawErrString(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`)}
 	b, errMsg := r.RawErrString()
+
+	// Act
 	actual := args.Map{"len": len(b), "emptyErr": errMsg == ""}
+
+	// Assert
 	expected := args.Map{"len": 3, "emptyErr": true}
 	expected.ShouldBeEqual(t, 0, "RawErrString returns error -- with args", actual)
 }
 
 func Test_Cov8_Result_RawPrettyString(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
 	s, err := r.RawPrettyString()
+
+	// Act
 	actual := args.Map{"notEmpty": s != "", "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"notEmpty": true, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "RawPrettyString returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_MeaningfulError_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	err := r.MeaningfulError()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "MeaningfulError returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_MeaningfulError_Ok(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
 	err := r.MeaningfulError()
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "MeaningfulError returns error -- ok", actual)
 }
 
 func Test_Cov8_Result_MeaningfulError_EmptyBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{TypeName: "T"}
 	err := r.MeaningfulError()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "MeaningfulError returns empty -- empty bytes", actual)
 }
 
 func Test_Cov8_Result_MeaningfulError_WithError(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`), Error: errors.New("fail"), TypeName: "T"}
 	err := r.MeaningfulError()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "MeaningfulError returns error -- with error", actual)
 }
 
 func Test_Cov8_Result_MeaningfulErrorMessage_NoErr(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"val": r.MeaningfulErrorMessage()}
+
+	// Assert
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "MeaningfulErrorMessage returns empty -- no err", actual)
 }
 
 func Test_Cov8_Result_IsEmptyError(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{}
 	r2 := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"empty": r1.IsEmptyError(), "notEmpty": r2.IsEmptyError()}
+
+	// Assert
 	expected := args.Map{"empty": true, "notEmpty": false}
 	expected.ShouldBeEqual(t, 0, "IsEmptyError returns empty -- with args", actual)
 }
 
 func Test_Cov8_Result_HasSafeItems(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{Bytes: []byte(`"hi"`)}
 	r2 := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"safe": r1.HasSafeItems(), "notSafe": r2.HasSafeItems()}
+
+	// Assert
 	expected := args.Map{"safe": true, "notSafe": false}
 	expected.ShouldBeEqual(t, 0, "HasSafeItems returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_IsAnyNull(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{}
 	r2 := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"null": r1.IsAnyNull(), "notNull": r2.IsAnyNull()}
+
+	// Assert
 	expected := args.Map{"null": true, "notNull": false}
 	expected.ShouldBeEqual(t, 0, "IsAnyNull returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_HasIssuesOrEmpty(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{Bytes: []byte(`"hi"`)}
 	r2 := &corejson.Result{Error: errors.New("e")}
+
+	// Act
 	actual := args.Map{"ok": r1.HasIssuesOrEmpty(), "err": r2.HasIssuesOrEmpty()}
+
+	// Assert
 	expected := args.Map{"ok": false, "err": true}
 	expected.ShouldBeEqual(t, 0, "HasIssuesOrEmpty returns empty -- with args", actual)
 }
 
 func Test_Cov8_Result_HasBytes(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{Bytes: []byte(`"hi"`)}
 	r2 := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"has": r1.HasBytes(), "notHas": r2.HasBytes()}
+
+	// Assert
 	expected := args.Map{"has": true, "notHas": false}
 	expected.ShouldBeEqual(t, 0, "HasBytes returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_IsEmptyJsonBytes_EmptyJson(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte("{}")}
+
+	// Act
 	actual := args.Map{"empty": r.IsEmptyJsonBytes()}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyJsonBytes returns empty -- {}", actual)
 }
 
 func Test_Cov8_Result_IsEmpty(t *testing.T) {
+	// Arrange
 	r1 := &corejson.Result{}
 	r2 := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"empty": r1.IsEmpty(), "notEmpty": r2.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"empty": true, "notEmpty": false}
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- with args", actual)
 }
 
 func Test_Cov8_Result_HasAnyItem(t *testing.T) {
+	// Arrange
 	r := corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"has": r.HasAnyItem()}
+
+	// Assert
 	expected := args.Map{"has": true}
 	expected.ShouldBeEqual(t, 0, "HasAnyItem returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_IsEmptyJson(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
+
+	// Act
 	actual := args.Map{"val": r.IsEmptyJson()}
+
+	// Assert
 	expected := args.Map{"val": true}
 	expected.ShouldBeEqual(t, 0, "IsEmptyJson returns empty -- with args", actual)
 }
 
 func Test_Cov8_Result_HasJson(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`)}
+
+	// Act
 	actual := args.Map{"val": r.HasJson()}
+
+	// Assert
 	expected := args.Map{"val": true}
 	expected.ShouldBeEqual(t, 0, "HasJson returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_HasJsonBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`)}
+
+	// Act
 	actual := args.Map{"val": r.HasJsonBytes()}
+
+	// Assert
 	expected := args.Map{"val": true}
 	expected.ShouldBeEqual(t, 0, "HasJsonBytes returns correct value -- with args", actual)
 }
 
 func Test_Cov8_Result_Deserialize_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hello"`)}
 	var s string
 	err := r.Deserialize(&s)
+
+	// Act
 	actual := args.Map{"val": s, "noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"val": "hello", "noErr": true}
 	expected.ShouldBeEqual(t, 0, "Deserialize returns non-empty -- valid", actual)
 }
 
 func Test_Cov8_Result_Unmarshal_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	var s string
 	err := r.Unmarshal(&s)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns nil -- nil", actual)
 }
 
 func Test_Cov8_Result_Unmarshal_WithError(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Error: errors.New("e")}
 	var s string
 	err := r.Unmarshal(&s)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns error -- with error", actual)
 }
 
 func Test_Cov8_Result_Unmarshal_BadJson(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{bad`)}
 	var s string
 	err := r.Unmarshal(&s)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Unmarshal returns correct value -- bad json", actual)
 }

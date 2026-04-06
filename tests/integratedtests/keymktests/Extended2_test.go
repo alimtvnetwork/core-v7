@@ -146,44 +146,69 @@ func Test_KeyJson_ParseInjectUsingJsonMust_Ext2(t *testing.T) {
 }
 
 func Test_KeyJson_AsJsonContractsBinder_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	binder := key.AsJsonContractsBinder()
+
+	// Act
 	actual := args.Map{"result": binder == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_KeyJson_AsJsoner_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	jsoner := key.AsJsoner()
+
+	// Act
 	actual := args.Map{"result": jsoner == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_KeyJson_JsonParseSelfInject_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	jsonResult := key.JsonPtr()
 
 	var target keymk.Key
 	err := target.JsonParseSelfInject(jsonResult)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
 func Test_KeyJson_AsJsonParseSelfInjector_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	injector := key.AsJsonParseSelfInjector()
+
+	// Act
 	actual := args.Map{"result": injector == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_KeyJson_AsJsonMarshaller_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	m := key.AsJsonMarshaller()
+
+	// Act
 	actual := args.Map{"result": m == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
@@ -306,36 +331,61 @@ func Test_FixedLegend_CompileKeepFormatOnEmpty_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_KeyWithLegend_NoLegend_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
+
+	// Act
 	actual := args.Map{"result": k.IsIgnoreLegendAttachments()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should ignore legend attachments", actual)
 }
 
 func Test_KeyWithLegend_Create_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.Create(keymk.JoinerOption, "r", "p", "g")
+
+	// Act
 	actual := args.Map{"result": k.IsIgnoreLegendAttachments()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not ignore legend attachments", actual)
 }
 
 func Test_KeyWithLegend_ShortLegend_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.ShortLegend(keymk.JoinerOption, "r", "p", "g")
+
+	// Act
 	actual := args.Map{"result": k.IsIgnoreLegendAttachments()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not ignore legend attachments", actual)
 }
 
 func Test_KeyWithLegend_NoLegendPackage_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegendPackage(false, keymk.JoinerOption, "r", "g")
+
+	// Act
 	actual := args.Map{"result": k.IsIgnoreLegendAttachments()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should ignore legend", actual)
 }
 
 func Test_KeyWithLegend_Getters_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.All(keymk.JoinerOption, keymk.FullLegends, true, "r", "p", "g", "s")
+
+	// Act
 	actual := args.Map{"result": k.RootName() != "r"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RootName mismatch", actual)
 	actual := args.Map{"result": k.PackageName() != "p"}
@@ -350,329 +400,534 @@ func Test_KeyWithLegend_Getters_Ext2(t *testing.T) {
 }
 
 func Test_KeyWithLegend_Item_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.Item("myitem")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemString("myitem")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemInt_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemInt(42)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemUInt_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemUInt(42)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupItemIntRange_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupItemIntRange("grp", 0, 2)
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_KeyWithLegend_GroupUIntRange_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUIntRange(0, 2)
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_KeyWithLegend_ItemIntRange_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemIntRange(0, 2)
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_KeyWithLegend_ItemUIntRange_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemUIntRange(0, 2)
+
+	// Act
 	actual := args.Map{"result": len(result) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_KeyWithLegend_Group_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.Group("myg")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupString("myg")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_UpToGroup_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.UpToGroup("myg")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_UpToGroupString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.UpToGroupString("myg")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemWithoutUser_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemWithoutUser("item1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemWithoutUserGroup_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemWithoutUserGroup("item1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_ItemWithoutUserStateGroup_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemWithoutUserStateGroup("item1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUser_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUser("g1", "u1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserString("g1", "u1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUInt_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUInt(1)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupByte_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupByte(1)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserByte_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserByte(1, 2)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserItem_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserItem("g1", "u1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupStateUserItem_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupStateUserItem("g1", "s1", "u1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_StateUserItem_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.StateUserItem("s1", "u1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_StateUser_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.StateUser("s1", "u1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupStateUserItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupStateUserItemString("g1", "s1", "u1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserItemString("g1", "u1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserItemUint_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserItemUint(1, 2, 3)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupUserItemInt_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupUserItemInt(1, 2, 3)
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupItem_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupItem("g1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_StateItem_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.StateItem("s1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupItemString("g1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_GroupStateItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.GroupStateItemString("g1", "s1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_StateItemString_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.StateItemString("s1", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_Compile_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.Compile("i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_CompileDefault_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.CompileDefault()
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_CompileUsingJoiner_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.CompileUsingJoiner("/")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_CompileStrings_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.CompileStrings()
+
+	// Act
 	actual := args.Map{"result": len(result) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty slice", actual)
 }
 
 func Test_KeyWithLegend_Strings_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.Strings()
+
+	// Act
 	actual := args.Map{"result": len(result) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty slice", actual)
 }
 
 func Test_KeyWithLegend_CompileItemUsingJoiner_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.CompileItemUsingJoiner("/", "i1")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_KeyWithLegend_Clone_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	cloned := k.Clone()
+
+	// Act
 	actual := args.Map{"result": cloned == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should not be nil", actual)
 }
 
 func Test_KeyWithLegend_CloneUsing_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	cloned := k.CloneUsing("newGroup")
+
+	// Act
 	actual := args.Map{"result": cloned == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CloneUsing should not be nil", actual)
 	actual := args.Map{"result": cloned.GroupName() != "newGroup"}
@@ -681,14 +936,20 @@ func Test_KeyWithLegend_CloneUsing_Ext2(t *testing.T) {
 }
 
 func Test_KeyWithLegend_NilCloneUsing_Ext2(t *testing.T) {
+	// Arrange
 	var k *keymk.KeyWithLegend
 	cloned := k.CloneUsing("newGroup")
+
+	// Act
 	actual := args.Map{"result": cloned != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil CloneUsing should return nil", actual)
 }
 
 func Test_KeyWithLegend_OutputItemsArray_WithLegend_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.All(keymk.JoinerOption, keymk.FullLegends, true, "r", "p", "g", "s")
 	request := keymk.KeyLegendCompileRequest{
 		GroupId:   "g1",
@@ -697,19 +958,28 @@ func Test_KeyWithLegend_OutputItemsArray_WithLegend_Ext2(t *testing.T) {
 		ItemId:    "i1",
 	}
 	result := k.OutputItemsArray(request)
+
+	// Act
 	actual := args.Map{"result": len(result) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty items", actual)
 }
 
 func Test_KeyWithLegend_FinalStrings_WithBrackets_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.BracketJoinerOption, "r", "p", "g")
 	request := keymk.KeyLegendCompileRequest{
 		GroupId: "g1",
 		ItemId:  "i1",
 	}
 	result := k.FinalStrings(request)
+
+	// Act
 	actual := args.Map{"result": len(result) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty items", actual)
 }
@@ -719,46 +989,66 @@ func Test_KeyWithLegend_FinalStrings_WithBrackets_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_Key_JoinUsingOption_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	opt := &keymk.Option{
 		Joiner:           "/",
 		IsSkipEmptyEntry: true,
 	}
 	result := key.JoinUsingOption(opt, "b")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Key_CompileReplaceCurlyKeyMapUsingItems_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Curly("root", "name")
 	compiled := key.CompileReplaceCurlyKeyMapUsingItems(
 		map[string]string{"root": "myroot", "name": "myname"},
 		"extra",
 	)
+
+	// Act
 	actual := args.Map{"result": compiled == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Key_CompileReplaceMapUsingItemsOption_NoCurly_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "name")
 	compiled := key.CompileReplaceMapUsingItemsOption(
 		false,
 		map[string]string{"root": "myroot"},
 	)
+
+	// Act
 	actual := args.Map{"result": compiled == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Key_CompileReplaceMapUsingItemsOption_EmptyMap_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	compiled := key.CompileReplaceMapUsingItemsOption(
 		true,
 		map[string]string{},
 	)
+
+	// Act
 	actual := args.Map{"result": compiled != "root"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'root', got ''", actual)
 }
@@ -768,42 +1058,62 @@ func Test_Key_CompileReplaceMapUsingItemsOption_EmptyMap_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_Key_Finalized_CompileWithAdditional_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	key.Finalized()
 
 	// Compile with additional should append
 	result := key.Compile("b")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Key_Finalized_CompileStringsWithAdditional_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	key.Finalized()
 
 	result := key.CompileStrings("b")
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Key_Finalized_CompileNoAdditional_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	key.Finalized()
 
 	result := key.Compile()
+
+	// Act
 	actual := args.Map{"result": result != "root-a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'root-a', got ''", actual)
 }
 
 func Test_Key_Finalized_CompileStringsNoAdditional_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root", "a")
 	key.Finalized()
 
 	result := key.CompileStrings()
+
+	// Act
 	actual := args.Map{"result": result != "root-a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'root-a', got ''", actual)
 }
@@ -813,17 +1123,27 @@ func Test_Key_Finalized_CompileStringsNoAdditional_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_KeyLegendCompileRequest_NewKeyLegend_Ext2(t *testing.T) {
+	// Arrange
 	req := keymk.KeyLegendCompileRequest{GroupId: "g1"}
 	k := req.NewKeyLegend(keymk.JoinerOption, keymk.ShortLegends, false, "r", "p", "s")
+
+	// Act
 	actual := args.Map{"result": k == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_KeyLegendCompileRequest_NewKeyLegendDefaults_Ext2(t *testing.T) {
+	// Arrange
 	req := keymk.KeyLegendCompileRequest{GroupId: "g1"}
 	k := req.NewKeyLegendDefaults("r", "p", "s")
+
+	// Act
 	actual := args.Map{"result": k == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
@@ -833,50 +1153,85 @@ func Test_KeyLegendCompileRequest_NewKeyLegendDefaults_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_NewKey_PathTemplatePrefixRelativeIdDefault_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.PathTemplatePrefixRelativeIdDefault()
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_PathTemplatePrefixRelativeIdFileDefault_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.PathTemplatePrefixRelativeIdFileDefault()
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_CurlyStrings_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.CurlyStrings("root", "a")
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_SquareBracketsStrings_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.SquareBracketsStrings("root", "a")
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_ParenthesisStrings_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.ParenthesisStrings("root", "a")
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_StringsWithOptions_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.StringsWithOptions(keymk.JoinerOption, "root", "a")
+
+	// Act
 	actual := args.Map{"result": key.Compile() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_NewKey_OptionMain_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.OptionMain(keymk.JoinerOption, "root")
+
+	// Act
 	actual := args.Map{"result": key.Compile() != "root"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'root', got ''", actual)
 }
@@ -886,9 +1241,14 @@ func Test_NewKey_OptionMain_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_KeyWithLegend_ItemEnumByte_Ext2(t *testing.T) {
+	// Arrange
 	k := keymk.NewKeyWithLegend.NoLegend(keymk.JoinerOption, "r", "p", "g")
 	result := k.ItemEnumByte(mockByteEnumNamer{name: "test-item"})
+
+	// Act
 	actual := args.Map{"result": result == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
@@ -898,11 +1258,16 @@ func Test_KeyWithLegend_ItemEnumByte_Ext2(t *testing.T) {
 // ============================================================================
 
 func Test_Key_AppendChainStrings_SkipEmpty_Ext2(t *testing.T) {
+	// Arrange
 	key := keymk.NewKey.Default("root")
 	key.AppendChainStrings("", "a", "", "b")
+
+	// Act
 	actual := args.Map{
 		"length": key.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"length": 2,
 	}

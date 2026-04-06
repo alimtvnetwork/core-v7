@@ -13,8 +13,13 @@ import (
 // ==========================================
 
 func Test_BaseLinesValidators_Empty(t *testing.T) {
+	// Arrange
 	b := corevalidator.BaseLinesValidators{}
+
+	// Act
 	actual := args.Map{"result": b.IsEmptyLinesValidators()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
 	actual := args.Map{"result": b.HasLinesValidators()}
@@ -26,6 +31,7 @@ func Test_BaseLinesValidators_Empty(t *testing.T) {
 }
 
 func Test_BaseLinesValidators_WithItems(t *testing.T) {
+	// Arrange
 	b := corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{
 			{
@@ -38,7 +44,11 @@ func Test_BaseLinesValidators_WithItems(t *testing.T) {
 			},
 		},
 	}
+
+	// Act
 	actual := args.Map{"result": b.IsEmptyLinesValidators()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 	actual := args.Map{"result": b.HasLinesValidators()}
@@ -50,9 +60,14 @@ func Test_BaseLinesValidators_WithItems(t *testing.T) {
 }
 
 func Test_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
+	// Arrange
 	b := corevalidator.BaseLinesValidators{}
 	lv := b.ToLinesValidators()
+
+	// Act
 	actual := args.Map{"result": lv == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	actual := args.Map{"result": lv.IsEmpty()}
@@ -61,6 +76,7 @@ func Test_BaseLinesValidators_ToLinesValidators_Empty(t *testing.T) {
 }
 
 func Test_BaseLinesValidators_ToLinesValidators_NonEmpty(t *testing.T) {
+	// Arrange
 	b := corevalidator.BaseLinesValidators{
 		LinesValidators: []corevalidator.LineValidator{
 			{
@@ -82,7 +98,11 @@ func Test_BaseLinesValidators_ToLinesValidators_NonEmpty(t *testing.T) {
 		},
 	}
 	lv := b.ToLinesValidators()
+
+	// Act
 	actual := args.Map{"result": lv.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
@@ -94,8 +114,13 @@ func Test_BaseLinesValidators_ToLinesValidators_NonEmpty(t *testing.T) {
 // ==========================================
 
 func Test_LinesValidators_New(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(5)
+
+	// Act
 	actual := args.Map{"result": lv == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	actual := args.Map{"result": lv.IsEmpty()}
@@ -104,6 +129,7 @@ func Test_LinesValidators_New(t *testing.T) {
 }
 
 func Test_LinesValidators_Add(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{
 		LineNumber: corevalidator.LineNumber{LineNumber: -1},
@@ -112,7 +138,11 @@ func Test_LinesValidators_Add(t *testing.T) {
 			SearchAs: stringcompareas.Equal,
 		},
 	})
+
+	// Act
 	actual := args.Map{"result": lv.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": lv.HasAnyItem()}
@@ -121,17 +151,27 @@ func Test_LinesValidators_Add(t *testing.T) {
 }
 
 func Test_LinesValidators_AddPtr_Nil(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.AddPtr(nil)
+
+	// Act
 	actual := args.Map{"result": lv.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil add should not increase length", actual)
 }
 
 func Test_LinesValidators_HasIndex(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{})
+
+	// Act
 	actual := args.Map{"result": lv.HasIndex(0)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have index 0", actual)
 	actual := args.Map{"result": lv.HasIndex(1)}
@@ -146,13 +186,19 @@ func Test_LinesValidators_HasIndex(t *testing.T) {
 // ==========================================
 
 func Test_LinesValidators_IsMatchText_Empty(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(0)
+
+	// Act
 	actual := args.Map{"result": lv.IsMatchText("anything", true)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty validators should match any text", actual)
 }
 
 func Test_LinesValidators_IsMatchText_Match(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{
 		LineNumber: corevalidator.LineNumber{LineNumber: -1},
@@ -162,12 +208,17 @@ func Test_LinesValidators_IsMatchText_Match(t *testing.T) {
 			Condition: corevalidator.DefaultDisabledCoreCondition,
 		},
 	})
+
+	// Act
 	actual := args.Map{"result": lv.IsMatchText("hello world", true)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "contains should match", actual)
 }
 
 func Test_LinesValidators_IsMatchText_NoMatch(t *testing.T) {
+	// Arrange
 	lv := corevalidator.NewLinesValidators(1)
 	lv.Add(corevalidator.LineValidator{
 		LineNumber: corevalidator.LineNumber{LineNumber: -1},
@@ -177,7 +228,11 @@ func Test_LinesValidators_IsMatchText_NoMatch(t *testing.T) {
 			Condition: corevalidator.DefaultDisabledCoreCondition,
 		},
 	})
+
+	// Act
 	actual := args.Map{"result": lv.IsMatchText("hello world", true)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "missing substring should not match", actual)
 }
@@ -187,9 +242,14 @@ func Test_LinesValidators_IsMatchText_NoMatch(t *testing.T) {
 // ==========================================
 
 func Test_BaseValidatorCoreCondition_Default_NilPtr(t *testing.T) {
+	// Arrange
 	b := corevalidator.BaseValidatorCoreCondition{}
 	c := b.ValidatorCoreConditionDefault()
+
+	// Act
 	actual := args.Map{"result": c.IsTrimCompare || c.IsUniqueWordOnly}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "default condition should have all false", actual)
 	// should set the ptr
@@ -199,12 +259,17 @@ func Test_BaseValidatorCoreCondition_Default_NilPtr(t *testing.T) {
 }
 
 func Test_BaseValidatorCoreCondition_Default_ExistingPtr(t *testing.T) {
+	// Arrange
 	cond := corevalidator.Condition{IsTrimCompare: true}
 	b := corevalidator.BaseValidatorCoreCondition{
 		ValidatorCoreCondition: &cond,
 	}
 	c := b.ValidatorCoreConditionDefault()
+
+	// Act
 	actual := args.Map{"result": c.IsTrimCompare}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should return existing condition", actual)
 }

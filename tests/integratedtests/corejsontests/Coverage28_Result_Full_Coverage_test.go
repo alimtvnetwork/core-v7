@@ -11,21 +11,31 @@ import (
 // ─── Result.Map ───
 
 func Test_C28_01_Result_Map_NilReceiver(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"result": m == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty map", actual)
 }
 
 func Test_C28_02_Result_Map_WithBytesAndError(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{
 		Bytes:    []byte(`"hello"`),
 		Error:    errors.New("some err"),
 		TypeName: "TestType",
 	}
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"result": m["Type"] != "TestType"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type", actual)
 	actual := args.Map{"result": _, ok := m["Error"]; !ok}
@@ -34,9 +44,14 @@ func Test_C28_02_Result_Map_WithBytesAndError(t *testing.T) {
 }
 
 func Test_C28_03_Result_Map_NoBytesNoError(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{TypeName: "X"}
 	m := r.Map()
+
+	// Act
 	actual := args.Map{"result": _, ok := m["Type"]; !ok}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type key", actual)
 }
@@ -44,9 +59,14 @@ func Test_C28_03_Result_Map_NoBytesNoError(t *testing.T) {
 // ─── Result.DeserializedFieldsToMap ───
 
 func Test_C28_04_Result_DeserializedFieldsToMap_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	m, err := r.DeserializedFieldsToMap()
+
+	// Act
 	actual := args.Map{"result": err != nil || m == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty map on nil", actual)
 }
@@ -82,15 +102,25 @@ func Test_C28_08_Result_SafeFieldsNames(t *testing.T) {
 // ─── Result.BytesTypeName, SafeBytesTypeName ───
 
 func Test_C28_09_BytesTypeName_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"result": r.BytesTypeName() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C28_10_BytesTypeName_Normal(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{TypeName: "Foo"}
+
+	// Act
 	actual := args.Map{"result": r.BytesTypeName() != "Foo"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Foo", actual)
 }
@@ -102,9 +132,14 @@ func Test_C28_11_SafeBytesTypeName_Empty(t *testing.T) {
 }
 
 func Test_C28_12_SafeBytesTypeName_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"x"`), TypeName: "T"}
 	s := r.SafeBytesTypeName()
+
+	// Act
 	actual := args.Map{"result": s != "T"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected T", actual)
 }
@@ -112,24 +147,39 @@ func Test_C28_12_SafeBytesTypeName_Valid(t *testing.T) {
 // ─── Result.SafeString, JsonStringPtr nil branch ───
 
 func Test_C28_13_SafeString(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`"hi"`)}
+
+	// Act
 	actual := args.Map{"result": r.SafeString() != `"hi"`}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C28_14_JsonStringPtr_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
 	s := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"result": *s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 }
 
 func Test_C28_15_JsonStringPtr_NoBytes(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
 	s := r.JsonStringPtr()
+
+	// Act
 	actual := args.Map{"result": *s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -137,17 +187,27 @@ func Test_C28_15_JsonStringPtr_NoBytes(t *testing.T) {
 // ─── Result.PrettyJsonBuffer ───
 
 func Test_C28_16_PrettyJsonBuffer_Empty(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{}
 	buf, err := r.PrettyJsonBuffer("", "  ")
+
+	// Act
 	actual := args.Map{"result": err != nil || buf == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C28_17_PrettyJsonBuffer_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
 	buf, err := r.PrettyJsonBuffer("", "  ")
+
+	// Act
 	actual := args.Map{"result": err != nil || buf.String() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -155,24 +215,39 @@ func Test_C28_17_PrettyJsonBuffer_Valid(t *testing.T) {
 // ─── Result.PrettyJsonString ───
 
 func Test_C28_18_PrettyJsonString_Nil(t *testing.T) {
+	// Arrange
 	var r *corejson.Result
+
+	// Act
 	actual := args.Map{"result": r.PrettyJsonString() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C28_19_PrettyJsonString_Valid(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`{"a":1}`)}
 	s := r.PrettyJsonString()
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C28_20_PrettyJsonString_InvalidJson(t *testing.T) {
+	// Arrange
 	r := &corejson.Result{Bytes: []byte(`not-json{`)}
 	s := r.PrettyJsonString()
+
+	// Act
 	actual := args.Map{"result": s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty on invalid json", actual)
 }

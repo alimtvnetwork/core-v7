@@ -11,28 +11,46 @@ import (
 // ── ReflectNull — reflect.Value input ──
 
 func Test_Cov8_ReflectNull_WithReflectValue(t *testing.T) {
+	// Arrange
 	rv := reflect.ValueOf(42)
+
+	// Act
 	actual := args.Map{"result": isany.ReflectNull(rv)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReflectNull with reflect.Value -- false", actual)
 }
 
 func Test_Cov8_ReflectNull_WithInvalidReflectValue(t *testing.T) {
+	// Arrange
 	rv := reflect.Value{}
+
+	// Act
 	actual := args.Map{"result": isany.ReflectNull(rv)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ReflectNull with invalid reflect.Value -- true", actual)
 }
 
 func Test_Cov8_ReflectNull_NilMap(t *testing.T) {
+	// Arrange
 	var m map[string]string
+
+	// Act
 	actual := args.Map{"result": isany.ReflectNull(m)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ReflectNull nil map -- true", actual)
 }
 
 func Test_Cov8_ReflectNull_NonNilValue(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.ReflectNull(42)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReflectNull non-nil value -- false", actual)
 }
@@ -40,20 +58,31 @@ func Test_Cov8_ReflectNull_NonNilValue(t *testing.T) {
 // ── ReflectValueNull ──
 
 func Test_Cov8_ReflectValueNull_InvalidValue(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.ReflectValueNull(reflect.Value{})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ReflectValueNull invalid -- true", actual)
 }
 
 func Test_Cov8_ReflectValueNull_NilSlice(t *testing.T) {
+	// Arrange
 	var s []int
+
+	// Act
 	actual := args.Map{"result": isany.ReflectValueNull(reflect.ValueOf(s))}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ReflectValueNull nil slice -- true", actual)
 }
 
 func Test_Cov8_ReflectValueNull_NonNilInt(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.ReflectValueNull(reflect.ValueOf(42))}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ReflectValueNull non-nil int -- false", actual)
 }
@@ -61,19 +90,28 @@ func Test_Cov8_ReflectValueNull_NonNilInt(t *testing.T) {
 // ── NullBoth ──
 
 func Test_Cov8_NullBoth_BothNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NullBoth(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NullBoth both nil -- true", actual)
 }
 
 func Test_Cov8_NullBoth_OneDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NullBoth(nil, "x")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NullBoth one defined -- false", actual)
 }
 
 func Test_Cov8_NullBoth_BothDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NullBoth("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NullBoth both defined -- false", actual)
 }
@@ -81,19 +119,28 @@ func Test_Cov8_NullBoth_BothDefined(t *testing.T) {
 // ── DefinedBoth ──
 
 func Test_Cov8_DefinedBoth_BothDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedBoth("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "DefinedBoth both defined -- true", actual)
 }
 
 func Test_Cov8_DefinedBoth_OneNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedBoth("a", nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedBoth one nil -- false", actual)
 }
 
 func Test_Cov8_DefinedBoth_BothNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedBoth(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedBoth both nil -- false", actual)
 }
@@ -101,19 +148,28 @@ func Test_Cov8_DefinedBoth_BothNil(t *testing.T) {
 // ── DefinedAllOf ──
 
 func Test_Cov8_DefinedAllOf_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAllOf()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedAllOf empty -- false", actual)
 }
 
 func Test_Cov8_DefinedAllOf_AllDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAllOf("a", 1, true)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "DefinedAllOf all defined -- true", actual)
 }
 
 func Test_Cov8_DefinedAllOf_OneNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAllOf("a", nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedAllOf one nil -- false", actual)
 }
@@ -121,19 +177,28 @@ func Test_Cov8_DefinedAllOf_OneNil(t *testing.T) {
 // ── DefinedAnyOf ──
 
 func Test_Cov8_DefinedAnyOf_Empty(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAnyOf()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedAnyOf empty -- false", actual)
 }
 
 func Test_Cov8_DefinedAnyOf_OneDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAnyOf(nil, "a")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "DefinedAnyOf one defined -- true", actual)
 }
 
 func Test_Cov8_DefinedAnyOf_AllNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAnyOf(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DefinedAnyOf all nil -- false", actual)
 }
@@ -141,13 +206,19 @@ func Test_Cov8_DefinedAnyOf_AllNil(t *testing.T) {
 // ── AllNull ──
 
 func Test_Cov8_AllNull_AllNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AllNull(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "AllNull all nil -- true", actual)
 }
 
 func Test_Cov8_AllNull_OneDefined(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AllNull(nil, "a")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AllNull one defined -- false", actual)
 }
@@ -155,13 +226,19 @@ func Test_Cov8_AllNull_OneDefined(t *testing.T) {
 // ── AnyNull ──
 
 func Test_Cov8_AnyNull_OneNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AnyNull("a", nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "AnyNull one nil -- true", actual)
 }
 
 func Test_Cov8_AnyNull_NoneNil(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AnyNull("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AnyNull none nil -- false", actual)
 }
@@ -169,10 +246,13 @@ func Test_Cov8_AnyNull_NoneNil(t *testing.T) {
 // ── NotDeepEqual ──
 
 func Test_Cov8_NotDeepEqual(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"diff": isany.NotDeepEqual(1, 2),
 		"same": isany.NotDeepEqual(1, 1),
 	}
+
+	// Assert
 	expected := args.Map{"diff": true, "same": false}
 	expected.ShouldBeEqual(t, 0, "NotDeepEqual returns correct value -- with args", actual)
 }
@@ -180,8 +260,13 @@ func Test_Cov8_NotDeepEqual(t *testing.T) {
 // ── NullLeftRight ──
 
 func Test_Cov8_NullLeftRight_BothNil(t *testing.T) {
+	// Arrange
 	l, r := isany.NullLeftRight(nil, nil)
+
+	// Act
 	actual := args.Map{"left": l, "right": r}
+
+	// Assert
 	expected := args.Map{"left": true, "right": true}
 	expected.ShouldBeEqual(t, 0, "NullLeftRight returns nil -- both nil", actual)
 }
@@ -189,15 +274,25 @@ func Test_Cov8_NullLeftRight_BothNil(t *testing.T) {
 // ── Null with typed nil variants ──
 
 func Test_Cov8_Null_NilChannel(t *testing.T) {
+	// Arrange
 	var ch chan int
+
+	// Act
 	actual := args.Map{"result": isany.Null(ch)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Null nil channel -- true", actual)
 }
 
 func Test_Cov8_Null_NilFunc(t *testing.T) {
+	// Arrange
 	var fn func()
+
+	// Act
 	actual := args.Map{"result": isany.Null(fn)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Null nil func -- true", actual)
 }

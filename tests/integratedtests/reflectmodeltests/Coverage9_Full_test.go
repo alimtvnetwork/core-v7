@@ -12,15 +12,20 @@ import (
 // ── FieldProcessor ──
 
 func Test_C9_FieldProcessor_IsFieldType(t *testing.T) {
+	// Arrange
 	fp := &reflectmodel.FieldProcessor{
 		Name:      "TestField",
 		Index:     0,
 		FieldType: reflect.TypeOf(""),
 	}
+
+	// Act
 	actual := args.Map{
 		"matchStr":  fp.IsFieldType(reflect.TypeOf("")),
 		"matchInt":  fp.IsFieldType(reflect.TypeOf(0)),
 	}
+
+	// Assert
 	expected := args.Map{"matchStr": true, "matchInt": false}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor.IsFieldType returns correct value -- with args", actual)
 
@@ -31,15 +36,20 @@ func Test_C9_FieldProcessor_IsFieldType(t *testing.T) {
 }
 
 func Test_C9_FieldProcessor_IsFieldKind(t *testing.T) {
+	// Arrange
 	fp := &reflectmodel.FieldProcessor{
 		Name:      "TestField",
 		Index:     0,
 		FieldType: reflect.TypeOf(""),
 	}
+
+	// Act
 	actual := args.Map{
 		"matchStr": fp.IsFieldKind(reflect.String),
 		"matchInt": fp.IsFieldKind(reflect.Int),
 	}
+
+	// Assert
 	expected := args.Map{"matchStr": true, "matchInt": false}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor.IsFieldKind returns correct value -- with args", actual)
 
@@ -52,13 +62,18 @@ func Test_C9_FieldProcessor_IsFieldKind(t *testing.T) {
 // ── ReflectValueKind ──
 
 func Test_C9_InvalidReflectValueKindModel(t *testing.T) {
+	// Arrange
 	rvk := reflectmodel.InvalidReflectValueKindModel("test error")
+
+	// Act
 	actual := args.Map{
 		"isInvalid":  rvk.IsInvalid(),
 		"hasError":   rvk.HasError(),
 		"emptyError": rvk.IsEmptyError(),
 		"isValid":    rvk.IsValid,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isInvalid":  true,
 		"hasError":   true,
@@ -69,7 +84,10 @@ func Test_C9_InvalidReflectValueKindModel(t *testing.T) {
 }
 
 func Test_C9_ReflectValueKind_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilRvk *reflectmodel.ReflectValueKind
+
+	// Act
 	actual := args.Map{
 		"isInvalid":  nilRvk.IsInvalid(),
 		"hasError":   nilRvk.HasError(),
@@ -80,6 +98,8 @@ func Test_C9_ReflectValueKind_NilReceiver(t *testing.T) {
 		"typeName":   nilRvk.TypeName(),
 		"ptrIface":   nilRvk.PointerInterface() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isInvalid":  true,
 		"hasError":   false,
@@ -94,11 +114,14 @@ func Test_C9_ReflectValueKind_NilReceiver(t *testing.T) {
 }
 
 func Test_C9_ReflectValueKind_Valid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf("hello"),
 		Kind:            reflect.String,
 	}
+
+	// Act
 	actual := args.Map{
 		"isInvalid":     rvk.IsInvalid(),
 		"hasError":      rvk.HasError(),
@@ -106,6 +129,8 @@ func Test_C9_ReflectValueKind_Valid(t *testing.T) {
 		"pkgNotEmpty":   true, // PkgPath for string is ""
 		"typeNotEmpty":  rvk.TypeName() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"isInvalid":     false,
 		"hasError":      false,
@@ -129,6 +154,7 @@ func Test_C9_ReflectValueKind_Valid(t *testing.T) {
 }
 
 func Test_C9_ReflectValueKind_InvalidNotNil(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         false,
 		FinalReflectVal: reflect.ValueOf(nil),
@@ -136,7 +162,11 @@ func Test_C9_ReflectValueKind_InvalidNotNil(t *testing.T) {
 	}
 	// PointerRv for invalid but non-nil
 	ptrRv := rvk.PointerRv()
+
+	// Act
 	actual := args.Map{"result": ptrRv == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil PointerRv for invalid", actual)
 	// PkgPath for invalid
@@ -173,8 +203,13 @@ func getMethodProcessorFull(name string) *reflectmodel.MethodProcessor {
 }
 
 func Test_C9_MethodProcessor_BasicMethods(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
+
+	// Act
 	actual := args.Map{"result": mp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "method not found", actual)
 
@@ -206,7 +241,10 @@ func Test_C9_MethodProcessor_BasicMethods(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilMp *reflectmodel.MethodProcessor
+
+	// Act
 	actual := args.Map{
 		"hasValidFunc": nilMp.HasValidFunc(),
 		"isInvalid":    nilMp.IsInvalid(),
@@ -216,6 +254,8 @@ func Test_C9_MethodProcessor_NilReceiver(t *testing.T) {
 		"isPrivate":    nilMp.IsPrivateMethod(),
 		"typeNil":      nilMp.GetType() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasValidFunc": false,
 		"isInvalid":    true,
@@ -240,9 +280,14 @@ func Test_C9_MethodProcessor_NilReceiver(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_Invoke_Success(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	results, err := mp.Invoke(testHelper{}, 2, 3)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "invoke err:", actual)
 	actual := args.Map{"result": results[0]}
@@ -251,25 +296,40 @@ func Test_C9_MethodProcessor_Invoke_Success(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_Invoke_ArgsMismatch(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	_, err := mp.Invoke(testHelper{}, 2) // missing arg
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for args mismatch", actual)
 }
 
 func Test_C9_MethodProcessor_Invoke_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilMp *reflectmodel.MethodProcessor
 	_, err := nilMp.Invoke()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil invoke", actual)
 }
 
 func Test_C9_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Greet")
 	first, err := mp.GetFirstResponseOfInvoke(testHelper{}, "world")
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err:", actual)
 	actual := args.Map{"result": first}
@@ -278,9 +338,14 @@ func Test_C9_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	result, err := mp.InvokeResultOfIndex(0, testHelper{}, 1, 2)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err:", actual)
 	actual := args.Map{"result": result}
@@ -289,9 +354,14 @@ func Test_C9_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_InvokeError(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Fail")
 	funcErr, procErr := mp.InvokeError(testHelper{})
+
+	// Act
 	actual := args.Map{"result": procErr}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "proc err:", actual)
 	actual := args.Map{"result": funcErr == nil}
@@ -300,9 +370,14 @@ func Test_C9_MethodProcessor_InvokeError(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_InvokeFirstAndError(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("TwoReturns")
 	first, funcErr, procErr := mp.InvokeFirstAndError(testHelper{}, 5)
+
+	// Act
 	actual := args.Map{"result": procErr}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "proc err:", actual)
 	actual := args.Map{"result": funcErr}
@@ -314,9 +389,14 @@ func Test_C9_MethodProcessor_InvokeFirstAndError(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_InvokeFirstAndError_TooFewReturns(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add") // only 1 return
 	_, _, procErr := mp.InvokeFirstAndError(testHelper{}, 1, 2)
+
+	// Act
 	actual := args.Map{"result": procErr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for too few returns", actual)
 }
@@ -330,9 +410,14 @@ func Test_C9_MethodProcessor_InvokeFirstAndError_WithError(t *testing.T) {
 // ── MethodProcessor — GetInArgsTypes / GetOutArgsTypes / GetInArgsTypesNames ──
 
 func Test_C9_MethodProcessor_ArgTypes(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	inTypes := mp.GetInArgsTypes()
+
+	// Act
 	actual := args.Map{"result": len(inTypes)}
+
+	// Assert
 	expected := args.Map{"result": 3}
 	expected.ShouldBeEqual(t, 0, "expected 3 in args", actual)
 	// second call should use cache
@@ -361,12 +446,17 @@ func Test_C9_MethodProcessor_ArgTypes(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_ZeroArgsMethod(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Fail")
 	// Fail has receiver only → ArgsCount=1, but GetInArgsTypes returns 1
 	inTypes := mp.GetInArgsTypes()
 	outTypes := mp.GetOutArgsTypes()
 	names := mp.GetInArgsTypesNames()
+
+	// Act
 	actual := args.Map{"result": len(inTypes)}
+
+	// Assert
 	expected := args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "expected 1 in arg (receiver)", actual)
 	actual := args.Map{"result": len(outTypes)}
@@ -380,11 +470,13 @@ func Test_C9_MethodProcessor_ZeroArgsMethod(t *testing.T) {
 // ── MethodProcessor — IsEqual / IsNotEqual ──
 
 func Test_C9_MethodProcessor_IsEqual(t *testing.T) {
+	// Arrange
 	mp1 := getMethodProcessorFull("Add")
 	mp2 := getMethodProcessorFull("Add")
 	mp3 := getMethodProcessorFull("Greet")
 	var nilMp *reflectmodel.MethodProcessor
 
+	// Act
 	actual := args.Map{
 		"sameEqual":    mp1.IsEqual(mp2),
 		"diffNotEqual": mp1.IsNotEqual(mp3),
@@ -393,6 +485,8 @@ func Test_C9_MethodProcessor_IsEqual(t *testing.T) {
 		"nilRight":     mp1.IsEqual(nil),
 		"selfEqual":    mp1.IsEqual(mp1),
 	}
+
+	// Assert
 	expected := args.Map{
 		"sameEqual":    true,
 		"diffNotEqual": true,
@@ -407,9 +501,14 @@ func Test_C9_MethodProcessor_IsEqual(t *testing.T) {
 // ── MethodProcessor — VerifyInArgs / VerifyOutArgs / ValidateMethodArgs ──
 
 func Test_C9_MethodProcessor_VerifyInArgs(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	ok, err := mp.VerifyInArgs([]any{testHelper{}, 1, 2})
+
+	// Act
 	actual := args.Map{"result": !ok || err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 
@@ -423,17 +522,27 @@ func Test_C9_MethodProcessor_VerifyInArgs(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_VerifyOutArgs(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	ok, err := mp.VerifyOutArgs([]any{0})
+
+	// Act
 	actual := args.Map{"result": !ok || err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_C9_MethodProcessor_ValidateMethodArgs(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	err := mp.ValidateMethodArgs([]any{testHelper{}, 1, 2})
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
@@ -446,10 +555,15 @@ func Test_C9_MethodProcessor_ValidateMethodArgs(t *testing.T) {
 // ── MethodProcessor — InArgsVerifyRv / OutArgsVerifyRv ──
 
 func Test_C9_MethodProcessor_InArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	types := []reflect.Type{reflect.TypeOf(testHelper{}), reflect.TypeOf(0), reflect.TypeOf(0)}
 	ok, err := mp.InArgsVerifyRv(types)
+
+	// Act
 	actual := args.Map{"result": !ok || err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err=", actual)
 
@@ -464,9 +578,14 @@ func Test_C9_MethodProcessor_InArgsVerifyRv(t *testing.T) {
 }
 
 func Test_C9_MethodProcessor_OutArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessorFull("Add")
 	ok, err := mp.OutArgsVerifyRv([]reflect.Type{reflect.TypeOf(0)})
+
+	// Act
 	actual := args.Map{"result": !ok || err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err=", actual)
 }

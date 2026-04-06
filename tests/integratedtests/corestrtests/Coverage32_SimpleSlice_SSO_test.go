@@ -12,9 +12,14 @@ import (
 
 func Test_C32_SS_Add(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Add", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
 		ss.Add("a")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -29,10 +34,15 @@ func Test_C32_SS_AddSplit(t *testing.T) {
 
 func Test_C32_SS_AddIf(t *testing.T) {
 	safeTest(t, "Test_C32_SS_AddIf", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
 		ss.AddIf(false, "skip")
 		ss.AddIf(true, "add")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -72,8 +82,13 @@ func Test_C32_SS_AppendFmtIf(t *testing.T) {
 
 func Test_C32_SS_Length(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Length", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var n *corestr.SimpleSlice
@@ -85,8 +100,13 @@ func Test_C32_SS_Length(t *testing.T) {
 
 func Test_C32_SS_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C32_SS_IsEmpty", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
+
+		// Act
 		actual := args.Map{"result": ss.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -94,8 +114,13 @@ func Test_C32_SS_IsEmpty(t *testing.T) {
 
 func Test_C32_SS_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_C32_SS_HasAnyItem", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.HasAnyItem()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -103,8 +128,13 @@ func Test_C32_SS_HasAnyItem(t *testing.T) {
 
 func Test_C32_SS_First(t *testing.T) {
 	safeTest(t, "Test_C32_SS_First", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.First() != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
@@ -112,8 +142,13 @@ func Test_C32_SS_First(t *testing.T) {
 
 func Test_C32_SS_Last(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Last", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
+
+		// Act
 		actual := args.Map{"result": ss.Last() != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
@@ -276,8 +311,13 @@ func Test_C32_SS_Reverse(t *testing.T) {
 
 func Test_C32_SS_IsContains(t *testing.T) {
 	safeTest(t, "Test_C32_SS_IsContains", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
+
+		// Act
 		actual := args.Map{"result": ss.IsContains("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -304,6 +344,7 @@ func Test_C32_NSSC_Cap(t *testing.T)     { _ = corestr.New.SimpleSlice.Cap(5) }
 func Test_C32_NSSC_Default(t *testing.T) { _ = corestr.New.SimpleSlice.Default() }
 func Test_C32_NSSC_Deserialize(t *testing.T) {
 	safeTest(t, "Test_C32_NSSC_Deserialize", func() {
+		// Arrange
 		_, _ = corestr.New.SimpleSlice.Deserialize([]byte(`["a"]`))
 		_, _ = corestr.New.SimpleSlice.Deserialize([]byte(`invalid`))
 	})
@@ -368,7 +409,11 @@ func Test_C32_NSSC_ByLen(t *testing.T)              { _ = corestr.New.SimpleSlic
 func Test_C32_SSO_Value(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_Value", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hello")
+
+		// Act
 		actual := args.Map{"result": sso.Value() != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})

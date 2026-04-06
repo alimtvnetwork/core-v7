@@ -8,32 +8,52 @@ import (
 )
 
 func Test_Cov_ExcludingOptions_SetSecure_Nil(t *testing.T) {
+	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.SetSecure()
+
+	// Act
 	actual := args.Map{"result": result == nil || !result.IsSecureText}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected secure", actual)
 }
 
 func Test_Cov_ExcludingOptions_SetPlainText_Nil(t *testing.T) {
+	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.SetPlainText()
+
+	// Act
 	actual := args.Map{"result": result == nil || result.IsSecureText}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected plain text", actual)
 }
 
 func Test_Cov_ExcludingOptions_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
 	result := opt.ClonePtr()
+
+	// Act
 	actual := args.Map{"result": result == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov_ExcludingOptions_IsEmpty(t *testing.T) {
+	// Arrange
 	opt := &coretaskinfo.ExcludingOptions{}
+
+	// Act
 	actual := args.Map{"result": opt.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	opt.IsExcludeRootName = true
@@ -43,15 +63,25 @@ func Test_Cov_ExcludingOptions_IsEmpty(t *testing.T) {
 }
 
 func Test_Cov_ExcludingOptions_IsZero(t *testing.T) {
+	// Arrange
 	opt := &coretaskinfo.ExcludingOptions{}
+
+	// Act
 	actual := args.Map{"result": opt.IsZero()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected zero", actual)
 }
 
 func Test_Cov_ExcludingOptions_AllIncludes(t *testing.T) {
+	// Arrange
 	var opt *coretaskinfo.ExcludingOptions
+
+	// Act
 	actual := args.Map{"result": opt.IsIncludeRootName()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include root name", actual)
 	actual := args.Map{"result": opt.IsIncludeDescription()}
@@ -84,17 +114,27 @@ func Test_Cov_ExcludingOptions_AllIncludes(t *testing.T) {
 }
 
 func Test_Cov_ExcludingOptions_Clone(t *testing.T) {
+	// Arrange
 	opt := coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
 	cloned := opt.Clone()
+
+	// Act
 	actual := args.Map{"result": cloned.IsExcludeRootName}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected cloned", actual)
 }
 
 func Test_Cov_ExcludingOptions_ToPtr_ToNonPtr(t *testing.T) {
+	// Arrange
 	opt := coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
 	p := opt.ToPtr()
+
+	// Act
 	actual := args.Map{"result": p == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	np := opt.ToNonPtr()

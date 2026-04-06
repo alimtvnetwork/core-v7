@@ -36,11 +36,14 @@ func Test_Cov2_Byte_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_Integer_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer(5, 5),
 		"less":    corecmp.Integer(3, 5),
 		"greater": corecmp.Integer(5, 3),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":   corecomparator.Equal,
 		"less":    corecomparator.LeftLess,
@@ -50,11 +53,14 @@ func Test_Cov2_Integer_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_Integer16_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer16(5, 5),
 		"less":    corecmp.Integer16(3, 5),
 		"greater": corecmp.Integer16(5, 3),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":   corecomparator.Equal,
 		"less":    corecomparator.LeftLess,
@@ -64,11 +70,14 @@ func Test_Cov2_Integer16_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_Integer32_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer32(5, 5),
 		"less":    corecmp.Integer32(3, 5),
 		"greater": corecmp.Integer32(5, 3),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":   corecomparator.Equal,
 		"less":    corecomparator.LeftLess,
@@ -78,11 +87,14 @@ func Test_Cov2_Integer32_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_Integer64_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer64(5, 5),
 		"less":    corecmp.Integer64(3, 5),
 		"greater": corecmp.Integer64(5, 3),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":   corecomparator.Equal,
 		"less":    corecomparator.LeftLess,
@@ -92,11 +104,14 @@ func Test_Cov2_Integer64_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_Integer8_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":   corecmp.Integer8(5, 5),
 		"less":    corecmp.Integer8(3, 5),
 		"greater": corecmp.Integer8(5, 3),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":   corecomparator.Equal,
 		"less":    corecomparator.LeftLess,
@@ -126,11 +141,14 @@ func Test_Cov2_Time_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_VersionSliceByte_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":      corecmp.VersionSliceByte([]byte{1, 2}, []byte{1, 2}),
 		"leftLess":   corecmp.VersionSliceByte([]byte{1}, []byte{1, 2}),
 		"leftGreater": corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2}),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":      corecomparator.Equal,
 		"leftLess":   corecomparator.LeftLess,
@@ -140,11 +158,14 @@ func Test_Cov2_VersionSliceByte_AllBranches(t *testing.T) {
 }
 
 func Test_Cov2_VersionSliceInteger_AllBranches(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"equal":      corecmp.VersionSliceInteger([]int{1, 2}, []int{1, 2}),
 		"leftLess":   corecmp.VersionSliceInteger([]int{1}, []int{1, 2}),
 		"leftGreater": corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2}),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal":      corecomparator.Equal,
 		"leftLess":   corecomparator.LeftLess,

@@ -10,7 +10,10 @@ import (
 // ── Null / NotNull / Defined ──
 
 func Test_Null_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.Null(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be null", actual)
 	actual := args.Map{"result": isany.Null(42)}
@@ -52,7 +55,10 @@ func Test_Null_Coverage(t *testing.T) {
 }
 
 func Test_NotNull_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NotNull(42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "42 should be not null", actual)
 	actual := args.Map{"result": isany.NotNull(nil)}
@@ -61,7 +67,10 @@ func Test_NotNull_Coverage(t *testing.T) {
 }
 
 func Test_Defined_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.Defined(42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "42 should be defined", actual)
 	actual := args.Map{"result": isany.Defined(nil)}
@@ -72,7 +81,10 @@ func Test_Defined_Coverage(t *testing.T) {
 // ── AllNull / AnyNull ──
 
 func Test_AllNull_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AllNull(nil, nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "all nils should be AllNull", actual)
 	actual := args.Map{"result": isany.AllNull(nil, 42, nil)}
@@ -84,7 +96,10 @@ func Test_AllNull_Coverage(t *testing.T) {
 }
 
 func Test_AnyNull_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AnyNull(nil, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be AnyNull with nil present", actual)
 	actual := args.Map{"result": isany.AnyNull()}
@@ -98,7 +113,10 @@ func Test_AnyNull_Coverage(t *testing.T) {
 // ── Zero / AllZero / AnyZero ──
 
 func Test_Zero_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.Zero(0)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "0 should be zero", actual)
 	actual := args.Map{"result": isany.Zero("")}
@@ -113,7 +131,10 @@ func Test_Zero_Coverage(t *testing.T) {
 }
 
 func Test_AllZero_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AllZero(0, "", nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "all zeros should be AllZero", actual)
 	actual := args.Map{"result": isany.AllZero(0, 1)}
@@ -125,7 +146,10 @@ func Test_AllZero_Coverage(t *testing.T) {
 }
 
 func Test_AnyZero_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.AnyZero(0, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be AnyZero", actual)
 	actual := args.Map{"result": isany.AnyZero(42, "hello")}
@@ -139,7 +163,10 @@ func Test_AnyZero_Coverage(t *testing.T) {
 // ── DeepEqual / NotDeepEqual ──
 
 func Test_DeepEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DeepEqual(42, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "42 == 42", actual)
 	actual := args.Map{"result": isany.DeepEqual(42, 43)}
@@ -151,7 +178,10 @@ func Test_DeepEqual_Coverage(t *testing.T) {
 }
 
 func Test_NotDeepEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NotDeepEqual(42, 43)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "42 != 43", actual)
 	actual := args.Map{"result": isany.NotDeepEqual(42, 42)}
@@ -162,7 +192,10 @@ func Test_NotDeepEqual_Coverage(t *testing.T) {
 // ── DeepEqualAllItems ──
 
 func Test_DeepEqualAllItems_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DeepEqualAllItems(42, 42, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "all 42 should be equal", actual)
 	actual := args.Map{"result": isany.DeepEqualAllItems(42, 43, 42)}
@@ -173,7 +206,10 @@ func Test_DeepEqualAllItems_Coverage(t *testing.T) {
 // ── DefinedBoth / NullBoth / DefinedAllOf / DefinedAnyOf ──
 
 func Test_DefinedBoth_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedBoth(42, "hello")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both defined should be true", actual)
 	actual := args.Map{"result": isany.DefinedBoth(nil, "hello")}
@@ -185,7 +221,10 @@ func Test_DefinedBoth_Coverage(t *testing.T) {
 }
 
 func Test_NullBoth_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NullBoth(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be true", actual)
 	actual := args.Map{"result": isany.NullBoth(nil, 42)}
@@ -194,7 +233,10 @@ func Test_NullBoth_Coverage(t *testing.T) {
 }
 
 func Test_DefinedAllOf_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAllOf(42, "hello")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "all defined should be true", actual)
 	actual := args.Map{"result": isany.DefinedAllOf(42, nil)}
@@ -203,7 +245,10 @@ func Test_DefinedAllOf_Coverage(t *testing.T) {
 }
 
 func Test_DefinedAnyOf_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.DefinedAnyOf(nil, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "one defined should be true", actual)
 	actual := args.Map{"result": isany.DefinedAnyOf(nil, nil)}
@@ -214,8 +259,13 @@ func Test_DefinedAnyOf_Coverage(t *testing.T) {
 // ── DefinedItems ──
 
 func Test_DefinedItems_Coverage(t *testing.T) {
+	// Arrange
 	_, items := isany.DefinedItems(nil, 42, nil, "hello")
+
+	// Act
 	actual := args.Map{"result": len(items) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 defined items", actual)
 }
@@ -223,8 +273,13 @@ func Test_DefinedItems_Coverage(t *testing.T) {
 // ── DefinedLeftRight ──
 
 func Test_DefinedLeftRight_Coverage(t *testing.T) {
+	// Arrange
 	leftDef, rightDef := isany.DefinedLeftRight(42, nil)
+
+	// Act
 	actual := args.Map{"result": leftDef}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "left should be defined", actual)
 	actual := args.Map{"result": rightDef}
@@ -235,8 +290,13 @@ func Test_DefinedLeftRight_Coverage(t *testing.T) {
 // ── NullLeftRight ──
 
 func Test_NullLeftRight_Coverage(t *testing.T) {
+	// Arrange
 	leftNull, rightNull := isany.NullLeftRight(nil, 42)
+
+	// Act
 	actual := args.Map{"result": leftNull}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "left should be null", actual)
 	actual := args.Map{"result": rightNull}
@@ -247,7 +307,10 @@ func Test_NullLeftRight_Coverage(t *testing.T) {
 // ── StringEqual ──
 
 func Test_StringEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.StringEqual(42, 42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same values should be string equal", actual)
 	actual := args.Map{"result": isany.StringEqual(42, 43)}
@@ -258,7 +321,10 @@ func Test_StringEqual_Coverage(t *testing.T) {
 // ── JsonEqual / JsonMismatch ──
 
 func Test_JsonEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.JsonEqual("hello", "hello")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same strings should be json equal", actual)
 	actual := args.Map{"result": isany.JsonEqual("hello", "world")}
@@ -281,7 +347,10 @@ func Test_JsonEqual_Coverage(t *testing.T) {
 }
 
 func Test_JsonMismatch_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.JsonMismatch("hello", "world")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "different should mismatch", actual)
 	actual := args.Map{"result": isany.JsonMismatch("hello", "hello")}
@@ -292,7 +361,10 @@ func Test_JsonMismatch_Coverage(t *testing.T) {
 // ── TypeSame ──
 
 func Test_TypeSame_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.TypeSame(42, 43)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both int should be same type", actual)
 	actual := args.Map{"result": isany.TypeSame(42, "hello")}
@@ -303,8 +375,13 @@ func Test_TypeSame_Coverage(t *testing.T) {
 // ── Pointer / Function / FuncOnly ──
 
 func Test_Pointer_Coverage(t *testing.T) {
+	// Arrange
 	val := 42
+
+	// Act
 	actual := args.Map{"result": isany.Pointer(&val)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "pointer should be pointer", actual)
 	actual := args.Map{"result": isany.Pointer(42)}
@@ -313,9 +390,14 @@ func Test_Pointer_Coverage(t *testing.T) {
 }
 
 func Test_Function_Coverage(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	isFunc, name := isany.Function(fn)
+
+	// Act
 	actual := args.Map{"result": isFunc}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "func should be function", actual)
 	actual := args.Map{"result": name == ""}
@@ -334,8 +416,13 @@ func Test_Function_Coverage(t *testing.T) {
 }
 
 func Test_FuncOnly_Coverage(t *testing.T) {
+	// Arrange
 	fn := func() {}
+
+	// Act
 	actual := args.Map{"result": isany.FuncOnly(fn)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "func should return true", actual)
 	actual := args.Map{"result": isany.FuncOnly(42)}
@@ -346,7 +433,10 @@ func Test_FuncOnly_Coverage(t *testing.T) {
 // ── PrimitiveType / NumberType / FloatingPointType / PositiveIntegerType ──
 
 func Test_PrimitiveType_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.PrimitiveType(42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "int should be primitive", actual)
 	actual := args.Map{"result": isany.PrimitiveType("hello")}
@@ -366,7 +456,10 @@ func Test_PrimitiveType_Coverage(t *testing.T) {
 }
 
 func Test_NumberType_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.NumberType(42)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "int should be number", actual)
 	actual := args.Map{"result": isany.NumberType(3.14)}
@@ -378,7 +471,10 @@ func Test_NumberType_Coverage(t *testing.T) {
 }
 
 func Test_FloatingPointType_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.FloatingPointType(3.14)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "float64 should be floating point", actual)
 	actual := args.Map{"result": isany.FloatingPointType(42)}
@@ -387,7 +483,10 @@ func Test_FloatingPointType_Coverage(t *testing.T) {
 }
 
 func Test_PositiveIntegerType_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": isany.PositiveIntegerType(uint(42))}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "uint should be positive integer", actual)
 	actual := args.Map{"result": isany.PositiveIntegerType(42)}
@@ -408,8 +507,13 @@ func Test_Conclusive_Coverage(t *testing.T) {
 // ── ReflectNull / ReflectNotNull / ReflectValueNull ──
 
 func Test_ReflectNull_Coverage(t *testing.T) {
+	// Arrange
 	var ptr *int
+
+	// Act
 	actual := args.Map{"result": isany.ReflectNull(ptr)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil ptr should be reflect null", actual)
 
@@ -420,8 +524,13 @@ func Test_ReflectNull_Coverage(t *testing.T) {
 }
 
 func Test_ReflectNotNull_Coverage(t *testing.T) {
+	// Arrange
 	val := 42
+
+	// Act
 	actual := args.Map{"result": isany.ReflectNotNull(&val)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "non-nil should be reflect not null", actual)
 }

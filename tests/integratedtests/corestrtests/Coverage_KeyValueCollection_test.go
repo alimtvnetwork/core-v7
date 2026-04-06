@@ -15,8 +15,13 @@ import (
 
 func Test_CovKVP_01_Basic(t *testing.T) {
 	safeTest(t, "Test_CovKVP_01_Basic", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "name", Value: "alice"}
+
+		// Act
 		actual := args.Map{"result": kv.KeyName() != "name"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected name", actual)
 		actual := args.Map{"result": kv.VariableName() != "name"}
@@ -36,8 +41,13 @@ func Test_CovKVP_01_Basic(t *testing.T) {
 
 func Test_CovKVP_02_IsKey_IsVal_Is(t *testing.T) {
 	safeTest(t, "Test_CovKVP_02_IsKey_IsVal_Is", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
+
+		// Act
 		actual := args.Map{"result": kv.IsKey("k")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": kv.IsVal("v")}
@@ -54,8 +64,13 @@ func Test_CovKVP_02_IsKey_IsVal_Is(t *testing.T) {
 
 func Test_CovKVP_03_IsEmpty_Has(t *testing.T) {
 	safeTest(t, "Test_CovKVP_03_IsEmpty_Has", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
+
+		// Act
 		actual := args.Map{"result": kv.IsKeyEmpty()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		actual := args.Map{"result": kv.IsValueEmpty()}
@@ -89,8 +104,13 @@ func Test_CovKVP_03_IsEmpty_Has(t *testing.T) {
 
 func Test_CovKVP_04_Trim(t *testing.T) {
 	safeTest(t, "Test_CovKVP_04_Trim", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: " k ", Value: " v "}
+
+		// Act
 		actual := args.Map{"result": kv.TrimKey() != "k"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected k", actual)
 		actual := args.Map{"result": kv.TrimValue() != "v"}
@@ -101,8 +121,13 @@ func Test_CovKVP_04_Trim(t *testing.T) {
 
 func Test_CovKVP_05_ValueBool(t *testing.T) {
 	safeTest(t, "Test_CovKVP_05_ValueBool", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "true"}
+
+		// Act
 		actual := args.Map{"result": kv.ValueBool()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		kv2 := corestr.KeyValuePair{Key: "k", Value: ""}
@@ -118,8 +143,13 @@ func Test_CovKVP_05_ValueBool(t *testing.T) {
 
 func Test_CovKVP_06_ValueInt_ValueDefInt(t *testing.T) {
 	safeTest(t, "Test_CovKVP_06_ValueInt_ValueDefInt", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "42"}
+
+		// Act
 		actual := args.Map{"result": kv.ValueInt(0) != 42}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 		actual := args.Map{"result": kv.ValueDefInt() != 42}
@@ -137,8 +167,13 @@ func Test_CovKVP_06_ValueInt_ValueDefInt(t *testing.T) {
 
 func Test_CovKVP_07_ValueByte_ValueDefByte(t *testing.T) {
 	safeTest(t, "Test_CovKVP_07_ValueByte_ValueDefByte", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "100"}
+
+		// Act
 		actual := args.Map{"result": kv.ValueByte(0) != 100}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 100", actual)
 		actual := args.Map{"result": kv.ValueDefByte() != 100}
@@ -159,8 +194,13 @@ func Test_CovKVP_07_ValueByte_ValueDefByte(t *testing.T) {
 
 func Test_CovKVP_08_ValueFloat64_ValueDefFloat64(t *testing.T) {
 	safeTest(t, "Test_CovKVP_08_ValueFloat64_ValueDefFloat64", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "3.14"}
+
+		// Act
 		actual := args.Map{"result": kv.ValueFloat64(0) != 3.14}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
 		actual := args.Map{"result": kv.ValueDefFloat64() != 3.14}
@@ -175,9 +215,14 @@ func Test_CovKVP_08_ValueFloat64_ValueDefFloat64(t *testing.T) {
 
 func Test_CovKVP_09_ValueValid_ValueValidOptions(t *testing.T) {
 	safeTest(t, "Test_CovKVP_09_ValueValid_ValueValidOptions", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		vv := kv.ValueValid()
+
+		// Act
 		actual := args.Map{"result": vv.IsValid || vv.Value != "v"}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 		vv2 := kv.ValueValidOptions(false, "msg")
@@ -189,8 +234,13 @@ func Test_CovKVP_09_ValueValid_ValueValidOptions(t *testing.T) {
 
 func Test_CovKVP_10_FormatString_String_Compile(t *testing.T) {
 	safeTest(t, "Test_CovKVP_10_FormatString_String_Compile", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
+
+		// Act
 		actual := args.Map{"result": kv.FormatString("%s=%s") != "k=v"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected k=v", actual)
 		_ = kv.String()
@@ -200,11 +250,16 @@ func Test_CovKVP_10_FormatString_String_Compile(t *testing.T) {
 
 func Test_CovKVP_11_Json_Serialize(t *testing.T) {
 	safeTest(t, "Test_CovKVP_11_Json_Serialize", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		_ = kv.Json()
 		_ = kv.JsonPtr()
 		_, err := kv.Serialize()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		_ = kv.SerializeMust()
@@ -213,9 +268,14 @@ func Test_CovKVP_11_Json_Serialize(t *testing.T) {
 
 func Test_CovKVP_12_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_CovKVP_12_Clear_Dispose", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		kv.Clear()
+
+		// Act
 		actual := args.Map{"result": kv.Key != "" || kv.Value != ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected cleared", actual)
 		kv2 := corestr.KeyValuePair{Key: "k", Value: "v"}
@@ -227,8 +287,13 @@ func Test_CovKVP_12_Clear_Dispose(t *testing.T) {
 
 func Test_CovKVC_01_IsEmpty_Length_Count(t *testing.T) {
 	safeTest(t, "Test_CovKVC_01_IsEmpty_Length_Count", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
+
+		// Act
 		actual := args.Map{"result": kvc.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": kvc.Length() != 0}
@@ -249,8 +314,13 @@ func Test_CovKVC_01_IsEmpty_Length_Count(t *testing.T) {
 
 func Test_CovKVC_02_HasAnyItem_LastIndex_HasIndex(t *testing.T) {
 	safeTest(t, "Test_CovKVC_02_HasAnyItem_LastIndex_HasIndex", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
+
+		// Act
 		actual := args.Map{"result": kvc.HasAnyItem()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		kvc.Add("k", "v")
@@ -271,8 +341,13 @@ func Test_CovKVC_02_HasAnyItem_LastIndex_HasIndex(t *testing.T) {
 
 func Test_CovKVC_03_First_Last_OrDefault(t *testing.T) {
 	safeTest(t, "Test_CovKVC_03_First_Last_OrDefault", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
+
+		// Act
 		actual := args.Map{"result": kvc.FirstOrDefault() != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		actual := args.Map{"result": kvc.LastOrDefault() != nil}
@@ -297,10 +372,15 @@ func Test_CovKVC_03_First_Last_OrDefault(t *testing.T) {
 
 func Test_CovKVC_04_Add_AddIf(t *testing.T) {
 	safeTest(t, "Test_CovKVC_04_Add_AddIf", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		kvc.AddIf(false, "b", "2")
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kvc.AddIf(true, "b", "2")
@@ -312,9 +392,14 @@ func Test_CovKVC_04_Add_AddIf(t *testing.T) {
 
 func Test_CovKVC_05_AddStringBySplit_AddStringBySplitTrim(t *testing.T) {
 	safeTest(t, "Test_CovKVC_05_AddStringBySplit_AddStringBySplitTrim", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.AddStringBySplit("=", "key=value")
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kvc.AddStringBySplitTrim("=", " key = value ")
@@ -326,12 +411,17 @@ func Test_CovKVC_05_AddStringBySplit_AddStringBySplitTrim(t *testing.T) {
 
 func Test_CovKVC_06_Adds(t *testing.T) {
 	safeTest(t, "Test_CovKVC_06_Adds", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Adds(
 			corestr.KeyValuePair{Key: "a", Value: "1"},
 			corestr.KeyValuePair{Key: "b", Value: "2"},
 		)
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		kvc.Adds()
@@ -340,9 +430,14 @@ func Test_CovKVC_06_Adds(t *testing.T) {
 
 func Test_CovKVC_07_AddMap_AddHashsetMap_AddHashset(t *testing.T) {
 	safeTest(t, "Test_CovKVC_07_AddMap_AddHashsetMap_AddHashset", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.AddMap(map[string]string{"a": "1"})
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kvc.AddMap(nil)
@@ -362,11 +457,16 @@ func Test_CovKVC_07_AddMap_AddHashsetMap_AddHashset(t *testing.T) {
 
 func Test_CovKVC_08_AddsHashmap_AddsHashmaps(t *testing.T) {
 	safeTest(t, "Test_CovKVC_08_AddsHashmap_AddsHashmaps", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		hm := corestr.Empty.Hashmap()
 		hm.AddOrUpdate("a", "1")
 		kvc.AddsHashmap(hm)
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kvc.AddsHashmap(nil)
@@ -377,9 +477,14 @@ func Test_CovKVC_08_AddsHashmap_AddsHashmaps(t *testing.T) {
 
 func Test_CovKVC_09_HasKey_IsContains_Get(t *testing.T) {
 	safeTest(t, "Test_CovKVC_09_HasKey_IsContains_Get", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
+
+		// Act
 		actual := args.Map{"result": kvc.HasKey("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": kvc.HasKey("z")}
@@ -401,11 +506,16 @@ func Test_CovKVC_09_HasKey_IsContains_Get(t *testing.T) {
 
 func Test_CovKVC_10_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 	safeTest(t, "Test_CovKVC_10_AllKeys_AllKeysSorted_AllValues", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("b", "2")
 		kvc.Add("a", "1")
 		keys := kvc.AllKeys()
+
+		// Act
 		actual := args.Map{"result": len(keys) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		sorted := kvc.AllKeysSorted()
@@ -421,8 +531,13 @@ func Test_CovKVC_10_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 
 func Test_CovKVC_11_SafeValueAt_SafeValuesAtIndexes(t *testing.T) {
 	safeTest(t, "Test_CovKVC_11_SafeValueAt_SafeValuesAtIndexes", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
+
+		// Act
 		actual := args.Map{"result": kvc.SafeValueAt(0) != ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		kvc.Add("a", "1")
@@ -446,12 +561,17 @@ func Test_CovKVC_11_SafeValueAt_SafeValuesAtIndexes(t *testing.T) {
 
 func Test_CovKVC_12_Find(t *testing.T) {
 	safeTest(t, "Test_CovKVC_12_Find", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		// empty
 		r := kvc.Find(func(i int, kv corestr.KeyValuePair) (corestr.KeyValuePair, bool, bool) {
 			return kv, true, false
 		})
+
+		// Act
 		actual := args.Map{"result": len(r) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		kvc.Add("a", "1")
@@ -482,8 +602,13 @@ func Test_CovKVC_12_Find(t *testing.T) {
 
 func Test_CovKVC_13_Strings_StringsUsingFormat_String(t *testing.T) {
 	safeTest(t, "Test_CovKVC_13_Strings_StringsUsingFormat_String", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
+
+		// Act
 		actual := args.Map{"result": len(kvc.Strings()) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		actual := args.Map{"result": len(kvc.StringsUsingFormat("%s=%s")) != 0}
@@ -503,10 +628,15 @@ func Test_CovKVC_13_Strings_StringsUsingFormat_String(t *testing.T) {
 
 func Test_CovKVC_14_Hashmap_Map(t *testing.T) {
 	safeTest(t, "Test_CovKVC_14_Hashmap_Map", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		hm := kvc.Hashmap()
+
+		// Act
 		actual := args.Map{"result": hm.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		m := kvc.Map()
@@ -529,10 +659,15 @@ func Test_CovKVC_15_Join_JoinKeys_JoinValues(t *testing.T) {
 
 func Test_CovKVC_16_SerializeMust(t *testing.T) {
 	safeTest(t, "Test_CovKVC_16_SerializeMust", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		b := kvc.SerializeMust()
+
+		// Act
 		actual := args.Map{"result": len(b) == 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	})
@@ -540,12 +675,17 @@ func Test_CovKVC_16_SerializeMust(t *testing.T) {
 
 func Test_CovKVC_17_JsonModel_MarshalUnmarshal(t *testing.T) {
 	safeTest(t, "Test_CovKVC_17_JsonModel_MarshalUnmarshal", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		_ = kvc.JsonModel()
 		_ = kvc.JsonModelAny()
 		data, err := kvc.MarshalJSON()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		kvc2 := &corestr.KeyValueCollection{}
@@ -568,13 +708,18 @@ func Test_CovKVC_17_JsonModel_MarshalUnmarshal(t *testing.T) {
 
 func Test_CovKVC_18_Json_JsonPtr_ParseInject(t *testing.T) {
 	safeTest(t, "Test_CovKVC_18_Json_JsonPtr_ParseInject", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		_ = kvc.Json()
 		jr := kvc.JsonPtr()
 		kvc2 := &corestr.KeyValueCollection{}
 		r, err := kvc2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil || r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
@@ -582,12 +727,17 @@ func Test_CovKVC_18_Json_JsonPtr_ParseInject(t *testing.T) {
 
 func Test_CovKVC_19_JsonParseSelfInject_AsInterfaces(t *testing.T) {
 	safeTest(t, "Test_CovKVC_19_JsonParseSelfInject_AsInterfaces", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		jr := kvc.JsonPtr()
 		kvc2 := &corestr.KeyValueCollection{}
 		err := kvc2.JsonParseSelfInject(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		_ = kvc.AsJsonContractsBinder()
@@ -598,10 +748,15 @@ func Test_CovKVC_19_JsonParseSelfInject_AsInterfaces(t *testing.T) {
 
 func Test_CovKVC_20_Serialize_Deserialize(t *testing.T) {
 	safeTest(t, "Test_CovKVC_20_Serialize_Deserialize", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		_, err := kvc.Serialize()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		target := &corestr.KeyValueCollection{}
@@ -614,10 +769,15 @@ func Test_CovKVC_20_Serialize_Deserialize(t *testing.T) {
 
 func Test_CovKVC_21_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_CovKVC_21_Clear_Dispose", func() {
+		// Arrange
 		kvc := &corestr.KeyValueCollection{}
 		kvc.Add("a", "1")
 		kvc.Clear()
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		kvc2 := &corestr.KeyValueCollection{}

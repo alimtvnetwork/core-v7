@@ -106,6 +106,8 @@ func Test_Cov3_SimpleTestCase_Disabled(t *testing.T) {
 		ExpectedInput: "value",
 	}
 	// SimpleTestCase has no IsEnable field; just test ShouldBeEqual normally
+
+	// Assert
 	tc.ShouldBeEqual(0, t, "value")
 }
 
@@ -159,9 +161,14 @@ func Test_Cov3_DraftType_IsEqual_InnerF1StringCoverage(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov3_AnyToBytes_MarshalPanic(t *testing.T) {
+	// Arrange
 	defer func() {
 		r := recover()
+
+	// Act
 		actual := args.Map{"result": r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic from AnyToBytes with unmarshalable input", actual)
 	}()

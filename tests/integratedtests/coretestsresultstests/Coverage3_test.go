@@ -20,41 +20,66 @@ func (s *cov3NilMapStruct) ReturnNilChan() chan int          { return nil }
 func (s *cov3NilMapStruct) ReturnNilPtr() *int              { return nil }
 
 func Test_Cov3_SafeInterface_NilMap(t *testing.T) {
+	// Arrange
 	s := &cov3NilMapStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilMap, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+
+	// Assert
 	expected := args.Map{"panicked": false, "isNil": true}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil map -- returns nil", actual)
 }
 
 func Test_Cov3_SafeInterface_NilSlice(t *testing.T) {
+	// Arrange
 	s := &cov3NilMapStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilSlice, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+
+	// Assert
 	expected := args.Map{"panicked": false, "isNil": true}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil slice -- returns nil", actual)
 }
 
 func Test_Cov3_SafeInterface_NilFunc(t *testing.T) {
+	// Arrange
 	s := &cov3NilMapStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilFunc, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+
+	// Assert
 	expected := args.Map{"panicked": false, "isNil": true}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil func -- returns nil", actual)
 }
 
 func Test_Cov3_SafeInterface_NilChan(t *testing.T) {
+	// Arrange
 	s := &cov3NilMapStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilChan, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+
+	// Assert
 	expected := args.Map{"panicked": false, "isNil": true}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil chan -- returns nil", actual)
 }
 
 func Test_Cov3_SafeInterface_NilPtr(t *testing.T) {
+	// Arrange
 	s := &cov3NilMapStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3NilMapStruct).ReturnNilPtr, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "isNil": r.Value == nil}
+
+	// Assert
 	expected := args.Map{"panicked": false, "isNil": true}
 	expected.ShouldBeEqual(t, 0, "safeInterface nil ptr -- returns nil", actual)
 }
@@ -72,9 +97,14 @@ func (e *cov3CustomError) Error() string { return e.msg }
 func (s *cov3PtrErrStruct) ReturnNilPtrError() *cov3CustomError { return nil }
 
 func Test_Cov3_ExtractError_NilPtrImplementingError(t *testing.T) {
+	// Arrange
 	s := &cov3PtrErrStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3PtrErrStruct).ReturnNilPtrError, s)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "hasError": r.HasError()}
+
+	// Assert
 	expected := args.Map{"panicked": false, "hasError": false}
 	expected.ShouldBeEqual(t, 0, "extractError nil ptr implementing error -- no error", actual)
 }
@@ -86,8 +116,11 @@ type cov3MultiNonErr struct{}
 func (s *cov3MultiNonErr) TwoStrings() (string, string) { return "a", "b" }
 
 func Test_Cov3_MultiReturn_NonErrorLast(t *testing.T) {
+	// Arrange
 	s := &cov3MultiNonErr{}
 	r := results.InvokeWithPanicRecovery((*cov3MultiNonErr).TwoStrings, s)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"count":    r.ReturnCount,
@@ -95,6 +128,8 @@ func Test_Cov3_MultiReturn_NonErrorLast(t *testing.T) {
 		"hasError": r.HasError(),
 		"allLen":   len(r.AllResults),
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"count":    2,
@@ -114,8 +149,11 @@ func (s *cov3MultiErr) StringAndError() (string, error) {
 }
 
 func Test_Cov3_MultiReturn_WithError(t *testing.T) {
+	// Arrange
 	s := &cov3MultiErr{}
 	r := results.InvokeWithPanicRecovery((*cov3MultiErr).StringAndError, s)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"count":    r.ReturnCount,
@@ -123,6 +161,8 @@ func Test_Cov3_MultiReturn_WithError(t *testing.T) {
 		"hasError": r.HasError(),
 		"errMsg":   r.Error.Error(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"count":    2,
@@ -140,13 +180,18 @@ type cov3MultiNilErr struct{}
 func (s *cov3MultiNilErr) StringNilError() (string, error) { return "ok", nil }
 
 func Test_Cov3_MultiReturn_NilError(t *testing.T) {
+	// Arrange
 	s := &cov3MultiNilErr{}
 	r := results.InvokeWithPanicRecovery((*cov3MultiNilErr).StringNilError, s)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"hasError": r.HasError(),
 		"val":      fmt.Sprintf("%v", r.Value),
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"hasError": false,
@@ -158,9 +203,14 @@ func Test_Cov3_MultiReturn_NilError(t *testing.T) {
 // ── buildCallArgs: no-param function with nil receiver ──
 
 func Test_Cov3_BuildCallArgs_NoParamFunc(t *testing.T) {
+	// Arrange
 	fn := func() string { return "hello" }
 	r := results.InvokeWithPanicRecovery(fn, nil)
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked, "val": fmt.Sprintf("%v", r.Value)}
+
+	// Assert
 	expected := args.Map{"panicked": false, "val": "hello"}
 	expected.ShouldBeEqual(t, 0, "buildCallArgs no-param func -- func() string", actual)
 }
@@ -192,13 +242,18 @@ func Test_Cov3_DeriveCompareFields_AllSet(t *testing.T) {
 // ── filterByFields: missing key ──
 
 func Test_Cov3_FilterByFields_MissingKey(t *testing.T) {
+	// Arrange
 	r := results.ResultAny{Value: "hello"}
 	m := r.ToMap()
 	// "nonexistent" isn't in the map — filterByFields should add "<missing key: ...>"
+
+	// Act
 	actual := args.Map{
 		"hasValue":    m.Has("value"),
 		"hasPanicked": m.Has("panicked"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasValue":    true,
 		"hasPanicked": true,
@@ -213,13 +268,18 @@ type cov3ThreeReturn struct{}
 func (s *cov3ThreeReturn) ThreeVals() (int, string, bool) { return 1, "two", true }
 
 func Test_Cov3_ThreeReturn(t *testing.T) {
+	// Arrange
 	s := &cov3ThreeReturn{}
 	r := results.InvokeWithPanicRecovery((*cov3ThreeReturn).ThreeVals, s)
+
+	// Act
 	actual := args.Map{
 		"count":  r.ReturnCount,
 		"val":    fmt.Sprintf("%v", r.Value),
 		"allLen": len(r.AllResults),
 	}
+
+	// Assert
 	expected := args.Map{
 		"count":  3,
 		"val":    "1",
@@ -235,12 +295,17 @@ type cov3ArgStruct struct{}
 func (s *cov3ArgStruct) Add(a, b int) int { return a + b }
 
 func Test_Cov3_Invoke_MultipleArgs(t *testing.T) {
+	// Arrange
 	s := &cov3ArgStruct{}
 	r := results.InvokeWithPanicRecovery((*cov3ArgStruct).Add, s, 3, 4)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"val":      fmt.Sprintf("%v", r.Value),
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"val":      "7",
@@ -255,9 +320,14 @@ type cov3ValueRecv struct{ Name string }
 func (s cov3ValueRecv) GetName() string { return s.Name }
 
 func Test_Cov3_ValueReceiver_NilPanic(t *testing.T) {
+	// Arrange
 	r := results.InvokeWithPanicRecovery((*cov3ValueRecv).GetName, nil)
 	// nil dereference of value receiver causes panic
+
+	// Act
 	actual := args.Map{"panicked": r.Panicked}
+
+	// Assert
 	expected := args.Map{"panicked": true}
 	expected.ShouldBeEqual(t, 0, "value receiver nil -- panics", actual)
 }
