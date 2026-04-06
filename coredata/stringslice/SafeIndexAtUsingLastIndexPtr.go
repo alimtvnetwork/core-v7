@@ -2,7 +2,6 @@ package stringslice
 
 import "github.com/alimtvnetwork/core/constants"
 
-// Deprecated: Use SafeIndexAtUsingLastIndex instead.
 func SafeIndexAtUsingLastIndexPtr(
 	slice []string,
 	lastIndex,

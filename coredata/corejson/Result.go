@@ -291,7 +291,6 @@ func (it *Result) SafeValues() []byte {
 	return it.Bytes
 }
 
-// Deprecated: Use SafeValues instead.
 func (it *Result) SafeValuesPtr() []byte {
 	if it.HasIssuesOrEmpty() {
 		return []byte{}

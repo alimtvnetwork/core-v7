@@ -1,6 +1,5 @@
 package stringslice
 
-// Deprecated: Use Clone instead.
 func ClonePtr(slice []string) []string {
 	if len(slice) == 0 {
 		return []string{}

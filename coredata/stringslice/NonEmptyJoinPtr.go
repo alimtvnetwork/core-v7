@@ -6,7 +6,6 @@ import (
 	"github.com/alimtvnetwork/core/constants"
 )
 
-// Deprecated: Use NonEmptyJoin instead.
 func NonEmptyJoinPtr(slice []string, joiner string) string {
 	if len(slice) == 0 {
 		return constants.EmptyString

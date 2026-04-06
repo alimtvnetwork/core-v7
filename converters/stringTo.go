@@ -172,7 +172,6 @@ func (it stringTo) Float64Default(
 
 // Float64Conditional
 //
-// Deprecated: Identical to Float64Default. Use Float64Default instead.
 func (it stringTo) Float64Conditional(
 	input string, defaultFloat64 float64,
 ) (value float64, isSuccess bool) {

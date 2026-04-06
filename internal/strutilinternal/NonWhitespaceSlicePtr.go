@@ -1,6 +1,5 @@
 package strutilinternal
 
-// Deprecated: Use NonWhitespaceSlice instead.
 func NonWhitespaceSlicePtr(
 	slice []string,
 ) []string {

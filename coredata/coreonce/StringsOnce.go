@@ -60,7 +60,6 @@ func (it *StringsOnce) Values() []string {
 	return it.Value()
 }
 
-// Deprecated: Use Values instead.
 func (it *StringsOnce) ValuesPtr() []string {
 	return it.Value()
 }
