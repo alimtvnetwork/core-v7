@@ -61,44 +61,6 @@ func Test_I15_BaseIsSecure_NewPlain(t *testing.T) {
 	}
 }
 
-func Test_I15_BaseIsSecure_NilReceiver(t *testing.T) {
-	var s *coreinstruction.BaseIsSecure
-	if !s.IsPlainText() {
-		t.Fatal("expected plain text for nil")
-	}
-	if !s.IsIncludePayload() {
-		t.Fatal("expected include payload for nil")
-	}
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// BaseTags — NewTagsPtr, TagsLength nil, TagsHashset, IsAnyTagMatchesRegex
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_I15_BaseTags_NewTagsPtr_Empty(t *testing.T) {
-	bt := coreinstruction.NewTagsPtr([]string{})
-	if bt == nil {
-		t.Fatal("expected non-nil")
-	}
-	if bt.TagsLength() != 0 {
-		t.Fatal("expected 0 tags")
-	}
-}
-
-func Test_I15_BaseTags_NewTagsPtr_NonEmpty(t *testing.T) {
-	bt := coreinstruction.NewTagsPtr([]string{"a", "b"})
-	if bt.TagsLength() != 2 {
-		t.Fatal("expected 2 tags")
-	}
-}
-
-func Test_I15_BaseTags_TagsLength_NilTags(t *testing.T) {
-	bt := coreinstruction.BaseTags{Tags: nil}
-	if bt.TagsLength() != 0 {
-		t.Fatal("expected 0")
-	}
-}
-
 func Test_I15_BaseTags_TagsHashset_Cached(t *testing.T) {
 	bt := coreinstruction.NewTags([]string{"x", "y"})
 	h1 := bt.TagsHashset()

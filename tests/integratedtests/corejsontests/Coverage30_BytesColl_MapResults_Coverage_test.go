@@ -244,18 +244,6 @@ func Test_C30_23_BC_GetAtSafe(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
-
-func Test_C30_24_BC_GetAtSafePtr(t *testing.T) {
-	bc := corejson.NewBytesCollection.Empty()
-	bc.Add([]byte(`"x"`))
-	if bc.GetAtSafePtr(0) == nil {
-		t.Fatal("expected non-nil")
-	}
-	if bc.GetAtSafePtr(-1) != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_C30_25_BC_GetResultAtSafe(t *testing.T) {
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
@@ -420,12 +408,6 @@ func Test_C30_41_BC_Strings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C30_42_BC_StringsPtr(t *testing.T) {
-	bc := corejson.NewBytesCollection.Empty()
-	_ = bc.StringsPtr()
-}
-
 func Test_C30_43_BC_AddJsoners(t *testing.T) {
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddJsoners(true)
@@ -580,22 +562,6 @@ func Test_C30_61_BC_Clone(t *testing.T) {
 	bc.Items = [][]byte{[]byte(`"x"`)}
 	_ = bc.Clone(true)
 }
-
-func Test_C30_62_BC_ClonePtr(t *testing.T) {
-	var bc *corejson.BytesCollection
-	if bc.ClonePtr(false) != nil {
-		t.Fatal("expected nil")
-	}
-	bc = corejson.NewBytesCollection.Empty()
-	_ = bc.ClonePtr(false)
-	bc.Add([]byte(`"x"`))
-	_ = bc.ClonePtr(true)
-}
-
-// ═══════════════════════════════════════════════
-// MapResults — all uncovered methods
-// ═══════════════════════════════════════════════
-
 func Test_C30_63_MR_Length(t *testing.T) {
 	var mr *corejson.MapResults
 	if mr.Length() != 0 {
@@ -681,12 +647,6 @@ func Test_C30_70_MR_GetErrorsStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C30_71_MR_GetErrorsStringsPtr(t *testing.T) {
-	mr := corejson.NewMapResults.Empty()
-	_ = mr.GetErrorsStringsPtr()
-}
-
 func Test_C30_72_MR_GetErrorsAsSingleString(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 	_ = mr.GetErrorsAsSingleString()
@@ -1007,12 +967,6 @@ func Test_C30_105_MR_GetStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C30_106_MR_GetStringsPtr(t *testing.T) {
-	mr := corejson.NewMapResults.Empty()
-	_ = mr.GetStringsPtr()
-}
-
 func Test_C30_107_MR_AddJsoner(t *testing.T) {
 	mr := corejson.NewMapResults.Empty()
 	mr.AddJsoner("k", nil)

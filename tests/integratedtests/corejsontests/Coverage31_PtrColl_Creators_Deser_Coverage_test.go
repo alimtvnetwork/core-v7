@@ -149,12 +149,6 @@ func Test_C31_14_RPC_GetErrorsStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C31_15_RPC_GetErrorsStringsPtr(t *testing.T) {
-	rpc := corejson.NewResultsPtrCollection.Empty()
-	_ = rpc.GetErrorsStringsPtr()
-}
-
 func Test_C31_16_RPC_GetErrorsAsSingleString(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	_ = rpc.GetErrorsAsSingleString()
@@ -378,12 +372,6 @@ func Test_C31_41_RPC_GetStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C31_42_RPC_GetStringsPtr(t *testing.T) {
-	rpc := corejson.NewResultsPtrCollection.Empty()
-	_ = rpc.GetStringsPtr()
-}
-
 func Test_C31_43_RPC_AddJsoners(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.AddJsoners(true)
@@ -684,12 +672,6 @@ func Test_C31_83_NRC_Error_ErrorPtr(t *testing.T) {
 	rp := corejson.NewResult.ErrorPtr(errors.New("e"))
 	_ = rp
 }
-
-func Test_C31_84_NRC_Empty_EmptyPtr(t *testing.T) {
-	_ = corejson.NewResult.Empty()
-	_ = corejson.NewResult.EmptyPtr()
-}
-
 func Test_C31_85_NRC_TypeName_TypeNameBytes(t *testing.T) {
 	_ = corejson.NewResult.TypeName("T")
 	_ = corejson.NewResult.TypeNameBytes("T")

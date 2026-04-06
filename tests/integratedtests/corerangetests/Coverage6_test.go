@@ -145,20 +145,6 @@ func Test_Cov6_MinMaxInt64_RangesExcept(t *testing.T) {
 	expected := args.Map{"exceptLen": 4}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt64 RangesExcept returns 4 -- excluding 3", actual)
 }
-
-func Test_Cov6_MinMaxInt64_Clone(t *testing.T) {
-	mm := &corerange.MinMaxInt64{Min: 1, Max: 10}
-	cloned := mm.Clone()
-	clonedPtr := mm.ClonePtr()
-	var nilMm *corerange.MinMaxInt64
-	actual := args.Map{
-		"clonedMin": int(cloned.Min), "clonedMax": int(cloned.Max),
-		"clonedPtrNil": clonedPtr == nil, "nilCloneNil": nilMm.ClonePtr() == nil,
-	}
-	expected := args.Map{"clonedMin": 1, "clonedMax": 10, "clonedPtrNil": false, "nilCloneNil": true}
-	expected.ShouldBeEqual(t, 0, "MinMaxInt64 Clone returns copy -- valid", actual)
-}
-
 func Test_Cov6_MinMaxInt64_IsEqual(t *testing.T) {
 	mm1 := &corerange.MinMaxInt64{Min: 1, Max: 10}
 	mm2 := &corerange.MinMaxInt64{Min: 1, Max: 10}
@@ -363,22 +349,6 @@ func Test_Cov6_MinMaxInt8_IsEqual(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt8 IsEqual returns expected -- various combos", actual)
 }
-
-func Test_Cov6_MinMaxInt8_Clone(t *testing.T) {
-	mm := &corerange.MinMaxInt8{Min: 1, Max: 10}
-	cloned := mm.Clone()
-	clonedPtr := mm.ClonePtr()
-	var nilMm *corerange.MinMaxInt8
-	actual := args.Map{
-		"clonedMin": int(cloned.Min), "clonedMax": int(cloned.Max),
-		"clonedPtrNil": clonedPtr == nil, "nilCloneNil": nilMm.ClonePtr() == nil,
-	}
-	expected := args.Map{"clonedMin": 1, "clonedMax": 10, "clonedPtrNil": false, "nilCloneNil": true}
-	expected.ShouldBeEqual(t, 0, "MinMaxInt8 Clone returns copy -- valid", actual)
-}
-
-// ── MinMaxByte — missing IsEqual ──
-
 func Test_Cov6_MinMaxByte_CreateRangeRanges(t *testing.T) {
 	mb := &corerange.MinMaxByte{Min: 1, Max: 5}
 	actual := args.Map{

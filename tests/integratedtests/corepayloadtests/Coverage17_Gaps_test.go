@@ -261,25 +261,6 @@ func Test_Cov17_PayloadWrapper_Clone_Error(t *testing.T) {
 		convey.So(err, convey.ShouldBeNil)
 	})
 }
-
-func Test_Cov17_PayloadWrapper_ClonePtr_Error(t *testing.T) {
-	// Arrange — wrapper with nil attributes
-	wrapper := &corepayload.PayloadWrapper{
-		Name: "test",
-	}
-
-	// Act
-	cloned, err := wrapper.ClonePtr(false)
-
-	// Assert
-	convey.Convey("PayloadWrapper.ClonePtr shallow clone succeeds", t, func() {
-		convey.So(err, convey.ShouldBeNil)
-		convey.So(cloned, convey.ShouldNotBeNil)
-	})
-}
-
-// --- TypedPayloadWrapper branches ---
-
 func Test_Cov17_TypedPayloadWrapper_MarshalJSON_NilWrapper(t *testing.T) {
 	// Arrange
 	typed := &corepayload.TypedPayloadWrapper[string]{}
@@ -320,21 +301,6 @@ func Test_Cov17_TypedPayloadWrapper_SetTypedData_NilWrapper(t *testing.T) {
 		convey.So(err, convey.ShouldNotBeNil)
 	})
 }
-
-func Test_Cov17_TypedPayloadWrapper_ClonePtr_Valid(t *testing.T) {
-	// Arrange
-	typed, _ := corepayload.NewTypedPayloadWrapperFrom("test", "id1", "entity", "hello")
-
-	// Act
-	cloned, err := typed.ClonePtr(true)
-
-	// Assert
-	convey.Convey("TypedPayloadWrapper.ClonePtr succeeds", t, func() {
-		convey.So(err, convey.ShouldBeNil)
-		convey.So(cloned, convey.ShouldNotBeNil)
-	})
-}
-
 func Test_Cov17_TypedPayloadWrapper_Clone_NilReceiver(t *testing.T) {
 	// Arrange
 	var typed *corepayload.TypedPayloadWrapper[string]

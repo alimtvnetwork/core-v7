@@ -265,25 +265,6 @@ func Test_Cov15_TypedSimpleResult_GetAs(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "GetAs returns correct value -- with args", actual)
 }
-
-func Test_Cov15_TypedSimpleResult_Clone(t *testing.T) {
-	r := coredynamic.NewTypedSimpleResultValid("hello")
-	cloned := r.Clone()
-	clonedPtr := r.ClonePtr()
-	var nilR *coredynamic.TypedSimpleResult[string]
-	nilClone := nilR.ClonePtr()
-	nilCloneVal := nilR.Clone()
-	actual := args.Map{
-		"cData": cloned.Data(), "cpNN": clonedPtr != nil,
-		"nilNil": nilClone == nil, "nilValid": nilCloneVal.IsValid(),
-	}
-	expected := args.Map{
-		"cData": "hello", "cpNN": true,
-		"nilNil": true, "nilValid": false,
-	}
-	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
-}
-
 func Test_Cov15_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	r := coredynamic.NewTypedSimpleResultValid("hello")
 	sr := r.ToSimpleResult()

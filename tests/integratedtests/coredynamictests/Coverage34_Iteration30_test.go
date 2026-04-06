@@ -654,23 +654,6 @@ func Test_C34_83_Dynamic_Clone(t *testing.T) {
 		t.Error("expected 42")
 	}
 }
-
-func Test_C34_84_Dynamic_ClonePtr(t *testing.T) {
-	d := coredynamic.NewDynamicValid(42)
-	cp := d.ClonePtr()
-	if cp == nil || cp.Value() != 42 {
-		t.Error("expected cloned ptr")
-	}
-}
-
-func Test_C34_85_Dynamic_ClonePtr_Nil(t *testing.T) {
-	var d *coredynamic.Dynamic
-	if d.ClonePtr() != nil {
-		t.Error("expected nil")
-	}
-}
-
-func Test_C34_86_Dynamic_NonPtr(t *testing.T) {
 	d := coredynamic.NewDynamicValid(42)
 	np := d.NonPtr()
 	if np.Value() != 42 {

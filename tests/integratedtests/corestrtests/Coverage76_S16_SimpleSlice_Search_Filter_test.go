@@ -291,38 +291,6 @@ func Test_C76_SimpleSlice_Clone_Shallow(t *testing.T) {
 		}
 	})
 }
-
-func Test_C76_SimpleSlice_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_C76_SimpleSlice_ClonePtr", func() {
-		// Arrange
-		ss := corestr.New.SimpleSlice.Lines("a", "b")
-
-		// Act
-		cloned := ss.ClonePtr(true)
-
-		// Assert
-		if cloned == nil || cloned.Length() != 2 {
-			t.Error("expected 2")
-		}
-	})
-}
-
-func Test_C76_SimpleSlice_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_C76_SimpleSlice_ClonePtr_Nil", func() {
-		// Arrange
-		var ss *corestr.SimpleSlice
-
-		// Act
-		cloned := ss.ClonePtr(true)
-
-		// Assert
-		if cloned != nil {
-			t.Error("expected nil")
-		}
-	})
-}
-
-func Test_C76_SimpleSlice_DeepClone(t *testing.T) {
 	safeTest(t, "Test_C76_SimpleSlice_DeepClone", func() {
 		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("x", "y")

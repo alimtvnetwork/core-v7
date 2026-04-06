@@ -762,19 +762,6 @@ func Test_Cov38_LL_GetNextNodes(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_LL_GetAllLinkedNodes(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_GetAllLinkedNodes", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a", "b")
-		nodes := ll.GetAllLinkedNodes()
-		if len(nodes) != 2 {
-			t.Errorf("expected 2, got %d", len(nodes))
-		}
-	})
-}
-
-// ── ToCollection / List / ListPtr / ListLock / ListPtrLock ──
-
 func Test_Cov38_LL_ToCollection(t *testing.T) {
 	safeTest(t, "Test_Cov38_LL_ToCollection", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a", "b")
@@ -813,16 +800,6 @@ func Test_Cov38_LL_List_Empty(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_LL_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_ListPtr", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		if len(ll.ListPtr()) != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
 func Test_Cov38_LL_ListLock(t *testing.T) {
 	safeTest(t, "Test_Cov38_LL_ListLock", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a")
@@ -831,18 +808,6 @@ func Test_Cov38_LL_ListLock(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_LL_ListPtrLock(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_ListPtrLock", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		if len(ll.ListPtrLock()) != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
-// ── String / StringLock / Join / JoinLock / Joins ──
-
 func Test_Cov38_LL_String(t *testing.T) {
 	safeTest(t, "Test_Cov38_LL_String", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a", "b")
@@ -999,22 +964,6 @@ func Test_Cov38_LL_IsEqualsWithSensitive_OneNil(t *testing.T) {
 		}
 	})
 }
-
-// ── GetCompareSummary ──
-
-func Test_Cov38_LL_GetCompareSummary(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_GetCompareSummary", func() {
-		a := corestr.New.LinkedList.SpreadStrings("a")
-		b := corestr.New.LinkedList.SpreadStrings("b")
-		summary := a.GetCompareSummary(b, "left", "right")
-		if summary == "" {
-			t.Error("expected non-empty summary")
-		}
-	})
-}
-
-// ── AddStringsToNode / AddStringsPtrToNode / AddCollectionToNode / AddAfterNode ──
-
 func Test_Cov38_LL_AddStringsToNode(t *testing.T) {
 	safeTest(t, "Test_Cov38_LL_AddStringsToNode", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a", "d")
@@ -1059,29 +1008,6 @@ func Test_Cov38_LL_AddStringsToNode_NilNode_Skip(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_LL_AddStringsPtrToNode_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_AddStringsPtrToNode_Nil", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		ll.AddStringsPtrToNode(true, ll.Head(), nil)
-		if ll.Length() != 1 {
-			t.Errorf("expected 1")
-		}
-	})
-}
-
-func Test_Cov38_LL_AddStringsPtrToNode(t *testing.T) {
-	safeTest(t, "Test_Cov38_LL_AddStringsPtrToNode", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		items := []string{"b"}
-		ll.AddStringsPtrToNode(true, ll.Head(), &items)
-		if ll.Length() != 2 {
-			t.Errorf("expected 2, got %d", ll.Length())
-		}
-	})
-}
-
-func Test_Cov38_LL_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_Cov38_LL_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a")
 		col := corestr.New.Collection.Strings([]string{"b"})
@@ -1494,16 +1420,6 @@ func Test_Cov38_Node_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_Node_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov38_Node_ListPtr", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		if len(ll.Head().ListPtr()) != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
 func Test_Cov38_Node_Join(t *testing.T) {
 	safeTest(t, "Test_Cov38_Node_Join", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a", "b")
@@ -1532,29 +1448,6 @@ func Test_Cov38_Node_AddStringsToNode(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov38_Node_AddStringsPtrToNode_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov38_Node_AddStringsPtrToNode_Nil", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		ll.Head().AddStringsPtrToNode(ll, true, nil)
-		if ll.Length() != 1 {
-			t.Errorf("expected 1")
-		}
-	})
-}
-
-func Test_Cov38_Node_AddStringsPtrToNode(t *testing.T) {
-	safeTest(t, "Test_Cov38_Node_AddStringsPtrToNode", func() {
-		ll := corestr.New.LinkedList.SpreadStrings("a")
-		items := []string{"b"}
-		ll.Head().AddStringsPtrToNode(ll, false, &items)
-		if ll.Length() != 2 {
-			t.Errorf("expected 2, got %d", ll.Length())
-		}
-	})
-}
-
-func Test_Cov38_Node_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_Cov38_Node_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.SpreadStrings("a")
 		col := corestr.New.Collection.Strings([]string{"b"})

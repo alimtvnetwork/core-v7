@@ -709,16 +709,6 @@ func Test_C30_Collection_FilterPtrLock(t *testing.T) {
 		_ = c.FilterPtrLock(func(s *string, i int) (*string, bool, bool) { return s, true, false })
 	})
 }
-
-func Test_C30_Collection_NonEmptyList(t *testing.T) {
-	safeTest(t, "Test_C30_Collection_NonEmptyList", func() {
-		c := corestr.New.Collection.Strings([]string{"", "a"})
-		r := c.NonEmptyList()
-		if len(r) != 1 { t.Fatal("expected 1") }
-		_ = c.NonEmptyListPtr()
-	})
-}
-
 func Test_C30_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HashsetAsIs", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -739,33 +729,6 @@ func Test_C30_Collection_HashsetLock(t *testing.T) {
 		_ = c.HashsetLock()
 	})
 }
-
-func Test_C30_Collection_NonEmptyItems(t *testing.T) {
-	safeTest(t, "Test_C30_Collection_NonEmptyItems", func() {
-		c := corestr.New.Collection.Strings([]string{"", "a"})
-		_ = c.NonEmptyItems()
-		_ = c.NonEmptyItemsPtr()
-	})
-}
-
-func Test_C30_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
-	safeTest(t, "Test_C30_Collection_NonEmptyItemsOrNonWhitespace", func() {
-		c := corestr.New.Collection.Strings([]string{"  ", "a"})
-		_ = c.NonEmptyItemsOrNonWhitespace()
-		_ = c.NonEmptyItemsOrNonWhitespacePtr()
-	})
-}
-
-func Test_C30_Collection_Items(t *testing.T) {
-	safeTest(t, "Test_C30_Collection_Items", func() {
-		c := corestr.New.Collection.Strings([]string{"a"})
-		_ = c.Items()
-		_ = c.ListPtr()
-	})
-}
-
-func Test_C30_Collection_ListCopyPtrLock(t *testing.T) {
-	safeTest(t, "Test_C30_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		_ = c.ListCopyPtrLock()
 		c2 := corestr.New.Collection.Empty()

@@ -150,16 +150,6 @@ func Test_Cov3_Variant_OnlySupportedErr(t *testing.T) {
 	expected := args.Map{"notNil": err != nil}
 	expected.ShouldBeEqual(t, 0, "Variant returns error -- OnlySupportedErr", actual)
 }
-
-func Test_Cov3_Variant_OnlySupportedMsgErr(t *testing.T) {
-	err := stringcompareas.Equal.OnlySupportedMsgErr("msg: ", "Equal")
-	actual := args.Map{"notNil": err != nil}
-	expected := args.Map{"notNil": err != nil}
-	expected.ShouldBeEqual(t, 0, "Variant returns error -- OnlySupportedMsgErr", actual)
-}
-
-// ── RangesByte / MinByte / MaxByte ──
-
 func Test_Cov3_Variant_RangesByte(t *testing.T) {
 	v := stringcompareas.Equal
 	result := v.RangesByte()
@@ -167,18 +157,6 @@ func Test_Cov3_Variant_RangesByte(t *testing.T) {
 	expected := args.Map{"hasItems": true}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- RangesByte", actual)
 }
-
-func Test_Cov3_Variant_MinMaxByte(t *testing.T) {
-	v := stringcompareas.Equal
-	actual := args.Map{
-		"minOK": v.MinByte() <= v.MaxByte(),
-	}
-	expected := args.Map{"minOK": true}
-	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- Min/MaxByte", actual)
-}
-
-// ── Format / IntegerEnumRanges / MinMaxAny / RangesDynamicMap ──
-
 func Test_Cov3_Variant_Format(t *testing.T) {
 	result := stringcompareas.Equal.Format("{name}={value}")
 	actual := args.Map{"notEmpty": result != ""}

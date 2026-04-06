@@ -21,19 +21,6 @@ func Test_Cov4_IsNotEmpty(t *testing.T) {
 	expected := args.Map{"notEmpty": true, "empty": false}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns empty -- with args", actual)
 }
-
-func Test_Cov4_IsEmptyPtr(t *testing.T) {
-	empty := ""
-	text := "hello"
-	actual := args.Map{
-		"nil":   stringutil.IsEmptyPtr(nil),
-		"empty": stringutil.IsEmptyPtr(&empty),
-		"text":  stringutil.IsEmptyPtr(&text),
-	}
-	expected := args.Map{"nil": true, "empty": true, "text": false}
-	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- with args", actual)
-}
-
 func Test_Cov4_IsNullOrEmptyPtr(t *testing.T) {
 	empty := ""
 	text := "hello"

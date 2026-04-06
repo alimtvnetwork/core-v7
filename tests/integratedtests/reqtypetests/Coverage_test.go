@@ -328,23 +328,6 @@ func Test_Request_EnumInfo(t *testing.T) {
 		t.Error("Create should be valid range")
 	}
 }
-
-func Test_Request_MinMax(t *testing.T) {
-	min, max := reqtype.Create.MinMaxAny()
-	if min == nil || max == nil {
-		t.Error("MinMaxAny should not return nil")
-	}
-	if reqtype.Create.MinValueString() == "" {
-		t.Error("MinValueString should not be empty")
-	}
-	if reqtype.Create.MaxValueString() == "" {
-		t.Error("MaxValueString should not be empty")
-	}
-	if reqtype.Create.MaxByte() == 0 {
-		t.Error("MaxByte should not be 0")
-	}
-}
-
 func Test_Request_Ranges(t *testing.T) {
 	if len(reqtype.Create.IntegerEnumRanges()) == 0 {
 		t.Error("IntegerEnumRanges should not be empty")

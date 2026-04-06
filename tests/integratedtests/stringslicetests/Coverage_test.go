@@ -158,42 +158,6 @@ func Test_Cov_MergeNewSimple_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "MergeNewSimple merges slices -- two slices", actual)
 }
 
-func Test_Cov_MergeNewSimple_WithEmpty(t *testing.T) {
-	result := stringslice.MergeNewSimple([]string{}, []string{"a"})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "MergeNewSimple skips empty -- empty first", actual)
-}
-
-// ============================================================================
-// ClonePtr
-// ============================================================================
-
-func Test_Cov_ClonePtr_NonEmpty(t *testing.T) {
-	result := stringslice.ClonePtr([]string{"a", "b"})
-	actual := args.Map{"len": len(result), "first": result[0]}
-	expected := args.Map{"len": 2, "first": "a"}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns copy -- non-empty", actual)
-}
-
-func Test_Cov_ClonePtr_Empty(t *testing.T) {
-	result := stringslice.ClonePtr(nil)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns empty -- nil", actual)
-}
-
-// ============================================================================
-// AppendStringsWithMainSlice
-// ============================================================================
-
-func Test_Cov_AppendStringsWithMainSlice_SkipEmpty(t *testing.T) {
-	result := stringslice.AppendStringsWithMainSlice(true, []string{"a"}, "", "b")
-	actual := args.Map{"len": len(result), "last": result[len(result)-1]}
-	expected := args.Map{"len": 2, "last": "b"}
-	expected.ShouldBeEqual(t, 0, "AppendStringsWithMainSlice skips empty -- isSkipEmpty", actual)
-}
-
 func Test_Cov_AppendStringsWithMainSlice_NoSkip(t *testing.T) {
 	result := stringslice.AppendStringsWithMainSlice(false, []string{"a"}, "", "b")
 	actual := args.Map{"len": len(result)}

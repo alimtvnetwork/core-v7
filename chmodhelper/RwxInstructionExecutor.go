@@ -234,7 +234,7 @@ func (it *RwxInstructionExecutor) verifyChmodLocationsNoContinue(
 
 		if err != nil {
 			return errcore.MeaningfulErrorWithData(
-				errcore.ValidataionFailedType,
+				errcore.ValidationFailedType,
 				"verifyChmodLocationsNoContinue",
 				err,
 				"failed to verify rwxInstruction for - "+filePath)

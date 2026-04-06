@@ -320,7 +320,6 @@ func Test_C32_NSSC_Map(t *testing.T) {
 }
 func Test_C32_NSSC_Create(t *testing.T)        { _ = corestr.New.SimpleSlice.Create([]string{"a"}) }
 func Test_C32_NSSC_Strings(t *testing.T)       { _ = corestr.New.SimpleSlice.Strings([]string{"a"}) }
-func Test_C32_NSSC_StringsPtr(t *testing.T)    { _ = corestr.New.SimpleSlice.StringsPtr(nil) }
 func Test_C32_NSSC_StringsOptions(t *testing.T) {
 	safeTest(t, "Test_C32_NSSC_StringsOptions", func() {
 		_ = corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})

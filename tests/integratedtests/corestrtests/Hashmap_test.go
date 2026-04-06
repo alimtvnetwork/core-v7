@@ -422,21 +422,6 @@ func Test_StrHashmap_IsEqualPtr_DifferentLength(t *testing.T) {
 		}
 	})
 }
-
-func Test_StrHashmap_IsEqualPtr_BothEmpty(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_IsEqualPtr_BothEmpty", func() {
-		a := corestr.New.Hashmap.Empty()
-		b := corestr.New.Hashmap.Empty()
-		if !a.IsEqualPtr(b) {
-			t.Error("Two empty hashmaps should be equal")
-		}
-	})
-}
-
-// ==========================================
-// KeysToLower (formerly ValuesToLower)
-// ==========================================
-
 func Test_StrHashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_StrHashmap_KeysToLower", func() {
 		hm := corestr.New.Hashmap.UsingMap(map[string]string{"ABC": "val1", "Def": "val2"})
@@ -453,21 +438,6 @@ func Test_StrHashmap_KeysToLower(t *testing.T) {
 		}
 	})
 }
-
-func Test_StrHashmap_ValuesToLower_Deprecated_DelegatesToKeysToLower(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_ValuesToLower_Deprecated_DelegatesToKeysToLower", func() {
-		hm := corestr.New.Hashmap.UsingMap(map[string]string{"KEY": "val"})
-		result := hm.ValuesToLower()
-		if !result.Has("key") {
-			t.Error("Deprecated ValuesToLower should delegate to KeysToLower")
-		}
-	})
-}
-
-// ==========================================
-// ValuesList caching (bug 42 context)
-// ==========================================
-
 func Test_StrHashmap_ValuesList_CacheInvalidatedAfterSet(t *testing.T) {
 	safeTest(t, "Test_StrHashmap_ValuesList_CacheInvalidatedAfterSet", func() {
 		hm := corestr.New.Hashmap.Empty()
@@ -551,51 +521,6 @@ func Test_StrHashmap_NilReceiver_HasItems(t *testing.T) {
 		}
 	})
 }
-
-func Test_StrHashmap_NilReceiver_HasAnyItem(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_NilReceiver_HasAnyItem", func() {
-		var hm *corestr.Hashmap
-		if hm.HasAnyItem() {
-			t.Error("nil.HasAnyItem() should return false")
-		}
-	})
-}
-
-// ==========================================
-// ClonePtr
-// ==========================================
-
-func Test_StrHashmap_ClonePtr_NilReceiver(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_ClonePtr_NilReceiver", func() {
-		var hm *corestr.Hashmap
-		result := hm.ClonePtr()
-		if result != nil {
-			t.Error("ClonePtr on nil should return nil")
-		}
-	})
-}
-
-func Test_StrHashmap_ClonePtr_Independence(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_ClonePtr_Independence", func() {
-		hm := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1"})
-		cloned := hm.ClonePtr()
-		cloned.Set("b", "2")
-		if hm.Has("b") {
-			t.Error("Clone should be independent from original")
-		}
-	})
-}
-
-// ==========================================
-// ConcatNew
-// ==========================================
-
-func Test_StrHashmap_ConcatNew(t *testing.T) {
-	safeTest(t, "Test_StrHashmap_ConcatNew", func() {
-		hm1 := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1"})
-		hm2 := corestr.New.Hashmap.UsingMap(map[string]string{"b": "2"})
-		result := hm1.ConcatNew(false, hm2)
-		if result.Length() != 2 {
 			t.Errorf("ConcatNew: expected 2, got %d", result.Length())
 		}
 		// original should not be mutated

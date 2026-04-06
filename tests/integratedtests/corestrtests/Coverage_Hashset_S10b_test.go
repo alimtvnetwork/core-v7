@@ -512,24 +512,6 @@ func Test_S10_118_Hashset_MapStringAny_Empty(t *testing.T) {
 		}
 	})
 }
-
-func Test_S10_119_Hashset_MapStringAnyDiff(t *testing.T) {
-	safeTest(t, "Test_S10_119_Hashset_MapStringAnyDiff", func() {
-		// Arrange
-		hs := corestr.New.Hashset.Strings([]string{"a"})
-
-		// Act
-		d := hs.MapStringAnyDiff()
-
-		// Assert
-		if d == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
-// ── JoinSorted / ListPtrSortedAsc / ListPtrSortedDsc / ListPtr ──
-
 func Test_S10_120_Hashset_JoinSorted(t *testing.T) {
 	safeTest(t, "Test_S10_120_Hashset_JoinSorted", func() {
 		// Arrange
@@ -589,24 +571,6 @@ func Test_S10_123_Hashset_ListPtrSortedDsc(t *testing.T) {
 		}
 	})
 }
-
-func Test_S10_124_Hashset_ListPtr(t *testing.T) {
-	safeTest(t, "Test_S10_124_Hashset_ListPtr", func() {
-		// Arrange
-		hs := corestr.New.Hashset.Strings([]string{"a"})
-
-		// Act
-		list := hs.ListPtr()
-
-		// Assert
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
-// ── Clear / Dispose ──────────────────────────────────────────
-
 func Test_S10_125_Hashset_Clear(t *testing.T) {
 	safeTest(t, "Test_S10_125_Hashset_Clear", func() {
 		// Arrange

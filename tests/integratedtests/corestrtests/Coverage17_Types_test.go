@@ -94,19 +94,6 @@ func Test_Cov17_ValidValue_Conversions(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- conversions", actual)
 	})
 }
-
-func Test_Cov17_ValidValue_BytesOnce(t *testing.T) {
-	safeTest(t, "Test_Cov17_ValidValue_BytesOnce", func() {
-		v := corestr.NewValidValue("hello")
-		b1 := v.ValueBytesOnce()
-		b2 := v.ValueBytesOnce()
-		_ = v.ValueBytesOncePtr()
-		actual := args.Map{"len1": len(b1), "len2": len(b2)}
-		expected := args.Map{"len1": 5, "len2": 5}
-		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- BytesOnce", actual)
-	})
-}
-
 func Test_Cov17_ValidValue_Regex(t *testing.T) {
 	safeTest(t, "Test_Cov17_ValidValue_Regex", func() {
 		v := corestr.NewValidValue("hello123")
@@ -732,58 +719,5 @@ func Test_Cov17_SimpleStringOnce_WithinRange(t *testing.T) {
 		actual := args.Map{"v": v, "ok": ok, "v2": v2, "ok2": ok2}
 		expected := args.Map{"v": 50, "ok": true, "v2": 50, "ok2": true}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns non-empty -- WithinRange", actual)
-	})
-}
-
-func Test_Cov17_SimpleStringOnce_Various(t *testing.T) {
-	safeTest(t, "Test_Cov17_SimpleStringOnce_Various", func() {
-		s := corestr.New.SimpleStringOnce.Init("hello")
-		_ = s.ConcatNew(" world")
-		_ = s.ConcatNewUsingStrings(" ", "beautiful", "world")
-		_ = s.Split(",")
-		_ = s.SplitNonEmpty(",")
-		_ = s.SplitTrimNonWhitespace(",")
-		_, _ = s.SplitLeftRight(",")
-		_, _ = s.SplitLeftRightTrim(",")
-		_ = s.LinesSimpleSlice()
-		_ = s.SimpleSlice(",")
-		_ = s.IsRegexMatches(nil)
-		_ = s.RegexFindString(nil)
-		_, _ = s.RegexFindAllStringsWithFlag(nil, -1)
-		_ = s.RegexFindAllStrings(nil, -1)
-		_ = s.NonPtr()
-		_ = s.Ptr()
-		_ = s.String()
-		_ = s.StringPtr()
-		_ = s.Clone()
-		_ = s.ClonePtr()
-		_ = s.CloneUsingNewVal("new")
-		_ = s.JsonModel()
-		_ = s.JsonModelAny()
-		_, _ = s.MarshalJSON()
-		_, _ = s.Serialize()
-		_ = s.AsJsoner()
-		_ = s.AsJsonContractsBinder()
-		_ = s.AsJsonParseSelfInjector()
-		_ = s.AsJsonMarshaller()
-
-		s.Invalidate()
-		s2 := corestr.New.SimpleStringOnce.Init("world")
-		s2.Reset()
-
-		s3 := corestr.New.SimpleStringOnce.Uninitialized("")
-		_ = s3.SetOnceIfUninitialized("val")
-		_ = s3.SetOnceIfUninitialized("val2")
-		_ = s3.GetOnce()
-
-		var nilS *corestr.SimpleStringOnce
-		_ = nilS.String()
-		_ = nilS.StringPtr()
-		_ = nilS.ClonePtr()
-
-		s.Dispose()
-		actual := args.Map{"done": true}
-		expected := args.Map{"done": true}
-		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns correct value -- various", actual)
 	})
 }

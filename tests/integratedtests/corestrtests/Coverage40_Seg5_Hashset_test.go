@@ -1650,18 +1650,6 @@ func Test_Seg5_HSC_LastIndex(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "LastIndex -- 0", actual)
 	})
 }
-
-func Test_Seg5_HSC_List(t *testing.T) {
-	safeTest(t, "Test_Seg5_HSC_List", func() {
-		hsc := corestr.New.HashsetsCollection.LenCap(0, 2)
-		h := corestr.New.Hashset.Strings([]string{"a"})
-		hsc.Add(h)
-		actual := args.Map{"len": len(hsc.List()), "ptrLen": len(*hsc.ListPtr())}
-		expected := args.Map{"len": 1, "ptrLen": 1}
-		expected.ShouldBeEqual(t, 0, "List/ListPtr -- 1 item", actual)
-	})
-}
-
 func Test_Seg5_HSC_StringsList(t *testing.T) {
 	safeTest(t, "Test_Seg5_HSC_StringsList", func() {
 		hsc := corestr.New.HashsetsCollection.LenCap(0, 2)

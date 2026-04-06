@@ -76,16 +76,6 @@ func Test_Seg8_VV_ValueBytesOnce(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValueBytesOnce -- cached", actual)
 	})
 }
-
-func Test_Seg8_VV_ValueBytesOncePtr(t *testing.T) {
-	safeTest(t, "Test_Seg8_VV_ValueBytesOncePtr", func() {
-		vv := corestr.NewValidValue("abc")
-		actual := args.Map{"len": len(vv.ValueBytesOncePtr())}
-		expected := args.Map{"len": 3}
-		expected.ShouldBeEqual(t, 0, "ValueBytesOncePtr -- delegates", actual)
-	})
-}
-
 func Test_Seg8_VV_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_Seg8_VV_IsEmpty_IsWhitespace", func() {
 		vv := corestr.NewValidValueEmpty()

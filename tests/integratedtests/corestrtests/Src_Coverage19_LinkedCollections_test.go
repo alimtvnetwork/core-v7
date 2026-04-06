@@ -373,32 +373,6 @@ func Test_SrcC19_ConcatIndex_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC19_ToCollStr_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC19_ToCollStr_Verification", func() {
-		// Arrange
-		tc := srcC19ToCollStrTestCase
-
-		// Act
-		actual := args.Map{
-			"toColLen":     corestr.New.LinkedCollection.UsingCollections(corestr.New.Collection.Strings([]string{"a", "b"}), corestr.New.Collection.Strings([]string{"c"})).ToCollection(0).Length(),
-			"toColEmptyE":  !corestr.New.LinkedCollection.Create().ToCollection(0).HasItems(),
-			"toColSimLen":  corestr.New.LinkedCollection.Strings("a").ToCollectionSimple().Length(),
-			"toStrLen":     len(corestr.New.LinkedCollection.Strings("a", "b").ToStrings()),
-			"toStrPtrLen":  len(*corestr.New.LinkedCollection.Strings("a").ToStringsPtr()),
-			"toCocNN":      corestr.New.LinkedCollection.UsingCollections(corestr.New.Collection.Strings([]string{"a"}), corestr.New.Collection.Strings([]string{"b"})).ToCollectionsOfCollection(0) != nil,
-			"toCocEmptyNN": corestr.New.LinkedCollection.Create().ToCollectionsOfCollection(0) != nil,
-			"ioiLen":       len(corestr.New.LinkedCollection.UsingCollections(corestr.New.Collection.Strings([]string{"a", "b"}), corestr.New.Collection.Strings([]string{"c"})).ItemsOfItems()),
-			"ioiEmptyLen":  len(corestr.New.LinkedCollection.Create().ItemsOfItems()),
-			"ioicLen":      len(corestr.New.LinkedCollection.UsingCollections(corestr.New.Collection.Strings([]string{"a"})).ItemsOfItemsCollection()),
-			"ssNN":         corestr.New.LinkedCollection.Strings("a", "b").SimpleSlice() != nil,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC19_AddStrOfStrAsync_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC19_AddStrOfStrAsync_Verification", func() {
 		// Arrange
@@ -439,31 +413,6 @@ func Test_SrcC19_AddStrOfStrAsync_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC19_StringJoinList_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC19_StringJoinList_Verification", func() {
-		// Arrange
-		tc := srcC19StringJoinListTestCase
-
-		// Act
-		actual := args.Map{
-			"strNonE":      corestr.New.LinkedCollection.Strings("a", "b").String() != "",
-			"strEmptyNonE": corestr.New.LinkedCollection.Create().String() != "",
-			"strLockNonE":  corestr.New.LinkedCollection.Strings("a").StringLock() != "",
-			"strLockENonE": corestr.New.LinkedCollection.Create().StringLock() != "",
-			"join":         corestr.New.LinkedCollection.Strings("a", "b").Join(","),
-			"joins":        corestr.New.LinkedCollection.Strings("a").Joins(",", "b"),
-			"joinsNil":     corestr.New.LinkedCollection.Create().Joins(",", "a"),
-			"listLen":      len(corestr.New.LinkedCollection.Strings("a", "b").List()),
-			"listEmptyLen": len(corestr.New.LinkedCollection.Create().List()),
-			"listPtrLen":   len(*corestr.New.LinkedCollection.Strings("a").ListPtr()),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC19_EqualsCompare_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC19_EqualsCompare_Verification", func() {
 		// Arrange
@@ -541,70 +490,6 @@ func Test_SrcC19_Clear_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC19_NodeExported_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC19_NodeExported_Verification", func() {
-		// Arrange
-		tc := srcC19NodeExportedTestCase
-
-		// Act
-		noPanic := !callPanicsSrcC19(func() {
-			// IsEmpty
-			var nNil *corestr.LinkedCollectionNode
-			_ = nNil.IsEmpty()
-			n1 := &corestr.LinkedCollectionNode{Element: nil}
-			_ = n1.IsEmpty()
-			n2 := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"a"})}
-			_ = n2.IsEmpty()
-			_ = n2.HasElement()
-			// ListPtr, Join, String, StringList
-			_ = n2.ListPtr()
-			_ = n2.Join(",")
-			_ = n2.String()
-			_ = n2.StringList("H: ")
-			// IsEqual variants
-			c := corestr.New.Collection.Strings([]string{"a"})
-			na := &corestr.LinkedCollectionNode{Element: c}
-			nb := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"a"})}
-			_ = na.IsEqual(nb)
-			_ = nNil.IsEqual(nil)
-			_ = na.IsEqual(nil)
-			_ = na.IsEqual(na) // same ref
-			nNilEl := &corestr.LinkedCollectionNode{Element: nil}
-			nNilEl2 := &corestr.LinkedCollectionNode{Element: nil}
-			_ = nNilEl.IsEqual(nNilEl2)
-			_ = nNilEl.IsEqual(nb)
-			nc := &corestr.LinkedCollectionNode{Element: c}
-			nd := &corestr.LinkedCollectionNode{Element: c}
-			_ = nc.IsEqual(nd)
-			// IsEqualValue
-			_ = na.IsEqualValue(c)
-			_ = nNilEl.IsEqualValue(nil)
-			_ = nNilEl.IsEqualValue(corestr.New.Collection.Strings([]string{"a"}))
-			// IsChainEqual (single node, no next)
-			_ = na.IsChainEqual(nil)
-			_ = nNil.IsChainEqual(nil)
-			_ = na.IsChainEqual(na)
-			// AddNext, AddNextNode
-			lc := corestr.New.LinkedCollection.Strings("a")
-			_ = lc.Head().AddNext(lc, corestr.New.Collection.Strings([]string{"b"}))
-			lc2 := corestr.New.LinkedCollection.Strings("a")
-			lc2.Head().AddNextNode(lc2, &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"b"})})
-			// AddStringsToNode, AddCollectionToNode
-			lc3 := corestr.New.LinkedCollection.Strings("a")
-			lc3.Head().AddStringsToNode(lc3, true, []string{"b"}, false)
-			lc4 := corestr.New.LinkedCollection.Strings("a")
-			lc4.Head().AddCollectionToNode(lc4, true, corestr.New.Collection.Strings([]string{"b"}))
-		})
-		actual := args.Map{
-			"noPanic": noPanic,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC19_NonChainedEmpty_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC19_NonChainedEmpty_Verification", func() {
 		// Arrange

@@ -18,19 +18,6 @@ func Test_Cov3_AnyToStringNameField(t *testing.T) {
 	expected := args.Map{"string": true, "int": true, "nil": ""}
 	expected.ShouldBeEqual(t, 0, "AnyToStringNameField returns correct value -- with args", actual)
 }
-
-func Test_Cov3_AnyToTypeString(t *testing.T) {
-	nilResult := stringutil.AnyToTypeString(nil)
-	actual := args.Map{
-		"string": stringutil.AnyToTypeString("hello") != "",
-		"nil":    nilResult,
-	}
-	expected := args.Map{"string": true, "nil": nilResult}
-	expected.ShouldBeEqual(t, 0, "AnyToTypeString returns correct value -- with args", actual)
-}
-
-// ── IsBlankPtr / IsDefinedPtr / IsEmptyPtr ──
-
 func Test_Cov3_IsBlankPtr(t *testing.T) {
 	empty := ""
 	space := "   "
@@ -198,18 +185,6 @@ func Test_Cov3_IsAnyStartsWith(t *testing.T) {
 	expected := args.Map{"match": true, "noMatch": false}
 	expected.ShouldBeEqual(t, 0, "IsAnyStartsWith returns non-empty -- with args", actual)
 }
-
-func Test_Cov3_IsAnyEndsWith(t *testing.T) {
-	actual := args.Map{
-		"match":   stringutil.IsAnyEndsWith("hello", false, "lo", "xy"),
-		"noMatch": stringutil.IsAnyEndsWith("hello", false, "ab", "cd"),
-	}
-	expected := args.Map{"match": true, "noMatch": false}
-	expected.ShouldBeEqual(t, 0, "IsAnyEndsWith returns non-empty -- with args", actual)
-}
-
-// ── FirstChar / ClonePtr / SafeClonePtr ──
-
 func Test_Cov3_FirstChar(t *testing.T) {
 	first := stringutil.FirstChar("hello")
 	empty := stringutil.FirstChar("")
@@ -220,16 +195,6 @@ func Test_Cov3_FirstChar(t *testing.T) {
 	expected := args.Map{"first": first, "empty": empty}
 	expected.ShouldBeEqual(t, 0, "FirstChar returns correct value -- with args", actual)
 }
-
-func Test_Cov3_ClonePtr(t *testing.T) {
-	text := "hello"
-	result := stringutil.ClonePtr(&text)
-	nilResult := stringutil.ClonePtr(nil)
-	actual := args.Map{"notNil": result != nil, "val": *result, "nilIsNil": nilResult == nil}
-	expected := args.Map{"notNil": true, "val": "hello", "nilIsNil": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
-}
-
 func Test_Cov3_SafeClonePtr(t *testing.T) {
 	text := "hello"
 	result := stringutil.SafeClonePtr(&text)

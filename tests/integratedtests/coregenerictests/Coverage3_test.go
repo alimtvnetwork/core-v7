@@ -260,14 +260,6 @@ func Test_Cov3_Hashset_RemoveLock(t *testing.T) {
 	expected := args.Map{"ok": true, "miss": false, "len": 1}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- RemoveLock", actual)
 }
-
-func Test_Cov3_Hashset_ListPtr(t *testing.T) {
-	hs := coregeneric.HashsetFrom([]string{"a"})
-	actual := args.Map{"notNil": hs.ListPtr() != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- ListPtr", actual)
-}
-
 func Test_Cov3_Hashset_Map(t *testing.T) {
 	hs := coregeneric.HashsetFrom([]string{"a"})
 	actual := args.Map{"len": len(hs.Map())}

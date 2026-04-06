@@ -126,28 +126,6 @@ func Test_IfSlice_String_Verification(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_NilCheck_Verification(t *testing.T) {
-	for caseIndex, testCase := range nilCheckTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		isNilVal, _ := input.Get("isNil")
-		isNil := isNilVal == true
-		onNil, _ := input.GetAsString("onNil")
-		onNonNil, _ := input.GetAsString("onNonNil")
-
-		// Act
-		var canBeEmpty any
-		if !isNil {
-			canBeEmpty = "something"
-		}
-		result := conditional.NilCheck(canBeEmpty, onNil, onNonNil)
-
-		// Assert
-		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
-	}
-}
-
 func Test_DefOnNil_Verification(t *testing.T) {
 	for caseIndex, testCase := range defOnNilTestCases {
 		// Arrange

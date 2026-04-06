@@ -6,58 +6,6 @@ import (
 	"github.com/alimtvnetwork/core/corecomparator"
 	"github.com/alimtvnetwork/core/coretests/args"
 )
-
-func Test_BaseIsCaseSensitive_Verification(t *testing.T) {
-	for caseIndex, testCase := range baseIsCaseSensitiveTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		isCaseSensitive := input.GetAsBoolDefault("isCaseSensitive", false)
-
-		b := corecomparator.BaseIsCaseSensitive{IsCaseSensitive: isCaseSensitive}
-
-		// Act
-		cloned := b.Clone()
-		clonedPtr := b.ClonePtr()
-		baseIgnore := b.BaseIsIgnoreCase()
-
-		actual := args.Map{
-			"isIgnoreCase": b.IsIgnoreCase(),
-			"cloneMatch":   cloned.IsCaseSensitive == b.IsCaseSensitive &&
-				clonedPtr.IsCaseSensitive == b.IsCaseSensitive &&
-				baseIgnore.IsIgnoreCase == b.IsIgnoreCase(),
-		}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_BaseIsIgnoreCase_Verification(t *testing.T) {
-	for caseIndex, testCase := range baseIsIgnoreCaseTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		isIgnoreCase := input.GetAsBoolDefault("isIgnoreCase", false)
-
-		b := corecomparator.BaseIsIgnoreCase{IsIgnoreCase: isIgnoreCase}
-
-		// Act
-		cloned := b.Clone()
-		clonedPtr := b.ClonePtr()
-		baseSensitive := b.BaseIsCaseSensitive()
-
-		actual := args.Map{
-			"isCaseSensitive": b.IsCaseSensitive(),
-			"cloneMatch":      cloned.IsIgnoreCase == b.IsIgnoreCase &&
-				clonedPtr.IsIgnoreCase == b.IsIgnoreCase &&
-				baseSensitive.IsCaseSensitive == b.IsCaseSensitive(),
-		}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_Compare_Is_And_Methods_Verification(t *testing.T) {
 	for caseIndex, testCase := range compareIsMethodTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -101,42 +49,6 @@ func Test_Compare_Is_And_Methods_Verification(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_BaseIsCaseSensitive_ClonePtr_Nil_Verification(t *testing.T) {
-	for caseIndex, testCase := range baseIsCaseSensitiveNilTestCases {
-		// Arrange
-		var b *corecomparator.BaseIsCaseSensitive
-
-		// Act
-		result := b.ClonePtr()
-
-		actual := args.Map{
-			"isNil": result == nil,
-		}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_BaseIsIgnoreCase_ClonePtr_Nil_Verification(t *testing.T) {
-	for caseIndex, testCase := range baseIsIgnoreCaseNilTestCases {
-		// Arrange
-		var b *corecomparator.BaseIsIgnoreCase
-
-		// Act
-		result := b.ClonePtr()
-
-		actual := args.Map{
-			"isNil": result == nil,
-		}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_Compare_UnmarshalJSON_Verification(t *testing.T) {
 	for caseIndex, testCase := range compareUnmarshalJsonTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)

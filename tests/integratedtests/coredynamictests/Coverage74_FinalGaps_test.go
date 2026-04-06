@@ -276,38 +276,6 @@ func Test_Cov74_MapAnyItems_JsonString_MarshalError(t *testing.T) {
 	}
 }
 
-func Test_Cov74_MapAnyItems_JsonStringMust_Panics(t *testing.T) {
-	// Arrange
-	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": make(chan int)}}
-	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic")
-		}
-	}()
-
-	// Act
-	m.JsonStringMust()
-}
-
-// ── MapAnyItems.ClonePtr: HasError branch ──
-
-func Test_Cov74_MapAnyItems_ClonePtr_MarshalError(t *testing.T) {
-	// Arrange
-	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": math.NaN()}}
-
-	// Act
-	_, err := m.ClonePtr()
-
-	// Assert — NaN may or may not cause JSON error depending on implementation
-	_ = err
-}
-
-// ── MapAnyItems.JsonMapResults: exercises conversion ──
-
-func Test_Cov74_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
-	// Arrange
-	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": "1", "b": "2"}}
-
 	// Act
 	mr, err := m.JsonMapResults()
 

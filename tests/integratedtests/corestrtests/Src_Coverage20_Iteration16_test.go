@@ -27,25 +27,6 @@ func Test_SrcC20_ValidValue_Constructors_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC20_ValidValue_BytesOnce_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC20_ValidValue_BytesOnce_Verification", func() {
-		// Arrange
-		tc := srcC20ValidValueBytesOnceTestCase
-		vv := corestr.NewValidValue("test")
-
-		// Act
-		actual := args.Map{
-			"b1":   string(vv.ValueBytesOnce()),
-			"b2":   string(vv.ValueBytesOnce()),
-			"bPtr": string(vv.ValueBytesOncePtr()),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC20_ValidValue_StringChecks_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC20_ValidValue_StringChecks_Verification", func() {
 		// Arrange

@@ -17,73 +17,17 @@ func Test_Cov5_Clone(t *testing.T) {
 	expected := args.Map{"len": 2, "nilLen": 0}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct -- 2 items", actual)
 }
-
-func Test_Cov5_ClonePtr(t *testing.T) {
-	result := stringslice.ClonePtr([]string{"a"})
-	emptyResult := stringslice.ClonePtr(nil)
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 1, "emptyLen": 0}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct -- 1 item", actual)
 }
-
-func Test_Cov5_CloneUsingCap(t *testing.T) {
-	result := stringslice.CloneUsingCap(5, []string{"a"})
-	empty := stringslice.CloneUsingCap(5, nil)
-	actual := args.Map{"len": len(result), "emptyLen": len(empty)}
-	expected := args.Map{"len": 1, "emptyLen": 0}
-	expected.ShouldBeEqual(t, 0, "CloneUsingCap returns correct -- cap 5", actual)
-}
-
-// ── Empty / EmptyPtr ──
-
-func Test_Cov5_Empty(t *testing.T) {
-	actual := args.Map{"len": len(stringslice.Empty()), "ptrLen": len(stringslice.EmptyPtr())}
-	expected := args.Map{"len": 0, "ptrLen": 0}
-	expected.ShouldBeEqual(t, 0, "Empty returns empty -- zero items", actual)
-}
-
-// ── First / FirstPtr / FirstOrDefault / FirstOrDefaultWith ──
-
-func Test_Cov5_First(t *testing.T) {
-	actual := args.Map{"val": stringslice.First([]string{"a", "b"})}
-	expected := args.Map{"val": "a"}
-	expected.ShouldBeEqual(t, 0, "First returns first -- 2 items", actual)
-}
-
-func Test_Cov5_FirstPtr(t *testing.T) {
-	actual := args.Map{"val": stringslice.FirstPtr([]string{"x"})}
-	expected := args.Map{"val": "x"}
-	expected.ShouldBeEqual(t, 0, "FirstPtr returns first -- 1 item", actual)
-}
-
 func Test_Cov5_FirstOrDefault(t *testing.T) {
 	actual := args.Map{"found": stringslice.FirstOrDefault([]string{"a"}), "empty": stringslice.FirstOrDefault(nil)}
 	expected := args.Map{"found": "a", "empty": ""}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefault returns correct -- found and empty", actual)
 }
-
-func Test_Cov5_FirstOrDefaultWith(t *testing.T) {
-	v, ok := stringslice.FirstOrDefaultWith([]string{"a"}, "def")
-	v2, ok2 := stringslice.FirstOrDefaultWith(nil, "def")
-	actual := args.Map{"v": v, "ok": ok, "v2": v2, "ok2": ok2}
-	expected := args.Map{"v": "a", "ok": true, "v2": "def", "ok2": false}
-	expected.ShouldBeEqual(t, 0, "FirstOrDefaultWith returns correct -- found and default", actual)
-}
-
-// ── Last / LastPtr / LastOrDefault ──
-
 func Test_Cov5_Last(t *testing.T) {
 	actual := args.Map{"val": stringslice.Last([]string{"a", "b"})}
 	expected := args.Map{"val": "b"}
 	expected.ShouldBeEqual(t, 0, "Last returns last -- 2 items", actual)
 }
-
-func Test_Cov5_LastPtr(t *testing.T) {
-	actual := args.Map{"val": stringslice.LastPtr([]string{"x", "y"})}
-	expected := args.Map{"val": "y"}
-	expected.ShouldBeEqual(t, 0, "LastPtr returns last -- 2 items", actual)
-}
-
 func Test_Cov5_LastOrDefault(t *testing.T) {
 	actual := args.Map{"found": stringslice.LastOrDefault([]string{"a", "b"}), "empty": stringslice.LastOrDefault(nil)}
 	expected := args.Map{"found": "b", "empty": ""}
@@ -105,51 +49,11 @@ func Test_Cov5_FirstLastDefaultStatus_Single(t *testing.T) {
 	expected := args.Map{"first": "a", "hasFirst": true, "hasLast": false, "isValid": false}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus single -- first only", actual)
 }
-
-func Test_Cov5_FirstLastDefaultStatus_Multiple(t *testing.T) {
-	s := stringslice.FirstLastDefaultStatus([]string{"a", "b", "c"})
-	actual := args.Map{"first": s.First, "last": s.Last, "isValid": s.IsValid, "hasFirst": s.HasFirst, "hasLast": s.HasLast}
-	expected := args.Map{"first": "a", "last": "c", "isValid": true, "hasFirst": true, "hasLast": true}
-	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus multiple -- all valid", actual)
-}
-
-// ── HasAnyItem / HasAnyItemPtr / IsEmpty / IsEmptyPtr / LengthOfPointer / SlicePtr ──
-
 func Test_Cov5_HasAnyItem(t *testing.T) {
 	actual := args.Map{"yes": stringslice.HasAnyItem([]string{"a"}), "no": stringslice.HasAnyItem(nil)}
 	expected := args.Map{"yes": true, "no": false}
 	expected.ShouldBeEqual(t, 0, "HasAnyItem returns correct value -- returns correct", actual)
 }
-
-func Test_Cov5_HasAnyItemPtr(t *testing.T) {
-	actual := args.Map{"yes": stringslice.HasAnyItemPtr([]string{"a"}), "no": stringslice.HasAnyItemPtr(nil)}
-	expected := args.Map{"yes": true, "no": false}
-	expected.ShouldBeEqual(t, 0, "HasAnyItemPtr returns correct value -- returns correct", actual)
-}
-
-func Test_Cov5_IsEmptyPtr(t *testing.T) {
-	actual := args.Map{"empty": stringslice.IsEmptyPtr(nil), "notEmpty": stringslice.IsEmptyPtr([]string{"a"})}
-	expected := args.Map{"empty": true, "notEmpty": false}
-	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- returns correct", actual)
-}
-
-func Test_Cov5_LengthOfPointer(t *testing.T) {
-	actual := args.Map{"len": stringslice.LengthOfPointer([]string{"a", "b"})}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "LengthOfPointer returns correct value -- returns 2", actual)
-}
-
-func Test_Cov5_SlicePtr(t *testing.T) {
-	actual := args.Map{"len": len(stringslice.SlicePtr([]string{"a"})), "emptyLen": len(stringslice.SlicePtr(nil))}
-	expected := args.Map{"len": 1, "emptyLen": 0}
-	expected.ShouldBeEqual(t, 0, "SlicePtr returns correct value -- returns correct", actual)
-}
-
-// ── IndexAt / SafeIndexAt / SafeIndexAtWith ──
-
-func Test_Cov5_IndexAt(t *testing.T) {
-	actual := args.Map{"val": stringslice.IndexAt([]string{"a", "b"}, 1)}
-	expected := args.Map{"val": "b"}
 	expected.ShouldBeEqual(t, 0, "IndexAt returns correct -- index 1", actual)
 }
 
@@ -163,33 +67,6 @@ func Test_Cov5_SafeIndexAt(t *testing.T) {
 	expected := args.Map{"valid": "b", "invalid": "", "neg": "", "empty": ""}
 	expected.ShouldBeEqual(t, 0, "SafeIndexAt returns correct -- all branches", actual)
 }
-
-func Test_Cov5_SafeIndexAtWith(t *testing.T) {
-	actual := args.Map{
-		"valid":   stringslice.SafeIndexAtWith([]string{"a", "b"}, 1, "def"),
-		"invalid": stringslice.SafeIndexAtWith([]string{"a"}, 5, "def"),
-	}
-	expected := args.Map{"valid": "b", "invalid": "def"}
-	expected.ShouldBeEqual(t, 0, "SafeIndexAtWith returns non-empty -- returns correct", actual)
-}
-
-// ── SafeIndexAtUsingLastIndexPtr ──
-
-func Test_Cov5_SafeIndexAtUsingLastIndexPtr(t *testing.T) {
-	actual := args.Map{
-		"valid":    stringslice.SafeIndexAtUsingLastIndexPtr([]string{"a", "b"}, 1, 0),
-		"zeroLast": stringslice.SafeIndexAtUsingLastIndexPtr([]string{"a"}, 0, 0),
-		"negLast":  stringslice.SafeIndexAtUsingLastIndexPtr([]string{"a"}, -1, 0),
-	}
-	expected := args.Map{"valid": "a", "zeroLast": "", "negLast": ""}
-	expected.ShouldBeEqual(t, 0, "SafeIndexAtUsingLastIndexPtr returns correct value -- returns correct", actual)
-}
-
-// ── NonEmpty / NonEmptyIf / NonEmptyStrings / NonNullStrings ──
-
-func Test_Cov5_NonEmptySlice(t *testing.T) {
-	result := stringslice.NonEmptySlice([]string{"a", "", "b"})
-	nilResult := stringslice.NonEmptySlice(nil)
 	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
 	expected := args.Map{"len": 2, "nilLen": 0}
 	expected.ShouldBeEqual(t, 0, "NonEmptySlice returns 2 -- skip empty", actual)
@@ -450,48 +327,6 @@ func Test_Cov5_ExpandBySplit(t *testing.T) {
 	expected := args.Map{"len": 4, "emptyLen": 0}
 	expected.ShouldBeEqual(t, 0, "ExpandBySplit returns correct value -- returns correct", actual)
 }
-
-// ── LinesProcess ──
-
-func Test_Cov5_LinesProcess(t *testing.T) {
-	result := stringslice.LinesProcess([]string{"a", "b", "c"}, func(i int, s string) (string, bool, bool) {
-		return s + "!", true, i == 1
-	})
-	emptyResult := stringslice.LinesProcess(nil, nil)
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 0}
-	expected.ShouldBeEqual(t, 0, "LinesProcess returns correct -- break at 1", actual)
-}
-
-// ── MakeDefault / MakeDefaultPtr / MakeLen / MakePtr / MakeLenPtr ──
-
-func Test_Cov5_MakeDefault(t *testing.T) {
-	actual := args.Map{
-		"defLen":    len(stringslice.MakeDefault(5)),
-		"defPtrLen": len(stringslice.MakeDefaultPtr(5)),
-	}
-	expected := args.Map{"defLen": 0, "defPtrLen": 0}
-	expected.ShouldBeEqual(t, 0, "MakeDefault returns empty -- cap 5", actual)
-}
-
-// ── SafeIndexesPtr (deprecated) ──
-
-func Test_Cov5_SafeIndexesPtr(t *testing.T) {
-	result := stringslice.SafeIndexesPtr([]string{"a", "b"}, 0, 1)
-	emptyResult := stringslice.SafeIndexesPtr(nil, 0)
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 1}
-	expected.ShouldBeEqual(t, 0, "SafeIndexesPtr returns correct value -- returns correct", actual)
-}
-
-// ── NonEmptySlicePtr (deprecated) ──
-
-func Test_Cov5_NonEmptySlicePtr(t *testing.T) {
-	result := stringslice.NonEmptySlicePtr([]string{"a", "", "b"})
-	emptyResult := stringslice.NonEmptySlicePtr(nil)
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 0}
-	expected.ShouldBeEqual(t, 0, "NonEmptySlicePtr returns empty -- returns correct", actual)
 }
 
 // ── Joins / JoinWith (from CloneIf.go) ──

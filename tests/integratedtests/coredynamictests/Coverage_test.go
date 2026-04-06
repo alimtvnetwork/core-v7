@@ -333,20 +333,6 @@ func Test_Cov_DynamicStatus_Clone(t *testing.T) {
 	expected := args.Map{"isValid": false, "message": "error"}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus Clone returns copy -- with message", actual)
 }
-
-func Test_Cov_DynamicStatus_ClonePtr(t *testing.T) {
-	ds := coredynamic.InvalidDynamicStatus("error")
-	clonedPtr := ds.ClonePtr()
-	var nilDs *coredynamic.DynamicStatus
-	actual := args.Map{"notNil": clonedPtr != nil, "nilClone": nilDs.ClonePtr() == nil}
-	expected := args.Map{"notNil": true, "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "DynamicStatus ClonePtr returns expected -- valid and nil", actual)
-}
-
-// ==========================================================================
-// ValueStatus coverage
-// ==========================================================================
-
 func Test_Cov_ValueStatus_InvalidNoMessage(t *testing.T) {
 	vs := coredynamic.InvalidValueStatusNoMessage()
 	actual := args.Map{"isValid": vs.IsValid, "message": vs.Message}
@@ -468,16 +454,6 @@ func Test_Cov_SimpleResult_Clone(t *testing.T) {
 	expected := args.Map{"result": "data", "isValid": true}
 	expected.ShouldBeEqual(t, 0, "SimpleResult Clone returns copy -- valid", actual)
 }
-
-func Test_Cov_SimpleResult_ClonePtr(t *testing.T) {
-	sr := coredynamic.NewSimpleResult("data", true, "")
-	cloned := sr.ClonePtr()
-	var nilSr *coredynamic.SimpleResult
-	actual := args.Map{"notNil": cloned != nil, "nilClone": nilSr.ClonePtr() == nil}
-	expected := args.Map{"notNil": true, "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "SimpleResult ClonePtr returns expected -- valid and nil", actual)
-}
-
 func Test_Cov_SimpleResult_GetErrorOnTypeMismatch(t *testing.T) {
 	sr := coredynamic.NewSimpleResultValid("hello")
 	errMatch := sr.GetErrorOnTypeMismatch(reflect.TypeOf(""), false)

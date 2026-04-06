@@ -323,23 +323,6 @@ func Test_CovS23_19_HashsetsCollection_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovS23_20_HashsetsCollection_ListPtr(t *testing.T) {
-	safeTest(t, "Test_CovS23_20_HashsetsCollection_ListPtr", func() {
-		// Arrange
-		hs := corestr.New.Hashset.Strings([]string{"a"})
-		hc := corestr.New.HashsetsCollection.UsingHashsetsPointers(hs)
-
-		// Act
-		listPtr := hc.ListPtr()
-
-		// Assert
-		if listPtr == nil || len(*listPtr) != 1 {
-			t.Errorf("ListPtr should return pointer to 1-item slice")
-		}
-	})
-}
-
 func Test_CovS23_21_HashsetsCollection_ListDirectPtr(t *testing.T) {
 	safeTest(t, "Test_CovS23_21_HashsetsCollection_ListDirectPtr", func() {
 		// Arrange

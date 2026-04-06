@@ -184,24 +184,6 @@ func Test_Cov8_KeyValCollection_Serialize(t *testing.T) {
 	expected := args.Map{"hasBytes": true, "errNil": true}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Serialize", actual)
 }
-
-func Test_Cov8_KeyValCollection_Clone(t *testing.T) {
-	c := coredynamic.NewKeyValCollection(5)
-	c.Add(coredynamic.KeyVal{Key: "a", Value: 1})
-	cloned := c.Clone()
-	clonedP := cloned.Ptr()
-	clonedPtr := c.ClonePtr()
-	var nilC *coredynamic.KeyValCollection
-	nilClone := nilC.ClonePtr()
-	actual := args.Map{
-		"cloneLen":    clonedP.Length(),
-		"clonePtrLen": clonedPtr.Length(),
-		"nilCloneNil": nilClone == nil,
-	}
-	expected := args.Map{"cloneLen": 1, "clonePtrLen": 1, "nilCloneNil": true}
-	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Clone", actual)
-}
-
 func Test_Cov8_KeyValCollection_Paging(t *testing.T) {
 	c := coredynamic.NewKeyValCollection(10)
 	for i := 0; i < 5; i++ {
@@ -846,25 +828,6 @@ func Test_Cov8_MapAnyItems_IsEqual(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- IsEqual", actual)
 }
-
-func Test_Cov8_MapAnyItems_ClonePtr(t *testing.T) {
-	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
-	cloned, err := m.ClonePtr()
-	var nilM *coredynamic.MapAnyItems
-	nilClone, nilErr := nilM.ClonePtr()
-	actual := args.Map{
-		"clonedLen":    cloned.Length(),
-		"errNil":       err == nil,
-		"nilCloneNil":  nilClone == nil,
-		"nilErrNotNil": nilErr != nil,
-	}
-	expected := args.Map{
-		"clonedLen": 1, "errNil": true,
-		"nilCloneNil": true, "nilErrNotNil": true,
-	}
-	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- ClonePtr", actual)
-}
-
 func Test_Cov8_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	self := m.MapAnyItems()

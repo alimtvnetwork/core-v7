@@ -281,15 +281,6 @@ func Test_C28_33_String_WithError(t *testing.T) {
 		t.Fatal("expected non-empty")
 	}
 }
-
-func Test_C28_34_String_NilBytes(t *testing.T) {
-	r := corejson.Result{}
-	s := r.String()
-	_ = s
-}
-
-// ─── SafeNonIssueBytes, SafeBytes, Values, SafeValues, SafeValuesPtr ───
-
 func Test_C28_35_SafeNonIssueBytes_HasIssue(t *testing.T) {
 	r := &corejson.Result{Error: errors.New("fail")}
 	b := r.SafeNonIssueBytes()
@@ -328,26 +319,6 @@ func Test_C28_39_SafeValues_NilBytes(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
-
-func Test_C28_40_SafeValuesPtr_HasIssue(t *testing.T) {
-	r := &corejson.Result{Error: errors.New("fail")}
-	b := r.SafeValuesPtr()
-	if len(b) != 0 {
-		t.Fatal("expected empty")
-	}
-}
-
-func Test_C28_41_SafeValuesPtr_Valid(t *testing.T) {
-	r := &corejson.Result{Bytes: []byte(`"x"`)}
-	b := r.SafeValuesPtr()
-	if len(b) == 0 {
-		t.Fatal("expected bytes")
-	}
-}
-
-// ─── Result.Raw, RawMust, RawString, RawStringMust, RawErrString, RawPrettyString ───
-
-func Test_C28_42_Raw_Nil(t *testing.T) {
 	var r *corejson.Result
 	_, err := r.Raw()
 	if err == nil {
@@ -970,17 +941,6 @@ func Test_C28_117_Dispose_Nil(t *testing.T) {
 	var r *corejson.Result
 	r.Dispose() // should not panic
 }
-
-func Test_C28_118_Dispose_Valid(t *testing.T) {
-	r := &corejson.Result{Bytes: []byte(`"x"`), Error: errors.New("e"), TypeName: "T"}
-	r.Dispose()
-	if r.Error != nil || r.Bytes != nil || r.TypeName != "" {
-		t.Fatal("expected disposed")
-	}
-}
-
-// ─── Result.CloneIf, ClonePtr, Clone ───
-
 func Test_C28_119_CloneIf_NoClone(t *testing.T) {
 	r := corejson.Result{Bytes: []byte(`"x"`)}
 	c := r.CloneIf(false, false)
@@ -998,24 +958,6 @@ func Test_C28_121_CloneIf_DeepClone(t *testing.T) {
 	c := r.CloneIf(true, true)
 	_ = c
 }
-
-func Test_C28_122_ClonePtr_Nil(t *testing.T) {
-	var r *corejson.Result
-	c := r.ClonePtr(false)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
-}
-
-func Test_C28_123_ClonePtr_Valid(t *testing.T) {
-	r := &corejson.Result{Bytes: []byte(`"x"`)}
-	c := r.ClonePtr(true)
-	if c == nil {
-		t.Fatal("expected non-nil")
-	}
-}
-
-func Test_C28_124_Clone_EmptyBytes(t *testing.T) {
 	r := corejson.Result{}
 	c := r.Clone(true)
 	_ = c

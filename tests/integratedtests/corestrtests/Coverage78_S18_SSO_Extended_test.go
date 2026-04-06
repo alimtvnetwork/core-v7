@@ -146,38 +146,6 @@ func Test_C78_SSO_SplitTrimNonWhitespace(t *testing.T) {
 		}
 	})
 }
-
-func Test_C78_SSO_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_C78_SSO_ClonePtr", func() {
-		// Arrange
-		sso := corestr.New.SimpleStringOnce.InitPtr("hello")
-
-		// Act
-		cloned := sso.ClonePtr()
-
-		// Assert
-		if cloned == nil || cloned.Value() != "hello" {
-			t.Error("clone mismatch")
-		}
-	})
-}
-
-func Test_C78_SSO_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_C78_SSO_ClonePtr_Nil", func() {
-		// Arrange
-		var sso *corestr.SimpleStringOnce
-
-		// Act
-		cloned := sso.ClonePtr()
-
-		// Assert
-		if cloned != nil {
-			t.Error("expected nil")
-		}
-	})
-}
-
-func Test_C78_SSO_Clone(t *testing.T) {
 	safeTest(t, "Test_C78_SSO_Clone", func() {
 		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("x")

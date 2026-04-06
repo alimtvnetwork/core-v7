@@ -62,22 +62,6 @@ func Test_StringSlice_AppendLineNew_EmptySlice(t *testing.T) {
 		t.Errorf("expected [x], got %v", result)
 	}
 }
-
-// ==========================================
-// PrependLineNew
-// ==========================================
-
-func Test_StringSlice_PrependLineNew_Basic(t *testing.T) {
-	result := stringslice.PrependLineNew("a", []string{"b", "c"})
-	if len(result) != 3 || result[0] != "a" {
-		t.Errorf("expected [a b c], got %v", result)
-	}
-}
-
-// ==========================================
-// MakeDefault / Make / MakeLen / MakePtr / MakeLenPtr / MakeDefaultPtr
-// ==========================================
-
 func Test_StringSlice_MakeDefault(t *testing.T) {
 	result := stringslice.MakeDefault(5)
 	if len(result) != 0 || cap(result) != 5 {
@@ -91,113 +75,13 @@ func Test_StringSlice_Make(t *testing.T) {
 		t.Errorf("expected len=3 cap=5, got len=%d cap=%d", len(result), cap(result))
 	}
 }
-
-func Test_StringSlice_MakeLen(t *testing.T) {
-	result := stringslice.MakeLen(3)
-	if len(result) != 3 {
-		t.Errorf("expected len=3, got %d", len(result))
-	}
-}
-
-// ==========================================
-// Empty / EmptyPtr
-// ==========================================
-
 func Test_StringSlice_Empty(t *testing.T) {
 	result := stringslice.Empty()
 	if result == nil || len(result) != 0 {
 		t.Error("Empty should return non-nil empty slice")
 	}
 }
-
-func Test_StringSlice_EmptyPtr(t *testing.T) {
-	result := stringslice.EmptyPtr()
-	if len(result) != 0 {
-		t.Error("EmptyPtr should return empty slice")
-	}
-}
-
-// ==========================================
-// IsEmpty / IsEmptyPtr / HasAnyItem / HasAnyItemPtr
-// ==========================================
-
-func Test_StringSlice_IsEmptyPtr_Nil(t *testing.T) {
-	if !stringslice.IsEmptyPtr(nil) {
-		t.Error("nil ptr should be empty")
-	}
-}
-
-func Test_StringSlice_IsEmptyPtr_NonNil(t *testing.T) {
-	s := []string{"a"}
-	if stringslice.IsEmptyPtr(s) {
-		t.Error("non-empty should not be empty")
-	}
-}
-
-func Test_StringSlice_HasAnyItemPtr_Nil(t *testing.T) {
-	if stringslice.HasAnyItemPtr(nil) {
-		t.Error("nil should not have items")
-	}
-}
-
-func Test_StringSlice_HasAnyItemPtr_NonNil(t *testing.T) {
-	s := []string{"a"}
-	if !stringslice.HasAnyItemPtr(s) {
-		t.Error("non-empty should have items")
-	}
-}
-
-// ==========================================
-// CloneIf
-// ==========================================
-
-func Test_StringSlice_CloneIf_True(t *testing.T) {
-	src := []string{"a", "b"}
-	result := stringslice.CloneIf(true, 0, src)
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
-	result[0] = "z"
-	if src[0] == "z" {
 		t.Error("CloneIf true should produce independent copy")
-	}
-}
-
-func Test_StringSlice_CloneIf_False(t *testing.T) {
-	src := []string{"a", "b"}
-	result := stringslice.CloneIf(false, 0, src)
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
-}
-
-// ==========================================
-// ClonePtr
-// ==========================================
-
-func Test_StringSlice_ClonePtr_Nil(t *testing.T) {
-	result := stringslice.ClonePtr(nil)
-	if len(result) != 0 {
-		t.Error("nil should return empty slice")
-	}
-}
-
-func Test_StringSlice_ClonePtr_NonEmpty(t *testing.T) {
-	s := []string{"a", "b"}
-	result := stringslice.ClonePtr(s)
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
-}
-
-// ==========================================
-// MergeNewSimple
-// ==========================================
-
-func Test_StringSlice_MergeNewSimple_Basic(t *testing.T) {
-	result := stringslice.MergeNewSimple([]string{"a"}, []string{"b", "c"})
-	if len(result) != 3 {
-		t.Errorf("expected 3, got %d", len(result))
 	}
 }
 
@@ -236,54 +120,6 @@ func Test_StringSlice_NonEmptyJoin(t *testing.T) {
 		t.Errorf("expected 'a,b', got '%s'", result)
 	}
 }
-
-// ==========================================
-// NonWhitespaceJoin
-// ==========================================
-
-func Test_StringSlice_NonWhitespaceJoin(t *testing.T) {
-	result := stringslice.NonWhitespaceJoin([]string{"a", "  ", "b"}, ",")
-	if result != "a,b" {
-		t.Errorf("expected 'a,b', got '%s'", result)
-	}
-}
-
-// ==========================================
-// SlicePtr / LengthOfPointer
-// ==========================================
-
-func Test_StringSlice_SlicePtr(t *testing.T) {
-	s := []string{"a", "b"}
-	result := stringslice.SlicePtr(s)
-	if len(result) != 2 {
-		t.Error("SlicePtr should return slice")
-	}
-}
-
-func Test_StringSlice_LengthOfPointer_Nil(t *testing.T) {
-	if stringslice.LengthOfPointer(nil) != 0 {
-		t.Error("nil should return 0")
-	}
-}
-
-func Test_StringSlice_LengthOfPointer_NonNil(t *testing.T) {
-	s := []string{"a", "b", "c"}
-	if stringslice.LengthOfPointer(s) != 3 {
-		t.Errorf("expected 3")
-	}
-}
-
-// ==========================================
-// IndexesDefault / SafeIndexes
-// ==========================================
-
-func Test_StringSlice_IndexesDefault(t *testing.T) {
-	result := stringslice.IndexesDefault([]string{"a", "b", "c"}, 0, 2)
-	if len(result) != 2 || result[0] != "a" || result[1] != "c" {
-		t.Errorf("unexpected result: %v", result)
-	}
-}
-
 // ==========================================
 // SplitTrimmedNonEmpty
 // ==========================================

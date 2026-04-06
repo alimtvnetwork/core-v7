@@ -119,31 +119,6 @@ func Test_Cov2_TypedDynamic_ValueMethods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Value* methods return expected -- various", actual)
 }
-
-func Test_Cov2_TypedDynamic_Clone(t *testing.T) {
-	d := coredynamic.NewTypedDynamicValid[string]("hello")
-	cloned := d.Clone()
-	ptr := coredynamic.NewTypedDynamicPtr[string]("world", true)
-	clonedPtr := ptr.ClonePtr()
-	var nilPtr *coredynamic.TypedDynamic[string]
-	nilCloned := nilPtr.ClonePtr()
-
-	actual := args.Map{
-		"clonedData": cloned.Data(), "clonedValid": cloned.IsValid(),
-		"clonedPtrData": clonedPtr.Data(),
-		"nilCloned": nilCloned == nil,
-		"nonPtr": d.NonPtr().Data(),
-		"ptr": d.Ptr() != nil,
-	}
-	expected := args.Map{
-		"clonedData": "hello", "clonedValid": true,
-		"clonedPtrData": "world",
-		"nilCloned": true,
-		"nonPtr": "hello", "ptr": true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedDynamic Clone methods return expected -- all paths", actual)
-}
-
 func Test_Cov2_TypedDynamic_ToDynamic(t *testing.T) {
 	d := coredynamic.NewTypedDynamicValid[string]("hello")
 	dyn := d.ToDynamic()
@@ -271,41 +246,6 @@ func Test_Cov2_TypedSimpleResult_GetAs(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult GetAs methods return expected -- string", actual)
 }
-
-func Test_Cov2_TypedSimpleResult_CloneAndConvert(t *testing.T) {
-	r := coredynamic.NewTypedSimpleResultValid[string]("hello")
-	cloned := r.Clone()
-	clonedPtr := r.ClonePtr()
-	var nilR *coredynamic.TypedSimpleResult[string]
-	nilClone := nilR.Clone()
-	nilClonePtr := nilR.ClonePtr()
-	sr := r.ToSimpleResult()
-	nilSr := nilR.ToSimpleResult()
-	td := r.ToTypedDynamic()
-	nilTd := nilR.ToTypedDynamic()
-	dyn := r.ToDynamic()
-	nilDyn := nilR.ToDynamic()
-	actual := args.Map{
-		"clonedData": cloned.Data(), "clonedPtrNotNil": clonedPtr != nil,
-		"nilCloneInvalid": nilClone.IsInvalid(), "nilClonePtr": nilClonePtr == nil,
-		"srValid": sr.IsValid(), "nilSrInvalid": nilSr.IsInvalid(),
-		"tdValid": td.IsValid(), "nilTdInvalid": nilTd.IsInvalid(),
-		"dynValid": dyn.IsValid(), "nilDynInvalid": nilDyn.IsInvalid(),
-	}
-	expected := args.Map{
-		"clonedData": "hello", "clonedPtrNotNil": true,
-		"nilCloneInvalid": true, "nilClonePtr": true,
-		"srValid": true, "nilSrInvalid": true,
-		"tdValid": true, "nilTdInvalid": true,
-		"dynValid": true, "nilDynInvalid": true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedSimpleResult Clone/Convert return expected -- all paths", actual)
-}
-
-// ==========================================================================
-// TypedSimpleRequest — comprehensive coverage
-// ==========================================================================
-
 func Test_Cov2_TypedSimpleRequest_Constructors(t *testing.T) {
 	r1 := coredynamic.NewTypedSimpleRequest[string]("hello", true, "")
 	r2 := coredynamic.NewTypedSimpleRequestValid[string]("world")

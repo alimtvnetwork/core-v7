@@ -119,84 +119,6 @@ func Test_Src_SafeIndexAt_Verification(t *testing.T) {
 		})
 	}
 }
-
-func Test_Src_FirstPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcFirstPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		slice := input["input"].([]string)
-
-		// Act
-		result := stringslice.FirstPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_FirstOrDefaultPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcFirstOrDefaultPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.FirstOrDefaultPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_LastPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcLastPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		slice := input["input"].([]string)
-
-		// Act
-		result := stringslice.LastPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_LastOrDefaultPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcLastOrDefaultPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.LastOrDefaultPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_FirstOrDefaultWith_Verification(t *testing.T) {
-	for caseIndex, tc := range srcFirstOrDefaultWithTestCases {
-		// Arrange
 		input := tc.ArrangeInput.(args.Map)
 		sliceRaw := input["input"]
 		defaultVal := input["default"].(string)
@@ -262,64 +184,6 @@ func Test_Src_SafeIndexAtWith_Verification(t *testing.T) {
 		})
 	}
 }
-
-func Test_Src_SafeIndexAtWithPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcSafeIndexAtWithPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-		index := input["index"].(int)
-		defaultVal := input["default"].(string)
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.SafeIndexAtWithPtr(slice, index, defaultVal)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_LastIndexPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcLastIndexPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		slice := input["input"].([]string)
-
-		// Act
-		result := stringslice.LastIndexPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_LastSafeIndexPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcLastSafeIndexPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		slice := input["input"].([]string)
-
-		// Act
-		result := stringslice.LastSafeIndexPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"result": result,
-		})
-	}
-}
-
-func Test_Src_IndexesDefault_Verification(t *testing.T) {
-	for caseIndex, tc := range srcIndexesDefaultTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
 		sliceRaw := input["input"]
@@ -362,30 +226,6 @@ func Test_Src_SafeRangeItems_Verification(t *testing.T) {
 		})
 	}
 }
-
-func Test_Src_SafeRangeItemsPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcSafeRangeItemsPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-		start := input["start"].(int)
-		end := input["end"].(int)
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.SafeRangeItemsPtr(slice, start, end)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"length": len(result),
-		})
-	}
-}
-
 func Test_Src_FirstLastDefault_Verification(t *testing.T) {
 	for caseIndex, tc := range srcFirstLastDefaultTestCases {
 		// Arrange
@@ -407,29 +247,6 @@ func Test_Src_FirstLastDefault_Verification(t *testing.T) {
 		})
 	}
 }
-
-func Test_Src_FirstLastDefaultPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcFirstLastDefaultPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		first, last := stringslice.FirstLastDefaultPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"first": first,
-			"last":  last,
-		})
-	}
-}
-
 func Test_Src_FirstLastDefaultStatus_Verification(t *testing.T) {
 	for caseIndex, tc := range srcFirstLastDefaultStatusTestCases {
 		// Arrange
@@ -456,26 +273,5 @@ func Test_Src_FirstLastDefaultStatus_Verification(t *testing.T) {
 		}
 
 		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_Src_FirstLastDefaultStatusPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcFirstLastDefaultStatusPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		s := stringslice.FirstLastDefaultStatusPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"isValid": s.IsValid,
-		})
 	}
 }

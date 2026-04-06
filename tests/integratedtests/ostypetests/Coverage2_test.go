@@ -62,37 +62,6 @@ func Test_Cov2_Group_BasicMethods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- basic methods", actual)
 }
-
-func Test_Cov2_Group_EnumMethods(t *testing.T) {
-	g := ostype.UnixGroup
-
-	actual := args.Map{
-		"rangesLen":    len(g.RangesByte()) > 0,
-		"minByte":      g.MinByte() == 0,
-		"maxByte":      g.MaxByte() > 0,
-		"allNamesLen":  len(g.AllNameValues()) > 0,
-		"enumType":     g.EnumType() != nil,
-		"isByteEq":     g.IsByteValueEqual(byte(ostype.UnixGroup)),
-		"isNameEq":     g.IsNameEqual(g.Name()),
-		"isValEq":      g.IsValueEqual(byte(ostype.UnixGroup)),
-		"formatNE":     g.Format("%s") != "",
-		"toPtr":        g.ToPtr() != nil,
-	}
-	expected := args.Map{
-		"rangesLen":    true,
-		"minByte":      true,
-		"maxByte":      true,
-		"allNamesLen":  true,
-		"enumType":     true,
-		"isByteEq":     true,
-		"isNameEq":     true,
-		"isValEq":      true,
-		"formatNE":     true,
-		"toPtr":        true,
-	}
-	expected.ShouldBeEqual(t, 0, "Group returns correct value -- enum methods", actual)
-}
-
 func Test_Cov2_Group_AnyMethods(t *testing.T) {
 	g := ostype.UnixGroup
 

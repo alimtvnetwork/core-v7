@@ -92,24 +92,6 @@ func Test_Cov6_Trace_FileWithLine(t *testing.T) {
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Trace returns non-empty -- FileWithLine", actual)
 }
-
-func Test_Cov6_Trace_Clone(t *testing.T) {
-	trace := codestack.New.Default()
-	cloned := trace.Clone()
-	clonedPtr := trace.ClonePtr()
-	actual := args.Map{"pkg": cloned.PackageName, "ptrPkg": clonedPtr.PackageName != ""}
-	expected := args.Map{"pkg": trace.PackageName, "ptrPkg": true}
-	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
-}
-
-func Test_Cov6_Trace_ClonePtr_Nil(t *testing.T) {
-	var trace *codestack.Trace
-	actual := args.Map{"isNil": trace.ClonePtr() == nil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
-}
-
-func Test_Cov6_Trace_Dispose(t *testing.T) {
 	trace := codestack.New.Default()
 	trace.Dispose()
 	actual := args.Map{"pkg": trace.PackageName}

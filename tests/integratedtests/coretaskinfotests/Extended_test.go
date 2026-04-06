@@ -98,23 +98,6 @@ func Test_Info_Clone_Ext(t *testing.T) {
 		t.Error("Clone should preserve RootName")
 	}
 }
-
-func Test_Info_ClonePtr_Ext(t *testing.T) {
-	info := coretaskinfo.New.Info.Plain.Default("n", "d", "u")
-	cloned := info.ClonePtr()
-	if cloned == nil || cloned.RootName != "n" {
-		t.Error("ClonePtr should preserve RootName")
-	}
-}
-
-func Test_Info_NilClonePtr_Ext(t *testing.T) {
-	var info *coretaskinfo.Info
-	if info.ClonePtr() != nil {
-		t.Error("nil ClonePtr should return nil")
-	}
-}
-
-func Test_Info_ToPtr_Ext(t *testing.T) {
 	info := coretaskinfo.New.Info.Plain.Default("n", "d", "u")
 	ptr := info.ToPtr()
 	if ptr == nil {
@@ -709,24 +692,6 @@ func Test_ExcludingOptions_Clone_Ext(t *testing.T) {
 		t.Error("Clone should preserve flags")
 	}
 }
-
-func Test_ExcludingOptions_ClonePtr_Ext(t *testing.T) {
-	opts := &coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
-	cloned := opts.ClonePtr()
-	if cloned == nil || !cloned.IsExcludeRootName {
-		t.Error("ClonePtr should preserve flags")
-	}
-}
-
-func Test_ExcludingOptions_NilClonePtr_Ext(t *testing.T) {
-	var opts *coretaskinfo.ExcludingOptions
-	result := opts.ClonePtr()
-	if result == nil {
-		t.Error("nil ClonePtr should return empty options")
-	}
-}
-
-func Test_ExcludingOptions_ToPtr_Ext(t *testing.T) {
 	opts := coretaskinfo.ExcludingOptions{IsExcludeRootName: true}
 	ptr := opts.ToPtr()
 	if ptr == nil || !ptr.IsExcludeRootName {

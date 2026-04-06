@@ -168,15 +168,6 @@ func Test_Cov19_BytesCollection_GetAtSafe(t *testing.T) {
 		t.Fatal("expected nil for neg")
 	}
 }
-
-func Test_Cov19_BytesCollection_GetAtSafePtr(t *testing.T) {
-	c := corejson.NewBytesCollection.UsingCap(1)
-	c.Add([]byte(`"a"`))
-	if c.GetAtSafePtr(0) == nil {
-		t.Fatal("expected non-nil")
-	}
-}
-
 func Test_Cov19_BytesCollection_GetResultAtSafe(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
@@ -207,16 +198,6 @@ func Test_Cov19_BytesCollection_Strings(t *testing.T) {
 		t.Fatal("expected 2")
 	}
 }
-
-func Test_Cov19_BytesCollection_StringsPtr(t *testing.T) {
-	c := corejson.NewBytesCollection.UsingCap(1)
-	c.Add([]byte(`"a"`))
-	strs := c.StringsPtr()
-	if len(strs) != 1 {
-		t.Fatal("expected 1")
-	}
-}
-
 func Test_Cov19_BytesCollection_ClearDispose(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"a"`))
@@ -290,29 +271,6 @@ func Test_Cov19_BytesCollection_JsonOps(t *testing.T) {
 		t.Fatal("unexpected error")
 	}
 }
-
-func Test_Cov19_BytesCollection_CloneOps(t *testing.T) {
-	c := corejson.NewBytesCollection.UsingCap(2)
-	c.Add([]byte(`"a"`)).Add([]byte(`"b"`))
-	sc := c.ShadowClone()
-	_ = sc
-	dc := c.Clone(true)
-	_ = dc
-	cp := c.ClonePtr(true)
-	if cp == nil {
-		t.Fatal("expected clone ptr")
-	}
-}
-
-func Test_Cov19_BytesCollection_ClonePtr_Nil(t *testing.T) {
-	var c *corejson.BytesCollection
-	cp := c.ClonePtr(true)
-	if cp != nil {
-		t.Fatal("expected nil")
-	}
-}
-
-func Test_Cov19_BytesCollection_InterfaceMethods(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"a"`))
 	_ = c.AsJsonContractsBinder()
@@ -476,27 +434,6 @@ func Test_Cov19_ResultsCollection_AddMethods(t *testing.T) {
 		t.Fatal("expected at least 5")
 	}
 }
-
-func Test_Cov19_ResultsCollection_Errors(t *testing.T) {
-	c := corejson.NewResultsCollection.Empty()
-	c.Add(corejson.NewResult.Any("ok"))
-	c.Add(corejson.NewResult.Error(errors.New("e")))
-	if !c.HasError() {
-		t.Fatal("expected error")
-	}
-	errs, hasErr := c.AllErrors()
-	if !hasErr || len(errs) == 0 {
-		t.Fatal("expected errors")
-	}
-	strs := c.GetErrorsStrings()
-	if len(strs) == 0 {
-		t.Fatal("expected error strings")
-	}
-	_ = c.GetErrorsStringsPtr()
-	_ = c.GetErrorsAsSingleString()
-	_ = c.GetErrorsAsSingle()
-}
-
 func Test_Cov19_ResultsCollection_GetAtSafe(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
@@ -532,17 +469,6 @@ func Test_Cov19_ResultsCollection_ClearDispose(t *testing.T) {
 	c.Add(corejson.NewResult.Any("y"))
 	c.Dispose()
 }
-
-func Test_Cov19_ResultsCollection_GetStrings(t *testing.T) {
-	c := corejson.NewResultsCollection.Empty()
-	c.Add(corejson.NewResult.Any("x"))
-	strs := c.GetStrings()
-	if len(strs) != 1 {
-		t.Fatal("expected 1")
-	}
-	_ = c.GetStringsPtr()
-}
-
 func Test_Cov19_ResultsCollection_JsonOps(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
@@ -556,29 +482,6 @@ func Test_Cov19_ResultsCollection_JsonOps(t *testing.T) {
 	_ = c.NonPtr()
 	_ = c.Ptr()
 }
-
-func Test_Cov19_ResultsCollection_CloneOps(t *testing.T) {
-	c := corejson.NewResultsCollection.Empty()
-	c.Add(corejson.NewResult.Any("x"))
-	sc := c.ShadowClone()
-	_ = sc
-	dc := c.Clone(true)
-	_ = dc
-	cp := c.ClonePtr(true)
-	if cp == nil {
-		t.Fatal("expected clone ptr")
-	}
-}
-
-func Test_Cov19_ResultsCollection_ClonePtr_Nil(t *testing.T) {
-	var c *corejson.ResultsCollection
-	cp := c.ClonePtr(true)
-	if cp != nil {
-		t.Fatal("expected nil")
-	}
-}
-
-func Test_Cov19_ResultsCollection_SerializerMethods(t *testing.T) {
 	c := corejson.NewResultsCollection.Empty()
 	c.AddSerializerFunc(nil)
 	c.AddSerializerFunc(func() ([]byte, error) { return []byte(`"x"`), nil })
@@ -719,24 +622,6 @@ func Test_Cov19_ResultsPtrCollection_AddMethods(t *testing.T) {
 		t.Fatal("expected at least 5")
 	}
 }
-
-func Test_Cov19_ResultsPtrCollection_Errors(t *testing.T) {
-	c := corejson.NewResultsPtrCollection.Default()
-	c.Add(corejson.NewResult.AnyPtr("ok"))
-	c.Add(corejson.NewResult.ErrorPtr(errors.New("e")))
-	if !c.HasError() {
-		t.Fatal("expected error")
-	}
-	errs, hasErr := c.AllErrors()
-	if !hasErr || len(errs) == 0 {
-		t.Fatal("expected errors")
-	}
-	_ = c.GetErrorsStrings()
-	_ = c.GetErrorsStringsPtr()
-	_ = c.GetErrorsAsSingleString()
-	_ = c.GetErrorsAsSingle()
-}
-
 func Test_Cov19_ResultsPtrCollection_PagingOps(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.Default()
 	for i := 0; i < 10; i++ {
@@ -758,17 +643,6 @@ func Test_Cov19_ResultsPtrCollection_ClearDispose(t *testing.T) {
 	c.Add(corejson.NewResult.AnyPtr("y"))
 	c.Dispose()
 }
-
-func Test_Cov19_ResultsPtrCollection_GetStrings(t *testing.T) {
-	c := corejson.NewResultsPtrCollection.Default()
-	c.Add(corejson.NewResult.AnyPtr("x"))
-	strs := c.GetStrings()
-	if len(strs) != 1 {
-		t.Fatal("expected 1")
-	}
-	_ = c.GetStringsPtr()
-}
-
 func Test_Cov19_ResultsPtrCollection_JsonOps(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))

@@ -109,18 +109,6 @@ func Test_CovPL_S4_07_PC_Reverse(t *testing.T) {
 	pc4 := corepayload.New.PayloadsCollection.UsingCap(0)
 	pc4.Reverse()
 }
-
-func Test_CovPL_S4_08_PC_Clone_ClonePtr(t *testing.T) {
-	pc := corepayload.New.PayloadsCollection.UsingCap(2)
-	pc.Add(*newPWSeg4())
-	_ = pc.Clone()
-	_ = pc.ClonePtr()
-	var nilPC *corepayload.PayloadsCollection
-	if nilPC.ClonePtr() != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_CovPL_S4_09_PC_Clear_Dispose(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
@@ -856,27 +844,6 @@ func Test_CovPL_S4_79_TPW_Setters(t *testing.T) {
 	}
 	tw.SetTypedDataMust(tpwTestData{Name: "z", Value: 20})
 }
-
-func Test_CovPL_S4_80_TPW_Clone_ClonePtr_ToPayloadWrapper_Reparse(t *testing.T) {
-	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
-		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
-	_, _ = tw.Clone(true)
-	_, _ = tw.Clone(false)
-	_, _ = tw.ClonePtr(true)
-	_, _ = tw.ClonePtr(false)
-	_ = tw.ToPayloadWrapper()
-	_ = tw.PayloadWrapperValue()
-	err := tw.Reparse()
-	if err != nil {
-		t.Fatal("expected no error")
-	}
-	var nilTW *corepayload.TypedPayloadWrapper[tpwTestData]
-	cp, _ := nilTW.ClonePtr(true)
-	if cp != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_CovPL_S4_81_TPW_DynamicPayloads_PayloadsString_Length_IsNull(t *testing.T) {
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})

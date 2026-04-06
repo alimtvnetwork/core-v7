@@ -1496,13 +1496,6 @@ func (it *Collection) FilterPtr(filterPtr IsStringPointerFilter) *[]*string {
 	return &list
 }
 
-// NonEmptyListPtr returns non-empty items as a slice.
-//
-// Deprecated: Use NonEmptyList instead.
-func (it *Collection) NonEmptyListPtr() *[]string {
-	list := it.NonEmptyList()
-	return &list
-}
 
 // NonEmptyList returns all non-empty string items.
 func (it *Collection) NonEmptyList() []string {
@@ -1547,30 +1540,18 @@ func (it *Collection) NonEmptyItems() []string {
 	return stringslice.NonEmptySlice(it.items)
 }
 
-// Deprecated: Use NonEmptyItems instead.
-func (it *Collection) NonEmptyItemsPtr() []string {
-	return stringslice.NonEmptySlicePtr(it.items)
-}
 
 // NonEmptyItemsOrNonWhitespace returns items that are non-empty and non-whitespace.
 func (it *Collection) NonEmptyItemsOrNonWhitespace() []string {
 	return stringslice.NonWhitespace(it.items)
 }
 
-// Deprecated: Use NonEmptyItemsOrNonWhitespace instead.
-func (it *Collection) NonEmptyItemsOrNonWhitespacePtr() []string {
-	return stringslice.NonWhitespacePtr(it.items)
-}
 
 // Items direct return pointer
 func (it *Collection) Items() []string {
 	return it.items
 }
 
-// Deprecated: Use List or Items instead.
-func (it *Collection) ListPtr() []string {
-	return it.items
-}
 
 // ListCopyPtrLock returns a copy of the items
 //

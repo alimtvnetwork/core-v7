@@ -21,15 +21,6 @@ func Test_Cov_ExcludingOptions_SetPlainText_Nil(t *testing.T) {
 		t.Error("expected plain text")
 	}
 }
-
-func Test_Cov_ExcludingOptions_ClonePtr_Nil(t *testing.T) {
-	var opt *coretaskinfo.ExcludingOptions
-	result := opt.ClonePtr()
-	if result == nil {
-		t.Error("expected non-nil")
-	}
-}
-
 func Test_Cov_ExcludingOptions_IsEmpty(t *testing.T) {
 	opt := &coretaskinfo.ExcludingOptions{}
 	if !opt.IsEmpty() {

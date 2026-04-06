@@ -181,13 +181,6 @@ func Test_C29_14_RC_GetErrorsStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C29_15_RC_GetErrorsStringsPtr(t *testing.T) {
-	rc := corejson.NewResultsCollection.Empty()
-	s := rc.GetErrorsStringsPtr()
-	_ = s
-}
-
 func Test_C29_16_RC_GetErrorsAsSingleString(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	s := rc.GetErrorsAsSingleString()
@@ -467,12 +460,6 @@ func Test_C29_44_RC_GetStrings(t *testing.T) {
 		t.Fatal("expected 1")
 	}
 }
-
-func Test_C29_45_RC_GetStringsPtr(t *testing.T) {
-	rc := corejson.NewResultsCollection.Empty()
-	_ = rc.GetStringsPtr()
-}
-
 func Test_C29_46_RC_AddJsoners(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddJsoners(true)
@@ -614,20 +601,6 @@ func Test_C29_62_RC_Clone(t *testing.T) {
 	rc.Items = []corejson.Result{corejson.NewResult.Any("x")}
 	_ = rc.Clone(true)
 }
-
-func Test_C29_63_RC_ClonePtr(t *testing.T) {
-	var rc *corejson.ResultsCollection
-	if rc.ClonePtr(false) != nil {
-		t.Fatal("expected nil")
-	}
-	rc = corejson.NewResultsCollection.Empty()
-	_ = rc.ClonePtr(false)
-	rc.Add(corejson.NewResult.Any("x"))
-	_ = rc.ClonePtr(true)
-}
-
-// ─── UnmarshalIntoSameIndex edge: empty json bytes item ───
-
 func Test_C29_64_RC_UnmarshalIntoSameIndex_EmptyJsonBytes(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Create([]byte(`{}`), nil, "T"))

@@ -11,5 +11,5 @@ func NonEmptyJoin(slice []string, joiner string) string {
 		return constants.EmptyString
 	}
 
-	return strings.Join(NonEmptySlicePtr(slice), joiner)
+	return strings.Join(NonEmptySlice(slice), joiner)
 }

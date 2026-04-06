@@ -117,18 +117,6 @@ func Test_C24_LinkedListNode_AddStringsToNode(t *testing.T) {
 		}
 	})
 }
-
-func Test_C24_LinkedListNode_AddStringsPtrToNode_Nil(t *testing.T) {
-	safeTest(t, "Test_C24_LinkedListNode_AddStringsPtrToNode_Nil", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		node := ll.Head()
-		result := node.AddStringsPtrToNode(ll, true, nil)
-		if result.Length() != 1 {
-			t.Errorf("expected 1 got %d", result.Length())
-		}
-	})
-}
-
 func Test_C24_LinkedListNode_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_C24_LinkedListNode_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
@@ -231,17 +219,6 @@ func Test_C24_LinkedListNode_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_C24_LinkedListNode_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C24_LinkedListNode_ListPtr", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		list := ll.Head().ListPtr()
-		if len(list) != 1 {
-			t.Errorf("expected 1 got %d", len(list))
-		}
-	})
-}
-
 func Test_C24_LinkedListNode_Join(t *testing.T) {
 	safeTest(t, "Test_C24_LinkedListNode_Join", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1012,17 +989,6 @@ func Test_C24_LinkedList_AddStringsToNode_NilSkip(t *testing.T) {
 		}
 	})
 }
-
-func Test_C24_LinkedList_AddStringsPtrToNode_NilItems(t *testing.T) {
-	safeTest(t, "Test_C24_LinkedList_AddStringsPtrToNode_NilItems", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		ll.AddStringsPtrToNode(true, ll.Head(), nil)
-		if ll.Length() != 1 {
-			t.Error("should not change")
-		}
-	})
-}
-
 func Test_C24_LinkedList_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_C24_LinkedList_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
@@ -1074,17 +1040,6 @@ func Test_C24_LinkedList_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_C24_LinkedList_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C24_LinkedList_ListPtr", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		list := ll.ListPtr()
-		if len(list) != 1 {
-			t.Errorf("expected 1 got %d", len(list))
-		}
-	})
-}
-
 func Test_C24_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_C24_LinkedList_ListLock", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
@@ -1094,17 +1049,6 @@ func Test_C24_LinkedList_ListLock(t *testing.T) {
 		}
 	})
 }
-
-func Test_C24_LinkedList_ListPtrLock(t *testing.T) {
-	safeTest(t, "Test_C24_LinkedList_ListPtrLock", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		list := ll.ListPtrLock()
-		if len(list) != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
 func Test_C24_LinkedList_String(t *testing.T) {
 	safeTest(t, "Test_C24_LinkedList_String", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})

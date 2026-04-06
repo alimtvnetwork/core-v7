@@ -554,39 +554,6 @@ func Test_C16_Dynamic_LoopMap_Invalid(t *testing.T) {
 	expected := args.Map{"called": false}
 	expected.ShouldBeEqual(t, 0, "LoopMap returns error -- invalid", actual)
 }
-
-// ==========================================================================
-// DynamicStatus coverage
-// ==========================================================================
-
-func Test_C16_DynamicStatus(t *testing.T) {
-	invalid := coredynamic.InvalidDynamicStatus("bad")
-	invalidNoMsg := coredynamic.InvalidDynamicStatusNoMessage()
-	clone := invalid.Clone()
-	var nilPtr *coredynamic.DynamicStatus
-	cloneNil := nilPtr.ClonePtr()
-	cloneValid := invalid.ClonePtr()
-	actual := args.Map{
-		"msg":        invalid.Message,
-		"noMsg":      invalidNoMsg.Message,
-		"cloneMsg":   clone.Message,
-		"nilClone":   cloneNil == nil,
-		"validClone": cloneValid != nil,
-	}
-	expected := args.Map{
-		"msg":        "bad",
-		"noMsg":      "",
-		"cloneMsg":   "bad",
-		"nilClone":   true,
-		"validClone": true,
-	}
-	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- with args", actual)
-}
-
-// ==========================================================================
-// ValueStatus coverage
-// ==========================================================================
-
 func Test_C16_ValueStatus(t *testing.T) {
 	inv := coredynamic.InvalidValueStatus("oops")
 	invNoMsg := coredynamic.InvalidValueStatusNoMessage()
@@ -749,30 +716,6 @@ func Test_C16_SimpleResult_InvalidError(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns error -- InvalidError", actual)
 }
-
-func Test_C16_SimpleResult_Clone(t *testing.T) {
-	sr := coredynamic.NewSimpleResultValid("data")
-	clone := sr.Clone()
-	clonePtr := sr.ClonePtr()
-	var nilSr *coredynamic.SimpleResult
-	nilClone := nilSr.ClonePtr()
-	actual := args.Map{
-		"cloneRes":   clone.Result,
-		"ptrRes":     clonePtr.Result,
-		"nilIsNil":   nilClone == nil,
-	}
-	expected := args.Map{
-		"cloneRes":   "data",
-		"ptrRes":     "data",
-		"nilIsNil":   true,
-	}
-	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- Clone", actual)
-}
-
-// ==========================================================================
-// TypedDynamic coverage
-// ==========================================================================
-
 func Test_C16_TypedDynamic_Full(t *testing.T) {
 	d := coredynamic.NewTypedDynamic[string]("hello", true)
 	dp := coredynamic.NewTypedDynamicPtr[string]("ptr", true)
@@ -906,36 +849,6 @@ func Test_C16_TypedDynamic_Value_Methods(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Value methods", actual)
 }
-
-func Test_C16_TypedDynamic_Clone(t *testing.T) {
-	d := coredynamic.NewTypedDynamic[string]("x", true)
-	clone := d.Clone()
-	dp := coredynamic.NewTypedDynamicPtr[string]("y", true)
-	cloneP := dp.ClonePtr()
-	var nilD *coredynamic.TypedDynamic[string]
-	nilClone := nilD.ClonePtr()
-	nonPtr := d.NonPtr()
-	ptr := dp.Ptr()
-	toDyn := d.ToDynamic()
-	actual := args.Map{
-		"cloneVal":  clone.Data(),
-		"clonePVal": cloneP.Data(),
-		"nilClone":  nilClone == nil,
-		"nonPtr":    nonPtr.Data(),
-		"ptrNotNil": ptr != nil,
-		"dynValid":  toDyn.IsValid(),
-	}
-	expected := args.Map{
-		"cloneVal":  "x",
-		"clonePVal": "y",
-		"nilClone":  true,
-		"nonPtr":    "x",
-		"ptrNotNil": true,
-		"dynValid":  true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Clone", actual)
-}
-
 func Test_C16_TypedDynamic_Deserialize(t *testing.T) {
 	d := coredynamic.NewTypedDynamicPtr[string]("", false)
 	err := d.Deserialize([]byte(`"hello"`))
@@ -1237,51 +1150,6 @@ func Test_C16_TypedSimpleResult_GetAs(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAs", actual)
 }
-
-func Test_C16_TypedSimpleResult_Clone(t *testing.T) {
-	sr := coredynamic.NewTypedSimpleResultValid[string]("x")
-	clone := sr.Clone()
-	cloneP := sr.ClonePtr()
-	var nilSR *coredynamic.TypedSimpleResult[string]
-	nilClone := nilSR.Clone()
-	nilCloneP := nilSR.ClonePtr()
-	toSimple := sr.ToSimpleResult()
-	toTD := sr.ToTypedDynamic()
-	toDyn := sr.ToDynamic()
-	nilToSimple := nilSR.ToSimpleResult()
-	nilToTD := nilSR.ToTypedDynamic()
-	nilToDyn := nilSR.ToDynamic()
-	actual := args.Map{
-		"cloneData":  clone.Data(),
-		"clonePData": cloneP.Data(),
-		"nilData":    nilClone.Data(),
-		"nilP":       nilCloneP == nil,
-		"simpleRes":  toSimple.Result,
-		"tdData":     toTD.Data(),
-		"dynValid":   toDyn.IsValid(),
-		"nilSimple":  nilToSimple != nil,
-		"nilTD":      nilToTD.IsInvalid(),
-		"nilDyn":     nilToDyn.IsInvalid(),
-	}
-	expected := args.Map{
-		"cloneData":  "x",
-		"clonePData": "x",
-		"nilData":    "",
-		"nilP":       true,
-		"simpleRes":  "x",
-		"tdData":     "x",
-		"dynValid":   true,
-		"nilSimple":  true,
-		"nilTD":      true,
-		"nilDyn":     true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Clone/Convert", actual)
-}
-
-// ==========================================================================
-// Package-level funcs coverage
-// ==========================================================================
-
 func Test_C16_SafeTypeName(t *testing.T) {
 	actual := args.Map{
 		"string": coredynamic.SafeTypeName("hello"),

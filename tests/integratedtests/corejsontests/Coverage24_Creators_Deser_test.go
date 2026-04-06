@@ -229,11 +229,6 @@ func Test_C24_NRC_ErrorPtr(t *testing.T) {
 func Test_C24_NRC_Empty(t *testing.T) {
 	_ = corejson.NewResult.Empty()
 }
-
-func Test_C24_NRC_EmptyPtr(t *testing.T) {
-	_ = corejson.NewResult.EmptyPtr()
-}
-
 func Test_C24_NRC_TypeName(t *testing.T) {
 	_ = corejson.NewResult.TypeName("t")
 }

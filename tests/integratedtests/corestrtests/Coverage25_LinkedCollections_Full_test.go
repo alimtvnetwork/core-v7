@@ -142,18 +142,6 @@ func Test_C25_LinkedCollectionNode_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_C25_LinkedCollectionNode_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C25_LinkedCollectionNode_ListPtr", func() {
-		col := corestr.New.Collection.Strings([]string{"a"})
-		node := &corestr.LinkedCollectionNode{Element: col}
-		ptr := node.ListPtr()
-		if ptr == nil || len(*ptr) != 1 {
-			t.Error("expected 1 element")
-		}
-	})
-}
-
 func Test_C25_LinkedCollectionNode_Join(t *testing.T) {
 	safeTest(t, "Test_C25_LinkedCollectionNode_Join", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -901,17 +889,6 @@ func Test_C25_LinkedCollections_ToStrings(t *testing.T) {
 		}
 	})
 }
-
-func Test_C25_LinkedCollections_ToStringsPtr(t *testing.T) {
-	safeTest(t, "Test_C25_LinkedCollections_ToStringsPtr", func() {
-		lc := corestr.New.LinkedCollection.Strings("a")
-		ptr := lc.ToStringsPtr()
-		if ptr == nil || len(*ptr) != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
 func Test_C25_LinkedCollections_ToCollection(t *testing.T) {
 	safeTest(t, "Test_C25_LinkedCollections_ToCollection", func() {
 		lc := corestr.New.LinkedCollection.Strings("a", "b")
@@ -1003,17 +980,6 @@ func Test_C25_LinkedCollections_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_C25_LinkedCollections_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C25_LinkedCollections_ListPtr", func() {
-		lc := corestr.New.LinkedCollection.Strings("a")
-		ptr := lc.ListPtr()
-		if ptr == nil {
-			t.Error("should not be nil")
-		}
-	})
-}
-
 func Test_C25_LinkedCollections_String(t *testing.T) {
 	safeTest(t, "Test_C25_LinkedCollections_String", func() {
 		lc := corestr.New.LinkedCollection.Strings("a")

@@ -759,16 +759,6 @@ func Test_Cov48_SS_Dispose(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
-
-func Test_Cov48_SS_Dispose_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov48_SS_Dispose_Nil", func() {
-		var ss *corestr.SimpleSlice
-		ss.Dispose()
-	})
-}
-
-// --- Clone, ClonePtr, DeepClone, ShadowClone ---
-
 func Test_Cov48_SS_Clone(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Clone", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
@@ -777,30 +767,6 @@ func Test_Cov48_SS_Clone(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
-
-func Test_Cov48_SS_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_Cov48_SS_ClonePtr", func() {
-		ss := corestr.New.SimpleSlice.Lines("a")
-		cloned := ss.ClonePtr(true)
-		if cloned == nil {
-			t.Fatal("expected non-nil")
-		}
-		tc := caseV1Compat{Name: "ClonePtr", Expected: 1, Actual: cloned.Length(), Args: args.Map{}}
-		tc.ShouldBeEqual(t)
-	})
-}
-
-func Test_Cov48_SS_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov48_SS_ClonePtr_Nil", func() {
-		var ss *corestr.SimpleSlice
-		cloned := ss.ClonePtr(true)
-		if cloned != nil {
-			t.Fatal("expected nil")
-		}
-	})
-}
-
-func Test_Cov48_SS_DeepClone(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_DeepClone", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		cloned := ss.DeepClone()

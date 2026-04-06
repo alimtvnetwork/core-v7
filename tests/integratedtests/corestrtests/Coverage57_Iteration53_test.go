@@ -396,21 +396,6 @@ func Test_Cov57_HashsetsCollection_IndexOf(t *testing.T) {
 		})
 	})
 }
-
-func Test_Cov57_HashsetsCollection_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov57_HashsetsCollection_ListPtr", func() {
-		hc := corestr.New.HashsetsCollection.Empty()
-		convey.Convey("ListPtr", t, func() {
-			convey.So(hc.ListPtr(), convey.ShouldNotBeNil)
-			convey.So(hc.List(), convey.ShouldNotBeNil)
-		})
-	})
-}
-
-// =============================================================================
-// KeyValuePair
-// =============================================================================
-
 func Test_Cov57_KeyValuePair_Basics(t *testing.T) {
 	safeTest(t, "Test_Cov57_KeyValuePair_Basics", func() {
 		kv := corestr.KeyValuePair{Key: "name", Value: "test"}
@@ -1972,16 +1957,6 @@ func Test_Cov57_ValidValue_ValueBytesOnce(t *testing.T) {
 		})
 	})
 }
-
-func Test_Cov57_ValidValue_ValueBytesOncePtr(t *testing.T) {
-	safeTest(t, "Test_Cov57_ValidValue_ValueBytesOncePtr", func() {
-		vv := corestr.NewValidValue("abc")
-		convey.Convey("VV ValueBytesOncePtr", t, func() {
-			convey.So(vv.ValueBytesOncePtr(), convey.ShouldResemble, []byte("abc"))
-		})
-	})
-}
-
 func Test_Cov57_ValidValue_Serialize(t *testing.T) {
 	safeTest(t, "Test_Cov57_ValidValue_Serialize", func() {
 		vv := corestr.NewValidValue("a")

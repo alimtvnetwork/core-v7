@@ -1386,27 +1386,6 @@ func Test_Seg4_SS_Clone(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Clone deep -- same items", actual)
 	})
 }
-
-func Test_Seg4_SS_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_Seg4_SS_ClonePtr", func() {
-		s := corestr.SimpleSlice{"a"}
-		c := s.ClonePtr(true)
-		actual := args.Map{"len": c.Length()}
-		expected := args.Map{"len": 1}
-		expected.ShouldBeEqual(t, 0, "ClonePtr -- same items", actual)
-	})
-}
-
-func Test_Seg4_SS_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_Seg4_SS_ClonePtr_Nil", func() {
-		var s *corestr.SimpleSlice
-		actual := args.Map{"nil": s.ClonePtr(true) == nil}
-		expected := args.Map{"nil": true}
-		expected.ShouldBeEqual(t, 0, "ClonePtr nil -- returns nil", actual)
-	})
-}
-
-func Test_Seg4_SS_DeepClone(t *testing.T) {
 	safeTest(t, "Test_Seg4_SS_DeepClone", func() {
 		s := corestr.SimpleSlice{"a"}
 		actual := args.Map{"len": s.DeepClone().Length()}

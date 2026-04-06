@@ -1128,32 +1128,6 @@ func Test_C75_NewSimpleSlice_Create(t *testing.T) {
 		}
 	})
 }
-
-func Test_C75_NewSimpleSlice_StringsPtr(t *testing.T) {
-	safeTest(t, "Test_C75_NewSimpleSlice_StringsPtr", func() {
-		// Arrange & Act
-		ss := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
-
-		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
-func Test_C75_NewSimpleSlice_StringsPtr_Empty(t *testing.T) {
-	safeTest(t, "Test_C75_NewSimpleSlice_StringsPtr_Empty", func() {
-		// Arrange & Act
-		ss := corestr.New.SimpleSlice.StringsPtr([]string{})
-
-		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
-	})
-}
-
-func Test_C75_NewSimpleSlice_StringsOptions_Clone(t *testing.T) {
 	safeTest(t, "Test_C75_NewSimpleSlice_StringsOptions_Clone", func() {
 		// Arrange & Act
 		ss := corestr.New.SimpleSlice.StringsOptions(true, []string{"a", "b"})

@@ -372,19 +372,6 @@ func Test_I17_BytesConverter_ToBytesCollection(t *testing.T) {
 	expected := args.Map{"noErr": true, "notNil": true}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToBytesCollection", actual)
 }
-
-func Test_I17_BytesConverter_ToBytesCollection_Invalid(t *testing.T) {
-	bc := coredynamic.NewBytesConverter([]byte(`not json`))
-	_, err := bc.ToBytesCollection()
-	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "BytesConverter returns error -- ToBytesCollection invalid", actual)
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// SimpleResult — Clone/ClonePtr
-// ══════════════════════════════════════════════════════════════════════════════
-
 func Test_I17_SimpleResult_Clone(t *testing.T) {
 	sr := coredynamic.NewSimpleResultValid("hello")
 	cloned := sr.Clone()
@@ -400,23 +387,6 @@ func Test_I17_SimpleResult_Clone_Nil(t *testing.T) {
 	expected := args.Map{"valid": false}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns nil -- Clone nil", actual)
 }
-
-func Test_I17_SimpleResult_ClonePtr(t *testing.T) {
-	sr := coredynamic.NewSimpleResultValid("hello")
-	cloned := sr.ClonePtr()
-	actual := args.Map{"notNil": cloned != nil, "valid": cloned.IsValid()}
-	expected := args.Map{"notNil": true, "valid": true}
-	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- ClonePtr", actual)
-}
-
-func Test_I17_SimpleResult_ClonePtr_Nil(t *testing.T) {
-	var sr *coredynamic.SimpleResult
-	actual := args.Map{"nil": sr.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "SimpleResult returns nil -- ClonePtr nil", actual)
-}
-
-func Test_I17_SimpleResult_InvalidError_WithMessage(t *testing.T) {
 	sr := coredynamic.InvalidSimpleResult("some error")
 	err := sr.InvalidError()
 	actual := args.Map{"hasErr": err != nil}

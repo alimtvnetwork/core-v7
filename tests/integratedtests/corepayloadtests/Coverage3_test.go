@@ -328,22 +328,6 @@ func Test_Cov3_PayloadsCollection_Clone(t *testing.T) {
 	expected := args.Map{"sameLen": true}
 	expected.ShouldBeEqual(t, 0, "PayloadsCollection.Clone returns same len -- single item", actual)
 }
-
-func Test_Cov3_PayloadsCollection_ClonePtr(t *testing.T) {
-	pc := corepayload.New.PayloadsCollection.Empty()
-	pc.Add(corepayload.PayloadWrapper{Name: "test"})
-	cloned := pc.ClonePtr()
-	actual := args.Map{
-		"notNil":     cloned != nil,
-		"notSamePtr": cloned != pc,
-	}
-	expected := args.Map{
-		"notNil":     true,
-		"notSamePtr": true,
-	}
-	expected.ShouldBeEqual(t, 0, "PayloadsCollection.ClonePtr returns different ptr -- single item", actual)
-}
-
 func Test_Cov3_PayloadsCollection_Clear(t *testing.T) {
 	pc := corepayload.New.PayloadsCollection.Empty()
 	pc.Add(corepayload.PayloadWrapper{Name: "test"})

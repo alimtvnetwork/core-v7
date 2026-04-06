@@ -191,30 +191,6 @@ func Test_Cov5_Result_IsEmpty(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Result returns empty -- IsEmpty methods", actual)
 }
-
-func Test_Cov5_Result_Clone(t *testing.T) {
-	r := corejson.NewPtr("hello")
-	cloned := r.Clone(true)
-	clonedShallow := r.Clone(false)
-	clonedPtr := r.ClonePtr(true)
-	var nilR *corejson.Result
-	clonedIf := r.NonPtr().CloneIf(true, true)
-	noClone := r.NonPtr().CloneIf(false, false)
-	actual := args.Map{
-		"clonedLen":    cloned.Length() > 0,
-		"shallowLen":   clonedShallow.Length() > 0,
-		"cpLen":        clonedPtr.Length() > 0,
-		"nilClone":     nilR.ClonePtr(true) == nil,
-		"cloneIfLen":   clonedIf.Length() > 0,
-		"noCloneLen":   noClone.Length() > 0,
-	}
-	expected := args.Map{
-		"clonedLen": true, "shallowLen": true, "cpLen": true,
-		"nilClone": true, "cloneIfLen": true, "noCloneLen": true,
-	}
-	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Clone", actual)
-}
-
 func Test_Cov5_Result_CloneError(t *testing.T) {
 	r := &corejson.Result{Error: errors.New("fail"), Bytes: []byte("x")}
 	rOk := corejson.NewPtr("ok")

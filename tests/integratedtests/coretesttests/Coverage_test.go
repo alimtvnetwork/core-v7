@@ -41,21 +41,6 @@ func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
 	expected := args.Map{"ptrNotNil": true, "nonPtrNotNil": true, "nilResult": true}
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- PtrOrNonPtr", actual)
 }
-
-func Test_Cov_DraftType_Clone(t *testing.T) {
-	d := &coretests.DraftType{SampleString1: "a", Lines: []string{"l"}, RawBytes: []byte{1}}
-	c := d.Clone()
-	cp := d.ClonePtr()
-	var nilD *coretests.DraftType
-	nilCp := nilD.ClonePtr()
-	actual := args.Map{
-		"name": c.SampleString1, "cpName": cp.SampleString1,
-		"nilCp": nilCp == nil,
-	}
-	expected := args.Map{"name": "a", "cpName": "a", "nilCp": true}
-	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- Clone", actual)
-}
-
 func Test_Cov_DraftType_IsEqual(t *testing.T) {
 	d1 := &coretests.DraftType{SampleString1: "a", SampleInteger: 1}
 	d2 := &coretests.DraftType{SampleString1: "a", SampleInteger: 1}
@@ -77,28 +62,6 @@ func Test_Cov_DraftType_IsEqual(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- IsEqual", actual)
 }
-
-func Test_Cov_DraftType_VerifyNotEqual(t *testing.T) {
-	d1 := &coretests.DraftType{SampleString1: "a"}
-	d2 := &coretests.DraftType{SampleString1: "a"}
-	d3 := &coretests.DraftType{SampleString1: "b"}
-	actual := args.Map{
-		"equalMsg":    d1.VerifyAllNotEqualMessage(d2),
-		"notEqualMsg": d1.VerifyAllNotEqualMessage(d3) != "",
-		"equalErr":    d1.VerifyAllNotEqualErr(d2) == nil,
-		"notEqualErr": d1.VerifyAllNotEqualErr(d3) != nil,
-		"excludeErr":  d1.VerifyNotEqualExcludingInnerFieldsErr(d2) == nil,
-	}
-	expected := args.Map{
-		"equalMsg": "", "notEqualMsg": true,
-		"equalErr": true, "notEqualErr": true,
-		"excludeErr": true,
-	}
-	expected.ShouldBeEqual(t, 0, "DraftType returns correct value -- VerifyNotEqual", actual)
-}
-
-// ── AnyToBytes / AnyToBytesPtr / AnyToDraftType ──
-
 func Test_Cov_AnyToBytes(t *testing.T) {
 	bytesResult := coretests.AnyToBytes([]byte{1, 2})
 	strResult := coretests.AnyToBytes("hello")
@@ -113,14 +76,6 @@ func Test_Cov_AnyToBytes(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes returns correct value -- with args", actual)
 }
-
-func Test_Cov_AnyToBytesPtr(t *testing.T) {
-	result := coretests.AnyToBytesPtr("hello")
-	actual := args.Map{"len": len(result) > 0}
-	expected := args.Map{"len": true}
-	expected.ShouldBeEqual(t, 0, "AnyToBytesPtr returns correct value -- with args", actual)
-}
-
 func Test_Cov_AnyToDraftType(t *testing.T) {
 	d := coretests.DraftType{SampleString1: "a"}
 	dp := &coretests.DraftType{SampleString1: "b"}

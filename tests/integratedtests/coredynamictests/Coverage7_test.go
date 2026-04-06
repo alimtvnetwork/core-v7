@@ -124,28 +124,6 @@ func Test_Cov7_TypedDynamic_Bytes(t *testing.T) {
 	expected := args.Map{"len": 3, "ok": true, "len2": true, "ok2": true}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes", actual)
 }
-
-func Test_Cov7_TypedDynamic_Clone(t *testing.T) {
-	td := coredynamic.NewTypedDynamicValid[string]("hello")
-	cloned := td.Clone()
-	clonedPtr := td.ClonePtr()
-	nonPtr := td.NonPtr()
-	ptr := td.Ptr()
-	var nilTd *coredynamic.TypedDynamic[string]
-	actual := args.Map{
-		"clonedData": cloned.Data(),
-		"cpData":     clonedPtr.Data(),
-		"nonPtrData": nonPtr.Data(),
-		"ptrNN":      ptr != nil,
-		"nilClone":   nilTd.ClonePtr() == nil,
-	}
-	expected := args.Map{
-		"clonedData": "hello", "cpData": "hello", "nonPtrData": "hello",
-		"ptrNN": true, "nilClone": true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Clone", actual)
-}
-
 func Test_Cov7_TypedDynamic_ToDynamic(t *testing.T) {
 	td := coredynamic.NewTypedDynamicValid[string]("hello")
 	d := td.ToDynamic()
@@ -387,21 +365,6 @@ func Test_Cov7_TypedSimpleResult_GetAs(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAs", actual)
 }
-
-func Test_Cov7_TypedSimpleResult_Clone(t *testing.T) {
-	r := coredynamic.NewTypedSimpleResultValid[string]("hello")
-	cloned := r.Clone()
-	clonedPtr := r.ClonePtr()
-	var nilR *coredynamic.TypedSimpleResult[string]
-	nilClone := nilR.ClonePtr()
-	actual := args.Map{
-		"cloneData": cloned.Data(), "cpData": clonedPtr.Data(),
-		"nilClone": nilClone == nil,
-	}
-	expected := args.Map{"cloneData": "hello", "cpData": "hello", "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Clone", actual)
-}
-
 func Test_Cov7_TypedSimpleResult_Conversions(t *testing.T) {
 	r := coredynamic.NewTypedSimpleResultValid[string]("hello")
 	sr := r.ToSimpleResult()
@@ -595,25 +558,6 @@ func Test_Cov7_SimpleResult_Constructors(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- constructors", actual)
 }
-
-func Test_Cov7_SimpleResult_Clone(t *testing.T) {
-	r := coredynamic.NewSimpleResultValid("data")
-	cloned := r.Clone()
-	clonedPtr := r.ClonePtr()
-	var nilR *coredynamic.SimpleResult
-	nilClone := nilR.ClonePtr()
-	actual := args.Map{
-		"cloneResult": cloned.Result, "cpResult": clonedPtr.Result,
-		"nilClone": nilClone == nil,
-	}
-	expected := args.Map{"cloneResult": "data", "cpResult": "data", "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- Clone", actual)
-}
-
-// ═══════════════════════════════════════════
-// DynamicGetters — uncovered branches
-// ═══════════════════════════════════════════
-
 func Test_Cov7_Dynamic_Getters_Types(t *testing.T) {
 	dStr := coredynamic.NewDynamicValid("hello")
 	dInt := coredynamic.NewDynamicValid(42)

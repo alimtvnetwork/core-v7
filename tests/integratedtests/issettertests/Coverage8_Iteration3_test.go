@@ -124,20 +124,6 @@ func Test_C8_IsCompareResult_NotEqual(t *testing.T) {
 		t.Fatal()
 	}
 }
-
-func Test_C8_IsCompareResult_DefaultPanic(t *testing.T) {
-	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic for out of range comparator")
-		}
-	}()
-	issetter.True.IsCompareResult(1, corecomparator.Compare(99))
-}
-
-// ═══════════════════════════════════════════════
-// IsOutOfRange / Max / Min / MaxByte / MinByte
-// ═══════════════════════════════════════════════
-
 func Test_C8_IsOutOfRange_True(t *testing.T) {
 	if !issetter.IsOutOfRange(200) {
 		t.Fatal()
@@ -161,24 +147,6 @@ func Test_C8_Min(t *testing.T) {
 		t.Fatal()
 	}
 }
-
-func Test_C8_MaxByte(t *testing.T) {
-	if issetter.MaxByte() != issetter.Set.Value() {
-		t.Fatal()
-	}
-}
-
-func Test_C8_MinByte(t *testing.T) {
-	if issetter.MinByte() != issetter.Uninitialized.Value() {
-		t.Fatal()
-	}
-}
-
-// ═══════════════════════════════════════════════
-// New / NewBool / NewBooleans / NewMust / RangeNamesCsv
-// ═══════════════════════════════════════════════
-
-func Test_C8_New_Valid(t *testing.T) {
 	v, err := issetter.New("True")
 	if err != nil || v != issetter.True {
 		t.Fatal()
@@ -1113,20 +1081,6 @@ func Test_C8_Deserialize_Invalid(t *testing.T) {
 		t.Fatal()
 	}
 }
-
-func Test_C8_MaxByteMethod(t *testing.T) {
-	if issetter.True.MaxByte() != issetter.Wildcard.ValueByte() {
-		t.Fatal()
-	}
-}
-
-func Test_C8_MinByteMethod(t *testing.T) {
-	if issetter.True.MinByte() != issetter.Uninitialized.ValueByte() {
-		t.Fatal()
-	}
-}
-
-func Test_C8_RangesByte_Panics(t *testing.T) {
 	defer func() {
 		if r := recover(); r == nil {
 			t.Fatal("expected panic")

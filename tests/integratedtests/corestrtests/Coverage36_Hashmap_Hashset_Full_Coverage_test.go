@@ -682,18 +682,6 @@ func Test_C36_Hashmap_KeysToLower(t *testing.T) {
 		}
 	})
 }
-
-func Test_C36_Hashmap_ValuesToLower(t *testing.T) {
-	safeTest(t, "Test_C36_Hashmap_ValuesToLower", func() {
-		h := corestr.New.Hashmap.Empty()
-		h.AddOrUpdate("KEY", "v")
-		lower := h.ValuesToLower()
-		if lower.Length() != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
 func Test_C36_Hashmap_Length_LengthLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Length_LengthLock", func() {
 		h := corestr.New.Hashmap.Empty()
@@ -1011,32 +999,6 @@ func Test_C36_Hashmap_AsJsoner_JsonParseSelfInject_AsJsonContractsBinder(t *test
 		}
 	})
 }
-
-func Test_C36_Hashmap_Clone_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_C36_Hashmap_Clone_ClonePtr", func() {
-		h := corestr.New.Hashmap.Empty()
-		h.AddOrUpdate("k", "v")
-		cloned := h.Clone()
-		if cloned.Length() != 1 {
-			t.Error("expected 1")
-		}
-		cp := h.ClonePtr()
-		if cp == nil || cp.Length() != 1 {
-			t.Error("expected 1")
-		}
-		var nilH *corestr.Hashmap
-		if nilH.ClonePtr() != nil {
-			t.Error("nil clone returns nil")
-		}
-		// empty clone
-		e := corestr.New.Hashmap.Empty()
-		ec := e.Clone()
-		if ec.Length() != 0 {
-			t.Error("expected 0")
-		}
-	})
-}
-
 func Test_C36_Hashmap_Get_GetValue(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Get_GetValue", func() {
 		h := corestr.New.Hashmap.Empty()

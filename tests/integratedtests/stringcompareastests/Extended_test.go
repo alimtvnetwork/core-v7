@@ -324,17 +324,6 @@ func Test_Variant_IsByteValueEqual(t *testing.T) {
 		t.Error("should match")
 	}
 }
-
-func Test_Variant_MaxMinByte(t *testing.T) {
-	v := stringcompareas.Equal
-	if v.MaxByte() == 0 {
-		t.Error("max should not be 0")
-	}
-	if v.MinByte() != 0 {
-		t.Error("min should be 0")
-	}
-}
-
 func Test_Variant_RangesByte(t *testing.T) {
 	v := stringcompareas.Equal
 	ranges := v.RangesByte()

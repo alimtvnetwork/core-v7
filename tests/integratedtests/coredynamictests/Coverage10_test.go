@@ -334,33 +334,6 @@ func Test_Cov10_TypedDynamic_Bytes(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- bytes", actual)
 }
-
-func Test_Cov10_TypedDynamic_ClonePtrNonPtr(t *testing.T) {
-	d := coredynamic.NewTypedDynamic("hello", true)
-	cloned := d.Clone()
-	dp := coredynamic.NewTypedDynamicPtr("test", true)
-	clonedPtr := dp.ClonePtr()
-	var nilDP *coredynamic.TypedDynamic[string]
-	nilClone := nilDP.ClonePtr()
-	nonPtr := d.NonPtr()
-	ptr := dp.Ptr()
-	toDyn := d.ToDynamic()
-	actual := args.Map{
-		"clonedData": cloned.Data(),
-		"clonePtrNN": clonedPtr != nil,
-		"nilCloneNil": nilClone == nil,
-		"nonPtrData":  nonPtr.Data(),
-		"ptrNN":       ptr != nil,
-		"toDynValid":  toDyn.IsValid(),
-	}
-	expected := args.Map{
-		"clonedData": "hello", "clonePtrNN": true,
-		"nilCloneNil": true, "nonPtrData": "hello",
-		"ptrNN": true, "toDynValid": true,
-	}
-	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- clone/ptr", actual)
-}
-
 func Test_Cov10_TypedDynamic_UnmarshalDeserialize(t *testing.T) {
 	d := coredynamic.NewTypedDynamicPtr("", false)
 	err := d.UnmarshalJSON([]byte(`"hello"`))
@@ -450,28 +423,6 @@ func Test_Cov10_SimpleResult_TypeMismatch(t *testing.T) {
 	expected := args.Map{"nilErr": true, "hasErr": true, "hasMsg": true}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- type mismatch", actual)
 }
-
-func Test_Cov10_SimpleResult_Clone(t *testing.T) {
-	sr := coredynamic.NewSimpleResultValid("hello")
-	cloned := sr.Clone()
-	clonedPtr := sr.ClonePtr()
-	var nilSR *coredynamic.SimpleResult
-	nilClone := nilSR.ClonePtr()
-	actual := args.Map{
-		"clonedResult": cloned.Result,
-		"ptrNN":        clonedPtr != nil,
-		"nilCloneNil":  nilClone == nil,
-	}
-	expected := args.Map{
-		"clonedResult": "hello", "ptrNN": true, "nilCloneNil": true,
-	}
-	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- clone", actual)
-}
-
-// ═══════════════════════════════════════════
-// SimpleRequest
-// ═══════════════════════════════════════════
-
 func Test_Cov10_SimpleRequest_Constructors(t *testing.T) {
 	sr := coredynamic.NewSimpleRequestValid("hello")
 	srInv := coredynamic.InvalidSimpleRequest("err-msg")

@@ -77,56 +77,6 @@ func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_Cov_AnyToBytes_NilBytes(t *testing.T) {
-	// Arrange
-	var input []byte
-
-	// Act
-	result := coretests.AnyToBytes(input)
-
-	// Assert
-	actual := args.Map{
-		"isNil": fmt.Sprintf("%v", result == nil),
-	}
-
-	tc := coretestcases.CaseV1{
-		Title:         "AnyToBytes returns nil for nil []byte -- nil input",
-		ExpectedInput: args.Map{
-			"isNil": "true",
-		},
-	}
-	tc.ShouldBeEqualMapFirst(t, actual)
-}
-
-// ── AnyToBytesPtr ──
-
-func Test_Cov_AnyToBytesPtr_Delegates(t *testing.T) {
-	// Arrange
-	input := "test"
-
-	// Act
-	result := coretests.AnyToBytesPtr(input)
-
-	// Assert
-	actual := args.Map{
-		"value": string(result),
-	}
-
-	tc := coretestcases.CaseV1{
-		Title:         "AnyToBytesPtr delegates to AnyToBytes -- string input",
-		ExpectedInput: args.Map{
-			"value": "test",
-		},
-	}
-	tc.ShouldBeEqualMapFirst(t, actual)
-}
-
-// ── AnyToDraftType ──
-
-func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
-	// Arrange
-	input := coretests.DraftType{SampleString1: "s1"}
-
 	// Act
 	result := coretests.AnyToDraftType(input)
 
@@ -228,52 +178,6 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	}
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
-
-func Test_Cov_DraftType_ClonePtr_Nil(t *testing.T) {
-	// Arrange
-	var d *coretests.DraftType
-
-	// Act
-	result := d.ClonePtr()
-
-	// Assert
-	actual := args.Map{
-		"isNil": fmt.Sprintf("%v", result == nil),
-	}
-
-	tc := coretestcases.CaseV1{
-		Title:         "ClonePtr returns nil on nil receiver",
-		ExpectedInput: args.Map{
-			"isNil": "true",
-		},
-	}
-	tc.ShouldBeEqualMapFirst(t, actual)
-}
-
-func Test_Cov_DraftType_ClonePtr_Valid(t *testing.T) {
-	// Arrange
-	d := &coretests.DraftType{SampleString1: "test"}
-
-	// Act
-	result := d.ClonePtr()
-
-	// Assert
-	actual := args.Map{
-		"notNil":  fmt.Sprintf("%v", result != nil),
-		"sample1": result.SampleString1,
-	}
-
-	tc := coretestcases.CaseV1{
-		Title:         "ClonePtr returns cloned ptr -- valid DraftType",
-		ExpectedInput: args.Map{
-			"notNil":  "true",
-			"sample1": "test",
-		},
-	}
-	tc.ShouldBeEqualMapFirst(t, actual)
-}
-
-func Test_Cov_DraftType_IsEqual_BothNil(t *testing.T) {
 	// Arrange
 	var a, b *coretests.DraftType
 

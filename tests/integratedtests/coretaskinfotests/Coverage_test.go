@@ -149,24 +149,6 @@ func Test_Cov_Info_Clone(t *testing.T) {
 	expected := args.Map{"name": "task", "desc": "desc", "url": "url"}
 	expected.ShouldBeEqual(t, 0, "Info returns correct value -- Clone", actual)
 }
-
-func Test_Cov_Info_ClonePtr_Nil(t *testing.T) {
-	var info *coretaskinfo.Info
-	cloned := info.ClonePtr()
-	actual := args.Map{"isNil": cloned == nil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "Info ClonePtr nil -- nil", actual)
-}
-
-func Test_Cov_Info_ClonePtr_Defined(t *testing.T) {
-	info := &coretaskinfo.Info{RootName: "test"}
-	cloned := info.ClonePtr()
-	actual := args.Map{"name": cloned.RootName}
-	expected := args.Map{"name": "test"}
-	expected.ShouldBeEqual(t, 0, "Info ClonePtr defined -- cloned", actual)
-}
-
-func Test_Cov_Info_ToPtr(t *testing.T) {
 	info := coretaskinfo.Info{RootName: "task"}
 	ptr := info.ToPtr()
 	actual := args.Map{"name": ptr.RootName}

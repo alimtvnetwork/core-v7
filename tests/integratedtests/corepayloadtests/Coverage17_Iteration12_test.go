@@ -38,25 +38,6 @@ func Test_Cov17_Attributes_Clone_NilPtr(t *testing.T) {
 	expected := args.Map{"isEmpty": true, "noErr": true}
 	expected.ShouldBeEqual(t, 0, "Clone returns empty -- nil receiver", actual)
 }
-
-// ── Attributes: deepClonePtr error path ──
-// Covers Attributes.go L127-129, L134-136
-
-func Test_Cov17_Attributes_DeepClone(t *testing.T) {
-	a := &corepayload.Attributes{
-		DynamicPayloads: []byte(`{"test":1}`),
-	}
-
-	cloned, err := a.ClonePtr(true)
-
-	actual := args.Map{"noErr": err == nil, "notNil": cloned != nil}
-	expected := args.Map{"noErr": true, "notNil": true}
-	expected.ShouldBeEqual(t, 0, "DeepClonePtr returns cloned -- valid attrs", actual)
-}
-
-// ── AttributesSetters: HandleErr, HandleError, MustBeEmptyError ──
-// Covers AttributesSetters.go L13-15, L19-21, L29
-
 func Test_Cov17_I12_Attributes_HandleErr_NoError(t *testing.T) {
 	a := &corepayload.Attributes{}
 	a.HandleErr() // should not panic
