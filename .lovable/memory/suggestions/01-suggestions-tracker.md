@@ -50,9 +50,9 @@
 - **rationale**: Value receivers are idiomatic for small, read-only types. They enable better compiler optimizations and prevent nil-receiver panics.
 - **proposed change**: Audit top packages (`coredata/corestr`, `errcore`, `coredata/corepayload`) for methods that could safely use value receivers.
 - **acceptance criteria**: Identified methods migrated without behavior changes. `./run.ps1 TC` passes.
-- **status**: open
-- **dependencies**: None (but be careful of types with caching fields — pointer receivers required)
-- **completion notes**: —
+- **status**: **done** (completed 2026-04-06)
+- **dependencies**: None
+- **completion notes**: 46 methods migrated to value receivers. LeftRight (18), LeftMiddleRight (22), ExpectingRecord (6). corepayload skipped — all methods require nil-guard pointer receivers. Types embedding sync.Mutex correctly excluded.
 
 ### S-013: Sync.Mutex → sync.RWMutex Audit
 - **suggestionId**: S-013
