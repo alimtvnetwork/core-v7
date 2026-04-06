@@ -93,7 +93,11 @@ func BenchmarkCollection_At(b *testing.B) {
 
 func BenchmarkCollection_Length(b *testing.B) {
 	c := NewCollection[string](10)
-	c.Adds("a", "b", "c", "d", "e")
+	c.Add("a")
+	c.Add("b")
+	c.Add("c")
+	c.Add("d")
+	c.Add("e")
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
 		c.Length()
@@ -101,7 +105,7 @@ func BenchmarkCollection_Length(b *testing.B) {
 }
 
 func BenchmarkCollection_Contains(b *testing.B) {
-	c := NewCollection[string](100)
+	c := NewCollection[string](101)
 	for i := 0; i < 100; i++ {
 		c.Add("item")
 	}
