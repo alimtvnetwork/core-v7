@@ -1665,6 +1665,6 @@ func Test_C79_Utils_WrapSingleIfMissing_Empty(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "''"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"''\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"''\"", actual)
 	})
 }
