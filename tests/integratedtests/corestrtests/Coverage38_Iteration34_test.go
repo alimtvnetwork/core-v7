@@ -1489,16 +1489,13 @@ func Test_Cov38_LL_AddStringsToNode(t *testing.T) {
 		ll := corestr.New.LinkedList.SpreadStrings("a", "d")
 		node := ll.Head()
 		ll.AddStringsToNode(false, node, []string{"b", "c"})
-		if ll.Length() != 5 { // a + b + c + (n-1 increments from AddNext) + 1 from AddStringsToNode + d
-			// The actual length depends on internal logic; just verify it grew
 
 		// Act
-			actual := args.Map{"result": ll.Length() < 4}
+		actual := args.Map{"result": ll.Length() < 4}
 
 		// Assert
-			expected := args.Map{"result": false}
-			expected.ShouldBeEqual(t, 0, "expected at least 4", actual)
-		}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 4", actual)
 	})
 }
 

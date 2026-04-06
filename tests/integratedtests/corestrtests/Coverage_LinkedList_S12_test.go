@@ -1142,7 +1142,7 @@ func Test_S12_71_LinkedList_Join(t *testing.T) {
 
 		// Assert
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", ll.Join("", actual)
+		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
 }
 
