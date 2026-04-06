@@ -505,10 +505,10 @@ func Test_ExtSimpleSlice_IndexOf_Verification(t *testing.T) {
 		// Act & Assert
 		actual := args.Map{"result": ss.IndexOf("b") != 1}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "IndexOf('b') expected 1, got", ss.IndexOf("b", actual)
+		expected.ShouldBeEqual(t, 0, "IndexOf('b') expected 1", actual)
 		actual = args.Map{"result": ss.IndexOf("z") != -1}
 		expected = args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "IndexOf('z') expected -1, got", ss.IndexOf("z", actual)
+		expected.ShouldBeEqual(t, 0, "IndexOf('z') expected -1", actual)
 	})
 }
 
