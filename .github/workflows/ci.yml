@@ -38,8 +38,49 @@ jobs:
         with:
           go-version: "1.25"
 
-      - name: Run tests with coverage
-        run: go test -race -coverprofile=coverage.out -covermode=atomic ./...
+      - name: Run tests with coverage (parallel, verbose)
+        run: |
+          set +e
+          go test -v -race -count=1 -parallel=4 -coverprofile=coverage.out -covermode=atomic ./... 2>&1 | tee test-output.txt
+          TEST_EXIT=${PIPESTATUS[0]}
+          echo "TEST_EXIT_CODE=${TEST_EXIT}" >> "$GITHUB_ENV"
+
+          echo ""
+          echo "═══════════════════════════════════════════════════════"
+          echo "  TEST SUMMARY"
+          echo "═══════════════════════════════════════════════════════"
+
+          # Extract and display all failing tests
+          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt || true)
+          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt || true)
+
+          if [ -n "$FAILURES" ]; then
+            echo ""
+            echo "❌ FAILING TESTS:"
+            echo "$FAILURES"
+            echo ""
+            echo "❌ FAILING PACKAGES:"
+            echo "$FAIL_PKGS"
+            echo ""
+
+            # Annotate each failure as a GitHub Actions error
+            echo "$FAILURES" | while IFS= read -r line; do
+              TEST_NAME=$(echo "$line" | sed 's/.*--- FAIL: //' | sed 's/ (.*//')
+              echo "::error::Test failed: ${TEST_NAME}"
+            done
+          else
+            echo ""
+            echo "✅ All tests passed"
+          fi
+
+          PASS_COUNT=$(grep -c '^\s*--- PASS:' test-output.txt || echo "0")
+          FAIL_COUNT=$(grep -c '^\s*--- FAIL:' test-output.txt || echo "0")
+          SKIP_COUNT=$(grep -c '^\s*--- SKIP:' test-output.txt || echo "0")
+          echo ""
+          echo "  Passed: ${PASS_COUNT}  |  Failed: ${FAIL_COUNT}  |  Skipped: ${SKIP_COUNT}"
+          echo "═══════════════════════════════════════════════════════"
+
+          exit $TEST_EXIT
 
       - name: Check coverage threshold
         run: |
