@@ -408,9 +408,9 @@ func Test_I8_MP_GetInArgsTypes(t *testing.T) {
 func Test_I8_MP_GetInArgsTypesNames(t *testing.T) {
 	mp := getMP("Greet")
 	names := mp.GetInArgsTypesNames()
-	if len(names) != 2 { // receiver + name
-		t.Fatalf("expected 2, got %d", len(names))
-	}
+	actualNames := args.Map{"length": len(names)}
+	expectedNames := args.Map{"length": 2}
+	expectedNames.ShouldBeEqual(t, 0, "GetInArgsTypesNames returns 2 -- receiver + name", actualNames)
 	// Call again for cache
 	names2 := mp.GetInArgsTypesNames()
 	actual := args.Map{"result": len(names2) != 2}

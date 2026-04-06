@@ -81,9 +81,10 @@ func Test_CaseNilSafe_MethodName(t *testing.T) {
 		actLines := actual.CompileToStrings()
 		expLines := expected.CompileToStrings()
 
+		lineCountActual := args.Map{"lineCount": len(actLines)}
+		lineCountExpected := args.Map{"lineCount": len(expLines)}
+		lineCountExpected.ShouldBeEqual(t, caseIndex, "line count matches", lineCountActual)
 		if len(actLines) != len(expLines) {
-			t.Errorf("Case %d: line count mismatch", caseIndex)
-
 			continue
 		}
 

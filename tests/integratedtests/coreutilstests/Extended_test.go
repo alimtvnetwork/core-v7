@@ -1230,11 +1230,15 @@ func Test_SplitLeftRightTypeTrimmed_Verification(t *testing.T) {
 	// Act
 	result := stringutil.SplitLeftRightTypeTrimmed(" key = value ", "=")
 
-	// Assert
-	if result.Left != "key" || result.Right != "value" {
-		t.Errorf("SplitLeftRightTypeTrimmed expected left=key right=value, got left=%s right=%s",
-			result.Left, result.Right)
+	actual := args.Map{
+		"left":  result.Left,
+		"right": result.Right,
 	}
+	expected := args.Map{
+		"left":  "key",
+		"right": "value",
+	}
+	expected.ShouldBeEqual(t, 0, "SplitLeftRightTypeTrimmed returns correct parts -- trimmed key=value", actual)
 }
 
 // ==========================================

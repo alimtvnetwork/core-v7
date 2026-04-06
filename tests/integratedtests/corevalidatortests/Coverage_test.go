@@ -227,11 +227,9 @@ func Test_TextValidators_Count_Cov(t *testing.T) {
 	tvs := corevalidator.NewTextValidators(5)
 	tvs.Add(corevalidator.TextValidator{})
 	tvs.Add(corevalidator.TextValidator{})
-	if tvs.Count() != 1 { // Count returns LastIndex
-		actual := args.Map{"result": false}
-		expected := args.Map{"result": true}
-		expected.ShouldBeEqual(t, 0, "count should equal lastindex", actual)
-	}
+	actual := args.Map{"count": tvs.Count()}
+	expected := args.Map{"count": 1}
+	expected.ShouldBeEqual(t, 0, "Count returns LastIndex -- two items added", actual)
 }
 
 func Test_TextValidators_Adds_Empty_Cov(t *testing.T) {

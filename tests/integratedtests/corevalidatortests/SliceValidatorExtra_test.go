@@ -298,9 +298,9 @@ func Test_TextValidators_Count(t *testing.T) {
 	v := corevalidator.NewTextValidators(2)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
 	v.Add(corevalidator.TextValidator{Search: "b", SearchAs: stringcompareas.Equal})
-	if v.Count() != 1 { // Count = LastIndex = Length-1
-		t.Errorf("expected Count=1 (LastIndex), got %d", v.Count())
-	}
+	actual := args.Map{"count": v.Count()}
+	expected := args.Map{"count": 1}
+	expected.ShouldBeEqual(t, 0, "Count returns LastIndex -- two validators", actual)
 }
 
 // ==========================================

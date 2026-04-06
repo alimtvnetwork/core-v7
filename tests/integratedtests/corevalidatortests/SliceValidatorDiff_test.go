@@ -301,10 +301,9 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_WithDiff(t *testing.T) {
 	}
 
 	err := v.AllVerifyErrorExceptLast(params)
-	if err != nil {
-		errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
-		t.Errorf("should pass when skipping last line: %v", err)
-	}
+	actual := args.Map{"hasError": err != nil}
+	expected := args.Map{"hasError": false}
+	expected.ShouldBeEqual(t, 0, "AllVerifyErrorExceptLast passes -- skipping last line", actual)
 }
 
 // ==========================================
