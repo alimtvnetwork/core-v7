@@ -666,9 +666,9 @@ func Test_Cov22_Hashset_DistinctDiff(t *testing.T) {
 		h := corestr.New.Hashset.Cap(3)
 		h.Adds("a", "b")
 		diff := h.DistinctDiffLinesRaw("b", "c")
-		if len(diff) != 2 { // "a" and "c"
-			t.Fatalf("expected 2, got %d", len(diff))
-		}
+		actualDiff := args.Map{"length": len(diff)}
+		expectedDiff := args.Map{"length": 2}
+		expectedDiff.ShouldBeEqual(t, 0, "DistinctDiffLinesRaw returns 2 -- a and c", actualDiff)
 		diffMap := h.DistinctDiffLines("b", "c")
 		actual := args.Map{"result": len(diffMap) != 2}
 		expected := args.Map{"result": false}

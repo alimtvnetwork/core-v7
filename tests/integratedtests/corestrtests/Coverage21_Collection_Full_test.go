@@ -661,9 +661,9 @@ func Test_Cov21_Collection_AddNonEmptyStrings(t *testing.T) {
 	safeTest(t, "Test_Cov21_Collection_AddNonEmptyStrings", func() {
 		c := corestr.New.Collection.Empty()
 		c.AddNonEmptyStrings("a", "", "b")
-		if c.Length() != 2 { // AddNonEmptyStrings filters empty strings
-			t.Fatalf("expected 2, got %d", c.Length())
-		}
+		actual := args.Map{"length": c.Length()}
+		expected := args.Map{"length": 2}
+		expected.ShouldBeEqual(t, 0, "AddNonEmptyStrings returns 2 -- filters empty strings", actual)
 	})
 }
 

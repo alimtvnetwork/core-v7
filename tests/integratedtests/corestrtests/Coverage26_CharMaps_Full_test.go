@@ -40,9 +40,9 @@ func Test_C26_CharCollectionMap_CapSelfCap(t *testing.T) {
 func Test_C26_CharCollectionMap_Items(t *testing.T) {
 	safeTest(t, "Test_C26_CharCollectionMap_Items", func() {
 		ccm := corestr.New.CharCollectionMap.Items([]string{"apple", "banana", "avocado"})
-		if ccm.Length() != 2 { // 'a' and 'b'
-			t.Errorf("expected 2 got %d", ccm.Length())
-		}
+		actual := args.Map{"length": ccm.Length()}
+		expected := args.Map{"length": 2}
+		expected.ShouldBeEqual(t, 0, "CharCollectionMap.Items returns 2 -- a and b groups", actual)
 	})
 }
 
