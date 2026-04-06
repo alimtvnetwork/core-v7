@@ -566,10 +566,6 @@ func (it *MapResults) GetStrings() []string {
 	return list
 }
 
-// Deprecated: Use GetStrings instead.
-func (it *MapResults) GetStringsPtr() []string {
-	return it.GetStrings()
-}
 
 // AddJsoner skip on nil
 func (it *MapResults) AddJsoner(

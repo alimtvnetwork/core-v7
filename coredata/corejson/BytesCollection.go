@@ -530,10 +530,6 @@ func (it *BytesCollection) Strings() []string {
 	return list
 }
 
-// Deprecated: Use Strings instead.
-func (it *BytesCollection) StringsPtr() []string {
-	return it.Strings()
-}
 
 // AddJsoners skip on nil
 func (it *BytesCollection) AddJsoners(
