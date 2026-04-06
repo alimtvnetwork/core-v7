@@ -135,6 +135,19 @@ def transform_simple_bool_if(lines: list, i: int, indent: str, stats: TransformS
         next_line = lines[i + 1].strip()
         close_line = lines[i + 2].strip() if i + 2 < len(lines) else ""
 
+        # Check for t.Fatal() / t.Error() with no args
+        noarg_match = re.match(r't\.(Error|Fatal)\(\)\s*$', next_line)
+        if noarg_match and close_line == "}":
+            expected_val = "true" if neg == "!" else "false"
+            expr = expr.strip()
+            new_lines = [
+                f'{ws}actual := args.Map{{"result": {expr}}}',
+                f'{ws}expected := args.Map{{"result": {expected_val}}}',
+                f'{ws}expected.ShouldBeEqual(t, 0, "assertion", actual)',
+            ]
+            stats.patterns_transformed += 1
+            return (i, i + 2, new_lines)
+
         # Check for t.Error("msg") on next line and } on line after
         err_match = re.match(
             r't\.(Error|Errorf|Fatal|Fatalf)\((".*?")\s*\)',
