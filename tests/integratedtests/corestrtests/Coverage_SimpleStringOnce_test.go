@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -20,25 +21,25 @@ func newSSO(val string) *corestr.SimpleStringOnce {
 func Test_CovSSO_01_Value_IsInitialized_IsDefined(t *testing.T) {
 	safeTest(t, "Test_CovSSO_01_Value_IsInitialized_IsDefined", func() {
 		sso := &corestr.SimpleStringOnce{}
-		if sso.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
-		if sso.IsDefined() {
-			t.Fatal("expected undefined")
-		}
-		if !sso.IsUninitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
+		actual := args.Map{"result": sso.IsDefined()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected undefined", actual)
+		actual := args.Map{"result": sso.IsUninitialized()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 		sso.SetOnUninitialized("hello")
-		if sso.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
-		if !sso.IsInitialized() {
-			t.Fatal("expected initialized")
-		}
-		if !sso.IsDefined() {
-			t.Fatal("expected defined")
-		}
+		actual := args.Map{"result": sso.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
+		actual := args.Map{"result": sso.IsDefined()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected defined", actual)
 	})
 }
 
@@ -46,9 +47,9 @@ func Test_CovSSO_02_SetOnUninitialized_AlreadyInit(t *testing.T) {
 	safeTest(t, "Test_CovSSO_02_SetOnUninitialized_AlreadyInit", func() {
 		sso := newSSO("first")
 		err := sso.SetOnUninitialized("second")
-		if err == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -56,14 +57,14 @@ func Test_CovSSO_03_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_CovSSO_03_GetSetOnce", func() {
 		sso := &corestr.SimpleStringOnce{}
 		v := sso.GetSetOnce("hello")
-		if v != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": v != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		// already init
 		v2 := sso.GetSetOnce("world")
-		if v2 != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": v2 != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
@@ -71,14 +72,14 @@ func Test_CovSSO_04_GetOnce(t *testing.T) {
 	safeTest(t, "Test_CovSSO_04_GetOnce", func() {
 		sso := &corestr.SimpleStringOnce{}
 		v := sso.GetOnce()
-		if v != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": v != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		// already init
 		v2 := sso.GetOnce()
-		if v2 != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": v2 != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -86,14 +87,14 @@ func Test_CovSSO_05_GetOnceFunc(t *testing.T) {
 	safeTest(t, "Test_CovSSO_05_GetOnceFunc", func() {
 		sso := &corestr.SimpleStringOnce{}
 		v := sso.GetOnceFunc(func() string { return "computed" })
-		if v != "computed" {
-			t.Fatal("expected computed")
-		}
+		actual := args.Map{"result": v != "computed"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected computed", actual)
 		// already init
 		v2 := sso.GetOnceFunc(func() string { return "other" })
-		if v2 != "computed" {
-			t.Fatal("expected computed")
-		}
+		actual := args.Map{"result": v2 != "computed"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected computed", actual)
 	})
 }
 
@@ -101,13 +102,13 @@ func Test_CovSSO_06_SetOnceIfUninitialized(t *testing.T) {
 	safeTest(t, "Test_CovSSO_06_SetOnceIfUninitialized", func() {
 		sso := &corestr.SimpleStringOnce{}
 		ok := sso.SetOnceIfUninitialized("hello")
-		if !ok {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": ok}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		ok2 := sso.SetOnceIfUninitialized("world")
-		if ok2 {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": ok2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -115,14 +116,14 @@ func Test_CovSSO_07_Invalidate_Reset(t *testing.T) {
 	safeTest(t, "Test_CovSSO_07_Invalidate_Reset", func() {
 		sso := newSSO("hello")
 		sso.Invalidate()
-		if sso.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 		sso.SetOnUninitialized("new")
 		sso.Reset()
-		if sso.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }
 
@@ -130,187 +131,187 @@ func Test_CovSSO_08_SetInitialize_SetUnInit(t *testing.T) {
 	safeTest(t, "Test_CovSSO_08_SetInitialize_SetUnInit", func() {
 		sso := &corestr.SimpleStringOnce{}
 		sso.SetInitialize()
-		if !sso.IsInitialized() {
-			t.Fatal("expected initialized")
-		}
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 		sso.SetUnInit()
-		if sso.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }
 
 func Test_CovSSO_09_IsInvalid(t *testing.T) {
 	safeTest(t, "Test_CovSSO_09_IsInvalid", func() {
 		sso := &corestr.SimpleStringOnce{}
-		if !sso.IsInvalid() {
-			t.Fatal("expected invalid")
-		}
+		actual := args.Map{"result": sso.IsInvalid()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 		sso.SetOnUninitialized("")
-		if !sso.IsInvalid() {
-			t.Fatal("expected invalid for empty value")
-		}
+		actual := args.Map{"result": sso.IsInvalid()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected invalid for empty value", actual)
 		sso2 := newSSO("hello")
-		if sso2.IsInvalid() {
-			t.Fatal("expected valid")
-		}
+		actual := args.Map{"result": sso2.IsInvalid()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	})
 }
 
 func Test_CovSSO_10_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovSSO_10_IsEmpty_IsWhitespace", func() {
 		sso := &corestr.SimpleStringOnce{}
-		if !sso.IsEmpty() {
-			t.Fatal("expected empty")
-		}
-		if !sso.IsWhitespace() {
-			t.Fatal("expected whitespace")
-		}
+		actual := args.Map{"result": sso.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual := args.Map{"result": sso.IsWhitespace()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected whitespace", actual)
 		sso2 := newSSO("hello")
-		if sso2.IsEmpty() {
-			t.Fatal("expected not empty")
-		}
+		actual := args.Map{"result": sso2.IsEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
 
 func Test_CovSSO_11_Trim(t *testing.T) {
 	safeTest(t, "Test_CovSSO_11_Trim", func() {
 		sso := newSSO("  hello  ")
-		if sso.Trim() != "hello" {
-			t.Fatal("expected trimmed")
-		}
+		actual := args.Map{"result": sso.Trim() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected trimmed", actual)
 	})
 }
 
 func Test_CovSSO_12_HasValidNonEmpty_HasValidNonWhitespace_HasSafeNonEmpty(t *testing.T) {
 	safeTest(t, "Test_CovSSO_12_HasValidNonEmpty_HasValidNonWhitespace_HasSafeNonEmpty", func() {
 		sso := &corestr.SimpleStringOnce{}
-		if sso.HasValidNonEmpty() {
-			t.Fatal("expected false")
-		}
-		if sso.HasValidNonWhitespace() {
-			t.Fatal("expected false")
-		}
-		if sso.HasSafeNonEmpty() {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": sso.HasValidNonEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": sso.HasValidNonWhitespace()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": sso.HasSafeNonEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		sso2 := newSSO("hello")
-		if !sso2.HasValidNonEmpty() {
-			t.Fatal("expected true")
-		}
-		if !sso2.HasValidNonWhitespace() {
-			t.Fatal("expected true")
-		}
-		if !sso2.HasSafeNonEmpty() {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": sso2.HasValidNonEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso2.HasValidNonWhitespace()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso2.HasSafeNonEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_CovSSO_13_SafeValue(t *testing.T) {
 	safeTest(t, "Test_CovSSO_13_SafeValue", func() {
 		sso := &corestr.SimpleStringOnce{}
-		if sso.SafeValue() != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": sso.SafeValue() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		sso2 := newSSO("hello")
-		if sso2.SafeValue() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": sso2.SafeValue() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
 func Test_CovSSO_14_ValueBytes_ValueBytesPtr(t *testing.T) {
 	safeTest(t, "Test_CovSSO_14_ValueBytes_ValueBytesPtr", func() {
 		sso := newSSO("hi")
-		if len(sso.ValueBytes()) != 2 {
-			t.Fatal("expected 2")
-		}
-		if len(sso.ValueBytesPtr()) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": len(sso.ValueBytes()) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+		actual := args.Map{"result": len(sso.ValueBytesPtr()) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_CovSSO_15_Int_ValueInt_ValueDefInt(t *testing.T) {
 	safeTest(t, "Test_CovSSO_15_Int_ValueInt_ValueDefInt", func() {
 		sso := newSSO("42")
-		if sso.Int() != 42 {
-			t.Fatal("expected 42")
-		}
-		if sso.ValueInt(0) != 42 {
-			t.Fatal("expected 42")
-		}
-		if sso.ValueDefInt() != 42 {
-			t.Fatal("expected 42")
-		}
+		actual := args.Map{"result": sso.Int() != 42}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 42", actual)
+		actual := args.Map{"result": sso.ValueInt(0) != 42}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 42", actual)
+		actual := args.Map{"result": sso.ValueDefInt() != 42}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 		// invalid
 		sso2 := newSSO("abc")
-		if sso2.Int() != 0 {
-			t.Fatal("expected 0")
-		}
-		if sso2.ValueInt(99) != 99 {
-			t.Fatal("expected 99")
-		}
-		if sso2.ValueDefInt() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": sso2.Int() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
+		actual := args.Map{"result": sso2.ValueInt(99) != 99}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 99", actual)
+		actual := args.Map{"result": sso2.ValueDefInt() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovSSO_16_Byte_ValueByte_ValueDefByte(t *testing.T) {
 	safeTest(t, "Test_CovSSO_16_Byte_ValueByte_ValueDefByte", func() {
 		sso := newSSO("100")
-		if sso.Byte() != 100 {
-			t.Fatal("expected 100")
-		}
-		if sso.ValueByte(0) != 100 {
-			t.Fatal("expected 100")
-		}
-		if sso.ValueDefByte() != 100 {
-			t.Fatal("expected 100")
-		}
+		actual := args.Map{"result": sso.Byte() != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
+		actual := args.Map{"result": sso.ValueByte(0) != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
+		actual := args.Map{"result": sso.ValueDefByte() != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
 		// out of range
 		sso2 := newSSO("999")
-		if sso2.Byte() != 0 {
-			t.Fatal("expected 0")
-		}
-		if sso2.ValueByte(5) != 5 {
-			t.Fatal("expected 5")
-		}
+		actual := args.Map{"result": sso2.Byte() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
+		actual := args.Map{"result": sso2.ValueByte(5) != 5}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 5", actual)
 		// invalid
 		sso3 := newSSO("abc")
-		if sso3.Byte() != 0 {
-			t.Fatal("expected 0")
-		}
-		if sso3.ValueByte(7) != 7 {
-			t.Fatal("expected 7")
-		}
+		actual := args.Map{"result": sso3.Byte() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
+		actual := args.Map{"result": sso3.ValueByte(7) != 7}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 7", actual)
 	})
 }
 
 func Test_CovSSO_17_Int16_Int32(t *testing.T) {
 	safeTest(t, "Test_CovSSO_17_Int16_Int32", func() {
 		sso := newSSO("100")
-		if sso.Int16() != 100 {
-			t.Fatal("expected 100")
-		}
-		if sso.Int32() != 100 {
-			t.Fatal("expected 100")
-		}
+		actual := args.Map{"result": sso.Int16() != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
+		actual := args.Map{"result": sso.Int32() != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
 		// out of range for int16
 		sso2 := newSSO("99999")
-		if sso2.Int16() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": sso2.Int16() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// invalid
 		sso3 := newSSO("abc")
-		if sso3.Int16() != 0 {
-			t.Fatal("expected 0")
-		}
-		if sso3.Int32() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": sso3.Int16() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
+		actual := args.Map{"result": sso3.Int32() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -318,13 +319,13 @@ func Test_CovSSO_18_Uint16_Uint32(t *testing.T) {
 	safeTest(t, "Test_CovSSO_18_Uint16_Uint32", func() {
 		sso := newSSO("100")
 		v16, ok16 := sso.Uint16()
-		if v16 != 100 || !ok16 {
-			t.Fatal("expected 100 in range")
-		}
+		actual := args.Map{"result": v16 != 100 || !ok16}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100 in range", actual)
 		v32, ok32 := sso.Uint32()
-		if v32 != 100 || !ok32 {
-			t.Fatal("expected 100 in range")
-		}
+		actual := args.Map{"result": v32 != 100 || !ok32}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100 in range", actual)
 	})
 }
 
@@ -332,53 +333,53 @@ func Test_CovSSO_19_WithinRange_WithinRangeDefault(t *testing.T) {
 	safeTest(t, "Test_CovSSO_19_WithinRange_WithinRangeDefault", func() {
 		sso := newSSO("50")
 		v, ok := sso.WithinRange(true, 0, 100)
-		if v != 50 || !ok {
-			t.Fatal("expected 50 in range")
-		}
+		actual := args.Map{"result": v != 50 || !ok}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 50 in range", actual)
 		// out of range with boundary
 		v2, ok2 := sso.WithinRange(true, 60, 100)
-		if v2 != 60 || ok2 {
-			t.Fatal("expected min boundary")
-		}
+		actual := args.Map{"result": v2 != 60 || ok2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected min boundary", actual)
 		// out of range, above max
 		sso2 := newSSO("200")
 		v3, ok3 := sso2.WithinRange(true, 0, 100)
-		if v3 != 100 || ok3 {
-			t.Fatal("expected max boundary")
-		}
+		actual := args.Map{"result": v3 != 100 || ok3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected max boundary", actual)
 		// no boundary
 		v4, ok4 := sso2.WithinRange(false, 0, 100)
-		if v4 != 200 || ok4 {
-			t.Fatal("expected 200 out of range")
-		}
+		actual := args.Map{"result": v4 != 200 || ok4}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 200 out of range", actual)
 		// invalid
 		sso3 := newSSO("abc")
 		v5, ok5 := sso3.WithinRange(true, 0, 100)
-		if v5 != 0 || ok5 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": v5 != 0 || ok5}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// WithinRangeDefault
 		v6, ok6 := sso.WithinRangeDefault(0, 100)
-		if v6 != 50 || !ok6 {
-			t.Fatal("expected 50")
-		}
+		actual := args.Map{"result": v6 != 50 || !ok6}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 50", actual)
 	})
 }
 
 func Test_CovSSO_20_ValueFloat64_ValueDefFloat64(t *testing.T) {
 	safeTest(t, "Test_CovSSO_20_ValueFloat64_ValueDefFloat64", func() {
 		sso := newSSO("3.14")
-		if sso.ValueFloat64(0) != 3.14 {
-			t.Fatal("expected 3.14")
-		}
-		if sso.ValueDefFloat64() != 3.14 {
-			t.Fatal("expected 3.14")
-		}
+		actual := args.Map{"result": sso.ValueFloat64(0) != 3.14}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
+		actual := args.Map{"result": sso.ValueDefFloat64() != 3.14}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
 		// invalid
 		sso2 := newSSO("abc")
-		if sso2.ValueFloat64(1.5) != 1.5 {
-			t.Fatal("expected 1.5")
-		}
+		actual := args.Map{"result": sso2.ValueFloat64(1.5) != 1.5}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1.5", actual)
 	})
 }
 
@@ -393,24 +394,24 @@ func Test_CovSSO_21_Boolean_BooleanDefault_IsValueBool(t *testing.T) {
 		}
 		for _, c := range cases {
 			sso := newSSO(c.val)
-			if sso.Boolean(false) != c.expect {
-				t.Fatalf("Boolean(%s) expected %v", c.val, c.expect)
-			}
+			actual := args.Map{"result": sso.Boolean(false) != c.expect}
+			expected := args.Map{"result": false}
+			expected.ShouldBeEqual(t, 0, "Boolean() expected", actual)
 		}
 		// with consider init
 		uninit := &corestr.SimpleStringOnce{}
-		if uninit.Boolean(true) {
-			t.Fatal("expected false for uninitialized")
-		}
+		actual := args.Map{"result": uninit.Boolean(true)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for uninitialized", actual)
 		// BooleanDefault
 		sso := newSSO("true")
-		if !sso.BooleanDefault() {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": sso.BooleanDefault()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		// IsValueBool
-		if !sso.IsValueBool() {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": sso.IsValueBool()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -418,76 +419,76 @@ func Test_CovSSO_22_IsSetter(t *testing.T) {
 	safeTest(t, "Test_CovSSO_22_IsSetter", func() {
 		sso := newSSO("yes")
 		v := sso.IsSetter(false)
-		if v.String() != "True" {
-			t.Fatalf("expected True, got %s", v.String())
-		}
+		actual := args.Map{"result": v.String() != "True"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected True", actual)
 		// invalid
 		sso2 := newSSO("abc")
 		v2 := sso2.IsSetter(false)
-		if v2.String() != "Uninitialized" {
-			t.Fatal("expected Uninitialized")
-		}
+		actual := args.Map{"result": v2.String() != "Uninitialized"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected Uninitialized", actual)
 		// consider init, uninitialized
 		uninit := &corestr.SimpleStringOnce{}
 		v3 := uninit.IsSetter(true)
-		if v3.String() != "False" {
-			t.Fatal("expected False")
-		}
+		actual := args.Map{"result": v3.String() != "False"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected False", actual)
 		// false value
 		sso3 := newSSO("false")
 		v4 := sso3.IsSetter(false)
-		if v4.String() != "False" {
-			t.Fatal("expected False")
-		}
+		actual := args.Map{"result": v4.String() != "False"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected False", actual)
 	})
 }
 
 func Test_CovSSO_23_Is_IsAnyOf(t *testing.T) {
 	safeTest(t, "Test_CovSSO_23_Is_IsAnyOf", func() {
 		sso := newSSO("hello")
-		if !sso.Is("hello") {
-			t.Fatal("expected true")
-		}
-		if sso.Is("world") {
-			t.Fatal("expected false")
-		}
-		if !sso.IsAnyOf("a", "hello") {
-			t.Fatal("expected true")
-		}
-		if sso.IsAnyOf("a", "b") {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": sso.Is("hello")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso.Is("world")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": sso.IsAnyOf("a", "hello")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso.IsAnyOf("a", "b")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// empty values → true
-		if !sso.IsAnyOf() {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": sso.IsAnyOf()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_CovSSO_24_IsContains_IsAnyContains(t *testing.T) {
 	safeTest(t, "Test_CovSSO_24_IsContains_IsAnyContains", func() {
 		sso := newSSO("hello world")
-		if !sso.IsContains("world") {
-			t.Fatal("expected true")
-		}
-		if !sso.IsAnyContains("xyz", "world") {
-			t.Fatal("expected true")
-		}
-		if sso.IsAnyContains("xyz", "abc") {
-			t.Fatal("expected false")
-		}
-		if !sso.IsAnyContains() {
-			t.Fatal("expected true for empty")
-		}
+		actual := args.Map{"result": sso.IsContains("world")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso.IsAnyContains("xyz", "world")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso.IsAnyContains("xyz", "abc")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual := args.Map{"result": sso.IsAnyContains()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 	})
 }
 
 func Test_CovSSO_25_IsEqualNonSensitive(t *testing.T) {
 	safeTest(t, "Test_CovSSO_25_IsEqualNonSensitive", func() {
 		sso := newSSO("Hello")
-		if !sso.IsEqualNonSensitive("hello") {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": sso.IsEqualNonSensitive("hello")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -495,34 +496,34 @@ func Test_CovSSO_26_IsRegexMatches_RegexFind(t *testing.T) {
 	safeTest(t, "Test_CovSSO_26_IsRegexMatches_RegexFind", func() {
 		sso := newSSO("hello123")
 		re := regexp.MustCompile(`\d+`)
-		if !sso.IsRegexMatches(re) {
-			t.Fatal("expected true")
-		}
-		if sso.IsRegexMatches(nil) {
-			t.Fatal("expected false for nil")
-		}
+		actual := args.Map{"result": sso.IsRegexMatches(re)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual := args.Map{"result": sso.IsRegexMatches(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 		found := sso.RegexFindString(re)
-		if found != "123" {
-			t.Fatal("expected 123")
-		}
-		if sso.RegexFindString(nil) != "" {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": found != "123"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 123", actual)
+		actual := args.Map{"result": sso.RegexFindString(nil) != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		items := sso.RegexFindAllStrings(re, -1)
-		if len(items) != 1 {
-			t.Fatal("expected 1")
-		}
-		if len(sso.RegexFindAllStrings(nil, -1)) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": len(items) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual := args.Map{"result": len(sso.RegexFindAllStrings(nil, -1)) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		items2, has := sso.RegexFindAllStringsWithFlag(re, -1)
-		if !has || len(items2) != 1 {
-			t.Fatal("expected found")
-		}
+		actual := args.Map{"result": has || len(items2) != 1}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		_, has2 := sso.RegexFindAllStringsWithFlag(nil, -1)
-		if has2 {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": has2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -530,31 +531,31 @@ func Test_CovSSO_27_Split_SplitLeftRight_SplitLeftRightTrim(t *testing.T) {
 	safeTest(t, "Test_CovSSO_27_Split_SplitLeftRight_SplitLeftRightTrim", func() {
 		sso := newSSO("key=value")
 		parts := sso.Split("=")
-		if len(parts) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": len(parts) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		l, r := sso.SplitLeftRight("=")
-		if l != "key" || r != "value" {
-			t.Fatal("expected key,value")
-		}
+		actual := args.Map{"result": l != "key" || r != "value"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected key,value", actual)
 		// no right
 		sso2 := newSSO("onlykey")
 		l2, r2 := sso2.SplitLeftRight("=")
-		if l2 != "onlykey" || r2 != "" {
-			t.Fatal("expected onlykey,empty")
-		}
+		actual := args.Map{"result": l2 != "onlykey" || r2 != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected onlykey,empty", actual)
 		// trim
 		sso3 := newSSO(" key = value ")
 		l3, r3 := sso3.SplitLeftRightTrim("=")
-		if l3 != "key" || r3 != "value" {
-			t.Fatalf("expected key,value got '%s','%s'", l3, r3)
-		}
+		actual := args.Map{"result": l3 != "key" || r3 != "value"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected key,value got '',''", actual)
 		// no right trim
 		sso4 := newSSO("onlykey")
 		l4, r4 := sso4.SplitLeftRightTrim("=")
-		if l4 != "onlykey" || r4 != "" {
-			t.Fatal("expected onlykey,empty")
-		}
+		actual := args.Map{"result": l4 != "onlykey" || r4 != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected onlykey,empty", actual)
 	})
 }
 
@@ -562,14 +563,14 @@ func Test_CovSSO_28_SplitNonEmpty_SplitTrimNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovSSO_28_SplitNonEmpty_SplitTrimNonWhitespace", func() {
 		sso := newSSO("a,,b")
 		parts := sso.SplitNonEmpty(",")
-		if len(parts) < 2 {
-			t.Fatal("expected at least 2")
-		}
+		actual := args.Map{"result": len(parts) < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 		sso2 := newSSO("a, ,b")
 		parts2 := sso2.SplitTrimNonWhitespace(",")
-		if len(parts2) < 2 {
-			t.Fatal("expected at least 2")
-		}
+		actual := args.Map{"result": len(parts2) < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
 }
 
@@ -577,13 +578,13 @@ func Test_CovSSO_29_LinesSimpleSlice_SimpleSlice(t *testing.T) {
 	safeTest(t, "Test_CovSSO_29_LinesSimpleSlice_SimpleSlice", func() {
 		sso := newSSO("a\nb")
 		ss := sso.LinesSimpleSlice()
-		if ss.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss2 := sso.SimpleSlice(",")
-		if ss2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": ss2.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -591,13 +592,13 @@ func Test_CovSSO_30_ConcatNew_ConcatNewUsingStrings(t *testing.T) {
 	safeTest(t, "Test_CovSSO_30_ConcatNew_ConcatNewUsingStrings", func() {
 		sso := newSSO("hello")
 		c := sso.ConcatNew(" world")
-		if c.Value() != "hello world" {
-			t.Fatal("expected hello world")
-		}
+		actual := args.Map{"result": c.Value() != "hello world"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello world", actual)
 		c2 := sso.ConcatNewUsingStrings("-", "a", "b")
-		if c2.Value() != "hello-a-b" {
-			t.Fatalf("expected 'hello-a-b', got '%s'", c2.Value())
-		}
+		actual := args.Map{"result": c2.Value() != "hello-a-b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'hello-a-b', got ''", actual)
 	})
 }
 
@@ -605,13 +606,13 @@ func Test_CovSSO_31_NonPtr_Ptr(t *testing.T) {
 	safeTest(t, "Test_CovSSO_31_NonPtr_Ptr", func() {
 		sso := newSSO("hello")
 		np := sso.NonPtr()
-		if np.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": np.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		p := sso.Ptr()
-		if p.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": p.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
@@ -619,30 +620,30 @@ func Test_CovSSO_32_Clone_ClonePtr_CloneUsingNewVal(t *testing.T) {
 	safeTest(t, "Test_CovSSO_32_Clone_ClonePtr_CloneUsingNewVal", func() {
 		sso := newSSO("hello")
 		c := sso.Clone()
-		if c.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": c.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		cp := sso.ClonePtr()
-		if cp.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": cp.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		cv := sso.CloneUsingNewVal("new")
-		if cv.Value() != "new" {
-			t.Fatal("expected new")
-		}
+		actual := args.Map{"result": cv.Value() != "new"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected new", actual)
 	})
 }
 
 func Test_CovSSO_33_String_StringPtr(t *testing.T) {
 	safeTest(t, "Test_CovSSO_33_String_StringPtr", func() {
 		sso := newSSO("hello")
-		if sso.String() != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": sso.String() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		sp := sso.StringPtr()
-		if *sp != "hello" {
-			t.Fatal("expected hello")
-		}
+		actual := args.Map{"result": *sp != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
@@ -659,19 +660,19 @@ func Test_CovSSO_35_JsonModel_MarshalUnmarshal(t *testing.T) {
 		_ = sso.JsonModel()
 		_ = sso.JsonModelAny()
 		data, err := sso.MarshalJSON()
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		sso2 := &corestr.SimpleStringOnce{}
 		err2 := sso2.UnmarshalJSON(data)
-		if err2 != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		// invalid
 		err3 := sso2.UnmarshalJSON([]byte("bad"))
-		if err3 == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err3 == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -682,9 +683,9 @@ func Test_CovSSO_36_Json_JsonPtr_ParseInject(t *testing.T) {
 		jr := sso.JsonPtr()
 		sso2 := &corestr.SimpleStringOnce{}
 		r, err := sso2.ParseInjectUsingJson(jr)
-		if err != nil || r == nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil || r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }
 
@@ -694,9 +695,9 @@ func Test_CovSSO_37_ParseInjectUsingJsonMust(t *testing.T) {
 		jr := sso.JsonPtr()
 		sso2 := &corestr.SimpleStringOnce{}
 		r := sso2.ParseInjectUsingJsonMust(jr)
-		if r == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -706,9 +707,9 @@ func Test_CovSSO_38_JsonParseSelfInject(t *testing.T) {
 		jr := sso.JsonPtr()
 		sso2 := &corestr.SimpleStringOnce{}
 		err := sso2.JsonParseSelfInject(jr)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }
 
@@ -726,13 +727,13 @@ func Test_CovSSO_40_Serialize_Deserialize(t *testing.T) {
 	safeTest(t, "Test_CovSSO_40_Serialize_Deserialize", func() {
 		sso := newSSO("hello")
 		_, err := sso.Serialize()
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		target := &corestr.SimpleStringOnce{}
 		err2 := sso.Deserialize(target)
-		if err2 != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err2 != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }

@@ -112,7 +112,9 @@ func Test_Seg2_Collection_Single_Panics(t *testing.T) {
 		c := corestr.New.Collection.Cap(5)
 		c.Adds("a", "b")
 		_ = c.Single() // should panic
-		t.Fatal("should have panicked")
+		actual := args.Map{"result": false}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have panicked", actual)
 	})
 }
 
@@ -179,7 +181,9 @@ func Test_Seg2_Collection_Skip_Panics(t *testing.T) {
 		c := corestr.New.Collection.Cap(5)
 		c.Add("a")
 		_ = c.Skip(10) // should panic
-		t.Fatal("should have panicked")
+		actual := args.Map{"result": false}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have panicked", actual)
 	})
 }
 
@@ -388,7 +392,9 @@ func Test_Seg2_Collection_RemoveItemsIndexesPtr_EmptyPanic(t *testing.T) {
 		defer func() { recover() }()
 		c := corestr.New.Collection.Cap(10)
 		c.RemoveItemsIndexesPtr(false, []int{0})
-		t.Fatal("should have panicked")
+		actual := args.Map{"result": false}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "should have panicked", actual)
 	})
 }
 

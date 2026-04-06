@@ -116,9 +116,9 @@ func Test_Cov48_SS_JoinLine(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JoinLine", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result := ss.JoinLine()
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -134,9 +134,9 @@ func Test_Cov48_SS_JoinLineEofLine(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JoinLineEofLine", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result := ss.JoinLineEofLine()
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -168,9 +168,9 @@ func Test_Cov48_SS_JoinCsv(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JoinCsv", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		result := ss.JoinCsv()
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -178,9 +178,9 @@ func Test_Cov48_SS_JoinCsvLine(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JoinCsvLine", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result := ss.JoinCsvLine()
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -205,9 +205,9 @@ func Test_Cov48_SS_JoinCsvString(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JoinCsvString", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		result := ss.JoinCsvString(",")
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -491,9 +491,9 @@ func Test_Cov48_SS_Ptr(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Ptr", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		p := ss.Ptr()
-		if p == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": p == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -501,9 +501,9 @@ func Test_Cov48_SS_ToPtr(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_ToPtr", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		p := ss.ToPtr()
-		if p == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": p == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -649,9 +649,9 @@ func Test_Cov48_SS_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_JsonModelAny", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		a := ss.JsonModelAny()
-		if a == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": a == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -659,9 +659,9 @@ func Test_Cov48_SS_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AsJsonContractsBinder", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		b := ss.AsJsonContractsBinder()
-		if b == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": b == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -669,9 +669,9 @@ func Test_Cov48_SS_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AsJsoner", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		j := ss.AsJsoner()
-		if j == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": j == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -679,9 +679,9 @@ func Test_Cov48_SS_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AsJsonParseSelfInjector", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		inj := ss.AsJsonParseSelfInjector()
-		if inj == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": inj == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -689,9 +689,9 @@ func Test_Cov48_SS_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AsJsonMarshaller", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		m := ss.AsJsonMarshaller()
-		if m == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": m == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -701,9 +701,9 @@ func Test_Cov48_SS_JsonParseSelfInject(t *testing.T) {
 		jr := ss.JsonPtr()
 		ss2 := corestr.New.SimpleSlice.Cap(0)
 		err := ss2.JsonParseSelfInject(jr)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }
 
@@ -724,9 +724,9 @@ func Test_Cov48_SS_UnmarshalJSON_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_UnmarshalJSON_Invalid", func() {
 		ss := corestr.New.SimpleSlice.Cap(0)
 		err := json.Unmarshal([]byte("invalid"), ss)
-		if err == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -745,9 +745,9 @@ func Test_Cov48_SS_Clear_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Clear_Nil", func() {
 		var ss *corestr.SimpleSlice
 		result := ss.Clear()
-		if result != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": result != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -782,9 +782,9 @@ func Test_Cov48_SS_ClonePtr(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_ClonePtr", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		cloned := ss.ClonePtr(true)
-		if cloned == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": cloned == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		tc := caseV1Compat{Name: "ClonePtr", Expected: 1, Actual: cloned.Length(), Args: args.Map{}}
 		tc.ShouldBeEqual(t)
 	})
@@ -794,9 +794,9 @@ func Test_Cov48_SS_ClonePtr_Nil(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_ClonePtr_Nil", func() {
 		var ss *corestr.SimpleSlice
 		cloned := ss.ClonePtr(true)
-		if cloned != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": cloned != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -979,9 +979,9 @@ func Test_Cov48_SS_DistinctDiffRaw(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_DistinctDiffRaw", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result := ss.DistinctDiffRaw("b", "c")
-		if len(result) == 0 {
-			t.Fatal("expected diff items")
-		}
+		actual := args.Map{"result": len(result) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected diff items", actual)
 	})
 }
 
@@ -1017,9 +1017,9 @@ func Test_Cov48_SS_DistinctDiff(t *testing.T) {
 		a := corestr.New.SimpleSlice.Lines("a", "b")
 		b := corestr.New.SimpleSlice.Lines("b", "c")
 		result := a.DistinctDiff(b)
-		if len(result) == 0 {
-			t.Fatal("expected diff items")
-		}
+		actual := args.Map{"result": len(result) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected diff items", actual)
 	})
 }
 
@@ -1058,12 +1058,12 @@ func Test_Cov48_SS_AddedRemovedLinesDiff(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AddedRemovedLinesDiff", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		added, removed := ss.AddedRemovedLinesDiff("b", "c")
-		if len(added) == 0 {
-			t.Fatal("expected added items")
-		}
-		if len(removed) == 0 {
-			t.Fatal("expected removed items")
-		}
+		actual := args.Map{"result": len(added) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected added items", actual)
+		actual := args.Map{"result": len(removed) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected removed items", actual)
 	})
 }
 
@@ -1071,9 +1071,9 @@ func Test_Cov48_SS_AddedRemovedLinesDiff_BothNil(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_AddedRemovedLinesDiff_BothNil", func() {
 		var ss *corestr.SimpleSlice
 		added, removed := ss.AddedRemovedLinesDiff()
-		if added != nil || removed != nil {
-			t.Fatal("expected nil")
-		}
+		actual := args.Map{"result": added != nil || removed != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -1083,9 +1083,9 @@ func Test_Cov48_SS_RemoveIndexes_Empty(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_RemoveIndexes_Empty", func() {
 		ss := corestr.New.SimpleSlice.Cap(0)
 		_, err := ss.RemoveIndexes(0)
-		if err == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -1093,12 +1093,12 @@ func Test_Cov48_SS_RemoveIndexes_InvalidIndex(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_RemoveIndexes_InvalidIndex", func() {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		result, err := ss.RemoveIndexes(99)
-		if err == nil {
-			t.Fatal("expected error for invalid index")
-		}
-		if result.Length() != 2 {
-			t.Fatal("expected 2 items still")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for invalid index", actual)
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 items still", actual)
 	})
 }
 
@@ -1109,9 +1109,9 @@ func Test_Cov48_SS_Deserialize(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 		var target []string
 		err := ss.Deserialize(&target)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		tc := caseV1Compat{Name: "Deserialize", Expected: 2, Actual: len(target), Args: args.Map{}}
 		tc.ShouldBeEqual(t)
 	})
@@ -1300,9 +1300,9 @@ func Test_Cov48_SS_Creator_UsingLines_NoClone(t *testing.T) {
 func Test_Cov48_SS_Creator_UsingLine(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Creator_UsingLine", func() {
 		ss := corestr.New.SimpleSlice.UsingLine("a\nb")
-		if ss.Length() < 1 {
-			t.Fatal("expected at least 1")
-		}
+		actual := args.Map{"result": ss.Length() < 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 1", actual)
 	})
 }
 
@@ -1354,9 +1354,9 @@ func Test_Cov48_SS_Creator_Deserialize(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Creator_Deserialize", func() {
 		data, _ := json.Marshal([]string{"a", "b"})
 		ss, err := corestr.New.SimpleSlice.Deserialize(data)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		tc := caseV1Compat{Name: "Creator Deserialize", Expected: 2, Actual: ss.Length(), Args: args.Map{}}
 		tc.ShouldBeEqual(t)
 	})
@@ -1365,8 +1365,8 @@ func Test_Cov48_SS_Creator_Deserialize(t *testing.T) {
 func Test_Cov48_SS_Creator_Deserialize_Invalid(t *testing.T) {
 	safeTest(t, "Test_Cov48_SS_Creator_Deserialize_Invalid", func() {
 		_, err := corestr.New.SimpleSlice.Deserialize([]byte("invalid"))
-		if err == nil {
-			t.Fatal("expected error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }

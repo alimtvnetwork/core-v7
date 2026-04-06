@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // region HashmapDataModel
@@ -19,9 +20,9 @@ func Test_CovS24_01_NewHashmapUsingDataModel(t *testing.T) {
 		hm := corestr.NewHashmapUsingDataModel(model)
 
 		// Assert
-		if hm == nil || hm.Length() != 1 {
-			t.Errorf("NewHashmapUsingDataModel should create hashmap with 1 item")
-		}
+		actual := args.Map{"result": hm == nil || hm.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashmapUsingDataModel should create hashmap with 1 item", actual)
 	})
 }
 
@@ -34,9 +35,9 @@ func Test_CovS24_02_NewHashmapsDataModelUsing(t *testing.T) {
 		model := corestr.NewHashmapsDataModelUsing(hm)
 
 		// Assert
-		if model == nil || len(model.Items) != 2 {
-			t.Errorf("NewHashmapsDataModelUsing should produce model with 2 items")
-		}
+		actual := args.Map{"result": model == nil || len(model.Items) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashmapsDataModelUsing should produce model with 2 items", actual)
 	})
 }
 
@@ -55,9 +56,9 @@ func Test_CovS24_03_NewHashsetUsingDataModel(t *testing.T) {
 		hs := corestr.NewHashsetUsingDataModel(model)
 
 		// Assert
-		if hs == nil || hs.Length() != 2 {
-			t.Errorf("NewHashsetUsingDataModel should create hashset with 2 items")
-		}
+		actual := args.Map{"result": hs == nil || hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashsetUsingDataModel should create hashset with 2 items", actual)
 	})
 }
 
@@ -70,9 +71,9 @@ func Test_CovS24_04_NewHashsetsDataModelUsing(t *testing.T) {
 		model := corestr.NewHashsetsDataModelUsing(hs)
 
 		// Assert
-		if model == nil || len(model.Items) != 2 {
-			t.Errorf("NewHashsetsDataModelUsing should produce model with 2 items")
-		}
+		actual := args.Map{"result": model == nil || len(model.Items) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashsetsDataModelUsing should produce model with 2 items", actual)
 	})
 }
 
@@ -92,9 +93,9 @@ func Test_CovS24_05_NewHashsetsCollectionUsingDataModel(t *testing.T) {
 		hc := corestr.NewHashsetsCollectionUsingDataModel(model)
 
 		// Assert
-		if hc == nil || hc.Length() != 1 {
-			t.Errorf("NewHashsetsCollectionUsingDataModel should create collection with 1 item")
-		}
+		actual := args.Map{"result": hc == nil || hc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashsetsCollectionUsingDataModel should create collection with 1 item", actual)
 	})
 }
 
@@ -108,9 +109,9 @@ func Test_CovS24_06_NewHashsetsCollectionDataModelUsing(t *testing.T) {
 		model := corestr.NewHashsetsCollectionDataModelUsing(hc)
 
 		// Assert
-		if model == nil || len(model.Items) != 1 {
-			t.Errorf("NewHashsetsCollectionDataModelUsing should produce model with 1 item")
-		}
+		actual := args.Map{"result": model == nil || len(model.Items) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewHashsetsCollectionDataModelUsing should produce model with 1 item", actual)
 	})
 }
 
@@ -131,9 +132,9 @@ func Test_CovS24_07_NewCharCollectionMapUsingDataModel(t *testing.T) {
 		ccm := corestr.NewCharCollectionMapUsingDataModel(model)
 
 		// Assert
-		if ccm == nil || ccm.Length() != 1 {
-			t.Errorf("NewCharCollectionMapUsingDataModel should create map with 1 entry")
-		}
+		actual := args.Map{"result": ccm == nil || ccm.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewCharCollectionMapUsingDataModel should create map with 1 entry", actual)
 	})
 }
 
@@ -147,9 +148,9 @@ func Test_CovS24_08_NewCharCollectionMapDataModelUsing(t *testing.T) {
 		model := corestr.NewCharCollectionMapDataModelUsing(ccm)
 
 		// Assert
-		if model == nil {
-			t.Errorf("NewCharCollectionMapDataModelUsing should produce model")
-		}
+		actual := args.Map{"result": model == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewCharCollectionMapDataModelUsing should produce model", actual)
 	})
 }
 
@@ -170,9 +171,9 @@ func Test_CovS24_09_NewCharHashsetMapUsingDataModel(t *testing.T) {
 		chm := corestr.NewCharHashsetMapUsingDataModel(model)
 
 		// Assert
-		if chm == nil || chm.Length() != 1 {
-			t.Errorf("NewCharHashsetMapUsingDataModel should create map with 1 entry")
-		}
+		actual := args.Map{"result": chm == nil || chm.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewCharHashsetMapUsingDataModel should create map with 1 entry", actual)
 	})
 }
 
@@ -186,9 +187,9 @@ func Test_CovS24_10_NewCharHashsetMapDataModelUsing(t *testing.T) {
 		model := corestr.NewCharHashsetMapDataModelUsing(chm)
 
 		// Assert
-		if model == nil {
-			t.Errorf("NewCharHashsetMapDataModelUsing should produce model")
-		}
+		actual := args.Map{"result": model == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewCharHashsetMapDataModelUsing should produce model", actual)
 	})
 }
 
@@ -202,9 +203,9 @@ func Test_CovS24_11_AllIndividualStringsOfStringsLength_Nil(t *testing.T) {
 		result := corestr.AllIndividualStringsOfStringsLength(nil)
 
 		// Assert
-		if result != 0 {
-			t.Errorf("Expected 0 for nil, got %d", result)
-		}
+		actual := args.Map{"result": result != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 0 for nil", actual)
 	})
 }
 
@@ -217,9 +218,9 @@ func Test_CovS24_12_AllIndividualStringsOfStringsLength_Empty(t *testing.T) {
 		result := corestr.AllIndividualStringsOfStringsLength(&items)
 
 		// Assert
-		if result != 0 {
-			t.Errorf("Expected 0 for empty, got %d", result)
-		}
+		actual := args.Map{"result": result != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 0 for empty", actual)
 	})
 }
 
@@ -232,9 +233,9 @@ func Test_CovS24_13_AllIndividualStringsOfStringsLength_Multiple(t *testing.T) {
 		result := corestr.AllIndividualStringsOfStringsLength(&items)
 
 		// Assert
-		if result != 6 {
-			t.Errorf("Expected 6, got %d", result)
-		}
+		actual := args.Map{"result": result != 6}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 6", actual)
 	})
 }
 
@@ -248,9 +249,9 @@ func Test_CovS24_14_AllIndividualsLengthOfSimpleSlices_Nil(t *testing.T) {
 		result := corestr.AllIndividualsLengthOfSimpleSlices()
 
 		// Assert
-		if result != 0 {
-			t.Errorf("Expected 0 for nil, got %d", result)
-		}
+		actual := args.Map{"result": result != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 0 for nil", actual)
 	})
 }
 
@@ -264,9 +265,9 @@ func Test_CovS24_15_AllIndividualsLengthOfSimpleSlices_Multiple(t *testing.T) {
 		result := corestr.AllIndividualsLengthOfSimpleSlices(ss1, ss2)
 
 		// Assert
-		if result != 3 {
-			t.Errorf("Expected 3, got %d", result)
-		}
+		actual := args.Map{"result": result != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Expected 3", actual)
 	})
 }
 
@@ -280,9 +281,9 @@ func Test_CovS24_16_AnyToString_EmptyString(t *testing.T) {
 		result := corestr.AnyToString(false, "")
 
 		// Assert
-		if result != "" {
-			t.Errorf("AnyToString empty string should return empty, got '%s'", result)
-		}
+		actual := args.Map{"result": result != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString empty string should return empty, got ''", actual)
 	})
 }
 
@@ -292,9 +293,9 @@ func Test_CovS24_17_AnyToString_WithFieldName(t *testing.T) {
 		result := corestr.AnyToString(true, "hello")
 
 		// Assert
-		if result == "" {
-			t.Errorf("AnyToString with field name should return non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString with field name should return non-empty", actual)
 	})
 }
 
@@ -304,9 +305,9 @@ func Test_CovS24_18_AnyToString_WithoutFieldName(t *testing.T) {
 		result := corestr.AnyToString(false, 42)
 
 		// Assert
-		if result == "" {
-			t.Errorf("AnyToString without field name should return non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString without field name should return non-empty", actual)
 	})
 }
 
@@ -319,9 +320,9 @@ func Test_CovS24_19_AnyToString_Pointer(t *testing.T) {
 		result := corestr.AnyToString(false, &val)
 
 		// Assert
-		if result == "" {
-			t.Errorf("AnyToString with pointer should return non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString with pointer should return non-empty", actual)
 	})
 }
 
@@ -351,9 +352,9 @@ func Test_CovS24_21_AnyToString_Struct(t *testing.T) {
 		result := corestr.AnyToString(true, s)
 
 		// Assert
-		if result == "" {
-			t.Errorf("AnyToString with struct should return non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString with struct should return non-empty", actual)
 	})
 }
 
@@ -367,9 +368,9 @@ func Test_CovS24_22_AnyToString_StructPointer(t *testing.T) {
 		result := corestr.AnyToString(false, s)
 
 		// Assert
-		if result == "" {
-			t.Errorf("AnyToString with struct pointer should return non-empty")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AnyToString with struct pointer should return non-empty", actual)
 	})
 }
 
@@ -386,9 +387,9 @@ func Test_CovS24_23_CollectionsOfCollectionModel_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if len(model.Items) != 1 {
-			t.Errorf("Model should have 1 item, got %d", len(model.Items))
-		}
+		actual := args.Map{"result": len(model.Items) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Model should have 1 item", actual)
 	})
 }
 
@@ -405,9 +406,9 @@ func Test_CovS24_24_SimpleStringOnceModel_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if model.Value != "hello" || !model.IsInitialize {
-			t.Errorf("Model fields mismatch")
-		}
+		actual := args.Map{"result": model.Value != "hello" || !model.IsInitialize}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Model fields mismatch", actual)
 	})
 }
 

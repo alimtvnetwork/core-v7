@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // region newCollectionsOfCollectionCreator
@@ -14,9 +15,9 @@ func Test_CovS25_01_CollOfCollCreator_Cap(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Cap(5)
 
 		// Assert
-		if coc == nil {
-			t.Errorf("Cap should create non-nil CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Cap should create non-nil CollectionsOfCollection", actual)
 	})
 }
 
@@ -26,9 +27,9 @@ func Test_CovS25_02_CollOfCollCreator_Empty(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Assert
-		if coc == nil || coc.Length() != 0 {
-			t.Errorf("Empty should create empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Empty should create empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -38,9 +39,9 @@ func Test_CovS25_03_CollOfCollCreator_LenCap(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.LenCap(0, 10)
 
 		// Assert
-		if coc == nil || coc.Length() != 0 {
-			t.Errorf("LenCap(0,10) should create empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LenCap(0,10) should create empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -50,9 +51,9 @@ func Test_CovS25_04_CollOfCollCreator_Strings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Strings([]string{"a", "b"})
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("Strings should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Strings should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -65,9 +66,9 @@ func Test_CovS25_05_CollOfCollCreator_CloneStrings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.CloneStrings(items)
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("CloneStrings should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "CloneStrings should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -77,9 +78,9 @@ func Test_CovS25_06_CollOfCollCreator_StringsOption(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOption(true, 5, []string{"x"})
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("StringsOption should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StringsOption should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -89,9 +90,9 @@ func Test_CovS25_07_CollOfCollCreator_StringsOptions(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOptions(false, 3, []string{"y"})
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("StringsOptions should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StringsOptions should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -101,9 +102,9 @@ func Test_CovS25_08_CollOfCollCreator_SpreadStrings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.SpreadStrings(false, "a", "b")
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("SpreadStrings should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "SpreadStrings should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -117,9 +118,9 @@ func Test_CovS25_09_CollOfCollCreator_StringsOfStrings(t *testing.T) {
 		)
 
 		// Assert
-		if coc == nil || !coc.HasItems() {
-			t.Errorf("StringsOfStrings should create non-empty CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil || !coc.HasItems()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StringsOfStrings should create non-empty CollectionsOfCollection", actual)
 	})
 }
 
@@ -129,9 +130,9 @@ func Test_CovS25_10_CollOfCollCreator_StringsOfStrings_Empty(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOfStrings(false)
 
 		// Assert
-		if coc == nil {
-			t.Errorf("StringsOfStrings with no args should create CollectionsOfCollection")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StringsOfStrings with no args should create CollectionsOfCollection", actual)
 	})
 }
 
@@ -145,9 +146,9 @@ func Test_CovS25_11_KeyValuesCreator_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.Empty()
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Errorf("Empty should create empty KeyValueCollection")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Empty should create empty KeyValueCollection", actual)
 	})
 }
 
@@ -157,9 +158,9 @@ func Test_CovS25_12_KeyValuesCreator_Cap(t *testing.T) {
 		kvc := corestr.New.KeyValues.Cap(10)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Errorf("Cap should create empty KeyValueCollection with capacity")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Cap should create empty KeyValueCollection with capacity", actual)
 	})
 }
 
@@ -172,9 +173,9 @@ func Test_CovS25_13_KeyValuesCreator_UsingMap(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingMap(m)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 2 {
-			t.Errorf("UsingMap should create KeyValueCollection with 2 items, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingMap should create KeyValueCollection with 2 items", actual)
 	})
 }
 
@@ -187,9 +188,9 @@ func Test_CovS25_14_KeyValuesCreator_UsingMap_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingMap(m)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Errorf("UsingMap empty should create empty KeyValueCollection")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingMap empty should create empty KeyValueCollection", actual)
 	})
 }
 
@@ -203,9 +204,9 @@ func Test_CovS25_15_KeyValuesCreator_UsingKeyValuePairs(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValuePairs(pair1, pair2)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 2 {
-			t.Errorf("UsingKeyValuePairs should create collection with 2 items, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingKeyValuePairs should create collection with 2 items", actual)
 	})
 }
 
@@ -215,9 +216,9 @@ func Test_CovS25_16_KeyValuesCreator_UsingKeyValuePairs_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValuePairs()
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Errorf("UsingKeyValuePairs with no args should be empty")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingKeyValuePairs with no args should be empty", actual)
 	})
 }
 
@@ -231,9 +232,9 @@ func Test_CovS25_17_KeyValuesCreator_UsingKeyValueStrings(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValueStrings(keys, values)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 2 {
-			t.Errorf("UsingKeyValueStrings should create collection with 2 items, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingKeyValueStrings should create collection with 2 items", actual)
 	})
 }
 
@@ -243,9 +244,9 @@ func Test_CovS25_18_KeyValuesCreator_UsingKeyValueStrings_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValueStrings([]string{}, []string{})
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Errorf("UsingKeyValueStrings empty should create empty collection")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingKeyValueStrings empty should create empty collection", actual)
 	})
 }
 
@@ -259,9 +260,9 @@ func Test_CovS25_19_ReturningBool_Fields(t *testing.T) {
 		rb := corestr.ReturningBool{IsBreak: true, IsKeep: false}
 
 		// Assert
-		if !rb.IsBreak || rb.IsKeep {
-			t.Errorf("ReturningBool fields mismatch")
-		}
+		actual := args.Map{"result": rb.IsBreak || rb.IsKeep}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "ReturningBool fields mismatch", actual)
 	})
 }
 
@@ -275,9 +276,9 @@ func Test_CovS25_20_LinkedCollectionFilterResult_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if !r.IsKeep || r.IsBreak || r.Value != nil {
-			t.Errorf("LinkedCollectionFilterResult fields mismatch")
-		}
+		actual := args.Map{"result": r.IsKeep || r.IsBreak || r.Value != nil}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "LinkedCollectionFilterResult fields mismatch", actual)
 	})
 }
 
@@ -291,9 +292,9 @@ func Test_CovS25_21_LinkedListFilterResult_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if r.IsKeep || !r.IsBreak {
-			t.Errorf("LinkedListFilterResult fields mismatch")
-		}
+		actual := args.Map{"result": r.IsKeep || !r.IsBreak}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LinkedListFilterResult fields mismatch", actual)
 	})
 }
 
@@ -306,9 +307,9 @@ func Test_CovS25_22_LinkedCollectionFilterParameter_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if p.Index != 5 || p.Node != nil {
-			t.Errorf("LinkedCollectionFilterParameter fields mismatch")
-		}
+		actual := args.Map{"result": p.Index != 5 || p.Node != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LinkedCollectionFilterParameter fields mismatch", actual)
 	})
 }
 
@@ -321,9 +322,9 @@ func Test_CovS25_23_LinkedListFilterParameter_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if p.Index != 3 {
-			t.Errorf("LinkedListFilterParameter fields mismatch")
-		}
+		actual := args.Map{"result": p.Index != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LinkedListFilterParameter fields mismatch", actual)
 	})
 }
 
@@ -339,9 +340,9 @@ func Test_CovS25_24_LinkedListProcessorParameter_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if !p.IsFirstIndex || p.IsEndingIndex {
-			t.Errorf("LinkedListProcessorParameter fields mismatch")
-		}
+		actual := args.Map{"result": p.IsFirstIndex || p.IsEndingIndex}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "LinkedListProcessorParameter fields mismatch", actual)
 	})
 }
 
@@ -357,9 +358,9 @@ func Test_CovS25_25_LinkedCollectionProcessorParameter_Fields(t *testing.T) {
 		}
 
 		// Assert
-		if p.IsFirstIndex || !p.IsEndingIndex {
-			t.Errorf("LinkedCollectionProcessorParameter fields mismatch")
-		}
+		actual := args.Map{"result": p.IsFirstIndex || !p.IsEndingIndex}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LinkedCollectionProcessorParameter fields mismatch", actual)
 	})
 }
 
@@ -370,27 +371,27 @@ func Test_CovS25_25_LinkedCollectionProcessorParameter_Fields(t *testing.T) {
 func Test_CovS25_26_RegularCollectionEfficiencyLimit(t *testing.T) {
 	safeTest(t, "Test_CovS25_26_RegularCollectionEfficiencyLimit", func() {
 		// Arrange & Act & Assert
-		if corestr.RegularCollectionEfficiencyLimit != 1000 {
-			t.Errorf("RegularCollectionEfficiencyLimit expected 1000, got %d", corestr.RegularCollectionEfficiencyLimit)
-		}
+		actual := args.Map{"result": corestr.RegularCollectionEfficiencyLimit != 1000}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RegularCollectionEfficiencyLimit expected 1000", actual)
 	})
 }
 
 func Test_CovS25_27_DoubleLimit(t *testing.T) {
 	safeTest(t, "Test_CovS25_27_DoubleLimit", func() {
 		// Arrange & Act & Assert
-		if corestr.DoubleLimit != 3000 {
-			t.Errorf("DoubleLimit expected 3000, got %d", corestr.DoubleLimit)
-		}
+		actual := args.Map{"result": corestr.DoubleLimit != 3000}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "DoubleLimit expected 3000", actual)
 	})
 }
 
 func Test_CovS25_28_NoElements(t *testing.T) {
 	safeTest(t, "Test_CovS25_28_NoElements", func() {
 		// Arrange & Act & Assert
-		if corestr.NoElements != " {No Element}" {
-			t.Errorf("NoElements mismatch: '%s'", corestr.NoElements)
-		}
+		actual := args.Map{"result": corestr.NoElements != " {No Element}"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NoElements mismatch: ''", actual)
 	})
 }
 
@@ -401,27 +402,27 @@ func Test_CovS25_28_NoElements(t *testing.T) {
 func Test_CovS25_29_StaticJsonError(t *testing.T) {
 	safeTest(t, "Test_CovS25_29_StaticJsonError", func() {
 		// Arrange & Act & Assert
-		if corestr.StaticJsonError == nil {
-			t.Errorf("StaticJsonError should not be nil")
-		}
+		actual := args.Map{"result": corestr.StaticJsonError == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StaticJsonError should not be nil", actual)
 	})
 }
 
 func Test_CovS25_30_ExpectingLengthForLeftRight(t *testing.T) {
 	safeTest(t, "Test_CovS25_30_ExpectingLengthForLeftRight", func() {
 		// Arrange & Act & Assert
-		if corestr.ExpectingLengthForLeftRight != 2 {
-			t.Errorf("ExpectingLengthForLeftRight expected 2, got %d", corestr.ExpectingLengthForLeftRight)
-		}
+		actual := args.Map{"result": corestr.ExpectingLengthForLeftRight != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ExpectingLengthForLeftRight expected 2", actual)
 	})
 }
 
 func Test_CovS25_31_LeftRightExpectingLengthMessager(t *testing.T) {
 	safeTest(t, "Test_CovS25_31_LeftRightExpectingLengthMessager", func() {
 		// Arrange & Act & Assert
-		if corestr.LeftRightExpectingLengthMessager == nil {
-			t.Errorf("LeftRightExpectingLengthMessager should not be nil")
-		}
+		actual := args.Map{"result": corestr.LeftRightExpectingLengthMessager == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftRightExpectingLengthMessager should not be nil", actual)
 	})
 }
 
@@ -431,9 +432,9 @@ func Test_CovS25_32_StringUtils_WrapDouble(t *testing.T) {
 		result := corestr.StringUtils.WrapDouble("test")
 
 		// Assert
-		if result != "\"test\"" {
-			t.Errorf("WrapDouble expected '\"test\"', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "\"test\""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapDouble expected '\"test\"', got ''", actual)
 	})
 }
 
@@ -443,9 +444,9 @@ func Test_CovS25_33_StringUtils_WrapSingle(t *testing.T) {
 		result := corestr.StringUtils.WrapSingle("test")
 
 		// Assert
-		if result != "'test'" {
-			t.Errorf("WrapSingle expected \"'test'\", got '%s'", result)
-		}
+		actual := args.Map{"result": result != "'test'"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapSingle expected \"'test'\", actual)
 	})
 }
 
@@ -455,9 +456,9 @@ func Test_CovS25_34_StringUtils_WrapTilda(t *testing.T) {
 		result := corestr.StringUtils.WrapTilda("test")
 
 		// Assert
-		if result != "`test`" {
-			t.Errorf("WrapTilda expected \"`test`\", got '%s'", result)
-		}
+		actual := args.Map{"result": result != "`test`"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapTilda expected \"`test`\", actual)
 	})
 }
 
@@ -467,9 +468,9 @@ func Test_CovS25_35_StringUtils_WrapDoubleIfMissing_AlreadyWrapped(t *testing.T)
 		result := corestr.StringUtils.WrapDoubleIfMissing("\"test\"")
 
 		// Assert
-		if result != "\"test\"" {
-			t.Errorf("WrapDoubleIfMissing already wrapped should return same, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "\"test\""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing already wrapped should return same, got ''", actual)
 	})
 }
 
@@ -479,9 +480,9 @@ func Test_CovS25_36_StringUtils_WrapDoubleIfMissing_NotWrapped(t *testing.T) {
 		result := corestr.StringUtils.WrapDoubleIfMissing("test")
 
 		// Assert
-		if result != "\"test\"" {
-			t.Errorf("WrapDoubleIfMissing should wrap, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "\"test\""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing should wrap, got ''", actual)
 	})
 }
 
@@ -491,9 +492,9 @@ func Test_CovS25_37_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 		result := corestr.StringUtils.WrapDoubleIfMissing("")
 
 		// Assert
-		if result != "\"\"" {
-			t.Errorf("WrapDoubleIfMissing empty should return \"\\\"\\\"\", got '%s'", result)
-		}
+		actual := args.Map{"result": result != "\"\""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing empty should return \"\\\"\\\"\", actual)
 	})
 }
 
@@ -503,9 +504,9 @@ func Test_CovS25_38_StringUtils_WrapDoubleIfMissing_QuotedEmpty(t *testing.T) {
 		result := corestr.StringUtils.WrapDoubleIfMissing("\"\"")
 
 		// Assert
-		if result != "\"\"" {
-			t.Errorf("WrapDoubleIfMissing '\"\"' should return same, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "\"\""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing '\"\"' should return same, got ''", actual)
 	})
 }
 
@@ -515,9 +516,9 @@ func Test_CovS25_39_StringUtils_WrapSingleIfMissing_AlreadyWrapped(t *testing.T)
 		result := corestr.StringUtils.WrapSingleIfMissing("'test'")
 
 		// Assert
-		if result != "'test'" {
-			t.Errorf("WrapSingleIfMissing already wrapped should return same, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "'test'"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapSingleIfMissing already wrapped should return same, got ''", actual)
 	})
 }
 
@@ -527,9 +528,9 @@ func Test_CovS25_40_StringUtils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 		result := corestr.StringUtils.WrapSingleIfMissing("test")
 
 		// Assert
-		if result != "'test'" {
-			t.Errorf("WrapSingleIfMissing should wrap, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "'test'"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapSingleIfMissing should wrap, got ''", actual)
 	})
 }
 
@@ -539,9 +540,9 @@ func Test_CovS25_41_StringUtils_WrapSingleIfMissing_Empty(t *testing.T) {
 		result := corestr.StringUtils.WrapSingleIfMissing("")
 
 		// Assert
-		if result != "''" {
-			t.Errorf("WrapSingleIfMissing empty should return '', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "''"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapSingleIfMissing empty should return '', got ''", actual)
 	})
 }
 
@@ -551,9 +552,9 @@ func Test_CovS25_42_StringUtils_WrapSingleIfMissing_QuotedEmpty(t *testing.T) {
 		result := corestr.StringUtils.WrapSingleIfMissing("''")
 
 		// Assert
-		if result != "''" {
-			t.Errorf("WrapSingleIfMissing '' should return same, got '%s'", result)
-		}
+		actual := args.Map{"result": result != "''"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "WrapSingleIfMissing '' should return same, got ''", actual)
 	})
 }
 

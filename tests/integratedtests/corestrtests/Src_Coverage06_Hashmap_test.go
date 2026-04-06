@@ -280,9 +280,9 @@ func Test_SrcC06_Hashmap_AddsFilter_Verification(t *testing.T) {
 		h.AddsOrUpdatesAnyUsingFilterLock(af)
 
 		// Assert
-		if h.Length() < 1 {
-			t.Fatal("expected items added via filter")
-		}
+		actual := args.Map{"result": h.Length() < 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected items added via filter", actual)
 	})
 }
 
@@ -551,9 +551,9 @@ func Test_SrcC06_Hashmap_ClearDispose_Verification(t *testing.T) {
 		h2.Dispose()
 
 		// Assert
-		if clearedLen != 0 {
-			t.Fatal("expected 0 after clear")
-		}
+		actual := args.Map{"result": clearedLen != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 after clear", actual)
 	})
 }
 
@@ -602,12 +602,12 @@ func Test_SrcC06_Hashmap_EmptyString_Verification(t *testing.T) {
 
 		// Act — empty hashmap string should still be non-empty (NoElements constant)
 		// Assert
-		if h.String() == "" {
-			t.Fatal("expected non-empty (NoElements)")
-		}
-		if h.StringLock() == "" {
-			t.Fatal("expected non-empty")
-		}
+		actual := args.Map{"result": h.String() == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty (NoElements)", actual)
+		actual := args.Map{"result": h.StringLock() == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
