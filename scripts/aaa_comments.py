@@ -366,8 +366,8 @@ def extract_functions(content: str) -> list[tuple]:
     i = 0
 
     while i < len(lines):
-        # Match func Test_...(t *testing.T) {
-        m = re.match(r'^(func Test_\w+\(t \*testing\.T\)\s*\{)', lines[i])
+        # Match func Test...(t *testing.T) { (with or without underscore)
+        m = re.match(r'^(func Test\w*\(t \*testing\.T\)\s*\{)', lines[i])
         if m:
             func_start = i
             body_start = i + 1
