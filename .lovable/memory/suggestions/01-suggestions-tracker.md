@@ -72,13 +72,13 @@
 - **createdAt**: 2026-03-21
 - **source**: Lovable (carried from prior coverage work)
 - **affectedProject**: core
-- **description**: Continue coverage push for packages below 100%. Key targets: `corestr` (3.3%), `coredynamic` (0.9%), `corejson` (45%), `corepayload` (56%), `corecmp` (10.8%), `codestack` (0%).
+- **description**: ~~Continue coverage push for packages below 100%.~~ All 21 non-internal packages now at 100% reachable coverage.
 - **rationale**: Coverage gaps hide bugs, especially in high-risk packages.
-- **proposed change**: Run TC → identify gaps → one package at a time → compile gate.
-- **acceptance criteria**: All packages at 100% coverage (excluding dead-code registry entries).
-- **status**: open
-- **dependencies**: User must run `./run.ps1 TC` for current baseline
-- **completion notes**: —
+- **proposed change**: Completed. Maintenance mode only.
+- **acceptance criteria**: All packages at 100% coverage (excluding dead-code registry entries). ✅ Met.
+- **status**: **done** (completed 2026-04-06)
+- **dependencies**: None remaining
+- **completion notes**: 21 packages at 100%. 3 accepted unreachable gaps documented. 4 packages restructured via split recovery.
 
 ### S-015: Version Bump Discipline
 - **suggestionId**: S-015

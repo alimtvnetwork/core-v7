@@ -1,7 +1,7 @@
 # Coverage & Testing Master Plan
 
-## Status: ✅ Complete — All iterations done, baseline established
-## Last Updated: 2026-03-29T16:00:00+08:00
+## Status: ✅ FULLY COMPLETE — 100% reachable coverage achieved for all 21 non-internal packages
+## Last Updated: 2026-04-06
 
 ## Critical Root Cause Checkpoint
 Coverage work has been repeatedly invalidated by assumed APIs, broad unverified coverage-file generation, and skipping the compile-first gate. Do **not** treat newly written coverage files as successful until `./run.ps1 PC` and then `./run.ps1 TC` confirm the result.
@@ -12,18 +12,30 @@ See issue record: `issues/repeated-coverage-remediation-failure-root-cause.md`
 
 ---
 
-## TC Run Results (2026-03-16)
+## Final Coverage Results (2026-04-06)
 
-- **68 packages**, **1210 files**, **755 at 100%**, **455 below 100%**
-- **21 packages at 100%**
-- **0 blocked packages** (all compile)
-- Detailed file-level plan: `.lovable/memory/workflow/03-coverage-file-level-plan.md`
+### All 21 Packages at 100% Reachable Coverage
+
+`corecmp`, `codestack`, `corepayload`, `corejson`, `coretests/results`, `reflectmodel`, `coretests`, `corevalidator`, `chmodhelper`, `coredynamic`, `enumimpl`, `errcore`, `corestr`, `coretests/args`, `coretests/coretestcases`, `namevalue`, `stringslice`, `corerange`, `stringutil`, `coreversion`, `coreonce`
+
+### Accepted Unreachable Gaps
+
+| Package | File:Line | Reason |
+|---------|-----------|--------|
+| `stringutil` | `IsEndsWith.go:37` | `remainingLength < 0` unreachable after prior length check |
+| `coreversion` | `hasDeductUsingNilNess.go:20` | Exhaustive nil checks above make this unreachable |
+| `coreonce` | `JsonStringMust` error branches | `json.Marshal` cannot fail on simple maps/slices |
+
+### Test Restructuring (Split Recovery)
+
+Four packages were restructured into per-method granular test files to enable parallel failure diagnosis:
+- `chmodhelpertests`, `coredynamictests`, `corestrtests`, `corepayloadtests`
 
 ---
 
 ## Remaining Coverage Work
 
-Moved to `plan.md` Priority 1 section. See `plan.md` → "Active Work — Prioritized Backlog" → "Priority 1: Coverage Push".
+None. Protocol is in maintenance mode for regression handling only.
 
 ---
 
