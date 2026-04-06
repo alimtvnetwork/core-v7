@@ -229,9 +229,9 @@ func Test_CovLLCCreator_01_Create_Empty(t *testing.T) {
 func Test_CovLLCCreator_02_Strings(t *testing.T) {
 	safeTest(t, "Test_CovLLCCreator_02_Strings", func() {
 		lc := corestr.New.LinkedCollection.Strings("a", "b")
-		if lc.Length() != 1 { // Strings creates one collection node containing both items
-			t.Fatalf("expected 1, got %d", lc.Length())
-		}
+		actualLen := args.Map{"result": lc.Length()}
+		expectedLen := args.Map{"result": 1}
+		expectedLen.ShouldBeEqual(t, 0, "Strings creates one collection node -- two items", actualLen)
 		lc2 := corestr.New.LinkedCollection.Strings()
 		actual := args.Map{"result": lc2.Length() != 0}
 		expected := args.Map{"result": false}

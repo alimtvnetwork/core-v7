@@ -247,19 +247,22 @@ func Test_C79_ValidValue_ValueByte(t *testing.T) {
 		negative := corestr.NewValidValue("-5")
 		invalid := corestr.NewValidValue("abc")
 
-		// Act & Assert
-		actual := args.Map{"result": valid.ValueByte(0) != 100}
-		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected 100", actual)
-		if overflow.ValueByte(0) != 255 { // MaxUnit8
-			t.Errorf("expected 255 for overflow, got %d", overflow.ValueByte(0))
+		// Act
+		actual := args.Map{
+			"valid":    valid.ValueByte(0),
+			"overflow": overflow.ValueByte(0),
+			"negative": negative.ValueByte(0),
+			"invalid":  invalid.ValueByte(0),
 		}
-		actual := args.Map{"result": negative.ValueByte(0) != 0}
-		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected 0 for negative", actual)
-		actual := args.Map{"result": invalid.ValueByte(0) != 0}
-		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected 0 for invalid", actual)
+
+		// Assert
+		expected := args.Map{
+			"valid":    byte(100),
+			"overflow": byte(255),
+			"negative": byte(0),
+			"invalid":  byte(0),
+		}
+		expected.ShouldBeEqual(t, 0, "ValueByte returns correct byte -- various inputs", actual)
 	})
 }
 

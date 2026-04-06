@@ -1651,20 +1651,22 @@ func Test_C76_SimpleSlice_TakeDynamic(t *testing.T) {
 		result := ss.TakeDynamic(2)
 
 		// Assert
+		length := 0
 		asSlice, ok := result.(corestr.SimpleSlice)
-		if !ok {
-			// May also return as []string
-			asStrSlice, ok2 := result.([]string)
-			if !ok2 {
-				actual := args.Map{"result": false}
-				expected := args.Map{"result": true}
-				expected.ShouldBeEqual(t, 0, "expected SimpleSlice or []string type", actual)
-			} else if len(asStrSlice) != 2 {
-				t.Errorf("expected 2, got %d", len(asStrSlice))
-			}
-		} else if asSlice.Length() != 2 {
-			t.Errorf("expected 2, got %d", asSlice.Length())
+		if ok {
+			length = asSlice.Length()
+		} else if asStrSlice, ok2 := result.([]string); ok2 {
+			length = len(asStrSlice)
 		}
+		actual := args.Map{
+			"typeOk": ok || func() bool { _, ok2 := result.([]string); return ok2 }(),
+			"length": length,
+		}
+		expected := args.Map{
+			"typeOk": true,
+			"length": 2,
+		}
+		expected.ShouldBeEqual(t, 0, "TakeDynamic returns 2 items -- SimpleSlice or []string", actual)
 	})
 }
 

@@ -731,9 +731,9 @@ func Test_CovLCN_06_String_List_ListPtr_Join_StringList(t *testing.T) {
 		n := &corestr.LinkedCollectionNode{Element: col}
 		_ = n.String()
 		list := n.List()
-		if len(list) != 3 { // Collection has 3 items: "false", "a", "b"
-			t.Fatalf("expected 3, got %d", len(list))
-		}
+		actualListLen := args.Map{"result": len(list)}
+		expectedListLen := args.Map{"result": 3}
+		expectedListLen.ShouldBeEqual(t, 0, "List returns 3 items -- Collection has 3 items", actualListLen)
 		lp := n.ListPtr()
 		actual := args.Map{"result": len(*lp) != 3}
 		expected := args.Map{"result": false}
