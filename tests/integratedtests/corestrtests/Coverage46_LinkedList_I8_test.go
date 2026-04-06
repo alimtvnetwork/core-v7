@@ -480,7 +480,7 @@ func Test_C46_LinkedList_AddFunc(t *testing.T) {
 func Test_C46_LinkedList_AddFuncErr_Success(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedList_AddFuncErr_Success", func() {
 		ll := corestr.New.LinkedList.Create()
-		ll.AddFuncErr(func() (string, error) { return "ok", nil }, func(e error) { t.Fatal("no err expected") })
+		ll.AddFuncErr(func() (string, error) { return "ok", nil }, func(e error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) })
 		actual := args.Map{"result": ll.Length() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
