@@ -5,13 +5,19 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/stringslice"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_MergeSlicesOfSlices_Empty(t *testing.T) {
+	// Arrange
 	result := stringslice.MergeSlicesOfSlices()
-	if len(result) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_QW_RegexTrimmedSplitNonEmptyAll_Empty(t *testing.T) {

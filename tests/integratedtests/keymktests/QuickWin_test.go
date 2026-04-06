@@ -5,14 +5,20 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
 	"github.com/alimtvnetwork/core/keymk"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_Key_Compile_WithBrackets(t *testing.T) {
+	// Arrange
 	k := keymk.NewKey.Default(".")
 	result := k.Compile("a", "b")
-	if result == "" {
-		t.Fatal("expected non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": result == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_QW_Key_Compile_Empty(t *testing.T) {
@@ -22,12 +28,17 @@ func Test_QW_Key_Compile_Empty(t *testing.T) {
 }
 
 func Test_QW_Key_ParseInjectUsingJson_Error(t *testing.T) {
+	// Arrange
 	k := keymk.NewKey.Default(".")
 	bad := corejson.NewResult.UsingString(`invalid`)
 	_, err := k.ParseInjectUsingJson(bad)
-	if err == nil {
-		t.Fatal("expected error for invalid JSON")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for invalid JSON", actual)
 }
 
 func Test_QW_Key_ParseInjectUsingJsonMust_Panic(t *testing.T) {

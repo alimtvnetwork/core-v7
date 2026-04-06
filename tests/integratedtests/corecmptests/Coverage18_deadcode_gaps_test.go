@@ -6,6 +6,7 @@ import (
 
 	"github.com/alimtvnetwork/core/corecmp"
 	"github.com/alimtvnetwork/core/corecomparator"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -39,9 +40,9 @@ func Test_Cov18_Byte_Equal(t *testing.T) {
 	result := corecmp.Byte(a, b)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Byte_LeftLess(t *testing.T) {
@@ -52,9 +53,9 @@ func Test_Cov18_Byte_LeftLess(t *testing.T) {
 	result := corecmp.Byte(a, b)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Byte_LeftGreater(t *testing.T) {
@@ -65,9 +66,9 @@ func Test_Cov18_Byte_LeftGreater(t *testing.T) {
 	result := corecmp.Byte(a, b)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Integer ----------
@@ -77,9 +78,9 @@ func Test_Cov18_Integer_Equal(t *testing.T) {
 	result := corecmp.Integer(10, 10)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Integer_LeftLess(t *testing.T) {
@@ -87,9 +88,9 @@ func Test_Cov18_Integer_LeftLess(t *testing.T) {
 	result := corecmp.Integer(1, 10)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Integer_LeftGreater(t *testing.T) {
@@ -97,9 +98,9 @@ func Test_Cov18_Integer_LeftGreater(t *testing.T) {
 	result := corecmp.Integer(10, 1)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Integer8 ----------
@@ -109,9 +110,9 @@ func Test_Cov18_Integer8_Equal(t *testing.T) {
 	result := corecmp.Integer8(5, 5)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Integer8_LeftLess(t *testing.T) {
@@ -119,9 +120,9 @@ func Test_Cov18_Integer8_LeftLess(t *testing.T) {
 	result := corecmp.Integer8(1, 5)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Integer8_LeftGreater(t *testing.T) {
@@ -129,9 +130,9 @@ func Test_Cov18_Integer8_LeftGreater(t *testing.T) {
 	result := corecmp.Integer8(5, 1)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Integer16 ----------
@@ -141,9 +142,9 @@ func Test_Cov18_Integer16_Equal(t *testing.T) {
 	result := corecmp.Integer16(100, 100)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Integer16_LeftLess(t *testing.T) {
@@ -151,9 +152,9 @@ func Test_Cov18_Integer16_LeftLess(t *testing.T) {
 	result := corecmp.Integer16(10, 100)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Integer16_LeftGreater(t *testing.T) {
@@ -161,9 +162,9 @@ func Test_Cov18_Integer16_LeftGreater(t *testing.T) {
 	result := corecmp.Integer16(100, 10)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Integer32 ----------
@@ -173,9 +174,9 @@ func Test_Cov18_Integer32_Equal(t *testing.T) {
 	result := corecmp.Integer32(1000, 1000)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Integer32_LeftLess(t *testing.T) {
@@ -183,9 +184,9 @@ func Test_Cov18_Integer32_LeftLess(t *testing.T) {
 	result := corecmp.Integer32(100, 1000)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Integer32_LeftGreater(t *testing.T) {
@@ -193,9 +194,9 @@ func Test_Cov18_Integer32_LeftGreater(t *testing.T) {
 	result := corecmp.Integer32(1000, 100)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Integer64 ----------
@@ -205,9 +206,9 @@ func Test_Cov18_Integer64_Equal(t *testing.T) {
 	result := corecmp.Integer64(10000, 10000)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Integer64_LeftLess(t *testing.T) {
@@ -215,9 +216,9 @@ func Test_Cov18_Integer64_LeftLess(t *testing.T) {
 	result := corecmp.Integer64(1000, 10000)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Integer64_LeftGreater(t *testing.T) {
@@ -225,9 +226,9 @@ func Test_Cov18_Integer64_LeftGreater(t *testing.T) {
 	result := corecmp.Integer64(10000, 1000)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- Time ----------
@@ -240,9 +241,9 @@ func Test_Cov18_Time_Equal(t *testing.T) {
 	result := corecmp.Time(now, now)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_Time_LeftLess(t *testing.T) {
@@ -254,9 +255,9 @@ func Test_Cov18_Time_LeftLess(t *testing.T) {
 	result := corecmp.Time(earlier, later)
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_Time_LeftGreater(t *testing.T) {
@@ -268,9 +269,9 @@ func Test_Cov18_Time_LeftGreater(t *testing.T) {
 	result := corecmp.Time(later, earlier)
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- VersionSliceByte ----------
@@ -280,9 +281,9 @@ func Test_Cov18_VersionSliceByte_BothNil(t *testing.T) {
 	result := corecmp.VersionSliceByte(nil, nil)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_VersionSliceByte_Equal(t *testing.T) {
@@ -290,9 +291,9 @@ func Test_Cov18_VersionSliceByte_Equal(t *testing.T) {
 	result := corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2, 3})
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_VersionSliceByte_LeftLess_ByElement(t *testing.T) {
@@ -300,9 +301,9 @@ func Test_Cov18_VersionSliceByte_LeftLess_ByElement(t *testing.T) {
 	result := corecmp.VersionSliceByte([]byte{1, 1}, []byte{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_VersionSliceByte_LeftGreater_ByElement(t *testing.T) {
@@ -310,9 +311,9 @@ func Test_Cov18_VersionSliceByte_LeftGreater_ByElement(t *testing.T) {
 	result := corecmp.VersionSliceByte([]byte{1, 3}, []byte{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 func Test_Cov18_VersionSliceByte_LeftLess_ByLength(t *testing.T) {
@@ -320,9 +321,9 @@ func Test_Cov18_VersionSliceByte_LeftLess_ByLength(t *testing.T) {
 	result := corecmp.VersionSliceByte([]byte{1, 2}, []byte{1, 2, 3})
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_VersionSliceByte_LeftGreater_ByLength(t *testing.T) {
@@ -330,9 +331,9 @@ func Test_Cov18_VersionSliceByte_LeftGreater_ByLength(t *testing.T) {
 	result := corecmp.VersionSliceByte([]byte{1, 2, 3}, []byte{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 // ---------- VersionSliceInteger ----------
@@ -342,9 +343,9 @@ func Test_Cov18_VersionSliceInteger_BothNil(t *testing.T) {
 	result := corecmp.VersionSliceInteger(nil, nil)
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_VersionSliceInteger_Equal(t *testing.T) {
@@ -352,9 +353,9 @@ func Test_Cov18_VersionSliceInteger_Equal(t *testing.T) {
 	result := corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2, 3})
 
 	// Assert
-	if result != corecomparator.Equal {
-		t.Fatal("expected Equal")
-	}
+	actual := args.Map{"result": result != corecomparator.Equal}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
 }
 
 func Test_Cov18_VersionSliceInteger_LeftLess_ByElement(t *testing.T) {
@@ -362,9 +363,9 @@ func Test_Cov18_VersionSliceInteger_LeftLess_ByElement(t *testing.T) {
 	result := corecmp.VersionSliceInteger([]int{1, 1}, []int{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_VersionSliceInteger_LeftGreater_ByElement(t *testing.T) {
@@ -372,9 +373,9 @@ func Test_Cov18_VersionSliceInteger_LeftGreater_ByElement(t *testing.T) {
 	result := corecmp.VersionSliceInteger([]int{1, 3}, []int{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }
 
 func Test_Cov18_VersionSliceInteger_LeftLess_ByLength(t *testing.T) {
@@ -382,9 +383,9 @@ func Test_Cov18_VersionSliceInteger_LeftLess_ByLength(t *testing.T) {
 	result := corecmp.VersionSliceInteger([]int{1, 2}, []int{1, 2, 3})
 
 	// Assert
-	if result != corecomparator.LeftLess {
-		t.Fatal("expected LeftLess")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftLess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftLess", actual)
 }
 
 func Test_Cov18_VersionSliceInteger_LeftGreater_ByLength(t *testing.T) {
@@ -392,7 +393,7 @@ func Test_Cov18_VersionSliceInteger_LeftGreater_ByLength(t *testing.T) {
 	result := corecmp.VersionSliceInteger([]int{1, 2, 3}, []int{1, 2})
 
 	// Assert
-	if result != corecomparator.LeftGreater {
-		t.Fatal("expected LeftGreater")
-	}
+	actual := args.Map{"result": result != corecomparator.LeftGreater}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected LeftGreater", actual)
 }

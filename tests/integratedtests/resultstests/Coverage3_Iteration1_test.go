@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coretests/results"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // Test_Cov3_MethodName_NilInput tests MethodName with nil funcRef.
@@ -13,9 +14,9 @@ func Test_Cov3_MethodName_NilInput(t *testing.T) {
 	actual := results.MethodName(nil)
 
 	// Assert
-	if actual != "" {
-		t.Fatalf("MethodName(nil) should return empty string, got %q", actual)
-	}
+	actual := args.Map{"result": actual != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MethodName(nil) should return empty string", actual)
 }
 
 // Test_Cov3_MethodName_NonFuncInput tests MethodName with a non-function value.
@@ -24,9 +25,9 @@ func Test_Cov3_MethodName_NonFuncInput(t *testing.T) {
 	actual := results.MethodName("not-a-func")
 
 	// Assert
-	if actual != "" {
-		t.Fatalf("MethodName(string) should return empty string, got %q", actual)
-	}
+	actual := args.Map{"result": actual != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MethodName(string) should return empty string", actual)
 }
 
 // Test_Cov3_MethodName_SimpleFuncNoDot tests MethodName with a simple function.
@@ -38,9 +39,9 @@ func Test_Cov3_MethodName_SimpleFuncNoDot(t *testing.T) {
 	actual := results.MethodName(myFunc)
 
 	// Assert
-	if actual == "" {
-		t.Fatalf("MethodName(func) should return non-empty, got empty")
-	}
+	actual := args.Map{"result": actual == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MethodName(func) should return non-empty, got empty", actual)
 }
 
 // Test_Cov3_InvokeWithPanicRecovery_VoidFunc tests InvokeWithPanicRecovery on a void func.
@@ -52,12 +53,12 @@ func Test_Cov3_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 	result := results.InvokeWithPanicRecovery(voidFunc, nil)
 
 	// Assert
-	if result.Panicked {
-		t.Fatalf("void func should not panic, got panicked")
-	}
-	if result.ReturnCount != 0 {
-		t.Fatalf("void func return count: got %d, want 0", result.ReturnCount)
-	}
+	actual := args.Map{"result": result.Panicked}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "void func should not panic, got panicked", actual)
+	actual := args.Map{"result": result.ReturnCount != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "void func return count: got, want 0", actual)
 }
 
 // Test_Cov3_InvokeWithPanicRecovery_NilPtrError tests extractErrorFromValue with nil ptr implementing error.
@@ -85,12 +86,12 @@ func Test_Cov3_InvokeWithPanicRecovery_FuncReturning42(t *testing.T) {
 	result := results.InvokeWithPanicRecovery(funcReturning42, nil)
 
 	// Assert
-	if result.Panicked {
-		t.Fatalf("expected no panic")
-	}
-	if result.ReturnCount != 1 {
-		t.Fatalf("expected return count 1, got %d", result.ReturnCount)
-	}
+	actual := args.Map{"result": result.Panicked}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no panic", actual)
+	actual := args.Map{"result": result.ReturnCount != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected return count 1", actual)
 }
 
 // Test_Cov3_FilterByFields_MissingKey tests filterByFields with a key not present in the map.

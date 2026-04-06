@@ -35,73 +35,73 @@ func Test_Cov_FileWithLine_Value(t *testing.T) {
 	}
 
 	// Act & Assert
-	if fwl.FullFilePath() != "/tmp/test.go" {
-		t.Error("FullFilePath mismatch")
-	}
+	actual := args.Map{"result": fwl.FullFilePath() != "/tmp/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FullFilePath mismatch", actual)
 
-	if fwl.LineNumber() != 42 {
-		t.Error("LineNumber mismatch")
-	}
+	actual := args.Map{"result": fwl.LineNumber() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LineNumber mismatch", actual)
 
-	if fwl.IsNil() {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": fwl.IsNil()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 
-	if !fwl.IsNotNil() {
-		t.Error("should be not nil")
-	}
+	actual := args.Map{"result": fwl.IsNotNil()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be not nil", actual)
 
-	if fwl.String() == "" {
-		t.Error("String should not be empty")
-	}
+	actual := args.Map{"result": fwl.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 
-	if fwl.FileWithLine() == "" {
-		t.Error("FileWithLine should not be empty")
-	}
+	actual := args.Map{"result": fwl.FileWithLine() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLine should not be empty", actual)
 
 	// JsonModel
 	model := fwl.JsonModel()
-	if model.FilePath != "/tmp/test.go" {
-		t.Error("JsonModel FilePath mismatch")
-	}
+	actual := args.Map{"result": model.FilePath != "/tmp/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModel FilePath mismatch", actual)
 
 	// JsonModelAny
 	modelAny := fwl.JsonModelAny()
-	if modelAny == nil {
-		t.Error("JsonModelAny should not be nil")
-	}
+	actual := args.Map{"result": modelAny == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	// Json
 	jsonResult := fwl.Json()
-	if jsonResult.JsonString() == "" {
-		t.Error("Json string should not be empty")
-	}
+	actual := args.Map{"result": jsonResult.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Json string should not be empty", actual)
 
 	// JsonPtr
 	jsonPtr := fwl.JsonPtr()
-	if jsonPtr == nil {
-		t.Error("JsonPtr should not be nil")
-	}
+	actual := args.Map{"result": jsonPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	// JsonString
 	js := fwl.JsonString()
-	if js == "" {
-		t.Error("JsonString should not be empty")
-	}
+	actual := args.Map{"result": js == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonString should not be empty", actual)
 
 	// StringUsingFmt
 	fmtStr := fwl.StringUsingFmt(func(f codestack.FileWithLine) string {
 		return f.FilePath
 	})
-	if fmtStr != "/tmp/test.go" {
-		t.Error("StringUsingFmt mismatch")
-	}
+	actual := args.Map{"result": fmtStr != "/tmp/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StringUsingFmt mismatch", actual)
 
 	// AsFileLiner
 	liner := fwl.AsFileLiner()
-	if liner == nil {
-		t.Error("AsFileLiner should not be nil")
-	}
+	actual := args.Map{"result": liner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
 func Test_Cov_FileWithLine_ParseJson(t *testing.T) {
@@ -118,13 +118,13 @@ func Test_Cov_FileWithLine_ParseJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonPtr)
 
 	// Assert
-	if err != nil {
-		t.Errorf("ParseInjectUsingJson error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson error:", actual)
 
-	if result.FilePath != "/tmp/test.go" {
-		t.Error("parsed FilePath mismatch")
-	}
+	actual := args.Map{"result": result.FilePath != "/tmp/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "parsed FilePath mismatch", actual)
 }
 
 func Test_Cov_FileWithLine_ParseJsonMust(t *testing.T) {
@@ -141,9 +141,9 @@ func Test_Cov_FileWithLine_ParseJsonMust(t *testing.T) {
 	result := target.ParseInjectUsingJsonMust(jsonPtr)
 
 	// Assert
-	if result.FilePath != "/tmp/test.go" {
-		t.Error("ParseInjectUsingJsonMust FilePath mismatch")
-	}
+	actual := args.Map{"result": result.FilePath != "/tmp/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust FilePath mismatch", actual)
 }
 
 func Test_Cov_FileWithLine_JsonParseSelfInject(t *testing.T) {
@@ -160,9 +160,9 @@ func Test_Cov_FileWithLine_JsonParseSelfInject(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonPtr)
 
 	// Assert
-	if err != nil {
-		t.Errorf("JsonParseSelfInject error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
 // ── Trace value tests ──
@@ -172,50 +172,50 @@ func Test_Cov_Trace_Value(t *testing.T) {
 	trace := codestack.New.Default()
 
 	// Act & Assert
-	if trace.IsNil() {
-		t.Error("should not be nil pointer — it's a value")
-	}
+	actual := args.Map{"result": trace.IsNil()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil pointer — it's a value", actual)
 
-	if !trace.IsOkay {
-		t.Error("Default trace should be okay")
-	}
+	actual := args.Map{"result": trace.IsOkay}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Default trace should be okay", actual)
 
-	if trace.PackageMethodName == "" {
-		t.Error("PackageMethodName should not be empty")
-	}
+	actual := args.Map{"result": trace.PackageMethodName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PackageMethodName should not be empty", actual)
 
-	if trace.Message() == "" {
-		t.Error("Message should not be empty")
-	}
+	actual := args.Map{"result": trace.Message() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Message should not be empty", actual)
 
-	if trace.ShortString() == "" {
-		t.Error("ShortString should not be empty")
-	}
+	actual := args.Map{"result": trace.ShortString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ShortString should not be empty", actual)
 
-	if trace.FullFilePath() == "" {
-		t.Error("FullFilePath should not be empty")
-	}
+	actual := args.Map{"result": trace.FullFilePath() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FullFilePath should not be empty", actual)
 
-	if trace.FileName() == "" {
-		t.Error("FileName should not be empty")
-	}
+	actual := args.Map{"result": trace.FileName() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileName should not be empty", actual)
 
-	if trace.LineNumber() == 0 {
-		t.Error("LineNumber should not be 0")
-	}
+	actual := args.Map{"result": trace.LineNumber() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LineNumber should not be 0", actual)
 
-	if trace.FileWithLineString() == "" {
-		t.Error("FileWithLineString should not be empty")
-	}
+	actual := args.Map{"result": trace.FileWithLineString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLineString should not be empty", actual)
 
 	fwl := trace.FileWithLine()
-	if fwl.FilePath == "" {
-		t.Error("FileWithLine FilePath should not be empty")
-	}
+	actual := args.Map{"result": fwl.FilePath == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLine FilePath should not be empty", actual)
 
-	if trace.String() == "" {
-		t.Error("String should not be empty")
-	}
+	actual := args.Map{"result": trace.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
 func Test_Cov_Trace_StringUsingFmt(t *testing.T) {
@@ -228,9 +228,9 @@ func Test_Cov_Trace_StringUsingFmt(t *testing.T) {
 	})
 
 	// Assert
-	if result == "" {
-		t.Error("StringUsingFmt should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StringUsingFmt should not be empty", actual)
 }
 
 func Test_Cov_Trace_Clone(t *testing.T) {
@@ -241,14 +241,14 @@ func Test_Cov_Trace_Clone(t *testing.T) {
 	cloned := trace.Clone()
 
 	// Assert
-	if cloned.PackageMethodName != trace.PackageMethodName {
-		t.Error("Clone PackageMethodName mismatch")
-	}
+	actual := args.Map{"result": cloned.PackageMethodName != trace.PackageMethodName}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Clone PackageMethodName mismatch", actual)
 
 	clonedPtr := trace.ClonePtr()
-	if clonedPtr == nil {
-		t.Error("ClonePtr should not be nil")
-	}
+	actual := args.Map{"result": clonedPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
 func Test_Cov_Trace_Json(t *testing.T) {
@@ -257,34 +257,34 @@ func Test_Cov_Trace_Json(t *testing.T) {
 
 	// Act & Assert
 	model := trace.JsonModel()
-	if model.PackageName == "" {
-		t.Error("JsonModel PackageName should not be empty")
-	}
+	actual := args.Map{"result": model.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModel PackageName should not be empty", actual)
 
 	modelAny := trace.JsonModelAny()
-	if modelAny == nil {
-		t.Error("JsonModelAny should not be nil")
-	}
+	actual := args.Map{"result": modelAny == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	js := trace.JsonString()
-	if js == "" {
-		t.Error("JsonString should not be empty")
-	}
+	actual := args.Map{"result": js == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonString should not be empty", actual)
 
 	jsonResult := trace.Json()
-	if jsonResult.JsonString() == "" {
-		t.Error("Json string should not be empty")
-	}
+	actual := args.Map{"result": jsonResult.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Json string should not be empty", actual)
 
 	jsonPtr := trace.JsonPtr()
-	if jsonPtr == nil {
-		t.Error("JsonPtr should not be nil")
-	}
+	actual := args.Map{"result": jsonPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	liner := trace.AsFileLiner()
-	if liner == nil {
-		t.Error("AsFileLiner should not be nil")
-	}
+	actual := args.Map{"result": liner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsFileLiner should not be nil", actual)
 }
 
 func Test_Cov_Trace_ParseJson(t *testing.T) {
@@ -298,13 +298,13 @@ func Test_Cov_Trace_ParseJson(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonPtr)
 
 	// Assert
-	if err != nil {
-		t.Errorf("ParseInjectUsingJson error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson error:", actual)
 
-	if result.PackageName == "" {
-		t.Error("parsed PackageName should not be empty")
-	}
+	actual := args.Map{"result": result.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "parsed PackageName should not be empty", actual)
 }
 
 func Test_Cov_Trace_ParseJsonMust(t *testing.T) {
@@ -318,9 +318,9 @@ func Test_Cov_Trace_ParseJsonMust(t *testing.T) {
 	result := target.ParseInjectUsingJsonMust(jsonPtr)
 
 	// Assert
-	if result.PackageName == "" {
-		t.Error("ParseInjectUsingJsonMust PackageName mismatch")
-	}
+	actual := args.Map{"result": result.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJsonMust PackageName mismatch", actual)
 }
 
 func Test_Cov_Trace_JsonParseSelfInject(t *testing.T) {
@@ -334,9 +334,9 @@ func Test_Cov_Trace_JsonParseSelfInject(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonPtr)
 
 	// Assert
-	if err != nil {
-		t.Errorf("JsonParseSelfInject error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
 func Test_Cov_Trace_Dispose(t *testing.T) {
@@ -347,13 +347,13 @@ func Test_Cov_Trace_Dispose(t *testing.T) {
 	trace.Dispose()
 
 	// Assert
-	if trace.PackageName != "" {
-		t.Error("PackageName should be empty after Dispose")
-	}
+	actual := args.Map{"result": trace.PackageName != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PackageName should be empty after Dispose", actual)
 
-	if trace.IsOkay {
-		t.Error("IsOkay should be false after Dispose")
-	}
+	actual := args.Map{"result": trace.IsOkay}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsOkay should be false after Dispose", actual)
 }
 
 func Test_Cov_Trace_HasIssues(t *testing.T) {
@@ -364,9 +364,9 @@ func Test_Cov_Trace_HasIssues(t *testing.T) {
 	hasIssues := trace.HasIssues()
 
 	// Assert
-	if !hasIssues {
-		t.Error("empty Trace should have issues")
-	}
+	actual := args.Map{"result": hasIssues}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty Trace should have issues", actual)
 }
 
 // ── TraceCollection tests (unique coverage methods) ──
@@ -377,34 +377,34 @@ func Test_Cov_TraceCollection_NewAndBasic(t *testing.T) {
 
 	// Act & Assert
 	first := tc.First()
-	if first.PackageName == "" {
-		t.Error("First should have PackageName")
-	}
+	actual := args.Map{"result": first.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "First should have PackageName", actual)
 
 	last := tc.Last()
-	if last.PackageName == "" {
-		t.Error("Last should have PackageName")
-	}
+	actual := args.Map{"result": last.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Last should have PackageName", actual)
 
 	firstDyn := tc.FirstDynamic()
-	if firstDyn == nil {
-		t.Error("FirstDynamic should not be nil")
-	}
+	actual := args.Map{"result": firstDyn == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FirstDynamic should not be nil", actual)
 
 	lastDyn := tc.LastDynamic()
-	if lastDyn == nil {
-		t.Error("LastDynamic should not be nil")
-	}
+	actual := args.Map{"result": lastDyn == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LastDynamic should not be nil", actual)
 
 	firstOrDefault := tc.FirstOrDefault()
-	if firstOrDefault.PackageName == "" {
-		t.Error("FirstOrDefault should have PackageName")
-	}
+	actual := args.Map{"result": firstOrDefault.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FirstOrDefault should have PackageName", actual)
 
 	lastOrDefault := tc.LastOrDefault()
-	if lastOrDefault.PackageName == "" {
-		t.Error("LastOrDefault should have PackageName")
-	}
+	actual := args.Map{"result": lastOrDefault.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LastOrDefault should have PackageName", actual)
 }
 
 func Test_Cov_TraceCollection_Strings(t *testing.T) {
@@ -478,129 +478,159 @@ func Test_Cov_TraceCollection_SkipTake(t *testing.T) {
 	}
 
 	skipCol := tc.SkipCollection(1)
-	if skipCol.Length() >= length {
-		t.Error("SkipCollection should reduce length")
-	}
+	actual := args.Map{"result": skipCol.Length() >= length}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SkipCollection should reduce length", actual)
 
 	takeCol := tc.TakeCollection(1)
-	if takeCol.Length() != 1 {
-		t.Error("TakeCollection should return 1")
-	}
+	actual := args.Map{"result": takeCol.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "TakeCollection should return 1", actual)
 
 	limitCol := tc.LimitCollection(1)
-	if limitCol.Length() != 1 {
-		t.Error("LimitCollection should return 1")
-	}
+	actual := args.Map{"result": limitCol.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LimitCollection should return 1", actual)
 
 	safeLimit := tc.SafeLimitCollection(1)
-	if safeLimit.Length() != 1 {
-		t.Error("SafeLimitCollection should return 1")
-	}
+	actual := args.Map{"result": safeLimit.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SafeLimitCollection should return 1", actual)
 }
 
 func Test_Cov_TraceCollection_FileWithLines(t *testing.T) {
+	// Arrange
 	// Use manually-constructed trace to avoid skip-count issues
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.Func", FilePath: "/f.go", Line: 1, IsOkay: true})
 
 	fwls := tc.FileWithLines()
-	if len(fwls) == 0 {
-		t.Error("FileWithLines should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(fwls) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLines should not be empty", actual)
 
 	fwlStrs := tc.FileWithLinesStrings()
-	if len(fwlStrs) == 0 {
-		t.Error("FileWithLinesStrings should not be empty")
-	}
+	actual := args.Map{"result": len(fwlStrs) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLinesStrings should not be empty", actual)
 
 	fwlStr := tc.FileWithLinesString()
-	if fwlStr == "" {
-		t.Error("FileWithLinesString should not be empty")
-	}
+	actual := args.Map{"result": fwlStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FileWithLinesString should not be empty", actual)
 
 	joinFwlStr := tc.JoinFileWithLinesStrings(", ")
-	if joinFwlStr == "" {
-		t.Error("JoinFileWithLinesStrings should not be empty")
-	}
+	actual := args.Map{"result": joinFwlStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinFileWithLinesStrings should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_Json(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.Func", FilePath: "/f.go", Line: 1, IsOkay: true})
 
 	jsonStrs := tc.JsonStrings()
-	if len(jsonStrs) == 0 {
-		t.Error("JsonStrings should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(jsonStrs) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonStrings should not be empty", actual)
 
 	joinJsonStr := tc.JoinJsonStrings(", ")
-	if joinJsonStr == "" {
-		t.Error("JoinJsonStrings should not be empty")
-	}
+	actual := args.Map{"result": joinJsonStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinJsonStrings should not be empty", actual)
 
 	jsonModel := tc.JsonModel()
-	if jsonModel == nil {
-		t.Error("JsonModel should not be nil")
-	}
+	actual := args.Map{"result": jsonModel == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModel should not be nil", actual)
 
 	jsonModelAny := tc.JsonModelAny()
-	if jsonModelAny == nil {
-		t.Error("JsonModelAny should not be nil")
-	}
+	actual := args.Map{"result": jsonModelAny == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonModelAny should not be nil", actual)
 
 	jsonResult := tc.Json()
-	if jsonResult.JsonString() == "" {
-		t.Error("Json should not be empty")
-	}
+	actual := args.Map{"result": jsonResult.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Json should not be empty", actual)
 
 	jsonPtr := tc.JsonPtr()
-	if jsonPtr == nil {
-		t.Error("JsonPtr should not be nil")
-	}
+	actual := args.Map{"result": jsonPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonPtr should not be nil", actual)
 
 	csvStrs := tc.CsvStrings()
-	if len(csvStrs) == 0 {
-		t.Error("CsvStrings should not be empty")
-	}
+	actual := args.Map{"result": len(csvStrs) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CsvStrings should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_Reverse(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
 	reversed := tc.Reverse()
-	if reversed.Length() != 2 {
-		t.Error("Reverse should preserve length")
-	}
+
+	// Act
+	actual := args.Map{"result": reversed.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Reverse should preserve length", actual)
 }
 
 func Test_Cov_TraceCollection_IsEqual(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
-	if !tc.IsEqual(&tc) {
-		t.Error("collection should be equal to itself")
-	}
+
+	// Act
+	actual := args.Map{"result": tc.IsEqual(&tc)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "collection should be equal to itself", actual)
 }
 
 func Test_Cov_TraceCollection_Clone(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
 	cloned := tc.Clone()
-	if cloned.Length() != tc.Length() {
-		t.Error("Clone should preserve length")
-	}
+
+	// Act
+	actual := args.Map{"result": cloned.Length() != tc.Length()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Clone should preserve length", actual)
 	clonedPtr := tc.ClonePtr()
-	if clonedPtr == nil {
-		t.Error("ClonePtr should not be nil")
-	}
+	actual := args.Map{"result": clonedPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ClonePtr should not be nil", actual)
 }
 
 func Test_Cov_TraceCollection_ClearDispose(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
 	tc.Clear()
-	if !tc.IsEmpty() {
-		t.Error("should be empty after Clear")
-	}
+
+	// Act
+	actual := args.Map{"result": tc.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be empty after Clear", actual)
 }
 
 func Test_Cov_TraceCollection_Add(t *testing.T) {
@@ -612,121 +642,171 @@ func Test_Cov_TraceCollection_Add(t *testing.T) {
 	tc.Add(trace)
 
 	// Assert
-	if tc.IsEmpty() {
-		t.Error("should not be empty after Add")
-	}
+	actual := args.Map{"result": tc.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty after Add", actual)
 }
 
 func Test_Cov_TraceCollection_Paging(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	for i := 0; i < 10; i++ {
 		tc.Add(codestack.Trace{PackageName: "pkg"})
 	}
 	pages := tc.GetPagesSize(2)
-	if pages < 1 {
-		t.Error("GetPagesSize should return at least 1")
-	}
+
+	// Act
+	actual := args.Map{"result": pages < 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "GetPagesSize should return at least 1", actual)
 }
 
 func Test_Cov_TraceCollection_CodeStacksString(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
 	csStr := tc.CodeStacksString()
-	if csStr == "" {
-		t.Error("CodeStacksString should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": csStr == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CodeStacksString should not be empty", actual)
 	csStrLimit := tc.CodeStacksStringLimit(1)
-	if csStrLimit == "" {
-		t.Error("CodeStacksStringLimit should not be empty")
-	}
+	actual := args.Map{"result": csStrLimit == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CodeStacksStringLimit should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_StringsUsingFmt(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
 	strs := tc.StringsUsingFmt(func(tr *codestack.Trace) string {
 		return tr.PackageName
 	})
-	if len(strs) == 0 {
-		t.Error("StringsUsingFmt should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(strs) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StringsUsingFmt should not be empty", actual)
 	joinStr := tc.JoinUsingFmt(func(tr *codestack.Trace) string {
 		return tr.PackageName
 	}, ", ")
-	if joinStr == "" {
-		t.Error("JoinUsingFmt should not be empty")
-	}
+	actual := args.Map{"result": joinStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinUsingFmt should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_JoinShortStrings(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
 	joinShort := tc.JoinShortStrings(", ")
-	if joinShort == "" {
-		t.Error("JoinShortStrings should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": joinShort == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinShortStrings should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_JoinCsvLine(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
 	csvLine := tc.JoinCsvLine()
-	if csvLine == "" {
-		t.Error("JoinCsvLine should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": csvLine == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinCsvLine should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_HasIndex(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
-	if !tc.HasIndex(0) {
-		t.Error("HasIndex 0 should be true")
-	}
-	if tc.HasIndex(9999) {
-		t.Error("HasIndex 9999 should be false")
-	}
+
+	// Act
+	actual := args.Map{"result": tc.HasIndex(0)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasIndex 0 should be true", actual)
+	actual := args.Map{"result": tc.HasIndex(9999)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "HasIndex 9999 should be false", actual)
 }
 
 func Test_Cov_TraceCollection_Serializer(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
 	bytes, err := tc.Serializer()
-	if err != nil {
-		t.Errorf("Serializer should not return error: %v", err)
-	}
-	if len(bytes) == 0 {
-		t.Error("Serializer should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Serializer should not return error:", actual)
+	actual := args.Map{"result": len(bytes) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Serializer should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_StackTracesBytes(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg", PackageMethodName: "pkg.F", FilePath: "/f.go", Line: 1, IsOkay: true})
 	bytes := tc.StackTracesBytes()
-	if len(bytes) == 0 {
-		t.Error("StackTracesBytes should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(bytes) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StackTracesBytes should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_ParseJson(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
 	jsonResult := tc.Json()
 	jsonPtr := &jsonResult
 	target := &codestack.TraceCollection{}
 	err := target.JsonParseSelfInject(jsonPtr)
-	if err != nil {
-		t.Errorf("JsonParseSelfInject error: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonParseSelfInject error:", actual)
 }
 
 func Test_Cov_TraceCollection_Dispose(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
 	tc.Dispose()
-	if !tc.IsEmpty() {
-		t.Error("should be empty after Dispose")
-	}
+
+	// Act
+	actual := args.Map{"result": tc.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be empty after Dispose", actual)
 }
 
 // ── NameOf tests ──
@@ -736,9 +816,9 @@ func Test_Cov_NameOf_Method(t *testing.T) {
 	name := codestack.NameOf.MethodByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Method_Cov")
 
 	// Assert
-	if name == "" {
-		t.Error("Method should not be empty")
-	}
+	actual := args.Map{"result": name == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Method should not be empty", actual)
 }
 
 func Test_Cov_NameOf_Package(t *testing.T) {
@@ -746,9 +826,9 @@ func Test_Cov_NameOf_Package(t *testing.T) {
 	name := codestack.NameOf.PackageByFullName("github.com/alimtvnetwork/core/codestack.Test_NameOf_Package_Cov")
 
 	// Assert
-	if name == "" {
-		t.Error("Package should not be empty")
-	}
+	actual := args.Map{"result": name == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Package should not be empty", actual)
 }
 
 func Test_Cov_NameOf_All(t *testing.T) {
@@ -756,17 +836,17 @@ func Test_Cov_NameOf_All(t *testing.T) {
 	full, pkg, method := codestack.NameOf.All("github.com/alimtvnetwork/core/codestack.Test_NameOf_All_Cov")
 
 	// Assert
-	if full == "" {
-		t.Error("full should not be empty")
-	}
+	actual := args.Map{"result": full == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "full should not be empty", actual)
 
-	if pkg == "" {
-		t.Error("pkg should not be empty")
-	}
+	actual := args.Map{"result": pkg == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "pkg should not be empty", actual)
 
-	if method == "" {
-		t.Error("method should not be empty")
-	}
+	actual := args.Map{"result": method == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "method should not be empty", actual)
 }
 
 // ── newCreator tests ──
@@ -776,9 +856,9 @@ func Test_Cov_NewCreator_SkipOne(t *testing.T) {
 	trace := codestack.New.SkipOne()
 
 	// Assert
-	if trace.PackageName == "" {
-		t.Error("SkipOne PackageName should not be empty")
-	}
+	actual := args.Map{"result": trace.PackageName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SkipOne PackageName should not be empty", actual)
 }
 
 func Test_Cov_NewCreator_Ptr(t *testing.T) {
@@ -786,9 +866,9 @@ func Test_Cov_NewCreator_Ptr(t *testing.T) {
 	trace := codestack.New.Ptr(0)
 
 	// Assert
-	if trace == nil {
-		t.Error("Ptr should not be nil")
-	}
+	actual := args.Map{"result": trace == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Ptr should not be nil", actual)
 }
 
 // ── StackTrace tests ──
@@ -857,9 +937,9 @@ func Test_Cov_File_Name(t *testing.T) {
 	name := codestack.File.Name(0)
 
 	// Assert
-	if name == "" {
-		t.Error("File.Name should not be empty")
-	}
+	actual := args.Map{"result": name == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "File.Name should not be empty", actual)
 }
 
 func Test_Cov_File_Path(t *testing.T) {
@@ -867,9 +947,9 @@ func Test_Cov_File_Path(t *testing.T) {
 	path := codestack.File.Path(0)
 
 	// Assert
-	if path == "" {
-		t.Error("File.Path should not be empty")
-	}
+	actual := args.Map{"result": path == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "File.Path should not be empty", actual)
 }
 
 // ── Dir getter tests ──
@@ -879,9 +959,9 @@ func Test_Cov_Dir_CurDir(t *testing.T) {
 	dir := codestack.Dir.CurDir()
 
 	// Assert
-	if dir == "" {
-		t.Error("Dir.CurDir should not be empty")
-	}
+	actual := args.Map{"result": dir == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Dir.CurDir should not be empty", actual)
 }
 
 func Test_Cov_Dir_CurDirJoin(t *testing.T) {
@@ -889,55 +969,70 @@ func Test_Cov_Dir_CurDirJoin(t *testing.T) {
 	dir := codestack.Dir.CurDirJoin("subdir")
 
 	// Assert
-	if dir == "" {
-		t.Error("Dir.CurDirJoin should not be empty")
-	}
+	actual := args.Map{"result": dir == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Dir.CurDirJoin should not be empty", actual)
 }
 
 func Test_Cov_TraceCollection_Concat(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "a"})
 	concatted := tc.ConcatNew(codestack.New.Default())
-	if concatted.Length() < tc.Length() {
-		t.Error("ConcatNew should not reduce length")
-	}
+
+	// Act
+	actual := args.Map{"result": concatted.Length() < tc.Length()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ConcatNew should not reduce length", actual)
 	trace := codestack.New.Default()
 	concatPtr := tc.ConcatNewPtr(&trace)
-	if concatPtr == nil {
-		t.Error("ConcatNewPtr should not be nil")
-	}
+	actual := args.Map{"result": concatPtr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ConcatNewPtr should not be nil", actual)
 }
 
 func Test_Cov_TraceCollection_Filters(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Adds(codestack.Trace{PackageName: "a"}, codestack.Trace{PackageName: "b"})
 	filtered := tc.Filter(func(trace *codestack.Trace) (bool, bool) {
 		return true, false
 	})
-	if len(filtered) != 2 {
-		t.Error("Filter should return all items")
-	}
+
+	// Act
+	actual := args.Map{"result": len(filtered) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Filter should return all items", actual)
 	filteredLimit := tc.FilterWithLimit(1, func(trace *codestack.Trace) (bool, bool) {
 		return true, false
 	})
-	if len(filteredLimit) != 1 {
-		t.Error("FilterWithLimit should return 1 item")
-	}
+	actual := args.Map{"result": len(filteredLimit) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FilterWithLimit should return 1 item", actual)
 }
 
 func Test_Cov_TraceCollection_AsBindings(t *testing.T) {
+	// Arrange
 	tc := codestack.TraceCollection{}
 	tc.Add(codestack.Trace{PackageName: "pkg"})
 	binder := tc.AsJsonContractsBinder()
-	if binder == nil {
-		t.Error("AsJsonContractsBinder should not be nil")
-	}
+
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsJsonContractsBinder should not be nil", actual)
 	jsoner := tc.AsJsoner()
-	if jsoner == nil {
-		t.Error("AsJsoner should not be nil")
-	}
+	actual := args.Map{"result": jsoner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsJsoner should not be nil", actual)
 	injector := tc.AsJsonParseSelfInjector()
-	if injector == nil {
-		t.Error("AsJsonParseSelfInjector should not be nil")
-	}
+	actual := args.Map{"result": injector == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsJsonParseSelfInjector should not be nil", actual)
 }

@@ -6,6 +6,7 @@ import (
 
 	"github.com/alimtvnetwork/core/corevalidator"
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -13,6 +14,7 @@ import (
 // ==========================================
 
 func Test_SliceValidator_AllVerifyErrorExceptLast_Pass(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -25,9 +27,13 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_Pass(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.AllVerifyErrorExceptLast(params)
-	if err != nil {
-		t.Errorf("except last should pass: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "except last should pass:", actual)
 }
 
 // (nil receiver test migrated to SliceValidator_NilReceiver_testcases.go)
@@ -37,27 +43,37 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_Pass(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyErrorQuick_Pass(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
 		ExpectedLines: []string{"a", "b"},
 	}
 	err := v.AllVerifyErrorQuick(0, "test", "a", "b")
-	if err != nil {
-		t.Errorf("matching should pass: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "matching should pass:", actual)
 }
 
 func Test_SliceValidator_AllVerifyErrorQuick_Fail(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
 		ExpectedLines: []string{"a", "b"},
 	}
 	err := v.AllVerifyErrorQuick(0, "test", "a", "x")
-	if err == nil {
-		t.Error("mismatch should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch should return error", actual)
 }
 
 // (nil receiver test migrated to SliceValidator_NilReceiver_testcases.go)
@@ -67,6 +83,7 @@ func Test_SliceValidator_AllVerifyErrorQuick_Fail(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyErrorTestCase_Pass(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -74,12 +91,17 @@ func Test_SliceValidator_AllVerifyErrorTestCase_Pass(t *testing.T) {
 		ExpectedLines: []string{"a"},
 	}
 	err := v.AllVerifyErrorTestCase(0, "test", true)
-	if err != nil {
-		t.Errorf("should pass: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should pass:", actual)
 }
 
 func Test_SliceValidator_AllVerifyErrorTestCase_Fail(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -87,9 +109,13 @@ func Test_SliceValidator_AllVerifyErrorTestCase_Fail(t *testing.T) {
 		ExpectedLines: []string{"b"},
 	}
 	err := v.AllVerifyErrorTestCase(0, "test", true)
-	if err == nil {
-		t.Error("mismatch should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch should return error", actual)
 }
 
 // (nil receiver test migrated to SliceValidator_NilReceiver_testcases.go)
@@ -99,6 +125,7 @@ func Test_SliceValidator_AllVerifyErrorTestCase_Fail(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -106,12 +133,16 @@ func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	}
 	first := v.ComparingValidators()
 	second := v.ComparingValidators()
-	if first != second {
-		t.Error("should return same cached instance")
-	}
-	if first.Length() != 2 {
-		t.Errorf("expected 2 validators, got %d", first.Length())
-	}
+
+	// Act
+	actual := args.Map{"result": first != second}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return same cached instance", actual)
+	actual := args.Map{"result": first.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 validators", actual)
 }
 
 // ==========================================
@@ -121,23 +152,33 @@ func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 // (nil receiver tests migrated to SliceValidator_NilReceiver_testcases.go)
 
 func Test_SliceValidator_ActualLinesString_NonEmpty(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		ActualLines: []string{"hello", "world"},
 	}
 	s := v.ActualLinesString()
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 func Test_SliceValidator_ExpectingLinesString_NonEmpty(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		ExpectedLines: []string{"hello", "world"},
 	}
 	s := v.ExpectingLinesString()
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 // ==========================================
@@ -151,39 +192,49 @@ func Test_SliceValidator_ExpectingLinesString_NonEmpty(t *testing.T) {
 // ==========================================
 
 func Test_NewSliceValidatorUsingErr_WithError(t *testing.T) {
+	// Arrange
 	err := errors.New("line1\nline2\nline3")
 	v := corevalidator.NewSliceValidatorUsingErr(
 		err, "line1\nline2\nline3",
 		false, false, false,
 		stringcompareas.Equal,
 	)
-	if v == nil {
-		t.Error("should not be nil")
-	}
-	if v.ActualLinesLength() != 3 {
-		t.Errorf("expected 3 actual lines, got %d", v.ActualLinesLength())
-	}
-	if v.ExpectingLinesLength() != 3 {
-		t.Errorf("expected 3 expected lines, got %d", v.ExpectingLinesLength())
-	}
+
+	// Act
+	actual := args.Map{"result": v == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
+	actual := args.Map{"result": v.ActualLinesLength() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 actual lines", actual)
+	actual := args.Map{"result": v.ExpectingLinesLength() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 expected lines", actual)
 }
 
 func Test_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
+	// Arrange
 	err := errors.New("  hello  \n  world  ")
 	v := corevalidator.NewSliceValidatorUsingErr(
 		err, "hello\nworld",
 		true, true, true,
 		stringcompareas.Equal,
 	)
-	if !v.IsTrimCompare {
-		t.Error("should have IsTrimCompare true")
-	}
-	if !v.IsNonEmptyWhitespace {
-		t.Error("should have IsNonEmptyWhitespace true")
-	}
-	if !v.IsSortStringsBySpace {
-		t.Error("should have IsSortStringsBySpace true")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsTrimCompare}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsTrimCompare true", actual)
+	actual := args.Map{"result": v.IsNonEmptyWhitespace}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsNonEmptyWhitespace true", actual)
+	actual := args.Map{"result": v.IsSortStringsBySpace}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsSortStringsBySpace true", actual)
 }
 
 // ==========================================
@@ -191,6 +242,7 @@ func Test_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_UserInputsMergeWithError_NoAttach(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		ActualLines:   []string{"a"},
 		ExpectedLines: []string{"b"},
@@ -202,15 +254,20 @@ func Test_SliceValidator_UserInputsMergeWithError_NoAttach(t *testing.T) {
 	}
 	testErr := errors.New("test error")
 	result := v.UserInputsMergeWithError(params, testErr)
-	if result == nil {
-		t.Error("should return error")
-	}
-	if result.Error() != "test error" {
-		t.Errorf("without attach, should return original error, got: %s", result.Error())
-	}
+
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
+	actual := args.Map{"result": result.Error() != "test error"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "without attach, should return original error, got:", actual)
 }
 
 func Test_SliceValidator_UserInputsMergeWithError_WithAttach(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		ActualLines:   []string{"a"},
 		ExpectedLines: []string{"b"},
@@ -222,13 +279,17 @@ func Test_SliceValidator_UserInputsMergeWithError_WithAttach(t *testing.T) {
 	}
 	testErr := errors.New("test error")
 	result := v.UserInputsMergeWithError(params, testErr)
-	if result == nil {
-		t.Error("should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
 	msg := result.Error()
-	if msg == "test error" {
-		t.Error("with attach, should include additional context")
-	}
+	actual := args.Map{"result": msg == "test error"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "with attach, should include additional context", actual)
 }
 
 // ==========================================
@@ -236,6 +297,7 @@ func Test_SliceValidator_UserInputsMergeWithError_WithAttach(t *testing.T) {
 // ==========================================
 
 func Test_SliceValidator_AllVerifyError_EmptyActualNoSkip(t *testing.T) {
+	// Arrange
 	v := corevalidator.SliceValidator{
 		Condition:     corevalidator.DefaultDisabledCoreCondition,
 		CompareAs:     stringcompareas.Equal,
@@ -247,9 +309,13 @@ func Test_SliceValidator_AllVerifyError_EmptyActualNoSkip(t *testing.T) {
 		IsSkipCompareOnActualEmpty: false,
 	}
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Error("empty actual without skip should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty actual without skip should return error", actual)
 }
 
 // ==========================================
@@ -257,24 +323,29 @@ func Test_SliceValidator_AllVerifyError_EmptyActualNoSkip(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.AddSimpleAllTrue("hello", stringcompareas.Contains)
-	if v.Length() != 1 {
-		t.Error("should add one validator")
-	}
+
+	// Act
+	actual := args.Map{"result": v.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should add one validator", actual)
 	item := v.Items[0]
-	if !item.IsTrimCompare {
-		t.Error("should have IsTrimCompare true")
-	}
-	if !item.IsUniqueWordOnly {
-		t.Error("should have IsUniqueWordOnly true")
-	}
-	if !item.IsNonEmptyWhitespace {
-		t.Error("should have IsNonEmptyWhitespace true")
-	}
-	if !item.IsSortStringsBySpace {
-		t.Error("should have IsSortStringsBySpace true")
-	}
+	actual := args.Map{"result": item.IsTrimCompare}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsTrimCompare true", actual)
+	actual := args.Map{"result": item.IsUniqueWordOnly}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsUniqueWordOnly true", actual)
+	actual := args.Map{"result": item.IsNonEmptyWhitespace}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsNonEmptyWhitespace true", actual)
+	actual := args.Map{"result": item.IsSortStringsBySpace}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have IsSortStringsBySpace true", actual)
 }
 
 // ==========================================
@@ -282,11 +353,16 @@ func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	binder := v.AsBasicSliceContractsBinder()
-	if binder == nil {
-		t.Error("should not be nil")
-	}
+
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 // ==========================================
@@ -294,12 +370,17 @@ func Test_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_Count(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(2)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
 	v.Add(corevalidator.TextValidator{Search: "b", SearchAs: stringcompareas.Equal})
-	if v.Count() != 1 { // Count = LastIndex = Length-1
-		t.Errorf("expected Count=1 (LastIndex), got %d", v.Count())
-	}
+
+	// Act
+	actual := args.Map{"count": v.Count()}
+
+	// Assert
+	expected := args.Map{"count": 1}
+	expected.ShouldBeEqual(t, 0, "Count returns LastIndex -- two validators", actual)
 }
 
 // ==========================================
@@ -307,6 +388,7 @@ func Test_TextValidators_Count(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_VerifySimpleError_Match(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "hello",
 		SearchAs:  stringcompareas.Equal,
@@ -317,12 +399,17 @@ func Test_TextValidator_VerifySimpleError_Match(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.VerifySimpleError(0, params, "hello")
-	if err != nil {
-		t.Errorf("match should not error: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "match should not error:", actual)
 }
 
 func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "hello",
 		SearchAs:  stringcompareas.Equal,
@@ -333,9 +420,13 @@ func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.VerifySimpleError(0, params, "world")
-	if err == nil {
-		t.Error("mismatch should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch should return error", actual)
 }
 
 // (nil receiver test migrated to TextValidator_NilReceiver_testcases.go)
@@ -345,10 +436,15 @@ func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_MethodName(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{SearchAs: stringcompareas.Contains}
-	if v.MethodName() != "IsContains" {
-		t.Errorf("expected 'IsContains', got '%s'", v.MethodName())
-	}
+
+	// Act
+	actual := args.Map{"result": v.MethodName() != "IsContains"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'IsContains', got ''", actual)
 }
 
 // ==========================================
@@ -356,39 +452,54 @@ func Test_TextValidator_MethodName(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_ToString_SingleLine(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
 		SearchAs:  stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 	s := v.ToString(true)
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 func Test_TextValidator_ToString_MultiLine(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
 		SearchAs:  stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 	s := v.ToString(false)
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 func Test_TextValidator_String(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
 		SearchAs:  stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 	s := v.String()
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 // ==========================================
@@ -396,23 +507,33 @@ func Test_TextValidator_String(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_GetCompiledTermBasedOnConditions_NoTrim(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 	result := v.GetCompiledTermBasedOnConditions("  hello  ", true)
-	if result != "  hello  " {
-		t.Errorf("no trim should return original, got '%s'", result)
-	}
+
+	// Act
+	actual := args.Map{"result": result != "  hello  "}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "no trim should return original, got ''", actual)
 }
 
 func Test_TextValidator_GetCompiledTermBasedOnConditions_WithTrim(t *testing.T) {
+	// Arrange
 	v := corevalidator.TextValidator{
 		Condition: corevalidator.DefaultTrimCoreCondition,
 	}
 	result := v.GetCompiledTermBasedOnConditions("  hello  ", true)
-	if result != "hello" {
-		t.Errorf("trim should return 'hello', got '%s'", result)
-	}
+
+	// Act
+	actual := args.Map{"result": result != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "trim should return 'hello', got ''", actual)
 }
 
 // ==========================================
@@ -420,15 +541,21 @@ func Test_TextValidator_GetCompiledTermBasedOnConditions_WithTrim(t *testing.T) 
 // ==========================================
 
 func Test_TextValidators_VerifyFirstErrorMany_Empty(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
 	err := v.VerifyFirstErrorMany(params, "a")
-	if err != nil {
-		t.Error("empty validators should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty validators should return nil", actual)
 }
 
 func Test_TextValidators_VerifyFirstErrorMany_Pass(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{
 		Search:    "a",
@@ -440,18 +567,27 @@ func Test_TextValidators_VerifyFirstErrorMany_Pass(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.VerifyFirstErrorMany(params, "a")
-	if err != nil {
-		t.Errorf("should pass: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should pass:", actual)
 }
 
 func Test_TextValidators_AllVerifyErrorMany_Empty(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
 	err := v.AllVerifyErrorMany(params, "a")
-	if err != nil {
-		t.Error("empty validators should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty validators should return nil", actual)
 }
 
 // ==========================================
@@ -459,6 +595,7 @@ func Test_TextValidators_AllVerifyErrorMany_Empty(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_VerifyErrorMany_ContinueTrue(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{
 		Search:    "x",
@@ -470,12 +607,17 @@ func Test_TextValidators_VerifyErrorMany_ContinueTrue(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.VerifyErrorMany(true, params, "a", "b")
-	if err == nil {
-		t.Error("mismatches should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatches should return error", actual)
 }
 
 func Test_TextValidators_VerifyErrorMany_ContinueFalse(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{
 		Search:    "x",
@@ -487,9 +629,13 @@ func Test_TextValidators_VerifyErrorMany_ContinueFalse(t *testing.T) {
 		IsCaseSensitive: true,
 	}
 	err := v.VerifyErrorMany(false, params, "a", "b")
-	if err == nil {
-		t.Error("mismatches should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatches should return error", actual)
 }
 
 // ==========================================
@@ -497,18 +643,28 @@ func Test_TextValidators_VerifyErrorMany_ContinueFalse(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_HasAnyItem_Empty(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(0)
-	if v.HasAnyItem() {
-		t.Error("empty should not have items")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should not have items", actual)
 }
 
 func Test_TextValidators_HasAnyItem_NonEmpty(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
-	if !v.HasAnyItem() {
-		t.Error("should have items")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
 // ==========================================
@@ -516,10 +672,15 @@ func Test_TextValidators_HasAnyItem_NonEmpty(t *testing.T) {
 // ==========================================
 
 func Test_TextValidators_String(t *testing.T) {
+	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
 	s := v.String()
-	if s == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }

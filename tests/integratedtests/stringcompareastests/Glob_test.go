@@ -32,39 +32,61 @@ func Test_Glob_Match_Verification(t *testing.T) {
 }
 
 func Test_Glob_IsGlob_ReturnsTrue(t *testing.T) {
-	if !stringcompareas.Glob.IsGlob() {
-		t.Error("Glob.IsGlob() should return true")
-	}
+	// Act
+	actual := args.Map{"result": stringcompareas.Glob.IsGlob()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Glob.IsGlob() should return true", actual)
 }
 
 func Test_Glob_IsNonGlob_ReturnsTrue(t *testing.T) {
-	if !stringcompareas.NonGlob.IsNonGlob() {
-		t.Error("NonGlob.IsNonGlob() should return true")
-	}
+	// Act
+	actual := args.Map{"result": stringcompareas.NonGlob.IsNonGlob()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "NonGlob.IsNonGlob() should return true", actual)
 }
 
 func Test_NonGlob_IsNegativeCondition(t *testing.T) {
-	if !stringcompareas.NonGlob.IsNegativeCondition() {
-		t.Error("NonGlob should be a negative condition")
-	}
+	// Act
+	actual := args.Map{"result": stringcompareas.NonGlob.IsNegativeCondition()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "NonGlob should be a negative condition", actual)
 }
 
 func Test_Glob_IsNotNegativeCondition(t *testing.T) {
-	if stringcompareas.Glob.IsNegativeCondition() {
-		t.Error("Glob should not be a negative condition")
-	}
+	// Act
+	actual := args.Map{"result": stringcompareas.Glob.IsNegativeCondition()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Glob should not be a negative condition", actual)
 }
 
 func Test_Glob_Name(t *testing.T) {
+	// Arrange
 	name := stringcompareas.Glob.Name()
-	if name != "Glob" {
-		t.Errorf("expected 'Glob', got '%s'", name)
-	}
+
+	// Act
+	actual := args.Map{"result": name != "Glob"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'Glob', got ''", actual)
 }
 
 func Test_NonGlob_Name(t *testing.T) {
+	// Arrange
 	name := stringcompareas.NonGlob.Name()
-	if name != "NonGlob" {
-		t.Errorf("expected 'NonGlob', got '%s'", name)
-	}
+
+	// Act
+	actual := args.Map{"result": name != "NonGlob"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'NonGlob', got ''", actual)
 }

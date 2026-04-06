@@ -85,9 +85,9 @@ func Test_Attribute_UsingByte(t *testing.T) {
 
 		// Act
 		attr, err := chmodhelper.New.Attribute.UsingByte(byte(inputVal))
-		if err != nil {
-			t.Fatalf("UsingByte(%d) returned error: %v", inputVal, err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "UsingByte() returned error:", actual)
 
 		actual := args.Map{
 			"read":    attr.IsRead,
@@ -129,18 +129,18 @@ func Test_Attribute_ToAttributeValue(t *testing.T) {
 	attrVal := attr.ToAttributeValue()
 
 	// Assert
-	if attrVal.Read != 4 {
-		t.Errorf("expected Read=4, got %d", attrVal.Read)
-	}
-	if attrVal.Write != 2 {
-		t.Errorf("expected Write=2, got %d", attrVal.Write)
-	}
-	if attrVal.Execute != 0 {
-		t.Errorf("expected Execute=0, got %d", attrVal.Execute)
-	}
-	if attrVal.Sum != 6 {
-		t.Errorf("expected Sum=6, got %d", attrVal.Sum)
-	}
+	actual := args.Map{"result": attrVal.Read != 4}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Read=4", actual)
+	actual := args.Map{"result": attrVal.Write != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Write=2", actual)
+	actual := args.Map{"result": attrVal.Execute != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Execute=0", actual)
+	actual := args.Map{"result": attrVal.Sum != 6}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Sum=6", actual)
 }
 
 func Test_Attribute_ToVariant(t *testing.T) {
@@ -151,9 +151,9 @@ func Test_Attribute_ToVariant(t *testing.T) {
 	v := attr.ToVariant()
 
 	// Assert
-	if v.Value() != 5 {
-		t.Errorf("expected variant value 5, got %d", v.Value())
-	}
+	actual := args.Map{"result": v.Value() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected variant value 5", actual)
 }
 
 func Test_ExpandCharRwx(t *testing.T) {
@@ -232,20 +232,20 @@ func Test_IsPathExistsPlusFileInfo(t *testing.T) {
 	exists, fileInfo := chmodhelper.IsPathExistsPlusFileInfo(".")
 
 	// Assert
-	if !exists {
-		t.Error("expected '.' to exist")
-	}
-	if fileInfo == nil {
-		t.Error("expected fileInfo to not be nil")
-	}
+	actual := args.Map{"result": exists}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected '.' to exist", actual)
+	actual := args.Map{"result": fileInfo == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected fileInfo to not be nil", actual)
 
 	// Arrange - non-existing path
 	exists2, _ := chmodhelper.IsPathExistsPlusFileInfo("/non/existing/path/xyz")
 
 	// Assert
-	if exists2 {
-		t.Error("expected non-existing path to return false")
-	}
+	actual := args.Map{"result": exists2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-existing path to return false", actual)
 }
 
 func Test_Attribute_NilIsEmpty(t *testing.T) {
@@ -253,15 +253,15 @@ func Test_Attribute_NilIsEmpty(t *testing.T) {
 	var attr *chmodhelper.Attribute
 
 	// Act & Assert
-	if !attr.IsNull() {
-		t.Error("expected nil attribute IsNull to be true")
-	}
-	if !attr.IsAnyNull() {
-		t.Error("expected nil attribute IsAnyNull to be true")
-	}
-	if !attr.IsEmpty() {
-		t.Error("expected nil attribute IsEmpty to be true")
-	}
+	actual := args.Map{"result": attr.IsNull()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil attribute IsNull to be true", actual)
+	actual := args.Map{"result": attr.IsAnyNull()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil attribute IsAnyNull to be true", actual)
+	actual := args.Map{"result": attr.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil attribute IsEmpty to be true", actual)
 }
 
 func Test_Attribute_NilClone(t *testing.T) {
@@ -272,9 +272,9 @@ func Test_Attribute_NilClone(t *testing.T) {
 	cloned := attr.Clone()
 
 	// Assert
-	if cloned != nil {
-		t.Error("expected nil clone to be nil")
-	}
+	actual := args.Map{"result": cloned != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil clone to be nil", actual)
 }
 
 func Test_Attribute_IsEqualPtr_BothNil(t *testing.T) {
@@ -283,9 +283,9 @@ func Test_Attribute_IsEqualPtr_BothNil(t *testing.T) {
 	var right *chmodhelper.Attribute
 
 	// Act & Assert
-	if !left.IsEqualPtr(right) {
-		t.Error("expected both nil IsEqualPtr to be true")
-	}
+	actual := args.Map{"result": left.IsEqualPtr(right)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected both nil IsEqualPtr to be true", actual)
 }
 
 func Test_Attribute_IsEqualPtr_OneNil(t *testing.T) {
@@ -294,7 +294,7 @@ func Test_Attribute_IsEqualPtr_OneNil(t *testing.T) {
 	var nilAttr *chmodhelper.Attribute
 
 	// Act & Assert
-	if attr.IsEqualPtr(nilAttr) {
-		t.Error("expected one nil IsEqualPtr to be false")
-	}
+	actual := args.Map{"result": attr.IsEqualPtr(nilAttr)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected one nil IsEqualPtr to be false", actual)
 }

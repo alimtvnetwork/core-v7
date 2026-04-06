@@ -10,6 +10,7 @@ import (
 // ── PagingInfo ──
 
 func Test_Cov2_PagingInfo(t *testing.T) {
+	// Arrange
 	p := corepayload.PagingInfo{
 		CurrentPageIndex: 1,
 		PerPageItems:     10,
@@ -17,11 +18,14 @@ func Test_Cov2_PagingInfo(t *testing.T) {
 		TotalPages:       3,
 	}
 
+	// Act
 	actual := args.Map{
 		"totalPages": p.TotalPages,
 		"hasTotalPages": p.HasTotalPages(),
 		"hasCurrentPage": p.HasCurrentPageIndex(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"totalPages": 3,
 		"hasTotalPages": true,
@@ -31,12 +35,16 @@ func Test_Cov2_PagingInfo(t *testing.T) {
 }
 
 func Test_Cov2_PagingInfo_Empty(t *testing.T) {
+	// Arrange
 	p := corepayload.PagingInfo{}
 
+	// Act
 	actual := args.Map{
 		"isEmpty":    p.IsEmpty(),
 		"hasTotalPages": p.HasTotalPages(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty":    true,
 		"hasTotalPages": false,
@@ -45,6 +53,7 @@ func Test_Cov2_PagingInfo_Empty(t *testing.T) {
 }
 
 func Test_Cov2_PagingInfo_Clone(t *testing.T) {
+	// Arrange
 	p := corepayload.PagingInfo{
 		CurrentPageIndex: 2,
 		PerPageItems:     10,
@@ -53,10 +62,13 @@ func Test_Cov2_PagingInfo_Clone(t *testing.T) {
 	}
 	cloned := p.Clone()
 
+	// Act
 	actual := args.Map{
 		"isEqual": p.IsEqual(&cloned),
 		"totalPages": cloned.TotalPages,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual": true,
 		"totalPages": 5,
@@ -65,13 +77,17 @@ func Test_Cov2_PagingInfo_Clone(t *testing.T) {
 }
 
 func Test_Cov2_PagingInfo_ClonePtr(t *testing.T) {
+	// Arrange
 	p := &corepayload.PagingInfo{TotalPages: 3, TotalItems: 30}
 	cloned := p.ClonePtr()
 
+	// Act
 	actual := args.Map{
 		"notNil":  cloned != nil,
 		"isEqual": p.IsEqual(cloned),
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil":  true,
 		"isEqual": true,
@@ -80,23 +96,31 @@ func Test_Cov2_PagingInfo_ClonePtr(t *testing.T) {
 }
 
 func Test_Cov2_PagingInfo_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var p *corepayload.PagingInfo
 	cloned := p.ClonePtr()
 
+	// Act
 	actual := args.Map{"isNil": cloned == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "PagingInfo returns nil -- clonePtr nil", actual)
 }
 
 func Test_Cov2_PagingInfo_InvalidChecks(t *testing.T) {
+	// Arrange
 	p := corepayload.PagingInfo{}
 
+	// Act
 	actual := args.Map{
 		"invalidTotalPages":       p.IsInvalidTotalPages(),
 		"invalidCurrentPageIndex": p.IsInvalidCurrentPageIndex(),
 		"invalidPerPageItems":     p.IsInvalidPerPageItems(),
 		"invalidTotalItems":       p.IsInvalidTotalItems(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidTotalPages":       true,
 		"invalidCurrentPageIndex": true,
@@ -109,12 +133,16 @@ func Test_Cov2_PagingInfo_InvalidChecks(t *testing.T) {
 // ── SessionInfo ──
 
 func Test_Cov2_SessionInfo(t *testing.T) {
+	// Arrange
 	s := corepayload.SessionInfo{Id: "abc123"}
 
+	// Act
 	actual := args.Map{
 		"isValid": s.IsValid(),
 		"id":      s.Id,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isValid": true,
 		"id":      "abc123",
@@ -123,9 +151,13 @@ func Test_Cov2_SessionInfo(t *testing.T) {
 }
 
 func Test_Cov2_SessionInfo_Empty(t *testing.T) {
+	// Arrange
 	s := corepayload.SessionInfo{}
 
+	// Act
 	actual := args.Map{"isEmpty": s.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "SessionInfo empty -- all zero fields", actual)
 }
@@ -133,13 +165,17 @@ func Test_Cov2_SessionInfo_Empty(t *testing.T) {
 // ── AuthInfo ──
 
 func Test_Cov2_AuthInfo(t *testing.T) {
+	// Arrange
 	a := corepayload.AuthInfo{Identifier: "id1", ActionType: "login", ResourceName: "/api"}
 
+	// Act
 	actual := args.Map{
 		"hasAction":   a.HasActionType(),
 		"hasResource": a.HasResourceName(),
 		"identifier":  a.Identifier,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasAction":   true,
 		"hasResource": true,
@@ -151,15 +187,19 @@ func Test_Cov2_AuthInfo(t *testing.T) {
 // ── PayloadWrapper ──
 
 func Test_Cov2_PayloadWrapper_Basic(t *testing.T) {
+	// Arrange
 	pw, _ := corepayload.New.PayloadWrapper.Create(
 		"test", "id1", "task", "cat",
 		map[string]string{"k": "v"},
 	)
 
+	// Act
 	actual := args.Map{
 		"notNil":  pw != nil,
 		"hasAny":  pw.HasAnyItem(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil":  true,
 		"hasAny":  true,
@@ -168,12 +208,16 @@ func Test_Cov2_PayloadWrapper_Basic(t *testing.T) {
 }
 
 func Test_Cov2_PayloadWrapper_Empty(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
+	// Act
 	actual := args.Map{
 		"notNil":  pw != nil,
 		"hasAny":  pw.HasAnyItem(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil":  true,
 		"hasAny":  false,

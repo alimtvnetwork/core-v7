@@ -5,9 +5,11 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/conditional"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
+	// Arrange
 	result := conditional.AnyFunctionsExecuteResults(
 		false,
 		nil,
@@ -15,12 +17,17 @@ func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
 			func() (any, bool, bool) { return "b", true, false },
 		},
 	)
-	if len(result) != 1 {
-		t.Errorf("expected 1 got %d", len(result))
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
+	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		false,
 		nil,
@@ -28,12 +35,17 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
 			func() (int, error) { return 42, nil },
 		},
 	)
-	if err != nil || len(results) != 1 || results[0] != 42 {
-		t.Error("expected 42")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || len(results) != 1 || results[0] != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
+	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		true,
 		[]func() (int, error){
@@ -43,21 +55,30 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
 		},
 		nil,
 	)
-	if err == nil {
-		t.Error("expected error")
-	}
-	if len(results) != 1 {
-		t.Errorf("expected 1 got %d", len(results))
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
+	actual := args.Map{"result": len(results) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
+	// Arrange
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](
 		true,
 		nil,
 		nil,
 	)
-	if err != nil || results != nil {
-		t.Error("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || results != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }

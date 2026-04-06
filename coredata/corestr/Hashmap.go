@@ -903,7 +903,6 @@ func (it *Hashmap) setCached() {
 	it.cachedList = list
 }
 
-// Deprecated: Use KeysToLower instead.
 func (it *Hashmap) ValuesToLower() *Hashmap {
 	return it.KeysToLower()
 }

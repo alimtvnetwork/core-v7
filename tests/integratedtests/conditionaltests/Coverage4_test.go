@@ -13,108 +13,188 @@ import (
 // ============================================================================
 
 func Test_IfFloat32_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"true":  fmt.Sprintf("%.1f", conditional.IfFloat32(true, 1.5, 2.5)),
 		"false": fmt.Sprintf("%.1f", conditional.IfFloat32(false, 1.5, 2.5)),
 	}
-	expected := args.Map{"true": "1.5", "false": "2.5"}
+
+	// Assert
+	expected := args.Map{
+		"true": "1.5",
+		"false": "2.5",
+	}
 	expected.ShouldBeEqual(t, 0, "IfFloat32 returns correct value -- with args", actual)
 }
 
 func Test_IfFuncFloat32_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"true":  fmt.Sprintf("%.1f", conditional.IfFuncFloat32(true, func() float32 { return 1.0 }, func() float32 { return 2.0 })),
 		"false": fmt.Sprintf("%.1f", conditional.IfFuncFloat32(false, func() float32 { return 1.0 }, func() float32 { return 2.0 })),
 	}
-	expected := args.Map{"true": "1.0", "false": "2.0"}
+
+	// Assert
+	expected := args.Map{
+		"true": "1.0",
+		"false": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfFuncFloat32 returns correct value -- with args", actual)
 }
 
 func Test_IfTrueFuncFloat32_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"true":  fmt.Sprintf("%.2f", conditional.IfTrueFuncFloat32(true, func() float32 { return 3.14 })),
 		"false": fmt.Sprintf("%.0f", conditional.IfTrueFuncFloat32(false, func() float32 { return 3.14 })),
 	}
-	expected := args.Map{"true": "3.14", "false": "0"}
+
+	// Assert
+	expected := args.Map{
+		"true": "3.14",
+		"false": "0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncFloat32 returns non-empty -- with args", actual)
 }
 
 func Test_IfSliceFloat32_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"trueLen":  len(conditional.IfSliceFloat32(true, []float32{1.0}, []float32{2.0, 3.0})),
 		"falseLen": len(conditional.IfSliceFloat32(false, []float32{1.0}, []float32{2.0, 3.0})),
 	}
-	expected := args.Map{"trueLen": 1, "falseLen": 2}
+
+	// Assert
+	expected := args.Map{
+		"trueLen": 1,
+		"falseLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "IfSliceFloat32 returns correct value -- with args", actual)
 }
 
 func Test_IfPtrFloat32_Cov4(t *testing.T) {
+	// Arrange
 	a, b := float32(1.0), float32(2.0)
+
+	// Act
 	actual := args.Map{
 		"true":  fmt.Sprintf("%.1f", *conditional.IfPtrFloat32(true, &a, &b)),
 		"false": fmt.Sprintf("%.1f", *conditional.IfPtrFloat32(false, &a, &b)),
 	}
-	expected := args.Map{"true": "1.0", "false": "2.0"}
+
+	// Assert
+	expected := args.Map{
+		"true": "1.0",
+		"false": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfPtrFloat32 returns correct value -- with args", actual)
 }
 
 func Test_NilDefFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(3.3)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.1f", conditional.NilDefFloat32(nil, 5.5)),
 		"nonNil": fmt.Sprintf("%.1f", conditional.NilDefFloat32(&v, 5.5)),
 	}
-	expected := args.Map{"nil": "5.5", "nonNil": "3.3"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "5.5",
+		"nonNil": "3.3",
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefFloat32 returns nil -- with args", actual)
 }
 
 func Test_NilDefPtrFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(1.1)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.1f", *conditional.NilDefPtrFloat32(nil, 9.9)),
 		"nonNil": fmt.Sprintf("%.1f", *conditional.NilDefPtrFloat32(&v, 9.9)),
 	}
-	expected := args.Map{"nil": "9.9", "nonNil": "1.1"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "9.9",
+		"nonNil": "1.1",
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrFloat32 returns nil -- with args", actual)
 }
 
 func Test_ValueOrZeroFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(7.7)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.0f", conditional.ValueOrZeroFloat32(nil)),
 		"nonNil": fmt.Sprintf("%.1f", conditional.ValueOrZeroFloat32(&v)),
 	}
-	expected := args.Map{"nil": "0", "nonNil": "7.7"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "0",
+		"nonNil": "7.7",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueOrZeroFloat32 returns correct value -- with args", actual)
 }
 
 func Test_PtrOrZeroFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(4.4)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.0f", *conditional.PtrOrZeroFloat32(nil)),
 		"nonNil": fmt.Sprintf("%.1f", *conditional.PtrOrZeroFloat32(&v)),
 	}
-	expected := args.Map{"nil": "0", "nonNil": "4.4"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "0",
+		"nonNil": "4.4",
+	}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroFloat32 returns correct value -- with args", actual)
 }
 
 func Test_NilValFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(5.0)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.1f", conditional.NilValFloat32(nil, 1.0, 2.0)),
 		"nonNil": fmt.Sprintf("%.1f", conditional.NilValFloat32(&v, 1.0, 2.0)),
 	}
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValFloat32 returns nil -- with args", actual)
 }
 
 func Test_NilValPtrFloat32_Cov4(t *testing.T) {
+	// Arrange
 	v := float32(5.0)
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.1f", *conditional.NilValPtrFloat32(nil, 1.0, 2.0)),
 		"nonNil": fmt.Sprintf("%.1f", *conditional.NilValPtrFloat32(&v, 1.0, 2.0)),
 	}
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValPtrFloat32 returns nil -- with args", actual)
 }
 
@@ -123,7 +203,10 @@ func Test_NilValPtrFloat32_Cov4(t *testing.T) {
 // ============================================================================
 
 func Test_Float64_Functions_Cov4(t *testing.T) {
+	// Arrange
 	v := 3.3
+
+	// Act
 	actual := args.Map{
 		"nilDef":         fmt.Sprintf("%.1f", conditional.NilDefFloat64(nil, 5.5)),
 		"nilDefNonNil":   fmt.Sprintf("%.1f", conditional.NilDefFloat64(&v, 5.5)),
@@ -134,6 +217,8 @@ func Test_Float64_Functions_Cov4(t *testing.T) {
 		"nilVal":         fmt.Sprintf("%.1f", conditional.NilValFloat64(nil, 1.0, 2.0)),
 		"nilValNonNil":   fmt.Sprintf("%.1f", conditional.NilValFloat64(&v, 1.0, 2.0)),
 	}
+
+	// Assert
 	expected := args.Map{
 		"nilDef": "5.5", "nilDefNonNil": "3.3",
 		"nilDefPtr": "9.9", "valueOrZero": "0", "valueOrZeroVal": "3.3",
@@ -143,17 +228,28 @@ func Test_Float64_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Float64_NilValPtr_Cov4(t *testing.T) {
+	// Arrange
 	v := 5.0
+
+	// Act
 	actual := args.Map{
 		"nil":    fmt.Sprintf("%.1f", *conditional.NilValPtrFloat64(nil, 1.0, 2.0)),
 		"nonNil": fmt.Sprintf("%.1f", *conditional.NilValPtrFloat64(&v, 1.0, 2.0)),
 	}
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+
+	// Assert
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValPtrFloat64 returns nil -- with args", actual)
 }
 
 func Test_Float64_SlicePtrFunc_Cov4(t *testing.T) {
+	// Arrange
 	a, b := 1.0, 2.0
+
+	// Act
 	actual := args.Map{
 		"sliceLen":     len(conditional.IfSliceFloat64(true, []float64{1.0}, []float64{2.0, 3.0})),
 		"ptrTrue":      fmt.Sprintf("%.1f", *conditional.IfPtrFloat64(true, &a, &b)),
@@ -161,6 +257,8 @@ func Test_Float64_SlicePtrFunc_Cov4(t *testing.T) {
 		"trueFuncTrue": fmt.Sprintf("%.2f", conditional.IfTrueFuncFloat64(true, func() float64 { return 3.14 })),
 		"trueFuncFalse": fmt.Sprintf("%.0f", conditional.IfTrueFuncFloat64(false, func() float64 { return 3.14 })),
 	}
+
+	// Assert
 	expected := args.Map{
 		"sliceLen": 1, "ptrTrue": "1.0", "ifFunc": "1.0",
 		"trueFuncTrue": "3.14", "trueFuncFalse": "0",
@@ -173,7 +271,10 @@ func Test_Float64_SlicePtrFunc_Cov4(t *testing.T) {
 // ============================================================================
 
 func Test_Int8_Functions_Cov4(t *testing.T) {
+	// Arrange
 	v := int8(3)
+
+	// Act
 	actual := args.Map{
 		"ifTrue":       int(conditional.IfInt8(true, 1, 2)),
 		"ifFalse":      int(conditional.IfInt8(false, 1, 2)),
@@ -190,6 +291,8 @@ func Test_Int8_Functions_Cov4(t *testing.T) {
 		"nilVal":       int(conditional.NilValInt8(nil, 1, 2)),
 		"nilValPtr":    int(*conditional.NilValPtrInt8(nil, 1, 2)),
 	}
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 1, "ifFalse": 2, "ifFunc": 1,
 		"trueFuncT": 5, "trueFuncF": 0, "sliceLen": 1, "ptrTrue": 3,
@@ -200,6 +303,7 @@ func Test_Int8_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Int16_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfInt16(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncInt16(true, func() int16 { return 10 }, func() int16 { return 20 })),
@@ -213,6 +317,8 @@ func Test_Int16_Functions_Cov4(t *testing.T) {
 		"nilVal":      int(conditional.NilValInt16(nil, 1, 2)),
 		"nilValPtr":   int(*conditional.NilValPtrInt16(nil, 1, 2)),
 	}
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50, "trueFuncF": 0,
 		"sliceLen": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -225,6 +331,7 @@ func Test_Int16_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Int32_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfInt32(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncInt32(true, func() int32 { return 10 }, func() int32 { return 20 })),
@@ -240,6 +347,8 @@ func Test_Int32_Functions_Cov4(t *testing.T) {
 	}
 	a, b := int32(1), int32(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrInt32(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50, "trueFuncF": 0,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -249,6 +358,7 @@ func Test_Int32_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Int64_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfInt64(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncInt64(true, func() int64 { return 10 }, func() int64 { return 20 })),
@@ -264,6 +374,8 @@ func Test_Int64_Functions_Cov4(t *testing.T) {
 	}
 	a, b := int64(1), int64(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrInt64(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50, "trueFuncF": 0,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -273,6 +385,7 @@ func Test_Int64_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Uint_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfUint(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncUint(true, func() uint { return 10 }, func() uint { return 20 })),
@@ -288,6 +401,8 @@ func Test_Uint_Functions_Cov4(t *testing.T) {
 	}
 	a, b := uint(1), uint(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrUint(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50, "trueFuncF": 0,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -297,6 +412,7 @@ func Test_Uint_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Uint8_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfUint8(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncUint8(true, func() uint8 { return 10 }, func() uint8 { return 20 })),
@@ -312,6 +428,8 @@ func Test_Uint8_Functions_Cov4(t *testing.T) {
 	}
 	a, b := uint8(1), uint8(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrUint8(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50, "trueFuncF": 0,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -321,6 +439,7 @@ func Test_Uint8_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Uint16_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfUint16(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncUint16(true, func() uint16 { return 10 }, func() uint16 { return 20 })),
@@ -335,6 +454,8 @@ func Test_Uint16_Functions_Cov4(t *testing.T) {
 	}
 	a, b := uint16(1), uint16(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrUint16(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -344,6 +465,7 @@ func Test_Uint16_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Uint32_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfUint32(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncUint32(true, func() uint32 { return 10 }, func() uint32 { return 20 })),
@@ -358,6 +480,8 @@ func Test_Uint32_Functions_Cov4(t *testing.T) {
 	}
 	a, b := uint32(1), uint32(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrUint32(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -367,6 +491,7 @@ func Test_Uint32_Functions_Cov4(t *testing.T) {
 }
 
 func Test_Uint64_Functions_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"ifTrue":      int(conditional.IfUint64(true, 10, 20)),
 		"ifFunc":      int(conditional.IfFuncUint64(true, func() uint64 { return 10 }, func() uint64 { return 20 })),
@@ -381,6 +506,8 @@ func Test_Uint64_Functions_Cov4(t *testing.T) {
 	}
 	a, b := uint64(1), uint64(2)
 	actual["ptrTrue"] = int(*conditional.IfPtrUint64(true, &a, &b))
+
+	// Assert
 	expected := args.Map{
 		"ifTrue": 10, "ifFunc": 10, "trueFuncT": 50,
 		"sliceLen": 1, "ptrTrue": 1, "nilDef": 5, "nilDefPtr": 9,
@@ -394,59 +521,91 @@ func Test_Uint64_Functions_Cov4(t *testing.T) {
 // ============================================================================
 
 func Test_NilDefPtrBool_Cov4(t *testing.T) {
+	// Arrange
 	v := false
+
+	// Act
 	actual := args.Map{
 		"nil":    *conditional.NilDefPtrBool(nil, true),
 		"nonNil": *conditional.NilDefPtrBool(&v, true),
 	}
-	expected := args.Map{"nil": true, "nonNil": false}
+
+	// Assert
+	expected := args.Map{
+		"nil": true,
+		"nonNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrBool returns nil -- with args", actual)
 }
 
 func Test_PtrOrZeroBool_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": *conditional.PtrOrZeroBool(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroBool returns correct value -- with args", actual)
 }
 
 func Test_NilValPtrBool_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": *conditional.NilValPtrBool(nil, true, false)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NilValPtrBool returns nil -- with args", actual)
 }
 
 func Test_NilDefPtrByte_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": int(*conditional.NilDefPtrByte(nil, 9))}
+
+	// Assert
 	expected := args.Map{"result": 9}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrByte returns nil -- with args", actual)
 }
 
 func Test_PtrOrZeroByte_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": int(*conditional.PtrOrZeroByte(nil))}
+
+	// Assert
 	expected := args.Map{"result": 0}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroByte returns correct value -- with args", actual)
 }
 
 func Test_NilValPtrByte_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": int(*conditional.NilValPtrByte(nil, 1, 2))}
+
+	// Assert
 	expected := args.Map{"result": 1}
 	expected.ShouldBeEqual(t, 0, "NilValPtrByte returns nil -- with args", actual)
 }
 
 func Test_NilDefPtrInt_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": *conditional.NilDefPtrInt(nil, 42)}
+
+	// Assert
 	expected := args.Map{"result": 42}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrInt returns nil -- with args", actual)
 }
 
 func Test_PtrOrZeroInt_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": *conditional.PtrOrZeroInt(nil)}
+
+	// Assert
 	expected := args.Map{"result": 0}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroInt returns correct value -- with args", actual)
 }
 
 func Test_NilValPtrInt_Cov4(t *testing.T) {
+	// Act
 	actual := args.Map{"result": *conditional.NilValPtrInt(nil, -1, 1)}
+
+	// Assert
 	expected := args.Map{"result": -1}
 	expected.ShouldBeEqual(t, 0, "NilValPtrInt returns nil -- with args", actual)
 }
@@ -456,47 +615,78 @@ func Test_NilValPtrInt_Cov4(t *testing.T) {
 // ============================================================================
 
 func Test_VoidFunctions_WithNilFunc_Cov4(t *testing.T) {
+	// Arrange
 	count := 0
 	funcs := []func(){nil, func() { count++ }}
 	conditional.VoidFunctions(true, funcs, []func(){})
+
+	// Act
 	actual := args.Map{"count": count}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "VoidFunctions_WithNilFunc returns nil -- with args", actual)
 }
 
 func Test_ErrorFunctionsExecuteResults_WithNilFunc_Cov4(t *testing.T) {
+	// Arrange
 	funcs := []func() error{nil, func() error { return nil }}
 	err := conditional.ErrorFunctionsExecuteResults(true, funcs, []func() error{})
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": false}
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionsExecuteResults_WithNilFunc returns nil -- with args", actual)
 }
 
 func Test_FunctionsExecuteResults_SkipTake_Cov4(t *testing.T) {
+	// Arrange
 	funcs := []func() (string, bool, bool){
 		func() (string, bool, bool) { return "skip", false, false },
 		func() (string, bool, bool) { return "take", true, false },
 	}
 	results := conditional.FunctionsExecuteResults[string](true, funcs, nil)
-	actual := args.Map{"len": len(results), "first": results[0]}
-	expected := args.Map{"len": 1, "first": "take"}
+
+	// Act
+	actual := args.Map{
+		"len": len(results),
+		"first": results[0],
+	}
+
+	// Assert
+	expected := args.Map{
+		"len": 1,
+		"first": "take",
+	}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults_SkipTake returns correct value -- with args", actual)
 }
 
 func Test_FunctionsExecuteResults_NilFunc_Cov4(t *testing.T) {
+	// Arrange
 	funcs := []func() (string, bool, bool){
 		nil,
 		func() (string, bool, bool) { return "a", true, false },
 	}
 	results := conditional.FunctionsExecuteResults[string](true, funcs, nil)
+
+	// Act
 	actual := args.Map{"len": len(results)}
+
+	// Assert
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults_NilFunc returns nil -- with args", actual)
 }
 
 func Test_FunctionsExecuteResults_Empty_Cov4(t *testing.T) {
+	// Arrange
 	results := conditional.FunctionsExecuteResults[string](true, nil, nil)
+
+	// Act
 	actual := args.Map{"isNil": results == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults_Empty returns empty -- with args", actual)
 }

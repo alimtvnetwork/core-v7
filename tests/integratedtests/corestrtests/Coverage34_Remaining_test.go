@@ -13,10 +13,19 @@ import (
 
 func Test_C34_HD_Length(t *testing.T) {
 	safeTest(t, "Test_C34_HD_Length", func() {
+		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"k": "v"})
-		if hd.Length() != 1 { t.Fatal("expected 1") }
+
+		// Act
+		actual := args.Map{"result": hd.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var nilHd *corestr.HashmapDiff
-		if nilHd.Length() != 0 { t.Fatal("expected 0") }
+		actual = args.Map{"result": nilHd.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -746,7 +755,9 @@ func Test_C34_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 func Test_C34_NCLLN_Methods(t *testing.T) {
 	safeTest(t, "Test_C34_NCLLN_Methods", func() {
 		nc := corestr.NewNonChainedLinkedListNodes(5)
-		if !nc.IsEmpty() { t.Fatal("expected empty") }
+		actual := args.Map{"result": nc.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		nc.Adds(ll.Head())
 		_ = nc.Length()
@@ -776,7 +787,9 @@ func Test_C34_NCLLN_Empty(t *testing.T) {
 func Test_C34_NCLCN_Methods(t *testing.T) {
 	safeTest(t, "Test_C34_NCLCN_Methods", func() {
 		nc := corestr.NewNonChainedLinkedCollectionNodes(5)
-		if !nc.IsEmpty() { t.Fatal("expected empty") }
+		actual := args.Map{"result": nc.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		lc := corestr.New.LinkedCollection.Strings("a")
 		nc.Adds(lc.Head())
 		_ = nc.Length()

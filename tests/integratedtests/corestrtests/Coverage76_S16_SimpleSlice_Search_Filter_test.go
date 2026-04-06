@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ========================================
@@ -20,9 +21,9 @@ func Test_C76_SimpleSlice_IsEqual_BothEqual(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if !ss1.IsEqual(ss2) {
-			t.Error("expected equal")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -33,9 +34,9 @@ func Test_C76_SimpleSlice_IsEqual_DiffContent(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("a", "c")
 
 		// Act & Assert
-		if ss1.IsEqual(ss2) {
-			t.Error("expected not equal")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
 
@@ -46,9 +47,9 @@ func Test_C76_SimpleSlice_IsEqual_DiffLength(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if ss1.IsEqual(ss2) {
-			t.Error("expected not equal due to length")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal due to length", actual)
 	})
 }
 
@@ -59,9 +60,9 @@ func Test_C76_SimpleSlice_IsEqual_BothNil(t *testing.T) {
 		var ss2 *corestr.SimpleSlice
 
 		// Act & Assert
-		if !ss1.IsEqual(ss2) {
-			t.Error("expected true for both nil")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both nil", actual)
 	})
 }
 
@@ -72,9 +73,9 @@ func Test_C76_SimpleSlice_IsEqual_OneNil(t *testing.T) {
 		var ss2 *corestr.SimpleSlice
 
 		// Act & Assert
-		if ss1.IsEqual(ss2) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -85,9 +86,9 @@ func Test_C76_SimpleSlice_IsEqual_BothEmpty(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss1.IsEqual(ss2) {
-			t.Error("expected true for both empty")
-		}
+		actual := args.Map{"result": ss1.IsEqual(ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both empty", actual)
 	})
 }
 
@@ -97,12 +98,12 @@ func Test_C76_SimpleSlice_IsEqualLines(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if !ss.IsEqualLines([]string{"a", "b"}) {
-			t.Error("expected true")
-		}
-		if ss.IsEqualLines([]string{"a", "c"}) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "b"})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -112,9 +113,9 @@ func Test_C76_SimpleSlice_IsEqualLines_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualLines([]string{"a", "b"}) {
-			t.Error("expected false for diff length")
-		}
+		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "b"})}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for diff length", actual)
 	})
 }
 
@@ -124,9 +125,9 @@ func Test_C76_SimpleSlice_IsEqualLines_BothNil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if !ss.IsEqualLines(nil) {
-			t.Error("expected true for both nil")
-		}
+		actual := args.Map{"result": ss.IsEqualLines(nil)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both nil", actual)
 	})
 }
 
@@ -136,9 +137,9 @@ func Test_C76_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualLines(nil) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsEqualLines(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -148,9 +149,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLines(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("b", "a")
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLines([]string{"a", "b"}) {
-			t.Error("expected true for unordered equal")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLines([]string{"a", "b"})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for unordered equal", actual)
 	})
 }
 
@@ -160,9 +161,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLines_Mismatch(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if ss.IsEqualUnorderedLines([]string{"a", "c"}) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLines([]string{"a", "c"})}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -172,9 +173,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLines_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualUnorderedLines([]string{"a", "b"}) {
-			t.Error("expected false for diff length")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLines([]string{"a", "b"})}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for diff length", actual)
 	})
 }
 
@@ -184,9 +185,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLines_BothNil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLines(nil) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLines(nil)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -196,9 +197,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLines_BothEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLines([]string{}) {
-			t.Error("expected true for both empty")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLines([]string{})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both empty", actual)
 	})
 }
 
@@ -208,9 +209,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLinesClone(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("c", "a", "b")
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLinesClone([]string{"b", "a", "c"}) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone([]string{"b", "a", "c"})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -220,9 +221,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLinesClone_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualUnorderedLinesClone([]string{"a", "b"}) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone([]string{"a", "b"})}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -232,9 +233,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLinesClone_Mismatch(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if ss.IsEqualUnorderedLinesClone([]string{"a", "c"}) {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone([]string{"a", "c"})}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -244,9 +245,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLinesClone_BothNil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLinesClone(nil) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone(nil)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -256,9 +257,9 @@ func Test_C76_SimpleSlice_IsEqualUnorderedLinesClone_BothEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss.IsEqualUnorderedLinesClone([]string{}) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss.IsEqualUnorderedLinesClone([]string{})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -271,9 +272,9 @@ func Test_C76_SimpleSlice_Clone_Deep(t *testing.T) {
 		cloned := ss.Clone(true)
 
 		// Assert
-		if cloned.Length() != 2 {
-			t.Errorf("expected 2, got %d", cloned.Length())
-		}
+		actual := args.Map{"result": cloned.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -286,9 +287,9 @@ func Test_C76_SimpleSlice_Clone_Shallow(t *testing.T) {
 		cloned := ss.Clone(false)
 
 		// Assert
-		if cloned.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": cloned.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -301,9 +302,9 @@ func Test_C76_SimpleSlice_ClonePtr(t *testing.T) {
 		cloned := ss.ClonePtr(true)
 
 		// Assert
-		if cloned == nil || cloned.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": cloned == nil || cloned.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -316,9 +317,9 @@ func Test_C76_SimpleSlice_ClonePtr_Nil(t *testing.T) {
 		cloned := ss.ClonePtr(true)
 
 		// Assert
-		if cloned != nil {
-			t.Error("expected nil")
-		}
+		actual := args.Map{"result": cloned != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -331,9 +332,9 @@ func Test_C76_SimpleSlice_DeepClone(t *testing.T) {
 		cloned := ss.DeepClone()
 
 		// Assert
-		if cloned.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": cloned.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -346,9 +347,9 @@ func Test_C76_SimpleSlice_ShadowClone(t *testing.T) {
 		cloned := ss.ShadowClone()
 
 		// Assert
-		if cloned.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": cloned.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -358,12 +359,12 @@ func Test_C76_SimpleSlice_IsDistinctEqualRaw(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b", "a")
 
 		// Act & Assert
-		if !ss.IsDistinctEqualRaw("a", "b") {
-			t.Error("expected true")
-		}
-		if ss.IsDistinctEqualRaw("a", "c") {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsDistinctEqualRaw("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": ss.IsDistinctEqualRaw("a", "c")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -374,9 +375,9 @@ func Test_C76_SimpleSlice_IsDistinctEqual(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("b", "a")
 
 		// Act & Assert
-		if !ss1.IsDistinctEqual(ss2) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss1.IsDistinctEqual(ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -386,9 +387,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqualRaw_Clone(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("b", "a")
 
 		// Act & Assert
-		if !ss.IsUnorderedEqualRaw(true, "a", "b") {
-			t.Error("expected true with clone")
-		}
+		actual := args.Map{"result": ss.IsUnorderedEqualRaw(true, "a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true with clone", actual)
 	})
 }
 
@@ -398,9 +399,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqualRaw_NoClone(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("b", "a")
 
 		// Act & Assert
-		if !ss.IsUnorderedEqualRaw(false, "a", "b") {
-			t.Error("expected true without clone")
-		}
+		actual := args.Map{"result": ss.IsUnorderedEqualRaw(false, "a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true without clone", actual)
 	})
 }
 
@@ -410,9 +411,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqualRaw_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsUnorderedEqualRaw(false, "a", "b") {
-			t.Error("expected false for diff length")
-		}
+		actual := args.Map{"result": ss.IsUnorderedEqualRaw(false, "a", "b")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for diff length", actual)
 	})
 }
 
@@ -422,9 +423,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqualRaw_BothEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss.IsUnorderedEqualRaw(false) {
-			t.Error("expected true for both empty")
-		}
+		actual := args.Map{"result": ss.IsUnorderedEqualRaw(false)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both empty", actual)
 	})
 }
 
@@ -435,9 +436,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqual_Clone(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if !ss1.IsUnorderedEqual(true, ss2) {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": ss1.IsUnorderedEqual(true, ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -448,9 +449,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqual_BothEmpty(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss1.IsUnorderedEqual(false, ss2) {
-			t.Error("expected true for both empty")
-		}
+		actual := args.Map{"result": ss1.IsUnorderedEqual(false, ss2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both empty", actual)
 	})
 }
 
@@ -460,9 +461,9 @@ func Test_C76_SimpleSlice_IsUnorderedEqual_NilRight(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsUnorderedEqual(false, nil) {
-			t.Error("expected false for nil right")
-		}
+		actual := args.Map{"result": ss.IsUnorderedEqual(false, nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for nil right", actual)
 	})
 }
 
@@ -477,9 +478,9 @@ func Test_C76_SimpleSlice_IsEqualByFunc(t *testing.T) {
 		}, "HELLO", "WORLD")
 
 		// Assert
-		if !result {
-			t.Error("expected true for case-insensitive match")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for case-insensitive match", actual)
 	})
 }
 
@@ -494,9 +495,9 @@ func Test_C76_SimpleSlice_IsEqualByFunc_Mismatch(t *testing.T) {
 		}, "a", "c")
 
 		// Assert
-		if result {
-			t.Error("expected false for mismatch")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for mismatch", actual)
 	})
 }
 
@@ -506,9 +507,9 @@ func Test_C76_SimpleSlice_IsEqualByFunc_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualByFunc(func(i int, l, r string) bool { return true }, "a", "b") {
-			t.Error("expected false for diff length")
-		}
+		actual := args.Map{"result": ss.IsEqualByFunc(func(i int, l, r string) bool { return true }, "a", "b")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for diff length", actual)
 	})
 }
 
@@ -518,9 +519,9 @@ func Test_C76_SimpleSlice_IsEqualByFunc_BothEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss.IsEqualByFunc(func(i int, l, r string) bool { return true }) {
-			t.Error("expected true for both empty")
-		}
+		actual := args.Map{"result": ss.IsEqualByFunc(func(i int, l, r string) bool { return true })}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for both empty", actual)
 	})
 }
 
@@ -535,9 +536,9 @@ func Test_C76_SimpleSlice_IsEqualByFuncLinesSplit(t *testing.T) {
 		})
 
 		// Assert
-		if !result {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -552,9 +553,9 @@ func Test_C76_SimpleSlice_IsEqualByFuncLinesSplit_WithTrim(t *testing.T) {
 		})
 
 		// Assert
-		if !result {
-			t.Error("expected true with trim")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true with trim", actual)
 	})
 }
 
@@ -564,9 +565,9 @@ func Test_C76_SimpleSlice_IsEqualByFuncLinesSplit_DiffLength(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.IsEqualByFuncLinesSplit(false, ",", "a,b", func(i int, l, r string) bool { return true }) {
-			t.Error("expected false for diff length")
-		}
+		actual := args.Map{"result": ss.IsEqualByFuncLinesSplit(false, ",", "a,b", func(i int, l, r string) bool { return true })}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for diff length", actual)
 	})
 }
 
@@ -577,9 +578,9 @@ func Test_C76_SimpleSlice_IsEqualByFuncLinesSplit_Empty(t *testing.T) {
 
 		// Act & Assert
 		// strings.Split("", ",") returns [""] (length 1), empty slice has length 0 → not equal
-		if ss.IsEqualByFuncLinesSplit(false, ",", "", func(i int, l, r string) bool { return true }) {
-			t.Error("expected false for empty vs single-element split")
-		}
+		actual := args.Map{"result": ss.IsEqualByFuncLinesSplit(false, ",", "", func(i int, l, r string) bool { return true })}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty vs single-element split", actual)
 	})
 }
 
@@ -594,9 +595,9 @@ func Test_C76_SimpleSlice_IsEqualByFuncLinesSplit_Mismatch(t *testing.T) {
 		})
 
 		// Assert
-		if result {
-			t.Error("expected false for mismatch")
-		}
+		actual := args.Map{"result": result}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for mismatch", actual)
 	})
 }
 
@@ -609,9 +610,9 @@ func Test_C76_SimpleSlice_DistinctDiffRaw(t *testing.T) {
 		diff := ss.DistinctDiffRaw("b", "c", "d")
 
 		// Assert
-		if len(diff) == 0 {
-			t.Error("expected non-empty diff")
-		}
+		actual := args.Map{"result": len(diff) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty diff", actual)
 	})
 }
 
@@ -624,9 +625,9 @@ func Test_C76_SimpleSlice_DistinctDiffRaw_BothNil(t *testing.T) {
 		diff := ss.DistinctDiffRaw()
 
 		// Assert
-		if len(diff) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": len(diff) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -639,9 +640,9 @@ func Test_C76_SimpleSlice_DistinctDiffRaw_LeftNil(t *testing.T) {
 		diff := ss.DistinctDiffRaw("a", "b")
 
 		// Assert
-		if len(diff) != 2 {
-			t.Errorf("expected 2, got %d", len(diff))
-		}
+		actual := args.Map{"result": len(diff) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -654,9 +655,9 @@ func Test_C76_SimpleSlice_DistinctDiffRaw_RightNil(t *testing.T) {
 		diff := ss.DistinctDiffRaw()
 
 		// Assert
-		if len(diff) != 2 {
-			t.Errorf("expected 2, got %d", len(diff))
-		}
+		actual := args.Map{"result": len(diff) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -670,9 +671,9 @@ func Test_C76_SimpleSlice_DistinctDiff(t *testing.T) {
 		diff := ss1.DistinctDiff(ss2)
 
 		// Assert
-		if len(diff) == 0 {
-			t.Error("expected non-empty diff")
-		}
+		actual := args.Map{"result": len(diff) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty diff", actual)
 	})
 }
 
@@ -686,9 +687,9 @@ func Test_C76_SimpleSlice_DistinctDiff_BothNil(t *testing.T) {
 		diff := ss1.DistinctDiff(ss2)
 
 		// Assert
-		if len(diff) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": len(diff) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -702,9 +703,9 @@ func Test_C76_SimpleSlice_DistinctDiff_LeftNil(t *testing.T) {
 		diff := ss1.DistinctDiff(ss2)
 
 		// Assert
-		if len(diff) != 1 {
-			t.Errorf("expected 1, got %d", len(diff))
-		}
+		actual := args.Map{"result": len(diff) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -717,9 +718,9 @@ func Test_C76_SimpleSlice_DistinctDiff_RightNil(t *testing.T) {
 		diff := ss1.DistinctDiff(nil)
 
 		// Assert
-		if len(diff) != 1 {
-			t.Errorf("expected 1, got %d", len(diff))
-		}
+		actual := args.Map{"result": len(diff) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -732,12 +733,12 @@ func Test_C76_SimpleSlice_AddedRemovedLinesDiff(t *testing.T) {
 		added, removed := ss.AddedRemovedLinesDiff("b", "c")
 
 		// Assert
-		if len(added) == 0 {
-			t.Error("expected some added lines")
-		}
-		if len(removed) == 0 {
-			t.Error("expected some removed lines")
-		}
+		actual := args.Map{"result": len(added) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected some added lines", actual)
+		actual = args.Map{"result": len(removed) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected some removed lines", actual)
 	})
 }
 
@@ -750,9 +751,9 @@ func Test_C76_SimpleSlice_AddedRemovedLinesDiff_BothNil(t *testing.T) {
 		added, removed := ss.AddedRemovedLinesDiff()
 
 		// Assert
-		if added != nil || removed != nil {
-			t.Error("expected nil for both nil inputs")
-		}
+		actual := args.Map{"result": added != nil || removed != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for both nil inputs", actual)
 	})
 }
 
@@ -765,12 +766,12 @@ func Test_C76_SimpleSlice_RemoveIndexes(t *testing.T) {
 		result, err := ss.RemoveIndexes(1, 3)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
-		if result.Length() != 2 {
-			t.Errorf("expected 2, got %d", result.Length())
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -783,9 +784,9 @@ func Test_C76_SimpleSlice_RemoveIndexes_Empty(t *testing.T) {
 		_, err := ss.RemoveIndexes(0)
 
 		// Assert
-		if err == nil {
-			t.Error("expected error for empty slice")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for empty slice", actual)
 	})
 }
 
@@ -798,12 +799,12 @@ func Test_C76_SimpleSlice_RemoveIndexes_InvalidIndex(t *testing.T) {
 		result, err := ss.RemoveIndexes(5)
 
 		// Assert
-		if err == nil {
-			t.Error("expected error for invalid index")
-		}
-		if result.Length() != 2 {
-			t.Errorf("expected 2 (all kept), got %d", result.Length())
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for invalid index", actual)
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 (all kept)", actual)
 	})
 }
 
@@ -818,9 +819,9 @@ func Test_C76_SimpleSlice_AddSplit(t *testing.T) {
 		ss.AddSplit("a:b:c", ":")
 
 		// Assert
-		if ss.Length() != 3 {
-			t.Errorf("expected 3, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -833,9 +834,9 @@ func Test_C76_SimpleSlice_AddIf_True(t *testing.T) {
 		ss.AddIf(true, "x")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -848,9 +849,9 @@ func Test_C76_SimpleSlice_AddIf_False(t *testing.T) {
 		ss.AddIf(false, "x")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -863,9 +864,9 @@ func Test_C76_SimpleSlice_Adds_Empty(t *testing.T) {
 		ss.Adds()
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -878,9 +879,9 @@ func Test_C76_SimpleSlice_Append_Empty(t *testing.T) {
 		ss.Append()
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -893,9 +894,9 @@ func Test_C76_SimpleSlice_AppendFmt(t *testing.T) {
 		ss.AppendFmt("hello %s", "world")
 
 		// Assert
-		if ss.Length() != 1 || ss.First() != "hello world" {
-			t.Errorf("expected 'hello world', got '%s'", ss.First())
-		}
+		actual := args.Map{"result": ss.Length() != 1 || ss.First() != "hello world"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'hello world', got ''", actual)
 	})
 }
 
@@ -908,9 +909,9 @@ func Test_C76_SimpleSlice_AppendFmt_EmptyFormat(t *testing.T) {
 		ss.AppendFmt("")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0 for empty format with no args")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for empty format with no args", actual)
 	})
 }
 
@@ -923,9 +924,9 @@ func Test_C76_SimpleSlice_AppendFmtIf_True(t *testing.T) {
 		ss.AppendFmtIf(true, "val=%d", 42)
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -938,9 +939,9 @@ func Test_C76_SimpleSlice_AppendFmtIf_False(t *testing.T) {
 		ss.AppendFmtIf(false, "val=%d", 42)
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -953,9 +954,9 @@ func Test_C76_SimpleSlice_AddAsTitleValue(t *testing.T) {
 		ss.AddAsTitleValue("Name", "Alice")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -968,9 +969,9 @@ func Test_C76_SimpleSlice_AddAsCurlyTitleWrap(t *testing.T) {
 		ss.AddAsCurlyTitleWrap("Key", "Val")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -983,9 +984,9 @@ func Test_C76_SimpleSlice_AddAsCurlyTitleWrapIf_True(t *testing.T) {
 		ss.AddAsCurlyTitleWrapIf(true, "K", "V")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -998,9 +999,9 @@ func Test_C76_SimpleSlice_AddAsCurlyTitleWrapIf_False(t *testing.T) {
 		ss.AddAsCurlyTitleWrapIf(false, "K", "V")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1013,9 +1014,9 @@ func Test_C76_SimpleSlice_AddAsTitleValueIf_True(t *testing.T) {
 		ss.AddAsTitleValueIf(true, "T", "V")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1028,9 +1029,9 @@ func Test_C76_SimpleSlice_AddAsTitleValueIf_False(t *testing.T) {
 		ss.AddAsTitleValueIf(false, "T", "V")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1043,13 +1044,13 @@ func Test_C76_SimpleSlice_InsertAt(t *testing.T) {
 		ss.InsertAt(1, "b")
 
 		// Assert
-		if ss.Length() != 3 {
-			t.Errorf("expected 3, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		strs := ss.Strings()
-		if strs[1] != "b" {
-			t.Errorf("expected 'b' at index 1, got '%s'", strs[1])
-		}
+		actual = args.Map{"result": strs[1] != "b"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'b' at index 1, got ''", actual)
 	})
 }
 
@@ -1062,9 +1063,9 @@ func Test_C76_SimpleSlice_InsertAt_NegativeIndex(t *testing.T) {
 		ss.InsertAt(-1, "x")
 
 		// Assert — should not add
-		if ss.Length() != 1 {
-			t.Error("expected 1, negative index should be ignored")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1, negative index should be ignored", actual)
 	})
 }
 
@@ -1077,9 +1078,9 @@ func Test_C76_SimpleSlice_InsertAt_BeyondLength(t *testing.T) {
 		ss.InsertAt(5, "x")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1093,9 +1094,9 @@ func Test_C76_SimpleSlice_AddStruct(t *testing.T) {
 		ss.AddStruct(false, testStruct{Name: "test"})
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1108,9 +1109,9 @@ func Test_C76_SimpleSlice_AddStruct_Nil(t *testing.T) {
 		ss.AddStruct(false, nil)
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1123,9 +1124,9 @@ func Test_C76_SimpleSlice_AddPointer_Nil(t *testing.T) {
 		ss.AddPointer(false, nil)
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1138,9 +1139,9 @@ func Test_C76_SimpleSlice_AddsIf_True(t *testing.T) {
 		ss.AddsIf(true, "a", "b")
 
 		// Assert
-		if ss.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1153,9 +1154,9 @@ func Test_C76_SimpleSlice_AddsIf_False(t *testing.T) {
 		ss.AddsIf(false, "a", "b")
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1168,9 +1169,9 @@ func Test_C76_SimpleSlice_AddError(t *testing.T) {
 		ss.AddError(nil)
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0 for nil error")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for nil error", actual)
 	})
 }
 
@@ -1183,9 +1184,9 @@ func Test_C76_SimpleSlice_AsDefaultError(t *testing.T) {
 		err := ss.AsDefaultError()
 
 		// Assert
-		if err == nil {
-			t.Error("expected non-nil error")
-		}
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil error", actual)
 	})
 }
 
@@ -1198,9 +1199,9 @@ func Test_C76_SimpleSlice_AsError_Empty(t *testing.T) {
 		err := ss.AsError(",")
 
 		// Assert
-		if err != nil {
-			t.Error("expected nil for empty")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	})
 }
 
@@ -1215,9 +1216,9 @@ func Test_C76_SimpleSlice_CountFunc(t *testing.T) {
 		})
 
 		// Assert
-		if count != 2 {
-			t.Errorf("expected 2, got %d", count)
-		}
+		actual := args.Map{"result": count != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1230,9 +1231,9 @@ func Test_C76_SimpleSlice_CountFunc_Empty(t *testing.T) {
 		count := ss.CountFunc(func(i int, s string) bool { return true })
 
 		// Assert
-		if count != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": count != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1242,12 +1243,12 @@ func Test_C76_SimpleSlice_IsContains(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if !ss.IsContains("a") {
-			t.Error("expected true")
-		}
-		if ss.IsContains("z") {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.IsContains("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": ss.IsContains("z")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1257,9 +1258,9 @@ func Test_C76_SimpleSlice_IsContains_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if ss.IsContains("a") {
-			t.Error("expected false for empty")
-		}
+		actual := args.Map{"result": ss.IsContains("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -1274,9 +1275,9 @@ func Test_C76_SimpleSlice_IsContainsFunc(t *testing.T) {
 		})
 
 		// Assert
-		if !found {
-			t.Error("expected true for case-insensitive search")
-		}
+		actual := args.Map{"result": found}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for case-insensitive search", actual)
 	})
 }
 
@@ -1286,9 +1287,9 @@ func Test_C76_SimpleSlice_IsContainsFunc_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if ss.IsContainsFunc("a", func(i, s string) bool { return true }) {
-			t.Error("expected false for empty")
-		}
+		actual := args.Map{"result": ss.IsContainsFunc("a", func(i, s string) bool { return true })}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -1303,9 +1304,9 @@ func Test_C76_SimpleSlice_IndexOfFunc(t *testing.T) {
 		})
 
 		// Assert
-		if idx != 1 {
-			t.Errorf("expected 1, got %d", idx)
-		}
+		actual := args.Map{"result": idx != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1320,9 +1321,9 @@ func Test_C76_SimpleSlice_IndexOfFunc_NotFound(t *testing.T) {
 		})
 
 		// Assert
-		if idx != -1 {
-			t.Errorf("expected -1, got %d", idx)
-		}
+		actual := args.Map{"result": idx != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
 
@@ -1335,9 +1336,9 @@ func Test_C76_SimpleSlice_IndexOfFunc_Empty(t *testing.T) {
 		idx := ss.IndexOfFunc("a", func(i, s string) bool { return true })
 
 		// Assert
-		if idx != -1 {
-			t.Errorf("expected -1, got %d", idx)
-		}
+		actual := args.Map{"result": idx != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
 
@@ -1347,12 +1348,12 @@ func Test_C76_SimpleSlice_IndexOf(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("x", "y", "z")
 
 		// Act & Assert
-		if ss.IndexOf("y") != 1 {
-			t.Error("expected 1")
-		}
-		if ss.IndexOf("w") != -1 {
-			t.Error("expected -1")
-		}
+		actual := args.Map{"result": ss.IndexOf("y") != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual = args.Map{"result": ss.IndexOf("w") != -1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
 
@@ -1362,9 +1363,9 @@ func Test_C76_SimpleSlice_IndexOf_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if ss.IndexOf("a") != -1 {
-			t.Error("expected -1")
-		}
+		actual := args.Map{"result": ss.IndexOf("a") != -1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
 
@@ -1375,12 +1376,12 @@ func Test_C76_SimpleSlice_HasAnyItem(t *testing.T) {
 		empty := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if !ss.HasAnyItem() {
-			t.Error("expected true")
-		}
-		if empty.HasAnyItem() {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": ss.HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": empty.HasAnyItem()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1390,18 +1391,18 @@ func Test_C76_SimpleSlice_HasIndex(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if !ss.HasIndex(0) {
-			t.Error("expected true for 0")
-		}
-		if !ss.HasIndex(1) {
-			t.Error("expected true for 1")
-		}
-		if ss.HasIndex(2) {
-			t.Error("expected false for 2")
-		}
-		if ss.HasIndex(-1) {
-			t.Error("expected false for -1")
-		}
+		actual := args.Map{"result": ss.HasIndex(0)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for 0", actual)
+		actual = args.Map{"result": ss.HasIndex(1)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for 1", actual)
+		actual = args.Map{"result": ss.HasIndex(2)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for 2", actual)
+		actual = args.Map{"result": ss.HasIndex(-1)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 	})
 }
 
@@ -1414,9 +1415,9 @@ func Test_C76_SimpleSlice_WrapDoubleQuote(t *testing.T) {
 		result := ss.WrapDoubleQuote()
 
 		// Assert
-		if result.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1429,9 +1430,9 @@ func Test_C76_SimpleSlice_WrapSingleQuote(t *testing.T) {
 		result := ss.WrapSingleQuote()
 
 		// Assert
-		if result.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": result.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1444,9 +1445,9 @@ func Test_C76_SimpleSlice_WrapTildaQuote(t *testing.T) {
 		result := ss.WrapTildaQuote()
 
 		// Assert
-		if result.Length() != 1 {
-			t.Error("expected 1")
-		}
+		actual := args.Map{"result": result.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1459,9 +1460,9 @@ func Test_C76_SimpleSlice_WrapDoubleQuoteIfMissing(t *testing.T) {
 		result := ss.WrapDoubleQuoteIfMissing()
 
 		// Assert
-		if result.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1474,9 +1475,9 @@ func Test_C76_SimpleSlice_WrapSingleQuoteIfMissing(t *testing.T) {
 		result := ss.WrapSingleQuoteIfMissing()
 
 		// Assert
-		if result.Length() != 2 {
-			t.Error("expected 2")
-		}
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1489,9 +1490,9 @@ func Test_C76_SimpleSlice_FirstDynamic(t *testing.T) {
 		result := ss.FirstDynamic()
 
 		// Assert
-		if result != "first" {
-			t.Error("expected 'first'")
-		}
+		actual := args.Map{"result": result != "first"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'first'", actual)
 	})
 }
 
@@ -1504,9 +1505,9 @@ func Test_C76_SimpleSlice_LastDynamic(t *testing.T) {
 		result := ss.LastDynamic()
 
 		// Assert
-		if result != "last" {
-			t.Error("expected 'last'")
-		}
+		actual := args.Map{"result": result != "last"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'last'", actual)
 	})
 }
 
@@ -1516,9 +1517,9 @@ func Test_C76_SimpleSlice_FirstOrDefault_NonEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a")
 
 		// Act & Assert
-		if ss.FirstOrDefault() != "a" {
-			t.Error("expected 'a'")
-		}
+		actual := args.Map{"result": ss.FirstOrDefault() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a'", actual)
 	})
 }
 
@@ -1528,9 +1529,9 @@ func Test_C76_SimpleSlice_FirstOrDefault_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if ss.FirstOrDefault() != "" {
-			t.Error("expected empty string")
-		}
+		actual := args.Map{"result": ss.FirstOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 	})
 }
 
@@ -1543,9 +1544,9 @@ func Test_C76_SimpleSlice_FirstOrDefaultDynamic(t *testing.T) {
 		result := ss.FirstOrDefaultDynamic()
 
 		// Assert
-		if result != "x" {
-			t.Error("expected 'x'")
-		}
+		actual := args.Map{"result": result != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'x'", actual)
 	})
 }
 
@@ -1555,9 +1556,9 @@ func Test_C76_SimpleSlice_LastOrDefault_NonEmpty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
 
 		// Act & Assert
-		if ss.LastOrDefault() != "b" {
-			t.Error("expected 'b'")
-		}
+		actual := args.Map{"result": ss.LastOrDefault() != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'b'", actual)
 	})
 }
 
@@ -1567,9 +1568,9 @@ func Test_C76_SimpleSlice_LastOrDefault_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Empty()
 
 		// Act & Assert
-		if ss.LastOrDefault() != "" {
-			t.Error("expected empty string")
-		}
+		actual := args.Map{"result": ss.LastOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 	})
 }
 
@@ -1582,9 +1583,9 @@ func Test_C76_SimpleSlice_LastOrDefaultDynamic(t *testing.T) {
 		result := ss.LastOrDefaultDynamic()
 
 		// Assert
-		if result != "x" {
-			t.Error("expected 'x'")
-		}
+		actual := args.Map{"result": result != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'x'", actual)
 	})
 }
 
@@ -1598,12 +1599,12 @@ func Test_C76_SimpleSlice_SkipDynamic(t *testing.T) {
 
 		// Assert
 		asSlice, ok := result.([]string)
-		if !ok {
-			t.Error("expected []string type")
-		}
-		if len(asSlice) != 2 {
-			t.Errorf("expected 2, got %d", len(asSlice))
-		}
+		actual := args.Map{"result": ok}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected []string type", actual)
+		actual = args.Map{"result": len(asSlice) != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1617,12 +1618,12 @@ func Test_C76_SimpleSlice_SkipDynamic_BeyondLength(t *testing.T) {
 
 		// Assert
 		asSlice, ok := result.([]string)
-		if !ok {
-			t.Error("expected []string type")
-		}
-		if len(asSlice) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": ok}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected []string type", actual)
+		actual = args.Map{"result": len(asSlice) != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1635,9 +1636,9 @@ func Test_C76_SimpleSlice_Skip(t *testing.T) {
 		result := ss.Skip(2)
 
 		// Assert
-		if len(result) != 1 || result[0] != "c" {
-			t.Errorf("expected ['c'], got %v", result)
-		}
+		actual := args.Map{"result": len(result) != 1 || result[0] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected ['c']", actual)
 	})
 }
 
@@ -1650,18 +1651,22 @@ func Test_C76_SimpleSlice_TakeDynamic(t *testing.T) {
 		result := ss.TakeDynamic(2)
 
 		// Assert
+		length := 0
 		asSlice, ok := result.(corestr.SimpleSlice)
-		if !ok {
-			// May also return as []string
-			asStrSlice, ok2 := result.([]string)
-			if !ok2 {
-				t.Error("expected SimpleSlice or []string type")
-			} else if len(asStrSlice) != 2 {
-				t.Errorf("expected 2, got %d", len(asStrSlice))
-			}
-		} else if asSlice.Length() != 2 {
-			t.Errorf("expected 2, got %d", asSlice.Length())
+		if ok {
+			length = asSlice.Length()
+		} else if asStrSlice, ok2 := result.([]string); ok2 {
+			length = len(asStrSlice)
 		}
+		actual := args.Map{
+			"typeOk": ok || func() bool { _, ok2 := result.([]string); return ok2 }(),
+			"length": length,
+		}
+		expected := args.Map{
+			"typeOk": true,
+			"length": 2,
+		}
+		expected.ShouldBeEqual(t, 0, "TakeDynamic returns 2 items -- SimpleSlice or []string", actual)
 	})
 }
 
@@ -1674,9 +1679,9 @@ func Test_C76_SimpleSlice_Take(t *testing.T) {
 		result := ss.Take(2)
 
 		// Assert
-		if len(result) != 2 {
-			t.Errorf("expected 2, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1689,9 +1694,9 @@ func Test_C76_SimpleSlice_Take_BeyondLength(t *testing.T) {
 		result := ss.Take(5)
 
 		// Assert
-		if len(result) != 1 {
-			t.Errorf("expected 1, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1704,9 +1709,9 @@ func Test_C76_SimpleSlice_LimitDynamic(t *testing.T) {
 		result := ss.LimitDynamic(1)
 
 		// Assert
-		if result == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -1719,9 +1724,9 @@ func Test_C76_SimpleSlice_Limit(t *testing.T) {
 		result := ss.Limit(1)
 
 		// Assert
-		if len(result) != 1 {
-			t.Errorf("expected 1, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1731,9 +1736,9 @@ func Test_C76_SimpleSlice_Length_Nil(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0 for nil")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for nil", actual)
 	})
 }
 
@@ -1747,9 +1752,9 @@ func Test_C76_SimpleSlice_Strings_List(t *testing.T) {
 		list := ss.List()
 
 		// Assert
-		if len(strs) != 2 || len(list) != 2 {
-			t.Error("expected 2 for both")
-		}
+		actual := args.Map{"result": len(strs) != 2 || len(list) != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 for both", actual)
 	})
 }
 
@@ -1763,12 +1768,12 @@ func Test_C76_SimpleSlice_DeserializeJsoner(t *testing.T) {
 		result, err := corestr.New.SimpleSlice.DeserializeJsoner(jsoner)
 
 		// Assert
-		if err != nil {
-			t.Errorf("error: %v", err)
-		}
-		if result.Length() != 2 {
-			t.Errorf("expected 2, got %d", result.Length())
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "error:", actual)
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1781,9 +1786,9 @@ func Test_C76_SimpleSlice_Map(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Map(m)
 
 		// Assert
-		if ss.Length() != 2 {
-			t.Errorf("expected 2, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1796,8 +1801,8 @@ func Test_C76_SimpleSlice_Map_Empty(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Map(m)
 
 		// Assert
-		if ss.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": ss.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

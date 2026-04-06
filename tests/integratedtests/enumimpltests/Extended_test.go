@@ -43,15 +43,15 @@ func Test_ExtDynMap_AddOrUpdate_Verification(t *testing.T) {
 	isExisting := dm.AddOrUpdate("A", 10)
 
 	// Assert
-	if !isNew {
-		t.Error("AddOrUpdate new key should return true")
-	}
-	if isExisting {
-		t.Error("AddOrUpdate existing key should return false")
-	}
-	if dm.Length() != 2 {
-		t.Errorf("Expected 2, got %d", dm.Length())
-	}
+	actual := args.Map{"result": isNew}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "AddOrUpdate new key should return true", actual)
+	actual := args.Map{"result": isExisting}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AddOrUpdate existing key should return false", actual)
+	actual := args.Map{"result": dm.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Expected 2", actual)
 }
 
 func Test_ExtDynMap_Set_Verification(t *testing.T) {
@@ -62,9 +62,9 @@ func Test_ExtDynMap_Set_Verification(t *testing.T) {
 	isNew := dm.Set("B", 2)
 
 	// Assert
-	if !isNew {
-		t.Error("Set new key should return true")
-	}
+	actual := args.Map{"result": isNew}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Set new key should return true", actual)
 }
 
 func Test_ExtDynMap_AddNewOnly_Verification(t *testing.T) {
@@ -76,12 +76,12 @@ func Test_ExtDynMap_AddNewOnly_Verification(t *testing.T) {
 	addedNew := dm.AddNewOnly("B", 2)
 
 	// Assert
-	if added {
-		t.Error("AddNewOnly existing should return false")
-	}
-	if !addedNew {
-		t.Error("AddNewOnly new should return true")
-	}
+	actual := args.Map{"result": added}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AddNewOnly existing should return false", actual)
+	actual := args.Map{"result": addedNew}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "AddNewOnly new should return true", actual)
 }
 
 // ==========================================
@@ -97,12 +97,12 @@ func Test_ExtDynMap_AllKeys_Verification(t *testing.T) {
 	sortedKeys := dm.AllKeysSorted()
 
 	// Assert
-	if len(keys) != 3 {
-		t.Errorf("AllKeys expected 3, got %d", len(keys))
-	}
-	if len(sortedKeys) != 3 || sortedKeys[0] != "A" {
-		t.Errorf("AllKeysSorted first should be A, got %v", sortedKeys)
-	}
+	actual := args.Map{"result": len(keys) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllKeys expected 3", actual)
+	actual := args.Map{"result": len(sortedKeys) != 3 || sortedKeys[0] != "A"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllKeysSorted first should be A", actual)
 }
 
 // ==========================================
@@ -114,27 +114,27 @@ func Test_ExtDynMap_HasKey_Verification(t *testing.T) {
 	dm := enumimpl.DynamicMap{"A": 1, "B": 2}
 
 	// Act & Assert
-	if !dm.HasKey("A") {
-		t.Error("HasKey should find A")
-	}
-	if dm.HasKey("Z") {
-		t.Error("HasKey should not find Z")
-	}
-	if !dm.HasAllKeys("A", "B") {
-		t.Error("HasAllKeys should be true")
-	}
-	if dm.HasAllKeys("A", "Z") {
-		t.Error("HasAllKeys with missing should be false")
-	}
-	if !dm.HasAnyKeys("Z", "A") {
-		t.Error("HasAnyKeys should be true")
-	}
-	if dm.HasAnyKeys("X", "Y") {
-		t.Error("HasAnyKeys should be false")
-	}
-	if !dm.IsMissingKey("Z") {
-		t.Error("IsMissingKey should be true for Z")
-	}
+	actual := args.Map{"result": dm.HasKey("A")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasKey should find A", actual)
+	actual := args.Map{"result": dm.HasKey("Z")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "HasKey should not find Z", actual)
+	actual := args.Map{"result": dm.HasAllKeys("A", "B")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasAllKeys should be true", actual)
+	actual := args.Map{"result": dm.HasAllKeys("A", "Z")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "HasAllKeys with missing should be false", actual)
+	actual := args.Map{"result": dm.HasAnyKeys("Z", "A")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasAnyKeys should be true", actual)
+	actual := args.Map{"result": dm.HasAnyKeys("X", "Y")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "HasAnyKeys should be false", actual)
+	actual := args.Map{"result": dm.IsMissingKey("Z")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsMissingKey should be true for Z", actual)
 }
 
 // ==========================================
@@ -146,21 +146,21 @@ func Test_ExtDynMap_Utility_Verification(t *testing.T) {
 	dm := enumimpl.DynamicMap{"A": 1, "B": 2}
 
 	// Act & Assert
-	if !dm.HasAnyItem() {
-		t.Error("HasAnyItem should be true")
-	}
-	if dm.Count() != 2 {
-		t.Errorf("Count expected 2, got %d", dm.Count())
-	}
-	if dm.LastIndex() != 1 {
-		t.Errorf("LastIndex expected 1, got %d", dm.LastIndex())
-	}
-	if !dm.HasIndex(1) {
-		t.Error("HasIndex(1) should be true")
-	}
-	if dm.HasIndex(5) {
-		t.Error("HasIndex(5) should be false")
-	}
+	actual := args.Map{"result": dm.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasAnyItem should be true", actual)
+	actual := args.Map{"result": dm.Count() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Count expected 2", actual)
+	actual := args.Map{"result": dm.LastIndex() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "LastIndex expected 1", actual)
+	actual := args.Map{"result": dm.HasIndex(1)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasIndex(1) should be true", actual)
+	actual := args.Map{"result": dm.HasIndex(5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "HasIndex(5) should be false", actual)
 }
 
 // ==========================================
@@ -175,9 +175,9 @@ func Test_ExtDynMap_First_Verification(t *testing.T) {
 	key, val := dm.First()
 
 	// Assert
-	if key == "" || val == nil {
-		t.Error("First should return a key-value")
-	}
+	actual := args.Map{"result": key == "" || val == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "First should return a key-value", actual)
 
 	// Arrange - empty
 	empty := enumimpl.DynamicMap{}
@@ -186,9 +186,9 @@ func Test_ExtDynMap_First_Verification(t *testing.T) {
 	key2, val2 := empty.First()
 
 	// Assert
-	if key2 != "" || val2 != nil {
-		t.Error("First on empty should return empty")
-	}
+	actual := args.Map{"result": key2 != "" || val2 != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "First on empty should return empty", actual)
 }
 
 // ==========================================
@@ -205,15 +205,15 @@ func Test_ExtDynMap_AllValues_Verification(t *testing.T) {
 	valIntegers := dm.AllValuesIntegers()
 
 	// Assert
-	if len(valStrings) != 2 {
-		t.Errorf("AllValuesStrings expected 2, got %d", len(valStrings))
-	}
-	if len(valStringsSorted) != 2 {
-		t.Errorf("AllValuesStringsSorted expected 2, got %d", len(valStringsSorted))
-	}
-	if len(valIntegers) != 2 {
-		t.Errorf("AllValuesIntegers expected 2, got %d", len(valIntegers))
-	}
+	actual := args.Map{"result": len(valStrings) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllValuesStrings expected 2", actual)
+	actual := args.Map{"result": len(valStringsSorted) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllValuesStringsSorted expected 2", actual)
+	actual := args.Map{"result": len(valIntegers) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllValuesIntegers expected 2", actual)
 }
 
 // ==========================================
@@ -227,24 +227,24 @@ func Test_ExtDynMap_IsEqual_Verification(t *testing.T) {
 	dm3 := enumimpl.DynamicMap{"A": 1, "B": 3}
 
 	// Act & Assert
-	if !dm1.IsEqual(false, &dm2) {
-		t.Error("Same content should be equal")
-	}
-	if dm1.IsEqual(false, &dm3) {
-		t.Error("Different content should not be equal")
-	}
-	if !dm1.IsMismatch(false, &dm3) {
-		t.Error("IsMismatch should be true for different")
-	}
+	actual := args.Map{"result": dm1.IsEqual(false, &dm2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Same content should be equal", actual)
+	actual := args.Map{"result": dm1.IsEqual(false, &dm3)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Different content should not be equal", actual)
+	actual := args.Map{"result": dm1.IsMismatch(false, &dm3)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsMismatch should be true for different", actual)
 
 	// nil cases
 	var nilDm *enumimpl.DynamicMap
-	if !nilDm.IsEqual(false, nil) {
-		t.Error("nil.IsEqual(nil) should be true")
-	}
-	if nilDm.IsEqual(false, &dm1) {
-		t.Error("nil.IsEqual(non-nil) should be false")
-	}
+	actual := args.Map{"result": nilDm.IsEqual(false, nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil.IsEqual(nil) should be true", actual)
+	actual := args.Map{"result": nilDm.IsEqual(false, &dm1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil.IsEqual(non-nil) should be false", actual)
 }
 
 func Test_ExtDynMap_IsRawEqual_Verification(t *testing.T) {
@@ -252,12 +252,12 @@ func Test_ExtDynMap_IsRawEqual_Verification(t *testing.T) {
 	dm := enumimpl.DynamicMap{"A": 1}
 
 	// Act & Assert
-	if !dm.IsRawEqual(false, map[string]any{"A": 1}) {
-		t.Error("IsRawEqual same should be true")
-	}
-	if dm.IsRawEqual(false, map[string]any{"A": 2}) {
-		t.Error("IsRawEqual different should be false")
-	}
+	actual := args.Map{"result": dm.IsRawEqual(false, map[string]any{"A": 1})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsRawEqual same should be true", actual)
+	actual := args.Map{"result": dm.IsRawEqual(false, map[string]any{"A": 2})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsRawEqual different should be false", actual)
 }
 
 func Test_ExtDynMap_IsRawEqual_RegardlessType_Verification(t *testing.T) {
@@ -266,9 +266,9 @@ func Test_ExtDynMap_IsRawEqual_RegardlessType_Verification(t *testing.T) {
 
 	// Act & Assert
 	// int vs int8 should match regardless of type
-	if !dm.IsRawEqual(true, map[string]any{"A": 1}) {
-		t.Error("IsRawEqual regardless should be true for same value")
-	}
+	actual := args.Map{"result": dm.IsRawEqual(true, map[string]any{"A": 1})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsRawEqual regardless should be true for same value", actual)
 }
 
 // ==========================================
@@ -280,12 +280,12 @@ func Test_ExtDynMap_IsKeysEqualOnly_Verification(t *testing.T) {
 	dm := enumimpl.DynamicMap{"A": 1, "B": 2}
 
 	// Act & Assert
-	if !dm.IsKeysEqualOnly(map[string]any{"A": 10, "B": 20}) {
-		t.Error("Same keys should be equal regardless of values")
-	}
-	if dm.IsKeysEqualOnly(map[string]any{"A": 1, "C": 3}) {
-		t.Error("Different keys should not be equal")
-	}
+	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"A": 10, "B": 20})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Same keys should be equal regardless of values", actual)
+	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"A": 1, "C": 3})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Different keys should not be equal", actual)
 }
 
 // ==========================================
@@ -300,33 +300,33 @@ func Test_ExtDynMap_KeyValue_Verification(t *testing.T) {
 	val, found := dm.KeyValue("A")
 
 	// Assert
-	if !found || val != 42 {
-		t.Errorf("KeyValue A expected 42, got %v", val)
-	}
+	actual := args.Map{"result": found || val != 42}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "KeyValue A expected 42", actual)
 
 	// Act
 	valStr, foundStr := dm.KeyValueString("B")
 
 	// Assert
-	if !foundStr || valStr != "hello" {
-		t.Errorf("KeyValueString B expected 'hello', got '%s'", valStr)
-	}
+	actual := args.Map{"result": foundStr || valStr != "hello"}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "KeyValueString B expected 'hello', got ''", actual)
 
 	// Act
 	valInt, foundInt, failed := dm.KeyValueInt("A")
 
 	// Assert
-	if !foundInt || failed || valInt != 42 {
-		t.Errorf("KeyValueInt A expected 42, got %d (found=%v, failed=%v)", valInt, foundInt, failed)
-	}
+	actual := args.Map{"result": foundInt || failed || valInt != 42}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "KeyValueInt A expected 42, got (found=, failed=)", actual)
 
 	// Act - missing key
 	_, foundMissing := dm.KeyValue("Z")
 
 	// Assert
-	if foundMissing {
-		t.Error("KeyValue missing should not be found")
-	}
+	actual := args.Map{"result": foundMissing}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyValue missing should not be found", actual)
 }
 
 func Test_ExtDynMap_KeyValueIntDefault_Verification(t *testing.T) {
@@ -338,9 +338,9 @@ func Test_ExtDynMap_KeyValueIntDefault_Verification(t *testing.T) {
 	valMissing := dm.KeyValueIntDefault("Z")
 
 	// Assert
-	if val != 42 {
-		t.Errorf("KeyValueIntDefault A expected 42, got %d", val)
-	}
+	actual := args.Map{"result": val != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyValueIntDefault A expected 42", actual)
 	// missing returns InvalidValue
 	_ = valMissing // just ensure no panic
 }
@@ -357,9 +357,9 @@ func Test_ExtDynMap_Add_Verification(t *testing.T) {
 	dm.Add("B", 2)
 
 	// Assert
-	if dm.Length() != 2 {
-		t.Errorf("Add expected 2, got %d", dm.Length())
-	}
+	actual := args.Map{"result": dm.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Add expected 2", actual)
 }
 
 // ==========================================
@@ -374,9 +374,9 @@ func Test_ExtDynMap_Raw_Verification(t *testing.T) {
 	raw := dm.Raw()
 
 	// Assert
-	if len(raw) != 1 {
-		t.Errorf("Raw expected 1, got %d", len(raw))
-	}
+	actual := args.Map{"result": len(raw) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Raw expected 1", actual)
 }
 
 // ==========================================
@@ -392,9 +392,9 @@ func Test_ExtDynMap_DiffRaw_Verification(t *testing.T) {
 	diff := dm.DiffRaw(false, right)
 
 	// Assert
-	if diff.Length() == 0 {
-		t.Error("DiffRaw should find differences")
-	}
+	actual := args.Map{"result": diff.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffRaw should find differences", actual)
 }
 
 func Test_ExtDynMap_DiffRaw_NilCases_Verification(t *testing.T) {
@@ -405,19 +405,19 @@ func Test_ExtDynMap_DiffRaw_NilCases_Verification(t *testing.T) {
 
 	// Act & Assert
 	diff1 := nilDm.DiffRaw(false, nil)
-	if diff1.Length() != 0 {
-		t.Error("nil vs nil diff should be empty")
-	}
+	actual := args.Map{"result": diff1.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs nil diff should be empty", actual)
 
 	diff2 := nilDm.DiffRaw(false, right)
-	if diff2.Length() == 0 {
-		t.Error("nil vs non-nil diff should have items")
-	}
+	actual := args.Map{"result": diff2.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs non-nil diff should have items", actual)
 
 	diff3 := dm.DiffRaw(false, nil)
-	if diff3.Length() == 0 {
-		t.Error("non-nil vs nil diff should have items")
-	}
+	actual := args.Map{"result": diff3.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil vs nil diff should have items", actual)
 }
 
 // ==========================================
@@ -432,12 +432,12 @@ func Test_ExtDynMap_SortedKeyValues_Verification(t *testing.T) {
 	kvs := dm.SortedKeyValues()
 
 	// Assert
-	if len(kvs) != 2 {
-		t.Errorf("SortedKeyValues expected 2, got %d", len(kvs))
-	}
-	if kvs[0].Key != "A" {
-		t.Errorf("First sorted key expected 'A', got '%s'", kvs[0].Key)
-	}
+	actual := args.Map{"result": len(kvs) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SortedKeyValues expected 2", actual)
+	actual := args.Map{"result": kvs[0].Key != "A"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "First sorted key expected 'A', got ''", actual)
 }
 
 func Test_ExtDynMap_SortedKeyAnyValues_Verification(t *testing.T) {
@@ -448,9 +448,9 @@ func Test_ExtDynMap_SortedKeyAnyValues_Verification(t *testing.T) {
 	kavs := dm.SortedKeyAnyValues()
 
 	// Assert
-	if len(kavs) != 2 {
-		t.Errorf("SortedKeyAnyValues expected 2, got %d", len(kavs))
-	}
+	actual := args.Map{"result": len(kavs) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SortedKeyAnyValues expected 2", actual)
 }
 
 // ==========================================
@@ -465,12 +465,12 @@ func Test_ExtDynMap_MapIntegerString_Verification(t *testing.T) {
 	rangeMap, sorted := dm.MapIntegerString()
 
 	// Assert
-	if len(rangeMap) != 2 {
-		t.Errorf("MapIntegerString map expected 2, got %d", len(rangeMap))
-	}
-	if len(sorted) != 2 || sorted[0] != 0 {
-		t.Errorf("MapIntegerString sorted expected [0,1], got %v", sorted)
-	}
+	actual := args.Map{"result": len(rangeMap) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MapIntegerString map expected 2", actual)
+	actual := args.Map{"result": len(sorted) != 2 || sorted[0] != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MapIntegerString sorted expected [0,1]", actual)
 }
 
 // ==========================================
@@ -482,14 +482,14 @@ func Test_ExtDynMap_IsValueString_Verification(t *testing.T) {
 	dm := enumimpl.DynamicMap{"A": "hello"}
 
 	// Act & Assert
-	if !dm.IsValueString() {
-		t.Error("IsValueString should be true for string values")
-	}
+	actual := args.Map{"result": dm.IsValueString()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsValueString should be true for string values", actual)
 
 	dm2 := enumimpl.DynamicMap{"A": 42}
-	if dm2.IsValueString() {
-		t.Error("IsValueString should be false for int values")
-	}
+	actual := args.Map{"result": dm2.IsValueString()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsValueString should be false for int values", actual)
 }
 
 // ==========================================
@@ -504,15 +504,15 @@ func Test_ExtDynMap_BasicByte_Verification(t *testing.T) {
 	bb := dm.BasicByte("TestType")
 
 	// Assert
-	if bb.Min() != 0 {
-		t.Errorf("BasicByte Min expected 0, got %d", bb.Min())
-	}
-	if bb.Max() != 2 {
-		t.Errorf("BasicByte Max expected 2, got %d", bb.Max())
-	}
-	if bb.TypeName() != "TestType" {
-		t.Errorf("TypeName expected 'TestType', got '%s'", bb.TypeName())
-	}
+	actual := args.Map{"result": bb.Min() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "BasicByte Min expected 0", actual)
+	actual := args.Map{"result": bb.Max() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "BasicByte Max expected 2", actual)
+	actual := args.Map{"result": bb.TypeName() != "TestType"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "TypeName expected 'TestType', got ''", actual)
 }
 
 func Test_ExtDynMap_BasicByte_Methods_Verification(t *testing.T) {
@@ -521,27 +521,27 @@ func Test_ExtDynMap_BasicByte_Methods_Verification(t *testing.T) {
 	bb := dm.BasicByte("TestType")
 
 	// Act & Assert
-	if !bb.IsValidRange(0) {
-		t.Error("IsValidRange(0) should be true")
-	}
-	if !bb.IsValidRange(1) {
-		t.Error("IsValidRange(1) should be true")
-	}
-	if bb.IsValidRange(5) {
-		t.Error("IsValidRange(5) should be false")
-	}
-	if !bb.IsAnyOf(1, 0, 1) {
-		t.Error("IsAnyOf should find 1")
-	}
-	if bb.IsAnyOf(5, 0, 1) {
-		t.Error("IsAnyOf should not find 5")
-	}
-	if bb.Length() != 2 {
-		t.Errorf("Length expected 2, got %d", bb.Length())
-	}
-	if bb.Count() != 2 {
-		t.Errorf("Count expected 2, got %d", bb.Count())
-	}
+	actual := args.Map{"result": bb.IsValidRange(0)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsValidRange(0) should be true", actual)
+	actual := args.Map{"result": bb.IsValidRange(1)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsValidRange(1) should be true", actual)
+	actual := args.Map{"result": bb.IsValidRange(5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsValidRange(5) should be false", actual)
+	actual := args.Map{"result": bb.IsAnyOf(1, 0, 1)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsAnyOf should find 1", actual)
+	actual := args.Map{"result": bb.IsAnyOf(5, 0, 1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsAnyOf should not find 5", actual)
+	actual := args.Map{"result": bb.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Length expected 2", actual)
+	actual := args.Map{"result": bb.Count() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Count expected 2", actual)
 }
 
 func Test_ExtDynMap_BasicByte_Unmarshal_Verification(t *testing.T) {
@@ -553,20 +553,20 @@ func Test_ExtDynMap_BasicByte_Unmarshal_Verification(t *testing.T) {
 	val, err := bb.UnmarshallToValue(true, nil)
 
 	// Assert
-	if err != nil {
-		t.Errorf("UnmarshallToValue nil with mapFirst should not error, got %v", err)
-	}
-	if val != bb.Min() {
-		t.Errorf("UnmarshallToValue nil expected min, got %d", val)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UnmarshallToValue nil with mapFirst should not error", actual)
+	actual := args.Map{"result": val != bb.Min()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UnmarshallToValue nil expected min", actual)
 
 	// Act - not mapped to first
 	_, err2 := bb.UnmarshallToValue(false, nil)
 
 	// Assert
-	if err2 == nil {
-		t.Error("UnmarshallToValue nil without mapFirst should error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UnmarshallToValue nil without mapFirst should error", actual)
 }
 
 func Test_ExtDynMap_BasicByte_StringRanges_Verification(t *testing.T) {
@@ -581,18 +581,18 @@ func Test_ExtDynMap_BasicByte_StringRanges_Verification(t *testing.T) {
 	err := bb.RangesInvalidErr()
 
 	// Assert
-	if len(ranges) != 2 {
-		t.Errorf("StringRanges expected 2, got %d", len(ranges))
-	}
-	if csv == "" {
-		t.Error("RangeNamesCsv should not be empty")
-	}
-	if msg == "" {
-		t.Error("RangesInvalidMessage should not be empty")
-	}
-	if err == nil {
-		t.Error("RangesInvalidErr should not be nil")
-	}
+	actual := args.Map{"result": len(ranges) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StringRanges expected 2", actual)
+	actual := args.Map{"result": csv == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangeNamesCsv should not be empty", actual)
+	actual := args.Map{"result": msg == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangesInvalidMessage should not be empty", actual)
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangesInvalidErr should not be nil", actual)
 }
 
 // ==========================================
@@ -623,41 +623,41 @@ func Test_ExtDiffLeftRight_Methods_Verification(t *testing.T) {
 	dlr := &enumimpl.DiffLeftRight{Left: "hello", Right: "world"}
 
 	// Act & Assert
-	if dlr.IsSameTypeSame() != true {
-		t.Error("Same type (both string) should return true")
-	}
-	if dlr.IsSameRegardlessOfType() {
-		t.Error("Different values should not be same")
-	}
-	if dlr.IsEqual(false) {
-		t.Error("IsEqual(false) should be false for different values")
-	}
-	if !dlr.HasMismatch(false) {
-		t.Error("HasMismatch should be true")
-	}
-	if dlr.String() == "" {
-		t.Error("String() should not be empty")
-	}
-	if dlr.JsonString() == "" {
-		t.Error("JsonString() should not be empty")
-	}
-	if dlr.DiffString() == "" {
-		t.Error("DiffString() should not be empty for mismatched")
-	}
+	actual := args.Map{"result": dlr.IsSameTypeSame() != true}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Same type (both string) should return true", actual)
+	actual := args.Map{"result": dlr.IsSameRegardlessOfType()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Different values should not be same", actual)
+	actual := args.Map{"result": dlr.IsEqual(false)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsEqual(false) should be false for different values", actual)
+	actual := args.Map{"result": dlr.HasMismatch(false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "HasMismatch should be true", actual)
+	actual := args.Map{"result": dlr.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String() should not be empty", actual)
+	actual := args.Map{"result": dlr.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JsonString() should not be empty", actual)
+	actual := args.Map{"result": dlr.DiffString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffString() should not be empty for mismatched", actual)
 
 	// Arrange - same
 	dlrSame := &enumimpl.DiffLeftRight{Left: "same", Right: "same"}
 
 	// Act & Assert
-	if dlrSame.DiffString() != "" {
-		t.Error("DiffString() should be empty for same values")
-	}
+	actual := args.Map{"result": dlrSame.DiffString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffString() should be empty for same values", actual)
 
 	// nil case
 	var nilDlr *enumimpl.DiffLeftRight
-	if nilDlr.JsonString() != "" {
-		t.Error("nil.JsonString() should be empty")
-	}
+	actual := args.Map{"result": nilDlr.JsonString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil.JsonString() should be empty", actual)
 }
 
 func Test_ExtDiffLeftRight_Types_Verification(t *testing.T) {
@@ -668,12 +668,12 @@ func Test_ExtDiffLeftRight_Types_Verification(t *testing.T) {
 	l, r := dlr.Types()
 
 	// Assert
-	if l == r {
-		t.Error("Different types should not be equal")
-	}
-	if dlr.IsSameTypeSame() {
-		t.Error("IsSameTypeSame should be false for string vs int")
-	}
+	actual := args.Map{"result": l == r}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Different types should not be equal", actual)
+	actual := args.Map{"result": dlr.IsSameTypeSame()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsSameTypeSame should be false for string vs int", actual)
 }
 
 func Test_ExtDiffLeftRight_SpecificFullString_Verification(t *testing.T) {
@@ -684,9 +684,9 @@ func Test_ExtDiffLeftRight_SpecificFullString_Verification(t *testing.T) {
 	l, r := dlr.SpecificFullString()
 
 	// Assert
-	if l == "" || r == "" {
-		t.Error("SpecificFullString should not be empty")
-	}
+	actual := args.Map{"result": l == "" || r == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "SpecificFullString should not be empty", actual)
 }
 
 // ==========================================
@@ -721,27 +721,27 @@ func Test_ExtKeyAnyVal_Methods_Verification(t *testing.T) {
 	kav := enumimpl.KeyAnyVal{Key: "Test", AnyValue: 42}
 
 	// Act & Assert
-	if kav.AnyVal() != 42 {
-		t.Error("AnyVal should be 42")
-	}
-	if kav.AnyValString() == "" {
-		t.Error("AnyValString should not be empty")
-	}
-	if kav.WrapKey() == "" {
-		t.Error("WrapKey should not be empty")
-	}
-	if kav.WrapValue() == "" {
-		t.Error("WrapValue should not be empty")
-	}
-	if kav.String() == "" {
-		t.Error("String should not be empty")
-	}
+	actual := args.Map{"result": kav.AnyVal() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AnyVal should be 42", actual)
+	actual := args.Map{"result": kav.AnyValString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AnyValString should not be empty", actual)
+	actual := args.Map{"result": kav.WrapKey() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "WrapKey should not be empty", actual)
+	actual := args.Map{"result": kav.WrapValue() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "WrapValue should not be empty", actual)
+	actual := args.Map{"result": kav.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 
 	// KeyValInteger conversion
 	kvi := kav.KeyValInteger()
-	if kvi.Key != "Test" || kvi.ValueInteger != 42 {
-		t.Errorf("KeyValInteger expected Test/42, got %s/%d", kvi.Key, kvi.ValueInteger)
-	}
+	actual := args.Map{"result": kvi.Key != "Test" || kvi.ValueInteger != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyValInteger expected Test/42, got/", actual)
 }
 
 // ==========================================
@@ -773,20 +773,20 @@ func Test_ExtKeyValInteger_Methods_Verification(t *testing.T) {
 	kvi := enumimpl.KeyValInteger{Key: "Test", ValueInteger: 5}
 
 	// Act & Assert
-	if kvi.WrapKey() == "" {
-		t.Error("WrapKey should not be empty")
-	}
-	if kvi.WrapValue() == "" {
-		t.Error("WrapValue should not be empty")
-	}
-	if kvi.String() == "" {
-		t.Error("String should not be empty")
-	}
+	actual := args.Map{"result": kvi.WrapKey() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "WrapKey should not be empty", actual)
+	actual := args.Map{"result": kvi.WrapValue() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "WrapValue should not be empty", actual)
+	actual := args.Map{"result": kvi.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 
 	kav := kvi.KeyAnyVal()
-	if kav.Key != "Test" || kav.AnyValue != 5 {
-		t.Error("KeyAnyVal conversion mismatch")
-	}
+	actual := args.Map{"result": kav.Key != "Test" || kav.AnyValue != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyAnyVal conversion mismatch", actual)
 }
 
 // ==========================================
@@ -802,12 +802,12 @@ func Test_ExtKeyAnyValues_Verification(t *testing.T) {
 	result := enumimpl.KeyAnyValues(names, values)
 
 	// Assert
-	if len(result) != 3 {
-		t.Errorf("KeyAnyValues expected 3, got %d", len(result))
-	}
-	if result[0].Key != "A" || result[0].ValInt() != 1 {
-		t.Errorf("First element expected A/1, got %s/%d", result[0].Key, result[0].ValInt())
-	}
+	actual := args.Map{"result": len(result) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyAnyValues expected 3", actual)
+	actual := args.Map{"result": result[0].Key != "A" || result[0].ValInt() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "First element expected A/1, got/", actual)
 }
 
 func Test_ExtKeyAnyValues_Empty_Verification(t *testing.T) {
@@ -816,9 +816,9 @@ func Test_ExtKeyAnyValues_Empty_Verification(t *testing.T) {
 	result := enumimpl.KeyAnyValues([]string{}, nil)
 
 	// Assert
-	if len(result) != 0 {
-		t.Errorf("Empty names should return empty, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Empty names should return empty", actual)
 }
 
 // ==========================================
@@ -834,9 +834,9 @@ func Test_ExtAllNameValues_Verification(t *testing.T) {
 	result := enumimpl.AllNameValues(names, values)
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("AllNameValues expected 2, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllNameValues expected 2", actual)
 }
 
 // ==========================================
@@ -845,15 +845,15 @@ func Test_ExtAllNameValues_Verification(t *testing.T) {
 
 func Test_ExtConvEnumAnyValToInteger_Verification(t *testing.T) {
 	// Arrange & Act & Assert
-	if enumimpl.ConvEnumAnyValToInteger(42) != 42 {
-		t.Error("int 42 should convert to 42")
-	}
-	if enumimpl.ConvEnumAnyValToInteger("hello") >= 0 {
-		t.Error("string should convert to MinInt (negative)")
-	}
-	if enumimpl.ConvEnumAnyValToInteger(byte(5)) != 5 {
-		t.Error("byte 5 should convert to 5")
-	}
+	actual := args.Map{"result": enumimpl.ConvEnumAnyValToInteger(42) != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "int 42 should convert to 42", actual)
+	actual := args.Map{"result": enumimpl.ConvEnumAnyValToInteger("hello") >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "string should convert to MinInt (negative)", actual)
+	actual := args.Map{"result": enumimpl.ConvEnumAnyValToInteger(byte(5)) != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "byte 5 should convert to 5", actual)
 }
 
 // ==========================================
@@ -868,9 +868,9 @@ func Test_ExtIntegersRangesOfAnyVal_Verification(t *testing.T) {
 	result := enumimpl.IntegersRangesOfAnyVal(values)
 
 	// Assert
-	if len(result) != 3 || result[0] != 1 || result[2] != 3 {
-		t.Errorf("IntegersRangesOfAnyVal expected sorted [1,2,3], got %v", result)
-	}
+	actual := args.Map{"result": len(result) != 3 || result[0] != 1 || result[2] != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IntegersRangesOfAnyVal expected sorted [1,2,3]", actual)
 }
 
 // ==========================================
@@ -886,9 +886,9 @@ func Test_ExtUnsupportedNames_Verification(t *testing.T) {
 	unsupported := enumimpl.UnsupportedNames(all, supported...)
 
 	// Assert
-	if len(unsupported) != 2 {
-		t.Errorf("UnsupportedNames expected 2, got %d", len(unsupported))
-	}
+	actual := args.Map{"result": len(unsupported) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UnsupportedNames expected 2", actual)
 }
 
 // ==========================================
@@ -901,9 +901,9 @@ func Test_ExtPrependJoin_Verification(t *testing.T) {
 	result := enumimpl.PrependJoin(".", "prefix", "a", "b")
 
 	// Assert
-	if result != "prefix.a.b" {
-		t.Errorf("PrependJoin expected 'prefix.a.b', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "prefix.a.b"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PrependJoin expected 'prefix.a.b', got ''", actual)
 }
 
 func Test_ExtJoinPrependUsingDot_Verification(t *testing.T) {
@@ -912,9 +912,9 @@ func Test_ExtJoinPrependUsingDot_Verification(t *testing.T) {
 	result := enumimpl.JoinPrependUsingDot("prefix", "a", "b")
 
 	// Assert
-	if result != "prefix.a.b" {
-		t.Errorf("JoinPrependUsingDot expected 'prefix.a.b', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "prefix.a.b"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinPrependUsingDot expected 'prefix.a.b', got ''", actual)
 }
 
 // ==========================================
@@ -927,9 +927,9 @@ func Test_ExtNameWithValue_Verification(t *testing.T) {
 	result := enumimpl.NameWithValue("TestEnum")
 
 	// Assert
-	if result == "" {
-		t.Error("NameWithValue should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NameWithValue should not be empty", actual)
 }
 
 // ==========================================
@@ -944,9 +944,9 @@ func Test_ExtFormat_Verification(t *testing.T) {
 	result := enumimpl.Format("MyEnum", "Active", "1", format)
 
 	// Assert
-	if result != "Enum of MyEnum - Active - 1" {
-		t.Errorf("Format expected 'Enum of MyEnum - Active - 1', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Enum of MyEnum - Active - 1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Format expected 'Enum of MyEnum - Active - 1', got ''", actual)
 }
 
 // ==========================================
@@ -958,26 +958,26 @@ func Test_ExtDifferCheckerImpl_Verification(t *testing.T) {
 	checker := enumimpl.DefaultDiffCheckerImpl
 
 	// Act & Assert
-	if !checker.IsEqual(false, 42, 42) {
-		t.Error("IsEqual same should be true")
-	}
-	if checker.IsEqual(false, 42, 43) {
-		t.Error("IsEqual different should be false")
-	}
-	if !checker.IsEqual(true, 42, 42) {
-		t.Error("IsEqual regardless same should be true")
-	}
+	actual := args.Map{"result": checker.IsEqual(false, 42, 42)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual same should be true", actual)
+	actual := args.Map{"result": checker.IsEqual(false, 42, 43)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsEqual different should be false", actual)
+	actual := args.Map{"result": checker.IsEqual(true, 42, 42)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual regardless same should be true", actual)
 
 	// GetSingleDiffResult
 	result := checker.GetSingleDiffResult(true, "left", "right")
-	if result != "left" {
-		t.Errorf("GetSingleDiffResult isLeft=true should return left, got %v", result)
-	}
+	actual := args.Map{"result": result != "left"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "GetSingleDiffResult isLeft=true should return left", actual)
 
 	result2 := checker.GetSingleDiffResult(false, "left", "right")
-	if result2 != "right" {
-		t.Errorf("GetSingleDiffResult isLeft=false should return right, got %v", result2)
-	}
+	actual := args.Map{"result": result2 != "right"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "GetSingleDiffResult isLeft=false should return right", actual)
 }
 
 // ==========================================
@@ -992,15 +992,15 @@ func Test_ExtLeftRightDiffCheckerImpl_Verification(t *testing.T) {
 	result := checker.GetSingleDiffResult(true, "L", "R")
 
 	// Assert
-	if result == nil {
-		t.Error("GetSingleDiffResult should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "GetSingleDiffResult should not be nil", actual)
 
 	// GetResultOnKeyMissingInRightExistInLeft
 	missing := checker.GetResultOnKeyMissingInRightExistInLeft("key", "val")
-	if missing == nil {
-		t.Error("GetResultOnKeyMissingInRightExistInLeft should not be nil")
-	}
+	actual := args.Map{"result": missing == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "GetResultOnKeyMissingInRightExistInLeft should not be nil", actual)
 }
 
 // ==========================================
@@ -1015,17 +1015,17 @@ func Test_ExtDynMap_DiffJsonMessage_Verification(t *testing.T) {
 	msg1 := dm.DiffJsonMessage(false, map[string]any{"A": 1, "B": 2})
 
 	// Assert
-	if msg1 != "" {
-		t.Error("DiffJsonMessage same should be empty")
-	}
+	actual := args.Map{"result": msg1 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffJsonMessage same should be empty", actual)
 
 	// Act - different
 	msg2 := dm.DiffJsonMessage(false, map[string]any{"A": 1, "C": 3})
 
 	// Assert
-	if msg2 == "" {
-		t.Error("DiffJsonMessage different should not be empty")
-	}
+	actual := args.Map{"result": msg2 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffJsonMessage different should not be empty", actual)
 }
 
 // ==========================================
@@ -1040,17 +1040,17 @@ func Test_ExtDynMap_ShouldDiffMessage_Verification(t *testing.T) {
 	msg1 := dm.ShouldDiffMessage(false, "test", map[string]any{"A": 1})
 
 	// Assert
-	if msg1 != "" {
-		t.Error("ShouldDiffMessage same should be empty")
-	}
+	actual := args.Map{"result": msg1 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ShouldDiffMessage same should be empty", actual)
 
 	// Act - different
 	msg2 := dm.ShouldDiffMessage(false, "test", map[string]any{"A": 2})
 
 	// Assert
-	if msg2 == "" {
-		t.Error("ShouldDiffMessage different should not be empty")
-	}
+	actual := args.Map{"result": msg2 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ShouldDiffMessage different should not be empty", actual)
 }
 
 // ==========================================
@@ -1065,17 +1065,17 @@ func Test_ExtDynMap_ExpectingMessage_Verification(t *testing.T) {
 	msg1 := dm.ExpectingMessage("test", map[string]any{"A": 1})
 
 	// Assert
-	if msg1 != "" {
-		t.Error("ExpectingMessage same should be empty")
-	}
+	actual := args.Map{"result": msg1 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ExpectingMessage same should be empty", actual)
 
 	// Act - different
 	msg2 := dm.ExpectingMessage("test", map[string]any{"A": 2})
 
 	// Assert
-	if msg2 == "" {
-		t.Error("ExpectingMessage different should not be empty")
-	}
+	actual := args.Map{"result": msg2 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ExpectingMessage different should not be empty", actual)
 }
 
 // ==========================================
@@ -1090,17 +1090,17 @@ func Test_ExtDynMap_DiffJsonMessageLeftRight_Verification(t *testing.T) {
 	msg1 := dm.DiffJsonMessageLeftRight(false, map[string]any{"A": 1})
 
 	// Assert
-	if msg1 != "" {
-		t.Error("DiffJsonMessageLeftRight same should be empty")
-	}
+	actual := args.Map{"result": msg1 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffJsonMessageLeftRight same should be empty", actual)
 
 	// Act - different
 	msg2 := dm.DiffJsonMessageLeftRight(false, map[string]any{"B": 2})
 
 	// Assert
-	if msg2 == "" {
-		t.Error("DiffJsonMessageLeftRight different should not be empty")
-	}
+	actual := args.Map{"result": msg2 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DiffJsonMessageLeftRight different should not be empty", actual)
 }
 
 // ==========================================
@@ -1114,59 +1114,59 @@ func Test_ExtNumberEnumBase_Methods_Verification(t *testing.T) {
 
 	// Act & Assert - MinMaxAny
 	minAny, maxAny := bb.MinMaxAny()
-	if minAny == nil || maxAny == nil {
-		t.Error("MinMaxAny should not return nil")
-	}
+	actual := args.Map{"result": minAny == nil || maxAny == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MinMaxAny should not return nil", actual)
 
 	// MinValueString / MaxValueString
-	if bb.MinValueString() == "" {
-		t.Error("MinValueString should not be empty")
-	}
-	if bb.MaxValueString() == "" {
-		t.Error("MaxValueString should not be empty")
-	}
+	actual := args.Map{"result": bb.MinValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MinValueString should not be empty", actual)
+	actual := args.Map{"result": bb.MaxValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaxValueString should not be empty", actual)
 
 	// MinInt / MaxInt
-	if bb.MinInt() != 0 {
-		t.Errorf("MinInt expected 0, got %d", bb.MinInt())
-	}
-	if bb.MaxInt() != 2 {
-		t.Errorf("MaxInt expected 2, got %d", bb.MaxInt())
-	}
+	actual := args.Map{"result": bb.MinInt() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MinInt expected 0", actual)
+	actual := args.Map{"result": bb.MaxInt() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaxInt expected 2", actual)
 
 	// AllNameValues
 	anv := bb.AllNameValues()
-	if len(anv) != 3 {
-		t.Errorf("AllNameValues expected 3, got %d", len(anv))
-	}
+	actual := args.Map{"result": len(anv) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllNameValues expected 3", actual)
 
 	// IntegerEnumRanges
 	ier := bb.IntegerEnumRanges()
-	if len(ier) != 3 {
-		t.Errorf("IntegerEnumRanges expected 3, got %d", len(ier))
-	}
+	actual := args.Map{"result": len(ier) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IntegerEnumRanges expected 3", actual)
 
 	// NamesHashset
 	nh := bb.NamesHashset()
-	if len(nh) != 3 {
-		t.Errorf("NamesHashset expected 3, got %d", len(nh))
-	}
+	actual := args.Map{"result": len(nh) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NamesHashset expected 3", actual)
 
 	// RangesDynamicMap / DynamicMap
 	rdm := bb.RangesDynamicMap()
-	if len(rdm) != 3 {
-		t.Errorf("RangesDynamicMap expected 3, got %d", len(rdm))
-	}
+	actual := args.Map{"result": len(rdm) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangesDynamicMap expected 3", actual)
 
 	// KeyAnyValues
 	kavs := bb.KeyAnyValues()
-	if len(kavs) != 3 {
-		t.Errorf("KeyAnyValues expected 3, got %d", len(kavs))
-	}
+	actual := args.Map{"result": len(kavs) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "KeyAnyValues expected 3", actual)
 
 	// Format
 	formatted := bb.Format("Enum of {type-name} - {name} - {value}", byte(0))
-	if formatted == "" {
-		t.Error("Format should not be empty")
-	}
+	actual := args.Map{"result": formatted == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Format should not be empty", actual)
 }

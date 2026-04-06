@@ -8,6 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coredata/corepayload"
 	"github.com/alimtvnetwork/core/coredata/corestr"
 	"github.com/alimtvnetwork/core/coreinstruction"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -15,369 +16,477 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Attributes_IsNull(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	attr := corepayload.New.Attributes.Empty()
 
-	if !nilAttr.IsNull() {
-		t.Fatal("nil Attributes should be null")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.IsNull()}
 
-	if attr.IsNull() {
-		t.Fatal("non-nil Attributes should not be null")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil Attributes should be null", actual)
+
+	actual := args.Map{"result": attr.IsNull()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil Attributes should not be null", actual)
 }
 
 func Test_Cov9_Attributes_HasSafeItems(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 
-	if !attr.HasSafeItems() {
-		t.Fatal("expected HasSafeItems to be true")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasSafeItems()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasSafeItems to be true", actual)
 }
 
 func Test_Cov9_Attributes_HasStringKey(t *testing.T) {
+	// Arrange
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 
-	if !attr.HasStringKey("k") {
-		t.Fatal("expected HasStringKey to be true")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasStringKey("k")}
 
-	if attr.HasStringKey("missing") {
-		t.Fatal("expected HasStringKey to be false for missing")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasStringKey to be true", actual)
+
+	actual := args.Map{"result": attr.HasStringKey("missing")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasStringKey to be false for missing", actual)
 }
 
 func Test_Cov9_Attributes_HasAnyKey(t *testing.T) {
+	// Arrange
 	anyMap := coredynamic.NewMapAnyItems(0)
 	anyMap.Add("k", 42)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 
-	if !attr.HasAnyKey("k") {
-		t.Fatal("expected HasAnyKey to be true")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasAnyKey("k")}
 
-	if attr.HasAnyKey("missing") {
-		t.Fatal("expected HasAnyKey to be false for missing")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyKey to be true", actual)
+
+	actual := args.Map{"result": attr.HasAnyKey("missing")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyKey to be false for missing", actual)
 }
 
 func Test_Cov9_Attributes_Payloads(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	p := nilAttr.Payloads()
 
-	if len(p) != 0 {
-		t.Fatal("nil Payloads should return empty")
-	}
+	// Act
+	actual := args.Map{"result": len(p) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil Payloads should return empty", actual)
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	if string(attr.Payloads()) != "data" {
-		t.Fatal("expected Payloads to return data")
-	}
+	actual := args.Map{"result": string(attr.Payloads()) != "data"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Payloads to return data", actual)
 }
 
 func Test_Cov9_Attributes_PayloadsString(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.PayloadsString() != "" {
-		t.Fatal("nil PayloadsString should return empty")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.PayloadsString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil PayloadsString should return empty", actual)
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	if attr.PayloadsString() != "data" {
-		t.Fatal("expected PayloadsString to return data")
-	}
+	actual := args.Map{"result": attr.PayloadsString() != "data"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected PayloadsString to return data", actual)
 
 	emptyAttr := corepayload.New.Attributes.Empty()
 
-	if emptyAttr.PayloadsString() != "" {
-		t.Fatal("empty PayloadsString should return empty")
-	}
+	actual := args.Map{"result": emptyAttr.PayloadsString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty PayloadsString should return empty", actual)
 }
 
 func Test_Cov9_Attributes_AnyKeyValMap(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	m := nilAttr.AnyKeyValMap()
 
-	if len(m) != 0 {
-		t.Fatal("nil AnyKeyValMap should return empty map")
-	}
+	// Act
+	actual := args.Map{"result": len(m) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil AnyKeyValMap should return empty map", actual)
 
 	anyMap := coredynamic.NewMapAnyItems(0)
 	anyMap.Add("k", 42)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 	m = attr.AnyKeyValMap()
 
-	if m["k"] != 42 {
-		t.Fatal("expected 42 for key k")
-	}
+	actual := args.Map{"result": m["k"] != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42 for key k", actual)
 }
 
 func Test_Cov9_Attributes_Hashmap(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	m := nilAttr.Hashmap()
 
-	if len(m) != 0 {
-		t.Fatal("nil Hashmap should return empty map")
-	}
+	// Act
+	actual := args.Map{"result": len(m) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil Hashmap should return empty map", actual)
 
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 	m = attr.Hashmap()
 
-	if m["k"] != "v" {
-		t.Fatal("expected v for key k")
-	}
+	actual := args.Map{"result": m["k"] != "v"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected v for key k", actual)
 }
 
 func Test_Cov9_Attributes_HasIssuesOrEmpty(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if !nilAttr.HasIssuesOrEmpty() {
-		t.Fatal("nil should have issues or be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.HasIssuesOrEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should have issues or be empty", actual)
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 
-	if attr.HasIssuesOrEmpty() {
-		t.Fatal("non-empty valid attr should not have issues")
-	}
+	actual := args.Map{"result": attr.HasIssuesOrEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-empty valid attr should not have issues", actual)
 }
 
 func Test_Cov9_Attributes_IsSafeValid(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 
-	if !attr.IsSafeValid() {
-		t.Fatal("expected IsSafeValid true")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsSafeValid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsSafeValid true", actual)
 }
 
 func Test_Cov9_Attributes_HasAnyItem(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 
-	if !attr.HasAnyItem() {
-		t.Fatal("expected HasAnyItem true")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true", actual)
 }
 
 func Test_Cov9_Attributes_Count_Capacity(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"ab"`))
 
-	if attr.Count() != attr.Length() {
-		t.Fatal("Count should equal Length")
-	}
+	// Act
+	actual := args.Map{"result": attr.Count() != attr.Length()}
 
-	if attr.Capacity() != attr.Length() {
-		t.Fatal("Capacity should equal Length")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Count should equal Length", actual)
+
+	actual := args.Map{"result": attr.Capacity() != attr.Length()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Capacity should equal Length", actual)
 }
 
 func Test_Cov9_Attributes_Length_Nil(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.Length() != 0 {
-		t.Fatal("nil Length should be 0")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil Length should be 0", actual)
 }
 
 func Test_Cov9_Attributes_HasPagingInfo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasPagingInfo() {
-		t.Fatal("expected no paging info")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasPagingInfo()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no paging info", actual)
 
 	attr.PagingInfo = &corepayload.PagingInfo{TotalPages: 5}
 
-	if !attr.HasPagingInfo() {
-		t.Fatal("expected paging info")
-	}
+	actual := args.Map{"result": attr.HasPagingInfo()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected paging info", actual)
 }
 
 func Test_Cov9_Attributes_HasKeyValuePairs(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasKeyValuePairs() {
-		t.Fatal("empty should not have key value pairs")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasKeyValuePairs()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should not have key value pairs", actual)
 
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr2 := corepayload.New.Attributes.UsingKeyValues(hm)
 
-	if !attr2.HasKeyValuePairs() {
-		t.Fatal("expected key value pairs")
-	}
+	actual := args.Map{"result": attr2.HasKeyValuePairs()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected key value pairs", actual)
 }
 
 func Test_Cov9_Attributes_HasFromTo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasFromTo() {
-		t.Fatal("expected no FromTo")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasFromTo()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no FromTo", actual)
 
 	attr.FromTo = &coreinstruction.FromTo{}
 
-	if !attr.HasFromTo() {
-		t.Fatal("expected FromTo present")
-	}
+	actual := args.Map{"result": attr.HasFromTo()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected FromTo present", actual)
 }
 
 func Test_Cov9_Attributes_IsValid_IsInvalid(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsValid() {
-		t.Fatal("expected valid")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsValid()}
 
-	if !attr.IsInvalid() {
-		t.Fatal("expected invalid")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
+
+	actual := args.Map{"result": attr.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if !nilAttr.IsInvalid() {
-		t.Fatal("nil should be invalid")
-	}
+	actual := args.Map{"result": nilAttr.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov9_Attributes_HasError_Error(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasError() {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasError()}
 
-	if attr.Error() != nil {
-		t.Fatal("expected nil error")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
-	if attr.CompiledError() != nil {
-		t.Fatal("expected nil CompiledError")
-	}
+	actual := args.Map{"result": attr.Error() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil error", actual)
+
+	actual := args.Map{"result": attr.CompiledError() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil CompiledError", actual)
 }
 
 func Test_Cov9_Attributes_IsEmptyError(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if !nilAttr.IsEmptyError() {
-		t.Fatal("nil should be empty error")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.IsEmptyError()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty error", actual)
 
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsEmptyError() {
-		t.Fatal("expected empty error")
-	}
+	actual := args.Map{"result": attr.IsEmptyError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 }
 
 func Test_Cov9_Attributes_DynamicBytesLength(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.DynamicBytesLength() != 0 {
-		t.Fatal("nil DynamicBytesLength should be 0")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.DynamicBytesLength() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil DynamicBytesLength should be 0", actual)
 
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("abc"))
 
-	if attr.DynamicBytesLength() != 3 {
-		t.Fatal("expected 3")
-	}
+	actual := args.Map{"result": attr.DynamicBytesLength() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov9_Attributes_StringKeyValuePairsLength(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.StringKeyValuePairsLength() != 0 {
-		t.Fatal("nil should return 0")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.StringKeyValuePairsLength() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return 0", actual)
 
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 
-	if attr.StringKeyValuePairsLength() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": attr.StringKeyValuePairsLength() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_Attributes_AnyKeyValuePairsLength(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.AnyKeyValuePairsLength() != 0 {
-		t.Fatal("nil should return 0")
-	}
+	// Act
+	actual := args.Map{"result": nilAttr.AnyKeyValuePairsLength() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return 0", actual)
 
 	anyMap := coredynamic.NewMapAnyItems(0)
 	anyMap.Add("k", 42)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 
-	if attr.AnyKeyValuePairsLength() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": attr.AnyKeyValuePairsLength() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_Attributes_IsEmpty_HasItems(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsEmpty() {
-		t.Fatal("empty attr should be empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsEmpty()}
 
-	if attr.HasItems() {
-		t.Fatal("empty attr should not have items")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty attr should be empty", actual)
+
+	actual := args.Map{"result": attr.HasItems()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty attr should not have items", actual)
 
 	attr2 := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	if attr2.IsEmpty() {
-		t.Fatal("non-empty attr should not be empty")
-	}
+	actual := args.Map{"result": attr2.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-empty attr should not be empty", actual)
 
-	if !attr2.HasItems() {
-		t.Fatal("non-empty attr should have items")
-	}
+	actual := args.Map{"result": attr2.HasItems()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "non-empty attr should have items", actual)
 }
 
 func Test_Cov9_Attributes_IsPagingInfoEmpty(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsPagingInfoEmpty() {
-		t.Fatal("expected paging info empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsPagingInfoEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected paging info empty", actual)
 }
 
 func Test_Cov9_Attributes_IsKeyValuePairsEmpty(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsKeyValuePairsEmpty() {
-		t.Fatal("expected key value pairs empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsKeyValuePairsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected key value pairs empty", actual)
 }
 
 func Test_Cov9_Attributes_IsAnyKeyValuePairsEmpty(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsAnyKeyValuePairsEmpty() {
-		t.Fatal("expected any key value pairs empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsAnyKeyValuePairsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected any key value pairs empty", actual)
 }
 
 func Test_Cov9_Attributes_IsUserInfoEmpty_VirtualUser_SystemUser(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsUserInfoEmpty() {
-		t.Fatal("expected user info empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsUserInfoEmpty()}
 
-	if attr.VirtualUser() != nil {
-		t.Fatal("expected nil VirtualUser")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected user info empty", actual)
 
-	if attr.SystemUser() != nil {
-		t.Fatal("expected nil SystemUser")
-	}
+	actual := args.Map{"result": attr.VirtualUser() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil VirtualUser", actual)
+
+	actual := args.Map{"result": attr.SystemUser() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil SystemUser", actual)
 
 	// With user info
 	user := corepayload.New.User.UsingName("Alice")
@@ -385,172 +494,220 @@ func Test_Cov9_Attributes_IsUserInfoEmpty_VirtualUser_SystemUser(t *testing.T) {
 	userInfo := &corepayload.UserInfo{User: user, SystemUser: sysUser}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{UserInfo: userInfo})
 
-	if attr2.IsUserInfoEmpty() {
-		t.Fatal("expected user info not empty")
-	}
+	actual := args.Map{"result": attr2.IsUserInfoEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected user info not empty", actual)
 
-	if attr2.VirtualUser().Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": attr2.VirtualUser().Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
-	if attr2.SystemUser().Name != "sys" {
-		t.Fatal("expected sys")
-	}
+	actual := args.Map{"result": attr2.SystemUser().Name != "sys"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected sys", actual)
 }
 
 func Test_Cov9_Attributes_SessionUser(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.SessionUser() != nil {
-		t.Fatal("expected nil SessionUser")
-	}
+	// Act
+	actual := args.Map{"result": attr.SessionUser() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil SessionUser", actual)
 
 	user := corepayload.New.User.UsingName("SessionUser")
 	si := &corepayload.SessionInfo{Id: "s1", User: user}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{SessionInfo: si})
 
-	if attr2.SessionUser().Name != "SessionUser" {
-		t.Fatal("expected SessionUser")
-	}
+	actual := args.Map{"result": attr2.SessionUser().Name != "SessionUser"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected SessionUser", actual)
 }
 
 func Test_Cov9_Attributes_IsAuthInfoEmpty_IsSessionInfoEmpty(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if !attr.IsAuthInfoEmpty() {
-		t.Fatal("expected auth info empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsAuthInfoEmpty()}
 
-	if !attr.IsSessionInfoEmpty() {
-		t.Fatal("expected session info empty")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected auth info empty", actual)
+
+	actual := args.Map{"result": attr.IsSessionInfoEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected session info empty", actual)
 }
 
 func Test_Cov9_Attributes_HasUserInfo_HasAuthInfo_HasSessionInfo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasUserInfo() {
-		t.Fatal("expected no user info")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasUserInfo()}
 
-	if attr.HasAuthInfo() {
-		t.Fatal("expected no auth info")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no user info", actual)
 
-	if attr.HasSessionInfo() {
-		t.Fatal("expected no session info")
-	}
+	actual := args.Map{"result": attr.HasAuthInfo()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no auth info", actual)
+
+	actual := args.Map{"result": attr.HasSessionInfo()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no session info", actual)
 }
 
 func Test_Cov9_Attributes_SessionInfo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.SessionInfo() != nil {
-		t.Fatal("expected nil SessionInfo")
-	}
+	// Act
+	actual := args.Map{"result": attr.SessionInfo() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil SessionInfo", actual)
 
 	si := &corepayload.SessionInfo{Id: "s1"}
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{SessionInfo: si})
 
-	if attr2.SessionInfo().Id != "s1" {
-		t.Fatal("expected s1")
-	}
+	actual := args.Map{"result": attr2.SessionInfo().Id != "s1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 }
 
 func Test_Cov9_Attributes_AuthType(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.AuthType() != "" {
-		t.Fatal("expected empty auth type")
-	}
+	// Act
+	actual := args.Map{"result": attr.AuthType() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty auth type", actual)
 
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{ActionType: "login"})
 
-	if attr2.AuthType() != "login" {
-		t.Fatal("expected login")
-	}
+	actual := args.Map{"result": attr2.AuthType() != "login"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected login", actual)
 }
 
 func Test_Cov9_Attributes_ResourceName(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.ResourceName() != "" {
-		t.Fatal("expected empty resource name")
-	}
+	// Act
+	actual := args.Map{"result": attr.ResourceName() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty resource name", actual)
 
 	attr2 := corepayload.New.Attributes.UsingAuthInfo(&corepayload.AuthInfo{ResourceName: "/api/test"})
 
-	if attr2.ResourceName() != "/api/test" {
-		t.Fatal("expected /api/test")
-	}
+	actual := args.Map{"result": attr2.ResourceName() != "/api/test"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected /api/test", actual)
 }
 
 func Test_Cov9_Attributes_HasStringKeyValuePairs(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasStringKeyValuePairs() {
-		t.Fatal("expected false")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasStringKeyValuePairs()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov9_Attributes_HasAnyKeyValuePairs(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasAnyKeyValuePairs() {
-		t.Fatal("expected false")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasAnyKeyValuePairs()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov9_Attributes_HasDynamicPayloads(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.HasDynamicPayloads() {
-		t.Fatal("expected false")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasDynamicPayloads()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
 	attr2 := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	if !attr2.HasDynamicPayloads() {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": attr2.HasDynamicPayloads()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_Cov9_Attributes_GetStringKeyValue(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	_, found := nilAttr.GetStringKeyValue("k")
 
-	if found {
-		t.Fatal("nil should not find")
-	}
+	// Act
+	actual := args.Map{"result": found}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not find", actual)
 
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 	val, found := attr.GetStringKeyValue("k")
 
-	if !found || val != "v" {
-		t.Fatal("expected v for key k")
-	}
+	actual := args.Map{"result": found || val != "v"}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected v for key k", actual)
 }
 
 func Test_Cov9_Attributes_GetAnyKeyValue(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	_, found := nilAttr.GetAnyKeyValue("k")
 
-	if found {
-		t.Fatal("nil should not find")
-	}
+	// Act
+	actual := args.Map{"result": found}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not find", actual)
 }
 
 func Test_Cov9_Attributes_IsErrorDifferent_IsErrorEqual(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 
-	if attr.IsErrorDifferent(nil) {
-		t.Fatal("expected not different when both empty")
-	}
+	// Act
+	actual := args.Map{"result": attr.IsErrorDifferent(nil)}
 
-	if !attr.IsErrorEqual(nil) {
-		t.Fatal("expected equal when both empty")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not different when both empty", actual)
+
+	actual := args.Map{"result": attr.IsErrorEqual(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal when both empty", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -569,130 +726,162 @@ func Test_Cov9_Attributes_MustBeEmptyError(t *testing.T) {
 }
 
 func Test_Cov9_Attributes_SetAuthInfo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	result := attr.SetAuthInfo(&corepayload.AuthInfo{ActionType: "test"})
 
-	if result.AuthInfo.ActionType != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": result.AuthInfo.ActionType != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
 	// nil receiver
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetAuthInfo(&corepayload.AuthInfo{ActionType: "new"})
 
-	if result == nil {
-		t.Fatal("expected non-nil result from nil receiver")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result from nil receiver", actual)
 }
 
 func Test_Cov9_Attributes_SetUserInfo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	attr.AuthInfo = &corepayload.AuthInfo{}
 	user := corepayload.New.User.UsingName("Alice")
 	userInfo := &corepayload.UserInfo{User: user}
 	result := attr.SetUserInfo(userInfo)
 
-	if result.AuthInfo.UserInfo.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": result.AuthInfo.UserInfo.User.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	// nil receiver
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetUserInfo(userInfo)
 
-	if result == nil {
-		t.Fatal("expected non-nil result from nil receiver")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result from nil receiver", actual)
 }
 
 func Test_Cov9_Attributes_AddNewStringKeyValueOnly(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	added := attr.AddNewStringKeyValueOnly("k", "v")
 
-	if !added {
-		t.Fatal("expected added")
-	}
+	// Act
+	actual := args.Map{"result": added}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected added", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.AddNewStringKeyValueOnly("k", "v") {
-		t.Fatal("nil should not add")
-	}
+	actual := args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not add", actual)
 }
 
 func Test_Cov9_Attributes_AddNewAnyKeyValueOnly(t *testing.T) {
+	// Arrange
 	anyMap := coredynamic.NewMapAnyItems(0)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 	added := attr.AddNewAnyKeyValueOnly("k", 42)
 
-	if !added {
-		t.Fatal("expected added")
-	}
+	// Act
+	actual := args.Map{"result": added}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected added", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.AddNewAnyKeyValueOnly("k", 42) {
-		t.Fatal("nil should not add")
-	}
+	actual := args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", 42)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not add", actual)
 }
 
 func Test_Cov9_Attributes_AddOrUpdateString(t *testing.T) {
+	// Arrange
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr := corepayload.New.Attributes.UsingKeyValues(hm)
 	isNew := attr.AddOrUpdateString("k2", "v2")
 
-	if !isNew {
-		t.Fatal("expected new key")
-	}
+	// Act
+	actual := args.Map{"result": isNew}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected new key", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.AddOrUpdateString("k", "v") {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilAttr.AddOrUpdateString("k", "v")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_Attributes_AddOrUpdateAnyItem(t *testing.T) {
+	// Arrange
 	anyMap := coredynamic.NewMapAnyItems(0)
 	attr := corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 	isNew := attr.AddOrUpdateAnyItem("k", 42)
 
-	if !isNew {
-		t.Fatal("expected new key")
-	}
+	// Act
+	actual := args.Map{"result": isNew}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected new key", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.AddOrUpdateAnyItem("k", 42) {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilAttr.AddOrUpdateAnyItem("k", 42)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_Attributes_SetBasicErr(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	result := attr.SetBasicErr(nil)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// nil receiver
 	var nilAttr *corepayload.Attributes
 	result = nilAttr.SetBasicErr(nil)
 
-	if result == nil {
-		t.Fatal("expected non-nil from nil receiver")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil from nil receiver", actual)
 }
 
 func Test_Cov9_Attributes_Clear_Dispose(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	attr.AddNewStringKeyValueOnly("k", "v")
 	attr.Clear()
 
-	if attr.HasStringKeyValuePairs() {
-		t.Fatal("expected empty after clear")
-	}
+	// Act
+	actual := args.Map{"result": attr.HasStringKeyValuePairs()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty after clear", actual)
 
 	attr2 := corepayload.New.Attributes.Empty()
 	attr2.Dispose()
@@ -708,67 +897,87 @@ func Test_Cov9_Attributes_Clear_Dispose(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Attributes_PayloadsPrettyString(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"key":"value"}`))
 	result := attr.PayloadsPrettyString()
 
-	if result == "" {
-		t.Fatal("expected pretty string")
-	}
+	// Act
+	actual := args.Map{"result": result == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected pretty string", actual)
 
 	var nilAttr *corepayload.Attributes
 
-	if nilAttr.PayloadsPrettyString() != "" {
-		t.Fatal("nil should return empty")
-	}
+	actual := args.Map{"result": nilAttr.PayloadsPrettyString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov9_Attributes_PayloadsJsonResult(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"key":"value"}`))
 	result := attr.PayloadsJsonResult()
 
-	if result == nil {
-		t.Fatal("expected non-nil result")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 
 	emptyAttr := corepayload.New.Attributes.Empty()
 	result = emptyAttr.PayloadsJsonResult()
 
-	if result == nil {
-		t.Fatal("expected non-nil empty result")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil empty result", actual)
 }
 
 func Test_Cov9_Attributes_JsonString_JsonStringMust(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	s := attr.JsonString()
 
-	if s == "" {
-		t.Fatal("expected non-empty json string")
-	}
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json string", actual)
 
 	s = attr.JsonStringMust()
 
-	if s == "" {
-		t.Fatal("expected non-empty json string must")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json string must", actual)
 }
 
 func Test_Cov9_Attributes_String(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	s := attr.String()
 
-	if s == "" {
-		t.Fatal("expected non-empty string")
-	}
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_Cov9_Attributes_PrettyJsonString(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	s := attr.PrettyJsonString()
 
-	if s == "" {
-		t.Fatal("expected non-empty pretty json")
-	}
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty pretty json", actual)
 }
 
 func Test_Cov9_Attributes_Json_JsonPtr(t *testing.T) {
@@ -792,112 +1001,152 @@ func Test_Cov9_Attributes_NonPtr(t *testing.T) {
 }
 
 func Test_Cov9_Attributes_AsJsonContractsBinder(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	binder := attr.AsJsonContractsBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil binder")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil binder", actual)
 }
 
 func Test_Cov9_Attributes_AsAttributesBinder(t *testing.T) {
+	// Arrange
 	attr := corepayload.Attributes{}
 	binder := attr.AsAttributesBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil binder")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil binder", actual)
 }
 
 func Test_Cov9_Attributes_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	attr := &corepayload.Attributes{}
 	jsonResult := corejson.NewPtr(corepayload.Attributes{})
 	result, err := attr.ParseInjectUsingJson(jsonResult)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
 
-	if result == nil {
-		t.Fatal("expected non-nil result")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
 func Test_Cov9_Attributes_ParseInjectUsingJsonMust(t *testing.T) {
+	// Arrange
 	attr := &corepayload.Attributes{}
 	jsonResult := corejson.NewPtr(corepayload.Attributes{})
 	result := attr.ParseInjectUsingJsonMust(jsonResult)
 
-	if result == nil {
-		t.Fatal("expected non-nil result")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
 func Test_Cov9_Attributes_JsonParseSelfInject(t *testing.T) {
+	// Arrange
 	attr := &corepayload.Attributes{}
 	jsonResult := corejson.NewPtr(corepayload.Attributes{})
 	err := attr.JsonParseSelfInject(jsonResult)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_Cov9_Attributes_DeserializeDynamicPayloads(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 	var s string
 	err := attr.DeserializeDynamicPayloads(&s)
 
-	if err != nil || s != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_Cov9_Attributes_DeserializeDynamicPayloadsMust(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 	var s string
 	attr.DeserializeDynamicPayloadsMust(&s)
 
-	if s != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_Cov9_Attributes_DynamicPayloadsDeserialize(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 	var s string
 	err := attr.DynamicPayloadsDeserialize(&s)
 
-	if err != nil || s != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	// nil receiver
 	var nilAttr *corepayload.Attributes
 	err = nilAttr.DynamicPayloadsDeserialize(&s)
 
-	if err == nil {
-		t.Fatal("nil should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return error", actual)
 }
 
 func Test_Cov9_Attributes_DynamicPayloadsDeserializeMust(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 	var s string
 	attr.DynamicPayloadsDeserializeMust(&s)
 
-	if s != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
 func Test_Cov9_Attributes_AnyKeyReflectSetTo(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	err := nilAttr.AnyKeyReflectSetTo("k", nil)
 
-	if err == nil {
-		t.Fatal("nil should return error")
-	}
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return error", actual)
 }
 
 func Test_Cov9_Attributes_ReflectSetTo(t *testing.T) {
@@ -911,79 +1160,99 @@ func Test_Cov9_Attributes_ReflectSetTo(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Attributes_IsEqual_AllBranches(t *testing.T) {
+	// Arrange
 	var nilA, nilB *corepayload.Attributes
 
-	if !nilA.IsEqual(nilB) {
-		t.Fatal("both nil should be equal")
-	}
+	// Act
+	actual := args.Map{"result": nilA.IsEqual(nilB)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
 	attr := corepayload.New.Attributes.Empty()
 
-	if nilA.IsEqual(attr) {
-		t.Fatal("nil vs non-nil should not be equal")
-	}
+	actual := args.Map{"result": nilA.IsEqual(attr)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
-	if attr.IsEqual(nilA) {
-		t.Fatal("non-nil vs nil should not be equal")
-	}
+	actual := args.Map{"result": attr.IsEqual(nilA)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 
 	// Same pointer
-	if !attr.IsEqual(attr) {
-		t.Fatal("same pointer should be equal")
-	}
+	actual := args.Map{"result": attr.IsEqual(attr)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 
 	// Different paging
 	a1 := corepayload.New.Attributes.Empty()
 	a2 := corepayload.New.Attributes.Empty()
 	a1.PagingInfo = &corepayload.PagingInfo{TotalPages: 1}
 
-	if a1.IsEqual(a2) {
-		t.Fatal("different paging should not be equal")
-	}
+	actual := args.Map{"result": a1.IsEqual(a2)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different paging should not be equal", actual)
 }
 
 func Test_Cov9_Attributes_Clone_Shallow(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 	cloned, err := attr.Clone(false)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
 
-	if string(cloned.DynamicPayloads) != `"data"` {
-		t.Fatal("expected cloned data")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cloned data", actual)
 }
 
 func Test_Cov9_Attributes_Clone_Deep(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"data"`))
 	cloned, err := attr.Clone(true)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
 
-	if string(cloned.DynamicPayloads) != `"data"` {
-		t.Fatal("expected cloned data")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": string(cloned.DynamicPayloads) != `"data"`}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cloned data", actual)
 }
 
 func Test_Cov9_Attributes_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	cloned, err := nilAttr.ClonePtr(true)
 
-	if err != nil || cloned != nil {
-		t.Fatal("nil ClonePtr should return nil, nil")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || cloned != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil, nil", actual)
 }
 
 func Test_Cov9_Attributes_Clone_NilReturnsEmpty(t *testing.T) {
+	// Arrange
 	var nilAttr *corepayload.Attributes
 	cloned, err := nilAttr.Clone(true)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	_ = cloned
 }
@@ -993,39 +1262,51 @@ func Test_Cov9_Attributes_Clone_NilReturnsEmpty(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadWrapper_HasSafeItems(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if pw.HasSafeItems() {
-		t.Fatal("empty should not have safe items")
-	}
+	// Act
+	actual := args.Map{"result": pw.HasSafeItems()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should not have safe items", actual)
 }
 
 func Test_Cov9_PayloadWrapper_DynamicPayloads(t *testing.T) {
+	// Arrange
 	var nilPW *corepayload.PayloadWrapper
 	p := nilPW.DynamicPayloads()
 
-	if len(p) != 0 {
-		t.Fatal("nil should return empty")
-	}
+	// Act
+	actual := args.Map{"result": len(p) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 
 	pw := corepayload.New.PayloadWrapper.Empty()
 	_ = pw.DynamicPayloads()
 }
 
 func Test_Cov9_PayloadWrapper_SetDynamicPayloads(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	err := pw.SetDynamicPayloads([]byte("data"))
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 	err = nilPW.SetDynamicPayloads([]byte("data"))
 
-	if err == nil {
-		t.Fatal("nil should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_AttrAsBinder(t *testing.T) {
@@ -1034,24 +1315,33 @@ func Test_Cov9_PayloadWrapper_AttrAsBinder(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_InitializeAttributesOnNull(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{}
 	binder := pw.InitializeAttributesOnNull()
 
-	if binder == nil {
-		t.Fatal("expected non-nil binder")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil binder", actual)
 }
 
 func Test_Cov9_PayloadWrapper_BasicError(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	be := pw.BasicError()
 
-	if be != nil {
-		t.Fatal("expected nil")
-	}
+	// Act
+	actual := args.Map{"result": be != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_All_AllSafe(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	id, name, entity, cat, payloads := pw.All()
 	_, _, _, _, _ = id, name, entity, cat, payloads
@@ -1062,12 +1352,16 @@ func Test_Cov9_PayloadWrapper_All_AllSafe(t *testing.T) {
 	var nilPW *corepayload.PayloadWrapper
 	id, name, entity, cat, payloads = nilPW.AllSafe()
 
-	if id != "" || name != "" {
-		t.Fatal("nil AllSafe should return empty strings")
-	}
+	// Act
+	actual := args.Map{"result": id != "" || name != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil AllSafe should return empty strings", actual)
 }
 
 func Test_Cov9_PayloadWrapper_PayloadName_Category_TaskType_EntityType(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{
 		Name:         "n",
 		CategoryName: "c",
@@ -1077,7 +1371,13 @@ func Test_Cov9_PayloadWrapper_PayloadName_Category_TaskType_EntityType(t *testin
 
 	if pw.PayloadName() != "n" || pw.PayloadCategory() != "c" ||
 		pw.PayloadTaskType() != "t" || pw.PayloadEntityType() != "e" {
-		t.Fatal("unexpected values")
+
+	// Act
+		actual := args.Map{"result": false}
+
+	// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "unexpected values", actual)
 	}
 }
 
@@ -1088,12 +1388,16 @@ func Test_Cov9_PayloadWrapper_PayloadDynamic_Value(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_PayloadProperties(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	props := pw.PayloadProperties()
 
-	if props == nil {
-		t.Fatal("expected non-nil properties")
-	}
+	// Act
+	actual := args.Map{"result": props == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil properties", actual)
 }
 
 func Test_Cov9_PayloadWrapper_HandleError(t *testing.T) {
@@ -1110,152 +1414,177 @@ func Test_Cov9_PayloadWrapper_AnyAttributes_ReflectSetAttributes(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_IdString_IdInteger(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Identifier: "42"}
 
-	if pw.IdString() != "42" {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": pw.IdString() != "42"}
 
-	if pw.IdInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
+
+	actual := args.Map{"result": pw.IdInteger() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Serialize(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	_, err := pw.Serialize()
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	bytes := pw.SerializeMust()
 
-	if len(bytes) == 0 {
-		t.Fatal("expected serialized bytes")
-	}
+	actual := args.Map{"result": len(bytes) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected serialized bytes", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Username(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if pw.Username() != "" {
-		t.Fatal("expected empty username")
-	}
+	// Act
+	actual := args.Map{"result": pw.Username() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty username", actual)
 
 	user := corepayload.New.User.UsingName("Alice")
 	pw.Attributes.AuthInfo = &corepayload.AuthInfo{
 		UserInfo: &corepayload.UserInfo{User: user},
 	}
 
-	if pw.Username() != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": pw.Username() != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Error(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if pw.Error() != nil {
-		t.Fatal("expected nil error")
-	}
+	// Act
+	actual := args.Map{"result": pw.Error() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsEqual_AllBranches(t *testing.T) {
+	// Arrange
 	var nilA, nilB *corepayload.PayloadWrapper
 
-	if !nilA.IsEqual(nilB) {
-		t.Fatal("both nil should be equal")
-	}
+	// Act
+	actual := args.Map{"result": nilA.IsEqual(nilB)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if nilA.IsEqual(pw) {
-		t.Fatal("nil vs non-nil should not be equal")
-	}
+	actual := args.Map{"result": nilA.IsEqual(pw)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
-	if pw.IsEqual(nilA) {
-		t.Fatal("non-nil vs nil should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(nilA)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 
-	if !pw.IsEqual(pw) {
-		t.Fatal("same pointer should be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 
 	pw2 := corepayload.New.PayloadWrapper.Empty()
 
-	if !pw.IsEqual(pw2) {
-		t.Fatal("two empty should be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "two empty should be equal", actual)
 
 	// Different Name
 	pw3 := corepayload.New.PayloadWrapper.Empty()
 	pw3.Name = "different"
 
-	if pw.IsEqual(pw3) {
-		t.Fatal("different name should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw3)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different name should not be equal", actual)
 
 	// Different Identifier
 	pw4 := corepayload.New.PayloadWrapper.Empty()
 	pw4.Identifier = "diff"
 
-	if pw.IsEqual(pw4) {
-		t.Fatal("different identifier should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw4)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different identifier should not be equal", actual)
 
 	// Different TaskTypeName
 	pw5 := corepayload.New.PayloadWrapper.Empty()
 	pw5.TaskTypeName = "diff"
 
-	if pw.IsEqual(pw5) {
-		t.Fatal("different task type should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different task type should not be equal", actual)
 
 	// Different EntityType
 	pw6 := corepayload.New.PayloadWrapper.Empty()
 	pw6.EntityType = "diff"
 
-	if pw.IsEqual(pw6) {
-		t.Fatal("different entity type should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw6)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different entity type should not be equal", actual)
 
 	// Different CategoryName
 	pw7 := corepayload.New.PayloadWrapper.Empty()
 	pw7.CategoryName = "diff"
 
-	if pw.IsEqual(pw7) {
-		t.Fatal("different category should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw7)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different category should not be equal", actual)
 
 	// Different HasManyRecords
 	pw8 := corepayload.New.PayloadWrapper.Empty()
 	pw8.HasManyRecords = true
 
-	if pw.IsEqual(pw8) {
-		t.Fatal("different HasManyRecords should not be equal")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw8)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different HasManyRecords should not be equal", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsPayloadsEqual(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte("data")}
 
-	if !pw.IsPayloadsEqual([]byte("data")) {
-		t.Fatal("expected equal")
-	}
+	// Act
+	actual := args.Map{"result": pw.IsPayloadsEqual([]byte("data"))}
 
-	if pw.IsPayloadsEqual([]byte("other")) {
-		t.Fatal("expected not equal")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
+
+	actual := args.Map{"result": pw.IsPayloadsEqual([]byte("other"))}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	if nilPW.IsPayloadsEqual([]byte("data")) {
-		t.Fatal("nil should not be equal")
-	}
+	actual := args.Map{"result": nilPW.IsPayloadsEqual([]byte("data"))}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsName_IsIdentifier_IsTaskTypeName_IsEntityType_IsCategory(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{
 		Name:         "n",
 		Identifier:   "id",
@@ -1264,176 +1593,219 @@ func Test_Cov9_PayloadWrapper_IsName_IsIdentifier_IsTaskTypeName_IsEntityType_Is
 		CategoryName: "cat",
 	}
 
-	if !pw.IsName("n") {
-		t.Fatal("expected true")
-	}
+	// Act
+	actual := args.Map{"result": pw.IsName("n")}
 
-	if !pw.IsIdentifier("id") {
-		t.Fatal("expected true")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	if !pw.IsTaskTypeName("task") {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.IsIdentifier("id")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	if !pw.IsEntityType("entity") {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.IsTaskTypeName("task")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
-	if !pw.IsCategory("cat") {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.IsEntityType("entity")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+
+	actual := args.Map{"result": pw.IsCategory("cat")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_Cov9_PayloadWrapper_HasAnyItem_HasIssuesOrEmpty(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if pw.HasAnyItem() {
-		t.Fatal("empty should not have any item")
-	}
+	// Act
+	actual := args.Map{"result": pw.HasAnyItem()}
 
-	if !pw.HasIssuesOrEmpty() {
-		t.Fatal("empty should have issues or be empty")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should not have any item", actual)
+
+	actual := args.Map{"result": pw.HasIssuesOrEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should have issues or be empty", actual)
 }
 
 func Test_Cov9_PayloadWrapper_HasError_IsEmptyError(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if pw.HasError() {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": pw.HasError()}
 
-	if !pw.IsEmptyError() {
-		t.Fatal("expected empty error")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": pw.IsEmptyError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_HasAttributes_IsEmptyAttributes(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 
-	if !pw.HasAttributes() {
-		t.Fatal("expected attributes")
-	}
+	// Act
+	actual := args.Map{"result": pw.HasAttributes()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected attributes", actual)
 
 	pw2 := &corepayload.PayloadWrapper{}
 
-	if !pw2.IsEmptyAttributes() {
-		t.Fatal("expected empty attributes")
-	}
+	actual := args.Map{"result": pw2.IsEmptyAttributes()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty attributes", actual)
 }
 
 func Test_Cov9_PayloadWrapper_HasSingleRecord(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{HasManyRecords: false}
 
-	if !pw.HasSingleRecord() {
-		t.Fatal("expected single record")
-	}
+	// Act
+	actual := args.Map{"result": pw.HasSingleRecord()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected single record", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsNull_HasAnyNil(t *testing.T) {
+	// Arrange
 	var nilPW *corepayload.PayloadWrapper
 
-	if !nilPW.IsNull() {
-		t.Fatal("expected null")
-	}
+	// Act
+	actual := args.Map{"result": nilPW.IsNull()}
 
-	if !nilPW.HasAnyNil() {
-		t.Fatal("expected has any nil")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected null", actual)
+
+	actual := args.Map{"result": nilPW.HasAnyNil()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected has any nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Count_Length_IsEmpty_HasItems(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte("data")}
 
-	if pw.Count() != 4 {
-		t.Fatal("expected 4")
-	}
+	// Act
+	actual := args.Map{"result": pw.Count() != 4}
 
-	if pw.Length() != 4 {
-		t.Fatal("expected 4")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 
-	if pw.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": pw.Length() != 4}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 
-	if !pw.HasItems() {
-		t.Fatal("expected has items")
-	}
+	actual := args.Map{"result": pw.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
+
+	actual := args.Map{"result": pw.HasItems()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected has items", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	if nilPW.Length() != 0 {
-		t.Fatal("nil Length should be 0")
-	}
+	actual := args.Map{"result": nilPW.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil Length should be 0", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IdentifierInteger_UnsignedInteger(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Identifier: "42"}
 
-	if pw.IdentifierInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": pw.IdentifierInteger() != 42}
 
-	if pw.IdentifierUnsignedInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
+
+	actual := args.Map{"result": pw.IdentifierUnsignedInteger() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	// Empty identifier
 	pw2 := &corepayload.PayloadWrapper{}
 
-	if pw2.IdentifierInteger() >= 0 {
-		t.Fatal("expected invalid value")
-	}
+	actual := args.Map{"result": pw2.IdentifierInteger() >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
 func Test_Cov9_PayloadWrapper_BytesConverter(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte("data")}
 	bc := pw.BytesConverter()
 
-	if bc == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": bc == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Deserialize(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte(`"hello"`)}
 	var s string
 	err := pw.Deserialize(&s)
 
-	if err != nil || s != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	err = pw.PayloadDeserialize(&s)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_MarshalJSON_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	pw.Payloads = []byte(`"hello"`)
 
 	jsonBytes, err := pw.MarshalJSON()
 
-	if err != nil {
-		t.Fatal("expected no marshal error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no marshal error", actual)
 
 	pw2 := &corepayload.PayloadWrapper{}
 	err = pw2.UnmarshalJSON(jsonBytes)
 
-	if err != nil {
-		t.Fatal("expected no unmarshal error")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no unmarshal error", actual)
 
-	if pw2.Name != "test" {
-		t.Fatal("expected test")
-	}
+	actual := args.Map{"result": pw2.Name != "test"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
 func Test_Cov9_PayloadWrapper_String_PrettyJsonString(t *testing.T) {
@@ -1461,89 +1833,113 @@ func Test_Cov9_PayloadWrapper_JsonModel_JsonModelAny(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{}
 	jsonResult := corejson.NewPtr(corepayload.PayloadWrapper{Name: "test"})
 	result, err := pw.ParseInjectUsingJson(jsonResult)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_JsonParseSelfInject(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{}
 	jsonResult := corejson.NewPtr(corepayload.PayloadWrapper{})
 	err := pw.JsonParseSelfInject(jsonResult)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_PayloadsString(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte("hello")}
 
-	if pw.PayloadsString() != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": pw.PayloadsString() != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	emptyPW := &corepayload.PayloadWrapper{}
 
-	if emptyPW.PayloadsString() != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": emptyPW.PayloadsString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_Cov9_PayloadWrapper_PayloadsJsonResult(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{Payloads: []byte(`{"k":"v"}`)}
 	result := pw.PayloadsJsonResult()
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	emptyPW := corepayload.PayloadWrapper{}
 	result = emptyPW.PayloadsJsonResult()
 
-	if result == nil {
-		t.Fatal("expected non-nil empty")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil empty", actual)
 }
 
 func Test_Cov9_PayloadWrapper_PayloadsPrettyString(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{Payloads: []byte(`{"k":"v"}`)}
 	result := pw.PayloadsPrettyString()
 
-	if result == "" {
-		t.Fatal("expected non-empty")
-	}
+	// Act
+	actual := args.Map{"result": result == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	emptyPW := corepayload.PayloadWrapper{}
 
-	if emptyPW.PayloadsPrettyString() != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": emptyPW.PayloadsPrettyString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Clear_Dispose(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Payloads = []byte("data")
 	pw.Clear()
 
-	if pw.Length() != 0 {
-		t.Fatal("expected 0 length after clear")
-	}
+	// Act
+	actual := args.Map{"result": pw.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 length after clear", actual)
 
 	pw2 := corepayload.New.PayloadWrapper.Empty()
 	pw2.Dispose()
 
-	if pw2.Attributes != nil {
-		t.Fatal("expected nil attributes after dispose")
-	}
+	actual := args.Map{"result": pw2.Attributes != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil attributes after dispose", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 	nilPW.Clear()
@@ -1551,46 +1947,63 @@ func Test_Cov9_PayloadWrapper_Clear_Dispose(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_AsJsonContractsBinder(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	binder := pw.AsJsonContractsBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Clone_Shallow(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	pw.Payloads = []byte("data")
 	cloned, err := pw.Clone(false)
 
-	if err != nil || cloned.Name != "test" {
-		t.Fatal("expected cloned with name test")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || cloned.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cloned with name test", actual)
 }
 
 func Test_Cov9_PayloadWrapper_Clone_Deep(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	pw.Payloads = []byte("data")
 	cloned, err := pw.Clone(true)
 
-	if err != nil || cloned.Name != "test" {
-		t.Fatal("expected cloned with name test")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || cloned.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cloned with name test", actual)
 }
 
 func Test_Cov9_PayloadWrapper_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var nilPW *corepayload.PayloadWrapper
 	cloned, err := nilPW.ClonePtr(true)
 
-	if err != nil || cloned != nil {
-		t.Fatal("nil ClonePtr should return nil, nil")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || cloned != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil, nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_NonPtr_ToPtr(t *testing.T) {
+	// Arrange
 	var nilPW *corepayload.PayloadWrapper
 	nonPtr := nilPW.NonPtr()
 	_ = nonPtr
@@ -1598,36 +2011,51 @@ func Test_Cov9_PayloadWrapper_NonPtr_ToPtr(t *testing.T) {
 	pw := corepayload.PayloadWrapper{Name: "test"}
 	ptr := pw.ToPtr()
 
-	if ptr.Name != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": ptr.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
 func Test_Cov9_PayloadWrapper_AsStandardTaskEntityDefiner(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{}
 	binder := pw.AsStandardTaskEntityDefinerContractsBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_AsPayloadsBinder(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{}
 	binder := pw.AsPayloadsBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_AsJsonMarshaller(t *testing.T) {
+	// Arrange
 	pw := corepayload.PayloadWrapper{}
 	m := pw.AsJsonMarshaller()
 
-	if m == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": m == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_ReflectSetTo(t *testing.T) {
@@ -1643,6 +2071,7 @@ func Test_Cov9_PayloadWrapper_ValueReflectSet(t *testing.T) {
 }
 
 func Test_Cov9_PayloadWrapper_IsStandardTaskEntityEqual(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 
@@ -1650,77 +2079,105 @@ func Test_Cov9_PayloadWrapper_IsStandardTaskEntityEqual(t *testing.T) {
 	pw2 := corepayload.New.PayloadWrapper.Empty()
 	pw2.Name = "test"
 
-	if !pw.IsStandardTaskEntityEqual(pw2) {
-		t.Fatal("expected equal")
-	}
+	// Act
+	actual := args.Map{"result": pw.IsStandardTaskEntityEqual(pw2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
 func Test_Cov9_PayloadWrapper_SetPayloadDynamic(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	result := pw.SetPayloadDynamic([]byte("data"))
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_SetPayloadDynamicAny(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	result, err := pw.SetPayloadDynamicAny("hello")
 
-	if err != nil || result == nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_SetAuthInfo(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	result := pw.SetAuthInfo(&corepayload.AuthInfo{ActionType: "login"})
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_SetUserInfo(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	user := corepayload.New.User.UsingName("Alice")
 	result := pw.SetUserInfo(&corepayload.UserInfo{User: user})
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_SetUser_SetSysUser(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	user := corepayload.New.User.UsingName("Alice")
 	result := pw.SetUser(user)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = pw.SetSysUser(sysUser)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_DeserializePayloadsToPayloadsCollection(t *testing.T) {
+	// Arrange
 	// Create a payload wrapper containing serialized collection
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Payloads = []byte(`[]`)
 	_, err := pw.DeserializePayloadsToPayloadsCollection()
 
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov9_PayloadWrapper_DeserializePayloadsToPayloadWrapper(t *testing.T) {
+	// Arrange
 	inner := corepayload.New.PayloadWrapper.Empty()
 	inner.Name = "inner"
 	jsonBytes, _ := inner.Serialize()
@@ -1728,37 +2185,48 @@ func Test_Cov9_PayloadWrapper_DeserializePayloadsToPayloadWrapper(t *testing.T) 
 	pw := &corepayload.PayloadWrapper{Payloads: jsonBytes}
 	result, err := pw.DeserializePayloadsToPayloadWrapper()
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
 
-	if result.Name != "inner" {
-		t.Fatal("expected inner")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
+
+	actual := args.Map{"result": result.Name != "inner"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected inner", actual)
 }
 
 func Test_Cov9_PayloadWrapper_ReCreateUsingJsonBytes(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	jsonBytes, _ := pw.Serialize()
 
 	result, err := pw.ReCreateUsingJsonBytes(jsonBytes)
 
-	if err != nil || result.Name != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
 func Test_Cov9_PayloadWrapper_ReCreateUsingJsonResult(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	jsonResult := pw.JsonPtr()
 
 	result, err := pw.ReCreateUsingJsonResult(jsonResult)
 
-	if err != nil || result.Name != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1766,81 +2234,98 @@ func Test_Cov9_PayloadWrapper_ReCreateUsingJsonResult(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadsCollection_Length_Count_IsEmpty(t *testing.T) {
+	// Arrange
 	var nilCol *corepayload.PayloadsCollection
 
-	if nilCol.Length() != 0 {
-		t.Fatal("nil Length should be 0")
-	}
+	// Act
+	actual := args.Map{"result": nilCol.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil Length should be 0", actual)
 
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if col.Count() != 0 || !col.IsEmpty() || col.HasAnyItem() {
-		t.Fatal("empty collection state mismatch")
-	}
+	actual := args.Map{"result": col.Count() != 0 || !col.IsEmpty() || col.HasAnyItem()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty collection state mismatch", actual)
 }
 
 func Test_Cov9_PayloadsCollection_LastIndex_HasIndex(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	pw := corepayload.New.PayloadWrapper.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	_ = pw
 
-	if col.LastIndex() != 0 {
-		t.Fatal("expected 0")
-	}
+	// Act
+	actual := args.Map{"result": col.LastIndex() != 0}
 
-	if !col.HasIndex(0) {
-		t.Fatal("expected true for index 0")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 
-	if col.HasIndex(1) {
-		t.Fatal("expected false for index 1")
-	}
+	actual := args.Map{"result": col.HasIndex(0)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for index 0", actual)
+
+	actual := args.Map{"result": col.HasIndex(1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for index 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_First_Last(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
 
-	if col.First().Name != "a" {
-		t.Fatal("expected a")
-	}
+	// Act
+	actual := args.Map{"result": col.First().Name != "a"}
 
-	if col.Last().Name != "b" {
-		t.Fatal("expected b")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
+
+	actual := args.Map{"result": col.Last().Name != "b"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected b", actual)
 
 	_ = col.FirstDynamic()
 	_ = col.LastDynamic()
 }
 
 func Test_Cov9_PayloadsCollection_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if col.FirstOrDefault() != nil {
-		t.Fatal("expected nil")
-	}
+	// Act
+	actual := args.Map{"result": col.FirstOrDefault() != nil}
 
-	if col.LastOrDefault() != nil {
-		t.Fatal("expected nil")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
+
+	actual := args.Map{"result": col.LastOrDefault() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	_ = col.FirstOrDefaultDynamic()
 	_ = col.LastOrDefaultDynamic()
 
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 
-	if col.FirstOrDefault().Name != "a" {
-		t.Fatal("expected a")
-	}
+	actual := args.Map{"result": col.FirstOrDefault().Name != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 
-	if col.LastOrDefault().Name != "a" {
-		t.Fatal("expected a")
-	}
+	actual := args.Map{"result": col.LastOrDefault().Name != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_Skip_Take_Limit(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -1848,87 +2333,102 @@ func Test_Cov9_PayloadsCollection_Skip_Take_Limit(t *testing.T) {
 
 	skipped := col.Skip(1)
 
-	if len(skipped) != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": len(skipped) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	_ = col.SkipDynamic(1)
 
 	skipCol := col.SkipCollection(1)
 
-	if skipCol.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": skipCol.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	taken := col.Take(2)
 
-	if len(taken) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": len(taken) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	_ = col.TakeDynamic(2)
 
 	takeCol := col.TakeCollection(2)
 
-	if takeCol.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": takeCol.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	limitCol := col.LimitCollection(2)
 
-	if limitCol.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": limitCol.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	safeLimitCol := col.SafeLimitCollection(100)
 
-	if safeLimitCol.Length() != 3 {
-		t.Fatal("expected 3")
-	}
+	actual := args.Map{"result": safeLimitCol.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
 	_ = col.LimitDynamic(2)
 	_ = col.Limit(2)
 }
 
 func Test_Cov9_PayloadsCollection_Strings(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 
 	strings := col.Strings()
 
-	if len(strings) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": len(strings) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_IsEqual(t *testing.T) {
+	// Arrange
 	var nilA, nilB *corepayload.PayloadsCollection
 
-	if !nilA.IsEqual(nilB) {
-		t.Fatal("both nil should be equal")
-	}
+	// Act
+	actual := args.Map{"result": nilA.IsEqual(nilB)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if nilA.IsEqual(col) {
-		t.Fatal("nil vs non-nil should not be equal")
-	}
+	actual := args.Map{"result": nilA.IsEqual(col)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
 	col2 := corepayload.New.PayloadsCollection.Empty()
 
-	if !col.IsEqual(col2) {
-		t.Fatal("two empty should be equal")
-	}
+	actual := args.Map{"result": col.IsEqual(col2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "two empty should be equal", actual)
 }
 
 func Test_Cov9_PayloadsCollection_IsEqualItems(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	pw := corepayload.New.PayloadWrapper.Empty()
 	col.AddsPtr(pw)
 
-	if !col.IsEqualItems(pw) {
-		t.Fatal("expected equal")
-	}
+	// Act
+	actual := args.Map{"result": col.IsEqualItems(pw)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1936,6 +2436,7 @@ func Test_Cov9_PayloadsCollection_IsEqualItems(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadsCollection_Filter(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -1944,12 +2445,16 @@ func Test_Cov9_PayloadsCollection_Filter(t *testing.T) {
 		return pw.Name == "a", false
 	})
 
-	if len(filtered) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": len(filtered) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterWithLimit(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -1959,12 +2464,16 @@ func Test_Cov9_PayloadsCollection_FilterWithLimit(t *testing.T) {
 		return true, false
 	})
 
-	if len(filtered) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": len(filtered) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FirstByFilter(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -1973,65 +2482,85 @@ func Test_Cov9_PayloadsCollection_FirstByFilter(t *testing.T) {
 		return pw.Name == "b"
 	})
 
-	if found == nil || found.Name != "b" {
-		t.Fatal("expected b")
-	}
+	// Act
+	actual := args.Map{"result": found == nil || found.Name != "b"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected b", actual)
 
 	notFound := col.FirstByFilter(func(pw *corepayload.PayloadWrapper) bool {
 		return pw.Name == "z"
 	})
 
-	if notFound != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": notFound != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FirstById(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Identifier: "id1", Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Identifier: "id2", Name: "b"})
 
 	found := col.FirstById("id2")
 
-	if found == nil || found.Name != "b" {
-		t.Fatal("expected b")
-	}
+	// Act
+	actual := args.Map{"result": found == nil || found.Name != "b"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected b", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FirstByCategory(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{CategoryName: "cat1", Name: "a"})
 
 	found := col.FirstByCategory("cat1")
 
-	if found == nil || found.Name != "a" {
-		t.Fatal("expected a")
-	}
+	// Act
+	actual := args.Map{"result": found == nil || found.Name != "a"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FirstByTaskType(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{TaskTypeName: "task1", Name: "a"})
 
 	found := col.FirstByTaskType("task1")
 
-	if found == nil || found.Name != "a" {
-		t.Fatal("expected a")
-	}
+	// Act
+	actual := args.Map{"result": found == nil || found.Name != "a"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FirstByEntityType(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{EntityType: "entity1", Name: "a"})
 
 	found := col.FirstByEntityType("entity1")
 
-	if found == nil || found.Name != "a" {
-		t.Fatal("expected a")
-	}
+	// Act
+	actual := args.Map{"result": found == nil || found.Name != "a"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -2040,12 +2569,16 @@ func Test_Cov9_PayloadsCollection_FilterCollection(t *testing.T) {
 		return pw.Name == "a", false
 	})
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_SkipFilterCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -2054,12 +2587,16 @@ func Test_Cov9_PayloadsCollection_SkipFilterCollection(t *testing.T) {
 		return pw.Name == "a", false
 	})
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterCollectionByIds(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Identifier: "id1", Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Identifier: "id2", Name: "b"})
@@ -2067,54 +2604,73 @@ func Test_Cov9_PayloadsCollection_FilterCollectionByIds(t *testing.T) {
 
 	filtered := col.FilterCollectionByIds("id1", "id3")
 
-	if filtered.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterNameCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
 
 	filtered := col.FilterNameCollection("a")
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterCategoryCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{CategoryName: "cat1"})
 
 	filtered := col.FilterCategoryCollection("cat1")
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterEntityTypeCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{EntityType: "entity1"})
 
 	filtered := col.FilterEntityTypeCollection("entity1")
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_FilterTaskTypeCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{TaskTypeName: "task1"})
 
 	filtered := col.FilterTaskTypeCollection("task1")
 
-	if filtered.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -2122,6 +2678,7 @@ func Test_Cov9_PayloadsCollection_FilterTaskTypeCollection(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadsCollection_GetPagesSize(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
 	for i := 0; i < 25; i++ {
@@ -2130,20 +2687,24 @@ func Test_Cov9_PayloadsCollection_GetPagesSize(t *testing.T) {
 
 	pages := col.GetPagesSize(10)
 
-	if pages != 3 {
-		t.Fatalf("expected 3 pages, got %d", pages)
-	}
+	// Act
+	actual := args.Map{"result": pages != 3}
 
-	if col.GetPagesSize(0) != 0 {
-		t.Fatal("zero page size should return 0")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 
-	if col.GetPagesSize(-1) != 0 {
-		t.Fatal("negative page size should return 0")
-	}
+	actual := args.Map{"result": col.GetPagesSize(0) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "zero page size should return 0", actual)
+
+	actual := args.Map{"result": col.GetPagesSize(-1) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "negative page size should return 0", actual)
 }
 
 func Test_Cov9_PayloadsCollection_GetPagedCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
 	for i := 0; i < 25; i++ {
@@ -2152,21 +2713,25 @@ func Test_Cov9_PayloadsCollection_GetPagedCollection(t *testing.T) {
 
 	pages := col.GetPagedCollection(10)
 
-	if len(pages) != 3 {
-		t.Fatalf("expected 3 pages, got %d", len(pages))
-	}
+	// Act
+	actual := args.Map{"result": len(pages) != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 
 	// Smaller than page size
 	small := corepayload.New.PayloadsCollection.Empty()
 	small.Add(corepayload.PayloadWrapper{Name: "a"})
 	pages = small.GetPagedCollection(10)
 
-	if len(pages) != 1 {
-		t.Fatal("expected 1 page")
-	}
+	actual := args.Map{"result": len(pages) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 page", actual)
 }
 
 func Test_Cov9_PayloadsCollection_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
 	for i := 0; i < 25; i++ {
@@ -2175,24 +2740,27 @@ func Test_Cov9_PayloadsCollection_GetSinglePageCollection(t *testing.T) {
 
 	page := col.GetSinglePageCollection(10, 1)
 
-	if page.Length() != 10 {
-		t.Fatalf("expected 10, got %d", page.Length())
-	}
+	// Act
+	actual := args.Map{"result": page.Length() != 10}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 10", actual)
 
 	page3 := col.GetSinglePageCollection(10, 3)
 
-	if page3.Length() != 5 {
-		t.Fatalf("expected 5, got %d", page3.Length())
-	}
+	actual := args.Map{"result": page3.Length() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	// Smaller than page size
 	small := corepayload.New.PayloadsCollection.Empty()
 	small.Add(corepayload.PayloadWrapper{Name: "a"})
 	page = small.GetSinglePageCollection(10, 1)
 
-	if page.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": page.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -2200,138 +2768,174 @@ func Test_Cov9_PayloadsCollection_GetSinglePageCollection(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadsCollection_Add_Adds(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Adds(corepayload.PayloadWrapper{Name: "b"}, corepayload.PayloadWrapper{Name: "c"})
 
-	if col.Length() != 3 {
-		t.Fatal("expected 3")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
 	// Adds empty
 	col.Adds()
 
-	if col.Length() != 3 {
-		t.Fatal("expected still 3")
-	}
+	actual := args.Map{"result": col.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected still 3", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AddsPtr(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	pw := corepayload.New.PayloadWrapper.Empty()
 	col.AddsPtr(pw)
 
-	if col.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// Empty
 	col.AddsPtr()
 
-	if col.Length() != 1 {
-		t.Fatal("expected still 1")
-	}
+	actual := args.Map{"result": col.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AddsPtrOptions(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Payloads = []byte("data")
 	col.AddsPtrOptions(false, pw)
 
-	if col.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// Skip issues
 	emptyPW := corepayload.New.PayloadWrapper.Empty()
 	col2 := corepayload.New.PayloadsCollection.Empty()
 	col2.AddsPtrOptions(true, emptyPW)
 
-	if col2.Length() != 0 {
-		t.Fatal("expected 0 (skipped)")
-	}
+	actual := args.Map{"result": col2.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 (skipped)", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AddsOptions(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.AddsOptions(false, corepayload.PayloadWrapper{Payloads: []byte("data")})
 
-	if col.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// Skip issues
 	col2 := corepayload.New.PayloadsCollection.Empty()
 	col2.AddsOptions(true, corepayload.PayloadWrapper{})
 
-	if col2.Length() != 0 {
-		t.Fatal("expected 0 (skipped)")
-	}
+	actual := args.Map{"result": col2.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 (skipped)", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AddsIf(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.AddsIf(true, corepayload.PayloadWrapper{Name: "a"})
 
-	if col.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	col.AddsIf(false, corepayload.PayloadWrapper{Name: "b"})
 
-	if col.Length() != 1 {
-		t.Fatal("expected still 1")
-	}
+	actual := args.Map{"result": col.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_InsertAt(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "c"})
 	col.InsertAt(1, corepayload.PayloadWrapper{Name: "b"})
 
-	if col.Length() != 3 {
-		t.Fatal("expected 3")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov9_PayloadsCollection_ConcatNew(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	newCol := col.ConcatNew(corepayload.PayloadWrapper{Name: "b"})
 
-	if newCol.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": newCol.Length() != 2}
 
-	if col.Length() != 1 {
-		t.Fatal("original should still be 1")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
+
+	actual := args.Map{"result": col.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "original should still be 1", actual)
 }
 
 func Test_Cov9_PayloadsCollection_ConcatNewPtr(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "b"
 	newCol := col.ConcatNewPtr(pw)
 
-	if newCol.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": newCol.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Cov9_PayloadsCollection_Reverse(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
 	col.Add(corepayload.PayloadWrapper{Name: "c"})
 	col.Reverse()
 
-	if col.First().Name != "c" || col.Last().Name != "a" {
-		t.Fatal("expected reversed")
-	}
+	// Act
+	actual := args.Map{"result": col.First().Name != "c" || col.Last().Name != "a"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected reversed", actual)
 
 	// Reverse 2 items
 	col2 := corepayload.New.PayloadsCollection.Empty()
@@ -2339,52 +2943,60 @@ func Test_Cov9_PayloadsCollection_Reverse(t *testing.T) {
 	col2.Add(corepayload.PayloadWrapper{Name: "b"})
 	col2.Reverse()
 
-	if col2.First().Name != "b" {
-		t.Fatal("expected b first")
-	}
+	actual := args.Map{"result": col2.First().Name != "b"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected b first", actual)
 
 	// Reverse 1 item
 	col3 := corepayload.New.PayloadsCollection.Empty()
 	col3.Add(corepayload.PayloadWrapper{Name: "a"})
 	col3.Reverse()
 
-	if col3.First().Name != "a" {
-		t.Fatal("expected a")
-	}
+	actual := args.Map{"result": col3.First().Name != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 
 	cloned := col.Clone()
 
-	if cloned.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": cloned.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	clonedPtr := col.ClonePtr()
 
-	if clonedPtr.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": clonedPtr.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// nil ClonePtr
 	var nilCol *corepayload.PayloadsCollection
 
-	if nilCol.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilCol.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
 func Test_Cov9_PayloadsCollection_Clear_Dispose(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Clear()
 
-	if col.Length() != 0 {
-		t.Fatal("expected 0 after clear")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 after clear", actual)
 
 	col2 := corepayload.New.PayloadsCollection.Empty()
 	col2.Dispose()
@@ -2400,6 +3012,7 @@ func Test_Cov9_PayloadsCollection_Clear_Dispose(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadsCollection_StringsUsingFmt(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 
@@ -2407,12 +3020,16 @@ func Test_Cov9_PayloadsCollection_StringsUsingFmt(t *testing.T) {
 		return pw.Name
 	})
 
-	if len(strings) != 1 || strings[0] != "a" {
-		t.Fatal("expected a")
-	}
+	// Act
+	actual := args.Map{"result": len(strings) != 1 || strings[0] != "a"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
 func Test_Cov9_PayloadsCollection_JoinUsingFmt(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a"})
 	col.Add(corepayload.PayloadWrapper{Name: "b"})
@@ -2421,20 +3038,27 @@ func Test_Cov9_PayloadsCollection_JoinUsingFmt(t *testing.T) {
 		return pw.Name
 	}, ",")
 
-	if result != "a,b" {
-		t.Fatal("expected a,b")
-	}
+	// Act
+	actual := args.Map{"result": result != "a,b"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected a,b", actual)
 }
 
 func Test_Cov9_PayloadsCollection_JsonStrings_JoinJsonStrings(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
 	jsonStrings := col.JsonStrings()
 
-	if len(jsonStrings) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": len(jsonStrings) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_ = col.JoinJsonStrings(",")
 }
@@ -2447,55 +3071,67 @@ func Test_Cov9_PayloadsCollection_Join(t *testing.T) {
 }
 
 func Test_Cov9_PayloadsCollection_JsonString_String(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if col.JsonString() != "" {
-		t.Fatal("empty should return empty string")
-	}
+	// Act
+	actual := args.Map{"result": col.JsonString() != ""}
 
-	if col.String() != "" {
-		t.Fatal("empty should return empty string")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
+
+	actual := args.Map{"result": col.String() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
 
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
-	if col.JsonString() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": col.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
-	if col.String() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": col.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_Cov9_PayloadsCollection_PrettyJsonString(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if col.PrettyJsonString() != "" {
-		t.Fatal("empty should return empty string")
-	}
+	// Act
+	actual := args.Map{"result": col.PrettyJsonString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
 
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
-	if col.PrettyJsonString() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": col.PrettyJsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_Cov9_PayloadsCollection_CsvStrings_JoinCsv_JoinCsvLine(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if len(col.CsvStrings()) != 0 {
-		t.Fatal("empty csv should be empty")
-	}
+	// Act
+	actual := args.Map{"result": len(col.CsvStrings()) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty csv should be empty", actual)
 
 	col.Add(corepayload.PayloadWrapper{Name: "a", Payloads: []byte("data")})
 
 	csvStrings := col.CsvStrings()
 
-	if len(csvStrings) != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": len(csvStrings) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	_ = col.JoinCsv()
 	_ = col.JoinCsvLine()
@@ -2508,50 +3144,70 @@ func Test_Cov9_PayloadsCollection_Json_JsonPtr(t *testing.T) {
 }
 
 func Test_Cov9_PayloadsCollection_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	col := &corepayload.PayloadsCollection{}
 	jsonResult := corejson.NewPtr(corepayload.PayloadsCollection{})
 	result, err := col.ParseInjectUsingJson(jsonResult)
 
-	if err != nil || result == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AsJsonContractsBinder(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	binder := col.AsJsonContractsBinder()
 
-	if binder == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AsJsoner(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	jsoner := col.AsJsoner()
 
-	if jsoner == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": jsoner == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_PayloadsCollection_JsonParseSelfInject(t *testing.T) {
+	// Arrange
 	col := &corepayload.PayloadsCollection{}
 	jsonResult := corejson.NewPtr(corepayload.PayloadsCollection{})
 	err := col.JsonParseSelfInject(jsonResult)
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_Cov9_PayloadsCollection_AsJsonParseSelfInjector(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 	injector := col.AsJsonParseSelfInjector()
 
-	if injector == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": injector == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -2559,113 +3215,126 @@ func Test_Cov9_PayloadsCollection_AsJsonParseSelfInjector(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_User_IdentifierInteger(t *testing.T) {
+	// Arrange
 	u := corepayload.User{Identifier: "42"}
 
-	if u.IdentifierInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": u.IdentifierInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	u2 := corepayload.User{}
 
-	if u2.IdentifierInteger() >= 0 {
-		t.Fatal("expected invalid value")
-	}
+	actual := args.Map{"result": u2.IdentifierInteger() >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
 func Test_Cov9_User_IdentifierUnsignedInteger(t *testing.T) {
+	// Arrange
 	u := corepayload.User{Identifier: "42"}
 
-	if u.IdentifierUnsignedInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": u.IdentifierUnsignedInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	u2 := corepayload.User{Identifier: "-1"}
 
-	if u2.IdentifierUnsignedInteger() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": u2.IdentifierUnsignedInteger() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov9_User_AllBoolMethods(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.All(true, "1", "Alice", "admin", "token", "hash")
 
-	if !u.HasAuthToken() {
-		t.Fatal("expected HasAuthToken")
-	}
+	// Act
+	actual := args.Map{"result": u.HasAuthToken()}
 
-	if !u.HasPasswordHash() {
-		t.Fatal("expected HasPasswordHash")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasAuthToken", actual)
 
-	if u.IsPasswordHashEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": u.HasPasswordHash()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasPasswordHash", actual)
 
-	if u.IsAuthTokenEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": u.IsPasswordHashEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if u.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": u.IsAuthTokenEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if !u.IsValidUser() {
-		t.Fatal("expected valid")
-	}
+	actual := args.Map{"result": u.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if u.IsNameEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": u.IsValidUser()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
-	if !u.IsNameEqual("Alice") {
-		t.Fatal("expected equal")
-	}
+	actual := args.Map{"result": u.IsNameEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if u.IsNotSystemUser() {
-		t.Fatal("expected system user")
-	}
+	actual := args.Map{"result": u.IsNameEqual("Alice")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-	if u.IsVirtualUser() {
-		t.Fatal("expected not virtual user (is system)")
-	}
+	actual := args.Map{"result": u.IsNotSystemUser()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected system user", actual)
 
-	if !u.HasType() {
-		t.Fatal("expected has type")
-	}
+	actual := args.Map{"result": u.IsVirtualUser()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not virtual user (is system)", actual)
 
-	if u.IsTypeEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": u.HasType()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected has type", actual)
+
+	actual := args.Map{"result": u.IsTypeEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
 	// nil receiver
 	var nilUser *corepayload.User
 
-	if nilUser.HasAuthToken() || nilUser.HasPasswordHash() {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilUser.HasAuthToken() || nilUser.HasPasswordHash()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	if !nilUser.IsPasswordHashEmpty() || !nilUser.IsAuthTokenEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	actual := args.Map{"result": nilUser.IsPasswordHashEmpty() || !nilUser.IsAuthTokenEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
-	if !nilUser.IsEmpty() || nilUser.IsValidUser() || !nilUser.IsNameEmpty() {
-		t.Fatal("nil checks failed")
-	}
+	actual := args.Map{"result": nilUser.IsEmpty() || nilUser.IsValidUser() || !nilUser.IsNameEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil checks failed", actual)
 
-	if nilUser.IsNameEqual("anything") {
-		t.Fatal("nil should not be equal")
-	}
+	actual := args.Map{"result": nilUser.IsNameEqual("anything")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not be equal", actual)
 
-	if nilUser.IsNotSystemUser() || nilUser.IsVirtualUser() || nilUser.HasType() {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilUser.IsNotSystemUser() || nilUser.IsVirtualUser() || nilUser.HasType()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	if !nilUser.IsTypeEmpty() {
-		t.Fatal("nil should be type empty")
-	}
+	actual := args.Map{"result": nilUser.IsTypeEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be type empty", actual)
 }
 
 func Test_Cov9_User_String_Json_Serialize_Deserialize(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.UsingName("Alice")
 	_ = u.String()
 	_ = u.PrettyJsonString()
@@ -2674,46 +3343,57 @@ func Test_Cov9_User_String_Json_Serialize_Deserialize(t *testing.T) {
 
 	serialized, err := u.Serialize()
 
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 	u2 := &corepayload.User{}
 	err = u2.Deserialize(serialized)
 
-	if err != nil || u2.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": err != nil || u2.Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
 func Test_Cov9_User_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.All(false, "1", "Alice", "admin", "token", "hash")
 	cloned := u.Clone()
 
-	if cloned.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": cloned.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	clonedPtr := u.ClonePtr()
 
-	if clonedPtr.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": clonedPtr.Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	var nilUser *corepayload.User
 
-	if nilUser.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilUser.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
 func Test_Cov9_User_Ptr(t *testing.T) {
+	// Arrange
 	u := corepayload.User{Name: "Alice"}
 	ptr := u.Ptr()
 
-	if ptr.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": ptr.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -2721,128 +3401,148 @@ func Test_Cov9_User_Ptr(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_UserInfo_All(t *testing.T) {
+	// Arrange
 	ui := &corepayload.UserInfo{
 		User:       corepayload.New.User.UsingName("Alice"),
 		SystemUser: corepayload.New.User.System("sys", "system"),
 	}
 
-	if !ui.HasUser() {
-		t.Fatal("expected HasUser")
-	}
+	// Act
+	actual := args.Map{"result": ui.HasUser()}
 
-	if !ui.HasSystemUser() {
-		t.Fatal("expected HasSystemUser")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasUser", actual)
 
-	if ui.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ui.HasSystemUser()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasSystemUser", actual)
 
-	if ui.IsUserEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ui.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if ui.IsSystemUserEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ui.IsUserEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
+
+	actual := args.Map{"result": ui.IsSystemUserEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
 	// nil receiver
 	var nilUI *corepayload.UserInfo
 
-	if nilUI.HasUser() || nilUI.HasSystemUser() {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilUI.HasUser() || nilUI.HasSystemUser()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 
-	if !nilUI.IsEmpty() || !nilUI.IsUserEmpty() || !nilUI.IsSystemUserEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	actual := args.Map{"result": nilUI.IsEmpty() || !nilUI.IsUserEmpty() || !nilUI.IsSystemUserEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov9_UserInfo_SetUserSystemUser(t *testing.T) {
+	// Arrange
 	ui := &corepayload.UserInfo{}
 	user := corepayload.New.User.UsingName("Alice")
 	sysUser := corepayload.New.User.System("sys", "system")
 	result := ui.SetUserSystemUser(user, sysUser)
 
-	if result.User.Name != "Alice" || result.SystemUser.Name != "sys" {
-		t.Fatal("expected Alice and sys")
-	}
+	// Act
+	actual := args.Map{"result": result.User.Name != "Alice" || result.SystemUser.Name != "sys"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice and sys", actual)
 
 	// nil receiver
 	var nilUI *corepayload.UserInfo
 	result = nilUI.SetUserSystemUser(user, sysUser)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_UserInfo_SetUser_SetSystemUser(t *testing.T) {
+	// Arrange
 	ui := &corepayload.UserInfo{}
 	user := corepayload.New.User.UsingName("Alice")
 	result := ui.SetUser(user)
 
-	if result.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": result.User.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = ui.SetSystemUser(sysUser)
 
-	if result.SystemUser.Name != "sys" {
-		t.Fatal("expected sys")
-	}
+	actual := args.Map{"result": result.SystemUser.Name != "sys"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected sys", actual)
 
 	// nil receiver
 	var nilUI *corepayload.UserInfo
 	result = nilUI.SetUser(user)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	result = nilUI.SetSystemUser(sysUser)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_UserInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	// Arrange
 	ui := &corepayload.UserInfo{User: corepayload.New.User.UsingName("Alice")}
 	cloned := ui.Clone()
 
-	if cloned.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": cloned.User.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	clonedPtr := ui.ClonePtr()
 
-	if clonedPtr.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": clonedPtr.User.Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	var nilUI *corepayload.UserInfo
 
-	if nilUI.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilUI.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 
 	uiVal := corepayload.UserInfo{User: corepayload.New.User.UsingName("Bob")}
 	ptr := uiVal.Ptr()
 
-	if ptr.User.Name != "Bob" {
-		t.Fatal("expected Bob")
-	}
+	actual := args.Map{"result": ptr.User.Name != "Bob"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Bob", actual)
 }
 
 func Test_Cov9_UserInfo_ToNonPtr(t *testing.T) {
+	// Arrange
 	ui := &corepayload.UserInfo{User: corepayload.New.User.UsingName("Alice")}
 	nonPtr := ui.ToNonPtr()
 
-	if nonPtr.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": nonPtr.User.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	var nilUI *corepayload.UserInfo
 	nonPtr = nilUI.ToNonPtr()
@@ -2854,229 +3554,273 @@ func Test_Cov9_UserInfo_ToNonPtr(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_AuthInfo_IdentifierInteger(t *testing.T) {
+	// Arrange
 	ai := corepayload.AuthInfo{Identifier: "42"}
 
-	if ai.IdentifierInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": ai.IdentifierInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	ai2 := corepayload.AuthInfo{}
 
-	if ai2.IdentifierInteger() >= 0 {
-		t.Fatal("expected invalid value")
-	}
+	actual := args.Map{"result": ai2.IdentifierInteger() >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
 func Test_Cov9_AuthInfo_IdentifierUnsignedInteger(t *testing.T) {
+	// Arrange
 	ai := corepayload.AuthInfo{Identifier: "42"}
 
-	if ai.IdentifierUnsignedInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": ai.IdentifierUnsignedInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	ai2 := corepayload.AuthInfo{Identifier: "-1"}
 
-	if ai2.IdentifierUnsignedInteger() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": ai2.IdentifierUnsignedInteger() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov9_AuthInfo_IsEmpty_HasAnyItem_IsValid(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 
-	if !nilAI.IsEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilAI.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	ai := &corepayload.AuthInfo{ActionType: "login"}
 
-	if ai.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ai.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if !ai.HasAnyItem() {
-		t.Fatal("expected has any item")
-	}
+	actual := args.Map{"result": ai.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected has any item", actual)
 
-	if !ai.IsValid() {
-		t.Fatal("expected valid")
-	}
+	actual := args.Map{"result": ai.IsValid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 }
 
 func Test_Cov9_AuthInfo_IsActionTypeEmpty_IsResourceNameEmpty(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 
-	if !nilAI.IsActionTypeEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilAI.IsActionTypeEmpty()}
 
-	if !nilAI.IsResourceNameEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
+
+	actual := args.Map{"result": nilAI.IsResourceNameEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	ai := &corepayload.AuthInfo{ActionType: "login", ResourceName: "/api"}
 
-	if ai.IsActionTypeEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ai.IsActionTypeEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if ai.IsResourceNameEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": ai.IsResourceNameEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
 func Test_Cov9_AuthInfo_HasActionType_HasResourceName(t *testing.T) {
+	// Arrange
 	ai := &corepayload.AuthInfo{ActionType: "login", ResourceName: "/api"}
 
-	if !ai.HasActionType() {
-		t.Fatal("expected true")
-	}
+	// Act
+	actual := args.Map{"result": ai.HasActionType()}
 
-	if !ai.HasResourceName() {
-		t.Fatal("expected true")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+
+	actual := args.Map{"result": ai.HasResourceName()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
 	var nilAI *corepayload.AuthInfo
 
-	if nilAI.HasActionType() || nilAI.HasResourceName() {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilAI.HasActionType() || nilAI.HasResourceName()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_AuthInfo_IsUserInfoEmpty_IsSessionInfoEmpty(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 
-	if !nilAI.IsUserInfoEmpty() || !nilAI.IsSessionInfoEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilAI.IsUserInfoEmpty() || !nilAI.IsSessionInfoEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	ai := &corepayload.AuthInfo{}
 
-	if !ai.IsUserInfoEmpty() || !ai.IsSessionInfoEmpty() {
-		t.Fatal("empty should be empty")
-	}
+	actual := args.Map{"result": ai.IsUserInfoEmpty() || !ai.IsSessionInfoEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
 }
 
 func Test_Cov9_AuthInfo_HasUserInfo_HasSessionInfo(t *testing.T) {
+	// Arrange
 	ai := &corepayload.AuthInfo{
 		UserInfo:    &corepayload.UserInfo{User: corepayload.New.User.UsingName("Alice")},
 		SessionInfo: &corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Bob")},
 	}
 
-	if !ai.HasUserInfo() {
-		t.Fatal("expected true")
-	}
+	// Act
+	actual := args.Map{"result": ai.HasUserInfo()}
 
-	if !ai.HasSessionInfo() {
-		t.Fatal("expected true")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+
+	actual := args.Map{"result": ai.HasSessionInfo()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_Cov9_AuthInfo_SetUserInfo_Nil(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 	result := nilAI.SetUserInfo(&corepayload.UserInfo{})
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	ai := &corepayload.AuthInfo{}
 	result = ai.SetUserInfo(&corepayload.UserInfo{})
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_AuthInfo_SetActionType_SetResourceName_SetIdentifier_SetSessionInfo(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 
 	result := nilAI.SetActionType("login")
 
-	if result == nil || result.ActionType != "login" {
-		t.Fatal("expected login")
-	}
+	// Act
+	actual := args.Map{"result": result == nil || result.ActionType != "login"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	result = nilAI.SetResourceName("/api")
 
-	if result == nil || result.ResourceName != "/api" {
-		t.Fatal("expected /api")
-	}
+	actual := args.Map{"result": result == nil || result.ResourceName != "/api"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected /api", actual)
 
 	result = nilAI.SetIdentifier("42")
 
-	if result == nil || result.Identifier != "42" {
-		t.Fatal("expected 42")
-	}
+	actual := args.Map{"result": result == nil || result.Identifier != "42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	result = nilAI.SetSessionInfo(&corepayload.SessionInfo{Id: "s1"})
 
-	if result == nil || result.SessionInfo.Id != "s1" {
-		t.Fatal("expected s1")
-	}
+	actual := args.Map{"result": result == nil || result.SessionInfo.Id != "s1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	// non-nil receiver
 	ai := &corepayload.AuthInfo{}
 	ai.SetActionType("test")
 
-	if ai.ActionType != "test" {
-		t.Fatal("expected test")
-	}
+	actual := args.Map{"result": ai.ActionType != "test"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
 	ai.SetResourceName("/resource")
 
-	if ai.ResourceName != "/resource" {
-		t.Fatal("expected /resource")
-	}
+	actual := args.Map{"result": ai.ResourceName != "/resource"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected /resource", actual)
 
 	ai.SetIdentifier("id")
 
-	if ai.Identifier != "id" {
-		t.Fatal("expected id")
-	}
+	actual := args.Map{"result": ai.Identifier != "id"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected id", actual)
 
 	ai.SetSessionInfo(&corepayload.SessionInfo{Id: "s2"})
 
-	if ai.SessionInfo.Id != "s2" {
-		t.Fatal("expected s2")
-	}
+	actual := args.Map{"result": ai.SessionInfo.Id != "s2"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected s2", actual)
 }
 
 func Test_Cov9_AuthInfo_SetUserSystemUser(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 	user := corepayload.New.User.UsingName("Alice")
 	sysUser := corepayload.New.User.System("sys", "system")
 
 	result := nilAI.SetUserSystemUser(user, sysUser)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	ai := &corepayload.AuthInfo{UserInfo: &corepayload.UserInfo{}}
 	result = ai.SetUserSystemUser(user, sysUser)
 
-	if result.UserInfo.User.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": result.UserInfo.User.Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
 func Test_Cov9_AuthInfo_SetUser_SetSystemUser(t *testing.T) {
+	// Arrange
 	var nilAI *corepayload.AuthInfo
 	user := corepayload.New.User.UsingName("Alice")
 
 	result := nilAI.SetUser(user)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	sysUser := corepayload.New.User.System("sys", "system")
 	result = nilAI.SetSystemUser(sysUser)
 
-	if result == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	ai := &corepayload.AuthInfo{UserInfo: &corepayload.UserInfo{}}
 	ai.SetUser(user)
@@ -3092,30 +3836,34 @@ func Test_Cov9_AuthInfo_String_PrettyJsonString_Json_JsonPtr(t *testing.T) {
 }
 
 func Test_Cov9_AuthInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	// Arrange
 	ai := corepayload.AuthInfo{Identifier: "1", ActionType: "login"}
 	cloned := ai.Clone()
 
-	if cloned.ActionType != "login" {
-		t.Fatal("expected login")
-	}
+	// Act
+	actual := args.Map{"result": cloned.ActionType != "login"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	ptr := ai.Ptr()
 
-	if ptr.ActionType != "login" {
-		t.Fatal("expected login")
-	}
+	actual := args.Map{"result": ptr.ActionType != "login"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	clonedPtr := ptr.ClonePtr()
 
-	if clonedPtr.ActionType != "login" {
-		t.Fatal("expected login")
-	}
+	actual := args.Map{"result": clonedPtr.ActionType != "login"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected login", actual)
 
 	var nilAI *corepayload.AuthInfo
 
-	if nilAI.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilAI.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3123,114 +3871,138 @@ func Test_Cov9_AuthInfo_Clone_ClonePtr_Ptr(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_SessionInfo_IdentifierInteger(t *testing.T) {
+	// Arrange
 	si := corepayload.SessionInfo{Id: "42"}
 
-	if si.IdentifierInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": si.IdentifierInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	si2 := corepayload.SessionInfo{}
 
-	if si2.IdentifierInteger() >= 0 {
-		t.Fatal("expected invalid value")
-	}
+	actual := args.Map{"result": si2.IdentifierInteger() >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid value", actual)
 }
 
 func Test_Cov9_SessionInfo_IdentifierUnsignedInteger(t *testing.T) {
+	// Arrange
 	si := corepayload.SessionInfo{Id: "42"}
 
-	if si.IdentifierUnsignedInteger() != 42 {
-		t.Fatal("expected 42")
-	}
+	// Act
+	actual := args.Map{"result": si.IdentifierUnsignedInteger() != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 	si2 := corepayload.SessionInfo{Id: "-1"}
 
-	if si2.IdentifierUnsignedInteger() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": si2.IdentifierUnsignedInteger() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov9_SessionInfo_IsEmpty_IsValid(t *testing.T) {
+	// Arrange
 	var nilSI *corepayload.SessionInfo
 
-	if !nilSI.IsEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilSI.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	si := &corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice")}
 
-	if si.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": si.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 
-	if !si.IsValid() {
-		t.Fatal("expected valid")
-	}
+	actual := args.Map{"result": si.IsValid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
 	emptySI := &corepayload.SessionInfo{}
 
-	if emptySI.IsValid() {
-		t.Fatal("expected invalid")
-	}
+	actual := args.Map{"result": emptySI.IsValid()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
 func Test_Cov9_SessionInfo_IsUserNameEmpty_IsUserEmpty_HasUser(t *testing.T) {
+	// Arrange
 	var nilSI *corepayload.SessionInfo
 
-	if !nilSI.IsUserNameEmpty() || !nilSI.IsUserEmpty() || nilSI.HasUser() {
-		t.Fatal("nil checks failed")
-	}
+	// Act
+	actual := args.Map{"result": nilSI.IsUserNameEmpty() || !nilSI.IsUserEmpty() || nilSI.HasUser()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil checks failed", actual)
 
 	si := &corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice")}
 
-	if si.IsUserNameEmpty() || si.IsUserEmpty() || !si.HasUser() {
-		t.Fatal("user checks failed")
-	}
+	actual := args.Map{"result": si.IsUserNameEmpty() || si.IsUserEmpty() || !si.HasUser()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "user checks failed", actual)
 }
 
 func Test_Cov9_SessionInfo_IsUsernameEqual(t *testing.T) {
+	// Arrange
 	si := &corepayload.SessionInfo{User: corepayload.New.User.UsingName("Alice")}
 
-	if !si.IsUsernameEqual("Alice") {
-		t.Fatal("expected equal")
-	}
+	// Act
+	actual := args.Map{"result": si.IsUsernameEqual("Alice")}
 
-	if si.IsUsernameEqual("Bob") {
-		t.Fatal("expected not equal")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
+
+	actual := args.Map{"result": si.IsUsernameEqual("Bob")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 	var nilSI *corepayload.SessionInfo
 
-	if nilSI.IsUsernameEqual("Alice") {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilSI.IsUsernameEqual("Alice")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_SessionInfo_Clone_ClonePtr_Ptr(t *testing.T) {
+	// Arrange
 	si := corepayload.SessionInfo{Id: "s1", User: corepayload.New.User.UsingName("Alice"), SessionPath: "/path"}
 	cloned := si.Clone()
 
-	if cloned.Id != "s1" || cloned.SessionPath != "/path" {
-		t.Fatal("expected cloned values")
-	}
+	// Act
+	actual := args.Map{"result": cloned.Id != "s1" || cloned.SessionPath != "/path"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cloned values", actual)
 
 	ptr := si.Ptr()
 
-	if ptr.Id != "s1" {
-		t.Fatal("expected s1")
-	}
+	actual := args.Map{"result": ptr.Id != "s1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	clonedPtr := ptr.ClonePtr()
 
-	if clonedPtr.Id != "s1" {
-		t.Fatal("expected s1")
-	}
+	actual := args.Map{"result": clonedPtr.Id != "s1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected s1", actual)
 
 	var nilSI *corepayload.SessionInfo
 
-	if nilSI.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilSI.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3238,58 +4010,67 @@ func Test_Cov9_SessionInfo_Clone_ClonePtr_Ptr(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PagingInfo_IsEmpty(t *testing.T) {
+	// Arrange
 	var nilPI *corepayload.PagingInfo
 
-	if !nilPI.IsEmpty() {
-		t.Fatal("nil should be empty")
-	}
+	// Act
+	actual := args.Map{"result": nilPI.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 
 	pi := &corepayload.PagingInfo{TotalPages: 5, TotalItems: 50}
 
-	if pi.IsEmpty() {
-		t.Fatal("expected not empty")
-	}
+	actual := args.Map{"result": pi.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
 func Test_Cov9_PagingInfo_IsEqual_AllBranches(t *testing.T) {
+	// Arrange
 	var nilA, nilB *corepayload.PagingInfo
 
-	if !nilA.IsEqual(nilB) {
-		t.Fatal("both nil should be equal")
-	}
+	// Act
+	actual := args.Map{"result": nilA.IsEqual(nilB)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 
 	pi := &corepayload.PagingInfo{TotalPages: 5}
 
-	if nilA.IsEqual(pi) || pi.IsEqual(nilA) {
-		t.Fatal("nil vs non-nil should not be equal")
-	}
+	actual := args.Map{"result": nilA.IsEqual(pi) || pi.IsEqual(nilA)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil vs non-nil should not be equal", actual)
 
 	pi2 := &corepayload.PagingInfo{TotalPages: 3}
 
-	if pi.IsEqual(pi2) {
-		t.Fatal("different TotalPages should not be equal")
-	}
+	actual := args.Map{"result": pi.IsEqual(pi2)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different TotalPages should not be equal", actual)
 
 	pi3 := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 1}
 
-	if pi.IsEqual(pi3) {
-		t.Fatal("different CurrentPageIndex should not be equal")
-	}
+	actual := args.Map{"result": pi.IsEqual(pi3)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different CurrentPageIndex should not be equal", actual)
 
 	pi4 := &corepayload.PagingInfo{TotalPages: 5, PerPageItems: 10}
 
-	if pi.IsEqual(pi4) {
-		t.Fatal("different PerPageItems should not be equal")
-	}
+	actual := args.Map{"result": pi.IsEqual(pi4)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different PerPageItems should not be equal", actual)
 
 	pi5 := &corepayload.PagingInfo{TotalPages: 5, TotalItems: 50}
 
-	if pi.IsEqual(pi5) {
-		t.Fatal("different TotalItems should not be equal")
-	}
+	actual := args.Map{"result": pi.IsEqual(pi5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different TotalItems should not be equal", actual)
 }
 
 func Test_Cov9_PagingInfo_HasMethods(t *testing.T) {
+	// Arrange
 	pi := &corepayload.PagingInfo{
 		TotalPages:       5,
 		CurrentPageIndex: 2,
@@ -3297,51 +4078,62 @@ func Test_Cov9_PagingInfo_HasMethods(t *testing.T) {
 		TotalItems:       50,
 	}
 
-	if !pi.HasTotalPages() || !pi.HasCurrentPageIndex() || !pi.HasPerPageItems() || !pi.HasTotalItems() {
-		t.Fatal("expected all true")
-	}
+	// Act
+	actual := args.Map{"result": pi.HasTotalPages() || !pi.HasCurrentPageIndex() || !pi.HasPerPageItems() || !pi.HasTotalItems()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected all true", actual)
 
 	var nilPI *corepayload.PagingInfo
 
-	if nilPI.HasTotalPages() || nilPI.HasCurrentPageIndex() || nilPI.HasPerPageItems() || nilPI.HasTotalItems() {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilPI.HasTotalPages() || nilPI.HasCurrentPageIndex() || nilPI.HasPerPageItems() || nilPI.HasTotalItems()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_PagingInfo_IsInvalidMethods(t *testing.T) {
+	// Arrange
 	pi := &corepayload.PagingInfo{}
 
-	if !pi.IsInvalidTotalPages() || !pi.IsInvalidCurrentPageIndex() || !pi.IsInvalidPerPageItems() || !pi.IsInvalidTotalItems() {
-		t.Fatal("zero values should be invalid")
-	}
+	// Act
+	actual := args.Map{"result": pi.IsInvalidTotalPages() || !pi.IsInvalidCurrentPageIndex() || !pi.IsInvalidPerPageItems() || !pi.IsInvalidTotalItems()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "zero values should be invalid", actual)
 
 	var nilPI *corepayload.PagingInfo
 
-	if !nilPI.IsInvalidTotalPages() || !nilPI.IsInvalidCurrentPageIndex() || !nilPI.IsInvalidPerPageItems() || !nilPI.IsInvalidTotalItems() {
-		t.Fatal("nil should be invalid")
-	}
+	actual := args.Map{"result": nilPI.IsInvalidTotalPages() || !nilPI.IsInvalidCurrentPageIndex() || !nilPI.IsInvalidPerPageItems() || !nilPI.IsInvalidTotalItems()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov9_PagingInfo_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	pi := corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 2, PerPageItems: 10, TotalItems: 50}
 	cloned := pi.Clone()
 
-	if cloned.TotalPages != 5 {
-		t.Fatal("expected 5")
-	}
+	// Act
+	actual := args.Map{"result": cloned.TotalPages != 5}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	ptr := &pi
 	clonedPtr := ptr.ClonePtr()
 
-	if clonedPtr.TotalPages != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": clonedPtr.TotalPages != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 
 	var nilPI *corepayload.PagingInfo
 
-	if nilPI.ClonePtr() != nil {
-		t.Fatal("nil ClonePtr should return nil")
-	}
+	actual := args.Map{"result": nilPI.ClonePtr() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ClonePtr should return nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3349,6 +4141,7 @@ func Test_Cov9_PagingInfo_Clone_ClonePtr(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_PayloadProperties_AllMethods(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	pw.Name = "test"
 	pw.Identifier = "42"
@@ -3359,29 +4152,32 @@ func Test_Cov9_PayloadProperties_AllMethods(t *testing.T) {
 
 	props := pw.PayloadProperties()
 
-	if props.Name() != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": props.Name() != "test"}
 
-	if props.IdString() != "42" {
-		t.Fatal("expected 42")
-	}
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 
-	if props.Category() != "cat" {
-		t.Fatal("expected cat")
-	}
+	actual := args.Map{"result": props.IdString() != "42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
-	if props.EntityType() != "entity" {
-		t.Fatal("expected entity")
-	}
+	actual := args.Map{"result": props.Category() != "cat"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cat", actual)
 
-	if !props.HasManyRecord() {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": props.EntityType() != "entity"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected entity", actual)
 
-	if props.HasSingleRecordOnly() {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": props.HasManyRecord()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+
+	actual := args.Map{"result": props.HasSingleRecordOnly()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 
 	_ = props.DynamicPayloads()
 	_ = props.IdInteger()
@@ -3448,208 +4244,248 @@ func Test_Cov9_PayloadProperties_DynamicPayloadsDeserializedTo(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_EmptyCreator_All(t *testing.T) {
+	// Arrange
 	attr := corepayload.Empty.Attributes()
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	attrDefaults := corepayload.Empty.AttributesDefaults()
 
-	if attrDefaults == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attrDefaults == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	pw := corepayload.Empty.PayloadWrapper()
 
-	if pw == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": pw == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	col := corepayload.Empty.PayloadsCollection()
 
-	if col == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": col == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_AllFactories(t *testing.T) {
+	// Arrange
 	// Create
 	attr := corepayload.New.Attributes.Create(nil, nil, []byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// ErrFromTo
 	attr = corepayload.New.Attributes.ErrFromTo(nil, nil, []byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoDynamicBytes
 	attr = corepayload.New.Attributes.UsingAuthInfoDynamicBytes(nil, []byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingDynamicPayloadBytes
 	attr = corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfo
 	attr = corepayload.New.Attributes.UsingAuthInfo(nil)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingKeyValues
 	hm := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v"})
 	attr = corepayload.New.Attributes.UsingKeyValues(hm)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoKeyValues
 	attr = corepayload.New.Attributes.UsingAuthInfoKeyValues(nil, hm)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingKeyValuesPlusDynamic
 	attr = corepayload.New.Attributes.UsingKeyValuesPlusDynamic(hm, []byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAnyKeyValues
 	anyMap := coredynamic.NewMapAnyItems(0)
 	attr = corepayload.New.Attributes.UsingAnyKeyValues(anyMap)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAuthInfoAnyKeyValues
 	attr = corepayload.New.Attributes.UsingAuthInfoAnyKeyValues(nil, anyMap)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingAnyKeyValuesPlusDynamic
 	attr = corepayload.New.Attributes.UsingAnyKeyValuesPlusDynamic(anyMap, []byte("data"))
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// UsingBasicError
 	attr = corepayload.New.Attributes.UsingBasicError(nil)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// Empty
 	attr = corepayload.New.Attributes.Empty()
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	// All
 	attr = corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
-	if attr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": attr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_AllAny(t *testing.T) {
+	// Arrange
 	attr, err := corepayload.New.Attributes.AllAny(nil, nil, nil, nil, "test")
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_PageInfoAny(t *testing.T) {
+	// Arrange
 	attr, err := corepayload.New.Attributes.PageInfoAny(nil, "test")
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_UsingDynamicPayloadAny(t *testing.T) {
+	// Arrange
 	attr, err := corepayload.New.Attributes.UsingDynamicPayloadAny(nil, "test")
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_UsingAuthInfoJsonResult(t *testing.T) {
+	// Arrange
 	jsonResult := corejson.NewPtr("test")
 	attr, err := corepayload.New.Attributes.UsingAuthInfoJsonResult(nil, jsonResult)
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_Deserialize(t *testing.T) {
+	// Arrange
 	original := corepayload.New.Attributes.Empty()
 	bytes := []byte(original.JsonString())
 	attr, err := corepayload.New.Attributes.Deserialize(bytes)
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_DeserializeMany(t *testing.T) {
+	// Arrange
 	bytes := []byte(`[{}]`)
 	attrs, err := corepayload.New.Attributes.DeserializeMany(bytes)
 
-	if err != nil || len(attrs) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || len(attrs) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_DeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	jsonResult := corejson.NewPtr(corepayload.Attributes{})
 	attr, err := corepayload.New.Attributes.DeserializeUsingJsonResult(jsonResult)
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewAttributesCreator_CastOrDeserializeFrom(t *testing.T) {
+	// Arrange
 	original := corepayload.New.Attributes.Empty()
 	attr, err := corepayload.New.Attributes.CastOrDeserializeFrom(original)
 
-	if err != nil || attr == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || attr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 
 	// nil
 	_, err = corepayload.New.Attributes.CastOrDeserializeFrom(nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3657,131 +4493,188 @@ func Test_Cov9_NewAttributesCreator_CastOrDeserializeFrom(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_NewPayloadWrapper_All(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.All("name", "id", "task", "cat", "entity", false, nil, []byte("data"))
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingBytes(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.UsingBytes("name", "id", "task", "cat", "entity", []byte("data"))
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_Create(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.Create("name", "id", "task", "cat", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_Record(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.Record("name", "id", "task", "cat", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_Records(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.Records("name", "id", "task", "cat", []string{"a", "b"})
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameIdRecord(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameIdRecord("name", "id", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameIdCategory(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameIdCategory("name", "id", "cat", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameIdTaskRecord(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameIdTaskRecord("name", "id", "task", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameTaskNameRecord(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameTaskNameRecord("id", "task", "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_ManyRecords(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.ManyRecords("name", "id", "task", "cat", []string{"a"})
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_Deserialize(t *testing.T) {
+	// Arrange
 	original := corepayload.New.PayloadWrapper.Empty()
 	original.Name = "test"
 	bytes, _ := original.Serialize()
 
 	pw, err := corepayload.New.PayloadWrapper.Deserialize(bytes)
 
-	if err != nil || pw.Name != "test" {
-		t.Fatal("expected test")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw.Name != "test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected test", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_CastOrDeserializeFrom(t *testing.T) {
+	// Arrange
 	original := corepayload.New.PayloadWrapper.Empty()
 	pw, err := corepayload.New.PayloadWrapper.CastOrDeserializeFrom(original)
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 
 	_, err = corepayload.New.PayloadWrapper.CastOrDeserializeFrom(nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_DeserializeToMany(t *testing.T) {
+	// Arrange
 	bytes := []byte(`[{}]`)
 	wrappers, err := corepayload.New.PayloadWrapper.DeserializeToMany(bytes)
 
-	if err != nil || len(wrappers) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || len(wrappers) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_DeserializeToCollection(t *testing.T) {
+	// Arrange
 	bytes := []byte(`{"Items":[]}`)
 	col, err := corepayload.New.PayloadWrapper.DeserializeToCollection(bytes)
 
-	if err != nil || col == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || col == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingBytesCreateInstruction(t *testing.T) {
+	// Arrange
 	instr := &corepayload.BytesCreateInstruction{
 		Name:       "name",
 		Identifier: "id",
@@ -3790,12 +4683,16 @@ func Test_Cov9_NewPayloadWrapper_UsingBytesCreateInstruction(t *testing.T) {
 
 	pw := corepayload.New.PayloadWrapper.UsingBytesCreateInstruction(instr)
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_BytesBranch(t *testing.T) {
+	// Arrange
 	instr := &corepayload.PayloadCreateInstruction{
 		Name:     "name",
 		Payloads: []byte("data"),
@@ -3803,12 +4700,16 @@ func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_BytesBranch(t *testing.T
 
 	pw, err := corepayload.New.PayloadWrapper.UsingCreateInstruction(instr)
 
-	if err != nil || pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_StringBranch(t *testing.T) {
+	// Arrange
 	instr := &corepayload.PayloadCreateInstruction{
 		Name:     "name",
 		Payloads: `"hello"`,
@@ -3816,12 +4717,16 @@ func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_StringBranch(t *testing.
 
 	pw, err := corepayload.New.PayloadWrapper.UsingCreateInstruction(instr)
 
-	if err != nil || pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_AnyBranch(t *testing.T) {
+	// Arrange
 	instr := &corepayload.PayloadCreateInstruction{
 		Name:     "name",
 		Payloads: 42,
@@ -3829,9 +4734,12 @@ func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_AnyBranch(t *testing.T) 
 
 	pw, err := corepayload.New.PayloadWrapper.UsingCreateInstruction(instr)
 
-	if err != nil || pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3839,59 +4747,79 @@ func Test_Cov9_NewPayloadWrapper_UsingCreateInstruction_AnyBranch(t *testing.T) 
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_NewPayloadsCollection_All(t *testing.T) {
+	// Arrange
 	col := corepayload.New.PayloadsCollection.Empty()
 
-	if col == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": col == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	col = corepayload.New.PayloadsCollection.UsingCap(10)
 
-	if col == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": col == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov9_NewPayloadsCollection_UsingWrappers(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.Empty()
 	col := corepayload.New.PayloadsCollection.UsingWrappers(pw)
 
-	if col.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	emptyCol := corepayload.New.PayloadsCollection.UsingWrappers()
 
-	if emptyCol.Length() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": emptyCol.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov9_NewPayloadsCollection_Deserialize(t *testing.T) {
+	// Arrange
 	bytes := []byte(`{"Items":[]}`)
 	col, err := corepayload.New.PayloadsCollection.Deserialize(bytes)
 
-	if err != nil || col == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || col == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadsCollection_DeserializeToMany(t *testing.T) {
+	// Arrange
 	bytes := []byte(`[{"Items":[]}]`)
 	cols, err := corepayload.New.PayloadsCollection.DeserializeToMany(bytes)
 
-	if err != nil || len(cols) != 1 {
-		t.Fatal("expected 1")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || len(cols) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov9_NewPayloadsCollection_DeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	jsonResult := corejson.NewPtr(corepayload.PayloadsCollection{})
 	col, err := corepayload.New.PayloadsCollection.DeserializeUsingJsonResult(jsonResult)
 
-	if err != nil || col == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || col == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3899,78 +4827,90 @@ func Test_Cov9_NewPayloadsCollection_DeserializeUsingJsonResult(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_NewUser_All(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.Empty()
 
-	if u == nil {
-		t.Fatal("expected non-nil")
-	}
+	// Act
+	actual := args.Map{"result": u == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	u = corepayload.New.User.Create(false, "Alice", "admin")
 
-	if u.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	actual := args.Map{"result": u.Name != "Alice"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 
 	u = corepayload.New.User.NonSysCreate("Bob", "user")
 
-	if u.Name != "Bob" {
-		t.Fatal("expected Bob")
-	}
+	actual := args.Map{"result": u.Name != "Bob"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Bob", actual)
 
 	u = corepayload.New.User.NonSysCreateId("1", "Charlie", "user")
 
-	if u.Identifier != "1" {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": u.Identifier != "1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	u = corepayload.New.User.System("sys", "system")
 
-	if !u.IsSystemUser {
-		t.Fatal("expected system user")
-	}
+	actual := args.Map{"result": u.IsSystemUser}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected system user", actual)
 
 	u = corepayload.New.User.SystemId("1", "sys", "system")
 
-	if u.Identifier != "1" {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": u.Identifier != "1"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	u = corepayload.New.User.UsingName("Dave")
 
-	if u.Name != "Dave" {
-		t.Fatal("expected Dave")
-	}
+	actual := args.Map{"result": u.Name != "Dave"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Dave", actual)
 
 	u = corepayload.New.User.All(true, "1", "Eve", "admin", "token", "hash")
 
-	if u.Name != "Eve" {
-		t.Fatal("expected Eve")
-	}
+	actual := args.Map{"result": u.Name != "Eve"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Eve", actual)
 }
 
 func Test_Cov9_NewUser_Deserialize(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.UsingName("Alice")
 	bytes, _ := u.Serialize()
 	result, err := corepayload.New.User.Deserialize(bytes)
 
-	if err != nil || result.Name != "Alice" {
-		t.Fatal("expected Alice")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result.Name != "Alice"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice", actual)
 }
 
 func Test_Cov9_NewUser_CastOrDeserializeFrom(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.UsingName("Alice")
 	result, err := corepayload.New.User.CastOrDeserializeFrom(u)
 
-	if err != nil || result == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 
 	_, err = corepayload.New.User.CastOrDeserializeFrom(nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -3978,67 +4918,83 @@ func Test_Cov9_NewUser_CastOrDeserializeFrom(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_DeserializePayloadTo(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte(`"hello"`)}
 	result, err := corepayload.DeserializePayloadTo[string](pw)
 
-	if err != nil || result != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	// nil wrapper
 	_, err = corepayload.DeserializePayloadTo[string](nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov9_DeserializePayloadToSlice(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{Payloads: []byte(`["a","b"]`)}
 	result, err := corepayload.DeserializePayloadToSlice[string](pw)
 
-	if err != nil || len(result) != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || len(result) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	// nil
 	_, err = corepayload.DeserializePayloadToSlice[string](nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov9_DeserializeAttributesPayloadTo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`"hello"`))
 	result, err := corepayload.DeserializeAttributesPayloadTo[string](attr)
 
-	if err != nil || result != "hello" {
-		t.Fatal("expected hello")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	// nil
 	_, err = corepayload.DeserializeAttributesPayloadTo[string](nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov9_DeserializeAttributesPayloadToSlice(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`["a","b"]`))
 	result, err := corepayload.DeserializeAttributesPayloadToSlice[string](attr)
 
-	if err != nil || len(result) != 2 {
-		t.Fatal("expected 2")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || len(result) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	// nil
 	_, err = corepayload.DeserializeAttributesPayloadToSlice[string](nil)
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -4051,6 +5007,7 @@ func (m mockStringer) String() string { return m.val }
 func (m mockStringer) Name() string   { return m.val }
 
 func Test_Cov9_PayloadCreateInstructionTypeStringer(t *testing.T) {
+	// Arrange
 	instr := corepayload.PayloadCreateInstructionTypeStringer{
 		Name:                 "name",
 		Identifier:           "id",
@@ -4061,12 +5018,16 @@ func Test_Cov9_PayloadCreateInstructionTypeStringer(t *testing.T) {
 
 	pci := instr.PayloadCreateInstruction()
 
-	if pci.TaskTypeName != "task" || pci.CategoryName != "cat" {
-		t.Fatal("expected task and cat")
-	}
+	// Act
+	actual := args.Map{"result": pci.TaskTypeName != "task" || pci.CategoryName != "cat"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected task and cat", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingBytesCreateInstructionStringer(t *testing.T) {
+	// Arrange
 	instr := &corepayload.BytesCreateInstructionStringer{
 		Name:         "name",
 		Identifier:   "id",
@@ -4078,12 +5039,16 @@ func Test_Cov9_NewPayloadWrapper_UsingBytesCreateInstructionStringer(t *testing.
 
 	pw := corepayload.New.PayloadWrapper.UsingBytesCreateInstructionTypeStringer(instr)
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_UsingCreateInstructionTypeStringer(t *testing.T) {
+	// Arrange
 	instr := &corepayload.PayloadCreateInstructionTypeStringer{
 		Name:                 "name",
 		Identifier:           "id",
@@ -4094,66 +5059,94 @@ func Test_Cov9_NewPayloadWrapper_UsingCreateInstructionTypeStringer(t *testing.T
 
 	pw, err := corepayload.New.PayloadWrapper.UsingCreateInstructionTypeStringer(instr)
 
-	if err != nil || pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_CreateUsingTypeStringer(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.CreateUsingTypeStringer(
 		"name", "id", mockStringer{"task"}, mockStringer{"cat"}, "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameIdCategoryStringer(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameIdCategoryStringer(
 		"name", "id", mockStringer{"cat"}, "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_RecordsTypeStringer(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.RecordsTypeStringer(
 		"name", "id", mockStringer{"task"}, mockStringer{"cat"}, []string{"a"})
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_RecordTypeStringer(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.RecordTypeStringer(
 		"name", "id", mockStringer{"task"}, mockStringer{"cat"}, "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_NameIdTaskStringerRecord(t *testing.T) {
+	// Arrange
 	pw, err := corepayload.New.PayloadWrapper.NameIdTaskStringerRecord(
 		"name", "id", mockStringer{"task"}, "hello")
 
-	if err != nil || pw == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || pw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_AllUsingStringer(t *testing.T) {
+	// Arrange
 	pw := corepayload.New.PayloadWrapper.AllUsingStringer(
 		"name", "id", mockStringer{"task"}, mockStringer{"cat"}, "entity", false, nil, []byte("data"))
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_AllUsingExpander(t *testing.T) {
+	// Arrange
 	expander := corepayload.PayloadTypeExpander{
 		CategoryStringer: mockStringer{"cat"},
 		TaskTypeStringer: mockStringer{"task"},
@@ -4162,41 +5155,60 @@ func Test_Cov9_NewPayloadWrapper_AllUsingExpander(t *testing.T) {
 	pw := corepayload.New.PayloadWrapper.AllUsingExpander(
 		"name", "id", expander, "entity", false, nil, []byte("data"))
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_NewUser_UsingNameTypeStringer(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.UsingNameTypeStringer("Alice", mockStringer{"admin"})
 
-	if u.Name != "Alice" || u.Type != "admin" {
-		t.Fatal("expected Alice/admin")
-	}
+	// Act
+	actual := args.Map{"result": u.Name != "Alice" || u.Type != "admin"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice/admin", actual)
 }
 
 func Test_Cov9_NewUser_SysUsingNameTypeStringer(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.SysUsingNameTypeStringer("sys", mockStringer{"system"})
 
-	if u.Name != "sys" || !u.IsSystemUser {
-		t.Fatal("expected system user")
-	}
+	// Act
+	actual := args.Map{"result": u.Name != "sys" || !u.IsSystemUser}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected system user", actual)
 }
 
 func Test_Cov9_NewUser_AllTypeStringer(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.AllTypeStringer(true, "1", "Alice", mockStringer{"admin"}, "token", "hash")
 
-	if u.Name != "Alice" || u.Type != "admin" {
-		t.Fatal("expected Alice/admin")
-	}
+	// Act
+	actual := args.Map{"result": u.Name != "Alice" || u.Type != "admin"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Alice/admin", actual)
 }
 
 func Test_Cov9_NewUser_AllUsingStringer(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.AllUsingStringer(false, "1", "Bob", mockStringer{"user"}, "token", "hash")
 
-	if u.Name != "Bob" || u.Type != "user" {
-		t.Fatal("expected Bob/user")
-	}
+	// Act
+	actual := args.Map{"result": u.Name != "Bob" || u.Type != "user"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Bob/user", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -4204,18 +5216,23 @@ func Test_Cov9_NewUser_AllUsingStringer(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov9_Attributes_DeserializeDynamicPayloadsToAttributes(t *testing.T) {
+	// Arrange
 	inner := corepayload.New.Attributes.Empty()
 	bytes := []byte(inner.JsonString())
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes(bytes)
 
 	result, err := attr.DeserializeDynamicPayloadsToAttributes()
 
-	if err != nil || result == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_Attributes_DeserializeDynamicPayloadsToPayloadWrapper(t *testing.T) {
+	// Arrange
 	inner := corepayload.New.PayloadWrapper.Empty()
 	inner.Name = "inner"
 	bytes, _ := inner.Serialize()
@@ -4223,21 +5240,29 @@ func Test_Cov9_Attributes_DeserializeDynamicPayloadsToPayloadWrapper(t *testing.
 
 	result, err := attr.DeserializeDynamicPayloadsToPayloadWrapper()
 
-	if err != nil || result.Name != "inner" {
-		t.Fatal("expected inner")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result.Name != "inner"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected inner", actual)
 }
 
 func Test_Cov9_Attributes_DeserializeDynamicPayloadsToPayloadWrappersCollection(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"Items":[]}`))
 	result, err := attr.DeserializeDynamicPayloadsToPayloadWrappersCollection()
 
-	if err != nil || result == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || result == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 }
 
 func Test_Cov9_PayloadWrapper_PayloadDeserializeToPayloadBinder(t *testing.T) {
+	// Arrange
 	inner := corepayload.New.PayloadWrapper.Empty()
 	inner.Name = "inner"
 	bytes, _ := inner.Serialize()
@@ -4247,52 +5272,64 @@ func Test_Cov9_PayloadWrapper_PayloadDeserializeToPayloadBinder(t *testing.T) {
 
 	binder, err := pw.PayloadDeserializeToPayloadBinder()
 
-	if err != nil || binder == nil {
-		t.Fatal("expected success")
-	}
+	// Act
+	actual := args.Map{"result": err != nil || binder == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected success", actual)
 
 	// nil receiver
 	var nilPW *corepayload.PayloadWrapper
 	_, err = nilPW.PayloadDeserializeToPayloadBinder()
 
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsEntityTypeNamer(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{EntityType: "test"}
 
-	if !pw.IsEntityTypeNamer(mockStringer{"test"}) {
-		t.Fatal("expected true")
-	}
+	// Act
+	actual := args.Map{"result": pw.IsEntityTypeNamer(mockStringer{"test"})}
 
-	if pw.IsEntityTypeNamer(nil) {
-		t.Fatal("expected false for nil namer")
-	}
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+
+	actual := args.Map{"result": pw.IsEntityTypeNamer(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for nil namer", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	if nilPW.IsEntityTypeNamer(mockStringer{"test"}) {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilPW.IsEntityTypeNamer(mockStringer{"test"})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_PayloadWrapper_IsCategoryNamer(t *testing.T) {
+	// Arrange
 	pw := &corepayload.PayloadWrapper{EntityType: "test"}
 
-	if !pw.IsCategoryNamer(mockStringer{"test"}) {
-		t.Fatal("expected true")
-	}
+	// Act
+	actual := args.Map{"result": pw.IsCategoryNamer(mockStringer{"test"})}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 
 	var nilPW *corepayload.PayloadWrapper
 
-	if nilPW.IsCategoryNamer(mockStringer{"test"}) {
-		t.Fatal("nil should return false")
-	}
+	actual := args.Map{"result": nilPW.IsCategoryNamer(mockStringer{"test"})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Cov9_NewPayloadWrapper_createInternalUsingBytes_WithExistingAttr(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	instr := &corepayload.BytesCreateInstruction{
 		Name:       "name",
@@ -4303,17 +5340,24 @@ func Test_Cov9_NewPayloadWrapper_createInternalUsingBytes_WithExistingAttr(t *te
 
 	pw := corepayload.New.PayloadWrapper.UsingBytesCreateInstruction(instr)
 
-	if pw.Name != "name" {
-		t.Fatal("expected name")
-	}
+	// Act
+	actual := args.Map{"result": pw.Name != "name"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected name", actual)
 }
 
 func Test_Cov9_Attributes_BasicErrorDeserializedTo(t *testing.T) {
+	// Arrange
 	attr := corepayload.New.Attributes.Empty()
 	var target any
 	err := attr.BasicErrorDeserializedTo(&target)
 
-	if err != nil {
-		t.Fatal("expected nil error (empty error)")
-	}
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil error (empty error)", actual)
 }

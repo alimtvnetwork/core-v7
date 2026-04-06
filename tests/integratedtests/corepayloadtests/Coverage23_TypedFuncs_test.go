@@ -8,27 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/coretests/args"
 )
 
-type testUserCov23 struct {
-	Name  string `json:"Name"`
-	Email string `json:"Email"`
-	Age   int    `json:"Age"`
-}
-
-func makeTypedWrapperCov23(name, id string, data testUserCov23) *corepayload.TypedPayloadWrapper[testUserCov23] {
-	tw, err := corepayload.NewTypedPayloadWrapperFrom[testUserCov23](name, id, "testUser", data)
-	if err != nil {
-		panic(err)
-	}
-	return tw
-}
-
-func makeCollectionCov23() *corepayload.TypedPayloadCollection[testUserCov23] {
-	col := corepayload.NewTypedPayloadCollection[testUserCov23](3)
-	col.Add(makeTypedWrapperCov23("user", "1", testUserCov23{Name: "Alice", Email: "a@a.com", Age: 30}))
-	col.Add(makeTypedWrapperCov23("user", "2", testUserCov23{Name: "Bob", Email: "b@b.com", Age: 25}))
-	col.Add(makeTypedWrapperCov23("user", "3", testUserCov23{Name: "Carol", Email: "c@c.com", Age: 35}))
-	return col
-}
+// testUserCov23, makeTypedWrapperCov23, makeCollectionCov23 are defined in shared_typed_helpers.go
 
 // ── MapTypedPayloads ──
 
@@ -44,8 +24,14 @@ func Test_Cov23_MapTypedPayloads(t *testing.T) {
 	)
 
 	// Assert
-	actual := args.Map{"length": len(names), "first": names[0]}
-	expected := args.Map{"length": 3, "first": "Alice"}
+	actual := args.Map{
+		"length": len(names),
+		"first": names[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "Alice",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloads returns names -- 3 items", actual)
 }
 
@@ -78,8 +64,14 @@ func Test_Cov23_MapTypedPayloadData(t *testing.T) {
 	)
 
 	// Assert
-	actual := args.Map{"length": len(emails), "first": emails[0]}
-	expected := args.Map{"length": 3, "first": "a@a.com"}
+	actual := args.Map{
+		"length": len(emails),
+		"first": emails[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "a@a.com",
+	}
 	expected.ShouldBeEqual(t, 0, "MapTypedPayloadData returns emails -- 3 items", actual)
 }
 
@@ -594,8 +586,14 @@ func Test_Cov23_TypedPayloadCollection_AllIdentifiers(t *testing.T) {
 	ids := col.AllIdentifiers()
 
 	// Assert
-	actual := args.Map{"length": len(ids), "first": ids[0]}
-	expected := args.Map{"length": 3, "first": "1"}
+	actual := args.Map{
+		"length": len(ids),
+		"first": ids[0],
+	}
+	expected := args.Map{
+		"length": 3,
+		"first": "1",
+	}
 	expected.ShouldBeEqual(t, 0, "AllIdentifiers returns ids -- 3 items", actual)
 }
 

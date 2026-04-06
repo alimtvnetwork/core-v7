@@ -170,7 +170,7 @@ func Test_RangeNamesCsv_Verification(t *testing.T) {
 	result := corecomparator.RangeNamesCsv()
 
 	// Assert
-	if result == "" {
-		t.Error("RangeNamesCsv should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangeNamesCsv should not be empty", actual)
 }

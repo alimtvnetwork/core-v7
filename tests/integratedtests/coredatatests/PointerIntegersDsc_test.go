@@ -34,14 +34,19 @@ func Test_PointerIntegersDsc_Len(t *testing.T) {
 }
 
 func Test_PointerIntegersDsc_Less(t *testing.T) {
+	// Arrange
 	// Case 0: both non-nil (3, 8) — descending so Less(0,1)=false, Less(1,0)=true
 	{
 		a, b := 3, 8
 		pi := coredata.PointerIntegersDsc{&a, &b}
+
+	// Act
 		actual := args.Map{
 			"lessIJ": pi.Less(0, 1),
 			"lessJI": pi.Less(1, 0),
 		}
+
+	// Assert
 		pointerIntegersDscLessTestCases[0].ShouldBeEqualMap(t, 0, actual)
 	}
 

@@ -20,7 +20,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": false,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": true, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage positive mismatch -- case sensitive",
@@ -28,7 +31,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": false,
 			"content": "hello", "search": "world",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage positive mismatch -- case ignored",
@@ -36,7 +42,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": true,
 			"content": "Hello", "search": "world",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage negative mismatch -- case sensitive",
@@ -44,7 +53,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.NotEqual, "ignoreCase": false,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": true},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": true,
+		},
 	},
 	{
 		Title: "VerifyMessage negative mismatch -- case ignored",
@@ -52,7 +64,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.NotEqual, "ignoreCase": true,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": true},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": true,
+		},
 	},
 }
 
@@ -102,6 +117,7 @@ var covVerifyErrorTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_VerifyError(t *testing.T) {
 	for caseIndex, testCase := range covVerifyErrorTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		variant := input["variant"].(stringcompareas.Variant)
 		ignoreCase := input["ignoreCase"].(bool)
@@ -110,7 +126,10 @@ func Test_Cov_VerifyError(t *testing.T) {
 
 		err := variant.VerifyError(ignoreCase, content, search)
 
+		// Act
 		actual := args.Map{"isNil": err == nil}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -129,12 +148,16 @@ var covOnlySupportedMsgErrTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_OnlySupportedMsgErr(t *testing.T) {
 	for caseIndex, testCase := range covOnlySupportedMsgErrTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		names := input["names"].([]string)
 
 		err := stringcompareas.Equal.OnlySupportedMsgErr("test message", names...)
 
+		// Act
 		actual := args.Map{"hasError": err != nil}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -253,6 +276,7 @@ var covIgnoreCaseCompareFuncTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_CompareFuncs_IgnoreCase(t *testing.T) {
 	for caseIndex, testCase := range covIgnoreCaseCompareFuncTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		variant := input["variant"].(stringcompareas.Variant)
 		content := input["content"].(string)
@@ -260,7 +284,10 @@ func Test_Cov_CompareFuncs_IgnoreCase(t *testing.T) {
 
 		match := variant.IsCompareSuccess(true, content, search)
 
+		// Act
 		actual := args.Map{"match": match}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -279,11 +306,15 @@ var covIsAnyEnumsEqualTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_IsAnyEnumsEqual_NoMatch(t *testing.T) {
 	for caseIndex, testCase := range covIsAnyEnumsEqualTestCases {
+		// Arrange
 		a := stringcompareas.Equal
 		b := stringcompareas.StartsWith
 		c := stringcompareas.EndsWith
 
+		// Act
 		actual := args.Map{"match": a.IsAnyEnumsEqual(&b, &c)}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -302,7 +333,10 @@ var covMinIntTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_MinInt(t *testing.T) {
 	for caseIndex, testCase := range covMinIntTestCases {
+		// Act
 		actual := args.Map{"value": fmt.Sprintf("%d", stringcompareas.Equal.MinInt())}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -321,8 +355,13 @@ var covValueByteTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_ValueByte(t *testing.T) {
 	for caseIndex, testCase := range covValueByteTestCases {
+		// Arrange
 		v := stringcompareas.Equal
+
+		// Act
 		actual := args.Map{"value": v.ValueByte()}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -341,10 +380,14 @@ var covUnmarshalJSONErrTestCases = []coretestcases.CaseV1{
 
 func Test_Cov_UnmarshalJSON_Error(t *testing.T) {
 	for caseIndex, testCase := range covUnmarshalJSONErrTestCases {
+		// Arrange
 		v := stringcompareas.Equal
 		err := v.UnmarshalJSON([]byte("invalid-not-json"))
 
+		// Act
 		actual := args.Map{"hasError": err != nil}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }

@@ -18,8 +18,14 @@ func Test_HashmapDiff_DiffJsonMessage_Cov3(t *testing.T) {
 	diffResult := h.DiffJsonMessage(map[string]string{"a": "2"})
 
 	// Assert
-	actual := args.Map{"emptyEmpty": emptyResult == "", "diffNotEmpty": diffResult != ""}
-	expected := args.Map{"emptyEmpty": true, "diffNotEmpty": true}
+	actual := args.Map{
+		"emptyEmpty": emptyResult == "",
+		"diffNotEmpty": diffResult != "",
+	}
+	expected := args.Map{
+		"emptyEmpty": true,
+		"diffNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "HashmapDiff returns correct value -- DiffJsonMessage", actual)
 }
 
@@ -33,8 +39,14 @@ func Test_HashmapDiff_DiffRaw_LeftNonNilRightNil_Cov3(t *testing.T) {
 	diffMap := h.DiffRaw(nil)
 
 	// Assert
-	actual := args.Map{"diffLength": len(diffMap), "hasKey-a": true}
-	expected := args.Map{"diffLength": 1, "hasKey-a": true}
+	actual := args.Map{
+		"diffLength": len(diffMap),
+		"hasKey-a": true,
+	}
+	expected := args.Map{
+		"diffLength": 1,
+		"hasKey-a": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRaw returns nil -- left non-nil right nil", actual)
 }
 
@@ -71,8 +83,14 @@ func Test_MapStringAnyDiff_ShouldDiffMessage_Cov3(t *testing.T) {
 	diffResult := m.ShouldDiffMessage(false, "title", map[string]any{"a": 2})
 
 	// Assert
-	actual := args.Map{"emptyEmpty": emptyResult == "", "diffNotEmpty": diffResult != ""}
-	expected := args.Map{"emptyEmpty": true, "diffNotEmpty": true}
+	actual := args.Map{
+		"emptyEmpty": emptyResult == "",
+		"diffNotEmpty": diffResult != "",
+	}
+	expected := args.Map{
+		"emptyEmpty": true,
+		"diffNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringAnyDiff returns correct value -- ShouldDiffMessage", actual)
 }
 
@@ -132,7 +150,13 @@ func Test_MapStringAnyDiff_DiffRaw_NilLeftNonNilRight_Cov3(t *testing.T) {
 	result := m.DiffRaw(false, map[string]any{"x": 10})
 
 	// Assert
-	actual := args.Map{"length": len(result), "hasX": result["x"] != nil}
-	expected := args.Map{"length": 1, "hasX": true}
+	actual := args.Map{
+		"length": len(result),
+		"hasX": result["x"] != nil,
+	}
+	expected := args.Map{
+		"length": 1,
+		"hasX": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRaw returns nil -- nil left non-nil right", actual)
 }

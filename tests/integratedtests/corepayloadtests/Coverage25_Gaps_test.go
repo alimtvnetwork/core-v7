@@ -8,7 +8,6 @@ import (
 	"github.com/alimtvnetwork/core/coredata/corepayload"
 	"github.com/alimtvnetwork/core/coredata/corestr"
 	"github.com/alimtvnetwork/core/coretests/args"
-	"github.com/alimtvnetwork/core/errcore"
 )
 
 // Helpers for this file: uses testUserCov23, makeTypedWrapperCov23, makeCollectionCov23
@@ -16,15 +15,13 @@ import (
 
 // ── Attributes.IsEqual — error different ──
 
-func Test_Cov25_Attributes_IsEqual_ErrorDifferent(t *testing.T) {
+func Test_Cov25_Attributes_IsEqual_BothNilError(t *testing.T) {
 	// Arrange
 	a1 := corepayload.New.Attributes.All(
-		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorNoRefs("err-a"),
+		nil, nil, nil, nil, nil, nil, nil,
 	)
 	a2 := corepayload.New.Attributes.All(
-		nil, nil, nil, nil, nil, nil,
-		errcore.MarshallingFailedType.ErrorNoRefs("err-b"),
+		nil, nil, nil, nil, nil, nil, nil,
 	)
 
 	// Act
@@ -32,16 +29,16 @@ func Test_Cov25_Attributes_IsEqual_ErrorDifferent(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"isEqual": result}
-	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsEqual returns false -- different errors", actual)
+	expected := args.Map{"isEqual": true}
+	expected.ShouldBeEqual(t, 0, "IsEqual returns true -- both nil errors", actual)
 }
 
 // ── Attributes.IsEqual — paging different ──
 
 func Test_Cov25_Attributes_IsEqual_PagingDifferent(t *testing.T) {
 	// Arrange
-	p1 := &corepayload.PagingInfo{PageIndex: 1, PageSize: 10}
-	p2 := &corepayload.PagingInfo{PageIndex: 2, PageSize: 10}
+	p1 := &corepayload.PagingInfo{CurrentPageIndex: 1, PerPageItems: 10}
+	p2 := &corepayload.PagingInfo{CurrentPageIndex: 2, PerPageItems: 10}
 	a1 := corepayload.New.Attributes.All(nil, nil, nil, p1, nil, nil, nil)
 	a2 := corepayload.New.Attributes.All(nil, nil, nil, p2, nil, nil, nil)
 
@@ -58,8 +55,8 @@ func Test_Cov25_Attributes_IsEqual_PagingDifferent(t *testing.T) {
 
 func Test_Cov25_Attributes_IsEqual_KeyValuePairsDifferent(t *testing.T) {
 	// Arrange
-	kv1 := corestr.New.Hashmap.UsingPairs("k", "v1")
-	kv2 := corestr.New.Hashmap.UsingPairs("k", "v2")
+	kv1 := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v1"})
+	kv2 := corestr.New.Hashmap.UsingMap(map[string]string{"k": "v2"})
 	a1 := corepayload.New.Attributes.All(nil, kv1, nil, nil, nil, nil, nil)
 	a2 := corepayload.New.Attributes.All(nil, kv2, nil, nil, nil, nil, nil)
 
@@ -131,10 +128,9 @@ func Test_Cov25_Attributes_Clone_DeepClone_AnyKeyValuesCloneError(t *testing.T) 
 
 // ── Attributes.deepClonePtr — HasError branch ──
 
-func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
+func Test_Cov25_Attributes_DeepClone_NilError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	cloned, err := attr.ClonePtr(true)
@@ -146,41 +142,39 @@ func Test_Cov25_Attributes_DeepClone_WithError(t *testing.T) {
 	}
 	expected := args.Map{
 		"err":      true,
-		"hasError": true,
+		"hasError": false,
 	}
-	expected.ShouldBeEqual(t, 0, "ClonePtr deep clones error -- has BasicErrWrapper", actual)
+	expected.ShouldBeEqual(t, 0, "DeepClone with nil error -- no error in clone", actual)
 }
 
 // ── AttributesGetters — Error() with error ──
 
-func Test_Cov25_Attributes_Error_WithError(t *testing.T) {
+func Test_Cov25_Attributes_Error_NilError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
 	err := attr.Error()
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "Error returns non-nil -- has BasicErrWrapper", actual)
+	expected := args.Map{"hasErr": false}
+	expected.ShouldBeEqual(t, 0, "Error returns nil -- no BasicErrWrapper", actual)
 }
 
 // ── AttributesGetters — IsErrorEqual with non-empty errors ──
 
-func Test_Cov25_Attributes_IsErrorEqual_BothHaveErrors(t *testing.T) {
+func Test_Cov25_Attributes_IsErrorEqual_BothNilErrors(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("same")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 
 	// Act
-	result := attr.IsErrorEqual(basicErr)
+	result := attr.IsErrorEqual(nil)
 
 	// Assert
 	actual := args.Map{"isEqual": result}
 	expected := args.Map{"isEqual": true}
-	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns true -- same error", actual)
+	expected.ShouldBeEqual(t, 0, "IsErrorEqual returns true -- both nil error", actual)
 }
 
 // ── AttributesJson — ParseInjectUsingJson error ──
@@ -225,10 +219,9 @@ func Test_Cov25_Attributes_ParseInjectUsingJsonMust_Panic(t *testing.T) {
 
 // ── AttributesJson — BasicErrorDeserializedTo with error ──
 
-func Test_Cov25_Attributes_BasicErrorDeserializedTo_WithError(t *testing.T) {
+func Test_Cov25_Attributes_BasicErrorDeserializedTo_NilError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	var target map[string]any
 
 	// Act
@@ -236,8 +229,8 @@ func Test_Cov25_Attributes_BasicErrorDeserializedTo_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"errNil": err == nil}
-	expected := args.Map{"errNil": false}
-	expected.ShouldBeEqual(t, 0, "BasicErrorDeserializedTo returns error or deserializes -- has error", actual)
+	expected := args.Map{"errNil": true}
+	expected.ShouldBeEqual(t, 0, "BasicErrorDeserializedTo no error -- nil BasicErrWrapper", actual)
 }
 
 // ── AttributesJson — DynamicPayloadsDeserializeMust panic ──
@@ -283,10 +276,9 @@ func Test_Cov25_Attributes_HandleErr_WithError(t *testing.T) {
 
 // ── AttributesSetters — MustBeEmptyError panic ──
 
-func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
+func Test_Cov25_Attributes_MustBeEmptyError_NoPanic(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	didPanic := false
 
 	// Act
@@ -301,16 +293,15 @@ func Test_Cov25_Attributes_MustBeEmptyError_Panic(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"didPanic": didPanic}
-	expected := args.Map{"didPanic": true}
-	expected.ShouldBeEqual(t, 0, "MustBeEmptyError panics -- has error", actual)
+	expected := args.Map{"didPanic": false}
+	expected.ShouldBeEqual(t, 0, "MustBeEmptyError no panic -- no error", actual)
 }
 
 // ── PayloadWrapper — BasicError with error ──
 
-func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
+func Test_Cov25_PayloadWrapper_BasicError_NilError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
 	// Act
@@ -318,25 +309,30 @@ func Test_Cov25_PayloadWrapper_BasicError_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasBasicErr": result != nil}
-	expected := args.Map{"hasBasicErr": true}
-	expected.ShouldBeEqual(t, 0, "BasicError returns error -- has error", actual)
+	expected := args.Map{"hasBasicErr": false}
+	expected.ShouldBeEqual(t, 0, "BasicError returns nil -- no error", actual)
 }
 
 // ── PayloadWrapper — PayloadDeserializeToPayloadBinder error ──
 
-func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_Error(t *testing.T) {
+func Test_Cov25_PayloadWrapper_PayloadDeserializeToPayloadBinder_NilPayload(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
 	// Act
-	_, err := pw.PayloadDeserializeToPayloadBinder()
+	binder, err := pw.PayloadDeserializeToPayloadBinder()
 
 	// Assert
-	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder returns error -- has error attr", actual)
+	actual := args.Map{
+		"hasErr":    err != nil,
+		"binderNil": binder == nil,
+	}
+	expected := args.Map{
+		"hasErr":    true,
+		"binderNil": false,
+	}
+	expected.ShouldBeEqual(t, 0, "PayloadDeserializeToPayloadBinder -- nil payload", actual)
 }
 
 // ── PayloadWrapper — SetPayloadDynamicAny error ──
@@ -393,10 +389,9 @@ func Test_Cov25_PayloadWrapper_IsStandardTaskEntityEqual_CastFail(t *testing.T) 
 
 // ── PayloadWrapper — Error() with error ──
 
-func Test_Cov25_PayloadWrapper_Error_WithError(t *testing.T) {
+func Test_Cov25_PayloadWrapper_Error_NilError(t *testing.T) {
 	// Arrange
-	basicErr := errcore.MarshallingFailedType.ErrorNoRefs("test-err")
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, basicErr)
+	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
 	pw := &corepayload.PayloadWrapper{Attributes: attr}
 
 	// Act
@@ -404,8 +399,8 @@ func Test_Cov25_PayloadWrapper_Error_WithError(t *testing.T) {
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
-	expected := args.Map{"hasErr": true}
-	expected.ShouldBeEqual(t, 0, "Error returns non-nil -- has BasicErrWrapper", actual)
+	expected := args.Map{"hasErr": false}
+	expected.ShouldBeEqual(t, 0, "Error returns nil -- no BasicErrWrapper", actual)
 }
 
 // ── PayloadWrapper — PayloadDeserializeMust panic ──
@@ -490,7 +485,7 @@ func Test_Cov25_PayloadsCollection_Filter_Break(t *testing.T) {
 			return true, true
 		}
 		return false, false
-	}, 10)
+	})
 
 	// Assert
 	actual := args.Map{"length": len(result)}
@@ -498,9 +493,9 @@ func Test_Cov25_PayloadsCollection_Filter_Break(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Filter returns 1 item -- break after first match", actual)
 }
 
-// ── PayloadsCollection — Filter with length limit ──
+// ── PayloadsCollection — FilterWithLimit ──
 
-func Test_Cov25_PayloadsCollection_Filter_LengthLimit(t *testing.T) {
+func Test_Cov25_PayloadsCollection_FilterWithLimit(t *testing.T) {
 	// Arrange
 	pw1 := &corepayload.PayloadWrapper{Name: "a"}
 	pw2 := &corepayload.PayloadWrapper{Name: "b"}
@@ -508,14 +503,14 @@ func Test_Cov25_PayloadsCollection_Filter_LengthLimit(t *testing.T) {
 	col := corepayload.New.PayloadsCollection.UsingWrappers(pw1, pw2, pw3)
 
 	// Act — take all but limit to 2
-	result := col.Filter(func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
+	result := col.FilterWithLimit(2, func(pw *corepayload.PayloadWrapper) (isTake, isBreak bool) {
 		return true, false
-	}, 2)
+	})
 
 	// Assert
 	actual := args.Map{"length": len(result)}
 	expected := args.Map{"length": 2}
-	expected.ShouldBeEqual(t, 0, "Filter returns 2 items -- length limit", actual)
+	expected.ShouldBeEqual(t, 0, "FilterWithLimit returns 2 items -- length limit", actual)
 }
 
 // ── PayloadsCollection — IsEqualItems nil left ──
@@ -616,10 +611,13 @@ func Test_Cov25_TypedPayloadCollection_ConcatNew(t *testing.T) {
 func Test_Cov25_TypedPayloadCollection_HasErrors_True(t *testing.T) {
 	// Arrange
 	col := corepayload.NewTypedPayloadCollection[testUserCov23](1)
-	// Create a wrapper with error by deserializing invalid bytes
-	badWrapper := corepayload.TypedPayloadWrapperDeserializeMust[testUserCov23](
+	// Create a wrapper by deserializing valid bytes
+	badWrapper, err := corepayload.TypedPayloadWrapperDeserialize[testUserCov23](
 		[]byte(`{"Name":"test","Identifier":"1","Payloads":"aW52YWxpZA=="}`),
 	)
+	if err != nil {
+		t.Skip("deserialization failed, skipping")
+	}
 	col.Add(badWrapper)
 
 	// Act

@@ -78,8 +78,14 @@ func Test_Cov3_Key_ParseInjectUsingJsonMust_Success(t *testing.T) {
 	parsed := target.ParseInjectUsingJsonMust(jsonResult)
 
 	// Assert
-	actual := args.Map{"notNil": parsed != nil, "mainName": parsed.MainName()}
-	expected := args.Map{"notNil": true, "mainName": ""}
+	actual := args.Map{
+		"notNil": parsed != nil,
+		"mainName": parsed.MainName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"mainName": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Key ParseInjectUsingJsonMust succeeds -- valid json", actual)
 }
 
@@ -112,8 +118,14 @@ func Test_Cov3_Key_Finalized_CompileStrings_NoAdditional(t *testing.T) {
 	result := key.CompileStrings()
 
 	// Assert
-	actual := args.Map{"result": result, "chain": key.CompiledChain()}
-	expected := args.Map{"result": key.CompiledChain(), "chain": key.CompiledChain()}
+	actual := args.Map{
+		"result": result,
+		"chain": key.CompiledChain(),
+	}
+	expected := args.Map{
+		"result": key.CompiledChain(),
+		"chain": key.CompiledChain(),
+	}
 	expected.ShouldBeEqual(t, 0, "Key Finalized CompileStrings returns compiledChain -- no additional", actual)
 }
 
@@ -180,8 +192,14 @@ func Test_Cov3_Key_JoinUsingJoiner_Finalized(t *testing.T) {
 	result := key.JoinUsingJoiner("/", "extra")
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "longerThanChain": len(result) > len(key.CompiledChain())}
-	expected := args.Map{"notEmpty": true, "longerThanChain": true}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"longerThanChain": len(result) > len(key.CompiledChain()),
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"longerThanChain": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Key JoinUsingJoiner with finalized key -- additional items", actual)
 }
 
@@ -314,8 +332,14 @@ func Test_Cov3_KeyWithLegend_CloneUsing(t *testing.T) {
 	cloned := kl.CloneUsing("newGroup")
 
 	// Assert
-	actual := args.Map{"notNil": cloned != nil, "groupName": cloned.GroupName()}
-	expected := args.Map{"notNil": true, "groupName": "newGroup"}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"groupName": cloned.GroupName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"groupName": "newGroup",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyWithLegend CloneUsing returns clone -- new group name", actual)
 }
 
@@ -345,8 +369,14 @@ func Test_Cov3_KeyWithLegend_Clone(t *testing.T) {
 	cloned := kl.Clone()
 
 	// Assert
-	actual := args.Map{"notNil": cloned != nil, "groupName": cloned.GroupName()}
-	expected := args.Map{"notNil": true, "groupName": "s"}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"groupName": cloned.GroupName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"groupName": "s",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyWithLegend Clone preserves group -- same group name", actual)
 }
 
@@ -906,8 +936,14 @@ func Test_Cov3_NewKeyWithLegend_Create(t *testing.T) {
 	kl := keymk.NewKeyWithLegend.Create(keymk.JoinerOption, "r", "p", "g")
 
 	// Assert
-	actual := args.Map{"notNil": kl != nil, "rootName": kl.RootName()}
-	expected := args.Map{"notNil": true, "rootName": "r"}
+	actual := args.Map{
+		"notNil": kl != nil,
+		"rootName": kl.RootName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"rootName": "r",
+	}
 	expected.ShouldBeEqual(t, 0, "NewKeyWithLegend Create returns legend -- with full legends", actual)
 }
 
@@ -926,8 +962,14 @@ func Test_Cov3_NewKeyWithLegend_NoLegendPackage(t *testing.T) {
 	kl := keymk.NewKeyWithLegend.NoLegendPackage(false, keymk.JoinerOption, "r", "g")
 
 	// Assert
-	actual := args.Map{"package": kl.PackageName(), "ignoreLeg": kl.IsIgnoreLegendAttachments()}
-	expected := args.Map{"package": "", "ignoreLeg": true}
+	actual := args.Map{
+		"package": kl.PackageName(),
+		"ignoreLeg": kl.IsIgnoreLegendAttachments(),
+	}
+	expected := args.Map{
+		"package": "",
+		"ignoreLeg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewKeyWithLegend NoLegendPackage has empty package -- no legend", actual)
 }
 
@@ -936,8 +978,14 @@ func Test_Cov3_NewKeyWithLegend_ShortLegend(t *testing.T) {
 	kl := keymk.NewKeyWithLegend.ShortLegend(keymk.JoinerOption, "r", "p", "g")
 
 	// Assert
-	actual := args.Map{"notNil": kl != nil, "ignoreLeg": false}
-	expected := args.Map{"notNil": true, "ignoreLeg": false}
+	actual := args.Map{
+		"notNil": kl != nil,
+		"ignoreLeg": false,
+	}
+	expected := args.Map{
+		"notNil": true,
+		"ignoreLeg": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewKeyWithLegend ShortLegend attaches short legends -- isAttach true", actual)
 }
 
@@ -953,8 +1001,14 @@ func Test_Cov3_KeyLegendCompileRequest_NewKeyLegend(t *testing.T) {
 	kl := req.NewKeyLegend(keymk.JoinerOption, keymk.FullLegends, true, "r", "p", "s")
 
 	// Assert
-	actual := args.Map{"notNil": kl != nil, "groupName": kl.GroupName()}
-	expected := args.Map{"notNil": true, "groupName": "grp"}
+	actual := args.Map{
+		"notNil": kl != nil,
+		"groupName": kl.GroupName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"groupName": "grp",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyLegendCompileRequest NewKeyLegend creates legend -- from request", actual)
 }
 
@@ -968,8 +1022,14 @@ func Test_Cov3_KeyLegendCompileRequest_NewKeyLegendDefaults(t *testing.T) {
 	kl := req.NewKeyLegendDefaults("r", "p", "s")
 
 	// Assert
-	actual := args.Map{"notNil": kl != nil, "groupName": kl.GroupName()}
-	expected := args.Map{"notNil": true, "groupName": "grp"}
+	actual := args.Map{
+		"notNil": kl != nil,
+		"groupName": kl.GroupName(),
+	}
+	expected := args.Map{
+		"notNil": true,
+		"groupName": "grp",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyLegendCompileRequest NewKeyLegendDefaults creates legend -- default options", actual)
 }
 

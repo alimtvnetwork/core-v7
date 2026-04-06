@@ -14,15 +14,20 @@ import (
 
 func Test_Hashset_AddNonEmpty_Regression(t *testing.T) {
 	safeTest(t, "Test_Hashset_AddNonEmpty_Regression", func() {
+		// Arrange
 		// Case 0: non-empty adds
 		{
 			tc := hashsetAddNonEmptyAddsTestCase
 			hs := corestr.New.Hashset.Empty()
 			hs.AddNonEmpty("hello")
+
+		// Act
 			actual := args.Map{
 				"length":       fmt.Sprintf("%d", hs.Length()),
 				"containsItem": fmt.Sprintf("%v", hs.Has("hello")),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -39,7 +44,7 @@ func Test_Hashset_AddNonEmpty_Regression(t *testing.T) {
 			tc := hashsetAddNonEmptyChainedTestCase
 			hs := corestr.New.Hashset.Empty()
 			hs.AddNonEmpty("a").AddNonEmpty("b").AddNonEmpty("c")
-			actual := args.Map{
+			actual = args.Map{
 				"length":        fmt.Sprintf("%d", hs.Length()),
 				"containsItem1": fmt.Sprintf("%v", hs.Has("a")),
 				"containsItem2": fmt.Sprintf("%v", hs.Has("b")),
@@ -56,12 +61,15 @@ func Test_Hashset_AddNonEmpty_Regression(t *testing.T) {
 
 func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 	safeTest(t, "Test_SimpleSlice_InsertAt_Regression", func() {
+		// Arrange
 		// Case 0: middle insert
 		{
 			tc := simpleSliceInsertAtMiddleTestCase
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 			ss.InsertAt(1, "X")
 			items := ss.List()
+
+		// Act
 			actual := args.Map{
 				"length": fmt.Sprintf("%d", ss.Length()),
 				"item0":  items[0],
@@ -69,6 +77,8 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 				"item2":  items[2],
 				"item3":  items[3],
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -78,7 +88,7 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 			ss.InsertAt(0, "X")
 			items := ss.List()
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%d", ss.Length()),
 				"item0":  items[0],
 				"item1":  items[1],
@@ -94,7 +104,7 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 			ss.InsertAt(3, "X")
 			items := ss.List()
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%d", ss.Length()),
 				"item0":  items[0],
 				"item1":  items[1],
@@ -110,7 +120,7 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 			ss.InsertAt(-1, "X")
 			items := ss.List()
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%d", ss.Length()),
 				"item0":  items[0],
 				"item1":  items[1],
@@ -125,7 +135,7 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 			ss.InsertAt(100, "X")
 			items := ss.List()
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%d", ss.Length()),
 				"item0":  items[0],
 				"item1":  items[1],
@@ -142,15 +152,20 @@ func Test_SimpleSlice_InsertAt_Regression(t *testing.T) {
 
 func Test_Collection_RemoveAt_Regression(t *testing.T) {
 	safeTest(t, "Test_Collection_RemoveAt_Regression", func() {
+		// Arrange
 		// Case 0: middle
 		{
 			tc := collectionRemoveAtMiddleTestCase
 			col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 			ok := col.RemoveAt(1)
+
+		// Act
 			actual := args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -159,7 +174,7 @@ func Test_Collection_RemoveAt_Regression(t *testing.T) {
 			tc := collectionRemoveAtFirstTestCase
 			col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 			ok := col.RemoveAt(0)
-			actual := args.Map{
+			actual = args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 				"newFirstItem":    col.First(),
@@ -172,7 +187,7 @@ func Test_Collection_RemoveAt_Regression(t *testing.T) {
 			tc := collectionRemoveAtLastTestCase
 			col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 			ok := col.RemoveAt(2)
-			actual := args.Map{
+			actual = args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 				"lastItem":        col.Last(),
@@ -185,7 +200,7 @@ func Test_Collection_RemoveAt_Regression(t *testing.T) {
 			tc := collectionRemoveAtNegativeTestCase
 			col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 			ok := col.RemoveAt(-1)
-			actual := args.Map{
+			actual = args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 			}
@@ -197,7 +212,7 @@ func Test_Collection_RemoveAt_Regression(t *testing.T) {
 			tc := collectionRemoveAtOutOfBoundsTestCase
 			col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 			ok := col.RemoveAt(100)
-			actual := args.Map{
+			actual = args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 			}
@@ -209,7 +224,7 @@ func Test_Collection_RemoveAt_Regression(t *testing.T) {
 			tc := collectionRemoveAtEmptyTestCase
 			col := corestr.New.Collection.Empty()
 			ok := col.RemoveAt(0)
-			actual := args.Map{
+			actual = args.Map{
 				"isRemoved":       fmt.Sprintf("%v", ok),
 				"remainingLength": fmt.Sprintf("%d", col.Length()),
 			}
@@ -233,6 +248,8 @@ func Test_Hashmap_IsEqualPtr_Regression(t *testing.T) {
 			hm2 := corestr.New.Hashmap.Empty()
 			hm2.Set("a", "1")
 			hm2.Set("b", "2")
+
+		// Assert
 			tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", hm1.IsEqualPtr(hm2)))
 		}
 
@@ -280,14 +297,19 @@ func Test_Hashmap_IsEqualPtr_Regression(t *testing.T) {
 
 func Test_Caching_Removal_Regression(t *testing.T) {
 	safeTest(t, "Test_Caching_Removal_Regression", func() {
+		// Arrange
 		// Case 0: fresh Hashset
 		{
 			tc := cachingRemovalFreshHashsetTestCase
 			hs := corestr.New.Hashset.Empty()
+
+		// Act
 			actual := args.Map{
 				"isEmpty": fmt.Sprintf("%v", hs.IsEmpty()),
 				"length":  fmt.Sprintf("%d", hs.Length()),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -296,7 +318,7 @@ func Test_Caching_Removal_Regression(t *testing.T) {
 			tc := cachingRemovalHashsetAfterAddTestCase
 			hs := corestr.New.Hashset.Empty()
 			hs.Add("a").Add("b")
-			actual := args.Map{
+			actual = args.Map{
 				"isEmpty": fmt.Sprintf("%v", hs.IsEmpty()),
 				"length":  fmt.Sprintf("%d", hs.Length()),
 			}
@@ -307,7 +329,7 @@ func Test_Caching_Removal_Regression(t *testing.T) {
 		{
 			tc := cachingRemovalFreshHashmapTestCase
 			hm := corestr.New.Hashmap.Empty()
-			actual := args.Map{
+			actual = args.Map{
 				"isEmpty": fmt.Sprintf("%v", hm.IsEmpty()),
 				"length":  fmt.Sprintf("%d", hm.Length()),
 			}
@@ -320,7 +342,7 @@ func Test_Caching_Removal_Regression(t *testing.T) {
 			hm := corestr.New.Hashmap.Empty()
 			hm.Set("x", "1")
 			hm.Set("y", "2")
-			actual := args.Map{
+			actual = args.Map{
 				"isEmpty": fmt.Sprintf("%v", hm.IsEmpty()),
 				"length":  fmt.Sprintf("%d", hm.Length()),
 			}
@@ -341,6 +363,8 @@ func Test_SimpleSlice_SkipTake_Regression(t *testing.T) {
 		{
 			tc := simpleSliceSkipBeyondTestCase
 			result := ss.Skip(100)
+
+		// Assert
 			tc.ShouldBeEqual(t, 0, fmt.Sprintf("%d", len(result)))
 		}
 
@@ -377,6 +401,8 @@ func Test_HasIndex_Negative_Regression(t *testing.T) {
 		{
 			tc := hasIndexNegativeSimpleSliceTestCase
 			ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
+
+		// Assert
 			tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", ss.HasIndex(-1)))
 		}
 
@@ -395,11 +421,14 @@ func Test_HasIndex_Negative_Regression(t *testing.T) {
 
 func Test_Hashmap_Clear_NilSafety_Regression(t *testing.T) {
 	safeTest(t, "Test_Hashmap_Clear_NilSafety_Regression", func() {
+		// Arrange
 		// Case 0: nil receiver
 		{
 			tc := hashmapClearNilReceiverTestCase
 			var hm *corestr.Hashmap
 			result := hm.Clear()
+
+		// Assert
 			tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", result == nil))
 		}
 
@@ -410,6 +439,8 @@ func Test_Hashmap_Clear_NilSafety_Regression(t *testing.T) {
 			hm.Set("a", "1")
 			hm.Set("b", "2")
 			hm.Clear()
+
+		// Act
 			actual := args.Map{
 				"length":  fmt.Sprintf("%d", hm.Length()),
 				"isEmpty": fmt.Sprintf("%v", hm.IsEmpty()),
@@ -423,7 +454,7 @@ func Test_Hashmap_Clear_NilSafety_Regression(t *testing.T) {
 			hm := corestr.New.Hashmap.Empty()
 			hm.Set("x", "old")
 			hm.Clear().Set("y", "new")
-			actual := args.Map{
+			actual = args.Map{
 				"lengthAfterClear": fmt.Sprintf("%d", hm.Length()),
 				"lengthAfterReAdd": fmt.Sprintf("%d", len(hm.ValuesList())),
 			}
@@ -438,6 +469,7 @@ func Test_Hashmap_Clear_NilSafety_Regression(t *testing.T) {
 
 func Test_Hashset_AddBool_CacheInvalidation_Regression(t *testing.T) {
 	safeTest(t, "Test_Hashset_AddBool_CacheInvalidation_Regression", func() {
+		// Arrange
 		// Case 0: new item invalidates cache
 		{
 			tc := hashsetAddBoolNewItemTestCase
@@ -445,11 +477,15 @@ func Test_Hashset_AddBool_CacheInvalidation_Regression(t *testing.T) {
 			isExist := hs.AddBool("hello")
 			// Force cache rebuild by calling Items
 			items := hs.Items()
+
+		// Act
 			actual := args.Map{
 				"existedBefore": fmt.Sprintf("%v", isExist),
 				"lengthAfter":   fmt.Sprintf("%d", len(items)),
 				"itemsContains": fmt.Sprintf("%v", hs.Has("hello")),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -459,7 +495,7 @@ func Test_Hashset_AddBool_CacheInvalidation_Regression(t *testing.T) {
 			hs := corestr.New.Hashset.Empty()
 			hs.Add("hello")
 			isExist := hs.AddBool("hello")
-			actual := args.Map{
+			actual = args.Map{
 				"existedBefore": fmt.Sprintf("%v", isExist),
 				"lengthAfter":   fmt.Sprintf("%d", hs.Length()),
 			}
@@ -473,7 +509,7 @@ func Test_Hashset_AddBool_CacheInvalidation_Regression(t *testing.T) {
 			hs.AddBool("a")
 			hs.AddBool("b")
 			hs.AddBool("c")
-			actual := args.Map{
+			actual = args.Map{
 				"length":        fmt.Sprintf("%d", hs.Length()),
 				"containsItem1": fmt.Sprintf("%v", hs.Has("a")),
 				"containsItem2": fmt.Sprintf("%v", hs.Has("b")),
@@ -490,6 +526,7 @@ func Test_Hashset_AddBool_CacheInvalidation_Regression(t *testing.T) {
 
 func Test_Hashmap_AddOrUpdateCollection_LengthMismatch_Regression(t *testing.T) {
 	safeTest(t, "Test_Hashmap_AddOrUpdateCollection_LengthMismatch_Regression", func() {
+		// Arrange
 		// Case 0: mismatched lengths
 		{
 			tc := hashmapAddOrUpdateMismatchedTestCase
@@ -497,6 +534,8 @@ func Test_Hashmap_AddOrUpdateCollection_LengthMismatch_Regression(t *testing.T) 
 			keys := corestr.New.Collection.Strings([]string{"k1", "k2", "k3"})
 			values := corestr.New.Collection.Strings([]string{"v1", "v2"})
 			hm.AddOrUpdateCollection(keys, values)
+
+		// Assert
 			tc.ShouldBeEqual(t, 0, fmt.Sprintf("%d", hm.Length()))
 		}
 
@@ -509,6 +548,8 @@ func Test_Hashmap_AddOrUpdateCollection_LengthMismatch_Regression(t *testing.T) 
 			hm.AddOrUpdateCollection(keys, values)
 			v1, _ := hm.Get("k1")
 			v2, _ := hm.Get("k2")
+
+		// Act
 			actual := args.Map{
 				"length": fmt.Sprintf("%d", hm.Length()),
 				"value1": v1,

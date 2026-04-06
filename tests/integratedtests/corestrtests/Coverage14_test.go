@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -14,43 +15,52 @@ import (
 
 func Test_Cov14_Hashmap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_BasicOps", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(10)
 		h.AddOrUpdate("a", "1")
 		h.Set("b", "2")
 		h.SetTrim(" c ", " 3 ")
 
-		if h.Length() != 3 || h.IsEmpty() || !h.HasItems() || !h.HasAnyItem() {
-			t.Fatal("expected 3")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 3 || h.IsEmpty() || !h.HasItems() || !h.HasAnyItem()}
 
-		if !h.Has("a") || !h.Contains("b") || h.IsKeyMissing("a") || !h.IsKeyMissing("z") {
-			t.Fatal("Has/Contains/IsKeyMissing failed")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
-		if !h.HasAll("a", "b") || h.HasAll("a", "z") {
-			t.Fatal("HasAll failed")
-		}
+		actual = args.Map{"result": h.Has("a") || !h.Contains("b") || h.IsKeyMissing("a") || !h.IsKeyMissing("z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Has/Contains/IsKeyMissing failed", actual)
 
-		if !h.HasAny("a", "z") || h.HasAny("x", "z") {
-			t.Fatal("HasAny failed")
-		}
+		actual = args.Map{"result": h.HasAll("a", "b") || h.HasAll("a", "z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAll failed", actual)
+
+		actual = args.Map{"result": h.HasAny("a", "z") || h.HasAny("x", "z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAny failed", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_SetBySplitter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_SetBySplitter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.SetBySplitter("=", "key=value")
 		h.SetBySplitter("=", "onlykey")
 
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_AddOrUpdateVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateVariants", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(10)
 
 		h.AddOrUpdateKeyStrValInt("k1", 42)
@@ -60,23 +70,30 @@ func Test_Cov14_Hashmap_AddOrUpdateVariants(t *testing.T) {
 		h.AddOrUpdateKeyValueAny(corestr.KeyAnyValuePair{Key: "k5", Value: "val5"})
 		h.AddOrUpdateKeyVal(corestr.KeyValuePair{Key: "k6", Value: "v6"})
 
-		if h.Length() != 6 {
-			t.Fatal("expected 6")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 6}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 6", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_AddsOrUpdates(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdates", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.AddsOrUpdates(
 			corestr.KeyValuePair{Key: "a", Value: "1"},
 			corestr.KeyValuePair{Key: "b", Value: "2"},
 		)
 
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		h.AddsOrUpdates()
 	})
@@ -84,12 +101,16 @@ func Test_Cov14_Hashmap_AddsOrUpdates(t *testing.T) {
 
 func Test_Cov14_Hashmap_AddOrUpdateMap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateMap", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.AddOrUpdateMap(map[string]string{"a": "1", "b": "2"})
 
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		h.AddOrUpdateMap(nil)
 	})
@@ -97,6 +118,7 @@ func Test_Cov14_Hashmap_AddOrUpdateMap(t *testing.T) {
 
 func Test_Cov14_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateHashmap", func() {
+		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
 		h1.Set("a", "1")
 
@@ -106,22 +128,30 @@ func Test_Cov14_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 		h1.AddOrUpdateHashmap(h2)
 		h1.AddOrUpdateHashmap(nil)
 
-		if h1.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h1.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddOrUpdateCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		keys := corestr.New.Collection.Strings([]string{"k1", "k2"})
 		vals := corestr.New.Collection.Strings([]string{"v1", "v2"})
 
 		h.AddOrUpdateCollection(keys, vals)
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		// Mismatched lengths
 		h.AddOrUpdateCollection(keys, corestr.New.Collection.Strings([]string{"v1"}))
@@ -133,28 +163,34 @@ func Test_Cov14_Hashmap_AddOrUpdateCollection(t *testing.T) {
 
 func Test_Cov14_Hashmap_Get(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Get", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 
 		v, found := h.Get("a")
-		if !found || v != "1" {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": found || v != "1"}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		_, found = h.Get("z")
-		if found {
-			t.Fatal("expected not found")
-		}
+		actual = args.Map{"result": found}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not found", actual)
 
 		v2, found2 := h.GetValue("a")
-		if !found2 || v2 != "1" {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": found2 || v2 != "1"}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ConcatNew", func() {
+		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
 		h1.Set("a", "1")
 
@@ -162,27 +198,36 @@ func Test_Cov14_Hashmap_ConcatNew(t *testing.T) {
 		h2.Set("b", "2")
 
 		result := h1.ConcatNew(true, h2)
-		if result.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+
+		// Act
+		actual := args.Map{"result": result.Length() < 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 
 		// Empty
 		result2 := h1.ConcatNew(true)
-		if result2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": result2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ConcatNewUsingMaps", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 
 		result := h.ConcatNewUsingMaps(true, map[string]string{"b": "2"})
-		if result.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+
+		// Act
+		actual := args.Map{"result": result.Length() < 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 
 		result2 := h.ConcatNewUsingMaps(true)
 		_ = result2
@@ -211,58 +256,71 @@ func Test_Cov14_Hashmap_Keys_Values(t *testing.T) {
 
 func Test_Cov14_Hashmap_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_IsEqual", func() {
+		// Arrange
 		h1 := corestr.New.Hashmap.Cap(5)
 		h1.Set("a", "1")
 
 		h2 := corestr.New.Hashmap.Cap(5)
 		h2.Set("a", "1")
 
-		if !h1.IsEqualPtr(h2) {
-			t.Fatal("expected equal")
-		}
+		// Act
+		actual := args.Map{"result": h1.IsEqualPtr(h2)}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 		h3 := corestr.New.Hashmap.Cap(5)
 		h3.Set("a", "2")
 
-		if h1.IsEqualPtr(h3) {
-			t.Fatal("expected not equal")
-		}
+		actual = args.Map{"result": h1.IsEqualPtr(h3)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 		// Same ptr
-		if !h1.IsEqualPtr(h1) {
-			t.Fatal("expected same ptr equal")
-		}
+		actual = args.Map{"result": h1.IsEqualPtr(h1)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected same ptr equal", actual)
 
 		// Both empty
 		e1 := corestr.Empty.Hashmap()
 		e2 := corestr.Empty.Hashmap()
-		if !e1.IsEqualPtr(e2) {
-			t.Fatal("expected empty equal")
-		}
+		actual = args.Map{"result": e1.IsEqualPtr(e2)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty equal", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Remove", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 		h.Remove("a")
 
-		if h.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_KeysToLower", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("HELLO", "world")
 
 		lowered := h.KeysToLower()
-		if !lowered.Has("hello") {
-			t.Fatal("expected hello")
-		}
+
+		// Act
+		actual := args.Map{"result": lowered.Has("hello")}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
@@ -288,23 +346,28 @@ func Test_Cov14_Hashmap_Join(t *testing.T) {
 
 func Test_Cov14_Hashmap_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_JSON", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 
 		b, err := json.Marshal(h)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		h2 := corestr.Empty.Hashmap()
 		err = json.Unmarshal(b, h2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 
-		if h2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": h2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -318,13 +381,17 @@ func Test_Cov14_Hashmap_Clone(t *testing.T) {
 
 func Test_Cov14_Hashmap_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Clear_Dispose", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 		h.Clear()
 
-		if h.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 
 		h2 := corestr.New.Hashmap.Cap(5)
 		h2.Set("a", "1")
@@ -351,18 +418,24 @@ func Test_Cov14_Hashmap_KeyValStringLines(t *testing.T) {
 
 func Test_Cov14_Hashmap_ToStringsUsingCompiler(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_ToStringsUsingCompiler", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 
 		lines := h.ToStringsUsingCompiler(func(k, v string) string { return k + "=" + v })
-		if len(lines) != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": len(lines) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_GetKeysFilteredItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetKeysFilteredItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("ab", "1")
 		h.Set("cd", "2")
@@ -371,14 +444,18 @@ func Test_Cov14_Hashmap_GetKeysFilteredItems(t *testing.T) {
 			return s, s == "ab", false
 		})
 
-		if len(result) != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": len(result) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetKeysFilteredCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("ab", "1")
 
@@ -386,27 +463,35 @@ func Test_Cov14_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 			return s, true, false
 		})
 
-		if result.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": result.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashmap_GetValuesExcept(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_GetValuesExcept", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 		h.Set("a", "1")
 		h.Set("b", "2")
 
 		result := h.GetValuesKeysExcept([]string{"a"})
-		if len(result) != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": len(result) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		result2 := h.GetValuesKeysExcept(nil)
-		if len(result2) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual = args.Map{"result": len(result2) != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -437,15 +522,19 @@ func Test_Cov14_Hashmap_Creators(t *testing.T) {
 
 func Test_Cov14_Hashmap_AddsOrUpdatesFilter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdatesFilter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 
 		h.AddsOrUpdatesUsingFilter(func(kv corestr.KeyValuePair) (string, bool, bool) {
 			return kv.Value, true, false
 		}, corestr.KeyValuePair{Key: "a", Value: "1"})
 
-		if h.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		h.AddsOrUpdatesUsingFilter(nil)
 	})
@@ -453,15 +542,19 @@ func Test_Cov14_Hashmap_AddsOrUpdatesFilter(t *testing.T) {
 
 func Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Cap(5)
 
 		h.AddsOrUpdatesAnyUsingFilter(func(kav corestr.KeyAnyValuePair) (string, bool, bool) {
 			return kav.ValueString(), true, false
 		}, corestr.KeyAnyValuePair{Key: "a", Value: 1})
 
-		if h.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -471,15 +564,19 @@ func Test_Cov14_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 
 func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashmapDiff_AllMethods", func() {
+		// Arrange
 		diff := corestr.HashmapDiff(map[string]string{"a": "1", "b": "2"})
 
-		if diff.Length() != 2 || diff.IsEmpty() || !diff.HasAnyItem() {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": diff.Length() != 2 || diff.IsEmpty() || !diff.HasAnyItem()}
 
-		if diff.LastIndex() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+
+		actual = args.Map{"result": diff.LastIndex() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		_ = diff.AllKeysSorted()
 		_ = diff.MapAnyItems()
@@ -487,13 +584,13 @@ func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
 		_ = diff.RawMapStringAnyDiff()
 
 		// IsRawEqual
-		if !diff.IsRawEqual(map[string]string{"a": "1", "b": "2"}) {
-			t.Fatal("expected equal")
-		}
+		actual = args.Map{"result": diff.IsRawEqual(map[string]string{"a": "1", "b": "2"})}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
-		if diff.HasAnyChanges(map[string]string{"a": "1", "b": "2"}) {
-			t.Fatal("expected no changes")
-		}
+		actual = args.Map{"result": diff.HasAnyChanges(map[string]string{"a": "1", "b": "2"})}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no changes", actual)
 
 		_ = diff.DiffRaw(map[string]string{"a": "1", "c": "3"})
 		_ = diff.DiffJsonMessage(map[string]string{"a": "2"})
@@ -506,9 +603,9 @@ func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
 
 		// Nil receiver
 		var nilDiff *corestr.HashmapDiff
-		if nilDiff.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": nilDiff.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		_ = nilDiff.Raw()
 		_ = nilDiff.MapAnyItems()
 	})
@@ -520,34 +617,39 @@ func Test_Cov14_HashmapDiff_AllMethods(t *testing.T) {
 
 func Test_Cov14_Hashset_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_BasicOps", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(10)
 		h.Add("a")
 		h.Add("b")
 
-		if h.Length() != 2 || h.IsEmpty() || !h.HasItems() || !h.HasAnyItem() {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2 || h.IsEmpty() || !h.HasItems() || !h.HasAnyItem()}
 
-		if !h.Has("a") || !h.Contains("b") || h.IsMissing("a") || !h.IsMissing("z") {
-			t.Fatal("Has/Contains/IsMissing failed")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
-		if !h.HasAll("a", "b") || h.HasAll("a", "z") {
-			t.Fatal("HasAll failed")
-		}
+		actual = args.Map{"result": h.Has("a") || !h.Contains("b") || h.IsMissing("a") || !h.IsMissing("z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Has/Contains/IsMissing failed", actual)
 
-		if !h.HasAny("a", "z") || h.HasAny("x", "z") {
-			t.Fatal("HasAny failed")
-		}
+		actual = args.Map{"result": h.HasAll("a", "b") || h.HasAll("a", "z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAll failed", actual)
 
-		if !h.IsAllMissing("x", "y") || h.IsAllMissing("a") {
-			t.Fatal("IsAllMissing failed")
-		}
+		actual = args.Map{"result": h.HasAny("a", "z") || h.HasAny("x", "z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAny failed", actual)
+
+		actual = args.Map{"result": h.IsAllMissing("x", "y") || h.IsAllMissing("a")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsAllMissing failed", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddVariants", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(10)
 		h.AddNonEmpty("")
 		h.AddNonEmpty("a")
@@ -564,68 +666,92 @@ func Test_Cov14_Hashset_AddVariants(t *testing.T) {
 		str := "h"
 		h.AddPtr(&str)
 
-		if h.Length() != 8 {
-			t.Fatalf("expected 8 got %d", h.Length())
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 8}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 8", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddFuncErr(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddFuncErr", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.AddFuncErr(func() (string, error) { return "ok", nil }, func(e error) {})
-		if h.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddStrings_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddStrings_Adds", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(10)
 		h.AddStrings([]string{"a", "b"})
 		h.Adds("c", "d")
 
-		if h.Length() != 4 {
-			t.Fatal("expected 4")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 4}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddHashsetItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddHashsetItems", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
 		h2 := corestr.New.Hashset.Strings([]string{"b"})
 
 		h1.AddHashsetItems(h2)
 		h1.AddHashsetItems(nil)
 
-		if h1.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h1.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddItemsMap(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddItemsMap", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		h.AddItemsMap(map[string]bool{"a": true, "b": false})
 
-		if h.Length() != 1 {
-			t.Fatal("expected 1 (false items skipped)")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 (false items skipped)", actual)
 	})
 }
 
 func Test_Cov14_Hashset_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddCollection", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		h.AddCollection(c)
 
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		h.AddCollection(nil)
 	})
@@ -633,42 +759,55 @@ func Test_Cov14_Hashset_AddCollection(t *testing.T) {
 
 func Test_Cov14_Hashset_AddSimpleSlice(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_AddSimpleSlice", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(5)
 		s := corestr.New.SimpleSlice.Lines("a", "b")
 		h.AddSimpleSlice(s)
 
-		if h.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashset_ConcatNewHashsets(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ConcatNewHashsets", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
 		h2 := corestr.New.Hashset.Strings([]string{"b"})
 
 		result := h1.ConcatNewHashsets(true, h2)
-		if result.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": result.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		// Empty
 		result2 := h1.ConcatNewHashsets(true)
-		if result2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": result2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashset_ConcatNewStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ConcatNewStrings", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		result := h.ConcatNewStrings(true, []string{"b", "c"})
 
-		if result.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		// Act
+		actual := args.Map{"result": result.Length() != 3}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -687,65 +826,83 @@ func Test_Cov14_Hashset_List_OrderedList_SortedList(t *testing.T) {
 
 func Test_Cov14_Hashset_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_IsEquals", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a", "b"})
 		h2 := corestr.New.Hashset.Strings([]string{"a", "b"})
 
-		if !h1.IsEquals(h2) || !h1.IsEqual(h2) {
-			t.Fatal("expected equal")
-		}
+		// Act
+		actual := args.Map{"result": h1.IsEquals(h2) || !h1.IsEqual(h2)}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 		// Same ptr
-		if !h1.IsEquals(h1) {
-			t.Fatal("expected same ptr equal")
-		}
+		actual = args.Map{"result": h1.IsEquals(h1)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected same ptr equal", actual)
 
 		// Both empty
 		e1 := corestr.Empty.Hashset()
 		e2 := corestr.Empty.Hashset()
-		if !e1.IsEquals(e2) {
-			t.Fatal("expected empty equal")
-		}
+		actual = args.Map{"result": e1.IsEquals(e2)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty equal", actual)
 	})
 }
 
 func Test_Cov14_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Filter", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"ab", "cd", "ef"})
 
 		result := h.Filter(func(s string) bool { return s == "ab" })
-		if result.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": result.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_Hashset_GetFilteredItems(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_GetFilteredItems", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"ab", "cd"})
 
 		result := h.GetFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
 
-		if len(result) != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": len(result) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashset_GetAllExcept(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_GetAllExcept", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b", "c"})
 
 		result := h.GetAllExcept([]string{"b"})
-		if len(result) != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": len(result) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		result2 := h.GetAllExcept(nil)
-		if len(result2) != 3 {
-			t.Fatal("expected 3")
-		}
+		actual = args.Map{"result": len(result2) != 3}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 
 		_ = h.GetAllExceptSpread("a")
 	})
@@ -753,43 +910,55 @@ func Test_Cov14_Hashset_GetAllExcept(t *testing.T) {
 
 func Test_Cov14_Hashset_Remove(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Remove", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 		h.Remove("a")
 
-		if h.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		h.SafeRemove("z") // no-op
 		h.SafeRemove("b")
 
-		if h.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": h.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_Cov14_Hashset_ToLowerSet(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_ToLowerSet", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"HELLO"})
 		lowered := h.ToLowerSet()
 
-		if !lowered.Has("hello") {
-			t.Fatal("expected hello")
-		}
+		// Act
+		actual := args.Map{"result": lowered.Has("hello")}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
 func Test_Cov14_Hashset_Resize(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Resize", func() {
+		// Arrange
 		h := corestr.New.Hashset.Cap(2)
 		h.Add("a")
 		h.Resize(100)
 		h.AddCapacities(50)
 
-		if !h.Has("a") {
-			t.Fatal("expected a after resize")
-		}
+		// Act
+		actual := args.Map{"result": h.Has("a")}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected a after resize", actual)
 	})
 }
 
@@ -818,12 +987,16 @@ func Test_Cov14_Hashset_WrapQuotes(t *testing.T) {
 
 func Test_Cov14_Hashset_Transpile(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Transpile", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		result := h.Transpile(func(s string) string { return s + "!" })
 
-		if result.Length() < 1 {
-			t.Fatal("expected at least 1")
-		}
+		// Act
+		actual := args.Map{"result": result.Length() < 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 1", actual)
 
 		// Empty
 		empty := corestr.Empty.Hashset()
@@ -833,44 +1006,59 @@ func Test_Cov14_Hashset_Transpile(t *testing.T) {
 
 func Test_Cov14_Hashset_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_JSON", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		b, err := json.Marshal(h)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		h2 := corestr.Empty.Hashset()
 		err = json.Unmarshal(b, h2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 	})
 }
 
 func Test_Cov14_Hashset_DistinctDiff(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_DistinctDiff", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		diffLines := h.DistinctDiffLinesRaw("b", "c")
-		if len(diffLines) != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": len(diffLines) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		diffMap := h.DistinctDiffLines("b", "c")
-		if len(diffMap) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual = args.Map{"result": len(diffMap) != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_Hashset_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_Clear_Dispose", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		h.Clear()
-		if h.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+
+		// Act
+		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 
 		h2 := corestr.New.Hashset.Strings([]string{"a"})
 		h2.Dispose()
@@ -879,12 +1067,16 @@ func Test_Cov14_Hashset_Clear_Dispose(t *testing.T) {
 
 func Test_Cov14_Hashset_MapStringAny(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashset_MapStringAny", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		m := h.MapStringAny()
 
-		if len(m) != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": len(m) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		_ = h.MapStringAnyDiff()
 	})
@@ -921,21 +1113,26 @@ func Test_Cov14_Hashset_Creators(t *testing.T) {
 
 func Test_Cov14_LinkedList_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_BasicOps", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
 		ll.Add("a").Add("b").Add("c")
 
-		if ll.Length() != 3 || ll.IsEmpty() || !ll.HasItems() {
-			t.Fatal("expected 3")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() != 3 || ll.IsEmpty() || !ll.HasItems()}
 
-		if ll.Head().Element != "a" || ll.Tail().Element != "c" {
-			t.Fatal("Head/Tail failed")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
+
+		actual = args.Map{"result": ll.Head().Element != "a" || ll.Tail().Element != "c"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Head/Tail failed", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_AddVariants(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AddVariants", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
 		ll.AddNonEmpty("")
 		ll.AddNonEmpty("a")
@@ -951,51 +1148,66 @@ func Test_Cov14_LinkedList_AddVariants(t *testing.T) {
 		ll.PushFront("front")
 		ll.AddFront("front2")
 
-		if ll.Length() < 7 {
-			t.Fatal("expected at least 7")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() < 7}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 7", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_Adds_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Adds_AddStrings", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
 		ll.Adds("a", "b", "c")
 		ll.AddStrings([]string{"d", "e"})
 
-		if ll.Length() != 5 {
-			t.Fatal("expected 5")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() != 5}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_AddCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AddCollection", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		ll.AddCollection(c)
 		ll.AddCollection(nil)
 
-		if ll.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_IsEquals", func() {
+		// Arrange
 		ll1 := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		ll2 := corestr.New.LinkedList.Strings([]string{"a", "b"})
 
-		if !ll1.IsEquals(ll2) {
-			t.Fatal("expected equal")
-		}
+		// Act
+		actual := args.Map{"result": ll1.IsEquals(ll2)}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 		// Case insensitive
 		ll3 := corestr.New.LinkedList.Strings([]string{"A", "B"})
-		if !ll1.IsEqualsWithSensitive(ll3, false) {
-			t.Fatal("expected equal insensitive")
-		}
+		actual = args.Map{"result": ll1.IsEqualsWithSensitive(ll3, false)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal insensitive", actual)
 	})
 }
 
@@ -1009,35 +1221,45 @@ func Test_Cov14_LinkedList_List_ToCollection(t *testing.T) {
 
 func Test_Cov14_LinkedList_SafeIndexAt(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_SafeIndexAt", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
 
 		node := ll.SafeIndexAt(1)
-		if node == nil || node.Element != "b" {
-			t.Fatal("expected b")
-		}
 
-		if ll.SafeIndexAt(-1) != nil || ll.SafeIndexAt(10) != nil {
-			t.Fatal("expected nil")
-		}
+		// Act
+		actual := args.Map{"result": node == nil || node.Element != "b"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b", actual)
+
+		actual = args.Map{"result": ll.SafeIndexAt(-1) != nil || ll.SafeIndexAt(10) != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_SafePointerIndexAtUsingDefault", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
 
-		if ll.SafePointerIndexAtUsingDefault(0, "def") != "a" {
-			t.Fatal("expected a")
-		}
+		// Act
+		actual := args.Map{"result": ll.SafePointerIndexAtUsingDefault(0, "def") != "a"}
 
-		if ll.SafePointerIndexAtUsingDefault(5, "def") != "def" {
-			t.Fatal("expected def")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
+
+		actual = args.Map{"result": ll.SafePointerIndexAtUsingDefault(5, "def") != "def"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected def", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_Loop(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Loop", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
 		count := 0
 
@@ -1046,9 +1268,12 @@ func Test_Cov14_LinkedList_Loop(t *testing.T) {
 			return false
 		})
 
-		if count != 3 {
-			t.Fatal("expected 3")
-		}
+		// Act
+		actual := args.Map{"result": count != 3}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1065,33 +1290,42 @@ func Test_Cov14_LinkedList_String(t *testing.T) {
 
 func Test_Cov14_LinkedList_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_JSON", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 
 		b, err := json.Marshal(ll)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		ll2 := corestr.New.LinkedList.Create()
 		err = json.Unmarshal(b, ll2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 
-		if ll2.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual = args.Map{"result": ll2.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_Clear(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Clear", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		ll.Clear()
 
-		if ll.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1110,35 +1344,47 @@ func Test_Cov14_LinkedList_Creators(t *testing.T) {
 
 func Test_Cov14_LinkedList_AppendNode(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_AppendNode", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
 		node := &corestr.LinkedListNode{Element: "a"}
 		ll.AppendNode(node)
 
-		if ll.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": ll.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_GetNextNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_GetNextNodes", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b", "c"})
 		nodes := ll.GetNextNodes(2)
 
-		if len(nodes) != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": len(nodes) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_LinkedList_GetAllLinkedNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_GetAllLinkedNodes", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		nodes := ll.GetAllLinkedNodes()
 
-		if len(nodes) != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": len(nodes) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1152,12 +1398,16 @@ func Test_Cov14_LinkedList_GetCompareSummary(t *testing.T) {
 
 func Test_Cov14_LinkedList_Joins(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedList_Joins", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
 		result := ll.Joins(",", "c")
 
-		if result == "" {
-			t.Fatal("expected non-empty")
-		}
+		// Act
+		actual := args.Map{"result": result == ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
@@ -1167,15 +1417,19 @@ func Test_Cov14_LinkedList_Joins(t *testing.T) {
 
 func Test_Cov14_LinkedListNode_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedListNode_AllMethods", func() {
+		// Arrange
 		node := &corestr.LinkedListNode{Element: "a"}
 
-		if node.HasNext() {
-			t.Fatal("expected no next")
-		}
+		// Act
+		actual := args.Map{"result": node.HasNext()}
 
-		if node.String() != "a" {
-			t.Fatal("expected a")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no next", actual)
+
+		actual = args.Map{"result": node.String() != "a"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 
 		_ = node.Clone()
 		_ = node.IsEqualValue("a")
@@ -1185,18 +1439,18 @@ func Test_Cov14_LinkedListNode_AllMethods(t *testing.T) {
 		_ = node.StringList("header: ")
 
 		end, length := node.EndOfChain()
-		if end != node || length != 1 {
-			t.Fatal("expected self, 1")
-		}
+		actual = args.Map{"result": end != node || length != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected self, 1", actual)
 
-		if !node.IsEqual(node) {
-			t.Fatal("expected equal to self")
-		}
+		actual = args.Map{"result": node.IsEqual(node)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal to self", actual)
 
 		node2 := &corestr.LinkedListNode{Element: "a"}
-		if !node.IsEqual(node2) {
-			t.Fatal("expected equal")
-		}
+		actual = args.Map{"result": node.IsEqual(node2)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -1206,18 +1460,22 @@ func Test_Cov14_LinkedListNode_AllMethods(t *testing.T) {
 
 func Test_Cov14_NonChainedLinkedListNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_NonChainedLinkedListNodes", func() {
+		// Arrange
 		nodes := corestr.NewNonChainedLinkedListNodes(5)
 		n1 := &corestr.LinkedListNode{Element: "a"}
 		n2 := &corestr.LinkedListNode{Element: "b"}
 		nodes.Adds(n1, n2)
 
-		if nodes.Length() != 2 || nodes.IsEmpty() || !nodes.HasItems() {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": nodes.Length() != 2 || nodes.IsEmpty() || !nodes.HasItems()}
 
-		if nodes.First().Element != "a" || nodes.Last().Element != "b" {
-			t.Fatal("First/Last failed")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
+
+		actual = args.Map{"result": nodes.First().Element != "a" || nodes.Last().Element != "b"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "First/Last failed", actual)
 
 		_ = nodes.FirstOrDefault()
 		_ = nodes.LastOrDefault()
@@ -1225,9 +1483,9 @@ func Test_Cov14_NonChainedLinkedListNodes(t *testing.T) {
 		_ = nodes.Items()
 
 		nodes.ApplyChaining()
-		if !nodes.IsChainingApplied() {
-			t.Fatal("expected chaining applied")
-		}
+		actual = args.Map{"result": nodes.IsChainingApplied()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected chaining applied", actual)
 	})
 }
 
@@ -1237,14 +1495,18 @@ func Test_Cov14_NonChainedLinkedListNodes(t *testing.T) {
 
 func Test_Cov14_NonChainedLinkedCollectionNodes(t *testing.T) {
 	safeTest(t, "Test_Cov14_NonChainedLinkedCollectionNodes", func() {
+		// Arrange
 		nodes := corestr.NewNonChainedLinkedCollectionNodes(5)
 		c1 := corestr.New.Collection.Strings([]string{"a"})
 		n1 := &corestr.LinkedCollectionNode{Element: c1}
 		nodes.Adds(n1)
 
-		if nodes.Length() != 1 || nodes.IsEmpty() {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": nodes.Length() != 1 || nodes.IsEmpty()}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 		_ = nodes.First()
 		_ = nodes.FirstOrDefault()
@@ -1262,33 +1524,37 @@ func Test_Cov14_NonChainedLinkedCollectionNodes(t *testing.T) {
 
 func Test_Cov14_KeyValueCollection_AllMethods(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_AllMethods", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Add("k1", "v1")
 		kvc.Add("k2", "v2")
 		kvc.AddIf(true, "k3", "v3")
 		kvc.AddIf(false, "s", "s")
 
-		if kvc.Length() != 3 || kvc.Count() != 3 || kvc.IsEmpty() {
-			t.Fatal("expected 3")
-		}
+		// Act
+		actual := args.Map{"result": kvc.Length() != 3 || kvc.Count() != 3 || kvc.IsEmpty()}
 
-		if !kvc.HasAnyItem() || kvc.LastIndex() != 2 || !kvc.HasIndex(2) || kvc.HasIndex(5) {
-			t.Fatal("index checks failed")
-		}
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
+
+		actual = args.Map{"result": kvc.HasAnyItem() || kvc.LastIndex() != 2 || !kvc.HasIndex(2) || kvc.HasIndex(5)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "index checks failed", actual)
 
 		_ = kvc.First()
 		_ = kvc.FirstOrDefault()
 		_ = kvc.Last()
 		_ = kvc.LastOrDefault()
 
-		if !kvc.HasKey("k1") || !kvc.IsContains("k1") {
-			t.Fatal("HasKey failed")
-		}
+		actual = args.Map{"result": kvc.HasKey("k1") || !kvc.IsContains("k1")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasKey failed", actual)
 
 		v, found := kvc.Get("k1")
-		if !found || v != "v1" {
-			t.Fatal("Get failed")
-		}
+		actual = args.Map{"result": found || v != "v1"}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Get failed", actual)
 
 		_ = kvc.AllKeys()
 		_ = kvc.AllKeysSorted()
@@ -1309,6 +1575,7 @@ func Test_Cov14_KeyValueCollection_AllMethods(t *testing.T) {
 
 func Test_Cov14_KeyValueCollection_Adds(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Adds", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Adds(
 			corestr.KeyValuePair{Key: "a", Value: "1"},
@@ -1326,14 +1593,18 @@ func Test_Cov14_KeyValueCollection_Adds(t *testing.T) {
 		kvc.AddsHashmap(hm)
 		kvc.AddsHashmaps(hm)
 
-		if kvc.Length() != 7 {
-			t.Fatalf("expected 7 got %d", kvc.Length())
-		}
+		// Act
+		actual := args.Map{"result": kvc.Length() != 7}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 7", actual)
 	})
 }
 
 func Test_Cov14_KeyValueCollection_Find(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Find", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Add("a", "1")
 		kvc.Add("b", "2")
@@ -1342,63 +1613,83 @@ func Test_Cov14_KeyValueCollection_Find(t *testing.T) {
 			return kv, kv.Key == "a", false
 		})
 
-		if len(found) != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": len(found) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_KeyValueCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_JSON", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Add("a", "1")
 
 		b, err := json.Marshal(kvc)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		kvc2 := corestr.Empty.KeyValueCollection()
 		err = json.Unmarshal(b, kvc2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 	})
 }
 
 func Test_Cov14_KeyValueCollection_StringsUsingFormat(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_StringsUsingFormat", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Add("a", "1")
 		result := kvc.StringsUsingFormat("%s=%s")
 
-		if len(result) != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": len(result) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_KeyValueCollection_AddStringBySplit(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_AddStringBySplit", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.AddStringBySplit("=", "key=value")
 		kvc.AddStringBySplitTrim("=", " key = value ")
 
-		if kvc.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": kvc.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_Cov14_KeyValueCollection_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_KeyValueCollection_Clear_Dispose", func() {
+		// Arrange
 		kvc := corestr.Empty.KeyValueCollection()
 		kvc.Add("a", "1")
 		kvc.Clear()
 
-		if kvc.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		// Act
+		actual := args.Map{"result": kvc.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 
 		kvc2 := corestr.Empty.KeyValueCollection()
 		kvc2.Add("x", "y")
@@ -1412,23 +1703,27 @@ func Test_Cov14_KeyValueCollection_Clear_Dispose(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_BasicOps", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello")
 
-		if !s.IsInitialized() || !s.IsDefined() || s.IsUninitialized() || s.IsInvalid() {
-			t.Fatal("expected initialized")
-		}
+		// Act
+		actual := args.Map{"result": s.IsInitialized() || !s.IsDefined() || s.IsUninitialized() || s.IsInvalid()}
 
-		if s.Value() != "hello" || s.SafeValue() != "hello" {
-			t.Fatal("expected hello")
-		}
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 
-		if s.IsEmpty() || s.IsWhitespace() {
-			t.Fatal("expected non-empty")
-		}
+		actual = args.Map{"result": s.Value() != "hello" || s.SafeValue() != "hello"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
-		if !s.HasValidNonEmpty() || !s.HasValidNonWhitespace() || !s.HasSafeNonEmpty() {
-			t.Fatal("expected valid")
-		}
+		actual = args.Map{"result": s.IsEmpty() || s.IsWhitespace()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+
+		actual = args.Map{"result": s.HasValidNonEmpty() || !s.HasValidNonWhitespace() || !s.HasSafeNonEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
 		_ = s.Trim()
 		_ = s.ValueBytes()
@@ -1442,102 +1737,132 @@ func Test_Cov14_SimpleStringOnce_BasicOps(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_SetOnUninitialized", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
 
 		err := s.SetOnUninitialized("val")
-		if err != nil {
-			t.Fatal("expected no error")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no error", actual)
 
 		err = s.SetOnUninitialized("another")
-		if err == nil {
-			t.Fatal("expected error for already initialized")
-		}
+		actual = args.Map{"result": err == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for already initialized", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetSetOnce", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
 
 		val := s.GetSetOnce("first")
-		if val != "first" {
-			t.Fatal("expected first")
-		}
+
+		// Act
+		actual := args.Map{"result": val != "first"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected first", actual)
 
 		val2 := s.GetSetOnce("second")
-		if val2 != "first" {
-			t.Fatal("expected first (already set)")
-		}
+		actual = args.Map{"result": val2 != "first"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected first (already set)", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_GetOnce(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetOnce", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
 		val := s.GetOnce()
 
-		if val != "" {
-			t.Fatal("expected empty")
-		}
+		// Act
+		actual := args.Map{"result": val != ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_GetOnceFunc", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
 		val := s.GetOnceFunc(func() string { return "computed" })
 
-		if val != "computed" {
-			t.Fatal("expected computed")
-		}
+		// Act
+		actual := args.Map{"result": val != "computed"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected computed", actual)
 
 		val2 := s.GetOnceFunc(func() string { return "other" })
-		if val2 != "computed" {
-			t.Fatal("expected computed (cached)")
-		}
+		actual = args.Map{"result": val2 != "computed"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected computed (cached)", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_SetOnceIfUninitialized(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_SetOnceIfUninitialized", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Uninitialized("")
 
-		if !s.SetOnceIfUninitialized("val") {
-			t.Fatal("expected set")
-		}
+		// Act
+		actual := args.Map{"result": s.SetOnceIfUninitialized("val")}
 
-		if s.SetOnceIfUninitialized("other") {
-			t.Fatal("expected not set")
-		}
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected set", actual)
+
+		actual = args.Map{"result": s.SetOnceIfUninitialized("other")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not set", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_Reset_Invalidate(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Reset_Invalidate", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("val")
 		s.Reset()
 
-		if s.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		// Act
+		actual := args.Map{"result": s.IsInitialized()}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 
 		s2 := corestr.New.SimpleStringOnce.Init("val2")
 		s2.Invalidate()
 
-		if s2.IsInitialized() {
-			t.Fatal("expected uninitialized")
-		}
+		actual = args.Map{"result": s2.IsInitialized()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }
 
 func Test_Cov14_SimpleStringOnce_Conversions(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Conversions", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("42")
 
-		if s.Int() != 42 || s.ValueInt(0) != 42 || s.ValueDefInt() != 42 {
-			t.Fatal("expected 42")
-		}
+		// Act
+		actual := args.Map{"result": s.Int() != 42 || s.ValueInt(0) != 42 || s.ValueDefInt() != 42}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 
 		_ = s.Byte()
 		_ = s.Int16()
@@ -1550,14 +1875,14 @@ func Test_Cov14_SimpleStringOnce_Conversions(t *testing.T) {
 		_ = f.ValueDefFloat64()
 
 		b := corestr.New.SimpleStringOnce.Init("true")
-		if !b.Boolean(false) || !b.BooleanDefault() || !b.IsValueBool() {
-			t.Fatal("expected true")
-		}
+		actual = args.Map{"result": b.Boolean(false) || !b.BooleanDefault() || !b.IsValueBool()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 
 		y := corestr.New.SimpleStringOnce.Init("yes")
-		if !y.Boolean(false) {
-			t.Fatal("expected true for yes")
-		}
+		actual = args.Map{"result": y.Boolean(false)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for yes", actual)
 
 		_ = s.IsSetter(false)
 		_ = s.IsSetter(true)
@@ -1566,17 +1891,22 @@ func Test_Cov14_SimpleStringOnce_Conversions(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_WithinRange(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_WithinRange", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("50")
 
 		val, inRange := s.WithinRange(true, 0, 100)
-		if !inRange || val != 50 {
-			t.Fatal("expected 50 in range")
-		}
+
+		// Act
+		actual := args.Map{"result": inRange || val != 50}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected 50 in range", actual)
 
 		val2, inRange2 := s.WithinRange(true, 60, 100)
-		if inRange2 || val2 != 60 {
-			t.Fatal("expected min boundary")
-		}
+		actual = args.Map{"result": inRange2 || val2 != 60}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected min boundary", actual)
 
 		_, _ = s.Uint16()
 		_, _ = s.Uint32()
@@ -1585,32 +1915,36 @@ func Test_Cov14_SimpleStringOnce_WithinRange(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_Is_Contains_Regex(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_Is_Contains_Regex", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello world")
 
-		if !s.Is("hello world") || s.Is("other") {
-			t.Fatal("Is failed")
-		}
+		// Act
+		actual := args.Map{"result": s.Is("hello world") || s.Is("other")}
 
-		if !s.IsAnyOf("hello world", "other") || !s.IsAnyOf() {
-			t.Fatal("IsAnyOf failed")
-		}
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Is failed", actual)
 
-		if !s.IsContains("hello") {
-			t.Fatal("IsContains failed")
-		}
+		actual = args.Map{"result": s.IsAnyOf("hello world", "other") || !s.IsAnyOf()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsAnyOf failed", actual)
 
-		if !s.IsAnyContains("hello", "xyz") || !s.IsAnyContains() {
-			t.Fatal("IsAnyContains failed")
-		}
+		actual = args.Map{"result": s.IsContains("hello")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsContains failed", actual)
 
-		if !s.IsEqualNonSensitive("HELLO WORLD") {
-			t.Fatal("expected equal")
-		}
+		actual = args.Map{"result": s.IsAnyContains("hello", "xyz") || !s.IsAnyContains()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsAnyContains failed", actual)
+
+		actual = args.Map{"result": s.IsEqualNonSensitive("HELLO WORLD")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 		re := regexp.MustCompile(`hello`)
-		if !s.IsRegexMatches(re) || s.IsRegexMatches(nil) {
-			t.Fatal("regex failed")
-		}
+		actual = args.Map{"result": s.IsRegexMatches(re) || s.IsRegexMatches(nil)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "regex failed", actual)
 
 		_ = s.RegexFindString(re)
 		_ = s.RegexFindString(nil)
@@ -1635,12 +1969,16 @@ func Test_Cov14_SimpleStringOnce_Split(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_ConcatNew", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("hello")
 		r := s.ConcatNew(" world")
 
-		if r.Value() != "hello world" {
-			t.Fatal("expected hello world")
-		}
+		// Act
+		actual := args.Map{"result": r.Value() != "hello world"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello world", actual)
 
 		r2 := s.ConcatNewUsingStrings("-", "world")
 		_ = r2
@@ -1658,18 +1996,23 @@ func Test_Cov14_SimpleStringOnce_Clone(t *testing.T) {
 
 func Test_Cov14_SimpleStringOnce_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_JSON", func() {
+		// Arrange
 		s := corestr.New.SimpleStringOnce.Init("val")
 
 		b, err := json.Marshal(&s)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		s2 := corestr.Empty.SimpleStringOnce()
 		err = json.Unmarshal(b, &s2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 	})
 }
 
@@ -1698,18 +2041,22 @@ func Test_Cov14_SimpleStringOnce_Creators(t *testing.T) {
 
 func Test_Cov14_CollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_CollectionsOfCollection", func() {
+		// Arrange
 		coc := corestr.Empty.CollectionsOfCollection()
 
-		if !coc.IsEmpty() || coc.HasItems() {
-			t.Fatal("expected empty")
-		}
+		// Act
+		actual := args.Map{"result": coc.IsEmpty() || coc.HasItems()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
 		coc.Add(c1)
 
-		if coc.Length() != 1 || coc.AllIndividualItemsLength() != 2 {
-			t.Fatal("expected 1/2")
-		}
+		actual = args.Map{"result": coc.Length() != 1 || coc.AllIndividualItemsLength() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1/2", actual)
 
 		_ = coc.Items()
 		_ = coc.List(0)
@@ -1723,20 +2070,25 @@ func Test_Cov14_CollectionsOfCollection(t *testing.T) {
 
 func Test_Cov14_CollectionsOfCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_CollectionsOfCollection_JSON", func() {
+		// Arrange
 		coc := corestr.Empty.CollectionsOfCollection()
 		c := corestr.New.Collection.Strings([]string{"a"})
 		coc.Add(c)
 
 		b, err := json.Marshal(coc)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		coc2 := corestr.Empty.CollectionsOfCollection()
 		err = json.Unmarshal(b, coc2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 	})
 }
 
@@ -1746,11 +2098,15 @@ func Test_Cov14_CollectionsOfCollection_JSON(t *testing.T) {
 
 func Test_Cov14_HashsetsCollection(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection", func() {
+		// Arrange
 		hc := corestr.Empty.HashsetsCollection()
 
-		if !hc.IsEmpty() || hc.HasItems() {
-			t.Fatal("expected empty")
-		}
+		// Act
+		actual := args.Map{"result": hc.IsEmpty() || hc.HasItems()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 		hc.Add(h)
@@ -1758,9 +2114,9 @@ func Test_Cov14_HashsetsCollection(t *testing.T) {
 		hc.AddNonEmpty(corestr.Empty.Hashset())
 		hc.AddNonEmpty(corestr.New.Hashset.Strings([]string{"c"}))
 
-		if hc.Length() != 2 {
-			t.Fatalf("expected 2 got %d", hc.Length())
-		}
+		actual = args.Map{"result": hc.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		_ = hc.StringsList()
 		_ = hc.String()
@@ -1772,6 +2128,7 @@ func Test_Cov14_HashsetsCollection(t *testing.T) {
 
 func Test_Cov14_HashsetsCollection_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_IsEqual", func() {
+		// Arrange
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
 		h2 := corestr.New.Hashset.Strings([]string{"a"})
 
@@ -1781,14 +2138,18 @@ func Test_Cov14_HashsetsCollection_IsEqual(t *testing.T) {
 		hc2 := corestr.Empty.HashsetsCollection()
 		hc2.Add(h2)
 
-		if !hc1.IsEqualPtr(hc2) {
-			t.Fatal("expected equal")
-		}
+		// Act
+		actual := args.Map{"result": hc1.IsEqualPtr(hc2)}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
 func Test_Cov14_HashsetsCollection_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_ConcatNew", func() {
+		// Arrange
 		h := corestr.New.Hashset.Strings([]string{"a"})
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(h)
@@ -1797,33 +2158,42 @@ func Test_Cov14_HashsetsCollection_ConcatNew(t *testing.T) {
 		hc2.Add(corestr.New.Hashset.Strings([]string{"b"}))
 
 		result := hc.ConcatNew(hc2)
-		if result.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": result.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		// No args
 		result2 := hc.ConcatNew()
-		if result2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": result2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_HashsetsCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_JSON", func() {
+		// Arrange
 		hc := corestr.Empty.HashsetsCollection()
 		hc.Add(corestr.New.Hashset.Strings([]string{"a"}))
 
 		b, err := json.Marshal(hc)
-		if err != nil {
-			t.Fatal("marshal failed")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal failed", actual)
 
 		hc2 := corestr.Empty.HashsetsCollection()
 		err = json.Unmarshal(b, hc2)
-		if err != nil {
-			t.Fatal("unmarshal failed")
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal failed", actual)
 	})
 }
 
@@ -1833,6 +2203,7 @@ func Test_Cov14_HashsetsCollection_JSON(t *testing.T) {
 
 func Test_Cov14_LinkedCollections_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_BasicOps", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		c1 := corestr.New.Collection.Strings([]string{"a"})
 		c2 := corestr.New.Collection.Strings([]string{"b"})
@@ -1840,9 +2211,12 @@ func Test_Cov14_LinkedCollections_BasicOps(t *testing.T) {
 		lc.Add(c1)
 		lc.Add(c2)
 
-		if lc.Length() != 2 || lc.IsEmpty() || !lc.HasItems() {
-			t.Fatal("expected 2")
-		}
+		// Act
+		actual := args.Map{"result": lc.Length() != 2 || lc.IsEmpty() || !lc.HasItems()}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 		_ = lc.Head()
 		_ = lc.Tail()
@@ -1856,17 +2230,22 @@ func Test_Cov14_LinkedCollections_BasicOps(t *testing.T) {
 
 func Test_Cov14_LinkedCollections_AddStrings(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddStrings", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.AddStrings("a", "b")
 
-		if lc.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_Cov14_LinkedCollections_AddFront(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddFront", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		c1 := corestr.New.Collection.Strings([]string{"a"})
 		c2 := corestr.New.Collection.Strings([]string{"b"})
@@ -1874,28 +2253,36 @@ func Test_Cov14_LinkedCollections_AddFront(t *testing.T) {
 		lc.Add(c1)
 		lc.AddFront(c2)
 
-		if lc.First().First() != "b" {
-			t.Fatal("expected b first")
-		}
+		// Act
+		actual := args.Map{"result": lc.First().First() != "b"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b first", actual)
 	})
 }
 
 func Test_Cov14_LinkedCollections_IsEquals(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_IsEquals", func() {
+		// Arrange
 		lc1 := corestr.Empty.LinkedCollections()
 		lc1.AddStrings("a")
 
 		lc2 := corestr.Empty.LinkedCollections()
 		lc2.AddStrings("a")
 
-		if !lc1.IsEqualsPtr(lc2) {
-			t.Fatal("expected equal")
-		}
+		// Act
+		actual := args.Map{"result": lc1.IsEqualsPtr(lc2)}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
 func Test_Cov14_LinkedCollections_AddAnother(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollections_AddAnother", func() {
+		// Arrange
 		lc1 := corestr.Empty.LinkedCollections()
 		lc1.AddStrings("a")
 
@@ -1903,9 +2290,13 @@ func Test_Cov14_LinkedCollections_AddAnother(t *testing.T) {
 		lc2.AddStrings("b")
 
 		lc1.AddAnother(lc2)
-		if lc1.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc1.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1915,12 +2306,16 @@ func Test_Cov14_LinkedCollections_AddAnother(t *testing.T) {
 
 func Test_Cov14_LinkedCollectionNode(t *testing.T) {
 	safeTest(t, "Test_Cov14_LinkedCollectionNode", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
 		node := &corestr.LinkedCollectionNode{Element: c}
 
-		if node.IsEmpty() || !node.HasElement() || node.HasNext() {
-			t.Fatal("expected valid")
-		}
+		// Act
+		actual := args.Map{"result": node.IsEmpty() || !node.HasElement() || node.HasNext()}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 
 		_ = node.String()
 		_ = node.List()
@@ -1929,9 +2324,9 @@ func Test_Cov14_LinkedCollectionNode(t *testing.T) {
 		_ = node.IsEqual(node)
 
 		end, length := node.EndOfChain()
-		if end != node || length != 1 {
-			t.Fatal("expected self, 1")
-		}
+		actual = args.Map{"result": end != node || length != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected self, 1", actual)
 
 		_ = node.CreateLinkedList()
 		_ = node.IsEqualValue(c)
@@ -1944,11 +2339,15 @@ func Test_Cov14_LinkedCollectionNode(t *testing.T) {
 
 func Test_Cov14_CharCollectionMap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_CharCollectionMap_BasicOps", func() {
+		// Arrange
 		ccm := corestr.Empty.CharCollectionMap()
 
-		if !ccm.IsEmpty() || ccm.HasItems() {
-			t.Fatal("expected empty")
-		}
+		// Act
+		actual := args.Map{"result": ccm.IsEmpty() || ccm.HasItems()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 
 		_ = ccm.Length()
 		_ = ccm.AllLengthsSum()
@@ -1963,11 +2362,15 @@ func Test_Cov14_CharCollectionMap_BasicOps(t *testing.T) {
 
 func Test_Cov14_CharHashsetMap_BasicOps(t *testing.T) {
 	safeTest(t, "Test_Cov14_CharHashsetMap_BasicOps", func() {
+		// Arrange
 		chm := corestr.Empty.CharHashsetMap()
 
-		if !chm.IsEmpty() || chm.HasItems() {
-			t.Fatal("expected empty")
-		}
+		// Act
+		actual := args.Map{"result": chm.IsEmpty() || chm.HasItems()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 
 		_ = chm.Length()
 		_ = chm.AllLengthsSum()

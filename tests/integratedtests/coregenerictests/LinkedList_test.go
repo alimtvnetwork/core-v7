@@ -58,6 +58,7 @@ func Test_LinkedList_FromEmptySlice(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IsEmpty())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -156,6 +157,7 @@ func Test_LinkedList_Adds(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -170,6 +172,7 @@ func Test_LinkedList_AddSlice(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -184,6 +187,7 @@ func Test_LinkedList_AddIfTrue(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -194,6 +198,7 @@ func Test_LinkedList_AddIfFalse(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IsEmpty())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -208,6 +213,7 @@ func Test_LinkedList_AddsIf(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IsEmpty())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -222,6 +228,7 @@ func Test_LinkedList_AddFunc(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.First())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -238,6 +245,7 @@ func Test_LinkedList_Push(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -251,6 +259,7 @@ func Test_LinkedList_FirstOrDefaultEmpty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.FirstOrDefault())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -260,6 +269,7 @@ func Test_LinkedList_FirstOrDefaultNonEmpty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.FirstOrDefault())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -273,6 +283,7 @@ func Test_LinkedList_LastOrDefaultEmpty(t *testing.T) {
 
 	actLines := []string{ll.LastOrDefault()}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -282,6 +293,7 @@ func Test_LinkedList_LastOrDefaultNonEmpty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.LastOrDefault())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -295,6 +307,7 @@ func Test_LinkedList_ItemsAll(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", len(ll.Items()))}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -304,6 +317,7 @@ func Test_LinkedList_ItemsEmpty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", len(ll.Items()))}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -317,6 +331,7 @@ func Test_LinkedList_Collection(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Collection().Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -330,6 +345,7 @@ func Test_LinkedList_String(t *testing.T) {
 
 	actLines := []string{ll.String()}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -361,6 +377,7 @@ func Test_LinkedList_IndexAt_First(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IndexAt(0).Element)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -370,6 +387,7 @@ func Test_LinkedList_IndexAt_Last(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IndexAt(2).Element)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -396,6 +414,7 @@ func Test_LinkedList_IndexAt_Empty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IndexAt(0) == nil)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -411,6 +430,7 @@ func Test_LinkedList_ForEachVisitsAll(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", sum)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -422,6 +442,7 @@ func Test_LinkedList_ForEachEmpty(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", called)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -437,6 +458,7 @@ func Test_LinkedList_ForEachBreakStopsEarly(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", count)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -448,6 +470,7 @@ func Test_LinkedList_ForEachBreakFirst(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", count)}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -510,6 +533,7 @@ func Test_LinkedList_LengthLock(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.LengthLock())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -519,6 +543,7 @@ func Test_LinkedList_IsEmptyLock(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.IsEmptyLock())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 
@@ -530,6 +555,7 @@ func Test_LinkedList_AddLock(t *testing.T) {
 
 	actLines := []string{fmt.Sprintf("%v", ll.Length())}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, actLines...)
 }
 

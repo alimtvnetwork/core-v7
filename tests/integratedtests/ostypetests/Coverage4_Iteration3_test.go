@@ -18,7 +18,13 @@ func Test_Cov4_Group_UnmarshallEnumToValue(t *testing.T) {
 	val, err := g.UnmarshallEnumToValue(validBytes)
 
 	// Assert
-	actual := args.Map{"value": val, "hasError": err != nil}
-	expected := args.Map{"value": byte(ostype.UnixGroup), "hasError": false}
+	actual := args.Map{
+		"value": val,
+		"hasError": err != nil,
+	}
+	expected := args.Map{
+		"value": byte(ostype.UnixGroup),
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Group returns correct value -- UnmarshallEnumToValue", actual)
 }

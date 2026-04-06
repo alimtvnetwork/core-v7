@@ -20,8 +20,14 @@ func Test_Cov49_UsingStringPtr_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingStringPtr(&s, &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "hello", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingStringPtr returns value -- valid string", actual)
 }
 
@@ -49,8 +55,14 @@ func Test_Cov49_UsingError_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingError(errJson, &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "error_msg", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "error_msg",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingError returns value -- valid json error", actual)
 }
 
@@ -78,8 +90,14 @@ func Test_Cov49_UsingBytesPointer_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingBytesPointer(bytes, &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "test", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "test",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesPointer returns value -- valid", actual)
 }
 
@@ -127,8 +145,14 @@ func Test_Cov49_UsingBytesIf_Skip(t *testing.T) {
 	err := corejson.Deserialize.UsingBytesIf(false, []byte(`"test"`), &result)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "empty": result == ""}
-	expected := args.Map{"noErr": true, "empty": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": result == "",
+	}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesIf skips -- false flag", actual)
 }
 
@@ -140,8 +164,14 @@ func Test_Cov49_UsingBytesIf_Process(t *testing.T) {
 	err := corejson.Deserialize.UsingBytesIf(true, []byte(`"ok"`), &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "ok", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "ok",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesIf processes -- true flag", actual)
 }
 
@@ -153,8 +183,14 @@ func Test_Cov49_UsingBytesPointerIf_Skip(t *testing.T) {
 	err := corejson.Deserialize.UsingBytesPointerIf(false, []byte(`"x"`), &result)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "empty": result == ""}
-	expected := args.Map{"noErr": true, "empty": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": result == "",
+	}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesPointerIf skips -- false flag", actual)
 }
 
@@ -204,8 +240,14 @@ func Test_Cov49_UsingStringOption_IgnoreEmpty(t *testing.T) {
 	err := corejson.Deserialize.UsingStringOption(true, "", &result)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "empty": result == ""}
-	expected := args.Map{"noErr": true, "empty": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": result == "",
+	}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingStringOption skips -- empty+ignore", actual)
 }
 
@@ -230,8 +272,14 @@ func Test_Cov49_UsingStringIgnoreEmpty_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingStringIgnoreEmpty(`"hello"`, &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "hello", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingStringIgnoreEmpty parses -- valid", actual)
 }
 
@@ -249,8 +297,14 @@ func Test_Cov49_MapAnyToPointer_Valid(t *testing.T) {
 	err := corejson.Deserialize.MapAnyToPointer(false, m, &result)
 
 	// Assert
-	actual := args.Map{"name": result.Name, "noErr": err == nil}
-	expected := args.Map{"name": "Alice", "noErr": true}
+	actual := args.Map{
+		"name": result.Name,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"name": "Alice",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyToPointer returns struct -- valid map", actual)
 }
 
@@ -263,8 +317,14 @@ func Test_Cov49_MapAnyToPointer_SkipEmpty(t *testing.T) {
 	err := corejson.Deserialize.MapAnyToPointer(true, map[string]any{}, &result)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "empty": result.Name == ""}
-	expected := args.Map{"noErr": true, "empty": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"empty": result.Name == "",
+	}
+	expected := args.Map{
+		"noErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyToPointer skips -- empty map+skipFlag", actual)
 }
 
@@ -281,8 +341,14 @@ func Test_Cov49_AnyToFieldsMap_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.AnyToFieldsMap(simple{Name: "Bob", Age: 30})
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "name": result["Name"]}
-	expected := args.Map{"noErr": true, "name": "Bob"}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": result["Name"],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"name": "Bob",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToFieldsMap returns map -- valid struct", actual)
 }
 
@@ -296,8 +362,14 @@ func Test_Cov49_FromString_Valid(t *testing.T) {
 	err := corejson.Deserialize.FromString(`"hi"`, &result)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": "hi", "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": "hi",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FromString returns value -- valid", actual)
 }
 
@@ -332,8 +404,14 @@ func Test_Cov49_Serialize_FromStringer(t *testing.T) {
 	result := corejson.Serialize.FromStringer(stringer)
 
 	// Assert
-	actual := args.Map{"hasBytes": result.Length() > 0, "noErr": !result.HasError()}
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	actual := args.Map{
+		"hasBytes": result.Length() > 0,
+		"noErr": !result.HasError(),
+	}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FromStringer returns result -- valid stringer", actual)
 }
 
@@ -366,8 +444,14 @@ func Test_Cov49_Serialize_ToBytesErr(t *testing.T) {
 	result, err := corejson.Serialize.ToBytesErr("test")
 
 	// Assert
-	actual := args.Map{"hasBytes": len(result) > 0, "noErr": err == nil}
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	actual := args.Map{
+		"hasBytes": len(result) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToBytesErr returns bytes -- valid", actual)
 }
 
@@ -376,8 +460,14 @@ func Test_Cov49_Serialize_ToStringErr(t *testing.T) {
 	result, err := corejson.Serialize.ToStringErr("test")
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "noErr": err == nil}
-	expected := args.Map{"hasContent": true, "noErr": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringErr returns string -- valid", actual)
 }
 
@@ -389,8 +479,14 @@ func Test_Cov49_Serialize_ToPrettyStringErr(t *testing.T) {
 	result, err := corejson.Serialize.ToPrettyStringErr(m)
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "noErr": err == nil}
-	expected := args.Map{"hasContent": true, "noErr": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToPrettyStringErr returns string -- valid", actual)
 }
 
@@ -419,8 +515,14 @@ func Test_Cov49_Serialize_FromInteger64(t *testing.T) {
 	result := corejson.Serialize.FromInteger64(42)
 
 	// Assert
-	actual := args.Map{"hasBytes": result.Length() > 0, "noErr": !result.HasError()}
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	actual := args.Map{
+		"hasBytes": result.Length() > 0,
+		"noErr": !result.HasError(),
+	}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FromInteger64 returns result -- valid int", actual)
 }
 
@@ -476,7 +578,13 @@ func Test_Cov49_JsonString_Valid(t *testing.T) {
 	result, err := corejson.JsonString(simple{Name: "Alice"})
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "noErr": err == nil}
-	expected := args.Map{"hasContent": true, "noErr": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonString returns string -- valid struct", actual)
 }

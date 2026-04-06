@@ -78,6 +78,7 @@ var covPtrConstructorTestCases = []coretestcases.CaseV1{
 
 func Test_PtrConstructors_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covPtrConstructorTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		typeName, _ := input.GetAsString("type")
 		notNil := false
@@ -109,7 +110,10 @@ func Test_PtrConstructors_Coverage(t *testing.T) {
 			notNil = coreonce.NewMapStringStringOncePtr(func() map[string]string { return nil }) != nil
 		}
 
+		// Act
 		actual := args.Map{"notNil": notNil}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -140,10 +144,12 @@ var covStringOnceTestCases = []coretestcases.CaseV1{
 
 func Test_StringOnce_Methods_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		val, _ := input.GetAsString("value")
 		so := coreonce.NewStringOnce(func() string { return val })
 
+		// Act
 		actual := args.Map{
 			"isEmpty":   so.IsEmpty(),
 			"isEmptyWs": so.IsEmptyOrWhitespace(),
@@ -162,6 +168,7 @@ func Test_StringOnce_Methods_Coverage(t *testing.T) {
 			actual["string"] = so.String()
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 		filtered := args.Map{}
 		for k := range expected {
@@ -181,23 +188,43 @@ func Test_StringOnce_Methods_Coverage(t *testing.T) {
 var covStringSplitTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "SplitLeftRight with separator",
-		ArrangeInput:  args.Map{"value": "key=value", "sep": "="},
-		ExpectedInput: args.Map{"left": "key", "right": "value"},
+		ArrangeInput:  args.Map{
+			"value": "key=value",
+			"sep": "=",
+		},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+		},
 	},
 	{
 		Title:         "SplitLeftRight no separator",
-		ArrangeInput:  args.Map{"value": "nosep", "sep": "="},
-		ExpectedInput: args.Map{"left": "nosep", "right": ""},
+		ArrangeInput:  args.Map{
+			"value": "nosep",
+			"sep": "=",
+		},
+		ExpectedInput: args.Map{
+			"left": "nosep",
+			"right": "",
+		},
 	},
 	{
 		Title:         "SplitLeftRightTrim with spaces",
-		ArrangeInput:  args.Map{"value": " key = value ", "sep": "=", "trim": true},
-		ExpectedInput: args.Map{"left": "key", "right": "value"},
+		ArrangeInput:  args.Map{
+			"value": " key = value ",
+			"sep": "=",
+			"trim": true,
+		},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+		},
 	},
 }
 
 func Test_StringOnce_SplitLeftRight_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringSplitTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		val, _ := input.GetAsString("value")
 		sep, _ := input.GetAsString("sep")
@@ -211,7 +238,13 @@ func Test_StringOnce_SplitLeftRight_Coverage(t *testing.T) {
 			left, right = so.SplitLeftRight(sep)
 		}
 
-		actual := args.Map{"left": left, "right": right}
+		// Act
+		actual := args.Map{
+			"left": left,
+			"right": right,
+		}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -224,12 +257,18 @@ var covStringOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{"value": "test"},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true, "errorOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+			"errorOk": true,
+		},
 	},
 }
 
 func Test_StringOnce_Serialize_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringOnceSerializeTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		val, _ := input.GetAsString("value")
 		so := coreonce.NewStringOnce(func() string { return val })
@@ -239,12 +278,15 @@ func Test_StringOnce_Serialize_Coverage(t *testing.T) {
 		unmarshalErr := so.UnmarshalJSON(marshalBytes)
 		errVal := so.Error()
 
+		// Act
 		actual := args.Map{
 			"serializeOk":  serErr == nil,
 			"marshalOk":    marshalErr == nil,
 			"unmarshalOk":  unmarshalErr == nil,
 			"errorOk":      errVal != nil,
 		}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -267,7 +309,10 @@ var covStringsOnceTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:        "StringsOnce not equal",
-		ArrangeInput: args.Map{"values": []string{"a"}, "compare": []string{"b"}},
+		ArrangeInput: args.Map{
+			"values": []string{"a"},
+			"compare": []string{"b"},
+		},
 		ExpectedInput: args.Map{
 			"isEqual": false,
 		},
@@ -276,11 +321,15 @@ var covStringsOnceTestCases = []coretestcases.CaseV1{
 
 func Test_StringsOnce_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringsOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		values := input["values"].([]string)
 		so := coreonce.NewStringsOnce(func() []string { return values })
 
+		// Act
 		actual := args.Map{}
+
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 
 		if _, has := expected["length"]; has {
@@ -330,24 +379,34 @@ func Test_StringsOnce_Coverage(t *testing.T) {
 var covStringsOnceIsEqualTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsOnce IsEqual different length returns false",
-		ArrangeInput:  args.Map{"values": []string{"a"}, "compare": []string{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"values": []string{"a"},
+			"compare": []string{"a", "b"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "StringsOnce IsEqual different value returns false",
-		ArrangeInput:  args.Map{"values": []string{"a"}, "compare": []string{"b"}},
+		ArrangeInput:  args.Map{
+			"values": []string{"a"},
+			"compare": []string{"b"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
 
 func Test_StringsOnce_IsEqual_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringsOnceIsEqualTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		values := input["values"].([]string)
 		compare := input["compare"].([]string)
 		so := coreonce.NewStringsOnce(func() []string { return values })
 
+		// Act
 		actual := args.Map{"isEqual": so.IsEqual(compare...)}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -368,23 +427,33 @@ var covIntegersOnceTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "IntegersOnce IsEqual different returns false",
-		ArrangeInput:  args.Map{"values": []int{1}, "compare": []int{2}},
+		ArrangeInput:  args.Map{
+			"values": []int{1},
+			"compare": []int{2},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "IntegersOnce IsEqual different length returns false",
-		ArrangeInput:  args.Map{"values": []int{1}, "compare": []int{1, 2}},
+		ArrangeInput:  args.Map{
+			"values": []int{1},
+			"compare": []int{1, 2},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
 
 func Test_IntegersOnce_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covIntegersOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		values := input["values"].([]int)
 		io := coreonce.NewIntegersOnce(func() []int { return values })
 
+		// Act
 		actual := args.Map{}
+
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 
 		if _, has := expected["isEmpty"]; has {
@@ -439,10 +508,12 @@ var covMapStringStringOnceTestCases = []coretestcases.CaseV1{
 
 func Test_MapStringStringOnce_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covMapStringStringOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		m := input["map"].(map[string]string)
 		mso := coreonce.NewMapStringStringOnce(func() map[string]string { return m })
 
+		// Act
 		actual := args.Map{
 			"length":     mso.Length(),
 			"hasAnyItem": mso.HasAnyItem(),
@@ -475,6 +546,7 @@ func Test_MapStringStringOnce_Coverage(t *testing.T) {
 		_, _ = mso.Serialize()
 		_, _ = mso.MarshalJSON()
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -491,18 +563,25 @@ var covMapSSIsEqualTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "IsEqual missing key returns false",
-		ArrangeInput:  args.Map{"map": map[string]string{"a": "1"}, "right": map[string]string{"b": "1"}},
+		ArrangeInput:  args.Map{
+			"map": map[string]string{"a": "1"},
+			"right": map[string]string{"b": "1"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "IsEqual different value returns false",
-		ArrangeInput:  args.Map{"map": map[string]string{"a": "1"}, "right": map[string]string{"a": "2"}},
+		ArrangeInput:  args.Map{
+			"map": map[string]string{"a": "1"},
+			"right": map[string]string{"a": "2"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
 
 func Test_MapStringStringOnce_IsEqual_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covMapSSIsEqualTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		m := input["map"].(map[string]string)
 		mso := coreonce.NewMapStringStringOnce(func() map[string]string { return m })
@@ -514,7 +593,10 @@ func Test_MapStringStringOnce_IsEqual_Coverage(t *testing.T) {
 			right = map[string]string{"a": "1", "b": "2"}
 		}
 
+		// Act
 		actual := args.Map{"isEqual": mso.IsEqual(right)}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -533,10 +615,14 @@ var covMapSSUnmarshalTestCases = []coretestcases.CaseV1{
 
 func Test_MapStringStringOnce_UnmarshalJSON_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covMapSSUnmarshalTestCases {
+		// Arrange
 		mso := coreonce.NewMapStringStringOnce(func() map[string]string { return nil })
 		err := mso.UnmarshalJSON([]byte(`{"k":"v"}`))
 
+		// Act
 		actual := args.Map{"ok": err == nil}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -565,15 +651,18 @@ var covByteOnceMethodsTestCases = []coretestcases.CaseV1{
 
 func Test_ByteOnce_Methods_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covByteOnceMethodsTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		val := input["value"].(byte)
 		bo := coreonce.NewByteOnce(func() byte { return val })
 
+		// Act
 		actual := args.Map{
 			"isEmpty": bo.IsEmpty(),
 			"isZero":  bo.IsZero(),
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 
 		if _, has := expected["intVal"]; has {
@@ -614,10 +703,12 @@ var covIntegerOnceMethodsTestCases = []coretestcases.CaseV1{
 
 func Test_IntegerOnce_Methods_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covIntegerOnceMethodsTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		val := input.GetAsIntDefault("value", 0)
 		io := coreonce.NewIntegerOnce(func() int { return val })
 
+		// Act
 		actual := args.Map{
 			"isAbove3":      io.IsAbove(3),
 			"isAboveEq5":    io.IsAboveEqual(5),
@@ -629,6 +720,7 @@ func Test_IntegerOnce_Methods_Coverage(t *testing.T) {
 		}
 		_, _ = io.MarshalJSON()
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -660,9 +752,11 @@ var covErrorOnceMethodsTestCases = []coretestcases.CaseV1{
 
 func Test_ErrorOnce_Methods_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covErrorOnceMethodsTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		hasErr := input.GetAsBoolDefault("hasError", false)
 
+		// Act
 		actual := args.Map{}
 
 		if hasErr {
@@ -685,6 +779,7 @@ func Test_ErrorOnce_Methods_Coverage(t *testing.T) {
 			actual["isMessageEqual"] = eo.IsMessageEqual("anything")
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 		filtered := args.Map{}
 		for k := range expected {
@@ -722,9 +817,11 @@ var covAnyErrorOnceMethodsTestCases = []coretestcases.CaseV1{
 
 func Test_AnyErrorOnce_Methods_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covAnyErrorOnceMethodsTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		isNilVal := input.GetAsBoolDefault("nilValue", false)
 
+		// Act
 		actual := args.Map{}
 
 		if isNilVal {
@@ -744,6 +841,7 @@ func Test_AnyErrorOnce_Methods_Coverage(t *testing.T) {
 			actual["valueStringMustOk"] = aeo.ValueStringMust() != ""
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 		filtered := args.Map{}
 		for k := range expected {
@@ -763,20 +861,29 @@ var covBytesOnceTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "BytesOnce nil initializerFunc is empty",
 		ArrangeInput:  args.Map{"nilInit": true},
-		ExpectedInput: args.Map{"isEmpty": true, "length": 0},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"length": 0,
+		},
 	},
 	{
 		Title:         "BytesOnce with data",
 		ArrangeInput:  args.Map{"value": "abc"},
-		ExpectedInput: args.Map{"isEmpty": false, "length": 3, "string": "abc"},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"length": 3,
+			"string": "abc",
+		},
 	},
 }
 
 func Test_BytesOnce_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covBytesOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		nilInit := input.GetAsBoolDefault("nilInit", false)
 
+		// Act
 		actual := args.Map{}
 
 		if nilInit {
@@ -794,6 +901,7 @@ func Test_BytesOnce_Coverage(t *testing.T) {
 			_ = bo.UnmarshalJSON([]byte(`"dGVzdA=="`))
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 		filtered := args.Map{}
 		for k := range expected {
@@ -832,9 +940,11 @@ var covBytesErrorOnceTestCases = []coretestcases.CaseV1{
 
 func Test_BytesErrorOnce_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covBytesErrorOnceTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		hasErr := input.GetAsBoolDefault("hasError", false)
 
+		// Act
 		actual := args.Map{}
 
 		if hasErr {
@@ -868,6 +978,7 @@ func Test_BytesErrorOnce_Coverage(t *testing.T) {
 			_, _ = beo.Serialize()
 		}
 
+		// Assert
 		expected := testCase.ExpectedInput.(args.Map)
 		filtered := args.Map{}
 		for k := range expected {
@@ -887,22 +998,30 @@ var covStringsOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+		},
 	},
 }
 
 func Test_StringsOnce_Serialize_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covStringsOnceSerializeTestCases {
+		// Arrange
 		so := coreonce.NewStringsOnce(func() []string { return []string{"a", "b"} })
 		_, serErr := so.Serialize()
 		marshalBytes, marshalErr := so.MarshalJSON()
 		unmarshalErr := so.UnmarshalJSON(marshalBytes)
 
+		// Act
 		actual := args.Map{
 			"serializeOk":  serErr == nil,
 			"marshalOk":    marshalErr == nil,
 			"unmarshalOk":  unmarshalErr == nil,
 		}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -915,22 +1034,30 @@ var covIntegersOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IntegersOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+		},
 	},
 }
 
 func Test_IntegersOnce_Serialize_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covIntegersOnceSerializeTestCases {
+		// Arrange
 		io := coreonce.NewIntegersOnce(func() []int { return []int{1, 2} })
 		_, serErr := io.Serialize()
 		marshalBytes, marshalErr := io.MarshalJSON()
 		unmarshalErr := io.UnmarshalJSON(marshalBytes)
 
+		// Act
 		actual := args.Map{
 			"serializeOk":  serErr == nil,
 			"marshalOk":    marshalErr == nil,
 			"unmarshalOk":  unmarshalErr == nil,
 		}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -943,14 +1070,22 @@ var covIntegersOnceEmptyTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IntegersOnce empty returns zero for maps",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"isEmpty": true, "isZero": true, "rangesLen": 0, "rangesBoolLen": 0, "uniqueLen": 0},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"isZero": true,
+			"rangesLen": 0,
+			"rangesBoolLen": 0,
+			"uniqueLen": 0,
+		},
 	},
 }
 
 func Test_IntegersOnce_Empty_Coverage(t *testing.T) {
 	for caseIndex, testCase := range covIntegersOnceEmptyTestCases {
+		// Arrange
 		io := coreonce.NewIntegersOnce(func() []int { return []int{} })
 
+		// Act
 		actual := args.Map{
 			"isEmpty":       io.IsEmpty(),
 			"isZero":        io.IsZero(),
@@ -958,6 +1093,8 @@ func Test_IntegersOnce_Empty_Coverage(t *testing.T) {
 			"rangesBoolLen": len(io.RangesBoolMap()),
 			"uniqueLen":     len(io.UniqueMap()),
 		}
+
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }

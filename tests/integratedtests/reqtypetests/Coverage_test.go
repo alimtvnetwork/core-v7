@@ -5,22 +5,27 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reqtype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── Constants ──
 
 func Test_Request_Constants(t *testing.T) {
-	if reqtype.Invalid != 0 {
-		t.Error("Invalid should be 0")
-	}
-	if reqtype.Create != 1 {
-		t.Error("Create should be 1")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Invalid != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Invalid should be 0", actual)
+	actual := args.Map{"result": reqtype.Create != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should be 1", actual)
 }
 
 // ── Identity checks ──
 
 func Test_Request_IdentityChecks(t *testing.T) {
+	// Arrange
 	checks := map[reqtype.Request]string{
 		reqtype.Create:                         "IsCreate",
 		reqtype.Read:                           "IsRead",
@@ -78,471 +83,657 @@ func Test_Request_IdentityChecks(t *testing.T) {
 	}
 
 	for req, name := range checks {
-		if req.String() == "" {
-			t.Errorf("%s: String should not be empty", name)
-		}
+
+	// Act
+		actual := args.Map{"result": req.String() == ""}
+
+	// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, ": String should not be empty", actual)
 	}
 
 	// Verify individual Is methods
-	if !reqtype.Create.IsCreate() { t.Error("IsCreate") }
-	if !reqtype.Read.IsRead() { t.Error("IsRead") }
-	if !reqtype.Update.IsUpdate() { t.Error("IsUpdate") }
-	if !reqtype.Delete.IsDelete() { t.Error("IsDelete") }
-	if !reqtype.Drop.IsDrop() { t.Error("IsDrop") }
-	if !reqtype.CreateOrUpdate.IsCreateOrUpdate() { t.Error("IsCreateOrUpdate") }
-	if !reqtype.ExistCheck.IsExistCheck() { t.Error("IsExistCheck") }
-	if !reqtype.SkipOnExist.IsSkipOnExist() { t.Error("IsSkipOnExist") }
-	if !reqtype.Overwrite.IsOverwrite() { t.Error("IsOverwrite") }
-	if !reqtype.Override.IsOverride() { t.Error("IsOverride") }
-	if !reqtype.Enforce.IsEnforce() { t.Error("IsEnforce") }
-	if !reqtype.GetHttp.IsGetHttp() { t.Error("IsGetHttp") }
-	if !reqtype.PostHttp.IsPostHttp() { t.Error("IsPostHttp") }
-	if !reqtype.PutHttp.IsPutHttp() { t.Error("IsPutHttp") }
-	if !reqtype.DeleteHttp.IsDeleteHttp() { t.Error("IsDeleteHttp") }
-	if !reqtype.PatchHttp.IsPatchHttp() { t.Error("IsPatchHttp") }
-	if !reqtype.Touch.IsTouch() { t.Error("IsTouch") }
-	if !reqtype.Start.IsStart() { t.Error("IsStart") }
-	if !reqtype.Stop.IsStop() { t.Error("IsStop") }
-	if !reqtype.Restart.IsRestart() { t.Error("IsRestart") }
-	if !reqtype.Reload.IsReload() { t.Error("IsReload") }
+	actual := args.Map{"result": reqtype.Create.IsCreate()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsCreate", actual)
+	actual := args.Map{"result": reqtype.Read.IsRead()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsRead", actual)
+	actual := args.Map{"result": reqtype.Update.IsUpdate()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsUpdate", actual)
+	actual := args.Map{"result": reqtype.Delete.IsDelete()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsDelete", actual)
+	actual := args.Map{"result": reqtype.Drop.IsDrop()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsDrop", actual)
+	actual := args.Map{"result": reqtype.CreateOrUpdate.IsCreateOrUpdate()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsCreateOrUpdate", actual)
+	actual := args.Map{"result": reqtype.ExistCheck.IsExistCheck()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsExistCheck", actual)
+	actual := args.Map{"result": reqtype.SkipOnExist.IsSkipOnExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsSkipOnExist", actual)
+	actual := args.Map{"result": reqtype.Overwrite.IsOverwrite()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsOverwrite", actual)
+	actual := args.Map{"result": reqtype.Override.IsOverride()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsOverride", actual)
+	actual := args.Map{"result": reqtype.Enforce.IsEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsEnforce", actual)
+	actual := args.Map{"result": reqtype.GetHttp.IsGetHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsGetHttp", actual)
+	actual := args.Map{"result": reqtype.PostHttp.IsPostHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsPostHttp", actual)
+	actual := args.Map{"result": reqtype.PutHttp.IsPutHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsPutHttp", actual)
+	actual := args.Map{"result": reqtype.DeleteHttp.IsDeleteHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsDeleteHttp", actual)
+	actual := args.Map{"result": reqtype.PatchHttp.IsPatchHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsPatchHttp", actual)
+	actual := args.Map{"result": reqtype.Touch.IsTouch()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsTouch", actual)
+	actual := args.Map{"result": reqtype.Start.IsStart()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsStart", actual)
+	actual := args.Map{"result": reqtype.Stop.IsStop()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsStop", actual)
+	actual := args.Map{"result": reqtype.Restart.IsRestart()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsRestart", actual)
+	actual := args.Map{"result": reqtype.Reload.IsReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsReload", actual)
 }
 
 // ── Logical groupings ──
 
 func Test_Request_LogicalGroups(t *testing.T) {
-	if !reqtype.Create.IsCreateLogically() {
-		t.Error("Create should be create logically")
-	}
-	if !reqtype.Create.IsCreateOrUpdateLogically() {
-		t.Error("Create should be create/update logically")
-	}
-	if !reqtype.Drop.IsDropLogically() {
-		t.Error("Drop should be drop logically")
-	}
-	if !reqtype.Read.IsCrudOnlyLogically() {
-		t.Error("Read should be CRUD only")
-	}
-	if reqtype.Read.IsNotCrudOnlyLogically() {
-		t.Error("Read should not be NOT CRUD")
-	}
-	if !reqtype.Read.IsReadOrEditLogically() {
-		t.Error("Read should be read/edit")
-	}
-	if !reqtype.Update.IsEditOrUpdateLogically() {
-		t.Error("Update should be edit/update")
-	}
-	if !reqtype.ExistCheck.IsOnExistCheckLogically() {
-		t.Error("ExistCheck should be on exist check")
-	}
-	if !reqtype.Delete.IsUpdateOrRemoveLogically() {
-		t.Error("Delete should be update/remove")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsCreateLogically()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be create logically", actual)
+	actual := args.Map{"result": reqtype.Create.IsCreateOrUpdateLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be create/update logically", actual)
+	actual := args.Map{"result": reqtype.Drop.IsDropLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Drop should be drop logically", actual)
+	actual := args.Map{"result": reqtype.Read.IsCrudOnlyLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Read should be CRUD only", actual)
+	actual := args.Map{"result": reqtype.Read.IsNotCrudOnlyLogically()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Read should not be NOT CRUD", actual)
+	actual := args.Map{"result": reqtype.Read.IsReadOrEditLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Read should be read/edit", actual)
+	actual := args.Map{"result": reqtype.Update.IsEditOrUpdateLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Update should be edit/update", actual)
+	actual := args.Map{"result": reqtype.ExistCheck.IsOnExistCheckLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "ExistCheck should be on exist check", actual)
+	actual := args.Map{"result": reqtype.Delete.IsUpdateOrRemoveLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Delete should be update/remove", actual)
 }
 
 func Test_Request_OverrideGroup(t *testing.T) {
-	if !reqtype.Override.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("Override should match group")
-	}
-	if !reqtype.Overwrite.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("Overwrite should match group")
-	}
-	if reqtype.Create.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("Create should not match override group")
-	}
-	if !reqtype.Create.IsNotOverrideOrOverwriteOrEnforce() {
-		t.Error("Create should not match override")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Override.IsOverrideOrOverwriteOrEnforce()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Override should match group", actual)
+	actual := args.Map{"result": reqtype.Overwrite.IsOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Overwrite should match group", actual)
+	actual := args.Map{"result": reqtype.Create.IsOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should not match override group", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should not match override", actual)
 }
 
 func Test_Request_RestartReload(t *testing.T) {
-	if !reqtype.Restart.IsRestartOrReload() {
-		t.Error("Restart should be restart/reload")
-	}
-	if !reqtype.Reload.IsRestartOrReload() {
-		t.Error("Reload should be restart/reload")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Restart.IsRestartOrReload()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Restart should be restart/reload", actual)
+	actual := args.Map{"result": reqtype.Reload.IsRestartOrReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Reload should be restart/reload", actual)
 }
 
 func Test_Request_AnySkipOnExist(t *testing.T) {
-	if !reqtype.SkipOnExist.IsAnySkipOnExist() {
-		t.Error("SkipOnExist should be any skip on exist")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.SkipOnExist.IsAnySkipOnExist()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "SkipOnExist should be any skip on exist", actual)
 }
 
 func Test_Request_AnyApplyOnExist(t *testing.T) {
-	if !reqtype.UpdateOnExist.IsAnyApplyOnExist() {
-		t.Error("UpdateOnExist should be any apply on exist")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.UpdateOnExist.IsAnyApplyOnExist()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "UpdateOnExist should be any apply on exist", actual)
 }
 
 func Test_Request_IsCrud(t *testing.T) {
-	if !reqtype.Create.IsCrud() {
-		t.Error("Create should be CRUD")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsCrud()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be CRUD", actual)
 }
 
 func Test_Request_IsCrudSkip(t *testing.T) {
-	if !reqtype.CreateOrSkipOnExist.IsCrudSkip() {
-		t.Error("CreateOrSkipOnExist should be CRUD skip")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.CreateOrSkipOnExist.IsCrudSkip()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "CreateOrSkipOnExist should be CRUD skip", actual)
 }
 
 func Test_Request_IsCrudOrSkip(t *testing.T) {
-	if !reqtype.Create.IsCrudOrSkip() {
-		t.Error("Create should be CRUD or skip")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsCrudOrSkip()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be CRUD or skip", actual)
 }
 
 func Test_Request_IsAnyDrop(t *testing.T) {
-	if !reqtype.Drop.IsAnyDrop() {
-		t.Error("Drop should be any drop")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Drop.IsAnyDrop()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Drop should be any drop", actual)
 }
 
 func Test_Request_IsDropSafe(t *testing.T) {
-	if !reqtype.DropOnExist.IsDropSafe() {
-		t.Error("DropOnExist should be drop safe")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.DropOnExist.IsDropSafe()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "DropOnExist should be drop safe", actual)
 }
 
 func Test_Request_IsAnyCreate(t *testing.T) {
-	if !reqtype.Create.IsAnyCreate() {
-		t.Error("Create should be any create")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsAnyCreate()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be any create", actual)
 }
 
 func Test_Request_IsAnyHttp(t *testing.T) {
-	if !reqtype.GetHttp.IsAnyHttp() {
-		t.Error("GetHttp should be any HTTP")
-	}
-	if reqtype.Create.IsAnyHttp() {
-		t.Error("Create should not be any HTTP")
-	}
-	if !reqtype.Create.IsNotHttpMethod() {
-		t.Error("Create should not be HTTP method")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.GetHttp.IsAnyHttp()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "GetHttp should be any HTTP", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyHttp()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should not be any HTTP", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotHttpMethod()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should not be HTTP method", actual)
 }
 
 func Test_Request_IsAnyAction(t *testing.T) {
-	if !reqtype.Start.IsAnyAction() {
-		t.Error("Start should be any action")
-	}
-	if reqtype.Create.IsAnyAction() {
-		t.Error("Create should not be any action")
-	}
-	if !reqtype.Create.IsNotAnyAction() {
-		t.Error("Create should be not any action")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Start.IsAnyAction()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Start should be any action", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyAction()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should not be any action", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotAnyAction()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be not any action", actual)
 }
 
 // ── Value conversions ──
 
 func Test_Request_ValueConversions(t *testing.T) {
+	// Arrange
 	r := reqtype.Create
 
-	if r.Value() != 1 {
-		t.Error("Value mismatch")
-	}
-	if r.ValueByte() != 1 {
-		t.Error("ValueByte mismatch")
-	}
-	if r.ValueInt() != 1 {
-		t.Error("ValueInt mismatch")
-	}
-	if r.ValueInt8() != 1 {
-		t.Error("ValueInt8 mismatch")
-	}
-	if r.ValueInt16() != 1 {
-		t.Error("ValueInt16 mismatch")
-	}
-	if r.ValueInt32() != 1 {
-		t.Error("ValueInt32 mismatch")
-	}
-	if r.ValueUInt16() != 1 {
-		t.Error("ValueUInt16 mismatch")
-	}
-	if r.ValueString() == "" {
-		t.Error("ValueString should not be empty")
-	}
+	// Act
+	actual := args.Map{"result": r.Value() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Value mismatch", actual)
+	actual := args.Map{"result": r.ValueByte() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueByte mismatch", actual)
+	actual := args.Map{"result": r.ValueInt() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueInt mismatch", actual)
+	actual := args.Map{"result": r.ValueInt8() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueInt8 mismatch", actual)
+	actual := args.Map{"result": r.ValueInt16() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueInt16 mismatch", actual)
+	actual := args.Map{"result": r.ValueInt32() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueInt32 mismatch", actual)
+	actual := args.Map{"result": r.ValueUInt16() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueUInt16 mismatch", actual)
+	actual := args.Map{"result": r.ValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ValueString should not be empty", actual)
 }
 
 func Test_Request_ValidInvalid(t *testing.T) {
-	if reqtype.Invalid.IsValid() {
-		t.Error("Invalid should not be valid")
-	}
-	if !reqtype.Invalid.IsInvalid() {
-		t.Error("Invalid should be invalid")
-	}
-	if !reqtype.Invalid.IsUndefined() {
-		t.Error("Invalid should be undefined")
-	}
-	if !reqtype.Invalid.IsNone() {
-		t.Error("Invalid should be none")
-	}
-	if !reqtype.Invalid.IsUninitialized() {
-		t.Error("Invalid should be uninitialized")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Invalid.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Invalid should not be valid", actual)
+	actual := args.Map{"result": reqtype.Invalid.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be invalid", actual)
+	actual := args.Map{"result": reqtype.Invalid.IsUndefined()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be undefined", actual)
+	actual := args.Map{"result": reqtype.Invalid.IsNone()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be none", actual)
+	actual := args.Map{"result": reqtype.Invalid.IsUninitialized()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be uninitialized", actual)
 }
 
 // ── Name / String / NameValue ──
 
 func Test_Request_Name(t *testing.T) {
-	if reqtype.Create.Name() == "" {
-		t.Error("Name should not be empty")
-	}
-	if reqtype.Create.String() == "" {
-		t.Error("String should not be empty")
-	}
-	if reqtype.Create.NameValue() == "" {
-		t.Error("NameValue should not be empty")
-	}
-	if reqtype.Create.ToNumberString() == "" {
-		t.Error("ToNumberString should not be empty")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.Name() == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Name should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.NameValue() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NameValue should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.ToNumberString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToNumberString should not be empty", actual)
 }
 
 func Test_Request_IsNameEqual(t *testing.T) {
+	// Arrange
 	name := reqtype.Create.Name()
-	if !reqtype.Create.IsNameEqual(name) {
-		t.Error("IsNameEqual should be true")
-	}
+
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsNameEqual(name)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsNameEqual should be true", actual)
 }
 
 func Test_Request_IsAnyNamesOf(t *testing.T) {
+	// Arrange
 	name := reqtype.Create.Name()
-	if !reqtype.Create.IsAnyNamesOf("NonExist", name) {
-		t.Error("IsAnyNamesOf should find match")
-	}
+
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsAnyNamesOf("NonExist", name)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsAnyNamesOf should find match", actual)
 }
 
 // ── Enum info ──
 
 func Test_Request_EnumInfo(t *testing.T) {
-	if reqtype.Create.TypeName() == "" {
-		t.Error("TypeName should not be empty")
-	}
-	if reqtype.Create.RangeNamesCsv() == "" {
-		t.Error("RangeNamesCsv should not be empty")
-	}
-	if !reqtype.Create.IsValidRange() {
-		t.Error("Create should be valid range")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.TypeName() == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "TypeName should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.RangeNamesCsv() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangeNamesCsv should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.IsValidRange()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be valid range", actual)
 }
 
 func Test_Request_MinMax(t *testing.T) {
+	// Arrange
 	min, max := reqtype.Create.MinMaxAny()
-	if min == nil || max == nil {
-		t.Error("MinMaxAny should not return nil")
-	}
-	if reqtype.Create.MinValueString() == "" {
-		t.Error("MinValueString should not be empty")
-	}
-	if reqtype.Create.MaxValueString() == "" {
-		t.Error("MaxValueString should not be empty")
-	}
-	if reqtype.Create.MaxByte() == 0 {
-		t.Error("MaxByte should not be 0")
-	}
+
+	// Act
+	actual := args.Map{"result": min == nil || max == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MinMaxAny should not return nil", actual)
+	actual := args.Map{"result": reqtype.Create.MinValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MinValueString should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.MaxValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaxValueString should not be empty", actual)
+	actual := args.Map{"result": reqtype.Create.MaxByte() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaxByte should not be 0", actual)
 }
 
 func Test_Request_Ranges(t *testing.T) {
-	if len(reqtype.Create.IntegerEnumRanges()) == 0 {
-		t.Error("IntegerEnumRanges should not be empty")
-	}
-	if len(reqtype.Create.RangesDynamicMap()) == 0 {
-		t.Error("RangesDynamicMap should not be empty")
-	}
-	if len(reqtype.Create.RangesByte()) == 0 {
-		t.Error("RangesByte should not be empty")
-	}
+	// Act
+	actual := args.Map{"result": len(reqtype.Create.IntegerEnumRanges()) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IntegerEnumRanges should not be empty", actual)
+	actual := args.Map{"result": len(reqtype.Create.RangesDynamicMap()) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangesDynamicMap should not be empty", actual)
+	actual := args.Map{"result": len(reqtype.Create.RangesByte()) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangesByte should not be empty", actual)
 }
 
 // ── JSON ──
 
 func Test_Request_JSON(t *testing.T) {
+	// Arrange
 	data, err := json.Marshal(reqtype.Create)
-	if err != nil {
-		t.Errorf("MarshalJSON error: %v", err)
-	}
-	if len(data) == 0 {
-		t.Error("MarshalJSON should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MarshalJSON error:", actual)
+	actual := args.Map{"result": len(data) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MarshalJSON should not be empty", actual)
 
 	var r reqtype.Request
 	err = json.Unmarshal(data, &r)
-	if err != nil {
-		t.Errorf("UnmarshalJSON error: %v", err)
-	}
-	if r != reqtype.Create {
-		t.Error("should unmarshal to Create")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
+	actual := args.Map{"result": r != reqtype.Create}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should unmarshal to Create", actual)
 }
 
 // ── IsInBetween / IsNotAnyOfReqs / IsAnyOfReqs ──
 
 func Test_Request_IsInBetween(t *testing.T) {
-	if !reqtype.Read.IsInBetween(reqtype.Create, reqtype.Delete) {
-		t.Error("Read should be between Create and Delete")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Read.IsInBetween(reqtype.Create, reqtype.Delete)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Read should be between Create and Delete", actual)
 }
 
 func Test_Request_IsNotAnyOfReqs(t *testing.T) {
-	if !reqtype.Create.IsNotAnyOfReqs(reqtype.Read, reqtype.Update) {
-		t.Error("Create should not be any of Read,Update")
-	}
-	if reqtype.Create.IsNotAnyOfReqs(reqtype.Create) {
-		t.Error("Create should be found")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs(reqtype.Read, reqtype.Update)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should not be any of Read,Update", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs(reqtype.Create)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should be found", actual)
 }
 
 func Test_Request_IsAnyOfReqs(t *testing.T) {
-	if !reqtype.Create.IsAnyOfReqs(reqtype.Read, reqtype.Create) {
-		t.Error("Create should be any of Read,Create")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs(reqtype.Read, reqtype.Create)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should be any of Read,Create", actual)
 }
 
 func Test_Request_IsAnyOf(t *testing.T) {
-	if !reqtype.Create.IsAnyOf(byte(reqtype.Create)) {
-		t.Error("IsAnyOf should match")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsAnyOf(byte(reqtype.Create))}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsAnyOf should match", actual)
 }
 
 func Test_Request_IsAnyValuesEqual(t *testing.T) {
-	if !reqtype.Create.IsAnyValuesEqual(1) {
-		t.Error("should match value 1")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsAnyValuesEqual(1)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should match value 1", actual)
 }
 
 func Test_Request_IsByteValueEqual(t *testing.T) {
-	if !reqtype.Create.IsByteValueEqual(1) {
-		t.Error("should match byte 1")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsByteValueEqual(1)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should match byte 1", actual)
 }
 
 // ── GetStatusAnyOf / GetInBetweenStatus ──
 
 func Test_Request_GetStatusAnyOf(t *testing.T) {
+	// Arrange
 	status := reqtype.Create.GetStatusAnyOf(reqtype.Create, reqtype.Read)
-	if !status.IsSuccess {
-		t.Error("should be success")
-	}
+
+	// Act
+	actual := args.Map{"result": status.IsSuccess}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be success", actual)
 
 	status = reqtype.Create.GetStatusAnyOf(reqtype.Read, reqtype.Update)
-	if status.Error == nil {
-		t.Error("should have error for no match")
-	}
+	actual := args.Map{"result": status.Error == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have error for no match", actual)
 }
 
 func Test_Request_GetInBetweenStatus(t *testing.T) {
+	// Arrange
 	status := reqtype.Read.GetInBetweenStatus(reqtype.Create, reqtype.Delete)
-	if !status.IsSuccess {
-		t.Error("Read should be in between")
-	}
+
+	// Act
+	actual := args.Map{"result": status.IsSuccess}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Read should be in between", actual)
 
 	status = reqtype.Overwrite.GetInBetweenStatus(reqtype.Create, reqtype.Delete)
-	if status.IsSuccess {
-		t.Error("Overwrite should not be in between Create-Delete")
-	}
+	actual := args.Map{"result": status.IsSuccess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Overwrite should not be in between Create-Delete", actual)
 }
 
 // ── ToPtr / ToSimple ──
 
 func Test_Request_ToPtr(t *testing.T) {
+	// Arrange
 	ptr := reqtype.Create.ToPtr()
-	if ptr == nil || *ptr != reqtype.Create {
-		t.Error("ToPtr mismatch")
-	}
+
+	// Act
+	actual := args.Map{"result": ptr == nil || *ptr != reqtype.Create}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToPtr mismatch", actual)
 }
 
 func Test_Request_ToSimple(t *testing.T) {
+	// Arrange
 	r := reqtype.Create
-	if r.ToSimple() != reqtype.Create {
-		t.Error("ToSimple mismatch")
-	}
+
+	// Act
+	actual := args.Map{"result": r.ToSimple() != reqtype.Create}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToSimple mismatch", actual)
 
 	var nilPtr *reqtype.Request
-	if nilPtr.ToSimple() != reqtype.Invalid {
-		t.Error("nil ToSimple should return Invalid")
-	}
+	actual := args.Map{"result": nilPtr.ToSimple() != reqtype.Invalid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil ToSimple should return Invalid", actual)
 }
 
 // ── Interface bindings ──
 
 func Test_Request_InterfaceBindings(t *testing.T) {
+	// Arrange
 	r := reqtype.Create
 
-	if r.AsBasicEnumContractsBinder() == nil {
-		t.Error("AsBasicEnumContractsBinder should not be nil")
-	}
-	if r.AsBasicByteEnumContractsBinder() == nil {
-		t.Error("AsBasicByteEnumContractsBinder should not be nil")
-	}
-	if r.AsCrudTyper() == nil {
-		t.Error("AsCrudTyper should not be nil")
-	}
-	if r.AsOverwriteOrRideOrEnforcer() == nil {
-		t.Error("AsOverwriteOrRideOrEnforcer should not be nil")
-	}
-	if r.AsHttpMethodTyper() == nil {
-		t.Error("AsHttpMethodTyper should not be nil")
-	}
-	if r.AsActionTyper() == nil {
-		t.Error("AsActionTyper should not be nil")
-	}
-	if r.EnumType() == nil {
-		t.Error("EnumType should not be nil")
-	}
-	if r.AsJsonMarshaller() == nil {
-		t.Error("AsJsonMarshaller should not be nil")
-	}
+	// Act
+	actual := args.Map{"result": r.AsBasicEnumContractsBinder() == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsBasicEnumContractsBinder should not be nil", actual)
+	actual := args.Map{"result": r.AsBasicByteEnumContractsBinder() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsBasicByteEnumContractsBinder should not be nil", actual)
+	actual := args.Map{"result": r.AsCrudTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsCrudTyper should not be nil", actual)
+	actual := args.Map{"result": r.AsOverwriteOrRideOrEnforcer() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsOverwriteOrRideOrEnforcer should not be nil", actual)
+	actual := args.Map{"result": r.AsHttpMethodTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsHttpMethodTyper should not be nil", actual)
+	actual := args.Map{"result": r.AsActionTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsActionTyper should not be nil", actual)
+	actual := args.Map{"result": r.EnumType() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "EnumType should not be nil", actual)
+	actual := args.Map{"result": r.AsJsonMarshaller() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AsJsonMarshaller should not be nil", actual)
 }
 
 // ── Format ──
 
 func Test_Request_Format(t *testing.T) {
+	// Arrange
 	result := reqtype.Create.Format("{name}")
-	if result == "" {
-		t.Error("Format should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": result == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Format should not be empty", actual)
 }
 
 // ── CurrentNotImpl ──
 
 func Test_Request_CurrentNotImpl(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.CurrentNotImpl(nil, "test")
-	if err == nil {
-		t.Error("CurrentNotImpl should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurrentNotImpl should return error", actual)
 
 	err = reqtype.Create.CurrentNotImpl("ref", "test")
-	if err == nil {
-		t.Error("CurrentNotImpl with ref should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurrentNotImpl with ref should return error", actual)
 }
 
 func Test_Request_NotSupportedErr(t *testing.T) {
+	// Arrange
 	err := reqtype.Create.NotSupportedErr("not supported", "ref")
-	if err == nil {
-		t.Error("NotSupportedErr should return error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NotSupportedErr should return error", actual)
 }
 
 // ── StopEnableStart / StopDisable ──
 
 func Test_Request_StopEnableStartDisable(t *testing.T) {
-	if reqtype.Create.IsStopEnableStart() {
-		t.Error("should be false")
-	}
-	if reqtype.Create.IsStopDisable() {
-		t.Error("should be false")
-	}
+	// Act
+	actual := args.Map{"result": reqtype.Create.IsStopEnableStart()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should be false", actual)
+	actual := args.Map{"result": reqtype.Create.IsStopDisable()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should be false", actual)
 }
 
 // ── AllNameValues ──
 
 func Test_Request_AllNameValues(t *testing.T) {
+	// Arrange
 	names := reqtype.Create.AllNameValues()
-	if len(names) == 0 {
-		t.Error("AllNameValues should not be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(names) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllNameValues should not be empty", actual)
 }

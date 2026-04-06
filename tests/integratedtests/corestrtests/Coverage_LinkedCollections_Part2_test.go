@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -13,6 +14,7 @@ import (
 
 func Test_CovLC2_01_AddCollectionsToNodeAsync(t *testing.T) {
 	safeTest(t, "Test_CovLC2_01_AddCollectionsToNodeAsync", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"base"}))
 		wg := &sync.WaitGroup{}
@@ -22,20 +24,29 @@ func Test_CovLC2_01_AddCollectionsToNodeAsync(t *testing.T) {
 			corestr.New.Collection.Strings([]string{"added"}),
 		)
 		wg.Wait()
-		if lc.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() < 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
 }
 
 func Test_CovLC2_02_AddCollectionsToNode(t *testing.T) {
 	safeTest(t, "Test_CovLC2_02_AddCollectionsToNode", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"base"}))
 		lc.AddCollectionsToNode(true, lc.Head(), corestr.New.Collection.Strings([]string{"x"}))
-		if lc.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() < 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 		// nil skip
 		lc.AddCollectionsToNode(true, lc.Head())
 	})
@@ -43,6 +54,7 @@ func Test_CovLC2_02_AddCollectionsToNode(t *testing.T) {
 
 func Test_CovLC2_03_AddCollectionsPointerToNode(t *testing.T) {
 	safeTest(t, "Test_CovLC2_03_AddCollectionsPointerToNode", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"base"}))
 		cols := []*corestr.Collection{
@@ -50,9 +62,13 @@ func Test_CovLC2_03_AddCollectionsPointerToNode(t *testing.T) {
 			corestr.New.Collection.Strings([]string{"b"}),
 		}
 		lc.AddCollectionsPointerToNode(true, lc.Head(), &cols)
-		if lc.Length() < 3 {
-			t.Fatalf("expected at least 3, got %d", lc.Length())
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() < 3}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 		// nil items
 		lc.AddCollectionsPointerToNode(true, lc.Head(), nil)
 		// nil node with skip
@@ -68,56 +84,72 @@ func Test_CovLC2_03_AddCollectionsPointerToNode(t *testing.T) {
 
 func Test_CovLC2_04_AddAfterNode(t *testing.T) {
 	safeTest(t, "Test_CovLC2_04_AddAfterNode", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.AddAfterNode(lc.Head(), corestr.New.Collection.Strings([]string{"b"}))
-		if lc.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_CovLC2_05_AddAfterNodeAsync(t *testing.T) {
 	safeTest(t, "Test_CovLC2_05_AddAfterNodeAsync", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		wg := &sync.WaitGroup{}
 		wg.Add(1)
 		lc.AddAfterNodeAsync(wg, lc.Head(), corestr.New.Collection.Strings([]string{"b"}))
 		wg.Wait()
-		if lc.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_CovLC2_06_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_CovLC2_06_ConcatNew", func() {
+		// Arrange
 		a := corestr.Empty.LinkedCollections()
 		a.Add(corestr.New.Collection.Strings([]string{"a"}))
 
 		// empty with clone
 		cloned := a.ConcatNew(true)
-		if cloned.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": cloned.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty without clone
 		same := a.ConcatNew(false)
-		if same.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": same.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// with others
 		b := corestr.Empty.LinkedCollections()
 		b.Add(corestr.New.Collection.Strings([]string{"b"}))
 		merged := a.ConcatNew(false, b)
-		if merged.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual = args.Map{"result": merged.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_CovLC2_07_AddAsyncFuncItems(t *testing.T) {
 	safeTest(t, "Test_CovLC2_07_AddAsyncFuncItems", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		wg := &sync.WaitGroup{}
 		wg.Add(2)
@@ -125,9 +157,13 @@ func Test_CovLC2_07_AddAsyncFuncItems(t *testing.T) {
 			func() []string { return []string{"a"} },
 			func() []string { return []string{} }, // empty
 		)
-		if lc.Length() != 1 {
-			t.Fatalf("expected 1, got %d", lc.Length())
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil funcs
 		lc2 := corestr.Empty.LinkedCollections()
 		lc2.AddAsyncFuncItems(wg, false)
@@ -136,6 +172,7 @@ func Test_CovLC2_07_AddAsyncFuncItems(t *testing.T) {
 
 func Test_CovLC2_08_AddAsyncFuncItemsPointer(t *testing.T) {
 	safeTest(t, "Test_CovLC2_08_AddAsyncFuncItemsPointer", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		wg := &sync.WaitGroup{}
 		wg.Add(2)
@@ -143,9 +180,13 @@ func Test_CovLC2_08_AddAsyncFuncItemsPointer(t *testing.T) {
 			func() []string { return []string{"a"} },
 			func() []string { return []string{} },
 		)
-		if lc.Length() != 1 {
-			t.Fatalf("expected 1, got %d", lc.Length())
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		lc2 := corestr.Empty.LinkedCollections()
 		lc2.AddAsyncFuncItemsPointer(wg, false)
 	})
@@ -153,92 +194,117 @@ func Test_CovLC2_08_AddAsyncFuncItemsPointer(t *testing.T) {
 
 func Test_CovLC2_09_AddStringsOfStrings(t *testing.T) {
 	safeTest(t, "Test_CovLC2_09_AddStringsOfStrings", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.AddStringsOfStrings(false, []string{"a"}, nil, []string{"b"})
-		if lc.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		lc.AddStringsOfStrings(false)
 	})
 }
 
 func Test_CovLC2_10_IndexAt(t *testing.T) {
 	safeTest(t, "Test_CovLC2_10_IndexAt", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.Add(corestr.New.Collection.Strings([]string{"b"}))
 		lc.Add(corestr.New.Collection.Strings([]string{"c"}))
 		// index 0
 		n := lc.IndexAt(0)
-		if n == nil {
-			t.Fatal("expected non-nil")
-		}
+
+		// Act
+		actual := args.Map{"result": n == nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// index 1
 		n1 := lc.IndexAt(1)
-		if n1 == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual = args.Map{"result": n1 == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// index 2
 		n2 := lc.IndexAt(2)
-		if n2 == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual = args.Map{"result": n2 == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// negative
 		nn := lc.IndexAt(-1)
-		if nn != nil {
-			t.Fatal("expected nil for negative")
-		}
+		actual = args.Map{"result": nn != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for negative", actual)
 	})
 }
 
 func Test_CovLC2_11_SafePointerIndexAt(t *testing.T) {
 	safeTest(t, "Test_CovLC2_11_SafePointerIndexAt", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		col := lc.SafePointerIndexAt(0)
-		if col == nil {
-			t.Fatal("expected non-nil")
-		}
+
+		// Act
+		actual := args.Map{"result": col == nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		nilCol := lc.SafePointerIndexAt(99)
-		if nilCol != nil {
-			t.Fatal("expected nil")
-		}
+		actual = args.Map{"result": nilCol != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
 func Test_CovLC2_12_SafeIndexAt(t *testing.T) {
 	safeTest(t, "Test_CovLC2_12_SafeIndexAt", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.Add(corestr.New.Collection.Strings([]string{"b"}))
 		n := lc.SafeIndexAt(0)
-		if n == nil {
-			t.Fatal("expected non-nil")
-		}
+
+		// Act
+		actual := args.Map{"result": n == nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		n1 := lc.SafeIndexAt(1)
-		if n1 == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual = args.Map{"result": n1 == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		// out of range
-		if lc.SafeIndexAt(-1) != nil {
-			t.Fatal("expected nil")
-		}
-		if lc.SafeIndexAt(99) != nil {
-			t.Fatal("expected nil")
-		}
+		actual = args.Map{"result": lc.SafeIndexAt(-1) != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
+		actual = args.Map{"result": lc.SafeIndexAt(99) != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
 func Test_CovLC2_13_AddStringsAsync(t *testing.T) {
 	safeTest(t, "Test_CovLC2_13_AddStringsAsync", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		wg := &sync.WaitGroup{}
 		wg.Add(1)
 		lc.AddStringsAsync(wg, []string{"a", "b"})
 		wg.Wait()
-		if lc.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
 		lc.AddStringsAsync(wg, nil)
 	})
@@ -246,26 +312,36 @@ func Test_CovLC2_13_AddStringsAsync(t *testing.T) {
 
 func Test_CovLC2_14_AddCollection(t *testing.T) {
 	safeTest(t, "Test_CovLC2_14_AddCollection", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.AddCollection(corestr.New.Collection.Strings([]string{"a"}))
-		if lc.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		lc.AddCollection(nil)
-		if lc.Length() != 1 {
-			t.Fatal("expected still 1")
-		}
+		actual = args.Map{"result": lc.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 	})
 }
 
 func Test_CovLC2_15_AddCollectionsPtr_AddCollections(t *testing.T) {
 	safeTest(t, "Test_CovLC2_15_AddCollectionsPtr_AddCollections", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		cols := []*corestr.Collection{corestr.New.Collection.Strings([]string{"a"})}
 		lc.AddCollectionsPtr(cols)
-		if lc.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		lc.AddCollectionsPtr(nil)
 		lc.AddCollections(nil)
 		// with nil in slice
@@ -277,128 +353,168 @@ func Test_CovLC2_15_AddCollectionsPtr_AddCollections(t *testing.T) {
 
 func Test_CovLC2_16_ToStringsPtr_ToStrings(t *testing.T) {
 	safeTest(t, "Test_CovLC2_16_ToStringsPtr_ToStrings", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a", "b"}))
 		ptr := lc.ToStringsPtr()
-		if len(*ptr) != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": len(*ptr) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		strs := lc.ToStrings()
-		if len(strs) != 2 {
-			t.Fatal("expected 2")
-		}
+		actual = args.Map{"result": len(strs) != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
 func Test_CovLC2_17_ToCollectionSimple_ToCollection(t *testing.T) {
 	safeTest(t, "Test_CovLC2_17_ToCollectionSimple_ToCollection", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		col := lc.ToCollectionSimple()
-		if col.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": col.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		col2 := lc.ToCollection(5)
-		if col2.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": col2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
-		if e.ToCollection(0).Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": e.ToCollection(0).Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovLC2_18_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_CovLC2_18_ToCollectionsOfCollection", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.Add(corestr.New.Collection.Strings([]string{"b"}))
 		coc := lc.ToCollectionsOfCollection(0)
-		if coc.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": coc.Length() != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
-		if e.ToCollectionsOfCollection(0).Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": e.ToCollectionsOfCollection(0).Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovLC2_19_ItemsOfItems(t *testing.T) {
 	safeTest(t, "Test_CovLC2_19_ItemsOfItems", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.Add(corestr.New.Collection.Strings([]string{"b", "c"}))
 		ii := lc.ItemsOfItems()
-		if len(ii) != 2 {
-			t.Fatal("expected 2")
-		}
+
+		// Act
+		actual := args.Map{"result": len(ii) != 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
-		if len(e.ItemsOfItems()) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": len(e.ItemsOfItems()) != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovLC2_20_ItemsOfItemsCollection(t *testing.T) {
 	safeTest(t, "Test_CovLC2_20_ItemsOfItemsCollection", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		cols := lc.ItemsOfItemsCollection()
-		if len(cols) != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": len(cols) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
-		if len(e.ItemsOfItemsCollection()) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": len(e.ItemsOfItemsCollection()) != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovLC2_21_SimpleSlice(t *testing.T) {
 	safeTest(t, "Test_CovLC2_21_SimpleSlice", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		ss := lc.SimpleSlice()
-		if ss.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
 func Test_CovLC2_22_ListPtr_List(t *testing.T) {
 	safeTest(t, "Test_CovLC2_22_ListPtr_List", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		ptr := lc.ListPtr()
-		if len(*ptr) != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": len(*ptr) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		list := lc.List()
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
+		actual = args.Map{"result": len(list) != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
-		if len(e.List()) != 0 {
-			t.Fatal("expected 0")
-		}
+		actual = args.Map{"result": len(e.List()) != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_CovLC2_23_String(t *testing.T) {
 	safeTest(t, "Test_CovLC2_23_String", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		s := lc.String()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+
+		// Act
+		actual := args.Map{"result": s == ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		// empty
 		e := corestr.Empty.LinkedCollections()
 		_ = e.String()
@@ -407,12 +523,17 @@ func Test_CovLC2_23_String(t *testing.T) {
 
 func Test_CovLC2_24_StringLock(t *testing.T) {
 	safeTest(t, "Test_CovLC2_24_StringLock", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		s := lc.StringLock()
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+
+		// Act
+		actual := args.Map{"result": s == ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		e := corestr.Empty.LinkedCollections()
 		_ = e.StringLock()
 	})
@@ -420,24 +541,34 @@ func Test_CovLC2_24_StringLock(t *testing.T) {
 
 func Test_CovLC2_25_Join(t *testing.T) {
 	safeTest(t, "Test_CovLC2_25_Join", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		s := lc.Join(",")
-		if s != "a" {
-			t.Fatalf("expected 'a', got '%s'", s)
-		}
+
+		// Act
+		actual := args.Map{"result": s != "a"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a', got ''", actual)
 	})
 }
 
 func Test_CovLC2_26_Joins(t *testing.T) {
 	safeTest(t, "Test_CovLC2_26_Joins", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		// with items
 		s := lc.Joins(",", "b")
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+
+		// Act
+		actual := args.Map{"result": s == ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		// nil items or empty LC
 		e := corestr.Empty.LinkedCollections()
 		_ = e.Joins(",")
@@ -446,56 +577,76 @@ func Test_CovLC2_26_Joins(t *testing.T) {
 
 func Test_CovLC2_27_JsonModel_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_CovLC2_27_JsonModel_JsonModelAny", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		m := lc.JsonModel()
-		if len(m) != 1 {
-			t.Fatal("expected 1")
-		}
+
+		// Act
+		actual := args.Map{"result": len(m) != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = lc.JsonModelAny()
 	})
 }
 
 func Test_CovLC2_28_MarshalJSON(t *testing.T) {
 	safeTest(t, "Test_CovLC2_28_MarshalJSON", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		data, err := lc.MarshalJSON()
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
-		if len(data) == 0 {
-			t.Fatal("expected data")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected data", actual)
 	})
 }
 
 func Test_CovLC2_29_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_CovLC2_29_UnmarshalJSON", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		err := lc.UnmarshalJSON([]byte(`["a","b"]`))
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
-		if lc.Length() != 1 {
-			t.Fatal("expected 1 collection with 2 items")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
+		actual = args.Map{"result": lc.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 collection with 2 items", actual)
 		// invalid
 		err2 := lc.UnmarshalJSON([]byte(`invalid`))
-		if err2 == nil {
-			t.Fatal("expected error")
-		}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
 func Test_CovLC2_30_RemoveAll_Clear(t *testing.T) {
 	safeTest(t, "Test_CovLC2_30_RemoveAll_Clear", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		lc.RemoveAll()
-		if lc.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() != 0}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// clear empty
 		e := corestr.Empty.LinkedCollections()
 		e.Clear()
@@ -513,14 +664,19 @@ func Test_CovLC2_31_Json_JsonPtr(t *testing.T) {
 
 func Test_CovLC2_32_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_CovLC2_32_ParseInjectUsingJson", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		jr := lc.JsonPtr()
 		lc2 := corestr.Empty.LinkedCollections()
 		result, err := lc2.ParseInjectUsingJson(jr)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		_ = result
 	})
 }
@@ -537,27 +693,37 @@ func Test_CovLC2_33_ParseInjectUsingJsonMust(t *testing.T) {
 
 func Test_CovLC2_34_GetCompareSummary(t *testing.T) {
 	safeTest(t, "Test_CovLC2_34_GetCompareSummary", func() {
+		// Arrange
 		a := corestr.Empty.LinkedCollections()
 		a.Add(corestr.New.Collection.Strings([]string{"x"}))
 		b := corestr.Empty.LinkedCollections()
 		b.Add(corestr.New.Collection.Strings([]string{"y"}))
 		s := a.GetCompareSummary(b, "left", "right")
-		if s == "" {
-			t.Fatal("expected non-empty")
-		}
+
+		// Act
+		actual := args.Map{"result": s == ""}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
 
 func Test_CovLC2_35_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_CovLC2_35_JsonParseSelfInject", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		jr := lc.JsonPtr()
 		lc2 := corestr.Empty.LinkedCollections()
 		err := lc2.JsonParseSelfInject(jr)
-		if err != nil {
-			t.Fatal("unexpected error")
-		}
+
+		// Act
+		actual := args.Map{"result": err != nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }
 
@@ -573,31 +739,41 @@ func Test_CovLC2_36_AsInterfaces(t *testing.T) {
 
 func Test_CovLC2_37_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_CovLC2_37_AddCollectionToNode", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"base"}))
 		lc.AddCollectionToNode(true, lc.Head(), corestr.New.Collection.Strings([]string{"x"}))
-		if lc.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+
+		// Act
+		actual := args.Map{"result": lc.Length() < 2}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
 }
 
 func Test_CovLC2_38_AttachWithNode(t *testing.T) {
 	safeTest(t, "Test_CovLC2_38_AttachWithNode", func() {
+		// Arrange
 		lc := corestr.Empty.LinkedCollections()
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
 		// err: node nil
 		err := lc.AttachWithNode(nil, &corestr.LinkedCollectionNode{})
-		if err == nil {
-			t.Fatal("expected error for nil node")
-		}
+
+		// Act
+		actual := args.Map{"result": err == nil}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error for nil node", actual)
 		// node.next not nil -> error
 		head := lc.Head()
 		// head.next is nil, so this should succeed
 		addingNode := &corestr.LinkedCollectionNode{Element: corestr.New.Collection.Strings([]string{"b"})}
 		err2 := lc.AttachWithNode(head, addingNode)
-		if err2 != nil {
-			t.Fatal("unexpected error:", err2)
-		}
+		actual = args.Map{"result": err2}
+		expected = args.Map{"result": nil}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	})
 }

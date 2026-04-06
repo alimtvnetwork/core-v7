@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════
@@ -21,12 +22,12 @@ func Test_S10_01_Hashset_IsEmpty(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !empty.IsEmpty() {
-			t.Fatal("expected empty")
-		}
-		if hs.IsEmpty() {
-			t.Fatal("expected not empty")
-		}
+		actual := args.Map{"result": empty.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual = args.Map{"result": hs.IsEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
 
@@ -36,9 +37,9 @@ func Test_S10_02_Hashset_IsEmpty_Nil(t *testing.T) {
 		var hs *corestr.Hashset
 
 		// Act & Assert
-		if !hs.IsEmpty() {
-			t.Fatal("expected empty for nil")
-		}
+		actual := args.Map{"result": hs.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	})
 }
 
@@ -48,12 +49,12 @@ func Test_S10_03_Hashset_HasItems(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.HasItems() {
-			t.Fatal("expected has items")
-		}
-		if corestr.Empty.Hashset().HasItems() {
-			t.Fatal("expected no items for empty")
-		}
+		actual := args.Map{"result": hs.HasItems()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has items", actual)
+		actual = args.Map{"result": corestr.Empty.Hashset().HasItems()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no items for empty", actual)
 	})
 }
 
@@ -63,9 +64,9 @@ func Test_S10_04_Hashset_IsEmptyLock(t *testing.T) {
 		hs := corestr.Empty.Hashset()
 
 		// Act & Assert
-		if !hs.IsEmptyLock() {
-			t.Fatal("expected empty")
-		}
+		actual := args.Map{"result": hs.IsEmptyLock()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -81,9 +82,9 @@ func Test_S10_05_Hashset_AddCapacities(t *testing.T) {
 		result := hs.AddCapacities(10, 5)
 
 		// Assert
-		if result.Length() != 1 {
-			t.Fatal("expected 1 item preserved")
-		}
+		actual := args.Map{"result": result.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 item preserved", actual)
 	})
 }
 
@@ -96,9 +97,9 @@ func Test_S10_06_Hashset_AddCapacities_Empty(t *testing.T) {
 		result := hs.AddCapacities()
 
 		// Assert
-		if result != hs {
-			t.Fatal("expected same pointer when no capacities")
-		}
+		actual := args.Map{"result": result != hs}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected same pointer when no capacities", actual)
 	})
 }
 
@@ -112,9 +113,9 @@ func Test_S10_07_Hashset_AddCapacitiesLock(t *testing.T) {
 		result := hs.AddCapacitiesLock(10)
 
 		// Assert
-		if result.Length() != 1 {
-			t.Fatal("expected 1 preserved")
-		}
+		actual := args.Map{"result": result.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 preserved", actual)
 	})
 }
 
@@ -127,9 +128,9 @@ func Test_S10_08_Hashset_AddCapacitiesLock_Empty(t *testing.T) {
 		result := hs.AddCapacitiesLock()
 
 		// Assert
-		if result != hs {
-			t.Fatal("expected same pointer")
-		}
+		actual := args.Map{"result": result != hs}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected same pointer", actual)
 	})
 }
 
@@ -144,9 +145,9 @@ func Test_S10_09_Hashset_Resize(t *testing.T) {
 		result := hs.Resize(10)
 
 		// Assert
-		if result.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -159,9 +160,9 @@ func Test_S10_10_Hashset_Resize_SmallerThanLength(t *testing.T) {
 		result := hs.Resize(1)
 
 		// Assert
-		if result.Length() != 3 {
-			t.Fatal("expected 3 — no resize when capacity < length")
-		}
+		actual := args.Map{"result": result.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3 — no resize when capacity < length", actual)
 	})
 }
 
@@ -174,9 +175,9 @@ func Test_S10_11_Hashset_ResizeLock(t *testing.T) {
 		result := hs.ResizeLock(10)
 
 		// Assert
-		if result.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": result.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -189,9 +190,9 @@ func Test_S10_12_Hashset_ResizeLock_SmallerThanLength(t *testing.T) {
 		result := hs.ResizeLock(0)
 
 		// Assert
-		if result.Length() != 2 {
-			t.Fatal("expected 2 — no resize")
-		}
+		actual := args.Map{"result": result.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 — no resize", actual)
 	})
 }
 
@@ -206,9 +207,9 @@ func Test_S10_13_Hashset_Collection(t *testing.T) {
 		col := hs.Collection()
 
 		// Assert
-		if col.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": col.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -224,9 +225,9 @@ func Test_S10_14_Hashset_ConcatNewHashsets(t *testing.T) {
 		result := hs.ConcatNewHashsets(true, other)
 
 		// Assert
-		if result.Length() < 2 {
-			t.Fatal("expected at least 2")
-		}
+		actual := args.Map{"result": result.Length() < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	})
 }
 
@@ -239,9 +240,9 @@ func Test_S10_15_Hashset_ConcatNewHashsets_Empty(t *testing.T) {
 		result := hs.ConcatNewHashsets(true)
 
 		// Assert
-		if result == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -254,9 +255,9 @@ func Test_S10_16_Hashset_ConcatNewHashsets_NilInList(t *testing.T) {
 		result := hs.ConcatNewHashsets(false, nil)
 
 		// Assert
-		if result == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -271,9 +272,9 @@ func Test_S10_17_Hashset_ConcatNewStrings(t *testing.T) {
 		result := hs.ConcatNewStrings(true, []string{"b", "c"})
 
 		// Assert
-		if result.Length() < 3 {
-			t.Fatal("expected at least 3")
-		}
+		actual := args.Map{"result": result.Length() < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	})
 }
 
@@ -286,9 +287,9 @@ func Test_S10_18_Hashset_ConcatNewStrings_Empty(t *testing.T) {
 		result := hs.ConcatNewStrings(true)
 
 		// Assert
-		if result == nil {
-			t.Fatal("expected non-nil")
-		}
+		actual := args.Map{"result": result == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -303,9 +304,9 @@ func Test_S10_19_Hashset_Add(t *testing.T) {
 		hs.Add("x")
 
 		// Assert
-		if !hs.Has("x") {
-			t.Fatal("expected has x")
-		}
+		actual := args.Map{"result": hs.Has("x")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has x", actual)
 	})
 }
 
@@ -319,9 +320,9 @@ func Test_S10_20_Hashset_AddPtr(t *testing.T) {
 		hs.AddPtr(&key)
 
 		// Assert
-		if !hs.Has("ptr-key") {
-			t.Fatal("expected has ptr-key")
-		}
+		actual := args.Map{"result": hs.Has("ptr-key")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has ptr-key", actual)
 	})
 }
 
@@ -335,9 +336,9 @@ func Test_S10_21_Hashset_AddPtrLock(t *testing.T) {
 		hs.AddPtrLock(&key)
 
 		// Assert
-		if !hs.Has("ptr-lock") {
-			t.Fatal("expected has ptr-lock")
-		}
+		actual := args.Map{"result": hs.Has("ptr-lock")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has ptr-lock", actual)
 	})
 }
 
@@ -353,9 +354,9 @@ func Test_S10_22_Hashset_AddWithWgLock(t *testing.T) {
 		wg.Wait()
 
 		// Assert
-		if !hs.Has("wg-key") {
-			t.Fatal("expected has wg-key")
-		}
+		actual := args.Map{"result": hs.Has("wg-key")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has wg-key", actual)
 	})
 }
 
@@ -369,12 +370,12 @@ func Test_S10_23_Hashset_AddBool(t *testing.T) {
 		existed2 := hs.AddBool("k")
 
 		// Assert
-		if existed {
-			t.Fatal("expected not existed on first add")
-		}
-		if !existed2 {
-			t.Fatal("expected existed on second add")
-		}
+		actual := args.Map{"result": existed}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not existed on first add", actual)
+		actual = args.Map{"result": existed2}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected existed on second add", actual)
 	})
 }
 
@@ -388,9 +389,9 @@ func Test_S10_24_Hashset_AddNonEmpty(t *testing.T) {
 		hs.AddNonEmpty("valid")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1 — empty string skipped")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 — empty string skipped", actual)
 	})
 }
 
@@ -404,9 +405,9 @@ func Test_S10_25_Hashset_AddNonEmptyWhitespace(t *testing.T) {
 		hs.AddNonEmptyWhitespace("valid")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1 — whitespace skipped")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 — whitespace skipped", actual)
 	})
 }
 
@@ -420,9 +421,9 @@ func Test_S10_26_Hashset_AddIf(t *testing.T) {
 		hs.AddIf(false, "no")
 
 		// Assert
-		if hs.Length() != 1 || !hs.Has("yes") {
-			t.Fatal("expected only 'yes'")
-		}
+		actual := args.Map{"result": hs.Length() != 1 || !hs.Has("yes")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected only 'yes'", actual)
 	})
 }
 
@@ -436,9 +437,9 @@ func Test_S10_27_Hashset_AddIfMany(t *testing.T) {
 		hs.AddIfMany(false, "c", "d")
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -451,9 +452,9 @@ func Test_S10_28_Hashset_AddFunc(t *testing.T) {
 		hs.AddFunc(func() string { return "func-val" })
 
 		// Assert
-		if !hs.Has("func-val") {
-			t.Fatal("expected has func-val")
-		}
+		actual := args.Map{"result": hs.Has("func-val")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has func-val", actual)
 	})
 }
 
@@ -465,13 +466,13 @@ func Test_S10_29_Hashset_AddFuncErr_NoError(t *testing.T) {
 		// Act
 		hs.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("should not call error handler") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 
 		// Assert
-		if !hs.Has("ok") {
-			t.Fatal("expected has ok")
-		}
+		actual = args.Map{"result": hs.Has("ok")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has ok", actual)
 	})
 }
 
@@ -488,9 +489,9 @@ func Test_S10_30_Hashset_AddFuncErr_WithError(t *testing.T) {
 		)
 
 		// Assert
-		if !called {
-			t.Fatal("expected error handler called")
-		}
+		actual := args.Map{"result": called}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected error handler called", actual)
 		if hs.Has("") {
 			// it may have "" but the err path was exercised
 			_ = 0
@@ -511,9 +512,9 @@ func Test_S10_31_Hashset_AddStringsPtrWgLock(t *testing.T) {
 		wg.Wait()
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -527,9 +528,9 @@ func Test_S10_32_Hashset_AddHashsetItems(t *testing.T) {
 		hs.AddHashsetItems(other)
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -542,9 +543,9 @@ func Test_S10_33_Hashset_AddHashsetItems_Nil(t *testing.T) {
 		hs.AddHashsetItems(nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -557,9 +558,9 @@ func Test_S10_34_Hashset_AddItemsMap(t *testing.T) {
 		hs.AddItemsMap(map[string]bool{"a": true, "b": false, "c": true})
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2 — b is disabled")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2 — b is disabled", actual)
 	})
 }
 
@@ -572,9 +573,9 @@ func Test_S10_35_Hashset_AddItemsMap_Nil(t *testing.T) {
 		hs.AddItemsMap(nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -591,9 +592,9 @@ func Test_S10_36_Hashset_AddItemsMapWgLock(t *testing.T) {
 		wg.Wait()
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -606,9 +607,9 @@ func Test_S10_37_Hashset_AddItemsMapWgLock_Nil(t *testing.T) {
 		hs.AddItemsMapWgLock(nil, nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -625,9 +626,9 @@ func Test_S10_38_Hashset_AddHashsetWgLock(t *testing.T) {
 		wg.Wait()
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -640,9 +641,9 @@ func Test_S10_39_Hashset_AddHashsetWgLock_Nil(t *testing.T) {
 		hs.AddHashsetWgLock(nil, nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -655,9 +656,9 @@ func Test_S10_40_Hashset_AddStrings(t *testing.T) {
 		hs.AddStrings([]string{"a", "b"})
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -670,9 +671,9 @@ func Test_S10_41_Hashset_AddStrings_Nil(t *testing.T) {
 		hs.AddStrings(nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -686,9 +687,9 @@ func Test_S10_42_Hashset_AddSimpleSlice(t *testing.T) {
 		hs.AddSimpleSlice(ss)
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -702,9 +703,9 @@ func Test_S10_43_Hashset_AddSimpleSlice_Empty(t *testing.T) {
 		hs.AddSimpleSlice(ss)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -717,9 +718,9 @@ func Test_S10_44_Hashset_AddStringsLock(t *testing.T) {
 		hs.AddStringsLock([]string{"a"})
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -732,9 +733,9 @@ func Test_S10_45_Hashset_AddStringsLock_Nil(t *testing.T) {
 		hs.AddStringsLock(nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -747,9 +748,9 @@ func Test_S10_46_Hashset_Adds(t *testing.T) {
 		hs.Adds("a", "b", "c")
 
 		// Assert
-		if hs.Length() != 3 {
-			t.Fatal("expected 3")
-		}
+		actual := args.Map{"result": hs.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -762,9 +763,9 @@ func Test_S10_47_Hashset_Adds_Nil(t *testing.T) {
 		hs.Adds(nil...)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -778,9 +779,9 @@ func Test_S10_48_Hashset_AddCollection(t *testing.T) {
 		hs.AddCollection(col)
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -793,9 +794,9 @@ func Test_S10_49_Hashset_AddCollection_Nil(t *testing.T) {
 		hs.AddCollection(nil)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -810,9 +811,9 @@ func Test_S10_50_Hashset_AddCollections(t *testing.T) {
 		hs.AddCollections(c1, nil, c2)
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -825,9 +826,9 @@ func Test_S10_51_Hashset_AddCollections_Nil(t *testing.T) {
 		hs.AddCollections(nil...)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -845,9 +846,9 @@ func Test_S10_52_Hashset_AddsAnyUsingFilter(t *testing.T) {
 		hs.AddsAnyUsingFilter(filter, "a", "b")
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -860,9 +861,9 @@ func Test_S10_53_Hashset_AddsAnyUsingFilter_Nil(t *testing.T) {
 		hs.AddsAnyUsingFilter(nil, nil...)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -878,9 +879,9 @@ func Test_S10_54_Hashset_AddsAnyUsingFilter_Break(t *testing.T) {
 		hs.AddsAnyUsingFilter(filter, "a", "b")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1 due to break")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 due to break", actual)
 	})
 }
 
@@ -896,9 +897,9 @@ func Test_S10_55_Hashset_AddsAnyUsingFilter_NilItem(t *testing.T) {
 		hs.AddsAnyUsingFilter(filter, nil, "b")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1 — nil skipped")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 — nil skipped", actual)
 	})
 }
 
@@ -914,9 +915,9 @@ func Test_S10_56_Hashset_AddsAnyUsingFilter_Skip(t *testing.T) {
 		hs.AddsAnyUsingFilter(filter, "a")
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -932,9 +933,9 @@ func Test_S10_57_Hashset_AddsAnyUsingFilterLock(t *testing.T) {
 		hs.AddsAnyUsingFilterLock(filter, "a")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -947,9 +948,9 @@ func Test_S10_58_Hashset_AddsAnyUsingFilterLock_Nil(t *testing.T) {
 		hs.AddsAnyUsingFilterLock(nil, nil...)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -970,9 +971,9 @@ func Test_S10_59_Hashset_AddsAnyUsingFilterLock_BreakAndSkip(t *testing.T) {
 		hs.AddsAnyUsingFilterLock(filter, "a", "b", "c")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatalf("expected 1, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -988,9 +989,9 @@ func Test_S10_60_Hashset_AddsAnyUsingFilterLock_NilItem(t *testing.T) {
 		hs.AddsAnyUsingFilterLock(filter, nil, "b")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatal("expected 1")
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1006,9 +1007,9 @@ func Test_S10_61_Hashset_AddsUsingFilter(t *testing.T) {
 		hs.AddsUsingFilter(filter, "a", "b")
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Fatal("expected 2")
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1021,9 +1022,9 @@ func Test_S10_62_Hashset_AddsUsingFilter_Nil(t *testing.T) {
 		hs.AddsUsingFilter(nil, nil...)
 
 		// Assert
-		if hs.Length() != 0 {
-			t.Fatal("expected 0")
-		}
+		actual := args.Map{"result": hs.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1044,9 +1045,9 @@ func Test_S10_63_Hashset_AddsUsingFilter_BreakAndSkip(t *testing.T) {
 		hs.AddsUsingFilter(filter, "a", "b", "c")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Fatalf("expected 1, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1061,9 +1062,9 @@ func Test_S10_64_Hashset_AddLock(t *testing.T) {
 		hs.AddLock("k")
 
 		// Assert
-		if !hs.Has("k") {
-			t.Fatal("expected has k")
-		}
+		actual := args.Map{"result": hs.Has("k")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has k", actual)
 	})
 }
 
@@ -1075,12 +1076,12 @@ func Test_S10_65_Hashset_Has(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.Has("a") {
-			t.Fatal("expected true")
-		}
-		if hs.Has("z") {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.Has("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": hs.Has("z")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1090,9 +1091,9 @@ func Test_S10_66_Hashset_Contains(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.Contains("a") {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": hs.Contains("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -1102,9 +1103,9 @@ func Test_S10_67_Hashset_HasLock(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.HasLock("a") {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": hs.HasLock("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -1114,9 +1115,9 @@ func Test_S10_68_Hashset_HasWithLock(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.HasWithLock("a") {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": hs.HasWithLock("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -1126,12 +1127,12 @@ func Test_S10_69_Hashset_HasAnyItem(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.HasAnyItem() {
-			t.Fatal("expected true")
-		}
-		if corestr.Empty.Hashset().HasAnyItem() {
-			t.Fatal("expected false for empty")
-		}
+		actual := args.Map{"result": hs.HasAnyItem()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": corestr.Empty.Hashset().HasAnyItem()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -1143,12 +1144,12 @@ func Test_S10_70_Hashset_IsMissing(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if hs.IsMissing("a") {
-			t.Fatal("expected false")
-		}
-		if !hs.IsMissing("z") {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": hs.IsMissing("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual = args.Map{"result": hs.IsMissing("z")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -1158,9 +1159,9 @@ func Test_S10_71_Hashset_IsMissingLock(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if hs.IsMissingLock("a") {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.IsMissingLock("a")}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1172,12 +1173,12 @@ func Test_S10_72_Hashset_HasAllStrings(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if !hs.HasAllStrings([]string{"a", "b"}) {
-			t.Fatal("expected true")
-		}
-		if hs.HasAllStrings([]string{"a", "c"}) {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.HasAllStrings([]string{"a", "b"})}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": hs.HasAllStrings([]string{"a", "c"})}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1187,12 +1188,12 @@ func Test_S10_73_Hashset_HasAll(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if !hs.HasAll("a", "b") {
-			t.Fatal("expected true")
-		}
-		if hs.HasAll("a", "c") {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.HasAll("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": hs.HasAll("a", "c")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1203,9 +1204,9 @@ func Test_S10_74_Hashset_HasAllCollectionItems(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if !hs.HasAllCollectionItems(col) {
-			t.Fatal("expected true")
-		}
+		actual := args.Map{"result": hs.HasAllCollectionItems(col)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -1215,9 +1216,9 @@ func Test_S10_75_Hashset_HasAllCollectionItems_Nil(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if hs.HasAllCollectionItems(nil) {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.HasAllCollectionItems(nil)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1227,9 +1228,9 @@ func Test_S10_76_Hashset_HasAllCollectionItems_Empty(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if hs.HasAllCollectionItems(corestr.Empty.Collection()) {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.HasAllCollectionItems(corestr.Empty.Collection())}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1241,12 +1242,12 @@ func Test_S10_77_Hashset_IsAllMissing(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.IsAllMissing("x", "y") {
-			t.Fatal("expected true")
-		}
-		if hs.IsAllMissing("a", "y") {
-			t.Fatal("expected false — a exists")
-		}
+		actual := args.Map{"result": hs.IsAllMissing("x", "y")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": hs.IsAllMissing("a", "y")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false — a exists", actual)
 	})
 }
 
@@ -1256,12 +1257,12 @@ func Test_S10_78_Hashset_HasAny(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !hs.HasAny("x", "a") {
-			t.Fatal("expected true")
-		}
-		if hs.HasAny("x", "y") {
-			t.Fatal("expected false")
-		}
+		actual := args.Map{"result": hs.HasAny("x", "a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": hs.HasAny("x", "y")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -1274,9 +1275,9 @@ func Test_S10_79_Hashset_IsEqual(t *testing.T) {
 		b := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !a.IsEqual(b) {
-			t.Fatal("expected equal")
-		}
+		actual := args.Map{"result": a.IsEqual(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -1287,9 +1288,9 @@ func Test_S10_80_Hashset_IsEquals_BothNil(t *testing.T) {
 		var b *corestr.Hashset
 
 		// Act & Assert
-		if !a.IsEquals(b) {
-			t.Fatal("expected equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -1300,9 +1301,9 @@ func Test_S10_81_Hashset_IsEquals_OneNil(t *testing.T) {
 		var b *corestr.Hashset
 
 		// Act & Assert
-		if a.IsEquals(b) {
-			t.Fatal("expected not equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
 
@@ -1312,9 +1313,9 @@ func Test_S10_82_Hashset_IsEquals_SamePtr(t *testing.T) {
 		a := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !a.IsEquals(a) {
-			t.Fatal("expected equal")
-		}
+		actual := args.Map{"result": a.IsEquals(a)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -1325,9 +1326,9 @@ func Test_S10_83_Hashset_IsEquals_BothEmpty(t *testing.T) {
 		b := corestr.Empty.Hashset()
 
 		// Act & Assert
-		if !a.IsEquals(b) {
-			t.Fatal("expected equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
 
@@ -1338,9 +1339,9 @@ func Test_S10_84_Hashset_IsEquals_OneEmpty(t *testing.T) {
 		b := corestr.Empty.Hashset()
 
 		// Act & Assert
-		if a.IsEquals(b) {
-			t.Fatal("expected not equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
 
@@ -1351,9 +1352,9 @@ func Test_S10_85_Hashset_IsEquals_DiffLength(t *testing.T) {
 		b := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		// Act & Assert
-		if a.IsEquals(b) {
-			t.Fatal("expected not equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
 
@@ -1364,9 +1365,9 @@ func Test_S10_86_Hashset_IsEquals_DiffKeys(t *testing.T) {
 		b := corestr.New.Hashset.Strings([]string{"b"})
 
 		// Act & Assert
-		if a.IsEquals(b) {
-			t.Fatal("expected not equal")
-		}
+		actual := args.Map{"result": a.IsEquals(b)}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
 
@@ -1377,8 +1378,8 @@ func Test_S10_87_Hashset_IsEqualsLock(t *testing.T) {
 		b := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act & Assert
-		if !a.IsEqualsLock(b) {
-			t.Fatal("expected equal")
-		}
+		actual := args.Map{"result": a.IsEqualsLock(b)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }

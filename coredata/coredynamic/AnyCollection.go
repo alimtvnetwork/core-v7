@@ -203,7 +203,6 @@ func (it *AnyCollection) HasIndex(index int) bool {
 	return it.LastIndex() >= index
 }
 
-// Deprecated: Use ListStrings instead.
 func (it *AnyCollection) ListStringsPtr(isIncludeFieldName bool) []string {
 	slice := make([]string, constants.Zero, it.Length()+1)
 

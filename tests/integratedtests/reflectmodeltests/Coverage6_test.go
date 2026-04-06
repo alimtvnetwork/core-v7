@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reflectcore/reflectmodel"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ═══════════════════════════════════════════════
@@ -12,45 +13,65 @@ import (
 // ═══════════════════════════════════════════════
 
 func Test_Cov6_FieldProcessor_IsFieldType_Valid(t *testing.T) {
+	// Arrange
 	fp := &reflectmodel.FieldProcessor{
 		Name:      "TestField",
 		Index:     0,
 		FieldType: reflect.TypeOf(0),
 	}
-	if !fp.IsFieldType(reflect.TypeOf(0)) {
-		t.Fatal("expected match")
-	}
-	if fp.IsFieldType(reflect.TypeOf("")) {
-		t.Fatal("expected no match")
-	}
+
+	// Act
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected match", actual)
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(""))}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }
 
 func Test_Cov6_FieldProcessor_IsFieldType_Nil(t *testing.T) {
+	// Arrange
 	var fp *reflectmodel.FieldProcessor
-	if fp.IsFieldType(reflect.TypeOf(0)) {
-		t.Fatal("nil receiver should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil receiver should return false", actual)
 }
 
 func Test_Cov6_FieldProcessor_IsFieldKind_Valid(t *testing.T) {
+	// Arrange
 	fp := &reflectmodel.FieldProcessor{
 		Name:      "TestField",
 		Index:     0,
 		FieldType: reflect.TypeOf(0),
 	}
-	if !fp.IsFieldKind(reflect.Int) {
-		t.Fatal("expected int kind")
-	}
-	if fp.IsFieldKind(reflect.String) {
-		t.Fatal("expected no match")
-	}
+
+	// Act
+	actual := args.Map{"result": fp.IsFieldKind(reflect.Int)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected int kind", actual)
+	actual := args.Map{"result": fp.IsFieldKind(reflect.String)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }
 
 func Test_Cov6_FieldProcessor_IsFieldKind_Nil(t *testing.T) {
+	// Arrange
 	var fp *reflectmodel.FieldProcessor
-	if fp.IsFieldKind(reflect.Int) {
-		t.Fatal("nil receiver should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": fp.IsFieldKind(reflect.Int)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil receiver should return false", actual)
 }
 
 // ═══════════════════════════════════════════════
@@ -81,196 +102,306 @@ func getMethodProcessor6(name string) *reflectmodel.MethodProcessor {
 }
 
 func Test_Cov6_MP_HasValidFunc(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if !mp.HasValidFunc() {
-		t.Fatal("expected valid")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.HasValidFunc()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	var nilMp *reflectmodel.MethodProcessor
-	if nilMp.HasValidFunc() {
-		t.Fatal("nil should be invalid")
-	}
+	actual := args.Map{"result": nilMp.HasValidFunc()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov6_MP_GetFuncName(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.GetFuncName() != "Add" {
-		t.Fatal("expected Add")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.GetFuncName() != "Add"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Add", actual)
 }
 
 func Test_Cov6_MP_IsInvalid(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.IsInvalid() {
-		t.Fatal("expected valid")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.IsInvalid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	var nilMp *reflectmodel.MethodProcessor
-	if !nilMp.IsInvalid() {
-		t.Fatal("nil should be invalid")
-	}
+	actual := args.Map{"result": nilMp.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov6_MP_Func(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	f := mp.Func()
-	if f == nil {
-		t.Fatal("expected func")
-	}
+
+	// Act
+	actual := args.Map{"result": f == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected func", actual)
 }
 
 func Test_Cov6_MP_Func_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
-	if mp.Func() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.Func() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov6_MP_ArgsCount(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	// Add has receiver + a + b = 3
-	if mp.ArgsCount() < 2 {
-		t.Fatalf("expected >= 2, got %d", mp.ArgsCount())
-	}
+
+	// Act
+	actual := args.Map{"result": mp.ArgsCount() < 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 }
 
 func Test_Cov6_MP_ReturnLength(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.ReturnLength() != 1 {
-		t.Fatalf("expected 1, got %d", mp.ReturnLength())
-	}
+
+	// Act
+	actual := args.Map{"result": mp.ReturnLength() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov6_MP_ReturnLength_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
-	if mp.ReturnLength() != -1 {
-		t.Fatal("nil should return -1")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.ReturnLength() != -1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return -1", actual)
 }
 
 func Test_Cov6_MP_IsPublicMethod(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if !mp.IsPublicMethod() {
-		t.Fatal("expected public")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.IsPublicMethod()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected public", actual)
 }
 
 func Test_Cov6_MP_IsPrivateMethod(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.IsPrivateMethod() {
-		t.Fatal("expected not private")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.IsPrivateMethod()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not private", actual)
 }
 
 func Test_Cov6_MP_ArgsLength(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.ArgsLength() < 2 {
-		t.Fatal("expected >= 2")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.ArgsLength() < 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 }
 
 func Test_Cov6_MP_Invoke_Success(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	// receiver + 2 args
 	results, err := mp.Invoke(testTarget6{}, 3, 4)
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if len(results) != 1 || results[0].(int) != 7 {
-		t.Fatal("expected 7")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": len(results) != 1 || results[0].(int) != 7}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 7", actual)
 }
 
 func Test_Cov6_MP_Invoke_ArgsMismatch(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	_, err := mp.Invoke(testTarget6{}, 3) // missing arg
-	if err == nil {
-		t.Fatal("expected error for args mismatch")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for args mismatch", actual)
 }
 
 func Test_Cov6_MP_Invoke_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
 	_, err := mp.Invoke()
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov6_MP_GetFirstResponseOfInvoke(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Greeting")
 	resp, err := mp.GetFirstResponseOfInvoke(testTarget6{})
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if resp.(string) != "hi" {
-		t.Fatal("expected hi")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": resp.(string) != "hi"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected hi", actual)
 }
 
 func Test_Cov6_MP_InvokeResultOfIndex(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	resp, err := mp.InvokeResultOfIndex(0, testTarget6{}, 1, 2)
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if resp.(int) != 3 {
-		t.Fatal("expected 3")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": resp.(int) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov6_MP_InvokeError(t *testing.T) {
+	// Arrange
 	defer func() { recover() }() // InvokeError may panic on zero reflect.Value
 	mp := getMethodProcessor6("Err")
 	funcErr, procErr := mp.InvokeError(testTarget6{})
-	if procErr != nil {
-		t.Fatalf("unexpected error: %v", procErr)
-	}
-	if funcErr != nil {
-		t.Fatal("expected nil error from Err()")
-	}
+
+	// Act
+	actual := args.Map{"result": procErr != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": funcErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil error from Err()", actual)
 }
 
 func Test_Cov6_MP_InvokeFirstAndError_Success(t *testing.T) {
+	// Arrange
 	defer func() { recover() }() // may panic on zero reflect.Value in ReflectValueToAnyValue
 	mp := getMethodProcessor6("PairResult")
 	first, funcErr, procErr := mp.InvokeFirstAndError(testTarget6{})
-	if procErr != nil {
-		t.Fatalf("processing error: %v", procErr)
-	}
-	if funcErr != nil {
-		t.Fatal("expected no func error")
-	}
-	if first.(string) != "ok" {
-		t.Fatal("expected 'ok'")
-	}
+
+	// Act
+	actual := args.Map{"result": procErr != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "processing error:", actual)
+	actual := args.Map{"result": funcErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no func error", actual)
+	actual := args.Map{"result": first.(string) != "ok"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'ok'", actual)
 }
 
 func Test_Cov6_MP_InvokeFirstAndError_SingleReturn(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Greeting")
 	_, _, procErr := mp.InvokeFirstAndError(testTarget6{})
-	if procErr == nil {
-		t.Fatal("expected error for single return")
-	}
+
+	// Act
+	actual := args.Map{"result": procErr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for single return", actual)
 }
 
 func Test_Cov6_MP_IsEqual_BothNil(t *testing.T) {
+	// Arrange
 	var a, b *reflectmodel.MethodProcessor
-	if !a.IsEqual(b) {
-		t.Fatal("both nil should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": a.IsEqual(b)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
 func Test_Cov6_MP_IsEqual_OneNil(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.IsEqual(nil) {
-		t.Fatal("non-nil vs nil should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.IsEqual(nil)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil vs nil should not be equal", actual)
 }
 
 func Test_Cov6_MP_IsEqual_Same(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if !mp.IsEqual(mp) {
-		t.Fatal("same pointer should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.IsEqual(mp)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same pointer should be equal", actual)
 }
 
 func Test_Cov6_MP_IsEqual_DiffMethods(t *testing.T) {
@@ -281,160 +412,250 @@ func Test_Cov6_MP_IsEqual_DiffMethods(t *testing.T) {
 }
 
 func Test_Cov6_MP_IsNotEqual(t *testing.T) {
+	// Arrange
 	mp1 := getMethodProcessor6("Add")
 	mp2 := getMethodProcessor6("Greeting")
-	if !mp1.IsNotEqual(mp2) {
-		t.Fatal("different methods should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": mp1.IsNotEqual(mp2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "different methods should not be equal", actual)
 }
 
 func Test_Cov6_MP_GetType(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
-	if mp.GetType() == nil {
-		t.Fatal("expected non-nil type")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.GetType() == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil type", actual)
 }
 
 func Test_Cov6_MP_GetType_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
-	if mp.GetType() != nil {
-		t.Fatal("nil should return nil type")
-	}
+
+	// Act
+	actual := args.Map{"result": mp.GetType() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil type", actual)
 }
 
 func Test_Cov6_MP_GetOutArgsTypes(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	out := mp.GetOutArgsTypes()
-	if len(out) != 1 {
-		t.Fatalf("expected 1, got %d", len(out))
-	}
+
+	// Act
+	actual := args.Map{"result": len(out) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// Call again to hit cache
 	out2 := mp.GetOutArgsTypes()
-	if len(out2) != 1 {
-		t.Fatal("cache should return same")
-	}
+	actual := args.Map{"result": len(out2) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
 func Test_Cov6_MP_GetOutArgsTypes_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
 	out := mp.GetOutArgsTypes()
-	if len(out) != 0 {
-		t.Fatal("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(out) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov6_MP_GetInArgsTypes(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	in := mp.GetInArgsTypes()
-	if len(in) < 2 {
-		t.Fatalf("expected >= 2, got %d", len(in))
-	}
+
+	// Act
+	actual := args.Map{"result": len(in) < 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 	// Call again to hit cache
 	in2 := mp.GetInArgsTypes()
-	if len(in2) != len(in) {
-		t.Fatal("cache should return same")
-	}
+	actual := args.Map{"result": len(in2) != len(in)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
 func Test_Cov6_MP_GetInArgsTypes_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
 	in := mp.GetInArgsTypes()
-	if len(in) != 0 {
-		t.Fatal("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(in) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov6_MP_GetInArgsTypesNames(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	names := mp.GetInArgsTypesNames()
-	if len(names) < 2 {
-		t.Fatalf("expected >= 2, got %d", len(names))
-	}
+
+	// Act
+	actual := args.Map{"result": len(names) < 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 	// Call again to hit cache
 	names2 := mp.GetInArgsTypesNames()
-	if len(names2) != len(names) {
-		t.Fatal("cache should return same")
-	}
+	actual := args.Map{"result": len(names2) != len(names)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
 func Test_Cov6_MP_GetInArgsTypesNames_Nil(t *testing.T) {
+	// Arrange
 	var mp *reflectmodel.MethodProcessor
 	names := mp.GetInArgsTypesNames()
-	if len(names) != 0 {
-		t.Fatal("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(names) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov6_MP_ValidateMethodArgs_Success(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Greeting")
 	err := mp.ValidateMethodArgs([]any{testTarget6{}})
-	if err != nil {
-		t.Fatalf("unexpected: %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 }
 
 func Test_Cov6_MP_ValidateMethodArgs_WrongCount(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	err := mp.ValidateMethodArgs([]any{testTarget6{}})
-	if err == nil {
-		t.Fatal("expected args mismatch error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected args mismatch error", actual)
 }
 
 func Test_Cov6_MP_ValidateMethodArgs_WrongType(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	err := mp.ValidateMethodArgs([]any{testTarget6{}, "not_int", "not_int"})
-	if err == nil {
-		t.Fatal("expected type mismatch error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected type mismatch error", actual)
 }
 
 func Test_Cov6_MP_VerifyInArgs(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Greeting")
 	ok, err := mp.VerifyInArgs([]any{testTarget6{}})
-	if !ok || err != nil {
-		t.Fatal("expected ok")
-	}
+
+	// Act
+	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_Cov6_MP_VerifyOutArgs(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	ok, err := mp.VerifyOutArgs([]any{0})
-	if !ok || err != nil {
-		t.Fatal("expected ok")
-	}
+
+	// Act
+	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_Cov6_MP_VerifyOutArgs_Mismatch(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	ok, _ := mp.VerifyOutArgs([]any{"string"})
-	if ok {
-		t.Fatal("expected mismatch")
-	}
+
+	// Act
+	actual := args.Map{"result": ok}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
 func Test_Cov6_MP_InArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Greeting")
 	ok, err := mp.InArgsVerifyRv([]reflect.Type{reflect.TypeOf(testTarget6{})})
-	if !ok || err != nil {
-		t.Fatal("expected ok")
-	}
+
+	// Act
+	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_Cov6_MP_OutArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	ok, err := mp.OutArgsVerifyRv([]reflect.Type{reflect.TypeOf(0)})
-	if !ok || err != nil {
-		t.Fatal("expected ok")
-	}
+
+	// Act
+	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_Cov6_MP_OutArgsVerifyRv_LengthMismatch(t *testing.T) {
+	// Arrange
 	mp := getMethodProcessor6("Add")
 	ok, _ := mp.OutArgsVerifyRv([]reflect.Type{reflect.TypeOf(0), reflect.TypeOf("")})
-	if ok {
-		t.Fatal("expected mismatch for wrong length")
-	}
+
+	// Act
+	actual := args.Map{"result": ok}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected mismatch for wrong length", actual)
 }
 
 // ═══════════════════════════════════════════════
@@ -442,143 +663,218 @@ func Test_Cov6_MP_OutArgsVerifyRv_LengthMismatch(t *testing.T) {
 // ═══════════════════════════════════════════════
 
 func Test_Cov6_RVK_InvalidReflectValueKindModel(t *testing.T) {
+	// Arrange
 	rvk := reflectmodel.InvalidReflectValueKindModel("test error")
-	if rvk.IsValid {
-		t.Fatal("expected invalid")
-	}
-	if rvk.Error == nil {
-		t.Fatal("expected error")
-	}
-	if !rvk.IsInvalid() {
-		t.Fatal("expected IsInvalid true")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.IsValid}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
+	actual := args.Map{"result": rvk.Error == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
+	actual := args.Map{"result": rvk.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsInvalid true", actual)
 }
 
 func Test_Cov6_RVK_IsEmptyError(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{IsValid: true}
-	if !rvk.IsEmptyError() {
-		t.Fatal("expected empty error")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.IsEmptyError()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 	var nilRvk *reflectmodel.ReflectValueKind
-	if !nilRvk.IsEmptyError() {
-		t.Fatal("nil should be empty error")
-	}
+	actual := args.Map{"result": nilRvk.IsEmptyError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty error", actual)
 }
 
 func Test_Cov6_RVK_ActualInstance(t *testing.T) {
+	// Arrange
 	val := 42
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf(val),
 	}
 	inst := rvk.ActualInstance()
-	if inst.(int) != 42 {
-		t.Fatal("expected 42")
-	}
+
+	// Act
+	actual := args.Map{"result": inst.(int) != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_Cov6_RVK_ActualInstance_Nil(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
-	if rvk.ActualInstance() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.ActualInstance() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov6_RVK_PkgPath(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf(testTarget6{}),
 	}
 	pkg := rvk.PkgPath()
-	if pkg == "" {
-		t.Fatal("expected non-empty pkg path")
-	}
+
+	// Act
+	actual := args.Map{"result": pkg == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty pkg path", actual)
 }
 
 func Test_Cov6_RVK_PkgPath_Nil(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
-	if rvk.PkgPath() != "" {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.PkgPath() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_Cov6_RVK_PkgPath_Invalid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{IsValid: false}
-	if rvk.PkgPath() != "" {
-		t.Fatal("expected empty for invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.PkgPath() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for invalid", actual)
 }
 
 func Test_Cov6_RVK_PointerRv_Valid(t *testing.T) {
+	// Arrange
 	val := 42
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf(val),
 	}
 	ptr := rvk.PointerRv()
-	if ptr == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": ptr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov6_RVK_PointerRv_Nil(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
-	if rvk.PointerRv() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.PointerRv() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov6_RVK_PointerRv_NotValid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         false,
 		FinalReflectVal: reflect.ValueOf(42),
 	}
 	ptr := rvk.PointerRv()
-	if ptr == nil {
-		t.Fatal("expected non-nil (returns FinalReflectVal addr)")
-	}
+
+	// Act
+	actual := args.Map{"result": ptr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil (returns FinalReflectVal addr)", actual)
 }
 
 func Test_Cov6_RVK_TypeName_Valid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf(42),
 	}
 	name := rvk.TypeName()
-	if name == "" {
-		t.Fatal("expected non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": name == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_Cov6_RVK_TypeName_Nil(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
-	if rvk.TypeName() != "" {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.TypeName() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_Cov6_RVK_TypeName_NotValid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{IsValid: false}
-	if rvk.TypeName() != "" {
-		t.Fatal("expected empty for invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.TypeName() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for invalid", actual)
 }
 
 func Test_Cov6_RVK_PointerInterface_Valid(t *testing.T) {
+	// Arrange
 	val := 42
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         true,
 		FinalReflectVal: reflect.ValueOf(val),
 	}
 	pi := rvk.PointerInterface()
-	if pi == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": pi == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov6_RVK_PointerInterface_Nil(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
-	if rvk.PointerInterface() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rvk.PointerInterface() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }

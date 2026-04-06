@@ -425,6 +425,10 @@ func (it *TraceCollection) GetSinglePageCollection(
 			)
 	}
 
+	if skipItems >= length {
+		return New.traces.Using(false)
+	}
+
 	endingIndex := skipItems + eachPageSize
 
 	if endingIndex > length {

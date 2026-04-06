@@ -15,6 +15,7 @@ import (
 // ==========================================
 
 func Test_GenericCollection_AddLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := collectionAddLockConcurrencyTestCase
 	const goroutines = 500
 	col := coregeneric.EmptyCollection[int]()
@@ -31,8 +32,10 @@ func Test_GenericCollection_AddLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": col.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -41,6 +44,7 @@ func Test_GenericCollection_AddLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericCollection_AddsLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := collectionAddsLockConcurrencyTestCase
 	const goroutines = 200
 	const batchSize = 5
@@ -62,8 +66,10 @@ func Test_GenericCollection_AddsLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": col.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -72,6 +78,7 @@ func Test_GenericCollection_AddsLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericCollection_LengthLock_ConcurrentReadsWrites(t *testing.T) {
+	// Arrange
 	tc := collectionLengthLockConcurrencyTestCase
 	const writers = 100
 	const readers = 100
@@ -104,11 +111,13 @@ func Test_GenericCollection_LengthLock_ConcurrentReadsWrites(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{
 		"finalLength":   col.Length(),
 		"noNegativeLen": noNegativeLen.Load(),
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -117,6 +126,7 @@ func Test_GenericCollection_LengthLock_ConcurrentReadsWrites(t *testing.T) {
 // ==========================================
 
 func Test_GenericCollection_IsEmptyLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := collectionIsEmptyLockConcurrencyTestCase
 	const goroutines = 100
 	col := coregeneric.EmptyCollection[int]()
@@ -137,7 +147,9 @@ func Test_GenericCollection_IsEmptyLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": col.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

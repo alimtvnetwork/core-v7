@@ -4,29 +4,45 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/issetter"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_IsSetter_OnlySupportedErr_ExercisesToHashset(t *testing.T) {
+	// Arrange
 	// OnlySupportedErr internally calls toHashset
 	v := issetter.True
 	err := v.OnlySupportedErr("True", "False")
-	if err == nil {
-		t.Error("expected error for unsupported names")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unsupported names", actual)
 }
 
 func Test_Cov_IsSetter_OnlySupportedErr_AllSupported(t *testing.T) {
+	// Arrange
 	v := issetter.True
 	err := v.OnlySupportedErr("Uninitialized", "True", "False", "Unset", "Set", "Wildcard")
-	if err != nil {
-		t.Errorf("expected nil got %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov_IsSetter_OnlySupportedErr_Empty(t *testing.T) {
+	// Arrange
 	v := issetter.True
 	err := v.OnlySupportedErr()
-	if err != nil {
-		t.Errorf("expected nil got %v", err)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }

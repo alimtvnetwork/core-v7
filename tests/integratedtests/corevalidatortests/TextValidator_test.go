@@ -13,50 +13,62 @@ import (
 // ==========================================
 
 func Test_TextValidator_IsMatch_ExactEqual(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchExactEqualTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_ExactNotEqual(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchExactNotEqualTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("world", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchCaseInsensitiveTestCase
 	v := corevalidator.TextValidator{
 		Search: "Hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", false)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_CaseSensitiveFail(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchCaseSensitiveFailTestCase
 	v := corevalidator.TextValidator{
 		Search: "Hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -65,26 +77,32 @@ func Test_TextValidator_IsMatch_CaseSensitiveFail(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatch_TrimMatch(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchTrimTestCase
 	v := corevalidator.TextValidator{
 		Search: "  hello  ", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultTrimCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_TrimBothSides(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchTrimBothTestCase
 	v := corevalidator.TextValidator{
 		Search: "  hello  ", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultTrimCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("  hello  ", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -93,26 +111,32 @@ func Test_TextValidator_IsMatch_TrimBothSides(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatch_Contains(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchContainsTestCase
 	v := corevalidator.TextValidator{
 		Search: "ell", SearchAs: stringcompareas.Contains,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello world", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_ContainsMissing(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchContainsMissingTestCase
 	v := corevalidator.TextValidator{
 		Search: "xyz", SearchAs: stringcompareas.Contains,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello world", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -121,26 +145,32 @@ func Test_TextValidator_IsMatch_ContainsMissing(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatch_NotEqual_Different(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchNotEqualDifferentTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.NotEqual,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("world", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_NotEqual_Same(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchNotEqualSameTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.NotEqual,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -149,14 +179,17 @@ func Test_TextValidator_IsMatch_NotEqual_Same(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatch_UniqueWordsSorted(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchUniqueWordsSortedTestCase
 	v := corevalidator.TextValidator{
 		Search: "  banana  apple  apple  cherry  ", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultUniqueWordsCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("cherry banana apple", false)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -165,26 +198,32 @@ func Test_TextValidator_IsMatch_UniqueWordsSorted(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatch_EmptySearchEmptyContent(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchEmptyBothTestCase
 	v := corevalidator.TextValidator{
 		Search: "", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatch_EmptySearchNonEmptyContent(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchEmptySearchNonEmptyTestCase
 	v := corevalidator.TextValidator{
 		Search: "", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -193,38 +232,47 @@ func Test_TextValidator_IsMatch_EmptySearchNonEmptyContent(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_IsMatchMany_AllMatch(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchManyAllTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatchMany(false, true, "hello", "hello", "hello")}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatchMany_OneFails(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchManyOneFailsTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatchMany(false, true, "hello", "world", "hello")}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_IsMatchMany_EmptySkip(t *testing.T) {
+	// Arrange
 	tc := tvIsMatchManyEmptySkipTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
 		Condition: corevalidator.DefaultDisabledCoreCondition,
 	}
 
+	// Act
 	actual := args.Map{"isMatch": v.IsMatchMany(true, true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -235,6 +283,7 @@ func Test_TextValidator_IsMatchMany_EmptySkip(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_VerifyDetailError_Match(t *testing.T) {
+	// Arrange
 	tc := tvVerifyDetailMatchTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
@@ -244,12 +293,15 @@ func Test_TextValidator_VerifyDetailError_Match(t *testing.T) {
 		CaseIndex: 0, Header: "test", IsCaseSensitive: true,
 	}
 
+	// Act
 	actual := args.Map{"hasError": v.VerifyDetailError(params, "hello") != nil}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
+	// Arrange
 	tc := tvVerifyDetailMismatchTestCase
 	v := corevalidator.TextValidator{
 		Search: "hello", SearchAs: stringcompareas.Equal,
@@ -259,8 +311,10 @@ func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 		CaseIndex: 0, Header: "test", IsCaseSensitive: true,
 	}
 
+	// Act
 	actual := args.Map{"hasError": v.VerifyDetailError(params, "world") != nil}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -271,6 +325,7 @@ func Test_TextValidator_VerifyDetailError_Mismatch(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
+	// Arrange
 	tc := tvVerifyManyFirstOnlyTestCase
 	v := corevalidator.TextValidator{
 		Search: "x", SearchAs: stringcompareas.Equal,
@@ -280,12 +335,15 @@ func Test_TextValidator_VerifyMany_FirstOnly(t *testing.T) {
 		CaseIndex: 0, Header: "test", IsCaseSensitive: true,
 	}
 
+	// Act
 	actual := args.Map{"hasError": v.VerifyMany(false, params, "a", "b", "c") != nil}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_VerifyMany_AllErrors(t *testing.T) {
+	// Arrange
 	tc := tvVerifyManyAllErrorsTestCase
 	v := corevalidator.TextValidator{
 		Search: "x", SearchAs: stringcompareas.Equal,
@@ -295,12 +353,15 @@ func Test_TextValidator_VerifyMany_AllErrors(t *testing.T) {
 		CaseIndex: 0, Header: "test", IsCaseSensitive: true,
 	}
 
+	// Act
 	actual := args.Map{"hasError": v.VerifyMany(true, params, "a", "b") != nil}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
+	// Arrange
 	tc := tvVerifyFirstEmptySkipTestCase
 	v := corevalidator.TextValidator{
 		Search: "x", SearchAs: stringcompareas.Equal,
@@ -311,8 +372,10 @@ func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 		IsSkipCompareOnActualEmpty: true,
 	}
 
+	// Act
 	actual := args.Map{"hasError": v.VerifyFirstError(params) != nil}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -321,6 +384,7 @@ func Test_TextValidator_VerifyFirstError_EmptySkip(t *testing.T) {
 // ==========================================
 
 func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
+	// Arrange
 	tc := tvSearchTextFinalizedTestCase
 	v := corevalidator.TextValidator{
 		Search: "  hello  ", SearchAs: stringcompareas.Equal,
@@ -329,11 +393,13 @@ func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 	first := v.SearchTextFinalized()
 	second := v.SearchTextFinalized()
 
+	// Act
 	actual := args.Map{
 		"isCached": first == second,
 		"value":    first,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -342,25 +408,34 @@ func Test_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 // ==========================================
 
 func Test_EmptyValidator_MatchesEmpty(t *testing.T) {
+	// Arrange
 	tc := tvEmptyMatchesEmptyTestCase
 
+	// Act
 	actual := args.Map{"isMatch": corevalidator.EmptyValidator.IsMatch("", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_EmptyValidator_MatchesTrimmedEmpty(t *testing.T) {
+	// Arrange
 	tc := tvEmptyMatchesTrimmedTestCase
 
+	// Act
 	actual := args.Map{"isMatch": corevalidator.EmptyValidator.IsMatch("   ", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_EmptyValidator_NoMatchNonEmpty(t *testing.T) {
+	// Arrange
 	tc := tvEmptyNoMatchNonEmptyTestCase
 
+	// Act
 	actual := args.Map{"isMatch": corevalidator.EmptyValidator.IsMatch("hello", true)}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

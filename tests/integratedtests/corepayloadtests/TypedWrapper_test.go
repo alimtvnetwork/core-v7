@@ -228,6 +228,7 @@ func Test_TypedPayloadWrapper_DeserializeToMany(t *testing.T) {
 }
 
 func Test_TypedPayloadWrapper_MetadataAccessors(t *testing.T) {
+	// Arrange
 	tc := typedWrapperMetadataAccessorsTestCase
 	product := testProduct{SKU: "META-1", Title: "Meta Test", Price: 42.0}
 	typed, err := corepayload.TypedPayloadWrapperNameIdCategory[testProduct](
@@ -235,6 +236,7 @@ func Test_TypedPayloadWrapper_MetadataAccessors(t *testing.T) {
 	)
 	errcore.HandleErr(err)
 
+	// Act
 	actual := args.Map{
 		"name":             typed.Name(),
 		"identifier":       typed.Identifier(),
@@ -246,10 +248,12 @@ func Test_TypedPayloadWrapper_MetadataAccessors(t *testing.T) {
 		"payloadsNonEmpty": typed.PayloadsString() != "",
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TypedPayloadWrapper_TypedDataJson(t *testing.T) {
+	// Arrange
 	tc := typedWrapperTypedDataJsonTestCase
 	product := testProduct{SKU: "JSON-1", Title: "Json Test", Price: 99.99}
 	typed, err := corepayload.TypedPayloadWrapperNameIdRecord[testProduct](
@@ -261,6 +265,7 @@ func Test_TypedPayloadWrapper_TypedDataJson(t *testing.T) {
 	dataJsonPtr := typed.TypedDataJsonPtr()
 	jsonBytes, jsonErr := typed.TypedDataJsonBytes()
 
+	// Act
 	actual := args.Map{
 		"dataJsonNonEmpty":  !dataJson.IsEmpty(),
 		"dataJsonPtrNonNil": dataJsonPtr != nil && !dataJsonPtr.IsEmpty(),
@@ -268,5 +273,6 @@ func Test_TypedPayloadWrapper_TypedDataJson(t *testing.T) {
 		"jsonBytesNoError":  jsonErr == nil,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

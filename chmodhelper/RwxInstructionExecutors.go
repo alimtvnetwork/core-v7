@@ -159,7 +159,6 @@ func (it *RwxInstructionExecutors) ApplyOnPaths(locations []string) error {
 	return it.ApplyOnPathsPtr(locations)
 }
 
-// Deprecated: Use ApplyOnPaths instead.
 func (it *RwxInstructionExecutors) ApplyOnPathsPtr(locations []string) error {
 	if it.IsEmpty() {
 		return nil

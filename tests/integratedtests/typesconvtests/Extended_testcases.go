@@ -9,12 +9,18 @@ var extBoolPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "BoolPtr true",
 		ArrangeInput:  args.Map{"value": true},
-		ExpectedInput: args.Map{"notNil": true, "deref": true},
+		ExpectedInput: args.Map{
+			"notNil": true,
+			"deref": true,
+		},
 	},
 	{
 		Title:         "BoolPtr false",
 		ArrangeInput:  args.Map{"value": false},
-		ExpectedInput: args.Map{"notNil": true, "deref": false},
+		ExpectedInput: args.Map{
+			"notNil": true,
+			"deref": false,
+		},
 	},
 }
 
@@ -26,7 +32,10 @@ var extBoolPtrToSimpleTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "non-nil true returns true",
-		ArrangeInput:  args.Map{"isNil": false, "value": true},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 }
@@ -34,12 +43,19 @@ var extBoolPtrToSimpleTestCases = []coretestcases.CaseV1{
 var extBoolPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns default true",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 	{
 		Title:         "non-nil false ignores default",
-		ArrangeInput:  args.Map{"isNil": false, "value": false, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": false,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 }
@@ -47,12 +63,19 @@ var extBoolPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 var extBoolPtrToDefPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns defVal ptr",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"deref": true},
 	},
 	{
 		Title:         "non-nil returns original",
-		ArrangeInput:  args.Map{"isNil": false, "value": false, "defVal": true},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": false,
+			"defVal": true,
+		},
 		ExpectedInput: args.Map{"deref": false},
 	},
 }
@@ -65,7 +88,10 @@ var extBoolPtrDefValFuncTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "non-nil returns original",
-		ArrangeInput:  args.Map{"isNil": false, "value": false},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": false,
+		},
 		ExpectedInput: args.Map{"deref": false},
 	},
 }
@@ -74,7 +100,10 @@ var extIntPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IntPtr creates pointer",
 		ArrangeInput:  args.Map{"value": 42},
-		ExpectedInput: args.Map{"notNil": true, "deref": 42},
+		ExpectedInput: args.Map{
+			"notNil": true,
+			"deref": 42,
+		},
 	},
 }
 
@@ -86,7 +115,10 @@ var extIntPtrToSimpleTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "non-nil returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": 7},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": 7,
+		},
 		ExpectedInput: args.Map{"result": 7},
 	},
 }
@@ -94,7 +126,10 @@ var extIntPtrToSimpleTestCases = []coretestcases.CaseV1{
 var extIntPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": 99},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": 99,
+		},
 		ExpectedInput: args.Map{"result": 99},
 	},
 }
@@ -102,7 +137,10 @@ var extIntPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 var extIntPtrToDefPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns defVal ptr",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": 10},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": 10,
+		},
 		ExpectedInput: args.Map{"deref": 10},
 	},
 }
@@ -119,7 +157,10 @@ var extStringPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringPtr creates pointer",
 		ArrangeInput:  args.Map{"value": "hello"},
-		ExpectedInput: args.Map{"notNil": true, "deref": "hello"},
+		ExpectedInput: args.Map{
+			"notNil": true,
+			"deref": "hello",
+		},
 	},
 }
 
@@ -131,7 +172,10 @@ var extStringPtrToSimpleTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "non-nil returns value",
-		ArrangeInput:  args.Map{"isNil": false, "value": "world"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "world",
+		},
 		ExpectedInput: args.Map{"result": "world"},
 	},
 }
@@ -139,7 +183,10 @@ var extStringPtrToSimpleTestCases = []coretestcases.CaseV1{
 var extStringPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": "fallback"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": "fallback",
+		},
 		ExpectedInput: args.Map{"result": "fallback"},
 	},
 }
@@ -147,7 +194,10 @@ var extStringPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 var extStringPtrToDefPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns defVal ptr",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": "default"},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": "default",
+		},
 		ExpectedInput: args.Map{"deref": "default"},
 	},
 }
@@ -201,12 +251,18 @@ var extStringPointerToBoolTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "empty returns false",
-		ArrangeInput:  args.Map{"isNil": false, "value": ""},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "",
+		},
 		ExpectedInput: args.Map{"result": false},
 	},
 	{
 		Title:         "yes returns true",
-		ArrangeInput:  args.Map{"isNil": false, "value": "yes"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "yes",
+		},
 		ExpectedInput: args.Map{"result": true},
 	},
 }
@@ -219,7 +275,10 @@ var extStringPointerToBoolPtrTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "yes returns true ptr",
-		ArrangeInput:  args.Map{"isNil": false, "value": "yes"},
+		ArrangeInput:  args.Map{
+			"isNil": false,
+			"value": "yes",
+		},
 		ExpectedInput: args.Map{"deref": true},
 	},
 }
@@ -256,7 +315,10 @@ var extBytePtrToSimpleTestCases = []coretestcases.CaseV1{
 var extBytePtrToSimpleDefTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": byte(9)},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": byte(9),
+		},
 		ExpectedInput: args.Map{"result": byte(9)},
 	},
 }
@@ -264,7 +326,10 @@ var extBytePtrToSimpleDefTestCases = []coretestcases.CaseV1{
 var extBytePtrToDefPtrTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns defVal ptr",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": byte(3)},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": byte(3),
+		},
 		ExpectedInput: args.Map{"notNil": true},
 	},
 }
@@ -296,7 +361,10 @@ var extFloatPtrToSimpleTestCases = []coretestcases.CaseV1{
 var extFloatPtrToSimpleDefTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "nil returns default",
-		ArrangeInput:  args.Map{"isNil": true, "defVal": float32(1.5)},
+		ArrangeInput:  args.Map{
+			"isNil": true,
+			"defVal": float32(1.5),
+		},
 		ExpectedInput: args.Map{"result": float32(1.5)},
 	},
 }

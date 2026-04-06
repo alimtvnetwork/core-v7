@@ -666,22 +666,34 @@ var extToBoolTestCases = []coretestcases.CaseV1{
 var extToByteTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToByte valid returns byte",
-		ArrangeInput:  args.Map{"input": "200", "def": byte(0)},
+		ArrangeInput:  args.Map{
+			"input": "200",
+			"def": byte(0),
+		},
 		ExpectedInput: "200",
 	},
 	{
 		Title:         "ToByte invalid returns default",
-		ArrangeInput:  args.Map{"input": "abc", "def": byte(99)},
+		ArrangeInput:  args.Map{
+			"input": "abc",
+			"def": byte(99),
+		},
 		ExpectedInput: "99",
 	},
 	{
 		Title:         "ToByte overflow returns default",
-		ArrangeInput:  args.Map{"input": "300", "def": byte(10)},
+		ArrangeInput:  args.Map{
+			"input": "300",
+			"def": byte(10),
+		},
 		ExpectedInput: "10",
 	},
 	{
 		Title:         "ToByte negative returns default",
-		ArrangeInput:  args.Map{"input": "-1", "def": byte(5)},
+		ArrangeInput:  args.Map{
+			"input": "-1",
+			"def": byte(5),
+		},
 		ExpectedInput: "5",
 	},
 }
@@ -711,12 +723,18 @@ var extToByteDefaultTestCases = []coretestcases.CaseV1{
 var extToIntTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToInt valid int",
-		ArrangeInput:  args.Map{"input": "42", "def": 0},
+		ArrangeInput:  args.Map{
+			"input": "42",
+			"def": 0,
+		},
 		ExpectedInput: "42",
 	},
 	{
 		Title:         "ToInt invalid returns default",
-		ArrangeInput:  args.Map{"input": "abc", "def": -1},
+		ArrangeInput:  args.Map{
+			"input": "abc",
+			"def": -1,
+		},
 		ExpectedInput: "-1",
 	},
 }
@@ -728,12 +746,18 @@ var extToIntTestCases = []coretestcases.CaseV1{
 var extToInt8TestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToInt8 valid",
-		ArrangeInput:  args.Map{"input": "50", "def": int8(0)},
+		ArrangeInput:  args.Map{
+			"input": "50",
+			"def": int8(0),
+		},
 		ExpectedInput: "50",
 	},
 	{
 		Title:         "ToInt8 invalid returns default",
-		ArrangeInput:  args.Map{"input": "abc", "def": int8(-1)},
+		ArrangeInput:  args.Map{
+			"input": "abc",
+			"def": int8(-1),
+		},
 		ExpectedInput: "-1",
 	},
 }
@@ -745,12 +769,18 @@ var extToInt8TestCases = []coretestcases.CaseV1{
 var extToInt16TestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToInt16 valid",
-		ArrangeInput:  args.Map{"input": "1000", "def": int16(0)},
+		ArrangeInput:  args.Map{
+			"input": "1000",
+			"def": int16(0),
+		},
 		ExpectedInput: "1000",
 	},
 	{
 		Title:         "ToInt16 invalid returns default",
-		ArrangeInput:  args.Map{"input": "abc", "def": int16(-1)},
+		ArrangeInput:  args.Map{
+			"input": "abc",
+			"def": int16(-1),
+		},
 		ExpectedInput: "-1",
 	},
 }
@@ -762,12 +792,18 @@ var extToInt16TestCases = []coretestcases.CaseV1{
 var extToInt32TestCases = []coretestcases.CaseV1{
 	{
 		Title:         "ToInt32 valid",
-		ArrangeInput:  args.Map{"input": "65536", "def": int32(0)},
+		ArrangeInput:  args.Map{
+			"input": "65536",
+			"def": int32(0),
+		},
 		ExpectedInput: "65536",
 	},
 	{
 		Title:         "ToInt32 invalid returns default",
-		ArrangeInput:  args.Map{"input": "abc", "def": int32(-1)},
+		ArrangeInput:  args.Map{
+			"input": "abc",
+			"def": int32(-1),
+		},
 		ExpectedInput: "-1",
 	},
 }
@@ -956,7 +992,10 @@ var extSplitLeftRightTrimmedTestCases = []coretestcases.CaseV1{
 			"input":     " key = value ",
 			"separator": "=",
 		},
-		ExpectedInput: args.Map{"left": "key", "right": "value"},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+		},
 	},
 	{
 		Title: "SplitLeftRightTrimmed no separator returns trimmed left",
@@ -964,7 +1003,10 @@ var extSplitLeftRightTrimmedTestCases = []coretestcases.CaseV1{
 			"input":     " nosep ",
 			"separator": "=",
 		},
-		ExpectedInput: args.Map{"left": "nosep", "right": ""},
+		ExpectedInput: args.Map{
+			"left": "nosep",
+			"right": "",
+		},
 	},
 }
 
@@ -979,7 +1021,10 @@ var extSplitFirstLastTestCases = []coretestcases.CaseV1{
 			"input":     "a/b/c",
 			"separator": "/",
 		},
-		ExpectedInput: args.Map{"first": "a", "last": "c"},
+		ExpectedInput: args.Map{
+			"first": "a",
+			"last": "c",
+		},
 	},
 	{
 		Title: "SplitFirstLast no separator",
@@ -987,7 +1032,10 @@ var extSplitFirstLastTestCases = []coretestcases.CaseV1{
 			"input":     "abc",
 			"separator": "/",
 		},
-		ExpectedInput: args.Map{"first": "abc", "last": ""},
+		ExpectedInput: args.Map{
+			"first": "abc",
+			"last": "",
+		},
 	},
 }
 
@@ -998,22 +1046,34 @@ var extSplitFirstLastTestCases = []coretestcases.CaseV1{
 var extSafeSubstringStartsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "SafeSubstringStarts normal",
-		ArrangeInput:  args.Map{"content": "hello", "start": 2},
+		ArrangeInput:  args.Map{
+			"content": "hello",
+			"start": 2,
+		},
 		ExpectedInput: "llo",
 	},
 	{
 		Title:         "SafeSubstringStarts -1 returns full",
-		ArrangeInput:  args.Map{"content": "hello", "start": -1},
+		ArrangeInput:  args.Map{
+			"content": "hello",
+			"start": -1,
+		},
 		ExpectedInput: "hello",
 	},
 	{
 		Title:         "SafeSubstringStarts empty returns empty",
-		ArrangeInput:  args.Map{"content": "", "start": 0},
+		ArrangeInput:  args.Map{
+			"content": "",
+			"start": 0,
+		},
 		ExpectedInput: "",
 	},
 	{
 		Title:         "SafeSubstringStarts out of range returns empty",
-		ArrangeInput:  args.Map{"content": "hi", "start": 5},
+		ArrangeInput:  args.Map{
+			"content": "hi",
+			"start": 5,
+		},
 		ExpectedInput: "",
 	},
 }
@@ -1021,22 +1081,34 @@ var extSafeSubstringStartsTestCases = []coretestcases.CaseV1{
 var extSafeSubstringEndsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "SafeSubstringEnds normal",
-		ArrangeInput:  args.Map{"content": "hello", "end": 3},
+		ArrangeInput:  args.Map{
+			"content": "hello",
+			"end": 3,
+		},
 		ExpectedInput: "hel",
 	},
 	{
 		Title:         "SafeSubstringEnds -1 returns full",
-		ArrangeInput:  args.Map{"content": "hello", "end": -1},
+		ArrangeInput:  args.Map{
+			"content": "hello",
+			"end": -1,
+		},
 		ExpectedInput: "hello",
 	},
 	{
 		Title:         "SafeSubstringEnds empty returns empty",
-		ArrangeInput:  args.Map{"content": "", "end": 3},
+		ArrangeInput:  args.Map{
+			"content": "",
+			"end": 3,
+		},
 		ExpectedInput: "",
 	},
 	{
 		Title:         "SafeSubstringEnds over length returns full",
-		ArrangeInput:  args.Map{"content": "hi", "end": 10},
+		ArrangeInput:  args.Map{
+			"content": "hi",
+			"end": 10,
+		},
 		ExpectedInput: "hi",
 	},
 }

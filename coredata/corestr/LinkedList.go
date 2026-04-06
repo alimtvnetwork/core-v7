@@ -707,7 +707,6 @@ func (it *LinkedList) AddStringsToNode(
 	return it
 }
 
-// Deprecated: Use AddStringsToNode instead.
 func (it *LinkedList) AddStringsPtrToNode(
 	isSkipOnNull bool,
 	node *LinkedListNode,
@@ -976,7 +975,6 @@ func (it *LinkedList) List() []string {
 	return list
 }
 
-// Deprecated: Use List instead.
 func (it *LinkedList) ListPtr() []string {
 	return it.List()
 }
@@ -989,7 +987,6 @@ func (it *LinkedList) ListLock() []string {
 	return it.List()
 }
 
-// Deprecated: Use ListLock instead.
 func (it *LinkedList) ListPtrLock() []string {
 	it.Lock()
 	defer it.Unlock()

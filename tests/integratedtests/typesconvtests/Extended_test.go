@@ -16,7 +16,10 @@ func Test_Ext_BoolPtr_Verification(t *testing.T) {
 		// Act
 		result := typesconv.BoolPtr(val)
 
-		actual := args.Map{"notNil": result != nil, "deref": *result}
+		actual := args.Map{
+			"notNil": result != nil,
+			"deref": *result,
+		}
 
 		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
@@ -122,7 +125,10 @@ func Test_Ext_IntPtr_Verification(t *testing.T) {
 		// Act
 		result := typesconv.IntPtr(val)
 
-		actual := args.Map{"notNil": result != nil, "deref": *result}
+		actual := args.Map{
+			"notNil": result != nil,
+			"deref": *result,
+		}
 
 		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
@@ -207,7 +213,10 @@ func Test_Ext_StringPtr_Verification(t *testing.T) {
 		// Act
 		result := typesconv.StringPtr(val)
 
-		actual := args.Map{"notNil": result != nil, "deref": *result}
+		actual := args.Map{
+			"notNil": result != nil,
+			"deref": *result,
+		}
 
 		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)

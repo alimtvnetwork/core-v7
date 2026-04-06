@@ -36,6 +36,7 @@ func (it coverage2TestCaseMessenger) Actual() any {
 }
 
 func Test_Cov2_BaseTestCase_ShouldAsserters(t *testing.T) {
+	// Arrange
 	base := &coretests.BaseTestCase{
 		Title:         "base should asserter",
 		ArrangeInput:  []string{"ok"},
@@ -53,10 +54,13 @@ func Test_Cov2_BaseTestCase_ShouldAsserters(t *testing.T) {
 	}
 	disabled.ShouldBe(2, t, convey.ShouldEqual, "done")
 
+	// Act
 	actual := args.Map{
 		"actualLen": len(base.ActualLines()),
 		"actualVal": base.ActualLines()[0],
 	}
+
+	// Assert
 	expected := args.Map{
 		"actualLen": 1,
 		"actualVal": "ok",
@@ -65,6 +69,7 @@ func Test_Cov2_BaseTestCase_ShouldAsserters(t *testing.T) {
 }
 
 func Test_Cov2_BaseTestCase_TypeValidation(t *testing.T) {
+	// Arrange
 	mismatch := &coretests.BaseTestCase{
 		Title:         "mismatch",
 		ArrangeInput:  "arrange",
@@ -84,10 +89,13 @@ func Test_Cov2_BaseTestCase_TypeValidation(t *testing.T) {
 	pass.TypesValidationMustPasses(t)
 	pass.TypeShouldMatch(t, 0, "type check")
 
+	// Act
 	actual := args.Map{
 		"mismatchErr": mismatchErr != nil,
 		"passErrNil":  pass.TypeValidationError() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"mismatchErr": true,
 		"passErrNil":  true,
@@ -96,6 +104,7 @@ func Test_Cov2_BaseTestCase_TypeValidation(t *testing.T) {
 }
 
 func Test_Cov2_Compare_IsMatch(t *testing.T) {
+	// Arrange
 	instruction := &coretests.ComparingInstruction{}
 	instruction.SetActual("alpha beta gamma")
 
@@ -103,6 +112,7 @@ func Test_Cov2_Compare_IsMatch(t *testing.T) {
 	partial := &coretests.Compare{StringContains: "alpha zeta beta", MatchingLength: 2}
 	failed := &coretests.Compare{StringContains: "zeta", MatchingLength: 1}
 
+	// Act
 	actual := args.Map{
 		"all":          all.IsMatch(false, 0, instruction),
 		"partial":      partial.IsMatch(false, 1, instruction),
@@ -110,6 +120,8 @@ func Test_Cov2_Compare_IsMatch(t *testing.T) {
 		"sortedNotEmpty": all.SortedString() != "",
 		"printHasIndex":  strings.Contains(all.GetPrintMessage(9), "Index:9"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"all":          true,
 		"partial":      true,
@@ -121,6 +133,7 @@ func Test_Cov2_Compare_IsMatch(t *testing.T) {
 }
 
 func Test_Cov2_ComparingInstruction_IsMatch(t *testing.T) {
+	// Arrange
 	instruction := &coretests.ComparingInstruction{
 		FunName:                    "matcher",
 		Header:                     "when whitespace is sorted",
@@ -140,11 +153,14 @@ func Test_Cov2_ComparingInstruction_IsMatch(t *testing.T) {
 
 	isMatch := instruction.IsMatch(&coretests.CaseIndexPlusIsPrint{CaseIndex: 3, IsPrint: false})
 
+	// Act
 	actual := args.Map{
 		"actual":    instruction.Actual(),
 		"hashReset": firstHash != secondHash,
 		"match":     isMatch,
 	}
+
+	// Assert
 	expected := args.Map{
 		"actual":    "beta alpha",
 		"hashReset": true,
@@ -154,6 +170,7 @@ func Test_Cov2_ComparingInstruction_IsMatch(t *testing.T) {
 }
 
 func Test_Cov2_SimpleTestCase_ShouldAsserters(t *testing.T) {
+	// Arrange
 	testCase := coretests.SimpleTestCase{
 		Title:         "simple should",
 		ArrangeInput:  []string{"ok"},
@@ -163,10 +180,13 @@ func Test_Cov2_SimpleTestCase_ShouldAsserters(t *testing.T) {
 	testCase.ShouldBe(0, t, convey.ShouldResemble, []string{"ok"})
 	testCase.ShouldBeExplicit(1, t, "simple explicit", []string{"ok"}, convey.ShouldResemble, []string{"ok"})
 
+	// Act
 	actual := args.Map{
 		"stringNotEmpty":     testCase.String(0) != "",
 		"linesStringNotEmpty": testCase.LinesString(0) != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"stringNotEmpty":     true,
 		"linesStringNotEmpty": true,
@@ -175,6 +195,7 @@ func Test_Cov2_SimpleTestCase_ShouldAsserters(t *testing.T) {
 }
 
 func Test_Cov2_SkipHelpers(t *testing.T) {
+	// Arrange
 	runCount := 0
 
 	t.Run("skip-on-unix", func(subT *testing.T) {
@@ -187,12 +208,16 @@ func Test_Cov2_SkipHelpers(t *testing.T) {
 		coretests.SkipOnWindows(subT)
 	})
 
+	// Act
 	actual := args.Map{"runCount": runCount}
+
+	// Assert
 	expected := args.Map{"runCount": 2}
 	expected.ShouldBeEqual(t, 0, "Skip returns correct value -- helpers invoked", actual)
 }
 
 func Test_Cov2_IsCompare_And_GetAssertHelpers(t *testing.T) {
+	// Arrange
 	messenger := coverage2TestCaseMessenger{
 		funcName: "CompareFn",
 		value:    "when comparing sorted",
@@ -241,6 +266,7 @@ func Test_Cov2_IsCompare_And_GetAssertHelpers(t *testing.T) {
 		},
 	)
 
+	// Act
 	actual := args.Map{
 		"msgNotEmpty":      msg != "",
 		"header":           header,
@@ -249,6 +275,8 @@ func Test_Cov2_IsCompare_And_GetAssertHelpers(t *testing.T) {
 		"errorMatch":       errorMatch,
 		"emptyErrorMatch":  emptyErrorMatch,
 	}
+
+	// Assert
 	expected := args.Map{
 		"msgNotEmpty":      true,
 		"header":           "CompareMethod : [CompareFn]",

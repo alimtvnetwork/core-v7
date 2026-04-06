@@ -4,55 +4,84 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/isany"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_Conclusive_BothReflectNull(t *testing.T) {
+	// Arrange
 	var p1 *string
 	var p2 *string
 	isEqual, isConclusive := isany.Conclusive(p1, p2)
-	if !isEqual || !isConclusive {
-		t.Error("both nil ptr should be equal conclusive")
-	}
+
+	// Act
+	actual := args.Map{"result": isEqual || !isConclusive}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil ptr should be equal conclusive", actual)
 }
 
 func Test_Cov_Conclusive_OneReflectNull(t *testing.T) {
+	// Arrange
 	var p1 *string
 	s := "hello"
 	isEqual, isConclusive := isany.Conclusive(p1, &s)
-	if isEqual || !isConclusive {
-		t.Error("one nil should be not equal but conclusive")
-	}
+
+	// Act
+	actual := args.Map{"result": isEqual || !isConclusive}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one nil should be not equal but conclusive", actual)
 }
 
 func Test_Cov_Conclusive_DiffTypes(t *testing.T) {
+	// Arrange
 	isEqual, isConclusive := isany.Conclusive(42, "hello")
-	if isEqual || !isConclusive {
-		t.Error("diff types should be not equal but conclusive")
-	}
+
+	// Act
+	actual := args.Map{"result": isEqual || !isConclusive}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "diff types should be not equal but conclusive", actual)
 }
 
 func Test_Cov_Conclusive_Inconclusive(t *testing.T) {
+	// Arrange
 	a := "hello"
 	b := "world"
 	isEqual, isConclusive := isany.Conclusive(&a, &b)
-	if isEqual || isConclusive {
-		t.Error("same type diff values should be inconclusive")
-	}
+
+	// Act
+	actual := args.Map{"result": isEqual || isConclusive}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "same type diff values should be inconclusive", actual)
 }
 
 func Test_Cov_JsonEqual_IntEqual(t *testing.T) {
-	if !isany.JsonEqual(42, 42) {
-		t.Error("expected equal")
-	}
-	if isany.JsonEqual(42, 43) {
-		t.Error("expected not equal")
-	}
+	// Act
+	actual := args.Map{"result": isany.JsonEqual(42, 42)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
+	actual := args.Map{"result": isany.JsonEqual(42, 43)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
 func Test_Cov_JsonEqual_JsonMarshal(t *testing.T) {
+	// Arrange
 	a := map[string]int{"a": 1}
 	b := map[string]int{"a": 1}
-	if !isany.JsonEqual(a, b) {
-		t.Error("expected equal")
-	}
+
+	// Act
+	actual := args.Map{"result": isany.JsonEqual(a, b)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }

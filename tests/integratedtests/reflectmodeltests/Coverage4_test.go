@@ -48,8 +48,14 @@ func Test_Cov4_ReflectValueKind_PointerRv_Valid(t *testing.T) {
 	ptrRv := rvk.PointerRv()
 	ptrInf := rvk.PointerInterface()
 	// Assert
-	actual := args.Map{"ptrRvNotNil": ptrRv != nil, "ptrInfNotNil": ptrInf != nil}
-	expected := args.Map{"ptrRvNotNil": true, "ptrInfNotNil": true}
+	actual := args.Map{
+		"ptrRvNotNil": ptrRv != nil,
+		"ptrInfNotNil": ptrInf != nil,
+	}
+	expected := args.Map{
+		"ptrRvNotNil": true,
+		"ptrInfNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectValueKind returns error -- PointerRv valid", actual)
 }
 
@@ -101,7 +107,10 @@ func Test_Cov4_FieldProcessor_Nil(t *testing.T) {
 		"isFieldType": fp.IsFieldType(reflect.TypeOf("")),
 		"isFieldKind": fp.IsFieldKind(reflect.String),
 	}
-	expected := args.Map{"isFieldType": false, "isFieldKind": false}
+	expected := args.Map{
+		"isFieldType": false,
+		"isFieldKind": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor returns nil -- nil", actual)
 }
 
@@ -202,8 +211,16 @@ func Test_Cov4_MethodProcessor_GetInOutArgsTypes_Nil(t *testing.T) {
 	outTypes := mp.GetOutArgsTypes()
 	inNames := mp.GetInArgsTypesNames()
 	// Assert
-	actual := args.Map{"inLen": len(inTypes), "outLen": len(outTypes), "inNamesLen": len(inNames)}
-	expected := args.Map{"inLen": 0, "outLen": 0, "inNamesLen": 0}
+	actual := args.Map{
+		"inLen": len(inTypes),
+		"outLen": len(outTypes),
+		"inNamesLen": len(inNames),
+	}
+	expected := args.Map{
+		"inLen": 0,
+		"outLen": 0,
+		"inNamesLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns nil -- nil GetInOutArgsTypes", actual)
 }
 
@@ -220,8 +237,14 @@ func Test_Cov4_MethodProcessor_Invoke(t *testing.T) {
 	// Act
 	results, err := mp.Invoke(s, "World")
 	// Assert
-	actual := args.Map{"err": err == nil, "result": results[0]}
-	expected := args.Map{"err": true, "result": "Hello World"}
+	actual := args.Map{
+		"err": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"err": true,
+		"result": "Hello World",
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns correct value -- Invoke", actual)
 }
 
@@ -255,8 +278,14 @@ func Test_Cov4_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 	// Act
 	result, err := mp.GetFirstResponseOfInvoke(s)
 	// Assert
-	actual := args.Map{"err": err == nil, "result": result}
-	expected := args.Map{"err": true, "result": "Hi"}
+	actual := args.Map{
+		"err": err == nil,
+		"result": result,
+	}
+	expected := args.Map{
+		"err": true,
+		"result": "Hi",
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns correct value -- GetFirstResponseOfInvoke", actual)
 }
 
@@ -291,8 +320,18 @@ func Test_Cov4_MethodProcessor_VerifyInOutArgs(t *testing.T) {
 	inOk, inErr := mp.VerifyInArgs([]any{cov4SampleStruct{}, "test"})
 	outOk, outErr := mp.VerifyOutArgs([]any{"result"})
 	// Assert
-	actual := args.Map{"inOk": inOk, "inErr": inErr == nil, "outOk": outOk, "outErr": outErr == nil}
-	expected := args.Map{"inOk": true, "inErr": true, "outOk": true, "outErr": true}
+	actual := args.Map{
+		"inOk": inOk,
+		"inErr": inErr == nil,
+		"outOk": outOk,
+		"outErr": outErr == nil,
+	}
+	expected := args.Map{
+		"inOk": true,
+		"inErr": true,
+		"outOk": true,
+		"outErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns correct value -- VerifyInOutArgs", actual)
 }
 
@@ -323,8 +362,14 @@ func Test_Cov4_RvUtils_IndexToPosition(t *testing.T) {
 	// Act
 	inOk, inErr := mp.InArgsVerifyRv([]reflect.Type{reflect.TypeOf(0)})
 	// Assert
-	actual := args.Map{"ok": inOk, "hasErr": inErr != nil}
-	expected := args.Map{"ok": false, "hasErr": true}
+	actual := args.Map{
+		"ok": inOk,
+		"hasErr": inErr != nil,
+	}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "rvUtils returns correct value -- VerifyReflectTypes length mismatch", actual)
 }
 

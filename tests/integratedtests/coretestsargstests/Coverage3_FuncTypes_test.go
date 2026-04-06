@@ -77,8 +77,14 @@ func Test_Cov3_TwoFunc_Invoke(t *testing.T) {
 	results, err := tf.Invoke(3, 4)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 7}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct -- TwoFunc with add", actual)
 }
 
@@ -111,8 +117,14 @@ func Test_Cov3_TwoFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := tf.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 30}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 30,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- TwoFunc", actual)
 }
 
@@ -128,8 +140,14 @@ func Test_Cov3_TwoFunc_InvokeArgs(t *testing.T) {
 	results, err := tf.InvokeArgs(2)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 11}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 11,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- TwoFunc upTo 2", actual)
 }
 
@@ -175,8 +193,14 @@ func Test_Cov3_ThreeFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := tf.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": "abc"}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": "abc",
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- ThreeFunc", actual)
 }
 
@@ -193,8 +217,14 @@ func Test_Cov3_ThreeFunc_InvokeArgs(t *testing.T) {
 	results, err := tf.InvokeArgs(3)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": "xyz"}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": "xyz",
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- ThreeFunc upTo 3", actual)
 }
 
@@ -211,8 +241,14 @@ func Test_Cov3_ThreeFunc_Slice_String(t *testing.T) {
 	str := tf.String()
 
 	// Assert
-	actual := args.Map{"sliceLen": len(slice), "hasStr": len(str) > 0}
-	expected := args.Map{"sliceLen": 3, "hasStr": true}
+	actual := args.Map{
+		"sliceLen": len(slice),
+		"hasStr": len(str) > 0,
+	}
+	expected := args.Map{
+		"sliceLen": 3,
+		"hasStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Slice/String returns correct -- ThreeFunc", actual)
 }
 
@@ -232,8 +268,14 @@ func Test_Cov3_FourFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := ff.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 10}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- FourFunc", actual)
 }
 
@@ -251,8 +293,14 @@ func Test_Cov3_FourFunc_InvokeArgs(t *testing.T) {
 	results, err := ff.InvokeArgs(4)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 10}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- FourFunc upTo 4", actual)
 }
 
@@ -270,8 +318,14 @@ func Test_Cov3_FourFunc_Slice_String(t *testing.T) {
 	str := ff.String()
 
 	// Assert
-	actual := args.Map{"sliceLen": len(slice), "hasStr": len(str) > 0}
-	expected := args.Map{"sliceLen": 4, "hasStr": true}
+	actual := args.Map{
+		"sliceLen": len(slice),
+		"hasStr": len(str) > 0,
+	}
+	expected := args.Map{
+		"sliceLen": 4,
+		"hasStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Slice/String returns correct -- FourFunc", actual)
 }
 
@@ -292,8 +346,14 @@ func Test_Cov3_FiveFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := ff.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 15}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 15,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- FiveFunc", actual)
 }
 
@@ -312,8 +372,14 @@ func Test_Cov3_FiveFunc_InvokeArgs(t *testing.T) {
 	results, err := ff.InvokeArgs(5)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 15}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 15,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- FiveFunc upTo 5", actual)
 }
 
@@ -332,8 +398,14 @@ func Test_Cov3_FiveFunc_Slice_String(t *testing.T) {
 	str := ff.String()
 
 	// Assert
-	actual := args.Map{"sliceLen": len(slice), "hasStr": len(str) > 0}
-	expected := args.Map{"sliceLen": 5, "hasStr": true}
+	actual := args.Map{
+		"sliceLen": len(slice),
+		"hasStr": len(str) > 0,
+	}
+	expected := args.Map{
+		"sliceLen": 5,
+		"hasStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Slice/String returns correct -- FiveFunc", actual)
 }
 
@@ -355,8 +427,14 @@ func Test_Cov3_SixFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := sf.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 21}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 21,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- SixFunc", actual)
 }
 
@@ -376,8 +454,14 @@ func Test_Cov3_SixFunc_InvokeArgs(t *testing.T) {
 	results, err := sf.InvokeArgs(6)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 21}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 21,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- SixFunc upTo 6", actual)
 }
 
@@ -397,7 +481,13 @@ func Test_Cov3_SixFunc_Slice_String(t *testing.T) {
 	str := sf.String()
 
 	// Assert
-	actual := args.Map{"sliceLen": len(slice), "hasStr": len(str) > 0}
-	expected := args.Map{"sliceLen": 6, "hasStr": true}
+	actual := args.Map{
+		"sliceLen": len(slice),
+		"hasStr": len(str) > 0,
+	}
+	expected := args.Map{
+		"sliceLen": 6,
+		"hasStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Slice/String returns correct -- SixFunc", actual)
 }

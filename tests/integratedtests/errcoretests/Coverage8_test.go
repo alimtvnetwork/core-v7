@@ -18,7 +18,10 @@ import (
 // ── LineDiff ──
 
 func Test_Cov8_LineDiff_MatchingLines(t *testing.T) {
+	// Act
 	actual := []string{"a", "b", "c"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 	results := errcore.LineDiff(actual, expected)
 	actual2 := args.Map{
@@ -37,7 +40,10 @@ func Test_Cov8_LineDiff_MatchingLines(t *testing.T) {
 }
 
 func Test_Cov8_LineDiff_MismatchLines(t *testing.T) {
+	// Act
 	actual := []string{"a", "WRONG", "c"}
+
+	// Assert
 	expected := []string{"a", "b", "c"}
 	results := errcore.LineDiff(actual, expected)
 	actual2 := args.Map{
@@ -56,7 +62,10 @@ func Test_Cov8_LineDiff_MismatchLines(t *testing.T) {
 }
 
 func Test_Cov8_LineDiff_ExtraActual(t *testing.T) {
+	// Act
 	actual := []string{"a", "b", "c"}
+
+	// Assert
 	expected := []string{"a", "b"}
 	results := errcore.LineDiff(actual, expected)
 	actual2 := args.Map{
@@ -71,7 +80,10 @@ func Test_Cov8_LineDiff_ExtraActual(t *testing.T) {
 }
 
 func Test_Cov8_LineDiff_MissingExpected(t *testing.T) {
+	// Act
 	actual := []string{"a"}
+
+	// Assert
 	expected := []string{"a", "b"}
 	results := errcore.LineDiff(actual, expected)
 	actual2 := args.Map{
@@ -86,8 +98,13 @@ func Test_Cov8_LineDiff_MissingExpected(t *testing.T) {
 }
 
 func Test_Cov8_LineDiff_BothEmpty(t *testing.T) {
+	// Arrange
 	results := errcore.LineDiff([]string{}, []string{})
+
+	// Act
 	actual := args.Map{"len": len(results)}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns empty -- both empty", actual)
 }
@@ -95,31 +112,46 @@ func Test_Cov8_LineDiff_BothEmpty(t *testing.T) {
 // ── HasAnyMismatchOnLines ──
 
 func Test_Cov8_HasAnyMismatchOnLines_Match(t *testing.T) {
+	// Arrange
 	result := errcore.HasAnyMismatchOnLines(
 		[]string{"a", "b"},
 		[]string{"a", "b"},
 	)
+
+	// Act
 	actual := args.Map{"hasMismatch": result}
+
+	// Assert
 	expected := args.Map{"hasMismatch": false}
 	expected.ShouldBeEqual(t, 0, "HasAnyMismatchOnLines returns false -- matching", actual)
 }
 
 func Test_Cov8_HasAnyMismatchOnLines_DifferentLength(t *testing.T) {
+	// Arrange
 	result := errcore.HasAnyMismatchOnLines(
 		[]string{"a"},
 		[]string{"a", "b"},
 	)
+
+	// Act
 	actual := args.Map{"hasMismatch": result}
+
+	// Assert
 	expected := args.Map{"hasMismatch": true}
 	expected.ShouldBeEqual(t, 0, "HasAnyMismatchOnLines returns true -- different length", actual)
 }
 
 func Test_Cov8_HasAnyMismatchOnLines_ContentDiffers(t *testing.T) {
+	// Arrange
 	result := errcore.HasAnyMismatchOnLines(
 		[]string{"a", "x"},
 		[]string{"a", "b"},
 	)
+
+	// Act
 	actual := args.Map{"hasMismatch": result}
+
+	// Assert
 	expected := args.Map{"hasMismatch": true}
 	expected.ShouldBeEqual(t, 0, "HasAnyMismatchOnLines returns true -- content differs", actual)
 }
@@ -127,14 +159,22 @@ func Test_Cov8_HasAnyMismatchOnLines_ContentDiffers(t *testing.T) {
 // ── LineDiffToString ──
 
 func Test_Cov8_LineDiffToString_NoMismatch(t *testing.T) {
+	// Arrange
 	result := errcore.LineDiffToString(0, "Test", []string{"a"}, []string{"a"})
+
+	// Act
 	actual := args.Map{"hasOutput": result != ""}
+
+	// Assert
 	expected := args.Map{"hasOutput": true}
 	expected.ShouldBeEqual(t, 0, "LineDiffToString returns output -- even when matching", actual)
 }
 
 func Test_Cov8_LineDiffToString_HasMismatch(t *testing.T) {
+	// Arrange
 	result := errcore.LineDiffToString(1, "TestCase", []string{"a", "x"}, []string{"a", "b"})
+
+	// Act
 	actual := args.Map{
 		"containsDiff":    strings.Contains(result, "Line-by-Line Diff"),
 		"containsCase":    strings.Contains(result, "Case 1"),
@@ -144,6 +184,8 @@ func Test_Cov8_LineDiffToString_HasMismatch(t *testing.T) {
 		"containsExpected": strings.Contains(result, "expected"),
 		"containsTotal":   strings.Contains(result, "Total"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"containsDiff": true, "containsCase": true,
 		"containsTitle": true, "containsMismatch": true,
@@ -154,14 +196,19 @@ func Test_Cov8_LineDiffToString_HasMismatch(t *testing.T) {
 }
 
 func Test_Cov8_LineDiffToString_ExtraAndMissing(t *testing.T) {
+	// Arrange
 	result := errcore.LineDiffToString(0, "EdgeCase",
 		[]string{"a", "b", "extra"},
 		[]string{"a"},
 	)
+
+	// Act
 	actual := args.Map{
 		"containsExtra":  strings.Contains(result, "EXTRA ACTUAL"),
 		"containsMismatches": strings.Contains(result, "2 mismatches"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"containsExtra": true, "containsMismatches": true,
 	}
@@ -169,13 +216,18 @@ func Test_Cov8_LineDiffToString_ExtraAndMissing(t *testing.T) {
 }
 
 func Test_Cov8_LineDiffToString_MissingExpected(t *testing.T) {
+	// Arrange
 	result := errcore.LineDiffToString(0, "Missing",
 		[]string{"a"},
 		[]string{"a", "b", "c"},
 	)
+
+	// Act
 	actual := args.Map{
 		"containsMissing": strings.Contains(result, "MISSING EXPECTED"),
 	}
+
+	// Assert
 	expected := args.Map{"containsMissing": true}
 	expected.ShouldBeEqual(t, 0, "LineDiffToString returns missing-expected markers -- shorter actual", actual)
 }
@@ -183,6 +235,7 @@ func Test_Cov8_LineDiffToString_MissingExpected(t *testing.T) {
 // ── MapMismatchError ──
 
 func Test_Cov8_MapMismatchError_Format(t *testing.T) {
+	// Arrange
 	result := errcore.MapMismatchError(
 		"Test_Example",
 		0,
@@ -190,6 +243,8 @@ func Test_Cov8_MapMismatchError_Format(t *testing.T) {
 		[]string{`"key1": 1,`, `"key2": 2,`},
 		[]string{`"key1": 1,`},
 	)
+
+	// Act
 	actual := args.Map{
 		"containsTestMethod": strings.Contains(result, "Test Method"),
 		"containsCase":       strings.Contains(result, "Case"),
@@ -203,6 +258,8 @@ func Test_Cov8_MapMismatchError_Format(t *testing.T) {
 		"containsKey2":       strings.Contains(result, `"key2": 2,`),
 		"tabIndented":        strings.Contains(result, "\t\"key1\""),
 	}
+
+	// Assert
 	expected := args.Map{
 		"containsTestMethod": true, "containsCase": true,
 		"containsTitle": true, "containsSeparator": true,
@@ -215,6 +272,7 @@ func Test_Cov8_MapMismatchError_Format(t *testing.T) {
 }
 
 func Test_Cov8_MapMismatchError_HeaderAlignment(t *testing.T) {
+	// Arrange
 	result := errcore.MapMismatchError(
 		"Test_Alignment",
 		5,
@@ -239,11 +297,15 @@ func Test_Cov8_MapMismatchError_HeaderAlignment(t *testing.T) {
 			hasTitle = true
 		}
 	}
+
+	// Act
 	actual := args.Map{
 		"hasTestMethod": hasTestMethod,
 		"hasCase":       hasCase,
 		"hasTitle":      hasTitle,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasTestMethod": true, "hasCase": true, "hasTitle": true,
 	}
@@ -253,36 +315,59 @@ func Test_Cov8_MapMismatchError_HeaderAlignment(t *testing.T) {
 // ── SliceDiffSummary ──
 
 func Test_Cov8_SliceDiffSummary_NoMismatch(t *testing.T) {
+	// Arrange
 	result := errcore.SliceDiffSummary([]string{"a"}, []string{"a"})
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": "all lines match"}
 	expected.ShouldBeEqual(t, 0, "SliceDiffSummary returns all-match -- no mismatch", actual)
 }
 
 func Test_Cov8_SliceDiffSummary_HasMismatch(t *testing.T) {
+	// Arrange
 	result := errcore.SliceDiffSummary([]string{"a", "x"}, []string{"a", "b"})
+
+	// Act
 	actual := args.Map{
 		"containsCount": strings.Contains(result, "1 mismatches"),
 		"containsLine":  strings.Contains(result, "line 1"),
 	}
-	expected := args.Map{"containsCount": true, "containsLine": true}
+
+	// Assert
+	expected := args.Map{
+		"containsCount": true,
+		"containsLine": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceDiffSummary returns mismatch summary -- one mismatch", actual)
 }
 
 // ── ErrorToLinesLineDiff ──
 
 func Test_Cov8_ErrorToLinesLineDiff_NilError(t *testing.T) {
+	// Arrange
 	result := errcore.ErrorToLinesLineDiff(0, "NilErr", nil, []string{"expected"})
+
+	// Act
 	actual := args.Map{
 		"containsMissing": strings.Contains(result, "MISSING EXPECTED"),
 	}
+
+	// Assert
 	expected := args.Map{"containsMissing": true}
 	expected.ShouldBeEqual(t, 0, "ErrorToLinesLineDiff returns missing-expected -- nil error", actual)
 }
 
 func Test_Cov8_ErrorToLinesLineDiff_MatchingError(t *testing.T) {
+	// Arrange
 	result := errcore.ErrorToLinesLineDiff(0, "Match", nil, []string{})
+
+	// Act
 	actual := args.Map{"isEmpty": result == ""}
+
+	// Assert
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "ErrorToLinesLineDiff returns empty -- nil error empty expected", actual)
 }

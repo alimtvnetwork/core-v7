@@ -9,6 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/chmodhelper"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodclasstype"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func skipIfWindows(t *testing.T) {
@@ -21,10 +22,15 @@ func skipIfWindows(t *testing.T) {
 // --- Variant ---
 
 func Test_I18_Variant_String(t *testing.T) {
+	// Arrange
 	v := chmodhelper.Variant("755")
-	if v.String() != "755" {
-		t.Fatalf("expected 755, got %s", v.String())
-	}
+
+	// Act
+	actual := args.Map{"result": v.String() != "755"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 755", actual)
 }
 
 func Test_I18_Variant_ExpandOctalByte(t *testing.T) {
@@ -39,176 +45,271 @@ func Test_I18_Variant_ExpandOctalByte(t *testing.T) {
 }
 
 func Test_I18_Variant_ToWrapper(t *testing.T) {
+	// Arrange
 	v := chmodhelper.Variant("755")
 	wrapper, err := v.ToWrapper()
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if wrapper.IsEmpty() {
-		t.Fatal("expected non-empty wrapper")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper", actual)
 }
 
 func Test_I18_Variant_ToWrapperPtr(t *testing.T) {
+	// Arrange
 	v := chmodhelper.Variant("755")
 	wrapper, err := v.ToWrapperPtr()
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if wrapper == nil || wrapper.IsEmpty() {
-		t.Fatal("expected non-empty wrapper ptr")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": wrapper == nil || wrapper.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper ptr", actual)
 }
 
 // --- RwxWrapper basic ---
 
 func Test_I18_RwxWrapper_IsEmpty_Nil(t *testing.T) {
+	// Arrange
 	var w *chmodhelper.RwxWrapper
-	if !w.IsEmpty() {
-		t.Fatal("expected empty for nil")
-	}
-	if !w.IsNull() {
-		t.Fatal("expected null for nil")
-	}
-	if !w.IsInvalid() {
-		t.Fatal("expected invalid for nil")
-	}
+
+	// Act
+	actual := args.Map{"result": w.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
+	actual := args.Map{"result": w.IsNull()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected null for nil", actual)
+	actual := args.Map{"result": w.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected invalid for nil", actual)
 }
 
 func Test_I18_RwxWrapper_IsDefined(t *testing.T) {
+	// Arrange
 	v := chmodhelper.Variant("755")
 	w, err := v.ToWrapperPtr()
-	if err != nil {
-		t.Fatal(err)
-	}
-	if !w.IsDefined() {
-		t.Fatal("expected defined")
-	}
-	if !w.HasAnyItem() {
-		t.Fatal("expected has items")
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": w.IsDefined()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected defined", actual)
+	actual := args.Map{"result": w.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected has items", actual)
 }
 
 // --- SingleRwx ---
 
 func Test_I18_NewSingleRwx_Valid(t *testing.T) {
+	// Arrange
 	s, err := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
-	if err != nil || s == nil {
-		t.Fatal("expected valid SingleRwx")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || s == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid SingleRwx", actual)
 }
 
 func Test_I18_NewSingleRwx_InvalidLength(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.NewSingleRwx("rw", chmodclasstype.All)
-	if err == nil {
-		t.Fatal("expected error for invalid rwx length")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for invalid rwx length", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_All(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Owner != "rwx" || ogo.Group != "rwx" || ogo.Other != "rwx" {
-		t.Fatal("expected all rwx")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Owner != "rwx" || ogo.Group != "rwx" || ogo.Other != "rwx"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected all rwx", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_Owner(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Owner != "rwx" {
-		t.Fatal("expected owner rwx")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Owner != "rwx"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected owner rwx", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_Group(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("r-x", chmodclasstype.Group)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Group != "r-x" {
-		t.Fatal("expected group r-x")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Group != "r-x"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected group r-x", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_Other(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("r--", chmodclasstype.Other)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Other != "r--" {
-		t.Fatal("expected other r--")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Other != "r--"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected other r--", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_OwnerGroup(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.OwnerGroup)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Owner != "rwx" || ogo.Group != "rwx" {
-		t.Fatal("expected owner+group rwx")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Owner != "rwx" || ogo.Group != "rwx"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected owner+group rwx", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_GroupOther(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("r-x", chmodclasstype.GroupOther)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Group != "r-x" || ogo.Other != "r-x" {
-		t.Fatal("expected group+other r-x")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Group != "r-x" || ogo.Other != "r-x"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected group+other r-x", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxOwnerGroupOther_OwnerOther(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rw-", chmodclasstype.OwnerOther)
 	ogo := s.ToRwxOwnerGroupOther()
-	if ogo == nil || ogo.Owner != "rw-" || ogo.Other != "rw-" {
-		t.Fatal("expected owner+other rw-")
-	}
+
+	// Act
+	actual := args.Map{"result": ogo == nil || ogo.Owner != "rw-" || ogo.Other != "rw-"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected owner+other rw-", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxInstruction(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	cond := &chmodins.Condition{}
 	ins := s.ToRwxInstruction(cond)
-	if ins == nil {
-		t.Fatal("expected non-nil instruction")
-	}
+
+	// Act
+	actual := args.Map{"result": ins == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil instruction", actual)
 }
 
 func Test_I18_SingleRwx_ToVarRwxWrapper(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	vw, err := s.ToVarRwxWrapper()
-	if err != nil || vw == nil {
-		t.Fatal("expected valid var wrapper")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || vw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid var wrapper", actual)
 }
 
 func Test_I18_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	dw, err := s.ToDisabledRwxWrapper()
-	if err != nil || dw == nil {
-		t.Fatal("expected valid disabled wrapper")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || dw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid disabled wrapper", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxWrapper_All(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	w, err := s.ToRwxWrapper()
-	if err != nil || w == nil {
-		t.Fatal("expected valid rwx wrapper")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || w == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid rwx wrapper", actual)
 }
 
 func Test_I18_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	_, err := s.ToRwxWrapper()
-	if err == nil {
-		t.Fatal("expected error for non-all class type")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for non-all class type", actual)
 }
 
 func Test_I18_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
+	// Arrange
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	cond := &chmodins.Condition{}
 	err := s.ApplyOnMany(cond)
-	if err != nil {
-		t.Fatal("expected nil for empty locations")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty locations", actual)
 }
 
 func Test_I18_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
@@ -227,30 +328,45 @@ func Test_I18_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
 // --- NewCreator.RwxWrapper ---
 
 func Test_I18_NewRwxWrapper_UsingVariant(t *testing.T) {
+	// Arrange
 	w, err := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.Variant("644"))
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if w.IsEmpty() {
-		t.Fatal("expected non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": w.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_I18_NewRwxWrapper_UsingVariantPtr(t *testing.T) {
+	// Arrange
 	w, err := chmodhelper.New.RwxWrapper.UsingVariantPtr(chmodhelper.Variant("644"))
-	if err != nil || w == nil {
-		t.Fatalf("unexpected: err=%v, w=%v", err, w)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || w == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected: err=, w=", actual)
 }
 
 func Test_I18_NewRwxWrapper_RwxFullString(t *testing.T) {
+	// Arrange
 	w, err := chmodhelper.New.RwxWrapper.RwxFullString("-rwxr-xr-x")
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
-	if w.IsEmpty() {
-		t.Fatal("expected non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": w.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 // --- ChmodApply and Verify ---
@@ -293,10 +409,15 @@ func Test_I18_ChmodVerify_RwxFull_NoDash(t *testing.T) {
 // --- TempDirGetter ---
 
 func Test_I18_TempDirGetter(t *testing.T) {
+	// Arrange
 	td := chmodhelper.TempDirGetter.TempDefault()
-	if td == "" {
-		t.Fatal("expected non-empty temp dir")
-	}
+
+	// Act
+	actual := args.Map{"result": td == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty temp dir", actual)
 }
 
 // --- ExpandCharRwx ---
@@ -316,15 +437,20 @@ func Test_I18_ExpandCharRwx_Short(t *testing.T) {
 // --- SimpleFileReaderWriter ---
 
 func Test_I18_SimpleFileReaderWriter(t *testing.T) {
+	// Arrange
 	skipIfWindows(t)
 
 	tmpDir := t.TempDir()
 	f := filepath.Join(tmpDir, "sub", "test.txt")
 
 	rw := chmodhelper.New.SimpleFileReaderWriter.Default(false, f)
-	if rw == nil {
-		t.Fatal("expected non-nil reader writer")
-	}
+
+	// Act
+	actual := args.Map{"result": rw == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil reader writer", actual)
 }
 
 // --- FileModeFriendlyString ---
@@ -337,61 +463,85 @@ func Test_I18_FileModeFriendlyString(t *testing.T) {
 // --- PathExistStat ---
 
 func Test_I18_GetPathExistStat_NonExistent(t *testing.T) {
+	// Arrange
 	stat := chmodhelper.GetPathExistStat("/nonexistent/path/xyz_i18")
-	if stat == nil {
-		t.Fatal("expected non-nil stat")
-	}
-	if stat.IsExist {
-		t.Fatal("expected non-exist for fake path")
-	}
+
+	// Act
+	actual := args.Map{"result": stat == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil stat", actual)
+	actual := args.Map{"result": stat.IsExist}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-exist for fake path", actual)
 }
 
 func Test_I18_GetPathExistStat_Existing(t *testing.T) {
+	// Arrange
 	tmpDir := t.TempDir()
 	f := filepath.Join(tmpDir, "test.txt")
 	os.WriteFile(f, []byte("test"), 0644)
 
 	stat := chmodhelper.GetPathExistStat(f)
-	if !stat.IsExist {
-		t.Fatal("expected exist for real path")
-	}
+
+	// Act
+	actual := args.Map{"result": stat.IsExist}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected exist for real path", actual)
 }
 
 // --- IsPathExists ---
 
 func Test_I18_IsPathExists(t *testing.T) {
+	// Arrange
 	tmpDir := t.TempDir()
-	if !chmodhelper.IsPathExists(tmpDir) {
-		t.Fatal("expected exists for temp dir")
-	}
 
-	if chmodhelper.IsPathExists("/nonexistent/xyz") {
-		t.Fatal("expected not exists")
-	}
+	// Act
+	actual := args.Map{"result": chmodhelper.IsPathExists(tmpDir)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected exists for temp dir", actual)
+
+	actual := args.Map{"result": chmodhelper.IsPathExists("/nonexistent/xyz")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not exists", actual)
 }
 
 func Test_I18_IsPathInvalid(t *testing.T) {
-	if !chmodhelper.IsPathInvalid("/nonexistent/xyz") {
-		t.Fatal("expected invalid for nonexistent path")
-	}
+	// Act
+	actual := args.Map{"result": chmodhelper.IsPathInvalid("/nonexistent/xyz")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected invalid for nonexistent path", actual)
 }
 
 func Test_I18_IsDirectory(t *testing.T) {
+	// Arrange
 	tmpDir := t.TempDir()
-	if !chmodhelper.IsDirectory(tmpDir) {
-		t.Fatal("expected directory")
-	}
+
+	// Act
+	actual := args.Map{"result": chmodhelper.IsDirectory(tmpDir)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected directory", actual)
 
 	f := filepath.Join(tmpDir, "test.txt")
 	os.WriteFile(f, []byte("test"), 0644)
-	if chmodhelper.IsDirectory(f) {
-		t.Fatal("expected not directory for file")
-	}
+	actual := args.Map{"result": chmodhelper.IsDirectory(f)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not directory for file", actual)
 }
 
 // --- GetExistingChmod ---
 
 func Test_I18_GetExistingChmod(t *testing.T) {
+	// Arrange
 	skipIfWindows(t)
 
 	tmpDir := t.TempDir()
@@ -399,12 +549,17 @@ func Test_I18_GetExistingChmod(t *testing.T) {
 	os.WriteFile(f, []byte("test"), 0644)
 
 	chmod, err := chmodhelper.GetExistingChmod(f)
-	if err != nil || chmod == 0 {
-		t.Fatal("expected non-zero chmod")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || chmod == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-zero chmod", actual)
 }
 
 func Test_I18_GetExistingChmodOfValidFile(t *testing.T) {
+	// Arrange
 	skipIfWindows(t)
 
 	tmpDir := t.TempDir()
@@ -412,14 +567,23 @@ func Test_I18_GetExistingChmodOfValidFile(t *testing.T) {
 	os.WriteFile(f, []byte("test"), 0644)
 
 	chmod, isInvalid := chmodhelper.GetExistingChmodOfValidFile(f)
-	if isInvalid || chmod == 0 {
-		t.Fatal("unexpected result")
-	}
+
+	// Act
+	actual := args.Map{"result": isInvalid || chmod == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected result", actual)
 }
 
 func Test_I18_GetExistingChmodOfValidFile_NonExistent(t *testing.T) {
+	// Arrange
 	_, isInvalid := chmodhelper.GetExistingChmodOfValidFile("/nonexistent/xyz")
-	if !isInvalid {
-		t.Fatal("expected invalid for nonexistent file")
-	}
+
+	// Act
+	actual := args.Map{"result": isInvalid}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected invalid for nonexistent file", actual)
 }

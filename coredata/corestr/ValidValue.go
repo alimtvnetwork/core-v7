@@ -89,7 +89,6 @@ func (it *ValidValue) ValueBytesOnce() []byte {
 	return it.valueBytes
 }
 
-// Deprecated: Use ValueBytesOnce() instead. Returns []byte directly.
 func (it *ValidValue) ValueBytesOncePtr() []byte {
 	return it.ValueBytesOnce()
 }

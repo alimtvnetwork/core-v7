@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/errcore"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -21,9 +22,9 @@ func Test_Cov16_CompiledErrorString_EmptyAdditionalMessage(t *testing.T) {
 	result := errcore.CompiledErrorString(mainErr, "")
 
 	// Assert
-	if result != "some error" {
-		t.Errorf("expected 'some error', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "some error"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'some error', got ''", actual)
 }
 
 func Test_Cov16_CompiledErrorString_NilMainErr(t *testing.T) {
@@ -31,9 +32,9 @@ func Test_Cov16_CompiledErrorString_NilMainErr(t *testing.T) {
 	result := errcore.CompiledErrorString(nil, "additional")
 
 	// Assert
-	if result != "" {
-		t.Errorf("expected empty string, got '%s'", result)
-	}
+	actual := args.Map{"result": result != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty string, got ''", actual)
 }
 
 func Test_Cov16_CompiledErrorString_BothPresent(t *testing.T) {
@@ -44,9 +45,9 @@ func Test_Cov16_CompiledErrorString_BothPresent(t *testing.T) {
 	result := errcore.CompiledErrorString(mainErr, "context")
 
 	// Assert
-	if result == "" {
-		t.Error("expected non-empty result")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty result", actual)
 }
 
 // ── RawErrCollection.CompiledJsonErrorWithStackTraces (line 237) ──
@@ -80,9 +81,9 @@ func Test_Cov16_RawErrCollection_CompiledJsonStringWithStackTraces_NonEmpty(t *t
 	result := coll.CompiledJsonStringWithStackTraces()
 
 	// Assert
-	if result == "" {
-		t.Error("expected non-empty string for non-empty collection")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string for non-empty collection", actual)
 }
 
 // ── RawErrCollection.LogFatal / LogFatalWithTraces (lines 449-465) ──
@@ -103,9 +104,9 @@ func Test_Cov16_StackEnhance_MsgErrorSkip_WithError(t *testing.T) {
 	result := errcore.StackEnhance.MsgErrorSkip(0, "context message", err)
 
 	// Assert
-	if result == "" {
-		t.Error("expected non-empty result")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty result", actual)
 }
 
 func Test_Cov16_StackEnhance_MsgErrorToErrSkip_NilError(t *testing.T) {
@@ -113,9 +114,9 @@ func Test_Cov16_StackEnhance_MsgErrorToErrSkip_NilError(t *testing.T) {
 	result := errcore.StackEnhance.MsgErrorToErrSkip(0, "msg", nil)
 
 	// Assert
-	if result != nil {
-		t.Error("expected nil for nil error input")
-	}
+	actual := args.Map{"result": result != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for nil error input", actual)
 }
 
 func Test_Cov16_StackEnhance_MsgErrorToErrSkip_WithError(t *testing.T) {
@@ -126,9 +127,9 @@ func Test_Cov16_StackEnhance_MsgErrorToErrSkip_WithError(t *testing.T) {
 	result := errcore.StackEnhance.MsgErrorToErrSkip(0, "outer", err)
 
 	// Assert
-	if result == nil {
-		t.Error("expected non-nil error")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil error", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════

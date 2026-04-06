@@ -15,6 +15,7 @@ import (
 
 func Test_Collection_Distinct_Verification(t *testing.T) {
 	for caseIndex, testCase := range collectionDistinctTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		items, isValid := input.GetAsStrings("items")
 		if !isValid {
@@ -26,6 +27,8 @@ func Test_Collection_Distinct_Verification(t *testing.T) {
 
 		// Handle mixed ExpectedInput types
 		if _, isMap := testCase.ExpectedInput.(args.Map); isMap {
+
+		// Act
 			actual := args.Map{
 				"distinctCount": result.Length(),
 			}
@@ -33,6 +36,7 @@ func Test_Collection_Distinct_Verification(t *testing.T) {
 				actual[fmt.Sprintf("item%d", i)] = result.SafeAt(i)
 			}
 
+		// Assert
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
 			testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%d", result.Length()))
@@ -54,6 +58,7 @@ func Test_Collection_DistinctCount_Verification(t *testing.T) {
 
 		col := coredynamic.New.Collection.String.From(items)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%d", coredynamic.DistinctCount(col)))
 	}
 }
@@ -72,6 +77,7 @@ func Test_Collection_IsDistinct_Verification(t *testing.T) {
 
 		col := coredynamic.New.Collection.String.From(items)
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", coredynamic.IsDistinct(col)))
 	}
 }

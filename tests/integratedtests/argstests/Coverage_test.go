@@ -11,93 +11,162 @@ import (
 // ==========================================
 
 func Test_Map_Length(t *testing.T) {
-	m := args.Map{"a": 1, "b": 2}
-	if m.Length() != 2 {
-		t.Errorf("expected 2, got %d", m.Length())
+	// Arrange
+	m := args.Map{
+		"a": 1,
+		"b": 2,
 	}
+
+	// Act
+	actual := args.Map{"result": m.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Map_Has(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
-	if !m.Has("a") {
-		t.Error("should have 'a'")
-	}
-	if m.Has("b") {
-		t.Error("should not have 'b'")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Has("a")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have 'a'", actual)
+	actual := args.Map{"result": m.Has("b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have 'b'", actual)
 }
 
 func Test_Map_Has_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
-	if m.Has("a") {
-		t.Error("nil map should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Has("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil map should return false", actual)
 }
 
 func Test_Map_HasDefined(t *testing.T) {
-	m := args.Map{"a": "val", "b": nil}
-	if !m.HasDefined("a") {
-		t.Error("should be defined")
+	// Arrange
+	m := args.Map{
+		"a": "val",
+		"b": nil,
 	}
+
+	// Act
+	actual := args.Map{"result": m.HasDefined("a")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be defined", actual)
 }
 
 func Test_Map_HasDefined_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
-	if m.HasDefined("a") {
-		t.Error("nil map should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": m.HasDefined("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil map should return false", actual)
 }
 
 func Test_Map_IsKeyMissing(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
-	if m.IsKeyMissing("a") {
-		t.Error("'a' should not be missing")
-	}
-	if !m.IsKeyMissing("b") {
-		t.Error("'b' should be missing")
-	}
+
+	// Act
+	actual := args.Map{"result": m.IsKeyMissing("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "'a' should not be missing", actual)
+	actual := args.Map{"result": m.IsKeyMissing("b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "'b' should be missing", actual)
 }
 
 func Test_Map_IsKeyMissing_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
-	if m.IsKeyMissing("a") {
-		t.Error("nil map should return false (per implementation)")
-	}
+
+	// Act
+	actual := args.Map{"result": m.IsKeyMissing("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil map should return false (per implementation)", actual)
 }
 
 func Test_Map_IsKeyInvalid(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": "val"}
-	if m.IsKeyInvalid("a") {
-		t.Error("'a' should not be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": m.IsKeyInvalid("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "'a' should not be invalid", actual)
 }
 
 func Test_Map_IsKeyInvalid_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
-	if m.IsKeyInvalid("a") {
-		t.Error("nil map should return false (per implementation)")
-	}
+
+	// Act
+	actual := args.Map{"result": m.IsKeyInvalid("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil map should return false (per implementation)", actual)
 }
 
 func Test_Map_HasDefinedAll(t *testing.T) {
-	m := args.Map{"a": "v1", "b": "v2"}
-	if !m.HasDefinedAll("a", "b") {
-		t.Error("should have all defined")
+	// Arrange
+	m := args.Map{
+		"a": "v1",
+		"b": "v2",
 	}
+
+	// Act
+	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have all defined", actual)
 }
 
 func Test_Map_HasDefinedAll_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
-	if m.HasDefinedAll("a") {
-		t.Error("nil should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": m.HasDefinedAll("a")}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Map_HasDefinedAll_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": "v1"}
-	if m.HasDefinedAll() {
-		t.Error("no names should return false")
-	}
+
+	// Act
+	actual := args.Map{"result": m.HasDefinedAll()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "no names should return false", actual)
 }
 
 // ==========================================
@@ -105,51 +174,81 @@ func Test_Map_HasDefinedAll_Empty(t *testing.T) {
 // ==========================================
 
 func Test_Map_Get_Cov(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": "val"}
 	item, isValid := m.Get("a")
-	if !isValid || item != "val" {
-		t.Error("should return valid item")
-	}
+
+	// Act
+	actual := args.Map{"result": isValid || item != "val"}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should return valid item", actual)
 }
 
 func Test_Map_Get_Missing(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": "val"}
 	_, isValid := m.Get("b")
-	if isValid {
-		t.Error("missing key should not be valid")
-	}
+
+	// Act
+	actual := args.Map{"result": isValid}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "missing key should not be valid", actual)
 }
 
 func Test_Map_Get_Nil(t *testing.T) {
+	// Arrange
 	var m args.Map
 	_, isValid := m.Get("a")
-	if isValid {
-		t.Error("nil map should not be valid")
-	}
+
+	// Act
+	actual := args.Map{"result": isValid}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil map should not be valid", actual)
 }
 
 func Test_Map_GetLowerCase(t *testing.T) {
+	// Arrange
 	m := args.Map{"name": "val"}
 	item, isValid := m.GetLowerCase("Name")
-	if !isValid || item != "val" {
-		t.Error("should find lowercase")
-	}
+
+	// Act
+	actual := args.Map{"result": isValid || item != "val"}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should find lowercase", actual)
 }
 
 func Test_Map_GetDirectLower(t *testing.T) {
+	// Arrange
 	m := args.Map{"name": "val"}
 	item := m.GetDirectLower("Name")
-	if item != "val" {
-		t.Error("should find lowercase")
-	}
+
+	// Act
+	actual := args.Map{"result": item != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should find lowercase", actual)
 }
 
 func Test_Map_GetDirectLower_Missing(t *testing.T) {
+	// Arrange
 	m := args.Map{"name": "val"}
 	item := m.GetDirectLower("Missing")
-	if item != nil {
-		t.Error("missing should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": item != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "missing should return nil", actual)
 }
 
 // ==========================================
@@ -157,46 +256,76 @@ func Test_Map_GetDirectLower_Missing(t *testing.T) {
 // ==========================================
 
 func Test_Map_When(t *testing.T) {
+	// Arrange
 	m := args.Map{"when": "condition"}
-	if m.When() != "condition" {
-		t.Error("should return when value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.When() != "condition"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return when value", actual)
 }
 
 func Test_Map_Title(t *testing.T) {
+	// Arrange
 	m := args.Map{"title": "test title"}
-	if m.Title() != "test title" {
-		t.Error("should return title value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Title() != "test title"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return title value", actual)
 }
 
 func Test_Map_Expect(t *testing.T) {
+	// Arrange
 	m := args.Map{"expect": "value"}
-	if m.Expect() != "value" {
-		t.Error("should return expect value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Expect() != "value"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return expect value", actual)
 }
 
 func Test_Map_Actual(t *testing.T) {
+	// Arrange
 	m := args.Map{"actual": "value"}
-	if m.Actual() != "value" {
-		t.Error("should return actual value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Actual() != "value"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return actual value", actual)
 }
 
 func Test_Map_Arrange(t *testing.T) {
+	// Arrange
 	m := args.Map{"arrange": "value"}
-	if m.Arrange() != "value" {
-		t.Error("should return arrange value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Arrange() != "value"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return arrange value", actual)
 }
 
 func Test_Map_SetActual_Cov(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	m.SetActual("hello")
-	if m.Actual() != "hello" {
-		t.Error("should set actual")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Actual() != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should set actual", actual)
 }
 
 // ==========================================
@@ -204,52 +333,87 @@ func Test_Map_SetActual_Cov(t *testing.T) {
 // ==========================================
 
 func Test_Map_FirstItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"first": "val"}
-	if m.FirstItem() != "val" {
-		t.Error("should return first item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.FirstItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return first item", actual)
 }
 
 func Test_Map_SecondItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"second": "val"}
-	if m.SecondItem() != "val" {
-		t.Error("should return second item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.SecondItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return second item", actual)
 }
 
 func Test_Map_ThirdItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"third": "val"}
-	if m.ThirdItem() != "val" {
-		t.Error("should return third item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.ThirdItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return third item", actual)
 }
 
 func Test_Map_FourthItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"fourth": "val"}
-	if m.FourthItem() != "val" {
-		t.Error("should return fourth item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.FourthItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return fourth item", actual)
 }
 
 func Test_Map_FifthItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"fifth": "val"}
-	if m.FifthItem() != "val" {
-		t.Error("should return fifth item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.FifthItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return fifth item", actual)
 }
 
 func Test_Map_SixthItem(t *testing.T) {
+	// Arrange
 	m := args.Map{"sixth": "val"}
-	if m.SixthItem() != "val" {
-		t.Error("should return sixth item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.SixthItem() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return sixth item", actual)
 }
 
 func Test_Map_Seventh(t *testing.T) {
+	// Arrange
 	m := args.Map{"seventh": "val"}
-	if m.Seventh() != "val" {
-		t.Error("should return seventh item")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Seventh() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return seventh item", actual)
 }
 
 // ==========================================
@@ -257,31 +421,51 @@ func Test_Map_Seventh(t *testing.T) {
 // ==========================================
 
 func Test_Map_Expected(t *testing.T) {
+	// Arrange
 	m := args.Map{"expected": "val"}
-	if m.Expected() != "val" {
-		t.Error("should return expected value")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Expected() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return expected value", actual)
 }
 
 func Test_Map_Expected_Alias(t *testing.T) {
+	// Arrange
 	m := args.Map{"expects": "val"}
-	if m.Expected() != "val" {
-		t.Error("should return expected from alias")
-	}
+
+	// Act
+	actual := args.Map{"result": m.Expected() != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return expected from alias", actual)
 }
 
 func Test_Map_HasExpect(t *testing.T) {
+	// Arrange
 	m := args.Map{"expected": "val"}
-	if !m.HasExpect() {
-		t.Error("should have expect")
-	}
+
+	// Act
+	actual := args.Map{"result": m.HasExpect()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have expect", actual)
 }
 
 func Test_Map_HasFirst(t *testing.T) {
+	// Arrange
 	m := args.Map{"first": "val"}
-	if !m.HasFirst() {
-		t.Error("should have first")
-	}
+
+	// Act
+	actual := args.Map{"result": m.HasFirst()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have first", actual)
 }
 
 // ==========================================
@@ -289,35 +473,58 @@ func Test_Map_HasFirst(t *testing.T) {
 // ==========================================
 
 func Test_Map_Raw(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	raw := m.Raw()
-	if len(raw) != 1 {
-		t.Error("raw should have 1 item")
-	}
+
+	// Act
+	actual := args.Map{"result": len(raw) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "raw should have 1 item", actual)
 }
 
 func Test_Map_Args_Cov(t *testing.T) {
-	m := args.Map{"a": 1, "b": 2}
-	a := m.Args("a", "b")
-	if len(a) != 2 {
-		t.Errorf("expected 2 args, got %d", len(a))
+	// Arrange
+	m := args.Map{
+		"a": 1,
+		"b": 2,
 	}
+	a := m.Args("a", "b")
+
+	// Act
+	actual := args.Map{"result": len(a) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 args", actual)
 }
 
 func Test_Map_GetByIndex_Cov(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	v := m.GetByIndex(0)
-	if v == nil {
-		t.Error("should return value at index 0")
-	}
+
+	// Act
+	actual := args.Map{"result": v == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return value at index 0", actual)
 }
 
 func Test_Map_GetByIndex_OutOfBounds(t *testing.T) {
+	// Arrange
 	m := args.Map{"a": 1}
 	v := m.GetByIndex(10)
-	if v != nil {
-		t.Error("out of bounds should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": v != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "out of bounds should return nil", actual)
 }
 
 // ==========================================
@@ -325,33 +532,54 @@ func Test_Map_GetByIndex_OutOfBounds(t *testing.T) {
 // ==========================================
 
 func Test_Map_SortedKeys_Cov(t *testing.T) {
-	m := args.Map{"b": 2, "a": 1}
+	// Arrange
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys, err := m.SortedKeys()
-	if err != nil {
-		t.Errorf("unexpected error: %v", err)
-	}
-	if len(keys) != 2 || keys[0] != "a" {
-		t.Errorf("expected sorted [a b], got %v", keys)
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": len(keys) != 2 || keys[0] != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected sorted [a b]", actual)
 }
 
 func Test_Map_SortedKeys_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{}
 	keys, err := m.SortedKeys()
-	if err != nil {
-		t.Errorf("unexpected error: %v", err)
-	}
-	if len(keys) != 0 {
-		t.Error("empty map should return empty keys")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+	actual := args.Map{"result": len(keys) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty map should return empty keys", actual)
 }
 
 func Test_Map_SortedKeysMust(t *testing.T) {
-	m := args.Map{"b": 2, "a": 1}
-	keys := m.SortedKeysMust()
-	if len(keys) != 2 {
-		t.Errorf("expected 2, got %d", len(keys))
+	// Arrange
+	m := args.Map{
+		"b": 2,
+		"a": 1,
 	}
+	keys := m.SortedKeysMust()
+
+	// Act
+	actual := args.Map{"result": len(keys) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 // ==========================================
@@ -359,21 +587,37 @@ func Test_Map_SortedKeysMust(t *testing.T) {
 // ==========================================
 
 func Test_Map_ArgsCount(t *testing.T) {
+	// Arrange
 	// HasFunc() always returns true (FuncWrap returns non-nil),
 	// so ArgsCount = len - 1 (func) = 1
-	m := args.Map{"a": 1, "b": 2}
-	if m.ArgsCount() != 1 {
-		t.Errorf("expected 1, got %d", m.ArgsCount())
+	m := args.Map{
+		"a": 1,
+		"b": 2,
 	}
+
+	// Act
+	actual := args.Map{"result": m.ArgsCount() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Map_ArgsCount_WithExpected(t *testing.T) {
+	// Arrange
 	// HasExpect=true, HasFunc=true => ArgsCount = 2 - 2 = 0
-	m := args.Map{"a": 1, "expected": "val"}
-	c := m.ArgsCount()
-	if c != 0 {
-		t.Errorf("expected 0 (excluding expected+func), got %d", c)
+	m := args.Map{
+		"a": 1,
+		"expected": "val",
 	}
+	c := m.ArgsCount()
+
+	// Act
+	actual := args.Map{"result": c != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 (excluding expected+func)", actual)
 }
 
 // ==========================================
@@ -381,17 +625,27 @@ func Test_Map_ArgsCount_WithExpected(t *testing.T) {
 // ==========================================
 
 func Test_Map_GetFirstOfNames(t *testing.T) {
+	// Arrange
 	m := args.Map{"name": "val"}
 	r := m.GetFirstOfNames("missing", "name")
-	if r != "val" {
-		t.Error("should return first found")
-	}
+
+	// Act
+	actual := args.Map{"result": r != "val"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return first found", actual)
 }
 
 func Test_Map_GetFirstOfNames_Empty(t *testing.T) {
+	// Arrange
 	m := args.Map{"name": "val"}
 	r := m.GetFirstOfNames()
-	if r != nil {
-		t.Error("empty names should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": r != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty names should return nil", actual)
 }

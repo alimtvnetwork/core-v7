@@ -5,15 +5,23 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── SimpleSlice ──
 
 func Test_C32_SS_Add(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Add", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
 		ss.Add("a")
-		if ss.Length() != 1 { t.Fatal("expected 1") }
+
+		// Act
+		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -26,10 +34,17 @@ func Test_C32_SS_AddSplit(t *testing.T) {
 
 func Test_C32_SS_AddIf(t *testing.T) {
 	safeTest(t, "Test_C32_SS_AddIf", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
 		ss.AddIf(false, "skip")
 		ss.AddIf(true, "add")
-		if ss.Length() != 1 { t.Fatal("expected 1") }
+
+		// Act
+		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -67,38 +82,75 @@ func Test_C32_SS_AppendFmtIf(t *testing.T) {
 
 func Test_C32_SS_Length(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Length", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
-		if ss.Length() != 1 { t.Fatal("expected 1") }
+
+		// Act
+		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var n *corestr.SimpleSlice
-		if n.Length() != 0 { t.Fatal("expected 0") }
+		actual = args.Map{"result": n.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
 func Test_C32_SS_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C32_SS_IsEmpty", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Empty()
-		if !ss.IsEmpty() { t.Fatal("expected true") }
+
+		// Act
+		actual := args.Map{"result": ss.IsEmpty()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_C32_SS_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_C32_SS_HasAnyItem", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
-		if !ss.HasAnyItem() { t.Fatal("expected true") }
+
+		// Act
+		actual := args.Map{"result": ss.HasAnyItem()}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_C32_SS_First(t *testing.T) {
 	safeTest(t, "Test_C32_SS_First", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
-		if ss.First() != "a" { t.Fatal("expected a") }
+
+		// Act
+		actual := args.Map{"result": ss.First() != "a"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
 
 func Test_C32_SS_Last(t *testing.T) {
 	safeTest(t, "Test_C32_SS_Last", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a", "b")
-		if ss.Last() != "b" { t.Fatal("expected b") }
+
+		// Act
+		actual := args.Map{"result": ss.Last() != "b"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
 }
 
@@ -259,8 +311,15 @@ func Test_C32_SS_Reverse(t *testing.T) {
 
 func Test_C32_SS_IsContains(t *testing.T) {
 	safeTest(t, "Test_C32_SS_IsContains", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Lines("a")
-		if !ss.IsContains("a") { t.Fatal("expected true") }
+
+		// Act
+		actual := args.Map{"result": ss.IsContains("a")}
+
+		// Assert
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -285,6 +344,7 @@ func Test_C32_NSSC_Cap(t *testing.T)     { _ = corestr.New.SimpleSlice.Cap(5) }
 func Test_C32_NSSC_Default(t *testing.T) { _ = corestr.New.SimpleSlice.Default() }
 func Test_C32_NSSC_Deserialize(t *testing.T) {
 	safeTest(t, "Test_C32_NSSC_Deserialize", func() {
+		// Arrange
 		_, _ = corestr.New.SimpleSlice.Deserialize([]byte(`["a"]`))
 		_, _ = corestr.New.SimpleSlice.Deserialize([]byte(`invalid`))
 	})
@@ -349,28 +409,40 @@ func Test_C32_NSSC_ByLen(t *testing.T)              { _ = corestr.New.SimpleSlic
 func Test_C32_SSO_Value(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_Value", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hello")
-		if sso.Value() != "hello" { t.Fatal("expected hello") }
+
+		// Act
+		actual := args.Map{"result": sso.Value() != "hello"}
+
+		// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
 
 func Test_C32_SSO_IsInitialized(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_IsInitialized", func() {
 		sso := corestr.New.SimpleStringOnce.Init("x")
-		if !sso.IsInitialized() { t.Fatal("expected true") }
+		actual := args.Map{"result": sso.IsInitialized()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_C32_SSO_IsDefined(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_IsDefined", func() {
 		sso := corestr.New.SimpleStringOnce.Init("x")
-		if !sso.IsDefined() { t.Fatal("expected true") }
+		actual := args.Map{"result": sso.IsDefined()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
 func Test_C32_SSO_IsUninitialized(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_IsUninitialized", func() {
 		sso := corestr.New.SimpleStringOnce.Empty()
-		if !sso.IsUninitialized() { t.Fatal("expected true") }
+		actual := args.Map{"result": sso.IsUninitialized()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -391,7 +463,9 @@ func Test_C32_SSO_Reset(t *testing.T) {
 func Test_C32_SSO_IsInvalid(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_IsInvalid", func() {
 		sso := corestr.New.SimpleStringOnce.Empty()
-		if !sso.IsInvalid() { t.Fatal("expected true") }
+		actual := args.Map{"result": sso.IsInvalid()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -408,7 +482,9 @@ func Test_C32_SSO_SetOnUninitialized(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Empty()
 		_ = sso.SetOnUninitialized("v")
 		err := sso.SetOnUninitialized("v2")
-		if err == nil { t.Fatal("expected error") }
+		actual := args.Map{"result": err == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
 
@@ -416,9 +492,13 @@ func Test_C32_SSO_GetSetOnce(t *testing.T) {
 	safeTest(t, "Test_C32_SSO_GetSetOnce", func() {
 		sso := corestr.New.SimpleStringOnce.Empty()
 		v := sso.GetSetOnce("hello")
-		if v != "hello" { t.Fatal("expected hello") }
+		actual := args.Map{"result": v != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		v2 := sso.GetSetOnce("world")
-		if v2 != "hello" { t.Fatal("expected hello still") }
+		actual = args.Map{"result": v2 != "hello"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hello still", actual)
 	})
 }
 

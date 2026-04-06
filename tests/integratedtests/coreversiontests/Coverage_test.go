@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreversion"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -11,31 +12,51 @@ import (
 // ==========================================
 
 func Test_Version_MajorString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.MajorString() != "1" {
-		t.Errorf("expected '1', got '%s'", v.MajorString())
-	}
+
+	// Act
+	actual := args.Map{"result": v.MajorString() != "1"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '1', got ''", actual)
 }
 
 func Test_Version_MinorString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.MinorString() != "2" {
-		t.Errorf("expected '2', got '%s'", v.MinorString())
-	}
+
+	// Act
+	actual := args.Map{"result": v.MinorString() != "2"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '2', got ''", actual)
 }
 
 func Test_Version_PatchString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.PatchString() != "3" {
-		t.Errorf("expected '3', got '%s'", v.PatchString())
-	}
+
+	// Act
+	actual := args.Map{"result": v.PatchString() != "3"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '3', got ''", actual)
 }
 
 func Test_Version_BuildString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3.4")
-	if v.BuildString() != "4" {
-		t.Errorf("expected '4', got '%s'", v.BuildString())
-	}
+
+	// Act
+	actual := args.Map{"result": v.BuildString() != "4"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '4', got ''", actual)
 }
 
 // ==========================================
@@ -43,31 +64,51 @@ func Test_Version_BuildString(t *testing.T) {
 // ==========================================
 
 func Test_Version_Nil_MajorString(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.MajorString() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.MajorString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Version_Nil_MinorString(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.MinorString() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.MinorString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Version_Nil_PatchString(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.PatchString() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.PatchString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Version_Nil_BuildString(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.BuildString() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.BuildString() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 // ==========================================
@@ -75,59 +116,99 @@ func Test_Version_Nil_BuildString(t *testing.T) {
 // ==========================================
 
 func Test_Version_HasMajor(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.0.0")
-	if !v.HasMajor() {
-		t.Error("should have major")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasMajor()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have major", actual)
 }
 
 func Test_Version_HasMinor(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.0")
-	if !v.HasMinor() {
-		t.Error("should have minor")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasMinor()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have minor", actual)
 }
 
 func Test_Version_HasPatch(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if !v.HasPatch() {
-		t.Error("should have patch")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasPatch()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have patch", actual)
 }
 
 func Test_Version_HasBuild(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3.4")
-	if !v.HasBuild() {
-		t.Error("should have build")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasBuild()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have build", actual)
 }
 
 func Test_Version_IsMajorInvalid_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsMajorInvalid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Version_IsMinorInvalid_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsMinorInvalid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMinorInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Version_IsPatchInvalid_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsPatchInvalid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsPatchInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Version_IsBuildInvalid_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsBuildInvalid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsBuildInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 // ==========================================
@@ -135,31 +216,51 @@ func Test_Version_IsBuildInvalid_Nil(t *testing.T) {
 // ==========================================
 
 func Test_Version_IsMajorInvalidOrZero(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("0.1.0")
-	if !v.IsMajorInvalidOrZero() {
-		t.Error("major 0 should be invalid or zero")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorInvalidOrZero()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "major 0 should be invalid or zero", actual)
 }
 
 func Test_Version_IsMinorInvalidOrZero(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.0.0")
-	if !v.IsMinorInvalidOrZero() {
-		t.Error("minor 0 should be invalid or zero")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMinorInvalidOrZero()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "minor 0 should be invalid or zero", actual)
 }
 
 func Test_Version_IsPatchInvalidOrZero(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.1.0")
-	if !v.IsPatchInvalidOrZero() {
-		t.Error("patch 0 should be invalid or zero")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsPatchInvalidOrZero()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "patch 0 should be invalid or zero", actual)
 }
 
 func Test_Version_IsBuildInvalidOrZero(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.1.1")
-	if !v.IsBuildInvalidOrZero() {
-		t.Error("no build should be invalid or zero")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsBuildInvalidOrZero()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "no build should be invalid or zero", actual)
 }
 
 // ==========================================
@@ -167,63 +268,103 @@ func Test_Version_IsBuildInvalidOrZero(t *testing.T) {
 // ==========================================
 
 func Test_Version_VersionDisplay(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
 	d := v.VersionDisplay()
-	if d == "" {
-		t.Error("should return non-empty display")
-	}
+
+	// Act
+	actual := args.Map{"result": d == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty display", actual)
 }
 
 func Test_Version_VersionDisplay_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.VersionDisplay() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.VersionDisplay() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Version_VersionDisplayMajor(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("5.2.3")
 	d := v.VersionDisplayMajor()
-	if d == "" {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": d == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Version_VersionDisplayMajorMinor(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("5.2.3")
 	d := v.VersionDisplayMajorMinor()
-	if d == "" {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": d == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Version_VersionDisplayMajorMinorPatch(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("5.2.3")
 	d := v.VersionDisplayMajorMinorPatch()
-	if d == "" {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": d == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Version_CompiledVersion(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.CompiledVersion() == "" {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.CompiledVersion() == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Version_CompiledVersion_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if v.CompiledVersion() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.CompiledVersion() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Version_String(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.String() == "" {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": v.String() == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -231,31 +372,51 @@ func Test_Version_String(t *testing.T) {
 // ==========================================
 
 func Test_Version_IsEmptyOrInvalid_Valid(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if v.IsEmptyOrInvalid() {
-		t.Error("valid version should not be empty/invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsEmptyOrInvalid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "valid version should not be empty/invalid", actual)
 }
 
 func Test_Version_IsEmptyOrInvalid_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsEmptyOrInvalid() {
-		t.Error("nil should be empty/invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsEmptyOrInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty/invalid", actual)
 }
 
 func Test_Version_HasAnyItem(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if !v.HasAnyItem() {
-		t.Error("should have item")
-	}
+
+	// Act
+	actual := args.Map{"result": v.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have item", actual)
 }
 
 func Test_Version_IsDefined(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if !v.IsDefined() {
-		t.Error("should be defined")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsDefined()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be defined", actual)
 }
 
 // ==========================================
@@ -263,27 +424,42 @@ func Test_Version_IsDefined(t *testing.T) {
 // ==========================================
 
 func Test_Version_IsVersionCompareEqual(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if !v.IsVersionCompareEqual("1.2.3") {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsVersionCompareEqual("1.2.3")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_IsVersionCompareNotEqual(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
-	if !v.IsVersionCompareNotEqual("2.0.0") {
-		t.Error("should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsVersionCompareNotEqual("2.0.0")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should not be equal", actual)
 }
 
 func Test_Version_IsVersionCompareEqual_Nil(t *testing.T) {
+	// Arrange
 	var v *coreversion.Version
-	if !v.IsVersionCompareEqual("") {
-		t.Error("nil with empty should be equal")
-	}
-	if v.IsVersionCompareEqual("1.0.0") {
-		t.Error("nil with value should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsVersionCompareEqual("")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil with empty should be equal", actual)
+	actual := args.Map{"result": v.IsVersionCompareEqual("1.0.0")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil with value should not be equal", actual)
 }
 
 // ==========================================
@@ -291,19 +467,29 @@ func Test_Version_IsVersionCompareEqual_Nil(t *testing.T) {
 // ==========================================
 
 func Test_Version_AllVersionValues(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3.4")
 	vals := v.AllVersionValues()
-	if len(vals) == 0 {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(vals) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Version_AllValidVersionValues(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
 	vals := v.AllValidVersionValues()
-	if len(vals) == 0 {
-		t.Error("should return non-empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(vals) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -311,34 +497,54 @@ func Test_Version_AllValidVersionValues(t *testing.T) {
 // ==========================================
 
 func Test_Version_IsMajorAtLeast(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.0.0")
-	if !v.IsMajorAtLeast(2) {
-		t.Error("3 should be at least 2")
-	}
-	if v.IsMajorAtLeast(5) {
-		t.Error("3 should not be at least 5")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorAtLeast(2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "3 should be at least 2", actual)
+	actual := args.Map{"result": v.IsMajorAtLeast(5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "3 should not be at least 5", actual)
 }
 
 func Test_Version_IsMajorMinorAtLeast(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.2.0")
-	if !v.IsMajorMinorAtLeast(3, 1) {
-		t.Error("3.2 should be at least 3.1")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorMinorAtLeast(3, 1)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "3.2 should be at least 3.1", actual)
 }
 
 func Test_Version_IsMajorMinorPatchAtLeast(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.2.1")
-	if !v.IsMajorMinorPatchAtLeast(3, 2, 0) {
-		t.Error("3.2.1 should be at least 3.2.0")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorMinorPatchAtLeast(3, 2, 0)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "3.2.1 should be at least 3.2.0", actual)
 }
 
 func Test_Version_IsMajorStringAtLeast(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.0.0")
-	if !v.IsMajorStringAtLeast("2") {
-		t.Error("3 should be at least 2")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorStringAtLeast("2")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "3 should be at least 2", actual)
 }
 
 // ==========================================
@@ -346,34 +552,48 @@ func Test_Version_IsMajorStringAtLeast(t *testing.T) {
 // ==========================================
 
 func Test_CompareVersionString(t *testing.T) {
+	// Arrange
 	cmp := coreversion.CompareVersionString("2.0.0", "1.0.0")
-	if !cmp.IsLeftGreaterEqualLogically() {
-		t.Error("2.0.0 should be greater than 1.0.0")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsLeftGreaterEqualLogically()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "2.0.0 should be greater than 1.0.0", actual)
 }
 
 func Test_IsAtLeast(t *testing.T) {
-	if !coreversion.IsAtLeast("2.0.0", "1.0.0") {
-		t.Error("2.0.0 should be at least 1.0.0")
-	}
-	if coreversion.IsAtLeast("1.0.0", "2.0.0") {
-		t.Error("1.0.0 should not be at least 2.0.0")
-	}
+	// Act
+	actual := args.Map{"result": coreversion.IsAtLeast("2.0.0", "1.0.0")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "2.0.0 should be at least 1.0.0", actual)
+	actual := args.Map{"result": coreversion.IsAtLeast("1.0.0", "2.0.0")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "1.0.0 should not be at least 2.0.0", actual)
 }
 
 func Test_IsLower(t *testing.T) {
-	if !coreversion.IsLower("1.0.0", "2.0.0") {
-		t.Error("1.0.0 should be lower than 2.0.0")
-	}
+	// Act
+	actual := args.Map{"result": coreversion.IsLower("1.0.0", "2.0.0")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "1.0.0 should be lower than 2.0.0", actual)
 }
 
 func Test_IsLowerOrEqual(t *testing.T) {
-	if !coreversion.IsLowerOrEqual("1.0.0", "1.0.0") {
-		t.Error("equal should be lower or equal")
-	}
-	if !coreversion.IsLowerOrEqual("1.0.0", "2.0.0") {
-		t.Error("1.0.0 should be lower or equal to 2.0.0")
-	}
+	// Act
+	actual := args.Map{"result": coreversion.IsLowerOrEqual("1.0.0", "1.0.0")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "equal should be lower or equal", actual)
+	actual := args.Map{"result": coreversion.IsLowerOrEqual("1.0.0", "2.0.0")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "1.0.0 should be lower or equal to 2.0.0", actual)
 }
 
 func Test_IsExpectedVersion(t *testing.T) {
@@ -390,140 +610,205 @@ func Test_IsExpectedVersion(t *testing.T) {
 // ==========================================
 
 func Test_VersionsCollection_Basic(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.Add("1.0.0")
 	vc.Add("2.0.0")
-	if vc.Length() != 2 {
-		t.Errorf("expected 2, got %d", vc.Length())
-	}
-	if vc.Count() != 2 {
-		t.Error("Count should equal Length")
-	}
-	if vc.IsEmpty() {
-		t.Error("should not be empty")
-	}
-	if !vc.HasAnyItem() {
-		t.Error("should have items")
-	}
-	if vc.LastIndex() != 1 {
-		t.Errorf("expected last index 1, got %d", vc.LastIndex())
-	}
-	if !vc.HasIndex(1) {
-		t.Error("should have index 1")
-	}
-	if vc.HasIndex(5) {
-		t.Error("should not have index 5")
-	}
+
+	// Act
+	actual := args.Map{"result": vc.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
+	actual := args.Map{"result": vc.Count() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Count should equal Length", actual)
+	actual := args.Map{"result": vc.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
+	actual := args.Map{"result": vc.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have items", actual)
+	actual := args.Map{"result": vc.LastIndex() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected last index 1", actual)
+	actual := args.Map{"result": vc.HasIndex(1)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have index 1", actual)
+	actual := args.Map{"result": vc.HasIndex(5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have index 5", actual)
 }
 
 func Test_VersionsCollection_AddSkipInvalid(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.AddSkipInvalid("1.0.0")
 	vc.AddSkipInvalid("")
-	if vc.Length() != 1 {
-		t.Errorf("expected 1, got %d", vc.Length())
-	}
+
+	// Act
+	actual := args.Map{"result": vc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_VersionsCollection_AddVersionsRaw(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.AddVersionsRaw("1.0.0", "2.0.0")
-	if vc.Length() != 2 {
-		t.Errorf("expected 2, got %d", vc.Length())
-	}
+
+	// Act
+	actual := args.Map{"result": vc.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_VersionsCollection_Strings(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.Add("1.0.0")
 	compactStrs := vc.VersionCompactStrings()
-	if len(compactStrs) != 1 {
-		t.Errorf("expected 1, got %d", len(compactStrs))
-	}
+
+	// Act
+	actual := args.Map{"result": len(compactStrs) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	verStrs := vc.VersionsStrings()
-	if len(verStrs) != 1 {
-		t.Errorf("expected 1, got %d", len(verStrs))
-	}
+	actual := args.Map{"result": len(verStrs) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_VersionsCollection_Strings_Empty(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
-	if len(vc.VersionCompactStrings()) != 0 {
-		t.Error("empty should return empty")
-	}
-	if len(vc.VersionsStrings()) != 0 {
-		t.Error("empty should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(vc.VersionCompactStrings()) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
+	actual := args.Map{"result": len(vc.VersionsStrings()) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
 }
 
 func Test_VersionsCollection_IndexOf(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.Add("1.0.0")
 	vc.Add("2.0.0")
-	if vc.IndexOf("2.0.0") < 0 {
-		t.Error("should find version")
-	}
-	if vc.IndexOf("3.0.0") >= 0 {
-		t.Error("should not find version")
-	}
+
+	// Act
+	actual := args.Map{"result": vc.IndexOf("2.0.0") < 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should find version", actual)
+	actual := args.Map{"result": vc.IndexOf("3.0.0") >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not find version", actual)
 }
 
 func Test_VersionsCollection_IsContainsVersion(t *testing.T) {
+	// Arrange
 	vc := &coreversion.VersionsCollection{}
 	vc.Add("1.0.0")
-	if !vc.IsContainsVersion("1.0.0") {
-		t.Error("should contain version")
-	}
+
+	// Act
+	actual := args.Map{"result": vc.IsContainsVersion("1.0.0")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should contain version", actual)
 }
 
 func Test_VersionsCollection_IsEqual(t *testing.T) {
+	// Arrange
 	vc1 := &coreversion.VersionsCollection{}
 	vc1.Add("1.0.0")
 	vc2 := &coreversion.VersionsCollection{}
 	vc2.Add("1.0.0")
-	if !vc1.IsEqual(vc2) {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": vc1.IsEqual(vc2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_VersionsCollection_IsEqual_DifferentLength(t *testing.T) {
+	// Arrange
 	vc1 := &coreversion.VersionsCollection{}
 	vc1.Add("1.0.0")
 	vc2 := &coreversion.VersionsCollection{}
-	if vc1.IsEqual(vc2) {
-		t.Error("different lengths should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": vc1.IsEqual(vc2)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different lengths should not be equal", actual)
 }
 
 func Test_VersionsCollection_IsEqual_BothNil(t *testing.T) {
+	// Arrange
 	var vc1 *coreversion.VersionsCollection
 	var vc2 *coreversion.VersionsCollection
-	if !vc1.IsEqual(vc2) {
-		t.Error("both nil should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": vc1.IsEqual(vc2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
 func Test_VersionsCollection_IsEqual_OneNil(t *testing.T) {
+	// Arrange
 	var vc1 *coreversion.VersionsCollection
 	vc2 := &coreversion.VersionsCollection{}
-	if vc1.IsEqual(vc2) {
-		t.Error("one nil should not be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": vc1.IsEqual(vc2)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one nil should not be equal", actual)
 }
 
 func Test_VersionsCollection_String(t *testing.T) {
+	// Arrange
 	vc := coreversion.VersionsCollection{}
 	vc.Add("1.0.0")
-	if vc.String() == "" {
-		t.Error("should return non-empty string")
-	}
+
+	// Act
+	actual := args.Map{"result": vc.String() == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
 func Test_VersionsCollection_Length_Nil(t *testing.T) {
+	// Arrange
 	var vc *coreversion.VersionsCollection
-	if vc.Length() != 0 {
-		t.Error("nil should return 0")
-	}
+
+	// Act
+	actual := args.Map{"result": vc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return 0", actual)
 }
 
 // ==========================================
@@ -531,81 +816,131 @@ func Test_VersionsCollection_Length_Nil(t *testing.T) {
 // ==========================================
 
 func Test_Version_MajorBuild(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.0.0.5")
 	cmp := v.MajorBuild(3, 5)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_IsMajorBuildAtLeast(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.0.0.5")
-	if !v.IsMajorBuildAtLeast(3, 4) {
-		t.Error("3.0.0.5 should be at least 3.0.0.4")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsMajorBuildAtLeast(3, 4)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "3.0.0.5 should be at least 3.0.0.4", actual)
 }
 
 func Test_Version_MajorBuildString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.0.0.5")
 	cmp := v.MajorBuildString("3", "5")
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_MajorMinorPatchBuildString(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("3.2.1.5")
 	cmp := v.MajorMinorPatchBuildString("3", "2", "5", "1")
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_Patch(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
 	cmp := v.Patch(3)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_MajorPatch(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3")
 	cmp := v.MajorPatch(1, 3)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_Build(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3.4")
 	cmp := v.Build(4)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_MajorMinorPatchBuild(t *testing.T) {
+	// Arrange
 	v := coreversion.New.Create("1.2.3.4")
 	cmp := v.MajorMinorPatchBuild(1, 2, 3, 4)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_Compare(t *testing.T) {
+	// Arrange
 	v1 := coreversion.New.Create("1.2.3")
 	v2 := coreversion.New.Create("1.2.3")
 	cmp := v1.Compare(&v2)
-	if !cmp.IsEqual() {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": cmp.IsEqual()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Version_IsEqual(t *testing.T) {
+	// Arrange
 	v1 := coreversion.New.Create("1.2.3")
 	v2 := coreversion.New.Create("1.2.3")
-	if !v1.IsEqual(&v2) {
-		t.Error("should be equal")
-	}
+
+	// Act
+	actual := args.Map{"result": v1.IsEqual(&v2)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }

@@ -9,6 +9,7 @@ import (
 
 	"github.com/alimtvnetwork/core/chmodhelper"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── errorCreator.dirError ──
@@ -28,6 +29,7 @@ func Test_Cov8_NotDirError_PathInvalid(t *testing.T) {
 }
 
 func Test_Cov8_NotDirError_ExistsButNotDir(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
@@ -38,14 +40,19 @@ func Test_Cov8_NotDirError_ExistsButNotDir(t *testing.T) {
 
 	// Use dir creator ByChecking on file path to exercise notDirError
 	err := chmodhelper.SimpleFileWriter.CreateDir.ByChecking(0755, tmpFile)
-	if err == nil {
-		t.Fatal("expected error for file path used as dir")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for file path used as dir", actual)
 }
 
 // ── errorCreator.pathError ──
 
 func Test_Cov8_PathError_NilErr(t *testing.T) {
+	// Arrange
 	// pathError returns nil when err is nil - covered through ApplyChmod on valid path
 	tmpDir := filepath.Join(os.TempDir(), "cov8_path_error_nil")
 	os.MkdirAll(tmpDir, 0755)
@@ -53,21 +60,30 @@ func Test_Cov8_PathError_NilErr(t *testing.T) {
 
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, tmpDir)
-	if err != nil {
-		t.Fatal(err)
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov8_PathError_WithErr(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	// pathError returns error when path doesn't exist and skip=false
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, "/nonexistent/cov8/path")
-	if err == nil {
-		t.Fatal("expected error for nonexistent path")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nonexistent path", actual)
 }
 
 // ── errorCreator.pathErrorWithDirValidate ──
@@ -90,15 +106,20 @@ func Test_Cov8_PathErrorWithDirValidate_ErrNil(t *testing.T) {
 // ── errorCreator.chmodApplyFailed ──
 
 func Test_Cov8_ChmodApplyFailed_WithErr(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	// Covered through ApplyChmod on invalid path
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, "/nonexistent/cov8/chmod_fail")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov8_ChmodApplyFailed_NilErr(t *testing.T) {
@@ -113,74 +134,104 @@ func Test_Cov8_ChmodApplyFailed_NilErr(t *testing.T) {
 // ── pathErrorMessage ──
 
 func Test_Cov8_PathErrorMessage(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	// Covered through any error path in ApplyChmod
 	rwx := chmodhelper.New.RwxWrapper.UsingFileMode(0755)
 	err := rwx.ApplyChmod(false, "/nonexistent/cov8/pem")
-	if err == nil {
-		t.Fatal("expected error")
-	}
-	if len(err.Error()) == 0 {
-		t.Fatal("expected non-empty error message")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
+	actual := args.Map{"result": len(err.Error()) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty error message", actual)
 }
 
 // ── dirCreator via CreateDirWithFiles ──
 
 func Test_Cov8_DirCreator_IfMissing_AlreadyExists(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_ifmissing_exists")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
 	// Creating again should be fine
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: tmpDir})
-	if err != nil {
-		t.Fatal(err)
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov8_DirCreator_IfMissing_CreateNew(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_ifmissing_new")
 	os.RemoveAll(tmpDir)
 	defer os.RemoveAll(tmpDir)
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: tmpDir})
-	if err != nil {
-		t.Fatal(err)
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov8_DirCreator_IfMissing_Error(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_ifmissing_err_file")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{
 		Dir: filepath.Join(tmpFile, "subdir"),
 	})
-	if err == nil {
-		t.Fatal("expected error creating dir under file")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error creating dir under file", actual)
 }
 
 func Test_Cov8_DirCreator_Default_Error(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_default_err")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{
 		Dir: filepath.Join(tmpFile, "sub"),
 	})
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── tempDirGetter.TempPermanent ──
 
 func Test_Cov8_TempDirGetter_TempPermanent(t *testing.T) {
+	// Arrange
 	result := chmodhelper.TempDirGetter.TempPermanent()
-	if result == "" {
-		t.Fatal("expected non-empty temp permanent path")
-	}
+
+	// Act
+	actual := args.Map{"result": result == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty temp permanent path", actual)
 }
 
 // ── PathExistStat.MeaningFullError ──
@@ -193,15 +244,20 @@ func Test_Cov8_PathExistStat_MeaningFullError(t *testing.T) {
 }
 
 func Test_Cov8_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+	// Arrange
 	stat := &chmodhelper.PathExistStat{
 		Location: "/test",
 		IsExist:  false,
 		Error:    errors.New("test error"),
 	}
 	err := stat.MeaningFullError()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── PathExistStat.NotAFileError ──
@@ -215,23 +271,33 @@ func Test_Cov8_PathExistStat_NotAFileError_NotExist(t *testing.T) {
 }
 
 func Test_Cov8_PathExistStat_NotAFileError_IsDir(t *testing.T) {
+	// Arrange
 	stat := chmodhelper.GetPathExistStat(os.TempDir())
 	err := stat.NotAFileError()
-	if err == nil {
-		t.Fatal("expected error: dir is not a file")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error: dir is not a file", actual)
 }
 
 func Test_Cov8_PathExistStat_NotAFileError_IsFile(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_notafile_isfile.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	stat := chmodhelper.GetPathExistStat(tmpFile)
 	err := stat.NotAFileError()
-	if err != nil {
-		t.Fatal("expected nil for file")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for file", actual)
 }
 
 // ── PathExistStat.NotADirError ──
@@ -243,95 +309,136 @@ func Test_Cov8_PathExistStat_NotADirError_NotExist(t *testing.T) {
 }
 
 func Test_Cov8_PathExistStat_NotADirError_IsFile(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_notadir_isfile.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	stat := chmodhelper.GetPathExistStat(tmpFile)
 	err := stat.NotADirError()
-	if err == nil {
-		t.Fatal("expected error: file is not a dir")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error: file is not a dir", actual)
 }
 
 func Test_Cov8_PathExistStat_NotADirError_IsDir(t *testing.T) {
+	// Arrange
 	stat := chmodhelper.GetPathExistStat(os.TempDir())
 	err := stat.NotADirError()
-	if err != nil {
-		t.Fatal("expected nil for dir")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for dir", actual)
 }
 
 // ── FilteredPathFileInfoMap.ValidLocations empty ──
 
 func Test_Cov8_FilteredPathFileInfoMap_ValidLocations_Empty(t *testing.T) {
+	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	locs := m.ValidLocations()
-	if len(locs) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(locs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 // ── FilteredPathFileInfoMap.ValidFileInfos empty ──
 
 func Test_Cov8_FilteredPathFileInfoMap_ValidFileInfos_Empty(t *testing.T) {
+	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	infos := m.ValidFileInfos()
-	if len(infos) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(infos) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 // ── FilteredPathFileInfoMap.ValidLocationFileInfoRwxWrappers empty ──
 
 func Test_Cov8_FilteredPathFileInfoMap_ValidLocationFileInfoRwxWrappers_Empty(t *testing.T) {
+	// Arrange
 	m := chmodhelper.InvalidFilteredPathFileInfoMap()
 	wrappers := m.ValidLocationFileInfoRwxWrappers()
-	if len(wrappers) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(wrappers) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 // ── FilteredPathFileInfoMap with valid entries ──
 
 func Test_Cov8_FilteredPathFileInfoMap_WithEntries(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_filtered_entries.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	m := chmodhelper.GetExistsFilteredPathFileInfoMap(false, tmpFile)
 	locs := m.ValidLocations()
-	if len(locs) == 0 {
-		t.Fatal("expected locations")
-	}
+
+	// Act
+	actual := args.Map{"result": len(locs) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected locations", actual)
 	infos := m.ValidFileInfos()
-	if len(infos) == 0 {
-		t.Fatal("expected file infos")
-	}
+	actual := args.Map{"result": len(infos) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected file infos", actual)
 	wrappers := m.ValidLocationFileInfoRwxWrappers()
-	if len(wrappers) == 0 {
-		t.Fatal("expected wrappers")
-	}
+	actual := args.Map{"result": len(wrappers) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrappers", actual)
 }
 
 // ── GetExistingChmodRwxWrapperMustPtr ──
 
 func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Valid(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_must_ptr.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	ptr := chmodhelper.GetExistingChmodRwxWrapperMustPtr(tmpFile)
-	if ptr == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": ptr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Panic(t *testing.T) {
+	// Arrange
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic")
-		}
+
+	// Act
+		r := recover()
+		actual := args.Map{"result": r == nil}
+
+	// Assert
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
 	chmodhelper.GetExistingChmodRwxWrapperMustPtr("/nonexistent/cov8/must_ptr")
 }
@@ -339,6 +446,7 @@ func Test_Cov8_GetExistingChmodRwxWrapperMustPtr_Panic(t *testing.T) {
 // ── GetExistingChmodRwxWrappers ──
 
 func Test_Cov8_GetExistingChmodRwxWrappers_ContinueOnError(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_wrappers_cont.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
@@ -346,36 +454,55 @@ func Test_Cov8_GetExistingChmodRwxWrappers_ContinueOnError(t *testing.T) {
 	results, err := chmodhelper.GetExistingChmodRwxWrappers(
 		true, tmpFile, "/nonexistent/cov8/wrappers")
 	_ = err
-	if len(results) == 0 {
-		t.Fatal("expected at least one result")
-	}
+
+	// Act
+	actual := args.Map{"result": len(results) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected at least one result", actual)
 }
 
 func Test_Cov8_GetExistingChmodRwxWrappers_ImmediateExit(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.GetExistingChmodRwxWrappers(
 		false, "/nonexistent/cov8/wrap1", "/nonexistent/cov8/wrap2")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov8_GetExistingChmodRwxWrappers_Empty(t *testing.T) {
+	// Arrange
 	results, err := chmodhelper.GetExistingChmodRwxWrappers(false)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(results) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": len(results) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 // ── IsChmodEqualUsingRwxOwnerGroupOther ──
 
 func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Nil(t *testing.T) {
+	// Arrange
 	result := chmodhelper.IsChmodEqualUsingRwxOwnerGroupOther("/tmp", nil)
-	if result {
-		t.Fatal("expected false for nil")
-	}
+
+	// Act
+	actual := args.Map{"result": result}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
 func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Valid(t *testing.T) {
@@ -394,42 +521,58 @@ func Test_Cov8_IsChmodEqualUsingRwxOwnerGroupOther_Valid(t *testing.T) {
 // ── GetRecursivePaths ──
 
 func Test_Cov8_GetRecursivePaths_NonExistent(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.GetRecursivePaths(false, "/nonexistent/cov8/recursive")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov8_GetRecursivePaths_File(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_recursive_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	paths, err := chmodhelper.GetRecursivePaths(false, tmpFile)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(paths) != 1 {
-		t.Fatalf("expected 1 path, got %d", len(paths))
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": len(paths) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
 func Test_Cov8_GetRecursivePaths_Dir(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recursive_dir")
 	os.MkdirAll(filepath.Join(tmpDir, "sub"), 0755)
 	os.WriteFile(filepath.Join(tmpDir, "sub", "f.txt"), []byte("x"), 0644)
 	defer os.RemoveAll(tmpDir)
 
 	paths, err := chmodhelper.GetRecursivePaths(false, tmpDir)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(paths) < 2 {
-		t.Fatal("expected multiple paths")
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": len(paths) < 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected multiple paths", actual)
 }
 
 func Test_Cov8_GetRecursivePaths_ContinueOnError(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recursive_cont")
 	os.MkdirAll(tmpDir, 0755)
 	os.WriteFile(filepath.Join(tmpDir, "f.txt"), []byte("x"), 0644)
@@ -437,41 +580,60 @@ func Test_Cov8_GetRecursivePaths_ContinueOnError(t *testing.T) {
 
 	paths, err := chmodhelper.GetRecursivePaths(true, tmpDir)
 	_ = err
-	if len(paths) < 1 {
-		t.Fatal("expected paths")
-	}
+
+	// Act
+	actual := args.Map{"result": len(paths) < 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected paths", actual)
 }
 
 // ── GetRecursivePathsContinueOnError ──
 
 func Test_Cov8_GetRecursivePathsContinueOnError_NonExistent(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.GetRecursivePathsContinueOnError("/nonexistent/cov8/recur_cont")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov8_GetRecursivePathsContinueOnError_File(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov8_recur_cont_file.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	paths, err := chmodhelper.GetRecursivePathsContinueOnError(tmpFile)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(paths) != 1 {
-		t.Fatal("expected 1 path")
-	}
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": len(paths) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 path", actual)
 }
 
 func Test_Cov8_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov8_recur_cont_dir")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
 
 	paths, _ := chmodhelper.GetRecursivePathsContinueOnError(tmpDir)
-	if len(paths) < 1 {
-		t.Fatal("expected paths")
-	}
+
+	// Act
+	actual := args.Map{"result": len(paths) < 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected paths", actual)
 }

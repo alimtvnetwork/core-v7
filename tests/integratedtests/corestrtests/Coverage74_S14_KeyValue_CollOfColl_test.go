@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ========================================
@@ -23,9 +24,9 @@ func Test_C74_KeyValuePair_KeyName(t *testing.T) {
 		result := kv.KeyName()
 
 		// Assert
-		if result != "host" {
-			t.Errorf("KeyName expected 'host', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "host"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "KeyName expected 'host', got ''", actual)
 	})
 }
 
@@ -38,9 +39,9 @@ func Test_C74_KeyValuePair_VariableName(t *testing.T) {
 		result := kv.VariableName()
 
 		// Assert
-		if result != "port" {
-			t.Errorf("expected 'port', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "port"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'port', got ''", actual)
 	})
 }
 
@@ -53,9 +54,9 @@ func Test_C74_KeyValuePair_ValueString(t *testing.T) {
 		result := kv.ValueString()
 
 		// Assert
-		if result != "val123" {
-			t.Errorf("expected 'val123', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "val123"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'val123', got ''", actual)
 	})
 }
 
@@ -65,12 +66,12 @@ func Test_C74_KeyValuePair_IsVariableNameEqual(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "name", Value: "x"}
 
 		// Act & Assert
-		if !kv.IsVariableNameEqual("name") {
-			t.Error("expected true for matching name")
-		}
-		if kv.IsVariableNameEqual("other") {
-			t.Error("expected false for non-matching name")
-		}
+		actual := args.Map{"result": kv.IsVariableNameEqual("name")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for matching name", actual)
+		actual = args.Map{"result": kv.IsVariableNameEqual("other")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for non-matching name", actual)
 	})
 }
 
@@ -80,12 +81,12 @@ func Test_C74_KeyValuePair_IsValueEqual(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act & Assert
-		if !kv.IsValueEqual("abc") {
-			t.Error("expected true")
-		}
-		if kv.IsValueEqual("xyz") {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": kv.IsValueEqual("abc")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": kv.IsValueEqual("xyz")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -98,9 +99,9 @@ func Test_C74_KeyValuePair_Compile(t *testing.T) {
 		result := kv.Compile()
 
 		// Assert
-		if result != kv.String() {
-			t.Errorf("Compile should equal String(), got '%s'", result)
-		}
+		actual := args.Map{"result": result != kv.String()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Compile should equal String(), got ''", actual)
 	})
 }
 
@@ -110,12 +111,12 @@ func Test_C74_KeyValuePair_IsKeyEmpty_IsValueEmpty(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "", Value: "x"}
 
 		// Act & Assert
-		if !kv.IsKeyEmpty() {
-			t.Error("expected key empty")
-		}
-		if kv.IsValueEmpty() {
-			t.Error("expected value not empty")
-		}
+		actual := args.Map{"result": kv.IsKeyEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected key empty", actual)
+		actual = args.Map{"result": kv.IsValueEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected value not empty", actual)
 	})
 }
 
@@ -125,12 +126,12 @@ func Test_C74_KeyValuePair_HasKey_HasValue(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: ""}
 
 		// Act & Assert
-		if !kv.HasKey() {
-			t.Error("expected HasKey true")
-		}
-		if kv.HasValue() {
-			t.Error("expected HasValue false")
-		}
+		actual := args.Map{"result": kv.HasKey()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected HasKey true", actual)
+		actual = args.Map{"result": kv.HasValue()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected HasValue false", actual)
 	})
 }
 
@@ -141,12 +142,12 @@ func Test_C74_KeyValuePair_IsKeyValueEmpty(t *testing.T) {
 		nonEmpty := corestr.KeyValuePair{Key: "k", Value: "v"}
 
 		// Act & Assert
-		if !empty.IsKeyValueEmpty() {
-			t.Error("expected true for empty")
-		}
-		if nonEmpty.IsKeyValueEmpty() {
-			t.Error("expected false for non-empty")
-		}
+		actual := args.Map{"result": empty.IsKeyValueEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
+		actual = args.Map{"result": nonEmpty.IsKeyValueEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for non-empty", actual)
 	})
 }
 
@@ -156,12 +157,12 @@ func Test_C74_KeyValuePair_TrimKey_TrimValue(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: " key ", Value: " val "}
 
 		// Act & Assert
-		if kv.TrimKey() != "key" {
-			t.Errorf("expected 'key', got '%s'", kv.TrimKey())
-		}
-		if kv.TrimValue() != "val" {
-			t.Errorf("expected 'val', got '%s'", kv.TrimValue())
-		}
+		actual := args.Map{"result": kv.TrimKey() != "key"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'key', got ''", actual)
+		actual = args.Map{"result": kv.TrimValue() != "val"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'val', got ''", actual)
 	})
 }
 
@@ -174,18 +175,18 @@ func Test_C74_KeyValuePair_ValueBool(t *testing.T) {
 		emptyKv := corestr.KeyValuePair{Key: "k", Value: ""}
 
 		// Act & Assert
-		if !trueKv.ValueBool() {
-			t.Error("expected true")
-		}
-		if falseKv.ValueBool() {
-			t.Error("expected false")
-		}
-		if invalidKv.ValueBool() {
-			t.Error("expected false for invalid")
-		}
-		if emptyKv.ValueBool() {
-			t.Error("expected false for empty")
-		}
+		actual := args.Map{"result": trueKv.ValueBool()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": falseKv.ValueBool()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
+		actual = args.Map{"result": invalidKv.ValueBool()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for invalid", actual)
+		actual = args.Map{"result": emptyKv.ValueBool()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
 
@@ -196,12 +197,12 @@ func Test_C74_KeyValuePair_ValueInt(t *testing.T) {
 		invalidKv := corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act & Assert
-		if kv.ValueInt(0) != 42 {
-			t.Errorf("expected 42, got %d", kv.ValueInt(0))
-		}
-		if invalidKv.ValueInt(99) != 99 {
-			t.Errorf("expected default 99, got %d", invalidKv.ValueInt(99))
-		}
+		actual := args.Map{"result": kv.ValueInt(0) != 42}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 42", actual)
+		actual = args.Map{"result": invalidKv.ValueInt(99) != 99}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected default 99", actual)
 	})
 }
 
@@ -212,12 +213,12 @@ func Test_C74_KeyValuePair_ValueDefInt(t *testing.T) {
 		invalidKv := corestr.KeyValuePair{Key: "k", Value: "x"}
 
 		// Act & Assert
-		if kv.ValueDefInt() != 10 {
-			t.Errorf("expected 10")
-		}
-		if invalidKv.ValueDefInt() != 0 {
-			t.Errorf("expected 0 for invalid")
-		}
+		actual := args.Map{"result": kv.ValueDefInt() != 10}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 10", actual)
+		actual = args.Map{"result": invalidKv.ValueDefInt() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for invalid", actual)
 	})
 }
 
@@ -229,15 +230,15 @@ func Test_C74_KeyValuePair_ValueByte(t *testing.T) {
 		invalidKv := corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act & Assert
-		if kv.ValueByte(0) != 200 {
-			t.Errorf("expected 200")
-		}
-		if overflowKv.ValueByte(5) != 5 {
-			t.Error("expected default for overflow")
-		}
-		if invalidKv.ValueByte(7) != 7 {
-			t.Error("expected default for invalid")
-		}
+		actual := args.Map{"result": kv.ValueByte(0) != 200}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 200", actual)
+		actual = args.Map{"result": overflowKv.ValueByte(5) != 5}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected default for overflow", actual)
+		actual = args.Map{"result": invalidKv.ValueByte(7) != 7}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected default for invalid", actual)
 	})
 }
 
@@ -249,15 +250,15 @@ func Test_C74_KeyValuePair_ValueDefByte(t *testing.T) {
 		overflowKv := corestr.KeyValuePair{Key: "k", Value: "300"}
 
 		// Act & Assert
-		if kv.ValueDefByte() != 100 {
-			t.Errorf("expected 100")
-		}
-		if invalidKv.ValueDefByte() != 0 {
-			t.Error("expected 0")
-		}
-		if overflowKv.ValueDefByte() != 0 {
-			t.Error("expected 0 for overflow")
-		}
+		actual := args.Map{"result": kv.ValueDefByte() != 100}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 100", actual)
+		actual = args.Map{"result": invalidKv.ValueDefByte() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
+		actual = args.Map{"result": overflowKv.ValueDefByte() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 for overflow", actual)
 	})
 }
 
@@ -268,12 +269,12 @@ func Test_C74_KeyValuePair_ValueFloat64(t *testing.T) {
 		invalidKv := corestr.KeyValuePair{Key: "k", Value: "abc"}
 
 		// Act & Assert
-		if kv.ValueFloat64(0) != 3.14 {
-			t.Errorf("expected 3.14")
-		}
-		if invalidKv.ValueFloat64(1.5) != 1.5 {
-			t.Error("expected default 1.5")
-		}
+		actual := args.Map{"result": kv.ValueFloat64(0) != 3.14}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
+		actual = args.Map{"result": invalidKv.ValueFloat64(1.5) != 1.5}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected default 1.5", actual)
 	})
 }
 
@@ -283,9 +284,9 @@ func Test_C74_KeyValuePair_ValueDefFloat64(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "2.5"}
 
 		// Act & Assert
-		if kv.ValueDefFloat64() != 2.5 {
-			t.Errorf("expected 2.5")
-		}
+		actual := args.Map{"result": kv.ValueDefFloat64() != 2.5}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2.5", actual)
 	})
 }
 
@@ -298,9 +299,9 @@ func Test_C74_KeyValuePair_ValueValid(t *testing.T) {
 		vv := kv.ValueValid()
 
 		// Assert
-		if vv.Value != "myval" || !vv.IsValid {
-			t.Error("expected valid value 'myval'")
-		}
+		actual := args.Map{"result": vv.Value != "myval" || !vv.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected valid value 'myval'", actual)
 	})
 }
 
@@ -313,9 +314,9 @@ func Test_C74_KeyValuePair_ValueValidOptions(t *testing.T) {
 		vv := kv.ValueValidOptions(false, "err msg")
 
 		// Assert
-		if vv.IsValid || vv.Message != "err msg" {
-			t.Error("expected invalid with message")
-		}
+		actual := args.Map{"result": vv.IsValid || vv.Message != "err msg"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected invalid with message", actual)
 	})
 }
 
@@ -325,12 +326,12 @@ func Test_C74_KeyValuePair_Is(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "a", Value: "b"}
 
 		// Act & Assert
-		if !kv.Is("a", "b") {
-			t.Error("expected true")
-		}
-		if kv.Is("a", "c") {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": kv.Is("a", "b")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": kv.Is("a", "c")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -340,15 +341,15 @@ func Test_C74_KeyValuePair_IsKey_IsVal(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "x", Value: "y"}
 
 		// Act & Assert
-		if !kv.IsKey("x") {
-			t.Error("expected IsKey true")
-		}
-		if !kv.IsVal("y") {
-			t.Error("expected IsVal true")
-		}
-		if kv.IsKey("z") {
-			t.Error("expected IsKey false")
-		}
+		actual := args.Map{"result": kv.IsKey("x")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected IsKey true", actual)
+		actual = args.Map{"result": kv.IsVal("y")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected IsVal true", actual)
+		actual = args.Map{"result": kv.IsKey("z")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected IsKey false", actual)
 	})
 }
 
@@ -361,18 +362,18 @@ func Test_C74_KeyValuePair_IsKeyValueAnyEmpty(t *testing.T) {
 		var nilPtr *corestr.KeyValuePair
 
 		// Act & Assert
-		if full.IsKeyValueAnyEmpty() {
-			t.Error("expected false for full")
-		}
-		if !emptyKey.IsKeyValueAnyEmpty() {
-			t.Error("expected true for empty key")
-		}
-		if !emptyVal.IsKeyValueAnyEmpty() {
-			t.Error("expected true for empty val")
-		}
-		if !nilPtr.IsKeyValueAnyEmpty() {
-			t.Error("expected true for nil")
-		}
+		actual := args.Map{"result": full.IsKeyValueAnyEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for full", actual)
+		actual = args.Map{"result": emptyKey.IsKeyValueAnyEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for empty key", actual)
+		actual = args.Map{"result": emptyVal.IsKeyValueAnyEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for empty val", actual)
+		actual = args.Map{"result": nilPtr.IsKeyValueAnyEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for nil", actual)
 	})
 }
 
@@ -385,9 +386,9 @@ func Test_C74_KeyValuePair_FormatString(t *testing.T) {
 		result := kv.FormatString("%s=%s")
 
 		// Assert
-		if result != "host=localhost" {
-			t.Errorf("expected 'host=localhost', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "host=localhost"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'host=localhost', got ''", actual)
 	})
 }
 
@@ -400,9 +401,9 @@ func Test_C74_KeyValuePair_String(t *testing.T) {
 		result := kv.String()
 
 		// Assert
-		if result != "{a:b}" {
-			t.Errorf("expected '{a:b}', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "{a:b}"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '{a:b}', got ''", actual)
 	})
 }
 
@@ -415,9 +416,9 @@ func Test_C74_KeyValuePair_Clear_Dispose(t *testing.T) {
 		kv.Clear()
 
 		// Assert
-		if kv.Key != "" || kv.Value != "" {
-			t.Error("expected cleared")
-		}
+		actual := args.Map{"result": kv.Key != "" || kv.Value != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected cleared", actual)
 	})
 }
 
@@ -442,15 +443,15 @@ func Test_C74_KeyValuePair_Json_Serialize(t *testing.T) {
 		bytes, err := kv.Serialize()
 
 		// Assert
-		if jsonResult.HasError() {
-			t.Error("json error")
-		}
-		if err != nil {
-			t.Errorf("serialize error: %v", err)
-		}
-		if len(bytes) == 0 {
-			t.Error("empty bytes")
-		}
+		actual := args.Map{"result": jsonResult.HasError()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "json error", actual)
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "serialize error:", actual)
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty bytes", actual)
 	})
 }
 
@@ -463,9 +464,9 @@ func Test_C74_KeyValuePair_SerializeMust(t *testing.T) {
 		bytes := kv.SerializeMust()
 
 		// Assert
-		if len(bytes) == 0 {
-			t.Error("expected non-empty bytes")
-		}
+		actual := args.Map{"result": len(bytes) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
 
@@ -477,12 +478,12 @@ func Test_C74_KeyAnyValuePair_KeyName_VariableName(t *testing.T) {
 		kav := corestr.KeyAnyValuePair{Key: "mykey", Value: 42}
 
 		// Act & Assert
-		if kav.KeyName() != "mykey" {
-			t.Error("KeyName mismatch")
-		}
-		if kav.VariableName() != "mykey" {
-			t.Error("VariableName mismatch")
-		}
+		actual := args.Map{"result": kav.KeyName() != "mykey"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "KeyName mismatch", actual)
+		actual = args.Map{"result": kav.VariableName() != "mykey"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "VariableName mismatch", actual)
 	})
 }
 
@@ -495,9 +496,9 @@ func Test_C74_KeyAnyValuePair_ValueAny(t *testing.T) {
 		result := kav.ValueAny()
 
 		// Assert
-		if result != "hello" {
-			t.Error("ValueAny mismatch")
-		}
+		actual := args.Map{"result": result != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ValueAny mismatch", actual)
 	})
 }
 
@@ -507,12 +508,12 @@ func Test_C74_KeyAnyValuePair_IsVariableNameEqual(t *testing.T) {
 		kav := corestr.KeyAnyValuePair{Key: "name", Value: nil}
 
 		// Act & Assert
-		if !kav.IsVariableNameEqual("name") {
-			t.Error("expected true")
-		}
-		if kav.IsVariableNameEqual("other") {
-			t.Error("expected false")
-		}
+		actual := args.Map{"result": kav.IsVariableNameEqual("name")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
+		actual = args.Map{"result": kav.IsVariableNameEqual("other")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
 
@@ -522,9 +523,9 @@ func Test_C74_KeyAnyValuePair_IsValueNull_Nil(t *testing.T) {
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: nil}
 
 		// Act & Assert
-		if !kav.IsValueNull() {
-			t.Error("expected null for nil value")
-		}
+		actual := args.Map{"result": kav.IsValueNull()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected null for nil value", actual)
 	})
 }
 
@@ -534,9 +535,9 @@ func Test_C74_KeyAnyValuePair_IsValueNull_NilReceiver(t *testing.T) {
 		var kav *corestr.KeyAnyValuePair
 
 		// Act & Assert
-		if !kav.IsValueNull() {
-			t.Error("expected null for nil receiver")
-		}
+		actual := args.Map{"result": kav.IsValueNull()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected null for nil receiver", actual)
 	})
 }
 
@@ -547,12 +548,12 @@ func Test_C74_KeyAnyValuePair_HasNonNull(t *testing.T) {
 		kavNil := corestr.KeyAnyValuePair{Key: "k", Value: nil}
 
 		// Act & Assert
-		if !kav.HasNonNull() {
-			t.Error("expected true for non-nil value")
-		}
-		if kavNil.HasNonNull() {
-			t.Error("expected false for nil value")
-		}
+		actual := args.Map{"result": kav.HasNonNull()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for non-nil value", actual)
+		actual = args.Map{"result": kavNil.HasNonNull()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for nil value", actual)
 	})
 }
 
@@ -562,9 +563,9 @@ func Test_C74_KeyAnyValuePair_HasValue(t *testing.T) {
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: "x"}
 
 		// Act & Assert
-		if !kav.HasValue() {
-			t.Error("expected true")
-		}
+		actual := args.Map{"result": kav.HasValue()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
 
@@ -575,12 +576,12 @@ func Test_C74_KeyAnyValuePair_IsValueEmptyString(t *testing.T) {
 		kavNonEmpty := corestr.KeyAnyValuePair{Key: "k", Value: "abc"}
 
 		// Act & Assert
-		if !kavEmpty.IsValueEmptyString() {
-			t.Error("expected true for empty string value")
-		}
-		if kavNonEmpty.IsValueEmptyString() {
-			t.Error("expected false for non-empty")
-		}
+		actual := args.Map{"result": kavEmpty.IsValueEmptyString()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for empty string value", actual)
+		actual = args.Map{"result": kavNonEmpty.IsValueEmptyString()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for non-empty", actual)
 	})
 }
 
@@ -590,9 +591,9 @@ func Test_C74_KeyAnyValuePair_IsValueWhitespace(t *testing.T) {
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: "  "}
 
 		// Act & Assert
-		if !kav.IsValueWhitespace() {
-			t.Error("expected true for whitespace value string")
-		}
+		actual := args.Map{"result": kav.IsValueWhitespace()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for whitespace value string", actual)
 	})
 }
 
@@ -605,9 +606,9 @@ func Test_C74_KeyAnyValuePair_ValueString(t *testing.T) {
 		result := kav.ValueString()
 
 		// Assert
-		if result != "123" {
-			t.Errorf("expected '123', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "123"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '123', got ''", actual)
 	})
 }
 
@@ -620,9 +621,9 @@ func Test_C74_KeyAnyValuePair_Compile(t *testing.T) {
 		result := kav.Compile()
 
 		// Assert
-		if result != kav.String() {
-			t.Error("Compile should equal String()")
-		}
+		actual := args.Map{"result": result != kav.String()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Compile should equal String()", actual)
 	})
 }
 
@@ -635,9 +636,9 @@ func Test_C74_KeyAnyValuePair_String(t *testing.T) {
 		result := kav.String()
 
 		// Assert
-		if result != "{x:y}" {
-			t.Errorf("expected '{x:y}', got '%s'", result)
-		}
+		actual := args.Map{"result": result != "{x:y}"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '{x:y}', got ''", actual)
 	})
 }
 
@@ -651,15 +652,15 @@ func Test_C74_KeyAnyValuePair_Json_Serialize(t *testing.T) {
 		bytes, err := kav.Serialize()
 
 		// Assert
-		if jsonResult.HasError() {
-			t.Error("json error")
-		}
-		if err != nil {
-			t.Errorf("serialize error: %v", err)
-		}
-		if len(bytes) == 0 {
-			t.Error("empty bytes")
-		}
+		actual := args.Map{"result": jsonResult.HasError()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "json error", actual)
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "serialize error:", actual)
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty bytes", actual)
 	})
 }
 
@@ -672,9 +673,9 @@ func Test_C74_KeyAnyValuePair_SerializeMust(t *testing.T) {
 		bytes := kav.SerializeMust()
 
 		// Assert
-		if len(bytes) == 0 {
-			t.Error("expected non-empty bytes")
-		}
+		actual := args.Map{"result": len(bytes) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
 
@@ -687,9 +688,9 @@ func Test_C74_KeyAnyValuePair_Clear_Dispose(t *testing.T) {
 		kav.Clear()
 
 		// Assert
-		if kav.Key != "" || kav.Value != nil {
-			t.Error("expected cleared")
-		}
+		actual := args.Map{"result": kav.Key != "" || kav.Value != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected cleared", actual)
 	})
 }
 
@@ -713,9 +714,9 @@ func Test_C74_KeyAnyValuePair_AsJsonContractsBinder(t *testing.T) {
 		binder := kav.AsJsonContractsBinder()
 
 		// Assert
-		if binder == nil {
-			t.Error("expected non-nil binder")
-		}
+		actual := args.Map{"result": binder == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil binder", actual)
 	})
 }
 
@@ -728,9 +729,9 @@ func Test_C74_KeyAnyValuePair_AsJsoner(t *testing.T) {
 		jsoner := kav.AsJsoner()
 
 		// Assert
-		if jsoner == nil {
-			t.Error("expected non-nil jsoner")
-		}
+		actual := args.Map{"result": jsoner == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil jsoner", actual)
 	})
 }
 
@@ -743,9 +744,9 @@ func Test_C74_KeyAnyValuePair_AsJsonParseSelfInjector(t *testing.T) {
 		injector := kav.AsJsonParseSelfInjector()
 
 		// Assert
-		if injector == nil {
-			t.Error("expected non-nil injector")
-		}
+		actual := args.Map{"result": injector == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil injector", actual)
 	})
 }
 
@@ -760,12 +761,12 @@ func Test_C74_KeyAnyValuePair_ParseInjectUsingJson(t *testing.T) {
 		result, err := target.ParseInjectUsingJson(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
-		if result.Key != "k" {
-			t.Errorf("expected key 'k', got '%s'", result.Key)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+		actual = args.Map{"result": result.Key != "k"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected key 'k', got ''", actual)
 	})
 }
 
@@ -780,9 +781,9 @@ func Test_C74_KeyAnyValuePair_ParseInjectUsingJsonMust(t *testing.T) {
 		result := target.ParseInjectUsingJsonMust(jsonResult)
 
 		// Assert
-		if result.Key != "test" {
-			t.Errorf("expected 'test', got '%s'", result.Key)
-		}
+		actual := args.Map{"result": result.Key != "test"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'test', got ''", actual)
 	})
 }
 
@@ -797,9 +798,9 @@ func Test_C74_KeyAnyValuePair_JsonParseSelfInject(t *testing.T) {
 		err := target.JsonParseSelfInject(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	})
 }
 
@@ -814,9 +815,9 @@ func Test_C74_KeyValueCollection_Add_Length(t *testing.T) {
 		kvc.Add("k1", "v1").Add("k2", "v2")
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -830,9 +831,9 @@ func Test_C74_KeyValueCollection_AddIf(t *testing.T) {
 		kvc.AddIf(false, "k2", "v2")
 
 		// Assert
-		if kvc.Length() != 1 {
-			t.Errorf("expected 1, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -844,18 +845,18 @@ func Test_C74_KeyValueCollection_IsEmpty_HasAnyItem(t *testing.T) {
 		nonEmpty.Add("k", "v")
 
 		// Act & Assert
-		if !empty.IsEmpty() {
-			t.Error("expected empty")
-		}
-		if empty.HasAnyItem() {
-			t.Error("expected no items")
-		}
-		if nonEmpty.IsEmpty() {
-			t.Error("expected not empty")
-		}
-		if !nonEmpty.HasAnyItem() {
-			t.Error("expected has items")
-		}
+		actual := args.Map{"result": empty.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual = args.Map{"result": empty.HasAnyItem()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no items", actual)
+		actual = args.Map{"result": nonEmpty.IsEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
+		actual = args.Map{"result": nonEmpty.HasAnyItem()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected has items", actual)
 	})
 }
 
@@ -866,9 +867,9 @@ func Test_C74_KeyValueCollection_Count(t *testing.T) {
 		kvc.Add("a", "1")
 
 		// Act & Assert
-		if kvc.Count() != 1 {
-			t.Errorf("expected 1")
-		}
+		actual := args.Map{"result": kvc.Count() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -879,12 +880,12 @@ func Test_C74_KeyValueCollection_First_Last(t *testing.T) {
 		kvc.Add("a", "1").Add("b", "2").Add("c", "3")
 
 		// Act & Assert
-		if kvc.First().Key != "a" {
-			t.Error("First key should be 'a'")
-		}
-		if kvc.Last().Key != "c" {
-			t.Error("Last key should be 'c'")
-		}
+		actual := args.Map{"result": kvc.First().Key != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "First key should be 'a'", actual)
+		actual = args.Map{"result": kvc.Last().Key != "c"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Last key should be 'c'", actual)
 	})
 }
 
@@ -897,9 +898,9 @@ func Test_C74_KeyValueCollection_FirstOrDefault_Empty(t *testing.T) {
 		result := kvc.FirstOrDefault()
 
 		// Assert
-		if result != nil {
-			t.Error("expected nil for empty collection")
-		}
+		actual := args.Map{"result": result != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for empty collection", actual)
 	})
 }
 
@@ -912,9 +913,9 @@ func Test_C74_KeyValueCollection_LastOrDefault_Empty(t *testing.T) {
 		result := kvc.LastOrDefault()
 
 		// Assert
-		if result != nil {
-			t.Error("expected nil for empty collection")
-		}
+		actual := args.Map{"result": result != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil for empty collection", actual)
 	})
 }
 
@@ -925,18 +926,18 @@ func Test_C74_KeyValueCollection_LastIndex_HasIndex(t *testing.T) {
 		kvc.Add("a", "1").Add("b", "2")
 
 		// Act & Assert
-		if kvc.LastIndex() != 1 {
-			t.Errorf("expected 1")
-		}
-		if !kvc.HasIndex(0) {
-			t.Error("expected true for index 0")
-		}
-		if !kvc.HasIndex(1) {
-			t.Error("expected true for index 1")
-		}
-		if kvc.HasIndex(2) {
-			t.Error("expected false for index 2")
-		}
+		actual := args.Map{"result": kvc.LastIndex() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
+		actual = args.Map{"result": kvc.HasIndex(0)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for index 0", actual)
+		actual = args.Map{"result": kvc.HasIndex(1)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected true for index 1", actual)
+		actual = args.Map{"result": kvc.HasIndex(2)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected false for index 2", actual)
 	})
 }
 
@@ -947,15 +948,15 @@ func Test_C74_KeyValueCollection_HasKey_IsContains(t *testing.T) {
 		kvc.Add("host", "localhost")
 
 		// Act & Assert
-		if !kvc.HasKey("host") {
-			t.Error("expected HasKey true")
-		}
-		if kvc.HasKey("port") {
-			t.Error("expected HasKey false")
-		}
-		if !kvc.IsContains("host") {
-			t.Error("expected IsContains true")
-		}
+		actual := args.Map{"result": kvc.HasKey("host")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected HasKey true", actual)
+		actual = args.Map{"result": kvc.HasKey("port")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected HasKey false", actual)
+		actual = args.Map{"result": kvc.IsContains("host")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected IsContains true", actual)
 	})
 }
 
@@ -970,12 +971,12 @@ func Test_C74_KeyValueCollection_Get(t *testing.T) {
 		_, notFound := kvc.Get("missing")
 
 		// Assert
-		if !found || val != "8080" {
-			t.Error("expected found with val '8080'")
-		}
-		if notFound {
-			t.Error("expected not found")
-		}
+		actual := args.Map{"result": found || val != "8080"}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected found with val '8080'", actual)
+		actual = args.Map{"result": notFound}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not found", actual)
 	})
 }
 
@@ -986,12 +987,12 @@ func Test_C74_KeyValueCollection_SafeValueAt(t *testing.T) {
 		kvc.Add("a", "1").Add("b", "2")
 
 		// Act & Assert
-		if kvc.SafeValueAt(0) != "1" {
-			t.Error("expected '1'")
-		}
-		if kvc.SafeValueAt(5) != "" {
-			t.Error("expected empty for out of range")
-		}
+		actual := args.Map{"result": kvc.SafeValueAt(0) != "1"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '1'", actual)
+		actual = args.Map{"result": kvc.SafeValueAt(5) != ""}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty for out of range", actual)
 	})
 }
 
@@ -1005,9 +1006,9 @@ func Test_C74_KeyValueCollection_SafeValuesAtIndexes(t *testing.T) {
 		vals := kvc.SafeValuesAtIndexes(0, 2)
 
 		// Assert
-		if len(vals) != 2 || vals[0] != "1" || vals[1] != "3" {
-			t.Errorf("expected ['1','3'], got %v", vals)
-		}
+		actual := args.Map{"result": len(vals) != 2 || vals[0] != "1" || vals[1] != "3"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected ['1','3']", actual)
 	})
 }
 
@@ -1021,9 +1022,9 @@ func Test_C74_KeyValueCollection_Strings(t *testing.T) {
 		result := kvc.Strings()
 
 		// Assert
-		if len(result) != 1 {
-			t.Errorf("expected 1 string")
-		}
+		actual := args.Map{"result": len(result) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 string", actual)
 	})
 }
 
@@ -1036,9 +1037,9 @@ func Test_C74_KeyValueCollection_Strings_Empty(t *testing.T) {
 		result := kvc.Strings()
 
 		// Assert
-		if len(result) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": len(result) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1052,9 +1053,9 @@ func Test_C74_KeyValueCollection_StringsUsingFormat(t *testing.T) {
 		result := kvc.StringsUsingFormat("%s=%s")
 
 		// Assert
-		if len(result) != 1 || result[0] != "host=localhost" {
-			t.Errorf("expected 'host=localhost', got %v", result)
-		}
+		actual := args.Map{"result": len(result) != 1 || result[0] != "host=localhost"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'host=localhost'", actual)
 	})
 }
 
@@ -1067,9 +1068,9 @@ func Test_C74_KeyValueCollection_StringsUsingFormat_Empty(t *testing.T) {
 		result := kvc.StringsUsingFormat("%s=%s")
 
 		// Assert
-		if len(result) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": len(result) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1084,12 +1085,12 @@ func Test_C74_KeyValueCollection_AllKeys_AllValues(t *testing.T) {
 		values := kvc.AllValues()
 
 		// Assert
-		if len(keys) != 2 || keys[0] != "a" || keys[1] != "b" {
-			t.Errorf("keys mismatch: %v", keys)
-		}
-		if len(values) != 2 || values[0] != "1" || values[1] != "2" {
-			t.Errorf("values mismatch: %v", values)
-		}
+		actual := args.Map{"result": len(keys) != 2 || keys[0] != "a" || keys[1] != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "keys mismatch:", actual)
+		actual = args.Map{"result": len(values) != 2 || values[0] != "1" || values[1] != "2"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "values mismatch:", actual)
 	})
 }
 
@@ -1103,9 +1104,9 @@ func Test_C74_KeyValueCollection_AllKeysSorted(t *testing.T) {
 		keys := kvc.AllKeysSorted()
 
 		// Assert
-		if keys[0] != "a" || keys[1] != "b" || keys[2] != "c" {
-			t.Errorf("expected sorted keys, got %v", keys)
-		}
+		actual := args.Map{"result": keys[0] != "a" || keys[1] != "b" || keys[2] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected sorted keys", actual)
 	})
 }
 
@@ -1119,12 +1120,12 @@ func Test_C74_KeyValueCollection_Join_JoinKeys_JoinValues(t *testing.T) {
 		joinKeys := kvc.JoinKeys(",")
 		joinValues := kvc.JoinValues(",")
 
-		if joinKeys != "a,b" {
-			t.Errorf("expected 'a,b', got '%s'", joinKeys)
-		}
-		if joinValues != "1,2" {
-			t.Errorf("expected '1,2', got '%s'", joinValues)
-		}
+		actual := args.Map{"result": joinKeys != "a,b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
+		actual = args.Map{"result": joinValues != "1,2"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '1,2', got ''", actual)
 	})
 }
 
@@ -1140,9 +1141,9 @@ func Test_C74_KeyValueCollection_Find(t *testing.T) {
 		})
 
 		// Assert
-		if len(found) != 1 || found[0].Key != "b" {
-			t.Errorf("expected to find 'b', got %v", found)
-		}
+		actual := args.Map{"result": len(found) != 1 || found[0].Key != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected to find 'b'", actual)
 	})
 }
 
@@ -1158,9 +1159,9 @@ func Test_C74_KeyValueCollection_Find_WithBreak(t *testing.T) {
 		})
 
 		// Assert
-		if len(found) != 1 {
-			t.Errorf("expected 1 due to break, got %d", len(found))
-		}
+		actual := args.Map{"result": len(found) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 due to break", actual)
 	})
 }
 
@@ -1175,9 +1176,9 @@ func Test_C74_KeyValueCollection_Find_Empty(t *testing.T) {
 		})
 
 		// Assert
-		if len(found) != 0 {
-			t.Error("expected empty")
-		}
+		actual := args.Map{"result": len(found) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
 
@@ -1190,9 +1191,9 @@ func Test_C74_KeyValueCollection_AddStringBySplit(t *testing.T) {
 		kvc.AddStringBySplit("=", "host=localhost")
 
 		// Assert
-		if kvc.Length() != 1 {
-			t.Error("expected 1 item")
-		}
+		actual := args.Map{"result": kvc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 	})
 }
 
@@ -1205,9 +1206,9 @@ func Test_C74_KeyValueCollection_AddStringBySplitTrim(t *testing.T) {
 		kvc.AddStringBySplitTrim("=", " host = localhost ")
 
 		// Assert
-		if kvc.Length() != 1 {
-			t.Error("expected 1 item")
-		}
+		actual := args.Map{"result": kvc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 	})
 }
 
@@ -1223,9 +1224,9 @@ func Test_C74_KeyValueCollection_Adds(t *testing.T) {
 		)
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1238,9 +1239,9 @@ func Test_C74_KeyValueCollection_Adds_Empty(t *testing.T) {
 		kvc.Adds()
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1253,9 +1254,9 @@ func Test_C74_KeyValueCollection_AddMap(t *testing.T) {
 		kvc.AddMap(map[string]string{"a": "1", "b": "2"})
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1268,9 +1269,9 @@ func Test_C74_KeyValueCollection_AddMap_Nil(t *testing.T) {
 		kvc.AddMap(nil)
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1283,9 +1284,9 @@ func Test_C74_KeyValueCollection_AddHashsetMap(t *testing.T) {
 		kvc.AddHashsetMap(map[string]bool{"x": true, "y": true})
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1298,9 +1299,9 @@ func Test_C74_KeyValueCollection_AddHashsetMap_Nil(t *testing.T) {
 		kvc.AddHashsetMap(nil)
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1314,9 +1315,9 @@ func Test_C74_KeyValueCollection_AddHashset(t *testing.T) {
 		kvc.AddHashset(hs)
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1329,9 +1330,9 @@ func Test_C74_KeyValueCollection_AddHashset_Nil(t *testing.T) {
 		kvc.AddHashset(nil)
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1345,9 +1346,9 @@ func Test_C74_KeyValueCollection_AddsHashmap(t *testing.T) {
 		kvc.AddsHashmap(hm)
 
 		// Assert
-		if kvc.Length() != 1 {
-			t.Errorf("expected 1, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1360,9 +1361,9 @@ func Test_C74_KeyValueCollection_AddsHashmap_Nil(t *testing.T) {
 		kvc.AddsHashmap(nil)
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1377,9 +1378,9 @@ func Test_C74_KeyValueCollection_AddsHashmaps(t *testing.T) {
 		kvc.AddsHashmaps(hm1, hm2)
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1392,9 +1393,9 @@ func Test_C74_KeyValueCollection_AddsHashmaps_Nil(t *testing.T) {
 		kvc.AddsHashmaps()
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1409,12 +1410,12 @@ func Test_C74_KeyValueCollection_Hashmap_Map(t *testing.T) {
 		m := kvc.Map()
 
 		// Assert
-		if hm.Length() != 2 {
-			t.Errorf("expected hashmap length 2")
-		}
-		if len(m) != 2 {
-			t.Errorf("expected map length 2")
-		}
+		actual := args.Map{"result": hm.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected hashmap length 2", actual)
+		actual = args.Map{"result": len(m) != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected map length 2", actual)
 	})
 }
 
@@ -1429,15 +1430,15 @@ func Test_C74_KeyValueCollection_Json_Serialize(t *testing.T) {
 		bytes, err := kvc.Serialize()
 
 		// Assert
-		if jsonResult.HasError() {
-			t.Error("json error")
-		}
-		if err != nil {
-			t.Errorf("serialize error: %v", err)
-		}
-		if len(bytes) == 0 {
-			t.Error("empty bytes")
-		}
+		actual := args.Map{"result": jsonResult.HasError()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "json error", actual)
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "serialize error:", actual)
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "empty bytes", actual)
 	})
 }
 
@@ -1449,20 +1450,20 @@ func Test_C74_KeyValueCollection_MarshalUnmarshalJSON(t *testing.T) {
 
 		// Act
 		bytes, err := kvc.MarshalJSON()
-		if err != nil {
-			t.Fatalf("marshal error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal error:", actual)
 
 		target := corestr.New.KeyValues.Empty()
 		err = target.UnmarshalJSON(bytes)
 
 		// Assert
-		if err != nil {
-			t.Fatalf("unmarshal error: %v", err)
-		}
-		if target.Length() != 2 {
-			t.Errorf("expected 2, got %d", target.Length())
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
+		actual = args.Map{"result": target.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1478,12 +1479,12 @@ func Test_C74_KeyValueCollection_ParseInjectUsingJson(t *testing.T) {
 		result, err := target.ParseInjectUsingJson(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
-		if result.Length() < 1 {
-			t.Error("expected at least 1 item")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
+		actual = args.Map{"result": result.Length() < 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 1 item", actual)
 	})
 }
 
@@ -1493,12 +1494,12 @@ func Test_C74_KeyValueCollection_AsJsoner_AsJsonContractsBinder(t *testing.T) {
 		kvc := corestr.New.KeyValues.Empty()
 
 		// Act & Assert
-		if kvc.AsJsoner() == nil {
-			t.Error("expected non-nil jsoner")
-		}
-		if kvc.AsJsonContractsBinder() == nil {
-			t.Error("expected non-nil binder")
-		}
+		actual := args.Map{"result": kvc.AsJsoner() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil jsoner", actual)
+		actual = args.Map{"result": kvc.AsJsonContractsBinder() == nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil binder", actual)
 	})
 }
 
@@ -1511,9 +1512,9 @@ func Test_C74_KeyValueCollection_AsJsonParseSelfInjector(t *testing.T) {
 		injector := kvc.AsJsonParseSelfInjector()
 
 		// Assert
-		if injector == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": injector == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -1529,9 +1530,9 @@ func Test_C74_KeyValueCollection_JsonParseSelfInject(t *testing.T) {
 		err := target.JsonParseSelfInject(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	})
 }
 
@@ -1545,9 +1546,9 @@ func Test_C74_KeyValueCollection_Clear_Dispose(t *testing.T) {
 		kvc.Clear()
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0 after clear")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0 after clear", actual)
 	})
 }
 
@@ -1573,9 +1574,9 @@ func Test_C74_KeyValueCollection_Deserialize(t *testing.T) {
 		err := kvc.Deserialize(&target)
 
 		// Assert
-		if err != nil {
-			t.Errorf("deserialize error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "deserialize error:", actual)
 	})
 }
 
@@ -1589,9 +1590,9 @@ func Test_C74_KeyValueCollection_SerializeMust(t *testing.T) {
 		bytes := kvc.SerializeMust()
 
 		// Assert
-		if len(bytes) == 0 {
-			t.Error("expected non-empty bytes")
-		}
+		actual := args.Map{"result": len(bytes) == 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
 
@@ -1603,9 +1604,9 @@ func Test_C74_NewKeyValues_Cap(t *testing.T) {
 		kvc := corestr.New.KeyValues.Cap(5)
 
 		// Assert
-		if kvc == nil || kvc.Length() != 0 {
-			t.Error("expected empty with capacity")
-		}
+		actual := args.Map{"result": kvc == nil || kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty with capacity", actual)
 	})
 }
 
@@ -1615,9 +1616,9 @@ func Test_C74_NewKeyValues_UsingMap(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingMap(map[string]string{"a": "1", "b": "2"})
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1627,9 +1628,9 @@ func Test_C74_NewKeyValues_UsingMap_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingMap(map[string]string{})
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1641,9 +1642,9 @@ func Test_C74_NewKeyValues_UsingKeyValuePairs(t *testing.T) {
 		)
 
 		// Assert
-		if kvc.Length() != 1 {
-			t.Errorf("expected 1")
-		}
+		actual := args.Map{"result": kvc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1653,9 +1654,9 @@ func Test_C74_NewKeyValues_UsingKeyValuePairs_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValuePairs()
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1668,9 +1669,9 @@ func Test_C74_NewKeyValues_UsingKeyValueStrings(t *testing.T) {
 		)
 
 		// Assert
-		if kvc.Length() != 2 {
-			t.Errorf("expected 2, got %d", kvc.Length())
-		}
+		actual := args.Map{"result": kvc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1680,9 +1681,9 @@ func Test_C74_NewKeyValues_UsingKeyValueStrings_Empty(t *testing.T) {
 		kvc := corestr.New.KeyValues.UsingKeyValueStrings([]string{}, []string{})
 
 		// Assert
-		if kvc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": kvc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1695,15 +1696,15 @@ func Test_C74_CollOfColl_IsEmpty_HasItems(t *testing.T) {
 		nonEmpty := corestr.New.CollectionsOfCollection.SpreadStrings(false, "a", "b")
 
 		// Act & Assert
-		if !empty.IsEmpty() {
-			t.Error("expected empty")
-		}
-		if empty.HasItems() {
-			t.Error("expected no items")
-		}
-		if nonEmpty.IsEmpty() {
-			t.Error("expected not empty")
-		}
+		actual := args.Map{"result": empty.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected empty", actual)
+		actual = args.Map{"result": empty.HasItems()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected no items", actual)
+		actual = args.Map{"result": nonEmpty.IsEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
 
@@ -1713,9 +1714,9 @@ func Test_C74_CollOfColl_Length(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1731,9 +1732,9 @@ func Test_C74_CollOfColl_AllIndividualItemsLength(t *testing.T) {
 		total := coc.AllIndividualItemsLength()
 
 		// Assert
-		if total != 3 {
-			t.Errorf("expected 3, got %d", total)
-		}
+		actual := args.Map{"result": total != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1743,9 +1744,9 @@ func Test_C74_CollOfColl_AllIndividualItemsLength_Empty(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.AllIndividualItemsLength() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": coc.AllIndividualItemsLength() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1760,9 +1761,9 @@ func Test_C74_CollOfColl_Items(t *testing.T) {
 		items := coc.Items()
 
 		// Assert
-		if len(items) != 1 {
-			t.Errorf("expected 1, got %d", len(items))
-		}
+		actual := args.Map{"result": len(items) != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1778,9 +1779,9 @@ func Test_C74_CollOfColl_List(t *testing.T) {
 		list := coc.List(0)
 
 		// Assert
-		if len(list) != 3 {
-			t.Errorf("expected 3, got %d", len(list))
-		}
+		actual := args.Map{"result": len(list) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -1793,9 +1794,9 @@ func Test_C74_CollOfColl_List_Empty(t *testing.T) {
 		list := coc.List(5)
 
 		// Assert
-		if len(list) != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": len(list) != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1810,9 +1811,9 @@ func Test_C74_CollOfColl_ToCollection(t *testing.T) {
 		col := coc.ToCollection()
 
 		// Assert
-		if col.Length() != 2 {
-			t.Errorf("expected 2, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1825,9 +1826,9 @@ func Test_C74_CollOfColl_AddStrings(t *testing.T) {
 		coc.AddStrings(false, []string{"a", "b"})
 
 		// Assert
-		if coc.Length() != 1 {
-			t.Errorf("expected 1, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1840,9 +1841,9 @@ func Test_C74_CollOfColl_AddStrings_Empty(t *testing.T) {
 		coc.AddStrings(false, []string{})
 
 		// Assert
-		if coc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1855,9 +1856,9 @@ func Test_C74_CollOfColl_AddsStringsOfStrings(t *testing.T) {
 		coc.AddsStringsOfStrings(false, []string{"a"}, []string{"b", "c"})
 
 		// Assert
-		if coc.Length() != 2 {
-			t.Errorf("expected 2, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -1870,9 +1871,9 @@ func Test_C74_CollOfColl_AddsStringsOfStrings_Nil(t *testing.T) {
 		coc.AddsStringsOfStrings(false)
 
 		// Assert
-		if coc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1886,9 +1887,9 @@ func Test_C74_CollOfColl_Adds_AddCollections(t *testing.T) {
 		coc.Adds(c1)
 
 		// Assert
-		if coc.Length() != 1 {
-			t.Errorf("expected 1, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -1901,9 +1902,9 @@ func Test_C74_CollOfColl_Adds_Nil(t *testing.T) {
 		coc.AddCollections()
 
 		// Assert
-		if coc.Length() != 0 {
-			t.Error("expected 0")
-		}
+		actual := args.Map{"result": coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1917,9 +1918,9 @@ func Test_C74_CollOfColl_Add_EmptyCollection(t *testing.T) {
 		coc.Add(emptyCol)
 
 		// Assert — empty collection should be skipped
-		if coc.Length() != 0 {
-			t.Errorf("expected 0, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 0}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
 
@@ -1934,9 +1935,9 @@ func Test_C74_CollOfColl_String(t *testing.T) {
 		result := coc.String()
 
 		// Assert
-		if result == "" {
-			t.Error("expected non-empty string")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 	})
 }
 
@@ -1951,9 +1952,9 @@ func Test_C74_CollOfColl_Json_Serialize(t *testing.T) {
 		jsonResult := coc.Json()
 
 		// Assert
-		if jsonResult.HasError() {
-			t.Errorf("json error: %v", jsonResult.Error)
-		}
+		actual := args.Map{"result": jsonResult.HasError()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "json error:", actual)
 	})
 }
 
@@ -1966,17 +1967,17 @@ func Test_C74_CollOfColl_MarshalUnmarshalJSON(t *testing.T) {
 
 		// Act
 		bytes, err := coc.MarshalJSON()
-		if err != nil {
-			t.Fatalf("marshal error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal error:", actual)
 
 		target := corestr.New.CollectionsOfCollection.Empty()
 		err = target.UnmarshalJSON(bytes)
 
 		// Assert
-		if err != nil {
-			t.Fatalf("unmarshal error: %v", err)
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
 	})
 }
 
@@ -1993,9 +1994,9 @@ func Test_C74_CollOfColl_ParseInjectUsingJson(t *testing.T) {
 		_, err := target.ParseInjectUsingJson(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	})
 }
 
@@ -2005,9 +2006,9 @@ func Test_C74_CollOfColl_AsJsoner(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.AsJsoner() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc.AsJsoner() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2017,9 +2018,9 @@ func Test_C74_CollOfColl_AsJsonParseSelfInjector(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.AsJsonParseSelfInjector() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc.AsJsonParseSelfInjector() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2029,9 +2030,9 @@ func Test_C74_CollOfColl_AsJsonMarshaller(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.AsJsonMarshaller() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc.AsJsonMarshaller() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2041,9 +2042,9 @@ func Test_C74_CollOfColl_AsJsonContractsBinder(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Empty()
 
 		// Act & Assert
-		if coc.AsJsonContractsBinder() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc.AsJsonContractsBinder() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2060,9 +2061,9 @@ func Test_C74_CollOfColl_JsonParseSelfInject(t *testing.T) {
 		err := target.JsonParseSelfInject(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("unexpected error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 	})
 }
 
@@ -2074,9 +2075,9 @@ func Test_C74_NewCollOfColl_Cap(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Cap(5)
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2086,9 +2087,9 @@ func Test_C74_NewCollOfColl_StringsOfStrings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOfStrings(false, []string{"a"}, []string{"b"})
 
 		// Assert
-		if coc.Length() != 2 {
-			t.Errorf("expected 2, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
 
@@ -2098,9 +2099,9 @@ func Test_C74_NewCollOfColl_SpreadStrings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.SpreadStrings(false, "x", "y")
 
 		// Assert
-		if coc.Length() != 1 {
-			t.Errorf("expected 1, got %d", coc.Length())
-		}
+		actual := args.Map{"result": coc.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
 
@@ -2110,9 +2111,9 @@ func Test_C74_NewCollOfColl_CloneStrings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.CloneStrings([]string{"a", "b"})
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2122,9 +2123,9 @@ func Test_C74_NewCollOfColl_Strings(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.Strings([]string{"a"})
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2134,9 +2135,9 @@ func Test_C74_NewCollOfColl_StringsOption(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOption(true, 5, []string{"a"})
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2146,9 +2147,9 @@ func Test_C74_NewCollOfColl_StringsOptions(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.StringsOptions(false, 3, []string{"x"})
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -2158,8 +2159,8 @@ func Test_C74_NewCollOfColl_LenCap(t *testing.T) {
 		coc := corestr.New.CollectionsOfCollection.LenCap(0, 10)
 
 		// Assert
-		if coc == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": coc == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }

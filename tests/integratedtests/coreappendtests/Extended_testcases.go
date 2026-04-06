@@ -8,7 +8,10 @@ import (
 var appendAnyItemsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "AppendAnyItemsToString comma -- not empty",
-		ArrangeInput:  args.Map{"when": "comma joiner", "joiner": ", "},
+		ArrangeInput:  args.Map{
+			"when": "comma joiner",
+			"joiner": ", ",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -16,7 +19,10 @@ var appendAnyItemsTestCases = []coretestcases.CaseV1{
 var prependAnyItemsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "PrependAnyItemsToString comma -- not empty",
-		ArrangeInput:  args.Map{"when": "comma joiner", "joiner": ", "},
+		ArrangeInput:  args.Map{
+			"when": "comma joiner",
+			"joiner": ", ",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -24,7 +30,10 @@ var prependAnyItemsTestCases = []coretestcases.CaseV1{
 var prependAppendStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "PrependAppendAnyItemsToString -- not empty",
-		ArrangeInput:  args.Map{"when": "comma joiner", "joiner": ", "},
+		ArrangeInput:  args.Map{
+			"when": "comma joiner",
+			"joiner": ", ",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }

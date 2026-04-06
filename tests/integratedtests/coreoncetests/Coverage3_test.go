@@ -13,13 +13,18 @@ import (
 // ==========================================================================
 
 func Test_Cov3_AnyOnce_ValueStringOnly(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "hello" })
+
+	// Act
 	actual := args.Map{
 		"valueStringOnly": ao.ValueStringOnly(),
 		"safeString":      ao.SafeString(),
 		"valueStringMust": ao.ValueStringMust(),
 		"valueOnly":       ao.ValueOnly(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"valueStringOnly": ao.ValueString(),
 		"safeString":      ao.ValueString(),
@@ -30,26 +35,36 @@ func Test_Cov3_AnyOnce_ValueStringOnly(t *testing.T) {
 }
 
 func Test_Cov3_AnyOnce_ValueString_Cached(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	// Call twice to test caching path
 	first := ao.ValueString()
 	second := ao.ValueString()
+
+	// Act
 	actual := args.Map{"same": first == second}
+
+	// Assert
 	expected := args.Map{"same": true}
 	expected.ShouldBeEqual(t, 0, "AnyOnce ValueString cached returns same -- second call", actual)
 }
 
 func Test_Cov3_AnyOnce_CastFail(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	_, okStr := ao.CastValueString()
 	_, okStrings := ao.CastValueStrings()
 	_, okMap := ao.CastValueHashmapMap()
 	_, okMapAny := ao.CastValueMapStringAnyMap()
 	_, okBytes := ao.CastValueBytes()
+
+	// Act
 	actual := args.Map{
 		"okStr": okStr, "okStrings": okStrings,
 		"okMap": okMap, "okMapAny": okMapAny, "okBytes": okBytes,
 	}
+
+	// Assert
 	expected := args.Map{
 		"okStr": false, "okStrings": false,
 		"okMap": false, "okMapAny": false, "okBytes": false,
@@ -58,9 +73,14 @@ func Test_Cov3_AnyOnce_CastFail(t *testing.T) {
 }
 
 func Test_Cov3_AnyOnce_ValueString_NilReturn(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 	result := ao.ValueString()
+
+	// Act
 	actual := args.Map{"isAngelBracket": result != ""}
+
+	// Assert
 	expected := args.Map{"isAngelBracket": true}
 	expected.ShouldBeEqual(t, 0, "AnyOnce ValueString nil returns angel bracket -- nil", actual)
 }
@@ -70,8 +90,11 @@ func Test_Cov3_AnyOnce_ValueString_NilReturn(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_ErrorOnce_WithError(t *testing.T) {
+	// Arrange
 	testErr := errors.New("test error")
 	eo := coreonce.NewErrorOnce(func() error { return testErr })
+
+	// Act
 	actual := args.Map{
 		"hasError": eo.HasError(), "isEmptyError": eo.IsEmptyError(),
 		"isEmpty": eo.IsEmpty(), "hasAnyItem": eo.HasAnyItem(),
@@ -85,6 +108,8 @@ func Test_Cov3_ErrorOnce_WithError(t *testing.T) {
 		"concatNew": eo.ConcatNew("extra") != nil,
 		"concatNewStr": eo.ConcatNewString("extra") != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasError": true, "isEmptyError": false,
 		"isEmpty": false, "hasAnyItem": true,
@@ -101,12 +126,20 @@ func Test_Cov3_ErrorOnce_WithError(t *testing.T) {
 }
 
 func Test_Cov3_ErrorOnce_Value(t *testing.T) {
+	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
+
+	// Act
 	actual := args.Map{
 		"valueNil": eo.Value() == nil,
 		"execute":  eo.Execute() == nil,
 	}
-	expected := args.Map{"valueNil": true, "execute": true}
+
+	// Assert
+	expected := args.Map{
+		"valueNil": true,
+		"execute": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce Value/Execute return nil -- no error", actual)
 }
 
@@ -115,14 +148,19 @@ func Test_Cov3_ErrorOnce_Value(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_AnyErrorOnce_WithError(t *testing.T) {
+	// Arrange
 	testErr := errors.New("fail")
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return nil, testErr })
+
+	// Act
 	actual := args.Map{
 		"hasError": aeo.HasError(), "isEmptyError": aeo.IsEmptyError(),
 		"isFailed": aeo.IsFailed(), "isSuccess": aeo.IsSuccess(),
 		"isNull": aeo.IsNull(), "isEmpty": aeo.IsEmpty(),
 		"isValid": aeo.IsValid(), "isInvalid": aeo.IsInvalid(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasError": true, "isEmptyError": false,
 		"isFailed": true, "isSuccess": false,
@@ -133,24 +171,40 @@ func Test_Cov3_AnyErrorOnce_WithError(t *testing.T) {
 }
 
 func Test_Cov3_AnyErrorOnce_ValueString_Nil(t *testing.T) {
+	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return nil, nil })
 	val, err := aeo.ValueString()
-	actual := args.Map{"val": val, "hasErr": err != nil}
-	expected := args.Map{"val": "<nil>", "hasErr": false}
+
+	// Act
+	actual := args.Map{
+		"val": val,
+		"hasErr": err != nil,
+	}
+
+	// Assert
+	expected := args.Map{
+		"val": "<nil>",
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyErrorOnce ValueString nil value returns empty -- nil data", actual)
 }
 
 func Test_Cov3_AnyErrorOnce_CastFail(t *testing.T) {
+	// Arrange
 	aeo := coreonce.NewAnyErrorOnce(func() (any, error) { return 42, nil })
 	_, _, okStr := aeo.CastValueString()
 	_, _, okStrings := aeo.CastValueStrings()
 	_, _, okMap := aeo.CastValueHashmapMap()
 	_, _, okMapAny := aeo.CastValueMapStringAnyMap()
 	_, _, okBytes := aeo.CastValueBytes()
+
+	// Act
 	actual := args.Map{
 		"okStr": okStr, "okStrings": okStrings,
 		"okMap": okMap, "okMapAny": okMapAny, "okBytes": okBytes,
 	}
+
+	// Assert
 	expected := args.Map{
 		"okStr": false, "okStrings": false,
 		"okMap": false, "okMapAny": false, "okBytes": false,
@@ -163,13 +217,18 @@ func Test_Cov3_AnyErrorOnce_CastFail(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_BytesErrorOnce_WithError(t *testing.T) {
+	// Arrange
 	testErr := errors.New("bytes error")
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return nil, testErr })
+
+	// Act
 	actual := args.Map{
 		"hasError": beo.HasError(), "isEmpty": beo.IsEmpty(),
 		"isValid": beo.IsValid(), "isInvalid": beo.IsInvalid(),
 		"length": beo.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasError": true, "isEmpty": false,
 		"isValid": false, "isInvalid": true,
@@ -179,11 +238,16 @@ func Test_Cov3_BytesErrorOnce_WithError(t *testing.T) {
 }
 
 func Test_Cov3_BytesErrorOnce_Valid(t *testing.T) {
+	// Arrange
 	beo := coreonce.NewBytesErrorOnce(func() ([]byte, error) { return []byte("hi"), nil })
+
+	// Act
 	actual := args.Map{
 		"hasError": beo.HasError(), "isEmpty": beo.IsEmpty(),
 		"string": beo.String(), "length": beo.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasError": false, "isEmpty": false,
 		"string": "hi", "length": 2,
@@ -196,7 +260,10 @@ func Test_Cov3_BytesErrorOnce_Valid(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_StringOnce_IsEqual_False(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "hello" })
+
+	// Act
 	actual := args.Map{
 		"notEqual":     so.IsEqual("world"),
 		"noPrefix":     so.HasPrefix("xyz"),
@@ -205,6 +272,8 @@ func Test_Cov3_StringOnce_IsEqual_False(t *testing.T) {
 		"notStartWith": so.IsStartsWith("xyz"),
 		"notEndWith":   so.IsEndsWith("xyz"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEqual": false, "noPrefix": false, "noSuffix": false,
 		"noContains": false, "notStartWith": false, "notEndWith": false,
@@ -217,12 +286,17 @@ func Test_Cov3_StringOnce_IsEqual_False(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_IntegerOnce_Zero(t *testing.T) {
+	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 0 })
+
+	// Act
 	actual := args.Map{
 		"isEmpty": io.IsEmpty(), "isZero": io.IsZero(),
 		"isAboveZero": io.IsAboveZero(), "isAboveEqualZero": io.IsAboveEqualZero(),
 		"isNegative": io.IsNegative(), "isPositive": io.IsPositive(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty": true, "isZero": true,
 		"isAboveZero": false, "isAboveEqualZero": true,
@@ -236,11 +310,16 @@ func Test_Cov3_IntegerOnce_Zero(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_ByteOnce_Zero(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewByteOnce(func() byte { return 0 })
+
+	// Act
 	actual := args.Map{
 		"isEmpty": bo.IsEmpty(), "isZero": bo.IsZero(),
 		"isNegative": bo.IsNegative(), "isPositive": bo.IsPositive(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty": true, "isZero": true,
 		"isNegative": false, "isPositive": false,
@@ -253,8 +332,13 @@ func Test_Cov3_ByteOnce_Zero(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_IntegersOnce_Empty(t *testing.T) {
+	// Arrange
 	io := coreonce.NewIntegersOnce(func() []int { return []int{} })
+
+	// Act
 	actual := args.Map{"isEmpty": io.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "IntegersOnce empty returns true -- empty slice", actual)
 }
@@ -264,12 +348,21 @@ func Test_Cov3_IntegersOnce_Empty(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_StringsOnce_Empty(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringsOnce(func() []string { return []string{} })
+
+	// Act
 	actual := args.Map{
 		"isEmpty": so.IsEmpty(), "hasAny": so.HasAnyItem(),
 		"length": so.Length(),
 	}
-	expected := args.Map{"isEmpty": true, "hasAny": false, "length": 0}
+
+	// Assert
+	expected := args.Map{
+		"isEmpty": true,
+		"hasAny": false,
+		"length": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsOnce empty returns expected -- empty slice", actual)
 }
 
@@ -278,20 +371,34 @@ func Test_Cov3_StringsOnce_Empty(t *testing.T) {
 // ==========================================================================
 
 func Test_Cov3_MapStringStringOnce_Empty(t *testing.T) {
+	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
+
+	// Act
 	actual := args.Map{
 		"isEmpty": mso.IsEmpty(), "length": mso.Length(),
 		"isMissing": mso.IsMissing("any"),
 	}
-	expected := args.Map{"isEmpty": true, "length": 0, "isMissing": true}
+
+	// Assert
+	expected := args.Map{
+		"isEmpty": true,
+		"length": 0,
+		"isMissing": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce empty returns expected -- empty map", actual)
 }
 
 func Test_Cov3_MapStringStringOnce_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	mso := coreonce.NewMapStringStringOnce(func() map[string]string { return map[string]string{} })
 	mb, _ := mso.MarshalJSON()
 	err := mso.UnmarshalJSON(mb)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": false}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce UnmarshalJSON returns no error -- valid", actual)
 }

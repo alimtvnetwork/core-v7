@@ -11,18 +11,22 @@ import (
 // ── CaseV1 basic getters ──
 
 func Test_Cov2_CaseV1_Input(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "test title",
 		ArrangeInput:  "input",
 		ExpectedInput: "expected",
 	}
 
+	// Act
 	actual := args.Map{
 		"input":     c.Input(),
 		"expected":  c.Expected(),
 		"title":     c.CaseTitle(),
 		"typeName":  c.ArrangeTypeName(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"input":     "input",
 		"expected":  "expected",
@@ -33,16 +37,20 @@ func Test_Cov2_CaseV1_Input(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_ExpectedLines_String(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		ExpectedInput: "hello returns correct value -- with args",
 	}
 
 	lines := c.ExpectedLines()
 
+	// Act
 	actual := args.Map{
 		"len":   len(lines),
 		"first": lines[0],
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":   1,
 		"first": "hello returns correct value -- with args",
@@ -51,15 +59,19 @@ func Test_Cov2_CaseV1_ExpectedLines_String(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_ExpectedLines_Slice(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		ExpectedInput: []string{"a", "b"},
 	}
 
 	lines := c.ExpectedLines()
 
+	// Act
 	actual := args.Map{
 		"len": len(lines),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 2,
 	}
@@ -67,11 +79,15 @@ func Test_Cov2_CaseV1_ExpectedLines_Slice(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_SetActual(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{Title: "test", ActualInput: "result"}
 
+	// Act
 	actual := args.Map{
 		"actual": c.Actual(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"actual": "result",
 	}
@@ -79,12 +95,16 @@ func Test_Cov2_CaseV1_SetActual(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_AsSimpleTestCaseWrapper(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{Title: "test"}
 	wrapper := c.AsSimpleTestCaseWrapper()
 
+	// Act
 	actual := args.Map{
 		"notNil": wrapper != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil": true,
 	}
@@ -99,6 +119,7 @@ func Test_Cov2_CaseV1_ShouldBeEqual(t *testing.T) {
 		ExpectedInput: "hello returns correct value -- with args",
 	}
 
+	// Assert
 	c.ShouldBeEqual(t, 0, "hello returns correct value -- with args")
 }
 
@@ -108,6 +129,7 @@ func Test_Cov2_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 		ExpectedInput: "hello returns correct value -- with args",
 	}
 
+	// Assert
 	c.ShouldBeEqualFirst(t, "hello returns correct value -- with args")
 }
 
@@ -148,49 +170,69 @@ func Test_Cov2_CaseV1_ShouldBeSortedEqualFirst(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_ShouldContains(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "ShouldContains test",
 		ExpectedInput: "hello",
 	}
 
 	err := c.VerifyError(0, stringcompareas.Contains, "hello world")
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "ShouldContains passes -- hello in hello world", actual)
 }
 
 func Test_Cov2_CaseV1_ShouldContainsFirst(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "ShouldContainsFirst test",
 		ExpectedInput: "hello",
 	}
 
 	err := c.VerifyError(0, stringcompareas.Contains, "hello world")
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "ShouldContainsFirst passes -- hello in hello world", actual)
 }
 
 func Test_Cov2_CaseV1_ShouldStartsWith(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "ShouldStartsWith test",
 		ExpectedInput: "hello",
 	}
 
 	err := c.VerifyError(0, stringcompareas.StartsWith, "hello world")
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "ShouldStartsWith passes -- hello starts hello world", actual)
 }
 
 func Test_Cov2_CaseV1_ShouldStartsWithFirst(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "ShouldStartsWithFirst test",
 		ExpectedInput: "hello",
 	}
 
 	err := c.VerifyError(0, stringcompareas.StartsWith, "hello world")
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "ShouldStartsWithFirst passes -- hello starts hello world", actual)
 }
@@ -234,6 +276,7 @@ func Test_Cov2_CaseV1_ShouldBeNotEqualFirst(t *testing.T) {
 // ── CaseV1 VerifyAll / VerifyError ──
 
 func Test_Cov2_CaseV1_VerifyAllEqual(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "VerifyAllEqual test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -241,9 +284,12 @@ func Test_Cov2_CaseV1_VerifyAllEqual(t *testing.T) {
 
 	err := c.VerifyAllEqual(0, "hello returns correct value -- with args")
 
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 	}
@@ -251,6 +297,7 @@ func Test_Cov2_CaseV1_VerifyAllEqual(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_VerifyError(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "VerifyError test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -258,9 +305,12 @@ func Test_Cov2_CaseV1_VerifyError(t *testing.T) {
 
 	err := c.VerifyError(0, stringcompareas.Equal, "hello returns correct value -- with args")
 
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 	}
@@ -268,6 +318,7 @@ func Test_Cov2_CaseV1_VerifyError(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_VerifyFirst(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "VerifyFirst test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -275,9 +326,12 @@ func Test_Cov2_CaseV1_VerifyFirst(t *testing.T) {
 
 	err := c.VerifyFirst(0, stringcompareas.Equal, []string{"hello returns correct value -- with args"})
 
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 	}
@@ -285,6 +339,7 @@ func Test_Cov2_CaseV1_VerifyFirst(t *testing.T) {
 }
 
 func Test_Cov2_CaseV1_SliceValidator(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "SliceValidator test",
 		ExpectedInput: "hello returns correct value -- with args",
@@ -292,10 +347,13 @@ func Test_Cov2_CaseV1_SliceValidator(t *testing.T) {
 
 	sv := c.SliceValidator(stringcompareas.Equal, []string{"hello returns correct value -- with args"})
 
+	// Act
 	actual := args.Map{
 		"hasActual":   len(sv.ActualLines) > 0,
 		"hasExpected": len(sv.ExpectedLines) > 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasActual":   true,
 		"hasExpected": true,
@@ -311,6 +369,7 @@ func Test_Cov2_CaseV1_ShouldBeEqualMap(t *testing.T) {
 		ExpectedInput: args.Map{"key": "value"},
 	}
 
+	// Assert
 	c.ShouldBeEqualMap(t, 0, args.Map{"key": "value"})
 }
 
@@ -320,19 +379,24 @@ func Test_Cov2_CaseV1_ShouldBeEqualMapFirst(t *testing.T) {
 		ExpectedInput: args.Map{"key": "value"},
 	}
 
+	// Assert
 	c.ShouldBeEqualMapFirst(t, args.Map{"key": "value"})
 }
 
 func Test_Cov2_CaseV1_ExpectedAsMap(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		ExpectedInput: args.Map{"key": "value"},
 	}
 
 	m := c.ExpectedAsMap()
 
+	// Act
 	actual := args.Map{
 		"len": len(m),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 1,
 	}
@@ -342,15 +406,19 @@ func Test_Cov2_CaseV1_ExpectedAsMap(t *testing.T) {
 // ── GenericGherkins CompareWith ──
 
 func Test_Cov2_GenericGherkins_CompareWith_Equal(t *testing.T) {
+	// Arrange
 	g1 := &coretestcases.StringBoolGherkins{Title: "t", Feature: "f", When: "w"}
 	g2 := &coretestcases.StringBoolGherkins{Title: "t", Feature: "f", When: "w"}
 
 	isEqual, diff := g1.CompareWith(g2)
 
+	// Act
 	actual := args.Map{
 		"isEqual":   isEqual,
 		"diffEmpty": diff == "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual":   true,
 		"diffEmpty": true,
@@ -359,15 +427,19 @@ func Test_Cov2_GenericGherkins_CompareWith_Equal(t *testing.T) {
 }
 
 func Test_Cov2_GenericGherkins_CompareWith_Diff(t *testing.T) {
+	// Arrange
 	g1 := &coretestcases.StringBoolGherkins{Title: "a"}
 	g2 := &coretestcases.StringBoolGherkins{Title: "b"}
 
 	isEqual, diff := g1.CompareWith(g2)
 
+	// Act
 	actual := args.Map{
 		"isEqual":    isEqual,
 		"hasDiff":    diff != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual":    false,
 		"hasDiff":    true,
@@ -376,13 +448,17 @@ func Test_Cov2_GenericGherkins_CompareWith_Diff(t *testing.T) {
 }
 
 func Test_Cov2_GenericGherkins_CompareWith_BothNil(t *testing.T) {
+	// Arrange
 	var g1, g2 *coretestcases.StringBoolGherkins
 
 	isEqual, _ := g1.CompareWith(g2)
 
+	// Act
 	actual := args.Map{
 		"isEqual": isEqual,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual": true,
 	}
@@ -390,15 +466,19 @@ func Test_Cov2_GenericGherkins_CompareWith_BothNil(t *testing.T) {
 }
 
 func Test_Cov2_GenericGherkins_CompareWith_OneNil(t *testing.T) {
+	// Arrange
 	g1 := &coretestcases.StringBoolGherkins{Title: "a"}
 	var g2 *coretestcases.StringBoolGherkins
 
 	isEqual, diff := g1.CompareWith(g2)
 
+	// Act
 	actual := args.Map{
 		"isEqual": isEqual,
 		"hasDiff": diff != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual": false,
 		"hasDiff": true,
@@ -429,6 +509,7 @@ func Test_Cov2_GenericGherkins_ShouldMatchExpectedFirst(t *testing.T) {
 // ── GenericGherkins TypedWrapper ──
 
 func Test_Cov2_GenericGherkins_TypedWrapper(t *testing.T) {
+	// Arrange
 	g := &coretestcases.StringBoolGherkins{
 		Title:    "wrapper",
 		Input:    "input",
@@ -437,6 +518,7 @@ func Test_Cov2_GenericGherkins_TypedWrapper(t *testing.T) {
 
 	g.SetTypedActual(false)
 
+	// Act
 	actual := args.Map{
 		"caseTitle":    g.CaseTitle(),
 		"typedInput":   g.TypedInput(),
@@ -444,6 +526,8 @@ func Test_Cov2_GenericGherkins_TypedWrapper(t *testing.T) {
 		"typedActual":  g.TypedActual(),
 		"wrapperNotNil": g.AsTypedTestCaseWrapper() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"caseTitle":    "wrapper",
 		"typedInput":   "input",
@@ -457,15 +541,19 @@ func Test_Cov2_GenericGherkins_TypedWrapper(t *testing.T) {
 // ── CaseNilSafe ──
 
 func Test_Cov2_CaseNilSafe_CaseTitle_Empty(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseNilSafe{
 		Func: (*testing.T).Name,
 	}
 
 	title := c.CaseTitle()
 
+	// Act
 	actual := args.Map{
 		"hasTitle": title != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasTitle": true,
 	}
@@ -473,15 +561,19 @@ func Test_Cov2_CaseNilSafe_CaseTitle_Empty(t *testing.T) {
 }
 
 func Test_Cov2_CaseNilSafe_MethodName(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseNilSafe{
 		Title: "explicit title",
 		Func:  (*testing.T).Name,
 	}
 
+	// Act
 	actual := args.Map{
 		"title":      c.CaseTitle(),
 		"methodName": c.MethodName() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"title":      "explicit title",
 		"methodName": true,

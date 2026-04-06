@@ -1022,7 +1022,6 @@ func (it *Hashset) ListPtrSortedDsc() []string {
 	return *stringslice.InPlaceReverse(&list)
 }
 
-// Deprecated: Use List instead.
 func (it *Hashset) ListPtr() []string {
 	return it.List()
 }

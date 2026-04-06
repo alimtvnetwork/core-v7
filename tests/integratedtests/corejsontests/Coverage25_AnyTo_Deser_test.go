@@ -6,13 +6,21 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── anyTo methods ──
 
 func Test_C25_AnyTo_SerializedJsonResult_Nil(t *testing.T) {
+	// Arrange
 	r := corejson.AnyTo.SerializedJsonResult(nil)
-	if r.Error == nil { t.Fatal("expected error for nil") }
+
+	// Act
+	actual := args.Map{"result": r.Error == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_C25_AnyTo_SerializedJsonResult_Result(t *testing.T) {
@@ -43,9 +51,16 @@ func Test_C25_AnyTo_SerializedJsonResult_Error(t *testing.T) {
 }
 
 func Test_C25_AnyTo_SerializedJsonResult_EmptyError(t *testing.T) {
+	// Arrange
 	var e error
 	out := corejson.AnyTo.SerializedJsonResult(e)
-	if out.Error == nil { t.Fatal("expected error for nil") }
+
+	// Act
+	actual := args.Map{"result": out.Error == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_C25_AnyTo_SerializedJsonResult_Any(t *testing.T) {
@@ -60,43 +75,99 @@ func Test_C25_AnyTo_SerializedRaw(t *testing.T) {
 }
 
 func Test_C25_AnyTo_SerializedString(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.SerializedString("hello")
-	if err != nil || s == "" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_SerializedString_Error(t *testing.T) {
+	// Arrange
 	_, err := corejson.AnyTo.SerializedString(make(chan int))
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_AnyTo_SerializedSafeString(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SerializedSafeString("hello")
-	if s == "" { t.Fatal("expected non-empty") }
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C25_AnyTo_SerializedSafeString_Error(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SerializedSafeString(make(chan int))
-	if s != "" { t.Fatal("expected empty for error") }
+
+	// Act
+	actual := args.Map{"result": s != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for error", actual)
 }
 
 func Test_C25_AnyTo_SerializedStringMust(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SerializedStringMust("hello")
-	if s == "" { t.Fatal("expected non-empty") }
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C25_AnyTo_SafeJsonString(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SafeJsonString("hello")
-	if s == "" { t.Fatal("expected non-empty") }
+
+	// Act
+	actual := args.Map{"result": s == ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_String(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
-	if err != nil || s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":"b"}`))
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	_ = s
 }
 
@@ -108,9 +179,16 @@ func Test_C25_AnyTo_PrettyStringWithError_Result(t *testing.T) {
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_ResultWithErr(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Create([]byte(`"x"`), errors.New("e"), "t")
 	_, err := corejson.AnyTo.PrettyStringWithError(r)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
@@ -120,9 +198,16 @@ func Test_C25_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_ResultPtrWithErr(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Ptr([]byte(`"x"`), errors.New("e"), "t")
 	_, err := corejson.AnyTo.PrettyStringWithError(r)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_AnyTo_PrettyStringWithError_Any(t *testing.T) {
@@ -132,8 +217,15 @@ func Test_C25_AnyTo_PrettyStringWithError_Any(t *testing.T) {
 }
 
 func Test_C25_AnyTo_SafeJsonPrettyString_String(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SafeJsonPrettyString("hello")
-	if s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_SafeJsonPrettyString_Bytes(t *testing.T) {
@@ -159,8 +251,15 @@ func Test_C25_AnyTo_SafeJsonPrettyString_Any(t *testing.T) {
 }
 
 func Test_C25_AnyTo_JsonString_String(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.JsonString("hello")
-	if s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_JsonString_Bytes(t *testing.T) {
@@ -186,8 +285,15 @@ func Test_C25_AnyTo_JsonString_Any(t *testing.T) {
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_String(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr("hello")
-	if err != nil || s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_Bytes(t *testing.T) {
@@ -204,9 +310,16 @@ func Test_C25_AnyTo_JsonStringWithErr_Result(t *testing.T) {
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_ResultWithErr(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Create([]byte(`"x"`), errors.New("e"), "")
 	_, err := corejson.AnyTo.JsonStringWithErr(r)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_ResultPtr(t *testing.T) {
@@ -215,9 +328,16 @@ func Test_C25_AnyTo_JsonStringWithErr_ResultPtr(t *testing.T) {
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_ResultPtrWithErr(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Ptr([]byte(`"x"`), errors.New("e"), "")
 	_, err := corejson.AnyTo.JsonStringWithErr(r)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_AnyTo_JsonStringWithErr_Any(t *testing.T) {
@@ -225,8 +345,15 @@ func Test_C25_AnyTo_JsonStringWithErr_Any(t *testing.T) {
 }
 
 func Test_C25_AnyTo_JsonStringMust(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.JsonStringMust("hello")
-	if s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_AnyTo_JsonStringMust_Panic(t *testing.T) {
@@ -264,9 +391,16 @@ func Test_C25_Deser_ApplyMust_Panic(t *testing.T) {
 }
 
 func Test_C25_Deser_FromString(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.FromString(`"hello"`, &s)
-	if err != nil || s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_Deser_FromStringMust(t *testing.T) {
@@ -287,26 +421,54 @@ func Test_C25_Deser_FromTo(t *testing.T) {
 }
 
 func Test_C25_Deser_MapAnyToPointer_SkipEmpty(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.MapAnyToPointer(true, map[string]any{}, &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_MapAnyToPointer_Valid(t *testing.T) {
+	// Arrange
 	var m map[string]string
 	err := corejson.Deserialize.MapAnyToPointer(false, map[string]any{"k": "v"}, &m)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesIf_Skip(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingBytesIf(false, nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesIf_Do(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesIf(true, []byte(`"hello"`), &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesMust(t *testing.T) {
@@ -315,25 +477,53 @@ func Test_C25_Deser_UsingBytesMust(t *testing.T) {
 }
 
 func Test_C25_Deser_UsingBytesPointer_Nil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingBytesPointer(nil, nil)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_Deser_UsingBytesPointer_Valid(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointer([]byte(`"hello"`), &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesPointerIf_Skip(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingBytesPointerIf(false, nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesPointerIf_Do(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingBytesPointerIf(true, []byte(`"hello"`), &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingBytesPointerMust(t *testing.T) {
@@ -355,63 +545,140 @@ func Test_C25_Deser_UsingSerializerTo(t *testing.T) {
 }
 
 func Test_C25_Deser_UsingSerializerFuncTo(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.Deserialize.UsingSerializerFuncTo(func() ([]byte, error) {
 		return json.Marshal("test")
 	}, &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingDeserializerToOption_SkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingDeserializerToOption(true, nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingDeserializerToOption_NotSkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingDeserializerToOption(false, nil, nil)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_Deser_UsingDeserializerDefined_Nil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingDeserializerDefined(nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingDeserializerFuncDefined_Nil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingDeserializerFuncDefined(nil, nil)
-	if err == nil { t.Fatal("expected error for nil func") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil func", actual)
 }
 
 func Test_C25_Deser_UsingDeserializerFuncDefined_Valid(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingDeserializerFuncDefined(func(toPtr any) error {
 		return nil
 	}, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingJsonerToAny_SkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingJsonerToAny(true, nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingJsonerToAny_NotSkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingJsonerToAny(false, nil, nil)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_Deser_UsingJsonerToAnyMust_SkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingJsonerToAnyMust(true, nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingJsonerToAnyMust_NotSkipNil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingJsonerToAnyMust(false, nil, nil)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C25_Deser_UsingError_Nil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingError(nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingError_Valid(t *testing.T) {
@@ -421,8 +688,15 @@ func Test_C25_Deser_UsingError_Valid(t *testing.T) {
 }
 
 func Test_C25_Deser_UsingErrorWhichJsonResult_Nil(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingErrorWhichJsonResult(nil, nil)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_Deser_UsingErrorWhichJsonResult_Valid(t *testing.T) {
@@ -435,33 +709,75 @@ func Test_C25_Deser_UsingErrorWhichJsonResult_Valid(t *testing.T) {
 // ── deserializeFromBytesTo ──
 
 func Test_C25_BytesTo_Integer(t *testing.T) {
+	// Arrange
 	i, err := corejson.Deserialize.BytesTo.Integer([]byte(`42`))
-	if err != nil || i != 42 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || i != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_IntegerMust(t *testing.T) {
+	// Arrange
 	i := corejson.Deserialize.BytesTo.IntegerMust([]byte(`42`))
-	if i != 42 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": i != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_Integer64(t *testing.T) {
+	// Arrange
 	i, err := corejson.Deserialize.BytesTo.Integer64([]byte(`42`))
-	if err != nil || i != 42 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || i != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_Integer64Must(t *testing.T) {
+	// Arrange
 	i := corejson.Deserialize.BytesTo.Integer64Must([]byte(`42`))
-	if i != 42 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": i != 42}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_Integers(t *testing.T) {
+	// Arrange
 	ints, err := corejson.Deserialize.BytesTo.Integers([]byte(`[1,2,3]`))
-	if err != nil || len(ints) != 3 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || len(ints) != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_IntegersMust(t *testing.T) {
+	// Arrange
 	ints := corejson.Deserialize.BytesTo.IntegersMust([]byte(`[1,2]`))
-	if len(ints) != 2 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": len(ints) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_IntegersMust_Panic(t *testing.T) {
@@ -470,8 +786,15 @@ func Test_C25_BytesTo_IntegersMust_Panic(t *testing.T) {
 }
 
 func Test_C25_BytesTo_StringMust(t *testing.T) {
+	// Arrange
 	s := corejson.Deserialize.BytesTo.StringMust([]byte(`"hello"`))
-	if s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_StringMust_Panic(t *testing.T) {
@@ -480,8 +803,15 @@ func Test_C25_BytesTo_StringMust_Panic(t *testing.T) {
 }
 
 func Test_C25_BytesTo_MapAnyItem(t *testing.T) {
+	// Arrange
 	m, err := corejson.Deserialize.BytesTo.MapAnyItem([]byte(`{"a":"b"}`))
-	if err != nil || m["a"] != "b" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || m["a"] != "b"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_MapAnyItemMust(t *testing.T) {
@@ -490,8 +820,15 @@ func Test_C25_BytesTo_MapAnyItemMust(t *testing.T) {
 }
 
 func Test_C25_BytesTo_MapStringString(t *testing.T) {
+	// Arrange
 	m, err := corejson.Deserialize.BytesTo.MapStringString([]byte(`{"a":"b"}`))
-	if err != nil || m["a"] != "b" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || m["a"] != "b"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_BytesTo_MapStringStringMust(t *testing.T) {
@@ -745,15 +1082,29 @@ func Test_C25_CastAny_OrDeserializeTo(t *testing.T) {
 }
 
 func Test_C25_CastAny_FromToOption_Bytes(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.CastAny.FromToOption(false, []byte(`"hello"`), &s)
-	if err != nil || s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C25_CastAny_FromToOption_String(t *testing.T) {
+	// Arrange
 	var s string
 	err := corejson.CastAny.FromToOption(false, `"hello"`, &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_CastAny_FromToOption_Error(t *testing.T) {
@@ -763,23 +1114,44 @@ func Test_C25_CastAny_FromToOption_Error(t *testing.T) {
 }
 
 func Test_C25_CastAny_FromToOption_NilError(t *testing.T) {
+	// Arrange
 	var e error
 	var s string
 	err := corejson.CastAny.FromToOption(false, e, &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_CastAny_FromToOption_SerializerFunc(t *testing.T) {
+	// Arrange
 	var s string
 	f := func() ([]byte, error) { return json.Marshal("hello") }
 	err := corejson.CastAny.FromToOption(false, f, &s)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_CastAny_FromToOption_Any(t *testing.T) {
+	// Arrange
 	var i int
 	err := corejson.CastAny.FromToOption(false, 42, &i)
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C25_CastAny_reflectionCasting_NilFrom(t *testing.T) {

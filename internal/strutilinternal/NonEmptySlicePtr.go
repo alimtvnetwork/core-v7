@@ -1,6 +1,5 @@
 package strutilinternal
 
-// Deprecated: Use NonEmptySlice instead.
 func NonEmptySlicePtr(slice []string) []string {
 	length := len(slice)
 

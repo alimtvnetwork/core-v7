@@ -15,6 +15,7 @@ import (
 
 func Test_NilLazyRegex_NilSafe(t *testing.T) {
 	for caseIndex, tc := range lazyRegexNilReceiverTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }
@@ -106,6 +107,7 @@ func Test_EmptyPattern_Compile_ReturnsError(t *testing.T) {
 // =============================================================================
 
 func Test_InvalidPattern_ConcurrentAccess(t *testing.T) {
+	// Arrange
 	invalidPatterns := []string{"[bad", "(unclosed", "*invalid", "(?P<>bad)"}
 	goroutineCount := 50
 	wg := sync.WaitGroup{}
@@ -142,11 +144,18 @@ func Test_InvalidPattern_ConcurrentAccess(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+
+	// Act
+		actual := args.Map{"error": errMsg}
+
+	// Assert
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
 func Test_InvalidPattern_ConcurrentCompileError(t *testing.T) {
+	// Arrange
 	pattern := "[broken"
 	goroutineCount := 50
 	wg := sync.WaitGroup{}
@@ -178,11 +187,18 @@ func Test_InvalidPattern_ConcurrentCompileError(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+
+	// Act
+		actual := args.Map{"error": errMsg}
+
+	// Assert
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
 func Test_MixedValidInvalid_ConcurrentAccess(t *testing.T) {
+	// Arrange
 	patterns := []string{`\d+`, "[bad", `[a-z]+`, "(unclosed"}
 	goroutineCount := 80
 	wg := sync.WaitGroup{}
@@ -213,6 +229,12 @@ func Test_MixedValidInvalid_ConcurrentAccess(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+
+	// Act
+		actual := args.Map{"error": errMsg}
+
+	// Assert
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }

@@ -62,21 +62,33 @@ var extLeftRightTestCases = []coretestcases.CaseV1{
 			"left":  "key",
 			"right": "value",
 		},
-		ExpectedInput: args.Map{"left": "key", "right": "value", "isValid": "true"},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+			"isValid": "true",
+		},
 	},
 	{
 		Title: "LeftRight from single-element slice",
 		ArrangeInput: args.Map{
 			"slice": []string{"only"},
 		},
-		ExpectedInput: args.Map{"left": "only", "right": "", "isValid": "false"},
+		ExpectedInput: args.Map{
+			"left": "only",
+			"right": "",
+			"isValid": "false",
+		},
 	},
 	{
 		Title: "LeftRight from two-element slice",
 		ArrangeInput: args.Map{
 			"slice": []string{"first", "second"},
 		},
-		ExpectedInput: args.Map{"left": "first", "right": "second", "isValid": "true"},
+		ExpectedInput: args.Map{
+			"left": "first",
+			"right": "second",
+			"isValid": "true",
+		},
 	},
 }
 
@@ -129,7 +141,10 @@ var extValidValueTestCases = []coretestcases.CaseV1{
 			"value":   "hello",
 			"isValid": true,
 		},
-		ExpectedInput: args.Map{"value": "hello", "isValid": "true"},
+		ExpectedInput: args.Map{
+			"value": "hello",
+			"isValid": "true",
+		},
 	},
 	{
 		Title: "ValidValue invalid",
@@ -137,6 +152,9 @@ var extValidValueTestCases = []coretestcases.CaseV1{
 			"value":   "",
 			"isValid": false,
 		},
-		ExpectedInput: args.Map{"value": "", "isValid": "false"},
+		ExpectedInput: args.Map{
+			"value": "",
+			"isValid": "false",
+		},
 	},
 }

@@ -20,8 +20,14 @@ func Test_Cov3_RemoveDirIf_ExistingDir(t *testing.T) {
 	err := pathinternal.RemoveDirIf(true, dir, "test")
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "removed": !pathinternal.IsPathExists(dir)}
-	expected := args.Map{"noErr": true, "removed": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"removed": !pathinternal.IsPathExists(dir),
+	}
+	expected := args.Map{
+		"noErr": true,
+		"removed": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveDirIf returns correct value -- existing dir", actual)
 }
 

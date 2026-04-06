@@ -6,11 +6,13 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── newBytesCollectionCreator ──
 
 func Test_C26_NBC_Empty(t *testing.T) { _ = corejson.NewBytesCollection.Empty() }
+	// Arrange
 func Test_C26_NBC_UsingCap(t *testing.T) { _ = corejson.NewBytesCollection.UsingCap(5) }
 
 func Test_C26_NBC_UnmarshalUsingBytes(t *testing.T) {
@@ -23,12 +25,20 @@ func Test_C26_NBC_UnmarshalUsingBytes(t *testing.T) {
 
 func Test_C26_NBC_DeserializeUsingBytes_Error(t *testing.T) {
 	_, err := corejson.NewBytesCollection.DeserializeUsingBytes([]byte(`invalid`))
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NBC_DeserializeUsingResult_HasIssue(t *testing.T) {
 	_, err := corejson.NewBytesCollection.DeserializeUsingResult(&corejson.Result{})
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NBC_DeserializeUsingResult_Valid(t *testing.T) {
@@ -40,27 +50,37 @@ func Test_C26_NBC_DeserializeUsingResult_Valid(t *testing.T) {
 
 func Test_C26_NBC_AnyItems(t *testing.T) {
 	bc, err := corejson.NewBytesCollection.AnyItems("a", "b")
-	if err != nil || bc.Length() != 2 { t.Fatal("unexpected") }
+	actual := args.Map{"result": err != nil || bc.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C26_NBC_AnyItems_Error(t *testing.T) {
 	_, err := corejson.NewBytesCollection.AnyItems(make(chan int))
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NBC_JsonersPlusCap_Empty(t *testing.T) {
 	bc := corejson.NewBytesCollection.JsonersPlusCap(true, 0)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": bc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NBC_Jsoners(t *testing.T) {
 	bc := corejson.NewBytesCollection.Jsoners()
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": bc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NBC_Serializers_Empty(t *testing.T) {
 	bc := corejson.NewBytesCollection.Serializers()
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": bc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ── newResultsCollectionCreator ──
@@ -77,22 +97,30 @@ func Test_C26_NRC_UnmarshalUsingBytes(t *testing.T) {
 
 func Test_C26_NRC_DeserializeUsingBytes_Error(t *testing.T) {
 	_, err := corejson.NewResultsCollection.DeserializeUsingBytes([]byte(`invalid`))
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NRC_DeserializeUsingResult_HasIssue(t *testing.T) {
 	_, err := corejson.NewResultsCollection.DeserializeUsingResult(&corejson.Result{})
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NRC_AnyItems(t *testing.T) {
 	rc := corejson.NewResultsCollection.AnyItems("a", "b")
-	if rc.Length() != 2 { t.Fatal("unexpected") }
+	actual := args.Map{"result": rc.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C26_NRC_AnyItemsPlusCap_Empty(t *testing.T) {
 	rc := corejson.NewResultsCollection.AnyItemsPlusCap(5)
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NRC_AnyItemsPlusCap_Valid(t *testing.T) {
@@ -102,7 +130,9 @@ func Test_C26_NRC_AnyItemsPlusCap_Valid(t *testing.T) {
 
 func Test_C26_NRC_UsingJsonersOption_Nil(t *testing.T) {
 	rc := corejson.NewResultsCollection.UsingJsonersOption(true, 0, nil)
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NRC_UsingJsonersNonNull(t *testing.T) {
@@ -161,12 +191,16 @@ func Test_C26_NRC_UsingResults(t *testing.T) {
 
 func Test_C26_NRC_Serializers_Empty(t *testing.T) {
 	rc := corejson.NewResultsCollection.Serializers()
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NRC_SerializerFunctions_Empty(t *testing.T) {
 	rc := corejson.NewResultsCollection.SerializerFunctions()
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_NRC_SerializerFunctions_Valid(t *testing.T) {
@@ -191,12 +225,16 @@ func Test_C26_NRPC_UnmarshalUsingBytes(t *testing.T) {
 
 func Test_C26_NRPC_DeserializeUsingBytes_Error(t *testing.T) {
 	_, err := corejson.NewResultsPtrCollection.DeserializeUsingBytes([]byte(`invalid`))
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NRPC_DeserializeUsingResult_HasIssue(t *testing.T) {
 	_, err := corejson.NewResultsPtrCollection.DeserializeUsingResult(&corejson.Result{})
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NRPC_AnyItemsPlusCap_Empty(t *testing.T) {
@@ -264,12 +302,16 @@ func Test_C26_NMR_UnmarshalUsingBytes(t *testing.T) {
 
 func Test_C26_NMR_DeserializeUsingBytes_Error(t *testing.T) {
 	_, err := corejson.NewMapResults.DeserializeUsingBytes([]byte(`invalid`))
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NMR_DeserializeUsingResult_HasIssue(t *testing.T) {
 	_, err := corejson.NewMapResults.DeserializeUsingResult(&corejson.Result{})
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C26_NMR_UsingKeyAnyItems_Empty(t *testing.T) {
@@ -395,21 +437,27 @@ func Test_C26_NMR_UsingKeyJsoners(t *testing.T) {
 func Test_C26_RC_AddNonNilNonError_Nil(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddNonNilNonError(nil)
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_RC_AddNonNilNonError_Error(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	r := corejson.NewResult.ErrorPtr(errors.New("e"))
 	rc.AddNonNilNonError(r)
-	if rc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_RC_AddNonNilNonError_Valid(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	r := corejson.New("x")
 	rc.AddNonNilNonError(r.Ptr())
-	if rc.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ── ResultsPtrCollection (key methods) ──
@@ -417,12 +465,16 @@ func Test_C26_RC_AddNonNilNonError_Valid(t *testing.T) {
 func Test_C26_RPC_AddNonNilNonError_Nil(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.AddNonNilNonError(nil)
-	if rpc.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": rpc.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C26_RPC_AddNonNilNonError_Valid(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	r := corejson.New("x")
 	rpc.AddNonNilNonError(r.Ptr())
-	if rpc.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": rpc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }

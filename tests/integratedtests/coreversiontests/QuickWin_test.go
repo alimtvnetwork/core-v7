@@ -4,14 +4,20 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreversion"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_VersionDisplayMajor_Invalid(t *testing.T) {
+	// Arrange
 	v := coreversion.Version{VersionMajor: -1}
 	s := v.VersionDisplayMajor()
-	if s != "" {
-		t.Fatal("expected empty for invalid major")
-	}
+
+	// Act
+	actual := args.Map{"result": s != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for invalid major", actual)
 }
 
 func Test_QW_VersionDisplayMajorMinor_MinorInvalid(t *testing.T) {

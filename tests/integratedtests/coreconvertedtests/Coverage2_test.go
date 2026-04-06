@@ -9,15 +9,21 @@ import (
 )
 
 func Test_Cov2_Bytes_HandleWithPanic_NoError(t *testing.T) {
+	// Arrange
 	b := &coreconverted.Bytes{Values: []byte{1}, CombinedError: nil}
 	// Should not panic
 	b.HandleWithPanic()
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "HandleWithPanic_NoError panics -- with args", actual)
 }
 
 func Test_Cov2_Bytes_HandleWithPanic_WithError(t *testing.T) {
+	// Arrange
 	b := &coreconverted.Bytes{Values: nil, CombinedError: errors.New("err")}
 	panicked := false
 	func() {
@@ -28,20 +34,30 @@ func Test_Cov2_Bytes_HandleWithPanic_WithError(t *testing.T) {
 		}()
 		b.HandleWithPanic()
 	}()
+
+	// Act
 	actual := args.Map{"panicked": panicked}
+
+	// Assert
 	expected := args.Map{"panicked": true}
 	expected.ShouldBeEqual(t, 0, "HandleWithPanic_WithError panics -- with args", actual)
 }
 
 func Test_Cov2_Integers_HandleWithPanic_NoError(t *testing.T) {
+	// Arrange
 	i := &coreconverted.Integers{Values: []int{1}, CombinedError: nil}
 	i.HandleWithPanic()
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "Integers_HandleWithPanic_NoError panics -- with args", actual)
 }
 
 func Test_Cov2_Integers_HandleWithPanic_WithError(t *testing.T) {
+	// Arrange
 	i := &coreconverted.Integers{Values: nil, CombinedError: errors.New("err")}
 	panicked := false
 	func() {
@@ -52,21 +68,47 @@ func Test_Cov2_Integers_HandleWithPanic_WithError(t *testing.T) {
 		}()
 		i.HandleWithPanic()
 	}()
+
+	// Act
 	actual := args.Map{"panicked": panicked}
+
+	// Assert
 	expected := args.Map{"panicked": true}
 	expected.ShouldBeEqual(t, 0, "Integers_HandleWithPanic_WithError panics -- with args", actual)
 }
 
 func Test_Cov2_Bytes_HasAnyItem_Empty(t *testing.T) {
+	// Arrange
 	b := &coreconverted.Bytes{Values: []byte{}}
-	actual := args.Map{"hasAny": b.HasAnyItem(), "isEmpty": b.IsEmpty()}
-	expected := args.Map{"hasAny": false, "isEmpty": true}
+
+	// Act
+	actual := args.Map{
+		"hasAny": b.HasAnyItem(),
+		"isEmpty": b.IsEmpty(),
+	}
+
+	// Assert
+	expected := args.Map{
+		"hasAny": false,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Bytes_HasAnyItem_Empty returns empty -- with args", actual)
 }
 
 func Test_Cov2_Integers_HasAnyItem_Empty(t *testing.T) {
+	// Arrange
 	i := &coreconverted.Integers{Values: []int{}}
-	actual := args.Map{"hasAny": i.HasAnyItem(), "isEmpty": i.IsEmpty()}
-	expected := args.Map{"hasAny": false, "isEmpty": true}
+
+	// Act
+	actual := args.Map{
+		"hasAny": i.HasAnyItem(),
+		"isEmpty": i.IsEmpty(),
+	}
+
+	// Assert
+	expected := args.Map{
+		"hasAny": false,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integers_HasAnyItem_Empty returns empty -- with args", actual)
 }

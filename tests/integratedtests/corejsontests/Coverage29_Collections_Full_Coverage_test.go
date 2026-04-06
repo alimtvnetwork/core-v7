@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ═══════════════════════════════════════════════
@@ -12,174 +13,244 @@ import (
 // ═══════════════════════════════════════════════
 
 func Test_C29_01_RC_Length(t *testing.T) {
+	// Arrange
 	var rc *corejson.ResultsCollection
-	if rc.Length() != 0 {
-		t.Fatal("expected 0")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	rc2 := &corejson.ResultsCollection{}
-	if rc2.Length() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": rc2.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C29_02_RC_LastIndex(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.LastIndex() != -1 {
-		t.Fatal("expected -1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.LastIndex() != -1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
 func Test_C29_03_RC_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if !rc.IsEmpty() {
-		t.Fatal("expected empty")
-	}
-	if rc.HasAnyItem() {
-		t.Fatal("expected false")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
+	actual := args.Map{"result": rc.HasAnyItem()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_C29_04_RC_FirstOrDefault(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.FirstOrDefault() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.FirstOrDefault() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	rc.Add(corejson.NewResult.Any("x"))
-	if rc.FirstOrDefault() == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": rc.FirstOrDefault() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C29_05_RC_LastOrDefault(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.LastOrDefault() != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.LastOrDefault() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	rc.Add(corejson.NewResult.Any("x"))
-	if rc.LastOrDefault() == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": rc.LastOrDefault() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C29_06_RC_Take(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	taken := rc.Take(1)
-	if taken.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": taken.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Add(corejson.NewResult.Any("a"))
 	rc.Add(corejson.NewResult.Any("b"))
 	taken = rc.Take(1)
-	if taken.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": taken.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_07_RC_Limit(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	l := rc.Limit(5)
-	if l.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": l.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Add(corejson.NewResult.Any("a"))
 	rc.Add(corejson.NewResult.Any("b"))
 	// TakeAllMinusOne is -1
 	l = rc.Limit(-1)
-	if l.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": l.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	l = rc.Limit(1)
-	if l.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": l.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_08_RC_Skip(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	s := rc.Skip(0)
-	if s.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": s.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Add(corejson.NewResult.Any("a"))
 	rc.Add(corejson.NewResult.Any("b"))
 	s = rc.Skip(1)
-	if s.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": s.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_09_RC_AddSkipOnNil(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSkipOnNil(nil)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	r := corejson.NewResult.AnyPtr("x")
 	rc.AddSkipOnNil(r)
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_10_RC_AddNonNilNonError(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddNonNilNonError(nil)
 	rc.AddNonNilNonError(&corejson.Result{Error: errors.New("e")})
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.AddNonNilNonError(corejson.NewResult.AnyPtr("x"))
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_11_RC_GetAt(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	r := rc.GetAt(0)
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C29_12_RC_HasError(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.HasError() {
-		t.Fatal("expected false")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasError()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rc.Add(corejson.NewResult.Error(errors.New("e")))
-	if !rc.HasError() {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": rc.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_C29_13_RC_AllErrors(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	errs, has := rc.AllErrors()
-	if has || len(errs) != 0 {
-		t.Fatal("unexpected")
-	}
+
+	// Act
+	actual := args.Map{"result": has || len(errs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	rc.Add(corejson.NewResult.Any("x"))
 	rc.Add(corejson.NewResult.Error(errors.New("e")))
 	errs, has = rc.AllErrors()
-	if !has || len(errs) != 1 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": has || len(errs) != 1}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C29_14_RC_GetErrorsStrings(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	s := rc.GetErrorsStrings()
-	if len(s) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(s) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Add(corejson.NewResult.Any("x"))
 	rc.Add(corejson.NewResult.Error(errors.New("e")))
 	s = rc.GetErrorsStrings()
-	if len(s) != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": len(s) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_15_RC_GetErrorsStringsPtr(t *testing.T) {
@@ -201,13 +272,18 @@ func Test_C29_17_RC_GetErrorsAsSingle(t *testing.T) {
 }
 
 func Test_C29_18_RC_UnmarshalAt(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("hello"))
 	var s string
 	err := rc.UnmarshalAt(0, &s)
-	if err != nil || s != "hello" {
-		t.Fatal("unexpected")
-	}
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C29_19_RC_InjectIntoAt(t *testing.T) {
@@ -220,22 +296,32 @@ func Test_C29_19_RC_InjectIntoAt(t *testing.T) {
 }
 
 func Test_C29_20_RC_InjectIntoSameIndex(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	// Pass true nil variadic slice
 	var nilSlice []corejson.JsonParseSelfInjector
 	errs, has := rc.InjectIntoSameIndex(nilSlice...)
-	if has || len(errs) != 0 {
-		t.Fatal("unexpected")
-	}
+
+	// Act
+	actual := args.Map{"result": has || len(errs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C29_21_RC_UnmarshalIntoSameIndex(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	var nilSlice []any
 	errs, has := rc.UnmarshalIntoSameIndex(nilSlice...)
-	if has || len(errs) != 0 {
-		t.Fatal("unexpected")
-	}
+
+	// Act
+	actual := args.Map{"result": has || len(errs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 
 	rc.Add(corejson.NewResult.Any("hello"))
 	rc.Add(corejson.NewResult.Error(errors.New("e")))
@@ -248,179 +334,264 @@ func Test_C29_21_RC_UnmarshalIntoSameIndex(t *testing.T) {
 }
 
 func Test_C29_22_RC_GetAtSafe(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	r := rc.GetAtSafe(0)
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	r = rc.GetAtSafe(-1)
-	if r != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": r != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	r = rc.GetAtSafe(999)
-	if r != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": r != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C29_23_RC_GetAtSafeUsingLength(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	r := rc.GetAtSafeUsingLength(0, 1)
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	r = rc.GetAtSafeUsingLength(5, 1)
-	if r != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": r != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C29_24_RC_AddPtr(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddPtr(nil)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.AddPtr(corejson.NewResult.AnyPtr("x"))
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_25_RC_Add(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_26_RC_Adds(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Adds()
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Adds(corejson.NewResult.Any("a"), corejson.NewResult.Any("b"))
-	if rc.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": rc.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C29_27_RC_AddSerializer(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSerializer(nil)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C29_28_RC_AddSerializers(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSerializers()
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C29_29_RC_AddSerializerFunc(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSerializerFunc(nil)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.AddSerializerFunc(func() ([]byte, error) {
 		return []byte(`"x"`), nil
 	})
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_30_RC_AddSerializerFunctions(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSerializerFunctions()
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C29_31_RC_AddMapResults(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	mr := corejson.NewMapResults.Empty()
 	rc.AddMapResults(mr)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.Add("k", corejson.NewResult.Any("v"))
 	rc.AddMapResults(mr)
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": rc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_32_RC_AddRawMapResults(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddRawMapResults(nil)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C29_33_RC_AddsPtr(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddsPtr(nil, corejson.NewResult.AnyPtr("x"))
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_34_RC_AddAny(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddAny(nil)
 	rc.AddAny("hello")
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_35_RC_AddAnyItems(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddAnyItems(nil, "a", nil, "b")
-	if rc.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C29_36_RC_AddAnyItemsSlice(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddAnyItemsSlice(nil)
 	rc.AddAnyItemsSlice([]any{nil, "a"})
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_37_RC_AddResultsCollection(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddResultsCollection(nil)
 	other := corejson.NewResultsCollection.Empty()
 	other.Add(corejson.NewResult.Any("x"))
 	rc.AddResultsCollection(other)
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_38_RC_AddNonNilItemsPtr(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddNonNilItemsPtr()
 	rc.AddNonNilItemsPtr(nil, corejson.NewResult.AnyPtr("x"))
-	if rc.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_39_RC_NonPtr_Ptr(t *testing.T) {
@@ -430,12 +601,17 @@ func Test_C29_39_RC_NonPtr_Ptr(t *testing.T) {
 }
 
 func Test_C29_40_RC_Clear(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	rc.Clear()
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty after clear")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty after clear", actual)
 }
 
 func Test_C29_41_RC_Clear_Nil(t *testing.T) {
@@ -456,16 +632,21 @@ func Test_C29_43_RC_Dispose_Nil(t *testing.T) {
 }
 
 func Test_C29_44_RC_GetStrings(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	s := rc.GetStrings()
-	if len(s) != 0 {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": len(s) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	rc.Add(corejson.NewResult.Any("hello"))
 	s = rc.GetStrings()
-	if len(s) != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": len(s) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_45_RC_GetStringsPtr(t *testing.T) {
@@ -474,71 +655,101 @@ func Test_C29_45_RC_GetStringsPtr(t *testing.T) {
 }
 
 func Test_C29_46_RC_AddJsoners(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddJsoners(true)
-	if rc.HasAnyItem() {
-		t.Fatal("expected empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C29_47_RC_GetPagesSize(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
-	if rc.GetPagesSize(0) != 0 {
-		t.Fatal("expected 0")
-	}
-	if rc.GetPagesSize(-1) != 0 {
-		t.Fatal("expected 0")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.GetPagesSize(0) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
+	actual := args.Map{"result": rc.GetPagesSize(-1) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	for i := 0; i < 5; i++ {
 		rc.Add(corejson.NewResult.Any(i))
 	}
-	if rc.GetPagesSize(2) != 3 {
-		t.Fatal("expected 3")
-	}
+	actual := args.Map{"result": rc.GetPagesSize(2) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C29_48_RC_GetPagedCollection(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 5; i++ {
 		rc.Add(corejson.NewResult.Any(i))
 	}
 	pages := rc.GetPagedCollection(2)
-	if len(pages) != 3 {
-		t.Fatal("expected 3 pages")
-	}
+
+	// Act
+	actual := args.Map{"result": len(pages) != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
 func Test_C29_49_RC_GetPagedCollection_SmallSize(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	pages := rc.GetPagedCollection(10)
-	if len(pages) != 1 {
-		t.Fatal("expected 1 page")
-	}
+
+	// Act
+	actual := args.Map{"result": len(pages) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 page", actual)
 }
 
 func Test_C29_50_RC_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	for i := 0; i < 10; i++ {
 		rc.Add(corejson.NewResult.Any(i))
 	}
 	page := rc.GetSinglePageCollection(3, 1)
-	if page.Length() != 3 {
-		t.Fatal("expected 3")
-	}
+
+	// Act
+	actual := args.Map{"result": page.Length() != 3}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	page = rc.GetSinglePageCollection(3, 4)
-	if page.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": page.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_51_RC_GetSinglePageCollection_Small(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Any("x"))
 	page := rc.GetSinglePageCollection(10, 1)
-	if page.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": page.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C29_52_RC_JsonModel_JsonModelAny(t *testing.T) {
@@ -563,12 +774,17 @@ func Test_C29_54_RC_ParseInjectUsingJson(t *testing.T) {
 }
 
 func Test_C29_55_RC_ParseInjectUsingJson_Fail(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	bad := &corejson.Result{Error: errors.New("fail")}
 	_, err := rc.ParseInjectUsingJson(bad)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C29_56_RC_ParseInjectUsingJsonMust(t *testing.T) {
@@ -616,10 +832,15 @@ func Test_C29_62_RC_Clone(t *testing.T) {
 }
 
 func Test_C29_63_RC_ClonePtr(t *testing.T) {
+	// Arrange
 	var rc *corejson.ResultsCollection
-	if rc.ClonePtr(false) != nil {
-		t.Fatal("expected nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rc.ClonePtr(false) != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	rc = corejson.NewResultsCollection.Empty()
 	_ = rc.ClonePtr(false)
 	rc.Add(corejson.NewResult.Any("x"))
@@ -640,12 +861,17 @@ func Test_C29_64_RC_UnmarshalIntoSameIndex_EmptyJsonBytes(t *testing.T) {
 // ─── InjectIntoSameIndex with error result and valid injector ───
 
 func Test_C29_65_RC_InjectIntoSameIndex_ErrorResult(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.NewResult.Error(errors.New("e")))
 	r := corejson.Result{}
 	errs, has := rc.InjectIntoSameIndex(&r)
-	if !has {
-		t.Fatal("expected hasAnyError true")
-	}
+
+	// Act
+	actual := args.Map{"result": has}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected hasAnyError true", actual)
 	_ = errs
 }

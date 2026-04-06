@@ -2,7 +2,6 @@ package stringslice
 
 import "github.com/alimtvnetwork/core/constants"
 
-// Deprecated: Use LastOrDefault instead.
 func LastOrDefaultPtr(slice []string) string {
 	length := len(slice)
 

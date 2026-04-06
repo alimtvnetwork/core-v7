@@ -4,13 +4,19 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/ostype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_Group_IsAnyEnumsEqual_NoMatch(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
-	if g.IsAnyEnumsEqual() {
-		t.Fatal("expected false for empty enums")
-	}
+
+	// Act
+	actual := args.Map{"result": g.IsAnyEnumsEqual()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for empty enums", actual)
 }
 
 func Test_QW_Group_MinByte(t *testing.T) {
@@ -18,10 +24,15 @@ func Test_QW_Group_MinByte(t *testing.T) {
 }
 
 func Test_QW_Variation_IsAnyEnumsEqual_NoMatch(t *testing.T) {
+	// Arrange
 	v := ostype.Linux
-	if v.IsAnyEnumsEqual() {
-		t.Fatal("expected false for empty enums")
-	}
+
+	// Act
+	actual := args.Map{"result": v.IsAnyEnumsEqual()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for empty enums", actual)
 }
 
 func Test_QW_Variation_MinByte(t *testing.T) {

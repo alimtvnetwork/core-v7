@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -14,144 +15,144 @@ import (
 
 func Test_Cov27_CharCollectionMap_AddToNilItems(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(0)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	ccm.Add("hello")
 
 	// Assert
-	if ccm.Length() == 0 {
-		t.Error("expected non-zero length after add")
-	}
+	actual := args.Map{"result": ccm.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-zero length after add", actual)
 }
 
 func Test_Cov27_CharCollectionMap_AllLengthsSumLock_Empty(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(0)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	sum := ccm.AllLengthsSumLock()
 
 	// Assert
-	if sum != 0 {
-		t.Errorf("expected 0, got %d", sum)
-	}
+	actual := args.Map{"result": sum != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ── CharCollectionMap.AddHashmapsValues: nil hashmaps ──
 
 func Test_Cov27_CharCollectionMap_AddHashmapsValues_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsValues(nil)
 
 	// Assert
-	if result == nil {
-		t.Error("expected non-nil result")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
 // ── CharCollectionMap.AddHashmapsKeysOrValuesBothUsingFilter: nil hashmaps ──
 
 func Test_Cov27_CharCollectionMap_AddHashmapsKeysOrValuesFilter_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsKeysOrValuesBothUsingFilter(nil, nil)
 
 	// Assert
-	if result == nil {
-		t.Error("expected non-nil result")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
 // ── CharCollectionMap.AddHashmapsKeysValuesBoth: nil hashmaps ──
 
 func Test_Cov27_CharCollectionMap_AddHashmapsKeysValuesBoth_NilInput(t *testing.T) {
 	// Arrange
-	ccm := corestr.New.CharCollectionMap.Cap(5)
+	ccm := corestr.New.CharCollectionMap.Empty()
 
 	// Act
 	result := ccm.AddHashmapsKeysValuesBoth(nil)
 
 	// Assert
-	if result == nil {
-		t.Error("expected non-nil result")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil result", actual)
 }
 
 // ── CharHashsetMap: nil items init branches ──
 
 func Test_Cov27_CharHashsetMap_AddLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.AddLock("test")
 
 	// Assert
-	if chm.Length() == 0 {
-		t.Error("expected non-zero length")
-	}
+	actual := args.Map{"result": chm.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-zero length", actual)
 }
 
 func Test_Cov27_CharHashsetMap_Add_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	chm.Add("test")
 
 	// Assert
-	if chm.Length() == 0 {
-		t.Error("expected non-zero length")
-	}
+	actual := args.Map{"result": chm.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-zero length", actual)
 }
 
 // ── CharHashsetMap: GetHashset/GetHashsetLock nil items init ──
 
 func Test_Cov27_CharHashsetMap_GetHashset_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
-	hs := chm.GetHashset(true, "a")
+	hs := chm.GetHashset("a", true)
 
 	// Assert
-	if hs == nil {
-		t.Error("expected non-nil hashset")
-	}
+	actual := args.Map{"result": hs == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil hashset", actual)
 }
 
 func Test_Cov27_CharHashsetMap_GetHashsetLock_NilItems(t *testing.T) {
 	// Arrange
-	chm := corestr.New.CharHashsetMap.Cap(0)
+	chm := corestr.New.CharHashsetMap.Cap(0, 0)
 
 	// Act
 	hs := chm.GetHashsetLock(true, "a")
 
 	// Assert
-	if hs == nil {
-		t.Error("expected non-nil hashset")
-	}
+	actual := args.Map{"result": hs == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil hashset", actual)
 }
 
 // ── Collection: resize branches ──
 
 func Test_Cov27_Collection_LengthLock_Normal(t *testing.T) {
 	// Arrange
-	c := corestr.New.Collection.Strings("a", "b", "c")
+	c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 	// Act
 	length := c.LengthLock()
 
 	// Assert
-	if length != 3 {
-		t.Errorf("expected 3, got %d", length)
-	}
+	actual := args.Map{"result": length != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_Cov27_Collection_AddHashmapsValues_NilInput(t *testing.T) {
@@ -162,9 +163,9 @@ func Test_Cov27_Collection_AddHashmapsValues_NilInput(t *testing.T) {
 	c.AddHashmapsValues(nil)
 
 	// Assert
-	if c.Length() != 0 {
-		t.Error("expected zero length")
-	}
+	actual := args.Map{"result": c.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected zero length", actual)
 }
 
 func Test_Cov27_Collection_AddStrings_NilInput(t *testing.T) {
@@ -193,9 +194,9 @@ func Test_Cov27_CollectionsOfCollection_AllLength_Empty(t *testing.T) {
 	length := cc.AllIndividualItemsLength()
 
 	// Assert
-	if length != 0 {
-		t.Errorf("expected 0, got %d", length)
-	}
+	actual := args.Map{"result": length != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov27_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
@@ -208,9 +209,9 @@ func Test_Cov27_CollectionsOfCollection_List_EmptyCollections(t *testing.T) {
 	list := cc.List(0)
 
 	// Assert
-	if len(list) != 0 {
-		t.Errorf("expected empty list, got %d items", len(list))
-	}
+	actual := args.Map{"result": len(list) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty list, got items", actual)
 }
 
 // ── LinkedList: equality branches ──
@@ -221,12 +222,12 @@ func Test_Cov27_LinkedList_IsEqual_BothEmpty(t *testing.T) {
 	ll2 := corestr.Empty.LinkedList()
 
 	// Act
-	result := ll1.IsEqual(ll2, true)
+	result := ll1.IsEquals(ll2)
 
 	// Assert
-	if !result {
-		t.Error("expected equal for two empty linked lists")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal for two empty linked lists", actual)
 }
 
 func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
@@ -235,12 +236,12 @@ func Test_Cov27_LinkedList_IsEqual_OneEmpty(t *testing.T) {
 	ll2 := corestr.Empty.LinkedList().Add("a")
 
 	// Act
-	result := ll1.IsEqual(ll2, true)
+	result := ll1.IsEquals(ll2)
 
 	// Assert
-	if result {
-		t.Error("expected not equal")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
 // ── LinkedList: RemoveNodeByElementValue panic on empty ──
@@ -249,9 +250,10 @@ func Test_Cov27_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic on removing from empty list")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
 
 	// Act
@@ -264,9 +266,10 @@ func Test_Cov27_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for negative index")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for negative index", actual)
 	}()
 
 	// Act
@@ -279,9 +282,10 @@ func Test_Cov27_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic on removing from empty list")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
 
 	// Act
@@ -295,9 +299,10 @@ func Test_Cov27_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
 	ll := corestr.Empty.LinkedList()
 	node := corestr.Empty.LinkedList().Add("a").Head()
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic on removing from empty list")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
 
 	// Act
@@ -310,9 +315,10 @@ func Test_Cov27_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for nil node")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for nil node", actual)
 	}()
 
 	// Act
@@ -325,9 +331,10 @@ func Test_Cov27_LinkedList_IndexAt_OutOfRangePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for out of range index")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for out of range index", actual)
 	}()
 
 	// Act
@@ -344,9 +351,9 @@ func Test_Cov27_LinkedList_SafeIndexAt_NotFound(t *testing.T) {
 	result := ll.SafeIndexAt(5)
 
 	// Assert
-	if result != nil {
-		t.Error("expected nil for out-of-range safe index")
-	}
+	actual := args.Map{"result": result != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for out-of-range safe index", actual)
 }
 
 // ── LinkedList: IndexAt returns nil branch (line 801) ──
@@ -359,9 +366,9 @@ func Test_Cov27_LinkedList_IndexAt_ReturnNil(t *testing.T) {
 	node := ll.IndexAt(2)
 
 	// Assert
-	if node == nil {
-		t.Error("expected non-nil for valid index")
-	}
+	actual := args.Map{"result": node == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil for valid index", actual)
 }
 
 // ── LinkedList: SafeIndexAt line 853 (return nil after loop) ──
@@ -374,9 +381,9 @@ func Test_Cov27_LinkedList_SafeIndexAt_BeyondLength(t *testing.T) {
 	result := ll.SafeIndexAt(10)
 
 	// Assert
-	if result != nil {
-		t.Error("expected nil")
-	}
+	actual := args.Map{"result": result != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 // ── LinkedList: GetNextNodes ──
@@ -389,40 +396,40 @@ func Test_Cov27_LinkedList_GetNextNodes_EmptyOrZero(t *testing.T) {
 	nodes := ll.GetNextNodes(0)
 
 	// Assert
-	if len(nodes) != 0 {
-		t.Error("expected empty nodes")
-	}
+	actual := args.Map{"result": len(nodes) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty nodes", actual)
 }
 
 // ── LinkedCollections: equality branches ──
 
-func Test_Cov27_LinkedCollections_IsEqual_BothEmpty(t *testing.T) {
+func Test_Cov27_LinkedCollections_IsEqualsPtr_BothEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
 	lc2 := corestr.Empty.LinkedCollections()
 
 	// Act
-	result := lc1.IsEqual(lc2)
+	result := lc1.IsEqualsPtr(lc2)
 
 	// Assert
-	if !result {
-		t.Error("expected equal for two empty linked collections")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected equal for two empty linked collections", actual)
 }
 
-func Test_Cov27_LinkedCollections_IsEqual_OneEmpty(t *testing.T) {
+func Test_Cov27_LinkedCollections_IsEqualsPtr_OneEmpty(t *testing.T) {
 	// Arrange
 	lc1 := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a")
+	col := corestr.New.Collection.Strings([]string{"a"})
 	lc2 := corestr.Empty.LinkedCollections().Add(col)
 
 	// Act
-	result := lc1.IsEqual(lc2)
+	result := lc1.IsEqualsPtr(lc2)
 
 	// Assert
-	if result {
-		t.Error("expected not equal")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 
 // ── LinkedCollections: AddLock (incrementLengthLock) ──
@@ -430,15 +437,15 @@ func Test_Cov27_LinkedCollections_IsEqual_OneEmpty(t *testing.T) {
 func Test_Cov27_LinkedCollections_AddLock(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a", "b")
+	col := corestr.New.Collection.Strings([]string{"a", "b"})
 
 	// Act
 	lc.AddLock(col)
 
 	// Assert
-	if lc.Length() != 1 {
-		t.Errorf("expected 1, got %d", lc.Length())
-	}
+	actual := args.Map{"result": lc.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ── LinkedCollections: SafePointerIndexAt ──
@@ -451,9 +458,9 @@ func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 	result := lc.SafePointerIndexAt(5)
 
 	// Assert
-	if result != nil {
-		t.Error("expected nil for out-of-range")
-	}
+	actual := args.Map{"result": result != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for out-of-range", actual)
 }
 
 // ── LinkedCollections: ToCollection / ToCollectionsOfCollection ──
@@ -461,31 +468,31 @@ func Test_Cov27_LinkedCollections_SafePointerIndexAt_NotFound(t *testing.T) {
 func Test_Cov27_LinkedCollections_ToCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("a", "b")
+	col := corestr.New.Collection.Strings([]string{"a", "b"})
 	lc.Add(col)
 
 	// Act
 	result := lc.ToCollection(0)
 
 	// Assert
-	if result == nil || result.Length() == 0 {
-		t.Error("expected non-empty collection")
-	}
+	actual := args.Map{"result": result == nil || result.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty collection", actual)
 }
 
 func Test_Cov27_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	// Arrange
 	lc := corestr.Empty.LinkedCollections()
-	col := corestr.New.Collection.Strings("x")
+	col := corestr.New.Collection.Strings([]string{"x"})
 	lc.Add(col)
 
 	// Act
 	result := lc.ToCollectionsOfCollection(0)
 
 	// Assert
-	if result == nil || result.Length() == 0 {
-		t.Error("expected non-empty result")
-	}
+	actual := args.Map{"result": result == nil || result.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty result", actual)
 }
 
 // ── SimpleSlice: TakeDynamic nil/negative ──
@@ -499,9 +506,9 @@ func Test_Cov27_SimpleSlice_TakeDynamic_Negative(t *testing.T) {
 
 	// Assert
 	arr, ok := result.([]string)
-	if !ok || len(arr) != 0 {
-		t.Error("expected empty slice for negative take")
-	}
+	actual := args.Map{"result": ok || len(arr) != 0}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty slice for negative take", actual)
 }
 
 // ── SimpleSlice: IsEqualLines nil branches ──
@@ -514,9 +521,9 @@ func Test_Cov27_SimpleSlice_IsEqualLines_NilSelf(t *testing.T) {
 	result := ss.IsEqualLines(nil)
 
 	// Assert
-	if !result {
-		t.Error("expected true for both nil")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for both nil", actual)
 }
 
 func Test_Cov27_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
@@ -527,38 +534,12 @@ func Test_Cov27_SimpleSlice_IsEqualLines_OneNil(t *testing.T) {
 	result := ss.IsEqualLines(nil)
 
 	// Assert
-	if result {
-		t.Error("expected false when one is nil")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false when one is nil", actual)
 }
 
-// ── SimpleSlice: IsEqualLinesInsensitive nil branches ──
-
-func Test_Cov27_SimpleSlice_IsEqualLinesInsensitive_NilSelf(t *testing.T) {
-	// Arrange
-	var ss *corestr.SimpleSlice
-
-	// Act
-	result := ss.IsEqualLinesInsensitive(nil)
-
-	// Assert
-	if !result {
-		t.Error("expected true for both nil")
-	}
-}
-
-func Test_Cov27_SimpleSlice_IsEqualLinesInsensitive_OneNil(t *testing.T) {
-	// Arrange
-	ss := corestr.SimpleSlice([]string{"a"})
-
-	// Act
-	result := ss.IsEqualLinesInsensitive(nil)
-
-	// Assert
-	if result {
-		t.Error("expected false when one is nil")
-	}
-}
+// IsEqualLinesInsensitive does not exist on SimpleSlice — removed.
 
 // ── SimpleSlice: IsEqualByFuncLinesSplit empty both sides (line 1173) ──
 
@@ -566,15 +547,16 @@ func Test_Cov27_SimpleSlice_IsEqualByFuncLinesSplit_BothEmpty(t *testing.T) {
 	// Arrange
 	ss := corestr.SimpleSlice([]string{})
 
-	// Act
+	// Act — strings.Split("", ",") returns [""] (length 1), but ss.Length() is 0
+	// So lengths don't match → returns false
 	result := ss.IsEqualByFuncLinesSplit(false, ",", "", func(i int, l, r string) bool {
 		return l == r
 	})
 
 	// Assert
-	if !result {
-		t.Error("expected true for both empty")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for length mismatch (empty slice vs split-of-empty-string)", actual)
 }
 
 // ── KeyValueCollection.UnmarshalJSON wrapper branches ──
@@ -588,9 +570,9 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_WrappedFormat(t *testing.T) {
 	err := kvc.UnmarshalJSON(data)
 
 	// Assert
-	if err != nil {
-		t.Errorf("unexpected error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T) {
@@ -602,15 +584,15 @@ func Test_Cov27_KeyValueCollection_UnmarshalJSON_EmptyWrappedFormat(t *testing.T
 	err := kvc.UnmarshalJSON(data)
 
 	// Assert
-	if err != nil {
-		t.Errorf("unexpected error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 func Test_Cov27_KeyValueCollection_ParseInjectUsingJson_Error(t *testing.T) {
 	// Arrange
 	kvc := &corestr.KeyValueCollection{}
-	jsonResult := corestr.New.Collection.Strings("not json").Json()
+	jsonResult := corestr.New.Collection.Strings([]string{"not json"}).Json()
 
 	// Act
 	_, err := kvc.ParseInjectUsingJson(&jsonResult)

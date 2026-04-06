@@ -10,29 +10,49 @@ import (
 // ── AnyToBytes ──
 
 func Test_Cov_AnyToBytes_FromBytes(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToBytes([]byte("hello"))
+
+	// Act
 	actual := args.Map{"val": string(result)}
+
+	// Assert
 	expected := args.Map{"val": "hello"}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from bytes", actual)
 }
 
 func Test_Cov_AnyToBytes_FromNilBytes(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToBytes([]byte(nil))
+
+	// Act
 	actual := args.Map{"isNil": result == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from nil bytes", actual)
 }
 
 func Test_Cov_AnyToBytes_FromString(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToBytes("hello")
+
+	// Act
 	actual := args.Map{"val": string(result)}
+
+	// Assert
 	expected := args.Map{"val": "hello"}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from string", actual)
 }
 
 func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToBytes(struct{ N int }{42})
+
+	// Act
 	actual := args.Map{"notEmpty": len(result) > 0}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from struct", actual)
 }
@@ -40,8 +60,13 @@ func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
 // ── AnyToBytesPtr (deprecated alias) ──
 
 func Test_Cov_AnyToBytesPtr(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToBytesPtr("test")
+
+	// Act
 	actual := args.Map{"val": string(result)}
+
+	// Assert
 	expected := args.Map{"val": "test"}
 	expected.ShouldBeEqual(t, 0, "AnyToBytesPtr", actual)
 }
@@ -49,24 +74,51 @@ func Test_Cov_AnyToBytesPtr(t *testing.T) {
 // ── AnyToDraftType ──
 
 func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
+	// Arrange
 	dt := coretests.DraftType{SampleString1: "hello"}
 	result := coretests.AnyToDraftType(dt)
-	actual := args.Map{"notNil": result != nil, "val": result.SampleString1}
-	expected := args.Map{"notNil": true, "val": "hello"}
+
+	// Act
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": result.SampleString1,
+	}
+
+	// Assert
+	expected := args.Map{
+		"notNil": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from value", actual)
 }
 
 func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
+	// Arrange
 	dt := &coretests.DraftType{SampleString1: "hello"}
 	result := coretests.AnyToDraftType(dt)
-	actual := args.Map{"notNil": result != nil, "val": result.SampleString1}
-	expected := args.Map{"notNil": true, "val": "hello"}
+
+	// Act
+	actual := args.Map{
+		"notNil": result != nil,
+		"val": result.SampleString1,
+	}
+
+	// Assert
+	expected := args.Map{
+		"notNil": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from ptr", actual)
 }
 
 func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
+	// Arrange
 	result := coretests.AnyToDraftType("not a draft type")
+
+	// Act
 	actual := args.Map{"isNil": result == nil}
+
+	// Assert
 	expected := args.Map{"isNil": true}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from other", actual)
 }
@@ -74,6 +126,7 @@ func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
 // ── DraftType ──
 
 func Test_Cov_DraftType_Getters(t *testing.T) {
+	// Arrange
 	dt := coretests.DraftType{
 		SampleString1: "s1",
 		SampleString2: "s2",
@@ -83,12 +136,15 @@ func Test_Cov_DraftType_Getters(t *testing.T) {
 	}
 	dt.SetF2Integer(99)
 
+	// Act
 	actual := args.Map{
 		"f1":       dt.F1String(),
 		"f2":       dt.F2Integer(),
 		"linesLen": dt.LinesLength(),
 		"bytesLen": dt.RawBytesLength(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"f1":       "",
 		"f2":       99,
@@ -99,12 +155,17 @@ func Test_Cov_DraftType_Getters(t *testing.T) {
 }
 
 func Test_Cov_DraftType_JsonString(t *testing.T) {
+	// Arrange
 	dt := coretests.DraftType{SampleString1: "test"}
+
+	// Act
 	actual := args.Map{
 		"jsonNotEmpty":  dt.JsonString() != "",
 		"bytesNotEmpty": len(dt.JsonBytes()) > 0,
 		"ptrNotEmpty":   len(dt.JsonBytesPtr()) > 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"jsonNotEmpty":  true,
 		"bytesNotEmpty": true,
@@ -114,24 +175,34 @@ func Test_Cov_DraftType_JsonString(t *testing.T) {
 }
 
 func Test_Cov_DraftType_NonPtr(t *testing.T) {
+	// Arrange
 	dt := coretests.DraftType{SampleString1: "test"}
 	nonPtr := dt.NonPtr()
+
+	// Act
 	actual := args.Map{"val": nonPtr.SampleString1}
+
+	// Assert
 	expected := args.Map{"val": "test"}
 	expected.ShouldBeEqual(t, 0, "DraftType NonPtr", actual)
 }
 
 func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
+	// Arrange
 	dt := &coretests.DraftType{SampleString1: "test"}
 	ptrResult := dt.PtrOrNonPtr(true)
 	nonPtrResult := dt.PtrOrNonPtr(false)
 	var nilDt *coretests.DraftType
 	nilResult := nilDt.PtrOrNonPtr(true)
+
+	// Act
 	actual := args.Map{
 		"ptrNotNil":    ptrResult != nil,
 		"nonPtrNotNil": nonPtrResult != nil,
 		"nilIsNil":     nilResult == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"ptrNotNil":    true,
 		"nonPtrNotNil": true,
@@ -141,27 +212,52 @@ func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
 }
 
 func Test_Cov_DraftType_Clone(t *testing.T) {
+	// Arrange
 	dt := coretests.DraftType{SampleString1: "test", Lines: []string{"a"}, RawBytes: []byte("b")}
 	clone := dt.Clone()
-	actual := args.Map{"val": clone.SampleString1, "linesLen": len(clone.Lines)}
-	expected := args.Map{"val": "test", "linesLen": 1}
+
+	// Act
+	actual := args.Map{
+		"val": clone.SampleString1,
+		"linesLen": len(clone.Lines),
+	}
+
+	// Assert
+	expected := args.Map{
+		"val": "test",
+		"linesLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType Clone", actual)
 }
 
 func Test_Cov_DraftType_ClonePtr(t *testing.T) {
+	// Arrange
 	dt := &coretests.DraftType{SampleString1: "test"}
 	clone := dt.ClonePtr()
 	var nilDt *coretests.DraftType
 	nilClone := nilDt.ClonePtr()
-	actual := args.Map{"notNil": clone != nil, "nilIsNil": nilClone == nil}
-	expected := args.Map{"notNil": true, "nilIsNil": true}
+
+	// Act
+	actual := args.Map{
+		"notNil": clone != nil,
+		"nilIsNil": nilClone == nil,
+	}
+
+	// Assert
+	expected := args.Map{
+		"notNil": true,
+		"nilIsNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DraftType ClonePtr", actual)
 }
 
 func Test_Cov_DraftType_IsEqual(t *testing.T) {
+	// Arrange
 	dt1 := &coretests.DraftType{SampleString1: "a"}
 	dt2 := &coretests.DraftType{SampleString1: "a"}
 	dt3 := &coretests.DraftType{SampleString1: "b"}
+
+	// Act
 	actual := args.Map{
 		"same":       dt1.IsEqual(true, dt2),
 		"diff":       dt1.IsEqual(true, dt3),
@@ -170,6 +266,8 @@ func Test_Cov_DraftType_IsEqual(t *testing.T) {
 		"selfEqual":  dt1.IsEqual(true, dt1),
 		"isEqualAll": dt1.IsEqualAll(dt2),
 	}
+
+	// Assert
 	expected := args.Map{
 		"same":       true,
 		"diff":       false,
@@ -182,9 +280,12 @@ func Test_Cov_DraftType_IsEqual(t *testing.T) {
 }
 
 func Test_Cov_DraftType_Verify(t *testing.T) {
+	// Arrange
 	dt1 := &coretests.DraftType{SampleString1: "a"}
 	dt2 := &coretests.DraftType{SampleString1: "b"}
 	dt3 := &coretests.DraftType{SampleString1: "a"}
+
+	// Act
 	actual := args.Map{
 		"diffMsg":        dt1.VerifyNotEqualMessage(false, dt2) != "",
 		"sameMsg":        dt1.VerifyNotEqualMessage(false, dt3),
@@ -194,6 +295,8 @@ func Test_Cov_DraftType_Verify(t *testing.T) {
 		"allErr":         dt1.VerifyAllNotEqualErr(dt2) != nil,
 		"exclInnerErr":   dt1.VerifyNotEqualExcludingInnerFieldsErr(dt2) != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"diffMsg":        true,
 		"sameMsg":        "",
@@ -209,8 +312,13 @@ func Test_Cov_DraftType_Verify(t *testing.T) {
 // ── TestFuncName ──
 
 func Test_Cov_TestFuncName(t *testing.T) {
+	// Arrange
 	fn := coretests.TestFuncName("myFunc")
+
+	// Act
 	actual := args.Map{"val": fn.Value()}
+
+	// Assert
 	expected := args.Map{"val": "myFunc"}
 	expected.ShouldBeEqual(t, 0, "TestFuncName", actual)
 }
@@ -218,11 +326,16 @@ func Test_Cov_TestFuncName(t *testing.T) {
 // ── SomeString ──
 
 func Test_Cov_SomeString(t *testing.T) {
+	// Arrange
 	s := coretests.SomeString{Value: "hello"}
+
+	// Act
 	actual := args.Map{
 		"str":       s.String(),
 		"stringer":  s.AsStringer() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"str":       "hello",
 		"stringer":  true,
@@ -233,12 +346,17 @@ func Test_Cov_SomeString(t *testing.T) {
 // ── VerifyTypeOf ──
 
 func Test_Cov_VerifyTypeOf(t *testing.T) {
+	// Arrange
 	vt := coretests.NewVerifyTypeOf("hello")
+
+	// Act
 	actual := args.Map{
 		"isDefined":      vt.IsDefined(),
 		"isInvalid":      vt.IsInvalid(),
 		"isSkipVerify":   vt.IsInvalidOrSkipVerify(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isDefined":      true,
 		"isInvalid":      true,
@@ -248,11 +366,16 @@ func Test_Cov_VerifyTypeOf(t *testing.T) {
 }
 
 func Test_Cov_VerifyTypeOf_Nil(t *testing.T) {
+	// Arrange
 	var vt *coretests.VerifyTypeOf
+
+	// Act
 	actual := args.Map{
 		"isDefined":    vt.IsDefined(),
 		"isSkipVerify": vt.IsInvalidOrSkipVerify(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isDefined":    false,
 		"isSkipVerify": true,
@@ -263,17 +386,27 @@ func Test_Cov_VerifyTypeOf_Nil(t *testing.T) {
 // ── LogOnFail ──
 
 func Test_Cov_LogOnFail_Pass(t *testing.T) {
+	// Arrange
 	// Should not panic
 	coretests.LogOnFail(true, "expected", "actual")
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "LogOnFail pass", actual)
 }
 
 func Test_Cov_LogOnFail_Fail(t *testing.T) {
+	// Arrange
 	// Should log but not panic
 	coretests.LogOnFail(false, "expected", "actual")
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "LogOnFail fail", actual)
 }
@@ -281,10 +414,13 @@ func Test_Cov_LogOnFail_Fail(t *testing.T) {
 // ── ToStringValues / ToStringNameValues ──
 
 func Test_Cov_ToStringValues(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"val": coretests.ToStringValues(42) != "",
 		"nil": coretests.ToStringValues(nil) != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"val": true,
 		"nil": true,
@@ -293,10 +429,13 @@ func Test_Cov_ToStringValues(t *testing.T) {
 }
 
 func Test_Cov_ToStringNameValues(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"val": coretests.ToStringNameValues(42) != "",
 		"nil": coretests.ToStringNameValues(nil) != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"val": true,
 		"nil": true,
@@ -307,6 +446,7 @@ func Test_Cov_ToStringNameValues(t *testing.T) {
 // ── SimpleGherkins ──
 
 func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
+	// Arrange
 	g := &coretests.SimpleGherkins{
 		Feature: "Login",
 		Given:   "user exists",
@@ -316,6 +456,7 @@ func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
 		Actual:  "home page",
 	}
 
+	// Act
 	actual := args.Map{
 		"toString":      g.ToString(0) != "",
 		"string":        g.String() != "",
@@ -323,6 +464,8 @@ func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
 		"condTrue":      g.GetMessageConditional(true, 0) != "",
 		"condFalse":     g.GetMessageConditional(false, 0) != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"toString":      true,
 		"string":        true,
@@ -336,12 +479,14 @@ func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
 // ── BaseTestCase ──
 
 func Test_Cov_BaseTestCase_Getters(t *testing.T) {
+	// Arrange
 	bt := &coretests.BaseTestCase{
 		Title:         "test",
 		ArrangeInput:  "input",
 		ExpectedInput: "expected",
 	}
 
+	// Act
 	actual := args.Map{
 		"title":          bt.CaseTitle(),
 		"typeName":       bt.ArrangeTypeName(),
@@ -358,6 +503,8 @@ func Test_Cov_BaseTestCase_Getters(t *testing.T) {
 		"wrapperNotNil":  bt.AsSimpleTestCaseWrapper() != nil,
 		"baseWrapNotNil": bt.AsBaseTestCaseWrapper() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"title":          "test",
 		"typeName":       "string",
@@ -378,6 +525,7 @@ func Test_Cov_BaseTestCase_Getters(t *testing.T) {
 }
 
 func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
+	// Arrange
 	bt := &coretests.BaseTestCase{
 		Title: "test",
 		Parameters: &args.HolderAny{
@@ -391,6 +539,8 @@ func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
 	}
 
 	hasMap, hashMap := bt.HashmapParam()
+
+	// Act
 	actual := args.Map{
 		"hasParams":     bt.HasParameters(),
 		"firstParam":    bt.FirstParam(),
@@ -402,6 +552,8 @@ func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
 		"hasValidMap":   bt.HasValidHashmapParam(),
 		"hashMapLen":    len(hashMap),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasParams":     true,
 		"firstParam":    "f1",
@@ -417,11 +569,16 @@ func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
 }
 
 func Test_Cov_BaseTestCase_Nil(t *testing.T) {
+	// Arrange
 	var bt *coretests.BaseTestCase
+
+	// Act
 	actual := args.Map{
 		"isTypeInvalid": bt.IsTypeInvalidOrSkipVerify(),
 		"invalidParams": bt.IsInvalidParameters(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isTypeInvalid": true,
 		"invalidParams": true,
@@ -432,18 +589,30 @@ func Test_Cov_BaseTestCase_Nil(t *testing.T) {
 // ── CaseIndexPlusIsPrint ──
 
 func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
+	// Arrange
 	c := &coretests.CaseIndexPlusIsPrint{
 		IsPrint:   true,
 		CaseIndex: 5,
 	}
-	actual := args.Map{"isPrint": c.IsPrint, "index": c.CaseIndex}
-	expected := args.Map{"isPrint": true, "index": 5}
+
+	// Act
+	actual := args.Map{
+		"isPrint": c.IsPrint,
+		"index": c.CaseIndex,
+	}
+
+	// Assert
+	expected := args.Map{
+		"isPrint": true,
+		"index": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "CaseIndexPlusIsPrint", actual)
 }
 
 // ── SimpleTestCase ──
 
 func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
+	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test",
 		ArrangeInput:  "arrange",
@@ -451,6 +620,7 @@ func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
 	}
 	tc.SetActual("actual")
 
+	// Act
 	actual := args.Map{
 		"title":       tc.CaseTitle(),
 		"input":       tc.Input(),
@@ -461,6 +631,8 @@ func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
 		"customTitle": tc.CustomTitle(0, "custom") != "",
 		"wrapperOk":   tc.AsSimpleTestCaseWrapper() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"title":       "test",
 		"input":       "arrange",
@@ -477,71 +649,121 @@ func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
 // ── GetAssert ──
 
 func Test_Cov_GetAssert_ToString(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.ToString("hello")
+
+	// Act
 	actual := args.Map{"val": result}
+
+	// Assert
 	expected := args.Map{"val": "hello"}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToString", actual)
 }
 
 func Test_Cov_GetAssert_SortedMessage(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.SortedMessage(false, "c b a", " ")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "GetAssert.SortedMessage", actual)
 }
 
 func Test_Cov_GetAssert_SortedArrayNoPrint(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.SortedArrayNoPrint("c b a")
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "GetAssert.SortedArrayNoPrint", actual)
 }
 
 func Test_Cov_GetAssert_ToStrings(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.ToStrings("hello")
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToStrings", actual)
 }
 
 func Test_Cov_GetAssert_ToStringsWithSpace(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.ToStringsWithSpace(2, "hello")
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToStringsWithSpace", actual)
 }
 
 func Test_Cov_GetAssert_ErrorToLinesWithSpaces(t *testing.T) {
+	// Arrange
 	nilResult := coretests.GetAssert.ErrorToLinesWithSpaces(2, nil)
+
+	// Act
 	actual := args.Map{"nilLen": len(nilResult)}
+
+	// Assert
 	expected := args.Map{"nilLen": 0}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ErrorToLinesWithSpaces nil", actual)
 }
 
 func Test_Cov_GetAssert_ErrorToLinesWithSpacesDefault(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.ErrorToLinesWithSpacesDefault(nil)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ErrorToLinesWithSpacesDefault", actual)
 }
 
 func Test_Cov_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.AnyToDoubleQuoteLines(2, "hello")
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "GetAssert.AnyToDoubleQuoteLines", actual)
 }
 
 func Test_Cov_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.ConvertLinesToDoubleQuoteThenString(2, []string{"a", "b"})
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "GetAssert.ConvertLinesToDoubleQuoteThenString", actual)
 }
 
 func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
+	// Arrange
 	result := coretests.GetAssert.AnyToStringDoubleQuoteLine(2, "hello")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "GetAssert.AnyToStringDoubleQuoteLine", actual)
 }
@@ -549,14 +771,18 @@ func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
 // ── Compare ──
 
 func Test_Cov_Compare_SortedStrings(t *testing.T) {
+	// Arrange
 	c := &coretests.Compare{StringContains: "c b a"}
 	ss := c.SortedStrings()
 	ss2 := c.SortedStrings() // cached
 
+	// Act
 	actual := args.Map{
 		"len":      len(ss),
 		"cachedEq": len(ss) == len(ss2),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":      3,
 		"cachedEq": true,
@@ -565,14 +791,18 @@ func Test_Cov_Compare_SortedStrings(t *testing.T) {
 }
 
 func Test_Cov_Compare_SortedString(t *testing.T) {
+	// Arrange
 	c := &coretests.Compare{StringContains: "b a"}
 	s := c.SortedString()
 	s2 := c.SortedString() // cached
 
+	// Act
 	actual := args.Map{
 		"notEmpty": s != "",
 		"cached":   s == s2,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 		"cached":   true,
@@ -581,9 +811,14 @@ func Test_Cov_Compare_SortedString(t *testing.T) {
 }
 
 func Test_Cov_Compare_GetPrintMessage(t *testing.T) {
+	// Arrange
 	c := &coretests.Compare{StringContains: "hello"}
 	msg := c.GetPrintMessage(0)
+
+	// Act
 	actual := args.Map{"notEmpty": msg != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "Compare.GetPrintMessage", actual)
 }

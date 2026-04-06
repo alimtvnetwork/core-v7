@@ -113,9 +113,14 @@ func Test_Cov10_ShouldHaveNoError(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov10_PrepareTitle(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{Title: "title"}
 	title := c.PrepareTitle(1, "suffix")
+
+	// Act
 	actual := args.Map{"hasTitle": title != ""}
+
+	// Assert
 	expected := args.Map{"hasTitle": true}
 	expected.ShouldBeEqual(t, 0, "PrepareTitle returns non-empty", actual)
 }
@@ -125,9 +130,14 @@ func Test_Cov10_PrepareTitle(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov10_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{Title: "binder"}
 	binder := c.AsSimpleTestCaseWrapperContractsBinder()
+
+	// Act
 	actual := args.Map{"notNil": binder != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "ContractsBinder returns non-nil", actual)
 }
@@ -197,6 +207,7 @@ func Test_Cov10_VerifyTypeMust(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov10_SliceValidatorCondition(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "slice validator condition",
 		ExpectedInput: "hello",
@@ -206,7 +217,11 @@ func Test_Cov10_SliceValidatorCondition(t *testing.T) {
 		corevalidator.DefaultDisabledCoreCondition,
 		[]string{"hello"},
 	)
+
+	// Act
 	actual := args.Map{"hasActual": len(sv.ActualLines) > 0}
+
+	// Assert
 	expected := args.Map{"hasActual": true}
 	expected.ShouldBeEqual(t, 0, "SliceValidatorCondition populated", actual)
 }
@@ -216,12 +231,17 @@ func Test_Cov10_SliceValidatorCondition(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov10_VerifyAllEqualCondition(t *testing.T) {
+	// Arrange
 	c := coretestcases.CaseV1{
 		Title:         "verify all equal condition",
 		ExpectedInput: "hello",
 	}
 	err := c.VerifyAllEqualCondition(0, corevalidator.DefaultDisabledCoreCondition, "hello")
+
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyAllEqualCondition passes", actual)
 }
@@ -231,6 +251,7 @@ func Test_Cov10_VerifyAllEqualCondition(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_Cov10_VerifyError_WithTypeVerify(t *testing.T) {
+	// Act
 	actualStr := "hello"
 	vt := &coretests.VerifyTypeOf{
 		IsVerify:      issetter.True,
@@ -246,6 +267,8 @@ func Test_Cov10_VerifyError_WithTypeVerify(t *testing.T) {
 	}
 	err := c.VerifyError(0, stringcompareas.Equal, "hello")
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyError with type nil", actual)
 }
@@ -263,6 +286,8 @@ func Test_Cov10_CaseNilSafe_ShouldBeSafe(t *testing.T) {
 		},
 		CompareFields: []string{"panicked"},
 	}
+
+	// Assert
 	tc.ShouldBeSafe(t, 0)
 }
 

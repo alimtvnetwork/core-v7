@@ -4,7 +4,6 @@ package stringslice
 //
 // Warning : Not found indexes will not be included in the values.
 //
-// Deprecated: Use SafeIndexes instead.
 func SafeIndexesPtr(slice []string, indexes ...int) (values []string) {
 	if IsEmptyPtr(slice) {
 		return MakeLenPtr(len(indexes))

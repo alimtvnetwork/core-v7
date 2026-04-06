@@ -15,6 +15,7 @@ import (
 // ==========================================
 
 func Test_GenericHashset_AddLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := hashsetAddLockConcurrencyTestCase
 	const goroutines = 500
 	hs := coregeneric.NewHashset[int](goroutines)
@@ -31,8 +32,10 @@ func Test_GenericHashset_AddLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": hs.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -41,6 +44,7 @@ func Test_GenericHashset_AddLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericHashset_AddSliceLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := hashsetAddSliceLockConcurrencyTestCase
 	const goroutines = 100
 	const batchSize = 10
@@ -62,8 +66,10 @@ func Test_GenericHashset_AddSliceLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": hs.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -72,6 +78,7 @@ func Test_GenericHashset_AddSliceLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericHashset_ContainsLock_ConcurrentReadsWrites(t *testing.T) {
+	// Arrange
 	tc := hashsetContainsLockConcurrencyTestCase
 	const writers = 200
 	const readers = 200
@@ -96,8 +103,10 @@ func Test_GenericHashset_ContainsLock_ConcurrentReadsWrites(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"finalLength": hs.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -106,6 +115,7 @@ func Test_GenericHashset_ContainsLock_ConcurrentReadsWrites(t *testing.T) {
 // ==========================================
 
 func Test_GenericHashset_RemoveLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := hashsetRemoveLockConcurrencyTestCase
 	const items = 500
 	hs := coregeneric.NewHashset[int](items)
@@ -126,8 +136,10 @@ func Test_GenericHashset_RemoveLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": hs.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -136,6 +148,7 @@ func Test_GenericHashset_RemoveLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericHashset_LengthLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := hashsetLengthLockConcurrencyTestCase
 	const writers = 100
 	const readers = 100
@@ -166,11 +179,13 @@ func Test_GenericHashset_LengthLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{
 		"finalLength":   hs.Length(),
 		"noNegativeLen": noNegativeLen.Load(),
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
@@ -179,6 +194,7 @@ func Test_GenericHashset_LengthLock_ConcurrentSafety(t *testing.T) {
 // ==========================================
 
 func Test_GenericHashset_IsEmptyLock_ConcurrentSafety(t *testing.T) {
+	// Arrange
 	tc := hashsetIsEmptyLockConcurrencyTestCase
 	const goroutines = 100
 	hs := coregeneric.NewHashset[int](goroutines)
@@ -199,7 +215,9 @@ func Test_GenericHashset_IsEmptyLock_ConcurrentSafety(t *testing.T) {
 
 	wg.Wait()
 
+	// Act
 	actual := args.Map{"length": hs.Length()}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

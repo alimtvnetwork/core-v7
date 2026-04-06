@@ -148,27 +148,27 @@ func Test_Variant_IntComparisons(t *testing.T) {
 	v := bytetype.New(5)
 
 	// Act & Assert
-	if !v.IsEqualInt(5) {
-		t.Error("expected IsEqualInt(5) true")
-	}
-	if v.IsEqualInt(3) {
-		t.Error("expected IsEqualInt(3) false")
-	}
-	if !v.IsGreaterInt(3) {
-		t.Error("expected IsGreaterInt(3) true")
-	}
-	if !v.IsGreaterEqualInt(5) {
-		t.Error("expected IsGreaterEqualInt(5) true")
-	}
-	if !v.IsLessInt(7) {
-		t.Error("expected IsLessInt(7) true")
-	}
-	if !v.IsLessEqualInt(5) {
-		t.Error("expected IsLessEqualInt(5) true")
-	}
-	if !v.IsBetweenInt(3, 7) {
-		t.Error("expected IsBetweenInt(3,7) true")
-	}
+	actual := args.Map{"result": v.IsEqualInt(5)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsEqualInt(5) true", actual)
+	actual := args.Map{"result": v.IsEqualInt(3)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsEqualInt(3) false", actual)
+	actual := args.Map{"result": v.IsGreaterInt(3)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsGreaterInt(3) true", actual)
+	actual := args.Map{"result": v.IsGreaterEqualInt(5)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsGreaterEqualInt(5) true", actual)
+	actual := args.Map{"result": v.IsLessInt(7)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsLessInt(7) true", actual)
+	actual := args.Map{"result": v.IsLessEqualInt(5)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsLessEqualInt(5) true", actual)
+	actual := args.Map{"result": v.IsBetweenInt(3, 7)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsBetweenInt(3,7) true", actual)
 }
 
 func Test_Variant_Is(t *testing.T) {
@@ -176,12 +176,12 @@ func Test_Variant_Is(t *testing.T) {
 	v := bytetype.New(3)
 
 	// Act & Assert
-	if !v.Is(bytetype.Three) {
-		t.Error("expected Is(Three) true")
-	}
-	if v.Is(bytetype.One) {
-		t.Error("expected Is(One) false")
-	}
+	actual := args.Map{"result": v.Is(bytetype.Three)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Is(Three) true", actual)
+	actual := args.Map{"result": v.Is(bytetype.One)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Is(One) false", actual)
 }
 
 func Test_Variant_HasIndexInStrings(t *testing.T) {
@@ -193,25 +193,25 @@ func Test_Variant_HasIndexInStrings(t *testing.T) {
 	val, isValid := v.HasIndexInStrings(items...)
 
 	// Assert
-	if !isValid {
-		t.Error("expected isValid true")
-	}
-	if val != "one" {
-		t.Errorf("expected 'one', got '%s'", val)
-	}
+	actual := args.Map{"result": isValid}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected isValid true", actual)
+	actual := args.Map{"result": val != "one"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'one', got ''", actual)
 
 	// Out of range
 	v2 := bytetype.New(10)
 	_, isValid2 := v2.HasIndexInStrings(items...)
-	if isValid2 {
-		t.Error("expected isValid false for out of range")
-	}
+	actual := args.Map{"result": isValid2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected isValid false for out of range", actual)
 
 	// Empty slice
 	_, isValid3 := v.HasIndexInStrings()
-	if isValid3 {
-		t.Error("expected isValid false for empty slice")
-	}
+	actual := args.Map{"result": isValid3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected isValid false for empty slice", actual)
 }
 
 func Test_Variant_ValueConversions(t *testing.T) {
@@ -219,27 +219,27 @@ func Test_Variant_ValueConversions(t *testing.T) {
 	v := bytetype.New(42)
 
 	// Act & Assert
-	if v.ValueUInt16() != 42 {
-		t.Errorf("expected ValueUInt16=42, got %d", v.ValueUInt16())
-	}
-	if v.ValueInt8() != 42 {
-		t.Errorf("expected ValueInt8=42, got %d", v.ValueInt8())
-	}
-	if v.ValueInt16() != 42 {
-		t.Errorf("expected ValueInt16=42, got %d", v.ValueInt16())
-	}
-	if v.ValueInt32() != 42 {
-		t.Errorf("expected ValueInt32=42, got %d", v.ValueInt32())
-	}
-	if v.ValueString() != "42" {
-		t.Errorf("expected ValueString='42', got '%s'", v.ValueString())
-	}
-	if v.ToNumberString() != "42" {
-		t.Errorf("expected ToNumberString='42', got '%s'", v.ToNumberString())
-	}
-	if v.StringValue() != "42" {
-		t.Errorf("expected StringValue='42', got '%s'", v.StringValue())
-	}
+	actual := args.Map{"result": v.ValueUInt16() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ValueUInt16=42", actual)
+	actual := args.Map{"result": v.ValueInt8() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ValueInt8=42", actual)
+	actual := args.Map{"result": v.ValueInt16() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ValueInt16=42", actual)
+	actual := args.Map{"result": v.ValueInt32() != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ValueInt32=42", actual)
+	actual := args.Map{"result": v.ValueString() != "42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ValueString='42', got ''", actual)
+	actual := args.Map{"result": v.ToNumberString() != "42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToNumberString='42', got ''", actual)
+	actual := args.Map{"result": v.StringValue() != "42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected StringValue='42', got ''", actual)
 }
 
 func Test_Variant_IsValueEqual(t *testing.T) {
@@ -247,12 +247,12 @@ func Test_Variant_IsValueEqual(t *testing.T) {
 	v := bytetype.New(5)
 
 	// Act & Assert
-	if !v.IsValueEqual(5) {
-		t.Error("expected IsValueEqual(5) true")
-	}
-	if v.IsValueEqual(3) {
-		t.Error("expected IsValueEqual(3) false")
-	}
+	actual := args.Map{"result": v.IsValueEqual(5)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsValueEqual(5) true", actual)
+	actual := args.Map{"result": v.IsValueEqual(3)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsValueEqual(3) false", actual)
 }
 
 func Test_Variant_ToPtr(t *testing.T) {
@@ -263,12 +263,12 @@ func Test_Variant_ToPtr(t *testing.T) {
 	ptr := v.ToPtr()
 
 	// Assert
-	if ptr == nil {
-		t.Error("expected ToPtr to not be nil")
-	}
-	if ptr.ValueInt() != 7 {
-		t.Errorf("expected ptr value 7, got %d", ptr.ValueInt())
-	}
+	actual := args.Map{"result": ptr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToPtr to not be nil", actual)
+	actual := args.Map{"result": ptr.ValueInt() != 7}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ptr value 7", actual)
 }
 
 func Test_Variant_IsNameEqual(t *testing.T) {
@@ -279,12 +279,12 @@ func Test_Variant_IsNameEqual(t *testing.T) {
 	name := v.Name()
 
 	// Assert
-	if !v.IsNameEqual(name) {
-		t.Errorf("expected IsNameEqual('%s') true", name)
-	}
-	if v.IsNameEqual("NonExistent") {
-		t.Error("expected IsNameEqual('NonExistent') false")
-	}
+	actual := args.Map{"result": v.IsNameEqual(name)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsNameEqual('') true", actual)
+	actual := args.Map{"result": v.IsNameEqual("NonExistent")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsNameEqual('NonExistent') false", actual)
 }
 
 func Test_Variant_IsAnyNamesOf(t *testing.T) {
@@ -293,10 +293,10 @@ func Test_Variant_IsAnyNamesOf(t *testing.T) {
 	name := v.Name()
 
 	// Act & Assert
-	if !v.IsAnyNamesOf(name, "Other") {
-		t.Error("expected IsAnyNamesOf to find match")
-	}
-	if v.IsAnyNamesOf("None", "Other") {
-		t.Error("expected IsAnyNamesOf to not match")
-	}
+	actual := args.Map{"result": v.IsAnyNamesOf(name, "Other")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsAnyNamesOf to find match", actual)
+	actual := args.Map{"result": v.IsAnyNamesOf("None", "Other")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsAnyNamesOf to not match", actual)
 }

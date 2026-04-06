@@ -17,6 +17,10 @@ type ExpectingRecord struct {
 //
 //	"%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
 func (it *ExpectingRecord) Message(actual any) string {
+	if it == nil {
+		return ""
+	}
+
 	return fmt.Sprintf(
 		expectingMessageFormat,
 		it.ExpectingTitle,
@@ -31,6 +35,10 @@ func (it *ExpectingRecord) Message(actual any) string {
 //
 //	"%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
 func (it *ExpectingRecord) MessageSimple(actual any) string {
+	if it == nil {
+		return ""
+	}
+
 	return ExpectingSimple(
 		it.ExpectingTitle,
 		it.WasExpecting,
@@ -43,6 +51,10 @@ func (it *ExpectingRecord) MessageSimple(actual any) string {
 //
 //	"%s - Expect [\"%v\"] != [\"%v\"] Actual"
 func (it *ExpectingRecord) MessageSimpleNoType(actual any) string {
+	if it == nil {
+		return ""
+	}
+
 	return ExpectingSimpleNoType(
 		it.ExpectingTitle,
 		it.WasExpecting,
@@ -56,6 +68,10 @@ func (it *ExpectingRecord) MessageSimpleNoType(actual any) string {
 //
 //	"%s - expecting (type:[%T]) : [\"%v\"], but received or actual (type:[%T]) : [\"%v\"]"
 func (it *ExpectingRecord) Error(actual any) error {
+	if it == nil {
+		return nil
+	}
+
 	return errors.New(it.Message(actual))
 }
 
@@ -66,6 +82,10 @@ func (it *ExpectingRecord) Error(actual any) error {
 //
 //	"%s - Expect (type:\"%T\")[\"%v\"] != [\"%v\"](type:\"%T\") Actual"
 func (it *ExpectingRecord) ErrorSimple(actual any) error {
+	if it == nil {
+		return nil
+	}
+
 	return errors.New(it.MessageSimple(actual))
 }
 
@@ -76,5 +96,9 @@ func (it *ExpectingRecord) ErrorSimple(actual any) error {
 //
 //	"%s - Expect [\"%v\"] != [\"%v\"] Actual"
 func (it *ExpectingRecord) ErrorSimpleNoType(actual any) error {
+	if it == nil {
+		return nil
+	}
+
 	return errors.New(it.MessageSimpleNoType(actual))
 }

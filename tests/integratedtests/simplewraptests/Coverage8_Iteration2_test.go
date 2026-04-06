@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/simplewrap"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // Test_Cov8_DoubleQuoteWrapElements_EmptyNonNilSlice tests the length==0 branch
@@ -16,9 +17,9 @@ func Test_Cov8_DoubleQuoteWrapElements_EmptyNonNilSlice(t *testing.T) {
 	actual := simplewrap.DoubleQuoteWrapElements(false, input...)
 
 	// Assert
-	if len(actual) != 0 {
-		t.Fatalf("DoubleQuoteWrapElements with empty slice: got len %d, want 0", len(actual))
-	}
+	actual := args.Map{"result": len(actual) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements with empty slice: got len, want 0", actual)
 }
 
 // Test_Cov8_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice tests length==0 branch.
@@ -30,7 +31,7 @@ func Test_Cov8_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice(t *testing.T)
 	actual := simplewrap.DoubleQuoteWrapElementsWithIndexes(input...)
 
 	// Assert
-	if len(actual) != 0 {
-		t.Fatalf("DoubleQuoteWrapElementsWithIndexes with empty slice: got len %d, want 0", len(actual))
-	}
+	actual := args.Map{"result": len(actual) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes with empty slice: got len, want 0", actual)
 }

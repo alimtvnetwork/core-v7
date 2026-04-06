@@ -15,8 +15,16 @@ func Test_Cov4_AnyTo_String(t *testing.T) {
 	emptyResult, _ := jsoninternal.Pretty.AnyTo.String(nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil, "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "noErr": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- String", actual)
 }
 
@@ -26,8 +34,14 @@ func Test_Cov4_AnyTo_SafeString(t *testing.T) {
 	emptyResult := jsoninternal.Pretty.AnyTo.SafeString(nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- SafeString", actual)
 }
 
@@ -39,8 +53,16 @@ func Test_Cov4_AnyTo_PrettyString(t *testing.T) {
 	emptyResult, _ := jsoninternal.Pretty.AnyTo.PrettyString("", nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil, "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "noErr": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- PrettyString", actual)
 }
 
@@ -50,8 +72,14 @@ func Test_Cov4_AnyTo_SafePrettyString(t *testing.T) {
 	emptyResult := jsoninternal.Pretty.AnyTo.SafePrettyString("", nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- SafePrettyString", actual)
 }
 
@@ -61,8 +89,14 @@ func Test_Cov4_AnyTo_PrettyStringDefault(t *testing.T) {
 	emptyResult := jsoninternal.Pretty.AnyTo.PrettyStringDefault(nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- PrettyStringDefault", actual)
 }
 
@@ -74,8 +108,16 @@ func Test_Cov4_AnyTo_PrettyStringIndent(t *testing.T) {
 	emptyResult, _ := jsoninternal.Pretty.AnyTo.PrettyStringIndent("", "\t", nil)
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil, "empty": emptyResult}
-	expected := args.Map{"notEmpty": true, "noErr": true, "empty": "null"}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+		"empty": emptyResult,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+		"empty": "null",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- PrettyStringIndent", actual)
 }
 
@@ -96,7 +138,13 @@ func Test_Cov4_Bytes_Indent(t *testing.T) {
 	result, err := jsoninternal.Pretty.Bytes.Indent("", "\t", []byte(`{"a":1}`))
 
 	// Assert
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil}
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Bytes returns correct value -- Indent", actual)
 }

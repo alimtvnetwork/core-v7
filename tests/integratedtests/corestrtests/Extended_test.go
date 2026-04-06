@@ -70,9 +70,9 @@ func Test_ExtCollection_AddNonEmpty_Verification(t *testing.T) {
 		col.AddNonEmpty("world")
 
 		// Assert
-		if col.Length() != 2 {
-			t.Errorf("AddNonEmpty expected 2 items, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddNonEmpty expected 2 items", actual)
 	})
 }
 
@@ -87,9 +87,9 @@ func Test_ExtCollection_AddNonEmptyWhitespace_Verification(t *testing.T) {
 		col.AddNonEmptyWhitespace("\t\n")
 
 		// Assert
-		if col.Length() != 1 {
-			t.Errorf("AddNonEmptyWhitespace expected 1, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddNonEmptyWhitespace expected 1", actual)
 	})
 }
 
@@ -107,9 +107,9 @@ func Test_ExtCollection_AddIf_Verification(t *testing.T) {
 		col.AddIf(false, "no")
 
 		// Assert
-		if col.Length() != 1 {
-			t.Errorf("AddIf expected 1, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddIf expected 1", actual)
 	})
 }
 
@@ -123,9 +123,9 @@ func Test_ExtCollection_AddIfMany_Verification(t *testing.T) {
 		col.AddIfMany(false, "c", "d")
 
 		// Assert
-		if col.Length() != 2 {
-			t.Errorf("AddIfMany expected 2, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddIfMany expected 2", actual)
 	})
 }
 
@@ -142,9 +142,9 @@ func Test_ExtCollection_AddFunc_Verification(t *testing.T) {
 		col.AddFunc(func() string { return "from func" })
 
 		// Assert
-		if col.Length() != 1 {
-			t.Errorf("AddFunc expected 1, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddFunc expected 1", actual)
 	})
 }
 
@@ -158,9 +158,9 @@ func Test_ExtCollection_AddError_Verification(t *testing.T) {
 		col.AddError(fmt.Errorf("test error"))
 
 		// Assert
-		if col.Length() != 1 {
-			t.Errorf("AddError expected 1, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddError expected 1", actual)
 	})
 }
 
@@ -176,15 +176,15 @@ func Test_ExtCollection_IsEquals_Verification(t *testing.T) {
 		col3 := corestr.New.Collection.Strings([]string{"A", "B"})
 
 		// Act & Assert
-		if !col1.IsEquals(col2) {
-			t.Error("Same content should be equal")
-		}
-		if col1.IsEquals(col3) {
-			t.Error("Different case should not be equal (case-sensitive)")
-		}
-		if !col1.IsEqualsWithSensitive(false, col3) {
-			t.Error("Case-insensitive should match")
-		}
+		actual := args.Map{"result": col1.IsEquals(col2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Same content should be equal", actual)
+		actual = args.Map{"result": col1.IsEquals(col3)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Different case should not be equal (case-sensitive)", actual)
+		actual = args.Map{"result": col1.IsEqualsWithSensitive(false, col3)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Case-insensitive should match", actual)
 	})
 }
 
@@ -198,15 +198,15 @@ func Test_ExtCollection_NilReceiver_Verification(t *testing.T) {
 		var col *corestr.Collection
 
 		// Act & Assert
-		if !col.IsEmpty() {
-			t.Error("nil.IsEmpty() should be true")
-		}
-		if col.Length() != 0 {
-			t.Error("nil.Length() should be 0")
-		}
-		if col.HasItems() {
-			t.Error("nil.HasItems() should be false")
-		}
+		actual := args.Map{"result": col.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "nil.IsEmpty() should be true", actual)
+		actual = args.Map{"result": col.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.Length() should be 0", actual)
+		actual = args.Map{"result": col.HasItems()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.HasItems() should be false", actual)
 	})
 }
 
@@ -223,25 +223,25 @@ func Test_ExtCollection_RemoveAt_Verification(t *testing.T) {
 		ok := col.RemoveAt(1)
 
 		// Assert
-		if !ok || col.Length() != 2 {
-			t.Errorf("RemoveAt(1) expected success, got ok=%v len=%d", ok, col.Length())
-		}
+		actual := args.Map{"result": ok || col.Length() != 2}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "RemoveAt(1) expected success, got ok= len=", actual)
 
 		// Act - out of range
 		ok2 := col.RemoveAt(10)
 
 		// Assert
-		if ok2 {
-			t.Error("RemoveAt(10) should return false")
-		}
+		actual = args.Map{"result": ok2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RemoveAt(10) should return false", actual)
 
 		// Act - negative
 		ok3 := col.RemoveAt(-1)
 
 		// Assert
-		if ok3 {
-			t.Error("RemoveAt(-1) should return false")
-		}
+		actual = args.Map{"result": ok3}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RemoveAt(-1) should return false", actual)
 	})
 }
 
@@ -258,17 +258,17 @@ func Test_ExtCollection_ConcatNew_Verification(t *testing.T) {
 		result := col.ConcatNew(0, "b", "c")
 
 		// Assert
-		if result.Length() != 3 {
-			t.Errorf("ConcatNew expected 3, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ConcatNew expected 3", actual)
 
 		// Act - empty
 		result2 := col.ConcatNew(0)
 
 		// Assert
-		if result2.Length() != 1 {
-			t.Errorf("ConcatNew empty expected 1, got %d", result2.Length())
-		}
+		actual = args.Map{"result": result2.Length() != 1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ConcatNew empty expected 1", actual)
 	})
 }
 
@@ -285,18 +285,18 @@ func Test_ExtCollection_AsError_Verification(t *testing.T) {
 		err := col.AsError("; ")
 
 		// Assert
-		if err == nil || err.Error() != "err1; err2" {
-			t.Errorf("AsError expected 'err1; err2', got '%v'", err)
-		}
+		actual := args.Map{"result": err == nil || err.Error() != "err1; err2"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AsError expected 'err1; err2', got ''", actual)
 
 		// Act - empty
 		emptyCol := corestr.New.Collection.Cap(0)
 		err2 := emptyCol.AsDefaultError()
 
 		// Assert
-		if err2 != nil {
-			t.Error("AsDefaultError on empty should return nil")
-		}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AsDefaultError on empty should return nil", actual)
 	})
 }
 
@@ -313,9 +313,9 @@ func Test_ExtCollection_EachItemSplitBy_Verification(t *testing.T) {
 		result := col.EachItemSplitBy(",")
 
 		// Assert
-		if len(result) != 4 {
-			t.Errorf("EachItemSplitBy expected 4, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) != 4}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "EachItemSplitBy expected 4", actual)
 	})
 }
 
@@ -329,21 +329,21 @@ func Test_ExtCollection_HasIndex_Verification(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a", "b", "c"})
 
 		// Act & Assert
-		if !col.HasIndex(0) {
-			t.Error("HasIndex(0) should be true")
-		}
-		if !col.HasIndex(2) {
-			t.Error("HasIndex(2) should be true")
-		}
-		if col.HasIndex(3) {
-			t.Error("HasIndex(3) should be false")
-		}
-		if col.LastIndex() != 2 {
-			t.Errorf("LastIndex expected 2, got %d", col.LastIndex())
-		}
-		if !col.HasAnyItem() {
-			t.Error("HasAnyItem should be true")
-		}
+		actual := args.Map{"result": col.HasIndex(0)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasIndex(0) should be true", actual)
+		actual = args.Map{"result": col.HasIndex(2)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasIndex(2) should be true", actual)
+		actual = args.Map{"result": col.HasIndex(3)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HasIndex(3) should be false", actual)
+		actual = args.Map{"result": col.LastIndex() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LastIndex expected 2", actual)
+		actual = args.Map{"result": col.HasAnyItem()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAnyItem should be true", actual)
 	})
 }
 
@@ -361,9 +361,9 @@ func Test_ExtCollection_AddCollection_Verification(t *testing.T) {
 		col1.AddCollection(col2)
 
 		// Assert
-		if col1.Length() != 3 {
-			t.Errorf("AddCollection expected 3, got %d", col1.Length())
-		}
+		actual := args.Map{"result": col1.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddCollection expected 3", actual)
 	})
 }
 
@@ -378,9 +378,9 @@ func Test_ExtCollection_AddCollections_Verification(t *testing.T) {
 		col1.AddCollections(col2, col3)
 
 		// Assert
-		if col1.Length() != 3 {
-			t.Errorf("AddCollections expected 3, got %d", col1.Length())
-		}
+		actual := args.Map{"result": col1.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddCollections expected 3", actual)
 	})
 }
 
@@ -415,9 +415,9 @@ func Test_ExtSimpleSlice_AddIf_Verification(t *testing.T) {
 		ss.AddIf(false, "no")
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Errorf("AddIf expected 1, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddIf expected 1", actual)
 	})
 }
 
@@ -427,18 +427,18 @@ func Test_ExtSimpleSlice_FirstLast_Verification(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 
 		// Act & Assert
-		if ss.First() != "a" {
-			t.Errorf("First expected 'a', got '%s'", ss.First())
-		}
-		if ss.Last() != "c" {
-			t.Errorf("Last expected 'c', got '%s'", ss.Last())
-		}
-		if ss.FirstOrDefault() != "a" {
-			t.Errorf("FirstOrDefault expected 'a', got '%s'", ss.FirstOrDefault())
-		}
-		if ss.LastOrDefault() != "c" {
-			t.Errorf("LastOrDefault expected 'c', got '%s'", ss.LastOrDefault())
-		}
+		actual := args.Map{"result": ss.First() != "a"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "First expected 'a', got ''", actual)
+		actual = args.Map{"result": ss.Last() != "c"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Last expected 'c', got ''", actual)
+		actual = args.Map{"result": ss.FirstOrDefault() != "a"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "FirstOrDefault expected 'a', got ''", actual)
+		actual = args.Map{"result": ss.LastOrDefault() != "c"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LastOrDefault expected 'c', got ''", actual)
 	})
 }
 
@@ -448,18 +448,18 @@ func Test_ExtSimpleSlice_EmptyDefaults_Verification(t *testing.T) {
 		var ss *corestr.SimpleSlice
 
 		// Act & Assert
-		if ss.FirstOrDefault() != "" {
-			t.Error("nil.FirstOrDefault() should return empty")
-		}
-		if ss.LastOrDefault() != "" {
-			t.Error("nil.LastOrDefault() should return empty")
-		}
-		if !ss.IsEmpty() {
-			t.Error("nil.IsEmpty() should be true")
-		}
-		if ss.Length() != 0 {
-			t.Error("nil.Length() should be 0")
-		}
+		actual := args.Map{"result": ss.FirstOrDefault() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.FirstOrDefault() should return empty", actual)
+		actual = args.Map{"result": ss.LastOrDefault() != ""}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.LastOrDefault() should return empty", actual)
+		actual = args.Map{"result": ss.IsEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "nil.IsEmpty() should be true", actual)
+		actual = args.Map{"result": ss.Length() != 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.Length() should be 0", actual)
 	})
 }
 
@@ -473,12 +473,12 @@ func Test_ExtSimpleSlice_SkipTake_Verification(t *testing.T) {
 		taken := ss.Take(2)
 
 		// Assert
-		if len(skipped) != 2 || skipped[0] != "c" {
-			t.Errorf("Skip(2) expected [c,d], got %v", skipped)
-		}
-		if len(taken) != 2 || taken[0] != "a" {
-			t.Errorf("Take(2) expected [a,b], got %v", taken)
-		}
+		actual := args.Map{"result": len(skipped) != 2 || skipped[0] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Skip(2) expected [c,d]", actual)
+		actual = args.Map{"result": len(taken) != 2 || taken[0] != "a"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Take(2) expected [a,b]", actual)
 	})
 }
 
@@ -488,12 +488,12 @@ func Test_ExtSimpleSlice_IsContains_Verification(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"hello", "world"})
 
 		// Act & Assert
-		if !ss.IsContains("hello") {
-			t.Error("IsContains should find 'hello'")
-		}
-		if ss.IsContains("missing") {
-			t.Error("IsContains should not find 'missing'")
-		}
+		actual := args.Map{"result": ss.IsContains("hello")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsContains should find 'hello'", actual)
+		actual = args.Map{"result": ss.IsContains("missing")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsContains should not find 'missing'", actual)
 	})
 }
 
@@ -503,12 +503,12 @@ func Test_ExtSimpleSlice_IndexOf_Verification(t *testing.T) {
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b", "c"})
 
 		// Act & Assert
-		if ss.IndexOf("b") != 1 {
-			t.Errorf("IndexOf('b') expected 1, got %d", ss.IndexOf("b"))
-		}
-		if ss.IndexOf("z") != -1 {
-			t.Errorf("IndexOf('z') expected -1, got %d", ss.IndexOf("z"))
-		}
+		actual := args.Map{"result": ss.IndexOf("b") != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IndexOf('b') expected 1", actual)
+		actual = args.Map{"result": ss.IndexOf("z") != -1}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IndexOf('z') expected -1", actual)
 	})
 }
 
@@ -521,9 +521,9 @@ func Test_ExtSimpleSlice_InsertAt_Verification(t *testing.T) {
 		ss.InsertAt(1, "b")
 
 		// Assert
-		if ss.Length() != 3 || (*ss)[1] != "b" {
-			t.Errorf("InsertAt expected [a,b,c], got %v", *ss)
-		}
+		actual := args.Map{"result": ss.Length() != 3 || (*ss)[1] != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InsertAt expected [a,b,c]", actual)
 	})
 }
 
@@ -537,9 +537,9 @@ func Test_ExtSimpleSlice_AddError_Verification(t *testing.T) {
 		ss.AddError(fmt.Errorf("oops"))
 
 		// Assert
-		if ss.Length() != 1 {
-			t.Errorf("AddError expected 1, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddError expected 1", actual)
 	})
 }
 
@@ -552,18 +552,18 @@ func Test_ExtSimpleSlice_AsError_Verification(t *testing.T) {
 		err := ss.AsError(", ")
 
 		// Assert
-		if err == nil || err.Error() != "e1, e2" {
-			t.Errorf("AsError expected 'e1, e2', got '%v'", err)
-		}
+		actual := args.Map{"result": err == nil || err.Error() != "e1, e2"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AsError expected 'e1, e2', got ''", actual)
 
 		// Act - nil empty
 		var nilSS *corestr.SimpleSlice
 		err2 := nilSS.AsError(", ")
 
 		// Assert
-		if err2 != nil {
-			t.Error("nil.AsError should return nil")
-		}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.AsError should return nil", actual)
 	})
 }
 
@@ -579,9 +579,9 @@ func Test_ExtSimpleSlice_AppendFmt_Verification(t *testing.T) {
 		ss.AppendFmtIf(false, "No %d", 2)
 
 		// Assert
-		if ss.Length() != 2 {
-			t.Errorf("AppendFmt expected 2 items, got %d", ss.Length())
-		}
+		actual := args.Map{"result": ss.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AppendFmt expected 2 items", actual)
 	})
 }
 
@@ -596,9 +596,9 @@ func Test_ExtSimpleSlice_CountFunc_Verification(t *testing.T) {
 		})
 
 		// Assert
-		if count != 2 {
-			t.Errorf("CountFunc expected 2, got %d", count)
-		}
+		actual := args.Map{"result": count != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "CountFunc expected 2", actual)
 	})
 }
 
@@ -642,27 +642,27 @@ func Test_ExtLeftRight_Methods_Verification(t *testing.T) {
 		lr := corestr.NewLeftRight(" hello ", " world ")
 
 		// Act & Assert
-		if lr.IsLeftEmpty() {
-			t.Error("IsLeftEmpty should be false")
-		}
-		if lr.IsRightEmpty() {
-			t.Error("IsRightEmpty should be false")
-		}
-		if !lr.HasSafeNonEmpty() {
-			t.Error("HasSafeNonEmpty should be true")
-		}
-		if lr.LeftTrim() != "hello" {
-			t.Errorf("LeftTrim expected 'hello', got '%s'", lr.LeftTrim())
-		}
-		if lr.RightTrim() != "world" {
-			t.Errorf("RightTrim expected 'world', got '%s'", lr.RightTrim())
-		}
-		if string(lr.LeftBytes()) != " hello " {
-			t.Errorf("LeftBytes mismatch")
-		}
-		if string(lr.RightBytes()) != " world " {
-			t.Errorf("RightBytes mismatch")
-		}
+		actual := args.Map{"result": lr.IsLeftEmpty()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsLeftEmpty should be false", actual)
+		actual = args.Map{"result": lr.IsRightEmpty()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "IsRightEmpty should be false", actual)
+		actual = args.Map{"result": lr.HasSafeNonEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasSafeNonEmpty should be true", actual)
+		actual = args.Map{"result": lr.LeftTrim() != "hello"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftTrim expected 'hello', got ''", actual)
+		actual = args.Map{"result": lr.RightTrim() != "world"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RightTrim expected 'world', got ''", actual)
+		actual = args.Map{"result": string(lr.LeftBytes()) != " hello "}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftBytes mismatch", actual)
+		actual = args.Map{"result": string(lr.RightBytes()) != " world "}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RightBytes mismatch", actual)
 	})
 }
 
@@ -674,21 +674,21 @@ func Test_ExtLeftRight_IsEqual_Verification(t *testing.T) {
 		lr3 := corestr.NewLeftRight("a", "c")
 
 		// Act & Assert
-		if !lr1.IsEqual(lr2) {
-			t.Error("Same content should be equal")
-		}
-		if lr1.IsEqual(lr3) {
-			t.Error("Different content should not be equal")
-		}
+		actual := args.Map{"result": lr1.IsEqual(lr2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Same content should be equal", actual)
+		actual = args.Map{"result": lr1.IsEqual(lr3)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Different content should not be equal", actual)
 
 		// nil cases
 		var nilLR *corestr.LeftRight
-		if !nilLR.IsEqual(nil) {
-			t.Error("nil.IsEqual(nil) should be true")
-		}
-		if lr1.IsEqual(nil) {
-			t.Error("non-nil.IsEqual(nil) should be false")
-		}
+		actual = args.Map{"result": nilLR.IsEqual(nil)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "nil.IsEqual(nil) should be true", actual)
+		actual = args.Map{"result": lr1.IsEqual(nil)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "non-nil.IsEqual(nil) should be false", actual)
 	})
 }
 
@@ -701,9 +701,9 @@ func Test_ExtLeftRight_Clone_Verification(t *testing.T) {
 		cloned := lr.Clone()
 
 		// Assert
-		if cloned.Left != "a" || cloned.Right != "b" {
-			t.Error("Clone should copy values")
-		}
+		actual := args.Map{"result": cloned.Left != "a" || cloned.Right != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Clone should copy values", actual)
 	})
 }
 
@@ -714,15 +714,15 @@ func Test_ExtLeftRight_RegexMatch_Verification(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 
 		// Act & Assert
-		if !lr.IsLeftRegexMatch(re) {
-			t.Error("IsLeftRegexMatch should be true")
-		}
-		if !lr.IsRightRegexMatch(re) {
-			t.Error("IsRightRegexMatch should be true")
-		}
-		if lr.IsLeftRegexMatch(nil) {
-			t.Error("nil regex should return false")
-		}
+		actual := args.Map{"result": lr.IsLeftRegexMatch(re)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsLeftRegexMatch should be true", actual)
+		actual = args.Map{"result": lr.IsRightRegexMatch(re)}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsRightRegexMatch should be true", actual)
+		actual = args.Map{"result": lr.IsLeftRegexMatch(nil)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil regex should return false", actual)
 	})
 }
 
@@ -732,15 +732,15 @@ func Test_ExtLeftRight_Is_Verification(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 
 		// Act & Assert
-		if !lr.IsLeft("a") {
-			t.Error("IsLeft should be true")
-		}
-		if !lr.IsRight("b") {
-			t.Error("IsRight should be true")
-		}
-		if !lr.Is("a", "b") {
-			t.Error("Is should be true")
-		}
+		actual := args.Map{"result": lr.IsLeft("a")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsLeft should be true", actual)
+		actual = args.Map{"result": lr.IsRight("b")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsRight should be true", actual)
+		actual = args.Map{"result": lr.Is("a", "b")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Is should be true", actual)
 	})
 }
 
@@ -752,12 +752,12 @@ func Test_ExtLeftRight_InvalidCreation_Verification(t *testing.T) {
 		lr2 := corestr.InvalidLeftRight("test error")
 
 		// Assert
-		if lr1.IsValid {
-			t.Error("InvalidLeftRightNoMessage should be invalid")
-		}
-		if lr2.IsValid || lr2.Message == "" {
-			t.Error("InvalidLeftRight should be invalid with message")
-		}
+		actual := args.Map{"result": lr1.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InvalidLeftRightNoMessage should be invalid", actual)
+		actual = args.Map{"result": lr2.IsValid || lr2.Message == ""}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InvalidLeftRight should be invalid with message", actual)
 	})
 }
 
@@ -770,9 +770,9 @@ func Test_ExtLeftRight_Dispose_Verification(t *testing.T) {
 		lr.Dispose()
 
 		// Assert
-		if lr.Left != "" || lr.Right != "" {
-			t.Error("Dispose should clear values")
-		}
+		actual := args.Map{"result": lr.Left != "" || lr.Right != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Dispose should clear values", actual)
 	})
 }
 
@@ -812,30 +812,30 @@ func Test_ExtLeftMiddleRight_Methods_Verification(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight(" L ", " M ", " R ")
 
 		// Act & Assert
-		if lmr.LeftTrim() != "L" {
-			t.Errorf("LeftTrim expected 'L', got '%s'", lmr.LeftTrim())
-		}
-		if lmr.MiddleTrim() != "M" {
-			t.Errorf("MiddleTrim expected 'M', got '%s'", lmr.MiddleTrim())
-		}
-		if lmr.RightTrim() != "R" {
-			t.Errorf("RightTrim expected 'R', got '%s'", lmr.RightTrim())
-		}
-		if string(lmr.LeftBytes()) != " L " {
-			t.Error("LeftBytes mismatch")
-		}
-		if string(lmr.MiddleBytes()) != " M " {
-			t.Error("MiddleBytes mismatch")
-		}
-		if string(lmr.RightBytes()) != " R " {
-			t.Error("RightBytes mismatch")
-		}
-		if !lmr.HasSafeNonEmpty() {
-			t.Error("HasSafeNonEmpty should be true")
-		}
-		if !lmr.IsAll(" L ", " M ", " R ") {
-			t.Error("IsAll should be true")
-		}
+		actual := args.Map{"result": lmr.LeftTrim() != "L"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftTrim expected 'L', got ''", actual)
+		actual = args.Map{"result": lmr.MiddleTrim() != "M"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "MiddleTrim expected 'M', got ''", actual)
+		actual = args.Map{"result": lmr.RightTrim() != "R"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RightTrim expected 'R', got ''", actual)
+		actual = args.Map{"result": string(lmr.LeftBytes()) != " L "}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftBytes mismatch", actual)
+		actual = args.Map{"result": string(lmr.MiddleBytes()) != " M "}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "MiddleBytes mismatch", actual)
+		actual = args.Map{"result": string(lmr.RightBytes()) != " R "}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "RightBytes mismatch", actual)
+		actual = args.Map{"result": lmr.HasSafeNonEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasSafeNonEmpty should be true", actual)
+		actual = args.Map{"result": lmr.IsAll(" L ", " M ", " R ")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "IsAll should be true", actual)
 	})
 }
 
@@ -848,9 +848,9 @@ func Test_ExtLeftMiddleRight_ToLeftRight_Verification(t *testing.T) {
 		lr := lmr.ToLeftRight()
 
 		// Assert
-		if lr.Left != "L" || lr.Right != "R" {
-			t.Errorf("ToLeftRight expected L/R, got %s/%s", lr.Left, lr.Right)
-		}
+		actual := args.Map{"result": lr.Left != "L" || lr.Right != "R"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ToLeftRight expected L/R, got/", actual)
 	})
 }
 
@@ -863,9 +863,9 @@ func Test_ExtLeftMiddleRight_Clone_Verification(t *testing.T) {
 		cloned := lmr.Clone()
 
 		// Assert
-		if cloned.Left != "L" || cloned.Middle != "M" || cloned.Right != "R" {
-			t.Error("Clone should copy all values")
-		}
+		actual := args.Map{"result": cloned.Left != "L" || cloned.Middle != "M" || cloned.Right != "R"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Clone should copy all values", actual)
 	})
 }
 
@@ -877,12 +877,12 @@ func Test_ExtLeftMiddleRight_Invalid_Verification(t *testing.T) {
 		lmr2 := corestr.InvalidLeftMiddleRight("test")
 
 		// Assert
-		if lmr1.IsValid {
-			t.Error("InvalidLeftMiddleRightNoMessage should be invalid")
-		}
-		if lmr2.IsValid || lmr2.Message == "" {
-			t.Error("InvalidLeftMiddleRight should be invalid with message")
-		}
+		actual := args.Map{"result": lmr1.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InvalidLeftMiddleRightNoMessage should be invalid", actual)
+		actual = args.Map{"result": lmr2.IsValid || lmr2.Message == ""}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InvalidLeftMiddleRight should be invalid with message", actual)
 	})
 }
 
@@ -895,9 +895,9 @@ func Test_ExtLeftMiddleRight_Dispose_Verification(t *testing.T) {
 		lmr.Dispose()
 
 		// Assert
-		if lmr.Left != "" || lmr.Middle != "" || lmr.Right != "" {
-			t.Error("Dispose should clear all values")
-		}
+		actual := args.Map{"result": lmr.Left != "" || lmr.Middle != "" || lmr.Right != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Dispose should clear all values", actual)
 	})
 }
 
@@ -938,20 +938,20 @@ func Test_ExtHashset_AddRemove_Verification(t *testing.T) {
 		hs.Add("c")
 
 		// Assert
-		if hs.Length() != 3 {
-			t.Errorf("After adds expected 3, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "After adds expected 3", actual)
 
 		// Act
 		hs.Remove("b")
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Errorf("After remove expected 2, got %d", hs.Length())
-		}
-		if hs.Has("b") {
-			t.Error("Should not have 'b' after remove")
-		}
+		actual = args.Map{"result": hs.Length() != 2}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "After remove expected 2", actual)
+		actual = args.Map{"result": hs.Has("b")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Should not have 'b' after remove", actual)
 	})
 }
 
@@ -965,9 +965,9 @@ func Test_ExtHashset_AddNonEmpty_Verification(t *testing.T) {
 		hs.AddNonEmpty("hello")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Errorf("AddNonEmpty expected 1, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddNonEmpty expected 1", actual)
 	})
 }
 
@@ -981,9 +981,9 @@ func Test_ExtHashset_AddNonEmptyWhitespace_Verification(t *testing.T) {
 		hs.AddNonEmptyWhitespace("hello")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Errorf("AddNonEmptyWhitespace expected 1, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddNonEmptyWhitespace expected 1", actual)
 	})
 }
 
@@ -997,9 +997,9 @@ func Test_ExtHashset_AddIf_Verification(t *testing.T) {
 		hs.AddIf(false, "no")
 
 		// Assert
-		if hs.Length() != 1 {
-			t.Errorf("AddIf expected 1, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 1}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddIf expected 1", actual)
 	})
 }
 
@@ -1012,9 +1012,9 @@ func Test_ExtHashset_List_Verification(t *testing.T) {
 		list := hs.List()
 
 		// Assert
-		if len(list) != 3 {
-			t.Errorf("List expected 3 items, got %d", len(list))
-		}
+		actual := args.Map{"result": len(list) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "List expected 3 items", actual)
 	})
 }
 
@@ -1027,9 +1027,9 @@ func Test_ExtHashset_SortedList_Verification(t *testing.T) {
 		sorted := hs.SortedList()
 
 		// Assert
-		if len(sorted) != 3 || sorted[0] != "a" || sorted[1] != "b" || sorted[2] != "c" {
-			t.Errorf("SortedList expected [a,b,c], got %v", sorted)
-		}
+		actual := args.Map{"result": len(sorted) != 3 || sorted[0] != "a" || sorted[1] != "b" || sorted[2] != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "SortedList expected [a,b,c]", actual)
 	})
 }
 
@@ -1039,18 +1039,18 @@ func Test_ExtHashset_HasAll_HasAny_Verification(t *testing.T) {
 		hs := corestr.New.Hashset.Strings([]string{"a", "b", "c"})
 
 		// Act & Assert
-		if !hs.HasAll("a", "c") {
-			t.Error("HasAll should be true")
-		}
-		if hs.HasAll("a", "z") {
-			t.Error("HasAll should be false with missing")
-		}
-		if !hs.HasAny("z", "a") {
-			t.Error("HasAny should be true")
-		}
-		if hs.HasAny("x", "y") {
-			t.Error("HasAny should be false")
-		}
+		actual := args.Map{"result": hs.HasAll("a", "c")}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAll should be true", actual)
+		actual = args.Map{"result": hs.HasAll("a", "z")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HasAll should be false with missing", actual)
+		actual = args.Map{"result": hs.HasAny("z", "a")}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "HasAny should be true", actual)
+		actual = args.Map{"result": hs.HasAny("x", "y")}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "HasAny should be false", actual)
 	})
 }
 
@@ -1060,12 +1060,12 @@ func Test_ExtHashset_NilReceiver_Verification(t *testing.T) {
 		var hs *corestr.Hashset
 
 		// Act & Assert
-		if !hs.IsEmpty() {
-			t.Error("nil.IsEmpty() should be true")
-		}
-		if hs.HasItems() {
-			t.Error("nil.HasItems() should be false")
-		}
+		actual := args.Map{"result": hs.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "nil.IsEmpty() should be true", actual)
+		actual = args.Map{"result": hs.HasItems()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil.HasItems() should be false", actual)
 	})
 }
 
@@ -1079,9 +1079,9 @@ func Test_ExtHashset_AddCollection_Verification(t *testing.T) {
 		hs.AddCollection(col)
 
 		// Assert
-		if hs.Length() != 2 {
-			t.Errorf("AddCollection expected 2, got %d", hs.Length())
-		}
+		actual := args.Map{"result": hs.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddCollection expected 2", actual)
 	})
 }
 
@@ -1095,9 +1095,9 @@ func Test_ExtHashset_AddHashsetItems_Verification(t *testing.T) {
 		hs1.AddHashsetItems(hs2)
 
 		// Assert
-		if hs1.Length() != 3 {
-			t.Errorf("AddHashsetItems expected 3, got %d", hs1.Length())
-		}
+		actual := args.Map{"result": hs1.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddHashsetItems expected 3", actual)
 	})
 }
 
@@ -1115,9 +1115,9 @@ func Test_ExtHashset_ConcatNewHashsets_Verification(t *testing.T) {
 		result := hs1.ConcatNewHashsets(true, hs2)
 
 		// Assert
-		if result.Length() < 2 {
-			t.Errorf("ConcatNewHashsets expected >= 2, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ConcatNewHashsets expected >= 2", actual)
 	})
 }
 
@@ -1130,9 +1130,9 @@ func Test_ExtHashset_ConcatNewStrings_Verification(t *testing.T) {
 		result := hs.ConcatNewStrings(true, []string{"b", "c"})
 
 		// Assert
-		if result.Length() < 2 {
-			t.Errorf("ConcatNewStrings expected >= 2, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "ConcatNewStrings expected >= 2", actual)
 	})
 }
 
@@ -1148,12 +1148,12 @@ func Test_ExtHashset_IsEqual_Verification(t *testing.T) {
 		hs3 := corestr.New.Hashset.Strings([]string{"a", "c"})
 
 		// Act & Assert
-		if !hs1.IsEqual(hs2) {
-			t.Error("Same content should be equal")
-		}
-		if hs1.IsEqual(hs3) {
-			t.Error("Different content should not be equal")
-		}
+		actual := args.Map{"result": hs1.IsEqual(hs2)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Same content should be equal", actual)
+		actual = args.Map{"result": hs1.IsEqual(hs3)}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Different content should not be equal", actual)
 	})
 }
 
@@ -1200,9 +1200,9 @@ func Test_ExtLeftRightFromSplit_Verification(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 
 		// Assert
-		if lr.Left != "key" || lr.Right != "value" {
-			t.Errorf("LeftRightFromSplit expected key/value, got %s/%s", lr.Left, lr.Right)
-		}
+		actual := args.Map{"result": lr.Left != "key" || lr.Right != "value"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit expected key/value, got/", actual)
 	})
 }
 
@@ -1213,9 +1213,9 @@ func Test_ExtLeftMiddleRightFromSplit_Verification(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplit("a/b/c", "/")
 
 		// Assert
-		if lmr.Left != "a" || lmr.Right != "c" {
-			t.Errorf("LeftMiddleRightFromSplit expected a/c, got %s/%s", lmr.Left, lmr.Right)
-		}
+		actual := args.Map{"result": lmr.Left != "a" || lmr.Right != "c"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit expected a/c, got/", actual)
 	})
 }
 
@@ -1233,9 +1233,9 @@ func Test_ExtCollection_JsonString_Verification(t *testing.T) {
 
 		// Assert — JsonPtr uses value receiver but slice is a reference type,
 		// so the copy retains the underlying items and serialization works.
-		if result == "" {
-			t.Error("JsonString should be non-empty for a populated collection")
-		}
+		actual := args.Map{"result": result == ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "JsonString should be non-empty for a populated collection", actual)
 	})
 }
 
@@ -1250,33 +1250,33 @@ func Test_ExtLeftRightTrimmedUsingSlice_Verification(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 
 		// Assert
-		if lr.Left != "a" || lr.Right != "b" {
-			t.Errorf("LeftRightTrimmedUsingSlice expected a/b, got %s/%s", lr.Left, lr.Right)
-		}
+		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "LeftRightTrimmedUsingSlice expected a/b, got/", actual)
 
 		// Act - single element
 		lr2 := corestr.LeftRightTrimmedUsingSlice([]string{"only"})
 
 		// Assert
-		if lr2.Left != "only" || lr2.IsValid {
-			t.Error("Single element should not be valid")
-		}
+		actual = args.Map{"result": lr2.Left != "only" || lr2.IsValid}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Single element should not be valid", actual)
 
 		// Act - empty
 		lr3 := corestr.LeftRightTrimmedUsingSlice([]string{})
 
 		// Assert
-		if lr3.IsValid {
-			t.Error("Empty slice should not be valid")
-		}
+		actual = args.Map{"result": lr3.IsValid}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Empty slice should not be valid", actual)
 
 		// Act - nil
 		lr4 := corestr.LeftRightTrimmedUsingSlice(nil)
 
 		// Assert
-		if lr4.IsValid {
-			t.Error("nil slice should not be valid")
-		}
+		actual = args.Map{"result": lr4.IsValid}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "nil slice should not be valid", actual)
 	})
 }
 
@@ -1295,9 +1295,9 @@ func Test_ExtHashset_Filter_Verification(t *testing.T) {
 		})
 
 		// Assert
-		if filtered.Length() != 2 {
-			t.Errorf("Filter expected 2 items starting with 'a', got %d", filtered.Length())
-		}
+		actual := args.Map{"result": filtered.Length() != 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Filter expected 2 items starting with 'a'", actual)
 	})
 }
 
@@ -1315,9 +1315,9 @@ func Test_ExtCollection_AddLock_Verification(t *testing.T) {
 		col.AddsLock("b", "c")
 
 		// Assert
-		if col.Length() != 3 {
-			t.Errorf("AddLock/AddsLock expected 3, got %d", col.Length())
-		}
+		actual := args.Map{"result": col.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "AddLock/AddsLock expected 3", actual)
 	})
 }
 
@@ -1334,14 +1334,14 @@ func Test_ExtEmptyCreator_Verification(t *testing.T) {
 		hm := corestr.Empty.Hashmap()
 
 		// Assert
-		if !col.IsEmpty() {
-			t.Error("Empty.Collection should be empty")
-		}
-		if !hs.IsEmpty() {
-			t.Error("Empty.Hashset should be empty")
-		}
-		if !hm.IsEmpty() {
-			t.Error("Empty.Hashmap should be empty")
-		}
+		actual := args.Map{"result": col.IsEmpty()}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Empty.Collection should be empty", actual)
+		actual = args.Map{"result": hs.IsEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Empty.Hashset should be empty", actual)
+		actual = args.Map{"result": hm.IsEmpty()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "Empty.Hashmap should be empty", actual)
 	})
 }

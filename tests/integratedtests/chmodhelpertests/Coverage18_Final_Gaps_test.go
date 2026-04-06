@@ -19,7 +19,7 @@ func Test_Cov18_GetRecursivePaths_InvalidRoot(t *testing.T) {
 	invalidPath := string([]byte{0})
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(invalidPath)
+	paths, err := chmodhelper.GetRecursivePaths(false, invalidPath)
 
 	// Assert
 	actual := args.Map{
@@ -59,7 +59,7 @@ func Test_Cov18_GetRecursivePathsContinueOnError_InvalidRoot(t *testing.T) {
 func Test_Cov18_MergeRwxWildcardWithFixedRwx_InvalidWildcard(t *testing.T) {
 	// Arrange
 	existingRwx := "rwx"
-	invalidWildcard := "zzz" // invalid rwx chars
+	invalidWildcard := "zzzz" // invalid length (not 3)
 
 	// Act
 	result, err := chmodhelper.MergeRwxWildcardWithFixedRwx(existingRwx, invalidWildcard)
@@ -301,8 +301,8 @@ func Test_Cov18_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
 // ── chmodVerifier — IsEqualRwxFullSkipInvalid with invalid path ──
 
 func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T) {
-	// Arrange
-	invalidPath := string([]byte{0})
+	// Arrange — use truly non-existent path (os.IsNotExist returns true)
+	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(invalidPath, "-rwxrwxrwx")
@@ -316,8 +316,8 @@ func Test_Cov18_ChmodVerifier_IsEqualRwxFullSkipInvalid_InvalidPath(t *testing.T
 // ── chmodVerifier — IsEqualSkipInvalid with invalid path ──
 
 func Test_Cov18_ChmodVerifier_IsEqualSkipInvalid_InvalidPath(t *testing.T) {
-	// Arrange
-	invalidPath := string([]byte{0})
+	// Arrange — use truly non-existent path
+	invalidPath := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(invalidPath, 0755)
@@ -423,7 +423,7 @@ func Test_Cov18_SimpleFileReaderWriter_WriteBytes_InvalidPath(t *testing.T) {
 	initialized := rw.InitializeDefault(false)
 
 	// Act
-	err := initialized.WriteBytes([]byte("test"))
+	err := initialized.Write([]byte("test"))
 
 	// Assert
 	actual := args.Map{"hasErr": err != nil}
@@ -467,9 +467,11 @@ func Test_Cov18_RwxWrapper_ApplyChmodSkipInvalid_InvalidPath(t *testing.T) {
 	if err != nil {
 		t.Skip("RwxWrapper creation failed")
 	}
+	// Use truly non-existent path (os.IsNotExist returns true)
+	nonExistent := filepath.Join(t.TempDir(), "no_such_file")
 
 	// Act
-	err = wrapper.ApplyChmodSkipInvalid(string([]byte{0}))
+	err = wrapper.ApplyChmodSkipInvalid(nonExistent)
 
 	// Assert
 	actual := args.Map{"errNil": err == nil}
@@ -510,6 +512,7 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	// Arrange
 	invalidPath := string([]byte{0})
 	dirWithFile := chmodhelper.DirWithFiles{
+		Dir:   invalidPath,
 		Files: []string{"test.txt"},
 	}
 
@@ -517,7 +520,6 @@ func Test_Cov18_CreateDirWithFiles_InvalidRemovePath(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(
 		true,
 		0755,
-		invalidPath,
 		&dirWithFile,
 	)
 
@@ -537,7 +539,7 @@ func Test_Cov18_GetRecursivePaths_ValidDir(t *testing.T) {
 	_ = os.WriteFile(filepath.Join(subDir, "file.txt"), []byte("hi"), 0644)
 
 	// Act
-	paths, err := chmodhelper.GetRecursivePaths(tmpDir)
+	paths, err := chmodhelper.GetRecursivePaths(false, tmpDir)
 
 	// Assert
 	actual := args.Map{

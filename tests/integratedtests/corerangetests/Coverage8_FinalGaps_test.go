@@ -580,65 +580,32 @@ func Test_Cov8_StartEndInt(t *testing.T) {
 
 	// Act & Assert
 	convey.Convey("StartEndInt methods", t, func() {
-		convey.So(se.Length(), convey.ShouldEqual, 4)
 		convey.So(se.RangeLength(), convey.ShouldEqual, 5)
 		convey.So(se.Ranges(), convey.ShouldNotBeEmpty)
 		convey.So(se.String(), convey.ShouldNotBeEmpty)
-		convey.So(se.IsEmpty(), convey.ShouldBeFalse)
+		convey.So(se.IsInvalid(), convey.ShouldBeFalse)
 	})
 }
 
-func Test_Cov8_StartEndInt_Clone(t *testing.T) {
+func Test_Cov8_StartEndInt_Diff(t *testing.T) {
 	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 
 	// Act
-	cloned := se.Clone()
-	clonedPtr := se.ClonePtr()
+	diff := se.Diff()
+	diffAbs := se.DifferenceAbsolute()
 
 	// Assert
-	convey.Convey("StartEndInt.Clone and ClonePtr", t, func() {
-		convey.So(cloned.Start, convey.ShouldEqual, 1)
-		convey.So(clonedPtr.Start, convey.ShouldEqual, 1)
+	convey.Convey("StartEndInt.Diff and DifferenceAbsolute", t, func() {
+		convey.So(diff, convey.ShouldEqual, 4)
+		convey.So(diffAbs, convey.ShouldEqual, 4)
 	})
 }
 
-func Test_Cov8_StartEndInt_ClonePtr_Nil(t *testing.T) {
-	// Arrange
-	var se *corerange.StartEndInt
+// StartEndInt.ClonePtr, StartEndString.IsEmpty, StartEndSimpleString.Length/IsEmpty/String/Clone/ClonePtr,
+// and Within.StringRangeInt do not exist — removed.
 
-	// Act
-	result := se.ClonePtr()
-
-	// Assert
-	convey.Convey("StartEndInt.ClonePtr nil returns nil", t, func() {
-		convey.So(result, convey.ShouldBeNil)
-	})
-}
-
-// --- RangeString / StartEndString / StartEndSimpleString ---
-
-func Test_Cov8_RangeString(t *testing.T) {
-	// Arrange
-	rs := &corerange.RangeString{
-		StartEndString: &corerange.StartEndString{
-			BaseRange: &corerange.BaseRange{
-				RawInput:  "a-z",
-				Separator: "-",
-				IsValid:   true,
-			},
-			Start: "a",
-			End:   "z",
-		},
-	}
-
-	// Act & Assert
-	convey.Convey("RangeString methods", t, func() {
-		convey.So(rs.String(), convey.ShouldNotBeEmpty)
-	})
-}
-
-func Test_Cov8_StartEndString(t *testing.T) {
+func Test_Cov8_StartEndString_String(t *testing.T) {
 	// Arrange
 	ses := &corerange.StartEndString{
 		BaseRange: &corerange.BaseRange{
@@ -649,13 +616,12 @@ func Test_Cov8_StartEndString(t *testing.T) {
 	}
 
 	// Act & Assert
-	convey.Convey("StartEndString methods", t, func() {
+	convey.Convey("StartEndString.String", t, func() {
 		convey.So(ses.String(), convey.ShouldNotBeEmpty)
-		convey.So(ses.IsEmpty(), convey.ShouldBeFalse)
 	})
 }
 
-func Test_Cov8_StartEndSimpleString(t *testing.T) {
+func Test_Cov8_StartEndSimpleString_StringHyphen(t *testing.T) {
 	// Arrange
 	sess := &corerange.StartEndSimpleString{
 		Start: "a",
@@ -663,61 +629,10 @@ func Test_Cov8_StartEndSimpleString(t *testing.T) {
 	}
 
 	// Act & Assert
-	convey.Convey("StartEndSimpleString methods", t, func() {
-		convey.So(sess.Length(), convey.ShouldEqual, 0) // string length difference
-		convey.So(sess.IsEmpty(), convey.ShouldBeFalse)
-		convey.So(sess.String(), convey.ShouldNotBeEmpty)
-	})
-}
-
-func Test_Cov8_StartEndSimpleString_Clone(t *testing.T) {
-	// Arrange
-	sess := &corerange.StartEndSimpleString{Start: "a", End: "z"}
-
-	// Act
-	cloned := sess.Clone()
-	clonedPtr := sess.ClonePtr()
-
-	// Assert
-	convey.Convey("StartEndSimpleString.Clone", t, func() {
-		convey.So(cloned.Start, convey.ShouldEqual, "a")
-		convey.So(clonedPtr.Start, convey.ShouldEqual, "a")
-	})
-}
-
-func Test_Cov8_StartEndSimpleString_ClonePtr_Nil(t *testing.T) {
-	// Arrange
-	var sess *corerange.StartEndSimpleString
-
-	// Act
-	result := sess.ClonePtr()
-
-	// Assert
-	convey.Convey("StartEndSimpleString.ClonePtr nil returns nil", t, func() {
-		convey.So(result, convey.ShouldBeNil)
-	})
-}
-
-// --- Within methods ---
-
-func Test_Cov8_Within_StringRangeInt(t *testing.T) {
-	// Act
-	val, ok := corerange.Within.StringRangeInt("42")
-
-	// Assert
-	convey.Convey("Within.StringRangeInt parses valid", t, func() {
-		convey.So(ok, convey.ShouldBeTrue)
-		convey.So(val, convey.ShouldEqual, 42)
-	})
-}
-
-func Test_Cov8_Within_StringRangeInt_Invalid(t *testing.T) {
-	// Act
-	_, ok := corerange.Within.StringRangeInt("abc")
-
-	// Assert
-	convey.Convey("Within.StringRangeInt invalid", t, func() {
-		convey.So(ok, convey.ShouldBeFalse)
+	convey.Convey("StartEndSimpleString.StringHyphen", t, func() {
+		convey.So(sess.StringHyphen(), convey.ShouldNotBeEmpty)
+		convey.So(sess.StringColon(), convey.ShouldNotBeEmpty)
+		convey.So(sess.StringSpace(), convey.ShouldNotBeEmpty)
 	})
 }
 

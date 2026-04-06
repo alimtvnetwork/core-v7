@@ -10,24 +10,53 @@ import (
 // ── StringOnce ──
 
 func Test_Cov6_StringOnce_SplitLeftRight(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "key=value" })
 	l, r := so.SplitLeftRight("=")
 	lt, rt := so.SplitLeftRightTrim("=")
-	actual := args.Map{"left": l, "right": r, "leftTrim": lt, "rightTrim": rt}
-	expected := args.Map{"left": "key", "right": "value", "leftTrim": "key", "rightTrim": "value"}
+
+	// Act
+	actual := args.Map{
+		"left": l,
+		"right": r,
+		"leftTrim": lt,
+		"rightTrim": rt,
+	}
+
+	// Assert
+	expected := args.Map{
+		"left": "key",
+		"right": "value",
+		"leftTrim": "key",
+		"rightTrim": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- SplitLeftRight", actual)
 }
 
 func Test_Cov6_StringOnce_SplitLeftRight_NoSep(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "nosep" })
 	l, r := so.SplitLeftRight("=")
-	actual := args.Map{"left": l, "right": r}
-	expected := args.Map{"left": "nosep", "right": ""}
+
+	// Act
+	actual := args.Map{
+		"left": l,
+		"right": r,
+	}
+
+	// Assert
+	expected := args.Map{
+		"left": "nosep",
+		"right": "",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns empty -- SplitLeftRight no separator", actual)
 }
 
 func Test_Cov6_StringOnce_Helpers(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "Hello World" })
+
+	// Act
 	actual := args.Map{
 		"isEqual":      so.IsEqual("Hello World"),
 		"hasPrefix":    so.HasPrefix("Hello"),
@@ -41,6 +70,8 @@ func Test_Cov6_StringOnce_Helpers(t *testing.T) {
 		"errorNotNil":  so.Error() != nil,
 		"valuePtrNN":   so.ValuePtr() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEqual": true, "hasPrefix": true, "hasSuffix": true,
 		"startsWith": true, "endsWith": true, "contains": true,
@@ -51,76 +82,142 @@ func Test_Cov6_StringOnce_Helpers(t *testing.T) {
 }
 
 func Test_Cov6_StringOnce_SplitBy(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "a,b,c" })
 	result := so.SplitBy(",")
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- SplitBy", actual)
 }
 
 func Test_Cov6_StringOnce_Execute(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "exec" })
+
+	// Act
 	actual := args.Map{"val": so.Execute()}
+
+	// Assert
 	expected := args.Map{"val": "exec"}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- Execute", actual)
 }
 
 func Test_Cov6_StringOnce_Serialize(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "test" })
 	data, err := so.Serialize()
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
-	expected := args.Map{"noErr": true, "notEmpty": true}
+
+	// Act
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
+
+	// Assert
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- Serialize", actual)
 }
 
 func Test_Cov6_StringOnce_MarshalUnmarshalJSON(t *testing.T) {
+	// Arrange
 	so := coreonce.NewStringOnce(func() string { return "hello" })
 	data, err := so.MarshalJSON()
 	var so2 coreonce.StringOnce
 	err2 := so2.UnmarshalJSON(data)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil, "noErr2": err2 == nil,
 		"value": so2.Value(),
 	}
-	expected := args.Map{"noErr": true, "noErr2": true, "value": "hello"}
+
+	// Assert
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"value": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "StringOnce returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
 // ── BoolOnce ──
 
 func Test_Cov6_BoolOnce_Execute(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
+
+	// Act
 	actual := args.Map{
 		"val":    bo.Value(),
 		"exec":   bo.Execute(),
 		"string": bo.String(),
 	}
-	expected := args.Map{"val": true, "exec": true, "string": "true"}
+
+	// Assert
+	expected := args.Map{
+		"val": true,
+		"exec": true,
+		"string": "true",
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Execute", actual)
 }
 
 func Test_Cov6_BoolOnce_Serialize(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return false })
 	data, err := bo.Serialize()
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
-	expected := args.Map{"noErr": true, "notEmpty": true}
+
+	// Act
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
+
+	// Assert
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- Serialize", actual)
 }
 
 func Test_Cov6_BoolOnce_MarshalUnmarshalJSON(t *testing.T) {
+	// Arrange
 	bo := coreonce.NewBoolOnce(func() bool { return true })
 	data, err := bo.MarshalJSON()
 	var bo2 coreonce.BoolOnce
 	err2 := bo2.UnmarshalJSON(data)
-	actual := args.Map{"noErr": err == nil, "noErr2": err2 == nil, "val": bo2.Value()}
-	expected := args.Map{"noErr": true, "noErr2": true, "val": true}
+
+	// Act
+	actual := args.Map{
+		"noErr": err == nil,
+		"noErr2": err2 == nil,
+		"val": bo2.Value(),
+	}
+
+	// Assert
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BoolOnce returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
 // ── IntegerOnce ──
 
 func Test_Cov6_IntegerOnce_Comparisons(t *testing.T) {
+	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 5 })
+
+	// Act
 	actual := args.Map{
 		"value":        io.Value(),
 		"execute":      io.Execute(),
@@ -140,6 +237,8 @@ func Test_Cov6_IntegerOnce_Comparisons(t *testing.T) {
 		"isPositive":   io.IsPositive(),
 		"string":       io.String(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"value": 5, "execute": 5,
 		"isEmpty": false, "isZero": false,
@@ -155,17 +254,31 @@ func Test_Cov6_IntegerOnce_Comparisons(t *testing.T) {
 }
 
 func Test_Cov6_IntegerOnce_Serialize(t *testing.T) {
+	// Arrange
 	io := coreonce.NewIntegerOnce(func() int { return 42 })
 	data, err := io.Serialize()
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
-	expected := args.Map{"noErr": true, "notEmpty": true}
+
+	// Act
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
+
+	// Assert
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegerOnce returns correct value -- Serialize", actual)
 }
 
 // ── ErrorOnce ──
 
 func Test_Cov6_ErrorOnce_NilError(t *testing.T) {
+	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
+
+	// Act
 	actual := args.Map{
 		"hasError": eo.HasError(),
 		"isEmpty":  eo.IsEmpty(),
@@ -178,6 +291,8 @@ func Test_Cov6_ErrorOnce_NilError(t *testing.T) {
 		"hasAny":    eo.HasAnyItem(),
 		"isInvalid": eo.IsInvalid(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasError": false, "isEmpty": true, "isValid": true,
 		"isNull": true, "message": "",
@@ -188,16 +303,26 @@ func Test_Cov6_ErrorOnce_NilError(t *testing.T) {
 }
 
 func Test_Cov6_ErrorOnce_IsMessageEqual(t *testing.T) {
+	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
+
+	// Act
 	actual := args.Map{"msgEq": eo.IsMessageEqual("test")}
+
+	// Assert
 	expected := args.Map{"msgEq": false}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce returns nil -- IsMessageEqual nil", actual)
 }
 
 func Test_Cov6_ErrorOnce_ConcatNew_NilError(t *testing.T) {
+	// Arrange
 	eo := coreonce.NewErrorOnce(func() error { return nil })
 	result := eo.ConcatNewString("extra")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "ErrorOnce returns nil -- ConcatNewString nil error", actual)
 }
@@ -205,9 +330,12 @@ func Test_Cov6_ErrorOnce_ConcatNew_NilError(t *testing.T) {
 // ── MapStringStringOnce ──
 
 func Test_Cov6_MapStringStringOnce_AllKeys(t *testing.T) {
+	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
 	})
+
+	// Act
 	actual := args.Map{
 		"length":       m.Length(),
 		"hasAnyItem":   m.HasAnyItem(),
@@ -223,6 +351,8 @@ func Test_Cov6_MapStringStringOnce_AllKeys(t *testing.T) {
 		"valuesSrtLen": len(m.AllValuesSorted()),
 		"stringsLen":   len(m.Strings()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"length": 2, "hasAnyItem": true, "isEmpty": false,
 		"hasA": true, "containsA": true, "missingC": true,
@@ -235,15 +365,20 @@ func Test_Cov6_MapStringStringOnce_AllKeys(t *testing.T) {
 }
 
 func Test_Cov6_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
+	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"key": "val"}
 	})
 	v, has := m.GetValueWithStatus("key")
 	v2, has2 := m.GetValueWithStatus("missing")
+
+	// Act
 	actual := args.Map{
 		"val": v, "has": has,
 		"val2": v2, "has2": has2,
 	}
+
+	// Assert
 	expected := args.Map{
 		"val": "val", "has": true,
 		"val2": "", "has2": false,
@@ -252,15 +387,20 @@ func Test_Cov6_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 }
 
 func Test_Cov6_MapStringStringOnce_IsEqual(t *testing.T) {
+	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
 	})
+
+	// Act
 	actual := args.Map{
 		"equal":    m.IsEqual(map[string]string{"a": "1"}),
 		"notEqual": m.IsEqual(map[string]string{"a": "2"}),
 		"missing":  m.IsEqual(map[string]string{"b": "1"}),
 		"diffLen":  m.IsEqual(map[string]string{"a": "1", "b": "2"}),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal": true, "notEqual": false,
 		"missing": false, "diffLen": false,
@@ -269,20 +409,30 @@ func Test_Cov6_MapStringStringOnce_IsEqual(t *testing.T) {
 }
 
 func Test_Cov6_MapStringStringOnce_String(t *testing.T) {
+	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
 	})
+
+	// Act
 	actual := args.Map{"notEmpty": m.String() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- String", actual)
 }
 
 func Test_Cov6_MapStringStringOnce_JsonStringMust(t *testing.T) {
+	// Arrange
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
 		return map[string]string{"a": "1"}
 	})
 	result := m.JsonStringMust()
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce returns correct value -- JsonStringMust", actual)
 }
@@ -290,6 +440,7 @@ func Test_Cov6_MapStringStringOnce_JsonStringMust(t *testing.T) {
 // ── AnyOnce ──
 
 func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
+	// Arrange
 	aoStr := coreonce.NewAnyOnce(func() any { return "hello" })
 	aoStrings := coreonce.NewAnyOnce(func() any { return []string{"a", "b"} })
 	aoMap := coreonce.NewAnyOnce(func() any { return map[string]string{"k": "v"} })
@@ -302,6 +453,7 @@ func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
 	vMapAny, okMapAny := aoMapAny.CastValueMapStringAnyMap()
 	vBytes, okBytes := aoBytes.CastValueBytes()
 
+	// Act
 	actual := args.Map{
 		"str": vStr, "okStr": okStr,
 		"stringsLen": len(vStrings), "okStrings": okStrings,
@@ -309,6 +461,8 @@ func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
 		"mapAnyLen": len(vMapAny), "okMapAny": okMapAny,
 		"bytesLen": len(vBytes), "okBytes": okBytes,
 	}
+
+	// Assert
 	expected := args.Map{
 		"str": "hello", "okStr": true,
 		"stringsLen": 2, "okStrings": true,
@@ -320,14 +474,19 @@ func Test_Cov6_AnyOnce_CastMethods(t *testing.T) {
 }
 
 func Test_Cov6_AnyOnce_Null(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return nil })
 	isInit := ao.IsInitialized()
+
+	// Act
 	actual := args.Map{
 		"isNull":           ao.IsNull(),
 		"isStringEmpty":    ao.IsStringEmpty(),
 		"isStringEmptyWS": ao.IsStringEmptyOrWhitespace(),
 		"isInitialized":   isInit,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isNull": true, "isStringEmpty": true,
 		"isStringEmptyWS": true, "isInitialized": isInit,
@@ -336,25 +495,35 @@ func Test_Cov6_AnyOnce_Null(t *testing.T) {
 }
 
 func Test_Cov6_AnyOnce_SerializeMust(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return "test" })
 	result := ao.SerializeMust()
+
+	// Act
 	actual := args.Map{"notEmpty": len(result) > 0}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "AnyOnce returns correct value -- SerializeMust", actual)
 }
 
 func Test_Cov6_AnyOnce_ValueString(t *testing.T) {
+	// Arrange
 	ao := coreonce.NewAnyOnce(func() any { return 42 })
 	v1 := ao.ValueString()
 	v2 := ao.ValueStringOnly()
 	v3 := ao.SafeString()
 	v4 := ao.ValueStringMust()
+
+	// Act
 	actual := args.Map{
 		"v1NotEmpty": v1 != "",
 		"v2Eq":       v1 == v2,
 		"v3Eq":       v1 == v3,
 		"v4Eq":       v1 == v4,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v1NotEmpty": true, "v2Eq": true, "v3Eq": true, "v4Eq": true,
 	}

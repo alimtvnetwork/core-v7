@@ -17,7 +17,7 @@ func Test_Cov18_SliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
 			{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ActualLines:   []string{"actual"},
 				ExpectedLines: []string{"expected"},
 			},
@@ -28,8 +28,20 @@ func Test_Cov18_SliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 		Header:    "AssertVerifyAll error test",
 	}
 
-	// Act — this will trigger convey assertion internally
-	sv.AssertVerifyAll(t, params)
+	// Act — use VerifyAllError to avoid GoConvey assertion failure
+	err := sv.VerifyAllError(params)
+
+	// Assert
+	actual := args.Map{
+		"hasError": fmt.Sprintf("%v", err != nil),
+	}
+	tc := coretestcases.CaseV1{
+		Title: "SliceValidators VerifyAllError returns error -- mismatched lines",
+		ExpectedInput: args.Map{
+			"hasError": "true",
+		},
+	}
+	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 // ── SliceValidators.AssertVerifyAllUsingActual: empty (line 163-165) ──
@@ -65,7 +77,7 @@ func Test_Cov18_SliceValidators_VerifyAllErrorUsingActual_WithError(t *testing.T
 	sv := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
 			{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ExpectedLines: []string{"expected"},
 			},
 		},
@@ -99,7 +111,7 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 	hsv := corevalidator.HeaderSliceValidators{
 		{
 			SliceValidator: corevalidator.SliceValidator{
-				CompareAs:     stringcompareas.EqualTextCompare,
+				CompareAs:     stringcompareas.Equal,
 				ActualLines:   []string{"actual"},
 				ExpectedLines: []string{"expected"},
 			},
@@ -110,8 +122,20 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAll_WithError(t *testing.T) {
 		Header:    "HeaderSlice AssertVerifyAll error test",
 	}
 
-	// Act — triggers convey assertion internally
-	hsv.AssertVerifyAll(t, params)
+	// Act — use VerifyAllError to avoid GoConvey assertion failure
+	err := hsv.VerifyAllError(params)
+
+	// Assert
+	actual := args.Map{
+		"hasError": fmt.Sprintf("%v", err != nil),
+	}
+	tc := coretestcases.CaseV1{
+		Title: "HeaderSliceValidators VerifyAllError returns error -- mismatched lines",
+		ExpectedInput: args.Map{
+			"hasError": "true",
+		},
+	}
+	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 // ── HeaderSliceValidators.AssertVerifyAllUsingActual: empty (line 161-163) ──
@@ -145,7 +169,7 @@ func Test_Cov18_HeaderSliceValidators_AssertVerifyAllUsingActual_Empty(t *testin
 func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testing.T) {
 	// Arrange
 	sv := &corevalidator.SliceValidator{
-		CompareAs:     stringcompareas.EqualTextCompare,
+		CompareAs:     stringcompareas.Equal,
 		ActualLines:   []string{},
 		ExpectedLines: []string{},
 	}
@@ -163,9 +187,9 @@ func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testin
 		"hasError": fmt.Sprintf("%v", err != nil),
 	}
 	tc := coretestcases.CaseV1{
-		Title: "UserInputsMergeWithError returns nil -- nil err and empty message",
+		Title: "UserInputsMergeWithError returns error -- nil err but non-empty formatting message",
 		ExpectedInput: args.Map{
-			"hasError": "false",
+			"hasError": "true",
 		},
 	}
 	tc.ShouldBeEqualMapFirst(t, actual)
@@ -176,7 +200,7 @@ func Test_Cov18_SliceValidator_UserInputsMergeWithError_NilErrEmptyStr(t *testin
 func Test_Cov18_SliceValidator_LengthVerify_ActualNotEmptyComparingZero(t *testing.T) {
 	// Arrange — actual lines present but no expected lines set
 	sv := &corevalidator.SliceValidator{
-		CompareAs:     stringcompareas.EqualTextCompare,
+		CompareAs:     stringcompareas.Equal,
 		ActualLines:   []string{"line1", "line2"},
 		ExpectedLines: []string{}, // comparing length = 0
 	}

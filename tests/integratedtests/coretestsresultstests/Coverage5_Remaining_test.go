@@ -11,16 +11,26 @@ import (
 // ── Result.IsResultTypeOf: actualType nil (Value is nil any) ──
 
 func Test_Cov5_IsResultTypeOf_NilValue_NonNilExpected(t *testing.T) {
+	// Arrange
 	r := results.ResultAny{Value: nil}
+
+	// Act
 	actual := args.Map{"typeOf": r.IsResultTypeOf(42)}
+
+	// Assert
 	expected := args.Map{"typeOf": false}
 	expected.ShouldBeEqual(t, 0, "IsResultTypeOf returns false -- nil value non-nil expected", actual)
 }
 
 func Test_Cov5_IsResultTypeOf_NilValue_NilExpected_Zero(t *testing.T) {
+	// Arrange
 	// Value is zero-value int (not nil), expected is nil
 	r := results.Result[int]{Value: 0}
+
+	// Act
 	actual := args.Map{"typeOf": r.IsResultTypeOf(nil)}
+
+	// Assert
 	expected := args.Map{"typeOf": true}
 	expected.ShouldBeEqual(t, 0, "IsResultTypeOf returns true -- zero int nil expected", actual)
 }
@@ -37,13 +47,18 @@ func Test_Cov5_ShouldMatchResult_ErrorDerived(t *testing.T) {
 // ── FromResultAny: panicked with no AllResults ──
 
 func Test_Cov5_FromResultAny_Panicked(t *testing.T) {
+	// Arrange
 	ra := results.ResultAny{Panicked: true, PanicValue: "boom"}
 	r := results.FromResultAny[string, int](ra)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"val":      r.Value,
 		"val2":     r.Result2,
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": true,
 		"val":      "",
@@ -55,19 +70,35 @@ func Test_Cov5_FromResultAny_Panicked(t *testing.T) {
 // ── FromResultAny: single AllResult ──
 
 func Test_Cov5_FromResultAny_SingleResult(t *testing.T) {
+	// Arrange
 	ra := results.ResultAny{AllResults: []any{"hello"}, ReturnCount: 1}
 	r := results.FromResultAny[string, int](ra)
-	actual := args.Map{"val": r.Value, "val2": r.Result2}
-	expected := args.Map{"val": "hello", "val2": 0}
+
+	// Act
+	actual := args.Map{
+		"val": r.Value,
+		"val2": r.Result2,
+	}
+
+	// Assert
+	expected := args.Map{
+		"val": "hello",
+		"val2": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "FromResultAny returns first only -- single result", actual)
 }
 
 // ── Result.ToMapCompact: panicked ──
 
 func Test_Cov5_ToMapCompact_Panicked(t *testing.T) {
+	// Arrange
 	r := results.ResultAny{Panicked: true, PanicValue: "boom"}
 	m := r.ToMapCompact()
+
+	// Act
 	actual := args.Map{"panicked": m["panicked"]}
+
+	// Assert
 	expected := args.Map{"panicked": true}
 	expected.ShouldBeEqual(t, 0, "ToMapCompact returns panicked -- panicked result", actual)
 }
@@ -81,13 +112,18 @@ func (s *cov5TypedArgStruct) Process(name string, count int) string {
 }
 
 func Test_Cov5_Invoke_TypedArgs(t *testing.T) {
+	// Arrange
 	s := &cov5TypedArgStruct{}
 	r := results.InvokeWithPanicRecovery((*cov5TypedArgStruct).Process, s, "hello", 5)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"val":      r.Value,
 		"count":    r.ReturnCount,
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"val":      "hello",
@@ -109,12 +145,17 @@ func (s *cov5PtrErrReturn) ReturnErr() *cov5CustomErr {
 }
 
 func Test_Cov5_ExtractError_PtrImplError(t *testing.T) {
+	// Arrange
 	s := &cov5PtrErrReturn{}
 	r := results.InvokeWithPanicRecovery((*cov5PtrErrReturn).ReturnErr, s)
+
+	// Act
 	actual := args.Map{
 		"panicked": r.Panicked,
 		"hasError": r.HasError(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"panicked": false,
 		"hasError": true,
@@ -133,11 +174,16 @@ func Test_Cov5_ShouldMatchResult_ReturnCountDerived(t *testing.T) {
 // ── Result.IsResult / IsError combined ──
 
 func Test_Cov5_Result_IsResult_StringComparison(t *testing.T) {
+	// Arrange
 	r := results.Result[int]{Value: 0}
+
+	// Act
 	actual := args.Map{
 		"isZero":   r.IsResult(0),
 		"isNotOne": !r.IsResult(1),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isZero":   true,
 		"isNotOne": true,

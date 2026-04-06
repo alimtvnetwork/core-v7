@@ -5,6 +5,7 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/coreapi"
 	"github.com/alimtvnetwork/core/coredata/coredynamic"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // =============================================================================
@@ -12,76 +13,127 @@ import (
 // =============================================================================
 
 func Test_Cov_RequestAttribute_HasSearchRequest(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{SearchRequest: &coreapi.SearchRequest{}}
-	if !attr.HasSearchRequest() {
-		t.Error("should have search request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.HasSearchRequest()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have search request", actual)
 }
 
 func Test_Cov_RequestAttribute_HasSearchRequest_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if attr.HasSearchRequest() {
-		t.Error("nil should not have search request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.HasSearchRequest()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not have search request", actual)
 }
 
 func Test_Cov_RequestAttribute_HasPageRequest(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{PageRequest: &coreapi.PageRequest{PageSize: 10}}
-	if !attr.HasPageRequest() {
-		t.Error("should have page request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.HasPageRequest()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have page request", actual)
 }
 
 func Test_Cov_RequestAttribute_HasPageRequest_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if attr.HasPageRequest() {
-		t.Error("nil should not have page request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.HasPageRequest()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not have page request", actual)
 }
 
 func Test_Cov_RequestAttribute_IsEmpty_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if !attr.IsEmpty() {
-		t.Error("nil should be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov_RequestAttribute_IsAnyNull_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if !attr.IsAnyNull() {
-		t.Error("nil should be null")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsAnyNull()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be null", actual)
 }
 
 func Test_Cov_RequestAttribute_IsPageRequestEmpty(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{}
-	if !attr.IsPageRequestEmpty() {
-		t.Error("should be empty without page request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsPageRequestEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be empty without page request", actual)
 }
 
 func Test_Cov_RequestAttribute_IsPageRequestEmpty_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if !attr.IsPageRequestEmpty() {
-		t.Error("nil should be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsPageRequestEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov_RequestAttribute_IsSearchRequestEmpty(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{}
-	if !attr.IsSearchRequestEmpty() {
-		t.Error("should be empty without search request")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsSearchRequestEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be empty without search request", actual)
 }
 
 func Test_Cov_RequestAttribute_IsSearchRequestEmpty_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if !attr.IsSearchRequestEmpty() {
-		t.Error("nil should be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsSearchRequestEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov_RequestAttribute_Clone(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{
 		Url:          "http://test",
 		IsValid:      true,
@@ -89,16 +141,25 @@ func Test_Cov_RequestAttribute_Clone(t *testing.T) {
 		PageRequest:   &coreapi.PageRequest{PageSize: 10},
 	}
 	c := attr.Clone()
-	if c == nil || c.Url != "http://test" {
-		t.Error("should clone")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil || c.Url != "http://test"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone", actual)
 }
 
 func Test_Cov_RequestAttribute_Clone_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.RequestAttribute
-	if attr.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 // =============================================================================
@@ -106,6 +167,7 @@ func Test_Cov_RequestAttribute_Clone_Nil(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_ResponseAttribute_Clone_WithSlices(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{
 		IsValid:        true,
 		Message:        "ok",
@@ -113,24 +175,38 @@ func Test_Cov_ResponseAttribute_Clone_WithSlices(t *testing.T) {
 		DebugInfos:     []string{"debug1"},
 	}
 	c := attr.Clone()
-	if c == nil || len(c.StepsPerformed) != 1 || len(c.DebugInfos) != 1 {
-		t.Error("should clone with slices")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil || len(c.StepsPerformed) != 1 || len(c.DebugInfos) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone with slices", actual)
 }
 
 func Test_Cov_ResponseAttribute_Clone_Nil(t *testing.T) {
+	// Arrange
 	var attr *coreapi.ResponseAttribute
-	if attr.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_ResponseAttribute_Clone_EmptySlices(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{IsValid: true}
 	c := attr.Clone()
-	if c == nil || c.StepsPerformed != nil {
-		t.Error("should clone without slices")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil || c.StepsPerformed != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone without slices", actual)
 }
 
 // =============================================================================
@@ -138,17 +214,27 @@ func Test_Cov_ResponseAttribute_Clone_EmptySlices(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_InvalidRequestAttribute(t *testing.T) {
+	// Arrange
 	attr := coreapi.InvalidRequestAttribute()
-	if attr.IsValid {
-		t.Error("should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsValid}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
 }
 
 func Test_Cov_InvalidResponseAttribute(t *testing.T) {
+	// Arrange
 	attr := coreapi.InvalidResponseAttribute("test error")
-	if attr.IsValid || attr.Message != "test error" {
-		t.Error("should be invalid with message")
-	}
+
+	// Act
+	actual := args.Map{"result": attr.IsValid || attr.Message != "test error"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should be invalid with message", actual)
 }
 
 // =============================================================================
@@ -156,18 +242,28 @@ func Test_Cov_InvalidResponseAttribute(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_SearchRequest_Clone(t *testing.T) {
+	// Arrange
 	sr := &coreapi.SearchRequest{SearchTerm: "test", IsContains: true}
 	c := sr.Clone()
-	if c == nil || c.SearchTerm != "test" || !c.IsContains {
-		t.Error("should clone")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil || c.SearchTerm != "test" || !c.IsContains}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone", actual)
 }
 
 func Test_Cov_SearchRequest_Clone_Nil(t *testing.T) {
+	// Arrange
 	var sr *coreapi.SearchRequest
-	if sr.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": sr.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 // =============================================================================
@@ -175,60 +271,100 @@ func Test_Cov_SearchRequest_Clone_Nil(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_PageRequest_IsPageSizeEmpty_Nil(t *testing.T) {
+	// Arrange
 	var pr *coreapi.PageRequest
-	if !pr.IsPageSizeEmpty() {
-		t.Error("nil should be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.IsPageSizeEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov_PageRequest_IsPageIndexEmpty_Nil(t *testing.T) {
+	// Arrange
 	var pr *coreapi.PageRequest
-	if !pr.IsPageIndexEmpty() {
-		t.Error("nil should be empty")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.IsPageIndexEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
 
 func Test_Cov_PageRequest_HasPageSize(t *testing.T) {
+	// Arrange
 	pr := &coreapi.PageRequest{PageSize: 10}
-	if !pr.HasPageSize() {
-		t.Error("should have page size")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.HasPageSize()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have page size", actual)
 }
 
 func Test_Cov_PageRequest_HasPageSize_Nil(t *testing.T) {
+	// Arrange
 	var pr *coreapi.PageRequest
-	if pr.HasPageSize() {
-		t.Error("nil should not have page size")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.HasPageSize()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not have page size", actual)
 }
 
 func Test_Cov_PageRequest_HasPageIndex(t *testing.T) {
+	// Arrange
 	pr := &coreapi.PageRequest{PageIndex: 5}
-	if !pr.HasPageIndex() {
-		t.Error("should have page index")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.HasPageIndex()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have page index", actual)
 }
 
 func Test_Cov_PageRequest_HasPageIndex_Nil(t *testing.T) {
+	// Arrange
 	var pr *coreapi.PageRequest
-	if pr.HasPageIndex() {
-		t.Error("nil should not have page index")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.HasPageIndex()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not have page index", actual)
 }
 
 func Test_Cov_PageRequest_Clone_Nil(t *testing.T) {
+	// Arrange
 	var pr *coreapi.PageRequest
-	if pr.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": pr.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_PageRequest_Clone(t *testing.T) {
+	// Arrange
 	pr := &coreapi.PageRequest{PageSize: 10, PageIndex: 2}
 	c := pr.Clone()
-	if c.PageSize != 10 || c.PageIndex != 2 {
-		t.Error("should clone")
-	}
+
+	// Act
+	actual := args.Map{"result": c.PageSize != 10 || c.PageIndex != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone", actual)
 }
 
 // =============================================================================
@@ -236,33 +372,53 @@ func Test_Cov_PageRequest_Clone(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_TypedResponse_Clone_Nil(t *testing.T) {
+	// Arrange
 	var resp *coreapi.TypedResponse[string]
-	if resp.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": resp.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_TypedResponse_TypedResponseResult_Nil(t *testing.T) {
+	// Arrange
 	var resp *coreapi.TypedResponse[string]
-	if resp.TypedResponseResult() != nil {
-		t.Error("nil should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": resp.TypedResponseResult() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
 func Test_Cov_TypedResponse_TypedResponseResult(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{IsValid: true}
 	resp := coreapi.NewTypedResponse(attr, "hello")
 	result := resp.TypedResponseResult()
-	if result == nil || result.Response != "hello" {
-		t.Error("should convert")
-	}
+
+	// Act
+	actual := args.Map{"result": result == nil || result.Response != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should convert", actual)
 }
 
 func Test_Cov_InvalidTypedResponse_NilAttribute(t *testing.T) {
+	// Arrange
 	resp := coreapi.InvalidTypedResponse[string](nil)
-	if resp.Attribute == nil {
-		t.Error("should have default invalid attribute")
-	}
+
+	// Act
+	actual := args.Map{"result": resp.Attribute == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have default invalid attribute", actual)
 }
 
 // =============================================================================
@@ -270,79 +426,129 @@ func Test_Cov_InvalidTypedResponse_NilAttribute(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_TypedResponseResult_IsValid(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{IsValid: true}
 	rr := coreapi.NewTypedResponseResult(attr, "data")
-	if !rr.IsValid() {
-		t.Error("should be valid")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be valid", actual)
 }
 
 func Test_Cov_TypedResponseResult_IsValid_Nil(t *testing.T) {
+	// Arrange
 	var rr *coreapi.TypedResponseResult[string]
-	if rr.IsValid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov_TypedResponseResult_IsInvalid(t *testing.T) {
+	// Arrange
 	rr := coreapi.InvalidTypedResponseResult[string](nil)
-	if !rr.IsInvalid() {
-		t.Error("should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.IsInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
 }
 
 func Test_Cov_TypedResponseResult_Message_Nil(t *testing.T) {
+	// Arrange
 	var rr *coreapi.TypedResponseResult[string]
-	if rr.Message() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.Message() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov_TypedResponseResult_Message(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{Message: "ok"}
 	rr := coreapi.NewTypedResponseResult(attr, "data")
-	if rr.Message() != "ok" {
-		t.Error("should return message")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.Message() != "ok"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return message", actual)
 }
 
 func Test_Cov_TypedResponseResult_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var rr *coreapi.TypedResponseResult[string]
-	if rr.ClonePtr() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.ClonePtr() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_TypedResponseResult_ClonePtr(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{IsValid: true}
 	rr := coreapi.NewTypedResponseResult(attr, "data")
 	c := rr.ClonePtr()
-	if c == nil || c.Response != "data" {
-		t.Error("should clone")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil || c.Response != "data"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone", actual)
 }
 
 func Test_Cov_TypedResponseResult_ToTypedResponse_Nil(t *testing.T) {
+	// Arrange
 	var rr *coreapi.TypedResponseResult[string]
-	if rr.ToTypedResponse() != nil {
-		t.Error("nil should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.ToTypedResponse() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
 func Test_Cov_TypedResponseResult_ToTypedResponse(t *testing.T) {
+	// Arrange
 	attr := &coreapi.ResponseAttribute{IsValid: true}
 	rr := coreapi.NewTypedResponseResult(attr, "data")
 	resp := rr.ToTypedResponse()
-	if resp == nil || resp.Response != "data" {
-		t.Error("should convert")
-	}
+
+	// Act
+	actual := args.Map{"result": resp == nil || resp.Response != "data"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should convert", actual)
 }
 
 func Test_Cov_InvalidTypedResponseResult_NilAttribute(t *testing.T) {
+	// Arrange
 	rr := coreapi.InvalidTypedResponseResult[string](nil)
-	if rr.Attribute == nil {
-		t.Error("should have default invalid attribute")
-	}
+
+	// Act
+	actual := args.Map{"result": rr.Attribute == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have default invalid attribute", actual)
 }
 
 // =============================================================================
@@ -350,33 +556,53 @@ func Test_Cov_InvalidTypedResponseResult_NilAttribute(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_TypedRequest_Clone_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedRequest[string]
-	if req.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_TypedRequest_ToTypedSimpleGenericRequest_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedRequest[string]
-	if req.ToTypedSimpleGenericRequest(true, "") != nil {
-		t.Error("nil should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.ToTypedSimpleGenericRequest(true, "") != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
 func Test_Cov_TypedRequest_ToTypedSimpleGenericRequest(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{IsValid: true}
 	req := coreapi.NewTypedRequest(attr, "payload")
 	sgr := req.ToTypedSimpleGenericRequest(true, "")
-	if sgr == nil {
-		t.Error("should convert")
-	}
+
+	// Act
+	actual := args.Map{"result": sgr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should convert", actual)
 }
 
 func Test_Cov_InvalidTypedRequest_NilAttribute(t *testing.T) {
+	// Arrange
 	req := coreapi.InvalidTypedRequest[string](nil)
-	if req.Attribute == nil {
-		t.Error("should have default invalid attribute")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Attribute == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have default invalid attribute", actual)
 }
 
 // =============================================================================
@@ -384,33 +610,53 @@ func Test_Cov_InvalidTypedRequest_NilAttribute(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_TypedRequestIn_Clone_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedRequestIn[string]
-	if req.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_TypedRequestIn_TypedSimpleGenericRequest_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedRequestIn[string]
-	if req.TypedSimpleGenericRequest(true, "") != nil {
-		t.Error("nil should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.TypedSimpleGenericRequest(true, "") != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
 func Test_Cov_TypedRequestIn_TypedSimpleGenericRequest(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{IsValid: true}
 	req := coreapi.NewTypedRequestIn(attr, "payload")
 	sgr := req.TypedSimpleGenericRequest(true, "")
-	if sgr == nil {
-		t.Error("should convert")
-	}
+
+	// Act
+	actual := args.Map{"result": sgr == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should convert", actual)
 }
 
 func Test_Cov_InvalidTypedRequestIn_NilAttribute(t *testing.T) {
+	// Arrange
 	req := coreapi.InvalidTypedRequestIn[string](nil)
-	if req.Attribute == nil {
-		t.Error("should have default invalid attribute")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Attribute == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have default invalid attribute", actual)
 }
 
 // =============================================================================
@@ -418,94 +664,154 @@ func Test_Cov_InvalidTypedRequestIn_NilAttribute(t *testing.T) {
 // =============================================================================
 
 func Test_Cov_TypedSimpleGenericRequest_IsValid_NilReceiver(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedSimpleGenericRequest[string]
-	if req.IsValid() {
-		t.Error("nil should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": req.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_IsValid_NilRequest(t *testing.T) {
+	// Arrange
 	req := &coreapi.TypedSimpleGenericRequest[string]{
 		Attribute: &coreapi.RequestAttribute{IsValid: true},
 	}
-	if req.IsValid() {
-		t.Error("nil request should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": req.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil request should be invalid", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_IsValid_True(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{IsValid: true}
 	simpleReq := coredynamic.NewTypedSimpleRequest("data", true, "")
 	req := coreapi.NewTypedSimpleGenericRequest(attr, simpleReq)
-	if !req.IsValid() {
-		t.Error("should be valid")
-	}
+
+	// Act
+	actual := args.Map{"result": req.IsValid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be valid", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_IsInvalid(t *testing.T) {
+	// Arrange
 	req := coreapi.InvalidTypedSimpleGenericRequest[string](nil)
-	if !req.IsInvalid() {
-		t.Error("should be invalid")
-	}
+
+	// Act
+	actual := args.Map{"result": req.IsInvalid()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be invalid", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_Message_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedSimpleGenericRequest[string]
-	if req.Message() != "" {
-		t.Error("nil should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Message() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_Message_NilRequest(t *testing.T) {
+	// Arrange
 	req := &coreapi.TypedSimpleGenericRequest[string]{}
-	if req.Message() != "" {
-		t.Error("nil request should return empty")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Message() != ""}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil request should return empty", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_InvalidError_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedSimpleGenericRequest[string]
-	if req.InvalidError() != nil {
-		t.Error("nil should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.InvalidError() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return nil", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_InvalidError_NilRequest(t *testing.T) {
+	// Arrange
 	req := &coreapi.TypedSimpleGenericRequest[string]{}
-	if req.InvalidError() != nil {
-		t.Error("nil request should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.InvalidError() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil request should return nil", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_Clone_Nil(t *testing.T) {
+	// Arrange
 	var req *coreapi.TypedSimpleGenericRequest[string]
-	if req.Clone() != nil {
-		t.Error("nil clone should return nil")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Clone() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil clone should return nil", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_Clone(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{IsValid: true}
 	simpleReq := coredynamic.NewTypedSimpleRequest("data", true, "")
 	req := coreapi.NewTypedSimpleGenericRequest(attr, simpleReq)
 	c := req.Clone()
-	if c == nil {
-		t.Error("should clone")
-	}
+
+	// Act
+	actual := args.Map{"result": c == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should clone", actual)
 }
 
 func Test_Cov_InvalidTypedSimpleGenericRequest_NilAttribute(t *testing.T) {
+	// Arrange
 	req := coreapi.InvalidTypedSimpleGenericRequest[string](nil)
-	if req.Attribute == nil {
-		t.Error("should have default invalid attribute")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Attribute == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have default invalid attribute", actual)
 }
 
 func Test_Cov_TypedSimpleGenericRequest_Data(t *testing.T) {
+	// Arrange
 	attr := &coreapi.RequestAttribute{IsValid: true}
 	simpleReq := coredynamic.NewTypedSimpleRequest("hello", true, "")
 	req := coreapi.NewTypedSimpleGenericRequest(attr, simpleReq)
-	if req.Data() != "hello" {
-		t.Error("should return data")
-	}
+
+	// Act
+	actual := args.Map{"result": req.Data() != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return data", actual)
 }

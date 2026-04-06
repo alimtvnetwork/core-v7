@@ -139,9 +139,9 @@ func Test_Src_LengthOfPointer_Verification(t *testing.T) {
 			result := stringslice.LengthOfPointer(input)
 
 			// Assert
-			if result != tt.expect {
-				t.Fatalf("expected %d, got %d", tt.expect, result)
-			}
+			actual := args.Map{"result": result != tt.expect}
+			expected := args.Map{"result": false}
+			expected.ShouldBeEqual(t, 0, "expected", actual)
 		})
 	}
 }
@@ -154,9 +154,9 @@ func Test_Src_Make_Verification(t *testing.T) {
 	result := stringslice.Make(0, expectedCap)
 
 	// Assert
-	if cap(result) != expectedCap {
-		t.Fatalf("expected cap %d, got %d", expectedCap, cap(result))
-	}
+	actual := args.Map{"result": cap(result) != expectedCap}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cap", actual)
 }
 
 func Test_Src_MakeDefault_Verification(t *testing.T) {
@@ -167,9 +167,9 @@ func Test_Src_MakeDefault_Verification(t *testing.T) {
 	result := stringslice.MakeDefault(expectedCap)
 
 	// Assert
-	if cap(result) < expectedCap {
-		t.Fatalf("expected cap >= %d, got %d", expectedCap, cap(result))
-	}
+	actual := args.Map{"result": cap(result) < expectedCap}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cap >=", actual)
 }
 
 func Test_Src_MakePtr_Verification(t *testing.T) {
@@ -180,9 +180,9 @@ func Test_Src_MakePtr_Verification(t *testing.T) {
 	result := stringslice.MakePtr(0, expectedCap)
 
 	// Assert
-	if cap(result) != expectedCap {
-		t.Fatalf("expected cap %d, got %d", expectedCap, cap(result))
-	}
+	actual := args.Map{"result": cap(result) != expectedCap}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cap", actual)
 }
 
 func Test_Src_MakeDefaultPtr_Verification(t *testing.T) {
@@ -193,9 +193,9 @@ func Test_Src_MakeDefaultPtr_Verification(t *testing.T) {
 	result := stringslice.MakeDefaultPtr(expectedCap)
 
 	// Assert
-	if cap(result) < expectedCap {
-		t.Fatalf("expected cap >= %d, got %d", expectedCap, cap(result))
-	}
+	actual := args.Map{"result": cap(result) < expectedCap}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cap >=", actual)
 }
 
 func Test_Src_MakeLen_Verification(t *testing.T) {
@@ -206,9 +206,9 @@ func Test_Src_MakeLen_Verification(t *testing.T) {
 	result := stringslice.MakeLen(expectedLen)
 
 	// Assert
-	if len(result) != expectedLen {
-		t.Fatalf("expected len %d, got %d", expectedLen, len(result))
-	}
+	actual := args.Map{"result": len(result) != expectedLen}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected len", actual)
 }
 
 func Test_Src_MakeLenPtr_Verification(t *testing.T) {
@@ -219,9 +219,9 @@ func Test_Src_MakeLenPtr_Verification(t *testing.T) {
 	result := stringslice.MakeLenPtr(expectedLen)
 
 	// Assert
-	if len(result) != expectedLen {
-		t.Fatalf("expected len %d, got %d", expectedLen, len(result))
-	}
+	actual := args.Map{"result": len(result) != expectedLen}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected len", actual)
 }
 
 func Test_Src_SlicePtr_Verification(t *testing.T) {
@@ -232,9 +232,9 @@ func Test_Src_SlicePtr_Verification(t *testing.T) {
 	result := stringslice.SlicePtr(input)
 
 	// Assert
-	if len(result) != 1 {
-		t.Fatalf("expected 1, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	// Arrange
 	var nilInput []string
@@ -243,9 +243,9 @@ func Test_Src_SlicePtr_Verification(t *testing.T) {
 	result2 := stringslice.SlicePtr(nilInput)
 
 	// Assert
-	if len(result2) != 0 {
-		t.Fatalf("expected 0, got %d", len(result2))
-	}
+	actual := args.Map{"result": len(result2) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Src_CloneSimpleSliceToPointers_Verification(t *testing.T) {
@@ -255,9 +255,9 @@ func Test_Src_CloneSimpleSliceToPointers_Verification(t *testing.T) {
 	result := stringslice.CloneSimpleSliceToPointers(nil)
 
 	// Assert
-	if result == nil || len(*result) != 0 {
-		t.Fatal("expected non-nil ptr with 0 len")
-	}
+	actual := args.Map{"result": result == nil || len(*result) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil ptr with 0 len", actual)
 
 	// Arrange (non-nil)
 	input := []string{"a"}
@@ -266,9 +266,9 @@ func Test_Src_CloneSimpleSliceToPointers_Verification(t *testing.T) {
 	result2 := stringslice.CloneSimpleSliceToPointers(input)
 
 	// Assert
-	if len(*result2) != 1 {
-		t.Fatalf("expected 1, got %d", len(*result2))
-	}
+	actual := args.Map{"result": len(*result2) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // Suppresses unused import

@@ -4,6 +4,7 @@ import (
 	"github.com/alimtvnetwork/core/coreinstruction"
 	"regexp"
 	"testing"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -11,24 +12,39 @@ import (
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I15_BaseIsContinueOnError_IsExitOnError_Nil(t *testing.T) {
+	// Arrange
 	var b *coreinstruction.BaseIsContinueOnError
-	if b.IsExitOnError() {
-		t.Fatal("expected false for nil receiver")
-	}
+
+	// Act
+	actual := args.Map{"result": b.IsExitOnError()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for nil receiver", actual)
 }
 
 func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueTrue(t *testing.T) {
+	// Arrange
 	b := &coreinstruction.BaseIsContinueOnError{IsContinueOnError: true}
-	if b.IsExitOnError() {
-		t.Fatal("expected false when IsContinueOnError is true")
-	}
+
+	// Act
+	actual := args.Map{"result": b.IsExitOnError()}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false when IsContinueOnError is true", actual)
 }
 
 func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueFalse(t *testing.T) {
+	// Arrange
 	b := &coreinstruction.BaseIsContinueOnError{IsContinueOnError: false}
-	if !b.IsExitOnError() {
-		t.Fatal("expected true when IsContinueOnError is false")
-	}
+
+	// Act
+	actual := args.Map{"result": b.IsExitOnError()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true when IsContinueOnError is false", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -36,39 +52,54 @@ func Test_I15_BaseIsContinueOnError_IsExitOnError_ContinueFalse(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I15_BaseIsSecure_NewSecure(t *testing.T) {
+	// Arrange
 	s := coreinstruction.NewSecure()
-	if !s.IsSecure {
-		t.Fatal("expected secure")
-	}
-	if s.IsPlainText() {
-		t.Fatal("expected not plain text")
-	}
-	if s.IsIncludePayload() {
-		t.Fatal("expected not include payload")
-	}
+
+	// Act
+	actual := args.Map{"result": s.IsSecure}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected secure", actual)
+	actual := args.Map{"result": s.IsPlainText()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not plain text", actual)
+	actual := args.Map{"result": s.IsIncludePayload()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not include payload", actual)
 }
 
 func Test_I15_BaseIsSecure_NewPlain(t *testing.T) {
+	// Arrange
 	s := coreinstruction.NewPlain()
-	if s.IsSecure {
-		t.Fatal("expected not secure")
-	}
-	if !s.IsPlainText() {
-		t.Fatal("expected plain text")
-	}
-	if !s.IsIncludePayload() {
-		t.Fatal("expected include payload")
-	}
+
+	// Act
+	actual := args.Map{"result": s.IsSecure}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not secure", actual)
+	actual := args.Map{"result": s.IsPlainText()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected plain text", actual)
+	actual := args.Map{"result": s.IsIncludePayload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected include payload", actual)
 }
 
 func Test_I15_BaseIsSecure_NilReceiver(t *testing.T) {
+	// Arrange
 	var s *coreinstruction.BaseIsSecure
-	if !s.IsPlainText() {
-		t.Fatal("expected plain text for nil")
-	}
-	if !s.IsIncludePayload() {
-		t.Fatal("expected include payload for nil")
-	}
+
+	// Act
+	actual := args.Map{"result": s.IsPlainText()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected plain text for nil", actual)
+	actual := args.Map{"result": s.IsIncludePayload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected include payload for nil", actual)
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -76,82 +107,127 @@ func Test_I15_BaseIsSecure_NilReceiver(t *testing.T) {
 // ══════════════════════════════════════════════════════════════════════════════
 
 func Test_I15_BaseTags_NewTagsPtr_Empty(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTagsPtr([]string{})
-	if bt == nil {
-		t.Fatal("expected non-nil")
-	}
-	if bt.TagsLength() != 0 {
-		t.Fatal("expected 0 tags")
-	}
+
+	// Act
+	actual := args.Map{"result": bt == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": bt.TagsLength() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 tags", actual)
 }
 
 func Test_I15_BaseTags_NewTagsPtr_NonEmpty(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTagsPtr([]string{"a", "b"})
-	if bt.TagsLength() != 2 {
-		t.Fatal("expected 2 tags")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.TagsLength() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 tags", actual)
 }
 
 func Test_I15_BaseTags_TagsLength_NilTags(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.BaseTags{Tags: nil}
-	if bt.TagsLength() != 0 {
-		t.Fatal("expected 0")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.TagsLength() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_I15_BaseTags_TagsHashset_Cached(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{"x", "y"})
 	h1 := bt.TagsHashset()
 	h2 := bt.TagsHashset()
-	if h1 != h2 {
-		t.Fatal("expected same pointer (cached)")
-	}
+
+	// Act
+	actual := args.Map{"result": h1 != h2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected same pointer (cached)", actual)
 }
 
 func Test_I15_BaseTags_HasAllTags(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{"a", "b", "c"})
-	if !bt.HasAllTags("a", "b") {
-		t.Fatal("expected true")
-	}
-	if bt.HasAllTags("a", "z") {
-		t.Fatal("expected false")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.HasAllTags("a", "b")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": bt.HasAllTags("a", "z")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	// Empty tags => true
-	if !bt.HasAllTags() {
-		t.Fatal("expected true for empty")
-	}
+	actual := args.Map{"result": bt.HasAllTags()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 }
 
 func Test_I15_BaseTags_HasAnyTags(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{"a", "b"})
-	if !bt.HasAnyTags("a", "z") {
-		t.Fatal("expected true")
-	}
-	if bt.HasAnyTags("x", "z") {
-		t.Fatal("expected false")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.HasAnyTags("a", "z")}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": bt.HasAnyTags("x", "z")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_I15_BaseTags_IsAnyTagMatchesRegex_Empty(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{})
 	r := regexp.MustCompile(`.*`)
-	if bt.IsAnyTagMatchesRegex(r) {
-		t.Fatal("expected false for empty tags")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.IsAnyTagMatchesRegex(r)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for empty tags", actual)
 }
 
 func Test_I15_BaseTags_IsAnyTagMatchesRegex_Match(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{"hello-world", "foo"})
 	r := regexp.MustCompile(`^hello`)
-	if !bt.IsAnyTagMatchesRegex(r) {
-		t.Fatal("expected match")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.IsAnyTagMatchesRegex(r)}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected match", actual)
 }
 
 func Test_I15_BaseTags_IsAnyTagMatchesRegex_NoMatch(t *testing.T) {
+	// Arrange
 	bt := coreinstruction.NewTags([]string{"foo", "bar"})
 	r := regexp.MustCompile(`^hello`)
-	if bt.IsAnyTagMatchesRegex(r) {
-		t.Fatal("expected no match")
-	}
+
+	// Act
+	actual := args.Map{"result": bt.IsAnyTagMatchesRegex(r)}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }

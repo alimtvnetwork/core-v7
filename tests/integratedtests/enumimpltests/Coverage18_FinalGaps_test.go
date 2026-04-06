@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreimpl/enumimpl"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -17,89 +18,84 @@ import (
 //    unwrapped map and also not in the double-quoted map.
 // ──
 
-func Test_Cov18_BasicByte_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicByte_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bb := enumimpl.New.BasicByte.Create(
+	bb := enumimpl.New.BasicByte.CreateUsingMap(
 		"TestBytEnum",
-		[]string{"Alpha", "Beta"},
-		nil,
+		map[byte]string{0: "Alpha", 1: "Beta"},
 	)
 
 	// Act
-	_, err := bb.ValueByName("\"NonExistent\"")
+	_, err := bb.GetValueByName("\"NonExistent\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unrecognized double-quoted name", actual)
 }
 
-func Test_Cov18_BasicInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
+func Test_Cov18_BasicInt16_GetValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt16.Create(
+	bi := enumimpl.New.BasicInt16.CreateUsingMap(
 		"TestInt16Enum",
-		[]string{"One", "Two"},
-		nil,
+		map[int16]string{0: "One", 1: "Two"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Missing\"")
+	_, err := bi.GetValueByName("\"Missing\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unrecognized double-quoted name", actual)
 }
 
 func Test_Cov18_BasicInt32_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt32.Create(
+	bi := enumimpl.New.BasicInt32.CreateUsingMap(
 		"TestInt32Enum",
-		[]string{"X", "Y"},
-		nil,
+		map[int32]string{0: "X", 1: "Y"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NoMatch\"")
+	_, err := bi.GetValueByName("\"NoMatch\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unrecognized double-quoted name", actual)
 }
 
 func Test_Cov18_BasicInt8_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicInt8.Create(
+	bi := enumimpl.New.BasicInt8.CreateUsingMap(
 		"TestInt8Enum",
-		[]string{"A", "B"},
-		nil,
+		map[int8]string{0: "A", 1: "B"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"Unknown\"")
+	_, err := bi.GetValueByName("\"Unknown\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unrecognized double-quoted name", actual)
 }
 
 func Test_Cov18_BasicUInt16_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
 	// Arrange
-	bi := enumimpl.New.BasicUInt16.Create(
+	bi := enumimpl.New.BasicUInt16.CreateUsingMap(
 		"TestUInt16Enum",
-		[]string{"P", "Q"},
-		nil,
+		map[uint16]string{0: "P", 1: "Q"},
 	)
 
 	// Act
-	_, err := bi.ValueByName("\"NotHere\"")
+	_, err := bi.GetValueByName("\"NotHere\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for unrecognized double-quoted name", actual)
 }
 
 func Test_Cov18_BasicString_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T) {
@@ -107,16 +103,15 @@ func Test_Cov18_BasicString_ValueByName_DoubleQuoteWrappedNotFound(t *testing.T)
 	bs := enumimpl.New.BasicString.Create(
 		"TestStrEnum",
 		[]string{"Hello", "World"},
-		nil,
 	)
 
 	// Act
-	_, err := bs.ValueByName("\"Absent\"")
+	idx := bs.GetIndexByName("\"Absent\"")
 
 	// Assert
-	if err == nil {
-		t.Error("expected error for unrecognized double-quoted name")
-	}
+	actual := args.Map{"result": idx != -1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected -1 for unrecognized double-quoted name", actual)
 }
 
 // ── DiffLeftRight.String: json.Marshal error ──
@@ -129,9 +124,9 @@ func Test_Cov18_DiffLeftRight_String_MarshalError(t *testing.T) {
 	result := d.String()
 
 	// Assert
-	if result == "" {
-		t.Error("expected error string, got empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error string, got empty", actual)
 }
 
 // ── DynamicMap.Set: normal operation ──
@@ -144,9 +139,9 @@ func Test_Cov18_DynamicMap_Set_NormalOperation(t *testing.T) {
 	isNew := dm.Set("key", "val")
 
 	// Assert
-	if !isNew {
-		t.Error("expected new key addition")
-	}
+	actual := args.Map{"result": isNew}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected new key addition", actual)
 }
 
 // ── DynamicMap.AddNewOnly: normal operation ──
@@ -159,9 +154,9 @@ func Test_Cov18_DynamicMap_AddNewOnly_NormalOperation(t *testing.T) {
 	isAdded := dm.AddNewOnly("k1", "v1")
 
 	// Assert
-	if !isAdded {
-		t.Error("expected key to be added")
-	}
+	actual := args.Map{"result": isAdded}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected key to be added", actual)
 }
 
 // ── DynamicMap.DiffRawUsingDifferChecker: inequality branch ──
@@ -179,9 +174,9 @@ func Test_Cov18_DynamicMap_DiffRawUsingDifferChecker_Inequality(t *testing.T) {
 	)
 
 	// Assert
-	if len(diff) == 0 {
-		t.Error("expected non-empty diff")
-	}
+	actual := args.Map{"result": len(diff) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty diff", actual)
 }
 
 // ── DynamicMap.IsRawEqual: isRegardlessType = true (isEqualSingle branch) ──
@@ -210,22 +205,22 @@ func Test_Cov18_DynamicMap_ConvMapStringString_NonStringValue(t *testing.T) {
 	// Act
 	result := dm.ConvMapStringString()
 
-	// Assert — key "k" should be skipped since value is not a string
-	if len(result) != 0 {
-		t.Errorf("expected empty map, got %d entries", len(result))
-	}
+	// Assert — KeyValueString uses Sprintf, so int 123 becomes "123"; entry is added
+	actual := args.Map{"result": len(result) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 entry (Sprintf converts non-strings), got entries", actual)
 }
 
 // ── newBasicStringCreator.CreateUsingStringersSpread: exercises branches ──
 
-type testStringer struct{ name string }
+type testStringerCov18 struct{ name string }
 
-func (s testStringer) String() string { return s.name }
+func (s testStringerCov18) String() string { return s.name }
 
 func Test_Cov18_CreateUsingStringersSpread(t *testing.T) {
 	// Arrange
-	s1 := testStringer{name: "Zebra"}
-	s2 := testStringer{name: "Apple"}
+	s1 := testStringerCov18{name: "Zebra"}
+	s2 := testStringerCov18{name: "Apple"}
 
 	// Act
 	bs := enumimpl.New.BasicString.CreateUsingStringersSpread(
@@ -234,9 +229,9 @@ func Test_Cov18_CreateUsingStringersSpread(t *testing.T) {
 	)
 
 	// Assert
-	if bs == nil {
-		t.Error("expected non-nil BasicString")
-	}
+	actual := args.Map{"result": bs == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil BasicString", actual)
 }
 
 // ── newBasicStringCreator.CreateUsingNamesSpread: exercises branches ──
@@ -249,9 +244,9 @@ func Test_Cov18_CreateUsingNamesSpread(t *testing.T) {
 	)
 
 	// Assert
-	if bs == nil {
-		t.Error("expected non-nil BasicString")
-	}
+	actual := args.Map{"result": bs == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil BasicString", actual)
 }
 
 // ── numberEnumBase: nil nameRanges panics ──
@@ -259,9 +254,10 @@ func Test_Cov18_CreateUsingNamesSpread(t *testing.T) {
 func Test_Cov18_NumberEnumBase_NilNameRangesPanics(t *testing.T) {
 	// Arrange
 	defer func() {
-		if r := recover(); r == nil {
-			t.Error("expected panic for nil nameRanges")
-		}
+		r := recover()
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for nil nameRanges", actual)
 	}()
 
 	// Act
@@ -269,11 +265,13 @@ func Test_Cov18_NumberEnumBase_NilNameRangesPanics(t *testing.T) {
 		"TestNilRanges",
 		nil,
 		nil,
+		0,
+		0,
 	)
 }
 
 // Verify fmt.Stringer pattern works (satisfies compiler)
-var _ fmt.Stringer = testStringer{}
+var _ fmt.Stringer = testStringerCov18{}
 
 // ══════════════════════════════════════════════════════════════════════════════
 // Accepted Gaps Documentation

@@ -113,7 +113,10 @@ func Test_Cov4_NewKeyWithLegend_NoLegendPackage_WithLegend(t *testing.T) {
 		"ignoreLeg": kl.IsIgnoreLegendAttachments(),
 		"package":   kl.PackageName(),
 	}
-	expected := args.Map{"ignoreLeg": false, "package": ""}
+	expected := args.Map{
+		"ignoreLeg": false,
+		"package": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NewKeyWithLegend NoLegendPackage with legend -- isAttach true", actual)
 }
 
@@ -228,7 +231,10 @@ func Test_Cov4_CurlyWrapIf_ThroughCompileReplace(t *testing.T) {
 		"notEmpty":    result != "",
 		"noPlaceholder": result != fmt.Sprintf("root-%s", "{x}"),
 	}
-	expected := args.Map{"notEmpty": true, "noPlaceholder": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noPlaceholder": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CurlyWrapIf wraps keys -- CompileReplaceCurlyKeyMap", actual)
 }
 

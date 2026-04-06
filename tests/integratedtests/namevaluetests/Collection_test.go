@@ -221,6 +221,7 @@ func Test_CollectionIsEqual_Equal(t *testing.T) {
 	b := namevalue.NewGenericCollectionDefault[string, int]()
 	b.Add(namevalue.StringInt{Name: "x", Value: 1})
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", a.IsEqualByString(b)))
 }
 
@@ -236,6 +237,7 @@ func Test_CollectionIsEqual_NotEqual(t *testing.T) {
 	b := namevalue.NewGenericCollectionDefault[string, int]()
 	b.Add(namevalue.StringInt{Name: "x", Value: 99})
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", a.IsEqualByString(b)))
 }
 
@@ -252,6 +254,7 @@ func Test_CollectionIsEqual_DiffLength(t *testing.T) {
 	b.Add(namevalue.StringInt{Name: "x", Value: 1})
 	b.Add(namevalue.StringInt{Name: "y", Value: 2})
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", a.IsEqualByString(b)))
 }
 
@@ -265,6 +268,7 @@ func Test_CollectionIsEqual_BothNils(t *testing.T) {
 	var a *namevalue.StringIntCollection
 	var b *namevalue.StringIntCollection
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, fmt.Sprintf("%v", a.IsEqualByString(b)))
 }
 
@@ -274,6 +278,7 @@ func Test_CollectionIsEqual_BothNils(t *testing.T) {
 
 func Test_CollectionError_Verification(t *testing.T) {
 	for caseIndex, testCase := range collectionErrorTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		count, _ := input.Get("count")
 		countInt := count.(int)
@@ -289,11 +294,13 @@ func Test_CollectionError_Verification(t *testing.T) {
 		err := col.Error()
 		errMsg := col.ErrorUsingMessage("failed:")
 
+		// Act
 		actual := args.Map{
 			"hasError":           err != nil,
 			"errorContainsItems": errMsg != nil,
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
@@ -318,6 +325,7 @@ func Test_CollectionDispose_Verification(t *testing.T) {
 
 		col.Dispose()
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", col.Items == nil))
 	}
 }
@@ -328,6 +336,7 @@ func Test_CollectionDispose_Verification(t *testing.T) {
 
 func Test_CollectionConcatNew_Verification(t *testing.T) {
 	for caseIndex, testCase := range collectionConcatNewTestCases {
+		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
 		original, _ := input.Get("original")
 		extra, _ := input.Get("extra")
@@ -346,11 +355,13 @@ func Test_CollectionConcatNew_Verification(t *testing.T) {
 
 		newCol := col.ConcatNew(extraItems...)
 
+		// Act
 		actual := args.Map{
 			"mergedLength":   newCol.Length(),
 			"originalLength": col.Length(),
 		}
 
+		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }

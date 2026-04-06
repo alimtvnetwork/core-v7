@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ========================================
@@ -21,9 +22,9 @@ func Test_C78_SSO_LinesSimpleSlice(t *testing.T) {
 		result := sso.LinesSimpleSlice()
 
 		// Assert
-		if result.Length() != 3 {
-			t.Errorf("expected 3, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -36,9 +37,9 @@ func Test_C78_SSO_SimpleSlice(t *testing.T) {
 		result := sso.SimpleSlice(":")
 
 		// Assert
-		if result.Length() != 3 {
-			t.Errorf("expected 3, got %d", result.Length())
-		}
+		actual := args.Map{"result": result.Length() != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -51,9 +52,9 @@ func Test_C78_SSO_Split(t *testing.T) {
 		result := sso.Split(",")
 
 		// Assert
-		if len(result) != 3 {
-			t.Errorf("expected 3, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) != 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
 
@@ -66,9 +67,9 @@ func Test_C78_SSO_SplitLeftRight(t *testing.T) {
 		left, right := sso.SplitLeftRight("=")
 
 		// Assert
-		if left != "key" || right != "value" {
-			t.Errorf("expected key/value, got %s/%s", left, right)
-		}
+		actual := args.Map{"result": left != "key" || right != "value"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected key/value, got/", actual)
 	})
 }
 
@@ -81,9 +82,9 @@ func Test_C78_SSO_SplitLeftRight_NoSep(t *testing.T) {
 		left, right := sso.SplitLeftRight("=")
 
 		// Assert
-		if left != "noseparator" || right != "" {
-			t.Errorf("expected noseparator/'', got %s/%s", left, right)
-		}
+		actual := args.Map{"result": left != "noseparator" || right != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected noseparator/'', got/", actual)
 	})
 }
 
@@ -96,9 +97,9 @@ func Test_C78_SSO_SplitLeftRightTrim(t *testing.T) {
 		left, right := sso.SplitLeftRightTrim("=")
 
 		// Assert
-		if left != "key" || right != "value" {
-			t.Errorf("expected key/value, got '%s'/'%s'", left, right)
-		}
+		actual := args.Map{"result": left != "key" || right != "value"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected key/value, got ''/''", actual)
 	})
 }
 
@@ -111,9 +112,9 @@ func Test_C78_SSO_SplitLeftRightTrim_NoSep(t *testing.T) {
 		left, right := sso.SplitLeftRightTrim("=")
 
 		// Assert
-		if left != "nosep" || right != "" {
-			t.Errorf("expected nosep/'', got '%s'/'%s'", left, right)
-		}
+		actual := args.Map{"result": left != "nosep" || right != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nosep/'', got ''/''", actual)
 	})
 }
 
@@ -126,9 +127,9 @@ func Test_C78_SSO_SplitNonEmpty(t *testing.T) {
 		result := sso.SplitNonEmpty("::")
 
 		// Assert
-		if len(result) < 3 {
-			t.Errorf("expected at least 3, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) < 3}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	})
 }
 
@@ -141,9 +142,9 @@ func Test_C78_SSO_SplitTrimNonWhitespace(t *testing.T) {
 		result := sso.SplitTrimNonWhitespace(",")
 
 		// Assert
-		if len(result) < 2 {
-			t.Errorf("expected at least 2 non-whitespace items, got %d", len(result))
-		}
+		actual := args.Map{"result": len(result) < 2}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected at least 2 non-whitespace items", actual)
 	})
 }
 
@@ -156,9 +157,9 @@ func Test_C78_SSO_ClonePtr(t *testing.T) {
 		cloned := sso.ClonePtr()
 
 		// Assert
-		if cloned == nil || cloned.Value() != "hello" {
-			t.Error("clone mismatch")
-		}
+		actual := args.Map{"result": cloned == nil || cloned.Value() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "clone mismatch", actual)
 	})
 }
 
@@ -171,9 +172,9 @@ func Test_C78_SSO_ClonePtr_Nil(t *testing.T) {
 		cloned := sso.ClonePtr()
 
 		// Assert
-		if cloned != nil {
-			t.Error("expected nil")
-		}
+		actual := args.Map{"result": cloned != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
 
@@ -186,9 +187,9 @@ func Test_C78_SSO_Clone(t *testing.T) {
 		cloned := sso.Clone()
 
 		// Assert
-		if cloned.Value() != "x" {
-			t.Error("clone mismatch")
-		}
+		actual := args.Map{"result": cloned.Value() != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "clone mismatch", actual)
 	})
 }
 
@@ -201,12 +202,12 @@ func Test_C78_SSO_CloneUsingNewVal(t *testing.T) {
 		cloned := sso.CloneUsingNewVal("new")
 
 		// Assert
-		if cloned.Value() != "new" {
-			t.Errorf("expected 'new', got '%s'", cloned.Value())
-		}
-		if !cloned.IsInitialized() {
-			t.Error("expected initialized from source")
-		}
+		actual := args.Map{"result": cloned.Value() != "new"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'new', got ''", actual)
+		actual = args.Map{"result": cloned.IsInitialized()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected initialized from source", actual)
 	})
 }
 
@@ -219,9 +220,9 @@ func Test_C78_SSO_Dispose(t *testing.T) {
 		sso.Dispose()
 
 		// Assert
-		if sso.Value() != "" {
-			t.Error("expected empty after dispose")
-		}
+		actual := args.Map{"result": sso.Value() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty after dispose", actual)
 	})
 }
 
@@ -241,9 +242,9 @@ func Test_C78_SSO_String(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("hello")
 
 		// Act & Assert
-		if sso.String() != "hello" {
-			t.Error("String mismatch")
-		}
+		actual := args.Map{"result": sso.String() != "hello"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "String mismatch", actual)
 	})
 }
 
@@ -253,9 +254,9 @@ func Test_C78_SSO_String_Nil(t *testing.T) {
 		var sso *corestr.SimpleStringOnce
 
 		// Act & Assert
-		if sso.String() != "" {
-			t.Error("expected empty for nil")
-		}
+		actual := args.Map{"result": sso.String() != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	})
 }
 
@@ -268,9 +269,9 @@ func Test_C78_SSO_StringPtr(t *testing.T) {
 		result := sso.StringPtr()
 
 		// Assert
-		if result == nil || *result != "val" {
-			t.Error("StringPtr mismatch")
-		}
+		actual := args.Map{"result": result == nil || *result != "val"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "StringPtr mismatch", actual)
 	})
 }
 
@@ -283,9 +284,9 @@ func Test_C78_SSO_StringPtr_Nil(t *testing.T) {
 		result := sso.StringPtr()
 
 		// Assert
-		if result == nil || *result != "" {
-			t.Error("expected empty string ptr for nil")
-		}
+		actual := args.Map{"result": result == nil || *result != ""}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected empty string ptr for nil", actual)
 	})
 }
 
@@ -298,9 +299,9 @@ func Test_C78_SSO_JsonModel(t *testing.T) {
 		model := sso.JsonModel()
 
 		// Assert
-		if model.Value != "test" || !model.IsInitialize {
-			t.Error("model mismatch")
-		}
+		actual := args.Map{"result": model.Value != "test" || !model.IsInitialize}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "model mismatch", actual)
 	})
 }
 
@@ -310,9 +311,9 @@ func Test_C78_SSO_JsonModelAny(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Act & Assert
-		if sso.JsonModelAny() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": sso.JsonModelAny() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -323,20 +324,20 @@ func Test_C78_SSO_MarshalUnmarshalJSON(t *testing.T) {
 
 		// Act
 		bytes, err := sso.MarshalJSON()
-		if err != nil {
-			t.Fatalf("marshal error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "marshal error:", actual)
 
 		target := corestr.New.SimpleStringOnce.CreatePtr("", false)
 		err = target.UnmarshalJSON(bytes)
 
 		// Assert
-		if err != nil {
-			t.Fatalf("unmarshal error: %v", err)
-		}
-		if target.Value() != "hello" {
-			t.Errorf("expected 'hello', got '%s'", target.Value())
-		}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
+		actual = args.Map{"result": target.Value() != "hello"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 	})
 }
 
@@ -350,12 +351,12 @@ func Test_C78_SSO_Json_JsonPtr(t *testing.T) {
 		jsonPtrResult := sso.JsonPtr()
 
 		// Assert
-		if jsonResult.HasError() {
-			t.Error("json error")
-		}
-		if jsonPtrResult.HasError() {
-			t.Error("jsonPtr error")
-		}
+		actual := args.Map{"result": jsonResult.HasError()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "json error", actual)
+		actual = args.Map{"result": jsonPtrResult.HasError()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "jsonPtr error", actual)
 	})
 }
 
@@ -370,12 +371,12 @@ func Test_C78_SSO_ParseInjectUsingJson(t *testing.T) {
 		result, err := target.ParseInjectUsingJson(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("error: %v", err)
-		}
-		if result.Value() != "hello" {
-			t.Error("value mismatch")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "error:", actual)
+		actual = args.Map{"result": result.Value() != "hello"}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
 	})
 }
 
@@ -390,9 +391,9 @@ func Test_C78_SSO_ParseInjectUsingJsonMust(t *testing.T) {
 		result := target.ParseInjectUsingJsonMust(jsonResult)
 
 		// Assert
-		if result.Value() != "test" {
-			t.Error("value mismatch")
-		}
+		actual := args.Map{"result": result.Value() != "test"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
 	})
 }
 
@@ -402,9 +403,9 @@ func Test_C78_SSO_AsJsonContractsBinder(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Act & Assert
-		if sso.AsJsonContractsBinder() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": sso.AsJsonContractsBinder() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -414,9 +415,9 @@ func Test_C78_SSO_AsJsoner(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Act & Assert
-		if sso.AsJsoner() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": sso.AsJsoner() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -431,9 +432,9 @@ func Test_C78_SSO_JsonParseSelfInject(t *testing.T) {
 		err := target.JsonParseSelfInject(jsonResult)
 
 		// Assert
-		if err != nil {
-			t.Errorf("error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "error:", actual)
 	})
 }
 
@@ -443,9 +444,9 @@ func Test_C78_SSO_AsJsonParseSelfInjector(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Act & Assert
-		if sso.AsJsonParseSelfInjector() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": sso.AsJsonParseSelfInjector() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -455,9 +456,9 @@ func Test_C78_SSO_AsJsonMarshaller(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Act & Assert
-		if sso.AsJsonMarshaller() == nil {
-			t.Error("expected non-nil")
-		}
+		actual := args.Map{"result": sso.AsJsonMarshaller() == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
 
@@ -470,12 +471,12 @@ func Test_C78_SSO_Serialize(t *testing.T) {
 		bytes, err := sso.Serialize()
 
 		// Assert
-		if err != nil {
-			t.Errorf("error: %v", err)
-		}
-		if len(bytes) == 0 {
-			t.Error("expected non-empty bytes")
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "error:", actual)
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
 
@@ -489,9 +490,9 @@ func Test_C78_SSO_Deserialize(t *testing.T) {
 		err := sso.Deserialize(&target)
 
 		// Assert
-		if err != nil {
-			t.Errorf("error: %v", err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "error:", actual)
 	})
 }
 
@@ -503,12 +504,12 @@ func Test_C78_NewSSO_Any(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Any(false, 42, true)
 
 		// Assert
-		if sso.Value() != "42" {
-			t.Errorf("expected '42', got '%s'", sso.Value())
-		}
-		if !sso.IsInitialized() {
-			t.Error("expected initialized")
-		}
+		actual := args.Map{"result": sso.Value() != "42"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected '42', got ''", actual)
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 	})
 }
 
@@ -518,12 +519,12 @@ func Test_C78_NewSSO_Uninitialized(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Uninitialized("val")
 
 		// Assert
-		if sso.Value() != "val" {
-			t.Error("value mismatch")
-		}
-		if sso.IsInitialized() {
-			t.Error("expected uninitialized")
-		}
+		actual := args.Map{"result": sso.Value() != "val"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }
 
@@ -533,9 +534,9 @@ func Test_C78_NewSSO_Init(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Init("x")
 
 		// Assert
-		if sso.Value() != "x" || !sso.IsInitialized() {
-			t.Error("Init mismatch")
-		}
+		actual := args.Map{"result": sso.Value() != "x" || !sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Init mismatch", actual)
 	})
 }
 
@@ -545,9 +546,9 @@ func Test_C78_NewSSO_InitPtr(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.InitPtr("x")
 
 		// Assert
-		if sso == nil || sso.Value() != "x" {
-			t.Error("InitPtr mismatch")
-		}
+		actual := args.Map{"result": sso == nil || sso.Value() != "x"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "InitPtr mismatch", actual)
 	})
 }
 
@@ -557,9 +558,9 @@ func Test_C78_NewSSO_Create(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Create("val", true)
 
 		// Assert
-		if sso.Value() != "val" || !sso.IsInitialized() {
-			t.Error("Create mismatch")
-		}
+		actual := args.Map{"result": sso.Value() != "val" || !sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Create mismatch", actual)
 	})
 }
 
@@ -569,9 +570,9 @@ func Test_C78_NewSSO_CreatePtr(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.CreatePtr("val", false)
 
 		// Assert
-		if sso == nil || sso.Value() != "val" || sso.IsInitialized() {
-			t.Error("CreatePtr mismatch")
-		}
+		actual := args.Map{"result": sso == nil || sso.Value() != "val" || sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "CreatePtr mismatch", actual)
 	})
 }
 
@@ -581,8 +582,8 @@ func Test_C78_NewSSO_Empty(t *testing.T) {
 		sso := corestr.New.SimpleStringOnce.Empty()
 
 		// Assert
-		if sso.Value() != "" || sso.IsInitialized() {
-			t.Error("Empty mismatch")
-		}
+		actual := args.Map{"result": sso.Value() != "" || sso.IsInitialized()}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Empty mismatch", actual)
 	})
 }

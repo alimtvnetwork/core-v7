@@ -4,39 +4,65 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/simplewrap"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_DoubleQuoteWrapElements_SkipOnExistence(t *testing.T) {
+	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(true, "hello", "\"already\"")
-	if len(result) != 2 {
-		t.Error("expected 2")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Cov_DoubleQuoteWrapElements_NoSkip(t *testing.T) {
+	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false, "hello")
-	if len(result) != 1 {
-		t.Error("expected 1")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov_DoubleQuoteWrapElements_Nil(t *testing.T) {
+	// Arrange
 	result := simplewrap.DoubleQuoteWrapElements(false)
-	if len(result) != 0 {
-		t.Error("expected 0")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov_DoubleQuoteWrapElementsWithIndexes(t *testing.T) {
+	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
-	if len(result) != 2 {
-		t.Error("expected 2")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Cov_DoubleQuoteWrapElementsWithIndexes_Nil(t *testing.T) {
+	// Arrange
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes()
-	if len(result) != 0 {
-		t.Error("expected 0")
-	}
+
+	// Act
+	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }

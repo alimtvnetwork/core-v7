@@ -13,17 +13,26 @@ var ext2DefaultCsvTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "DefaultCsv single item -- no joiner",
 		ArrangeInput:  args.Map{"items": []string{"hello"}},
-		ExpectedInput: args.Map{"notEmpty": true, "hasComma": false},
+		ExpectedInput: args.Map{
+			"notEmpty": true,
+			"hasComma": false,
+		},
 	},
 	{
 		Title:         "DefaultCsv multiple items -- comma joined",
 		ArrangeInput:  args.Map{"items": []string{"a", "b", "c"}},
-		ExpectedInput: args.Map{"notEmpty": true, "hasComma": true},
+		ExpectedInput: args.Map{
+			"notEmpty": true,
+			"hasComma": true,
+		},
 	},
 	{
 		Title:         "DefaultCsv empty items -- returns empty",
 		ArrangeInput:  args.Map{"items": []string{}},
-		ExpectedInput: args.Map{"notEmpty": false, "hasComma": false},
+		ExpectedInput: args.Map{
+			"notEmpty": false,
+			"hasComma": false,
+		},
 	},
 }
 
@@ -51,7 +60,10 @@ var ext2DefaultCsvStringsTestCases = []coretestcases.CaseV1{
 var ext2DefaultCsvUsingJoinerTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "DefaultCsvUsingJoiner pipe joiner -- joined",
-		ArrangeInput:  args.Map{"joiner": " | ", "items": []string{"x", "y"}},
+		ArrangeInput:  args.Map{
+			"joiner": " | ",
+			"items": []string{"x", "y"},
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -92,7 +104,10 @@ var ext2DefaultAnyCsvStringsTestCases = []coretestcases.CaseV1{
 var ext2DefaultAnyCsvUsingJoinerTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "DefaultAnyCsvUsingJoiner pipe joiner -- joined",
-		ArrangeInput:  args.Map{"joiner": " | ", "items": []any{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"joiner": " | ",
+			"items": []any{"a", "b"},
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -128,22 +143,42 @@ var ext2StringsToStringDefaultTestCases = []coretestcases.CaseV1{
 var ext2StringsToCsvStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsToCsvString single quote -- has single quotes",
-		ArrangeInput:  args.Map{"joiner": ", ", "quote": true, "singleQuote": true, "items": []string{"a"}},
+		ArrangeInput:  args.Map{
+			"joiner": ", ",
+			"quote": true,
+			"singleQuote": true,
+			"items": []string{"a"},
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 	{
 		Title:         "StringsToCsvString double quote -- has double quotes",
-		ArrangeInput:  args.Map{"joiner": ", ", "quote": true, "singleQuote": false, "items": []string{"a"}},
+		ArrangeInput:  args.Map{
+			"joiner": ", ",
+			"quote": true,
+			"singleQuote": false,
+			"items": []string{"a"},
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 	{
 		Title:         "StringsToCsvString no quote -- plain",
-		ArrangeInput:  args.Map{"joiner": ", ", "quote": false, "singleQuote": false, "items": []string{"a"}},
+		ArrangeInput:  args.Map{
+			"joiner": ", ",
+			"quote": false,
+			"singleQuote": false,
+			"items": []string{"a"},
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 	{
 		Title:         "StringsToCsvString empty -- empty string",
-		ArrangeInput:  args.Map{"joiner": ", ", "quote": false, "singleQuote": false, "items": []string{}},
+		ArrangeInput:  args.Map{
+			"joiner": ", ",
+			"quote": false,
+			"singleQuote": false,
+			"items": []string{},
+		},
 		ExpectedInput: args.Map{"notEmpty": false},
 	},
 }
@@ -155,22 +190,38 @@ var ext2StringsToCsvStringTestCases = []coretestcases.CaseV1{
 var ext2StringsToCsvStringsTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsToCsvStrings single quote",
-		ArrangeInput:  args.Map{"quote": true, "singleQuote": true, "items": []string{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"quote": true,
+			"singleQuote": true,
+			"items": []string{"a", "b"},
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringsToCsvStrings double quote",
-		ArrangeInput:  args.Map{"quote": true, "singleQuote": false, "items": []string{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"quote": true,
+			"singleQuote": false,
+			"items": []string{"a", "b"},
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringsToCsvStrings no quote",
-		ArrangeInput:  args.Map{"quote": false, "singleQuote": false, "items": []string{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"quote": false,
+			"singleQuote": false,
+			"items": []string{"a", "b"},
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringsToCsvStrings empty -- empty slice",
-		ArrangeInput:  args.Map{"quote": false, "singleQuote": false, "items": []string{}},
+		ArrangeInput:  args.Map{
+			"quote": false,
+			"singleQuote": false,
+			"items": []string{},
+		},
 		ExpectedInput: args.Map{"length": 0},
 	},
 }
@@ -182,7 +233,10 @@ var ext2StringsToCsvStringsTestCases = []coretestcases.CaseV1{
 var ext2CompileStringersToStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "CompileStringersToString with funcs -- joined string",
-		ArrangeInput:  args.Map{"count": 2, "joiner": ", "},
+		ArrangeInput:  args.Map{
+			"count": 2,
+			"joiner": ", ",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -206,22 +260,38 @@ var ext2CompileStringersToStringDefaultTestCases = []coretestcases.CaseV1{
 var ext2StringFunctionsToStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringFunctionsToString single quote",
-		ArrangeInput:  args.Map{"quote": true, "singleQuote": true, "count": 2},
+		ArrangeInput:  args.Map{
+			"quote": true,
+			"singleQuote": true,
+			"count": 2,
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringFunctionsToString double quote",
-		ArrangeInput:  args.Map{"quote": true, "singleQuote": false, "count": 2},
+		ArrangeInput:  args.Map{
+			"quote": true,
+			"singleQuote": false,
+			"count": 2,
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringFunctionsToString no quote",
-		ArrangeInput:  args.Map{"quote": false, "singleQuote": false, "count": 2},
+		ArrangeInput:  args.Map{
+			"quote": false,
+			"singleQuote": false,
+			"count": 2,
+		},
 		ExpectedInput: args.Map{"length": 2},
 	},
 	{
 		Title:         "StringFunctionsToString empty -- empty slice",
-		ArrangeInput:  args.Map{"quote": false, "singleQuote": false, "count": 0},
+		ArrangeInput:  args.Map{
+			"quote": false,
+			"singleQuote": false,
+			"count": 0,
+		},
 		ExpectedInput: args.Map{"length": 0},
 	},
 }

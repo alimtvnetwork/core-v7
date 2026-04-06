@@ -4,22 +4,23 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/issetter"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Value_Methods_Ext2(t *testing.T) {
 	// Arrange
 	v, err := issetter.New("Set")
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 
 	// Assert
-	if v.IsUnset() {
-		t.Error("should not be unset")
-	}
-	if !v.IsSet() {
-		t.Error("should be set")
-	}
+	actual := args.Map{"result": v.IsUnset()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
+	actual := args.Map{"result": v.IsSet()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be set", actual)
 }
 
 func Test_NewBool_Ext2(t *testing.T) {
@@ -27,12 +28,12 @@ func Test_NewBool_Ext2(t *testing.T) {
 	v := issetter.NewBool(true)
 
 	// Assert
-	if v.IsUnset() {
-		t.Error("should not be unset")
-	}
-	if !v.Boolean() {
-		t.Error("should be true")
-	}
+	actual := args.Map{"result": v.IsUnset()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
+	actual := args.Map{"result": v.Boolean()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be true", actual)
 }
 
 func Test_NewMust_Ext2(t *testing.T) {
@@ -40,12 +41,12 @@ func Test_NewMust_Ext2(t *testing.T) {
 	v := issetter.NewMust("True")
 
 	// Assert
-	if v.IsUnset() {
-		t.Error("should not be unset")
-	}
-	if !v.IsTrue() {
-		t.Error("should be True")
-	}
+	actual := args.Map{"result": v.IsUnset()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
+	actual := args.Map{"result": v.IsTrue()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be True", actual)
 }
 
 func Test_Max_Ext2(t *testing.T) {
@@ -53,9 +54,9 @@ func Test_Max_Ext2(t *testing.T) {
 	result := issetter.Max()
 
 	// Assert
-	if result != issetter.Wildcard {
-		t.Error("expected Wildcard to be max")
-	}
+	actual := args.Map{"result": result != issetter.Wildcard}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Wildcard to be max", actual)
 }
 
 func Test_Min_Ext2(t *testing.T) {
@@ -63,7 +64,7 @@ func Test_Min_Ext2(t *testing.T) {
 	result := issetter.Min()
 
 	// Assert
-	if result != issetter.Uninitialized {
-		t.Error("expected Uninitialized to be min")
-	}
+	actual := args.Map{"result": result != issetter.Uninitialized}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Uninitialized to be min", actual)
 }

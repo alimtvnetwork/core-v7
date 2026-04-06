@@ -5,374 +5,776 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── BytesCollection basic methods ──
 
 func Test_C22_BC_Length_Nil(t *testing.T) {
+	// Arrange
 	var bc *corejson.BytesCollection
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_LastIndex(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
-	if bc.LastIndex() != -1 { t.Fatal("expected -1") }
+
+	// Act
+	actual := args.Map{"result": bc.LastIndex() != -1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
 func Test_C22_BC_IsEmpty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
-	if !bc.IsEmpty() { t.Fatal("expected true") }
+
+	// Act
+	actual := args.Map{"result": bc.IsEmpty()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_C22_BC_HasAnyItem(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
-	if !bc.HasAnyItem() { t.Fatal("expected true") }
+
+	// Act
+	actual := args.Map{"result": bc.HasAnyItem()}
+
+	// Assert
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_C22_BC_FirstOrDefault_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
-	if bc.FirstOrDefault() != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": bc.FirstOrDefault() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C22_BC_FirstOrDefault_NonEmpty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"first"`))
-	if bc.FirstOrDefault() == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": bc.FirstOrDefault() == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_LastOrDefault_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
-	if bc.LastOrDefault() != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": bc.LastOrDefault() != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C22_BC_LastOrDefault_NonEmpty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"last"`))
-	if bc.LastOrDefault() == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": bc.LastOrDefault() == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_Take(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(3)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`)).Add([]byte(`"c"`))
 	taken := bc.Take(2)
-	if taken.Length() != 2 { t.Fatal("expected 2") }
+
+	// Act
+	actual := args.Map{"result": taken.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C22_BC_Take_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	taken := bc.Take(2)
-	if taken.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": taken.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_Limit(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(3)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`)).Add([]byte(`"c"`))
 	limited := bc.Limit(2)
-	if limited.Length() != 2 { t.Fatal("expected 2") }
+
+	// Act
+	actual := args.Map{"result": limited.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C22_BC_Limit_TakeAll(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`))
 	limited := bc.Limit(-1)
-	if limited.Length() != 2 { t.Fatal("expected all") }
+
+	// Act
+	actual := args.Map{"result": limited.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected all", actual)
 }
 
 func Test_C22_BC_Limit_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	limited := bc.Limit(5)
-	if limited.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": limited.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_Skip(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(3)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`)).Add([]byte(`"c"`))
 	skipped := bc.Skip(1)
-	if skipped.Length() != 2 { t.Fatal("expected 2") }
+
+	// Act
+	actual := args.Map{"result": skipped.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C22_BC_Skip_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	skipped := bc.Skip(0)
-	if skipped.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": skipped.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ── Add methods ──
 
 func Test_C22_BC_AddSkipOnNil_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSkipOnNil(nil)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddSkipOnNil_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSkipOnNil([]byte(`"x"`))
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddNonEmpty_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddNonEmpty([]byte{})
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddNonEmpty_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddNonEmpty([]byte(`"x"`))
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddResultPtr_HasIssue(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := &corejson.Result{}
 	bc.AddResultPtr(r)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddResultPtr_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.New("x")
 	bc.AddResultPtr(r.Ptr())
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddResult_HasIssue(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.Result{}
 	bc.AddResult(r)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddResult_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.New("x")
 	bc.AddResult(r)
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_GetAt(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	b := bc.GetAt(0)
-	if len(b) == 0 { t.Fatal("expected non-empty") }
+
+	// Act
+	actual := args.Map{"result": len(b) == 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C22_BC_JsonResultAt(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	r := bc.JsonResultAt(0)
-	if r == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_UnmarshalAt(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"hello"`))
 	var s string
 	err := bc.UnmarshalAt(0, &s)
-	if err != nil || s != "hello" { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C22_BC_AddSerializer_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializer(nil)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddSerializerFunc_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializerFunc(nil)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddSerializerFunc_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializerFunc(func() ([]byte, error) {
 		return json.Marshal("test")
 	})
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddSerializerFunctions_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializerFunctions()
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddSerializerFunctions_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializerFunctions(func() ([]byte, error) { return json.Marshal("a") })
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddSerializers_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddSerializers()
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_Add(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddPtr_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddPtr([]byte{})
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddPtr_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddPtr([]byte(`"x"`))
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_Adds_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Adds()
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_Adds_SkipEmpty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Adds([]byte{}, []byte(`"x"`))
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddAnyItems_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	err := bc.AddAnyItems()
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C22_BC_AddAnyItems_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	err := bc.AddAnyItems("hello", 42)
-	if err != nil { t.Fatal(err) }
-	if bc.Length() != 2 { t.Fatal("expected 2") }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": bc.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C22_BC_AddAnyItems_Error(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	err := bc.AddAnyItems(make(chan int))
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C22_BC_AddAny_Error(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	err := bc.AddAny(make(chan int))
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C22_BC_AddAny_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	err := bc.AddAny("hello")
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C22_BC_AddBytesCollection_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	other := corejson.NewBytesCollection.Empty()
 	bc.AddBytesCollection(other)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddBytesCollection_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	other := corejson.NewBytesCollection.Empty()
 	other.Add([]byte(`"x"`))
 	bc.AddBytesCollection(other)
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddMapResults_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	mr := corejson.NewMapResults.Empty()
 	bc.AddMapResults(mr)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddRawMapResults_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddRawMapResults(map[string]corejson.Result{})
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddRawMapResults_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.New("x")
 	bc.AddRawMapResults(map[string]corejson.Result{"k": r})
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddsPtr_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddsPtr(nil)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_AddsPtr_SkipNil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.New("x")
 	bc.AddsPtr(nil, r.Ptr())
-	if bc.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_AddJsoners_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.AddJsoners(true, nil)
-	if bc.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ── Safe getters ──
 
 func Test_C22_BC_GetAtSafe_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	b := bc.GetAtSafe(0)
-	if b == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": b == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_GetAtSafe_OutOfRange(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	b := bc.GetAtSafe(5)
-	if b != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": b != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C22_BC_GetAtSafePtr(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	b := bc.GetAtSafePtr(0)
-	if b == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": b == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_GetResultAtSafe_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	r := bc.GetResultAtSafe(0)
-	if r == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_GetResultAtSafe_Invalid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := bc.GetResultAtSafe(5)
-	if r != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": r != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C22_BC_GetAtSafeUsingLength_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	r := bc.GetAtSafeUsingLength(0, 1)
-	if r == nil { t.Fatal("expected non-nil") }
+
+	// Act
+	actual := args.Map{"result": r == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C22_BC_GetAtSafeUsingLength_Invalid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := bc.GetAtSafeUsingLength(5, 1)
-	if r != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": r != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 // ── Inject / Unmarshal into same index ──
@@ -386,18 +788,32 @@ func Test_C22_BC_InjectIntoAt(t *testing.T) {
 }
 
 func Test_C22_BC_InjectIntoSameIndex_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	// Pass nil as a true nil slice (not a single nil interface element)
 	var nilSlice []corejson.JsonParseSelfInjector
 	errs, hasErr := bc.InjectIntoSameIndex(nilSlice...)
-	if hasErr || len(errs) != 0 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": hasErr || len(errs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C22_BC_UnmarshalIntoSameIndex_Nil(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	var nilSlice []any
 	errs, hasErr := bc.UnmarshalIntoSameIndex(nilSlice...)
-	if hasErr || len(errs) != 0 { t.Fatal("unexpected") }
+
+	// Act
+	actual := args.Map{"result": hasErr || len(errs) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C22_BC_InjectIntoSameIndex_WithItems(t *testing.T) {
@@ -454,16 +870,30 @@ func Test_C22_BC_Dispose_Valid(t *testing.T) {
 // ── Strings ──
 
 func Test_C22_BC_Strings_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	s := bc.Strings()
-	if len(s) != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": len(s) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_Strings_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	s := bc.Strings()
-	if len(s) != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": len(s) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C22_BC_StringsPtr(t *testing.T) {
@@ -474,50 +904,99 @@ func Test_C22_BC_StringsPtr(t *testing.T) {
 // ── Pages ──
 
 func Test_C22_BC_GetPagesSize_Zero(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
-	if bc.GetPagesSize(0) != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": bc.GetPagesSize(0) != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_GetPagesSize_Valid(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ { bc.Add([]byte(`"x"`)) }
 	pages := bc.GetPagesSize(2)
-	if pages != 3 { t.Fatalf("expected 3, got %d", pages) }
+
+	// Act
+	actual := args.Map{"result": pages}
+
+	// Assert
+	expected := args.Map{"result": 3}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C22_BC_GetPagedCollection_SmallList(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`))
 	result := bc.GetPagedCollection(5)
-	if len(result) != 1 { t.Fatal("expected 1 page") }
+
+	// Act
+	actual := args.Map{"result": len(result) != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 page", actual)
 }
 
 func Test_C22_BC_GetPagedCollection_MultiPage(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ { bc.Add([]byte(`"x"`)) }
 	result := bc.GetPagedCollection(2)
-	if len(result) != 3 { t.Fatalf("expected 3 pages, got %d", len(result)) }
+
+	// Act
+	actual := args.Map{"result": len(result)}
+
+	// Assert
+	expected := args.Map{"result": 3}
+	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
 func Test_C22_BC_GetSinglePageCollection_SmallList(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`"a"`)).Add([]byte(`"b"`))
 	page := bc.GetSinglePageCollection(5, 1)
-	if page.Length() != 2 { t.Fatal("expected all items") }
+
+	// Act
+	actual := args.Map{"result": page.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected all items", actual)
 }
 
 func Test_C22_BC_GetSinglePageCollection_Page2(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ { bc.Add([]byte(`"x"`)) }
 	page := bc.GetSinglePageCollection(2, 2)
-	if page.Length() != 2 { t.Fatal("expected 2") }
+
+	// Act
+	actual := args.Map{"result": page.Length() != 2}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C22_BC_GetSinglePageCollection_LastPage(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(5)
 	for i := 0; i < 5; i++ { bc.Add([]byte(`"x"`)) }
 	page := bc.GetSinglePageCollection(2, 3)
-	if page.Length() != 1 { t.Fatal("expected 1") }
+
+	// Act
+	actual := args.Map{"result": page.Length() != 1}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ── Json methods ──
@@ -533,10 +1012,17 @@ func Test_C22_BC_JsonModelAny(t *testing.T) {
 }
 
 func Test_C22_BC_MarshalJSON(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bc.Add([]byte(`"x"`))
 	b, err := bc.MarshalJSON()
-	if err != nil { t.Fatal(err) }
+
+	// Act
+	actual := args.Map{"result": err}
+
+	// Assert
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	_ = b
 }
 
@@ -559,10 +1045,17 @@ func Test_C22_BC_JsonPtr(t *testing.T) {
 }
 
 func Test_C22_BC_ParseInjectUsingJson_Error(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	bad := corejson.NewResult.UsingString(`not valid`)
 	_, err := bc.ParseInjectUsingJson(bad)
-	if err == nil { t.Fatal("expected error") }
+
+	// Act
+	actual := args.Map{"result": err == nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C22_BC_ParseInjectUsingJsonMust_Panic(t *testing.T) {
@@ -616,14 +1109,28 @@ func Test_C22_BC_Clone_WithItems(t *testing.T) {
 }
 
 func Test_C22_BC_ClonePtr_Nil(t *testing.T) {
+	// Arrange
 	var bc *corejson.BytesCollection
-	if bc.ClonePtr(true) != nil { t.Fatal("expected nil") }
+
+	// Act
+	actual := args.Map{"result": bc.ClonePtr(true) != nil}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C22_BC_ClonePtr_Empty(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	c := bc.ClonePtr(true)
-	if c.Length() != 0 { t.Fatal("expected 0") }
+
+	// Act
+	actual := args.Map{"result": c.Length() != 0}
+
+	// Assert
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C22_BC_ClonePtr_WithItems(t *testing.T) {
