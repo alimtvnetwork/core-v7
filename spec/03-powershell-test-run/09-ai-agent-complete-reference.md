@@ -619,16 +619,32 @@ func Test_Cov1_internalHelper_ValidInput(t *testing.T) {
 
 ## 5. Unit Coverage Fix Protocol
 
+### Status: ✅ COMPLETE (as of 2026-04-06)
+
+All non-internal packages have achieved **100% reachable code coverage**. The protocol remains documented for maintenance and regression handling.
+
+### Completed Packages (21 packages at 100%)
+
+`corecmp`, `codestack`, `corepayload`, `corejson`, `coretests/results`, `reflectmodel`, `coretests`, `corevalidator`, `chmodhelper`, `coredynamic`, `enumimpl`, `errcore`, `corestr`, `coretests/args`, `coretests/coretestcases`, `namevalue`, `stringslice`, `corerange`, `stringutil`, `coreversion`, `coreonce`
+
+### Documented Unreachable Gaps (accepted, not bugs)
+
+| Package | Gap | Reason | Documentation |
+|---------|-----|--------|---------------|
+| `stringutil` | `IsEndsWith.go:37` (`remainingLength < 0`) | Prior length check makes this unreachable | `Coverage7_Gaps_test.go` |
+| `coreversion` | `hasDeductUsingNilNess.go:20` | Exhaustive nil checks above | `Coverage6_DeadCode_test.go` |
+| `coreonce` | `JsonStringMust` error branches | `json.Marshal` cannot fail on simple maps/slices | `Coverage16_Gaps_test.go` |
+
 ### Trigger
 
-When the user says **"fix unit test"** or **"Unit Coverage Fix"**, execute this protocol.
+When the user says **"fix unit test"**, **"Unit Coverage Fix"**, or **"next"**, execute this protocol for **maintenance/regression** handling.
 
 ### Objectives
 
 1. Fix build issues, runtime failures, blocked packages, and failing tests **first**
 2. Move all tests from inside packages to `tests/integratedtests/<pkg>tests/`
 3. Fix all assertion, formatting, and structural violations
-4. Achieve 100% code coverage across all non-internal packages
+4. Maintain 100% code coverage across all non-internal packages
 5. Enhance testing guidelines where gaps exist
 
 ### Prerequisites
@@ -648,6 +664,12 @@ When the user says **"fix unit test"** or **"Unit Coverage Fix"**, execute this 
 5. Refactoring      → apply AAA, fix assertions, format maps
 6. Coverage gaps    → write new tests (2 packages per iteration)
 ```
+
+### Failure Isolation (Split Recovery)
+
+If a package fails repeatedly during testing, **split monolithic test files into per-method granular files**. This ensures a single `-TC` run captures all distinct failures simultaneously without one error blocking compilation or execution of others.
+
+Four packages were restructured using this approach: `chmodhelpertests`, `coredynamictests`, `corestrtests`, `corepayloadtests`.
 
 ### Skip Rules
 
