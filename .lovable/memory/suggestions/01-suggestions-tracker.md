@@ -120,5 +120,6 @@
 | S-007 | Spec Reconciliation | 2026-03-17 | 9 files fixed |
 | S-008 | CI Pipeline Setup | 2026-03-18 | GitHub Actions |
 | S-011 | Missing Package READMEs (10 packages) | 2026-03-21 | All 10 created |
+| S-014 | Coverage Push — All Packages to 100% | 2026-04-06 | 21 packages at 100%, 3 accepted gaps, 4 split-recovery packages |
 
 > Detail files in `completed/` subfolder.
