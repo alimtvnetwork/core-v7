@@ -46,10 +46,10 @@ func BenchmarkLazyRegex_IsMatch_Miss(b *testing.B) {
 
 func BenchmarkLazyRegexMap_CreateOrExistingLock_Hit(b *testing.B) {
 	// prime the cache
-	internalLazyRegexMap.CreateOrExistingLock(`^bench-hit$`)
+	lazyRegexOnceMap.CreateOrExistingLock(`^bench-hit$`)
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		internalLazyRegexMap.CreateOrExistingLock(`^bench-hit$`)
+		lazyRegexOnceMap.CreateOrExistingLock(`^bench-hit$`)
 	}
 }
 
@@ -60,7 +60,7 @@ func BenchmarkLazyRegexMap_CreateOrExistingLock_Miss(b *testing.B) {
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		internalLazyRegexMap.CreateOrExistingLock(patterns[i])
+		lazyRegexOnceMap.CreateOrExistingLock(patterns[i])
 	}
 }
 
