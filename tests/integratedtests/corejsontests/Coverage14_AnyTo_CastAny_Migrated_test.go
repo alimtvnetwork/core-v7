@@ -11,9 +11,14 @@ import (
 // ── Migrated from Coverage06_AnyTo_CastAny_test.go and Coverage11 ──
 
 func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
+	// Arrange
 	r := corejson.NewResult.Any("x")
 	jr := corejson.AnyTo.SerializedJsonResult(r)
+
+	// Act
 	actual := args.Map{"hasError": jr.HasError()}
+
+	// Assert
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "result has no error", actual)
 
@@ -48,15 +53,25 @@ func Test_C06_AnyTo_SerializedJsonResult(t *testing.T) {
 }
 
 func Test_C06_AnyTo_SerializedRaw(t *testing.T) {
+	// Arrange
 	b, err := corejson.AnyTo.SerializedRaw("hello")
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_AnyTo_SerializedString(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.SerializedString("hello")
+
+	// Act
 	actual := args.Map{"result": err != nil || s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	_, err2 := corejson.AnyTo.SerializedString(nil)
@@ -66,8 +81,13 @@ func Test_C06_AnyTo_SerializedString(t *testing.T) {
 }
 
 func Test_C06_AnyTo_SerializedSafeString(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SerializedSafeString("hello")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	s2 := corejson.AnyTo.SerializedSafeString(nil)
@@ -77,22 +97,37 @@ func Test_C06_AnyTo_SerializedSafeString(t *testing.T) {
 }
 
 func Test_C06_AnyTo_SerializedStringMust(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SerializedStringMust("hello")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C06_AnyTo_SafeJsonString(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.SafeJsonString("hello")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C06_AnyTo_PrettyStringWithError(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
+
+	// Act
 	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	s2, err2 := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":1}`))
@@ -144,8 +179,13 @@ func Test_C06_AnyTo_JsonString(t *testing.T) {
 }
 
 func Test_C06_AnyTo_JsonStringWithErr(t *testing.T) {
+	// Arrange
 	s, err := corejson.AnyTo.JsonStringWithErr("hello")
+
+	// Act
 	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	_, _ = corejson.AnyTo.JsonStringWithErr([]byte("test"))
@@ -164,8 +204,13 @@ func Test_C06_AnyTo_JsonStringWithErr(t *testing.T) {
 }
 
 func Test_C06_AnyTo_JsonStringMust(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.JsonStringMust("hello")
+
+	// Act
 	actual := args.Map{"result": s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -179,25 +224,40 @@ func Test_C06_AnyTo_SerializedFieldsMap(t *testing.T) {
 }
 
 func Test_C06_CastAny_FromToDefault(t *testing.T) {
+	// Arrange
 	var out string
 	err := corejson.CastAny.FromToDefault([]byte(`"hello"`), &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_CastAny_FromToOption_Bytes(t *testing.T) {
+	// Arrange
 	var out string
 	err := corejson.CastAny.FromToOption(false, []byte(`"hello"`), &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_CastAny_FromToOption_String(t *testing.T) {
+	// Arrange
 	var out int
 	err := corejson.CastAny.FromToOption(false, "42", &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -215,20 +275,30 @@ func Test_C06_CastAny_FromToOption_ResultPtr(t *testing.T) {
 }
 
 func Test_C06_CastAny_FromToOption_SerializerFunc(t *testing.T) {
+	// Arrange
 	fn := func() ([]byte, error) { return []byte(`"hello"`), nil }
 	var out string
 	err := corejson.CastAny.FromToOption(false, fn, &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_CastAny_FromToOption_AnyFallback(t *testing.T) {
+	// Arrange
 	type simple struct{ Name string }
 	src := simple{Name: "test"}
 	var dst simple
 	err := corejson.CastAny.FromToOption(false, src, &dst)
+
+	// Act
 	actual := args.Map{"result": err != nil || dst.Name != "test"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -239,17 +309,27 @@ func Test_C06_CastAny_FromToOption_WithReflection(t *testing.T) {
 }
 
 func Test_C06_CastAny_OrDeserializeTo(t *testing.T) {
+	// Arrange
 	var out string
 	err := corejson.CastAny.OrDeserializeTo([]byte(`"hi"`), &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != "hi"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_CastAny_FromToReflection(t *testing.T) {
+	// Arrange
 	var out string
 	err := corejson.CastAny.FromToReflection([]byte(`"hello"`), &out)
+
+	// Act
 	actual := args.Map{"result": err != nil || out != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -258,15 +338,25 @@ type testSerializer14 struct{}
 func (testSerializer14) Serialize() ([]byte, error) { return []byte(`"x"`), nil }
 
 func Test_C06_AnyTo_UsingSerializer_Alt(t *testing.T) {
+	// Arrange
 	r := corejson.AnyTo.UsingSerializer(testSerializer14{})
+
+	// Act
 	actual := args.Map{"result": r == nil || r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_C06_AnyTo_PrettyStringMust_Map(t *testing.T) {
+	// Arrange
 	s := corejson.AnyTo.PrettyStringMust(map[string]string{"a": "1"})
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }

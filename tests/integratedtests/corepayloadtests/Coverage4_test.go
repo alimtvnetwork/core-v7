@@ -10,30 +10,40 @@ import (
 // ── Attributes extended ──
 
 func Test_Cov4_Attributes_IsEqual(t *testing.T) {
+	// Arrange
 	a1 := corepayload.New.Attributes.Empty()
 	a2 := corepayload.New.Attributes.Empty()
 	var nilA *corepayload.Attributes
+
+	// Act
 	actual := args.Map{
 		"equal":     a1.IsEqual(a2),
 		"self":      a1.IsEqual(a1),
 		"nilNil":    nilA.IsEqual(nilA),
 		"nilNonNil": nilA.IsEqual(a1),
 	}
+
+	// Assert
 	expected := args.Map{"equal": true, "self": true, "nilNil": true, "nilNonNil": false}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- IsEqual", actual)
 }
 
 func Test_Cov4_Attributes_Clone(t *testing.T) {
+	// Arrange
 	a := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"a":1}`))
 	cloned, err := a.Clone(false)
 	deepCloned, deepErr := a.Clone(true)
 	var nilA *corepayload.Attributes
 	nilCloned, nilErr := nilA.ClonePtr(false)
+
+	// Act
 	actual := args.Map{
 		"noErr":  err == nil, "len": cloned.Length() > 0,
 		"deepNoErr": deepErr == nil, "deepLen": deepCloned.Length() > 0,
 		"nilClone": nilCloned == nil, "nilErr": nilErr == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true, "len": true, "deepNoErr": true, "deepLen": true,
 		"nilClone": true, "nilErr": true,
@@ -42,8 +52,11 @@ func Test_Cov4_Attributes_Clone(t *testing.T) {
 }
 
 func Test_Cov4_Attributes_Getters(t *testing.T) {
+	// Arrange
 	a := corepayload.New.Attributes.Empty()
 	var nilA *corepayload.Attributes
+
+	// Act
 	actual := args.Map{
 		"isNull":           nilA.IsNull(),
 		"hasSafe":          a.HasSafeItems(),
@@ -87,6 +100,8 @@ func Test_Cov4_Attributes_Getters(t *testing.T) {
 		"hasAuthInfo":      a.HasAuthInfo(),
 		"hasSessionInfo":   a.HasSessionInfo(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isNull": true, "hasSafe": false, "hasStringKey": false, "hasAnyKey": false,
 		"payloadsLen": 0, "payloadsStr": "", "anyMap": 0, "hashmap": 0,
@@ -105,21 +120,31 @@ func Test_Cov4_Attributes_Getters(t *testing.T) {
 }
 
 func Test_Cov4_Attributes_GetStringKeyValue(t *testing.T) {
+	// Arrange
 	a := corepayload.New.Attributes.Empty()
 	_, found := a.GetStringKeyValue("x")
 	var nilA *corepayload.Attributes
 	_, nilFound := nilA.GetStringKeyValue("x")
+
+	// Act
 	actual := args.Map{"found": found, "nilFound": nilFound}
+
+	// Assert
 	expected := args.Map{"found": false, "nilFound": false}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- GetStringKeyValue", actual)
 }
 
 func Test_Cov4_Attributes_IsErrorEqual(t *testing.T) {
+	// Arrange
 	a := corepayload.New.Attributes.Empty()
+
+	// Act
 	actual := args.Map{
 		"equalNil":     a.IsErrorEqual(nil),
 		"differentNil": a.IsErrorDifferent(nil),
 	}
+
+	// Assert
 	expected := args.Map{"equalNil": true, "differentNil": false}
 	expected.ShouldBeEqual(t, 0, "Attributes returns error -- IsErrorEqual", actual)
 }
@@ -127,8 +152,11 @@ func Test_Cov4_Attributes_IsErrorEqual(t *testing.T) {
 // ── PagingInfo ──
 
 func Test_Cov4_PagingInfo(t *testing.T) {
+	// Arrange
 	p := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 1, PerPageItems: 10, TotalItems: 50}
 	var nilP *corepayload.PagingInfo
+
+	// Act
 	actual := args.Map{
 		"isEmpty":     p.IsEmpty(),
 		"isEqual":     p.IsEqual(p),
@@ -145,6 +173,8 @@ func Test_Cov4_PagingInfo(t *testing.T) {
 		"cloneTotalP":  p.Clone().TotalPages,
 		"clonePtrNil":  nilP.ClonePtr() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty": false, "isEqual": true, "nilNil": true, "nilNonNil": false,
 		"hasTotal": true, "hasCurrent": true, "hasPerPage": true, "hasTotalI": true,
@@ -157,9 +187,12 @@ func Test_Cov4_PagingInfo(t *testing.T) {
 // ── SessionInfo ──
 
 func Test_Cov4_SessionInfo(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.UsingName("alice")
 	s := &corepayload.SessionInfo{Id: "42", User: u, SessionPath: "/sess"}
 	var nilS *corepayload.SessionInfo
+
+	// Act
 	actual := args.Map{
 		"isEmpty":  s.IsEmpty(),
 		"isValid":  s.IsValid(),
@@ -173,6 +206,8 @@ func Test_Cov4_SessionInfo(t *testing.T) {
 		"nilEmpty": nilS.IsEmpty(),
 		"nilClone": nilS.ClonePtr() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty": false, "isValid": true, "hasUser": true,
 		"isUserE": false, "isNameE": false, "nameEq": true,
@@ -185,8 +220,11 @@ func Test_Cov4_SessionInfo(t *testing.T) {
 // ── AuthInfo ──
 
 func Test_Cov4_AuthInfo(t *testing.T) {
+	// Arrange
 	a := &corepayload.AuthInfo{ActionType: "login", ResourceName: "/api", Identifier: "42"}
 	var nilA *corepayload.AuthInfo
+
+	// Act
 	actual := args.Map{
 		"isEmpty":      a.IsEmpty(),
 		"hasAnyItem":   a.HasAnyItem(),
@@ -205,6 +243,8 @@ func Test_Cov4_AuthInfo(t *testing.T) {
 		"pretty":       a.PrettyJsonString() != "",
 		"nilEmpty":     nilA.IsEmpty(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isEmpty": false, "hasAnyItem": true, "isValid": true,
 		"hasAction": true, "hasResource": true,
@@ -218,6 +258,7 @@ func Test_Cov4_AuthInfo(t *testing.T) {
 }
 
 func Test_Cov4_AuthInfo_Setters(t *testing.T) {
+	// Arrange
 	var nilA *corepayload.AuthInfo
 	fromNilUser := nilA.SetUserInfo(&corepayload.UserInfo{})
 	fromNilAction := nilA.SetActionType("login")
@@ -227,6 +268,8 @@ func Test_Cov4_AuthInfo_Setters(t *testing.T) {
 	fromNilSysUser := nilA.SetUserSystemUser(nil, nil)
 	fromNilSetUser := nilA.SetUser(corepayload.New.User.UsingName("a"))
 	fromNilSetSysUser := nilA.SetSystemUser(corepayload.New.User.UsingName("s"))
+
+	// Act
 	actual := args.Map{
 		"userNotNil":    fromNilUser != nil,
 		"actionNotNil":  fromNilAction != nil,
@@ -237,6 +280,8 @@ func Test_Cov4_AuthInfo_Setters(t *testing.T) {
 		"setUserNotNil": fromNilSetUser != nil,
 		"setSysNotNil":  fromNilSetSysUser != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"userNotNil": true, "actionNotNil": true, "resourceNotNil": true,
 		"idNotNil": true, "sessionNotNil": true, "sysUserNotNil": true,
@@ -246,13 +291,18 @@ func Test_Cov4_AuthInfo_Setters(t *testing.T) {
 }
 
 func Test_Cov4_AuthInfo_Clone(t *testing.T) {
+	// Arrange
 	a := &corepayload.AuthInfo{ActionType: "login"}
 	cloned := a.ClonePtr()
 	var nilA *corepayload.AuthInfo
+
+	// Act
 	actual := args.Map{
 		"action":   cloned.ActionType,
 		"nilClone": nilA.ClonePtr() == nil,
 	}
+
+	// Assert
 	expected := args.Map{"action": "login", "nilClone": true}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Clone", actual)
 }
@@ -260,10 +310,13 @@ func Test_Cov4_AuthInfo_Clone(t *testing.T) {
 // ── TypedPayloadWrapper ──
 
 func Test_Cov4_TypedPayloadWrapper(t *testing.T) {
+	// Arrange
 	type Data struct{ Name string }
 	typed, err := corepayload.NewTypedPayloadWrapperFrom[Data](
 		"test", "id1", "entity", Data{Name: "alice"},
 	)
+
+	// Act
 	actual := args.Map{
 		"noErr":    err == nil,
 		"name":     typed.Name(),
@@ -286,6 +339,8 @@ func Test_Cov4_TypedPayloadWrapper(t *testing.T) {
 		"pretty":   typed.PrettyJsonString() != "",
 		"jsonStr":  typed.JsonString() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true, "name": "test", "id": "id1", "idStr": "id1",
 		"entity": "entity", "category": "", "task": "",
@@ -298,7 +353,10 @@ func Test_Cov4_TypedPayloadWrapper(t *testing.T) {
 }
 
 func Test_Cov4_TypedPayloadWrapper_Nil(t *testing.T) {
+	// Arrange
 	var typed *corepayload.TypedPayloadWrapper[string]
+
+	// Act
 	actual := args.Map{
 		"name":     typed.Name(),
 		"id":       typed.Identifier(),
@@ -316,6 +374,8 @@ func Test_Cov4_TypedPayloadWrapper_Nil(t *testing.T) {
 		"isParsed": typed.IsParsed(),
 		"attrs":    typed.Attributes() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"name": "", "id": "", "idStr": "", "entity": "", "category": "", "task": "",
 		"hasMany": false, "isEmpty": true, "hasError": false, "err": true,
@@ -325,6 +385,7 @@ func Test_Cov4_TypedPayloadWrapper_Nil(t *testing.T) {
 }
 
 func Test_Cov4_TypedPayloadWrapper_JSON(t *testing.T) {
+	// Arrange
 	type Data struct{ Name string }
 	typed, _ := corepayload.NewTypedPayloadWrapperFrom[Data](
 		"test", "id1", "entity", Data{Name: "alice"},
@@ -332,21 +393,30 @@ func Test_Cov4_TypedPayloadWrapper_JSON(t *testing.T) {
 	bytes, err := typed.MarshalJSON()
 	var typed2 corepayload.TypedPayloadWrapper[Data]
 	err2 := typed2.UnmarshalJSON(bytes)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil, "noErr2": err2 == nil,
 		"name": typed2.Data().Name,
 	}
+
+	// Assert
 	expected := args.Map{"noErr": true, "noErr2": true, "name": "alice"}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- JSON", actual)
 }
 
 func Test_Cov4_TypedPayloadWrapper_Serialize(t *testing.T) {
+	// Arrange
 	type Data struct{ Name string }
 	typed, _ := corepayload.NewTypedPayloadWrapperFrom[Data](
 		"test", "id1", "entity", Data{Name: "alice"},
 	)
 	bytes, err := typed.Serialize()
+
+	// Act
 	actual := args.Map{"noErr": err == nil, "notEmpty": len(bytes) > 0}
+
+	// Assert
 	expected := args.Map{"noErr": true, "notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- Serialize", actual)
 }
@@ -354,6 +424,7 @@ func Test_Cov4_TypedPayloadWrapper_Serialize(t *testing.T) {
 // ── PayloadCreateInstructionTypeStringer ──
 
 func Test_Cov4_PayloadCreateInstructionTypeStringer(t *testing.T) {
+	// Arrange
 	type myStringer struct{ val string }
 	ms := corepayload.PayloadCreateInstructionTypeStringer{
 		Name:                 "test",
@@ -362,7 +433,11 @@ func Test_Cov4_PayloadCreateInstructionTypeStringer(t *testing.T) {
 		CategoryNameStringer: corepayload.New.User.UsingName("cat"),
 	}
 	result := ms.PayloadCreateInstruction()
+
+	// Act
 	actual := args.Map{"name": result.Name}
+
+	// Assert
 	expected := args.Map{"name": "test"}
 	expected.ShouldBeEqual(t, 0, "PayloadCreateInstructionTypeStringer returns correct value -- with args", actual)
 }
@@ -370,16 +445,21 @@ func Test_Cov4_PayloadCreateInstructionTypeStringer(t *testing.T) {
 // ── Empty creator ──
 
 func Test_Cov4_EmptyCreator(t *testing.T) {
+	// Arrange
 	attrs := corepayload.Empty.Attributes()
 	attrsDef := corepayload.Empty.AttributesDefaults()
 	pw := corepayload.Empty.PayloadWrapper()
 	pc := corepayload.Empty.PayloadsCollection()
+
+	// Act
 	actual := args.Map{
 		"attrsNotNil":  attrs != nil,
 		"attrsDefHasKV": attrsDef.HasKeyValuePairs(),
 		"pwNotNil":     pw != nil,
 		"pcNotNil":     pc != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"attrsNotNil": true, "attrsDefHasKV": false,
 		"pwNotNil": true, "pcNotNil": true,

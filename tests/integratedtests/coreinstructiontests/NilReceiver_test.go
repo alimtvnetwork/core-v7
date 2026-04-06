@@ -14,6 +14,7 @@ import "testing"
 
 func Test_IdentifiersWithGlobals_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range identifiersWithGlobalsNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }
@@ -24,6 +25,7 @@ func Test_IdentifiersWithGlobals_NilReceiver(t *testing.T) {
 
 func Test_FromTo_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range fromToNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }

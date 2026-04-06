@@ -36,8 +36,13 @@ func newTestPC() *corepayload.PayloadsCollection {
 // --- PayloadsCollection Getters ---
 
 func Test_CovPL_S2_01_Length_Count_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": pc.Count() != 2}
@@ -57,8 +62,13 @@ func Test_CovPL_S2_01_Length_Count_IsEmpty_HasAnyItem(t *testing.T) {
 }
 
 func Test_CovPL_S2_02_LastIndex_HasIndex(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
+
+	// Act
 	actual := args.Map{"result": pc.LastIndex() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": pc.HasIndex(0)}
@@ -70,8 +80,13 @@ func Test_CovPL_S2_02_LastIndex_HasIndex(t *testing.T) {
 }
 
 func Test_CovPL_S2_03_First_Last_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
+
+	// Act
 	actual := args.Map{"result": pc.First() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": pc.Last() == nil}
@@ -121,9 +136,14 @@ func Test_CovPL_S2_04_Skip_Take_Limit_SafeLimit(t *testing.T) {
 }
 
 func Test_CovPL_S2_05_Strings_IsEqual_IsEqualItems(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	ss := pc.Strings()
+
+	// Act
 	actual := args.Map{"result": len(ss) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": pc.IsEqual(pc)}
@@ -170,10 +190,15 @@ func Test_CovPL_S2_08_AddsIf_InsertAt(t *testing.T) {
 }
 
 func Test_CovPL_S2_09_ConcatNew_ConcatNewPtr(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	pw := newTestPWForSeg2()
 	c := pc.ConcatNew(*pw)
+
+	// Act
 	actual := args.Map{"result": c.Length() < 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected >= 3", actual)
 	c2 := pc.ConcatNewPtr(pw)
@@ -198,9 +223,14 @@ func Test_CovPL_S2_10_Reverse(t *testing.T) {
 }
 
 func Test_CovPL_S2_11_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	c := pc.Clone()
+
+	// Act
 	actual := args.Map{"result": c.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	cp := pc.ClonePtr()
@@ -214,9 +244,14 @@ func Test_CovPL_S2_11_Clone_ClonePtr(t *testing.T) {
 }
 
 func Test_CovPL_S2_12_Clear_Dispose(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	pc.Clear()
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	pc2 := newTestPC()
@@ -229,11 +264,16 @@ func Test_CovPL_S2_12_Clear_Dispose(t *testing.T) {
 // --- PayloadsCollection Filter ---
 
 func Test_CovPL_S2_13_Filter_FilterWithLimit(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	items := pc.Filter(func(pw *corepayload.PayloadWrapper) (bool, bool) {
 		return true, false
 	})
+
+	// Act
 	actual := args.Map{"result": len(items) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	items2 := pc.FilterWithLimit(1, func(pw *corepayload.PayloadWrapper) (bool, bool) {
@@ -245,11 +285,16 @@ func Test_CovPL_S2_13_Filter_FilterWithLimit(t *testing.T) {
 }
 
 func Test_CovPL_S2_14_FirstByFilter_FirstById_FirstByCategory_FirstByTaskType_FirstByEntityType(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	f := pc.FirstByFilter(func(pw *corepayload.PayloadWrapper) bool {
 		return pw.IsIdentifier("1")
 	})
+
+	// Act
 	actual := args.Map{"result": f == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_ = pc.FirstById("1")
@@ -259,11 +304,16 @@ func Test_CovPL_S2_14_FirstByFilter_FirstById_FirstByCategory_FirstByTaskType_Fi
 }
 
 func Test_CovPL_S2_15_FilterCollection_SkipFilterCollection(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	fc := pc.FilterCollection(func(pw *corepayload.PayloadWrapper) (bool, bool) {
 		return true, false
 	})
+
+	// Act
 	actual := args.Map{"result": fc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sc := pc.SkipFilterCollection(func(pw *corepayload.PayloadWrapper) (bool, bool) {
@@ -286,11 +336,16 @@ func Test_CovPL_S2_16_FilterCollectionByIds_FilterNameCollection_FilterCategory_
 // --- PayloadsCollection Paging ---
 
 func Test_CovPL_S2_17_GetPagesSize_GetPagedCollection_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		pc.Add(*newTestPWForSeg2())
 	}
+
+	// Act
 	actual := args.Map{"result": pc.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": pc.GetPagesSize(0) != 0}
@@ -313,11 +368,16 @@ func Test_CovPL_S2_17_GetPagesSize_GetPagedCollection_GetSinglePageCollection(t 
 // --- PayloadsCollection JSON ---
 
 func Test_CovPL_S2_18_StringsUsingFmt_JoinUsingFmt(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	ss := pc.StringsUsingFmt(func(pw *corepayload.PayloadWrapper) string {
 		return pw.PayloadName()
 	})
+
+	// Act
 	actual := args.Map{"result": len(ss) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	j := pc.JoinUsingFmt(func(pw *corepayload.PayloadWrapper) string {
@@ -338,8 +398,13 @@ func Test_CovPL_S2_19_JsonStrings_JoinJsonStrings_Join_JoinCsv_JoinCsvLine(t *te
 }
 
 func Test_CovPL_S2_20_JsonString_String_PrettyJsonString_CsvStrings(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
+
+	// Act
 	actual := args.Map{"result": pc.JsonString() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": pc.String() == ""}
@@ -357,10 +422,15 @@ func Test_CovPL_S2_20_JsonString_String_PrettyJsonString_CsvStrings(t *testing.T
 }
 
 func Test_CovPL_S2_21_Json_JsonPtr_ParseInject_AsJsoner(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	_ = pc.Json()
 	jp := pc.JsonPtr()
+
+	// Act
 	actual := args.Map{"result": jp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	pc2 := corepayload.New.PayloadsCollection.Empty()
@@ -392,29 +462,44 @@ func Test_CovPL_S2_23_NewPC_Empty_UsingCap_UsingWrappers(t *testing.T) {
 }
 
 func Test_CovPL_S2_24_NewPC_Deserialize(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	b, _ := corejson.Serialize.Raw(pc)
 	pc2, err := corepayload.New.PayloadsCollection.Deserialize(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || pc2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S2_25_NewPC_DeserializeToMany(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	pcs := []*corepayload.PayloadsCollection{pc}
 	b, _ := corejson.Serialize.Raw(pcs)
 	many, err := corepayload.New.PayloadsCollection.DeserializeToMany(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(many) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S2_26_NewPC_DeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	pc := newTestPC()
 	jr := pc.JsonPtr()
 	pc2, err := corepayload.New.PayloadsCollection.DeserializeUsingJsonResult(jr)
+
+	// Act
 	actual := args.Map{"result": err != nil || pc2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
@@ -422,9 +507,14 @@ func Test_CovPL_S2_26_NewPC_DeserializeUsingJsonResult(t *testing.T) {
 // --- TypedPayloadWrapper ---
 
 func Test_CovPL_S2_30_TypedPW_Create_TypedData(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, err := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": tw.TypedData().A != 1}
@@ -439,9 +529,14 @@ func Test_CovPL_S2_30_TypedPW_Create_TypedData(t *testing.T) {
 }
 
 func Test_CovPL_S2_31_TypedPW_Accessors(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": tw.Name() != "n"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected n", actual)
 	actual := args.Map{"result": tw.Identifier() != "1"}
@@ -467,9 +562,14 @@ func Test_CovPL_S2_31_TypedPW_Accessors(t *testing.T) {
 }
 
 func Test_CovPL_S2_32_TypedPW_ErrorHandling(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": tw.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	actual := args.Map{"result": tw.IsEmpty()}
@@ -487,9 +587,14 @@ func Test_CovPL_S2_32_TypedPW_ErrorHandling(t *testing.T) {
 }
 
 func Test_CovPL_S2_33_TypedPW_StringRepresentation(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": tw.String() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": tw.PrettyJsonString() == ""}
@@ -506,12 +611,17 @@ func Test_CovPL_S2_33_TypedPW_StringRepresentation(t *testing.T) {
 }
 
 func Test_CovPL_S2_34_TypedPW_JSON(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	_ = tw.Json()
 	_ = tw.JsonPtr()
 	b, err := tw.MarshalJSON()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	tw2, _ := corepayload.NewTypedPayloadWrapperFrom[D]("x", "2", "e", D{})
@@ -527,9 +637,14 @@ func Test_CovPL_S2_34_TypedPW_JSON(t *testing.T) {
 }
 
 func Test_CovPL_S2_35_TypedPW_GetAs(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[string]("n", "1", "e", "hello")
 	s, ok := tw.GetAsString()
+
+	// Act
 	actual := args.Map{"result": ok || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	_ = tw.ValueString()
@@ -576,6 +691,7 @@ func Test_CovPL_S2_35_TypedPW_GetAs(t *testing.T) {
 }
 
 func Test_CovPL_S2_36_TypedPW_Setters(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	tw.SetName("new")
@@ -583,7 +699,11 @@ func Test_CovPL_S2_36_TypedPW_Setters(t *testing.T) {
 	tw.SetEntityType("new_e")
 	tw.SetCategoryName("cat")
 	err := tw.SetTypedData(D{A: 5})
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	actual := args.Map{"result": tw.TypedData().A != 5}
@@ -592,10 +712,15 @@ func Test_CovPL_S2_36_TypedPW_Setters(t *testing.T) {
 }
 
 func Test_CovPL_S2_37_TypedPW_Clone_ToPayloadWrapper_Reparse(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	cp, err := tw.ClonePtr(true)
+
+	// Act
 	actual := args.Map{"result": err != nil || cp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_, _ = tw.Clone(true)
@@ -631,9 +756,14 @@ func Test_CovPL_S2_38_TypedPW_Clear_Dispose(t *testing.T) {
 }
 
 func Test_CovPL_S2_39_TypedPW_OtherAccessors(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": tw.CategoryName() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	actual := args.Map{"result": tw.TaskTypeName() != ""}
@@ -652,10 +782,15 @@ func Test_CovPL_S2_39_TypedPW_OtherAccessors(t *testing.T) {
 }
 
 func Test_CovPL_S2_40_TypedPW_NewFromWrapper(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	pw := newTestPWForSeg2()
 	tw, err := corepayload.NewTypedPayloadWrapper[D](pw)
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	// nil wrapper
@@ -668,9 +803,14 @@ func Test_CovPL_S2_40_TypedPW_NewFromWrapper(t *testing.T) {
 // --- TypedPayloadCollection ---
 
 func Test_CovPL_S2_50_TPC_Create_Length_IsEmpty_HasItems(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	col := corepayload.NewTypedPayloadCollection[D](5)
+
+	// Act
 	actual := args.Map{"result": col.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": col.IsEmpty()}
@@ -693,9 +833,14 @@ func Test_CovPL_S2_50_TPC_Create_Length_IsEmpty_HasItems(t *testing.T) {
 }
 
 func Test_CovPL_S2_51_TPC_Empty_From(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
+
+	// Act
 	actual := args.Map{"result": empty.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
@@ -706,10 +851,15 @@ func Test_CovPL_S2_51_TPC_Empty_From(t *testing.T) {
 }
 
 func Test_CovPL_S2_52_TPC_FromPayloads(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	pc := newTestPC()
 	col := corepayload.TypedPayloadCollectionFromPayloads[D](pc)
+
+	// Act
 	actual := args.Map{"result": col.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// nil
@@ -720,13 +870,18 @@ func Test_CovPL_S2_52_TPC_FromPayloads(t *testing.T) {
 }
 
 func Test_CovPL_S2_53_TPC_ElementAccess(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw1, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	tw2, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "2", "e", D{A: 2})
 	col := corepayload.NewTypedPayloadCollection[D](2)
 	col.Add(tw1)
 	col.Add(tw2)
+
+	// Act
 	actual := args.Map{"result": col.First().Data().A != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": col.Last().Data().A != 2}
@@ -752,6 +907,7 @@ func Test_CovPL_S2_53_TPC_ElementAccess(t *testing.T) {
 }
 
 func Test_CovPL_S2_54_TPC_Add_AddLock_Adds_AddCollection_RemoveAt(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	col := corepayload.NewTypedPayloadCollection[D](5)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
@@ -761,7 +917,11 @@ func Test_CovPL_S2_54_TPC_Add_AddLock_Adds_AddCollection_RemoveAt(t *testing.T) 
 	col2.Add(tw)
 	col.AddCollection(col2)
 	ok := col.RemoveAt(0)
+
+	// Act
 	actual := args.Map{"result": ok}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	ok2 := col.RemoveAt(-1)
@@ -771,6 +931,7 @@ func Test_CovPL_S2_54_TPC_Add_AddLock_Adds_AddCollection_RemoveAt(t *testing.T) 
 }
 
 func Test_CovPL_S2_55_TPC_Iteration_Filter(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col := corepayload.NewTypedPayloadCollection[D](2)
@@ -779,7 +940,11 @@ func Test_CovPL_S2_55_TPC_Iteration_Filter(t *testing.T) {
 	col.ForEachData(func(i int, data D) {})
 	col.ForEachBreak(func(i int, item *corepayload.TypedPayloadWrapper[D]) bool { return false })
 	fc := col.Filter(func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })
+
+	// Act
 	actual := args.Map{"result": fc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	fd := col.FilterByData(func(d D) bool { return d.A == 1 })
@@ -794,6 +959,7 @@ func Test_CovPL_S2_55_TPC_Iteration_Filter(t *testing.T) {
 }
 
 func Test_CovPL_S2_56_TPC_Skip_Take_AllData_AllNames_AllIdentifiers(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col := corepayload.NewTypedPayloadCollection[D](2)
@@ -801,7 +967,11 @@ func Test_CovPL_S2_56_TPC_Skip_Take_AllData_AllNames_AllIdentifiers(t *testing.T
 	_ = col.Skip(0)
 	_ = col.Take(1)
 	data := col.AllData()
+
+	// Act
 	actual := args.Map{"result": len(data) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	names := col.AllNames()
@@ -820,12 +990,17 @@ func Test_CovPL_S2_56_TPC_Skip_Take_AllData_AllNames_AllIdentifiers(t *testing.T
 }
 
 func Test_CovPL_S2_57_TPC_ToPayloadsCollection_Clone(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col := corepayload.NewTypedPayloadCollection[D](2)
 	col.Add(tw)
 	pc := col.ToPayloadsCollection()
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c, err := col.Clone()
@@ -854,11 +1029,16 @@ func Test_CovPL_S2_58_TPC_Clear_Dispose(t *testing.T) {
 }
 
 func Test_CovPL_S2_59_TPC_LengthLock_IsEmptyLock_HasIndex_LastIndex(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	col := corepayload.NewTypedPayloadCollection[D](2)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col.Add(tw)
+
+	// Act
 	actual := args.Map{"result": col.LengthLock() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": col.IsEmptyLock()}
@@ -873,11 +1053,16 @@ func Test_CovPL_S2_59_TPC_LengthLock_IsEmptyLock_HasIndex_LastIndex(t *testing.T
 }
 
 func Test_CovPL_S2_60_TPC_IsValid_HasErrors_Errors_FirstError_MergedError(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	col := corepayload.NewTypedPayloadCollection[D](2)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col.Add(tw)
+
+	// Act
 	actual := args.Map{"result": col.IsValid()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": col.HasErrors()}
@@ -895,6 +1080,7 @@ func Test_CovPL_S2_60_TPC_IsValid_HasErrors_Errors_FirstError_MergedError(t *tes
 }
 
 func Test_CovPL_S2_61_TPC_Deserialization(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col := corepayload.NewTypedPayloadCollection[D](1)
@@ -904,17 +1090,26 @@ func Test_CovPL_S2_61_TPC_Deserialization(t *testing.T) {
 	// a JSON array [{},...], not {"Items":[...]} — serialize Items directly
 	b, _ := corejson.Serialize.Raw(pc.Items)
 	col2, err := corepayload.TypedPayloadCollectionDeserialize[D](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || col2.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_ = corepayload.TypedPayloadCollectionDeserializeMust[D](b)
 }
 
 func Test_CovPL_S2_62_TPC_Single_FromData(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	single := corepayload.NewTypedPayloadCollectionSingle[D](tw)
+
+	// Act
 	actual := args.Map{"result": single.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	nilSingle := corepayload.NewTypedPayloadCollectionSingle[D](nil)
@@ -935,9 +1130,14 @@ func Test_CovPL_S2_62_TPC_Single_FromData(t *testing.T) {
 // --- TypedPayloadWrapper Creator functions ---
 
 func Test_CovPL_S2_65_TypedPW_Creators(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	_, err := corepayload.TypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_, err2 := corepayload.TypedPayloadWrapperRecord[D]("n", "1", "t", "c", D{A: 1})
@@ -965,11 +1165,16 @@ func Test_CovPL_S2_65_TypedPW_Creators(t *testing.T) {
 }
 
 func Test_CovPL_S2_66_TypedPW_Deserialize(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	b, _ := tw.Serialize()
 	tw2, err := corepayload.TypedPayloadWrapperDeserialize[D](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || tw2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	jr := tw.JsonPtr()
@@ -980,12 +1185,17 @@ func Test_CovPL_S2_66_TypedPW_Deserialize(t *testing.T) {
 }
 
 func Test_CovPL_S2_67_TypedPW_DeserializeToMany(t *testing.T) {
+	// Arrange
 	type D struct{ A int }
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	pws := []*corepayload.PayloadWrapper{tw.ToPayloadWrapper()}
 	b, _ := corejson.Serialize.Raw(pws)
 	many, err := corepayload.TypedPayloadWrapperDeserializeToMany[D](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(many) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
@@ -993,8 +1203,13 @@ func Test_CovPL_S2_67_TypedPW_DeserializeToMany(t *testing.T) {
 // --- SessionInfo ---
 
 func Test_CovPL_S2_70_SessionInfo(t *testing.T) {
+	// Arrange
 	si := corepayload.SessionInfo{Id: "5", User: &corepayload.User{Name: "u"}, SessionPath: "/p"}
+
+	// Act
 	actual := args.Map{"result": si.IdentifierInteger() != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	actual := args.Map{"result": si.IdentifierUnsignedInteger() != 5}
@@ -1046,6 +1261,7 @@ func Test_CovPL_S2_70_SessionInfo(t *testing.T) {
 // --- AuthInfo ---
 
 func Test_CovPL_S2_71_AuthInfo(t *testing.T) {
+	// Arrange
 	ai := corepayload.AuthInfo{
 		Identifier:   "5",
 		ActionType:   "act",
@@ -1053,7 +1269,11 @@ func Test_CovPL_S2_71_AuthInfo(t *testing.T) {
 		SessionInfo:  &corepayload.SessionInfo{Id: "1"},
 		UserInfo:     &corepayload.UserInfo{User: &corepayload.User{Name: "u"}},
 	}
+
+	// Act
 	actual := args.Map{"result": ai.IdentifierInteger() != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	actual := args.Map{"result": ai.IdentifierUnsignedInteger() != 5}
@@ -1113,6 +1333,7 @@ func Test_CovPL_S2_71_AuthInfo(t *testing.T) {
 }
 
 func Test_CovPL_S2_72_AuthInfo_Setters(t *testing.T) {
+	// Arrange
 	ai := &corepayload.AuthInfo{}
 	ai.SetActionType("act")
 	ai.SetResourceName("res")
@@ -1126,7 +1347,11 @@ func Test_CovPL_S2_72_AuthInfo_Setters(t *testing.T) {
 	// nil setters
 	var nilAI *corepayload.AuthInfo
 	r := nilAI.SetActionType("act")
+
+	// Act
 	actual := args.Map{"result": r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_ = nilAI.SetResourceName("res")
@@ -1141,13 +1366,18 @@ func Test_CovPL_S2_72_AuthInfo_Setters(t *testing.T) {
 // --- PagingInfo ---
 
 func Test_CovPL_S2_73_PagingInfo(t *testing.T) {
+	// Arrange
 	pi := corepayload.PagingInfo{
 		CurrentPageIndex: 1,
 		TotalPages:       5,
 		PerPageItems:     10,
 		TotalItems:       50,
 	}
+
+	// Act
 	actual := args.Map{"result": pi.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	actual := args.Map{"result": pi.HasTotalPages()}
@@ -1202,6 +1432,7 @@ func Test_CovPL_S2_73_PagingInfo(t *testing.T) {
 // --- User ---
 
 func Test_CovPL_S2_74_User(t *testing.T) {
+	// Arrange
 	u := corepayload.User{
 		Identifier:   "5",
 		Name:         "u",
@@ -1210,7 +1441,11 @@ func Test_CovPL_S2_74_User(t *testing.T) {
 		PasswordHash: "hash",
 		IsSystemUser: false,
 	}
+
+	// Act
 	actual := args.Map{"result": u.IdentifierInteger() != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	actual := args.Map{"result": u.IdentifierUnsignedInteger() != 5}
@@ -1283,10 +1518,15 @@ func Test_CovPL_S2_74_User(t *testing.T) {
 // --- UserInfo ---
 
 func Test_CovPL_S2_75_UserInfo(t *testing.T) {
+	// Arrange
 	u := &corepayload.User{Name: "u"}
 	su := &corepayload.User{Name: "sys", IsSystemUser: true}
 	ui := corepayload.UserInfo{User: u, SystemUser: su}
+
+	// Act
 	actual := args.Map{"result": ui.HasUser()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": ui.HasSystemUser()}
@@ -1348,10 +1588,15 @@ func Test_CovPL_S2_76_NewUser_Creator(t *testing.T) {
 }
 
 func Test_CovPL_S2_77_NewUser_Deserialize_CastOrDeserializeFrom(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.Create(false, "u", "t")
 	b, _ := u.Serialize()
 	u2, err := corepayload.New.User.Deserialize(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || u2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	u3, err2 := corepayload.New.User.CastOrDeserializeFrom(u)
@@ -1368,6 +1613,7 @@ func Test_CovPL_S2_77_NewUser_Deserialize_CastOrDeserializeFrom(t *testing.T) {
 // --- PayloadCreateInstructionTypeStringer ---
 
 func Test_CovPL_S2_80_PayloadCreateInstructionTypeStringer(t *testing.T) {
+	// Arrange
 	type stringer struct{ v string }
 	s := stringer{v: "task"}
 	// can't use stringer directly, use a real Stringer
@@ -1379,7 +1625,11 @@ func Test_CovPL_S2_80_PayloadCreateInstructionTypeStringer(t *testing.T) {
 		CategoryNameStringer: stringerImpl{"cat"},
 	}
 	pci := inst.PayloadCreateInstruction()
+
+	// Act
 	actual := args.Map{"result": pci == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_ = s

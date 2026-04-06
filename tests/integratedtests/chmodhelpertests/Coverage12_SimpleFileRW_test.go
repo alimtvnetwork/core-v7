@@ -13,25 +13,35 @@ import (
 // ── SimpleFileReaderWriter.Write ──
 
 func Test_Cov12_Write_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.Write([]byte("hello"))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_Write_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_write")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
 
 	rw := newTestRW(tmpDir, "test.txt")
 	err := rw.Write([]byte("hello"))
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -39,18 +49,24 @@ func Test_Cov12_Write_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.WritePath ──
 
 func Test_Cov12_WritePath_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.WritePath(false, filepath.Join(invalidDir, "wp.txt"), []byte("x"))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_WritePath_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writepath")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -58,7 +74,11 @@ func Test_Cov12_WritePath_Success(t *testing.T) {
 	rw := newTestRW(tmpDir, "test.txt")
 	fp := filepath.Join(tmpDir, "wp.txt")
 	err := rw.WritePath(false, fp, []byte("hello"))
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -66,25 +86,35 @@ func Test_Cov12_WritePath_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.WriteRelativePath ──
 
 func Test_Cov12_WriteRelativePath_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.WriteRelativePath(false, "rel.txt", []byte("x"))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_WriteRelativePath_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writerel")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
 
 	rw := newTestRW(tmpDir, "test.txt")
 	err := rw.WriteRelativePath(false, "rel.txt", []byte("hello"))
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -92,25 +122,35 @@ func Test_Cov12_WriteRelativePath_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.WriteString ──
 
 func Test_Cov12_WriteString_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.WriteString("hello")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_WriteString_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_writestr")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
 
 	rw := newTestRW(tmpDir, "test.txt")
 	err := rw.WriteString("hello")
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -118,13 +158,18 @@ func Test_Cov12_WriteString_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.WriteAny ──
 
 func Test_Cov12_WriteAny_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.json")
 	err := rw.WriteAny(map[string]string{"k": "v"})
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -132,18 +177,24 @@ func Test_Cov12_WriteAny_Error(t *testing.T) {
 // ── SimpleFileReaderWriter.Read ──
 
 func Test_Cov12_Read_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	_, err := rw.Read()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_Read_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_read")
 	os.MkdirAll(tmpDir, 0755)
 	fp := filepath.Join(tmpDir, "test.txt")
@@ -152,7 +203,11 @@ func Test_Cov12_Read_Success(t *testing.T) {
 
 	rw := newTestRW(tmpDir, "test.txt")
 	data, err := rw.Read()
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": string(data) != "hello"}
@@ -163,11 +218,16 @@ func Test_Cov12_Read_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.ReadMust ──
 
 func Test_Cov12_ReadMust_Panic(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	defer func() {
+
+	// Act
 		actual := args.Map{"result": r := recover(); r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
@@ -179,18 +239,24 @@ func Test_Cov12_ReadMust_Panic(t *testing.T) {
 // ── SimpleFileReaderWriter.ReadString ──
 
 func Test_Cov12_ReadString_Error(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	_, err := rw.ReadString()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_ReadString_Success(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_readstr")
 	os.MkdirAll(tmpDir, 0755)
 	fp := filepath.Join(tmpDir, "test.txt")
@@ -199,7 +265,11 @@ func Test_Cov12_ReadString_Success(t *testing.T) {
 
 	rw := newTestRW(tmpDir, "test.txt")
 	s, err := rw.ReadString()
+
+	// Act
 	actual := args.Map{"result": err != nil || s != "world"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
@@ -207,11 +277,16 @@ func Test_Cov12_ReadString_Success(t *testing.T) {
 // ── SimpleFileReaderWriter.ReadStringMust ──
 
 func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
 	defer func() {
+
+	// Act
 		actual := args.Map{"result": r := recover(); r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
@@ -223,6 +298,7 @@ func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
 // ── SimpleFileReaderWriter.GetSet ──
 
 func Test_Cov12_GetSet_GenerateError(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_getset")
 	os.MkdirAll(tmpDir, 0755)
 	defer os.RemoveAll(tmpDir)
@@ -233,7 +309,11 @@ func Test_Cov12_GetSet_GenerateError(t *testing.T) {
 	err := rw.GetSet(&result, func() (any, error) {
 		return nil, os.ErrNotExist
 	})
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error from generate func", actual)
 }
@@ -241,6 +321,7 @@ func Test_Cov12_GetSet_GenerateError(t *testing.T) {
 // ── SimpleFileReaderWriter.errorWrap / errorWrapFilePath ──
 
 func Test_Cov12_ErrorWrap_Nil(t *testing.T) {
+	// Arrange
 	// errorWrap with nil returns nil - covered through successful write
 	tmpDir := filepath.Join(os.TempDir(), "cov12_errwrap")
 	os.MkdirAll(tmpDir, 0755)
@@ -248,7 +329,11 @@ func Test_Cov12_ErrorWrap_Nil(t *testing.T) {
 
 	rw := newTestRW(tmpDir, "test.txt")
 	err := rw.Write([]byte("x"))
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -262,6 +347,7 @@ func Test_Cov12_ErrorWrapFilePath_Nil(t *testing.T) {
 // ── SimpleFileReaderWriter.name (unexported, tested indirectly via errorWrap) ──
 
 func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod behavior differs on Windows")
 	}
@@ -270,7 +356,11 @@ func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
 	invalidDir := filepath.Join("/proc", "nonexistent_cov12")
 	rw := newTestRW(invalidDir, "test.txt")
 	err := rw.Write([]byte("x"))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// error message includes "simple-reader-writer" from name()
@@ -279,15 +369,21 @@ func Test_Cov12_Name_CoveredViaErrorWrap(t *testing.T) {
 // ── SimpleFileReaderWriter.getOnExist ──
 
 func Test_Cov12_GetOnExist_ReadError(t *testing.T) {
+	// Arrange
 	rw := newTestRW("/nonexistent/cov12", "cache.json")
 	// File doesn't exist but Get calls getOnExist only if IsExist
 	err := rw.Get(nil)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov12_GetOnExist_Valid(t *testing.T) {
+	// Arrange
 	tmpDir := filepath.Join(os.TempDir(), "cov12_getonexist")
 	os.MkdirAll(tmpDir, 0755)
 	fp := filepath.Join(tmpDir, "data.json")
@@ -297,7 +393,11 @@ func Test_Cov12_GetOnExist_Valid(t *testing.T) {
 	rw := newTestRW(tmpDir, "data.json")
 	var result map[string]string
 	err := rw.Get(&result)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }

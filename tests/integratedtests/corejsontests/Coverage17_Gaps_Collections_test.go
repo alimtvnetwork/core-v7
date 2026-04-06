@@ -12,10 +12,15 @@ import (
 // ── ResultsCollection uncovered methods ──
 
 func Test_Gap_RC_GetAtSafeUsingLength(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.Add(corejson.NewResult.Any("a"))
 	c.Add(corejson.NewResult.Any("b"))
+
+	// Act
 	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 2) == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 2) != nil}
@@ -27,30 +32,45 @@ func Test_Gap_RC_GetAtSafeUsingLength(t *testing.T) {
 }
 
 func Test_Gap_RC_AddAnyItemsSlice(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.AddAnyItemsSlice([]any{"a", nil, "b"})
+
+	// Act
 	actual := args.Map{"result": c.Length()}
+
+	// Assert
 	expected := args.Map{"result": 2}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	c.AddAnyItemsSlice(nil)
 }
 
 func Test_Gap_RC_AddResultsCollection(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.Add(corejson.NewResult.Any("a"))
 	sub := corejson.NewResultsCollection.UsingCap(1)
 	sub.Add(corejson.NewResult.Any("b"))
 	c.AddResultsCollection(sub)
 	c.AddResultsCollection(nil)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Gap_RC_AddNonNilItemsPtr(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.AddNonNilItemsPtr(nil, corejson.NewResult.AnyPtr("a"), nil)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c.AddNonNilItemsPtr()
@@ -65,29 +85,44 @@ func Test_Gap_RC_NonPtrPtr(t *testing.T) {
 }
 
 func Test_Gap_RC_GetAt(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(1)
 	c.Add(corejson.NewResult.Any("x"))
 	r := c.GetAt(0)
+
+	// Act
 	actual := args.Map{"result": r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Gap_RC_NoErrorCollection(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(1)
 	c.Add(corejson.NewResult.Any("ok"))
+
+	// Act
 	actual := args.Map{"result": c.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have error", actual)
 }
 
 func Test_Gap_RC_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsCollection.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -101,21 +136,31 @@ func Test_Gap_RC_ParseInjectUsingJsonMust(t *testing.T) {
 }
 
 func Test_Gap_RC_JsonParseSelfInject(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.Empty()
 	c.Add(corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsCollection.Empty()
 	err := target.JsonParseSelfInject(jr)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_RC_AddSerializerFunc(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsCollection.UsingCap(2)
 	c.AddSerializerFunc(func() ([]byte, error) { return []byte(`"x"`), nil })
 	c.AddSerializerFunc(nil)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
@@ -162,12 +207,17 @@ func Test_Gap_RC_UnmarshalIntoSameIndex(t *testing.T) {
 // ── ResultsPtrCollection uncovered methods ──
 
 func Test_Gap_RPC_UnmarshalAt(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsPtrCollection.UsingCap(2)
 	c.Add(corejson.NewResult.AnyPtr("hello"))
 	c.Add(&corejson.Result{Error: errors.New("e")})
 	var s string
 	err := c.UnmarshalAt(0, &s)
+
+	// Act
 	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	err2 := c.UnmarshalAt(1, &s)
@@ -176,19 +226,29 @@ func Test_Gap_RPC_UnmarshalAt(t *testing.T) {
 }
 
 func Test_Gap_RPC_UnmarshalAt_NilResult(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsPtrCollection.UsingCap(1)
 	c.Add(nil)
 	var s string
 	err := c.UnmarshalAt(0, &s)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for nil result", actual)
 }
 
 func Test_Gap_RPC_GetAtSafe(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsPtrCollection.UsingCap(1)
 	c.Add(corejson.NewResult.AnyPtr("x"))
+
+	// Act
 	actual := args.Map{"result": c.GetAtSafe(0) == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": c.GetAtSafe(-1) != nil}
@@ -200,9 +260,14 @@ func Test_Gap_RPC_GetAtSafe(t *testing.T) {
 }
 
 func Test_Gap_RPC_GetAtSafeUsingLength(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsPtrCollection.UsingCap(1)
 	c.Add(corejson.NewResult.AnyPtr("x"))
+
+	// Act
 	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 1) == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
@@ -231,12 +296,17 @@ func Test_Gap_RPC_UnmarshalIntoSameIndex(t *testing.T) {
 }
 
 func Test_Gap_RPC_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	c := corejson.NewResultsPtrCollection.Default()
 	c.Add(corejson.NewResult.AnyPtr("x"))
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsPtrCollection.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -260,9 +330,14 @@ func Test_Gap_RPC_JsonParseSelfInject(t *testing.T) {
 // ── BytesCollection uncovered methods ──
 
 func Test_Gap_BC_GetAtSafeUsingLength(t *testing.T) {
+	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"x"`))
+
+	// Act
 	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 1) == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
@@ -271,10 +346,15 @@ func Test_Gap_BC_GetAtSafeUsingLength(t *testing.T) {
 }
 
 func Test_Gap_BC_AddsPtr(t *testing.T) {
+	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	r := corejson.NewResult.AnyPtr("x")
 	c.AddsPtr(r, nil)
+
+	// Act
 	actual := args.Map{"result": c.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c.AddsPtr()
@@ -288,13 +368,18 @@ func Test_Gap_BC_InjectIntoSameIndex(t *testing.T) {
 }
 
 func Test_Gap_BC_UnmarshalIntoSameIndex(t *testing.T) {
+	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(2)
 	c.Add([]byte(`"hello"`))
 	c.Add([]byte(`42`))
 	var s string
 	var n int
 	_, _ = c.UnmarshalIntoSameIndex(&s, &n)
+
+	// Act
 	actual := args.Map{"result": s != "hello" || n != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	_, _ = c.UnmarshalIntoSameIndex()
@@ -330,12 +415,17 @@ func Test_Gap_BC_JsonParseSelfInject(t *testing.T) {
 }
 
 func Test_Gap_BC_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	c := corejson.NewBytesCollection.UsingCap(15)
 	for i := 0; i < 15; i++ {
 		c.Add([]byte(`"x"`))
 	}
 	page := c.GetSinglePageCollection(5, 1)
+
+	// Act
 	actual := args.Map{"result": page.Length() != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	page2 := c.GetSinglePageCollection(5, 3)
@@ -385,19 +475,29 @@ func Test_Gap_MR_DeserializeMust(t *testing.T) {
 }
 
 func Test_Gap_MR_UnmarshalMany(t *testing.T) {
+	// Arrange
 	m := corejson.NewMapResults.UsingCap(2)
 	m.Add("a", corejson.NewResult.Any("hello"))
 	err := m.UnmarshalMany()
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 }
 
 func Test_Gap_MR_UnmarshalManySafe(t *testing.T) {
+	// Arrange
 	m := corejson.NewMapResults.UsingCap(2)
 	m.Add("a", corejson.NewResult.Any("hello"))
 	err := m.UnmarshalManySafe()
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 }
@@ -450,12 +550,17 @@ func Test_Gap_MR_AddKeyWithJsonerPtr(t *testing.T) {
 }
 
 func Test_Gap_MR_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	m := corejson.NewMapResults.UsingCap(1)
 	m.Add("a", corejson.NewResult.Any("x"))
 	jr := corejson.NewResult.AnyPtr(m)
 	target := corejson.NewMapResults.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
@@ -477,13 +582,18 @@ func Test_Gap_MR_JsonParseSelfInject(t *testing.T) {
 }
 
 func Test_Gap_MR_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	m := corejson.NewMapResults.UsingCap(15)
 	for i := 0; i < 15; i++ {
 		m.Add(corejson.Serialize.ToString(i), corejson.NewResult.Any(i))
 	}
 	keys := m.AllKeysSorted()
 	page := m.GetSinglePageCollection(5, 1, keys)
+
+	// Act
 	actual := args.Map{"result": page.Length() != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }

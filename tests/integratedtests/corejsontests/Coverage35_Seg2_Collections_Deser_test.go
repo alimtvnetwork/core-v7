@@ -22,8 +22,13 @@ func newTestRC() *corejson.ResultsCollection {
 }
 
 func Test_CovJsonS2_RC01_Length_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": rc.IsEmpty()}
@@ -40,9 +45,14 @@ func Test_CovJsonS2_RC01_Length_IsEmpty_HasAnyItem(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC02_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	f := rc.FirstOrDefault()
+
+	// Act
 	actual := args.Map{"result": f == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	l := rc.LastOrDefault()
@@ -60,9 +70,14 @@ func Test_CovJsonS2_RC02_FirstOrDefault_LastOrDefault(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC03_Take_Limit_Skip(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	taken := rc.Take(1)
+
+	// Act
 	actual := args.Map{"result": taken.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	limited := rc.Limit(1)
@@ -92,9 +107,14 @@ func Test_CovJsonS2_RC03_Take_Limit_Skip(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC04_AddSkipOnNil_AddNonNilNonError(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddSkipOnNil(nil)
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	r := corejson.NewPtr(1)
@@ -116,8 +136,13 @@ func Test_CovJsonS2_RC04_AddSkipOnNil_AddNonNilNonError(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC05_HasError_AllErrors(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
+
+	// Act
 	actual := args.Map{"result": rc.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	errs, hasAny := rc.AllErrors()
@@ -133,9 +158,14 @@ func Test_CovJsonS2_RC05_HasError_AllErrors(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC06_GetErrorsStrings_GetErrorsAsSingle(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	ss := rc.GetErrorsStrings()
+
+	// Act
 	actual := args.Map{"result": len(ss) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	_ = rc.GetErrorsStringsPtr()
@@ -150,10 +180,15 @@ func Test_CovJsonS2_RC06_GetErrorsStrings_GetErrorsAsSingle(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC07_GetAt_GetAtSafe_GetAtSafeUsingLength(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	_ = rc.GetAt(0)
 	safe := rc.GetAtSafe(0)
+
+	// Act
 	actual := args.Map{"result": safe == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	safe2 := rc.GetAtSafe(-2)
@@ -171,9 +206,14 @@ func Test_CovJsonS2_RC07_GetAt_GetAtSafe_GetAtSafeUsingLength(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC08_AddPtr_Adds_AddsPtr_AddAny_AddAnyItems(t *testing.T) {
+	// Arrange
 	rc := corejson.NewResultsCollection.Empty()
 	rc.AddPtr(nil)
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	r := corejson.NewPtr(1)
@@ -211,9 +251,14 @@ func Test_CovJsonS2_RC11_Dispose_Clear(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC12_GetStrings(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	ss := rc.GetStrings()
+
+	// Act
 	actual := args.Map{"result": len(ss) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	_ = rc.GetStringsPtr()
@@ -226,13 +271,18 @@ func Test_CovJsonS2_RC12_GetStrings(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC13_GetPagesSize_GetPagedCollection_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	// build 15 items
 	rc := corejson.NewResultsCollection.UsingCap(20)
 	for i := 0; i < 15; i++ {
 		rc.AddAny(i)
 	}
 	ps := rc.GetPagesSize(5)
+
+	// Act
 	actual := args.Map{"result": ps != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	actual := args.Map{"result": rc.GetPagesSize(0) != 0}
@@ -259,9 +309,14 @@ func Test_CovJsonS2_RC13_GetPagesSize_GetPagedCollection_GetSinglePageCollection
 }
 
 func Test_CovJsonS2_RC14_Json_JsonPtr_JsonModel_Interfaces(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	j := rc.Json()
+
+	// Act
 	actual := args.Map{"result": j.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	jp := rc.JsonPtr()
@@ -278,23 +333,33 @@ func Test_CovJsonS2_RC14_Json_JsonPtr_JsonModel_Interfaces(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC15_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	jr := rc.JsonPtr()
 	rc2 := corejson.NewResultsCollection.Empty()
 	_, err := rc2.ParseInjectUsingJson(jr)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_CovJsonS2_RC16_Clone_ShadowClone_ClonePtr(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	c := rc.ShadowClone()
 	_ = c
 	c2 := rc.Clone(true)
 	_ = c2
 	cp := rc.ClonePtr(true)
+
+	// Act
 	actual := args.Map{"result": cp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	// nil
@@ -305,19 +370,29 @@ func Test_CovJsonS2_RC16_Clone_ShadowClone_ClonePtr(t *testing.T) {
 }
 
 func Test_CovJsonS2_RC17_UnmarshalAt(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	var m map[string]int
 	err := rc.UnmarshalAt(0, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
 
 func Test_CovJsonS2_RC18_UnmarshalIntoSameIndex(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	var m1, m2 map[string]int
 	errs, hasAny := rc.UnmarshalIntoSameIndex(&m1, &m2)
+
+	// Act
 	actual := args.Map{"result": hasAny}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_ = errs
@@ -352,8 +427,13 @@ func newTestRPC() *corejson.ResultsPtrCollection {
 }
 
 func Test_CovJsonS2_RPC01_Length_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
+
+	// Act
 	actual := args.Map{"result": rpc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	var nilRPC *corejson.ResultsPtrCollection
@@ -363,8 +443,13 @@ func Test_CovJsonS2_RPC01_Length_IsEmpty_HasAnyItem(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC02_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
+
+	// Act
 	actual := args.Map{"result": rpc.FirstOrDefault() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": rpc.LastOrDefault() == nil}
@@ -377,8 +462,13 @@ func Test_CovJsonS2_RPC02_FirstOrDefault_LastOrDefault(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC03_Take_Limit_Skip(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
+
+	// Act
 	actual := args.Map{"result": rpc.Take(1).Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": rpc.Limit(1).Length() != 1}
@@ -397,11 +487,16 @@ func Test_CovJsonS2_RPC03_Take_Limit_Skip(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC04_AddSkipOnNil_AddNonNilNonError(t *testing.T) {
+	// Arrange
 	rpc := corejson.NewResultsPtrCollection.Empty()
 	rpc.AddSkipOnNil(nil)
 	r := corejson.NewPtr(1)
 	rpc.AddSkipOnNil(r)
+
+	// Act
 	actual := args.Map{"result": rpc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	errR := &corejson.Result{Error: errors.New("err")}
@@ -412,8 +507,13 @@ func Test_CovJsonS2_RPC04_AddSkipOnNil_AddNonNilNonError(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC05_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
+
+	// Act
 	actual := args.Map{"result": rpc.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	errs, hasAny := rpc.AllErrors()
@@ -431,10 +531,15 @@ func Test_CovJsonS2_RPC05_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC06_GetAt_GetAtSafe(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
 	_ = rpc.GetAt(0)
 	safe := rpc.GetAtSafe(0)
+
+	// Act
 	actual := args.Map{"result": safe == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": rpc.GetAtSafe(-2) != nil}
@@ -464,10 +569,15 @@ func Test_CovJsonS2_RPC08_AddResultsCollection_AddNonNilItems(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC09_UnmarshalAt(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
 	var m map[string]int
 	err := rpc.UnmarshalAt(0, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	// nil result
@@ -480,10 +590,15 @@ func Test_CovJsonS2_RPC09_UnmarshalAt(t *testing.T) {
 }
 
 func Test_CovJsonS2_RPC10_UnmarshalIntoSameIndex(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
 	var m1, m2 map[string]int
 	errs, hasAny := rpc.UnmarshalIntoSameIndex(&m1, &m2)
+
+	// Act
 	actual := args.Map{"result": hasAny}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_ = errs
@@ -514,8 +629,13 @@ func newTestMR() *corejson.MapResults {
 }
 
 func Test_CovJsonS2_MR01_Length_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
+
+	// Act
 	actual := args.Map{"result": mr.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	var nilMR *corejson.MapResults
@@ -525,11 +645,16 @@ func Test_CovJsonS2_MR01_Length_IsEmpty_HasAnyItem(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR02_AddSkipOnNil_GetByKey(t *testing.T) {
+	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	mr.AddSkipOnNil("k", nil)
 	r := corejson.NewPtr(1)
 	mr.AddSkipOnNil("k", r)
+
+	// Act
 	actual := args.Map{"result": mr.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	got := mr.GetByKey("k")
@@ -542,8 +667,13 @@ func Test_CovJsonS2_MR02_AddSkipOnNil_GetByKey(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR03_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
+
+	// Act
 	actual := args.Map{"result": mr.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	errs, hasAny := mr.AllErrors()
@@ -561,9 +691,14 @@ func Test_CovJsonS2_MR03_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR04_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	keys := mr.AllKeys()
+
+	// Act
 	actual := args.Map{"result": len(keys) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sorted := mr.AllKeysSorted()
@@ -593,9 +728,14 @@ func Test_CovJsonS2_MR04_AllKeys_AllKeysSorted_AllValues(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR05_GetStrings(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	ss := mr.GetStrings()
+
+	// Act
 	actual := args.Map{"result": len(ss) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	_ = mr.GetStringsPtr()
@@ -607,9 +747,14 @@ func Test_CovJsonS2_MR05_GetStrings(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR06_Add_AddPtr_AddAny_AddAnySkipOnNil(t *testing.T) {
+	// Arrange
 	mr := corejson.NewMapResults.Empty()
 	mr.AddPtr("k", nil)
+
+	// Act
 	actual := args.Map{"result": mr.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	err := mr.AddAny("k", map[string]int{"a": 1})
@@ -664,11 +809,16 @@ func Test_CovJsonS2_MR10_AddNonEmptyNonErrorPtr_AddMapResults_AddMapAnyItems(t *
 }
 
 func Test_CovJsonS2_MR11_GetPagesSize_GetPagedCollection(t *testing.T) {
+	// Arrange
 	mr := corejson.NewMapResults.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		mr.Add(string(rune('a'+i)), corejson.New(i))
 	}
+
+	// Act
 	actual := args.Map{"result": mr.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": mr.GetPagesSize(0) != 0}
@@ -697,9 +847,14 @@ func Test_CovJsonS2_MR12_AddMapResultsUsingCloneOption(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR13_GetNewMapUsingKeys(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	sub := mr.GetNewMapUsingKeys(false, "a")
+
+	// Act
 	actual := args.Map{"result": sub.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// empty keys
@@ -710,9 +865,14 @@ func Test_CovJsonS2_MR13_GetNewMapUsingKeys(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR14_ResultCollection_Json_JsonPtr_Interfaces(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	rc := mr.ResultCollection()
+
+	// Act
 	actual := args.Map{"result": rc.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	_ = mr.Json()
@@ -732,11 +892,16 @@ func Test_CovJsonS2_MR15_Clear_Dispose(t *testing.T) {
 }
 
 func Test_CovJsonS2_MR16_ParseInjectUsingJson(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	jr := mr.JsonPtr()
 	mr2 := corejson.NewMapResults.Empty()
 	_, err := mr2.ParseInjectUsingJson(jr)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
@@ -744,10 +909,15 @@ func Test_CovJsonS2_MR16_ParseInjectUsingJson(t *testing.T) {
 // --- Deserializer (deserializerLogic) ---
 
 func Test_CovJsonS2_DL01_Apply_UsingResult(t *testing.T) {
+	// Arrange
 	r := corejson.NewPtr(map[string]int{"a": 1})
 	var m map[string]int
 	err := corejson.Deserialize.Apply(r, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	err2 := corejson.Deserialize.UsingResult(r, &m)
@@ -757,9 +927,14 @@ func Test_CovJsonS2_DL01_Apply_UsingResult(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL02_UsingString_FromString(t *testing.T) {
+	// Arrange
 	var m map[string]int
 	err := corejson.Deserialize.UsingString(`{"a":1}`, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil || m["a"] != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a=1", actual)
 	var m2 map[string]int
@@ -770,9 +945,14 @@ func Test_CovJsonS2_DL02_UsingString_FromString(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL03_UsingStringOption_UsingStringIgnoreEmpty(t *testing.T) {
+	// Arrange
 	var m map[string]int
 	err := corejson.Deserialize.UsingStringOption(true, "", &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	err2 := corejson.Deserialize.UsingStringIgnoreEmpty("", &m)
@@ -782,10 +962,15 @@ func Test_CovJsonS2_DL03_UsingStringOption_UsingStringIgnoreEmpty(t *testing.T) 
 }
 
 func Test_CovJsonS2_DL04_UsingStringPtr(t *testing.T) {
+	// Arrange
 	s := `{"a":1}`
 	var m map[string]int
 	err := corejson.Deserialize.UsingStringPtr(&s, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	err2 := corejson.Deserialize.UsingStringPtr(nil, &m)
@@ -795,8 +980,13 @@ func Test_CovJsonS2_DL04_UsingStringPtr(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL05_UsingError_UsingErrorWhichJsonResult(t *testing.T) {
+	// Arrange
 	err := corejson.Deserialize.UsingError(nil, nil)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err2 := corejson.Deserialize.UsingErrorWhichJsonResult(nil, nil)
@@ -806,9 +996,14 @@ func Test_CovJsonS2_DL05_UsingError_UsingErrorWhichJsonResult(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL06_UsingBytes_UsingBytesPointer_UsingBytesMust(t *testing.T) {
+	// Arrange
 	var m map[string]int
 	err := corejson.Deserialize.UsingBytes([]byte(`{"a":1}`), &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	err2 := corejson.Deserialize.UsingBytesPointer(nil, &m)
@@ -818,9 +1013,14 @@ func Test_CovJsonS2_DL06_UsingBytes_UsingBytesPointer_UsingBytesMust(t *testing.
 }
 
 func Test_CovJsonS2_DL07_UsingBytesIf_UsingBytesPointerIf(t *testing.T) {
+	// Arrange
 	var m map[string]int
 	err := corejson.Deserialize.UsingBytesIf(false, nil, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err2 := corejson.Deserialize.UsingBytesPointerIf(false, nil, &m)
@@ -830,9 +1030,14 @@ func Test_CovJsonS2_DL07_UsingBytesIf_UsingBytesPointerIf(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL08_MapAnyToPointer(t *testing.T) {
+	// Arrange
 	var m map[string]int
 	err := corejson.Deserialize.MapAnyToPointer(true, nil, &m)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty skip", actual)
 	err2 := corejson.Deserialize.MapAnyToPointer(false, map[string]any{"a": 1}, &m)
@@ -842,10 +1047,15 @@ func Test_CovJsonS2_DL08_MapAnyToPointer(t *testing.T) {
 }
 
 func Test_CovJsonS2_DL09_FromTo(t *testing.T) {
+	// Arrange
 	from := map[string]int{"a": 1}
 	var to map[string]int
 	err := corejson.Deserialize.FromTo(from, &to)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 }
@@ -859,9 +1069,14 @@ func Test_CovJsonS2_DL10_AnyToFieldsMap(t *testing.T) {
 // --- deserializeFromBytesTo ---
 
 func Test_CovJsonS2_BT01_Strings_String_Integer(t *testing.T) {
+	// Arrange
 	sb, _ := corejson.Serialize.Raw([]string{"a", "b"})
 	lines, err := corejson.Deserialize.BytesTo.Strings(sb)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(lines) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sb2, _ := corejson.Serialize.Raw("hello")
@@ -878,9 +1093,14 @@ func Test_CovJsonS2_BT01_Strings_String_Integer(t *testing.T) {
 }
 
 func Test_CovJsonS2_BT02_Integer64_Integers_Bool(t *testing.T) {
+	// Arrange
 	sb, _ := corejson.Serialize.Raw(int64(42))
 	i64, err := corejson.Deserialize.BytesTo.Integer64(sb)
+
+	// Act
 	actual := args.Map{"result": err != nil || i64 != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	_ = corejson.Deserialize.BytesTo.Integer64Must(sb)
@@ -897,9 +1117,14 @@ func Test_CovJsonS2_BT02_Integer64_Integers_Bool(t *testing.T) {
 }
 
 func Test_CovJsonS2_BT03_MapAnyItem_MapStringString(t *testing.T) {
+	// Arrange
 	sb, _ := corejson.Serialize.Raw(map[string]any{"a": 1})
 	m, err := corejson.Deserialize.BytesTo.MapAnyItem(sb)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(m) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected map", actual)
 	_ = corejson.Deserialize.BytesTo.MapAnyItemMust(sb)
@@ -912,20 +1137,30 @@ func Test_CovJsonS2_BT03_MapAnyItem_MapStringString(t *testing.T) {
 }
 
 func Test_CovJsonS2_BT04_Bytes_BytesMust(t *testing.T) {
+	// Arrange
 	inner := []byte(`"hello"`)
 	sb, _ := corejson.Serialize.Raw(inner)
 	b, err := corejson.Deserialize.BytesTo.Bytes(sb)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = b
 }
 
 func Test_CovJsonS2_BT05_ResultCollection_ResultsPtrCollection_MapResults(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	sb, _ := corejson.Serialize.Raw(rc)
 	rc2, err := corejson.Deserialize.BytesTo.ResultCollection(sb)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = rc2
@@ -948,9 +1183,14 @@ func Test_CovJsonS2_BT05_ResultCollection_ResultsPtrCollection_MapResults(t *tes
 // --- deserializeFromResultTo ---
 
 func Test_CovJsonS2_RT01_String_Bool_Byte(t *testing.T) {
+	// Arrange
 	r := corejson.NewPtr("hello")
 	s, err := corejson.Deserialize.ResultTo.String(r)
+
+	// Act
 	actual := args.Map{"result": err != nil || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	r2 := corejson.NewPtr(true)
@@ -966,9 +1206,14 @@ func Test_CovJsonS2_RT01_String_Bool_Byte(t *testing.T) {
 }
 
 func Test_CovJsonS2_RT02_MapAnyItem_MapStringString(t *testing.T) {
+	// Arrange
 	r := corejson.NewPtr(map[string]any{"a": 1})
 	m, err := corejson.Deserialize.ResultTo.MapAnyItem(r)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(m) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected map", actual)
 	r2 := corejson.NewPtr(map[string]string{"a": "b"})
@@ -981,8 +1226,13 @@ func Test_CovJsonS2_RT02_MapAnyItem_MapStringString(t *testing.T) {
 // --- Serializer (serializerLogic) ---
 
 func Test_CovJsonS2_SL01_Apply_Various(t *testing.T) {
+	// Arrange
 	r := corejson.Serialize.Apply(1)
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = corejson.Serialize.FromBytes([]byte("test"))
@@ -997,8 +1247,13 @@ func Test_CovJsonS2_SL01_Apply_Various(t *testing.T) {
 }
 
 func Test_CovJsonS2_SL02_UsingAny_UsingAnyPtr_Raw_Marshal(t *testing.T) {
+	// Arrange
 	r := corejson.Serialize.UsingAny(1)
+
+	// Act
 	actual := args.Map{"result": r.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	rp := corejson.Serialize.UsingAnyPtr(1)
@@ -1161,10 +1416,15 @@ func Test_CovJsonS2_CR07_NewBytesCollection(t *testing.T) {
 }
 
 func Test_CovJsonS2_CR08_NewResultsCollection_DeserializeUsingBytes(t *testing.T) {
+	// Arrange
 	rc := newTestRC()
 	b, _ := corejson.Serialize.Raw(rc)
 	rc2, err := corejson.NewResultsCollection.DeserializeUsingBytes(b)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = rc2
@@ -1174,10 +1434,15 @@ func Test_CovJsonS2_CR08_NewResultsCollection_DeserializeUsingBytes(t *testing.T
 }
 
 func Test_CovJsonS2_CR09_NewResultsPtrCollection_DeserializeUsingBytes(t *testing.T) {
+	// Arrange
 	rpc := newTestRPC()
 	b, _ := corejson.Serialize.Raw(rpc)
 	rpc2, err := corejson.NewResultsPtrCollection.DeserializeUsingBytes(b)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = rpc2
@@ -1187,10 +1452,15 @@ func Test_CovJsonS2_CR09_NewResultsPtrCollection_DeserializeUsingBytes(t *testin
 }
 
 func Test_CovJsonS2_CR10_NewMapResults_DeserializeUsingBytes(t *testing.T) {
+	// Arrange
 	mr := newTestMR()
 	b, _ := corejson.Serialize.Raw(mr)
 	mr2, err := corejson.NewMapResults.DeserializeUsingBytes(b)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = mr2
@@ -1200,11 +1470,16 @@ func Test_CovJsonS2_CR10_NewMapResults_DeserializeUsingBytes(t *testing.T) {
 }
 
 func Test_CovJsonS2_CR11_NewBytesCollection_DeserializeUsingBytes_DeserializeUsingResult(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`"a"`))
 	b, _ := corejson.Serialize.Raw(bc)
 	bc2, err := corejson.NewBytesCollection.DeserializeUsingBytes(b)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	_ = bc2
@@ -1216,10 +1491,15 @@ func Test_CovJsonS2_CR11_NewBytesCollection_DeserializeUsingBytes_DeserializeUsi
 // --- BytesCollection methods ---
 
 func Test_CovJsonS2_BC01_Length_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`1`))
 	bc.Add([]byte(`2`))
+
+	// Act
 	actual := args.Map{"result": bc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	actual := args.Map{"result": bc.FirstOrDefault() == nil}
@@ -1258,12 +1538,17 @@ func Test_CovJsonS2_BC03_AddSkipOnNil_AddNonEmpty_AddPtr_Adds(t *testing.T) {
 }
 
 func Test_CovJsonS2_BC04_AddResult_AddResultPtr_AddAny_AddAnyItems(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.Empty()
 	r := corejson.New(1)
 	bc.AddResult(r)
 	bc.AddResultPtr(corejson.NewPtr(1))
 	err := bc.AddAny(1)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	err2 := bc.AddAnyItems(1, 2)
@@ -1274,6 +1559,7 @@ func Test_CovJsonS2_BC04_AddResult_AddResultPtr_AddAny_AddAnyItems(t *testing.T)
 }
 
 func Test_CovJsonS2_BC05_GetAt_GetAtSafe_JsonResultAt(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`1`))
 	_ = bc.GetAt(0)
@@ -1281,19 +1567,28 @@ func Test_CovJsonS2_BC05_GetAt_GetAtSafe_JsonResultAt(t *testing.T) {
 	_ = bc.GetAtSafePtr(0)
 	_ = bc.GetResultAtSafe(0)
 	_ = bc.GetAtSafeUsingLength(0, 1)
+
+	// Act
 	actual := args.Map{"result": bc.GetAtSafe(-2) != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	_ = bc.JsonResultAt(0)
 }
 
 func Test_CovJsonS2_BC06_UnmarshalAt_UnmarshalIntoSameIndex(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`1`))
 	bc.Add([]byte(`2`))
 	var i, j int
 	err := bc.UnmarshalAt(0, &i)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	errs, _ := bc.UnmarshalIntoSameIndex(&i, &j)
@@ -1302,10 +1597,15 @@ func Test_CovJsonS2_BC06_UnmarshalAt_UnmarshalIntoSameIndex(t *testing.T) {
 }
 
 func Test_CovJsonS2_BC07_Strings_Clone_Dispose(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(2)
 	bc.Add([]byte(`"a"`))
 	ss := bc.Strings()
+
+	// Act
 	actual := args.Map{"result": len(ss) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_ = bc.StringsPtr()
@@ -1328,11 +1628,16 @@ func Test_CovJsonS2_BC07_Strings_Clone_Dispose(t *testing.T) {
 }
 
 func Test_CovJsonS2_BC08_GetPagesSize_GetPagedCollection(t *testing.T) {
+	// Arrange
 	bc := corejson.NewBytesCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		bc.Add([]byte(`1`))
 	}
+
+	// Act
 	actual := args.Map{"result": bc.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": bc.GetPagesSize(0) != 0}

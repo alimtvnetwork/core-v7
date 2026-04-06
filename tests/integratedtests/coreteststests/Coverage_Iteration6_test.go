@@ -758,6 +758,7 @@ func Test_C79_GetAssert_Quick(t *testing.T) {
 // ─── getAssertSimpleTestCaseWrapper ──────────────────────────────────────────
 
 func Test_C80_GetAssert_SimpleTestCaseWrapper_Lines(t *testing.T) {
+	// Arrange
 	convey.Convey("GetAssert SimpleTestCaseWrapper Lines", t, func() {
 		tc := coretests.SimpleTestCase{
 			Title:         "test",
@@ -765,6 +766,8 @@ func Test_C80_GetAssert_SimpleTestCaseWrapper_Lines(t *testing.T) {
 			ExpectedInput: "expected",
 			ActualInput:   "actual",
 		}
+
+	// Act
 		actual, expected := coretests.GetAssert.SimpleTestCaseWrapper.Lines(tc)
 		convey.So(len(actual), convey.ShouldBeGreaterThan, 0)
 		convey.So(len(expected), convey.ShouldBeGreaterThan, 0)

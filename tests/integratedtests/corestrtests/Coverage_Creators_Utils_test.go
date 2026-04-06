@@ -39,8 +39,13 @@ func Test_CovEmpty_01_AllCreators(t *testing.T) {
 
 func Test_CovSSOCreator_01_Init_InitPtr(t *testing.T) {
 	safeTest(t, "Test_CovSSOCreator_01_Init_InitPtr", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Init("hello")
+
+		// Act
 		actual := args.Map{"result": sso.Value() != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		ssoP := corestr.New.SimpleStringOnce.InitPtr("hello")
@@ -52,8 +57,13 @@ func Test_CovSSOCreator_01_Init_InitPtr(t *testing.T) {
 
 func Test_CovSSOCreator_02_Uninitialized(t *testing.T) {
 	safeTest(t, "Test_CovSSOCreator_02_Uninitialized", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Uninitialized("hello")
+
+		// Act
 		actual := args.Map{"result": sso.IsInitialized()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
@@ -61,8 +71,13 @@ func Test_CovSSOCreator_02_Uninitialized(t *testing.T) {
 
 func Test_CovSSOCreator_03_Create_CreatePtr(t *testing.T) {
 	safeTest(t, "Test_CovSSOCreator_03_Create_CreatePtr", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Create("v", true)
+
+		// Act
 		actual := args.Map{"result": sso.Value() != "v"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected v", actual)
 		ssoP := corestr.New.SimpleStringOnce.CreatePtr("v", true)
@@ -74,8 +89,13 @@ func Test_CovSSOCreator_03_Create_CreatePtr(t *testing.T) {
 
 func Test_CovSSOCreator_04_Any(t *testing.T) {
 	safeTest(t, "Test_CovSSOCreator_04_Any", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Any(false, "test", true)
+
+		// Act
 		actual := args.Map{"result": sso.IsInitialized()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 	})
@@ -83,8 +103,13 @@ func Test_CovSSOCreator_04_Any(t *testing.T) {
 
 func Test_CovSSOCreator_05_Empty(t *testing.T) {
 	safeTest(t, "Test_CovSSOCreator_05_Empty", func() {
+		// Arrange
 		sso := corestr.New.SimpleStringOnce.Empty()
+
+		// Act
 		actual := args.Map{"result": sso.IsInitialized()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
@@ -94,8 +119,13 @@ func Test_CovSSOCreator_05_Empty(t *testing.T) {
 
 func Test_CovKVCreator_01_Cap_Empty(t *testing.T) {
 	safeTest(t, "Test_CovKVCreator_01_Cap_Empty", func() {
+		// Arrange
 		kv := corestr.New.KeyValues.Cap(5)
+
+		// Act
 		actual := args.Map{"result": kv.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		kv2 := corestr.New.KeyValues.Empty()
@@ -107,8 +137,13 @@ func Test_CovKVCreator_01_Cap_Empty(t *testing.T) {
 
 func Test_CovKVCreator_02_UsingMap(t *testing.T) {
 	safeTest(t, "Test_CovKVCreator_02_UsingMap", func() {
+		// Arrange
 		kv := corestr.New.KeyValues.UsingMap(map[string]string{"a": "1"})
+
+		// Act
 		actual := args.Map{"result": kv.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kv2 := corestr.New.KeyValues.UsingMap(map[string]string{})
@@ -120,10 +155,15 @@ func Test_CovKVCreator_02_UsingMap(t *testing.T) {
 
 func Test_CovKVCreator_03_UsingKeyValuePairs(t *testing.T) {
 	safeTest(t, "Test_CovKVCreator_03_UsingKeyValuePairs", func() {
+		// Arrange
 		kv := corestr.New.KeyValues.UsingKeyValuePairs(
 			corestr.KeyValuePair{Key: "a", Value: "1"},
 		)
+
+		// Act
 		actual := args.Map{"result": kv.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kv2 := corestr.New.KeyValues.UsingKeyValuePairs()
@@ -135,10 +175,15 @@ func Test_CovKVCreator_03_UsingKeyValuePairs(t *testing.T) {
 
 func Test_CovKVCreator_04_UsingKeyValueStrings(t *testing.T) {
 	safeTest(t, "Test_CovKVCreator_04_UsingKeyValueStrings", func() {
+		// Arrange
 		kv := corestr.New.KeyValues.UsingKeyValueStrings(
 			[]string{"a", "b"}, []string{"1", "2"},
 		)
+
+		// Act
 		actual := args.Map{"result": kv.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		kv2 := corestr.New.KeyValues.UsingKeyValueStrings([]string{}, []string{})
@@ -152,8 +197,13 @@ func Test_CovKVCreator_04_UsingKeyValueStrings(t *testing.T) {
 
 func Test_CovLLCreator_01_Create_Empty(t *testing.T) {
 	safeTest(t, "Test_CovLLCreator_01_Create_Empty", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Create()
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll2 := corestr.New.LinkedList.Empty()
@@ -165,8 +215,13 @@ func Test_CovLLCreator_01_Create_Empty(t *testing.T) {
 
 func Test_CovLLCreator_02_Strings(t *testing.T) {
 	safeTest(t, "Test_CovLLCreator_02_Strings", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2 := corestr.New.LinkedList.Strings([]string{})
@@ -178,8 +233,13 @@ func Test_CovLLCreator_02_Strings(t *testing.T) {
 
 func Test_CovLLCreator_03_SpreadStrings(t *testing.T) {
 	safeTest(t, "Test_CovLLCreator_03_SpreadStrings", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.SpreadStrings("a", "b")
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2 := corestr.New.LinkedList.SpreadStrings()
@@ -191,8 +251,13 @@ func Test_CovLLCreator_03_SpreadStrings(t *testing.T) {
 
 func Test_CovLLCreator_04_UsingMap(t *testing.T) {
 	safeTest(t, "Test_CovLLCreator_04_UsingMap", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.UsingMap(map[string]bool{"a": true})
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ll2 := corestr.New.LinkedList.UsingMap(nil)
@@ -204,8 +269,13 @@ func Test_CovLLCreator_04_UsingMap(t *testing.T) {
 
 func Test_CovLLCreator_05_PointerStringsPtr(t *testing.T) {
 	safeTest(t, "Test_CovLLCreator_05_PointerStringsPtr", func() {
+		// Arrange
 		ll := corestr.New.LinkedList.PointerStringsPtr(nil)
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
@@ -215,8 +285,13 @@ func Test_CovLLCreator_05_PointerStringsPtr(t *testing.T) {
 
 func Test_CovLLCCreator_01_Create_Empty(t *testing.T) {
 	safeTest(t, "Test_CovLLCCreator_01_Create_Empty", func() {
+		// Arrange
 		lc := corestr.New.LinkedCollection.Create()
+
+		// Act
 		actual := args.Map{"result": lc.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		lc2 := corestr.New.LinkedCollection.Empty()
@@ -228,8 +303,13 @@ func Test_CovLLCCreator_01_Create_Empty(t *testing.T) {
 
 func Test_CovLLCCreator_02_Strings(t *testing.T) {
 	safeTest(t, "Test_CovLLCCreator_02_Strings", func() {
+		// Arrange
 		lc := corestr.New.LinkedCollection.Strings("a", "b")
+
+		// Act
 		actualLen := args.Map{"result": lc.Length()}
+
+		// Assert
 		expectedLen := args.Map{"result": 1}
 		expectedLen.ShouldBeEqual(t, 0, "Strings creates one collection node -- two items", actualLen)
 		lc2 := corestr.New.LinkedCollection.Strings()
@@ -241,9 +321,14 @@ func Test_CovLLCCreator_02_Strings(t *testing.T) {
 
 func Test_CovLLCCreator_03_UsingCollections(t *testing.T) {
 	safeTest(t, "Test_CovLLCCreator_03_UsingCollections", func() {
+		// Arrange
 		col := corestr.New.Collection.Strings([]string{"false", "a"})
 		lc := corestr.New.LinkedCollection.UsingCollections(col)
+
+		// Act
 		actual := args.Map{"result": lc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		lc2 := corestr.New.LinkedCollection.UsingCollections(nil)
@@ -253,8 +338,13 @@ func Test_CovLLCCreator_03_UsingCollections(t *testing.T) {
 
 func Test_CovLLCCreator_04_PointerStringsPtr(t *testing.T) {
 	safeTest(t, "Test_CovLLCCreator_04_PointerStringsPtr", func() {
+		// Arrange
 		lc := corestr.New.LinkedCollection.PointerStringsPtr(nil)
+
+		// Act
 		actual := args.Map{"result": lc.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
@@ -264,8 +354,13 @@ func Test_CovLLCCreator_04_PointerStringsPtr(t *testing.T) {
 
 func Test_CovSSCreator_01_Cap_Default_Empty(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_01_Cap_Default_Empty", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Cap(5)
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss2 := corestr.New.SimpleSlice.Cap(-1)
@@ -285,8 +380,13 @@ func Test_CovSSCreator_01_Cap_Default_Empty(t *testing.T) {
 
 func Test_CovSSCreator_02_Strings_Create_Lines(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_02_Strings_Create_Lines", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss2 := corestr.New.SimpleSlice.Create([]string{"a"})
@@ -306,8 +406,13 @@ func Test_CovSSCreator_02_Strings_Create_Lines(t *testing.T) {
 
 func Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss2 := corestr.New.SimpleSlice.StringsPtr([]string{})
@@ -339,8 +444,13 @@ func Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone(t *testing.T) {
 
 func Test_CovSSCreator_04_Direct_UsingLines(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_04_Direct_UsingLines", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Direct(true, []string{"a"})
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss2 := corestr.New.SimpleSlice.Direct(false, []string{"a"})
@@ -368,8 +478,13 @@ func Test_CovSSCreator_04_Direct_UsingLines(t *testing.T) {
 
 func Test_CovSSCreator_05_Split_SplitLines_UsingSeparatorLine_UsingLine(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_05_Split_SplitLines_UsingSeparatorLine_UsingLine", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Split("a,b,c", ",")
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		ss2 := corestr.New.SimpleSlice.SplitLines("a\nb")
@@ -387,8 +502,13 @@ func Test_CovSSCreator_05_Split_SplitLines_UsingSeparatorLine_UsingLine(t *testi
 
 func Test_CovSSCreator_06_ByLen(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_06_ByLen", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.ByLen([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 length, just capacity", actual)
 	})
@@ -396,9 +516,14 @@ func Test_CovSSCreator_06_ByLen(t *testing.T) {
 
 func Test_CovSSCreator_07_Hashset_Map(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_07_Hashset_Map", func() {
+		// Arrange
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 		ss := corestr.New.SimpleSlice.Hashset(hs)
+
+		// Act
 		actual := args.Map{"result": ss.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ssE := corestr.New.SimpleSlice.Hashset(corestr.New.Hashset.Empty())
@@ -416,10 +541,15 @@ func Test_CovSSCreator_07_Hashset_Map(t *testing.T) {
 
 func Test_CovSSCreator_08_Deserialize(t *testing.T) {
 	safeTest(t, "Test_CovSSCreator_08_Deserialize", func() {
+		// Arrange
 		ss := corestr.New.SimpleSlice.Strings([]string{"a", "b"})
 		data, _ := ss.Serialize()
 		ss2, err := corestr.New.SimpleSlice.Deserialize(data)
+
+		// Act
 		actual := args.Map{"result": err != nil || ss2.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error or wrong length", actual)
 		_, err2 := corestr.New.SimpleSlice.Deserialize([]byte("bad"))
@@ -433,8 +563,13 @@ func Test_CovSSCreator_08_Deserialize(t *testing.T) {
 
 func Test_CovUtils_01_WrapDoubleIfMissing(t *testing.T) {
 	safeTest(t, "Test_CovUtils_01_WrapDoubleIfMissing", func() {
+		// Arrange
 		u := corestr.StringUtils
+
+		// Act
 		actual := args.Map{"result": u.WrapDoubleIfMissing("hello") != `"hello"`}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
 		actual := args.Map{"result": u.WrapDoubleIfMissing(`"hello"`) != `"hello"`}
@@ -451,8 +586,13 @@ func Test_CovUtils_01_WrapDoubleIfMissing(t *testing.T) {
 
 func Test_CovUtils_02_WrapSingleIfMissing(t *testing.T) {
 	safeTest(t, "Test_CovUtils_02_WrapSingleIfMissing", func() {
+		// Arrange
 		u := corestr.StringUtils
+
+		// Act
 		actual := args.Map{"result": u.WrapSingleIfMissing("hello") != "'hello'"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
 		actual := args.Map{"result": u.WrapSingleIfMissing("'hello'") != "'hello'"}
@@ -469,8 +609,13 @@ func Test_CovUtils_02_WrapSingleIfMissing(t *testing.T) {
 
 func Test_CovUtils_03_WrapDouble_WrapSingle_WrapTilda(t *testing.T) {
 	safeTest(t, "Test_CovUtils_03_WrapDouble_WrapSingle_WrapTilda", func() {
+		// Arrange
 		u := corestr.StringUtils
+
+		// Act
 		actual := args.Map{"result": u.WrapDouble("hello") != `"hello"`}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
 		actual := args.Map{"result": u.WrapSingle("hello") != "'hello'"}

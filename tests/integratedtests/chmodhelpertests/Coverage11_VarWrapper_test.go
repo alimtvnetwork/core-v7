@@ -14,15 +14,25 @@ import (
 // ── NewRwxVariableWrapper error ──
 
 func Test_Cov11_NewRwxVariableWrapper_Valid(t *testing.T) {
+	// Arrange
 	vw, err := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
+
+	// Act
 	actual := args.Map{"result": err != nil || vw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid wrapper", actual)
 }
 
 func Test_Cov11_NewRwxVariableWrapper_WithWildcard(t *testing.T) {
+	// Arrange
 	vw, err := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
+
+	// Act
 	actual := args.Map{"result": err != nil || vw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid wrapper", actual)
 }
@@ -38,17 +48,27 @@ func Test_Cov11_NewRwxVariableWrapper_Error(t *testing.T) {
 // ── RwxVariableWrapper.ToCompileFixedPtr ──
 
 func Test_Cov11_ToCompileFixedPtr_Fixed(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	ptr := vw.ToCompileFixedPtr()
+
+	// Act
 	actual := args.Map{"result": ptr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil for fixed type", actual)
 }
 
 func Test_Cov11_ToCompileFixedPtr_Var(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 	ptr := vw.ToCompileFixedPtr()
+
+	// Act
 	actual := args.Map{"result": ptr != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for var type", actual)
 }
@@ -56,29 +76,44 @@ func Test_Cov11_ToCompileFixedPtr_Var(t *testing.T) {
 // ── RwxVariableWrapper.ToCompileWrapperUsingLocationPtr ──
 
 func Test_Cov11_ToCompileWrapperUsingLocationPtr_Fixed(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	w, err := vw.ToCompileWrapperUsingLocationPtr("/any")
+
+	// Act
 	actual := args.Map{"result": err != nil || w == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper for fixed type", actual)
 }
 
 func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Valid(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov11_compile_loc.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	defer os.Remove(tmpFile)
 
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 	w, err := vw.ToCompileWrapperUsingLocationPtr(tmpFile)
+
+	// Act
 	actual := args.Map{"result": err != nil || w == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 func Test_Cov11_ToCompileWrapperUsingLocationPtr_Var_Error(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw*r-*r-*")
 	_, err := vw.ToCompileWrapperUsingLocationPtr("/nonexistent/cov11/loc")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for invalid location", actual)
 }
@@ -106,9 +141,14 @@ func Test_Cov11_ApplyRwxOnLocations_NoContinue(t *testing.T) {
 }
 
 func Test_Cov11_ApplyRwxOnLocations_NoContinue_Error(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	err := vw.ApplyRwxOnLocations(false, false, "/nonexistent/cov11/apply2")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -129,6 +169,7 @@ func Test_Cov11_ApplyRwxOnLocations_NilRwx(t *testing.T) {
 // ── RwxVariableWrapper.RwxMatchingStatus ──
 
 func Test_Cov11_RwxMatchingStatus_Match(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
 	}
@@ -139,12 +180,17 @@ func Test_Cov11_RwxMatchingStatus_Match(t *testing.T) {
 
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	status := vw.RwxMatchingStatus(false, false, []string{tmpFile})
+
+	// Act
 	actual := args.Map{"result": status.IsAllMatching}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected all matching", actual)
 }
 
 func Test_Cov11_RwxMatchingStatus_Mismatch(t *testing.T) {
+	// Arrange
 	tmpFile := filepath.Join(os.TempDir(), "cov11_rwx_mismatch.txt")
 	os.WriteFile(tmpFile, []byte("x"), 0644)
 	os.Chmod(tmpFile, 0644)
@@ -152,15 +198,24 @@ func Test_Cov11_RwxMatchingStatus_Mismatch(t *testing.T) {
 
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxrwxrwx")
 	status := vw.RwxMatchingStatus(false, false, []string{tmpFile})
+
+	// Act
 	actual := args.Map{"result": status.IsAllMatching}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
 func Test_Cov11_RwxMatchingStatus_Error_NoContinue(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	status := vw.RwxMatchingStatus(false, false, []string{"/nonexistent/cov11/status"})
+
+	// Act
 	actual := args.Map{"result": status.Error == nil && status.IsAllMatching}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error or mismatch", actual)
 }
@@ -168,9 +223,14 @@ func Test_Cov11_RwxMatchingStatus_Error_NoContinue(t *testing.T) {
 // ── RwxVariableWrapper.IsEqualPartialFullRwx short input ──
 
 func Test_Cov11_IsEqualPartialFullRwx_Short(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	result := vw.IsEqualPartialFullRwx("rwx")
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for short input", actual)
 }
@@ -178,18 +238,28 @@ func Test_Cov11_IsEqualPartialFullRwx_Short(t *testing.T) {
 // ── RwxVariableWrapper.IsEqualRwxWrapperPtr nil ──
 
 func Test_Cov11_IsEqualRwxWrapperPtr_Nil(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	result := vw.IsEqualRwxWrapperPtr(nil)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov11_IsEqualRwxWrapperPtr_Valid(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
 	rwx := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 	result := vw.IsEqualRwxWrapperPtr(rwx)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
@@ -197,13 +267,19 @@ func Test_Cov11_IsEqualRwxWrapperPtr_Valid(t *testing.T) {
 // ── RwxVariableWrapper.IsEqualUsingFileInfo nil ──
 
 func Test_Cov11_IsEqualUsingFileInfo_Nil(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
+
+	// Act
 	actual := args.Map{"result": vw.IsEqualUsingFileInfo(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov11_IsEqualUsingFileInfo_Valid(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
 	}
@@ -215,7 +291,11 @@ func Test_Cov11_IsEqualUsingFileInfo_Valid(t *testing.T) {
 	info, _ := os.Stat(tmpFile)
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	result := vw.IsEqualUsingFileInfo(info)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
@@ -223,13 +303,19 @@ func Test_Cov11_IsEqualUsingFileInfo_Valid(t *testing.T) {
 // ── RwxVariableWrapper.IsEqualUsingLocation ──
 
 func Test_Cov11_IsEqualUsingLocation_NonExistent(t *testing.T) {
+	// Arrange
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rwxr-xr-x")
+
+	// Act
 	actual := args.Map{"result": vw.IsEqualUsingLocation("/nonexistent/cov11/loc")}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_Cov11_IsEqualUsingLocation_Valid(t *testing.T) {
+	// Arrange
 	if runtime.GOOS == "windows" {
 		t.Skip("file permissions not reliable on Windows")
 	}
@@ -240,7 +326,11 @@ func Test_Cov11_IsEqualUsingLocation_Valid(t *testing.T) {
 
 	vw, _ := chmodhelper.NewRwxVariableWrapper("-rw-r--r--")
 	result := vw.IsEqualUsingLocation(tmpFile)
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
@@ -258,15 +348,25 @@ func Test_Cov11_VarAttribute_IsEqualPtr_BothNil(t *testing.T) {
 // ── MergeRwxWildcardWithFixedRwx error ──
 
 func Test_Cov11_MergeRwxWildcard_Error(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.MergeRwxWildcardWithFixedRwx("rwx", "rw")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
 
 func Test_Cov11_MergeRwxWildcard_Error2(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.MergeRwxWildcardWithFixedRwx("rw", "rwx")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
@@ -274,8 +374,13 @@ func Test_Cov11_MergeRwxWildcard_Error2(t *testing.T) {
 // ── ParseRwxOwnerGroupOtherToFileModeMust panic ──
 
 func Test_Cov11_ParseRwxOwnerGroupOtherToFileModeMust_Panic(t *testing.T) {
+	// Arrange
 	defer func() {
+
+	// Act
 		actual := args.Map{"result": r := recover(); r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
@@ -285,20 +390,30 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToFileModeMust_Panic(t *testing.T) {
 // ── ParseRwxInstructionToVarWrapper nil ──
 
 func Test_Cov11_ParseRwxInstructionToVarWrapper_Nil(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.ParseRwxInstructionToVarWrapper(nil)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov11_ParseRwxInstructionToVarWrapper_Valid(t *testing.T) {
+	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 			Owner: "rwx", Group: "r-x", Other: "r-x",
 		},
 	}
 	vw, err := chmodhelper.ParseRwxInstructionToVarWrapper(ins)
+
+	// Act
 	actual := args.Map{"result": err != nil || vw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid wrapper", actual)
 }
@@ -322,8 +437,13 @@ func Test_Cov11_ParseRwxInstructionsToExecutors_Error(t *testing.T) {
 // ── ParseRwxOwnerGroupOtherToRwxVariableWrapper branches ──
 
 func Test_Cov11_ParseRwxOwnerGroupOtherToRwxVariableWrapper_Nil(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.ParseRwxOwnerGroupOtherToRwxVariableWrapper(nil)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -362,17 +482,27 @@ func Test_Cov11_ParseRwxOwnerGroupOtherToFileMode_Error(t *testing.T) {
 // ── RwxPartialToInstructionExecutor ──
 
 func Test_Cov11_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
+	// Arrange
 	_, err := chmodhelper.RwxPartialToInstructionExecutor("-rwxr-xr-x", nil)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil condition", actual)
 }
 
 func Test_Cov11_RwxPartialToInstructionExecutor_Valid(t *testing.T) {
+	// Arrange
 	exec, err := chmodhelper.RwxPartialToInstructionExecutor(
 		"-rwxr-xr-x",
 		&chmodins.Condition{})
+
+	// Act
 	actual := args.Map{"result": err != nil || exec == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid executor", actual)
 }

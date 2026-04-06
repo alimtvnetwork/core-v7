@@ -135,6 +135,7 @@ func Test_Pair_IsEqual_Same(t *testing.T) {
 	a := coregeneric.NewPair(left, right)
 	b := coregeneric.NewPair(left, right)
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, fmt.Sprintf("%v", a.IsEqual(b)))
 }
 
@@ -143,6 +144,7 @@ func Test_Pair_IsEqual_DiffLeft(t *testing.T) {
 	a := coregeneric.NewPair("a", "b")
 	b := coregeneric.NewPair("x", "b")
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, fmt.Sprintf("%v", a.IsEqual(b)))
 }
 
@@ -151,6 +153,7 @@ func Test_Pair_IsEqual_NilVsNonNil(t *testing.T) {
 	a := coregeneric.NewPair("a", "b")
 	var b *coregeneric.Pair[string, string]
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, fmt.Sprintf("%v", a.IsEqual(b)))
 }
 
@@ -159,6 +162,7 @@ func Test_Pair_IsEqual_BothNil(t *testing.T) {
 	var a *coregeneric.Pair[string, string]
 	var b *coregeneric.Pair[string, string]
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, fmt.Sprintf("%v", a.IsEqual(b)))
 }
 
@@ -406,9 +410,14 @@ func Test_Triple_Clear(t *testing.T) {
 // ==========================================
 
 func Test_New_Pair_Creator(t *testing.T) {
+	// Arrange
 	// StringString
 	p := coregeneric.New.Pair.StringString("k", "v")
+
+	// Act
 	actual := args.Map{"result": p.Left != "k" || p.Right != "v" || !p.IsValid}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Pair.StringString failed:", actual)
 
@@ -436,9 +445,14 @@ func Test_New_Pair_Creator(t *testing.T) {
 // ==========================================
 
 func Test_New_Triple_Creator(t *testing.T) {
+	// Arrange
 	// StringStringString
 	tr := coregeneric.New.Triple.StringStringString("a", "b", "c")
+
+	// Act
 	actual := args.Map{"result": tr.Left != "a" || tr.Middle != "b" || tr.Right != "c" || !tr.IsValid}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "New.Triple.StringStringString failed:", actual)
 

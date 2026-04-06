@@ -72,7 +72,10 @@ func Test_Variant_TypeChecks(t *testing.T) {
 }
 
 func Test_Variant_IsNumber(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Integer.IsNumber()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Integer should be number", actual)
 	actual := args.Map{"result": enumtype.Boolean.IsNumber()}
@@ -84,7 +87,10 @@ func Test_Variant_IsNumber(t *testing.T) {
 }
 
 func Test_Variant_IsAnyInteger(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Integer.IsAnyInteger()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Integer should be any integer", actual)
 	actual := args.Map{"result": enumtype.Byte.IsAnyInteger()}
@@ -93,7 +99,10 @@ func Test_Variant_IsAnyInteger(t *testing.T) {
 }
 
 func Test_Variant_IsAnyUnsignedNumber(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Byte.IsAnyUnsignedNumber()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Byte should be unsigned", actual)
 	actual := args.Map{"result": enumtype.Integer.IsAnyUnsignedNumber()}
@@ -102,7 +111,10 @@ func Test_Variant_IsAnyUnsignedNumber(t *testing.T) {
 }
 
 func Test_Variant_ValidInvalid(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Invalid.IsValid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Invalid should not be valid", actual)
 	actual := args.Map{"result": enumtype.Invalid.IsInvalid()}
@@ -117,9 +129,13 @@ func Test_Variant_ValidInvalid(t *testing.T) {
 }
 
 func Test_Variant_ValueConversions(t *testing.T) {
+	// Arrange
 	v := enumtype.Integer // 10
 
+	// Act
 	actual := args.Map{"result": v.Value() != 10}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Value mismatch", actual)
 	actual := args.Map{"result": v.ValueByte() != 10}
@@ -149,7 +165,10 @@ func Test_Variant_ValueConversions(t *testing.T) {
 }
 
 func Test_Variant_IsNameEqual(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.IsNameEqual("Boolean")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsNameEqual should be true for Boolean", actual)
 	actual := args.Map{"result": enumtype.Boolean.IsNameEqual("String")}
@@ -158,7 +177,10 @@ func Test_Variant_IsNameEqual(t *testing.T) {
 }
 
 func Test_Variant_IsAnyNamesOf(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.IsAnyNamesOf("String", "Boolean")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "IsAnyNamesOf should find Boolean", actual)
 	actual := args.Map{"result": enumtype.Boolean.IsAnyNamesOf("String", "Integer")}
@@ -167,26 +189,40 @@ func Test_Variant_IsAnyNamesOf(t *testing.T) {
 }
 
 func Test_Variant_TypeName(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.TypeName() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "TypeName should not be empty", actual)
 }
 
 func Test_Variant_RangeNamesCsv(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.RangeNamesCsv() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RangeNamesCsv should not be empty", actual)
 }
 
 func Test_Variant_MinMaxAny(t *testing.T) {
+	// Arrange
 	min, max := enumtype.Boolean.MinMaxAny()
+
+	// Act
 	actual := args.Map{"result": min == nil || max == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MinMaxAny should not return nil", actual)
 }
 
 func Test_Variant_MinMaxStrings(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.MinValueString() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MinValueString should not be empty", actual)
 	actual := args.Map{"result": enumtype.Boolean.MaxValueString() == ""}
@@ -195,7 +231,10 @@ func Test_Variant_MinMaxStrings(t *testing.T) {
 }
 
 func Test_Variant_MinMaxInt(t *testing.T) {
+	// Act
 	actual := args.Map{"result": enumtype.Boolean.MaxInt() != enumtype.String.ValueInt()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MaxInt mismatch", actual)
 	actual := args.Map{"result": enumtype.Boolean.MinInt() != enumtype.Invalid.ValueInt()}
@@ -204,29 +243,49 @@ func Test_Variant_MinMaxInt(t *testing.T) {
 }
 
 func Test_Variant_RangesDynamicMap(t *testing.T) {
+	// Arrange
 	m := enumtype.Boolean.RangesDynamicMap()
+
+	// Act
 	actual := args.Map{"result": len(m) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RangesDynamicMap should not be empty", actual)
 }
 
 func Test_Variant_IntegerEnumRanges(t *testing.T) {
+	// Arrange
 	ranges := enumtype.Boolean.IntegerEnumRanges()
+
+	// Act
 	actual := args.Map{"result": len(ranges) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IntegerEnumRanges should not be empty", actual)
 }
 
 func Test_Variant_EnumType(t *testing.T) {
+	// Arrange
 	et := enumtype.Boolean.EnumType()
+
+	// Act
 	actual := args.Map{"result": et == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "EnumType should not be nil", actual)
 }
 
 func Test_Variant_MarshalJSON(t *testing.T) {
+	// Arrange
 	data, err := json.Marshal(enumtype.Boolean)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON error:", actual)
 	actual := args.Map{"result": len(data) == 0}
@@ -235,9 +294,14 @@ func Test_Variant_MarshalJSON(t *testing.T) {
 }
 
 func Test_Variant_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	var v enumtype.Variant
 	err := json.Unmarshal([]byte(`"Boolean"`), &v)
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
 	actual := args.Map{"result": v != enumtype.Boolean}
@@ -246,9 +310,14 @@ func Test_Variant_UnmarshalJSON(t *testing.T) {
 }
 
 func Test_Variant_UnmarshalJSON_Invalid(t *testing.T) {
+	// Arrange
 	var v enumtype.Variant
 	err := json.Unmarshal([]byte(`""`), &v)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON should error on empty", actual)
 
@@ -259,8 +328,13 @@ func Test_Variant_UnmarshalJSON_Invalid(t *testing.T) {
 }
 
 func Test_Variant_Format_Panics(t *testing.T) {
+	// Arrange
 	defer func() {
+
+	// Act
 		actual := args.Map{"result": r := recover(); r == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Format should panic", actual)
 	}()

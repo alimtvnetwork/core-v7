@@ -14,10 +14,15 @@ import (
 
 func Test_CovLL2_01_ToCollection(t *testing.T) {
 	safeTest(t, "Test_CovLL2_01_ToCollection", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		// empty
 		col := ll.ToCollection(0)
+
+		// Act
 		actual := args.Map{"result": col.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.Adds("a", "b")
@@ -30,8 +35,13 @@ func Test_CovLL2_01_ToCollection(t *testing.T) {
 
 func Test_CovLL2_02_List_ListPtr_ListLock_ListPtrLock(t *testing.T) {
 	safeTest(t, "Test_CovLL2_02_List_ListPtr_ListLock_ListPtrLock", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
+
+		// Act
 		actual := args.Map{"result": len(ll.List()) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll.Adds("a", "b")
@@ -52,9 +62,14 @@ func Test_CovLL2_02_List_ListPtr_ListLock_ListPtrLock(t *testing.T) {
 
 func Test_CovLL2_03_String_StringLock(t *testing.T) {
 	safeTest(t, "Test_CovLL2_03_String_StringLock", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		s := ll.String()
+
+		// Act
 		actual := args.Map{"result": s == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		ll.Adds("a", "b")
@@ -74,10 +89,15 @@ func Test_CovLL2_03_String_StringLock(t *testing.T) {
 
 func Test_CovLL2_04_Join_JoinLock_Joins(t *testing.T) {
 	safeTest(t, "Test_CovLL2_04_Join_JoinLock_Joins", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		j := ll.Join(",")
+
+		// Act
 		actual := args.Map{"result": j != "a,b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 		jl := ll.JoinLock(",")
@@ -97,11 +117,16 @@ func Test_CovLL2_04_Join_JoinLock_Joins(t *testing.T) {
 
 func Test_CovLL2_05_IsEquals(t *testing.T) {
 	safeTest(t, "Test_CovLL2_05_IsEquals", func() {
+		// Arrange
 		a := corestr.Empty.LinkedList()
 		a.Adds("a", "b")
 		b := corestr.Empty.LinkedList()
 		b.Adds("a", "b")
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		// nil
@@ -133,11 +158,16 @@ func Test_CovLL2_05_IsEquals(t *testing.T) {
 
 func Test_CovLL2_06_IsEqualsWithSensitive(t *testing.T) {
 	safeTest(t, "Test_CovLL2_06_IsEqualsWithSensitive", func() {
+		// Arrange
 		a := corestr.Empty.LinkedList()
 		a.Adds("Hello", "World")
 		b := corestr.Empty.LinkedList()
 		b.Adds("hello", "world")
+
+		// Act
 		actual := args.Map{"result": a.IsEqualsWithSensitive(b, true)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for case sensitive", actual)
 		actual := args.Map{"result": a.IsEqualsWithSensitive(b, false)}
@@ -148,10 +178,15 @@ func Test_CovLL2_06_IsEqualsWithSensitive(t *testing.T) {
 
 func Test_CovLL2_07_JsonModel_JsonModelAny(t *testing.T) {
 	safeTest(t, "Test_CovLL2_07_JsonModel_JsonModelAny", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		m := ll.JsonModel()
+
+		// Act
 		actual := args.Map{"result": len(m) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_ = ll.JsonModelAny()
@@ -160,10 +195,15 @@ func Test_CovLL2_07_JsonModel_JsonModelAny(t *testing.T) {
 
 func Test_CovLL2_08_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_CovLL2_08_MarshalJSON_UnmarshalJSON", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		data, err := ll.MarshalJSON()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		ll2 := corestr.Empty.LinkedList()
@@ -184,10 +224,15 @@ func Test_CovLL2_08_MarshalJSON_UnmarshalJSON(t *testing.T) {
 
 func Test_CovLL2_09_Clear_RemoveAll(t *testing.T) {
 	safeTest(t, "Test_CovLL2_09_Clear_RemoveAll", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		ll.Clear()
+
+		// Act
 		actual := args.Map{"result": ll.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// clear already empty
@@ -212,12 +257,17 @@ func Test_CovLL2_10_Json_JsonPtr(t *testing.T) {
 
 func Test_CovLL2_11_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_CovLL2_11_ParseInjectUsingJson", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		jr := ll.JsonPtr()
 		ll2 := corestr.Empty.LinkedList()
 		r, err := ll2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		actual := args.Map{"result": r.Length() != 2}
@@ -228,12 +278,17 @@ func Test_CovLL2_11_ParseInjectUsingJson(t *testing.T) {
 
 func Test_CovLL2_12_ParseInjectUsingJsonMust(t *testing.T) {
 	safeTest(t, "Test_CovLL2_12_ParseInjectUsingJsonMust", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		jr := ll.JsonPtr()
 		ll2 := corestr.Empty.LinkedList()
 		r := ll2.ParseInjectUsingJsonMust(jr)
+
+		// Act
 		actual := args.Map{"result": r.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -241,12 +296,17 @@ func Test_CovLL2_12_ParseInjectUsingJsonMust(t *testing.T) {
 
 func Test_CovLL2_13_JsonParseSelfInject(t *testing.T) {
 	safeTest(t, "Test_CovLL2_13_JsonParseSelfInject", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		jr := ll.JsonPtr()
 		ll2 := corestr.Empty.LinkedList()
 		err := ll2.JsonParseSelfInject(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
@@ -265,10 +325,15 @@ func Test_CovLL2_14_AsJsonMarshaller(t *testing.T) {
 
 func Test_CovLL2_15_Node_HasNext_Next(t *testing.T) {
 	safeTest(t, "Test_CovLL2_15_Node_HasNext_Next", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		head := ll.Head()
+
+		// Act
 		actual := args.Map{"result": head.HasNext()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected next", actual)
 		next := head.Next()
@@ -283,10 +348,15 @@ func Test_CovLL2_15_Node_HasNext_Next(t *testing.T) {
 
 func Test_CovLL2_16_Node_EndOfChain(t *testing.T) {
 	safeTest(t, "Test_CovLL2_16_Node_EndOfChain", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		end, length := ll.Head().EndOfChain()
+
+		// Act
 		actual := args.Map{"result": length != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		actual := args.Map{"result": end.Element != "c"}
@@ -297,6 +367,7 @@ func Test_CovLL2_16_Node_EndOfChain(t *testing.T) {
 
 func Test_CovLL2_17_Node_LoopEndOfChain(t *testing.T) {
 	safeTest(t, "Test_CovLL2_17_Node_LoopEndOfChain", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		count := 0
@@ -304,7 +375,11 @@ func Test_CovLL2_17_Node_LoopEndOfChain(t *testing.T) {
 			count++
 			return false
 		})
+
+		// Act
 		actual := args.Map{"result": length != 3 || count != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		actual := args.Map{"result": end.Element != "c"}
@@ -331,10 +406,15 @@ func Test_CovLL2_17_Node_LoopEndOfChain(t *testing.T) {
 
 func Test_CovLL2_18_Node_Clone(t *testing.T) {
 	safeTest(t, "Test_CovLL2_18_Node_Clone", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		c := ll.Head().Clone()
+
+		// Act
 		actual := args.Map{"result": c.Element != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		actual := args.Map{"result": c.HasNext()}
@@ -345,10 +425,15 @@ func Test_CovLL2_18_Node_Clone(t *testing.T) {
 
 func Test_CovLL2_19_Node_AddNext(t *testing.T) {
 	safeTest(t, "Test_CovLL2_19_Node_AddNext", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		newNode := ll.Head().AddNext(ll, "b")
+
+		// Act
 		actual := args.Map{"result": newNode.Element != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 		actual := args.Map{"result": ll.Length() != 2}
@@ -359,10 +444,15 @@ func Test_CovLL2_19_Node_AddNext(t *testing.T) {
 
 func Test_CovLL2_20_Node_AddStringsToNode(t *testing.T) {
 	safeTest(t, "Test_CovLL2_20_Node_AddStringsToNode", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		ll.Head().AddStringsToNode(ll, false, []string{"b", "c"})
+
+		// Act
 		actual := args.Map{"result": ll.Length() < 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	})
@@ -381,11 +471,16 @@ func Test_CovLL2_21_Node_AddStringsPtrToNode(t *testing.T) {
 
 func Test_CovLL2_22_Node_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_CovLL2_22_Node_AddCollectionToNode", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		col := corestr.New.Collection.Strings([]string{"b", "c"})
 		ll.Head().AddCollectionToNode(ll, true, col)
+
+		// Act
 		actual := args.Map{"result": ll.Length() < 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	})
@@ -393,11 +488,16 @@ func Test_CovLL2_22_Node_AddCollectionToNode(t *testing.T) {
 
 func Test_CovLL2_23_Node_AddNextNode(t *testing.T) {
 	safeTest(t, "Test_CovLL2_23_Node_AddNextNode", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("a")
 		newNode := &corestr.LinkedListNode{Element: "b"}
 		result := ll.Head().AddNextNode(ll, newNode)
+
+		// Act
 		actual := args.Map{"result": result.Element != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
@@ -405,11 +505,16 @@ func Test_CovLL2_23_Node_AddNextNode(t *testing.T) {
 
 func Test_CovLL2_24_Node_IsEqual(t *testing.T) {
 	safeTest(t, "Test_CovLL2_24_Node_IsEqual", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Adds("a", "b")
+
+		// Act
 		actual := args.Map{"result": ll.Head().IsEqual(ll2.Head())}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		// same pointer
@@ -435,12 +540,17 @@ func Test_CovLL2_24_Node_IsEqual(t *testing.T) {
 
 func Test_CovLL2_25_Node_IsChainEqual(t *testing.T) {
 	safeTest(t, "Test_CovLL2_25_Node_IsChainEqual", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("Hello", "World")
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Adds("hello", "world")
 		// case sensitive
+
+		// Act
 		actual := args.Map{"result": ll.Head().IsChainEqual(ll2.Head(), true)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// case insensitive
@@ -465,11 +575,16 @@ func Test_CovLL2_25_Node_IsChainEqual(t *testing.T) {
 
 func Test_CovLL2_26_Node_IsEqualSensitive(t *testing.T) {
 	safeTest(t, "Test_CovLL2_26_Node_IsEqualSensitive", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("A")
 		ll2 := corestr.Empty.LinkedList()
 		ll2.Add("a")
+
+		// Act
 		actual := args.Map{"result": ll.Head().IsEqualSensitive(ll2.Head(), true)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		actual := args.Map{"result": ll.Head().IsEqualSensitive(ll2.Head(), false)}
@@ -492,9 +607,14 @@ func Test_CovLL2_26_Node_IsEqualSensitive(t *testing.T) {
 
 func Test_CovLL2_27_Node_IsEqualValue_IsEqualValueSensitive(t *testing.T) {
 	safeTest(t, "Test_CovLL2_27_Node_IsEqualValue_IsEqualValueSensitive", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("Hello")
+
+		// Act
 		actual := args.Map{"result": ll.Head().IsEqualValue("Hello")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": ll.Head().IsEqualValue("hello")}
@@ -511,10 +631,15 @@ func Test_CovLL2_27_Node_IsEqualValue_IsEqualValueSensitive(t *testing.T) {
 
 func Test_CovLL2_28_Node_CreateLinkedList(t *testing.T) {
 	safeTest(t, "Test_CovLL2_28_Node_CreateLinkedList", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b", "c")
 		newLL := ll.Head().CreateLinkedList()
+
+		// Act
 		actual := args.Map{"result": newLL.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
@@ -522,9 +647,14 @@ func Test_CovLL2_28_Node_CreateLinkedList(t *testing.T) {
 
 func Test_CovLL2_29_Node_String(t *testing.T) {
 	safeTest(t, "Test_CovLL2_29_Node_String", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Add("hello")
+
+		// Act
 		actual := args.Map{"result": ll.Head().String() != "hello"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
@@ -532,10 +662,15 @@ func Test_CovLL2_29_Node_String(t *testing.T) {
 
 func Test_CovLL2_30_Node_List_ListPtr(t *testing.T) {
 	safeTest(t, "Test_CovLL2_30_Node_List_ListPtr", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		items := ll.Head().List()
+
+		// Act
 		actual := args.Map{"result": len(items) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		items2 := ll.Head().ListPtr()
@@ -547,10 +682,15 @@ func Test_CovLL2_30_Node_List_ListPtr(t *testing.T) {
 
 func Test_CovLL2_31_Node_Join_StringList_Print(t *testing.T) {
 	safeTest(t, "Test_CovLL2_31_Node_Join_StringList_Print", func() {
+		// Arrange
 		ll := corestr.Empty.LinkedList()
 		ll.Adds("a", "b")
 		j := ll.Head().Join(",")
+
+		// Act
 		actual := args.Map{"result": j != "a,b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 		sl := ll.Head().StringList("header:")

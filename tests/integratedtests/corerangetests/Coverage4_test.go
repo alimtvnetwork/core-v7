@@ -10,40 +10,58 @@ import (
 // ── RangeInt ──
 
 func Test_Cov4_RangeInt_CreateRanges(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	extra := corerange.MinMaxInt{Min: 10, Max: 12}
 	ranges := ri.CreateRanges(extra)
+
+	// Act
 	actual := args.Map{
 		"len":   len(ranges),
 		"first": ranges[0],
 		"last":  ranges[len(ranges)-1],
 	}
+
+	// Assert
 	expected := args.Map{"len": 8, "first": 1, "last": 12}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns non-empty -- CreateRanges with extra MinMaxInt", actual)
 }
 
 func Test_Cov4_RangeInt_CreateRanges_NoExtra(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 3, true)
 	ranges := ri.CreateRanges()
+
+	// Act
 	actual := args.Map{"len": len(ranges)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns empty -- CreateRanges no extra", actual)
 }
 
 func Test_Cov4_RangeInt_RangesExcept(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	result := ri.RangesExcept(2, 4)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- RangesExcept", actual)
 }
 
 func Test_Cov4_RangeInt_Conversions(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
 	ri8 := ri.CreateRangeInt8()
 	riByte := ri.CreateRangeByte()
 	ri16 := ri.CreateRangeInt16()
 	se := ri.CreateStartEnd()
+
+	// Act
 	actual := args.Map{
 		"int8Start":    int(ri8.Start),
 		"byteStart":   int(riByte.Start),
@@ -53,6 +71,8 @@ func Test_Cov4_RangeInt_Conversions(t *testing.T) {
 		"shallowI8":   int(ri.ShallowCreateRangeInt8().Start),
 		"shallowByte": int(ri.ShallowCreateRangeByte().Start),
 	}
+
+	// Assert
 	expected := args.Map{
 		"int8Start": 1, "byteStart": 1, "int16Start": 1,
 		"seStart": 1, "shallowI16": 1, "shallowI8": 1, "shallowByte": 1,
@@ -61,13 +81,18 @@ func Test_Cov4_RangeInt_Conversions(t *testing.T) {
 }
 
 func Test_Cov4_RangeInt_IsWithinRange(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 10, true)
+
+	// Act
 	actual := args.Map{
 		"within5":          ri.IsWithinRange(5),
 		"within0":          ri.IsWithinRange(0),
 		"validPlusWithin":  ri.IsValidPlusWithinRange(5),
 		"invalidValue":     ri.IsInvalidValue(0),
 	}
+
+	// Assert
 	expected := args.Map{
 		"within5": true, "within0": false,
 		"validPlusWithin": true, "invalidValue": true,
@@ -76,15 +101,25 @@ func Test_Cov4_RangeInt_IsWithinRange(t *testing.T) {
 }
 
 func Test_Cov4_RangeInt_String(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(1, 5, true)
+
+	// Act
 	actual := args.Map{"notEmpty": ri.String() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- String", actual)
 }
 
 func Test_Cov4_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
+	// Arrange
 	ri := corerange.NewRangeIntUsingValues(5, 1, false)
+
+	// Act
 	actual := args.Map{"diffAbs": ri.DifferenceAbsolute()}
+
+	// Assert
 	expected := args.Map{"diffAbs": 4}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns correct value -- DifferenceAbsolute negative", actual)
 }
@@ -92,7 +127,10 @@ func Test_Cov4_RangeInt_DifferenceAbsolute_Negative(t *testing.T) {
 // ── StartEndInt ──
 
 func Test_Cov4_StartEndInt_Methods(t *testing.T) {
+	// Arrange
 	se := &corerange.StartEndInt{Start: 2, End: 10}
+
+	// Act
 	actual := args.Map{
 		"invalidStart":   se.IsInvalidStart(),
 		"bothDefined":    se.IsStartEndBothDefined(),
@@ -112,6 +150,8 @@ func Test_Cov4_StartEndInt_Methods(t *testing.T) {
 		"stringHyphen":   se.StringHyphen(),
 		"stringColon":    se.StringColon(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidStart": false, "bothDefined": true,
 		"invalidBoth": false, "invalidAny": false,
@@ -126,7 +166,10 @@ func Test_Cov4_StartEndInt_Methods(t *testing.T) {
 }
 
 func Test_Cov4_StartEndInt_Nil(t *testing.T) {
+	// Arrange
 	var se *corerange.StartEndInt
+
+	// Act
 	actual := args.Map{
 		"invalidStart": se.IsInvalidStart(),
 		"hasStart":     se.HasStart(),
@@ -136,6 +179,8 @@ func Test_Cov4_StartEndInt_Nil(t *testing.T) {
 		"startGt":      se.IsStartGraterThan(0),
 		"endGt":        se.IsEndGraterThan(0),
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidStart": true, "hasStart": false,
 		"invalidEnd": true, "hasEnd": false,
@@ -145,26 +190,41 @@ func Test_Cov4_StartEndInt_Nil(t *testing.T) {
 }
 
 func Test_Cov4_StartEndInt_Ranges(t *testing.T) {
+	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 3}
 	ranges := se.Ranges()
+
+	// Act
 	actual := args.Map{"len": len(ranges)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- Ranges", actual)
 }
 
 func Test_Cov4_StartEndInt_CreateRanges(t *testing.T) {
+	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 3}
 	extra := corerange.StartEndInt{Start: 10, End: 12}
 	result := se.CreateRanges(extra)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 6}
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- CreateRanges", actual)
 }
 
 func Test_Cov4_StartEndInt_RangesExcept(t *testing.T) {
+	// Arrange
 	se := &corerange.StartEndInt{Start: 1, End: 5}
 	result := se.RangesExcept(2, 4)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "StartEndInt returns correct value -- RangesExcept", actual)
 }
@@ -172,7 +232,10 @@ func Test_Cov4_StartEndInt_RangesExcept(t *testing.T) {
 // ── StartEndSimpleString ──
 
 func Test_Cov4_StartEndSimpleString_Methods(t *testing.T) {
+	// Arrange
 	ss := &corerange.StartEndSimpleString{Start: "abc", End: "xyz"}
+
+	// Act
 	actual := args.Map{
 		"invalidStart":  ss.IsInvalidStart(),
 		"bothDefined":   ss.IsStartEndBothDefined(),
@@ -187,6 +250,8 @@ func Test_Cov4_StartEndSimpleString_Methods(t *testing.T) {
 		"startVVNotNil": ss.StartValidValue() != nil,
 		"endVVNotNil":   ss.EndValidValue() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidStart": false, "bothDefined": true,
 		"invalidBoth": false, "invalidAny": false,
@@ -199,7 +264,10 @@ func Test_Cov4_StartEndSimpleString_Methods(t *testing.T) {
 }
 
 func Test_Cov4_StartEndSimpleString_Nil(t *testing.T) {
+	// Arrange
 	var ss *corerange.StartEndSimpleString
+
+	// Act
 	actual := args.Map{
 		"invalidStart": ss.IsInvalidStart(),
 		"hasStart":     ss.HasStart(),
@@ -209,6 +277,8 @@ func Test_Cov4_StartEndSimpleString_Nil(t *testing.T) {
 		"endVV":        ss.EndValidValue() == nil,
 		"startEnd":     ss.StartEndString() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"invalidStart": true, "hasStart": false,
 		"invalidEnd": true, "hasEnd": false,
@@ -218,13 +288,18 @@ func Test_Cov4_StartEndSimpleString_Nil(t *testing.T) {
 }
 
 func Test_Cov4_StartEndSimpleString_StartEndString(t *testing.T) {
+	// Arrange
 	ss := &corerange.StartEndSimpleString{Start: "a", End: "b"}
 	result := ss.StartEndString()
+
+	// Act
 	actual := args.Map{
 		"notNil": result != nil,
 		"start":  result.Start,
 		"end":    result.End,
 	}
+
+	// Assert
 	expected := args.Map{"notNil": true, "start": "a", "end": "b"}
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString returns correct value -- StartEndString", actual)
 }
@@ -232,6 +307,7 @@ func Test_Cov4_StartEndSimpleString_StartEndString(t *testing.T) {
 // ── RangeAny ──
 
 func Test_Cov4_RangeAny_Methods(t *testing.T) {
+	// Arrange
 	ra := &corerange.RangeAny{
 		BaseRange: &corerange.BaseRange{
 			RawInput:  "1|5",
@@ -244,12 +320,16 @@ func Test_Cov4_RangeAny_Methods(t *testing.T) {
 		Start:    1,
 		End:      5,
 	}
+
+	// Act
 	actual := args.Map{
 		"rawInputStr": ra.RawInputString(),
 		"startStr":    ra.StartString(),
 		"endStr":      ra.EndString(),
 		"stringVal":   ra.String() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"rawInputStr": "1|5",
 		"startStr":    "1",
@@ -262,16 +342,21 @@ func Test_Cov4_RangeAny_Methods(t *testing.T) {
 // ── Within ──
 
 func Test_Cov4_Within_RangeInteger(t *testing.T) {
+	// Arrange
 	val, ok := corerange.Within.RangeInteger(true, 0, 100, 50)
 	val2, ok2 := corerange.Within.RangeInteger(true, 0, 100, -5)
 	val3, ok3 := corerange.Within.RangeInteger(true, 0, 100, 200)
 	val4, ok4 := corerange.Within.RangeInteger(false, 0, 100, -5)
+
+	// Act
 	actual := args.Map{
 		"inRange": val, "inRangeOk": ok,
 		"belowMin": val2, "belowMinOk": ok2,
 		"aboveMax": val3, "aboveMaxOk": ok3,
 		"noBoundBelow": val4, "noBoundBelowOk": ok4,
 	}
+
+	// Assert
 	expected := args.Map{
 		"inRange": 50, "inRangeOk": true,
 		"belowMin": 0, "belowMinOk": false,
@@ -282,18 +367,26 @@ func Test_Cov4_Within_RangeInteger(t *testing.T) {
 }
 
 func Test_Cov4_Within_RangeDefaultInteger(t *testing.T) {
+	// Arrange
 	val, ok := corerange.Within.RangeDefaultInteger(0, 10, 5)
+
+	// Act
 	actual := args.Map{"val": val, "ok": ok}
+
+	// Assert
 	expected := args.Map{"val": 5, "ok": true}
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeDefaultInteger", actual)
 }
 
 func Test_Cov4_Within_StringRange_Types(t *testing.T) {
+	// Arrange
 	v8, ok8 := corerange.Within.StringRangeInt8("5")
 	v16, ok16 := corerange.Within.StringRangeInt16("100")
 	v32, ok32 := corerange.Within.StringRangeInt32("1000")
 	vB, okB := corerange.Within.StringRangeByte("200")
 	vU16, okU16 := corerange.Within.StringRangeUint16("500")
+
+	// Act
 	actual := args.Map{
 		"v8": int(v8), "ok8": ok8,
 		"v16": int(v16), "ok16": ok16,
@@ -301,6 +394,8 @@ func Test_Cov4_Within_StringRange_Types(t *testing.T) {
 		"vB": int(vB), "okB": okB,
 		"vU16": int(vU16), "okU16": okU16,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v8": 5, "ok8": true,
 		"v16": 100, "ok16": true,
@@ -312,23 +407,33 @@ func Test_Cov4_Within_StringRange_Types(t *testing.T) {
 }
 
 func Test_Cov4_Within_StringRangeInteger_InvalidInput(t *testing.T) {
+	// Arrange
 	_, ok := corerange.Within.StringRangeInteger(true, 0, 100, "abc")
+
+	// Act
 	actual := args.Map{"ok": ok}
+
+	// Assert
 	expected := args.Map{"ok": false}
 	expected.ShouldBeEqual(t, 0, "Within returns error -- StringRangeInteger invalid", actual)
 }
 
 func Test_Cov4_Within_RangeByte(t *testing.T) {
+	// Arrange
 	v, ok := corerange.Within.RangeByteDefault(100)
 	v2, ok2 := corerange.Within.RangeByte(true, -1)
 	v3, ok3 := corerange.Within.RangeByte(true, 300)
 	v4, ok4 := corerange.Within.RangeByte(false, -1)
+
+	// Act
 	actual := args.Map{
 		"v": int(v), "ok": ok,
 		"belowV": int(v2), "belowOk": ok2,
 		"aboveV": int(v3), "aboveOk": ok3,
 		"noBoundV": int(v4), "noBoundOk": ok4,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v": 100, "ok": true,
 		"belowV": 0, "belowOk": false,
@@ -339,12 +444,17 @@ func Test_Cov4_Within_RangeByte(t *testing.T) {
 }
 
 func Test_Cov4_Within_RangeUint16(t *testing.T) {
+	// Arrange
 	v, ok := corerange.Within.RangeUint16Default(500)
 	v2, ok2 := corerange.Within.RangeUint16(false, -1)
+
+	// Act
 	actual := args.Map{
 		"v": int(v), "ok": ok,
 		"noBoundV": int(v2), "noBoundOk": ok2,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v": 500, "ok": true,
 		"noBoundV": 0, "noBoundOk": false,
@@ -353,14 +463,19 @@ func Test_Cov4_Within_RangeUint16(t *testing.T) {
 }
 
 func Test_Cov4_Within_RangeFloat(t *testing.T) {
+	// Arrange
 	v, ok := corerange.Within.RangeFloat(true, 0, 100, 50)
 	v2, ok2 := corerange.Within.RangeFloat(true, 0, 100, -5)
 	v3, ok3 := corerange.Within.RangeFloat(false, 0, 100, -5)
+
+	// Act
 	actual := args.Map{
 		"inV": int(v), "inOk": ok,
 		"belowV": int(v2), "belowOk": ok2,
 		"noBoundV": int(v3), "noBoundOk": ok3,
 	}
+
+	// Assert
 	expected := args.Map{
 		"inV": 50, "inOk": true,
 		"belowV": 0, "belowOk": false,
@@ -370,12 +485,17 @@ func Test_Cov4_Within_RangeFloat(t *testing.T) {
 }
 
 func Test_Cov4_Within_RangeFloat64(t *testing.T) {
+	// Arrange
 	v, ok := corerange.Within.RangeFloat64(true, 0, 100, 50)
 	v2, ok2 := corerange.Within.RangeFloat64(true, 0, 100, 200)
+
+	// Act
 	actual := args.Map{
 		"v": int(v), "ok": ok,
 		"aboveV": int(v2), "aboveOk": ok2,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v": 50, "ok": true,
 		"aboveV": 100, "aboveOk": false,
@@ -384,24 +504,34 @@ func Test_Cov4_Within_RangeFloat64(t *testing.T) {
 }
 
 func Test_Cov4_Within_StringRangeFloat_InvalidInput(t *testing.T) {
+	// Arrange
 	_, ok := corerange.Within.StringRangeFloat(true, 0, 100, "abc")
 	_, ok64 := corerange.Within.StringRangeFloat64(true, 0, 100, "abc")
+
+	// Act
 	actual := args.Map{"ok": ok, "ok64": ok64}
+
+	// Assert
 	expected := args.Map{"ok": false, "ok64": false}
 	expected.ShouldBeEqual(t, 0, "Within returns error -- StringRangeFloat invalid", actual)
 }
 
 func Test_Cov4_Within_StringRangeIntegerDefault(t *testing.T) {
+	// Arrange
 	v, ok := corerange.Within.StringRangeIntegerDefault(0, 100, "50")
 	v2, ok2 := corerange.Within.StringRangeIntegerDefault(0, 100, "abc")
 	v3, ok3 := corerange.Within.StringRangeIntegerDefault(0, 100, "-5")
 	v4, ok4 := corerange.Within.StringRangeIntegerDefault(0, 100, "200")
+
+	// Act
 	actual := args.Map{
 		"v": v, "ok": ok,
 		"errV": v2, "errOk": ok2,
 		"belowV": v3, "belowOk": ok3,
 		"aboveV": v4, "aboveOk": ok4,
 	}
+
+	// Assert
 	expected := args.Map{
 		"v": 50, "ok": true,
 		"errV": 0, "errOk": false,
@@ -414,10 +544,13 @@ func Test_Cov4_Within_StringRangeIntegerDefault(t *testing.T) {
 // ── MinMaxInt ──
 
 func Test_Cov4_MinMaxInt_IsEqual(t *testing.T) {
+	// Arrange
 	a := &corerange.MinMaxInt{Min: 1, Max: 10}
 	b := &corerange.MinMaxInt{Min: 1, Max: 10}
 	c := &corerange.MinMaxInt{Min: 2, Max: 10}
 	var nilMM *corerange.MinMaxInt
+
+	// Act
 	actual := args.Map{
 		"equal":    a.IsEqual(b),
 		"notEqual": a.IsEqual(c),
@@ -425,6 +558,8 @@ func Test_Cov4_MinMaxInt_IsEqual(t *testing.T) {
 		"nilBoth":  nilMM.IsEqual(nil),
 		"nilLeft":  nilMM.IsEqual(a),
 	}
+
+	// Assert
 	expected := args.Map{
 		"equal": true, "notEqual": false,
 		"selfEq": true, "nilBoth": true, "nilLeft": true,
@@ -433,27 +568,42 @@ func Test_Cov4_MinMaxInt_IsEqual(t *testing.T) {
 }
 
 func Test_Cov4_MinMaxInt_String(t *testing.T) {
+	// Arrange
 	mm := corerange.MinMaxInt{Min: 1, Max: 10}
+
+	// Act
 	actual := args.Map{"notEmpty": mm.String() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- String", actual)
 }
 
 func Test_Cov4_MinMaxInt_RangesExcept(t *testing.T) {
+	// Arrange
 	mm := &corerange.MinMaxInt{Min: 1, Max: 5}
 	result := mm.RangesExcept(2, 4)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 3}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- RangesExcept", actual)
 }
 
 func Test_Cov4_MinMaxInt_IsOutOfRange(t *testing.T) {
+	// Arrange
 	mm := corerange.MinMaxInt{Min: 1, Max: 10}
+
+	// Act
 	actual := args.Map{
 		"outOf0":  mm.IsOutOfRange(0),
 		"outOf5":  mm.IsOutOfRange(5),
 		"outOf11": mm.IsOutOfRange(11),
 	}
+
+	// Assert
 	expected := args.Map{"outOf0": true, "outOf5": false, "outOf11": true}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- IsOutOfRange", actual)
 }
@@ -461,7 +611,10 @@ func Test_Cov4_MinMaxInt_IsOutOfRange(t *testing.T) {
 // ── MinMaxByte ──
 
 func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
+	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
+
+	// Act
 	actual := args.Map{
 		"diff":       int(mb.Difference()),
 		"rangeLen":   int(mb.RangeLength()),
@@ -483,6 +636,8 @@ func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
 		"maxLess":    mb.IsMaxLess(20),
 		"maxLessEq":  mb.IsMaxLessEqual(10),
 	}
+
+	// Assert
 	expected := args.Map{
 		"diff": 9, "rangeLen": 10, "rangeLenI": 10,
 		"rangesLen": 10, "rangesILen": 10,
@@ -497,16 +652,21 @@ func Test_Cov4_MinMaxByte_Methods(t *testing.T) {
 }
 
 func Test_Cov4_MinMaxByte_Clone(t *testing.T) {
+	// Arrange
 	mb := &corerange.MinMaxByte{Min: 1, Max: 10}
 	cloned := mb.ClonePtr()
 	clonedV := mb.Clone()
 	var nilMB *corerange.MinMaxByte
+
+	// Act
 	actual := args.Map{
 		"clonedMin": int(cloned.Min),
 		"clonedMax": int(cloned.Max),
 		"valueMin":  int(clonedV.Min),
 		"nilClone":  nilMB.ClonePtr() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"clonedMin": 1, "clonedMax": 10,
 		"valueMin": 1, "nilClone": true,
@@ -517,11 +677,16 @@ func Test_Cov4_MinMaxByte_Clone(t *testing.T) {
 // ── RangeByte ──
 
 func Test_Cov4_RangeByte_Difference(t *testing.T) {
+	// Arrange
 	rb := corerange.NewRangeByteMinMax("1|5", "|", 0, 255)
+
+	// Act
 	actual := args.Map{
 		"diffAbs": int(rb.DifferenceAbsolute()),
 		"rangeL":  int(rb.RangeLength()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"diffAbs": 4,
 		"rangeL":  5,
@@ -532,12 +697,17 @@ func Test_Cov4_RangeByte_Difference(t *testing.T) {
 // ── RangeString ──
 
 func Test_Cov4_RangeString_Methods(t *testing.T) {
+	// Arrange
 	rs := corerange.NewRangeString("hello:world", ":")
+
+	// Act
 	actual := args.Map{
 		"start":    rs.Start,
 		"end":      rs.End,
 		"notEmpty": rs.String() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"start": "hello", "end": "world", "notEmpty": true,
 	}
@@ -547,11 +717,16 @@ func Test_Cov4_RangeString_Methods(t *testing.T) {
 // ── StartEndString ──
 
 func Test_Cov4_StartEndString_UsingLines(t *testing.T) {
+	// Arrange
 	se := corerange.NewStartEndStringUsingLines([]string{"first", "last"})
+
+	// Act
 	actual := args.Map{
 		"start": se.Start, "end": se.End,
 		"isValid": se.IsValid,
 	}
+
+	// Assert
 	expected := args.Map{
 		"start": "first", "end": "last", "isValid": true,
 	}
@@ -559,9 +734,14 @@ func Test_Cov4_StartEndString_UsingLines(t *testing.T) {
 }
 
 func Test_Cov4_StartEndString_CreateRangeString(t *testing.T) {
+	// Arrange
 	se := corerange.NewStartEndString("a:b", ":")
 	rs := se.CreateRangeString()
+
+	// Act
 	actual := args.Map{"start": rs.Start, "end": rs.End}
+
+	// Assert
 	expected := args.Map{"start": "a", "end": "b"}
 	expected.ShouldBeEqual(t, 0, "StartEndString returns correct value -- CreateRangeString", actual)
 }

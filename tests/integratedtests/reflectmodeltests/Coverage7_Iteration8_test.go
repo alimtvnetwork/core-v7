@@ -45,6 +45,7 @@ func getMP(name string) *reflectmodel.MethodProcessor {
 // ==========================================================================
 
 func Test_I8_FieldProcessor_IsFieldType(t *testing.T) {
+	// Arrange
 	type sample struct {
 		Name string
 		Age  int
@@ -58,7 +59,10 @@ func Test_I8_FieldProcessor_IsFieldType(t *testing.T) {
 		FieldType: f.Type,
 	}
 
+	// Act
 	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(""))}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for string type", actual)
 	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
@@ -73,6 +77,7 @@ func Test_I8_FieldProcessor_IsFieldType(t *testing.T) {
 }
 
 func Test_I8_FieldProcessor_IsFieldKind(t *testing.T) {
+	// Arrange
 	type sample struct {
 		Name string
 	}
@@ -85,7 +90,10 @@ func Test_I8_FieldProcessor_IsFieldKind(t *testing.T) {
 		FieldType: f.Type,
 	}
 
+	// Act
 	actual := args.Map{"result": fp.IsFieldKind(reflect.String)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for string kind", actual)
 	actual := args.Map{"result": fp.IsFieldKind(reflect.Int)}
@@ -103,8 +111,13 @@ func Test_I8_FieldProcessor_IsFieldKind(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_HasValidFunc(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.HasValidFunc()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -114,15 +127,25 @@ func Test_I8_MP_HasValidFunc(t *testing.T) {
 }
 
 func Test_I8_MP_GetFuncName(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.GetFuncName() != "Add"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Add", actual)
 }
 
 func Test_I8_MP_IsInvalid(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -132,9 +155,14 @@ func Test_I8_MP_IsInvalid(t *testing.T) {
 }
 
 func Test_I8_MP_Func(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	f := mp.Func()
+
+	// Act
 	actual := args.Map{"result": f == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
@@ -145,23 +173,38 @@ func Test_I8_MP_Func(t *testing.T) {
 }
 
 func Test_I8_MP_ArgsCount(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	// receiver + a + b = 3
+
+	// Act
 	actual := args.Map{"result": mp.ArgsCount() != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_I8_MP_ArgsLength(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.ArgsLength() != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_I8_MP_ReturnLength(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.ReturnLength() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -171,8 +214,13 @@ func Test_I8_MP_ReturnLength(t *testing.T) {
 }
 
 func Test_I8_MP_IsPublicMethod(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.IsPublicMethod()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -182,8 +230,13 @@ func Test_I8_MP_IsPublicMethod(t *testing.T) {
 }
 
 func Test_I8_MP_IsPrivateMethod(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.IsPrivateMethod()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for public method", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -193,8 +246,13 @@ func Test_I8_MP_IsPrivateMethod(t *testing.T) {
 }
 
 func Test_I8_MP_GetType(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.GetType() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	var nilMP *reflectmodel.MethodProcessor
@@ -208,9 +266,14 @@ func Test_I8_MP_GetType(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_Invoke_Success(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	results, err := mp.Invoke(testAdder{}, 2, 3)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": results[0].(int) != 5}
@@ -219,25 +282,40 @@ func Test_I8_MP_Invoke_Success(t *testing.T) {
 }
 
 func Test_I8_MP_Invoke_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilMP *reflectmodel.MethodProcessor
 	_, err := nilMP.Invoke()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_I8_MP_Invoke_WrongArgCount(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	_, err := mp.Invoke(testAdder{}, 2)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected args count mismatch error", actual)
 }
 
 func Test_I8_MP_GetFirstResponseOfInvoke(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	resp, err := mp.GetFirstResponseOfInvoke(testAdder{}, 2, 3)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": resp.(int) != 5}
@@ -246,9 +324,14 @@ func Test_I8_MP_GetFirstResponseOfInvoke(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeResultOfIndex(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	resp, err := mp.InvokeResultOfIndex(0, testAdder{}, 10, 20)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": resp.(int) != 30}
@@ -257,9 +340,14 @@ func Test_I8_MP_InvokeResultOfIndex(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeError_WithError(t *testing.T) {
+	// Arrange
 	mp := getMP("Fail")
 	funcErr, procErr := mp.InvokeError(testAdder{})
+
+	// Act
 	actual := args.Map{"result": procErr}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "procErr", actual)
 	actual := args.Map{"result": funcErr == nil}
@@ -268,16 +356,22 @@ func Test_I8_MP_InvokeError_WithError(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeError_NoError(t *testing.T) {
+	// Arrange
 	mp := getMP("NoError")
 	defer func() { recover() }() // may panic on nil error interface
 	funcErr, procErr := mp.InvokeError(testAdder{})
+
+	// Act
 	actual := args.Map{"result": procErr}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "procErr", actual)
 	_ = funcErr
 }
 
 func Test_I8_MP_InvokeFirstAndError_Success(t *testing.T) {
+	// Arrange
 	mp := getMP("TwoReturns")
 	// InvokeFirstAndError does results[1].Interface().(error) which panics on nil interface
 	didPanic := false
@@ -290,8 +384,12 @@ func Test_I8_MP_InvokeFirstAndError_Success(t *testing.T) {
 		}()
 		first, _, _ = mp.InvokeFirstAndError(testAdder{}, 5)
 	}()
+
+	// Act
 	actual := args.Map{"didPanic": didPanic, "firstIfNoPanic": first}
 	if didPanic {
+
+	// Assert
 		expected := args.Map{"didPanic": true, "firstIfNoPanic": nil}
 		expected.ShouldBeEqual(t, 0, "InvokeFirstAndError panics -- nil error interface cast", actual)
 	} else {
@@ -302,9 +400,14 @@ func Test_I8_MP_InvokeFirstAndError_Success(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeFirstAndError_FuncError(t *testing.T) {
+	// Arrange
 	mp := getMP("TwoReturns")
 	_, funcErr, procErr := mp.InvokeFirstAndError(testAdder{}, -1)
+
+	// Act
 	actual := args.Map{"result": procErr}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "procErr", actual)
 	actual := args.Map{"result": funcErr == nil}
@@ -313,9 +416,14 @@ func Test_I8_MP_InvokeFirstAndError_FuncError(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeFirstAndError_TooFewReturns(t *testing.T) {
+	// Arrange
 	mp := getMP("Add") // only 1 return
 	_, _, procErr := mp.InvokeFirstAndError(testAdder{}, 1, 2)
+
+	// Act
 	actual := args.Map{"result": procErr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected processing error for single-return method", actual)
 }
@@ -325,22 +433,37 @@ func Test_I8_MP_InvokeFirstAndError_TooFewReturns(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_IsEqual_BothNil(t *testing.T) {
+	// Arrange
 	var a, b *reflectmodel.MethodProcessor
+
+	// Act
 	actual := args.Map{"result": a.IsEqual(b)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for both nil", actual)
 }
 
 func Test_I8_MP_IsEqual_OneNil(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.IsEqual(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_I8_MP_IsEqual_Same(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": mp.IsEqual(mp)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for same ptr", actual)
 }
@@ -354,9 +477,14 @@ func Test_I8_MP_IsEqual_Different(t *testing.T) {
 }
 
 func Test_I8_MP_IsEqual_SameName(t *testing.T) {
+	// Arrange
 	a := getMP("Add")
 	b := getMP("Add")
+
+	// Act
 	actual := args.Map{"result": a.IsEqual(b)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for same method", actual)
 	actual := args.Map{"result": a.IsNotEqual(b)}
@@ -369,9 +497,14 @@ func Test_I8_MP_IsEqual_SameName(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_GetOutArgsTypes(t *testing.T) {
+	// Arrange
 	mp := getMP("TwoReturns")
 	outTypes := mp.GetOutArgsTypes()
+
+	// Act
 	actual := args.Map{"result": len(outTypes) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 out types", actual)
 	// Call again to test cache
@@ -388,9 +521,14 @@ func Test_I8_MP_GetOutArgsTypes(t *testing.T) {
 }
 
 func Test_I8_MP_GetInArgsTypes(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	inTypes := mp.GetInArgsTypes()
+
+	// Act
 	actual := args.Map{"result": len(inTypes) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	// Call again for cache
@@ -406,9 +544,14 @@ func Test_I8_MP_GetInArgsTypes(t *testing.T) {
 }
 
 func Test_I8_MP_GetInArgsTypesNames(t *testing.T) {
+	// Arrange
 	mp := getMP("Greet")
 	names := mp.GetInArgsTypesNames()
+
+	// Act
 	actualNames := args.Map{"length": len(names)}
+
+	// Assert
 	expectedNames := args.Map{"length": 2}
 	expectedNames.ShouldBeEqual(t, 0, "GetInArgsTypesNames returns 2 -- receiver + name", actualNames)
 	// Call again for cache
@@ -424,11 +567,16 @@ func Test_I8_MP_GetInArgsTypesNames(t *testing.T) {
 }
 
 func Test_I8_MP_GetOutArgsTypes_ZeroOut(t *testing.T) {
+	// Arrange
 	// Find a method with zero out args... we don't have one, but let's
 	// test the nil/empty path indirectly
 	var nilMP *reflectmodel.MethodProcessor
 	out := nilMP.GetOutArgsTypes()
+
+	// Act
 	actual := args.Map{"result": len(out) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -438,59 +586,94 @@ func Test_I8_MP_GetOutArgsTypes_ZeroOut(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_ValidateMethodArgs_Success(t *testing.T) {
+	// Arrange
 	mp := getMP("Greet")
 	err := mp.ValidateMethodArgs([]any{testAdder{}, "world"})
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_I8_MP_ValidateMethodArgs_WrongCount(t *testing.T) {
+	// Arrange
 	mp := getMP("Greet")
 	err := mp.ValidateMethodArgs([]any{testAdder{}})
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for wrong arg count", actual)
 }
 
 func Test_I8_MP_ValidateMethodArgs_WrongType(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	err := mp.ValidateMethodArgs([]any{testAdder{}, "not-int", 3})
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for wrong arg type", actual)
 }
 
 func Test_I8_MP_VerifyInArgs(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	ok, err := mp.VerifyInArgs([]any{testAdder{}, 1, 2})
+
+	// Act
 	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_I8_MP_VerifyOutArgs(t *testing.T) {
+	// Arrange
 	mp := getMP("TwoReturns")
 	ok, err := mp.VerifyOutArgs([]any{0, errors.New("e")})
+
+	// Act
 	actual := args.Map{"result": ok || err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type mismatch for concrete error vs error interface", actual)
 }
 
 func Test_I8_MP_InArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	types := mp.GetInArgsTypes()
 	ok, err := mp.InArgsVerifyRv(types)
+
+	// Act
 	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
 
 func Test_I8_MP_OutArgsVerifyRv(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	types := mp.GetOutArgsTypes()
 	ok, err := mp.OutArgsVerifyRv(types)
+
+	// Act
 	actual := args.Map{"result": ok || err != nil}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected ok", actual)
 }
@@ -500,8 +683,13 @@ func Test_I8_MP_OutArgsVerifyRv(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_InvalidReflectValueKindModel(t *testing.T) {
+	// Arrange
 	rvk := reflectmodel.InvalidReflectValueKindModel("test error")
+
+	// Act
 	actual := args.Map{"result": rvk == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": rvk.IsInvalid()}
@@ -516,8 +704,13 @@ func Test_I8_InvalidReflectValueKindModel(t *testing.T) {
 }
 
 func Test_I8_RVK_NilReceiver(t *testing.T) {
+	// Arrange
 	var rvk *reflectmodel.ReflectValueKind
+
+	// Act
 	actual := args.Map{"result": rvk.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 	actual := args.Map{"result": rvk.HasError()}
@@ -544,6 +737,7 @@ func Test_I8_RVK_NilReceiver(t *testing.T) {
 }
 
 func Test_I8_RVK_Valid(t *testing.T) {
+	// Arrange
 	val := "hello"
 	rv := reflect.ValueOf(val)
 	rvk := &reflectmodel.ReflectValueKind{
@@ -552,7 +746,10 @@ func Test_I8_RVK_Valid(t *testing.T) {
 		Kind:            rv.Kind(),
 	}
 
+	// Act
 	actual := args.Map{"result": rvk.IsInvalid()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	actual := args.Map{"result": rvk.ActualInstance() != "hello"}
@@ -576,30 +773,45 @@ func Test_I8_RVK_Valid(t *testing.T) {
 }
 
 func Test_I8_RVK_Invalid_PointerRv(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid:         false,
 		FinalReflectVal: reflect.ValueOf(nil),
 	}
 	ptr := rvk.PointerRv()
+
+	// Act
 	actual := args.Map{"result": ptr == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil (returns &FinalReflectVal for invalid)", actual)
 }
 
 func Test_I8_RVK_PkgPath_Invalid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid: false,
 	}
+
+	// Act
 	actual := args.Map{"result": rvk.PkgPath() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for invalid", actual)
 }
 
 func Test_I8_RVK_TypeName_Invalid(t *testing.T) {
+	// Arrange
 	rvk := &reflectmodel.ReflectValueKind{
 		IsValid: false,
 	}
+
+	// Act
 	actual := args.Map{"result": rvk.TypeName() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for invalid", actual)
 }
@@ -609,19 +821,29 @@ func Test_I8_RVK_TypeName_Invalid(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_Utils_ArgsToReflectValues_Empty(t *testing.T) {
+	// Arrange
 	mp := getMP("NoError")
 	// Invoke with just the receiver covers ArgsToReflectValues with 1 arg
 	_, err := mp.Invoke(testAdder{})
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_I8_Utils_ReflectValuesToInterfaces_Coverage(t *testing.T) {
+	// Arrange
 	// Covered through Invoke which calls ReflectValuesToInterfaces
 	mp := getMP("Greet")
 	results, err := mp.Invoke(testAdder{}, "world")
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": results[0] != "hello world"}
@@ -630,31 +852,46 @@ func Test_I8_Utils_ReflectValuesToInterfaces_Coverage(t *testing.T) {
 }
 
 func Test_I8_Utils_VerifyReflectTypes_LengthMismatch(t *testing.T) {
+	// Arrange
 	mp := getMP("Add")
 	// Provide wrong number of types
 	ok, err := mp.InArgsVerifyRv([]reflect.Type{reflect.TypeOf(0)})
+
+	// Act
 	actual := args.Map{"result": ok || err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected length mismatch error", actual)
 }
 
 func Test_I8_Utils_VerifyReflectTypes_TypeMismatch(t *testing.T) {
+	// Arrange
 	mp := getMP("Greet") // expects (testAdder, string)
 	wrongTypes := []reflect.Type{
 		reflect.TypeOf(testAdder{}),
 		reflect.TypeOf(42), // should be string
 	}
 	ok, err := mp.InArgsVerifyRv(wrongTypes)
+
+	// Act
 	actual := args.Map{"result": ok || err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type mismatch error", actual)
 }
 
 func Test_I8_Utils_InterfacesToTypesNamesWithValues(t *testing.T) {
+	// Arrange
 	// Covered through argsCountMismatchErrorMessage via Invoke with wrong args
 	mp := getMP("Add")
 	_, err := mp.Invoke(testAdder{}, "wrong")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error containing type info", actual)
 	errMsg := err.Error()
@@ -664,6 +901,7 @@ func Test_I8_Utils_InterfacesToTypesNamesWithValues(t *testing.T) {
 }
 
 func Test_I8_Utils_IndexToPosition(t *testing.T) {
+	// Arrange
 	// Covered through type verification error messages
 	mp := getMP("Add")
 	// Wrong type at position 1 (2nd arg) covers "2nd" path
@@ -673,7 +911,11 @@ func Test_I8_Utils_IndexToPosition(t *testing.T) {
 		reflect.TypeOf(0),
 	}
 	ok, err := mp.InArgsVerifyRv(wrongTypes)
+
+	// Act
 	actual := args.Map{"result": ok || err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
@@ -687,6 +929,7 @@ func Test_I8_Utils_IndexToPosition(t *testing.T) {
 }
 
 func Test_I8_Utils_PrependWithSpaces_Coverage(t *testing.T) {
+	// Arrange
 	// Covered through VerifyReflectTypes error path which calls PrependWithSpaces
 	mp := getMP("Greet")
 	wrongTypes := []reflect.Type{
@@ -694,7 +937,11 @@ func Test_I8_Utils_PrependWithSpaces_Coverage(t *testing.T) {
 		reflect.TypeOf(0),
 	}
 	_, err := mp.InArgsVerifyRv(wrongTypes)
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -717,9 +964,14 @@ func Test_I8_IsNull_Coverage(t *testing.T) {
 // ==========================================================================
 
 func Test_I8_MP_Invoke_Greet(t *testing.T) {
+	// Arrange
 	mp := getMP("Greet")
 	results, err := mp.Invoke(testAdder{}, "Go")
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": results[0] != "hello Go"}
@@ -728,9 +980,14 @@ func Test_I8_MP_Invoke_Greet(t *testing.T) {
 }
 
 func Test_I8_MP_Invoke_TwoReturns(t *testing.T) {
+	// Arrange
 	mp := getMP("TwoReturns")
 	results, err := mp.Invoke(testAdder{}, 7)
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	actual := args.Map{"result": len(results) != 2}
@@ -742,25 +999,40 @@ func Test_I8_MP_Invoke_TwoReturns(t *testing.T) {
 }
 
 func Test_I8_MP_InvokeFirstAndError_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilMP *reflectmodel.MethodProcessor
 	_, _, err := nilMP.InvokeFirstAndError()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_I8_MP_InvokeError_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilMP *reflectmodel.MethodProcessor
 	_, err := nilMP.InvokeError()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_I8_MP_GetFirstResponseOfInvoke_Error(t *testing.T) {
+	// Arrange
 	var nilMP *reflectmodel.MethodProcessor
 	_, err := nilMP.GetFirstResponseOfInvoke()
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }

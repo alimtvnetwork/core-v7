@@ -12,185 +12,286 @@ import (
 // ── SliceValidator ──
 
 func Test_Cov7_SliceValidator_IsUsedAlready_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
+
+	// Act
 	actual := args.Map{"used": sv.IsUsedAlready()}
+
+	// Assert
 	expected := args.Map{"used": false}
 	expected.ShouldBeEqual(t, 0, "IsUsedAlready returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_ActualLinesLength_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
+
+	// Act
 	actual := args.Map{"len": sv.ActualLinesLength()}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "ActualLinesLength returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_MethodName(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{CompareAs: stringcompareas.Equal}
+
+	// Act
 	actual := args.Map{"notEmpty": sv.MethodName() != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MethodName returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_SetActual(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{}
 	sv.SetActual([]string{"a", "b"})
+
+	// Act
 	actual := args.Map{"used": sv.IsUsedAlready(), "len": sv.ActualLinesLength()}
+
+	// Assert
 	expected := args.Map{"used": true, "len": 2}
 	expected.ShouldBeEqual(t, 0, "SetActual returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_SetActualVsExpected(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{}
 	sv.SetActualVsExpected([]string{"a"}, []string{"a"})
+
+	// Act
 	actual := args.Map{"used": sv.IsUsedAlready(), "actualLen": sv.ActualLinesLength(), "expectedLen": sv.ExpectingLinesLength()}
+
+	// Assert
 	expected := args.Map{"used": true, "actualLen": 1, "expectedLen": 1}
 	expected.ShouldBeEqual(t, 0, "SetActualVsExpected returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_ActualLinesString(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{ActualLines: []string{"line1", "line2"}}
 	result := sv.ActualLinesString()
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "ActualLinesString returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_ActualLinesString_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
 	result := sv.ActualLinesString()
+
+	// Act
 	actual := args.Map{"empty": result == ""}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "ActualLinesString returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_ExpectingLinesString(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{ExpectedLines: []string{"line1"}}
 	result := sv.ExpectingLinesString()
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "ExpectingLinesString returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_ExpectingLinesString_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
 	result := sv.ExpectingLinesString()
+
+	// Act
 	actual := args.Map{"empty": result == ""}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "ExpectingLinesString returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_ExpectingLinesLength_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
+
+	// Act
 	actual := args.Map{"len": sv.ExpectingLinesLength()}
+
+	// Assert
 	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "ExpectingLinesLength returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_ComparingValidators(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a", "b"},
 		CompareAs:     stringcompareas.Equal,
 	}
 	validators := sv.ComparingValidators()
+
+	// Act
 	actual := args.Map{"count": len(validators.Items)}
+
+	// Assert
 	expected := args.Map{"count": 2}
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_ComparingValidators_Cached(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a"},
 		CompareAs:     stringcompareas.Equal,
 	}
 	v1 := sv.ComparingValidators()
 	v2 := sv.ComparingValidators()
+
+	// Act
 	actual := args.Map{"same": v1 == v2}
+
+	// Assert
 	expected := args.Map{"same": true}
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns non-empty -- cached", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValid_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
+
+	// Act
 	actual := args.Map{"valid": sv.IsValid(true)}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "IsValid returns nil -- nil", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValid_Match(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"hello", "world"},
 		ExpectedLines: []string{"hello", "world"},
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{"valid": sv.IsValid(true)}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- match", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValid_Mismatch(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"hello"},
 		ExpectedLines: []string{"world"},
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{"valid": sv.IsValid(true)}
+
+	// Assert
 	expected := args.Map{"valid": false}
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- mismatch", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValid_DifferentLengths(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"a", "b"},
 		ExpectedLines: []string{"a"},
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{"valid": sv.IsValid(true)}
+
+	// Assert
 	expected := args.Map{"valid": false}
 	expected.ShouldBeEqual(t, 0, "IsValid returns non-empty -- different lengths", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValidOtherLines(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a", "b"},
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{
 		"match":    sv.IsValidOtherLines(true, []string{"a", "b"}),
 		"mismatch": sv.IsValidOtherLines(true, []string{"c", "d"}),
 	}
+
+	// Assert
 	expected := args.Map{"match": true, "mismatch": false}
 	expected.ShouldBeEqual(t, 0, "IsValidOtherLines returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValidLines_BothNil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
+
+	// Act
 	actual := args.Map{"valid": sv.IsValidOtherLines(true, nil)}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "isValidLines returns nil -- both nil", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValidLines_LinesNilExpectedNil(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: nil,
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{"valid": sv.IsValidOtherLines(true, nil)}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "isValidLines returns nil -- both nil (non-nil receiver)", actual)
 }
 
 func Test_Cov7_SliceValidator_IsValidLines_OneNil(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ExpectedLines: []string{"a"},
 		CompareAs:     stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{"valid": sv.IsValidOtherLines(true, nil)}
+
+	// Assert
 	expected := args.Map{"valid": false}
 	expected.ShouldBeEqual(t, 0, "isValidLines returns nil -- one nil", actual)
 }
 
 func Test_Cov7_SliceValidator_Dispose(t *testing.T) {
+	// Arrange
 	sv := &corevalidator.SliceValidator{
 		ActualLines:   []string{"a"},
 		ExpectedLines: []string{"a"},
@@ -198,15 +299,24 @@ func Test_Cov7_SliceValidator_Dispose(t *testing.T) {
 	}
 	_ = sv.ComparingValidators() // force lazy init
 	sv.Dispose()
+
+	// Act
 	actual := args.Map{"actualNil": sv.ActualLines == nil, "expectedNil": sv.ExpectedLines == nil}
+
+	// Assert
 	expected := args.Map{"actualNil": true, "expectedNil": true}
 	expected.ShouldBeEqual(t, 0, "Dispose returns correct value -- with args", actual)
 }
 
 func Test_Cov7_SliceValidator_Dispose_Nil(t *testing.T) {
+	// Arrange
 	var sv *corevalidator.SliceValidator
 	sv.Dispose() // should not panic
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "Dispose returns nil -- nil", actual)
 }
@@ -214,44 +324,64 @@ func Test_Cov7_SliceValidator_Dispose_Nil(t *testing.T) {
 // ── TextValidator ──
 
 func Test_Cov7_TextValidator_IsMatch_EqualMatch(t *testing.T) {
+	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hello",
 		SearchAs: stringcompareas.Equal,
 	}
+
+	// Act
 	actual := args.Map{
 		"match":    tv.IsMatch("hello", true),
 		"mismatch": tv.IsMatch("world", true),
 	}
+
+	// Assert
 	expected := args.Map{"match": true, "mismatch": false}
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- equal", actual)
 }
 
 func Test_Cov7_TextValidator_IsMatch_Contains(t *testing.T) {
+	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "ell",
 		SearchAs: stringcompareas.Contains,
 	}
+
+	// Act
 	actual := args.Map{"match": tv.IsMatch("hello", true)}
+
+	// Assert
 	expected := args.Map{"match": true}
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- contains", actual)
 }
 
 func Test_Cov7_TextValidator_IsMatch_StartsWith(t *testing.T) {
+	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "hel",
 		SearchAs: stringcompareas.StartsWith,
 	}
+
+	// Act
 	actual := args.Map{"match": tv.IsMatch("hello", true)}
+
+	// Assert
 	expected := args.Map{"match": true}
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- startsWith", actual)
 }
 
 func Test_Cov7_TextValidator_IsMatch_EndsWith(t *testing.T) {
+	// Arrange
 	tv := corevalidator.TextValidator{
 		Search:   "llo",
 		SearchAs: stringcompareas.EndsWith,
 	}
+
+	// Act
 	actual := args.Map{"match": tv.IsMatch("hello", true)}
+
+	// Assert
 	expected := args.Map{"match": true}
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- endsWith", actual)
 }
@@ -259,27 +389,42 @@ func Test_Cov7_TextValidator_IsMatch_EndsWith(t *testing.T) {
 // ── TextValidators ──
 
 func Test_Cov7_TextValidators_Add(t *testing.T) {
+	// Arrange
 	validators := corevalidator.NewTextValidators(5)
 	validators.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
 	validators.Add(corevalidator.TextValidator{Search: "b", SearchAs: stringcompareas.Equal})
+
+	// Act
 	actual := args.Map{"count": len(validators.Items)}
+
+	// Assert
 	expected := args.Map{"count": 2}
 	expected.ShouldBeEqual(t, 0, "TextValidators.Add returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_TextValidators_Dispose(t *testing.T) {
+	// Arrange
 	validators := corevalidator.NewTextValidators(5)
 	validators.Add(corevalidator.TextValidator{Search: "a"})
 	validators.Dispose()
+
+	// Act
 	actual := args.Map{"nil": validators.Items == nil}
+
+	// Assert
 	expected := args.Map{"nil": true}
 	expected.ShouldBeEqual(t, 0, "TextValidators.Dispose returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_TextValidators_Dispose_Nil(t *testing.T) {
+	// Arrange
 	var validators *corevalidator.TextValidators
 	validators.Dispose() // should not panic
+
+	// Act
 	actual := args.Map{"ok": true}
+
+	// Assert
 	expected := args.Map{"ok": true}
 	expected.ShouldBeEqual(t, 0, "TextValidators.Dispose returns nil -- nil", actual)
 }
@@ -287,8 +432,13 @@ func Test_Cov7_TextValidators_Dispose_Nil(t *testing.T) {
 // ── Condition ──
 
 func Test_Cov7_Condition_IsSplitByWhitespace(t *testing.T) {
+	// Arrange
 	c := corevalidator.Condition{IsUniqueWordOnly: true}
+
+	// Act
 	actual := args.Map{"split": c.IsSplitByWhitespace()}
+
+	// Assert
 	expected := args.Map{"split": true}
 	expected.ShouldBeEqual(t, 0, "Condition.IsSplitByWhitespace returns correct value -- with args", actual)
 }
@@ -296,10 +446,15 @@ func Test_Cov7_Condition_IsSplitByWhitespace(t *testing.T) {
 // ── Parameter ──
 
 func Test_Cov7_Parameter_Fields(t *testing.T) {
+	// Arrange
 	p := &corevalidator.Parameter{
 		IsSkipCompareOnActualEmpty: true,
 	}
+
+	// Act
 	actual := args.Map{"skip": p.IsSkipCompareOnActualEmpty}
+
+	// Assert
 	expected := args.Map{"skip": true}
 	expected.ShouldBeEqual(t, 0, "Parameter returns correct value -- fields", actual)
 }
@@ -307,18 +462,26 @@ func Test_Cov7_Parameter_Fields(t *testing.T) {
 // ── SimpleSliceValidator ──
 
 func Test_Cov7_SimpleSliceValidator_SetActual(t *testing.T) {
+	// Arrange
+
+	// Assert
 	expected := corestr.New.SimpleSlice.SpreadStrings("a", "b")
 	sv := &corevalidator.SimpleSliceValidator{
 		Expected: expected,
 	}
 	sv.SetActual([]string{"a", "b"})
 	sliceV := sv.SliceValidator()
+
+	// Act
 	actual := args.Map{"notNil": sliceV != nil}
 	expectedM := args.Map{"notNil": true}
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.SetActual returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_SimpleSliceValidator_VerifyAll(t *testing.T) {
+	// Arrange
+
+	// Assert
 	expected := corestr.New.SimpleSlice.SpreadStrings("a", "b")
 	sv := &corevalidator.SimpleSliceValidator{
 		Expected: expected,
@@ -326,12 +489,17 @@ func Test_Cov7_SimpleSliceValidator_VerifyAll(t *testing.T) {
 	sv.SetActual([]string{"a", "b"})
 	sliceV := sv.SliceValidator()
 	// Verify SliceValidator was created properly
+
+	// Act
 	actual := args.Map{"notNil": sliceV != nil, "actualLen": len(sliceV.ActualLines), "expectedLen": len(sliceV.ExpectedLines)}
 	expectedM := args.Map{"notNil": true, "actualLen": 2, "expectedLen": 2}
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.VerifyAll returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
+	// Arrange
+
+	// Assert
 	expected := corestr.New.SimpleSlice.SpreadStrings("a", "b")
 	sv := &corevalidator.SimpleSliceValidator{
 		Expected: expected,
@@ -339,6 +507,8 @@ func Test_Cov7_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
 	sv.SetActual([]string{"a", "c"})
 	params := &corevalidator.Parameter{IsCaseSensitive: true}
 	err := sv.VerifyAll([]string{"a", "c"}, params)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
 	expectedM := args.Map{"hasErr": true}
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.VerifyAll returns non-empty -- mismatch", actual)
@@ -347,10 +517,15 @@ func Test_Cov7_SimpleSliceValidator_VerifyAll_Mismatch(t *testing.T) {
 // ── LineNumber ──
 
 func Test_Cov7_LineNumber_Fields(t *testing.T) {
+	// Arrange
 	ln := corevalidator.LineNumber{
 		LineNumber: 1,
 	}
+
+	// Act
 	actual := args.Map{"num": ln.LineNumber, "hasLN": ln.HasLineNumber()}
+
+	// Assert
 	expected := args.Map{"num": 1, "hasLN": true}
 	expected.ShouldBeEqual(t, 0, "LineNumber returns correct value -- fields", actual)
 }
@@ -358,6 +533,7 @@ func Test_Cov7_LineNumber_Fields(t *testing.T) {
 // ── HeaderSliceValidator ──
 
 func Test_Cov7_HeaderSliceValidator_IsValid(t *testing.T) {
+	// Arrange
 	hsv := corevalidator.HeaderSliceValidator{
 		Header: "test-header",
 		SliceValidator: corevalidator.SliceValidator{
@@ -366,7 +542,11 @@ func Test_Cov7_HeaderSliceValidator_IsValid(t *testing.T) {
 			CompareAs:     stringcompareas.Equal,
 		},
 	}
+
+	// Act
 	actual := args.Map{"valid": hsv.IsValid(true)}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "HeaderSliceValidator.IsValid returns non-empty -- with args", actual)
 }
@@ -374,17 +554,27 @@ func Test_Cov7_HeaderSliceValidator_IsValid(t *testing.T) {
 // ── HeaderSliceValidators ──
 
 func Test_Cov7_HeaderSliceValidators_IsEmpty(t *testing.T) {
+	// Arrange
 	hsvs := &corevalidator.HeaderSliceValidators{}
+
+	// Act
 	actual := args.Map{"empty": hsvs.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "HeaderSliceValidators.IsEmpty returns empty -- with args", actual)
 }
 
 func Test_Cov7_HeaderSliceValidators_Length(t *testing.T) {
+	// Arrange
 	hsvs := corevalidator.HeaderSliceValidators{
 		{Header: "h1"},
 	}
+
+	// Act
 	actual := args.Map{"count": hsvs.Length()}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "HeaderSliceValidators.Length returns non-empty -- with args", actual)
 }
@@ -392,13 +582,19 @@ func Test_Cov7_HeaderSliceValidators_Length(t *testing.T) {
 // ── SliceValidators ──
 
 func Test_Cov7_SliceValidators_IsEmpty(t *testing.T) {
+	// Arrange
 	svs := &corevalidator.SliceValidators{}
+
+	// Act
 	actual := args.Map{"empty": svs.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "SliceValidators.IsEmpty returns empty -- with args", actual)
 }
 
 func Test_Cov7_SliceValidators_Length(t *testing.T) {
+	// Arrange
 	svs := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
 			{
@@ -408,7 +604,11 @@ func Test_Cov7_SliceValidators_Length(t *testing.T) {
 			},
 		},
 	}
+
+	// Act
 	actual := args.Map{"count": svs.Length()}
+
+	// Assert
 	expected := args.Map{"count": 1}
 	expected.ShouldBeEqual(t, 0, "SliceValidators.Length returns non-empty -- with args", actual)
 }
@@ -416,10 +616,15 @@ func Test_Cov7_SliceValidators_Length(t *testing.T) {
 // ── RangesSegment ──
 
 func Test_Cov7_RangesSegment(t *testing.T) {
+	// Arrange
 	rs := corevalidator.RangesSegment{
 		ExpectedLines: []string{"a", "b"},
 	}
+
+	// Act
 	actual := args.Map{"len": len(rs.ExpectedLines)}
+
+	// Assert
 	expected := args.Map{"len": 2}
 	expected.ShouldBeEqual(t, 0, "RangesSegment returns correct value -- with args", actual)
 }

@@ -9,9 +9,14 @@ import (
 )
 
 func Test_Cov_Variant_UnmarshalJSON_Error(t *testing.T) {
+	// Arrange
 	v := new(bytetype.Variant)
 	err := v.UnmarshalJSON([]byte("invalid"))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }

@@ -14,8 +14,13 @@ import (
 
 func Test_CovLR_01_NewLeftRight(t *testing.T) {
 	safeTest(t, "Test_CovLR_01_NewLeftRight", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a,b", actual)
 		actual := args.Map{"result": lr.IsValid}
@@ -26,8 +31,13 @@ func Test_CovLR_01_NewLeftRight(t *testing.T) {
 
 func Test_CovLR_02_InvalidLeftRight(t *testing.T) {
 	safeTest(t, "Test_CovLR_02_InvalidLeftRight", func() {
+		// Arrange
 		lr := corestr.InvalidLeftRight("msg")
+
+		// Act
 		actual := args.Map{"result": lr.IsValid}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 		lr2 := corestr.InvalidLeftRightNoMessage()
@@ -39,9 +49,14 @@ func Test_CovLR_02_InvalidLeftRight(t *testing.T) {
 
 func Test_CovLR_03_LeftRightUsingSlice(t *testing.T) {
 	safeTest(t, "Test_CovLR_03_LeftRightUsingSlice", func() {
+		// Arrange
 		// 2 items
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a,b", actual)
 		// 1 item
@@ -68,8 +83,13 @@ func Test_CovLR_03_LeftRightUsingSlice(t *testing.T) {
 
 func Test_CovLR_04_LeftRightTrimmedUsingSlice(t *testing.T) {
 	safeTest(t, "Test_CovLR_04_LeftRightTrimmedUsingSlice", func() {
+		// Arrange
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected trimmed a,b", actual)
 		// nil
@@ -92,8 +112,13 @@ func Test_CovLR_04_LeftRightTrimmedUsingSlice(t *testing.T) {
 
 func Test_CovLR_05_LeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_CovLR_05_LeftRightFromSplit", func() {
+		// Arrange
 		lr := corestr.LeftRightFromSplit("key=value", "=")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "key" || lr.Right != "value"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected key,value", actual)
 	})
@@ -101,8 +126,13 @@ func Test_CovLR_05_LeftRightFromSplit(t *testing.T) {
 
 func Test_CovLR_06_LeftRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_CovLR_06_LeftRightFromSplitTrimmed", func() {
+		// Arrange
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "key" || lr.Right != "value"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected trimmed, got '',''", actual)
 	})
@@ -110,8 +140,13 @@ func Test_CovLR_06_LeftRightFromSplitTrimmed(t *testing.T) {
 
 func Test_CovLR_07_LeftRightFromSplitFull(t *testing.T) {
 	safeTest(t, "Test_CovLR_07_LeftRightFromSplitFull", func() {
+		// Arrange
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a" || lr.Right != "b:c:d"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a,b:c:d got '',''", actual)
 	})
@@ -119,8 +154,13 @@ func Test_CovLR_07_LeftRightFromSplitFull(t *testing.T) {
 
 func Test_CovLR_08_LeftRightFromSplitFullTrimmed(t *testing.T) {
 	safeTest(t, "Test_CovLR_08_LeftRightFromSplitFullTrimmed", func() {
+		// Arrange
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a, got ''", actual)
 	})
@@ -128,8 +168,13 @@ func Test_CovLR_08_LeftRightFromSplitFullTrimmed(t *testing.T) {
 
 func Test_CovLR_09_LeftBytes_RightBytes(t *testing.T) {
 	safeTest(t, "Test_CovLR_09_LeftBytes_RightBytes", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("ab", "cd")
+
+		// Act
 		actual := args.Map{"result": len(lr.LeftBytes()) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		actual := args.Map{"result": len(lr.RightBytes()) != 2}
@@ -140,8 +185,13 @@ func Test_CovLR_09_LeftBytes_RightBytes(t *testing.T) {
 
 func Test_CovLR_10_LeftTrim_RightTrim(t *testing.T) {
 	safeTest(t, "Test_CovLR_10_LeftTrim_RightTrim", func() {
+		// Arrange
 		lr := corestr.NewLeftRight(" a ", " b ")
+
+		// Act
 		actual := args.Map{"result": lr.LeftTrim() != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		actual := args.Map{"result": lr.RightTrim() != "b"}
@@ -152,8 +202,13 @@ func Test_CovLR_10_LeftTrim_RightTrim(t *testing.T) {
 
 func Test_CovLR_11_IsLeftEmpty_IsRightEmpty(t *testing.T) {
 	safeTest(t, "Test_CovLR_11_IsLeftEmpty_IsRightEmpty", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("", "b")
+
+		// Act
 		actual := args.Map{"result": lr.IsLeftEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": lr.IsRightEmpty()}
@@ -164,8 +219,13 @@ func Test_CovLR_11_IsLeftEmpty_IsRightEmpty(t *testing.T) {
 
 func Test_CovLR_12_IsLeftWhitespace_IsRightWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovLR_12_IsLeftWhitespace_IsRightWhitespace", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("  ", "  ")
+
+		// Act
 		actual := args.Map{"result": lr.IsLeftWhitespace()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": lr.IsRightWhitespace()}
@@ -176,8 +236,13 @@ func Test_CovLR_12_IsLeftWhitespace_IsRightWhitespace(t *testing.T) {
 
 func Test_CovLR_13_HasValidNonEmpty(t *testing.T) {
 	safeTest(t, "Test_CovLR_13_HasValidNonEmpty", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
+
+		// Act
 		actual := args.Map{"result": lr.HasValidNonEmptyLeft()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": lr.HasValidNonEmptyRight()}
@@ -197,9 +262,14 @@ func Test_CovLR_13_HasValidNonEmpty(t *testing.T) {
 
 func Test_CovLR_14_NonPtr_Ptr(t *testing.T) {
 	safeTest(t, "Test_CovLR_14_NonPtr_Ptr", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
 		np := lr.NonPtr()
+
+		// Act
 		actual := args.Map{"result": np.Left != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		p := lr.Ptr()
@@ -211,9 +281,14 @@ func Test_CovLR_14_NonPtr_Ptr(t *testing.T) {
 
 func Test_CovLR_15_IsLeftRegexMatch_IsRightRegexMatch(t *testing.T) {
 	safeTest(t, "Test_CovLR_15_IsLeftRegexMatch_IsRightRegexMatch", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("hello123", "world456")
 		re := regexp.MustCompile(`\d+`)
+
+		// Act
 		actual := args.Map{"result": lr.IsLeftRegexMatch(re)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": lr.IsRightRegexMatch(re)}
@@ -230,8 +305,13 @@ func Test_CovLR_15_IsLeftRegexMatch_IsRightRegexMatch(t *testing.T) {
 
 func Test_CovLR_16_IsLeft_IsRight_Is(t *testing.T) {
 	safeTest(t, "Test_CovLR_16_IsLeft_IsRight_Is", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
+
+		// Act
 		actual := args.Map{"result": lr.IsLeft("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": lr.IsRight("b")}
@@ -248,9 +328,14 @@ func Test_CovLR_16_IsLeft_IsRight_Is(t *testing.T) {
 
 func Test_CovLR_17_IsEqual(t *testing.T) {
 	safeTest(t, "Test_CovLR_17_IsEqual", func() {
+		// Arrange
 		lr1 := corestr.NewLeftRight("a", "b")
 		lr2 := corestr.NewLeftRight("a", "b")
+
+		// Act
 		actual := args.Map{"result": lr1.IsEqual(lr2)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		lr3 := corestr.NewLeftRight("x", "b")
@@ -269,9 +354,14 @@ func Test_CovLR_17_IsEqual(t *testing.T) {
 
 func Test_CovLR_18_Clone_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_CovLR_18_Clone_Clear_Dispose", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
 		c := lr.Clone()
+
+		// Act
 		actual := args.Map{"result": c.Left != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		lr.Clear()
@@ -289,8 +379,13 @@ func Test_CovLR_18_Clone_Clear_Dispose(t *testing.T) {
 
 func Test_CovCoC_01_IsEmpty_HasItems_Length(t *testing.T) {
 	safeTest(t, "Test_CovCoC_01_IsEmpty_HasItems_Length", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
+
+		// Act
 		actual := args.Map{"result": coc.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		actual := args.Map{"result": coc.HasItems()}
@@ -304,10 +399,15 @@ func Test_CovCoC_01_IsEmpty_HasItems_Length(t *testing.T) {
 
 func Test_CovCoC_02_Add_Adds_AddCollections(t *testing.T) {
 	safeTest(t, "Test_CovCoC_02_Add_Adds_AddCollections", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Cap(5)
 		col := corestr.New.Collection.Strings([]string{"false", "a", "b"})
 		coc.Add(col)
+
+		// Act
 		actual := args.Map{"result": coc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// Add empty skipped
@@ -327,9 +427,14 @@ func Test_CovCoC_02_Add_Adds_AddCollections(t *testing.T) {
 
 func Test_CovCoC_03_AddStrings_AddsStringsOfStrings(t *testing.T) {
 	safeTest(t, "Test_CovCoC_03_AddStrings_AddsStringsOfStrings", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": coc.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		coc.AddStrings(false, []string{})
@@ -346,8 +451,13 @@ func Test_CovCoC_03_AddStrings_AddsStringsOfStrings(t *testing.T) {
 
 func Test_CovCoC_04_AllIndividualItemsLength_Items_List(t *testing.T) {
 	safeTest(t, "Test_CovCoC_04_AllIndividualItemsLength_Items_List", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
+
+		// Act
 		actual := args.Map{"result": coc.AllIndividualItemsLength() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		coc.AddStrings(false, []string{"a", "b"})
@@ -367,10 +477,15 @@ func Test_CovCoC_04_AllIndividualItemsLength_Items_List(t *testing.T) {
 
 func Test_CovCoC_05_ToCollection(t *testing.T) {
 	safeTest(t, "Test_CovCoC_05_ToCollection", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a", "b"})
 		col := coc.ToCollection()
+
+		// Act
 		actual := args.Map{"result": col.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -386,12 +501,17 @@ func Test_CovCoC_06_String(t *testing.T) {
 
 func Test_CovCoC_07_JsonModel_MarshalUnmarshal(t *testing.T) {
 	safeTest(t, "Test_CovCoC_07_JsonModel_MarshalUnmarshal", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a"})
 		_ = coc.JsonModel()
 		_ = coc.JsonModelAny()
 		data, err := coc.MarshalJSON()
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		coc2 := corestr.New.CollectionsOfCollection.Empty()
@@ -408,13 +528,18 @@ func Test_CovCoC_07_JsonModel_MarshalUnmarshal(t *testing.T) {
 
 func Test_CovCoC_08_Json_ParseInject(t *testing.T) {
 	safeTest(t, "Test_CovCoC_08_Json_ParseInject", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a"})
 		_ = coc.Json()
 		jr := coc.JsonPtr()
 		coc2 := corestr.New.CollectionsOfCollection.Empty()
 		r, err := coc2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil || r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
@@ -422,12 +547,17 @@ func Test_CovCoC_08_Json_ParseInject(t *testing.T) {
 
 func Test_CovCoC_09_ParseInjectMust(t *testing.T) {
 	safeTest(t, "Test_CovCoC_09_ParseInjectMust", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a"})
 		jr := coc.JsonPtr()
 		coc2 := corestr.New.CollectionsOfCollection.Empty()
 		r := coc2.ParseInjectUsingJsonMust(jr)
+
+		// Act
 		actual := args.Map{"result": r == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -435,12 +565,17 @@ func Test_CovCoC_09_ParseInjectMust(t *testing.T) {
 
 func Test_CovCoC_10_JsonParseSelfInject_AsInterfaces(t *testing.T) {
 	safeTest(t, "Test_CovCoC_10_JsonParseSelfInject_AsInterfaces", func() {
+		// Arrange
 		coc := corestr.New.CollectionsOfCollection.Empty()
 		coc.AddStrings(false, []string{"a"})
 		jr := coc.JsonPtr()
 		coc2 := corestr.New.CollectionsOfCollection.Empty()
 		err := coc2.JsonParseSelfInject(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		_ = coc.AsJsonContractsBinder()
@@ -452,9 +587,14 @@ func Test_CovCoC_10_JsonParseSelfInject_AsInterfaces(t *testing.T) {
 
 func Test_CovCoC_11_Creators(t *testing.T) {
 	safeTest(t, "Test_CovCoC_11_Creators", func() {
+		// Arrange
 		// LenCap
 		c := corestr.New.CollectionsOfCollection.LenCap(0, 5)
+
+		// Act
 		actual := args.Map{"result": c.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// StringsOfStrings

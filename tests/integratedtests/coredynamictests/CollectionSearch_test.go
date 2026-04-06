@@ -34,6 +34,7 @@ func Test_Collection_Contains_Verification(t *testing.T) {
 			fmt.Sprintf("%v", coredynamic.Contains(col, search)),
 		}
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, actLines...)
 	}
 }
@@ -63,6 +64,7 @@ func Test_Collection_IndexOf_Verification(t *testing.T) {
 			fmt.Sprintf("%d", coredynamic.IndexOf(col, search)),
 		}
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, actLines...)
 	}
 }
@@ -92,6 +94,7 @@ func Test_Collection_HasAll_Verification(t *testing.T) {
 			fmt.Sprintf("%v", coredynamic.HasAll(col, search...)),
 		}
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, actLines...)
 	}
 }
@@ -121,6 +124,7 @@ func Test_Collection_LastIndexOf_Verification(t *testing.T) {
 			fmt.Sprintf("%d", coredynamic.LastIndexOf(col, search)),
 		}
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, actLines...)
 	}
 }
@@ -150,6 +154,7 @@ func Test_Collection_Count_Verification(t *testing.T) {
 			fmt.Sprintf("%d", coredynamic.Count(col, search)),
 		}
 
+		// Assert
 		testCase.ShouldBeEqual(t, caseIndex, actLines...)
 	}
 }

@@ -304,6 +304,7 @@ func Test_TypedPayloadCollection_AnyAll(t *testing.T) {
 }
 
 func Test_TypedPayloadCollection_EmptyBehavior(t *testing.T) {
+	// Arrange
 	tc := typedCollectionEmptyOpsTestCase
 	collection := corepayload.EmptyTypedPayloadCollection[testUser]()
 
@@ -316,6 +317,7 @@ func Test_TypedPayloadCollection_EmptyBehavior(t *testing.T) {
 		collection, 0, func(acc int, u testUser) int { return acc + u.Age },
 	)
 
+	// Act
 	actual := args.Map{
 		"allDataLen":  len(allData),
 		"namesLen":    len(names),
@@ -323,31 +325,37 @@ func Test_TypedPayloadCollection_EmptyBehavior(t *testing.T) {
 		"totalAge":    totalAge,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TypedPayloadCollection_FirstByName(t *testing.T) {
+	// Arrange
 	tc := typedCollectionFirstByNameTestCase
 	collection := createTestCollection()
 
 	found := collection.FirstByName("Bob")
 	notFound := collection.FirstByName("Nonexistent")
 
+	// Act
 	actual := args.Map{
 		"foundName":   found.Data().Name,
 		"notFoundNil": notFound == nil,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TypedPayloadCollection_RemoveAt(t *testing.T) {
+	// Arrange
 	tc := typedCollectionRemoveAtTestCase
 	collection := createTestCollection()
 
 	removed := collection.RemoveAt(1)
 	invalidRemove := collection.RemoveAt(99)
 
+	// Act
 	actual := args.Map{
 		"removed":       removed,
 		"lengthAfter":   collection.Length(),
@@ -356,18 +364,22 @@ func Test_TypedPayloadCollection_RemoveAt(t *testing.T) {
 		"invalidRemove": invalidRemove,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
 func Test_TypedPayloadCollection_ToPayloadsCollection(t *testing.T) {
+	// Arrange
 	tc := typedCollectionToPayloadsTestCase
 	collection := createTestCollection()
 	payloads := collection.ToPayloadsCollection()
 
+	// Act
 	actual := args.Map{
 		"length":    payloads.Length(),
 		"firstName": payloads.First().Name,
 	}
 
+	// Assert
 	tc.ShouldBeEqualMapFirst(t, actual)
 }

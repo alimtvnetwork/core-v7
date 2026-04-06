@@ -1070,8 +1070,13 @@ func Test_S10_155_Hashset_JsonParseSelfInject(t *testing.T) {
 
 func Test_S10_156_Hashset_AsJsoner(t *testing.T) {
 	safeTest(t, "Test_S10_156_Hashset_AsJsoner", func() {
+		// Arrange
 		hs := corestr.New.Hashset.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hs.AsJsoner() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -1079,8 +1084,13 @@ func Test_S10_156_Hashset_AsJsoner(t *testing.T) {
 
 func Test_S10_157_Hashset_AsJsonContractsBinder(t *testing.T) {
 	safeTest(t, "Test_S10_157_Hashset_AsJsonContractsBinder", func() {
+		// Arrange
 		hs := corestr.New.Hashset.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hs.AsJsonContractsBinder() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -1088,8 +1098,13 @@ func Test_S10_157_Hashset_AsJsonContractsBinder(t *testing.T) {
 
 func Test_S10_158_Hashset_AsJsonParseSelfInjector(t *testing.T) {
 	safeTest(t, "Test_S10_158_Hashset_AsJsonParseSelfInjector", func() {
+		// Arrange
 		hs := corestr.New.Hashset.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hs.AsJsonParseSelfInjector() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
@@ -1097,8 +1112,13 @@ func Test_S10_158_Hashset_AsJsonParseSelfInjector(t *testing.T) {
 
 func Test_S10_159_Hashset_AsJsonMarshaller(t *testing.T) {
 	safeTest(t, "Test_S10_159_Hashset_AsJsonMarshaller", func() {
+		// Arrange
 		hs := corestr.New.Hashset.Cap(5)
+
+		// Act
 		actual := args.Map{"result": hs.AsJsonMarshaller() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})

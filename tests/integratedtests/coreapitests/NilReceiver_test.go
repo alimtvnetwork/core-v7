@@ -14,6 +14,7 @@ import "testing"
 
 func Test_PageRequest_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range pageRequestNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }

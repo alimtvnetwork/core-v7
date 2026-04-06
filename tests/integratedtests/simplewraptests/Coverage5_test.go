@@ -10,20 +10,31 @@ import (
 // ── ConditionalWrapWith (startChar byte, input string, endChar byte) ──
 
 func Test_Cov5_ConditionalWrapWith_Wrapped(t *testing.T) {
+	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('[', "x", ']')}
+
+	// Assert
 	expected := args.Map{"result": "[x]"}
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith wraps -- not already wrapped", actual)
 }
 
 func Test_Cov5_ConditionalWrapWith_AlreadyWrapped(t *testing.T) {
+	// Act
 	actual := args.Map{"result": simplewrap.ConditionalWrapWith('[', "[x]", ']')}
+
+	// Assert
 	expected := args.Map{"result": "[x]"}
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith no-op -- already wrapped", actual)
 }
 
 func Test_Cov5_ConditionalWrapWith_Empty(t *testing.T) {
+	// Arrange
 	result := simplewrap.ConditionalWrapWith('[', "", ']')
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": "[]"}
 	expected.ShouldBeEqual(t, 0, "ConditionalWrapWith empty -- just brackets", actual)
 }
@@ -31,8 +42,13 @@ func Test_Cov5_ConditionalWrapWith_Empty(t *testing.T) {
 // ── MsgWrapMsg ──
 
 func Test_Cov5_MsgWrapMsg(t *testing.T) {
+	// Arrange
 	result := simplewrap.MsgWrapMsg("hello", "world")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MsgWrapMsg -- not empty", actual)
 }
@@ -40,22 +56,37 @@ func Test_Cov5_MsgWrapMsg(t *testing.T) {
 // ── CurlyWrapOption (isSkipIfExists bool, source any) ──
 
 func Test_Cov5_CurlyWrapOption_NonEmpty(t *testing.T) {
+	// Arrange
 	result := simplewrap.CurlyWrapOption(false, "hello")
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": "{hello}"}
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption non-empty -- wrapped", actual)
 }
 
 func Test_Cov5_CurlyWrapOption_SkipIfExists(t *testing.T) {
+	// Arrange
 	result := simplewrap.CurlyWrapOption(true, "{hello}")
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": "{hello}"}
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption skip if exists -- no double wrap", actual)
 }
 
 func Test_Cov5_CurlyWrapOption_Empty(t *testing.T) {
+	// Arrange
 	result := simplewrap.CurlyWrapOption(false, "")
+
+	// Act
 	actual := args.Map{"result": result}
+
+	// Assert
 	expected := args.Map{"result": "{}"}
 	expected.ShouldBeEqual(t, 0, "CurlyWrapOption empty -- just curlies", actual)
 }
@@ -63,8 +94,13 @@ func Test_Cov5_CurlyWrapOption_Empty(t *testing.T) {
 // ── WithBracketsQuotation ──
 
 func Test_Cov5_WithBracketsQuotation(t *testing.T) {
+	// Arrange
 	result := simplewrap.WithBracketsQuotation("x")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "WithBracketsQuotation -- wrapped", actual)
 }
@@ -72,8 +108,13 @@ func Test_Cov5_WithBracketsQuotation(t *testing.T) {
 // ── WithCurlyQuotation ──
 
 func Test_Cov5_WithCurlyQuotation(t *testing.T) {
+	// Arrange
 	result := simplewrap.WithCurlyQuotation("x")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "WithCurlyQuotation -- wrapped", actual)
 }
@@ -81,8 +122,13 @@ func Test_Cov5_WithCurlyQuotation(t *testing.T) {
 // ── WithParenthesisQuotation ──
 
 func Test_Cov5_WithParenthesisQuotation(t *testing.T) {
+	// Arrange
 	result := simplewrap.WithParenthesisQuotation("x")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "WithParenthesisQuotation -- wrapped", actual)
 }
@@ -90,8 +136,13 @@ func Test_Cov5_WithParenthesisQuotation(t *testing.T) {
 // ── MsgCsvItems ──
 
 func Test_Cov5_MsgCsvItems_Empty(t *testing.T) {
+	// Arrange
 	result := simplewrap.MsgCsvItems("msg")
+
+	// Act
 	actual := args.Map{"notEmpty": result != ""}
+
+	// Assert
 	expected := args.Map{"notEmpty": true}
 	expected.ShouldBeEqual(t, 0, "MsgCsvItems no items -- msg only", actual)
 }

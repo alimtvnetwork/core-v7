@@ -12,8 +12,13 @@ import (
 
 func Test_C40_ValidValue_Constructors(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Constructors", func() {
+		// Arrange
 		v1 := corestr.NewValidValue("hello")
+
+		// Act
 		actual := args.Map{"result": v1.Value != "hello" || !v1.IsValid}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v2 := corestr.NewValidValueEmpty()
@@ -41,8 +46,13 @@ func Test_C40_ValidValue_Constructors(t *testing.T) {
 
 func Test_C40_ValidValue_Methods(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Methods", func() {
+		// Arrange
 		v := corestr.NewValidValue("hello")
+
+		// Act
 		actual := args.Map{"result": v.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": v.IsWhitespace()}
@@ -92,8 +102,13 @@ func Test_C40_ValidValue_Methods(t *testing.T) {
 
 func Test_C40_ValidValue_NumericConversions(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_NumericConversions", func() {
+		// Arrange
 		v := corestr.NewValidValue("42")
+
+		// Act
 		actual := args.Map{"result": v.ValueInt(0) != 42}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": v.ValueDefInt() != 42}
@@ -149,9 +164,14 @@ func Test_C40_ValidValue_NumericConversions(t *testing.T) {
 
 func Test_C40_ValidValue_Regex(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Regex", func() {
+		// Arrange
 		v := corestr.NewValidValue("hello123")
 		re := regexp.MustCompile(`\d+`)
+
+		// Act
 		actual := args.Map{"result": v.IsRegexMatches(re)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": v.IsRegexMatches(nil)}
@@ -182,8 +202,13 @@ func Test_C40_ValidValue_Regex(t *testing.T) {
 
 func Test_C40_ValidValue_Split(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Split", func() {
+		// Arrange
 		v := corestr.NewValidValue("a,b,c")
+
+		// Act
 		actual := args.Map{"result": len(v.Split(",")) != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_ = v.SplitNonEmpty(",")
@@ -193,10 +218,15 @@ func Test_C40_ValidValue_Split(t *testing.T) {
 
 func Test_C40_ValidValue_ValueBytesOnce(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_ValueBytesOnce", func() {
+		// Arrange
 		v := corestr.NewValidValue("hi")
 		b1 := v.ValueBytesOnce()
 		b2 := v.ValueBytesOnce() // cached
+
+		// Act
 		actual := args.Map{"result": len(b1) != 2 || len(b2) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_ = v.ValueBytesOncePtr()
@@ -205,9 +235,14 @@ func Test_C40_ValidValue_ValueBytesOnce(t *testing.T) {
 
 func Test_C40_ValidValue_Clone_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_Clone_Clear_Dispose", func() {
+		// Arrange
 		v := corestr.NewValidValue("hi")
 		c := v.Clone()
+
+		// Act
 		actual := args.Map{"result": c.Value != "hi"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		var nilV *corestr.ValidValue
@@ -227,8 +262,13 @@ func Test_C40_ValidValue_Clone_Clear_Dispose(t *testing.T) {
 
 func Test_C40_ValidValue_String_FullString(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_String_FullString", func() {
+		// Arrange
 		v := corestr.NewValidValue("hi")
+
+		// Act
 		actual := args.Map{"result": v.String() != "hi"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": v.FullString() == ""}
@@ -246,9 +286,14 @@ func Test_C40_ValidValue_String_FullString(t *testing.T) {
 
 func Test_C40_ValidValue_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_JSON", func() {
+		// Arrange
 		v := corestr.NewValidValue("hi")
 		j := v.Json()
+
+		// Act
 		actual := args.Map{"hasError": j.HasError()}
+
+		// Assert
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := v.JsonPtr()
@@ -266,10 +311,15 @@ func Test_C40_ValidValue_JSON(t *testing.T) {
 
 func Test_C40_ValidValues(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValues", func() {
+		// Arrange
 		vv := corestr.NewValidValues(5)
 		vv.Add("a")
 		vv.AddFull(true, "b", "msg")
+
+		// Act
 		actual := args.Map{"result": vv.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": vv.Count() != 2}
@@ -320,10 +370,15 @@ func Test_C40_ValidValues(t *testing.T) {
 
 func Test_C40_ValidValues_Add(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValues_Add", func() {
+		// Arrange
 		vv := corestr.NewValidValues(5)
 		v1 := corestr.ValidValue{Value: "a", IsValid: true}
 		vv.Adds(v1)
+
+		// Act
 		actual := args.Map{"result": vv.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		vv.AddsPtr(corestr.NewValidValue("b"))
@@ -342,10 +397,15 @@ func Test_C40_ValidValues_Add(t *testing.T) {
 
 func Test_C40_ValidValues_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValues_ConcatNew", func() {
+		// Arrange
 		vv := corestr.NewValidValues(2)
 		vv.Add("a")
 		cn := vv.ConcatNew(true)
+
+		// Act
 		actual := args.Map{"result": cn.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		cn2 := vv.ConcatNew(false)
@@ -363,13 +423,18 @@ func Test_C40_ValidValues_ConcatNew(t *testing.T) {
 
 func Test_C40_ValidValues_Find(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValues_Find", func() {
+		// Arrange
 		vv := corestr.NewValidValues(3)
 		vv.Add("a")
 		vv.Add("b")
 		found := vv.Find(func(i int, v *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return v, v.Value == "a", false
 		})
+
+		// Act
 		actual := args.Map{"result": len(found) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		found2 := corestr.EmptyValidValues().Find(func(i int, v *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
@@ -383,10 +448,15 @@ func Test_C40_ValidValues_Find(t *testing.T) {
 
 func Test_C40_ValidValues_Hashmap_Map(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValues_Hashmap_Map", func() {
+		// Arrange
 		vv := corestr.NewValidValues(2)
 		vv.Add("a")
 		hm := vv.Hashmap()
+
+		// Act
 		actual := args.Map{"result": hm.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		m := vv.Map()
@@ -404,8 +474,13 @@ func Test_C40_ValidValues_Hashmap_Map(t *testing.T) {
 
 func Test_C40_ValueStatus(t *testing.T) {
 	safeTest(t, "Test_C40_ValueStatus", func() {
+		// Arrange
 		vs := corestr.InvalidValueStatus("bad")
+
+		// Act
 		actual := args.Map{"result": vs.ValueValid.IsValid}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		vs2 := corestr.InvalidValueStatusNoMessage()
@@ -423,8 +498,13 @@ func Test_C40_ValueStatus(t *testing.T) {
 
 func Test_C40_KeyValuePair(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValuePair", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
+
+		// Act
 		actual := args.Map{"result": kv.KeyName() != "k"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": kv.VariableName() != "k"}
@@ -490,8 +570,13 @@ func Test_C40_KeyValuePair(t *testing.T) {
 
 func Test_C40_KeyValuePair_Numeric(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValuePair_Numeric", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "42"}
+
+		// Act
 		actual := args.Map{"result": kv.ValueInt(0) != 42}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": kv.ValueDefInt() != 42}
@@ -525,9 +610,14 @@ func Test_C40_KeyValuePair_Numeric(t *testing.T) {
 
 func Test_C40_KeyValuePair_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValuePair_JSON", func() {
+		// Arrange
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		j := kv.Json()
+
+		// Act
 		actual := args.Map{"hasError": j.HasError()}
+
+		// Assert
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kv.JsonPtr()
@@ -543,12 +633,17 @@ func Test_C40_KeyValuePair_JSON(t *testing.T) {
 
 func Test_C40_KeyValueCollection(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValueCollection", func() {
+		// Arrange
 		kvc := corestr.New.KeyValues.Cap(5)
 		kvc.Add("a", "1")
 		kvc.AddIf(true, "b", "2")
 		kvc.AddIf(false, "skip", "skip")
 		kvc.Adds(corestr.KeyValuePair{Key: "c", Value: "3"})
+
+		// Act
 		actual := args.Map{"result": kvc.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": kvc.Count() != 3}
@@ -637,12 +732,17 @@ func Test_C40_KeyValueCollection_AddMethods(t *testing.T) {
 
 func Test_C40_KeyValueCollection_Find(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValueCollection_Find", func() {
+		// Arrange
 		kvc := corestr.New.KeyValues.Cap(3)
 		kvc.Add("a", "1")
 		found := kvc.Find(func(i int, kv corestr.KeyValuePair) (corestr.KeyValuePair, bool, bool) {
 			return kv, kv.Key == "a", false
 		})
+
+		// Act
 		actual := args.Map{"result": len(found) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
@@ -650,10 +750,15 @@ func Test_C40_KeyValueCollection_Find(t *testing.T) {
 
 func Test_C40_KeyValueCollection_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValueCollection_JSON", func() {
+		// Arrange
 		kvc := corestr.New.KeyValues.Cap(2)
 		kvc.Add("a", "1")
 		j := kvc.Json()
+
+		// Act
 		actual := args.Map{"hasError": j.HasError()}
+
+		// Assert
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kvc.JsonPtr()
@@ -680,8 +785,13 @@ func Test_C40_KeyValueCollection_JSON(t *testing.T) {
 
 func Test_C40_KeyAnyValuePair(t *testing.T) {
 	safeTest(t, "Test_C40_KeyAnyValuePair", func() {
+		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: 42}
+
+		// Act
 		actual := args.Map{"result": kav.KeyName() != "k"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": kav.VariableName() != "k"}
@@ -735,8 +845,13 @@ func Test_C40_KeyAnyValuePair(t *testing.T) {
 
 func Test_C40_KeyAnyValuePair_NullValue(t *testing.T) {
 	safeTest(t, "Test_C40_KeyAnyValuePair_NullValue", func() {
+		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: nil}
+
+		// Act
 		actual := args.Map{"result": kav.IsValueNull()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		vs := kav.ValueString()
@@ -746,9 +861,14 @@ func Test_C40_KeyAnyValuePair_NullValue(t *testing.T) {
 
 func Test_C40_KeyAnyValuePair_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_KeyAnyValuePair_JSON", func() {
+		// Arrange
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: "v"}
 		j := kav.Json()
+
+		// Act
 		actual := args.Map{"hasError": j.HasError()}
+
+		// Assert
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kav.JsonPtr()
@@ -768,8 +888,13 @@ func Test_C40_KeyAnyValuePair_JSON(t *testing.T) {
 
 func Test_C40_LeftRight(t *testing.T) {
 	safeTest(t, "Test_C40_LeftRight", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("left", "right")
+
+		// Act
 		actual := args.Map{"result": lr.Left != "left"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": lr.Right != "right"}
@@ -827,9 +952,14 @@ func Test_C40_LeftRight(t *testing.T) {
 
 func Test_C40_LeftRight_IsEqual(t *testing.T) {
 	safeTest(t, "Test_C40_LeftRight_IsEqual", func() {
+		// Arrange
 		a := corestr.NewLeftRight("a", "b")
 		b := corestr.NewLeftRight("a", "b")
+
+		// Act
 		actual := args.Map{"result": a.IsEqual(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": a.IsEqual(a)}
@@ -847,9 +977,14 @@ func Test_C40_LeftRight_IsEqual(t *testing.T) {
 
 func Test_C40_LeftRight_Clone(t *testing.T) {
 	safeTest(t, "Test_C40_LeftRight_Clone", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("a", "b")
 		c := lr.Clone()
+
+		// Act
 		actual := args.Map{"result": c.Left != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
@@ -857,9 +992,14 @@ func Test_C40_LeftRight_Clone(t *testing.T) {
 
 func Test_C40_LeftRight_Regex(t *testing.T) {
 	safeTest(t, "Test_C40_LeftRight_Regex", func() {
+		// Arrange
 		lr := corestr.NewLeftRight("hello", "world")
 		re := regexp.MustCompile(`^hel`)
+
+		// Act
 		actual := args.Map{"result": lr.IsLeftRegexMatch(re)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": lr.IsRightRegexMatch(re)}
@@ -876,8 +1016,13 @@ func Test_C40_LeftRight_Regex(t *testing.T) {
 
 func Test_C40_LeftRight_FromSlice(t *testing.T) {
 	safeTest(t, "Test_C40_LeftRight_FromSlice", func() {
+		// Arrange
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": lr.Left != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		lr2 := corestr.LeftRightUsingSlice([]string{"a"})
@@ -921,8 +1066,13 @@ func Test_C40_LeftRight_FromSlice(t *testing.T) {
 
 func Test_C40_LeftMiddleRight(t *testing.T) {
 	safeTest(t, "Test_C40_LeftMiddleRight", func() {
+		// Arrange
 		lmr := corestr.NewLeftMiddleRight("l", "m", "r")
+
+		// Act
 		actual := args.Map{"result": lmr.Left != "l"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": lmr.Middle != "m"}
@@ -998,8 +1148,13 @@ func Test_C40_LeftMiddleRight(t *testing.T) {
 
 func Test_C40_CloneSlice(t *testing.T) {
 	safeTest(t, "Test_C40_CloneSlice", func() {
+		// Arrange
 		r := corestr.CloneSlice([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": len(r) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r2 := corestr.CloneSlice(nil)
@@ -1011,8 +1166,13 @@ func Test_C40_CloneSlice(t *testing.T) {
 
 func Test_C40_CloneSliceIf(t *testing.T) {
 	safeTest(t, "Test_C40_CloneSliceIf", func() {
+		// Arrange
 		r := corestr.CloneSliceIf(true, "a", "b")
+
+		// Act
 		actual := args.Map{"result": len(r) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r2 := corestr.CloneSliceIf(false, "a")
@@ -1028,8 +1188,13 @@ func Test_C40_CloneSliceIf(t *testing.T) {
 
 func Test_C40_AnyToString(t *testing.T) {
 	safeTest(t, "Test_C40_AnyToString", func() {
+		// Arrange
 		r := corestr.AnyToString(false, "hello")
+
+		// Act
 		actual := args.Map{"result": r == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r2 := corestr.AnyToString(true, "hello")
@@ -1045,9 +1210,14 @@ func Test_C40_AnyToString(t *testing.T) {
 
 func Test_C40_AllIndividualStringsOfStringsLength(t *testing.T) {
 	safeTest(t, "Test_C40_AllIndividualStringsOfStringsLength", func() {
+		// Arrange
 		s := [][]string{{"a", "b"}, {"c"}}
 		r := corestr.AllIndividualStringsOfStringsLength(&s)
+
+		// Act
 		actual := args.Map{"result": r != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": corestr.AllIndividualStringsOfStringsLength(nil) != 0}
@@ -1058,10 +1228,15 @@ func Test_C40_AllIndividualStringsOfStringsLength(t *testing.T) {
 
 func Test_C40_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 	safeTest(t, "Test_C40_AllIndividualsLengthOfSimpleSlices", func() {
+		// Arrange
 		ss1 := corestr.New.SimpleSlice.Lines("a", "b")
 		ss2 := corestr.New.SimpleSlice.Lines("c")
 		r := corestr.AllIndividualsLengthOfSimpleSlices(ss1, ss2)
+
+		// Act
 		actual := args.Map{"result": r != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": corestr.AllIndividualsLengthOfSimpleSlices() != 0}
@@ -1072,8 +1247,13 @@ func Test_C40_AllIndividualsLengthOfSimpleSlices(t *testing.T) {
 
 func Test_C40_StringUtils(t *testing.T) {
 	safeTest(t, "Test_C40_StringUtils", func() {
+		// Arrange
 		u := corestr.StringUtils
+
+		// Act
 		actual := args.Map{"result": u.WrapDouble("a") != `"a"`}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		actual := args.Map{"result": u.WrapSingle("a") != `'a'`}

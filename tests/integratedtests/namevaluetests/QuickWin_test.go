@@ -8,25 +8,40 @@ import (
 )
 
 func Test_QW_Collection_String_NilReceiver(t *testing.T) {
+	// Arrange
 	var c *namevalue.Collection[string, string]
 	s := c.String()
+
+	// Act
 	actual := args.Map{"result": s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
 func Test_QW_Collection_JsonString_NilReceiver(t *testing.T) {
+	// Arrange
 	defer func() { recover() }() // value receiver on nil pointer may panic
 	var c *namevalue.Collection[string, string]
 	s := c.JsonString()
+
+	// Act
 	actual := args.Map{"result": s != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
 func Test_QW_Instance_IsNull(t *testing.T) {
+	// Arrange
 	var inst *namevalue.Instance[string, string]
+
+	// Act
 	actual := args.Map{"result": inst.IsNull()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected null", actual)
 }

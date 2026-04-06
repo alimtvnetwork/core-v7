@@ -91,9 +91,14 @@ func Test_MustBeEmpty_NilError_DoesNotPanic(t *testing.T) {
 }
 
 func Test_MustBeEmpty_WithError_Panics(t *testing.T) {
+	// Arrange
 	defer func() {
 		recovered := recover()
+
+	// Act
 		actual := args.Map{"result": recovered == nil}
+
+	// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Expected panic but did not get one", actual)
 	}()

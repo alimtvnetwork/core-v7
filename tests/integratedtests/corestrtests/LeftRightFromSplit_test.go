@@ -14,15 +14,20 @@ import (
 
 func Test_LeftRightFromSplit(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplit", func() {
+		// Arrange
 		// Case 0: Normal key=value split
 		{
 			tc := leftRightFromSplitNormalTestCase
 			lr := corestr.LeftRightFromSplit("key=value", "=")
+
+		// Act
 			actual := args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -94,15 +99,20 @@ func Test_LeftRightFromSplit(t *testing.T) {
 
 func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitTrimmed", func() {
+		// Arrange
 		// Case 0: Trims whitespace
 		{
 			tc := leftRightFromSplitTrimmedTrimsTestCase
 			lr := corestr.LeftRightFromSplitTrimmed("  key  =  value  ", "=")
+
+		// Act
 			actual := args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -138,15 +148,20 @@ func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 
 func Test_LeftRightFromSplitFull(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitFull", func() {
+		// Arrange
 		// Case 0: Remainder in right
 		{
 			tc := leftRightFromSplitFullRemainderTestCase
 			lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
+
+		// Act
 			actual := args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 
@@ -182,15 +197,20 @@ func Test_LeftRightFromSplitFull(t *testing.T) {
 
 func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
 	safeTest(t, "Test_LeftRightFromSplitFullTrimmed", func() {
+		// Arrange
 		// Case 0: Remainder trimmed
 		{
 			tc := leftRightFromSplitFullTrimmedRemainderTestCase
 			lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c : d ", ":")
+
+		// Act
 			actual := args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
 			}
+
+		// Assert
 			tc.ShouldBeEqualMapFirst(t, actual)
 		}
 

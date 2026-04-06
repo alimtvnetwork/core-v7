@@ -14,8 +14,13 @@ import (
 
 func Test_C30_Collection_Length_Nil(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Length_Nil", func() {
+		// Arrange
 		var c *corestr.Collection
+
+		// Act
 		actual := args.Map{"result": c.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
@@ -23,8 +28,13 @@ func Test_C30_Collection_Length_Nil(t *testing.T) {
 
 func Test_C30_Collection_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasAnyItem", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": c.HasAnyItem()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		c.Add("x")
@@ -36,8 +46,13 @@ func Test_C30_Collection_HasAnyItem(t *testing.T) {
 
 func Test_C30_Collection_LastIndex(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_LastIndex", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": c.LastIndex() != -1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
@@ -45,8 +60,13 @@ func Test_C30_Collection_LastIndex(t *testing.T) {
 
 func Test_C30_Collection_HasIndex(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasIndex", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": c.HasIndex(1)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.HasIndex(5)}
@@ -78,8 +98,13 @@ func Test_C30_Collection_StringJSON(t *testing.T) {
 
 func Test_C30_Collection_RemoveAt(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_RemoveAt", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c"})
+
+		// Act
 		actual := args.Map{"result": c.RemoveAt(1)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.RemoveAt(-1)}
@@ -93,8 +118,13 @@ func Test_C30_Collection_RemoveAt(t *testing.T) {
 
 func Test_C30_Collection_Count(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Count", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.Count() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -102,8 +132,13 @@ func Test_C30_Collection_Count(t *testing.T) {
 
 func Test_C30_Collection_Capacity(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Capacity", func() {
+		// Arrange
 		c := corestr.New.Collection.Cap(10)
+
+		// Act
 		actual := args.Map{"result": c.Capacity() < 10}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected >= 10", actual)
 	})
@@ -118,8 +153,13 @@ func Test_C30_Collection_Capacity_Nil(t *testing.T) {
 
 func Test_C30_Collection_LengthLock(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_LengthLock", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.LengthLock() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -127,9 +167,14 @@ func Test_C30_Collection_LengthLock(t *testing.T) {
 
 func Test_C30_Collection_IsEquals(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a", "b"})
 		b := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
@@ -137,9 +182,14 @@ func Test_C30_Collection_IsEquals(t *testing.T) {
 
 func Test_C30_Collection_IsEqualsWithSensitive(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEqualsWithSensitive", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"A"})
 		b := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": a.IsEqualsWithSensitive(true, b)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 		actual := args.Map{"result": a.IsEqualsWithSensitive(false, b)}
@@ -150,8 +200,13 @@ func Test_C30_Collection_IsEqualsWithSensitive(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_NilBoth(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_NilBoth", func() {
+		// Arrange
 		var a, b *corestr.Collection
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -159,8 +214,13 @@ func Test_C30_Collection_IsEquals_NilBoth(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_OneNil(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_OneNil", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(nil)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
@@ -168,9 +228,14 @@ func Test_C30_Collection_IsEquals_OneNil(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_BothEmpty(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_BothEmpty", func() {
+		// Arrange
 		a := corestr.New.Collection.Empty()
 		b := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -178,9 +243,14 @@ func Test_C30_Collection_IsEquals_BothEmpty(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_OneEmpty(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_OneEmpty", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a"})
 		b := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
@@ -188,9 +258,14 @@ func Test_C30_Collection_IsEquals_OneEmpty(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_DiffLen(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_DiffLen", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a"})
 		b := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(b)}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
@@ -198,8 +273,13 @@ func Test_C30_Collection_IsEquals_DiffLen(t *testing.T) {
 
 func Test_C30_Collection_IsEquals_SamePtr(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEquals_SamePtr", func() {
+		// Arrange
 		a := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": a.IsEquals(a)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for same pointer", actual)
 	})
@@ -207,8 +287,13 @@ func Test_C30_Collection_IsEquals_SamePtr(t *testing.T) {
 
 func Test_C30_Collection_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEmptyLock", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": c.IsEmptyLock()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -216,8 +301,13 @@ func Test_C30_Collection_IsEmptyLock(t *testing.T) {
 
 func Test_C30_Collection_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsEmpty", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": c.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -225,8 +315,13 @@ func Test_C30_Collection_IsEmpty(t *testing.T) {
 
 func Test_C30_Collection_HasItems(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasItems", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.HasItems()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -234,9 +329,14 @@ func Test_C30_Collection_HasItems(t *testing.T) {
 
 func Test_C30_Collection_AddLock(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddLock", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddLock("a")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -244,10 +344,15 @@ func Test_C30_Collection_AddLock(t *testing.T) {
 
 func Test_C30_Collection_AddNonEmpty(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddNonEmpty", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddNonEmpty("")
 		c.AddNonEmpty("a")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -255,10 +360,15 @@ func Test_C30_Collection_AddNonEmpty(t *testing.T) {
 
 func Test_C30_Collection_AddNonEmptyWhitespace(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddNonEmptyWhitespace", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddNonEmptyWhitespace("  ")
 		c.AddNonEmptyWhitespace("a")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -266,9 +376,14 @@ func Test_C30_Collection_AddNonEmptyWhitespace(t *testing.T) {
 
 func Test_C30_Collection_Add(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Add", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.Add("a")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -276,10 +391,15 @@ func Test_C30_Collection_Add(t *testing.T) {
 
 func Test_C30_Collection_AddError(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddError", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddError(nil)
 		c.AddError(errors.New("err"))
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -287,8 +407,13 @@ func Test_C30_Collection_AddError(t *testing.T) {
 
 func Test_C30_Collection_AsDefaultError(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AsDefaultError", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
+
+		// Act
 		actual := args.Map{"result": c.AsDefaultError() != nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		c.Add("err1")
@@ -307,10 +432,15 @@ func Test_C30_Collection_AsError(t *testing.T) {
 
 func Test_C30_Collection_AddIf(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddIf", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddIf(false, "skip")
 		c.AddIf(true, "add")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -318,9 +448,14 @@ func Test_C30_Collection_AddIf(t *testing.T) {
 
 func Test_C30_Collection_EachItemSplitBy(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_EachItemSplitBy", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a,b", "c"})
 		r := c.EachItemSplitBy(",")
+
+		// Act
 		actual := args.Map{"result": len(r)}
+
+		// Assert
 		expected := args.Map{"result": 3}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
@@ -328,9 +463,14 @@ func Test_C30_Collection_EachItemSplitBy(t *testing.T) {
 
 func Test_C30_Collection_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_ConcatNew", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
 		n := c.ConcatNew(0, "b", "c")
+
+		// Act
 		actual := args.Map{"result": n.Length() != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
@@ -338,9 +478,14 @@ func Test_C30_Collection_ConcatNew(t *testing.T) {
 
 func Test_C30_Collection_ConcatNew_Empty(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_ConcatNew_Empty", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
 		n := c.ConcatNew(0)
+
+		// Act
 		actual := args.Map{"result": n.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -362,10 +507,15 @@ func Test_C30_Collection_ToDefaultError(t *testing.T) {
 
 func Test_C30_Collection_AddIfMany(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddIfMany", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddIfMany(false, "a", "b")
 		c.AddIfMany(true, "a", "b")
+
+		// Act
 		actual := args.Map{"result": c.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -373,9 +523,14 @@ func Test_C30_Collection_AddIfMany(t *testing.T) {
 
 func Test_C30_Collection_AddFunc(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddFunc", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddFunc(func() string { return "x" })
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -383,10 +538,15 @@ func Test_C30_Collection_AddFunc(t *testing.T) {
 
 func Test_C30_Collection_AddFuncErr(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_AddFuncErr", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		c.AddFuncErr(func() (string, error) { return "x", nil }, func(e error) {})
 		c.AddFuncErr(func() (string, error) { return "", errors.New("e") }, func(e error) {})
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -493,8 +653,13 @@ func Test_C30_Collection_AddWithWgLock(t *testing.T) {
 
 func Test_C30_Collection_IndexAt(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IndexAt", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": c.IndexAt(1) != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
@@ -502,8 +667,13 @@ func Test_C30_Collection_IndexAt(t *testing.T) {
 
 func Test_C30_Collection_SafeIndexAtUsingLength(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_SafeIndexAtUsingLength", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.SafeIndexAtUsingLength("def", 1, 0) != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		actual := args.Map{"result": c.SafeIndexAtUsingLength("def", 0, 1) != "def"}
@@ -514,8 +684,13 @@ func Test_C30_Collection_SafeIndexAtUsingLength(t *testing.T) {
 
 func Test_C30_Collection_First(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_First", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.First() != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
@@ -523,8 +698,13 @@ func Test_C30_Collection_First(t *testing.T) {
 
 func Test_C30_Collection_Last(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Last", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": c.Last() != "b"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
@@ -578,8 +758,13 @@ func Test_C30_Collection_Reverse(t *testing.T) {
 
 func Test_C30_Collection_GetPagesSize(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_GetPagesSize", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b", "c", "d", "e"})
+
+		// Act
 		actual := args.Map{"result": c.GetPagesSize(2) != 3}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		actual := args.Map{"result": c.GetPagesSize(0) != 0}
@@ -726,9 +911,14 @@ func Test_C30_Collection_AddsNonEmptyPtrLock(t *testing.T) {
 
 func Test_C30_Collection_UniqueBoolMap(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_UniqueBoolMap", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "a", "b"})
 		m := c.UniqueBoolMap()
+
+		// Act
 		actual := args.Map{"result": len(m) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -757,9 +947,14 @@ func Test_C30_Collection_UniqueListLock(t *testing.T) {
 
 func Test_C30_Collection_Filter(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Filter", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		r := c.Filter(func(s string, i int) (string, bool, bool) { return s, true, false })
+
+		// Act
 		actual := args.Map{"result": len(r) != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		c2 := corestr.New.Collection.Empty()
@@ -809,9 +1004,14 @@ func Test_C30_Collection_FilterPtrLock(t *testing.T) {
 
 func Test_C30_Collection_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_NonEmptyList", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"", "a"})
 		r := c.NonEmptyList()
+
+		// Act
 		actual := args.Map{"result": len(r) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = c.NonEmptyListPtr()
@@ -874,8 +1074,13 @@ func Test_C30_Collection_ListCopyPtrLock(t *testing.T) {
 
 func Test_C30_Collection_Has(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_Has", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.Has("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.Has("z")}
@@ -897,9 +1102,14 @@ func Test_C30_Collection_HasLock(t *testing.T) {
 
 func Test_C30_Collection_HasPtr(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasPtr", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
 		s := "a"
+
+		// Act
 		actual := args.Map{"result": c.HasPtr(&s)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.HasPtr(nil)}
@@ -910,8 +1120,13 @@ func Test_C30_Collection_HasPtr(t *testing.T) {
 
 func Test_C30_Collection_HasAll(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasAll", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": c.HasAll("a", "b")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.HasAll("a", "z")}
@@ -926,9 +1141,14 @@ func Test_C30_Collection_HasAll(t *testing.T) {
 
 func Test_C30_Collection_SortedListAsc(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_SortedListAsc", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"b", "a"})
 		r := c.SortedListAsc()
+
+		// Act
 		actual := args.Map{"result": r[0] != "a"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 		c2 := corestr.New.Collection.Empty()
@@ -963,8 +1183,13 @@ func Test_C30_Collection_SortedListDsc(t *testing.T) {
 
 func Test_C30_Collection_HasUsingSensitivity(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_HasUsingSensitivity", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"A"})
+
+		// Act
 		actual := args.Map{"result": c.HasUsingSensitivity("A", true)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.HasUsingSensitivity("a", false)}
@@ -975,9 +1200,14 @@ func Test_C30_Collection_HasUsingSensitivity(t *testing.T) {
 
 func Test_C30_Collection_IsContainsPtr(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsContainsPtr", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
 		s := "a"
+
+		// Act
 		actual := args.Map{"result": c.IsContainsPtr(&s)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -985,9 +1215,14 @@ func Test_C30_Collection_IsContainsPtr(t *testing.T) {
 
 func Test_C30_Collection_GetHashsetPlusHasAll(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_GetHashsetPlusHasAll", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		_, has := c.GetHashsetPlusHasAll([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": has}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		_, has2 := c.GetHashsetPlusHasAll(nil)
@@ -999,8 +1234,13 @@ func Test_C30_Collection_GetHashsetPlusHasAll(t *testing.T) {
 
 func Test_C30_Collection_IsContainsAllSlice(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsContainsAllSlice", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
+
+		// Act
 		actual := args.Map{"result": c.IsContainsAllSlice([]string{"a"})}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": c.IsContainsAllSlice([]string{})}
@@ -1011,8 +1251,13 @@ func Test_C30_Collection_IsContainsAllSlice(t *testing.T) {
 
 func Test_C30_Collection_IsContainsAll(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_IsContainsAll", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": c.IsContainsAll("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -1027,9 +1272,14 @@ func Test_C30_Collection_IsContainsAllLock(t *testing.T) {
 
 func Test_C30_Collection_New(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_New", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		n := c.New("a", "b")
+
+		// Act
 		actual := args.Map{"result": n.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		n2 := c.New()
@@ -1086,9 +1336,14 @@ func Test_C30_Collection_MergeSlicesOfSlice(t *testing.T) {
 
 func Test_C30_Collection_GetAllExceptCollection(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_GetAllExceptCollection", func() {
+		// Arrange
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 		r := c.GetAllExceptCollection(corestr.New.Collection.Strings([]string{"a"}))
+
+		// Act
 		actual := args.Map{"result": len(r) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		r2 := c.GetAllExceptCollection(nil)
@@ -1231,10 +1486,15 @@ func Test_C30_Collection_ParseInjectUsingJson(t *testing.T) {
 
 func Test_C30_Collection_ParseInjectUsingJson_Error(t *testing.T) {
 	safeTest(t, "Test_C30_Collection_ParseInjectUsingJson_Error", func() {
+		// Arrange
 		c := corestr.New.Collection.Empty()
 		bad := corejson.NewResult.UsingString(`invalid`)
 		_, err := c.ParseInjectUsingJson(bad)
+
+		// Act
 		actual := args.Map{"result": err == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})

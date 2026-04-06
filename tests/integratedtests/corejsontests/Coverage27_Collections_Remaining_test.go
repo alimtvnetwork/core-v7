@@ -11,12 +11,18 @@ import (
 // ── ResultsCollection remaining methods ──
 
 func Test_C27_RC_Length_Nil(t *testing.T) {
+	// Arrange
 	var rc *corejson.ResultsCollection
+
+	// Act
 	actual := args.Map{"result": rc.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 func Test_C27_RC_LastIndex(t *testing.T) { _ = corejson.NewResultsCollection.Empty().LastIndex() }
+	// Arrange
 func Test_C27_RC_IsEmpty(t *testing.T) { _ = corejson.NewResultsCollection.Empty().IsEmpty() }
 func Test_C27_RC_HasAnyItem(t *testing.T) { _ = corejson.NewResultsCollection.Empty().HasAnyItem() }
 
@@ -50,7 +56,11 @@ func Test_C27_RC_Take(t *testing.T) {
 	rc := corejson.NewResultsCollection.Empty()
 	rc.Add(corejson.New("a")).Add(corejson.New("b"))
 	taken := rc.Take(1)
+
+	// Act
 	actual := args.Map{"result": taken.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }

@@ -10,12 +10,14 @@ import (
 // ── BasicByte via newBasicByteCreator ──
 
 func Test_Cov3_BasicByte_Create_Default(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"min":          bb.Min(),
 		"max":          bb.Max(),
@@ -26,6 +28,8 @@ func Test_Cov3_BasicByte_Create_Default(t *testing.T) {
 		"length":       bb.Length(),
 		"count":        bb.Count(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"min":          byte(0),
 		"max":          byte(2),
@@ -40,17 +44,21 @@ func Test_Cov3_BasicByte_Create_Default(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_IsAnyOf(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"isAnyEmpty":   bb.IsAnyOf(1),
 		"isAnyMatch":  bb.IsAnyOf(1, 0, 1, 2),
 		"isAnyNoMatch": bb.IsAnyOf(1, 0, 2),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isAnyEmpty":   true,
 		"isAnyMatch":  true,
@@ -60,16 +68,20 @@ func Test_Cov3_BasicByte_IsAnyOf(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_IsAnyNamesOf(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"matchName":   bb.IsAnyNamesOf(1, "Active"),
 		"noMatchName": bb.IsAnyNamesOf(1, "Invalid"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"matchName":   true,
 		"noMatchName": false,
@@ -78,15 +90,19 @@ func Test_Cov3_BasicByte_IsAnyNamesOf(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_GetValueByString(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"byName": bb.GetValueByString("Active"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"byName": byte(1),
 	}
@@ -94,6 +110,7 @@ func Test_Cov3_BasicByte_GetValueByString(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_GetValueByName(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -103,11 +120,14 @@ func Test_Cov3_BasicByte_GetValueByName(t *testing.T) {
 	val, err := bb.GetValueByName("Active")
 	_, errNotFound := bb.GetValueByName("NotExist")
 
+	// Act
 	actual := args.Map{
 		"val":      val,
 		"noErr":    err == nil,
 		"hasError": errNotFound != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"val":      byte(1),
 		"noErr":    true,
@@ -117,15 +137,19 @@ func Test_Cov3_BasicByte_GetValueByName(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_GetStringValue(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"val": bb.GetStringValue(0),
 	}
+
+	// Assert
 	expected := args.Map{
 		"val": "Invalid",
 	}
@@ -133,15 +157,19 @@ func Test_Cov3_BasicByte_GetStringValue(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_Ranges(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"rangesLen": len(bb.Ranges()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"rangesLen": 2,
 	}
@@ -149,6 +177,7 @@ func Test_Cov3_BasicByte_Ranges(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_Hashmap(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -158,10 +187,13 @@ func Test_Cov3_BasicByte_Hashmap(t *testing.T) {
 	hm := bb.Hashmap()
 	hmPtr := bb.HashmapPtr()
 
+	// Act
 	actual := args.Map{
 		"hmHasItems":    len(hm) > 0,
 		"hmPtrNotNil":   hmPtr != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hmHasItems":    true,
 		"hmPtrNotNil":   true,
@@ -170,6 +202,7 @@ func Test_Cov3_BasicByte_Hashmap(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_ToEnumJsonBytes(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -179,11 +212,14 @@ func Test_Cov3_BasicByte_ToEnumJsonBytes(t *testing.T) {
 	jsonBytes, err := bb.ToEnumJsonBytes(0)
 	_, errNotFound := bb.ToEnumJsonBytes(99)
 
+	// Act
 	actual := args.Map{
 		"hasBytes":  len(jsonBytes) > 0,
 		"noErr":     err == nil,
 		"notFound":  errNotFound != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasBytes":  true,
 		"noErr":     true,
@@ -193,6 +229,7 @@ func Test_Cov3_BasicByte_ToEnumJsonBytes(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_AppendPrependJoinValue(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -201,9 +238,12 @@ func Test_Cov3_BasicByte_AppendPrependJoinValue(t *testing.T) {
 
 	result := bb.AppendPrependJoinValue(".", 1, 0)
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -211,15 +251,19 @@ func Test_Cov3_BasicByte_AppendPrependJoinValue(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_ToNumberString(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"notEmpty": bb.ToNumberString(1) != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -227,6 +271,7 @@ func Test_Cov3_BasicByte_ToNumberString(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_UnmarshallToValue(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -242,6 +287,7 @@ func Test_Cov3_BasicByte_UnmarshallToValue(t *testing.T) {
 	// valid name
 	val4, err4 := bb.UnmarshallToValue(false, []byte("Active"))
 
+	// Act
 	actual := args.Map{
 		"nilMapped":    val1,
 		"nilMappedErr": err1 == nil,
@@ -251,6 +297,8 @@ func Test_Cov3_BasicByte_UnmarshallToValue(t *testing.T) {
 		"validVal":     val4,
 		"validNoErr":   err4 == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"nilMapped":    byte(0),
 		"nilMappedErr": true,
@@ -264,15 +312,19 @@ func Test_Cov3_BasicByte_UnmarshallToValue(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_EnumType(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"enumType": bb.EnumType().String(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"enumType": "Byte",
 	}
@@ -280,6 +332,7 @@ func Test_Cov3_BasicByte_EnumType(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_AsBasicByter(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -288,9 +341,12 @@ func Test_Cov3_BasicByte_AsBasicByter(t *testing.T) {
 
 	byter := bb.AsBasicByter()
 
+	// Act
 	actual := args.Map{
 		"notNil": byter != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil": true,
 	}
@@ -300,6 +356,7 @@ func Test_Cov3_BasicByte_AsBasicByter(t *testing.T) {
 // ── BasicByte with alias map ──
 
 func Test_Cov3_BasicByte_WithAliasMap(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.DefaultWithAliasMap(
 		myEnum(0),
@@ -309,10 +366,13 @@ func Test_Cov3_BasicByte_WithAliasMap(t *testing.T) {
 
 	val, err := bb.GetValueByName("on")
 
+	// Act
 	actual := args.Map{
 		"aliasVal": val,
 		"noErr":    err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"aliasVal": byte(1),
 		"noErr":    true,
@@ -321,6 +381,7 @@ func Test_Cov3_BasicByte_WithAliasMap(t *testing.T) {
 }
 
 func Test_Cov3_BasicByte_AllCases(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.DefaultAllCases(
 		myEnum(0),
@@ -329,10 +390,13 @@ func Test_Cov3_BasicByte_AllCases(t *testing.T) {
 
 	val, err := bb.GetValueByName("active")
 
+	// Act
 	actual := args.Map{
 		"lowerVal": val,
 		"noErr":    err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"lowerVal": byte(1),
 		"noErr":    true,
@@ -343,6 +407,7 @@ func Test_Cov3_BasicByte_AllCases(t *testing.T) {
 // ── numberEnumBase methods via BasicByte ──
 
 func Test_Cov3_NumberEnumBase_MinMaxAny(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -351,10 +416,13 @@ func Test_Cov3_NumberEnumBase_MinMaxAny(t *testing.T) {
 
 	min, max := bb.MinMaxAny()
 
+	// Act
 	actual := args.Map{
 		"min": min,
 		"max": max,
 	}
+
+	// Assert
 	expected := args.Map{
 		"min": byte(0),
 		"max": byte(1),
@@ -363,12 +431,14 @@ func Test_Cov3_NumberEnumBase_MinMaxAny(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_ValueStrings(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"minValStr":     bb.MinValueString() != "",
 		"maxValStr":     bb.MaxValueString() != "",
@@ -378,6 +448,8 @@ func Test_Cov3_NumberEnumBase_ValueStrings(t *testing.T) {
 		"rangesInvalid": bb.RangesInvalidMessage() != "",
 		"rangesErr":     bb.RangesInvalidErr() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"minValStr":     true,
 		"maxValStr":     true,
@@ -391,17 +463,21 @@ func Test_Cov3_NumberEnumBase_ValueStrings(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_StringRanges(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"strRangesLen":    len(bb.StringRanges()),
 		"strRangesPtrLen": len(bb.StringRangesPtr()),
 		"namesHashLen":    len(bb.NamesHashset()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"strRangesLen":    2,
 		"strRangesPtrLen": 2,
@@ -411,6 +487,7 @@ func Test_Cov3_NumberEnumBase_StringRanges(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_DynamicMap(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -420,10 +497,13 @@ func Test_Cov3_NumberEnumBase_DynamicMap(t *testing.T) {
 	dm := bb.RangesDynamicMap()
 	dm2 := bb.DynamicMap()
 
+	// Act
 	actual := args.Map{
 		"dmLen":  len(dm),
 		"dm2Len": len(dm2),
 	}
+
+	// Assert
 	expected := args.Map{
 		"dmLen":  2,
 		"dm2Len": 2,
@@ -432,6 +512,7 @@ func Test_Cov3_NumberEnumBase_DynamicMap(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_IntegerEnumRanges(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -440,9 +521,12 @@ func Test_Cov3_NumberEnumBase_IntegerEnumRanges(t *testing.T) {
 
 	ranges := bb.IntegerEnumRanges()
 
+	// Act
 	actual := args.Map{
 		"len": len(ranges),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 2,
 	}
@@ -450,6 +534,7 @@ func Test_Cov3_NumberEnumBase_IntegerEnumRanges(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_AllNameValues(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -458,9 +543,12 @@ func Test_Cov3_NumberEnumBase_AllNameValues(t *testing.T) {
 
 	anv := bb.AllNameValues()
 
+	// Act
 	actual := args.Map{
 		"len": len(anv),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 2,
 	}
@@ -468,6 +556,7 @@ func Test_Cov3_NumberEnumBase_AllNameValues(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_KeyAnyValues(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -477,10 +566,13 @@ func Test_Cov3_NumberEnumBase_KeyAnyValues(t *testing.T) {
 	kav := bb.KeyAnyValues()
 	kvi := bb.KeyValIntegers()
 
+	// Act
 	actual := args.Map{
 		"kavLen": len(kav),
 		"kviLen": len(kvi),
 	}
+
+	// Assert
 	expected := args.Map{
 		"kavLen": 2,
 		"kviLen": 2,
@@ -489,6 +581,7 @@ func Test_Cov3_NumberEnumBase_KeyAnyValues(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_Loop(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -507,10 +600,13 @@ func Test_Cov3_NumberEnumBase_Loop(t *testing.T) {
 		return false
 	})
 
+	// Act
 	actual := args.Map{
 		"loopCount":    count,
 		"intLoopCount": intCount,
 	}
+
+	// Assert
 	expected := args.Map{
 		"loopCount":    2,
 		"intLoopCount": 2,
@@ -519,6 +615,7 @@ func Test_Cov3_NumberEnumBase_Loop(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_LoopBreak(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -531,9 +628,12 @@ func Test_Cov3_NumberEnumBase_LoopBreak(t *testing.T) {
 		return true // break after first
 	})
 
+	// Act
 	actual := args.Map{
 		"breakCount": count,
 	}
+
+	// Assert
 	expected := args.Map{
 		"breakCount": 1,
 	}
@@ -541,6 +641,7 @@ func Test_Cov3_NumberEnumBase_LoopBreak(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_Format(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -549,9 +650,12 @@ func Test_Cov3_NumberEnumBase_Format(t *testing.T) {
 
 	result := bb.Format("Enum of {type-name} - {name} - {value}", byte(1))
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -559,6 +663,7 @@ func Test_Cov3_NumberEnumBase_Format(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_NameWithValue(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -569,11 +674,14 @@ func Test_Cov3_NumberEnumBase_NameWithValue(t *testing.T) {
 	nvOpt := bb.NameWithValueOption(byte(1), true)
 	nvOptNo := bb.NameWithValueOption(byte(1), false)
 
+	// Act
 	actual := args.Map{
 		"nv":      nv != "",
 		"nvOpt":   nvOpt != "",
 		"nvOptNo": nvOptNo != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"nv":      true,
 		"nvOpt":   true,
@@ -583,6 +691,7 @@ func Test_Cov3_NumberEnumBase_NameWithValue(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_RangesMap(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -592,10 +701,13 @@ func Test_Cov3_NumberEnumBase_RangesMap(t *testing.T) {
 	rm := bb.RangesMap()
 	rism := bb.RangesIntegerStringMap()
 
+	// Act
 	actual := args.Map{
 		"rmLen":   len(rm),
 		"rismLen": len(rism),
 	}
+
+	// Assert
 	expected := args.Map{
 		"rmLen":   2,
 		"rismLen": 2,
@@ -604,6 +716,7 @@ func Test_Cov3_NumberEnumBase_RangesMap(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_OnlySupportedErr(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -614,11 +727,14 @@ func Test_Cov3_NumberEnumBase_OnlySupportedErr(t *testing.T) {
 	hasErr := bb.OnlySupportedErr("Invalid")
 	msgErr := bb.OnlySupportedMsgErr("context", "Invalid")
 
+	// Act
 	actual := args.Map{
 		"noErr":  noErr == nil,
 		"hasErr": hasErr != nil,
 		"msgErr": msgErr != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":  true,
 		"hasErr": true,
@@ -628,6 +744,7 @@ func Test_Cov3_NumberEnumBase_OnlySupportedErr(t *testing.T) {
 }
 
 func Test_Cov3_NumberEnumBase_JsonString(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -638,11 +755,14 @@ func Test_Cov3_NumberEnumBase_JsonString(t *testing.T) {
 	es := bb.ToEnumString(byte(1))
 	tn := bb.ToName(byte(1))
 
+	// Act
 	actual := args.Map{
 		"js": js != "",
 		"es": es != "",
 		"tn": tn != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"js": true,
 		"es": true,
@@ -654,11 +774,13 @@ func Test_Cov3_NumberEnumBase_JsonString(t *testing.T) {
 // ── BasicString ──
 
 func Test_Cov3_BasicString_Create(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"min":           bs.Min(),
 		"max":           bs.Max(),
@@ -668,6 +790,8 @@ func Test_Cov3_BasicString_Create(t *testing.T) {
 		"isValidActive": bs.IsValidRange("Active"),
 		"isValidBad":    bs.IsValidRange("NotExist"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"min":           bs.Min(),
 		"max":           bs.Max(),
@@ -681,16 +805,20 @@ func Test_Cov3_BasicString_Create(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_IsAnyOf(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"empty":   bs.IsAnyOf("x"),
 		"match":   bs.IsAnyOf("Active", "Active", "Invalid"),
 		"noMatch": bs.IsAnyOf("Active", "Invalid"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"empty":   true,
 		"match":   true,
@@ -700,15 +828,19 @@ func Test_Cov3_BasicString_IsAnyOf(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_IsAnyNamesOf(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"match":   bs.IsAnyNamesOf("Active", "Active"),
 		"noMatch": bs.IsAnyNamesOf("Active", "Invalid"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"match":   true,
 		"noMatch": false,
@@ -717,15 +849,19 @@ func Test_Cov3_BasicString_IsAnyNamesOf(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_GetNameByIndex(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active", "Inactive"},
 	)
 
+	// Act
 	actual := args.Map{
 		"valid":   bs.GetNameByIndex(1),
 		"invalid": bs.GetNameByIndex(99),
 	}
+
+	// Assert
 	expected := args.Map{
 		"valid":   "Active",
 		"invalid": "",
@@ -734,16 +870,20 @@ func Test_Cov3_BasicString_GetNameByIndex(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_GetIndexByName(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"found":   bs.GetIndexByName("Active"),
 		"empty":   bs.GetIndexByName(""),
 		"missing": bs.GetIndexByName("NotExist"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"found":   bs.GetIndexByName("Active"),
 		"empty":   -1,
@@ -753,11 +893,13 @@ func Test_Cov3_BasicString_GetIndexByName(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_Ranges(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"rangesLen":   len(bs.Ranges()),
 		"hashsetLen":  len(bs.Hashset()),
@@ -765,6 +907,8 @@ func Test_Cov3_BasicString_Ranges(t *testing.T) {
 		"integersLen": len(bs.RangesIntegers()),
 		"nameIdxLen":  len(bs.NameWithIndexMap()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"rangesLen":   2,
 		"hashsetLen":  len(bs.Hashset()),
@@ -776,6 +920,7 @@ func Test_Cov3_BasicString_Ranges(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_GetValueByName(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
@@ -784,11 +929,14 @@ func Test_Cov3_BasicString_GetValueByName(t *testing.T) {
 	val, err := bs.GetValueByName("Active")
 	_, errNotFound := bs.GetValueByName("NotExist")
 
+	// Act
 	actual := args.Map{
 		"val":      val,
 		"noErr":    err == nil,
 		"hasError": errNotFound != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"val":      "Active",
 		"noErr":    true,
@@ -798,6 +946,7 @@ func Test_Cov3_BasicString_GetValueByName(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_ToEnumJsonBytes(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
@@ -806,11 +955,14 @@ func Test_Cov3_BasicString_ToEnumJsonBytes(t *testing.T) {
 	jsonBytes, err := bs.ToEnumJsonBytes("Active")
 	_, errBad := bs.ToEnumJsonBytes("NotExist")
 
+	// Act
 	actual := args.Map{
 		"hasBytes":  len(jsonBytes) > 0,
 		"noErr":     err == nil,
 		"errOnBad":  errBad != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasBytes":  true,
 		"noErr":     true,
@@ -820,6 +972,7 @@ func Test_Cov3_BasicString_ToEnumJsonBytes(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_UnmarshallToValue(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
@@ -830,6 +983,7 @@ func Test_Cov3_BasicString_UnmarshallToValue(t *testing.T) {
 	val3, err3 := bs.UnmarshallToValue(true, []byte(""))
 	val4, err4 := bs.UnmarshallToValue(false, []byte("Active"))
 
+	// Act
 	actual := args.Map{
 		"nilMapped":   val1,
 		"nilMapErr":   err1 == nil,
@@ -839,6 +993,8 @@ func Test_Cov3_BasicString_UnmarshallToValue(t *testing.T) {
 		"validVal":    val4,
 		"validErr":    err4 == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"nilMapped":   val1,
 		"nilMapErr":   true,
@@ -852,14 +1008,18 @@ func Test_Cov3_BasicString_UnmarshallToValue(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_EnumType(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"enumType": bs.EnumType().String(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"enumType": "String",
 	}
@@ -867,6 +1027,7 @@ func Test_Cov3_BasicString_EnumType(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_AppendPrependJoinValue(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
@@ -874,9 +1035,12 @@ func Test_Cov3_BasicString_AppendPrependJoinValue(t *testing.T) {
 
 	result := bs.AppendPrependJoinValue(".", "Active", "Invalid")
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -884,6 +1048,7 @@ func Test_Cov3_BasicString_AppendPrependJoinValue(t *testing.T) {
 }
 
 func Test_Cov3_BasicString_OnlySupportedErr(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create(
 		"testStringEnum",
 		[]string{"Invalid", "Active"},
@@ -893,11 +1058,14 @@ func Test_Cov3_BasicString_OnlySupportedErr(t *testing.T) {
 	hasErr := bs.OnlySupportedErr("Invalid")
 	msgErr := bs.OnlySupportedMsgErr("context", "Invalid")
 
+	// Act
 	actual := args.Map{
 		"noErr":  noErr == nil,
 		"hasErr": hasErr != nil,
 		"msgErr": msgErr != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":  true,
 		"hasErr": true,
@@ -909,13 +1077,17 @@ func Test_Cov3_BasicString_OnlySupportedErr(t *testing.T) {
 // ── differCheckerImpl ──
 
 func Test_Cov3_DifferChecker_GetSingleDiffResult(t *testing.T) {
+	// Arrange
 	leftResult := enumimpl.DefaultDiffCheckerImpl.GetSingleDiffResult(true, "L", "R")
 	rightResult := enumimpl.DefaultDiffCheckerImpl.GetSingleDiffResult(false, "L", "R")
 
+	// Act
 	actual := args.Map{
 		"left":  leftResult,
 		"right": rightResult,
 	}
+
+	// Assert
 	expected := args.Map{
 		"left":  "L",
 		"right": "R",
@@ -924,11 +1096,15 @@ func Test_Cov3_DifferChecker_GetSingleDiffResult(t *testing.T) {
 }
 
 func Test_Cov3_DifferChecker_GetResultOnKeyMissing(t *testing.T) {
+	// Arrange
 	result := enumimpl.DefaultDiffCheckerImpl.GetResultOnKeyMissingInRightExistInLeft("key", "val")
 
+	// Act
 	actual := args.Map{
 		"result": result,
 	}
+
+	// Assert
 	expected := args.Map{
 		"result": "val",
 	}
@@ -936,12 +1112,15 @@ func Test_Cov3_DifferChecker_GetResultOnKeyMissing(t *testing.T) {
 }
 
 func Test_Cov3_DifferChecker_IsEqual(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"regardlessSame": enumimpl.DefaultDiffCheckerImpl.IsEqual(true, 1, 1),
 		"regardlessDiff": enumimpl.DefaultDiffCheckerImpl.IsEqual(true, 1, 2),
 		"strictSame":     enumimpl.DefaultDiffCheckerImpl.IsEqual(false, "a", "a"),
 		"strictDiff":     enumimpl.DefaultDiffCheckerImpl.IsEqual(false, "a", "b"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"regardlessSame": true,
 		"regardlessDiff": false,
@@ -952,11 +1131,15 @@ func Test_Cov3_DifferChecker_IsEqual(t *testing.T) {
 }
 
 func Test_Cov3_DifferChecker_AsDifferChecker(t *testing.T) {
+	// Arrange
 	checker := enumimpl.DefaultDiffCheckerImpl.AsDifferChecker()
 
+	// Act
 	actual := args.Map{
 		"notNil": checker != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil": true,
 	}
@@ -966,11 +1149,15 @@ func Test_Cov3_DifferChecker_AsDifferChecker(t *testing.T) {
 // ── leftRightDiffCheckerImpl ──
 
 func Test_Cov3_LeftRightDiffChecker_GetSingleDiffResult(t *testing.T) {
+	// Arrange
 	result := enumimpl.LeftRightDiffCheckerImpl.GetSingleDiffResult(true, "L", "R")
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -978,11 +1165,15 @@ func Test_Cov3_LeftRightDiffChecker_GetSingleDiffResult(t *testing.T) {
 }
 
 func Test_Cov3_LeftRightDiffChecker_GetResultOnKeyMissing(t *testing.T) {
+	// Arrange
 	result := enumimpl.LeftRightDiffCheckerImpl.GetResultOnKeyMissingInRightExistInLeft("key", "val")
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -990,10 +1181,13 @@ func Test_Cov3_LeftRightDiffChecker_GetResultOnKeyMissing(t *testing.T) {
 }
 
 func Test_Cov3_LeftRightDiffChecker_IsEqual(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"same": enumimpl.LeftRightDiffCheckerImpl.IsEqual(false, "a", "a"),
 		"diff": enumimpl.LeftRightDiffCheckerImpl.IsEqual(false, "a", "b"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"same": true,
 		"diff": false,
@@ -1002,11 +1196,15 @@ func Test_Cov3_LeftRightDiffChecker_IsEqual(t *testing.T) {
 }
 
 func Test_Cov3_LeftRightDiffChecker_AsChecker(t *testing.T) {
+	// Arrange
 	checker := enumimpl.LeftRightDiffCheckerImpl.AsChecker()
 
+	// Act
 	actual := args.Map{
 		"notNil": checker != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil": true,
 	}
@@ -1016,6 +1214,7 @@ func Test_Cov3_LeftRightDiffChecker_AsChecker(t *testing.T) {
 // ── FormatUsingFmt ──
 
 func Test_Cov3_FormatUsingFmt(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -1024,9 +1223,12 @@ func Test_Cov3_FormatUsingFmt(t *testing.T) {
 
 	result := bb.Format("{type-name}.{name}={value}", byte(1))
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -1036,12 +1238,16 @@ func Test_Cov3_FormatUsingFmt(t *testing.T) {
 // ── ConvEnumAnyValToInteger additional branches ──
 
 func Test_Cov3_ConvEnumAnyValToInteger_Byte(t *testing.T) {
+	// Arrange
 	type myByte byte
 	result := enumimpl.ConvEnumAnyValToInteger(myByte(5))
 
+	// Act
 	actual := args.Map{
 		"isPositive": result >= 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isPositive": true,
 	}
@@ -1051,15 +1257,19 @@ func Test_Cov3_ConvEnumAnyValToInteger_Byte(t *testing.T) {
 // ── BasicByte via CreateUsingMap ──
 
 func Test_Cov3_BasicByte_CreateUsingMap(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.CreateUsingMap(
 		"testEnum",
 		map[byte]string{0: "Invalid", 1: "Active"},
 	)
 
+	// Act
 	actual := args.Map{
 		"typeName": bb.TypeName(),
 		"length":   bb.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"typeName": "testEnum",
 		"length":   2,
@@ -1070,6 +1280,7 @@ func Test_Cov3_BasicByte_CreateUsingMap(t *testing.T) {
 // ── BasicByte ExpectingEnumValueError ──
 
 func Test_Cov3_BasicByte_ExpectingEnumValueError(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
@@ -1080,11 +1291,14 @@ func Test_Cov3_BasicByte_ExpectingEnumValueError(t *testing.T) {
 	hasErr := bb.ExpectingEnumValueError("Invalid", byte(1))
 	parseErr := bb.ExpectingEnumValueError("NotExist", byte(1))
 
+	// Act
 	actual := args.Map{
 		"matchNoErr":  noErr == nil,
 		"mismatchErr": hasErr != nil,
 		"parseErr":    parseErr != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"matchNoErr":  true,
 		"mismatchErr": true,
@@ -1096,15 +1310,19 @@ func Test_Cov3_BasicByte_ExpectingEnumValueError(t *testing.T) {
 // ── NamesHashset empty ──
 
 func Test_Cov3_NumberEnumBase_NamesHashsetEmpty(t *testing.T) {
+	// Arrange
 	type myEnum byte
 	bb := enumimpl.New.BasicByte.Default(
 		myEnum(0),
 		[]string{},
 	)
 
+	// Act
 	actual := args.Map{
 		"len": len(bb.NamesHashset()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 0,
 	}

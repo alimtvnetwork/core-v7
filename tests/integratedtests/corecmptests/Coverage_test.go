@@ -12,7 +12,10 @@ import (
 // ── Byte ──
 
 func Test_Byte_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Byte(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "5 == 5", actual)
 	actual := args.Map{"result": corecmp.Byte(3, 5) != corecomparator.LeftLess}
@@ -24,8 +27,13 @@ func Test_Byte_Coverage(t *testing.T) {
 }
 
 func Test_BytePtr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := byte(5), byte(3)
+
+	// Act
 	actual := args.Map{"result": corecmp.BytePtr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be equal", actual)
 	actual := args.Map{"result": corecmp.BytePtr(&a, &b) != corecomparator.LeftGreater}
@@ -45,7 +53,10 @@ func Test_BytePtr_Coverage(t *testing.T) {
 // ── Integer ──
 
 func Test_Integer_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "5 == 5", actual)
 	actual := args.Map{"result": corecmp.Integer(3, 5) != corecomparator.LeftLess}
@@ -57,8 +68,13 @@ func Test_Integer_Coverage(t *testing.T) {
 }
 
 func Test_IntegerPtr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := 5, 3
+
+	// Act
 	actual := args.Map{"result": corecmp.IntegerPtr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same should be equal", actual)
 	actual := args.Map{"result": corecmp.IntegerPtr(nil, nil) != corecomparator.Equal}
@@ -75,7 +91,10 @@ func Test_IntegerPtr_Coverage(t *testing.T) {
 // ── Integer64 ──
 
 func Test_Integer64_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer64(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer64(3, 5) != corecomparator.LeftLess}
@@ -89,7 +108,10 @@ func Test_Integer64_Coverage(t *testing.T) {
 // ── Integer16, Integer32, Integer8 ──
 
 func Test_Integer16_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer16(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer16(3, 5) != corecomparator.LeftLess}
@@ -101,7 +123,10 @@ func Test_Integer16_Coverage(t *testing.T) {
 }
 
 func Test_Integer32_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer32(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer32(3, 5) != corecomparator.LeftLess}
@@ -113,7 +138,10 @@ func Test_Integer32_Coverage(t *testing.T) {
 }
 
 func Test_Integer8_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.Integer8(5, 5) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer8(3, 5) != corecomparator.LeftLess}
@@ -127,8 +155,13 @@ func Test_Integer8_Coverage(t *testing.T) {
 // ── Ptr variants for 16/32/64/8 ──
 
 func Test_Integer16Ptr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := int16(5), int16(3)
+
+	// Act
 	actual := args.Map{"result": corecmp.Integer16Ptr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer16Ptr(nil, nil) != corecomparator.Equal}
@@ -143,8 +176,13 @@ func Test_Integer16Ptr_Coverage(t *testing.T) {
 }
 
 func Test_Integer32Ptr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := int32(5), int32(3)
+
+	// Act
 	actual := args.Map{"result": corecmp.Integer32Ptr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer32Ptr(nil, nil) != corecomparator.Equal}
@@ -159,8 +197,13 @@ func Test_Integer32Ptr_Coverage(t *testing.T) {
 }
 
 func Test_Integer64Ptr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := int64(5), int64(3)
+
+	// Act
 	actual := args.Map{"result": corecmp.Integer64Ptr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer64Ptr(nil, nil) != corecomparator.Equal}
@@ -175,8 +218,13 @@ func Test_Integer64Ptr_Coverage(t *testing.T) {
 }
 
 func Test_Integer8Ptr_Coverage(t *testing.T) {
+	// Arrange
 	a, b := int8(5), int8(3)
+
+	// Act
 	actual := args.Map{"result": corecmp.Integer8Ptr(&a, &a) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.Integer8Ptr(nil, nil) != corecomparator.Equal}
@@ -193,11 +241,15 @@ func Test_Integer8Ptr_Coverage(t *testing.T) {
 // ── Time / TimePtr ──
 
 func Test_Time_Coverage(t *testing.T) {
+	// Arrange
 	now := time.Now()
 	earlier := now.Add(-time.Hour)
 	later := now.Add(time.Hour)
 
+	// Act
 	actual := args.Map{"result": corecmp.Time(now, now) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "same time should be equal", actual)
 	actual := args.Map{"result": corecmp.Time(earlier, later) != corecomparator.LeftLess}
@@ -209,8 +261,13 @@ func Test_Time_Coverage(t *testing.T) {
 }
 
 func Test_TimePtr_Coverage(t *testing.T) {
+	// Arrange
 	now := time.Now()
+
+	// Act
 	actual := args.Map{"result": corecmp.TimePtr(&now, &now) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	actual := args.Map{"result": corecmp.TimePtr(nil, nil) != corecomparator.Equal}
@@ -224,7 +281,10 @@ func Test_TimePtr_Coverage(t *testing.T) {
 // ── IsStringsEqual / IsStringsEqualPtr / IsStringsEqualWithoutOrder ──
 
 func Test_IsStringsEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqual([]string{"a", "b"}, []string{"a", "b"})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same should be equal", actual)
 	actual := args.Map{"result": corecmp.IsStringsEqual([]string{"a"}, []string{"b"})}
@@ -242,7 +302,10 @@ func Test_IsStringsEqual_Coverage(t *testing.T) {
 }
 
 func Test_IsStringsEqualPtr_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualPtr(nil, nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 	a := []string{"a"}
@@ -255,7 +318,10 @@ func Test_IsStringsEqualPtr_Coverage(t *testing.T) {
 }
 
 func Test_IsStringsEqualWithoutOrder_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder([]string{"b", "a"}, []string{"a", "b"})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same items different order should be equal", actual)
 	actual := args.Map{"result": corecmp.IsStringsEqualWithoutOrder([]string{"a"}, []string{"b"})}
@@ -272,7 +338,10 @@ func Test_IsStringsEqualWithoutOrder_Coverage(t *testing.T) {
 // ── IsIntegersEqual / IsIntegersEqualPtr ──
 
 func Test_IsIntegersEqual_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqual([]int{1, 2}, []int{1, 2})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same should be equal", actual)
 	actual := args.Map{"result": corecmp.IsIntegersEqual([]int{1}, []int{2})}
@@ -287,11 +356,15 @@ func Test_IsIntegersEqual_Coverage(t *testing.T) {
 }
 
 func Test_IsIntegersEqualPtr_Coverage(t *testing.T) {
+	// Arrange
 	a := []int{1, 2}
 	b := []int{1, 2}
 	c := []int{3}
 
+	// Act
 	actual := args.Map{"result": corecmp.IsIntegersEqualPtr(&a, &b)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same should be equal", actual)
 	actual := args.Map{"result": corecmp.IsIntegersEqualPtr(&a, &c)}
@@ -308,7 +381,10 @@ func Test_IsIntegersEqualPtr_Coverage(t *testing.T) {
 // ── AnyItem ──
 
 func Test_AnyItem_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.AnyItem(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 	actual := args.Map{"result": corecmp.AnyItem(nil, 42) != corecomparator.NotEqual}
@@ -328,7 +404,10 @@ func Test_AnyItem_Coverage(t *testing.T) {
 // ── VersionSliceByte ──
 
 func Test_VersionSliceByte_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.VersionSliceByte(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil equal", actual)
 	actual := args.Map{"result": corecmp.VersionSliceByte(nil, []byte{1}) != corecomparator.NotEqual}
@@ -354,7 +433,10 @@ func Test_VersionSliceByte_Coverage(t *testing.T) {
 // ── VersionSliceInteger ──
 
 func Test_VersionSliceInteger_Coverage(t *testing.T) {
+	// Act
 	actual := args.Map{"result": corecmp.VersionSliceInteger(nil, nil) != corecomparator.Equal}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "both nil equal", actual)
 	actual := args.Map{"result": corecmp.VersionSliceInteger(nil, []int{1}) != corecomparator.NotEqual}

@@ -11,9 +11,14 @@ import (
 // ===================== DynamicMap =====================
 
 func Test_C13_DynamicMap_AddOrUpdate(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
 	isNew := dm.AddOrUpdate("k1", "v1")
+
+	// Act
 	actual := args.Map{"result": isNew}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 	isNew2 := dm.AddOrUpdate("k1", "v2")
@@ -23,9 +28,14 @@ func Test_C13_DynamicMap_AddOrUpdate(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_Set(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
 	isNew := dm.Set("k", "v")
+
+	// Act
 	actual := args.Map{"result": isNew}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 	isNew2 := dm.Set("k", "v2")
@@ -35,8 +45,13 @@ func Test_C13_DynamicMap_Set(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_AddNewOnly(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": dm.AddNewOnly("k", "v")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected added", actual)
 	actual := args.Map{"result": dm.AddNewOnly("k", "v2")}
@@ -45,92 +60,152 @@ func Test_C13_DynamicMap_AddNewOnly(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_AllKeys(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"b": 2, "a": 1}
 	keys := dm.AllKeys()
+
+	// Act
 	actual := args.Map{"result": len(keys) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_AllKeys_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.AllKeys()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_AllKeysSorted(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"b": 2, "a": 1}
 	keys := dm.AllKeysSorted()
+
+	// Act
 	actual := args.Map{"result": keys[0] != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a first", actual)
 }
 
 func Test_C13_DynamicMap_AllKeysSorted_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.AllKeysSorted()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesStrings(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"k": "v"}
 	vs := dm.AllValuesStrings()
+
+	// Act
 	actual := args.Map{"result": len(vs) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesStrings_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.AllValuesStrings()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesStringsSorted(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"k": "v"}
 	vs := dm.AllValuesStringsSorted()
+
+	// Act
 	actual := args.Map{"result": len(vs) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesStringsSorted_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.AllValuesStringsSorted()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesIntegers(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	ints := dm.AllValuesIntegers()
+
+	// Act
 	actual := args.Map{"result": len(ints) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_AllValuesIntegers_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.AllValuesIntegers()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_MapIntegerString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	m, sorted := dm.MapIntegerString()
+
+	// Act
 	actual := args.Map{"result": len(m) == 0 || len(sorted) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C13_DynamicMap_MapIntegerString_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
 	m, sorted := dm.MapIntegerString()
+
+	// Act
 	actual := args.Map{"result": len(m) != 0 || len(sorted) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -143,62 +218,102 @@ func Test_C13_DynamicMap_MapIntegerString_StringValues(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_SortedKeyValues(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	kv := dm.SortedKeyValues()
+
+	// Act
 	actual := args.Map{"result": len(kv) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_SortedKeyValues_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.SortedKeyValues()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_SortedKeyAnyValues(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	kav := dm.SortedKeyAnyValues()
+
+	// Act
 	actual := args.Map{"result": len(kav) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_SortedKeyAnyValues_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.SortedKeyAnyValues()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_SortedKeyAnyValues_StringValues(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": "x", "b": "y"}
 	kav := dm.SortedKeyAnyValues()
+
+	// Act
 	actual := args.Map{"result": len(kav) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_First(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"k": "v"}
 	k, v := dm.First()
+
+	// Act
 	actual := args.Map{"result": k == "" || v == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected key and value", actual)
 }
 
 func Test_C13_DynamicMap_First_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
 	k, v := dm.First()
+
+	// Act
 	actual := args.Map{"result": k != "" || v != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_IsValueString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"k": "v"}
+
+	// Act
 	actual := args.Map{"result": dm.IsValueString()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	dm2 := enumimpl.DynamicMap{"k": 1}
@@ -208,22 +323,37 @@ func Test_C13_DynamicMap_IsValueString(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_LengthAndCount(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.Length() != 1 || dm.Count() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_Length_Nil(t *testing.T) {
+	// Arrange
 	var dm *enumimpl.DynamicMap
+
+	// Act
 	actual := args.Map{"result": dm.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil length should be 0", actual)
 }
 
 func Test_C13_DynamicMap_IsEmpty_HasAnyItem(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": dm.IsEmpty() || dm.HasAnyItem()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	dm["k"] = 1
@@ -233,8 +363,13 @@ func Test_C13_DynamicMap_IsEmpty_HasAnyItem(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_LastIndex_HasIndex(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": dm.LastIndex() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": dm.HasIndex(1) || dm.HasIndex(2)}
@@ -243,8 +378,13 @@ func Test_C13_DynamicMap_LastIndex_HasIndex(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_HasKey_IsMissingKey(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.HasKey("a") || dm.HasKey("b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "key check failed", actual)
 	actual := args.Map{"result": dm.IsMissingKey("a") || !dm.IsMissingKey("b")}
@@ -253,8 +393,13 @@ func Test_C13_DynamicMap_HasKey_IsMissingKey(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_HasAllKeys(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": dm.HasAllKeys("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": dm.HasAllKeys("a", "c")}
@@ -263,8 +408,13 @@ func Test_C13_DynamicMap_HasAllKeys(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_HasAnyKeys(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.HasAnyKeys("a", "b")}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": dm.HasAnyKeys("c")}
@@ -273,110 +423,180 @@ func Test_C13_DynamicMap_HasAnyKeys(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_IsEqual_BothNil(t *testing.T) {
+	// Arrange
 	var l, r *enumimpl.DynamicMap
+
+	// Act
 	actual := args.Map{"result": l.IsEqual(true, r)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
 func Test_C13_DynamicMap_IsEqual_OneNil(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsEqual(true, nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_C13_DynamicMap_IsEqual_SameRef(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsEqual(true, &dm)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "same ref should be equal", actual)
 }
 
 func Test_C13_DynamicMap_IsEqual_RegardlessType(t *testing.T) {
+	// Arrange
 	dm1 := enumimpl.DynamicMap{"a": 1}
 	dm2 := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm1.IsEqual(true, &dm2)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless", actual)
 }
 
 func Test_C13_DynamicMap_IsEqual_StrictType(t *testing.T) {
+	// Arrange
 	dm1 := enumimpl.DynamicMap{"a": 1}
 	dm2 := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm1.IsEqual(false, &dm2)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal strict", actual)
 }
 
 func Test_C13_DynamicMap_IsRawEqual_DiffLength(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	right := map[string]any{"a": 1, "b": 2}
+
+	// Act
 	actual := args.Map{"result": dm.IsRawEqual(true, right)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "different length should not be equal", actual)
 }
 
 func Test_C13_DynamicMap_IsRawEqual_MissingKey(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	right := map[string]any{"b": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsRawEqual(true, right)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "missing key should not be equal", actual)
 }
 
 func Test_C13_DynamicMap_IsMismatch(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	other := enumimpl.DynamicMap{"a": 2}
+
+	// Act
 	actual := args.Map{"result": dm.IsMismatch(false, &other)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
 func Test_C13_DynamicMap_IsRawMismatch(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsRawMismatch(false, map[string]any{"a": 2})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected mismatch", actual)
 }
 
 func Test_C13_DynamicMap_DiffRaw(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	diff := dm.DiffRaw(false, map[string]any{"a": 1, "c": 3})
+
+	// Act
 	actual := args.Map{"result": diff.Length() == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diffs", actual)
 }
 
 func Test_C13_DynamicMap_DiffRaw_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	diff := dm.DiffRaw(true, map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": diff.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no diffs", actual)
 }
 
 func Test_C13_DynamicMap_DiffRawUsingDifferChecker_BothNil(t *testing.T) {
+	// Arrange
 	var dm *enumimpl.DynamicMap
 	diff := dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, true, nil)
+
+	// Act
 	actual := args.Map{"result": diff.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_DiffRawUsingDifferChecker_LeftNil(t *testing.T) {
+	// Arrange
 	var dm *enumimpl.DynamicMap
 	right := map[string]any{"a": 1}
 	diff := dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, true, right)
+
+	// Act
 	actual := args.Map{"result": diff.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected right map", actual)
 }
 
 func Test_C13_DynamicMap_DiffRawUsingDifferChecker_RightNil(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	diff := dm.DiffRawUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, true, nil)
+
+	// Act
 	actual := args.Map{"result": diff.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected left map", actual)
 }
@@ -392,9 +612,14 @@ func Test_C13_DynamicMap_DiffRawLeftRight(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_DiffRawLeftRight_BothNil(t *testing.T) {
+	// Arrange
 	var dm *enumimpl.DynamicMap
 	l, r := dm.DiffRawLeftRightUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, true, nil)
+
+	// Act
 	actual := args.Map{"result": l.Length() != 0 || r.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -414,127 +639,202 @@ func Test_C13_DynamicMap_DiffRawLeftRight_RightNil(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_DiffRawLeftRight_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	l, r := dm.DiffRawLeftRightUsingDifferChecker(enumimpl.DefaultDiffCheckerImpl, true, map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": l.Length() != 0 || r.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no diff", actual)
 }
 
 func Test_C13_DynamicMap_DiffJsonMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.DiffJsonMessage(false, map[string]any{"a": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff message", actual)
 }
 
 func Test_C13_DynamicMap_DiffJsonMessage_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.DiffJsonMessage(true, map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_DiffJsonMessageLeftRight(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.DiffJsonMessageLeftRight(false, map[string]any{"b": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected message", actual)
 }
 
 func Test_C13_DynamicMap_DiffJsonMessageLeftRight_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.DiffJsonMessageLeftRight(true, map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_ShouldDiffMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ShouldDiffMessage(false, "test", map[string]any{"a": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_ShouldDiffMessage_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ShouldDiffMessage(true, "test", map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffMessage(false, "test", map[string]any{"a": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffMessage_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffMessage(true, "test", map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffLeftRightMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffLeftRightMessage(false, "test", map[string]any{"b": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffLeftRightMessage_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffLeftRightMessage(true, "test", map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_ShouldDiffLeftRightMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ShouldDiffLeftRightMessageUsingDifferChecker(
 		enumimpl.LeftRightDiffCheckerImpl, false, "test",
 		map[string]any{"b": 2},
 	)
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_ShouldDiffLeftRightMessage_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ShouldDiffLeftRightMessageUsingDifferChecker(
 		enumimpl.LeftRightDiffCheckerImpl, true, "test",
 		map[string]any{"a": 1},
 	)
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_ExpectingMessage(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ExpectingMessage("test", map[string]any{"a": 2})
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected mismatch message", actual)
 }
 
 func Test_C13_DynamicMap_ExpectingMessage_Equal(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ExpectingMessage("test", map[string]any{"a": 1})
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -550,8 +850,13 @@ func Test_C13_DynamicMap_LogExpectingMessage_Equal(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_IsKeysEqualOnly(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 99})}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "keys should be equal", actual)
 	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"b": 1})}
@@ -560,30 +865,50 @@ func Test_C13_DynamicMap_IsKeysEqualOnly(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_IsKeysEqualOnly_BothNil(t *testing.T) {
+	// Arrange
 	var dm *enumimpl.DynamicMap
+
+	// Act
 	actual := args.Map{"result": dm.IsKeysEqualOnly(nil)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
 func Test_C13_DynamicMap_IsKeysEqualOnly_OneNil(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsKeysEqualOnly(nil)}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_C13_DynamicMap_IsKeysEqualOnly_DiffLength(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsKeysEqualOnly(map[string]any{"a": 1, "b": 2})}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "diff length", actual)
 }
 
 func Test_C13_DynamicMap_KeyValue(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	v, found := dm.KeyValue("a")
+
+	// Act
 	actual := args.Map{"result": found || v != 1}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected found", actual)
 	_, found2 := dm.KeyValue("missing")
@@ -593,9 +918,14 @@ func Test_C13_DynamicMap_KeyValue(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_KeyValueString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": "hello"}
 	v, found := dm.KeyValueString("a")
+
+	// Act
 	actual := args.Map{"result": found || v != "hello"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	_, found2 := dm.KeyValueString("missing")
@@ -605,9 +935,14 @@ func Test_C13_DynamicMap_KeyValueString(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_KeyValueInt(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 42}
 	v, found, failed := dm.KeyValueInt("a")
+
+	// Act
 	actual := args.Map{"result": found || failed || v != 42}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	_, found2, _ := dm.KeyValueInt("missing")
@@ -617,24 +952,39 @@ func Test_C13_DynamicMap_KeyValueInt(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_KeyValueInt_ByteValue(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": byte(5)}
 	v, found, failed := dm.KeyValueInt("a")
+
+	// Act
 	actual := args.Map{"result": found || failed || v != 5}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
 func Test_C13_DynamicMap_KeyValueIntDefault(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 10}
+
+	// Act
 	actual := args.Map{"result": dm.KeyValueIntDefault("a") != 10}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 10", actual)
 }
 
 func Test_C13_DynamicMap_KeyValueByte(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": byte(5)}
 	v, found, failed := dm.KeyValueByte("a")
+
+	// Act
 	actual := args.Map{"result": found || failed || v != 5}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	_, found2, _ := dm.KeyValueByte("missing")
@@ -644,241 +994,396 @@ func Test_C13_DynamicMap_KeyValueByte(t *testing.T) {
 }
 
 func Test_C13_DynamicMap_KeyValueByte_IntValue(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 100}
 	v, found, failed := dm.KeyValueByte("a")
+
+	// Act
 	actual := args.Map{"result": found || failed || v != 100}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected 100", actual)
 }
 
 func Test_C13_DynamicMap_Add(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
 	dm.Add("k", "v")
+
+	// Act
 	actual := args.Map{"result": dm.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_Raw(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"k": "v"}
 	raw := dm.Raw()
+
+	// Act
 	actual := args.Map{"result": len(raw) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConcatNew(t *testing.T) {
+	// Arrange
 	dm1 := enumimpl.DynamicMap{"a": 1}
 	dm2 := enumimpl.DynamicMap{"b": 2}
 	result := dm1.ConcatNew(true, dm2)
+
+	// Act
 	actual := args.Map{"result": result.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_ConcatNew_NoOverride(t *testing.T) {
+	// Arrange
 	dm1 := enumimpl.DynamicMap{"a": 1}
 	dm2 := enumimpl.DynamicMap{"a": 2, "b": 3}
 	result := dm1.ConcatNew(false, dm2)
+
+	// Act
 	actual := args.Map{"result": result["a"] != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not override", actual)
 }
 
 func Test_C13_DynamicMap_ConcatNew_BothEmpty(t *testing.T) {
+	// Arrange
 	dm1 := enumimpl.DynamicMap{}
 	dm2 := enumimpl.DynamicMap{}
 	result := dm1.ConcatNew(true, dm2)
+
+	// Act
 	actual := args.Map{"result": result.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_Strings(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	s := dm.Strings()
+
+	// Act
 	actual := args.Map{"result": len(s) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_Strings_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.Strings()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_StringsUsingFmt(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	s := dm.StringsUsingFmt(func(i int, k string, v any) string {
 		return fmt.Sprintf("%d:%s=%v", i, k, v)
 	})
+
+	// Act
 	actual := args.Map{"result": len(s) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_StringsUsingFmt_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.StringsUsingFmt(func(i int, k string, v any) string { return "" })) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.String() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C13_DynamicMap_IsStringEqual(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
+
+	// Act
 	actual := args.Map{"result": dm.IsStringEqual(dm.String())}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
 }
 
 func Test_C13_DynamicMap_Serialize(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	_, err := dm.Serialize()
+
+	// Act
 	actual := args.Map{"result": err}
+
+	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_C13_DynamicMap_ConvMaps(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": byte(1), "b": byte(2)}
 	byteMap := dm.ConvMapByteString()
+
+	// Act
 	actual := args.Map{"result": len(byteMap) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapByteString_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapByteString()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapStringInteger(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapStringInteger()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapStringInteger_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapStringInteger()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapIntegerString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapIntegerString()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapIntegerString_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapIntegerString()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt8String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapInt8String()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt8String_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapInt8String()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt16String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapInt16String()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt16String_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapInt16String()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt32String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapInt32String()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt32String_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapInt32String()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapUInt16String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapUInt16String()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapUInt16String_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapUInt16String()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapStringString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": "x"}
 	m := dm.ConvMapStringString()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapStringString_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapStringString()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt64String(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	m := dm.ConvMapInt64String()
+
+	// Act
 	actual := args.Map{"result": len(m) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_DynamicMap_ConvMapInt64String_Empty(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{}
+
+	// Act
 	actual := args.Map{"result": len(dm.ConvMapInt64String()) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
@@ -886,57 +1391,92 @@ func Test_C13_DynamicMap_ConvMapInt64String_Empty(t *testing.T) {
 // ===================== DynamicMap → Basic* conversions =====================
 
 func Test_C13_DynamicMap_BasicByte(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"Invalid": byte(0), "Valid": byte(1)}
 	bb := dm.BasicByte("TestByteEnum")
+
+	// Act
 	actual := args.Map{"result": bb == nil || bb.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected BasicByte with 2 items", actual)
 }
 
 func Test_C13_DynamicMap_BasicByteUsingAliasMap(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"Invalid": byte(0), "Valid": byte(1)}
 	bb := dm.BasicByteUsingAliasMap("TestByteEnum", map[string]byte{"v": 1})
+
+	// Act
 	actual := args.Map{"result": bb == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C13_DynamicMap_BasicInt8(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"A": int8(0), "B": int8(1)}
 	bi := dm.BasicInt8("TestInt8Enum")
+
+	// Act
 	actual := args.Map{"result": bi == nil || bi.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_BasicInt16(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"A": int16(0), "B": int16(1)}
 	bi := dm.BasicInt16("TestInt16Enum")
+
+	// Act
 	actual := args.Map{"result": bi == nil || bi.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_BasicInt32(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"A": int32(0), "B": int32(1)}
 	bi := dm.BasicInt32("TestInt32Enum")
+
+	// Act
 	actual := args.Map{"result": bi == nil || bi.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_BasicString(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"alpha": "x", "beta": "y"}
 	bs := dm.BasicString("TestStringEnum")
+
+	// Act
 	actual := args.Map{"result": bs == nil || bs.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_DynamicMap_BasicUInt16(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"A": uint16(0), "B": uint16(1)}
 	bu := dm.BasicUInt16("TestUInt16Enum")
+
+	// Act
 	actual := args.Map{"result": bu == nil || bu.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
@@ -944,6 +1484,7 @@ func Test_C13_DynamicMap_BasicUInt16(t *testing.T) {
 // ===================== BasicByte =====================
 
 func Test_C13_BasicByte_AllMethods(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.Create(
 		"TestByte",
 		[]byte{0, 1, 2},
@@ -951,7 +1492,10 @@ func Test_C13_BasicByte_AllMethods(t *testing.T) {
 		0, 2,
 	)
 
+	// Act
 	actual := args.Map{"result": bb.Min() != 0 || bb.Max() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "min/max wrong", actual)
 	actual := args.Map{"result": bb.IsValidRange(1) || bb.IsValidRange(3)}
@@ -1065,6 +1609,7 @@ func Test_C13_BasicByte_AllMethods(t *testing.T) {
 }
 
 func Test_C13_BasicByte_ExpectingEnumValueError(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.Create(
 		"TestByte",
 		[]byte{0, 1},
@@ -1074,7 +1619,11 @@ func Test_C13_BasicByte_ExpectingEnumValueError(t *testing.T) {
 
 	// Matching value
 	err := bb.ExpectingEnumValueError("Invalid", byte(0))
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for matching", actual)
 
@@ -1094,9 +1643,13 @@ func Test_C13_BasicByte_ExpectingEnumValueError(t *testing.T) {
 // ===================== BasicString =====================
 
 func Test_C13_BasicString_AllMethods(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.Create("TestString", []string{"alpha", "beta", "gamma"})
 
+	// Act
 	actual := args.Map{"result": bs.Min() == "" || bs.Max() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected min/max", actual)
 	ranges := bs.Ranges()
@@ -1233,6 +1786,7 @@ func Test_C13_BasicString_AllMethods(t *testing.T) {
 // ===================== numberEnumBase methods =====================
 
 func Test_C13_NumberEnumBase_Methods(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.Create(
 		"TestByte",
 		[]byte{0, 1, 2},
@@ -1241,7 +1795,11 @@ func Test_C13_NumberEnumBase_Methods(t *testing.T) {
 	)
 
 	min, max := bb.MinMaxAny()
+
+	// Act
 	actual := args.Map{"result": min == nil || max == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": bb.MinValueString() == "" || bb.MaxValueString() == ""}
@@ -1378,9 +1936,14 @@ func Test_C13_NumberEnumBase_Methods(t *testing.T) {
 // ===================== DiffLeftRight =====================
 
 func Test_C13_DiffLeftRight_AllMethods(t *testing.T) {
+	// Arrange
 	d := &enumimpl.DiffLeftRight{Left: 1, Right: 1}
 	l, r := d.Types()
+
+	// Act
 	actual := args.Map{"result": l == nil || r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected types", actual)
 	actual := args.Map{"result": d.IsSameTypeSame()}
@@ -1417,8 +1980,13 @@ func Test_C13_DiffLeftRight_AllMethods(t *testing.T) {
 }
 
 func Test_C13_DiffLeftRight_Different(t *testing.T) {
+	// Arrange
 	d := &enumimpl.DiffLeftRight{Left: 1, Right: 2}
+
+	// Act
 	actual := args.Map{"result": d.IsSame()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected different", actual)
 	actual := args.Map{"result": d.IsNotEqual()}
@@ -1433,8 +2001,13 @@ func Test_C13_DiffLeftRight_Different(t *testing.T) {
 }
 
 func Test_C13_DiffLeftRight_JsonString_Nil(t *testing.T) {
+	// Arrange
 	var d *enumimpl.DiffLeftRight
+
+	// Act
 	actual := args.Map{"result": d.JsonString() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 }
@@ -1442,8 +2015,13 @@ func Test_C13_DiffLeftRight_JsonString_Nil(t *testing.T) {
 // ===================== KeyAnyVal =====================
 
 func Test_C13_KeyAnyVal_AllMethods(t *testing.T) {
+	// Arrange
 	kav := enumimpl.KeyAnyVal{Key: "name", AnyValue: byte(5)}
+
+	// Act
 	actual := args.Map{"result": kav.KeyString() != "name"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected name", actual)
 	actual := args.Map{"result": kav.AnyVal() != byte(5)}
@@ -1475,8 +2053,13 @@ func Test_C13_KeyAnyVal_AllMethods(t *testing.T) {
 }
 
 func Test_C13_KeyAnyVal_StringType(t *testing.T) {
+	// Arrange
 	kav := enumimpl.KeyAnyVal{Key: "name", AnyValue: "strval"}
+
+	// Act
 	actual := args.Map{"result": kav.IsString()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected string type", actual)
 	s := kav.String()
@@ -1488,15 +2071,25 @@ func Test_C13_KeyAnyVal_StringType(t *testing.T) {
 // ===================== KeyAnyValues =====================
 
 func Test_C13_KeyAnyValues_Empty(t *testing.T) {
+	// Arrange
 	result := enumimpl.KeyAnyValues([]string{}, []byte{})
+
+	// Act
 	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_C13_KeyAnyValues_NonEmpty(t *testing.T) {
+	// Arrange
 	result := enumimpl.KeyAnyValues([]string{"a", "b"}, []byte{0, 1})
+
+	// Act
 	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
@@ -1504,8 +2097,13 @@ func Test_C13_KeyAnyValues_NonEmpty(t *testing.T) {
 // ===================== Format, FormatUsingFmt, NameWithValue, PrependJoin, JoinPrependUsingDot =====================
 
 func Test_C13_Format(t *testing.T) {
+	// Arrange
 	s := enumimpl.Format("MyEnum", "Active", "1", "Enum:{type-name}-{name}-{value}")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected formatted", actual)
 }
@@ -1517,29 +2115,49 @@ func (tf testFormatterC13) Name() string       { return "TestName" }
 func (tf testFormatterC13) ValueString() string { return "TestVal" }
 
 func Test_C13_FormatUsingFmt(t *testing.T) {
+	// Arrange
 	s := enumimpl.FormatUsingFmt(testFormatterC13{}, "{type-name}-{name}-{value}")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected formatted", actual)
 }
 
 func Test_C13_NameWithValue(t *testing.T) {
+	// Arrange
 	s := enumimpl.NameWithValue(byte(5))
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C13_PrependJoin(t *testing.T) {
+	// Arrange
 	s := enumimpl.PrependJoin(".", "prefix", "a", "b")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C13_JoinPrependUsingDot(t *testing.T) {
+	// Arrange
 	s := enumimpl.JoinPrependUsingDot("prefix", "a", "b")
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
@@ -1552,15 +2170,25 @@ func Test_C13_ConvEnumAnyValToInteger_String(t *testing.T) {
 }
 
 func Test_C13_ConvEnumAnyValToInteger_Int(t *testing.T) {
+	// Arrange
 	v := enumimpl.ConvEnumAnyValToInteger(42)
+
+	// Act
 	actual := args.Map{"result": v != 42}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_C13_ConvEnumAnyValToInteger_Byte(t *testing.T) {
+	// Arrange
 	v := enumimpl.ConvEnumAnyValToInteger(byte(5))
+
+	// Act
 	actual := args.Map{"result": v != 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
@@ -1574,8 +2202,13 @@ func Test_C13_ConvEnumAnyValToInteger_Fallback(t *testing.T) {
 // ===================== IntegersRangesOfAnyVal =====================
 
 func Test_C13_IntegersRangesOfAnyVal(t *testing.T) {
+	// Arrange
 	result := enumimpl.IntegersRangesOfAnyVal([]byte{2, 0, 1})
+
+	// Act
 	actual := args.Map{"result": len(result) != 3 || result[0] != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sorted [0,1,2]", actual)
 }
@@ -1583,8 +2216,13 @@ func Test_C13_IntegersRangesOfAnyVal(t *testing.T) {
 // ===================== AllNameValues =====================
 
 func Test_C13_AllNameValues(t *testing.T) {
+	// Arrange
 	result := enumimpl.AllNameValues([]string{"a", "b"}, []byte{0, 1})
+
+	// Act
 	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
@@ -1592,15 +2230,25 @@ func Test_C13_AllNameValues(t *testing.T) {
 // ===================== UnsupportedNames =====================
 
 func Test_C13_UnsupportedNames(t *testing.T) {
+	// Arrange
 	result := enumimpl.UnsupportedNames([]string{"a", "b", "c"}, "a")
+
+	// Act
 	actual := args.Map{"result": len(result) != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 unsupported", actual)
 }
 
 func Test_C13_UnsupportedNames_AllSupported(t *testing.T) {
+	// Arrange
 	result := enumimpl.UnsupportedNames([]string{"a", "b"}, "a", "b")
+
+	// Act
 	actual := args.Map{"result": len(result) != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
@@ -1608,22 +2256,37 @@ func Test_C13_UnsupportedNames_AllSupported(t *testing.T) {
 // ===================== OnlySupportedErr =====================
 
 func Test_C13_OnlySupportedErr_EmptyAll(t *testing.T) {
+	// Arrange
 	err := enumimpl.OnlySupportedErr(2, []string{})
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C13_OnlySupportedErr_AllSupported(t *testing.T) {
+	// Arrange
 	err := enumimpl.OnlySupportedErr(2, []string{"a"}, "a")
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C13_OnlySupportedErr_HasUnsupported(t *testing.T) {
+	// Arrange
 	err := enumimpl.OnlySupportedErr(2, []string{"a", "b"}, "a")
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
@@ -1631,8 +2294,13 @@ func Test_C13_OnlySupportedErr_HasUnsupported(t *testing.T) {
 // ===================== DifferCheckerImpl =====================
 
 func Test_C13_DifferCheckerImpl_GetSingleDiffResult(t *testing.T) {
+	// Arrange
 	dc := enumimpl.DefaultDiffCheckerImpl
+
+	// Act
 	actual := args.Map{"result": dc.GetSingleDiffResult(true, "l", "r") != "l"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected left", actual)
 	actual := args.Map{"result": dc.GetSingleDiffResult(false, "l", "r") != "r"}
@@ -1641,8 +2309,13 @@ func Test_C13_DifferCheckerImpl_GetSingleDiffResult(t *testing.T) {
 }
 
 func Test_C13_DifferCheckerImpl_IsEqual(t *testing.T) {
+	// Arrange
 	dc := enumimpl.DefaultDiffCheckerImpl
+
+	// Act
 	actual := args.Map{"result": dc.IsEqual(true, 1, 1)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal regardless", actual)
 	actual := args.Map{"result": dc.IsEqual(false, 1, "1")}
@@ -1651,9 +2324,14 @@ func Test_C13_DifferCheckerImpl_IsEqual(t *testing.T) {
 }
 
 func Test_C13_DifferCheckerImpl_GetResultOnKeyMissing(t *testing.T) {
+	// Arrange
 	dc := enumimpl.DefaultDiffCheckerImpl
 	r := dc.GetResultOnKeyMissingInRightExistInLeft("k", "v")
+
+	// Act
 	actual := args.Map{"result": r != "v"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected v", actual)
 }
@@ -1661,9 +2339,14 @@ func Test_C13_DifferCheckerImpl_GetResultOnKeyMissing(t *testing.T) {
 // ===================== LeftRightDiffCheckerImpl =====================
 
 func Test_C13_LeftRightDiffCheckerImpl(t *testing.T) {
+	// Arrange
 	lrdc := enumimpl.LeftRightDiffCheckerImpl
 	r := lrdc.GetSingleDiffResult(true, 1, 2)
+
+	// Act
 	actual := args.Map{"result": r == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	r2 := lrdc.GetResultOnKeyMissingInRightExistInLeft("k", "v")
@@ -1678,110 +2361,185 @@ func Test_C13_LeftRightDiffCheckerImpl(t *testing.T) {
 // ===================== Creator methods =====================
 
 func Test_C13_NewBasicByte_UsingTypeSlice(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.UsingTypeSlice("T", []string{"A", "B"})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicByte_Default(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.Default(byte(0), []string{"A", "B"})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicByte_DefaultAllCases(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.DefaultAllCases(byte(0), []string{"Active", "Inactive"})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicByte_DefaultWithAliasMap(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.DefaultWithAliasMap(byte(0), []string{"A", "B"}, map[string]byte{"a": 0})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicByte_DefaultWithAliasMapAllCases(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.DefaultWithAliasMapAllCases(byte(0), []string{"A"}, map[string]byte{"a": 0})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicByte_UsingFirstItemSliceCaseOptions(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.UsingFirstItemSliceCaseOptions(false, byte(0), []string{"A"})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicByte_UsingFirstItemSliceAllCases(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.UsingFirstItemSliceAllCases(byte(0), []string{"A"})
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicByte_UsingFirstItemSliceAliasMap(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.UsingFirstItemSliceAliasMap(byte(0), []string{"A"}, nil)
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicByte_CreateUsingMapPlusAliasMapOptions(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.CreateUsingMapPlusAliasMapOptions(
 		true, byte(0), map[byte]string{0: "A"}, nil,
 	)
+
+	// Act
 	actual := args.Map{"result": bb.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicString_CreateDefault(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.CreateDefault("strval", []string{"a", "b"})
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicString_CreateUsingStringersSpread(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.CreateUsingNamesSpread("T", "alpha", "beta")
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicString_CreateUsingNamesMinMax(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.CreateUsingNamesMinMax("T", []string{"a", "b"}, "a", "b")
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicString_CreateUsingSlicePlusAliasMapOptions(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.CreateUsingSlicePlusAliasMapOptions(
 		true, "strval", []string{"A", "B"}, nil,
 	)
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C13_NewBasicString_UsingFirstItemSliceCaseOptions(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.UsingFirstItemSliceCaseOptions(false, "strval", []string{"A"})
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C13_NewBasicString_UsingFirstItemSliceAllCases(t *testing.T) {
+	// Arrange
 	bs := enumimpl.New.BasicString.UsingFirstItemSliceAllCases("strval", []string{"A"})
+
+	// Act
 	actual := args.Map{"result": bs.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
@@ -1789,67 +2547,97 @@ func Test_C13_NewBasicString_UsingFirstItemSliceAllCases(t *testing.T) {
 // ===================== DynamicMap with LeftRightDiffChecker =====================
 
 func Test_C13_DynamicMap_LogShouldDiffMessageUsingDifferChecker(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffMessageUsingDifferChecker(
 		enumimpl.DefaultDiffCheckerImpl, false, "test",
 		map[string]any{"a": 2},
 	)
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffMessageUsingDifferChecker_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffMessageUsingDifferChecker(
 		enumimpl.DefaultDiffCheckerImpl, true, "test",
 		map[string]any{"a": 1},
 	)
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffLeftRightMessageUsingDifferChecker(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffLeftRightMessageUsingDifferChecker(
 		enumimpl.LeftRightDiffCheckerImpl, false, "test",
 		map[string]any{"b": 2},
 	)
+
+	// Act
 	actual := args.Map{"result": msg == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected diff", actual)
 }
 
 func Test_C13_DynamicMap_LogShouldDiffLeftRightMessageUsingDifferChecker_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.LogShouldDiffLeftRightMessageUsingDifferChecker(
 		enumimpl.LeftRightDiffCheckerImpl, true, "test",
 		map[string]any{"a": 1},
 	)
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_ShouldDiffMessageUsingDifferChecker_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.ShouldDiffMessageUsingDifferChecker(
 		enumimpl.DefaultDiffCheckerImpl, true, "test",
 		map[string]any{"a": 1},
 	)
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C13_DynamicMap_DiffJsonMessageUsingDifferChecker_NoDiff(t *testing.T) {
+	// Arrange
 	dm := enumimpl.DynamicMap{"a": 1}
 	msg := dm.DiffJsonMessageUsingDifferChecker(
 		enumimpl.DefaultDiffCheckerImpl, true,
 		map[string]any{"a": 1},
 	)
+
+	// Act
 	actual := args.Map{"result": msg != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
@@ -1869,9 +2657,14 @@ type testNamerC13 struct{ name string }
 func (n testNamerC13) Name() string { return n.name }
 
 func Test_C13_BasicByte_AppendPrependJoinNamer(t *testing.T) {
+	// Arrange
 	bb := enumimpl.New.BasicByte.Create("T", []byte{0, 1}, []string{"A", "B"}, 0, 1)
 	s := bb.AppendPrependJoinNamer(".", testNamerC13{"append"}, testNamerC13{"prepend"})
+
+	// Act
 	actual := args.Map{"result": s == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }

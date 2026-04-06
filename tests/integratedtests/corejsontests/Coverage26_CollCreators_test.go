@@ -12,6 +12,7 @@ import (
 // ── newBytesCollectionCreator ──
 
 func Test_C26_NBC_Empty(t *testing.T) { _ = corejson.NewBytesCollection.Empty() }
+	// Arrange
 func Test_C26_NBC_UsingCap(t *testing.T) { _ = corejson.NewBytesCollection.UsingCap(5) }
 
 func Test_C26_NBC_UnmarshalUsingBytes(t *testing.T) {
@@ -24,7 +25,11 @@ func Test_C26_NBC_UnmarshalUsingBytes(t *testing.T) {
 
 func Test_C26_NBC_DeserializeUsingBytes_Error(t *testing.T) {
 	_, err := corejson.NewBytesCollection.DeserializeUsingBytes([]byte(`invalid`))
+
+	// Act
 	actual := args.Map{"result": err == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }

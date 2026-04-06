@@ -30,7 +30,10 @@ func makeTypedWrapper(t *testing.T) *corepayload.TypedPayloadWrapper[testUser] {
 }
 
 func Test_C15_TypedPayloadWrapper_Constructors(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
+
+	// Act
 	actual := args.Map{
 		"name":       tw.Name(),
 		"id":         tw.Identifier(),
@@ -44,6 +47,8 @@ func Test_C15_TypedPayloadWrapper_Constructors(t *testing.T) {
 		"data":       tw.Data().Name,
 		"typedData":  tw.TypedData().Email,
 	}
+
+	// Assert
 	expected := args.Map{
 		"name":       "user-create",
 		"id":         "usr-1",
@@ -61,7 +66,10 @@ func Test_C15_TypedPayloadWrapper_Constructors(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_NilChecks(t *testing.T) {
+	// Arrange
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
+
+	// Act
 	actual := args.Map{
 		"name":    nilTW.Name(),
 		"id":      nilTW.Identifier(),
@@ -85,6 +93,8 @@ func Test_C15_TypedPayloadWrapper_NilChecks(t *testing.T) {
 		"payStr":  nilTW.PayloadsString(),
 		"length":  nilTW.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"name":    "",
 		"id":      "",
@@ -112,7 +122,10 @@ func Test_C15_TypedPayloadWrapper_NilChecks(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_ErrorHandling(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
+
+	// Act
 	actual := args.Map{
 		"hasErr":  tw.HasError(),
 		"isEmpty": tw.IsEmpty(),
@@ -120,6 +133,8 @@ func Test_C15_TypedPayloadWrapper_ErrorHandling(t *testing.T) {
 		"safe":    tw.HasSafeItems(),
 		"err":     tw.Error() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasErr":  false,
 		"isEmpty": false,
@@ -131,12 +146,17 @@ func Test_C15_TypedPayloadWrapper_ErrorHandling(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_Strings(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
+
+	// Act
 	actual := args.Map{
 		"strNotEmpty":   tw.String() != "",
 		"prettyNotEmpty": tw.PrettyJsonString() != "",
 		"jsonNotEmpty":  tw.JsonString() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"strNotEmpty":   true,
 		"prettyNotEmpty": true,
@@ -146,6 +166,7 @@ func Test_C15_TypedPayloadWrapper_Strings(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_JSON(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	j := tw.Json()
 	jp := tw.JsonPtr()
@@ -154,6 +175,8 @@ func Test_C15_TypedPayloadWrapper_JSON(t *testing.T) {
 	tdj := tw.TypedDataJson()
 	tdjp := tw.TypedDataJsonPtr()
 	tdjb, tdjbErr := tw.TypedDataJsonBytes()
+
+	// Act
 	actual := args.Map{
 		"jOK":     j.JsonString() != "",
 		"jpOK":    jp != nil,
@@ -163,6 +186,8 @@ func Test_C15_TypedPayloadWrapper_JSON(t *testing.T) {
 		"tdjpOK":  tdjp != nil,
 		"tdjbOK":  tdjbErr == nil && len(tdjb) > 0,
 	}
+
+	// Assert
 	expected := args.Map{
 		"jOK":     true,
 		"jpOK":    true,
@@ -176,22 +201,32 @@ func Test_C15_TypedPayloadWrapper_JSON(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_MarshalJSON_Nil(t *testing.T) {
+	// Arrange
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	_, err := nilTW.MarshalJSON()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns nil -- MarshalJSON nil", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	b, _ := tw.MarshalJSON()
 	tw2 := &corepayload.TypedPayloadWrapper[testUser]{}
 	err := tw2.UnmarshalJSON(b)
+
+	// Act
 	actual := args.Map{
 		"noErr":  err == nil,
 		"parsed": tw2.IsParsed(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":  true,
 		"parsed": true,
@@ -200,22 +235,33 @@ func Test_C15_TypedPayloadWrapper_UnmarshalJSON(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_SerializeMust(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	b := tw.SerializeMust()
+
+	// Act
 	actual := args.Map{"len": len(b) > 0}
+
+	// Assert
 	expected := args.Map{"len": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- SerializeMust", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_Serialize_Nil(t *testing.T) {
+	// Arrange
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	_, err := nilTW.Serialize()
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns nil -- Serialize nil", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_GetAs(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[string]("n", "i", "e", "hello")
 	s, sOk := tw.GetAsString()
 	_, iOk := tw.GetAsInt()
@@ -225,10 +271,14 @@ func Test_C15_TypedPayloadWrapper_GetAs(t *testing.T) {
 	_, bOk := tw.GetAsBool()
 	_, byOk := tw.GetAsBytes()
 	_, ssOk := tw.GetAsStrings()
+
+	// Act
 	actual := args.Map{
 		"s": s, "sOk": sOk, "iOk": iOk, "i64Ok": i64Ok,
 		"f64Ok": f64Ok, "f32Ok": f32Ok, "bOk": bOk, "byOk": byOk, "ssOk": ssOk,
 	}
+
+	// Assert
 	expected := args.Map{
 		"s": "hello", "sOk": true, "iOk": false, "i64Ok": false,
 		"f64Ok": false, "f32Ok": false, "bOk": false, "byOk": false, "ssOk": false,
@@ -237,14 +287,19 @@ func Test_C15_TypedPayloadWrapper_GetAs(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_ValueMethods(t *testing.T) {
+	// Arrange
 	twStr, _ := corepayload.NewTypedPayloadWrapperFrom[string]("n", "i", "e", "hello")
 	twInt, _ := corepayload.NewTypedPayloadWrapperFrom[int]("n", "i", "e", 42)
 	twBool, _ := corepayload.NewTypedPayloadWrapperFrom[bool]("n", "i", "e", true)
+
+	// Act
 	actual := args.Map{
 		"str":  twStr.ValueString(),
 		"int":  twInt.ValueInt(),
 		"bool": twBool.ValueBool(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"str":  "hello",
 		"int":  42,
@@ -254,17 +309,22 @@ func Test_C15_TypedPayloadWrapper_ValueMethods(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_Setters(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	tw.SetName("newName")
 	tw.SetIdentifier("newId")
 	tw.SetEntityType("newEntity")
 	tw.SetCategoryName("newCat")
+
+	// Act
 	actual := args.Map{
 		"name":   tw.Name(),
 		"id":     tw.Identifier(),
 		"entity": tw.EntityType(),
 		"cat":    tw.CategoryName(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"name":   "newName",
 		"id":     "newId",
@@ -275,12 +335,17 @@ func Test_C15_TypedPayloadWrapper_Setters(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_SetTypedData(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	err := tw.SetTypedData(testUser{Name: "Bob", Email: "bob@test.com"})
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"name":  tw.Data().Name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"name":  "Bob",
@@ -289,27 +354,40 @@ func Test_C15_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_SetTypedData_Nil(t *testing.T) {
+	// Arrange
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	err := nilTW.SetTypedData(testUser{})
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns nil -- SetTypedData nil", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_SetTypedDataMust(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	tw.SetTypedDataMust(testUser{Name: "Charlie"})
+
+	// Act
 	actual := args.Map{"name": tw.Data().Name}
+
+	// Assert
 	expected := args.Map{"name": "Charlie"}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- SetTypedDataMust", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_Clone(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	cloneP, err := tw.ClonePtr(true)
 	clone, err2 := tw.Clone(true)
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	nilClone, nilErr := nilTW.ClonePtr(true)
+
+	// Act
 	actual := args.Map{
 		"noErr":       err == nil,
 		"cloneName":   cloneP.Data().Name,
@@ -318,6 +396,8 @@ func Test_C15_TypedPayloadWrapper_Clone(t *testing.T) {
 		"nilClone":    nilClone == nil,
 		"nilErr":      nilErr == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":       true,
 		"cloneName":   "Alice",
@@ -330,16 +410,21 @@ func Test_C15_TypedPayloadWrapper_Clone(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_ToPayloadWrapper(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	pw := tw.ToPayloadWrapper()
 	pwv := tw.PayloadWrapperValue()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	nilPW := nilTW.ToPayloadWrapper()
+
+	// Act
 	actual := args.Map{
 		"notNil":  pw != nil,
 		"vNotNil": pwv != nil,
 		"nilPW":   nilPW == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"notNil":  true,
 		"vNotNil": true,
@@ -349,15 +434,20 @@ func Test_C15_TypedPayloadWrapper_ToPayloadWrapper(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_Reparse(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	err := tw.Reparse()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	errNil := nilTW.Reparse()
+
+	// Act
 	actual := args.Map{
 		"noErr":   err == nil,
 		"nilErr":  errNil != nil,
 		"parsed":  tw.IsParsed(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":   true,
 		"nilErr":  true,
@@ -367,9 +457,14 @@ func Test_C15_TypedPayloadWrapper_Reparse(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_ClearDispose(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	tw.Clear()
+
+	// Act
 	actual := args.Map{"isEmpty": tw.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadWrapper returns correct value -- Clear", actual)
 
@@ -385,17 +480,22 @@ func Test_C15_TypedPayloadWrapper_ClearDispose(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_Attributes(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	attr := tw.Attributes()
 	tw.InitializeAttributesOnNull()
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
 	nilAttr := nilTW.Attributes()
 	nilInit := nilTW.InitializeAttributesOnNull()
+
+	// Act
 	actual := args.Map{
 		"attrNil":     attr == nil,
 		"nilAttr":     nilAttr == nil,
 		"nilInit":     nilInit == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"attrNil":     true,
 		"nilAttr":     true,
@@ -405,12 +505,17 @@ func Test_C15_TypedPayloadWrapper_Attributes(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_IdInteger(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[string]("n", "42", "e", "x")
 	var nilTW *corepayload.TypedPayloadWrapper[string]
+
+	// Act
 	actual := args.Map{
 		"id":    tw.IdInteger(),
 		"nilId": nilTW.IdInteger(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"id":    42,
 		"nilId": -1,
@@ -428,12 +533,15 @@ func Test_C15_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
 // ==========================================================================
 
 func Test_C15_TypedPayloadWrapper_Factories(t *testing.T) {
+	// Arrange
 	tw1, err1 := corepayload.TypedPayloadWrapperFrom[testUser]("n", "i", "e", testUser{Name: "A"})
 	tw2, err2 := corepayload.TypedPayloadWrapperRecord[testUser]("n", "i", "t", "c", testUser{Name: "B"})
 	tw3, err3 := corepayload.TypedPayloadWrapperRecords[[]testUser]("n", "i", "t", "c", []testUser{{Name: "C"}})
 	tw4, err4 := corepayload.TypedPayloadWrapperNameIdRecord[testUser]("n", "i", testUser{Name: "D"})
 	tw5, err5 := corepayload.TypedPayloadWrapperNameIdCategory[testUser]("n", "i", "cat", testUser{Name: "E"})
 	tw6, err6 := corepayload.TypedPayloadWrapperAll[testUser]("n", "i", "t", "e", "c", true, testUser{Name: "F"}, nil)
+
+	// Act
 	actual := args.Map{
 		"e1": err1 == nil, "n1": tw1.Data().Name,
 		"e2": err2 == nil, "n2": tw2.Data().Name,
@@ -442,6 +550,8 @@ func Test_C15_TypedPayloadWrapper_Factories(t *testing.T) {
 		"e5": err5 == nil, "n5": tw5.Data().Name,
 		"e6": err6 == nil, "n6": tw6.Data().Name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"e1": true, "n1": "A",
 		"e2": true, "n2": "B",
@@ -454,21 +564,31 @@ func Test_C15_TypedPayloadWrapper_Factories(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_Must(t *testing.T) {
+	// Arrange
 	pw, _ := corepayload.New.PayloadWrapper.NameIdCategory("n", "i", "cat", testUser{Name: "X"})
 	tw := corepayload.NewTypedPayloadWrapperMust[testUser](pw)
+
+	// Act
 	actual := args.Map{"name": tw.Data().Name}
+
+	// Assert
 	expected := args.Map{"name": "X"}
 	expected.ShouldBeEqual(t, 0, "NewTypedPayloadWrapperMust returns correct value -- with args", actual)
 }
 
 func Test_C15_TypedPayloadWrapper_Deserialize(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	b, _ := tw.Serialize()
 	tw2, err := corepayload.TypedPayloadWrapperDeserialize[testUser](b)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"name":  tw2.Data().Name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"name":  "Alice",
@@ -477,14 +597,19 @@ func Test_C15_TypedPayloadWrapper_Deserialize(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadWrapper_DeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	b, _ := tw.Serialize()
 	jr := corejson.NewResult.UsingTypeBytesPtr("test", b)
 	tw2, err := corepayload.TypedPayloadWrapperDeserializeUsingJsonResult[testUser](jr)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"name":  tw2.Data().Name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"name":  "Alice",
@@ -506,8 +631,11 @@ func makeTypedCollection(t *testing.T) *corepayload.TypedPayloadCollection[testU
 }
 
 func Test_C15_TypedPayloadCollection_Core(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
+
+	// Act
 	actual := args.Map{
 		"len":      col.Length(),
 		"count":    col.Count(),
@@ -520,6 +648,8 @@ func Test_C15_TypedPayloadCollection_Core(t *testing.T) {
 		"emptyLen": empty.Length(),
 		"emptyE":   empty.IsEmpty(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":      2,
 		"count":    2,
@@ -536,12 +666,17 @@ func Test_C15_TypedPayloadCollection_Core(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_NilReceiver(t *testing.T) {
+	// Arrange
 	var nilCol *corepayload.TypedPayloadCollection[testUser]
+
+	// Act
 	actual := args.Map{
 		"len":     nilCol.Length(),
 		"isEmpty": nilCol.IsEmpty(),
 		"items":   nilCol.Items() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":     0,
 		"isEmpty": true,
@@ -551,6 +686,7 @@ func Test_C15_TypedPayloadCollection_NilReceiver(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_ElementAccess(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	first := col.First()
 	last := col.Last()
@@ -562,6 +698,8 @@ func Test_C15_TypedPayloadCollection_ElementAccess(t *testing.T) {
 	efod := empty.FirstOrDefault()
 	elod := empty.LastOrDefault()
 	esafe := empty.SafeAt(0)
+
+	// Act
 	actual := args.Map{
 		"firstName":  first.Data().Name,
 		"lastName":   last.Data().Name,
@@ -573,6 +711,8 @@ func Test_C15_TypedPayloadCollection_ElementAccess(t *testing.T) {
 		"elod":       elod == nil,
 		"esafe":      esafe == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"firstName":  "Alice",
 		"lastName":   "Bob",
@@ -588,36 +728,52 @@ func Test_C15_TypedPayloadCollection_ElementAccess(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Mutation(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[testUser](2)
 	tw := makeTypedWrapper(t)
 	col.Add(tw)
 	col.AddLock(tw)
 	col.Adds(tw, tw)
+
+	// Act
 	actual := args.Map{"len": col.Length()}
+
+	// Assert
 	expected := args.Map{"len": 4}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadCollection returns correct value -- mutation", actual)
 }
 
 func Test_C15_TypedPayloadCollection_AddCollection(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	col2 := makeTypedCollection(t)
 	col.AddCollection(col2)
+
+	// Act
 	actual := args.Map{"len": col.Length()}
+
+	// Assert
 	expected := args.Map{"len": 4}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadCollection returns correct value -- AddCollection", actual)
 }
 
 func Test_C15_TypedPayloadCollection_RemoveAt(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	ok := col.RemoveAt(0)
 	bad := col.RemoveAt(99)
 	neg := col.RemoveAt(-1)
+
+	// Act
 	actual := args.Map{"ok": ok, "bad": bad, "neg": neg, "len": col.Length()}
+
+	// Assert
 	expected := args.Map{"ok": true, "bad": false, "neg": false, "len": 1}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadCollection returns correct value -- RemoveAt", actual)
 }
 
 func Test_C15_TypedPayloadCollection_Iteration(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	names := []string{}
 	col.ForEach(func(i int, item *corepayload.TypedPayloadWrapper[testUser]) {
@@ -632,11 +788,15 @@ func Test_C15_TypedPayloadCollection_Iteration(t *testing.T) {
 		breakCount++
 		return true
 	})
+
+	// Act
 	actual := args.Map{
 		"names":     len(names),
 		"dataNames": len(dataNames),
 		"breakCnt":  breakCount,
 	}
+
+	// Assert
 	expected := args.Map{
 		"names":     2,
 		"dataNames": 2,
@@ -646,6 +806,7 @@ func Test_C15_TypedPayloadCollection_Iteration(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Filter(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	filtered := col.Filter(func(item *corepayload.TypedPayloadWrapper[testUser]) bool {
 		return item.Data().Name == "Alice"
@@ -664,6 +825,8 @@ func Test_C15_TypedPayloadCollection_Filter(t *testing.T) {
 	countF := col.CountFunc(func(item *corepayload.TypedPayloadWrapper[testUser]) bool {
 		return true
 	})
+
+	// Act
 	actual := args.Map{
 		"filteredLen":   filtered.Length(),
 		"byDataLen":     byData.Length(),
@@ -673,6 +836,8 @@ func Test_C15_TypedPayloadCollection_Filter(t *testing.T) {
 		"byIdNotNil":    byId != nil,
 		"countF":        countF,
 	}
+
+	// Assert
 	expected := args.Map{
 		"filteredLen":   1,
 		"byDataLen":     1,
@@ -686,13 +851,18 @@ func Test_C15_TypedPayloadCollection_Filter(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_SkipTake(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	skipped := col.Skip(1)
 	taken := col.Take(1)
+
+	// Act
 	actual := args.Map{
 		"skipLen": len(skipped),
 		"takeLen": len(taken),
 	}
+
+	// Assert
 	expected := args.Map{
 		"skipLen": 1,
 		"takeLen": 1,
@@ -701,6 +871,7 @@ func Test_C15_TypedPayloadCollection_SkipTake(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Extraction(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	allData := col.AllData()
 	allNames := col.AllNames()
@@ -709,6 +880,8 @@ func Test_C15_TypedPayloadCollection_Extraction(t *testing.T) {
 	emptyData := empty.AllData()
 	emptyNames := empty.AllNames()
 	emptyIds := empty.AllIdentifiers()
+
+	// Act
 	actual := args.Map{
 		"dataLen":     len(allData),
 		"namesLen":    len(allNames),
@@ -717,6 +890,8 @@ func Test_C15_TypedPayloadCollection_Extraction(t *testing.T) {
 		"emptyNames":  len(emptyNames),
 		"emptyIds":    len(emptyIds),
 	}
+
+	// Assert
 	expected := args.Map{
 		"dataLen":     2,
 		"namesLen":    2,
@@ -729,14 +904,19 @@ func Test_C15_TypedPayloadCollection_Extraction(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_ToPayloadsCollection(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	pc := col.ToPayloadsCollection()
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	epc := empty.ToPayloadsCollection()
+
+	// Act
 	actual := args.Map{
 		"len":      pc.Length(),
 		"emptyLen": epc.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":      2,
 		"emptyLen": 0,
@@ -745,11 +925,14 @@ func Test_C15_TypedPayloadCollection_ToPayloadsCollection(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Clone(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	cloned, err := col.Clone()
 	cloneMust := col.CloneMust()
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyClone, emptyErr := empty.Clone()
+
+	// Act
 	actual := args.Map{
 		"noErr":     err == nil,
 		"cloneLen":  cloned.Length(),
@@ -757,6 +940,8 @@ func Test_C15_TypedPayloadCollection_Clone(t *testing.T) {
 		"emptyErr":  emptyErr == nil,
 		"emptyLen":  emptyClone.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":     true,
 		"cloneLen":  2,
@@ -768,13 +953,18 @@ func Test_C15_TypedPayloadCollection_Clone(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_ConcatNew(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	tw := makeTypedWrapper(t)
 	concat, err := col.ConcatNew(tw)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"len":   concat.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"len":   3,
@@ -783,9 +973,14 @@ func Test_C15_TypedPayloadCollection_ConcatNew(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_ClearDispose(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	col.Clear()
+
+	// Act
 	actual := args.Map{"isEmpty": col.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"isEmpty": true}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadCollection returns correct value -- Clear", actual)
 
@@ -801,13 +996,18 @@ func Test_C15_TypedPayloadCollection_ClearDispose(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_LockMethods(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	lenLock := col.LengthLock()
 	emptyLock := col.IsEmptyLock()
+
+	// Act
 	actual := args.Map{
 		"lenLock":   lenLock,
 		"emptyLock": emptyLock,
 	}
+
+	// Assert
 	expected := args.Map{
 		"lenLock":   2,
 		"emptyLock": false,
@@ -816,6 +1016,7 @@ func Test_C15_TypedPayloadCollection_LockMethods(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Paging(t *testing.T) {
+	// Arrange
 	col, _ := corepayload.NewTypedPayloadCollectionFromData[testUser]("user", []testUser{
 		{Name: "A"}, {Name: "B"}, {Name: "C"}, {Name: "D"}, {Name: "E"},
 	})
@@ -825,6 +1026,8 @@ func Test_C15_TypedPayloadCollection_Paging(t *testing.T) {
 	withInfo := col.GetPagedCollectionWithInfo(2)
 	smallCol := corepayload.EmptyTypedPayloadCollection[testUser]()
 	smallPages := smallCol.GetPagesSize(0)
+
+	// Act
 	actual := args.Map{
 		"pages":         pages,
 		"singlePageLen": singlePage.Length(),
@@ -832,6 +1035,8 @@ func Test_C15_TypedPayloadCollection_Paging(t *testing.T) {
 		"withInfoLen":   len(withInfo),
 		"smallPages":    smallPages,
 	}
+
+	// Assert
 	expected := args.Map{
 		"pages":         3,
 		"singlePageLen": 2,
@@ -843,7 +1048,10 @@ func Test_C15_TypedPayloadCollection_Paging(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_Validation(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
+
+	// Act
 	actual := args.Map{
 		"isValid":   col.IsValid(),
 		"hasErrors": col.HasErrors(),
@@ -851,6 +1059,8 @@ func Test_C15_TypedPayloadCollection_Validation(t *testing.T) {
 		"mergedErr": col.MergedError() == nil,
 		"errsLen":   len(col.Errors()),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isValid":   true,
 		"hasErrors": false,
@@ -862,11 +1072,16 @@ func Test_C15_TypedPayloadCollection_Validation(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_EmptyValidation(t *testing.T) {
+	// Arrange
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
+
+	// Act
 	actual := args.Map{
 		"isValid":   empty.IsValid(),
 		"errs":      empty.Errors() == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isValid":   true,
 		"errs":      true,
@@ -875,6 +1090,7 @@ func Test_C15_TypedPayloadCollection_EmptyValidation(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_SingleAndFromData(t *testing.T) {
+	// Arrange
 	tw := makeTypedWrapper(t)
 	single := corepayload.NewTypedPayloadCollectionSingle[testUser](tw)
 	var nilTW *corepayload.TypedPayloadWrapper[testUser]
@@ -882,6 +1098,8 @@ func Test_C15_TypedPayloadCollection_SingleAndFromData(t *testing.T) {
 	fromData, err := corepayload.NewTypedPayloadCollectionFromData[testUser]("u", []testUser{{Name: "A"}})
 	emptyFromData, _ := corepayload.NewTypedPayloadCollectionFromData[testUser]("u", []testUser{})
 	mustFromData := corepayload.NewTypedPayloadCollectionFromDataMust[testUser]("u", []testUser{{Name: "B"}})
+
+	// Act
 	actual := args.Map{
 		"singleLen":    single.Length(),
 		"nilSingleLen": nilSingle.Length(),
@@ -890,6 +1108,8 @@ func Test_C15_TypedPayloadCollection_SingleAndFromData(t *testing.T) {
 		"emptyLen":     emptyFromData.Length(),
 		"mustLen":      mustFromData.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"singleLen":    1,
 		"nilSingleLen": 0,
@@ -902,14 +1122,19 @@ func Test_C15_TypedPayloadCollection_SingleAndFromData(t *testing.T) {
 }
 
 func Test_C15_TypedPayloadCollection_FromPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	pc := col.ToPayloadsCollection()
 	fromPayloads := corepayload.TypedPayloadCollectionFromPayloads[testUser](pc)
 	nilFrom := corepayload.TypedPayloadCollectionFromPayloads[testUser](nil)
+
+	// Act
 	actual := args.Map{
 		"len":    fromPayloads.Length(),
 		"nilLen": nilFrom.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":    2,
 		"nilLen": 0,
@@ -932,6 +1157,7 @@ func Test_C15_TypedPayloadCollection_Deserialize(t *testing.T) {
 // ==========================================================================
 
 func Test_C15_MapTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	names := corepayload.MapTypedPayloads[testUser, string](col, func(item *corepayload.TypedPayloadWrapper[testUser]) string {
 		return item.Data().Name
@@ -942,12 +1168,16 @@ func Test_C15_MapTypedPayloads(t *testing.T) {
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyMap := corepayload.MapTypedPayloads[testUser, string](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) string { return "" })
 	emptyDataMap := corepayload.MapTypedPayloadData[testUser, string](empty, func(u testUser) string { return "" })
+
+	// Act
 	actual := args.Map{
 		"namesLen":    len(names),
 		"dataLen":     len(dataNames),
 		"emptyLen":    len(emptyMap),
 		"emptyDatLen": len(emptyDataMap),
 	}
+
+	// Assert
 	expected := args.Map{
 		"namesLen":    2,
 		"dataLen":     2,
@@ -958,6 +1188,7 @@ func Test_C15_MapTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_FlatMapTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	result := corepayload.FlatMapTypedPayloads[testUser, string](col, func(item *corepayload.TypedPayloadWrapper[testUser]) []string {
 		return []string{item.Data().Name, item.Data().Email}
@@ -968,12 +1199,16 @@ func Test_C15_FlatMapTypedPayloads(t *testing.T) {
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyFlat := corepayload.FlatMapTypedPayloads[testUser, string](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) []string { return nil })
 	emptyDataFlat := corepayload.FlatMapTypedPayloadData[testUser, string](empty, func(u testUser) []string { return nil })
+
+	// Act
 	actual := args.Map{
 		"len":         len(result),
 		"dataLen":     len(dataResult),
 		"emptyLen":    len(emptyFlat),
 		"emptyDatLen": len(emptyDataFlat),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":         4,
 		"dataLen":     2,
@@ -984,6 +1219,7 @@ func Test_C15_FlatMapTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_ReduceTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	total := corepayload.ReduceTypedPayloads[testUser, int](col, 0, func(acc int, item *corepayload.TypedPayloadWrapper[testUser]) int {
 		return acc + 1
@@ -994,12 +1230,16 @@ func Test_C15_ReduceTypedPayloads(t *testing.T) {
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyReduce := corepayload.ReduceTypedPayloads[testUser, int](empty, 99, func(acc int, item *corepayload.TypedPayloadWrapper[testUser]) int { return acc })
 	emptyDataReduce := corepayload.ReduceTypedPayloadData[testUser, int](empty, 77, func(acc int, u testUser) int { return acc })
+
+	// Act
 	actual := args.Map{
 		"total":     total,
 		"dataTotal": dataTotal,
 		"empty":     emptyReduce,
 		"emptyData": emptyDataReduce,
 	}
+
+	// Assert
 	expected := args.Map{
 		"total":     2,
 		"dataTotal": 8, // Alice(5) + Bob(3)
@@ -1010,6 +1250,7 @@ func Test_C15_ReduceTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_GroupTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	groups := corepayload.GroupTypedPayloads[testUser, string](col, func(item *corepayload.TypedPayloadWrapper[testUser]) string {
 		return item.Name()
@@ -1019,11 +1260,15 @@ func Test_C15_GroupTypedPayloads(t *testing.T) {
 	})
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyGroups := corepayload.GroupTypedPayloads[testUser, string](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) string { return "" })
+
+	// Act
 	actual := args.Map{
 		"groupsLen":     len(groups),
 		"dataGroupsLen": len(dataGroups),
 		"emptyLen":      len(emptyGroups),
 	}
+
+	// Assert
 	expected := args.Map{
 		"groupsLen":     2,
 		"dataGroupsLen": 2,
@@ -1033,18 +1278,23 @@ func Test_C15_GroupTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_PartitionTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	matching, notMatching := corepayload.PartitionTypedPayloads[testUser](col, func(item *corepayload.TypedPayloadWrapper[testUser]) bool {
 		return item.Data().Name == "Alice"
 	})
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	em, enm := corepayload.PartitionTypedPayloads[testUser](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) bool { return true })
+
+	// Act
 	actual := args.Map{
 		"matchLen":    matching.Length(),
 		"notMatchLen": notMatching.Length(),
 		"emLen":       em.Length(),
 		"enmLen":      enm.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"matchLen":    1,
 		"notMatchLen": 1,
@@ -1055,6 +1305,7 @@ func Test_C15_PartitionTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_AnyAllTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	any := corepayload.AnyTypedPayload[testUser](col, func(item *corepayload.TypedPayloadWrapper[testUser]) bool {
 		return item.Data().Name == "Alice"
@@ -1068,6 +1319,8 @@ func Test_C15_AnyAllTypedPayloads(t *testing.T) {
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	anyEmpty := corepayload.AnyTypedPayload[testUser](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) bool { return true })
 	allEmpty := corepayload.AllTypedPayloads[testUser](empty, func(item *corepayload.TypedPayloadWrapper[testUser]) bool { return false })
+
+	// Act
 	actual := args.Map{
 		"any":      any,
 		"all":      all,
@@ -1075,6 +1328,8 @@ func Test_C15_AnyAllTypedPayloads(t *testing.T) {
 		"anyEmpty": anyEmpty,
 		"allEmpty": allEmpty,
 	}
+
+	// Assert
 	expected := args.Map{
 		"any":      true,
 		"all":      true,
@@ -1086,16 +1341,21 @@ func Test_C15_AnyAllTypedPayloads(t *testing.T) {
 }
 
 func Test_C15_ConvertTypedPayloads(t *testing.T) {
+	// Arrange
 	col := makeTypedCollection(t)
 	converted, err := corepayload.ConvertTypedPayloads[testUser, testUser](col)
 	empty := corepayload.EmptyTypedPayloadCollection[testUser]()
 	emptyConv, emptyErr := corepayload.ConvertTypedPayloads[testUser, testUser](empty)
+
+	// Act
 	actual := args.Map{
 		"noErr":    err == nil,
 		"len":      converted.Length(),
 		"emptyErr": emptyErr == nil,
 		"emptyLen": emptyConv.Length(),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr":    true,
 		"len":      2,
@@ -1110,12 +1370,17 @@ func Test_C15_ConvertTypedPayloads(t *testing.T) {
 // ==========================================================================
 
 func Test_C15_DeserializePayloadTo(t *testing.T) {
+	// Arrange
 	pw, _ := corepayload.New.PayloadWrapper.NameIdCategory("n", "i", "cat", testUser{Name: "X"})
 	u, err := corepayload.DeserializePayloadTo[testUser](pw)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"name":  u.Name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"name":  "X",
@@ -1124,28 +1389,43 @@ func Test_C15_DeserializePayloadTo(t *testing.T) {
 }
 
 func Test_C15_DeserializePayloadTo_Nil(t *testing.T) {
+	// Arrange
 	_, err := corepayload.DeserializePayloadTo[testUser](nil)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadTo returns nil -- nil", actual)
 }
 
 func Test_C15_DeserializePayloadToMust(t *testing.T) {
+	// Arrange
 	pw, _ := corepayload.New.PayloadWrapper.NameIdCategory("n", "i", "cat", testUser{Name: "Y"})
 	u := corepayload.DeserializePayloadToMust[testUser](pw)
+
+	// Act
 	actual := args.Map{"name": u.Name}
+
+	// Assert
 	expected := args.Map{"name": "Y"}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadToMust returns correct value -- with args", actual)
 }
 
 func Test_C15_DeserializePayloadToSlice(t *testing.T) {
+	// Arrange
 	users := []testUser{{Name: "A"}, {Name: "B"}}
 	pw, _ := corepayload.New.PayloadWrapper.NameIdCategory("n", "i", "cat", users)
 	result, err := corepayload.DeserializePayloadToSlice[testUser](pw)
+
+	// Act
 	actual := args.Map{
 		"noErr": err == nil,
 		"len":   len(result),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noErr": true,
 		"len":   2,
@@ -1154,61 +1434,96 @@ func Test_C15_DeserializePayloadToSlice(t *testing.T) {
 }
 
 func Test_C15_DeserializePayloadToSlice_Nil(t *testing.T) {
+	// Arrange
 	result, err := corepayload.DeserializePayloadToSlice[testUser](nil)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil, "len": len(result)}
+
+	// Assert
 	expected := args.Map{"hasErr": true, "len": 0}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadToSlice returns nil -- nil", actual)
 }
 
 func Test_C15_DeserializePayloadToSliceMust(t *testing.T) {
+	// Arrange
 	users := []testUser{{Name: "C"}}
 	pw, _ := corepayload.New.PayloadWrapper.NameIdCategory("n", "i", "cat", users)
 	result := corepayload.DeserializePayloadToSliceMust[testUser](pw)
+
+	// Act
 	actual := args.Map{"len": len(result)}
+
+	// Assert
 	expected := args.Map{"len": 1}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadToSliceMust returns correct value -- with args", actual)
 }
 
 func Test_C15_DeserializeAttributesPayloadTo(t *testing.T) {
+	// Arrange
 	u := testUser{Name: "Test"}
 	b, _ := corejson.Serialize.Raw(u)
 	attr := &corepayload.Attributes{DynamicPayloads: b}
 	result, err := corepayload.DeserializeAttributesPayloadTo[testUser](attr)
+
+	// Act
 	actual := args.Map{"noErr": err == nil, "name": result.Name}
+
+	// Assert
 	expected := args.Map{"noErr": true, "name": "Test"}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadTo returns correct value -- with args", actual)
 }
 
 func Test_C15_DeserializeAttributesPayloadTo_Nil(t *testing.T) {
+	// Arrange
 	_, err := corepayload.DeserializeAttributesPayloadTo[testUser](nil)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil}
+
+	// Assert
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadTo returns nil -- nil", actual)
 }
 
 func Test_C15_DeserializeAttributesPayloadToMust(t *testing.T) {
+	// Arrange
 	u := testUser{Name: "MustTest"}
 	b, _ := corejson.Serialize.Raw(u)
 	attr := &corepayload.Attributes{DynamicPayloads: b}
 	result := corepayload.DeserializeAttributesPayloadToMust[testUser](attr)
+
+	// Act
 	actual := args.Map{"name": result.Name}
+
+	// Assert
 	expected := args.Map{"name": "MustTest"}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToMust returns correct value -- with args", actual)
 }
 
 func Test_C15_DeserializeAttributesPayloadToSlice(t *testing.T) {
+	// Arrange
 	users := []testUser{{Name: "A"}}
 	b, _ := corejson.Serialize.Raw(users)
 	attr := &corepayload.Attributes{DynamicPayloads: b}
 	result, err := corepayload.DeserializeAttributesPayloadToSlice[testUser](attr)
+
+	// Act
 	actual := args.Map{"noErr": err == nil, "len": len(result)}
+
+	// Assert
 	expected := args.Map{"noErr": true, "len": 1}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToSlice returns correct value -- with args", actual)
 }
 
 func Test_C15_DeserializeAttributesPayloadToSlice_Nil(t *testing.T) {
+	// Arrange
 	result, err := corepayload.DeserializeAttributesPayloadToSlice[testUser](nil)
+
+	// Act
 	actual := args.Map{"hasErr": err != nil, "len": len(result)}
+
+	// Assert
 	expected := args.Map{"hasErr": true, "len": 0}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToSlice returns nil -- nil", actual)
 }

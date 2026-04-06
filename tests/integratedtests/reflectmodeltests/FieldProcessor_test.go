@@ -9,8 +9,13 @@ import (
 // ===== FieldProcessor Tests =====
 
 func Test_FieldProcessor_IsFieldType_Match(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Name", 0)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 
@@ -20,8 +25,13 @@ func Test_FieldProcessor_IsFieldType_Match(t *testing.T) {
 }
 
 func Test_FieldProcessor_IsFieldType_NoMatch(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Name", 0)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 
@@ -33,8 +43,13 @@ func Test_FieldProcessor_IsFieldType_NoMatch(t *testing.T) {
 // Note: IsFieldType nil receiver test migrated to FieldProcessor_NilReceiver_testcases.go
 
 func Test_FieldProcessor_IsFieldKind_Match(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Age", 1)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Age", actual)
 
@@ -44,8 +59,13 @@ func Test_FieldProcessor_IsFieldKind_Match(t *testing.T) {
 }
 
 func Test_FieldProcessor_IsFieldKind_NoMatch(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Age", 1)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Age", actual)
 
@@ -66,8 +86,13 @@ func Test_FieldProcessor_NilReceiver(t *testing.T) {
 }
 
 func Test_FieldProcessor_BoolField(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Active", 2)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Active", actual)
 
@@ -81,8 +106,13 @@ func Test_FieldProcessor_BoolField(t *testing.T) {
 }
 
 func Test_FieldProcessor_FieldData(t *testing.T) {
+	// Arrange
 	fp := newFieldProcessor("Name", 0)
+
+	// Act
 	actual := args.Map{"result": fp == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 

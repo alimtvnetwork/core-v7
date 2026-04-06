@@ -30,12 +30,17 @@ func newPWSeg4() *corepayload.PayloadWrapper {
 // --- PayloadsCollection ---
 
 func Test_CovPL_S4_01_PC_Add_Adds_AddsPtr(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(5)
 	pw := *newPWSeg4()
 	pc.Add(pw)
 	pc.Adds(pw, pw)
 	pc.AddsPtr(newPWSeg4(), newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.Length() < 5}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 5", actual)
 }
@@ -57,22 +62,32 @@ func Test_CovPL_S4_03_PC_AddsOptions(t *testing.T) {
 }
 
 func Test_CovPL_S4_04_PC_AddsIf(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(5)
 	pw := *newPWSeg4()
 	pc.AddsIf(true, pw)
 	pc.AddsIf(false, pw) // skipped
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S4_05_PC_InsertAt(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(3)
 	pc.Add(*newPWSeg4())
 	pc.Add(*newPWSeg4())
 	pw2, _ := corepayload.New.PayloadWrapper.Create("inserted", "99", "t", "c", 1)
 	pc.InsertAt(0, *pw2)
+
+	// Act
 	actual := args.Map{"result": pc.First().Name != "inserted"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected inserted at 0", actual)
 }
@@ -86,6 +101,7 @@ func Test_CovPL_S4_06_PC_ConcatNew_ConcatNewPtr(t *testing.T) {
 }
 
 func Test_CovPL_S4_07_PC_Reverse(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(3)
 	pw1, _ := corepayload.New.PayloadWrapper.Create("a", "1", "t", "c", 1)
 	pw2, _ := corepayload.New.PayloadWrapper.Create("b", "2", "t", "c", 2)
@@ -94,7 +110,11 @@ func Test_CovPL_S4_07_PC_Reverse(t *testing.T) {
 	pc.Add(*pw2)
 	pc.Add(*pw3)
 	pc.Reverse()
+
+	// Act
 	actual := args.Map{"result": pc.First().Name != "c"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected c first after reverse", actual)
 	// 2 items
@@ -112,12 +132,17 @@ func Test_CovPL_S4_07_PC_Reverse(t *testing.T) {
 }
 
 func Test_CovPL_S4_08_PC_Clone_ClonePtr(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
 	_ = pc.Clone()
 	_ = pc.ClonePtr()
 	var nilPC *corepayload.PayloadsCollection
+
+	// Act
 	actual := args.Map{"result": nilPC.ClonePtr() != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
@@ -137,9 +162,14 @@ func Test_CovPL_S4_09_PC_Clear_Dispose(t *testing.T) {
 // --- PayloadsCollectionGetters ---
 
 func Test_CovPL_S4_10_PCG_Length_Count_IsEmpty_HasAnyItem_LastIndex_HasIndex(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	actual := args.Map{"result": pc.Count() != 1}
@@ -167,9 +197,14 @@ func Test_CovPL_S4_10_PCG_Length_Count_IsEmpty_HasAnyItem_LastIndex_HasIndex(t *
 }
 
 func Test_CovPL_S4_11_PCG_First_Last_FirstOrDefault_LastOrDefault(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.First() == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": pc.Last() == nil}
@@ -229,20 +264,30 @@ func Test_CovPL_S4_12_PCG_Skip_Take_Limit_Collection(t *testing.T) {
 }
 
 func Test_CovPL_S4_13_PCG_Strings(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
 	s := pc.Strings()
+
+	// Act
 	actual := args.Map{"result": len(s) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S4_14_PCG_IsEqual_IsEqualItems(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc.Add(*newPWSeg4())
 	pc2 := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc2.Add(*newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.IsEqual(pc2)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": pc.IsEqualItems(pc2.Items...)}
@@ -267,6 +312,7 @@ func Test_CovPL_S4_14_PCG_IsEqual_IsEqualItems(t *testing.T) {
 // --- PayloadsCollectionFilter ---
 
 func Test_CovPL_S4_20_PCF_Filter(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(3)
 	pw1, _ := corepayload.New.PayloadWrapper.Create("a", "1", "t", "c", 1)
 	pw2, _ := corepayload.New.PayloadWrapper.Create("b", "2", "t", "c", 2)
@@ -275,12 +321,17 @@ func Test_CovPL_S4_20_PCF_Filter(t *testing.T) {
 	items := pc.Filter(func(pw *corepayload.PayloadWrapper) (bool, bool) {
 		return pw.Name == "a", false
 	})
+
+	// Act
 	actual := args.Map{"result": len(items) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S4_21_PCF_FilterWithLimit(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(5)
 	for i := 0; i < 5; i++ {
 		pc.Add(*newPWSeg4())
@@ -288,19 +339,28 @@ func Test_CovPL_S4_21_PCF_FilterWithLimit(t *testing.T) {
 	items := pc.FilterWithLimit(2, func(pw *corepayload.PayloadWrapper) (bool, bool) {
 		return true, false
 	})
+
+	// Act
 	actual := args.Map{"result": len(items) > 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at most 2", actual)
 }
 
 func Test_CovPL_S4_22_PCF_FirstByFilter(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pw1, _ := corepayload.New.PayloadWrapper.Create("a", "1", "t", "c", 1)
 	pc.Add(*pw1)
 	found := pc.FirstByFilter(func(pw *corepayload.PayloadWrapper) bool {
 		return pw.Name == "a"
 	})
+
+	// Act
 	actual := args.Map{"result": found == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	notFound := pc.FirstByFilter(func(pw *corepayload.PayloadWrapper) bool {
@@ -312,9 +372,14 @@ func Test_CovPL_S4_22_PCF_FirstByFilter(t *testing.T) {
 }
 
 func Test_CovPL_S4_23_PCF_FirstById_FirstByCategory_FirstByTaskType_FirstByEntityType(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.FirstById("10") == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	actual := args.Map{"result": pc.FirstByCategory("category") == nil}
@@ -332,13 +397,18 @@ func Test_CovPL_S4_23_PCF_FirstById_FirstByCategory_FirstByTaskType_FirstByEntit
 }
 
 func Test_CovPL_S4_24_PCF_FilterCollection_SkipFilterCollection(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(3)
 	pc.Add(*newPWSeg4())
 	pc.Add(*newPWSeg4())
 	fc := pc.FilterCollection(func(pw *corepayload.PayloadWrapper) (bool, bool) {
 		return true, false
 	})
+
+	// Act
 	actual := args.Map{"result": fc.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sc := pc.SkipFilterCollection(func(pw *corepayload.PayloadWrapper) (bool, bool) {
@@ -362,12 +432,17 @@ func Test_CovPL_S4_25_PCF_FilterCollectionByIds_FilterNameCollection_FilterCateg
 // --- PayloadsCollectionJson ---
 
 func Test_CovPL_S4_30_PCJ_StringsUsingFmt_JoinUsingFmt(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
 	strs := pc.StringsUsingFmt(func(pw *corepayload.PayloadWrapper) string {
 		return pw.Name
 	})
+
+	// Act
 	actual := args.Map{"result": len(strs) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	j := pc.JoinUsingFmt(func(pw *corepayload.PayloadWrapper) string {
@@ -389,9 +464,14 @@ func Test_CovPL_S4_31_PCJ_JsonStrings_JoinJsonStrings_Join_JoinCsv_JoinCsvLine(t
 }
 
 func Test_CovPL_S4_32_PCJ_JsonString_String_PrettyJsonString(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
+
+	// Act
 	actual := args.Map{"result": pc.JsonString() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": pc.String() == ""}
@@ -413,10 +493,15 @@ func Test_CovPL_S4_32_PCJ_JsonString_String_PrettyJsonString(t *testing.T) {
 }
 
 func Test_CovPL_S4_33_PCJ_CsvStrings(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(2)
 	pc.Add(*newPWSeg4())
 	csv := pc.CsvStrings()
+
+	// Act
 	actual := args.Map{"result": len(csv) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := corepayload.New.PayloadsCollection.UsingCap(0)
@@ -447,11 +532,16 @@ func Test_CovPL_S4_35_PCJ_AsInterfaces(t *testing.T) {
 // --- PayloadsCollectionPaging ---
 
 func Test_CovPL_S4_40_PCP_GetPagesSize(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		pc.Add(*newPWSeg4())
 	}
+
+	// Act
 	actual := args.Map{"result": pc.GetPagesSize(3) != 4}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	actual := args.Map{"result": pc.GetPagesSize(0) != 0}
@@ -460,12 +550,17 @@ func Test_CovPL_S4_40_PCP_GetPagesSize(t *testing.T) {
 }
 
 func Test_CovPL_S4_41_PCP_GetPagedCollection(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		pc.Add(*newPWSeg4())
 	}
 	pages := pc.GetPagedCollection(3)
+
+	// Act
 	actual := args.Map{"result": len(pages) < 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	// small
@@ -475,12 +570,17 @@ func Test_CovPL_S4_41_PCP_GetPagedCollection(t *testing.T) {
 }
 
 func Test_CovPL_S4_42_PCP_GetSinglePageCollection(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(10)
 	for i := 0; i < 10; i++ {
 		pc.Add(*newPWSeg4())
 	}
 	page := pc.GetSinglePageCollection(3, 2)
+
+	// Act
 	actual := args.Map{"result": page.Length() == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// last page
@@ -494,18 +594,28 @@ func Test_CovPL_S4_42_PCP_GetSinglePageCollection(t *testing.T) {
 // --- newPayloadsCollectionCreator ---
 
 func Test_CovPL_S4_50_NPCC_Empty(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.Empty()
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_CovPL_S4_51_NPCC_Deserialize_DeserializeMust(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc.Add(*newPWSeg4())
 	b, _ := corejson.Serialize.Raw(pc)
 	pc2, err := corepayload.New.PayloadsCollection.Deserialize(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || pc2.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	pc3 := corepayload.New.PayloadsCollection.DeserializeMust(b)
@@ -520,11 +630,16 @@ func Test_CovPL_S4_51_NPCC_Deserialize_DeserializeMust(t *testing.T) {
 }
 
 func Test_CovPL_S4_52_NPCC_DeserializeToMany(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc.Add(*newPWSeg4())
 	b, _ := corejson.Serialize.Raw([]*corepayload.PayloadsCollection{pc})
 	many, err := corepayload.New.PayloadsCollection.DeserializeToMany(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(many) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_, err2 := corepayload.New.PayloadsCollection.DeserializeToMany([]byte("bad"))
@@ -534,19 +649,29 @@ func Test_CovPL_S4_52_NPCC_DeserializeToMany(t *testing.T) {
 }
 
 func Test_CovPL_S4_53_NPCC_DeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc.Add(*newPWSeg4())
 	jr := pc.JsonPtr()
 	pc2, err := corepayload.New.PayloadsCollection.DeserializeUsingJsonResult(jr)
+
+	// Act
 	actual := args.Map{"result": err != nil || pc2.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S4_54_NPCC_UsingWrappers(t *testing.T) {
+	// Arrange
 	pw := newPWSeg4()
 	pc := corepayload.New.PayloadsCollection.UsingWrappers(pw)
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := corepayload.New.PayloadsCollection.UsingWrappers()
@@ -573,10 +698,15 @@ func Test_CovPL_S4_60_NUC_Methods(t *testing.T) {
 }
 
 func Test_CovPL_S4_61_NUC_Deserialize(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.Create(false, "name", "type")
 	b, _ := corejson.Serialize.Raw(u)
 	u2, err := corepayload.New.User.Deserialize(b)
+
+	// Act
 	actual := args.Map{"result": err != nil || u2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_, err2 := corepayload.New.User.Deserialize([]byte("bad"))
@@ -586,9 +716,14 @@ func Test_CovPL_S4_61_NUC_Deserialize(t *testing.T) {
 }
 
 func Test_CovPL_S4_62_NUC_CastOrDeserializeFrom(t *testing.T) {
+	// Arrange
 	u := corepayload.New.User.Create(false, "name", "type")
 	u2, err := corepayload.New.User.CastOrDeserializeFrom(u)
+
+	// Act
 	actual := args.Map{"result": err != nil || u2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_, err2 := corepayload.New.User.CastOrDeserializeFrom(nil)
@@ -605,9 +740,14 @@ type tpwTestData struct {
 }
 
 func Test_CovPL_S4_70_TPW_Accessors(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": tw.Name() != "tw"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected tw", actual)
 	actual := args.Map{"result": tw.Identifier() != "1"}
@@ -650,8 +790,13 @@ func Test_CovPL_S4_70_TPW_Accessors(t *testing.T) {
 }
 
 func Test_CovPL_S4_71_TPW_NilAccessors(t *testing.T) {
+	// Arrange
 	var nilTW *corepayload.TypedPayloadWrapper[tpwTestData]
+
+	// Act
 	actual := args.Map{"result": nilTW.Name() != ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	actual := args.Map{"result": nilTW.Identifier() != ""}
@@ -678,9 +823,14 @@ func Test_CovPL_S4_71_TPW_NilAccessors(t *testing.T) {
 }
 
 func Test_CovPL_S4_72_TPW_Error_HasError_IsEmpty_HasItems_HasSafeItems_HandleError(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": tw.HasError()}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	actual := args.Map{"result": tw.IsEmpty()}
@@ -699,9 +849,14 @@ func Test_CovPL_S4_72_TPW_Error_HasError_IsEmpty_HasItems_HasSafeItems_HandleErr
 }
 
 func Test_CovPL_S4_73_TPW_String_PrettyJsonString_JsonString(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": tw.String() == ""}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": tw.PrettyJsonString() == ""}
@@ -717,12 +872,17 @@ func Test_CovPL_S4_73_TPW_String_PrettyJsonString_JsonString(t *testing.T) {
 }
 
 func Test_CovPL_S4_74_TPW_Json_JsonPtr_MarshalJSON_UnmarshalJSON(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	_ = tw.Json()
 	_ = tw.JsonPtr()
 	b, err := tw.MarshalJSON()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	tw2 := &corepayload.TypedPayloadWrapper[tpwTestData]{}
@@ -740,10 +900,15 @@ func Test_CovPL_S4_74_TPW_Json_JsonPtr_MarshalJSON_UnmarshalJSON(t *testing.T) {
 }
 
 func Test_CovPL_S4_75_TPW_Serialize_SerializeMust(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	b, err := tw.Serialize()
+
+	// Act
 	actual := args.Map{"result": err != nil || len(b) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	_ = tw.SerializeMust()
@@ -758,10 +923,15 @@ func Test_CovPL_S4_76_TPW_TypedDataJson_TypedDataJsonPtr_TypedDataJsonBytes(t *t
 }
 
 func Test_CovPL_S4_77_TPW_GetAs_Methods(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[string](
 		"tw", "1", "entity", "hello")
 	s, ok := tw.GetAsString()
+
+	// Act
 	actual := args.Map{"result": ok || s != "hello"}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	twI, _ := corepayload.NewTypedPayloadWrapperFrom[int](
@@ -809,9 +979,14 @@ func Test_CovPL_S4_77_TPW_GetAs_Methods(t *testing.T) {
 }
 
 func Test_CovPL_S4_78_TPW_Value_Methods(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[string](
 		"tw", "1", "entity", "hello")
+
+	// Act
 	actual := args.Map{"result": tw.ValueString() != "hello"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	twI, _ := corepayload.NewTypedPayloadWrapperFrom[int](
@@ -839,13 +1014,18 @@ func Test_CovPL_S4_78_TPW_Value_Methods(t *testing.T) {
 }
 
 func Test_CovPL_S4_79_TPW_Setters(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	tw.SetName("new")
 	tw.SetIdentifier("2")
 	tw.SetEntityType("e2")
 	tw.SetCategoryName("c2")
+
+	// Act
 	actual := args.Map{"result": tw.Name() != "new"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected new", actual)
 	err := tw.SetTypedData(tpwTestData{Name: "y", Value: 10})
@@ -859,6 +1039,7 @@ func Test_CovPL_S4_79_TPW_Setters(t *testing.T) {
 }
 
 func Test_CovPL_S4_80_TPW_Clone_ClonePtr_ToPayloadWrapper_Reparse(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	_, _ = tw.Clone(true)
@@ -868,7 +1049,11 @@ func Test_CovPL_S4_80_TPW_Clone_ClonePtr_ToPayloadWrapper_Reparse(t *testing.T) 
 	_ = tw.ToPayloadWrapper()
 	_ = tw.PayloadWrapperValue()
 	err := tw.Reparse()
+
+	// Act
 	actual := args.Map{"result": err != nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	var nilTW *corepayload.TypedPayloadWrapper[tpwTestData]
@@ -879,9 +1064,14 @@ func Test_CovPL_S4_80_TPW_Clone_ClonePtr_ToPayloadWrapper_Reparse(t *testing.T) 
 }
 
 func Test_CovPL_S4_81_TPW_DynamicPayloads_PayloadsString_Length_IsNull(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": len(tw.DynamicPayloads()) == 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	actual := args.Map{"result": tw.PayloadsString() == ""}
@@ -922,60 +1112,95 @@ func Test_CovPL_S4_83_TPW_NewTypedPayloadWrapperMust(t *testing.T) {
 // --- newTypedPayloadWrapperCreator ---
 
 func Test_CovPL_S4_85_NTPWC_TypedPayloadWrapperFrom(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_86_NTPWC_TypedPayloadWrapperRecord(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperRecord[tpwTestData](
 		"tw", "1", "task", "cat", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_87_NTPWC_TypedPayloadWrapperRecords(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperRecords[[]tpwTestData](
 		"tw", "1", "task", "cat", []tpwTestData{{Name: "a"}, {Name: "b"}})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_88_NTPWC_TypedPayloadWrapperNameIdRecord(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperNameIdRecord[tpwTestData](
 		"tw", "1", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_89_NTPWC_TypedPayloadWrapperNameIdCategory(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperNameIdCategory[tpwTestData](
 		"tw", "1", "cat", tpwTestData{Name: "x", Value: 5})
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_90_NTPWC_TypedPayloadWrapperAll(t *testing.T) {
+	// Arrange
 	tw, err := corepayload.TypedPayloadWrapperAll[tpwTestData](
 		"tw", "1", "task", "entity", "cat", false,
 		tpwTestData{Name: "x", Value: 5}, nil)
+
+	// Act
 	actual := args.Map{"result": err != nil || tw == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_91_NTPWC_TypedPayloadWrapperDeserialize(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	b, _ := tw.Serialize()
 	tw2, err := corepayload.TypedPayloadWrapperDeserialize[tpwTestData](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || tw2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	_, err2 := corepayload.TypedPayloadWrapperDeserialize[tpwTestData]([]byte("bad"))
@@ -985,21 +1210,31 @@ func Test_CovPL_S4_91_NTPWC_TypedPayloadWrapperDeserialize(t *testing.T) {
 }
 
 func Test_CovPL_S4_92_NTPWC_TypedPayloadWrapperDeserializeUsingJsonResult(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	jr := tw.JsonPtr()
 	tw2, err := corepayload.TypedPayloadWrapperDeserializeUsingJsonResult[tpwTestData](jr)
+
+	// Act
 	actual := args.Map{"result": err != nil || tw2 == nil}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S4_93_NTPWC_TypedPayloadWrapperDeserializeToMany(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"tw", "1", "entity", tpwTestData{Name: "x", Value: 5})
 	b, _ := corejson.Serialize.Raw([]*corepayload.PayloadWrapper{tw.Wrapper})
 	many, err := corepayload.TypedPayloadWrapperDeserializeToMany[tpwTestData](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || len(many) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_, err2 := corepayload.TypedPayloadWrapperDeserializeToMany[tpwTestData]([]byte("bad"))
@@ -1011,8 +1246,13 @@ func Test_CovPL_S4_93_NTPWC_TypedPayloadWrapperDeserializeToMany(t *testing.T) {
 // --- TypedPayloadCollection deep coverage ---
 
 func Test_CovPL_S4_100_TPC_Core(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](5)
+
+	// Act
 	actual := args.Map{"result": col.IsEmpty()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": col.HasItems()}
@@ -1049,8 +1289,13 @@ func Test_CovPL_S4_100_TPC_Core(t *testing.T) {
 }
 
 func Test_CovPL_S4_101_TPC_NilAccessors(t *testing.T) {
+	// Arrange
 	var nilCol *corepayload.TypedPayloadCollection[tpwTestData]
+
+	// Act
 	actual := args.Map{"result": nilCol.Length() != 0}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	actual := args.Map{"result": nilCol.IsEmpty()}
@@ -1071,6 +1316,7 @@ func Test_CovPL_S4_102_TPC_LengthLock_IsEmptyLock(t *testing.T) {
 }
 
 func Test_CovPL_S4_103_TPC_ElementAccess(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](2)
 	tw1, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
@@ -1078,7 +1324,11 @@ func Test_CovPL_S4_103_TPC_ElementAccess(t *testing.T) {
 		"b", "2", "e", tpwTestData{Name: "b"})
 	col.Add(tw1)
 	col.Add(tw2)
+
+	// Act
 	actual := args.Map{"result": col.First().Name() != "a"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	actual := args.Map{"result": col.Last().Name() != "b"}
@@ -1106,6 +1356,7 @@ func Test_CovPL_S4_103_TPC_ElementAccess(t *testing.T) {
 }
 
 func Test_CovPL_S4_104_TPC_Mutation(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](5)
 	tw1, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
@@ -1118,7 +1369,11 @@ func Test_CovPL_S4_104_TPC_Mutation(t *testing.T) {
 	col2.Add(tw1)
 	col.AddCollection(col2)
 	col.AddCollection(corepayload.EmptyTypedPayloadCollection[tpwTestData]())
+
+	// Act
 	actual := args.Map{"result": col.RemoveAt(0)}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": col.RemoveAt(-1)}
@@ -1130,6 +1385,7 @@ func Test_CovPL_S4_104_TPC_Mutation(t *testing.T) {
 }
 
 func Test_CovPL_S4_105_TPC_Iteration(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](2)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a", Value: 1})
@@ -1138,7 +1394,11 @@ func Test_CovPL_S4_105_TPC_Iteration(t *testing.T) {
 	col.ForEach(func(i int, item *corepayload.TypedPayloadWrapper[tpwTestData]) {
 		count++
 	})
+
+	// Act
 	actual := args.Map{"result": count != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	col.ForEachData(func(i int, d tpwTestData) {
@@ -1152,6 +1412,7 @@ func Test_CovPL_S4_105_TPC_Iteration(t *testing.T) {
 }
 
 func Test_CovPL_S4_106_TPC_Filter(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](3)
 	tw1, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a", Value: 1})
@@ -1162,7 +1423,11 @@ func Test_CovPL_S4_106_TPC_Filter(t *testing.T) {
 	filtered := col.Filter(func(item *corepayload.TypedPayloadWrapper[tpwTestData]) bool {
 		return item.Data().Value == 1
 	})
+
+	// Act
 	actual := args.Map{"result": filtered.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	filteredByData := col.FilterByData(func(d tpwTestData) bool {
@@ -1195,13 +1460,18 @@ func Test_CovPL_S4_106_TPC_Filter(t *testing.T) {
 }
 
 func Test_CovPL_S4_107_TPC_SkipTake(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](5)
 	for i := 0; i < 5; i++ {
 		tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 			"x", "1", "e", tpwTestData{Value: i})
 		col.Add(tw)
 	}
+
+	// Act
 	actual := args.Map{"result": len(col.Skip(2)) != 3}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	actual := args.Map{"result": len(col.Skip(10)) != 0}
@@ -1216,12 +1486,17 @@ func Test_CovPL_S4_107_TPC_SkipTake(t *testing.T) {
 }
 
 func Test_CovPL_S4_108_TPC_Extraction(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](2)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a", Value: 1})
 	col.Add(tw)
 	data := col.AllData()
+
+	// Act
 	actual := args.Map{"result": len(data) != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	names := col.AllNames()
@@ -1245,12 +1520,17 @@ func Test_CovPL_S4_108_TPC_Extraction(t *testing.T) {
 }
 
 func Test_CovPL_S4_109_TPC_ToPayloadsCollection(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](1)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
 	col.Add(tw)
 	pc := col.ToPayloadsCollection()
+
+	// Act
 	actual := args.Map{"result": pc.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	empty := corepayload.EmptyTypedPayloadCollection[tpwTestData]()
@@ -1261,12 +1541,17 @@ func Test_CovPL_S4_109_TPC_ToPayloadsCollection(t *testing.T) {
 }
 
 func Test_CovPL_S4_110_TPC_Clone_CloneMust_ConcatNew(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](1)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
 	col.Add(tw)
 	cloned, err := col.Clone()
+
+	// Act
 	actual := args.Map{"result": err != nil || cloned.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_ = col.CloneMust()
@@ -1296,11 +1581,16 @@ func Test_CovPL_S4_111_TPC_Clear_Dispose(t *testing.T) {
 }
 
 func Test_CovPL_S4_112_TPC_Deserialization(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
 	b, _ := corejson.Serialize.Raw([]*corepayload.PayloadWrapper{tw.Wrapper})
 	col, err := corepayload.TypedPayloadCollectionDeserialize[tpwTestData](b)
+
+	// Act
 	actual := args.Map{"result": err != nil || col.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_ = corepayload.TypedPayloadCollectionDeserializeMust[tpwTestData](b)
@@ -1311,10 +1601,15 @@ func Test_CovPL_S4_112_TPC_Deserialization(t *testing.T) {
 }
 
 func Test_CovPL_S4_113_TPC_FromPayloads(t *testing.T) {
+	// Arrange
 	pc := corepayload.New.PayloadsCollection.UsingCap(1)
 	pc.Add(*newPWSeg4())
 	col := corepayload.TypedPayloadCollectionFromPayloads[map[string]int](pc)
+
+	// Act
 	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// nil
@@ -1325,10 +1620,15 @@ func Test_CovPL_S4_113_TPC_FromPayloads(t *testing.T) {
 }
 
 func Test_CovPL_S4_114_TPC_NewTypedPayloadCollectionSingle(t *testing.T) {
+	// Arrange
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
 	col := corepayload.NewTypedPayloadCollectionSingle[tpwTestData](tw)
+
+	// Act
 	actual := args.Map{"result": col.Length() != 1}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	nilCol := corepayload.NewTypedPayloadCollectionSingle[tpwTestData](nil)
@@ -1338,9 +1638,14 @@ func Test_CovPL_S4_114_TPC_NewTypedPayloadCollectionSingle(t *testing.T) {
 }
 
 func Test_CovPL_S4_115_TPC_NewTypedPayloadCollectionFromData(t *testing.T) {
+	// Arrange
 	col, err := corepayload.NewTypedPayloadCollectionFromData[tpwTestData](
 		"test", []tpwTestData{{Name: "a"}, {Name: "b"}})
+
+	// Act
 	actual := args.Map{"result": err != nil || col.Length() != 2}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	_ = corepayload.NewTypedPayloadCollectionFromDataMust[tpwTestData](
@@ -1353,11 +1658,16 @@ func Test_CovPL_S4_115_TPC_NewTypedPayloadCollectionFromData(t *testing.T) {
 }
 
 func Test_CovPL_S4_116_TPC_IsValid_HasErrors_Errors_FirstError_MergedError(t *testing.T) {
+	// Arrange
 	col := corepayload.NewTypedPayloadCollection[tpwTestData](1)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[tpwTestData](
 		"a", "1", "e", tpwTestData{Name: "a"})
 	col.Add(tw)
+
+	// Act
 	actual := args.Map{"result": col.IsValid()}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	actual := args.Map{"result": col.HasErrors()}
@@ -1384,6 +1694,7 @@ func Test_CovPL_S4_116_TPC_IsValid_HasErrors_Errors_FirstError_MergedError(t *te
 // --- PayloadCreateInstructionTypeStringer ---
 
 func Test_CovPL_S4_120_PCITS_PayloadCreateInstruction(t *testing.T) {
+	// Arrange
 	inst := corepayload.PayloadCreateInstructionTypeStringer{
 		Name:                 "n",
 		Identifier:           "1",
@@ -1393,7 +1704,11 @@ func Test_CovPL_S4_120_PCITS_PayloadCreateInstruction(t *testing.T) {
 		Payloads:             map[string]int{"a": 1},
 	}
 	pi := inst.PayloadCreateInstruction()
+
+	// Act
 	actual := args.Map{"result": pi.TaskTypeName != "task"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected task", actual)
 	actual := args.Map{"result": pi.CategoryName != "cat"}
@@ -1404,6 +1719,7 @@ func Test_CovPL_S4_120_PCITS_PayloadCreateInstruction(t *testing.T) {
 // --- BytesCreateInstructionStringer ---
 
 func Test_CovPL_S4_121_BCIS_Fields(t *testing.T) {
+	// Arrange
 	inst := corepayload.BytesCreateInstructionStringer{
 		Name:           "n",
 		Identifier:     "1",
@@ -1413,7 +1729,11 @@ func Test_CovPL_S4_121_BCIS_Fields(t *testing.T) {
 		HasManyRecords: false,
 		Payloads:       []byte("x"),
 	}
+
+	// Act
 	actual := args.Map{"result": inst.Name != "n"}
+
+	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected n", actual)
 }

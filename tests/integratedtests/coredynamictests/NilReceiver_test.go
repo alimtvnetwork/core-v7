@@ -8,6 +8,7 @@ import "testing"
 
 func Test_Dynamic_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range dynamicNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }
@@ -18,6 +19,7 @@ func Test_Dynamic_NilReceiver(t *testing.T) {
 
 func Test_LeftRight_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range leftRightNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }
@@ -28,6 +30,7 @@ func Test_LeftRight_NilReceiver(t *testing.T) {
 
 func Test_CastedResult_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range castedResultNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }
@@ -38,6 +41,7 @@ func Test_CastedResult_NilReceiver(t *testing.T) {
 
 func Test_MapAnyItems_NilReceiver(t *testing.T) {
 	for caseIndex, tc := range mapAnyItemsNilSafeTestCases {
+		// Assert
 		tc.ShouldBeSafe(t, caseIndex)
 	}
 }

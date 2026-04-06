@@ -13,8 +13,13 @@ import (
 
 func Test_C36_Hashmap_IsEmpty(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_IsEmpty", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.IsEmpty()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
@@ -22,9 +27,14 @@ func Test_C36_Hashmap_IsEmpty(t *testing.T) {
 
 func Test_C36_Hashmap_HasItems(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.HasItems()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has items", actual)
 	})
@@ -32,10 +42,15 @@ func Test_C36_Hashmap_HasItems(t *testing.T) {
 
 func Test_C36_Hashmap_Collection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Collection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
 		c := h.Collection()
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -43,8 +58,13 @@ func Test_C36_Hashmap_Collection(t *testing.T) {
 
 func Test_C36_Hashmap_IsEmptyLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_IsEmptyLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.IsEmptyLock()}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
@@ -52,12 +72,17 @@ func Test_C36_Hashmap_IsEmptyLock(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateWithWgLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateWithWgLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		wg := &sync.WaitGroup{}
 		wg.Add(1)
 		h.AddOrUpdateWithWgLock("k", "v", wg)
 		wg.Wait()
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -65,10 +90,15 @@ func Test_C36_Hashmap_AddOrUpdateWithWgLock(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyStrValInt(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyStrValInt", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyStrValInt("k", 42)
 		v, _ := h.Get("k")
+
+		// Act
 		actual := args.Map{"result": v != "42"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 	})
@@ -76,9 +106,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyStrValInt(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyStrValFloat", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyStrValFloat("k", 3.14)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -86,9 +121,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyStrValFloat(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyStrValFloat64", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyStrValFloat64("k", 2.71)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -96,9 +136,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyStrValFloat64(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyStrValAny(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyStrValAny", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyStrValAny("k", "hello")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -106,9 +151,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyStrValAny(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyValueAny(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyValueAny", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyValueAny(corestr.KeyAnyValuePair{Key: "k", Value: "v"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -116,9 +166,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyValueAny(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyVal(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyVal", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		isNew := h.AddOrUpdateKeyVal(corestr.KeyValuePair{Key: "k", Value: "v"})
+
+		// Act
 		actual := args.Map{"result": isNew}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected new", actual)
 		isNew2 := h.AddOrUpdateKeyVal(corestr.KeyValuePair{Key: "k", Value: "v2"})
@@ -130,9 +185,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyVal(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdate(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdate", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		isNew := h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": isNew}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected new", actual)
 	})
@@ -140,9 +200,14 @@ func Test_C36_Hashmap_AddOrUpdate(t *testing.T) {
 
 func Test_C36_Hashmap_Set(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Set", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.Set("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -150,10 +215,15 @@ func Test_C36_Hashmap_Set(t *testing.T) {
 
 func Test_C36_Hashmap_SetTrim(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_SetTrim", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.SetTrim(" k ", " v ")
 		_, found := h.Get("k")
+
+		// Act
 		actual := args.Map{"result": found}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 	})
@@ -161,10 +231,15 @@ func Test_C36_Hashmap_SetTrim(t *testing.T) {
 
 func Test_C36_Hashmap_SetBySplitter(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_SetBySplitter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.SetBySplitter("=", "key=value")
 		v, _ := h.Get("key")
+
+		// Act
 		actual := args.Map{"result": v != "value"}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected value", actual)
 		// single item
@@ -178,12 +253,17 @@ func Test_C36_Hashmap_SetBySplitter(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateStringsPtrWgLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateStringsPtrWgLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		wg := &sync.WaitGroup{}
 		wg.Add(1)
 		h.AddOrUpdateStringsPtrWgLock(wg, []string{"a", "b"}, []string{"1", "2"})
 		wg.Wait()
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
@@ -201,12 +281,17 @@ func Test_C36_Hashmap_AddOrUpdateStringsPtrWgLock_Empty(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateHashmap", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		other := corestr.New.Hashmap.Empty()
 		other.AddOrUpdate("b", "2")
 		h.AddOrUpdateHashmap(other)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		h.AddOrUpdateHashmap(nil)
@@ -215,9 +300,14 @@ func Test_C36_Hashmap_AddOrUpdateHashmap(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateMap(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateMap", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateMap(map[string]string{"a": "1"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		h.AddOrUpdateMap(nil)
@@ -226,9 +316,14 @@ func Test_C36_Hashmap_AddOrUpdateMap(t *testing.T) {
 
 func Test_C36_Hashmap_AddsOrUpdates(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddsOrUpdates", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddsOrUpdates(corestr.KeyValuePair{Key: "a", Value: "1"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -236,9 +331,14 @@ func Test_C36_Hashmap_AddsOrUpdates(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyAnyValues(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyAnyValues", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyAnyValues(corestr.KeyAnyValuePair{Key: "k", Value: "v"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		h.AddOrUpdateKeyAnyValues()
@@ -247,9 +347,14 @@ func Test_C36_Hashmap_AddOrUpdateKeyAnyValues(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateKeyValues(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateKeyValues", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateKeyValues(corestr.KeyValuePair{Key: "k", Value: "v"})
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -257,11 +362,16 @@ func Test_C36_Hashmap_AddOrUpdateKeyValues(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		keys := corestr.New.Collection.Strings([]string{"a"})
 		vals := corestr.New.Collection.Strings([]string{"1"})
 		h.AddOrUpdateCollection(keys, vals)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil/empty
@@ -279,6 +389,7 @@ func Test_C36_Hashmap_AddOrUpdateCollection(t *testing.T) {
 
 func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddsOrUpdatesAnyUsingFilter(
 			func(pair corestr.KeyAnyValuePair) (string, bool, bool) {
@@ -286,7 +397,11 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 			},
 			corestr.KeyAnyValuePair{Key: "k", Value: "v"},
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -294,6 +409,7 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter(t *testing.T) {
 
 func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter_Break(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter_Break", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddsOrUpdatesAnyUsingFilter(
 			func(pair corestr.KeyAnyValuePair) (string, bool, bool) {
@@ -302,7 +418,11 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter_Break(t *testing.T) {
 			corestr.KeyAnyValuePair{Key: "k1", Value: "v"},
 			corestr.KeyAnyValuePair{Key: "k2", Value: "v"},
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 due to break", actual)
 	})
@@ -310,6 +430,7 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilter_Break(t *testing.T) {
 
 func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilterLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilterLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddsOrUpdatesAnyUsingFilterLock(
 			func(pair corestr.KeyAnyValuePair) (string, bool, bool) {
@@ -317,7 +438,11 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilterLock(t *testing.T) {
 			},
 			corestr.KeyAnyValuePair{Key: "k", Value: "v"},
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -325,6 +450,7 @@ func Test_C36_Hashmap_AddsOrUpdatesAnyUsingFilterLock(t *testing.T) {
 
 func Test_C36_Hashmap_AddsOrUpdatesUsingFilter(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddsOrUpdatesUsingFilter", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddsOrUpdatesUsingFilter(
 			func(pair corestr.KeyValuePair) (string, bool, bool) {
@@ -332,7 +458,11 @@ func Test_C36_Hashmap_AddsOrUpdatesUsingFilter(t *testing.T) {
 			},
 			corestr.KeyValuePair{Key: "k", Value: "v"},
 		)
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -340,12 +470,17 @@ func Test_C36_Hashmap_AddsOrUpdatesUsingFilter(t *testing.T) {
 
 func Test_C36_Hashmap_ConcatNew(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ConcatNew", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		other := corestr.New.Hashmap.Empty()
 		other.AddOrUpdate("b", "2")
 		newH := h.ConcatNew(false, other)
+
+		// Act
 		actual := args.Map{"result": newH.Length() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 		// no args
@@ -358,10 +493,15 @@ func Test_C36_Hashmap_ConcatNew(t *testing.T) {
 
 func Test_C36_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ConcatNewUsingMaps", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		newH := h.ConcatNewUsingMaps(false, map[string]string{"b": "2"})
+
+		// Act
 		actual := args.Map{"result": newH.Length() < 2}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 		// empty
@@ -374,9 +514,14 @@ func Test_C36_Hashmap_ConcatNewUsingMaps(t *testing.T) {
 
 func Test_C36_Hashmap_AddOrUpdateLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AddOrUpdateLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdateLock("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -384,9 +529,14 @@ func Test_C36_Hashmap_AddOrUpdateLock(t *testing.T) {
 
 func Test_C36_Hashmap_Has_Contains_IsKeyMissing(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Has_Contains_IsKeyMissing", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.Has("k")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has", actual)
 		actual := args.Map{"result": h.Contains("k")}
@@ -412,10 +562,15 @@ func Test_C36_Hashmap_Has_Contains_IsKeyMissing(t *testing.T) {
 
 func Test_C36_Hashmap_HasAllStrings(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasAllStrings", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		h.AddOrUpdate("b", "2")
+
+		// Act
 		actual := args.Map{"result": h.HasAllStrings("a", "b")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has all", actual)
 		actual := args.Map{"result": h.HasAllStrings("a", "z")}
@@ -426,10 +581,15 @@ func Test_C36_Hashmap_HasAllStrings(t *testing.T) {
 
 func Test_C36_Hashmap_HasAllCollectionItems(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasAllCollectionItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		c := corestr.New.Collection.Strings([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": h.HasAllCollectionItems(c)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": h.HasAllCollectionItems(nil)}
@@ -440,9 +600,14 @@ func Test_C36_Hashmap_HasAllCollectionItems(t *testing.T) {
 
 func Test_C36_Hashmap_HasAll(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasAll", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.HasAll("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -450,8 +615,13 @@ func Test_C36_Hashmap_HasAll(t *testing.T) {
 
 func Test_C36_Hashmap_HasAnyItem(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasAnyItem", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.HasAnyItem()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		h.AddOrUpdate("a", "1")
@@ -463,9 +633,14 @@ func Test_C36_Hashmap_HasAnyItem(t *testing.T) {
 
 func Test_C36_Hashmap_HasAny(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasAny", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.HasAny("a", "z")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		actual := args.Map{"result": h.HasAny("z")}
@@ -476,9 +651,14 @@ func Test_C36_Hashmap_HasAny(t *testing.T) {
 
 func Test_C36_Hashmap_HasWithLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_HasWithLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.HasWithLock("a")}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
@@ -486,12 +666,17 @@ func Test_C36_Hashmap_HasWithLock(t *testing.T) {
 
 func Test_C36_Hashmap_GetKeysFilteredItems(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_GetKeysFilteredItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		items := h.GetKeysFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
+
+		// Act
 		actual := args.Map{"result": len(items) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -499,12 +684,17 @@ func Test_C36_Hashmap_GetKeysFilteredItems(t *testing.T) {
 
 func Test_C36_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_GetKeysFilteredCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		c := h.GetKeysFilteredCollection(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -512,9 +702,14 @@ func Test_C36_Hashmap_GetKeysFilteredCollection(t *testing.T) {
 
 func Test_C36_Hashmap_Items_SafeItems(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Items_SafeItems", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": len(h.Items()) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		actual := args.Map{"result": len(h.SafeItems()) != 1}
@@ -529,10 +724,15 @@ func Test_C36_Hashmap_Items_SafeItems(t *testing.T) {
 
 func Test_C36_Hashmap_ItemsCopyLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ItemsCopyLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		cp := h.ItemsCopyLock()
+
+		// Act
 		actual := args.Map{"result": len(*cp) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -540,9 +740,14 @@ func Test_C36_Hashmap_ItemsCopyLock(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.ValuesCollection().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -550,9 +755,14 @@ func Test_C36_Hashmap_ValuesCollection(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesHashset(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesHashset", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.ValuesHashset().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -560,9 +770,14 @@ func Test_C36_Hashmap_ValuesHashset(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesCollectionLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesCollectionLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.ValuesCollectionLock().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -570,9 +785,14 @@ func Test_C36_Hashmap_ValuesCollectionLock(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesHashsetLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesHashsetLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.ValuesHashsetLock().Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -580,9 +800,14 @@ func Test_C36_Hashmap_ValuesHashsetLock(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesList(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesList", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": len(h.ValuesList()) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -590,10 +815,15 @@ func Test_C36_Hashmap_ValuesList(t *testing.T) {
 
 func Test_C36_Hashmap_KeysValuesCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysValuesCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		keys, values := h.KeysValuesCollection()
+
+		// Act
 		actual := args.Map{"result": keys.Length() != 1 || values.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 each", actual)
 	})
@@ -601,10 +831,15 @@ func Test_C36_Hashmap_KeysValuesCollection(t *testing.T) {
 
 func Test_C36_Hashmap_KeysValuesList(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysValuesList", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		keys, values := h.KeysValuesList()
+
+		// Act
 		actual := args.Map{"result": len(keys) != 1 || len(values) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 each", actual)
 	})
@@ -612,10 +847,15 @@ func Test_C36_Hashmap_KeysValuesList(t *testing.T) {
 
 func Test_C36_Hashmap_KeysValuePairs(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysValuePairs", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		pairs := h.KeysValuePairs()
+
+		// Act
 		actual := args.Map{"result": len(pairs) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -623,10 +863,15 @@ func Test_C36_Hashmap_KeysValuePairs(t *testing.T) {
 
 func Test_C36_Hashmap_KeysValuePairsCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysValuePairsCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		c := h.KeysValuePairsCollection()
+
+		// Act
 		actual := args.Map{"result": c.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -634,10 +879,15 @@ func Test_C36_Hashmap_KeysValuePairsCollection(t *testing.T) {
 
 func Test_C36_Hashmap_KeysValuesListLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysValuesListLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		keys, values := h.KeysValuesListLock()
+
+		// Act
 		actual := args.Map{"result": len(keys) != 1 || len(values) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -645,9 +895,14 @@ func Test_C36_Hashmap_KeysValuesListLock(t *testing.T) {
 
 func Test_C36_Hashmap_AllKeys_Keys_KeysCollection_KeysLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_AllKeys_Keys_KeysCollection_KeysLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": len(h.AllKeys()) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		actual := args.Map{"result": len(h.Keys()) != 1}
@@ -664,9 +919,14 @@ func Test_C36_Hashmap_AllKeys_Keys_KeysCollection_KeysLock(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesListCopyLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesListCopyLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": len(h.ValuesListCopyLock()) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -674,11 +934,16 @@ func Test_C36_Hashmap_ValuesListCopyLock(t *testing.T) {
 
 func Test_C36_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_KeysToLower", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("KEY", "v")
 		lower := h.KeysToLower()
 		_, found := lower.Get("key")
+
+		// Act
 		actual := args.Map{"result": found}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected lowercase key", actual)
 	})
@@ -686,10 +951,15 @@ func Test_C36_Hashmap_KeysToLower(t *testing.T) {
 
 func Test_C36_Hashmap_ValuesToLower(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ValuesToLower", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("KEY", "v")
 		lower := h.ValuesToLower()
+
+		// Act
 		actual := args.Map{"result": lower.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
@@ -697,8 +967,13 @@ func Test_C36_Hashmap_ValuesToLower(t *testing.T) {
 
 func Test_C36_Hashmap_Length_LengthLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Length_LengthLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		actual := args.Map{"result": h.LengthLock() != 0}
@@ -713,11 +988,16 @@ func Test_C36_Hashmap_Length_LengthLock(t *testing.T) {
 
 func Test_C36_Hashmap_IsEqual_IsEqualPtr(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_IsEqual_IsEqualPtr", func() {
+		// Arrange
 		a := corestr.New.Hashmap.Empty()
 		a.AddOrUpdate("k", "v")
 		b := corestr.New.Hashmap.Empty()
 		b.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": a.IsEqualPtr(b)}
+
+		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		actual := args.Map{"result": a.IsEqual(*b)}
@@ -755,10 +1035,15 @@ func Test_C36_Hashmap_IsEqual_IsEqualPtr(t *testing.T) {
 
 func Test_C36_Hashmap_Remove_RemoveWithLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Remove_RemoveWithLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		h.Remove("a")
+
+		// Act
 		actual := args.Map{"result": h.Length() != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddOrUpdate("b", "2")
@@ -771,8 +1056,13 @@ func Test_C36_Hashmap_Remove_RemoveWithLock(t *testing.T) {
 
 func Test_C36_Hashmap_String_StringLock(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_String_StringLock", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
+
+		// Act
 		actual := args.Map{"result": h.String() == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty for empty", actual)
 		h.AddOrUpdate("a", "1")
@@ -787,12 +1077,17 @@ func Test_C36_Hashmap_String_StringLock(t *testing.T) {
 
 func Test_C36_Hashmap_GetValuesExceptKeysInHashset(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_GetValuesExceptKeysInHashset", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		h.AddOrUpdate("b", "2")
 		hs := corestr.New.Hashset.Strings([]string{"a"})
 		result := h.GetValuesExceptKeysInHashset(hs)
+
+		// Act
 		actual := args.Map{"result": len(result) != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		all := h.GetValuesExceptKeysInHashset(nil)
@@ -804,10 +1099,15 @@ func Test_C36_Hashmap_GetValuesExceptKeysInHashset(t *testing.T) {
 
 func Test_C36_Hashmap_GetValuesKeysExcept(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_GetValuesKeysExcept", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		result := h.GetValuesKeysExcept([]string{"a"})
+
+		// Act
 		actual := args.Map{"result": len(result) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		all := h.GetValuesKeysExcept(nil)
@@ -819,11 +1119,16 @@ func Test_C36_Hashmap_GetValuesKeysExcept(t *testing.T) {
 
 func Test_C36_Hashmap_GetAllExceptCollection(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_GetAllExceptCollection", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
 		c := corestr.New.Collection.Strings([]string{"a"})
 		result := h.GetAllExceptCollection(c)
+
+		// Act
 		actual := args.Map{"result": len(result) != 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		all := h.GetAllExceptCollection(nil)
@@ -835,9 +1140,14 @@ func Test_C36_Hashmap_GetAllExceptCollection(t *testing.T) {
 
 func Test_C36_Hashmap_Join_JoinKeys(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Join_JoinKeys", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("a", "1")
+
+		// Act
 		actual := args.Map{"result": h.Join(",") == ""}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		actual := args.Map{"result": h.JoinKeys(",") == ""}
@@ -866,9 +1176,14 @@ func Test_C36_Hashmap_Diff(t *testing.T) {
 
 func Test_C36_Hashmap_JsonModel_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_JsonModel_MarshalJSON_UnmarshalJSON", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
+
+		// Act
 		actual := args.Map{"result": h.JsonModel() == nil}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 		actual := args.Map{"result": h.JsonModelAny() == nil}
@@ -890,10 +1205,15 @@ func Test_C36_Hashmap_JsonModel_MarshalJSON_UnmarshalJSON(t *testing.T) {
 
 func Test_C36_Hashmap_Json_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_Json_JsonPtr", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
 		r := h.Json()
+
+		// Act
 		actual := args.Map{"result": r.HasError()}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no error", actual)
 		rp := h.JsonPtr()
@@ -905,12 +1225,17 @@ func Test_C36_Hashmap_Json_JsonPtr(t *testing.T) {
 
 func Test_C36_Hashmap_ParseInjectUsingJson(t *testing.T) {
 	safeTest(t, "Test_C36_Hashmap_ParseInjectUsingJson", func() {
+		// Arrange
 		h := corestr.New.Hashmap.Empty()
 		h.AddOrUpdate("k", "v")
 		jr := h.JsonPtr()
 		h2 := &corestr.Hashmap{}
 		result, err := h2.ParseInjectUsingJson(jr)
+
+		// Act
 		actual := args.Map{"result": err != nil || result.Length() == 0}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected success", actual)
 		badJson := corejson.NewPtr("invalid{")

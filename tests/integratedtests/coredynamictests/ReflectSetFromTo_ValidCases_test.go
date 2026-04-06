@@ -42,6 +42,7 @@ func Test_ReflectSetFromTo_NullNull(t *testing.T) {
 
 	actLines, expected := assertReflectSetFromToBase(t, tc)
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, actLines, expected)
 }
 
@@ -57,6 +58,8 @@ func Test_ReflectSetFromTo_PtrToPtr(t *testing.T) {
 	// Additional DraftType field verification
 	convertedFrom := tc.From.(*coretests.DraftType)
 	toField := tc.ToFieldToDraftType()
+
+	// Assert
 	expectedField := tc.ExpectedFieldToDraftType()
 	toFieldEqualErr := toField.VerifyNotEqualExcludingInnerFieldsErr(expectedField)
 	fromFieldEqualErr := convertedFrom.VerifyNotEqualExcludingInnerFieldsErr(expectedField)
@@ -82,6 +85,8 @@ func Test_ReflectSetFromTo_ValueToPtr(t *testing.T) {
 	// Additional DraftType field verification
 	convertedFrom := tc.From.(coretests.DraftType)
 	toField := tc.ToFieldToDraftType()
+
+	// Assert
 	expectedField := tc.ExpectedFieldToDraftType()
 	toFieldEqualErr := toField.VerifyNotEqualExcludingInnerFieldsErr(expectedField)
 	fromFieldEqualErr := convertedFrom.VerifyNotEqualExcludingInnerFieldsErr(expectedField)
@@ -115,6 +120,7 @@ func Test_ReflectSetFromTo_BytesToDraft(t *testing.T) {
 	)
 	expected = append(expected, "true")
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, actLines, expected)
 }
 
@@ -127,5 +133,6 @@ func Test_ReflectSetFromTo_DraftToBytes(t *testing.T) {
 
 	actLines, expected := assertReflectSetFromToBase(t, tc)
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, actLines, expected)
 }

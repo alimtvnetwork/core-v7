@@ -10,8 +10,10 @@ import (
 // ── Group methods ──
 
 func Test_Cov2_Group_BasicMethods(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
 
+	// Act
 	actual := args.Map{
 		"isWindows":   g.IsWindows(),
 		"isUnix":      g.IsUnix(),
@@ -36,6 +38,8 @@ func Test_Cov2_Group_BasicMethods(t *testing.T) {
 		"typeNameNE":  g.TypeName() != "",
 		"rangesCsvNE": g.RangeNamesCsv() != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"isWindows":   false,
 		"isUnix":      true,
@@ -64,8 +68,10 @@ func Test_Cov2_Group_BasicMethods(t *testing.T) {
 }
 
 func Test_Cov2_Group_EnumMethods(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
 
+	// Act
 	actual := args.Map{
 		"rangesLen":    len(g.RangesByte()) > 0,
 		"minByte":      g.MinByte() == 0,
@@ -78,6 +84,8 @@ func Test_Cov2_Group_EnumMethods(t *testing.T) {
 		"formatNE":     g.Format("%s") != "",
 		"toPtr":        g.ToPtr() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"rangesLen":    true,
 		"minByte":      true,
@@ -94,14 +102,18 @@ func Test_Cov2_Group_EnumMethods(t *testing.T) {
 }
 
 func Test_Cov2_Group_AnyMethods(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
 
+	// Act
 	actual := args.Map{
 		"isAnyNames":     g.IsAnyNamesOf(g.Name(), "Invalid"),
 		"isAnyNamesNo":   g.IsAnyNamesOf("Invalid"),
 		"isAnyValues":    g.IsAnyValuesEqual(byte(ostype.UnixGroup)),
 		"isAnyValuesNo":  g.IsAnyValuesEqual(99),
 	}
+
+	// Assert
 	expected := args.Map{
 		"isAnyNames":     true,
 		"isAnyNamesNo":   false,
@@ -112,16 +124,20 @@ func Test_Cov2_Group_AnyMethods(t *testing.T) {
 }
 
 func Test_Cov2_Group_JSON(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
 	bytes, err := g.MarshalJSON()
 	var g2 ostype.Group
 	err2 := g2.UnmarshalJSON(bytes)
 
+	// Act
 	actual := args.Map{
 		"marshalErr":   err == nil,
 		"unmarshalErr": err2 == nil,
 		"same":         g2 == ostype.UnixGroup,
 	}
+
+	// Assert
 	expected := args.Map{
 		"marshalErr":   true,
 		"unmarshalErr": true,
@@ -131,12 +147,17 @@ func Test_Cov2_Group_JSON(t *testing.T) {
 }
 
 func Test_Cov2_Group_Binders(t *testing.T) {
+	// Arrange
 	g := ostype.UnixGroup
+
+	// Act
 	actual := args.Map{
 		"basicBinder":    g.AsBasicEnumContractsBinder() != nil,
 		"jsonBinder":     g.AsJsonContractsBinder() != nil,
 		"byteBinder":     g.AsBasicByteEnumContractsBinder() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"basicBinder":    true,
 		"jsonBinder":     true,
@@ -148,8 +169,10 @@ func Test_Cov2_Group_Binders(t *testing.T) {
 // ── Variation methods ──
 
 func Test_Cov2_Variation_BasicMethods(t *testing.T) {
+	// Arrange
 	v := ostype.Linux
 
+	// Act
 	actual := args.Map{
 		"isWindows":   v.IsWindows(),
 		"isLinux":     v.IsLinux(),
@@ -167,6 +190,8 @@ func Test_Cov2_Variation_BasicMethods(t *testing.T) {
 		"isActualUnix": v.IsActualGroupUnix(),
 		"group":       v.Group() == ostype.UnixGroup,
 	}
+
+	// Assert
 	expected := args.Map{
 		"isWindows":   false,
 		"isLinux":     true,
@@ -188,8 +213,10 @@ func Test_Cov2_Variation_BasicMethods(t *testing.T) {
 }
 
 func Test_Cov2_Variation_MatchMethods(t *testing.T) {
+	// Arrange
 	v := ostype.Linux
 
+	// Act
 	actual := args.Map{
 		"is":           v.Is(ostype.Linux),
 		"isNot":        v.Is(ostype.Windows),
@@ -199,6 +226,8 @@ func Test_Cov2_Variation_MatchMethods(t *testing.T) {
 		"isStrMatch":   v.IsStringsMatchAny("linux"),
 		"isStrMatchNo": v.IsStringsMatchAny("windows"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"is":           true,
 		"isNot":        false,
@@ -212,13 +241,19 @@ func Test_Cov2_Variation_MatchMethods(t *testing.T) {
 }
 
 func Test_Cov2_Variation_GroupForWindows(t *testing.T) {
+	// Act
 	actual := args.Map{"group": ostype.Windows.Group() == ostype.WindowsGroup}
+
+	// Assert
 	expected := args.Map{"group": true}
 	expected.ShouldBeEqual(t, 0, "Variation returns correct value -- group windows", actual)
 }
 
 func Test_Cov2_Variation_GroupForAndroid(t *testing.T) {
+	// Act
 	actual := args.Map{"group": ostype.Android.Group() == ostype.AndroidGroup}
+
+	// Assert
 	expected := args.Map{"group": true}
 	expected.ShouldBeEqual(t, 0, "Variation returns correct value -- group android", actual)
 }
@@ -226,65 +261,103 @@ func Test_Cov2_Variation_GroupForAndroid(t *testing.T) {
 // ── GetGroup / GetVariant / GetGroupVariant ──
 
 func Test_Cov2_GetGroup_Windows(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetGroup("windows") == ostype.WindowsGroup}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetGroup returns correct value -- windows", actual)
 }
 
 func Test_Cov2_GetGroup_Android(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetGroup("android") == ostype.AndroidGroup}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetGroup returns correct value -- android", actual)
 }
 
 func Test_Cov2_GetGroup_Linux(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetGroup("linux") == ostype.UnixGroup}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetGroup returns correct value -- linux", actual)
 }
 
 func Test_Cov2_GetGroup_Invalid(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetGroup("invalid-os") == ostype.InvalidGroup}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetGroup returns error -- invalid", actual)
 }
 
 func Test_Cov2_GetVariant_Linux(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetVariant("linux") == ostype.Linux}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetVariant returns correct value -- linux", actual)
 }
 
 func Test_Cov2_GetVariant_Unknown(t *testing.T) {
+	// Act
 	actual := args.Map{"result": ostype.GetVariant("nonexistent") == ostype.Unknown}
+
+	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetVariant returns correct value -- unknown", actual)
 }
 
 func Test_Cov2_GetGroupVariant(t *testing.T) {
+	// Arrange
 	gv := ostype.GetGroupVariant()
+
+	// Act
 	actual := args.Map{"groupValid": gv.Group.IsValid() || gv.Group == ostype.InvalidGroup}
+
+	// Assert
 	expected := args.Map{"groupValid": true}
 	expected.ShouldBeEqual(t, 0, "GetGroupVariant returns correct value -- with args", actual)
 }
 
 func Test_Cov2_GetGroupVariantPtr(t *testing.T) {
+	// Arrange
 	gv := ostype.GetGroupVariantPtr()
+
+	// Act
 	actual := args.Map{"notNil": gv != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "GetGroupVariantPtr returns correct value -- with args", actual)
 }
 
 func Test_Cov2_GetCurrentGroup(t *testing.T) {
+	// Arrange
 	g := ostype.GetCurrentGroup()
+
+	// Act
 	actual := args.Map{"valid": g != ostype.InvalidGroup}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "GetCurrentGroup returns correct value -- with args", actual)
 }
 
 func Test_Cov2_GetCurrentVariant(t *testing.T) {
+	// Arrange
 	v := ostype.GetCurrentVariant()
+
+	// Act
 	actual := args.Map{"valid": v != ostype.Unknown}
+
+	// Assert
 	expected := args.Map{"valid": true}
 	expected.ShouldBeEqual(t, 0, "GetCurrentVariant returns correct value -- with args", actual)
 }
@@ -292,16 +365,20 @@ func Test_Cov2_GetCurrentVariant(t *testing.T) {
 // ── Variation JSON ──
 
 func Test_Cov2_Variation_JSON(t *testing.T) {
+	// Arrange
 	v := ostype.Linux
 	bytes, err := v.MarshalJSON()
 	var v2 ostype.Variation
 	err2 := v2.UnmarshalJSON(bytes)
 
+	// Act
 	actual := args.Map{
 		"marshalErr":   err == nil,
 		"unmarshalErr": err2 == nil,
 		"same":         v2 == ostype.Linux,
 	}
+
+	// Assert
 	expected := args.Map{
 		"marshalErr":   true,
 		"unmarshalErr": true,
@@ -311,13 +388,18 @@ func Test_Cov2_Variation_JSON(t *testing.T) {
 }
 
 func Test_Cov2_Variation_Binders(t *testing.T) {
+	// Arrange
 	v := ostype.Linux
+
+	// Act
 	actual := args.Map{
 		"basic": v.AsBasicEnumContractsBinder() != nil,
 		"json":  v.AsJsonContractsBinder() != nil,
 		"byte":  v.AsBasicByteEnumContractsBinder() != nil,
 		"toPtr": v.ToPtr() != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"basic": true,
 		"json":  true,

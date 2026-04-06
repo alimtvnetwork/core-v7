@@ -14,6 +14,7 @@ import (
 // Covers CaseV1.go L55-57
 
 func Test_Cov9_CaseV1_ArrangeTypeName(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "test type name",
 		ArrangeInput:  "hello",
@@ -22,7 +23,10 @@ func Test_Cov9_CaseV1_ArrangeTypeName(t *testing.T) {
 
 	result := tc.ArrangeTypeName()
 
+	// Act
 	actual := args.Map{"nonEmpty": len(result) > 0}
+
+	// Assert
 	expected := args.Map{"nonEmpty": true}
 	expected.ShouldBeEqual(t, 0, "ArrangeTypeName returns type name -- string input", actual)
 }
@@ -36,6 +40,7 @@ func Test_Cov9_CaseV1_ShouldBeEqual_Success(t *testing.T) {
 		ExpectedInput: "hello",
 	}
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, "hello")
 }
 
@@ -139,6 +144,7 @@ func Test_Cov9_CaseV1_AssertDirectly(t *testing.T) {
 // Covers CaseV1.go L636-643
 
 func Test_Cov9_CaseV1_PrepareTitle(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "my test",
 		ExpectedInput: "x",
@@ -146,7 +152,10 @@ func Test_Cov9_CaseV1_PrepareTitle(t *testing.T) {
 
 	result := tc.PrepareTitle(3, "extra")
 
+	// Act
 	actual := args.Map{"nonEmpty": len(result) > 0, "contains": true}
+
+	// Assert
 	expected := args.Map{"nonEmpty": true, "contains": true}
 	expected.ShouldBeEqual(t, 0, "PrepareTitle returns formatted title", actual)
 }
@@ -155,6 +164,7 @@ func Test_Cov9_CaseV1_PrepareTitle(t *testing.T) {
 // Covers CaseV1.go L649-651
 
 func Test_Cov9_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "binder test",
 		ExpectedInput: "x",
@@ -162,7 +172,10 @@ func Test_Cov9_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
 
 	binder := tc.AsSimpleTestCaseWrapperContractsBinder()
 
+	// Act
 	actual := args.Map{"notNil": binder != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "AsSimpleTestCaseWrapperContractsBinder returns non-nil", actual)
 }
@@ -172,6 +185,8 @@ func Test_Cov9_CaseV1_AsSimpleTestCaseWrapperContractsBinder(t *testing.T) {
 
 func Test_Cov9_CaseV1_ShouldBeEqualFirst(t *testing.T) {
 	tc := coretestcases.CaseV1{Title: "first equal", ExpectedInput: "val"}
+
+	// Assert
 	tc.ShouldBeEqualFirst(t, "val")
 }
 
@@ -209,6 +224,7 @@ func Test_Cov9_CaseV1_ShouldBeNotEqualFirst(t *testing.T) {
 // Covers CaseV1MapAssertions.go L19-20 (ExpectedAsMap)
 
 func Test_Cov9_CaseV1_ShouldBeEqualMap_Matching(t *testing.T) {
+	// Assert
 	expected := args.Map{"key": "value"}
 	tc := coretestcases.CaseV1{
 		Title:         "map equal test",
@@ -222,6 +238,9 @@ func Test_Cov9_CaseV1_ShouldBeEqualMap_Matching(t *testing.T) {
 // Covers CaseV1MapAssertions.go L55-69
 
 func Test_Cov9_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
+	// Arrange
+
+	// Assert
 	expected := args.Map{"key": "expected"}
 	tc := coretestcases.CaseV1{
 		Title:         "map mismatch test",
@@ -231,6 +250,7 @@ func Test_Cov9_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
 	fakeT := &testing.T{}
 	tc.ShouldBeEqualMap(fakeT, 0, args.Map{"key": "actual"})
 
+	// Act
 	actual := args.Map{"failed": fakeT.Failed()}
 	exp := args.Map{"failed": true}
 	exp.ShouldBeEqual(t, 0, "ShouldBeEqualMap marks test failed -- mismatch", actual)
@@ -240,6 +260,7 @@ func Test_Cov9_CaseV1_ShouldBeEqualMap_Mismatch(t *testing.T) {
 // Covers CaseV1.go L262-280
 
 func Test_Cov9_CaseV1_VerifyAll(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify all test",
 		ExpectedInput: []string{"a", "b"},
@@ -247,7 +268,10 @@ func Test_Cov9_CaseV1_VerifyAll(t *testing.T) {
 
 	err := tc.VerifyAllEqual(0, "a", "b")
 
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyAllEqual returns nil -- matching", actual)
 }
@@ -256,6 +280,7 @@ func Test_Cov9_CaseV1_VerifyAll(t *testing.T) {
 // Covers CaseV1.go L311-329
 
 func Test_Cov9_CaseV1_VerifyFirst(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify first test",
 		ExpectedInput: []string{"hello"},
@@ -263,7 +288,10 @@ func Test_Cov9_CaseV1_VerifyFirst(t *testing.T) {
 
 	err := tc.VerifyFirst(0, stringcompareas.Equal, []string{"hello"})
 
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyFirst returns nil -- matching", actual)
 }
@@ -272,6 +300,7 @@ func Test_Cov9_CaseV1_VerifyFirst(t *testing.T) {
 // Covers CaseV1.go L349-366
 
 func Test_Cov9_CaseV1_VerifyError(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "verify error test",
 		ExpectedInput: "hello",
@@ -279,7 +308,10 @@ func Test_Cov9_CaseV1_VerifyError(t *testing.T) {
 
 	err := tc.VerifyError(0, stringcompareas.Equal, "hello")
 
+	// Act
 	actual := args.Map{"noErr": err == nil}
+
+	// Assert
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyError returns nil -- matching", actual)
 }
@@ -288,6 +320,7 @@ func Test_Cov9_CaseV1_VerifyError(t *testing.T) {
 // Covers CaseV1.go L233-239
 
 func Test_Cov9_CaseV1_SliceValidator(t *testing.T) {
+	// Arrange
 	tc := coretestcases.CaseV1{
 		Title:         "slice validator test",
 		ExpectedInput: []string{"a"},
@@ -295,7 +328,10 @@ func Test_Cov9_CaseV1_SliceValidator(t *testing.T) {
 
 	sv := tc.SliceValidator(0, []string{"a"})
 
+	// Act
 	actual := args.Map{"notNil": sv.ActualLines != nil}
+
+	// Assert
 	expected := args.Map{"notNil": true}
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns valid -- matching", actual)
 }
@@ -322,6 +358,7 @@ func Test_Cov9_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
 		},
 	}
 
+	// Assert
 	tc.ShouldBeSafeFirst(t)
 }
 
@@ -337,6 +374,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqual(t *testing.T) {
 		ExpectedLines: []string{"hello"},
 	}
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, []string{"hello"}, []string{"hello"})
 }
 
@@ -348,6 +386,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualFirst(t *testing.T) {
 		Title: "gherkins first test",
 	}
 
+	// Assert
 	tc.ShouldBeEqualFirst(t, []string{"a"}, []string{"a"})
 }
 
@@ -360,6 +399,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualArgs(t *testing.T) {
 		ExpectedLines: []string{"val"},
 	}
 
+	// Assert
 	tc.ShouldBeEqualArgs(t, 0, "val")
 }
 
@@ -372,6 +412,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualArgsFirst(t *testing.T) {
 		ExpectedLines: []string{"val"},
 	}
 
+	// Assert
 	tc.ShouldBeEqualArgsFirst(t, "val")
 }
 
@@ -384,6 +425,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualUsingExpected(t *testing.T) {
 		ExpectedLines: []string{"val"},
 	}
 
+	// Assert
 	tc.ShouldBeEqualUsingExpected(t, 0, []string{"val"})
 }
 
@@ -396,6 +438,7 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
 		ExpectedLines: []string{"val"},
 	}
 
+	// Assert
 	tc.ShouldBeEqualUsingExpectedFirst(t, []string{"val"})
 }
 
@@ -403,13 +446,17 @@ func Test_Cov9_GenericGherkins_ShouldBeEqualUsingExpectedFirst(t *testing.T) {
 // Covers GenericGherkinsCompare.go L14-17
 
 func Test_Cov9_GenericGherkins_CompareWith_OneNil(t *testing.T) {
+	// Arrange
 	tc := &coretestcases.GenericGherkins[string, string]{
 		Title: "compare test",
 	}
 
 	isEqual, diff := tc.CompareWith(nil)
 
+	// Act
 	actual := args.Map{"equal": isEqual, "hasDiff": len(diff) > 0}
+
+	// Assert
 	expected := args.Map{"equal": false, "hasDiff": true}
 	expected.ShouldBeEqual(t, 0, "CompareWith returns false -- one nil", actual)
 }
@@ -423,5 +470,6 @@ func Test_Cov9_GenericGherkins_ShouldBeEqual_WhenFallback(t *testing.T) {
 		When:  "when condition",
 	}
 
+	// Assert
 	tc.ShouldBeEqual(t, 0, []string{"a"}, []string{"a"})
 }

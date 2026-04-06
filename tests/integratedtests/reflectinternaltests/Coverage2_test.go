@@ -11,14 +11,18 @@ import (
 // ── getFunc ──
 
 func Test_Cov2_GetFunc_FullName(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fullName := reflectinternal.GetFunc.FullName(fn)
 	nilName := reflectinternal.GetFunc.FullName(nil)
 
+	// Act
 	actual := args.Map{
 		"hasName": fullName != "",
 		"nilName": nilName,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasName": true,
 		"nilName": "",
@@ -27,16 +31,20 @@ func Test_Cov2_GetFunc_FullName(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_FullNameWithName(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	fullName, name := reflectinternal.GetFunc.FullNameWithName(fn)
 	nilFull, nilName := reflectinternal.GetFunc.FullNameWithName(nil)
 
+	// Act
 	actual := args.Map{
 		"hasFullName": fullName != "",
 		"hasName":     name != "",
 		"nilFull":     nilFull,
 		"nilName":     nilName,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasFullName": true,
 		"hasName":     true,
@@ -47,14 +55,18 @@ func Test_Cov2_GetFunc_FullNameWithName(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_NameOnly(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	name := reflectinternal.GetFunc.NameOnly(fn)
 	nilName := reflectinternal.GetFunc.NameOnly(nil)
 
+	// Act
 	actual := args.Map{
 		"hasName": name != "",
 		"nilName": nilName,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasName": true,
 		"nilName": "",
@@ -63,9 +75,11 @@ func Test_Cov2_GetFunc_NameOnly(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_All(t *testing.T) {
+	// Arrange
 	full, pkg, method := reflectinternal.GetFunc.All("mypackage.MyFunc")
 	emFull, emPkg, emMethod := reflectinternal.GetFunc.All("")
 
+	// Act
 	actual := args.Map{
 		"full":     full,
 		"pkg":      pkg,
@@ -74,6 +88,8 @@ func Test_Cov2_GetFunc_All(t *testing.T) {
 		"emPkg":    emPkg,
 		"emMethod": emMethod,
 	}
+
+	// Assert
 	expected := args.Map{
 		"full":     "mypackage.MyFunc",
 		"pkg":      "mypackage",
@@ -86,14 +102,18 @@ func Test_Cov2_GetFunc_All(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_FuncDirectInvokeName(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	name := reflectinternal.GetFunc.FuncDirectInvokeName(fn)
 	emptyName := reflectinternal.GetFunc.FuncDirectInvokeNameUsingFullName("")
 
+	// Act
 	actual := args.Map{
 		"hasName":  name != "",
 		"emptyRes": emptyName,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasName":  true,
 		"emptyRes": "",
@@ -102,12 +122,15 @@ func Test_Cov2_GetFunc_FuncDirectInvokeName(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_PascalFuncName(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"simple":  reflectinternal.GetFunc.PascalFuncName("hello"),
 		"single":  reflectinternal.GetFunc.PascalFuncName("h"),
 		"empty":   reflectinternal.GetFunc.PascalFuncName(""),
 		"already": reflectinternal.GetFunc.PascalFuncName("Hello"),
 	}
+
+	// Assert
 	expected := args.Map{
 		"simple":  "Hello",
 		"single":  "H",
@@ -118,15 +141,19 @@ func Test_Cov2_GetFunc_PascalFuncName(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_GetPkgPathFullName(t *testing.T) {
+	// Arrange
 	result := reflectinternal.GetFunc.GetPkgPathFullName("github.com/org/repo/pkg.Func")
 	empty := reflectinternal.GetFunc.GetPkgPathFullName("")
 	noslash := reflectinternal.GetFunc.GetPkgPathFullName("pkg.Func")
 
+	// Act
 	actual := args.Map{
 		"result":  result != "",
 		"empty":   empty,
 		"noslash": noslash,
 	}
+
+	// Assert
 	expected := args.Map{
 		"result":  true,
 		"empty":   "",
@@ -136,16 +163,20 @@ func Test_Cov2_GetFunc_GetPkgPathFullName(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_RunTime(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	rt := reflectinternal.GetFunc.RunTime(fn)
 	nilRt := reflectinternal.GetFunc.RunTime(nil)
 	intRt := reflectinternal.GetFunc.RunTime(42)
 
+	// Act
 	actual := args.Map{
 		"rtNotNil": rt != nil,
 		"nilRt":    nilRt == nil,
 		"intRt":    intRt == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"rtNotNil": true,
 		"nilRt":    true,
@@ -155,6 +186,7 @@ func Test_Cov2_GetFunc_RunTime(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_GetMethod(t *testing.T) {
+	// Arrange
 	type myStruct struct{}
 	s := myStruct{}
 
@@ -162,11 +194,14 @@ func Test_Cov2_GetFunc_GetMethod(t *testing.T) {
 	missingMethod := reflectinternal.GetFunc.GetMethod("NotExist", s)
 	nilItem := reflectinternal.GetFunc.GetMethod("Name", nil)
 
+	// Act
 	actual := args.Map{
 		"nilMethod":     nilMethod == nil,
 		"missingMethod": missingMethod == nil,
 		"nilItem":       nilItem == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"nilMethod":     true,
 		"missingMethod": true,
@@ -176,15 +211,19 @@ func Test_Cov2_GetFunc_GetMethod(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_GetMethods(t *testing.T) {
+	// Arrange
 	type myStruct struct{}
 	s := myStruct{}
 	methods := reflectinternal.GetFunc.GetMethods(s)
 	nilMethods := reflectinternal.GetFunc.GetMethods(nil)
 
+	// Act
 	actual := args.Map{
 		"methodsNotNil":    methods != nil,
 		"nilMethodsNotNil": nilMethods != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"methodsNotNil":    true,
 		"nilMethodsNotNil": true,
@@ -193,15 +232,19 @@ func Test_Cov2_GetFunc_GetMethods(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_GetMethodsNames(t *testing.T) {
+	// Arrange
 	type myStruct struct{}
 	s := myStruct{}
 	names := reflectinternal.GetFunc.GetMethodsNames(s)
 	nilNames := reflectinternal.GetFunc.GetMethodsNames(nil)
 
+	// Act
 	actual := args.Map{
 		"namesNotNil":    names != nil,
 		"nilNamesNotNil": nilNames != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"namesNotNil":    names != nil,
 		"nilNamesNotNil": true,
@@ -210,15 +253,19 @@ func Test_Cov2_GetFunc_GetMethodsNames(t *testing.T) {
 }
 
 func Test_Cov2_GetFunc_GetMethodsMap(t *testing.T) {
+	// Arrange
 	type myStruct struct{}
 	s := myStruct{}
 	m := reflectinternal.GetFunc.GetMethodsMap(s)
 	nilMap := reflectinternal.GetFunc.GetMethodsMap(nil)
 
+	// Act
 	actual := args.Map{
 		"mapNotNil":    m != nil,
 		"nilMapNotNil": nilMap != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"mapNotNil":    true,
 		"nilMapNotNil": true,
@@ -229,12 +276,15 @@ func Test_Cov2_GetFunc_GetMethodsMap(t *testing.T) {
 // ── reflectUtils ──
 
 func Test_Cov2_Utils_MaxLimit(t *testing.T) {
+	// Act
 	actual := args.Map{
 		"noMax":     reflectinternal.Utils.MaxLimit(10, -1),
 		"underMax":  reflectinternal.Utils.MaxLimit(5, 10),
 		"overMax":   reflectinternal.Utils.MaxLimit(15, 10),
 		"equalMax":  reflectinternal.Utils.MaxLimit(10, 10),
 	}
+
+	// Assert
 	expected := args.Map{
 		"noMax":     10,
 		"underMax":  5,
@@ -245,14 +295,18 @@ func Test_Cov2_Utils_MaxLimit(t *testing.T) {
 }
 
 func Test_Cov2_Utils_AppendArgs(t *testing.T) {
+	// Arrange
 	emptyResult := reflectinternal.Utils.AppendArgs("item", []any{})
 	withResult := reflectinternal.Utils.AppendArgs("item", []any{"a", "b"})
 
+	// Act
 	actual := args.Map{
 		"emptyLen": len(emptyResult),
 		"withLen":  len(withResult),
 		"first":    emptyResult[0],
 	}
+
+	// Assert
 	expected := args.Map{
 		"emptyLen": 1,
 		"withLen":  3,
@@ -262,12 +316,16 @@ func Test_Cov2_Utils_AppendArgs(t *testing.T) {
 }
 
 func Test_Cov2_Utils_PkgNameOnly(t *testing.T) {
+	// Arrange
 	fn := func() {}
 	name := reflectinternal.Utils.PkgNameOnly(fn)
 
+	// Act
 	actual := args.Map{
 		"hasName": name != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasName": true,
 	}
@@ -275,11 +333,15 @@ func Test_Cov2_Utils_PkgNameOnly(t *testing.T) {
 }
 
 func Test_Cov2_Utils_FullNameToPkgName(t *testing.T) {
+	// Arrange
 	name := reflectinternal.Utils.FullNameToPkgName("mypackage.MyFunc")
 
+	// Act
 	actual := args.Map{
 		"name": name,
 	}
+
+	// Assert
 	expected := args.Map{
 		"name": "mypackage",
 	}
@@ -287,6 +349,7 @@ func Test_Cov2_Utils_FullNameToPkgName(t *testing.T) {
 }
 
 func Test_Cov2_Utils_IsReflectTypeMatch(t *testing.T) {
+	// Arrange
 	intType := reflect.TypeOf(0)
 	strType := reflect.TypeOf("")
 	anyType := reflect.TypeOf((*any)(nil)).Elem()
@@ -295,6 +358,7 @@ func Test_Cov2_Utils_IsReflectTypeMatch(t *testing.T) {
 	ok2, err2 := reflectinternal.Utils.IsReflectTypeMatch(intType, strType)
 	ok3, err3 := reflectinternal.Utils.IsReflectTypeMatch(anyType, strType)
 
+	// Act
 	actual := args.Map{
 		"sameOk":   ok1,
 		"sameErr":  err1 == nil,
@@ -303,6 +367,8 @@ func Test_Cov2_Utils_IsReflectTypeMatch(t *testing.T) {
 		"anyOk":    ok3,
 		"anyNoErr": err3 == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"sameOk":   true,
 		"sameErr":  true,
@@ -315,15 +381,19 @@ func Test_Cov2_Utils_IsReflectTypeMatch(t *testing.T) {
 }
 
 func Test_Cov2_Utils_IsReflectTypeMatchAny(t *testing.T) {
+	// Arrange
 	ok1, err1 := reflectinternal.Utils.IsReflectTypeMatchAny(42, 99)
 	ok2, err2 := reflectinternal.Utils.IsReflectTypeMatchAny(42, "hello")
 
+	// Act
 	actual := args.Map{
 		"sameOk":  ok1,
 		"sameErr": err1 == nil,
 		"diffOk":  ok2,
 		"diffErr": err2 != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"sameOk":  true,
 		"sameErr": true,
@@ -334,6 +404,7 @@ func Test_Cov2_Utils_IsReflectTypeMatchAny(t *testing.T) {
 }
 
 func Test_Cov2_Utils_VerifyReflectTypesAny(t *testing.T) {
+	// Arrange
 	ok1, err1 := reflectinternal.Utils.VerifyReflectTypesAny(
 		[]any{42, "hello"},
 		[]any{99, "world"},
@@ -347,6 +418,7 @@ func Test_Cov2_Utils_VerifyReflectTypesAny(t *testing.T) {
 		[]any{99, 100},
 	)
 
+	// Act
 	actual := args.Map{
 		"matchOk":     ok1,
 		"matchErr":    err1 == nil,
@@ -355,6 +427,8 @@ func Test_Cov2_Utils_VerifyReflectTypesAny(t *testing.T) {
 		"typeMismatch": ok3,
 		"typeErr":     err3 != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"matchOk":     true,
 		"matchErr":    true,
@@ -367,6 +441,7 @@ func Test_Cov2_Utils_VerifyReflectTypesAny(t *testing.T) {
 }
 
 func Test_Cov2_Utils_VerifyReflectTypes(t *testing.T) {
+	// Arrange
 	intType := reflect.TypeOf(0)
 	strType := reflect.TypeOf("")
 
@@ -381,12 +456,15 @@ func Test_Cov2_Utils_VerifyReflectTypes(t *testing.T) {
 		[]reflect.Type{intType, strType},
 	)
 
+	// Act
 	actual := args.Map{
 		"matchOk":  ok1,
 		"matchErr": err1 == nil,
 		"diffOk":   ok2,
 		"diffErr":  err2 != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"matchOk":  true,
 		"matchErr": true,
@@ -399,6 +477,7 @@ func Test_Cov2_Utils_VerifyReflectTypes(t *testing.T) {
 // ── reflectGetter additional ──
 
 func Test_Cov2_ReflectGetter_FieldNameWithValuesMap(t *testing.T) {
+	// Arrange
 	type testStruct struct {
 		Name string
 		age  int
@@ -408,12 +487,15 @@ func Test_Cov2_ReflectGetter_FieldNameWithValuesMap(t *testing.T) {
 	result, err := reflectinternal.ReflectGetter.FieldNameWithValuesMap(s)
 	nilResult, nilErr := reflectinternal.ReflectGetter.FieldNameWithValuesMap(nil)
 
+	// Act
 	actual := args.Map{
 		"resultLen": len(result),
 		"noError":   err == nil,
 		"nilLen":    len(nilResult),
 		"nilHasErr": nilErr != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"resultLen": 2,
 		"noError":   true,
@@ -424,6 +506,7 @@ func Test_Cov2_ReflectGetter_FieldNameWithValuesMap(t *testing.T) {
 }
 
 func Test_Cov2_ReflectGetter_NullFieldsMap(t *testing.T) {
+	// Arrange
 	type testStruct struct {
 		Name *string
 		Age  int
@@ -433,10 +516,13 @@ func Test_Cov2_ReflectGetter_NullFieldsMap(t *testing.T) {
 	result := reflectinternal.ReflectGetter.NullFieldsMap(s)
 	nilResult := reflectinternal.ReflectGetter.NullFieldsMap(nil)
 
+	// Act
 	actual := args.Map{
 		"hasNullName": result["Name"],
 		"nilLen":      len(nilResult),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasNullName": true,
 		"nilLen":      0,
@@ -445,6 +531,7 @@ func Test_Cov2_ReflectGetter_NullFieldsMap(t *testing.T) {
 }
 
 func Test_Cov2_ReflectGetter_NullOrZeroFieldsMap(t *testing.T) {
+	// Arrange
 	type testStruct struct {
 		Name string
 		Age  int
@@ -454,11 +541,14 @@ func Test_Cov2_ReflectGetter_NullOrZeroFieldsMap(t *testing.T) {
 	result := reflectinternal.ReflectGetter.NullOrZeroFieldsMap(s)
 	nilResult := reflectinternal.ReflectGetter.NullOrZeroFieldsMap(nil)
 
+	// Act
 	actual := args.Map{
 		"hasZeroName": result["Name"],
 		"hasZeroAge":  result["Age"],
 		"nilLen":      len(nilResult),
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasZeroName": true,
 		"hasZeroAge":  true,
@@ -470,6 +560,7 @@ func Test_Cov2_ReflectGetter_NullOrZeroFieldsMap(t *testing.T) {
 // ── reflectGetUsingReflectValue additional ──
 
 func Test_Cov2_ReflectGetRv_FieldNameWithTypeMap(t *testing.T) {
+	// Arrange
 	type testStruct struct {
 		Name string
 		Age  int
@@ -482,10 +573,13 @@ func Test_Cov2_ReflectGetRv_FieldNameWithTypeMap(t *testing.T) {
 		reflect.ValueOf(42),
 	)
 
+	// Act
 	actual := args.Map{
 		"resultLen": len(result),
 		"nilResult": nilResult == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"resultLen": 2,
 		"nilResult": true,
@@ -494,6 +588,7 @@ func Test_Cov2_ReflectGetRv_FieldNameWithTypeMap(t *testing.T) {
 }
 
 func Test_Cov2_ReflectGetRv_FieldNameWithValuesMap(t *testing.T) {
+	// Arrange
 	type testStruct struct {
 		Name string
 		age  int
@@ -503,11 +598,14 @@ func Test_Cov2_ReflectGetRv_FieldNameWithValuesMap(t *testing.T) {
 
 	result, err := reflectinternal.ReflectGetterUsingReflectValue.FieldNameWithValuesMap(rv)
 
+	// Act
 	actual := args.Map{
 		"resultLen": len(result),
 		"noError":   err == nil,
 		"hasName":   result["Name"] == "Alice",
 	}
+
+	// Assert
 	expected := args.Map{
 		"resultLen": 2,
 		"noError":   true,
@@ -519,12 +617,16 @@ func Test_Cov2_ReflectGetRv_FieldNameWithValuesMap(t *testing.T) {
 // ── MapConverter additional ──
 
 func Test_Cov2_MapConverter_ToKeysStrings(t *testing.T) {
+	// Arrange
 	result, err := reflectinternal.MapConverter.ToKeysStrings(map[string]int{"a": 1})
 
+	// Act
 	actual := args.Map{
 		"len":   len(result),
 		"noErr": err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":   1,
 		"noErr": true,
@@ -533,15 +635,19 @@ func Test_Cov2_MapConverter_ToKeysStrings(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToValuesAny(t *testing.T) {
+	// Arrange
 	result, err := reflectinternal.MapConverter.ToValuesAny(map[string]int{"a": 1})
 	nilResult, nilErr := reflectinternal.MapConverter.ToValuesAny(nil)
 
+	// Act
 	actual := args.Map{
 		"len":    len(result),
 		"noErr":  err == nil,
 		"nilLen": len(nilResult),
 		"nilErr": nilErr == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":    1,
 		"noErr":  true,
@@ -552,15 +658,19 @@ func Test_Cov2_MapConverter_ToValuesAny(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToKeysAny(t *testing.T) {
+	// Arrange
 	result, err := reflectinternal.MapConverter.ToKeysAny(map[string]int{"a": 1})
 	nilResult, nilErr := reflectinternal.MapConverter.ToKeysAny(nil)
 
+	// Act
 	actual := args.Map{
 		"len":    len(result),
 		"noErr":  err == nil,
 		"nilLen": len(nilResult),
 		"nilErr": nilErr == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":    1,
 		"noErr":  true,
@@ -571,11 +681,15 @@ func Test_Cov2_MapConverter_ToKeysAny(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToStringsMust(t *testing.T) {
+	// Arrange
 	result := reflectinternal.MapConverter.ToStringsMust(map[string]int{"a": 1})
 
+	// Act
 	actual := args.Map{
 		"len": len(result),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len": 1,
 	}
@@ -583,14 +697,18 @@ func Test_Cov2_MapConverter_ToStringsMust(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToSortedStringsMust(t *testing.T) {
+	// Arrange
 	result := reflectinternal.MapConverter.ToSortedStringsMust(map[string]int{"b": 2, "a": 1})
 	nilResult := reflectinternal.MapConverter.ToSortedStringsMust(nil)
 
+	// Act
 	actual := args.Map{
 		"len":    len(result),
 		"first":  result[0],
 		"nilLen": len(nilResult),
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":    2,
 		"first":  "a",
@@ -600,14 +718,18 @@ func Test_Cov2_MapConverter_ToSortedStringsMust(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToMapStringAnyRv_NonStringKey(t *testing.T) {
+	// Arrange
 	m := map[int]string{1: "one", 2: "two"}
 	rv := reflect.ValueOf(m)
 	result, err := reflectinternal.MapConverter.ToMapStringAnyRv(rv)
 
+	// Act
 	actual := args.Map{
 		"len":   len(result),
 		"noErr": err == nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"len":   2,
 		"noErr": true,
@@ -616,12 +738,16 @@ func Test_Cov2_MapConverter_ToMapStringAnyRv_NonStringKey(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToMapStringAnyRv_NotMap(t *testing.T) {
+	// Arrange
 	rv := reflect.ValueOf(42)
 	_, err := reflectinternal.MapConverter.ToMapStringAnyRv(rv)
 
+	// Act
 	actual := args.Map{
 		"hasErr": err != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasErr": true,
 	}
@@ -629,12 +755,16 @@ func Test_Cov2_MapConverter_ToMapStringAnyRv_NotMap(t *testing.T) {
 }
 
 func Test_Cov2_MapConverter_ToStringsRv_NotMap(t *testing.T) {
+	// Arrange
 	rv := reflect.ValueOf(42)
 	_, err := reflectinternal.MapConverter.ToStringsRv(rv)
 
+	// Act
 	actual := args.Map{
 		"hasErr": err != nil,
 	}
+
+	// Assert
 	expected := args.Map{
 		"hasErr": true,
 	}
@@ -644,11 +774,15 @@ func Test_Cov2_MapConverter_ToStringsRv_NotMap(t *testing.T) {
 // ── reflectPath ──
 
 func Test_Cov2_Path_RepoDir(t *testing.T) {
+	// Arrange
 	result := reflectinternal.Path.RepoDir()
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -656,11 +790,15 @@ func Test_Cov2_Path_RepoDir(t *testing.T) {
 }
 
 func Test_Cov2_Path_CurDir(t *testing.T) {
+	// Arrange
 	result := reflectinternal.Path.CurDir()
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -670,11 +808,15 @@ func Test_Cov2_Path_CurDir(t *testing.T) {
 // ── TypeNamesReferenceString ──
 
 func Test_Cov2_TypeNamesReferenceString(t *testing.T) {
+	// Arrange
 	result := reflectinternal.TypeNamesReferenceString(true, 42, "hello")
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -684,11 +826,15 @@ func Test_Cov2_TypeNamesReferenceString(t *testing.T) {
 // ── TypeNamesString ──
 
 func Test_Cov2_TypeNamesString(t *testing.T) {
+	// Arrange
 	result := reflectinternal.TypeNamesString(true, 42, "hello")
 
+	// Act
 	actual := args.Map{
 		"notEmpty": result != "",
 	}
+
+	// Assert
 	expected := args.Map{
 		"notEmpty": true,
 	}
@@ -698,13 +844,17 @@ func Test_Cov2_TypeNamesString(t *testing.T) {
 // ── ReflectType converter ──
 
 func Test_Cov2_ReflectType_SafeName(t *testing.T) {
+	// Arrange
 	result := reflectinternal.ReflectType.SafeName(42)
 	nilResult := reflectinternal.ReflectType.SafeName(nil)
 
+	// Act
 	actual := args.Map{
 		"result":    result,
 		"nilResult": nilResult,
 	}
+
+	// Assert
 	expected := args.Map{
 		"result":    "int",
 		"nilResult": "",

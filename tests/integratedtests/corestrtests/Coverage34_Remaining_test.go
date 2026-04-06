@@ -13,8 +13,13 @@ import (
 
 func Test_C34_HD_Length(t *testing.T) {
 	safeTest(t, "Test_C34_HD_Length", func() {
+		// Arrange
 		hd := corestr.HashmapDiff(map[string]string{"k": "v"})
+
+		// Act
 		actual := args.Map{"result": hd.Length() != 1}
+
+		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var nilHd *corestr.HashmapDiff
