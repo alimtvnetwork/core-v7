@@ -114,21 +114,6 @@ func (linkedListNode *LinkedListNode) AddStringsToNode(
 		items)
 }
 
-// Deprecated: Use AddStringsToNode instead.
-func (linkedListNode *LinkedListNode) AddStringsPtrToNode(
-	linkedListForIncrement *LinkedList,
-	isSkipOnNull bool,
-	items *[]string,
-) *LinkedList {
-	if items == nil {
-		return linkedListForIncrement
-	}
-
-	return linkedListNode.AddStringsToNode(
-		linkedListForIncrement,
-		isSkipOnNull,
-		*items)
-}
 
 func (linkedListNode *LinkedListNode) AddCollectionToNode(
 	linkedListForIncrement *LinkedList,
