@@ -1579,7 +1579,9 @@ func Test_C37_Collection_Json(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_Json", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		j := c.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 	})
 }
 
@@ -1587,7 +1589,9 @@ func Test_C37_Collection_JsonPtr(t *testing.T) {
 	safeTest(t, "Test_C37_Collection_JsonPtr", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
 		jp := c.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 	})
 }
 

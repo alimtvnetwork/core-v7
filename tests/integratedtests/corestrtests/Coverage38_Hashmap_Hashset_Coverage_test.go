@@ -794,9 +794,13 @@ func Test_C38_Hashmap_JSON(t *testing.T) {
 		h := corestr.New.Hashmap.Cap(2)
 		h.AddOrUpdate("a", "1")
 		j := h.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := h.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 		actual := args.Map{"result": h.JsonModelAny() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
@@ -1585,9 +1589,13 @@ func Test_C38_Hashset_JSON(t *testing.T) {
 	safeTest(t, "Test_C38_Hashset_JSON", func() {
 		hs := corestr.New.Hashset.StringsSpreadItems("a")
 		j := hs.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := hs.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 		actual := args.Map{"result": hs.JsonModelAny() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
