@@ -286,7 +286,8 @@ def insert_aaa_in_safetest(body_lines: list[str], base_indent: str) -> list[str]
     # Analyze closure body (everything between safeTest and closing })
     closure_body = body_lines[safe_start + 1:]
     # Remove trailing }) lines
-    while closure_body and closure_body[-1].strip() in ['', '})', '})'}:
+    closing_tokens = {'', '})', '})'}
+    while closure_body and closure_body[-1].strip() in closing_tokens:
         closure_body = closure_body[:-1]
 
     if not has_aaa_comments(closure_body):
