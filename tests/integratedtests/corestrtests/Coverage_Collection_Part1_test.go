@@ -408,7 +408,7 @@ func Test_CovP1_31_AddFuncErr(t *testing.T) {
 		// success
 		col.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("unexpected error handler") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 		actual := args.Map{"result": col.Length() != 1}
 		expected := args.Map{"result": false}

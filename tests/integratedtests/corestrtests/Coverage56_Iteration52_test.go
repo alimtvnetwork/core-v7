@@ -173,7 +173,7 @@ func Test_Cov56_Hashset_AddFuncErr_NoErr(t *testing.T) {
 		// Act
 		hs.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal(err) },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 		// Assert
 		tc := coretestcases.CaseV1{

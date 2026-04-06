@@ -466,7 +466,7 @@ func Test_S10_29_Hashset_AddFuncErr_NoError(t *testing.T) {
 		// Act
 		hs.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("should not call error handler") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 
 		// Assert

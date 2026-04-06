@@ -411,7 +411,7 @@ func Test_Cov58_Collection_AddFuncErr_Success(t *testing.T) {
 		c := corestr.New.Collection.Empty()
 		c.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("should not be called") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 		actual := args.Map{"len": c.Length(), "first": c.First()}
 		expected := args.Map{"len": 1, "first": "ok"}

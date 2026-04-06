@@ -233,7 +233,7 @@ func Test_Cov64_LinkedList_AddFuncErr_NoError(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 		ll.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("should not be called") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 		actual := args.Map{"len": ll.Length()}
 		expected := args.Map{"len": 1}

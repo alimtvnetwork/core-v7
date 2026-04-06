@@ -281,7 +281,7 @@ func Test_CovHS1_19_AddFuncErr(t *testing.T) {
 		// success
 		hs.AddFuncErr(
 			func() (string, error) { return "ok", nil },
-			func(err error) { t.Fatal("should not be called") },
+			func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) },
 		)
 		actual := args.Map{"result": hs.Has("ok")}
 		expected := args.Map{"result": true}
