@@ -163,9 +163,9 @@ func Test_Cov7_CaseV1_TypeShouldMatch(t *testing.T) {
 		VerifyTypeOf:  coretests.NewVerifyTypeOf([]string{"hello"}),
 	}
 	err := c.TypeShouldMatch(t)
-	if err != nil {
-		t.Fatalf("unexpected type mismatch: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected type mismatch:", actual)
 }
 
 // ── CaseV1.ShouldBeUsingCondition with type verify ──
@@ -182,9 +182,9 @@ func Test_Cov7_CaseV1_ShouldBeUsingCondition_WithVerify(t *testing.T) {
 		corevalidator.DefaultDisabledCoreCondition,
 		"hello",
 	)
-	if err != nil {
-		t.Fatalf("unexpected error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 }
 
 // ── CaseV1.AssertDirectly ──

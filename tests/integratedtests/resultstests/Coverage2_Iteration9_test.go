@@ -40,34 +40,34 @@ func Test_C2_IsResultTypeOf_NilExpected_ZeroInt(t *testing.T) {
 func Test_C2_Result_String_Panicked(t *testing.T) {
 	r := results.Result[string]{Panicked: true, PanicValue: "boom"}
 	s := r.String()
-	if s == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C2_Result_String_WithError(t *testing.T) {
 	r := results.Result[string]{Value: "v", Error: errors.New("e"), ReturnCount: 1}
 	s := r.String()
-	if s == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C2_Result_String_Normal(t *testing.T) {
 	r := results.Result[int]{Value: 42, ReturnCount: 1}
 	s := r.String()
-	if s == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 // ── Results.String — 3 branches ──
 
 func Test_C2_Results_String_Panicked(t *testing.T) {
 	r := results.Results[string, int]{Result: results.Result[string]{Panicked: true, PanicValue: "p"}}
-	if r.String() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": r.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C2_Results_String_WithError(t *testing.T) {
@@ -75,9 +75,9 @@ func Test_C2_Results_String_WithError(t *testing.T) {
 		Result:  results.Result[string]{Value: "v", Error: errors.New("e")},
 		Result2: 5,
 	}
-	if r.String() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": r.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C2_Results_String_Normal(t *testing.T) {
@@ -85,9 +85,9 @@ func Test_C2_Results_String_Normal(t *testing.T) {
 		Result:  results.Result[string]{Value: "v"},
 		Result2: 10,
 	}
-	if r.String() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": r.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 // ── FromResultAny — type assertion failures ──
@@ -215,9 +215,9 @@ func Test_C2_ShouldMatchResult_MissingFieldKey(t *testing.T) {
 func Test_C2_MethodName_MethodExpression(t *testing.T) {
 	name := results.MethodName((*testReceiver).Greet)
 	// Should extract "Greet" from the full name
-	if name == "" {
-		t.Fatal("expected non-empty method name")
-	}
+	actual := args.Map{"result": name == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty method name", actual)
 }
 
 // ── ToMap and ToMapCompact completeness ──
@@ -230,33 +230,33 @@ func Test_C2_Result_ToMap_AllFields(t *testing.T) {
 		ReturnCount: 1,
 	}
 	m := r.ToMap()
-	if m["value"] != "test" || m["panicked"] != false || m["hasError"] != true || m["returnCount"] != 1 {
-		t.Fatal("unexpected map values")
-	}
+	actual := args.Map{"result": m["value"] != "test" || m["panicked"] != false || m["hasError"] != true || m["returnCount"] != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected map values", actual)
 }
 
 func Test_C2_Result_ToMapCompact_Fields(t *testing.T) {
 	r := results.Result[int]{Value: 5, Panicked: true}
 	m := r.ToMapCompact()
-	if m["value"] != "5" || m["panicked"] != true {
-		t.Fatal("unexpected compact map")
-	}
+	actual := args.Map{"result": m["value"] != "5" || m["panicked"] != true}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected compact map", actual)
 }
 
 // ── ResultAt edge cases ──
 
 func Test_C2_Result_ResultAt_ValidIndex(t *testing.T) {
 	r := results.Result[string]{AllResults: []any{"a", "b", "c"}}
-	if r.ResultAt(2) != "c" {
-		t.Fatal("expected c")
-	}
+	actual := args.Map{"result": r.ResultAt(2) != "c"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected c", actual)
 }
 
 // ── IsResult2 and Result2String ──
 
 func Test_C2_Results_IsResult2_NoMatch(t *testing.T) {
 	r := results.Results[string, int]{Result2: 10}
-	if r.IsResult2(20) {
-		t.Fatal("should not match")
-	}
+	actual := args.Map{"result": r.IsResult2(20)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not match", actual)
 }

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreversion"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // Test_Cov5_VersionDisplayMajorMinorPatch_InvalidPatch tests the IsPatchInvalid branch.
@@ -20,9 +21,9 @@ func Test_Cov5_VersionDisplayMajorMinorPatch_InvalidPatch(t *testing.T) {
 
 	// Assert
 	expected := "v1.2"
-	if actual != expected {
-		t.Fatalf("VersionDisplayMajorMinorPatch with invalid patch: got %q, want %q", actual, expected)
-	}
+	actual := args.Map{"result": actual != expected}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "VersionDisplayMajorMinorPatch with invalid patch: got, want", actual)
 }
 
 // Test_Cov5_Major_Compare tests the Major() comparison method.
@@ -37,7 +38,7 @@ func Test_Cov5_Major_Compare(t *testing.T) {
 	result := v.Major(3)
 
 	// Assert
-	if !result.IsEqual() {
-		t.Fatalf("Major(3) on version with major=3 should be Equal, got %v", result)
-	}
+	actual := args.Map{"result": result.IsEqual()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Major(3) on version with major=3 should be Equal", actual)
 }

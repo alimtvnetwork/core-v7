@@ -138,9 +138,9 @@ func Test_Trace_ClonePtr_Nil(t *testing.T) {
 	cloned := trace.ClonePtr()
 
 	// Assert
-	if cloned != nil {
-		t.Error("expected nil ClonePtr to return nil")
-	}
+	actual := args.Map{"result": cloned != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil ClonePtr to return nil", actual)
 }
 
 func Test_Trace_Message_And_ShortString(t *testing.T) {
@@ -160,15 +160,15 @@ func Test_Trace_Message_And_ShortString(t *testing.T) {
 	str := trace.String()
 
 	// Assert
-	if msg == "" {
-		t.Error("expected Message to not be empty")
-	}
-	if shortStr == "" {
-		t.Error("expected ShortString to not be empty")
-	}
-	if str == "" {
-		t.Error("expected String to not be empty")
-	}
+	actual := args.Map{"result": msg == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Message to not be empty", actual)
+	actual := args.Map{"result": shortStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ShortString to not be empty", actual)
+	actual := args.Map{"result": str == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected String to not be empty", actual)
 }
 
 func Test_Trace_FileWithLine(t *testing.T) {
@@ -183,12 +183,12 @@ func Test_Trace_FileWithLine(t *testing.T) {
 	fwl := trace.FileWithLine()
 
 	// Assert
-	if fwl.FilePath != "/src/file.go" {
-		t.Errorf("expected FilePath '/src/file.go', got '%s'", fwl.FilePath)
-	}
-	if fwl.Line != 10 {
-		t.Errorf("expected Line 10, got %d", fwl.Line)
-	}
+	actual := args.Map{"result": fwl.FilePath != "/src/file.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FilePath '/src/file.go', got ''", actual)
+	actual := args.Map{"result": fwl.Line != 10}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Line 10", actual)
 }
 
 func Test_Trace_FileName(t *testing.T) {
@@ -202,9 +202,9 @@ func Test_Trace_FileName(t *testing.T) {
 	fileName := trace.FileName()
 
 	// Assert
-	if fileName != "handler.go" {
-		t.Errorf("expected FileName 'handler.go', got '%s'", fileName)
-	}
+	actual := args.Map{"result": fileName != "handler.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FileName 'handler.go', got ''", actual)
 }
 
 func Test_Trace_HasIssues(t *testing.T) {
@@ -216,9 +216,9 @@ func Test_Trace_HasIssues(t *testing.T) {
 	}
 
 	// Act & Assert
-	if !trace.HasIssues() {
-		t.Error("expected HasIssues=true when PackageMethodName is empty")
-	}
+	actual := args.Map{"result": trace.HasIssues()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasIssues=true when PackageMethodName is empty", actual)
 }
 
 func Test_Trace_FileWithLineString(t *testing.T) {
@@ -232,9 +232,9 @@ func Test_Trace_FileWithLineString(t *testing.T) {
 	result := trace.FileWithLineString()
 
 	// Assert
-	if result == "" {
-		t.Error("expected FileWithLineString to not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FileWithLineString to not be empty", actual)
 }
 
 func Test_FileWithLine_StringMethods(t *testing.T) {
@@ -269,9 +269,9 @@ func Test_FileWithLine_NilString(t *testing.T) {
 	result := fwl.String()
 
 	// Assert
-	if result != "" {
-		t.Errorf("expected nil FileWithLine String to be empty, got '%s'", result)
-	}
+	actual := args.Map{"result": result != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil FileWithLine String to be empty, got ''", actual)
 }
 
 func Test_FileWithLine_JsonString(t *testing.T) {
@@ -285,9 +285,9 @@ func Test_FileWithLine_JsonString(t *testing.T) {
 	jsonStr := fwl.JsonString()
 
 	// Assert
-	if jsonStr == "" {
-		t.Error("expected JsonString to not be empty")
-	}
+	actual := args.Map{"result": jsonStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected JsonString to not be empty", actual)
 }
 
 func Test_FileWithLine_AsFileLiner(t *testing.T) {
@@ -301,12 +301,12 @@ func Test_FileWithLine_AsFileLiner(t *testing.T) {
 	liner := fwl.AsFileLiner()
 
 	// Assert
-	if liner == nil {
-		t.Error("expected AsFileLiner to not be nil")
-	}
-	if liner.FullFilePath() != "/src/test.go" {
-		t.Errorf("expected path '/src/test.go', got '%s'", liner.FullFilePath())
-	}
+	actual := args.Map{"result": liner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected AsFileLiner to not be nil", actual)
+	actual := args.Map{"result": liner.FullFilePath() != "/src/test.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected path '/src/test.go', got ''", actual)
 }
 
 func Test_Trace_AsFileLiner(t *testing.T) {
@@ -321,9 +321,9 @@ func Test_Trace_AsFileLiner(t *testing.T) {
 	liner := trace.AsFileLiner()
 
 	// Assert
-	if liner == nil {
-		t.Error("expected AsFileLiner to not be nil")
-	}
+	actual := args.Map{"result": liner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected AsFileLiner to not be nil", actual)
 }
 
 func Test_Trace_StringUsingFmt(t *testing.T) {
@@ -339,9 +339,9 @@ func Test_Trace_StringUsingFmt(t *testing.T) {
 	})
 
 	// Assert
-	if result != "pkg.Method" {
-		t.Errorf("expected 'pkg.Method', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "pkg.Method"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'pkg.Method', got ''", actual)
 }
 
 func Test_FileWithLine_StringUsingFmt(t *testing.T) {
@@ -357,7 +357,7 @@ func Test_FileWithLine_StringUsingFmt(t *testing.T) {
 	})
 
 	// Assert
-	if result != "/file.go" {
-		t.Errorf("expected '/file.go', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "/file.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '/file.go', got ''", actual)
 }

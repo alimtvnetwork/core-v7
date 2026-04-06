@@ -5,6 +5,7 @@ import (
 
 	"github.com/alimtvnetwork/core/corevalidator"
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -13,12 +14,12 @@ import (
 
 func Test_SliceValidators_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
-	if !v.IsEmpty() {
-		t.Error("empty should be empty")
-	}
-	if v.Length() != 0 {
-		t.Errorf("expected 0, got %d", v.Length())
-	}
+	actual := args.Map{"result": v.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
+	actual := args.Map{"result": v.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // (nil receiver tests migrated to SliceValidators_NilReceiver_testcases.go)
@@ -33,12 +34,12 @@ func Test_SliceValidators_WithItems(t *testing.T) {
 			},
 		},
 	}
-	if v.IsEmpty() {
-		t.Error("should not be empty")
-	}
-	if v.Length() != 1 {
-		t.Errorf("expected 1, got %d", v.Length())
-	}
+	actual := args.Map{"result": v.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
+	actual := args.Map{"result": v.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ==========================================
@@ -47,16 +48,16 @@ func Test_SliceValidators_WithItems(t *testing.T) {
 
 func Test_SliceValidators_IsMatch_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
-	if !v.IsMatch(true) {
-		t.Error("empty should match")
-	}
+	actual := args.Map{"result": v.IsMatch(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should match", actual)
 }
 
 func Test_SliceValidators_IsValid_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
-	if !v.IsValid(true) {
-		t.Error("empty IsValid should be true")
-	}
+	actual := args.Map{"result": v.IsValid(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty IsValid should be true", actual)
 }
 
 func Test_SliceValidators_IsMatch_AllPass(t *testing.T) {
@@ -70,9 +71,9 @@ func Test_SliceValidators_IsMatch_AllPass(t *testing.T) {
 			},
 		},
 	}
-	if !v.IsMatch(true) {
-		t.Error("matching validators should return true")
-	}
+	actual := args.Map{"result": v.IsMatch(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "matching validators should return true", actual)
 }
 
 func Test_SliceValidators_IsMatch_OneFails(t *testing.T) {
@@ -92,9 +93,9 @@ func Test_SliceValidators_IsMatch_OneFails(t *testing.T) {
 			},
 		},
 	}
-	if v.IsMatch(true) {
-		t.Error("one failing validator should return false")
-	}
+	actual := args.Map{"result": v.IsMatch(true)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one failing validator should return false", actual)
 }
 
 // (nil receiver test migrated to SliceValidators_NilReceiver_testcases.go)
@@ -107,9 +108,9 @@ func Test_SliceValidators_VerifyAll_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
 	err := v.VerifyAll("header", params, false)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_SliceValidators_VerifyAll_Pass(t *testing.T) {
@@ -125,9 +126,9 @@ func Test_SliceValidators_VerifyAll_Pass(t *testing.T) {
 	}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test", IsCaseSensitive: true}
 	err := v.VerifyAll("header", params, false)
-	if err != nil {
-		t.Errorf("matching should pass: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "matching should pass:", actual)
 }
 
 // ==========================================
@@ -138,9 +139,9 @@ func Test_SliceValidators_VerifyAllError_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
 	err := v.VerifyAllError(params)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 // ==========================================
@@ -151,9 +152,9 @@ func Test_SliceValidators_VerifyFirst_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
 	err := v.VerifyFirst(params, false)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_SliceValidators_VerifyFirst_Pass(t *testing.T) {
@@ -169,9 +170,9 @@ func Test_SliceValidators_VerifyFirst_Pass(t *testing.T) {
 	}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test", IsCaseSensitive: true}
 	err := v.VerifyFirst(params, false)
-	if err != nil {
-		t.Errorf("matching should pass: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "matching should pass:", actual)
 }
 
 // ==========================================
@@ -182,9 +183,9 @@ func Test_SliceValidators_VerifyUpto_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
 	err := v.VerifyUpto(false, false, 1, params)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 // ==========================================
@@ -205,7 +206,7 @@ func Test_SliceValidators_VerifyAllErrorUsingActual_Empty(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
 	err := v.VerifyAllErrorUsingActual(params, "a")
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }

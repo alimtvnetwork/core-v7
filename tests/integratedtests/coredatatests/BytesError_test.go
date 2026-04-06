@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ===== BytesError Tests =====
@@ -17,18 +18,18 @@ func Test_BytesError_String_WithBytes(t *testing.T) {
 	}
 
 	got := be.String()
-	if got != "hello" {
-		t.Errorf("BytesError.String() = %q, want %q", got, "hello")
-	}
+	actual := args.Map{"result": got != "hello"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "BytesError.String() =, want", got, "hello", actual)
 }
 
 func Test_BytesError_String_EmptyBytes(t *testing.T) {
 	be := &coredata.BytesError{}
 
 	got := be.String()
-	if got != "" {
-		t.Errorf("BytesError.String() on empty = %q, want empty", got)
-	}
+	actual := args.Map{"result": got != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "BytesError.String() on empty =, want empty", actual)
 }
 
 func Test_BytesError_String_CachesResult(t *testing.T) {
@@ -39,9 +40,9 @@ func Test_BytesError_String_CachesResult(t *testing.T) {
 	first := be.String()
 	second := be.String()
 
-	if first != second {
-		t.Error("expected cached string to be identical on second call")
-	}
+	actual := args.Map{"result": first != second}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cached string to be identical on second call", actual)
 }
 
 func Test_BytesError_HasError_True(t *testing.T) {
@@ -49,17 +50,17 @@ func Test_BytesError_HasError_True(t *testing.T) {
 		Error: errors.New("some error"),
 	}
 
-	if !be.HasError() {
-		t.Error("expected HasError() = true")
-	}
+	actual := args.Map{"result": be.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasError() = true", actual)
 }
 
 func Test_BytesError_HasError_False(t *testing.T) {
 	be := &coredata.BytesError{}
 
-	if be.HasError() {
-		t.Error("expected HasError() = false")
-	}
+	actual := args.Map{"result": be.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasError() = false", actual)
 }
 
 // Note: HasError nil receiver test migrated to BytesError_NilReceiver_testcases.go
@@ -67,9 +68,9 @@ func Test_BytesError_HasError_False(t *testing.T) {
 func Test_BytesError_IsEmptyError_True(t *testing.T) {
 	be := &coredata.BytesError{}
 
-	if !be.IsEmptyError() {
-		t.Error("expected IsEmptyError() = true")
-	}
+	actual := args.Map{"result": be.IsEmptyError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsEmptyError() = true", actual)
 }
 
 // Note: IsEmptyError nil receiver test migrated to BytesError_NilReceiver_testcases.go
@@ -79,9 +80,9 @@ func Test_BytesError_IsEmptyError_False(t *testing.T) {
 		Error: errors.New("err"),
 	}
 
-	if be.IsEmptyError() {
-		t.Error("expected IsEmptyError() = false")
-	}
+	actual := args.Map{"result": be.IsEmptyError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsEmptyError() = false", actual)
 }
 
 func Test_BytesError_HasBytes_True(t *testing.T) {
@@ -89,17 +90,17 @@ func Test_BytesError_HasBytes_True(t *testing.T) {
 		Bytes: []byte("data"),
 	}
 
-	if !be.HasBytes() {
-		t.Error("expected HasBytes() = true")
-	}
+	actual := args.Map{"result": be.HasBytes()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasBytes() = true", actual)
 }
 
 func Test_BytesError_HasBytes_False_NilBytes(t *testing.T) {
 	be := &coredata.BytesError{}
 
-	if be.HasBytes() {
-		t.Error("expected HasBytes() = false for nil bytes")
-	}
+	actual := args.Map{"result": be.HasBytes()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasBytes() = false for nil bytes", actual)
 }
 
 func Test_BytesError_HasBytes_False_EmptyBytes(t *testing.T) {
@@ -107,9 +108,9 @@ func Test_BytesError_HasBytes_False_EmptyBytes(t *testing.T) {
 		Bytes: []byte{},
 	}
 
-	if be.HasBytes() {
-		t.Error("expected HasBytes() = false for empty bytes")
-	}
+	actual := args.Map{"result": be.HasBytes()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasBytes() = false for empty bytes", actual)
 }
 
 func Test_BytesError_HasBytes_False_EmptyJson(t *testing.T) {
@@ -117,9 +118,9 @@ func Test_BytesError_HasBytes_False_EmptyJson(t *testing.T) {
 		Bytes: []byte("{}"),
 	}
 
-	if be.HasBytes() {
-		t.Error("expected HasBytes() = false for empty JSON {}")
-	}
+	actual := args.Map{"result": be.HasBytes()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasBytes() = false for empty JSON {}", actual)
 }
 
 func Test_BytesError_HasBytes_False_WithError(t *testing.T) {
@@ -128,9 +129,9 @@ func Test_BytesError_HasBytes_False_WithError(t *testing.T) {
 		Error: errors.New("err"),
 	}
 
-	if be.HasBytes() {
-		t.Error("expected HasBytes() = false when error is present")
-	}
+	actual := args.Map{"result": be.HasBytes()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasBytes() = false when error is present", actual)
 }
 
 // Note: Length nil receiver test migrated to BytesError_NilReceiver_testcases.go
@@ -141,9 +142,9 @@ func Test_BytesError_Length_WithBytes(t *testing.T) {
 	}
 
 	got := be.Length()
-	if got != 5 {
-		t.Errorf("BytesError.Length() = %d, want 5", got)
-	}
+	actual := args.Map{"result": got != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "BytesError.Length() =, want 5", actual)
 }
 
 // Note: IsEmpty nil receiver test migrated to BytesError_NilReceiver_testcases.go
@@ -153,9 +154,9 @@ func Test_BytesError_IsEmpty_EmptyBytes(t *testing.T) {
 		Bytes: []byte{},
 	}
 
-	if !be.IsEmpty() {
-		t.Error("expected IsEmpty() = true for empty bytes")
-	}
+	actual := args.Map{"result": be.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsEmpty() = true for empty bytes", actual)
 }
 
 func Test_BytesError_IsEmpty_False(t *testing.T) {
@@ -163,9 +164,9 @@ func Test_BytesError_IsEmpty_False(t *testing.T) {
 		Bytes: []byte("data"),
 	}
 
-	if be.IsEmpty() {
-		t.Error("expected IsEmpty() = false for non-empty bytes")
-	}
+	actual := args.Map{"result": be.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsEmpty() = false for non-empty bytes", actual)
 }
 
 func Test_BytesError_HandleError_NoError(t *testing.T) {
@@ -189,9 +190,9 @@ func Test_BytesError_NilReceiver(t *testing.T) {
 func Test_BytesError_HandleError_Panics(t *testing.T) {
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Error("expected HandleError to panic")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected HandleError to panic", actual)
 	}()
 
 	be := &coredata.BytesError{
@@ -211,19 +212,23 @@ func Test_BytesError_HandleErrorWithMsg_PanicsWithMsg(t *testing.T) {
 	defer func() {
 		r := recover()
 		if r == nil {
-			t.Error("expected HandleErrorWithMsg to panic")
+			actual := args.Map{"result": false}
+			expected := args.Map{"result": true}
+			expected.ShouldBeEqual(t, 0, "expected HandleErrorWithMsg to panic", actual)
 			return
 		}
 
 		msg, ok := r.(string)
 		if !ok {
-			t.Error("expected panic value to be string")
+			actual := args.Map{"result": false}
+			expected := args.Map{"result": true}
+			expected.ShouldBeEqual(t, 0, "expected panic value to be string", actual)
 			return
 		}
 
-		if msg != "prefix: boom" {
-			t.Errorf("panic message = %q, want %q", msg, "prefix: boom")
-		}
+		actual := args.Map{"result": msg != "prefix: boom"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "panic message =, want", msg, "prefix: boom", actual)
 	}()
 
 	be := &coredata.BytesError{
@@ -235,9 +240,9 @@ func Test_BytesError_HandleErrorWithMsg_PanicsWithMsg(t *testing.T) {
 func Test_BytesError_HandleErrorWithMsg_PanicsEmptyMsg(t *testing.T) {
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Error("expected HandleErrorWithMsg to panic")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected HandleErrorWithMsg to panic", actual)
 	}()
 
 	be := &coredata.BytesError{
@@ -250,18 +255,18 @@ func Test_BytesError_CombineErrorWithRef_NoError(t *testing.T) {
 	be := &coredata.BytesError{}
 
 	got := be.CombineErrorWithRef("ref1")
-	if got != "" {
-		t.Errorf("CombineErrorWithRef on no error = %q, want empty", got)
-	}
+	actual := args.Map{"result": got != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CombineErrorWithRef on no error =, want empty", actual)
 }
 
 func Test_BytesError_CombineErrorWithRefError_NoError(t *testing.T) {
 	be := &coredata.BytesError{}
 
 	got := be.CombineErrorWithRefError("ref1")
-	if got != nil {
-		t.Errorf("CombineErrorWithRefError on no error = %v, want nil", got)
-	}
+	actual := args.Map{"result": got != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CombineErrorWithRefError on no error =, want nil", actual)
 }
 
 func Test_BytesError_CombineErrorWithRefError_WithError(t *testing.T) {
@@ -270,7 +275,7 @@ func Test_BytesError_CombineErrorWithRefError_WithError(t *testing.T) {
 	}
 
 	got := be.CombineErrorWithRefError("ref1", "ref2")
-	if got == nil {
-		t.Error("expected non-nil error from CombineErrorWithRefError")
-	}
+	actual := args.Map{"result": got == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil error from CombineErrorWithRefError", actual)
 }

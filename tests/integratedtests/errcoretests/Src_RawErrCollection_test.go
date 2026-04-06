@@ -356,9 +356,9 @@ func Test_Src04_RawErrCollection_CompiledStackTracesString(t *testing.T) {
 	empty := c.CompiledStackTracesString() == ""
 	c.Add(errors.New("a"))
 	nonEmpty := c.CompiledStackTracesString() != ""
-	if !empty || !nonEmpty {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": empty || !nonEmpty}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Src04_RawErrCollection_CompiledErrorUsingStackTraces(t *testing.T) {
@@ -366,9 +366,9 @@ func Test_Src04_RawErrCollection_CompiledErrorUsingStackTraces(t *testing.T) {
 	emptyNil := c.CompiledErrorUsingStackTraces(",", []string{"t"}) == nil
 	c.Add(errors.New("a"))
 	nonNil := c.CompiledErrorUsingStackTraces(",", []string{"t"}) != nil
-	if !emptyNil || !nonNil {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": emptyNil || !nonNil}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Src04_RawErrCollection_CompiledJsonErrorWithStackTraces(t *testing.T) {

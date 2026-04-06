@@ -4,15 +4,16 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coremath"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_IsOutOfRange_Integer_ToUnsignedInt32(t *testing.T) {
 	result := coremath.IsOutOfRange.Integer.ToUnsignedInt32(-1)
-	if !result {
-		t.Fatal("expected true for negative value")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for negative value", actual)
 	result2 := coremath.IsOutOfRange.Integer.ToUnsignedInt32(100)
-	if result2 {
-		t.Fatal("expected false for valid value")
-	}
+	actual := args.Map{"result": result2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for valid value", actual)
 }

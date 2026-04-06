@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/conditional"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
@@ -15,9 +16,9 @@ func Test_Cov_AnyFunctionsExecuteResults_False(t *testing.T) {
 			func() (any, bool, bool) { return "b", true, false },
 		},
 	)
-	if len(result) != 1 {
-		t.Errorf("expected 1 got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
@@ -28,9 +29,9 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_False(t *testing.T) {
 			func() (int, error) { return 42, nil },
 		},
 	)
-	if err != nil || len(results) != 1 || results[0] != 42 {
-		t.Error("expected 42")
-	}
+	actual := args.Map{"result": err != nil || len(results) != 1 || results[0] != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
@@ -43,12 +44,12 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
 		},
 		nil,
 	)
-	if err == nil {
-		t.Error("expected error")
-	}
-	if len(results) != 1 {
-		t.Errorf("expected 1 got %d", len(results))
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
+	actual := args.Map{"result": len(results) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Cov_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
@@ -57,7 +58,7 @@ func Test_Cov_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 		nil,
 		nil,
 	)
-	if err != nil || results != nil {
-		t.Error("expected nil")
-	}
+	actual := args.Map{"result": err != nil || results != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }

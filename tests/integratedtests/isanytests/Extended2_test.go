@@ -4,242 +4,243 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/isany"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Null_Direct_NilInput(t *testing.T) {
-	if !isany.Null(nil) {
-		t.Error("nil should be null")
-	}
+	actual := args.Map{"result": isany.Null(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be null", actual)
 }
 
 func Test_Null_Direct_StringInput(t *testing.T) {
-	if isany.Null("hello") {
-		t.Error("string should not be null")
-	}
+	actual := args.Map{"result": isany.Null("hello")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "string should not be null", actual)
 }
 
 func Test_Null_Direct_IntInput(t *testing.T) {
-	if isany.Null(42) {
-		t.Error("int should not be null")
-	}
+	actual := args.Map{"result": isany.Null(42)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "int should not be null", actual)
 }
 
 func Test_Null_Direct_NilSlice(t *testing.T) {
 	var s []string
-	if !isany.Null(s) {
-		t.Error("nil slice should be null")
-	}
+	actual := args.Map{"result": isany.Null(s)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil slice should be null", actual)
 }
 
 func Test_Null_Direct_NilMap(t *testing.T) {
 	var m map[string]string
-	if !isany.Null(m) {
-		t.Error("nil map should be null")
-	}
+	actual := args.Map{"result": isany.Null(m)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil map should be null", actual)
 }
 
 func Test_Defined_Direct_NilInput(t *testing.T) {
-	if isany.Defined(nil) {
-		t.Error("nil should not be defined")
-	}
+	actual := args.Map{"result": isany.Defined(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not be defined", actual)
 }
 
 func Test_Defined_Direct_StringInput(t *testing.T) {
-	if !isany.Defined("hello") {
-		t.Error("string should be defined")
-	}
+	actual := args.Map{"result": isany.Defined("hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "string should be defined", actual)
 }
 
 func Test_DefinedBoth_Direct_BothDefined(t *testing.T) {
-	if !isany.DefinedBoth("a", "b") {
-		t.Error("both defined should return true")
-	}
+	actual := args.Map{"result": isany.DefinedBoth("a", "b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both defined should return true", actual)
 }
 
 func Test_DefinedBoth_Direct_LeftNil(t *testing.T) {
-	if isany.DefinedBoth(nil, "b") {
-		t.Error("left nil should return false")
-	}
+	actual := args.Map{"result": isany.DefinedBoth(nil, "b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "left nil should return false", actual)
 }
 
 func Test_DefinedBoth_Direct_RightNil(t *testing.T) {
-	if isany.DefinedBoth("a", nil) {
-		t.Error("right nil should return false")
-	}
+	actual := args.Map{"result": isany.DefinedBoth("a", nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "right nil should return false", actual)
 }
 
 func Test_DefinedBoth_Direct_BothNil(t *testing.T) {
-	if isany.DefinedBoth(nil, nil) {
-		t.Error("both nil should return false")
-	}
+	actual := args.Map{"result": isany.DefinedBoth(nil, nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "both nil should return false", actual)
 }
 
 func Test_DefinedLeftRight_Direct(t *testing.T) {
 	l, r := isany.DefinedLeftRight("a", nil)
-	if !l {
-		t.Error("left should be defined")
-	}
-	if r {
-		t.Error("right should not be defined")
-	}
+	actual := args.Map{"result": l}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "left should be defined", actual)
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "right should not be defined", actual)
 }
 
 func Test_NullBoth_Direct_BothNil(t *testing.T) {
-	if !isany.NullBoth(nil, nil) {
-		t.Error("both nil should return true")
-	}
+	actual := args.Map{"result": isany.NullBoth(nil, nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should return true", actual)
 }
 
 func Test_NullBoth_Direct_OneNonNil(t *testing.T) {
-	if isany.NullBoth("a", nil) {
-		t.Error("one non-nil should return false")
-	}
+	actual := args.Map{"result": isany.NullBoth("a", nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one non-nil should return false", actual)
 }
 
 func Test_NullLeftRight_Direct(t *testing.T) {
 	l, r := isany.NullLeftRight(nil, "b")
-	if !l {
-		t.Error("left should be null")
-	}
-	if r {
-		t.Error("right should not be null")
-	}
+	actual := args.Map{"result": l}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "left should be null", actual)
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "right should not be null", actual)
 }
 
 func Test_FuncOnly_Direct_Nil(t *testing.T) {
-	if isany.FuncOnly(nil) {
-		t.Error("nil should not be func")
-	}
+	actual := args.Map{"result": isany.FuncOnly(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not be func", actual)
 }
 
 func Test_FuncOnly_Direct_String(t *testing.T) {
-	if isany.FuncOnly("string") {
-		t.Error("string should not be func")
-	}
+	actual := args.Map{"result": isany.FuncOnly("string")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "string should not be func", actual)
 }
 
 func Test_FuncOnly_Direct_Func(t *testing.T) {
-	if !isany.FuncOnly(func() {}) {
-		t.Error("func should be func")
-	}
+	actual := args.Map{"result": isany.FuncOnly(func() {})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "func should be func", actual)
 }
 
 func Test_NotNull_Direct(t *testing.T) {
-	if isany.NotNull(nil) {
-		t.Error("nil should be null")
-	}
-	if !isany.NotNull("hello") {
-		t.Error("string should not be null")
-	}
+	actual := args.Map{"result": isany.NotNull(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should be null", actual)
+	actual := args.Map{"result": isany.NotNull("hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "string should not be null", actual)
 }
 
 func Test_AllNull_Direct(t *testing.T) {
-	if !isany.AllNull(nil, nil, nil) {
-		t.Error("all nil should return true")
-	}
-	if isany.AllNull(nil, "a", nil) {
-		t.Error("one non-nil should return false")
-	}
+	actual := args.Map{"result": isany.AllNull(nil, nil, nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "all nil should return true", actual)
+	actual := args.Map{"result": isany.AllNull(nil, "a", nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one non-nil should return false", actual)
 }
 
 func Test_AnyNull_Direct(t *testing.T) {
-	if !isany.AnyNull(nil, "a") {
-		t.Error("one nil should return true")
-	}
-	if isany.AnyNull("a", "b") {
-		t.Error("no nil should return false")
-	}
+	actual := args.Map{"result": isany.AnyNull(nil, "a")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "one nil should return true", actual)
+	actual := args.Map{"result": isany.AnyNull("a", "b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "no nil should return false", actual)
 }
 
 func Test_AllZero_Direct(t *testing.T) {
-	if !isany.AllZero(0, "", false) {
-		t.Error("all zero values should return true")
-	}
-	if isany.AllZero(0, "a", false) {
-		t.Error("non-zero should return false")
-	}
+	actual := args.Map{"result": isany.AllZero(0, "", false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "all zero values should return true", actual)
+	actual := args.Map{"result": isany.AllZero(0, "a", false)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-zero should return false", actual)
 }
 
 func Test_AnyZero_Direct(t *testing.T) {
-	if !isany.AnyZero(0, "a") {
-		t.Error("one zero should return true")
-	}
-	if isany.AnyZero("a", 1) {
-		t.Error("no zero should return false")
-	}
+	actual := args.Map{"result": isany.AnyZero(0, "a")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "one zero should return true", actual)
+	actual := args.Map{"result": isany.AnyZero("a", 1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "no zero should return false", actual)
 }
 
 func Test_Zero_Direct(t *testing.T) {
-	if !isany.Zero(0) {
-		t.Error("0 should be zero")
-	}
-	if !isany.Zero("") {
-		t.Error("empty string should be zero")
-	}
-	if !isany.Zero(false) {
-		t.Error("false should be zero")
-	}
-	if isany.Zero(1) {
-		t.Error("1 should not be zero")
-	}
+	actual := args.Map{"result": isany.Zero(0)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "0 should be zero", actual)
+	actual := args.Map{"result": isany.Zero("")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty string should be zero", actual)
+	actual := args.Map{"result": isany.Zero(false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "false should be zero", actual)
+	actual := args.Map{"result": isany.Zero(1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "1 should not be zero", actual)
 }
 
 func Test_DeepEqual_Direct(t *testing.T) {
-	if !isany.DeepEqual("a", "a") {
-		t.Error("same strings should be deep equal")
-	}
-	if isany.DeepEqual("a", "b") {
-		t.Error("different strings should not be deep equal")
-	}
+	actual := args.Map{"result": isany.DeepEqual("a", "a")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same strings should be deep equal", actual)
+	actual := args.Map{"result": isany.DeepEqual("a", "b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different strings should not be deep equal", actual)
 }
 
 func Test_NotDeepEqual_Direct(t *testing.T) {
-	if isany.NotDeepEqual("a", "a") {
-		t.Error("same should return false")
-	}
-	if !isany.NotDeepEqual("a", "b") {
-		t.Error("different should return true")
-	}
+	actual := args.Map{"result": isany.NotDeepEqual("a", "a")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "same should return false", actual)
+	actual := args.Map{"result": isany.NotDeepEqual("a", "b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "different should return true", actual)
 }
 
 func Test_StringEqual_Direct(t *testing.T) {
-	if !isany.StringEqual("hello", "hello") {
-		t.Error("same strings should be equal")
-	}
-	if isany.StringEqual("hello", "world") {
-		t.Error("different strings should not be equal")
-	}
+	actual := args.Map{"result": isany.StringEqual("hello", "hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same strings should be equal", actual)
+	actual := args.Map{"result": isany.StringEqual("hello", "world")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different strings should not be equal", actual)
 }
 
 func Test_ReflectNull_Direct(t *testing.T) {
-	if !isany.ReflectNull(nil) {
-		t.Error("nil should be reflect null")
-	}
-	if isany.ReflectNull("hello") {
-		t.Error("string should not be reflect null")
-	}
+	actual := args.Map{"result": isany.ReflectNull(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil should be reflect null", actual)
+	actual := args.Map{"result": isany.ReflectNull("hello")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "string should not be reflect null", actual)
 }
 
 func Test_ReflectNotNull_Direct(t *testing.T) {
-	if isany.ReflectNotNull(nil) {
-		t.Error("nil should not be reflect not null")
-	}
-	if !isany.ReflectNotNull("hello") {
-		t.Error("string should be reflect not null")
-	}
+	actual := args.Map{"result": isany.ReflectNotNull(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should not be reflect not null", actual)
+	actual := args.Map{"result": isany.ReflectNotNull("hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "string should be reflect not null", actual)
 }
 
 func Test_Pointer_Direct(t *testing.T) {
 	val := 42
-	if !isany.Pointer(&val) {
-		t.Error("pointer should return true")
-	}
-	if isany.Pointer(42) {
-		t.Error("non-pointer should return false")
-	}
-	if isany.Pointer(nil) {
-		t.Error("nil should return false")
-	}
+	actual := args.Map{"result": isany.Pointer(&val)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "pointer should return true", actual)
+	actual := args.Map{"result": isany.Pointer(42)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-pointer should return false", actual)
+	actual := args.Map{"result": isany.Pointer(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return false", actual)
 }
 
 func Test_Conclusive_Direct(t *testing.T) {
@@ -248,110 +249,110 @@ func Test_Conclusive_Direct(t *testing.T) {
 		// same type, different pointers → inconclusive
 	}
 	isEq2, isConcl2 := isany.Conclusive(nil, nil)
-	if !isConcl2 || !isEq2 {
-		t.Error("both nil should be conclusive equal")
-	}
+	actual := args.Map{"result": isConcl2 || !isEq2}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be conclusive equal", actual)
 }
 
 func Test_DefinedAllOf_Direct(t *testing.T) {
-	if !isany.DefinedAllOf("a", "b", "c") {
-		t.Error("all defined should return true")
-	}
-	if isany.DefinedAllOf("a", nil, "c") {
-		t.Error("one nil should return false")
-	}
+	actual := args.Map{"result": isany.DefinedAllOf("a", "b", "c")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "all defined should return true", actual)
+	actual := args.Map{"result": isany.DefinedAllOf("a", nil, "c")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one nil should return false", actual)
 }
 
 func Test_DefinedAnyOf_Direct(t *testing.T) {
-	if !isany.DefinedAnyOf(nil, "a", nil) {
-		t.Error("one defined should return true")
-	}
-	if isany.DefinedAnyOf(nil, nil) {
-		t.Error("all nil should return false")
-	}
+	actual := args.Map{"result": isany.DefinedAnyOf(nil, "a", nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "one defined should return true", actual)
+	actual := args.Map{"result": isany.DefinedAnyOf(nil, nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "all nil should return false", actual)
 }
 
 func Test_TypeSame_Direct(t *testing.T) {
-	if !isany.TypeSame("a", "b") {
-		t.Error("same types should return true")
-	}
-	if isany.TypeSame("a", 1) {
-		t.Error("different types should return false")
-	}
+	actual := args.Map{"result": isany.TypeSame("a", "b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same types should return true", actual)
+	actual := args.Map{"result": isany.TypeSame("a", 1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different types should return false", actual)
 }
 
 func Test_JsonEqual_Direct(t *testing.T) {
-	if !isany.JsonEqual("hello", "hello") {
-		t.Error("same values should be json equal")
-	}
+	actual := args.Map{"result": isany.JsonEqual("hello", "hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same values should be json equal", actual)
 }
 
 func Test_JsonMismatch_Direct(t *testing.T) {
-	if isany.JsonMismatch("hello", "hello") {
-		t.Error("same values should not mismatch")
-	}
-	if !isany.JsonMismatch("hello", "world") {
-		t.Error("different values should mismatch")
-	}
+	actual := args.Map{"result": isany.JsonMismatch("hello", "hello")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "same values should not mismatch", actual)
+	actual := args.Map{"result": isany.JsonMismatch("hello", "world")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "different values should mismatch", actual)
 }
 
 func Test_NumberType_Direct(t *testing.T) {
-	if !isany.NumberType(42) {
-		t.Error("int should be number type")
-	}
-	if !isany.NumberType(3.14) {
-		t.Error("float should be number type")
-	}
-	if isany.NumberType("hello") {
-		t.Error("string should not be number type")
-	}
+	actual := args.Map{"result": isany.NumberType(42)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "int should be number type", actual)
+	actual := args.Map{"result": isany.NumberType(3.14)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "float should be number type", actual)
+	actual := args.Map{"result": isany.NumberType("hello")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "string should not be number type", actual)
 }
 
 func Test_PrimitiveType_Direct(t *testing.T) {
-	if !isany.PrimitiveType("hello") {
-		t.Error("string should be primitive")
-	}
-	if !isany.PrimitiveType(42) {
-		t.Error("int should be primitive")
-	}
-	if !isany.PrimitiveType(true) {
-		t.Error("bool should be primitive")
-	}
+	actual := args.Map{"result": isany.PrimitiveType("hello")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "string should be primitive", actual)
+	actual := args.Map{"result": isany.PrimitiveType(42)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "int should be primitive", actual)
+	actual := args.Map{"result": isany.PrimitiveType(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "bool should be primitive", actual)
 }
 
 func Test_FloatingPointType_Direct(t *testing.T) {
-	if !isany.FloatingPointType(3.14) {
-		t.Error("float64 should be floating point")
-	}
-	if !isany.FloatingPointType(float32(1.0)) {
-		t.Error("float32 should be floating point")
-	}
-	if isany.FloatingPointType(42) {
-		t.Error("int should not be floating point")
-	}
+	actual := args.Map{"result": isany.FloatingPointType(3.14)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "float64 should be floating point", actual)
+	actual := args.Map{"result": isany.FloatingPointType(float32(1.0))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "float32 should be floating point", actual)
+	actual := args.Map{"result": isany.FloatingPointType(42)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "int should not be floating point", actual)
 }
 
 func Test_DefinedItems_Direct(t *testing.T) {
 	_, items := isany.DefinedItems("a", nil, "c")
-	if len(items) != 2 {
-		t.Errorf("expected 2 defined items, got %d", len(items))
-	}
+	actual := args.Map{"result": len(items) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 defined items", actual)
 }
 
 func Test_PositiveIntegerType_Direct(t *testing.T) {
-	if !isany.PositiveIntegerType(uint(42)) {
-		t.Error("positive int should be positive integer type")
-	}
-	if isany.PositiveIntegerType(-1) {
-		t.Error("negative int should not be positive integer type")
-	}
+	actual := args.Map{"result": isany.PositiveIntegerType(uint(42))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "positive int should be positive integer type", actual)
+	actual := args.Map{"result": isany.PositiveIntegerType(-1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "negative int should not be positive integer type", actual)
 }
 
 func Test_DeepEqualAllItems_Direct(t *testing.T) {
-	if !isany.DeepEqualAllItems(1, 1, 1) {
-		t.Error("all same should return true")
-	}
-	if isany.DeepEqualAllItems(1, 2, 1) {
-		t.Error("different should return false")
-	}
+	actual := args.Map{"result": isany.DeepEqualAllItems(1, 1, 1)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "all same should return true", actual)
+	actual := args.Map{"result": isany.DeepEqualAllItems(1, 2, 1)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different should return false", actual)
 }

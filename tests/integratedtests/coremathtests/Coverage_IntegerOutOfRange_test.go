@@ -4,10 +4,11 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coremath"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov2_IntegerOutOfRange_ToInt(t *testing.T) {
-	if coremath.IsOutOfRange.Integer.ToInt(0) {
-		t.Error("0 should be in range")
-	}
+	actual := args.Map{"result": coremath.IsOutOfRange.Integer.ToInt(0)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "0 should be in range", actual)
 }

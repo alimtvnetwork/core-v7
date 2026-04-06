@@ -16,9 +16,9 @@ func Test_RwxWrapper_Create(t *testing.T) {
 
 		// Act
 		wrapper, err := chmodhelper.New.RwxWrapper.Create(mode)
-		if err != nil {
-			t.Fatalf("Create(%s) returned error: %v", mode, err)
-		}
+		actual := args.Map{"result": err != nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "Create() returned error:", actual)
 
 		actual := args.Map{
 			"ownerRwx":    wrapper.Owner.ToRwxString(),
@@ -171,9 +171,9 @@ func Test_RwxWrapper_NilClone(t *testing.T) {
 	cloned := wrapper.Clone()
 
 	// Assert
-	if cloned != nil {
-		t.Error("expected nil clone to be nil")
-	}
+	actual := args.Map{"result": cloned != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil clone to be nil", actual)
 }
 
 func Test_RwxWrapper_NilIsEmpty(t *testing.T) {
@@ -181,15 +181,15 @@ func Test_RwxWrapper_NilIsEmpty(t *testing.T) {
 	var wrapper *chmodhelper.RwxWrapper
 
 	// Act & Assert
-	if !wrapper.IsEmpty() {
-		t.Error("expected nil wrapper IsEmpty to be true")
-	}
-	if !wrapper.IsNull() {
-		t.Error("expected nil wrapper IsNull to be true")
-	}
-	if !wrapper.IsInvalid() {
-		t.Error("expected nil wrapper IsInvalid to be true")
-	}
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsEmpty to be true", actual)
+	actual := args.Map{"result": wrapper.IsNull()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsNull to be true", actual)
+	actual := args.Map{"result": wrapper.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected nil wrapper IsInvalid to be true", actual)
 }
 
 func Test_RwxWrapper_IsEqualPtr_BothNil(t *testing.T) {
@@ -198,9 +198,9 @@ func Test_RwxWrapper_IsEqualPtr_BothNil(t *testing.T) {
 	var right *chmodhelper.RwxWrapper
 
 	// Act & Assert
-	if !left.IsEqualPtr(right) {
-		t.Error("expected both nil IsEqualPtr to be true")
-	}
+	actual := args.Map{"result": left.IsEqualPtr(right)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected both nil IsEqualPtr to be true", actual)
 }
 
 func Test_RwxWrapper_IsEqualPtr_OneNil(t *testing.T) {
@@ -209,9 +209,9 @@ func Test_RwxWrapper_IsEqualPtr_OneNil(t *testing.T) {
 	var nilWrapper *chmodhelper.RwxWrapper
 
 	// Act & Assert
-	if wrapper.IsEqualPtr(nilWrapper) {
-		t.Error("expected one nil IsEqualPtr to be false")
-	}
+	actual := args.Map{"result": wrapper.IsEqualPtr(nilWrapper)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected one nil IsEqualPtr to be false", actual)
 }
 
 func Test_RwxWrapper_ToFileMode(t *testing.T) {
@@ -223,9 +223,9 @@ func Test_RwxWrapper_ToFileMode(t *testing.T) {
 
 	// Assert
 	expectedMode := os.FileMode(0755)
-	if mode != expectedMode {
-		t.Errorf("expected FileMode %v, got %v", expectedMode, mode)
-	}
+	actual := args.Map{"result": mode != expectedMode}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FileMode", actual)
 }
 
 func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
@@ -236,9 +236,9 @@ func Test_RwxWrapper_ToUint32Octal(t *testing.T) {
 	octal := wrapper.ToUint32Octal()
 
 	// Assert
-	if octal != 0755 {
-		t.Errorf("expected octal 0755 (%d), got %d", uint32(0755), octal)
-	}
+	actual := args.Map{"result": octal != 0755}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected octal 0755 ()", actual)
 }
 
 func Test_RwxWrapper_String(t *testing.T) {
@@ -249,9 +249,9 @@ func Test_RwxWrapper_String(t *testing.T) {
 	str := wrapper.String()
 
 	// Assert
-	if str != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", str)
-	}
+	actual := args.Map{"result": str != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingBytes(t *testing.T) {
@@ -262,9 +262,9 @@ func Test_RwxWrapper_UsingBytes(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingBytes(bytes)
 
 	// Assert
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingSpecificByte(t *testing.T) {
@@ -272,9 +272,9 @@ func Test_RwxWrapper_UsingSpecificByte(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingSpecificByte(7, 5, 5)
 
 	// Assert
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_Invalid(t *testing.T) {
@@ -282,9 +282,9 @@ func Test_RwxWrapper_Invalid(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.Invalid()
 
 	// Assert
-	if !wrapper.IsEmpty() {
-		t.Error("expected Invalid wrapper to be empty")
-	}
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Invalid wrapper to be empty", actual)
 }
 
 func Test_RwxWrapper_InvalidPtr(t *testing.T) {
@@ -292,9 +292,9 @@ func Test_RwxWrapper_InvalidPtr(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.InvalidPtr()
 
 	// Assert
-	if !wrapper.IsEmpty() {
-		t.Error("expected InvalidPtr wrapper to be empty")
-	}
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected InvalidPtr wrapper to be empty", actual)
 }
 
 func Test_RwxWrapper_Empty(t *testing.T) {
@@ -302,9 +302,9 @@ func Test_RwxWrapper_Empty(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.Empty()
 
 	// Assert
-	if !wrapper.IsEmpty() {
-		t.Error("expected Empty wrapper to be empty")
-	}
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Empty wrapper to be empty", actual)
 	if !wrapper.IsNull() {
 		// Note: Empty returns *RwxWrapper{}, not nil
 		// IsNull checks for nil
@@ -341,15 +341,15 @@ func Test_RwxWrapper_ToCompiledSplitValues(t *testing.T) {
 	expectedOwner := byte('7')
 	expectedGroup := byte('5')
 	expectedOther := byte('5')
-	if owner != expectedOwner {
-		t.Errorf("expected owner '%c', got '%c'", expectedOwner, owner)
-	}
-	if group != expectedGroup {
-		t.Errorf("expected group '%c', got '%c'", expectedGroup, group)
-	}
-	if other != expectedOther {
-		t.Errorf("expected other '%c', got '%c'", expectedOther, other)
-	}
+	actual := args.Map{"result": owner != expectedOwner}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected owner '', got ''", actual)
+	actual := args.Map{"result": group != expectedGroup}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected group '', got ''", actual)
+	actual := args.Map{"result": other != expectedOther}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected other '', got ''", actual)
 }
 
 func Test_RwxWrapper_FriendlyDisplay(t *testing.T) {
@@ -360,9 +360,9 @@ func Test_RwxWrapper_FriendlyDisplay(t *testing.T) {
 	display := wrapper.FriendlyDisplay()
 
 	// Assert
-	if display == "" {
-		t.Error("expected FriendlyDisplay to not be empty")
-	}
+	actual := args.Map{"result": display == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FriendlyDisplay to not be empty", actual)
 }
 
 func Test_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
@@ -373,18 +373,18 @@ func Test_RwxWrapper_ToRwxOwnerGroupOther(t *testing.T) {
 	ogo := wrapper.ToRwxOwnerGroupOther()
 
 	// Assert
-	if ogo == nil {
-		t.Fatal("expected ToRwxOwnerGroupOther to not be nil")
-	}
-	if ogo.Owner != "rwx" {
-		t.Errorf("expected Owner 'rwx', got '%s'", ogo.Owner)
-	}
-	if ogo.Group != "r-x" {
-		t.Errorf("expected Group 'r-x', got '%s'", ogo.Group)
-	}
-	if ogo.Other != "r-x" {
-		t.Errorf("expected Other 'r-x', got '%s'", ogo.Other)
-	}
+	actual := args.Map{"result": ogo == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToRwxOwnerGroupOther to not be nil", actual)
+	actual := args.Map{"result": ogo.Owner != "rwx"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Owner 'rwx', got ''", actual)
+	actual := args.Map{"result": ogo.Group != "r-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Group 'r-x', got ''", actual)
+	actual := args.Map{"result": ogo.Other != "r-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Other 'r-x', got ''", actual)
 }
 
 func Test_RwxWrapper_IsRwxFullEqual(t *testing.T) {
@@ -392,15 +392,15 @@ func Test_RwxWrapper_IsRwxFullEqual(t *testing.T) {
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
 	// Act & Assert
-	if !wrapper.IsRwxFullEqual("-rwxr-xr-x") {
-		t.Error("expected IsRwxFullEqual('-rwxr-xr-x') true")
-	}
-	if wrapper.IsRwxFullEqual("-rw-r--r--") {
-		t.Error("expected IsRwxFullEqual('-rw-r--r--') false")
-	}
-	if wrapper.IsRwxFullEqual("short") {
-		t.Error("expected IsRwxFullEqual('short') false for short string")
-	}
+	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rwxr-xr-x")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('-rwxr-xr-x') true", actual)
+	actual := args.Map{"result": wrapper.IsRwxFullEqual("-rw-r--r--")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('-rw-r--r--') false", actual)
+	actual := args.Map{"result": wrapper.IsRwxFullEqual("short")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsRwxFullEqual('short') false for short string", actual)
 }
 
 func Test_RwxWrapper_IsEqualFileMode(t *testing.T) {
@@ -408,15 +408,15 @@ func Test_RwxWrapper_IsEqualFileMode(t *testing.T) {
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
 	// Act & Assert
-	if !wrapper.IsEqualFileMode(os.FileMode(0755)) {
-		t.Error("expected IsEqualFileMode(0755) true")
-	}
-	if wrapper.IsEqualFileMode(os.FileMode(0644)) {
-		t.Error("expected IsEqualFileMode(0644) false")
-	}
-	if !wrapper.IsNotEqualFileMode(os.FileMode(0644)) {
-		t.Error("expected IsNotEqualFileMode(0644) true")
-	}
+	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0755))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsEqualFileMode(0755) true", actual)
+	actual := args.Map{"result": wrapper.IsEqualFileMode(os.FileMode(0644))}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsEqualFileMode(0644) false", actual)
+	actual := args.Map{"result": wrapper.IsNotEqualFileMode(os.FileMode(0644))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsNotEqualFileMode(0644) true", actual)
 }
 
 func Test_RwxWrapper_HasAnyItem(t *testing.T) {
@@ -425,12 +425,12 @@ func Test_RwxWrapper_HasAnyItem(t *testing.T) {
 	emptyWrapper := chmodhelper.New.RwxWrapper.Invalid()
 
 	// Act & Assert
-	if !wrapper.HasAnyItem() {
-		t.Error("expected HasAnyItem true for 755")
-	}
-	if emptyWrapper.HasAnyItem() {
-		t.Error("expected HasAnyItem false for empty wrapper")
-	}
+	actual := args.Map{"result": wrapper.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true for 755", actual)
+	actual := args.Map{"result": emptyWrapper.HasAnyItem()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty wrapper", actual)
 }
 
 func Test_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
@@ -442,12 +442,12 @@ func Test_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
 	nonPtr := ptr.ToNonPtr()
 
 	// Assert
-	if ptr == nil {
-		t.Error("expected ToPtr to not be nil")
-	}
-	if nonPtr.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected ToNonPtr to preserve value, got '%s'", nonPtr.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": ptr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToPtr to not be nil", actual)
+	actual := args.Map{"result": nonPtr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToNonPtr to preserve value, got ''", actual)
 }
 
 func Test_RwxWrapper_Json(t *testing.T) {
@@ -459,9 +459,9 @@ func Test_RwxWrapper_Json(t *testing.T) {
 	jsonStr := jsonResult.JsonString()
 
 	// Assert
-	if jsonStr == "" {
-		t.Error("expected Json string to not be empty")
-	}
+	actual := args.Map{"result": jsonStr == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Json string to not be empty", actual)
 }
 
 func Test_RwxWrapper_UsingVariant(t *testing.T) {
@@ -492,9 +492,9 @@ func Test_RwxWrapper_UsingAttrVariants(t *testing.T) {
 	)
 
 	// Assert
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingAttrs(t *testing.T) {
@@ -507,9 +507,9 @@ func Test_RwxWrapper_UsingAttrs(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingAttrs(owner, group, other)
 
 	// Assert
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_CreatePtr(t *testing.T) {
@@ -517,15 +517,15 @@ func Test_RwxWrapper_CreatePtr(t *testing.T) {
 	ptr, err := chmodhelper.New.RwxWrapper.CreatePtr("755")
 
 	// Assert
-	if err != nil {
-		t.Fatalf("CreatePtr returned error: %v", err)
-	}
-	if ptr == nil {
-		t.Fatal("expected CreatePtr to not be nil")
-	}
-	if ptr.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", ptr.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CreatePtr returned error:", actual)
+	actual := args.Map{"result": ptr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected CreatePtr to not be nil", actual)
+	actual := args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingFileModePtr(t *testing.T) {
@@ -536,12 +536,12 @@ func Test_RwxWrapper_UsingFileModePtr(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingFileModePtr(mode)
 
 	// Assert
-	if wrapper == nil {
-		t.Fatal("expected UsingFileModePtr to not be nil")
-	}
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected UsingFileModePtr to not be nil", actual)
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
@@ -552,12 +552,12 @@ func Test_RwxWrapper_UsingFileModePtr_Zero(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingFileModePtr(mode)
 
 	// Assert
-	if wrapper == nil {
-		t.Fatal("expected UsingFileModePtr to not be nil even for zero")
-	}
-	if !wrapper.IsEmpty() {
-		t.Error("expected zero FileMode to create empty wrapper")
-	}
+	actual := args.Map{"result": wrapper == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected UsingFileModePtr to not be nil even for zero", actual)
+	actual := args.Map{"result": wrapper.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected zero FileMode to create empty wrapper", actual)
 }
 
 func Test_RwxWrapper_UsingFileMode(t *testing.T) {
@@ -568,9 +568,9 @@ func Test_RwxWrapper_UsingFileMode(t *testing.T) {
 	wrapper := chmodhelper.New.RwxWrapper.UsingFileMode(mode)
 
 	// Assert
-	if wrapper.ToFullRwxValueString() != "-rw-r--r--" {
-		t.Errorf("expected '-rw-r--r--', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rw-r--r--"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rw-r--r--', got ''", actual)
 }
 
 func Test_RwxWrapper_UsingVariantPtr(t *testing.T) {
@@ -578,15 +578,15 @@ func Test_RwxWrapper_UsingVariantPtr(t *testing.T) {
 	ptr, err := chmodhelper.New.RwxWrapper.UsingVariantPtr(chmodhelper.Variant("755"))
 
 	// Assert
-	if err != nil {
-		t.Fatalf("UsingVariantPtr returned error: %v", err)
-	}
-	if ptr == nil {
-		t.Fatal("expected UsingVariantPtr to not be nil")
-	}
-	if ptr.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", ptr.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UsingVariantPtr returned error:", actual)
+	actual := args.Map{"result": ptr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected UsingVariantPtr to not be nil", actual)
+	actual := args.Map{"result": ptr.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_ToFullRwxValuesChars(t *testing.T) {
@@ -597,12 +597,12 @@ func Test_RwxWrapper_ToFullRwxValuesChars(t *testing.T) {
 	chars := wrapper.ToFullRwxValuesChars()
 
 	// Assert
-	if len(chars) != 10 {
-		t.Errorf("expected 10 chars, got %d", len(chars))
-	}
-	if string(chars) != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", string(chars))
-	}
+	actual := args.Map{"result": len(chars) != 10}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 10 chars", actual)
+	actual := args.Map{"result": string(chars) != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
@@ -610,9 +610,9 @@ func Test_RwxWrapper_IsEqualVarWrapper_Nil(t *testing.T) {
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
 	// Act & Assert
-	if wrapper.IsEqualVarWrapper(nil) {
-		t.Error("expected IsEqualVarWrapper(nil) false")
-	}
+	actual := args.Map{"result": wrapper.IsEqualVarWrapper(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsEqualVarWrapper(nil) false", actual)
 }
 
 func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
@@ -620,9 +620,9 @@ func Test_RwxWrapper_IsRwxEqualFileInfo_Nil(t *testing.T) {
 	wrapper, _ := chmodhelper.New.RwxWrapper.Create("755")
 
 	// Act & Assert
-	if wrapper.IsRwxEqualFileInfo(nil) {
-		t.Error("expected IsRwxEqualFileInfo(nil) false")
-	}
+	actual := args.Map{"result": wrapper.IsRwxEqualFileInfo(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsRwxEqualFileInfo(nil) false", actual)
 }
 
 func Test_FileModeFriendlyString(t *testing.T) {
@@ -633,9 +633,9 @@ func Test_FileModeFriendlyString(t *testing.T) {
 	result := chmodhelper.FileModeFriendlyString(mode)
 
 	// Assert
-	if result == "" {
-		t.Error("expected FileModeFriendlyString to not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected FileModeFriendlyString to not be empty", actual)
 }
 
 func Test_AttrVariant(t *testing.T) {
@@ -665,12 +665,12 @@ func Test_AttrVariant_IsGreaterThan(t *testing.T) {
 	v := chmodhelper.ReadWriteExecute // 7
 
 	// Act & Assert
-	if !v.IsGreaterThan(8) {
-		t.Error("expected IsGreaterThan(8) true (8 > 7)")
-	}
-	if v.IsGreaterThan(5) {
-		t.Error("expected IsGreaterThan(5) false (5 < 7)")
-	}
+	actual := args.Map{"result": v.IsGreaterThan(8)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsGreaterThan(8) true (8 > 7)", actual)
+	actual := args.Map{"result": v.IsGreaterThan(5)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsGreaterThan(5) false (5 < 7)", actual)
 }
 
 func Test_Variant_String(t *testing.T) {
@@ -681,9 +681,9 @@ func Test_Variant_String(t *testing.T) {
 	str := v.String()
 
 	// Assert
-	if str != "755" {
-		t.Errorf("expected '755', got '%s'", str)
-	}
+	actual := args.Map{"result": str != "755"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '755', got ''", actual)
 }
 
 func Test_Variant_ExpandOctalByte(t *testing.T) {
@@ -694,15 +694,15 @@ func Test_Variant_ExpandOctalByte(t *testing.T) {
 	r, w, x := v.ExpandOctalByte()
 
 	// Assert
-	if r != '7' {
-		t.Errorf("expected r='7' (%d), got %d", byte('7'), r)
-	}
-	if w != '5' {
-		t.Errorf("expected w='5' (%d), got %d", byte('5'), w)
-	}
-	if x != '5' {
-		t.Errorf("expected x='5' (%d), got %d", byte('5'), x)
-	}
+	actual := args.Map{"result": r != '7'}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected r='7' ()", actual)
+	actual := args.Map{"result": w != '5'}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected w='5' ()", actual)
+	actual := args.Map{"result": x != '5'}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected x='5' ()", actual)
 }
 
 func Test_Variant_ToWrapper(t *testing.T) {
@@ -713,12 +713,12 @@ func Test_Variant_ToWrapper(t *testing.T) {
 	wrapper, err := v.ToWrapper()
 
 	// Assert
-	if err != nil {
-		t.Fatalf("ToWrapper returned error: %v", err)
-	}
-	if wrapper.ToFullRwxValueString() != "-rwxr-xr-x" {
-		t.Errorf("expected '-rwxr-xr-x', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToWrapper returned error:", actual)
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rwxr-xr-x"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rwxr-xr-x', got ''", actual)
 }
 
 func Test_Variant_ToWrapperPtr(t *testing.T) {
@@ -729,15 +729,15 @@ func Test_Variant_ToWrapperPtr(t *testing.T) {
 	wrapper, err := v.ToWrapperPtr()
 
 	// Assert
-	if err != nil {
-		t.Fatalf("ToWrapperPtr returned error: %v", err)
-	}
-	if wrapper == nil {
-		t.Fatal("expected ToWrapperPtr to not be nil")
-	}
-	if wrapper.ToFullRwxValueString() != "-rw-r--r--" {
-		t.Errorf("expected '-rw-r--r--', got '%s'", wrapper.ToFullRwxValueString())
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToWrapperPtr returned error:", actual)
+	actual := args.Map{"result": wrapper == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToWrapperPtr to not be nil", actual)
+	actual := args.Map{"result": wrapper.ToFullRwxValueString() != "-rw-r--r--"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '-rw-r--r--', got ''", actual)
 }
 
 func Test_Attribute_HasAnyItem(t *testing.T) {
@@ -746,12 +746,12 @@ func Test_Attribute_HasAnyItem(t *testing.T) {
 	emptyAttr := chmodhelper.New.Attribute.Create(false, false, false)
 
 	// Act & Assert
-	if !attr.HasAnyItem() {
-		t.Error("expected HasAnyItem true for read-only attribute")
-	}
-	if emptyAttr.HasAnyItem() {
-		t.Error("expected HasAnyItem false for empty attribute")
-	}
+	actual := args.Map{"result": attr.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true for read-only attribute", actual)
+	actual := args.Map{"result": emptyAttr.HasAnyItem()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty attribute", actual)
 }
 
 func Test_Attribute_ToSum(t *testing.T) {
@@ -762,9 +762,9 @@ func Test_Attribute_ToSum(t *testing.T) {
 	sum := attr.ToSum()
 
 	// Assert
-	if sum != 7 {
-		t.Errorf("expected ToSum 7, got %d", sum)
-	}
+	actual := args.Map{"result": sum != 7}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ToSum 7", actual)
 }
 
 func Test_Attribute_ToRwx(t *testing.T) {
@@ -775,9 +775,9 @@ func Test_Attribute_ToRwx(t *testing.T) {
 	rwx := attr.ToRwx()
 
 	// Assert
-	if rwx != [3]byte{'r', '-', 'x'} {
-		t.Errorf("expected [r,-,x], got %v", rwx)
-	}
+	actual := args.Map{"result": rwx != [3]byte{'r', '-', 'x'}}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected [r,-,x]", actual)
 }
 
 func Test_Attribute_ToStringByte(t *testing.T) {
@@ -788,9 +788,9 @@ func Test_Attribute_ToStringByte(t *testing.T) {
 	sb := attr.ToStringByte()
 
 	// Assert - 7 + '0' = '7'
-	if sb != '7' {
-		t.Errorf("expected '7' (%d), got %d", byte('7'), sb)
-	}
+	actual := args.Map{"result": sb != '7'}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '7' ()", actual)
 }
 
 func Test_Attribute_ToSpecificBytes(t *testing.T) {
@@ -801,18 +801,18 @@ func Test_Attribute_ToSpecificBytes(t *testing.T) {
 	read, write, exe, sum := attr.ToSpecificBytes()
 
 	// Assert
-	if read != 4 {
-		t.Errorf("expected read=4, got %d", read)
-	}
-	if write != 2 {
-		t.Errorf("expected write=2, got %d", write)
-	}
-	if exe != 0 {
-		t.Errorf("expected exe=0, got %d", exe)
-	}
-	if sum != 6 {
-		t.Errorf("expected sum=6, got %d", sum)
-	}
+	actual := args.Map{"result": read != 4}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected read=4", actual)
+	actual := args.Map{"result": write != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected write=2", actual)
+	actual := args.Map{"result": exe != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected exe=0", actual)
+	actual := args.Map{"result": sum != 6}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected sum=6", actual)
 }
 
 func Test_Attribute_UsingByteMust(t *testing.T) {
@@ -820,15 +820,15 @@ func Test_Attribute_UsingByteMust(t *testing.T) {
 	attr := chmodhelper.New.Attribute.UsingByteMust(5)
 
 	// Assert
-	if !attr.IsRead {
-		t.Error("expected IsRead true for byte 5")
-	}
-	if attr.IsWrite {
-		t.Error("expected IsWrite false for byte 5")
-	}
-	if !attr.IsExecute {
-		t.Error("expected IsExecute true for byte 5")
-	}
+	actual := args.Map{"result": attr.IsRead}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsRead true for byte 5", actual)
+	actual := args.Map{"result": attr.IsWrite}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsWrite false for byte 5", actual)
+	actual := args.Map{"result": attr.IsExecute}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsExecute true for byte 5", actual)
 }
 
 func Test_Attribute_UsingVariantMust(t *testing.T) {
@@ -836,9 +836,9 @@ func Test_Attribute_UsingVariantMust(t *testing.T) {
 	attr := chmodhelper.New.Attribute.UsingVariantMust(chmodhelper.ReadWriteExecute)
 
 	// Assert
-	if !attr.IsRead || !attr.IsWrite || !attr.IsExecute {
-		t.Error("expected all permissions true for ReadWriteExecute variant")
-	}
+	actual := args.Map{"result": attr.IsRead || !attr.IsWrite || !attr.IsExecute}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected all permissions true for ReadWriteExecute variant", actual)
 }
 
 func Test_Attribute_UsingVariant(t *testing.T) {
@@ -846,12 +846,12 @@ func Test_Attribute_UsingVariant(t *testing.T) {
 	attr, err := chmodhelper.New.Attribute.UsingVariant(chmodhelper.ReadExecute)
 
 	// Assert
-	if err != nil {
-		t.Fatalf("UsingVariant returned error: %v", err)
-	}
-	if !attr.IsRead || attr.IsWrite || !attr.IsExecute {
-		t.Error("expected read+execute only for ReadExecute variant")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UsingVariant returned error:", actual)
+	actual := args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected read+execute only for ReadExecute variant", actual)
 }
 
 func Test_Attribute_Default(t *testing.T) {
@@ -859,21 +859,21 @@ func Test_Attribute_Default(t *testing.T) {
 	attr := chmodhelper.New.Attribute.Default(true, false, true)
 
 	// Assert
-	if !attr.IsRead || attr.IsWrite || !attr.IsExecute {
-		t.Error("expected Default to create attribute with given values")
-	}
+	actual := args.Map{"result": attr.IsRead || attr.IsWrite || !attr.IsExecute}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Default to create attribute with given values", actual)
 }
 
 func Test_IsChmod_EmptyLocation(t *testing.T) {
 	// Arrange & Act & Assert
-	if chmodhelper.IsChmod("", "-rwxr-xr-x") {
-		t.Error("expected IsChmod empty location to be false")
-	}
+	actual := args.Map{"result": chmodhelper.IsChmod("", "-rwxr-xr-x")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsChmod empty location to be false", actual)
 }
 
 func Test_IsChmod_InvalidLength(t *testing.T) {
 	// Arrange & Act & Assert
-	if chmodhelper.IsChmod(".", "rwx") {
-		t.Error("expected IsChmod invalid rwx length to be false")
-	}
+	actual := args.Map{"result": chmodhelper.IsChmod(".", "rwx")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsChmod invalid rwx length to be false", actual)
 }

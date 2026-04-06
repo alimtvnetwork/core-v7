@@ -23,9 +23,9 @@ func makeTypedWrapper(t *testing.T) *corepayload.TypedPayloadWrapper[testUser] {
 		"user-create", "usr-1", "User",
 		testUser{Name: "Alice", Email: "alice@test.com"},
 	)
-	if err != nil {
-		t.Fatalf("NewTypedPayloadWrapperFrom failed: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewTypedPayloadWrapperFrom failed:", actual)
 	return tw
 }
 

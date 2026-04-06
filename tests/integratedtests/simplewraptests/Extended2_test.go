@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/simplewrap"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_WithStartEnd_Verification_Ext2(t *testing.T) {
@@ -12,9 +13,9 @@ func Test_WithStartEnd_Verification_Ext2(t *testing.T) {
 	result := simplewrap.WithStartEnd("[", "hello")
 
 	// Assert
-	if !strings.Contains(result, "[") {
-		t.Error("should contain bracket wrapper")
-	}
+	actual := args.Map{"result": strings.Contains(result, "[")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should contain bracket wrapper", actual)
 }
 
 func Test_WithBracketsQuotation_Verification_Ext2(t *testing.T) {
@@ -22,9 +23,9 @@ func Test_WithBracketsQuotation_Verification_Ext2(t *testing.T) {
 	result := simplewrap.WithBracketsQuotation("hello")
 
 	// Assert
-	if result == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
 func Test_WithCurlyQuotation_Verification_Ext2(t *testing.T) {
@@ -32,9 +33,9 @@ func Test_WithCurlyQuotation_Verification_Ext2(t *testing.T) {
 	result := simplewrap.WithCurlyQuotation("hello")
 
 	// Assert
-	if result == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
 func Test_WithParenthesisQuotation_Verification_Ext2(t *testing.T) {
@@ -42,9 +43,9 @@ func Test_WithParenthesisQuotation_Verification_Ext2(t *testing.T) {
 	result := simplewrap.WithParenthesisQuotation("hello")
 
 	// Assert
-	if result == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
 func Test_TitleSquareCsvMeta_Verification_Ext2(t *testing.T) {
@@ -52,9 +53,9 @@ func Test_TitleSquareCsvMeta_Verification_Ext2(t *testing.T) {
 	result := simplewrap.TitleSquareCsvMeta("title", "a", "b")
 
 	// Assert
-	if result == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
 func Test_TitleQuotationMeta_Verification_Ext2(t *testing.T) {
@@ -62,9 +63,9 @@ func Test_TitleQuotationMeta_Verification_Ext2(t *testing.T) {
 	result := simplewrap.TitleQuotationMeta("title", "value", "meta")
 
 	// Assert
-	if result == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }
 
 func Test_DoubleQuoteWrapElements_Verification_Ext2(t *testing.T) {
@@ -72,7 +73,7 @@ func Test_DoubleQuoteWrapElements_Verification_Ext2(t *testing.T) {
 	result := simplewrap.DoubleQuoteWrapElements(false, "a", "b")
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("expected 2 elements, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 elements", actual)
 }

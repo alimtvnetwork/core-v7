@@ -37,9 +37,9 @@ func Test_CreateMust_PanicsOnInvalidPattern(t *testing.T) {
 	// Act & Assert
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Error("CreateMust should panic on invalid pattern")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "CreateMust should panic on invalid pattern", actual)
 	}()
 
 	regexnew.CreateMust(pattern)
@@ -73,9 +73,9 @@ func Test_CreateMustLockIf_PanicsOnInvalidPattern(t *testing.T) {
 	// Act & Assert — with lock
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Error("CreateMustLockIf should panic on invalid pattern")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "CreateMustLockIf should panic on invalid pattern", actual)
 	}()
 
 	regexnew.CreateMustLockIf(true, pattern)
@@ -148,9 +148,9 @@ func Test_NewMustLock_PanicsOnInvalidPattern(t *testing.T) {
 	// Act & Assert
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Error("NewMustLock should panic on invalid pattern")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "NewMustLock should panic on invalid pattern", actual)
 	}()
 
 	regexnew.NewMustLock(pattern)

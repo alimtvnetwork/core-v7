@@ -499,12 +499,12 @@ func Test_ToIntDef_Verification(t *testing.T) {
 	result2 := stringutil.ToIntDef("abc")
 
 	// Assert
-	if result1 != 42 {
-		t.Errorf("ToIntDef(42) expected 42, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToIntDef(abc) expected 0, got %d", result2)
-	}
+	actual := args.Map{"result": result1 != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntDef(42) expected 42", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntDef(abc) expected 0", actual)
 }
 
 func Test_ToIntDefault_Verification(t *testing.T) {
@@ -514,12 +514,12 @@ func Test_ToIntDefault_Verification(t *testing.T) {
 	result2 := stringutil.ToIntDefault("abc")
 
 	// Assert
-	if result1 != 42 {
-		t.Errorf("ToIntDefault(42) expected 42, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToIntDefault(abc) expected 0, got %d", result2)
-	}
+	actual := args.Map{"result": result1 != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntDefault(42) expected 42", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntDefault(abc) expected 0", actual)
 }
 
 // ==========================================
@@ -549,12 +549,12 @@ func Test_ToInt8Def_Verification(t *testing.T) {
 	result2 := stringutil.ToInt8Def("abc")
 
 	// Assert
-	if result1 != 50 {
-		t.Errorf("ToInt8Def(50) expected 50, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToInt8Def(abc) expected 0, got %d", result2)
-	}
+	actual := args.Map{"result": result1 != 50}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt8Def(50) expected 50", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt8Def(abc) expected 0", actual)
 }
 
 // ==========================================
@@ -585,15 +585,15 @@ func Test_ToInt16Default_Verification(t *testing.T) {
 	result3 := stringutil.ToInt16Default("40000") // overflow
 
 	// Assert
-	if result1 != 1000 {
-		t.Errorf("ToInt16Default(1000) expected 1000, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToInt16Default(abc) expected 0, got %d", result2)
-	}
-	if result3 != 0 {
-		t.Errorf("ToInt16Default(40000) expected 0, got %d", result3)
-	}
+	actual := args.Map{"result": result1 != 1000}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt16Default(1000) expected 1000", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt16Default(abc) expected 0", actual)
+	actual := args.Map{"result": result3 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt16Default(40000) expected 0", actual)
 }
 
 // ==========================================
@@ -623,12 +623,12 @@ func Test_ToInt32Def_Verification(t *testing.T) {
 	result2 := stringutil.ToInt32Def("abc")
 
 	// Assert
-	if result1 != 65536 {
-		t.Errorf("ToInt32Def(65536) expected 65536, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToInt32Def(abc) expected 0, got %d", result2)
-	}
+	actual := args.Map{"result": result1 != 65536}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt32Def(65536) expected 65536", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToInt32Def(abc) expected 0", actual)
 }
 
 // ==========================================
@@ -696,12 +696,12 @@ func Test_AnyToStringNameField_Verification(t *testing.T) {
 	resultVal := stringutil.AnyToStringNameField(42)
 
 	// Assert
-	if resultNil != "" {
-		t.Errorf("AnyToStringNameField(nil) expected empty, got '%s'", resultNil)
-	}
-	if resultVal == "" {
-		t.Error("AnyToStringNameField(42) should not be empty")
-	}
+	actual := args.Map{"result": resultNil != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AnyToStringNameField(nil) expected empty, got ''", actual)
+	actual := args.Map{"result": resultVal == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AnyToStringNameField(42) should not be empty", actual)
 }
 
 // ==========================================
@@ -714,9 +714,9 @@ func Test_AnyToTypeString_Verification(t *testing.T) {
 	result := stringutil.AnyToTypeString(42)
 
 	// Assert
-	if result == "" {
-		t.Error("AnyToTypeString(42) should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AnyToTypeString(42) should not be empty", actual)
 }
 
 // ==========================================
@@ -750,15 +750,15 @@ func Test_MaskTrimLine_Verification(t *testing.T) {
 	result3 := stringutil.MaskTrimLine("---", "hello world")
 
 	// Assert
-	if result1 != "hi--------" {
-		t.Errorf("MaskTrimLine expected 'hi--------', got '%s'", result1)
-	}
-	if result2 != "----------" {
-		t.Errorf("MaskTrimLine whitespace expected mask, got '%s'", result2)
-	}
-	if result3 != "hello world" {
-		t.Errorf("MaskTrimLine long line expected 'hello world', got '%s'", result3)
-	}
+	actual := args.Map{"result": result1 != "hi--------"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaskTrimLine expected 'hi--------', got ''", actual)
+	actual := args.Map{"result": result2 != "----------"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaskTrimLine whitespace expected mask, got ''", actual)
+	actual := args.Map{"result": result3 != "hello world"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MaskTrimLine long line expected 'hello world', got ''", actual)
 }
 
 // ==========================================
@@ -842,25 +842,25 @@ func Test_IsContainsPtr_Verification(t *testing.T) {
 	result1 := stringutil.IsContainsPtr(&lines, &find, 0, false)
 
 	// Assert
-	if !result1 {
-		t.Error("IsContainsPtr case-insensitive should find 'hello'")
-	}
+	actual := args.Map{"result": result1}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtr case-insensitive should find 'hello'", actual)
 
 	// Act - case sensitive
 	result2 := stringutil.IsContainsPtr(&lines, &find, 0, true)
 
 	// Assert
-	if result2 {
-		t.Error("IsContainsPtr case-sensitive should not find 'hello'")
-	}
+	actual := args.Map{"result": result2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtr case-sensitive should not find 'hello'", actual)
 
 	// Act - nil lines
 	result3 := stringutil.IsContainsPtr(nil, &find, 0, true)
 
 	// Assert
-	if result3 {
-		t.Error("IsContainsPtr nil should return false")
-	}
+	actual := args.Map{"result": result3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtr nil should return false", actual)
 }
 
 func Test_IsContainsPtrSimple_Verification(t *testing.T) {
@@ -871,17 +871,17 @@ func Test_IsContainsPtrSimple_Verification(t *testing.T) {
 	result1 := stringutil.IsContainsPtrSimple(&lines, "hello", 0, false)
 
 	// Assert
-	if !result1 {
-		t.Error("IsContainsPtrSimple case-insensitive should find 'hello'")
-	}
+	actual := args.Map{"result": result1}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple case-insensitive should find 'hello'", actual)
 
 	// Act - nil
 	result2 := stringutil.IsContainsPtrSimple(nil, "x", 0, true)
 
 	// Assert
-	if result2 {
-		t.Error("IsContainsPtrSimple nil should return false")
-	}
+	actual := args.Map{"result": result2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple nil should return false", actual)
 }
 
 // ==========================================
@@ -1063,17 +1063,17 @@ func Test_ReplaceTemplate_DirectOne_Verification(t *testing.T) {
 	result := stringutil.ReplaceTemplate.DirectOne(format, "NAME", "World")
 
 	// Assert
-	if result != "Hello World!" {
-		t.Errorf("DirectOne expected 'Hello World!', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Hello World!"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectOne expected 'Hello World!', got ''", actual)
 
 	// Act - empty
 	result2 := stringutil.ReplaceTemplate.DirectOne("", "NAME", "World")
 
 	// Assert
-	if result2 != "" {
-		t.Errorf("DirectOne empty format expected '', got '%s'", result2)
-	}
+	actual := args.Map{"result": result2 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectOne empty format expected '', got ''", actual)
 }
 
 func Test_ReplaceTemplate_DirectTwoItem_Verification(t *testing.T) {
@@ -1084,9 +1084,9 @@ func Test_ReplaceTemplate_DirectTwoItem_Verification(t *testing.T) {
 	result := stringutil.ReplaceTemplate.DirectTwoItem(format, "NAME", "Alice", "AGE", 30)
 
 	// Assert
-	if result != "Alice is 30 years old" {
-		t.Errorf("DirectTwoItem expected 'Alice is 30 years old', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Alice is 30 years old"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectTwoItem expected 'Alice is 30 years old', got ''", actual)
 }
 
 func Test_ReplaceTemplate_DirectKeyUsingMap_Verification(t *testing.T) {
@@ -1098,17 +1098,17 @@ func Test_ReplaceTemplate_DirectKeyUsingMap_Verification(t *testing.T) {
 	result := stringutil.ReplaceTemplate.DirectKeyUsingMap(format, m)
 
 	// Assert
-	if result != "Hello Alice from NYC" {
-		t.Errorf("DirectKeyUsingMap expected 'Hello Alice from NYC', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Hello Alice from NYC"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectKeyUsingMap expected 'Hello Alice from NYC', got ''", actual)
 
 	// Act - empty map
 	result2 := stringutil.ReplaceTemplate.DirectKeyUsingMap(format, map[string]string{})
 
 	// Assert
-	if result2 != format {
-		t.Errorf("DirectKeyUsingMap empty map should return format unchanged")
-	}
+	actual := args.Map{"result": result2 != format}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectKeyUsingMap empty map should return format unchanged", actual)
 }
 
 func Test_ReplaceTemplate_DirectKeyUsingMapTrim_Verification(t *testing.T) {
@@ -1120,9 +1120,9 @@ func Test_ReplaceTemplate_DirectKeyUsingMapTrim_Verification(t *testing.T) {
 	result := stringutil.ReplaceTemplate.DirectKeyUsingMapTrim(format, m)
 
 	// Assert
-	if result != "Hello World" {
-		t.Errorf("DirectKeyUsingMapTrim expected 'Hello World', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Hello World"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectKeyUsingMapTrim expected 'Hello World', got ''", actual)
 }
 
 func Test_ReplaceTemplate_DirectKeyUsingKeyVal_Verification(t *testing.T) {
@@ -1137,17 +1137,17 @@ func Test_ReplaceTemplate_DirectKeyUsingKeyVal_Verification(t *testing.T) {
 	)
 
 	// Assert
-	if result != "Hello Alice from NYC" {
-		t.Errorf("DirectKeyUsingKeyVal expected 'Hello Alice from NYC', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Hello Alice from NYC"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectKeyUsingKeyVal expected 'Hello Alice from NYC', got ''", actual)
 
 	// Act - empty
 	result2 := stringutil.ReplaceTemplate.DirectKeyUsingKeyVal(format)
 
 	// Assert
-	if result2 != format {
-		t.Errorf("DirectKeyUsingKeyVal empty should return format unchanged")
-	}
+	actual := args.Map{"result": result2 != format}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DirectKeyUsingKeyVal empty should return format unchanged", actual)
 }
 
 func Test_ReplaceTemplate_CurlyKeyUsingMap_Verification(t *testing.T) {
@@ -1159,9 +1159,9 @@ func Test_ReplaceTemplate_CurlyKeyUsingMap_Verification(t *testing.T) {
 	result := stringutil.ReplaceTemplate.CurlyKeyUsingMap(format, m)
 
 	// Assert
-	if result != "Hi Bob!" {
-		t.Errorf("CurlyKeyUsingMap expected 'Hi Bob!', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "Hi Bob!"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurlyKeyUsingMap expected 'Hi Bob!', got ''", actual)
 }
 
 func Test_ReplaceTemplate_UsingMapOptions_Verification(t *testing.T) {
@@ -1173,25 +1173,25 @@ func Test_ReplaceTemplate_UsingMapOptions_Verification(t *testing.T) {
 	result1 := stringutil.ReplaceTemplate.UsingMapOptions(true, format, m)
 
 	// Assert
-	if !strings.Contains(result1, "A") {
-		t.Errorf("UsingMapOptions curly should replace {key1}")
-	}
+	actual := args.Map{"result": strings.Contains(result1, "A")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "UsingMapOptions curly should replace {key1}", actual)
 
 	// Act - direct mode
 	result2 := stringutil.ReplaceTemplate.UsingMapOptions(false, format, m)
 
 	// Assert
-	if !strings.Contains(result2, "B") {
-		t.Errorf("UsingMapOptions direct should replace KEY2")
-	}
+	actual := args.Map{"result": strings.Contains(result2, "B")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "UsingMapOptions direct should replace KEY2", actual)
 
 	// Act - empty
 	result3 := stringutil.ReplaceTemplate.UsingMapOptions(true, "", m)
 
 	// Assert
-	if result3 != "" {
-		t.Errorf("UsingMapOptions empty format should return empty")
-	}
+	actual := args.Map{"result": result3 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "UsingMapOptions empty format should return empty", actual)
 }
 
 func Test_ReplaceTemplate_ReplaceWhiteSpacesToSingle_Verification(t *testing.T) {
@@ -1200,9 +1200,9 @@ func Test_ReplaceTemplate_ReplaceWhiteSpacesToSingle_Verification(t *testing.T) 
 	result := stringutil.ReplaceTemplate.ReplaceWhiteSpacesToSingle("  hello   world  ")
 
 	// Assert
-	if result != "hello world" {
-		t.Errorf("ReplaceWhiteSpacesToSingle expected 'hello world', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "hello world"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ReplaceWhiteSpacesToSingle expected 'hello world', got ''", actual)
 }
 
 // ==========================================
@@ -1247,15 +1247,15 @@ func Test_ToIntUsingRegexMatch_Verification(t *testing.T) {
 	result3 := stringutil.ToIntUsingRegexMatch(nil, "42")
 
 	// Assert
-	if result1 != 42 {
-		t.Errorf("ToIntUsingRegexMatch(42) expected 42, got %d", result1)
-	}
-	if result2 != 0 {
-		t.Errorf("ToIntUsingRegexMatch(abc) expected 0, got %d", result2)
-	}
-	if result3 != 0 {
-		t.Errorf("ToIntUsingRegexMatch(nil re) expected 0, got %d", result3)
-	}
+	actual := args.Map{"result": result1 != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntUsingRegexMatch(42) expected 42", actual)
+	actual := args.Map{"result": result2 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntUsingRegexMatch(abc) expected 0", actual)
+	actual := args.Map{"result": result3 != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ToIntUsingRegexMatch(nil re) expected 0", actual)
 }
 
 // ==========================================
@@ -1270,23 +1270,23 @@ func Test_SplitContentsByWhitespaceConditions_Verification(t *testing.T) {
 	result1 := stringutil.SplitContentsByWhitespaceConditions(input, false, false, false, false, false)
 
 	// Assert
-	if len(result1) != 3 {
-		t.Errorf("Basic split expected 3 items, got %d", len(result1))
-	}
+	actual := args.Map{"result": len(result1) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Basic split expected 3 items", actual)
 
 	// Act - sorted
 	result2 := stringutil.SplitContentsByWhitespaceConditions(input, false, false, true, false, false)
 
 	// Assert
-	if len(result2) < 2 {
-		t.Error("Sorted split should have items")
-	}
+	actual := args.Map{"result": len(result2) < 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Sorted split should have items", actual)
 
 	// Act - unique + lowercase
 	result3 := stringutil.SplitContentsByWhitespaceConditions(input, false, false, false, true, true)
 
 	// Assert
-	if len(result3) != 2 {
-		t.Errorf("Unique+lowercase expected 2 items, got %d", len(result3))
-	}
+	actual := args.Map{"result": len(result3) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Unique+lowercase expected 2 items", actual)
 }

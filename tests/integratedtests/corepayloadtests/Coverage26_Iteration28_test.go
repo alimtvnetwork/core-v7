@@ -131,9 +131,9 @@ func Test_I28_TypedPayloadWrapper_HandleError_NoError(t *testing.T) {
 	}
 	data := simpleData{Val: "test"}
 	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id-1", "task", "cat", data)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err:", actual)
 
 	// Act & Assert
 	tw.HandleError()
@@ -170,9 +170,9 @@ func Test_I28_TypedPayloadCollection_ErrorMethods_NoErrors(t *testing.T) {
 	}
 	items := []simpleUser{{Name: "alice"}, {Name: "bob"}}
 	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
-	if err != nil {
-		t.Fatalf("unexpected err creating collection: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err creating collection:", actual)
 
 	// Act
 	hasErrors := collection.HasErrors()
@@ -205,9 +205,9 @@ func Test_I28_TypedPayloadCollection_Clone(t *testing.T) {
 	}
 	items := []simpleUser{{Name: "alice"}}
 	collection, err := corepayload.NewTypedPayloadCollectionFromData[simpleUser]("users", items)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err:", actual)
 
 	// Act
 	cloned, err := collection.Clone()
@@ -233,9 +233,9 @@ func Test_I28_TypedPayloadWrapper_ClonePtr(t *testing.T) {
 	}
 	data := simpleData{Val: "test"}
 	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err:", actual)
 
 	// Act
 	cloned, err := tw.ClonePtr(true)
@@ -261,9 +261,9 @@ func Test_I28_TypedPayloadWrapper_Clone(t *testing.T) {
 	}
 	data := simpleData{Val: "test"}
 	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err:", actual)
 
 	// Act
 	cloned, err := tw.Clone(true)
@@ -288,9 +288,9 @@ func Test_I28_TypedPayloadWrapper_SetTypedData(t *testing.T) {
 	}
 	data := simpleData{Val: "initial"}
 	tw, err := corepayload.TypedPayloadWrapperRecord[simpleData]("test", "id1", "task", "cat", data)
-	if err != nil {
-		t.Fatalf("unexpected err: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected err:", actual)
 
 	// Act
 	newData := simpleData{Val: "updated"}

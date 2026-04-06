@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reqtype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ═══════════════════════════════════════════════
@@ -92,9 +93,9 @@ func Test_Cov4_AllIsMethods(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if tt.method(tt.req) != tt.expect {
-				t.Errorf("%s(%v) = %v, want %v", tt.name, tt.req, !tt.expect, tt.expect)
-			}
+			actual := args.Map{"result": tt.method(tt.req) != tt.expect}
+			expected := args.Map{"result": false}
+			expected.ShouldBeEqual(t, 0, "() =, want", actual)
 		})
 	}
 }
@@ -104,70 +105,126 @@ func Test_Cov4_AllIsMethods(t *testing.T) {
 // ═══════════════════════════════════════════════
 
 func Test_Cov4_IsAnyApplyOnExist(t *testing.T) {
-	if !reqtype.UpdateOnExist.IsAnyApplyOnExist() { t.Fatal() }
-	if !reqtype.DropOnExist.IsAnyApplyOnExist() { t.Fatal() }
-	if reqtype.Create.IsAnyApplyOnExist() { t.Fatal() }
+	actual := args.Map{"result": reqtype.UpdateOnExist.IsAnyApplyOnExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.DropOnExist.IsAnyApplyOnExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyApplyOnExist()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsCrud(t *testing.T) {
-	if !reqtype.Read.IsCrud() { t.Fatal() }
-	if !reqtype.Create.IsCrud() { t.Fatal() }
-	if reqtype.Append.IsCrud() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsCrud()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsCrud()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Append.IsCrud()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsCrudSkip(t *testing.T) {
-	if !reqtype.CreateOrSkipOnExist.IsCrudSkip() { t.Fatal() }
-	if reqtype.Read.IsCrudSkip() { t.Fatal() }
+	actual := args.Map{"result": reqtype.CreateOrSkipOnExist.IsCrudSkip()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Read.IsCrudSkip()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsCrudOrSkip(t *testing.T) {
-	if !reqtype.Read.IsCrudOrSkip() { t.Fatal() }
-	if !reqtype.CreateOrSkipOnExist.IsCrudOrSkip() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsCrudOrSkip()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.CreateOrSkipOnExist.IsCrudOrSkip()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyDrop(t *testing.T) {
-	if !reqtype.Drop.IsAnyDrop() { t.Fatal() }
-	if !reqtype.Delete.IsAnyDrop() { t.Fatal() }
-	if reqtype.Read.IsAnyDrop() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Drop.IsAnyDrop()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Delete.IsAnyDrop()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Read.IsAnyDrop()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsDropSafe(t *testing.T) {
-	if !reqtype.DeleteOrSkipOnNonExist.IsDropSafe() { t.Fatal() }
-	if reqtype.Drop.IsDropSafe() { t.Fatal() }
+	actual := args.Map{"result": reqtype.DeleteOrSkipOnNonExist.IsDropSafe()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Drop.IsDropSafe()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyCreate(t *testing.T) {
-	if !reqtype.Create.IsAnyCreate() { t.Fatal() }
-	if !reqtype.CreateOrAppend.IsAnyCreate() { t.Fatal() }
-	if reqtype.Read.IsAnyCreate() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsAnyCreate()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.CreateOrAppend.IsAnyCreate()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Read.IsAnyCreate()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyHttp(t *testing.T) {
-	if !reqtype.GetHttp.IsAnyHttp() { t.Fatal() }
-	if reqtype.Create.IsAnyHttp() { t.Fatal() }
+	actual := args.Map{"result": reqtype.GetHttp.IsAnyHttp()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyHttp()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyAction(t *testing.T) {
-	if !reqtype.Start.IsAnyAction() { t.Fatal() }
-	if reqtype.Create.IsAnyAction() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Start.IsAnyAction()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyAction()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsNotAnyAction(t *testing.T) {
-	if !reqtype.Create.IsNotAnyAction() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsNotAnyAction()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyHttpMethod(t *testing.T) {
-	if !reqtype.GetHttp.IsAnyHttpMethod("GetHttp") { t.Fatal() }
-	if reqtype.Create.IsAnyHttpMethod("Create") { t.Fatal() }
+	actual := args.Map{"result": reqtype.GetHttp.IsAnyHttpMethod("GetHttp")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyHttpMethod("Create")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsNotHttpMethod(t *testing.T) {
-	if !reqtype.Create.IsNotHttpMethod() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsNotHttpMethod()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsNotOverrideOrOverwriteOrEnforce(t *testing.T) {
-	if !reqtype.Create.IsNotOverrideOrOverwriteOrEnforce() { t.Fatal() }
-	if reqtype.Override.IsNotOverrideOrOverwriteOrEnforce() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsNotOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Override.IsNotOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 // ═══════════════════════════════════════════════
@@ -176,70 +233,112 @@ func Test_Cov4_IsNotOverrideOrOverwriteOrEnforce(t *testing.T) {
 
 func Test_Cov4_Name(t *testing.T) {
 	n := reqtype.Create.Name()
-	if n == "" { t.Fatal("expected non-empty name") }
+	actual := args.Map{"result": n == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty name", actual)
 }
 
 func Test_Cov4_ToNumberString(t *testing.T) {
 	s := reqtype.Create.ToNumberString()
-	if s == "" { t.Fatal("expected non-empty") }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_Cov4_UnmarshallEnumToValue(t *testing.T) {
 	_, err := reqtype.Create.UnmarshallEnumToValue([]byte(`"Read"`))
-	if err != nil { t.Fatal(err) }
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov4_IsValidRange(t *testing.T) {
-	if !reqtype.Create.IsValidRange() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsValidRange()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsInBetween(t *testing.T) {
-	if !reqtype.Update.IsInBetween(reqtype.Create, reqtype.Delete) { t.Fatal() }
-	if reqtype.Append.IsInBetween(reqtype.Create, reqtype.Delete) { t.Fatal() }
+	actual := args.Map{"result": reqtype.Update.IsInBetween(reqtype.Create, reqtype.Delete)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Append.IsInBetween(reqtype.Create, reqtype.Delete)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_CurrentNotImpl(t *testing.T) {
 	err := reqtype.Create.CurrentNotImpl(nil, "test")
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := reqtype.Create.CurrentNotImpl("ref", "test")
-	if err2 == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov4_NotSupportedErr(t *testing.T) {
 	err := reqtype.Create.NotSupportedErr("test msg", "ref")
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov4_IsNotAnyOfReqs(t *testing.T) {
-	if !reqtype.Create.IsNotAnyOfReqs(reqtype.Read, reqtype.Update) { t.Fatal() }
-	if reqtype.Create.IsNotAnyOfReqs(reqtype.Create) { t.Fatal() }
-	if !reqtype.Create.IsNotAnyOfReqs() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs(reqtype.Read, reqtype.Update)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs(reqtype.Create)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyOfReqs(t *testing.T) {
-	if !reqtype.Create.IsAnyOfReqs(reqtype.Create, reqtype.Read) { t.Fatal() }
-	if reqtype.Create.IsAnyOfReqs(reqtype.Read) { t.Fatal() }
-	if !reqtype.Create.IsAnyOfReqs() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs(reqtype.Create, reqtype.Read)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs(reqtype.Read)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_GetStatusAnyOf(t *testing.T) {
 	s := reqtype.Create.GetStatusAnyOf(reqtype.Create, reqtype.Read)
-	if !s.IsSuccess { t.Fatal() }
+	actual := args.Map{"result": s.IsSuccess}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	s2 := reqtype.Append.GetStatusAnyOf(reqtype.Create, reqtype.Read)
-	if s2.Error == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": s2.Error == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	s3 := reqtype.Create.GetStatusAnyOf()
-	if !s3.IsSuccess { t.Fatal() }
+	actual := args.Map{"result": s3.IsSuccess}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_GetInBetweenStatus(t *testing.T) {
 	s := reqtype.Update.GetInBetweenStatus(reqtype.Create, reqtype.Delete)
-	if !s.IsSuccess { t.Fatal() }
+	actual := args.Map{"result": s.IsSuccess}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	s2 := reqtype.Append.GetInBetweenStatus(reqtype.Create, reqtype.Delete)
-	if s2.IsSuccess { t.Fatal("expected failure") }
+	actual := args.Map{"result": s2.IsSuccess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected failure", actual)
 }
 
 func Test_Cov4_MaxByte(t *testing.T) {
-	if reqtype.Create.MaxByte() == 0 { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.MaxByte() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_MinByte(t *testing.T) {
@@ -247,85 +346,123 @@ func Test_Cov4_MinByte(t *testing.T) {
 }
 
 func Test_Cov4_ValueByte(t *testing.T) {
-	if reqtype.Create.ValueByte() == 0 { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.ValueByte() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesByte(t *testing.T) {
 	r := reqtype.Create.RangesByte()
-	if len(r) == 0 { t.Fatal() }
+	actual := args.Map{"result": len(r) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_Value(t *testing.T) {
-	if reqtype.Create.Value() == 0 { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.Value() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_ValueInt(t *testing.T) {
-	if reqtype.Create.ValueInt() == 0 { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.ValueInt() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyOf(t *testing.T) {
-	if !reqtype.Create.IsAnyOf(reqtype.Create.Value()) { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsAnyOf(reqtype.Create.Value())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_String(t *testing.T) {
 	s := reqtype.Create.String()
-	if s == "" { t.Fatal() }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_UnmarshalJSON(t *testing.T) {
 	r := reqtype.Invalid
 	err := r.UnmarshalJSON([]byte(`"Read"`))
-	if err != nil { t.Fatal(err) }
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov4_ToPtr(t *testing.T) {
 	p := reqtype.Create.ToPtr()
-	if p == nil { t.Fatal() }
+	actual := args.Map{"result": p == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_ToSimple(t *testing.T) {
 	p := reqtype.Create.ToPtr()
-	if p.ToSimple() != reqtype.Create { t.Fatal() }
+	actual := args.Map{"result": p.ToSimple() != reqtype.Create}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	var nilP *reqtype.Request
-	if nilP.ToSimple() != reqtype.Invalid { t.Fatal() }
+	actual := args.Map{"result": nilP.ToSimple() != reqtype.Invalid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_MarshalJSON(t *testing.T) {
 	data, err := reqtype.Create.MarshalJSON()
-	if err != nil || len(data) == 0 { t.Fatal() }
+	actual := args.Map{"result": err != nil || len(data) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_EnumType(t *testing.T) {
-	if reqtype.Create.EnumType() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.EnumType() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsBasicEnumContractsBinder(t *testing.T) {
-	if reqtype.Create.AsBasicEnumContractsBinder() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsBasicEnumContractsBinder() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsJsonMarshaller(t *testing.T) {
 	r := reqtype.Create
-	if r.AsJsonMarshaller() == nil { t.Fatal() }
+	actual := args.Map{"result": r.AsJsonMarshaller() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsBasicByteEnumContractsBinder(t *testing.T) {
-	if reqtype.Create.AsBasicByteEnumContractsBinder() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsBasicByteEnumContractsBinder() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsCrudTyper(t *testing.T) {
-	if reqtype.Create.AsCrudTyper() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsCrudTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsOverwriteOrRideOrEnforcer(t *testing.T) {
-	if reqtype.Create.AsOverwriteOrRideOrEnforcer() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsOverwriteOrRideOrEnforcer() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsHttpMethodTyper(t *testing.T) {
-	if reqtype.Create.AsHttpMethodTyper() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsHttpMethodTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_AsActionTyper(t *testing.T) {
-	if reqtype.Create.AsActionTyper() == nil { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.AsActionTyper() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 // ═══════════════════════════════════════════════
@@ -334,39 +471,59 @@ func Test_Cov4_AsActionTyper(t *testing.T) {
 
 func Test_Cov4_IsEnumEqual(t *testing.T) {
 	r := reqtype.Create
-	if !r.IsEnumEqual(&r) { t.Fatal() }
+	actual := args.Map{"result": r.IsEnumEqual(&r)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsByteValueEqual(t *testing.T) {
-	if !reqtype.Create.IsByteValueEqual(reqtype.Create.Value()) { t.Fatal() }
+	actual := args.Map{"result": reqtype.Create.IsByteValueEqual(reqtype.Create.Value())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyEnumsEqual(t *testing.T) {
 	r := reqtype.Create
 	r2 := reqtype.Create
-	if !r.IsAnyEnumsEqual(&r2) { t.Fatal() }
+	actual := args.Map{"result": r.IsAnyEnumsEqual(&r2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsNameEqual(t *testing.T) {
-	if !reqtype.Read.IsNameEqual("Read") { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsNameEqual("Read")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyNamesOf(t *testing.T) {
-	if !reqtype.Read.IsAnyNamesOf("Read", "Update") { t.Fatal() }
-	if reqtype.Read.IsAnyNamesOf("Update") { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsAnyNamesOf("Read", "Update")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Read.IsAnyNamesOf("Update")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsValueEqual(t *testing.T) {
-	if !reqtype.Read.IsValueEqual(reqtype.Read.Value()) { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsValueEqual(reqtype.Read.Value())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsAnyValuesEqual(t *testing.T) {
-	if !reqtype.Read.IsAnyValuesEqual(reqtype.Read.Value()) { t.Fatal() }
-	if reqtype.Read.IsAnyValuesEqual(99) { t.Fatal() }
+	actual := args.Map{"result": reqtype.Read.IsAnyValuesEqual(reqtype.Read.Value())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
+	actual := args.Map{"result": reqtype.Read.IsAnyValuesEqual(99)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_IsUninitialized(t *testing.T) {
-	if !reqtype.Invalid.IsUninitialized() { t.Fatal() }
+	actual := args.Map{"result": reqtype.Invalid.IsUninitialized()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 // ═══════════════════════════════════════════════
@@ -374,64 +531,96 @@ func Test_Cov4_IsUninitialized(t *testing.T) {
 // ═══════════════════════════════════════════════
 
 func Test_Cov4_Max(t *testing.T) {
-	if reqtype.Max() != reqtype.DynamicAction { t.Fatal() }
+	actual := args.Map{"result": reqtype.Max() != reqtype.DynamicAction}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_Min(t *testing.T) {
-	if reqtype.Min() != reqtype.Invalid { t.Fatal() }
+	actual := args.Map{"result": reqtype.Min() != reqtype.Invalid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesInBetween(t *testing.T) {
 	r := reqtype.RangesInBetween(reqtype.Create, reqtype.Delete)
-	if len(r) != 4 { t.Fatalf("expected 4 got %d", len(r)) }
+	actual := args.Map{"result": len(r)}
+	expected := args.Map{"result": 4}
+	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
 func Test_Cov4_RangesInvalidErr(t *testing.T) {
 	err := reqtype.RangesInvalidErr()
-	if err == nil { t.Fatal() }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesNotMeet(t *testing.T) {
 	s := reqtype.RangesNotMeet("test", reqtype.Create, reqtype.Read)
-	if s == "" { t.Fatal() }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	s2 := reqtype.RangesNotMeet("test")
-	if s2 != "" { t.Fatal("expected empty for no reqs") }
+	actual := args.Map{"result": s2 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for no reqs", actual)
 }
 
 func Test_Cov4_RangesNotMeetError(t *testing.T) {
 	err := reqtype.RangesNotMeetError("test", reqtype.Create)
-	if err == nil { t.Fatal() }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	err2 := reqtype.RangesNotMeetError("test")
-	if err2 != nil { t.Fatal("expected nil for no reqs") }
+	actual := args.Map{"result": err2 != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for no reqs", actual)
 }
 
 func Test_Cov4_RangesNotSupportedFor(t *testing.T) {
 	err := reqtype.RangesNotSupportedFor("test", reqtype.Create)
-	if err == nil { t.Fatal() }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	err2 := reqtype.RangesNotSupportedFor("test")
-	if err2 != nil { t.Fatal() }
+	actual := args.Map{"result": err2 != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesOnlySupportedFor(t *testing.T) {
 	err := reqtype.RangesOnlySupportedFor("test", reqtype.Create)
-	if err == nil { t.Fatal() }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	err2 := reqtype.RangesOnlySupportedFor("test")
-	if err2 != nil { t.Fatal() }
+	actual := args.Map{"result": err2 != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesString(t *testing.T) {
 	s := reqtype.RangesString(", ", reqtype.Create, reqtype.Read)
-	if s == "" { t.Fatal() }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesStringDefaultJoiner(t *testing.T) {
 	s := reqtype.RangesStringDefaultJoiner(reqtype.Create)
-	if s == "" { t.Fatal() }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
 func Test_Cov4_RangesStrings(t *testing.T) {
 	s := reqtype.RangesStrings(reqtype.Create, reqtype.Read)
-	if len(s) != 2 { t.Fatal() }
+	actual := args.Map{"result": len(s) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	s2 := reqtype.RangesStrings()
-	if len(s2) != 0 { t.Fatal() }
+	actual := args.Map{"result": len(s2) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }

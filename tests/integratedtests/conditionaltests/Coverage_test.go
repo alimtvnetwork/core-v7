@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/conditional"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -12,23 +13,23 @@ import (
 
 func Test_If_Int_True(t *testing.T) {
 	r := conditional.If[int](true, 2, 7)
-	if r != 2 {
-		t.Errorf("expected 2, got %d", r)
-	}
+	actual := args.Map{"result": r != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_If_Int_False(t *testing.T) {
 	r := conditional.If[int](false, 2, 7)
-	if r != 7 {
-		t.Errorf("expected 7, got %d", r)
-	}
+	actual := args.Map{"result": r != 7}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 7", actual)
 }
 
 func Test_If_String_True(t *testing.T) {
 	r := conditional.If[string](true, "yes", "no")
-	if r != "yes" {
-		t.Errorf("expected 'yes', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "yes"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'yes', got ''", actual)
 }
 
 // ==========================================
@@ -41,9 +42,9 @@ func Test_IfFunc_True(t *testing.T) {
 		func() string { return "true" },
 		func() string { return "false" },
 	)
-	if r != "true" {
-		t.Errorf("expected 'true', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "true"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'true', got ''", actual)
 }
 
 func Test_IfFunc_False(t *testing.T) {
@@ -52,9 +53,9 @@ func Test_IfFunc_False(t *testing.T) {
 		func() string { return "true" },
 		func() string { return "false" },
 	)
-	if r != "false" {
-		t.Errorf("expected 'false', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "false"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'false', got ''", actual)
 }
 
 // ==========================================
@@ -63,16 +64,16 @@ func Test_IfFunc_False(t *testing.T) {
 
 func Test_IfTrueFunc_True(t *testing.T) {
 	r := conditional.IfTrueFunc[int](true, func() int { return 42 })
-	if r != 42 {
-		t.Errorf("expected 42, got %d", r)
-	}
+	actual := args.Map{"result": r != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_IfTrueFunc_False(t *testing.T) {
 	r := conditional.IfTrueFunc[int](false, func() int { return 42 })
-	if r != 0 {
-		t.Errorf("expected 0, got %d", r)
-	}
+	actual := args.Map{"result": r != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ==========================================
@@ -81,16 +82,16 @@ func Test_IfTrueFunc_False(t *testing.T) {
 
 func Test_IfSlice_True(t *testing.T) {
 	r := conditional.IfSlice[int](true, []int{1, 2}, []int{3})
-	if len(r) != 2 {
-		t.Errorf("expected 2, got %d", len(r))
-	}
+	actual := args.Map{"result": len(r) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_IfSlice_False(t *testing.T) {
 	r := conditional.IfSlice[int](false, []int{1, 2}, []int{3})
-	if len(r) != 1 {
-		t.Errorf("expected 1, got %d", len(r))
-	}
+	actual := args.Map{"result": len(r) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ==========================================
@@ -99,32 +100,32 @@ func Test_IfSlice_False(t *testing.T) {
 
 func Test_NilDef_Nil(t *testing.T) {
 	r := conditional.NilDef[int](nil, 99)
-	if r != 99 {
-		t.Errorf("expected 99, got %d", r)
-	}
+	actual := args.Map{"result": r != 99}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 99", actual)
 }
 
 func Test_NilDef_NonNil(t *testing.T) {
 	v := 42
 	r := conditional.NilDef[int](&v, 99)
-	if r != 42 {
-		t.Errorf("expected 42, got %d", r)
-	}
+	actual := args.Map{"result": r != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_NilDefPtr_Nil(t *testing.T) {
 	r := conditional.NilDefPtr[int](nil, 99)
-	if *r != 99 {
-		t.Errorf("expected 99, got %d", *r)
-	}
+	actual := args.Map{"result": *r != 99}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 99", actual)
 }
 
 func Test_NilDefPtr_NonNil(t *testing.T) {
 	v := 42
 	r := conditional.NilDefPtr[int](&v, 99)
-	if *r != 42 {
-		t.Errorf("expected 42, got %d", *r)
-	}
+	actual := args.Map{"result": *r != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 // ==========================================
@@ -133,32 +134,32 @@ func Test_NilDefPtr_NonNil(t *testing.T) {
 
 func Test_NilVal_Nil(t *testing.T) {
 	r := conditional.NilVal[string](nil, "nil", "nonnil")
-	if r != "nil" {
-		t.Errorf("expected 'nil', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "nil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'nil', got ''", actual)
 }
 
 func Test_NilVal_NonNil(t *testing.T) {
 	v := "hello"
 	r := conditional.NilVal[string](&v, "nil", "nonnil")
-	if r != "nonnil" {
-		t.Errorf("expected 'nonnil', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "nonnil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'nonnil', got ''", actual)
 }
 
 func Test_NilValPtr_Nil(t *testing.T) {
 	r := conditional.NilValPtr[string](nil, "nil", "nonnil")
-	if *r != "nil" {
-		t.Errorf("expected 'nil', got '%s'", *r)
-	}
+	actual := args.Map{"result": *r != "nil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'nil', got ''", actual)
 }
 
 func Test_NilValPtr_NonNil(t *testing.T) {
 	v := "hello"
 	r := conditional.NilValPtr[string](&v, "nil", "nonnil")
-	if *r != "nonnil" {
-		t.Errorf("expected 'nonnil', got '%s'", *r)
-	}
+	actual := args.Map{"result": *r != "nonnil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'nonnil', got ''", actual)
 }
 
 // ==========================================
@@ -167,32 +168,32 @@ func Test_NilValPtr_NonNil(t *testing.T) {
 
 func Test_ValueOrZero_Nil(t *testing.T) {
 	r := conditional.ValueOrZero[int](nil)
-	if r != 0 {
-		t.Errorf("expected 0, got %d", r)
-	}
+	actual := args.Map{"result": r != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_ValueOrZero_NonNil(t *testing.T) {
 	v := 42
 	r := conditional.ValueOrZero[int](&v)
-	if r != 42 {
-		t.Errorf("expected 42, got %d", r)
-	}
+	actual := args.Map{"result": r != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 func Test_PtrOrZero_Nil(t *testing.T) {
 	r := conditional.PtrOrZero[int](nil)
-	if r == nil || *r != 0 {
-		t.Error("expected pointer to 0")
-	}
+	actual := args.Map{"result": r == nil || *r != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected pointer to 0", actual)
 }
 
 func Test_PtrOrZero_NonNil(t *testing.T) {
 	v := 42
 	r := conditional.PtrOrZero[int](&v)
-	if *r != 42 {
-		t.Errorf("expected 42, got %d", *r)
-	}
+	actual := args.Map{"result": *r != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
 // ==========================================
@@ -202,17 +203,17 @@ func Test_PtrOrZero_NonNil(t *testing.T) {
 func Test_IfPtr_True(t *testing.T) {
 	a, b := 1, 2
 	r := conditional.IfPtr[int](true, &a, &b)
-	if *r != 1 {
-		t.Errorf("expected 1, got %d", *r)
-	}
+	actual := args.Map{"result": *r != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_IfPtr_False(t *testing.T) {
 	a, b := 1, 2
 	r := conditional.IfPtr[int](false, &a, &b)
-	if *r != 2 {
-		t.Errorf("expected 2, got %d", *r)
-	}
+	actual := args.Map{"result": *r != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 // ==========================================
@@ -221,16 +222,16 @@ func Test_IfPtr_False(t *testing.T) {
 
 func Test_NilCheck_Nil(t *testing.T) {
 	r := conditional.NilCheck(nil, "onNil", "onNonNil")
-	if r != "onNil" {
-		t.Errorf("expected 'onNil', got '%v'", r)
-	}
+	actual := args.Map{"result": r != "onNil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'onNil', got ''", actual)
 }
 
 func Test_NilCheck_NonNil(t *testing.T) {
 	r := conditional.NilCheck("val", "onNil", "onNonNil")
-	if r != "onNonNil" {
-		t.Errorf("expected 'onNonNil', got '%v'", r)
-	}
+	actual := args.Map{"result": r != "onNonNil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'onNonNil', got ''", actual)
 }
 
 // ==========================================
@@ -239,16 +240,16 @@ func Test_NilCheck_NonNil(t *testing.T) {
 
 func Test_DefOnNil_Nil(t *testing.T) {
 	r := conditional.DefOnNil(nil, "default")
-	if r != "default" {
-		t.Errorf("expected 'default', got '%v'", r)
-	}
+	actual := args.Map{"result": r != "default"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'default', got ''", actual)
 }
 
 func Test_DefOnNil_NonNil(t *testing.T) {
 	r := conditional.DefOnNil("value", "default")
-	if r != "value" {
-		t.Errorf("expected 'value', got '%v'", r)
-	}
+	actual := args.Map{"result": r != "value"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'value', got ''", actual)
 }
 
 // ==========================================
@@ -257,40 +258,40 @@ func Test_DefOnNil_NonNil(t *testing.T) {
 
 func Test_NilOrEmptyStr_Nil(t *testing.T) {
 	r := conditional.NilOrEmptyStr(nil, "empty", "notempty")
-	if r != "empty" {
-		t.Errorf("expected 'empty', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'empty', got ''", actual)
 }
 
 func Test_NilOrEmptyStr_Empty(t *testing.T) {
 	s := ""
 	r := conditional.NilOrEmptyStr(&s, "empty", "notempty")
-	if r != "empty" {
-		t.Errorf("expected 'empty', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'empty', got ''", actual)
 }
 
 func Test_NilOrEmptyStr_NonEmpty(t *testing.T) {
 	s := "hello"
 	r := conditional.NilOrEmptyStr(&s, "empty", "notempty")
-	if r != "notempty" {
-		t.Errorf("expected 'notempty', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "notempty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'notempty', got ''", actual)
 }
 
 func Test_NilOrEmptyStrPtr_Nil(t *testing.T) {
 	r := conditional.NilOrEmptyStrPtr(nil, "empty", "notempty")
-	if *r != "empty" {
-		t.Errorf("expected 'empty', got '%s'", *r)
-	}
+	actual := args.Map{"result": *r != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'empty', got ''", actual)
 }
 
 func Test_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
 	s := "hello"
 	r := conditional.NilOrEmptyStrPtr(&s, "empty", "notempty")
-	if *r != "notempty" {
-		t.Errorf("expected 'notempty', got '%s'", *r)
-	}
+	actual := args.Map{"result": *r != "notempty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'notempty', got ''", actual)
 }
 
 // ==========================================
@@ -299,16 +300,16 @@ func Test_NilOrEmptyStrPtr_NonEmpty(t *testing.T) {
 
 func Test_StringDefault_True(t *testing.T) {
 	r := conditional.StringDefault(true, "value")
-	if r != "value" {
-		t.Errorf("expected 'value', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "value"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'value', got ''", actual)
 }
 
 func Test_StringDefault_False(t *testing.T) {
 	r := conditional.StringDefault(false, "value")
-	if r != "" {
-		t.Errorf("expected empty, got '%s'", r)
-	}
+	actual := args.Map{"result": r != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty, got ''", actual)
 }
 
 // ==========================================
@@ -317,30 +318,30 @@ func Test_StringDefault_False(t *testing.T) {
 
 func Test_BoolByOrder_FirstTrue(t *testing.T) {
 	r := conditional.BoolByOrder(true, false)
-	if !r {
-		t.Error("should return true")
-	}
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should return true", actual)
 }
 
 func Test_BoolByOrder_AllFalse(t *testing.T) {
 	r := conditional.BoolByOrder(false, false, false)
-	if r {
-		t.Error("should return false")
-	}
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return false", actual)
 }
 
 func Test_BoolByOrder_LastTrue(t *testing.T) {
 	r := conditional.BoolByOrder(false, false, true)
-	if !r {
-		t.Error("should return true")
-	}
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should return true", actual)
 }
 
 func Test_BoolByOrder_Empty(t *testing.T) {
 	r := conditional.BoolByOrder()
-	if r {
-		t.Error("empty should return false")
-	}
+	actual := args.Map{"result": r}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return false", actual)
 }
 
 // ==========================================
@@ -351,18 +352,18 @@ func Test_Func_True(t *testing.T) {
 	trueF := func() any { return "true" }
 	falseF := func() any { return "false" }
 	r := conditional.Func(true, trueF, falseF)
-	if r() != "true" {
-		t.Error("should return true func")
-	}
+	actual := args.Map{"result": r() != "true"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return true func", actual)
 }
 
 func Test_Func_False(t *testing.T) {
 	trueF := func() any { return "true" }
 	falseF := func() any { return "false" }
 	r := conditional.Func(false, trueF, falseF)
-	if r() != "false" {
-		t.Error("should return false func")
-	}
+	actual := args.Map{"result": r() != "false"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return false func", actual)
 }
 
 // ==========================================
@@ -371,14 +372,14 @@ func Test_Func_False(t *testing.T) {
 
 func Test_StringsIndexVal_True(t *testing.T) {
 	r := conditional.StringsIndexVal(true, []string{"a", "b", "c"}, 0, 2)
-	if r != "a" {
-		t.Errorf("expected 'a', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'a', got ''", actual)
 }
 
 func Test_StringsIndexVal_False(t *testing.T) {
 	r := conditional.StringsIndexVal(false, []string{"a", "b", "c"}, 0, 2)
-	if r != "c" {
-		t.Errorf("expected 'c', got '%s'", r)
-	}
+	actual := args.Map{"result": r != "c"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'c', got ''", actual)
 }

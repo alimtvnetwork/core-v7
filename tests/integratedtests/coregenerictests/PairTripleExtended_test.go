@@ -415,57 +415,57 @@ func Test_New_Pair_Creator_AllShortcuts(t *testing.T) {
 	// StringInt64
 	{
 		p := coregeneric.New.Pair.StringInt64("k", int64(99))
-		if p.Left != "k" || p.Right != int64(99) || !p.IsValid {
-			t.Errorf("New.Pair.StringInt64 failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != "k" || p.Right != int64(99) || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.StringInt64 failed:", actual)
 	}
 
 	// StringFloat64
 	{
 		p := coregeneric.New.Pair.StringFloat64("pi", 3.14)
-		if p.Left != "pi" || p.Right != 3.14 || !p.IsValid {
-			t.Errorf("New.Pair.StringFloat64 failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != "pi" || p.Right != 3.14 || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.StringFloat64 failed:", actual)
 	}
 
 	// StringBool
 	{
 		p := coregeneric.New.Pair.StringBool("flag", true)
-		if p.Left != "flag" || p.Right != true || !p.IsValid {
-			t.Errorf("New.Pair.StringBool failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != "flag" || p.Right != true || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.StringBool failed:", actual)
 	}
 
 	// StringAny
 	{
 		p := coregeneric.New.Pair.StringAny("key", []int{1, 2})
-		if p.Left != "key" || !p.IsValid {
-			t.Errorf("New.Pair.StringAny failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != "key" || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.StringAny failed:", actual)
 	}
 
 	// IntInt
 	{
 		p := coregeneric.New.Pair.IntInt(1, 2)
-		if p.Left != 1 || p.Right != 2 || !p.IsValid {
-			t.Errorf("New.Pair.IntInt failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != 1 || p.Right != 2 || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.IntInt failed:", actual)
 	}
 
 	// IntString
 	{
 		p := coregeneric.New.Pair.IntString(42, "answer")
-		if p.Left != 42 || p.Right != "answer" || !p.IsValid {
-			t.Errorf("New.Pair.IntString failed: got %v", p)
-		}
+		actual := args.Map{"result": p.Left != 42 || p.Right != "answer" || !p.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.IntString failed:", actual)
 	}
 
 	// InvalidAny
 	{
 		p := coregeneric.New.Pair.InvalidAny("bad")
-		if p.IsValid || p.Message != "bad" {
-			t.Errorf("New.Pair.InvalidAny failed: got %v", p)
-		}
+		actual := args.Map{"result": p.IsValid || p.Message != "bad"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Pair.InvalidAny failed:", actual)
 	}
 }
 
@@ -477,25 +477,25 @@ func Test_New_Triple_Creator_AllShortcuts(t *testing.T) {
 	// StringIntString
 	{
 		tr := coregeneric.New.Triple.StringIntString("left", 42, "right")
-		if tr.Left != "left" || tr.Middle != 42 || tr.Right != "right" || !tr.IsValid {
-			t.Errorf("New.Triple.StringIntString failed: got %v", tr)
-		}
+		actual := args.Map{"result": tr.Left != "left" || tr.Middle != 42 || tr.Right != "right" || !tr.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Triple.StringIntString failed:", actual)
 	}
 
 	// StringAnyAny
 	{
 		tr := coregeneric.New.Triple.StringAnyAny("key", 3.14, true)
-		if tr.Left != "key" || !tr.IsValid {
-			t.Errorf("New.Triple.StringAnyAny failed: got %v", tr)
-		}
+		actual := args.Map{"result": tr.Left != "key" || !tr.IsValid}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Triple.StringAnyAny failed:", actual)
 	}
 
 	// InvalidAny
 	{
 		tr := coregeneric.New.Triple.InvalidAny("err")
-		if tr.IsValid || tr.Message != "err" {
-			t.Errorf("New.Triple.InvalidAny failed: got %v", tr)
-		}
+		actual := args.Map{"result": tr.IsValid || tr.Message != "err"}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "New.Triple.InvalidAny failed:", actual)
 	}
 }
 

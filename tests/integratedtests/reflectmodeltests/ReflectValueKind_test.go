@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reflectcore/reflectmodel"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ===== ReflectValueKind Tests =====
@@ -11,17 +12,17 @@ import (
 func Test_InvalidReflectValueKindModel(t *testing.T) {
 	rvk := reflectmodel.InvalidReflectValueKindModel("test error")
 
-	if rvk.IsValid {
-		t.Error("expected IsValid = false")
-	}
+	actual := args.Map{"result": rvk.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsValid = false", actual)
 
-	if !rvk.HasError() {
-		t.Error("expected HasError() = true")
-	}
+	actual := args.Map{"result": rvk.HasError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected HasError() = true", actual)
 
-	if rvk.Error.Error() != "test error" {
-		t.Errorf("Error = %q, want %q", rvk.Error.Error(), "test error")
-	}
+	actual := args.Map{"result": rvk.Error.Error() != "test error"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Error =, want", rvk.Error.Error(), "test error", actual)
 }
 
 // Note: All nil receiver tests migrated to ReflectValueKind_NilReceiver_testcases.go
@@ -38,33 +39,33 @@ func Test_ReflectValueKind_NilReceiver(t *testing.T) {
 func Test_ReflectValueKind_IsInvalid_NotValid(t *testing.T) {
 	rvk := &reflectmodel.ReflectValueKind{IsValid: false}
 
-	if !rvk.IsInvalid() {
-		t.Error("expected IsInvalid() = true when IsValid=false")
-	}
+	actual := args.Map{"result": rvk.IsInvalid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsInvalid() = true when IsValid=false", actual)
 }
 
 func Test_ReflectValueKind_IsEmptyError_NoError(t *testing.T) {
 	rvk := &reflectmodel.ReflectValueKind{}
 
-	if !rvk.IsEmptyError() {
-		t.Error("expected IsEmptyError() = true when no error")
-	}
+	actual := args.Map{"result": rvk.IsEmptyError()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsEmptyError() = true when no error", actual)
 }
 
 func Test_ReflectValueKind_PkgPath_NotValid(t *testing.T) {
 	rvk := &reflectmodel.ReflectValueKind{IsValid: false}
 
 	got := rvk.PkgPath()
-	if got != "" {
-		t.Errorf("expected PkgPath() = empty when IsValid=false, got %q", got)
-	}
+	actual := args.Map{"result": got != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected PkgPath() = empty when IsValid=false", actual)
 }
 
 func Test_ReflectValueKind_TypeName_NotValid(t *testing.T) {
 	rvk := &reflectmodel.ReflectValueKind{IsValid: false}
 
 	got := rvk.TypeName()
-	if got != "" {
-		t.Errorf("expected TypeName() = empty when IsValid=false, got %q", got)
-	}
+	actual := args.Map{"result": got != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected TypeName() = empty when IsValid=false", actual)
 }

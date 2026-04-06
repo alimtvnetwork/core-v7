@@ -110,9 +110,9 @@ func Test_Cov19_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.
 	_ = os.WriteFile(testFile, []byte("data"), 0o644)
 
 	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-r*xr-xr-x")
-	if ogoErr != nil {
-		t.Fatalf("unexpected ogo error: %v", ogoErr)
-	}
+	actual := args.Map{"result": ogoErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected ogo error:", actual)
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *ogo,
 		Condition: chmodins.Condition{
@@ -147,9 +147,9 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 
 	// Arrange
 	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-rwxr-xr-x")
-	if ogoErr != nil {
-		t.Fatalf("unexpected ogo error: %v", ogoErr)
-	}
+	actual := args.Map{"result": ogoErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected ogo error:", actual)
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *ogo,
 		Condition: chmodins.Condition{
@@ -186,9 +186,9 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 
 	// Arrange
 	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-rwxr-xr-x")
-	if ogoErr != nil {
-		t.Fatalf("unexpected ogo error: %v", ogoErr)
-	}
+	actual := args.Map{"result": ogoErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected ogo error:", actual)
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *ogo,
 		Condition: chmodins.Condition{
@@ -227,9 +227,9 @@ func Test_Cov19_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	tmpDir := t.TempDir()
 	_ = os.WriteFile(filepath.Join(tmpDir, "f.txt"), []byte("x"), 0o644)
 	ogo, ogoErr := chmodins.ExpandRwxFullStringToOwnerGroupOther("-rwxrwxrwx")
-	if ogoErr != nil {
-		t.Fatalf("unexpected ogo error: %v", ogoErr)
-	}
+	actual := args.Map{"result": ogoErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected ogo error:", actual)
 	ins := chmodins.RwxInstruction{
 		RwxOwnerGroupOther: *ogo,
 		Condition: chmodins.Condition{

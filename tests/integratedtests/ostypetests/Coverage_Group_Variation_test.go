@@ -4,57 +4,58 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/ostype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_Group_IsWindows(t *testing.T) {
-	if !ostype.WindowsGroup.IsWindows() {
-		t.Error("expected windows")
-	}
+	actual := args.Map{"result": ostype.WindowsGroup.IsWindows()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected windows", actual)
 }
 
 func Test_Cov_Group_IsUnix(t *testing.T) {
-	if !ostype.UnixGroup.IsUnix() {
-		t.Error("expected unix")
-	}
+	actual := args.Map{"result": ostype.UnixGroup.IsUnix()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected unix", actual)
 }
 
 func Test_Cov_Group_IsAndroid(t *testing.T) {
-	if !ostype.AndroidGroup.IsAndroid() {
-		t.Error("expected android")
-	}
+	actual := args.Map{"result": ostype.AndroidGroup.IsAndroid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected android", actual)
 }
 
 func Test_Cov_Group_IsInvalidGroup(t *testing.T) {
-	if !ostype.InvalidGroup.IsInvalidGroup() {
-		t.Error("expected invalid")
-	}
+	actual := args.Map{"result": ostype.InvalidGroup.IsInvalidGroup()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
 func Test_Cov_Variation_Group_Android(t *testing.T) {
 	g := ostype.Android.Group()
-	if !g.IsAndroid() {
-		t.Error("expected android group")
-	}
+	actual := args.Map{"result": g.IsAndroid()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected android group", actual)
 }
 
 func Test_Cov_Variation_Group_Unix(t *testing.T) {
 	g := ostype.Linux.Group()
-	if !g.IsUnix() {
-		t.Error("expected unix group")
-	}
+	actual := args.Map{"result": g.IsUnix()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected unix group", actual)
 }
 
 func Test_Cov_Variation_IsActualGroupUnix(t *testing.T) {
-	if !ostype.Linux.IsActualGroupUnix() {
-		t.Error("expected actual group unix")
-	}
+	actual := args.Map{"result": ostype.Linux.IsActualGroupUnix()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected actual group unix", actual)
 }
 
 func Test_Cov_Variation_IsPossibleUnixGroup(t *testing.T) {
-	if !ostype.Linux.IsPossibleUnixGroup() {
-		t.Error("expected possible unix")
-	}
-	if ostype.Windows.IsPossibleUnixGroup() {
-		t.Error("windows should not be unix")
-	}
+	actual := args.Map{"result": ostype.Linux.IsPossibleUnixGroup()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected possible unix", actual)
+	actual := args.Map{"result": ostype.Windows.IsPossibleUnixGroup()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "windows should not be unix", actual)
 }

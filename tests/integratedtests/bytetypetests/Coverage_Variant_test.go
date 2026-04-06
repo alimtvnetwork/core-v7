@@ -5,14 +5,15 @@ import (
 
 	"github.com/alimtvnetwork/core/bytetype"
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_Variant_UnmarshalJSON_Error(t *testing.T) {
 	v := new(bytetype.Variant)
 	err := v.UnmarshalJSON([]byte("invalid"))
-	if err == nil {
-		t.Error("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov_Variant_UnmarshallToValue(t *testing.T) {

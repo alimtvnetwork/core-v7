@@ -7,6 +7,7 @@ import (
 
 	"github.com/alimtvnetwork/core/chmodhelper"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── ParseRwxOwnerGroupOtherToFileModeMust ──
@@ -18,18 +19,18 @@ func Test_Cov7_ParseRwxOwnerGroupOtherToFileModeMust(t *testing.T) {
 		Other: "r-x",
 	}
 	mode := chmodhelper.ParseRwxOwnerGroupOtherToFileModeMust(rwx)
-	if mode == 0 {
-		t.Fatal("expected non-zero mode")
-	}
+	actual := args.Map{"result": mode == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-zero mode", actual)
 }
 
 // ── ParseBaseRwxInstructionsToExecutors ──
 
 func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Nil(t *testing.T) {
 	_, err := chmodhelper.ParseBaseRwxInstructionsToExecutors(nil)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
@@ -46,21 +47,21 @@ func Test_Cov7_ParseBaseRwxInstructionsToExecutors_Valid(t *testing.T) {
 		},
 	}
 	executors, err := chmodhelper.ParseBaseRwxInstructionsToExecutors(base)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if executors == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": executors == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 // ── GetFilesChmodRwxFullMap ──
 
 func Test_Cov7_GetFilesChmodRwxFullMap_Empty(t *testing.T) {
 	hm, err := chmodhelper.GetFilesChmodRwxFullMap(nil)
-	if err != nil || hm == nil {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || hm == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_GetFilesChmodRwxFullMap_Valid(t *testing.T) {
@@ -68,16 +69,16 @@ func Test_Cov7_GetFilesChmodRwxFullMap_Valid(t *testing.T) {
 	f := filepath.Join(dir, "test.txt")
 	_ = os.WriteFile(f, []byte("x"), 0644)
 	hm, err := chmodhelper.GetFilesChmodRwxFullMap([]string{f})
-	if err != nil || hm == nil {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || hm == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_GetFilesChmodRwxFullMap_Invalid(t *testing.T) {
 	hm, err := chmodhelper.GetFilesChmodRwxFullMap([]string{"/nonexistent/path/xyz123"})
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	_ = hm
 }
 
@@ -92,9 +93,9 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 		FilePath:  f,
 	}
 	initialized := rw.InitializeDefault(true)
-	if initialized.ParentDir == "" {
-		t.Fatal("expected parent dir")
-	}
+	actual := args.Map{"result": initialized.ParentDir == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected parent dir", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) {
@@ -106,9 +107,9 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultApplyChmod(t *testing.T) 
 		FilePath:  f,
 	}
 	initialized := rw.InitializeDefaultApplyChmod()
-	if initialized == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": initialized == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
@@ -121,24 +122,24 @@ func Test_Cov7_SimpleFileReaderWriter_IsExistAndParent(t *testing.T) {
 		ParentDir: dir,
 		FilePath:  f,
 	}
-	if !rw.IsExist() {
-		t.Fatal("expected exist")
-	}
-	if !rw.IsParentExist() {
-		t.Fatal("expected parent exist")
-	}
-	if rw.HasPathIssues() {
-		t.Fatal("expected no issues")
-	}
-	if rw.IsPathInvalid() {
-		t.Fatal("expected valid")
-	}
-	if rw.IsParentDirInvalid() {
-		t.Fatal("expected valid parent")
-	}
-	if rw.HasAnyIssues() {
-		t.Fatal("expected no issues")
-	}
+	actual := args.Map{"result": rw.IsExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected exist", actual)
+	actual := args.Map{"result": rw.IsParentExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected parent exist", actual)
+	actual := args.Map{"result": rw.HasPathIssues()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
+	actual := args.Map{"result": rw.IsPathInvalid()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid", actual)
+	actual := args.Map{"result": rw.IsParentDirInvalid()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid parent", actual)
+	actual := args.Map{"result": rw.HasAnyIssues()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
@@ -151,13 +152,13 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 		FilePath:  f,
 	}
 	err := rw.Write([]byte("hello"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	content, err := rw.Read()
-	if err != nil || string(content) != "hello" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || string(content) != "hello"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WriteString(t *testing.T) {
@@ -170,13 +171,13 @@ func Test_Cov7_SimpleFileReaderWriter_WriteString(t *testing.T) {
 		FilePath:  f,
 	}
 	err := rw.WriteString("world")
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	content, err := rw.ReadString()
-	if err != nil || content != "world" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || content != "world"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
@@ -190,13 +191,13 @@ func Test_Cov7_SimpleFileReaderWriter_ReadOnExist(t *testing.T) {
 	}
 	// File doesn't exist yet
 	bytes, err := rw.ReadOnExist()
-	if err != nil || bytes != nil {
-		t.Fatal("expected nil nil")
-	}
+	actual := args.Map{"result": err != nil || bytes != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil nil", actual)
 	content, err := rw.ReadStringOnExist()
-	if err != nil || content != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": err != nil || content != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WritePath(t *testing.T) {
@@ -209,9 +210,9 @@ func Test_Cov7_SimpleFileReaderWriter_WritePath(t *testing.T) {
 		FilePath:  f,
 	}
 	err := rw.WritePath(false, f, []byte("test"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
@@ -223,9 +224,9 @@ func Test_Cov7_SimpleFileReaderWriter_WriteRelativePath(t *testing.T) {
 		FilePath:  filepath.Join(dir, "dummy.txt"),
 	}
 	err := rw.WriteRelativePath(false, "rel.txt", []byte("data"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
@@ -233,13 +234,13 @@ func Test_Cov7_SimpleFileReaderWriter_JoinRelPath(t *testing.T) {
 		ParentDir: "/tmp/base",
 	}
 	p := rw.JoinRelPath("sub/file.txt")
-	if p == "" {
-		t.Fatal("expected path")
-	}
+	actual := args.Map{"result": p == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected path", actual)
 	p2 := rw.JoinRelPath("")
-	if p2 == "" {
-		t.Fatal("expected path")
-	}
+	actual := args.Map{"result": p2 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected path", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WriteAny(t *testing.T) {
@@ -253,9 +254,9 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAny(t *testing.T) {
 	}
 	type data struct{ Name string }
 	err := rw.WriteAny(&data{Name: "test"})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_WriteAnyLock(t *testing.T) {
@@ -269,9 +270,9 @@ func Test_Cov7_SimpleFileReaderWriter_WriteAnyLock(t *testing.T) {
 	}
 	type data struct{ Val int }
 	err := rw.WriteAnyLock(&data{Val: 42})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadLock(t *testing.T) {
@@ -285,9 +286,9 @@ func Test_Cov7_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 		FilePath:  f,
 	}
 	b, err := rw.ReadLock()
-	if err != nil || string(b) != "locked" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || string(b) != "locked"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
@@ -301,9 +302,9 @@ func Test_Cov7_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 		FilePath:  f,
 	}
 	s, err := rw.ReadStringLock()
-	if err != nil || s != "locked" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || s != "locked"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
@@ -317,9 +318,9 @@ func Test_Cov7_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 		FilePath:  f,
 	}
 	b, err := rw.ReadOnExistLock()
-	if err != nil || string(b) != "exists" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || string(b) != "exists"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
@@ -333,9 +334,9 @@ func Test_Cov7_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 		FilePath:  f,
 	}
 	s, err := rw.ReadStringOnExistLock()
-	if err != nil || s != "exists" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || s != "exists"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_String(t *testing.T) {
@@ -346,9 +347,9 @@ func Test_Cov7_SimpleFileReaderWriter_String(t *testing.T) {
 		FilePath:  "/tmp/test.txt",
 	}
 	s := rw.String()
-	if s == "" {
-		t.Fatal("expected non-empty string")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_StringFilePath(t *testing.T) {
@@ -359,9 +360,9 @@ func Test_Cov7_SimpleFileReaderWriter_StringFilePath(t *testing.T) {
 		FilePath:  "/tmp/test.txt",
 	}
 	s := rw.StringFilePath("/other/path.txt")
-	if s == "" {
-		t.Fatal("expected non-empty string")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ChmodApplier(t *testing.T) {
@@ -401,9 +402,9 @@ func Test_Cov7_SimpleFileReaderWriter_NewPath(t *testing.T) {
 		FilePath:  filepath.Join(dir, "orig.txt"),
 	}
 	newRw := rw.NewPath(false, filepath.Join(dir, "new.txt"))
-	if newRw == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": newRw == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
@@ -415,9 +416,9 @@ func Test_Cov7_SimpleFileReaderWriter_NewPathJoin(t *testing.T) {
 		FilePath:  filepath.Join(dir, "orig.txt"),
 	}
 	newRw := rw.NewPathJoin(false, "sub", "file.txt")
-	if newRw == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": newRw == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
@@ -429,9 +430,9 @@ func Test_Cov7_SimpleFileReaderWriter_InitializeDefaultNew(t *testing.T) {
 		FilePath:  filepath.Join(dir, "idn.txt"),
 	}
 	newRw := rw.InitializeDefaultNew()
-	if newRw == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": newRw == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_Set(t *testing.T) {
@@ -445,9 +446,9 @@ func Test_Cov7_SimpleFileReaderWriter_Set(t *testing.T) {
 	}
 	type data struct{ X int }
 	err := rw.Set(&data{X: 1})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_SetLock(t *testing.T) {
@@ -461,9 +462,9 @@ func Test_Cov7_SimpleFileReaderWriter_SetLock(t *testing.T) {
 	}
 	type data struct{ X int }
 	err := rw.SetLock(&data{X: 2})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_Get(t *testing.T) {
@@ -479,9 +480,9 @@ func Test_Cov7_SimpleFileReaderWriter_Get(t *testing.T) {
 	type data struct{ X int }
 	result := &data{}
 	err := rw.Get(result)
-	if err != nil || result.X != 42 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || result.X != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_GetLock(t *testing.T) {
@@ -497,9 +498,9 @@ func Test_Cov7_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	type data struct{ X int }
 	result := &data{}
 	err := rw.GetLock(result)
-	if err != nil || result.X != 99 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || result.X != 99}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_Expire(t *testing.T) {
@@ -513,9 +514,9 @@ func Test_Cov7_SimpleFileReaderWriter_Expire(t *testing.T) {
 		FilePath:  f,
 	}
 	rw.Expire()
-	if rw.IsExist() {
-		t.Fatal("expected removed")
-	}
+	actual := args.Map{"result": rw.IsExist()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected removed", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_Serialize(t *testing.T) {
@@ -529,9 +530,9 @@ func Test_Cov7_SimpleFileReaderWriter_Serialize(t *testing.T) {
 		FilePath:  f,
 	}
 	b, err := rw.Serialize()
-	if err != nil || len(b) == 0 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || len(b) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
@@ -545,9 +546,9 @@ func Test_Cov7_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 		FilePath:  f,
 	}
 	b, err := rw.SerializeLock()
-	if err != nil || len(b) == 0 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || len(b) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_Deserialize(t *testing.T) {
@@ -563,9 +564,9 @@ func Test_Cov7_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	type data struct{ X int }
 	result := &data{}
 	err := rw.Deserialize(result)
-	if err != nil || result.X != 10 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || result.X != 10}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
@@ -581,9 +582,9 @@ func Test_Cov7_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	type data struct{ X int }
 	result := &data{}
 	err := rw.DeserializeLock(result)
-	if err != nil || result.X != 20 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || result.X != 20}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadMust(t *testing.T) {
@@ -597,9 +598,9 @@ func Test_Cov7_SimpleFileReaderWriter_ReadMust(t *testing.T) {
 		FilePath:  f,
 	}
 	b := rw.ReadMust()
-	if string(b) != "must" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": string(b) != "must"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
 func Test_Cov7_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
@@ -613,7 +614,7 @@ func Test_Cov7_SimpleFileReaderWriter_ReadStringMust(t *testing.T) {
 		FilePath:  f,
 	}
 	s := rw.ReadStringMust()
-	if s != "strmust" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": s != "strmust"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }

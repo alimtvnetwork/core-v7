@@ -9,6 +9,7 @@ import (
 	"github.com/alimtvnetwork/core/corevalidator"
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
 	"github.com/alimtvnetwork/core/errcore"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -35,9 +36,9 @@ func Test_LineValidator_VerifyError_LineAndTextMismatch_PrintsDiff(t *testing.T)
 	err := v.VerifyError(params, 10, "actual-wrong-text")
 
 	// Assert
-	if err == nil {
-		t.Fatal("expected error for line+text mismatch")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for line+text mismatch", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -75,9 +76,9 @@ func Test_LineValidator_AllVerifyError_MultipleContents_PrintsDiff(t *testing.T)
 	err := v.AllVerifyError(params, items...)
 
 	// Assert
-	if err == nil {
-		t.Fatal("expected error for 3 mismatches")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for 3 mismatches", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -90,9 +91,9 @@ func Test_LineValidator_AllVerifyError_MultipleContents_PrintsDiff(t *testing.T)
 
 	errMsg := err.Error()
 	for _, expected := range []string{"wrong-1", "wrong-2", "wrong-3"} {
-		if !strings.Contains(errMsg, expected) {
-			t.Errorf("error should contain '%s', got:\n%s", expected, errMsg)
-		}
+		actual := args.Map{"result": strings.Contains(errMsg, expected)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "error should contain '', got:\n", actual)
 	}
 }
 
@@ -120,9 +121,9 @@ func Test_LineValidator_VerifyMany_CollectAll_PrintsDiff(t *testing.T) {
 
 	// isContinueOnError = true -> collect all
 	err := v.VerifyMany(true, params, items...)
-	if err == nil {
-		t.Fatal("expected errors for lines 1 and 3")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected errors for lines 1 and 3", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -134,9 +135,9 @@ func Test_LineValidator_VerifyMany_CollectAll_PrintsDiff(t *testing.T) {
 	}, "Contains 'ok'")
 
 	errMsg := err.Error()
-	if !strings.Contains(errMsg, "no match") {
-		t.Errorf("should mention 'no match': %s", errMsg)
-	}
+	actual := args.Map{"result": strings.Contains(errMsg, "no match")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should mention 'no match':", actual)
 }
 
 // ==========================================
@@ -168,9 +169,9 @@ func Test_LineValidator_VerifyFirstError_SpecificLineNumber_PrintsDiff(t *testin
 	err := v.VerifyFirstError(params, items...)
 
 	// The first item has LineNumber=0 but validator expects 2, so error
-	if err == nil {
-		t.Fatal("line 0 doesn't match expected line 2, should error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "line 0 doesn't match expected line 2, should error", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -217,9 +218,9 @@ func Test_LinesValidators_AllVerifyError_MultiValidator_PrintsDiff(t *testing.T)
 	}
 
 	err := lv.AllVerifyError(params, items...)
-	if err == nil {
-		t.Fatal("expected errors: 'beta' not in line 0, 'alpha' not in line 1")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected errors: 'beta' not in line 0, 'alpha' not in line 1", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -253,9 +254,9 @@ func Test_LinesValidators_IsMatchText_Multiple_PrintsDiff(t *testing.T) {
 	text := "hello universe"
 	result := lv.IsMatchText(text, true)
 
-	if result {
-		t.Error("'world' is not in 'hello universe', should return false")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "'world' is not in 'hello universe', should return false", actual)
 
 	diag := ValidatorDiffDiagnostics{
 		CaseIndex: 0,
@@ -275,9 +276,9 @@ func Test_ErrorToLinesLineDiff_NilError(t *testing.T) {
 	expected := []string{"line1", "line2"}
 	result := errcore.ErrorToLinesLineDiff(0, "nil error test", nil, expected)
 
-	if !strings.Contains(result, "MISSING EXPECTED") {
-		t.Errorf("nil error vs expected lines should show missing, got:\n%s", result)
-	}
+	actual := args.Map{"result": strings.Contains(result, "MISSING EXPECTED")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "nil error vs expected lines should show missing, got:\n", actual)
 
 	fmt.Print(result)
 }
@@ -288,12 +289,12 @@ func Test_ErrorToLinesLineDiff_WithError(t *testing.T) {
 
 	result := errcore.ErrorToLinesLineDiff(0, "error diff test", err, expected)
 
-	if !strings.Contains(result, "MISMATCH") {
-		t.Errorf("line 2 should be mismatch, got:\n%s", result)
-	}
-	if !strings.Contains(result, "Line") {
-		t.Error("should contain line number labels")
-	}
+	actual := args.Map{"result": strings.Contains(result, "MISMATCH")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "line 2 should be mismatch, got:\n", actual)
+	actual := args.Map{"result": strings.Contains(result, "Line")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should contain line number labels", actual)
 
 	fmt.Print(result)
 }

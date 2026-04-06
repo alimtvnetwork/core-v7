@@ -7,6 +7,7 @@ import (
 	"github.com/alimtvnetwork/core/coredata/corestr"
 	"github.com/alimtvnetwork/core/corevalidator"
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -16,18 +17,18 @@ import (
 func Test_LinesValidators_Count(t *testing.T) {
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{})
-	if lv.Count() != 1 {
-		t.Errorf("expected 1, got %d", lv.Count())
-	}
+	actual := args.Map{"result": lv.Count() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_LinesValidators_LastIndex(t *testing.T) {
 	lv := corevalidator.NewLinesValidators(2)
 	lv.Add(corevalidator.LineValidator{})
 	lv.Add(corevalidator.LineValidator{})
-	if lv.LastIndex() != 1 {
-		t.Errorf("expected 1, got %d", lv.LastIndex())
-	}
+	actual := args.Map{"result": lv.LastIndex() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_LinesValidators_Adds(t *testing.T) {
@@ -37,9 +38,9 @@ func Test_LinesValidators_Adds(t *testing.T) {
 		corevalidator.LineValidator{},
 		corevalidator.LineValidator{},
 	)
-	if lv.Length() != 3 {
-		t.Errorf("expected 3, got %d", lv.Length())
-	}
+	actual := args.Map{"result": lv.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_LinesValidators_String(t *testing.T) {
@@ -52,9 +53,9 @@ func Test_LinesValidators_String(t *testing.T) {
 		},
 	})
 	s := lv.String()
-	if s == "" {
-		t.Error("String should not be empty")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "String should not be empty", actual)
 }
 
 // ==========================================
@@ -66,9 +67,9 @@ func Test_LinesValidators_IsMatch_Empty(t *testing.T) {
 	items := []corestr.TextWithLineNumber{
 		{Text: "hello", LineNumber: 0},
 	}
-	if !lv.IsMatch(false, true, items...) {
-		t.Error("empty validators should match")
-	}
+	actual := args.Map{"result": lv.IsMatch(false, true, items...)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty validators should match", actual)
 }
 
 func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
@@ -80,9 +81,9 @@ func Test_LinesValidators_IsMatch_NoContentsSkip(t *testing.T) {
 			SearchAs: stringcompareas.Equal,
 		},
 	})
-	if !lv.IsMatch(true, true) {
-		t.Error("no contents with skip should match")
-	}
+	actual := args.Map{"result": lv.IsMatch(true, true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "no contents with skip should match", actual)
 }
 
 func Test_LinesValidators_IsMatch_NoContentsNoSkip(t *testing.T) {
@@ -94,9 +95,9 @@ func Test_LinesValidators_IsMatch_NoContentsNoSkip(t *testing.T) {
 			SearchAs: stringcompareas.Equal,
 		},
 	})
-	if lv.IsMatch(false, true) {
-		t.Error("no contents without skip should not match")
-	}
+	actual := args.Map{"result": lv.IsMatch(false, true)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "no contents without skip should not match", actual)
 }
 
 func Test_LinesValidators_IsMatch_AllMatch(t *testing.T) {
@@ -113,9 +114,9 @@ func Test_LinesValidators_IsMatch_AllMatch(t *testing.T) {
 		{Text: "ok", LineNumber: 0},
 		{Text: "ok", LineNumber: 1},
 	}
-	if !lv.IsMatch(false, true, items...) {
-		t.Error("all matching should return true")
-	}
+	actual := args.Map{"result": lv.IsMatch(false, true, items...)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "all matching should return true", actual)
 }
 
 func Test_LinesValidators_IsMatch_OneFails(t *testing.T) {
@@ -132,9 +133,9 @@ func Test_LinesValidators_IsMatch_OneFails(t *testing.T) {
 		{Text: "ok", LineNumber: 0},
 		{Text: "nope", LineNumber: 1},
 	}
-	if lv.IsMatch(false, true, items...) {
-		t.Error("one failing should return false")
-	}
+	actual := args.Map{"result": lv.IsMatch(false, true, items...)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one failing should return false", actual)
 }
 
 // ==========================================
@@ -145,9 +146,9 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Empty(t *testing.T) 
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
 	err := lv.VerifyFirstDefaultLineNumberError(params)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_LinesValidators_VerifyFirstDefaultLineNumberError_SkipEmpty(t *testing.T) {
@@ -163,9 +164,9 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_SkipEmpty(t *testing
 		IsSkipCompareOnActualEmpty: true,
 	}
 	err := lv.VerifyFirstDefaultLineNumberError(params)
-	if err != nil {
-		t.Errorf("skip empty should return nil: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "skip empty should return nil:", actual)
 }
 
 func Test_LinesValidators_VerifyFirstDefaultLineNumberError_NoSkipEmpty(t *testing.T) {
@@ -181,9 +182,9 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_NoSkipEmpty(t *testi
 		IsSkipCompareOnActualEmpty: false,
 	}
 	err := lv.VerifyFirstDefaultLineNumberError(params)
-	if err == nil {
-		t.Error("empty contents without skip should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty contents without skip should return error", actual)
 }
 
 func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Pass(t *testing.T) {
@@ -204,9 +205,9 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Pass(t *testing.T) {
 		{Text: "ok", LineNumber: 0},
 	}
 	err := lv.VerifyFirstDefaultLineNumberError(params, items...)
-	if err != nil {
-		t.Errorf("match should pass: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "match should pass:", actual)
 }
 
 func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Fail(t *testing.T) {
@@ -227,9 +228,9 @@ func Test_LinesValidators_VerifyFirstDefaultLineNumberError_Fail(t *testing.T) {
 		{Text: "bad", LineNumber: 0},
 	}
 	err := lv.VerifyFirstDefaultLineNumberError(params, items...)
-	if err == nil {
-		t.Error("mismatch should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch should return error", actual)
 }
 
 // ==========================================
@@ -240,9 +241,9 @@ func Test_LinesValidators_AllVerifyError_Empty(t *testing.T) {
 	lv := corevalidator.NewLinesValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
 	err := lv.AllVerifyError(params)
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_LinesValidators_AllVerifyError_SkipEmpty(t *testing.T) {
@@ -258,9 +259,9 @@ func Test_LinesValidators_AllVerifyError_SkipEmpty(t *testing.T) {
 		IsSkipCompareOnActualEmpty: true,
 	}
 	err := lv.AllVerifyError(params)
-	if err != nil {
-		t.Errorf("skip empty should return nil: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "skip empty should return nil:", actual)
 }
 
 func Test_LinesValidators_AllVerifyError_NoSkipEmpty(t *testing.T) {
@@ -276,9 +277,9 @@ func Test_LinesValidators_AllVerifyError_NoSkipEmpty(t *testing.T) {
 		IsSkipCompareOnActualEmpty: false,
 	}
 	err := lv.AllVerifyError(params)
-	if err == nil {
-		t.Error("empty contents without skip should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty contents without skip should return error", actual)
 }
 
 func Test_LinesValidators_AllVerifyError_Pass(t *testing.T) {
@@ -299,9 +300,9 @@ func Test_LinesValidators_AllVerifyError_Pass(t *testing.T) {
 		{Text: "ok", LineNumber: 0},
 	}
 	err := lv.AllVerifyError(params, items...)
-	if err != nil {
-		t.Errorf("match should pass: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "match should pass:", actual)
 }
 
 func Test_LinesValidators_AllVerifyError_Fail(t *testing.T) {
@@ -322,9 +323,9 @@ func Test_LinesValidators_AllVerifyError_Fail(t *testing.T) {
 		{Text: "bad", LineNumber: 0},
 	}
 	err := lv.AllVerifyError(params, items...)
-	if err == nil {
-		t.Error("mismatch should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch should return error", actual)
 }
 
 func Test_LineValidator_AllVerifyError_CollectsMultipleErrors(t *testing.T) {
@@ -351,15 +352,15 @@ func Test_LineValidator_AllVerifyError_CollectsMultipleErrors(t *testing.T) {
 	err := lv.AllVerifyError(params, items...)
 
 	// Assert: error should be non-nil and contain all 3 failures
-	if err == nil {
-		t.Fatal("AllVerifyError should return error when all items fail")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllVerifyError should return error when all items fail", actual)
 
 	errMsg := err.Error()
 	for _, expected := range []string{"bad1", "bad2", "bad3"} {
-		if !strings.Contains(errMsg, expected) {
-			t.Errorf("AllVerifyError should collect all errors, missing '%s' in:\n%s", expected, errMsg)
-		}
+		actual := args.Map{"result": strings.Contains(errMsg, expected)}
+		expected := args.Map{"result": true}
+		expected.ShouldBeEqual(t, 0, "AllVerifyError should collect all errors, missing '' in:\n", actual)
 	}
 }
 
@@ -387,14 +388,14 @@ func Test_LineValidator_AllVerifyError_FirstFailOthersPass(t *testing.T) {
 	err := lv.AllVerifyError(params, items...)
 
 	// Assert: should still report the one failure
-	if err == nil {
-		t.Fatal("AllVerifyError should return error when any item fails")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AllVerifyError should return error when any item fails", actual)
 
 	errMsg := err.Error()
-	if !strings.Contains(errMsg, "bad") {
-		t.Errorf("error should mention the failed content 'bad', got:\n%s", errMsg)
-	}
+	actual := args.Map{"result": strings.Contains(errMsg, "bad")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "error should mention the failed content 'bad', got:\n", actual)
 }
 
 // ==========================================
@@ -404,7 +405,7 @@ func Test_LineValidator_AllVerifyError_FirstFailOthersPass(t *testing.T) {
 func Test_LinesValidators_AsBasicSliceContractsBinder(t *testing.T) {
 	lv := corevalidator.NewLinesValidators(1)
 	binder := lv.AsBasicSliceContractsBinder()
-	if binder == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": binder == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }

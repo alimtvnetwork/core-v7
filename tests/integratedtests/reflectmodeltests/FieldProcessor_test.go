@@ -3,54 +3,55 @@ package reflectmodeltests
 import (
 	"reflect"
 	"testing"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ===== FieldProcessor Tests =====
 
 func Test_FieldProcessor_IsFieldType_Match(t *testing.T) {
 	fp := newFieldProcessor("Name", 0)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Name")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 
-	if !fp.IsFieldType(reflect.TypeOf("")) {
-		t.Error("expected IsFieldType(string) = true for Name field")
-	}
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(""))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsFieldType(string) = true for Name field", actual)
 }
 
 func Test_FieldProcessor_IsFieldType_NoMatch(t *testing.T) {
 	fp := newFieldProcessor("Name", 0)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Name")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 
-	if fp.IsFieldType(reflect.TypeOf(0)) {
-		t.Error("expected IsFieldType(int) = false for Name (string) field")
-	}
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsFieldType(int) = false for Name (string) field", actual)
 }
 
 // Note: IsFieldType nil receiver test migrated to FieldProcessor_NilReceiver_testcases.go
 
 func Test_FieldProcessor_IsFieldKind_Match(t *testing.T) {
 	fp := newFieldProcessor("Age", 1)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Age")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Age", actual)
 
-	if !fp.IsFieldKind(reflect.Int) {
-		t.Error("expected IsFieldKind(Int) = true for Age field")
-	}
+	actual := args.Map{"result": fp.IsFieldKind(reflect.Int)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected IsFieldKind(Int) = true for Age field", actual)
 }
 
 func Test_FieldProcessor_IsFieldKind_NoMatch(t *testing.T) {
 	fp := newFieldProcessor("Age", 1)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Age")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Age", actual)
 
-	if fp.IsFieldKind(reflect.String) {
-		t.Error("expected IsFieldKind(String) = false for Age (int) field")
-	}
+	actual := args.Map{"result": fp.IsFieldKind(reflect.String)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected IsFieldKind(String) = false for Age (int) field", actual)
 }
 
 // Note: IsFieldKind nil receiver test migrated to FieldProcessor_NilReceiver_testcases.go
@@ -66,34 +67,34 @@ func Test_FieldProcessor_NilReceiver(t *testing.T) {
 
 func Test_FieldProcessor_BoolField(t *testing.T) {
 	fp := newFieldProcessor("Active", 2)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Active")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Active", actual)
 
-	if !fp.IsFieldKind(reflect.Bool) {
-		t.Error("expected Active field to be Bool kind")
-	}
+	actual := args.Map{"result": fp.IsFieldKind(reflect.Bool)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Active field to be Bool kind", actual)
 
-	if !fp.IsFieldType(reflect.TypeOf(true)) {
-		t.Error("expected Active field to match bool type")
-	}
+	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(true))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected Active field to match bool type", actual)
 }
 
 func Test_FieldProcessor_FieldData(t *testing.T) {
 	fp := newFieldProcessor("Name", 0)
-	if fp == nil {
-		t.Fatal("failed to create FieldProcessor for Name")
-	}
+	actual := args.Map{"result": fp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "failed to create FieldProcessor for Name", actual)
 
-	if fp.Name != "Name" {
-		t.Errorf("Name = %q, want %q", fp.Name, "Name")
-	}
+	actual := args.Map{"result": fp.Name != "Name"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Name =, want", fp.Name, "Name", actual)
 
-	if fp.Index != 0 {
-		t.Errorf("Index = %d, want 0", fp.Index)
-	}
+	actual := args.Map{"result": fp.Index != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Index =, want 0", actual)
 
-	if fp.Field.Name != "Name" {
-		t.Errorf("Field.Name = %q, want %q", fp.Field.Name, "Name")
-	}
+	actual := args.Map{"result": fp.Field.Name != "Name"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Field.Name =, want", fp.Field.Name, "Name", actual)
 }
