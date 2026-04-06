@@ -92,6 +92,23 @@ def transform_simple_bool_if(lines: list, i: int, indent: str, stats: TransformS
     line = lines[i].rstrip()
     stripped = line.strip()
 
+    # --- Single-line: if !expr { t.Fatal() } (no message) ---
+    m_noarg = re.match(
+        r'^(\s*)if\s+(!?)(.+?)\s*\{\s*t\.(Fatal|Error)\(\)\s*\}',
+        line,
+    )
+    if m_noarg:
+        ws, neg, expr, _ = m_noarg.groups()
+        expected_val = "true" if neg == "!" else "false"
+        expr = expr.strip()
+        new_lines = [
+            f'{ws}actual := args.Map{{"result": {expr}}}',
+            f'{ws}expected := args.Map{{"result": {expected_val}}}',
+            f'{ws}expected.ShouldBeEqual(t, 0, "assertion", actual)',
+        ]
+        stats.patterns_transformed += 1
+        return (i, i, new_lines)
+
     # --- Single-line: if !expr { t.Error("msg") } ---
     m = re.match(
         r'^(\s*)if\s+(!?)(.+?)\s*\{\s*t\.(Error|Errorf|Fatal|Fatalf)\((".*?")\s*\)\s*\}',
