@@ -748,9 +748,13 @@ func Test_C39_SimpleSlice_JSON(t *testing.T) {
 	safeTest(t, "Test_C39_SimpleSlice_JSON", func() {
 		ss := corestr.New.SimpleSlice.Lines("a")
 		j := ss.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := ss.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 		actual := args.Map{"result": ss.JsonModelAny() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
@@ -1408,9 +1412,13 @@ func Test_C39_SSO_JSON(t *testing.T) {
 	safeTest(t, "Test_C39_SSO_JSON", func() {
 		sso := corestr.New.SimpleStringOnce.Init("hi")
 		j := sso.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := sso.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 		actual := args.Map{"result": sso.JsonModelAny() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)

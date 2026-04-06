@@ -248,9 +248,13 @@ func Test_C40_ValidValue_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_ValidValue_JSON", func() {
 		v := corestr.NewValidValue("hi")
 		j := v.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := v.JsonPtr()
-		if jp.HasError() { t.Fatal(jp.Error) }
+		actual := args.Map{"hasError": jp.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
 		_, err := v.Serialize()
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
@@ -523,7 +527,9 @@ func Test_C40_KeyValuePair_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_KeyValuePair_JSON", func() {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		j := kv.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kv.JsonPtr()
 		_, err := kv.Serialize()
 		actual := args.Map{"result": err}
@@ -647,7 +653,9 @@ func Test_C40_KeyValueCollection_JSON(t *testing.T) {
 		kvc := corestr.New.KeyValues.Cap(2)
 		kvc.Add("a", "1")
 		j := kvc.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kvc.JsonPtr()
 		_ = kvc.JsonModel()
 		_ = kvc.JsonModelAny()
@@ -740,7 +748,9 @@ func Test_C40_KeyAnyValuePair_JSON(t *testing.T) {
 	safeTest(t, "Test_C40_KeyAnyValuePair_JSON", func() {
 		kav := corestr.KeyAnyValuePair{Key: "k", Value: "v"}
 		j := kav.Json()
-		if j.HasError() { t.Fatal(j.Error) }
+		actual := args.Map{"hasError": j.HasError()}
+		expected := args.Map{"hasError": false}
+		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		_ = kav.JsonPtr()
 		actual := args.Map{"result": kav.AsJsonContractsBinder() == nil}
 		expected := args.Map{"result": false}
