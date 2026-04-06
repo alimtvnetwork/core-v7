@@ -10,6 +10,7 @@ import (
 	"github.com/alimtvnetwork/core/chmodhelper/chmodclasstype"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
 	"github.com/smartystreets/goconvey/convey"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -21,9 +22,9 @@ import (
 func Test_Cov17_RwxWrapper_VerifyPaths_InvalidPaths(t *testing.T) {
 	// Arrange
 	wrapper, err := chmodhelper.New.RwxWrapper.UsingVariant(chmodhelper.X755)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 
 	// Act
 	verifyErr := wrapper.VerifyPaths(false, "/nonexistent/path1")

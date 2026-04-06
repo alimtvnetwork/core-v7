@@ -165,9 +165,9 @@ func Test_Src02_PrintErrorLineDiff(t *testing.T) {
 		errcore.PrintErrorLineDiff(0, "test", errors.New("a"), []string{"b"})
 	})
 	// Assert
-	if !noPanic {
-		t.Fatal("unexpected panic")
-	}
+	actual := args.Map{"result": noPanic}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected panic", actual)
 }
 
 func Test_Src02_SliceDiffSummary_Match(t *testing.T) {
@@ -193,9 +193,9 @@ func Test_Src02_PrintDiffOnMismatch_NoMismatch(t *testing.T) {
 	noPanic := !callPanicsErrcore(func() {
 		errcore.PrintDiffOnMismatch(0, "test", []string{"a"}, []string{"a"})
 	})
-	if !noPanic {
-		t.Fatal("unexpected panic")
-	}
+	actual := args.Map{"result": noPanic}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected panic", actual)
 }
 
 func Test_Src02_PrintDiffOnMismatch_WithMismatch(t *testing.T) {
@@ -203,9 +203,9 @@ func Test_Src02_PrintDiffOnMismatch_WithMismatch(t *testing.T) {
 	noPanic := !callPanicsErrcore(func() {
 		errcore.PrintDiffOnMismatch(0, "test", []string{"a"}, []string{"b"}, "ctx1")
 	})
-	if !noPanic {
-		t.Fatal("unexpected panic")
-	}
+	actual := args.Map{"result": noPanic}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "unexpected panic", actual)
 }
 
 func Test_Src02_MapMismatchError(t *testing.T) {

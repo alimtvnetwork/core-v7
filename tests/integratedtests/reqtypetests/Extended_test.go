@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reqtype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -11,60 +12,60 @@ import (
 // ==========================================
 
 func Test_Request_IsNone_Ext(t *testing.T) {
-	if !reqtype.Invalid.IsNone() {
-		t.Error("Invalid should be None")
-	}
-	if reqtype.Create.IsNone() {
-		t.Error("Create should not be None")
-	}
+	actual := args.Map{"result": reqtype.Invalid.IsNone()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be None", actual)
+	actual := args.Map{"result": reqtype.Create.IsNone()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should not be None", actual)
 }
 
 func Test_Request_IsStopEnableStart_Ext(t *testing.T) {
-	if reqtype.Create.IsStopEnableStart() {
-		t.Error("should return false")
-	}
+	actual := args.Map{"result": reqtype.Create.IsStopEnableStart()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return false", actual)
 }
 
 func Test_Request_IsStopDisable_Ext(t *testing.T) {
-	if reqtype.Create.IsStopDisable() {
-		t.Error("should return false")
-	}
+	actual := args.Map{"result": reqtype.Create.IsStopDisable()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return false", actual)
 }
 
 func Test_Request_IsUndefined_Ext(t *testing.T) {
-	if !reqtype.Invalid.IsUndefined() {
-		t.Error("Invalid should be undefined")
-	}
+	actual := args.Map{"result": reqtype.Invalid.IsUndefined()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be undefined", actual)
 }
 
 func Test_Request_ValueUInt16_Ext(t *testing.T) {
 	r := reqtype.Create.ValueUInt16()
-	if r != 1 {
-		t.Errorf("expected 1, got %d", r)
-	}
+	actual := args.Map{"result": r != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Request_IntegerEnumRanges_Ext(t *testing.T) {
 	r := reqtype.Create.IntegerEnumRanges()
-	if len(r) == 0 {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": len(r) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Request_MinMaxAny_Ext(t *testing.T) {
 	min, max := reqtype.Create.MinMaxAny()
-	if min == nil || max == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": min == nil || max == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_Request_MinMaxValueString_Ext(t *testing.T) {
-	if reqtype.Create.MinValueString() == "" {
-		t.Error("should return non-empty")
-	}
-	if reqtype.Create.MaxValueString() == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": reqtype.Create.MinValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
+	actual := args.Map{"result": reqtype.Create.MaxValueString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Request_MinMaxInt_Ext(t *testing.T) {
@@ -74,63 +75,63 @@ func Test_Request_MinMaxInt_Ext(t *testing.T) {
 
 func Test_Request_RangesDynamicMap_Ext(t *testing.T) {
 	m := reqtype.Create.RangesDynamicMap()
-	if len(m) == 0 {
-		t.Error("should return non-empty map")
-	}
+	actual := args.Map{"result": len(m) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty map", actual)
 }
 
 func Test_Request_IsNotOverrideOrOverwriteOrEnforce_Ext(t *testing.T) {
-	if !reqtype.Create.IsNotOverrideOrOverwriteOrEnforce() {
-		t.Error("Create should not match override group")
-	}
-	if reqtype.Override.IsNotOverrideOrOverwriteOrEnforce() {
-		t.Error("Override should match override group")
-	}
+	actual := args.Map{"result": reqtype.Create.IsNotOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should not match override group", actual)
+	actual := args.Map{"result": reqtype.Override.IsNotOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Override should match override group", actual)
 }
 
 func Test_Request_IsOverwrite_Ext(t *testing.T) {
-	if !reqtype.Overwrite.IsOverwrite() {
-		t.Error("Overwrite should match")
-	}
+	actual := args.Map{"result": reqtype.Overwrite.IsOverwrite()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Overwrite should match", actual)
 }
 
 func Test_Request_IsOverride_Ext(t *testing.T) {
-	if !reqtype.Override.IsOverride() {
-		t.Error("Override should match")
-	}
+	actual := args.Map{"result": reqtype.Override.IsOverride()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Override should match", actual)
 }
 
 func Test_Request_IsEnforce_Ext(t *testing.T) {
-	if !reqtype.Enforce.IsEnforce() {
-		t.Error("Enforce should match")
-	}
+	actual := args.Map{"result": reqtype.Enforce.IsEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Enforce should match", actual)
 }
 
 func Test_Request_IsValueEqual_Ext(t *testing.T) {
-	if !reqtype.Create.IsValueEqual(byte(reqtype.Create)) {
-		t.Error("should be equal")
-	}
+	actual := args.Map{"result": reqtype.Create.IsValueEqual(byte(reqtype.Create))}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_Request_IsOnExistOrSkipOnNonExistLogically_Ext(t *testing.T) {
-	if !reqtype.ExistCheck.IsOnExistOrSkipOnNonExistLogically() {
-		t.Error("ExistCheck should match")
-	}
+	actual := args.Map{"result": reqtype.ExistCheck.IsOnExistOrSkipOnNonExistLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "ExistCheck should match", actual)
 }
 
 func Test_Request_IsReadOrUpdateLogically_Ext(t *testing.T) {
-	if !reqtype.Read.IsReadOrUpdateLogically() {
-		t.Error("Read should match")
-	}
+	actual := args.Map{"result": reqtype.Read.IsReadOrUpdateLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Read should match", actual)
 }
 
 func Test_Request_IsRestartOrReload_Ext(t *testing.T) {
-	if !reqtype.Restart.IsRestartOrReload() {
-		t.Error("Restart should match")
-	}
-	if !reqtype.Reload.IsRestartOrReload() {
-		t.Error("Reload should match")
-	}
+	actual := args.Map{"result": reqtype.Restart.IsRestartOrReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Restart should match", actual)
+	actual := args.Map{"result": reqtype.Reload.IsRestartOrReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Reload should match", actual)
 }
 
 func Test_Request_OnlySupportedErr_Ext(t *testing.T) {
@@ -192,9 +193,9 @@ func Test_Request_OnlySupportedErr_Ext(t *testing.T) {
 		"Enforce",
 	}
 	err := reqtype.Create.OnlySupportedErr(allNames...)
-	if err != nil {
-		t.Errorf("all names supported should not error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "all names supported should not error:", actual)
 }
 
 // ==========================================
@@ -203,16 +204,16 @@ func Test_Request_OnlySupportedErr_Ext(t *testing.T) {
 
 func Test_RangesOnlySupportedFor_Empty(t *testing.T) {
 	err := reqtype.RangesOnlySupportedFor("msg")
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_RangesOnlySupportedFor_NonEmpty(t *testing.T) {
 	err := reqtype.RangesOnlySupportedFor("msg", reqtype.Create, reqtype.Read)
-	if err == nil {
-		t.Error("should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
 // ==========================================
@@ -221,23 +222,23 @@ func Test_RangesOnlySupportedFor_NonEmpty(t *testing.T) {
 
 func Test_RangesString_Ext(t *testing.T) {
 	r := reqtype.RangesString(", ", reqtype.Create, reqtype.Read)
-	if r == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": r == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_RangesStrings_Ext(t *testing.T) {
 	r := reqtype.RangesStrings(reqtype.Create, reqtype.Read)
-	if len(r) != 2 {
-		t.Errorf("expected 2, got %d", len(r))
-	}
+	actual := args.Map{"result": len(r) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_RangesStringDefaultJoiner_Ext(t *testing.T) {
 	r := reqtype.RangesStringDefaultJoiner(reqtype.Create, reqtype.Read)
-	if r == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": r == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -246,16 +247,16 @@ func Test_RangesStringDefaultJoiner_Ext(t *testing.T) {
 
 func Test_Request_Min_Ext(t *testing.T) {
 	m := reqtype.Min()
-	if m != reqtype.Invalid {
-		t.Errorf("expected Invalid")
-	}
+	actual := args.Map{"result": m != reqtype.Invalid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected Invalid", actual)
 }
 
 func Test_Request_Max_Ext(t *testing.T) {
 	m := reqtype.Max()
-	if m == reqtype.Invalid {
-		t.Error("max should not be Invalid")
-	}
+	actual := args.Map{"result": m == reqtype.Invalid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "max should not be Invalid", actual)
 }
 
 // ==========================================
@@ -264,30 +265,30 @@ func Test_Request_Max_Ext(t *testing.T) {
 
 func Test_RangesNotMeet_Ext(t *testing.T) {
 	r := reqtype.RangesNotMeet("msg", reqtype.Create, reqtype.Read)
-	if r == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": r == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_RangesNotMeetError_Ext(t *testing.T) {
 	err := reqtype.RangesNotMeetError("msg", reqtype.Create, reqtype.Read)
-	if err == nil {
-		t.Error("should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
 func Test_RangesNotSupportedFor_Empty_Ext(t *testing.T) {
 	err := reqtype.RangesNotSupportedFor("msg")
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 func Test_RangesNotSupportedFor_NonEmpty_Ext(t *testing.T) {
 	err := reqtype.RangesNotSupportedFor("msg", reqtype.Create)
-	if err == nil {
-		t.Error("should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
 // ==========================================
@@ -296,9 +297,9 @@ func Test_RangesNotSupportedFor_NonEmpty_Ext(t *testing.T) {
 
 func Test_RangesInvalidErr_Ext(t *testing.T) {
 	err := reqtype.RangesInvalidErr()
-	if err == nil {
-		t.Error("should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
 // ==========================================
@@ -307,9 +308,9 @@ func Test_RangesInvalidErr_Ext(t *testing.T) {
 
 func Test_RangesInBetween_Ext(t *testing.T) {
 	r := reqtype.RangesInBetween(reqtype.Create, reqtype.Read)
-	if len(r) == 0 {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": len(r) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -318,12 +319,12 @@ func Test_RangesInBetween_Ext(t *testing.T) {
 
 func Test_ResultStatus_Ext(t *testing.T) {
 	rs := reqtype.ResultStatus{}
-	if rs.Error != nil {
-		t.Error("default should not have error")
-	}
-	if rs.IsSuccess {
-		t.Error("default should not be success")
-	}
+	actual := args.Map{"result": rs.Error != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "default should not have error", actual)
+	actual := args.Map{"result": rs.IsSuccess}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "default should not be success", actual)
 }
 
 // ==========================================
@@ -332,9 +333,9 @@ func Test_ResultStatus_Ext(t *testing.T) {
 
 func Test_Request_OnlySupportedMsgErr_Ext(t *testing.T) {
 	err := reqtype.Create.OnlySupportedMsgErr("test", "NonExistent")
-	if err == nil {
-		t.Error("should return error for unsupported name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return error for unsupported name", actual)
 }
 
 // ==========================================
@@ -343,16 +344,16 @@ func Test_Request_OnlySupportedMsgErr_Ext(t *testing.T) {
 
 func Test_RangesNotMeet_Empty_Ext(t *testing.T) {
 	r := reqtype.RangesNotMeet("msg")
-	if r != "" {
-		t.Error("empty should return empty string")
-	}
+	actual := args.Map{"result": r != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty string", actual)
 }
 
 func Test_RangesNotMeetError_Empty_Ext(t *testing.T) {
 	err := reqtype.RangesNotMeetError("msg")
-	if err != nil {
-		t.Error("empty should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 }
 
 // ==========================================
@@ -361,9 +362,9 @@ func Test_RangesNotMeetError_Empty_Ext(t *testing.T) {
 
 func Test_RangesStrings_Empty_Ext(t *testing.T) {
 	r := reqtype.RangesStrings()
-	if len(r) != 0 {
-		t.Errorf("expected 0, got %d", len(r))
-	}
+	actual := args.Map{"result": len(r) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ==========================================
@@ -372,12 +373,12 @@ func Test_RangesStrings_Empty_Ext(t *testing.T) {
 
 func Test_Request_IsAnyHttpMethod_Ext(t *testing.T) {
 	name := reqtype.GetHttp.Name()
-	if !reqtype.GetHttp.IsAnyHttpMethod(name) {
-		t.Error("GetHttp should match its own name")
-	}
-	if reqtype.Create.IsAnyHttpMethod("Create") {
-		t.Error("Create should not be HTTP method")
-	}
+	actual := args.Map{"result": reqtype.GetHttp.IsAnyHttpMethod(name)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "GetHttp should match its own name", actual)
+	actual := args.Map{"result": reqtype.Create.IsAnyHttpMethod("Create")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Create should not be HTTP method", actual)
 }
 
 // ==========================================
@@ -385,16 +386,16 @@ func Test_Request_IsAnyHttpMethod_Ext(t *testing.T) {
 // ==========================================
 
 func Test_Request_IsEnumEqual_Ext(t *testing.T) {
-	if !reqtype.Create.IsEnumEqual(reqtype.Create.AsBasicEnumContractsBinder()) {
-		t.Error("should be equal to self")
-	}
+	actual := args.Map{"result": reqtype.Create.IsEnumEqual(reqtype.Create.AsBasicEnumContractsBinder())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal to self", actual)
 }
 
 func Test_Request_IsAnyEnumsEqual_Ext(t *testing.T) {
 	r := reqtype.Create
-	if !r.IsAnyEnumsEqual(reqtype.Read.AsBasicEnumContractsBinder(), reqtype.Create.AsBasicEnumContractsBinder()) {
-		t.Error("should match Create")
-	}
+	actual := args.Map{"result": r.IsAnyEnumsEqual(reqtype.Read.AsBasicEnumContractsBinder(), reqtype.Create.AsBasicEnumContractsBinder())}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should match Create", actual)
 }
 
 // ==========================================
@@ -410,21 +411,21 @@ func Test_Request_MinByte_Ext(t *testing.T) {
 // ==========================================
 
 func Test_Request_NameValue_Ext(t *testing.T) {
-	if reqtype.Create.NameValue() == "" {
-		t.Error("NameValue should not be empty")
-	}
+	actual := args.Map{"result": reqtype.Create.NameValue() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NameValue should not be empty", actual)
 }
 
 func Test_Request_RangeNamesCsv_Ext(t *testing.T) {
-	if reqtype.Create.RangeNamesCsv() == "" {
-		t.Error("RangeNamesCsv should not be empty")
-	}
+	actual := args.Map{"result": reqtype.Create.RangeNamesCsv() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "RangeNamesCsv should not be empty", actual)
 }
 
 func Test_Request_IsUninitialized_Ext(t *testing.T) {
-	if !reqtype.Invalid.IsUninitialized() {
-		t.Error("Invalid should be uninitialized")
-	}
+	actual := args.Map{"result": reqtype.Invalid.IsUninitialized()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Invalid should be uninitialized", actual)
 }
 
 // ==========================================
@@ -433,20 +434,20 @@ func Test_Request_IsUninitialized_Ext(t *testing.T) {
 
 func Test_Request_CurrentNotImpl_Ext(t *testing.T) {
 	err := reqtype.Create.CurrentNotImpl(nil, "test")
-	if err == nil {
-		t.Error("CurrentNotImpl should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurrentNotImpl should return error", actual)
 	err = reqtype.Create.CurrentNotImpl("ref", "test")
-	if err == nil {
-		t.Error("CurrentNotImpl with ref should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurrentNotImpl with ref should return error", actual)
 }
 
 func Test_Request_NotSupportedErr_Ext(t *testing.T) {
 	err := reqtype.Create.NotSupportedErr("not supported", "ref")
-	if err == nil {
-		t.Error("NotSupportedErr should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NotSupportedErr should return error", actual)
 }
 
 // ==========================================
@@ -454,91 +455,91 @@ func Test_Request_NotSupportedErr_Ext(t *testing.T) {
 // ==========================================
 
 func Test_Request_IsEditOrUpdateLogically_Ext(t *testing.T) {
-	if !reqtype.Update.IsEditOrUpdateLogically() {
-		t.Error("Update should match")
-	}
+	actual := args.Map{"result": reqtype.Update.IsEditOrUpdateLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Update should match", actual)
 }
 
 // Additional: IsCreateOrUpdateLogically
 func Test_Request_IsCreateOrUpdateLogically_Ext(t *testing.T) {
-	if !reqtype.Create.IsCreateOrUpdateLogically() {
-		t.Error("Create should match")
-	}
+	actual := args.Map{"result": reqtype.Create.IsCreateOrUpdateLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Create should match", actual)
 }
 
 // Additional: IsNotCrudOnlyLogically
 func Test_Request_IsNotCrudOnlyLogically_Ext(t *testing.T) {
-	if reqtype.Read.IsNotCrudOnlyLogically() {
-		t.Error("Read is CRUD, should not return true")
-	}
-	if !reqtype.Touch.IsNotCrudOnlyLogically() {
-		t.Error("Touch is not CRUD, should return true")
-	}
+	actual := args.Map{"result": reqtype.Read.IsNotCrudOnlyLogically()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Read is CRUD, should not return true", actual)
+	actual := args.Map{"result": reqtype.Touch.IsNotCrudOnlyLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "Touch is not CRUD, should return true", actual)
 }
 
 // Additional: IsOnExistCheckLogically
 func Test_Request_IsOnExistCheckLogically_Ext(t *testing.T) {
-	if !reqtype.ExistCheck.IsOnExistCheckLogically() {
-		t.Error("ExistCheck should match")
-	}
+	actual := args.Map{"result": reqtype.ExistCheck.IsOnExistCheckLogically()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "ExistCheck should match", actual)
 }
 
 // Additional: DynamicAction
 func Test_Request_IsDynamicAction_Ext(t *testing.T) {
-	if reqtype.DynamicAction.IsValid() == false {
-		t.Error("DynamicAction should be valid")
-	}
+	actual := args.Map{"result": reqtype.DynamicAction.IsValid() == false}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "DynamicAction should be valid", actual)
 }
 
 // Additional: IsInBetween edges
 func Test_Request_IsInBetween_NotInRange_Ext(t *testing.T) {
-	if reqtype.Enforce.IsInBetween(reqtype.Create, reqtype.Delete) {
-		t.Error("Enforce should not be between Create and Delete")
-	}
+	actual := args.Map{"result": reqtype.Enforce.IsInBetween(reqtype.Create, reqtype.Delete)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Enforce should not be between Create and Delete", actual)
 }
 
 // Additional: IsAnyOfReqs empty
 func Test_Request_IsAnyOfReqs_Empty_Ext(t *testing.T) {
-	if !reqtype.Create.IsAnyOfReqs() {
-		t.Error("empty should return true")
-	}
+	actual := args.Map{"result": reqtype.Create.IsAnyOfReqs()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 }
 
 // Additional: IsNotAnyOfReqs empty
 func Test_Request_IsNotAnyOfReqs_Empty_Ext(t *testing.T) {
-	if !reqtype.Create.IsNotAnyOfReqs() {
-		t.Error("empty should return true")
-	}
+	actual := args.Map{"result": reqtype.Create.IsNotAnyOfReqs()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 }
 
 // Additional: GetStatusAnyOf empty
 func Test_Request_GetStatusAnyOf_Empty_Ext(t *testing.T) {
 	status := reqtype.Create.GetStatusAnyOf()
-	if !status.IsSuccess {
-		t.Error("empty should be success")
-	}
+	actual := args.Map{"result": status.IsSuccess}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "empty should be success", actual)
 }
 
 // Additional: UnmarshalJSON
 func Test_Request_UnmarshalJSON_Invalid_Ext(t *testing.T) {
 	var r reqtype.Request
 	err := r.UnmarshalJSON([]byte(`"NonExistent"`))
-	if err == nil {
-		t.Error("should error on invalid name")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should error on invalid name", actual)
 }
 
 // Additional: Format
 func Test_Request_Format_Ext(t *testing.T) {
 	result := reqtype.Create.Format("{name}")
-	if result == "" {
-		t.Error("Format should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Format should not be empty", actual)
 }
 
 // Additional: ToNumberString
 func Test_Request_ToNumberString_Ext(t *testing.T) {
-	if reqtype.Create.ToNumberString() == "" {
-		t.Error("should not be empty")
-	}
+	actual := args.Map{"result": reqtype.Create.ToNumberString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
 }

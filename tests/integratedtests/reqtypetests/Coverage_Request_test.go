@@ -4,31 +4,32 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/reqtype"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_Request_IsAnySkipOnExist(t *testing.T) {
-	if !reqtype.SkipOnExist.IsAnySkipOnExist() {
-		t.Error("expected true")
-	}
+	actual := args.Map{"result": reqtype.SkipOnExist.IsAnySkipOnExist()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_Cov_Request_IsOverrideOrOverwriteOrEnforce(t *testing.T) {
-	if !reqtype.Overwrite.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("expected true")
-	}
-	if !reqtype.Override.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("expected true")
-	}
-	if !reqtype.Enforce.IsOverrideOrOverwriteOrEnforce() {
-		t.Error("expected true")
-	}
+	actual := args.Map{"result": reqtype.Overwrite.IsOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": reqtype.Override.IsOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": reqtype.Enforce.IsOverrideOrOverwriteOrEnforce()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 func Test_Cov_Request_IsRestartOrReload(t *testing.T) {
-	if !reqtype.Restart.IsRestartOrReload() {
-		t.Error("expected true")
-	}
-	if !reqtype.Reload.IsRestartOrReload() {
-		t.Error("expected true")
-	}
+	actual := args.Map{"result": reqtype.Restart.IsRestartOrReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": reqtype.Reload.IsRestartOrReload()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coretaskinfo"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // Test_Cov3_JsonString_ZeroInfo exercises JsonString on a zero-value Info.
@@ -32,7 +33,7 @@ func Test_Cov3_MapWithPayloadAsAny_SerializeError(t *testing.T) {
 
 	// Assert — should have a serializing error field
 	_, hasPayloadsErr := result["Payloads.SerializingErr"]
-	if !hasPayloadsErr {
-		t.Fatalf("MapWithPayloadAsAny with unmarshal-able payload should have error key, got keys: %v", result)
-	}
+	actual := args.Map{"result": hasPayloadsErr}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "MapWithPayloadAsAny with unmarshal-able payload should have error key, got keys:", actual)
 }

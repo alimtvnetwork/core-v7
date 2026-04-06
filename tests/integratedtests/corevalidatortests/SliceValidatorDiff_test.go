@@ -8,6 +8,7 @@ import (
 	"github.com/alimtvnetwork/core/corevalidator"
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
 	"github.com/alimtvnetwork/core/errcore"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -37,20 +38,20 @@ func Test_SliceValidator_AllVerifyError_MultiLineMismatch_WithDiff(t *testing.T)
 	err := v.AllVerifyError(params)
 
 	// Assert: must fail
-	if err == nil {
-		t.Fatal("expected error for multi-line mismatch")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for multi-line mismatch", actual)
 
 	// Print line-by-line diff for diagnostics
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 
 	errMsg := err.Error()
-	if !strings.Contains(errMsg, "bravo") {
-		t.Errorf("error should mention 'bravo' mismatch, got:\n%s", errMsg)
-	}
-	if !strings.Contains(errMsg, "delta") {
-		t.Errorf("error should mention 'delta' mismatch, got:\n%s", errMsg)
-	}
+	actual := args.Map{"result": strings.Contains(errMsg, "bravo")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "error should mention 'bravo' mismatch, got:\n", actual)
+	actual := args.Map{"result": strings.Contains(errMsg, "delta")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "error should mention 'delta' mismatch, got:\n", actual)
 }
 
 func Test_SliceValidator_AllVerifyError_ExtraActualLines_WithDiff(t *testing.T) {
@@ -72,9 +73,9 @@ func Test_SliceValidator_AllVerifyError_ExtraActualLines_WithDiff(t *testing.T) 
 	}
 
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Fatal("expected error for length mismatch")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for length mismatch", actual)
 
 	// Print diff showing extra line
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
@@ -101,9 +102,9 @@ func Test_SliceValidator_AllVerifyError_MissingActualLines_WithDiff(t *testing.T
 	}
 
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Fatal("expected error for missing actual lines")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for missing actual lines", actual)
 
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 }
@@ -131,17 +132,17 @@ func Test_SliceValidator_VerifyFirstError_StopsAtFirst_WithDiff(t *testing.T) {
 	}
 
 	err := v.VerifyFirstError(params)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 
 	// VerifyFirst should mention line 1 mismatch
 	errMsg := err.Error()
-	if !strings.Contains(errMsg, "WRONG1") {
-		t.Errorf("should mention first mismatch 'WRONG1', got:\n%s", errMsg)
-	}
+	actual := args.Map{"result": strings.Contains(errMsg, "WRONG1")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should mention first mismatch 'WRONG1', got:\n", actual)
 }
 
 // ==========================================
@@ -160,9 +161,9 @@ func Test_SliceValidator_AllVerifyErrorTestCase_WithDiff(t *testing.T) {
 	}
 
 	err := v.AllVerifyErrorTestCase(0, "TestCase with diff", true)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	// Also print our enhanced diff
 	errcore.PrintDiffOnMismatch(0, "TestCase with diff", actual, expected)
@@ -199,16 +200,16 @@ func Test_SliceValidator_AllVerifyError_Contains_MultiMismatch(t *testing.T) {
 	}
 
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Fatal("expected error for line 1 mismatch")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for line 1 mismatch", actual)
 
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 
 	errMsg := err.Error()
-	if !strings.Contains(errMsg, "expected-missing") {
-		t.Errorf("error should reference missing substring, got:\n%s", errMsg)
-	}
+	actual := args.Map{"result": strings.Contains(errMsg, "expected-missing")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "error should reference missing substring, got:\n", actual)
 }
 
 // ==========================================
@@ -233,9 +234,9 @@ func Test_SliceValidator_AllVerifyError_Trim_WithDiff(t *testing.T) {
 	}
 
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Fatal("expected error: world != universe after trim")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error: world != universe after trim", actual)
 
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 }
@@ -271,9 +272,9 @@ func Test_SliceValidator_AllVerifyError_Glob_WithDiff(t *testing.T) {
 	}
 
 	err := v.AllVerifyError(params)
-	if err == nil {
-		t.Fatal("expected error: data.csv doesn't match WRONG.csv glob")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error: data.csv doesn't match WRONG.csv glob", actual)
 
 	errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
 }
@@ -300,10 +301,9 @@ func Test_SliceValidator_AllVerifyErrorExceptLast_WithDiff(t *testing.T) {
 	}
 
 	err := v.AllVerifyErrorExceptLast(params)
-	if err != nil {
-		errcore.PrintDiffOnMismatch(0, params.Header, actual, expected)
-		t.Errorf("should pass when skipping last line: %v", err)
-	}
+	actual := args.Map{"hasError": err != nil}
+	expected := args.Map{"hasError": false}
+	expected.ShouldBeEqual(t, 0, "AllVerifyErrorExceptLast passes -- skipping last line", actual)
 }
 
 // ==========================================
@@ -324,9 +324,9 @@ func Test_SliceValidator_Dispose_ThenAllVerifyError(t *testing.T) {
 	err := v.AllVerifyError(params)
 
 	// After dispose, both are nil, so nil receiver-like behavior
-	if err != nil {
-		t.Errorf("disposed validator with nil lines should not error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "disposed validator with nil lines should not error:", actual)
 }
 
 // ==========================================
@@ -335,9 +335,9 @@ func Test_SliceValidator_Dispose_ThenAllVerifyError(t *testing.T) {
 
 func Test_LineDiff_BothEmpty(t *testing.T) {
 	diffs := errcore.LineDiff([]string{}, []string{})
-	if len(diffs) != 0 {
-		t.Errorf("both empty should produce 0 diffs, got %d", len(diffs))
-	}
+	actual := args.Map{"result": len(diffs) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "both empty should produce 0 diffs", actual)
 }
 
 func Test_LineDiff_ExactMatch(t *testing.T) {
@@ -346,12 +346,12 @@ func Test_LineDiff_ExactMatch(t *testing.T) {
 	diffs := errcore.LineDiff(actual, expected)
 
 	for i, d := range diffs {
-		if d.Status != "  " {
-			t.Errorf("line %d should match, got status %q", i, d.Status)
-		}
-		if d.LineNumber != i {
-			t.Errorf("line number should be %d, got %d", i, d.LineNumber)
-		}
+		actual := args.Map{"result": d.Status != "  "}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "line should match, got status", actual)
+		actual := args.Map{"result": d.LineNumber != i}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "line number should be", actual)
 	}
 }
 
@@ -360,18 +360,18 @@ func Test_LineDiff_Mismatches(t *testing.T) {
 	expected := []string{"a", "b", "c"}
 	diffs := errcore.LineDiff(actual, expected)
 
-	if diffs[0].Status != "  " {
-		t.Error("line 0 should match")
-	}
-	if diffs[1].Status != "!!" {
-		t.Errorf("line 1 should be mismatch, got %q", diffs[1].Status)
-	}
-	if diffs[1].LineNumber != 1 {
-		t.Errorf("mismatch line number should be 1, got %d", diffs[1].LineNumber)
-	}
-	if diffs[2].Status != "  " {
-		t.Error("line 2 should match")
-	}
+	actual := args.Map{"result": diffs[0].Status != "  "}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "line 0 should match", actual)
+	actual := args.Map{"result": diffs[1].Status != "!!"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "line 1 should be mismatch", actual)
+	actual := args.Map{"result": diffs[1].LineNumber != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "mismatch line number should be 1", actual)
+	actual := args.Map{"result": diffs[2].Status != "  "}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "line 2 should match", actual)
 }
 
 func Test_LineDiff_ExtraActual(t *testing.T) {
@@ -379,15 +379,15 @@ func Test_LineDiff_ExtraActual(t *testing.T) {
 	expected := []string{"a", "b"}
 	diffs := errcore.LineDiff(actual, expected)
 
-	if len(diffs) != 3 {
-		t.Fatalf("expected 3 diffs, got %d", len(diffs))
-	}
-	if diffs[2].Status != "+" {
-		t.Errorf("extra line should have '+' status, got %q", diffs[2].Status)
-	}
-	if diffs[2].LineNumber != 2 {
-		t.Errorf("extra line number should be 2, got %d", diffs[2].LineNumber)
-	}
+	actual := args.Map{"result": len(diffs) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 diffs", actual)
+	actual := args.Map{"result": diffs[2].Status != "+"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "extra line should have '+' status", actual)
+	actual := args.Map{"result": diffs[2].LineNumber != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "extra line number should be 2", actual)
 }
 
 func Test_LineDiff_MissingActual(t *testing.T) {
@@ -395,15 +395,15 @@ func Test_LineDiff_MissingActual(t *testing.T) {
 	expected := []string{"a", "b", "c"}
 	diffs := errcore.LineDiff(actual, expected)
 
-	if len(diffs) != 3 {
-		t.Fatalf("expected 3 diffs, got %d", len(diffs))
-	}
-	if diffs[1].Status != "-" {
-		t.Errorf("missing line should have '-' status, got %q", diffs[1].Status)
-	}
-	if diffs[2].Status != "-" {
-		t.Errorf("missing line should have '-' status, got %q", diffs[2].Status)
-	}
+	actual := args.Map{"result": len(diffs) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 diffs", actual)
+	actual := args.Map{"result": diffs[1].Status != "-"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "missing line should have '-' status", actual)
+	actual := args.Map{"result": diffs[2].Status != "-"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "missing line should have '-' status", actual)
 }
 
 func Test_LineDiffToString_ContainsLineNumbers(t *testing.T) {
@@ -412,46 +412,46 @@ func Test_LineDiffToString_ContainsLineNumbers(t *testing.T) {
 
 	result := errcore.LineDiffToString(0, "test header", actual, expected)
 
-	if !strings.Contains(result, "Line") {
-		t.Error("diff output should contain 'Line' labels")
-	}
-	if !strings.Contains(result, "MISMATCH") {
-		t.Error("diff output should contain 'MISMATCH' for differing lines")
-	}
-	if !strings.Contains(result, "test header") {
-		t.Error("diff output should contain the header")
-	}
-	if !strings.Contains(result, "Case 0") {
-		t.Error("diff output should contain the case index")
-	}
+	actual := args.Map{"result": strings.Contains(result, "Line")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "diff output should contain 'Line' labels", actual)
+	actual := args.Map{"result": strings.Contains(result, "MISMATCH")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "diff output should contain 'MISMATCH' for differing lines", actual)
+	actual := args.Map{"result": strings.Contains(result, "test header")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "diff output should contain the header", actual)
+	actual := args.Map{"result": strings.Contains(result, "Case 0")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "diff output should contain the case index", actual)
 
 	// Print for visual inspection during test runs
 	fmt.Print(result)
 }
 
 func Test_HasAnyMismatchOnLines_True(t *testing.T) {
-	if !errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"b"}) {
-		t.Error("different content should be mismatch")
-	}
+	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"b"})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "different content should be mismatch", actual)
 }
 
 func Test_HasAnyMismatchOnLines_DifferentLength(t *testing.T) {
-	if !errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"a", "b"}) {
-		t.Error("different length should be mismatch")
-	}
+	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a"}, []string{"a", "b"})}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "different length should be mismatch", actual)
 }
 
 func Test_HasAnyMismatchOnLines_False(t *testing.T) {
-	if errcore.HasAnyMismatchOnLines([]string{"a", "b"}, []string{"a", "b"}) {
-		t.Error("same content should not be mismatch")
-	}
+	actual := args.Map{"result": errcore.HasAnyMismatchOnLines([]string{"a", "b"}, []string{"a", "b"})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "same content should not be mismatch", actual)
 }
 
 func Test_SliceDiffSummary_AllMatch(t *testing.T) {
 	result := errcore.SliceDiffSummary([]string{"a", "b"}, []string{"a", "b"})
-	if result != "all lines match" {
-		t.Errorf("expected 'all lines match', got %q", result)
-	}
+	actual := args.Map{"result": result != "all lines match"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'all lines match'", actual)
 }
 
 func Test_SliceDiffSummary_HasMismatches(t *testing.T) {
@@ -459,10 +459,10 @@ func Test_SliceDiffSummary_HasMismatches(t *testing.T) {
 		[]string{"a", "WRONG", "c"},
 		[]string{"a", "b", "c"},
 	)
-	if !strings.Contains(result, "1 mismatches") {
-		t.Errorf("summary should show mismatch count, got %q", result)
-	}
-	if !strings.Contains(result, "line 1") {
-		t.Errorf("summary should show line number, got %q", result)
-	}
+	actual := args.Map{"result": strings.Contains(result, "1 mismatches")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "summary should show mismatch count", actual)
+	actual := args.Map{"result": strings.Contains(result, "line 1")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "summary should show line number", actual)
 }

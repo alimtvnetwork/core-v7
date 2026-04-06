@@ -275,9 +275,9 @@ func Test_Collection_Clear_And_Dispose(t *testing.T) {
 	col.Clear()
 
 	// Assert
-	if col.Length() != 0 {
-		t.Error("Clear should make length 0")
-	}
+	actual := args.Map{"result": col.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Clear should make length 0", actual)
 
 	// Arrange 2
 	col2 := namevalue.NewGenericCollectionDefault[string, string]()
@@ -298,9 +298,9 @@ func Test_Collection_AddsPtr(t *testing.T) {
 	col.AddsPtr(item, nil)
 
 	// Assert
-	if col.Length() != 1 {
-		t.Errorf("AddsPtr should add non-nil only, got %d", col.Length())
-	}
+	actual := args.Map{"result": col.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "AddsPtr should add non-nil only", actual)
 }
 
 func Test_Collection_CompiledLazyString(t *testing.T) {
@@ -313,9 +313,9 @@ func Test_Collection_CompiledLazyString(t *testing.T) {
 	str2 := col.CompiledLazyString()
 
 	// Assert
-	if str1 != str2 || str1 == "" {
-		t.Error("CompiledLazyString should return cached non-empty string")
-	}
+	actual := args.Map{"result": str1 != str2 || str1 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CompiledLazyString should return cached non-empty string", actual)
 }
 
 func Test_Collection_ConcatNewPtr(t *testing.T) {
@@ -328,9 +328,9 @@ func Test_Collection_ConcatNewPtr(t *testing.T) {
 	newCol := col.ConcatNewPtr(item)
 
 	// Assert
-	if newCol.Length() != 2 {
-		t.Errorf("ConcatNewPtr should have 2, got %d", newCol.Length())
-	}
+	actual := args.Map{"result": newCol.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ConcatNewPtr should have 2", actual)
 }
 
 func Test_Collection_JoinJsonStrings(t *testing.T) {
@@ -342,9 +342,9 @@ func Test_Collection_JoinJsonStrings(t *testing.T) {
 	result := col.JoinJsonStrings(", ")
 
 	// Assert
-	if result == "" {
-		t.Error("JoinJsonStrings should not be empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinJsonStrings should not be empty", actual)
 }
 
 func Test_Collection_NewGenericCollectionUsing(t *testing.T) {
@@ -364,7 +364,7 @@ func Test_Collection_NewGenericCollectionUsing(t *testing.T) {
 	col3 := namevalue.NewGenericCollectionUsing[string, string](false)
 
 	// Assert
-	if col1.Length() != 2 || col2.Length() != 2 || col3.Length() != 0 {
-		t.Errorf("NewGenericCollectionUsing failed: %d %d %d", col1.Length(), col2.Length(), col3.Length())
-	}
+	actual := args.Map{"result": col1.Length() != 2 || col2.Length() != 2 || col3.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewGenericCollectionUsing failed:", actual)
 }

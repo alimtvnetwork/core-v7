@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coredata/coreonce"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ===== AnyOnce.Deserialize coverage =====
@@ -14,9 +15,9 @@ func Test_Cov10_AnyOnce_Deserialize_Success(t *testing.T) {
 	var target map[string]string
 	err := o.Deserialize(&target)
 	// Due to the bug (if err == nil returns err which is nil), this always returns nil
-	if err != nil {
-		t.Fatal("expected nil due to code path")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil due to code path", actual)
 }
 
 func Test_Cov10_AnyOnce_Deserialize_SerializeError(t *testing.T) {
@@ -25,9 +26,9 @@ func Test_Cov10_AnyOnce_Deserialize_SerializeError(t *testing.T) {
 	o := coreonce.NewAnyOncePtr(func() any { return ch })
 	var target string
 	err := o.Deserialize(&target)
-	if err == nil {
-		t.Fatal("expected serialize error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected serialize error", actual)
 }
 
 // ===== AnyErrorOnce.Deserialize coverage =====
@@ -38,9 +39,9 @@ func Test_Cov10_AnyErrorOnce_Deserialize_ExistingError(t *testing.T) {
 	})
 	var target string
 	err := o.Deserialize(&target)
-	if err == nil {
-		t.Fatal("expected error from serialize")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error from serialize", actual)
 }
 
 func Test_Cov10_AnyErrorOnce_Deserialize_Success(t *testing.T) {
@@ -50,9 +51,9 @@ func Test_Cov10_AnyErrorOnce_Deserialize_Success(t *testing.T) {
 	var target map[string]string
 	err := o.Deserialize(&target)
 	// Same bug as AnyOnce - always returns nil when serialize succeeds
-	if err != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov10_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
@@ -62,9 +63,9 @@ func Test_Cov10_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 	})
 	var target string
 	err := o.Deserialize(&target)
-	if err == nil {
-		t.Fatal("expected marshal error from Serialize")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected marshal error from Serialize", actual)
 }
 
 // ===== IntegersOnce.IsEqual - hit currentMap[item] < 0 =====
@@ -72,9 +73,9 @@ func Test_Cov10_AnyErrorOnce_Deserialize_MarshalError(t *testing.T) {
 func Test_Cov10_IntegersOnce_IsEqual_FreqMismatch(t *testing.T) {
 	o := coreonce.NewIntegersOncePtr(func() []int { return []int{1, 1} })
 	// Same length but different frequencies: {1,1} vs {1,2}
-	if o.IsEqual(1, 2) {
-		t.Fatal("expected false for frequency mismatch")
-	}
+	actual := args.Map{"result": o.IsEqual(1, 2)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for frequency mismatch", actual)
 }
 
 // ===== MapStringStringOnce.IsEqual - hit isMissing and value mismatch =====
@@ -83,27 +84,27 @@ func Test_Cov10_MapStringStringOnce_IsEqual_MissingKey(t *testing.T) {
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1", "b": "2"}
 	})
-	if o.IsEqual(map[string]string{"a": "1", "c": "2"}) {
-		t.Fatal("expected false for missing key")
-	}
+	actual := args.Map{"result": o.IsEqual(map[string]string{"a": "1", "c": "2"})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for missing key", actual)
 }
 
 func Test_Cov10_MapStringStringOnce_IsEqual_ValueMismatch(t *testing.T) {
 	o := coreonce.NewMapStringStringOncePtr(func() map[string]string {
 		return map[string]string{"a": "1"}
 	})
-	if o.IsEqual(map[string]string{"a": "9"}) {
-		t.Fatal("expected false for value mismatch")
-	}
+	actual := args.Map{"result": o.IsEqual(map[string]string{"a": "9"})}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for value mismatch", actual)
 }
 
 // ===== StringsOnce.IsEqual - hit currentMap[item] < 0 =====
 
 func Test_Cov10_StringsOnce_IsEqual_FreqMismatch(t *testing.T) {
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a", "a"} })
-	if o.IsEqual("a", "b") {
-		t.Fatal("expected false for frequency mismatch")
-	}
+	actual := args.Map{"result": o.IsEqual("a", "b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for frequency mismatch", actual)
 }
 
 // ===== StringOnce.SplitLeftRight - hit len > 2 branch =====
@@ -113,17 +114,17 @@ func Test_Cov10_StringsOnce_IsEqual_FreqMismatch(t *testing.T) {
 func Test_Cov10_StringOnce_SplitLeftRight_NoSplitter(t *testing.T) {
 	o := coreonce.NewStringOncePtr(func() string { return "nosplitter" })
 	left, right := o.SplitLeftRight(":")
-	if left != "nosplitter" || right != "" {
-		t.Fatalf("expected 'nosplitter','', got '%s','%s'", left, right)
-	}
+	actual := args.Map{"result": left != "nosplitter" || right != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'nosplitter','', got '',''", actual)
 }
 
 func Test_Cov10_StringOnce_SplitLeftRight_WithSplitter(t *testing.T) {
 	o := coreonce.NewStringOncePtr(func() string { return "left:right" })
 	left, right := o.SplitLeftRight(":")
-	if left != "left" || right != "right" {
-		t.Fatalf("expected 'left','right', got '%s','%s'", left, right)
-	}
+	actual := args.Map{"result": left != "left" || right != "right"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 'left','right', got '',''", actual)
 }
 
 // ===== JsonStringMust panic paths =====
@@ -131,9 +132,9 @@ func Test_Cov10_StringOnce_SplitLeftRight_WithSplitter(t *testing.T) {
 func Test_Cov10_StringsOnce_JsonStringMust_Success(t *testing.T) {
 	o := coreonce.NewStringsOncePtr(func() []string { return []string{"a"} })
 	s := o.JsonStringMust()
-	if s == "" {
-		t.Fatal("expected non-empty json string")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json string", actual)
 }
 
 func Test_Cov10_MapStringStringOnce_JsonStringMust_Success(t *testing.T) {
@@ -141,7 +142,7 @@ func Test_Cov10_MapStringStringOnce_JsonStringMust_Success(t *testing.T) {
 		return map[string]string{"k": "v"}
 	})
 	s := o.JsonStringMust()
-	if s == "" {
-		t.Fatal("expected non-empty json string")
-	}
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json string", actual)
 }

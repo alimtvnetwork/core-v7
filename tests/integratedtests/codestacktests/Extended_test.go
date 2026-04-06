@@ -315,9 +315,9 @@ func Test_NameOf_MethodByFullName_Ext(t *testing.T) {
 	methodName := codestack.NameOf.MethodByFullName(fullName)
 
 	// Assert
-	if methodName == "" {
-		t.Error("MethodByFullName should return non-empty")
-	}
+	actual := args.Map{"result": methodName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MethodByFullName should return non-empty", actual)
 }
 
 func Test_NameOf_PackageByFullName_Ext(t *testing.T) {
@@ -328,9 +328,9 @@ func Test_NameOf_PackageByFullName_Ext(t *testing.T) {
 	pkgName := codestack.NameOf.PackageByFullName(fullName)
 
 	// Assert
-	if pkgName == "" {
-		t.Error("PackageByFullName should return non-empty")
-	}
+	actual := args.Map{"result": pkgName == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PackageByFullName should return non-empty", actual)
 }
 
 func Test_NameOf_JoinPackageNameWithRelative_Ext(t *testing.T) {
@@ -344,9 +344,9 @@ func Test_NameOf_JoinPackageNameWithRelative_Ext(t *testing.T) {
 	)
 
 	// Assert
-	if result == "" {
-		t.Error("JoinPackageNameWithRelative should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "JoinPackageNameWithRelative should return non-empty", actual)
 }
 
 func Test_NameOf_CurrentFuncFullPath_Ext(t *testing.T) {
@@ -357,9 +357,9 @@ func Test_NameOf_CurrentFuncFullPath_Ext(t *testing.T) {
 	result := codestack.NameOf.CurrentFuncFullPath(fullName)
 
 	// Assert
-	if result == "" {
-		t.Error("CurrentFuncFullPath should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "CurrentFuncFullPath should return non-empty", actual)
 }
 
 func Test_NameOf_MethodStackSkip_Ext(t *testing.T) {
@@ -367,9 +367,9 @@ func Test_NameOf_MethodStackSkip_Ext(t *testing.T) {
 	result := codestack.NameOf.MethodStackSkip(0)
 
 	// Assert
-	if result == "" {
-		t.Error("MethodStackSkip should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MethodStackSkip should return non-empty", actual)
 }
 
 func Test_NameOf_PackageStackSkip_Ext(t *testing.T) {
@@ -377,9 +377,9 @@ func Test_NameOf_PackageStackSkip_Ext(t *testing.T) {
 	result := codestack.NameOf.PackageStackSkip(0)
 
 	// Assert
-	if result == "" {
-		t.Error("PackageStackSkip should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PackageStackSkip should return non-empty", actual)
 }
 
 // =============================================================================
@@ -508,9 +508,9 @@ func Test_NewStacksCreator_DefaultCount_Reflection_Ext(t *testing.T) {
 	collection := results[0].Interface().(codestack.TraceCollection)
 
 	// Assert
-	if !collection.HasAnyItem() {
-		t.Error("DefaultCount should return items")
-	}
+	actual := args.Map{"result": collection.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "DefaultCount should return items", actual)
 }
 
 func Test_NewStacksCreator_All_Reflection_Ext(t *testing.T) {
@@ -528,9 +528,9 @@ func Test_NewStacksCreator_All_Reflection_Ext(t *testing.T) {
 	collection := results[0].Interface().(codestack.TraceCollection)
 
 	// Assert
-	if !collection.HasAnyItem() {
-		t.Error("All should return items")
-	}
+	actual := args.Map{"result": collection.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "All should return items", actual)
 }
 
 // =============================================================================
@@ -570,9 +570,9 @@ func Test_Dir_Get_Ext(t *testing.T) {
 	result := codestack.Dir.Get(0)
 
 	// Assert
-	if result == "" {
-		t.Error("Dir.Get should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Dir.Get should return non-empty", actual)
 }
 
 func Test_Dir_CurDirJoin_Ext(t *testing.T) {
@@ -580,9 +580,9 @@ func Test_Dir_CurDirJoin_Ext(t *testing.T) {
 	result := codestack.Dir.CurDirJoin("sub", "path")
 
 	// Assert
-	if result == "" {
-		t.Error("Dir.CurDirJoin should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Dir.CurDirJoin should return non-empty", actual)
 }
 
 func Test_Dir_RepoDirJoin_Ext(t *testing.T) {
@@ -590,9 +590,9 @@ func Test_Dir_RepoDirJoin_Ext(t *testing.T) {
 	result := codestack.Dir.RepoDirJoin("sub")
 
 	// Assert
-	if result == "" {
-		t.Error("Dir.RepoDirJoin should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Dir.RepoDirJoin should return non-empty", actual)
 }
 
 // =============================================================================
@@ -646,12 +646,12 @@ func Test_File_PathLineSep_Ext(t *testing.T) {
 	filePath, lineNumber := codestack.File.PathLineSep(0)
 
 	// Assert
-	if filePath == "" {
-		t.Error("PathLineSep should return non-empty file path")
-	}
-	if lineNumber <= 0 {
-		t.Error("PathLineSep should return positive line number")
-	}
+	actual := args.Map{"result": filePath == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PathLineSep should return non-empty file path", actual)
+	actual := args.Map{"result": lineNumber <= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PathLineSep should return positive line number", actual)
 }
 
 func Test_File_PathLineSepDefault_Ext(t *testing.T) {
@@ -659,12 +659,12 @@ func Test_File_PathLineSepDefault_Ext(t *testing.T) {
 	filePath, lineNumber := codestack.File.PathLineSepDefault()
 
 	// Assert
-	if filePath == "" {
-		t.Error("PathLineSepDefault should return non-empty file path")
-	}
-	if lineNumber <= 0 {
-		t.Error("PathLineSepDefault should return positive line number")
-	}
+	actual := args.Map{"result": filePath == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PathLineSepDefault should return non-empty file path", actual)
+	actual := args.Map{"result": lineNumber <= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PathLineSepDefault should return positive line number", actual)
 }
 
 func Test_File_FilePathWithLineString_Ext(t *testing.T) {
@@ -672,9 +672,9 @@ func Test_File_FilePathWithLineString_Ext(t *testing.T) {
 	result := codestack.File.FilePathWithLineString(0)
 
 	// Assert
-	if result == "" {
-		t.Error("FilePathWithLineString should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "FilePathWithLineString should return non-empty", actual)
 }
 
 func Test_File_PathLineStringDefault_Ext(t *testing.T) {
@@ -682,9 +682,9 @@ func Test_File_PathLineStringDefault_Ext(t *testing.T) {
 	result := codestack.File.PathLineStringDefault()
 
 	// Assert
-	if result == "" {
-		t.Error("PathLineStringDefault should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "PathLineStringDefault should return non-empty", actual)
 }
 
 // =============================================================================
@@ -701,9 +701,9 @@ func Test_TraceCollection_StackTracesJsonResult_Reflection_Ext(t *testing.T) {
 	results := method.Call(nil)
 
 	// Assert
-	if results[0].IsNil() {
-		t.Error("StackTracesJsonResult should not be nil")
-	}
+	actual := args.Map{"result": results[0].IsNil()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "StackTracesJsonResult should not be nil", actual)
 }
 
 func Test_TraceCollection_NewStackTraces_Ext(t *testing.T) {
@@ -714,9 +714,9 @@ func Test_TraceCollection_NewStackTraces_Ext(t *testing.T) {
 	result := collection.NewStackTraces(0)
 
 	// Assert
-	if result == "" {
-		t.Error("NewStackTraces should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewStackTraces should return non-empty", actual)
 }
 
 func Test_TraceCollection_NewDefaultStackTraces_Ext(t *testing.T) {
@@ -727,9 +727,9 @@ func Test_TraceCollection_NewDefaultStackTraces_Ext(t *testing.T) {
 	result := collection.NewDefaultStackTraces()
 
 	// Assert
-	if result == "" {
-		t.Error("NewDefaultStackTraces should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewDefaultStackTraces should return non-empty", actual)
 }
 
 func Test_TraceCollection_NewStackTracesJsonResult_Ext(t *testing.T) {
@@ -740,9 +740,9 @@ func Test_TraceCollection_NewStackTracesJsonResult_Ext(t *testing.T) {
 	result := collection.NewStackTracesJsonResult(0)
 
 	// Assert
-	if result == nil {
-		t.Error("NewStackTracesJsonResult should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewStackTracesJsonResult should not be nil", actual)
 }
 
 func Test_TraceCollection_NewDefaultStackTracesJsonResult_Ext(t *testing.T) {
@@ -753,9 +753,9 @@ func Test_TraceCollection_NewDefaultStackTracesJsonResult_Ext(t *testing.T) {
 	result := collection.NewDefaultStackTracesJsonResult()
 
 	// Assert
-	if result == nil {
-		t.Error("NewDefaultStackTracesJsonResult should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "NewDefaultStackTracesJsonResult should not be nil", actual)
 }
 
 func Test_TraceCollection_GetPagedCollection_Ext(t *testing.T) {
@@ -774,9 +774,9 @@ func Test_TraceCollection_GetPagedCollection_Ext(t *testing.T) {
 	pages := collection.GetPagedCollection(2)
 
 	// Assert
-	if len(pages) != 3 {
-		t.Errorf("expected 3 pages, got %d", len(pages))
-	}
+	actual := args.Map{"result": len(pages) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
 }
 
 func Test_TraceCollection_GetSinglePageCollection_Ext(t *testing.T) {
@@ -795,9 +795,9 @@ func Test_TraceCollection_GetSinglePageCollection_Ext(t *testing.T) {
 	page := collection.GetSinglePageCollection(2, 2)
 
 	// Assert
-	if page.Length() != 2 {
-		t.Errorf("expected 2 items, got %d", page.Length())
-	}
+	actual := args.Map{"result": page.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 items", actual)
 }
 
 func Test_TraceCollection_GetSinglePageCollection_SmallList_Ext(t *testing.T) {
@@ -812,9 +812,9 @@ func Test_TraceCollection_GetSinglePageCollection_SmallList_Ext(t *testing.T) {
 	page := collection.GetSinglePageCollection(5, 1)
 
 	// Assert
-	if page.Length() != 1 {
-		t.Errorf("expected 1 item, got %d", page.Length())
-	}
+	actual := args.Map{"result": page.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 }
 
 func Test_TraceCollection_FilterWithLimit_Ext(t *testing.T) {
@@ -830,9 +830,9 @@ func Test_TraceCollection_FilterWithLimit_Ext(t *testing.T) {
 	)
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("expected 2 items, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 items", actual)
 }
 
 func Test_TraceCollection_FilterTraceCollection_Ext(t *testing.T) {
@@ -847,9 +847,9 @@ func Test_TraceCollection_FilterTraceCollection_Ext(t *testing.T) {
 	)
 
 	// Assert
-	if result.Length() != 1 {
-		t.Errorf("expected 1 item, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 }
 
 func Test_TraceCollection_SkipFilterMethodName_Ext(t *testing.T) {
@@ -860,9 +860,9 @@ func Test_TraceCollection_SkipFilterMethodName_Ext(t *testing.T) {
 	result := collection.SkipFilterMethodNameTraceCollection("TestMethod")
 
 	// Assert
-	if result.Length() != 0 {
-		t.Errorf("expected 0 items, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 items", actual)
 }
 
 func Test_TraceCollection_FilterFullMethodName_Ext(t *testing.T) {
@@ -873,9 +873,9 @@ func Test_TraceCollection_FilterFullMethodName_Ext(t *testing.T) {
 	result := collection.FilterFullMethodNameTraceCollection("pkg1.TestMethod")
 
 	// Assert
-	if result.Length() != 1 {
-		t.Errorf("expected 1 item, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1 item", actual)
 }
 
 func Test_TraceCollection_SkipFilterFullMethodName_Ext(t *testing.T) {
@@ -886,9 +886,9 @@ func Test_TraceCollection_SkipFilterFullMethodName_Ext(t *testing.T) {
 	result := collection.SkipFilterFullMethodNameTraceCollection("pkg1.TestMethod")
 
 	// Assert
-	if result.Length() != 2 {
-		t.Errorf("expected 2 items, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 items", actual)
 }
 
 func Test_TraceCollection_SkipFilterFilename_Ext(t *testing.T) {
@@ -899,9 +899,9 @@ func Test_TraceCollection_SkipFilterFilename_Ext(t *testing.T) {
 	result := collection.SkipFilterFilenameTraceCollection("/src/pkg1/file.go")
 
 	// Assert
-	if result.Length() != 2 {
-		t.Errorf("expected 2 items, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 items", actual)
 }
 
 func Test_TraceCollection_FileWithLinesStrings_Ext(t *testing.T) {
@@ -912,9 +912,9 @@ func Test_TraceCollection_FileWithLinesStrings_Ext(t *testing.T) {
 	strs := collection.FileWithLinesStrings()
 
 	// Assert
-	if len(strs) != 3 {
-		t.Errorf("expected 3, got %d", len(strs))
-	}
+	actual := args.Map{"result": len(strs) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_FileWithLinesString_Ext(t *testing.T) {
@@ -925,9 +925,9 @@ func Test_TraceCollection_FileWithLinesString_Ext(t *testing.T) {
 	result := collection.FileWithLinesString()
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_FileWithLinesString_Empty_Ext(t *testing.T) {
@@ -938,9 +938,9 @@ func Test_TraceCollection_FileWithLinesString_Empty_Ext(t *testing.T) {
 	result := collection.FileWithLinesString()
 
 	// Assert
-	if result != "" {
-		t.Error("empty should return empty")
-	}
+	actual := args.Map{"result": result != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
 }
 
 func Test_TraceCollection_JoinShortStrings_Ext(t *testing.T) {
@@ -951,9 +951,9 @@ func Test_TraceCollection_JoinShortStrings_Ext(t *testing.T) {
 	result := collection.JoinShortStrings(",")
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JoinFileWithLinesStrings_Ext(t *testing.T) {
@@ -964,9 +964,9 @@ func Test_TraceCollection_JoinFileWithLinesStrings_Ext(t *testing.T) {
 	result := collection.JoinFileWithLinesStrings(",")
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JoinJsonStrings_Ext(t *testing.T) {
@@ -977,9 +977,9 @@ func Test_TraceCollection_JoinJsonStrings_Ext(t *testing.T) {
 	result := collection.JoinJsonStrings(",")
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JsonStrings_Ext(t *testing.T) {
@@ -990,9 +990,9 @@ func Test_TraceCollection_JsonStrings_Ext(t *testing.T) {
 	result := collection.JsonStrings()
 
 	// Assert
-	if len(result) != 3 {
-		t.Errorf("expected 3, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_Join_Ext(t *testing.T) {
@@ -1003,9 +1003,9 @@ func Test_TraceCollection_Join_Ext(t *testing.T) {
 	result := collection.Join(",")
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JoinLines_Ext(t *testing.T) {
@@ -1016,9 +1016,9 @@ func Test_TraceCollection_JoinLines_Ext(t *testing.T) {
 	result := collection.JoinLines()
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JoinCsv_Ext(t *testing.T) {
@@ -1029,9 +1029,9 @@ func Test_TraceCollection_JoinCsv_Ext(t *testing.T) {
 	result := collection.JoinCsv()
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_JoinCsvLine_Ext(t *testing.T) {
@@ -1042,9 +1042,9 @@ func Test_TraceCollection_JoinCsvLine_Ext(t *testing.T) {
 	result := collection.JoinCsvLine()
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_CodeStacksStringLimit_Ext(t *testing.T) {
@@ -1055,9 +1055,9 @@ func Test_TraceCollection_CodeStacksStringLimit_Ext(t *testing.T) {
 	result := collection.CodeStacksStringLimit(2)
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_TraceCollection_CodeStacksStringLimit_Empty_Ext(t *testing.T) {
@@ -1068,9 +1068,9 @@ func Test_TraceCollection_CodeStacksStringLimit_Empty_Ext(t *testing.T) {
 	result := collection.CodeStacksStringLimit(2)
 
 	// Assert
-	if result != "" {
-		t.Error("empty should return empty")
-	}
+	actual := args.Map{"result": result != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return empty", actual)
 }
 
 func Test_TraceCollection_CsvStrings_Empty_Ext(t *testing.T) {
@@ -1081,9 +1081,9 @@ func Test_TraceCollection_CsvStrings_Empty_Ext(t *testing.T) {
 	result := collection.CsvStrings()
 
 	// Assert
-	if len(result) != 0 {
-		t.Errorf("expected 0, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_TraceCollection_FirstDynamic_Ext(t *testing.T) {
@@ -1094,9 +1094,9 @@ func Test_TraceCollection_FirstDynamic_Ext(t *testing.T) {
 	result := collection.FirstDynamic()
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_LastDynamic_Ext(t *testing.T) {
@@ -1107,9 +1107,9 @@ func Test_TraceCollection_LastDynamic_Ext(t *testing.T) {
 	result := collection.LastDynamic()
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_FirstOrDefaultDynamic_Ext(t *testing.T) {
@@ -1120,9 +1120,9 @@ func Test_TraceCollection_FirstOrDefaultDynamic_Ext(t *testing.T) {
 	result := collection.FirstOrDefaultDynamic()
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_LastOrDefaultDynamic_Ext(t *testing.T) {
@@ -1133,9 +1133,9 @@ func Test_TraceCollection_LastOrDefaultDynamic_Ext(t *testing.T) {
 	result := collection.LastOrDefaultDynamic()
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_SkipDynamic_Ext(t *testing.T) {
@@ -1146,9 +1146,9 @@ func Test_TraceCollection_SkipDynamic_Ext(t *testing.T) {
 	result := collection.SkipDynamic(1)
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_Skip_Ext(t *testing.T) {
@@ -1159,9 +1159,9 @@ func Test_TraceCollection_Skip_Ext(t *testing.T) {
 	result := collection.Skip(1)
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_TraceCollection_TakeDynamic_Ext(t *testing.T) {
@@ -1172,9 +1172,9 @@ func Test_TraceCollection_TakeDynamic_Ext(t *testing.T) {
 	result := collection.TakeDynamic(2)
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_Take_Ext(t *testing.T) {
@@ -1185,9 +1185,9 @@ func Test_TraceCollection_Take_Ext(t *testing.T) {
 	result := collection.Take(2)
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_TraceCollection_LimitDynamic_Ext(t *testing.T) {
@@ -1198,9 +1198,9 @@ func Test_TraceCollection_LimitDynamic_Ext(t *testing.T) {
 	result := collection.LimitDynamic(2)
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_Limit_Ext(t *testing.T) {
@@ -1211,9 +1211,9 @@ func Test_TraceCollection_Limit_Ext(t *testing.T) {
 	result := collection.Limit(2)
 
 	// Assert
-	if len(result) != 2 {
-		t.Errorf("expected 2, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_TraceCollection_Count_Ext(t *testing.T) {
@@ -1224,9 +1224,9 @@ func Test_TraceCollection_Count_Ext(t *testing.T) {
 	count := collection.Count()
 
 	// Assert
-	if count != 3 {
-		t.Errorf("expected 3, got %d", count)
-	}
+	actual := args.Map{"result": count != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_JsonModel_Ext(t *testing.T) {
@@ -1237,9 +1237,9 @@ func Test_TraceCollection_JsonModel_Ext(t *testing.T) {
 	model := collection.JsonModel()
 
 	// Assert
-	if len(model) != 3 {
-		t.Errorf("expected 3, got %d", len(model))
-	}
+	actual := args.Map{"result": len(model) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_JsonModelAny_Ext(t *testing.T) {
@@ -1250,9 +1250,9 @@ func Test_TraceCollection_JsonModelAny_Ext(t *testing.T) {
 	result := collection.JsonModelAny()
 
 	// Assert
-	if result == nil {
-		t.Error("should return non-nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
 func Test_TraceCollection_Json_Ext(t *testing.T) {
@@ -1263,9 +1263,9 @@ func Test_TraceCollection_Json_Ext(t *testing.T) {
 	result := collection.Json()
 
 	// Assert
-	if result.HasError() {
-		t.Errorf("should not have error: %v", result.MeaningfulError())
-	}
+	actual := args.Map{"result": result.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have error:", actual)
 }
 
 func Test_TraceCollection_AsJsonContractsBinder_Ext(t *testing.T) {
@@ -1276,9 +1276,9 @@ func Test_TraceCollection_AsJsonContractsBinder_Ext(t *testing.T) {
 	binder := collection.AsJsonContractsBinder()
 
 	// Assert
-	if binder == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": binder == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_TraceCollection_AsJsoner_Ext(t *testing.T) {
@@ -1289,9 +1289,9 @@ func Test_TraceCollection_AsJsoner_Ext(t *testing.T) {
 	jsoner := collection.AsJsoner()
 
 	// Assert
-	if jsoner == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": jsoner == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_TraceCollection_AsJsonParseSelfInjector_Ext(t *testing.T) {
@@ -1302,9 +1302,9 @@ func Test_TraceCollection_AsJsonParseSelfInjector_Ext(t *testing.T) {
 	injector := collection.AsJsonParseSelfInjector()
 
 	// Assert
-	if injector == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": injector == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_TraceCollection_ParseInjectUsingJson_Ext(t *testing.T) {
@@ -1317,12 +1317,12 @@ func Test_TraceCollection_ParseInjectUsingJson_Ext(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
-	if result.Length() != 3 {
-		t.Errorf("expected 3, got %d", result.Length())
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
+	actual := args.Map{"result": result.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_ParseInjectUsingJsonMust_Ext(t *testing.T) {
@@ -1335,9 +1335,9 @@ func Test_TraceCollection_ParseInjectUsingJsonMust_Ext(t *testing.T) {
 	result := target.ParseInjectUsingJsonMust(jsonResult)
 
 	// Assert
-	if result.Length() != 3 {
-		t.Errorf("expected 3, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_JsonParseSelfInject_Ext(t *testing.T) {
@@ -1350,9 +1350,9 @@ func Test_TraceCollection_JsonParseSelfInject_Ext(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
 }
 
 func Test_TraceCollection_IsEqualItems_Ext(t *testing.T) {
@@ -1363,9 +1363,9 @@ func Test_TraceCollection_IsEqualItems_Ext(t *testing.T) {
 	result := collection.IsEqualItems(collection.Items...)
 
 	// Assert
-	if !result {
-		t.Error("should be equal")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_TraceCollection_IsEqualItems_DiffLength_Ext(t *testing.T) {
@@ -1376,9 +1376,9 @@ func Test_TraceCollection_IsEqualItems_DiffLength_Ext(t *testing.T) {
 	result := collection.IsEqualItems(newTestTrace("pkg1", 10))
 
 	// Assert
-	if result {
-		t.Error("should not be equal")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be equal", actual)
 }
 
 func Test_TraceCollection_ConcatNewPtr_Ext(t *testing.T) {
@@ -1390,9 +1390,9 @@ func Test_TraceCollection_ConcatNewPtr_Ext(t *testing.T) {
 	result := collection.ConcatNewPtr(&trace)
 
 	// Assert
-	if result.Length() != 4 {
-		t.Errorf("expected 4, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() != 4}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 }
 
 func Test_TraceCollection_ConcatNewUsingSkipPlusCount_Ext(t *testing.T) {
@@ -1403,9 +1403,9 @@ func Test_TraceCollection_ConcatNewUsingSkipPlusCount_Ext(t *testing.T) {
 	result := collection.ConcatNewUsingSkipPlusCount(0, 3)
 
 	// Assert
-	if result.Length() < 3 {
-		t.Errorf("expected at least 3, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() < 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 }
 
 func Test_TraceCollection_ConcatNewUsingSkip_Ext(t *testing.T) {
@@ -1416,9 +1416,9 @@ func Test_TraceCollection_ConcatNewUsingSkip_Ext(t *testing.T) {
 	result := collection.ConcatNewUsingSkip(0)
 
 	// Assert
-	if result.Length() < 3 {
-		t.Errorf("expected at least 3, got %d", result.Length())
-	}
+	actual := args.Map{"result": result.Length() < 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 }
 
 func Test_TraceCollection_InsertAt_Ext(t *testing.T) {
@@ -1430,9 +1430,9 @@ func Test_TraceCollection_InsertAt_Ext(t *testing.T) {
 	collection.InsertAt(1, inserted)
 
 	// Assert
-	if collection.Items[1].PackageName != "inserted" {
-		t.Error("item should be inserted at index 1")
-	}
+	actual := args.Map{"result": collection.Items[1].PackageName != "inserted"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "item should be inserted at index 1", actual)
 }
 
 func Test_TraceCollection_AddsPtr_Valid_Ext(t *testing.T) {
@@ -1444,9 +1444,9 @@ func Test_TraceCollection_AddsPtr_Valid_Ext(t *testing.T) {
 	collection.AddsPtr(false, &trace)
 
 	// Assert
-	if collection.Length() != 1 {
-		t.Errorf("expected 1, got %d", collection.Length())
-	}
+	actual := args.Map{"result": collection.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_TraceCollection_Adds_Empty_Ext(t *testing.T) {
@@ -1457,9 +1457,9 @@ func Test_TraceCollection_Adds_Empty_Ext(t *testing.T) {
 	collection.Adds()
 
 	// Assert
-	if collection.Length() != 3 {
-		t.Errorf("expected 3, got %d", collection.Length())
-	}
+	actual := args.Map{"result": collection.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_AddsPtr_Empty_Ext(t *testing.T) {
@@ -1470,9 +1470,9 @@ func Test_TraceCollection_AddsPtr_Empty_Ext(t *testing.T) {
 	collection.AddsPtr(false)
 
 	// Assert
-	if collection.Length() != 0 {
-		t.Errorf("expected 0, got %d", collection.Length())
-	}
+	actual := args.Map{"result": collection.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_TraceCollection_StringsUsingFmt_Ext(t *testing.T) {
@@ -1485,9 +1485,9 @@ func Test_TraceCollection_StringsUsingFmt_Ext(t *testing.T) {
 	})
 
 	// Assert
-	if len(result) != 3 {
-		t.Errorf("expected 3, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_TraceCollection_AddsUsingSkipDefault_Ext(t *testing.T) {
@@ -1498,9 +1498,9 @@ func Test_TraceCollection_AddsUsingSkipDefault_Ext(t *testing.T) {
 	collection.AddsUsingSkipDefault(0)
 
 	// Assert - should have items from current stack
-	if collection.Length() == 0 {
-		t.Error("should have items from stack")
-	}
+	actual := args.Map{"result": collection.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have items from stack", actual)
 }
 
 func Test_TraceCollection_AddsUsingSkipUsingFilter_Ext(t *testing.T) {
@@ -1519,9 +1519,9 @@ func Test_TraceCollection_AddsUsingSkipUsingFilter_Ext(t *testing.T) {
 	)
 
 	// Assert
-	if collection.Length() == 0 {
-		t.Error("should have items from filtered stack")
-	}
+	actual := args.Map{"result": collection.Length() == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should have items from filtered stack", actual)
 }
 
 // =============================================================================
@@ -1543,9 +1543,9 @@ func Test_Trace_Json_Ext(t *testing.T) {
 	result := trace.Json()
 
 	// Assert
-	if result.HasError() {
-		t.Errorf("should not have error: %v", result.MeaningfulError())
-	}
+	actual := args.Map{"result": result.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have error:", actual)
 }
 
 func Test_Trace_JsonPtr_Ext(t *testing.T) {
@@ -1560,9 +1560,9 @@ func Test_Trace_JsonPtr_Ext(t *testing.T) {
 	result := trace.JsonPtr()
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_Trace_JsonModel_Ext(t *testing.T) {
@@ -1573,9 +1573,9 @@ func Test_Trace_JsonModel_Ext(t *testing.T) {
 	model := trace.JsonModel()
 
 	// Assert
-	if model.PackageName != "pkg" {
-		t.Error("should return same trace as model")
-	}
+	actual := args.Map{"result": model.PackageName != "pkg"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return same trace as model", actual)
 }
 
 func Test_Trace_JsonModelAny_Ext(t *testing.T) {
@@ -1586,9 +1586,9 @@ func Test_Trace_JsonModelAny_Ext(t *testing.T) {
 	result := trace.JsonModelAny()
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_Trace_JsonString_Ext(t *testing.T) {
@@ -1603,9 +1603,9 @@ func Test_Trace_JsonString_Ext(t *testing.T) {
 	result := trace.JsonString()
 
 	// Assert
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_Trace_ParseInjectUsingJson_Ext(t *testing.T) {
@@ -1623,12 +1623,12 @@ func Test_Trace_ParseInjectUsingJson_Ext(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
-	if result.PackageName != "pkg" {
-		t.Error("should preserve PackageName")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
+	actual := args.Map{"result": result.PackageName != "pkg"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should preserve PackageName", actual)
 }
 
 func Test_Trace_ParseInjectUsingJsonMust_Ext(t *testing.T) {
@@ -1641,9 +1641,9 @@ func Test_Trace_ParseInjectUsingJsonMust_Ext(t *testing.T) {
 	result := target.ParseInjectUsingJsonMust(jsonResult)
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_Trace_JsonParseSelfInject_Ext(t *testing.T) {
@@ -1656,9 +1656,9 @@ func Test_Trace_JsonParseSelfInject_Ext(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
 }
 
 func Test_Trace_NilDispose_Ext(t *testing.T) {
@@ -1681,9 +1681,9 @@ func Test_FileWithLine_JsonModel_Ext(t *testing.T) {
 	model := fwl.JsonModel()
 
 	// Assert
-	if model.FilePath != "/f.go" {
-		t.Error("should return same model")
-	}
+	actual := args.Map{"result": model.FilePath != "/f.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return same model", actual)
 }
 
 func Test_FileWithLine_JsonModelAny_Ext(t *testing.T) {
@@ -1694,9 +1694,9 @@ func Test_FileWithLine_JsonModelAny_Ext(t *testing.T) {
 	result := fwl.JsonModelAny()
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_FileWithLine_Json_Ext(t *testing.T) {
@@ -1707,9 +1707,9 @@ func Test_FileWithLine_Json_Ext(t *testing.T) {
 	result := fwl.Json()
 
 	// Assert
-	if result.HasError() {
-		t.Errorf("error: %v", result.MeaningfulError())
-	}
+	actual := args.Map{"result": result.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
 }
 
 func Test_FileWithLine_JsonPtr_Ext(t *testing.T) {
@@ -1720,9 +1720,9 @@ func Test_FileWithLine_JsonPtr_Ext(t *testing.T) {
 	result := fwl.JsonPtr()
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_FileWithLine_ParseInjectUsingJson_Ext(t *testing.T) {
@@ -1735,12 +1735,12 @@ func Test_FileWithLine_ParseInjectUsingJson_Ext(t *testing.T) {
 	result, err := target.ParseInjectUsingJson(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
-	if result.FilePath != "/f.go" {
-		t.Error("should preserve FilePath")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
+	actual := args.Map{"result": result.FilePath != "/f.go"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should preserve FilePath", actual)
 }
 
 func Test_FileWithLine_ParseInjectUsingJsonMust_Ext(t *testing.T) {
@@ -1753,9 +1753,9 @@ func Test_FileWithLine_ParseInjectUsingJsonMust_Ext(t *testing.T) {
 	result := target.ParseInjectUsingJsonMust(jsonResult)
 
 	// Assert
-	if result == nil {
-		t.Error("should not be nil")
-	}
+	actual := args.Map{"result": result == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 }
 
 func Test_FileWithLine_JsonParseSelfInject_Ext(t *testing.T) {
@@ -1768,9 +1768,9 @@ func Test_FileWithLine_JsonParseSelfInject_Ext(t *testing.T) {
 	err := target.JsonParseSelfInject(jsonResult)
 
 	// Assert
-	if err != nil {
-		t.Errorf("error: %v", err)
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "error:", actual)
 }
 
 func Test_FileWithLine_FileWithLine_Method_Ext(t *testing.T) {
@@ -1781,9 +1781,9 @@ func Test_FileWithLine_FileWithLine_Method_Ext(t *testing.T) {
 	result := fwl.FileWithLine()
 
 	// Assert
-	if result != "/f.go:42" {
-		t.Errorf("expected '/f.go:42', got '%s'", result)
-	}
+	actual := args.Map{"result": result != "/f.go:42"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected '/f.go:42', got ''", actual)
 }
 
 // =============================================================================
@@ -1806,9 +1806,9 @@ func Test_Trace_Message_CachesOnSecondCall_Ext(t *testing.T) {
 	msg2 := trace.Message() // cached path
 
 	// Assert
-	if msg1 != msg2 {
-		t.Error("Message should return same value on second call")
-	}
+	actual := args.Map{"result": msg1 != msg2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "Message should return same value on second call", actual)
 }
 
 func Test_Trace_ShortString_CachesOnSecondCall_Ext(t *testing.T) {
@@ -1827,7 +1827,7 @@ func Test_Trace_ShortString_CachesOnSecondCall_Ext(t *testing.T) {
 	s2 := trace.ShortString() // cached path
 
 	// Assert
-	if s1 != s2 {
-		t.Error("ShortString should return same value on second call")
-	}
+	actual := args.Map{"result": s1 != s2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "ShortString should return same value on second call", actual)
 }

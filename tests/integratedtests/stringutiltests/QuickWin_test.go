@@ -6,36 +6,37 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreutils/stringutil"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_IsEndsWith_NegativeRemainingLength(t *testing.T) {
 	result := stringutil.IsEndsWith("ab", "abcdef", false)
-	if result {
-		t.Fatal("expected false when endsWith is longer than base")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false when endsWith is longer than base", actual)
 }
 
 func Test_QW_ToIntUsingRegexMatch_NilRegex(t *testing.T) {
 	result := stringutil.ToIntUsingRegexMatch(nil, "123")
-	if result != 0 {
-		t.Fatal("expected 0 for nil regex")
-	}
+	actual := args.Map{"result": result != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 for nil regex", actual)
 }
 
 func Test_QW_ToIntUsingRegexMatch_NoMatch(t *testing.T) {
 	re := regexp.MustCompile(`^\d+$`)
 	result := stringutil.ToIntUsingRegexMatch(re, "abc")
-	if result != 0 {
-		t.Fatal("expected 0 for no match")
-	}
+	actual := args.Map{"result": result != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 for no match", actual)
 }
 
 func Test_QW_ToIntUsingRegexMatch_ParseError(t *testing.T) {
 	re := regexp.MustCompile(`.*`)
 	result := stringutil.ToIntUsingRegexMatch(re, "abc")
-	if result != 0 {
-		t.Fatal("expected 0 for parse error")
-	}
+	actual := args.Map{"result": result != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 for parse error", actual)
 }
 
 func Test_QW_UsingBracketsWrappedTemplate(t *testing.T) {
@@ -43,13 +44,13 @@ func Test_QW_UsingBracketsWrappedTemplate(t *testing.T) {
 		"hello {brackets-wrapped} world",
 		"REPLACED",
 	)
-	if result == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	result2 := stringutil.ReplaceTemplate.UsingBracketsWrappedTemplate("", "REPLACED")
-	if result2 != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": result2 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_QW_UsingQuotesWrappedTemplate(t *testing.T) {
@@ -57,13 +58,13 @@ func Test_QW_UsingQuotesWrappedTemplate(t *testing.T) {
 		"hello {quotes-wrapped} world",
 		"REPLACED",
 	)
-	if result == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	result2 := stringutil.ReplaceTemplate.UsingQuotesWrappedTemplate("", "REPLACED")
-	if result2 != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": result2 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 // Renamed to avoid redeclaration with Coverage6_test.go

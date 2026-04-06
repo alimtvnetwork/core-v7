@@ -5,6 +5,7 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/alimtvnetwork/core/coretests/args"
 	"github.com/alimtvnetwork/core/regexnew"
 )
 
@@ -43,7 +44,9 @@ func Test_LazyLock_ConcurrentAccess(t *testing.T) {
 
 	// Assert
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -82,7 +85,9 @@ func Test_LazyLock_ConcurrentDifferentPatterns(t *testing.T) {
 
 	// Assert
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -120,7 +125,9 @@ func Test_TwoLock_ConcurrentAccess(t *testing.T) {
 
 	// Assert
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -158,7 +165,9 @@ func Test_ManyUsingLock_ConcurrentAccess(t *testing.T) {
 
 	// Assert
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -198,6 +207,8 @@ func Test_LazyLock_ConcurrentCompileAndMatch(t *testing.T) {
 
 	// Assert
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }

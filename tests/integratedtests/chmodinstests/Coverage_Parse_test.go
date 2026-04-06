@@ -91,7 +91,9 @@ func Test_Cov_ParseRwxInstructionMust_Panic(t *testing.T) {
 	// Act
 	chmodins.ParseRwxInstructionUsingJsonResultMust(nil)
 	// Assert
-	t.Fatal("expected panic")
+	actual := args.Map{"result": false}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected panic", actual)
 }
 
 // ── ParseBaseRwxInstructionsUsingJsonResult ──
@@ -176,5 +178,7 @@ func Test_Cov_ParseBaseRwxInstructionsMust_Panic(t *testing.T) {
 	// Act
 	chmodins.ParseBaseRwxInstructionsUsingJsonResultMust(nil)
 	// Assert
-	t.Fatal("expected panic")
+	actual := args.Map{"result": false}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected panic", actual)
 }

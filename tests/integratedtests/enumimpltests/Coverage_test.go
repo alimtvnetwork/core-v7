@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/coreimpl/enumimpl"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ==========================================
@@ -13,115 +14,115 @@ import (
 func Test_DiffLeftRight_Types(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: 1}
 	l, r := d.Types()
-	if l == nil || r == nil {
-		t.Error("types should not be nil")
-	}
+	actual := args.Map{"result": l == nil || r == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "types should not be nil", actual)
 }
 
 func Test_DiffLeftRight_IsSameTypeSame_True(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if !d.IsSameTypeSame() {
-		t.Error("same type should return true")
-	}
+	actual := args.Map{"result": d.IsSameTypeSame()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same type should return true", actual)
 }
 
 func Test_DiffLeftRight_IsSameTypeSame_False(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: 1}
-	if d.IsSameTypeSame() {
-		t.Error("different types should return false")
-	}
+	actual := args.Map{"result": d.IsSameTypeSame()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different types should return false", actual)
 }
 
 func Test_DiffLeftRight_IsSame_True(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "a"}
-	if !d.IsSame() {
-		t.Error("same values should return true")
-	}
+	actual := args.Map{"result": d.IsSame()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same values should return true", actual)
 }
 
 func Test_DiffLeftRight_IsSame_False(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if d.IsSame() {
-		t.Error("different values should return false")
-	}
+	actual := args.Map{"result": d.IsSame()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different values should return false", actual)
 }
 
 func Test_DiffLeftRight_IsSameRegardlessOfType(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: 1, Right: 1}
-	if !d.IsSameRegardlessOfType() {
-		t.Error("same value regardless of type should be true")
-	}
+	actual := args.Map{"result": d.IsSameRegardlessOfType()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "same value regardless of type should be true", actual)
 }
 
 func Test_DiffLeftRight_IsEqual_Regardless(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: 1, Right: 1}
-	if !d.IsEqual(true) {
-		t.Error("should be equal regardless")
-	}
+	actual := args.Map{"result": d.IsEqual(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal regardless", actual)
 }
 
 func Test_DiffLeftRight_IsEqual_Strict(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "a"}
-	if !d.IsEqual(false) {
-		t.Error("should be equal strict")
-	}
+	actual := args.Map{"result": d.IsEqual(false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal strict", actual)
 }
 
 func Test_DiffLeftRight_HasMismatch_Regardless(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if !d.HasMismatch(true) {
-		t.Error("should have mismatch")
-	}
+	actual := args.Map{"result": d.HasMismatch(true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have mismatch", actual)
 }
 
 func Test_DiffLeftRight_HasMismatch_Strict(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if !d.HasMismatch(false) {
-		t.Error("should have mismatch")
-	}
+	actual := args.Map{"result": d.HasMismatch(false)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have mismatch", actual)
 }
 
 func Test_DiffLeftRight_IsNotEqual(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if !d.IsNotEqual() {
-		t.Error("should not be equal")
-	}
+	actual := args.Map{"result": d.IsNotEqual()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should not be equal", actual)
 }
 
 func Test_DiffLeftRight_String(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if d.String() == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": d.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_DiffLeftRight_JsonString_Nil(t *testing.T) {
 	var d *enumimpl.DiffLeftRight
-	if d.JsonString() != "" {
-		t.Error("nil should return empty")
-	}
+	actual := args.Map{"result": d.JsonString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return empty", actual)
 }
 
 func Test_DiffLeftRight_SpecificFullString(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
 	l, r := d.SpecificFullString()
-	if l == "" || r == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": l == "" || r == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 func Test_DiffLeftRight_DiffString_Same(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "a"}
-	if d.DiffString() != "" {
-		t.Error("same values should return empty diff")
-	}
+	actual := args.Map{"result": d.DiffString() != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "same values should return empty diff", actual)
 }
 
 func Test_DiffLeftRight_DiffString_Different(t *testing.T) {
 	d := &enumimpl.DiffLeftRight{Left: "a", Right: "b"}
-	if d.DiffString() == "" {
-		t.Error("different values should return non-empty diff")
-	}
+	actual := args.Map{"result": d.DiffString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "different values should return non-empty diff", actual)
 }
 
 // ==========================================
@@ -131,179 +132,179 @@ func Test_DiffLeftRight_DiffString_Different(t *testing.T) {
 func Test_DynamicMap_AddOrUpdate(t *testing.T) {
 	dm := enumimpl.DynamicMap{"key1": "val1"}
 	isNew := dm.AddOrUpdate("key2", "val2")
-	if !isNew {
-		t.Error("should be newly added")
-	}
+	actual := args.Map{"result": isNew}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be newly added", actual)
 	isNew2 := dm.AddOrUpdate("key1", "updated")
-	if isNew2 {
-		t.Error("should be updated, not new")
-	}
+	actual := args.Map{"result": isNew2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should be updated, not new", actual)
 }
 
 func Test_DynamicMap_AllKeys(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
 	keys := dm.AllKeys()
-	if len(keys) != 2 {
-		t.Errorf("expected 2, got %d", len(keys))
-	}
+	actual := args.Map{"result": len(keys) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_DynamicMap_AllKeys_Empty(t *testing.T) {
 	dm := enumimpl.DynamicMap{}
 	keys := dm.AllKeys()
-	if len(keys) != 0 {
-		t.Errorf("expected 0, got %d", len(keys))
-	}
+	actual := args.Map{"result": len(keys) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_DynamicMap_AllKeysSorted(t *testing.T) {
 	dm := enumimpl.DynamicMap{"b": 2, "a": 1}
 	keys := dm.AllKeysSorted()
-	if len(keys) != 2 || keys[0] != "a" {
-		t.Errorf("expected sorted [a b], got %v", keys)
-	}
+	actual := args.Map{"result": len(keys) != 2 || keys[0] != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected sorted [a b]", actual)
 }
 
 func Test_DynamicMap_AllValuesStrings(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
 	vals := dm.AllValuesStrings()
-	if len(vals) != 1 {
-		t.Errorf("expected 1, got %d", len(vals))
-	}
+	actual := args.Map{"result": len(vals) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_DynamicMap_AllValuesStringsSorted(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": "b", "c": "a"}
 	vals := dm.AllValuesStringsSorted()
-	if len(vals) != 2 {
-		t.Errorf("expected 2, got %d", len(vals))
-	}
+	actual := args.Map{"result": len(vals) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_DynamicMap_Length(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if dm.Length() != 1 {
-		t.Error("expected 1")
-	}
+	actual := args.Map{"result": dm.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_DynamicMap_Length_Nil(t *testing.T) {
 	var dm *enumimpl.DynamicMap
-	if dm.Length() != 0 {
-		t.Error("nil should return 0")
-	}
+	actual := args.Map{"result": dm.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return 0", actual)
 }
 
 func Test_DynamicMap_Count(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if dm.Count() != 1 {
-		t.Error("expected 1")
-	}
+	actual := args.Map{"result": dm.Count() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_DynamicMap_IsEmpty(t *testing.T) {
 	dm := enumimpl.DynamicMap{}
-	if !dm.IsEmpty() {
-		t.Error("should be empty")
-	}
+	actual := args.Map{"result": dm.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
 func Test_DynamicMap_HasAnyItem(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if !dm.HasAnyItem() {
-		t.Error("should have items")
-	}
+	actual := args.Map{"result": dm.HasAnyItem()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
 func Test_DynamicMap_HasKey(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if !dm.HasKey("a") {
-		t.Error("should have key 'a'")
-	}
-	if dm.HasKey("b") {
-		t.Error("should not have key 'b'")
-	}
+	actual := args.Map{"result": dm.HasKey("a")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have key 'a'", actual)
+	actual := args.Map{"result": dm.HasKey("b")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have key 'b'", actual)
 }
 
 func Test_DynamicMap_HasAllKeys(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1, "b": 2}
-	if !dm.HasAllKeys("a", "b") {
-		t.Error("should have all keys")
-	}
-	if dm.HasAllKeys("a", "c") {
-		t.Error("should not have all keys")
-	}
+	actual := args.Map{"result": dm.HasAllKeys("a", "b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have all keys", actual)
+	actual := args.Map{"result": dm.HasAllKeys("a", "c")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have all keys", actual)
 }
 
 func Test_DynamicMap_HasAnyKeys(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if !dm.HasAnyKeys("a", "b") {
-		t.Error("should have any key")
-	}
-	if dm.HasAnyKeys("b", "c") {
-		t.Error("should not have any key")
-	}
+	actual := args.Map{"result": dm.HasAnyKeys("a", "b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should have any key", actual)
+	actual := args.Map{"result": dm.HasAnyKeys("b", "c")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have any key", actual)
 }
 
 func Test_DynamicMap_IsMissingKey(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
-	if !dm.IsMissingKey("b") {
-		t.Error("should be missing 'b'")
-	}
+	actual := args.Map{"result": dm.IsMissingKey("b")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be missing 'b'", actual)
 }
 
 func Test_DynamicMap_Raw(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
 	raw := dm.Raw()
-	if len(raw) != 1 {
-		t.Error("raw should have 1 item")
-	}
+	actual := args.Map{"result": len(raw) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "raw should have 1 item", actual)
 }
 
 func Test_DynamicMap_First(t *testing.T) {
 	dm := enumimpl.DynamicMap{"a": 1}
 	k, v := dm.First()
-	if k == "" || v == nil {
-		t.Error("should return first item")
-	}
+	actual := args.Map{"result": k == "" || v == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return first item", actual)
 }
 
 func Test_DynamicMap_First_Empty(t *testing.T) {
 	dm := enumimpl.DynamicMap{}
 	k, v := dm.First()
-	if k != "" || v != nil {
-		t.Error("empty map should return empty first")
-	}
+	actual := args.Map{"result": k != "" || v != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty map should return empty first", actual)
 }
 
 func Test_DynamicMap_IsEqual_BothNil(t *testing.T) {
 	var a, b *enumimpl.DynamicMap
-	if !a.IsEqual(true, b) {
-		t.Error("both nil should be equal")
-	}
+	actual := args.Map{"result": a.IsEqual(true, b)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "both nil should be equal", actual)
 }
 
 func Test_DynamicMap_IsEqual_OneNil(t *testing.T) {
 	dm := &enumimpl.DynamicMap{"a": 1}
-	if dm.IsEqual(true, nil) {
-		t.Error("one nil should not be equal")
-	}
+	actual := args.Map{"result": dm.IsEqual(true, nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "one nil should not be equal", actual)
 }
 
 func Test_DynamicMap_IsEqual_Same(t *testing.T) {
 	dm := &enumimpl.DynamicMap{"a": 1}
 	dm2 := &enumimpl.DynamicMap{"a": 1}
-	if !dm.IsEqual(true, dm2) {
-		t.Error("should be equal")
-	}
+	actual := args.Map{"result": dm.IsEqual(true, dm2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be equal", actual)
 }
 
 func Test_DynamicMap_IsMismatch(t *testing.T) {
 	dm := &enumimpl.DynamicMap{"a": 1}
 	dm2 := &enumimpl.DynamicMap{"a": 2}
-	if !dm.IsMismatch(false, dm2) {
-		t.Error("should be mismatch")
-	}
+	actual := args.Map{"result": dm.IsMismatch(false, dm2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "should be mismatch", actual)
 }
 
 // ==========================================
@@ -317,9 +318,9 @@ func Test_Format(t *testing.T) {
 		"0",
 		"Enum of {type-name} - {name} - {value}",
 	)
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -328,9 +329,9 @@ func Test_Format(t *testing.T) {
 
 func Test_NameWithValue(t *testing.T) {
 	result := enumimpl.NameWithValue("test")
-	if result == "" {
-		t.Error("should return non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should return non-empty", actual)
 }
 
 // ==========================================
@@ -339,16 +340,16 @@ func Test_NameWithValue(t *testing.T) {
 
 func Test_UnsupportedNames_AllSupported(t *testing.T) {
 	result := enumimpl.UnsupportedNames([]string{"a", "b"}, "a", "b")
-	if len(result) != 0 {
-		t.Errorf("expected 0 unsupported, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 unsupported", actual)
 }
 
 func Test_UnsupportedNames_SomeUnsupported(t *testing.T) {
 	result := enumimpl.UnsupportedNames([]string{"a", "b", "c"}, "a")
-	if len(result) != 2 {
-		t.Errorf("expected 2 unsupported, got %d", len(result))
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2 unsupported", actual)
 }
 
 // ==========================================
@@ -357,21 +358,21 @@ func Test_UnsupportedNames_SomeUnsupported(t *testing.T) {
 
 func Test_OnlySupportedErr_AllSupported(t *testing.T) {
 	err := enumimpl.OnlySupportedErr(0, []string{"a", "b"}, "a", "b")
-	if err != nil {
-		t.Error("all supported should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "all supported should return nil", actual)
 }
 
 func Test_OnlySupportedErr_SomeUnsupported(t *testing.T) {
 	err := enumimpl.OnlySupportedErr(0, []string{"a", "b", "c"}, "a")
-	if err == nil {
-		t.Error("unsupported should return error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unsupported should return error", actual)
 }
 
 func Test_OnlySupportedErr_EmptyAllNames(t *testing.T) {
 	err := enumimpl.OnlySupportedErr(0, []string{})
-	if err != nil {
-		t.Error("empty allNames should return nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty allNames should return nil", actual)
 }

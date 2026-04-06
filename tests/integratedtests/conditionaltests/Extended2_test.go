@@ -4,120 +4,121 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/conditional"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_NilCheck_Extended_Verification(t *testing.T) {
 	// nil case
 	result := conditional.NilCheck(nil, "wasNil", "wasNotNil")
-	if result != "wasNil" {
-		t.Error("nil should return onNil")
-	}
+	actual := args.Map{"result": result != "wasNil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return onNil", actual)
 
 	// non-nil case
 	result2 := conditional.NilCheck("something", "wasNil", "wasNotNil")
-	if result2 != "wasNotNil" {
-		t.Error("non-nil should return onNonNil")
-	}
+	actual := args.Map{"result": result2 != "wasNotNil"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil should return onNonNil", actual)
 }
 
 func Test_DefOnNil_Extended_Verification(t *testing.T) {
 	// nil case
 	result := conditional.DefOnNil(nil, "default")
-	if result != "default" {
-		t.Error("nil should return default")
-	}
+	actual := args.Map{"result": result != "default"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return default", actual)
 
 	// non-nil case
 	result2 := conditional.DefOnNil("original", "default")
-	if result2 != "original" {
-		t.Error("non-nil should return original")
-	}
+	actual := args.Map{"result": result2 != "original"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-nil should return original", actual)
 }
 
 func Test_NilOrEmptyStr_Extended_Verification(t *testing.T) {
 	// nil case
 	result := conditional.NilOrEmptyStr(nil, "empty", "full")
-	if result != "empty" {
-		t.Error("nil should return onNilOrEmpty")
-	}
+	actual := args.Map{"result": result != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return onNilOrEmpty", actual)
 
 	// empty case
 	empty := ""
 	result2 := conditional.NilOrEmptyStr(&empty, "empty", "full")
-	if result2 != "empty" {
-		t.Error("empty string should return onNilOrEmpty")
-	}
+	actual := args.Map{"result": result2 != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty string should return onNilOrEmpty", actual)
 
 	// non-empty case
 	val := "hello"
 	result3 := conditional.NilOrEmptyStr(&val, "empty", "full")
-	if result3 != "full" {
-		t.Error("non-empty should return onNonNilOrNonEmpty")
-	}
+	actual := args.Map{"result": result3 != "full"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-empty should return onNonNilOrNonEmpty", actual)
 }
 
 func Test_NilOrEmptyStrPtr_Extended_Verification(t *testing.T) {
 	// nil case
 	result := conditional.NilOrEmptyStrPtr(nil, "empty", "full")
-	if result == nil || *result != "empty" {
-		t.Error("nil should return pointer to onNilOrEmpty")
-	}
+	actual := args.Map{"result": result == nil || *result != "empty"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "nil should return pointer to onNilOrEmpty", actual)
 
 	// non-empty case
 	val := "hello"
 	result2 := conditional.NilOrEmptyStrPtr(&val, "empty", "full")
-	if result2 == nil || *result2 != "full" {
-		t.Error("non-empty should return pointer to onNonNilOrNonEmpty")
-	}
+	actual := args.Map{"result": result2 == nil || *result2 != "full"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "non-empty should return pointer to onNonNilOrNonEmpty", actual)
 }
 
 func Test_BoolByOrder_Extended_Verification(t *testing.T) {
-	if conditional.BoolByOrder() {
-		t.Error("empty should return false")
-	}
-	if !conditional.BoolByOrder(false, true) {
-		t.Error("one true should return true")
-	}
-	if conditional.BoolByOrder(false, false) {
-		t.Error("all false should return false")
-	}
+	actual := args.Map{"result": conditional.BoolByOrder()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "empty should return false", actual)
+	actual := args.Map{"result": conditional.BoolByOrder(false, true)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "one true should return true", actual)
+	actual := args.Map{"result": conditional.BoolByOrder(false, false)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "all false should return false", actual)
 }
 
 func Test_StringsIndexVal_Extended_Verification(t *testing.T) {
 	slice := []string{"a", "b", "c"}
 	result := conditional.StringsIndexVal(true, slice, 0, 2)
-	if result != "a" {
-		t.Error("true should return index 0")
-	}
+	actual := args.Map{"result": result != "a"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "true should return index 0", actual)
 
 	result2 := conditional.StringsIndexVal(false, slice, 0, 2)
-	if result2 != "c" {
-		t.Error("false should return index 2")
-	}
+	actual := args.Map{"result": result2 != "c"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "false should return index 2", actual)
 }
 
 func Test_IfSliceAny_Extended_Verification(t *testing.T) {
 	result := conditional.IfSliceAny(true, []any{1, 2}, []any{3})
-	if len(result) != 2 {
-		t.Error("true should return first slice")
-	}
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "true should return first slice", actual)
 
 	result2 := conditional.IfSliceAny(false, []any{1, 2}, []any{3})
-	if len(result2) != 1 {
-		t.Error("false should return second slice")
-	}
+	actual := args.Map{"result": len(result2) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "false should return second slice", actual)
 }
 
 func Test_IfFuncAny_Extended_Verification(t *testing.T) {
 	result := conditional.IfFuncAny(true, func() any { return "yes" }, func() any { return "no" })
-	if result != "yes" {
-		t.Error("true should return yes")
-	}
+	actual := args.Map{"result": result != "yes"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "true should return yes", actual)
 
 	result2 := conditional.IfFuncAny(false, func() any { return "yes" }, func() any { return "no" })
-	if result2 != "no" {
-		t.Error("false should return no")
-	}
+	actual := args.Map{"result": result2 != "no"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "false should return no", actual)
 }
 
 func Test_Setter_Extended_Verification(t *testing.T) {

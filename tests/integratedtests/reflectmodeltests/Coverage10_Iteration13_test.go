@@ -176,9 +176,9 @@ func Test_I13_Invoke_NoArgs(t *testing.T) {
 func Test_I13_Invoke_TypeMismatch(t *testing.T) {
 	mp := getPtrMP("ManyArgs")
 	_, err := mp.Invoke(ptrReturner{}, "wrong", 2, 3, 4)
-	if err == nil {
-		t.Fatal("expected type mismatch error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected type mismatch error", actual)
 	actual := args.Map{"hasErr": true}
 	expected := args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct value -- type mismatch", actual)

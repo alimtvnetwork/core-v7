@@ -10,6 +10,7 @@ import (
 	"github.com/alimtvnetwork/core/chmodhelper/chmodclasstype"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
 	"github.com/alimtvnetwork/core/coredata/corestr"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func skipOnWindows(t *testing.T) {
@@ -27,9 +28,9 @@ func Test_Cov13_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
 		ClassType: chmodclasstype.All,
 	}
 	result := s.ToRwxOwnerGroupOther()
-	if result.Owner != "rwx" || result.Group != "rwx" || result.Other != "rwx" {
-		t.Fatal("expected all rwx")
-	}
+	actual := args.Map{"result": result.Owner != "rwx" || result.Group != "rwx" || result.Other != "rwx"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected all rwx", actual)
 }
 
 // ── SingleRwx.ToDisabledRwxWrapper ──
@@ -37,9 +38,9 @@ func Test_Cov13_SingleRwx_ToRwxOwnerGroupOther_Default(t *testing.T) {
 func Test_Cov13_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	w, err := s.ToDisabledRwxWrapper()
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 func Test_Cov13_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
@@ -49,9 +50,9 @@ func Test_Cov13_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
 		ClassType: chmodclasstype.All,
 	}
 	w, err := s.ToDisabledRwxWrapper()
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper for normalized invalid chars")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper for normalized invalid chars", actual)
 }
 
 // ── SingleRwx.ToRwxWrapper ──
@@ -59,17 +60,17 @@ func Test_Cov13_SingleRwx_ToDisabledRwxWrapper_Error(t *testing.T) {
 func Test_Cov13_SingleRwx_ToRwxWrapper_NotAll(t *testing.T) {
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.Owner)
 	_, err := s.ToRwxWrapper()
-	if err == nil {
-		t.Fatal("expected error for non-All class type")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for non-All class type", actual)
 }
 
 func Test_Cov13_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	w, err := s.ToRwxWrapper()
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 func Test_Cov13_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
@@ -78,9 +79,9 @@ func Test_Cov13_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
 		ClassType: chmodclasstype.All,
 	}
 	w, err := s.ToRwxWrapper()
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper for normalized invalid chars")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper for normalized invalid chars", actual)
 }
 
 // ── SingleRwx.ApplyOnMany ──
@@ -88,9 +89,9 @@ func Test_Cov13_SingleRwx_ToRwxWrapper_Error(t *testing.T) {
 func Test_Cov13_SingleRwx_ApplyOnMany_Empty(t *testing.T) {
 	s, _ := chmodhelper.NewSingleRwx("rwx", chmodclasstype.All)
 	err := s.ApplyOnMany(&chmodins.Condition{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov13_SingleRwx_ApplyOnMany_Valid(t *testing.T) {
@@ -109,43 +110,43 @@ func Test_Cov13_SingleRwx_ApplyOnMany_Error(t *testing.T) {
 		ClassType: chmodclasstype.All,
 	}
 	err := s.ApplyOnMany(&chmodins.Condition{}, "/some/path")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── newRwxWrapperCreator.CreatePtr error ──
 
 func Test_Cov13_CreatePtr_Error(t *testing.T) {
 	_, err := chmodhelper.New.RwxWrapper.CreatePtr("999")
-	if err == nil {
-		t.Fatal("expected error for invalid mode")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for invalid mode", actual)
 }
 
 func Test_Cov13_CreatePtr_Valid(t *testing.T) {
 	ptr, err := chmodhelper.New.RwxWrapper.CreatePtr("755")
-	if err != nil || ptr == nil {
-		t.Fatal("expected valid pointer")
-	}
+	actual := args.Map{"result": err != nil || ptr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid pointer", actual)
 }
 
 // ── newRwxWrapperCreator.Create invalid char ──
 
 func Test_Cov13_Create_InvalidChar(t *testing.T) {
 	_, err := chmodhelper.New.RwxWrapper.Create("89a")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── newRwxWrapperCreator.Create invalid length ──
 
 func Test_Cov13_Create_InvalidLength(t *testing.T) {
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic for wrong length")
-		}
+		actual := args.Map{"result": r := recover(); r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for wrong length", actual)
 	}()
 	chmodhelper.New.RwxWrapper.Create("77")
 }
@@ -154,19 +155,19 @@ func Test_Cov13_Create_InvalidLength(t *testing.T) {
 
 func Test_Cov13_UsingChmod_Valid(t *testing.T) {
 	w := chmodhelper.New.RwxWrapper.UsingChmod(0755)
-	if w == nil || w.IsEmpty() {
-		t.Fatal("expected non-empty wrapper")
-	}
+	actual := args.Map{"result": w == nil || w.IsEmpty()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper", actual)
 }
 
 func Test_Cov13_UsingChmod_Zero(t *testing.T) {
 	w := chmodhelper.New.RwxWrapper.UsingChmod(0)
-	if w == nil {
-		t.Fatal("expected non-nil wrapper")
-	}
-	if !w.IsEmpty() {
-		t.Fatal("expected empty wrapper for zero mode")
-	}
+	actual := args.Map{"result": w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil wrapper", actual)
+	actual := args.Map{"result": w.IsEmpty()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected empty wrapper for zero mode", actual)
 }
 
 // ── newRwxWrapperCreator.UsingVariantPtr ──
@@ -174,9 +175,9 @@ func Test_Cov13_UsingChmod_Zero(t *testing.T) {
 
 func Test_Cov13_UsingVariantPtr_Valid(t *testing.T) {
 	w, err := chmodhelper.New.RwxWrapper.UsingVariantPtr(chmodhelper.Variant("755"))
-	if err != nil || w == nil {
-		t.Fatal("expected valid pointer")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected valid pointer", actual)
 }
 
 func Test_Cov13_UsingVariantPtr_Invalid(t *testing.T) {
@@ -194,27 +195,27 @@ func Test_Cov13_Instruction_Valid(t *testing.T) {
 	ins, err := chmodhelper.New.RwxWrapper.Instruction(
 		"-rwxr-xr-x",
 		chmodins.Condition{})
-	if err != nil || ins == nil {
-		t.Fatal("expected instruction")
-	}
+	actual := args.Map{"result": err != nil || ins == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected instruction", actual)
 }
 
 func Test_Cov13_Instruction_Error(t *testing.T) {
 	_, err := chmodhelper.New.RwxWrapper.Instruction(
 		"rwxr-xr-x",
 		chmodins.Condition{})
-	if err == nil {
-		t.Fatal("expected error for wrong length")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
 
 // ── newAttributeCreator.UsingByteMust panic ──
 
 func Test_Cov13_UsingByteMust_Panic(t *testing.T) {
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic for byte > 7")
-		}
+		actual := args.Map{"result": r := recover(); r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for byte > 7", actual)
 	}()
 	chmodhelper.New.Attribute.UsingByteMust(8)
 }
@@ -223,9 +224,9 @@ func Test_Cov13_UsingByteMust_Panic(t *testing.T) {
 
 func Test_Cov13_UsingRwxString_Panic(t *testing.T) {
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic for wrong length")
-		}
+		actual := args.Map{"result": r := recover(); r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic for wrong length", actual)
 	}()
 	chmodhelper.New.Attribute.UsingRwxString("rw")
 }
@@ -235,38 +236,38 @@ func Test_Cov13_UsingRwxString_Panic(t *testing.T) {
 func Test_Cov13_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	result := chmodhelper.ChmodVerify.IsEqualRwxFullSkipInvalid(
 		"/nonexistent/cov13/skip", "-rwxr-xr-x")
-	if !result {
-		t.Fatal("expected true for invalid path with skip")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for invalid path with skip", actual)
 }
 
 func Test_Cov13_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	result := chmodhelper.ChmodVerify.IsEqualSkipInvalid(
 		"/nonexistent/cov13/skip2", 0755)
-	if !result {
-		t.Fatal("expected true for invalid path with skip")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true for invalid path with skip", actual)
 }
 
 func Test_Cov13_ChmodVerifier_GetRwx9_Short(t *testing.T) {
 	result := chmodhelper.ChmodVerify.GetRwx9(0)
-	if result != "---------" {
-		t.Fatalf("expected --------- got %q", result)
-	}
+	actual := args.Map{"result": result != "---------"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected ---------", actual)
 }
 
 func Test_Cov13_ChmodVerifier_GetRwx9_Valid(t *testing.T) {
 	result := chmodhelper.ChmodVerify.GetRwx9(0755)
-	if result == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": result == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_Cov13_ChmodVerifier_GetExistingRwxWrapperMust_Panic(t *testing.T) {
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic")
-		}
+		actual := args.Map{"result": r := recover(); r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
 	chmodhelper.ChmodVerify.GetExistingRwxWrapperMust("/nonexistent/cov13/must")
 }
@@ -277,9 +278,9 @@ func Test_Cov13_ChmodVerifier_GetExistingChmodRwxWrappers(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	results, err := chmodhelper.ChmodVerify.GetExistingChmodRwxWrappers(true, tmpFile)
-	if err != nil || len(results) == 0 {
-		t.Fatal("expected results")
-	}
+	actual := args.Map{"result": err != nil || len(results) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected results", actual)
 }
 
 func Test_Cov13_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
@@ -288,16 +289,16 @@ func Test_Cov13_ChmodVerifier_GetExistsFilteredPathFileInfoMap(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	m := chmodhelper.ChmodVerify.GetExistsFilteredPathFileInfoMap(false, tmpFile)
-	if m == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": m == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Cov13_ChmodVerifier_RwxFull_InvalidLength(t *testing.T) {
 	err := chmodhelper.ChmodVerify.RwxFull("/tmp", "rwx")
-	if err == nil {
-		t.Fatal("expected error for wrong length")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for wrong length", actual)
 }
 
 func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions(t *testing.T) {
@@ -317,16 +318,16 @@ func Test_Cov13_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
 	// Test empty locations branch (returns nil from CreateErrFinalError).
 	verifyErr := chmodhelper.ChmodVerify.PathsUsingPartialRwxOptions(
 		false, false, "-rwx")
-	if verifyErr != nil {
-		t.Fatal("expected nil for empty locations")
-	}
+	actual := args.Map{"result": verifyErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty locations", actual)
 }
 
 func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_Empty(t *testing.T) {
 	err := chmodhelper.ChmodVerify.PathsUsingRwxFull(false, "-rwxr-xr-x")
-	if err == nil {
-		t.Fatal("expected error for empty locations")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for empty locations", actual)
 }
 
 func Test_Cov13_ChmodVerifier_PathsUsingRwxFull_ContinueOnError(t *testing.T) {
@@ -363,18 +364,18 @@ func Test_Cov13_ChmodVerifier_UsingHashmap_Mismatch(t *testing.T) {
 	hm.AddOrUpdate(tmpFile, "-rwxrwxrwx")
 
 	err := chmodhelper.ChmodVerify.UsingHashmap(hm)
-	if err == nil {
-		t.Fatal("expected mismatch error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected mismatch error", actual)
 }
 
 // ── chmodVerifier.UsingRwxOwnerGroupOther ──
 
 func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Nil(t *testing.T) {
 	err := chmodhelper.ChmodVerify.UsingRwxOwnerGroupOther(nil, "/tmp")
-	if err == nil {
-		t.Fatal("expected error for nil")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 }
 
 func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Valid(t *testing.T) {
@@ -396,9 +397,9 @@ func Test_Cov13_ChmodVerifier_UsingRwxOwnerGroupOther_Valid(t *testing.T) {
 
 func Test_Cov13_ChmodApplier_RwxPartial_Empty(t *testing.T) {
 	err := chmodhelper.ChmodApply.RwxPartial("-rwxr-xr-x", &chmodins.Condition{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov13_ChmodApplier_RwxPartial_Error(t *testing.T) {
@@ -408,9 +409,9 @@ func Test_Cov13_ChmodApplier_RwxPartial_Error(t *testing.T) {
 	defer os.Remove(tmpFile)
 
 	err := chmodhelper.ChmodApply.RwxPartial("-rwxr-xr-x", nil, tmpFile)
-	if err == nil {
-		t.Fatal("expected error for nil condition")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for nil condition", actual)
 }
 
 func Test_Cov13_ChmodApplier_RwxPartial_Valid(t *testing.T) {
@@ -426,23 +427,23 @@ func Test_Cov13_ChmodApplier_RwxPartial_Valid(t *testing.T) {
 
 func Test_Cov13_RwxStringApplyChmod_Empty(t *testing.T) {
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr-x", &chmodins.Condition{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov13_RwxStringApplyChmod_InvalidLength(t *testing.T) {
 	err := chmodhelper.RwxStringApplyChmod("rwx", &chmodins.Condition{}, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_RwxStringApplyChmod_NilCondition(t *testing.T) {
 	err := chmodhelper.RwxStringApplyChmod("-rwxr-xr-x", nil, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_RwxStringApplyChmod_Valid(t *testing.T) {
@@ -459,9 +460,9 @@ func Test_Cov13_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
 	// Parser does not validate individual rwx characters, only length.
 	// Use a string with wrong length to trigger error.
 	err := chmodhelper.RwxStringApplyChmod("-rZx", &chmodins.Condition{}, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── RwxOwnerGroupOtherApplyChmod ──
@@ -469,24 +470,24 @@ func Test_Cov13_RwxStringApplyChmod_InvalidRwx(t *testing.T) {
 func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Empty(t *testing.T) {
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "r-x"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, &chmodins.Condition{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilRwx(t *testing.T) {
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(nil, &chmodins.Condition{}, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_RwxOwnerGroupOtherApplyChmod_NilCondition(t *testing.T) {
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rwx", Group: "r-x", Other: "r-x"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, nil, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_RwxOwnerGroupOtherApplyChmod_Valid(t *testing.T) {
@@ -504,9 +505,9 @@ func Test_Cov13_RwxOwnerGroupOtherApplyChmod_InvalidRwx(t *testing.T) {
 	// Use invalid length rwx to trigger parsing error
 	rwx := &chmodins.RwxOwnerGroupOther{Owner: "rZxExtra", Group: "r-x", Other: "r-x"}
 	err := chmodhelper.RwxOwnerGroupOtherApplyChmod(rwx, &chmodins.Condition{}, "/tmp")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── RwxMatchingStatus.CreateErrFinalError ──
@@ -516,9 +517,9 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_AllMatching(t *testing.T) 
 		IsAllMatching: true,
 	}
 	err := status.CreateErrFinalError()
-	if err != nil {
-		t.Fatal("expected nil for all matching")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for all matching", actual)
 }
 
 func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithMismatch(t *testing.T) {
@@ -529,9 +530,9 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithMismatch(t *testing.T)
 		},
 	}
 	err := status.CreateErrFinalError()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithError(t *testing.T) {
@@ -541,9 +542,9 @@ func Test_Cov13_RwxMatchingStatus_CreateErrFinalError_WithError(t *testing.T) {
 		Error:            os.ErrNotExist,
 	}
 	err := status.CreateErrFinalError()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── fwChmodApplier ──
@@ -557,9 +558,9 @@ func Test_Cov13_FwChmodApplier_Apply_Error(t *testing.T) {
 	}
 	applier := rw.ChmodApplier()
 	err := applier.Apply(0644, "/nonexistent/cov13/fw/test.txt")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_FwChmodApplier_OnDiffFile(t *testing.T) {
@@ -589,9 +590,9 @@ func Test_Cov13_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
 	}
 	applier := rw.ChmodApplier()
 	err := applier.OnDiffFile(true, "/nonexistent/cov13/skip.txt")
-	if err != nil {
-		t.Fatal("expected nil for skip invalid")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for skip invalid", actual)
 }
 
 func Test_Cov13_FwChmodApplier_OnDiffDir(t *testing.T) {
@@ -619,9 +620,9 @@ func Test_Cov13_FwChmodApplier_OnDiffDir_SkipInvalid(t *testing.T) {
 	}
 	applier := rw.ChmodApplier()
 	err := applier.OnDiffDir(true, "/nonexistent/cov13/skipdir")
-	if err != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Cov13_FwChmodApplier_OnAll(t *testing.T) {
@@ -651,9 +652,9 @@ func Test_Cov13_FwChmodApplier_OnAll_Error(t *testing.T) {
 	}
 	applier := rw.ChmodApplier()
 	err := applier.OnAll()
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_FwChmodApplier_OnMismatch(t *testing.T) {
@@ -678,9 +679,9 @@ func Test_Cov13_FwChmodApplier_OnMismatch_BothFalse(t *testing.T) {
 	rw := &chmodhelper.SimpleFileReaderWriter{}
 	applier := rw.ChmodApplier()
 	err := applier.OnMismatch(false, false)
-	if err != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 // ── fwChmodVerifier.HasMismatchParentDir ──
@@ -715,9 +716,9 @@ func Test_Cov13_CreateDirFilesWithRwxPermission_FileModeErr(t *testing.T) {
 		},
 	}
 	err := chmodhelper.CreateDirFilesWithRwxPermission(false, perm)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_CreateDirFilesWithRwxPermission_CreateErr(t *testing.T) {
@@ -737,9 +738,9 @@ func Test_Cov13_CreateDirFilesWithRwxPermission_CreateErr(t *testing.T) {
 		},
 	}
 	err := chmodhelper.CreateDirFilesWithRwxPermission(false, perm)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── CreateDirWithFiles error branches ──
@@ -754,9 +755,9 @@ func Test_Cov13_CreateDirWithFiles_RemoveDirErr(t *testing.T) {
 		Files: []string{"a.txt"},
 	})
 	defer os.RemoveAll(tmpDir)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov13_CreateDirWithFiles_MkdirErr(t *testing.T) {
@@ -767,9 +768,9 @@ func Test_Cov13_CreateDirWithFiles_MkdirErr(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{
 		Dir: filepath.Join(tmpFile, "sub"),
 	})
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_CreateDirWithFiles_FileCreateErr(t *testing.T) {
@@ -785,9 +786,9 @@ func Test_Cov13_CreateDirWithFiles_FileCreateErr(t *testing.T) {
 		Dir:   tmpDir,
 		Files: []string{filepath.Join("blocker", "impossible.txt")},
 	})
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_CreateDirWithFiles_NoFiles(t *testing.T) {
@@ -798,9 +799,9 @@ func Test_Cov13_CreateDirWithFiles_NoFiles(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{
 		Dir: tmpDir,
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 // ── CreateDirsWithFiles error ──
@@ -812,9 +813,9 @@ func Test_Cov13_CreateDirsWithFiles_Error(t *testing.T) {
 
 	err := chmodhelper.CreateDirsWithFiles(false, 0755,
 		chmodhelper.DirWithFiles{Dir: filepath.Join(tmpFile, "sub"), Files: []string{"a.txt"}})
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── CreateDirFilesWithRwxPermissions error ──
@@ -828,9 +829,9 @@ func Test_Cov13_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 		},
 	}
 	err := chmodhelper.CreateDirFilesWithRwxPermissions(false, perms)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── CreateDirFilesWithRwxPermissionsMust panic ──
@@ -838,9 +839,9 @@ func Test_Cov13_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 func Test_Cov13_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 	skipOnWindows(t)
 	defer func() {
-		if r := recover(); r == nil {
-			t.Fatal("expected panic")
-		}
+		actual := args.Map{"result": r := recover(); r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()
 	perms := []chmodhelper.DirFilesWithRwxPermission{
 		{
@@ -865,9 +866,9 @@ func Test_Cov13_DirFilesWithContent_Create_RemoveError(t *testing.T) {
 	}
 	err := dfc.Create(true)
 	// remove on non-existent is fine, but write fails
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_DirFilesWithContent_Create_Success(t *testing.T) {
@@ -883,9 +884,9 @@ func Test_Cov13_DirFilesWithContent_Create_Success(t *testing.T) {
 		},
 	}
 	err := dfc.Create(false)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 // ── FileWithContent.ReadLines error ──
@@ -896,9 +897,9 @@ func Test_Cov13_FileWithContent_ReadLines_Error(t *testing.T) {
 		FileMode:     0644,
 	}
 	_, err := fc.ReadLines("/nonexistent/cov13")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_FileWithContent_ReadLines_Success(t *testing.T) {
@@ -912,12 +913,12 @@ func Test_Cov13_FileWithContent_ReadLines_Success(t *testing.T) {
 		FileMode:     0644,
 	}
 	lines, err := fc.ReadLines(tmpDir)
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(lines) != 3 {
-		t.Fatalf("expected 3 lines, got %d", len(lines))
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
+	actual := args.Map{"result": len(lines) != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3 lines", actual)
 }
 
 // ── fileWriter.All error branches ──
@@ -929,9 +930,9 @@ func Test_Cov13_FileWriter_All_DirErr(t *testing.T) {
 
 	rw := newTestRW(filepath.Join(tmpFile, "sub"), "test.txt")
 	err := rw.Write([]byte("x"))
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov13_FileWriter_Remove(t *testing.T) {
@@ -949,7 +950,7 @@ func Test_Cov13_FileWriter_Remove(t *testing.T) {
 		IsRemoveBeforeWrite: true,
 	}
 	err := rw.Write([]byte("new content"))
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/enums/stringcompareas"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_Cov_NotContains_CaseSensitive(t *testing.T) {
@@ -11,15 +12,15 @@ func Test_Cov_NotContains_CaseSensitive(t *testing.T) {
 	// Case-sensitive: "Hello World" does NOT contain "hello" (different case)
 	// so NotContains returns true (it is indeed not contained).
 	result := nc.IsCompareSuccess(false, "Hello World", "hello")
-	if !result {
-		t.Error("case sensitive: 'hello' not in 'Hello World', NotContains should be true")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "case sensitive: 'hello' not in 'Hello World', NotContains should be true", actual)
 }
 
 func Test_Cov_NotContains_CaseInsensitive(t *testing.T) {
 	nc := stringcompareas.NotContains
 	result := nc.IsCompareSuccess(true, "Hello World", "hello")
-	if result {
-		t.Error("case insensitive: should contain")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "case insensitive: should contain", actual)
 }

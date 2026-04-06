@@ -318,10 +318,10 @@ func Test_BoolOnce_MarshalJSON_RoundTrip(t *testing.T) {
 	bytes, err := json.Marshal(&boolOnce)
 
 	// Assert
-	if err != nil {
-		t.Errorf("MarshalJSON failed: %v", err)
-	}
-	if len(bytes) == 0 {
-		t.Error("MarshalJSON returned empty bytes")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MarshalJSON failed:", actual)
+	actual := args.Map{"result": len(bytes) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "MarshalJSON returned empty bytes", actual)
 }

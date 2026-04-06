@@ -408,27 +408,27 @@ func Test_Triple_Clear(t *testing.T) {
 func Test_New_Pair_Creator(t *testing.T) {
 	// StringString
 	p := coregeneric.New.Pair.StringString("k", "v")
-	if p.Left != "k" || p.Right != "v" || !p.IsValid {
-		t.Errorf("New.Pair.StringString failed: got %v", p)
-	}
+	actual := args.Map{"result": p.Left != "k" || p.Right != "v" || !p.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Pair.StringString failed:", actual)
 
 	// StringInt
 	pi := coregeneric.New.Pair.StringInt("age", 30)
-	if pi.Left != "age" || pi.Right != 30 || !pi.IsValid {
-		t.Errorf("New.Pair.StringInt failed: got %v", pi)
-	}
+	actual := args.Map{"result": pi.Left != "age" || pi.Right != 30 || !pi.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Pair.StringInt failed:", actual)
 
 	// Any
 	pa := coregeneric.New.Pair.Any("x", 42)
-	if pa.Left != "x" || pa.Right != 42 || !pa.IsValid {
-		t.Errorf("New.Pair.Any failed: got %v", pa)
-	}
+	actual := args.Map{"result": pa.Left != "x" || pa.Right != 42 || !pa.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Pair.Any failed:", actual)
 
 	// InvalidStringString
 	inv := coregeneric.New.Pair.InvalidStringString("err")
-	if inv.IsValid || inv.Message != "err" {
-		t.Errorf("New.Pair.InvalidStringString failed: got %v", inv)
-	}
+	actual := args.Map{"result": inv.IsValid || inv.Message != "err"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Pair.InvalidStringString failed:", actual)
 }
 
 // ==========================================
@@ -438,19 +438,19 @@ func Test_New_Pair_Creator(t *testing.T) {
 func Test_New_Triple_Creator(t *testing.T) {
 	// StringStringString
 	tr := coregeneric.New.Triple.StringStringString("a", "b", "c")
-	if tr.Left != "a" || tr.Middle != "b" || tr.Right != "c" || !tr.IsValid {
-		t.Errorf("New.Triple.StringStringString failed: got %v", tr)
-	}
+	actual := args.Map{"result": tr.Left != "a" || tr.Middle != "b" || tr.Right != "c" || !tr.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Triple.StringStringString failed:", actual)
 
 	// Any
 	ta := coregeneric.New.Triple.Any("x", 1, true)
-	if ta.Left != "x" || ta.Middle != 1 || ta.Right != true || !ta.IsValid {
-		t.Errorf("New.Triple.Any failed: got %v", ta)
-	}
+	actual := args.Map{"result": ta.Left != "x" || ta.Middle != 1 || ta.Right != true || !ta.IsValid}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Triple.Any failed:", actual)
 
 	// InvalidStringStringString
 	inv := coregeneric.New.Triple.InvalidStringStringString("bad")
-	if inv.IsValid || inv.Message != "bad" {
-		t.Errorf("New.Triple.InvalidStringStringString failed: got %v", inv)
-	}
+	actual := args.Map{"result": inv.IsValid || inv.Message != "bad"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "New.Triple.InvalidStringStringString failed:", actual)
 }

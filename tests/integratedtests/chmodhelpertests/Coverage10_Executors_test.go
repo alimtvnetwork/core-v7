@@ -7,6 +7,7 @@ import (
 
 	"github.com/alimtvnetwork/core/chmodhelper"
 	"github.com/alimtvnetwork/core/chmodhelper/chmodins"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── RwxInstructionExecutor.CompiledWrapper ──
@@ -18,13 +19,13 @@ func Test_Cov10_CompiledWrapper_Fixed(t *testing.T) {
 		},
 	}
 	exec, err := chmodhelper.ParseRwxInstructionToExecutor(ins)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	w, err := exec.CompiledWrapper(0755)
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 func Test_Cov10_CompiledWrapper_Var(t *testing.T) {
@@ -34,13 +35,13 @@ func Test_Cov10_CompiledWrapper_Var(t *testing.T) {
 		},
 	}
 	exec, err := chmodhelper.ParseRwxInstructionToExecutor(ins)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	w, err := exec.CompiledWrapper(0755)
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 // ── RwxInstructionExecutor.CompiledRwxWrapperUsingFixedRwxWrapper ──
@@ -52,14 +53,14 @@ func Test_Cov10_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 		},
 	}
 	exec, err := chmodhelper.ParseRwxInstructionToExecutor(ins)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	existing := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 	w, err := exec.CompiledRwxWrapperUsingFixedRwxWrapper(existing)
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 func Test_Cov10_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
@@ -69,14 +70,14 @@ func Test_Cov10_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 		},
 	}
 	exec, err := chmodhelper.ParseRwxInstructionToExecutor(ins)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 	existing := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 	w, err := exec.CompiledRwxWrapperUsingFixedRwxWrapper(existing)
-	if err != nil || w == nil {
-		t.Fatal("expected wrapper")
-	}
+	actual := args.Map{"result": err != nil || w == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
 // ── RwxInstructionExecutor.ApplyOnPath ──
@@ -92,9 +93,9 @@ func Test_Cov10_ApplyOnPath_ExitOnInvalid_Error(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPath("/nonexistent/cov10/exit_invalid")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov10_ApplyOnPath_SkipOnInvalid(t *testing.T) {
@@ -108,9 +109,9 @@ func Test_Cov10_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPath("/nonexistent/cov10/skip_invalid")
-	if err != nil {
-		t.Fatal("expected nil for skip on invalid")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for skip on invalid", actual)
 }
 
 func Test_Cov10_ApplyOnPath_Recursive(t *testing.T) {
@@ -143,9 +144,9 @@ func Test_Cov10_ApplyOnPath_NonRecursive(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPath(tmpFile)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 // ── RwxInstructionExecutor.ApplyOnPaths / ApplyOnPathsDirect / ApplyOnPathsPtr ──
@@ -158,9 +159,9 @@ func Test_Cov10_ApplyOnPaths_Empty(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPaths([]string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_ApplyOnPathsDirect_Empty(t *testing.T) {
@@ -171,9 +172,9 @@ func Test_Cov10_ApplyOnPathsDirect_Empty(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPathsDirect()
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_ApplyOnPathsPtr_Nil(t *testing.T) {
@@ -184,9 +185,9 @@ func Test_Cov10_ApplyOnPathsPtr_Nil(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.ApplyOnPathsPtr(nil)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_ApplyOnPathsPtr_ContinueOnError(t *testing.T) {
@@ -203,9 +204,9 @@ func Test_Cov10_ApplyOnPathsPtr_ContinueOnError(t *testing.T) {
 	locs := []string{"/nonexistent/cov10/p1", "/nonexistent/cov10/p2"}
 	err := exec.ApplyOnPathsPtr(&locs)
 	// skip on invalid -> nil
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_ApplyOnPathsPtr_StopOnError(t *testing.T) {
@@ -221,9 +222,9 @@ func Test_Cov10_ApplyOnPathsPtr_StopOnError(t *testing.T) {
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	locs := []string{tmpFile}
 	err := exec.ApplyOnPathsPtr(&locs)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 // ── RwxInstructionExecutor.VerifyRwxModifiers ──
@@ -236,9 +237,9 @@ func Test_Cov10_VerifyRwxModifiers_Empty(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.VerifyRwxModifiers(true, []string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_VerifyRwxModifiers_ContinueOnError(t *testing.T) {
@@ -287,9 +288,9 @@ func Test_Cov10_VerifyRwxModifiers_RecursiveNotSupported(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.VerifyRwxModifiers(false, []string{"/some/path"})
-	if err == nil {
-		t.Fatal("expected error for recursive verify")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error for recursive verify", actual)
 }
 
 func Test_Cov10_VerifyRwxModifiersDirect(t *testing.T) {
@@ -336,9 +337,9 @@ func Test_Cov10_VerifyNoContinue_Mismatch(t *testing.T) {
 	}
 	exec, _ := chmodhelper.ParseRwxInstructionToExecutor(ins)
 	err := exec.VerifyRwxModifiers(true, []string{tmpFile})
-	if err == nil {
-		t.Fatal("expected mismatch error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected mismatch error", actual)
 }
 
 // ── RwxInstructionExecutors ──
@@ -360,9 +361,9 @@ func Test_Cov10_Executors_Adds(t *testing.T) {
 	e2, _ := chmodhelper.ParseRwxInstructionToExecutor(ins2)
 
 	executors.Adds(e1, e2)
-	if executors.Length() != 2 {
-		t.Fatalf("expected 2, got %d", executors.Length())
-	}
+	actual := args.Map{"result": executors.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Cov10_Executors_Adds_Nil(t *testing.T) {
@@ -374,9 +375,9 @@ func Test_Cov10_Executors_Adds_Nil(t *testing.T) {
 func Test_Cov10_Executors_Length_Empty(t *testing.T) {
 	executors := chmodhelper.NewRwxInstructionExecutors(0)
 	l := executors.Length()
-	if l != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": l != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_Cov10_Executors_ApplyOnPath(t *testing.T) {
@@ -394,9 +395,9 @@ func Test_Cov10_Executors_ApplyOnPath(t *testing.T) {
 	executors.Add(e)
 
 	err := executors.ApplyOnPath(tmpFile)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_Executors_ApplyOnPath_Error(t *testing.T) {
@@ -413,9 +414,9 @@ func Test_Cov10_Executors_ApplyOnPath_Error(t *testing.T) {
 	executors.Add(e)
 
 	err := executors.ApplyOnPath("/nonexistent/cov10/exec_err")
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_Cov10_Executors_ApplyOnPaths(t *testing.T) {
@@ -429,9 +430,9 @@ func Test_Cov10_Executors_ApplyOnPaths(t *testing.T) {
 	executors.Add(e)
 
 	err := executors.ApplyOnPaths([]string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_Executors_ApplyOnPathsPtr(t *testing.T) {
@@ -450,9 +451,9 @@ func Test_Cov10_Executors_ApplyOnPathsPtr(t *testing.T) {
 
 	locs := []string{tmpFile}
 	err := executors.ApplyOnPathsPtr(locs)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Cov10_Executors_VerifyRwxModifiers(t *testing.T) {
@@ -491,7 +492,7 @@ func Test_Cov10_Executors_VerifyRwxModifiers_ContinueOnErr(t *testing.T) {
 func Test_Cov10_Executors_VerifyRwxModifiers_Empty(t *testing.T) {
 	executors := chmodhelper.NewRwxInstructionExecutors(1)
 	err := executors.VerifyRwxModifiers(false, true, []string{})
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }

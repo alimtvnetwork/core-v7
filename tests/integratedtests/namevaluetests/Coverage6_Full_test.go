@@ -20,19 +20,25 @@ func Test_C6_Instance_IsNull(t *testing.T) {
 func Test_C6_Instance_String(t *testing.T) {
 	inst := namevalue.StringAny{Name: "key", Value: "val"}
 	s := inst.String()
-	if s == "" { t.Fatal("expected non-empty string") }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_C6_Instance_JsonString(t *testing.T) {
 	inst := namevalue.StringAny{Name: "key", Value: "val"}
 	js := inst.JsonString()
-	if js == "" { t.Fatal("expected non-empty json") }
+	actual := args.Map{"result": js == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
 func Test_C6_Instance_Dispose(t *testing.T) {
 	inst := namevalue.StringAny{Name: "key", Value: "val"}
 	inst.Dispose()
-	if inst.Name != "" { t.Fatal("expected empty after dispose") }
+	actual := args.Map{"result": inst.Name != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty after dispose", actual)
 
 	// nil dispose should not panic
 	var nilInst *namevalue.StringAny
@@ -50,12 +56,16 @@ func Test_C6_NewGenericCollection(t *testing.T) {
 
 func Test_C6_NewGenericCollectionDefault(t *testing.T) {
 	c := namevalue.NewGenericCollectionDefault[string, any]()
-	if c == nil { t.Fatal("expected non-nil") }
+	actual := args.Map{"result": c == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C6_EmptyGenericCollection(t *testing.T) {
 	c := namevalue.EmptyGenericCollection[string, any]()
-	if c.Length() != 0 { t.Fatal("expected empty") }
+	actual := args.Map{"result": c.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_C6_NewGenericCollectionUsing(t *testing.T) {
@@ -78,22 +88,30 @@ func Test_C6_NewGenericCollectionUsing(t *testing.T) {
 
 func Test_C6_NewNameValuesCollection(t *testing.T) {
 	c := namevalue.NewNameValuesCollection(5)
-	if c == nil { t.Fatal("expected non-nil") }
+	actual := args.Map{"result": c == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C6_NewCollection(t *testing.T) {
 	c := namevalue.NewCollection()
-	if c == nil { t.Fatal("expected non-nil") }
+	actual := args.Map{"result": c == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_C6_NewNewNameValuesCollectionUsing(t *testing.T) {
 	c := namevalue.NewNewNameValuesCollectionUsing(true, namevalue.StringAny{Name: "x", Value: 1})
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_EmptyNameValuesCollection(t *testing.T) {
 	c := namevalue.EmptyNameValuesCollection()
-	if c.Length() != 0 { t.Fatal("expected 0") }
+	actual := args.Map{"result": c.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // ── Collection Add/Adds/Append/Prepend ──
@@ -101,21 +119,27 @@ func Test_C6_EmptyNameValuesCollection(t *testing.T) {
 func Test_C6_Collection_Add(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_Adds(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Adds(namevalue.StringAny{Name: "a", Value: 1}, namevalue.StringAny{Name: "b", Value: 2})
 	c.Adds() // empty
-	if c.Length() != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": c.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C6_Collection_Append(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Append(namevalue.StringAny{Name: "a", Value: 1})
 	c.Append() // empty
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_AppendIf(t *testing.T) {
@@ -123,7 +147,9 @@ func Test_C6_Collection_AppendIf(t *testing.T) {
 	c.AppendIf(true, namevalue.StringAny{Name: "a", Value: 1})
 	c.AppendIf(false, namevalue.StringAny{Name: "b", Value: 2})
 	c.AppendIf(true) // empty items
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_Prepend(t *testing.T) {
@@ -131,7 +157,9 @@ func Test_C6_Collection_Prepend(t *testing.T) {
 	c.Add(namevalue.StringAny{Name: "b", Value: 2})
 	c.Prepend(namevalue.StringAny{Name: "a", Value: 1})
 	c.Prepend() // empty
-	if c.Length() != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": c.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C6_Collection_PrependIf(t *testing.T) {
@@ -140,7 +168,9 @@ func Test_C6_Collection_PrependIf(t *testing.T) {
 	c.PrependIf(true, namevalue.StringAny{Name: "a", Value: 1})
 	c.PrependIf(false, namevalue.StringAny{Name: "c", Value: 3})
 	c.PrependIf(true) // empty items
-	if c.Length() != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": c.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C6_Collection_PrependUsingFuncIf(t *testing.T) {
@@ -153,7 +183,9 @@ func Test_C6_Collection_PrependUsingFuncIf(t *testing.T) {
 		return []namevalue.StringAny{{Name: "c", Value: 3}}
 	})
 	c.PrependUsingFuncIf(true, nil) // nil func
-	if c.Length() != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": c.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_C6_Collection_AppendUsingFuncIf(t *testing.T) {
@@ -165,7 +197,9 @@ func Test_C6_Collection_AppendUsingFuncIf(t *testing.T) {
 		return []namevalue.StringAny{{Name: "b", Value: 2}}
 	})
 	c.AppendUsingFuncIf(true, nil) // nil func
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_AppendPrependIf(t *testing.T) {
@@ -177,7 +211,9 @@ func Test_C6_Collection_AppendPrependIf(t *testing.T) {
 	c.AppendPrependIf(false, prepend, appnd) // skip
 	// Also test with empty slices
 	c.AppendPrependIf(true, nil, nil)
-	if c.Length() != 3 { t.Fatal("expected 3") }
+	actual := args.Map{"result": c.Length() != 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
 func Test_C6_Collection_AddsPtr(t *testing.T) {
@@ -185,14 +221,18 @@ func Test_C6_Collection_AddsPtr(t *testing.T) {
 	item := namevalue.StringAny{Name: "a", Value: 1}
 	c.AddsPtr(&item, nil) // nil should be skipped
 	c.AddsPtr()           // empty
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_AddsIf(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.AddsIf(true, namevalue.StringAny{Name: "a", Value: 1})
 	c.AddsIf(false, namevalue.StringAny{Name: "b", Value: 2})
-	if c.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ── Collection query methods ──
@@ -232,28 +272,36 @@ func Test_C6_Collection_Strings(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	strs := c.Strings()
-	if len(strs) != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": len(strs) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_JsonStrings(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	strs := c.JsonStrings()
-	if len(strs) != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": len(strs) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_JoinJsonStrings(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	s := c.JoinJsonStrings(",")
-	if s == "" { t.Fatal("expected non-empty") }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C6_Collection_Join(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	s := c.Join(",")
-	if s == "" { t.Fatal("expected non-empty") }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_C6_Collection_JoinLines(t *testing.T) {
@@ -278,11 +326,15 @@ func Test_C6_Collection_CsvStrings(t *testing.T) {
 	c := namevalue.NewCollection()
 	// empty
 	csv := c.CsvStrings()
-	if len(csv) != 0 { t.Fatal("expected empty") }
+	actual := args.Map{"result": len(csv) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	// with items
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	csv = c.CsvStrings()
-	if len(csv) != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": len(csv) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 // ── Collection IsEqualByString ──
@@ -320,19 +372,27 @@ func Test_C6_Collection_IsEqualByString(t *testing.T) {
 func Test_C6_Collection_JsonString(t *testing.T) {
 	c := namevalue.NewCollection()
 	empty := c.JsonString()
-	if empty != "" { t.Fatal("expected empty for empty collection") }
+	actual := args.Map{"result": empty != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for empty collection", actual)
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	js := c.JsonString()
-	if js == "" { t.Fatal("expected non-empty json") }
+	actual := args.Map{"result": js == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
 func Test_C6_Collection_String(t *testing.T) {
 	c := namevalue.NewCollection()
 	empty := c.String()
-	if empty != "" { t.Fatal("expected empty for empty collection") }
+	actual := args.Map{"result": empty != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for empty collection", actual)
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	s := c.String()
-	if s == "" { t.Fatal("expected non-empty string") }
+	actual := args.Map{"result": s == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty string", actual)
 }
 
 func Test_C6_Collection_HasCompiledString_CompiledLazyString(t *testing.T) {
@@ -340,19 +400,29 @@ func Test_C6_Collection_HasCompiledString_CompiledLazyString(t *testing.T) {
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	// First call compiles
 	s1 := c.CompiledLazyString()
-	if s1 == "" { t.Fatal("expected non-empty") }
-	if !c.HasCompiledString() { t.Fatal("expected compiled") }
+	actual := args.Map{"result": s1 == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+	actual := args.Map{"result": c.HasCompiledString()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected compiled", actual)
 	// Second call returns cached
 	s2 := c.CompiledLazyString()
-	if s1 != s2 { t.Fatal("expected same") }
+	actual := args.Map{"result": s1 != s2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected same", actual)
 	// Invalidate
 	c.InvalidateLazyString()
-	if c.HasCompiledString() { t.Fatal("expected not compiled") }
+	actual := args.Map{"result": c.HasCompiledString()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not compiled", actual)
 
 	// nil receiver
 	var nilC *namevalue.Collection[string, any]
 	nilS := nilC.CompiledLazyString()
-	if nilS != "" { t.Fatal("expected empty for nil") }
+	actual := args.Map{"result": nilS != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	nilC.InvalidateLazyString() // should not panic
 }
 
@@ -360,17 +430,25 @@ func Test_C6_Collection_HasCompiledString_CompiledLazyString(t *testing.T) {
 
 func Test_C6_Collection_Error(t *testing.T) {
 	c := namevalue.NewCollection()
-	if c.Error() != nil { t.Fatal("expected nil for empty") }
+	actual := args.Map{"result": c.Error() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	c.Add(namevalue.StringAny{Name: "err", Value: "msg"})
-	if c.Error() == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": c.Error() == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_C6_Collection_ErrorUsingMessage(t *testing.T) {
 	c := namevalue.NewCollection()
-	if c.ErrorUsingMessage("prefix") != nil { t.Fatal("expected nil for empty") }
+	actual := args.Map{"result": c.ErrorUsingMessage("prefix") != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 	c.Add(namevalue.StringAny{Name: "err", Value: "msg"})
 	err := c.ErrorUsingMessage("prefix")
-	if err == nil { t.Fatal("expected error") }
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // ── Collection ConcatNew / ConcatNewPtr ──
@@ -379,8 +457,12 @@ func Test_C6_Collection_ConcatNew(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	c2 := c.ConcatNew(namevalue.StringAny{Name: "b", Value: 2})
-	if c2.Length() != 2 { t.Fatal("expected 2") }
-	if c.Length() != 1 { t.Fatal("original should be unchanged") }
+	actual := args.Map{"result": c2.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "original should be unchanged", actual)
 }
 
 func Test_C6_Collection_ConcatNewPtr(t *testing.T) {
@@ -388,7 +470,9 @@ func Test_C6_Collection_ConcatNewPtr(t *testing.T) {
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	item := namevalue.StringAny{Name: "b", Value: 2}
 	c2 := c.ConcatNewPtr(&item)
-	if c2.Length() != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": c2.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 // ── Collection Clone / ClonePtr / Clear / Dispose ──
@@ -397,36 +481,48 @@ func Test_C6_Collection_Clone(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	clone := c.Clone()
-	if clone.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": clone.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_Collection_ClonePtr(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	clone := c.ClonePtr()
-	if clone.Length() != 1 { t.Fatal("expected 1") }
+	actual := args.Map{"result": clone.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 
 	var nilC *namevalue.Collection[string, any]
 	nilClone := nilC.ClonePtr()
-	if nilClone != nil { t.Fatal("expected nil for nil ptr") }
+	actual := args.Map{"result": nilClone != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for nil ptr", actual)
 }
 
 func Test_C6_Collection_Clear(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	c.Clear()
-	if c.Length() != 0 { t.Fatal("expected 0 after clear") }
+	actual := args.Map{"result": c.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0 after clear", actual)
 
 	var nilC *namevalue.Collection[string, any]
 	result := nilC.Clear()
-	if result != nil { t.Fatal("expected nil") }
+	actual := args.Map{"result": result != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_C6_Collection_Dispose(t *testing.T) {
 	c := namevalue.NewCollection()
 	c.Add(namevalue.StringAny{Name: "a", Value: 1})
 	c.Dispose()
-	if c.Items != nil { t.Fatal("expected nil after dispose") }
+	actual := args.Map{"result": c.Items != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil after dispose", actual)
 
 	var nilC *namevalue.Collection[string, any]
 	nilC.Dispose() // should not panic
@@ -437,19 +533,31 @@ func Test_C6_Collection_Dispose(t *testing.T) {
 func Test_C6_AppendsIf(t *testing.T) {
 	items := []namevalue.StringAny{{Name: "a", Value: 1}}
 	result := namevalue.AppendsIf(true, items, namevalue.StringAny{Name: "b", Value: 2})
-	if len(result) != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	result2 := namevalue.AppendsIf(false, items, namevalue.StringAny{Name: "c", Value: 3})
-	if len(result2) != 1 { t.Fatalf("expected 1 got %d", len(result2)) }
+	actual := args.Map{"result": len(result2)}
+	expected := args.Map{"result": 1}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	result3 := namevalue.AppendsIf[string, any](true, items)
-	if len(result3) != 1 { t.Fatalf("expected 1 got %d", len(result3)) }
+	actual := args.Map{"result": len(result3)}
+	expected := args.Map{"result": 1}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_C6_PrependsIf(t *testing.T) {
 	items := []namevalue.StringAny{{Name: "b", Value: 2}}
 	result := namevalue.PrependsIf(true, items, namevalue.StringAny{Name: "a", Value: 1})
-	if len(result) != 2 { t.Fatal("expected 2") }
+	actual := args.Map{"result": len(result) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	result2 := namevalue.PrependsIf(false, items, namevalue.StringAny{Name: "c", Value: 3})
-	if len(result2) != 1 { t.Fatalf("expected 1 got %d", len(result2)) }
+	actual := args.Map{"result": len(result2)}
+	expected := args.Map{"result": 1}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	result3 := namevalue.PrependsIf[string, any](true, items)
-	if len(result3) != 1 { t.Fatalf("expected 1 got %d", len(result3)) }
+	actual := args.Map{"result": len(result3)}
+	expected := args.Map{"result": 1}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }

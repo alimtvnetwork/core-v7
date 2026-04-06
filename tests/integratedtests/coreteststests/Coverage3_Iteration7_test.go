@@ -161,9 +161,9 @@ func Test_Cov3_DraftType_IsEqual_InnerF1StringCoverage(t *testing.T) {
 func Test_Cov3_AnyToBytes_MarshalPanic(t *testing.T) {
 	defer func() {
 		r := recover()
-		if r == nil {
-			t.Fatal("expected panic from AnyToBytes with unmarshalable input")
-		}
+		actual := args.Map{"result": r == nil}
+		expected := args.Map{"result": false}
+		expected.ShouldBeEqual(t, 0, "expected panic from AnyToBytes with unmarshalable input", actual)
 	}()
 
 	// func() is not JSON-marshalable, triggers panic

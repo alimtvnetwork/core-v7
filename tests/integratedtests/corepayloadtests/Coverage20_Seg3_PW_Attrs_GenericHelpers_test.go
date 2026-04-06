@@ -5,6 +5,7 @@ import (
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
 	"github.com/alimtvnetwork/core/coredata/corepayload"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -27,58 +28,58 @@ func newPWForSeg3() *corepayload.PayloadWrapper {
 func Test_CovPL_S3_01_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	pw := newPWForSeg3()
 	b, err := pw.MarshalJSON()
-	if err != nil || len(b) == 0 {
-		t.Fatal("expected bytes")
-	}
+	actual := args.Map{"result": err != nil || len(b) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	pw2 := &corepayload.PayloadWrapper{}
 	err2 := pw2.UnmarshalJSON(b)
-	if err2 != nil {
-		t.Fatal("expected no error")
-	}
+	actual := args.Map{"result": err2 != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	// nil
 	var nilPW *corepayload.PayloadWrapper
 	_, err3 := nilPW.MarshalJSON()
-	if err3 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err3 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_02_ReCreateUsingJsonBytes_ReCreateUsingJsonResult(t *testing.T) {
 	pw := newPWForSeg3()
 	b, _ := pw.Serialize()
 	pw2, err := pw.ReCreateUsingJsonBytes(b)
-	if err != nil || pw2 == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": err != nil || pw2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	jr := pw.JsonPtr()
 	pw3, err2 := pw.ReCreateUsingJsonResult(jr)
-	if err2 != nil || pw3 == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": err2 != nil || pw3 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S3_03_HasSafeItems_DynamicPayloads_SetDynamicPayloads(t *testing.T) {
 	pw := newPWForSeg3()
-	if !pw.HasSafeItems() {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.HasSafeItems()}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	dp := pw.DynamicPayloads()
-	if len(dp) == 0 {
-		t.Fatal("expected bytes")
-	}
+	actual := args.Map{"result": len(dp) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	var nilPW *corepayload.PayloadWrapper
-	if len(nilPW.DynamicPayloads()) != 0 {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": len(nilPW.DynamicPayloads()) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	err := pw.SetDynamicPayloads([]byte("test"))
-	if err != nil {
-		t.Fatal("expected no error")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	var nilPW2 *corepayload.PayloadWrapper
 	err2 := nilPW2.SetDynamicPayloads([]byte("test"))
-	if err2 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_04_AttrAsBinder_InitializeAttributesOnNull(t *testing.T) {
@@ -89,9 +90,9 @@ func Test_CovPL_S3_04_AttrAsBinder_InitializeAttributesOnNull(t *testing.T) {
 
 func Test_CovPL_S3_05_BasicError_PayloadDeserializeToPayloadBinder(t *testing.T) {
 	pw := newPWForSeg3()
-	if pw.BasicError() != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": pw.BasicError() != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	// PayloadDeserializeToPayloadBinder requires payloads to be PW json
 	pw2, _ := corepayload.New.PayloadWrapper.Create("inner", "1", "t", "c", map[string]int{"b": 2})
 	b2, _ := pw2.Serialize()
@@ -102,14 +103,14 @@ func Test_CovPL_S3_05_BasicError_PayloadDeserializeToPayloadBinder(t *testing.T)
 func Test_CovPL_S3_06_All_AllSafe(t *testing.T) {
 	pw := newPWForSeg3()
 	id, name, entity, category, dp := pw.All()
-	if id != "5" || name != "seg3" || entity == "" || category != "category" || len(dp) == 0 {
-		t.Fatal("unexpected values")
-	}
+	actual := args.Map{"result": id != "5" || name != "seg3" || entity == "" || category != "category" || len(dp) == 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected values", actual)
 	var nilPW *corepayload.PayloadWrapper
 	id2, _, _, _, _ := nilPW.AllSafe()
-	if id2 != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": id2 != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
 func Test_CovPL_S3_07_PayloadName_PayloadCategory_PayloadTaskType_PayloadEntityType_PayloadDynamic(t *testing.T) {
@@ -139,9 +140,9 @@ func Test_CovPL_S3_09_SetAuthInfo_SetUserInfo_SetUser_SetSysUser(t *testing.T) {
 func Test_CovPL_S3_10_PayloadProperties(t *testing.T) {
 	pw := newPWForSeg3()
 	pp := pw.PayloadProperties()
-	if pp == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": pp == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S3_11_HandleError_ReflectSetTo(t *testing.T) {
@@ -160,56 +161,56 @@ func Test_CovPL_S3_12_AnyAttributes_ReflectSetAttributes(t *testing.T) {
 
 func Test_CovPL_S3_13_IdString_IdInteger_IdentifierInteger_IdentifierUnsignedInteger(t *testing.T) {
 	pw := newPWForSeg3()
-	if pw.IdString() != "5" {
-		t.Fatal("expected 5")
-	}
-	if pw.IdInteger() != 5 {
-		t.Fatal("expected 5")
-	}
-	if pw.IdentifierInteger() != 5 {
-		t.Fatal("expected 5")
-	}
-	if pw.IdentifierUnsignedInteger() != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": pw.IdString() != "5"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
+	actual := args.Map{"result": pw.IdInteger() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
+	actual := args.Map{"result": pw.IdentifierInteger() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
+	actual := args.Map{"result": pw.IdentifierUnsignedInteger() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	// empty id
 	pw2 := corepayload.New.PayloadWrapper.All("n", "", "t", "c", "", false, nil, []byte("x"))
-	if pw2.IdentifierInteger() >= 0 {
-		t.Fatal("expected invalid")
-	}
+	actual := args.Map{"result": pw2.IdentifierInteger() >= 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
 func Test_CovPL_S3_14_IsEqual_IsPayloadsEqual_IsName_IsIdentifier_IsTaskType_IsEntity_IsCategory(t *testing.T) {
 	pw := newPWForSeg3()
 	pw2 := newPWForSeg3()
-	if !pw.IsEqual(pw2) {
-		t.Fatal("expected true")
-	}
-	if !pw.IsPayloadsEqual(pw2.Payloads) {
-		t.Fatal("expected true")
-	}
-	if !pw.IsName("seg3") {
-		t.Fatal("expected true")
-	}
-	if !pw.IsIdentifier("5") {
-		t.Fatal("expected true")
-	}
-	if !pw.IsTaskTypeName("taskType") {
-		t.Fatal("expected true")
-	}
-	if !pw.IsEntityType(pw.EntityType) {
-		t.Fatal("expected true")
-	}
-	if !pw.IsCategory("category") {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.IsEqual(pw2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsPayloadsEqual(pw2.Payloads)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsName("seg3")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsIdentifier("5")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsTaskTypeName("taskType")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsEntityType(pw.EntityType)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": pw.IsCategory("category")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilPW *corepayload.PayloadWrapper
-	if !nilPW.IsEqual(nil) {
-		t.Fatal("expected true")
-	}
-	if nilPW.IsEqual(pw) {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": nilPW.IsEqual(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": nilPW.IsEqual(pw)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_CovPL_S3_15_HasIssuesOrEmpty_HasError_IsEmptyError_HasAttributes_IsEmptyAttributes(t *testing.T) {
@@ -290,32 +291,32 @@ func Test_CovPL_S3_22_PW_JsonParseSelfInject(t *testing.T) {
 
 func Test_CovPL_S3_23_PW_String_PrettyJsonString_JsonString_JsonStringMust(t *testing.T) {
 	pw := newPWForSeg3()
-	if pw.String() == "" {
-		t.Fatal("expected non-empty")
-	}
-	if pw.PrettyJsonString() == "" {
-		t.Fatal("expected non-empty")
-	}
-	if pw.JsonString() == "" {
-		t.Fatal("expected non-empty")
-	}
-	if pw.JsonStringMust() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": pw.String() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+	actual := args.Map{"result": pw.PrettyJsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+	actual := args.Map{"result": pw.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+	actual := args.Map{"result": pw.JsonStringMust() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
 func Test_CovPL_S3_24_PW_PayloadsString_PayloadsPrettyString_PayloadsJsonResult(t *testing.T) {
 	pw := newPWForSeg3()
-	if pw.PayloadsString() == "" {
-		t.Fatal("expected non-empty")
-	}
-	if pw.PayloadsPrettyString() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": pw.PayloadsString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
+	actual := args.Map{"result": pw.PayloadsPrettyString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	jr := pw.PayloadsJsonResult()
-	if jr == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": jr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S3_25_PW_Clear_Dispose(t *testing.T) {
@@ -337,13 +338,13 @@ func Test_CovPL_S3_26_PW_Clone_ClonePtr_NonPtr_ToPtr(t *testing.T) {
 	_ = pw.NonPtr()
 	_ = pw.ToPtr()
 	var nilPW *corepayload.PayloadWrapper
-	if nilPW.NonPtr().Name != "" {
-		t.Fatal("expected empty")
-	}
+	actual := args.Map{"result": nilPW.NonPtr().Name != ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	c, _ := nilPW.ClonePtr(true)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_CovPL_S3_27_PW_AsInterfaces(t *testing.T) {
@@ -371,9 +372,9 @@ func Test_CovPL_S3_29_PW_ValueReflectSet(t *testing.T) {
 func Test_CovPL_S3_30_PW_IsStandardTaskEntityEqual(t *testing.T) {
 	pw := newPWForSeg3()
 	pw2 := newPWForSeg3()
-	if !pw.IsStandardTaskEntityEqual(pw2) {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": pw.IsStandardTaskEntityEqual(pw2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
 // --- Attributes Getters ---
@@ -430,40 +431,40 @@ func Test_CovPL_S3_41_Attr_GetStringKeyValue_GetAnyKeyValue(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
 	attr.AddNewStringKeyValueOnly("k", "v")
 	v, found := attr.GetStringKeyValue("k")
-	if !found || v != "v" {
-		t.Fatal("expected v")
-	}
+	actual := args.Map{"result": found || v != "v"}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected v", actual)
 	_, found2 := attr.GetStringKeyValue("missing")
-	if found2 {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": found2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, _ = attr.GetAnyKeyValue("missing")
 	var nilAttr *corepayload.Attributes
 	_, f := nilAttr.GetStringKeyValue("k")
-	if f {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": f}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_CovPL_S3_42_Attr_HasStringKey_HasAnyKey(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
 	attr.AddNewStringKeyValueOnly("k", "v")
-	if !attr.HasStringKey("k") {
-		t.Fatal("expected true")
-	}
-	if attr.HasAnyKey("k") {
-		t.Fatal("expected false") // AnyKeyValuePairs is empty
-	}
+	actual := args.Map{"result": attr.HasStringKey("k")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": attr.HasAnyKey("k")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_CovPL_S3_43_Attr_IsErrorEqual_IsErrorDifferent(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
-	if !attr.IsErrorEqual(nil) {
-		t.Fatal("expected true")
-	}
-	if attr.IsErrorDifferent(nil) {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": attr.IsErrorEqual(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": attr.IsErrorDifferent(nil)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 // --- Attributes Setters ---
@@ -478,31 +479,31 @@ func Test_CovPL_S3_44_Attr_HandleErr_HandleError_MustBeEmptyError(t *testing.T) 
 func Test_CovPL_S3_45_Attr_SetAuthInfo_SetUserInfo_NilReceiver(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	r := nilAttr.SetAuthInfo(&corepayload.AuthInfo{})
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": r == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	var nilAttr2 *corepayload.Attributes
 	r2 := nilAttr2.SetUserInfo(&corepayload.UserInfo{})
-	if r2 == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": r2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S3_46_Attr_AddNewStringKeyValueOnly_AddNewAnyKeyValueOnly(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
-	if !attr.AddNewStringKeyValueOnly("k", "v") {
-		t.Fatal("expected true")
-	}
-	if !attr.AddNewAnyKeyValueOnly("k", "v") {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": attr.AddNewStringKeyValueOnly("k", "v")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": attr.AddNewAnyKeyValueOnly("k", "v")}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilAttr *corepayload.Attributes
-	if nilAttr.AddNewStringKeyValueOnly("k", "v") {
-		t.Fatal("expected false")
-	}
-	if nilAttr.AddNewAnyKeyValueOnly("k", "v") {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
+	actual := args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", "v")}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 func Test_CovPL_S3_47_Attr_AddOrUpdateString_AddOrUpdateAnyItem(t *testing.T) {
@@ -517,9 +518,9 @@ func Test_CovPL_S3_47_Attr_AddOrUpdateString_AddOrUpdateAnyItem(t *testing.T) {
 func Test_CovPL_S3_48_Attr_SetBasicErr_NilReceiver(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	r := nilAttr.SetBasicErr(nil)
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": r == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_CovPL_S3_49_Attr_ReflectSetTo_AnyKeyReflectSetTo(t *testing.T) {
@@ -542,16 +543,16 @@ func Test_CovPL_S3_50_Attr_Clear_Dispose(t *testing.T) {
 
 func Test_CovPL_S3_51_Attr_Json_Methods(t *testing.T) {
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"a":1}`))
-	if attr.PayloadsPrettyString() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": attr.PayloadsPrettyString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	jr := attr.PayloadsJsonResult()
-	if jr == nil {
-		t.Fatal("expected non-nil")
-	}
-	if attr.JsonString() == "" {
-		t.Fatal("expected non-empty")
-	}
+	actual := args.Map{"result": jr == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": attr.JsonString() == ""}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	_ = attr.JsonStringMust()
 	_ = attr.String()
 	_ = attr.PrettyJsonString()
@@ -609,9 +610,9 @@ func Test_CovPL_S3_56_Attr_DeserializeDynamicPayloadsToPayloadWrappersCollection
 func Test_CovPL_S3_57_Attr_DynamicPayloadsDeserialize_Nil(t *testing.T) {
 	var nilAttr *corepayload.Attributes
 	err := nilAttr.DynamicPayloadsDeserialize(nil)
-	if err == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_58_Attr_Clone_ClonePtr(t *testing.T) {
@@ -622,24 +623,24 @@ func Test_CovPL_S3_58_Attr_Clone_ClonePtr(t *testing.T) {
 	_, _ = attr.ClonePtr(false)
 	var nilAttr *corepayload.Attributes
 	c, _ := nilAttr.ClonePtr(true)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_CovPL_S3_59_Attr_IsEqual(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
 	attr2 := corepayload.New.Attributes.Empty()
-	if !attr.IsEqual(attr2) {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": attr.IsEqual(attr2)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilAttr *corepayload.Attributes
-	if !nilAttr.IsEqual(nil) {
-		t.Fatal("expected true")
-	}
-	if nilAttr.IsEqual(attr) {
-		t.Fatal("expected false")
-	}
+	actual := args.Map{"result": nilAttr.IsEqual(nil)}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": nilAttr.IsEqual(attr)}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
 // --- Attributes Creator ---
@@ -676,30 +677,30 @@ func Test_CovPL_S3_70_DeserializePayloadTo(t *testing.T) {
 	type D struct{ A int }
 	pw, _ := corepayload.New.PayloadWrapper.Create("n", "1", "t", "c", D{A: 1})
 	d, err := corepayload.DeserializePayloadTo[D](pw)
-	if err != nil || d.A != 1 {
-		t.Fatal("expected A=1")
-	}
+	actual := args.Map{"result": err != nil || d.A != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected A=1", actual)
 	_ = corepayload.DeserializePayloadToMust[D](pw)
 	// nil
 	_, err2 := corepayload.DeserializePayloadTo[D](nil)
-	if err2 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_71_DeserializePayloadToSlice(t *testing.T) {
 	type D struct{ A int }
 	pw, _ := corepayload.New.PayloadWrapper.Create("n", "1", "t", "c", []D{{A: 1}, {A: 2}})
 	ds, err := corepayload.DeserializePayloadToSlice[D](pw)
-	if err != nil || len(ds) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": err != nil || len(ds) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	_ = corepayload.DeserializePayloadToSliceMust[D](pw)
 	// nil
 	_, err2 := corepayload.DeserializePayloadToSlice[D](nil)
-	if err2 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_72_DeserializeAttributesPayloadTo(t *testing.T) {
@@ -707,15 +708,15 @@ func Test_CovPL_S3_72_DeserializeAttributesPayloadTo(t *testing.T) {
 	b, _ := corejson.Serialize.Raw(D{A: 1})
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes(b)
 	d, err := corepayload.DeserializeAttributesPayloadTo[D](attr)
-	if err != nil || d.A != 1 {
-		t.Fatal("expected A=1")
-	}
+	actual := args.Map{"result": err != nil || d.A != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected A=1", actual)
 	_ = corepayload.DeserializeAttributesPayloadToMust[D](attr)
 	// nil
 	_, err2 := corepayload.DeserializeAttributesPayloadTo[D](nil)
-	if err2 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 func Test_CovPL_S3_73_DeserializeAttributesPayloadToSlice(t *testing.T) {
@@ -723,14 +724,14 @@ func Test_CovPL_S3_73_DeserializeAttributesPayloadToSlice(t *testing.T) {
 	b, _ := corejson.Serialize.Raw([]D{{A: 1}, {A: 2}})
 	attr := corepayload.New.Attributes.UsingDynamicPayloadBytes(b)
 	ds, err := corepayload.DeserializeAttributesPayloadToSlice[D](attr)
-	if err != nil || len(ds) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": err != nil || len(ds) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// nil
 	_, err2 := corepayload.DeserializeAttributesPayloadToSlice[D](nil)
-	if err2 == nil {
-		t.Fatal("expected error")
-	}
+	actual := args.Map{"result": err2 == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
 // --- typed_collection_funcs ---
@@ -743,15 +744,15 @@ func Test_CovPL_S3_80_MapTypedPayloads(t *testing.T) {
 	names := corepayload.MapTypedPayloads[D, string](col, func(item *corepayload.TypedPayloadWrapper[D]) string {
 		return item.Name()
 	})
-	if len(names) != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": len(names) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
 	r := corepayload.MapTypedPayloads[D, string](empty, func(item *corepayload.TypedPayloadWrapper[D]) string { return "" })
-	if len(r) != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": len(r) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 func Test_CovPL_S3_81_MapTypedPayloadData(t *testing.T) {
@@ -760,9 +761,9 @@ func Test_CovPL_S3_81_MapTypedPayloadData(t *testing.T) {
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 5})
 	col.Add(tw)
 	vals := corepayload.MapTypedPayloadData[D, int](col, func(d D) int { return d.A })
-	if vals[0] != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": vals[0] != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
 func Test_CovPL_S3_82_FlatMapTypedPayloads(t *testing.T) {
@@ -773,9 +774,9 @@ func Test_CovPL_S3_82_FlatMapTypedPayloads(t *testing.T) {
 	tags := corepayload.FlatMapTypedPayloads[D, string](col, func(item *corepayload.TypedPayloadWrapper[D]) []string {
 		return item.Data().Tags
 	})
-	if len(tags) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": len(tags) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_CovPL_S3_83_FlatMapTypedPayloadData(t *testing.T) {
@@ -784,9 +785,9 @@ func Test_CovPL_S3_83_FlatMapTypedPayloadData(t *testing.T) {
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{Tags: []string{"a"}})
 	col.Add(tw)
 	tags := corepayload.FlatMapTypedPayloadData[D, string](col, func(d D) []string { return d.Tags })
-	if len(tags) != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": len(tags) != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_CovPL_S3_84_ReduceTypedPayloads(t *testing.T) {
@@ -799,9 +800,9 @@ func Test_CovPL_S3_84_ReduceTypedPayloads(t *testing.T) {
 	sum := corepayload.ReduceTypedPayloads[D, int](col, 0, func(acc int, item *corepayload.TypedPayloadWrapper[D]) int {
 		return acc + item.Data().A
 	})
-	if sum != 10 {
-		t.Fatal("expected 10")
-	}
+	actual := args.Map{"result": sum != 10}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 10", actual)
 }
 
 func Test_CovPL_S3_85_ReduceTypedPayloadData(t *testing.T) {
@@ -810,9 +811,9 @@ func Test_CovPL_S3_85_ReduceTypedPayloadData(t *testing.T) {
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 5})
 	col.Add(tw)
 	sum := corepayload.ReduceTypedPayloadData[D, int](col, 0, func(acc int, d D) int { return acc + d.A })
-	if sum != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": sum != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
 func Test_CovPL_S3_86_GroupTypedPayloads_GroupTypedPayloadData(t *testing.T) {
@@ -825,13 +826,13 @@ func Test_CovPL_S3_86_GroupTypedPayloads_GroupTypedPayloadData(t *testing.T) {
 	groups := corepayload.GroupTypedPayloads[D, string](col, func(item *corepayload.TypedPayloadWrapper[D]) string {
 		return item.Data().Cat
 	})
-	if len(groups) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": len(groups) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	groups2 := corepayload.GroupTypedPayloadData[D, string](col, func(d D) string { return d.Cat })
-	if len(groups2) != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": len(groups2) != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_CovPL_S3_87_PartitionTypedPayloads(t *testing.T) {
@@ -844,9 +845,9 @@ func Test_CovPL_S3_87_PartitionTypedPayloads(t *testing.T) {
 	m, nm := corepayload.PartitionTypedPayloads[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool {
 		return item.Data().A == 1
 	})
-	if m.Length() != 1 || nm.Length() != 1 {
-		t.Fatal("expected 1,1")
-	}
+	actual := args.Map{"result": m.Length() != 1 || nm.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1,1", actual)
 }
 
 func Test_CovPL_S3_88_AnyTypedPayload_AllTypedPayloads(t *testing.T) {
@@ -854,20 +855,20 @@ func Test_CovPL_S3_88_AnyTypedPayload_AllTypedPayloads(t *testing.T) {
 	col := corepayload.NewTypedPayloadCollection[D](1)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col.Add(tw)
-	if !corepayload.AnyTypedPayload[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true }) {
-		t.Fatal("expected true")
-	}
-	if !corepayload.AllTypedPayloads[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true }) {
-		t.Fatal("expected true")
-	}
+	actual := args.Map{"result": corepayload.AnyTypedPayload[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
+	actual := args.Map{"result": corepayload.AllTypedPayloads[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
-	if corepayload.AnyTypedPayload[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true }) {
-		t.Fatal("expected false")
-	}
-	if !corepayload.AllTypedPayloads[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return false }) {
-		t.Fatal("expected true (vacuous)")
-	}
+	actual := args.Map{"result": corepayload.AnyTypedPayload[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false", actual)
+	actual := args.Map{"result": corepayload.AllTypedPayloads[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return false })}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected true (vacuous)", actual)
 }
 
 func Test_CovPL_S3_89_ConvertTypedPayloads(t *testing.T) {
@@ -877,15 +878,15 @@ func Test_CovPL_S3_89_ConvertTypedPayloads(t *testing.T) {
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
 	col.Add(tw)
 	converted, err := corepayload.ConvertTypedPayloads[D, D2](col)
-	if err != nil || converted.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": err != nil || converted.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
 	c2, _ := corepayload.ConvertTypedPayloads[D, D2](empty)
-	if c2.Length() != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": c2.Length() != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
 // --- typed_collection_paging ---
@@ -897,22 +898,22 @@ func Test_CovPL_S3_90_TPC_Paging(t *testing.T) {
 		tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: i})
 		col.Add(tw)
 	}
-	if col.GetPagesSize(3) != 4 {
-		t.Fatal("expected 4")
-	}
-	if col.GetPagesSize(0) != 0 {
-		t.Fatal("expected 0")
-	}
+	actual := args.Map{"result": col.GetPagesSize(3) != 4}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 4", actual)
+	actual := args.Map{"result": col.GetPagesSize(0) != 0}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	_ = col.GetPagingInfo(3, 1)
 	_ = col.GetSinglePageCollection(3, 2)
 	pages := col.GetPagedCollection(3)
-	if len(pages) < 3 {
-		t.Fatal("expected at least 3")
-	}
+	actual := args.Map{"result": len(pages) < 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	withInfo := col.GetPagedCollectionWithInfo(3)
-	if len(withInfo) < 3 {
-		t.Fatal("expected at least 3")
-	}
+	actual := args.Map{"result": len(withInfo) < 3}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	// small
 	small := corepayload.NewTypedPayloadCollection[D](1)
 	tw, _ := corepayload.NewTypedPayloadWrapperFrom[D]("n", "1", "e", D{A: 1})
@@ -929,9 +930,9 @@ func Test_CovPL_S3_95_PayloadCreateInstruction(t *testing.T) {
 		EntityType: "e", CategoryName: "c",
 		HasManyRecords: false, Payloads: map[string]int{"a": 1},
 	}
-	if inst.Name != "n" {
-		t.Fatal("expected n")
-	}
+	actual := args.Map{"result": inst.Name != "n"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected n", actual)
 }
 
 func Test_CovPL_S3_96_BytesCreateInstruction(t *testing.T) {
@@ -940,9 +941,9 @@ func Test_CovPL_S3_96_BytesCreateInstruction(t *testing.T) {
 		EntityType: "e", CategoryName: "c",
 		HasManyRecords: false, Payloads: []byte("x"),
 	}
-	if inst.Name != "n" {
-		t.Fatal("expected n")
-	}
+	actual := args.Map{"result": inst.Name != "n"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected n", actual)
 }
 
 type seg3Stringer struct{ v string }
@@ -954,7 +955,7 @@ func Test_CovPL_S3_97_PayloadTypeExpander(t *testing.T) {
 		CategoryStringer: seg3Stringer{"cat"},
 		TaskTypeStringer: seg3Stringer{"task"},
 	}
-	if pe.CategoryStringer.String() != "cat" {
-		t.Fatal("expected cat")
-	}
+	actual := args.Map{"result": pe.CategoryStringer.String() != "cat"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected cat", actual)
 }

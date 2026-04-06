@@ -4,17 +4,18 @@ import (
 	"testing"
 
 	"github.com/alimtvnetwork/core/isany"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 func Test_QW_Conclusive_LeftNilRightDefined(t *testing.T) {
 	// Cover the branch: left==nil || right==nil (with left nil, right defined)
 	isEqual, isConclusive := isany.Conclusive(nil, "hello")
-	if isEqual {
-		t.Fatal("expected not equal")
-	}
-	if !isConclusive {
-		t.Fatal("expected conclusive")
-	}
+	actual := args.Map{"result": isEqual}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
+	actual := args.Map{"result": isConclusive}
+	expected := args.Map{"result": true}
+	expected.ShouldBeEqual(t, 0, "expected conclusive", actual)
 }
 
 func Test_QW_JsonEqual_BothMarshalError(t *testing.T) {
@@ -22,7 +23,7 @@ func Test_QW_JsonEqual_BothMarshalError(t *testing.T) {
 	ch1 := make(chan int)
 	ch2 := make(chan string)
 	result := isany.JsonEqual(ch1, ch2)
-	if result {
-		t.Fatal("expected false for different marshal errors")
-	}
+	actual := args.Map{"result": result}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected false for different marshal errors", actual)
 }

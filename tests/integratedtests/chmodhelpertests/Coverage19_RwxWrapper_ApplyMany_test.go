@@ -30,9 +30,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	_ = os.WriteFile(f1, []byte("x"), 0o644)
 	_ = os.WriteFile(f2, []byte("y"), 0o644)
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       false,
 		IsContinueOnError: false,
@@ -57,9 +57,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveError(t *testing.T)
 
 	// Arrange
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       false,
 		IsContinueOnError: false,
@@ -87,9 +87,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
 	subDir := filepath.Join(tmpDir, "sub")
 	_ = os.Mkdir(subDir, 0o755)
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       true,
 		IsContinueOnError: false,
@@ -114,9 +114,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveError(t *testing.T) {
 
 	// Arrange
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       true,
 		IsContinueOnError: false,
@@ -142,9 +142,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_RecursiveContinueOnError(t *tes
 	// Arrange
 	tmpDir := t.TempDir()
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       true,
 		IsContinueOnError: true,
@@ -173,9 +173,9 @@ func Test_Cov19_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursiveContinueOnError(t *
 	validFile := filepath.Join(tmpDir, "ok.txt")
 	_ = os.WriteFile(validFile, []byte("x"), 0o644)
 	wrapper, wErr := chmodhelper.New.RwxWrapper.RwxFullStringWtHyphen("rwxrwxrwx")
-	if wErr != nil {
-		t.Fatalf("unexpected parse error: %v", wErr)
-	}
+	actual := args.Map{"result": wErr != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected parse error:", actual)
 	cond := &chmodins.Condition{
 		IsRecursive:       false,
 		IsContinueOnError: true,
