@@ -35,75 +35,75 @@ func NewLeftMiddleRight(left, middle, right string) *LeftMiddleRight {
 
 // --- String-specific methods ---
 
-func (it *LeftMiddleRight) LeftBytes() []byte {
+func (it LeftMiddleRight) LeftBytes() []byte {
 	return []byte(it.Left)
 }
 
-func (it *LeftMiddleRight) RightBytes() []byte {
+func (it LeftMiddleRight) RightBytes() []byte {
 	return []byte(it.Right)
 }
 
-func (it *LeftMiddleRight) MiddleBytes() []byte {
+func (it LeftMiddleRight) MiddleBytes() []byte {
 	return []byte(it.Middle)
 }
 
-func (it *LeftMiddleRight) LeftTrim() string {
+func (it LeftMiddleRight) LeftTrim() string {
 	return strings.TrimSpace(it.Left)
 }
 
-func (it *LeftMiddleRight) RightTrim() string {
+func (it LeftMiddleRight) RightTrim() string {
 	return strings.TrimSpace(it.Right)
 }
 
-func (it *LeftMiddleRight) MiddleTrim() string {
+func (it LeftMiddleRight) MiddleTrim() string {
 	return strings.TrimSpace(it.Middle)
 }
 
-func (it *LeftMiddleRight) IsLeftEmpty() bool {
+func (it LeftMiddleRight) IsLeftEmpty() bool {
 	return it.Left == ""
 }
 
-func (it *LeftMiddleRight) IsRightEmpty() bool {
+func (it LeftMiddleRight) IsRightEmpty() bool {
 	return it.Right == ""
 }
 
-func (it *LeftMiddleRight) IsMiddleEmpty() bool {
+func (it LeftMiddleRight) IsMiddleEmpty() bool {
 	return it.Middle == ""
 }
 
-func (it *LeftMiddleRight) IsMiddleWhitespace() bool {
+func (it LeftMiddleRight) IsMiddleWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(it.Middle)
 }
 
-func (it *LeftMiddleRight) IsLeftWhitespace() bool {
+func (it LeftMiddleRight) IsLeftWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(it.Left)
 }
 
-func (it *LeftMiddleRight) IsRightWhitespace() bool {
+func (it LeftMiddleRight) IsRightWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(it.Right)
 }
 
-func (it *LeftMiddleRight) HasValidNonEmptyLeft() bool {
+func (it LeftMiddleRight) HasValidNonEmptyLeft() bool {
 	return it.IsValid && !it.IsLeftEmpty()
 }
 
-func (it *LeftMiddleRight) HasValidNonEmptyRight() bool {
+func (it LeftMiddleRight) HasValidNonEmptyRight() bool {
 	return it.IsValid && !it.IsRightEmpty()
 }
 
-func (it *LeftMiddleRight) HasValidNonEmptyMiddle() bool {
+func (it LeftMiddleRight) HasValidNonEmptyMiddle() bool {
 	return it.IsValid && !it.IsMiddleEmpty()
 }
 
-func (it *LeftMiddleRight) HasValidNonWhitespaceLeft() bool {
+func (it LeftMiddleRight) HasValidNonWhitespaceLeft() bool {
 	return it.IsValid && !it.IsLeftWhitespace()
 }
 
-func (it *LeftMiddleRight) HasValidNonWhitespaceRight() bool {
+func (it LeftMiddleRight) HasValidNonWhitespaceRight() bool {
 	return it.IsValid && !it.IsRightWhitespace()
 }
 
-func (it *LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
+func (it LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
 	return it.IsValid && !it.IsMiddleWhitespace()
 }
 
@@ -112,20 +112,20 @@ func (it *LeftMiddleRight) HasValidNonWhitespaceMiddle() bool {
 //	!receiver.IsLeftEmpty() &&
 //	!receiver.IsMiddleEmpty() &&
 //	!receiver.IsRightEmpty()
-func (it *LeftMiddleRight) HasSafeNonEmpty() bool {
+func (it LeftMiddleRight) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsLeftEmpty() &&
 		!it.IsMiddleEmpty() &&
 		!it.IsRightEmpty()
 }
 
-func (it *LeftMiddleRight) IsAll(left, mid, right string) bool {
+func (it LeftMiddleRight) IsAll(left, mid, right string) bool {
 	return it.Left == left &&
 		it.Right == right &&
 		it.Middle == mid
 }
 
-func (it *LeftMiddleRight) Is(left, right string) bool {
+func (it LeftMiddleRight) Is(left, right string) bool {
 	return it.Left == left && it.Right == right
 }
 
@@ -135,7 +135,7 @@ func (it *LeftMiddleRight) Clone() *LeftMiddleRight {
 	}
 }
 
-func (it *LeftMiddleRight) ToLeftRight() *LeftRight {
+func (it LeftMiddleRight) ToLeftRight() *LeftRight {
 	return &LeftRight{
 		Pair: coregeneric.Pair[string, string]{
 			Left:    it.Left,

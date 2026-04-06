@@ -106,51 +106,51 @@ func NewLeftRight(left, right string) *LeftRight {
 
 // --- String-specific methods ---
 
-func (it *LeftRight) LeftBytes() []byte {
+func (it LeftRight) LeftBytes() []byte {
 	return []byte(it.Left)
 }
 
-func (it *LeftRight) RightBytes() []byte {
+func (it LeftRight) RightBytes() []byte {
 	return []byte(it.Right)
 }
 
-func (it *LeftRight) LeftTrim() string {
+func (it LeftRight) LeftTrim() string {
 	return strings.TrimSpace(it.Left)
 }
 
-func (it *LeftRight) RightTrim() string {
+func (it LeftRight) RightTrim() string {
 	return strings.TrimSpace(it.Right)
 }
 
-func (it *LeftRight) IsLeftEmpty() bool {
+func (it LeftRight) IsLeftEmpty() bool {
 	return it.Left == ""
 }
 
-func (it *LeftRight) IsRightEmpty() bool {
+func (it LeftRight) IsRightEmpty() bool {
 	return it.Right == ""
 }
 
-func (it *LeftRight) IsRightWhitespace() bool {
+func (it LeftRight) IsRightWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(it.Right)
 }
 
-func (it *LeftRight) IsLeftWhitespace() bool {
+func (it LeftRight) IsLeftWhitespace() bool {
 	return strutilinternal.IsEmptyOrWhitespace(it.Left)
 }
 
-func (it *LeftRight) HasValidNonEmptyLeft() bool {
+func (it LeftRight) HasValidNonEmptyLeft() bool {
 	return it.IsValid && !it.IsLeftEmpty()
 }
 
-func (it *LeftRight) HasValidNonEmptyRight() bool {
+func (it LeftRight) HasValidNonEmptyRight() bool {
 	return it.IsValid && !it.IsRightEmpty()
 }
 
-func (it *LeftRight) HasValidNonWhitespaceLeft() bool {
+func (it LeftRight) HasValidNonWhitespaceLeft() bool {
 	return it.IsValid && !it.IsLeftWhitespace()
 }
 
-func (it *LeftRight) HasValidNonWhitespaceRight() bool {
+func (it LeftRight) HasValidNonWhitespaceRight() bool {
 	return it.IsValid && !it.IsRightWhitespace()
 }
 
@@ -158,7 +158,7 @@ func (it *LeftRight) HasValidNonWhitespaceRight() bool {
 //
 //	!receiver.IsLeftEmpty() &&
 //	!receiver.IsRightEmpty()
-func (it *LeftRight) HasSafeNonEmpty() bool {
+func (it LeftRight) HasSafeNonEmpty() bool {
 	return it.IsValid &&
 		!it.IsLeftEmpty() &&
 		!it.IsRightEmpty()
@@ -172,7 +172,7 @@ func (it *LeftRight) Ptr() *LeftRight {
 	return it
 }
 
-func (it *LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
+func (it LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
 	if regexp == nil {
 		return false
 	}
@@ -180,7 +180,7 @@ func (it *LeftRight) IsLeftRegexMatch(regexp *regexp.Regexp) bool {
 	return regexp.MatchString(it.Left)
 }
 
-func (it *LeftRight) IsRightRegexMatch(regexp *regexp.Regexp) bool {
+func (it LeftRight) IsRightRegexMatch(regexp *regexp.Regexp) bool {
 	if regexp == nil {
 		return false
 	}
@@ -188,15 +188,15 @@ func (it *LeftRight) IsRightRegexMatch(regexp *regexp.Regexp) bool {
 	return regexp.MatchString(it.Right)
 }
 
-func (it *LeftRight) IsLeft(left string) bool {
+func (it LeftRight) IsLeft(left string) bool {
 	return it.Left == left
 }
 
-func (it *LeftRight) IsRight(right string) bool {
+func (it LeftRight) IsRight(right string) bool {
 	return it.Right == right
 }
 
-func (it *LeftRight) Is(left, right string) bool {
+func (it LeftRight) Is(left, right string) bool {
 	return it.Left == left && it.Right == right
 }
 
