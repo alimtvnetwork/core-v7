@@ -1248,11 +1248,6 @@ func (it *LinkedCollections) AddCollections(
 	return it
 }
 
-// Deprecated: Use ToStrings instead.
-func (it *LinkedCollections) ToStringsPtr() *[]string {
-	list := it.ToStrings()
-	return &list
-}
 
 func (it *LinkedCollections) ToStrings() []string {
 	return it.ToCollectionSimple().List()
