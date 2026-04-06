@@ -694,7 +694,7 @@ func Test_C8_ToSetUnsetValue(t *testing.T) {
 
 func Test_C8_LazyEvaluateBool_NotCalled(t *testing.T) {
 	v := issetter.True
-	called := v.LazyEvaluateBool(func() { t.Fatal("should not call") })
+	called := v.LazyEvaluateBool(func() { actual := args.Map{"called": true}; expected := args.Map{"called": false}; expected.ShouldBeEqual(t, 0, "LazyEvaluateBool should not call", actual) })
 	actual := args.Map{"result": called}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
