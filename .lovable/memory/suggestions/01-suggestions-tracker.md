@@ -119,7 +119,9 @@
 | S-006 | Codegen Removal | 2026-03-21 | Fully removed |
 | S-007 | Spec Reconciliation | 2026-03-17 | 9 files fixed |
 | S-008 | CI Pipeline Setup | 2026-03-18 | GitHub Actions |
+| S-010 | Performance Benchmarks | 2026-04-06 | 38 benchmarks across 6 packages (corestr, coredynamic, errcore, codestack, regexnew, mutexbykey) |
 | S-011 | Missing Package READMEs (10 packages) | 2026-03-21 | All 10 created |
+| S-012 | Pointer Receiver Audit | 2026-04-06 | 46 methods migrated (LeftRight, LeftMiddleRight, ExpectingRecord). corepayload skipped (nil guards). |
 | S-014 | Coverage Push — All Packages to 100% | 2026-04-06 | 21 packages at 100%, 3 accepted gaps, 4 split-recovery packages |
 
 > Detail files in `completed/` subfolder.
