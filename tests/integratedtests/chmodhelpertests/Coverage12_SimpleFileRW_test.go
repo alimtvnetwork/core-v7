@@ -225,7 +225,8 @@ func Test_Cov12_ReadMust_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -284,7 +285,8 @@ func Test_Cov12_ReadStringMust_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}

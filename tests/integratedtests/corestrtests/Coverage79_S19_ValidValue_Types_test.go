@@ -130,11 +130,11 @@ func Test_C79_ValidValue_IsEmpty_IsWhitespace(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": ws.IsWhitespace()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ws.IsWhitespace()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected whitespace", actual)
-		actual := args.Map{"result": val.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -161,8 +161,8 @@ func Test_C79_ValidValue_HasValidNonEmpty(t *testing.T) {
 		actual := args.Map{"result": valid.HasValidNonEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": invalid.HasValidNonEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.HasValidNonEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -177,8 +177,8 @@ func Test_C79_ValidValue_HasValidNonWhitespace(t *testing.T) {
 		actual := args.Map{"result": valid.HasValidNonWhitespace()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ws.HasValidNonWhitespace()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ws.HasValidNonWhitespace()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for whitespace", actual)
 	})
 }
@@ -195,14 +195,14 @@ func Test_C79_ValidValue_ValueBool(t *testing.T) {
 		actual := args.Map{"result": trueVV.ValueBool()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": falseVV.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": falseVV.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": invalidVV.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalidVV.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for invalid", actual)
-		actual := args.Map{"result": emptyVV.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": emptyVV.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
@@ -217,8 +217,8 @@ func Test_C79_ValidValue_ValueInt(t *testing.T) {
 		actual := args.Map{"result": vv.ValueInt(0) != 42}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
-		actual := args.Map{"result": invalid.ValueInt(99) != 99}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueInt(99) != 99}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 99", actual)
 	})
 }
@@ -233,8 +233,8 @@ func Test_C79_ValidValue_ValueDefInt(t *testing.T) {
 		actual := args.Map{"result": vv.ValueDefInt() != 10}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 10", actual)
-		actual := args.Map{"result": invalid.ValueDefInt() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueDefInt() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -277,11 +277,11 @@ func Test_C79_ValidValue_ValueDefByte(t *testing.T) {
 		actual := args.Map{"result": valid.ValueDefByte() != 50}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 50", actual)
-		actual := args.Map{"result": overflow.ValueDefByte() != 255}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": overflow.ValueDefByte() != 255}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 255", actual)
-		actual := args.Map{"result": negative.ValueDefByte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": negative.ValueDefByte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -296,8 +296,8 @@ func Test_C79_ValidValue_ValueFloat64(t *testing.T) {
 		actual := args.Map{"result": vv.ValueFloat64(0) != 3.14}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
-		actual := args.Map{"result": invalid.ValueFloat64(1.5) != 1.5}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueFloat64(1.5) != 1.5}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1.5", actual)
 	})
 }
@@ -324,8 +324,8 @@ func Test_C79_ValidValue_HasSafeNonEmpty(t *testing.T) {
 		actual := args.Map{"result": valid.HasSafeNonEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": empty.HasSafeNonEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasSafeNonEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -339,8 +339,8 @@ func Test_C79_ValidValue_Is(t *testing.T) {
 		actual := args.Map{"result": vv.Is("hello")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": vv.Is("world")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.Is("world")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -354,11 +354,11 @@ func Test_C79_ValidValue_IsAnyOf(t *testing.T) {
 		actual := args.Map{"result": vv.IsAnyOf("a", "b")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": vv.IsAnyOf("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.IsAnyOf("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": vv.IsAnyOf()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vv.IsAnyOf()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 	})
 }
@@ -384,11 +384,11 @@ func Test_C79_ValidValue_IsAnyContains(t *testing.T) {
 		actual := args.Map{"result": vv.IsAnyContains("xyz", "world")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": vv.IsAnyContains("abc")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.IsAnyContains("abc")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": vv.IsAnyContains()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vv.IsAnyContains()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 	})
 }
@@ -415,8 +415,8 @@ func Test_C79_ValidValue_IsRegexMatches(t *testing.T) {
 		actual := args.Map{"result": vv.IsRegexMatches(re)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": vv.IsRegexMatches(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.IsRegexMatches(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 	})
 }
@@ -431,8 +431,8 @@ func Test_C79_ValidValue_RegexFindString(t *testing.T) {
 		actual := args.Map{"result": vv.RegexFindString(re) != "123"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected '123'", actual)
-		actual := args.Map{"result": vv.RegexFindString(nil) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.RegexFindString(nil) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 	})
 }
@@ -661,8 +661,8 @@ func Test_C79_ValidValue_Json_Serialize(t *testing.T) {
 		actual := args.Map{"result": jsonResult.HasError()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "json error", actual)
-		actual := args.Map{"result": err != nil || len(bytes) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err != nil || len(bytes) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "serialize error", actual)
 	})
 }
@@ -681,8 +681,8 @@ func Test_C79_ValidValue_ParseInjectUsingJson(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": result.Value != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Value != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
 	})
 }
@@ -796,8 +796,8 @@ func Test_C79_ValidValues_Count_HasAnyItem(t *testing.T) {
 		actual := args.Map{"result": vvs.Count() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": vvs.HasAnyItem()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vvs.HasAnyItem()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -812,11 +812,11 @@ func Test_C79_ValidValues_LastIndex_HasIndex(t *testing.T) {
 		actual := args.Map{"result": vvs.LastIndex() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": vvs.HasIndex(0)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vvs.HasIndex(0)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for 0", actual)
-		actual := args.Map{"result": vvs.HasIndex(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vvs.HasIndex(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for 5", actual)
 	})
 }
@@ -831,8 +831,8 @@ func Test_C79_ValidValues_SafeValueAt(t *testing.T) {
 		actual := args.Map{"result": vvs.SafeValueAt(0) != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a'", actual)
-		actual := args.Map{"result": vvs.SafeValueAt(5) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vvs.SafeValueAt(5) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty for out of range", actual)
 	})
 }
@@ -848,8 +848,8 @@ func Test_C79_ValidValues_SafeValidValueAt(t *testing.T) {
 		actual := args.Map{"result": vvs.SafeValidValueAt(0) != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a'", actual)
-		actual := args.Map{"result": vvs.SafeValidValueAt(1) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vvs.SafeValidValueAt(1) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty for invalid value", actual)
 	})
 }
@@ -1262,8 +1262,8 @@ func Test_C79_ValueStatus_InvalidValueStatusNoMessage(t *testing.T) {
 		actual := args.Map{"result": vs.ValueValid.IsValid}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-		actual := args.Map{"result": vs.Index != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vs.Index != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
@@ -1277,8 +1277,8 @@ func Test_C79_ValueStatus_InvalidValueStatus(t *testing.T) {
 		actual := args.Map{"result": vs.ValueValid.IsValid}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-		actual := args.Map{"result": vs.ValueValid.Message != "err"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vs.ValueValid.Message != "err"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "message mismatch", actual)
 	})
 }
@@ -1313,8 +1313,8 @@ func Test_C79_TWLN_HasLineNumber(t *testing.T) {
 		actual := args.Map{"result": twln.HasLineNumber()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": invalid.HasLineNumber()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.HasLineNumber()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 	})
 }
@@ -1341,8 +1341,8 @@ func Test_C79_TWLN_IsInvalidLineNumber(t *testing.T) {
 		actual := args.Map{"result": valid.IsInvalidLineNumber()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": invalid.IsInvalidLineNumber()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": invalid.IsInvalidLineNumber()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -1393,8 +1393,8 @@ func Test_C79_TWLN_IsEmpty(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": valid.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": valid.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -1421,8 +1421,8 @@ func Test_C79_TWLN_IsEmptyText(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmptyText()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": valid.IsEmptyText()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": valid.IsEmptyText()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1581,7 +1581,7 @@ func Test_C79_Utils_WrapSingle(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "'x'"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"'x'\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"'x'\"", actual)
 	})
 }
 
@@ -1593,7 +1593,7 @@ func Test_C79_Utils_WrapTilda(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "`x`"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"`x`\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"`x`\"", actual)
 	})
 }
 
@@ -1653,7 +1653,7 @@ func Test_C79_Utils_WrapSingleIfMissing_NotWrapped(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "'hello'"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected \"'hello'\", actual)
+		expected.ShouldBeEqual(t, 0, "expected \"'hello'\"", actual)
 	})
 }
 

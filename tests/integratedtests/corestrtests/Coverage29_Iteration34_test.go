@@ -847,8 +847,8 @@ func Test_C29_57_SimpleSlice_IsContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.IsContains("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IsContains("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -909,8 +909,8 @@ func Test_C29_61_SimpleSlice_IndexOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": s.IndexOf("z") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IndexOf("z") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
@@ -1000,11 +1000,11 @@ func Test_C29_67_SimpleSlice_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.HasIndex(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.HasIndex(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": s.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }

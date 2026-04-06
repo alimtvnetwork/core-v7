@@ -102,8 +102,8 @@ func Test_C49_ValidValue_ValueBytesOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		b2 := vv.ValueBytesOnce() // cached
-		actual := args.Map{"result": len(b2) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(b2) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected cached 3", actual)
 	})
 }
@@ -205,12 +205,12 @@ func Test_C49_ValidValue_ValueBool(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		vv2 := corestr.NewValidValue("invalid")
-		actual := args.Map{"result": vv2.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv2.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		vv3 := corestr.NewValidValue("")
-		actual := args.Map{"result": vv3.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv3.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
@@ -227,8 +227,8 @@ func Test_C49_ValidValue_ValueInt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 		vv2 := corestr.NewValidValue("bad")
-		actual := args.Map{"result": vv2.ValueInt(99) != 99}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv2.ValueInt(99) != 99}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected default", actual)
 	})
 }
@@ -261,13 +261,13 @@ func Test_C49_ValidValue_ValueByte(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 100", actual)
 		vv2 := corestr.NewValidValue("300")
 		b2 := vv2.ValueByte(0)
-		actual := args.Map{"result": b2 != 255}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": b2 != 255}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 255 for overflow", actual)
 		vv3 := corestr.NewValidValue("-1")
 		b3 := vv3.ValueByte(0)
-		actual := args.Map{"result": b3 != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": b3 != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for negative", actual)
 	})
 }
@@ -340,11 +340,11 @@ func Test_C49_ValidValue_IsAnyOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should match", actual)
-		actual := args.Map{"result": vv.IsAnyOf()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vv.IsAnyOf()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "empty values should return true", actual)
-		actual := args.Map{"result": vv.IsAnyOf("x")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.IsAnyOf("x")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not match", actual)
 	})
 }
@@ -374,8 +374,8 @@ func Test_C49_ValidValue_IsAnyContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should contain", actual)
-		actual := args.Map{"result": vv.IsAnyContains()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": vv.IsAnyContains()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "empty should return true", actual)
 	})
 }
@@ -406,8 +406,8 @@ func Test_C49_ValidValue_IsRegexMatches(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should match", actual)
-		actual := args.Map{"result": vv.IsRegexMatches(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.IsRegexMatches(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nil regex should return false", actual)
 	})
 }
@@ -424,8 +424,8 @@ func Test_C49_ValidValue_RegexFindString(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 123", actual)
-		actual := args.Map{"result": vv.RegexFindString(nil) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vv.RegexFindString(nil) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nil regex should return empty", actual)
 	})
 }
@@ -444,8 +444,8 @@ func Test_C49_ValidValue_RegexFindAllStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		result2 := vv.RegexFindAllStrings(nil, -1)
-		actual := args.Map{"result": len(result2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(result2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -464,8 +464,8 @@ func Test_C49_ValidValue_RegexFindAllStringsWithFlag(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_, has2 := vv.RegexFindAllStringsWithFlag(nil, -1)
-		actual := args.Map{"result": has2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": has2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nil regex should return false", actual)
 	})
 }
@@ -787,8 +787,8 @@ func Test_C49_ValidValues_SafeValueAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected x", actual)
-		actual := args.Map{"result": vvs.SafeValueAt(99) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vvs.SafeValueAt(99) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty for out of range", actual)
 	})
 }
@@ -900,8 +900,8 @@ func Test_C49_ValidValues_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should have index 0", actual)
-		actual := args.Map{"result": vvs.HasIndex(1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": vvs.HasIndex(1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have index 1", actual)
 	})
 }
@@ -1416,8 +1416,8 @@ func Test_C49_LeftMiddleRight_HasValid(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": lmr.HasValidNonWhitespaceLeft() || !lmr.HasValidNonWhitespaceMiddle() || !lmr.HasValidNonWhitespaceRight()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": lmr.HasValidNonWhitespaceLeft() || !lmr.HasValidNonWhitespaceMiddle() || !lmr.HasValidNonWhitespaceRight()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -1663,8 +1663,8 @@ func Test_C49_CollectionsOfCollection_JSON(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		coc2 := corestr.New.CollectionsOfCollection.Cap(5)
 		err = json.Unmarshal(data, coc2)
-		actual := args.Map{"result": err}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
@@ -1724,8 +1724,8 @@ func Test_C49_HashsetsCollection_AddNonNil(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nil should not add", actual)
 		hsc.AddNonNil(corestr.New.Hashset.Strings([]string{"a"}))
-		actual := args.Map{"result": hsc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -2009,8 +2009,8 @@ func Test_C49_HashsetsCollection_JSON(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		hsc2 := corestr.Empty.HashsetsCollection()
 		err = json.Unmarshal(data, hsc2)
-		actual := args.Map{"result": err}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 	})
 }
@@ -2070,8 +2070,8 @@ func Test_C49_SimpleStringOnce_SetOnUninitialized(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "set failed", actual)
 		err2 := sso.SetOnUninitialized("world")
-		actual := args.Map{"result": err2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should error on already initialized", actual)
 	})
 }
@@ -2089,8 +2089,8 @@ func Test_C49_SimpleStringOnce_GetSetOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected first", actual)
 		v2 := sso.GetSetOnce("second")
-		actual := args.Map{"result": v2 != "first"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "first"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should return first (already set)", actual)
 	})
 }
@@ -2107,8 +2107,8 @@ func Test_C49_SimpleStringOnce_GetOnce(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be initialized", actual)
 	})
 }
@@ -2126,8 +2126,8 @@ func Test_C49_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected computed", actual)
 		v2 := sso.GetOnceFunc(func() string { return "other" })
-		actual := args.Map{"result": v2 != "computed"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "computed"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should return first value", actual)
 	})
 }
@@ -2176,8 +2176,8 @@ func Test_C49_SimpleStringOnce_Boolean(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		sso2 := corestr.New.SimpleStringOnce.Init("yes")
-		actual := args.Map{"result": sso2.Boolean(false)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso2.Boolean(false)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for yes", actual)
 	})
 }
@@ -2253,13 +2253,13 @@ func Test_C49_SimpleStringOnce_WithinRange(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected in range", actual)
 		val2, inRange2 := sso.WithinRange(true, 60, 100)
-		actual := args.Map{"result": inRange2 || val2 != 60}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": inRange2 || val2 != 60}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected boundary min", actual)
 		sso3 := corestr.New.SimpleStringOnce.Init("200")
 		val3, inRange3 := sso3.WithinRange(true, 0, 100)
-		actual := args.Map{"result": inRange3 || val3 != 100}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": inRange3 || val3 != 100}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected boundary max", actual)
 	})
 }

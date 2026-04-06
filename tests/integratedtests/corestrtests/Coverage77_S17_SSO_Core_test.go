@@ -24,8 +24,8 @@ func Test_C77_SSO_Value_IsInitialized(t *testing.T) {
 		actual := args.Map{"result": sso.Value() != "hello"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 	})
 }
@@ -95,11 +95,11 @@ func Test_C77_SSO_IsInvalid(t *testing.T) {
 		actual := args.Map{"result": uninit.IsInvalid()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected invalid for uninitialized", actual)
-		actual := args.Map{"result": initEmpty.IsInvalid()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": initEmpty.IsInvalid()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected invalid for empty value", actual)
-		actual := args.Map{"result": valid.IsInvalid()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": valid.IsInvalid()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	})
 }
@@ -158,8 +158,8 @@ func Test_C77_SSO_SetOnUninitialized(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-		actual := args.Map{"result": sso.Value() != "val"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Value() != "val"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "value not set", actual)
 	})
 }
@@ -176,8 +176,8 @@ func Test_C77_SSO_SetOnUninitialized_AlreadyInit(t *testing.T) {
 		actual := args.Map{"result": err == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error for already initialized", actual)
-		actual := args.Map{"result": sso.Value() != "existing"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Value() != "existing"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "value should not change", actual)
 	})
 }
@@ -224,8 +224,8 @@ func Test_C77_SSO_GetOnce_Uninitialized(t *testing.T) {
 		actual := args.Map{"result": result != ""}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty string", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be initialized after GetOnce", actual)
 	})
 }
@@ -322,8 +322,8 @@ func Test_C77_SSO_SetInitialize_SetUnInit(t *testing.T) {
 		sso.SetUnInit()
 
 		// Assert
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }
@@ -369,11 +369,11 @@ func Test_C77_SSO_IsEmpty_IsWhitespace(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": ws.IsWhitespace()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ws.IsWhitespace()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected whitespace", actual)
-		actual := args.Map{"result": val.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -400,8 +400,8 @@ func Test_C77_SSO_HasValidNonEmpty(t *testing.T) {
 		actual := args.Map{"result": valid.HasValidNonEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": empty.HasValidNonEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasValidNonEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -416,8 +416,8 @@ func Test_C77_SSO_HasValidNonWhitespace(t *testing.T) {
 		actual := args.Map{"result": valid.HasValidNonWhitespace()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ws.HasValidNonWhitespace()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ws.HasValidNonWhitespace()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -432,8 +432,8 @@ func Test_C77_SSO_IsValueBool(t *testing.T) {
 		actual := args.Map{"result": ssoFalse.IsValueBool()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": ssoTrue.IsValueBool()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ssoTrue.IsValueBool()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -448,8 +448,8 @@ func Test_C77_SSO_SafeValue(t *testing.T) {
 		actual := args.Map{"result": init.SafeValue() != "val"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'val'", actual)
-		actual := args.Map{"result": uninit.SafeValue() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": uninit.SafeValue() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty for uninitialized", actual)
 	})
 }
@@ -464,8 +464,8 @@ func Test_C77_SSO_Int(t *testing.T) {
 		actual := args.Map{"result": sso.Int() != 42}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
-		actual := args.Map{"result": invalid.Int() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.Int() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -481,11 +481,11 @@ func Test_C77_SSO_Byte(t *testing.T) {
 		actual := args.Map{"result": valid.Byte() != 200}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 200", actual)
-		actual := args.Map{"result": overflow.Byte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": overflow.Byte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for overflow", actual)
-		actual := args.Map{"result": invalid.Byte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.Byte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for invalid", actual)
 	})
 }
@@ -501,11 +501,11 @@ func Test_C77_SSO_Int16(t *testing.T) {
 		actual := args.Map{"result": valid.Int16() != 1000}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1000", actual)
-		actual := args.Map{"result": overflow.Int16() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": overflow.Int16() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for overflow", actual)
-		actual := args.Map{"result": invalid.Int16() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.Int16() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for invalid", actual)
 	})
 }
@@ -520,8 +520,8 @@ func Test_C77_SSO_Int32(t *testing.T) {
 		actual := args.Map{"result": valid.Int32() != 100000}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 100000", actual)
-		actual := args.Map{"result": invalid.Int32() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.Int32() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -583,8 +583,8 @@ func Test_C77_SSO_WithinRange_BelowMin_WithBoundary(t *testing.T) {
 		actual := args.Map{"result": inRange}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected out of range", actual)
-		actual := args.Map{"result": val != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected boundary min 0", actual)
 	})
 }
@@ -601,8 +601,8 @@ func Test_C77_SSO_WithinRange_AboveMax_WithBoundary(t *testing.T) {
 		actual := args.Map{"result": inRange}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected out of range", actual)
-		actual := args.Map{"result": val != 100}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != 100}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected boundary max 100", actual)
 	})
 }
@@ -619,8 +619,8 @@ func Test_C77_SSO_WithinRange_NoBoundary(t *testing.T) {
 		actual := args.Map{"result": inRange}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected out of range", actual)
-		actual := args.Map{"result": val != 200}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != 200}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected raw value 200", actual)
 	})
 }
@@ -637,8 +637,8 @@ func Test_C77_SSO_WithinRange_Invalid(t *testing.T) {
 		actual := args.Map{"result": inRange}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for invalid", actual)
-		actual := args.Map{"result": val != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -792,8 +792,8 @@ func Test_C77_SSO_ValueInt(t *testing.T) {
 		actual := args.Map{"result": sso.ValueInt(0) != 42}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
-		actual := args.Map{"result": invalid.ValueInt(99) != 99}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueInt(99) != 99}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 99", actual)
 	})
 }
@@ -808,8 +808,8 @@ func Test_C77_SSO_ValueDefInt(t *testing.T) {
 		actual := args.Map{"result": sso.ValueDefInt() != 10}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 10", actual)
-		actual := args.Map{"result": invalid.ValueDefInt() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueDefInt() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -825,11 +825,11 @@ func Test_C77_SSO_ValueByte(t *testing.T) {
 		actual := args.Map{"result": sso.ValueByte(0) != 100}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 100", actual)
-		actual := args.Map{"result": overflow.ValueByte(5) != 5}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": overflow.ValueByte(5) != 5}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 5 for overflow", actual)
-		actual := args.Map{"result": invalid.ValueByte(7) != 7}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueByte(7) != 7}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 7 for invalid", actual)
 	})
 }
@@ -844,8 +844,8 @@ func Test_C77_SSO_ValueDefByte(t *testing.T) {
 		actual := args.Map{"result": sso.ValueDefByte() != 50}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 50", actual)
-		actual := args.Map{"result": overflow.ValueDefByte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": overflow.ValueDefByte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -860,8 +860,8 @@ func Test_C77_SSO_ValueFloat64(t *testing.T) {
 		actual := args.Map{"result": sso.ValueFloat64(0) != 3.14}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
-		actual := args.Map{"result": invalid.ValueFloat64(1.5) != 1.5}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": invalid.ValueFloat64(1.5) != 1.5}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1.5", actual)
 	})
 }
@@ -891,8 +891,8 @@ func Test_C77_SSO_NonPtr_Ptr(t *testing.T) {
 		actual := args.Map{"result": nonPtr.Value() != "x"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nonPtr mismatch", actual)
-		actual := args.Map{"result": ptr == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ptr == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ptr nil", actual)
 	})
 }
@@ -907,8 +907,8 @@ func Test_C77_SSO_HasSafeNonEmpty(t *testing.T) {
 		actual := args.Map{"result": valid.HasSafeNonEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": empty.HasSafeNonEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasSafeNonEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -922,8 +922,8 @@ func Test_C77_SSO_Is(t *testing.T) {
 		actual := args.Map{"result": sso.Is("hello")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": sso.Is("world")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Is("world")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -937,8 +937,8 @@ func Test_C77_SSO_IsAnyOf(t *testing.T) {
 		actual := args.Map{"result": sso.IsAnyOf("a", "b", "c")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": sso.IsAnyOf("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsAnyOf("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -964,8 +964,8 @@ func Test_C77_SSO_IsContains(t *testing.T) {
 		actual := args.Map{"result": sso.IsContains("world")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": sso.IsContains("xyz")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsContains("xyz")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -979,8 +979,8 @@ func Test_C77_SSO_IsAnyContains(t *testing.T) {
 		actual := args.Map{"result": sso.IsAnyContains("xyz", "world")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": sso.IsAnyContains("abc", "def")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsAnyContains("abc", "def")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1019,8 +1019,8 @@ func Test_C77_SSO_IsRegexMatches(t *testing.T) {
 		actual := args.Map{"result": sso.IsRegexMatches(re)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": sso.IsRegexMatches(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsRegexMatches(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for nil regex", actual)
 	})
 }

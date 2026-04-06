@@ -26,8 +26,8 @@ func Test_S09_01_Hashmap_IsEmpty(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": hm.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -42,8 +42,8 @@ func Test_S09_02_Hashmap_HasItems(t *testing.T) {
 		actual := args.Map{"result": hm.HasItems()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has items", actual)
-		actual := args.Map{"result": corestr.Empty.Hashmap().HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Hashmap().HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items for empty", actual)
 	})
 }
@@ -190,8 +190,8 @@ func Test_S09_11_Hashmap_AddOrUpdateKeyVal(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected new", actual)
 		isNew2 := hm.AddOrUpdateKeyVal(kv)
-		actual := args.Map{"result": isNew2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": isNew2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not new on second add", actual)
 	})
 }
@@ -209,8 +209,8 @@ func Test_S09_12_Hashmap_AddOrUpdate(t *testing.T) {
 		actual := args.Map{"result": isNew}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected new", actual)
-		actual := args.Map{"result": isNew2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": isNew2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected update not new", actual)
 	})
 }
@@ -261,8 +261,8 @@ func Test_S09_15_Hashmap_SetBySplitter(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected 'value', got ''", actual)
 		v2, ok2 := hm.Get("novalue")
-		actual := args.Map{"result": ok2 || v2 != ""}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ok2 || v2 != ""}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty value, got ''", actual)
 	})
 }
@@ -309,7 +309,8 @@ func Test_S09_18_Hashmap_AddOrUpdateStringsPtrWgLock_Panic(t *testing.T) {
 
 		// Act & Assert
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for mismatched lengths", actual)
 		}()
@@ -874,8 +875,8 @@ func Test_S09_50_Hashmap_Has(t *testing.T) {
 		actual := args.Map{"result": hm.Has("k")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hm.Has("missing")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Has("missing")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -916,8 +917,8 @@ func Test_S09_53_Hashmap_IsKeyMissing(t *testing.T) {
 		actual := args.Map{"result": hm.IsKeyMissing("k")}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": hm.IsKeyMissing("missing")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hm.IsKeyMissing("missing")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -974,8 +975,8 @@ func Test_S09_57_Hashmap_HasAllStrings(t *testing.T) {
 		actual := args.Map{"result": hm.HasAllStrings("a", "b")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hm.HasAllStrings("a", "c")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.HasAllStrings("a", "c")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -990,8 +991,8 @@ func Test_S09_58_Hashmap_HasAll(t *testing.T) {
 		actual := args.Map{"result": hm.HasAll("x")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hm.HasAll("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.HasAll("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1019,8 +1020,8 @@ func Test_S09_60_Hashmap_HasAny(t *testing.T) {
 		actual := args.Map{"result": hm.HasAny("a", "z")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hm.HasAny("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.HasAny("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2072,8 +2073,8 @@ func Test_S09_126_Hashmap_UnmarshalJSON(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no error", actual)
-		actual := args.Map{"result": hm.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

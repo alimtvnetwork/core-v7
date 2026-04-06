@@ -27,8 +27,8 @@ func Test_CovHS2_01_OrderedList(t *testing.T) {
 		// empty
 		e := corestr.New.Hashset.Empty()
 		list2 := e.OrderedList()
-		actual := args.Map{"result": len(list2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -45,8 +45,8 @@ func Test_CovHS2_02_SafeStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
-		actual := args.Map{"result": len(hs.SafeStrings()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hs.SafeStrings()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -63,8 +63,8 @@ func Test_CovHS2_03_Lines(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
-		actual := args.Map{"result": len(hs.Lines()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hs.Lines()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -83,8 +83,8 @@ func Test_CovHS2_04_SimpleSlice(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
 		ss2 := hs.SimpleSlice()
-		actual := args.Map{"result": ss2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -179,13 +179,13 @@ func Test_CovHS2_07_GetAllExceptHashset(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// nil
 		r2 := hs.GetAllExceptHashset(nil)
-		actual := args.Map{"result": len(r2) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// empty
 		r3 := hs.GetAllExceptHashset(corestr.New.Hashset.Empty())
-		actual := args.Map{"result": len(r3) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -205,8 +205,8 @@ func Test_CovHS2_08_GetAllExcept(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
 		r2 := hs.GetAllExcept(nil)
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -226,8 +226,8 @@ func Test_CovHS2_09_GetAllExceptSpread(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
 		r2 := hs.GetAllExceptSpread()
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -247,8 +247,8 @@ func Test_CovHS2_10_GetAllExceptCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
 		r2 := hs.GetAllExceptCollection(nil)
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -281,11 +281,11 @@ func Test_CovHS2_12_List_ListPtr_ListCopyLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hs.ListPtr()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hs.ListPtr()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hs.ListCopyLock()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hs.ListCopyLock()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -305,8 +305,8 @@ func Test_CovHS2_13_MapStringAny_MapStringAnyDiff(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
 		m2 := hs.MapStringAny()
-		actual := args.Map{"result": len(m2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(m2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = hs.MapStringAnyDiff()
 	})
@@ -325,8 +325,8 @@ func Test_CovHS2_14_JoinSorted(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		hs.Adds("b", "a")
 		s := hs.JoinSorted(",")
-		actual := args.Map{"result": s != "a,b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s != "a,b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
 }
@@ -345,8 +345,8 @@ func Test_CovHS2_15_ListPtrSortedAsc_Dsc(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a first", actual)
 		dsc := hs.ListPtrSortedDsc()
-		actual := args.Map{"result": dsc[0] != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": dsc[0] != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected c first", actual)
 	})
 }
@@ -384,13 +384,13 @@ func Test_CovHS2_17_Remove_SafeRemove_RemoveWithLock(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 		hs.SafeRemove("b")
-		actual := args.Map{"result": hs.Has("b")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Has("b")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 		hs.SafeRemove("nonexist")
 		hs.RemoveWithLock("c")
-		actual := args.Map{"result": hs.Has("c")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Has("c")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 	})
 }
@@ -409,8 +409,8 @@ func Test_CovHS2_18_String_StringLock(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected non-empty (NoElements)", actual)
 		hs.Add("a")
 		s2 := hs.String()
-		actual := args.Map{"result": s2 == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s2 == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		_ = hs.StringLock()
 		_ = corestr.New.Hashset.Empty().StringLock()
@@ -470,12 +470,12 @@ func Test_CovHS2_22_Length_LengthLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
-		actual := args.Map{"result": hs.LengthLock() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.LengthLock() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -494,8 +494,8 @@ func Test_CovHS2_23_JsonModel_JsonModelAny(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hs.Add("a")
 		m2 := hs.JsonModel()
-		actual := args.Map{"result": len(m2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(m2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = hs.JsonModelAny()
 	})
@@ -516,16 +516,16 @@ func Test_CovHS2_24_MarshalJSON_UnmarshalJSON(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		hs2 := corestr.New.Hashset.Empty()
 		err2 := hs2.UnmarshalJSON(data)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
-		actual := args.Map{"result": hs2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// invalid
 		err3 := hs2.UnmarshalJSON([]byte("invalid"))
-		actual := args.Map{"result": err3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -554,8 +554,8 @@ func Test_CovHS2_26_ParseInjectUsingJson(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -621,19 +621,19 @@ func Test_CovHS2_30_DistinctDiffLinesRaw(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// left empty, right has items
 		r2 := hs.DistinctDiffLinesRaw("a")
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// left has items, right empty
 		hs.Add("x")
 		r3 := hs.DistinctDiffLinesRaw()
-		actual := args.Map{"result": len(r3) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// both have items
 		r4 := hs.DistinctDiffLinesRaw("a", "x")
-		actual := args.Map{"result": len(r4) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 (only 'a')", actual)
 	})
 }
@@ -672,19 +672,19 @@ func Test_CovHS2_32_DistinctDiffLines(t *testing.T) {
 		// left not empty, right empty
 		hs.Add("x")
 		r2 := hs.DistinctDiffLines()
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// left empty, right not empty
 		e := corestr.New.Hashset.Empty()
 		r3 := e.DistinctDiffLines("a")
-		actual := args.Map{"result": len(r3) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// both have items
 		r4 := hs.DistinctDiffLines("a", "x")
-		actual := args.Map{"result": len(r4) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -704,8 +704,8 @@ func Test_CovHS2_33_Serialize_Deserialize(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		target := corestr.New.Hashset.Empty()
 		err2 := hs.Deserialize(target)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }

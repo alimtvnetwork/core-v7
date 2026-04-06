@@ -360,8 +360,8 @@ func Test_Cov37_InsertAt_OutOfRange(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		s.InsertAt(99, "x")
-		actual := args.Map{"result": s.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -895,11 +895,11 @@ func Test_Cov37_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.HasIndex(2)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.HasIndex(2)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": s.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for negative", actual)
 	})
 }
@@ -917,8 +917,8 @@ func Test_Cov37_IsContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.IsContains("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IsContains("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -980,8 +980,8 @@ func Test_Cov37_IndexOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": s.IndexOf("z") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IndexOf("z") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
@@ -2090,8 +2090,8 @@ func Test_Cov37_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": strings.Contains(string(data), "\"a\"")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": strings.Contains(string(data), "\"a\"")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 	})
 }
@@ -2108,8 +2108,8 @@ func Test_Cov37_UnmarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": s.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -2201,8 +2201,8 @@ func Test_Cov37_Serialize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
@@ -2220,8 +2220,8 @@ func Test_Cov37_Deserialize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(target) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(target) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -2240,8 +2240,8 @@ func Test_Cov37_ParseInjectUsingJson(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -2711,8 +2711,8 @@ func Test_Cov37_AddedRemovedLinesDiff(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected added items", actual)
-		actual := args.Map{"result": len(removed) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(removed) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed items", actual)
 	})
 }
@@ -2746,8 +2746,8 @@ func Test_Cov37_RemoveIndexes(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -3192,8 +3192,8 @@ func Test_Cov37_Creator_Deserialize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": s.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -3225,8 +3225,8 @@ func Test_Cov37_Creator_DeserializeJsoner(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": s.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

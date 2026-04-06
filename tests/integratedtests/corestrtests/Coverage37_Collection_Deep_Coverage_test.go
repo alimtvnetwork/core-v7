@@ -102,8 +102,8 @@ func Test_C37_Collection_AddError(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		c.AddError(errForTest)
-		actual := args.Map{"result": c.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -196,8 +196,8 @@ func Test_C37_Collection_AddFuncErr(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		c.AddFuncErr(func() (string, error) { return "", errForTest }, func(e error) {})
-		actual := args.Map{"result": c.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 still", actual)
 	})
 }
@@ -216,8 +216,8 @@ func Test_C37_Collection_AddCollection(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		c1.AddCollection(corestr.Empty.Collection())
-		actual := args.Map{"result": c1.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c1.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2 still", actual)
 	})
 }
@@ -270,8 +270,8 @@ func Test_C37_Collection_AddHashmapsValues(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		c.AddHashmapsValues(nil)
-		actual := args.Map{"result": c.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 after nil", actual)
 	})
 }
@@ -339,14 +339,14 @@ func Test_C37_Collection_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.HasIndex(1)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": c.HasIndex(1)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.HasIndex(2)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasIndex(2)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": c.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -470,14 +470,14 @@ func Test_C37_Collection_RemoveAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": c.RemoveAt(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.RemoveAt(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": c.RemoveAt(100)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.RemoveAt(100)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -512,8 +512,8 @@ func Test_C37_Collection_IsEquals_Nil(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true nil==nil", actual)
 		c := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"result": c.IsEquals(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsEquals(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -574,8 +574,8 @@ func Test_C37_Collection_IsEqualsWithSensitive_Insensitive(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal insensitive", actual)
-		actual := args.Map{"result": a.IsEqualsWithSensitive(true, b)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(true, b)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal sensitive", actual)
 	})
 }
@@ -634,8 +634,8 @@ func Test_C37_Collection_FirstOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		c := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"result": c.FirstOrDefault() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.FirstOrDefault() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -649,8 +649,8 @@ func Test_C37_Collection_LastOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		c := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"result": c.LastOrDefault() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.LastOrDefault() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -680,8 +680,8 @@ func Test_C37_Collection_SafeIndexAtUsingLength(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
-		actual := args.Map{"result": c.SafeIndexAtUsingLength("def", 1, 5) != "def"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.SafeIndexAtUsingLength("def", 1, 5) != "def"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected def", actual)
 	})
 }
@@ -697,17 +697,17 @@ func Test_C37_Collection_List_Items_ListStrings(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(c.Items()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(c.Items()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(c.ListStrings()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(c.ListStrings()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(c.ListStringsPtr()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(c.ListStringsPtr()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(c.ListPtr()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(c.ListPtr()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -727,12 +727,12 @@ func Test_C37_Collection_Take(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		same := c.Take(10)
-		actual := args.Map{"result": same != c}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": same != c}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected same ptr", actual)
 		empty := c.Take(0)
-		actual := args.Map{"result": empty.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -750,8 +750,8 @@ func Test_C37_Collection_Skip(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		same := c.Skip(0)
-		actual := args.Map{"result": same != c}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": same != c}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected same ptr", actual)
 	})
 }
@@ -771,14 +771,14 @@ func Test_C37_Collection_Reverse(t *testing.T) {
 		// Two items
 		c2 := corestr.New.Collection.Strings([]string{"x", "y"})
 		c2.Reverse()
-		actual := args.Map{"result": c2.First() != "y"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c2.First() != "y"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected y", actual)
 		// Single
 		c3 := corestr.New.Collection.Strings([]string{"z"})
 		c3.Reverse()
-		actual := args.Map{"result": c3.First() != "z"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c3.First() != "z"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected z", actual)
 	})
 }
@@ -795,8 +795,8 @@ func Test_C37_Collection_SortedListAsc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a first", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().SortedListAsc() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().SortedListAsc() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected nil", actual)
 	})
 }
@@ -1069,11 +1069,11 @@ func Test_C37_Collection_Has(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.Has("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Has("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().Has("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().Has("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1104,11 +1104,11 @@ func Test_C37_Collection_HasPtr(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.HasPtr(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasPtr(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().HasPtr(&s)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().HasPtr(&s)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1124,11 +1124,11 @@ func Test_C37_Collection_HasAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.HasAll("a", "z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasAll("a", "z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().HasAll("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().HasAll("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1144,11 +1144,11 @@ func Test_C37_Collection_HasUsingSensitivity(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.HasUsingSensitivity("hello", true)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasUsingSensitivity("hello", true)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": c.HasUsingSensitivity("world", false)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.HasUsingSensitivity("world", false)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1165,12 +1165,12 @@ func Test_C37_Collection_IsContainsPtr(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.IsContainsPtr(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsContainsPtr(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		miss := "z"
-		actual := args.Map{"result": c.IsContainsPtr(&miss)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsContainsPtr(&miss)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1186,8 +1186,8 @@ func Test_C37_Collection_IsContainsAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.IsContainsAll(nil...)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsContainsAll(nil...)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1203,11 +1203,11 @@ func Test_C37_Collection_IsContainsAllSlice(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.IsContainsAllSlice([]string{})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsContainsAllSlice([]string{})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false on empty", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().IsContainsAllSlice([]string{"a"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().IsContainsAllSlice([]string{"a"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1223,8 +1223,8 @@ func Test_C37_Collection_IsContainsAllLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": c.IsContainsAllLock(nil...)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.IsContainsAllLock(nil...)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false nil", actual)
 	})
 }
@@ -1241,12 +1241,12 @@ func Test_C37_Collection_GetHashsetPlusHasAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_, ok2 := c.GetHashsetPlusHasAll(nil)
-		actual := args.Map{"result": ok2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1264,8 +1264,8 @@ func Test_C37_Collection_String(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().String() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().String() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have no elements text", actual)
 	})
 }
@@ -1309,8 +1309,8 @@ func Test_C37_Collection_JsonString(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": c.JsonStringMust() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.JsonStringMust() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1326,8 +1326,8 @@ func Test_C37_Collection_Join(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a,b", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().Join(",") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().Join(",") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -1344,8 +1344,8 @@ func Test_C37_Collection_JoinLine(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().JoinLine() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().JoinLine() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -1361,8 +1361,8 @@ func Test_C37_Collection_Joins(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": c.Joins(",", "b") == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Joins(",", "b") == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1410,8 +1410,8 @@ func Test_C37_Collection_Csv(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().Csv() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().Csv() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1427,8 +1427,8 @@ func Test_C37_Collection_CsvOptions(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().CsvOptions(false) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().CsvOptions(false) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1476,11 +1476,11 @@ func Test_C37_Collection_GetPagesSize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": c.GetPagesSize(0) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.GetPagesSize(0) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
-		actual := args.Map{"result": c.GetPagesSize(-1) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.GetPagesSize(-1) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -1513,14 +1513,14 @@ func Test_C37_Collection_GetSinglePageCollection(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		page2 := c.GetSinglePageCollection(2, 2)
-		actual := args.Map{"result": page2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": page2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// small collection
 		small := corestr.New.Collection.Strings([]string{"a"})
 		same := small.GetSinglePageCollection(10, 1)
-		actual := args.Map{"result": same != small}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": same != small}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected same ptr", actual)
 	})
 }
@@ -1593,8 +1593,8 @@ func Test_C37_Collection_NonEmptyList(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().NonEmptyList() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().NonEmptyList() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1753,8 +1753,8 @@ func Test_C37_Collection_ConcatNew(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		cn2 := c.ConcatNew(0)
-		actual := args.Map{"result": cn2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cn2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -1798,8 +1798,8 @@ func Test_C37_Collection_AsError(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().AsError(",") != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().AsError(",") != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -2078,8 +2078,8 @@ func Test_C37_Collection_GetAllExcept(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		r2 := c.GetAllExcept(nil)
-		actual := args.Map{"result": len(r2) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -2098,8 +2098,8 @@ func Test_C37_Collection_GetAllExceptCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		exc := corestr.New.Collection.Strings([]string{"a"})
 		r2 := c.GetAllExceptCollection(exc)
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -2133,8 +2133,8 @@ func Test_C37_Collection_New(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		n2 := c.New()
-		actual := args.Map{"result": n2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": n2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -2152,8 +2152,8 @@ func Test_C37_Collection_ListCopyPtrLock(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		l2 := corestr.Empty.Collection().ListCopyPtrLock()
-		actual := args.Map{"result": len(l2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(l2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -2184,8 +2184,8 @@ func Test_C37_Collection_SummaryStringWithHeader(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.Collection().SummaryStringWithHeader("H") == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Collection().SummaryStringWithHeader("H") == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -2262,8 +2262,8 @@ func Test_C37_Collection_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(b) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(b) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	})
 }
@@ -2280,13 +2280,13 @@ func Test_C37_Collection_UnmarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": c.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// invalid
 		err2 := c.UnmarshalJSON([]byte(`{invalid`))
-		actual := args.Map{"result": err2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -2300,8 +2300,8 @@ func Test_C37_Collection_ParseInjectUsingJson(t *testing.T) {
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": result.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -2337,8 +2337,8 @@ func Test_C37_Collection_Serialize(t *testing.T) {
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(b) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(b) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	})
 }
@@ -2408,8 +2408,8 @@ func Test_C37_Collection_Clear(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		var nilC *corestr.Collection
-		actual := args.Map{"result": nilC.Clear() != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilC.Clear() != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -2460,61 +2460,61 @@ func Test_C37_NewCollectionCreator_Methods(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// CloneStrings
 		c2 := corestr.New.Collection.CloneStrings([]string{"a"})
-		actual := args.Map{"result": c2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// Create
 		c3 := corestr.New.Collection.Create([]string{"a"})
-		actual := args.Map{"result": c3.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c3.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// StringsOptions clone
 		c4 := corestr.New.Collection.StringsOptions(true, []string{"a"})
-		actual := args.Map{"result": c4.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c4.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// StringsOptions no clone empty
 		c5 := corestr.New.Collection.StringsOptions(false, nil)
-		actual := args.Map{"result": c5.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c5.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// LineUsingSep
 		c6 := corestr.New.Collection.LineUsingSep(",", "a,b,c")
-		actual := args.Map{"result": c6.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c6.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// LineDefault
 		c7 := corestr.New.Collection.LineDefault("a\nb")
-		actual := args.Map{"result": c7.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c7.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// StringsPlusCap
 		c8 := corestr.New.Collection.StringsPlusCap(5, []string{"a"})
-		actual := args.Map{"result": c8.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c8.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		c9 := corestr.New.Collection.StringsPlusCap(0, []string{"a"})
-		actual := args.Map{"result": c9.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c9.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// CapStrings
 		c10 := corestr.New.Collection.CapStrings(5, []string{"a"})
-		actual := args.Map{"result": c10.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c10.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		c11 := corestr.New.Collection.CapStrings(0, []string{"a"})
-		actual := args.Map{"result": c11.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c11.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// LenCap
 		c12 := corestr.New.Collection.LenCap(3, 10)
-		actual := args.Map{"result": c12.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c12.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// Empty
 		c13 := corestr.New.Collection.Empty()
-		actual := args.Map{"result": c13.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c13.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -2526,51 +2526,51 @@ func Test_C37_EmptyCreator_All(t *testing.T) {
 		actual := args.Map{"result": corestr.Empty.Collection().Length() != 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.LinkedList().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.LinkedList().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.KeyAnyValuePair() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.KeyAnyValuePair() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.KeyValuePair() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.KeyValuePair() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.KeyValueCollection().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.KeyValueCollection().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.LinkedCollections().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.LinkedCollections().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.LeftRight() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.LeftRight() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_ = corestr.Empty.SimpleStringOnce()
-		actual := args.Map{"result": corestr.Empty.SimpleStringOncePtr() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleStringOncePtr() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.Hashset().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Hashset().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.HashsetsCollection().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.HashsetsCollection().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.Hashmap().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Hashmap().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.CharCollectionMap().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.CharCollectionMap().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.KeyValuesCollection().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.KeyValuesCollection().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.CollectionsOfCollection().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.CollectionsOfCollection().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.CharHashsetMap().Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.CharHashsetMap().Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }

@@ -205,8 +205,8 @@ func Test_C78_SSO_CloneUsingNewVal(t *testing.T) {
 		actual := args.Map{"result": cloned.Value() != "new"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'new', got ''", actual)
-		actual := args.Map{"result": cloned.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": cloned.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected initialized from source", actual)
 	})
 }
@@ -332,11 +332,11 @@ func Test_C78_SSO_MarshalUnmarshalJSON(t *testing.T) {
 		err = target.UnmarshalJSON(bytes)
 
 		// Assert
-		actual := args.Map{"result": err != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
-		actual := args.Map{"result": target.Value() != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": target.Value() != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 	})
 }
@@ -354,8 +354,8 @@ func Test_C78_SSO_Json_JsonPtr(t *testing.T) {
 		actual := args.Map{"result": jsonResult.HasError()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "json error", actual)
-		actual := args.Map{"result": jsonPtrResult.HasError()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": jsonPtrResult.HasError()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "jsonPtr error", actual)
 	})
 }
@@ -374,8 +374,8 @@ func Test_C78_SSO_ParseInjectUsingJson(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": result.Value() != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Value() != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
 	})
 }
@@ -474,8 +474,8 @@ func Test_C78_SSO_Serialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(bytes) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
@@ -507,8 +507,8 @@ func Test_C78_NewSSO_Any(t *testing.T) {
 		actual := args.Map{"result": sso.Value() != "42"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected '42', got ''", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 	})
 }
@@ -522,8 +522,8 @@ func Test_C78_NewSSO_Uninitialized(t *testing.T) {
 		actual := args.Map{"result": sso.Value() != "val"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "value mismatch", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected uninitialized", actual)
 	})
 }

@@ -56,8 +56,8 @@ func Test_C25_LinkedCollectionNode_EndOfChain(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": end == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": end == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "end should not be nil", actual)
 	})
 }
@@ -75,8 +75,8 @@ func Test_C25_LinkedCollectionNode_Clone(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "cloned should not have next", actual)
-		actual := args.Map{"result": cloned.Element.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cloned.Element.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "cloned element should have 1 item", actual)
 	})
 }
@@ -350,8 +350,8 @@ func Test_C25_LinkedCollections_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be empty", actual)
-		actual := args.Map{"result": lc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have items", actual)
 	})
 }
@@ -1190,12 +1190,12 @@ func Test_C25_LinkedCollections_SafeIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil for negative", actual)
-		actual := args.Map{"result": lc.SafeIndexAt(5) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.SafeIndexAt(5) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil for out of range", actual)
 		node := lc.SafeIndexAt(0)
-		actual := args.Map{"result": node == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": node == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected node", actual)
 	})
 }
@@ -1212,8 +1212,8 @@ func Test_C25_LinkedCollections_SafePointerIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected collection", actual)
-		actual := args.Map{"result": lc.SafePointerIndexAt(5) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.SafePointerIndexAt(5) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -1232,8 +1232,8 @@ func Test_C25_LinkedCollections_AddCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "should skip nil", actual)
 		col := corestr.New.Collection.Strings([]string{"a"})
 		lc.AddCollection(col)
-		actual := args.Map{"result": lc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -1628,8 +1628,8 @@ func Test_C25_LinkedCollections_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have data", actual)
 	})
 }
@@ -1729,14 +1729,14 @@ func Test_C25_LinkedCollections_AsJsonInterfaces(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": lc.AsJsoner() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.AsJsoner() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": lc.AsJsonParseSelfInjector() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.AsJsonParseSelfInjector() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": lc.AsJsonMarshaller() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.AsJsonMarshaller() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	})
 }
@@ -1794,8 +1794,8 @@ func Test_C25_NonChainedLinkedCollectionNodes_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be empty", actual)
-		actual := args.Map{"result": nc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have items", actual)
 	})
 }
@@ -1813,11 +1813,11 @@ func Test_C25_NonChainedLinkedCollectionNodes_Adds(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": nc.First() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.First() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "first should not be nil", actual)
-		actual := args.Map{"result": nc.Last() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.Last() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "last should not be nil", actual)
 	})
 }
@@ -1868,8 +1868,8 @@ func Test_C25_NonChainedLinkedCollectionNodes_ApplyChaining(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be applied", actual)
-		actual := args.Map{"result": nc.First().HasNext()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nc.First().HasNext()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "first should have next", actual)
 	})
 }

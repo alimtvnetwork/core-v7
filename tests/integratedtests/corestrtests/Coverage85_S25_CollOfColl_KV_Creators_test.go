@@ -446,7 +446,7 @@ func Test_CovS25_33_StringUtils_WrapSingle(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "'test'"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "WrapSingle expected \"'test'\", actual)
+		expected.ShouldBeEqual(t, 0, "WrapSingle expected \"'test'\"", actual)
 	})
 }
 
@@ -458,7 +458,7 @@ func Test_CovS25_34_StringUtils_WrapTilda(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "`test`"}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "WrapTilda expected \"`test`\", actual)
+		expected.ShouldBeEqual(t, 0, "WrapTilda expected \"`test`\"", actual)
 	})
 }
 
@@ -494,7 +494,7 @@ func Test_CovS25_37_StringUtils_WrapDoubleIfMissing_Empty(t *testing.T) {
 		// Assert
 		actual := args.Map{"result": result != "\"\""}
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing empty should return \"\\\"\\\"\", actual)
+		expected.ShouldBeEqual(t, 0, "WrapDoubleIfMissing empty should return \"\\\"\\\"\"", actual)
 	})
 }
 

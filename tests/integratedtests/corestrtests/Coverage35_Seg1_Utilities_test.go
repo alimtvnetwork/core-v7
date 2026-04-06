@@ -2228,8 +2228,8 @@ func Test_Seg1_Collection_AddFuncErr_Success(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": c.Length()}
-		expected := args.Map{"len": 1}
+		actual = args.Map{"len": c.Length()}
+		expected = args.Map{"len": 1}
 		expected.ShouldBeEqual(t, 0, "Collection AddFuncErr -- success path", actual)
 	})
 }

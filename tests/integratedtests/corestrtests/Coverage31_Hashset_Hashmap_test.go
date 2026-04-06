@@ -219,8 +219,8 @@ func Test_C31_Hashset_Has(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.Has("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Has("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -243,8 +243,8 @@ func Test_C31_Hashset_HasAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.HasAll("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.HasAll("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }

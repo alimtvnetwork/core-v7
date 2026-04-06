@@ -250,7 +250,8 @@ func Test_Cov27_LinkedList_RemoveNodeByElementValue_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
@@ -265,7 +266,8 @@ func Test_Cov27_LinkedList_RemoveNodeByIndex_NegativePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for negative index", actual)
 	}()
@@ -280,7 +282,8 @@ func Test_Cov27_LinkedList_RemoveNodeByIndexes_EmptyPanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList()
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
@@ -296,7 +299,8 @@ func Test_Cov27_LinkedList_RemoveNode_EmptyPanics(t *testing.T) {
 	ll := corestr.Empty.LinkedList()
 	node := corestr.Empty.LinkedList().Add("a").Head()
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic on removing from empty list", actual)
 	}()
@@ -311,7 +315,8 @@ func Test_Cov27_LinkedList_AddStringsToNode_NilNodePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for nil node", actual)
 	}()
@@ -326,7 +331,8 @@ func Test_Cov27_LinkedList_IndexAt_OutOfRangePanics(t *testing.T) {
 	// Arrange
 	ll := corestr.Empty.LinkedList().Add("a")
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for out of range index", actual)
 	}()

@@ -254,7 +254,8 @@ func Test_Cov18_CreateUsingNamesSpread(t *testing.T) {
 func Test_Cov18_NumberEnumBase_NilNameRangesPanics(t *testing.T) {
 	// Arrange
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for nil nameRanges", actual)
 	}()

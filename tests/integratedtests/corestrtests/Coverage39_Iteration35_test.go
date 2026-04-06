@@ -44,8 +44,8 @@ func Test_Cov39_LC_Head_Tail(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
-		actual := args.Map{"result": lc.Tail().Element.First() != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Tail().Element.First() != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 	})
 }
@@ -64,8 +64,8 @@ func Test_Cov39_LC_First_Last(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected x", actual)
-		actual := args.Map{"result": lc.Last().First() != "y"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Last().First() != "y"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected y", actual)
 	})
 }
@@ -124,8 +124,8 @@ func Test_Cov39_LC_IsEmpty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": lc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items", actual)
 	})
 }
@@ -1886,8 +1886,8 @@ func Test_Cov39_LC_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": strings.Contains(string(data), "\"a\"")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": strings.Contains(string(data), "\"a\"")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 	})
 }
@@ -2186,8 +2186,8 @@ func Test_Cov39_LCNode_HasNext(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": lc.Tail().HasNext()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Tail().HasNext()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2645,8 +2645,8 @@ func Test_Cov39_NCLCN_ApplyChaining(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": n1.HasNext()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": n1.HasNext()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected chaining", actual)
 	})
 }

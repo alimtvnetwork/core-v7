@@ -23,14 +23,14 @@ func Test_S20_001_NewNonChainedLinkedListNodes_creates_with_capacity(t *testing.
 		actual := args.Map{"result": nodes == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "NewNonChainedLinkedListNodes returns nil -- capacity 5", actual)
-		actual := args.Map{"result": nodes.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Length returns 0 -- empty after creation", actual)
-		actual := args.Map{"result": nodes.IsEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.IsEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsEmpty returns true -- no items added", actual)
-		actual := args.Map{"result": nodes.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HasItems returns false -- no items added", actual)
 	})
 }
@@ -49,11 +49,11 @@ func Test_S20_002_NonChainedLinkedListNodes_Adds_single(t *testing.T) {
 		actual := args.Map{"result": nodes.Length() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Length returns 1 -- one node added", actual)
-		actual := args.Map{"result": nodes.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsEmpty returns false -- has items", actual)
-		actual := args.Map{"result": nodes.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasItems returns true -- has items", actual)
 	})
 }
@@ -70,8 +70,8 @@ func Test_S20_003_NonChainedLinkedListNodes_Adds_nil(t *testing.T) {
 		actual := args.Map{"result": result != nodes}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Adds returns self -- nil input", actual)
-		actual := args.Map{"result": nodes.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Length returns 0 -- nil not added", actual)
 	})
 }
@@ -92,8 +92,8 @@ func Test_S20_004_NonChainedLinkedListNodes_First_Last(t *testing.T) {
 		actual := args.Map{"result": nodes.First().Element != "alpha"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "First returns alpha -- first added", actual)
-		actual := args.Map{"result": nodes.Last().Element != "gamma"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Last().Element != "gamma"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Last returns gamma -- last added", actual)
 	})
 }
@@ -189,8 +189,8 @@ func Test_S20_010_NonChainedLinkedListNodes_ApplyChaining_empty(t *testing.T) {
 		actual := args.Map{"result": result != nodes}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining returns self -- empty nodes", actual)
-		actual := args.Map{"result": nodes.IsChainingApplied()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.IsChainingApplied()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsChainingApplied returns false -- empty, no chaining applied", actual)
 	})
 }
@@ -212,15 +212,15 @@ func Test_S20_011_NonChainedLinkedListNodes_ApplyChaining_multi(t *testing.T) {
 		actual := args.Map{"result": result != nodes}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining returns self", actual)
-		actual := args.Map{"result": nodes.IsChainingApplied()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.IsChainingApplied()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsChainingApplied returns true -- chaining applied", actual)
 		first := nodes.First()
-		actual := args.Map{"result": first.Next() == nil || first.Next().Element != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": first.Next() == nil || first.Next().Element != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining chains a->b -- correct next", actual)
-		actual := args.Map{"result": nodes.Last().HasNext()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Last().HasNext()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Last node has nil next -- end of chain", actual)
 	})
 }
@@ -271,8 +271,8 @@ func Test_S20_014_NonChainedLinkedListNodes_ToChainedNodes_empty(t *testing.T) {
 		actual := args.Map{"result": chained == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ToChainedNodes returns non-nil slice -- empty input", actual)
-		actual := args.Map{"result": len(chained) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(chained) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ToChainedNodes returns empty slice -- empty input", actual)
 	})
 }
@@ -290,11 +290,11 @@ func Test_S20_020_NewNonChainedLinkedCollectionNodes_creates(t *testing.T) {
 		actual := args.Map{"result": nodes == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "NewNonChainedLinkedCollectionNodes returns non-nil -- capacity 5", actual)
-		actual := args.Map{"result": nodes.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Length returns 0 -- empty", actual)
-		actual := args.Map{"result": nodes.IsEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.IsEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsEmpty returns true -- no items", actual)
 	})
 }
@@ -314,8 +314,8 @@ func Test_S20_021_NonChainedLinkedCollectionNodes_Adds(t *testing.T) {
 		actual := args.Map{"result": nodes.Length() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Length returns 1 -- one node", actual)
-		actual := args.Map{"result": nodes.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasItems returns true -- has items", actual)
 	})
 }
@@ -381,8 +381,8 @@ func Test_S20_025_NonChainedLinkedCollectionNodes_First_Last(t *testing.T) {
 		actual := args.Map{"result": nodes.First().Element.List()[0] != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "First returns collection with a", actual)
-		actual := args.Map{"result": nodes.Last().Element.List()[0] != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Last().Element.List()[0] != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Last returns collection with b", actual)
 	})
 }
@@ -447,8 +447,8 @@ func Test_S20_029_NonChainedLinkedCollectionNodes_ApplyChaining_empty(t *testing
 		actual := args.Map{"result": result != nodes}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining returns self -- empty", actual)
-		actual := args.Map{"result": nodes.IsChainingApplied()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.IsChainingApplied()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsChainingApplied returns false -- empty, no chaining", actual)
 	})
 }
@@ -472,11 +472,11 @@ func Test_S20_030_NonChainedLinkedCollectionNodes_ApplyChaining_multi(t *testing
 		actual := args.Map{"result": result != nodes}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining returns self", actual)
-		actual := args.Map{"result": nodes.IsChainingApplied()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nodes.IsChainingApplied()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsChainingApplied returns true -- applied", actual)
-		actual := args.Map{"result": nodes.Last().HasNext()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nodes.Last().HasNext()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Last node has nil next -- end of chain", actual)
 	})
 }
@@ -628,8 +628,8 @@ func Test_S20_046_HashmapDiff_AllKeysSorted(t *testing.T) {
 		actual := args.Map{"result": len(keys) != 3}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AllKeysSorted returns 3 keys", actual)
-		actual := args.Map{"result": keys[0] != "a" || keys[1] != "b" || keys[2] != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": keys[0] != "a" || keys[1] != "b" || keys[2] != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AllKeysSorted returns sorted keys -- a,b,c", actual)
 	})
 }
@@ -646,8 +646,8 @@ func Test_S20_047_HashmapDiff_MapAnyItems(t *testing.T) {
 		actual := args.Map{"result": len(result) != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "MapAnyItems returns 1 item", actual)
-		actual := args.Map{"result": result["x"] != "10"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result["x"] != "10"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "MapAnyItems has x=10", actual)
 	})
 }
@@ -769,8 +769,8 @@ func Test_S20_055_HashmapDiff_DiffRaw(t *testing.T) {
 		actual := args.Map{"result": diff == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "DiffRaw returns non-nil -- has diff", actual)
-		actual := args.Map{"result": diff["b"] != "2"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": diff["b"] != "2"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "DiffRaw contains b=2 -- left value for changed key", actual)
 	})
 }
@@ -878,8 +878,8 @@ func Test_S20_062_HashmapDiff_Serialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Serialize returns no error", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Serialize returns non-empty bytes", actual)
 	})
 }
@@ -897,8 +897,8 @@ func Test_S20_063_HashmapDiff_Deserialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Deserialize returns no error", actual)
-		actual := args.Map{"result": target["a"] != "1"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": target["a"] != "1"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Deserialize target has a=1", actual)
 	})
 }

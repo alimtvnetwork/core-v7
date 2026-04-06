@@ -57,8 +57,8 @@ func Test_S08_03_Collection_HasAnyItem(t *testing.T) {
 		actual := args.Map{"result": col.HasAnyItem()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected HasAnyItem true", actual)
-		actual := args.Map{"result": empty.HasAnyItem()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasAnyItem()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for empty", actual)
 	})
 }
@@ -87,14 +87,14 @@ func Test_S08_05_Collection_HasIndex(t *testing.T) {
 		actual := args.Map{"result": col.HasIndex(0)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected HasIndex(0) true", actual)
-		actual := args.Map{"result": col.HasIndex(1)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": col.HasIndex(1)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected HasIndex(1) true", actual)
-		actual := args.Map{"result": col.HasIndex(2)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.HasIndex(2)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected HasIndex(2) false", actual)
-		actual := args.Map{"result": col.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected HasIndex(-1) false", actual)
 	})
 }
@@ -160,8 +160,8 @@ func Test_S08_09_Collection_RemoveAt_Valid(t *testing.T) {
 		actual := args.Map{"result": ok}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": col.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -175,8 +175,8 @@ func Test_S08_10_Collection_RemoveAt_Invalid(t *testing.T) {
 		actual := args.Map{"result": col.RemoveAt(-1)}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for negative index", actual)
-		actual := args.Map{"result": col.RemoveAt(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.RemoveAt(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for out of range", actual)
 	})
 }
@@ -351,8 +351,8 @@ func Test_S08_23_Collection_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) 
 		actual := args.Map{"result": a.IsEqualsWithSensitive(false, b)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected case-insensitive equal", actual)
-		actual := args.Map{"result": a.IsEqualsWithSensitive(true, b)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(true, b)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected case-sensitive not equal", actual)
 	})
 }
@@ -382,8 +382,8 @@ func Test_S08_25_Collection_IsEmpty(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": nonEmpty.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nonEmpty.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -493,8 +493,8 @@ func Test_S08_32_Collection_AddError(t *testing.T) {
 		actual := args.Map{"result": col.Length() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1, nil error should be skipped", actual)
-		actual := args.Map{"result": col.First() != "test err"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.First() != "test err"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'test err', got ''", actual)
 	})
 }
@@ -675,8 +675,8 @@ func Test_S08_43_Collection_AddFuncErr_Success(t *testing.T) {
 		)
 
 		// Assert
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -697,8 +697,8 @@ func Test_S08_44_Collection_AddFuncErr_Error(t *testing.T) {
 		actual := args.Map{"result": col.Length() != 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
-		actual := args.Map{"result": called}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": called}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected error handler called", actual)
 	})
 }
@@ -1034,8 +1034,8 @@ func Test_S08_63_Collection_IndexAt(t *testing.T) {
 		actual := args.Map{"result": col.IndexAt(0) != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a'", actual)
-		actual := args.Map{"result": col.IndexAt(2) != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.IndexAt(2) != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'c'", actual)
 	})
 }
@@ -1053,8 +1053,8 @@ func Test_S08_64_Collection_SafeIndexAtUsingLength(t *testing.T) {
 		actual := args.Map{"result": v1 != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'a', got ''", actual)
-		actual := args.Map{"result": v2 != "default"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "default"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'default', got ''", actual)
 	})
 }
@@ -1155,7 +1155,8 @@ func Test_S08_72_Collection_Single_Panic(t *testing.T) {
 
 		// Act & Assert
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for non-single collection", actual)
 		}()
@@ -1298,11 +1299,11 @@ func Test_S08_81_Collection_GetPagesSize(t *testing.T) {
 		actual := args.Map{"result": col.GetPagesSize(2) != 3}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3 pages", actual)
-		actual := args.Map{"result": col.GetPagesSize(0) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.GetPagesSize(0) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for zero page size", actual)
-		actual := args.Map{"result": col.GetPagesSize(-1) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.GetPagesSize(-1) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for negative", actual)
 	})
 }
@@ -1527,7 +1528,8 @@ func Test_S08_95_Collection_RemoveItemsIndexesPtr_EmptyCollValidation(t *testing
 
 		// Act & Assert — should panic with validation on
 		defer func() {
-			actual := args.Map{"result": r := recover(); r == nil}
+			r := recover()
+			actual := args.Map{"result": r == nil}
 			expected := args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "expected panic for removing from empty with validation", actual)
 		}()

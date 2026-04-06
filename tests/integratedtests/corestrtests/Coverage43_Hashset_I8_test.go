@@ -25,8 +25,8 @@ func Test_I8_HS01_IsEmpty(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		h.Add("a")
-		actual := args.Map{"result": h.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -43,8 +43,8 @@ func Test_I8_HS02_HasItems(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		h.Add("a")
-		actual := args.Map{"result": h.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -91,8 +91,8 @@ func Test_I8_HS05_AddBool(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for new key", actual)
 		existed2 := h.AddBool("a")
-		actual := args.Map{"result": existed2}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": existed2}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for existing key", actual)
 	})
 }
@@ -157,8 +157,8 @@ func Test_I8_HS09_AddNonEmpty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddNonEmpty("a")
-		actual := args.Map{"result": h.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -176,8 +176,8 @@ func Test_I8_HS10_AddNonEmptyWhitespace(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddNonEmptyWhitespace("a")
-		actual := args.Map{"result": h.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -195,8 +195,8 @@ func Test_I8_HS11_AddIf(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddIf(true, "keep")
-		actual := args.Map{"result": h.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -214,8 +214,8 @@ func Test_I8_HS12_AddIfMany(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		h.AddIfMany(true, "a", "b")
-		actual := args.Map{"result": h.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -327,8 +327,8 @@ func Test_I8_HS19_AddCollection(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		h.AddCollection(nil)
-		actual := args.Map{"result": h.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected still 2", actual)
 	})
 }
@@ -364,8 +364,8 @@ func Test_I8_HS21_AddHashsetItems(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		h.AddHashsetItems(nil)
-		actual := args.Map{"result": h.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected still 2", actual)
 	})
 }
@@ -418,8 +418,8 @@ func Test_I8_HS24_Has(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.Has("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.Has("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -449,8 +449,8 @@ func Test_I8_HS26_HasAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.HasAll("a", "z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.HasAll("a", "z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -466,8 +466,8 @@ func Test_I8_HS27_HasAny(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.HasAny("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.HasAny("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -497,8 +497,8 @@ func Test_I8_HS29_IsMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": h.IsMissing("z")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.IsMissing("z")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -528,8 +528,8 @@ func Test_I8_HS31_IsAllMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.IsAllMissing("a", "y") != false}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsAllMissing("a", "y") != false}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1076,8 +1076,8 @@ func Test_I8_HS67_HasAllCollectionItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.HasAllCollectionItems(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.HasAllCollectionItems(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 	})
 }

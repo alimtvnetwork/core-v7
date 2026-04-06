@@ -112,20 +112,20 @@ func Test_Cov22_Hashmap_Lookups(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.IsKeyMissing("a") || h.IsKeyMissingLock("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsKeyMissing("a") || h.IsKeyMissingLock("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not missing", actual)
-		actual := args.Map{"result": h.HasLock("a") || !h.HasWithLock("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasLock("a") || !h.HasWithLock("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAll("a") || !h.HasAny("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAll("a") || !h.HasAny("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAllStrings("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAllStrings("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAnyItem()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAnyItem()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has item", actual)
 	})
 }
@@ -144,8 +144,8 @@ func Test_Cov22_Hashmap_Get(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 		v2, ok2 := h.GetValue("a")
-		actual := args.Map{"result": ok2 || v2 != "1"}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ok2 || v2 != "1"}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 	})
 }
@@ -264,8 +264,8 @@ func Test_Cov22_Hashmap_IsEqual(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
-		actual := args.Map{"result": h1.IsEqualPtrLock(h2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h1.IsEqualPtrLock(h2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
@@ -365,8 +365,8 @@ func Test_Cov22_Hashmap_Clone(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		cp := h.ClonePtr()
-		actual := args.Map{"result": cp == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cp == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
@@ -564,23 +564,23 @@ func Test_Cov22_Hashset_Lookups(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.IsMissing("a") || h.IsMissingLock("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsMissing("a") || h.IsMissingLock("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not missing", actual)
-		actual := args.Map{"result": h.HasLock("a") || !h.HasWithLock("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasLock("a") || !h.HasWithLock("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAll("a") || !h.HasAny("a")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAll("a") || !h.HasAny("a")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAllStrings([]string{"a"})}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAllStrings([]string{"a"})}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
-		actual := args.Map{"result": h.HasAnyItem() || !h.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h.HasAnyItem() || !h.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has item", actual)
-		actual := args.Map{"result": h.IsAllMissing("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.IsAllMissing("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -685,11 +685,11 @@ func Test_Cov22_Hashset_IsEquals(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
-		actual := args.Map{"result": h1.IsEqual(h2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h1.IsEqual(h2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
-		actual := args.Map{"result": h1.IsEqualsLock(h2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": h1.IsEqualsLock(h2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
@@ -962,8 +962,8 @@ func Test_Cov22_Hashset_HasAllCollectionItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": h.HasAllCollectionItems(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.HasAllCollectionItems(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }

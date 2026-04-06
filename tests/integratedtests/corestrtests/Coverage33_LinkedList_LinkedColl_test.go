@@ -21,8 +21,8 @@ func Test_C33_LL_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": ll.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items", actual)
 	})
 }
@@ -105,8 +105,8 @@ func Test_C33_LL_IsEqualsWithSensitive(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": a.IsEqualsWithSensitive(b, false)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(b, false)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }

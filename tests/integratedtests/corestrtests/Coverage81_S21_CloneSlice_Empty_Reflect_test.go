@@ -23,13 +23,13 @@ func Test_S21_001_CloneSlice_with_items(t *testing.T) {
 		actual := args.Map{"result": len(clone) != 3}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns 3 items", actual)
-		actual := args.Map{"result": clone[0] != "a" || clone[1] != "b" || clone[2] != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": clone[0] != "a" || clone[1] != "b" || clone[2] != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns correct values -- a,b,c", actual)
 		// Verify independence
 		items[0] = "modified"
-		actual := args.Map{"result": clone[0] == "modified"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": clone[0] == "modified"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns independent copy -- mutation should not propagate", actual)
 	})
 }
@@ -46,8 +46,8 @@ func Test_S21_002_CloneSlice_empty(t *testing.T) {
 		actual := args.Map{"result": clone == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns non-nil -- empty input", actual)
-		actual := args.Map{"result": len(clone) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(clone) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns empty slice", actual)
 	})
 }
@@ -64,8 +64,8 @@ func Test_S21_003_CloneSlice_nil(t *testing.T) {
 		actual := args.Map{"result": clone == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns non-nil -- nil input", actual)
-		actual := args.Map{"result": len(clone) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(clone) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns empty slice -- nil input", actual)
 	})
 }
@@ -87,8 +87,8 @@ func Test_S21_010_CloneSliceIf_clone_true(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns 2 items -- clone true", actual)
 		items[0] = "modified"
-		actual := args.Map{"result": clone[0] == "modified"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": clone[0] == "modified"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns independent copy -- clone true", actual)
 	})
 }
@@ -107,8 +107,8 @@ func Test_S21_011_CloneSliceIf_clone_false(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns 2 items -- clone false", actual)
 		// When clone=false, should return same slice (shared backing array)
 		items[0] = "modified"
-		actual := args.Map{"result": result[0] != "modified"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result[0] != "modified"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns same reference -- clone false", actual)
 	})
 }
@@ -122,8 +122,8 @@ func Test_S21_012_CloneSliceIf_empty(t *testing.T) {
 		actual := args.Map{"result": result == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns non-nil -- empty variadic", actual)
-		actual := args.Map{"result": len(result) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(result) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf returns empty slice", actual)
 	})
 }

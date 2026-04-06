@@ -49,8 +49,8 @@ func Test_CovSSOCreator_01_Init_InitPtr(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		ssoP := corestr.New.SimpleStringOnce.InitPtr("hello")
-		actual := args.Map{"result": ssoP.Value() != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ssoP.Value() != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 	})
 }
@@ -81,8 +81,8 @@ func Test_CovSSOCreator_03_Create_CreatePtr(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected v", actual)
 		ssoP := corestr.New.SimpleStringOnce.CreatePtr("v", true)
-		actual := args.Map{"result": ssoP.Value() != "v"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ssoP.Value() != "v"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected v", actual)
 	})
 }
@@ -129,8 +129,8 @@ func Test_CovKVCreator_01_Cap_Empty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		kv2 := corestr.New.KeyValues.Empty()
-		actual := args.Map{"result": kv2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -147,8 +147,8 @@ func Test_CovKVCreator_02_UsingMap(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kv2 := corestr.New.KeyValues.UsingMap(map[string]string{})
-		actual := args.Map{"result": kv2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -167,8 +167,8 @@ func Test_CovKVCreator_03_UsingKeyValuePairs(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		kv2 := corestr.New.KeyValues.UsingKeyValuePairs()
-		actual := args.Map{"result": kv2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -187,8 +187,8 @@ func Test_CovKVCreator_04_UsingKeyValueStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		kv2 := corestr.New.KeyValues.UsingKeyValueStrings([]string{}, []string{})
-		actual := args.Map{"result": kv2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -207,8 +207,8 @@ func Test_CovLLCreator_01_Create_Empty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ll2 := corestr.New.LinkedList.Empty()
-		actual := args.Map{"result": ll2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -225,8 +225,8 @@ func Test_CovLLCreator_02_Strings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2 := corestr.New.LinkedList.Strings([]string{})
-		actual := args.Map{"result": ll2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -243,8 +243,8 @@ func Test_CovLLCreator_03_SpreadStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ll2 := corestr.New.LinkedList.SpreadStrings()
-		actual := args.Map{"result": ll2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -261,8 +261,8 @@ func Test_CovLLCreator_04_UsingMap(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ll2 := corestr.New.LinkedList.UsingMap(nil)
-		actual := args.Map{"result": ll2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -295,8 +295,8 @@ func Test_CovLLCCreator_01_Create_Empty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		lc2 := corestr.New.LinkedCollection.Empty()
-		actual := args.Map{"result": lc2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -364,16 +364,16 @@ func Test_CovSSCreator_01_Cap_Default_Empty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss2 := corestr.New.SimpleSlice.Cap(-1)
-		actual := args.Map{"result": ss2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss3 := corestr.New.SimpleSlice.Default()
-		actual := args.Map{"result": ss3.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss3.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss4 := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": ss4.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss4.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -390,16 +390,16 @@ func Test_CovSSCreator_02_Strings_Create_Lines(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss2 := corestr.New.SimpleSlice.Create([]string{"a"})
-		actual := args.Map{"result": ss2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss3 := corestr.New.SimpleSlice.Lines("a", "b")
-		actual := args.Map{"result": ss3.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss3.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss4 := corestr.New.SimpleSlice.SpreadStrings("a")
-		actual := args.Map{"result": ss4.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss4.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -416,28 +416,28 @@ func Test_CovSSCreator_03_StringsPtr_StringsOptions_StringsClone(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss2 := corestr.New.SimpleSlice.StringsPtr([]string{})
-		actual := args.Map{"result": ss2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss3 := corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
-		actual := args.Map{"result": ss3.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss3.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss4 := corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
-		actual := args.Map{"result": ss4.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss4.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss5 := corestr.New.SimpleSlice.StringsOptions(true, []string{})
-		actual := args.Map{"result": ss5.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss5.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss6 := corestr.New.SimpleSlice.StringsClone([]string{"a"})
-		actual := args.Map{"result": ss6.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss6.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss7 := corestr.New.SimpleSlice.StringsClone(nil)
-		actual := args.Map{"result": ss7.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss7.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -454,24 +454,24 @@ func Test_CovSSCreator_04_Direct_UsingLines(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss2 := corestr.New.SimpleSlice.Direct(false, []string{"a"})
-		actual := args.Map{"result": ss2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss3 := corestr.New.SimpleSlice.Direct(true, nil)
-		actual := args.Map{"result": ss3.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss3.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ss4 := corestr.New.SimpleSlice.UsingLines(true, "a", "b")
-		actual := args.Map{"result": ss4.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss4.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss5 := corestr.New.SimpleSlice.UsingLines(false, "a")
-		actual := args.Map{"result": ss5.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss5.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ss6 := corestr.New.SimpleSlice.UsingLines(true)
-		actual := args.Map{"result": ss6.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss6.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -488,12 +488,12 @@ func Test_CovSSCreator_05_Split_SplitLines_UsingSeparatorLine_UsingLine(t *testi
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		ss2 := corestr.New.SimpleSlice.SplitLines("a\nb")
-		actual := args.Map{"result": ss2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss3 := corestr.New.SimpleSlice.UsingSeparatorLine(",", "a,b")
-		actual := args.Map{"result": ss3.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss3.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		ss4 := corestr.New.SimpleSlice.UsingLine("a\nb")
 		_ = ss4
@@ -527,14 +527,14 @@ func Test_CovSSCreator_07_Hashset_Map(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		ssE := corestr.New.SimpleSlice.Hashset(corestr.New.Hashset.Empty())
-		actual := args.Map{"result": ssE.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ssE.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		ssM := corestr.New.SimpleSlice.Map(map[string]string{"a": "1"})
 		_ = ssM
 		ssM2 := corestr.New.SimpleSlice.Map(nil)
-		actual := args.Map{"result": ssM2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ssM2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -553,8 +553,8 @@ func Test_CovSSCreator_08_Deserialize(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error or wrong length", actual)
 		_, err2 := corestr.New.SimpleSlice.Deserialize([]byte("bad"))
-		actual := args.Map{"result": err2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -572,14 +572,14 @@ func Test_CovUtils_01_WrapDoubleIfMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
-		actual := args.Map{"result": u.WrapDoubleIfMissing(`"hello"`) != `"hello"`}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapDoubleIfMissing(`"hello"`) != `"hello"`}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected already wrapped", actual)
-		actual := args.Map{"result": u.WrapDoubleIfMissing("") != `""`}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapDoubleIfMissing("") != `""`}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty quotes", actual)
-		actual := args.Map{"result": u.WrapDoubleIfMissing(`""`) != `""`}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapDoubleIfMissing(`""`) != `""`}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty quotes", actual)
 	})
 }
@@ -595,14 +595,14 @@ func Test_CovUtils_02_WrapSingleIfMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
-		actual := args.Map{"result": u.WrapSingleIfMissing("'hello'") != "'hello'"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapSingleIfMissing("'hello'") != "'hello'"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected already wrapped", actual)
-		actual := args.Map{"result": u.WrapSingleIfMissing("") != "''"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapSingleIfMissing("") != "''"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty quotes", actual)
-		actual := args.Map{"result": u.WrapSingleIfMissing("''") != "''"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapSingleIfMissing("''") != "''"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty quotes", actual)
 	})
 }
@@ -618,11 +618,11 @@ func Test_CovUtils_03_WrapDouble_WrapSingle_WrapTilda(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
-		actual := args.Map{"result": u.WrapSingle("hello") != "'hello'"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapSingle("hello") != "'hello'"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
-		actual := args.Map{"result": u.WrapTilda("hello") != "`hello`"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.WrapTilda("hello") != "`hello`"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected wrapped", actual)
 	})
 }

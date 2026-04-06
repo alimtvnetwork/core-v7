@@ -55,8 +55,8 @@ func Test_C24_LinkedListNode_EndOfChain_Multi(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": end.Element != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": end.Element != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected c", actual)
 	})
 }
@@ -73,8 +73,8 @@ func Test_C24_LinkedListNode_Clone(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "cloned should not have next", actual)
-		actual := args.Map{"result": cloned.Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cloned.Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -95,11 +95,11 @@ func Test_C24_LinkedListNode_LoopEndOfChain(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": end.Element != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": end.Element != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected c", actual)
-		actual := args.Map{"result": len(collected) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(collected) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3 collected", actual)
 	})
 }
@@ -118,8 +118,8 @@ func Test_C24_LinkedListNode_LoopEndOfChain_Break(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": end.Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": end.Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -137,8 +137,8 @@ func Test_C24_LinkedListNode_AddNext(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
-		actual := args.Map{"result": ll.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -264,8 +264,8 @@ func Test_C24_LinkedListNode_IsEqualSensitive(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be equal case sensitive", actual)
-		actual := args.Map{"result": ll1.Head().IsEqualSensitive(ll2.Head(), false)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ll1.Head().IsEqualSensitive(ll2.Head(), false)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be equal case insensitive", actual)
 	})
 }
@@ -409,11 +409,11 @@ func Test_C24_LinkedList_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be empty", actual)
-		actual := args.Map{"result": ll.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have items", actual)
-		actual := args.Map{"result": ll.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -430,11 +430,11 @@ func Test_C24_LinkedList_Add_Single(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": ll.Head().Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Head().Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "head should be a", actual)
-		actual := args.Map{"result": ll.Tail().Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Tail().Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "tail should be a", actual)
 	})
 }
@@ -451,11 +451,11 @@ func Test_C24_LinkedList_Add_Multi(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": ll.Head().Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Head().Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "head should be a", actual)
-		actual := args.Map{"result": ll.Tail().Element != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Tail().Element != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "tail should be c", actual)
 	})
 }
@@ -472,8 +472,8 @@ func Test_C24_LinkedList_AddFront(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "head should be a", actual)
-		actual := args.Map{"result": ll.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -506,8 +506,8 @@ func Test_C24_LinkedList_AddNonEmpty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not add empty", actual)
 		ll.AddNonEmpty("a")
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should add non-empty", actual)
 	})
 }
@@ -525,8 +525,8 @@ func Test_C24_LinkedList_AddNonEmptyWhitespace(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not add whitespace", actual)
 		ll.AddNonEmptyWhitespace("a")
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should add non-whitespace", actual)
 	})
 }
@@ -544,8 +544,8 @@ func Test_C24_LinkedList_AddIf(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not add", actual)
 		ll.AddIf(true, "keep")
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should add", actual)
 	})
 }
@@ -563,8 +563,8 @@ func Test_C24_LinkedList_AddsIf(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not add", actual)
 		ll.AddsIf(true, "a", "b")
-		actual := args.Map{"result": ll.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -596,8 +596,8 @@ func Test_C24_LinkedList_AddFuncErr_Success(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have added", actual)
 	})
 }
@@ -631,8 +631,8 @@ func Test_C24_LinkedList_Push_PushFront_PushBack(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": ll.Head().Element != "front"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Head().Element != "front"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "head should be front", actual)
 	})
 }
@@ -929,8 +929,8 @@ func Test_C24_LinkedList_SafeIndexAt_OutOfRange(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
-		actual := args.Map{"result": ll.SafeIndexAt(-1) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafeIndexAt(-1) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil for negative", actual)
 	})
 }
@@ -962,8 +962,8 @@ func Test_C24_LinkedList_SafePointerIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
-		actual := args.Map{"result": ll.SafePointerIndexAt(5) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafePointerIndexAt(5) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -981,8 +981,8 @@ func Test_C24_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		val = ll.SafePointerIndexAtUsingDefault(5, "default")
-		actual := args.Map{"result": val != "default"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != "default"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected default", actual)
 	})
 }
@@ -1057,8 +1057,8 @@ func Test_C24_LinkedList_IsEqualsWithSensitive(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be equal case sensitive", actual)
-		actual := args.Map{"result": ll1.IsEqualsWithSensitive(ll2, false)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ll1.IsEqualsWithSensitive(ll2, false)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be equal case insensitive", actual)
 	})
 }
@@ -1262,8 +1262,8 @@ func Test_C24_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": ll.Head().Element != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Head().Element != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "head should be b", actual)
 	})
 }
@@ -1811,8 +1811,8 @@ func Test_C24_LinkedList_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "marshal error:", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have data", actual)
 	})
 }
@@ -1831,8 +1831,8 @@ func Test_C24_LinkedList_UnmarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
-		actual := args.Map{"result": ll2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -1853,8 +1853,8 @@ func Test_C24_LinkedList_ParseInjectUsingJson(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -1921,11 +1921,11 @@ func Test_C24_NonChainedLinkedListNodes_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should be empty", actual)
-		actual := args.Map{"result": nc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have items", actual)
-		actual := args.Map{"result": nc.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should be 0", actual)
 	})
 }
@@ -1945,11 +1945,11 @@ func Test_C24_NonChainedLinkedListNodes_Adds(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": nc.First().Element != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.First().Element != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "first should be a", actual)
-		actual := args.Map{"result": nc.Last().Element != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.Last().Element != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "last should be b", actual)
 	})
 }
@@ -1999,8 +1999,8 @@ func Test_C24_NonChainedLinkedListNodes_ApplyChaining(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "chaining should be applied", actual)
-		actual := args.Map{"result": nc.First().HasNext()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nc.First().HasNext()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "first should have next after chaining", actual)
 	})
 }

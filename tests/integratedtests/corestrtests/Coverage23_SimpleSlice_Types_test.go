@@ -23,8 +23,8 @@ func Test_Cov23_SimpleSlice_BasicOps(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
-		actual := args.Map{"result": ss.Count() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Count() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "count wrong", actual)
 	})
 }
@@ -70,16 +70,16 @@ func Test_Cov23_SimpleSlice_FirstLast(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
-		actual := args.Map{"result": ss.FirstOrDefault() != "a" || ss.LastOrDefault() != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.FirstOrDefault() != "a" || ss.LastOrDefault() != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 		_ = ss.FirstDynamic()
 		_ = ss.LastDynamic()
 		_ = ss.FirstOrDefaultDynamic()
 		_ = ss.LastOrDefaultDynamic()
 		e := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": e.FirstOrDefault() != "" || e.LastOrDefault() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": e.FirstOrDefault() != "" || e.LastOrDefault() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -95,11 +95,11 @@ func Test_Cov23_SimpleSlice_SkipTakeLimit(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong skip", actual)
-		actual := args.Map{"result": len(ss.Take(2)) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(ss.Take(2)) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong take", actual)
-		actual := args.Map{"result": len(ss.Limit(2)) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(ss.Limit(2)) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong limit", actual)
 		_ = ss.SkipDynamic(1)
 		_ = ss.TakeDynamic(2)
@@ -118,8 +118,8 @@ func Test_Cov23_SimpleSlice_IsContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ss.IsContains("x")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsContains("x")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -149,8 +149,8 @@ func Test_Cov23_SimpleSlice_IndexOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong index", actual)
-		actual := args.Map{"result": ss.IndexOf("x") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IndexOf("x") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
@@ -181,8 +181,8 @@ func Test_Cov23_SimpleSlice_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ss.HasIndex(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.HasIndex(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -333,8 +333,8 @@ func Test_Cov23_SimpleSlice_PrependAppendJoin(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		s2 := ss.AppendJoin(",", "c")
-		actual := args.Map{"result": s2 == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s2 == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
@@ -441,8 +441,8 @@ func Test_Cov23_SimpleSlice_AsError(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 		_ = ss.AsDefaultError()
 		empty := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": empty.AsError(",") != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.AsError(",") != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -459,8 +459,8 @@ func Test_Cov23_SimpleSlice_String(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 		empty := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": empty.String() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.String() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -478,8 +478,8 @@ func Test_Cov23_SimpleSlice_Sort_Reverse(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong sort", actual)
 		ss.Reverse()
-		actual := args.Map{"result": ss.First() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.First() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong reverse", actual)
 	})
 }
@@ -541,19 +541,19 @@ func Test_Cov23_CollectionsOfCollection(t *testing.T) {
 		c1 := corestr.New.Collection.Strings([]string{"a", "b"})
 		c2 := corestr.New.Collection.Strings([]string{"c"})
 		cc.Add(c1).Add(c2)
-		actual := args.Map{"result": cc.Length() != 2 || cc.IsEmpty() || !cc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cc.Length() != 2 || cc.IsEmpty() || !cc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "filled checks failed", actual)
-		actual := args.Map{"result": cc.AllIndividualItemsLength() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cc.AllIndividualItemsLength() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		list := cc.List(0)
-		actual := args.Map{"result": len(list) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		col := cc.ToCollection()
-		actual := args.Map{"result": col.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		_ = cc.Items()
 		_ = cc.String()
@@ -716,16 +716,16 @@ func Test_Cov23_SimpleStringOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "basic checks failed", actual)
 		sso2 := corestr.New.SimpleStringOnce.Empty()
-		actual := args.Map{"result": sso2.IsEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso2.IsEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		sso2.GetSetOnce("world")
-		actual := args.Map{"result": sso2.Value() != "world"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso2.Value() != "world"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "wrong", actual)
 		sso2.GetSetOnce("again") // should not change
-		actual := args.Map{"result": sso2.Value() != "world"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso2.Value() != "world"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not change", actual)
 	})
 }
@@ -771,8 +771,8 @@ func Test_Cov23_HashsetsCollection(t *testing.T) {
 		hs := corestr.New.Hashset.Cap(2)
 		hs.Add("a")
 		hc.Add(hs)
-		actual := args.Map{"result": hc.Length() != 1 || hc.IsEmpty() || !hc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hc.Length() != 1 || hc.IsEmpty() || !hc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "filled checks failed", actual)
 	})
 }

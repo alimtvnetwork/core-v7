@@ -23,8 +23,8 @@ func Test_CovHM2_01_Items_SafeItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hm.SafeItems()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hm.SafeItems()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -59,8 +59,8 @@ func Test_CovHM2_03_ValuesCollection_ValuesHashset(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		hs := hm.ValuesHashset()
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -86,8 +86,8 @@ func Test_CovHM2_05_ValuesList_ValuesListCopyLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hm.ValuesListCopyLock()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hm.ValuesListCopyLock()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -184,22 +184,22 @@ func Test_CovHM2_11_AllKeys_Keys_KeysCollection_KeysLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hm.Keys()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hm.Keys()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": hm.KeysCollection().Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.KeysCollection().Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(hm.KeysLock()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(hm.KeysLock()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty keys
 		e := corestr.Empty.Hashmap()
-		actual := args.Map{"result": len(e.AllKeys()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(e.AllKeys()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
-		actual := args.Map{"result": len(e.KeysLock()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(e.KeysLock()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -232,12 +232,12 @@ func Test_CovHM2_13_Length_LengthLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
-		actual := args.Map{"result": hm.LengthLock() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.LengthLock() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hm.AddOrUpdate("a", "1")
-		actual := args.Map{"result": hm.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -256,42 +256,42 @@ func Test_CovHM2_14_IsEqual_IsEqualPtr_IsEqualPtrLock(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
-		actual := args.Map{"result": a.IsEqualPtr(a)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": a.IsEqualPtr(a)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal to self", actual)
-		actual := args.Map{"result": a.IsEqualPtr(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualPtr(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// both empty
 		e1 := corestr.Empty.Hashmap()
 		e2 := corestr.Empty.Hashmap()
-		actual := args.Map{"result": e1.IsEqualPtr(e2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": e1.IsEqualPtr(e2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		// one empty
-		actual := args.Map{"result": a.IsEqualPtr(e1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualPtr(e1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// diff length
 		c := corestr.Empty.Hashmap()
 		c.AddOrUpdate("a", "1")
 		c.AddOrUpdate("b", "2")
-		actual := args.Map{"result": a.IsEqualPtr(c)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualPtr(c)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// diff value
 		d := corestr.Empty.Hashmap()
 		d.AddOrUpdate("a", "99")
-		actual := args.Map{"result": a.IsEqualPtr(d)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualPtr(d)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		// IsEqual (value receiver)
-		actual := args.Map{"result": a.IsEqual(*b)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": a.IsEqual(*b)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		// IsEqualPtrLock
-		actual := args.Map{"result": a.IsEqualPtrLock(b)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": a.IsEqualPtrLock(b)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 	})
 }
@@ -311,8 +311,8 @@ func Test_CovHM2_15_Remove_RemoveWithLock(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 		hm.AddOrUpdate("b", "2")
 		hm.RemoveWithLock("b")
-		actual := args.Map{"result": hm.Has("b")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Has("b")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 	})
 }
@@ -354,8 +354,8 @@ func Test_CovHM2_17_GetValuesExceptKeysInHashset(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// nil
 		r2 := hm.GetValuesExceptKeysInHashset(nil)
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -374,8 +374,8 @@ func Test_CovHM2_18_GetValuesKeysExcept(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		r2 := hm.GetValuesKeysExcept(nil)
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -394,8 +394,8 @@ func Test_CovHM2_19_GetAllExceptCollection(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		r2 := hm.GetAllExceptCollection(nil)
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -440,13 +440,13 @@ func Test_CovHM2_22_MarshalJSON_UnmarshalJSON(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		hm2 := corestr.Empty.Hashmap()
 		err2 := hm2.UnmarshalJSON(data)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		// invalid
 		err3 := hm2.UnmarshalJSON([]byte("bad"))
-		actual := args.Map{"result": err3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -475,8 +475,8 @@ func Test_CovHM2_24_ParseInjectUsingJson(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
-		actual := args.Map{"result": r.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": r.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -513,8 +513,8 @@ func Test_CovHM2_26_ToError_ToDefaultError(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 		e2 := hm.ToDefaultError()
-		actual := args.Map{"result": e2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": e2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -568,8 +568,8 @@ func Test_CovHM2_29_ToStringsUsingCompiler(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hm.AddOrUpdate("a", "1")
 		r2 := hm.ToStringsUsingCompiler(func(k, v string) string { return k + "=" + v })
-		actual := args.Map{"result": len(r2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -616,14 +616,14 @@ func Test_CovHM2_32_Clone_ClonePtr(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		cp := hm.ClonePtr()
-		actual := args.Map{"result": cp.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cp.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// empty clone
 		e := corestr.Empty.Hashmap()
 		ec := e.Clone()
-		actual := args.Map{"result": ec.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ec.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -642,12 +642,12 @@ func Test_CovHM2_33_Get_GetValue(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected found", actual)
 		_, ok2 := hm.Get("z")
-		actual := args.Map{"result": ok2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not found", actual)
 		v2, _ := hm.GetValue("a")
-		actual := args.Map{"result": v2 != "1"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "1"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -667,8 +667,8 @@ func Test_CovHM2_34_Serialize_Deserialize(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		target := corestr.Empty.Hashmap()
 		err2 := hm.Deserialize(target)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }

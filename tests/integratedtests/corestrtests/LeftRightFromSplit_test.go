@@ -35,7 +35,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 		{
 			tc := leftRightFromSplitMissingSepTestCase
 			lr := corestr.LeftRightFromSplit("no-separator-here", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -47,7 +47,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 		{
 			tc := leftRightFromSplitEmptyTestCase
 			lr := corestr.LeftRightFromSplit("", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -59,7 +59,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 		{
 			tc := leftRightFromSplitSepAtStartTestCase
 			lr := corestr.LeftRightFromSplit("=value", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -71,7 +71,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 		{
 			tc := leftRightFromSplitSepAtEndTestCase
 			lr := corestr.LeftRightFromSplit("key=", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -83,7 +83,7 @@ func Test_LeftRightFromSplit(t *testing.T) {
 		{
 			tc := leftRightFromSplitMultipleSepTestCase
 			lr := corestr.LeftRightFromSplit("a=b=c", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -120,7 +120,7 @@ func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 		{
 			tc := leftRightFromSplitTrimmedNoSepTestCase
 			lr := corestr.LeftRightFromSplitTrimmed("  hello  ", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -132,7 +132,7 @@ func Test_LeftRightFromSplitTrimmed(t *testing.T) {
 		{
 			tc := leftRightFromSplitTrimmedWhitespaceTestCase
 			lr := corestr.LeftRightFromSplitTrimmed("   =   ", "=")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -169,7 +169,7 @@ func Test_LeftRightFromSplitFull(t *testing.T) {
 		{
 			tc := leftRightFromSplitFullSingleSepTestCase
 			lr := corestr.LeftRightFromSplitFull("key:value", ":")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -181,7 +181,7 @@ func Test_LeftRightFromSplitFull(t *testing.T) {
 		{
 			tc := leftRightFromSplitFullMissingSepTestCase
 			lr := corestr.LeftRightFromSplitFull("nosep", ":")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),
@@ -218,7 +218,7 @@ func Test_LeftRightFromSplitFullTrimmed(t *testing.T) {
 		{
 			tc := leftRightFromSplitFullTrimmedMissingSepTestCase
 			lr := corestr.LeftRightFromSplitFullTrimmed("  hello  ", ":")
-			actual := args.Map{
+			actual = args.Map{
 				"left":    lr.Left,
 				"right":   lr.Right,
 				"isValid": fmt.Sprintf("%v", lr.IsValid),

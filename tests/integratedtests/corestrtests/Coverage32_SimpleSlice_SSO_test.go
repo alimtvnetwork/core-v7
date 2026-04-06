@@ -92,8 +92,8 @@ func Test_C32_SS_Length(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var n *corestr.SimpleSlice
-		actual := args.Map{"result": n.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": n.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -496,8 +496,8 @@ func Test_C32_SSO_GetSetOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		v2 := sso.GetSetOnce("world")
-		actual := args.Map{"result": v2 != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello still", actual)
 	})
 }

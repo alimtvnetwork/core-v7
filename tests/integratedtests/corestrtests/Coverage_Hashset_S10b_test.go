@@ -478,8 +478,8 @@ func Test_S10_116_Hashset_List(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// call again for cache path
 		list2 := hs.List()
-		actual := args.Map{"result": len(list2) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list2) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 cached", actual)
 	})
 }

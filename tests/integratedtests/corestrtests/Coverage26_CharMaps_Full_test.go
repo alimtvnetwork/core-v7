@@ -27,8 +27,8 @@ func Test_C26_CharCollectionMap_Empty(t *testing.T) {
 			expected := args.Map{"result": true}
 			expected.ShouldBeEqual(t, 0, "expected empty internal state", actual)
 		}
-		actual := args.Map{"result": ccm.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -116,8 +116,8 @@ func Test_C26_CharCollectionMap_GetChar(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected h", actual)
 		ch = ccm.GetChar("")
-		actual := args.Map{"result": ch != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ch != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -183,8 +183,8 @@ func Test_C26_CharCollectionMap_AddSameStartingCharItems(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// add more to existing
 		ccm.AddSameStartingCharItems('a', []string{"apricot"}, false)
-		actual := args.Map{"result": ccm.LengthOf('a') != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.LengthOf('a') != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -200,8 +200,8 @@ func Test_C26_CharCollectionMap_Has(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should have apple", actual)
-		actual := args.Map{"result": ccm.Has("cherry")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.Has("cherry")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have cherry", actual)
 	})
 }
@@ -219,8 +219,8 @@ func Test_C26_CharCollectionMap_HasWithCollection(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should find apple", actual)
 		has, _ = ccm.HasWithCollection("xyz")
-		actual := args.Map{"result": has}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": has}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not find xyz", actual)
 	})
 }
@@ -251,8 +251,8 @@ func Test_C26_CharCollectionMap_LengthOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": ccm.LengthOf('z') != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.LengthOf('z') != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -282,8 +282,8 @@ func Test_C26_CharCollectionMap_LengthOfCollectionFromFirstChar(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": ccm.LengthOfCollectionFromFirstChar("xyz") != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.LengthOfCollectionFromFirstChar("xyz") != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -478,12 +478,12 @@ func Test_C26_CharCollectionMap_GetCollection(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should find 'a' bucket", actual)
 		col2 := ccm.GetCollection("xyz", true)
-		actual := args.Map{"result": col2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should create on empty", actual)
 		col3 := ccm.GetCollection("zzz", false)
-		actual := args.Map{"result": col3 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col3 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not create", actual)
 	})
 }
@@ -990,8 +990,8 @@ func Test_C26_CharCollectionMap_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have data", actual)
 	})
 }
@@ -1105,14 +1105,14 @@ func Test_C26_CharCollectionMap_AsJsonInterfaces(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": ccm.AsJsoner() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.AsJsoner() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": ccm.AsJsonMarshaller() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.AsJsonMarshaller() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": ccm.AsJsonParseSelfInjector() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm.AsJsonParseSelfInjector() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	})
 }
@@ -1152,8 +1152,8 @@ func Test_C26_CharCollectionMap_DataModel(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 		ccm2 := corestr.NewCharCollectionMapUsingDataModel(dm)
-		actual := args.Map{"result": ccm2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ccm2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	})
 }
@@ -1229,8 +1229,8 @@ func Test_C26_CharHashsetMap_GetChar(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected h", actual)
-		actual := args.Map{"result": chm.GetChar("") != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.GetChar("") != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -1246,8 +1246,8 @@ func Test_C26_CharHashsetMap_GetCharOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected h", actual)
-		actual := args.Map{"result": chm.GetCharOf("") != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.GetCharOf("") != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -1328,8 +1328,8 @@ func Test_C26_CharHashsetMap_AddSameStartingCharItems(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// Add to existing
 		chm.AddSameStartingCharItems('a', []string{"apricot"})
-		actual := args.Map{"result": chm.LengthOf('a') != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.LengthOf('a') != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -1345,8 +1345,8 @@ func Test_C26_CharHashsetMap_Has(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should have apple", actual)
-		actual := args.Map{"result": chm.Has("cherry")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.Has("cherry")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not have cherry", actual)
 	})
 }
@@ -1364,8 +1364,8 @@ func Test_C26_CharHashsetMap_HasWithHashset(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "should find apple", actual)
 		has, _ = chm.HasWithHashset("xyz")
-		actual := args.Map{"result": has}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": has}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not find xyz", actual)
 	})
 }
@@ -1582,8 +1582,8 @@ func Test_C26_CharHashsetMap_GetHashset(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should find 'a' bucket", actual)
 		hs2 := chm.GetHashset("xyz", true)
-		actual := args.Map{"result": hs2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should create on empty", actual)
 	})
 }
@@ -1646,8 +1646,8 @@ func Test_C26_CharHashsetMap_HashsetByCharLock(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 		hs2 := chm.HashsetByCharLock('z')
-		actual := args.Map{"result": hs2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should return empty, not nil", actual)
 	})
 }
@@ -1896,8 +1896,8 @@ func Test_C26_CharHashsetMap_SortedListAsc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": list[0] != "apple"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": list[0] != "apple"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "first should be apple", actual)
 	})
 }
@@ -1914,8 +1914,8 @@ func Test_C26_CharHashsetMap_SortedListDsc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": list[0] != "cherry"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": list[0] != "cherry"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "first should be cherry", actual)
 	})
 }
@@ -2037,8 +2037,8 @@ func Test_C26_CharHashsetMap_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(data) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(data) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should have data", actual)
 	})
 }
@@ -2152,14 +2152,14 @@ func Test_C26_CharHashsetMap_AsJsonInterfaces(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": chm.AsJsoner() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.AsJsoner() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": chm.AsJsonMarshaller() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.AsJsonMarshaller() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-		actual := args.Map{"result": chm.AsJsonParseSelfInjector() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.AsJsonParseSelfInjector() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	})
 }
@@ -2209,8 +2209,8 @@ func Test_C26_CharHashsetMap_DataModel(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 		chm2 := corestr.NewCharHashsetMapUsingDataModel(dm)
-		actual := args.Map{"result": chm2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should not be nil", actual)
 	})
 }

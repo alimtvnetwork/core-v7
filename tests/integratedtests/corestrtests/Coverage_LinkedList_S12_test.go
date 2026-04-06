@@ -23,8 +23,8 @@ func Test_S12_01_LinkedList_HeadTailLength(t *testing.T) {
 		actual := args.Map{"result": ll.Head() == nil || ll.Tail() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil head/tail", actual)
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -55,12 +55,12 @@ func Test_S12_03_LinkedList_IsEmpty_HasItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": ll.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items", actual)
 		ll.Add("a")
-		actual := args.Map{"result": ll.IsEmpty() || !ll.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.IsEmpty() || !ll.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -228,8 +228,8 @@ func Test_S12_14_LinkedList_AddFuncErr_NoError(t *testing.T) {
 		ll.AddFuncErr(func() (string, error) { return "ok", nil }, func(err error) { actual := args.Map{"errCalled": true}; expected := args.Map{"errCalled": false}; expected.ShouldBeEqual(t, 0, "error handler should not be called", actual) })
 
 		// Act
-		actual := args.Map{"result": ll.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -828,11 +828,11 @@ func Test_S12_51_LinkedList_SafeIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
-		actual := args.Map{"result": ll.SafeIndexAt(-1) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafeIndexAt(-1) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
-		actual := args.Map{"result": ll.SafeIndexAt(10) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafeIndexAt(10) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -865,8 +865,8 @@ func Test_S12_53_LinkedList_SafePointerIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
-		actual := args.Map{"result": ll.SafePointerIndexAt(10) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafePointerIndexAt(10) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -883,8 +883,8 @@ func Test_S12_54_LinkedList_SafePointerIndexAtUsingDefault(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
-		actual := args.Map{"result": ll.SafePointerIndexAtUsingDefault(10, "def") != "def"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ll.SafePointerIndexAtUsingDefault(10, "def") != "def"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected def", actual)
 	})
 }
@@ -1142,7 +1142,7 @@ func Test_S12_71_LinkedList_Join(t *testing.T) {
 
 		// Assert
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", ll.Join("", actual)
+		expected.ShouldBeEqual(t, 0, "expected 'a,b', got ''", actual)
 	})
 }
 

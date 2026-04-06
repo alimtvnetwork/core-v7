@@ -385,8 +385,8 @@ func Test_Cov64_LinkedList_AddFuncErr_NoError(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": ll.Length()}
-		expected := args.Map{"len": 1}
+		actual = args.Map{"len": ll.Length()}
+		expected = args.Map{"len": 1}
 		expected.ShouldBeEqual(t, 0, "AddFuncErr no error", actual)
 	})
 }

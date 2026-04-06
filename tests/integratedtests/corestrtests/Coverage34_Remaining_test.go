@@ -23,8 +23,8 @@ func Test_C34_HD_Length(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		var nilHd *corestr.HashmapDiff
-		actual := args.Map{"result": nilHd.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilHd.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

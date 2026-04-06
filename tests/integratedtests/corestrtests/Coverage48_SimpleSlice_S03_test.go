@@ -1339,8 +1339,8 @@ func Test_Cov48_SS_AddedRemovedLinesDiff(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected added items", actual)
-		actual := args.Map{"result": len(removed) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(removed) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed items", actual)
 	})
 }
@@ -1389,8 +1389,8 @@ func Test_Cov48_SS_RemoveIndexes_InvalidIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error for invalid index", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2 items still", actual)
 	})
 }

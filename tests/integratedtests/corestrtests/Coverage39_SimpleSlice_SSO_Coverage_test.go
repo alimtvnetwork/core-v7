@@ -217,56 +217,56 @@ func Test_C39_SimpleSlice_Accessors(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.Last() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Last() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.FirstOrDefault() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.FirstOrDefault() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.LastOrDefault() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.LastOrDefault() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.FirstDynamic() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.FirstDynamic() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.LastDynamic() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.LastDynamic() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.FirstOrDefaultDynamic() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.FirstOrDefaultDynamic() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.LastOrDefaultDynamic() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.LastOrDefaultDynamic() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.Count() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Count() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.LastIndex() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.LastIndex() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.HasIndex(0)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss.HasIndex(0)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.HasIndex(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.HasIndex(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.HasAnyItem()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss.HasAnyItem()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// empty
 		es := corestr.Empty.SimpleSlice()
-		actual := args.Map{"result": es.FirstOrDefault() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": es.FirstOrDefault() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": es.LastOrDefault() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": es.LastOrDefault() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		var nilSS *corestr.SimpleSlice
-		actual := args.Map{"result": nilSS.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSS.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -284,20 +284,20 @@ func Test_C39_SimpleSlice_Skip_Take_Limit(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s2 := ss.Skip(10)
-		actual := args.Map{"result": len(s2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(s2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		tk := ss.Take(2)
-		actual := args.Map{"result": len(tk) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(tk) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		tk2 := ss.Take(10)
-		actual := args.Map{"result": len(tk2) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(tk2) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		lm := ss.Limit(1)
-		actual := args.Map{"result": len(lm) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(lm) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// Dynamic
 		_ = ss.SkipDynamic(1)
@@ -319,11 +319,11 @@ func Test_C39_SimpleSlice_IsContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IsContains("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsContains("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().IsContains("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().IsContains("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -339,8 +339,8 @@ func Test_C39_SimpleSlice_IsContainsFunc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().IsContainsFunc("a", func(a, b string) bool { return true })}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().IsContainsFunc("a", func(a, b string) bool { return true })}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -356,11 +356,11 @@ func Test_C39_SimpleSlice_IndexOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IndexOf("z") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IndexOf("z") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().IndexOf("a") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().IndexOf("a") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -376,8 +376,8 @@ func Test_C39_SimpleSlice_IndexOfFunc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().IndexOfFunc("a", func(a, b string) bool { return true }) != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().IndexOfFunc("a", func(a, b string) bool { return true }) != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -394,8 +394,8 @@ func Test_C39_SimpleSlice_CountFunc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().CountFunc(func(i int, s string) bool { return true }) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().CountFunc(func(i int, s string) bool { return true }) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -428,8 +428,8 @@ func Test_C39_SimpleSlice_Transpile_TranspileJoin(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		tj := ss.TranspileJoin(func(s string) string { return s }, ",")
-		actual := args.Map{"result": tj == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": tj == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// empty transpile
 		_ = corestr.Empty.SimpleSlice().Transpile(func(s string) string { return s })
@@ -447,38 +447,38 @@ func Test_C39_SimpleSlice_Join_Methods(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinLine() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinLine() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinSpace() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinSpace() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinComma() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinComma() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinCsv() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinCsv() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinCsvLine() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinCsvLine() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinWith(",") == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinWith(",") == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.JoinCsvString(",") == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JoinCsvString(",") == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().Join(",") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().Join(",") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinLine() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinLine() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinWith(",") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinWith(",") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinCsvString(",") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinCsvString(",") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -498,8 +498,8 @@ func Test_C39_SimpleSlice_JoinLineEofLine(t *testing.T) {
 		// already has suffix
 		ss2 := corestr.New.SimpleSlice.Lines("a\n")
 		_ = ss2.JoinLineEofLine()
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinLineEofLine() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinLineEofLine() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -517,8 +517,8 @@ func Test_C39_SimpleSlice_PrependJoin_AppendJoin(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r2 := ss.AppendJoin(",", "c")
-		actual := args.Map{"result": r2 == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": r2 == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -566,21 +566,21 @@ func Test_C39_SimpleSlice_IsEqual(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		var nilSS *corestr.SimpleSlice
-		actual := args.Map{"result": nilSS.IsEqual(nil)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": nilSS.IsEqual(nil)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": a.IsEqual(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqual(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		c := corestr.New.SimpleSlice.Lines("a")
-		actual := args.Map{"result": a.IsEqual(c)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqual(c)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// empty
 		e1 := corestr.New.SimpleSlice.Empty()
 		e2 := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": e1.IsEqual(e2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": e1.IsEqual(e2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -596,11 +596,11 @@ func Test_C39_SimpleSlice_IsEqualLines(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IsEqualLines([]string{"a"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsEqualLines([]string{"a"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -644,8 +644,8 @@ func Test_C39_SimpleSlice_IsUnorderedEqualRaw(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IsUnorderedEqualRaw(false, "a", "b")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss.IsUnorderedEqualRaw(false, "a", "b")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -664,8 +664,8 @@ func Test_C39_SimpleSlice_IsUnorderedEqual(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		e1 := corestr.New.SimpleSlice.Empty()
 		e2 := corestr.New.SimpleSlice.Empty()
-		actual := args.Map{"result": e1.IsUnorderedEqual(true, e2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": e1.IsUnorderedEqual(true, e2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -682,8 +682,8 @@ func Test_C39_SimpleSlice_IsDistinctEqual(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		other := corestr.New.SimpleSlice.Lines("a", "b")
-		actual := args.Map{"result": ss.IsDistinctEqual(other)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss.IsDistinctEqual(other)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -699,8 +699,8 @@ func Test_C39_SimpleSlice_IsEqualByFunc(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.IsEqualByFunc(func(i int, l, r string) bool { return l == r }, "a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsEqualByFunc(func(i int, l, r string) bool { return l == r }, "a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -732,14 +732,14 @@ func Test_C39_SimpleSlice_Sort_Reverse(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		ss.Reverse()
-		actual := args.Map{"result": ss.First() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.First() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// 2 items
 		ss2 := corestr.New.SimpleSlice.Lines("b", "a")
 		ss2.Reverse()
-		actual := args.Map{"result": ss2.First() != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss2.First() != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// 1 item
 		ss3 := corestr.New.SimpleSlice.Lines("a")
@@ -760,8 +760,8 @@ func Test_C39_SimpleSlice_ConcatNew(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		cns := ss.ConcatNewStrings("d")
-		actual := args.Map{"result": len(cns) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(cns) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -795,14 +795,14 @@ func Test_C39_SimpleSlice_Clone(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		cp := ss.ClonePtr(true)
-		actual := args.Map{"result": cp.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cp.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_ = ss.DeepClone()
 		_ = ss.ShadowClone()
 		var nilSS *corestr.SimpleSlice
-		actual := args.Map{"result": nilSS.ClonePtr(true) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSS.ClonePtr(true) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -818,11 +818,11 @@ func Test_C39_SimpleSlice_Collection_Hashset(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.ToCollection(false).Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.ToCollection(false).Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.Hashset().Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Hashset().Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -838,14 +838,14 @@ func Test_C39_SimpleSlice_Strings_List(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(ss.List()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(ss.List()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(ss.SafeStrings()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(ss.SafeStrings()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(corestr.Empty.SimpleSlice().SafeStrings()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(corestr.Empty.SimpleSlice().SafeStrings()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -861,8 +861,8 @@ func Test_C39_SimpleSlice_String(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().String() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().String() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -878,8 +878,8 @@ func Test_C39_SimpleSlice_CsvStrings(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(corestr.Empty.SimpleSlice().CsvStrings()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(corestr.Empty.SimpleSlice().CsvStrings()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -895,11 +895,11 @@ func Test_C39_SimpleSlice_AsError(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.AsDefaultError() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.AsDefaultError() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().AsError(",") != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().AsError(",") != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -916,12 +916,12 @@ func Test_C39_SimpleSlice_RemoveIndexes(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": newSS.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": newSS.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_, err2 := corestr.Empty.SimpleSlice().RemoveIndexes(0)
-		actual := args.Map{"result": err2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -940,8 +940,8 @@ func Test_C39_SimpleSlice_DistinctDiff(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		other := corestr.New.SimpleSlice.Lines("b", "c")
 		r2 := ss.DistinctDiff(other)
-		actual := args.Map{"result": len(r2) < 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) < 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -958,8 +958,8 @@ func Test_C39_SimpleSlice_AddedRemovedLinesDiff(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected added", actual)
-		actual := args.Map{"result": len(removed) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(removed) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected removed", actual)
 	})
 }
@@ -987,24 +987,24 @@ func Test_C39_SimpleSlice_JSON(t *testing.T) {
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := ss.JsonPtr()
-		actual := args.Map{"hasError": jp.HasError()}
-		expected := args.Map{"hasError": false}
+		actual = args.Map{"hasError": jp.HasError()}
+		expected = args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
-		actual := args.Map{"result": ss.JsonModelAny() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.JsonModelAny() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		b, err := ss.MarshalJSON()
-		actual := args.Map{"result": err}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		ss2 := corestr.New.SimpleSlice.Empty()
 		err2 := ss2.UnmarshalJSON(b)
-		actual := args.Map{"result": err2}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err2}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err2", actual)
 		err3 := ss2.UnmarshalJSON([]byte(`{bad`))
-		actual := args.Map{"result": err3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1018,8 +1018,8 @@ func Test_C39_SimpleSlice_ParseInjectUsingJson(t *testing.T) {
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": result.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1030,14 +1030,14 @@ func Test_C39_SimpleSlice_InterfaceCasts(t *testing.T) {
 		actual := args.Map{"result": ss.AsJsonContractsBinder() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.AsJsoner() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.AsJsoner() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.AsJsonParseSelfInjector() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.AsJsonParseSelfInjector() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": ss.AsJsonMarshaller() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.AsJsonMarshaller() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1052,8 +1052,8 @@ func Test_C39_SimpleSlice_Clear_Dispose(t *testing.T) {
 		ss2 := corestr.New.SimpleSlice.Lines("a")
 		ss2.Dispose()
 		var nilSS *corestr.SimpleSlice
-		actual := args.Map{"result": nilSS.Clear() != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSS.Clear() != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		nilSS.Dispose()
 	})
@@ -1066,13 +1066,13 @@ func Test_C39_SimpleSlice_Serialize_Deserialize(t *testing.T) {
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(b) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(b) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		var target []string
 		err2 := ss.Deserialize(&target)
-		actual := args.Map{"result": err2}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err2}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err2", actual)
 	})
 }
@@ -1086,100 +1086,100 @@ func Test_C39_NewSimpleSliceCreator(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s2 := corestr.New.SimpleSlice.Cap(-1)
-		actual := args.Map{"result": s2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s3 := corestr.New.SimpleSlice.Default()
-		actual := args.Map{"result": s3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s4 := corestr.New.SimpleSlice.Lines("a", "b")
-		actual := args.Map{"result": s4.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s4.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s5 := corestr.New.SimpleSlice.SpreadStrings("a")
-		actual := args.Map{"result": s5.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s5.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s6 := corestr.New.SimpleSlice.Create([]string{"a"})
-		actual := args.Map{"result": s6.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s6.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s7 := corestr.New.SimpleSlice.StringsPtr([]string{"a"})
-		actual := args.Map{"result": s7.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s7.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s8 := corestr.New.SimpleSlice.StringsPtr(nil)
-		actual := args.Map{"result": s8.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s8.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s9 := corestr.New.SimpleSlice.StringsOptions(true, []string{"a"})
-		actual := args.Map{"result": s9.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s9.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s10 := corestr.New.SimpleSlice.StringsOptions(false, []string{"a"})
-		actual := args.Map{"result": s10.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s10.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s11 := corestr.New.SimpleSlice.StringsClone([]string{"a"})
-		actual := args.Map{"result": s11.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s11.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s12 := corestr.New.SimpleSlice.StringsClone(nil)
-		actual := args.Map{"result": s12.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s12.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s13 := corestr.New.SimpleSlice.Direct(true, []string{"a"})
-		actual := args.Map{"result": s13.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s13.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s14 := corestr.New.SimpleSlice.Direct(false, []string{"a"})
-		actual := args.Map{"result": s14.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s14.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s15 := corestr.New.SimpleSlice.Direct(false, nil)
-		actual := args.Map{"result": s15.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s15.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s16 := corestr.New.SimpleSlice.UsingLines(true, "a")
-		actual := args.Map{"result": s16.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s16.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s17 := corestr.New.SimpleSlice.UsingLines(false, "a")
-		actual := args.Map{"result": s17.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s17.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s18 := corestr.New.SimpleSlice.Split("a,b", ",")
-		actual := args.Map{"result": s18.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s18.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s19 := corestr.New.SimpleSlice.SplitLines("a\nb")
-		actual := args.Map{"result": s19.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s19.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s20 := corestr.New.SimpleSlice.UsingSeparatorLine(",", "a,b")
-		actual := args.Map{"result": s20.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s20.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s21 := corestr.New.SimpleSlice.UsingLine("a\nb")
-		actual := args.Map{"result": s21.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s21.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s22 := corestr.New.SimpleSlice.Hashset(corestr.New.Hashset.StringsSpreadItems("a"))
-		actual := args.Map{"result": s22.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s22.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s23 := corestr.New.SimpleSlice.Hashset(corestr.Empty.Hashset())
-		actual := args.Map{"result": s23.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s23.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s24 := corestr.New.SimpleSlice.Map(map[string]string{"a": "1"})
-		actual := args.Map{"result": s24.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s24.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s25 := corestr.New.SimpleSlice.ByLen([]string{"a", "b"})
-		actual := args.Map{"result": s25 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s25 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1192,17 +1192,17 @@ func Test_C39_SSO_SetGet(t *testing.T) {
 		actual := args.Map{"result": sso.Value() != "hello"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsDefined()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsDefined()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsUninitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsUninitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsInvalid()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsInvalid()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1215,8 +1215,8 @@ func Test_C39_SSO_SetOnUninitialized(t *testing.T) {
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		err2 := sso.SetOnUninitialized("val2")
-		actual := args.Map{"result": err2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -1229,8 +1229,8 @@ func Test_C39_SSO_GetSetOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v2 := sso.GetSetOnce("second")
-		actual := args.Map{"result": v2 != "first"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "first"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1253,8 +1253,8 @@ func Test_C39_SSO_GetOnceFunc(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v2 := sso.GetOnceFunc(func() string { return "other" })
-		actual := args.Map{"result": v2 != "computed"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "computed"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1265,8 +1265,8 @@ func Test_C39_SSO_SetOnceIfUninitialized(t *testing.T) {
 		actual := args.Map{"result": sso.SetOnceIfUninitialized("v")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.SetOnceIfUninitialized("v2")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.SetOnceIfUninitialized("v2")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1280,8 +1280,8 @@ func Test_C39_SSO_Invalidate_Reset(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		sso2 := corestr.New.SimpleStringOnce.Init("world")
 		sso2.Reset()
-		actual := args.Map{"result": sso2.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso2.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1292,48 +1292,48 @@ func Test_C39_SSO_NumericConversions(t *testing.T) {
 		actual := args.Map{"result": sso.Int() != 42}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.ValueDefInt() != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.ValueDefInt() != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.ValueInt(0) != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.ValueInt(0) != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.Byte() != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Byte() != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.ValueDefByte() != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.ValueDefByte() != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.ValueByte(0) != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.ValueByte(0) != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.Int16() != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Int16() != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.Int32() != 42}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Int32() != 42}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v, ok := sso.Uint16()
-		actual := args.Map{"result": ok || v != 42}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ok || v != 42}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v2, ok2 := sso.Uint32()
-		actual := args.Map{"result": ok2 || v2 != 42}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ok2 || v2 != 42}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// non-numeric
 		bad := corestr.New.SimpleStringOnce.Init("abc")
-		actual := args.Map{"result": bad.Int() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.Int() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": bad.Byte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.Byte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": bad.Int16() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.Int16() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": bad.Int32() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.Int32() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1344,12 +1344,12 @@ func Test_C39_SSO_Float64(t *testing.T) {
 		actual := args.Map{"result": sso.ValueFloat64(0) == 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.ValueDefFloat64() == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.ValueDefFloat64() == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		bad := corestr.New.SimpleStringOnce.Init("abc")
-		actual := args.Map{"result": bad.ValueFloat64(1.0) != 1.0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.ValueFloat64(1.0) != 1.0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1360,23 +1360,23 @@ func Test_C39_SSO_Boolean(t *testing.T) {
 		actual := args.Map{"result": sso.Boolean(false)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.BooleanDefault()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.BooleanDefault()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsValueBool()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsValueBool()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		sso2 := corestr.New.SimpleStringOnce.Init("true")
-		actual := args.Map{"result": sso2.Boolean(false)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso2.Boolean(false)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		bad := corestr.New.SimpleStringOnce.Init("xyz")
-		actual := args.Map{"result": bad.Boolean(false)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": bad.Boolean(false)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		uninit := corestr.New.SimpleStringOnce.Empty()
-		actual := args.Map{"result": uninit.Boolean(true)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": uninit.Boolean(true)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1388,14 +1388,14 @@ func Test_C39_SSO_IsSetter(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		uninit := corestr.New.SimpleStringOnce.Empty()
-		actual := args.Map{"result": uninit.IsSetter(true).IsTrue()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": uninit.IsSetter(true).IsTrue()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		bad := corestr.New.SimpleStringOnce.Init("xyz")
 		_ = bad.IsSetter(false)
 		ssoTrue := corestr.New.SimpleStringOnce.Init("true")
-		actual := args.Map{"result": ssoTrue.IsSetter(false).IsTrue()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ssoTrue.IsSetter(false).IsTrue()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1408,26 +1408,26 @@ func Test_C39_SSO_WithinRange(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v2, ok2 := sso.WithinRange(true, 60, 100)
-		actual := args.Map{"result": ok2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": v2 != 60}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != 60}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v3, ok3 := sso.WithinRange(true, 0, 10)
-		actual := args.Map{"result": ok3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": v3 != 10}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v3 != 10}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		v4, ok4 := sso.WithinRange(false, 60, 100)
-		actual := args.Map{"result": ok4 || v4 != 50}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok4 || v4 != 50}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_, ok5 := sso.WithinRangeDefault(0, 100)
-		actual := args.Map{"result": ok5}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ok5}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1438,67 +1438,67 @@ func Test_C39_SSO_StringMethods(t *testing.T) {
 		actual := args.Map{"result": sso.String() == ""}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.StringPtr() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.StringPtr() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.SafeValue() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.SafeValue() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.Trim() != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Trim() != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsWhitespace()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsWhitespace()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.HasValidNonEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.HasValidNonEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.HasValidNonWhitespace()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.HasValidNonWhitespace()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.HasSafeNonEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.HasSafeNonEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.Is("hello")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.Is("hello")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsAnyOf("hello", "world")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsAnyOf("hello", "world")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsContains("ell")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsContains("ell")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsAnyContains("xyz", "ell")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsAnyContains("xyz", "ell")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsAnyContains("xyz")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsAnyContains("xyz")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsEqualNonSensitive("HELLO")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsEqualNonSensitive("HELLO")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// nil ptr
 		var nilSSO *corestr.SimpleStringOnce
-		actual := args.Map{"result": nilSSO.String() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSSO.String() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": nilSSO.StringPtr() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSSO.StringPtr() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// uninit safe value
 		uninit := corestr.New.SimpleStringOnce.Empty()
-		actual := args.Map{"result": uninit.SafeValue() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": uninit.SafeValue() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		// IsAnyOf empty
-		actual := args.Map{"result": sso.IsAnyOf()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsAnyOf()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.IsAnyContains()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsAnyContains()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1509,8 +1509,8 @@ func Test_C39_SSO_ValueBytes(t *testing.T) {
 		actual := args.Map{"result": len(sso.ValueBytes()) != 2}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": len(sso.ValueBytesPtr()) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(sso.ValueBytesPtr()) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1543,16 +1543,16 @@ func Test_C39_SSO_Clone(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		cp := sso.ClonePtr()
-		actual := args.Map{"result": cp.Value() != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cp.Value() != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		cu := sso.CloneUsingNewVal("world")
-		actual := args.Map{"result": cu.Value() != "world"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cu.Value() != "world"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		var nilSSO *corestr.SimpleStringOnce
-		actual := args.Map{"result": nilSSO.ClonePtr() != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nilSSO.ClonePtr() != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1573,8 +1573,8 @@ func Test_C39_SSO_SetInit_SetUnInit(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		sso.SetUnInit()
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1586,12 +1586,12 @@ func Test_C39_SSO_Split(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		l, r := sso.SplitLeftRight(",")
-		actual := args.Map{"result": l != "a" || r == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": l != "a" || r == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		l2, r2 := sso.SplitLeftRightTrim(",")
-		actual := args.Map{"result": l2 != "a" || r2 == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": l2 != "a" || r2 == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		_ = sso.SplitNonEmpty(",")
 		_ = sso.SplitTrimNonWhitespace(",")
@@ -1608,8 +1608,8 @@ func Test_C39_SSO_SplitLeftRight_SingleItem(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		l2, r2 := sso.SplitLeftRightTrim(",")
-		actual := args.Map{"result": l2 != "nosep" || r2 != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": l2 != "nosep" || r2 != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1620,16 +1620,16 @@ func Test_C39_SSO_Regex(t *testing.T) {
 		actual := args.Map{"result": sso.IsRegexMatches(nil)}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.RegexFindString(nil) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.RegexFindString(nil) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r, ok := sso.RegexFindAllStringsWithFlag(nil, -1)
-		actual := args.Map{"result": ok || len(r) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok || len(r) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		r2 := sso.RegexFindAllStrings(nil, -1)
-		actual := args.Map{"result": len(r2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1651,20 +1651,20 @@ func Test_C39_SSO_JSON(t *testing.T) {
 		expected := args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "Json returns no error", actual)
 		jp := sso.JsonPtr()
-		actual := args.Map{"hasError": jp.HasError()}
-		expected := args.Map{"hasError": false}
+		actual = args.Map{"hasError": jp.HasError()}
+		expected = args.Map{"hasError": false}
 		expected.ShouldBeEqual(t, 0, "JsonPtr returns no error", actual)
-		actual := args.Map{"result": sso.JsonModelAny() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.JsonModelAny() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		b, err := sso.MarshalJSON()
-		actual := args.Map{"result": err}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		sso2 := corestr.New.SimpleStringOnce.Empty()
 		err2 := sso2.UnmarshalJSON(b)
-		actual := args.Map{"result": err2}
-		expected := args.Map{"result": nil}
+		actual = args.Map{"result": err2}
+		expected = args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err2", actual)
 	})
 }
@@ -1675,14 +1675,14 @@ func Test_C39_SSO_InterfaceCasts(t *testing.T) {
 		actual := args.Map{"result": sso.AsJsonContractsBinder() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.AsJsoner() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.AsJsoner() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.AsJsonParseSelfInjector() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.AsJsonParseSelfInjector() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
-		actual := args.Map{"result": sso.AsJsonMarshaller() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.AsJsonMarshaller() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1694,8 +1694,8 @@ func Test_C39_SSO_Serialize_Deserialize(t *testing.T) {
 		actual := args.Map{"result": err}
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{"result": len(b) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(b) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
@@ -1709,28 +1709,28 @@ func Test_C39_NewSSOCreator(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s2 := corestr.New.SimpleStringOnce.InitPtr("hi")
-		actual := args.Map{"result": s2.Value() != "hi"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s2.Value() != "hi"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s3 := corestr.New.SimpleStringOnce.Create("v", true)
-		actual := args.Map{"result": s3.Value() != "v"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s3.Value() != "v"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s4 := corestr.New.SimpleStringOnce.CreatePtr("v", true)
-		actual := args.Map{"result": s4.Value() != "v"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s4.Value() != "v"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s5 := corestr.New.SimpleStringOnce.Uninitialized("val")
-		actual := args.Map{"result": s5.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s5.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s6 := corestr.New.SimpleStringOnce.Empty()
-		actual := args.Map{"result": s6.IsInitialized()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s6.IsInitialized()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		s7 := corestr.New.SimpleStringOnce.Any(false, 42, true)
-		actual := args.Map{"result": s7.Value() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s7.Value() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 	})
 }
