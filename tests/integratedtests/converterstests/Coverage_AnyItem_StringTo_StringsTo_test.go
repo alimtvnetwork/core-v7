@@ -62,7 +62,8 @@ func Test_Cov_AnyTo_Bytes_Error(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -79,7 +80,8 @@ func Test_Cov_StringTo_Float64Must_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -95,7 +97,8 @@ func Test_Cov_StringsTo_IntegersOptionPanic_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -126,7 +129,8 @@ func Test_Cov_StringsTo_BytesMust_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -140,7 +144,8 @@ func Test_Cov_StringsTo_Float64sMust_Panic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}

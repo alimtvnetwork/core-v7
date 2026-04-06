@@ -207,7 +207,8 @@ func Test_Cov74_MapAnyItems_GetSinglePageCollection_LengthMismatchPanics(t *test
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1, "b": 2, "c": 3}}
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for length mismatch", actual)
 	}()
@@ -223,7 +224,8 @@ func Test_Cov74_MapAnyItems_GetSinglePageCollection_NegativePageIndexPanics(t *t
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1, "b": 2, "c": 3}}
 	allKeys := m.AllKeys()
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic for negative page index", actual)
 	}()
@@ -238,7 +240,8 @@ func Test_Cov74_MapAnyItems_GetNewMapUsingKeys_PanicOnMissing(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"a": 1}}
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic on missing key", actual)
 	}()
@@ -281,7 +284,8 @@ func Test_Cov74_MapAnyItems_JsonStringMust_Panics(t *testing.T) {
 	// Arrange
 	m := &coredynamic.MapAnyItems{Items: map[string]any{"k": make(chan int)}}
 	defer func() {
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	}()

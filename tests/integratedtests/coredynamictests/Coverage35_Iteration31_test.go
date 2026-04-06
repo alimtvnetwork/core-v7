@@ -1892,7 +1892,8 @@ func Test_C35_145_TypeStatus_MustBeSame_Same(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r != nil}
+		r := recover()
+		actual := args.Map{"result": r != nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1907,7 +1908,8 @@ func Test_C35_146_TypeStatus_MustBeSame_Different(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1971,7 +1973,8 @@ func Test_C35_151_TypeStatus_SrcDestinationMustBeSame_Same(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r != nil}
+		r := recover()
+		actual := args.Map{"result": r != nil}
 
 	// Assert
 		expected := args.Map{"result": false}

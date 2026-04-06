@@ -190,7 +190,8 @@ func Test_C8_IsCompareResult_DefaultPanic(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1425,7 +1426,8 @@ func Test_C8_PanicOnOutOfRange_OutOfRange(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1706,7 +1708,8 @@ func Test_C8_RangesByte_Panics(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}

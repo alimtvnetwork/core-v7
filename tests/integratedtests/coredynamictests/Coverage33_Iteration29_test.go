@@ -1373,7 +1373,8 @@ func Test_C33_98_TypeMustBeSame_Same(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r != nil}
+		r := recover()
+		actual := args.Map{"result": r != nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1387,7 +1388,8 @@ func Test_C33_99_TypeMustBeSame_Different(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r == nil}
+		r := recover()
+		actual := args.Map{"result": r == nil}
 
 	// Assert
 		expected := args.Map{"result": false}
@@ -1429,7 +1431,8 @@ func Test_C33_102_MustBeAcceptedTypes_Accepted(t *testing.T) {
 	defer func() {
 
 	// Act
-		actual := args.Map{"result": r := recover(); r != nil}
+		r := recover()
+		actual := args.Map{"result": r != nil}
 
 	// Assert
 		expected := args.Map{"result": false}
