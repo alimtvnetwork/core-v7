@@ -9,6 +9,3 @@ type (
 	ErrAnyItemsFunc func() (anyItems []any, err error)
 	ErrInAnyFunc    func(anyItem any) (err error)
 )
-
-// Deprecated: Use ErrFunc instead.
-type TaskWithErrFunc = ErrFunc
