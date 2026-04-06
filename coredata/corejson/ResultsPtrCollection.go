@@ -186,7 +186,6 @@ func (it *ResultsPtrCollection) GetErrorsStrings() []string {
 	return errStrList
 }
 
-// Deprecated: Use GetErrorsStrings instead.
 func (it *ResultsPtrCollection) GetErrorsStringsPtr() []string {
 	return it.GetErrorsStrings()
 }
@@ -566,7 +565,6 @@ func (it *ResultsPtrCollection) GetStrings() []string {
 	return list
 }
 
-// Deprecated: Use GetStrings instead.
 func (it *ResultsPtrCollection) GetStringsPtr() []string {
 	return it.GetStrings()
 }

@@ -19,7 +19,6 @@ func UnsafeBytesToStringWithErr(unsafeBytes []byte) (string, error) {
 //
 // # Returns string arrays from unsafe bytes
 //
-// Deprecated: This function is fundamentally broken — it reinterprets
 // []byte (1-byte elements) as []string (16-byte elements) via unsafe.Pointer,
 // producing corrupted memory reads. Do not use.
 // Use a proper loop conversion instead.

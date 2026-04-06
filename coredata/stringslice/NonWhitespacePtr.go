@@ -1,6 +1,5 @@
 package stringslice
 
-// Deprecated: Use NonWhitespace instead.
 func NonWhitespacePtr(
 	slice []string,
 ) []string {

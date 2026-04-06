@@ -114,7 +114,6 @@ func (linkedListNode *LinkedListNode) AddStringsToNode(
 		items)
 }
 
-// Deprecated: Use AddStringsToNode instead.
 func (linkedListNode *LinkedListNode) AddStringsPtrToNode(
 	linkedListForIncrement *LinkedList,
 	isSkipOnNull bool,
@@ -303,7 +302,6 @@ func (linkedListNode *LinkedListNode) List() []string {
 	return list
 }
 
-// Deprecated: Use List instead.
 func (linkedListNode *LinkedListNode) ListPtr() []string {
 	return linkedListNode.List()
 }

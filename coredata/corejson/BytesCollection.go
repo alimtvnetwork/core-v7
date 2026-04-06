@@ -325,7 +325,6 @@ func (it *BytesCollection) GetAtSafe(
 	return nil
 }
 
-// Deprecated: Use GetAtSafe instead.
 func (it *BytesCollection) GetAtSafePtr(
 	index int,
 ) []byte {
@@ -540,7 +539,6 @@ func (it *BytesCollection) Strings() []string {
 	return list
 }
 
-// Deprecated: Use Strings instead.
 func (it *BytesCollection) StringsPtr() []string {
 	return it.Strings()
 }

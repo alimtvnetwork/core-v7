@@ -10,5 +10,4 @@ type (
 	ErrInAnyFunc    func(anyItem any) (err error)
 )
 
-// Deprecated: Use ErrFunc instead.
 type TaskWithErrFunc = ErrFunc

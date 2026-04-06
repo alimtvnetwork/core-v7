@@ -28,7 +28,6 @@ func InvalidLeftRight(message string) *LeftRight {
 	}
 }
 
-// Deprecated: Use LeftRightUsingSlice instead.
 func LeftRightUsingSlicePtr(slice []string) *LeftRight {
 	if len(slice) == 0 {
 		return LeftRightUsingSlice(nil)

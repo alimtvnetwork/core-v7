@@ -1,6 +1,5 @@
 package stringslice
 
-// Deprecated: Use SafeIndexAtWith instead.
 func SafeIndexAtWithPtr(
 	slice []string,
 	index int,
