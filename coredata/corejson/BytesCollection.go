@@ -325,16 +325,6 @@ func (it *BytesCollection) GetAtSafe(
 	return nil
 }
 
-// Deprecated: Use GetAtSafe instead.
-func (it *BytesCollection) GetAtSafePtr(
-	index int,
-) []byte {
-	if index > constants.InvalidNotFoundCase && index <= it.Length()-1 {
-		return it.Items[index]
-	}
-
-	return nil
-}
 
 func (it *BytesCollection) GetResultAtSafe(
 	index int,
