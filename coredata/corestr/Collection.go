@@ -1546,10 +1546,6 @@ func (it *Collection) NonEmptyItemsOrNonWhitespace() []string {
 	return stringslice.NonWhitespace(it.items)
 }
 
-// Deprecated: Use NonEmptyItemsOrNonWhitespace instead.
-func (it *Collection) NonEmptyItemsOrNonWhitespacePtr() []string {
-	return stringslice.NonWhitespacePtr(it.items)
-}
 
 // Items direct return pointer
 func (it *Collection) Items() []string {
