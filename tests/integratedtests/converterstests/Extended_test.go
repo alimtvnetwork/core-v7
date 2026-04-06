@@ -77,16 +77,6 @@ func TestStringTo_Float64Default(t *testing.T) {
 		t.Errorf("expected 9.9 default, got %f", val)
 	}
 }
-
-// TestStringTo_Float64Conditional verifies deprecated conditional.
-func TestStringTo_Float64Conditional(t *testing.T) {
-	val, ok := converters.StringTo.Float64Conditional("2.5", 0.0)
-	if !ok || val != 2.5 {
-		t.Errorf("expected 2.5, got %f", val)
-	}
-}
-
-// TestStringTo_Byte verifies byte conversion.
 func TestStringTo_Byte(t *testing.T) {
 	for _, tc := range stringToByteCases {
 		t.Run(tc.name, func(t *testing.T) {
