@@ -1301,7 +1301,7 @@ func Test_Cov38_LL_Join(t *testing.T) {
 
 		// Assert
 		expected := args.Map{"result": false}
-		expected.ShouldBeEqual(t, 0, "unexpected:", ll.Join("", actual)
+		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	})
 }
 
