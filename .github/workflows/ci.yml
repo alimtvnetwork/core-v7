@@ -82,6 +82,94 @@ jobs:
 
           exit $TEST_EXIT
 
+      - name: Generate test summary
+        if: always()
+        run: |
+          PASS_COUNT=$(grep -c '^\s*--- PASS:' test-output.txt 2>/dev/null || echo "0")
+          FAIL_COUNT=$(grep -c '^\s*--- FAIL:' test-output.txt 2>/dev/null || echo "0")
+          SKIP_COUNT=$(grep -c '^\s*--- SKIP:' test-output.txt 2>/dev/null || echo "0")
+          TOTAL_COUNT=$((PASS_COUNT + FAIL_COUNT + SKIP_COUNT))
+
+          echo "TEST_PASS_COUNT=${PASS_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_FAIL_COUNT=${FAIL_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_SKIP_COUNT=${SKIP_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_TOTAL_COUNT=${TOTAL_COUNT}" >> "$GITHUB_ENV"
+
+          # Extract failing test details
+          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
+          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt 2>/dev/null || true)
+          echo "$FAILURES" > test-failures.txt
+          echo "$FAIL_PKGS" > test-fail-pkgs.txt
+
+      - name: Comment test results on PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const passed = process.env.TEST_PASS_COUNT || '0';
+            const failed = process.env.TEST_FAIL_COUNT || '0';
+            const skipped = process.env.TEST_SKIP_COUNT || '0';
+            const total = process.env.TEST_TOTAL_COUNT || '0';
+            const exitCode = process.env.TEST_EXIT_CODE || '0';
+
+            const statusIcon = exitCode === '0' ? '✅' : '❌';
+            const statusText = exitCode === '0' ? 'All tests passed' : 'Some tests failed';
+
+            let failureSection = '';
+            try {
+              const failures = fs.readFileSync('test-failures.txt', 'utf8').trim();
+              const failPkgs = fs.readFileSync('test-fail-pkgs.txt', 'utf8').trim();
+              if (failures) {
+                failureSection = `\n\n### ❌ Failing Tests\n\n\`\`\`\n${failures}\n\`\`\`\n\n### 📦 Failing Packages\n\n\`\`\`\n${failPkgs}\n\`\`\``;
+              }
+            } catch (e) { /* no failure files */ }
+
+            let fullOutput = '';
+            try {
+              const output = fs.readFileSync('test-output.txt', 'utf8');
+              if (output.length > 0) {
+                const truncated = output.length > 50000
+                  ? output.substring(output.length - 50000)
+                  : output;
+                fullOutput = `\n\n<details>\n<summary>Full test output</summary>\n\n\`\`\`\n${truncated}\n\`\`\`\n</details>`;
+              }
+            } catch (e) { /* no output file */ }
+
+            const body = [
+              `## 🧪 Test Results`,
+              ``,
+              `${statusIcon} **${statusText}**`,
+              ``,
+              `| Passed | Failed | Skipped | Total |`,
+              `|--------|--------|---------|-------|`,
+              `| ${passed} ✅ | ${failed} ❌ | ${skipped} ⏭️ | ${total} |`,
+              failureSection,
+              fullOutput,
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c => c.body.includes('🧪 Test Results'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
       - name: Check coverage threshold
         run: |
           TOTAL=$(go tool cover -func=coverage.out | grep ^total: | awk '{print $3}' | tr -d '%')
