@@ -373,16 +373,17 @@ def main():
         transform_file(args.file, args.dry_run, stats)
     else:
         root = args.root
-        for pkg_dir in sorted(os.listdir(root)):
-            if args.package and pkg_dir != args.package:
-                continue
-            pkg_path = os.path.join(root, pkg_dir)
-            if not os.path.isdir(pkg_path):
-                continue
-            for fname in sorted(os.listdir(pkg_path)):
+        for dirpath, dirnames, filenames in sorted(os.walk(root)):
+            if args.package:
+                # Match if the package name appears anywhere in the path
+                rel = os.path.relpath(dirpath, root)
+                parts = rel.split(os.sep)
+                if args.package not in parts:
+                    continue
+            for fname in sorted(filenames):
                 if not fname.endswith("_test.go"):
                     continue
-                fpath = os.path.join(pkg_path, fname)
+                fpath = os.path.join(dirpath, fname)
                 transform_file(fpath, args.dry_run, stats)
 
     # Report
