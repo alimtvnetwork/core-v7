@@ -22,8 +22,8 @@ func Test_StrHashmap_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Empty hashmap should be empty", actual)
-		actual := args.Map{"result": hm.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Empty hashmap length: expected 0", actual)
 	})
 }
@@ -72,8 +72,8 @@ func Test_StrHashmap_KeyValuesStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "KeyValuesStrings: expected 2", actual)
 		val, found := hm.Get("a")
-		actual := args.Map{"result": found || val != "1"}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": found || val != "1"}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Get('a'): expected '1', got '' (found=)", actual)
 	})
 }
@@ -108,8 +108,8 @@ func Test_StrHashmap_Set_NewKey(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Set on new key should return true", actual)
-		actual := args.Map{"result": hm.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After Set: expected 1", actual)
 	})
 }
@@ -128,8 +128,8 @@ func Test_StrHashmap_Set_ExistingKey(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Set on existing key should return false", actual)
 		val, _ := hm.Get("key")
-		actual := args.Map{"result": val != "val2"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != "val2"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Set should overwrite: expected 'val2', got ''", actual)
 	})
 }
@@ -195,8 +195,8 @@ func Test_StrHashmap_AddOrUpdateHashmap(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After merge: expected 2", actual)
 		val, _ := hm1.Get("a")
-		actual := args.Map{"result": val != "override"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != "override"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Merge should overwrite: expected 'override', got ''", actual)
 	})
 }
@@ -303,8 +303,8 @@ func Test_StrHashmap_IsKeyMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsKeyMissing should return false for existing key", actual)
-		actual := args.Map{"result": hm.IsKeyMissing("z")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hm.IsKeyMissing("z")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsKeyMissing should return true for missing key", actual)
 	})
 }
@@ -320,8 +320,8 @@ func Test_StrHashmap_HasAllStrings(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings should return true when all present", actual)
-		actual := args.Map{"result": hm.HasAllStrings("a", "z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.HasAllStrings("a", "z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings should return false when one missing", actual)
 	})
 }
@@ -337,8 +337,8 @@ func Test_StrHashmap_HasAll(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasAll should return true when all present", actual)
-		actual := args.Map{"result": hm.HasAll("a", "x")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.HasAll("a", "x")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HasAll should return false when one missing", actual)
 	})
 }
@@ -387,8 +387,8 @@ func Test_StrHashmap_Get_Existing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Get should find existing key", actual)
-		actual := args.Map{"result": val != "v"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != "v"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Get: expected 'v', got ''", actual)
 	})
 }
@@ -405,8 +405,8 @@ func Test_StrHashmap_Get_Missing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Get should return false for missing key", actual)
-		actual := args.Map{"result": val != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Get missing: expected empty string, got ''", actual)
 	})
 }
@@ -427,8 +427,8 @@ func Test_StrHashmap_Remove(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Remove should delete key", actual)
-		actual := args.Map{"result": hm.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After remove: expected 1", actual)
 	})
 }
@@ -635,12 +635,12 @@ func Test_StrHashmap_KeysToLower(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "KeysToLower should lowercase all keys", actual)
-		actual := args.Map{"result": lower.Has("ABC")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lower.Has("ABC")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "KeysToLower should not retain original case keys", actual)
 		val, _ := lower.Get("abc")
-		actual := args.Map{"result": val != "val1"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": val != "val1"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "KeysToLower should preserve values: expected 'val1', got ''", actual)
 	})
 }
@@ -679,8 +679,8 @@ func Test_StrHashmap_ValuesList_CacheInvalidatedAfterSet(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Initial ValuesList: expected 1", actual)
 		hm.Set("b", "2")
 		list2 := hm.ValuesList()
-		actual := args.Map{"result": len(list2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After Set, ValuesList should reflect new item: expected 2", actual)
 	})
 }
@@ -850,8 +850,8 @@ func Test_StrHashmap_ConcatNew(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ConcatNew: expected 2", actual)
 		// original should not be mutated
-		actual := args.Map{"result": hm1.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hm1.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ConcatNew should not mutate original", actual)
 	})
 }

@@ -22,8 +22,8 @@ func Test_StrHashset_Empty(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Empty hashset should be empty", actual)
-		actual := args.Map{"result": hs.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Empty hashset length: expected 0", actual)
 	})
 }
@@ -115,8 +115,8 @@ func Test_StrHashset_Add_SetsHasMapUpdated(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Add should insert item", actual)
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After Add: expected 1", actual)
 	})
 }
@@ -148,8 +148,8 @@ func Test_StrHashset_AddBool_FirstAdd_ReturnsFalse(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddBool first add should return false (did not exist)", actual)
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After AddBool: expected 1", actual)
 	})
 }
@@ -167,8 +167,8 @@ func Test_StrHashset_AddBool_SecondAdd_ReturnsTrue(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "AddBool second add should return true (already existed)", actual)
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddBool duplicate: expected 1", actual)
 	})
 }
@@ -211,8 +211,8 @@ func Test_StrHashset_AddNonEmpty_SkipsEmpty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddNonEmpty should skip empty string", actual)
 		hs.AddNonEmpty("valid")
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddNonEmpty: expected 1", actual)
 	})
 }
@@ -230,8 +230,8 @@ func Test_StrHashset_AddNonEmptyWhitespace_SkipsWhitespace(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddNonEmptyWhitespace should skip whitespace-only", actual)
 		hs.AddNonEmptyWhitespace("valid")
-		actual := args.Map{"result": hs.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -377,8 +377,8 @@ func Test_StrHashset_AddItemsMap_OnlyTrueValues(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddItemsMap: expected 2 (only true)", actual)
-		actual := args.Map{"result": hs.Has("no")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Has("no")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddItemsMap should skip false-valued entries", actual)
 	})
 }
@@ -510,8 +510,8 @@ func Test_StrHashset_IsMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsMissing should return true for absent key", actual)
-		actual := args.Map{"result": hs.IsMissing("a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.IsMissing("a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsMissing should return false for present key", actual)
 	})
 }
@@ -527,8 +527,8 @@ func Test_StrHashset_IsAllMissing(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsAllMissing should return true when all missing", actual)
-		actual := args.Map{"result": hs.IsAllMissing("x", "a")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.IsAllMissing("x", "a")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsAllMissing should return false when any present", actual)
 	})
 }
@@ -549,8 +549,8 @@ func Test_StrHashset_Remove(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Remove should delete item", actual)
-		actual := args.Map{"result": hs.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After remove: expected 2", actual)
 	})
 }
@@ -601,8 +601,8 @@ func Test_StrHashset_Resize_LargerPreservesItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Resize should preserve items: expected 2", actual)
-		actual := args.Map{"result": hs.Has("a") || !hs.Has("b")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hs.Has("a") || !hs.Has("b")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "Resize should preserve all items", actual)
 	})
 }
@@ -762,8 +762,8 @@ func Test_StrHashset_List_CacheInvalidatedAfterAdd(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Initial list: expected 1", actual)
 		hs.Add("b")
 		list2 := hs.List()
-		actual := args.Map{"result": len(list2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "After Add, list should reflect new item: expected 2", actual)
 	})
 }
@@ -852,8 +852,8 @@ func Test_StrHashset_ToLowerSet(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "ToLowerSet should lowercase all keys", actual)
-		actual := args.Map{"result": lower.Has("ABC")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lower.Has("ABC")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ToLowerSet should not retain original case", actual)
 	})
 }
@@ -916,8 +916,8 @@ func Test_StrHashset_OrderedList(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "OrderedList: expected 3", actual)
-		actual := args.Map{"result": list[0] != "a" || list[1] != "b" || list[2] != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": list[0] != "a" || list[1] != "b" || list[2] != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "OrderedList should be sorted asc", actual)
 	})
 }

@@ -152,12 +152,12 @@ func Test_Cov40_KVP_ValueBool(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		kv2 := corestr.KeyValuePair{Value: ""}
-		actual := args.Map{"result": kv2.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 		kv3 := corestr.KeyValuePair{Value: "invalid"}
-		actual := args.Map{"result": kv3.ValueBool()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv3.ValueBool()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -174,8 +174,8 @@ func Test_Cov40_KVP_ValueInt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 42", actual)
 		kv2 := corestr.KeyValuePair{Value: "bad"}
-		actual := args.Map{"result": kv2.ValueInt(99) != 99}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueInt(99) != 99}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 99", actual)
 	})
 }
@@ -192,8 +192,8 @@ func Test_Cov40_KVP_ValueDefInt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 10", actual)
 		kv2 := corestr.KeyValuePair{Value: "bad"}
-		actual := args.Map{"result": kv2.ValueDefInt() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueDefInt() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -210,8 +210,8 @@ func Test_Cov40_KVP_ValueByte(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 10", actual)
 		kv2 := corestr.KeyValuePair{Value: "999"}
-		actual := args.Map{"result": kv2.ValueByte(5) != 5}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueByte(5) != 5}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	})
 }
@@ -228,8 +228,8 @@ func Test_Cov40_KVP_ValueDefByte(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 50", actual)
 		kv2 := corestr.KeyValuePair{Value: "bad"}
-		actual := args.Map{"result": kv2.ValueDefByte() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueDefByte() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -246,8 +246,8 @@ func Test_Cov40_KVP_ValueFloat64(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3.14", actual)
 		kv2 := corestr.KeyValuePair{Value: "bad"}
-		actual := args.Map{"result": kv2.ValueFloat64(1.0) != 1.0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.ValueFloat64(1.0) != 1.0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1.0", actual)
 	})
 }
@@ -349,8 +349,8 @@ func Test_Cov40_KVP_Json(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
-		actual := args.Map{"result": kv.JsonPtr() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv.JsonPtr() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
@@ -367,8 +367,8 @@ func Test_Cov40_KVP_Serialize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
-		actual := args.Map{"result": len(kv.SerializeMust()) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(kv.SerializeMust()) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
@@ -387,8 +387,8 @@ func Test_Cov40_KVP_Clear_Dispose(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		kv2 := corestr.KeyValuePair{Key: "a", Value: "b"}
 		kv2.Dispose()
-		actual := args.Map{"result": kv2.Key != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv2.Key != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -731,8 +731,8 @@ func Test_Cov40_KVC_Get(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		_, found2 := kvc.Get("missing")
-		actual := args.Map{"result": found2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": found2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not found", actual)
 	})
 }
@@ -1074,8 +1074,8 @@ func Test_Cov40_KVC_JSON(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		kvc2 := corestr.New.KeyValues.Empty()
 		err = json.Unmarshal(data, kvc2)
-		actual := args.Map{"result": err != nil || kvc2.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err != nil || kvc2.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	})
 }
@@ -1138,8 +1138,8 @@ func Test_Cov40_KVC_Serialize_Deserialize(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
-		actual := args.Map{"result": len(kvc.SerializeMust()) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(kvc.SerializeMust()) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }
@@ -2608,8 +2608,8 @@ func Test_Cov40_CHM_HasWithHashset(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		has2, _ := chm.HasWithHashset("banana")
-		actual := args.Map{"result": has2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": has2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2669,8 +2669,8 @@ func Test_Cov40_CHM_LengthOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
-		actual := args.Map{"result": chm.LengthOf('z') != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.LengthOf('z') != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -2701,8 +2701,8 @@ func Test_Cov40_CHM_LengthOfHashsetFromFirstChar(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": chm.LengthOfHashsetFromFirstChar("z") != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.LengthOfHashsetFromFirstChar("z") != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -2812,12 +2812,12 @@ func Test_Cov40_CHM_GetHashset(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected", actual)
 		hs2 := chm.GetHashset("z", false)
-		actual := args.Map{"result": hs2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		hs3 := chm.GetHashset("z", true)
-		actual := args.Map{"result": hs3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
@@ -3301,14 +3301,14 @@ func Test_Cov40_CHM_Lock_Variants(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
-		actual := args.Map{"result": chm.LengthLock() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.LengthLock() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": chm.AllLengthsSumLock() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.AllLengthsSumLock() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": chm.LengthOfLock('a') != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": chm.LengthOfLock('a') != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

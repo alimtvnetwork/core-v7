@@ -23,8 +23,8 @@ func Test_C47_LinkedCollectionNode_IsEmpty(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "nil should be empty", actual)
 		n2 := &corestr.LinkedCollectionNode{}
-		actual := args.Map{"result": n2.IsEmpty()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": n2.IsEmpty()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "nil element should be empty", actual)
 	})
 }
@@ -1163,8 +1163,8 @@ func Test_C47_LinkedCollections_IndexAt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected node", actual)
 		node2 := lc.IndexAt(-1)
-		actual := args.Map{"result": node2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": node2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "negative should be nil", actual)
 	})
 }
@@ -1183,12 +1183,12 @@ func Test_C47_LinkedCollections_SafeIndexAt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected node", actual)
 		n2 := lc.SafeIndexAt(99)
-		actual := args.Map{"result": n2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": n2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		n3 := lc.SafeIndexAt(-1)
-		actual := args.Map{"result": n3 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": n3 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -1207,8 +1207,8 @@ func Test_C47_LinkedCollections_SafePointerIndexAt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected collection", actual)
 		col2 := lc.SafePointerIndexAt(99)
-		actual := args.Map{"result": col2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -1744,11 +1744,11 @@ func Test_C47_LinkedCollections_MarshalJSON(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
-		actual := args.Map{
+		actual = args.Map{
 			"result": string(data) != `["a",
 			"b"]`,
 		}
-		expected := args.Map{"result": false}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected:", actual)
 	})
 }
@@ -1766,8 +1766,8 @@ func Test_C47_LinkedCollections_UnmarshalJSON(t *testing.T) {
 		expected := args.Map{"result": nil}
 		expected.ShouldBeEqual(t, 0, "err", actual)
 		list := lc.List()
-		actual := args.Map{"result": len(list) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(list) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -2058,11 +2058,11 @@ func Test_C47_NonChainedLinkedCollectionNodes_Basic(t *testing.T) {
 		col := corestr.New.Collection.Strings([]string{"a"})
 		n1 := &corestr.LinkedCollectionNode{Element: col}
 		nc.Adds(n1)
-		actual := args.Map{"result": nc.Length() != 1 || nc.IsEmpty() || !nc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.Length() != 1 || nc.IsEmpty() || !nc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": nc.First() != n1 || nc.Last() != n1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nc.First() != n1 || nc.Last() != n1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "first/last mismatch", actual)
 	})
 }

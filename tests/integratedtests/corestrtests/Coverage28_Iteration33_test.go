@@ -65,8 +65,8 @@ func Test_C28_04_KeyAnyValuePair_IsVariableNameEqual(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": kv.IsVariableNameEqual("x")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kv.IsVariableNameEqual("x")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -599,8 +599,8 @@ func Test_C28_42_KeyValueCollection_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": kvc.HasIndex(5)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.HasIndex(5)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -632,8 +632,8 @@ func Test_C28_44_KeyValueCollection_FirstOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		kvc.Add("a", "1")
-		actual := args.Map{"result": kvc.FirstOrDefault().Key != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.FirstOrDefault().Key != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -666,8 +666,8 @@ func Test_C28_46_KeyValueCollection_LastOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 		kvc.Add("a", "1")
-		actual := args.Map{"result": kvc.LastOrDefault().Key != "a"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.LastOrDefault().Key != "a"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 	})
 }
@@ -740,8 +740,8 @@ func Test_C28_50_KeyValueCollection_SafeValueAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": kvc.SafeValueAt(99) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.SafeValueAt(99) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -1108,8 +1108,8 @@ func Test_C28_74_KeyValueCollection_IsContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": kvc.IsContains("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.IsContains("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1128,8 +1128,8 @@ func Test_C28_75_KeyValueCollection_Get(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_, ok2 := kvc.Get("z")
-		actual := args.Map{"result": ok2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1162,8 +1162,8 @@ func Test_C28_77_KeyValueCollection_HasKey(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": kvc.HasKey("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": kvc.HasKey("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1787,8 +1787,8 @@ func Test_C28_119_SimpleStringOnce_GetSetOnce(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		v2 := s.GetSetOnce("world")
-		actual := args.Map{"result": v2 != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello still", actual)
 	})
 }
@@ -1805,8 +1805,8 @@ func Test_C28_120_SimpleStringOnce_GetOnce(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": s.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": s.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 	})
 }
@@ -1824,8 +1824,8 @@ func Test_C28_121_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello", actual)
 		v2 := s.GetOnceFunc(func() string { return "world" })
-		actual := args.Map{"result": v2 != "hello"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": v2 != "hello"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected hello still", actual)
 	})
 }
@@ -1841,8 +1841,8 @@ func Test_C28_122_SimpleStringOnce_SetOnceIfUninitialized(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.SetOnceIfUninitialized("world")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.SetOnceIfUninitialized("world")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2588,11 +2588,11 @@ func Test_C28_175_SimpleStringOnce_IsAnyOf(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.IsAnyOf()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": s.IsAnyOf()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
-		actual := args.Map{"result": s.IsAnyOf("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IsAnyOf("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2622,8 +2622,8 @@ func Test_C28_177_SimpleStringOnce_IsAnyContains(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.IsAnyContains()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": s.IsAnyContains()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for empty", actual)
 	})
 }
@@ -2654,8 +2654,8 @@ func Test_C28_179_SimpleStringOnce_IsRegexMatches(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": s.IsRegexMatches(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.IsRegexMatches(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2672,8 +2672,8 @@ func Test_C28_180_SimpleStringOnce_RegexFindString(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 123", actual)
-		actual := args.Map{"result": s.RegexFindString(nil) != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": s.RegexFindString(nil) != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -2692,8 +2692,8 @@ func Test_C28_181_SimpleStringOnce_RegexFindAllStringsWithFlag(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		_, has2 := s.RegexFindAllStringsWithFlag(nil, -1)
-		actual := args.Map{"result": has2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": has2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -2712,8 +2712,8 @@ func Test_C28_182_SimpleStringOnce_RegexFindAllStrings(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		items2 := s.RegexFindAllStrings(nil, -1)
-		actual := args.Map{"result": len(items2) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(items2) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

@@ -101,8 +101,8 @@ func Test_C76_SimpleSlice_IsEqualLines(t *testing.T) {
 		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "b"})}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -362,8 +362,8 @@ func Test_C76_SimpleSlice_IsDistinctEqualRaw(t *testing.T) {
 		actual := args.Map{"result": ss.IsDistinctEqualRaw("a", "b")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ss.IsDistinctEqualRaw("a", "c")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsDistinctEqualRaw("a", "c")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -736,8 +736,8 @@ func Test_C76_SimpleSlice_AddedRemovedLinesDiff(t *testing.T) {
 		actual := args.Map{"result": len(added) == 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected some added lines", actual)
-		actual := args.Map{"result": len(removed) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(removed) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected some removed lines", actual)
 	})
 }
@@ -769,8 +769,8 @@ func Test_C76_SimpleSlice_RemoveIndexes(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -802,8 +802,8 @@ func Test_C76_SimpleSlice_RemoveIndexes_InvalidIndex(t *testing.T) {
 		actual := args.Map{"result": err == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error for invalid index", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2 (all kept)", actual)
 	})
 }
@@ -1048,8 +1048,8 @@ func Test_C76_SimpleSlice_InsertAt(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		strs := ss.Strings()
-		actual := args.Map{"result": strs[1] != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": strs[1] != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'b' at index 1, got ''", actual)
 	})
 }
@@ -1246,8 +1246,8 @@ func Test_C76_SimpleSlice_IsContains(t *testing.T) {
 		actual := args.Map{"result": ss.IsContains("a")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": ss.IsContains("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsContains("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1351,8 +1351,8 @@ func Test_C76_SimpleSlice_IndexOf(t *testing.T) {
 		actual := args.Map{"result": ss.IndexOf("y") != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": ss.IndexOf("w") != -1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IndexOf("w") != -1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected -1", actual)
 	})
 }
@@ -1379,8 +1379,8 @@ func Test_C76_SimpleSlice_HasAnyItem(t *testing.T) {
 		actual := args.Map{"result": ss.HasAnyItem()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": empty.HasAnyItem()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasAnyItem()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1394,14 +1394,14 @@ func Test_C76_SimpleSlice_HasIndex(t *testing.T) {
 		actual := args.Map{"result": ss.HasIndex(0)}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for 0", actual)
-		actual := args.Map{"result": ss.HasIndex(1)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss.HasIndex(1)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for 1", actual)
-		actual := args.Map{"result": ss.HasIndex(2)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.HasIndex(2)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for 2", actual)
-		actual := args.Map{"result": ss.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 	})
 }
@@ -1602,8 +1602,8 @@ func Test_C76_SimpleSlice_SkipDynamic(t *testing.T) {
 		actual := args.Map{"result": ok}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected []string type", actual)
-		actual := args.Map{"result": len(asSlice) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(asSlice) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -1621,8 +1621,8 @@ func Test_C76_SimpleSlice_SkipDynamic_BeyondLength(t *testing.T) {
 		actual := args.Map{"result": ok}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected []string type", actual)
-		actual := args.Map{"result": len(asSlice) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(asSlice) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -1771,8 +1771,8 @@ func Test_C76_SimpleSlice_DeserializeJsoner(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }

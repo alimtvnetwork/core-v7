@@ -180,7 +180,7 @@ func Test_Cov56_Hashset_AddFuncErr_NoErr(t *testing.T) {
 			Title:         "AddFuncErr no err",
 			ExpectedInput: args.Map{"Has": true},
 		}
-		actual := args.Map{"Has": hs.Has("ok")}
+		actual = args.Map{"Has": hs.Has("ok")}
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }

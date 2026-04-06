@@ -26,8 +26,8 @@ func Test_C75_SimpleSlice_Transpile(t *testing.T) {
 		actual := args.Map{"result": result.Length() != 3}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": result.First() != "A"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.First() != "A"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 'A', got ''", actual)
 	})
 }
@@ -146,8 +146,8 @@ func Test_C75_SimpleSlice_JoinLineEofLine(t *testing.T) {
 		actual := args.Map{"result": result == ""}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-		actual := args.Map{"result": strings.HasSuffix(result, "\n")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": strings.HasSuffix(result, "\n")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected trailing newline", actual)
 	})
 }
@@ -380,8 +380,8 @@ func Test_C75_SimpleSlice_PrependAppend(t *testing.T) {
 		actual := args.Map{"result": result.Length() != 3}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
-		actual := args.Map{"result": result.First() != "a" || result.Last() != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.First() != "a" || result.Last() != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected [a,b,c]", actual)
 	})
 }
@@ -459,8 +459,8 @@ func Test_C75_SimpleSlice_NonPtr_Ptr(t *testing.T) {
 		actual := args.Map{"result": nonPtr.Length() != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "nonPtr mismatch", actual)
-		actual := args.Map{"result": ptr.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ptr.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "ptr mismatch", actual)
 	})
 }
@@ -673,11 +673,11 @@ func Test_C75_SimpleSlice_MarshalUnmarshalJSON(t *testing.T) {
 		err = target.UnmarshalJSON(bytes)
 
 		// Assert
-		actual := args.Map{"result": err != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unmarshal error:", actual)
-		actual := args.Map{"result": target.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": target.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -695,8 +695,8 @@ func Test_C75_SimpleSlice_Json_JsonPtr(t *testing.T) {
 		actual := args.Map{"result": jsonResult.HasError()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "json error", actual)
-		actual := args.Map{"result": jsonPtrResult.HasError()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": jsonPtrResult.HasError()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "jsonPtr error", actual)
 	})
 }
@@ -715,8 +715,8 @@ func Test_C75_SimpleSlice_ParseInjectUsingJson(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": result.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": result.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -775,8 +775,8 @@ func Test_C75_SimpleSlice_ToPtr_ToNonPtr(t *testing.T) {
 		actual := args.Map{"result": ptr == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil ptr", actual)
-		actual := args.Map{"result": nonPtr.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": nonPtr.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -889,8 +889,8 @@ func Test_C75_SimpleSlice_Serialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(bytes) == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(bytes) == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 	})
 }
@@ -908,8 +908,8 @@ func Test_C75_SimpleSlice_Deserialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": len(target) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(target) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -924,8 +924,8 @@ func Test_C75_SimpleSlice_SafeStrings(t *testing.T) {
 		actual := args.Map{"result": len(ss.SafeStrings()) != 1}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(empty.SafeStrings()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(empty.SafeStrings()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }
@@ -980,8 +980,8 @@ func Test_C75_NewSimpleSlice_Deserialize(t *testing.T) {
 		actual := args.Map{"result": err != nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "error:", actual)
-		actual := args.Map{"result": ss.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -998,8 +998,8 @@ func Test_C75_NewSimpleSlice_Deserialize_Invalid(t *testing.T) {
 		actual := args.Map{"result": err == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
-		actual := args.Map{"result": ss.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty on error", actual)
 	})
 }

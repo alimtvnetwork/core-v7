@@ -674,11 +674,11 @@ func Test_Cov58_Collection_AddFuncErr_Success(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{
+		actual = args.Map{
 			"len": c.Length(),
 			"first": c.First(),
 		}
-		expected := args.Map{
+		expected = args.Map{
 			"len": 1,
 			"first": "ok",
 		}

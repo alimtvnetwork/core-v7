@@ -25,8 +25,8 @@ func Test_S10_01_Hashset_IsEmpty(t *testing.T) {
 		actual := args.Map{"result": empty.IsEmpty()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": hs.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -52,8 +52,8 @@ func Test_S10_03_Hashset_HasItems(t *testing.T) {
 		actual := args.Map{"result": hs.HasItems()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has items", actual)
-		actual := args.Map{"result": corestr.Empty.Hashset().HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Hashset().HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items for empty", actual)
 	})
 }
@@ -373,8 +373,8 @@ func Test_S10_23_Hashset_AddBool(t *testing.T) {
 		actual := args.Map{"result": existed}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not existed on first add", actual)
-		actual := args.Map{"result": existed2}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": existed2}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected existed on second add", actual)
 	})
 }
@@ -470,8 +470,8 @@ func Test_S10_29_Hashset_AddFuncErr_NoError(t *testing.T) {
 		)
 
 		// Assert
-		actual := args.Map{"result": hs.Has("ok")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hs.Has("ok")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has ok", actual)
 	})
 }
@@ -1079,8 +1079,8 @@ func Test_S10_65_Hashset_Has(t *testing.T) {
 		actual := args.Map{"result": hs.Has("a")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.Has("z")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.Has("z")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1130,8 +1130,8 @@ func Test_S10_69_Hashset_HasAnyItem(t *testing.T) {
 		actual := args.Map{"result": hs.HasAnyItem()}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": corestr.Empty.Hashset().HasAnyItem()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.Hashset().HasAnyItem()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 	})
 }
@@ -1147,8 +1147,8 @@ func Test_S10_70_Hashset_IsMissing(t *testing.T) {
 		actual := args.Map{"result": hs.IsMissing("a")}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
-		actual := args.Map{"result": hs.IsMissing("z")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hs.IsMissing("z")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 	})
 }
@@ -1176,8 +1176,8 @@ func Test_S10_72_Hashset_HasAllStrings(t *testing.T) {
 		actual := args.Map{"result": hs.HasAllStrings([]string{"a", "b"})}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.HasAllStrings([]string{"a", "c"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.HasAllStrings([]string{"a", "c"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1191,8 +1191,8 @@ func Test_S10_73_Hashset_HasAll(t *testing.T) {
 		actual := args.Map{"result": hs.HasAll("a", "b")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.HasAll("a", "c")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.HasAll("a", "c")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -1245,8 +1245,8 @@ func Test_S10_77_Hashset_IsAllMissing(t *testing.T) {
 		actual := args.Map{"result": hs.IsAllMissing("x", "y")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.IsAllMissing("a", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.IsAllMissing("a", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false — a exists", actual)
 	})
 }
@@ -1260,8 +1260,8 @@ func Test_S10_78_Hashset_HasAny(t *testing.T) {
 		actual := args.Map{"result": hs.HasAny("x", "a")}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hs.HasAny("x", "y")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs.HasAny("x", "y")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }

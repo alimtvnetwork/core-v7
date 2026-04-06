@@ -712,8 +712,8 @@ func Test_CovS23_42_HashsetsCollection_MarshalUnmarshalJSON(t *testing.T) {
 		err2 := hc2.UnmarshalJSON(data)
 
 		// Assert
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
 	})
 }

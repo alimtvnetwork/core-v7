@@ -31,21 +31,21 @@ func Test_CovHSC_01_IsEmpty_HasItems_Length(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
-		actual := args.Map{"result": hsc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected no items", actual)
-		actual := args.Map{"result": hsc.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hsc.Add(corestr.New.Hashset.Strings([]string{"a"}))
-		actual := args.Map{"result": hsc.IsEmpty()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.IsEmpty()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
-		actual := args.Map{"result": hsc.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hsc.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected items", actual)
-		actual := args.Map{"result": hsc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -94,12 +94,12 @@ func Test_CovHSC_04_List_ListPtr_ListDirectPtr(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(*hsc.ListPtr()) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*hsc.ListPtr()) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		dp := hsc.ListDirectPtr()
-		actual := args.Map{"result": len(*dp) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(*dp) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -117,8 +117,8 @@ func Test_CovHSC_05_StringsList(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hsc = newHSC([]string{"a", "b"}, []string{"c"})
 		sl := hsc.StringsList()
-		actual := args.Map{"result": len(sl) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(sl) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }
@@ -135,11 +135,11 @@ func Test_CovHSC_06_HasAll(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for empty", actual)
 		hsc = newHSC([]string{"a", "b"})
-		actual := args.Map{"result": hsc.HasAll("a", "b")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hsc.HasAll("a", "b")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
-		actual := args.Map{"result": hsc.HasAll("x")}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.HasAll("x")}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -157,16 +157,16 @@ func Test_CovHSC_07_Add_AddNonNil_AddNonEmpty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		hsc.AddNonNil(corestr.New.Hashset.Strings([]string{"a"}))
-		actual := args.Map{"result": hsc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		hsc.AddNonEmpty(corestr.New.Hashset.Empty())
-		actual := args.Map{"result": hsc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		hsc.AddNonEmpty(corestr.New.Hashset.Strings([]string{"b"}))
-		actual := args.Map{"result": hsc.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -185,8 +185,8 @@ func Test_CovHSC_08_Adds(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		hsc.Adds(corestr.New.Hashset.Empty())
-		actual := args.Map{"result": hsc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1, empty skipped", actual)
 	})
 }
@@ -205,8 +205,8 @@ func Test_CovHSC_09_AddHashsetsCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		hsc2 := newHSC([]string{"b"})
 		hsc.AddHashsetsCollection(hsc2)
-		actual := args.Map{"result": hsc.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -227,8 +227,8 @@ func Test_CovHSC_10_ConcatNew(t *testing.T) {
 		// with args
 		hsc2 := newHSC([]string{"b"})
 		c2 := hsc.ConcatNew(hsc2)
-		actual := args.Map{"result": c2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": c2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -246,36 +246,36 @@ func Test_CovHSC_11_IsEqual_IsEqualPtr(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		// same ptr
-		actual := args.Map{"result": hsc1.IsEqualPtr(hsc1)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hsc1.IsEqualPtr(hsc1)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal same ptr", actual)
 		// both empty
 		e1 := corestr.New.HashsetsCollection.Empty()
 		e2 := corestr.New.HashsetsCollection.Empty()
-		actual := args.Map{"result": e1.IsEqualPtr(e2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": e1.IsEqualPtr(e2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal empties", actual)
 		// diff length
 		hsc3 := newHSC([]string{"a"}, []string{"b"})
-		actual := args.Map{"result": hsc1.IsEqualPtr(hsc3)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc1.IsEqualPtr(hsc3)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 		// one nil
-		actual := args.Map{"result": hsc1.IsEqualPtr(nil)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc1.IsEqualPtr(nil)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 		// diff content
 		hsc4 := newHSC([]string{"x"})
-		actual := args.Map{"result": hsc1.IsEqualPtr(hsc4)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsc1.IsEqualPtr(hsc4)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 		// IsEqual value
-		actual := args.Map{"result": hsc1.IsEqual(*hsc2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": hsc1.IsEqual(*hsc2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 		// one empty, one not
-		actual := args.Map{"result": e1.IsEqualPtr(hsc1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": e1.IsEqualPtr(hsc1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
@@ -306,13 +306,13 @@ func Test_CovHSC_13_JsonModel_MarshalUnmarshal(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		hsc2 := corestr.New.HashsetsCollection.Empty()
 		err2 := hsc2.UnmarshalJSON(data)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		// invalid
 		err3 := hsc2.UnmarshalJSON([]byte("bad"))
-		actual := args.Map{"result": err3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected error", actual)
 	})
 }
@@ -387,8 +387,8 @@ func Test_CovHSC_17_Serialize_Deserialize(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 		target := corestr.New.HashsetsCollection.Empty()
 		err2 := hsc.Deserialize(target)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	})
 }
@@ -424,34 +424,34 @@ func Test_CovHSC_19_Creators(t *testing.T) {
 		// UsingHashsets
 		hs := corestr.Hashset{}
 		u := corestr.New.HashsetsCollection.UsingHashsets(hs)
-		actual := args.Map{"result": u.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// UsingHashsets empty
 		u2 := corestr.New.HashsetsCollection.UsingHashsets()
-		actual := args.Map{"result": u2.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u2.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// UsingHashsetsPointers
 		hp := corestr.New.Hashset.Strings([]string{"a"})
 		u3 := corestr.New.HashsetsCollection.UsingHashsetsPointers(hp)
-		actual := args.Map{"result": u3.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u3.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// UsingHashsetsPointers empty
 		u4 := corestr.New.HashsetsCollection.UsingHashsetsPointers()
-		actual := args.Map{"result": u4.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": u4.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// LenCap
 		lc := corestr.New.HashsetsCollection.LenCap(0, 5)
-		actual := args.Map{"result": lc.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// Cap
 		cp := corestr.New.HashsetsCollection.Cap(5)
-		actual := args.Map{"result": cp.Length() != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": cp.Length() != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

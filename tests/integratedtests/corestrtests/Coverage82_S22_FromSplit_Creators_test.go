@@ -20,8 +20,8 @@ func Test_S22_001_LeftRightFromSplit_basic(t *testing.T) {
 		actual := args.Map{"result": lr.Left != "key"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit Left returns key", actual)
-		actual := args.Map{"result": lr.Right != "value"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lr.Right != "value"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit Right returns value", actual)
 	})
 }
@@ -47,8 +47,8 @@ func Test_S22_003_LeftRightFromSplitTrimmed(t *testing.T) {
 		actual := args.Map{"result": lr.Left != "key"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitTrimmed Left returns trimmed key", actual)
-		actual := args.Map{"result": lr.Right != "value"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lr.Right != "value"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitTrimmed Right returns trimmed value", actual)
 	})
 }
@@ -62,8 +62,8 @@ func Test_S22_004_LeftRightFromSplitFull_multi_sep(t *testing.T) {
 		actual := args.Map{"result": lr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFull Left returns a", actual)
-		actual := args.Map{"result": lr.Right != "b:c:d"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lr.Right != "b:c:d"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFull Right returns b:c:d", actual)
 	})
 }
@@ -77,8 +77,8 @@ func Test_S22_005_LeftRightFromSplitFullTrimmed(t *testing.T) {
 		actual := args.Map{"result": lr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFullTrimmed Left returns trimmed a", actual)
-		actual := args.Map{"result": lr.Right != "b : c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lr.Right != "b : c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFullTrimmed Right returns trimmed remainder", actual)
 	})
 }
@@ -108,11 +108,11 @@ func Test_S22_010_LeftMiddleRightFromSplit_basic(t *testing.T) {
 		actual := args.Map{"result": lmr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit Left returns a", actual)
-		actual := args.Map{"result": lmr.Middle != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Middle != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit Middle returns b", actual)
-		actual := args.Map{"result": lmr.Right != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Right != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit Right returns c", actual)
 	})
 }
@@ -138,11 +138,11 @@ func Test_S22_012_LeftMiddleRightFromSplitTrimmed(t *testing.T) {
 		actual := args.Map{"result": lmr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitTrimmed Left returns trimmed a", actual)
-		actual := args.Map{"result": lmr.Middle != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Middle != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitTrimmed Middle returns trimmed b", actual)
-		actual := args.Map{"result": lmr.Right != "c"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Right != "c"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitTrimmed Right returns trimmed c", actual)
 	})
 }
@@ -156,11 +156,11 @@ func Test_S22_013_LeftMiddleRightFromSplitN(t *testing.T) {
 		actual := args.Map{"result": lmr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitN Left returns a", actual)
-		actual := args.Map{"result": lmr.Middle != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Middle != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitN Middle returns b", actual)
-		actual := args.Map{"result": lmr.Right != "c:d:e"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Right != "c:d:e"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitN Right returns c:d:e", actual)
 	})
 }
@@ -174,8 +174,8 @@ func Test_S22_014_LeftMiddleRightFromSplitNTrimmed(t *testing.T) {
 		actual := args.Map{"result": lmr.Left != "a"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitNTrimmed Left returns trimmed a", actual)
-		actual := args.Map{"result": lmr.Middle != "b"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lmr.Middle != "b"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitNTrimmed Middle returns trimmed b", actual)
 	})
 }
@@ -1265,8 +1265,8 @@ func Test_S22_130_NewSSO_Init(t *testing.T) {
 		actual := args.Map{"result": sso.Value() != "hello"}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.Init returns hello", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.Init returns initialized", actual)
 	})
 }
@@ -1280,8 +1280,8 @@ func Test_S22_131_NewSSO_InitPtr(t *testing.T) {
 		actual := args.Map{"result": sso == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.InitPtr returns non-nil", actual)
-		actual := args.Map{"result": sso.Value() != "world"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": sso.Value() != "world"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.InitPtr returns world", actual)
 	})
 }
@@ -1343,8 +1343,8 @@ func Test_S22_136_NewSSO_Any_no_field_names(t *testing.T) {
 		actual := args.Map{"result": sso.Value() == ""}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.Any returns non-empty -- int input", actual)
-		actual := args.Map{"result": sso.IsInitialized()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": sso.IsInitialized()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "New.SimpleStringOnce.Any returns initialized -- isInit true", actual)
 	})
 }

@@ -96,8 +96,8 @@ func Test_S11_71_SimpleSlice_IsEqualLines(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
-		actual := args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ss.IsEqualLines([]string{"a", "c"})}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
@@ -310,8 +310,8 @@ func Test_S11_86_SimpleSlice_String(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().String() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().String() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -403,8 +403,8 @@ func Test_S11_92_SimpleSlice_CsvStrings(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().CsvStrings() == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().CsvStrings() == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
@@ -420,8 +420,8 @@ func Test_S11_93_SimpleSlice_JoinCsvString(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinCsvString(",") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinCsvString(",") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -438,8 +438,8 @@ func Test_S11_94_SimpleSlice_JoinWith(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected prefix |", actual)
-		actual := args.Map{"result": corestr.Empty.SimpleSlice().JoinWith("|") != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": corestr.Empty.SimpleSlice().JoinWith("|") != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -883,8 +883,8 @@ func Test_S11_125_SimpleSlice_IsUnorderedEqualRaw(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal with clone", actual)
 		ss2 := corestr.New.SimpleSlice.Strings([]string{"b", "a"})
-		actual := args.Map{"result": ss2.IsUnorderedEqualRaw(false, "a", "b")}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": ss2.IsUnorderedEqualRaw(false, "a", "b")}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal without clone", actual)
 	})
 }
@@ -1345,8 +1345,8 @@ func Test_S11_156_SimpleSlice_SafeStrings(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
-		actual := args.Map{"result": len(corestr.Empty.SimpleSlice().SafeStrings()) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(corestr.Empty.SimpleSlice().SafeStrings()) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

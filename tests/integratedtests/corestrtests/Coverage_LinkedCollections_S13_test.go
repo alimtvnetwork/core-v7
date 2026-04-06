@@ -24,8 +24,8 @@ func Test_S13_01_LinkedCollections_HeadTailLength(t *testing.T) {
 		actual := args.Map{"result": lc.Head() == nil || lc.Tail() == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-		actual := args.Map{"result": lc.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -101,8 +101,8 @@ func Test_S13_06_LinkedCollections_IsEmpty_HasItems(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
-		actual := args.Map{"result": lc.IsEmpty() || !lc.HasItems()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.IsEmpty() || !lc.HasItems()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 	})
 }
@@ -1380,11 +1380,11 @@ func Test_S13_87_LinkedCollections_SafeIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-		actual := args.Map{"result": lc.SafeIndexAt(-1) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.SafeIndexAt(-1) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
-		actual := args.Map{"result": lc.SafeIndexAt(10) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.SafeIndexAt(10) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }
@@ -1401,8 +1401,8 @@ func Test_S13_88_LinkedCollections_SafePointerIndexAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-		actual := args.Map{"result": lc.SafePointerIndexAt(10) != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lc.SafePointerIndexAt(10) != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	})
 }

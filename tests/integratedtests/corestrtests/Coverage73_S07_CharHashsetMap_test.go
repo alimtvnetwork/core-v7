@@ -705,17 +705,17 @@ func Test_CovS07_LockVariants(t *testing.T) {
 		actual := args.Map{"result": lenLock <= 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LengthLock should be > 0", actual)
-		actual := args.Map{"result": isEmptyLock}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": isEmptyLock}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "IsEmptyLock should be false", actual)
-		actual := args.Map{"result": allSumLock <= 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": allSumLock <= 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AllLengthsSumLock should be > 0", actual)
-		actual := args.Map{"result": lenOfLock <= 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": lenOfLock <= 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "LengthOfLock should be > 0", actual)
-		actual := args.Map{"result": isEqLock}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": isEqLock}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "IsEqualsLock(self) should be true", actual)
 	})
 }
@@ -736,8 +736,8 @@ func Test_CovS07_HasWithHashsetLock(t *testing.T) {
 		actual := args.Map{"result": found}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasWithHashsetLock should find 'alpha'", actual)
-		actual := args.Map{"result": hs == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HasWithHashsetLock should return non-nil hashset", actual)
 	})
 }
@@ -802,20 +802,20 @@ func Test_CovS07_HashsetByChar(t *testing.T) {
 		actual := args.Map{"result": hs1 == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByChar('a') should be non-nil", actual)
-		actual := args.Map{"result": hs2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('a') should be non-nil", actual)
-		actual := args.Map{"result": hs3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstChar should be non-nil", actual)
-		actual := args.Map{"result": hs4 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs4 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstCharLock should be non-nil", actual)
-		actual := args.Map{"result": hs5 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs5 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "GetHashsetByChar('a') should be non-nil", actual)
-		actual := args.Map{"result": hsMissing == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsMissing == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('z') should return empty hashset, not nil", actual)
 	})
 }
@@ -837,8 +837,8 @@ func Test_CovS07_HashsetsCollByCharsAndStr(t *testing.T) {
 		actual := args.Map{"result": hsByChars == nil || hsByChars.Length() == 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByChars should return non-empty", actual)
-		actual := args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByStringsFirstChar should return non-empty", actual)
 	})
 }
@@ -904,8 +904,8 @@ func Test_CovS07_MarshalUnmarshal(t *testing.T) {
 		actual := args.Map{"result": err != nil || len(bytes) == 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON failed:", actual)
-		actual := args.Map{"result": err2 != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": err2 != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON failed:", actual)
 	})
 }
@@ -988,8 +988,8 @@ func Test_CovS07_AddSameCharsCollLock(t *testing.T) {
 		actual := args.Map{"result": result == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddSameCharsCollectionLock should return non-nil", actual)
-		actual := args.Map{"result": m.AllLengthsSum() < 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": m.AllLengthsSum() < 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
@@ -1030,8 +1030,8 @@ func Test_CovS07_AddSameCharsCollLock_NewChar_WithData(t *testing.T) {
 		actual := args.Map{"result": result == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should return non-nil hashset", actual)
-		actual := args.Map{"result": m.AllLengthsSum() < 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": m.AllLengthsSum() < 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
@@ -1092,8 +1092,8 @@ func Test_CovS07_AddHashsetLock_NewChar_WithData(t *testing.T) {
 		actual := args.Map{"result": result == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
-		actual := args.Map{"result": m.AllLengthsSum() < 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": m.AllLengthsSum() < 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
@@ -1115,8 +1115,8 @@ func Test_CovS07_GetHashsetLock(t *testing.T) {
 		actual := args.Map{"result": hs == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "GetHashsetLock should return non-nil for existing char", actual)
-		actual := args.Map{"result": hsMissing != nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsMissing != nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "GetHashsetLock should return nil for missing char with isAddNew=false", actual)
 	})
 }

@@ -605,8 +605,8 @@ func Test_SrcC06_Hashmap_EmptyString_Verification(t *testing.T) {
 		actual := args.Map{"result": h.String() == ""}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty (NoElements)", actual)
-		actual := args.Map{"result": h.StringLock() == ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": h.StringLock() == ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	})
 }

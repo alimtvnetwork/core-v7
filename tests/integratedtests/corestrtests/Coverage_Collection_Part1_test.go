@@ -56,8 +56,8 @@ func Test_CovP1_03_HasAnyItem(t *testing.T) {
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true", actual)
 		empty := corestr.Empty.Collection()
-		actual := args.Map{"result": empty.HasAnyItem()}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.HasAnyItem()}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false", actual)
 	})
 }
@@ -87,14 +87,14 @@ func Test_CovP1_05_HasIndex(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for index 0", actual)
-		actual := args.Map{"result": col.HasIndex(1)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": col.HasIndex(1)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected true for index 1", actual)
-		actual := args.Map{"result": col.HasIndex(2)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.HasIndex(2)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for index 2", actual)
-		actual := args.Map{"result": col.HasIndex(-1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.HasIndex(-1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 	})
 }
@@ -153,17 +153,17 @@ func Test_CovP1_09_RemoveAt(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected success", actual)
-		actual := args.Map{"result": col.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// out of range
 		ok = col.RemoveAt(-1)
-		actual := args.Map{"result": ok}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for -1", actual)
 		ok = col.RemoveAt(100)
-		actual := args.Map{"result": ok}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": ok}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected false for 100", actual)
 	})
 }
@@ -242,26 +242,26 @@ func Test_CovP1_14_IsCollectionPrecheckEqual_AllPaths(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected equal", actual)
 
 		// same pointer
-		actual := args.Map{"result": a.IsEquals(a)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": a.IsEquals(a)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected equal to self", actual)
 
 		// both empty
 		e1 := corestr.Empty.Collection()
 		e2 := corestr.Empty.Collection()
-		actual := args.Map{"result": e1.IsEquals(e2)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": e1.IsEquals(e2)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty equals empty", actual)
 
 		// one empty
-		actual := args.Map{"result": a.IsEquals(e1)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEquals(e1)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 		// diff length
 		c := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"result": a.IsEquals(c)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEquals(c)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal for diff length", actual)
 	})
 }
@@ -278,20 +278,20 @@ func Test_CovP1_15_IsEqualsWithSensitive_CaseInsensitive(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected case-insensitive equal", actual)
-		actual := args.Map{"result": a.IsEqualsWithSensitive(true, b) != false}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(true, b) != false}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected case-sensitive not equal", actual)
 
 		// mismatch fold
 		c := corestr.New.Collection.Strings([]string{"hello", "OTHER"})
-		actual := args.Map{"result": a.IsEqualsWithSensitive(false, c)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(false, c)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 
 		// mismatch sensitive
 		d := corestr.New.Collection.Strings([]string{"Hello", "other"})
-		actual := args.Map{"result": a.IsEqualsWithSensitive(true, d)}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.IsEqualsWithSensitive(true, d)}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 	})
 }
@@ -308,8 +308,8 @@ func Test_CovP1_16_IsEmptyLock(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 		empty := corestr.Empty.Collection()
-		actual := args.Map{"result": empty.IsEmptyLock()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": empty.IsEmptyLock()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	})
 }
@@ -325,8 +325,8 @@ func Test_CovP1_17_IsEmpty_HasItems(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected not empty", actual)
-		actual := args.Map{"result": col.HasItems()}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": col.HasItems()}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected has items", actual)
 	})
 }
@@ -360,8 +360,8 @@ func Test_CovP1_19_AddNonEmpty(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for empty string", actual)
 		col.AddNonEmpty("a")
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -379,8 +379,8 @@ func Test_CovP1_20_AddNonEmptyWhitespace(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for whitespace", actual)
 		col.AddNonEmptyWhitespace("a")
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -398,8 +398,8 @@ func Test_CovP1_21_AddError(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0 for nil error", actual)
 		col.AddError(errors.New("test"))
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -431,8 +431,8 @@ func Test_CovP1_23_AsError(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 		col := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"result": col.AsError(",") == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.AsError(",") == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	})
 }
@@ -450,8 +450,8 @@ func Test_CovP1_24_AddIf(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		col.AddIf(true, "keep")
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }
@@ -486,8 +486,8 @@ func Test_CovP1_26_ConcatNew(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// with addingStrings
 		newCol2 := col.ConcatNew(0, "c", "d")
-		actual := args.Map{"result": newCol2.Length() != 4}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": newCol2.Length() != 4}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	})
 }
@@ -520,8 +520,8 @@ func Test_CovP1_29_AddIfMany(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		col.AddIfMany(true, "a", "b")
-		actual := args.Map{"result": col.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -554,8 +554,8 @@ func Test_CovP1_31_AddFuncErr(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// error
 		errCalled := false
@@ -563,11 +563,11 @@ func Test_CovP1_31_AddFuncErr(t *testing.T) {
 			func() (string, error) { return "", errors.New("fail") },
 			func(err error) { errCalled = true },
 		)
-		actual := args.Map{"result": errCalled}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": errCalled}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected error handler called", actual)
-		actual := args.Map{"result": col.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected still 1", actual)
 	})
 }
@@ -632,8 +632,8 @@ func Test_CovP1_35_AddCollection(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// empty collection
 		a.AddCollection(corestr.Empty.Collection())
-		actual := args.Map{"result": a.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": a.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected still 3", actual)
 	})
 }
@@ -824,8 +824,8 @@ func Test_CovP1_44_SafeIndexAtUsingLength(t *testing.T) {
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
-		actual := args.Map{"result": col.SafeIndexAtUsingLength("def", 2, 5) != "def"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.SafeIndexAtUsingLength("def", 2, 5) != "def"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected default", actual)
 	})
 }
@@ -859,8 +859,8 @@ func Test_CovP1_46_Single(t *testing.T) {
 		defer func() { recover() }()
 		col2 := corestr.New.Collection.Strings([]string{"a", "b"})
 		col2.Single()
-		actual := args.Map{"result": false}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": false}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "expected panic", actual)
 	})
 }
@@ -891,8 +891,8 @@ func Test_CovP1_48_LastOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected b", actual)
 		empty := corestr.Empty.Collection()
-		actual := args.Map{"result": empty.LastOrDefault() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.LastOrDefault() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 	})
 }
@@ -909,8 +909,8 @@ func Test_CovP1_49_FirstOrDefault(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected a", actual)
 		empty := corestr.Empty.Collection()
-		actual := args.Map{"result": empty.FirstOrDefault() != ""}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": empty.FirstOrDefault() != ""}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected empty string", actual)
 	})
 }

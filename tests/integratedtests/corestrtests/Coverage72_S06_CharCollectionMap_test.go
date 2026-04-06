@@ -826,8 +826,8 @@ func Test_CovS06_CharCollMap_PrintSkip(t *testing.T) {
 
 		// Assert — no panic means success
 		expected := args.Map{"skipped": true}
-		actual := args.Map{"result": actual["skipped"] != expected["skipped"]}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": actual["skipped"] != expected["skipped"]}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Print skip test failed", actual)
 	})
 }
@@ -884,8 +884,8 @@ func Test_CovS06_CharCollMap_MarshalUnmarshal(t *testing.T) {
 			"marshalOk":   true,
 			"unmarshalOk": true,
 		}
-		actual := args.Map{"result": actual["marshalOk"] != expected["marshalOk"] || actual["unmarshalOk"] != expected["unmarshalOk"]}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": actual["marshalOk"] != expected["marshalOk"] || actual["unmarshalOk"] != expected["unmarshalOk"]}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON/UnmarshalJSON failed:", actual)
 	})
 }
@@ -1001,8 +1001,8 @@ func Test_CovS06_CharCollMap_LockVariants(t *testing.T) {
 			"isEqCSLock":   true,
 		}
 		for k, v := range expected {
-			actual := args.Map{"result": actual[k] != v}
-			expected := args.Map{"result": false}
+			actual = args.Map{"result": actual[k] != v}
+			expected = args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "LockVariants: got, want", actual)
 		}
 	})
@@ -1024,8 +1024,8 @@ func Test_CovS06_CharCollMap_HasWithCollectionLock(t *testing.T) {
 		actual := args.Map{"result": found}
 		expected := args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock should find 'alpha'", actual)
-		actual := args.Map{"result": coll == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": coll == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock should return non-nil collection", actual)
 	})
 }
@@ -1049,11 +1049,11 @@ func Test_CovS06_CharCollMap_HashsetVariants(t *testing.T) {
 		actual := args.Map{"result": hs1 == nil || hs1.IsEmpty()}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByCharLock('a') should return non-empty", actual)
-		actual := args.Map{"result": hs2 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs2 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstChar should return non-nil", actual)
-		actual := args.Map{"result": hs3 == nil}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hs3 == nil}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetByStringFirstCharLock should return non-nil", actual)
 		if hs4 == nil || !hs4.IsEmpty() {
 			// missing char returns Empty hashset
@@ -1079,8 +1079,8 @@ func Test_CovS06_CharCollMap_HashsetsCollByCharsAndStr(t *testing.T) {
 		actual := args.Map{"result": hsByChars == nil || hsByChars.Length() == 0}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByChars should return non-empty", actual)
-		actual := args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": hsByStr == nil || hsByStr.Length() == 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollectionByStringFirstChar should return non-empty", actual)
 	})
 }
@@ -1122,8 +1122,8 @@ func Test_CovS06_CharCollMap_AddSameCharsCollLock(t *testing.T) {
 		actual := args.Map{"result": result == nil}
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "AddSameCharsCollectionLock should return non-nil", actual)
-		actual := args.Map{"result": m.AllLengthsSum() < 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": m.AllLengthsSum() < 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "Expected at least 3 items", actual)
 	})
 }
