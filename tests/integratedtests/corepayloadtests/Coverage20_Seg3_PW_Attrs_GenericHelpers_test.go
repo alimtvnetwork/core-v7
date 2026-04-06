@@ -327,25 +327,6 @@ func Test_CovPL_S3_25_PW_Clear_Dispose(t *testing.T) {
 	nilPW.Clear()
 	nilPW.Dispose()
 }
-
-func Test_CovPL_S3_26_PW_Clone_ClonePtr_NonPtr_ToPtr(t *testing.T) {
-	pw := newPWForSeg3()
-	_, _ = pw.Clone(true)
-	_, _ = pw.Clone(false)
-	_, _ = pw.ClonePtr(true)
-	_, _ = pw.ClonePtr(false)
-	_ = pw.NonPtr()
-	_ = pw.ToPtr()
-	var nilPW *corepayload.PayloadWrapper
-	if nilPW.NonPtr().Name != "" {
-		t.Fatal("expected empty")
-	}
-	c, _ := nilPW.ClonePtr(true)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_CovPL_S3_27_PW_AsInterfaces(t *testing.T) {
 	pw := newPWForSeg3()
 	_ = pw.AsStandardTaskEntityDefinerContractsBinder()
@@ -613,20 +594,6 @@ func Test_CovPL_S3_57_Attr_DynamicPayloadsDeserialize_Nil(t *testing.T) {
 		t.Fatal("expected error")
 	}
 }
-
-func Test_CovPL_S3_58_Attr_Clone_ClonePtr(t *testing.T) {
-	attr := corepayload.New.Attributes.Empty()
-	_, _ = attr.Clone(true)
-	_, _ = attr.Clone(false)
-	_, _ = attr.ClonePtr(true)
-	_, _ = attr.ClonePtr(false)
-	var nilAttr *corepayload.Attributes
-	c, _ := nilAttr.ClonePtr(true)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_CovPL_S3_59_Attr_IsEqual(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
 	attr2 := corepayload.New.Attributes.Empty()

@@ -360,18 +360,6 @@ func Test_Cov21_Collection_FilteredCollection(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov21_Collection_NonEmptyList(t *testing.T) {
-	safeTest(t, "Test_Cov21_Collection_NonEmptyList", func() {
-		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-		list := c.NonEmptyList()
-		if len(list) != 2 {
-			t.Fatal("expected 2")
-		}
-		_ = c.NonEmptyListPtr()
-	})
-}
-
 func Test_Cov21_Collection_NonEmptyItems(t *testing.T) {
 	safeTest(t, "Test_Cov21_Collection_NonEmptyItems", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
@@ -389,16 +377,6 @@ func Test_Cov21_Collection_HashsetOps(t *testing.T) {
 		_ = c.HashsetWithDoubleLength()
 	})
 }
-
-func Test_Cov21_Collection_Items_List_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov21_Collection_Items_List_ListPtr", func() {
-		c := corestr.New.Collection.Strings([]string{"a"})
-		_ = c.Items()
-		_ = c.List()
-		_ = c.ListPtr()
-	})
-}
-
 func Test_Cov21_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_Cov21_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})

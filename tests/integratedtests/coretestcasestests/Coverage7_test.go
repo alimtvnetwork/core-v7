@@ -234,58 +234,6 @@ func Test_Cov7_CaseV1_SetActual(t *testing.T) {
 	expected := args.Map{"called": true}
 	expected.ShouldBeEqual(t, 0, "SetActual returns correct value -- with args", actual)
 }
-
-// ── CaseNilSafe with Args ──
-
-func Test_Cov7_CaseNilSafe_WithArgs(t *testing.T) {
-	tc := coretestcases.CaseNilSafe{
-		Title: "ClonePtr with args",
-		Func:  (*coretests.DraftType).ClonePtr,
-		Args:  []any{},
-		Expected: results.ResultAny{
-			Panicked: false,
-		},
-		CompareFields: []string{"panicked"},
-	}
-	tc.ShouldBeSafe(t, 0)
-}
-
-// ── CaseNilSafe.InvokeNil with a method that returns something ──
-
-func Test_Cov7_CaseNilSafe_InvokeNil_ReturnValue(t *testing.T) {
-	tc := coretestcases.CaseNilSafe{
-		Title: "ClonePtr nil returns nil",
-		Func:  (*coretests.DraftType).ClonePtr,
-		Expected: results.ResultAny{
-			Panicked: false,
-		},
-		CompareFields: []string{"panicked"},
-	}
-	tc.ShouldBeSafe(t, 0)
-}
-
-// ── CaseNilSafe.ShouldBeSafeFirst ──
-
-func Test_Cov7_CaseNilSafe_ShouldBeSafeFirst(t *testing.T) {
-	tc := coretestcases.CaseNilSafe{
-		Title: "safe first",
-		Func:  (*coretests.DraftType).ClonePtr,
-		Expected: results.ResultAny{
-			Panicked: false,
-		},
-		CompareFields: []string{"panicked"},
-	}
-	tc.ShouldBeSafeFirst(t)
-}
-
-// ── GenericGherkins.ShouldBeEqual with When fallback ──
-
-func Test_Cov7_GenericGherkins_ShouldBeEqual_WhenFallback(t *testing.T) {
-	tc := &coretestcases.GenericGherkins[string, string]{
-		When:          "when-based-title",
-		ExpectedLines: []string{"hello"},
-	}
-	tc.ShouldBeEqual(t, 0, []string{"hello"}, []string{"hello"})
 }
 
 // ── GenericGherkins.ShouldBeEqualMap with When fallback ──

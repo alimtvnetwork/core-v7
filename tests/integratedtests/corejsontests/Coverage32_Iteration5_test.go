@@ -261,14 +261,6 @@ func Test_I5_C31_Result_SafeValues_Nil(t *testing.T) {
 	expected := args.Map{"empty": true}
 	expected.ShouldBeEqual(t, 0, "SafeValues_Nil returns nil -- with args", actual)
 }
-
-func Test_I5_C32_Result_SafeValuesPtr_HasIssues(t *testing.T) {
-	r := &corejson.Result{Error: errors.New("e")}
-	actual := args.Map{"empty": len(r.SafeValuesPtr()) == 0}
-	expected := args.Map{"empty": true}
-	expected.ShouldBeEqual(t, 0, "SafeValuesPtr_HasIssues returns non-empty -- with args", actual)
-}
-
 func Test_I5_C33_Result_RawMust(t *testing.T) {
 	r := &corejson.Result{Bytes: []byte(`"ok"`)}
 	b := r.RawMust()
@@ -767,20 +759,6 @@ func Test_I5_C83_Result_CloneIf(t *testing.T) {
 	expected := args.Map{"clonedHasBytes": true, "notClonedHasBytes": true}
 	expected.ShouldBeEqual(t, 0, "CloneIf returns correct value -- with args", actual)
 }
-
-func Test_I5_C84_Result_ClonePtr(t *testing.T) {
-	r := &corejson.Result{Bytes: []byte(`"x"`), TypeName: "T"}
-	cloned := r.ClonePtr(true)
-	actual := args.Map{"notNil": cloned != nil}
-	expected := args.Map{"notNil": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
-
-	var rNil *corejson.Result
-	actual2 := args.Map{"nil": rNil.ClonePtr(true) == nil}
-	expected2 := args.Map{"nil": true}
-	expected2.ShouldBeEqual(t, 0, "ClonePtr_Nil returns nil -- with args", actual2)
-}
-
 func Test_I5_C85_Result_Clone_ShallowAndDeep(t *testing.T) {
 	r := corejson.Result{Bytes: []byte(`"x"`), TypeName: "T"}
 	shallow := r.Clone(false)

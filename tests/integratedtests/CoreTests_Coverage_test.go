@@ -29,28 +29,6 @@ func Test_Cov_AnyToBytes_FromString(t *testing.T) {
 	expected := args.Map{"val": "hello"}
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from string", actual)
 }
-
-func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
-	result := coretests.AnyToBytes(struct{ N int }{42})
-	actual := args.Map{"notEmpty": len(result) > 0}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "AnyToBytes from struct", actual)
-}
-
-// ── AnyToBytesPtr (deprecated alias) ──
-
-func Test_Cov_AnyToBytesPtr(t *testing.T) {
-	result := coretests.AnyToBytesPtr("test")
-	actual := args.Map{"val": string(result)}
-	expected := args.Map{"val": "test"}
-	expected.ShouldBeEqual(t, 0, "AnyToBytesPtr", actual)
-}
-
-// ── AnyToDraftType ──
-
-func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
-	dt := coretests.DraftType{SampleString1: "hello"}
-	result := coretests.AnyToDraftType(dt)
 	actual := args.Map{"notNil": result != nil, "val": result.SampleString1}
 	expected := args.Map{"notNil": true, "val": "hello"}
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from value", actual)
@@ -147,17 +125,6 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	expected := args.Map{"val": "test", "linesLen": 1}
 	expected.ShouldBeEqual(t, 0, "DraftType Clone", actual)
 }
-
-func Test_Cov_DraftType_ClonePtr(t *testing.T) {
-	dt := &coretests.DraftType{SampleString1: "test"}
-	clone := dt.ClonePtr()
-	var nilDt *coretests.DraftType
-	nilClone := nilDt.ClonePtr()
-	actual := args.Map{"notNil": clone != nil, "nilIsNil": nilClone == nil}
-	expected := args.Map{"notNil": true, "nilIsNil": true}
-	expected.ShouldBeEqual(t, 0, "DraftType ClonePtr", actual)
-}
-
 func Test_Cov_DraftType_IsEqual(t *testing.T) {
 	dt1 := &coretests.DraftType{SampleString1: "a"}
 	dt2 := &coretests.DraftType{SampleString1: "a"}

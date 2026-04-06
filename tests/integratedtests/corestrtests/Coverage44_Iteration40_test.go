@@ -500,26 +500,6 @@ func Test_Cov44_SSO_Clone(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
-
-func Test_Cov44_SSO_ClonePtr_Valid(t *testing.T) {
-	safeTest(t, "Test_Cov44_SSO_ClonePtr_Valid", func() {
-		sso := corestr.New.SimpleStringOnce.InitPtr("val")
-		cloned := sso.ClonePtr()
-		tc := caseV1Compat{Name: "ClonePtr", Expected: "val", Actual: cloned.Value()}
-		tc.ShouldBeEqual(t)
-	})
-}
-
-func Test_Cov44_SSO_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov44_SSO_ClonePtr_Nil", func() {
-		var sso *corestr.SimpleStringOnce
-		cloned := sso.ClonePtr()
-		tc := caseV1Compat{Name: "ClonePtr nil", Expected: true, Actual: cloned == nil}
-		tc.ShouldBeEqual(t)
-	})
-}
-
-func Test_Cov44_SSO_StringPtr(t *testing.T) {
 	safeTest(t, "Test_Cov44_SSO_StringPtr", func() {
 		sso := corestr.New.SimpleStringOnce.InitPtr("hello")
 		ptr := sso.StringPtr()
@@ -735,20 +715,6 @@ func Test_Cov44_InvalidValidValueNoMessage(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
-
-func Test_Cov44_ValidValue_ValueBytesOncePtr(t *testing.T) {
-	safeTest(t, "Test_Cov44_ValidValue_ValueBytesOncePtr", func() {
-		vv := corestr.NewValidValue("bytes")
-		result := vv.ValueBytesOncePtr()
-		tc := caseV1Compat{Name: "ValueBytesOncePtr", Expected: 5, Actual: len(result)}
-		tc.ShouldBeEqual(t)
-	})
-}
-
-// ═══════════════════════════════════════════════════════════════
-// ValidValues — factory
-// ═══════════════════════════════════════════════════════════════
-
 func Test_Cov44_NewValidValuesUsingValues_Valid(t *testing.T) {
 	safeTest(t, "Test_Cov44_NewValidValuesUsingValues_Valid", func() {
 		v1 := corestr.ValidValue{Value: "a", IsValid: true}

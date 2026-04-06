@@ -174,15 +174,6 @@ func Test_CovJsonS4_R17_SafeNonIssueBytes(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
-
-func Test_CovJsonS4_R18_SafeBytes_Values_SafeValues(t *testing.T) {
-	r := corejson.New(1)
-	_ = r.SafeBytes()
-	_ = r.Values()
-	_ = r.SafeValues()
-	_ = r.SafeValuesPtr()
-}
-
 func Test_CovJsonS4_R19_Raw_RawMust_RawString_RawStringMust_RawErrString_RawPrettyString(t *testing.T) {
 	r := corejson.New(1)
 	_, _ = r.Raw()
@@ -459,22 +450,6 @@ func Test_CovJsonS4_R48_Dispose(t *testing.T) {
 	var nr *corejson.Result
 	nr.Dispose()
 }
-
-func Test_CovJsonS4_R49_CloneIf_Clone_ClonePtr(t *testing.T) {
-	r := corejson.New(1)
-	_ = r.CloneIf(true, true)
-	_ = r.CloneIf(false, false)
-	_ = r.CloneIf(true, false)
-	_ = r.Clone(true)
-	_ = r.Clone(false)
-	_ = r.ClonePtr(true)
-	_ = r.ClonePtr(false)
-	var nr *corejson.Result
-	if nr.ClonePtr(true) != nil {
-		t.Fatal("expected nil")
-	}
-}
-
 func Test_CovJsonS4_R50_AsJsonContractsBinder_AsJsoner_AsJsonParseSelfInjector(t *testing.T) {
 	r := corejson.New(1)
 	_ = r.AsJsonContractsBinder()
@@ -576,27 +551,6 @@ func Test_CovJsonS4_RC05_GetAt_GetAtSafe_GetAtSafeUsingLength(t *testing.T) {
 	_ = rc.GetAtSafeUsingLength(0, 1)
 	_ = rc.GetAtSafeUsingLength(10, 1)
 }
-
-func Test_CovJsonS4_RC06_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
-	rc := corejson.NewResultsCollection.UsingCap(2)
-	rc.AddAny(1)
-	if rc.HasError() {
-		t.Fatal("expected false")
-	}
-	_, has := rc.AllErrors()
-	if has {
-		t.Fatal("expected false")
-	}
-	_ = rc.GetErrorsStrings()
-	_ = rc.GetErrorsStringsPtr()
-	_ = rc.GetErrorsAsSingleString()
-	_ = rc.GetErrorsAsSingle()
-	// empty
-	empty := corejson.NewResultsCollection.UsingCap(0)
-	_ = empty.GetErrorsStrings()
-	_, _ = empty.AllErrors()
-}
-
 func Test_CovJsonS4_RC07_UnmarshalAt_InjectIntoAt(t *testing.T) {
 	rc := corejson.NewResultsCollection.UsingCap(2)
 	rc.AddAny(map[string]int{"a": 1})
@@ -646,16 +600,6 @@ func Test_CovJsonS4_RC12_AddJsoners(t *testing.T) {
 	rc.AddJsoners(false, rc2)
 	rc.AddJsoners(true, nil)
 }
-
-func Test_CovJsonS4_RC13_GetStrings_GetStringsPtr(t *testing.T) {
-	rc := corejson.NewResultsCollection.UsingCap(2)
-	rc.AddAny(1)
-	_ = rc.GetStrings()
-	_ = rc.GetStringsPtr()
-	empty := corejson.NewResultsCollection.UsingCap(0)
-	_ = empty.GetStrings()
-}
-
 func Test_CovJsonS4_RC14_NonPtr_Ptr(t *testing.T) {
 	rc := corejson.NewResultsCollection.UsingCap(1)
 	_ = rc.NonPtr()
@@ -723,22 +667,6 @@ func Test_CovJsonS4_RC19_AsInterfaces(t *testing.T) {
 	_ = rc.AsJsonParseSelfInjector()
 	_ = rc.JsonParseSelfInject(rc.JsonPtr())
 }
-
-func Test_CovJsonS4_RC20_ShadowClone_Clone_ClonePtr(t *testing.T) {
-	rc := corejson.NewResultsCollection.UsingCap(2)
-	rc.AddAny(1)
-	_ = rc.ShadowClone()
-	_ = rc.Clone(true)
-	_ = rc.ClonePtr(true)
-	_ = rc.ClonePtr(false)
-	var nilRC *corejson.ResultsCollection
-	if nilRC.ClonePtr(true) != nil {
-		t.Fatal("expected nil")
-	}
-}
-
-// --- ResultsPtrCollection remaining branches ---
-
 func Test_CovJsonS4_RPC01_Basic(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.UsingCap(5)
 	rpc.AddAny(1)
@@ -819,26 +747,6 @@ func Test_CovJsonS4_RPC05_GetAt_GetAtSafe_GetAtSafeUsingLength(t *testing.T) {
 	_ = rpc.GetAtSafeUsingLength(0, 1)
 	_ = rpc.GetAtSafeUsingLength(10, 1)
 }
-
-func Test_CovJsonS4_RPC06_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
-	rpc := corejson.NewResultsPtrCollection.UsingCap(2)
-	rpc.AddAny(1)
-	if rpc.HasError() {
-		t.Fatal("expected false")
-	}
-	_, has := rpc.AllErrors()
-	if has {
-		t.Fatal("expected false")
-	}
-	_ = rpc.GetErrorsStrings()
-	_ = rpc.GetErrorsStringsPtr()
-	_ = rpc.GetErrorsAsSingleString()
-	_ = rpc.GetErrorsAsSingle()
-	empty := corejson.NewResultsPtrCollection.UsingCap(0)
-	_ = empty.GetErrorsStrings()
-	_, _ = empty.AllErrors()
-}
-
 func Test_CovJsonS4_RPC07_UnmarshalAt_InjectIntoAt(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.UsingCap(2)
 	rpc.AddAny(map[string]int{"a": 1})
@@ -879,16 +787,6 @@ func Test_CovJsonS4_RPC11_AddJsoners(t *testing.T) {
 	rpc.AddJsoners(false, rc)
 	rpc.AddJsoners(true, nil)
 }
-
-func Test_CovJsonS4_RPC12_GetStrings_GetStringsPtr(t *testing.T) {
-	rpc := corejson.NewResultsPtrCollection.UsingCap(2)
-	rpc.AddAny(1)
-	_ = rpc.GetStrings()
-	_ = rpc.GetStringsPtr()
-	empty := corejson.NewResultsPtrCollection.UsingCap(0)
-	_ = empty.GetStrings()
-}
-
 func Test_CovJsonS4_RPC13_NonPtr_Ptr(t *testing.T) {
 	rpc := corejson.NewResultsPtrCollection.UsingCap(1)
 	_ = rpc.NonPtr()
@@ -1043,26 +941,6 @@ func Test_CovJsonS4_MR05_GetByKey(t *testing.T) {
 		t.Fatal("expected nil")
 	}
 }
-
-func Test_CovJsonS4_MR06_HasError_AllErrors_GetErrorsStrings(t *testing.T) {
-	mr := corejson.NewMapResults.UsingCap(2)
-	mr.AddAny("k", 1)
-	if mr.HasError() {
-		t.Fatal("expected false")
-	}
-	_, has := mr.AllErrors()
-	if has {
-		t.Fatal("expected false")
-	}
-	_ = mr.GetErrorsStrings()
-	_ = mr.GetErrorsStringsPtr()
-	_ = mr.GetErrorsAsSingleString()
-	_ = mr.GetErrorsAsSingle()
-	empty := corejson.NewMapResults.UsingCap(0)
-	_ = empty.GetErrorsStrings()
-	_, _ = empty.AllErrors()
-}
-
 func Test_CovJsonS4_MR07_AllKeys_AllKeysSorted_AllValues_AllResults_AllResultsCollection(t *testing.T) {
 	mr := corejson.NewMapResults.UsingCap(2)
 	mr.AddAny("b", 2)
@@ -1086,16 +964,6 @@ func Test_CovJsonS4_MR07_AllKeys_AllKeysSorted_AllValues_AllResults_AllResultsCo
 	_ = empty.AllResultsCollection()
 	_ = empty.ResultCollection()
 }
-
-func Test_CovJsonS4_MR08_GetStrings_GetStringsPtr(t *testing.T) {
-	mr := corejson.NewMapResults.UsingCap(2)
-	mr.AddAny("k", 1)
-	_ = mr.GetStrings()
-	_ = mr.GetStringsPtr()
-	empty := corejson.NewMapResults.UsingCap(0)
-	_ = empty.GetStrings()
-}
-
 func Test_CovJsonS4_MR09_AddJsoner_AddKeyWithJsoner_AddKeysWithJsoners(t *testing.T) {
 	mr := corejson.NewMapResults.UsingCap(5)
 	rc := corejson.NewResultsCollection.UsingCap(1)

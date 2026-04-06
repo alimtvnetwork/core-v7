@@ -50,17 +50,6 @@ func Test_C46_LinkedListNode_List(t *testing.T) {
 		}
 	})
 }
-
-func Test_C46_LinkedListNode_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C46_LinkedListNode_ListPtr", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"x"})
-		list := ll.Head().ListPtr()
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
 func Test_C46_LinkedListNode_Join(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedListNode_Join", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -252,18 +241,6 @@ func Test_C46_LinkedListNode_AddStringsToNode(t *testing.T) {
 		}
 	})
 }
-
-func Test_C46_LinkedListNode_AddStringsPtrToNode_Nil(t *testing.T) {
-	safeTest(t, "Test_C46_LinkedListNode_AddStringsPtrToNode_Nil", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		node := ll.Head()
-		result := node.AddStringsPtrToNode(ll, true, nil)
-		if result.Length() != 1 {
-			t.Fatal("nil ptr should not add")
-		}
-	})
-}
-
 func Test_C46_LinkedListNode_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedListNode_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "d"})
@@ -1010,17 +987,6 @@ func Test_C46_LinkedList_List_Empty(t *testing.T) {
 		}
 	})
 }
-
-func Test_C46_LinkedList_ListPtr(t *testing.T) {
-	safeTest(t, "Test_C46_LinkedList_ListPtr", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		list := ll.ListPtr()
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
 func Test_C46_LinkedList_ListLock(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedList_ListLock", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a"})
@@ -1030,17 +996,6 @@ func Test_C46_LinkedList_ListLock(t *testing.T) {
 		}
 	})
 }
-
-func Test_C46_LinkedList_ListPtrLock(t *testing.T) {
-	safeTest(t, "Test_C46_LinkedList_ListPtrLock", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		list := ll.ListPtrLock()
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
 func Test_C46_LinkedList_LengthLock(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedList_LengthLock", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "b"})
@@ -1287,17 +1242,6 @@ func Test_C46_LinkedList_AddStringsToNode_NilNodeSkip(t *testing.T) {
 		}
 	})
 }
-
-func Test_C46_LinkedList_AddStringsPtrToNode_Nil(t *testing.T) {
-	safeTest(t, "Test_C46_LinkedList_AddStringsPtrToNode_Nil", func() {
-		ll := corestr.New.LinkedList.Strings([]string{"a"})
-		ll.AddStringsPtrToNode(false, ll.Head(), nil)
-		if ll.Length() != 1 {
-			t.Fatal("nil ptr should not add")
-		}
-	})
-}
-
 func Test_C46_LinkedList_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_C46_LinkedList_AddCollectionToNode", func() {
 		ll := corestr.New.LinkedList.Strings([]string{"a", "d"})

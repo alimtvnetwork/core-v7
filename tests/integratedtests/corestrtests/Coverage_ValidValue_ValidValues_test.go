@@ -47,27 +47,6 @@ func Test_CovVV_03_NewValidValueUsingAnyAutoValid(t *testing.T) {
 		_ = vv
 	})
 }
-
-func Test_CovVV_04_ValueBytesOnce(t *testing.T) {
-	safeTest(t, "Test_CovVV_04_ValueBytesOnce", func() {
-		vv := corestr.NewValidValue("hi")
-		b := vv.ValueBytesOnce()
-		if len(b) != 2 {
-			t.Fatal("expected 2")
-		}
-		// second call returns cached
-		b2 := vv.ValueBytesOnce()
-		if len(b2) != 2 {
-			t.Fatal("expected 2")
-		}
-		// deprecated alias
-		b3 := vv.ValueBytesOncePtr()
-		if len(b3) != 2 {
-			t.Fatal("expected 2")
-		}
-	})
-}
-
 func Test_CovVV_05_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovVV_05_IsEmpty_IsWhitespace", func() {
 		vv := corestr.NewValidValue("")
@@ -723,25 +702,6 @@ func Test_CovLCN_05_IsEqualValue(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovLCN_06_String_List_ListPtr_Join_StringList(t *testing.T) {
-	safeTest(t, "Test_CovLCN_06_String_List_ListPtr_Join_StringList", func() {
-		col := corestr.New.Collection.Strings([]string{"false", "a", "b"})
-		n := &corestr.LinkedCollectionNode{Element: col}
-		_ = n.String()
-		list := n.List()
-		if len(list) != 3 { // Collection has 3 items: "false", "a", "b"
-			t.Fatalf("expected 3, got %d", len(list))
-		}
-		lp := n.ListPtr()
-		if len(*lp) != 3 {
-			t.Fatalf("expected 3, got %d", len(*lp))
-		}
-		_ = n.Join(",")
-		_ = n.StringList("Header: ")
-	})
-}
-
 func Test_CovLCN_07_CreateLinkedList(t *testing.T) {
 	safeTest(t, "Test_CovLCN_07_CreateLinkedList", func() {
 		col := corestr.New.Collection.Strings([]string{"false", "a"})

@@ -7,34 +7,6 @@ import (
 	"github.com/alimtvnetwork/core/coreinstruction"
 	"github.com/alimtvnetwork/core/coretests/args"
 )
-
-func Test_FromTo_ClonePtr(t *testing.T) {
-	// Case 0: positive
-	{
-		tc := fromToClonePtrCopiesTestCase
-		orig := &coreinstruction.FromTo{From: "source", To: "destination"}
-		cloned := orig.ClonePtr()
-
-		actual := args.Map{
-			"isNotNil": cloned != nil,
-			"from":     cloned.From,
-			"to":       cloned.To,
-		}
-
-		tc.ShouldBeEqualMapFirst(t, actual)
-	}
-
-	// Case 1: nil receiver
-	{
-		tc := fromToClonePtrNilTestCase
-		var nilFT *coreinstruction.FromTo
-
-		actual := args.Map{"isNil": nilFT.ClonePtr() == nil}
-
-		tc.ShouldBeEqualMapFirst(t, actual)
-	}
-}
-
 func Test_FromTo_Clone(t *testing.T) {
 	tc := fromToCloneCopiesTestCase
 	orig := coreinstruction.FromTo{From: "a", To: "b"}

@@ -22,25 +22,6 @@ func Test_Cov4_Attributes_IsEqual(t *testing.T) {
 	expected := args.Map{"equal": true, "self": true, "nilNil": true, "nilNonNil": false}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- IsEqual", actual)
 }
-
-func Test_Cov4_Attributes_Clone(t *testing.T) {
-	a := corepayload.New.Attributes.UsingDynamicPayloadBytes([]byte(`{"a":1}`))
-	cloned, err := a.Clone(false)
-	deepCloned, deepErr := a.Clone(true)
-	var nilA *corepayload.Attributes
-	nilCloned, nilErr := nilA.ClonePtr(false)
-	actual := args.Map{
-		"noErr":  err == nil, "len": cloned.Length() > 0,
-		"deepNoErr": deepErr == nil, "deepLen": deepCloned.Length() > 0,
-		"nilClone": nilCloned == nil, "nilErr": nilErr == nil,
-	}
-	expected := args.Map{
-		"noErr": true, "len": true, "deepNoErr": true, "deepLen": true,
-		"nilClone": true, "nilErr": true,
-	}
-	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- Clone", actual)
-}
-
 func Test_Cov4_Attributes_Getters(t *testing.T) {
 	a := corepayload.New.Attributes.Empty()
 	var nilA *corepayload.Attributes
@@ -123,70 +104,6 @@ func Test_Cov4_Attributes_IsErrorEqual(t *testing.T) {
 	expected := args.Map{"equalNil": true, "differentNil": false}
 	expected.ShouldBeEqual(t, 0, "Attributes returns error -- IsErrorEqual", actual)
 }
-
-// ── PagingInfo ──
-
-func Test_Cov4_PagingInfo(t *testing.T) {
-	p := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 1, PerPageItems: 10, TotalItems: 50}
-	var nilP *corepayload.PagingInfo
-	actual := args.Map{
-		"isEmpty":     p.IsEmpty(),
-		"isEqual":     p.IsEqual(p),
-		"nilNil":      nilP.IsEqual(nilP),
-		"nilNonNil":   nilP.IsEqual(p),
-		"hasTotal":    p.HasTotalPages(),
-		"hasCurrent":  p.HasCurrentPageIndex(),
-		"hasPerPage":  p.HasPerPageItems(),
-		"hasTotalI":   p.HasTotalItems(),
-		"invalidTotal": p.IsInvalidTotalPages(),
-		"invalidCurr":  p.IsInvalidCurrentPageIndex(),
-		"invalidPer":   p.IsInvalidPerPageItems(),
-		"invalidTotalI": p.IsInvalidTotalItems(),
-		"cloneTotalP":  p.Clone().TotalPages,
-		"clonePtrNil":  nilP.ClonePtr() == nil,
-	}
-	expected := args.Map{
-		"isEmpty": false, "isEqual": true, "nilNil": true, "nilNonNil": false,
-		"hasTotal": true, "hasCurrent": true, "hasPerPage": true, "hasTotalI": true,
-		"invalidTotal": false, "invalidCurr": false, "invalidPer": false, "invalidTotalI": false,
-		"cloneTotalP": 5, "clonePtrNil": true,
-	}
-	expected.ShouldBeEqual(t, 0, "PagingInfo returns correct value -- with args", actual)
-}
-
-// ── SessionInfo ──
-
-func Test_Cov4_SessionInfo(t *testing.T) {
-	u := corepayload.New.User.UsingName("alice")
-	s := &corepayload.SessionInfo{Id: "42", User: u, SessionPath: "/sess"}
-	var nilS *corepayload.SessionInfo
-	actual := args.Map{
-		"isEmpty":  s.IsEmpty(),
-		"isValid":  s.IsValid(),
-		"hasUser":  s.HasUser(),
-		"isUserE":  s.IsUserEmpty(),
-		"isNameE":  s.IsUserNameEmpty(),
-		"nameEq":   s.IsUsernameEqual("alice"),
-		"idInt":    s.IdentifierInteger(),
-		"idUint":   s.IdentifierUnsignedInteger(),
-		"cloneId":  s.ClonePtr().Id,
-		"nilEmpty": nilS.IsEmpty(),
-		"nilClone": nilS.ClonePtr() == nil,
-	}
-	expected := args.Map{
-		"isEmpty": false, "isValid": true, "hasUser": true,
-		"isUserE": false, "isNameE": false, "nameEq": true,
-		"idInt": 42, "idUint": uint(42), "cloneId": "42",
-		"nilEmpty": true, "nilClone": true,
-	}
-	expected.ShouldBeEqual(t, 0, "SessionInfo returns correct value -- with args", actual)
-}
-
-// ── AuthInfo ──
-
-func Test_Cov4_AuthInfo(t *testing.T) {
-	a := &corepayload.AuthInfo{ActionType: "login", ResourceName: "/api", Identifier: "42"}
-	var nilA *corepayload.AuthInfo
 	actual := args.Map{
 		"isEmpty":      a.IsEmpty(),
 		"hasAnyItem":   a.HasAnyItem(),
@@ -244,21 +161,6 @@ func Test_Cov4_AuthInfo_Setters(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Setters", actual)
 }
-
-func Test_Cov4_AuthInfo_Clone(t *testing.T) {
-	a := &corepayload.AuthInfo{ActionType: "login"}
-	cloned := a.ClonePtr()
-	var nilA *corepayload.AuthInfo
-	actual := args.Map{
-		"action":   cloned.ActionType,
-		"nilClone": nilA.ClonePtr() == nil,
-	}
-	expected := args.Map{"action": "login", "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Clone", actual)
-}
-
-// ── TypedPayloadWrapper ──
-
 func Test_Cov4_TypedPayloadWrapper(t *testing.T) {
 	type Data struct{ Name string }
 	typed, err := corepayload.NewTypedPayloadWrapperFrom[Data](

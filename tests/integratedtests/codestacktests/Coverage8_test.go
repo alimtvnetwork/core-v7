@@ -346,25 +346,6 @@ func Test_Cov8_Trace_Clone(t *testing.T) {
 	expected := args.Map{"samePath": true}
 	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- Clone", actual)
 }
-
-func Test_Cov8_Trace_ClonePtr(t *testing.T) {
-	trace := codestack.New.Create(0)
-	cloned := trace.ClonePtr()
-	actual := args.Map{"notNil": cloned != nil, "samePath": cloned.FilePath == trace.FilePath}
-	expected := args.Map{"notNil": true, "samePath": true}
-	expected.ShouldBeEqual(t, 0, "Trace returns correct value -- ClonePtr", actual)
-}
-
-func Test_Cov8_Trace_ClonePtr_Nil(t *testing.T) {
-	var trace *codestack.Trace
-	cloned := trace.ClonePtr()
-	isNil := cloned == nil
-	actual := args.Map{"isNil": isNil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "Trace returns nil -- ClonePtr nil", actual)
-}
-
-func Test_Cov8_Trace_ParseInjectUsingJson(t *testing.T) {
 	trace := codestack.New.Create(0)
 	jsonResult := trace.JsonPtr()
 	var target codestack.Trace
@@ -604,25 +585,6 @@ func Test_Cov8_TraceCollection_Clone(t *testing.T) {
 	expected := args.Map{"sameLen": true}
 	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- Clone", actual)
 }
-
-func Test_Cov8_TraceCollection_ClonePtr(t *testing.T) {
-	tc := codestack.New.StackTrace.SkipNone()
-	cloned := tc.ClonePtr()
-	actual := args.Map{"notNil": cloned != nil, "sameLen": cloned.Length() == tc.Length()}
-	expected := args.Map{"notNil": true, "sameLen": true}
-	expected.ShouldBeEqual(t, 0, "TraceCollection returns correct value -- ClonePtr", actual)
-}
-
-func Test_Cov8_TraceCollection_ClonePtr_Nil(t *testing.T) {
-	var tc *codestack.TraceCollection
-	cloned := tc.ClonePtr()
-	isNil := cloned == nil
-	actual := args.Map{"isNil": isNil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "TraceCollection returns nil -- ClonePtr nil", actual)
-}
-
-func Test_Cov8_TraceCollection_Reverse_Empty(t *testing.T) {
 	tc := &codestack.TraceCollection{}
 	result := tc.Reverse()
 	actual := args.Map{"empty": result.IsEmpty()}

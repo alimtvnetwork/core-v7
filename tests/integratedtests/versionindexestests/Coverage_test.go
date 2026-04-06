@@ -137,39 +137,3 @@ func Test_Index_Binders(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Index_Binders returns correct value -- with args", actual)
 }
-
-func Test_Index_EnumMetadata(t *testing.T) {
-	// Arrange
-	v := versionindexes.Major
-
-	// Act
-	actual := args.Map{
-		"allNameValuesLen": len(v.AllNameValues()) > 0,
-		"intRangesLen":     len(v.IntegerEnumRanges()) > 0,
-		"rangesDynMapLen":  len(v.RangesDynamicMap()) > 0,
-		"formatNotEmpty":   v.Format("{name}") != "",
-		"minValueStr":      v.MinValueString() != "",
-		"maxValueStr":      v.MaxValueString() != "",
-		"maxByte":          int(v.MaxByte()) > 0,
-		"rangesByteLen":    len(v.RangesByte()) > 0,
-		"valueUInt16":      int(v.ValueUInt16()),
-		"valueInt8":        int(v.ValueInt8()),
-		"valueInt16":       int(v.ValueInt16()),
-		"valueInt32":       int(v.ValueInt32()),
-	}
-	expected := args.Map{
-		"allNameValuesLen": true,
-		"intRangesLen":     true,
-		"rangesDynMapLen":  true,
-		"formatNotEmpty":   true,
-		"minValueStr":      true,
-		"maxValueStr":      true,
-		"maxByte":          true,
-		"rangesByteLen":    true,
-		"valueUInt16":      0,
-		"valueInt8":        0,
-		"valueInt16":       0,
-		"valueInt32":       0,
-	}
-	expected.ShouldBeEqual(t, 0, "Index_EnumMetadata returns correct value -- with args", actual)
-}

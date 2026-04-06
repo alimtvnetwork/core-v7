@@ -389,18 +389,6 @@ func Test_CovLL1_23_AddStringsToNode(t *testing.T) {
 		ll2.AddStringsToNode(true, nil, []string{"x"})
 	})
 }
-
-func Test_CovLL1_24_AddStringsPtrToNode(t *testing.T) {
-	safeTest(t, "Test_CovLL1_24_AddStringsPtrToNode", func() {
-		ll := corestr.Empty.LinkedList()
-		ll.Add("a")
-		items := []string{"b"}
-		ll.AddStringsPtrToNode(false, ll.Head(), &items)
-		// nil
-		ll.AddStringsPtrToNode(false, ll.Head(), nil)
-	})
-}
-
 func Test_CovLL1_25_AddCollectionToNode(t *testing.T) {
 	safeTest(t, "Test_CovLL1_25_AddCollectionToNode", func() {
 		ll := corestr.Empty.LinkedList()

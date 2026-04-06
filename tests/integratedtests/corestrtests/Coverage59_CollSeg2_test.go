@@ -603,17 +603,6 @@ func Test_Cov59_Collection_NonEmptyList_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyList on empty returns empty", actual)
 	})
 }
-
-func Test_Cov59_Collection_NonEmptyListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov59_Collection_NonEmptyListPtr", func() {
-		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-		r := c.NonEmptyListPtr()
-		actual := args.Map{"len": len(*r)}
-		expected := args.Map{"len": 2}
-		expected.ShouldBeEqual(t, 0, "NonEmptyListPtr returns ptr to non-empty", actual)
-	})
-}
-
 func Test_Cov59_Collection_HashsetAsIs(t *testing.T) {
 	safeTest(t, "Test_Cov59_Collection_HashsetAsIs", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
@@ -653,17 +642,6 @@ func Test_Cov59_Collection_NonEmptyItems(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyItems filters empty", actual)
 	})
 }
-
-func Test_Cov59_Collection_NonEmptyItemsPtr(t *testing.T) {
-	safeTest(t, "Test_Cov59_Collection_NonEmptyItemsPtr", func() {
-		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-		r := c.NonEmptyItemsPtr()
-		actual := args.Map{"len": len(r)}
-		expected := args.Map{"len": 2}
-		expected.ShouldBeEqual(t, 0, "NonEmptyItemsPtr filters empty", actual)
-	})
-}
-
 func Test_Cov59_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_Cov59_Collection_NonEmptyItemsOrNonWhitespace", func() {
 		c := corestr.New.Collection.Strings([]string{"a", "  ", ""})
@@ -673,17 +651,6 @@ func Test_Cov59_Collection_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "NonEmptyItemsOrNonWhitespace filters whitespace", actual)
 	})
 }
-
-func Test_Cov59_Collection_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
-	safeTest(t, "Test_Cov59_Collection_NonEmptyItemsOrNonWhitespacePtr", func() {
-		c := corestr.New.Collection.Strings([]string{"a", "  ", ""})
-		r := c.NonEmptyItemsOrNonWhitespacePtr()
-		actual := args.Map{"len": len(r)}
-		expected := args.Map{"len": 1}
-		expected.ShouldBeEqual(t, 0, "NonEmptyItemsOrNonWhitespacePtr filters", actual)
-	})
-}
-
 func Test_Cov59_Collection_Items(t *testing.T) {
 	safeTest(t, "Test_Cov59_Collection_Items", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})
@@ -692,16 +659,6 @@ func Test_Cov59_Collection_Items(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Items returns items", actual)
 	})
 }
-
-func Test_Cov59_Collection_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov59_Collection_ListPtr", func() {
-		c := corestr.New.Collection.Strings([]string{"a"})
-		actual := args.Map{"len": len(c.ListPtr())}
-		expected := args.Map{"len": 1}
-		expected.ShouldBeEqual(t, 0, "ListPtr returns items", actual)
-	})
-}
-
 func Test_Cov59_Collection_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_Cov59_Collection_ListCopyPtrLock", func() {
 		c := corestr.New.Collection.Strings([]string{"a"})

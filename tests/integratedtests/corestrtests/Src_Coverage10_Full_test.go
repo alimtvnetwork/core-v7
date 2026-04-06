@@ -50,72 +50,6 @@ func Test_SrcC10_Collection_AddNonEmpty_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC10_Collection_NonEmptyList_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC10_Collection_NonEmptyList_Verification", func() {
-		// Arrange
-		tc := srcC10CollectionNonEmptyListTestCase
-		c := corestr.New.Collection.Strings([]string{"a", "", "b"})
-
-		// Act
-		actual := args.Map{
-			"listLen":    len(c.NonEmptyList()),
-			"listPtrLen": len(*c.NonEmptyListPtr()),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
-func Test_SrcC10_Collection_MethodsNoPanic_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC10_Collection_MethodsNoPanic_Verification", func() {
-		// Arrange
-		tc := srcC10CollectionMethodsNoPanicTestCase
-
-		// Act
-		noPanic := !callPanicsSrcC10(func() {
-			c := corestr.New.Collection.Strings([]string{"a", "b"})
-			_ = c.Items()
-			_ = c.ListPtr()
-			_ = c.ListCopyPtrLock()
-			_ = c.HashsetAsIs()
-			_ = c.HashsetWithDoubleLength()
-			_ = c.HashsetLock()
-
-			c2 := corestr.New.Collection.Strings([]string{"a", "", "b"})
-			_ = c2.NonEmptyItems()
-			_ = c2.NonEmptyItemsPtr()
-
-			c3 := corestr.New.Collection.Strings([]string{"a", " ", "b"})
-			_ = c3.NonEmptyItemsOrNonWhitespace()
-			_ = c3.NonEmptyItemsOrNonWhitespacePtr()
-
-			cf := corestr.New.Collection.Strings([]string{"apple", "banana", "cherry"})
-			_ = cf.Filter(func(s string, i int) (string, bool, bool) { return s, len(s) > 5, false })
-			_ = cf.FilterLock(func(s string, i int) (string, bool, bool) { return s, len(s) > 1, false })
-			_ = cf.FilteredCollection(func(s string, i int) (string, bool, bool) { return s, len(s) > 1, false })
-			_ = cf.FilteredCollectionLock(func(s string, i int) (string, bool, bool) { return s, len(s) > 1, false })
-			_ = cf.FilterPtr(func(s *string, i int) (*string, bool, bool) { return s, len(*s) > 1, false })
-			_ = cf.FilterPtrLock(func(s *string, i int) (*string, bool, bool) { return s, len(*s) > 1, false })
-
-			_ = c.CharCollectionMap()
-			c.AddCapacity(10)
-			c.Resize(5)
-
-			_ = c.CsvLines()
-			_ = c.Csv()
-		})
-		actual := args.Map{
-			"noPanic": noPanic,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
-func Test_SrcC10_Collection_Has_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC10_Collection_Has_Verification", func() {
 		// Arrange
 		tc := srcC10CollectionHasTestCase
@@ -509,30 +443,6 @@ func Test_SrcC10_Hashmap_ItemsCopy_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC10_Hashmap_Mutate_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC10_Hashmap_Mutate_Verification", func() {
-		// Arrange
-		tc := srcC10HashmapMutateTestCase
-
-		// Act
-		noPanic := !callPanicsSrcC10(func() {
-			hm := corestr.New.Hashmap.Cap(5)
-			hm.AddOrUpdate("a", "HELLO")
-			hm.ValuesToLower()
-			hm2 := corestr.New.Hashmap.Cap(5)
-			hm2.AddOrUpdate("ABC", "1")
-			hm2.KeysToLower()
-		})
-		actual := args.Map{
-			"noPanic": noPanic,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC10_Hashmap_EqualClone_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC10_Hashmap_EqualClone_Verification", func() {
 		// Arrange

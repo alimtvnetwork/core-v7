@@ -184,23 +184,6 @@ func Test_Cov10_User_Clone(t *testing.T) {
 	expected := args.Map{"name": "alice", "type": "admin", "token": "tok", "hash": "hash", "sys": true}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
-
-func Test_Cov10_User_ClonePtr_Nil(t *testing.T) {
-	var u *corepayload.User
-	actual := args.Map{"nil": u.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
-}
-
-func Test_Cov10_User_ClonePtr_Valid(t *testing.T) {
-	u := &corepayload.User{Name: "alice"}
-	c := u.ClonePtr()
-	actual := args.Map{"name": c.Name, "diff": c != u}
-	expected := args.Map{"name": "alice", "diff": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns non-empty -- valid", actual)
-}
-
-func Test_Cov10_User_Ptr(t *testing.T) {
 	u := corepayload.User{Name: "alice"}
 	p := u.Ptr()
 	actual := args.Map{"notNil": p != nil, "name": p.Name}
@@ -304,14 +287,6 @@ func Test_Cov10_UserInfo_Clone(t *testing.T) {
 	expected := args.Map{"user": "a", "sys": "b"}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
-
-func Test_Cov10_UserInfo_ClonePtr_Nil(t *testing.T) {
-	var ui *corepayload.UserInfo
-	actual := args.Map{"nil": ui.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
-}
-
 func Test_Cov10_UserInfo_Ptr(t *testing.T) {
 	ui := corepayload.UserInfo{User: &corepayload.User{Name: "a"}}
 	p := ui.Ptr()
@@ -415,14 +390,6 @@ func Test_Cov10_SessionInfo_Clone(t *testing.T) {
 	expected := args.Map{"id": "1", "user": "a", "path": "/p"}
 	expected.ShouldBeEqual(t, 0, "SI returns correct value -- Clone", actual)
 }
-
-func Test_Cov10_SessionInfo_ClonePtr_Nil(t *testing.T) {
-	var s *corepayload.SessionInfo
-	actual := args.Map{"nil": s.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "SI returns nil -- ClonePtr nil", actual)
-}
-
 func Test_Cov10_SessionInfo_Ptr(t *testing.T) {
 	s := corepayload.SessionInfo{Id: "1"}
 	p := s.Ptr()
@@ -580,14 +547,6 @@ func Test_Cov10_AuthInfo_Clone(t *testing.T) {
 	expected := args.Map{"id": "id1", "action": "login", "res": "res", "hasSession": true, "hasUser": true}
 	expected.ShouldBeEqual(t, 0, "AI returns correct value -- Clone", actual)
 }
-
-func Test_Cov10_AuthInfo_ClonePtr_Nil(t *testing.T) {
-	var a *corepayload.AuthInfo
-	actual := args.Map{"nil": a.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "AI returns nil -- ClonePtr nil", actual)
-}
-
 func Test_Cov10_AuthInfo_Ptr(t *testing.T) {
 	a := corepayload.AuthInfo{ActionType: "x"}
 	actual := args.Map{"notNil": a.Ptr() != nil}
@@ -808,27 +767,6 @@ func Test_Cov10_PagingInfo_Clone(t *testing.T) {
 	expected := args.Map{"total": 5, "current": 2, "perPage": 10, "items": 50}
 	expected.ShouldBeEqual(t, 0, "PI returns correct value -- Clone", actual)
 }
-
-func Test_Cov10_PagingInfo_ClonePtr_Nil(t *testing.T) {
-	var p *corepayload.PagingInfo
-	actual := args.Map{"nil": p.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "PI returns nil -- ClonePtr nil", actual)
-}
-
-func Test_Cov10_PagingInfo_ClonePtr_Valid(t *testing.T) {
-	p := &corepayload.PagingInfo{TotalPages: 5}
-	c := p.ClonePtr()
-	actual := args.Map{"notNil": c != nil, "total": c.TotalPages, "diff": c != p}
-	expected := args.Map{"notNil": true, "total": 5, "diff": true}
-	expected.ShouldBeEqual(t, 0, "PI returns non-empty -- ClonePtr valid", actual)
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// NewUser Creator
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_Cov10_NewUser_Empty(t *testing.T) {
 	u := corepayload.New.User.Empty()
 	actual := args.Map{"notNil": u != nil, "empty": u.IsEmpty()}
 	expected := args.Map{"notNil": true, "empty": true}

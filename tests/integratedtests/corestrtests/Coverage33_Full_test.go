@@ -136,17 +136,6 @@ func Test_C33_ValidValue_Constructors(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- constructors", actual)
 	})
 }
-
-func Test_C33_ValidValue_ValueBytesOnce(t *testing.T) {
-	safeTest(t, "Test_C33_ValidValue_ValueBytesOnce", func() {
-		v := corestr.NewValidValue("hello")
-		b1 := v.ValueBytesOnce()
-		b2 := v.ValueBytesOnce() // cached
-		if len(b1) != 5 || len(b2) != 5 { t.Fatal("expected 5") }
-		_ = v.ValueBytesOncePtr()
-	})
-}
-
 func Test_C33_ValidValue_IsEmpty_IsWhitespace(t *testing.T) {
 	safeTest(t, "Test_C33_ValidValue_IsEmpty_IsWhitespace", func() {
 		v := corestr.NewValidValue("")

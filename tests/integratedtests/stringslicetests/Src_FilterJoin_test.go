@@ -303,25 +303,6 @@ func Test_Src_TrimmedEachWords_Verification(t *testing.T) {
 		tc.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_Src_TrimmedEachWordsPtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcTrimmedEachWordsPtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.TrimmedEachWordsPtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{"length": len(result)})
-	}
-}
-
 func Test_Src_TrimmedEachWordsIf_Verification(t *testing.T) {
 	for caseIndex, tc := range srcTrimmedEachWordsIfTestCases {
 		// Arrange

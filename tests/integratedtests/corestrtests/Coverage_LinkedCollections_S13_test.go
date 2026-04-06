@@ -551,17 +551,6 @@ func Test_S13_48_LinkedCollections_ToStrings(t *testing.T) {
 		}
 	})
 }
-
-func Test_S13_49_LinkedCollections_ToStringsPtr(t *testing.T) {
-	safeTest(t, "Test_S13_49_LinkedCollections_ToStringsPtr", func() {
-		lc := corestr.New.LinkedCollection.Create()
-		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
-		if lc.ToStringsPtr() == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
 func Test_S13_50_LinkedCollections_ToCollectionsOfCollection(t *testing.T) {
 	safeTest(t, "Test_S13_50_LinkedCollections_ToCollectionsOfCollection", func() {
 		lc := corestr.New.LinkedCollection.Create()
@@ -652,17 +641,6 @@ func Test_S13_58_LinkedCollections_List_Empty(t *testing.T) {
 		}
 	})
 }
-
-func Test_S13_59_LinkedCollections_ListPtr(t *testing.T) {
-	safeTest(t, "Test_S13_59_LinkedCollections_ListPtr", func() {
-		lc := corestr.New.LinkedCollection.Create()
-		lc.Add(corestr.New.Collection.Strings([]string{"a"}))
-		if lc.ListPtr() == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
 func Test_S13_60_LinkedCollections_String(t *testing.T) {
 	safeTest(t, "Test_S13_60_LinkedCollections_String", func() {
 		lc := corestr.New.LinkedCollection.Create()

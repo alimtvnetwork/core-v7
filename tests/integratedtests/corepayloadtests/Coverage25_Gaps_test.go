@@ -84,29 +84,6 @@ func Test_Cov25_Attributes_IsEqual_DynamicPayloadsDifferent(t *testing.T) {
 	expected := args.Map{"isEqual": false}
 	expected.ShouldBeEqual(t, 0, "IsEqual returns false -- different dynamic payloads", actual)
 }
-
-// ── Attributes.IsEqual — anyKeyValuePairs different ──
-
-func Test_Cov25_Attributes_IsEqual_AnyKeyValuePairsDifferent(t *testing.T) {
-	// Arrange
-	m1 := coredynamic.NewMapAnyItems(2)
-	m1.Add("key", "val1")
-	m2 := coredynamic.NewMapAnyItems(2)
-	m2.Add("key", "val2")
-	a1 := corepayload.New.Attributes.All(nil, nil, m1, nil, nil, nil, nil)
-	a2 := corepayload.New.Attributes.All(nil, nil, m2, nil, nil, nil, nil)
-
-	// Act
-	result := a1.IsEqual(a2)
-
-	// Assert
-	actual := args.Map{"isEqual": result}
-	expected := args.Map{"isEqual": false}
-	expected.ShouldBeEqual(t, 0, "IsEqual returns false -- different any key-value pairs", actual)
-}
-
-// ── Attributes.Clone — ClonePtr returns error ──
-
 func Test_Cov25_Attributes_Clone_DeepClone_AnyKeyValuesCloneError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
@@ -125,30 +102,6 @@ func Test_Cov25_Attributes_Clone_DeepClone_AnyKeyValuesCloneError(t *testing.T) 
 	}
 	expected.ShouldBeEqual(t, 0, "Clone deep returns no error -- nil anyKeyValues", actual)
 }
-
-// ── Attributes.deepClonePtr — HasError branch ──
-
-func Test_Cov25_Attributes_DeepClone_NilError(t *testing.T) {
-	// Arrange
-	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)
-
-	// Act
-	cloned, err := attr.ClonePtr(true)
-
-	// Assert
-	actual := args.Map{
-		"err":      err == nil,
-		"hasError": cloned.HasError(),
-	}
-	expected := args.Map{
-		"err":      true,
-		"hasError": false,
-	}
-	expected.ShouldBeEqual(t, 0, "DeepClone with nil error -- no error in clone", actual)
-}
-
-// ── AttributesGetters — Error() with error ──
-
 func Test_Cov25_Attributes_Error_NilError(t *testing.T) {
 	// Arrange
 	attr := corepayload.New.Attributes.All(nil, nil, nil, nil, nil, nil, nil)

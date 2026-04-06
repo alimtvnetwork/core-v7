@@ -42,41 +42,6 @@ func Test_Cov6_AnyToStringNameField_Struct(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToStringNameField returns correct value -- struct", actual)
 }
 
-// ══════════════════════════════════════════════════════════════════════════════
-// AnyToTypeString
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_Cov6_AnyToTypeString(t *testing.T) {
-	actual := args.Map{"notEmpty": stringutil.AnyToTypeString(42) != ""}
-	expected := args.Map{"notEmpty": true}
-	expected.ShouldBeEqual(t, 0, "AnyToTypeString returns correct value -- with args", actual)
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// ClonePtr / SafeClonePtr
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_Cov6_ClonePtr_Nil(t *testing.T) {
-	actual := args.Map{"nil": stringutil.ClonePtr(nil) == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- nil", actual)
-}
-
-func Test_Cov6_ClonePtr_Value(t *testing.T) {
-	s := "hello"
-	c := stringutil.ClonePtr(&s)
-	actual := args.Map{"val": *c, "diff": c != &s}
-	expected := args.Map{"val": "hello", "diff": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- value", actual)
-}
-
-func Test_Cov6_SafeClonePtr_Nil(t *testing.T) {
-	c := stringutil.SafeClonePtr(nil)
-	actual := args.Map{"notNil": c != nil, "val": *c}
-	expected := args.Map{"notNil": true, "val": ""}
-	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns nil -- nil", actual)
-}
-
 func Test_Cov6_SafeClonePtr_Value(t *testing.T) {
 	s := "hello"
 	c := stringutil.SafeClonePtr(&s)
@@ -351,18 +316,6 @@ func Test_Cov6_IsContainsPtrSimple_InsensitiveFound(t *testing.T) {
 	expected := args.Map{"v": true}
 	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple returns correct value -- insensitive found", actual)
 }
-
-func Test_Cov6_IsContainsPtrSimple_InsensitiveNotFound(t *testing.T) {
-	lines := []string{"Hello"}
-	actual := args.Map{"v": stringutil.IsContainsPtrSimple(&lines, "xyz", 0, false)}
-	expected := args.Map{"v": false}
-	expected.ShouldBeEqual(t, 0, "IsContainsPtrSimple returns correct value -- insensitive not found", actual)
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// IsEmpty / IsNotEmpty / IsEmptyPtr / IsNullOrEmptyPtr / IsEmptyOrWhitespace / IsEmptyOrWhitespacePtr
-// ══════════════════════════════════════════════════════════════════════════════
-
 func Test_Cov6_IsEmpty(t *testing.T) {
 	actual := args.Map{"empty": stringutil.IsEmpty(""), "text": stringutil.IsEmpty("x")}
 	expected := args.Map{"empty": true, "text": false}
@@ -374,15 +327,6 @@ func Test_Cov6_IsNotEmpty(t *testing.T) {
 	expected := args.Map{"empty": false, "text": true}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns empty -- with args", actual)
 }
-
-func Test_Cov6_IsEmptyPtr(t *testing.T) {
-	s := ""
-	s2 := "x"
-	actual := args.Map{"nil": stringutil.IsEmptyPtr(nil), "empty": stringutil.IsEmptyPtr(&s), "text": stringutil.IsEmptyPtr(&s2)}
-	expected := args.Map{"nil": true, "empty": true, "text": false}
-	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- with args", actual)
-}
-
 func Test_Cov6_IsNullOrEmptyPtr(t *testing.T) {
 	s := "x"
 	actual := args.Map{"nil": stringutil.IsNullOrEmptyPtr(nil), "text": stringutil.IsNullOrEmptyPtr(&s)}

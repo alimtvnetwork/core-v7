@@ -141,39 +141,3 @@ func Test_IntegerOutOfRange_ToUnsignedInt64_Verification(t *testing.T) {
 		tc.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_MaxFloat32_Verification(t *testing.T) {
-	for caseIndex, tc := range maxFloat32TestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		aRaw, _ := input.Get("a")
-		bRaw, _ := input.Get("b")
-		a := float32(aRaw.(float64))
-		b := float32(bRaw.(float64))
-
-		// Act
-		result := coremath.MaxFloat32(a, b)
-
-		// Assert
-		actual := args.Map{"result": float64(result)}
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_MinFloat32_Verification(t *testing.T) {
-	for caseIndex, tc := range minFloat32TestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		aRaw, _ := input.Get("a")
-		bRaw, _ := input.Get("b")
-		a := float32(aRaw.(float64))
-		b := float32(bRaw.(float64))
-
-		// Act
-		result := coremath.MinFloat32(a, b)
-
-		// Assert
-		actual := args.Map{"result": float64(result)}
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}

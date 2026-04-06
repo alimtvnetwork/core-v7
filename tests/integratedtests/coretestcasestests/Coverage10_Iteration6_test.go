@@ -249,27 +249,6 @@ func Test_Cov10_VerifyError_WithTypeVerify(t *testing.T) {
 	expected := args.Map{"noErr": true}
 	expected.ShouldBeEqual(t, 0, "VerifyError with type nil", actual)
 }
-
-// ══════════════════════════════════════════════════════════════════════════════
-// CaseNilSafe — covers CaseNilSafe.go + CaseNilSafeAssertHelper.go
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_Cov10_CaseNilSafe_ShouldBeSafe(t *testing.T) {
-	tc := coretestcases.CaseNilSafe{
-		Title: "ClonePtr nil safe direct",
-		Func:  (*coretests.DraftType).ClonePtr,
-		Expected: results.ResultAny{
-			Panicked: false,
-		},
-		CompareFields: []string{"panicked"},
-	}
-	tc.ShouldBeSafe(t, 0)
-}
-
-// ══════════════════════════════════════════════════════════════════════════════
-// CaseV1 First variants — covers CaseV1FirstAssertions.go
-// ══════════════════════════════════════════════════════════════════════════════
-
 func Test_Cov10_ShouldContainsFirst(t *testing.T) {
 	c := coretestcases.CaseV1{
 		Title:         "contains first direct",

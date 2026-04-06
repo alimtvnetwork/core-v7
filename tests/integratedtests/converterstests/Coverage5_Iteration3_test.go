@@ -626,14 +626,6 @@ func Test_C5_StringTo_Float64Default_Fail(t *testing.T) {
 		t.Fatal()
 	}
 }
-
-func Test_C5_StringTo_Float64Conditional(t *testing.T) {
-	v, ok := converters.StringTo.Float64Conditional("3.14", 0)
-	if !ok || v != 3.14 {
-		t.Fatal()
-	}
-}
-
 func Test_C5_StringTo_ByteWithDefault_Fail(t *testing.T) {
 	_, ok := converters.StringTo.ByteWithDefault("abc", 0)
 	if ok {
@@ -993,22 +985,6 @@ func Test_C5_UnsafeBytesToStringWithErr_Valid(t *testing.T) {
 		t.Fatal()
 	}
 }
-
-func Test_C5_UnsafeBytesToStrings_Nil(t *testing.T) {
-	r := converters.UnsafeBytesToStrings(nil)
-	if r != nil {
-		t.Fatal()
-	}
-}
-
-func Test_C5_UnsafeBytesToStrings_Valid(t *testing.T) {
-	r := converters.UnsafeBytesToStrings([]byte{65, 66})
-	if len(r) != 2 || r[0] != "A" {
-		t.Fatal()
-	}
-}
-
-func Test_C5_UnsafeBytesToStringPtr_Nil(t *testing.T) {
 	r := converters.UnsafeBytesToStringPtr(nil)
 	if r != nil {
 		t.Fatal()

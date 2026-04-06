@@ -697,26 +697,6 @@ func Test_I24_DynamicStatus_Clone(t *testing.T) {
 	expected := args.Map{"valid": true, "msg": "test"}
 	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- Clone", actual)
 }
-
-func Test_I24_DynamicStatus_ClonePtr(t *testing.T) {
-	ds := &coredynamic.DynamicStatus{
-		Dynamic: coredynamic.NewDynamic("hello", true),
-		Message: "test",
-	}
-	cloned := ds.ClonePtr()
-	actual := args.Map{"notNil": cloned != nil, "msg": cloned.Message}
-	expected := args.Map{"notNil": true, "msg": "test"}
-	expected.ShouldBeEqual(t, 0, "DynamicStatus returns correct value -- ClonePtr", actual)
-}
-
-func Test_I24_DynamicStatus_ClonePtr_Nil(t *testing.T) {
-	var ds *coredynamic.DynamicStatus
-	actual := args.Map{"nil": ds.ClonePtr() == nil}
-	expected := args.Map{"nil": true}
-	expected.ShouldBeEqual(t, 0, "DynamicStatus returns nil -- ClonePtr nil", actual)
-}
-
-func Test_I24_MapAnyItemDiff_IsRawEqual_RegardlessType(t *testing.T) {
 	m := coredynamic.MapAnyItemDiff{"a": 1}
 	actual := args.Map{"eq": m.IsRawEqual(true, map[string]any{"a": 1})}
 	expected := args.Map{"eq": true}

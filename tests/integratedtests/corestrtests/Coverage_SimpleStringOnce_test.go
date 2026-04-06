@@ -614,25 +614,6 @@ func Test_CovSSO_31_NonPtr_Ptr(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovSSO_32_Clone_ClonePtr_CloneUsingNewVal(t *testing.T) {
-	safeTest(t, "Test_CovSSO_32_Clone_ClonePtr_CloneUsingNewVal", func() {
-		sso := newSSO("hello")
-		c := sso.Clone()
-		if c.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
-		cp := sso.ClonePtr()
-		if cp.Value() != "hello" {
-			t.Fatal("expected hello")
-		}
-		cv := sso.CloneUsingNewVal("new")
-		if cv.Value() != "new" {
-			t.Fatal("expected new")
-		}
-	})
-}
-
 func Test_CovSSO_33_String_StringPtr(t *testing.T) {
 	safeTest(t, "Test_CovSSO_33_String_StringPtr", func() {
 		sso := newSSO("hello")

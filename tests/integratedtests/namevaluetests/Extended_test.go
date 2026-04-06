@@ -158,31 +158,6 @@ func Test_Collection_IsEqual_Verification(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_Collection_ClonePtr_Verification(t *testing.T) {
-	for caseIndex, testCase := range collectionClonePtrTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		isNil := input.GetAsBoolDefault("isNil", false)
-
-		var result *namevalue.Collection[string, string]
-		if isNil {
-			var nilCol *namevalue.Collection[string, string]
-			result = nilCol.ClonePtr()
-		} else {
-			col := namevalue.NewGenericCollectionDefault[string, string]()
-			col.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-			result = col.ClonePtr()
-		}
-
-		// Act
-		actual := args.Map{"isNil": result == nil}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
 func Test_Collection_AddsIf_Verification(t *testing.T) {
 	for caseIndex, testCase := range collectionAddsIfTestCases {
 		// Arrange

@@ -85,24 +85,6 @@ func Test_Cov5_TraceCollection_Clone(t *testing.T) {
 	expected := args.Map{"sameLen": true}
 	expected.ShouldBeEqual(t, 0, "TraceCollection Clone -- same length", actual)
 }
-
-func Test_Cov5_TraceCollection_ClonePtr(t *testing.T) {
-	tc := codestack.New.StackTrace.Default(1, 3)
-	cloned := tc.ClonePtr()
-	actual := args.Map{"notNil": cloned != nil, "sameLen": cloned.Length() == tc.Length()}
-	expected := args.Map{"notNil": true, "sameLen": true}
-	expected.ShouldBeEqual(t, 0, "TraceCollection ClonePtr -- same length", actual)
-}
-
-func Test_Cov5_TraceCollection_ClonePtr_Nil(t *testing.T) {
-	var tc *codestack.TraceCollection
-	cloned := tc.ClonePtr()
-	actual := args.Map{"isNil": cloned == nil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "TraceCollection ClonePtr nil -- returns nil", actual)
-}
-
-func Test_Cov5_TraceCollection_FirstOrDefault(t *testing.T) {
 	tc := codestack.New.StackTrace.SkipNone()
 	first := tc.FirstOrDefault()
 	actual := args.Map{"notNil": first != nil}

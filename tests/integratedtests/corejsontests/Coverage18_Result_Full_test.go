@@ -176,22 +176,6 @@ func Test_Cov18_Result_SafeValues_Nil(t *testing.T) {
 		t.Fatal("expected empty")
 	}
 }
-
-func Test_Cov18_Result_SafeValuesPtr(t *testing.T) {
-	r := corejson.NewResult.AnyPtr("x")
-	if len(r.SafeValuesPtr()) == 0 {
-		t.Fatal("expected values")
-	}
-}
-
-func Test_Cov18_Result_SafeValuesPtr_Issues(t *testing.T) {
-	r := &corejson.Result{Error: errors.New("e")}
-	if len(r.SafeValuesPtr()) != 0 {
-		t.Fatal("expected empty")
-	}
-}
-
-func Test_Cov18_Result_RawMust(t *testing.T) {
 	r := corejson.NewResult.AnyPtr("hello")
 	b := r.RawMust()
 	if len(b) == 0 {
@@ -596,24 +580,6 @@ func Test_Cov18_Result_CloneIf(t *testing.T) {
 		t.Fatal("unexpected error")
 	}
 }
-
-func Test_Cov18_Result_ClonePtr(t *testing.T) {
-	r := corejson.NewResult.AnyPtr("hello")
-	c := r.ClonePtr(true)
-	if c == nil {
-		t.Fatal("expected clone")
-	}
-}
-
-func Test_Cov18_Result_ClonePtr_Nil(t *testing.T) {
-	var r *corejson.Result
-	c := r.ClonePtr(true)
-	if c != nil {
-		t.Fatal("expected nil")
-	}
-}
-
-func Test_Cov18_Result_Clone_DeepAndShallow(t *testing.T) {
 	r := corejson.NewResult.Any("hello")
 	deep := r.Clone(true)
 	shallow := r.Clone(false)

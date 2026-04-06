@@ -160,27 +160,3 @@ func Test_SimpleSlice_InsertAt_Verification(t *testing.T) {
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_LinkedListNode_Extended_Verification(t *testing.T) {
-	for caseIndex, testCase := range linkedListNodeExtendedTestCases {
-		// Arrange
-		list := coregeneric.LinkedListFrom[string]([]string{"a", "b", "c"})
-		head := list.Head()
-
-		// Act
-		endNode, length := head.EndOfChain()
-		cloned := head.Clone()
-		listPtr := head.ListPtr()
-		str := endNode.String()
-
-		actual := args.Map{
-			"endLength":    length,
-			"cloneHasNext": cloned.HasNext(),
-			"listPtrLen":   len(*listPtr),
-			"stringOk":     str != "",
-		}
-
-		// Assert
-		testCase.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}

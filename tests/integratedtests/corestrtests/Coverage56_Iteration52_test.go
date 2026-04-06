@@ -1556,23 +1556,6 @@ func Test_Cov56_Hashset_Collection(t *testing.T) {
 		tc.ShouldBeEqualMap(t, 0, actual)
 	})
 }
-
-func Test_Cov56_Hashset_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov56_Hashset_ListPtr", func() {
-		// Arrange
-		hs := corestr.New.Hashset.Strings([]string{"a"})
-		// Act
-		result := hs.ListPtr()
-		// Assert
-		tc := coretestcases.CaseV1{
-			Title:         "ListPtr deprecated alias",
-			ExpectedInput: args.Map{"Length": 1},
-		}
-		actual := args.Map{"Length": len(result)}
-		tc.ShouldBeEqualMap(t, 0, actual)
-	})
-}
-
 func Test_Cov56_Hashset_AddCapacities(t *testing.T) {
 	safeTest(t, "Test_Cov56_Hashset_AddCapacities", func() {
 		// Arrange

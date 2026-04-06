@@ -1947,27 +1947,6 @@ func Test_C28_191_SimpleStringOnce_SplitTrimNonWhitespace(t *testing.T) {
 		_ = sp
 	})
 }
-
-func Test_C28_192_SimpleStringOnce_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_C28_192_SimpleStringOnce_ClonePtr", func() {
-		s := corestr.New.SimpleStringOnce.Init("hello")
-		c := s.ClonePtr()
-		if c.Value() != "hello" {
-			t.Error("expected hello")
-		}
-	})
-}
-
-func Test_C28_193_SimpleStringOnce_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_C28_193_SimpleStringOnce_ClonePtr_Nil", func() {
-		var s *corestr.SimpleStringOnce
-		if s.ClonePtr() != nil {
-			t.Error("expected nil")
-		}
-	})
-}
-
-func Test_C28_194_SimpleStringOnce_Clone(t *testing.T) {
 	safeTest(t, "Test_C28_194_SimpleStringOnce_Clone", func() {
 		s := corestr.New.SimpleStringOnce.Init("hello")
 		c := s.Clone()

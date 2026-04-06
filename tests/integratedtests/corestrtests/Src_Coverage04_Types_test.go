@@ -130,27 +130,6 @@ func Test_SrcC04_ValidValue_BadConversions_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC04_ValidValue_BytesOnce_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC04_ValidValue_BytesOnce_Verification", func() {
-		// Arrange
-		tc := srcC04ValidValueBytesOnceTestCase
-		v := corestr.NewValidValue("hello")
-
-		// Act
-		b1 := v.ValueBytesOnce()
-		b2 := v.ValueBytesOnce()
-		_ = v.ValueBytesOncePtr()
-		actual := args.Map{
-			"len1": len(b1),
-			"len2": len(b2),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC04_ValidValue_Regex_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC04_ValidValue_Regex_Verification", func() {
 		// Arrange

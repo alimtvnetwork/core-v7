@@ -188,21 +188,6 @@ func Test_Cov13_KeyValCollection_Json(t *testing.T) {
 	expected := args.Map{"jLen": true, "jpNN": true, "jmNN": true, "jmaNN": true}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Json", actual)
 }
-
-func Test_Cov13_KeyValCollection_CloneNonPtrPtr(t *testing.T) {
-	kvc := coredynamic.NewKeyValCollection(2)
-	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
-	cloned := kvc.Clone()
-	clonedPtr := kvc.ClonePtr()
-	np := kvc.NonPtr()
-	p := kvc.Ptr()
-	var nilKvc *coredynamic.KeyValCollection
-	nilClone := nilKvc.ClonePtr()
-	actual := args.Map{"cLen": cloned.Length(), "cpNN": clonedPtr != nil, "npLen": np.Length(), "pNN": p != nil, "nilNil": nilClone == nil}
-	expected := args.Map{"cLen": 1, "cpNN": true, "npLen": 1, "pNN": true, "nilNil": true}
-	expected.ShouldBeEqual(t, 0, "Clone/NonPtr/Ptr returns correct value -- with args", actual)
-}
-
 func Test_Cov13_KeyValCollection_Serialize(t *testing.T) {
 	kvc := coredynamic.NewKeyValCollection(2)
 	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})

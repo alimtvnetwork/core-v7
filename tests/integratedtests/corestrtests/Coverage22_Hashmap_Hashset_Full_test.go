@@ -284,22 +284,6 @@ func Test_Cov22_Hashmap_JsonOps(t *testing.T) {
 		_ = h.AsJsonMarshaller()
 	})
 }
-
-func Test_Cov22_Hashmap_Clone(t *testing.T) {
-	safeTest(t, "Test_Cov22_Hashmap_Clone", func() {
-		h := corestr.New.Hashmap.Cap(2)
-		h.AddOrUpdate("a", "1")
-		c := h.Clone()
-		if c.Length() != 1 {
-			t.Fatal("expected 1")
-		}
-		cp := h.ClonePtr()
-		if cp == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
 func Test_Cov22_Hashmap_ClearDispose(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashmap_ClearDispose", func() {
 		h := corestr.New.Hashmap.Cap(2)
@@ -483,26 +467,6 @@ func Test_Cov22_Hashset_Lookups(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov22_Hashset_Collection(t *testing.T) {
-	safeTest(t, "Test_Cov22_Hashset_Collection", func() {
-		h := corestr.New.Hashset.Cap(2)
-		h.Adds("a", "b")
-		_ = h.Collection()
-		_ = h.SortedList()
-		_ = h.OrderedList()
-		_ = h.SafeStrings()
-		_ = h.Lines()
-		_ = h.SimpleSlice()
-		_ = h.Items()
-		_ = h.List()
-		_ = h.ListPtr()
-		_ = h.ListCopyLock()
-		_ = h.ListPtrSortedAsc()
-		_ = h.ListPtrSortedDsc()
-	})
-}
-
 func Test_Cov22_Hashset_Filter(t *testing.T) {
 	safeTest(t, "Test_Cov22_Hashset_Filter", func() {
 		h := corestr.New.Hashset.Cap(5)

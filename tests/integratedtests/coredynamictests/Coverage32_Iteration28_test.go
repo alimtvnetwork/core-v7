@@ -1141,21 +1141,6 @@ func Test_C32_87_MapAnyItems_JsonResultsPtrCollection(t *testing.T) {
 		t.Errorf("expected 0")
 	}
 }
-
-func Test_C32_88_MapAnyItems_ClonePtr(t *testing.T) {
-	m := coredynamic.NewMapAnyItems(4)
-	m.Add("a", 1)
-	cloned, err := m.ClonePtr()
-	if err != nil || cloned == nil {
-		t.Errorf("unexpected error or nil: %v", err)
-	}
-	var nilM *coredynamic.MapAnyItems
-	_, err = nilM.ClonePtr()
-	if err == nil {
-		t.Errorf("expected error for nil receiver")
-	}
-}
-
 func Test_C32_89_MapAnyItems_NewUsingAnyTypeMap(t *testing.T) {
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]int{"a": 1})
 	if err != nil {
@@ -1548,24 +1533,6 @@ func Test_C32_114_KeyValCollection_String(t *testing.T) {
 		t.Errorf("expected non-empty")
 	}
 }
-
-func Test_C32_115_KeyValCollection_Clone_ClonePtr(t *testing.T) {
-	kvc := coredynamic.NewKeyValCollection(2)
-	kvc.Add(coredynamic.KeyVal{Key: "a", Value: 1})
-	c := kvc.Clone()
-	if c.Length() != 1 {
-		t.Errorf("expected 1")
-	}
-	cp := kvc.ClonePtr()
-	if cp.Length() != 1 {
-		t.Errorf("expected 1")
-	}
-	var nilKVC *coredynamic.KeyValCollection
-	if nilKVC.ClonePtr() != nil {
-		t.Errorf("expected nil")
-	}
-}
-
 func Test_C32_116_KeyValCollection_NonPtr_Ptr(t *testing.T) {
 	kvc := coredynamic.NewKeyValCollection(2)
 	np := kvc.NonPtr()

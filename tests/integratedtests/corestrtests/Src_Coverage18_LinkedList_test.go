@@ -393,29 +393,6 @@ func Test_SrcC18_NextNodes_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC18_ToCollList_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC18_ToCollList_Verification", func() {
-		// Arrange
-		tc := srcC18ToCollListTestCase
-
-		// Act
-		actual := args.Map{
-			"toColLen":     corestr.New.LinkedList.SpreadStrings("a", "b").ToCollection(5).Length(),
-			"toColEmptyE":  !corestr.New.LinkedList.Create().ToCollection(0).HasItems(),
-			"listLen":      len(corestr.New.LinkedList.SpreadStrings("a", "b").List()),
-			"listFirst":    corestr.New.LinkedList.SpreadStrings("a", "b").List()[0],
-			"listEmptyLen": len(corestr.New.LinkedList.Create().List()),
-			"listPtrLen":   len(corestr.New.LinkedList.SpreadStrings("a").ListPtr()),
-			"listLockLen":  len(corestr.New.LinkedList.SpreadStrings("a").ListLock()),
-			"listPtrLkLen": len(corestr.New.LinkedList.SpreadStrings("a").ListPtrLock()),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC18_StringJoin_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC18_StringJoin_Verification", func() {
 		// Arrange
@@ -458,40 +435,6 @@ func Test_SrcC18_CompareEquals_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC18_AddStrToNode_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC18_AddStrToNode_Verification", func() {
-		// Arrange
-		tc := srcC18AddStrToNodeTestCase
-
-		// Act
-		ll1 := corestr.New.LinkedList.SpreadStrings("a", "d")
-		ll1.AddStringsToNode(false, ll1.Head(), []string{"b", "c"})
-		ll2 := corestr.New.LinkedList.SpreadStrings("a", "c")
-		ll2.AddStringsToNode(false, ll2.Head(), []string{"b"})
-		ll3 := corestr.New.LinkedList.SpreadStrings("a")
-		ll3.AddStringsToNode(false, ll3.Head(), []string{})
-		ll4 := corestr.New.LinkedList.SpreadStrings("a")
-		ll4.AddStringsToNode(true, nil, []string{"b"})
-		ll5 := corestr.New.LinkedList.SpreadStrings("a")
-		items := []string{"b"}
-		ll5.AddStringsPtrToNode(true, ll5.Head(), &items)
-		ll6 := corestr.New.LinkedList.SpreadStrings("a")
-		ll6.AddStringsPtrToNode(true, ll6.Head(), nil)
-		actual := args.Map{
-			"strToNodeGe3":  ll1.Length() >= 3,
-			"strSingleAt1":  ll2.List()[1],
-			"strEmptyLen":   ll3.Length(),
-			"strNilNodeLen": ll4.Length(),
-			"ptrToNodeGe2":  ll5.Length() >= 2,
-			"ptrNilLen":     ll6.Length(),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC18_Json_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC18_Json_Verification", func() {
 		// Arrange
@@ -544,72 +487,6 @@ func Test_SrcC18_Clear_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC18_NodeExported_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC18_NodeExported_Verification", func() {
-		// Arrange
-		tc := srcC18NodeExportedTestCase
-
-		// Act
-		noPanic := !callPanicsSrcC18(func() {
-			// IsEqual variants (no next field)
-			n1 := &corestr.LinkedListNode{Element: "a"}
-			n2 := &corestr.LinkedListNode{Element: "b"}
-			_ = n1.IsEqual(n1) // same ref
-			_ = n1.IsEqual(nil)
-			_ = n1.IsEqual(n2)
-			var nNil *corestr.LinkedListNode
-			_ = nNil.IsEqual(nil)
-			// IsEqualSensitive
-			nA := &corestr.LinkedListNode{Element: "A"}
-			na := &corestr.LinkedListNode{Element: "a"}
-			_ = nA.IsEqualSensitive(na, false)
-			_ = nA.IsEqualSensitive(na, true)
-			_ = nNil.IsEqualSensitive(nil, true)
-			_ = n1.IsEqualSensitive(nil, true)
-			// IsEqualValue
-			_ = n1.IsEqualValue("a")
-			_ = nA.IsEqualValueSensitive("a", false)
-			_ = nA.IsEqualValueSensitive("a", true)
-			// IsChainEqual (no next field needed for single-node)
-			_ = n1.IsChainEqual(nil, true)
-			_ = nNil.IsChainEqual(nil, true)
-			nAA := &corestr.LinkedListNode{Element: "A"}
-			_ = nAA.IsChainEqual(na, false)
-			// AddNext
-			ll := corestr.New.LinkedList.SpreadStrings("a")
-			nn := ll.Head().AddNext(ll, "b")
-			_ = nn.Element
-			// AddNextNode
-			ll2 := corestr.New.LinkedList.SpreadStrings("a")
-			ll2.Head().AddNextNode(ll2, &corestr.LinkedListNode{Element: "b"})
-			// AddStringsToNode
-			ll3 := corestr.New.LinkedList.SpreadStrings("a")
-			ll3.Head().AddStringsToNode(ll3, true, []string{"b", "c"})
-			// AddStringsPtrToNode
-			ll4 := corestr.New.LinkedList.SpreadStrings("a")
-			items := []string{"b"}
-			ll4.Head().AddStringsPtrToNode(ll4, true, &items)
-			ll5 := corestr.New.LinkedList.SpreadStrings("a")
-			_ = ll5.Head().AddStringsPtrToNode(ll5, true, nil)
-			// AddCollectionToNode
-			ll6 := corestr.New.LinkedList.SpreadStrings("a")
-			ll6.Head().AddCollectionToNode(ll6, true, corestr.New.Collection.Strings([]string{"b"}))
-			// String
-			_ = n1.String()
-			_ = n1.StringList("H: ")
-			// ListPtr (single node)
-			_ = n1.ListPtr()
-		})
-		actual := args.Map{
-			"noPanic": noPanic,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC18_NonChained_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC18_NonChained_Verification", func() {
 		// Arrange

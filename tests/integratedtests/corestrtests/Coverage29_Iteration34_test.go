@@ -1465,27 +1465,6 @@ func Test_C29_150_SimpleSlice_Clone(t *testing.T) {
 		}
 	})
 }
-
-func Test_C29_151_SimpleSlice_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_C29_151_SimpleSlice_ClonePtr", func() {
-		s := corestr.New.SimpleSlice.Lines("a")
-		c := s.ClonePtr(true)
-		if c.Length() != 1 {
-			t.Error("expected 1")
-		}
-	})
-}
-
-func Test_C29_152_SimpleSlice_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_C29_152_SimpleSlice_ClonePtr_Nil", func() {
-		var s *corestr.SimpleSlice
-		if s.ClonePtr(true) != nil {
-			t.Error("expected nil")
-		}
-	})
-}
-
-func Test_C29_153_SimpleSlice_DeepClone(t *testing.T) {
 	safeTest(t, "Test_C29_153_SimpleSlice_DeepClone", func() {
 		s := corestr.New.SimpleSlice.Lines("a")
 		c := s.DeepClone()

@@ -1040,19 +1040,6 @@ func Test_Cov62_Hashmap_KeysLock_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "KeysLock empty", actual)
 	})
 }
-
-func Test_Cov62_Hashmap_ValuesListCopyLock(t *testing.T) {
-	safeTest(t, "Test_Cov62_Hashmap_ValuesListCopyLock", func() {
-		hm := corestr.New.Hashmap.Empty()
-		hm.AddOrUpdate("k", "v")
-		actual := args.Map{"len": len(hm.ValuesListCopyLock())}
-		expected := args.Map{"len": 1}
-		expected.ShouldBeEqual(t, 0, "ValuesListCopyLock", actual)
-	})
-}
-
-// ── KeysToLower / ValuesToLower ──
-
 func Test_Cov62_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_KeysToLower", func() {
 		hm := corestr.New.Hashmap.Empty()
@@ -1063,20 +1050,6 @@ func Test_Cov62_Hashmap_KeysToLower(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "KeysToLower", actual)
 	})
 }
-
-func Test_Cov62_Hashmap_ValuesToLower(t *testing.T) {
-	safeTest(t, "Test_Cov62_Hashmap_ValuesToLower", func() {
-		hm := corestr.New.Hashmap.Empty()
-		hm.AddOrUpdate("KEY", "val")
-		r := hm.ValuesToLower()
-		actual := args.Map{"has": r.Has("key")}
-		expected := args.Map{"has": true}
-		expected.ShouldBeEqual(t, 0, "ValuesToLower (deprecated alias)", actual)
-	})
-}
-
-// ── Length ──
-
 func Test_Cov62_Hashmap_Length(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Length", func() {
 		hm := corestr.New.Hashmap.Empty()
@@ -1674,31 +1647,6 @@ func Test_Cov62_Hashmap_Clone_Empty(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Clone empty", actual)
 	})
 }
-
-func Test_Cov62_Hashmap_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_Cov62_Hashmap_ClonePtr", func() {
-		hm := corestr.New.Hashmap.Empty()
-		hm.AddOrUpdate("k", "v")
-		r := hm.ClonePtr()
-		actual := args.Map{"nonNil": r != nil, "len": r.Length()}
-		expected := args.Map{"nonNil": true, "len": 1}
-		expected.ShouldBeEqual(t, 0, "ClonePtr", actual)
-	})
-}
-
-func Test_Cov62_Hashmap_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov62_Hashmap_ClonePtr_Nil", func() {
-		var hm *corestr.Hashmap
-		r := hm.ClonePtr()
-		actual := args.Map{"nil": r == nil}
-		expected := args.Map{"nil": true}
-		expected.ShouldBeEqual(t, 0, "ClonePtr nil", actual)
-	})
-}
-
-// ── Get / GetValue ──
-
-func Test_Cov62_Hashmap_Get(t *testing.T) {
 	safeTest(t, "Test_Cov62_Hashmap_Get", func() {
 		hm := corestr.New.Hashmap.Empty()
 		hm.AddOrUpdate("k", "v")

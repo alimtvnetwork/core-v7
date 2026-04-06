@@ -516,17 +516,6 @@ func Test_CovP2_31_FilterPtr(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovP2_32_NonEmptyListPtr(t *testing.T) {
-	safeTest(t, "Test_CovP2_32_NonEmptyListPtr", func() {
-		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
-		result := col.NonEmptyListPtr()
-		if len(*result) != 2 {
-			t.Fatal("expected 2")
-		}
-	})
-}
-
 func Test_CovP2_33_NonEmptyList(t *testing.T) {
 	safeTest(t, "Test_CovP2_33_NonEmptyList", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
@@ -581,17 +570,6 @@ func Test_CovP2_37_NonEmptyItems(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovP2_38_NonEmptyItemsPtr(t *testing.T) {
-	safeTest(t, "Test_CovP2_38_NonEmptyItemsPtr", func() {
-		col := corestr.New.Collection.Strings([]string{"a", "", "b"})
-		r := col.NonEmptyItemsPtr()
-		if len(r) != 2 {
-			t.Fatal("expected 2")
-		}
-	})
-}
-
 func Test_CovP2_39_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 	safeTest(t, "Test_CovP2_39_NonEmptyItemsOrNonWhitespace", func() {
 		col := corestr.New.Collection.Strings([]string{"a", "   ", "b"})
@@ -601,17 +579,6 @@ func Test_CovP2_39_NonEmptyItemsOrNonWhitespace(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovP2_40_NonEmptyItemsOrNonWhitespacePtr(t *testing.T) {
-	safeTest(t, "Test_CovP2_40_NonEmptyItemsOrNonWhitespacePtr", func() {
-		col := corestr.New.Collection.Strings([]string{"a", "   ", "b"})
-		r := col.NonEmptyItemsOrNonWhitespacePtr()
-		if len(r) != 2 {
-			t.Fatal("expected 2")
-		}
-	})
-}
-
 func Test_CovP2_41_Items(t *testing.T) {
 	safeTest(t, "Test_CovP2_41_Items", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})
@@ -620,16 +587,6 @@ func Test_CovP2_41_Items(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovP2_42_ListPtr(t *testing.T) {
-	safeTest(t, "Test_CovP2_42_ListPtr", func() {
-		col := corestr.New.Collection.Strings([]string{"a"})
-		if len(col.ListPtr()) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
 func Test_CovP2_43_ListCopyPtrLock(t *testing.T) {
 	safeTest(t, "Test_CovP2_43_ListCopyPtrLock", func() {
 		col := corestr.New.Collection.Strings([]string{"a"})

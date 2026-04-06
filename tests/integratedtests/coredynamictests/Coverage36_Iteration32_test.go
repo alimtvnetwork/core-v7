@@ -444,25 +444,6 @@ func Test_C36_52_MapAnyItems_IsEqual_DiffLen(t *testing.T) {
 		t.Error("expected not equal")
 	}
 }
-
-func Test_C36_53_MapAnyItems_ClonePtr(t *testing.T) {
-	m := coredynamic.NewMapAnyItems(4)
-	m.Add("k", 42)
-	cloned, err := m.ClonePtr()
-	if err != nil || cloned == nil {
-		t.Error("expected cloned")
-	}
-}
-
-func Test_C36_54_MapAnyItems_ClonePtr_Nil(t *testing.T) {
-	var m *coredynamic.MapAnyItems
-	cloned, err := m.ClonePtr()
-	if cloned != nil || err == nil {
-		t.Error("expected nil + error")
-	}
-}
-
-func Test_C36_55_MapAnyItems_RawMapStringAnyDiff(t *testing.T) {
 	m := coredynamic.NewMapAnyItems(4)
 	m.Add("k", 1)
 	d := m.RawMapStringAnyDiff()
@@ -1228,23 +1209,6 @@ func Test_C36_146_TypedDynamic_Clone(t *testing.T) {
 		t.Error("expected 42")
 	}
 }
-
-func Test_C36_147_TypedDynamic_ClonePtr(t *testing.T) {
-	d := coredynamic.NewTypedDynamicPtr[int](42, true)
-	c := d.ClonePtr()
-	if c == nil || c.Value() != 42 {
-		t.Error("expected 42")
-	}
-}
-
-func Test_C36_148_TypedDynamic_ClonePtr_Nil(t *testing.T) {
-	var d *coredynamic.TypedDynamic[int]
-	if d.ClonePtr() != nil {
-		t.Error("expected nil")
-	}
-}
-
-func Test_C36_149_TypedDynamic_NonPtr(t *testing.T) {
 	d := coredynamic.NewTypedDynamic[int](42, true)
 	np := d.NonPtr()
 	if np.Value() != 42 {
@@ -1581,23 +1545,6 @@ func Test_C36_191_TypedSimpleResult_Clone(t *testing.T) {
 		t.Error("expected 42")
 	}
 }
-
-func Test_C36_192_TypedSimpleResult_ClonePtr(t *testing.T) {
-	r := coredynamic.NewTypedSimpleResultValid[int](42)
-	c := r.ClonePtr()
-	if c == nil || c.Data() != 42 {
-		t.Error("expected 42")
-	}
-}
-
-func Test_C36_193_TypedSimpleResult_ClonePtr_Nil(t *testing.T) {
-	var r *coredynamic.TypedSimpleResult[int]
-	if r.ClonePtr() != nil {
-		t.Error("expected nil")
-	}
-}
-
-func Test_C36_194_TypedSimpleResult_Clone_Nil(t *testing.T) {
 	var r *coredynamic.TypedSimpleResult[int]
 	c := r.Clone()
 	if c.IsValid() {

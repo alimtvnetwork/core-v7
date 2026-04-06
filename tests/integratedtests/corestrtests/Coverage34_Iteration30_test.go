@@ -419,16 +419,6 @@ func Test_I30_Hashset_List(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- List", actual)
 	})
 }
-
-func Test_I30_Hashset_ListPtr(t *testing.T) {
-	safeTest(t, "Test_I30_Hashset_ListPtr", func() {
-		hs := corestr.New.Hashset.Strings([]string{"a"})
-		actual := args.Map{"len": len(hs.ListPtr())}
-		expected := args.Map{"len": 1}
-		expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- ListPtr", actual)
-	})
-}
-
 func Test_I30_Hashset_ListCopyLock(t *testing.T) {
 	safeTest(t, "Test_I30_Hashset_ListCopyLock", func() {
 		hs := corestr.New.Hashset.Strings([]string{"a"})

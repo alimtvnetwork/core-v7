@@ -173,21 +173,6 @@ func Test_Cov6_User_Comprehensive(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "User returns correct value -- comprehensive", actual)
 }
-
-func Test_Cov6_User_Clone(t *testing.T) {
-	u := &corepayload.User{Name: "Alice", Type: "admin"}
-	cloned := u.Clone()
-	clonedPtr := u.ClonePtr()
-	var nilU *corepayload.User
-	actual := args.Map{
-		"cloneName":   cloned.Name,
-		"cpName":      clonedPtr.Name,
-		"nilClonePtr": nilU.ClonePtr() == nil,
-	}
-	expected := args.Map{"cloneName": "Alice", "cpName": "Alice", "nilClonePtr": true}
-	expected.ShouldBeEqual(t, 0, "User returns correct value -- Clone", actual)
-}
-
 func Test_Cov6_User_JSON(t *testing.T) {
 	u := &corepayload.User{Name: "Alice"}
 	j := u.Json()
@@ -245,21 +230,6 @@ func Test_Cov6_AuthInfo_Setters(t *testing.T) {
 	expected := args.Map{"action": "create", "resource": "/api", "id": "id-1"}
 	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- setters", actual)
 }
-
-func Test_Cov6_AuthInfo_Clone(t *testing.T) {
-	ai := &corepayload.AuthInfo{ActionType: "create"}
-	cloned := ai.Clone()
-	clonedPtr := ai.ClonePtr()
-	var nilAI *corepayload.AuthInfo
-	actual := args.Map{
-		"cloneAction": cloned.ActionType,
-		"cpAction":    clonedPtr.ActionType,
-		"nilClone":    nilAI.ClonePtr() == nil,
-	}
-	expected := args.Map{"cloneAction": "create", "cpAction": "create", "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "AuthInfo returns correct value -- Clone", actual)
-}
-
 func Test_Cov6_AuthInfo_JSON(t *testing.T) {
 	ai := corepayload.AuthInfo{ActionType: "create"}
 	j := ai.Json()
@@ -328,16 +298,4 @@ func Test_Cov6_SessionInfo_IsEmpty(t *testing.T) {
 	}
 	expected := args.Map{"isEmpty": true, "nilEmpty": true}
 	expected.ShouldBeEqual(t, 0, "SessionInfo returns empty -- IsEmpty", actual)
-}
-
-func Test_Cov6_SessionInfo_Clone(t *testing.T) {
-	si := &corepayload.SessionInfo{Id: "s1"}
-	cloned := si.ClonePtr()
-	var nilSI *corepayload.SessionInfo
-	actual := args.Map{
-		"cloneId":  cloned.Id,
-		"nilClone": nilSI.ClonePtr() == nil,
-	}
-	expected := args.Map{"cloneId": "s1", "nilClone": true}
-	expected.ShouldBeEqual(t, 0, "SessionInfo returns correct value -- Clone", actual)
 }

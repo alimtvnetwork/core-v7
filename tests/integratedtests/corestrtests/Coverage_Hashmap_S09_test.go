@@ -1513,27 +1513,6 @@ func Test_S09_90_Hashmap_KeysLock_Empty(t *testing.T) {
 		}
 	})
 }
-
-// ── ValuesListCopyLock ───────────────────────────────────────
-
-func Test_S09_91_Hashmap_ValuesListCopyLock(t *testing.T) {
-	safeTest(t, "Test_S09_91_Hashmap_ValuesListCopyLock", func() {
-		// Arrange
-		hm := corestr.New.Hashmap.Cap(5)
-		hm.AddOrUpdate("k", "v")
-
-		// Act
-		list := hm.ValuesListCopyLock()
-
-		// Assert
-		if len(list) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
-// ── KeysToLower / ValuesToLower ──────────────────────────────
-
 func Test_S09_92_Hashmap_KeysToLower(t *testing.T) {
 	safeTest(t, "Test_S09_92_Hashmap_KeysToLower", func() {
 		// Arrange
@@ -1549,25 +1528,6 @@ func Test_S09_92_Hashmap_KeysToLower(t *testing.T) {
 		}
 	})
 }
-
-func Test_S09_93_Hashmap_ValuesToLower(t *testing.T) {
-	safeTest(t, "Test_S09_93_Hashmap_ValuesToLower", func() {
-		// Arrange
-		hm := corestr.New.Hashmap.Cap(5)
-		hm.AddOrUpdate("KEY", "v")
-
-		// Act — deprecated alias
-		lowered := hm.ValuesToLower()
-
-		// Assert
-		if lowered == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
-// ── Length / LengthLock ──────────────────────────────────────
-
 func Test_S09_94_Hashmap_Length(t *testing.T) {
 	safeTest(t, "Test_S09_94_Hashmap_Length", func() {
 		// Arrange
@@ -2349,53 +2309,6 @@ func Test_S09_144_Hashmap_AsJsonParseSelfInjector(t *testing.T) {
 		}
 	})
 }
-
-func Test_S09_145_Hashmap_AsJsonMarshaller(t *testing.T) {
-	safeTest(t, "Test_S09_145_Hashmap_AsJsonMarshaller", func() {
-		hm := corestr.New.Hashmap.Cap(5)
-		if hm.AsJsonMarshaller() == nil {
-			t.Fatal("expected non-nil")
-		}
-	})
-}
-
-// ── ClonePtr / Clone ─────────────────────────────────────────
-
-func Test_S09_146_Hashmap_ClonePtr(t *testing.T) {
-	safeTest(t, "Test_S09_146_Hashmap_ClonePtr", func() {
-		// Arrange
-		hm := corestr.New.Hashmap.Cap(5)
-		hm.AddOrUpdate("k", "v")
-
-		// Act
-		cloned := hm.ClonePtr()
-
-		// Assert
-		if cloned == nil || cloned.Length() != 1 {
-			t.Fatal("expected cloned with 1 item")
-		}
-	})
-}
-
-func Test_S09_147_Hashmap_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_S09_147_Hashmap_ClonePtr_Nil", func() {
-		// Arrange
-		var hm *corestr.Hashmap
-
-		// Act
-		cloned := hm.ClonePtr()
-
-		// Assert
-		if cloned != nil {
-			t.Fatal("expected nil")
-		}
-	})
-}
-
-func Test_S09_148_Hashmap_Clone(t *testing.T) {
-	safeTest(t, "Test_S09_148_Hashmap_Clone", func() {
-		// Arrange
-		hm := corestr.New.Hashmap.Cap(5)
 		hm.AddOrUpdate("k", "v")
 
 		// Act

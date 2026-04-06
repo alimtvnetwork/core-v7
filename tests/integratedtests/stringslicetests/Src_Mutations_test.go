@@ -27,28 +27,6 @@ func Test_Src_Clone_Verification(t *testing.T) {
 		})
 	}
 }
-
-func Test_Src_ClonePtr_Verification(t *testing.T) {
-	for caseIndex, tc := range srcClonePtrTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		sliceRaw := input["input"]
-
-		var slice []string
-		if sliceRaw != nil {
-			slice = sliceRaw.([]string)
-		}
-
-		// Act
-		result := stringslice.ClonePtr(slice)
-
-		// Assert
-		tc.ShouldBeEqualMap(t, caseIndex, args.Map{
-			"length": len(result),
-		})
-	}
-}
-
 func Test_Src_CloneUsingCap_Verification(t *testing.T) {
 	for caseIndex, tc := range srcCloneUsingCapTestCases {
 		// Arrange

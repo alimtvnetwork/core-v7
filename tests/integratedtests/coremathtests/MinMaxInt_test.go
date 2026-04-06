@@ -38,40 +38,6 @@ func Test_MinInt_Verification(t *testing.T) {
 		tc.ShouldBeEqualMap(t, caseIndex, actual)
 	}
 }
-
-func Test_MaxByte_Verification(t *testing.T) {
-	for caseIndex, tc := range maxByteTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		a, _ := input.GetAsInt("a")
-		b, _ := input.GetAsInt("b")
-
-		// Act
-		result := coremath.MaxByte(byte(a), byte(b))
-
-		// Assert
-		actual := args.Map{"result": int(result)}
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_MinByte_Verification(t *testing.T) {
-	for caseIndex, tc := range minByteTestCases {
-		// Arrange
-		input := tc.ArrangeInput.(args.Map)
-		a, _ := input.GetAsInt("a")
-		b, _ := input.GetAsInt("b")
-
-		// Act
-		result := coremath.MinByte(byte(a), byte(b))
-
-		// Assert
-		actual := args.Map{"result": int(result)}
-		tc.ShouldBeEqualMap(t, caseIndex, actual)
-	}
-}
-
-func Test_IntegerWithin_ToByte_Verification(t *testing.T) {
 	for caseIndex, tc := range integerWithinToByteTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)

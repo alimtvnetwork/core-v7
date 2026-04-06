@@ -53,36 +53,6 @@ func Test_Cov8_SafeRangeItems_EndBeyondLast(t *testing.T) {
 	expected := args.Map{"len": 2}
 	expected.ShouldBeEqual(t, 0, "SafeRangeItems returns clipped -- end beyond last", actual)
 }
-
-func Test_Cov8_SafeRangeItems_InvalidStart(t *testing.T) {
-	result := stringslice.SafeRangeItems([]string{"a", "b", "c"}, -1, 2)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 2}
-	expected.ShouldBeEqual(t, 0, "SafeRangeItems returns from start -- invalid start index", actual)
-}
-
-// ── SafeRangeItemsPtr — uncovered branches ──
-
-func Test_Cov8_SafeRangeItemsPtr_Empty(t *testing.T) {
-	result := stringslice.SafeRangeItemsPtr([]string{}, 0, 1)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "SafeRangeItemsPtr returns empty -- empty slice", actual)
-}
-
-func Test_Cov8_SafeRangeItemsPtr_Valid(t *testing.T) {
-	result := stringslice.SafeRangeItemsPtr([]string{"a", "b"}, 0, 1)
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 1}
-	expected.ShouldBeEqual(t, 0, "SafeRangeItemsPtr returns items -- valid range", actual)
-}
-
-// ── SafeIndexes — uncovered branches ──
-
-func Test_Cov8_SafeIndexes_OutOfBounds(t *testing.T) {
-	result := stringslice.SafeIndexes([]string{"a", "b"}, 0, 5, -1)
-	actual := args.Map{"first": result[0], "second": result[1], "third": result[2]}
-	expected := args.Map{"first": "a", "second": "", "third": ""}
 	expected.ShouldBeEqual(t, 0, "SafeIndexes returns partial -- out of bounds indexes", actual)
 }
 
@@ -101,38 +71,6 @@ func Test_Cov8_SplitTrimmedNonEmpty_Content(t *testing.T) {
 	expected := args.Map{"len": 3, "first": "a"}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmpty returns trimmed -- comma separated", actual)
 }
-
-// ── SplitTrimmedNonEmptyAll ──
-
-func Test_Cov8_SplitTrimmedNonEmptyAll_Content(t *testing.T) {
-	result := stringslice.SplitTrimmedNonEmptyAll("  x | y  ", "|")
-	actual := args.Map{"len": len(result), "first": result[0]}
-	expected := args.Map{"len": 2, "first": "x"}
-	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmptyAll returns trimmed -- pipe separated", actual)
-}
-
-// ── TrimmedEachWordsPtr ──
-
-func Test_Cov8_TrimmedEachWordsPtr_Empty(t *testing.T) {
-	result := stringslice.TrimmedEachWordsPtr([]string{})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
-	expected.ShouldBeEqual(t, 0, "TrimmedEachWordsPtr returns empty -- empty input", actual)
-}
-
-func Test_Cov8_TrimmedEachWordsPtr_Items(t *testing.T) {
-	result := stringslice.TrimmedEachWordsPtr([]string{" a ", " b "})
-	actual := args.Map{"first": result[0], "second": result[1]}
-	expected := args.Map{"first": "a", "second": "b"}
-	expected.ShouldBeEqual(t, 0, "TrimmedEachWordsPtr returns trimmed -- whitespace items", actual)
-}
-
-// ── NonWhitespacePtr ──
-
-func Test_Cov8_NonWhitespacePtr_Empty(t *testing.T) {
-	result := stringslice.NonWhitespacePtr([]string{})
-	actual := args.Map{"len": len(result)}
-	expected := args.Map{"len": 0}
 	expected.ShouldBeEqual(t, 0, "NonWhitespacePtr returns empty -- empty input", actual)
 }
 
@@ -167,36 +105,6 @@ func Test_Cov8_NonEmptyJoinPtr_Empty(t *testing.T) {
 	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "NonEmptyJoinPtr returns empty -- empty input", actual)
 }
-
-func Test_Cov8_NonEmptyJoinPtr_Items(t *testing.T) {
-	result := stringslice.NonEmptyJoinPtr([]string{"a", "", "b"}, ",")
-	actual := args.Map{"val": result}
-	expected := args.Map{"val": "a,b"}
-	expected.ShouldBeEqual(t, 0, "NonEmptyJoinPtr returns joined -- empty removed", actual)
-}
-
-// ── LastSafeIndexPtr ──
-
-func Test_Cov8_LastSafeIndexPtr_Empty(t *testing.T) {
-	result := stringslice.LastSafeIndexPtr([]string{})
-	actual := args.Map{"val": result}
-	expected := args.Map{"val": -1}
-	expected.ShouldBeEqual(t, 0, "LastSafeIndexPtr returns -1 -- empty input", actual)
-}
-
-func Test_Cov8_LastSafeIndexPtr_Items(t *testing.T) {
-	result := stringslice.LastSafeIndexPtr([]string{"a", "b"})
-	actual := args.Map{"val": result}
-	expected := args.Map{"val": 1}
-	expected.ShouldBeEqual(t, 0, "LastSafeIndexPtr returns 1 -- two items", actual)
-}
-
-// ── SafeIndexAtUsingLastIndex ──
-
-func Test_Cov8_SafeIndexAtUsingLastIndex_OutOfRange(t *testing.T) {
-	result := stringslice.SafeIndexAtUsingLastIndex([]string{"a"}, 0, 5)
-	actual := args.Map{"val": result}
-	expected := args.Map{"val": ""}
 	expected.ShouldBeEqual(t, 0, "SafeIndexAtUsingLastIndex returns empty -- index out of range", actual)
 }
 

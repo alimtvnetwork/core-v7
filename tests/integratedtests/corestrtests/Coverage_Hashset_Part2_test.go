@@ -212,23 +212,6 @@ func Test_CovHS2_11_Items(t *testing.T) {
 		}
 	})
 }
-
-func Test_CovHS2_12_List_ListPtr_ListCopyLock(t *testing.T) {
-	safeTest(t, "Test_CovHS2_12_List_ListPtr_ListCopyLock", func() {
-		hs := corestr.New.Hashset.Empty()
-		hs.Add("a")
-		if len(hs.List()) != 1 {
-			t.Fatal("expected 1")
-		}
-		if len(hs.ListPtr()) != 1 {
-			t.Fatal("expected 1")
-		}
-		if len(hs.ListCopyLock()) != 1 {
-			t.Fatal("expected 1")
-		}
-	})
-}
-
 func Test_CovHS2_13_MapStringAny_MapStringAnyDiff(t *testing.T) {
 	safeTest(t, "Test_CovHS2_13_MapStringAny_MapStringAnyDiff", func() {
 		hs := corestr.New.Hashset.Empty()

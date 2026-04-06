@@ -81,28 +81,6 @@ func Test_Key_HasInChains_Verification(t *testing.T) {
 		testCase.ShouldBeEqual(t, caseIndex, fmt.Sprintf("%v", result))
 	}
 }
-
-func Test_Key_ClonePtr_Verification(t *testing.T) {
-	for caseIndex, testCase := range keyClonePtrTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		main, _ := input.GetAsString("main")
-		chains, _ := input.GetAsStrings("chains")
-
-		// Act
-		key := keymk.NewKey.DefaultStrings(main, chains...)
-		cloned := key.ClonePtr()
-		originalCompiled := key.Compile()
-		clonedCompiled := cloned.Compile()
-
-		// Assert
-		testCase.ShouldBeEqual(t, caseIndex,
-			originalCompiled,
-			clonedCompiled,
-		)
-	}
-}
-
 func Test_Key_Length_Verification(t *testing.T) {
 	for caseIndex, testCase := range keyLengthTestCases {
 		// Arrange

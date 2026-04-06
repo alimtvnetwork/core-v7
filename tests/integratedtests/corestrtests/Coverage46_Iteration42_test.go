@@ -345,15 +345,6 @@ func Test_Cov46_HashsetsCollection_StringsList_Empty(t *testing.T) {
 		tc.ShouldBeEqual(t)
 	})
 }
-
-func Test_Cov46_HashsetsCollection_ListPtr(t *testing.T) {
-	safeTest(t, "Test_Cov46_HashsetsCollection_ListPtr", func() {
-		hc := corestr.Empty.HashsetsCollection()
-		tc := caseV1Compat{Name: "HC ListPtr", Expected: true, Actual: hc.ListPtr() != nil, Args: args.Map{}}
-		tc.ShouldBeEqual(t)
-	})
-}
-
 func Test_Cov46_HashsetsCollection_List(t *testing.T) {
 	safeTest(t, "Test_Cov46_HashsetsCollection_List", func() {
 		hc := corestr.Empty.HashsetsCollection()

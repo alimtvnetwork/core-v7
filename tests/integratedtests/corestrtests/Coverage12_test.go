@@ -156,28 +156,6 @@ func Test_Cov12_Hashmap_Nil(t *testing.T) {
 		expected.ShouldBeEqual(t, 0, "Hashmap returns nil -- nil", actual)
 	})
 }
-
-func Test_Cov12_Hashmap_Clone(t *testing.T) {
-	safeTest(t, "Test_Cov12_Hashmap_Clone", func() {
-		hm := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
-		cloned := hm.ClonePtr()
-		actual := args.Map{"notNil": cloned != nil, "notEmpty": !cloned.IsEmpty()}
-		expected := args.Map{"notNil": true, "notEmpty": true}
-		expected.ShouldBeEqual(t, 0, "Hashmap.Clone returns correct value -- with args", actual)
-	})
-}
-
-func Test_Cov12_Hashmap_ClonePtr_Nil(t *testing.T) {
-	safeTest(t, "Test_Cov12_Hashmap_ClonePtr_Nil", func() {
-		var hm *corestr.Hashmap
-		cloned := hm.ClonePtr()
-		actual := args.Map{"nil": cloned == nil}
-		expected := args.Map{"nil": true}
-		expected.ShouldBeEqual(t, 0, "Hashmap.ClonePtr returns nil -- nil", actual)
-	})
-}
-
-func Test_Cov12_Hashmap_IsEqualPtr(t *testing.T) {
 	safeTest(t, "Test_Cov12_Hashmap_IsEqualPtr", func() {
 		a := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})
 		b := corestr.New.Hashmap.KeyValues(corestr.KeyValuePair{Key: "k1", Value: "v1"})

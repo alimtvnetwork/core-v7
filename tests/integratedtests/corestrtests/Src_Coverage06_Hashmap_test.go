@@ -466,25 +466,6 @@ func Test_SrcC06_Hashmap_StringJson_Verification(t *testing.T) {
 		tc.ShouldBeEqualMapFirst(t, actual)
 	})
 }
-
-func Test_SrcC06_Hashmap_KeysToLower_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC06_Hashmap_KeysToLower_Verification", func() {
-		// Arrange
-		tc := srcC06HashmapKeysToLowerTestCase
-		h := corestr.New.Hashmap.UsingMap(map[string]string{"ABC": "1"})
-
-		// Act
-		lower := h.KeysToLower()
-		_ = h.ValuesToLower()
-		actual := args.Map{
-			"hasLowercase": lower.Has("abc"),
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC06_Hashmap_Except_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC06_Hashmap_Except_Verification", func() {
 		// Arrange
@@ -556,27 +537,6 @@ func Test_SrcC06_Hashmap_ClearDispose_Verification(t *testing.T) {
 		}
 	})
 }
-
-func Test_SrcC06_Hashmap_Clone_Verification(t *testing.T) {
-	safeTest(t, "Test_SrcC06_Hashmap_Clone_Verification", func() {
-		// Arrange
-		tc := srcC06HashmapCloneTestCase
-		h := corestr.New.Hashmap.UsingMap(map[string]string{"a": "1"})
-		var nilH *corestr.Hashmap
-
-		// Act
-		cloneVal := h.Clone()
-		actual := args.Map{
-			"cloneLen":    (&cloneVal).Length(),
-			"clonePtrLen": h.ClonePtr().Length(),
-			"nilClone":    nilH.ClonePtr() == nil,
-		}
-
-		// Assert
-		tc.ShouldBeEqualMapFirst(t, actual)
-	})
-}
-
 func Test_SrcC06_Hashmap_Compiler_Verification(t *testing.T) {
 	safeTest(t, "Test_SrcC06_Hashmap_Compiler_Verification", func() {
 		// Arrange

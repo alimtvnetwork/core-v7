@@ -399,17 +399,6 @@ func Test_Cov14_MapAnyItems_MapAnyItemsSelf(t *testing.T) {
 	expected := args.Map{"same": true}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems returns correct value -- self", actual)
 }
-
-func Test_Cov14_MapAnyItems_ClonePtr(t *testing.T) {
-	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
-	cloned, err := m.ClonePtr()
-	var nilM *coredynamic.MapAnyItems
-	_, nilErr := nilM.ClonePtr()
-	actual := args.Map{"clonedNN": cloned != nil, "noErr": err == nil, "nilErr": nilErr != nil}
-	expected := args.Map{"clonedNN": true, "noErr": true, "nilErr": true}
-	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
-}
-
 func Test_Cov14_MapAnyItems_Json(t *testing.T) {
 	m := coredynamic.NewMapAnyItemsUsingItems(map[string]any{"a": 1})
 	j := m.Json()

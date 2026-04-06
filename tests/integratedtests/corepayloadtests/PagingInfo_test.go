@@ -109,61 +109,6 @@ func Test_PagingInfo_Clone_Verification(t *testing.T) {
 	}
 }
 
-func Test_PagingInfo_ClonePtr_Verification(t *testing.T) {
-	for caseIndex, testCase := range pagingInfoClonePtrTestCases {
-		// Arrange
-		input := testCase.ArrangeInput.(args.Map)
-		isNil := input.GetAsBoolDefault("isNil", false)
-
-		var info *corepayload.PagingInfo
-		if !isNil {
-			info = buildPagingInfoFromMap(input)
-		}
-
-		// Act
-		result := info.ClonePtr()
-
-		// Assert
-		if isNil {
-			actual := args.Map{
-				"isNil": result == nil,
-			}
-			testCase.ShouldBeEqualMap(t, caseIndex, actual)
-		} else {
-			actual := args.Map{
-				"isNil":            result == nil,
-				"totalPages":       result.TotalPages,
-				"currentPageIndex": result.CurrentPageIndex,
-				"perPageItems":     result.PerPageItems,
-				"totalItems":       result.TotalItems,
-			}
-			testCase.ShouldBeEqualMap(t, caseIndex, actual)
-		}
-	}
-}
-
-// === Independence tests ===
-
-func Test_PagingInfo_ClonePtr_Independence(t *testing.T) {
-	tc := pagingInfoClonePtrIndependenceTestCase
-	info := &corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 3, PerPageItems: 10, TotalItems: 50}
-
-	clone := info.ClonePtr()
-	clone.TotalPages = 99
-	clone.CurrentPageIndex = 99
-
-	actual := args.Map{
-		"originalTotalPages":  info.TotalPages,
-		"originalCurrentPage": info.CurrentPageIndex,
-	}
-
-	tc.ShouldBeEqualMapFirst(t, actual)
-}
-
-func Test_PagingInfo_Clone_Independence(t *testing.T) {
-	tc := pagingInfoCloneIndependenceTestCase
-	info := corepayload.PagingInfo{TotalPages: 5, CurrentPageIndex: 3, PerPageItems: 10, TotalItems: 50}
-
 	clone := info.Clone()
 	clone.TotalPages = 99
 

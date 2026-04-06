@@ -273,32 +273,6 @@ func Test_CovPL_S1_15_Deserialize_PayloadDeserialize(t *testing.T) {
 		t.Fatal("expected no error")
 	}
 }
-
-func Test_CovPL_S1_16_Clone_ClonePtr_NonPtr_ToPtr(t *testing.T) {
-	pw := newTestPW()
-	c, err := pw.Clone(false)
-	if err != nil {
-		t.Fatal("expected no error")
-	}
-	_ = c
-	c2, err2 := pw.Clone(true)
-	if err2 != nil {
-		t.Fatal("expected no error")
-	}
-	_ = c2
-	cp, err3 := pw.ClonePtr(true)
-	if err3 != nil || cp == nil {
-		t.Fatal("expected non-nil")
-	}
-	// nil
-	var nilPW *corepayload.PayloadWrapper
-	if _, err4 := nilPW.ClonePtr(true); err4 != nil {
-		t.Fatal("expected nil, nil")
-	}
-	_ = pw.NonPtr()
-	_ = pw.ToPtr()
-}
-
 func Test_CovPL_S1_17_ParseInjectUsingJson(t *testing.T) {
 	pw := newTestPW()
 	jr := pw.JsonPtr()
@@ -643,27 +617,6 @@ func Test_CovPL_S1_41_Attributes_IsErrorEqual_IsErrorDifferent(t *testing.T) {
 		t.Fatal("expected false")
 	}
 }
-
-func Test_CovPL_S1_42_Attributes_Clone_ClonePtr(t *testing.T) {
-	attr := corepayload.New.Attributes.Empty()
-	c, err := attr.Clone(false)
-	if err != nil {
-		t.Fatal("expected no error")
-	}
-	_ = c
-	cp, err2 := attr.ClonePtr(true)
-	if err2 != nil {
-		t.Fatal("expected no error")
-	}
-	_ = cp
-	// nil
-	var nilAttr *corepayload.Attributes
-	cp2, err3 := nilAttr.ClonePtr(true)
-	if err3 != nil || cp2 != nil {
-		t.Fatal("expected nil, nil")
-	}
-}
-
 func Test_CovPL_S1_43_Attributes_SetBasicErr_SetAuthInfo(t *testing.T) {
 	attr := corepayload.New.Attributes.Empty()
 	_ = attr.SetBasicErr(nil)

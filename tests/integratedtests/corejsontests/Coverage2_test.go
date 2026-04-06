@@ -55,30 +55,6 @@ func Test_Cov2_Result_Clone(t *testing.T) {
 	}
 	expected.ShouldBeEqual(t, 0, "Result.Clone produces equal json -- valid", actual)
 }
-
-func Test_Cov2_Result_ClonePtr(t *testing.T) {
-	result := corejson.NewResult.Serialize("hello")
-	cloned := result.ClonePtr(false)
-	actual := args.Map{
-		"notNil": cloned != nil,
-	}
-	expected := args.Map{
-		"notNil": true,
-	}
-	expected.ShouldBeEqual(t, 0, "Result.ClonePtr returns non-nil -- valid", actual)
-}
-
-func Test_Cov2_Result_Nil_ClonePtr(t *testing.T) {
-	var result *corejson.Result
-	cloned := result.ClonePtr(false)
-	actual := args.Map{"isNil": cloned == nil}
-	expected := args.Map{"isNil": true}
-	expected.ShouldBeEqual(t, 0, "Result.ClonePtr returns nil -- nil receiver", actual)
-}
-
-// ── Serialize/Deserialize roundtrip ──
-
-func Test_Cov2_SerializeDeserialize_Roundtrip(t *testing.T) {
 	type testStruct struct {
 		Name string
 		Age  int

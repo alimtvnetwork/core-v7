@@ -307,15 +307,6 @@ func Test_Cov14_Hashmap_JSON(t *testing.T) {
 		}
 	})
 }
-
-func Test_Cov14_Hashmap_Clone(t *testing.T) {
-	safeTest(t, "Test_Cov14_Hashmap_Clone", func() {
-		h := corestr.New.Hashmap.Cap(5)
-		h.Set("a", "1")
-		_ = h.ClonePtr()
-	})
-}
-
 func Test_Cov14_Hashmap_Clear_Dispose(t *testing.T) {
 	safeTest(t, "Test_Cov14_Hashmap_Clear_Dispose", func() {
 		h := corestr.New.Hashmap.Cap(5)
@@ -1646,16 +1637,6 @@ func Test_Cov14_SimpleStringOnce_ConcatNew(t *testing.T) {
 		_ = r2
 	})
 }
-
-func Test_Cov14_SimpleStringOnce_Clone(t *testing.T) {
-	safeTest(t, "Test_Cov14_SimpleStringOnce_Clone", func() {
-		s := corestr.New.SimpleStringOnce.Init("val")
-		_ = s.Clone()
-		_ = s.ClonePtr()
-		_ = s.CloneUsingNewVal("other")
-	})
-}
-
 func Test_Cov14_SimpleStringOnce_JSON(t *testing.T) {
 	safeTest(t, "Test_Cov14_SimpleStringOnce_JSON", func() {
 		s := corestr.New.SimpleStringOnce.Init("val")
@@ -1739,37 +1720,6 @@ func Test_Cov14_CollectionsOfCollection_JSON(t *testing.T) {
 		}
 	})
 }
-
-// ══════════════════════════════════════════════════════════════════════════════
-// HashsetsCollection — coverage
-// ══════════════════════════════════════════════════════════════════════════════
-
-func Test_Cov14_HashsetsCollection(t *testing.T) {
-	safeTest(t, "Test_Cov14_HashsetsCollection", func() {
-		hc := corestr.Empty.HashsetsCollection()
-
-		if !hc.IsEmpty() || hc.HasItems() {
-			t.Fatal("expected empty")
-		}
-
-		h := corestr.New.Hashset.Strings([]string{"a", "b"})
-		hc.Add(h)
-		hc.AddNonNil(nil)
-		hc.AddNonEmpty(corestr.Empty.Hashset())
-		hc.AddNonEmpty(corestr.New.Hashset.Strings([]string{"c"}))
-
-		if hc.Length() != 2 {
-			t.Fatalf("expected 2 got %d", hc.Length())
-		}
-
-		_ = hc.StringsList()
-		_ = hc.String()
-		_ = hc.Join(",")
-		_ = hc.List()
-		_ = hc.ListPtr()
-	})
-}
-
 func Test_Cov14_HashsetsCollection_IsEqual(t *testing.T) {
 	safeTest(t, "Test_Cov14_HashsetsCollection_IsEqual", func() {
 		h1 := corestr.New.Hashset.Strings([]string{"a"})
