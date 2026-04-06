@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/alimtvnetwork/core/coredata/corejson"
+	"github.com/alimtvnetwork/core/coretests/args"
 )
 
 // ── ResultsCollection uncovered methods ──
@@ -14,23 +15,23 @@ func Test_Gap_RC_GetAtSafeUsingLength(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.Add(corejson.NewResult.Any("a"))
 	c.Add(corejson.NewResult.Any("b"))
-	if c.GetAtSafeUsingLength(0, 2) == nil {
-		t.Fatal("expected non-nil")
-	}
-	if c.GetAtSafeUsingLength(5, 2) != nil {
-		t.Fatal("expected nil")
-	}
-	if c.GetAtSafeUsingLength(-1, 2) != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 2) == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 2) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
+	actual := args.Map{"result": c.GetAtSafeUsingLength(-1, 2) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Gap_RC_AddAnyItemsSlice(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.AddAnyItemsSlice([]any{"a", nil, "b"})
-	if c.Length() != 2 {
-		t.Fatal("expected 2, got", c.Length())
-	}
+	actual := args.Map{"result": c.Length()}
+	expected := args.Map{"result": 2}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	c.AddAnyItemsSlice(nil)
 }
 
@@ -41,17 +42,17 @@ func Test_Gap_RC_AddResultsCollection(t *testing.T) {
 	sub.Add(corejson.NewResult.Any("b"))
 	c.AddResultsCollection(sub)
 	c.AddResultsCollection(nil)
-	if c.Length() != 2 {
-		t.Fatal("expected 2")
-	}
+	actual := args.Map{"result": c.Length() != 2}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
 func Test_Gap_RC_AddNonNilItemsPtr(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(3)
 	c.AddNonNilItemsPtr(nil, corejson.NewResult.AnyPtr("a"), nil)
-	if c.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c.AddNonNilItemsPtr()
 	c.AddNonNilItemsPtr(nil)
 }
@@ -67,17 +68,17 @@ func Test_Gap_RC_GetAt(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(1)
 	c.Add(corejson.NewResult.Any("x"))
 	r := c.GetAt(0)
-	if r == nil {
-		t.Fatal("expected non-nil")
-	}
+	actual := args.Map{"result": r == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
 func Test_Gap_RC_NoErrorCollection(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(1)
 	c.Add(corejson.NewResult.Any("ok"))
-	if c.HasError() {
-		t.Fatal("should not have error")
-	}
+	actual := args.Map{"result": c.HasError()}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "should not have error", actual)
 }
 
 func Test_Gap_RC_ParseInjectUsingJson(t *testing.T) {
@@ -86,9 +87,9 @@ func Test_Gap_RC_ParseInjectUsingJson(t *testing.T) {
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsCollection.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_RC_ParseInjectUsingJsonMust(t *testing.T) {
@@ -105,18 +106,18 @@ func Test_Gap_RC_JsonParseSelfInject(t *testing.T) {
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsCollection.Empty()
 	err := target.JsonParseSelfInject(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_RC_AddSerializerFunc(t *testing.T) {
 	c := corejson.NewResultsCollection.UsingCap(2)
 	c.AddSerializerFunc(func() ([]byte, error) { return []byte(`"x"`), nil })
 	c.AddSerializerFunc(nil)
-	if c.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
 func Test_Gap_RC_AddSerializerFunctions(t *testing.T) {
@@ -166,9 +167,9 @@ func Test_Gap_RPC_UnmarshalAt(t *testing.T) {
 	c.Add(&corejson.Result{Error: errors.New("e")})
 	var s string
 	err := c.UnmarshalAt(0, &s)
-	if err != nil || s != "hello" {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": err != nil || s != "hello"}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	err2 := c.UnmarshalAt(1, &s)
 	// Result with error may or may not return error from UnmarshalAt
 	_ = err2
@@ -179,34 +180,34 @@ func Test_Gap_RPC_UnmarshalAt_NilResult(t *testing.T) {
 	c.Add(nil)
 	var s string
 	err := c.UnmarshalAt(0, &s)
-	if err != nil {
-		t.Fatal("expected nil for nil result")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for nil result", actual)
 }
 
 func Test_Gap_RPC_GetAtSafe(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.UsingCap(1)
 	c.Add(corejson.NewResult.AnyPtr("x"))
-	if c.GetAtSafe(0) == nil {
-		t.Fatal("expected non-nil")
-	}
-	if c.GetAtSafe(-1) != nil {
-		t.Fatal("expected nil")
-	}
-	if c.GetAtSafe(5) != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c.GetAtSafe(0) == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": c.GetAtSafe(-1) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
+	actual := args.Map{"result": c.GetAtSafe(5) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Gap_RPC_GetAtSafeUsingLength(t *testing.T) {
 	c := corejson.NewResultsPtrCollection.UsingCap(1)
 	c.Add(corejson.NewResult.AnyPtr("x"))
-	if c.GetAtSafeUsingLength(0, 1) == nil {
-		t.Fatal("expected non-nil")
-	}
-	if c.GetAtSafeUsingLength(5, 1) != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 1) == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Gap_RPC_InjectIntoSameIndex(t *testing.T) {
@@ -235,9 +236,9 @@ func Test_Gap_RPC_ParseInjectUsingJson(t *testing.T) {
 	jr := corejson.NewResult.AnyPtr(c)
 	target := corejson.NewResultsPtrCollection.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_RPC_ParseInjectUsingJsonMust(t *testing.T) {
@@ -261,21 +262,21 @@ func Test_Gap_RPC_JsonParseSelfInject(t *testing.T) {
 func Test_Gap_BC_GetAtSafeUsingLength(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(1)
 	c.Add([]byte(`"x"`))
-	if c.GetAtSafeUsingLength(0, 1) == nil {
-		t.Fatal("expected non-nil")
-	}
-	if c.GetAtSafeUsingLength(5, 1) != nil {
-		t.Fatal("expected nil")
-	}
+	actual := args.Map{"result": c.GetAtSafeUsingLength(0, 1) == nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
+	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
 func Test_Gap_BC_AddsPtr(t *testing.T) {
 	c := corejson.NewBytesCollection.UsingCap(2)
 	r := corejson.NewResult.AnyPtr("x")
 	c.AddsPtr(r, nil)
-	if c.Length() != 1 {
-		t.Fatal("expected 1")
-	}
+	actual := args.Map{"result": c.Length() != 1}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	c.AddsPtr()
 }
 
@@ -293,9 +294,9 @@ func Test_Gap_BC_UnmarshalIntoSameIndex(t *testing.T) {
 	var s string
 	var n int
 	_, _ = c.UnmarshalIntoSameIndex(&s, &n)
-	if s != "hello" || n != 42 {
-		t.Fatal("unexpected")
-	}
+	actual := args.Map{"result": s != "hello" || n != 42}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	_, _ = c.UnmarshalIntoSameIndex()
 }
 
@@ -334,18 +335,18 @@ func Test_Gap_BC_GetSinglePageCollection(t *testing.T) {
 		c.Add([]byte(`"x"`))
 	}
 	page := c.GetSinglePageCollection(5, 1)
-	if page.Length() != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": page.Length() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	page2 := c.GetSinglePageCollection(5, 3)
-	if page2.Length() != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": page2.Length() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	// Last page
 	page3 := c.GetSinglePageCollection(10, 2)
-	if page3.Length() != 5 {
-		t.Fatal("expected 5 for last partial page")
-	}
+	actual := args.Map{"result": page3.Length() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5 for last partial page", actual)
 }
 
 func Test_Gap_BC_AddJsoners(t *testing.T) {
@@ -387,18 +388,18 @@ func Test_Gap_MR_UnmarshalMany(t *testing.T) {
 	m := corejson.NewMapResults.UsingCap(2)
 	m.Add("a", corejson.NewResult.Any("hello"))
 	err := m.UnmarshalMany()
-	if err != nil {
-		t.Fatal("expected nil for empty")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 }
 
 func Test_Gap_MR_UnmarshalManySafe(t *testing.T) {
 	m := corejson.NewMapResults.UsingCap(2)
 	m.Add("a", corejson.NewResult.Any("hello"))
 	err := m.UnmarshalManySafe()
-	if err != nil {
-		t.Fatal("expected nil for empty")
-	}
+	actual := args.Map{"result": err != nil}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected nil for empty", actual)
 }
 
 func Test_Gap_MR_SafeUnmarshal(t *testing.T) {
@@ -454,9 +455,9 @@ func Test_Gap_MR_ParseInjectUsingJson(t *testing.T) {
 	jr := corejson.NewResult.AnyPtr(m)
 	target := corejson.NewMapResults.Empty()
 	_, err := target.ParseInjectUsingJson(jr)
-	if err != nil {
-		t.Fatal(err)
-	}
+	actual := args.Map{"result": err}
+	expected := args.Map{"result": nil}
+	expected.ShouldBeEqual(t, 0, "err", actual)
 }
 
 func Test_Gap_MR_ParseInjectUsingJsonMust(t *testing.T) {
@@ -482,9 +483,9 @@ func Test_Gap_MR_GetSinglePageCollection(t *testing.T) {
 	}
 	keys := m.AllKeysSorted()
 	page := m.GetSinglePageCollection(5, 1, keys)
-	if page.Length() != 5 {
-		t.Fatal("expected 5")
-	}
+	actual := args.Map{"result": page.Length() != 5}
+	expected := args.Map{"result": false}
+	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 }
 
 // ── ResultsCollection InjectIntoAt ──
