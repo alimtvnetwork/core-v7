@@ -1,0 +1,12 @@
+{
+  "version": "1.5.4",
+  "branch": "release/v1.5.4",
+  "sourceBranch": "main",
+  "commit": "85367f4a2689e8f61510e0015acea25382a9f378",
+  "tag": "v1.5.4",
+  "assets": [],
+  "draft": false,
+  "preRelease": false,
+  "createdAt": "2026-04-06T20:38:20Z",
+  "isLatest": false
+}
