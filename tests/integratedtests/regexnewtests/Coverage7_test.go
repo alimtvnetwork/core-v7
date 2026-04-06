@@ -18,10 +18,16 @@ func Test_Cov7_LazyRegex_Compile_Valid(t *testing.T) {
 	re, err := lr.Compile()
 
 	// Act
-	actual := args.Map{"notNil": re != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": re != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Compile returns non-empty -- valid", actual)
 }
 
@@ -31,10 +37,16 @@ func Test_Cov7_LazyRegex_Compile_Invalid(t *testing.T) {
 	re, err := lr.Compile()
 
 	// Act
-	actual := args.Map{"nil": re == nil, "hasErr": err != nil}
+	actual := args.Map{
+		"nil": re == nil,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "hasErr": true}
+	expected := args.Map{
+		"nil": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Compile returns error -- invalid", actual)
 }
 

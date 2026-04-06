@@ -70,7 +70,10 @@ func Test_Cov7_Integer8(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": corecomparator.Equal, "less": corecomparator.LeftLess}
+	expected := args.Map{
+		"equal": corecomparator.Equal,
+		"less": corecomparator.LeftLess,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer8 returns correct value -- with args", actual)
 }
 
@@ -127,10 +130,16 @@ func Test_Cov7_Integer32Ptr_BothNil(t *testing.T) {
 
 func Test_Cov7_Integer64(t *testing.T) {
 	// Act
-	actual := args.Map{"equal": corecmp.Integer64(5, 5), "less": corecmp.Integer64(3, 5)}
+	actual := args.Map{
+		"equal": corecmp.Integer64(5, 5),
+		"less": corecmp.Integer64(3, 5),
+	}
 
 	// Assert
-	expected := args.Map{"equal": corecomparator.Equal, "less": corecomparator.LeftLess}
+	expected := args.Map{
+		"equal": corecomparator.Equal,
+		"less": corecomparator.LeftLess,
+	}
 	expected.ShouldBeEqual(t, 0, "Integer64 returns correct value -- with args", actual)
 }
 
@@ -166,7 +175,11 @@ func Test_Cov7_Byte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": corecomparator.Equal, "less": corecomparator.LeftLess, "greater": corecomparator.LeftGreater}
+	expected := args.Map{
+		"equal": corecomparator.Equal,
+		"less": corecomparator.LeftLess,
+		"greater": corecomparator.LeftGreater,
+	}
 	expected.ShouldBeEqual(t, 0, "Byte returns correct value -- with args", actual)
 }
 
@@ -203,7 +216,12 @@ func Test_Cov7_IsIntegersEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEq": false, "diffLen": false, "bothNil": true}
+	expected := args.Map{
+		"equal": true,
+		"notEq": false,
+		"diffLen": false,
+		"bothNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqual returns correct value -- with args", actual)
 }
 
@@ -221,7 +239,11 @@ func Test_Cov7_IsIntegersEqualPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "bothNil": true, "leftNil": false}
+	expected := args.Map{
+		"equal": true,
+		"bothNil": true,
+		"leftNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsIntegersEqualPtr returns correct value -- with args", actual)
 }
 
@@ -236,7 +258,11 @@ func Test_Cov7_IsStringsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "bothNil": true, "leftNil": false}
+	expected := args.Map{
+		"equal": true,
+		"bothNil": true,
+		"leftNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStringsEqual returns correct value -- with args", actual)
 }
 
@@ -248,7 +274,10 @@ func Test_Cov7_IsStringsEqualPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "bothNil": true}
+	expected := args.Map{
+		"equal": true,
+		"bothNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsStringsEqualPtr returns correct value -- with args", actual)
 }
 

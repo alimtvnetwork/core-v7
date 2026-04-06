@@ -282,7 +282,10 @@ func Test_Cov7_UserInfo_Setters(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasUser": true, "hasSysUser": true}
+	expected := args.Map{
+		"hasUser": true,
+		"hasSysUser": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UserInfo returns correct value -- setters", actual)
 }
 
@@ -299,7 +302,11 @@ func Test_Cov7_UserInfo_NilSetters(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"r1NN": true, "r2NN": true, "r3NN": true}
+	expected := args.Map{
+		"r1NN": true,
+		"r2NN": true,
+		"r3NN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UserInfo returns nil -- nil setters", actual)
 }
 
@@ -433,7 +440,11 @@ func Test_Cov7_PayloadProperties_DynPayloads(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"dynLen": true, "errNil": true, "newDyn": true}
+	expected := args.Map{
+		"dynLen": true,
+		"errNil": true,
+		"newDyn": true,
+	}
 	expected.ShouldBeEqual(t, 0, "payloadProperties returns correct value -- dyn payloads", actual)
 }
 

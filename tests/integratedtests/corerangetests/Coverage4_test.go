@@ -23,7 +23,11 @@ func Test_Cov4_RangeInt_CreateRanges(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 8, "first": 1, "last": 12}
+	expected := args.Map{
+		"len": 8,
+		"first": 1,
+		"last": 12,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeInt returns non-empty -- CreateRanges with extra MinMaxInt", actual)
 }
 
@@ -300,7 +304,11 @@ func Test_Cov4_StartEndSimpleString_StartEndString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "start": "a", "end": "b"}
+	expected := args.Map{
+		"notNil": true,
+		"start": "a",
+		"end": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString returns correct value -- StartEndString", actual)
 }
 
@@ -371,10 +379,16 @@ func Test_Cov4_Within_RangeDefaultInteger(t *testing.T) {
 	val, ok := corerange.Within.RangeDefaultInteger(0, 10, 5)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 5, "ok": true}
+	expected := args.Map{
+		"val": 5,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Within returns non-empty -- RangeDefaultInteger", actual)
 }
 
@@ -509,10 +523,16 @@ func Test_Cov4_Within_StringRangeFloat_InvalidInput(t *testing.T) {
 	_, ok64 := corerange.Within.StringRangeFloat64(true, 0, 100, "abc")
 
 	// Act
-	actual := args.Map{"ok": ok, "ok64": ok64}
+	actual := args.Map{
+		"ok": ok,
+		"ok64": ok64,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "ok64": false}
+	expected := args.Map{
+		"ok": false,
+		"ok64": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Within returns error -- StringRangeFloat invalid", actual)
 }
 
@@ -604,7 +624,11 @@ func Test_Cov4_MinMaxInt_IsOutOfRange(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"outOf0": true, "outOf5": false, "outOf11": true}
+	expected := args.Map{
+		"outOf0": true,
+		"outOf5": false,
+		"outOf11": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt returns correct value -- IsOutOfRange", actual)
 }
 
@@ -739,9 +763,15 @@ func Test_Cov4_StartEndString_CreateRangeString(t *testing.T) {
 	rs := se.CreateRangeString()
 
 	// Act
-	actual := args.Map{"start": rs.Start, "end": rs.End}
+	actual := args.Map{
+		"start": rs.Start,
+		"end": rs.End,
+	}
 
 	// Assert
-	expected := args.Map{"start": "a", "end": "b"}
+	expected := args.Map{
+		"start": "a",
+		"end": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndString returns correct value -- CreateRangeString", actual)
 }

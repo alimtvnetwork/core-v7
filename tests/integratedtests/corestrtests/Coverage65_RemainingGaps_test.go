@@ -35,10 +35,16 @@ func Test_Cov65_SSO_JsonPtr(t *testing.T) {
 		r := sso.JsonPtr()
 
 		// Act
-		actual := args.Map{"nonNil": r != nil, "noErr": r.Error == nil}
+		actual := args.Map{
+			"nonNil": r != nil,
+			"noErr": r.Error == nil,
+		}
 
 		// Assert
-		expected := args.Map{"nonNil": true, "noErr": true}
+		expected := args.Map{
+			"nonNil": true,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SSO JsonPtr", actual)
 	})
 }
@@ -50,10 +56,16 @@ func Test_Cov65_SSO_JsonModel(t *testing.T) {
 		m := sso.JsonModel()
 
 		// Act
-		actual := args.Map{"val": m.Value, "init": m.IsInitialize}
+		actual := args.Map{
+			"val": m.Value,
+			"init": m.IsInitialize,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "init": true}
+		expected := args.Map{
+			"val": "hello",
+			"init": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SSO JsonModel", actual)
 	})
 }
@@ -79,10 +91,16 @@ func Test_Cov65_SSO_MarshalJSON(t *testing.T) {
 		b, err := sso.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SSO MarshalJSON", actual)
 	})
 }
@@ -128,10 +146,16 @@ func Test_Cov65_SSO_ParseInjectUsingJson(t *testing.T) {
 		r, err := sso2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SSO ParseInjectUsingJson", actual)
 	})
 }
@@ -273,10 +297,16 @@ func Test_Cov65_SSO_Serialize(t *testing.T) {
 		b, err := sso.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SSO Serialize", actual)
 	})
 }
@@ -429,10 +459,16 @@ func Test_Cov65_COC_JsonPtr(t *testing.T) {
 		r := coc.JsonPtr()
 
 		// Act
-		actual := args.Map{"nonNil": r != nil, "noErr": r.Error == nil}
+		actual := args.Map{
+			"nonNil": r != nil,
+			"noErr": r.Error == nil,
+		}
 
 		// Assert
-		expected := args.Map{"nonNil": true, "noErr": true}
+		expected := args.Map{
+			"nonNil": true,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "COC JsonPtr", actual)
 	})
 }
@@ -450,10 +486,16 @@ func Test_Cov65_HC_JsonPtr(t *testing.T) {
 		r := hc.JsonPtr()
 
 		// Act
-		actual := args.Map{"nonNil": r != nil, "noErr": r.Error == nil}
+		actual := args.Map{
+			"nonNil": r != nil,
+			"noErr": r.Error == nil,
+		}
 
 		// Assert
-		expected := args.Map{"nonNil": true, "noErr": true}
+		expected := args.Map{
+			"nonNil": true,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HC JsonPtr", actual)
 	})
 }

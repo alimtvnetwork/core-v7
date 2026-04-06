@@ -16,7 +16,10 @@ func Test_Cov3_DefaultCsv(t *testing.T) {
 	actual := args.Map{"result": corecsv.DefaultCsv("a", "b")}
 
 	// Assert
-	expected := args.Map{"result": `"a", "b"`}
+	expected := args.Map{
+		"result": `"a",
+		"b"`,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultCsv returns double-quoted csv -- two items", actual)
 }
 
@@ -34,7 +37,10 @@ func Test_Cov3_DefaultAnyCsv(t *testing.T) {
 	actual := args.Map{"result": corecsv.DefaultAnyCsv("x", 1)}
 
 	// Assert
-	expected := args.Map{"result": `"x", "1"`}
+	expected := args.Map{
+		"result": `"x",
+		"1"`,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultAnyCsv returns double-quoted csv -- mixed types", actual)
 }
 
@@ -52,10 +58,16 @@ func Test_Cov3_DefaultCsvStrings(t *testing.T) {
 	result := corecsv.DefaultCsvStrings("a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": `"a"`}
+	expected := args.Map{
+		"len": 2,
+		"first": `"a"`,
+	}
 	expected.ShouldBeEqual(t, 0, "DefaultCsvStrings returns double-quoted slice -- two items", actual)
 }
 
@@ -94,10 +106,16 @@ func Test_Cov3_StringsToCsvStringsDefault(t *testing.T) {
 	result := corecsv.StringsToCsvStringsDefault("a")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": `"a"`}
+	expected := args.Map{
+		"len": 1,
+		"first": `"a"`,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsToCsvStringsDefault returns double-quoted -- one item", actual)
 }
 
@@ -106,7 +124,10 @@ func Test_Cov3_StringsToStringDefault(t *testing.T) {
 	actual := args.Map{"result": corecsv.StringsToStringDefault("a", "b")}
 
 	// Assert
-	expected := args.Map{"result": `"a", "b"`}
+	expected := args.Map{
+		"result": `"a",
+		"b"`,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsToStringDefault returns joined csv -- two items", actual)
 }
 
@@ -388,10 +409,16 @@ func Test_Cov3_StringsToCsvStrings_SingleQuote(t *testing.T) {
 	result := corecsv.StringsToCsvStrings(true, true, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "'a'"}
+	expected := args.Map{
+		"len": 2,
+		"first": "'a'",
+	}
 	expected.ShouldBeEqual(t, 0, "StringsToCsvStrings returns single-quoted -- two items", actual)
 }
 

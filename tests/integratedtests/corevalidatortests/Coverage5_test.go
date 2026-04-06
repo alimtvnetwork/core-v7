@@ -24,8 +24,14 @@ func Test_Cov5_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	v2 := sv.ComparingValidators()
 
 	// Assert
-	actual := args.Map{"same": v1 == v2, "len": v1.Length()}
-	expected := args.Map{"same": true, "len": 2}
+	actual := args.Map{
+		"same": v1 == v2,
+		"len": v1.Length(),
+	}
+	expected := args.Map{
+		"same": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "ComparingValidators returns cached -- second call", actual)
 }
 
@@ -42,8 +48,14 @@ func Test_Cov5_SliceValidator_Dispose_WithValidators(t *testing.T) {
 	sv.Dispose()
 
 	// Assert
-	actual := args.Map{"actualNil": sv.ActualLines == nil, "expectedNil": sv.ExpectedLines == nil}
-	expected := args.Map{"actualNil": true, "expectedNil": true}
+	actual := args.Map{
+		"actualNil": sv.ActualLines == nil,
+		"expectedNil": sv.ExpectedLines == nil,
+	}
+	expected := args.Map{
+		"actualNil": true,
+		"expectedNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dispose clears all fields -- with cached validators", actual)
 }
 
@@ -115,8 +127,14 @@ func Test_Cov5_SliceValidator_SetActual_ReturnsChain(t *testing.T) {
 	result := sv.SetActual([]string{"x"})
 
 	// Assert
-	actual := args.Map{"same": result == sv, "used": sv.IsUsedAlready()}
-	expected := args.Map{"same": true, "used": true}
+	actual := args.Map{
+		"same": result == sv,
+		"used": sv.IsUsedAlready(),
+	}
+	expected := args.Map{
+		"same": true,
+		"used": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SetActual returns self -- chaining", actual)
 }
 
@@ -526,8 +544,14 @@ func Test_Cov5_TextValidator_SearchTextFinalized_Cached(t *testing.T) {
 	s2 := tv.SearchTextFinalized()
 
 	// Assert
-	actual := args.Map{"same": s1 == s2, "val": s1}
-	expected := args.Map{"same": true, "val": "hello"}
+	actual := args.Map{
+		"same": s1 == s2,
+		"val": s1,
+	}
+	expected := args.Map{
+		"same": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "SearchTextFinalized returns cached -- second call", actual)
 }
 
@@ -1127,7 +1151,10 @@ func Test_Cov5_LinesValidators_IsMatchText_WithItems(t *testing.T) {
 		"match":    lv.IsMatchText("hello", true),
 		"mismatch": lv.IsMatchText("world", true),
 	}
-	expected := args.Map{"match": true, "mismatch": false}
+	expected := args.Map{
+		"match": true,
+		"mismatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatchText returns correct -- with items", actual)
 }
 
@@ -1806,8 +1833,14 @@ func Test_Cov5_Condition_IsTrimCompare(t *testing.T) {
 	c := corevalidator.Condition{IsTrimCompare: true}
 
 	// Act & Assert
-	actual := args.Map{"trim": c.IsTrimCompare, "split": c.IsSplitByWhitespace()}
-	expected := args.Map{"trim": true, "split": false}
+	actual := args.Map{
+		"trim": c.IsTrimCompare,
+		"split": c.IsSplitByWhitespace(),
+	}
+	expected := args.Map{
+		"trim": true,
+		"split": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Condition returns correct -- trim only no split", actual)
 }
 

@@ -31,10 +31,16 @@ func Test_I5_C02_Result_NilReceiver_JsonStringPtr(t *testing.T) {
 	s := r.JsonStringPtr()
 
 	// Act
-	actual := args.Map{"notNil": s != nil, "empty": *s == ""}
+	actual := args.Map{
+		"notNil": s != nil,
+		"empty": *s == "",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilReceiver_JsonStringPtr returns nil -- with args", actual)
 }
 
@@ -94,10 +100,16 @@ func Test_I5_C07_Result_NilReceiver_Raw(t *testing.T) {
 	b, err := r.Raw()
 
 	// Act
-	actual := args.Map{"emptyBytes": len(b) == 0, "hasErr": err != nil}
+	actual := args.Map{
+		"emptyBytes": len(b) == 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"emptyBytes": true, "hasErr": true}
+	expected := args.Map{
+		"emptyBytes": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilReceiver_Raw returns nil -- with args", actual)
 }
 
@@ -194,10 +206,16 @@ func Test_I5_C15_Result_DeserializedFieldsToMap_Nil(t *testing.T) {
 	m, err := r.DeserializedFieldsToMap()
 
 	// Act
-	actual := args.Map{"len": len(m), "nilErr": err == nil}
+	actual := args.Map{
+		"len": len(m),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "nilErr": true}
+	expected := args.Map{
+		"len": 0,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializedFieldsToMap_Nil returns nil -- with args", actual)
 }
 
@@ -222,10 +240,16 @@ func Test_I5_C17_Result_FieldsNames_Empty(t *testing.T) {
 	names, err := r.FieldsNames()
 
 	// Act
-	actual := args.Map{"len": len(names), "nilErr": err == nil}
+	actual := args.Map{
+		"len": len(names),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "nilErr": true}
+	expected := args.Map{
+		"len": 0,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldsNames_Empty returns empty -- with args", actual)
 }
 
@@ -477,10 +501,16 @@ func Test_I5_C36_Result_RawErrString(t *testing.T) {
 	b, errMsg := r.RawErrString()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "emptyErr": errMsg == ""}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"emptyErr": errMsg == "",
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "emptyErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"emptyErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrString returns error -- with args", actual)
 }
 
@@ -490,10 +520,16 @@ func Test_I5_C37_Result_RawPrettyString(t *testing.T) {
 	s, err := r.RawPrettyString()
 
 	// Act
-	actual := args.Map{"hasContent": len(s) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasContent": len(s) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasContent": true, "nilErr": true}
+	expected := args.Map{
+		"hasContent": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawPrettyString returns correct value -- with args", actual)
 }
 
@@ -503,10 +539,16 @@ func Test_I5_C38_Result_PrettyJsonBuffer_Empty(t *testing.T) {
 	buf, err := r.PrettyJsonBuffer("", "  ")
 
 	// Act
-	actual := args.Map{"emptyBuf": buf.Len() == 0, "nilErr": err == nil}
+	actual := args.Map{
+		"emptyBuf": buf.Len() == 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"emptyBuf": true, "nilErr": true}
+	expected := args.Map{
+		"emptyBuf": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PrettyJsonBuffer_Empty returns empty -- with args", actual)
 }
 
@@ -582,10 +624,16 @@ func Test_I5_C43_Result_HasBytes_HasJsonBytes(t *testing.T) {
 	r := &corejson.Result{Bytes: []byte(`"ok"`)}
 
 	// Act
-	actual := args.Map{"hasBytes": r.HasBytes(), "hasJsonBytes": r.HasJsonBytes()}
+	actual := args.Map{
+		"hasBytes": r.HasBytes(),
+		"hasJsonBytes": r.HasJsonBytes(),
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasJsonBytes": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasJsonBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "HasBytes_HasJsonBytes returns correct value -- with args", actual)
 }
 
@@ -630,10 +678,16 @@ func Test_I5_C47_Result_HasJson_IsEmptyJson(t *testing.T) {
 	r := &corejson.Result{Bytes: []byte(`"x"`)}
 
 	// Act
-	actual := args.Map{"hasJson": r.HasJson(), "isEmptyJson": r.IsEmptyJson()}
+	actual := args.Map{
+		"hasJson": r.HasJson(),
+		"isEmptyJson": r.IsEmptyJson(),
+	}
 
 	// Assert
-	expected := args.Map{"hasJson": true, "isEmptyJson": false}
+	expected := args.Map{
+		"hasJson": true,
+		"isEmptyJson": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasJson_IsEmptyJson returns empty -- with args", actual)
 }
 
@@ -727,10 +781,16 @@ func Test_I5_C53_Result_SerializeSkipExistingIssues(t *testing.T) {
 	b, err := r.SerializeSkipExistingIssues()
 
 	// Act
-	actual := args.Map{"nilBytes": b == nil, "nilErr": err == nil}
+	actual := args.Map{
+		"nilBytes": b == nil,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nilBytes": true, "nilErr": true}
+	expected := args.Map{
+		"nilBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeSkipExistingIssues returns correct value -- with args", actual)
 }
 
@@ -740,10 +800,16 @@ func Test_I5_C54_Result_SerializeSkipExistingIssues_Valid(t *testing.T) {
 	b, err := r.SerializeSkipExistingIssues()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeSkipExistingIssues_Valid returns non-empty -- with args", actual)
 }
 
@@ -753,10 +819,16 @@ func Test_I5_C55_Result_Serialize_Nil(t *testing.T) {
 	b, err := r.Serialize()
 
 	// Act
-	actual := args.Map{"nilBytes": b == nil, "hasErr": err != nil}
+	actual := args.Map{
+		"nilBytes": b == nil,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"nilBytes": true, "hasErr": true}
+	expected := args.Map{
+		"nilBytes": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_Nil returns nil -- with args", actual)
 }
 
@@ -766,10 +838,16 @@ func Test_I5_C56_Result_Serialize_WithError(t *testing.T) {
 	b, err := r.Serialize()
 
 	// Act
-	actual := args.Map{"emptyBytes": len(b) == 0, "hasErr": err != nil}
+	actual := args.Map{
+		"emptyBytes": len(b) == 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"emptyBytes": true, "hasErr": true}
+	expected := args.Map{
+		"emptyBytes": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_WithError returns error -- with args", actual)
 }
 
@@ -779,10 +857,16 @@ func Test_I5_C57_Result_Serialize_Valid(t *testing.T) {
 	b, err := r.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_Valid returns non-empty -- with args", actual)
 }
 
@@ -820,10 +904,16 @@ func Test_I5_C60_Result_UnmarshalSkipExistingIssues_Valid(t *testing.T) {
 	err := r.UnmarshalSkipExistingIssues(&s)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": s}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": s,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshalSkipExistingIssues_Valid returns non-empty -- with args", actual)
 }
 
@@ -849,10 +939,16 @@ func Test_I5_C62_Result_UnmarshalResult(t *testing.T) {
 	result, err := outer.UnmarshalResult()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "nilErr": err == nil}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshalResult returns correct value -- with args", actual)
 }
 
@@ -902,10 +998,16 @@ func Test_I5_C66_Result_Json_JsonPtr(t *testing.T) {
 	jp := r.JsonPtr()
 
 	// Act
-	actual := args.Map{"hasBytes": len(j.Bytes) > 0, "ptrNotNil": jp != nil}
+	actual := args.Map{
+		"hasBytes": len(j.Bytes) > 0,
+		"ptrNotNil": jp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Json_JsonPtr returns correct value -- with args", actual)
 }
 
@@ -916,10 +1018,16 @@ func Test_I5_C67_Result_ParseInjectUsingJson(t *testing.T) {
 	result, err := r.ParseInjectUsingJson(input)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "nilErr": err == nil}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson returns correct value -- with args", actual)
 }
 
@@ -983,10 +1091,16 @@ func Test_I5_C71_Result_Ptr_NonPtr(t *testing.T) {
 	np := p.NonPtr()
 
 	// Act
-	actual := args.Map{"ptrNotNil": p != nil, "hasBytes": len(np.Bytes) > 0}
+	actual := args.Map{
+		"ptrNotNil": p != nil,
+		"hasBytes": len(np.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ptrNotNil": true, "hasBytes": true}
+	expected := args.Map{
+		"ptrNotNil": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Ptr_NonPtr returns correct value -- with args", actual)
 }
 
@@ -1010,10 +1124,16 @@ func Test_I5_C73_Result_ToPtr_ToNonPtr(t *testing.T) {
 	np := r.ToNonPtr()
 
 	// Act
-	actual := args.Map{"ptrNotNil": p != nil, "hasBytes": len(np.Bytes) > 0}
+	actual := args.Map{
+		"ptrNotNil": p != nil,
+		"hasBytes": len(np.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ptrNotNil": true, "hasBytes": true}
+	expected := args.Map{
+		"ptrNotNil": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToPtr_ToNonPtr returns correct value -- with args", actual)
 }
 
@@ -1122,10 +1242,16 @@ func Test_I5_C80_Result_IsEqual(t *testing.T) {
 	r3 := corejson.Result{Bytes: []byte(`"y"`)}
 
 	// Act
-	actual := args.Map{"same": r1.IsEqual(r2), "diff": r1.IsEqual(r3)}
+	actual := args.Map{
+		"same": r1.IsEqual(r2),
+		"diff": r1.IsEqual(r3),
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- with args", actual)
 }
 
@@ -1135,10 +1261,16 @@ func Test_I5_C81_Result_BytesError(t *testing.T) {
 	be := r.BytesError()
 
 	// Act
-	actual := args.Map{"notNil": be != nil, "hasBytes": len(be.Bytes) > 0}
+	actual := args.Map{
+		"notNil": be != nil,
+		"hasBytes": len(be.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasBytes": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesError returns error -- with args", actual)
 
 	var rNil *corejson.Result
@@ -1153,10 +1285,18 @@ func Test_I5_C82_Result_Dispose(t *testing.T) {
 	r.Dispose()
 
 	// Act
-	actual := args.Map{"nilErr": r.Error == nil, "nilBytes": r.Bytes == nil, "emptyType": r.TypeName == ""}
+	actual := args.Map{
+		"nilErr": r.Error == nil,
+		"nilBytes": r.Bytes == nil,
+		"emptyType": r.TypeName == "",
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "nilBytes": true, "emptyType": true}
+	expected := args.Map{
+		"nilErr": true,
+		"nilBytes": true,
+		"emptyType": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dispose returns correct value -- with args", actual)
 
 	var rNil *corejson.Result
@@ -1170,10 +1310,16 @@ func Test_I5_C83_Result_CloneIf(t *testing.T) {
 	notCloned := r.CloneIf(false, false)
 
 	// Act
-	actual := args.Map{"clonedHasBytes": len(cloned.Bytes) > 0, "notClonedHasBytes": len(notCloned.Bytes) > 0}
+	actual := args.Map{
+		"clonedHasBytes": len(cloned.Bytes) > 0,
+		"notClonedHasBytes": len(notCloned.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"clonedHasBytes": true, "notClonedHasBytes": true}
+	expected := args.Map{
+		"clonedHasBytes": true,
+		"notClonedHasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CloneIf returns correct value -- with args", actual)
 }
 
@@ -1202,10 +1348,16 @@ func Test_I5_C85_Result_Clone_ShallowAndDeep(t *testing.T) {
 	deep := r.Clone(true)
 
 	// Act
-	actual := args.Map{"shallowHasBytes": len(shallow.Bytes) > 0, "deepHasBytes": len(deep.Bytes) > 0}
+	actual := args.Map{
+		"shallowHasBytes": len(shallow.Bytes) > 0,
+		"deepHasBytes": len(deep.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"shallowHasBytes": true, "deepHasBytes": true}
+	expected := args.Map{
+		"shallowHasBytes": true,
+		"deepHasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone_ShallowAndDeep returns correct value -- with args", actual)
 }
 
@@ -1273,10 +1425,16 @@ func Test_I5_C90_CastAny_FromToDefault(t *testing.T) {
 	err := corejson.CastAny.FromToDefault([]byte(`"hello"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToDefault returns correct value -- with args", actual)
 }
 
@@ -1286,10 +1444,16 @@ func Test_I5_C91_CastAny_FromToReflection(t *testing.T) {
 	err := corejson.CastAny.FromToReflection([]byte(`"hello"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToReflection returns correct value -- with args", actual)
 }
 
@@ -1311,10 +1475,16 @@ func Test_I5_C93_CastAny_FromToOption_String(t *testing.T) {
 	err := corejson.CastAny.FromToOption(false, `{"a":"b"}`, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out["a"]}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out["a"],
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "b"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToOption_String returns correct value -- with args", actual)
 }
 
@@ -1324,10 +1494,16 @@ func Test_I5_C94_CastAny_FromToOption_Error(t *testing.T) {
 	err := corejson.CastAny.FromToOption(false, errors.New(`"test"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "test"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToOption_Error returns error -- with args", actual)
 }
 
@@ -1352,10 +1528,16 @@ func Test_I5_C96_CastAny_FromToOption_SerializerFunc(t *testing.T) {
 	err := corejson.CastAny.FromToOption(false, fn, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "from-func"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "from-func",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToOption_SerializerFunc returns correct value -- with args", actual)
 }
 
@@ -1366,10 +1548,16 @@ func Test_I5_C97_CastAny_FromToOption_AnyItem(t *testing.T) {
 	err := corejson.CastAny.FromToOption(false, s{A: 42}, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out.A}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out.A,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": 42}
+	expected := args.Map{
+		"nilErr": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_FromToOption_AnyItem returns correct value -- with args", actual)
 }
 
@@ -1379,10 +1567,16 @@ func Test_I5_C98_CastAny_OrDeserializeTo(t *testing.T) {
 	err := corejson.CastAny.OrDeserializeTo([]byte(`"hi"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hi"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hi",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny_OrDeserializeTo returns correct value -- with args", actual)
 }
 
@@ -1431,10 +1625,16 @@ func Test_I5_C102_AnyTo_SerializedRaw(t *testing.T) {
 	b, err := corejson.AnyTo.SerializedRaw([]byte(`"test"`))
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_SerializedRaw returns correct value -- with args", actual)
 }
 
@@ -1443,10 +1643,16 @@ func Test_I5_C103_AnyTo_SerializedString(t *testing.T) {
 	s, err := corejson.AnyTo.SerializedString([]byte(`"hello"`))
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_SerializedString returns correct value -- with args", actual)
 }
 
@@ -1455,10 +1661,16 @@ func Test_I5_C104_AnyTo_SerializedString_Error(t *testing.T) {
 	s, err := corejson.AnyTo.SerializedString(nil)
 
 	// Act
-	actual := args.Map{"empty": s == "", "hasErr": err != nil}
+	actual := args.Map{
+		"empty": s == "",
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "hasErr": true}
+	expected := args.Map{
+		"empty": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_SerializedString_Error returns error -- with args", actual)
 }
 
@@ -1515,10 +1727,16 @@ func Test_I5_C109_AnyTo_PrettyStringWithError(t *testing.T) {
 	s, err := corejson.AnyTo.PrettyStringWithError("hello")
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_PrettyStringWithError_String returns error -- with args", actual)
 }
 
@@ -1527,10 +1745,16 @@ func Test_I5_C110_AnyTo_PrettyStringWithError_Bytes(t *testing.T) {
 	s, err := corejson.AnyTo.PrettyStringWithError([]byte(`{"a":1}`))
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_PrettyStringWithError_Bytes returns error -- with args", actual)
 }
 
@@ -1540,10 +1764,16 @@ func Test_I5_C111_AnyTo_PrettyStringWithError_Result(t *testing.T) {
 	s, err := corejson.AnyTo.PrettyStringWithError(r)
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_PrettyStringWithError_Result returns error -- with args", actual)
 }
 
@@ -1553,10 +1783,16 @@ func Test_I5_C112_AnyTo_PrettyStringWithError_ResultPtr(t *testing.T) {
 	s, err := corejson.AnyTo.PrettyStringWithError(r)
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_PrettyStringWithError_ResultPtr returns error -- with args", actual)
 }
 
@@ -1679,10 +1915,16 @@ func Test_I5_C123_AnyTo_JsonStringWithErr(t *testing.T) {
 	s, err := corejson.AnyTo.JsonStringWithErr("hello")
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_JsonStringWithErr_String returns error -- with args", actual)
 }
 
@@ -1691,10 +1933,16 @@ func Test_I5_C124_AnyTo_JsonStringWithErr_Bytes(t *testing.T) {
 	s, err := corejson.AnyTo.JsonStringWithErr([]byte(`"x"`))
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo_JsonStringWithErr_Bytes returns error -- with args", actual)
 }
 
@@ -1787,10 +2035,16 @@ func Test_I5_C132_Deserialize_UsingStringPtr_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingStringPtr(&str, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_UsingStringPtr_Valid returns non-empty -- with args", actual)
 }
 
@@ -1813,10 +2067,16 @@ func Test_I5_C134_Deserialize_UsingError_Valid(t *testing.T) {
 	err := corejson.Deserialize.UsingError(errors.New(`"hello"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_UsingError_Valid returns error -- with args", actual)
 }
 
@@ -1861,10 +2121,16 @@ func Test_I5_C137_Deserialize_FromString(t *testing.T) {
 	err := corejson.Deserialize.FromString(`"hello"`, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": "hello"}
+	expected := args.Map{
+		"nilErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_FromString returns correct value -- with args", actual)
 }
 
@@ -1911,10 +2177,16 @@ func Test_I5_C140_Deserialize_MapAnyToPointer(t *testing.T) {
 	err := corejson.Deserialize.MapAnyToPointer(false, map[string]any{"a": 1}, &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "val": out.A}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"val": out.A,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "val": 1}
+	expected := args.Map{
+		"nilErr": true,
+		"val": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_MapAnyToPointer returns correct value -- with args", actual)
 }
 
@@ -1997,10 +2269,16 @@ func Test_I5_C146_Deserialize_UsingBytesIf(t *testing.T) {
 	err := corejson.Deserialize.UsingBytesIf(false, []byte(`"x"`), &out)
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "empty": out == ""}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"empty": out == "",
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "empty": true}
+	expected := args.Map{
+		"nilErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize_UsingBytesIf_Skip returns correct value -- with args", actual)
 }
 
@@ -2270,10 +2548,16 @@ func Test_I5_C168_JsonString_Func(t *testing.T) {
 	s, err := corejson.JsonString("hello")
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonString_Func returns correct value -- with args", actual)
 }
 
@@ -2434,10 +2718,16 @@ func Test_I5_C181_Serialize_Raw(t *testing.T) {
 	b, err := corejson.Serialize.Raw("hello")
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_Raw returns correct value -- with args", actual)
 }
 
@@ -2446,10 +2736,16 @@ func Test_I5_C182_Serialize_Marshal(t *testing.T) {
 	b, err := corejson.Serialize.Marshal("hello")
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_Marshal returns correct value -- with args", actual)
 }
 
@@ -2518,10 +2814,16 @@ func Test_I5_C188_Serialize_ToBytesErr(t *testing.T) {
 	b, err := corejson.Serialize.ToBytesErr("hello")
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_ToBytesErr returns error -- with args", actual)
 }
 
@@ -2554,10 +2856,16 @@ func Test_I5_C191_Serialize_ToStringErr(t *testing.T) {
 	s, err := corejson.Serialize.ToStringErr("hello")
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_ToStringErr returns error -- with args", actual)
 }
 
@@ -2566,10 +2874,16 @@ func Test_I5_C192_Serialize_ToPrettyStringErr(t *testing.T) {
 	s, err := corejson.Serialize.ToPrettyStringErr(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "nilErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "nilErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize_ToPrettyStringErr returns error -- with args", actual)
 }
 
@@ -2606,10 +2920,16 @@ func Test_I5_C195_BytesTo_Bool(t *testing.T) {
 	b, err := corejson.Deserialize.BytesTo.Bool([]byte(`true`))
 
 	// Act
-	actual := args.Map{"val": b, "nilErr": err == nil}
+	actual := args.Map{
+		"val": b,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "nilErr": true}
+	expected := args.Map{
+		"val": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Bool returns correct value -- with args", actual)
 }
 
@@ -2630,10 +2950,16 @@ func Test_I5_C197_BytesTo_Integer(t *testing.T) {
 	i, err := corejson.Deserialize.BytesTo.Integer([]byte(`42`))
 
 	// Act
-	actual := args.Map{"val": i, "nilErr": err == nil}
+	actual := args.Map{
+		"val": i,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "nilErr": true}
+	expected := args.Map{
+		"val": 42,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Integer returns correct value -- with args", actual)
 }
 
@@ -2654,10 +2980,16 @@ func Test_I5_C199_BytesTo_Integer64(t *testing.T) {
 	i, err := corejson.Deserialize.BytesTo.Integer64([]byte(`99`))
 
 	// Act
-	actual := args.Map{"val": int(i), "nilErr": err == nil}
+	actual := args.Map{
+		"val": int(i),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 99, "nilErr": true}
+	expected := args.Map{
+		"val": 99,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Integer64 returns correct value -- with args", actual)
 }
 
@@ -2678,10 +3010,16 @@ func Test_I5_C201_BytesTo_Integers(t *testing.T) {
 	ints, err := corejson.Deserialize.BytesTo.Integers([]byte(`[1,2,3]`))
 
 	// Act
-	actual := args.Map{"len": len(ints), "nilErr": err == nil}
+	actual := args.Map{
+		"len": len(ints),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "nilErr": true}
+	expected := args.Map{
+		"len": 3,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Integers returns correct value -- with args", actual)
 }
 
@@ -2702,10 +3040,16 @@ func Test_I5_C203_BytesTo_Strings(t *testing.T) {
 	strs, err := corejson.Deserialize.BytesTo.Strings([]byte(`["a","b"]`))
 
 	// Act
-	actual := args.Map{"len": len(strs), "nilErr": err == nil}
+	actual := args.Map{
+		"len": len(strs),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilErr": true}
+	expected := args.Map{
+		"len": 2,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Strings returns correct value -- with args", actual)
 }
 
@@ -2726,10 +3070,16 @@ func Test_I5_C205_BytesTo_String(t *testing.T) {
 	s, err := corejson.Deserialize.BytesTo.String([]byte(`"hi"`))
 
 	// Act
-	actual := args.Map{"val": s, "nilErr": err == nil}
+	actual := args.Map{
+		"val": s,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hi", "nilErr": true}
+	expected := args.Map{
+		"val": "hi",
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_String returns correct value -- with args", actual)
 }
 
@@ -2750,10 +3100,16 @@ func Test_I5_C207_BytesTo_MapAnyItem(t *testing.T) {
 	m, err := corejson.Deserialize.BytesTo.MapAnyItem([]byte(`{"a":1}`))
 
 	// Act
-	actual := args.Map{"hasKey": m["a"] != nil, "nilErr": err == nil}
+	actual := args.Map{
+		"hasKey": m["a"] != nil,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasKey": true, "nilErr": true}
+	expected := args.Map{
+		"hasKey": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_MapAnyItem returns correct value -- with args", actual)
 }
 
@@ -2774,10 +3130,16 @@ func Test_I5_C209_BytesTo_MapStringString(t *testing.T) {
 	m, err := corejson.Deserialize.BytesTo.MapStringString([]byte(`{"a":"b"}`))
 
 	// Act
-	actual := args.Map{"val": m["a"], "nilErr": err == nil}
+	actual := args.Map{
+		"val": m["a"],
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "b", "nilErr": true}
+	expected := args.Map{
+		"val": "b",
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_MapStringString returns correct value -- with args", actual)
 }
 
@@ -2798,10 +3160,16 @@ func Test_I5_C211_BytesTo_Bytes(t *testing.T) {
 	b, err := corejson.Deserialize.BytesTo.Bytes([]byte(`"aGVsbG8="`))
 
 	// Act
-	actual := args.Map{"hasData": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasData": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasData": true, "nilErr": true}
+	expected := args.Map{
+		"hasData": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo_Bytes returns correct value -- with args", actual)
 }
 
@@ -2827,10 +3195,16 @@ func Test_I5_C213_ResultTo_Byte(t *testing.T) {
 	b, err := corejson.Deserialize.ResultTo.Byte(r)
 
 	// Act
-	actual := args.Map{"val": int(b), "nilErr": err == nil}
+	actual := args.Map{
+		"val": int(b),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 65, "nilErr": true}
+	expected := args.Map{
+		"val": 65,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ResultTo_Byte returns correct value -- with args", actual)
 }
 
@@ -2856,10 +3230,16 @@ func Test_I5_C215_Empty_ResultWithErr(t *testing.T) {
 	r := corejson.Empty.ResultWithErr("T", errors.New("e"))
 
 	// Act
-	actual := args.Map{"hasErr": r.Error != nil, "type": r.TypeName}
+	actual := args.Map{
+		"hasErr": r.Error != nil,
+		"type": r.TypeName,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "type": "T"}
+	expected := args.Map{
+		"hasErr": true,
+		"type": "T",
+	}
 	expected.ShouldBeEqual(t, 0, "Empty_ResultWithErr returns empty -- with args", actual)
 }
 
@@ -2868,10 +3248,16 @@ func Test_I5_C216_Empty_ResultPtrWithErr(t *testing.T) {
 	r := corejson.Empty.ResultPtrWithErr("T", errors.New("e"))
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "hasErr": r.Error != nil}
+	actual := args.Map{
+		"notNil": r != nil,
+		"hasErr": r.Error != nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty_ResultPtrWithErr returns empty -- with args", actual)
 }
 
@@ -2892,10 +3278,16 @@ func Test_I5_C218_Empty_BytesCollectionPtr(t *testing.T) {
 	c := corejson.Empty.BytesCollectionPtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "empty": c.IsEmpty()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"empty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty_BytesCollectionPtr returns empty -- with args", actual)
 }
 
@@ -2904,10 +3296,16 @@ func Test_I5_C219_Empty_ResultsPtrCollection(t *testing.T) {
 	c := corejson.Empty.ResultsPtrCollection()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "empty": c.IsEmpty()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"empty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty_ResultsPtrCollection returns empty -- with args", actual)
 }
 
@@ -2916,10 +3314,16 @@ func Test_I5_C220_Empty_MapResults(t *testing.T) {
 	m := corejson.Empty.MapResults()
 
 	// Act
-	actual := args.Map{"notNil": m != nil, "empty": m.IsEmpty()}
+	actual := args.Map{
+		"notNil": m != nil,
+		"empty": m.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty_MapResults returns empty -- with args", actual)
 }
 
@@ -2970,10 +3374,16 @@ func Test_I5_C224_NewResult_UsingErrorStringPtr_Valid(t *testing.T) {
 	r := corejson.NewResult.UsingErrorStringPtr(nil, &s, "T")
 
 	// Act
-	actual := args.Map{"hasBytes": len(r.Bytes) > 0, "nilErr": r.Error == nil}
+	actual := args.Map{
+		"hasBytes": len(r.Bytes) > 0,
+		"nilErr": r.Error == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewResult_UsingErrorStringPtr_Valid returns error -- with args", actual)
 }
 
@@ -3056,10 +3466,16 @@ func Test_I5_C231_NewResult_UsingBytesErrPtr_Empty(t *testing.T) {
 	r := corejson.NewResult.UsingBytesErrPtr([]byte{}, errors.New("e"), "T")
 
 	// Act
-	actual := args.Map{"hasErr": r.Error != nil, "emptyBytes": len(r.Bytes) == 0}
+	actual := args.Map{
+		"hasErr": r.Error != nil,
+		"emptyBytes": len(r.Bytes) == 0,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "emptyBytes": true}
+	expected := args.Map{
+		"hasErr": true,
+		"emptyBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewResult_UsingBytesErrPtr_Empty returns empty -- with args", actual)
 }
 
@@ -3104,10 +3520,16 @@ func Test_I5_C235_NewResult_Many(t *testing.T) {
 	r := corejson.NewResult.Many("a", "b", "c")
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "hasBytes": len(r.Bytes) > 0}
+	actual := args.Map{
+		"notNil": r != nil,
+		"hasBytes": len(r.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasBytes": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewResult_Many returns correct value -- with args", actual)
 }
 

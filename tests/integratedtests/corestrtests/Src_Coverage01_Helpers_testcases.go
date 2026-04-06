@@ -14,7 +14,10 @@ var cloneSliceTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "CloneSlice returns cloned items -- non-empty input",
-		ExpectedInput: args.Map{"len": 2, "first": "a"},
+		ExpectedInput: args.Map{
+			"len": 2,
+			"first": "a",
+		},
 	},
 }
 
@@ -149,11 +152,17 @@ var dataModelTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "HashmapDataModel round-trips -- valid input",
-		ExpectedInput: args.Map{"nonNil": true, "nonEmpty": true},
+		ExpectedInput: args.Map{
+			"nonNil": true,
+			"nonEmpty": true,
+		},
 	},
 	{
 		Title:         "HashsetDataModel round-trips -- valid input",
-		ExpectedInput: args.Map{"nonNil": true, "nonEmpty": true},
+		ExpectedInput: args.Map{
+			"nonNil": true,
+			"nonEmpty": true,
+		},
 	},
 	{
 		Title:         "HashsetsCollectionDataModel round-trips -- valid input",

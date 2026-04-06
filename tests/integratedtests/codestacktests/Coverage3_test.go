@@ -14,10 +14,16 @@ func Test_Cov3_TraceCollection_NilLength(t *testing.T) {
 	var tc *codestack.TraceCollection
 
 	// Act
-	actual := args.Map{"length": tc.Length(), "isEmpty": tc.IsEmpty()}
+	actual := args.Map{
+		"length": tc.Length(),
+		"isEmpty": tc.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"length": 0, "isEmpty": true}
+	expected := args.Map{
+		"length": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection.Length returns nil -- nil receiver", actual)
 }
 
@@ -254,10 +260,16 @@ func Test_Cov3_TraceCollection_ConcatNewPtr(t *testing.T) {
 	newTc := tc.ConcatNewPtr(tr)
 
 	// Act
-	actual := args.Map{"origSame": tc.Length() == origLen, "newNotEmpty": newTc.Length() > 0}
+	actual := args.Map{
+		"origSame": tc.Length() == origLen,
+		"newNotEmpty": newTc.Length() > 0,
+	}
 
 	// Assert
-	expected := args.Map{"origSame": true, "newNotEmpty": true}
+	expected := args.Map{
+		"origSame": true,
+		"newNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TraceCollection.ConcatNewPtr returns correct value -- with args", actual)
 }
 
@@ -513,10 +525,16 @@ func Test_Cov3_File_PathLineSep(t *testing.T) {
 	fp, ln := codestack.File.PathLineSep(0)
 
 	// Act
-	actual := args.Map{"pathNotEmpty": fp != "", "linePositive": ln > 0}
+	actual := args.Map{
+		"pathNotEmpty": fp != "",
+		"linePositive": ln > 0,
+	}
 
 	// Assert
-	expected := args.Map{"pathNotEmpty": true, "linePositive": true}
+	expected := args.Map{
+		"pathNotEmpty": true,
+		"linePositive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "File.PathLineSep returns correct value -- with args", actual)
 }
 
@@ -525,10 +543,16 @@ func Test_Cov3_File_PathLineSepDefault(t *testing.T) {
 	fp, ln := codestack.File.PathLineSepDefault()
 
 	// Act
-	actual := args.Map{"pathNotEmpty": fp != "", "linePositive": ln > 0}
+	actual := args.Map{
+		"pathNotEmpty": fp != "",
+		"linePositive": ln > 0,
+	}
 
 	// Assert
-	expected := args.Map{"pathNotEmpty": true, "linePositive": true}
+	expected := args.Map{
+		"pathNotEmpty": true,
+		"linePositive": true,
+	}
 	expected.ShouldBeEqual(t, 0, "File.PathLineSepDefault returns correct value -- with args", actual)
 }
 

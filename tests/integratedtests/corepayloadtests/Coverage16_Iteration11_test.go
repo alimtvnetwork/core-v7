@@ -28,10 +28,18 @@ func Test_I11_NewPW_UsingBytesCreateInstruction(t *testing.T) {
 		})
 
 	// Act
-	actual := args.Map{"name": pw.Name, "id": pw.Identifier, "entity": pw.EntityType}
+	actual := args.Map{
+		"name": pw.Name,
+		"id": pw.Identifier,
+		"entity": pw.EntityType,
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "id": "id", "entity": "entity"}
+	expected := args.Map{
+		"name": "n",
+		"id": "id",
+		"entity": "entity",
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesCreateInstruction returns correct value -- with args", actual)
 }
 
@@ -47,10 +55,18 @@ func Test_I11_NewPW_UsingBytesCreateInstructionTypeStringer(t *testing.T) {
 		})
 
 	// Act
-	actual := args.Map{"name": pw.Name, "task": pw.TaskTypeName, "cat": pw.CategoryName}
+	actual := args.Map{
+		"name": pw.Name,
+		"task": pw.TaskTypeName,
+		"cat": pw.CategoryName,
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "task": "task", "cat": "cat"}
+	expected := args.Map{
+		"name": "n",
+		"task": "task",
+		"cat": "cat",
+	}
 	expected.ShouldBeEqual(t, 0, "UsingBytesCreateInstructionTypeStringer returns correct value -- with args", actual)
 }
 
@@ -69,10 +85,18 @@ func Test_I11_NewPW_UsingCreateInstructionTypeStringer(t *testing.T) {
 		})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": pw.Name, "task": pw.TaskTypeName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": pw.Name,
+		"task": pw.TaskTypeName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "n", "task": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "n",
+		"task": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "UsingCreateInstructionTypeStringer returns correct value -- with args", actual)
 }
 
@@ -90,10 +114,16 @@ func Test_I11_NewPW_UsingCreateInstruction_StringPayload(t *testing.T) {
 		})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "entity": pw.EntityType}
+	actual := args.Map{
+		"noErr": err == nil,
+		"entity": pw.EntityType,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "entity": "entity"}
+	expected := args.Map{
+		"noErr": true,
+		"entity": "entity",
+	}
 	expected.ShouldBeEqual(t, 0, "UsingCreateInstruction returns correct value -- string payload", actual)
 }
 
@@ -108,10 +138,18 @@ func Test_I11_NewPW_CreateUsingTypeStringer(t *testing.T) {
 		testUser{Name: "X"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "task": pw.TaskTypeName, "cat": pw.CategoryName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"task": pw.TaskTypeName,
+		"cat": pw.CategoryName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "task": "task", "cat": "cat"}
+	expected := args.Map{
+		"noErr": true,
+		"task": "task",
+		"cat": "cat",
+	}
 	expected.ShouldBeEqual(t, 0, "CreateUsingTypeStringer returns correct value -- with args", actual)
 }
 
@@ -125,10 +163,16 @@ func Test_I11_NewPW_NameIdCategoryStringer(t *testing.T) {
 		"n", "id", stringer16{"cat"}, testUser{Name: "Y"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "cat": pw.CategoryName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"cat": pw.CategoryName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "cat": "cat"}
+	expected := args.Map{
+		"noErr": true,
+		"cat": "cat",
+	}
 	expected.ShouldBeEqual(t, 0, "NameIdCategoryStringer returns correct value -- with args", actual)
 }
 
@@ -143,10 +187,16 @@ func Test_I11_NewPW_RecordsTypeStringer(t *testing.T) {
 		[]testUser{{Name: "A"}, {Name: "B"}})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "many": pw.HasManyRecords}
+	actual := args.Map{
+		"noErr": err == nil,
+		"many": pw.HasManyRecords,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "many": true}
+	expected := args.Map{
+		"noErr": true,
+		"many": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RecordsTypeStringer returns correct value -- with args", actual)
 }
 
@@ -157,10 +207,16 @@ func Test_I11_NewPW_RecordTypeStringer(t *testing.T) {
 		testUser{Name: "Z"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "task": pw.TaskTypeName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"task": pw.TaskTypeName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "task": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"task": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "RecordTypeStringer returns correct value -- with args", actual)
 }
 
@@ -174,10 +230,16 @@ func Test_I11_NewPW_NameIdTaskStringerRecord(t *testing.T) {
 		"n", "id", stringer16{"task"}, testUser{Name: "Q"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "task": pw.TaskTypeName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"task": pw.TaskTypeName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "task": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"task": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "NameIdTaskStringerRecord returns error -- with args", actual)
 }
 
@@ -187,10 +249,16 @@ func Test_I11_NewPW_NameTaskNameRecord(t *testing.T) {
 		"id", "task", testUser{Name: "R"})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "task": pw.TaskTypeName}
+	actual := args.Map{
+		"noErr": err == nil,
+		"task": pw.TaskTypeName,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "task": "task"}
+	expected := args.Map{
+		"noErr": true,
+		"task": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "NameTaskNameRecord returns correct value -- with args", actual)
 }
 
@@ -205,10 +273,16 @@ func Test_I11_NewPW_ManyRecords(t *testing.T) {
 		[]testUser{{Name: "A"}})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": pw.Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": pw.Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "n"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "n",
+	}
 	expected.ShouldBeEqual(t, 0, "ManyRecords returns correct value -- with args", actual)
 }
 
@@ -237,10 +311,16 @@ func Test_I11_NewPC_DeserializeToMany_Valid(t *testing.T) {
 	result, err := corepayload.New.PayloadsCollection.DeserializeToMany(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(result)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPC.DeserializeToMany returns non-empty -- valid", actual)
 }
 
@@ -252,10 +332,16 @@ func Test_I11_NewPC_DeserializeUsingJsonResult_Valid(t *testing.T) {
 	result, err := corepayload.New.PayloadsCollection.DeserializeUsingJsonResult(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPC.DeserializeUsingJsonResult returns non-empty -- valid", actual)
 }
 
@@ -549,10 +635,18 @@ func Test_I11_PayloadCreateInstructionTypeStringer(t *testing.T) {
 	pi := pci.PayloadCreateInstruction()
 
 	// Act
-	actual := args.Map{"name": pi.Name, "task": pi.TaskTypeName, "cat": pi.CategoryName}
+	actual := args.Map{
+		"name": pi.Name,
+		"task": pi.TaskTypeName,
+		"cat": pi.CategoryName,
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "task": "task", "cat": "cat"}
+	expected := args.Map{
+		"name": "n",
+		"task": "task",
+		"cat": "cat",
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadCreateInstructionTypeStringer returns correct value -- with args", actual)
 }
 
@@ -574,7 +668,10 @@ func Test_I11_PayloadTypeExpander(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"cat": "cat", "task": "task"}
+	expected := args.Map{
+		"cat": "cat",
+		"task": "task",
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadTypeExpander returns correct value -- with args", actual)
 }
 
@@ -593,10 +690,18 @@ func Test_I11_BytesCreateInstructionStringer(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"name": bci.Name, "task": bci.TaskTypeName.String(), "cat": fmt.Sprintf("%v", bci.CategoryName)}
+	actual := args.Map{
+		"name": bci.Name,
+		"task": bci.TaskTypeName.String(),
+		"cat": fmt.Sprintf("%v", bci.CategoryName),
+	}
 
 	// Assert
-	expected := args.Map{"name": "n", "task": "task", "cat": "cat"}
+	expected := args.Map{
+		"name": "n",
+		"task": "task",
+		"cat": "cat",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesCreateInstructionStringer returns correct value -- with args", actual)
 }
 
@@ -613,10 +718,16 @@ func Test_I11_NewPW_CastOrDeserializeFrom_Valid(t *testing.T) {
 	// Name should survive the round-trip since both use the same model.
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": pw2 != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": pw2 != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastOrDeserializeFrom returns non-nil -- valid", actual)
 }
 
@@ -631,10 +742,16 @@ func Test_I11_NewPW_DeserializeToMany_Valid(t *testing.T) {
 	result, err := corepayload.New.PayloadWrapper.DeserializeToMany(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(result)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPW.DeserializeToMany returns non-empty -- valid", actual)
 }
 
@@ -649,10 +766,16 @@ func Test_I11_NewPW_DeserializeToCollection(t *testing.T) {
 	result, err := corepayload.New.PayloadWrapper.DeserializeToCollection(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeToCollection returns correct value -- with args", actual)
 }
 

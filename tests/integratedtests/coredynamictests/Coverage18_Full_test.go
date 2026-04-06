@@ -73,7 +73,10 @@ func Test_C18_Dynamic_DataValue(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "value": "hello"}
+	expected := args.Map{
+		"data": "hello",
+		"value": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Data/Value", actual)
 }
 

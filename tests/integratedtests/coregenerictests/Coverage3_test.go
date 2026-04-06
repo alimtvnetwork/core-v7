@@ -40,10 +40,16 @@ func Test_Cov3_Collection_HasItems(t *testing.T) {
 	empty := coregeneric.EmptyCollection[int]()
 
 	// Act
-	actual := args.Map{"has": col.HasItems(), "empty": empty.HasItems()}
+	actual := args.Map{
+		"has": col.HasItems(),
+		"empty": empty.HasItems(),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "empty": false}
+	expected := args.Map{
+		"has": true,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasItems", actual)
 }
 
@@ -140,10 +146,20 @@ func Test_Cov3_Collection_RemoveAt(t *testing.T) {
 	outOfRange := col.RemoveAt(100)
 
 	// Act
-	actual := args.Map{"ok": ok, "fail": fail, "outOfRange": outOfRange, "len": col.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"fail": fail,
+		"outOfRange": outOfRange,
+		"len": col.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "fail": false, "outOfRange": false, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"fail": false,
+		"outOfRange": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- RemoveAt", actual)
 }
 
@@ -176,10 +192,16 @@ func Test_Cov3_Collection_SafeAt(t *testing.T) {
 	col := coregeneric.CollectionFrom([]int{10, 20})
 
 	// Act
-	actual := args.Map{"valid": col.SafeAt(1), "invalid": col.SafeAt(99)}
+	actual := args.Map{
+		"valid": col.SafeAt(1),
+		"invalid": col.SafeAt(99),
+	}
 
 	// Assert
-	expected := args.Map{"valid": 20, "invalid": 0}
+	expected := args.Map{
+		"valid": 20,
+		"invalid": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SafeAt", actual)
 }
 
@@ -196,7 +218,12 @@ func Test_Cov3_Collection_Skip_Take(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"skipLen": 2, "skipAll": 0, "takeLen": 2, "takeAll": 4}
+	expected := args.Map{
+		"skipLen": 2,
+		"skipAll": 0,
+		"takeLen": 2,
+		"takeAll": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Skip/Take", actual)
 }
 
@@ -249,10 +276,16 @@ func Test_Cov3_Collection_SortFunc(t *testing.T) {
 	col.SortFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last()}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- SortFunc", actual)
 }
 
@@ -297,10 +330,18 @@ func Test_Cov3_Collection_HasIndex(t *testing.T) {
 	col := coregeneric.CollectionFrom([]int{1, 2})
 
 	// Act
-	actual := args.Map{"valid": col.HasIndex(1), "invalid": col.HasIndex(5), "neg": col.HasIndex(-1)}
+	actual := args.Map{
+		"valid": col.HasIndex(1),
+		"invalid": col.HasIndex(5),
+		"neg": col.HasIndex(-1),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false, "neg": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+		"neg": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasIndex", actual)
 }
 
@@ -373,10 +414,16 @@ func Test_Cov3_Hashset_ContainsLock(t *testing.T) {
 	hs := coregeneric.HashsetFrom([]string{"a"})
 
 	// Act
-	actual := args.Map{"has": hs.ContainsLock("a"), "miss": hs.ContainsLock("b")}
+	actual := args.Map{
+		"has": hs.ContainsLock("a"),
+		"miss": hs.ContainsLock("b"),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "miss": false}
+	expected := args.Map{
+		"has": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- ContainsLock", actual)
 }
 
@@ -393,7 +440,12 @@ func Test_Cov3_Hashset_HasAll_HasAny(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"all": true, "notAll": false, "any": true, "notAny": false}
+	expected := args.Map{
+		"all": true,
+		"notAll": false,
+		"any": true,
+		"notAny": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- HasAll/HasAny", actual)
 }
 
@@ -404,10 +456,18 @@ func Test_Cov3_Hashset_RemoveLock(t *testing.T) {
 	miss := hs.RemoveLock("c")
 
 	// Act
-	actual := args.Map{"ok": ok, "miss": miss, "len": hs.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"miss": miss,
+		"len": hs.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "miss": false, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"miss": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- RemoveLock", actual)
 }
 
@@ -465,7 +525,13 @@ func Test_Cov3_Hashset_IsEquals(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "sameRef": true, "nilBoth": true, "nilLeft": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"sameRef": true,
+		"nilBoth": true,
+		"nilLeft": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashset returns correct value -- IsEquals", actual)
 }
 
@@ -564,10 +630,16 @@ func Test_Cov3_Hashmap_GetOrDefault(t *testing.T) {
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"found": hm.GetOrDefault("a", -1), "missing": hm.GetOrDefault("b", -1)}
+	actual := args.Map{
+		"found": hm.GetOrDefault("a", -1),
+		"missing": hm.GetOrDefault("b", -1),
+	}
 
 	// Assert
-	expected := args.Map{"found": 1, "missing": -1}
+	expected := args.Map{
+		"found": 1,
+		"missing": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- GetOrDefault", actual)
 }
 
@@ -577,10 +649,16 @@ func Test_Cov3_Hashmap_GetLock(t *testing.T) {
 	val, found := hm.GetLock("a")
 
 	// Act
-	actual := args.Map{"val": val, "found": found}
+	actual := args.Map{
+		"val": val,
+		"found": found,
+	}
 
 	// Assert
-	expected := args.Map{"val": 1, "found": true}
+	expected := args.Map{
+		"val": 1,
+		"found": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- GetLock", actual)
 }
 
@@ -589,10 +667,16 @@ func Test_Cov3_Hashmap_ContainsLock(t *testing.T) {
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"has": hm.ContainsLock("a"), "miss": hm.ContainsLock("b")}
+	actual := args.Map{
+		"has": hm.ContainsLock("a"),
+		"miss": hm.ContainsLock("b"),
+	}
 
 	// Assert
-	expected := args.Map{"has": true, "miss": false}
+	expected := args.Map{
+		"has": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- ContainsLock", actual)
 }
 
@@ -601,10 +685,16 @@ func Test_Cov3_Hashmap_IsKeyMissing(t *testing.T) {
 	hm := coregeneric.HashmapFrom(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"miss": hm.IsKeyMissing("b"), "has": hm.IsKeyMissing("a")}
+	actual := args.Map{
+		"miss": hm.IsKeyMissing("b"),
+		"has": hm.IsKeyMissing("a"),
+	}
 
 	// Assert
-	expected := args.Map{"miss": true, "has": false}
+	expected := args.Map{
+		"miss": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- IsKeyMissing", actual)
 }
 
@@ -615,10 +705,16 @@ func Test_Cov3_Hashmap_RemoveLock(t *testing.T) {
 	miss := hm.RemoveLock("b")
 
 	// Act
-	actual := args.Map{"ok": ok, "miss": miss}
+	actual := args.Map{
+		"ok": ok,
+		"miss": miss,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "miss": false}
+	expected := args.Map{
+		"ok": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- RemoveLock", actual)
 }
 
@@ -681,7 +777,13 @@ func Test_Cov3_Hashmap_IsEquals(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "sameRef": true, "nilBoth": true, "nilLeft": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"sameRef": true,
+		"nilBoth": true,
+		"nilLeft": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Hashmap returns correct value -- IsEquals", actual)
 }
 
@@ -771,10 +873,18 @@ func Test_Cov3_LinkedList_PushBackFrontPush(t *testing.T) {
 	ll.Push(2)
 
 	// Act
-	actual := args.Map{"first": ll.First(), "last": ll.Last(), "len": ll.Length()}
+	actual := args.Map{
+		"first": ll.First(),
+		"last": ll.Last(),
+		"len": ll.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 0, "last": 2, "len": 3}
+	expected := args.Map{
+		"first": 0,
+		"last": 2,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- PushBack/PushFront/Push", actual)
 }
 
@@ -785,10 +895,16 @@ func Test_Cov3_LinkedList_AppendNode(t *testing.T) {
 	ll.AppendNode(node)
 
 	// Act
-	actual := args.Map{"first": ll.First(), "len": ll.Length()}
+	actual := args.Map{
+		"first": ll.First(),
+		"len": ll.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 42, "len": 1}
+	expected := args.Map{
+		"first": 42,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns empty -- AppendNode empty", actual)
 }
 
@@ -841,10 +957,18 @@ func Test_Cov3_LinkedList_IndexAt(t *testing.T) {
 	outNode := ll.IndexAt(100)
 
 	// Act
-	actual := args.Map{"val": node.Element, "nil1": nilNode == nil, "nil2": outNode == nil}
+	actual := args.Map{
+		"val": node.Element,
+		"nil1": nilNode == nil,
+		"nil2": outNode == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 20, "nil1": true, "nil2": true}
+	expected := args.Map{
+		"val": 20,
+		"nil1": true,
+		"nil2": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LinkedList returns correct value -- IndexAt", actual)
 }
 
@@ -924,10 +1048,16 @@ func Test_Cov3_SimpleSlice_InsertAt(t *testing.T) {
 	outOfRange.InsertAt(-1, 0)
 
 	// Act
-	actual := args.Map{"len": ss.Length(), "outLen": outOfRange.Length()}
+	actual := args.Map{
+		"len": ss.Length(),
+		"outLen": outOfRange.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "outLen": 1}
+	expected := args.Map{
+		"len": 3,
+		"outLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- InsertAt", actual)
 }
 
@@ -951,10 +1081,16 @@ func Test_Cov3_SimpleSlice_Clone(t *testing.T) {
 	emptyClone := coregeneric.EmptySimpleSlice[int]().Clone()
 
 	// Act
-	actual := args.Map{"len": cloned.Length(), "emptyLen": emptyClone.Length()}
+	actual := args.Map{
+		"len": cloned.Length(),
+		"emptyLen": emptyClone.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleSlice returns correct value -- Clone", actual)
 }
 
@@ -1011,7 +1147,12 @@ func Test_Cov3_MinMaxCollectionOrDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": 1, "max": 3, "minEmpty": -1, "maxEmpty": -1}
+	expected := args.Map{
+		"min": 1,
+		"max": 3,
+		"minEmpty": -1,
+		"maxEmpty": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMax returns correct value -- CollectionOrDefault", actual)
 }
 
@@ -1021,10 +1162,18 @@ func Test_Cov3_IsSortedCollection(t *testing.T) {
 	unsorted := coregeneric.CollectionFrom([]int{3, 1, 2})
 
 	// Act
-	actual := args.Map{"sorted": coregeneric.IsSortedCollection(sorted), "unsorted": coregeneric.IsSortedCollection(unsorted), "nil": coregeneric.IsSortedCollection[int](nil)}
+	actual := args.Map{
+		"sorted": coregeneric.IsSortedCollection(sorted),
+		"unsorted": coregeneric.IsSortedCollection(unsorted),
+		"nil": coregeneric.IsSortedCollection[int](nil),
+	}
 
 	// Assert
-	expected := args.Map{"sorted": true, "unsorted": false, "nil": true}
+	expected := args.Map{
+		"sorted": true,
+		"unsorted": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsSortedCollection returns correct value -- with args", actual)
 }
 
@@ -1033,10 +1182,16 @@ func Test_Cov3_SumCollection(t *testing.T) {
 	col := coregeneric.CollectionFrom([]int{1, 2, 3})
 
 	// Act
-	actual := args.Map{"sum": coregeneric.SumCollection(col), "nil": coregeneric.SumCollection[int](nil)}
+	actual := args.Map{
+		"sum": coregeneric.SumCollection(col),
+		"nil": coregeneric.SumCollection[int](nil),
+	}
 
 	// Assert
-	expected := args.Map{"sum": 6, "nil": 0}
+	expected := args.Map{
+		"sum": 6,
+		"nil": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SumCollection returns correct value -- with args", actual)
 }
 
@@ -1046,10 +1201,18 @@ func Test_Cov3_ClampCollection(t *testing.T) {
 	coregeneric.ClampCollection(col, 0, 10)
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last(), "nil": coregeneric.ClampCollection[int](nil, 0, 10) == nil}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+		"nil": coregeneric.ClampCollection[int](nil, 0, 10) == nil,
+	}
 
 	// Assert
-	expected := args.Map{"first": 0, "last": 10, "nil": true}
+	expected := args.Map{
+		"first": 0,
+		"last": 10,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ClampCollection returns correct value -- with args", actual)
 }
 
@@ -1107,7 +1270,12 @@ func Test_Cov3_MinMaxHashsetOrDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": 1, "max": 3, "minEmpty": -1, "maxEmpty": -1}
+	expected := args.Map{
+		"min": 1,
+		"max": 3,
+		"minEmpty": -1,
+		"maxEmpty": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxHashsetOrDefault returns correct value -- with args", actual)
 }
 
@@ -1153,7 +1321,12 @@ func Test_Cov3_MinMaxKeyHashmapOrDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": "a", "max": "c", "minEmpty": "z", "maxEmpty": "z"}
+	expected := args.Map{
+		"min": "a",
+		"max": "c",
+		"minEmpty": "z",
+		"maxEmpty": "z",
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxKeyHashmapOrDefault returns correct value -- with args", actual)
 }
 
@@ -1184,7 +1357,12 @@ func Test_Cov3_MinMaxValueHashmapOrDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": 1, "max": 3, "minEmpty": -1, "maxEmpty": -1}
+	expected := args.Map{
+		"min": 1,
+		"max": 3,
+		"minEmpty": -1,
+		"maxEmpty": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxValueHashmapOrDefault returns correct value -- with args", actual)
 }
 
@@ -1202,7 +1380,11 @@ func Test_Cov3_ContainsAll(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"all": true, "notAll": false, "nil": false}
+	expected := args.Map{
+		"all": true,
+		"notAll": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ContainsAll returns correct value -- with args", actual)
 }
 
@@ -1218,7 +1400,11 @@ func Test_Cov3_ContainsAny(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"any": true, "notAny": false, "nil": false}
+	expected := args.Map{
+		"any": true,
+		"notAny": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ContainsAny returns correct value -- with args", actual)
 }
 
@@ -1230,10 +1416,20 @@ func Test_Cov3_RemoveItem(t *testing.T) {
 	nilRm := coregeneric.RemoveItem[int](nil, 1)
 
 	// Act
-	actual := args.Map{"ok": ok, "miss": miss, "nil": nilRm, "len": col.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"miss": miss,
+		"nil": nilRm,
+		"len": col.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "miss": false, "nil": false, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"miss": false,
+		"nil": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveItem returns correct value -- with args", actual)
 }
 
@@ -1244,10 +1440,18 @@ func Test_Cov3_RemoveAllItems(t *testing.T) {
 	nilRm := coregeneric.RemoveAllItems[int](nil, 1)
 
 	// Act
-	actual := args.Map{"removed": removed, "len": col.Length(), "nil": nilRm}
+	actual := args.Map{
+		"removed": removed,
+		"len": col.Length(),
+		"nil": nilRm,
+	}
 
 	// Assert
-	expected := args.Map{"removed": 2, "len": 2, "nil": 0}
+	expected := args.Map{
+		"removed": 2,
+		"len": 2,
+		"nil": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "RemoveAllItems returns correct value -- with args", actual)
 }
 
@@ -1258,10 +1462,16 @@ func Test_Cov3_ToHashset(t *testing.T) {
 	nilHs := coregeneric.ToHashset[int](nil)
 
 	// Act
-	actual := args.Map{"len": hs.Length(), "nilEmpty": nilHs.IsEmpty()}
+	actual := args.Map{
+		"len": hs.Length(),
+		"nilEmpty": nilHs.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilEmpty": true}
+	expected := args.Map{
+		"len": 2,
+		"nilEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToHashset returns correct value -- with args", actual)
 }
 
@@ -1293,7 +1503,11 @@ func Test_Cov3_Clamp(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"below": 0, "above": 10, "inside": 5}
+	expected := args.Map{
+		"below": 0,
+		"above": 10,
+		"inside": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "Clamp returns correct value -- with args", actual)
 }
 
@@ -1307,7 +1521,12 @@ func Test_Cov3_ClampMinMax(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"clampMin": 0, "clampMax": 10, "okMin": 5, "okMax": 5}
+	expected := args.Map{
+		"clampMin": 0,
+		"clampMax": 10,
+		"okMin": 5,
+		"okMax": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "ClampMin/ClampMax returns correct value -- with args", actual)
 }
 
@@ -1321,7 +1540,12 @@ func Test_Cov3_Abs_AbsDiff(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"absNeg": 5, "absPos": 5, "diff": 4, "diffRev": 4}
+	expected := args.Map{
+		"absNeg": 5,
+		"absPos": 5,
+		"diff": 4,
+		"diffRev": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "Abs/AbsDiff returns correct value -- with args", actual)
 }
 
@@ -1333,7 +1557,10 @@ func Test_Cov3_MinMaxOfSlice(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"min": 1, "max": 3}
+	expected := args.Map{
+		"min": 1,
+		"max": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "MinOfSlice/MaxOfSlice returns correct value -- with args", actual)
 }
 
@@ -1349,7 +1576,14 @@ func Test_Cov3_IsZero_IsPositive_IsNegative(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"zero": true, "notZero": false, "positive": true, "notPos": false, "negative": true, "notNeg": false}
+	expected := args.Map{
+		"zero": true,
+		"notZero": false,
+		"positive": true,
+		"notPos": false,
+		"negative": true,
+		"notNeg": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsZero/IsPositive/IsNegative returns correct value -- with args", actual)
 }
 
@@ -1361,7 +1595,10 @@ func Test_Cov3_SafeDiv(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"normal": 3, "zero": 0}
+	expected := args.Map{
+		"normal": 3,
+		"zero": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeDiv returns correct value -- with args", actual)
 }
 
@@ -1378,6 +1615,12 @@ func Test_Cov3_Relational(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"less": true, "lessEq": true, "greater": true, "greaterEq": true, "inRange": true}
+	expected := args.Map{
+		"less": true,
+		"lessEq": true,
+		"greater": true,
+		"greaterEq": true,
+		"inRange": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Relational returns correct value -- predicates", actual)
 }

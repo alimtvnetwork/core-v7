@@ -129,10 +129,16 @@ func Test_I14_MethodProcessor_NilReceiver_IsPublic(t *testing.T) {
 	var mp *reflectmodel.MethodProcessor
 
 	// Act
-	actual := args.Map{"isPublic": mp.IsPublicMethod(), "isPrivate": mp.IsPrivateMethod()}
+	actual := args.Map{
+		"isPublic": mp.IsPublicMethod(),
+		"isPrivate": mp.IsPrivateMethod(),
+	}
 
 	// Assert
-	expected := args.Map{"isPublic": false, "isPrivate": false}
+	expected := args.Map{
+		"isPublic": false,
+		"isPrivate": false,
+	}
 	expected.ShouldBeEqual(t, 0, "nil returns nil -- IsPublicMethod/IsPrivateMethod", actual)
 }
 
@@ -291,10 +297,18 @@ func Test_I14_RVK_NilReceiver_IsInvalid(t *testing.T) {
 	var rvk *reflectmodel.ReflectValueKind
 
 	// Act
-	actual := args.Map{"isInvalid": rvk.IsInvalid(), "hasErr": rvk.HasError(), "emptyErr": rvk.IsEmptyError()}
+	actual := args.Map{
+		"isInvalid": rvk.IsInvalid(),
+		"hasErr": rvk.HasError(),
+		"emptyErr": rvk.IsEmptyError(),
+	}
 
 	// Assert
-	expected := args.Map{"isInvalid": true, "hasErr": false, "emptyErr": true}
+	expected := args.Map{
+		"isInvalid": true,
+		"hasErr": false,
+		"emptyErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "nil returns nil -- RVK IsInvalid/HasError/IsEmptyError", actual)
 }
 
@@ -372,10 +386,18 @@ func Test_I14_RVK_InvalidNotNil_PointerRv(t *testing.T) {
 	ptr := rvk.PointerRv()
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "pkgPath": rvk.PkgPath(), "typeName": rvk.TypeName()}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"pkgPath": rvk.PkgPath(),
+		"typeName": rvk.TypeName(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "pkgPath": "", "typeName": ""}
+	expected := args.Map{
+		"notNil": true,
+		"pkgPath": "",
+		"typeName": "",
+	}
 	expected.ShouldBeEqual(t, 0, "RVK returns nil -- invalid non-nil PointerRv", actual)
 }
 
@@ -475,10 +497,16 @@ func Test_I14_GetFirstResponseOfInvoke_Success(t *testing.T) {
 	first, err := mp.GetFirstResponseOfInvoke(sampleStruct{})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": first}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": first,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "GetFirstResponseOfInvoke returns correct value -- success", actual)
 }
 
@@ -492,9 +520,15 @@ func Test_I14_InvokeResultOfIndex_SecondResult(t *testing.T) {
 	second, err := mp.InvokeResultOfIndex(1, sampleStruct{}, "test", 42)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nilErr": second == nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nilErr": second == nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nilErr": true}
+	expected := args.Map{
+		"noErr": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex returns correct value -- second result", actual)
 }

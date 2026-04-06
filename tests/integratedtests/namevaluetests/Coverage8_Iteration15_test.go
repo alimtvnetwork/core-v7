@@ -18,10 +18,16 @@ func Test_I15_Instance_IntInt_String(t *testing.T) {
 	js := inst.JsonString()
 
 	// Act
-	actual := args.Map{"str": s != "", "json": js != ""}
+	actual := args.Map{
+		"str": s != "",
+		"json": js != "",
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "json": true}
+	expected := args.Map{
+		"str": true,
+		"json": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- IntInt String/JsonString", actual)
 }
 
@@ -31,10 +37,16 @@ func Test_I15_Instance_IntInt_IsNull(t *testing.T) {
 	var nilInst *namevalue.Instance[int, int]
 
 	// Act
-	actual := args.Map{"nonNil": inst.IsNull(), "nil": nilInst.IsNull()}
+	actual := args.Map{
+		"nonNil": inst.IsNull(),
+		"nil": nilInst.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"nonNil": false, "nil": true}
+	expected := args.Map{
+		"nonNil": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- IntInt IsNull", actual)
 }
 
@@ -44,10 +56,16 @@ func Test_I15_Instance_IntInt_Dispose(t *testing.T) {
 	inst.Dispose()
 
 	// Act
-	actual := args.Map{"name": inst.Name, "val": inst.Value}
+	actual := args.Map{
+		"name": inst.Name,
+		"val": inst.Value,
+	}
 
 	// Assert
-	expected := args.Map{"name": 0, "val": 0}
+	expected := args.Map{
+		"name": 0,
+		"val": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- IntInt Dispose zeros", actual)
 }
 
@@ -75,10 +93,18 @@ func Test_I15_IntInt_Collection_Full(t *testing.T) {
 	ce := namevalue.EmptyGenericCollection[int, int]()
 
 	// Act
-	actual := args.Map{"c": c.IsEmpty(), "cd": cd.IsEmpty(), "ce": ce.IsEmpty()}
+	actual := args.Map{
+		"c": c.IsEmpty(),
+		"cd": cd.IsEmpty(),
+		"ce": ce.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"c": true, "cd": true, "ce": true}
+	expected := args.Map{
+		"c": true,
+		"cd": true,
+		"ce": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntInt Collection returns correct value -- constructors", actual)
 }
 
@@ -90,10 +116,18 @@ func Test_I15_IntInt_CollectionUsing(t *testing.T) {
 	c3 := namevalue.NewGenericCollectionUsing[int, int](true)
 
 	// Act
-	actual := args.Map{"c1": c1.Length(), "c2": c2.Length(), "c3": c3.Length()}
+	actual := args.Map{
+		"c1": c1.Length(),
+		"c2": c2.Length(),
+		"c3": c3.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"c1": 2, "c2": 2, "c3": 0}
+	expected := args.Map{
+		"c1": 2,
+		"c2": 2,
+		"c3": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "IntInt Collection returns correct value -- CollectionUsing", actual)
 }
 
@@ -270,7 +304,12 @@ func Test_I15_IntInt_LazyString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "hasPre": false, "nilComp": false, "nilLazy": ""}
+	expected := args.Map{
+		"same": true,
+		"hasPre": false,
+		"nilComp": false,
+		"nilLazy": "",
+	}
 	expected.ShouldBeEqual(t, 0, "IntInt Collection returns correct value -- lazy string", actual)
 
 	nilC.InvalidateLazyString() // no panic
@@ -296,7 +335,13 @@ func Test_I15_IntInt_IsEqualByString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "nilBoth": true, "nilOne": false, "diffLen": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"nilBoth": true,
+		"nilOne": false,
+		"diffLen": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IntInt Collection returns correct value -- IsEqualByString", actual)
 }
 
@@ -316,7 +361,12 @@ func Test_I15_IntInt_ErrorMethods(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "nilMsgErr": true, "hasErr": true, "hasMsgErr": true}
+	expected := args.Map{
+		"nilErr": true,
+		"nilMsgErr": true,
+		"hasErr": true,
+		"hasMsgErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IntInt Collection returns error -- error methods", actual)
 }
 
@@ -415,10 +465,18 @@ func Test_I15_AppendsIf_IntInt(t *testing.T) {
 	r3 := namevalue.AppendsIf[int, int](true, items)
 
 	// Act
-	actual := args.Map{"r1": len(r1), "r2": len(r2), "r3": len(r3)}
+	actual := args.Map{
+		"r1": len(r1),
+		"r2": len(r2),
+		"r3": len(r3),
+	}
 
 	// Assert
-	expected := args.Map{"r1": 2, "r2": 1, "r3": 1}
+	expected := args.Map{
+		"r1": 2,
+		"r2": 1,
+		"r3": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AppendsIf returns correct value -- IntInt", actual)
 }
 
@@ -430,10 +488,18 @@ func Test_I15_PrependsIf_IntInt(t *testing.T) {
 	r3 := namevalue.PrependsIf[int, int](true, items)
 
 	// Act
-	actual := args.Map{"r1": len(r1), "r2": len(r2), "r3": len(r3)}
+	actual := args.Map{
+		"r1": len(r1),
+		"r2": len(r2),
+		"r3": len(r3),
+	}
 
 	// Assert
-	expected := args.Map{"r1": 2, "r2": 1, "r3": 1}
+	expected := args.Map{
+		"r1": 2,
+		"r2": 1,
+		"r3": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "PrependsIf returns correct value -- IntInt", actual)
 }
 
@@ -448,10 +514,16 @@ func Test_I15_Instance_StringBool(t *testing.T) {
 	js := inst.JsonString()
 
 	// Act
-	actual := args.Map{"str": s != "", "json": js != ""}
+	actual := args.Map{
+		"str": s != "",
+		"json": js != "",
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "json": true}
+	expected := args.Map{
+		"str": true,
+		"json": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- StringBool", actual)
 }
 
@@ -461,10 +533,16 @@ func Test_I15_Instance_StringBool_Dispose(t *testing.T) {
 	inst.Dispose()
 
 	// Act
-	actual := args.Map{"name": inst.Name, "val": inst.Value}
+	actual := args.Map{
+		"name": inst.Name,
+		"val": inst.Value,
+	}
 
 	// Assert
-	expected := args.Map{"name": "", "val": false}
+	expected := args.Map{
+		"name": "",
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- StringBool Dispose", actual)
 }
 
@@ -505,10 +583,16 @@ func Test_I15_StringBool_Clone_IsEqual(t *testing.T) {
 	c2 := c1.Clone()
 
 	// Act
-	actual := args.Map{"eq": c1.IsEqualByString(c2), "len": c2.Length()}
+	actual := args.Map{
+		"eq": c1.IsEqualByString(c2),
+		"len": c2.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"eq": true, "len": 1}
+	expected := args.Map{
+		"eq": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "StringBool Collection returns correct value -- clone equal", actual)
 }
 
@@ -518,10 +602,16 @@ func Test_I15_StringBool_Error(t *testing.T) {
 	c.Add(namevalue.Instance[string, bool]{Name: "err", Value: true})
 
 	// Act
-	actual := args.Map{"hasErr": c.Error() != nil, "hasMsg": c.ErrorUsingMessage("p") != nil}
+	actual := args.Map{
+		"hasErr": c.Error() != nil,
+		"hasMsg": c.ErrorUsingMessage("p") != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "hasMsg": true}
+	expected := args.Map{
+		"hasErr": true,
+		"hasMsg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringBool Collection returns error -- error methods", actual)
 }
 
@@ -550,10 +640,16 @@ func Test_I15_Instance_StringFloat64(t *testing.T) {
 	js := inst.JsonString()
 
 	// Act
-	actual := args.Map{"str": s != "", "json": js != ""}
+	actual := args.Map{
+		"str": s != "",
+		"json": js != "",
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "json": true}
+	expected := args.Map{
+		"str": true,
+		"json": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- StringFloat64", actual)
 }
 
@@ -570,7 +666,12 @@ func Test_I15_StringFloat64_Collection(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 2, "join": true, "json": true, "string": true}
+	expected := args.Map{
+		"len": 2,
+		"join": true,
+		"json": true,
+		"string": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringFloat64 Collection returns correct value -- full", actual)
 }
 
@@ -586,10 +687,18 @@ func Test_I15_Instance_StringSlice(t *testing.T) {
 	inst.Dispose()
 
 	// Act
-	actual := args.Map{"str": s != "", "json": js != "", "name": inst.Name}
+	actual := args.Map{
+		"str": s != "",
+		"json": js != "",
+		"name": inst.Name,
+	}
 
 	// Assert
-	expected := args.Map{"str": true, "json": true, "name": ""}
+	expected := args.Map{
+		"str": true,
+		"json": true,
+		"name": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- StringSlice", actual)
 }
 
@@ -605,7 +714,11 @@ func Test_I15_StringSlice_Collection(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 1, "string": true, "json": true}
+	expected := args.Map{
+		"len": 1,
+		"string": true,
+		"json": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringSlice Collection returns correct value -- full", actual)
 
 	cl := c.Clone()

@@ -445,10 +445,16 @@ func Test_Seg3_Collection_Has(t *testing.T) {
 		c.Adds("a", "b", "c")
 
 		// Act
-		actual := args.Map{"has": c.Has("b"), "miss": c.Has("z")}
+		actual := args.Map{
+			"has": c.Has("b"),
+			"miss": c.Has("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Has -- found and missing", actual)
 	})
 }
@@ -490,10 +496,16 @@ func Test_Seg3_Collection_HasPtr(t *testing.T) {
 		s := "hello"
 
 		// Act
-		actual := args.Map{"has": c.HasPtr(&s), "nil": c.HasPtr(nil)}
+		actual := args.Map{
+			"has": c.HasPtr(&s),
+			"nil": c.HasPtr(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasPtr -- found and nil", actual)
 	})
 }
@@ -579,10 +591,16 @@ func Test_Seg3_Collection_IsContainsPtr(t *testing.T) {
 		s := "x"
 
 		// Act
-		actual := args.Map{"has": c.IsContainsPtr(&s), "nil": c.IsContainsPtr(nil)}
+		actual := args.Map{
+			"has": c.IsContainsPtr(&s),
+			"nil": c.IsContainsPtr(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsContainsPtr -- found and nil", actual)
 	})
 }
@@ -662,10 +680,16 @@ func Test_Seg3_Collection_GetHashsetPlusHasAll(t *testing.T) {
 		hs, hasAll := c.GetHashsetPlusHasAll([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"hasAll": hasAll, "hsLen": hs.Length()}
+		actual := args.Map{
+			"hasAll": hasAll,
+			"hsLen": hs.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"hasAll": true, "hsLen": 3}
+		expected := args.Map{
+			"hasAll": true,
+			"hsLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "GetHashsetPlusHasAll -- all found", actual)
 	})
 }
@@ -696,10 +720,16 @@ func Test_Seg3_Collection_SortedListAsc(t *testing.T) {
 		sorted := c.SortedListAsc()
 
 		// Act
-		actual := args.Map{"first": sorted[0], "last": sorted[2]}
+		actual := args.Map{
+			"first": sorted[0],
+			"last": sorted[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "SortedListAsc -- ascending order", actual)
 	})
 }
@@ -788,10 +818,16 @@ func Test_Seg3_Collection_SortedListDsc(t *testing.T) {
 		sorted := c.SortedListDsc()
 
 		// Act
-		actual := args.Map{"first": sorted[0], "last": sorted[2]}
+		actual := args.Map{
+			"first": sorted[0],
+			"last": sorted[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "c", "last": "a"}
+		expected := args.Map{
+			"first": "c",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "SortedListDsc -- descending order", actual)
 	})
 }
@@ -1507,10 +1543,16 @@ func Test_Seg3_Collection_MarshalJSON(t *testing.T) {
 		b, err := c.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1522,10 +1564,16 @@ func Test_Seg3_Collection_UnmarshalJSON(t *testing.T) {
 		err := c.UnmarshalJSON([]byte(`["a","b"]`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": c.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": c.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -1553,10 +1601,16 @@ func Test_Seg3_Collection_Serialize(t *testing.T) {
 		b, err := c.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1570,10 +1624,16 @@ func Test_Seg3_Collection_Deserialize(t *testing.T) {
 		err := c.Deserialize(&dest)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": len(dest)}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": len(dest),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize -- success", actual)
 	})
 }
@@ -1588,10 +1648,16 @@ func Test_Seg3_Collection_ParseInjectUsingJson(t *testing.T) {
 		result, err := c2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": result.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": result.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- round trip", actual)
 	})
 }

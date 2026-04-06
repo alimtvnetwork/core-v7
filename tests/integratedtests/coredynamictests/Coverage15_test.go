@@ -66,10 +66,18 @@ func Test_Cov15_TypedSimpleRequest_InvalidError(t *testing.T) {
 	err3 := inv.InvalidError() // cached
 
 	// Act
-	actual := args.Map{"noErr": err1 == nil, "hasErr": err2 != nil, "cached": err3 == err2}
+	actual := args.Map{
+		"noErr": err1 == nil,
+		"hasErr": err2 != nil,
+		"cached": err3 == err2,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasErr": true, "cached": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasErr": true,
+		"cached": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidError returns error -- with args", actual)
 }
 
@@ -155,10 +163,16 @@ func Test_Cov15_TypedSimpleRequest_Clone(t *testing.T) {
 	nilClone := nilR.Clone()
 
 	// Act
-	actual := args.Map{"cData": cloned.Data(), "nilNil": nilClone == nil}
+	actual := args.Map{
+		"cData": cloned.Data(),
+		"nilNil": nilClone == nil,
+	}
 
 	// Assert
-	expected := args.Map{"cData": "hello", "nilNil": true}
+	expected := args.Map{
+		"cData": "hello",
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns correct value -- with args", actual)
 }
 
@@ -170,10 +184,16 @@ func Test_Cov15_TypedSimpleRequest_ToSimpleRequest(t *testing.T) {
 	nilSR := nilR.ToSimpleRequest()
 
 	// Act
-	actual := args.Map{"valid": sr.IsValid(), "nilValid": nilSR.IsValid()}
+	actual := args.Map{
+		"valid": sr.IsValid(),
+		"nilValid": nilSR.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "nilValid": false}
+	expected := args.Map{
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToSimpleRequest returns correct value -- with args", actual)
 }
 
@@ -185,10 +205,18 @@ func Test_Cov15_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	nilTD := nilR.ToTypedDynamic()
 
 	// Act
-	actual := args.Map{"data": td.Data(), "valid": td.IsValid(), "nilValid": nilTD.IsValid()}
+	actual := args.Map{
+		"data": td.Data(),
+		"valid": td.IsValid(),
+		"nilValid": nilTD.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "valid": true, "nilValid": false}
+	expected := args.Map{
+		"data": "hello",
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToTypedDynamic returns correct value -- with args", actual)
 }
 
@@ -200,10 +228,18 @@ func Test_Cov15_TypedSimpleRequest_ToDynamic(t *testing.T) {
 	nilD := nilR.ToDynamic()
 
 	// Act
-	actual := args.Map{"data": d.Data(), "valid": d.IsValid(), "nilValid": nilD.IsValid()}
+	actual := args.Map{
+		"data": d.Data(),
+		"valid": d.IsValid(),
+		"nilValid": nilD.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "valid": true, "nilValid": false}
+	expected := args.Map{
+		"data": "hello",
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToDynamic returns correct value -- with args", actual)
 }
 
@@ -266,10 +302,18 @@ func Test_Cov15_TypedSimpleResult_InvalidError(t *testing.T) {
 	err3 := inv.InvalidError() // cached
 
 	// Act
-	actual := args.Map{"noErr": err1 == nil, "hasErr": err2 != nil, "cached": err3 == err2}
+	actual := args.Map{
+		"noErr": err1 == nil,
+		"hasErr": err2 != nil,
+		"cached": err3 == err2,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasErr": true, "cached": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasErr": true,
+		"cached": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidError returns error -- with args", actual)
 }
 
@@ -377,10 +421,16 @@ func Test_Cov15_TypedSimpleResult_ToSimpleResult(t *testing.T) {
 	nilSR := nilR.ToSimpleResult()
 
 	// Act
-	actual := args.Map{"valid": sr.IsValid(), "nilValid": nilSR.IsValid()}
+	actual := args.Map{
+		"valid": sr.IsValid(),
+		"nilValid": nilSR.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "nilValid": false}
+	expected := args.Map{
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToSimpleResult returns correct value -- with args", actual)
 }
 
@@ -392,10 +442,18 @@ func Test_Cov15_TypedSimpleResult_ToTypedDynamic(t *testing.T) {
 	nilTD := nilR.ToTypedDynamic()
 
 	// Act
-	actual := args.Map{"data": td.Data(), "valid": td.IsValid(), "nilValid": nilTD.IsValid()}
+	actual := args.Map{
+		"data": td.Data(),
+		"valid": td.IsValid(),
+		"nilValid": nilTD.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "valid": true, "nilValid": false}
+	expected := args.Map{
+		"data": "hello",
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToTypedDynamic returns correct value -- with args", actual)
 }
 
@@ -407,9 +465,17 @@ func Test_Cov15_TypedSimpleResult_ToDynamic(t *testing.T) {
 	nilD := nilR.ToDynamic()
 
 	// Act
-	actual := args.Map{"data": d.Data(), "valid": d.IsValid(), "nilValid": nilD.IsValid()}
+	actual := args.Map{
+		"data": d.Data(),
+		"valid": d.IsValid(),
+		"nilValid": nilD.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"data": "hello", "valid": true, "nilValid": false}
+	expected := args.Map{
+		"data": "hello",
+		"valid": true,
+		"nilValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ToDynamic returns correct value -- with args", actual)
 }

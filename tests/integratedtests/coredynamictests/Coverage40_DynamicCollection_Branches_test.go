@@ -397,10 +397,16 @@ func Test_Cov40_DynColl_RemoveAt_Valid(t *testing.T) {
 	ok := dc.RemoveAt(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": dc.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection RemoveAt valid", actual)
 }
 
@@ -687,10 +693,16 @@ func Test_Cov40_DynColl_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	err := dc.AddAnyWithTypeValidation(true, reflect.TypeOf(""), "hello")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": dc.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection AddAnyWithTypeValidation valid", actual)
 }
 
@@ -713,10 +725,16 @@ func Test_Cov40_DynColl_AddAnyItemsWithTypeValidation_ContinueOnError(t *testing
 	err := dc.AddAnyItemsWithTypeValidation(true, true, reflect.TypeOf(""), "a", 42, "b")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection AddAnyItemsWithTypeValidation continue on error", actual)
 }
 
@@ -726,10 +744,16 @@ func Test_Cov40_DynColl_AddAnyItemsWithTypeValidation_StopOnError(t *testing.T) 
 	err := dc.AddAnyItemsWithTypeValidation(false, true, reflect.TypeOf(""), "a", 42, "b")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": dc.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": dc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection AddAnyItemsWithTypeValidation stop on error", actual)
 }
 
@@ -744,10 +768,16 @@ func Test_Cov40_DynColl_JsonString_Valid(t *testing.T) {
 	s, err := dc.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(s) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(s) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection JsonString valid", actual)
 }
 
@@ -772,10 +802,16 @@ func Test_Cov40_DynColl_MarshalJSON(t *testing.T) {
 	b, err := dc.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DynamicCollection MarshalJSON", actual)
 }
 

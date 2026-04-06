@@ -497,10 +497,16 @@ func Test_Cov2_ClonePtr_NonNil(t *testing.T) {
 	cloned := stringutil.ClonePtr(&s)
 
 	// Act
-	actual := args.Map{"value": *cloned, "diffPtr": cloned != &s}
+	actual := args.Map{
+		"value": *cloned,
+		"diffPtr": cloned != &s,
+	}
 
 	// Assert
-	expected := args.Map{"value": "hello", "diffPtr": true}
+	expected := args.Map{
+		"value": "hello",
+		"diffPtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns nil -- non-nil", actual)
 }
 
@@ -509,10 +515,16 @@ func Test_Cov2_SafeClonePtr_Nil(t *testing.T) {
 	result := stringutil.SafeClonePtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "value": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"value": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "value": ""}
+	expected := args.Map{
+		"notNil": true,
+		"value": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeClonePtr returns nil -- nil", actual)
 }
 
@@ -638,10 +650,16 @@ func Test_Cov2_SplitLeftRight(t *testing.T) {
 	left, right := stringutil.SplitLeftRight("hello:world", ":")
 
 	// Act
-	actual := args.Map{"left": left, "right": right}
+	actual := args.Map{
+		"left": left,
+		"right": right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "right": "world"}
+	expected := args.Map{
+		"left": "hello",
+		"right": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns correct value -- with args", actual)
 }
 
@@ -650,10 +668,16 @@ func Test_Cov2_SplitLeftRight_NoSep(t *testing.T) {
 	left, right := stringutil.SplitLeftRight("hello", ":")
 
 	// Act
-	actual := args.Map{"left": left, "right": right}
+	actual := args.Map{
+		"left": left,
+		"right": right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "right": ""}
+	expected := args.Map{
+		"left": "hello",
+		"right": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRight returns empty -- no sep", actual)
 }
 
@@ -664,10 +688,16 @@ func Test_Cov2_SplitLeftRightTrimmed(t *testing.T) {
 	left, right := stringutil.SplitLeftRightTrimmed(" hello : world ", ":")
 
 	// Act
-	actual := args.Map{"left": left, "right": right}
+	actual := args.Map{
+		"left": left,
+		"right": right,
+	}
 
 	// Assert
-	expected := args.Map{"left": "hello", "right": "world"}
+	expected := args.Map{
+		"left": "hello",
+		"right": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightTrimmed returns correct value -- with args", actual)
 }
 

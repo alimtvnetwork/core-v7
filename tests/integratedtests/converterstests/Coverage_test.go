@@ -98,10 +98,16 @@ func Test_Cov_StringsTo_MapStringIntegerUsingFunc(t *testing.T) {
 	}, "line1")
 
 	// Act
-	actual := args.Map{"len": len(result), "val": result["k"]}
+	actual := args.Map{
+		"len": len(result),
+		"val": result["k"],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "val": 42}
+	expected := args.Map{
+		"len": 1,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "MapStringIntegerUsingFunc returns correct value -- with args", actual)
 }
 
@@ -124,10 +130,16 @@ func Test_Cov_StringsTo_MapConverter(t *testing.T) {
 	mc := converters.StringsTo.MapConverter("a:1", "b:2")
 
 	// Act
-	actual := args.Map{"len": mc.Length(), "hasAny": mc.HasAnyItem()}
+	actual := args.Map{
+		"len": mc.Length(),
+		"hasAny": mc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapConverter returns correct value -- with args", actual)
 }
 
@@ -137,10 +149,18 @@ func Test_Cov_StringsTo_IntegersSkipMapAndDefaultValue(t *testing.T) {
 	result := converters.StringsTo.IntegersSkipMapAndDefaultValue(-1, skip, "1", "skip", "abc")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1, "second": 0}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+		"second": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersSkipMapAndDefaultValue returns correct value -- with args", actual)
 }
 
@@ -149,10 +169,16 @@ func Test_Cov_StringsTo_IntegersSkipAndDefaultValue(t *testing.T) {
 	result := converters.StringsTo.IntegersSkipAndDefaultValue(-1, "skip", "1", "skip", "abc")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersSkipAndDefaultValue returns correct value -- with args", actual)
 }
 
@@ -209,10 +235,16 @@ func Test_Cov_StringsTo_CsvUsingPtrStrings(t *testing.T) {
 	result := converters.StringsTo.CsvUsingPtrStrings(false, &items)
 
 	// Act
-	actual := args.Map{"nilEmpty": nilResult == "", "notEmpty": result != ""}
+	actual := args.Map{
+		"nilEmpty": nilResult == "",
+		"notEmpty": result != "",
+	}
 
 	// Assert
-	expected := args.Map{"nilEmpty": true, "notEmpty": true}
+	expected := args.Map{
+		"nilEmpty": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CsvUsingPtrStrings returns correct value -- with args", actual)
 }
 
@@ -270,8 +302,14 @@ func Test_Cov_StringsTo_PtrOfPtrToPtrStrings(t *testing.T) {
 	var nilStr *string
 	items := []*string{&s1, &s2, nilStr}
 	result := converters.StringsTo.PtrOfPtrToPtrStrings(&items)
-	actual2 := args.Map{"len": len(*result), "third": (*result)[2]}
-	expected2 := args.Map{"len": 3, "third": ""}
+	actual2 := args.Map{
+		"len": len(*result),
+		"third": (*result)[2],
+	}
+	expected2 := args.Map{
+		"len": 3,
+		"third": "",
+	}
 	expected2.ShouldBeEqual(t, 1, "PtrOfPtrToPtrStrings_values returns non-empty -- with args", actual2)
 }
 
@@ -290,8 +328,14 @@ func Test_Cov_StringsTo_PtrOfPtrToMapStringBool(t *testing.T) {
 	var nilStr *string
 	items := []*string{&s1, nilStr}
 	result := converters.StringsTo.PtrOfPtrToMapStringBool(&items)
-	actual2 := args.Map{"len": len(result), "hasA": result["a"]}
-	expected2 := args.Map{"len": 1, "hasA": true}
+	actual2 := args.Map{
+		"len": len(result),
+		"hasA": result["a"],
+	}
+	expected2 := args.Map{
+		"len": 1,
+		"hasA": true,
+	}
 	expected2.ShouldBeEqual(t, 1, "PtrOfPtrToMapStringBool_values returns non-empty -- with args", actual2)
 }
 
@@ -380,10 +424,16 @@ func Test_Cov_StringsToMapConverter_LineProcessorMapStringIntegerTrim(t *testing
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "val": result["k"]}
+	actual := args.Map{
+		"len": len(result),
+		"val": result["k"],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "val": 42}
+	expected := args.Map{
+		"len": 1,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "LineProcessorMapStringIntegerTrim returns correct value -- with args", actual)
 }
 
@@ -472,10 +522,16 @@ func Test_Cov_AnyTo_SmartStringsJoiner(t *testing.T) {
 	emptyResult := converters.AnyTo.SmartStringsJoiner(",")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": emptyResult}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": emptyResult,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SmartStringsJoiner returns correct value -- with args", actual)
 }
 

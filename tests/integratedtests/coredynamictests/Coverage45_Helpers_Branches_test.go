@@ -29,10 +29,16 @@ func Test_Cov45_TypeSameStatus_Different(t *testing.T) {
 	ts := coredynamic.TypeSameStatus("a", 42)
 
 	// Act
-	actual := args.Map{"same": ts.IsSame, "notSame": ts.IsNotSame()}
+	actual := args.Map{
+		"same": ts.IsSame,
+		"notSame": ts.IsNotSame(),
+	}
 
 	// Assert
-	expected := args.Map{"same": false, "notSame": true}
+	expected := args.Map{
+		"same": false,
+		"notSame": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus different", actual)
 }
 
@@ -41,10 +47,16 @@ func Test_Cov45_TypeSameStatus_NilLeft(t *testing.T) {
 	ts := coredynamic.TypeSameStatus(nil, "b")
 
 	// Act
-	actual := args.Map{"leftNull": ts.IsLeftUnknownNull, "same": ts.IsSame}
+	actual := args.Map{
+		"leftNull": ts.IsLeftUnknownNull,
+		"same": ts.IsSame,
+	}
 
 	// Assert
-	expected := args.Map{"leftNull": true, "same": false}
+	expected := args.Map{
+		"leftNull": true,
+		"same": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus nil left", actual)
 }
 
@@ -54,10 +66,18 @@ func Test_Cov45_TypeSameStatus_Pointers(t *testing.T) {
 	ts := coredynamic.TypeSameStatus(&s, "b")
 
 	// Act
-	actual := args.Map{"leftPtr": ts.IsLeftPointer, "rightPtr": ts.IsRightPointer, "anyPtr": ts.IsAnyPointer()}
+	actual := args.Map{
+		"leftPtr": ts.IsLeftPointer,
+		"rightPtr": ts.IsRightPointer,
+		"anyPtr": ts.IsAnyPointer(),
+	}
 
 	// Assert
-	expected := args.Map{"leftPtr": true, "rightPtr": false, "anyPtr": true}
+	expected := args.Map{
+		"leftPtr": true,
+		"rightPtr": false,
+		"anyPtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus pointers", actual)
 }
 
@@ -84,10 +104,16 @@ func Test_Cov45_TypeStatus_IsValid_Nil(t *testing.T) {
 	var ts *coredynamic.TypeStatus
 
 	// Act
-	actual := args.Map{"valid": ts.IsValid(), "invalid": ts.IsInvalid()}
+	actual := args.Map{
+		"valid": ts.IsValid(),
+		"invalid": ts.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus IsValid nil", actual)
 }
 
@@ -479,10 +505,18 @@ func Test_Cov45_ValueStatus_Invalid(t *testing.T) {
 	vs := coredynamic.InvalidValueStatus("bad")
 
 	// Act
-	actual := args.Map{"valid": vs.IsValid, "msg": vs.Message, "idx": vs.Index}
+	actual := args.Map{
+		"valid": vs.IsValid,
+		"msg": vs.Message,
+		"idx": vs.Index,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "bad", "idx": -1}
+	expected := args.Map{
+		"valid": false,
+		"msg": "bad",
+		"idx": -1,
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus Invalid", actual)
 }
 
@@ -491,10 +525,16 @@ func Test_Cov45_ValueStatus_InvalidNoMessage(t *testing.T) {
 	vs := coredynamic.InvalidValueStatusNoMessage()
 
 	// Act
-	actual := args.Map{"valid": vs.IsValid, "msg": vs.Message}
+	actual := args.Map{
+		"valid": vs.IsValid,
+		"msg": vs.Message,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueStatus InvalidNoMessage", actual)
 }
 

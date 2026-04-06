@@ -251,10 +251,16 @@ func Test_Cov41_DynReflect_Loop_Valid(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 3}
+	expected := args.Map{
+		"called": true,
+		"count": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop valid", actual)
 }
 
@@ -268,10 +274,16 @@ func Test_Cov41_DynReflect_Loop_Break(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 1}
+	expected := args.Map{
+		"called": true,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Loop break", actual)
 }
 
@@ -362,10 +374,16 @@ func Test_Cov41_DynReflect_LoopMap_Valid(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 1}
+	expected := args.Map{
+		"called": true,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic LoopMap valid", actual)
 }
 
@@ -379,10 +397,16 @@ func Test_Cov41_DynReflect_LoopMap_Break(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 1}
+	expected := args.Map{
+		"called": true,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic LoopMap break", actual)
 }
 
@@ -396,10 +420,16 @@ func Test_Cov41_DynReflect_MapToKeyVal_Valid(t *testing.T) {
 	kvc, err := d.MapToKeyVal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": kvc != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": kvc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic MapToKeyVal valid", actual)
 }
 
@@ -439,10 +469,16 @@ func Test_Cov41_DynJson_ValueMarshal_Valid(t *testing.T) {
 	b, err := d.ValueMarshal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic ValueMarshal valid", actual)
 }
 
@@ -465,10 +501,16 @@ func Test_Cov41_DynJson_JsonBytesPtr_Null(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "emptyBytes": len(b) == 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"emptyBytes": len(b) == 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "emptyBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"emptyBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr null", actual)
 }
 
@@ -478,10 +520,16 @@ func Test_Cov41_DynJson_JsonBytesPtr_Valid(t *testing.T) {
 	b, err := d.JsonBytesPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytesPtr valid", actual)
 }
 
@@ -491,10 +539,16 @@ func Test_Cov41_DynJson_MarshalJSON(t *testing.T) {
 	b, err := d.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic MarshalJSON", actual)
 }
 
@@ -617,10 +671,16 @@ func Test_Cov41_DynJson_JsonBytes_Valid(t *testing.T) {
 	b, err := d.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonBytes valid", actual)
 }
 
@@ -630,10 +690,16 @@ func Test_Cov41_DynJson_JsonString_Valid(t *testing.T) {
 	s, err := d.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(s) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(s) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic JsonString valid", actual)
 }
 

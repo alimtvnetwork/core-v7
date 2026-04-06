@@ -136,10 +136,16 @@ func Test_Cov38_MapAnyItems_Get_Found(t *testing.T) {
 	val, has := m.Get("k")
 
 	// Act
-	actual := args.Map{"val": val, "has": has}
+	actual := args.Map{
+		"val": val,
+		"has": has,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "has": true}
+	expected := args.Map{
+		"val": 42,
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Get found", actual)
 }
 
@@ -149,10 +155,16 @@ func Test_Cov38_MapAnyItems_Get_Missing(t *testing.T) {
 	val, has := m.Get("missing")
 
 	// Act
-	actual := args.Map{"isNil": val == nil, "has": has}
+	actual := args.Map{
+		"isNil": val == nil,
+		"has": has,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "has": false}
+	expected := args.Map{
+		"isNil": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems Get missing", actual)
 }
 
@@ -180,10 +192,16 @@ func Test_Cov38_MapAnyItems_GetFieldsMap_Found(t *testing.T) {
 	fieldMap, _, isFound := m.GetFieldsMap("k")
 
 	// Act
-	actual := args.Map{"isFound": isFound, "hasA": fieldMap != nil}
+	actual := args.Map{
+		"isFound": isFound,
+		"hasA": fieldMap != nil,
+	}
 
 	// Assert
-	expected := args.Map{"isFound": true, "hasA": true}
+	expected := args.Map{
+		"isFound": true,
+		"hasA": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetFieldsMap found", actual)
 }
 
@@ -226,10 +244,16 @@ func Test_Cov38_MapAnyItems_GetUsingUnmarshallAt_Valid(t *testing.T) {
 	err := m.GetUsingUnmarshallAt("k", &out)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": out}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": out,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetUsingUnmarshallAt valid", actual)
 }
 
@@ -274,10 +298,18 @@ func Test_Cov38_MapAnyItems_GetUsingUnmarshallManyAt_Valid(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "s": s, "n": n}
+	actual := args.Map{
+		"noErr": err == nil,
+		"s": s,
+		"n": n,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "s": "v1", "n": 42}
+	expected := args.Map{
+		"noErr": true,
+		"s": "v1",
+		"n": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems GetUsingUnmarshallManyAt valid", actual)
 }
 
@@ -435,10 +467,16 @@ func Test_Cov38_MapAnyItems_AddKeyAnyWithValidation_Match(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": m.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AddKeyAnyWithValidation match", actual)
 }
 
@@ -681,10 +719,16 @@ func Test_Cov38_MapAnyItems_JsonString_Valid(t *testing.T) {
 	s, err := m.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(s) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(s) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonString valid", actual)
 }
 
@@ -856,10 +900,16 @@ func Test_Cov38_MapAnyItems_AllKeysSorted_Valid(t *testing.T) {
 	keys := m.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"first": keys[0], "second": keys[1]}
+	actual := args.Map{
+		"first": keys[0],
+		"second": keys[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems AllKeysSorted valid", actual)
 }
 
@@ -1131,10 +1181,16 @@ func Test_Cov38_MapAnyItems_ClonePtr_Valid(t *testing.T) {
 	c, err := m.ClonePtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": c.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems ClonePtr valid", actual)
 }
 
@@ -1266,10 +1322,16 @@ func Test_Cov38_MapAnyItems_JsonMapResults_Empty(t *testing.T) {
 	r, err := m.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": r != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": r != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonMapResults empty", actual)
 }
 
@@ -1280,10 +1342,16 @@ func Test_Cov38_MapAnyItems_JsonMapResults_Valid(t *testing.T) {
 	r, err := m.JsonMapResults()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": r != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": r != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems JsonMapResults valid", actual)
 }
 
@@ -1362,10 +1430,16 @@ func Test_Cov38_MapAnyItems_NewMapAnyItemsUsingAnyTypeMap_Valid(t *testing.T) {
 	m, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(map[string]any{"a": 1})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": m.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": m.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "NewMapAnyItemsUsingAnyTypeMap valid", actual)
 }
 

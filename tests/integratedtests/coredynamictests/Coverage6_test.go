@@ -21,7 +21,10 @@ func Test_Cov6_Dynamic_JsonString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonString", actual)
 }
 
@@ -37,7 +40,10 @@ func Test_Cov6_Dynamic_JsonBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytes", actual)
 }
 
@@ -53,7 +59,10 @@ func Test_Cov6_Dynamic_JsonBytesPtr_Null(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"emptyBytes": true, "noErr": true}
+	expected := args.Map{
+		"emptyBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- JsonBytesPtr null", actual)
 }
 
@@ -69,7 +78,10 @@ func Test_Cov6_Dynamic_ValueMarshal(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- ValueMarshal", actual)
 }
 
@@ -104,7 +116,10 @@ func Test_Cov6_Dynamic_Json(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jsonNotEmpty": jsonNotEmpty, "jsonPtrNN": true}
+	expected := args.Map{
+		"jsonNotEmpty": jsonNotEmpty,
+		"jsonPtrNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- Json/JsonPtr", actual)
 }
 
@@ -120,7 +135,10 @@ func Test_Cov6_Dynamic_MarshalJSON(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- MarshalJSON", actual)
 }
 
@@ -310,7 +328,10 @@ func Test_Cov6_Dynamic_InvalidDynamic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isNull": true}
+	expected := args.Map{
+		"isValid": false,
+		"isNull": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidDynamic returns error -- with args", actual)
 }
 
@@ -327,7 +348,10 @@ func Test_Cov6_Dynamic_NonPtr_Ptr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonPtrValid": true, "ptrNotNil": true}
+	expected := args.Map{
+		"nonPtrValid": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic returns correct value -- NonPtr/Ptr", actual)
 }
 

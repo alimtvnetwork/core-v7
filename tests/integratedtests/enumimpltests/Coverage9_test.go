@@ -89,10 +89,16 @@ func Test_Cov9_BasicInt8_GetValueByName_Found(t *testing.T) {
 	val, err := bi.GetValueByName("A")
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int8(0), "noErr": true}
+	expected := args.Map{
+		"val": int8(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- known name", actual)
 }
 
@@ -115,10 +121,16 @@ func Test_Cov9_BasicInt8_ToEnumJsonBytes_Found(t *testing.T) {
 	b, err := bi.ToEnumJsonBytes(0)
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToEnumJsonBytes returns bytes -- valid value", actual)
 }
 
@@ -167,10 +179,16 @@ func Test_Cov9_BasicInt8_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int8(0), "noErr": true}
+	expected := args.Map{
+		"val": int8(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -180,10 +198,16 @@ func Test_Cov9_BasicInt8_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int8(0), "noErr": true}
+	expected := args.Map{
+		"val": int8(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -192,10 +216,16 @@ func Test_Cov9_BasicInt8_MinMax(t *testing.T) {
 	bi := enumimpl.New.BasicInt8.UsingTypeSlice("TestI8", []string{"A", "B", "C"})
 
 	// Act
-	actual := args.Map{"min": bi.Min(), "max": bi.Max()}
+	actual := args.Map{
+		"min": bi.Min(),
+		"max": bi.Max(),
+	}
 
 	// Assert
-	expected := args.Map{"min": int8(0), "max": int8(2)}
+	expected := args.Map{
+		"min": int8(0),
+		"max": int8(2),
+	}
 	expected.ShouldBeEqual(t, 0, "MinMax returns correct -- three items", actual)
 }
 
@@ -399,10 +429,16 @@ func Test_Cov9_BasicInt16_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int16(0), "noErr": true}
+	expected := args.Map{
+		"val": int16(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -412,10 +448,16 @@ func Test_Cov9_BasicInt16_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int16(0), "noErr": true}
+	expected := args.Map{
+		"val": int16(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -424,10 +466,16 @@ func Test_Cov9_BasicInt16_MinMax(t *testing.T) {
 	bi := enumimpl.New.BasicInt16.UsingTypeSlice("TestI16", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"min": bi.Min(), "max": bi.Max()}
+	actual := args.Map{
+		"min": bi.Min(),
+		"max": bi.Max(),
+	}
 
 	// Assert
-	expected := args.Map{"min": int16(0), "max": int16(1)}
+	expected := args.Map{
+		"min": int16(0),
+		"max": int16(1),
+	}
 	expected.ShouldBeEqual(t, 0, "MinMax returns correct -- two items", actual)
 }
 
@@ -448,10 +496,16 @@ func Test_Cov9_BasicInt16_IsValidRange(t *testing.T) {
 	bi := enumimpl.New.BasicInt16.UsingTypeSlice("TestI16", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"valid": bi.IsValidRange(0), "invalid": bi.IsValidRange(5)}
+	actual := args.Map{
+		"valid": bi.IsValidRange(0),
+		"invalid": bi.IsValidRange(5),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValidRange returns correct -- valid and invalid", actual)
 }
 
@@ -589,10 +643,16 @@ func Test_Cov9_BasicInt32_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int32(0), "noErr": true}
+	expected := args.Map{
+		"val": int32(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -602,10 +662,16 @@ func Test_Cov9_BasicInt32_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bi.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int32(0), "noErr": true}
+	expected := args.Map{
+		"val": int32(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -614,10 +680,16 @@ func Test_Cov9_BasicInt32_MinMax(t *testing.T) {
 	bi := enumimpl.New.BasicInt32.UsingTypeSlice("TestI32", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"min": bi.Min(), "max": bi.Max()}
+	actual := args.Map{
+		"min": bi.Min(),
+		"max": bi.Max(),
+	}
 
 	// Assert
-	expected := args.Map{"min": int32(0), "max": int32(1)}
+	expected := args.Map{
+		"min": int32(0),
+		"max": int32(1),
+	}
 	expected.ShouldBeEqual(t, 0, "MinMax returns correct -- two items", actual)
 }
 
@@ -638,10 +710,16 @@ func Test_Cov9_BasicInt32_IsValidRange(t *testing.T) {
 	bi := enumimpl.New.BasicInt32.UsingTypeSlice("TestI32", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"valid": bi.IsValidRange(0), "invalid": bi.IsValidRange(5)}
+	actual := args.Map{
+		"valid": bi.IsValidRange(0),
+		"invalid": bi.IsValidRange(5),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValidRange returns correct -- valid and invalid", actual)
 }
 
@@ -779,10 +857,16 @@ func Test_Cov9_BasicUInt16_UnmarshallToValue_NilMapped(t *testing.T) {
 	val, err := bu.UnmarshallToValue(true, nil)
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": uint16(0), "noErr": true}
+	expected := args.Map{
+		"val": uint16(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- nil mapped to first", actual)
 }
 
@@ -792,10 +876,16 @@ func Test_Cov9_BasicUInt16_UnmarshallToValue_EmptyMapped(t *testing.T) {
 	val, err := bu.UnmarshallToValue(true, []byte(`""`))
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": uint16(0), "noErr": true}
+	expected := args.Map{
+		"val": uint16(0),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue returns min -- empty string mapped", actual)
 }
 
@@ -804,10 +894,16 @@ func Test_Cov9_BasicUInt16_MinMax(t *testing.T) {
 	bu := enumimpl.New.BasicUInt16.UsingTypeSlice("TestU16", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"min": bu.Min(), "max": bu.Max()}
+	actual := args.Map{
+		"min": bu.Min(),
+		"max": bu.Max(),
+	}
 
 	// Assert
-	expected := args.Map{"min": uint16(0), "max": uint16(1)}
+	expected := args.Map{
+		"min": uint16(0),
+		"max": uint16(1),
+	}
 	expected.ShouldBeEqual(t, 0, "MinMax returns correct -- two items", actual)
 }
 
@@ -828,10 +924,16 @@ func Test_Cov9_BasicUInt16_IsValidRange(t *testing.T) {
 	bu := enumimpl.New.BasicUInt16.UsingTypeSlice("TestU16", []string{"A", "B"})
 
 	// Act
-	actual := args.Map{"valid": bu.IsValidRange(0), "invalid": bu.IsValidRange(5)}
+	actual := args.Map{
+		"valid": bu.IsValidRange(0),
+		"invalid": bu.IsValidRange(5),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValidRange returns correct -- valid and invalid", actual)
 }
 
@@ -1252,10 +1354,16 @@ func Test_Cov9_LeftRightDiffChecker_GetResultOnKeyMissing(t *testing.T) {
 	resultStr, ok := result.(string)
 
 	// Act
-	actual := args.Map{"ok": ok, "contains": len(resultStr) > 0}
+	actual := args.Map{
+		"ok": ok,
+		"contains": len(resultStr) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "contains": true}
+	expected := args.Map{
+		"ok": true,
+		"contains": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetResultOnKeyMissing returns formatted string -- key missing", actual)
 }
 
@@ -1342,10 +1450,16 @@ func Test_Cov9_KeyAnyVal_KeyValInteger(t *testing.T) {
 	kvi := kav.KeyValInteger()
 
 	// Act
-	actual := args.Map{"key": kvi.Key, "val": kvi.ValueInteger}
+	actual := args.Map{
+		"key": kvi.Key,
+		"val": kvi.ValueInteger,
+	}
 
 	// Assert
-	expected := args.Map{"key": "TestKey", "val": 42}
+	expected := args.Map{
+		"key": "TestKey",
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValInteger returns correct -- key and value", actual)
 }
 
@@ -1403,10 +1517,16 @@ func Test_Cov9_KeyValInteger_KeyAnyVal(t *testing.T) {
 	kav := kvi.KeyAnyVal()
 
 	// Act
-	actual := args.Map{"key": kav.Key, "val": kav.AnyValue}
+	actual := args.Map{
+		"key": kav.Key,
+		"val": kav.AnyValue,
+	}
 
 	// Assert
-	expected := args.Map{"key": "TestKey", "val": 42}
+	expected := args.Map{
+		"key": "TestKey",
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyVal returns correct -- key and value", actual)
 }
 
@@ -1429,10 +1549,16 @@ func Test_Cov9_KeyAnyValues_Items(t *testing.T) {
 	result := enumimpl.KeyAnyValues([]string{"A", "B"}, []byte{10, 20})
 
 	// Act
-	actual := args.Map{"len": len(result), "firstKey": result[0].Key}
+	actual := args.Map{
+		"len": len(result),
+		"firstKey": result[0].Key,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstKey": "A"}
+	expected := args.Map{
+		"len": 2,
+		"firstKey": "A",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyValues returns mapped -- two items", actual)
 }
 
@@ -1457,10 +1583,16 @@ func Test_Cov9_Format_Template(t *testing.T) {
 	result := enumimpl.Format("MyEnum", "Active", "1", "Enum of {type-name} - {name} - {value}")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "contains": len(result) > 10}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"contains": len(result) > 10,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "contains": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"contains": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Format returns formatted -- template with replacements", actual)
 }
 
@@ -1471,10 +1603,16 @@ func Test_Cov9_IntegersRangesOfAnyVal_ByteSlice(t *testing.T) {
 	result := enumimpl.IntegersRangesOfAnyVal([]byte{3, 1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersRangesOfAnyVal returns sorted -- byte slice", actual)
 }
 
@@ -1562,10 +1700,16 @@ func Test_Cov9_NumberEnumBase_MinMaxAny(t *testing.T) {
 	min, max := bb.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxAny returns non-nil -- byte enum", actual)
 }
 

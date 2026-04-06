@@ -46,7 +46,11 @@ func Test_Cov7_SimpleSlice_Empty(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 0, "isEmpty": true, "hasAny": false}
+		expected := args.Map{
+			"len": 0,
+			"isEmpty": true,
+			"hasAny": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice empty -- 0 items", actual)
 	})
 }
@@ -144,7 +148,11 @@ func Test_Cov7_Collection_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 2, "isEmpty": false, "hasAny": true}
+		expected := args.Map{
+			"len": 2,
+			"isEmpty": false,
+			"hasAny": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection basic -- 2 items", actual)
 	})
 }
@@ -177,7 +185,10 @@ func Test_Cov7_Collection_Has(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"has": true, "notHas": false}
+		expected := args.Map{
+			"has": true,
+			"notHas": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection Has -- found and missing", actual)
 	})
 }
@@ -244,7 +255,12 @@ func Test_Cov7_Hashmap_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 2, "isEmpty": false, "hasKey": true, "noKey": false}
+		expected := args.Map{
+			"len": 2,
+			"isEmpty": false,
+			"hasKey": true,
+			"noKey": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap basic -- 2 items", actual)
 	})
 }
@@ -258,10 +274,18 @@ func Test_Cov7_Hashmap_Get(t *testing.T) {
 		_, notHas := h.Get("missing")
 
 		// Act
-		actual := args.Map{"val": val, "has": has, "notHas": notHas}
+		actual := args.Map{
+			"val": val,
+			"has": has,
+			"notHas": notHas,
+		}
 
 		// Assert
-		expected := args.Map{"val": "val1", "has": true, "notHas": false}
+		expected := args.Map{
+			"val": "val1",
+			"has": true,
+			"notHas": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap Get -- found and missing", actual)
 	})
 }
@@ -316,7 +340,14 @@ func Test_Cov7_Hashset_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 2, "isEmpty": false, "has": true, "notHas": false, "hasAll": true, "notAll": false}
+		expected := args.Map{
+			"len": 2,
+			"isEmpty": false,
+			"has": true,
+			"notHas": false,
+			"hasAll": true,
+			"notAll": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset basic -- dedup 2 items", actual)
 	})
 }
@@ -388,10 +419,16 @@ func Test_Cov7_LeftRightFromSplit(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("hello=world", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "hello", "right": "world"}
+		expected := args.Map{
+			"left": "hello",
+			"right": "world",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit -- equals split", actual)
 	})
 }
@@ -402,10 +439,18 @@ func Test_Cov7_LeftMiddleRightFromSplit(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplit("a:b:c", ":")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "middle": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"middle": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit -- colon split", actual)
 	})
 }
@@ -427,7 +472,11 @@ func Test_Cov7_LinkedList_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 2, "isEmpty": false, "hasAny": true}
+		expected := args.Map{
+			"len": 2,
+			"isEmpty": false,
+			"hasAny": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LinkedList basic -- 2 items", actual)
 	})
 }
@@ -458,7 +507,10 @@ func Test_Cov7_AnyToString(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"str": "hello", "int": true}
+		expected := args.Map{
+			"str": "hello",
+			"int": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AnyToString -- all types", actual)
 	})
 }
@@ -535,10 +587,16 @@ func Test_Cov7_CloneSliceIf(t *testing.T) {
 		noClone := corestr.CloneSliceIf(false, []string{"a"}...)
 
 		// Act
-		actual := args.Map{"cloneLen": len(result), "noCloneLen": len(noClone)}
+		actual := args.Map{
+			"cloneLen": len(result),
+			"noCloneLen": len(noClone),
+		}
 
 		// Assert
-		expected := args.Map{"cloneLen": 1, "noCloneLen": 1}
+		expected := args.Map{
+			"cloneLen": 1,
+			"noCloneLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "CloneSliceIf -- clone and no clone", actual)
 	})
 }
@@ -551,10 +609,16 @@ func Test_Cov7_ValidValue(t *testing.T) {
 		vv := corestr.ValidValue{Value: "hello", IsValid: true}
 
 		// Act
-		actual := args.Map{"val": vv.Value, "isValid": vv.IsValid}
+		actual := args.Map{
+			"val": vv.Value,
+			"isValid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "isValid": true}
+		expected := args.Map{
+			"val": "hello",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue -- basic", actual)
 	})
 }
@@ -567,10 +631,16 @@ func Test_Cov7_ValidValues(t *testing.T) {
 		vv := corestr.NewValidValuesUsingValues(corestr.ValidValue{Value: "a", IsValid: true})
 
 		// Act
-		actual := args.Map{"len": vv.Length(), "isValid": vv.ValidValues[0].IsValid}
+		actual := args.Map{
+			"len": vv.Length(),
+			"isValid": vv.ValidValues[0].IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "isValid": true}
+		expected := args.Map{
+			"len": 1,
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues -- basic", actual)
 	})
 }
@@ -583,10 +653,16 @@ func Test_Cov7_ValueStatus(t *testing.T) {
 		vs := corestr.ValueStatus{ValueValid: &corestr.ValidValue{Value: "hello", IsValid: true}, Index: 0}
 
 		// Act
-		actual := args.Map{"val": vs.ValueValid.Value, "isValid": vs.ValueValid.IsValid}
+		actual := args.Map{
+			"val": vs.ValueValid.Value,
+			"isValid": vs.ValueValid.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "isValid": true}
+		expected := args.Map{
+			"val": "hello",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus -- basic", actual)
 	})
 }
@@ -608,7 +684,11 @@ func Test_Cov7_HashsetsCollection_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 1, "isEmpty": false, "hasAny": true}
+		expected := args.Map{
+			"len": 1,
+			"isEmpty": false,
+			"hasAny": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollection basic -- 1 hashset", actual)
 	})
 }
@@ -622,10 +702,16 @@ func Test_Cov7_SimpleStringOnce(t *testing.T) {
 		s.SetOnceIfUninitialized("hello")
 
 		// Act
-		actual := args.Map{"val": s.Value(), "initialized": s.IsInitialized()}
+		actual := args.Map{
+			"val": s.Value(),
+			"initialized": s.IsInitialized(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "hello", "initialized": true}
+		expected := args.Map{
+			"val": "hello",
+			"initialized": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce -- set once", actual)
 	})
 }
@@ -638,10 +724,16 @@ func Test_Cov7_KeyValuePair(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "val": "v"}
+		expected := args.Map{
+			"key": "k",
+			"val": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair -- basic", actual)
 	})
 }
@@ -652,10 +744,16 @@ func Test_Cov7_KeyAnyValuePair(t *testing.T) {
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "val": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"val": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "val": 42}
+		expected := args.Map{
+			"key": "k",
+			"val": 42,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyAnyValuePair -- basic", actual)
 	})
 }
@@ -668,10 +766,16 @@ func Test_Cov7_TextWithLineNumber(t *testing.T) {
 		twl := corestr.TextWithLineNumber{Text: "hello", LineNumber: 42}
 
 		// Act
-		actual := args.Map{"text": twl.Text, "line": twl.LineNumber}
+		actual := args.Map{
+			"text": twl.Text,
+			"line": twl.LineNumber,
+		}
 
 		// Assert
-		expected := args.Map{"text": "hello", "line": 42}
+		expected := args.Map{
+			"text": "hello",
+			"line": 42,
+		}
 		expected.ShouldBeEqual(t, 0, "TextWithLineNumber -- basic", actual)
 	})
 }

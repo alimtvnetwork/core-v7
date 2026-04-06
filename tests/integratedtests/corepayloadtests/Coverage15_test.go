@@ -765,10 +765,20 @@ func Test_C15_TypedPayloadCollection_RemoveAt(t *testing.T) {
 	neg := col.RemoveAt(-1)
 
 	// Act
-	actual := args.Map{"ok": ok, "bad": bad, "neg": neg, "len": col.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"bad": bad,
+		"neg": neg,
+		"len": col.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "bad": false, "neg": false, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"bad": false,
+		"neg": false,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedPayloadCollection returns correct value -- RemoveAt", actual)
 }
 
@@ -1438,10 +1448,16 @@ func Test_C15_DeserializePayloadToSlice_Nil(t *testing.T) {
 	result, err := corepayload.DeserializePayloadToSlice[testUser](nil)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": len(result)}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializePayloadToSlice returns nil -- nil", actual)
 }
 
@@ -1467,10 +1483,16 @@ func Test_C15_DeserializeAttributesPayloadTo(t *testing.T) {
 	result, err := corepayload.DeserializeAttributesPayloadTo[testUser](attr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": result.Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": result.Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "Test"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "Test",
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadTo returns correct value -- with args", actual)
 }
 
@@ -1509,10 +1531,16 @@ func Test_C15_DeserializeAttributesPayloadToSlice(t *testing.T) {
 	result, err := corepayload.DeserializeAttributesPayloadToSlice[testUser](attr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(result)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToSlice returns correct value -- with args", actual)
 }
 
@@ -1521,9 +1549,15 @@ func Test_C15_DeserializeAttributesPayloadToSlice_Nil(t *testing.T) {
 	result, err := corepayload.DeserializeAttributesPayloadToSlice[testUser](nil)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": len(result)}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeAttributesPayloadToSlice returns nil -- nil", actual)
 }

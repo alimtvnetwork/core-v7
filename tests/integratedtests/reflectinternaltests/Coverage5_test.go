@@ -95,10 +95,16 @@ func Test_Cov5_Converter_InterfacesToTypes(t *testing.T) {
 	emptyResult := reflectinternal.Converter.InterfacesToTypes(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "InterfacesToTypes returns correct value -- with args", actual)
 }
 
@@ -108,10 +114,16 @@ func Test_Cov5_Converter_InterfacesToTypesNames(t *testing.T) {
 	emptyResult := reflectinternal.Converter.InterfacesToTypesNames(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "InterfacesToTypesNames returns correct value -- with args", actual)
 }
 
@@ -121,10 +133,16 @@ func Test_Cov5_Converter_InterfacesToTypesNamesWithValues(t *testing.T) {
 	emptyResult := reflectinternal.Converter.InterfacesToTypesNamesWithValues(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "emptyLen": 0}
+	expected := args.Map{
+		"len": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "InterfacesToTypesNamesWithValues returns non-empty -- with args", actual)
 }
 
@@ -174,10 +192,16 @@ func Test_Cov5_Converter_ReducePointer(t *testing.T) {
 	result := reflectinternal.Converter.ReducePointer(&x, 3)
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "kind": result.Kind == reflect.Int}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"kind": result.Kind == reflect.Int,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "kind": true}
+	expected := args.Map{
+		"valid": true,
+		"kind": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReducePointer returns correct value -- with args", actual)
 }
 
@@ -387,10 +411,16 @@ func Test_Cov5_Converter_ToPointerRv(t *testing.T) {
 	nilResult := reflectinternal.Converter.ToPointerRv(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "nilResult": nilResult == nil}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilResult": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilResult": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToPointerRv returns error -- with args", actual)
 }
 
@@ -400,10 +430,16 @@ func Test_Cov5_Converter_ToPointer(t *testing.T) {
 	nilResult := reflectinternal.Converter.ToPointer(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "nilResult": nilResult == nil}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilResult": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilResult": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToPointer returns correct value -- with args", actual)
 }
 
@@ -432,10 +468,16 @@ func Test_Cov5_RvGetter_PublicValuesMapStruct_WithUnexported(t *testing.T) {
 	m, err := reflectinternal.ReflectGetterUsingReflectValue.PublicValuesMapStruct(rv)
 
 	// Act
-	actual := args.Map{"len": len(m), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(m),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PublicValuesMapStruct returns non-empty -- unexported", actual)
 }
 
@@ -487,10 +529,16 @@ func Test_Cov5_RvGetter_FieldNameWithValuesMap(t *testing.T) {
 	m, err := reflectinternal.ReflectGetterUsingReflectValue.FieldNameWithValuesMap(rv)
 
 	// Act
-	actual := args.Map{"len": len(m), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(m),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldNameWithValuesMap returns non-empty -- with args", actual)
 }
 
@@ -501,10 +549,16 @@ func Test_Cov5_RvGetter_FieldNamesMap_Ptr(t *testing.T) {
 	m, err := reflectinternal.ReflectGetterUsingReflectValue.FieldNamesMap(rv)
 
 	// Act
-	actual := args.Map{"len": len(m), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(m),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldNamesMap returns correct value -- ptr", actual)
 }
 
@@ -584,10 +638,16 @@ func Test_Cov5_ReflectType_SafeName(t *testing.T) {
 	nilResult := reflectinternal.ReflectType.SafeName(nil)
 
 	// Act
-	actual := args.Map{"val": result, "nil": nilResult}
+	actual := args.Map{
+		"val": result,
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"val": "int", "nil": ""}
+	expected := args.Map{
+		"val": "int",
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeName returns correct value -- with args", actual)
 }
 
@@ -597,10 +657,16 @@ func Test_Cov5_ReflectType_SafeTypeNameOfSliceOrSingle(t *testing.T) {
 	slice := reflectinternal.ReflectType.SafeTypeNameOfSliceOrSingle(false, []int{1})
 
 	// Act
-	actual := args.Map{"single": single, "slice": slice}
+	actual := args.Map{
+		"single": single,
+		"slice": slice,
+	}
 
 	// Assert
-	expected := args.Map{"single": "int", "slice": "int"}
+	expected := args.Map{
+		"single": "int",
+		"slice": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeTypeNameOfSliceOrSingle returns correct value -- with args", actual)
 }
 
@@ -610,10 +676,16 @@ func Test_Cov5_ReflectType_SliceFirstItemTypeName(t *testing.T) {
 	nilResult := reflectinternal.ReflectType.SliceFirstItemTypeName(nil)
 
 	// Act
-	actual := args.Map{"val": result, "nil": nilResult}
+	actual := args.Map{
+		"val": result,
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"val": "int", "nil": ""}
+	expected := args.Map{
+		"val": "int",
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SliceFirstItemTypeName returns correct value -- with args", actual)
 }
 
@@ -623,10 +695,16 @@ func Test_Cov5_ReflectType_NamesStringUsingReflectType(t *testing.T) {
 	empty := reflectinternal.ReflectType.NamesStringUsingReflectType(true)
 
 	// Act
-	actual := args.Map{"notEmpty": full != "", "empty": empty}
+	actual := args.Map{
+		"notEmpty": full != "",
+		"empty": empty,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NamesStringUsingReflectType returns correct value -- with args", actual)
 }
 
@@ -636,10 +714,16 @@ func Test_Cov5_ReflectType_TypeNamesString(t *testing.T) {
 	empty := reflectinternal.ReflectType.TypeNamesString(true)
 
 	// Act
-	actual := args.Map{"notEmpty": full != "", "empty": empty}
+	actual := args.Map{
+		"notEmpty": full != "",
+		"empty": empty,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeNamesString returns correct value -- with args", actual)
 }
 
@@ -661,10 +745,16 @@ func Test_Cov5_ReflectType_NamesReferenceString(t *testing.T) {
 	empty := reflectinternal.ReflectType.NamesReferenceString(true)
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": empty}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": empty,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "NamesReferenceString returns correct value -- with args", actual)
 }
 
@@ -675,10 +765,18 @@ func Test_Cov5_ReflectType_Names(t *testing.T) {
 	empty := reflectinternal.ReflectType.Names(true)
 
 	// Act
-	actual := args.Map{"fullLen": len(full), "shortLen": len(short), "emptyLen": len(empty)}
+	actual := args.Map{
+		"fullLen": len(full),
+		"shortLen": len(short),
+		"emptyLen": len(empty),
+	}
 
 	// Assert
-	expected := args.Map{"fullLen": 1, "shortLen": 1, "emptyLen": 0}
+	expected := args.Map{
+		"fullLen": 1,
+		"shortLen": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Names returns correct value -- with args", actual)
 }
 
@@ -688,10 +786,16 @@ func Test_Cov5_ReflectType_Name(t *testing.T) {
 	nilResult := reflectinternal.ReflectType.Name(nil)
 
 	// Act
-	actual := args.Map{"val": result, "nil": nilResult}
+	actual := args.Map{
+		"val": result,
+		"nil": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"val": "int", "nil": ""}
+	expected := args.Map{
+		"val": "int",
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Name returns correct value -- with args", actual)
 }
 
@@ -719,7 +823,12 @@ func Test_Cov5_SliceConverter_Length(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"slice": 2, "map": 1, "nil": 0, "int": 0}
+	expected := args.Map{
+		"slice": 2,
+		"map": 1,
+		"nil": 0,
+		"int": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceConverter returns correct value -- Length", actual)
 }
 
@@ -730,10 +839,16 @@ func Test_Cov5_SliceConverter_ToStringsRv_Ptr(t *testing.T) {
 	result, err := reflectinternal.SliceConverter.ToStringsRv(rv)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringsRv returns correct value -- ptr", actual)
 }
 
@@ -756,10 +871,16 @@ func Test_Cov5_SliceConverter_ToStringsRv_Empty(t *testing.T) {
 	result, err := reflectinternal.SliceConverter.ToStringsRv(rv)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "noErr": true}
+	expected := args.Map{
+		"len": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringsRv returns empty -- empty", actual)
 }
 
@@ -768,10 +889,16 @@ func Test_Cov5_SliceConverter_ToStrings(t *testing.T) {
 	result, err := reflectinternal.SliceConverter.ToStrings([]int{1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStrings returns correct value -- with args", actual)
 }
 
@@ -794,10 +921,16 @@ func Test_Cov5_SliceConverter_ToStringsRvUsingProcessor(t *testing.T) {
 		func(i int, item any) (string, bool, bool) { return "x", true, i == 1 })
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringsRvUsingProcessor returns correct value -- with args", actual)
 }
 
@@ -813,10 +946,16 @@ func Test_Cov5_SliceConverter_ToStringsRvUsingSimpleProcessor(t *testing.T) {
 		})
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringsRvUsingSimpleProcessor returns correct value -- with args", actual)
 }
 
@@ -826,10 +965,16 @@ func Test_Cov5_SliceConverter_ToAnyItemsAsync(t *testing.T) {
 	nilResult := reflectinternal.SliceConverter.ToAnyItemsAsync(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToAnyItemsAsync returns correct value -- with args", actual)
 }
 
@@ -851,10 +996,16 @@ func Test_Cov5_MapConverter_ToStringsRv_Ptr(t *testing.T) {
 	result, err := reflectinternal.MapConverter.ToStringsRv(rv)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapConverter returns correct value -- ToStringsRv ptr", actual)
 }
 
@@ -890,10 +1041,16 @@ func Test_Cov5_MapConverter_ToKeysStrings(t *testing.T) {
 	result, err := reflectinternal.MapConverter.ToKeysStrings(map[string]int{"a": 1})
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToKeysStrings returns correct value -- with args", actual)
 }
 
@@ -903,10 +1060,18 @@ func Test_Cov5_MapConverter_ToValuesAny(t *testing.T) {
 	nilResult, _ := reflectinternal.MapConverter.ToValuesAny(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil, "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true, "nilLen": 0}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToValuesAny returns non-empty -- with args", actual)
 }
 
@@ -916,10 +1081,18 @@ func Test_Cov5_MapConverter_ToKeysAny(t *testing.T) {
 	nilResult, _ := reflectinternal.MapConverter.ToKeysAny(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil, "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true, "nilLen": 0}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToKeysAny returns correct value -- with args", actual)
 }
 
@@ -929,10 +1102,20 @@ func Test_Cov5_MapConverter_ToKeysValuesAny(t *testing.T) {
 	nilKeys, _, _ := reflectinternal.MapConverter.ToKeysValuesAny(nil)
 
 	// Act
-	actual := args.Map{"keysLen": len(keys), "valsLen": len(vals), "noErr": err == nil, "nilKeysLen": len(nilKeys)}
+	actual := args.Map{
+		"keysLen": len(keys),
+		"valsLen": len(vals),
+		"noErr": err == nil,
+		"nilKeysLen": len(nilKeys),
+	}
 
 	// Assert
-	expected := args.Map{"keysLen": 1, "valsLen": 1, "noErr": true, "nilKeysLen": 0}
+	expected := args.Map{
+		"keysLen": 1,
+		"valsLen": 1,
+		"noErr": true,
+		"nilKeysLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToKeysValuesAny returns non-empty -- with args", actual)
 }
 
@@ -941,10 +1124,16 @@ func Test_Cov5_MapConverter_ToStrings_Nil(t *testing.T) {
 	result, err := reflectinternal.MapConverter.ToStrings(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "noErr": true}
+	expected := args.Map{
+		"len": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStrings returns nil -- nil", actual)
 }
 
@@ -968,10 +1157,18 @@ func Test_Cov5_MapConverter_ToSortedStrings(t *testing.T) {
 	nilResult, _ := reflectinternal.MapConverter.ToSortedStrings(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil, "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToSortedStrings returns correct value -- with args", actual)
 }
 
@@ -981,10 +1178,16 @@ func Test_Cov5_MapConverter_ToSortedStringsMust(t *testing.T) {
 	nilResult := reflectinternal.MapConverter.ToSortedStringsMust(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToSortedStringsMust returns correct value -- with args", actual)
 }
 
@@ -995,10 +1198,16 @@ func Test_Cov5_MapConverter_ToMapStringAnyRv(t *testing.T) {
 	result, err := reflectinternal.MapConverter.ToMapStringAnyRv(rv)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToMapStringAnyRv returns correct value -- with args", actual)
 }
 
@@ -1009,10 +1218,16 @@ func Test_Cov5_MapConverter_ToMapStringAnyRv_IntKey(t *testing.T) {
 	result, err := reflectinternal.MapConverter.ToMapStringAnyRv(rv)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToMapStringAnyRv returns correct value -- int-key", actual)
 }
 
@@ -1022,10 +1237,18 @@ func Test_Cov5_MapConverter_ToMapStringAny(t *testing.T) {
 	nilResult, _ := reflectinternal.MapConverter.ToMapStringAny(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "noErr": err == nil, "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true, "nilLen": 0}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToMapStringAny returns correct value -- with args", actual)
 }
 
@@ -1036,10 +1259,16 @@ func Test_Cov5_Is_Conclusive_Slices(t *testing.T) {
 	eq, conc := reflectinternal.Is.Conclusive([]int{1}, []int{1})
 
 	// Act
-	actual := args.Map{"eq": eq, "conc": conc}
+	actual := args.Map{
+		"eq": eq,
+		"conc": conc,
+	}
 
 	// Assert
-	expected := args.Map{"eq": false, "conc": false}
+	expected := args.Map{
+		"eq": false,
+		"conc": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns correct value -- slices", actual)
 }
 
@@ -1049,10 +1278,16 @@ func Test_Cov5_Is_Conclusive_BothNilPtrs(t *testing.T) {
 	eq, conc := reflectinternal.Is.Conclusive(a, b)
 
 	// Act
-	actual := args.Map{"eq": eq, "conc": conc}
+	actual := args.Map{
+		"eq": eq,
+		"conc": conc,
+	}
 
 	// Assert
-	expected := args.Map{"eq": true, "conc": true}
+	expected := args.Map{
+		"eq": true,
+		"conc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- both nil ptrs", actual)
 }
 
@@ -1063,10 +1298,16 @@ func Test_Cov5_Is_Conclusive_OneNilPtr(t *testing.T) {
 	eq, conc := reflectinternal.Is.Conclusive(a, &x)
 
 	// Act
-	actual := args.Map{"eq": eq, "conc": conc}
+	actual := args.Map{
+		"eq": eq,
+		"conc": conc,
+	}
 
 	// Assert
-	expected := args.Map{"eq": false, "conc": true}
+	expected := args.Map{
+		"eq": false,
+		"conc": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Conclusive returns nil -- one nil ptr", actual)
 }
 
@@ -1087,7 +1328,10 @@ func Test_Cov5_Is_NotFunc(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": true, "nil": true}
+	expected := args.Map{
+		"int": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NotFunc returns correct value -- with args", actual)
 }
 
@@ -1099,7 +1343,10 @@ func Test_Cov5_Is_SliceOrArrayOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"slice": true, "int": false}
+	expected := args.Map{
+		"slice": true,
+		"int": false,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceOrArrayOf returns correct value -- with args", actual)
 }
 
@@ -1111,7 +1358,10 @@ func Test_Cov5_Is_NotNull(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"val": true, "nil": false}
+	expected := args.Map{
+		"val": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NotNull returns correct value -- with args", actual)
 }
 
@@ -1208,10 +1458,16 @@ func Test_Cov5_Looper_FieldNames(t *testing.T) {
 	names, err := reflectinternal.Looper.FieldNames(S{})
 
 	// Act
-	actual := args.Map{"len": len(names), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(names),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldNames returns correct value -- with args", actual)
 }
 
@@ -1221,10 +1477,16 @@ func Test_Cov5_Looper_FieldsMap(t *testing.T) {
 	m, err := reflectinternal.Looper.FieldsMap(S{})
 
 	// Act
-	actual := args.Map{"len": len(m), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(m),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "noErr": true}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldsMap returns correct value -- with args", actual)
 }
 
@@ -1234,10 +1496,16 @@ func Test_Cov5_Looper_MethodsMap(t *testing.T) {
 	m, err := reflectinternal.Looper.MethodsMap(S{})
 
 	// Act
-	actual := args.Map{"notNil": m != nil, "noErr": err == nil}
+	actual := args.Map{
+		"notNil": m != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodsMap returns correct value -- with args", actual)
 }
 
@@ -1272,10 +1540,16 @@ func Test_Cov5_Looper_Slice(t *testing.T) {
 	nilErr := reflectinternal.Looper.Slice(nil, func(total, index int, item any) error { return nil })
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nilNoErr": nilErr == nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nilNoErr": nilErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nilNoErr": true}
+	expected := args.Map{
+		"noErr": true,
+		"nilNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Slice returns correct value -- with args", actual)
 }
 
@@ -1285,10 +1559,16 @@ func Test_Cov5_Looper_Map(t *testing.T) {
 	nilErr := reflectinternal.Looper.Map(nil, func(total, index int, key, value any) error { return nil })
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nilNoErr": nilErr == nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nilNoErr": nilErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nilNoErr": true}
+	expected := args.Map{
+		"noErr": true,
+		"nilNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- with args", actual)
 }
 
@@ -1545,10 +1825,16 @@ func Test_Cov5_Utils_VerifyReflectTypes_Mismatch(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "VerifyReflectTypes returns correct value -- mismatch", actual)
 }
 

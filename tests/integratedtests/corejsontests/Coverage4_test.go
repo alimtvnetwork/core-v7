@@ -24,7 +24,11 @@ func Test_Cov4_BytesDeepClone(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 15, "nilIsNil": nilIsNil, "notSamePtr": true}
+	expected := args.Map{
+		"len": 15,
+		"nilIsNil": nilIsNil,
+		"notSamePtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesDeepClone returns independent copy -- valid input", actual)
 }
 
@@ -60,7 +64,10 @@ func Test_Cov4_Result_New_ValueType(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns bytes -- New value type", actual)
 }
 
@@ -97,10 +104,16 @@ func Test_Cov4_JsonString(t *testing.T) {
 	result, err := corejson.JsonString(map[string]string{"a": "1"})
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonString returns json -- map input", actual)
 }
 
@@ -182,7 +195,10 @@ func Test_Cov4_SimpleJsonBinder(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "test"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleJsonBinder returns deserialized struct -- round-trip", actual)
 }
 
@@ -200,6 +216,9 @@ func Test_Cov4_Result_PrettyJsonString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsKey": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsKey": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns pretty json -- map input", actual)
 }

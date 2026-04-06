@@ -53,10 +53,16 @@ func Test_Cov7_SliceValidator_SetActual(t *testing.T) {
 	sv.SetActual([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"used": sv.IsUsedAlready(), "len": sv.ActualLinesLength()}
+	actual := args.Map{
+		"used": sv.IsUsedAlready(),
+		"len": sv.ActualLinesLength(),
+	}
 
 	// Assert
-	expected := args.Map{"used": true, "len": 2}
+	expected := args.Map{
+		"used": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "SetActual returns correct value -- with args", actual)
 }
 
@@ -66,10 +72,18 @@ func Test_Cov7_SliceValidator_SetActualVsExpected(t *testing.T) {
 	sv.SetActualVsExpected([]string{"a"}, []string{"a"})
 
 	// Act
-	actual := args.Map{"used": sv.IsUsedAlready(), "actualLen": sv.ActualLinesLength(), "expectedLen": sv.ExpectingLinesLength()}
+	actual := args.Map{
+		"used": sv.IsUsedAlready(),
+		"actualLen": sv.ActualLinesLength(),
+		"expectedLen": sv.ExpectingLinesLength(),
+	}
 
 	// Assert
-	expected := args.Map{"used": true, "actualLen": 1, "expectedLen": 1}
+	expected := args.Map{
+		"used": true,
+		"actualLen": 1,
+		"expectedLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SetActualVsExpected returns correct value -- with args", actual)
 }
 
@@ -244,7 +258,10 @@ func Test_Cov7_SliceValidator_IsValidOtherLines(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "mismatch": false}
+	expected := args.Map{
+		"match": true,
+		"mismatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsValidOtherLines returns non-empty -- with args", actual)
 }
 
@@ -301,10 +318,16 @@ func Test_Cov7_SliceValidator_Dispose(t *testing.T) {
 	sv.Dispose()
 
 	// Act
-	actual := args.Map{"actualNil": sv.ActualLines == nil, "expectedNil": sv.ExpectedLines == nil}
+	actual := args.Map{
+		"actualNil": sv.ActualLines == nil,
+		"expectedNil": sv.ExpectedLines == nil,
+	}
 
 	// Assert
-	expected := args.Map{"actualNil": true, "expectedNil": true}
+	expected := args.Map{
+		"actualNil": true,
+		"expectedNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dispose returns correct value -- with args", actual)
 }
 
@@ -337,7 +360,10 @@ func Test_Cov7_TextValidator_IsMatch_EqualMatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "mismatch": false}
+	expected := args.Map{
+		"match": true,
+		"mismatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidator.IsMatch returns non-empty -- equal", actual)
 }
 
@@ -491,8 +517,16 @@ func Test_Cov7_SimpleSliceValidator_VerifyAll(t *testing.T) {
 	// Verify SliceValidator was created properly
 
 	// Act
-	actual := args.Map{"notNil": sliceV != nil, "actualLen": len(sliceV.ActualLines), "expectedLen": len(sliceV.ExpectedLines)}
-	expectedM := args.Map{"notNil": true, "actualLen": 2, "expectedLen": 2}
+	actual := args.Map{
+		"notNil": sliceV != nil,
+		"actualLen": len(sliceV.ActualLines),
+		"expectedLen": len(sliceV.ExpectedLines),
+	}
+	expectedM := args.Map{
+		"notNil": true,
+		"actualLen": 2,
+		"expectedLen": 2,
+	}
 	expectedM.ShouldBeEqual(t, 0, "SimpleSliceValidator.VerifyAll returns non-empty -- with args", actual)
 }
 
@@ -523,10 +557,16 @@ func Test_Cov7_LineNumber_Fields(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"num": ln.LineNumber, "hasLN": ln.HasLineNumber()}
+	actual := args.Map{
+		"num": ln.LineNumber,
+		"hasLN": ln.HasLineNumber(),
+	}
 
 	// Assert
-	expected := args.Map{"num": 1, "hasLN": true}
+	expected := args.Map{
+		"num": 1,
+		"hasLN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LineNumber returns correct value -- fields", actual)
 }
 

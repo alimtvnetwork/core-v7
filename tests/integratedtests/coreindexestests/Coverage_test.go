@@ -132,10 +132,16 @@ func Test_Cov_HasIndexPlusRemoveIndex_Found(t *testing.T) {
 	found := coreindexes.HasIndexPlusRemoveIndex(&indexes, 2)
 
 	// Act
-	actual := args.Map{"found": found, "len": len(indexes)}
+	actual := args.Map{
+		"found": found,
+		"len": len(indexes),
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "len": 2}
+	expected := args.Map{
+		"found": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "HasIndexPlusRemoveIndex removes and returns true -- found", actual)
 }
 
@@ -145,9 +151,15 @@ func Test_Cov_HasIndexPlusRemoveIndex_NotFound(t *testing.T) {
 	found := coreindexes.HasIndexPlusRemoveIndex(&indexes, 99)
 
 	// Act
-	actual := args.Map{"found": found, "len": len(indexes)}
+	actual := args.Map{
+		"found": found,
+		"len": len(indexes),
+	}
 
 	// Assert
-	expected := args.Map{"found": false, "len": 3}
+	expected := args.Map{
+		"found": false,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "HasIndexPlusRemoveIndex returns false -- not found", actual)
 }

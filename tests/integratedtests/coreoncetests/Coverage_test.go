@@ -188,18 +188,37 @@ func Test_StringOnce_Methods_Coverage(t *testing.T) {
 var covStringSplitTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "SplitLeftRight with separator",
-		ArrangeInput:  args.Map{"value": "key=value", "sep": "="},
-		ExpectedInput: args.Map{"left": "key", "right": "value"},
+		ArrangeInput:  args.Map{
+			"value": "key=value",
+			"sep": "=",
+		},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+		},
 	},
 	{
 		Title:         "SplitLeftRight no separator",
-		ArrangeInput:  args.Map{"value": "nosep", "sep": "="},
-		ExpectedInput: args.Map{"left": "nosep", "right": ""},
+		ArrangeInput:  args.Map{
+			"value": "nosep",
+			"sep": "=",
+		},
+		ExpectedInput: args.Map{
+			"left": "nosep",
+			"right": "",
+		},
 	},
 	{
 		Title:         "SplitLeftRightTrim with spaces",
-		ArrangeInput:  args.Map{"value": " key = value ", "sep": "=", "trim": true},
-		ExpectedInput: args.Map{"left": "key", "right": "value"},
+		ArrangeInput:  args.Map{
+			"value": " key = value ",
+			"sep": "=",
+			"trim": true,
+		},
+		ExpectedInput: args.Map{
+			"left": "key",
+			"right": "value",
+		},
 	},
 }
 
@@ -220,7 +239,10 @@ func Test_StringOnce_SplitLeftRight_Coverage(t *testing.T) {
 		}
 
 		// Act
-		actual := args.Map{"left": left, "right": right}
+		actual := args.Map{
+			"left": left,
+			"right": right,
+		}
 
 		// Assert
 		testCase.ShouldBeEqualMap(t, caseIndex, actual)
@@ -235,7 +257,12 @@ var covStringOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{"value": "test"},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true, "errorOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+			"errorOk": true,
+		},
 	},
 }
 
@@ -282,7 +309,10 @@ var covStringsOnceTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:        "StringsOnce not equal",
-		ArrangeInput: args.Map{"values": []string{"a"}, "compare": []string{"b"}},
+		ArrangeInput: args.Map{
+			"values": []string{"a"},
+			"compare": []string{"b"},
+		},
 		ExpectedInput: args.Map{
 			"isEqual": false,
 		},
@@ -349,12 +379,18 @@ func Test_StringsOnce_Coverage(t *testing.T) {
 var covStringsOnceIsEqualTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsOnce IsEqual different length returns false",
-		ArrangeInput:  args.Map{"values": []string{"a"}, "compare": []string{"a", "b"}},
+		ArrangeInput:  args.Map{
+			"values": []string{"a"},
+			"compare": []string{"a", "b"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "StringsOnce IsEqual different value returns false",
-		ArrangeInput:  args.Map{"values": []string{"a"}, "compare": []string{"b"}},
+		ArrangeInput:  args.Map{
+			"values": []string{"a"},
+			"compare": []string{"b"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
@@ -391,12 +427,18 @@ var covIntegersOnceTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "IntegersOnce IsEqual different returns false",
-		ArrangeInput:  args.Map{"values": []int{1}, "compare": []int{2}},
+		ArrangeInput:  args.Map{
+			"values": []int{1},
+			"compare": []int{2},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "IntegersOnce IsEqual different length returns false",
-		ArrangeInput:  args.Map{"values": []int{1}, "compare": []int{1, 2}},
+		ArrangeInput:  args.Map{
+			"values": []int{1},
+			"compare": []int{1, 2},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
@@ -521,12 +563,18 @@ var covMapSSIsEqualTestCases = []coretestcases.CaseV1{
 	},
 	{
 		Title:         "IsEqual missing key returns false",
-		ArrangeInput:  args.Map{"map": map[string]string{"a": "1"}, "right": map[string]string{"b": "1"}},
+		ArrangeInput:  args.Map{
+			"map": map[string]string{"a": "1"},
+			"right": map[string]string{"b": "1"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 	{
 		Title:         "IsEqual different value returns false",
-		ArrangeInput:  args.Map{"map": map[string]string{"a": "1"}, "right": map[string]string{"a": "2"}},
+		ArrangeInput:  args.Map{
+			"map": map[string]string{"a": "1"},
+			"right": map[string]string{"a": "2"},
+		},
 		ExpectedInput: args.Map{"isEqual": false},
 	},
 }
@@ -813,12 +861,19 @@ var covBytesOnceTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "BytesOnce nil initializerFunc is empty",
 		ArrangeInput:  args.Map{"nilInit": true},
-		ExpectedInput: args.Map{"isEmpty": true, "length": 0},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"length": 0,
+		},
 	},
 	{
 		Title:         "BytesOnce with data",
 		ArrangeInput:  args.Map{"value": "abc"},
-		ExpectedInput: args.Map{"isEmpty": false, "length": 3, "string": "abc"},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"length": 3,
+			"string": "abc",
+		},
 	},
 }
 
@@ -943,7 +998,11 @@ var covStringsOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "StringsOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+		},
 	},
 }
 
@@ -975,7 +1034,11 @@ var covIntegersOnceSerializeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IntegersOnce Serialize and JSON roundtrip",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"serializeOk": true, "marshalOk": true, "unmarshalOk": true},
+		ExpectedInput: args.Map{
+			"serializeOk": true,
+			"marshalOk": true,
+			"unmarshalOk": true,
+		},
 	},
 }
 
@@ -1007,7 +1070,13 @@ var covIntegersOnceEmptyTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "IntegersOnce empty returns zero for maps",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"isEmpty": true, "isZero": true, "rangesLen": 0, "rangesBoolLen": 0, "uniqueLen": 0},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"isZero": true,
+			"rangesLen": 0,
+			"rangesBoolLen": 0,
+			"uniqueLen": 0,
+		},
 	},
 }
 

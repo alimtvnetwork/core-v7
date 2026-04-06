@@ -202,10 +202,16 @@ func Test_I16_SliceValidator_SetActual(t *testing.T) {
 	sv.SetActual([]string{"hello"})
 
 	// Act
-	actual := args.Map{"used": sv.IsUsedAlready(), "len": sv.ActualLinesLength()}
+	actual := args.Map{
+		"used": sv.IsUsedAlready(),
+		"len": sv.ActualLinesLength(),
+	}
 
 	// Assert
-	expected := args.Map{"used": true, "len": 1}
+	expected := args.Map{
+		"used": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns correct value -- SetActual", actual)
 }
 
@@ -215,10 +221,18 @@ func Test_I16_SliceValidator_SetActualVsExpected(t *testing.T) {
 	sv.SetActualVsExpected([]string{"a"}, []string{"a"})
 
 	// Act
-	actual := args.Map{"used": sv.IsUsedAlready(), "aLen": sv.ActualLinesLength(), "eLen": sv.ExpectingLinesLength()}
+	actual := args.Map{
+		"used": sv.IsUsedAlready(),
+		"aLen": sv.ActualLinesLength(),
+		"eLen": sv.ExpectingLinesLength(),
+	}
 
 	// Assert
-	expected := args.Map{"used": true, "aLen": 1, "eLen": 1}
+	expected := args.Map{
+		"used": true,
+		"aLen": 1,
+		"eLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns correct value -- SetActualVsExpected", actual)
 }
 
@@ -335,10 +349,16 @@ func Test_I16_SliceValidator_ComparingValidators(t *testing.T) {
 	v2 := sv.ComparingValidators() // cached
 
 	// Act
-	actual := args.Map{"len": v1.Length(), "same": v1 == v2}
+	actual := args.Map{
+		"len": v1.Length(),
+		"same": v1 == v2,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "same": true}
+	expected := args.Map{
+		"len": 2,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns correct value -- ComparingValidators cached", actual)
 }
 
@@ -357,10 +377,16 @@ func Test_I16_SliceValidator_Dispose_WithValidators(t *testing.T) {
 	sv.Dispose()
 
 	// Act
-	actual := args.Map{"actualNil": sv.ActualLines == nil, "expectedNil": sv.ExpectedLines == nil}
+	actual := args.Map{
+		"actualNil": sv.ActualLines == nil,
+		"expectedNil": sv.ExpectedLines == nil,
+	}
 
 	// Assert
-	expected := args.Map{"actualNil": true, "expectedNil": true}
+	expected := args.Map{
+		"actualNil": true,
+		"expectedNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceValidator returns nil -- Dispose clears all", actual)
 }
 
@@ -704,7 +730,10 @@ func Test_I16_NewSliceValidatorUsingErr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"aLen": 2, "eLen": 2}
+	expected := args.Map{
+		"aLen": 2,
+		"eLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingErr returns correct value -- with args", actual)
 }
 
@@ -724,7 +753,10 @@ func Test_I16_NewSliceValidatorUsingAny(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"aLen": 2, "eLen": 2}
+	expected := args.Map{
+		"aLen": 2,
+		"eLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "NewSliceValidatorUsingAny returns correct value -- with args", actual)
 }
 
@@ -748,10 +780,16 @@ func Test_I16_TextValidator_ToString_SingleLine(t *testing.T) {
 	ml := tv.ToString(false)
 
 	// Act
-	actual := args.Map{"single": s != "", "multi": ml != ""}
+	actual := args.Map{
+		"single": s != "",
+		"multi": ml != "",
+	}
 
 	// Assert
-	expected := args.Map{"single": true, "multi": true}
+	expected := args.Map{
+		"single": true,
+		"multi": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- ToString formats", actual)
 }
 
@@ -770,7 +808,11 @@ func Test_I16_TextValidator_IsMatch_CaseInsensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"sensitive": true, "insensitive": true, "mismatch": false}
+	expected := args.Map{
+		"sensitive": true,
+		"insensitive": true,
+		"mismatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- IsMatch case sensitivity", actual)
 }
 
@@ -789,7 +831,11 @@ func Test_I16_TextValidator_IsMatchMany(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"allMatch": true, "oneFails": false, "emptySkip": true}
+	expected := args.Map{
+		"allMatch": true,
+		"oneFails": false,
+		"emptySkip": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- IsMatchMany", actual)
 }
 
@@ -964,10 +1010,16 @@ func Test_I16_TextValidator_MethodName(t *testing.T) {
 	var nilTv *corevalidator.TextValidator
 
 	// Act
-	actual := args.Map{"name": tv.MethodName(), "nil": nilTv.MethodName()}
+	actual := args.Map{
+		"name": tv.MethodName(),
+		"nil": nilTv.MethodName(),
+	}
 
 	// Assert
-	expected := args.Map{"name": stringcompareas.Contains.Name(), "nil": ""}
+	expected := args.Map{
+		"name": stringcompareas.Contains.Name(),
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidator returns correct value -- MethodName", actual)
 }
 
@@ -1046,10 +1098,16 @@ func Test_I16_TextValidators_AddSimpleAllTrue(t *testing.T) {
 	tvs.AddSimpleAllTrue("test", stringcompareas.Equal)
 
 	// Act
-	actual := args.Map{"len": tvs.Length(), "hasAny": tvs.HasAnyItem()}
+	actual := args.Map{
+		"len": tvs.Length(),
+		"hasAny": tvs.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasAny": true}
+	expected := args.Map{
+		"len": 1,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidators returns correct value -- AddSimpleAllTrue", actual)
 }
 
@@ -1084,10 +1142,16 @@ func Test_I16_TextValidators_IsMatch_Success(t *testing.T) {
 	tvs.AddSimple("hello", stringcompareas.Equal)
 
 	// Act
-	actual := args.Map{"match": tvs.IsMatch("hello", true), "noMatch": tvs.IsMatch("world", true)}
+	actual := args.Map{
+		"match": tvs.IsMatch("hello", true),
+		"noMatch": tvs.IsMatch("world", true),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TextValidators returns correct value -- IsMatch", actual)
 }
 
@@ -1268,10 +1332,20 @@ func Test_I16_Condition_IsSplitByWhitespace(t *testing.T) {
 	c4 := corevalidator.Condition{IsSortStringsBySpace: true}
 
 	// Act
-	actual := args.Map{"none": c1.IsSplitByWhitespace(), "unique": c2.IsSplitByWhitespace(), "nonEmpty": c3.IsSplitByWhitespace(), "sort": c4.IsSplitByWhitespace()}
+	actual := args.Map{
+		"none": c1.IsSplitByWhitespace(),
+		"unique": c2.IsSplitByWhitespace(),
+		"nonEmpty": c3.IsSplitByWhitespace(),
+		"sort": c4.IsSplitByWhitespace(),
+	}
 
 	// Assert
-	expected := args.Map{"none": false, "unique": true, "nonEmpty": true, "sort": true}
+	expected := args.Map{
+		"none": false,
+		"unique": true,
+		"nonEmpty": true,
+		"sort": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Condition returns correct value -- IsSplitByWhitespace", actual)
 }
 
@@ -1285,10 +1359,16 @@ func Test_I16_Parameter_IsIgnoreCase(t *testing.T) {
 	p2 := corevalidator.Parameter{IsCaseSensitive: false}
 
 	// Act
-	actual := args.Map{"p1": p1.IsIgnoreCase(), "p2": p2.IsIgnoreCase()}
+	actual := args.Map{
+		"p1": p1.IsIgnoreCase(),
+		"p2": p2.IsIgnoreCase(),
+	}
 
 	// Assert
-	expected := args.Map{"p1": false, "p2": true}
+	expected := args.Map{
+		"p1": false,
+		"p2": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Parameter returns correct value -- IsIgnoreCase", actual)
 }
 

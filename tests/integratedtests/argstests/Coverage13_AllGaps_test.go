@@ -176,7 +176,10 @@ func Test_Cov13_Map_GetFuncName_NoFunc_I29(t *testing.T) {
 
 func Test_Cov13_Map_SortedKeysMust_Valid_I29(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 
 	// Act
 	result := m.SortedKeysMust()

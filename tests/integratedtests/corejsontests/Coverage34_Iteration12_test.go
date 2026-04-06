@@ -19,10 +19,16 @@ func Test_Cov34_CastAny_StringToPtr(t *testing.T) {
 	err := corejson.CastAny.OrDeserializeTo(jsonStr, &result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "key": result["key"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"key": result["key"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "key": "value"}
+	expected := args.Map{
+		"noErr": true,
+		"key": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny.OrDeserializeTo works -- string input", actual)
 }
 
@@ -34,10 +40,16 @@ func Test_Cov34_CastAny_BytesToPtr(t *testing.T) {
 	err := corejson.CastAny.OrDeserializeTo(jsonBytes, &result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "key": result["key"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"key": result["key"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "key": "value"}
+	expected := args.Map{
+		"noErr": true,
+		"key": "value",
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny.OrDeserializeTo works -- []byte input", actual)
 }
 
@@ -50,10 +62,16 @@ func Test_Cov34_AnyTo_String(t *testing.T) {
 	result := corejson.AnyTo.SerializedJsonResult(jsonStr)
 
 	// Act
-	actual := args.Map{"noErr": result.IsEmptyError(), "hasBytes": len(result.Bytes) > 0}
+	actual := args.Map{
+		"noErr": result.IsEmptyError(),
+		"hasBytes": len(result.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo.SerializedJsonResult works -- string input", actual)
 }
 
@@ -67,10 +85,16 @@ func Test_Cov34_Result_FieldsNames(t *testing.T) {
 	// DeserializedFieldsToMap initializes map and passes pointer to Deserialize.
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasNames": len(names) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasNames": len(names) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasNames": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasNames": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldsNames returns empty -- DeserializedFieldsToMap limitation", actual)
 }
 
@@ -249,10 +273,16 @@ func Test_Cov34_MapResults_AddAnySkipOnNil_Valid(t *testing.T) {
 	_, hasKey := mr.Items["key"]
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasKey": hasKey}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasKey": hasKey,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasKey": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasKey": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AddAnySkipOnNil adds result -- valid item", actual)
 }
 
@@ -339,10 +369,16 @@ func Test_Cov34_NewResult_UsingSerializerFunc(t *testing.T) {
 	result := corejson.NewResult.UsingSerializerFunc(fn)
 
 	// Act
-	actual := args.Map{"noErr": result.IsEmptyError(), "hasBytes": len(result.Bytes) > 0}
+	actual := args.Map{
+		"noErr": result.IsEmptyError(),
+		"hasBytes": len(result.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingSerializerFunc creates result -- valid func", actual)
 }
 
@@ -354,10 +390,16 @@ func Test_Cov34_NewBytesCollection_Empty(t *testing.T) {
 	result := corejson.NewBytesCollection.Empty()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "empty": result.IsEmpty()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"empty": result.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBytesCollection.Empty returns empty collection", actual)
 }
 
@@ -369,10 +411,16 @@ func Test_Cov34_NewMapResults_Empty(t *testing.T) {
 	result := corejson.NewMapResults.Empty()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "empty": result.IsEmpty()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"empty": result.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewMapResults.Empty returns empty map results", actual)
 }
 
@@ -384,9 +432,15 @@ func Test_Cov34_NewResultsCollection_Empty(t *testing.T) {
 	result := corejson.NewResultsCollection.Empty()
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "empty": result.IsEmpty()}
+	actual := args.Map{
+		"notNil": result != nil,
+		"empty": result.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewResultsCollection.Empty returns empty collection", actual)
 }

@@ -46,7 +46,10 @@ func Test_Cov6_ConcatMessageWithErr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasResult": true, "nilResult": true}
+	expected := args.Map{
+		"hasResult": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatMessageWithErr returns correct -- nil and non-nil", actual)
 }
 
@@ -58,10 +61,16 @@ func Test_Cov6_ErrorToSplitLines(t *testing.T) {
 	nilResult := errcore.ErrorToSplitLines(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "nilLen": 0}
+	expected := args.Map{
+		"len": 3,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorToSplitLines returns lines -- with newlines", actual)
 }
 
@@ -71,10 +80,16 @@ func Test_Cov6_ErrorToSplitNonEmptyLines(t *testing.T) {
 	nilResult := errcore.ErrorToSplitNonEmptyLines(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorToSplitNonEmptyLines returns filtered -- with empty lines", actual)
 }
 
@@ -95,7 +110,11 @@ func Test_Cov6_ManyErrorToSingle(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilResult": true, "allNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilResult": true,
+		"allNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ManyErrorToSingle returns correct -- mixed nil and non-nil", actual)
 }
 
@@ -105,10 +124,16 @@ func Test_Cov6_ManyErrorToSingleDirect(t *testing.T) {
 	nilResult := errcore.ManyErrorToSingleDirect()
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "nilResult": nilResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"nilResult": nilResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "nilResult": true}
+	expected := args.Map{
+		"hasErr": true,
+		"nilResult": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ManyErrorToSingleDirect returns correct -- mixed args", actual)
 }
 
@@ -133,10 +158,16 @@ func Test_Cov6_ToString(t *testing.T) {
 	nilResult := errcore.ToString(nil)
 
 	// Act
-	actual := args.Map{"result": result, "nilResult": nilResult}
+	actual := args.Map{
+		"result": result,
+		"nilResult": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"result": "test", "nilResult": ""}
+	expected := args.Map{
+		"result": "test",
+		"nilResult": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ToString returns correct -- nil and non-nil", actual)
 }
 
@@ -147,10 +178,18 @@ func Test_Cov6_ToStringPtr(t *testing.T) {
 	nilResult := errcore.ToStringPtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "nilResultNotNil": nilResult != nil, "nilValue": *nilResult}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilResultNotNil": nilResult != nil,
+		"nilValue": *nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilResultNotNil": true, "nilValue": ""}
+	expected := args.Map{
+		"notNil": true,
+		"nilResultNotNil": true,
+		"nilValue": "",
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringPtr returns correct -- nil and non-nil", actual)
 }
 
@@ -161,10 +200,16 @@ func Test_Cov6_ToValueString(t *testing.T) {
 	nilResult := errcore.ToValueString(nil)
 
 	// Act
-	actual := args.Map{"result": result, "nilResult": nilResult}
+	actual := args.Map{
+		"result": result,
+		"nilResult": nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"result": "test", "nilResult": "<nil>"}
+	expected := args.Map{
+		"result": "test",
+		"nilResult": "<nil>",
+	}
 	expected.ShouldBeEqual(t, 0, "ToValueString returns non-empty -- with value", actual)
 }
 
@@ -183,7 +228,10 @@ func Test_Cov6_RawErrCollection(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection returns correct state -- comprehensive test", actual)
 }
 
@@ -196,10 +244,16 @@ func Test_Cov6_RawErrCollection_CombinedError(t *testing.T) {
 	emptyResult := empty.CompiledError()
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "emptyNil": emptyResult == nil}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"emptyNil": emptyResult == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "emptyNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"emptyNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.CompiledError returns correct -- with errors", actual)
 }
 
@@ -466,10 +520,16 @@ func Test_Cov6_MsgHeaderIf(t *testing.T) {
 	falseResult := errcore.MsgHeaderIf(false, "header", "msg")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "falseNotEmpty": falseResult != ""}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"falseNotEmpty": falseResult != "",
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "falseNotEmpty": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"falseNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MsgHeaderIf returns correct value -- with condition", actual)
 }
 

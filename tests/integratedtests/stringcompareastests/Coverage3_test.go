@@ -80,7 +80,10 @@ func Test_Cov3_Variant_Invalid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isInvalid": true}
+	expected := args.Map{
+		"isValid": false,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns error -- Invalid checks", actual)
 }
 
@@ -120,7 +123,10 @@ func Test_Cov3_Variant_IsAnyNamesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- IsAnyNamesOf", actual)
 }
 
@@ -132,7 +138,10 @@ func Test_Cov3_Variant_IsAnyValuesEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns non-empty -- IsAnyValuesEqual", actual)
 }
 
@@ -146,7 +155,10 @@ func Test_Cov3_Variant_IsAnyMethod(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- IsAnyMethod", actual)
 }
 
@@ -160,7 +172,10 @@ func Test_Cov3_Variant_Is(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "no": false}
+	expected := args.Map{
+		"match": true,
+		"no": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- Is", actual)
 }
 
@@ -261,10 +276,16 @@ func Test_Cov3_Variant_MinMaxAny(t *testing.T) {
 	min, max := stringcompareas.Equal.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- MinMaxAny", actual)
 }
 
@@ -304,10 +325,16 @@ func Test_Cov3_Variant_MarshalJSON(t *testing.T) {
 	data, err := stringcompareas.Equal.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasData": len(data) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasData": len(data) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasData": true, "noErr": true}
+	expected := args.Map{
+		"hasData": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- MarshalJSON", actual)
 }
 
@@ -317,10 +344,16 @@ func Test_Cov3_Variant_UnmarshalJSON(t *testing.T) {
 	err := v.UnmarshalJSON([]byte(`"Equal"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": v.Name()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": v.Name(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "Equal"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "Equal",
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- UnmarshalJSON", actual)
 }
 
@@ -329,10 +362,16 @@ func Test_Cov3_Variant_UnmarshallEnumToValue(t *testing.T) {
 	val, err := stringcompareas.Equal.UnmarshallEnumToValue([]byte(`"Equal"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": int(val)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": int(val),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": 0}
+	expected := args.Map{
+		"noErr": true,
+		"val": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- UnmarshallEnumToValue", actual)
 }
 
@@ -350,7 +389,10 @@ func Test_Cov3_Variant_IsEnumEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- IsEnumEqual", actual)
 }
 
@@ -375,10 +417,16 @@ func Test_Cov3_Variant_ToPtr(t *testing.T) {
 	ptr := stringcompareas.Equal.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "val": *ptr == stringcompareas.Equal}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"val": *ptr == stringcompareas.Equal,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": true}
+	expected := args.Map{
+		"notNil": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToPtr", actual)
 }
 
@@ -394,7 +442,11 @@ func Test_Cov3_Variant_Binders(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"basic": true, "compare": true, "byteBind": true}
+	expected := args.Map{
+		"basic": true,
+		"compare": true,
+		"byteBind": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- binder methods", actual)
 }
 
@@ -413,7 +465,10 @@ func Test_Cov3_Variant_DynamicCompare(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- DynamicCompare", actual)
 }
 
@@ -430,7 +485,10 @@ func Test_Cov3_Variant_CompareSuccessCaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- IsCompareSuccessCaseSensitive", actual)
 }
 
@@ -481,7 +539,11 @@ func Test_Cov3_Glob_IsCompareSuccess(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false, "ignoreCase": true}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+		"ignoreCase": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Glob returns correct value -- IsCompareSuccess", actual)
 }
 
@@ -493,7 +555,10 @@ func Test_Cov3_NonGlob_IsCompareSuccess(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noMatch": false, "match": true}
+	expected := args.Map{
+		"noMatch": false,
+		"match": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NonGlob returns correct value -- IsCompareSuccess", actual)
 }
 
@@ -507,7 +572,10 @@ func Test_Cov3_AnyChars_IsCompareSuccess(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "ignoreCase": true}
+	expected := args.Map{
+		"match": true,
+		"ignoreCase": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyChars returns correct value -- IsCompareSuccess", actual)
 }
 

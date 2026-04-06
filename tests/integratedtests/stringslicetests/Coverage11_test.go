@@ -108,10 +108,16 @@ func Test_Cov11_Make(t *testing.T) {
 	s := stringslice.Make(3, 5)
 
 	// Act
-	actual := args.Map{"len": len(s), "cap": cap(s)}
+	actual := args.Map{
+		"len": len(s),
+		"cap": cap(s),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "cap": 5}
+	expected := args.Map{
+		"len": 3,
+		"cap": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "Make returns correct value -- with args", actual)
 }
 
@@ -120,10 +126,16 @@ func Test_Cov11_MakePtr(t *testing.T) {
 	s := stringslice.MakePtr(3, 5)
 
 	// Act
-	actual := args.Map{"len": len(s), "cap": cap(s)}
+	actual := args.Map{
+		"len": len(s),
+		"cap": cap(s),
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "cap": 5}
+	expected := args.Map{
+		"len": 3,
+		"cap": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "MakePtr returns correct value -- with args", actual)
 }
 
@@ -156,10 +168,16 @@ func Test_Cov11_MakeDefault(t *testing.T) {
 	s := stringslice.MakeDefault(10)
 
 	// Act
-	actual := args.Map{"len": len(s), "cap": cap(s)}
+	actual := args.Map{
+		"len": len(s),
+		"cap": cap(s),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "cap": 10}
+	expected := args.Map{
+		"len": 0,
+		"cap": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "MakeDefault returns correct value -- with args", actual)
 }
 
@@ -168,10 +186,16 @@ func Test_Cov11_MakeDefaultPtr(t *testing.T) {
 	s := stringslice.MakeDefaultPtr(10)
 
 	// Act
-	actual := args.Map{"len": len(s), "cap": cap(s)}
+	actual := args.Map{
+		"len": len(s),
+		"cap": cap(s),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "cap": 10}
+	expected := args.Map{
+		"len": 0,
+		"cap": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "MakeDefaultPtr returns correct value -- with args", actual)
 }
 
@@ -184,10 +208,16 @@ func Test_Cov11_Clone_NonEmpty(t *testing.T) {
 	original[0] = "X"
 
 	// Act
-	actual := args.Map{"len": len(cloned), "first": cloned[0]}
+	actual := args.Map{
+		"len": len(cloned),
+		"first": cloned[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "Clone returns empty -- non-empty", actual)
 }
 
@@ -210,10 +240,16 @@ func Test_Cov11_ClonePtr(t *testing.T) {
 	original[0] = "X"
 
 	// Act
-	actual := args.Map{"len": len(cloned), "first": cloned[0]}
+	actual := args.Map{
+		"len": len(cloned),
+		"first": cloned[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "ClonePtr returns correct value -- with args", actual)
 }
 
@@ -234,10 +270,16 @@ func Test_Cov11_CloneUsingCap_NonEmpty(t *testing.T) {
 	cloned := stringslice.CloneUsingCap(5, []string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(cloned), "capGt": cap(cloned) >= 7}
+	actual := args.Map{
+		"len": len(cloned),
+		"capGt": cap(cloned) >= 7,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "capGt": true}
+	expected := args.Map{
+		"len": 2,
+		"capGt": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CloneUsingCap returns empty -- non-empty", actual)
 }
 
@@ -431,10 +473,16 @@ func Test_Cov11_FirstOrDefaultWith_Found(t *testing.T) {
 	result, ok := stringslice.FirstOrDefaultWith([]string{"a"}, "def")
 
 	// Act
-	actual := args.Map{"val": result, "ok": ok}
+	actual := args.Map{
+		"val": result,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "a", "ok": true}
+	expected := args.Map{
+		"val": "a",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefaultWith returns non-empty -- found", actual)
 }
 
@@ -443,10 +491,16 @@ func Test_Cov11_FirstOrDefaultWith_NotFound(t *testing.T) {
 	result, ok := stringslice.FirstOrDefaultWith(nil, "def")
 
 	// Act
-	actual := args.Map{"val": result, "ok": ok}
+	actual := args.Map{
+		"val": result,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "def", "ok": false}
+	expected := args.Map{
+		"val": "def",
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstOrDefaultWith returns non-empty -- not found", actual)
 }
 
@@ -542,10 +596,16 @@ func Test_Cov11_FirstLastDefault_Empty(t *testing.T) {
 	first, last := stringslice.FirstLastDefault(nil)
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "", "last": ""}
+	expected := args.Map{
+		"first": "",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns empty -- empty", actual)
 }
 
@@ -554,10 +614,16 @@ func Test_Cov11_FirstLastDefault_One(t *testing.T) {
 	first, last := stringslice.FirstLastDefault([]string{"a"})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": ""}
+	expected := args.Map{
+		"first": "a",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns correct value -- one", actual)
 }
 
@@ -566,10 +632,16 @@ func Test_Cov11_FirstLastDefault_Two(t *testing.T) {
 	first, last := stringslice.FirstLastDefault([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "b"}
+	expected := args.Map{
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns correct value -- two", actual)
 }
 
@@ -578,10 +650,16 @@ func Test_Cov11_FirstLastDefaultPtr_Empty(t *testing.T) {
 	first, last := stringslice.FirstLastDefaultPtr(nil)
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "", "last": ""}
+	expected := args.Map{
+		"first": "",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultPtr returns empty -- empty", actual)
 }
 
@@ -590,10 +668,16 @@ func Test_Cov11_FirstLastDefaultPtr_NonEmpty(t *testing.T) {
 	first, last := stringslice.FirstLastDefaultPtr([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "b"}
+	expected := args.Map{
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultPtr returns empty -- non-empty", actual)
 }
 
@@ -604,10 +688,18 @@ func Test_Cov11_FirstLastDefaultStatus_Empty(t *testing.T) {
 	result := stringslice.FirstLastDefaultStatus(nil)
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "hasFirst": result.HasFirst, "hasLast": result.HasLast}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"hasFirst": result.HasFirst,
+		"hasLast": result.HasLast,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "hasFirst": false, "hasLast": false}
+	expected := args.Map{
+		"valid": false,
+		"hasFirst": false,
+		"hasLast": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns empty -- empty", actual)
 }
 
@@ -616,10 +708,20 @@ func Test_Cov11_FirstLastDefaultStatus_One(t *testing.T) {
 	result := stringslice.FirstLastDefaultStatus([]string{"a"})
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "hasFirst": result.HasFirst, "hasLast": result.HasLast, "first": result.First}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"hasFirst": result.HasFirst,
+		"hasLast": result.HasLast,
+		"first": result.First,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "hasFirst": true, "hasLast": false, "first": "a"}
+	expected := args.Map{
+		"valid": false,
+		"hasFirst": true,
+		"hasLast": false,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns correct value -- one", actual)
 }
 
@@ -628,10 +730,18 @@ func Test_Cov11_FirstLastDefaultStatus_Two(t *testing.T) {
 	result := stringslice.FirstLastDefaultStatus([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "hasFirst": result.HasFirst, "hasLast": result.HasLast}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"hasFirst": result.HasFirst,
+		"hasLast": result.HasLast,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "hasFirst": true, "hasLast": true}
+	expected := args.Map{
+		"valid": true,
+		"hasFirst": true,
+		"hasLast": true,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns correct value -- two", actual)
 }
 
@@ -664,10 +774,18 @@ func Test_Cov11_InvalidFirstLastStatus(t *testing.T) {
 	result := stringslice.InvalidFirstLastStatus()
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "first": result.First, "last": result.Last}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"first": result.First,
+		"last": result.Last,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "first": "", "last": ""}
+	expected := args.Map{
+		"valid": false,
+		"first": "",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidFirstLastStatus returns error -- with args", actual)
 }
 
@@ -676,10 +794,18 @@ func Test_Cov11_InvalidFirstLastStatusForLast(t *testing.T) {
 	result := stringslice.InvalidFirstLastStatusForLast("x")
 
 	// Act
-	actual := args.Map{"hasFirst": result.HasFirst, "hasLast": result.HasLast, "first": result.First}
+	actual := args.Map{
+		"hasFirst": result.HasFirst,
+		"hasLast": result.HasLast,
+		"first": result.First,
+	}
 
 	// Assert
-	expected := args.Map{"hasFirst": true, "hasLast": false, "first": "x"}
+	expected := args.Map{
+		"hasFirst": true,
+		"hasLast": false,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidFirstLastStatusForLast returns error -- with args", actual)
 }
 
@@ -701,10 +827,18 @@ func Test_Cov11_IndexesDefault_NonEmpty(t *testing.T) {
 	result := stringslice.IndexesDefault([]string{"a", "b", "c"}, 0, 2)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "second": "c"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"second": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "IndexesDefault returns empty -- non-empty", actual)
 }
 
@@ -727,10 +861,16 @@ func Test_Cov11_InvalidIndexValuesDetail(t *testing.T) {
 	result := stringslice.InvalidIndexValuesDetail()
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "missing": result.IsAnyMissing}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"missing": result.IsAnyMissing,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "missing": true}
+	expected := args.Map{
+		"valid": false,
+		"missing": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidIndexValuesDetail returns error -- with args", actual)
 }
 
@@ -887,10 +1027,16 @@ func Test_Cov11_SafeIndexes_Valid(t *testing.T) {
 	result := stringslice.SafeIndexes([]string{"a", "b", "c"}, 0, 2)
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "c"}
+	expected := args.Map{
+		"first": "a",
+		"second": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexes returns non-empty -- valid", actual)
 }
 
@@ -899,10 +1045,16 @@ func Test_Cov11_SafeIndexes_OutOfRange(t *testing.T) {
 	result := stringslice.SafeIndexes([]string{"a"}, 0, 5)
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": ""}
+	expected := args.Map{
+		"first": "a",
+		"second": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexes returns correct value -- out of range", actual)
 }
 
@@ -923,10 +1075,16 @@ func Test_Cov11_SafeIndexesPtr_NonEmpty(t *testing.T) {
 	result := stringslice.SafeIndexesPtr([]string{"a", "b"}, 0, 1)
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesPtr returns empty -- non-empty", actual)
 }
 
@@ -947,10 +1105,18 @@ func Test_Cov11_SafeIndexesDefaultWithDetail_Valid(t *testing.T) {
 	result := stringslice.SafeIndexesDefaultWithDetail([]string{"a", "b", "c"}, 0, 2)
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "missing": result.IsAnyMissing, "len": len(result.Values)}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"missing": result.IsAnyMissing,
+		"len": len(result.Values),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "missing": false, "len": 2}
+	expected := args.Map{
+		"valid": true,
+		"missing": false,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesDefaultWithDetail returns non-empty -- valid", actual)
 }
 
@@ -959,10 +1125,18 @@ func Test_Cov11_SafeIndexesDefaultWithDetail_WithMissing(t *testing.T) {
 	result := stringslice.SafeIndexesDefaultWithDetail([]string{"a"}, 0, 5)
 
 	// Act
-	actual := args.Map{"valid": result.IsValid, "missing": result.IsAnyMissing, "missingLen": len(result.MissingIndexes)}
+	actual := args.Map{
+		"valid": result.IsValid,
+		"missing": result.IsAnyMissing,
+		"missingLen": len(result.MissingIndexes),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "missing": true, "missingLen": 1}
+	expected := args.Map{
+		"valid": true,
+		"missing": true,
+		"missingLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesDefaultWithDetail returns non-empty -- with missing", actual)
 }
 
@@ -985,10 +1159,18 @@ func Test_Cov11_SafeIndexRanges_Valid(t *testing.T) {
 	result := stringslice.SafeIndexRanges([]string{"a", "b", "c", "d"}, 1, 3)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "b", "last": "d"}
+	expected := args.Map{
+		"len": 3,
+		"first": "b",
+		"last": "d",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexRanges returns non-empty -- valid", actual)
 }
 
@@ -1009,10 +1191,18 @@ func Test_Cov11_SafeIndexRanges_OutOfRange(t *testing.T) {
 	result := stringslice.SafeIndexRanges([]string{"a", "b"}, 0, 5)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 6, "first": "a", "second": "b"}
+	expected := args.Map{
+		"len": 6,
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexRanges returns empty -- out of range pads empty", actual)
 }
 
@@ -1021,10 +1211,16 @@ func Test_Cov11_SafeIndexRanges_EmptySlice(t *testing.T) {
 	result := stringslice.SafeIndexRanges(nil, 0, 0)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": ""}
+	expected := args.Map{
+		"len": 1,
+		"first": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexRanges returns empty -- empty slice", actual)
 }
 
@@ -1035,10 +1231,16 @@ func Test_Cov11_SafeRangeItems_Valid(t *testing.T) {
 	result := stringslice.SafeRangeItems([]string{"a", "b", "c"}, 0, 2)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeRangeItems returns non-empty -- valid", actual)
 }
 
@@ -1083,10 +1285,18 @@ func Test_Cov11_SafeRangeItems_EndGtLastIndex(t *testing.T) {
 	result := stringslice.SafeRangeItems([]string{"a", "b", "c"}, 0, -1)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "second": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeRangeItems returns correct value -- end=-1 clips to lastIndex", actual)
 }
 
@@ -1185,10 +1395,16 @@ func Test_Cov11_InPlaceReverse_Two(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "second": (*result)[1]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"second": (*result)[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "b", "second": "a"}
+	expected := args.Map{
+		"first": "b",
+		"second": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse returns correct value -- two", actual)
 }
 
@@ -1198,10 +1414,16 @@ func Test_Cov11_InPlaceReverse_Three(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse returns correct value -- three", actual)
 }
 
@@ -1212,10 +1434,18 @@ func Test_Cov11_MergeNew(t *testing.T) {
 	result := stringslice.MergeNew([]string{"a"}, "b", "c")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns correct value -- with args", actual)
 }
 
@@ -1224,10 +1454,16 @@ func Test_Cov11_MergeNew_EmptyFirst(t *testing.T) {
 	result := stringslice.MergeNew(nil, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns empty -- empty first", actual)
 }
 
@@ -1236,10 +1472,16 @@ func Test_Cov11_MergeNew_EmptyAdditional(t *testing.T) {
 	result := stringslice.MergeNew([]string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns empty -- empty additional", actual)
 }
 
@@ -1322,10 +1564,16 @@ func Test_Cov11_AppendLineNew(t *testing.T) {
 	result := stringslice.AppendLineNew([]string{"a"}, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendLineNew returns correct value -- with args", actual)
 }
 
@@ -1334,10 +1582,16 @@ func Test_Cov11_PrependLineNew(t *testing.T) {
 	result := stringslice.PrependLineNew("x", []string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "x"}
+	expected := args.Map{
+		"len": 2,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependLineNew returns correct value -- with args", actual)
 }
 
@@ -1346,10 +1600,18 @@ func Test_Cov11_PrependNew(t *testing.T) {
 	result := stringslice.PrependNew([]string{"a"}, "x", "y")
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "x", "last": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "x",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew returns correct value -- with args", actual)
 }
 
@@ -1358,10 +1620,16 @@ func Test_Cov11_PrependNew_EmptyPrepend(t *testing.T) {
 	result := stringslice.PrependNew([]string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew returns empty -- empty prepend", actual)
 }
 
@@ -1370,10 +1638,16 @@ func Test_Cov11_PrependNew_EmptySlice(t *testing.T) {
 	result := stringslice.PrependNew(nil, "x")
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "x"}
+	expected := args.Map{
+		"len": 1,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew returns empty -- empty slice", actual)
 }
 
@@ -1884,10 +2158,18 @@ func Test_Cov11_TrimmedEachWords(t *testing.T) {
 	result := stringslice.TrimmedEachWords([]string{"  a  ", " ", "  b  "})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "second": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "TrimmedEachWords returns correct value -- with args", actual)
 }
 
@@ -1999,10 +2281,18 @@ func Test_Cov11_SplitContentsByWhitespace(t *testing.T) {
 	result := stringslice.SplitContentsByWhitespace("hello  world   test")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "hello", "last": "test"}
+	expected := args.Map{
+		"len": 3,
+		"first": "hello",
+		"last": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitContentsByWhitespace returns correct value -- with args", actual)
 }
 
@@ -2013,10 +2303,16 @@ func Test_Cov11_SplitTrimmedNonEmpty(t *testing.T) {
 	result := stringslice.SplitTrimmedNonEmpty(" a , b , c ", ",", -1)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmpty returns empty -- with args", actual)
 }
 
@@ -2025,10 +2321,16 @@ func Test_Cov11_SplitTrimmedNonEmptyAll(t *testing.T) {
 	result := stringslice.SplitTrimmedNonEmptyAll(" a , b , c ", ",")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmptyAll returns empty -- with args", actual)
 }
 
@@ -2040,10 +2342,16 @@ func Test_Cov11_RegexTrimmedSplitNonEmptyAll(t *testing.T) {
 	result := stringslice.RegexTrimmedSplitNonEmptyAll(re, " a , b ; c ")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "RegexTrimmedSplitNonEmptyAll returns empty -- with args", actual)
 }
 
@@ -2144,10 +2452,16 @@ func Test_Cov11_ProcessAsync(t *testing.T) {
 	}, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "x"}
+	expected := args.Map{
+		"len": 2,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "ProcessAsync returns correct value -- with args", actual)
 }
 
@@ -2218,10 +2532,16 @@ func Test_Cov11_LinesProcess(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a!"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesProcess returns correct value -- with args", actual)
 }
 
@@ -2275,10 +2595,16 @@ func Test_Cov11_LinesSimpleProcess(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesSimpleProcess returns correct value -- with args", actual)
 }
 
@@ -2330,10 +2656,16 @@ func Test_Cov11_LinesAsyncProcess(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesAsyncProcess returns correct value -- with args", actual)
 }
 

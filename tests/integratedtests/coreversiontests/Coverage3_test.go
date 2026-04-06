@@ -72,7 +72,10 @@ func Test_Cov3_Version_IsVersionCompareEqual_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bothEmpty": true, "nilNonEmpty": false}
+	expected := args.Map{
+		"bothEmpty": true,
+		"nilNonEmpty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsVersionCompareEqual returns nil -- nil", actual)
 }
 
@@ -254,10 +257,16 @@ func Test_Cov3_VersionsCollection_NilReceiver(t *testing.T) {
 	var vc *coreversion.VersionsCollection
 
 	// Act
-	actual := args.Map{"length": vc.Length(), "isEmpty": vc.IsEmpty()}
+	actual := args.Map{
+		"length": vc.Length(),
+		"isEmpty": vc.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"length": 0, "isEmpty": true}
+	expected := args.Map{
+		"length": 0,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "VersionsCollection returns nil -- nil receiver", actual)
 }
 
@@ -298,8 +307,14 @@ func Test_Cov3_VersionsCollection_JsonParseSelfInject(t *testing.T) {
 	err := vc2.JsonParseSelfInject(j)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "len": vc2.Length()}
-	expected := args.Map{"noErr": true, "len": 1}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": vc2.Length(),
+	}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "VersionsCollection returns correct value -- JsonParseSelfInject", actual)
 }
 
@@ -314,7 +329,10 @@ func Test_Cov3_VersionsCollection_AsBinderInterfaces(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jsonBinder": true, "sliceBinder": true}
+	expected := args.Map{
+		"jsonBinder": true,
+		"sliceBinder": true,
+	}
 	expected.ShouldBeEqual(t, 0, "VersionsCollection returns correct value -- AsBinderInterfaces", actual)
 }
 

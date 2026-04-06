@@ -8,7 +8,10 @@ import (
 var instanceStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "Instance String returns non-empty",
-		ArrangeInput:  args.Map{"name": "key", "value": "val"},
+		ArrangeInput:  args.Map{
+			"name": "key",
+			"value": "val",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -16,7 +19,10 @@ var instanceStringTestCases = []coretestcases.CaseV1{
 var instanceJsonStringTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "Instance JsonString returns non-empty",
-		ArrangeInput:  args.Map{"name": "key", "value": "val"},
+		ArrangeInput:  args.Map{
+			"name": "key",
+			"value": "val",
+		},
 		ExpectedInput: args.Map{"notEmpty": true},
 	},
 }
@@ -24,8 +30,14 @@ var instanceJsonStringTestCases = []coretestcases.CaseV1{
 var instanceDisposeTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "Instance Dispose clears values",
-		ArrangeInput:  args.Map{"name": "key", "value": "val"},
-		ExpectedInput: args.Map{"nameEmpty": true, "valueEmpty": true},
+		ArrangeInput:  args.Map{
+			"name": "key",
+			"value": "val",
+		},
+		ExpectedInput: args.Map{
+			"nameEmpty": true,
+			"valueEmpty": true,
+		},
 	},
 }
 

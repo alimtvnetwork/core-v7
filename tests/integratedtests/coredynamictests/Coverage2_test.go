@@ -172,10 +172,16 @@ func Test_Cov2_TypedDynamic_ToDynamic(t *testing.T) {
 	dyn := d.ToDynamic()
 
 	// Act
-	actual := args.Map{"dynValid": dyn.IsValid(), "dynData": dyn.Data()}
+	actual := args.Map{
+		"dynValid": dyn.IsValid(),
+		"dynData": dyn.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"dynValid": true, "dynData": "hello"}
+	expected := args.Map{
+		"dynValid": true,
+		"dynData": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ToDynamic returns expected -- valid", actual)
 }
 
@@ -185,10 +191,18 @@ func Test_Cov2_TypedDynamic_Deserialize(t *testing.T) {
 	err := d.Deserialize([]byte(`"hello"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "data": d.Data(), "valid": d.IsValid()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"data": d.Data(),
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "data": "hello", "valid": true}
+	expected := args.Map{
+		"hasErr": false,
+		"data": "hello",
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize sets data -- valid JSON", actual)
 }
 
@@ -198,10 +212,16 @@ func Test_Cov2_TypedDynamic_UnmarshalJSON(t *testing.T) {
 	err := d.UnmarshalJSON([]byte(`"world"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "data": d.Data()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"data": d.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "data": "world"}
+	expected := args.Map{
+		"hasErr": false,
+		"data": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic UnmarshalJSON sets data -- valid JSON", actual)
 }
 
@@ -212,11 +232,19 @@ func Test_Cov2_TypedDynamic_JsonResult(t *testing.T) {
 	jp := d.JsonPtr()
 
 	// Act
-	actual := args.Map{"jrNotNil": true, "jpNotNil": jp != nil, "jsonNotNil": d.Json().Bytes != nil}
+	actual := args.Map{
+		"jrNotNil": true,
+		"jpNotNil": jp != nil,
+		"jsonNotNil": d.Json().Bytes != nil,
+	}
 	_ = jr
 
 	// Assert
-	expected := args.Map{"jrNotNil": true, "jpNotNil": true, "jsonNotNil": true}
+	expected := args.Map{
+		"jrNotNil": true,
+		"jpNotNil": true,
+		"jsonNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonResult returns non-nil -- valid", actual)
 }
 
@@ -226,10 +254,16 @@ func Test_Cov2_TypedDynamic_BytesNonByteType(t *testing.T) {
 	bytes, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "hasBytes": len(bytes) > 0}
+	actual := args.Map{
+		"ok": ok,
+		"hasBytes": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "hasBytes": true}
+	expected := args.Map{
+		"ok": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Bytes marshals non-byte type -- int", actual)
 }
 
@@ -563,7 +597,12 @@ func Test_Cov2_LengthOfReflect(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"slice": 3, "array": 2, "map": 1, "int": 0}
+	expected := args.Map{
+		"slice": 3,
+		"array": 2,
+		"map": 1,
+		"int": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "LengthOfReflect returns expected -- various kinds", actual)
 }
 
@@ -583,7 +622,10 @@ func Test_Cov2_BytesConverter_SafeCastString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"safe": "hello", "safeEmpty": ""}
+	expected := args.Map{
+		"safe": "hello",
+		"safeEmpty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter SafeCastString returns expected -- valid and empty", actual)
 }
 
@@ -600,7 +642,11 @@ func Test_Cov2_BytesConverter_CastString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "hasErr": false, "emptyHasErr": true}
+	expected := args.Map{
+		"val": "hello",
+		"hasErr": false,
+		"emptyHasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString returns expected -- valid and empty", actual)
 }
 
@@ -610,10 +656,16 @@ func Test_Cov2_BytesConverter_ToBool(t *testing.T) {
 	val, err := bc.ToBool()
 
 	// Act
-	actual := args.Map{"val": val, "hasErr": err != nil}
+	actual := args.Map{
+		"val": val,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "hasErr": false}
+	expected := args.Map{
+		"val": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToBool returns true -- valid", actual)
 }
 
@@ -635,10 +687,16 @@ func Test_Cov2_BytesConverter_ToString(t *testing.T) {
 	val, err := bc.ToString()
 
 	// Act
-	actual := args.Map{"val": val, "hasErr": err != nil}
+	actual := args.Map{
+		"val": val,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "hasErr": false}
+	expected := args.Map{
+		"val": "hello",
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToString returns expected -- valid JSON string", actual)
 }
 
@@ -660,10 +718,16 @@ func Test_Cov2_BytesConverter_ToStrings(t *testing.T) {
 	val, err := bc.ToStrings()
 
 	// Act
-	actual := args.Map{"len": len(val), "hasErr": err != nil}
+	actual := args.Map{
+		"len": len(val),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasErr": false}
+	expected := args.Map{
+		"len": 2,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToStrings returns expected -- valid", actual)
 }
 
@@ -686,10 +750,16 @@ func Test_Cov2_BytesConverter_ToInt64(t *testing.T) {
 	val, err := bc.ToInt64()
 
 	// Act
-	actual := args.Map{"val": int(val), "hasErr": err != nil}
+	actual := args.Map{
+		"val": int(val),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "hasErr": false}
+	expected := args.Map{
+		"val": 42,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter ToInt64 returns expected -- valid", actual)
 }
 
@@ -712,10 +782,16 @@ func Test_Cov2_BytesConverter_Deserialize(t *testing.T) {
 	err := bc.Deserialize(&result)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "result": result}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"result": result,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "result": "hello"}
+	expected := args.Map{
+		"hasErr": false,
+		"result": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter Deserialize returns expected -- valid", actual)
 }
 
@@ -743,10 +819,16 @@ func Test_Cov2_Dynamic_MapToKeyVal(t *testing.T) {
 	kv, err := d.MapToKeyVal()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": kv != nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": kv != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic MapToKeyVal returns no error -- valid map", actual)
 }
 
@@ -756,10 +838,16 @@ func Test_Cov2_Dynamic_ItemReflectValue(t *testing.T) {
 	rv := d.ItemReflectValueUsingIndex(0)
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "val": rv.Interface()}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"val": rv.Interface(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": "a"}
+	expected := args.Map{
+		"valid": true,
+		"val": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemReflectValueUsingIndex returns expected -- index 0", actual)
 }
 
@@ -769,10 +857,16 @@ func Test_Cov2_Dynamic_ItemReflectValueUsingKey(t *testing.T) {
 	rv := d.ItemReflectValueUsingKey("x")
 
 	// Act
-	actual := args.Map{"valid": rv.IsValid(), "val": int(rv.Int())}
+	actual := args.Map{
+		"valid": rv.IsValid(),
+		"val": int(rv.Int()),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": 99}
+	expected := args.Map{
+		"valid": true,
+		"val": 99,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic ItemReflectValueUsingKey returns expected -- key x", actual)
 }
 
@@ -784,10 +878,16 @@ func Test_Cov2_Dynamic_Json_Deserialize(t *testing.T) {
 	_, nilErr := nilD.Deserialize(nil)
 
 	// Act
-	actual := args.Map{"err": err != nil, "nilErr": nilErr != nil}
+	actual := args.Map{
+		"err": err != nil,
+		"nilErr": nilErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"err": true, "nilErr": true}
+	expected := args.Map{
+		"err": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Deserialize returns expected -- valid and nil", actual)
 }
 
@@ -799,10 +899,16 @@ func Test_Cov2_Dynamic_UnmarshalJSON(t *testing.T) {
 	nilErr := nilD.UnmarshalJSON(nil)
 
 	// Act
-	actual := args.Map{"err": err != nil, "nilErr": nilErr != nil}
+	actual := args.Map{
+		"err": err != nil,
+		"nilErr": nilErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"err": true, "nilErr": true}
+	expected := args.Map{
+		"err": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic UnmarshalJSON returns expected -- valid and nil", actual)
 }
 
@@ -826,10 +932,16 @@ func Test_Cov2_Dynamic_JsonPtr(t *testing.T) {
 	j := d.Json()
 
 	// Act
-	actual := args.Map{"jpNotNil": jp != nil, "jNotNil": j.Bytes != nil}
+	actual := args.Map{
+		"jpNotNil": jp != nil,
+		"jNotNil": j.Bytes != nil,
+	}
 
 	// Assert
-	expected := args.Map{"jpNotNil": true, "jNotNil": true}
+	expected := args.Map{
+		"jpNotNil": true,
+		"jNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Dynamic Json/JsonPtr returns non-nil -- valid", actual)
 }
 
@@ -898,7 +1010,10 @@ func Test_Cov2_IsAnyTypesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyTypesOf returns expected -- match and no match", actual)
 }
 

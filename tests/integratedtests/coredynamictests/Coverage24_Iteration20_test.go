@@ -57,10 +57,16 @@ func Test_I20_TypeStatus_IsNotSame(t *testing.T) {
 	ts := coredynamic.TypeStatus{IsSame: false}
 
 	// Act
-	actual := args.Map{"notSame": ts.IsNotSame(), "notEqual": ts.IsNotEqualTypes()}
+	actual := args.Map{
+		"notSame": ts.IsNotSame(),
+		"notEqual": ts.IsNotEqualTypes(),
+	}
 
 	// Assert
-	expected := args.Map{"notSame": true, "notEqual": true}
+	expected := args.Map{
+		"notSame": true,
+		"notEqual": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsNotSame", actual)
 }
 
@@ -69,10 +75,16 @@ func Test_I20_TypeStatus_IsAnyPointer(t *testing.T) {
 	ts := coredynamic.TypeStatus{IsLeftPointer: true}
 
 	// Act
-	actual := args.Map{"any": ts.IsAnyPointer(), "both": ts.IsBothPointer()}
+	actual := args.Map{
+		"any": ts.IsAnyPointer(),
+		"both": ts.IsBothPointer(),
+	}
 
 	// Assert
-	expected := args.Map{"any": true, "both": false}
+	expected := args.Map{
+		"any": true,
+		"both": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- IsAnyPointer", actual)
 }
 
@@ -169,10 +181,16 @@ func Test_I20_TypeStatus_LeftName(t *testing.T) {
 	ts := coredynamic.TypeStatus{Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
 	// Act
-	actual := args.Map{"left": ts.LeftName(), "right": ts.RightName()}
+	actual := args.Map{
+		"left": ts.LeftName(),
+		"right": ts.RightName(),
+	}
 
 	// Assert
-	expected := args.Map{"left": "string", "right": "int"}
+	expected := args.Map{
+		"left": "string",
+		"right": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- LeftName/RightName", actual)
 }
 
@@ -181,10 +199,16 @@ func Test_I20_TypeStatus_LeftFullName(t *testing.T) {
 	ts := coredynamic.TypeStatus{Left: reflect.TypeOf(""), Right: reflect.TypeOf(0)}
 
 	// Act
-	actual := args.Map{"left": ts.LeftFullName(), "right": ts.RightFullName()}
+	actual := args.Map{
+		"left": ts.LeftFullName(),
+		"right": ts.RightFullName(),
+	}
 
 	// Assert
-	expected := args.Map{"left": "string", "right": "int"}
+	expected := args.Map{
+		"left": "string",
+		"right": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- LeftFullName/RightFullName", actual)
 }
 
@@ -430,10 +454,16 @@ func Test_I20_TypedDynamic_GetAsString(t *testing.T) {
 	val, ok := td.GetAsString()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsString", actual)
 }
 
@@ -443,10 +473,16 @@ func Test_I20_TypedDynamic_GetAsInt(t *testing.T) {
 	val, ok := td.GetAsInt()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsInt", actual)
 }
 
@@ -456,10 +492,16 @@ func Test_I20_TypedDynamic_GetAsInt64(t *testing.T) {
 	val, ok := td.GetAsInt64()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": int64(99), "ok": true}
+	expected := args.Map{
+		"val": int64(99),
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsInt64", actual)
 }
 
@@ -469,10 +511,16 @@ func Test_I20_TypedDynamic_GetAsUint(t *testing.T) {
 	val, ok := td.GetAsUint()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": uint(7), "ok": true}
+	expected := args.Map{
+		"val": uint(7),
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsUint", actual)
 }
 
@@ -482,10 +530,16 @@ func Test_I20_TypedDynamic_GetAsFloat64(t *testing.T) {
 	val, ok := td.GetAsFloat64()
 
 	// Act
-	actual := args.Map{"ok": ok, "close": val > 3.0}
+	actual := args.Map{
+		"ok": ok,
+		"close": val > 3.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "close": true}
+	expected := args.Map{
+		"ok": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsFloat64", actual)
 }
 
@@ -495,10 +549,16 @@ func Test_I20_TypedDynamic_GetAsFloat32(t *testing.T) {
 	val, ok := td.GetAsFloat32()
 
 	// Act
-	actual := args.Map{"ok": ok, "close": val > 1.0}
+	actual := args.Map{
+		"ok": ok,
+		"close": val > 1.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "close": true}
+	expected := args.Map{
+		"ok": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsFloat32", actual)
 }
 
@@ -508,10 +568,16 @@ func Test_I20_TypedDynamic_GetAsBool(t *testing.T) {
 	val, ok := td.GetAsBool()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsBool", actual)
 }
 
@@ -521,10 +587,16 @@ func Test_I20_TypedDynamic_GetAsBytes(t *testing.T) {
 	val, ok := td.GetAsBytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsBytes", actual)
 }
 
@@ -534,10 +606,16 @@ func Test_I20_TypedDynamic_GetAsStrings(t *testing.T) {
 	val, ok := td.GetAsStrings()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- GetAsStrings", actual)
 }
 
@@ -619,10 +697,16 @@ func Test_I20_TypedDynamic_Clone(t *testing.T) {
 	cloned := td.Clone()
 
 	// Act
-	actual := args.Map{"valid": cloned.IsValid(), "val": cloned.Data()}
+	actual := args.Map{
+		"valid": cloned.IsValid(),
+		"val": cloned.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": "hello"}
+	expected := args.Map{
+		"valid": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Clone", actual)
 }
 
@@ -632,10 +716,16 @@ func Test_I20_TypedDynamic_ClonePtr(t *testing.T) {
 	cloned := td.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "val": cloned.Data()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"val": cloned.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": "hello"}
+	expected := args.Map{
+		"notNil": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ClonePtr", actual)
 }
 
@@ -670,10 +760,16 @@ func Test_I20_TypedDynamic_Deserialize(t *testing.T) {
 	err := td.Deserialize([]byte(`"world"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": td.Data()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": td.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "world"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Deserialize", actual)
 }
 
@@ -696,10 +792,16 @@ func Test_I20_TypedDynamic_Bytes_AsBytes(t *testing.T) {
 	b, ok := td.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(b)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(b),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes as bytes", actual)
 }
 
@@ -709,10 +811,16 @@ func Test_I20_TypedDynamic_Bytes_Marshal(t *testing.T) {
 	b, ok := td.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"ok": ok,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "hasBytes": true}
+	expected := args.Map{
+		"ok": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes marshal", actual)
 }
 
@@ -759,10 +867,16 @@ func Test_I20_TypedDynamic_ValueMarshal(t *testing.T) {
 	b, err := td.ValueMarshal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- ValueMarshal", actual)
 }
 
@@ -772,10 +886,16 @@ func Test_I20_TypedDynamic_MarshalJSON(t *testing.T) {
 	b, err := td.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- MarshalJSON", actual)
 }
 
@@ -785,10 +905,16 @@ func Test_I20_TypedDynamic_UnmarshalJSON(t *testing.T) {
 	err := td.UnmarshalJSON([]byte(`"abc"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "valid": td.IsValid()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"valid": td.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "valid": true}
+	expected := args.Map{
+		"noErr": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- UnmarshalJSON", actual)
 }
 
@@ -802,10 +928,16 @@ func Test_I20_TypedSimpleRequest_Clone(t *testing.T) {
 	cloned := sr.Clone()
 
 	// Act
-	actual := args.Map{"valid": cloned.IsValid(), "val": cloned.Data()}
+	actual := args.Map{
+		"valid": cloned.IsValid(),
+		"val": cloned.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": "hello"}
+	expected := args.Map{
+		"valid": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- Clone", actual)
 }
 
@@ -828,10 +960,16 @@ func Test_I20_TypedSimpleRequest_ToTypedDynamic(t *testing.T) {
 	td := sr.ToTypedDynamic()
 
 	// Act
-	actual := args.Map{"valid": td.IsValid(), "val": td.Data()}
+	actual := args.Map{
+		"valid": td.IsValid(),
+		"val": td.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": "hello"}
+	expected := args.Map{
+		"valid": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- ToTypedDynamic", actual)
 }
 
@@ -854,10 +992,16 @@ func Test_I20_TypedSimpleRequest_GetAsString(t *testing.T) {
 	val, ok := sr.GetAsString()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsString", actual)
 }
 
@@ -867,10 +1011,16 @@ func Test_I20_TypedSimpleRequest_GetAsInt(t *testing.T) {
 	val, ok := sr.GetAsInt()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsInt", actual)
 }
 
@@ -881,10 +1031,16 @@ func Test_I20_TypedSimpleRequest_InvalidError_Cached(t *testing.T) {
 	e2 := sr.InvalidError()
 
 	// Act
-	actual := args.Map{"same": e1 == e2, "hasErr": e1 != nil}
+	actual := args.Map{
+		"same": e1 == e2,
+		"hasErr": e1 != nil,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "hasErr": true}
+	expected := args.Map{
+		"same": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns error -- InvalidError cached", actual)
 }
 
@@ -894,10 +1050,16 @@ func Test_I20_TypedSimpleRequest_JsonBytes(t *testing.T) {
 	b, err := sr.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- JsonBytes", actual)
 }
 
@@ -935,10 +1097,16 @@ func Test_I20_TypedSimpleResult_Clone(t *testing.T) {
 	cloned := sr.Clone()
 
 	// Act
-	actual := args.Map{"valid": cloned.IsValid(), "val": cloned.Data()}
+	actual := args.Map{
+		"valid": cloned.IsValid(),
+		"val": cloned.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "val": "ok"}
+	expected := args.Map{
+		"valid": true,
+		"val": "ok",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- Clone", actual)
 }
 
@@ -948,10 +1116,16 @@ func Test_I20_TypedSimpleResult_ClonePtr(t *testing.T) {
 	cloned := sr.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": cloned != nil, "val": cloned.Data()}
+	actual := args.Map{
+		"notNil": cloned != nil,
+		"val": cloned.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": "ok"}
+	expected := args.Map{
+		"notNil": true,
+		"val": "ok",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- ClonePtr", actual)
 }
 
@@ -1001,10 +1175,16 @@ func Test_I20_TypedSimpleResult_InvalidError_Cached(t *testing.T) {
 	e2 := sr.InvalidError()
 
 	// Act
-	actual := args.Map{"same": e1 == e2, "hasErr": e1 != nil}
+	actual := args.Map{
+		"same": e1 == e2,
+		"hasErr": e1 != nil,
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "hasErr": true}
+	expected := args.Map{
+		"same": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns error -- InvalidError cached", actual)
 }
 
@@ -1014,10 +1194,16 @@ func Test_I20_TypedSimpleResult_GetAsString(t *testing.T) {
 	val, ok := sr.GetAsString()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "ok", "ok": true}
+	expected := args.Map{
+		"val": "ok",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsString", actual)
 }
 
@@ -1027,10 +1213,16 @@ func Test_I20_TypedSimpleResult_GetAsFloat64(t *testing.T) {
 	val, ok := sr.GetAsFloat64()
 
 	// Act
-	actual := args.Map{"ok": ok, "close": val > 3.0}
+	actual := args.Map{
+		"ok": ok,
+		"close": val > 3.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "close": true}
+	expected := args.Map{
+		"ok": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsFloat64", actual)
 }
 
@@ -1040,10 +1232,16 @@ func Test_I20_TypedSimpleResult_GetAsBool(t *testing.T) {
 	val, ok := sr.GetAsBool()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsBool", actual)
 }
 
@@ -1053,10 +1251,16 @@ func Test_I20_TypedSimpleResult_JsonBytes(t *testing.T) {
 	b, err := sr.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- JsonBytes", actual)
 }
 
@@ -1078,10 +1282,16 @@ func Test_I20_TypedSimpleResult_InvalidNoMessage(t *testing.T) {
 	sr := coredynamic.InvalidTypedSimpleResultNoMessage[string]()
 
 	// Act
-	actual := args.Map{"invalid": sr.IsInvalid(), "msg": sr.Message()}
+	actual := args.Map{
+		"invalid": sr.IsInvalid(),
+		"msg": sr.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"invalid": true, "msg": ""}
+	expected := args.Map{
+		"invalid": true,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns error -- InvalidNoMessage", actual)
 }
 
@@ -1090,10 +1300,16 @@ func Test_I20_TypedSimpleRequest_InvalidNoMessage(t *testing.T) {
 	sr := coredynamic.InvalidTypedSimpleRequestNoMessage[string]()
 
 	// Act
-	actual := args.Map{"invalid": sr.IsInvalid(), "msg": sr.Message()}
+	actual := args.Map{
+		"invalid": sr.IsInvalid(),
+		"msg": sr.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"invalid": true, "msg": ""}
+	expected := args.Map{
+		"invalid": true,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns error -- InvalidNoMessage", actual)
 }
 
@@ -1138,10 +1354,16 @@ func Test_I20_TypedDynamic_InvalidPtr(t *testing.T) {
 	td := coredynamic.InvalidTypedDynamicPtr[string]()
 
 	// Act
-	actual := args.Map{"invalid": td.IsInvalid(), "notNil": td != nil}
+	actual := args.Map{
+		"invalid": td.IsInvalid(),
+		"notNil": td != nil,
+	}
 
 	// Assert
-	expected := args.Map{"invalid": true, "notNil": true}
+	expected := args.Map{
+		"invalid": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns error -- InvalidPtr", actual)
 }
 
@@ -1163,10 +1385,16 @@ func Test_I20_TypedDynamic_JsonBytes(t *testing.T) {
 	b, err := td.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonBytes", actual)
 }
 
@@ -1189,10 +1417,16 @@ func Test_I20_TypedDynamic_JsonString(t *testing.T) {
 	s, err := td.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- JsonString", actual)
 }
 
@@ -1228,10 +1462,16 @@ func Test_I20_TypedSimpleResult_MarshalJSON(t *testing.T) {
 	b, err := sr.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- MarshalJSON", actual)
 }
 
@@ -1241,10 +1481,16 @@ func Test_I20_TypedSimpleRequest_MarshalJSON(t *testing.T) {
 	b, err := sr.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- MarshalJSON", actual)
 }
 
@@ -1254,10 +1500,16 @@ func Test_I20_TypedSimpleResult_GetAsBytes(t *testing.T) {
 	val, ok := sr.GetAsBytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsBytes", actual)
 }
 
@@ -1267,10 +1519,16 @@ func Test_I20_TypedSimpleResult_GetAsStrings(t *testing.T) {
 	val, ok := sr.GetAsStrings()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsStrings", actual)
 }
 
@@ -1280,10 +1538,16 @@ func Test_I20_TypedSimpleRequest_GetAsBytes(t *testing.T) {
 	val, ok := sr.GetAsBytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 1}
+	expected := args.Map{
+		"ok": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsBytes", actual)
 }
 
@@ -1293,10 +1557,16 @@ func Test_I20_TypedSimpleRequest_GetAsStrings(t *testing.T) {
 	val, ok := sr.GetAsStrings()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(val)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsStrings", actual)
 }
 
@@ -1306,10 +1576,16 @@ func Test_I20_TypedSimpleRequest_GetAsInt64(t *testing.T) {
 	val, ok := sr.GetAsInt64()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": int64(77), "ok": true}
+	expected := args.Map{
+		"val": int64(77),
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsInt64", actual)
 }
 
@@ -1319,10 +1595,16 @@ func Test_I20_TypedSimpleRequest_GetAsFloat64(t *testing.T) {
 	val, ok := sr.GetAsFloat64()
 
 	// Act
-	actual := args.Map{"ok": ok, "close": val > 1.0}
+	actual := args.Map{
+		"ok": ok,
+		"close": val > 1.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "close": true}
+	expected := args.Map{
+		"ok": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsFloat64", actual)
 }
 
@@ -1332,10 +1614,16 @@ func Test_I20_TypedSimpleRequest_GetAsFloat32(t *testing.T) {
 	val, ok := sr.GetAsFloat32()
 
 	// Act
-	actual := args.Map{"ok": ok, "close": val > 2.0}
+	actual := args.Map{
+		"ok": ok,
+		"close": val > 2.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "close": true}
+	expected := args.Map{
+		"ok": true,
+		"close": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsFloat32", actual)
 }
 
@@ -1345,10 +1633,16 @@ func Test_I20_TypedSimpleRequest_GetAsBool(t *testing.T) {
 	val, ok := sr.GetAsBool()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleRequest returns correct value -- GetAsBool", actual)
 }
 
@@ -1358,10 +1652,16 @@ func Test_I20_TypedSimpleResult_GetAsInt(t *testing.T) {
 	val, ok := sr.GetAsInt()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": 42, "ok": true}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsInt", actual)
 }
 
@@ -1371,10 +1671,16 @@ func Test_I20_TypedSimpleResult_GetAsInt64(t *testing.T) {
 	val, ok := sr.GetAsInt64()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": int64(88), "ok": true}
+	expected := args.Map{
+		"val": int64(88),
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedSimpleResult returns correct value -- GetAsInt64", actual)
 }
 

@@ -41,10 +41,16 @@ func Test_Cov4_PrependsIf_True(t *testing.T) {
 	result := namevalue.PrependsIf(true, items, namevalue.Instance[string, string]{Name: "a", Value: "1"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0].Name}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependsIf returns non-empty -- true", actual)
 }
 
@@ -68,10 +74,16 @@ func Test_Cov4_NewNameValuesCollection(t *testing.T) {
 	c := namevalue.NewNameValuesCollection(10)
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "isEmpty": c.IsEmpty()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"isEmpty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewNameValuesCollection returns non-empty -- with args", actual)
 }
 
@@ -125,10 +137,16 @@ func Test_Cov4_Collection_JsonString(t *testing.T) {
 	emptyResult := emptyC.JsonString()
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "emptyResult": emptyResult}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"emptyResult": emptyResult,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "emptyResult": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"emptyResult": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- JsonString", actual)
 }
 
@@ -141,10 +159,16 @@ func Test_Cov4_Collection_Error(t *testing.T) {
 	emptyErr := emptyC.Error()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "emptyNil": emptyErr == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"emptyNil": emptyErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "emptyNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"emptyNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns error -- Error", actual)
 }
 
@@ -157,10 +181,16 @@ func Test_Cov4_Collection_ErrorUsingMessage(t *testing.T) {
 	emptyErr := emptyC.ErrorUsingMessage("prefix:")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "emptyNil": emptyErr == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"emptyNil": emptyErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "emptyNil": true}
+	expected := args.Map{
+		"hasErr": true,
+		"emptyNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns error -- ErrorUsingMessage", actual)
 }
 
@@ -173,10 +203,16 @@ func Test_Cov4_Collection_CsvStrings(t *testing.T) {
 	emptyResult := emptyC.CsvStrings()
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "emptyLen": 0}
+	expected := args.Map{
+		"len": 1,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- CsvStrings", actual)
 }
 
@@ -314,7 +350,10 @@ func Test_Cov4_Collection_HasCompiledString(t *testing.T) {
 	actual["after"] = c.HasCompiledString()
 
 	// Assert
-	expected := args.Map{"before": false, "after": true}
+	expected := args.Map{
+		"before": false,
+		"after": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasCompiledString", actual)
 }
 

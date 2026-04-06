@@ -19,8 +19,14 @@ func Test_Cov15_BasicByte_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bb.GetValueByName("Alpha")
 
 	// Assert
-	actual := args.Map{"value": int(val), "noErr": err == nil}
-	expected := args.Map{"value": 0, "noErr": true}
+	actual := args.Map{
+		"value": int(val),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path", actual)
 }
 
@@ -35,8 +41,14 @@ func Test_Cov15_BasicInt8_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bi.GetValueByName("X")
 
 	// Assert
-	actual := args.Map{"value": int(val), "noErr": err == nil}
-	expected := args.Map{"value": 0, "noErr": true}
+	actual := args.Map{
+		"value": int(val),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path Int8", actual)
 }
 
@@ -51,8 +63,14 @@ func Test_Cov15_BasicInt16_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bi.GetValueByName("M")
 
 	// Assert
-	actual := args.Map{"value": int(val), "noErr": err == nil}
-	expected := args.Map{"value": 0, "noErr": true}
+	actual := args.Map{
+		"value": int(val),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path Int16", actual)
 }
 
@@ -67,8 +85,14 @@ func Test_Cov15_BasicInt32_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bi.GetValueByName("P")
 
 	// Assert
-	actual := args.Map{"value": int(val), "noErr": err == nil}
-	expected := args.Map{"value": 0, "noErr": true}
+	actual := args.Map{
+		"value": int(val),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path Int32", actual)
 }
 
@@ -83,8 +107,14 @@ func Test_Cov15_BasicUInt16_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bi.GetValueByName("R")
 
 	// Assert
-	actual := args.Map{"value": int(val), "noErr": err == nil}
-	expected := args.Map{"value": 0, "noErr": true}
+	actual := args.Map{
+		"value": int(val),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": 0,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path UInt16", actual)
 }
 
@@ -99,8 +129,14 @@ func Test_Cov15_BasicString_GetValueByName_WrappedQuotePath(t *testing.T) {
 	val, err := bs.GetValueByName("Foo")
 
 	// Assert
-	actual := args.Map{"value": val, "noErr": err == nil}
-	expected := args.Map{"value": "Foo", "noErr": true}
+	actual := args.Map{
+		"value": val,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"value": "Foo",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueByName returns value -- wrapped quote path String", actual)
 }
 
@@ -147,8 +183,14 @@ func Test_Cov15_DynamicMap_DiffRaw_RightSideDifference(t *testing.T) {
 	diff := left.DiffRaw(false, right)
 
 	// Assert — "b" differs, "c" only in right
-	actual := args.Map{"hasDiff": diff.HasAnyItem(), "length": diff.Length()}
-	expected := args.Map{"hasDiff": true, "length": 2}
+	actual := args.Map{
+		"hasDiff": diff.HasAnyItem(),
+		"length": diff.Length(),
+	}
+	expected := args.Map{
+		"hasDiff": true,
+		"length": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffRaw returns diffs -- right-side differences", actual)
 }
 

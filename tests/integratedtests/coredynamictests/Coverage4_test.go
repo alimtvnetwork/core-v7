@@ -424,10 +424,16 @@ func Test_Cov4_MapAnyItems_Get(t *testing.T) {
 	val, has := m.Get("k1")
 
 	// Act
-	actual := args.Map{"val": val, "has": has}
+	actual := args.Map{
+		"val": val,
+		"has": has,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v1", "has": true}
+	expected := args.Map{
+		"val": "v1",
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems.Get returns correct -- k1", actual)
 }
 
@@ -440,10 +446,16 @@ func Test_Cov4_MapAnyItems_AllKeysSorted(t *testing.T) {
 	keys := m.AllKeysSorted()
 
 	// Act
-	actual := args.Map{"first": keys[0], "last": keys[2]}
+	actual := args.Map{
+		"first": keys[0],
+		"last": keys[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MapAnyItems.AllKeysSorted returns sorted -- 3 keys", actual)
 }
 

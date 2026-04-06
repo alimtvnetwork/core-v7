@@ -44,10 +44,16 @@ func Test_Cov4_CaseV1_ExpectedLines_String(t *testing.T) {
 	lines := c.ExpectedLines()
 
 	// Act
-	actual := args.Map{"len": len(lines), "first": lines[0]}
+	actual := args.Map{
+		"len": len(lines),
+		"first": lines[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "single"}
+	expected := args.Map{
+		"len": 1,
+		"first": "single",
+	}
 	expected.ShouldBeEqual(t, 0, "CaseV1.ExpectedLines string -- single", actual)
 }
 

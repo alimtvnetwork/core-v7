@@ -153,10 +153,16 @@ func Test_Cov9_CaseV1_PrepareTitle(t *testing.T) {
 	result := tc.PrepareTitle(3, "extra")
 
 	// Act
-	actual := args.Map{"nonEmpty": len(result) > 0, "contains": true}
+	actual := args.Map{
+		"nonEmpty": len(result) > 0,
+		"contains": true,
+	}
 
 	// Assert
-	expected := args.Map{"nonEmpty": true, "contains": true}
+	expected := args.Map{
+		"nonEmpty": true,
+		"contains": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PrepareTitle returns formatted title", actual)
 }
 
@@ -454,10 +460,16 @@ func Test_Cov9_GenericGherkins_CompareWith_OneNil(t *testing.T) {
 	isEqual, diff := tc.CompareWith(nil)
 
 	// Act
-	actual := args.Map{"equal": isEqual, "hasDiff": len(diff) > 0}
+	actual := args.Map{
+		"equal": isEqual,
+		"hasDiff": len(diff) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"equal": false, "hasDiff": true}
+	expected := args.Map{
+		"equal": false,
+		"hasDiff": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CompareWith returns false -- one nil", actual)
 }
 

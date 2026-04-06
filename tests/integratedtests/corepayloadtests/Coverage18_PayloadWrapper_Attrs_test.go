@@ -373,7 +373,10 @@ func Test_CovPL_S1_16_Clone_ClonePtr_NonPtr_ToPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	// nil
 	var nilPW *corepayload.PayloadWrapper
-	actual := args.Map{"result": _, err4 := nilPW.ClonePtr(true); err4 != nil}
+	actual := args.Map{
+		"result": _,
+		err4 := nilPW.ClonePtr(true); err4 != nil,
+	}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil, nil", actual)
 	_ = pw.NonPtr()

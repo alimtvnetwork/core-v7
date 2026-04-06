@@ -24,10 +24,16 @@ func Test_Cov6_CreateDirWithFiles(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: dir, Files: []string{"a.txt"}})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "exists": chmodhelper.IsPathExists(filepath.Join(dir, "a.txt"))}
+	actual := args.Map{
+		"noErr": err == nil,
+		"exists": chmodhelper.IsPathExists(filepath.Join(dir, "a.txt")),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "exists": true}
+	expected := args.Map{
+		"noErr": true,
+		"exists": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateDirWithFiles returns non-empty -- with args", actual)
 }
 
@@ -37,10 +43,16 @@ func Test_Cov6_CreateDirWithFiles_NoFiles(t *testing.T) {
 	err := chmodhelper.CreateDirWithFiles(false, 0755, &chmodhelper.DirWithFiles{Dir: dir, Files: []string{}})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "dirExists": chmodhelper.IsPathExists(dir)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"dirExists": chmodhelper.IsPathExists(dir),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dirExists": true}
+	expected := args.Map{
+		"noErr": true,
+		"dirExists": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateDirWithFiles_NoFiles returns non-empty -- with args", actual)
 }
 
@@ -301,8 +313,14 @@ func Test_Cov6_FileWithContent_ReadWrite(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "FileWithContent_Write returns non-empty -- with args", actual)
 
 	readBytes, readErr := fc.Read(dir)
-	actual2 := args.Map{"readOk": readErr == nil, "hasContent": len(readBytes) > 0}
-	expected2 := args.Map{"readOk": true, "hasContent": true}
+	actual2 := args.Map{
+		"readOk": readErr == nil,
+		"hasContent": len(readBytes) > 0,
+	}
+	expected2 := args.Map{
+		"readOk": true,
+		"hasContent": true,
+	}
 	expected2.ShouldBeEqual(t, 0, "FileWithContent_Read returns non-empty -- with args", actual2)
 }
 
@@ -377,10 +395,16 @@ func Test_Cov6_GetFilesChmodRwxFullMapDirect(t *testing.T) {
 	hm, err := chmodhelper.GetFilesChmodRwxFullMapDirect(f)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": hm != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": hm != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetFilesChmodRwxFullMapDirect returns correct value -- with args", actual)
 }
 
@@ -423,10 +447,16 @@ func Test_Cov6_GetRecursivePathsContinueOnError_File(t *testing.T) {
 	paths, err := chmodhelper.GetRecursivePathsContinueOnError(f)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(paths)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(paths),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths_File returns correct value -- with args", actual)
 }
 
@@ -439,10 +469,16 @@ func Test_Cov6_GetRecursivePathsContinueOnError_Dir(t *testing.T) {
 	paths, err := chmodhelper.GetRecursivePathsContinueOnError(dir)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasItems": len(paths) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasItems": len(paths) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasItems": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasItems": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetRecursivePaths_Dir returns correct value -- with args", actual)
 }
 

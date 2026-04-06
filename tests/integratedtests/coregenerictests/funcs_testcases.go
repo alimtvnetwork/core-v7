@@ -11,7 +11,11 @@ import (
 
 var mapCollectionIntToStringTestCase = coretestcases.CaseV1{
 	Title:         "MapCollection int to string",
-	ExpectedInput: args.Map{"length": 3, "first": "v1", "last": "v3"},
+	ExpectedInput: args.Map{
+		"length": 3,
+		"first": "v1",
+		"last": "v3",
+	},
 }
 
 var mapCollectionNilSourceTestCase = coretestcases.CaseV1{
@@ -63,7 +67,11 @@ var reduceCollectionConcatTestCase = coretestcases.CaseV1{
 
 var groupByCollectionGroupsTestCase = coretestcases.CaseV1{
 	Title:         "GroupByCollection groups",
-	ExpectedInput: args.Map{"groupCount": 2, "evenCount": 3, "oddCount": 3},
+	ExpectedInput: args.Map{
+		"groupCount": 2,
+		"evenCount": 3,
+		"oddCount": 3,
+	},
 }
 
 var groupByCollectionNilTestCase = coretestcases.CaseV1{

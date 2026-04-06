@@ -78,7 +78,10 @@ func Test_C01_Result_Map(t *testing.T) {
 	m := r.Map()
 
 	// Act
-	actual := args.Map{"result": _, ok := m["Bytes"]; !ok}
+	actual := args.Map{
+		"result": _,
+		ok := m["Bytes"]; !ok,
+	}
 
 	// Assert
 	expected := args.Map{"result": false}
@@ -86,7 +89,10 @@ func Test_C01_Result_Map(t *testing.T) {
 
 	rErr := corejson.NewResult.Error(errors.New("fail"))
 	m2 := rErr.Map()
-	actual := args.Map{"result": _, ok := m2["Error"]; !ok}
+	actual := args.Map{
+		"result": _,
+		ok := m2["Error"]; !ok,
+	}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error key", actual)
 

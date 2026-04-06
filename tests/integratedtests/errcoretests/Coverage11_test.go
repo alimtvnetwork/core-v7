@@ -17,10 +17,18 @@ func Test_Cov11_LineDiff_AllMatch(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a", "b"}, []string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "st0": diffs[0].Status, "st1": diffs[1].Status}
+	actual := args.Map{
+		"len": len(diffs),
+		"st0": diffs[0].Status,
+		"st1": diffs[1].Status,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "st0": "  ", "st1": "  "}
+	expected := args.Map{
+		"len": 2,
+		"st0": "  ",
+		"st1": "  ",
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns all-match -- matching lines", actual)
 }
 
@@ -1399,10 +1407,16 @@ func Test_Cov11_RawErrCollection_FullStringWithTracesIf(t *testing.T) {
 	r2 := rec.FullStringWithTracesIf(false)
 
 	// Act
-	actual := args.Map{"t": r1 != "", "f": r2 != ""}
+	actual := args.Map{
+		"t": r1 != "",
+		"f": r2 != "",
+	}
 
 	// Assert
-	expected := args.Map{"t": true, "f": true}
+	expected := args.Map{
+		"t": true,
+		"f": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.FullStringWithTracesIf returns non-empty -- with condition", actual)
 }
 
@@ -1489,10 +1503,16 @@ func Test_Cov11_RawErrCollection_Serialize(t *testing.T) {
 	b, err := rec.Serialize()
 
 	// Act
-	actual := args.Map{"nil": b == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nil": b == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "noErr": true}
+	expected := args.Map{
+		"nil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.Serialize returns nil -- empty collection", actual)
 }
 
@@ -1502,10 +1522,16 @@ func Test_Cov11_RawErrCollection_SerializeWithoutTraces(t *testing.T) {
 	b, err := rec.SerializeWithoutTraces()
 
 	// Act
-	actual := args.Map{"nil": b == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nil": b == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "noErr": true}
+	expected := args.Map{
+		"nil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.SerializeWithoutTraces returns nil -- empty collection", actual)
 }
 
@@ -1528,10 +1554,16 @@ func Test_Cov11_RawErrCollection_MarshalJSON(t *testing.T) {
 	b, err := rec.MarshalJSON()
 
 	// Act
-	actual := args.Map{"nil": b == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nil": b == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nil": true, "noErr": true}
+	expected := args.Map{
+		"nil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.MarshalJSON returns nil -- empty collection", actual)
 }
 

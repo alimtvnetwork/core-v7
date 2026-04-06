@@ -29,10 +29,16 @@ func Test_Cov_GetMap_EmptySlice(t *testing.T) {
 	result := intunique.GetMap(&input)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "len": len(*result)}
+	actual := args.Map{
+		"notNil": result != nil,
+		"len": len(*result),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 0}
+	expected := args.Map{
+		"notNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "GetMap returns empty map -- empty slice", actual)
 }
 
@@ -83,9 +89,15 @@ func Test_Cov_Get_SingleElement(t *testing.T) {
 	result := intunique.Get(&input)
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": 42}
+	expected := args.Map{
+		"len": 1,
+		"first": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Get returns same -- single element", actual)
 }

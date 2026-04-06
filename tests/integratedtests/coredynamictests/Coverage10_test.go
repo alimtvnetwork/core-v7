@@ -46,7 +46,11 @@ func Test_Cov10_TypeSameStatus_DiffTypes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isSame": false, "notSame": true, "isNEq": true}
+	expected := args.Map{
+		"isSame": false,
+		"notSame": true,
+		"isNEq": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns correct value -- diff types", actual)
 }
 
@@ -83,7 +87,11 @@ func Test_Cov10_TypeSameStatus_NilInput(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"leftNull": true, "rightNull": false, "isSame": false}
+	expected := args.Map{
+		"leftNull": true,
+		"rightNull": false,
+		"isSame": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeSameStatus returns nil -- nil input", actual)
 }
 
@@ -127,7 +135,10 @@ func Test_Cov10_TypeStatus_NilReceiver(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isValid": false, "isInvalid": true}
+	expected := args.Map{
+		"isValid": false,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns nil -- nil receiver", actual)
 }
 
@@ -145,7 +156,10 @@ func Test_Cov10_TypeStatus_NotMatchMessage(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"msgNE": true, "sameMsg": ""}
+	expected := args.Map{
+		"msgNE": true,
+		"sameMsg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- not match message", actual)
 }
 
@@ -163,7 +177,10 @@ func Test_Cov10_TypeStatus_NotMatchErr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "noErr": true}
+	expected := args.Map{
+		"hasErr": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- not match err", actual)
 }
 
@@ -175,10 +192,16 @@ func Test_Cov10_TypeStatus_ValidationError(t *testing.T) {
 	sameErr := sameTS.ValidationError()
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "noErr": sameErr == nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"noErr": sameErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "noErr": true}
+	expected := args.Map{
+		"hasErr": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns error -- validation error", actual)
 }
 
@@ -189,10 +212,16 @@ func Test_Cov10_TypeStatus_NotEqualSrcDest(t *testing.T) {
 	err := ts.NotEqualSrcDestinationErr()
 
 	// Act
-	actual := args.Map{"msgNE": msg != "", "hasErr": err != nil}
+	actual := args.Map{
+		"msgNE": msg != "",
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"msgNE": true, "hasErr": true}
+	expected := args.Map{
+		"msgNE": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypeStatus returns correct value -- src dest", actual)
 }
 
@@ -474,7 +503,11 @@ func Test_Cov10_TypedDynamic_UnmarshalDeserialize(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "data": "hello", "isValid": true}
+	expected := args.Map{
+		"errNil": true,
+		"data": "hello",
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- unmarshal", actual)
 }
 
@@ -484,10 +517,16 @@ func Test_Cov10_TypedDynamic_UnmarshalBadJSON(t *testing.T) {
 	err := d.UnmarshalJSON([]byte(`"not-an-int"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isValid": d.IsValid()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isValid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "isValid": false}
+	expected := args.Map{
+		"hasErr": true,
+		"isValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- unmarshal bad json", actual)
 }
 
@@ -498,10 +537,18 @@ func Test_Cov10_TypedDynamic_Deserialize(t *testing.T) {
 	err := d.Deserialize(jsonBytes)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "data": d.Data(), "valid": d.IsValid()}
+	actual := args.Map{
+		"errNil": err == nil,
+		"data": d.Data(),
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "data": "world", "valid": true}
+	expected := args.Map{
+		"errNil": true,
+		"data": "world",
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- deserialize", actual)
 }
 
@@ -561,7 +608,10 @@ func Test_Cov10_SimpleResult_InvalidError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"validErr": true, "invErr": true}
+	expected := args.Map{
+		"validErr": true,
+		"invErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns error -- invalid error", actual)
 }
 
@@ -582,7 +632,11 @@ func Test_Cov10_SimpleResult_TypeMismatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "hasErr": true, "hasMsg": true}
+	expected := args.Map{
+		"nilErr": true,
+		"hasErr": true,
+		"hasMsg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleResult returns correct value -- type mismatch", actual)
 }
 
@@ -652,7 +706,10 @@ func Test_Cov10_SimpleRequest_InvalidError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"validErr": true, "invErr": true}
+	expected := args.Map{
+		"validErr": true,
+		"invErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns error -- invalid error", actual)
 }
 
@@ -665,10 +722,16 @@ func Test_Cov10_SimpleRequest_TypeMismatch(t *testing.T) {
 	hasErr := sr.GetErrorOnTypeMismatch(intType, true)
 
 	// Act
-	actual := args.Map{"nilErr": nilErr == nil, "hasErr": hasErr != nil}
+	actual := args.Map{
+		"nilErr": nilErr == nil,
+		"hasErr": hasErr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "hasErr": true}
+	expected := args.Map{
+		"nilErr": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- type mismatch", actual)
 }
 
@@ -686,7 +749,11 @@ func Test_Cov10_SimpleRequest_IsPointer(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isPtr": true, "isNonPtr": false, "isKindStr": true}
+	expected := args.Map{
+		"isPtr": true,
+		"isNonPtr": false,
+		"isKindStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest returns correct value -- is pointer", actual)
 }
 
@@ -792,7 +859,10 @@ func Test_Cov10_BytesConverter_EmptyBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"cast": "", "castErr": true}
+	expected := args.Map{
+		"cast": "",
+		"castErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns empty -- empty", actual)
 }
 
@@ -803,10 +873,18 @@ func Test_Cov10_BytesConverter_Bool(t *testing.T) {
 	bMust := bc.ToBoolMust()
 
 	// Act
-	actual := args.Map{"val": b, "errNil": err == nil, "must": bMust}
+	actual := args.Map{
+		"val": b,
+		"errNil": err == nil,
+		"must": bMust,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "errNil": true, "must": true}
+	expected := args.Map{
+		"val": true,
+		"errNil": true,
+		"must": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- bool", actual)
 }
 
@@ -822,7 +900,11 @@ func Test_Cov10_BytesConverter_Strings(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 2, "errNil": true, "mustLen": 2}
+	expected := args.Map{
+		"len": 2,
+		"errNil": true,
+		"mustLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- strings", actual)
 }
 
@@ -833,10 +915,18 @@ func Test_Cov10_BytesConverter_Int64(t *testing.T) {
 	must := bc.ToInt64Must()
 
 	// Act
-	actual := args.Map{"val": val, "errNil": err == nil, "must": must}
+	actual := args.Map{
+		"val": val,
+		"errNil": err == nil,
+		"must": must,
+	}
 
 	// Assert
-	expected := args.Map{"val": int64(42), "errNil": true, "must": int64(42)}
+	expected := args.Map{
+		"val": int64(42),
+		"errNil": true,
+		"must": int64(42),
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- int64", actual)
 }
 
@@ -847,10 +937,16 @@ func Test_Cov10_BytesConverter_Deserialize(t *testing.T) {
 	err := bc.Deserialize(&target)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "target": target}
+	actual := args.Map{
+		"errNil": err == nil,
+		"target": target,
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "target": "hello"}
+	expected := args.Map{
+		"errNil": true,
+		"target": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- deserialize", actual)
 }
 

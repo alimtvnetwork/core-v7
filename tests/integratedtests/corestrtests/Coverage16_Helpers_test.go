@@ -34,10 +34,16 @@ func Test_Cov16_CloneSlice_WithItems(t *testing.T) {
 		result := corestr.CloneSlice([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"len": len(result), "first": result[0]}
+		actual := args.Map{
+			"len": len(result),
+			"first": result[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns correct value -- items", actual)
 	})
 }
@@ -259,10 +265,18 @@ func Test_Cov16_HashmapDataModel(t *testing.T) {
 		dm2 := corestr.NewHashmapsDataModelUsing(hm)
 
 		// Act
-		actual := args.Map{"hmNotNil": hm != nil, "dm2NotNil": dm2 != nil, "hmNotEmpty": !hm.IsEmpty()}
+		actual := args.Map{
+			"hmNotNil": hm != nil,
+			"dm2NotNil": dm2 != nil,
+			"hmNotEmpty": !hm.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"hmNotNil": true, "dm2NotNil": true, "hmNotEmpty": true}
+		expected := args.Map{
+			"hmNotNil": true,
+			"dm2NotNil": true,
+			"hmNotEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashmapDataModel returns correct value -- with args", actual)
 	})
 }
@@ -275,10 +289,16 @@ func Test_Cov16_HashsetDataModel(t *testing.T) {
 		dm2 := corestr.NewHashsetsDataModelUsing(hs)
 
 		// Act
-		actual := args.Map{"hsNotNil": hs != nil, "dm2NotNil": dm2 != nil}
+		actual := args.Map{
+			"hsNotNil": hs != nil,
+			"dm2NotNil": dm2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"hsNotNil": true, "dm2NotNil": true}
+		expected := args.Map{
+			"hsNotNil": true,
+			"dm2NotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetDataModel returns correct value -- with args", actual)
 	})
 }
@@ -291,10 +311,16 @@ func Test_Cov16_HashsetsCollectionDataModel(t *testing.T) {
 		dm2 := corestr.NewHashsetsCollectionDataModelUsing(hc)
 
 		// Act
-		actual := args.Map{"hcNotNil": hc != nil, "dm2NotNil": dm2 != nil}
+		actual := args.Map{
+			"hcNotNil": hc != nil,
+			"dm2NotNil": dm2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"hcNotNil": true, "dm2NotNil": true}
+		expected := args.Map{
+			"hcNotNil": true,
+			"dm2NotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollectionDataModel returns correct value -- with args", actual)
 	})
 }
@@ -310,10 +336,16 @@ func Test_Cov16_CharCollectionDataModel(t *testing.T) {
 		dm2 := corestr.NewCharCollectionMapDataModelUsing(ccm)
 
 		// Act
-		actual := args.Map{"ccmNotNil": ccm != nil, "dm2NotNil": dm2 != nil}
+		actual := args.Map{
+			"ccmNotNil": ccm != nil,
+			"dm2NotNil": dm2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"ccmNotNil": true, "dm2NotNil": true}
+		expected := args.Map{
+			"ccmNotNil": true,
+			"dm2NotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "CharCollectionDataModel returns correct value -- with args", actual)
 	})
 }
@@ -329,10 +361,16 @@ func Test_Cov16_CharHashsetDataModel(t *testing.T) {
 		dm2 := corestr.NewCharHashsetMapDataModelUsing(chm)
 
 		// Act
-		actual := args.Map{"chmNotNil": chm != nil, "dm2NotNil": dm2 != nil}
+		actual := args.Map{
+			"chmNotNil": chm != nil,
+			"dm2NotNil": dm2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"chmNotNil": true, "dm2NotNil": true}
+		expected := args.Map{
+			"chmNotNil": true,
+			"dm2NotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "CharHashsetDataModel returns correct value -- with args", actual)
 	})
 }
@@ -395,10 +433,16 @@ func Test_Cov16_Collection_NilReceiver(t *testing.T) {
 		var c *corestr.Collection
 
 		// Act
-		actual := args.Map{"len": c.Length(), "empty": c.IsEmpty()}
+		actual := args.Map{
+			"len": c.Length(),
+			"empty": c.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "empty": true}
+		expected := args.Map{
+			"len": 0,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns nil -- nil receiver", actual)
 	})
 }
@@ -572,10 +616,16 @@ func Test_Cov16_Collection_AddFuncErr_WithErr(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": c.Length(), "called": called}
+		actual := args.Map{
+			"len": c.Length(),
+			"called": called,
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "called": true}
+		expected := args.Map{
+			"len": 0,
+			"called": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns error -- AddFuncErr withErr", actual)
 	})
 }
@@ -653,10 +703,20 @@ func Test_Cov16_Collection_RemoveAt(t *testing.T) {
 		ok := c.RemoveAt(1)
 
 		// Act
-		actual := args.Map{"ok": ok, "len": c.Length(), "negFail": c.RemoveAt(-1), "bigFail": c.RemoveAt(100)}
+		actual := args.Map{
+			"ok": ok,
+			"len": c.Length(),
+			"negFail": c.RemoveAt(-1),
+			"bigFail": c.RemoveAt(100),
+		}
 
 		// Assert
-		expected := args.Map{"ok": true, "len": 2, "negFail": false, "bigFail": false}
+		expected := args.Map{
+			"ok": true,
+			"len": 2,
+			"negFail": false,
+			"bigFail": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- RemoveAt", actual)
 	})
 }
@@ -667,10 +727,16 @@ func Test_Cov16_Collection_ListStrings(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"listLen": len(c.ListStrings()), "listPtrLen": len(c.ListStringsPtr())}
+		actual := args.Map{
+			"listLen": len(c.ListStrings()),
+			"listPtrLen": len(c.ListStringsPtr()),
+		}
 
 		// Assert
-		expected := args.Map{"listLen": 1, "listPtrLen": 1}
+		expected := args.Map{
+			"listLen": 1,
+			"listPtrLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- ListStrings", actual)
 	})
 }
@@ -713,10 +779,18 @@ func Test_Cov16_Collection_AsError(t *testing.T) {
 		hasDef := c.AsDefaultError() != nil
 
 		// Act
-		actual := args.Map{"nilDef": nilDef, "nilSep": nilSep, "hasDef": hasDef}
+		actual := args.Map{
+			"nilDef": nilDef,
+			"nilSep": nilSep,
+			"hasDef": hasDef,
+		}
 
 		// Assert
-		expected := args.Map{"nilDef": true, "nilSep": true, "hasDef": true}
+		expected := args.Map{
+			"nilDef": true,
+			"nilSep": true,
+			"hasDef": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns error -- AsError", actual)
 	})
 }
@@ -731,10 +805,18 @@ func Test_Cov16_Collection_ToError(t *testing.T) {
 		hasToErr := c.ToError(",") != nil
 
 		// Act
-		actual := args.Map{"nilToErr": nilToErr, "nilToDef": nilToDef, "hasToErr": hasToErr}
+		actual := args.Map{
+			"nilToErr": nilToErr,
+			"nilToDef": nilToDef,
+			"hasToErr": hasToErr,
+		}
 
 		// Assert
-		expected := args.Map{"nilToErr": true, "nilToDef": true, "hasToErr": true}
+		expected := args.Map{
+			"nilToErr": true,
+			"nilToDef": true,
+			"hasToErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns error -- ToError", actual)
 	})
 }
@@ -797,7 +879,10 @@ func Test_Cov16_Collection_IsEqualsWithSensitive(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"caseInsensitive": true, "caseSensitive": false}
+		expected := args.Map{
+			"caseInsensitive": true,
+			"caseSensitive": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns non-empty -- IsEqualsWithSensitive", actual)
 	})
 }
@@ -881,10 +966,20 @@ func Test_Cov16_Collection_HasIndex(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"has0": c.HasIndex(0), "has1": c.HasIndex(1), "has2": c.HasIndex(2), "hasNeg": c.HasIndex(-1)}
+		actual := args.Map{
+			"has0": c.HasIndex(0),
+			"has1": c.HasIndex(1),
+			"has2": c.HasIndex(2),
+			"hasNeg": c.HasIndex(-1),
+		}
 
 		// Assert
-		expected := args.Map{"has0": true, "has1": true, "has2": false, "hasNeg": false}
+		expected := args.Map{
+			"has0": true,
+			"has1": true,
+			"has2": false,
+			"hasNeg": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- HasIndex", actual)
 	})
 }
@@ -1092,10 +1187,16 @@ func Test_Cov16_Collection_GetAllExcept(t *testing.T) {
 		r2 := c.GetAllExcept([]string{"b"})
 
 		// Act
-		actual := args.Map{"rLen": len(r), "r2Len": len(r2)}
+		actual := args.Map{
+			"rLen": len(r),
+			"r2Len": len(r2),
+		}
 
 		// Assert
-		expected := args.Map{"rLen": 2, "r2Len": 2}
+		expected := args.Map{
+			"rLen": 2,
+			"r2Len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetAllExcept", actual)
 	})
 }
@@ -1107,10 +1208,16 @@ func Test_Cov16_Collection_GetHashsetPlusHasAll(t *testing.T) {
 		hs, hasAll := c.GetHashsetPlusHasAll([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"hasAll": hasAll, "hsNotNil": hs != nil}
+		actual := args.Map{
+			"hasAll": hasAll,
+			"hsNotNil": hs != nil,
+		}
 
 		// Assert
-		expected := args.Map{"hasAll": true, "hsNotNil": true}
+		expected := args.Map{
+			"hasAll": true,
+			"hsNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection returns correct value -- GetHashsetPlusHasAll", actual)
 	})
 }

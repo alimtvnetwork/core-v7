@@ -12,7 +12,10 @@ import (
 
 func Test_Map_Length(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"result": m.Length() != 2}
@@ -51,7 +54,10 @@ func Test_Map_Has_Nil(t *testing.T) {
 
 func Test_Map_HasDefined(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": "val", "b": nil}
+	m := args.Map{
+		"a": "val",
+		"b": nil,
+	}
 
 	// Act
 	actual := args.Map{"result": m.HasDefined("a")}
@@ -126,7 +132,10 @@ func Test_Map_IsKeyInvalid_Nil(t *testing.T) {
 
 func Test_Map_HasDefinedAll(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": "v1", "b": "v2"}
+	m := args.Map{
+		"a": "v1",
+		"b": "v2",
+	}
 
 	// Act
 	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
@@ -478,7 +487,10 @@ func Test_Map_Raw(t *testing.T) {
 
 func Test_Map_Args_Cov(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 	a := m.Args("a", "b")
 
 	// Act
@@ -521,7 +533,10 @@ func Test_Map_GetByIndex_OutOfBounds(t *testing.T) {
 
 func Test_Map_SortedKeys_Cov(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys, err := m.SortedKeys()
 
 	// Act
@@ -553,7 +568,10 @@ func Test_Map_SortedKeys_Empty(t *testing.T) {
 
 func Test_Map_SortedKeysMust(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys := m.SortedKeysMust()
 
 	// Act
@@ -572,7 +590,10 @@ func Test_Map_ArgsCount(t *testing.T) {
 	// Arrange
 	// HasFunc() always returns true (FuncWrap returns non-nil),
 	// so ArgsCount = len - 1 (func) = 1
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"result": m.ArgsCount() != 1}
@@ -585,7 +606,10 @@ func Test_Map_ArgsCount(t *testing.T) {
 func Test_Map_ArgsCount_WithExpected(t *testing.T) {
 	// Arrange
 	// HasExpect=true, HasFunc=true => ArgsCount = 2 - 2 = 0
-	m := args.Map{"a": 1, "expected": "val"}
+	m := args.Map{
+		"a": 1,
+		"expected": "val",
+	}
 	c := m.ArgsCount()
 
 	// Act

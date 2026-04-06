@@ -17,10 +17,18 @@ func Test_Cov13_LeftRight_Empty(t *testing.T) {
 	var nilLR *coredynamic.LeftRight
 
 	// Act
-	actual := args.Map{"empty": lr.IsEmpty(), "has": lr.HasAnyItem(), "nilEmpty": nilLR.IsEmpty()}
+	actual := args.Map{
+		"empty": lr.IsEmpty(),
+		"has": lr.HasAnyItem(),
+		"nilEmpty": nilLR.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "has": false, "nilEmpty": true}
+	expected := args.Map{
+		"empty": true,
+		"has": false,
+		"nilEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns empty -- empty", actual)
 }
 
@@ -35,7 +43,12 @@ func Test_Cov13_LeftRight_HasLeftRight(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasL": true, "hasR": true, "lEmpty": false, "rEmpty": false}
+	expected := args.Map{
+		"hasL": true,
+		"hasR": true,
+		"lEmpty": false,
+		"rEmpty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- HasLeft/Right", actual)
 }
 
@@ -44,10 +57,20 @@ func Test_Cov13_LeftRight_NilHasLeftRight(t *testing.T) {
 	var lr *coredynamic.LeftRight
 
 	// Act
-	actual := args.Map{"hasL": lr.HasLeft(), "hasR": lr.HasRight(), "lEmpty": lr.IsLeftEmpty(), "rEmpty": lr.IsRightEmpty()}
+	actual := args.Map{
+		"hasL": lr.HasLeft(),
+		"hasR": lr.HasRight(),
+		"lEmpty": lr.IsLeftEmpty(),
+		"rEmpty": lr.IsRightEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"hasL": false, "hasR": false, "lEmpty": true, "rEmpty": true}
+	expected := args.Map{
+		"hasL": false,
+		"hasR": false,
+		"lEmpty": true,
+		"rEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- nil HasLeft/Right", actual)
 }
 
@@ -59,10 +82,20 @@ func Test_Cov13_LeftRight_ReflectSet(t *testing.T) {
 	errR := lr.RightReflectSet(&r)
 
 	// Act
-	actual := args.Map{"l": l, "r": r, "noErrL": errL == nil, "noErrR": errR == nil}
+	actual := args.Map{
+		"l": l,
+		"r": r,
+		"noErrL": errL == nil,
+		"noErrR": errR == nil,
+	}
 
 	// Assert
-	expected := args.Map{"l": "hello", "r": "world", "noErrL": true, "noErrR": true}
+	expected := args.Map{
+		"l": "hello",
+		"r": "world",
+		"noErrL": true,
+		"noErrR": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- ReflectSet", actual)
 }
 
@@ -73,10 +106,16 @@ func Test_Cov13_LeftRight_ReflectSet_Nil(t *testing.T) {
 	errR := lr.RightReflectSet(nil)
 
 	// Act
-	actual := args.Map{"noErrL": errL == nil, "noErrR": errR == nil}
+	actual := args.Map{
+		"noErrL": errL == nil,
+		"noErrR": errR == nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErrL": true, "noErrR": true}
+	expected := args.Map{
+		"noErrL": true,
+		"noErrR": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- ReflectSet nil", actual)
 }
 
@@ -87,10 +126,16 @@ func Test_Cov13_LeftRight_Deserialize(t *testing.T) {
 	dr := lr.DeserializeRight()
 
 	// Act
-	actual := args.Map{"dlNN": dl != nil, "drNN": dr != nil}
+	actual := args.Map{
+		"dlNN": dl != nil,
+		"drNN": dr != nil,
+	}
 
 	// Assert
-	expected := args.Map{"dlNN": true, "drNN": true}
+	expected := args.Map{
+		"dlNN": true,
+		"drNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- Deserialize", actual)
 }
 
@@ -101,10 +146,16 @@ func Test_Cov13_LeftRight_Deserialize_Nil(t *testing.T) {
 	dr := lr.DeserializeRight()
 
 	// Act
-	actual := args.Map{"dlNil": dl == nil, "drNil": dr == nil}
+	actual := args.Map{
+		"dlNil": dl == nil,
+		"drNil": dr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"dlNil": true, "drNil": true}
+	expected := args.Map{
+		"dlNil": true,
+		"drNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- Deserialize nil", actual)
 }
 
@@ -115,10 +166,16 @@ func Test_Cov13_LeftRight_ToDynamic(t *testing.T) {
 	rd := lr.RightToDynamic()
 
 	// Act
-	actual := args.Map{"ldNN": ld != nil, "rdNN": rd != nil}
+	actual := args.Map{
+		"ldNN": ld != nil,
+		"rdNN": rd != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ldNN": true, "rdNN": true}
+	expected := args.Map{
+		"ldNN": true,
+		"rdNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns correct value -- ToDynamic", actual)
 }
 
@@ -129,10 +186,16 @@ func Test_Cov13_LeftRight_ToDynamic_Nil(t *testing.T) {
 	rd := lr.RightToDynamic()
 
 	// Act
-	actual := args.Map{"ldNil": ld == nil, "rdNil": rd == nil}
+	actual := args.Map{
+		"ldNil": ld == nil,
+		"rdNil": rd == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ldNil": true, "rdNil": true}
+	expected := args.Map{
+		"ldNil": true,
+		"rdNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LeftRight returns nil -- ToDynamic nil", actual)
 }
 
@@ -176,10 +239,18 @@ func Test_Cov13_KeyValCollection_Basic(t *testing.T) {
 	kvc.AddManyPtr(&coredynamic.KeyVal{Key: "d", Value: 4}, nil)
 
 	// Act
-	actual := args.Map{"len": kvc.Length(), "empty": kvc.IsEmpty(), "has": kvc.HasAnyItem()}
+	actual := args.Map{
+		"len": kvc.Length(),
+		"empty": kvc.IsEmpty(),
+		"has": kvc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 4, "empty": false, "has": true}
+	expected := args.Map{
+		"len": 4,
+		"empty": false,
+		"has": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- basic", actual)
 }
 
@@ -205,10 +276,18 @@ func Test_Cov13_KeyValCollection_AllKeys(t *testing.T) {
 	vals := kvc.AllValues()
 
 	// Act
-	actual := args.Map{"keysLen": len(keys), "sortedFirst": sorted[0], "valsLen": len(vals)}
+	actual := args.Map{
+		"keysLen": len(keys),
+		"sortedFirst": sorted[0],
+		"valsLen": len(vals),
+	}
 
 	// Assert
-	expected := args.Map{"keysLen": 2, "sortedFirst": "a", "valsLen": 2}
+	expected := args.Map{
+		"keysLen": 2,
+		"sortedFirst": "a",
+		"valsLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AllKeys returns correct value -- with args", actual)
 }
 
@@ -217,10 +296,18 @@ func Test_Cov13_KeyValCollection_AllKeys_Empty(t *testing.T) {
 	kvc := coredynamic.EmptyKeyValCollection()
 
 	// Act
-	actual := args.Map{"keys": len(kvc.AllKeys()), "sorted": len(kvc.AllKeysSorted()), "vals": len(kvc.AllValues())}
+	actual := args.Map{
+		"keys": len(kvc.AllKeys()),
+		"sorted": len(kvc.AllKeysSorted()),
+		"vals": len(kvc.AllValues()),
+	}
 
 	// Assert
-	expected := args.Map{"keys": 0, "sorted": 0, "vals": 0}
+	expected := args.Map{
+		"keys": 0,
+		"sorted": 0,
+		"vals": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AllKeys returns empty -- empty", actual)
 }
 
@@ -233,10 +320,16 @@ func Test_Cov13_KeyValCollection_String(t *testing.T) {
 	ns := nilKvc.String()
 
 	// Act
-	actual := args.Map{"ne": s != "", "nil": ns}
+	actual := args.Map{
+		"ne": s != "",
+		"nil": ns,
+	}
 
 	// Assert
-	expected := args.Map{"ne": true, "nil": ""}
+	expected := args.Map{
+		"ne": true,
+		"nil": "",
+	}
 	expected.ShouldBeEqual(t, 0, "String returns correct value -- with args", actual)
 }
 
@@ -277,10 +370,20 @@ func Test_Cov13_KeyValCollection_Json(t *testing.T) {
 	jma := kvc.JsonModelAny()
 
 	// Act
-	actual := args.Map{"jLen": j.Length() > 0, "jpNN": jp != nil, "jmNN": jm != nil, "jmaNN": jma != nil}
+	actual := args.Map{
+		"jLen": j.Length() > 0,
+		"jpNN": jp != nil,
+		"jmNN": jm != nil,
+		"jmaNN": jma != nil,
+	}
 
 	// Assert
-	expected := args.Map{"jLen": true, "jpNN": true, "jmNN": true, "jmaNN": true}
+	expected := args.Map{
+		"jLen": true,
+		"jpNN": true,
+		"jmNN": true,
+		"jmaNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Json", actual)
 }
 
@@ -296,10 +399,22 @@ func Test_Cov13_KeyValCollection_CloneNonPtrPtr(t *testing.T) {
 	nilClone := nilKvc.ClonePtr()
 
 	// Act
-	actual := args.Map{"cLen": cloned.Length(), "cpNN": clonedPtr != nil, "npLen": np.Length(), "pNN": p != nil, "nilNil": nilClone == nil}
+	actual := args.Map{
+		"cLen": cloned.Length(),
+		"cpNN": clonedPtr != nil,
+		"npLen": np.Length(),
+		"pNN": p != nil,
+		"nilNil": nilClone == nil,
+	}
 
 	// Assert
-	expected := args.Map{"cLen": 1, "cpNN": true, "npLen": 1, "pNN": true, "nilNil": true}
+	expected := args.Map{
+		"cLen": 1,
+		"cpNN": true,
+		"npLen": 1,
+		"pNN": true,
+		"nilNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Clone/NonPtr/Ptr returns correct value -- with args", actual)
 }
 
@@ -312,10 +427,20 @@ func Test_Cov13_KeyValCollection_Serialize(t *testing.T) {
 	// KeyValCollection.Json() serializes JsonModel(), so JsonString is non-empty.
 
 	// Act
-	actual := args.Map{"bLen": len(b) > 0, "noErr": err == nil, "jsNE": js != "", "jsNoErr": jsErr == nil}
+	actual := args.Map{
+		"bLen": len(b) > 0,
+		"noErr": err == nil,
+		"jsNE": js != "",
+		"jsNoErr": jsErr == nil,
+	}
 
 	// Assert
-	expected := args.Map{"bLen": true, "noErr": true, "jsNE": true, "jsNoErr": true}
+	expected := args.Map{
+		"bLen": true,
+		"noErr": true,
+		"jsNE": true,
+		"jsNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- with args", actual)
 }
 
@@ -331,10 +456,20 @@ func Test_Cov13_KeyValCollection_Paging(t *testing.T) {
 	small := kvc.GetPagedCollection(100)
 
 	// Act
-	actual := args.Map{"ps": ps, "pz": pz, "pagedLen": len(paged), "smallLen": len(small)}
+	actual := args.Map{
+		"ps": ps,
+		"pz": pz,
+		"pagedLen": len(paged),
+		"smallLen": len(small),
+	}
 
 	// Assert
-	expected := args.Map{"ps": 3, "pz": 0, "pagedLen": 3, "smallLen": 1}
+	expected := args.Map{
+		"ps": 3,
+		"pz": 0,
+		"pagedLen": 3,
+		"smallLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValCollection returns correct value -- Paging", actual)
 }
 
@@ -345,10 +480,16 @@ func Test_Cov13_KeyValCollection_JsonMapResults(t *testing.T) {
 	mr, err := kvc.JsonMapResults()
 
 	// Act
-	actual := args.Map{"mrNN": mr != nil, "noErr": err == nil}
+	actual := args.Map{
+		"mrNN": mr != nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"mrNN": true, "noErr": true}
+	expected := args.Map{
+		"mrNN": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonMapResults returns correct value -- with args", actual)
 }
 
@@ -373,10 +514,16 @@ func Test_Cov13_KeyValCollection_JsonResultsCollection(t *testing.T) {
 	rpc := kvc.JsonResultsPtrCollection()
 
 	// Act
-	actual := args.Map{"rcNN": rc != nil, "rpcNN": rpc != nil}
+	actual := args.Map{
+		"rcNN": rc != nil,
+		"rpcNN": rpc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"rcNN": true, "rpcNN": true}
+	expected := args.Map{
+		"rcNN": true,
+		"rpcNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonResultsCollection returns correct value -- with args", actual)
 }
 
@@ -387,10 +534,16 @@ func Test_Cov13_KeyValCollection_JsonResultsCollection_Empty(t *testing.T) {
 	rpc := kvc.JsonResultsPtrCollection()
 
 	// Act
-	actual := args.Map{"rcNN": rc != nil, "rpcNN": rpc != nil}
+	actual := args.Map{
+		"rcNN": rc != nil,
+		"rpcNN": rpc != nil,
+	}
 
 	// Assert
-	expected := args.Map{"rcNN": true, "rpcNN": true}
+	expected := args.Map{
+		"rcNN": true,
+		"rpcNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "JsonResultsCollection returns empty -- empty", actual)
 }
 

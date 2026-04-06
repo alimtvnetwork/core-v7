@@ -57,8 +57,14 @@ func Test_Cov13_CompiledErrorString_WithError(t *testing.T) {
 	result := errcore.CompiledErrorString(errors.New("main"), "additional")
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "contains": strings.Contains(result, "main")}
-	expected := args.Map{"hasContent": true, "contains": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"contains": strings.Contains(result, "main"),
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"contains": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CompiledErrorString returns string -- with error", actual)
 }
 
@@ -76,8 +82,14 @@ func Test_Cov13_ExpectationMessageDef_CachedExpected(t *testing.T) {
 	second := def.ExpectedSafeString()
 
 	// Assert
-	actual := args.Map{"equal": first == second, "nonEmpty": len(first) > 0}
-	expected := args.Map{"equal": true, "nonEmpty": true}
+	actual := args.Map{
+		"equal": first == second,
+		"nonEmpty": len(first) > 0,
+	}
+	expected := args.Map{
+		"equal": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ExpectedSafeString returns cached value -- second call", actual)
 }
 
@@ -277,8 +289,14 @@ func Test_Cov13_RawErrCollection_SerializeWithoutTraces(t *testing.T) {
 	bytes, err := ec.SerializeWithoutTraces()
 
 	// Assert
-	actual := args.Map{"hasBytes": len(bytes) > 0, "noErr": err == nil}
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeWithoutTraces returns bytes -- non-empty", actual)
 }
 
@@ -324,8 +342,14 @@ func Test_Cov13_StackEnhance_MsgErrorSkip_ExistingStackTrace(t *testing.T) {
 	result := errcore.StackEnhance.MsgErrorSkip(0, msg, err)
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "containsStackTrace": strings.Contains(result, "Stack-Trace")}
-	expected := args.Map{"hasContent": true, "containsStackTrace": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"containsStackTrace": strings.Contains(result, "Stack-Trace"),
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"containsStackTrace": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MsgErrorSkip returns compiled msg -- existing stack trace", actual)
 	expected.ShouldBeEqual(t, 0, "MsgErrorSkip returns compiled msg -- existing stack trace", actual)
 }

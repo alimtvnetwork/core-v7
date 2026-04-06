@@ -20,10 +20,16 @@ func Test_Seg4_SS_Add(t *testing.T) {
 		s.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"len": s.Length(), "first": s.First()}
+		actual := args.Map{
+			"len": s.Length(),
+			"first": s.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 items", actual)
 	})
 }
@@ -156,10 +162,16 @@ func Test_Seg4_SS_AppendFmtIf(t *testing.T) {
 		s.AppendFmtIf(false, "skip=%d", 99)
 
 		// Act
-		actual := args.Map{"len": s.Length(), "val": s.First()}
+		actual := args.Map{
+			"len": s.Length(),
+			"val": s.First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "val": "v=42"}
+		expected := args.Map{
+			"len": 1,
+			"val": "v=42",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendFmtIf -- only true", actual)
 	})
 }
@@ -248,10 +260,16 @@ func Test_Seg4_SS_InsertAt(t *testing.T) {
 		s.InsertAt(1, "b")
 
 		// Act
-		actual := args.Map{"len": s.Length(), "mid": s[1]}
+		actual := args.Map{
+			"len": s.Length(),
+			"mid": s[1],
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "mid": "b"}
+		expected := args.Map{
+			"len": 3,
+			"mid": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "InsertAt -- inserted in middle", actual)
 	})
 }
@@ -355,10 +373,20 @@ func Test_Seg4_SS_First_Last(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b", "c"}
 
 		// Act
-		actual := args.Map{"first": s.First(), "last": s.Last(), "firstDyn": s.FirstDynamic(), "lastDyn": s.LastDynamic()}
+		actual := args.Map{
+			"first": s.First(),
+			"last": s.Last(),
+			"firstDyn": s.FirstDynamic(),
+			"lastDyn": s.LastDynamic(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c", "firstDyn": "a", "lastDyn": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+			"firstDyn": "a",
+			"lastDyn": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "First/Last/Dynamic -- correct", actual)
 	})
 }
@@ -369,10 +397,16 @@ func Test_Seg4_SS_FirstOrDefault_Empty(t *testing.T) {
 		s := corestr.SimpleSlice{}
 
 		// Act
-		actual := args.Map{"val": s.FirstOrDefault(), "dyn": s.FirstOrDefaultDynamic()}
+		actual := args.Map{
+			"val": s.FirstOrDefault(),
+			"dyn": s.FirstOrDefaultDynamic(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "dyn": ""}
+		expected := args.Map{
+			"val": "",
+			"dyn": "",
+		}
 		expected.ShouldBeEqual(t, 0, "FirstOrDefault empty -- empty string", actual)
 	})
 }
@@ -383,10 +417,16 @@ func Test_Seg4_SS_LastOrDefault_Empty(t *testing.T) {
 		s := corestr.SimpleSlice{}
 
 		// Act
-		actual := args.Map{"val": s.LastOrDefault(), "dyn": s.LastOrDefaultDynamic()}
+		actual := args.Map{
+			"val": s.LastOrDefault(),
+			"dyn": s.LastOrDefaultDynamic(),
+		}
 
 		// Assert
-		expected := args.Map{"val": "", "dyn": ""}
+		expected := args.Map{
+			"val": "",
+			"dyn": "",
+		}
 		expected.ShouldBeEqual(t, 0, "LastOrDefault empty -- empty string", actual)
 	})
 }
@@ -412,10 +452,16 @@ func Test_Seg4_SS_AsError_Empty(t *testing.T) {
 		s := corestr.SimpleSlice{}
 
 		// Act
-		actual := args.Map{"nil": s.AsError("; ") == nil, "defNil": s.AsDefaultError() == nil}
+		actual := args.Map{
+			"nil": s.AsError("; ") == nil,
+			"defNil": s.AsDefaultError() == nil,
+		}
 
 		// Assert
-		expected := args.Map{"nil": true, "defNil": true}
+		expected := args.Map{
+			"nil": true,
+			"defNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AsError empty -- nil", actual)
 	})
 }
@@ -442,10 +488,16 @@ func Test_Seg4_SS_Skip(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b", "c"}
 
 		// Act
-		actual := args.Map{"len": len(s.Skip(1)), "dynLen": len(s.SkipDynamic(1).([]string))}
+		actual := args.Map{
+			"len": len(s.Skip(1)),
+			"dynLen": len(s.SkipDynamic(1).([]string)),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "dynLen": 2}
+		expected := args.Map{
+			"len": 2,
+			"dynLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Skip -- 2 remaining", actual)
 	})
 }
@@ -544,10 +596,16 @@ func Test_Seg4_SS_Length_Nil(t *testing.T) {
 		var s *corestr.SimpleSlice
 
 		// Act
-		actual := args.Map{"len": s.Length(), "empty": s.IsEmpty()}
+		actual := args.Map{
+			"len": s.Length(),
+			"empty": s.IsEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "empty": true}
+		expected := args.Map{
+			"len": 0,
+			"empty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Length nil -- 0", actual)
 	})
 }
@@ -628,10 +686,18 @@ func Test_Seg4_SS_HasIndex(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b"}
 
 		// Act
-		actual := args.Map{"has0": s.HasIndex(0), "has5": s.HasIndex(5), "hasNeg": s.HasIndex(-1)}
+		actual := args.Map{
+			"has0": s.HasIndex(0),
+			"has5": s.HasIndex(5),
+			"hasNeg": s.HasIndex(-1),
+		}
 
 		// Assert
-		expected := args.Map{"has0": true, "has5": false, "hasNeg": false}
+		expected := args.Map{
+			"has0": true,
+			"has5": false,
+			"hasNeg": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasIndex -- valid and invalid", actual)
 	})
 }
@@ -644,10 +710,16 @@ func Test_Seg4_SS_IsContains(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b"}
 
 		// Act
-		actual := args.Map{"has": s.IsContains("a"), "miss": s.IsContains("z")}
+		actual := args.Map{
+			"has": s.IsContains("a"),
+			"miss": s.IsContains("z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsContains -- found and missing", actual)
 	})
 }
@@ -700,10 +772,16 @@ func Test_Seg4_SS_IndexOf(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b", "c"}
 
 		// Act
-		actual := args.Map{"idx": s.IndexOf("b"), "miss": s.IndexOf("z")}
+		actual := args.Map{
+			"idx": s.IndexOf("b"),
+			"miss": s.IndexOf("z"),
+		}
 
 		// Assert
-		expected := args.Map{"idx": 1, "miss": -1}
+		expected := args.Map{
+			"idx": 1,
+			"miss": -1,
+		}
 		expected.ShouldBeEqual(t, 0, "IndexOf -- found and missing", actual)
 	})
 }
@@ -758,10 +836,16 @@ func Test_Seg4_SS_StringsList(t *testing.T) {
 		s := corestr.SimpleSlice{"a", "b"}
 
 		// Act
-		actual := args.Map{"strLen": len(s.Strings()), "listLen": len(s.List())}
+		actual := args.Map{
+			"strLen": len(s.Strings()),
+			"listLen": len(s.List()),
+		}
 
 		// Assert
-		expected := args.Map{"strLen": 2, "listLen": 2}
+		expected := args.Map{
+			"strLen": 2,
+			"listLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Strings/List -- same", actual)
 	})
 }
@@ -1449,7 +1533,10 @@ func Test_Seg4_SS_IsEqualByFunc(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualByFunc -- match and mismatch", actual)
 	})
 }
@@ -1782,10 +1869,16 @@ func Test_Seg4_SS_Reverse(t *testing.T) {
 		s.Reverse()
 
 		// Act
-		actual := args.Map{"first": s.First(), "last": s.Last()}
+		actual := args.Map{
+			"first": s.First(),
+			"last": s.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "d", "last": "a"}
+		expected := args.Map{
+			"first": "d",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Reverse -- reversed", actual)
 	})
 }
@@ -1844,10 +1937,16 @@ func Test_Seg4_SS_MarshalJSON(t *testing.T) {
 		b, err := s.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1859,10 +1958,16 @@ func Test_Seg4_SS_UnmarshalJSON(t *testing.T) {
 		err := s.UnmarshalJSON([]byte(`["a","b"]`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": s.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": s.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -1889,10 +1994,16 @@ func Test_Seg4_SS_Serialize(t *testing.T) {
 		b, err := s.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -1905,10 +2016,16 @@ func Test_Seg4_SS_Deserialize(t *testing.T) {
 		err := s.Deserialize(&dest)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": len(dest)}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": len(dest),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Deserialize -- success", actual)
 	})
 }
@@ -1922,10 +2039,16 @@ func Test_Seg4_SS_ParseInjectUsingJson(t *testing.T) {
 		result, err := s2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": result.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": result.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- round trip", actual)
 	})
 }
@@ -2286,10 +2409,16 @@ func Test_Seg4_SS_AddedRemovedLinesDiff(t *testing.T) {
 		added, removed := s.AddedRemovedLinesDiff("b", "c")
 
 		// Act
-		actual := args.Map{"addedLen": len(added), "removedLen": len(removed)}
+		actual := args.Map{
+			"addedLen": len(added),
+			"removedLen": len(removed),
+		}
 
 		// Assert
-		expected := args.Map{"addedLen": 1, "removedLen": 1}
+		expected := args.Map{
+			"addedLen": 1,
+			"removedLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "AddedRemovedLinesDiff -- 1 added 1 removed", actual)
 	})
 }
@@ -2301,10 +2430,16 @@ func Test_Seg4_SS_AddedRemovedLinesDiff_BothNil(t *testing.T) {
 		added, removed := s.AddedRemovedLinesDiff(nil...)
 
 		// Act
-		actual := args.Map{"addedNil": added == nil, "removedNil": removed == nil}
+		actual := args.Map{
+			"addedNil": added == nil,
+			"removedNil": removed == nil,
+		}
 
 		// Assert
-		expected := args.Map{"addedNil": true, "removedNil": true}
+		expected := args.Map{
+			"addedNil": true,
+			"removedNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddedRemovedLinesDiff both nil -- nil", actual)
 	})
 }
@@ -2318,10 +2453,16 @@ func Test_Seg4_SS_RemoveIndexes(t *testing.T) {
 		result, err := s.RemoveIndexes(1, 3)
 
 		// Act
-		actual := args.Map{"len": result.Length(), "noErr": err == nil}
+		actual := args.Map{
+			"len": result.Length(),
+			"noErr": err == nil,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "noErr": true}
+		expected := args.Map{
+			"len": 2,
+			"noErr": true,
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveIndexes -- 2 remaining", actual)
 	})
 }
@@ -2348,10 +2489,16 @@ func Test_Seg4_SS_RemoveIndexes_OutOfBounds(t *testing.T) {
 		result, err := s.RemoveIndexes(5)
 
 		// Act
-		actual := args.Map{"hasErr": err != nil, "len": result.Length()}
+		actual := args.Map{
+			"hasErr": err != nil,
+			"len": result.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"hasErr": true, "len": 2}
+		expected := args.Map{
+			"hasErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveIndexes out of bounds -- error with all items", actual)
 	})
 }

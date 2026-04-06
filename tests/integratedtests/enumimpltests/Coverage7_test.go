@@ -89,7 +89,11 @@ func Test_Cov7_KeyAnyVal(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"key": "test", "valInt": 42, "isString": false}
+	expected := args.Map{
+		"key": "test",
+		"valInt": 42,
+		"isString": false,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyVal returns correct fields -- int value", actual)
 }
 
@@ -105,7 +109,11 @@ func Test_Cov7_KeyAnyVal_StringValue(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"key": "strKey", "isString": true, "anyVal": "hello"}
+	expected := args.Map{
+		"key": "strKey",
+		"isString": true,
+		"anyVal": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyVal returns string type -- string value", actual)
 }
 
@@ -189,7 +197,10 @@ func Test_Cov7_DiffLeftRight_SpecificFullString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"leftNotEmpty": true, "rightNotEmpty": true}
+	expected := args.Map{
+		"leftNotEmpty": true,
+		"rightNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DiffLeftRight returns full strings -- both sides", actual)
 }
 

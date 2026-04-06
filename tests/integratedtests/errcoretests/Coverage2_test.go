@@ -615,10 +615,16 @@ func Test_Cov2_LineDiff_Match(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a", "b"}, []string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "allMatch": diffs[0].Status == "  "}
+	actual := args.Map{
+		"len": len(diffs),
+		"allMatch": diffs[0].Status == "  ",
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "allMatch": true}
+	expected := args.Map{
+		"len": 2,
+		"allMatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns matching -- same lines", actual)
 }
 
@@ -858,10 +864,16 @@ func Test_Cov2_ExpectingFuture(t *testing.T) {
 	record := errcore.ExpectingFuture("title", "expected")
 
 	// Act
-	actual := args.Map{"notNil": record != nil, "title": record.ExpectingTitle}
+	actual := args.Map{
+		"notNil": record != nil,
+		"title": record.ExpectingTitle,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "title": "title"}
+	expected := args.Map{
+		"notNil": true,
+		"title": "title",
+	}
 	expected.ShouldBeEqual(t, 0, "ExpectingFuture returns record -- with title", actual)
 }
 
@@ -1199,10 +1211,16 @@ func Test_Cov2_ToStringPtr_NilErr(t *testing.T) {
 	result := errcore.ToStringPtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "empty": *result == ""}
+	actual := args.Map{
+		"notNil": result != nil,
+		"empty": *result == "",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringPtr returns empty ptr -- nil error", actual)
 }
 
@@ -1211,10 +1229,16 @@ func Test_Cov2_ToStringPtr_WithErr(t *testing.T) {
 	result := errcore.ToStringPtr(errors.New("fail"))
 
 	// Act
-	actual := args.Map{"notNil": result != nil, "value": *result}
+	actual := args.Map{
+		"notNil": result != nil,
+		"value": *result,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "value": "fail"}
+	expected := args.Map{
+		"notNil": true,
+		"value": "fail",
+	}
 	expected.ShouldBeEqual(t, 0, "ToStringPtr returns error ptr -- with error", actual)
 }
 

@@ -621,10 +621,16 @@ func Test_C16_Dynamic_Loop(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "sum": sum}
+	actual := args.Map{
+		"called": called,
+		"sum": sum,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "sum": 60}
+	expected := args.Map{
+		"called": true,
+		"sum": 60,
+	}
 	expected.ShouldBeEqual(t, 0, "Loop returns correct value -- with args", actual)
 }
 
@@ -713,10 +719,16 @@ func Test_C16_Dynamic_LoopMap(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 2}
+	expected := args.Map{
+		"called": true,
+		"count": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- with args", actual)
 }
 
@@ -730,10 +742,16 @@ func Test_C16_Dynamic_LoopMap_Break(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": called, "count": count}
+	actual := args.Map{
+		"called": called,
+		"count": count,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "count": 1}
+	expected := args.Map{
+		"called": true,
+		"count": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "LoopMap returns correct value -- break", actual)
 }
 
@@ -1112,10 +1130,16 @@ func Test_C16_TypedDynamic_Bytes_IsBytes(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "len": len(b)}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(b),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic returns correct value -- Bytes []byte", actual)
 }
 
@@ -1793,10 +1817,16 @@ func Test_C16_BytesConverter_ToBool(t *testing.T) {
 	val, err := bc.ToBool()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "noErr": true}
+	expected := args.Map{
+		"val": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToBool", actual)
 }
 
@@ -1832,10 +1862,16 @@ func Test_C16_BytesConverter_ToStrings(t *testing.T) {
 	val, err := bc.ToStrings()
 
 	// Act
-	actual := args.Map{"len": len(val), "noErr": err == nil}
+	actual := args.Map{
+		"len": len(val),
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "noErr": true}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToStrings", actual)
 }
 
@@ -1858,10 +1894,16 @@ func Test_C16_BytesConverter_ToInt64(t *testing.T) {
 	val, err := bc.ToInt64()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int64(42), "noErr": true}
+	expected := args.Map{
+		"val": int64(42),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- ToInt64", actual)
 }
 
@@ -1885,10 +1927,16 @@ func Test_C16_BytesConverter_Deserialize(t *testing.T) {
 	err := bc.Deserialize(&s)
 
 	// Act
-	actual := args.Map{"val": s, "noErr": err == nil}
+	actual := args.Map{
+		"val": s,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "noErr": true}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesConverter returns correct value -- Deserialize", actual)
 }
 

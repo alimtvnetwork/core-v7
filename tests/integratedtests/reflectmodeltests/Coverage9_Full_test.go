@@ -26,7 +26,10 @@ func Test_C9_FieldProcessor_IsFieldType(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchStr": true, "matchInt": false}
+	expected := args.Map{
+		"matchStr": true,
+		"matchInt": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor.IsFieldType returns correct value -- with args", actual)
 
 	var nilFp *reflectmodel.FieldProcessor
@@ -50,7 +53,10 @@ func Test_C9_FieldProcessor_IsFieldKind(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchStr": true, "matchInt": false}
+	expected := args.Map{
+		"matchStr": true,
+		"matchInt": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FieldProcessor.IsFieldKind returns correct value -- with args", actual)
 
 	var nilFp *reflectmodel.FieldProcessor

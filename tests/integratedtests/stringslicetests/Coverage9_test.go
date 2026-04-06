@@ -19,10 +19,16 @@ func Test_Cov9_LinesProcess_SkipLines(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesProcess returns filtered -- isTake false skips", actual)
 }
 
@@ -47,10 +53,18 @@ func Test_Cov9_LinesProcess_TakeAll(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a!", "last": "b!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a!",
+		"last": "b!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesProcess returns all processed -- take all no break", actual)
 }
 
@@ -85,10 +99,18 @@ func Test_Cov9_SafeRangeItems_ValidRange(t *testing.T) {
 	result := stringslice.SafeRangeItems([]string{"a", "b", "c", "d"}, 1, 3)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "b", "last": "c"}
+	expected := args.Map{
+		"len": 2,
+		"first": "b",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeRangeItems returns range -- valid start and end", actual)
 }
 
@@ -106,7 +128,11 @@ func Test_Cov9_SafeIndexesDefaultWithDetail_AllValid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valuesLen": 3, "anyMissing": false, "isValid": true}
+	expected := args.Map{
+		"valuesLen": 3,
+		"anyMissing": false,
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesDefaultWithDetail returns all valid -- no missing indexes", actual)
 }
 
@@ -122,7 +148,11 @@ func Test_Cov9_SafeIndexesDefaultWithDetail_NoIndexes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valuesLen": 0, "anyMissing": false, "isValid": true}
+	expected := args.Map{
+		"valuesLen": 0,
+		"anyMissing": false,
+		"isValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesDefaultWithDetail returns empty values -- no indexes requested", actual)
 }
 
@@ -141,7 +171,12 @@ func Test_Cov9_InvalidIndexValuesDetail(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valuesLen": 0, "missingLen": 0, "isAnyMissing": true, "isValid": false}
+	expected := args.Map{
+		"valuesLen": 0,
+		"missingLen": 0,
+		"isAnyMissing": true,
+		"isValid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidIndexValuesDetail returns invalid -- default", actual)
 }
 
@@ -158,7 +193,13 @@ func Test_Cov9_InvalidFirstLastStatus(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "", "last": "", "isValid": false, "hasFirst": false, "hasLast": false}
+	expected := args.Map{
+		"first": "",
+		"last": "",
+		"isValid": false,
+		"hasFirst": false,
+		"hasLast": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidFirstLastStatus returns all false -- default", actual)
 }
 
@@ -173,7 +214,13 @@ func Test_Cov9_InvalidFirstLastStatusForLast(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"first": "hello", "last": "", "isValid": false, "hasFirst": true, "hasLast": false}
+	expected := args.Map{
+		"first": "hello",
+		"last": "",
+		"isValid": false,
+		"hasFirst": true,
+		"hasLast": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidFirstLastStatusForLast returns partial -- first only", actual)
 }
 
@@ -224,10 +271,18 @@ func Test_Cov9_NonEmptySlice_AllNonEmpty(t *testing.T) {
 	result := stringslice.NonEmptySlice([]string{"a", "b", "c"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "NonEmptySlice returns all -- all non-empty", actual)
 }
 
@@ -394,10 +449,18 @@ func Test_Cov9_SafeIndexesPtr_NonEmpty(t *testing.T) {
 	result := stringslice.SafeIndexesPtr([]string{"a", "b", "c"}, 0, 2)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexesPtr returns correct -- valid indexes", actual)
 }
 
@@ -462,10 +525,18 @@ func Test_Cov9_AnyLinesProcessAsync_IntSlice(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "1", "last": "3"}
+	expected := args.Map{
+		"len": 3,
+		"first": "1",
+		"last": "3",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyLinesProcessAsync returns processed -- int slice", actual)
 }
 
@@ -476,10 +547,16 @@ func Test_Cov9_LinesAsyncProcess_Single(t *testing.T) {
 	result := stringslice.LinesAsyncProcess([]string{"only"}, func(i int, s string) string { return s + "!" })
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "only!"}
+	expected := args.Map{
+		"len": 1,
+		"first": "only!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesAsyncProcess returns processed -- single item", actual)
 }
 
@@ -492,10 +569,16 @@ func Test_Cov9_ProcessAsync_Single(t *testing.T) {
 	}, "only")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "only!"}
+	expected := args.Map{
+		"len": 1,
+		"first": "only!",
+	}
 	expected.ShouldBeEqual(t, 0, "ProcessAsync returns processed -- single item", actual)
 }
 
@@ -522,10 +605,16 @@ func Test_Cov9_CloneUsingCap_Nil(t *testing.T) {
 	result := stringslice.CloneUsingCap(5, nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "capGe5": cap(result) >= 5}
+	actual := args.Map{
+		"len": len(result),
+		"capGe5": cap(result) >= 5,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "capGe5": true}
+	expected := args.Map{
+		"len": 0,
+		"capGe5": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CloneUsingCap returns empty with cap -- nil input", actual)
 }
 
@@ -564,10 +653,16 @@ func Test_Cov9_SafeIndexRanges_SingleElement(t *testing.T) {
 	result := stringslice.SafeIndexRanges([]string{"a", "b", "c"}, 1, 1)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexRanges returns single -- same start and end", actual)
 }
 
@@ -578,10 +673,18 @@ func Test_Cov9_SafeIndexes_AllValid(t *testing.T) {
 	result := stringslice.SafeIndexes([]string{"a", "b", "c"}, 0, 1, 2)
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1], "third": result[2]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+		"third": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b", "third": "c"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+		"third": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexes returns all -- all valid indexes", actual)
 }
 
@@ -592,10 +695,16 @@ func Test_Cov9_IndexesDefault_SingleIndex(t *testing.T) {
 	result := stringslice.IndexesDefault([]string{"a", "b", "c"}, 1)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "IndexesDefault returns one -- single index", actual)
 }
 
@@ -672,10 +781,16 @@ func Test_Cov9_MergeNew_NilFirstWithItems(t *testing.T) {
 	result := stringslice.MergeNew(nil, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns items only -- nil first slice", actual)
 }
 
@@ -698,10 +813,16 @@ func Test_Cov9_PrependNew_NilSlice(t *testing.T) {
 	result := stringslice.PrependNew(nil, "a")
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew returns prepended only -- nil second slice", actual)
 }
 

@@ -394,10 +394,16 @@ func Test_Cov39_AnyCollection_RemoveAt_Valid(t *testing.T) {
 	ok := c.RemoveAt(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": c.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection RemoveAt valid", actual)
 }
 
@@ -654,10 +660,16 @@ func Test_Cov39_AnyCollection_AddAnyWithTypeValidation_Valid(t *testing.T) {
 	err := c.AddAnyWithTypeValidation(true, reflect.TypeOf(""), "hello")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": c.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyWithTypeValidation valid", actual)
 }
 
@@ -680,10 +692,16 @@ func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnError(t *t
 	err := c.AddAnyItemsWithTypeValidation(true, true, reflect.TypeOf(""), "a", 42, "b")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": c.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyItemsWithTypeValidation continue on error", actual)
 }
 
@@ -693,10 +711,16 @@ func Test_Cov39_AnyCollection_AddAnyItemsWithTypeValidation_StopOnError(t *testi
 	err := c.AddAnyItemsWithTypeValidation(false, true, reflect.TypeOf(""), "a", 42, "b")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": c.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection AddAnyItemsWithTypeValidation stop on error", actual)
 }
 
@@ -711,10 +735,16 @@ func Test_Cov39_AnyCollection_JsonString_Valid(t *testing.T) {
 	s, err := c.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(s) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(s) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection JsonString valid", actual)
 }
 
@@ -739,10 +769,16 @@ func Test_Cov39_AnyCollection_MarshalJSON(t *testing.T) {
 	b, err := c.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonEmpty": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection MarshalJSON", actual)
 }
 
@@ -752,10 +788,16 @@ func Test_Cov39_AnyCollection_UnmarshalJSON_Valid(t *testing.T) {
 	err := c.UnmarshalJSON([]byte(`[1,2,3]`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": c.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": c.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 3}
+	expected := args.Map{
+		"noErr": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection UnmarshalJSON valid", actual)
 }
 

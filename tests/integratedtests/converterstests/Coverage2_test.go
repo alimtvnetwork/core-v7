@@ -14,10 +14,16 @@ func Test_Cov2_StringTo_Integer(t *testing.T) {
 	result, err := converters.StringTo.Integer("42")
 
 	// Act
-	actual := args.Map{"value": result, "hasError": err != nil}
+	actual := args.Map{
+		"value": result,
+		"hasError": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"value": 42, "hasError": false}
+	expected := args.Map{
+		"value": 42,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Integer returns correct value -- with args", actual)
 }
 
@@ -38,10 +44,16 @@ func Test_Cov2_StringTo_Float64(t *testing.T) {
 	result, err := converters.StringTo.Float64("3.14")
 
 	// Act
-	actual := args.Map{"gt3": result > 3.0, "hasError": err != nil}
+	actual := args.Map{
+		"gt3": result > 3.0,
+		"hasError": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"gt3": true, "hasError": false}
+	expected := args.Map{
+		"gt3": true,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Float64 returns correct value -- with args", actual)
 }
 
@@ -62,10 +74,16 @@ func Test_Cov2_StringTo_Byte(t *testing.T) {
 	result, err := converters.StringTo.Byte("42")
 
 	// Act
-	actual := args.Map{"value": int(result), "hasError": err != nil}
+	actual := args.Map{
+		"value": int(result),
+		"hasError": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"value": 42, "hasError": false}
+	expected := args.Map{
+		"value": 42,
+		"hasError": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Byte returns correct value -- with args", actual)
 }
 

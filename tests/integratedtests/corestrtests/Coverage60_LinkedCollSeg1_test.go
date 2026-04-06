@@ -266,10 +266,16 @@ func Test_Cov60_LC_IsEmpty(t *testing.T) {
 		lc := corestr.New.LinkedCollection.Create()
 
 		// Act
-		actual := args.Map{"empty": lc.IsEmpty(), "hasItems": lc.HasItems()}
+		actual := args.Map{
+			"empty": lc.IsEmpty(),
+			"hasItems": lc.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty/HasItems on empty", actual)
 	})
 }
@@ -296,10 +302,16 @@ func Test_Cov60_LC_InsertAt_Front(t *testing.T) {
 		lc.InsertAt(0, col)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "InsertAt 0 adds to front", actual)
 	})
 }
@@ -473,10 +485,16 @@ func Test_Cov60_LC_Add_ToEmpty(t *testing.T) {
 		lc.Add(col)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "first": "a"}
+		expected := args.Map{
+			"len": 1,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Add to empty sets head and tail", actual)
 	})
 }
@@ -488,10 +506,16 @@ func Test_Cov60_LC_Add_ToExisting(t *testing.T) {
 		lc.Add(corestr.New.Collection.Strings([]string{"b"}))
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "last": lc.Last().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"last": lc.Last().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "last": "b"}
+		expected := args.Map{
+			"len": 2,
+			"last": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "Add to existing appends to tail", actual)
 	})
 }
@@ -580,10 +604,16 @@ func Test_Cov60_LC_AppendNode_ToEmpty(t *testing.T) {
 		lc.AppendNode(node)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "first": "a"}
+		expected := args.Map{
+			"len": 1,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendNode to empty sets head", actual)
 	})
 }
@@ -660,10 +690,16 @@ func Test_Cov60_LC_PushFront(t *testing.T) {
 		lc.PushFront(corestr.New.Collection.Strings([]string{"a"}))
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "PushFront adds to front", actual)
 	})
 }
@@ -675,10 +711,16 @@ func Test_Cov60_LC_AddFrontLock(t *testing.T) {
 		lc.AddFrontLock(corestr.New.Collection.Strings([]string{"a"}))
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "AddFrontLock adds to front with lock", actual)
 	})
 }
@@ -974,10 +1016,16 @@ func Test_Cov60_LC_RemoveNodeByIndex_First(t *testing.T) {
 		lc.RemoveNodeByIndex(0)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "first": lc.First().First()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"first": lc.First().First(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "b"}
+		expected := args.Map{
+			"len": 2,
+			"first": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNodeByIndex removes first", actual)
 	})
 }
@@ -2289,10 +2337,16 @@ func Test_Cov60_LC_MarshalJSON(t *testing.T) {
 		b, err := lc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON returns bytes", actual)
 	})
 }
@@ -2304,10 +2358,16 @@ func Test_Cov60_LC_UnmarshalJSON(t *testing.T) {
 		err := lc.UnmarshalJSON([]byte(`["a","b"]`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": lc.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": lc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON parses items", actual)
 	})
 }
@@ -2410,10 +2470,16 @@ func Test_Cov60_LC_ParseInjectUsingJson(t *testing.T) {
 		r, err := lc.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson parses", actual)
 	})
 }

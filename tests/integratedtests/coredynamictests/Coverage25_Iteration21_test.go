@@ -18,10 +18,18 @@ func Test_I21_AnyCollection_Empty(t *testing.T) {
 	ac := coredynamic.EmptyAnyCollection()
 
 	// Act
-	actual := args.Map{"empty": ac.IsEmpty(), "len": ac.Length(), "count": ac.Count()}
+	actual := args.Map{
+		"empty": ac.IsEmpty(),
+		"len": ac.Length(),
+		"count": ac.Count(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "len": 0, "count": 0}
+	expected := args.Map{
+		"empty": true,
+		"len": 0,
+		"count": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns empty -- Empty", actual)
 }
 
@@ -43,10 +51,16 @@ func Test_I21_AnyCollection_Add(t *testing.T) {
 	ac.Add("a").Add("b")
 
 	// Act
-	actual := args.Map{"len": ac.Length(), "hasAny": ac.HasAnyItem()}
+	actual := args.Map{
+		"len": ac.Length(),
+		"hasAny": ac.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasAny": true}
+	expected := args.Map{
+		"len": 2,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- Add", actual)
 }
 
@@ -187,10 +201,16 @@ func Test_I21_AnyCollection_Items_Nil(t *testing.T) {
 	items := ac.Items()
 
 	// Act
-	actual := args.Map{"nil": items == nil, "len": len(items)}
+	actual := args.Map{
+		"nil": items == nil,
+		"len": len(items),
+	}
 
 	// Assert
-	expected := args.Map{"nil": false, "len": 0}
+	expected := args.Map{
+		"nil": false,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns nil -- Items nil", actual)
 }
 
@@ -228,10 +248,16 @@ func Test_I21_AnyCollection_First(t *testing.T) {
 	ac.Add("a").Add("b")
 
 	// Act
-	actual := args.Map{"first": ac.First(), "last": ac.Last()}
+	actual := args.Map{
+		"first": ac.First(),
+		"last": ac.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "b"}
+	expected := args.Map{
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- First/Last", actual)
 }
 
@@ -388,10 +414,16 @@ func Test_I21_AnyCollection_HasIndex(t *testing.T) {
 	ac.Add("a")
 
 	// Act
-	actual := args.Map{"has0": ac.HasIndex(0), "has1": ac.HasIndex(1)}
+	actual := args.Map{
+		"has0": ac.HasIndex(0),
+		"has1": ac.HasIndex(1),
+	}
 
 	// Assert
-	expected := args.Map{"has0": true, "has1": false}
+	expected := args.Map{
+		"has0": true,
+		"has1": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- HasIndex", actual)
 }
 
@@ -402,10 +434,16 @@ func Test_I21_AnyCollection_RemoveAt(t *testing.T) {
 	ok := ac.RemoveAt(1)
 
 	// Act
-	actual := args.Map{"ok": ok, "len": ac.Length()}
+	actual := args.Map{
+		"ok": ok,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "len": 2}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- RemoveAt", actual)
 }
 
@@ -557,10 +595,16 @@ func Test_I21_AnyCollection_AddAnyWithTypeValidation_Match(t *testing.T) {
 	err := ac.AddAnyWithTypeValidation(false, reflect.TypeOf(""), "hello")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": ac.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyWithTypeValidation match", actual)
 }
 
@@ -570,10 +614,16 @@ func Test_I21_AnyCollection_AddAnyWithTypeValidation_Mismatch(t *testing.T) {
 	err := ac.AddAnyWithTypeValidation(false, reflect.TypeOf(""), 42)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": ac.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 0}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyWithTypeValidation mismatch", actual)
 }
 
@@ -587,10 +637,16 @@ func Test_I21_AnyCollection_AddAnyItemsWithTypeValidation_StopOnErr(t *testing.T
 	)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": ac.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 1}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation stop", actual)
 }
 
@@ -604,10 +660,16 @@ func Test_I21_AnyCollection_AddAnyItemsWithTypeValidation_ContinueOnErr(t *testi
 	)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "len": ac.Length()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "len": 2}
+	expected := args.Map{
+		"hasErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns non-empty -- AddAnyItemsWithTypeValidation continue", actual)
 }
 
@@ -750,10 +812,16 @@ func Test_I21_AnyCollection_JsonString(t *testing.T) {
 	s, err := ac.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- JsonString", actual)
 }
 
@@ -778,10 +846,16 @@ func Test_I21_AnyCollection_MarshalJSON(t *testing.T) {
 	b, err := ac.MarshalJSON()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- MarshalJSON", actual)
 }
 
@@ -791,10 +865,16 @@ func Test_I21_AnyCollection_UnmarshalJSON(t *testing.T) {
 	err := ac.UnmarshalJSON([]byte(`["a","b"]`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": ac.Length()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": ac.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 2}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- UnmarshalJSON", actual)
 }
 
@@ -914,10 +994,16 @@ func Test_I21_AnyCollection_ParseInjectUsingJson(t *testing.T) {
 	result, err := ac.ParseInjectUsingJson(jr)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -1011,10 +1097,16 @@ func Test_I21_AnyCollection_ReflectSetAt(t *testing.T) {
 	err := ac.ReflectSetAt(0, &target)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": target}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": target,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyCollection returns correct value -- ReflectSetAt", actual)
 }
 

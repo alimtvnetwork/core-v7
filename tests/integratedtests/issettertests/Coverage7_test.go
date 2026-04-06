@@ -14,10 +14,16 @@ func Test_Cov7_New_ValidName(t *testing.T) {
 	v, err := issetter.New("True")
 
 	// Act
-	actual := args.Map{"val": v, "isNilErr": err == nil}
+	actual := args.Map{
+		"val": v,
+		"isNilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": issetter.True, "isNilErr": true}
+	expected := args.Map{
+		"val": issetter.True,
+		"isNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid name", actual)
 }
 
@@ -384,37 +390,63 @@ func Test_Cov7_Value_IsYes(t *testing.T) {
 
 func Test_Cov7_Value_IsTrueOrSet(t *testing.T) {
 	// Act
-	actual := args.Map{"true": issetter.True.IsTrueOrSet(), "set": issetter.Set.IsTrueOrSet(), "false": issetter.False.IsTrueOrSet()}
+	actual := args.Map{
+		"true": issetter.True.IsTrueOrSet(),
+		"set": issetter.Set.IsTrueOrSet(),
+		"false": issetter.False.IsTrueOrSet(),
+	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": true, "false": false}
+	expected := args.Map{
+		"true": true,
+		"set": true,
+		"false": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value.IsTrueOrSet returns non-empty -- with args", actual)
 }
 
 func Test_Cov7_Value_IsInitBoolean(t *testing.T) {
 	// Act
-	actual := args.Map{"true": issetter.True.IsInitBoolean(), "set": issetter.Set.IsInitBoolean()}
+	actual := args.Map{
+		"true": issetter.True.IsInitBoolean(),
+		"set": issetter.Set.IsInitBoolean(),
+	}
 
 	// Assert
-	expected := args.Map{"true": true, "set": false}
+	expected := args.Map{
+		"true": true,
+		"set": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value.IsInitBoolean returns correct value -- with args", actual)
 }
 
 func Test_Cov7_Value_IsDefinedLogically(t *testing.T) {
 	// Act
-	actual := args.Map{"true": issetter.True.IsDefinedLogically(), "wild": issetter.Wildcard.IsDefinedLogically()}
+	actual := args.Map{
+		"true": issetter.True.IsDefinedLogically(),
+		"wild": issetter.Wildcard.IsDefinedLogically(),
+	}
 
 	// Assert
-	expected := args.Map{"true": true, "wild": false}
+	expected := args.Map{
+		"true": true,
+		"wild": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value.IsDefinedLogically returns correct value -- with args", actual)
 }
 
 func Test_Cov7_Value_IsUndefinedLogically(t *testing.T) {
 	// Act
-	actual := args.Map{"wild": issetter.Wildcard.IsUndefinedLogically(), "true": issetter.True.IsUndefinedLogically()}
+	actual := args.Map{
+		"wild": issetter.Wildcard.IsUndefinedLogically(),
+		"true": issetter.True.IsUndefinedLogically(),
+	}
 
 	// Assert
-	expected := args.Map{"wild": true, "true": false}
+	expected := args.Map{
+		"wild": true,
+		"true": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value.IsUndefinedLogically returns correct value -- with args", actual)
 }
 
@@ -507,10 +539,18 @@ func Test_Cov7_Value_IsWildcardOrBool_False(t *testing.T) {
 
 func Test_Cov7_Value_ToByteCondition(t *testing.T) {
 	// Act
-	actual := args.Map{"true": issetter.True.ToByteCondition(1, 0, 255), "false": issetter.False.ToByteCondition(1, 0, 255), "uninit": issetter.Uninitialized.ToByteCondition(1, 0, 255)}
+	actual := args.Map{
+		"true": issetter.True.ToByteCondition(1, 0, 255),
+		"false": issetter.False.ToByteCondition(1, 0, 255),
+		"uninit": issetter.Uninitialized.ToByteCondition(1, 0, 255),
+	}
 
 	// Assert
-	expected := args.Map{"true": byte(1), "false": byte(0), "uninit": byte(255)}
+	expected := args.Map{
+		"true": byte(1),
+		"false": byte(0),
+		"uninit": byte(255),
+	}
 	expected.ShouldBeEqual(t, 0, "Value.ToByteCondition returns correct value -- with args", actual)
 }
 

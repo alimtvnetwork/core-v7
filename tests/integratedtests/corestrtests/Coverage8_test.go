@@ -42,7 +42,10 @@ func Test_Cov8_ValidValue_Empty(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isValid": true, "isEmpty": true}
+		expected := args.Map{
+			"isValid": true,
+			"isEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns valid-empty -- empty string", actual)
 	})
 }
@@ -59,7 +62,10 @@ func Test_Cov8_ValidValue_Invalid(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isValid": false, "message": "bad input"}
+		expected := args.Map{
+			"isValid": false,
+			"message": "bad input",
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns invalid -- error message", actual)
 	})
 }
@@ -78,7 +84,10 @@ func Test_Cov8_LeftRight(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"left": "l", "right": "r"}
+		expected := args.Map{
+			"left": "l",
+			"right": "r",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight returns fields -- struct access", actual)
 	})
 }
@@ -98,7 +107,11 @@ func Test_Cov8_LeftMiddleRight(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"left": "l", "middle": "m", "right": "r"}
+		expected := args.Map{
+			"left": "l",
+			"middle": "m",
+			"right": "r",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRight returns fields -- struct access", actual)
 	})
 }
@@ -117,7 +130,10 @@ func Test_Cov8_LeftRightFromSplit(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value"}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit returns split -- equals separator", actual)
 	})
 }
@@ -128,10 +144,16 @@ func Test_Cov8_LeftRightFromSplit_NoSep(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("nosep", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "nosep", "right": ""}
+		expected := args.Map{
+			"left": "nosep",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit returns left-only -- no separator", actual)
 	})
 }
@@ -151,7 +173,11 @@ func Test_Cov8_LeftMiddleRightFromSplit(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"left": "a", "middle": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"middle": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit returns three parts -- colon separator", actual)
 	})
 }
@@ -173,7 +199,10 @@ func Test_Cov8_ValueStatus(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"value": "test", "isValid": true}
+		expected := args.Map{
+			"value": "test",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus returns fields -- struct access", actual)
 	})
 }
@@ -195,7 +224,10 @@ func Test_Cov8_TextWithLineNumber(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"lineNo": 5, "text": "hello"}
+		expected := args.Map{
+			"lineNo": 5,
+			"text": "hello",
+		}
 		expected.ShouldBeEqual(t, 0, "TextWithLineNumber returns fields -- struct access", actual)
 	})
 }
@@ -215,7 +247,11 @@ func Test_Cov8_KeyValuePair(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"key": "k", "value": "v", "notEmpty": true}
+		expected := args.Map{
+			"key": "k",
+			"value": "v",
+			"notEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair returns fields -- struct access", actual)
 	})
 }
@@ -235,7 +271,10 @@ func Test_Cov8_CloneSlice(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 3, "first": "a"}
+		expected := args.Map{
+			"len": 3,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "CloneSlice returns copy -- valid input", actual)
 	})
 }
@@ -322,7 +361,10 @@ func Test_Cov8_SimpleStringOnce_Uninitialized(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"value": "pending", "isInitialized": false}
+		expected := args.Map{
+			"value": "pending",
+			"isInitialized": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns uninitialized -- Uninitialized", actual)
 	})
 }
@@ -339,7 +381,10 @@ func Test_Cov8_SimpleStringOnce_Empty(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "isInitialized": false}
+		expected := args.Map{
+			"isEmpty": true,
+			"isInitialized": false,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns empty -- Empty creator", actual)
 	})
 }

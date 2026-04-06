@@ -82,10 +82,16 @@ func Test_Cov2_Bytes_HasAnyItem_Empty(t *testing.T) {
 	b := &coreconverted.Bytes{Values: []byte{}}
 
 	// Act
-	actual := args.Map{"hasAny": b.HasAnyItem(), "isEmpty": b.IsEmpty()}
+	actual := args.Map{
+		"hasAny": b.HasAnyItem(),
+		"isEmpty": b.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"hasAny": false, "isEmpty": true}
+	expected := args.Map{
+		"hasAny": false,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Bytes_HasAnyItem_Empty returns empty -- with args", actual)
 }
 
@@ -94,9 +100,15 @@ func Test_Cov2_Integers_HasAnyItem_Empty(t *testing.T) {
 	i := &coreconverted.Integers{Values: []int{}}
 
 	// Act
-	actual := args.Map{"hasAny": i.HasAnyItem(), "isEmpty": i.IsEmpty()}
+	actual := args.Map{
+		"hasAny": i.HasAnyItem(),
+		"isEmpty": i.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"hasAny": false, "isEmpty": true}
+	expected := args.Map{
+		"hasAny": false,
+		"isEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integers_HasAnyItem_Empty returns empty -- with args", actual)
 }

@@ -339,10 +339,16 @@ func Test_Cov_User_Ptr(t *testing.T) {
 	p := u.Ptr()
 
 	// Act
-	actual := args.Map{"notNil": p != nil, "name": p.Name}
+	actual := args.Map{
+		"notNil": p != nil,
+		"name": p.Name,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "name": "test"}
+	expected := args.Map{
+		"notNil": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "Ptr returns correct value -- with args", actual)
 }
 
@@ -371,10 +377,16 @@ func Test_Cov_NewUser_Create(t *testing.T) {
 	u := corepayload.New.User.Create(true, "test", "admin")
 
 	// Act
-	actual := args.Map{"name": u.Name, "sys": u.IsSystemUser}
+	actual := args.Map{
+		"name": u.Name,
+		"sys": u.IsSystemUser,
+	}
 
 	// Assert
-	expected := args.Map{"name": "test", "sys": true}
+	expected := args.Map{
+		"name": "test",
+		"sys": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.Create returns correct value -- with args", actual)
 }
 
@@ -383,10 +395,16 @@ func Test_Cov_NewUser_NonSys(t *testing.T) {
 	u := corepayload.New.User.NonSysCreate("test", "admin")
 
 	// Act
-	actual := args.Map{"name": u.Name, "sys": u.IsSystemUser}
+	actual := args.Map{
+		"name": u.Name,
+		"sys": u.IsSystemUser,
+	}
 
 	// Assert
-	expected := args.Map{"name": "test", "sys": false}
+	expected := args.Map{
+		"name": "test",
+		"sys": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.NonSysCreate returns correct value -- with args", actual)
 }
 
@@ -395,10 +413,16 @@ func Test_Cov_NewUser_NonSysId(t *testing.T) {
 	u := corepayload.New.User.NonSysCreateId("1", "test", "admin")
 
 	// Act
-	actual := args.Map{"id": u.Identifier, "name": u.Name}
+	actual := args.Map{
+		"id": u.Identifier,
+		"name": u.Name,
+	}
 
 	// Assert
-	expected := args.Map{"id": "1", "name": "test"}
+	expected := args.Map{
+		"id": "1",
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.NonSysCreateId returns correct value -- with args", actual)
 }
 
@@ -419,10 +443,16 @@ func Test_Cov_NewUser_SystemId(t *testing.T) {
 	u := corepayload.New.User.SystemId("1", "test", "admin")
 
 	// Act
-	actual := args.Map{"id": u.Identifier, "sys": u.IsSystemUser}
+	actual := args.Map{
+		"id": u.Identifier,
+		"sys": u.IsSystemUser,
+	}
 
 	// Assert
-	expected := args.Map{"id": "1", "sys": true}
+	expected := args.Map{
+		"id": "1",
+		"sys": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.SystemId returns correct value -- with args", actual)
 }
 
@@ -443,10 +473,16 @@ func Test_Cov_NewUser_Empty(t *testing.T) {
 	u := corepayload.New.User.Empty()
 
 	// Act
-	actual := args.Map{"notNil": u != nil, "nameEmpty": u.Name == ""}
+	actual := args.Map{
+		"notNil": u != nil,
+		"nameEmpty": u.Name == "",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nameEmpty": true}
+	expected := args.Map{
+		"notNil": true,
+		"nameEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.Empty returns empty -- with args", actual)
 }
 
@@ -457,10 +493,16 @@ func Test_Cov_NewUser_Deserialize(t *testing.T) {
 	u, err := corepayload.New.User.Deserialize(bytes)
 
 	// Act
-	actual := args.Map{"err": err == nil, "name": u.Name}
+	actual := args.Map{
+		"err": err == nil,
+		"name": u.Name,
+	}
 
 	// Assert
-	expected := args.Map{"err": true, "name": "test"}
+	expected := args.Map{
+		"err": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "NewUser.Deserialize returns correct value -- with args", actual)
 }
 
@@ -494,9 +536,15 @@ func Test_Cov_NewUser_CastOrDeserializeFrom_Valid(t *testing.T) {
 	u, err := corepayload.New.User.CastOrDeserializeFrom(src)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": u != nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": u != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastOrDeserializeFrom returns non-empty -- valid", actual)
 }

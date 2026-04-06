@@ -32,10 +32,16 @@ func Test_Cov2_RangesInBetween(t *testing.T) {
 	result := reqtype.RangesInBetween(reqtype.Create, reqtype.Delete)
 
 	// Act
-	actual := args.Map{"len": len(result), "firstIsCreate": result[0] == reqtype.Create}
+	actual := args.Map{
+		"len": len(result),
+		"firstIsCreate": result[0] == reqtype.Create,
+	}
 
 	// Assert
-	expected := args.Map{"len": 4, "firstIsCreate": true}
+	expected := args.Map{
+		"len": 4,
+		"firstIsCreate": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RangesInBetween returns correct value -- Create-Delete", actual)
 }
 
@@ -44,10 +50,16 @@ func Test_Cov2_RangesStrings(t *testing.T) {
 	result := reqtype.RangesStrings(reqtype.Create, reqtype.Read)
 
 	// Act
-	actual := args.Map{"len": len(result), "firstNotEmpty": result[0] != ""}
+	actual := args.Map{
+		"len": len(result),
+		"firstNotEmpty": result[0] != "",
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstNotEmpty": true}
+	expected := args.Map{
+		"len": 2,
+		"firstNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RangesStrings returns correct value -- with args", actual)
 }
 

@@ -79,10 +79,16 @@ func Test_Cov17_DiffLeftRight_SpecificFullString(t *testing.T) {
 	l, r := d.SpecificFullString()
 
 	// Act
-	actual := args.Map{"leftNotEmpty": l != "", "rightNotEmpty": r != ""}
+	actual := args.Map{
+		"leftNotEmpty": l != "",
+		"rightNotEmpty": r != "",
+	}
 
 	// Assert
-	expected := args.Map{"leftNotEmpty": true, "rightNotEmpty": true}
+	expected := args.Map{
+		"leftNotEmpty": true,
+		"rightNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SpecificFullString returns non-empty -- valid", actual)
 }
 
@@ -379,10 +385,16 @@ func Test_Cov17_UnsupportedNames(t *testing.T) {
 	result := enumimpl.UnsupportedNames([]string{"a", "b", "c"}, "a", "c")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "UnsupportedNames returns unsupported -- b only", actual)
 }
 
@@ -466,10 +478,16 @@ func Test_Cov17_KeyAnyVal_KeyValInteger(t *testing.T) {
 	kvi := kv.KeyValInteger()
 
 	// Act
-	actual := args.Map{"key": kvi.Key, "val": kvi.ValueInteger}
+	actual := args.Map{
+		"key": kvi.Key,
+		"val": kvi.ValueInteger,
+	}
 
 	// Assert
-	expected := args.Map{"key": "x", "val": 5}
+	expected := args.Map{
+		"key": "x",
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValInteger returns correct -- from KeyAnyVal", actual)
 }
 
@@ -545,10 +563,16 @@ func Test_Cov17_KeyAnyValues_Valid(t *testing.T) {
 	result := enumimpl.KeyAnyValues([]string{"a", "b"}, []int{1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "firstKey": result[0].Key}
+	actual := args.Map{
+		"len": len(result),
+		"firstKey": result[0].Key,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "firstKey": "a"}
+	expected := args.Map{
+		"len": 2,
+		"firstKey": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyValues returns 2 -- valid input", actual)
 }
 
@@ -559,10 +583,18 @@ func Test_Cov17_IntegersRangesOfAnyVal(t *testing.T) {
 	result := enumimpl.IntegersRangesOfAnyVal([]int{3, 1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1, "last": 3}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersRangesOfAnyVal returns sorted -- valid slice", actual)
 }
 

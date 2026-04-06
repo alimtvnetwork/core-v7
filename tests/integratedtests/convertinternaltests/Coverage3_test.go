@@ -20,7 +20,11 @@ func Test_Cov3_AnyTo_FullPropertyString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": true, "nil": "", "string": true}
+	expected := args.Map{
+		"int": true,
+		"nil": "",
+		"string": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- FullPropertyString", actual)
 }
 
@@ -33,7 +37,11 @@ func Test_Cov3_AnyTo_TypeName(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": true, "nil": "", "string": true}
+	expected := args.Map{
+		"int": true,
+		"nil": "",
+		"string": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- TypeName", actual)
 }
 
@@ -49,7 +57,10 @@ func Test_Cov3_AnyTo_SmartString_Error(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"error": "test error", "nilErr": ""}
+	expected := args.Map{
+		"error": "test error",
+		"nilErr": "",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns error -- SmartString error", actual)
 }
 
@@ -115,7 +126,10 @@ func Test_Cov3_AnyTo_SmartJson_Error(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"error": "json err", "nilErr": ""}
+	expected := args.Map{
+		"error": "json err",
+		"nilErr": "",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns error -- SmartJson error", actual)
 }
 
@@ -172,7 +186,12 @@ func Test_Cov3_AnyTo_SmartPrettyJsonLines(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"strLen": 2, "sliceLen": 2, "nilLen": 0, "structGt0": true}
+	expected := args.Map{
+		"strLen": 2,
+		"sliceLen": 2,
+		"nilLen": 0,
+		"structGt0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- SmartPrettyJsonLines", actual)
 }
 
@@ -182,10 +201,16 @@ func Test_Cov3_AnyTo_PrettyJsonLines(t *testing.T) {
 	nilResult := convertinternal.AnyTo.PrettyJsonLines(nil)
 
 	// Act
-	actual := args.Map{"gt0": len(result) > 0, "nilLen": len(nilResult)}
+	actual := args.Map{
+		"gt0": len(result) > 0,
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"gt0": true, "nilLen": 0}
+	expected := args.Map{
+		"gt0": true,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- PrettyJsonLines", actual)
 }
 
@@ -243,10 +268,16 @@ func Test_Cov3_AnyTo_Strings_AnySlice(t *testing.T) {
 	emptyResult := convertinternal.AnyTo.Strings([]any{})
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- Strings any slice", actual)
 }
 
@@ -258,10 +289,16 @@ func Test_Cov3_AnyTo_Strings_Error(t *testing.T) {
 	nilResult := convertinternal.AnyTo.Strings(nilErr)
 
 	// Act
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult)}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "nilLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns error -- Strings error", actual)
 }
 
@@ -330,10 +367,16 @@ func Test_Cov3_AnyTo_Strings_Bool(t *testing.T) {
 	result := convertinternal.AnyTo.Strings(true)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "true"}
+	expected := args.Map{
+		"len": 1,
+		"first": "true",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns correct value -- Strings bool", actual)
 }
 
@@ -362,7 +405,10 @@ func Test_Cov3_AnyTo_String_Error(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"error": "test", "nilErr": ""}
+	expected := args.Map{
+		"error": "test",
+		"nilErr": "",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo returns error -- String error", actual)
 }
 
@@ -381,7 +427,12 @@ func Test_Cov3_CodeFormatter_GolangRaw(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true, "emptyLen": 0, "emptyNoErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+		"emptyLen": 0,
+		"emptyNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CodeFormatter returns correct value -- GolangRaw", actual)
 }
 
@@ -397,7 +448,12 @@ func Test_Cov3_CodeFormatter_Golang(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true, "emptyResult": "", "emptyNoErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+		"emptyResult": "",
+		"emptyNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CodeFormatter returns correct value -- Golang", actual)
 }
 
@@ -418,31 +474,57 @@ func Test_Cov3_CodeFormatter_Golang_Invalid(t *testing.T) {
 func Test_Cov3_Integers_ToMapBool(t *testing.T) {
 	result := convertinternal.Integers.ToMapBool(1, 2, 3)
 	emptyResult := convertinternal.Integers.ToMapBool()
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult), "has1": result[1]}
-	expected := args.Map{"len": 3, "emptyLen": 0, "has1": true}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+		"has1": result[1],
+	}
+	expected := args.Map{
+		"len": 3,
+		"emptyLen": 0,
+		"has1": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Integers returns correct value -- ToMapBool", actual)
 }
 
 func Test_Cov3_Integers_Int8ToMapBool(t *testing.T) {
 	result := convertinternal.Integers.Int8ToMapBool(1, 2)
 	emptyResult := convertinternal.Integers.Int8ToMapBool()
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Integers returns correct value -- Int8ToMapBool", actual)
 }
 
 func Test_Cov3_Integers_FromIntegersToMap(t *testing.T) {
 	result := convertinternal.Integers.FromIntegersToMap(1, 2)
 	emptyResult := convertinternal.Integers.FromIntegersToMap()
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Integers returns correct value -- FromIntegersToMap", actual)
 }
 
 func Test_Cov3_Integers_IntegersToStrings(t *testing.T) {
 	result := convertinternal.Integers.IntegersToStrings([]int{1, 2})
-	actual := args.Map{"len": len(result), "first": result[0]}
-	expected := args.Map{"len": 2, "first": "1"}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
+	expected := args.Map{
+		"len": 2,
+		"first": "1",
+	}
 	expected.ShouldBeEqual(t, 0, "Integers returns correct value -- IntegersToStrings", actual)
 }
 
@@ -451,8 +533,16 @@ func Test_Cov3_Integers_IntegersToStrings(t *testing.T) {
 func Test_Cov3_KeyValues_ToMap(t *testing.T) {
 	result := convertinternal.KeyValuesTo.ToMap([]string{"a", "b"}, []string{"1", "2"})
 	nilResult := convertinternal.KeyValuesTo.ToMap(nil, nil)
-	actual := args.Map{"len": len(result), "nilLen": len(nilResult), "a": result["a"]}
-	expected := args.Map{"len": 2, "nilLen": 0, "a": "1"}
+	actual := args.Map{
+		"len": len(result),
+		"nilLen": len(nilResult),
+		"a": result["a"],
+	}
+	expected := args.Map{
+		"len": 2,
+		"nilLen": 0,
+		"a": "1",
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValues returns non-empty -- ToMap", actual)
 }
 
@@ -461,8 +551,14 @@ func Test_Cov3_KeyValues_ToMapPtr(t *testing.T) {
 	vals := []string{"1"}
 	result := convertinternal.KeyValuesTo.ToMapPtr(&keys, &vals)
 	nilResult := convertinternal.KeyValuesTo.ToMapPtr(nil, nil)
-	actual := args.Map{"notNil": result != nil, "nilNotNil": nilResult != nil}
-	expected := args.Map{"notNil": true, "nilNotNil": true}
+	actual := args.Map{
+		"notNil": result != nil,
+		"nilNotNil": nilResult != nil,
+	}
+	expected := args.Map{
+		"notNil": true,
+		"nilNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValues returns non-empty -- ToMapPtr", actual)
 }
 
@@ -470,22 +566,40 @@ func Test_Cov3_KeyValues_ToMapPtr(t *testing.T) {
 
 func Test_Cov3_Map_Keys_StringString(t *testing.T) {
 	keys, err := convertinternal.Map.Keys(map[string]string{"a": "1", "b": "2"})
-	actual := args.Map{"len": len(keys), "noErr": err == nil}
-	expected := args.Map{"len": 2, "noErr": true}
+	actual := args.Map{
+		"len": len(keys),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Keys string string", actual)
 }
 
 func Test_Cov3_Map_Keys_StringAny(t *testing.T) {
 	keys, err := convertinternal.Map.Keys(map[string]any{"a": 1})
-	actual := args.Map{"len": len(keys), "noErr": err == nil}
-	expected := args.Map{"len": 1, "noErr": true}
+	actual := args.Map{
+		"len": len(keys),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Keys string any", actual)
 }
 
 func Test_Cov3_Map_Keys_IntAny(t *testing.T) {
 	keys, err := convertinternal.Map.Keys(map[int]any{1: "a"})
-	actual := args.Map{"len": len(keys), "noErr": err == nil}
-	expected := args.Map{"len": 1, "noErr": true}
+	actual := args.Map{
+		"len": len(keys),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"len": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns correct value -- Keys int any", actual)
 }
 
@@ -498,15 +612,31 @@ func Test_Cov3_Map_Keys_Unsupported(t *testing.T) {
 
 func Test_Cov3_Map_KeysValues_StringString(t *testing.T) {
 	keys, vals, err := convertinternal.Map.KeysValues(map[string]string{"a": "1"})
-	actual := args.Map{"kLen": len(keys), "vLen": len(vals), "noErr": err == nil}
-	expected := args.Map{"kLen": 1, "vLen": 1, "noErr": true}
+	actual := args.Map{
+		"kLen": len(keys),
+		"vLen": len(vals),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"kLen": 1,
+		"vLen": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns non-empty -- KeysValues string string", actual)
 }
 
 func Test_Cov3_Map_KeysValues_StringAny(t *testing.T) {
 	keys, vals, err := convertinternal.Map.KeysValues(map[string]any{"a": 1})
-	actual := args.Map{"kLen": len(keys), "vLen": len(vals), "noErr": err == nil}
-	expected := args.Map{"kLen": 1, "vLen": 1, "noErr": true}
+	actual := args.Map{
+		"kLen": len(keys),
+		"vLen": len(vals),
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"kLen": 1,
+		"vLen": 1,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Map returns non-empty -- KeysValues string any", actual)
 }
 

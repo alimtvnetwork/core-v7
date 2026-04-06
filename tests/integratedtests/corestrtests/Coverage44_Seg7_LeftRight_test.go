@@ -18,10 +18,18 @@ func Test_Seg7_LR_NewLeftRight(t *testing.T) {
 		lr := corestr.NewLeftRight("left", "right")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "left", "right": "right", "valid": true}
+		expected := args.Map{
+			"left": "left",
+			"right": "right",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewLeftRight -- valid pair", actual)
 	})
 }
@@ -32,10 +40,16 @@ func Test_Seg7_LR_InvalidLeftRight(t *testing.T) {
 		lr := corestr.InvalidLeftRight("err")
 
 		// Act
-		actual := args.Map{"valid": lr.IsValid, "msg": lr.Message}
+		actual := args.Map{
+			"valid": lr.IsValid,
+			"msg": lr.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": "err"}
+		expected := args.Map{
+			"valid": false,
+			"msg": "err",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftRight -- invalid with message", actual)
 	})
 }
@@ -60,10 +74,18 @@ func Test_Seg7_LR_LeftRightUsingSlice_Two(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b", "valid": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice 2 -- valid", actual)
 	})
 }
@@ -74,10 +96,18 @@ func Test_Seg7_LR_LeftRightUsingSlice_One(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a"})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "", "valid": false}
+		expected := args.Map{
+			"left": "a",
+			"right": "",
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice 1 -- invalid", actual)
 	})
 }
@@ -102,10 +132,18 @@ func Test_Seg7_LR_LeftRightUsingSlice_Three(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b", "c"})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "c", "valid": false}
+		expected := args.Map{
+			"left": "a",
+			"right": "c",
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlice 3 -- invalid takes last", actual)
 	})
 }
@@ -116,10 +154,16 @@ func Test_Seg7_LR_LeftRightUsingSlicePtr(t *testing.T) {
 		lr := corestr.LeftRightUsingSlicePtr([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightUsingSlicePtr -- delegates", actual)
 	})
 }
@@ -144,10 +188,18 @@ func Test_Seg7_LR_LeftRightTrimmedUsingSlice(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b", "valid": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightTrimmedUsingSlice -- trimmed", actual)
 	})
 }
@@ -186,10 +238,18 @@ func Test_Seg7_LR_LeftRightTrimmedUsingSlice_One(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{"a"})
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "", "valid": false}
+		expected := args.Map{
+			"left": "a",
+			"right": "",
+			"valid": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightTrimmedUsingSlice one -- invalid", actual)
 	})
 }
@@ -200,10 +260,16 @@ func Test_Seg7_LR_Bytes(t *testing.T) {
 		lr := corestr.NewLeftRight("abc", "xyz")
 
 		// Act
-		actual := args.Map{"leftLen": len(lr.LeftBytes()), "rightLen": len(lr.RightBytes())}
+		actual := args.Map{
+			"leftLen": len(lr.LeftBytes()),
+			"rightLen": len(lr.RightBytes()),
+		}
 
 		// Assert
-		expected := args.Map{"leftLen": 3, "rightLen": 3}
+		expected := args.Map{
+			"leftLen": 3,
+			"rightLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftBytes/RightBytes -- correct length", actual)
 	})
 }
@@ -214,10 +280,16 @@ func Test_Seg7_LR_Trim(t *testing.T) {
 		lr := corestr.NewLeftRight(" a ", " b ")
 
 		// Act
-		actual := args.Map{"left": lr.LeftTrim(), "right": lr.RightTrim()}
+		actual := args.Map{
+			"left": lr.LeftTrim(),
+			"right": lr.RightTrim(),
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftTrim/RightTrim -- trimmed", actual)
 	})
 }
@@ -236,7 +308,12 @@ func Test_Seg7_LR_EmptyChecks(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"leftEmpty": false, "rightEmpty": true, "leftWS": false, "rightWS": true}
+		expected := args.Map{
+			"leftEmpty": false,
+			"rightEmpty": true,
+			"leftWS": false,
+			"rightWS": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Empty checks -- correct", actual)
 	})
 }
@@ -270,10 +347,16 @@ func Test_Seg7_LR_NonPtr_Ptr(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 
 		// Act
-		actual := args.Map{"nonPtrLeft": lr.NonPtr().Left, "ptrSame": lr.Ptr() == lr}
+		actual := args.Map{
+			"nonPtrLeft": lr.NonPtr().Left,
+			"ptrSame": lr.Ptr() == lr,
+		}
 
 		// Assert
-		expected := args.Map{"nonPtrLeft": "a", "ptrSame": true}
+		expected := args.Map{
+			"nonPtrLeft": "a",
+			"ptrSame": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NonPtr/Ptr -- correct", actual)
 	})
 }
@@ -293,7 +376,12 @@ func Test_Seg7_LR_Regex(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"leftMatch": true, "rightMatch": false, "nilLeft": false, "nilRight": false}
+		expected := args.Map{
+			"leftMatch": true,
+			"rightMatch": false,
+			"nilLeft": false,
+			"nilRight": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Regex -- matches", actual)
 	})
 }
@@ -312,7 +400,12 @@ func Test_Seg7_LR_Is(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isLeft": true, "isRight": true, "is": true, "isNot": false}
+		expected := args.Map{
+			"isLeft": true,
+			"isRight": true,
+			"is": true,
+			"isNot": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Is -- checks", actual)
 	})
 }
@@ -334,7 +427,13 @@ func Test_Seg7_LR_IsEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false, "self": true, "nilBoth": true, "nilOne": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+			"self": true,
+			"nilBoth": true,
+			"nilOne": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqual -- various", actual)
 	})
 }
@@ -346,10 +445,18 @@ func Test_Seg7_LR_Clone(t *testing.T) {
 		c := lr.Clone()
 
 		// Act
-		actual := args.Map{"left": c.Left, "right": c.Right, "diff": c != lr}
+		actual := args.Map{
+			"left": c.Left,
+			"right": c.Right,
+			"diff": c != lr,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b", "diff": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "b",
+			"diff": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- new copy", actual)
 	})
 }
@@ -361,10 +468,16 @@ func Test_Seg7_LR_Clear(t *testing.T) {
 		lr.Clear()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Clear -- emptied", actual)
 	})
 }
@@ -408,10 +521,16 @@ func Test_Seg7_LRFS_FromSplit(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value"}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplit -- split", actual)
 	})
 }
@@ -422,10 +541,16 @@ func Test_Seg7_LRFS_FromSplitTrimmed(t *testing.T) {
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "key", "right": "value"}
+		expected := args.Map{
+			"left": "key",
+			"right": "value",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitTrimmed -- trimmed", actual)
 	})
 }
@@ -436,10 +561,16 @@ func Test_Seg7_LRFS_FromSplitFull(t *testing.T) {
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b:c:d"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b:c:d",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFull -- first sep only", actual)
 	})
 }
@@ -450,10 +581,16 @@ func Test_Seg7_LRFS_FromSplitFullTrimmed(t *testing.T) {
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "b : c"}
+		expected := args.Map{
+			"left": "a",
+			"right": "b : c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRightFromSplitFullTrimmed -- trimmed", actual)
 	})
 }
@@ -487,7 +624,12 @@ func Test_Seg7_LMR_New(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c", "valid": true}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewLeftMiddleRight -- valid", actual)
 	})
 }
@@ -498,10 +640,16 @@ func Test_Seg7_LMR_Invalid(t *testing.T) {
 		lmr := corestr.InvalidLeftMiddleRight("err")
 
 		// Act
-		actual := args.Map{"valid": lmr.IsValid, "msg": lmr.Message}
+		actual := args.Map{
+			"valid": lmr.IsValid,
+			"msg": lmr.Message,
+		}
 
 		// Assert
-		expected := args.Map{"valid": false, "msg": "err"}
+		expected := args.Map{
+			"valid": false,
+			"msg": "err",
+		}
 		expected.ShouldBeEqual(t, 0, "InvalidLeftMiddleRight -- invalid", actual)
 	})
 }
@@ -531,7 +679,11 @@ func Test_Seg7_LMR_Bytes(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"leftLen": 2, "midLen": 2, "rightLen": 2}
+		expected := args.Map{
+			"leftLen": 2,
+			"midLen": 2,
+			"rightLen": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Bytes -- correct", actual)
 	})
 }
@@ -542,10 +694,18 @@ func Test_Seg7_LMR_Trim(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight(" a ", " b ", " c ")
 
 		// Act
-		actual := args.Map{"left": lmr.LeftTrim(), "mid": lmr.MiddleTrim(), "right": lmr.RightTrim()}
+		actual := args.Map{
+			"left": lmr.LeftTrim(),
+			"mid": lmr.MiddleTrim(),
+			"right": lmr.RightTrim(),
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Trim -- trimmed", actual)
 	})
 }
@@ -609,7 +769,12 @@ func Test_Seg7_LMR_IsAll(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"isAll": true, "isAllNot": false, "is": true, "isNot": false}
+		expected := args.Map{
+			"isAll": true,
+			"isAllNot": false,
+			"is": true,
+			"isNot": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAll/Is -- checks", actual)
 	})
 }
@@ -621,10 +786,20 @@ func Test_Seg7_LMR_Clone(t *testing.T) {
 		c := lmr.Clone()
 
 		// Act
-		actual := args.Map{"left": c.Left, "mid": c.Middle, "right": c.Right, "diff": c != lmr}
+		actual := args.Map{
+			"left": c.Left,
+			"mid": c.Middle,
+			"right": c.Right,
+			"diff": c != lmr,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c", "diff": true}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+			"diff": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- new copy", actual)
 	})
 }
@@ -636,10 +811,18 @@ func Test_Seg7_LMR_ToLeftRight(t *testing.T) {
 		lr := lmr.ToLeftRight()
 
 		// Act
-		actual := args.Map{"left": lr.Left, "right": lr.Right, "valid": lr.IsValid}
+		actual := args.Map{
+			"left": lr.Left,
+			"right": lr.Right,
+			"valid": lr.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "right": "c", "valid": true}
+		expected := args.Map{
+			"left": "a",
+			"right": "c",
+			"valid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ToLeftRight -- drops middle", actual)
 	})
 }
@@ -651,10 +834,18 @@ func Test_Seg7_LMR_Clear(t *testing.T) {
 		lmr.Clear()
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "", "mid": "", "right": ""}
+		expected := args.Map{
+			"left": "",
+			"mid": "",
+			"right": "",
+		}
 		expected.ShouldBeEqual(t, 0, "Clear -- emptied", actual)
 	})
 }
@@ -698,10 +889,18 @@ func Test_Seg7_LMRFS_FromSplit(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplit -- split", actual)
 	})
 }
@@ -712,10 +911,18 @@ func Test_Seg7_LMRFS_FromSplitTrimmed(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitTrimmed(" a . b . c ", ".")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitTrimmed -- trimmed", actual)
 	})
 }
@@ -726,10 +933,18 @@ func Test_Seg7_LMRFS_FromSplitN(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitN("a:b:c:d:e", ":")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c:d:e"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c:d:e",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitN -- 3 parts", actual)
 	})
 }
@@ -740,10 +955,18 @@ func Test_Seg7_LMRFS_FromSplitNTrimmed(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitNTrimmed(" a : b : c : d ", ":")
 
 		// Act
-		actual := args.Map{"left": lmr.Left, "mid": lmr.Middle, "right": lmr.Right}
+		actual := args.Map{
+			"left": lmr.Left,
+			"mid": lmr.Middle,
+			"right": lmr.Right,
+		}
 
 		// Assert
-		expected := args.Map{"left": "a", "mid": "b", "right": "c : d"}
+		expected := args.Map{
+			"left": "a",
+			"mid": "b",
+			"right": "c : d",
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRightFromSplitNTrimmed -- trimmed 3 parts", actual)
 	})
 }

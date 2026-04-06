@@ -556,10 +556,16 @@ func Test_I22_SortFunc(t *testing.T) {
 	col.SortFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last()}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortFunc returns correct value -- with args", actual)
 }
 
@@ -598,10 +604,16 @@ func Test_I22_SortedFunc(t *testing.T) {
 	sorted := col.SortedFunc(func(a, b int) bool { return a < b })
 
 	// Act
-	actual := args.Map{"origFirst": col.First(), "sortedFirst": sorted.First()}
+	actual := args.Map{
+		"origFirst": col.First(),
+		"sortedFirst": sorted.First(),
+	}
 
 	// Assert
-	expected := args.Map{"origFirst": 3, "sortedFirst": 1}
+	expected := args.Map{
+		"origFirst": 3,
+		"sortedFirst": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedFunc returns correct value -- does not mutate", actual)
 }
 
@@ -612,10 +624,16 @@ func Test_I22_SortAsc(t *testing.T) {
 	coredynamic.SortAsc(col)
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last()}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 1, "last": 3}
+	expected := args.Map{
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortAsc returns correct value -- with args", actual)
 }
 
@@ -626,10 +644,16 @@ func Test_I22_SortDesc(t *testing.T) {
 	coredynamic.SortDesc(col)
 
 	// Act
-	actual := args.Map{"first": col.First(), "last": col.Last()}
+	actual := args.Map{
+		"first": col.First(),
+		"last": col.Last(),
+	}
 
 	// Assert
-	expected := args.Map{"first": 3, "last": 1}
+	expected := args.Map{
+		"first": 3,
+		"last": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SortDesc returns correct value -- with args", actual)
 }
 
@@ -668,10 +692,16 @@ func Test_I22_SortedAsc(t *testing.T) {
 	sorted := coredynamic.SortedAsc(col)
 
 	// Act
-	actual := args.Map{"origFirst": col.First(), "sortedFirst": sorted.First()}
+	actual := args.Map{
+		"origFirst": col.First(),
+		"sortedFirst": sorted.First(),
+	}
 
 	// Assert
-	expected := args.Map{"origFirst": 3, "sortedFirst": 1}
+	expected := args.Map{
+		"origFirst": 3,
+		"sortedFirst": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedAsc returns correct value -- with args", actual)
 }
 
@@ -682,10 +712,16 @@ func Test_I22_SortedDesc(t *testing.T) {
 	sorted := coredynamic.SortedDesc(col)
 
 	// Act
-	actual := args.Map{"origFirst": col.First(), "sortedFirst": sorted.First()}
+	actual := args.Map{
+		"origFirst": col.First(),
+		"sortedFirst": sorted.First(),
+	}
 
 	// Assert
-	expected := args.Map{"origFirst": 1, "sortedFirst": 3}
+	expected := args.Map{
+		"origFirst": 1,
+		"sortedFirst": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SortedDesc returns correct value -- with args", actual)
 }
 
@@ -765,10 +801,16 @@ func Test_I22_GroupBy(t *testing.T) {
 	groups := coredynamic.GroupBy(col, func(s string) string { return string(s[0]) })
 
 	// Act
-	actual := args.Map{"groups": len(groups), "aLen": groups["a"].Length()}
+	actual := args.Map{
+		"groups": len(groups),
+		"aLen": groups["a"].Length(),
+	}
 
 	// Assert
-	expected := args.Map{"groups": 2, "aLen": 2}
+	expected := args.Map{
+		"groups": 2,
+		"aLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupBy returns correct value -- with args", actual)
 }
 
@@ -809,10 +851,16 @@ func Test_I22_GroupByLock(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"even": groups["even"].Length(), "odd": groups["odd"].Length()}
+	actual := args.Map{
+		"even": groups["even"].Length(),
+		"odd": groups["odd"].Length(),
+	}
 
 	// Assert
-	expected := args.Map{"even": 2, "odd": 2}
+	expected := args.Map{
+		"even": 2,
+		"odd": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupByLock returns correct value -- with args", actual)
 }
 
@@ -823,10 +871,16 @@ func Test_I22_GroupByCount(t *testing.T) {
 	counts := coredynamic.GroupByCount(col, func(s string) string { return s })
 
 	// Act
-	actual := args.Map{"a": counts["a"], "b": counts["b"]}
+	actual := args.Map{
+		"a": counts["a"],
+		"b": counts["b"],
+	}
 
 	// Assert
-	expected := args.Map{"a": 2, "b": 1}
+	expected := args.Map{
+		"a": 2,
+		"b": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "GroupByCount returns correct value -- with args", actual)
 }
 
@@ -878,10 +932,16 @@ func Test_I22_ReflectSetFromTo_SameType(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, &to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": to}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": to,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same type", actual)
 }
 
@@ -893,10 +953,16 @@ func Test_I22_ReflectSetFromTo_SamePointerType(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": *to}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": *to,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- same ptr type", actual)
 }
 
@@ -948,10 +1014,16 @@ func Test_I22_ReflectSetFromTo_BytesToStruct(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, &to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "name": to.Name}
+	actual := args.Map{
+		"noErr": err == nil,
+		"name": to.Name,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "name": "test"}
+	expected := args.Map{
+		"noErr": true,
+		"name": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bytes to struct", actual)
 }
 
@@ -965,10 +1037,16 @@ func Test_I22_ReflectSetFromTo_StructToBytes(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, &to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(to) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(to) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- struct to bytes", actual)
 }
 
@@ -993,10 +1071,16 @@ func Test_I22_ReflectSetFromTo_IntValue(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, &to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": to}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": to,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": 42}
+	expected := args.Map{
+		"noErr": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- int value", actual)
 }
 
@@ -1008,9 +1092,15 @@ func Test_I22_ReflectSetFromTo_ReflectType(t *testing.T) {
 	err := coredynamic.ReflectSetFromTo(from, &to)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": to}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": to,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": true}
+	expected := args.Map{
+		"noErr": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReflectSetFromTo returns correct value -- bool", actual)
 }

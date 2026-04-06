@@ -21,10 +21,18 @@ func Test_Cov64_LinkedList_HeadTail_Empty(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 
 		// Act
-		actual := args.Map{"headNil": ll.Head() == nil, "tailNil": ll.Tail() == nil, "len": ll.Length()}
+		actual := args.Map{
+			"headNil": ll.Head() == nil,
+			"tailNil": ll.Tail() == nil,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"headNil": true, "tailNil": true, "len": 0}
+		expected := args.Map{
+			"headNil": true,
+			"tailNil": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Head/Tail nil on empty", actual)
 	})
 }
@@ -36,10 +44,18 @@ func Test_Cov64_LinkedList_HeadTail_NonEmpty(t *testing.T) {
 		ll.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "tail": ll.Tail().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"tail": ll.Tail().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "tail": "b", "len": 2}
+		expected := args.Map{
+			"head": "a",
+			"tail": "b",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "Head/Tail after adds", actual)
 	})
 }
@@ -67,10 +83,16 @@ func Test_Cov64_LinkedList_IsEmpty(t *testing.T) {
 		ll := corestr.New.LinkedList.Create()
 
 		// Act
-		actual := args.Map{"empty": ll.IsEmpty(), "hasItems": ll.HasItems()}
+		actual := args.Map{
+			"empty": ll.IsEmpty(),
+			"hasItems": ll.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty on new", actual)
 	})
 }
@@ -82,10 +104,16 @@ func Test_Cov64_LinkedList_HasItems(t *testing.T) {
 		ll.Add("a")
 
 		// Act
-		actual := args.Map{"empty": ll.IsEmpty(), "hasItems": ll.HasItems()}
+		actual := args.Map{
+			"empty": ll.IsEmpty(),
+			"hasItems": ll.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": false, "hasItems": true}
+		expected := args.Map{
+			"empty": false,
+			"hasItems": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasItems after add", actual)
 	})
 }
@@ -113,10 +141,16 @@ func Test_Cov64_LinkedList_Add_First(t *testing.T) {
 		ll.Add("first")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "first", "len": 1}
+		expected := args.Map{
+			"head": "first",
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "Add first item", actual)
 	})
 }
@@ -128,10 +162,16 @@ func Test_Cov64_LinkedList_Add_Multiple(t *testing.T) {
 		ll.Add("a").Add("b").Add("c")
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "tail": ll.Tail().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"tail": ll.Tail().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "tail": "c"}
+		expected := args.Map{
+			"len": 3,
+			"tail": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Add multiple", actual)
 	})
 }
@@ -362,10 +402,16 @@ func Test_Cov64_LinkedList_AddFuncErr_Error(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "errCalled": errCalled}
+		actual := args.Map{
+			"len": ll.Length(),
+			"errCalled": errCalled,
+		}
 
 		// Assert
-		expected := args.Map{"len": 0, "errCalled": true}
+		expected := args.Map{
+			"len": 0,
+			"errCalled": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFuncErr with error", actual)
 	})
 }
@@ -408,10 +454,16 @@ func Test_Cov64_LinkedList_PushFront(t *testing.T) {
 		ll.PushFront("a")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 2}
+		expected := args.Map{
+			"head": "a",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "PushFront", actual)
 	})
 }
@@ -423,10 +475,16 @@ func Test_Cov64_LinkedList_AddFront_Empty(t *testing.T) {
 		ll.AddFront("a")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 1}
+		expected := args.Map{
+			"head": "a",
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFront empty", actual)
 	})
 }
@@ -439,10 +497,16 @@ func Test_Cov64_LinkedList_AddFront_NonEmpty(t *testing.T) {
 		ll.AddFront("a")
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 3}
+		expected := args.Map{
+			"head": "a",
+			"len": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFront non-empty", actual)
 	})
 }
@@ -487,10 +551,16 @@ func Test_Cov64_LinkedList_AppendNode_Empty(t *testing.T) {
 		ll.AppendNode(node)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "a"}
+		expected := args.Map{
+			"len": 1,
+			"head": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendNode empty", actual)
 	})
 }
@@ -504,10 +574,16 @@ func Test_Cov64_LinkedList_AppendNode_NonEmpty(t *testing.T) {
 		ll.AppendNode(node)
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "tail": ll.Tail().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"tail": ll.Tail().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "tail": "b"}
+		expected := args.Map{
+			"len": 2,
+			"tail": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "AppendNode non-empty", actual)
 	})
 }
@@ -669,10 +745,16 @@ func Test_Cov64_LinkedList_AttachWithNode_Success(t *testing.T) {
 		err := ll.AttachWithNode(ll.Tail(), &corestr.LinkedListNode{Element: "b"})
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": ll.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "AttachWithNode success", actual)
 	})
 }
@@ -1136,10 +1218,16 @@ func Test_Cov64_LinkedList_SafePointerIndexAt(t *testing.T) {
 		ptr := ll.SafePointerIndexAt(0)
 
 		// Act
-		actual := args.Map{"nonNil": ptr != nil, "val": *ptr}
+		actual := args.Map{
+			"nonNil": ptr != nil,
+			"val": *ptr,
+		}
 
 		// Assert
-		expected := args.Map{"nonNil": true, "val": "a"}
+		expected := args.Map{
+			"nonNil": true,
+			"val": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "SafePointerIndexAt", actual)
 	})
 }
@@ -1216,10 +1304,16 @@ func Test_Cov64_LinkedList_RemoveNodeByElementValue_First(t *testing.T) {
 		ll.RemoveNodeByElementValue("a", true, false)
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "b", "len": 2}
+		expected := args.Map{
+			"head": "b",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNodeByElementValue first", actual)
 	})
 }
@@ -1266,10 +1360,16 @@ func Test_Cov64_LinkedList_RemoveNodeByIndex_First(t *testing.T) {
 		ll.RemoveNodeByIndex(0)
 
 		// Act
-		actual := args.Map{"head": ll.Head().Element, "len": ll.Length()}
+		actual := args.Map{
+			"head": ll.Head().Element,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "b", "len": 2}
+		expected := args.Map{
+			"head": "b",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNodeByIndex first", actual)
 	})
 }
@@ -1366,10 +1466,16 @@ func Test_Cov64_LinkedList_RemoveNode_First(t *testing.T) {
 		ll.RemoveNode(ll.Head())
 
 		// Act
-		actual := args.Map{"len": ll.Length(), "head": ll.Head().Element}
+		actual := args.Map{
+			"len": ll.Length(),
+			"head": ll.Head().Element,
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "head": "b"}
+		expected := args.Map{
+			"len": 1,
+			"head": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "RemoveNode first", actual)
 	})
 }
@@ -1792,10 +1898,16 @@ func Test_Cov64_LinkedList_MarshalJSON(t *testing.T) {
 		b, err := ll.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonEmpty": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonEmpty": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonEmpty": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON", actual)
 	})
 }
@@ -1807,10 +1919,16 @@ func Test_Cov64_LinkedList_UnmarshalJSON(t *testing.T) {
 		err := ll.UnmarshalJSON([]byte(`["a","b"]`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": ll.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 2}
+		expected := args.Map{
+			"noErr": true,
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON", actual)
 	})
 }
@@ -1872,10 +1990,16 @@ func Test_Cov64_LinkedList_ParseInjectUsingJson(t *testing.T) {
 		r, err := ll2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "nonNil": r != nil}
+		actual := args.Map{
+			"noErr": err == nil,
+			"nonNil": r != nil,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "nonNil": true}
+		expected := args.Map{
+			"noErr": true,
+			"nonNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson", actual)
 	})
 }
@@ -1980,10 +2104,16 @@ func Test_Cov64_LinkedList_Clear(t *testing.T) {
 		ll.Clear()
 
 		// Act
-		actual := args.Map{"empty": ll.IsEmpty(), "len": ll.Length()}
+		actual := args.Map{
+			"empty": ll.IsEmpty(),
+			"len": ll.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "Clear", actual)
 	})
 }

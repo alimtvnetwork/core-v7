@@ -26,10 +26,16 @@ func Test_Cov4_RawErrorType_Combine(t *testing.T) {
 	result := errcore.InvalidRequestType.Combine("details", "ref")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "containsType": strings.Contains(result, "Invalid")}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"containsType": strings.Contains(result, "Invalid"),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsType": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsType": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrorType.Combine returns formatted -- with msg and ref", actual)
 }
 
@@ -700,10 +706,16 @@ func Test_Cov4_ExpectingErrorSimpleNoTypeNewLineEnds(t *testing.T) {
 	err := errcore.ExpectingErrorSimpleNoTypeNewLineEnds("title", "exp", "act")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "endsNewLine": strings.HasSuffix(err.Error(), "\n")}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"endsNewLine": strings.HasSuffix(err.Error(), "\n"),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "endsNewLine": true}
+	expected := args.Map{
+		"hasErr": true,
+		"endsNewLine": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ExpectingErrorSimpleNoTypeNewLineEnds returns error -- with args", actual)
 }
 
@@ -1355,10 +1367,16 @@ func Test_Cov4_LineDiff_Matching(t *testing.T) {
 	diffs := errcore.LineDiff([]string{"a", "b"}, []string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(diffs), "status0": diffs[0].Status}
+	actual := args.Map{
+		"len": len(diffs),
+		"status0": diffs[0].Status,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "status0": "  "}
+	expected := args.Map{
+		"len": 2,
+		"status0": "  ",
+	}
 	expected.ShouldBeEqual(t, 0, "LineDiff returns all-match -- matching lines", actual)
 }
 
@@ -1762,10 +1780,16 @@ func Test_Cov4_RawErrCollection_MarshalJSON_Empty(t *testing.T) {
 	bytes, err := c.MarshalJSON()
 
 	// Act
-	actual := args.Map{"bytesNil": bytes == nil, "errNil": err == nil}
+	actual := args.Map{
+		"bytesNil": bytes == nil,
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"bytesNil": true, "errNil": true}
+	expected := args.Map{
+		"bytesNil": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.MarshalJSON returns nil -- empty collection", actual)
 }
 
@@ -1775,10 +1799,16 @@ func Test_Cov4_RawErrCollection_SerializeWithoutTraces_Empty(t *testing.T) {
 	bytes, err := c.SerializeWithoutTraces()
 
 	// Act
-	actual := args.Map{"bytesNil": bytes == nil, "errNil": err == nil}
+	actual := args.Map{
+		"bytesNil": bytes == nil,
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"bytesNil": true, "errNil": true}
+	expected := args.Map{
+		"bytesNil": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RawErrCollection.SerializeWithoutTraces returns nil -- empty collection", actual)
 }
 
@@ -1822,10 +1852,16 @@ func Test_Cov4_RawErrCollection_IsErrorsCollected(t *testing.T) {
 	noChange := c.IsErrorsCollected(nil)
 
 	// Act
-	actual := args.Map{"changed": changed, "noChange": noChange}
+	actual := args.Map{
+		"changed": changed,
+		"noChange": noChange,
+	}
 
 	// Assert
-	expected := args.Map{"changed": true, "noChange": false}
+	expected := args.Map{
+		"changed": true,
+		"noChange": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsErrorsCollected returns correct value -- with args", actual)
 }
 

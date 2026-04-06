@@ -542,11 +542,17 @@ func Test_Cov57_KeyValuePair_Is(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 		tc := coretestcases.CaseV1{
 			Title:         "KVP Is",
-			ExpectedInput: args.Map{"Is": true, "IsNot": false},
+			ExpectedInput: args.Map{
+				"Is": true,
+				"IsNot": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Is": kv.Is("k", "v"), "IsNot": kv.Is("k", "x")})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Is": kv.Is("k", "v"),
+			"IsNot": kv.Is("k", "x"),
+		})
 	})
 }
 
@@ -555,11 +561,17 @@ func Test_Cov57_KeyValuePair_Trim(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: " k ", Value: " v "}
 		tc := coretestcases.CaseV1{
 			Title:         "KVP Trim",
-			ExpectedInput: args.Map{"TrimKey": "k", "TrimVal": "v"},
+			ExpectedInput: args.Map{
+				"TrimKey": "k",
+				"TrimVal": "v",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"TrimKey": kv.TrimKey(), "TrimVal": kv.TrimValue()})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"TrimKey": kv.TrimKey(),
+			"TrimVal": kv.TrimValue(),
+		})
 	})
 }
 
@@ -647,11 +659,17 @@ func Test_Cov57_KeyValuePair_ValueValidOptions(t *testing.T) {
 		vv := kv.ValueValidOptions(false, "err")
 		tc := coretestcases.CaseV1{
 			Title:         "KVP ValueValidOptions",
-			ExpectedInput: args.Map{"IsValid": false, "Message": "err"},
+			ExpectedInput: args.Map{
+				"IsValid": false,
+				"Message": "err",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"IsValid": vv.IsValid, "Message": vv.Message})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"IsValid": vv.IsValid,
+			"Message": vv.Message,
+		})
 	})
 }
 
@@ -841,11 +859,17 @@ func Test_Cov57_KeyValueCollection_SafeValueAt(t *testing.T) {
 		kvc.Add("k", "v")
 		tc := coretestcases.CaseV1{
 			Title:         "SafeValueAt",
-			ExpectedInput: args.Map{"Value": "v", "Empty": ""},
+			ExpectedInput: args.Map{
+				"Value": "v",
+				"Empty": "",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Value": kvc.SafeValueAt(0), "Empty": kvc.SafeValueAt(99)})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Value": kvc.SafeValueAt(0),
+			"Empty": kvc.SafeValueAt(99),
+		})
 	})
 }
 
@@ -885,11 +909,17 @@ func Test_Cov57_KeyValueCollection_AllKeysValues(t *testing.T) {
 		kvc.Add("k1", "v1").Add("k2", "v2")
 		tc := coretestcases.CaseV1{
 			Title:         "AllKeys/AllValues",
-			ExpectedInput: args.Map{"KeysLen": 2, "ValsLen": 2},
+			ExpectedInput: args.Map{
+				"KeysLen": 2,
+				"ValsLen": 2,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"KeysLen": len(kvc.AllKeys()), "ValsLen": len(kvc.AllValues())})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"KeysLen": len(kvc.AllKeys()),
+			"ValsLen": len(kvc.AllValues()),
+		})
 	})
 }
 
@@ -1101,11 +1131,17 @@ func Test_Cov57_KeyValueCollection_IsContains(t *testing.T) {
 		kvc.Add("k", "v")
 		tc := coretestcases.CaseV1{
 			Title:         "IsContains",
-			ExpectedInput: args.Map{"Contains": true, "Missing": false},
+			ExpectedInput: args.Map{
+				"Contains": true,
+				"Missing": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Contains": kvc.IsContains("k"), "Missing": kvc.IsContains("x")})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Contains": kvc.IsContains("k"),
+			"Missing": kvc.IsContains("x"),
+		})
 	})
 }
 
@@ -1116,11 +1152,17 @@ func Test_Cov57_KeyValueCollection_Get(t *testing.T) {
 		val, ok := kvc.Get("k")
 		tc := coretestcases.CaseV1{
 			Title:         "Get",
-			ExpectedInput: args.Map{"Value": "v", "Ok": true},
+			ExpectedInput: args.Map{
+				"Value": "v",
+				"Ok": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Value": val, "Ok": ok})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Value": val,
+			"Ok": ok,
+		})
 	})
 }
 
@@ -1144,11 +1186,17 @@ func Test_Cov57_KeyValueCollection_HasIndex(t *testing.T) {
 		kvc.Add("k", "v")
 		tc := coretestcases.CaseV1{
 			Title:         "HasIndex",
-			ExpectedInput: args.Map{"Has": true, "Missing": false},
+			ExpectedInput: args.Map{
+				"Has": true,
+				"Missing": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Has": kvc.HasIndex(0), "Missing": kvc.HasIndex(99)})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Has": kvc.HasIndex(0),
+			"Missing": kvc.HasIndex(99),
+		})
 	})
 }
 
@@ -1306,11 +1354,17 @@ func Test_Cov57_LeftRight_Trim(t *testing.T) {
 		lr := corestr.NewLeftRight(" a ", " b ")
 		tc := coretestcases.CaseV1{
 			Title:         "LR Trim",
-			ExpectedInput: args.Map{"Left": "a", "Right": "b"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Right": "b",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.LeftTrim(), "Right": lr.RightTrim()})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.LeftTrim(),
+			"Right": lr.RightTrim(),
+		})
 	})
 }
 
@@ -1374,7 +1428,10 @@ func Test_Cov57_LeftRight_ValidNonWhitespace(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := coretestcases.CaseV1{
 			Title:         "LR valid non-ws",
-			ExpectedInput: args.Map{"Left": true, "Right": true},
+			ExpectedInput: args.Map{
+				"Left": true,
+				"Right": true,
+			},
 		}
 
 		// Assert
@@ -1445,7 +1502,10 @@ func Test_Cov57_LeftRight_RegexMatch(t *testing.T) {
 		re := regexp.MustCompile(`\d+`)
 		tc := coretestcases.CaseV1{
 			Title:         "LR Regex",
-			ExpectedInput: args.Map{"LeftMatch": true, "RightMatch": false},
+			ExpectedInput: args.Map{
+				"LeftMatch": true,
+				"RightMatch": false,
+			},
 		}
 
 		// Assert
@@ -1460,7 +1520,10 @@ func Test_Cov57_LeftRight_RegexMatch_Nil(t *testing.T) {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := coretestcases.CaseV1{
 			Title:         "LR Regex nil",
-			ExpectedInput: args.Map{"Left": false, "Right": false},
+			ExpectedInput: args.Map{
+				"Left": false,
+				"Right": false,
+			},
 		}
 
 		// Assert
@@ -1489,11 +1552,17 @@ func Test_Cov57_LeftRight_FromSplit(t *testing.T) {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 		tc := coretestcases.CaseV1{
 			Title:         "LR FromSplit",
-			ExpectedInput: args.Map{"Left": "key", "Right": "value"},
+			ExpectedInput: args.Map{
+				"Left": "key",
+				"Right": "value",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1502,11 +1571,17 @@ func Test_Cov57_LeftRight_FromSplitTrimmed(t *testing.T) {
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
 		tc := coretestcases.CaseV1{
 			Title:         "LR FromSplitTrimmed",
-			ExpectedInput: args.Map{"Left": "key", "Right": "value"},
+			ExpectedInput: args.Map{
+				"Left": "key",
+				"Right": "value",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1515,11 +1590,17 @@ func Test_Cov57_LeftRight_FromSplitFull(t *testing.T) {
 		lr := corestr.LeftRightFromSplitFull("a:b:c", ":")
 		tc := coretestcases.CaseV1{
 			Title:         "LR FromSplitFull",
-			ExpectedInput: args.Map{"Left": "a", "Right": "b:c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Right": "b:c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1541,11 +1622,17 @@ func Test_Cov57_LeftRight_UsingSlice(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a", "b"})
 		tc := coretestcases.CaseV1{
 			Title:         "LR UsingSlice",
-			ExpectedInput: args.Map{"Left": "a", "Right": "b"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Right": "b",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1554,11 +1641,17 @@ func Test_Cov57_LeftRight_UsingSlice_Single(t *testing.T) {
 		lr := corestr.LeftRightUsingSlice([]string{"a"})
 		tc := coretestcases.CaseV1{
 			Title:         "LR UsingSlice single",
-			ExpectedInput: args.Map{"Left": "a", "IsValid": false},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"IsValid": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "IsValid": lr.IsValid})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"IsValid": lr.IsValid,
+		})
 	})
 }
 
@@ -1593,11 +1686,17 @@ func Test_Cov57_LeftRight_TrimmedUsingSlice(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a ", " b "})
 		tc := coretestcases.CaseV1{
 			Title:         "LR TrimmedUsingSlice",
-			ExpectedInput: args.Map{"Left": "a", "Right": "b"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Right": "b",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1619,11 +1718,17 @@ func Test_Cov57_LeftRight_TrimmedUsingSlice_Single(t *testing.T) {
 		lr := corestr.LeftRightTrimmedUsingSlice([]string{" a "})
 		tc := coretestcases.CaseV1{
 			Title:         "LR TrimmedUsingSlice single",
-			ExpectedInput: args.Map{"Left": "a", "IsValid": false},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"IsValid": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "IsValid": lr.IsValid})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"IsValid": lr.IsValid,
+		})
 	})
 }
 
@@ -1636,11 +1741,19 @@ func Test_Cov57_LeftMiddleRight_New(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR New",
-			ExpectedInput: args.Map{"Left": "a", "Middle": "b", "Right": "c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Middle": "b",
+				"Right": "c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.Left, "Middle": lmr.Middle, "Right": lmr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.Left,
+			"Middle": lmr.Middle,
+			"Right": lmr.Right,
+		})
 	})
 }
 
@@ -1686,11 +1799,19 @@ func Test_Cov57_LeftMiddleRight_Trim(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight(" a ", " b ", " c ")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR Trim",
-			ExpectedInput: args.Map{"Left": "a", "Mid": "b", "Right": "c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Mid": "b",
+				"Right": "c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.LeftTrim(), "Mid": lmr.MiddleTrim(), "Right": lmr.RightTrim()})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.LeftTrim(),
+			"Mid": lmr.MiddleTrim(),
+			"Right": lmr.RightTrim(),
+		})
 	})
 }
 
@@ -1751,7 +1872,11 @@ func Test_Cov57_LeftMiddleRight_ValidNonWhitespace(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR valid non-ws",
-			ExpectedInput: args.Map{"Left": true, "Mid": true, "Right": true},
+			ExpectedInput: args.Map{
+				"Left": true,
+				"Mid": true,
+				"Right": true,
+			},
 		}
 
 		// Assert
@@ -1767,11 +1892,17 @@ func Test_Cov57_LeftMiddleRight_IsAll(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("a", "b", "c")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR IsAll",
-			ExpectedInput: args.Map{"IsAll": true, "Is": true},
+			ExpectedInput: args.Map{
+				"IsAll": true,
+				"Is": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"IsAll": lmr.IsAll("a", "b", "c"), "Is": lmr.Is("a", "c")})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"IsAll": lmr.IsAll("a", "b", "c"),
+			"Is": lmr.Is("a", "c"),
+		})
 	})
 }
 
@@ -1795,11 +1926,17 @@ func Test_Cov57_LeftMiddleRight_ToLeftRight(t *testing.T) {
 		lr := lmr.ToLeftRight()
 		tc := coretestcases.CaseV1{
 			Title:         "LMR ToLeftRight",
-			ExpectedInput: args.Map{"Left": "a", "Right": "c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Right": "c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lr.Left, "Right": lr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lr.Left,
+			"Right": lr.Right,
+		})
 	})
 }
 
@@ -1822,11 +1959,19 @@ func Test_Cov57_LeftMiddleRight_FromSplit(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplit("a.b.c", ".")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR FromSplit",
-			ExpectedInput: args.Map{"Left": "a", "Mid": "b", "Right": "c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Mid": "b",
+				"Right": "c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.Left, "Mid": lmr.Middle, "Right": lmr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.Left,
+			"Mid": lmr.Middle,
+			"Right": lmr.Right,
+		})
 	})
 }
 
@@ -1835,11 +1980,19 @@ func Test_Cov57_LeftMiddleRight_FromSplitTrimmed(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitTrimmed(" a . b . c ", ".")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR FromSplitTrimmed",
-			ExpectedInput: args.Map{"Left": "a", "Mid": "b", "Right": "c"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Mid": "b",
+				"Right": "c",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.Left, "Mid": lmr.Middle, "Right": lmr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.Left,
+			"Mid": lmr.Middle,
+			"Right": lmr.Right,
+		})
 	})
 }
 
@@ -1848,11 +2001,19 @@ func Test_Cov57_LeftMiddleRight_FromSplitN(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitN("a:b:c:d", ":")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR FromSplitN",
-			ExpectedInput: args.Map{"Left": "a", "Mid": "b", "Right": "c:d"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Mid": "b",
+				"Right": "c:d",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.Left, "Mid": lmr.Middle, "Right": lmr.Right})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.Left,
+			"Mid": lmr.Middle,
+			"Right": lmr.Right,
+		})
 	})
 }
 
@@ -1861,11 +2022,17 @@ func Test_Cov57_LeftMiddleRight_FromSplitNTrimmed(t *testing.T) {
 		lmr := corestr.LeftMiddleRightFromSplitNTrimmed(" a : b : c : d ", ":")
 		tc := coretestcases.CaseV1{
 			Title:         "LMR FromSplitNTrimmed",
-			ExpectedInput: args.Map{"Left": "a", "Mid": "b"},
+			ExpectedInput: args.Map{
+				"Left": "a",
+				"Mid": "b",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Left": lmr.Left, "Mid": lmr.Middle})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Left": lmr.Left,
+			"Mid": lmr.Middle,
+		})
 	})
 }
 
@@ -1878,11 +2045,17 @@ func Test_Cov57_ValidValue_New(t *testing.T) {
 		vv := corestr.NewValidValue("hello")
 		tc := coretestcases.CaseV1{
 			Title:         "VV New",
-			ExpectedInput: args.Map{"Value": "hello", "IsValid": true},
+			ExpectedInput: args.Map{
+				"Value": "hello",
+				"IsValid": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Value": vv.Value, "IsValid": vv.IsValid})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Value": vv.Value,
+			"IsValid": vv.IsValid,
+		})
 	})
 }
 
@@ -1891,11 +2064,17 @@ func Test_Cov57_ValidValue_Empty(t *testing.T) {
 		vv := corestr.NewValidValueEmpty()
 		tc := coretestcases.CaseV1{
 			Title:         "VV Empty",
-			ExpectedInput: args.Map{"IsEmpty": true, "IsValid": true},
+			ExpectedInput: args.Map{
+				"IsEmpty": true,
+				"IsValid": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"IsEmpty": vv.IsEmpty(), "IsValid": vv.IsValid})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"IsEmpty": vv.IsEmpty(),
+			"IsValid": vv.IsValid,
+		})
 	})
 }
 
@@ -1904,11 +2083,17 @@ func Test_Cov57_ValidValue_Invalid(t *testing.T) {
 		vv := corestr.InvalidValidValue("err")
 		tc := coretestcases.CaseV1{
 			Title:         "VV Invalid",
-			ExpectedInput: args.Map{"IsValid": false, "Message": "err"},
+			ExpectedInput: args.Map{
+				"IsValid": false,
+				"Message": "err",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"IsValid": vv.IsValid, "Message": vv.Message})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"IsValid": vv.IsValid,
+			"Message": vv.Message,
+		})
 	})
 }
 
@@ -1991,11 +2176,17 @@ func Test_Cov57_ValidValue_HasValidNonEmpty(t *testing.T) {
 		vv := corestr.NewValidValue("a")
 		tc := coretestcases.CaseV1{
 			Title:         "VV HasValidNonEmpty",
-			ExpectedInput: args.Map{"Result": true, "Safe": true},
+			ExpectedInput: args.Map{
+				"Result": true,
+				"Safe": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Result": vv.HasValidNonEmpty(), "Safe": vv.HasSafeNonEmpty()})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Result": vv.HasValidNonEmpty(),
+			"Safe": vv.HasSafeNonEmpty(),
+		})
 	})
 }
 
@@ -2004,11 +2195,17 @@ func Test_Cov57_ValidValue_Is(t *testing.T) {
 		vv := corestr.NewValidValue("a")
 		tc := coretestcases.CaseV1{
 			Title:         "VV Is",
-			ExpectedInput: args.Map{"Is": true, "IsNot": false},
+			ExpectedInput: args.Map{
+				"Is": true,
+				"IsNot": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Is": vv.Is("a"), "IsNot": vv.Is("b")})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Is": vv.Is("a"),
+			"IsNot": vv.Is("b"),
+		})
 	})
 }
 
@@ -2017,7 +2214,11 @@ func Test_Cov57_ValidValue_IsAnyOf(t *testing.T) {
 		vv := corestr.NewValidValue("b")
 		tc := coretestcases.CaseV1{
 			Title:         "VV IsAnyOf",
-			ExpectedInput: args.Map{"Found": true, "NotFound": false, "Empty": true},
+			ExpectedInput: args.Map{
+				"Found": true,
+				"NotFound": false,
+				"Empty": true,
+			},
 		}
 
 		// Assert
@@ -2093,7 +2294,10 @@ func Test_Cov57_ValidValue_Regex_Nil(t *testing.T) {
 		vv := corestr.NewValidValue("abc")
 		tc := coretestcases.CaseV1{
 			Title:         "VV Regex nil",
-			ExpectedInput: args.Map{"Matches": false, "FindStr": ""},
+			ExpectedInput: args.Map{
+				"Matches": false,
+				"FindStr": "",
+			},
 		}
 
 		// Assert
@@ -2139,11 +2343,17 @@ func Test_Cov57_ValidValue_RegexFindAllStringsWithFlag(t *testing.T) {
 		items, hasAny := vv.RegexFindAllStringsWithFlag(re, -1)
 		tc := coretestcases.CaseV1{
 			Title:         "VV FindAllWithFlag",
-			ExpectedInput: args.Map{"Length": 2, "HasAny": true},
+			ExpectedInput: args.Map{
+				"Length": 2,
+				"HasAny": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Length": len(items), "HasAny": hasAny})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Length": len(items),
+			"HasAny": hasAny,
+		})
 	})
 }
 
@@ -2217,11 +2427,17 @@ func Test_Cov57_ValidValue_ClearDispose(t *testing.T) {
 		vv.Dispose()
 		tc := coretestcases.CaseV1{
 			Title:         "VV Dispose",
-			ExpectedInput: args.Map{"IsEmpty": true, "IsValid": false},
+			ExpectedInput: args.Map{
+				"IsEmpty": true,
+				"IsValid": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"IsEmpty": vv.IsEmpty(), "IsValid": vv.IsValid})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"IsEmpty": vv.IsEmpty(),
+			"IsValid": vv.IsValid,
+		})
 	})
 }
 
@@ -2334,11 +2550,17 @@ func Test_Cov57_ValidValues_SafeValueAt(t *testing.T) {
 		vvs.Add("a")
 		tc := coretestcases.CaseV1{
 			Title:         "VVs SafeValueAt",
-			ExpectedInput: args.Map{"Value": "a", "Empty": ""},
+			ExpectedInput: args.Map{
+				"Value": "a",
+				"Empty": "",
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Value": vvs.SafeValueAt(0), "Empty": vvs.SafeValueAt(99)})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Value": vvs.SafeValueAt(0),
+			"Empty": vvs.SafeValueAt(99),
+		})
 	})
 }
 
@@ -2601,11 +2823,17 @@ func Test_Cov57_ValidValues_HasIndex(t *testing.T) {
 		vvs.Add("a")
 		tc := coretestcases.CaseV1{
 			Title:         "VVs HasIndex",
-			ExpectedInput: args.Map{"Has": true, "Missing": false},
+			ExpectedInput: args.Map{
+				"Has": true,
+				"Missing": false,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Has": vvs.HasIndex(0), "Missing": vvs.HasIndex(99)})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Has": vvs.HasIndex(0),
+			"Missing": vvs.HasIndex(99),
+		})
 	})
 }
 
@@ -2739,11 +2967,17 @@ func Test_Cov57_NonChainedLinkedListNodes_Adds(t *testing.T) {
 		nodes.Adds(ll.Head())
 		tc := coretestcases.CaseV1{
 			Title:         "NCLLN Adds",
-			ExpectedInput: args.Map{"Length": 1, "HasItems": true},
+			ExpectedInput: args.Map{
+				"Length": 1,
+				"HasItems": true,
+			},
 		}
 
 		// Assert
-		tc.ShouldBeEqualMap(t, 0, args.Map{"Length": nodes.Length(), "HasItems": nodes.HasItems()})
+		tc.ShouldBeEqualMap(t, 0, args.Map{
+			"Length": nodes.Length(),
+			"HasItems": nodes.HasItems(),
+		})
 	})
 }
 

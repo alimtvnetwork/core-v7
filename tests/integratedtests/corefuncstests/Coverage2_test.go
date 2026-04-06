@@ -60,10 +60,16 @@ func Test_Cov2_NamedAction_Next(t *testing.T) {
 	w1.Next(&w2)
 
 	// Act
-	actual := args.Map{"first": firstCalled, "second": secondCalled}
+	actual := args.Map{
+		"first": firstCalled,
+		"second": secondCalled,
+	}
 
 	// Assert
-	expected := args.Map{"first": true, "second": true}
+	expected := args.Map{
+		"first": true,
+		"second": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NamedAction Next -- both called", actual)
 }
 
@@ -191,10 +197,16 @@ func Test_Cov2_InOutErrWrapperOf_ToLegacy(t *testing.T) {
 	out, err := legacy.Exec("hi")
 
 	// Act
-	actual := args.Map{"output": out, "isNil": err == nil}
+	actual := args.Map{
+		"output": out,
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"output": 2, "isNil": true}
+	expected := args.Map{
+		"output": 2,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InOutErrWrapperOf returns error -- ToLegacy", actual)
 }
 
@@ -223,10 +235,16 @@ func Test_Cov2_InOutFuncWrapperOf_ToLegacy(t *testing.T) {
 	out, err := legacy.Exec("hi")
 
 	// Act
-	actual := args.Map{"output": out, "isNil": err == nil}
+	actual := args.Map{
+		"output": out,
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"output": 2, "isNil": true}
+	expected := args.Map{
+		"output": 2,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InOutFuncWrapperOf returns correct value -- ToLegacy", actual)
 }
 
@@ -257,10 +275,16 @@ func Test_Cov2_LegacyInOutErr_Exec(t *testing.T) {
 	out, err := w.Exec("input")
 
 	// Act
-	actual := args.Map{"output": out, "isNil": err == nil}
+	actual := args.Map{
+		"output": out,
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"output": "ok", "isNil": true}
+	expected := args.Map{
+		"output": "ok",
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LegacyInOutErr returns error -- Exec", actual)
 }
 
@@ -291,10 +315,16 @@ func Test_Cov2_SerializeWrapper_Exec(t *testing.T) {
 	bytes, err := w.Exec("hello")
 
 	// Act
-	actual := args.Map{"result": string(bytes), "isNil": err == nil}
+	actual := args.Map{
+		"result": string(bytes),
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"result": "hello", "isNil": true}
+	expected := args.Map{
+		"result": "hello",
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeWrapper returns correct value -- Exec", actual)
 }
 
@@ -325,10 +355,16 @@ func Test_Cov2_InOutErrWrapperOf_Exec(t *testing.T) {
 	out, err := w.Exec("abc")
 
 	// Act
-	actual := args.Map{"output": out, "isNil": err == nil}
+	actual := args.Map{
+		"output": out,
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"output": 3, "isNil": true}
+	expected := args.Map{
+		"output": 3,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InOutErrWrapperOf returns error -- Exec", actual)
 }
 
@@ -360,9 +396,15 @@ func Test_Cov2_ResultDelegatingWrapperOf_Exec(t *testing.T) {
 	err := w.Exec(&s)
 
 	// Act
-	actual := args.Map{"value": s, "isNil": err == nil}
+	actual := args.Map{
+		"value": s,
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"value": "bound", "isNil": true}
+	expected := args.Map{
+		"value": "bound",
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ResultDelegatingWrapperOf returns correct value -- Exec", actual)
 }

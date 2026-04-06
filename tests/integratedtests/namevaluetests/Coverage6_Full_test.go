@@ -15,10 +15,16 @@ func Test_C6_Instance_IsNull(t *testing.T) {
 	var nilInst *namevalue.StringAny
 
 	// Act
-	actual := args.Map{"notNull": !inst.IsNull(), "nilIsNull": nilInst.IsNull()}
+	actual := args.Map{
+		"notNull": !inst.IsNull(),
+		"nilIsNull": nilInst.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"notNull": true, "nilIsNull": true}
+	expected := args.Map{
+		"notNull": true,
+		"nilIsNull": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- IsNull", actual)
 }
 
@@ -72,10 +78,16 @@ func Test_C6_NewGenericCollection(t *testing.T) {
 	c := namevalue.NewGenericCollection[string, any](5)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "empty": c.IsEmpty()}
+	actual := args.Map{
+		"len": c.Length(),
+		"empty": c.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewGenericCollection returns correct value -- with args", actual)
 }
 
@@ -117,10 +129,18 @@ func Test_C6_NewGenericCollectionUsing(t *testing.T) {
 	c3 := namevalue.NewGenericCollectionUsing[string, any](false)
 
 	// Act
-	actual := args.Map{"c1Len": c1.Length(), "c2Len": c2.Length(), "c3Len": c3.Length()}
+	actual := args.Map{
+		"c1Len": c1.Length(),
+		"c2Len": c2.Length(),
+		"c3Len": c3.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"c1Len": 2, "c2Len": 2, "c3Len": 0}
+	expected := args.Map{
+		"c1Len": 2,
+		"c2Len": 2,
+		"c3Len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "NewGenericCollectionUsing returns correct value -- with args", actual)
 }
 
@@ -384,10 +404,18 @@ func Test_C6_Collection_LastIndex_HasIndex(t *testing.T) {
 	c.Add(namevalue.StringAny{Name: "b", Value: 2})
 
 	// Act
-	actual := args.Map{"lastIdx": c.LastIndex(), "hasIdx0": c.HasIndex(0), "hasIdx5": c.HasIndex(5)}
+	actual := args.Map{
+		"lastIdx": c.LastIndex(),
+		"hasIdx0": c.HasIndex(0),
+		"hasIdx5": c.HasIndex(5),
+	}
 
 	// Assert
-	expected := args.Map{"lastIdx": 1, "hasIdx0": true, "hasIdx5": false}
+	expected := args.Map{
+		"lastIdx": 1,
+		"hasIdx0": true,
+		"hasIdx5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LastIndex/HasIndex returns correct value -- with args", actual)
 }
 

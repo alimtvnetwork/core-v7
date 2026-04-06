@@ -73,10 +73,16 @@ func Test_Cov4_VersionsCollection_IsEmpty_HasAnyItem(t *testing.T) {
 	vc := &coreversion.VersionsCollection{}
 
 	// Act
-	actual := args.Map{"empty": vc.IsEmpty(), "hasAny": vc.HasAnyItem()}
+	actual := args.Map{
+		"empty": vc.IsEmpty(),
+		"hasAny": vc.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "hasAny": false}
+	expected := args.Map{
+		"empty": true,
+		"hasAny": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- and HasAnyItem on empty", actual)
 }
 
@@ -86,10 +92,18 @@ func Test_Cov4_VersionsCollection_LastIndex_HasIndex(t *testing.T) {
 	vc.Add("1.0").Add("2.0")
 
 	// Act
-	actual := args.Map{"lastIdx": vc.LastIndex(), "hasIdx0": vc.HasIndex(0), "hasIdx5": vc.HasIndex(5)}
+	actual := args.Map{
+		"lastIdx": vc.LastIndex(),
+		"hasIdx0": vc.HasIndex(0),
+		"hasIdx5": vc.HasIndex(5),
+	}
 
 	// Assert
-	expected := args.Map{"lastIdx": 1, "hasIdx0": true, "hasIdx5": false}
+	expected := args.Map{
+		"lastIdx": 1,
+		"hasIdx0": true,
+		"hasIdx5": false,
+	}
 	expected.ShouldBeEqual(t, 0, "LastIndex returns correct value -- and HasIndex", actual)
 }
 
@@ -153,10 +167,16 @@ func Test_Cov4_VersionsCollection_IndexOf(t *testing.T) {
 	vc.Add("1.0.0").Add("2.0.0")
 
 	// Act
-	actual := args.Map{"found": vc.IndexOf("1.0.0") >= 0, "notFound": vc.IndexOf("3.0.0") < 0}
+	actual := args.Map{
+		"found": vc.IndexOf("1.0.0") >= 0,
+		"notFound": vc.IndexOf("3.0.0") < 0,
+	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": true}
+	expected := args.Map{
+		"found": true,
+		"notFound": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IndexOf returns correct value -- finds version", actual)
 }
 
@@ -166,10 +186,16 @@ func Test_Cov4_VersionsCollection_IsContainsVersion(t *testing.T) {
 	vc.Add("1.0.0")
 
 	// Act
-	actual := args.Map{"contains": vc.IsContainsVersion("1.0.0"), "missing": vc.IsContainsVersion("9.9")}
+	actual := args.Map{
+		"contains": vc.IsContainsVersion("1.0.0"),
+		"missing": vc.IsContainsVersion("9.9"),
+	}
 
 	// Assert
-	expected := args.Map{"contains": true, "missing": false}
+	expected := args.Map{
+		"contains": true,
+		"missing": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsContainsVersion returns correct value -- with args", actual)
 }
 
@@ -237,10 +263,16 @@ func Test_Cov4_VersionsCollection_Json(t *testing.T) {
 	jp := vc.JsonPtr()
 
 	// Act
-	actual := args.Map{"hasResult": j.HasSafeItems(), "ptrNotNil": jp != nil}
+	actual := args.Map{
+		"hasResult": j.HasSafeItems(),
+		"ptrNotNil": jp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasResult": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasResult": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Json returns correct value -- and JsonPtr", actual)
 }
 
@@ -265,10 +297,16 @@ func Test_Cov4_EmptyUsingCompactVersion(t *testing.T) {
 	v := coreversion.EmptyUsingCompactVersion("1.2.3")
 
 	// Act
-	actual := args.Map{"compact": v.VersionCompact, "invalid": v.IsInvalid}
+	actual := args.Map{
+		"compact": v.VersionCompact,
+		"invalid": v.IsInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"compact": "1.2.3", "invalid": false}
+	expected := args.Map{
+		"compact": "1.2.3",
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyUsingCompactVersion returns empty -- with args", actual)
 }
 
@@ -277,10 +315,16 @@ func Test_Cov4_InvalidCompactVersion(t *testing.T) {
 	v := coreversion.InvalidCompactVersion("bad")
 
 	// Act
-	actual := args.Map{"compact": v.VersionCompact, "invalid": v.IsInvalid}
+	actual := args.Map{
+		"compact": v.VersionCompact,
+		"invalid": v.IsInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"compact": "bad", "invalid": true}
+	expected := args.Map{
+		"compact": "bad",
+		"invalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidCompactVersion returns error -- with args", actual)
 }
 
@@ -457,10 +501,16 @@ func Test_Cov4_Version_NonPtr_Ptr(t *testing.T) {
 	p := v.Ptr()
 
 	// Act
-	actual := args.Map{"nonPtrCompact": np.VersionCompact, "ptrNotNil": p != nil}
+	actual := args.Map{
+		"nonPtrCompact": np.VersionCompact,
+		"ptrNotNil": p != nil,
+	}
 
 	// Assert
-	expected := args.Map{"nonPtrCompact": "1.0", "ptrNotNil": true}
+	expected := args.Map{
+		"nonPtrCompact": "1.0",
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NonPtr returns correct value -- and Ptr", actual)
 }
 
@@ -499,7 +549,10 @@ func Test_Cov4_IsAtLeast(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"atLeast": true, "below": false}
+	expected := args.Map{
+		"atLeast": true,
+		"below": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAtLeast returns correct value -- with args", actual)
 }
 
@@ -616,7 +669,10 @@ func Test_Cov4_Version_IsMajorMinorAtLeast(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"atLeast": true, "below": false}
+	expected := args.Map{
+		"atLeast": true,
+		"below": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMajorMinorAtLeast returns correct value -- with args", actual)
 }
 
@@ -629,10 +685,18 @@ func Test_Cov4_New_SpreadIntegers(t *testing.T) {
 	v := coreversion.New.SpreadIntegers(1, 2, 3)
 
 	// Act
-	actual := args.Map{"major": v.VersionMajor, "minor": v.VersionMinor, "patch": v.VersionPatch}
+	actual := args.Map{
+		"major": v.VersionMajor,
+		"minor": v.VersionMinor,
+		"patch": v.VersionPatch,
+	}
 
 	// Assert
-	expected := args.Map{"major": 1, "minor": 2, "patch": 3}
+	expected := args.Map{
+		"major": 1,
+		"minor": 2,
+		"patch": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "SpreadIntegers returns correct value -- creates version", actual)
 }
 
@@ -641,10 +705,16 @@ func Test_Cov4_New_SpreadUnsignedIntegers(t *testing.T) {
 	v := coreversion.New.SpreadUnsignedIntegers(1, 2)
 
 	// Act
-	actual := args.Map{"major": v.VersionMajor, "minor": v.VersionMinor}
+	actual := args.Map{
+		"major": v.VersionMajor,
+		"minor": v.VersionMinor,
+	}
 
 	// Assert
-	expected := args.Map{"major": 1, "minor": 2}
+	expected := args.Map{
+		"major": 1,
+		"minor": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "SpreadUnsignedIntegers returns correct value -- creates version", actual)
 }
 
@@ -665,10 +735,16 @@ func Test_Cov4_New_AllByte(t *testing.T) {
 	v := coreversion.New.AllByte(1, 2, 3, 4)
 
 	// Act
-	actual := args.Map{"major": v.VersionMajor, "build": v.VersionBuild}
+	actual := args.Map{
+		"major": v.VersionMajor,
+		"build": v.VersionBuild,
+	}
 
 	// Assert
-	expected := args.Map{"major": 1, "build": 4}
+	expected := args.Map{
+		"major": 1,
+		"build": 4,
+	}
 	expected.ShouldBeEqual(t, 0, "AllByte returns correct value -- creates version", actual)
 }
 
@@ -689,10 +765,16 @@ func Test_Cov4_New_MajorMinorBuild(t *testing.T) {
 	v := coreversion.New.MajorMinorBuild("1", "2", "5")
 
 	// Act
-	actual := args.Map{"major": v.VersionMajor, "minor": v.VersionMinor}
+	actual := args.Map{
+		"major": v.VersionMajor,
+		"minor": v.VersionMinor,
+	}
 
 	// Assert
-	expected := args.Map{"major": 1, "minor": 2}
+	expected := args.Map{
+		"major": 1,
+		"minor": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "MajorMinorBuild returns correct value -- creates version", actual)
 }
 
@@ -743,10 +825,16 @@ func Test_Cov4_Version_Json(t *testing.T) {
 	jp := v.JsonPtr()
 
 	// Act
-	actual := args.Map{"hasResult": j.HasSafeItems(), "ptrNotNil": jp != nil}
+	actual := args.Map{
+		"hasResult": j.HasSafeItems(),
+		"ptrNotNil": jp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasResult": true, "ptrNotNil": true}
+	expected := args.Map{
+		"hasResult": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Version returns correct value -- Json and JsonPtr", actual)
 }
 

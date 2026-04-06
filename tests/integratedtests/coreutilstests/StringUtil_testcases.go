@@ -181,7 +181,10 @@ var splitLeftRightTestCases = []coretestcases.CaseV1{
 			"input":     "name=John",
 			"separator": "=",
 		},
-		ExpectedInput: args.Map{"left": "name", "right": "John"},
+		ExpectedInput: args.Map{
+			"left": "name",
+			"right": "John",
+		},
 	},
 	{
 		Title: "SplitLeftRight returns empty right when no separator",
@@ -190,7 +193,10 @@ var splitLeftRightTestCases = []coretestcases.CaseV1{
 			"input":     "noseparator",
 			"separator": "=",
 		},
-		ExpectedInput: args.Map{"left": "noseparator", "right": ""},
+		ExpectedInput: args.Map{
+			"left": "noseparator",
+			"right": "",
+		},
 	},
 	{
 		Title: "SplitLeftRight splits only first occurrence",
@@ -199,7 +205,10 @@ var splitLeftRightTestCases = []coretestcases.CaseV1{
 			"input":     "a=b=c",
 			"separator": "=",
 		},
-		ExpectedInput: args.Map{"left": "a", "right": "b=c"},
+		ExpectedInput: args.Map{
+			"left": "a",
+			"right": "b=c",
+		},
 	},
 }
 

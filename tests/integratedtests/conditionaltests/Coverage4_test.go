@@ -20,7 +20,10 @@ func Test_IfFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "1.5", "false": "2.5"}
+	expected := args.Map{
+		"true": "1.5",
+		"false": "2.5",
+	}
 	expected.ShouldBeEqual(t, 0, "IfFloat32 returns correct value -- with args", actual)
 }
 
@@ -32,7 +35,10 @@ func Test_IfFuncFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "1.0", "false": "2.0"}
+	expected := args.Map{
+		"true": "1.0",
+		"false": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfFuncFloat32 returns correct value -- with args", actual)
 }
 
@@ -44,7 +50,10 @@ func Test_IfTrueFuncFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "3.14", "false": "0"}
+	expected := args.Map{
+		"true": "3.14",
+		"false": "0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncFloat32 returns non-empty -- with args", actual)
 }
 
@@ -56,7 +65,10 @@ func Test_IfSliceFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueLen": 1, "falseLen": 2}
+	expected := args.Map{
+		"trueLen": 1,
+		"falseLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "IfSliceFloat32 returns correct value -- with args", actual)
 }
 
@@ -71,7 +83,10 @@ func Test_IfPtrFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "1.0", "false": "2.0"}
+	expected := args.Map{
+		"true": "1.0",
+		"false": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "IfPtrFloat32 returns correct value -- with args", actual)
 }
 
@@ -86,7 +101,10 @@ func Test_NilDefFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "5.5", "nonNil": "3.3"}
+	expected := args.Map{
+		"nil": "5.5",
+		"nonNil": "3.3",
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefFloat32 returns nil -- with args", actual)
 }
 
@@ -101,7 +119,10 @@ func Test_NilDefPtrFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "9.9", "nonNil": "1.1"}
+	expected := args.Map{
+		"nil": "9.9",
+		"nonNil": "1.1",
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrFloat32 returns nil -- with args", actual)
 }
 
@@ -116,7 +137,10 @@ func Test_ValueOrZeroFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "0", "nonNil": "7.7"}
+	expected := args.Map{
+		"nil": "0",
+		"nonNil": "7.7",
+	}
 	expected.ShouldBeEqual(t, 0, "ValueOrZeroFloat32 returns correct value -- with args", actual)
 }
 
@@ -131,7 +155,10 @@ func Test_PtrOrZeroFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "0", "nonNil": "4.4"}
+	expected := args.Map{
+		"nil": "0",
+		"nonNil": "4.4",
+	}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroFloat32 returns correct value -- with args", actual)
 }
 
@@ -146,7 +173,10 @@ func Test_NilValFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValFloat32 returns nil -- with args", actual)
 }
 
@@ -161,7 +191,10 @@ func Test_NilValPtrFloat32_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValPtrFloat32 returns nil -- with args", actual)
 }
 
@@ -205,7 +238,10 @@ func Test_Float64_NilValPtr_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "1.0", "nonNil": "2.0"}
+	expected := args.Map{
+		"nil": "1.0",
+		"nonNil": "2.0",
+	}
 	expected.ShouldBeEqual(t, 0, "NilValPtrFloat64 returns nil -- with args", actual)
 }
 
@@ -495,7 +531,10 @@ func Test_NilDefPtrBool_Cov4(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "nonNil": false}
+	expected := args.Map{
+		"nil": true,
+		"nonNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrBool returns nil -- with args", actual)
 }
 
@@ -611,10 +650,16 @@ func Test_FunctionsExecuteResults_SkipTake_Cov4(t *testing.T) {
 	results := conditional.FunctionsExecuteResults[string](true, funcs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "first": results[0]}
+	actual := args.Map{
+		"len": len(results),
+		"first": results[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "take"}
+	expected := args.Map{
+		"len": 1,
+		"first": "take",
+	}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults_SkipTake returns correct value -- with args", actual)
 }
 

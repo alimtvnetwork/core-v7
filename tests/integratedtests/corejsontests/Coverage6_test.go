@@ -24,7 +24,11 @@ func Test_Cov6_New_Valid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "hasBytes": true, "typeNotEmpty": true}
+	expected := args.Map{
+		"hasError": false,
+		"hasBytes": true,
+		"typeNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid", actual)
 }
 
@@ -40,7 +44,11 @@ func Test_Cov6_NewPtr_Valid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasError": false, "hasBytes": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasError": false,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPtr returns non-empty -- valid", actual)
 }
 
@@ -55,7 +63,10 @@ func Test_Cov6_New_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasError": false, "hasBytes": true}
+	expected := args.Map{
+		"hasError": false,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New returns nil -- nil", actual)
 }
 
@@ -75,7 +86,10 @@ func Test_Cov6_Result_Length(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"len": 7, "nilLen": 0}
+	expected := args.Map{
+		"len": 7,
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Length", actual)
 }
 
@@ -91,7 +105,10 @@ func Test_Cov6_Result_HasError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": false, "nilErr": false}
+	expected := args.Map{
+		"noErr": false,
+		"nilErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- HasError", actual)
 }
 
@@ -107,7 +124,10 @@ func Test_Cov6_Result_IsEmptyError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"emptyErr": true, "nilEmptyErr": true}
+	expected := args.Map{
+		"emptyErr": true,
+		"nilEmptyErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns empty -- IsEmptyError", actual)
 }
 
@@ -134,7 +154,10 @@ func Test_Cov6_Result_IsErrorEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bothNil": true, "oneNotNil": false}
+	expected := args.Map{
+		"bothNil": true,
+		"oneNotNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- IsErrorEqual", actual)
 }
 
@@ -151,7 +174,11 @@ func Test_Cov6_Result_IsEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": false, "nilEmpty": true, "hasAny": true}
+	expected := args.Map{
+		"notEmpty": false,
+		"nilEmpty": true,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns empty -- IsEmpty", actual)
 }
 
@@ -167,7 +194,10 @@ func Test_Cov6_Result_IsAnyNull(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notNull": false, "nilNull": true}
+	expected := args.Map{
+		"notNull": false,
+		"nilNull": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- IsAnyNull", actual)
 }
 
@@ -207,7 +237,10 @@ func Test_Cov6_Result_PrettyJsonString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"prettyNE": true, "nilPretty": ""}
+	expected := args.Map{
+		"prettyNE": true,
+		"nilPretty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- PrettyJsonString", actual)
 }
 
@@ -223,7 +256,10 @@ func Test_Cov6_Result_PrettyJsonStringOrErrString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"prettyNE": true, "nilNotEmpty": true}
+	expected := args.Map{
+		"prettyNE": true,
+		"nilNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- PrettyJsonStringOrErrString", actual)
 }
 
@@ -257,7 +293,12 @@ func Test_Cov6_Result_SafeBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilEmpty": 0, "values": true, "safeVals": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilEmpty": 0,
+		"values": true,
+		"safeVals": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- SafeBytes", actual)
 }
 
@@ -277,7 +318,12 @@ func Test_Cov6_Result_Raw(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "errNil": true, "nilBytes": 0, "nilErrNN": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"errNil": true,
+		"nilBytes": 0,
+		"nilErrNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Raw", actual)
 }
 
@@ -300,10 +346,16 @@ func Test_Cov6_Result_RawString(t *testing.T) {
 	str, err := r.RawString()
 
 	// Act
-	actual := args.Map{"strNE": str != "", "errNil": err == nil}
+	actual := args.Map{
+		"strNE": str != "",
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"strNE": true, "errNil": true}
+	expected := args.Map{
+		"strNE": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- RawString", actual)
 }
 
@@ -326,10 +378,16 @@ func Test_Cov6_Result_RawErrString(t *testing.T) {
 	raw, errMsg := r.RawErrString()
 
 	// Act
-	actual := args.Map{"hasRaw": len(raw) > 0, "errEmpty": errMsg == ""}
+	actual := args.Map{
+		"hasRaw": len(raw) > 0,
+		"errEmpty": errMsg == "",
+	}
 
 	// Assert
-	expected := args.Map{"hasRaw": true, "errEmpty": true}
+	expected := args.Map{
+		"hasRaw": true,
+		"errEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- RawErrString", actual)
 }
 
@@ -339,10 +397,16 @@ func Test_Cov6_Result_RawPrettyString(t *testing.T) {
 	pretty, err := r.RawPrettyString()
 
 	// Act
-	actual := args.Map{"prettyNE": pretty != "", "errNil": err == nil}
+	actual := args.Map{
+		"prettyNE": pretty != "",
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"prettyNE": true, "errNil": true}
+	expected := args.Map{
+		"prettyNE": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- RawPrettyString", actual)
 }
 
@@ -385,7 +449,11 @@ func Test_Cov6_Result_BytesTypeName(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"typeNE": true, "nilType": "", "safeType": true}
+	expected := args.Map{
+		"typeNE": true,
+		"nilType": "",
+		"safeType": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- BytesTypeName", actual)
 }
 
@@ -402,7 +470,11 @@ func Test_Cov6_Result_MeaningfulError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"validErr": true, "nilErrNN": true, "errMsg": ""}
+	expected := args.Map{
+		"validErr": true,
+		"nilErrNN": true,
+		"errMsg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- MeaningfulError", actual)
 }
 
@@ -417,10 +489,16 @@ func Test_Cov6_Result_Unmarshal(t *testing.T) {
 	err := r.Unmarshal(&target)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "target": target}
+	actual := args.Map{
+		"errNil": err == nil,
+		"target": target,
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "target": "hello"}
+	expected := args.Map{
+		"errNil": true,
+		"target": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Unmarshal", actual)
 }
 
@@ -445,10 +523,16 @@ func Test_Cov6_Result_Deserialize(t *testing.T) {
 	err := r.Deserialize(&target)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "target": target}
+	actual := args.Map{
+		"errNil": err == nil,
+		"target": target,
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "target": "hello"}
+	expected := args.Map{
+		"errNil": true,
+		"target": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Deserialize", actual)
 }
 
@@ -472,7 +556,12 @@ func Test_Cov6_Result_Serialize(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "errNil": true, "nilBytes": true, "nilErrNN": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"errNil": true,
+		"nilBytes": true,
+		"nilErrNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Serialize", actual)
 }
 
@@ -518,7 +607,10 @@ func Test_Cov6_Result_CloneIf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"clonedLen": 7, "notClonedLen": 7}
+	expected := args.Map{
+		"clonedLen": 7,
+		"notClonedLen": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- CloneIf", actual)
 }
 
@@ -583,7 +675,10 @@ func Test_Cov6_Result_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- IsEqual", actual)
 }
 
@@ -661,7 +756,11 @@ func Test_Cov6_Result_Dispose(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bytesNil": true, "errNil": true, "typeName": ""}
+	expected := args.Map{
+		"bytesNil": true,
+		"errNil": true,
+		"typeName": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Dispose", actual)
 }
 
@@ -683,7 +782,10 @@ func Test_Cov6_Result_BytesError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"beNotNil": true, "nilBENil": true}
+	expected := args.Map{
+		"beNotNil": true,
+		"nilBENil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- BytesError", actual)
 }
 
@@ -734,7 +836,11 @@ func Test_Cov6_Result_InterfaceAdapters(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"binderNN": true, "jsonerNN": true, "injectorNN": true}
+	expected := args.Map{
+		"binderNN": true,
+		"jsonerNN": true,
+		"injectorNN": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- InterfaceAdapters", actual)
 }
 
@@ -757,7 +863,11 @@ func Test_Cov6_Result_DeserializedFieldsToMap(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"fmNil": false, "hasErr": false, "sfmNil": false}
+	expected := args.Map{
+		"fmNil": false,
+		"hasErr": false,
+		"sfmNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- DeserializedFieldsToMap", actual)
 }
 
@@ -776,7 +886,11 @@ func Test_Cov6_Result_FieldsNames(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"namesNotNil": true, "hasErr": false, "safeNotNil": true}
+	expected := args.Map{
+		"namesNotNil": true,
+		"hasErr": false,
+		"safeNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- FieldsNames", actual)
 }
 
@@ -798,7 +912,10 @@ func Test_Cov6_Result_Map(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilMapLen": 0}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilMapLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Map", actual)
 }
 
@@ -818,7 +935,10 @@ func Test_Cov6_Result_SerializeSkipExistingIssues(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "errNil": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- SerializeSkipExistingIssues", actual)
 }
 
@@ -833,10 +953,16 @@ func Test_Cov6_Result_UnmarshalSkipExistingIssues(t *testing.T) {
 	err := r.UnmarshalSkipExistingIssues(&target)
 
 	// Act
-	actual := args.Map{"errNil": err == nil, "target": target}
+	actual := args.Map{
+		"errNil": err == nil,
+		"target": target,
+	}
 
 	// Assert
-	expected := args.Map{"errNil": true, "target": "hello"}
+	expected := args.Map{
+		"errNil": true,
+		"target": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- UnmarshalSkipExistingIssues", actual)
 }
 
@@ -879,7 +1005,10 @@ func Test_Cov6_Result_ParseInjectUsingJson(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"parsedNN": true, "errNil": true}
+	expected := args.Map{
+		"parsedNN": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- ParseInjectUsingJson", actual)
 }
 
@@ -898,7 +1027,10 @@ func Test_Cov6_Result_SafeNonIssueBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"safeNonIssue": true, "safeValsPtr": true}
+	expected := args.Map{
+		"safeNonIssue": true,
+		"safeValsPtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- SafeNonIssueBytes", actual)
 }
 
@@ -919,7 +1051,11 @@ func Test_Cov6_Result_PrettyJsonBuffer(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bufNN": true, "errNil": true, "bufLen": true}
+	expected := args.Map{
+		"bufNN": true,
+		"errNil": true,
+		"bufLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- PrettyJsonBuffer", actual)
 }
 

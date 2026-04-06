@@ -94,10 +94,16 @@ func Test_Cov4_Collection_Backward_Iterator(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"first": items[0], "last": items[2]}
+	actual := args.Map{
+		"first": items[0],
+		"last": items[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": 30, "last": 10}
+	expected := args.Map{
+		"first": 30,
+		"last": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "Collection returns correct value -- Backward", actual)
 }
 

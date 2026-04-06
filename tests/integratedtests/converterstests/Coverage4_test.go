@@ -78,10 +78,16 @@ func Test_Cov4_BytesTo_PointerToBytes_NonNil(t *testing.T) {
 	result := converters.BytesTo.PointerToBytes([]byte{1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": byte(1)}
+	expected := args.Map{
+		"len": 2,
+		"first": byte(1),
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.PointerToBytes returns nil -- non-nil", actual)
 }
 
@@ -118,10 +124,16 @@ func Test_Cov4_StringTo_Integer_Valid(t *testing.T) {
 	val, err := converters.StringTo.Integer("123")
 
 	// Act
-	actual := args.Map{"val": val, "isNilErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"isNilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 123, "isNilErr": true}
+	expected := args.Map{
+		"val": 123,
+		"isNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Integer returns non-empty -- valid", actual)
 }
 
@@ -211,10 +223,16 @@ func Test_Cov4_StringTo_IntegersWithDefaults_Empty(t *testing.T) {
 	result := converters.StringTo.IntegersWithDefaults("", ",", -1)
 
 	// Act
-	actual := args.Map{"len": len(result.Values), "nilErr": result.CombinedError == nil}
+	actual := args.Map{
+		"len": len(result.Values),
+		"nilErr": result.CombinedError == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "nilErr": true}
+	expected := args.Map{
+		"len": 0,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.IntegersWithDefaults returns empty -- empty", actual)
 }
 
@@ -223,10 +241,22 @@ func Test_Cov4_StringTo_IntegersWithDefaults_MixedValid(t *testing.T) {
 	result := converters.StringTo.IntegersWithDefaults("1,abc,3", ",", -1)
 
 	// Act
-	actual := args.Map{"len": len(result.Values), "first": result.Values[0], "second": result.Values[1], "third": result.Values[2], "hasErr": result.CombinedError != nil}
+	actual := args.Map{
+		"len": len(result.Values),
+		"first": result.Values[0],
+		"second": result.Values[1],
+		"third": result.Values[2],
+		"hasErr": result.CombinedError != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1, "second": -1, "third": 3, "hasErr": true}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+		"second": -1,
+		"third": 3,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.IntegersWithDefaults returns non-empty -- mixed", actual)
 }
 
@@ -237,10 +267,16 @@ func Test_Cov4_StringTo_Float64_Valid(t *testing.T) {
 	val, err := converters.StringTo.Float64("3.14")
 
 	// Act
-	actual := args.Map{"isNilErr": err == nil, "above3": val > 3.0}
+	actual := args.Map{
+		"isNilErr": err == nil,
+		"above3": val > 3.0,
+	}
 
 	// Assert
-	expected := args.Map{"isNilErr": true, "above3": true}
+	expected := args.Map{
+		"isNilErr": true,
+		"above3": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Float64 returns non-empty -- valid", actual)
 }
 
@@ -263,10 +299,16 @@ func Test_Cov4_StringTo_Float64Default_Valid(t *testing.T) {
 	val, ok := converters.StringTo.Float64Default("2.5", -1.0)
 
 	// Act
-	actual := args.Map{"ok": ok, "above2": val > 2.0}
+	actual := args.Map{
+		"ok": ok,
+		"above2": val > 2.0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "above2": true}
+	expected := args.Map{
+		"ok": true,
+		"above2": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Float64Default returns non-empty -- valid", actual)
 }
 
@@ -275,10 +317,16 @@ func Test_Cov4_StringTo_Float64Default_Invalid(t *testing.T) {
 	val, ok := converters.StringTo.Float64Default("abc", -1.0)
 
 	// Act
-	actual := args.Map{"ok": ok, "val": val}
+	actual := args.Map{
+		"ok": ok,
+		"val": val,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "val": -1.0}
+	expected := args.Map{
+		"ok": false,
+		"val": -1.0,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Float64Default returns error -- invalid", actual)
 }
 
@@ -315,10 +363,16 @@ func Test_Cov4_StringTo_Byte_Zero(t *testing.T) {
 	val, err := converters.StringTo.Byte("0")
 
 	// Act
-	actual := args.Map{"val": val, "isNilErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"isNilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(0), "isNilErr": true}
+	expected := args.Map{
+		"val": byte(0),
+		"isNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Byte returns correct value -- zero", actual)
 }
 
@@ -327,10 +381,16 @@ func Test_Cov4_StringTo_Byte_One(t *testing.T) {
 	val, err := converters.StringTo.Byte("1")
 
 	// Act
-	actual := args.Map{"val": val, "isNilErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"isNilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(1), "isNilErr": true}
+	expected := args.Map{
+		"val": byte(1),
+		"isNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Byte returns correct value -- one", actual)
 }
 
@@ -339,10 +399,16 @@ func Test_Cov4_StringTo_Byte_Valid(t *testing.T) {
 	val, err := converters.StringTo.Byte("200")
 
 	// Act
-	actual := args.Map{"val": val, "isNilErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"isNilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(200), "isNilErr": true}
+	expected := args.Map{
+		"val": byte(200),
+		"isNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.Byte returns non-empty -- valid", actual)
 }
 
@@ -389,10 +455,16 @@ func Test_Cov4_StringTo_ByteWithDefault_Valid(t *testing.T) {
 	val, ok := converters.StringTo.ByteWithDefault("100", 0)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(100), "ok": true}
+	expected := args.Map{
+		"val": byte(100),
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.ByteWithDefault returns non-empty -- valid", actual)
 }
 
@@ -401,10 +473,16 @@ func Test_Cov4_StringTo_ByteWithDefault_Invalid(t *testing.T) {
 	val, ok := converters.StringTo.ByteWithDefault("abc", 99)
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": byte(99), "ok": false}
+	expected := args.Map{
+		"val": byte(99),
+		"ok": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StringTo.ByteWithDefault returns error -- invalid", actual)
 }
 
@@ -429,10 +507,18 @@ func Test_Cov4_StringsTo_Hashset(t *testing.T) {
 	result := converters.StringsTo.Hashset([]string{"a", "b", "a"})
 
 	// Act
-	actual := args.Map{"len": len(result), "hasA": result["a"], "hasB": result["b"]}
+	actual := args.Map{
+		"len": len(result),
+		"hasA": result["a"],
+		"hasB": result["b"],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasA": true, "hasB": true}
+	expected := args.Map{
+		"len": 2,
+		"hasA": true,
+		"hasB": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.Hashset returns correct value -- with args", actual)
 }
 
@@ -443,10 +529,18 @@ func Test_Cov4_StringsTo_IntegersSkipErrors(t *testing.T) {
 	result := converters.StringsTo.IntegersSkipErrors("1", "abc", "3")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "third": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"third": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1, "third": 3}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+		"third": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.IntegersSkipErrors returns error -- with args", actual)
 }
 
@@ -457,10 +551,16 @@ func Test_Cov4_StringsTo_IntegersSkipAndDefaultValue(t *testing.T) {
 	result := converters.StringsTo.IntegersSkipAndDefaultValue(-1, "skip", "1", "skip", "abc")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.IntegersSkipAndDefaultValue returns correct value -- with args", actual)
 }
 
@@ -553,10 +653,16 @@ func Test_Cov4_StringsTo_PointerStringsCopy_NonNil(t *testing.T) {
 	result := converters.StringsTo.PointerStringsCopy(&lines)
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": *(*result)[0]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": *(*result)[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "x"}
+	expected := args.Map{
+		"len": 2,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.PointerStringsCopy returns nil -- non-nil", actual)
 }
 
@@ -623,10 +729,20 @@ func Test_Cov4_StringsTo_BytesWithDefaults_Valid(t *testing.T) {
 	result := converters.StringsTo.BytesWithDefaults(0, "10", "20")
 
 	// Act
-	actual := args.Map{"len": len(result.Values), "first": result.Values[0], "second": result.Values[1], "nilErr": result.CombinedError == nil}
+	actual := args.Map{
+		"len": len(result.Values),
+		"first": result.Values[0],
+		"second": result.Values[1],
+		"nilErr": result.CombinedError == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": byte(10), "second": byte(20), "nilErr": true}
+	expected := args.Map{
+		"len": 2,
+		"first": byte(10),
+		"second": byte(20),
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.BytesWithDefaults returns non-empty -- valid", actual)
 }
 
@@ -635,10 +751,16 @@ func Test_Cov4_StringsTo_BytesWithDefaults_Invalid(t *testing.T) {
 	result := converters.StringsTo.BytesWithDefaults(0, "abc")
 
 	// Act
-	actual := args.Map{"first": result.Values[0], "hasErr": result.CombinedError != nil}
+	actual := args.Map{
+		"first": result.Values[0],
+		"hasErr": result.CombinedError != nil,
+	}
 
 	// Assert
-	expected := args.Map{"first": byte(0), "hasErr": true}
+	expected := args.Map{
+		"first": byte(0),
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.BytesWithDefaults returns error -- invalid", actual)
 }
 
@@ -647,9 +769,15 @@ func Test_Cov4_StringsTo_BytesWithDefaults_OutOfRange(t *testing.T) {
 	result := converters.StringsTo.BytesWithDefaults(0, "300")
 
 	// Act
-	actual := args.Map{"first": result.Values[0], "hasErr": result.CombinedError != nil}
+	actual := args.Map{
+		"first": result.Values[0],
+		"hasErr": result.CombinedError != nil,
+	}
 
 	// Assert
-	expected := args.Map{"first": byte(0), "hasErr": true}
+	expected := args.Map{
+		"first": byte(0),
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StringsTo.BytesWithDefaults returns non-empty -- out of range", actual)
 }

@@ -270,10 +270,16 @@ func Test_Cov5_MethodProcessor_VerifyOutArgs_Mismatch(t *testing.T) {
 	ok, err := mp.VerifyOutArgs([]any{42})
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "VerifyOutArgs returns correct value -- mismatch", actual)
 }
 
@@ -286,10 +292,16 @@ func Test_Cov5_MethodProcessor_OutArgsVerifyRv_LengthMismatch(t *testing.T) {
 	ok, err := mp.OutArgsVerifyRv([]reflect.Type{reflect.TypeOf(""), reflect.TypeOf(0)})
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OutArgsVerifyRv returns correct value -- length mismatch", actual)
 }
 
@@ -355,10 +367,16 @@ func Test_Cov5_MethodProcessor_GetFirstResponseOfInvoke_NilReceiver(t *testing.T
 	first, err := mp.GetFirstResponseOfInvoke()
 
 	// Act
-	actual := args.Map{"firstNil": first == nil, "hasErr": err != nil}
+	actual := args.Map{
+		"firstNil": first == nil,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"firstNil": true, "hasErr": true}
+	expected := args.Map{
+		"firstNil": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetFirstResponseOfInvoke returns nil -- nil", actual)
 }
 
@@ -368,10 +386,16 @@ func Test_Cov5_MethodProcessor_InvokeResultOfIndex_NilReceiver(t *testing.T) {
 	result, err := mp.InvokeResultOfIndex(0)
 
 	// Act
-	actual := args.Map{"resultNil": result == nil, "hasErr": err != nil}
+	actual := args.Map{
+		"resultNil": result == nil,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"resultNil": true, "hasErr": true}
+	expected := args.Map{
+		"resultNil": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex returns nil -- nil", actual)
 }
 

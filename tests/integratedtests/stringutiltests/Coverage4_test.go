@@ -12,19 +12,31 @@ import (
 
 func Test_Cov4_IsEmpty(t *testing.T) {
 	// Act
-	actual := args.Map{"empty": stringutil.IsEmpty(""), "notEmpty": stringutil.IsEmpty("x")}
+	actual := args.Map{
+		"empty": stringutil.IsEmpty(""),
+		"notEmpty": stringutil.IsEmpty("x"),
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "notEmpty": false}
+	expected := args.Map{
+		"empty": true,
+		"notEmpty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmpty returns empty -- with args", actual)
 }
 
 func Test_Cov4_IsNotEmpty(t *testing.T) {
 	// Act
-	actual := args.Map{"notEmpty": stringutil.IsNotEmpty("x"), "empty": stringutil.IsNotEmpty("")}
+	actual := args.Map{
+		"notEmpty": stringutil.IsNotEmpty("x"),
+		"empty": stringutil.IsNotEmpty(""),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": false}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNotEmpty returns empty -- with args", actual)
 }
 
@@ -41,7 +53,11 @@ func Test_Cov4_IsEmptyPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "empty": true, "text": false}
+	expected := args.Map{
+		"nil": true,
+		"empty": true,
+		"text": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyPtr returns empty -- with args", actual)
 }
 
@@ -58,7 +74,11 @@ func Test_Cov4_IsNullOrEmptyPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": true, "empty": true, "text": false}
+	expected := args.Map{
+		"nil": true,
+		"empty": true,
+		"text": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNullOrEmptyPtr returns empty -- with args", actual)
 }
 
@@ -73,7 +93,13 @@ func Test_Cov4_IsBlank(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": true, "space": true, "nl": true, "text": false, "tabs": true}
+	expected := args.Map{
+		"empty": true,
+		"space": true,
+		"nl": true,
+		"text": false,
+		"tabs": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsBlank returns correct value -- with args", actual)
 }
 
@@ -86,7 +112,11 @@ func Test_Cov4_IsEmptyOrWhitespace(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": true, "space": true, "text": false}
+	expected := args.Map{
+		"empty": true,
+		"space": true,
+		"text": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyOrWhitespace returns empty -- with args", actual)
 }
 
@@ -101,7 +131,10 @@ func Test_Cov4_IsContains(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"found": true, "notFound": false}
+	expected := args.Map{
+		"found": true,
+		"notFound": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsContains returns correct value -- with args", actual)
 }
 
@@ -116,7 +149,11 @@ func Test_Cov4_AnyToString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "", "string": "hello", "int": true}
+	expected := args.Map{
+		"nil": "",
+		"string": "hello",
+		"int": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToString returns correct value -- with args", actual)
 }
 
@@ -152,10 +189,16 @@ func Test_Cov4_SplitLeftRightsTrims(t *testing.T) {
 	emptyResult := stringutil.SplitLeftRightsTrims("=")
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(emptyResult)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(emptyResult),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "SplitLeftRightsTrims returns correct value -- with args", actual)
 }
 
@@ -175,7 +218,11 @@ func Test_Cov4_SplitContentsByWhitespaceConditions(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trimSorted": true, "uniqueLower": true, "noFlags": true}
+	expected := args.Map{
+		"trimSorted": true,
+		"uniqueLower": true,
+		"noFlags": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SplitContentsByWhitespaceConditions returns correct value -- with args", actual)
 }
 
@@ -193,7 +240,11 @@ func Test_Cov4_ToIntUsingRegexMatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": 42, "invalid": 0, "nilRegex": 0}
+	expected := args.Map{
+		"valid": 42,
+		"invalid": 0,
+		"nilRegex": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "ToIntUsingRegexMatch returns correct value -- with args", actual)
 }
 

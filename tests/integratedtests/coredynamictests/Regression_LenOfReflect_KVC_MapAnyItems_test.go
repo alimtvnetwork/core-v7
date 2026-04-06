@@ -180,8 +180,14 @@ func Test_Reg_MapAnyItems_NewUsingAnyTypeMap_StringInt(t *testing.T) {
 	items, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(m)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "len": items.Length()}
-	expected := args.Map{"noErr": true, "len": 2}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": items.Length(),
+	}
+	expected := args.Map{
+		"noErr": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUsingAnyTypeMap returns map -- map[string]int", actual)
 }
 
@@ -192,8 +198,14 @@ func Test_Reg_MapAnyItems_NewUsingAnyTypeMap_Nil(t *testing.T) {
 	items, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(nil)
 
 	// Assert
-	actual := args.Map{"hasErr": err != nil, "empty": items.IsEmpty()}
-	expected := args.Map{"hasErr": true, "empty": true}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"empty": items.IsEmpty(),
+	}
+	expected := args.Map{
+		"hasErr": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUsingAnyTypeMap returns error -- nil input", actual)
 }
 
@@ -205,8 +217,14 @@ func Test_Reg_MapAnyItems_NewUsingAnyTypeMap_StringAny(t *testing.T) {
 	items, err := coredynamic.NewMapAnyItemsUsingAnyTypeMap(m)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "hasKey": items.HasKey("key")}
-	expected := args.Map{"noErr": true, "hasKey": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasKey": items.HasKey("key"),
+	}
+	expected := args.Map{
+		"noErr": true,
+		"hasKey": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewUsingAnyTypeMap returns map -- map[string]any", actual)
 }
 
@@ -219,8 +237,16 @@ func Test_Reg_MapAnyItems_GetFieldsMap_MapValue(t *testing.T) {
 	fm, err, found := m.GetFieldsMap("k")
 
 	// Assert
-	actual := args.Map{"found": found, "noErr": err == nil, "notNil": fm != nil}
-	expected := args.Map{"found": true, "noErr": true, "notNil": true}
+	actual := args.Map{
+		"found": found,
+		"noErr": err == nil,
+		"notNil": fm != nil,
+	}
+	expected := args.Map{
+		"found": true,
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetFieldsMap returns map -- map value", actual)
 }
 
@@ -233,8 +259,14 @@ func Test_Reg_MapAnyItems_GetSafeFieldsMap_MapValue(t *testing.T) {
 	fm, found := m.GetSafeFieldsMap("k")
 
 	// Assert
-	actual := args.Map{"found": found, "notNil": fm != nil}
-	expected := args.Map{"found": true, "notNil": true}
+	actual := args.Map{
+		"found": found,
+		"notNil": fm != nil,
+	}
+	expected := args.Map{
+		"found": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSafeFieldsMap returns map -- map value", actual)
 }
 
@@ -252,8 +284,14 @@ func Test_Reg_KVC_Json_HasBytes(t *testing.T) {
 	j := kvc.Json()
 
 	// Assert
-	actual := args.Map{"hasBytes": j.HasBytes(), "noErr": !j.HasError()}
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	actual := args.Map{
+		"hasBytes": j.HasBytes(),
+		"noErr": !j.HasError(),
+	}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC Json returns bytes -- non-empty collection", actual)
 }
 
@@ -266,8 +304,14 @@ func Test_Reg_KVC_JsonString_NonEmpty(t *testing.T) {
 	s, err := kvc.JsonString()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "notEmpty": s != ""}
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": s != "",
+	}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC JsonString returns non-empty -- non-empty collection", actual)
 }
 
@@ -280,8 +324,14 @@ func Test_Reg_KVC_Serialize_NonEmpty(t *testing.T) {
 	b, err := kvc.Serialize()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "hasData": len(b) > 0}
-	expected := args.Map{"noErr": true, "hasData": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(b) > 0,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC Serialize returns bytes -- non-empty collection", actual)
 }
 
@@ -301,7 +351,10 @@ func Test_Reg_KVC_JsonRoundTrip(t *testing.T) {
 		"noParseErr": parseErr == nil,
 		"sameLen":    kvc2.Length() == kvc.Length(),
 	}
-	expected := args.Map{"noParseErr": true, "sameLen": true}
+	expected := args.Map{
+		"noParseErr": true,
+		"sameLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KVC round-trip returns same length -- serialize then parse", actual)
 }
 

@@ -98,10 +98,16 @@ func Test_Cov4_FileReader_Read_ValidFile(t *testing.T) {
 	content, err := chmodhelper.SimpleFileWriter.FileReader.Read(filePath)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "content": content}
+	actual := args.Map{
+		"noErr": err == nil,
+		"content": content,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "content": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"content": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "FileReader.Read returns non-empty -- valid", actual)
 }
 
@@ -817,10 +823,16 @@ func Test_Cov4_ChmodVerifier_GetExisting(t *testing.T) {
 	mode, err := chmodhelper.ChmodVerify.GetExisting(filePath)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "nonZero": mode != 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nonZero": mode != 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "nonZero": true}
+	expected := args.Map{
+		"noErr": true,
+		"nonZero": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetExisting returns correct value -- with args", actual)
 }
 
@@ -833,10 +845,16 @@ func Test_Cov4_ChmodVerifier_GetExistingRwxWrapper(t *testing.T) {
 	rwx, err := chmodhelper.ChmodVerify.GetExistingRwxWrapper(filePath)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "defined": rwx.IsDefined()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"defined": rwx.IsDefined(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "defined": true}
+	expected := args.Map{
+		"noErr": true,
+		"defined": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ChmodVerify.GetExistingRwxWrapper returns correct value -- with args", actual)
 }
 
@@ -1362,10 +1380,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadOnExist_NotExist(t *testing.T) {
 	bytes, err := rw.ReadOnExist()
 
 	// Act
-	actual := args.Map{"nilBytes": bytes == nil, "noErr": err == nil}
+	actual := args.Map{
+		"nilBytes": bytes == nil,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"nilBytes": true, "noErr": true}
+	expected := args.Map{
+		"nilBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReadOnExist returns correct value -- not exist", actual)
 }
 
@@ -1378,10 +1402,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExist_NotExist(t *testing.T) {
 	content, err := rw.ReadStringOnExist()
 
 	// Act
-	actual := args.Map{"empty": content == "", "noErr": err == nil}
+	actual := args.Map{
+		"empty": content == "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"empty": true, "noErr": true}
+	expected := args.Map{
+		"empty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExist returns correct value -- not exist", actual)
 }
 
@@ -1411,10 +1441,16 @@ func Test_Cov4_SimpleFileReaderWriter_Expire_Exist(t *testing.T) {
 	err := rw.Expire()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "removed": !chmodhelper.IsPathExists(filePath)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"removed": !chmodhelper.IsPathExists(filePath),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "removed": true}
+	expected := args.Map{
+		"noErr": true,
+		"removed": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Expire returns correct value -- exist", actual)
 }
 
@@ -1511,7 +1547,10 @@ func Test_Cov4_SimpleFileReaderWriter_InitializeDefault(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "mustChmod": true}
+	expected := args.Map{
+		"notNil": true,
+		"mustChmod": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InitializeDefault returns correct value -- with args", actual)
 }
 
@@ -1559,10 +1598,16 @@ func Test_Cov4_SimpleFileReaderWriter_NewPath(t *testing.T) {
 	newRw := rw.NewPath(false, "/tmp/other.txt")
 
 	// Act
-	actual := args.Map{"notNil": newRw != nil, "path": newRw.FilePath}
+	actual := args.Map{
+		"notNil": newRw != nil,
+		"path": newRw.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "path": "/tmp/other.txt"}
+	expected := args.Map{
+		"notNil": true,
+		"path": "/tmp/other.txt",
+	}
 	expected.ShouldBeEqual(t, 0, "NewPath returns correct value -- with args", actual)
 }
 
@@ -1658,10 +1703,16 @@ func Test_Cov4_SimpleFileReaderWriter_OsFile(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": f != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": f != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OsFile returns correct value -- with args", actual)
 }
 
@@ -2009,10 +2060,16 @@ func Test_Cov4_FwChmodVerifier_IsEqualParentDir(t *testing.T) {
 	// just exercise the method
 
 	// Act
-	actual := args.Map{"called": true, "result": result}
+	actual := args.Map{
+		"called": true,
+		"result": result,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "result": result}
+	expected := args.Map{
+		"called": true,
+		"result": result,
+	}
 	expected.ShouldBeEqual(t, 0, "fwChmodVerifier.IsEqualParentDir returns correct value -- with args", actual)
 }
 
@@ -2167,10 +2224,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadLock(t *testing.T) {
 	bytes, err := rw.ReadLock()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasData": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasData": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReadLock returns correct value -- with args", actual)
 }
 
@@ -2184,10 +2247,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringLock(t *testing.T) {
 	content, err := rw.ReadStringLock()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "content": content}
+	actual := args.Map{
+		"noErr": err == nil,
+		"content": content,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "content": "str-lock"}
+	expected := args.Map{
+		"noErr": true,
+		"content": "str-lock",
+	}
 	expected.ShouldBeEqual(t, 0, "ReadStringLock returns correct value -- with args", actual)
 }
 
@@ -2201,10 +2270,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadOnExistLock(t *testing.T) {
 	bytes, err := rw.ReadOnExistLock()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasData": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasData": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReadOnExistLock returns correct value -- with args", actual)
 }
 
@@ -2218,10 +2293,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadStringOnExistLock(t *testing.T) {
 	content, err := rw.ReadStringOnExistLock()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "content": content}
+	actual := args.Map{
+		"noErr": err == nil,
+		"content": content,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "content": "data"}
+	expected := args.Map{
+		"noErr": true,
+		"content": "data",
+	}
 	expected.ShouldBeEqual(t, 0, "ReadStringOnExistLock returns correct value -- with args", actual)
 }
 
@@ -2270,10 +2351,16 @@ func Test_Cov4_SimpleFileReaderWriter_Serialize(t *testing.T) {
 	bytes, err := rw.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasData": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasData": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- with args", actual)
 }
 
@@ -2287,10 +2374,16 @@ func Test_Cov4_SimpleFileReaderWriter_SerializeLock(t *testing.T) {
 	bytes, err := rw.SerializeLock()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasData": len(bytes) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasData": len(bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasData": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasData": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeLock returns correct value -- with args", actual)
 }
 
@@ -2337,10 +2430,16 @@ func Test_Cov4_SimpleFileReaderWriter_Deserialize(t *testing.T) {
 	err := rw.Deserialize(&result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": result["v"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": result["v"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": 1}
+	expected := args.Map{
+		"noErr": true,
+		"v": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize returns correct value -- with args", actual)
 }
 
@@ -2355,10 +2454,16 @@ func Test_Cov4_SimpleFileReaderWriter_DeserializeLock(t *testing.T) {
 	err := rw.DeserializeLock(&result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": result["v"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": result["v"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": 2}
+	expected := args.Map{
+		"noErr": true,
+		"v": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "DeserializeLock returns correct value -- with args", actual)
 }
 
@@ -2373,10 +2478,16 @@ func Test_Cov4_SimpleFileReaderWriter_GetLock(t *testing.T) {
 	err := rw.GetLock(&result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "v": result["v"]}
+	actual := args.Map{
+		"noErr": err == nil,
+		"v": result["v"],
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "v": 3}
+	expected := args.Map{
+		"noErr": true,
+		"v": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "GetLock returns correct value -- with args", actual)
 }
 
@@ -2478,10 +2589,16 @@ func Test_Cov4_SimpleFileReaderWriter_ReadWrite(t *testing.T) {
 	// exercises GetSet path
 
 	// Act
-	actual := args.Map{"called": true, "errOrNil": err == nil || err != nil}
+	actual := args.Map{
+		"called": true,
+		"errOrNil": err == nil || err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "errOrNil": true}
+	expected := args.Map{
+		"called": true,
+		"errOrNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ReadWrite returns correct value -- with args", actual)
 }
 
@@ -2498,10 +2615,16 @@ func Test_Cov4_SimpleFileReaderWriter_CacheGetSet(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"called": true, "errOrNil": err == nil || err != nil}
+	actual := args.Map{
+		"called": true,
+		"errOrNil": err == nil || err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "errOrNil": true}
+	expected := args.Map{
+		"called": true,
+		"errOrNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CacheGetSet returns correct value -- with args", actual)
 }
 

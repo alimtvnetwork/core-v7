@@ -14,10 +14,18 @@ func Test_RangeString_Valid_Cov2(t *testing.T) {
 	rs := corerange.NewRangeString("hello:world", ":")
 
 	// Act
-	actual := args.Map{"isValid": rs.IsValid, "hasStart": rs.HasStart, "hasEnd": rs.HasEnd}
+	actual := args.Map{
+		"isValid": rs.IsValid,
+		"hasStart": rs.HasStart,
+		"hasEnd": rs.HasEnd,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "hasStart": true, "hasEnd": true}
+	expected := args.Map{
+		"isValid": true,
+		"hasStart": true,
+		"hasEnd": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeString_Valid returns non-empty -- with args", actual)
 }
 
@@ -44,10 +52,18 @@ func Test_RangeString_Methods_Cov2(t *testing.T) {
 	rs := corerange.NewRangeString("hello:world", ":")
 
 	// Act
-	actual := args.Map{"stringNotEmpty": rs.String() != "", "start": rs.Start, "end": rs.End}
+	actual := args.Map{
+		"stringNotEmpty": rs.String() != "",
+		"start": rs.Start,
+		"end": rs.End,
+	}
 
 	// Assert
-	expected := args.Map{"stringNotEmpty": true, "start": "hello", "end": "world"}
+	expected := args.Map{
+		"stringNotEmpty": true,
+		"start": "hello",
+		"end": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "RangeString_Methods returns correct value -- with args", actual)
 }
 
@@ -58,10 +74,18 @@ func Test_RangeInt8_Cov2(t *testing.T) {
 	ri8 := corerange.NewRangeIntMinMax("3:7", ":", 0, 10).CreateRangeInt8()
 
 	// Act
-	actual := args.Map{"isValid": ri8.IsValid, "start": int(ri8.Start), "end": int(ri8.End)}
+	actual := args.Map{
+		"isValid": ri8.IsValid,
+		"start": int(ri8.Start),
+		"end": int(ri8.End),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "start": 3, "end": 7}
+	expected := args.Map{
+		"isValid": true,
+		"start": 3,
+		"end": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeInt8 returns correct value -- with args", actual)
 }
 
@@ -94,10 +118,18 @@ func Test_RangeInt16_Cov2(t *testing.T) {
 	ri16 := corerange.NewRangeIntMinMax("3:7", ":", 0, 10).CreateRangeInt16()
 
 	// Act
-	actual := args.Map{"isValid": ri16.IsValid, "start": int(ri16.Start), "end": int(ri16.End)}
+	actual := args.Map{
+		"isValid": ri16.IsValid,
+		"start": int(ri16.Start),
+		"end": int(ri16.End),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "start": 3, "end": 7}
+	expected := args.Map{
+		"isValid": true,
+		"start": 3,
+		"end": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeInt16 returns correct value -- with args", actual)
 }
 
@@ -126,10 +158,18 @@ func Test_RangeByte_Cov2(t *testing.T) {
 	rb := corerange.NewRangeIntMinMax("3:7", ":", 0, 10).CreateRangeByte()
 
 	// Act
-	actual := args.Map{"isValid": rb.IsValid, "start": int(rb.Start), "end": int(rb.End)}
+	actual := args.Map{
+		"isValid": rb.IsValid,
+		"start": int(rb.Start),
+		"end": int(rb.End),
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "start": 3, "end": 7}
+	expected := args.Map{
+		"isValid": true,
+		"start": 3,
+		"end": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "RangeByte returns correct value -- with args", actual)
 }
 
@@ -270,10 +310,20 @@ func Test_StartEndSimpleString_Cov2(t *testing.T) {
 	se := &corerange.StartEndSimpleString{Start: "hello", End: "world"}
 
 	// Act
-	actual := args.Map{"hasStart": se.HasStart(), "hasEnd": se.HasEnd(), "isStartEmpty": se.Start == "", "isEndEmpty": se.End == ""}
+	actual := args.Map{
+		"hasStart": se.HasStart(),
+		"hasEnd": se.HasEnd(),
+		"isStartEmpty": se.Start == "",
+		"isEndEmpty": se.End == "",
+	}
 
 	// Assert
-	expected := args.Map{"hasStart": true, "hasEnd": true, "isStartEmpty": false, "isEndEmpty": false}
+	expected := args.Map{
+		"hasStart": true,
+		"hasEnd": true,
+		"isStartEmpty": false,
+		"isEndEmpty": false,
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndSimpleString returns correct value -- with args", actual)
 }
 
@@ -284,10 +334,18 @@ func Test_StartEndString_Cov2(t *testing.T) {
 	se := corerange.NewStartEndString("hello:world", ":")
 
 	// Act
-	actual := args.Map{"isValid": se.IsValid, "hasStart": se.HasStart, "hasEnd": se.HasEnd}
+	actual := args.Map{
+		"isValid": se.IsValid,
+		"hasStart": se.HasStart,
+		"hasEnd": se.HasEnd,
+	}
 
 	// Assert
-	expected := args.Map{"isValid": true, "hasStart": true, "hasEnd": true}
+	expected := args.Map{
+		"isValid": true,
+		"hasStart": true,
+		"hasEnd": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndString returns correct value -- with args", actual)
 }
 
@@ -296,10 +354,18 @@ func Test_StartEndString_Methods_Cov2(t *testing.T) {
 	se := corerange.NewStartEndString("hello:world", ":")
 
 	// Act
-	actual := args.Map{"start": se.Start, "end": se.End, "stringNotEmpty": se.String() != ""}
+	actual := args.Map{
+		"start": se.Start,
+		"end": se.End,
+		"stringNotEmpty": se.String() != "",
+	}
 
 	// Assert
-	expected := args.Map{"start": "hello", "end": "world", "stringNotEmpty": true}
+	expected := args.Map{
+		"start": "hello",
+		"end": "world",
+		"stringNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "StartEndString_Methods returns correct value -- with args", actual)
 }
 
@@ -336,9 +402,19 @@ func Test_MinMaxInt_IsWithinRange_Boundary_Cov2(t *testing.T) {
 	mm := &corerange.MinMaxInt{Min: 3, Max: 7}
 
 	// Act
-	actual := args.Map{"exactMin": mm.IsWithinRange(3), "exactMax": mm.IsWithinRange(7), "below": mm.IsWithinRange(2), "above": mm.IsWithinRange(8)}
+	actual := args.Map{
+		"exactMin": mm.IsWithinRange(3),
+		"exactMax": mm.IsWithinRange(7),
+		"below": mm.IsWithinRange(2),
+		"above": mm.IsWithinRange(8),
+	}
 
 	// Assert
-	expected := args.Map{"exactMin": true, "exactMax": true, "below": false, "above": false}
+	expected := args.Map{
+		"exactMin": true,
+		"exactMax": true,
+		"below": false,
+		"above": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxInt_Within_Boundary returns non-empty -- with args", actual)
 }

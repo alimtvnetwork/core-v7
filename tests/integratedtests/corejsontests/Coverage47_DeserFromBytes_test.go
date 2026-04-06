@@ -17,8 +17,14 @@ func Test_Cov47_BytesTo_Bool_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.Bool(jsonBytes)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": true, "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.Bool returns true -- valid", actual)
 }
 
@@ -45,8 +51,14 @@ func Test_Cov47_BytesTo_Integer64_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.Integer64(jsonBytes)
 
 	// Assert
-	actual := args.Map{"val": result, "noErr": err == nil}
-	expected := args.Map{"val": int64(9999999999), "noErr": true}
+	actual := args.Map{
+		"val": result,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"val": int64(9999999999),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.Integer64 returns value -- valid", actual)
 }
 
@@ -74,8 +86,16 @@ func Test_Cov47_BytesTo_MapStringString_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.MapStringString(jsonBytes)
 
 	// Assert
-	actual := args.Map{"len": len(result), "noErr": err == nil, "a": result["a"]}
-	expected := args.Map{"len": 2, "noErr": true, "a": "1"}
+	actual := args.Map{
+		"len": len(result),
+		"noErr": err == nil,
+		"a": result["a"],
+	}
+	expected := args.Map{
+		"len": 2,
+		"noErr": true,
+		"a": "1",
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.MapStringString returns map -- valid", actual)
 }
 
@@ -104,8 +124,14 @@ func Test_Cov47_BytesTo_Bytes_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.Bytes(jsonBytes)
 
 	// Assert
-	actual := args.Map{"hasContent": len(result) > 0, "noErr": err == nil}
-	expected := args.Map{"hasContent": true, "noErr": true}
+	actual := args.Map{
+		"hasContent": len(result) > 0,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"hasContent": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.Bytes returns bytes -- valid", actual)
 }
 
@@ -134,8 +160,14 @@ func Test_Cov47_BytesTo_ResultsPtrCollection_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.ResultsPtrCollection(jsonBytes)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "hasItems": result != nil && result.Length() > 0}
-	expected := args.Map{"noErr": true, "hasItems": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasItems": result != nil && result.Length() > 0,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"hasItems": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.ResultsPtrCollection returns coll -- valid", actual)
 }
 
@@ -166,8 +198,14 @@ func Test_Cov47_BytesTo_MapResults_Valid(t *testing.T) {
 	result, err := corejson.Deserialize.BytesTo.MapResults(jsonBytes)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "notNil": result != nil}
-	expected := args.Map{"noErr": true, "notNil": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": result != nil,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesTo.MapResults returns map -- valid", actual)
 }
 

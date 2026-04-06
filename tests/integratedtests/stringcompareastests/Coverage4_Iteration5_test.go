@@ -34,7 +34,10 @@ func Test_I5_SC02_Variant_IsAnyMethod(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchEqual": true, "noMatchOther": false}
+	expected := args.Map{
+		"matchEqual": true,
+		"noMatchOther": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsAnyMethod returns correct value -- with args", actual)
 }
 
@@ -108,10 +111,16 @@ func Test_I5_SC08_Variant_MinMaxAny(t *testing.T) {
 	min, max := v.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_MinMaxAny returns correct value -- with args", actual)
 }
 
@@ -126,7 +135,10 @@ func Test_I5_SC09_Variant_MinMaxValueString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"minNotEmpty": true, "maxNotEmpty": true}
+	expected := args.Map{
+		"minNotEmpty": true,
+		"maxNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_MinMaxValueString returns non-empty -- with args", actual)
 }
 
@@ -135,10 +147,16 @@ func Test_I5_SC10_Variant_MaxInt_MinInt(t *testing.T) {
 	v := stringcompareas.Equal
 
 	// Act
-	actual := args.Map{"maxGe0": v.MaxInt() >= 0, "minGe0": v.MinInt() >= 0}
+	actual := args.Map{
+		"maxGe0": v.MaxInt() >= 0,
+		"minGe0": v.MinInt() >= 0,
+	}
 
 	// Assert
-	expected := args.Map{"maxGe0": true, "minGe0": true}
+	expected := args.Map{
+		"maxGe0": true,
+		"minGe0": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_MaxInt_MinInt returns correct value -- with args", actual)
 }
 
@@ -166,7 +184,10 @@ func Test_I5_SC12_Variant_IsByteValueEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchSelf": true, "noMatchOth": false}
+	expected := args.Map{
+		"matchSelf": true,
+		"noMatchOth": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsByteValueEqual returns correct value -- with args", actual)
 }
 
@@ -196,7 +217,10 @@ func Test_I5_SC14_Variant_IsEnumEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"same": true, "diff": false}
+	expected := args.Map{
+		"same": true,
+		"diff": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsEnumEqual returns correct value -- with args", actual)
 }
 
@@ -213,7 +237,10 @@ func Test_I5_SC15_Variant_IsAnyEnumsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchAny": true, "noMatchAny": false}
+	expected := args.Map{
+		"matchAny": true,
+		"noMatchAny": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsAnyEnumsEqual returns correct value -- with args", actual)
 }
 
@@ -222,10 +249,16 @@ func Test_I5_SC16_Variant_IsNameEqual(t *testing.T) {
 	v := stringcompareas.Equal
 
 	// Act
-	actual := args.Map{"match": v.IsNameEqual("Equal"), "noMatch": v.IsNameEqual("Regex")}
+	actual := args.Map{
+		"match": v.IsNameEqual("Equal"),
+		"noMatch": v.IsNameEqual("Regex"),
+	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsNameEqual returns correct value -- with args", actual)
 }
 
@@ -240,7 +273,10 @@ func Test_I5_SC17_Variant_IsAnyNamesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsAnyNamesOf returns correct value -- with args", actual)
 }
 
@@ -255,7 +291,10 @@ func Test_I5_SC18_Variant_IsValueEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsValueEqual returns correct value -- with args", actual)
 }
 
@@ -270,7 +309,10 @@ func Test_I5_SC19_Variant_IsAnyValuesEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsAnyValuesEqual returns non-empty -- with args", actual)
 }
 
@@ -287,7 +329,12 @@ func Test_I5_SC20_Variant_ValueInt_Variants(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"int": 1, "int8": 1, "int16": 1, "int32": 1}
+	expected := args.Map{
+		"int": 1,
+		"int8": 1,
+		"int16": 1,
+		"int32": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_ValueInt_Variants returns correct value -- with args", actual)
 }
 
@@ -317,7 +364,12 @@ func Test_I5_SC22_Variant_IsValid_IsInvalid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valid": true, "notInvalid": true, "invalid": true, "notValid": true}
+	expected := args.Map{
+		"valid": true,
+		"notInvalid": true,
+		"invalid": true,
+		"notValid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_IsValid_IsInvalid returns error -- with args", actual)
 }
 
@@ -350,10 +402,16 @@ func Test_I5_SC24_Variant_Is(t *testing.T) {
 	v := stringcompareas.Equal
 
 	// Act
-	actual := args.Map{"isSelf": v.Is(stringcompareas.Equal), "isOther": v.Is(stringcompareas.Regex)}
+	actual := args.Map{
+		"isSelf": v.Is(stringcompareas.Equal),
+		"isOther": v.Is(stringcompareas.Regex),
+	}
 
 	// Assert
-	expected := args.Map{"isSelf": true, "isOther": false}
+	expected := args.Map{
+		"isSelf": true,
+		"isOther": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_Is returns correct value -- with args", actual)
 }
 
@@ -415,10 +473,16 @@ func Test_I5_SC27_Variant_MarshalJSON(t *testing.T) {
 	b, err := v.MarshalJSON()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "nilErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "nilErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_MarshalJSON returns correct value -- with args", actual)
 }
 
@@ -428,10 +492,16 @@ func Test_I5_SC28_Variant_UnmarshalJSON(t *testing.T) {
 	err := v.UnmarshalJSON([]byte(`"Equal"`))
 
 	// Act
-	actual := args.Map{"nilErr": err == nil, "isEqual": v.IsEqual()}
+	actual := args.Map{
+		"nilErr": err == nil,
+		"isEqual": v.IsEqual(),
+	}
 
 	// Assert
-	expected := args.Map{"nilErr": true, "isEqual": true}
+	expected := args.Map{
+		"nilErr": true,
+		"isEqual": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_UnmarshalJSON returns correct value -- with args", actual)
 }
 
@@ -461,7 +531,12 @@ func Test_I5_SC30_Variant_MaxByte_MinByte_ValueByte_RangesByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"maxGe0": true, "minGe0": true, "valueByte0": true, "rangesLen": true}
+	expected := args.Map{
+		"maxGe0": true,
+		"minGe0": true,
+		"valueByte0": true,
+		"rangesLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_MaxByte_MinByte_ValueByte_RangesByte returns correct value -- with args", actual)
 }
 
@@ -471,10 +546,16 @@ func Test_I5_SC31_Variant_UnmarshallEnumToValue(t *testing.T) {
 	val, err := v.UnmarshallEnumToValue([]byte(`"Equal"`))
 
 	// Act
-	actual := args.Map{"val": int(val), "nilErr": err == nil}
+	actual := args.Map{
+		"val": int(val),
+		"nilErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 0, "nilErr": true}
+	expected := args.Map{
+		"val": 0,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_UnmarshallEnumToValue returns correct value -- with args", actual)
 }
 
@@ -574,7 +655,10 @@ func Test_I5_SC36_Variant_IsCompareSuccessCaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsCompareSuccessCaseSensitive returns correct value -- with args", actual)
 }
 
@@ -733,10 +817,16 @@ func Test_I5_SC48_Variant_ToPtr(t *testing.T) {
 	p := v.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": p != nil, "isEqual": p.IsEqual()}
+	actual := args.Map{
+		"notNil": p != nil,
+		"isEqual": p.IsEqual(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isEqual": true}
+	expected := args.Map{
+		"notNil": true,
+		"isEqual": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant_ToPtr returns correct value -- with args", actual)
 }
 
@@ -752,7 +842,10 @@ func Test_I5_SC49_AnyChars_CaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyChars_CaseSensitive returns correct value -- with args", actual)
 }
 
@@ -764,7 +857,10 @@ func Test_I5_SC50_NotAnyChars_CaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notFound": true, "found": false}
+	expected := args.Map{
+		"notFound": true,
+		"found": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NotAnyChars_CaseSensitive returns correct value -- with args", actual)
 }
 
@@ -786,7 +882,10 @@ func Test_I5_SC52_Glob_CaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Glob_CaseSensitive returns correct value -- with args", actual)
 }
 
@@ -798,7 +897,10 @@ func Test_I5_SC53_NonGlob_CaseSensitive(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noMatch": true, "match": false}
+	expected := args.Map{
+		"noMatch": true,
+		"match": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NonGlob_CaseSensitive returns correct value -- with args", actual)
 }
 

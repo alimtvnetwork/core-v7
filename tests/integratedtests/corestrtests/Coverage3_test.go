@@ -16,10 +16,16 @@ func Test_Cov3_Collection_Add(t *testing.T) {
 		c.Add("hello")
 
 		// Act
-		actual := args.Map{"length": c.Length(), "hasAny": c.HasAnyItem()}
+		actual := args.Map{
+			"length": c.Length(),
+			"hasAny": c.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"length": 1, "hasAny": true}
+		expected := args.Map{
+			"length": 1,
+			"hasAny": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Collection Add returns 1 -- single item", actual)
 	})
 }
@@ -65,10 +71,16 @@ func Test_Cov3_Hashmap_AddOrUpdate(t *testing.T) {
 		val, found := h.Get("key")
 
 		// Act
-		actual := args.Map{"val": val, "found": found}
+		actual := args.Map{
+			"val": val,
+			"found": found,
+		}
 
 		// Assert
-		expected := args.Map{"val": "value", "found": true}
+		expected := args.Map{
+			"val": "value",
+			"found": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap AddOrUpdate and Get returns expected -- hit", actual)
 	})
 }
@@ -95,10 +107,16 @@ func Test_Cov3_Hashmap_Has(t *testing.T) {
 		h.AddOrUpdate("key", "value")
 
 		// Act
-		actual := args.Map{"hasKey": h.Has("key"), "hasMissing": h.Has("missing")}
+		actual := args.Map{
+			"hasKey": h.Has("key"),
+			"hasMissing": h.Has("missing"),
+		}
 
 		// Assert
-		expected := args.Map{"hasKey": true, "hasMissing": false}
+		expected := args.Map{
+			"hasKey": true,
+			"hasMissing": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap Has returns expected -- hit and miss", actual)
 	})
 }
@@ -113,10 +131,16 @@ func Test_Cov3_Hashset_Remove(t *testing.T) {
 		h.Remove("b")
 
 		// Act
-		actual := args.Map{"length": h.Length(), "hasB": h.Has("b")}
+		actual := args.Map{
+			"length": h.Length(),
+			"hasB": h.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"length": 2, "hasB": false}
+		expected := args.Map{
+			"length": 2,
+			"hasB": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset Remove returns 2 -- removed b", actual)
 	})
 }
@@ -129,10 +153,16 @@ func Test_Cov3_LeftRight_Empty(t *testing.T) {
 		lr := corestr.LeftRight{}
 
 		// Act
-		actual := args.Map{"isLeftEmpty": lr.IsLeftEmpty(), "isRightEmpty": lr.IsRightEmpty()}
+		actual := args.Map{
+			"isLeftEmpty": lr.IsLeftEmpty(),
+			"isRightEmpty": lr.IsRightEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"isLeftEmpty": true, "isRightEmpty": true}
+		expected := args.Map{
+			"isLeftEmpty": true,
+			"isRightEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight empty returns true -- all empty", actual)
 	})
 }
@@ -143,10 +173,18 @@ func Test_Cov3_LeftRight_PartialLeft(t *testing.T) {
 		lr := corestr.NewLeftRight("l", "")
 
 		// Act
-		actual := args.Map{"isLeftEmpty": lr.IsLeftEmpty(), "isRightEmpty": lr.IsRightEmpty(), "hasSafe": lr.HasSafeNonEmpty()}
+		actual := args.Map{
+			"isLeftEmpty": lr.IsLeftEmpty(),
+			"isRightEmpty": lr.IsRightEmpty(),
+			"hasSafe": lr.HasSafeNonEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"isLeftEmpty": false, "isRightEmpty": true, "hasSafe": false}
+		expected := args.Map{
+			"isLeftEmpty": false,
+			"isRightEmpty": true,
+			"hasSafe": false,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftRight partial returns mixed -- only left", actual)
 	})
 }
@@ -159,10 +197,18 @@ func Test_Cov3_LeftMiddleRight_Empty(t *testing.T) {
 		lmr := corestr.NewLeftMiddleRight("", "", "")
 
 		// Act
-		actual := args.Map{"isLeftEmpty": lmr.IsLeftEmpty(), "isMiddleEmpty": lmr.IsMiddleEmpty(), "isRightEmpty": lmr.IsRightEmpty()}
+		actual := args.Map{
+			"isLeftEmpty": lmr.IsLeftEmpty(),
+			"isMiddleEmpty": lmr.IsMiddleEmpty(),
+			"isRightEmpty": lmr.IsRightEmpty(),
+		}
 
 		// Assert
-		expected := args.Map{"isLeftEmpty": true, "isMiddleEmpty": true, "isRightEmpty": true}
+		expected := args.Map{
+			"isLeftEmpty": true,
+			"isMiddleEmpty": true,
+			"isRightEmpty": true,
+		}
 		expected.ShouldBeEqual(t, 0, "LeftMiddleRight empty returns true -- all empty", actual)
 	})
 }
@@ -175,10 +221,16 @@ func Test_Cov3_KeyValuePair(t *testing.T) {
 		kv := corestr.KeyValuePair{Key: "k", Value: "v"}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "value": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"value": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "value": "v"}
+		expected := args.Map{
+			"key": "k",
+			"value": "v",
+		}
 		expected.ShouldBeEqual(t, 0, "KeyValuePair returns expected -- valid pair", actual)
 	})
 }
@@ -191,10 +243,16 @@ func Test_Cov3_KeyAnyValuePair(t *testing.T) {
 		kv := corestr.KeyAnyValuePair{Key: "k", Value: 42}
 
 		// Act
-		actual := args.Map{"key": kv.Key, "value": kv.Value}
+		actual := args.Map{
+			"key": kv.Key,
+			"value": kv.Value,
+		}
 
 		// Assert
-		expected := args.Map{"key": "k", "value": 42}
+		expected := args.Map{
+			"key": "k",
+			"value": 42,
+		}
 		expected.ShouldBeEqual(t, 0, "KeyAnyValuePair returns expected -- valid pair", actual)
 	})
 }
@@ -209,10 +267,16 @@ func Test_Cov3_SimpleSlice_Clear(t *testing.T) {
 		s.Clear()
 
 		// Act
-		actual := args.Map{"isEmpty": s.IsEmpty(), "length": s.Length()}
+		actual := args.Map{
+			"isEmpty": s.IsEmpty(),
+			"length": s.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"isEmpty": true, "length": 0}
+		expected := args.Map{
+			"isEmpty": true,
+			"length": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleSlice Clear returns empty -- after clear", actual)
 	})
 }
@@ -225,10 +289,16 @@ func Test_Cov3_NewValidValue(t *testing.T) {
 		vv := corestr.NewValidValue("hello")
 
 		// Act
-		actual := args.Map{"value": vv.Value, "isValid": vv.IsValid}
+		actual := args.Map{
+			"value": vv.Value,
+			"isValid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"value": "hello", "isValid": true}
+		expected := args.Map{
+			"value": "hello",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewValidValue returns valid -- non-empty string", actual)
 	})
 }
@@ -239,10 +309,16 @@ func Test_Cov3_NewValidValue_Empty(t *testing.T) {
 		vv := corestr.NewValidValue("")
 
 		// Act
-		actual := args.Map{"value": vv.Value, "isValid": vv.IsValid}
+		actual := args.Map{
+			"value": vv.Value,
+			"isValid": vv.IsValid,
+		}
 
 		// Assert
-		expected := args.Map{"value": "", "isValid": true}
+		expected := args.Map{
+			"value": "",
+			"isValid": true,
+		}
 		expected.ShouldBeEqual(t, 0, "NewValidValue always returns valid -- empty string", actual)
 	})
 }

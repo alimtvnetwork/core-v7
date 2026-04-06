@@ -13,10 +13,16 @@ func Test_CreateLockIf_WithLock_Cov2(t *testing.T) {
 	r, err := regexnew.CreateLockIf(true, `^\d+$`)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": r != nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": r != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLockIf_WithLock returns non-empty -- with args", actual)
 }
 
@@ -25,10 +31,16 @@ func Test_CreateLockIf_WithoutLock_Cov2(t *testing.T) {
 	r, err := regexnew.CreateLockIf(false, `^\d+$`)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": r != nil}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": r != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateLockIf_WithoutLock returns non-empty -- with args", actual)
 }
 
@@ -52,7 +64,10 @@ func Test_CreateMustLockIf_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"withLock": true, "withoutLock": true}
+	expected := args.Map{
+		"withLock": true,
+		"withoutLock": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateMustLockIf returns correct value -- with args", actual)
 }
 
@@ -61,10 +76,18 @@ func Test_CreateApplicableLock_Cov2(t *testing.T) {
 	r, err, isApplicable := regexnew.CreateApplicableLock(`^\d+$`)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "notNil": r != nil, "isApplicable": isApplicable}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"notNil": r != nil,
+		"isApplicable": isApplicable,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "notNil": true, "isApplicable": true}
+	expected := args.Map{
+		"hasErr": false,
+		"notNil": true,
+		"isApplicable": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateApplicableLock_Valid returns non-empty -- with args", actual)
 }
 
@@ -73,10 +96,16 @@ func Test_CreateApplicableLock_Invalid_Cov2(t *testing.T) {
 	_, err, isApplicable := regexnew.CreateApplicableLock(`[invalid`)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isApplicable": isApplicable}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isApplicable": isApplicable,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "isApplicable": false}
+	expected := args.Map{
+		"hasErr": true,
+		"isApplicable": false,
+	}
 	expected.ShouldBeEqual(t, 0, "CreateApplicableLock_Invalid returns error -- with args", actual)
 }
 
@@ -88,7 +117,10 @@ func Test_IsMatchFailed_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchDigits": false, "failAlpha": true}
+	expected := args.Map{
+		"matchDigits": false,
+		"failAlpha": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsMatchFailed returns correct value -- with args", actual)
 }
 
@@ -101,7 +133,11 @@ func Test_MatchError_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchErr": false, "noMatchErr": true, "invalidErr": true}
+	expected := args.Map{
+		"matchErr": false,
+		"noMatchErr": true,
+		"invalidErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MatchError returns error -- with args", actual)
 }
 
@@ -113,7 +149,10 @@ func Test_MatchErrorLock_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchErr": false, "noMatchErr": true}
+	expected := args.Map{
+		"matchErr": false,
+		"noMatchErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MatchErrorLock returns error -- with args", actual)
 }
 
@@ -128,7 +167,10 @@ func Test_MatchUsingFuncErrorLock_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchErr": false, "noMatchErr": true}
+	expected := args.Map{
+		"matchErr": false,
+		"noMatchErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MatchUsingFuncErrorLock returns error -- with args", actual)
 }
 
@@ -143,7 +185,10 @@ func Test_MatchUsingCustomizeErrorFuncLock_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchNilCustom": false, "noMatchNilCustom": true}
+	expected := args.Map{
+		"matchNilCustom": false,
+		"noMatchNilCustom": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MatchUsingCustomizeErrorFuncLock returns error -- with args", actual)
 }
 
@@ -259,7 +304,10 @@ func Test_LazyRegex_MatchUsingFuncError_Cov2(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"matchErr": false, "noMatchErr": true}
+	expected := args.Map{
+		"matchErr": false,
+		"noMatchErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyRegex_MatchUsingFuncError returns error -- with args", actual)
 }
 

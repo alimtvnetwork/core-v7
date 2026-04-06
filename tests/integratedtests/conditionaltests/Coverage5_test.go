@@ -304,10 +304,16 @@ func Test_ErrorFunctionResult_True_Cov5(t *testing.T) {
 		func() error { return nil })
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "msg": err.Error()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"msg": err.Error(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "msg": "true-err"}
+	expected := args.Map{
+		"hasErr": true,
+		"msg": "true-err",
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionResult returns trueFunc result -- true", actual)
 }
 
@@ -411,10 +417,16 @@ func Test_AnyFunctionsExecuteResults_True_Cov5(t *testing.T) {
 	results := conditional.AnyFunctionsExecuteResults(true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "first": results[0]}
+	actual := args.Map{
+		"len": len(results),
+		"first": results[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyFunctionsExecuteResults returns true results -- true", actual)
 }
 
@@ -490,10 +502,16 @@ func Test_FunctionsExecuteResults_True_Cov5(t *testing.T) {
 	results := conditional.FunctionsExecuteResults[string](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "first": results[0]}
+	actual := args.Map{
+		"len": len(results),
+		"first": results[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults returns results -- true", actual)
 }
 
@@ -651,10 +669,16 @@ func Test_TypedErrorFunctionsExecuteResults_True_Cov5(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "hasErr": err != nil}
+	actual := args.Map{
+		"len": len(results),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "hasErr": true}
+	expected := args.Map{
+		"len": 2,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults collects results and errors -- mixed", actual)
 }
 
@@ -663,10 +687,16 @@ func Test_TypedErrorFunctionsExecuteResults_Empty_Cov5(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](true, nil, nil)
 
 	// Act
-	actual := args.Map{"isNil": results == nil, "hasErr": err != nil}
+	actual := args.Map{
+		"isNil": results == nil,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "hasErr": false}
+	expected := args.Map{
+		"isNil": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns nil -- empty", actual)
 }
 
@@ -679,10 +709,16 @@ func Test_TypedErrorFunctionsExecuteResults_SkipNil_Cov5(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, funcs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "hasErr": err != nil}
+	actual := args.Map{
+		"len": len(results),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasErr": false}
+	expected := args.Map{
+		"len": 1,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults skips nil -- nil entry", actual)
 }
 
@@ -748,7 +784,10 @@ func Test_IfByte_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": byte(1), "false": byte(2)}
+	expected := args.Map{
+		"true": byte(1),
+		"false": byte(2),
+	}
 	expected.ShouldBeEqual(t, 0, "IfByte returns correct value -- true/false", actual)
 }
 
@@ -771,7 +810,10 @@ func Test_IfTrueFuncByte_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": byte(5), "false": byte(0)}
+	expected := args.Map{
+		"true": byte(5),
+		"false": byte(0),
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncByte returns value or zero -- true/false", actual)
 }
 
@@ -808,7 +850,10 @@ func Test_NilDefByte_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": byte(99), "nonNil": byte(5)}
+	expected := args.Map{
+		"nil": byte(99),
+		"nonNil": byte(5),
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefByte returns default or value -- nil/nonNil", actual)
 }
 
@@ -853,7 +898,10 @@ func Test_NilValByte_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": byte(10), "nonNil": byte(20)}
+	expected := args.Map{
+		"nil": byte(10),
+		"nonNil": byte(20),
+	}
 	expected.ShouldBeEqual(t, 0, "NilValByte returns onNil or onNonNil -- nil/nonNil", actual)
 }
 
@@ -959,7 +1007,10 @@ func Test_IfTrueFuncInt_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": 5, "false": 0}
+	expected := args.Map{
+		"true": 5,
+		"false": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncInt returns value or zero -- true/false", actual)
 }
 
@@ -1071,7 +1122,10 @@ func Test_IfTrueFuncString_Cov5(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "val", "false": ""}
+	expected := args.Map{
+		"true": "val",
+		"false": "",
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncString returns value or zero -- true/false", actual)
 }
 

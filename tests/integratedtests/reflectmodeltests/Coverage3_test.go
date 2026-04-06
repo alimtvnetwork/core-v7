@@ -205,7 +205,10 @@ func Test_Cov3_MethodProcessor_IsEqual_BothNil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns nil -- IsEqual both nil", actual)
 }
 
@@ -245,6 +248,10 @@ func Test_Cov3_MethodProcessor_GetInOutArgsTypes_Invalid(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"inLen": 0, "outLen": 0, "inNamesLen": 0}
+	expected := args.Map{
+		"inLen": 0,
+		"outLen": 0,
+		"inNamesLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "MethodProcessor returns nil -- GetInOutArgsTypes nil", actual)
 }

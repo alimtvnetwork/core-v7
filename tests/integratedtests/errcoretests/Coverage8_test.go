@@ -337,7 +337,10 @@ func Test_Cov8_SliceDiffSummary_HasMismatch(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"containsCount": true, "containsLine": true}
+	expected := args.Map{
+		"containsCount": true,
+		"containsLine": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SliceDiffSummary returns mismatch summary -- one mismatch", actual)
 }
 

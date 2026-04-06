@@ -317,10 +317,16 @@ func Test_Cov5_BasicInt16_CreateUsingMap(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"typeName": bi.TypeName(), "length": bi.Length()}
+	actual := args.Map{
+		"typeName": bi.TypeName(),
+		"length": bi.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"typeName": "testInt16Enum", "length": 2}
+	expected := args.Map{
+		"typeName": "testInt16Enum",
+		"length": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt16_CreateUsingMap returns correct value -- with args", actual)
 }
 
@@ -336,10 +342,16 @@ func Test_Cov5_BasicInt16_WithAliasMap(t *testing.T) {
 	val, err := bi.GetValueByName("on")
 
 	// Act
-	actual := args.Map{"aliasVal": val, "noErr": err == nil}
+	actual := args.Map{
+		"aliasVal": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"aliasVal": int16(1), "noErr": true}
+	expected := args.Map{
+		"aliasVal": int16(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt16_WithAliasMap returns non-empty -- with args", actual)
 }
 
@@ -354,10 +366,16 @@ func Test_Cov5_BasicInt16_DefaultAllCases(t *testing.T) {
 	val, err := bi.GetValueByName("active")
 
 	// Act
-	actual := args.Map{"lowerVal": val, "noErr": err == nil}
+	actual := args.Map{
+		"lowerVal": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"lowerVal": int16(1), "noErr": true}
+	expected := args.Map{
+		"lowerVal": int16(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt16_DefaultAllCases returns correct value -- with args", actual)
 }
 
@@ -373,10 +391,16 @@ func Test_Cov5_BasicInt16_DefaultWithAliasMapAllCases(t *testing.T) {
 	val, err := bi.GetValueByName("ENABLED")
 
 	// Act
-	actual := args.Map{"upperAlias": val, "noErr": err == nil}
+	actual := args.Map{
+		"upperAlias": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"upperAlias": int16(1), "noErr": true}
+	expected := args.Map{
+		"upperAlias": int16(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt16_DefaultWithAliasMapAllCases returns non-empty -- with args", actual)
 }
 
@@ -393,10 +417,16 @@ func Test_Cov5_BasicInt16_CreateUsingMapPlusAliasMapOptions(t *testing.T) {
 	val, err := bi.GetValueByName("ON")
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": int16(1), "noErr": true}
+	expected := args.Map{
+		"val": int16(1),
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BasicInt16_CreateUsingMapPlusAliasMapOptions returns correct value -- with args", actual)
 }
 

@@ -42,10 +42,16 @@ func Test_Cov40_BytesCloneIf_DeepValid(t *testing.T) {
 	c := corejson.BytesCloneIf(true, b)
 
 	// Act
-	actual := args.Map{"len": len(c), "same": &c[0] != &b[0]}
+	actual := args.Map{
+		"len": len(c),
+		"same": &c[0] != &b[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 5, "same": true}
+	expected := args.Map{
+		"len": 5,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf deep valid", actual)
 }
 
@@ -159,10 +165,16 @@ func Test_Cov40_New_Valid(t *testing.T) {
 	r := corejson.New("hello")
 
 	// Act
-	actual := args.Map{"noErr": !r.HasError(), "hasBytes": r.Length() > 0}
+	actual := args.Map{
+		"noErr": !r.HasError(),
+		"hasBytes": r.Length() > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New valid", actual)
 }
 
@@ -183,10 +195,16 @@ func Test_Cov40_NewPtr_Valid(t *testing.T) {
 	r := corejson.NewPtr("hello")
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "noErr": !r.HasError()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"noErr": !r.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPtr valid", actual)
 }
 
@@ -223,10 +241,16 @@ func Test_Cov40_Empty_ResultPtr(t *testing.T) {
 	r := corejson.Empty.ResultPtr()
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "empty": r.IsEmpty()}
+	actual := args.Map{
+		"notNil": r != nil,
+		"empty": r.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "empty": true}
+	expected := args.Map{
+		"notNil": true,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtr", actual)
 }
 
@@ -247,10 +271,16 @@ func Test_Cov40_Empty_ResultPtrWithErr(t *testing.T) {
 	r := corejson.Empty.ResultPtrWithErr("int", nil)
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "typeName": r.TypeName}
+	actual := args.Map{
+		"notNil": r != nil,
+		"typeName": r.TypeName,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "typeName": "int"}
+	expected := args.Map{
+		"notNil": true,
+		"typeName": "int",
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.ResultPtrWithErr", actual)
 }
 
@@ -283,10 +313,16 @@ func Test_Cov40_Empty_ResultsCollection(t *testing.T) {
 	rc := corejson.Empty.ResultsCollection()
 
 	// Act
-	actual := args.Map{"notNil": rc != nil, "len": rc.Length()}
+	actual := args.Map{
+		"notNil": rc != nil,
+		"len": rc.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 0}
+	expected := args.Map{
+		"notNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.ResultsCollection", actual)
 }
 
@@ -307,10 +343,16 @@ func Test_Cov40_Empty_MapResults(t *testing.T) {
 	mr := corejson.Empty.MapResults()
 
 	// Act
-	actual := args.Map{"notNil": mr != nil, "len": mr.Length()}
+	actual := args.Map{
+		"notNil": mr != nil,
+		"len": mr.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "len": 0}
+	expected := args.Map{
+		"notNil": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Empty.MapResults", actual)
 }
 
@@ -323,10 +365,16 @@ func Test_Cov40_KeyAny(t *testing.T) {
 	ka := corejson.KeyAny{Key: "x", AnyInf: 42}
 
 	// Act
-	actual := args.Map{"key": ka.Key, "val": ka.AnyInf}
+	actual := args.Map{
+		"key": ka.Key,
+		"val": ka.AnyInf,
+	}
 
 	// Assert
-	expected := args.Map{"key": "x", "val": 42}
+	expected := args.Map{
+		"key": "x",
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAny", actual)
 }
 
@@ -335,9 +383,15 @@ func Test_Cov40_KeyWithResult(t *testing.T) {
 	kwr := corejson.KeyWithResult{Key: "x", Result: corejson.New("hello")}
 
 	// Act
-	actual := args.Map{"key": kwr.Key, "noErr": !kwr.Result.HasError()}
+	actual := args.Map{
+		"key": kwr.Key,
+		"noErr": !kwr.Result.HasError(),
+	}
 
 	// Assert
-	expected := args.Map{"key": "x", "noErr": true}
+	expected := args.Map{
+		"key": "x",
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyWithResult", actual)
 }

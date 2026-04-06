@@ -18,10 +18,16 @@ func Test_Seg5_HS_IsEmpty(t *testing.T) {
 		h := corestr.New.Hashset.Empty()
 
 		// Act
-		actual := args.Map{"empty": h.IsEmpty(), "hasItems": h.HasItems()}
+		actual := args.Map{
+			"empty": h.IsEmpty(),
+			"hasItems": h.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -33,10 +39,16 @@ func Test_Seg5_HS_Add(t *testing.T) {
 		h.Add("a").Add("b")
 
 		// Act
-		actual := args.Map{"len": h.Length(), "has": h.Has("a")}
+		actual := args.Map{
+			"len": h.Length(),
+			"has": h.Has("a"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "has": true}
+		expected := args.Map{
+			"len": 2,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 items", actual)
 	})
 }
@@ -49,10 +61,16 @@ func Test_Seg5_HS_AddBool(t *testing.T) {
 		existed2 := h.AddBool("a")
 
 		// Act
-		actual := args.Map{"existed1": existed1, "existed2": existed2}
+		actual := args.Map{
+			"existed1": existed1,
+			"existed2": existed2,
+		}
 
 		// Assert
-		expected := args.Map{"existed1": false, "existed2": true}
+		expected := args.Map{
+			"existed1": false,
+			"existed2": true,
+		}
 		expected.ShouldBeEqual(t, 0, "AddBool -- new then existing", actual)
 	})
 }
@@ -158,10 +176,16 @@ func Test_Seg5_HS_AddFuncErr_Error(t *testing.T) {
 		)
 
 		// Act
-		actual := args.Map{"handled": handledErr != nil, "len": h.Length()}
+		actual := args.Map{
+			"handled": handledErr != nil,
+			"len": h.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"handled": true, "len": 0}
+		expected := args.Map{
+			"handled": true,
+			"len": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFuncErr error -- handled", actual)
 	})
 }
@@ -609,10 +633,16 @@ func Test_Seg5_HS_HasAllStrings(t *testing.T) {
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"all": h.HasAllStrings([]string{"a", "b"}), "miss": h.HasAllStrings([]string{"a", "z"})}
+		actual := args.Map{
+			"all": h.HasAllStrings([]string{"a", "b"}),
+			"miss": h.HasAllStrings([]string{"a", "z"}),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllStrings -- all and missing", actual)
 	})
 }
@@ -623,10 +653,16 @@ func Test_Seg5_HS_HasAll(t *testing.T) {
 		h := corestr.New.Hashset.Strings([]string{"a", "b"})
 
 		// Act
-		actual := args.Map{"all": h.HasAll("a", "b"), "miss": h.HasAll("a", "z")}
+		actual := args.Map{
+			"all": h.HasAll("a", "b"),
+			"miss": h.HasAll("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"all": true, "miss": false}
+		expected := args.Map{
+			"all": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAll -- all and missing", actual)
 	})
 }
@@ -638,10 +674,16 @@ func Test_Seg5_HS_HasAllCollectionItems(t *testing.T) {
 		c := corestr.New.Collection.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"has": h.HasAllCollectionItems(c), "nil": h.HasAllCollectionItems(nil)}
+		actual := args.Map{
+			"has": h.HasAllCollectionItems(c),
+			"nil": h.HasAllCollectionItems(nil),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "nil": false}
+		expected := args.Map{
+			"has": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAllCollectionItems -- found and nil", actual)
 	})
 }
@@ -652,10 +694,16 @@ func Test_Seg5_HS_HasAny(t *testing.T) {
 		h := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"any": h.HasAny("z", "a"), "none": h.HasAny("x", "y")}
+		actual := args.Map{
+			"any": h.HasAny("z", "a"),
+			"none": h.HasAny("x", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"any": true, "none": false}
+		expected := args.Map{
+			"any": true,
+			"none": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAny -- found and none", actual)
 	})
 }
@@ -680,10 +728,16 @@ func Test_Seg5_HS_IsAllMissing(t *testing.T) {
 		h := corestr.New.Hashset.Strings([]string{"a"})
 
 		// Act
-		actual := args.Map{"miss": h.IsAllMissing("x", "y"), "notMiss": h.IsAllMissing("a", "y")}
+		actual := args.Map{
+			"miss": h.IsAllMissing("x", "y"),
+			"notMiss": h.IsAllMissing("a", "y"),
+		}
 
 		// Assert
-		expected := args.Map{"miss": true, "notMiss": false}
+		expected := args.Map{
+			"miss": true,
+			"notMiss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsAllMissing -- all missing and partial", actual)
 	})
 }
@@ -2072,10 +2126,16 @@ func Test_Seg5_HS_MarshalJSON(t *testing.T) {
 		b, err := h.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -2087,10 +2147,16 @@ func Test_Seg5_HS_UnmarshalJSON(t *testing.T) {
 		err := h.UnmarshalJSON([]byte(`{"a":true}`))
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": h.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": h.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "UnmarshalJSON -- success", actual)
 	})
 }
@@ -2161,10 +2227,16 @@ func Test_Seg5_HS_ParseInjectUsingJson(t *testing.T) {
 		result, err := h2.ParseInjectUsingJson(jr)
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "len": result.Length()}
+		actual := args.Map{
+			"noErr": err == nil,
+			"len": result.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "len": 1}
+		expected := args.Map{
+			"noErr": true,
+			"len": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson -- round trip", actual)
 	})
 }
@@ -2210,10 +2282,16 @@ func Test_Seg5_HS_Serialize(t *testing.T) {
 		b, err := h.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }
@@ -2302,10 +2380,16 @@ func Test_Seg5_HSC_IsEmpty(t *testing.T) {
 		hsc := corestr.New.HashsetsCollection.LenCap(0, 0)
 
 		// Act
-		actual := args.Map{"empty": hsc.IsEmpty(), "hasItems": hsc.HasItems()}
+		actual := args.Map{
+			"empty": hsc.IsEmpty(),
+			"hasItems": hsc.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetsCollection IsEmpty -- true", actual)
 	})
 }
@@ -2429,10 +2513,16 @@ func Test_Seg5_HSC_List(t *testing.T) {
 		hsc.Add(h)
 
 		// Act
-		actual := args.Map{"len": len(hsc.List()), "ptrLen": len(*hsc.ListPtr())}
+		actual := args.Map{
+			"len": len(hsc.List()),
+			"ptrLen": len(*hsc.ListPtr()),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "ptrLen": 1}
+		expected := args.Map{
+			"len": 1,
+			"ptrLen": 1,
+		}
 		expected.ShouldBeEqual(t, 0, "List/ListPtr -- 1 item", actual)
 	})
 }
@@ -2565,10 +2655,16 @@ func Test_Seg5_HSC_HasAll(t *testing.T) {
 		hsc.Add(h)
 
 		// Act
-		actual := args.Map{"has": hsc.HasAll("a", "b"), "miss": hsc.HasAll("a", "z")}
+		actual := args.Map{
+			"has": hsc.HasAll("a", "b"),
+			"miss": hsc.HasAll("a", "z"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "HasAll -- found and missing", actual)
 	})
 }
@@ -2775,10 +2871,16 @@ func Test_Seg5_HSC_MarshalJSON(t *testing.T) {
 		b, err := hsc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -2826,10 +2928,16 @@ func Test_Seg5_HSC_Serialize(t *testing.T) {
 		b, err := hsc.Serialize()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Serialize -- success", actual)
 	})
 }

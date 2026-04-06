@@ -29,10 +29,16 @@ func Test_Cov2_VerifyMessage_IgnoreCase_Negative(t *testing.T) {
 	msg := stringcompareas.NotStartsWith.VerifyMessage(true, "Hello World", "hello")
 
 	// Act
-	actual := args.Map{"nonEmpty": msg != "", "isNeg": strings.Contains(msg, "negative")}
+	actual := args.Map{
+		"nonEmpty": msg != "",
+		"isNeg": strings.Contains(msg, "negative"),
+	}
 
 	// Assert
-	expected := args.Map{"nonEmpty": true, "isNeg": true}
+	expected := args.Map{
+		"nonEmpty": true,
+		"isNeg": true,
+	}
 	expected.ShouldBeEqual(t, 0, "VerifyMessage returns correct value -- ignore case negative mismatch", actual)
 }
 

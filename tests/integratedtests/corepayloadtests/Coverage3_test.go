@@ -297,10 +297,16 @@ func Test_Cov3_PayloadWrapper_ToPtr(t *testing.T) {
 	ptr := pw.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "sameName": ptr.Name == "test"}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"sameName": ptr.Name == "test",
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "sameName": true}
+	expected := args.Map{
+		"notNil": true,
+		"sameName": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PayloadWrapper.ToPtr returns pointer -- basic", actual)
 }
 

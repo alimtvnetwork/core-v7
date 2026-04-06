@@ -43,14 +43,20 @@ var refTestCases = []coretestcases.CaseV1{
 }
 
 var sourceDestTestCases = []coretestcases.CaseV1{
-	{Title: "SourceDestination returns non-empty -- with type", ExpectedInput: args.Map{"nonEmpty1": true, "nonEmpty2": true}},
+	{Title: "SourceDestination returns non-empty -- with type", ExpectedInput: args.Map{
+		"nonEmpty1": true,
+		"nonEmpty2": true,
+	}},
 	{Title: "SourceDestinationNoType returns non-empty -- valid args", ExpectedInput: args.Map{"nonEmpty": true}},
 	{Title: "SourceDestinationErr returns non-nil -- valid args", ExpectedInput: args.Map{"nonNil": true}},
 }
 
 var combineTestCases = []coretestcases.CaseV1{
 	{Title: "Combine returns non-empty -- valid args", ExpectedInput: args.Map{"nonEmpty": true}},
-	{Title: "CombineWithMsgTypeNoStack returns non-empty -- various combos", ExpectedInput: args.Map{"nonEmpty1": true, "nonEmpty2": true}},
+	{Title: "CombineWithMsgTypeNoStack returns non-empty -- various combos", ExpectedInput: args.Map{
+		"nonEmpty1": true,
+		"nonEmpty2": true,
+	}},
 	{Title: "CombineWithMsgTypeStackTrace returns non-empty -- valid args", ExpectedInput: args.Map{"nonEmpty": true}},
 	{Title: "StackTracesCompiled returns non-empty -- with traces", ExpectedInput: args.Map{"nonEmpty": true}},
 	{Title: "GherkinsString returns non-empty -- valid args", ExpectedInput: args.Map{"nonEmpty": true}},

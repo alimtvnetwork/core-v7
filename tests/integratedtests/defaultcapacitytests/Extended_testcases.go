@@ -56,12 +56,18 @@ var predictiveDefaultSmallTestCases = []coretestcases.CaseV1{
 var predictiveFiftyPercentTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "Positive length with additional cap",
-		ArrangeInput:  args.Map{"possibleLen": 100, "additionalCap": 10},
+		ArrangeInput:  args.Map{
+			"possibleLen": 100,
+			"additionalCap": 10,
+		},
 		ExpectedInput: args.Map{"isPositive": true},
 	},
 	{
 		Title:         "Zero length returns additional cap",
-		ArrangeInput:  args.Map{"possibleLen": 0, "additionalCap": 5},
+		ArrangeInput:  args.Map{
+			"possibleLen": 0,
+			"additionalCap": 5,
+		},
 		ExpectedInput: args.Map{"result": 5},
 	},
 }

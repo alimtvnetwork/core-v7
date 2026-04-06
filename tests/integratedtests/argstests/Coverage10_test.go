@@ -286,7 +286,10 @@ func Test_CovArgs_14_Map_Get_Has_HasDefined(t *testing.T) {
 
 func Test_CovArgs_15_Map_HasDefinedAll_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 	// Arrange
-	m := args.Map{"a": 1, "b": 2}
+	m := args.Map{
+		"a": 1,
+		"b": 2,
+	}
 
 	// Act
 	actual := args.Map{"result": m.HasDefinedAll("a", "b")}
@@ -338,7 +341,10 @@ func Test_CovArgs_16_Map_NilMap(t *testing.T) {
 
 func Test_CovArgs_17_Map_SortedKeys(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	keys, err := m.SortedKeys()
 
 	// Act
@@ -429,7 +435,11 @@ func Test_CovArgs_20_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 
 func Test_CovArgs_21_Map_Expect_Actual_Arrange(t *testing.T) {
 	// Arrange
-	m := args.Map{"expect": 1, "actual": 2, "arrange": 3}
+	m := args.Map{
+		"expect": 1,
+		"actual": 2,
+		"arrange": 3,
+	}
 
 	// Act
 	actual := args.Map{"result": m.Expect() != 1}
@@ -460,7 +470,10 @@ func Test_CovArgs_22_Map_SetActual(t *testing.T) {
 
 func Test_CovArgs_23_Map_When_Title(t *testing.T) {
 	// Arrange
-	m := args.Map{"when": "w", "title": "t"}
+	m := args.Map{
+		"when": "w",
+		"title": "t",
+	}
 
 	// Act
 	actual := args.Map{"result": m.When() != "w"}
@@ -489,7 +502,10 @@ func Test_CovArgs_24_Map_GetByIndex(t *testing.T) {
 
 func Test_CovArgs_25_Map_Raw_Args_ValidArgs(t *testing.T) {
 	// Arrange
-	m := args.Map{"first": "a", "second": "b"}
+	m := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	raw := m.Raw()
 
 	// Act

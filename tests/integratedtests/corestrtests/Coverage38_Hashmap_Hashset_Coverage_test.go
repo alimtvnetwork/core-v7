@@ -46,13 +46,19 @@ func Test_C38_Hashmap_SetBySplitter(t *testing.T) {
 		h.SetBySplitter("=", "key=val")
 
 		// Act
-		actual := args.Map{"result": v, ok := h.Get("key"); !ok || v != "val"}
+		actual := args.Map{
+			"result": v,
+			ok := h.Get("key"); !ok || v != "val",
+		}
 
 		// Assert
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "assertion", actual)
 		h.SetBySplitter("=", "noequals")
-		actual := args.Map{"result": v, ok := h.Get("noequals"); !ok || v}
+		actual := args.Map{
+			"result": v,
+			ok := h.Get("noequals"); !ok || v,
+		}
 		expected := args.Map{"result": ""}
 		expected.ShouldBeEqual(t, 0, "v", actual)
 	})

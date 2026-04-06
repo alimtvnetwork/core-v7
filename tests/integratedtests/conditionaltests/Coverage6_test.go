@@ -444,10 +444,16 @@ func Test_Cov6_TypedErrorFunctionsExecuteResults_True_NoErrors(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "isNil": err == nil}
+	actual := args.Map{
+		"len": len(results),
+		"isNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "isNil": true}
+	expected := args.Map{
+		"len": 2,
+		"isNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns empty -- no errors", actual)
 }
 
@@ -461,10 +467,16 @@ func Test_Cov6_TypedErrorFunctionsExecuteResults_WithErrors(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "hasError": err != nil}
+	actual := args.Map{
+		"len": len(results),
+		"hasError": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasError": true}
+	expected := args.Map{
+		"len": 1,
+		"hasError": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns error -- with errors", actual)
 }
 
@@ -473,10 +485,16 @@ func Test_Cov6_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, nil, nil)
 
 	// Act
-	actual := args.Map{"isNil": results == nil, "errNil": err == nil}
+	actual := args.Map{
+		"isNil": results == nil,
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "errNil": true}
+	expected := args.Map{
+		"isNil": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns empty -- empty", actual)
 }
 

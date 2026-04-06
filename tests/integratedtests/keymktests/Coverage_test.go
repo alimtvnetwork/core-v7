@@ -65,7 +65,12 @@ func Test_Cov_Key_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"length": 0, "keyChains": true, "allRaw": true, "hasIn": false}
+	expected := args.Map{
+		"length": 0,
+		"keyChains": true,
+		"allRaw": true,
+		"hasIn": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns nil -- nil", actual)
 }
 
@@ -145,7 +150,10 @@ func Test_Cov_Key_HasInChains(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasA": true, "hasC": false}
+	expected := args.Map{
+		"hasA": true,
+		"hasC": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- HasInChains", actual)
 }
 
@@ -156,10 +164,16 @@ func Test_Cov_Key_ConcatNewUsingKeys(t *testing.T) {
 	result := key1.ConcatNewUsingKeys(key2)
 
 	// Act
-	actual := args.Map{"length": result.Length(), "originalLen": key1.Length()}
+	actual := args.Map{
+		"length": result.Length(),
+		"originalLen": key1.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"length": 3, "originalLen": 1}
+	expected := args.Map{
+		"length": 3,
+		"originalLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- ConcatNewUsingKeys", actual)
 }
 
@@ -169,10 +183,16 @@ func Test_Cov_Key_ClonePtr(t *testing.T) {
 	cloned := key.ClonePtr("b")
 
 	// Act
-	actual := args.Map{"clonedLen": cloned.Length(), "originalLen": key.Length()}
+	actual := args.Map{
+		"clonedLen": cloned.Length(),
+		"originalLen": key.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"clonedLen": 2, "originalLen": 1}
+	expected := args.Map{
+		"clonedLen": 2,
+		"originalLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- ClonePtr", actual)
 }
 
@@ -214,7 +234,10 @@ func Test_Cov_Key_Finalized(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isComplete": true, "compiledChain": true}
+	expected := args.Map{
+		"isComplete": true,
+		"compiledChain": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- Finalized", actual)
 }
 
@@ -225,10 +248,16 @@ func Test_Cov_Key_Finalized_Compile_Additional(t *testing.T) {
 	result := key.Compile("extra")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "containsExtra": len(result) > len(key.CompiledChain())}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"containsExtra": len(result) > len(key.CompiledChain()),
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsExtra": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsExtra": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns non-empty -- Finalized Compile with extra", actual)
 }
 
@@ -253,10 +282,16 @@ func Test_Cov_Key_Finalized_Compile_NoAdditional(t *testing.T) {
 	result := key.Compile()
 
 	// Act
-	actual := args.Map{"result": result, "chain": key.CompiledChain()}
+	actual := args.Map{
+		"result": result,
+		"chain": key.CompiledChain(),
+	}
 
 	// Assert
-	expected := args.Map{"result": key.CompiledChain(), "chain": key.CompiledChain()}
+	expected := args.Map{
+		"result": key.CompiledChain(),
+		"chain": key.CompiledChain(),
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns empty -- Finalized Compile no additional", actual)
 }
 
@@ -282,10 +317,16 @@ func Test_Cov_Key_CompileKeys_Empty(t *testing.T) {
 	result := key.CompileKeys()
 
 	// Act
-	actual := args.Map{"result": result, "compile": key.Compile()}
+	actual := args.Map{
+		"result": result,
+		"compile": key.Compile(),
+	}
 
 	// Assert
-	expected := args.Map{"result": key.Compile(), "compile": key.Compile()}
+	expected := args.Map{
+		"result": key.Compile(),
+		"compile": key.Compile(),
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns empty -- CompileKeys empty", actual)
 }
 
@@ -323,10 +364,16 @@ func Test_Cov_Key_CompileReplaceMapUsingItemsOption_EmptyMap(t *testing.T) {
 	result := key.CompileReplaceMapUsingItemsOption(true, map[string]string{})
 
 	// Act
-	actual := args.Map{"result": result, "compile": key.Compile()}
+	actual := args.Map{
+		"result": result,
+		"compile": key.Compile(),
+	}
 
 	// Assert
-	expected := args.Map{"result": key.Compile(), "compile": key.Compile()}
+	expected := args.Map{
+		"result": key.Compile(),
+		"compile": key.Compile(),
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns empty -- CompileReplaceMap empty map", actual)
 }
 
@@ -418,7 +465,12 @@ func Test_Cov_Key_MarshalUnmarshalJSON(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "notEmpty": true, "mainName": "root"}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"notEmpty": true,
+		"mainName": "root",
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
@@ -441,10 +493,16 @@ func Test_Cov_Key_Serialize(t *testing.T) {
 	data, err := key.Serialize()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": len(data) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": len(data) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Key returns correct value -- Serialize", actual)
 }
 
@@ -587,10 +645,16 @@ func Test_Cov_NewKey_AllStrings(t *testing.T) {
 	key := keymk.NewKey.AllStrings(keymk.JoinerOption, "root", "a", "b")
 
 	// Act
-	actual := args.Map{"mainName": key.MainName(), "len": key.Length()}
+	actual := args.Map{
+		"mainName": key.MainName(),
+		"len": key.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"mainName": "root", "len": 2}
+	expected := args.Map{
+		"mainName": "root",
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "NewKey returns correct value -- AllStrings", actual)
 }
 
@@ -599,10 +663,16 @@ func Test_Cov_NewKey_StringsWithOptions(t *testing.T) {
 	key := keymk.NewKey.StringsWithOptions(keymk.JoinerOption, "root", "a")
 
 	// Act
-	actual := args.Map{"mainName": key.MainName(), "len": key.Length()}
+	actual := args.Map{
+		"mainName": key.MainName(),
+		"len": key.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"mainName": "root", "len": 1}
+	expected := args.Map{
+		"mainName": "root",
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "NewKey returns non-empty -- StringsWithOptions", actual)
 }
 

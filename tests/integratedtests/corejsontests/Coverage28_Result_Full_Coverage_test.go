@@ -38,7 +38,10 @@ func Test_C28_02_Result_Map_WithBytesAndError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type", actual)
-	actual := args.Map{"result": _, ok := m["Error"]; !ok}
+	actual := args.Map{
+		"result": _,
+		ok := m["Error"]; !ok,
+	}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error key", actual)
 }
@@ -49,7 +52,10 @@ func Test_C28_03_Result_Map_NoBytesNoError(t *testing.T) {
 	m := r.Map()
 
 	// Act
-	actual := args.Map{"result": _, ok := m["Type"]; !ok}
+	actual := args.Map{
+		"result": _,
+		ok := m["Type"]; !ok,
+	}
 
 	// Assert
 	expected := args.Map{"result": false}

@@ -39,10 +39,18 @@ func Test_Cov8_SafeIndexRanges_PartialOutOfBounds(t *testing.T) {
 	result := stringslice.SafeIndexRanges([]string{"a", "b", "c"}, -1, 4)
 
 	// Act
-	actual := args.Map{"len": len(result), "idx1": result[1], "idx2": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"idx1": result[1],
+		"idx2": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 6, "idx1": "a", "idx2": "b"}
+	expected := args.Map{
+		"len": 6,
+		"idx1": "a",
+		"idx2": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexRanges returns partial -- out of bounds edges", actual)
 }
 
@@ -129,10 +137,18 @@ func Test_Cov8_SafeIndexes_OutOfBounds(t *testing.T) {
 	result := stringslice.SafeIndexes([]string{"a", "b"}, 0, 5, -1)
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1], "third": result[2]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+		"third": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "", "third": ""}
+	expected := args.Map{
+		"first": "a",
+		"second": "",
+		"third": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SafeIndexes returns partial -- out of bounds indexes", actual)
 }
 
@@ -155,10 +171,16 @@ func Test_Cov8_SplitTrimmedNonEmpty_Content(t *testing.T) {
 	result := stringslice.SplitTrimmedNonEmpty("  a , b , c  ", ",", -1)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmpty returns trimmed -- comma separated", actual)
 }
 
@@ -169,10 +191,16 @@ func Test_Cov8_SplitTrimmedNonEmptyAll_Content(t *testing.T) {
 	result := stringslice.SplitTrimmedNonEmptyAll("  x | y  ", "|")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "x"}
+	expected := args.Map{
+		"len": 2,
+		"first": "x",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitTrimmedNonEmptyAll returns trimmed -- pipe separated", actual)
 }
 
@@ -195,10 +223,16 @@ func Test_Cov8_TrimmedEachWordsPtr_Items(t *testing.T) {
 	result := stringslice.TrimmedEachWordsPtr([]string{" a ", " b "})
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "second": "b"}
+	expected := args.Map{
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "TrimmedEachWordsPtr returns trimmed -- whitespace items", actual)
 }
 
@@ -378,10 +412,16 @@ func Test_Cov8_RegexTrimmedSplitNonEmptyAll(t *testing.T) {
 	result := stringslice.RegexTrimmedSplitNonEmptyAll(re, " a , b ; c ")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "RegexTrimmedSplitNonEmptyAll returns trimmed -- regex split", actual)
 }
 
@@ -442,10 +482,16 @@ func Test_Cov8_LinesSimpleProcess_Items(t *testing.T) {
 	result := stringslice.LinesSimpleProcess([]string{"a", "b"}, func(s string) string { return s + "!" })
 
 	// Act
-	actual := args.Map{"first": result[0], "second": result[1]}
+	actual := args.Map{
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a!", "second": "b!"}
+	expected := args.Map{
+		"first": "a!",
+		"second": "b!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesSimpleProcess returns processed -- append exclamation", actual)
 }
 
@@ -600,10 +646,16 @@ func Test_Cov8_ProcessAsync_Items(t *testing.T) {
 	}, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a!",
+	}
 	expected.ShouldBeEqual(t, 0, "ProcessAsync returns processed -- two items", actual)
 }
 
@@ -674,10 +726,16 @@ func Test_Cov8_LinesAsyncProcess_Items(t *testing.T) {
 	result := stringslice.LinesAsyncProcess([]string{"a", "b"}, func(i int, s string) string { return s + "!" })
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a!",
+	}
 	expected.ShouldBeEqual(t, 0, "LinesAsyncProcess returns processed -- two items", actual)
 }
 
@@ -726,10 +784,16 @@ func Test_Cov8_AnyLinesProcessAsync_Items(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "x!"}
+	expected := args.Map{
+		"len": 2,
+		"first": "x!",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyLinesProcessAsync returns processed -- string slice", actual)
 }
 

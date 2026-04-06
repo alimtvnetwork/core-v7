@@ -306,7 +306,10 @@ func Test_MapAppend_SkipEmpty(t *testing.T) {
 	// "a" has value "" which after Sprintf becomes "" → skipped
 
 	// Act
-	actual := args.Map{"result": _, has := result["a"]; has}
+	actual := args.Map{
+		"result": _,
+		has := result["a"]; has,
+	}
 
 	// Assert
 	expected := args.Map{"result": false}

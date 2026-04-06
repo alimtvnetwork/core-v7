@@ -44,7 +44,10 @@ func Test_Cov18_Result_Map_NoError(t *testing.T) {
 	m := r.Map()
 
 	// Act
-	actual := args.Map{"result": _, ok := m["Error"]; ok}
+	actual := args.Map{
+		"result": _,
+		ok := m["Error"]; ok,
+	}
 
 	// Assert
 	expected := args.Map{"result": false}

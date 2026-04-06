@@ -18,10 +18,16 @@ func Test_Seg7_LC_IsEmpty(t *testing.T) {
 		lc := corestr.New.LinkedCollection.Create()
 
 		// Act
-		actual := args.Map{"empty": lc.IsEmpty(), "hasItems": lc.HasItems()}
+		actual := args.Map{
+			"empty": lc.IsEmpty(),
+			"hasItems": lc.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -35,10 +41,16 @@ func Test_Seg7_LC_Add(t *testing.T) {
 		lc.Add(c1).Add(c2)
 
 		// Act
-		actual := args.Map{"len": lc.Length(), "allLen": lc.AllIndividualItemsLength()}
+		actual := args.Map{
+			"len": lc.Length(),
+			"allLen": lc.AllIndividualItemsLength(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "allLen": 3}
+		expected := args.Map{
+			"len": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 collections 3 items", actual)
 	})
 }
@@ -113,10 +125,16 @@ func Test_Seg7_LC_AddFront(t *testing.T) {
 		lc.Add(c1).AddFront(c2)
 
 		// Act
-		actual := args.Map{"head": lc.Head().Element.List()[0], "len": lc.Length()}
+		actual := args.Map{
+			"head": lc.Head().Element.List()[0],
+			"len": lc.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"head": "a", "len": 2}
+		expected := args.Map{
+			"head": "a",
+			"len": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "AddFront -- prepended", actual)
 	})
 }
@@ -300,7 +318,11 @@ func Test_Seg7_LC_FirstLastSingle(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "a", "single": "a"}
+		expected := args.Map{
+			"first": "a",
+			"last": "a",
+			"single": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "First/Last/Single -- correct", actual)
 	})
 }
@@ -378,7 +400,11 @@ func Test_Seg7_LC_SafeIndexAt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"at0": true, "neg": true, "over": true}
+		expected := args.Map{
+			"at0": true,
+			"neg": true,
+			"over": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SafeIndexAt -- various", actual)
 	})
 }
@@ -397,7 +423,10 @@ func Test_Seg7_LC_SafePointerIndexAt(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"at0": true, "nil": true}
+		expected := args.Map{
+			"at0": true,
+			"nil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SafePointerIndexAt -- correct", actual)
 	})
 }
@@ -457,7 +486,11 @@ func Test_Seg7_LC_IsEqualsPtr(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "self": true, "nil": false}
+		expected := args.Map{
+			"eq": true,
+			"self": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualsPtr -- various", actual)
 	})
 }
@@ -952,10 +985,16 @@ func Test_Seg7_LC_MarshalJSON(t *testing.T) {
 		b, err := lc.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1095,7 +1134,12 @@ func Test_Seg7_LC_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true, "marsh": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+			"marsh": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }
@@ -1450,7 +1494,12 @@ func Test_Seg7_LLN_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"elem": "hello", "str": "hello", "hasNext": false, "next": true}
+		expected := args.Map{
+			"elem": "hello",
+			"str": "hello",
+			"hasNext": false,
+			"next": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Basic -- correct", actual)
 	})
 }
@@ -1462,10 +1511,18 @@ func Test_Seg7_LLN_Clone(t *testing.T) {
 		c := node.Clone()
 
 		// Act
-		actual := args.Map{"elem": c.Element, "diff": c != node, "hasNext": c.HasNext()}
+		actual := args.Map{
+			"elem": c.Element,
+			"diff": c != node,
+			"hasNext": c.HasNext(),
+		}
 
 		// Assert
-		expected := args.Map{"elem": "hello", "diff": true, "hasNext": false}
+		expected := args.Map{
+			"elem": "hello",
+			"diff": true,
+			"hasNext": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- new copy no next", actual)
 	})
 }
@@ -1478,10 +1535,16 @@ func Test_Seg7_LLN_EndOfChain(t *testing.T) {
 		end, length := ll.Head().EndOfChain()
 
 		// Act
-		actual := args.Map{"end": end.Element, "len": length}
+		actual := args.Map{
+			"end": end.Element,
+			"len": length,
+		}
 
 		// Assert
-		expected := args.Map{"end": "c", "len": 3}
+		expected := args.Map{
+			"end": "c",
+			"len": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "EndOfChain -- end node + length", actual)
 	})
 }
@@ -1494,10 +1557,16 @@ func Test_Seg7_LLN_List(t *testing.T) {
 		list := ll.Head().List()
 
 		// Act
-		actual := args.Map{"len": len(list), "first": list[0]}
+		actual := args.Map{
+			"len": len(list),
+			"first": list[0],
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "List -- from node onwards", actual)
 	})
 }
@@ -1534,7 +1603,12 @@ func Test_Seg7_LLN_IsEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "self": true, "nilBoth": true, "nilOne": false}
+		expected := args.Map{
+			"eq": true,
+			"self": true,
+			"nilBoth": true,
+			"nilOne": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqual -- various", actual)
 	})
 }
@@ -1545,10 +1619,16 @@ func Test_Seg7_LLN_IsEqualValue(t *testing.T) {
 		node := &corestr.LinkedListNode{Element: "a"}
 
 		// Act
-		actual := args.Map{"eq": node.IsEqualValue("a"), "neq": node.IsEqualValue("b")}
+		actual := args.Map{
+			"eq": node.IsEqualValue("a"),
+			"neq": node.IsEqualValue("b"),
+		}
 
 		// Assert
-		expected := args.Map{"eq": true, "neq": false}
+		expected := args.Map{
+			"eq": true,
+			"neq": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualValue -- correct", actual)
 	})
 }
@@ -1565,7 +1645,10 @@ func Test_Seg7_LLN_IsEqualValueSensitive(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"sensitive": false, "insensitive": true}
+		expected := args.Map{
+			"sensitive": false,
+			"insensitive": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualValueSensitive -- case matters", actual)
 	})
 }
@@ -1586,7 +1669,11 @@ func Test_Seg7_LLN_IsChainEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "nilBoth": true, "nilOne": false}
+		expected := args.Map{
+			"eq": true,
+			"nilBoth": true,
+			"nilOne": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsChainEqual -- correct", actual)
 	})
 }
@@ -1609,7 +1696,13 @@ func Test_Seg7_LLN_IsEqualSensitive(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"sensitive": false, "insensitive": true, "nilBoth": true, "nilOne": false, "self": true}
+		expected := args.Map{
+			"sensitive": false,
+			"insensitive": true,
+			"nilBoth": true,
+			"nilOne": false,
+			"self": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualSensitive -- various", actual)
 	})
 }
@@ -1642,10 +1735,18 @@ func Test_Seg7_LLN_LoopEndOfChain(t *testing.T) {
 		})
 
 		// Act
-		actual := args.Map{"end": end.Element, "len": length, "count": count}
+		actual := args.Map{
+			"end": end.Element,
+			"len": length,
+			"count": count,
+		}
 
 		// Assert
-		expected := args.Map{"end": "b", "len": 2, "count": 2}
+		expected := args.Map{
+			"end": "b",
+			"len": 2,
+			"count": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "LoopEndOfChain -- all visited", actual)
 	})
 }
@@ -1687,7 +1788,12 @@ func Test_Seg7_LCN_Basic(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"hasElem": true, "hasNext": false, "isEmpty": false, "str": true}
+		expected := args.Map{
+			"hasElem": true,
+			"hasNext": false,
+			"isEmpty": false,
+			"str": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Basic -- correct", actual)
 	})
 }
@@ -1714,10 +1820,16 @@ func Test_Seg7_LCN_Clone(t *testing.T) {
 		cl := node.Clone()
 
 		// Act
-		actual := args.Map{"diff": cl != node, "hasNext": cl.HasNext()}
+		actual := args.Map{
+			"diff": cl != node,
+			"hasNext": cl.HasNext(),
+		}
 
 		// Assert
-		expected := args.Map{"diff": true, "hasNext": false}
+		expected := args.Map{
+			"diff": true,
+			"hasNext": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Clone -- new copy", actual)
 	})
 }
@@ -1732,10 +1844,16 @@ func Test_Seg7_LCN_EndOfChain(t *testing.T) {
 		end, length := lc.Head().EndOfChain()
 
 		// Act
-		actual := args.Map{"len": length, "notNil": end != nil}
+		actual := args.Map{
+			"len": length,
+			"notNil": end != nil,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "notNil": true}
+		expected := args.Map{
+			"len": 2,
+			"notNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "EndOfChain -- end + length", actual)
 	})
 }
@@ -1790,7 +1908,12 @@ func Test_Seg7_LCN_IsEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "self": true, "nilBoth": true, "nilOne": false}
+		expected := args.Map{
+			"eq": true,
+			"self": true,
+			"nilBoth": true,
+			"nilOne": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqual -- various", actual)
 	})
 }
@@ -1809,7 +1932,10 @@ func Test_Seg7_LCN_IsEqualValue(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "nil": false}
+		expected := args.Map{
+			"eq": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEqualValue -- correct", actual)
 	})
 }
@@ -1833,7 +1959,10 @@ func Test_Seg7_LCN_IsChainEqual(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "nilBoth": true}
+		expected := args.Map{
+			"eq": true,
+			"nilBoth": true,
+		}
 		expected.ShouldBeEqual(t, 0, "IsChainEqual -- correct", actual)
 	})
 }
@@ -1869,10 +1998,16 @@ func Test_Seg7_LCN_LoopEndOfChain(t *testing.T) {
 		})
 
 		// Act
-		actual := args.Map{"len": length, "count": count}
+		actual := args.Map{
+			"len": length,
+			"count": count,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "count": 2}
+		expected := args.Map{
+			"len": 2,
+			"count": 2,
+		}
 		expected.ShouldBeEqual(t, 0, "LoopEndOfChain -- all visited", actual)
 	})
 }
@@ -1887,10 +2022,18 @@ func Test_Seg7_NCLLN_Basic(t *testing.T) {
 		ncl := corestr.NewNonChainedLinkedListNodes(4)
 
 		// Act
-		actual := args.Map{"empty": ncl.IsEmpty(), "len": ncl.Length(), "hasItems": ncl.HasItems()}
+		actual := args.Map{
+			"empty": ncl.IsEmpty(),
+			"len": ncl.Length(),
+			"hasItems": ncl.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Basic -- empty", actual)
 	})
 }
@@ -1911,7 +2054,11 @@ func Test_Seg7_NCLLN_Adds(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": "a", "last": "b"}
+		expected := args.Map{
+			"len": 2,
+			"first": "a",
+			"last": "b",
+		}
 		expected.ShouldBeEqual(t, 0, "Adds -- 2 nodes", actual)
 	})
 }
@@ -1937,10 +2084,16 @@ func Test_Seg7_NCLLN_FirstLastOrDefault(t *testing.T) {
 		ncl := corestr.NewNonChainedLinkedListNodes(4)
 
 		// Act
-		actual := args.Map{"firstNil": ncl.FirstOrDefault() == nil, "lastNil": ncl.LastOrDefault() == nil}
+		actual := args.Map{
+			"firstNil": ncl.FirstOrDefault() == nil,
+			"lastNil": ncl.LastOrDefault() == nil,
+		}
 
 		// Assert
-		expected := args.Map{"firstNil": true, "lastNil": true}
+		expected := args.Map{
+			"firstNil": true,
+			"lastNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "FirstOrDefault/LastOrDefault empty -- nil", actual)
 	})
 }
@@ -1955,10 +2108,16 @@ func Test_Seg7_NCLLN_ApplyChaining(t *testing.T) {
 		ncl.ApplyChaining()
 
 		// Act
-		actual := args.Map{"chained": ncl.IsChainingApplied(), "hasNext": n1.HasNext()}
+		actual := args.Map{
+			"chained": ncl.IsChainingApplied(),
+			"hasNext": n1.HasNext(),
+		}
 
 		// Assert
-		expected := args.Map{"chained": true, "hasNext": true}
+		expected := args.Map{
+			"chained": true,
+			"hasNext": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining -- linked", actual)
 	})
 }
@@ -2037,10 +2196,18 @@ func Test_Seg7_NCLN_Basic(t *testing.T) {
 		ncl := corestr.NewNonChainedLinkedCollectionNodes(4)
 
 		// Act
-		actual := args.Map{"empty": ncl.IsEmpty(), "len": ncl.Length(), "hasItems": ncl.HasItems()}
+		actual := args.Map{
+			"empty": ncl.IsEmpty(),
+			"len": ncl.Length(),
+			"hasItems": ncl.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "len": 0, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"len": 0,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Basic -- empty", actual)
 	})
 }
@@ -2056,10 +2223,18 @@ func Test_Seg7_NCLN_Adds(t *testing.T) {
 		ncl.Adds(n1, n2)
 
 		// Act
-		actual := args.Map{"len": ncl.Length(), "first": ncl.First() != nil, "last": ncl.Last() != nil}
+		actual := args.Map{
+			"len": ncl.Length(),
+			"first": ncl.First() != nil,
+			"last": ncl.Last() != nil,
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "first": true, "last": true}
+		expected := args.Map{
+			"len": 2,
+			"first": true,
+			"last": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Adds -- 2 nodes", actual)
 	})
 }
@@ -2085,10 +2260,16 @@ func Test_Seg7_NCLN_FirstLastOrDefault(t *testing.T) {
 		ncl := corestr.NewNonChainedLinkedCollectionNodes(4)
 
 		// Act
-		actual := args.Map{"firstNil": ncl.FirstOrDefault() == nil, "lastNil": ncl.LastOrDefault() == nil}
+		actual := args.Map{
+			"firstNil": ncl.FirstOrDefault() == nil,
+			"lastNil": ncl.LastOrDefault() == nil,
+		}
 
 		// Assert
-		expected := args.Map{"firstNil": true, "lastNil": true}
+		expected := args.Map{
+			"firstNil": true,
+			"lastNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "FirstOrDefault/LastOrDefault empty -- nil", actual)
 	})
 }
@@ -2105,10 +2286,16 @@ func Test_Seg7_NCLN_ApplyChaining(t *testing.T) {
 		ncl.ApplyChaining()
 
 		// Act
-		actual := args.Map{"chained": ncl.IsChainingApplied(), "hasNext": n1.HasNext()}
+		actual := args.Map{
+			"chained": ncl.IsChainingApplied(),
+			"hasNext": n1.HasNext(),
+		}
 
 		// Assert
-		expected := args.Map{"chained": true, "hasNext": true}
+		expected := args.Map{
+			"chained": true,
+			"hasNext": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ApplyChaining -- linked", actual)
 	})
 }

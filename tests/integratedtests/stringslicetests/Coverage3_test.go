@@ -103,10 +103,16 @@ func Test_Cov3_InPlaceReverse(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse reverses -- a,b,c", actual)
 }
 
@@ -148,7 +154,11 @@ func Test_Cov3_HasAnyItem(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonEmpty": true, "empty": false, "nil": false}
+	expected := args.Map{
+		"nonEmpty": true,
+		"empty": false,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasAnyItem -- various", actual)
 }
 
@@ -161,7 +171,11 @@ func Test_Cov3_IsEmpty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": true, "nonEmpty": false, "nil": true}
+	expected := args.Map{
+		"empty": true,
+		"nonEmpty": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmpty -- various", actual)
 }
 
@@ -202,10 +216,16 @@ func Test_Cov3_Make(t *testing.T) {
 	result := stringslice.Make(0, 5)
 
 	// Act
-	actual := args.Map{"cap": cap(result) >= 5, "len": len(result)}
+	actual := args.Map{
+		"cap": cap(result) >= 5,
+		"len": len(result),
+	}
 
 	// Assert
-	expected := args.Map{"cap": true, "len": 0}
+	expected := args.Map{
+		"cap": true,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Make creates slice -- cap 5", actual)
 }
 
@@ -296,10 +316,16 @@ func Test_Cov3_CloneUsingCap(t *testing.T) {
 	result := stringslice.CloneUsingCap(10, []string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(result), "capAbove": cap(result) >= 10}
+	actual := args.Map{
+		"len": len(result),
+		"capAbove": cap(result) >= 10,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "capAbove": true}
+	expected := args.Map{
+		"len": 1,
+		"capAbove": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CloneUsingCap clones with cap -- cap 10", actual)
 }
 
@@ -312,10 +338,16 @@ func Test_Cov3_AppendLineNew(t *testing.T) {
 	result := stringslice.AppendLineNew([]string{"a"}, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendLineNew appends -- b", actual)
 }
 
@@ -427,8 +459,14 @@ func Test_Cov3_FirstLastStatus_Multiple(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 2 items", actual)
-	actual := args.Map{"first": s[0], "last": s[len(s)-1]}
-	expected := args.Map{"first": "a", "last": "b"}
+	actual := args.Map{
+		"first": s[0],
+		"last": s[len(s)-1],
+	}
+	expected := args.Map{
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastStatus returns both -- 2 items", actual)
 }
 
@@ -459,7 +497,10 @@ func Test_Cov3_HasAnyItemPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"has": true, "nilPtr": false}
+	expected := args.Map{
+		"has": true,
+		"nilPtr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "HasAnyItemPtr -- valid and nil", actual)
 }
 
@@ -474,7 +515,10 @@ func Test_Cov3_IsEmptyPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notEmpty": false, "nilPtr": true}
+	expected := args.Map{
+		"notEmpty": false,
+		"nilPtr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEmptyPtr -- valid and nil", actual)
 }
 

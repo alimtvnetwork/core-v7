@@ -217,10 +217,16 @@ func Test_Cov_AnyToValuesTypeStrings(t *testing.T) {
 	empty := corecsv.AnyToValuesTypeStrings()
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(empty)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(empty),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToValuesTypeStrings returns non-empty -- with args", actual)
 }
 
@@ -230,10 +236,16 @@ func Test_Cov_AnyToValuesTypeString(t *testing.T) {
 	empty := corecsv.AnyToValuesTypeString()
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "empty": empty}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"empty": empty,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "empty": ""}
+	expected := args.Map{
+		"notEmpty": true,
+		"empty": "",
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToValuesTypeString returns non-empty -- with args", actual)
 }
 
@@ -447,9 +459,15 @@ func Test_Cov_AnyToValuesTypeStrings_EmptyStringItem(t *testing.T) {
 	result := corecsv.AnyToValuesTypeStrings(nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "notPanicked": true}
+	actual := args.Map{
+		"len": len(result),
+		"notPanicked": true,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "notPanicked": true}
+	expected := args.Map{
+		"len": 1,
+		"notPanicked": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyToValuesTypeStrings covers empty-string item -- nil input", actual)
 }

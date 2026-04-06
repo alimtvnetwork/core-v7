@@ -145,7 +145,10 @@ func Test_Cov5_Value_IsNameEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value IsNameEqual -- True", actual)
 }
 
@@ -157,7 +160,10 @@ func Test_Cov5_Value_IsAnyNamesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value IsAnyNamesOf -- True", actual)
 }
 
@@ -178,7 +184,10 @@ func Test_Cov5_Value_IsValueEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value IsValueEqual -- True==1", actual)
 }
 
@@ -248,7 +257,10 @@ func Test_Cov5_Value_IsAnyValuesEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value IsAnyValuesEqual -- True in 0,1,2", actual)
 }
 
@@ -263,10 +275,16 @@ func Test_Cov5_Value_MarshalUnmarshal(t *testing.T) {
 	err := v.UnmarshalJSON(mb)
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "val": v == issetter.True}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"val": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "val": true}
+	expected := args.Map{
+		"hasErr": false,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value Marshal/Unmarshal roundtrip -- True", actual)
 }
 
@@ -301,10 +319,16 @@ func Test_Cov5_Value_Serialize(t *testing.T) {
 	bytes, err := issetter.True.Serialize()
 
 	// Act
-	actual := args.Map{"hasBytes": len(bytes) > 0, "hasErr": err != nil}
+	actual := args.Map{
+		"hasBytes": len(bytes) > 0,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasErr": false}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value Serialize -- True", actual)
 }
 
@@ -313,10 +337,16 @@ func Test_Cov5_Value_Deserialize(t *testing.T) {
 	v, err := issetter.Uninitialized.Deserialize([]byte(`"True"`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "isTrue": true}
+	expected := args.Map{
+		"hasErr": false,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value Deserialize -- True", actual)
 }
 
@@ -337,10 +367,16 @@ func Test_Cov5_Value_UnmarshallEnumToValue(t *testing.T) {
 	val, err := issetter.Uninitialized.UnmarshallEnumToValue([]byte(`"Set"`))
 
 	// Act
-	actual := args.Map{"val": int(val), "hasErr": err != nil}
+	actual := args.Map{
+		"val": int(val),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"val": 4, "hasErr": false}
+	expected := args.Map{
+		"val": 4,
+		"hasErr": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Value UnmarshallEnumToValue -- Set", actual)
 }
 
@@ -362,10 +398,16 @@ func Test_Cov5_Value_MinMaxAny(t *testing.T) {
 	min, max := issetter.True.MinMaxAny()
 
 	// Act
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
 
 	// Assert
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value MinMaxAny -- not nil", actual)
 }
 
@@ -430,10 +472,16 @@ func Test_Cov5_Value_ToPtr(t *testing.T) {
 	ptr := issetter.True.ToPtr()
 
 	// Act
-	actual := args.Map{"notNil": ptr != nil, "val": *ptr == issetter.True}
+	actual := args.Map{
+		"notNil": ptr != nil,
+		"val": *ptr == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "val": true}
+	expected := args.Map{
+		"notNil": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Value ToPtr -- True", actual)
 }
 
@@ -475,10 +523,16 @@ func Test_Cov5_GetSetBoolOnInvalid_Uninit(t *testing.T) {
 	result := v.GetSetBoolOnInvalid(true)
 
 	// Act
-	actual := args.Map{"result": result, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"result": result,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"result": true, "isTrue": true}
+	expected := args.Map{
+		"result": true,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetBoolOnInvalid uninit sets -- true", actual)
 }
 
@@ -488,10 +542,16 @@ func Test_Cov5_GetSetBoolOnInvalidFunc_Uninit(t *testing.T) {
 	result := v.GetSetBoolOnInvalidFunc(func() bool { return false })
 
 	// Act
-	actual := args.Map{"result": result, "isFalse": v == issetter.False}
+	actual := args.Map{
+		"result": result,
+		"isFalse": v == issetter.False,
+	}
 
 	// Assert
-	expected := args.Map{"result": false, "isFalse": true}
+	expected := args.Map{
+		"result": false,
+		"isFalse": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetBoolOnInvalidFunc uninit sets -- false", actual)
 }
 
@@ -506,10 +566,16 @@ func Test_Cov5_LazyEvaluateBool_Uninit(t *testing.T) {
 	result := v.LazyEvaluateBool(func() { called = true })
 
 	// Act
-	actual := args.Map{"called": called, "result": result}
+	actual := args.Map{
+		"called": called,
+		"result": result,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "result": true}
+	expected := args.Map{
+		"called": true,
+		"result": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyEvaluateBool uninit calls -- called", actual)
 }
 
@@ -520,10 +586,16 @@ func Test_Cov5_LazyEvaluateSet_Uninit(t *testing.T) {
 	result := v.LazyEvaluateSet(func() { called = true })
 
 	// Act
-	actual := args.Map{"called": called, "result": result}
+	actual := args.Map{
+		"called": called,
+		"result": result,
+	}
 
 	// Assert
-	expected := args.Map{"called": true, "result": true}
+	expected := args.Map{
+		"called": true,
+		"result": true,
+	}
 	expected.ShouldBeEqual(t, 0, "LazyEvaluateSet uninit calls -- called", actual)
 }
 
@@ -625,7 +697,10 @@ func Test_Cov5_IsOutOfRange(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"inRange": false, "outRange": true}
+	expected := args.Map{
+		"inRange": false,
+		"outRange": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsOutOfRange -- 1 and 255", actual)
 }
 
@@ -637,7 +712,10 @@ func Test_Cov5_CombinedBooleans(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"allTrue": true, "oneFalse": true}
+	expected := args.Map{
+		"allTrue": true,
+		"oneFalse": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CombinedBooleans -- various", actual)
 }
 
@@ -649,7 +727,10 @@ func Test_Cov5_GetSetByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueVal": 1, "falseVal": 2}
+	expected := args.Map{
+		"trueVal": 1,
+		"falseVal": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetByte -- true/false", actual)
 }
 
@@ -661,7 +742,10 @@ func Test_Cov5_GetSetterByComparing(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": true}
+	expected := args.Map{
+		"match": true,
+		"noMatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetterByComparing -- match and no match", actual)
 }
 
@@ -670,10 +754,16 @@ func Test_Cov5_New_Valid(t *testing.T) {
 	v, err := issetter.New("true")
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "isTrue": v == issetter.True}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"isTrue": v == issetter.True,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": false, "isTrue": true}
+	expected := args.Map{
+		"hasErr": false,
+		"isTrue": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New valid -- true", actual)
 }
 
@@ -709,7 +799,10 @@ func Test_Cov5_NewBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": true}
+	expected := args.Map{
+		"true": true,
+		"false": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBool -- true/false", actual)
 }
 
@@ -721,7 +814,10 @@ func Test_Cov5_NewBooleans(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"allTrue": true, "oneFalse": true}
+	expected := args.Map{
+		"allTrue": true,
+		"oneFalse": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewBooleans -- various", actual)
 }
 
@@ -733,7 +829,10 @@ func Test_Cov5_GetSetUnset(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueIsSet": true, "falseIsUnset": true}
+	expected := args.Map{
+		"trueIsSet": true,
+		"falseIsUnset": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetSetUnset -- true/false", actual)
 }
 
@@ -747,7 +846,12 @@ func Test_Cov5_Max_Min(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"max": true, "min": true, "maxByte": 4, "minByte": 0}
+	expected := args.Map{
+		"max": true,
+		"min": true,
+		"maxByte": 4,
+		"minByte": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Max/Min -- expected", actual)
 }
 
@@ -788,7 +892,11 @@ func Test_Cov5_ToBooleanValue_SetUnset(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"setToTrue": true, "unsetToFalse": true, "uninitStays": true}
+	expected := args.Map{
+		"setToTrue": true,
+		"unsetToFalse": true,
+		"uninitStays": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToBooleanValue Set/Unset -- expected", actual)
 }
 
@@ -801,6 +909,10 @@ func Test_Cov5_ToSetUnsetValue_TrueFalse(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueToSet": true, "falseToUnset": true, "uninitStays": true}
+	expected := args.Map{
+		"trueToSet": true,
+		"falseToUnset": true,
+		"uninitStays": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToSetUnsetValue True/False -- expected", actual)
 }

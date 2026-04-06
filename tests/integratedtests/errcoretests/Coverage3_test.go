@@ -43,10 +43,16 @@ func Test_Cov3_ErrorWithRef_WithRef(t *testing.T) {
 	result := errcore.ErrorWithRef(errors.New("fail"), "ctx")
 
 	// Act
-	actual := args.Map{"notEmpty": result != "", "containsErr": true}
+	actual := args.Map{
+		"notEmpty": result != "",
+		"containsErr": true,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "containsErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"containsErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorWithRef returns formatted -- with reference", actual)
 }
 

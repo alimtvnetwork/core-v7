@@ -21,10 +21,16 @@ func Test_Cov3_BaseLineIdentifier_New(t *testing.T) {
 	bli := coreinstruction.NewBaseLineIdentifier(5, reqtype.Create)
 
 	// Act
-	actual := args.Map{"line": bli.LineNumber, "isCreate": bli.IsNewLineRequest()}
+	actual := args.Map{
+		"line": bli.LineNumber,
+		"isCreate": bli.IsNewLineRequest(),
+	}
 
 	// Assert
-	expected := args.Map{"line": 5, "isCreate": true}
+	expected := args.Map{
+		"line": 5,
+		"isCreate": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseLineIdentifier_New returns correct value -- with args", actual)
 }
 
@@ -34,10 +40,16 @@ func Test_Cov3_BaseLineIdentifier_ToNewLineIdentifier(t *testing.T) {
 	li := bli.ToNewLineIdentifier()
 
 	// Act
-	actual := args.Map{"line": li.LineNumber, "isModify": li.IsModifyLineRequest()}
+	actual := args.Map{
+		"line": li.LineNumber,
+		"isModify": li.IsModifyLineRequest(),
+	}
 
 	// Assert
-	expected := args.Map{"line": 3, "isModify": true}
+	expected := args.Map{
+		"line": 3,
+		"isModify": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseLineIdentifier_ToNew returns correct value -- with args", actual)
 }
 
@@ -59,10 +71,16 @@ func Test_Cov3_BaseLineIdentifier_Clone(t *testing.T) {
 	cloned := bli.Clone()
 
 	// Act
-	actual := args.Map{"line": cloned.LineNumber, "isDel": cloned.IsDeleteLineRequest()}
+	actual := args.Map{
+		"line": cloned.LineNumber,
+		"isDel": cloned.IsDeleteLineRequest(),
+	}
 
 	// Assert
-	expected := args.Map{"line": 7, "isDel": true}
+	expected := args.Map{
+		"line": 7,
+		"isDel": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseLineIdentifier_Clone returns correct value -- with args", actual)
 }
 
@@ -196,10 +214,16 @@ func Test_Cov3_BaseSpecPlusRequestIds_SpecOnly(t *testing.T) {
 	bspr := coreinstruction.NewBaseSpecPlusRequestIdsUsingSpecOnly(spec)
 
 	// Act
-	actual := args.Map{"specId": bspr.Specification.Id, "reqLen": len(bspr.RequestIds)}
+	actual := args.Map{
+		"specId": bspr.Specification.Id,
+		"reqLen": len(bspr.RequestIds),
+	}
 
 	// Assert
-	expected := args.Map{"specId": "id1", "reqLen": 0}
+	expected := args.Map{
+		"specId": "id1",
+		"reqLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseSpecPlusReqIds_SpecOnly returns correct value -- with args", actual)
 }
 
@@ -338,10 +362,18 @@ func Test_Cov3_BaseRequestIds_NilLen(t *testing.T) {
 	var bri *coreinstruction.BaseRequestIds
 
 	// Act
-	actual := args.Map{"len": bri.RequestIdsLength(), "empty": bri.IsEmptyRequestIds(), "has": bri.HasRequestIds()}
+	actual := args.Map{
+		"len": bri.RequestIdsLength(),
+		"empty": bri.IsEmptyRequestIds(),
+		"has": bri.HasRequestIds(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true, "has": false}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseRequestIds_Nil returns nil -- with args", actual)
 }
 
@@ -364,10 +396,16 @@ func Test_Cov3_NewRequestId(t *testing.T) {
 	rid := coreinstruction.NewRequestId(true, "x")
 
 	// Act
-	actual := args.Map{"id": rid.Id, "global": rid.IsGlobal}
+	actual := args.Map{
+		"id": rid.Id,
+		"global": rid.IsGlobal,
+	}
 
 	// Assert
-	expected := args.Map{"id": "x", "global": true}
+	expected := args.Map{
+		"id": "x",
+		"global": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRequestId returns correct value -- with args", actual)
 }
 
@@ -378,10 +416,16 @@ func Test_Cov3_BaseSourceDestination(t *testing.T) {
 	bsd := coreinstruction.NewBaseSourceDestination("src", "dst")
 
 	// Act
-	actual := args.Map{"src": bsd.Source, "dst": bsd.Destination}
+	actual := args.Map{
+		"src": bsd.Source,
+		"dst": bsd.Destination,
+	}
 
 	// Assert
-	expected := args.Map{"src": "src", "dst": "dst"}
+	expected := args.Map{
+		"src": "src",
+		"dst": "dst",
+	}
 	expected.ShouldBeEqual(t, 0, "BaseSourceDestination returns correct value -- with args", actual)
 }
 
@@ -434,10 +478,16 @@ func Test_Cov3_BaseUsername_Nil(t *testing.T) {
 	var u *coreinstruction.BaseUsername
 
 	// Act
-	actual := args.Map{"isEmpty": u.IsUsernameEmpty(), "isWs": u.IsUsernameWhitespace()}
+	actual := args.Map{
+		"isEmpty": u.IsUsernameEmpty(),
+		"isWs": u.IsUsernameWhitespace(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "isWs": true}
+	expected := args.Map{
+		"isEmpty": true,
+		"isWs": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BaseUsername_Nil returns nil -- with args", actual)
 }
 
@@ -475,10 +525,16 @@ func Test_Cov3_BaseUsername_Clone(t *testing.T) {
 	val := u.Clone()
 
 	// Act
-	actual := args.Map{"ptrName": cloned.Username, "valName": val.Username}
+	actual := args.Map{
+		"ptrName": cloned.Username,
+		"valName": val.Username,
+	}
 
 	// Assert
-	expected := args.Map{"ptrName": "test", "valName": "test"}
+	expected := args.Map{
+		"ptrName": "test",
+		"valName": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "BaseUsername_Clone returns correct value -- with args", actual)
 }
 
@@ -515,10 +571,16 @@ func Test_Cov3_IdentifierWithIsGlobal_Clone(t *testing.T) {
 	cloned := iwg.Clone()
 
 	// Act
-	actual := args.Map{"id": cloned.Id, "global": cloned.IsGlobal}
+	actual := args.Map{
+		"id": cloned.Id,
+		"global": cloned.IsGlobal,
+	}
 
 	// Assert
-	expected := args.Map{"id": "x", "global": true}
+	expected := args.Map{
+		"id": "x",
+		"global": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IdentifierWithIsGlobal_Clone returns non-empty -- with args", actual)
 }
 
@@ -617,10 +679,16 @@ func Test_Cov3_Identifiers_NewEmpty(t *testing.T) {
 	ids := coreinstruction.NewIdentifiers()
 
 	// Act
-	actual := args.Map{"len": ids.Length(), "empty": ids.IsEmpty()}
+	actual := args.Map{
+		"len": ids.Length(),
+		"empty": ids.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Identifiers_NewEmpty returns empty -- with args", actual)
 }
 
@@ -806,10 +874,18 @@ func Test_Cov3_ParentIdentifier(t *testing.T) {
 	pi := coreinstruction.ParentIdentifier{ParentId: "p1", ParentName: "pn", ParentVersion: "v1"}
 
 	// Act
-	actual := args.Map{"id": pi.ParentId, "name": pi.ParentName, "ver": pi.ParentVersion}
+	actual := args.Map{
+		"id": pi.ParentId,
+		"name": pi.ParentName,
+		"ver": pi.ParentVersion,
+	}
 
 	// Assert
-	expected := args.Map{"id": "p1", "name": "pn", "ver": "v1"}
+	expected := args.Map{
+		"id": "p1",
+		"name": "pn",
+		"ver": "v1",
+	}
 	expected.ShouldBeEqual(t, 0, "ParentIdentifier returns correct value -- with args", actual)
 }
 
@@ -833,10 +909,18 @@ func Test_Cov3_DependsOn(t *testing.T) {
 	}
 
 	// Act
-	actual := args.Map{"name": d.Name, "ver": d.Version, "isSpec": d.IsSpecific}
+	actual := args.Map{
+		"name": d.Name,
+		"ver": d.Version,
+		"isSpec": d.IsSpecific,
+	}
 
 	// Assert
-	expected := args.Map{"name": "dep", "ver": "1.0", "isSpec": true}
+	expected := args.Map{
+		"name": "dep",
+		"ver": "1.0",
+		"isSpec": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DependsOn returns correct value -- with args", actual)
 }
 
@@ -957,9 +1041,17 @@ func Test_Cov3_Identifiers_Nil(t *testing.T) {
 	var ids *coreinstruction.Identifiers
 
 	// Act
-	actual := args.Map{"len": ids.Length(), "empty": ids.IsEmpty(), "has": ids.HasAnyItem()}
+	actual := args.Map{
+		"len": ids.Length(),
+		"empty": ids.IsEmpty(),
+		"has": ids.HasAnyItem(),
+	}
 
 	// Assert
-	expected := args.Map{"len": 0, "empty": true, "has": false}
+	expected := args.Map{
+		"len": 0,
+		"empty": true,
+		"has": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Identifiers_Nil returns nil -- with args", actual)
 }

@@ -17,10 +17,18 @@ func Test_Cov2_NonEmptySlice_Mixed(t *testing.T) {
 	result := stringslice.NonEmptySlice([]string{"a", "", "b", ""})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "NonEmptySlice filters empty -- mixed", actual)
 }
 
@@ -125,10 +133,16 @@ func Test_Cov2_Clone_NonEmpty(t *testing.T) {
 	result := stringslice.Clone([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "Clone copies slice -- non-empty", actual)
 }
 
@@ -153,10 +167,16 @@ func Test_Cov2_FirstLastDefault_Empty(t *testing.T) {
 	first, last := stringslice.FirstLastDefault([]string{})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "", "last": ""}
+	expected := args.Map{
+		"first": "",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns empty -- empty", actual)
 }
 
@@ -165,10 +185,16 @@ func Test_Cov2_FirstLastDefault_Single(t *testing.T) {
 	first, last := stringslice.FirstLastDefault([]string{"only"})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "only", "last": ""}
+	expected := args.Map{
+		"first": "only",
+		"last": "",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns first only -- single", actual)
 }
 
@@ -177,10 +203,16 @@ func Test_Cov2_FirstLastDefault_Multiple(t *testing.T) {
 	first, last := stringslice.FirstLastDefault([]string{"a", "b", "c"})
 
 	// Act
-	actual := args.Map{"first": first, "last": last}
+	actual := args.Map{
+		"first": first,
+		"last": last,
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefault returns first and last -- multiple", actual)
 }
 
@@ -193,10 +225,18 @@ func Test_Cov2_FirstLastDefaultStatus_Empty(t *testing.T) {
 	s := stringslice.FirstLastDefaultStatus([]string{})
 
 	// Act
-	actual := args.Map{"valid": s.IsValid, "hasFirst": s.HasFirst, "hasLast": s.HasLast}
+	actual := args.Map{
+		"valid": s.IsValid,
+		"hasFirst": s.HasFirst,
+		"hasLast": s.HasLast,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "hasFirst": false, "hasLast": false}
+	expected := args.Map{
+		"valid": false,
+		"hasFirst": false,
+		"hasLast": false,
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns invalid -- empty", actual)
 }
 
@@ -205,10 +245,20 @@ func Test_Cov2_FirstLastDefaultStatus_Single(t *testing.T) {
 	s := stringslice.FirstLastDefaultStatus([]string{"only"})
 
 	// Act
-	actual := args.Map{"valid": s.IsValid, "hasFirst": s.HasFirst, "hasLast": s.HasLast, "first": s.First}
+	actual := args.Map{
+		"valid": s.IsValid,
+		"hasFirst": s.HasFirst,
+		"hasLast": s.HasLast,
+		"first": s.First,
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "hasFirst": true, "hasLast": false, "first": "only"}
+	expected := args.Map{
+		"valid": false,
+		"hasFirst": true,
+		"hasLast": false,
+		"first": "only",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns partial -- single", actual)
 }
 
@@ -217,10 +267,22 @@ func Test_Cov2_FirstLastDefaultStatus_Multiple(t *testing.T) {
 	s := stringslice.FirstLastDefaultStatus([]string{"a", "b"})
 
 	// Act
-	actual := args.Map{"valid": s.IsValid, "hasFirst": s.HasFirst, "hasLast": s.HasLast, "first": s.First, "last": s.Last}
+	actual := args.Map{
+		"valid": s.IsValid,
+		"hasFirst": s.HasFirst,
+		"hasLast": s.HasLast,
+		"first": s.First,
+		"last": s.Last,
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "hasFirst": true, "hasLast": true, "first": "a", "last": "b"}
+	expected := args.Map{
+		"valid": true,
+		"hasFirst": true,
+		"hasLast": true,
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FirstLastDefaultStatus returns valid -- multiple", actual)
 }
 
@@ -363,10 +425,18 @@ func Test_Cov2_PrependNew(t *testing.T) {
 	result := stringslice.PrependNew([]string{"b", "c"}, "a")
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew prepends items -- one prepend", actual)
 }
 
@@ -387,10 +457,16 @@ func Test_Cov2_PrependLineNew(t *testing.T) {
 	result := stringslice.PrependLineNew("first", []string{"second"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "first"}
+	expected := args.Map{
+		"len": 2,
+		"first": "first",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependLineNew prepends line -- one line", actual)
 }
 
@@ -403,10 +479,18 @@ func Test_Cov2_TrimmedEachWords_Mixed(t *testing.T) {
 	result := stringslice.TrimmedEachWords([]string{"  a  ", "  ", " b "})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "TrimmedEachWords trims and filters -- mixed", actual)
 }
 
@@ -529,10 +613,18 @@ func Test_Cov2_SplitContentsByWhitespace(t *testing.T) {
 	result := stringslice.SplitContentsByWhitespace("  hello  world  ")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "hello", "last": "world"}
+	expected := args.Map{
+		"len": 2,
+		"first": "hello",
+		"last": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "SplitContentsByWhitespace splits by ws -- two words", actual)
 }
 

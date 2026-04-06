@@ -16,10 +16,16 @@ func Test_Cov9_New_Valid(t *testing.T) {
 	r := corejson.New(map[string]string{"k": "v"})
 
 	// Act
-	actual := args.Map{"noErr": !r.HasError(), "hasBytes": r.HasBytes()}
+	actual := args.Map{
+		"noErr": !r.HasError(),
+		"hasBytes": r.HasBytes(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "New returns non-empty -- valid", actual)
 }
 
@@ -28,10 +34,16 @@ func Test_Cov9_NewPtr_Nil(t *testing.T) {
 	r := corejson.NewPtr(nil)
 
 	// Act
-	actual := args.Map{"notNil": r != nil, "hasBytes": len(r.Bytes) > 0}
+	actual := args.Map{
+		"notNil": r != nil,
+		"hasBytes": len(r.Bytes) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasBytes": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewPtr returns nil -- nil", actual)
 }
 
@@ -41,10 +53,16 @@ func Test_Cov9_BytesCloneIf_True(t *testing.T) {
 	cloned := corejson.BytesCloneIf(true, original)
 
 	// Act
-	actual := args.Map{"len": len(cloned), "notSame": &cloned[0] != &original[0]}
+	actual := args.Map{
+		"len": len(cloned),
+		"notSame": &cloned[0] != &original[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 7, "notSame": true}
+	expected := args.Map{
+		"len": 7,
+		"notSame": true,
+	}
 	expected.ShouldBeEqual(t, 0, "BytesCloneIf returns non-empty -- true", actual)
 }
 
@@ -53,10 +71,16 @@ func Test_Cov9_Deserialize_BytesTo_String(t *testing.T) {
 	s, err := corejson.Deserialize.BytesTo.String([]byte(`"hello"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.String returns correct value -- with args", actual)
 }
 
@@ -65,10 +89,16 @@ func Test_Cov9_Deserialize_BytesTo_MapStringString(t *testing.T) {
 	m, err := corejson.Deserialize.BytesTo.MapStringString([]byte(`{"k":"v"}`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(m)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(m),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize.BytesTo.MapStringString returns correct value -- with args", actual)
 }
 
@@ -101,10 +131,16 @@ func Test_Cov9_Serialize_Raw_Valid(t *testing.T) {
 	b, err := corejson.Serialize.Raw(map[string]string{"k": "v"})
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize.Raw returns non-empty -- valid", actual)
 }
 
@@ -140,10 +176,16 @@ func Test_Cov9_CastAny_FromToDefault(t *testing.T) {
 	err := corejson.CastAny.FromToDefault(map[string]string{"k": "v"}, &casted)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "len": len(casted)}
+	actual := args.Map{
+		"noErr": err == nil,
+		"len": len(casted),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "len": 1}
+	expected := args.Map{
+		"noErr": true,
+		"len": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "CastAny.FromToDefault returns correct value -- with args", actual)
 }
 
@@ -188,9 +230,15 @@ func Test_Cov9_AnyTo_PrettyStringWithError(t *testing.T) {
 	pretty, err := corejson.AnyTo.PrettyStringWithError(map[string]string{"k": "v"})
 
 	// Act
-	actual := args.Map{"notEmpty": pretty != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": pretty != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "AnyTo.PrettyStringWithError returns error -- with args", actual)
 }

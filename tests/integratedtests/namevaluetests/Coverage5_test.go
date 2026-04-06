@@ -19,10 +19,18 @@ func Test_Cov5_AppendPrependIf_True(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"len": c.Length(), "first": c.Items[0].Name, "last": c.Items[2].Name}
+	actual := args.Map{
+		"len": c.Length(),
+		"first": c.Items[0].Name,
+		"last": c.Items[2].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendPrependIf true -- both applied", actual)
 }
 
@@ -82,10 +90,16 @@ func Test_Cov5_PrependUsingFuncIf_True(t *testing.T) {
 	})
 
 	// Act
-	actual := args.Map{"len": c.Length(), "first": c.Items[0].Name}
+	actual := args.Map{
+		"len": c.Length(),
+		"first": c.Items[0].Name,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependUsingFuncIf returns non-empty -- true", actual)
 }
 
@@ -202,10 +216,16 @@ func Test_Cov5_ConcatNew(t *testing.T) {
 	result := c.ConcatNew(namevalue.Instance[string, string]{Name: "b", Value: "2"})
 
 	// Act
-	actual := args.Map{"origLen": c.Length(), "newLen": result.Length()}
+	actual := args.Map{
+		"origLen": c.Length(),
+		"newLen": result.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"origLen": 1, "newLen": 2}
+	expected := args.Map{
+		"origLen": 1,
+		"newLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "ConcatNew -- immutable", actual)
 }
 
@@ -370,10 +390,16 @@ func Test_Cov5_Instance_IsNull(t *testing.T) {
 	var nilInst *namevalue.Instance[string, string]
 
 	// Act
-	actual := args.Map{"nonNil": inst.IsNull(), "nil": nilInst.IsNull()}
+	actual := args.Map{
+		"nonNil": inst.IsNull(),
+		"nil": nilInst.IsNull(),
+	}
 
 	// Assert
-	expected := args.Map{"nonNil": false, "nil": true}
+	expected := args.Map{
+		"nonNil": false,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instance returns correct value -- IsNull", actual)
 }
 
@@ -383,10 +409,16 @@ func Test_Cov5_Instance_Dispose(t *testing.T) {
 	inst.Dispose()
 
 	// Act
-	actual := args.Map{"name": inst.Name, "val": inst.Value}
+	actual := args.Map{
+		"name": inst.Name,
+		"val": inst.Value,
+	}
 
 	// Assert
-	expected := args.Map{"name": "", "val": ""}
+	expected := args.Map{
+		"name": "",
+		"val": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Instance Dispose -- zeroed", actual)
 }
 

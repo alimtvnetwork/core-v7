@@ -163,10 +163,16 @@ func Test_Cov6_Collection_Reverse(t *testing.T) {
 		reversed := c.Reverse()
 
 		// Act
-		actual := args.Map{"first": reversed.First(), "last": reversed.Last()}
+		actual := args.Map{
+			"first": reversed.First(),
+			"last": reversed.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"first": "c", "last": "a"}
+		expected := args.Map{
+			"first": "c",
+			"last": "a",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection.Reverse reverses -- 3 items", actual)
 	})
 }
@@ -215,10 +221,18 @@ func Test_Cov6_Collection_RemoveAt(t *testing.T) {
 		c.RemoveAt(1)
 
 		// Act
-		actual := args.Map{"length": c.Length(), "first": c.First(), "last": c.Last()}
+		actual := args.Map{
+			"length": c.Length(),
+			"first": c.First(),
+			"last": c.Last(),
+		}
 
 		// Assert
-		expected := args.Map{"length": 2, "first": "a", "last": "c"}
+		expected := args.Map{
+			"length": 2,
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection.RemoveAt removes middle -- 3 items", actual)
 	})
 }
@@ -261,10 +275,16 @@ func Test_Cov6_Collection_InsertAt(t *testing.T) {
 		c.InsertAt(1, "b")
 
 		// Act
-		actual := args.Map{"len": c.Length(), "middle": c.IndexAt(1)}
+		actual := args.Map{
+			"len": c.Length(),
+			"middle": c.IndexAt(1),
+		}
 
 		// Assert
-		expected := args.Map{"len": 3, "middle": "c"}
+		expected := args.Map{
+			"len": 3,
+			"middle": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Collection.InsertAt at last index appends -- a,c,b", actual)
 	})
 }
@@ -389,10 +409,16 @@ func Test_Cov6_Hashset_AddBool(t *testing.T) {
 		added2 := hs.AddBool("hello")
 
 		// Act
-		actual := args.Map{"first": added1, "second": added2}
+		actual := args.Map{
+			"first": added1,
+			"second": added2,
+		}
 
 		// Assert
-		expected := args.Map{"first": false, "second": true}
+		expected := args.Map{
+			"first": false,
+			"second": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset.AddBool returns isExist -- false then true", actual)
 	})
 }
@@ -455,10 +481,16 @@ func Test_Cov6_Hashset_SortedList(t *testing.T) {
 		sorted := hs.SortedList()
 
 		// Act
-		actual := args.Map{"first": sorted[0], "last": sorted[2]}
+		actual := args.Map{
+			"first": sorted[0],
+			"last": sorted[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset.SortedList returns sorted -- 3 items", actual)
 	})
 }
@@ -470,10 +502,16 @@ func Test_Cov6_Hashset_Remove(t *testing.T) {
 		hs.Remove("b")
 
 		// Act
-		actual := args.Map{"length": hs.Length(), "hasB": hs.Has("b")}
+		actual := args.Map{
+			"length": hs.Length(),
+			"hasB": hs.Has("b"),
+		}
 
 		// Assert
-		expected := args.Map{"length": 2, "hasB": false}
+		expected := args.Map{
+			"length": 2,
+			"hasB": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashset.Remove removes item -- remove b", actual)
 	})
 }
@@ -642,10 +680,16 @@ func Test_Cov6_Hashmap_AddOrUpdate(t *testing.T) {
 		v, _ := hm.Get("k1")
 
 		// Act
-		actual := args.Map{"length": hm.Length(), "val": v}
+		actual := args.Map{
+			"length": hm.Length(),
+			"val": v,
+		}
 
 		// Assert
-		expected := args.Map{"length": 1, "val": "v2"}
+		expected := args.Map{
+			"length": 1,
+			"val": "v2",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.AddOrUpdate updates -- key exists", actual)
 	})
 }
@@ -658,10 +702,16 @@ func Test_Cov6_Hashmap_AllKeys(t *testing.T) {
 		sort.Strings(keys)
 
 		// Act
-		actual := args.Map{"first": keys[0], "last": keys[2]}
+		actual := args.Map{
+			"first": keys[0],
+			"last": keys[2],
+		}
 
 		// Assert
-		expected := args.Map{"first": "a", "last": "c"}
+		expected := args.Map{
+			"first": "a",
+			"last": "c",
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.AllKeys returns all keys sorted -- 3 keys", actual)
 	})
 }
@@ -688,10 +738,16 @@ func Test_Cov6_Hashmap_Remove(t *testing.T) {
 		hm.Remove("k1")
 
 		// Act
-		actual := args.Map{"length": hm.Length(), "hasK1": hm.Has("k1")}
+		actual := args.Map{
+			"length": hm.Length(),
+			"hasK1": hm.Has("k1"),
+		}
 
 		// Assert
-		expected := args.Map{"length": 1, "hasK1": false}
+		expected := args.Map{
+			"length": 1,
+			"hasK1": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Hashmap.Remove removes key -- remove k1", actual)
 	})
 }

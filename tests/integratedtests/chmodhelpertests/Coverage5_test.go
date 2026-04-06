@@ -52,10 +52,20 @@ func Test_Cov5_Attribute_ToSpecificBytes(t *testing.T) {
 	r, w, e, sum := attr.ToSpecificBytes()
 
 	// Act
-	actual := args.Map{"r": r, "w": w, "e": e, "sum": sum}
+	actual := args.Map{
+		"r": r,
+		"w": w,
+		"e": e,
+		"sum": sum,
+	}
 
 	// Assert
-	expected := args.Map{"r": byte(4), "w": byte(0), "e": byte(1), "sum": byte(5)}
+	expected := args.Map{
+		"r": byte(4),
+		"w": byte(0),
+		"e": byte(1),
+		"sum": byte(5),
+	}
 	expected.ShouldBeEqual(t, 0, "ToSpecificBytes returns correct value -- with args", actual)
 }
 
@@ -78,10 +88,18 @@ func Test_Cov5_Attribute_ToRwx(t *testing.T) {
 	rwx := attr.ToRwx()
 
 	// Act
-	actual := args.Map{"r": rwx[0], "w": rwx[1], "x": rwx[2]}
+	actual := args.Map{
+		"r": rwx[0],
+		"w": rwx[1],
+		"x": rwx[2],
+	}
 
 	// Assert
-	expected := args.Map{"r": byte('r'), "w": byte('-'), "x": byte('-')}
+	expected := args.Map{
+		"r": byte('r'),
+		"w": byte('-'),
+		"x": byte('-'),
+	}
 	expected.ShouldBeEqual(t, 0, "ToRwx returns correct value -- with args", actual)
 }
 
@@ -137,7 +155,12 @@ func Test_Cov5_Attribute_IsEqualPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "bothNil": true, "oneNil": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"bothNil": true,
+		"oneNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns correct value -- with args", actual)
 }
 
@@ -148,10 +171,16 @@ func Test_Cov5_Attribute_IsEqual(t *testing.T) {
 	c := chmodhelper.Attribute{IsRead: false}
 
 	// Act
-	actual := args.Map{"equal": a.IsEqual(b), "notEqual": a.IsEqual(c)}
+	actual := args.Map{
+		"equal": a.IsEqual(b),
+		"notEqual": a.IsEqual(c),
+	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEqual returns correct value -- with args", actual)
 }
 
@@ -171,7 +200,13 @@ func Test_Cov5_AttrVariant_All(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"str": true, "val": byte(7), "gt": true, "notGt": false, "attrOk": byte(7)}
+	expected := args.Map{
+		"str": true,
+		"val": byte(7),
+		"gt": true,
+		"notGt": false,
+		"attrOk": byte(7),
+	}
 	expected.ShouldBeEqual(t, 0, "AttrVariant returns correct value -- all", actual)
 }
 
@@ -194,10 +229,18 @@ func Test_Cov5_Variant_ExpandOctalByte(t *testing.T) {
 	r, w, x := chmodhelper.X755.ExpandOctalByte()
 
 	// Act
-	actual := args.Map{"r": r, "w": w, "x": x}
+	actual := args.Map{
+		"r": r,
+		"w": w,
+		"x": x,
+	}
 
 	// Assert
-	expected := args.Map{"r": byte('7'), "w": byte('5'), "x": byte('5')}
+	expected := args.Map{
+		"r": byte('7'),
+		"w": byte('5'),
+		"x": byte('5'),
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ExpandOctalByte", actual)
 }
 
@@ -206,10 +249,16 @@ func Test_Cov5_Variant_ToWrapper(t *testing.T) {
 	rwx, err := chmodhelper.X755.ToWrapper()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": !rwx.IsEmpty()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": !rwx.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToWrapper", actual)
 }
 
@@ -218,10 +267,16 @@ func Test_Cov5_Variant_ToWrapperPtr(t *testing.T) {
 	rwx, err := chmodhelper.X755.ToWrapperPtr()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rwx != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rwx != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Variant returns correct value -- ToWrapperPtr", actual)
 }
 
@@ -232,10 +287,18 @@ func Test_Cov5_ExpandCharRwx(t *testing.T) {
 	r, w, x := chmodhelper.ExpandCharRwx("755")
 
 	// Act
-	actual := args.Map{"r": r, "w": w, "x": x}
+	actual := args.Map{
+		"r": r,
+		"w": w,
+		"x": x,
+	}
 
 	// Assert
-	expected := args.Map{"r": byte('7'), "w": byte('5'), "x": byte('5')}
+	expected := args.Map{
+		"r": byte('7'),
+		"w": byte('5'),
+		"x": byte('5'),
+	}
 	expected.ShouldBeEqual(t, 0, "ExpandCharRwx returns correct value -- with args", actual)
 }
 
@@ -300,7 +363,12 @@ func Test_Cov5_RwxWrapper_IsEqualPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "bothNil": true, "oneNil": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"bothNil": true,
+		"oneNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "RwxWrapper returns correct value -- IsEqualPtr", actual)
 }
 
@@ -315,7 +383,10 @@ func Test_Cov5_RwxWrapper_IsEqualFileMode(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "notMatch": true}
+	expected := args.Map{
+		"match": true,
+		"notMatch": true,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEqualFileMode returns correct value -- with args", actual)
 }
 
@@ -330,7 +401,10 @@ func Test_Cov5_RwxWrapper_IsRwxFullEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "short": false}
+	expected := args.Map{
+		"match": true,
+		"short": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsRwxFullEqual returns correct value -- with args", actual)
 }
 
@@ -402,10 +476,16 @@ func Test_Cov5_RwxWrapper_ToPtr_ToNonPtr(t *testing.T) {
 	np := p.ToNonPtr()
 
 	// Act
-	actual := args.Map{"ptrNotNil": p != nil, "npNotEmpty": !np.IsEmpty()}
+	actual := args.Map{
+		"ptrNotNil": p != nil,
+		"npNotEmpty": !np.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"ptrNotNil": true, "npNotEmpty": true}
+	expected := args.Map{
+		"ptrNotNil": true,
+		"npNotEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToPtr/ToNonPtr returns correct value -- with args", actual)
 }
 
@@ -444,10 +524,18 @@ func Test_Cov5_RwxWrapper_MarshalUnmarshalJSON(t *testing.T) {
 	err2 := rwx2.UnmarshalJSON(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "noErr2": err2 == nil, "match": rwx2.ToFullRwxValueString() == rwx.ToFullRwxValueString()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"noErr2": err2 == nil,
+		"match": rwx2.ToFullRwxValueString() == rwx.ToFullRwxValueString(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "match": true}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"match": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MarshalUnmarshalJSON returns correct value -- with args", actual)
 }
 
@@ -470,10 +558,16 @@ func Test_Cov5_RwxWrapper_Json(t *testing.T) {
 	rp := rwx.JsonPtr()
 
 	// Act
-	actual := args.Map{"noErr": !r.HasError(), "ptrNotNil": rp != nil}
+	actual := args.Map{
+		"noErr": !r.HasError(),
+		"ptrNotNil": rp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "ptrNotNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Json/JsonPtr returns correct value -- with args", actual)
 }
 
@@ -544,10 +638,16 @@ func Test_Cov5_NewRwxWrapper_CreatePtr(t *testing.T) {
 	rwx, err := chmodhelper.New.RwxWrapper.CreatePtr("755")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rwx != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rwx != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewRwxWrapper returns correct value -- CreatePtr", actual)
 }
 
@@ -656,10 +756,16 @@ func Test_Cov5_NewRwxWrapper_Rwx10(t *testing.T) {
 	rwx, err := chmodhelper.New.RwxWrapper.Rwx10("-rwxr-xr-x")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": !rwx.IsEmpty()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": !rwx.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Rwx10 returns correct value -- with args", actual)
 }
 
@@ -668,10 +774,16 @@ func Test_Cov5_NewRwxWrapper_Rwx9(t *testing.T) {
 	rwx, err := chmodhelper.New.RwxWrapper.Rwx9("rwxr-xr-x")
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notEmpty": !rwx.IsEmpty()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notEmpty": !rwx.IsEmpty(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notEmpty": true}
+	expected := args.Map{
+		"noErr": true,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Rwx9 returns correct value -- with args", actual)
 }
 
@@ -707,10 +819,16 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFile(t *testing.T) {
 	rwx, err := chmodhelper.New.RwxWrapper.UsingExistingFile(fp)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rwx != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rwx != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingExistingFile returns correct value -- with args", actual)
 }
 
@@ -719,10 +837,16 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileSkipInvalidFile(t *testing.T) {
 	rwx, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileSkipInvalidFile("/nonexistent_cov5")
 
 	// Act
-	actual := args.Map{"notNil": rwx != nil, "isInvalid": isInvalid}
+	actual := args.Map{
+		"notNil": rwx != nil,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "isInvalid": true}
+	expected := args.Map{
+		"notNil": true,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileSkipInvalidFile returns error -- with args", actual)
 }
 
@@ -731,10 +855,18 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_Skip(t *testing.T) {
 	rwx, err, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileOption(true, "/nonexistent_cov5")
 
 	// Act
-	actual := args.Map{"notNil": rwx != nil, "noErr": err == nil, "isInvalid": isInvalid}
+	actual := args.Map{
+		"notNil": rwx != nil,
+		"noErr": err == nil,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true, "isInvalid": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileOption returns correct value -- skip", actual)
 }
 
@@ -743,10 +875,18 @@ func Test_Cov5_NewRwxWrapper_UsingExistingFileOption_NoSkip(t *testing.T) {
 	rwx, err, isInvalid := chmodhelper.New.RwxWrapper.UsingExistingFileOption(false, "/nonexistent_cov5")
 
 	// Act
-	actual := args.Map{"notNil": rwx != nil, "hasErr": err != nil, "isInvalid": isInvalid}
+	actual := args.Map{
+		"notNil": rwx != nil,
+		"hasErr": err != nil,
+		"isInvalid": isInvalid,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "hasErr": true, "isInvalid": true}
+	expected := args.Map{
+		"notNil": true,
+		"hasErr": true,
+		"isInvalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingExistingFileOption returns correct value -- no-skip", actual)
 }
 
@@ -755,10 +895,16 @@ func Test_Cov5_NewRwxWrapper_Instruction(t *testing.T) {
 	ins, err := chmodhelper.New.RwxWrapper.Instruction("-rwxr-xr-x", chmodins.Condition{})
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": ins != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": ins != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Instruction returns correct value -- with args", actual)
 }
 
@@ -819,10 +965,16 @@ func Test_Cov5_SingleRwx_ToVarRwxWrapper(t *testing.T) {
 	vw, err := s.ToVarRwxWrapper()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": vw != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": vw != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToVarRwxWrapper", actual)
 }
 
@@ -832,10 +984,16 @@ func Test_Cov5_SingleRwx_ToDisabledRwxWrapper(t *testing.T) {
 	rwx, err := s.ToDisabledRwxWrapper()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rwx != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rwx != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToDisabledRwxWrapper", actual)
 }
 
@@ -845,10 +1003,16 @@ func Test_Cov5_SingleRwx_ToRwxWrapper_All(t *testing.T) {
 	rwx, err := s.ToRwxWrapper()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "notNil": rwx != nil}
+	actual := args.Map{
+		"noErr": err == nil,
+		"notNil": rwx != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "notNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"notNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SingleRwx returns correct value -- ToRwxWrapper all", actual)
 }
 
@@ -874,10 +1038,16 @@ func Test_Cov5_RwxVariableWrapper_Clone(t *testing.T) {
 	var nilVw *chmodhelper.RwxVariableWrapper
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "nilClone": nilVw.Clone() == nil}
+	actual := args.Map{
+		"notNil": c != nil,
+		"nilClone": nilVw.Clone() == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "nilClone": true}
+	expected := args.Map{
+		"notNil": true,
+		"nilClone": true,
+	}
 	expected.ShouldBeEqual(t, 0, "RwxVariableWrapper returns correct value -- Clone", actual)
 }
 
@@ -895,7 +1065,11 @@ func Test_Cov5_RwxVariableWrapper_IsEqualPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "bothNil": true, "oneNil": false}
+	expected := args.Map{
+		"equal": true,
+		"bothNil": true,
+		"oneNil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsEqualPtr returns correct value -- with args", actual)
 }
 
@@ -906,10 +1080,16 @@ func Test_Cov5_RwxVariableWrapper_ToString(t *testing.T) {
 	withoutH := vw.ToString(false)
 
 	// Act
-	actual := args.Map{"withH": len(withH), "withoutH": len(withoutH)}
+	actual := args.Map{
+		"withH": len(withH),
+		"withoutH": len(withoutH),
+	}
 
 	// Assert
-	expected := args.Map{"withH": 10, "withoutH": 9}
+	expected := args.Map{
+		"withH": 10,
+		"withoutH": 9,
+	}
 	expected.ShouldBeEqual(t, 0, "ToString returns correct value -- with args", actual)
 }
 
@@ -920,10 +1100,16 @@ func Test_Cov5_RwxMatchingStatus_Invalid(t *testing.T) {
 	s := chmodhelper.InvalidRwxMatchingStatus(nil)
 
 	// Act
-	actual := args.Map{"notNil": s != nil, "notAll": !s.IsAllMatching}
+	actual := args.Map{
+		"notNil": s != nil,
+		"notAll": !s.IsAllMatching,
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "notAll": true}
+	expected := args.Map{
+		"notNil": true,
+		"notAll": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidRwxMatchingStatus returns error -- with args", actual)
 }
 
@@ -932,10 +1118,16 @@ func Test_Cov5_RwxMatchingStatus_Empty(t *testing.T) {
 	s := chmodhelper.EmptyRwxMatchingStatus()
 
 	// Act
-	actual := args.Map{"notNil": s != nil, "missingStr": s.MissingFilesToString()}
+	actual := args.Map{
+		"notNil": s != nil,
+		"missingStr": s.MissingFilesToString(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "missingStr": ""}
+	expected := args.Map{
+		"notNil": true,
+		"missingStr": "",
+	}
 	expected.ShouldBeEqual(t, 0, "EmptyRwxMatchingStatus returns empty -- with args", actual)
 }
 
@@ -1052,7 +1244,11 @@ func Test_Cov5_PathExistStat_NonExist(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"fileMode": true, "size": true, "lastMod": true}
+	expected := args.Map{
+		"fileMode": true,
+		"size": true,
+		"lastMod": true,
+	}
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns non-empty -- non-exist", actual)
 }
 
@@ -1062,10 +1258,16 @@ func Test_Cov5_PathExistStat_Dispose(t *testing.T) {
 	stat.Dispose()
 
 	// Act
-	actual := args.Map{"loc": stat.Location, "exist": stat.IsExist}
+	actual := args.Map{
+		"loc": stat.Location,
+		"exist": stat.IsExist,
+	}
 
 	// Assert
-	expected := args.Map{"loc": "", "exist": false}
+	expected := args.Map{
+		"loc": "",
+		"exist": false,
+	}
 	expected.ShouldBeEqual(t, 0, "PathExistStat returns correct value -- Dispose", actual)
 }
 
@@ -1137,10 +1339,18 @@ func Test_Cov5_SimpleFileRW_MarshalUnmarshalJSON(t *testing.T) {
 	err2 := rw2.UnmarshalJSON(b)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "noErr2": err2 == nil, "path": rw2.FilePath}
+	actual := args.Map{
+		"noErr": err == nil,
+		"noErr2": err2 == nil,
+		"path": rw2.FilePath,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "noErr2": true, "path": "/tmp/test.txt"}
+	expected := args.Map{
+		"noErr": true,
+		"noErr2": true,
+		"path": "/tmp/test.txt",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- MarshalUnmarshalJSON", actual)
 }
 
@@ -1176,10 +1386,16 @@ func Test_Cov5_SimpleFileRW_Json(t *testing.T) {
 	rp := rw.JsonPtr()
 
 	// Act
-	actual := args.Map{"noErr": !r.HasError(), "ptrNotNil": rp != nil}
+	actual := args.Map{
+		"noErr": !r.HasError(),
+		"ptrNotNil": rp != nil,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "ptrNotNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"ptrNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleFileRW returns correct value -- Json", actual)
 }
 
@@ -1269,10 +1485,18 @@ func Test_Cov5_NewAttribute_Create(t *testing.T) {
 	attr := chmodhelper.New.Attribute.Create(true, false, true)
 
 	// Act
-	actual := args.Map{"read": attr.IsRead, "write": attr.IsWrite, "exe": attr.IsExecute}
+	actual := args.Map{
+		"read": attr.IsRead,
+		"write": attr.IsWrite,
+		"exe": attr.IsExecute,
+	}
 
 	// Assert
-	expected := args.Map{"read": true, "write": false, "exe": true}
+	expected := args.Map{
+		"read": true,
+		"write": false,
+		"exe": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewAttribute returns correct value -- Create", actual)
 }
 
@@ -1293,10 +1517,18 @@ func Test_Cov5_NewAttribute_UsingByte(t *testing.T) {
 	attr, err := chmodhelper.New.Attribute.UsingByte(5)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "read": attr.IsRead, "exe": attr.IsExecute}
+	actual := args.Map{
+		"noErr": err == nil,
+		"read": attr.IsRead,
+		"exe": attr.IsExecute,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "read": true, "exe": true}
+	expected := args.Map{
+		"noErr": true,
+		"read": true,
+		"exe": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingByte returns correct value -- with args", actual)
 }
 
@@ -1305,10 +1537,18 @@ func Test_Cov5_NewAttribute_UsingVariant(t *testing.T) {
 	attr, err := chmodhelper.New.Attribute.UsingVariant(chmodhelper.ReadWrite)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "read": attr.IsRead, "write": attr.IsWrite}
+	actual := args.Map{
+		"noErr": err == nil,
+		"read": attr.IsRead,
+		"write": attr.IsWrite,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "read": true, "write": true}
+	expected := args.Map{
+		"noErr": true,
+		"read": true,
+		"write": true,
+	}
 	expected.ShouldBeEqual(t, 0, "UsingVariant returns correct value -- with args", actual)
 }
 
@@ -1334,10 +1574,18 @@ func Test_Cov5_VarAttribute_ToCompileAttr_Wildcard(t *testing.T) {
 	attr := vw.Group.ToCompileAttr(fixed)
 
 	// Act
-	actual := args.Map{"read": attr.IsRead, "write": attr.IsWrite, "exe": attr.IsExecute}
+	actual := args.Map{
+		"read": attr.IsRead,
+		"write": attr.IsWrite,
+		"exe": attr.IsExecute,
+	}
 
 	// Assert
-	expected := args.Map{"read": true, "write": true, "exe": true}
+	expected := args.Map{
+		"read": true,
+		"write": true,
+		"exe": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ToCompileAttr returns correct value -- wildcard", actual)
 }
 
@@ -1384,7 +1632,14 @@ func Test_Cov5_RwxInstructionExecutors_Basic(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"empty": true, "hasAny": false, "len": 0, "count": 0, "lastIdx": -1, "hasIdx0": false}
+	expected := args.Map{
+		"empty": true,
+		"hasAny": false,
+		"len": 0,
+		"count": 0,
+		"lastIdx": -1,
+		"hasIdx0": false,
+	}
 	expected.ShouldBeEqual(t, 0, "RwxInstructionExecutors returns correct value -- basic", actual)
 }
 

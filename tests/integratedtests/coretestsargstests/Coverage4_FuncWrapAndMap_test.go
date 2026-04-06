@@ -196,8 +196,14 @@ func Test_Cov4_FuncWrap_InvokeAsBool(t *testing.T) {
 	val, err := fw.InvokeAsBool()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns correct -- bool func", actual)
 }
 
@@ -209,8 +215,14 @@ func Test_Cov4_FuncWrap_InvokeAsBool_WrongType(t *testing.T) {
 	val, err := fw.InvokeAsBool()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": false}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns false -- wrong type", actual)
 }
 
@@ -222,8 +234,14 @@ func Test_Cov4_FuncWrap_InvokeAsBool_NoResults(t *testing.T) {
 	val, err := fw.InvokeAsBool()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": false}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsBool returns false -- void func", actual)
 }
 
@@ -235,8 +253,14 @@ func Test_Cov4_FuncWrap_InvokeAsError_Valid(t *testing.T) {
 	funcErr, procErr := fw.InvokeAsError()
 
 	// Assert
-	actual := args.Map{"procOk": procErr == nil, "hasErr": funcErr != nil}
-	expected := args.Map{"procOk": true, "hasErr": true}
+	actual := args.Map{
+		"procOk": procErr == nil,
+		"hasErr": funcErr != nil,
+	}
+	expected := args.Map{
+		"procOk": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns correct -- error func", actual)
 }
 
@@ -248,8 +272,14 @@ func Test_Cov4_FuncWrap_InvokeAsError_NilReturn(t *testing.T) {
 	funcErr, procErr := fw.InvokeAsError()
 
 	// Assert
-	actual := args.Map{"procOk": procErr == nil, "nilErr": funcErr == nil}
-	expected := args.Map{"procOk": true, "nilErr": true}
+	actual := args.Map{
+		"procOk": procErr == nil,
+		"nilErr": funcErr == nil,
+	}
+	expected := args.Map{
+		"procOk": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns nil -- nil error func", actual)
 }
 
@@ -261,8 +291,14 @@ func Test_Cov4_FuncWrap_InvokeAsError_NoResults(t *testing.T) {
 	funcErr, procErr := fw.InvokeAsError()
 
 	// Assert
-	actual := args.Map{"procOk": procErr == nil, "nilErr": funcErr == nil}
-	expected := args.Map{"procOk": true, "nilErr": true}
+	actual := args.Map{
+		"procOk": procErr == nil,
+		"nilErr": funcErr == nil,
+	}
+	expected := args.Map{
+		"procOk": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsError returns nil -- void func", actual)
 }
 
@@ -274,8 +310,14 @@ func Test_Cov4_FuncWrap_InvokeAsString(t *testing.T) {
 	val, err := fw.InvokeAsString()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": "hello"}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsString returns correct -- string func", actual)
 }
 
@@ -287,8 +329,14 @@ func Test_Cov4_FuncWrap_InvokeAsString_WrongType(t *testing.T) {
 	val, err := fw.InvokeAsString()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": ""}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": "",
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsString returns empty -- wrong type", actual)
 }
 
@@ -300,8 +348,14 @@ func Test_Cov4_FuncWrap_InvokeAsAny(t *testing.T) {
 	val, err := fw.InvokeAsAny()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "val": val}
-	expected := args.Map{"noErr": true, "val": 42}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": val,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"val": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsAny returns correct -- any func", actual)
 }
 
@@ -313,8 +367,14 @@ func Test_Cov4_FuncWrap_InvokeAsAny_NoResults(t *testing.T) {
 	val, err := fw.InvokeAsAny()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "nilVal": val == nil}
-	expected := args.Map{"noErr": true, "nilVal": true}
+	actual := args.Map{
+		"noErr": err == nil,
+		"nilVal": val == nil,
+	}
+	expected := args.Map{
+		"noErr": true,
+		"nilVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsAny returns nil -- void func", actual)
 }
 
@@ -368,8 +428,16 @@ func Test_Cov4_FuncWrap_InvokeAsAnyError_NoResults(t *testing.T) {
 	result, funcErr, procErr := fw.InvokeAsAnyError()
 
 	// Assert
-	actual := args.Map{"procOk": procErr == nil, "nilRes": result == nil, "nilErr": funcErr == nil}
-	expected := args.Map{"procOk": true, "nilRes": true, "nilErr": true}
+	actual := args.Map{
+		"procOk": procErr == nil,
+		"nilRes": result == nil,
+		"nilErr": funcErr == nil,
+	}
+	expected := args.Map{
+		"procOk": true,
+		"nilRes": true,
+		"nilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeAsAnyError returns nils -- void func", actual)
 }
 
@@ -430,8 +498,14 @@ func Test_Cov4_FuncMap_InArgsVerifyRv(t *testing.T) {
 	})
 
 	// Assert
-	actual := args.Map{"ok": ok, "noErr": err == nil}
-	expected := args.Map{"ok": true, "noErr": true}
+	actual := args.Map{
+		"ok": ok,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"ok": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InArgsVerifyRv returns ok -- matching types", actual)
 }
 
@@ -443,8 +517,14 @@ func Test_Cov4_FuncMap_InArgsVerifyRv_NotFound(t *testing.T) {
 	ok, err := fm.InArgsVerifyRv("nonexistent", nil)
 
 	// Assert
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
-	expected := args.Map{"ok": false, "hasErr": true}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InArgsVerifyRv returns error -- not found", actual)
 }
 
@@ -457,8 +537,14 @@ func Test_Cov4_FuncMap_OutArgsVerifyRv(t *testing.T) {
 	ok, err := fm.OutArgsVerifyRv(name, []reflect.Type{reflect.TypeOf(0)})
 
 	// Assert
-	actual := args.Map{"ok": ok, "noErr": err == nil}
-	expected := args.Map{"ok": true, "noErr": true}
+	actual := args.Map{
+		"ok": ok,
+		"noErr": err == nil,
+	}
+	expected := args.Map{
+		"ok": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OutArgsVerifyRv returns ok -- matching types", actual)
 }
 
@@ -470,8 +556,14 @@ func Test_Cov4_FuncMap_OutArgsVerifyRv_NotFound(t *testing.T) {
 	ok, err := fm.OutArgsVerifyRv("nonexistent", nil)
 
 	// Assert
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
-	expected := args.Map{"ok": false, "hasErr": true}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "OutArgsVerifyRv returns error -- not found", actual)
 }
 
@@ -578,8 +670,14 @@ func Test_Cov4_FuncMap_InvokeError(t *testing.T) {
 	funcErr, procErr := fm.InvokeError(name)
 
 	// Assert
-	actual := args.Map{"procOk": procErr == nil, "hasErr": funcErr != nil}
-	expected := args.Map{"procOk": true, "hasErr": true}
+	actual := args.Map{
+		"procOk": procErr == nil,
+		"hasErr": funcErr != nil,
+	}
+	expected := args.Map{
+		"procOk": true,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeError returns correct -- error func", actual)
 }
 
@@ -669,8 +767,14 @@ func Test_Cov4_DynamicFunc_GetAsInt(t *testing.T) {
 	val, ok := df.GetAsInt("count")
 
 	// Assert
-	actual := args.Map{"ok": ok, "val": val}
-	expected := args.Map{"ok": true, "val": 5}
+	actual := args.Map{
+		"ok": ok,
+		"val": val,
+	}
+	expected := args.Map{
+		"ok": true,
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns correct -- valid key", actual)
 }
 
@@ -684,8 +788,14 @@ func Test_Cov4_DynamicFunc_GetAsInt_Missing(t *testing.T) {
 	val, ok := df.GetAsInt("missing")
 
 	// Assert
-	actual := args.Map{"ok": ok, "val": val}
-	expected := args.Map{"ok": false, "val": 0}
+	actual := args.Map{
+		"ok": ok,
+		"val": val,
+	}
+	expected := args.Map{
+		"ok": false,
+		"val": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns zero -- missing key", actual)
 }
 
@@ -699,8 +809,14 @@ func Test_Cov4_DynamicFunc_GetAsString(t *testing.T) {
 	val, ok := df.GetAsString("name")
 
 	// Assert
-	actual := args.Map{"ok": ok, "val": val}
-	expected := args.Map{"ok": true, "val": "test"}
+	actual := args.Map{
+		"ok": ok,
+		"val": val,
+	}
+	expected := args.Map{
+		"ok": true,
+		"val": "test",
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsString returns correct -- valid key", actual)
 }
 
@@ -714,8 +830,14 @@ func Test_Cov4_DynamicFunc_GetAsString_Missing(t *testing.T) {
 	val, ok := df.GetAsString("missing")
 
 	// Assert
-	actual := args.Map{"ok": ok, "val": val}
-	expected := args.Map{"ok": false, "val": ""}
+	actual := args.Map{
+		"ok": ok,
+		"val": val,
+	}
+	expected := args.Map{
+		"ok": false,
+		"val": "",
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsString returns empty -- missing key", actual)
 }
 
@@ -729,8 +851,14 @@ func Test_Cov4_DynamicFunc_GetAsStrings(t *testing.T) {
 	val, ok := df.GetAsStrings("items")
 
 	// Assert
-	actual := args.Map{"ok": ok, "len": len(val)}
-	expected := args.Map{"ok": true, "len": 2}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
+	expected := args.Map{
+		"ok": true,
+		"len": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsStrings returns correct -- valid key", actual)
 }
 
@@ -744,8 +872,14 @@ func Test_Cov4_DynamicFunc_GetAsStrings_Missing(t *testing.T) {
 	val, ok := df.GetAsStrings("missing")
 
 	// Assert
-	actual := args.Map{"ok": ok, "len": len(val)}
-	expected := args.Map{"ok": false, "len": 0}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
+	expected := args.Map{
+		"ok": false,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsStrings returns empty -- missing key", actual)
 }
 
@@ -759,8 +893,14 @@ func Test_Cov4_DynamicFunc_GetAsAnyItems(t *testing.T) {
 	val, ok := df.GetAsAnyItems("items")
 
 	// Assert
-	actual := args.Map{"ok": ok, "len": len(val)}
-	expected := args.Map{"ok": true, "len": 3}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
+	expected := args.Map{
+		"ok": true,
+		"len": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsAnyItems returns correct -- valid key", actual)
 }
 
@@ -774,8 +914,14 @@ func Test_Cov4_DynamicFunc_GetAsAnyItems_Missing(t *testing.T) {
 	val, ok := df.GetAsAnyItems("missing")
 
 	// Assert
-	actual := args.Map{"ok": ok, "len": len(val)}
-	expected := args.Map{"ok": false, "len": 0}
+	actual := args.Map{
+		"ok": ok,
+		"len": len(val),
+	}
+	expected := args.Map{
+		"ok": false,
+		"len": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsAnyItems returns empty -- missing key", actual)
 }
 
@@ -790,8 +936,14 @@ func Test_Cov4_DynamicFunc_Invoke(t *testing.T) {
 	results, err := df.Invoke(3, 4)
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 7}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 7,
+	}
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct -- DynamicFunc with add", actual)
 }
 
@@ -824,8 +976,14 @@ func Test_Cov4_DynamicFunc_InvokeWithValidArgs(t *testing.T) {
 	results, err := df.InvokeWithValidArgs()
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 30}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 30,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeWithValidArgs returns correct -- DynamicFunc", actual)
 }
 
@@ -843,8 +1001,14 @@ func Test_Cov4_DynamicFunc_InvokeArgs(t *testing.T) {
 	results, err := df.InvokeArgs("first", "p2")
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 11}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 11,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- DynamicFunc with named args", actual)
 }
 
@@ -877,8 +1041,14 @@ func Test_Cov4_Dynamic_InvokeArgs(t *testing.T) {
 	results, err := d.InvokeArgs("first", "p2")
 
 	// Assert
-	actual := args.Map{"noErr": err == nil, "result": results[0]}
-	expected := args.Map{"noErr": true, "result": 10}
+	actual := args.Map{
+		"noErr": err == nil,
+		"result": results[0],
+	}
+	expected := args.Map{
+		"noErr": true,
+		"result": 10,
+	}
 	expected.ShouldBeEqual(t, 0, "InvokeArgs returns correct -- Dynamic with named args", actual)
 }
 

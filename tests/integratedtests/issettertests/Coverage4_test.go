@@ -51,7 +51,10 @@ func Test_Cov4_WildcardApply_False(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"wildFalse": false, "falseFalse": false}
+	expected := args.Map{
+		"wildFalse": false,
+		"falseFalse": false,
+	}
 	expected.ShouldBeEqual(t, 0, "WildcardApply returns expected -- false paths", actual)
 }
 
@@ -103,7 +106,10 @@ func Test_Cov4_AndBool_WildcardTrue(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"wildTrue": true, "wildFalse": false}
+	expected := args.Map{
+		"wildTrue": true,
+		"wildFalse": false,
+	}
 	expected.ShouldBeEqual(t, 0, "AndBool wildcard passes through -- both", actual)
 }
 
@@ -279,7 +285,10 @@ func Test_Cov4_YesNoMappedValue_SetUnset(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"set": "yes", "unset": "no"}
+	expected := args.Map{
+		"set": "yes",
+		"unset": "no",
+	}
 	expected.ShouldBeEqual(t, 0, "YesNoMappedValue returns expected -- Set/Unset", actual)
 }
 
@@ -335,6 +344,9 @@ func Test_Cov4_IsBetween_OutOfRange(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"below": false, "above": false}
+	expected := args.Map{
+		"below": false,
+		"above": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsBetween out of range returns false -- both edges", actual)
 }

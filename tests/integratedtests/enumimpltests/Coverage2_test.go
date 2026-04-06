@@ -114,10 +114,16 @@ func Test_Cov2_KeyAnyVal_KeyValInteger(t *testing.T) {
 	kvi := kv.KeyValInteger()
 
 	// Act
-	actual := args.Map{"key": kvi.Key, "val": kvi.ValueInteger}
+	actual := args.Map{
+		"key": kvi.Key,
+		"val": kvi.ValueInteger,
+	}
 
 	// Assert
-	expected := args.Map{"key": "test", "val": 5}
+	expected := args.Map{
+		"key": "test",
+		"val": 5,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyValInteger_conv returns correct value -- with args", actual)
 }
 
@@ -176,10 +182,16 @@ func Test_Cov2_KeyAnyValues(t *testing.T) {
 	empty := enumimpl.KeyAnyValues([]string{}, []int{})
 
 	// Act
-	actual := args.Map{"len": len(result), "emptyLen": len(empty)}
+	actual := args.Map{
+		"len": len(result),
+		"emptyLen": len(empty),
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "emptyLen": 0}
+	expected := args.Map{
+		"len": 2,
+		"emptyLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "KeyAnyValues returns non-empty -- with args", actual)
 }
 
@@ -190,10 +202,18 @@ func Test_Cov2_IntegersRangesOfAnyVal(t *testing.T) {
 	result := enumimpl.IntegersRangesOfAnyVal([]int{3, 1, 2})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": 1, "last": 3}
+	expected := args.Map{
+		"len": 3,
+		"first": 1,
+		"last": 3,
+	}
 	expected.ShouldBeEqual(t, 0, "IntegersRangesOfAnyVal returns correct value -- with args", actual)
 }
 

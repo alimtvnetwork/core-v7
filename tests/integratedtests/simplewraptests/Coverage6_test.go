@@ -297,10 +297,16 @@ func Test_Cov6_CurlyWrapIf(t *testing.T) {
 	noWrap := simplewrap.CurlyWrapIf(false, "hello")
 
 	// Act
-	actual := args.Map{"wrapped": result != "", "noWrap": noWrap != ""}
+	actual := args.Map{
+		"wrapped": result != "",
+		"noWrap": noWrap != "",
+	}
 
 	// Assert
-	expected := args.Map{"wrapped": true, "noWrap": true}
+	expected := args.Map{
+		"wrapped": true,
+		"noWrap": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CurlyWrapIf returns correct value -- with args", actual)
 }
 
@@ -326,10 +332,16 @@ func Test_Cov6_ParenthesisWrapIf(t *testing.T) {
 	noWrap := simplewrap.ParenthesisWrapIf(false, "hello")
 
 	// Act
-	actual := args.Map{"wrapped": result != "", "noWrap": noWrap != ""}
+	actual := args.Map{
+		"wrapped": result != "",
+		"noWrap": noWrap != "",
+	}
 
 	// Assert
-	expected := args.Map{"wrapped": true, "noWrap": true}
+	expected := args.Map{
+		"wrapped": true,
+		"noWrap": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ParenthesisWrapIf returns correct value -- with args", actual)
 }
 
@@ -355,10 +367,16 @@ func Test_Cov6_SquareWrapIf(t *testing.T) {
 	noWrap := simplewrap.SquareWrapIf(false, "hello")
 
 	// Act
-	actual := args.Map{"wrapped": result != "", "noWrap": noWrap != ""}
+	actual := args.Map{
+		"wrapped": result != "",
+		"noWrap": noWrap != "",
+	}
 
 	// Assert
-	expected := args.Map{"wrapped": true, "noWrap": true}
+	expected := args.Map{
+		"wrapped": true,
+		"noWrap": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SquareWrapIf returns correct value -- with args", actual)
 }
 
@@ -459,10 +477,16 @@ func Test_Cov6_DoubleQuoteWrapElementsWithIndexes_Items(t *testing.T) {
 	result := simplewrap.DoubleQuoteWrapElementsWithIndexes("a", "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "notEmpty": result[0] != ""}
+	actual := args.Map{
+		"len": len(result),
+		"notEmpty": result[0] != "",
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "notEmpty": true}
+	expected := args.Map{
+		"len": 2,
+		"notEmpty": true,
+	}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes returns non-empty -- items", actual)
 }
 

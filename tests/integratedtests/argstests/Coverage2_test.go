@@ -348,7 +348,10 @@ func Test_Cov2_Dynamic_GetLowerCase(t *testing.T) {
 func Test_Cov2_Dynamic_HasDefined(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
-		Params: args.Map{"key": "val", "null": nil},
+		Params: args.Map{
+			"key": "val",
+			"null": nil,
+		},
 	}
 
 	// Act
@@ -382,7 +385,10 @@ func Test_Cov2_Dynamic_HasDefined(t *testing.T) {
 func Test_Cov2_Dynamic_ValidArgs(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
-		Params: args.Map{"a": 1, "b": 2},
+		Params: args.Map{
+			"a": 1,
+			"b": 2,
+		},
 	}
 
 	validArgs := d.ValidArgs()
@@ -449,7 +455,10 @@ func Test_Cov2_Dynamic_String(t *testing.T) {
 func Test_Cov2_Dynamic_Actual(t *testing.T) {
 	// Arrange
 	d := &args.DynamicAny{
-		Params: args.Map{"actual": "myActual", "arrange": "myArrange"},
+		Params: args.Map{
+			"actual": "myActual",
+			"arrange": "myArrange",
+		},
 	}
 
 	// Act
@@ -1255,7 +1264,10 @@ func Test_Cov2_FuncWrap_InvokeResultOfIndex(t *testing.T) {
 
 func Test_Cov2_Map_CompileToString(t *testing.T) {
 	// Arrange
-	m := args.Map{"b": 2, "a": 1}
+	m := args.Map{
+		"b": 2,
+		"a": 1,
+	}
 	result := m.CompileToString()
 
 	// Act

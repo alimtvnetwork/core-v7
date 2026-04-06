@@ -112,10 +112,16 @@ func Test_Cov8_ErrorFunctionResult_True(t *testing.T) {
 	result := conditional.ErrorFunctionResult(true, errTrue, errFalse)
 
 	// Act
-	actual := args.Map{"hasErr": result != nil, "err": result.Error()}
+	actual := args.Map{
+		"hasErr": result != nil,
+		"err": result.Error(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "err": "true-err"}
+	expected := args.Map{
+		"hasErr": true,
+		"err": "true-err",
+	}
 	expected.ShouldBeEqual(t, 0, "ErrorFunctionResult returns error -- condition true", actual)
 }
 
@@ -269,10 +275,16 @@ func Test_Cov8_FunctionsExecuteResults_True(t *testing.T) {
 	result := conditional.FunctionsExecuteResults[string](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "t1"}
+	expected := args.Map{
+		"len": 2,
+		"first": "t1",
+	}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults returns results -- true path", actual)
 }
 
@@ -302,10 +314,16 @@ func Test_Cov8_FunctionsExecuteResults_SkipNotTake(t *testing.T) {
 	result := conditional.FunctionsExecuteResults[string](true, funcs, nil)
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "FunctionsExecuteResults skips isTake=false -- selective take", actual)
 }
 
@@ -481,10 +499,16 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_True(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, trueFuncs, nil)
 
 	// Act
-	actual := args.Map{"resultLen": len(results), "hasErr": err != nil}
+	actual := args.Map{
+		"resultLen": len(results),
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"resultLen": 2, "hasErr": true}
+	expected := args.Map{
+		"resultLen": 2,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns results+error -- mixed", actual)
 }
 
@@ -493,10 +517,16 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_Empty(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[string](true, nil, nil)
 
 	// Act
-	actual := args.Map{"isNil": results == nil, "errNil": err == nil}
+	actual := args.Map{
+		"isNil": results == nil,
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "errNil": true}
+	expected := args.Map{
+		"isNil": true,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults returns nil -- empty", actual)
 }
 
@@ -509,10 +539,16 @@ func Test_Cov8_TypedErrorFunctionsExecuteResults_NilFunc(t *testing.T) {
 	results, err := conditional.TypedErrorFunctionsExecuteResults[int](true, funcs, nil)
 
 	// Act
-	actual := args.Map{"len": len(results), "errNil": err == nil}
+	actual := args.Map{
+		"len": len(results),
+		"errNil": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "errNil": true}
+	expected := args.Map{
+		"len": 1,
+		"errNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedErrorFunctionsExecuteResults skips nil -- nil in slice", actual)
 }
 
@@ -532,7 +568,10 @@ func Test_Cov8_IfFuncBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": false}
+	expected := args.Map{
+		"true": true,
+		"false": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IfFuncBool returns bool -- both conditions", actual)
 }
 
@@ -547,7 +586,10 @@ func Test_Cov8_IfTrueFuncBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": true, "false": false}
+	expected := args.Map{
+		"true": true,
+		"false": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncBool returns bool -- both conditions", actual)
 }
 
@@ -562,7 +604,10 @@ func Test_Cov8_NilDefBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNil": true, "nil": true}
+	expected := args.Map{
+		"nonNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefBool returns bool -- nil and non-nil", actual)
 }
 
@@ -579,7 +624,10 @@ func Test_Cov8_NilDefPtrBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNilVal": true, "nilVal": true}
+	expected := args.Map{
+		"nonNilVal": true,
+		"nilVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrBool returns *bool -- nil and non-nil", actual)
 }
 
@@ -594,7 +642,10 @@ func Test_Cov8_ValueOrZeroBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNil": true, "nil": false}
+	expected := args.Map{
+		"nonNil": true,
+		"nil": false,
+	}
 	expected.ShouldBeEqual(t, 0, "ValueOrZeroBool returns bool -- nil and non-nil", actual)
 }
 
@@ -611,7 +662,10 @@ func Test_Cov8_PtrOrZeroBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNilVal": true, "nilVal": false}
+	expected := args.Map{
+		"nonNilVal": true,
+		"nilVal": false,
+	}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroBool returns *bool -- nil and non-nil", actual)
 }
 
@@ -626,7 +680,10 @@ func Test_Cov8_NilValBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNil": true, "nil": true}
+	expected := args.Map{
+		"nonNil": true,
+		"nil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilValBool returns bool -- nil and non-nil", actual)
 }
 
@@ -637,10 +694,16 @@ func Test_Cov8_NilValPtrBool(t *testing.T) {
 	nilResult := conditional.NilValPtrBool(nil, true, false)
 
 	// Act
-	actual := args.Map{"nonNilVal": *nonNilResult, "nilVal": *nilResult}
+	actual := args.Map{
+		"nonNilVal": *nonNilResult,
+		"nilVal": *nilResult,
+	}
 
 	// Assert
-	expected := args.Map{"nonNilVal": true, "nilVal": true}
+	expected := args.Map{
+		"nonNilVal": true,
+		"nilVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NilValPtrBool returns *bool -- nil and non-nil", actual)
 }
 
@@ -656,7 +719,10 @@ func Test_Cov8_IfSliceBool(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueLen": 1, "falseLen": 1}
+	expected := args.Map{
+		"trueLen": 1,
+		"falseLen": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "IfSliceBool returns slice -- both conditions", actual)
 }
 
@@ -686,7 +752,10 @@ func Test_Cov8_IfByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": byte(1), "false": byte(2)}
+	expected := args.Map{
+		"true": byte(1),
+		"false": byte(2),
+	}
 	expected.ShouldBeEqual(t, 0, "IfByte returns byte -- both conditions", actual)
 }
 
@@ -714,7 +783,10 @@ func Test_Cov8_IfTrueFuncByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": byte(42), "false": byte(0)}
+	expected := args.Map{
+		"true": byte(42),
+		"false": byte(0),
+	}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncByte returns byte -- both conditions", actual)
 }
 
@@ -729,7 +801,10 @@ func Test_Cov8_NilDefByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNil": byte(42), "nil": byte(99)}
+	expected := args.Map{
+		"nonNil": byte(42),
+		"nil": byte(99),
+	}
 	expected.ShouldBeEqual(t, 0, "NilDefByte returns byte -- nil and non-nil", actual)
 }
 
@@ -744,6 +819,9 @@ func Test_Cov8_ValueOrZeroByte(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nonNil": byte(42), "nil": byte(0)}
+	expected := args.Map{
+		"nonNil": byte(42),
+		"nil": byte(0),
+	}
 	expected.ShouldBeEqual(t, 0, "ValueOrZeroByte returns byte -- nil and non-nil", actual)
 }

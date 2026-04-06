@@ -59,7 +59,10 @@ func Test_Cov5_Attributes_Clone_Nil(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "noErr": true}
+	expected := args.Map{
+		"isNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns nil -- ClonePtr nil", actual)
 }
 
@@ -75,7 +78,10 @@ func Test_Cov5_Attributes_Clone_Shallow(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "noErr": true}
+	expected := args.Map{
+		"notNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- ClonePtr shallow", actual)
 }
 
@@ -92,7 +98,10 @@ func Test_Cov5_Attributes_Clone_Value(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "dynPayloadsNil": true}
+	expected := args.Map{
+		"noErr": true,
+		"dynPayloadsNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Attributes returns correct value -- Clone value", actual)
 }
 
@@ -158,10 +167,16 @@ func Test_Cov5_UserInfo(t *testing.T) {
 	ui := corepayload.UserInfo{}
 
 	// Act
-	actual := args.Map{"isEmpty": ui.IsEmpty(), "hasUser": ui.HasUser()}
+	actual := args.Map{
+		"isEmpty": ui.IsEmpty(),
+		"hasUser": ui.HasUser(),
+	}
 
 	// Assert
-	expected := args.Map{"isEmpty": true, "hasUser": false}
+	expected := args.Map{
+		"isEmpty": true,
+		"hasUser": false,
+	}
 	expected.ShouldBeEqual(t, 0, "UserInfo returns correct value -- struct", actual)
 }
 

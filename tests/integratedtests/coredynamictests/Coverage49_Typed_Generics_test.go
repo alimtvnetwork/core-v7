@@ -18,10 +18,20 @@ func Test_Cov49_TD_NewTypedDynamic(t *testing.T) {
 	d := coredynamic.NewTypedDynamic("hello", true)
 
 	// Act
-	actual := args.Map{"valid": d.IsValid(), "data": d.Data(), "val": d.Value(), "invalid": d.IsInvalid()}
+	actual := args.Map{
+		"valid": d.IsValid(),
+		"data": d.Data(),
+		"val": d.Value(),
+		"invalid": d.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "data": "hello", "val": "hello", "invalid": false}
+	expected := args.Map{
+		"valid": true,
+		"data": "hello",
+		"val": "hello",
+		"invalid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamic", actual)
 }
 
@@ -30,10 +40,16 @@ func Test_Cov49_TD_NewTypedDynamicValid(t *testing.T) {
 	d := coredynamic.NewTypedDynamicValid(42)
 
 	// Act
-	actual := args.Map{"valid": d.IsValid(), "data": d.Data()}
+	actual := args.Map{
+		"valid": d.IsValid(),
+		"data": d.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "data": 42}
+	expected := args.Map{
+		"valid": true,
+		"data": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamicValid", actual)
 }
 
@@ -42,10 +58,16 @@ func Test_Cov49_TD_NewTypedDynamicPtr(t *testing.T) {
 	d := coredynamic.NewTypedDynamicPtr("x", true)
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": true}
+	expected := args.Map{
+		"notNil": true,
+		"valid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "NewTypedDynamicPtr", actual)
 }
 
@@ -54,10 +76,16 @@ func Test_Cov49_TD_InvalidTypedDynamic(t *testing.T) {
 	d := coredynamic.InvalidTypedDynamic[string]()
 
 	// Act
-	actual := args.Map{"valid": d.IsValid(), "invalid": d.IsInvalid()}
+	actual := args.Map{
+		"valid": d.IsValid(),
+		"invalid": d.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidTypedDynamic", actual)
 }
 
@@ -66,10 +94,16 @@ func Test_Cov49_TD_InvalidTypedDynamicPtr(t *testing.T) {
 	d := coredynamic.InvalidTypedDynamicPtr[int]()
 
 	// Act
-	actual := args.Map{"notNil": d != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"notNil": d != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "valid": false}
+	expected := args.Map{
+		"notNil": true,
+		"valid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "InvalidTypedDynamicPtr", actual)
 }
 
@@ -95,10 +129,16 @@ func Test_Cov49_TD_JsonBytes(t *testing.T) {
 	b, err := d.JsonBytes()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonBytes", actual)
 }
 
@@ -121,10 +161,16 @@ func Test_Cov49_TD_JsonString(t *testing.T) {
 	s, err := d.JsonString()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "r": s}
+	actual := args.Map{
+		"noErr": err == nil,
+		"r": s,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "r": `"hello"`}
+	expected := args.Map{
+		"noErr": true,
+		"r": `"hello"`,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic JsonString", actual)
 }
 
@@ -134,10 +180,16 @@ func Test_Cov49_TD_MarshalJSON(t *testing.T) {
 	b, err := json.Marshal(d)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic MarshalJSON", actual)
 }
 
@@ -147,10 +199,18 @@ func Test_Cov49_TD_UnmarshalJSON(t *testing.T) {
 	err := json.Unmarshal([]byte(`"world"`), d)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "valid": d.IsValid(), "data": d.Data()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"valid": d.IsValid(),
+		"data": d.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "valid": true, "data": "world"}
+	expected := args.Map{
+		"noErr": true,
+		"valid": true,
+		"data": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic UnmarshalJSON", actual)
 }
 
@@ -160,10 +220,16 @@ func Test_Cov49_TD_ValueMarshal(t *testing.T) {
 	b, err := d.ValueMarshal()
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"noErr": err == nil,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "hasBytes": true}
+	expected := args.Map{
+		"noErr": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ValueMarshal", actual)
 }
 
@@ -173,10 +239,16 @@ func Test_Cov49_TD_Bytes_IsBytes(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"ok": ok,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "hasBytes": true}
+	expected := args.Map{
+		"ok": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Bytes isBytes", actual)
 }
 
@@ -186,10 +258,16 @@ func Test_Cov49_TD_Bytes_NotBytes(t *testing.T) {
 	b, ok := d.Bytes()
 
 	// Act
-	actual := args.Map{"ok": ok, "hasBytes": len(b) > 0}
+	actual := args.Map{
+		"ok": ok,
+		"hasBytes": len(b) > 0,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "hasBytes": true}
+	expected := args.Map{
+		"ok": true,
+		"hasBytes": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Bytes notBytes", actual)
 }
 
@@ -203,10 +281,16 @@ func Test_Cov49_TD_GetAsString(t *testing.T) {
 	v, ok := d.GetAsString()
 
 	// Act
-	actual := args.Map{"ok": ok, "v": v}
+	actual := args.Map{
+		"ok": ok,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "v": "hello"}
+	expected := args.Map{
+		"ok": true,
+		"v": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsString", actual)
 }
 
@@ -216,10 +300,16 @@ func Test_Cov49_TD_GetAsInt(t *testing.T) {
 	v, ok := d.GetAsInt()
 
 	// Act
-	actual := args.Map{"ok": ok, "v": v}
+	actual := args.Map{
+		"ok": ok,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "v": 42}
+	expected := args.Map{
+		"ok": true,
+		"v": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsInt", actual)
 }
 
@@ -229,10 +319,16 @@ func Test_Cov49_TD_GetAsInt64(t *testing.T) {
 	v, ok := d.GetAsInt64()
 
 	// Act
-	actual := args.Map{"ok": ok, "v": v}
+	actual := args.Map{
+		"ok": ok,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "v": int64(99)}
+	expected := args.Map{
+		"ok": true,
+		"v": int64(99),
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsInt64", actual)
 }
 
@@ -242,10 +338,16 @@ func Test_Cov49_TD_GetAsUint(t *testing.T) {
 	v, ok := d.GetAsUint()
 
 	// Act
-	actual := args.Map{"ok": ok, "v": v}
+	actual := args.Map{
+		"ok": ok,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "v": uint(5)}
+	expected := args.Map{
+		"ok": true,
+		"v": uint(5),
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsUint", actual)
 }
 
@@ -282,10 +384,16 @@ func Test_Cov49_TD_GetAsBool(t *testing.T) {
 	v, ok := d.GetAsBool()
 
 	// Act
-	actual := args.Map{"ok": ok, "v": v}
+	actual := args.Map{
+		"ok": ok,
+		"v": v,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "v": true}
+	expected := args.Map{
+		"ok": true,
+		"v": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic GetAsBool", actual)
 }
 
@@ -472,10 +580,18 @@ func Test_Cov49_TD_Deserialize_Valid(t *testing.T) {
 	err := d.Deserialize([]byte(`"world"`))
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "valid": d.IsValid(), "data": d.Data()}
+	actual := args.Map{
+		"noErr": err == nil,
+		"valid": d.IsValid(),
+		"data": d.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "valid": true, "data": "world"}
+	expected := args.Map{
+		"noErr": true,
+		"valid": true,
+		"data": "world",
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize valid", actual)
 }
 
@@ -498,10 +614,16 @@ func Test_Cov49_TD_Deserialize_Invalid(t *testing.T) {
 	err := d.Deserialize([]byte(`bad`))
 
 	// Act
-	actual := args.Map{"hasErr": err != nil, "valid": d.IsValid()}
+	actual := args.Map{
+		"hasErr": err != nil,
+		"valid": d.IsValid(),
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "valid": false}
+	expected := args.Map{
+		"hasErr": true,
+		"valid": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize invalid", actual)
 }
 
@@ -563,10 +685,20 @@ func Test_Cov49_TSR_NewValid(t *testing.T) {
 	r := coredynamic.NewTypedSimpleResultValid("ok")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "data": r.Data(), "result": r.Result(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"data": r.Data(),
+		"result": r.Result(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "data": "ok", "result": "ok", "msg": ""}
+	expected := args.Map{
+		"valid": true,
+		"data": "ok",
+		"result": "ok",
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TSR NewValid", actual)
 }
 
@@ -575,10 +707,18 @@ func Test_Cov49_TSR_Invalid(t *testing.T) {
 	r := coredynamic.InvalidTypedSimpleResult[string]("fail")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "invalid": r.IsInvalid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"invalid": r.IsInvalid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true, "msg": "fail"}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+		"msg": "fail",
+	}
 	expected.ShouldBeEqual(t, 0, "TSR Invalid", actual)
 }
 
@@ -587,10 +727,16 @@ func Test_Cov49_TSR_InvalidNoMessage(t *testing.T) {
 	r := coredynamic.InvalidTypedSimpleResultNoMessage[int]()
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TSR InvalidNoMessage", actual)
 }
 
@@ -599,10 +745,16 @@ func Test_Cov49_TSR_IsValid_Nil(t *testing.T) {
 	var r *coredynamic.TypedSimpleResult[string]
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "invalid": r.IsInvalid()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"invalid": r.IsInvalid(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TSR IsValid nil", actual)
 }
 
@@ -673,10 +825,16 @@ func Test_Cov49_TSR_InvalidError_WithMessage(t *testing.T) {
 	e2 := r.InvalidError() // cached
 
 	// Act
-	actual := args.Map{"hasErr": e1 != nil, "same": e1 == e2}
+	actual := args.Map{
+		"hasErr": e1 != nil,
+		"same": e1 == e2,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "same": true}
+	expected := args.Map{
+		"hasErr": true,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TSR InvalidError with message cached", actual)
 }
 
@@ -711,10 +869,16 @@ func Test_Cov49_TSR_ClonePtr_Valid(t *testing.T) {
 	c := r.ClonePtr()
 
 	// Act
-	actual := args.Map{"notNil": c != nil, "data": c.Data()}
+	actual := args.Map{
+		"notNil": c != nil,
+		"data": c.Data(),
+	}
 
 	// Assert
-	expected := args.Map{"notNil": true, "data": "ok"}
+	expected := args.Map{
+		"notNil": true,
+		"data": "ok",
+	}
 	expected.ShouldBeEqual(t, 0, "TSR ClonePtr valid", actual)
 }
 
@@ -776,10 +940,16 @@ func Test_Cov49_TSR_GetAs(t *testing.T) {
 	s, ok := r.GetAsString()
 
 	// Act
-	actual := args.Map{"ok": ok, "val": s}
+	actual := args.Map{
+		"ok": ok,
+		"val": s,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "val": "hello"}
+	expected := args.Map{
+		"ok": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "TSR GetAsString", actual)
 }
 
@@ -821,10 +991,20 @@ func Test_Cov49_TSReq_NewValid(t *testing.T) {
 	r := coredynamic.NewTypedSimpleRequestValid("input")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "data": r.Data(), "req": r.Request(), "val": r.Value()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"data": r.Data(),
+		"req": r.Request(),
+		"val": r.Value(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "data": "input", "req": "input", "val": "input"}
+	expected := args.Map{
+		"valid": true,
+		"data": "input",
+		"req": "input",
+		"val": "input",
+	}
 	expected.ShouldBeEqual(t, 0, "TSReq NewValid", actual)
 }
 
@@ -833,10 +1013,18 @@ func Test_Cov49_TSReq_Invalid(t *testing.T) {
 	r := coredynamic.InvalidTypedSimpleRequest[string]("bad")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "invalid": r.IsInvalid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"invalid": r.IsInvalid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true, "msg": "bad"}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+		"msg": "bad",
+	}
 	expected.ShouldBeEqual(t, 0, "TSReq Invalid", actual)
 }
 
@@ -845,10 +1033,20 @@ func Test_Cov49_TSReq_Nil(t *testing.T) {
 	var r *coredynamic.TypedSimpleRequest[string]
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "invalid": r.IsInvalid(), "msg": r.Message(), "str": r.String()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"invalid": r.IsInvalid(),
+		"msg": r.Message(),
+		"str": r.String(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "invalid": true, "msg": "", "str": ""}
+	expected := args.Map{
+		"valid": false,
+		"invalid": true,
+		"msg": "",
+		"str": "",
+	}
 	expected.ShouldBeEqual(t, 0, "TSReq nil accessors", actual)
 }
 
@@ -871,10 +1069,16 @@ func Test_Cov49_TSReq_InvalidError_Cached(t *testing.T) {
 	e2 := r.InvalidError()
 
 	// Act
-	actual := args.Map{"hasErr": e1 != nil, "same": e1 == e2}
+	actual := args.Map{
+		"hasErr": e1 != nil,
+		"same": e1 == e2,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "same": true}
+	expected := args.Map{
+		"hasErr": true,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "TSReq InvalidError cached", actual)
 }
 
@@ -968,10 +1172,30 @@ func Test_Cov49_TSReq_GetAs(t *testing.T) {
 	_, ssOk := r.GetAsStrings()
 
 	// Act
-	actual := args.Map{"sOk": ok, "s": s, "iOk": iOk, "i64Ok": i64Ok, "f64Ok": f64Ok, "f32Ok": f32Ok, "bOk": bOk, "byOk": byOk, "ssOk": ssOk}
+	actual := args.Map{
+		"sOk": ok,
+		"s": s,
+		"iOk": iOk,
+		"i64Ok": i64Ok,
+		"f64Ok": f64Ok,
+		"f32Ok": f32Ok,
+		"bOk": bOk,
+		"byOk": byOk,
+		"ssOk": ssOk,
+	}
 
 	// Assert
-	expected := args.Map{"sOk": true, "s": "hello", "iOk": false, "i64Ok": false, "f64Ok": false, "f32Ok": false, "bOk": false, "byOk": false, "ssOk": false}
+	expected := args.Map{
+		"sOk": true,
+		"s": "hello",
+		"iOk": false,
+		"i64Ok": false,
+		"f64Ok": false,
+		"f32Ok": false,
+		"bOk": false,
+		"byOk": false,
+		"ssOk": false,
+	}
 	expected.ShouldBeEqual(t, 0, "TSReq GetAs all", actual)
 }
 
@@ -984,10 +1208,16 @@ func Test_Cov49_SR_NewValid(t *testing.T) {
 	r := coredynamic.NewSimpleRequestValid("input")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": true, "msg": ""}
+	expected := args.Map{
+		"valid": true,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest NewValid", actual)
 }
 
@@ -996,10 +1226,16 @@ func Test_Cov49_SR_Invalid(t *testing.T) {
 	r := coredynamic.InvalidSimpleRequest("fail")
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": "fail"}
+	expected := args.Map{
+		"valid": false,
+		"msg": "fail",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest Invalid", actual)
 }
 
@@ -1008,10 +1244,16 @@ func Test_Cov49_SR_InvalidNoMessage(t *testing.T) {
 	r := coredynamic.InvalidSimpleRequestNoMessage()
 
 	// Act
-	actual := args.Map{"valid": r.IsValid(), "msg": r.Message()}
+	actual := args.Map{
+		"valid": r.IsValid(),
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"valid": false, "msg": ""}
+	expected := args.Map{
+		"valid": false,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidNoMessage", actual)
 }
 
@@ -1020,10 +1262,16 @@ func Test_Cov49_SR_Request_Nil(t *testing.T) {
 	var r *coredynamic.SimpleRequest
 
 	// Act
-	actual := args.Map{"isNil": r.Request() == nil, "msg": r.Message()}
+	actual := args.Map{
+		"isNil": r.Request() == nil,
+		"msg": r.Message(),
+	}
 
 	// Assert
-	expected := args.Map{"isNil": true, "msg": ""}
+	expected := args.Map{
+		"isNil": true,
+		"msg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest Request nil", actual)
 }
 
@@ -1171,9 +1419,15 @@ func Test_Cov49_SR_InvalidError_WithMessage(t *testing.T) {
 	e2 := r.InvalidError() // cached
 
 	// Act
-	actual := args.Map{"hasErr": e1 != nil, "same": e1 == e2}
+	actual := args.Map{
+		"hasErr": e1 != nil,
+		"same": e1 == e2,
+	}
 
 	// Assert
-	expected := args.Map{"hasErr": true, "same": true}
+	expected := args.Map{
+		"hasErr": true,
+		"same": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SimpleRequest InvalidError cached", actual)
 }

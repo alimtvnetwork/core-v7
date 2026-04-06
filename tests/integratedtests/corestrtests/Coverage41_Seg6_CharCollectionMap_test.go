@@ -17,10 +17,16 @@ func Test_Seg6_CCM_IsEmpty(t *testing.T) {
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(0, 4)
 
 		// Act
-		actual := args.Map{"empty": ccm.IsEmpty(), "hasItems": ccm.HasItems()}
+		actual := args.Map{
+			"empty": ccm.IsEmpty(),
+			"hasItems": ccm.HasItems(),
+		}
 
 		// Assert
-		expected := args.Map{"empty": true, "hasItems": false}
+		expected := args.Map{
+			"empty": true,
+			"hasItems": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEmpty -- true on empty", actual)
 	})
 }
@@ -32,10 +38,16 @@ func Test_Seg6_CCM_Add(t *testing.T) {
 		ccm.Add("apple").Add("avocado").Add("banana")
 
 		// Act
-		actual := args.Map{"len": ccm.Length(), "allLen": ccm.AllLengthsSum()}
+		actual := args.Map{
+			"len": ccm.Length(),
+			"allLen": ccm.AllLengthsSum(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "allLen": 3}
+		expected := args.Map{
+			"len": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "Add -- 2 char groups, 3 total items", actual)
 	})
 }
@@ -62,10 +74,16 @@ func Test_Seg6_CCM_AddStrings(t *testing.T) {
 		ccm.AddStrings("apple", "avocado", "banana")
 
 		// Act
-		actual := args.Map{"len": ccm.Length(), "allLen": ccm.AllLengthsSum()}
+		actual := args.Map{
+			"len": ccm.Length(),
+			"allLen": ccm.AllLengthsSum(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "allLen": 3}
+		expected := args.Map{
+			"len": 2,
+			"allLen": 3,
+		}
 		expected.ShouldBeEqual(t, 0, "AddStrings -- 2 groups 3 total", actual)
 	})
 }
@@ -91,10 +109,16 @@ func Test_Seg6_CCM_GetChar(t *testing.T) {
 		ccm := corestr.New.CharCollectionMap.CapSelfCap(0, 4)
 
 		// Act
-		actual := args.Map{"char": ccm.GetChar("abc"), "empty": ccm.GetChar("")}
+		actual := args.Map{
+			"char": ccm.GetChar("abc"),
+			"empty": ccm.GetChar(""),
+		}
 
 		// Assert
-		expected := args.Map{"char": byte('a'), "empty": byte(0)}
+		expected := args.Map{
+			"char": byte('a'),
+			"empty": byte(0),
+		}
 		expected.ShouldBeEqual(t, 0, "GetChar -- first char or empty", actual)
 	})
 }
@@ -106,10 +130,16 @@ func Test_Seg6_CCM_Has(t *testing.T) {
 		ccm.Add("apple")
 
 		// Act
-		actual := args.Map{"has": ccm.Has("apple"), "miss": ccm.Has("banana")}
+		actual := args.Map{
+			"has": ccm.Has("apple"),
+			"miss": ccm.Has("banana"),
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "miss": false}
+		expected := args.Map{
+			"has": true,
+			"miss": false,
+		}
 		expected.ShouldBeEqual(t, 0, "Has -- found and missing", actual)
 	})
 }
@@ -136,10 +166,16 @@ func Test_Seg6_CCM_HasWithCollection(t *testing.T) {
 		has, coll := ccm.HasWithCollection("apple")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "collNotNil": true}
+		expected := args.Map{
+			"has": true,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollection -- found", actual)
 	})
 }
@@ -152,10 +188,16 @@ func Test_Seg6_CCM_HasWithCollection_Miss(t *testing.T) {
 		has, coll := ccm.HasWithCollection("banana")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "collNotNil": true}
+		expected := args.Map{
+			"has": false,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollection miss -- not found", actual)
 	})
 }
@@ -167,10 +209,16 @@ func Test_Seg6_CCM_HasWithCollection_Empty(t *testing.T) {
 		has, coll := ccm.HasWithCollection("apple")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "collNotNil": true}
+		expected := args.Map{
+			"has": false,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollection empty -- not found", actual)
 	})
 }
@@ -183,10 +231,16 @@ func Test_Seg6_CCM_HasWithCollectionLock(t *testing.T) {
 		has, coll := ccm.HasWithCollectionLock("apple")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": true, "collNotNil": true}
+		expected := args.Map{
+			"has": true,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock -- found", actual)
 	})
 }
@@ -198,10 +252,16 @@ func Test_Seg6_CCM_HasWithCollectionLock_Empty(t *testing.T) {
 		has, coll := ccm.HasWithCollectionLock("apple")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "collNotNil": true}
+		expected := args.Map{
+			"has": false,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock empty -- not found", actual)
 	})
 }
@@ -214,10 +274,16 @@ func Test_Seg6_CCM_HasWithCollectionLock_Miss(t *testing.T) {
 		has, coll := ccm.HasWithCollectionLock("banana")
 
 		// Act
-		actual := args.Map{"has": has, "collNotNil": coll != nil}
+		actual := args.Map{
+			"has": has,
+			"collNotNil": coll != nil,
+		}
 
 		// Assert
-		expected := args.Map{"has": false, "collNotNil": true}
+		expected := args.Map{
+			"has": false,
+			"collNotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HasWithCollectionLock miss -- not found", actual)
 	})
 }
@@ -229,10 +295,16 @@ func Test_Seg6_CCM_LengthOf(t *testing.T) {
 		ccm.Add("apple").Add("avocado")
 
 		// Act
-		actual := args.Map{"lenA": ccm.LengthOf(byte('a')), "lenZ": ccm.LengthOf(byte('z'))}
+		actual := args.Map{
+			"lenA": ccm.LengthOf(byte('a')),
+			"lenZ": ccm.LengthOf(byte('z')),
+		}
 
 		// Assert
-		expected := args.Map{"lenA": 2, "lenZ": 0}
+		expected := args.Map{
+			"lenA": 2,
+			"lenZ": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LengthOf -- 2 for 'a', 0 for 'z'", actual)
 	})
 }
@@ -258,10 +330,16 @@ func Test_Seg6_CCM_LengthOfLock(t *testing.T) {
 		ccm.Add("apple")
 
 		// Act
-		actual := args.Map{"len": ccm.LengthOfLock(byte('a')), "miss": ccm.LengthOfLock(byte('z'))}
+		actual := args.Map{
+			"len": ccm.LengthOfLock(byte('a')),
+			"miss": ccm.LengthOfLock(byte('z')),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "miss": 0}
+		expected := args.Map{
+			"len": 1,
+			"miss": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LengthOfLock -- found and missing", actual)
 	})
 }
@@ -287,10 +365,16 @@ func Test_Seg6_CCM_LengthOfCollectionFromFirstChar(t *testing.T) {
 		ccm.Add("apple").Add("avocado")
 
 		// Act
-		actual := args.Map{"len": ccm.LengthOfCollectionFromFirstChar("abc"), "miss": ccm.LengthOfCollectionFromFirstChar("xyz")}
+		actual := args.Map{
+			"len": ccm.LengthOfCollectionFromFirstChar("abc"),
+			"miss": ccm.LengthOfCollectionFromFirstChar("xyz"),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "miss": 0}
+		expected := args.Map{
+			"len": 2,
+			"miss": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "LengthOfCollectionFromFirstChar -- 2 and 0", actual)
 	})
 }
@@ -568,7 +652,11 @@ func Test_Seg6_CCM_IsEquals(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"eq": true, "same": true, "nil": false}
+		expected := args.Map{
+			"eq": true,
+			"same": true,
+			"nil": false,
+		}
 		expected.ShouldBeEqual(t, 0, "IsEquals -- various", actual)
 	})
 }
@@ -1165,10 +1253,16 @@ func Test_Seg6_CCM_HashsetByChar(t *testing.T) {
 		hs := ccm.HashsetByChar(byte('a'))
 
 		// Act
-		actual := args.Map{"notNil": hs != nil, "has": hs.Has("apple")}
+		actual := args.Map{
+			"notNil": hs != nil,
+			"has": hs.Has("apple"),
+		}
 
 		// Assert
-		expected := args.Map{"notNil": true, "has": true}
+		expected := args.Map{
+			"notNil": true,
+			"has": true,
+		}
 		expected.ShouldBeEqual(t, 0, "HashsetByChar -- found", actual)
 	})
 }
@@ -1466,10 +1560,16 @@ func Test_Seg6_CCM_MarshalJSON(t *testing.T) {
 		b, err := ccm.MarshalJSON()
 
 		// Act
-		actual := args.Map{"noErr": err == nil, "hasBytes": len(b) > 0}
+		actual := args.Map{
+			"noErr": err == nil,
+			"hasBytes": len(b) > 0,
+		}
 
 		// Assert
-		expected := args.Map{"noErr": true, "hasBytes": true}
+		expected := args.Map{
+			"noErr": true,
+			"hasBytes": true,
+		}
 		expected.ShouldBeEqual(t, 0, "MarshalJSON -- success", actual)
 	})
 }
@@ -1550,7 +1650,12 @@ func Test_Seg6_CCM_InterfaceCasts(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"jsoner": true, "binder": true, "injector": true, "marsh": true}
+		expected := args.Map{
+			"jsoner": true,
+			"binder": true,
+			"injector": true,
+			"marsh": true,
+		}
 		expected.ShouldBeEqual(t, 0, "Interface casts -- all non-nil", actual)
 	})
 }

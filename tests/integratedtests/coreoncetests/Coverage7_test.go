@@ -43,10 +43,16 @@ func Test_Cov7_AnyOnce_CastValueString(t *testing.T) {
 	val, ok := ao.CastValueString()
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueString returns value -- string value", actual)
 }
 
@@ -69,10 +75,16 @@ func Test_Cov7_AnyOnce_CastValueStrings(t *testing.T) {
 	val, ok := ao.CastValueStrings()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "ok": true}
+	expected := args.Map{
+		"len": 2,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueStrings returns slice -- string slice", actual)
 }
 
@@ -82,10 +94,16 @@ func Test_Cov7_AnyOnce_CastValueHashmapMap(t *testing.T) {
 	val, ok := ao.CastValueHashmapMap()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueHashmapMap returns map -- map value", actual)
 }
 
@@ -95,10 +113,16 @@ func Test_Cov7_AnyOnce_CastValueMapStringAnyMap(t *testing.T) {
 	val, ok := ao.CastValueMapStringAnyMap()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueMapStringAnyMap returns map -- map any value", actual)
 }
 
@@ -108,10 +132,16 @@ func Test_Cov7_AnyOnce_CastValueBytes(t *testing.T) {
 	val, ok := ao.CastValueBytes()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "ok": true}
+	expected := args.Map{
+		"len": 2,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueBytes returns bytes -- byte slice", actual)
 }
 
@@ -172,10 +202,16 @@ func Test_Cov7_AnyOnce_SerializeSkipExistingError(t *testing.T) {
 	b, err := ao.SerializeSkipExistingError()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeSkipExistingError returns bytes -- string value", actual)
 }
 
@@ -200,10 +236,16 @@ func Test_Cov7_AnyErrorOnce_ValueString_NilValue(t *testing.T) {
 	val, err := ao.ValueString()
 
 	// Act
-	actual := args.Map{"containsNil": val != "", "noErr": err == nil}
+	actual := args.Map{
+		"containsNil": val != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"containsNil": true, "noErr": true}
+	expected := args.Map{
+		"containsNil": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ValueString returns nil bracket -- nil value no error", actual)
 }
 
@@ -259,10 +301,18 @@ func Test_Cov7_AnyErrorOnce_CastValueString(t *testing.T) {
 	val, err, ok := ao.CastValueString()
 
 	// Act
-	actual := args.Map{"val": val, "noErr": err == nil, "ok": ok}
+	actual := args.Map{
+		"val": val,
+		"noErr": err == nil,
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"val": "hello", "noErr": true, "ok": true}
+	expected := args.Map{
+		"val": "hello",
+		"noErr": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueString returns value -- string", actual)
 }
 
@@ -272,10 +322,16 @@ func Test_Cov7_AnyErrorOnce_CastValueStrings(t *testing.T) {
 	val, _, ok := ao.CastValueStrings()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueStrings returns slice -- string slice", actual)
 }
 
@@ -285,10 +341,16 @@ func Test_Cov7_AnyErrorOnce_CastValueHashmapMap(t *testing.T) {
 	val, _, ok := ao.CastValueHashmapMap()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueHashmapMap returns map -- map value", actual)
 }
 
@@ -298,10 +360,16 @@ func Test_Cov7_AnyErrorOnce_CastValueMapStringAnyMap(t *testing.T) {
 	val, _, ok := ao.CastValueMapStringAnyMap()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueMapStringAnyMap returns map -- map any", actual)
 }
 
@@ -311,10 +379,16 @@ func Test_Cov7_AnyErrorOnce_CastValueBytes(t *testing.T) {
 	val, _, ok := ao.CastValueBytes()
 
 	// Act
-	actual := args.Map{"len": len(val), "ok": ok}
+	actual := args.Map{
+		"len": len(val),
+		"ok": ok,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "ok": true}
+	expected := args.Map{
+		"len": 1,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "CastValueBytes returns bytes -- byte slice", actual)
 }
 
@@ -374,10 +448,16 @@ func Test_Cov7_AnyErrorOnce_SerializeSkipExistingError(t *testing.T) {
 	b, err := ao.SerializeSkipExistingError()
 
 	// Act
-	actual := args.Map{"hasBytes": len(b) > 0, "noErr": err == nil}
+	actual := args.Map{
+		"hasBytes": len(b) > 0,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "noErr": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "SerializeSkipExistingError returns bytes -- ignores existing error", actual)
 }
 
@@ -505,10 +585,16 @@ func Test_Cov7_BytesErrorOnce_Deserialize_Success(t *testing.T) {
 	err := bo.Deserialize(&result)
 
 	// Act
-	actual := args.Map{"noErr": err == nil, "val": result}
+	actual := args.Map{
+		"noErr": err == nil,
+		"val": result,
+	}
 
 	// Assert
-	expected := args.Map{"noErr": true, "val": "hello"}
+	expected := args.Map{
+		"noErr": true,
+		"val": "hello",
+	}
 	expected.ShouldBeEqual(t, 0, "Deserialize returns value -- valid json string", actual)
 }
 
@@ -705,10 +791,16 @@ func Test_Cov7_IntegersOnce_Sorted_Cached(t *testing.T) {
 	sorted2 := io.Sorted()
 
 	// Act
-	actual := args.Map{"same": len(sorted1) == len(sorted2), "first": sorted1[0]}
+	actual := args.Map{
+		"same": len(sorted1) == len(sorted2),
+		"first": sorted1[0],
+	}
 
 	// Assert
-	expected := args.Map{"same": true, "first": 1}
+	expected := args.Map{
+		"same": true,
+		"first": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "Sorted returns cached -- second call same result", actual)
 }
 
@@ -1104,9 +1196,17 @@ func Test_Cov7_MapStringStringOnce_GetValueWithStatus(t *testing.T) {
 	_, miss := mo.GetValueWithStatus("x")
 
 	// Act
-	actual := args.Map{"val": val, "has": has, "miss": miss}
+	actual := args.Map{
+		"val": val,
+		"has": has,
+		"miss": miss,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "has": true, "miss": false}
+	expected := args.Map{
+		"val": "v",
+		"has": true,
+		"miss": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetValueWithStatus returns correct -- hit and miss", actual)
 }

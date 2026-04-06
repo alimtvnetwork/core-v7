@@ -119,10 +119,16 @@ func Test_Cov17_ValidValue_BytesOnce(t *testing.T) {
 		_ = v.ValueBytesOncePtr()
 
 		// Act
-		actual := args.Map{"len1": len(b1), "len2": len(b2)}
+		actual := args.Map{
+			"len1": len(b1),
+			"len2": len(b2),
+		}
 
 		// Assert
-		expected := args.Map{"len1": 5, "len2": 5}
+		expected := args.Map{
+			"len1": 5,
+			"len2": 5,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- BytesOnce", actual)
 	})
 }
@@ -173,10 +179,16 @@ func Test_Cov17_ValidValue_Clone(t *testing.T) {
 		var nilV *corestr.ValidValue
 
 		// Act
-		actual := args.Map{"cloneVal": c.Value, "nilClone": nilV.Clone() == nil}
+		actual := args.Map{
+			"cloneVal": c.Value,
+			"nilClone": nilV.Clone() == nil,
+		}
 
 		// Assert
-		expected := args.Map{"cloneVal": "hello", "nilClone": true}
+		expected := args.Map{
+			"cloneVal": "hello",
+			"nilClone": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- Clone", actual)
 	})
 }
@@ -199,7 +211,12 @@ func Test_Cov17_ValidValue_StringAndJson(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"str": true, "fullStr": true, "nilStr": true, "nilFull": true}
+		expected := args.Map{
+			"str": true,
+			"fullStr": true,
+			"nilStr": true,
+			"nilFull": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValue returns non-empty -- StringAndJson", actual)
 	})
 }
@@ -235,10 +252,18 @@ func Test_Cov17_ValidValues(t *testing.T) {
 		vv.Add("a").AddFull(true, "b", "msg")
 
 		// Act
-		actual := args.Map{"len": vv.Length(), "empty": vv.IsEmpty(), "hasAny": vv.HasAnyItem()}
+		actual := args.Map{
+			"len": vv.Length(),
+			"empty": vv.IsEmpty(),
+			"hasAny": vv.HasAnyItem(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 2, "empty": false, "hasAny": true}
+		expected := args.Map{
+			"len": 2,
+			"empty": false,
+			"hasAny": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues returns non-empty -- basic", actual)
 	})
 }
@@ -265,10 +290,18 @@ func Test_Cov17_ValidValues_Factories(t *testing.T) {
 		cap := corestr.NewValidValues(10)
 
 		// Act
-		actual := args.Map{"len": vv.Length(), "emptyLen": empty.Length(), "capLen": cap.Length()}
+		actual := args.Map{
+			"len": vv.Length(),
+			"emptyLen": empty.Length(),
+			"capLen": cap.Length(),
+		}
 
 		// Assert
-		expected := args.Map{"len": 1, "emptyLen": 0, "capLen": 0}
+		expected := args.Map{
+			"len": 1,
+			"emptyLen": 0,
+			"capLen": 0,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues returns non-empty -- factories", actual)
 	})
 }
@@ -312,7 +345,11 @@ func Test_Cov17_ValidValues_Strings(t *testing.T) {
 		}
 
 		// Assert
-		expected := args.Map{"strLen": 1, "fullLen": 1, "str": true}
+		expected := args.Map{
+			"strLen": 1,
+			"fullLen": 1,
+			"str": true,
+		}
 		expected.ShouldBeEqual(t, 0, "ValidValues returns non-empty -- Strings", actual)
 	})
 }
@@ -329,10 +366,16 @@ func Test_Cov17_ValueStatus(t *testing.T) {
 		c := vs2.Clone()
 
 		// Act
-		actual := args.Map{"invalid": !vs.ValueValid.IsValid, "cloneMsg": c.ValueValid.Message}
+		actual := args.Map{
+			"invalid": !vs.ValueValid.IsValid,
+			"cloneMsg": c.ValueValid.Message,
+		}
 
 		// Assert
-		expected := args.Map{"invalid": true, "cloneMsg": "msg"}
+		expected := args.Map{
+			"invalid": true,
+			"cloneMsg": "msg",
+		}
 		expected.ShouldBeEqual(t, 0, "ValueStatus returns non-empty -- with args", actual)
 	})
 }
@@ -797,10 +840,16 @@ func Test_Cov17_SimpleStringOnce_Set(t *testing.T) {
 		err2 := s.SetOnUninitialized("val2")
 
 		// Act
-		actual := args.Map{"err1Nil": err == nil, "err2NotNil": err2 != nil}
+		actual := args.Map{
+			"err1Nil": err == nil,
+			"err2NotNil": err2 != nil,
+		}
 
 		// Assert
-		expected := args.Map{"err1Nil": true, "err2NotNil": true}
+		expected := args.Map{
+			"err1Nil": true,
+			"err2NotNil": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns correct value -- Set", actual)
 	})
 }
@@ -813,10 +862,16 @@ func Test_Cov17_SimpleStringOnce_GetSetOnce(t *testing.T) {
 		v2 := s.GetSetOnce("second")
 
 		// Act
-		actual := args.Map{"v1": v, "v2": v2}
+		actual := args.Map{
+			"v1": v,
+			"v2": v2,
+		}
 
 		// Assert
-		expected := args.Map{"v1": "first", "v2": "first"}
+		expected := args.Map{
+			"v1": "first",
+			"v2": "first",
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns correct value -- GetSetOnce", actual)
 	})
 }
@@ -829,10 +884,16 @@ func Test_Cov17_SimpleStringOnce_GetOnceFunc(t *testing.T) {
 		v2 := s.GetOnceFunc(func() string { return "other" })
 
 		// Act
-		actual := args.Map{"v1": v, "v2": v2}
+		actual := args.Map{
+			"v1": v,
+			"v2": v2,
+		}
 
 		// Assert
-		expected := args.Map{"v1": "computed", "v2": "computed"}
+		expected := args.Map{
+			"v1": "computed",
+			"v2": "computed",
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns correct value -- GetOnceFunc", actual)
 	})
 }
@@ -887,10 +948,20 @@ func Test_Cov17_SimpleStringOnce_WithinRange(t *testing.T) {
 		_, _ = s.Uint32()
 
 		// Act
-		actual := args.Map{"v": v, "ok": ok, "v2": v2, "ok2": ok2}
+		actual := args.Map{
+			"v": v,
+			"ok": ok,
+			"v2": v2,
+			"ok2": ok2,
+		}
 
 		// Assert
-		expected := args.Map{"v": 50, "ok": true, "v2": 50, "ok2": true}
+		expected := args.Map{
+			"v": 50,
+			"ok": true,
+			"v2": 50,
+			"ok2": true,
+		}
 		expected.ShouldBeEqual(t, 0, "SimpleStringOnce returns non-empty -- WithinRange", actual)
 	})
 }

@@ -139,10 +139,18 @@ func Test_Cov7_MergeNew(t *testing.T) {
 	result := stringslice.MergeNew([]string{"a"}, "b", "c")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "last": result[2]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns correct value -- with args", actual)
 }
 
@@ -151,10 +159,16 @@ func Test_Cov7_MergeNew_EmptyFirst(t *testing.T) {
 	result := stringslice.MergeNew([]string{}, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "b"}
+	expected := args.Map{
+		"len": 1,
+		"first": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "MergeNew returns empty -- empty first", actual)
 }
 
@@ -191,10 +205,16 @@ func Test_Cov7_AppendLineNew(t *testing.T) {
 	result := stringslice.AppendLineNew([]string{"a"}, "b")
 
 	// Act
-	actual := args.Map{"len": len(result), "last": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"last": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "last": "b"}
+	expected := args.Map{
+		"len": 2,
+		"last": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "AppendLineNew returns correct value -- with args", actual)
 }
 
@@ -205,10 +225,18 @@ func Test_Cov7_PrependNew(t *testing.T) {
 	result := stringslice.PrependNew([]string{"c"}, "a", "b")
 
 	// Act
-	actual := args.Map{"len": len(*result), "first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"len": len(*result),
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"len": 3, "first": "a", "last": "c"}
+	expected := args.Map{
+		"len": 3,
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "PrependNew returns correct value -- with args", actual)
 }
 
@@ -245,10 +273,16 @@ func Test_Cov7_InPlaceReverse_Two(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "second": (*result)[1]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"second": (*result)[1],
+	}
 
 	// Assert
-	expected := args.Map{"first": "b", "second": "a"}
+	expected := args.Map{
+		"first": "b",
+		"second": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse returns correct value -- two", actual)
 }
 
@@ -258,10 +292,16 @@ func Test_Cov7_InPlaceReverse_Three(t *testing.T) {
 	result := stringslice.InPlaceReverse(&s)
 
 	// Act
-	actual := args.Map{"first": (*result)[0], "last": (*result)[2]}
+	actual := args.Map{
+		"first": (*result)[0],
+		"last": (*result)[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "c", "last": "a"}
+	expected := args.Map{
+		"first": "c",
+		"last": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "InPlaceReverse returns correct value -- three", actual)
 }
 
@@ -272,10 +312,16 @@ func Test_Cov7_SortIf_True(t *testing.T) {
 	result := stringslice.SortIf(true, []string{"c", "a", "b"})
 
 	// Act
-	actual := args.Map{"first": result[0], "last": result[2]}
+	actual := args.Map{
+		"first": result[0],
+		"last": result[2],
+	}
 
 	// Assert
-	expected := args.Map{"first": "a", "last": "c"}
+	expected := args.Map{
+		"first": "a",
+		"last": "c",
+	}
 	expected.ShouldBeEqual(t, 0, "SortIf returns non-empty -- true", actual)
 }
 
@@ -310,10 +356,18 @@ func Test_Cov7_NonEmptySlice_Mixed(t *testing.T) {
 	result := stringslice.NonEmptySlice([]string{"a", "", "b"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0], "second": result[1]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+		"second": result[1],
+	}
 
 	// Assert
-	expected := args.Map{"len": 2, "first": "a", "second": "b"}
+	expected := args.Map{
+		"len": 2,
+		"first": "a",
+		"second": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "NonEmptySlice returns empty -- mixed", actual)
 }
 
@@ -388,10 +442,16 @@ func Test_Cov7_CloneIf_Clone(t *testing.T) {
 	result := stringslice.CloneIf(true, 0, []string{"a"})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "a"}
+	expected := args.Map{
+		"len": 1,
+		"first": "a",
+	}
 	expected.ShouldBeEqual(t, 0, "CloneIf returns correct value -- clone", actual)
 }
 

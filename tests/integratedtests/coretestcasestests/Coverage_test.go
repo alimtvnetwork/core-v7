@@ -79,10 +79,20 @@ func Test_Cov_GenericGherkins_GetExtraAsString(t *testing.T) {
 	nilVal, nilOk := gNil.GetExtraAsString("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok, "nilVal": nilVal, "nilOk": nilOk}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+		"nilVal": nilVal,
+		"nilOk": nilOk,
+	}
 
 	// Assert
-	expected := args.Map{"val": "v", "ok": true, "nilVal": "", "nilOk": false}
+	expected := args.Map{
+		"val": "v",
+		"ok": true,
+		"nilVal": "",
+		"nilOk": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsString returns correct value -- with args", actual)
 }
 
@@ -94,10 +104,20 @@ func Test_Cov_GenericGherkins_GetExtraAsBool(t *testing.T) {
 	nilVal, nilOk := gNil.GetExtraAsBool("k")
 
 	// Act
-	actual := args.Map{"val": val, "ok": ok, "nilVal": nilVal, "nilOk": nilOk}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+		"nilVal": nilVal,
+		"nilOk": nilOk,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "ok": true, "nilVal": false, "nilOk": false}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+		"nilVal": false,
+		"nilOk": false,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsBool returns correct value -- with args", actual)
 }
 
@@ -109,10 +129,16 @@ func Test_Cov_GenericGherkins_GetExtraAsBoolDefault(t *testing.T) {
 	nilVal := gNil.GetExtraAsBoolDefault("k", true)
 
 	// Act
-	actual := args.Map{"val": val, "nilVal": nilVal}
+	actual := args.Map{
+		"val": val,
+		"nilVal": nilVal,
+	}
 
 	// Assert
-	expected := args.Map{"val": true, "nilVal": true}
+	expected := args.Map{
+		"val": true,
+		"nilVal": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetExtraAsBoolDefault returns correct value -- with args", actual)
 }
 

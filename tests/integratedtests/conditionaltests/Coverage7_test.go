@@ -214,7 +214,10 @@ func Test_Cov7_Generic_If(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": 1, "false": 2}
+	expected := args.Map{
+		"true": 1,
+		"false": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- If", actual)
 }
 
@@ -226,7 +229,10 @@ func Test_Cov7_Generic_IfFunc(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": "a", "false": "b"}
+	expected := args.Map{
+		"true": "a",
+		"false": "b",
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfFunc", actual)
 }
 
@@ -238,7 +244,10 @@ func Test_Cov7_Generic_IfTrueFunc(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": 42, "false": 0}
+	expected := args.Map{
+		"true": 42,
+		"false": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns non-empty -- IfTrueFunc", actual)
 }
 
@@ -254,7 +263,10 @@ func Test_Cov7_Generic_IfSlice(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"trueLen": 2, "falseLen": 2}
+	expected := args.Map{
+		"trueLen": 2,
+		"falseLen": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfSlice", actual)
 }
 
@@ -269,7 +281,10 @@ func Test_Cov7_Generic_NilDef(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": 99, "nonNil": 42}
+	expected := args.Map{
+		"nil": 99,
+		"nonNil": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilDef", actual)
 }
 
@@ -280,10 +295,16 @@ func Test_Cov7_Generic_NilDefPtr(t *testing.T) {
 	result2 := conditional.NilDefPtr[int](&v, 99)
 
 	// Act
-	actual := args.Map{"nilVal": *result, "nonNilVal": *result2}
+	actual := args.Map{
+		"nilVal": *result,
+		"nonNilVal": *result2,
+	}
 
 	// Assert
-	expected := args.Map{"nilVal": 99, "nonNilVal": 42}
+	expected := args.Map{
+		"nilVal": 99,
+		"nonNilVal": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilDefPtr", actual)
 }
 
@@ -299,7 +320,10 @@ func Test_Cov7_Generic_IfPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"true": 1, "false": 2}
+	expected := args.Map{
+		"true": 1,
+		"false": 2,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- IfPtr", actual)
 }
 
@@ -314,7 +338,10 @@ func Test_Cov7_Generic_NilVal(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": "default", "nonNil": "has"}
+	expected := args.Map{
+		"nil": "default",
+		"nonNil": "has",
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilVal", actual)
 }
 
@@ -325,10 +352,16 @@ func Test_Cov7_Generic_NilValPtr(t *testing.T) {
 	r2 := conditional.NilValPtr[string](&v, "d", "h")
 
 	// Act
-	actual := args.Map{"nil": *r1, "nonNil": *r2}
+	actual := args.Map{
+		"nil": *r1,
+		"nonNil": *r2,
+	}
 
 	// Assert
-	expected := args.Map{"nil": "d", "nonNil": "h"}
+	expected := args.Map{
+		"nil": "d",
+		"nonNil": "h",
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns nil -- NilValPtr", actual)
 }
 
@@ -343,7 +376,10 @@ func Test_Cov7_Generic_ValueOrZero(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"nil": 0, "nonNil": 42}
+	expected := args.Map{
+		"nil": 0,
+		"nonNil": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- ValueOrZero", actual)
 }
 
@@ -354,9 +390,15 @@ func Test_Cov7_Generic_PtrOrZero(t *testing.T) {
 	r2 := conditional.PtrOrZero[int](&v)
 
 	// Act
-	actual := args.Map{"nilVal": *r1, "nonNilVal": *r2}
+	actual := args.Map{
+		"nilVal": *r1,
+		"nonNilVal": *r2,
+	}
 
 	// Assert
-	expected := args.Map{"nilVal": 0, "nonNilVal": 42}
+	expected := args.Map{
+		"nilVal": 0,
+		"nonNilVal": 42,
+	}
 	expected.ShouldBeEqual(t, 0, "Generic returns correct value -- PtrOrZero", actual)
 }

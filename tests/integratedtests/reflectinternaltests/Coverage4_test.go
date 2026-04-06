@@ -33,10 +33,16 @@ func Test_Cov4_Utils_AppendArgs_Empty(t *testing.T) {
 	result := reflectinternal.Utils.AppendArgs("first", []any{})
 
 	// Act
-	actual := args.Map{"len": len(result), "first": result[0]}
+	actual := args.Map{
+		"len": len(result),
+		"first": result[0],
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "first": "first"}
+	expected := args.Map{
+		"len": 1,
+		"first": "first",
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns empty -- AppendArgs empty", actual)
 }
 
@@ -83,10 +89,16 @@ func Test_Cov4_Utils_IsReflectTypeMatch_InterfaceType(t *testing.T) {
 	ok, err := reflectinternal.Utils.IsReflectTypeMatch(ifaceType, strType)
 
 	// Act
-	actual := args.Map{"ok": ok, "noErr": err == nil}
+	actual := args.Map{
+		"ok": ok,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "noErr": true}
+	expected := args.Map{
+		"ok": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- IsReflectTypeMatch interface", actual)
 }
 
@@ -121,10 +133,16 @@ func Test_Cov4_Utils_VerifyReflectTypesAny_LenMismatch(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- VerifyReflectTypesAny len mismatch", actual)
 }
 
@@ -136,10 +154,16 @@ func Test_Cov4_Utils_VerifyReflectTypesAny_Match(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "noErr": err == nil}
+	actual := args.Map{
+		"ok": ok,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "noErr": true}
+	expected := args.Map{
+		"ok": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- VerifyReflectTypesAny match", actual)
 }
 
@@ -151,10 +175,16 @@ func Test_Cov4_Utils_VerifyReflectTypesAny_Mismatch(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- VerifyReflectTypesAny mismatch", actual)
 }
 
@@ -169,10 +199,16 @@ func Test_Cov4_Utils_VerifyReflectTypes_LenMismatch(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "hasErr": err != nil}
+	actual := args.Map{
+		"ok": ok,
+		"hasErr": err != nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": false, "hasErr": true}
+	expected := args.Map{
+		"ok": false,
+		"hasErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- VerifyReflectTypes len mismatch", actual)
 }
 
@@ -185,10 +221,16 @@ func Test_Cov4_Utils_VerifyReflectTypes_Match(t *testing.T) {
 	)
 
 	// Act
-	actual := args.Map{"ok": ok, "noErr": err == nil}
+	actual := args.Map{
+		"ok": ok,
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"ok": true, "noErr": true}
+	expected := args.Map{
+		"ok": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Utils returns correct value -- VerifyReflectTypes match", actual)
 }
 

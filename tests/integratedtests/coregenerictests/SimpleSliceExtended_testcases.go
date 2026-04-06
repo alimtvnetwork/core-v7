@@ -8,12 +8,18 @@ import (
 var simpleSliceAddIfTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "AddIf true adds item",
-		ArrangeInput:  args.Map{"isAdd": true, "item": "x"},
+		ArrangeInput:  args.Map{
+			"isAdd": true,
+			"item": "x",
+		},
 		ExpectedInput: args.Map{"length": 1},
 	},
 	{
 		Title:         "AddIf false skips item",
-		ArrangeInput:  args.Map{"isAdd": false, "item": "x"},
+		ArrangeInput:  args.Map{
+			"isAdd": false,
+			"item": "x",
+		},
 		ExpectedInput: args.Map{"length": 0},
 	},
 }
@@ -79,19 +85,31 @@ var simpleSliceAddFuncTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "AddFunc adds result of function",
 		ArrangeInput:  args.Map{},
-		ExpectedInput: args.Map{"length": 1, "first": "gen"},
+		ExpectedInput: args.Map{
+			"length": 1,
+			"first": "gen",
+		},
 	},
 }
 
 var simpleSliceInsertAtTestCases = []coretestcases.CaseV1{
 	{
 		Title:         "InsertAt valid index",
-		ArrangeInput:  args.Map{"index": 1, "item": "inserted"},
-		ExpectedInput: args.Map{"length": 4, "atIndex": "inserted"},
+		ArrangeInput:  args.Map{
+			"index": 1,
+			"item": "inserted",
+		},
+		ExpectedInput: args.Map{
+			"length": 4,
+			"atIndex": "inserted",
+		},
 	},
 	{
 		Title:         "InsertAt negative index -- no change",
-		ArrangeInput:  args.Map{"index": -1, "item": "x"},
+		ArrangeInput:  args.Map{
+			"index": -1,
+			"item": "x",
+		},
 		ExpectedInput: args.Map{"length": 3},
 	},
 }

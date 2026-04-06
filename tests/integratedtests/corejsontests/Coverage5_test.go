@@ -18,10 +18,16 @@ func Test_Cov5_Result_Map(t *testing.T) {
 	m := r.Map()
 
 	// Act
-	actual := args.Map{"hasBytes": m["Bytes"] != "", "hasType": m["Type"] != ""}
+	actual := args.Map{
+		"hasBytes": m["Bytes"] != "",
+		"hasType": m["Type"] != "",
+	}
 
 	// Assert
-	expected := args.Map{"hasBytes": true, "hasType": true}
+	expected := args.Map{
+		"hasBytes": true,
+		"hasType": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Map", actual)
 }
 
@@ -70,10 +76,16 @@ func Test_Cov5_Result_Length(t *testing.T) {
 	var nilR *corejson.Result
 
 	// Act
-	actual := args.Map{"len": r.Length(), "nilLen": nilR.Length()}
+	actual := args.Map{
+		"len": r.Length(),
+		"nilLen": nilR.Length(),
+	}
 
 	// Assert
-	expected := args.Map{"len": r.Length(), "nilLen": 0}
+	expected := args.Map{
+		"len": r.Length(),
+		"nilLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Length", actual)
 }
 
@@ -83,10 +95,16 @@ func Test_Cov5_Result_ErrorString(t *testing.T) {
 	rOk := corejson.NewPtr("ok")
 
 	// Act
-	actual := args.Map{"errStr": r.ErrorString() != "", "okStr": rOk.ErrorString()}
+	actual := args.Map{
+		"errStr": r.ErrorString() != "",
+		"okStr": rOk.ErrorString(),
+	}
 
 	// Assert
-	expected := args.Map{"errStr": true, "okStr": ""}
+	expected := args.Map{
+		"errStr": true,
+		"okStr": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- ErrorString", actual)
 }
 
@@ -104,7 +122,12 @@ func Test_Cov5_Result_IsErrorEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false, "nilBoth": true, "nilOne": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+		"nilBoth": true,
+		"nilOne": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- IsErrorEqual", actual)
 }
 
@@ -129,10 +152,16 @@ func Test_Cov5_Result_SafeNonIssueBytes(t *testing.T) {
 	bErr := rErr.SafeNonIssueBytes()
 
 	// Act
-	actual := args.Map{"len": len(b) > 0, "errLen": len(bErr)}
+	actual := args.Map{
+		"len": len(b) > 0,
+		"errLen": len(bErr),
+	}
 
 	// Assert
-	expected := args.Map{"len": true, "errLen": 0}
+	expected := args.Map{
+		"len": true,
+		"errLen": 0,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- SafeNonIssueBytes", actual)
 }
 
@@ -147,7 +176,10 @@ func Test_Cov5_Result_Values(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"valuesLen": true, "safeLen": true}
+	expected := args.Map{
+		"valuesLen": true,
+		"safeLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns non-empty -- Values", actual)
 }
 
@@ -164,7 +196,12 @@ func Test_Cov5_Result_Raw(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bLen": true, "noErr": true, "rsLen": true, "rsNoErr": true}
+	expected := args.Map{
+		"bLen": true,
+		"noErr": true,
+		"rsLen": true,
+		"rsNoErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Raw", actual)
 }
 
@@ -187,10 +224,16 @@ func Test_Cov5_Result_RawPrettyString(t *testing.T) {
 	s, err := r.RawPrettyString()
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- RawPrettyString", actual)
 }
 
@@ -200,10 +243,16 @@ func Test_Cov5_Result_RawErrString(t *testing.T) {
 	b, errMsg := r.RawErrString()
 
 	// Act
-	actual := args.Map{"bLen": len(b) > 0, "errMsg": errMsg}
+	actual := args.Map{
+		"bLen": len(b) > 0,
+		"errMsg": errMsg,
+	}
 
 	// Assert
-	expected := args.Map{"bLen": true, "errMsg": ""}
+	expected := args.Map{
+		"bLen": true,
+		"errMsg": "",
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- RawErrString", actual)
 }
 
@@ -244,7 +293,11 @@ func Test_Cov5_Result_PrettyJsonStringOrErrString(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"pretty": true, "errStr": true, "nilStr": true}
+	expected := args.Map{
+		"pretty": true,
+		"errStr": true,
+		"nilStr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- PrettyJsonStringOrErrString", actual)
 }
 
@@ -317,7 +370,10 @@ func Test_Cov5_Result_CloneError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"hasCloneErr": true, "noCloneErr": true}
+	expected := args.Map{
+		"hasCloneErr": true,
+		"noCloneErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- CloneError", actual)
 }
 
@@ -338,7 +394,12 @@ func Test_Cov5_Result_PtrNonPtr(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"npLen": true, "pNN": true, "tpNN": true, "tnpLen": true}
+	expected := args.Map{
+		"npLen": true,
+		"pNN": true,
+		"tpNN": true,
+		"tnpLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Ptr/NonPtr", actual)
 }
 
@@ -368,7 +429,10 @@ func Test_Cov5_Result_IsEqual(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"equal": true, "notEqual": false}
+	expected := args.Map{
+		"equal": true,
+		"notEqual": false,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- IsEqual", actual)
 }
 
@@ -412,7 +476,12 @@ func Test_Cov5_Result_Serialize(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bLen": true, "noErr": true, "nilErr": true, "errErr": true}
+	expected := args.Map{
+		"bLen": true,
+		"noErr": true,
+		"nilErr": true,
+		"errErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Serialize", actual)
 }
 
@@ -432,7 +501,11 @@ func Test_Cov5_Result_JsonModel(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"jmLen": true, "jmaNN": true, "nilJMErr": true}
+	expected := args.Map{
+		"jmLen": true,
+		"jmaNN": true,
+		"nilJMErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- JsonModel", actual)
 }
 
@@ -450,7 +523,11 @@ func Test_Cov5_Result_BytesError(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"beNN": true, "bLen": true, "nilBE": true}
+	expected := args.Map{
+		"beNN": true,
+		"bLen": true,
+		"nilBE": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- BytesError", actual)
 }
 
@@ -462,10 +539,16 @@ func Test_Cov5_Result_Dispose(t *testing.T) {
 	nilR.Dispose() // should not panic
 
 	// Act
-	actual := args.Map{"bytes": r.Bytes == nil, "err": r.Error == nil}
+	actual := args.Map{
+		"bytes": r.Bytes == nil,
+		"err": r.Error == nil,
+	}
 
 	// Assert
-	expected := args.Map{"bytes": true, "err": true}
+	expected := args.Map{
+		"bytes": true,
+		"err": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns correct value -- Dispose", actual)
 }
 
@@ -485,7 +568,12 @@ func Test_Cov5_Result_CombineErrorWithRef(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"sLen": true, "eNN": true, "okEmpty": "", "okNilErr": true}
+	expected := args.Map{
+		"sLen": true,
+		"eNN": true,
+		"okEmpty": "",
+		"okNilErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Result returns error -- CombineErrorWithRef", actual)
 }
 
@@ -527,10 +615,16 @@ func Test_Cov5_Serialize_UsingAny(t *testing.T) {
 	rp := corejson.Serialize.UsingAnyPtr("hello")
 
 	// Act
-	actual := args.Map{"rHas": r.HasBytes(), "rpHas": rp.HasBytes()}
+	actual := args.Map{
+		"rHas": r.HasBytes(),
+		"rpHas": rp.HasBytes(),
+	}
 
 	// Assert
-	expected := args.Map{"rHas": true, "rpHas": true}
+	expected := args.Map{
+		"rHas": true,
+		"rpHas": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- UsingAny", actual)
 }
 
@@ -559,7 +653,12 @@ func Test_Cov5_Serialize_ToBytes(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"bLen": true, "noErr": true, "swallowLen": true, "safeLen": true}
+	expected := args.Map{
+		"bLen": true,
+		"noErr": true,
+		"swallowLen": true,
+		"safeLen": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns correct value -- ToBytes", actual)
 }
 
@@ -568,10 +667,16 @@ func Test_Cov5_Serialize_ToStringErr(t *testing.T) {
 	s, err := corejson.Serialize.ToStringErr("hello")
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns error -- ToStringErr", actual)
 }
 
@@ -580,10 +685,16 @@ func Test_Cov5_Serialize_ToPrettyStringErr(t *testing.T) {
 	s, err := corejson.Serialize.ToPrettyStringErr(map[string]string{"a": "1"})
 
 	// Act
-	actual := args.Map{"notEmpty": s != "", "noErr": err == nil}
+	actual := args.Map{
+		"notEmpty": s != "",
+		"noErr": err == nil,
+	}
 
 	// Assert
-	expected := args.Map{"notEmpty": true, "noErr": true}
+	expected := args.Map{
+		"notEmpty": true,
+		"noErr": true,
+	}
 	expected.ShouldBeEqual(t, 0, "Serialize returns error -- ToPrettyStringErr", actual)
 }
 
@@ -651,7 +762,10 @@ func Test_Cov5_ResultsCollection_Empty(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"firstNil": true, "lastNil": true}
+	expected := args.Map{
+		"firstNil": true,
+		"lastNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "ResultsCollection returns empty -- empty", actual)
 }
 
@@ -707,10 +821,16 @@ func Test_Cov5_MapResults_AllErrors(t *testing.T) {
 	errs, hasAny := mr.AllErrors()
 
 	// Act
-	actual := args.Map{"len": len(errs), "hasAny": hasAny}
+	actual := args.Map{
+		"len": len(errs),
+		"hasAny": hasAny,
+	}
 
 	// Assert
-	expected := args.Map{"len": 1, "hasAny": true}
+	expected := args.Map{
+		"len": 1,
+		"hasAny": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MapResults returns error -- AllErrors", actual)
 }
 

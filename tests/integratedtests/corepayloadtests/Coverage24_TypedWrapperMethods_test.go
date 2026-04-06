@@ -121,8 +121,14 @@ func Test_Cov24_TypedPayloadWrapper_GetAsString(t *testing.T) {
 	val, ok := tw.GetAsString()
 
 	// Assert
-	actual := args.Map{"val": val, "ok": ok}
-	expected := args.Map{"val": "hello", "ok": true}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
+	expected := args.Map{
+		"val": "hello",
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsString returns value -- string type", actual)
 }
 
@@ -134,8 +140,14 @@ func Test_Cov24_TypedPayloadWrapper_GetAsInt(t *testing.T) {
 	val, ok := tw.GetAsInt()
 
 	// Assert
-	actual := args.Map{"val": val, "ok": ok}
-	expected := args.Map{"val": 42, "ok": true}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
+	expected := args.Map{
+		"val": 42,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsInt returns value -- int type", actual)
 }
 
@@ -147,8 +159,14 @@ func Test_Cov24_TypedPayloadWrapper_GetAsBool(t *testing.T) {
 	val, ok := tw.GetAsBool()
 
 	// Assert
-	actual := args.Map{"val": val, "ok": ok}
-	expected := args.Map{"val": true, "ok": true}
+	actual := args.Map{
+		"val": val,
+		"ok": ok,
+	}
+	expected := args.Map{
+		"val": true,
+		"ok": true,
+	}
 	expected.ShouldBeEqual(t, 0, "GetAsBool returns value -- bool type", actual)
 }
 

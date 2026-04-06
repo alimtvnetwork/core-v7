@@ -82,8 +82,14 @@ func Test_Cov3_Request_MinMaxAny(t *testing.T) {
 	min, max := reqtype.Create.MinMaxAny()
 
 	// Assert
-	actual := args.Map{"minNotNil": min != nil, "maxNotNil": max != nil}
-	expected := args.Map{"minNotNil": true, "maxNotNil": true}
+	actual := args.Map{
+		"minNotNil": min != nil,
+		"maxNotNil": max != nil,
+	}
+	expected := args.Map{
+		"minNotNil": true,
+		"maxNotNil": true,
+	}
 	expected.ShouldBeEqual(t, 0, "MinMaxAny returns correct value -- with args", actual)
 }
 
@@ -95,7 +101,10 @@ func Test_Cov3_Request_IsInBetween(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"inBetween": true, "outOfRange": false}
+	expected := args.Map{
+		"inBetween": true,
+		"outOfRange": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsInBetween returns correct value -- with args", actual)
 }
 
@@ -123,8 +132,14 @@ func Test_Cov3_Request_GetStatusAnyOf_Match(t *testing.T) {
 	status := reqtype.Create.GetStatusAnyOf(reqtype.Read, reqtype.Create)
 
 	// Assert
-	actual := args.Map{"isSuccess": status.IsSuccess, "indexMatch": status.IndexMatch}
-	expected := args.Map{"isSuccess": true, "indexMatch": 1}
+	actual := args.Map{
+		"isSuccess": status.IsSuccess,
+		"indexMatch": status.IndexMatch,
+	}
+	expected := args.Map{
+		"isSuccess": true,
+		"indexMatch": 1,
+	}
 	expected.ShouldBeEqual(t, 0, "GetStatusAnyOf returns correct value -- match", actual)
 }
 
@@ -270,7 +285,10 @@ func Test_Cov3_Request_IsNotAnyOfReqs_Match(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"notAny": true, "match": false}
+	expected := args.Map{
+		"notAny": true,
+		"match": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsNotAnyOfReqs returns correct value -- match", actual)
 }
 
@@ -282,7 +300,10 @@ func Test_Cov3_Request_IsAnyOfReqs_Match(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyOfReqs returns correct value -- match", actual)
 }
 
@@ -294,7 +315,10 @@ func Test_Cov3_Request_IsAnyNamesOf(t *testing.T) {
 	}
 
 	// Assert
-	expected := args.Map{"match": true, "noMatch": false}
+	expected := args.Map{
+		"match": true,
+		"noMatch": false,
+	}
 	expected.ShouldBeEqual(t, 0, "IsAnyNamesOf returns correct value -- with args", actual)
 }
 

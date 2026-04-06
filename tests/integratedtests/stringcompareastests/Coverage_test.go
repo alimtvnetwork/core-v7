@@ -20,7 +20,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": false,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": true, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": true,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage positive mismatch -- case sensitive",
@@ -28,7 +31,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": false,
 			"content": "hello", "search": "world",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage positive mismatch -- case ignored",
@@ -36,7 +42,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.Equal, "ignoreCase": true,
 			"content": "Hello", "search": "world",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": false},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": false,
+		},
 	},
 	{
 		Title: "VerifyMessage negative mismatch -- case sensitive",
@@ -44,7 +53,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.NotEqual, "ignoreCase": false,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": true},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": true,
+		},
 	},
 	{
 		Title: "VerifyMessage negative mismatch -- case ignored",
@@ -52,7 +64,10 @@ var covVerifyMessageTestCases = []coretestcases.CaseV1{
 			"variant": stringcompareas.NotEqual, "ignoreCase": true,
 			"content": "hello", "search": "hello",
 		},
-		ExpectedInput: args.Map{"isEmpty": false, "isNegativeMsg": true},
+		ExpectedInput: args.Map{
+			"isEmpty": false,
+			"isNegativeMsg": true,
+		},
 	},
 }
 
