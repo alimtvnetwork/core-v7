@@ -142,7 +142,9 @@ func Test_InvalidPattern_ConcurrentAccess(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -178,7 +180,9 @@ func Test_InvalidPattern_ConcurrentCompileError(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
 
@@ -213,6 +217,8 @@ func Test_MixedValidInvalid_ConcurrentAccess(t *testing.T) {
 	close(errors)
 
 	for errMsg := range errors {
-		t.Error(errMsg)
+		actual := args.Map{"error": errMsg}
+		expected := args.Map{"error": ""}
+		expected.ShouldBeEqual(t, 0, "concurrent operation should not error", actual)
 	}
 }
