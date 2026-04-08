@@ -57,13 +57,13 @@
 - **createdAt**: 2026-04-06
 - **source**: Lovable (AAA audit)
 - **affectedProject**: core
-- **description**: 33,150 non-compliant assertion calls across 393 files in 53 test packages. Tests should use `args.Map` + `ShouldBeEqual` pattern per project standard.
+- **description**: ~~33,150~~ → **1,214** non-compliant assertion calls remaining across 34 files in 12 source packages. 96.3% complete (31,936 resolved). All `integratedtests/` packages are fully compliant.
 - **rationale**: Consistent assertion format enables better diagnostics, machine-parseable output, and snapshot testing.
-- **proposed change**: Migrate packages batch-by-batch, prioritizing high-violation packages. Full audit in `.lovable/memory/workflow/07-aaa-compliance-audit.md`.
+- **proposed change**: Migrate remaining 12 in-package test files (all use unexported symbols). Detailed breakdown in `.lovable/pending-issues/03-aaa-compliance-migration.md`.
 - **acceptance criteria**: All test packages use `args.Map` + `ShouldBeEqual`. `./run.ps1 TC` passes.
-- **status**: open
+- **status**: open (96.3% complete — residual in-package tests)
 - **dependencies**: None
-- **completion notes**: Audit report generated (733 lines). Migration not started.
+- **completion notes**: Re-audited 2026-04-08. Bulk migration complete. 1,214 violations remain in 12 source packages that access unexported symbols.
 
 ### S-017: PR Template
 - **suggestionId**: S-017
