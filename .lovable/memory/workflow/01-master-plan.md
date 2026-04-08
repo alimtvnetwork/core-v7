@@ -1,6 +1,6 @@
 # Master Project Plan
 
-## Last Updated: 2026-04-08 (Session 2)
+## Last Updated: 2026-04-08 (Session 3)
 
 ---
 
@@ -34,11 +34,13 @@
 - ✅ Release-assets folder cleanup (deleted, user to add to .gitignore)
 - ✅ CI workflow full verification (pipeline structure, test parallelism, PR comment logic confirmed correct)
 
-### Phase 3: Performance & Code Quality (2026-04-06)
+### Phase 3: Performance & Code Quality (2026-04-06 — 2026-04-08)
 - ✅ Performance benchmarks (S-010: 38 benchmarks across 6 packages)
 - ✅ Pointer receiver audit (S-012: 46 methods migrated)
 - ✅ 100% reachable coverage for all 21 non-internal packages (S-014)
 - ✅ PowerShell refactor plan complete (15/15 tasks)
+- ✅ AAA compliance migration (S-016: 96.3% complete, 1,214 intentional exceptions documented)
+- ✅ CI notification policy: no external notifications (email/Slack/Discord/webhooks) — PR comments only
 
 ---
 
@@ -60,10 +62,9 @@
 - `.release` folder must never be modified
 - **Priority**: Ongoing
 
-### S-016: AAA Compliance Migration (Open)
-- 33,150 non-compliant assertions across 393 files
-- Full audit in `.lovable/memory/workflow/07-aaa-compliance-audit.md`
-- **Priority**: Low (large effort, no functional impact)
+### ~~S-016: AAA Compliance Migration~~ (Closed — Complete)
+- 96.3% migrated (31,936 of 33,150). Remaining 1,214 are intentional in-package exceptions.
+- Full audit in `.lovable/memory/workflow/04-aaa-compliance-audit.md`
 
 ### S-017: PR Template (Open)
 - Create `.github/PULL_REQUEST_TEMPLATE.md`
