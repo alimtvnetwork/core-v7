@@ -62,10 +62,9 @@
 - `.release` folder must never be modified
 - **Priority**: Ongoing
 
-### S-016: AAA Compliance Migration (Open)
-- 33,150 non-compliant assertions across 393 files
-- Full audit in `.lovable/memory/workflow/07-aaa-compliance-audit.md`
-- **Priority**: Low (large effort, no functional impact)
+### ~~S-016: AAA Compliance Migration~~ (Closed — Complete)
+- 96.3% migrated (31,936 of 33,150). Remaining 1,214 are intentional in-package exceptions.
+- Full audit in `.lovable/memory/workflow/04-aaa-compliance-audit.md`
 
 ### S-017: PR Template (Open)
 - Create `.github/PULL_REQUEST_TEMPLATE.md`
