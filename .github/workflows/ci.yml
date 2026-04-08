@@ -2,9 +2,7 @@ name: CI
 
 on:
   push:
-    branches: ["**"]
   pull_request:
-    branches: ["**"]
     types: [opened, synchronize, reopened]
 
 permissions:
@@ -12,25 +10,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  # ─── SHA dedup: skip if this exact commit already passed ───
-  check-sha:
-    name: Check SHA Cache
-    runs-on: ubuntu-latest
-    outputs:
-      cache-hit: ${{ steps.sha-cache.outputs.cache-hit }}
-    steps:
-      - name: Check if SHA already passed
-        id: sha-cache
-        uses: actions/cache@v4
-        with:
-          path: .ci-passed
-          key: ci-passed-${{ github.sha }}
-          lookup-only: true
-
   lint:
     name: Lint
-    needs: check-sha
-    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -47,8 +28,6 @@ jobs:
 
   vet:
     name: Vet
-    needs: check-sha
-    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,8 +41,6 @@ jobs:
 
   test:
     name: Test & Coverage
-    needs: check-sha
-    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -73,64 +50,71 @@ jobs:
           go-version: "1.25"
 
       - name: Run tests with coverage (parallel, verbose)
+        id: run-tests
+        continue-on-error: true
+        shell: bash
         run: |
           set +e
           go test -v -race -count=1 -parallel=4 -coverprofile=coverage.out -covermode=atomic ./... 2>&1 | tee test-output.txt
           TEST_EXIT=${PIPESTATUS[0]}
-          echo "TEST_EXIT_CODE=${TEST_EXIT}" >> "$GITHUB_ENV"
-
-          echo ""
-          echo "═══════════════════════════════════════════════════════"
-          echo "  TEST SUMMARY"
-          echo "═══════════════════════════════════════════════════════"
-
-          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt || true)
-          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt || true)
-
-          if [ -n "$FAILURES" ]; then
-            echo ""
-            echo "❌ FAILING TESTS:"
-            echo "$FAILURES"
-            echo ""
-            echo "❌ FAILING PACKAGES:"
-            echo "$FAIL_PKGS"
-            echo ""
-
-            echo "$FAILURES" | while IFS= read -r line; do
-              TEST_NAME=$(echo "$line" | sed 's/.*--- FAIL: //' | sed 's/ (.*//')
-              echo "::error::Test failed: ${TEST_NAME}"
-            done
-          else
-            echo ""
-            echo "✅ All tests passed"
-          fi
-
-          PASS_COUNT=$(grep -c '^\s*--- PASS:' test-output.txt || echo "0")
-          FAIL_COUNT=$(grep -c '^\s*--- FAIL:' test-output.txt || echo "0")
-          SKIP_COUNT=$(grep -c '^\s*--- SKIP:' test-output.txt || echo "0")
-          echo ""
-          echo "  Passed: ${PASS_COUNT}  |  Failed: ${FAIL_COUNT}  |  Skipped: ${SKIP_COUNT}"
-          echo "═══════════════════════════════════════════════════════"
-
-          exit $TEST_EXIT
+          echo "exit_code=${TEST_EXIT}" >> "$GITHUB_OUTPUT"
+          exit "$TEST_EXIT"
 
       - name: Generate test summary
         if: always()
+        shell: bash
         run: |
-          PASS_COUNT=$(grep -c '^\s*--- PASS:' test-output.txt 2>/dev/null || echo "0")
-          FAIL_COUNT=$(grep -c '^\s*--- FAIL:' test-output.txt 2>/dev/null || echo "0")
-          SKIP_COUNT=$(grep -c '^\s*--- SKIP:' test-output.txt 2>/dev/null || echo "0")
+          PASS_COUNT=$(grep -c -E '^\s*--- PASS:' test-output.txt 2>/dev/null || true)
+          FAIL_COUNT=$(grep -c -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
+          SKIP_COUNT=$(grep -c -E '^\s*--- SKIP:' test-output.txt 2>/dev/null || true)
           TOTAL_COUNT=$((PASS_COUNT + FAIL_COUNT + SKIP_COUNT))
+          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
+          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt 2>/dev/null || true)
 
           echo "TEST_PASS_COUNT=${PASS_COUNT}" >> "$GITHUB_ENV"
           echo "TEST_FAIL_COUNT=${FAIL_COUNT}" >> "$GITHUB_ENV"
           echo "TEST_SKIP_COUNT=${SKIP_COUNT}" >> "$GITHUB_ENV"
           echo "TEST_TOTAL_COUNT=${TOTAL_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_EXIT_CODE=${{ steps.run-tests.outputs.exit_code }}" >> "$GITHUB_ENV"
 
-          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
-          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt 2>/dev/null || true)
-          echo "$FAILURES" > test-failures.txt
-          echo "$FAIL_PKGS" > test-fail-pkgs.txt
+          printf "%s\n" "$FAILURES" > test-failures.txt
+          printf "%s\n" "$FAIL_PKGS" > test-fail-pkgs.txt
+
+          {
+            echo "## 🧪 Test Summary"
+            echo
+            if [ "${{ steps.run-tests.outputs.exit_code }}" = "0" ]; then
+              echo "✅ **All tests passed**"
+            else
+              echo "❌ **Some tests failed**"
+            fi
+            echo
+            echo "| Passed | Failed | Skipped | Total |"
+            echo "|--------|--------|---------|-------|"
+            echo "| ${PASS_COUNT} | ${FAIL_COUNT} | ${SKIP_COUNT} | ${TOTAL_COUNT} |"
+            if [ -n "$FAILURES" ]; then
+              echo
+              echo "### ❌ Failing Tests"
+              echo '```'
+              printf "%s\n" "$FAILURES"
+              echo '```'
+            fi
+            if [ -n "$FAIL_PKGS" ]; then
+              echo
+              echo "### 📦 Failing Packages"
+              echo '```'
+              printf "%s\n" "$FAIL_PKGS"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ -n "$FAILURES" ]; then
+            while IFS= read -r line; do
+              [ -n "$line" ] || continue
+              TEST_NAME=$(echo "$line" | sed -E 's/.*--- FAIL: ([^ ]+).*/\1/')
+              echo "::error::Test failed: ${TEST_NAME}"
+            done <<< "$FAILURES"
+          fi
 
       - name: Comment test results on PR
         if: github.event_name == 'pull_request' && always()
@@ -154,7 +138,7 @@ jobs:
               if (failures) {
                 failureSection = `\n\n### ❌ Failing Tests\n\n\`\`\`\n${failures}\n\`\`\`\n\n### 📦 Failing Packages\n\n\`\`\`\n${failPkgs}\n\`\`\``;
               }
-            } catch (e) { /* no failure files */ }
+            } catch (e) {}
 
             let fullOutput = '';
             try {
@@ -165,7 +149,7 @@ jobs:
                   : output;
                 fullOutput = `\n\n<details>\n<summary>Full test output</summary>\n\n\`\`\`\n${truncated}\n\`\`\`\n</details>`;
               }
-            } catch (e) { /* no output file */ }
+            } catch (e) {}
 
             const body = [
               `## 🧪 Test Results`,
@@ -184,6 +168,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
+
             const existing = comments.find(c => c.body.includes('🧪 Test Results'));
             if (existing) {
               await github.rest.issues.updateComment({
@@ -201,21 +186,47 @@ jobs:
               });
             }
 
-      - name: Check coverage threshold
+      - name: Generate coverage report
+        if: always()
+        shell: bash
         run: |
-          TOTAL=$(go tool cover -func=coverage.out | grep ^total: | awk '{print $3}' | tr -d '%')
-          echo "Total coverage: ${TOTAL}%"
-          echo "COVERAGE_TOTAL=${TOTAL}" >> "$GITHUB_ENV"
+          if [ -f coverage.out ]; then
+            go tool cover -func=coverage.out > coverage-summary.txt
+          else
+            echo "coverage.out was not generated" > coverage-summary.txt
+          fi
+
+      - name: Check coverage threshold
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -f coverage.out ]; then
+            echo "COVERAGE_TOTAL=unavailable" >> "$GITHUB_ENV"
+            {
+              echo "## 📊 Coverage"
+              echo
+              echo "⚠️ Coverage file was not generated."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          TOTAL=$(awk '/^total:/ {gsub("%", "", $3); print $3}' coverage-summary.txt)
           THRESHOLD=60
-          if [ "$(echo "${TOTAL} < ${THRESHOLD}" | bc -l)" -eq 1 ]; then
+
+          echo "COVERAGE_TOTAL=${TOTAL}" >> "$GITHUB_ENV"
+
+          {
+            echo "## 📊 Coverage"
+            echo
+            echo "**Total coverage: ${TOTAL}%**"
+            echo
+            echo "Threshold: ${THRESHOLD}%"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if awk "BEGIN {exit !(${TOTAL} < ${THRESHOLD})}"; then
             echo "::error::Coverage ${TOTAL}% is below threshold ${THRESHOLD}%"
             exit 1
           fi
-
-      - name: Generate coverage report
-        if: always()
-        run: |
-          go tool cover -func=coverage.out > coverage-summary.txt
 
       - name: Comment coverage on PR
         if: github.event_name == 'pull_request' && always()
@@ -232,6 +243,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
+
             const existing = comments.find(c => c.body.includes('📊 Coverage Report'));
             if (existing) {
               await github.rest.issues.updateComment({
@@ -249,19 +261,24 @@ jobs:
               });
             }
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload test artifacts
         if: always()
+        uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
+          name: test-and-coverage-artifacts
           path: |
+            test-output.txt
+            test-failures.txt
+            test-fail-pkgs.txt
             coverage.out
             coverage-summary.txt
 
+      - name: Fail job if tests failed
+        if: steps.run-tests.outcome == 'failure'
+        run: exit 1
+
   security:
     name: Security Scan
-    needs: check-sha
-    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -279,8 +296,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [check-sha, lint, vet, test, security]
-    if: needs.check-sha.outputs.cache-hit != 'true'
+    needs: [lint, vet, test, security]
     steps:
       - uses: actions/checkout@v4
 
@@ -291,30 +307,11 @@ jobs:
       - name: Build
         run: go build ./...
 
-  # ─── Write SHA cache on full success ───
-  mark-sha:
-    name: Mark SHA as Passed
-    runs-on: ubuntu-latest
-    needs: [check-sha, build]
-    if: needs.check-sha.outputs.cache-hit != 'true'
-    steps:
-      - name: Write cache marker
-        run: echo "passed" > .ci-passed
-
-      - name: Save SHA cache
-        uses: actions/cache/save@v4
-        with:
-          path: .ci-passed
-          key: ci-passed-${{ github.sha }}
-
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [check-sha, lint, vet, test, security, build]
-    if: |
-      github.event_name == 'push' &&
-      startsWith(github.ref, 'refs/heads/release/') &&
-      (needs.check-sha.outputs.cache-hit == 'true' || success())
+    needs: [lint, vet, test, security, build]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
     permissions:
       contents: write
     steps:
