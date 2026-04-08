@@ -1,0 +1,350 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: latest
+          args: --timeout=5m
+
+  vet:
+    name: Vet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: go vet
+        run: go vet ./...
+
+  test:
+    name: Test & Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Run tests with coverage (parallel, verbose)
+        id: run-tests
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          go test -v -race -count=1 -parallel=4 -coverprofile=coverage.out -covermode=atomic ./... 2>&1 | tee test-output.txt
+          TEST_EXIT=${PIPESTATUS[0]}
+          echo "exit_code=${TEST_EXIT}" >> "$GITHUB_OUTPUT"
+          exit "$TEST_EXIT"
+
+      - name: Generate test summary
+        if: always()
+        shell: bash
+        run: |
+          PASS_COUNT=$(grep -c -E '^\s*--- PASS:' test-output.txt 2>/dev/null || true)
+          FAIL_COUNT=$(grep -c -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
+          SKIP_COUNT=$(grep -c -E '^\s*--- SKIP:' test-output.txt 2>/dev/null || true)
+          TOTAL_COUNT=$((PASS_COUNT + FAIL_COUNT + SKIP_COUNT))
+          FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
+          FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt 2>/dev/null || true)
+
+          echo "TEST_PASS_COUNT=${PASS_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_FAIL_COUNT=${FAIL_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_SKIP_COUNT=${SKIP_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_TOTAL_COUNT=${TOTAL_COUNT}" >> "$GITHUB_ENV"
+          echo "TEST_EXIT_CODE=${{ steps.run-tests.outputs.exit_code }}" >> "$GITHUB_ENV"
+
+          printf "%s\n" "$FAILURES" > test-failures.txt
+          printf "%s\n" "$FAIL_PKGS" > test-fail-pkgs.txt
+
+          {
+            echo "## 🧪 Test Summary"
+            echo
+            if [ "${{ steps.run-tests.outputs.exit_code }}" = "0" ]; then
+              echo "✅ **All tests passed**"
+            else
+              echo "❌ **Some tests failed**"
+            fi
+            echo
+            echo "| Passed | Failed | Skipped | Total |"
+            echo "|--------|--------|---------|-------|"
+            echo "| ${PASS_COUNT} | ${FAIL_COUNT} | ${SKIP_COUNT} | ${TOTAL_COUNT} |"
+            if [ -n "$FAILURES" ]; then
+              echo
+              echo "### ❌ Failing Tests"
+              echo '```'
+              printf "%s\n" "$FAILURES"
+              echo '```'
+            fi
+            if [ -n "$FAIL_PKGS" ]; then
+              echo
+              echo "### 📦 Failing Packages"
+              echo '```'
+              printf "%s\n" "$FAIL_PKGS"
+              echo '```'
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ -n "$FAILURES" ]; then
+            while IFS= read -r line; do
+              [ -n "$line" ] || continue
+              TEST_NAME=$(echo "$line" | sed -E 's/.*--- FAIL: ([^ ]+).*/\1/')
+              echo "::error::Test failed: ${TEST_NAME}"
+            done <<< "$FAILURES"
+          fi
+
+      - name: Comment test results on PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const passed = process.env.TEST_PASS_COUNT || '0';
+            const failed = process.env.TEST_FAIL_COUNT || '0';
+            const skipped = process.env.TEST_SKIP_COUNT || '0';
+            const total = process.env.TEST_TOTAL_COUNT || '0';
+            const exitCode = process.env.TEST_EXIT_CODE || '0';
+
+            const statusIcon = exitCode === '0' ? '✅' : '❌';
+            const statusText = exitCode === '0' ? 'All tests passed' : 'Some tests failed';
+
+            let failureSection = '';
+            try {
+              const failures = fs.readFileSync('test-failures.txt', 'utf8').trim();
+              const failPkgs = fs.readFileSync('test-fail-pkgs.txt', 'utf8').trim();
+              if (failures) {
+                failureSection = `\n\n### ❌ Failing Tests\n\n\`\`\`\n${failures}\n\`\`\`\n\n### 📦 Failing Packages\n\n\`\`\`\n${failPkgs}\n\`\`\``;
+              }
+            } catch (e) {}
+
+            let fullOutput = '';
+            try {
+              const output = fs.readFileSync('test-output.txt', 'utf8');
+              if (output.length > 0) {
+                const truncated = output.length > 50000
+                  ? output.substring(output.length - 50000)
+                  : output;
+                fullOutput = `\n\n<details>\n<summary>Full test output</summary>\n\n\`\`\`\n${truncated}\n\`\`\`\n</details>`;
+              }
+            } catch (e) {}
+
+            const body = [
+              `## 🧪 Test Results`,
+              ``,
+              `${statusIcon} **${statusText}**`,
+              ``,
+              `| Passed | Failed | Skipped | Total |`,
+              `|--------|--------|---------|-------|`,
+              `| ${passed} ✅ | ${failed} ❌ | ${skipped} ⏭️ | ${total} |`,
+              failureSection,
+              fullOutput,
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c => c.body.includes('🧪 Test Results'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Generate coverage report
+        if: always()
+        shell: bash
+        run: |
+          if [ -f coverage.out ]; then
+            go tool cover -func=coverage.out > coverage-summary.txt
+          else
+            echo "coverage.out was not generated" > coverage-summary.txt
+          fi
+
+      - name: Check coverage threshold
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -f coverage.out ]; then
+            echo "COVERAGE_TOTAL=unavailable" >> "$GITHUB_ENV"
+            {
+              echo "## 📊 Coverage"
+              echo
+              echo "⚠️ Coverage file was not generated."
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          TOTAL=$(awk '/^total:/ {gsub("%", "", $3); print $3}' coverage-summary.txt)
+          THRESHOLD=60
+
+          echo "COVERAGE_TOTAL=${TOTAL}" >> "$GITHUB_ENV"
+
+          {
+            echo "## 📊 Coverage"
+            echo
+            echo "**Total coverage: ${TOTAL}%**"
+            echo
+            echo "Threshold: ${THRESHOLD}%"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if awk "BEGIN {exit !(${TOTAL} < ${THRESHOLD})}"; then
+            echo "::error::Coverage ${TOTAL}% is below threshold ${THRESHOLD}%"
+            exit 1
+          fi
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const summary = fs.readFileSync('coverage-summary.txt', 'utf8');
+            const total = process.env.COVERAGE_TOTAL || 'unknown';
+            const body = `## 📊 Coverage Report\n\n**Total coverage: ${total}%**\n\n<details>\n<summary>Full coverage breakdown</summary>\n\n\`\`\`\n${summary}\n\`\`\`\n</details>`;
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const existing = comments.find(c => c.body.includes('📊 Coverage Report'));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-and-coverage-artifacts
+          path: |
+            test-output.txt
+            test-failures.txt
+            test-fail-pkgs.txt
+            coverage.out
+            coverage-summary.txt
+
+      - name: Fail job if tests failed
+        if: steps.run-tests.outcome == 'failure'
+        run: exit 1
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Install govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+
+      - name: Run govulncheck
+        run: govulncheck ./...
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: [lint, vet, test, security]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Build
+        run: go build ./...
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: [lint, vet, test, security, build]
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: Derive version from branch name
+        id: version
+        run: |
+          BRANCH="${GITHUB_REF#refs/heads/release/}"
+          echo "tag=${BRANCH}" >> "$GITHUB_OUTPUT"
+          echo "Releasing version: ${BRANCH}"
+
+      - name: Create Git tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          TAG="${{ steps.version.outputs.tag }}"
+          if ! git rev-parse "$TAG" >/dev/null 2>&1; then
+            git tag -a "$TAG" -m "Release $TAG"
+            git push origin "$TAG"
+          fi
+
+      - name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
