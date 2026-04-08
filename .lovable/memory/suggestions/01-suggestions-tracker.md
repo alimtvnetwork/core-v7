@@ -1,6 +1,6 @@
 # Suggestions Tracker
 
-## Last Updated: 2026-04-08
+## Last Updated: 2026-04-08 (Session 2)
 
 ## Convention
 
@@ -111,5 +111,6 @@
 | S-008a | CI: Test Summary PR Comment | 2026-04-08 | Auto-comments test results on PRs |
 | S-008b | CI: Issue Templates | 2026-04-08 | Bug report + feature request YAML forms |
 | S-008c | CI: Release-assets cleanup | 2026-04-08 | Folder deleted, user to add to .gitignore |
+| S-008d | CI: Workflow verification | 2026-04-08 | Full pipeline reviewed — test parallelism, PR comments, job gating confirmed |
 
 > Detail files for completed suggestions in `completed/` subfolder.
