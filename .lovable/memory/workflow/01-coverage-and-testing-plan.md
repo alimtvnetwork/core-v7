@@ -1,14 +1,14 @@
 # Coverage & Testing Master Plan
 
 ## Status: ✅ FULLY COMPLETE — 100% reachable coverage achieved for all 21 non-internal packages
-## Last Updated: 2026-04-06
+## Last Updated: 2026-04-08
 
 ## Critical Root Cause Checkpoint
 Coverage work has been repeatedly invalidated by assumed APIs, broad unverified coverage-file generation, and skipping the compile-first gate. Do **not** treat newly written coverage files as successful until `./run.ps1 PC` and then `./run.ps1 TC` confirm the result.
 
 See finalized postmortem memory: `.lovable/memory/workflow/completed/02-coverage-remediation-root-cause.md`
 See API hallucination root cause: `.lovable/memory/workflow/03-api-hallucination-root-cause.md`
-See issue record: `issues/repeated-coverage-remediation-failure-root-cause.md`
+See issue record: `.lovable/solved-issues/01-coverage-regression-cascade.md`
 
 ---
 
@@ -36,14 +36,6 @@ Four packages were restructured into per-method granular test files to enable pa
 ## Remaining Coverage Work
 
 None. Protocol is in maintenance mode for regression handling only.
-
----
-
-## Completed Tasks
-
-### 1–7: ✅ All batches, prompt generator, compile baseline, audit, TC run — all done.
-
-See `plan.md` for full completion history.
 
 ---
 
