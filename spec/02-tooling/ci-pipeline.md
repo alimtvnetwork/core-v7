@@ -6,10 +6,10 @@ Continuous Integration pipeline for the Go project, running automated quality ga
 
 ## Trigger Conditions
 
-- **Push** to `main`, `master`, `release/**` branches
-- **Pull requests** targeting `main`, `master`, `release/**` branches
+- **Push** to any branch
+- **Pull requests** targeting any branch
 
-> `develop` is explicitly excluded — CI only runs on production-bound branches.
+> CI runs on all branches to catch issues early.
 
 ## Pipeline Stages
 
