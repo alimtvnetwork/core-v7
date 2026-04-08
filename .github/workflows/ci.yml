@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, master, "release/**"]
+    branches: ["**"]
   pull_request:
-    branches: [main, master, "release/**"]
+    branches: ["**"]
     types: [opened, synchronize, reopened]
 
 permissions:
