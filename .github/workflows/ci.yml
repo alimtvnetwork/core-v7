@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main, master, develop, "release/**"]
+    branches: [main, master, "release/**"]
   pull_request:
-    branches: [main, master, develop, "release/**"]
+    branches: [main, master, "release/**"]
     types: [opened, synchronize, reopened]
 
 permissions:
@@ -12,8 +12,25 @@ permissions:
   pull-requests: write
 
 jobs:
+  # ─── SHA dedup: skip if this exact commit already passed ───
+  check-sha:
+    name: Check SHA Cache
+    runs-on: ubuntu-latest
+    outputs:
+      cache-hit: ${{ steps.sha-cache.outputs.cache-hit }}
+    steps:
+      - name: Check if SHA already passed
+        id: sha-cache
+        uses: actions/cache@v4
+        with:
+          path: .ci-passed
+          key: ci-passed-${{ github.sha }}
+          lookup-only: true
+
   lint:
     name: Lint
+    needs: check-sha
+    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,8 +45,25 @@ jobs:
           version: latest
           args: --timeout=5m
 
+  vet:
+    name: Vet
+    needs: check-sha
+    if: needs.check-sha.outputs.cache-hit != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+
+      - name: go vet
+        run: go vet ./...
+
   test:
     name: Test & Coverage
+    needs: check-sha
+    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,7 +84,6 @@ jobs:
           echo "  TEST SUMMARY"
           echo "═══════════════════════════════════════════════════════"
 
-          # Extract and display all failing tests
           FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt || true)
           FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt || true)
 
@@ -63,7 +96,6 @@ jobs:
             echo "$FAIL_PKGS"
             echo ""
 
-            # Annotate each failure as a GitHub Actions error
             echo "$FAILURES" | while IFS= read -r line; do
               TEST_NAME=$(echo "$line" | sed 's/.*--- FAIL: //' | sed 's/ (.*//')
               echo "::error::Test failed: ${TEST_NAME}"
@@ -95,7 +127,6 @@ jobs:
           echo "TEST_SKIP_COUNT=${SKIP_COUNT}" >> "$GITHUB_ENV"
           echo "TEST_TOTAL_COUNT=${TOTAL_COUNT}" >> "$GITHUB_ENV"
 
-          # Extract failing test details
           FAILURES=$(grep -E '^\s*--- FAIL:' test-output.txt 2>/dev/null || true)
           FAIL_PKGS=$(grep -E '^FAIL\s' test-output.txt 2>/dev/null || true)
           echo "$FAILURES" > test-failures.txt
@@ -229,6 +260,8 @@ jobs:
 
   security:
     name: Security Scan
+    needs: check-sha
+    if: needs.check-sha.outputs.cache-hit != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -246,7 +279,8 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, test, security]
+    needs: [check-sha, lint, vet, test, security]
+    if: needs.check-sha.outputs.cache-hit != 'true'
     steps:
       - uses: actions/checkout@v4
 
@@ -257,11 +291,30 @@ jobs:
       - name: Build
         run: go build ./...
 
+  # ─── Write SHA cache on full success ───
+  mark-sha:
+    name: Mark SHA as Passed
+    runs-on: ubuntu-latest
+    needs: [check-sha, build]
+    if: needs.check-sha.outputs.cache-hit != 'true'
+    steps:
+      - name: Write cache marker
+        run: echo "passed" > .ci-passed
+
+      - name: Save SHA cache
+        uses: actions/cache/save@v4
+        with:
+          path: .ci-passed
+          key: ci-passed-${{ github.sha }}
+
   release:
     name: Release
     runs-on: ubuntu-latest
-    needs: [lint, test, security, build]
-    if: github.event_name == 'push' && startsWith(github.ref, 'refs/heads/release/')
+    needs: [check-sha, lint, vet, test, security, build]
+    if: |
+      github.event_name == 'push' &&
+      startsWith(github.ref, 'refs/heads/release/') &&
+      (needs.check-sha.outputs.cache-hit == 'true' || success())
     permissions:
       contents: write
     steps:
