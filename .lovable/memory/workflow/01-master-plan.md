@@ -42,6 +42,10 @@
 - ✅ AAA compliance migration (S-016: 96.3% complete, 1,214 intentional exceptions documented)
 - ✅ CI notification policy: no external notifications (email/Slack/Discord/webhooks) — PR comments only
 
+### Phase 4: Test Quality & Templates (2026-04-08 — 2026-04-11)
+- ✅ Test Quality Overhaul (S-018: 766 files, ~25k functions, ~8k duplicates across 72 packages)
+- ✅ PR Template (S-017: `.github/PULL_REQUEST_TEMPLATE.md`)
+
 ---
 
 ## Pending Work
@@ -66,9 +70,11 @@
 - 96.3% migrated (31,936 of 33,150). Remaining 1,214 are intentional in-package exceptions.
 - Full audit in `.lovable/memory/workflow/04-aaa-compliance-audit.md`
 
-### S-017: PR Template (Open)
-- Create `.github/PULL_REQUEST_TEMPLATE.md`
-- **Priority**: Low
+### ~~S-017: PR Template~~ (Closed — Complete)
+- Created `.github/PULL_REQUEST_TEMPLATE.md`
+
+### S-018: Test Quality Overhaul (Closed — Complete)
+- 6-phase overhaul: 766 files renamed, ~25k functions, ~8k duplicates fixed
 
 ---
 

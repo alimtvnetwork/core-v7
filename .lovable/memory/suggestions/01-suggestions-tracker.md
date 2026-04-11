@@ -61,18 +61,23 @@
 - **status**: **done** (closed 2026-04-08)
 - **completion notes**: Architecturally constrained — in-package tests cannot import `coretests/args` due to linter (`check-inpkg-imports.ps1`) and coverage pipeline restrictions. Using `t.Fatal`/`t.Errorf` is the correct pattern for these files. Moved to `completed/` and `solved-issues/`.
 
-### S-017: PR Template
+### ~~S-017: PR Template~~ → **CLOSED (Complete)**
 - **suggestionId**: S-017
 - **createdAt**: 2026-04-08
 - **source**: Lovable (CI/CD improvement)
 - **affectedProject**: core
 - **description**: Add `.github/PULL_REQUEST_TEMPLATE.md` with sections for description, type of change, checklist, and linked issues.
-- **rationale**: Standardizes PR submissions and ensures reviewers have context.
-- **proposed change**: Create template file with standard sections.
-- **acceptance criteria**: Template appears when opening PRs on GitHub.
-- **status**: open
-- **dependencies**: None
-- **completion notes**: —
+- **status**: **done** (closed 2026-04-11)
+- **completion notes**: Template created with type-of-change checkboxes, compile/test/naming checklist, and linked issues section.
+
+### S-018: Test Quality Overhaul → **CLOSED (Complete)**
+- **suggestionId**: S-018
+- **createdAt**: 2026-04-08
+- **source**: User instruction
+- **affectedProject**: core
+- **description**: 6-phase overhaul to rename ~725 badly-named test files, ~39.6k badly-named functions, and strip `Coverage`/`Cov`/`I12` prefixes.
+- **status**: **done** (closed 2026-04-11)
+- **completion notes**: 766 files renamed, ~25,026 function prefixes stripped, ~8,121 duplicates disambiguated across 72 packages. Zero `Coverage*` filenames and zero `Cov_`/`I12_` prefixes remain (excluding `internal/` per policy).
 
 ---
 
