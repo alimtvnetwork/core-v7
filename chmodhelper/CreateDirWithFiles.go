@@ -26,7 +26,7 @@ func CreateDirWithFiles(
 	}
 
 	mkDirErr := os.MkdirAll(
-		dir, fileChmod,
+		dir, dirDefaultChmod,
 	)
 
 	if mkDirErr != nil {
