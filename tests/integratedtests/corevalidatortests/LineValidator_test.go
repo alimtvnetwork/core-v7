@@ -51,7 +51,7 @@ func Test_LineValidator_IsMatch_LineNumberMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_LineValidator_IsMatch_TextMismatch(t *testing.T) {
+func Test_LineValidator_IsMatch_TextMismatch_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorIsMatchTextMismatchTestCase
 	v := corevalidator.LineValidator{
@@ -93,7 +93,7 @@ func Test_LineValidator_IsMatch_SkipLineNumber(t *testing.T) {
 // LineValidator.IsMatchMany
 // ==========================================
 
-func Test_LineValidator_IsMatchMany_AllMatch(t *testing.T) {
+func Test_LineValidator_IsMatchMany_AllMatch_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorIsMatchManyAllTestCase
 	v := corevalidator.LineValidator{
@@ -116,7 +116,7 @@ func Test_LineValidator_IsMatchMany_AllMatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_LineValidator_IsMatchMany_OneFails(t *testing.T) {
+func Test_LineValidator_IsMatchMany_OneFails_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorIsMatchManyOneFailsTestCase
 	v := corevalidator.LineValidator{
@@ -139,7 +139,7 @@ func Test_LineValidator_IsMatchMany_OneFails(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
+func Test_LineValidator_IsMatchMany_EmptySkip_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorIsMatchManyEmptySkipTestCase
 	v := corevalidator.LineValidator{
@@ -164,7 +164,7 @@ func Test_LineValidator_IsMatchMany_EmptySkip(t *testing.T) {
 // LineValidator.VerifyError
 // ==========================================
 
-func Test_LineValidator_VerifyError_Match(t *testing.T) {
+func Test_LineValidator_VerifyError_Match_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorVerifyErrorMatchTestCase
 	v := corevalidator.LineValidator{
@@ -212,7 +212,7 @@ func Test_LineValidator_VerifyError_LineNumberMismatch(t *testing.T) {
 	tc.ShouldBeEqualMapFirst(t, actual)
 }
 
-func Test_LineValidator_VerifyError_TextMismatch(t *testing.T) {
+func Test_LineValidator_VerifyError_TextMismatch_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorVerifyErrorTextMismatchTestCase
 	v := corevalidator.LineValidator{
@@ -240,7 +240,7 @@ func Test_LineValidator_VerifyError_TextMismatch(t *testing.T) {
 // LineValidator.VerifyMany
 // ==========================================
 
-func Test_LineValidator_VerifyMany_ContinueOnError(t *testing.T) {
+func Test_LineValidator_VerifyMany_ContinueOnError_FromLineValidator(t *testing.T) {
 	// Arrange
 	tc := lineValidatorVerifyManyContinueTestCase
 	v := corevalidator.LineValidator{

@@ -71,7 +71,7 @@ func Test_BaseLinesValidators_NilReceiver(t *testing.T) {
 // LinesValidators — CaseNilSafe pattern
 // ==========================================
 
-func Test_LinesValidators_NilReceiver(t *testing.T) {
+func Test_LinesValidators_NilReceiver_FromNilReceiver(t *testing.T) {
 	for caseIndex, tc := range linesValidatorsNilReceiverTestCases {
 		// Arrange (implicit — nil receiver)
 

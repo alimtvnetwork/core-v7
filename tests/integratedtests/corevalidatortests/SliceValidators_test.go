@@ -56,7 +56,7 @@ func Test_SliceValidators_WithItems(t *testing.T) {
 // SliceValidators.IsMatch / IsValid
 // ==========================================
 
-func Test_SliceValidators_IsMatch_Empty(t *testing.T) {
+func Test_SliceValidators_IsMatch_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 
@@ -68,7 +68,7 @@ func Test_SliceValidators_IsMatch_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty should match", actual)
 }
 
-func Test_SliceValidators_IsValid_Empty(t *testing.T) {
+func Test_SliceValidators_IsValid_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 
@@ -80,7 +80,7 @@ func Test_SliceValidators_IsValid_Empty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "empty IsValid should be true", actual)
 }
 
-func Test_SliceValidators_IsMatch_AllPass(t *testing.T) {
+func Test_SliceValidators_IsMatch_AllPass_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{
 		Validators: []corevalidator.SliceValidator{
@@ -134,7 +134,7 @@ func Test_SliceValidators_IsMatch_OneFails(t *testing.T) {
 // SliceValidators.VerifyAll
 // ==========================================
 
-func Test_SliceValidators_VerifyAll_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAll_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
@@ -175,7 +175,7 @@ func Test_SliceValidators_VerifyAll_Pass(t *testing.T) {
 // SliceValidators.VerifyAllError
 // ==========================================
 
-func Test_SliceValidators_VerifyAllError_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAllError_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
@@ -193,7 +193,7 @@ func Test_SliceValidators_VerifyAllError_Empty(t *testing.T) {
 // SliceValidators.VerifyFirst
 // ==========================================
 
-func Test_SliceValidators_VerifyFirst_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyFirst_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
@@ -234,7 +234,7 @@ func Test_SliceValidators_VerifyFirst_Pass(t *testing.T) {
 // SliceValidators.VerifyUpto
 // ==========================================
 
-func Test_SliceValidators_VerifyUpto_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyUpto_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}
@@ -252,7 +252,7 @@ func Test_SliceValidators_VerifyUpto_Empty(t *testing.T) {
 // SliceValidators.SetActualOnAll
 // ==========================================
 
-func Test_SliceValidators_SetActualOnAll_Empty(t *testing.T) {
+func Test_SliceValidators_SetActualOnAll_Empty_FromSliceValidators(t *testing.T) {
 	v := &corevalidator.SliceValidators{}
 	// should not panic
 	v.SetActualOnAll("a", "b")
@@ -262,7 +262,7 @@ func Test_SliceValidators_SetActualOnAll_Empty(t *testing.T) {
 // SliceValidators.VerifyAllErrorUsingActual
 // ==========================================
 
-func Test_SliceValidators_VerifyAllErrorUsingActual_Empty(t *testing.T) {
+func Test_SliceValidators_VerifyAllErrorUsingActual_Empty_FromSliceValidators(t *testing.T) {
 	// Arrange
 	v := &corevalidator.SliceValidators{}
 	params := &corevalidator.Parameter{CaseIndex: 0, Header: "test"}

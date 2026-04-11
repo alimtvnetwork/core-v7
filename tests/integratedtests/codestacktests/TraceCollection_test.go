@@ -34,7 +34,7 @@ func emptyCollection() *codestack.TraceCollection {
 	}
 }
 
-func Test_TraceCollection_Basic(t *testing.T) {
+func Test_TraceCollection_Basic_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionBasicTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -75,7 +75,7 @@ func Test_TraceCollection_FirstLast(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_SkipTake(t *testing.T) {
+func Test_TraceCollection_SkipTake_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionSkipTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -95,7 +95,7 @@ func Test_TraceCollection_SkipTake(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Take(t *testing.T) {
+func Test_TraceCollection_Take_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionTakeTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -115,7 +115,7 @@ func Test_TraceCollection_Take(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Reverse(t *testing.T) {
+func Test_TraceCollection_Reverse_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionReverseTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -133,7 +133,7 @@ func Test_TraceCollection_Reverse(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_FilterPackageName(t *testing.T) {
+func Test_TraceCollection_FilterPackageName_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionFilterTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -153,7 +153,7 @@ func Test_TraceCollection_FilterPackageName(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Add(t *testing.T) {
+func Test_TraceCollection_Add_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionAddTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -173,7 +173,7 @@ func Test_TraceCollection_Add(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Adds(t *testing.T) {
+func Test_TraceCollection_Adds_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionAddsTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -195,7 +195,7 @@ func Test_TraceCollection_Adds(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_AddsIf_True(t *testing.T) {
+func Test_TraceCollection_AddsIf_True_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionAddsIfTrueTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -212,7 +212,7 @@ func Test_TraceCollection_AddsIf_True(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_AddsIf_False(t *testing.T) {
+func Test_TraceCollection_AddsIf_False_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionAddsIfFalseTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -229,7 +229,7 @@ func Test_TraceCollection_AddsIf_False(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionFirstOrDefaultEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -246,7 +246,7 @@ func Test_TraceCollection_FirstOrDefault_Empty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_FirstOrDefault_NonEmpty(t *testing.T) {
+func Test_TraceCollection_FirstOrDefault_NonEmpty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionFirstOrDefaultNonEmptyTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -264,7 +264,7 @@ func Test_TraceCollection_FirstOrDefault_NonEmpty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_LastOrDefault_Empty(t *testing.T) {
+func Test_TraceCollection_LastOrDefault_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionLastOrDefaultEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -299,7 +299,7 @@ func Test_TraceCollection_LastOrDefault_NonEmpty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Strings(t *testing.T) {
+func Test_TraceCollection_Strings_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionStringsTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -316,7 +316,7 @@ func Test_TraceCollection_Strings(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Filter(t *testing.T) {
+func Test_TraceCollection_Filter_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionFilterFuncTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -335,7 +335,7 @@ func Test_TraceCollection_Filter(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_SkipFilterPackageName(t *testing.T) {
+func Test_TraceCollection_SkipFilterPackageName_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionSkipFilterPkgTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -369,7 +369,7 @@ func Test_TraceCollection_FilterMethodName(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Clone(t *testing.T) {
+func Test_TraceCollection_Clone_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionCloneTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -387,7 +387,7 @@ func Test_TraceCollection_Clone(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_ClonePtr(t *testing.T) {
+func Test_TraceCollection_ClonePtr_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionClonePtrTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -405,7 +405,7 @@ func Test_TraceCollection_ClonePtr(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_ClonePtr_Nil(t *testing.T) {
+func Test_TraceCollection_ClonePtr_Nil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionClonePtrNilTestCases {
 		// Arrange
 		var collection *codestack.TraceCollection
@@ -422,7 +422,7 @@ func Test_TraceCollection_ClonePtr_Nil(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_IsEqual(t *testing.T) {
+func Test_TraceCollection_IsEqual_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionIsEqualTestCases {
 		// Arrange
 		c1 := newTestCollection()
@@ -438,7 +438,7 @@ func Test_TraceCollection_IsEqual(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_IsEqual_BothNil(t *testing.T) {
+func Test_TraceCollection_IsEqual_BothNil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionIsEqualBothNilTestCases {
 		// Arrange
 		var c1 *codestack.TraceCollection
@@ -454,7 +454,7 @@ func Test_TraceCollection_IsEqual_BothNil(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_IsEqual_OneNil(t *testing.T) {
+func Test_TraceCollection_IsEqual_OneNil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionIsEqualOneNilTestCases {
 		// Arrange
 		c1 := newTestCollection()
@@ -470,7 +470,7 @@ func Test_TraceCollection_IsEqual_OneNil(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Length_Nil(t *testing.T) {
+func Test_TraceCollection_Length_Nil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionLengthNilTestCases {
 		// Arrange
 		var collection *codestack.TraceCollection
@@ -485,7 +485,7 @@ func Test_TraceCollection_Length_Nil(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_HasIndex(t *testing.T) {
+func Test_TraceCollection_HasIndex_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionHasIndexTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -502,7 +502,7 @@ func Test_TraceCollection_HasIndex(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Reverse_Empty(t *testing.T) {
+func Test_TraceCollection_Reverse_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionReverseEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -519,7 +519,7 @@ func Test_TraceCollection_Reverse_Empty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Reverse_Two(t *testing.T) {
+func Test_TraceCollection_Reverse_Two_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionReverseTwoTestCases {
 		// Arrange
 		collection := &codestack.TraceCollection{
@@ -542,7 +542,7 @@ func Test_TraceCollection_Reverse_Two(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_ConcatNew(t *testing.T) {
+func Test_TraceCollection_ConcatNew_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionConcatNewTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -560,7 +560,7 @@ func Test_TraceCollection_ConcatNew(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Dispose(t *testing.T) {
+func Test_TraceCollection_Dispose_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionDisposeTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -577,7 +577,7 @@ func Test_TraceCollection_Dispose(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Dispose_Nil(t *testing.T) {
+func Test_TraceCollection_Dispose_Nil_FromTraceCollection(t *testing.T) {
 	// Arrange
 	var collection *codestack.TraceCollection
 
@@ -585,7 +585,7 @@ func Test_TraceCollection_Dispose_Nil(t *testing.T) {
 	collection.Dispose()
 }
 
-func Test_TraceCollection_Clear(t *testing.T) {
+func Test_TraceCollection_Clear_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionClearTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -602,7 +602,7 @@ func Test_TraceCollection_Clear(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Clear_Nil(t *testing.T) {
+func Test_TraceCollection_Clear_Nil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionClearNilTestCases {
 		// Arrange
 		var collection *codestack.TraceCollection
@@ -619,7 +619,7 @@ func Test_TraceCollection_Clear_Nil(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_CodeStacksString(t *testing.T) {
+func Test_TraceCollection_CodeStacksString_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionCodeStacksStringTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -636,7 +636,7 @@ func Test_TraceCollection_CodeStacksString(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_CodeStacksString_Empty(t *testing.T) {
+func Test_TraceCollection_CodeStacksString_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionCodeStacksStringEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -653,7 +653,7 @@ func Test_TraceCollection_CodeStacksString_Empty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_JsonString(t *testing.T) {
+func Test_TraceCollection_JsonString_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionJsonStringTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -670,7 +670,7 @@ func Test_TraceCollection_JsonString(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_JsonString_Empty(t *testing.T) {
+func Test_TraceCollection_JsonString_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionJsonStringEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -687,7 +687,7 @@ func Test_TraceCollection_JsonString_Empty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_Serializer(t *testing.T) {
+func Test_TraceCollection_Serializer_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionSerializerTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -705,7 +705,7 @@ func Test_TraceCollection_Serializer(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_StackTracesBytes(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionStackTracesBytesTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -722,7 +722,7 @@ func Test_TraceCollection_StackTracesBytes(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_StackTracesBytes_Empty(t *testing.T) {
+func Test_TraceCollection_StackTracesBytes_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionStackTracesBytesEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -739,7 +739,7 @@ func Test_TraceCollection_StackTracesBytes_Empty(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_GetPagesSize(t *testing.T) {
+func Test_TraceCollection_GetPagesSize_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionGetPagesSizeTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -758,7 +758,7 @@ func Test_TraceCollection_GetPagesSize(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_LimitCollection(t *testing.T) {
+func Test_TraceCollection_LimitCollection_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionLimitTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -775,7 +775,7 @@ func Test_TraceCollection_LimitCollection(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_SafeLimitCollection(t *testing.T) {
+func Test_TraceCollection_SafeLimitCollection_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionSafeLimitTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -792,7 +792,7 @@ func Test_TraceCollection_SafeLimitCollection(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_FileWithLines(t *testing.T) {
+func Test_TraceCollection_FileWithLines_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionFileWithLinesTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -809,7 +809,7 @@ func Test_TraceCollection_FileWithLines(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_ShortStrings(t *testing.T) {
+func Test_TraceCollection_ShortStrings_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionShortStringsTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -826,7 +826,7 @@ func Test_TraceCollection_ShortStrings(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_JoinUsingFmt(t *testing.T) {
+func Test_TraceCollection_JoinUsingFmt_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionJoinUsingFmtTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -845,7 +845,7 @@ func Test_TraceCollection_JoinUsingFmt(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_CsvStrings(t *testing.T) {
+func Test_TraceCollection_CsvStrings_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionCsvStringsTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -862,7 +862,7 @@ func Test_TraceCollection_CsvStrings(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_AddsPtr_Nil(t *testing.T) {
+func Test_TraceCollection_AddsPtr_Nil_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionAddsPtrNilTestCases {
 		// Arrange
 		collection := emptyCollection()
@@ -902,7 +902,7 @@ func Test_TraceCollection_AddsPtr_SkipOnIssues(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_String(t *testing.T) {
+func Test_TraceCollection_String_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionStringTestCases {
 		// Arrange
 		collection := newTestCollection()
@@ -919,7 +919,7 @@ func Test_TraceCollection_String(t *testing.T) {
 	}
 }
 
-func Test_TraceCollection_String_Empty(t *testing.T) {
+func Test_TraceCollection_String_Empty_FromTraceCollection(t *testing.T) {
 	for caseIndex, testCase := range traceCollectionStringEmptyTestCases {
 		// Arrange
 		collection := emptyCollection()

@@ -241,7 +241,7 @@ func Test_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
 // SliceValidator.UserInputsMergeWithError
 // ==========================================
 
-func Test_SliceValidator_UserInputsMergeWithError_NoAttach(t *testing.T) {
+func Test_SliceValidator_UserInputsMergeWithError_NoAttach_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.SliceValidator{
 		ActualLines:   []string{"a"},
@@ -322,7 +322,7 @@ func Test_SliceValidator_AllVerifyError_EmptyActualNoSkip(t *testing.T) {
 // TextValidators.AddSimpleAllTrue
 // ==========================================
 
-func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
+func Test_TextValidators_AddSimpleAllTrue_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.AddSimpleAllTrue("hello", stringcompareas.Contains)
@@ -352,7 +352,7 @@ func Test_TextValidators_AddSimpleAllTrue(t *testing.T) {
 // TextValidators.AsBasicSliceContractsBinder
 // ==========================================
 
-func Test_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
+func Test_TextValidators_AsBasicSliceContractsBinder_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	binder := v.AsBasicSliceContractsBinder()
@@ -369,7 +369,7 @@ func Test_TextValidators_AsBasicSliceContractsBinder(t *testing.T) {
 // TextValidators.Count
 // ==========================================
 
-func Test_TextValidators_Count(t *testing.T) {
+func Test_TextValidators_Count_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(2)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
@@ -387,7 +387,7 @@ func Test_TextValidators_Count(t *testing.T) {
 // TextValidator.VerifySimpleError
 // ==========================================
 
-func Test_TextValidator_VerifySimpleError_Match(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Match_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "hello",
@@ -408,7 +408,7 @@ func Test_TextValidator_VerifySimpleError_Match(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "match should not error:", actual)
 }
 
-func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
+func Test_TextValidator_VerifySimpleError_Mismatch_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "hello",
@@ -435,7 +435,7 @@ func Test_TextValidator_VerifySimpleError_Mismatch(t *testing.T) {
 // TextValidator.MethodName
 // ==========================================
 
-func Test_TextValidator_MethodName(t *testing.T) {
+func Test_TextValidator_MethodName_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{SearchAs: stringcompareas.Contains}
 
@@ -451,7 +451,7 @@ func Test_TextValidator_MethodName(t *testing.T) {
 // TextValidator.ToString
 // ==========================================
 
-func Test_TextValidator_ToString_SingleLine(t *testing.T) {
+func Test_TextValidator_ToString_SingleLine_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
@@ -468,7 +468,7 @@ func Test_TextValidator_ToString_SingleLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
-func Test_TextValidator_ToString_MultiLine(t *testing.T) {
+func Test_TextValidator_ToString_MultiLine_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
@@ -485,7 +485,7 @@ func Test_TextValidator_ToString_MultiLine(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should return non-empty string", actual)
 }
 
-func Test_TextValidator_String(t *testing.T) {
+func Test_TextValidator_String_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.TextValidator{
 		Search:    "test",
@@ -540,7 +540,7 @@ func Test_TextValidator_GetCompiledTermBasedOnConditions_WithTrim(t *testing.T) 
 // TextValidators.VerifyFirstErrorMany
 // ==========================================
 
-func Test_TextValidators_VerifyFirstErrorMany_Empty(t *testing.T) {
+func Test_TextValidators_VerifyFirstErrorMany_Empty_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
@@ -576,7 +576,7 @@ func Test_TextValidators_VerifyFirstErrorMany_Pass(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should pass:", actual)
 }
 
-func Test_TextValidators_AllVerifyErrorMany_Empty(t *testing.T) {
+func Test_TextValidators_AllVerifyErrorMany_Empty_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(0)
 	params := &corevalidator.Parameter{CaseIndex: 0}
@@ -671,7 +671,7 @@ func Test_TextValidators_HasAnyItem_NonEmpty(t *testing.T) {
 // TextValidators.String
 // ==========================================
 
-func Test_TextValidators_String(t *testing.T) {
+func Test_TextValidators_String_FromSliceValidatorExtra(t *testing.T) {
 	// Arrange
 	v := corevalidator.NewTextValidators(1)
 	v.Add(corevalidator.TextValidator{Search: "a", SearchAs: stringcompareas.Equal})
