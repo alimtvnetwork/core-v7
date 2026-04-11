@@ -46,8 +46,8 @@ func (it *LinkedList[T]) Length() int {
 
 // LengthLock returns the length with mutex protection.
 func (it *LinkedList[T]) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.length
 }
@@ -59,8 +59,8 @@ func (it *LinkedList[T]) IsEmpty() bool {
 
 // IsEmptyLock returns IsEmpty with mutex protection.
 func (it *LinkedList[T]) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }

@@ -53,8 +53,8 @@ func (it *Hashmap[K, V]) HasItems() bool {
 
 // IsEmptyLock returns IsEmpty with mutex protection.
 func (it *Hashmap[K, V]) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -70,8 +70,8 @@ func (it *Hashmap[K, V]) Length() int {
 
 // LengthLock returns the length with mutex protection.
 func (it *Hashmap[K, V]) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Length()
 }
@@ -115,8 +115,8 @@ func (it *Hashmap[K, V]) GetOrDefault(key K, defaultVal V) V {
 
 // GetLock returns the value with mutex protection.
 func (it *Hashmap[K, V]) GetLock(key K) (V, bool) {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	val, found := it.items[key]
 
@@ -137,9 +137,9 @@ func (it *Hashmap[K, V]) Contains(key K) bool {
 
 // ContainsLock returns Has with mutex protection.
 func (it *Hashmap[K, V]) ContainsLock(key K) bool {
-	it.Lock()
+	it.RLock()
 	_, found := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return found
 }
