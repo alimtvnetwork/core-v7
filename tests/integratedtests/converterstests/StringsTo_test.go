@@ -14,7 +14,7 @@ import (
 // Tests: IntegersWithDefaults
 // =============================================================================
 
-func Test_StringsTo_IntegersWithDefaults(t *testing.T) {
+func Test_StringsTo_IntegersWithDefaults_FromStringsTo(t *testing.T) {
 	for caseIndex, testCase := range integersWithDefaultsTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -52,7 +52,7 @@ func Test_StringsTo_IntegersWithDefaults(t *testing.T) {
 // Tests: BytesWithDefaults
 // =============================================================================
 
-func Test_StringsTo_BytesWithDefaults(t *testing.T) {
+func Test_StringsTo_BytesWithDefaults_FromStringsTo(t *testing.T) {
 	for caseIndex, testCase := range bytesWithDefaultsTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -91,7 +91,7 @@ func Test_StringsTo_BytesWithDefaults(t *testing.T) {
 // Tests: CloneIf
 // =============================================================================
 
-func Test_StringsTo_CloneIf(t *testing.T) {
+func Test_StringsTo_CloneIf_FromStringsTo(t *testing.T) {
 	for caseIndex, testCase := range cloneIfTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -137,7 +137,7 @@ func Test_StringsTo_CloneIf(t *testing.T) {
 // Tests: PtrOfPtrToPtrStrings
 // =============================================================================
 
-func Test_StringsTo_PtrOfPtrToPtrStrings(t *testing.T) {
+func Test_StringsTo_PtrOfPtrToPtrStrings_FromStringsTo(t *testing.T) {
 	for caseIndex, testCase := range ptrOfPtrToPtrStringsTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
@@ -204,7 +204,7 @@ func Test_StringsTo_PtrOfPtrToPtrStrings(t *testing.T) {
 // Tests: PtrOfPtrToMapStringBool
 // =============================================================================
 
-func Test_StringsTo_PtrOfPtrToMapStringBool(t *testing.T) {
+func Test_StringsTo_PtrOfPtrToMapStringBool_FromStringsTo(t *testing.T) {
 	for caseIndex, testCase := range ptrOfPtrToMapStringBoolTestCases {
 		// Arrange
 		input := testCase.ArrangeInput.(args.Map)
