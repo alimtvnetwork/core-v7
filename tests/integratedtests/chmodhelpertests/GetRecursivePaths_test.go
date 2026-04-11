@@ -292,8 +292,8 @@ func Test_ChmodVerifier_PathIf_VerifyTrue(t *testing.T) {
 		expected := args.Map{"ran": true}
 		expected.ShouldBeEqual(t, 0, "PathIf ran without panic -- Windows", actual)
 	} else {
-		actual := args.Map{"errNil": err == nil}
-		expected := args.Map{"errNil": true}
+		actual = args.Map{"errNil": err == nil}
+		expected = args.Map{"errNil": true}
 		expected.ShouldBeEqual(t, 0, "PathIf returns nil -- matching chmod on Linux", actual)
 	}
 }

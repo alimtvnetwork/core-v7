@@ -316,13 +316,13 @@ func Test_NewPayloadWrapper_Create_Deserialize(t *testing.T) {
 	}
 	bytes, serErr := pw.Serialize()
 	pw2, deErr := corepayload.New.PayloadWrapper.Deserialize(bytes)
-	actual := args.Map{
+	actual = args.Map{
 		"createNoErr": createErr == nil,
 		"serNoErr": serErr == nil,
 		"deNoErr": deErr == nil,
 		"name": pw2.Name,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"createNoErr": true,
 		"serNoErr": true,
 		"deNoErr": true,

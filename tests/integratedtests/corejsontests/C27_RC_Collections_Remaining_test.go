@@ -139,8 +139,8 @@ func Test_C27_RC_HasError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rc.Add(corejson.NewResult.Create(nil, errors.New("e"), ""))
-	actual := args.Map{"result": rc.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rc.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -259,8 +259,8 @@ func Test_C27_RC_GetPagesSize(t *testing.T) {
 	actual := args.Map{"result": rc.GetPagesSize(2) != 3}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
-	actual := args.Map{"result": rc.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -543,8 +543,8 @@ func Test_C27_RPC_HasError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rpc.Add(corejson.NewResult.ErrorPtr(errors.New("e")))
-	actual := args.Map{"result": rpc.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rpc.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -668,8 +668,8 @@ func Test_C27_RPC_GetPagesSize(t *testing.T) {
 	actual := args.Map{"result": rpc.GetPagesSize(2) != 3}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
-	actual := args.Map{"result": rpc.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 

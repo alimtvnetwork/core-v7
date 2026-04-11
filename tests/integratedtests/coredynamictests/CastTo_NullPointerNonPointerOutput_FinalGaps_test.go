@@ -28,8 +28,8 @@ func Test_CastTo_NullPointerNonPointerOutput(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for null pointer with non-pointer output", actual)
 
-	actual := args.Map{"result": result.IsNull}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": result.IsNull}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsNull to be true", actual)
 }
 
@@ -126,8 +126,8 @@ func Test_MapAnyItems_GetItemRef_PtrFoundItem(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": out != "world"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": out != "world"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'world', got ''", actual)
 }
 
@@ -320,8 +320,8 @@ func Test_MapAnyItems_JsonMapResults_Normal(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": mr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil MapResults", actual)
 }
 

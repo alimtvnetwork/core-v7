@@ -389,16 +389,16 @@ func Test_CovLL2_17_Node_LoopEndOfChain(t *testing.T) {
 		end2, length2 := ll.Head().LoopEndOfChain(func(arg *corestr.LinkedListProcessorParameter) bool {
 			return true
 		})
-		actual := args.Map{"result": length2 != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": length2 != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		_ = end2
 		// break on second
 		end3, length3 := ll.Head().LoopEndOfChain(func(arg *corestr.LinkedListProcessorParameter) bool {
 			return arg.Index == 1
 		})
-		actual := args.Map{"result": length3 != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": length3 != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		_ = end3
 	})

@@ -38,14 +38,14 @@ func Test_CovPL_S3_01_MarshalJSON_UnmarshalJSON(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	pw2 := &corepayload.PayloadWrapper{}
 	err2 := pw2.UnmarshalJSON(b)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	// nil
 	var nilPW *corepayload.PayloadWrapper
 	_, err3 := nilPW.MarshalJSON()
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -63,8 +63,8 @@ func Test_CovPL_S3_02_ReCreateUsingJsonBytes_ReCreateUsingJsonResult(t *testing.
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	jr := pw.JsonPtr()
 	pw3, err2 := pw.ReCreateUsingJsonResult(jr)
-	actual := args.Map{"result": err2 != nil || pw3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil || pw3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -79,21 +79,21 @@ func Test_CovPL_S3_03_HasSafeItems_DynamicPayloads_SetDynamicPayloads(t *testing
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	dp := pw.DynamicPayloads()
-	actual := args.Map{"result": len(dp) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(dp) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	var nilPW *corepayload.PayloadWrapper
-	actual := args.Map{"result": len(nilPW.DynamicPayloads()) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(nilPW.DynamicPayloads()) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	err := pw.SetDynamicPayloads([]byte("test"))
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
 	var nilPW2 *corepayload.PayloadWrapper
 	err2 := nilPW2.SetDynamicPayloads([]byte("test"))
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -133,8 +133,8 @@ func Test_CovPL_S3_06_All_AllSafe(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected values", actual)
 	var nilPW *corepayload.PayloadWrapper
 	id2, _, _, _, _ := nilPW.AllSafe()
-	actual := args.Map{"result": id2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": id2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -199,19 +199,19 @@ func Test_CovPL_S3_13_IdString_IdInteger_IdentifierInteger_IdentifierUnsignedInt
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": pw.IdInteger() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IdInteger() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": pw.IdentifierInteger() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IdentifierInteger() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": pw.IdentifierUnsignedInteger() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.IdentifierUnsignedInteger() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	// empty id
 	pw2 := corepayload.New.PayloadWrapper.All("n", "", "t", "c", "", false, nil, []byte("x"))
-	actual := args.Map{"result": pw2.IdentifierInteger() >= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw2.IdentifierInteger() >= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -226,30 +226,30 @@ func Test_CovPL_S3_14_IsEqual_IsPayloadsEqual_IsName_IsIdentifier_IsTaskType_IsE
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsPayloadsEqual(pw2.Payloads)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsPayloadsEqual(pw2.Payloads)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsName("seg3")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsName("seg3")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsIdentifier("5")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsIdentifier("5")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsTaskTypeName("taskType")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsTaskTypeName("taskType")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsEntityType(pw.EntityType)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsEntityType(pw.EntityType)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": pw.IsCategory("category")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": pw.IsCategory("category")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilPW *corepayload.PayloadWrapper
-	actual := args.Map{"result": nilPW.IsEqual(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilPW.IsEqual(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": nilPW.IsEqual(pw)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilPW.IsEqual(pw)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -339,14 +339,14 @@ func Test_CovPL_S3_23_PW_String_PrettyJsonString_JsonString_JsonStringMust(t *te
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-	actual := args.Map{"result": pw.PrettyJsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.PrettyJsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-	actual := args.Map{"result": pw.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-	actual := args.Map{"result": pw.JsonStringMust() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.JsonStringMust() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -360,12 +360,12 @@ func Test_CovPL_S3_24_PW_PayloadsString_PayloadsPrettyString_PayloadsJsonResult(
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
-	actual := args.Map{"result": pw.PayloadsPrettyString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": pw.PayloadsPrettyString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	jr := pw.PayloadsJsonResult()
-	actual := args.Map{"result": jr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -397,8 +397,8 @@ func Test_CovPL_S3_26_PW_Clone_ClonePtr_NonPtr_ToPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	c, _ := nilPW.ClonePtr(true)
-	actual := args.Map{"result": c != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -500,14 +500,14 @@ func Test_CovPL_S3_41_Attr_GetStringKeyValue_GetAnyKeyValue(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected v", actual)
 	_, found2 := attr.GetStringKeyValue("missing")
-	actual := args.Map{"result": found2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": found2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, _ = attr.GetAnyKeyValue("missing")
 	var nilAttr *corepayload.Attributes
 	_, f := nilAttr.GetStringKeyValue("k")
-	actual := args.Map{"result": f}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": f}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -522,8 +522,8 @@ func Test_CovPL_S3_42_Attr_HasStringKey_HasAnyKey(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": attr.HasAnyKey("k")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.HasAnyKey("k")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -537,8 +537,8 @@ func Test_CovPL_S3_43_Attr_IsErrorEqual_IsErrorDifferent(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": attr.IsErrorDifferent(nil)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.IsErrorDifferent(nil)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -564,8 +564,8 @@ func Test_CovPL_S3_45_Attr_SetAuthInfo_SetUserInfo_NilReceiver(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	var nilAttr2 *corepayload.Attributes
 	r2 := nilAttr2.SetUserInfo(&corepayload.UserInfo{})
-	actual := args.Map{"result": r2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -579,15 +579,15 @@ func Test_CovPL_S3_46_Attr_AddNewStringKeyValueOnly_AddNewAnyKeyValueOnly(t *tes
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": attr.AddNewAnyKeyValueOnly("k", "v")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.AddNewAnyKeyValueOnly("k", "v")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilAttr *corepayload.Attributes
-	actual := args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddNewStringKeyValueOnly("k", "v")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", "v")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.AddNewAnyKeyValueOnly("k", "v")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -642,11 +642,11 @@ func Test_CovPL_S3_51_Attr_Json_Methods(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	jr := attr.PayloadsJsonResult()
-	actual := args.Map{"result": jr == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jr == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": attr.JsonString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attr.JsonString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	_ = attr.JsonStringMust()
 	_ = attr.String()
@@ -745,11 +745,11 @@ func Test_CovPL_S3_59_Attr_IsEqual(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilAttr *corepayload.Attributes
-	actual := args.Map{"result": nilAttr.IsEqual(nil)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilAttr.IsEqual(nil)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": nilAttr.IsEqual(attr)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilAttr.IsEqual(attr)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -798,8 +798,8 @@ func Test_CovPL_S3_70_DeserializePayloadTo(t *testing.T) {
 	_ = corepayload.DeserializePayloadToMust[D](pw)
 	// nil
 	_, err2 := corepayload.DeserializePayloadTo[D](nil)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -818,8 +818,8 @@ func Test_CovPL_S3_71_DeserializePayloadToSlice(t *testing.T) {
 	_ = corepayload.DeserializePayloadToSliceMust[D](pw)
 	// nil
 	_, err2 := corepayload.DeserializePayloadToSlice[D](nil)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -839,8 +839,8 @@ func Test_CovPL_S3_72_DeserializeAttributesPayloadTo(t *testing.T) {
 	_ = corepayload.DeserializeAttributesPayloadToMust[D](attr)
 	// nil
 	_, err2 := corepayload.DeserializeAttributesPayloadTo[D](nil)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -859,8 +859,8 @@ func Test_CovPL_S3_73_DeserializeAttributesPayloadToSlice(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// nil
 	_, err2 := corepayload.DeserializeAttributesPayloadToSlice[D](nil)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -885,8 +885,8 @@ func Test_CovPL_S3_80_MapTypedPayloads(t *testing.T) {
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
 	r := corepayload.MapTypedPayloads[D, string](empty, func(item *corepayload.TypedPayloadWrapper[D]) string { return "" })
-	actual := args.Map{"result": len(r) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(r) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -995,8 +995,8 @@ func Test_CovPL_S3_86_GroupTypedPayloads_GroupTypedPayloadData(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	groups2 := corepayload.GroupTypedPayloadData[D, string](col, func(d D) string { return d.Cat })
-	actual := args.Map{"result": len(groups2) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(groups2) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -1033,16 +1033,16 @@ func Test_CovPL_S3_88_AnyTypedPayload_AllTypedPayloads(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": corepayload.AllTypedPayloads[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": corepayload.AllTypedPayloads[D](col, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
-	actual := args.Map{"result": corepayload.AnyTypedPayload[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": corepayload.AnyTypedPayload[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return true })}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": corepayload.AllTypedPayloads[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return false })}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": corepayload.AllTypedPayloads[D](empty, func(item *corepayload.TypedPayloadWrapper[D]) bool { return false })}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true (vacuous)", actual)
 }
 
@@ -1064,8 +1064,8 @@ func Test_CovPL_S3_89_ConvertTypedPayloads(t *testing.T) {
 	// empty
 	empty := corepayload.EmptyTypedPayloadCollection[D]()
 	c2, _ := corepayload.ConvertTypedPayloads[D, D2](empty)
-	actual := args.Map{"result": c2.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c2.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -1086,18 +1086,18 @@ func Test_CovPL_S3_90_TPC_Paging(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
-	actual := args.Map{"result": col.GetPagesSize(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.GetPagesSize(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	_ = col.GetPagingInfo(3, 1)
 	_ = col.GetSinglePageCollection(3, 2)
 	pages := col.GetPagedCollection(3)
-	actual := args.Map{"result": len(pages) < 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(pages) < 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	withInfo := col.GetPagedCollectionWithInfo(3)
-	actual := args.Map{"result": len(withInfo) < 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(withInfo) < 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 3", actual)
 	// small
 	small := corepayload.NewTypedPayloadCollection[D](1)

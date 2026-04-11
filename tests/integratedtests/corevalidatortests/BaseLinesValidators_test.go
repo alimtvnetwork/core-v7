@@ -22,11 +22,11 @@ func Test_BaseLinesValidators_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
-	actual := args.Map{"result": b.HasLinesValidators()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": b.HasLinesValidators()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should not have validators", actual)
-	actual := args.Map{"result": b.LinesValidatorsLength() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": b.LinesValidatorsLength() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -51,11 +51,11 @@ func Test_BaseLinesValidators_WithItems_FromBaseLinesValidators(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
-	actual := args.Map{"result": b.HasLinesValidators()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": b.HasLinesValidators()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have validators", actual)
-	actual := args.Map{"result": b.LinesValidatorsLength() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": b.LinesValidatorsLength() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -70,8 +70,8 @@ func Test_BaseLinesValidators_ToLinesValidators_Empty_FromBaseLinesValidators(t 
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": lv.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lv.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 }
 
@@ -123,8 +123,8 @@ func Test_LinesValidators_New(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": lv.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lv.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "new should be empty", actual)
 }
 
@@ -145,8 +145,8 @@ func Test_LinesValidators_Add_FromBaseLinesValidators(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": lv.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lv.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
@@ -174,8 +174,8 @@ func Test_LinesValidators_HasIndex(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have index 0", actual)
-	actual := args.Map{"result": lv.HasIndex(1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lv.HasIndex(1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have index 1", actual)
 }
 
@@ -253,8 +253,8 @@ func Test_BaseValidatorCoreCondition_Default_NilPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "default condition should have all false", actual)
 	// should set the ptr
-	actual := args.Map{"result": b.ValidatorCoreCondition == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": b.ValidatorCoreCondition == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have set the pointer", actual)
 }
 

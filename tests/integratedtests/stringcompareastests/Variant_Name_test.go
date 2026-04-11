@@ -15,17 +15,17 @@ func Test_Variant_Name_Verification(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Equal", actual)
-	actual := args.Map{"result": stringcompareas.StartsWith.Name() != "StartsWith"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.StartsWith.Name() != "StartsWith"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected StartsWith", actual)
-	actual := args.Map{"result": stringcompareas.EndsWith.Name() != "EndsWith"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.EndsWith.Name() != "EndsWith"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected EndsWith", actual)
-	actual := args.Map{"result": stringcompareas.Anywhere.Name() != "Anywhere"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Anywhere.Name() != "Anywhere"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Anywhere", actual)
-	actual := args.Map{"result": stringcompareas.Regex.Name() != "Regex"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Regex.Name() != "Regex"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Regex", actual)
 }
 
@@ -36,29 +36,29 @@ func Test_Variant_Is_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal should be IsEqual", actual)
-	actual := args.Map{"result": stringcompareas.StartsWith.IsStartsWith()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.StartsWith.IsStartsWith()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "StartsWith should be IsStartsWith", actual)
-	actual := args.Map{"result": stringcompareas.EndsWith.IsEndsWith()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.EndsWith.IsEndsWith()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "EndsWith should be IsEndsWith", actual)
-	actual := args.Map{"result": stringcompareas.Anywhere.IsAnywhere()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Anywhere.IsAnywhere()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Anywhere should be IsAnywhere", actual)
-	actual := args.Map{"result": stringcompareas.Contains.IsContains()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Contains.IsContains()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Contains should be IsContains", actual)
-	actual := args.Map{"result": stringcompareas.AnyChars.IsAnyChars()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.AnyChars.IsAnyChars()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "AnyChars should be IsAnyChars", actual)
-	actual := args.Map{"result": stringcompareas.Regex.IsRegex()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Regex.IsRegex()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Regex should be IsRegex", actual)
-	actual := args.Map{"result": stringcompareas.Glob.IsGlob()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Glob.IsGlob()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Glob should be IsGlob", actual)
-	actual := args.Map{"result": stringcompareas.NonGlob.IsNonGlob()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NonGlob.IsNonGlob()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NonGlob should be IsNonGlob", actual)
 }
 
@@ -69,17 +69,17 @@ func Test_Variant_Not_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotEqual should be IsNotEqual", actual)
-	actual := args.Map{"result": stringcompareas.NotStartsWith.IsNotStartsWith()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotStartsWith.IsNotStartsWith()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotStartsWith should be IsNotStartsWith", actual)
-	actual := args.Map{"result": stringcompareas.NotEndsWith.IsNotEndsWith()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotEndsWith.IsNotEndsWith()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotEndsWith should be IsNotEndsWith", actual)
-	actual := args.Map{"result": stringcompareas.NotContains.IsNotContains()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotContains.IsNotContains()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotContains should be IsNotContains", actual)
-	actual := args.Map{"result": stringcompareas.NotMatchRegex.IsNotMatchRegex()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotMatchRegex.IsNotMatchRegex()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotMatchRegex should be IsNotMatchRegex", actual)
 }
 
@@ -90,14 +90,14 @@ func Test_Variant_IsNegativeCondition(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotEqual should be negative", actual)
-	actual := args.Map{"result": stringcompareas.NotStartsWith.IsNegativeCondition()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotStartsWith.IsNegativeCondition()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotStartsWith should be negative", actual)
-	actual := args.Map{"result": stringcompareas.NonGlob.IsNegativeCondition()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NonGlob.IsNegativeCondition()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NonGlob should be negative", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsNegativeCondition()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsNegativeCondition()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Equal should not be negative", actual)
 }
 
@@ -108,11 +108,11 @@ func Test_Variant_ValidInvalid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal should be valid", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsInvalid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsInvalid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Equal should not be invalid", actual)
-	actual := args.Map{"result": stringcompareas.Invalid.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Invalid.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Invalid should be invalid", actual)
 }
 
@@ -124,33 +124,33 @@ func Test_Variant_IsCompareSuccess(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal should match", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsCompareSuccess(false, "hello", "world")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsCompareSuccess(false, "hello", "world")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Equal should not match different", actual)
 
 	// StartsWith
-	actual := args.Map{"result": stringcompareas.StartsWith.IsCompareSuccess(false, "hello world", "hello")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.StartsWith.IsCompareSuccess(false, "hello world", "hello")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "StartsWith should match", actual)
 
 	// EndsWith
-	actual := args.Map{"result": stringcompareas.EndsWith.IsCompareSuccess(false, "hello world", "world")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.EndsWith.IsCompareSuccess(false, "hello world", "world")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "EndsWith should match", actual)
 
 	// Anywhere/Contains
-	actual := args.Map{"result": stringcompareas.Anywhere.IsCompareSuccess(false, "hello world", "lo wo")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Anywhere.IsCompareSuccess(false, "hello world", "lo wo")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Anywhere should match", actual)
 
 	// NotEqual
-	actual := args.Map{"result": stringcompareas.NotEqual.IsCompareSuccess(false, "hello", "world")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.NotEqual.IsCompareSuccess(false, "hello", "world")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "NotEqual should match different strings", actual)
 
 	// Case insensitive
-	actual := args.Map{"result": stringcompareas.Equal.IsCompareSuccess(true, "Hello", "hello")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": stringcompareas.Equal.IsCompareSuccess(true, "Hello", "hello")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal ignore case should match", actual)
 }
 
@@ -164,8 +164,8 @@ func Test_Variant_CompareSuccessCaseSensitive(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "case sensitive should match", actual)
-	actual := args.Map{"result": v.IsCompareSuccessCaseSensitive("Hello", "hello")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsCompareSuccessCaseSensitive("Hello", "hello")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "case sensitive should not match different case", actual)
 }
 
@@ -193,14 +193,14 @@ func Test_Variant_VerifyMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "matching should return empty message", actual)
 
 	msg = stringcompareas.Equal.VerifyMessage(false, "hello", "world")
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-matching should return error message", actual)
 
 	// negative case
 	msg = stringcompareas.NotEqual.VerifyMessage(false, "hello", "hello")
-	actual := args.Map{"result": msg == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NotEqual same values should return error message", actual)
 }
 
@@ -216,8 +216,8 @@ func Test_Variant_VerifyError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "matching should return nil error", actual)
 
 	err = stringcompareas.Equal.VerifyError(false, "hello", "world")
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "non-matching should return error", actual)
 }
 
@@ -255,8 +255,8 @@ func Test_Variant_MarshalJSON(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON error:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON should return bytes", actual)
 }
 
@@ -284,20 +284,20 @@ func Test_Variant_ValueMethods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Equal should be 0", actual)
-	actual := args.Map{"result": v.ValueInt() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueInt should be 0", actual)
-	actual := args.Map{"result": v.ValueInt8() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt8() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueInt8 should be 0", actual)
-	actual := args.Map{"result": v.ValueInt16() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt16() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueInt16 should be 0", actual)
-	actual := args.Map{"result": v.ValueInt32() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt32() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueInt32 should be 0", actual)
-	actual := args.Map{"result": v.ValueUInt16() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueUInt16() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ValueUInt16 should be 0", actual)
 }
 
@@ -317,8 +317,8 @@ func Test_Variant_Is(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal should Is Equal", actual)
-	actual := args.Map{"result": stringcompareas.Equal.Is(stringcompareas.StartsWith)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.Is(stringcompareas.StartsWith)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Equal should not Is StartsWith", actual)
 }
 
@@ -377,8 +377,8 @@ func Test_Variant_IsAnyMethod(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match Equal", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsAnyMethod("StartsWith")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsAnyMethod("StartsWith")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match StartsWith", actual)
 }
 
@@ -398,8 +398,8 @@ func Test_Variant_IsAnyNamesOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match Equal", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsAnyNamesOf("StartsWith", "EndsWith")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsAnyNamesOf("StartsWith", "EndsWith")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match", actual)
 }
 
@@ -419,8 +419,8 @@ func Test_Variant_IsAnyValuesEqual(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match 0", actual)
-	actual := args.Map{"result": stringcompareas.Equal.IsAnyValuesEqual(1, 2)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.IsAnyValuesEqual(1, 2)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match", actual)
 }
 
@@ -443,8 +443,8 @@ func Test_Variant_MaxMinByte(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "max should not be 0", actual)
-	actual := args.Map{"result": v.MinByte() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.MinByte() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "min should be 0", actual)
 }
 
@@ -504,8 +504,8 @@ func Test_Variant_MinMaxValueString(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MinValueString should not be empty", actual)
-	actual := args.Map{"result": stringcompareas.Equal.MaxValueString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.MaxValueString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MaxValueString should not be empty", actual)
 }
 
@@ -586,11 +586,11 @@ func Test_Variant_AsInterfaces(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsBasicEnumContractsBinder should not be nil", actual)
-	actual := args.Map{"result": stringcompareas.Equal.AsStringCompareTyper() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.AsStringCompareTyper() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsStringCompareTyper should not be nil", actual)
-	actual := args.Map{"result": stringcompareas.Equal.AsBasicByteEnumContractsBinder() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.Equal.AsBasicByteEnumContractsBinder() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "AsBasicByteEnumContractsBinder should not be nil", actual)
 }
 
@@ -605,8 +605,8 @@ func Test_Variant_UnmarshallEnumToValue(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshallEnumToValue error:", actual)
-	actual := args.Map{"result": val != byte(stringcompareas.Equal)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": val != byte(stringcompareas.Equal)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return Equal value", actual)
 }
 
@@ -658,8 +658,8 @@ func Test_Variant_OnlySupportedErr(t *testing.T) {
 
 	// Passing only "Equal" → all others unsupported → error expected
 	err2 := stringcompareas.Equal.OnlySupportedErr("Equal")
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "partial support should return error for unsupported names", actual)
 }
 
@@ -688,8 +688,8 @@ func Test_Variant_IsLineCompareFunc(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IsLineCompareFunc should not be nil", actual)
-	actual := args.Map{"result": fn("hello", "hello", false)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": fn("hello", "hello", false)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Equal compare func should match same strings", actual)
 }
 
@@ -700,8 +700,8 @@ func Test_Variant_GlobCompare(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "Glob should match *.txt", actual)
-	actual := args.Map{"result": stringcompareas.NonGlob.IsCompareSuccess(false, "hello.txt", "*.txt")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.NonGlob.IsCompareSuccess(false, "hello.txt", "*.txt")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NonGlob should not match *.txt", actual)
 }
 
@@ -712,8 +712,8 @@ func Test_Variant_AnyCharsCompare(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "AnyChars should match when chars exist", actual)
-	actual := args.Map{"result": stringcompareas.NotAnyChars.IsCompareSuccess(false, "hello", "hlo")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stringcompareas.NotAnyChars.IsCompareSuccess(false, "hello", "hlo")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NotAnyChars should not match when chars exist", actual)
 }
 

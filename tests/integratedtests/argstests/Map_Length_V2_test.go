@@ -35,8 +35,8 @@ func Test_Map_Has_FromMapLengthV2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have 'a'", actual)
-	actual := args.Map{"result": m.Has("b")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Has("b")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have 'b'", actual)
 }
 
@@ -89,8 +89,8 @@ func Test_Map_IsKeyMissing_FromMapLengthV2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "'a' should not be missing", actual)
-	actual := args.Map{"result": m.IsKeyMissing("b")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.IsKeyMissing("b")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "'b' should be missing", actual)
 }
 
@@ -545,8 +545,8 @@ func Test_Map_SortedKeys_Cov(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": len(keys) != 2 || keys[0] != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(keys) != 2 || keys[0] != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sorted [a b]", actual)
 }
 
@@ -561,8 +561,8 @@ func Test_Map_SortedKeys_Empty_FromMapLengthV2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": len(keys) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(keys) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty map should return empty keys", actual)
 }
 

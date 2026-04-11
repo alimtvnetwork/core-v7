@@ -55,8 +55,8 @@ func Test_Variant_ToWrapper_FromVariantChmodVerifier(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": wrapper.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper", actual)
 }
 
@@ -71,8 +71,8 @@ func Test_Variant_ToWrapperPtr_FromVariantChmodVerifier(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": wrapper == nil || wrapper.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": wrapper == nil || wrapper.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty wrapper ptr", actual)
 }
 
@@ -88,11 +88,11 @@ func Test_RwxWrapper_IsEmpty_Nil(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
-	actual := args.Map{"result": w.IsNull()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": w.IsNull()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected null for nil", actual)
-	actual := args.Map{"result": w.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": w.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected invalid for nil", actual)
 }
 
@@ -107,11 +107,11 @@ func Test_RwxWrapper_IsDefined(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": w.IsDefined()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": w.IsDefined()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected defined", actual)
-	actual := args.Map{"result": w.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": w.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has items", actual)
 }
 
@@ -337,8 +337,8 @@ func Test_NewRwxWrapper_UsingVariant_FromVariantChmodVerifier(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": w.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": w.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -364,8 +364,8 @@ func Test_NewRwxWrapper_RwxFullString(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": w.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": w.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -472,8 +472,8 @@ func Test_GetPathExistStat_NonExistent(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil stat", actual)
-	actual := args.Map{"result": stat.IsExist}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": stat.IsExist}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-exist for fake path", actual)
 }
 
@@ -506,8 +506,8 @@ func Test_IsPathExists_FromVariantChmodVerifier(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected exists for temp dir", actual)
 
-	actual := args.Map{"result": chmodhelper.IsPathExists("/nonexistent/xyz")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsPathExists("/nonexistent/xyz")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not exists", actual)
 }
 
@@ -533,8 +533,8 @@ func Test_IsDirectory_FromVariantChmodVerifier(t *testing.T) {
 
 	f := filepath.Join(tmpDir, "test.txt")
 	os.WriteFile(f, []byte("test"), 0644)
-	actual := args.Map{"result": chmodhelper.IsDirectory(f)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": chmodhelper.IsDirectory(f)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not directory for file", actual)
 }
 

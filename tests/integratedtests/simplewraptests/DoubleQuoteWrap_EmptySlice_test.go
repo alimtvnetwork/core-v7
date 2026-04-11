@@ -17,7 +17,7 @@ func Test_DoubleQuoteWrapElements_EmptyNonNilSlice(t *testing.T) {
 	actual := simplewrap.DoubleQuoteWrapElements(false, input...)
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElements with empty slice: got len, want 0", actual)
 }
@@ -31,7 +31,7 @@ func Test_DoubleQuoteWrapElementsWithIndexes_EmptyNonNilSlice(t *testing.T) {
 	actual := simplewrap.DoubleQuoteWrapElementsWithIndexes(input...)
 
 	// Assert
-	actual := args.Map{"result": len(actual) != 0}
+	actual = args.Map{"result": len(actual) != 0}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "DoubleQuoteWrapElementsWithIndexes with empty slice: got len, want 0", actual)
 }

@@ -71,8 +71,8 @@ func Test_CovJsonS5_R04_Result_PrettyJsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	var nr *corejson.Result
 	s2 := nr.PrettyJsonString()
-	actual := args.Map{"result": s2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -99,8 +99,8 @@ func Test_CovJsonS5_R06_Result_HasSafeItems_HasIssuesOrEmpty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected has safe items", actual)
-	actual := args.Map{"result": r.HasIssuesOrEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.HasIssuesOrEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no issues", actual)
 }
 
@@ -114,15 +114,15 @@ func Test_CovJsonS5_R07_Result_HasError_IsEmptyError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": r.IsEmptyError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": r.IsEmptyError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	re := corejson.Result{Error: errors.New("fail")}
-	actual := args.Map{"result": re.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": re.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": re.IsEmptyError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": re.IsEmptyError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -328,11 +328,11 @@ func Test_CovJsonS5_BC01_BytesCollection_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": bc.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": bc.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": bc.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -490,8 +490,8 @@ func Test_CovJsonS5_F03_BytesToString(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
-	actual := args.Map{"result": corejson.BytesToString(nil) != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": corejson.BytesToString(nil) != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 

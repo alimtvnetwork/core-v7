@@ -112,8 +112,8 @@ func Test_C05_NewResultCreator_UsingSerializerFunc(t *testing.T) {
 	r2 := corejson.NewResult.UsingSerializerFunc(func() ([]byte, error) {
 		return []byte(`"x"`), nil
 	})
-	actual := args.Map{"result": r2 == nil || r2.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == nil || r2.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -204,8 +204,8 @@ func Test_C05_BytesDeepClone_Func(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 	b2 := corejson.BytesDeepClone([]byte{})
-	actual := args.Map{"result": len(b2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -220,8 +220,8 @@ func Test_C05_BytesToString_Func(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	s2 := corejson.BytesToString([]byte{})
-	actual := args.Map{"result": s2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -236,8 +236,8 @@ func Test_C05_BytesToPrettyString_Func(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	s2 := corejson.BytesToPrettyString([]byte{})
-	actual := args.Map{"result": s2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -265,8 +265,8 @@ func Test_C05_JsonStringOrErrMsg_Func(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	ch := make(chan int)
 	s2 := corejson.JsonStringOrErrMsg(ch)
-	actual := args.Map{"result": s2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error message", actual)
 }
 

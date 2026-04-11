@@ -59,8 +59,8 @@ func Test_C31_04_RPC_FirstOrDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	rpc.Add(corejson.NewResult.AnyPtr("x"))
-	actual := args.Map{"result": rpc.FirstOrDefault() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.FirstOrDefault() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -75,8 +75,8 @@ func Test_C31_05_RPC_LastOrDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	rpc.Add(corejson.NewResult.AnyPtr("x"))
-	actual := args.Map{"result": rpc.LastOrDefault() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.LastOrDefault() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -108,8 +108,8 @@ func Test_C31_07_RPC_Limit(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": rpc.Limit(1).Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.Limit(1).Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -181,8 +181,8 @@ func Test_C31_12_RPC_HasError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	rpc.Add(&corejson.Result{Error: errors.New("e")})
-	actual := args.Map{"result": rpc.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rpc.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -200,8 +200,8 @@ func Test_C31_13_RPC_AllErrors(t *testing.T) {
 	rpc.Add(corejson.NewResult.AnyPtr("x"))
 	rpc.Add(&corejson.Result{Error: errors.New("e")})
 	errs, has = rpc.AllErrors()
-	actual := args.Map{"result": has || len(errs) != 1}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": has || len(errs) != 1}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -338,8 +338,8 @@ func Test_C31_24_RPC_GetAtSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": rpc.GetAtSafe(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.GetAtSafe(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -354,8 +354,8 @@ func Test_C31_25_RPC_GetAtSafeUsingLength(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": rpc.GetAtSafeUsingLength(5, 1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.GetAtSafeUsingLength(5, 1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -554,8 +554,8 @@ func Test_C31_45_RPC_GetPagesSize(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		rpc.Add(corejson.NewResult.AnyPtr(i))
 	}
-	actual := args.Map{"result": rpc.GetPagesSize(2) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rpc.GetPagesSize(2) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -944,8 +944,8 @@ func Test_C31_90_NRC_UsingSerializerFunc(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	r = corejson.NewResult.UsingSerializerFunc(func() ([]byte, error) { return []byte(`"x"`), nil })
-	actual := args.Map{"result": r.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
@@ -1350,8 +1350,8 @@ func Test_C31_151_Deser_MapAnyToPointer(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for empty map skip", actual)
 	err = corejson.Deserialize.MapAnyToPointer(false, map[string]any{"Name": "test"}, &s)
-	actual := args.Map{"result": err != nil || s.Name != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || s.Name != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -1408,8 +1408,8 @@ func Test_C31_155_Deser_UsingBytesIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil when skip", actual)
 	err = corejson.Deserialize.UsingBytesIf(true, []byte(`"hello"`), &s)
-	actual := args.Map{"result": err != nil || s != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || s != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -1425,8 +1425,8 @@ func Test_C31_156_Deser_UsingBytesPointerIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil when skip", actual)
 	err = corejson.Deserialize.UsingBytesPointerIf(true, []byte(`"hello"`), &s)
-	actual := args.Map{"result": err != nil || s != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || s != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -1442,8 +1442,8 @@ func Test_C31_157_Deser_UsingBytesPointer(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 	err = corejson.Deserialize.UsingBytesPointer([]byte(`"hello"`), &s)
-	actual := args.Map{"result": err != nil || s != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || s != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -1515,8 +1515,8 @@ func Test_C31_163_Deser_UsingDeserializerToOption(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err = corejson.Deserialize.UsingDeserializerToOption(false, nil, &s)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -1547,8 +1547,8 @@ func Test_C31_165_Deser_UsingDeserializerFuncDefined(t *testing.T) {
 	err = corejson.Deserialize.UsingDeserializerFuncDefined(func(toPtr any) error {
 		return nil
 	}, &s)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
@@ -1564,8 +1564,8 @@ func Test_C31_166_Deser_UsingJsonerToAny(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err = corejson.Deserialize.UsingJsonerToAny(false, nil, &s)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 

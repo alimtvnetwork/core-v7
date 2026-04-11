@@ -136,7 +136,7 @@ func Test_SliceValidators_VerifyAll_DiffOutput_Verification(t *testing.T) {
 			}
 
 			// Act
-			err := v.VerifyAll(header, params, false)
+			err = v.VerifyAll(header, params, false)
 
 			if err == nil {
 				actLines = []string{"false"}

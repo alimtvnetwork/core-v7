@@ -22,8 +22,8 @@ func Test_SliceValidators_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "empty should be empty", actual)
-	actual := args.Map{"result": v.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -47,8 +47,8 @@ func Test_SliceValidators_WithItems(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty", actual)
-	actual := args.Map{"result": v.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 

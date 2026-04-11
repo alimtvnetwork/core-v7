@@ -131,12 +131,12 @@ func Test_Variant_IsAnyEnumsEqual(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsAnyEnumsEqual to find match", actual)
 
-	actual := args.Map{"result": v.IsAnyEnumsEqual(&two, &three)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsAnyEnumsEqual(&two, &three)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsAnyEnumsEqual to not match", actual)
 
-	actual := args.Map{"result": v.IsAnyEnumsEqual()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsAnyEnumsEqual()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsAnyEnumsEqual with no args to return false", actual)
 }
 
@@ -152,8 +152,8 @@ func Test_Variant_MarshalJSON(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON error:", actual)
 
-	actual := args.Map{"result": len(data) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(data) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MarshalJSON returned empty bytes", actual)
 }
 
@@ -171,8 +171,8 @@ func Test_Variant_UnmarshalJSON(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
 
-	actual := args.Map{"result": result.Value() != v.Value()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.Value() != v.Value()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected value", actual)
 }
 
@@ -189,8 +189,8 @@ func Test_Variant_UnmarshallToValue(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshallToValue error:", actual)
 
-	actual := args.Map{"result": val != v.Value()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": val != v.Value()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected", actual)
 }
 
@@ -232,8 +232,8 @@ func Test_Variant_MinMaxAny(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "min should not be nil", actual)
 
-	actual := args.Map{"result": max == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": max == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "max should not be nil", actual)
 }
 
@@ -246,16 +246,16 @@ func Test_Variant_MinMaxStrings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MinValueString should not be empty", actual)
 
-	actual := args.Map{"result": v.MaxValueString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.MaxValueString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MaxValueString should not be empty", actual)
 
-	actual := args.Map{"result": v.MinInt() < 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.MinInt() < 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MinInt should be >= 0", actual)
 
-	actual := args.Map{"result": v.MaxInt() <= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.MaxInt() <= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MaxInt should be > 0", actual)
 }
 
@@ -294,8 +294,8 @@ func Test_Variant_StringRanges(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "StringRanges should not be empty", actual)
 
-	actual := args.Map{"result": len(v.StringRangesPtr()) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(v.StringRangesPtr()) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "StringRangesPtr should not be empty", actual)
 }
 
@@ -308,8 +308,8 @@ func Test_Variant_RangesInvalid(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RangesInvalidMessage should not be empty", actual)
 
-	actual := args.Map{"result": v.RangesInvalidErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.RangesInvalidErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RangesInvalidErr should not be nil", actual)
 }
 

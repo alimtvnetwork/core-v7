@@ -22,8 +22,8 @@ func Test_StringSlice_PrependNew_BothNonEmpty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
-	actual := args.Map{"result": r[0] != "a" || r[1] != "b" || r[2] != "c" || r[3] != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r[0] != "a" || r[1] != "b" || r[2] != "c" || r[3] != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected order:", actual)
 }
 
@@ -240,8 +240,8 @@ func Test_StringSlice_CloneIf_True(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	result[0] = "z"
-	actual := args.Map{"result": src[0] == "z"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": src[0] == "z"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CloneIf true should produce independent copy", actual)
 }
 

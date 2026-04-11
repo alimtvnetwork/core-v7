@@ -453,8 +453,8 @@ func Test_LineValidator_AllVerifyError_CollectsMultipleErrors(t *testing.T) {
 
 	errMsg := err.Error()
 	for _, expected := range []string{"bad1", "bad2", "bad3"} {
-		actual := args.Map{"result": strings.Contains(errMsg, expected)}
-		expected := args.Map{"result": true}
+		actual = args.Map{"result": strings.Contains(errMsg, expected)}
+		expected = args.Map{"result": true}
 		expected.ShouldBeEqual(t, 0, "AllVerifyError should collect all errors, missing '' in:\n", actual)
 	}
 }
@@ -488,8 +488,8 @@ func Test_LineValidator_AllVerifyError_FirstFailOthersPass(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AllVerifyError should return error when any item fails", actual)
 
 	errMsg := err.Error()
-	actual := args.Map{"result": strings.Contains(errMsg, "bad")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": strings.Contains(errMsg, "bad")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "error should mention the failed content 'bad', got:\n", actual)
 }
 

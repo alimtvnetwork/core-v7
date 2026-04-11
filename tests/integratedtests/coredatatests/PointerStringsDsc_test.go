@@ -54,7 +54,7 @@ func Test_PointerStringsDsc_Less(t *testing.T) {
 	{
 		b := "beta"
 		ps := coredata.PointerStringsDsc{nil, &b}
-		actual := args.Map{
+		actual = args.Map{
 			"result": ps.Less(0, 1),
 		}
 		pointerStringsDscLessTestCases[1].ShouldBeEqualMap(t, 1, actual)
@@ -64,7 +64,7 @@ func Test_PointerStringsDsc_Less(t *testing.T) {
 	{
 		a := "alpha"
 		ps := coredata.PointerStringsDsc{&a, nil}
-		actual := args.Map{
+		actual = args.Map{
 			"result": ps.Less(0, 1),
 		}
 		pointerStringsDscLessTestCases[2].ShouldBeEqualMap(t, 2, actual)
@@ -73,7 +73,7 @@ func Test_PointerStringsDsc_Less(t *testing.T) {
 	// Case 3: both nil returns false
 	{
 		ps := coredata.PointerStringsDsc{nil, nil}
-		actual := args.Map{
+		actual = args.Map{
 			"result": ps.Less(0, 1),
 		}
 		pointerStringsDscLessTestCases[3].ShouldBeEqualMap(t, 3, actual)

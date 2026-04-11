@@ -117,13 +117,13 @@ func Test_Within_StringRangeIntegerDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 50", actual)
 	// below min
 	val2, ok2 := corerange.Within.StringRangeIntegerDefault(0, 100, "-5")
-	actual := args.Map{"result": ok2 || val2 != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2 || val2 != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 for below min", actual)
 	// above max
 	val3, ok3 := corerange.Within.StringRangeIntegerDefault(0, 100, "200")
-	actual := args.Map{"result": ok3 || val3 != 100}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok3 || val3 != 100}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 100 for above max", actual)
 }
 
@@ -211,17 +211,17 @@ func Test_Within_RangeFloat(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 50", actual)
 	// below min with boundary
 	val2, ok2 := corerange.Within.RangeFloat(true, 10, 100, 5)
-	actual := args.Map{"result": ok2 || val2 != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2 || val2 != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 10", actual)
 	// above max with boundary
 	val3, ok3 := corerange.Within.RangeFloat(true, 0, 100, 200)
-	actual := args.Map{"result": ok3 || val3 != 100}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok3 || val3 != 100}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 100", actual)
 	// no boundary
 	val4, ok4 := corerange.Within.RangeFloat(false, 0, 100, 200)
-	actual := args.Map{"result": ok4 || val4 != 200}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok4 || val4 != 200}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 200", actual)
 }

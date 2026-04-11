@@ -130,7 +130,7 @@ func Test_PagingInfo_ClonePtr_Verification(t *testing.T) {
 			}
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
-			actual := args.Map{
+			actual = args.Map{
 				"isNil":            result == nil,
 				"totalPages":       result.TotalPages,
 				"currentPageIndex": result.CurrentPageIndex,

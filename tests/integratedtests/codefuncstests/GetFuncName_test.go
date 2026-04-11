@@ -301,7 +301,7 @@ func Test_NewCreator_Verification(t *testing.T) {
 			w := corefuncs.New.LegacyResultDelegating(name, func(_ any) error {
 				return nil
 			})
-			err := w.Exec("target")
+			err = w.Exec("target")
 			actual = args.Map{
 				"hasError": err != nil,
 			}

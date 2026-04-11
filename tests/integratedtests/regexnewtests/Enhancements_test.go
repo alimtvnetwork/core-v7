@@ -120,11 +120,11 @@ func Test_TwoLock_InvalidPatterns(t *testing.T) {
 	tc0.ShouldBeEqualMapFirst(t, actual)
 
 	// Verify first is applicable, second is not
-	actual := args.Map{"result": first.IsApplicable()}
+	actual = args.Map{"result": first.IsApplicable()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "case 0: first pattern should be applicable", actual)
-	actual := args.Map{"result": second.IsApplicable()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": second.IsApplicable()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "case 0: second pattern should NOT be applicable", actual)
 }
 
@@ -147,11 +147,11 @@ func Test_TwoLock_BothInvalid(t *testing.T) {
 	tc1.ShouldBeEqualMapFirst(t, actual)
 
 	// Verify both are not applicable
-	actual := args.Map{"result": first.IsApplicable()}
+	actual = args.Map{"result": first.IsApplicable()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "case 1: first pattern should NOT be applicable", actual)
-	actual := args.Map{"result": second.IsApplicable()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": second.IsApplicable()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "case 1: second pattern should NOT be applicable", actual)
 }
 

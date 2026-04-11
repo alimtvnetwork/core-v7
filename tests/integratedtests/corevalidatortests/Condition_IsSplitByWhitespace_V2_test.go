@@ -75,8 +75,8 @@ func Test_Parameter_IsIgnoreCase_Cov(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "case sensitive should not ignore case", actual)
 	p2 := corevalidator.Parameter{IsCaseSensitive: false}
-	actual := args.Map{"result": p2.IsIgnoreCase()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": p2.IsIgnoreCase()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "not case sensitive should ignore case", actual)
 }
 
@@ -142,8 +142,8 @@ func Test_LineNumber_IsMatch_Exact(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match", actual)
-	actual := args.Map{"result": ln.IsMatch(3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ln.IsMatch(3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match", actual)
 }
 
@@ -407,8 +407,8 @@ func Test_TextValidators_HasAnyItem(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be empty", actual)
 	tvs.Add(corevalidator.TextValidator{})
-	actual := args.Map{"result": tvs.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tvs.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have items", actual)
 }
 
@@ -423,8 +423,8 @@ func Test_TextValidators_HasIndex_Cov(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have index 0", actual)
-	actual := args.Map{"result": tvs.HasIndex(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tvs.HasIndex(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have index 5", actual)
 }
 

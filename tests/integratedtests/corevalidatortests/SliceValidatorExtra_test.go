@@ -140,8 +140,8 @@ func Test_SliceValidator_ComparingValidators_Cached(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return same cached instance", actual)
-	actual := args.Map{"result": first.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": first.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 validators", actual)
 }
 
@@ -206,11 +206,11 @@ func Test_NewSliceValidatorUsingErr_WithError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be nil", actual)
-	actual := args.Map{"result": v.ActualLinesLength() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ActualLinesLength() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 actual lines", actual)
-	actual := args.Map{"result": v.ExpectingLinesLength() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ExpectingLinesLength() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 expected lines", actual)
 }
 
@@ -229,11 +229,11 @@ func Test_NewSliceValidatorUsingErr_WithConditions(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsTrimCompare true", actual)
-	actual := args.Map{"result": v.IsNonEmptyWhitespace}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsNonEmptyWhitespace}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsNonEmptyWhitespace true", actual)
-	actual := args.Map{"result": v.IsSortStringsBySpace}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsSortStringsBySpace}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsSortStringsBySpace true", actual)
 }
 
@@ -261,8 +261,8 @@ func Test_SliceValidator_UserInputsMergeWithError_NoAttach_FromSliceValidatorExt
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return error", actual)
-	actual := args.Map{"result": result.Error() != "test error"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.Error() != "test error"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "without attach, should return original error, got:", actual)
 }
 
@@ -287,8 +287,8 @@ func Test_SliceValidator_UserInputsMergeWithError_WithAttach(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return error", actual)
 	msg := result.Error()
-	actual := args.Map{"result": msg == "test error"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": msg == "test error"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "with attach, should include additional context", actual)
 }
 
@@ -334,17 +334,17 @@ func Test_TextValidators_AddSimpleAllTrue_FromSliceValidatorExtra(t *testing.T) 
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should add one validator", actual)
 	item := v.Items[0]
-	actual := args.Map{"result": item.IsTrimCompare}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": item.IsTrimCompare}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsTrimCompare true", actual)
-	actual := args.Map{"result": item.IsUniqueWordOnly}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": item.IsUniqueWordOnly}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsUniqueWordOnly true", actual)
-	actual := args.Map{"result": item.IsNonEmptyWhitespace}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": item.IsNonEmptyWhitespace}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsNonEmptyWhitespace true", actual)
-	actual := args.Map{"result": item.IsSortStringsBySpace}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": item.IsSortStringsBySpace}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have IsSortStringsBySpace true", actual)
 }
 

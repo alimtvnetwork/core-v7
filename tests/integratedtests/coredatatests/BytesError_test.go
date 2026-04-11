@@ -293,14 +293,14 @@ func Test_BytesError_HandleErrorWithMsg_PanicsWithMsg(t *testing.T) {
 
 		msg, ok := r.(string)
 		if !ok {
-			actual := args.Map{"result": false}
-			expected := args.Map{"result": true}
+			actual = args.Map{"result": false}
+			expected = args.Map{"result": true}
 			expected.ShouldBeEqual(t, 0, "expected panic value to be string", actual)
 			return
 		}
 
-		actual := args.Map{"result": msg != "prefix: boom"}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": msg != "prefix: boom"}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "panic message =, want", msg, "prefix: boom", actual)
 	}()
 

@@ -20,12 +20,12 @@ func Test_InvalidReflectValueKindModel_FromReflectValueKind(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsValid = false", actual)
 
-	actual := args.Map{"result": rvk.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rvk.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasError() = true", actual)
 
-	actual := args.Map{"result": rvk.Error.Error() != "test error"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rvk.Error.Error() != "test error"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Error =, want", rvk.Error.Error(), "test error", actual)
 }
 

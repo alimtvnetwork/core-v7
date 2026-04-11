@@ -54,7 +54,7 @@ func Test_PointerIntegers_Less(t *testing.T) {
 	{
 		b := 5
 		pi := coredata.PointerIntegers{nil, &b}
-		actual := args.Map{
+		actual = args.Map{
 			"result": pi.Less(0, 1),
 		}
 		pointerIntegersLessTestCases[1].ShouldBeEqualMap(t, 1, actual)
@@ -64,7 +64,7 @@ func Test_PointerIntegers_Less(t *testing.T) {
 	{
 		a := 5
 		pi := coredata.PointerIntegers{&a, nil}
-		actual := args.Map{
+		actual = args.Map{
 			"result": pi.Less(0, 1),
 		}
 		pointerIntegersLessTestCases[2].ShouldBeEqualMap(t, 2, actual)
@@ -73,7 +73,7 @@ func Test_PointerIntegers_Less(t *testing.T) {
 	// Case 3: both nil
 	{
 		pi := coredata.PointerIntegers{nil, nil}
-		actual := args.Map{
+		actual = args.Map{
 			"result": pi.Less(0, 1),
 		}
 		pointerIntegersLessTestCases[3].ShouldBeEqualMap(t, 3, actual)

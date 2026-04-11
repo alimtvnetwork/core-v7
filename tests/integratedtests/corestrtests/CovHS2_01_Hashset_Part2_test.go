@@ -109,22 +109,22 @@ func Test_CovHS2_05_GetFilteredItems(t *testing.T) {
 		r2 := hs.GetFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// skip
 		r3 := hs.GetFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, false, false
 		})
-		actual := args.Map{"result": len(r3) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// break
 		r4 := hs.GetFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, true, true
 		})
-		actual := args.Map{"result": len(r4) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1 (break)", actual)
 	})
 }
@@ -149,15 +149,15 @@ func Test_CovHS2_06_GetFilteredCollection(t *testing.T) {
 		col2 := hs.GetFilteredCollection(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": col2.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col2.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// break
 		col3 := hs.GetFilteredCollection(func(s string, i int) (string, bool, bool) {
 			return s, true, true
 		})
-		actual := args.Map{"result": col3.Length() != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col3.Length() != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

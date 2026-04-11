@@ -27,8 +27,8 @@ func Test_01_FP_IsFieldType(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for same type", actual)
-	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fp.IsFieldType(reflect.TypeOf(0))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for different type", actual)
 }
 
@@ -59,8 +59,8 @@ func Test_03_FP_IsFieldKind(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for string kind", actual)
-	actual := args.Map{"result": fp.IsFieldKind(reflect.Int)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fp.IsFieldKind(reflect.Int)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for int kind", actual)
 }
 
@@ -120,8 +120,8 @@ func Test_05_MP_HasValidFunc(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	var nilMP *reflectmodel.MethodProcessor
-	actual := args.Map{"result": nilMP.HasValidFunc()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilMP.HasValidFunc()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
@@ -148,8 +148,8 @@ func Test_07_MP_IsInvalid(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	var nilMP *reflectmodel.MethodProcessor
-	actual := args.Map{"result": nilMP.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilMP.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true for nil", actual)
 }
 
@@ -317,8 +317,8 @@ func Test_20_MP_GetOutArgsTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2 out args", actual)
 	// Call again to test cache
 	types2 := mp.GetOutArgsTypes()
-	actual := args.Map{"result": len(types2) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(types2) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 from cache", actual)
 }
 
@@ -362,8 +362,8 @@ func Test_23_MP_GetInArgsTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 2 in args", actual)
 	// call again for cache
 	types2 := mp.GetInArgsTypes()
-	actual := args.Map{"result": len(types2) != len(types)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(types2) != len(types)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache mismatch", actual)
 }
 
@@ -393,8 +393,8 @@ func Test_25_MP_GetInArgsTypesNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	// call again for cache
 	names2 := mp.GetInArgsTypesNames()
-	actual := args.Map{"result": len(names2) != len(names)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(names2) != len(names)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache mismatch", actual)
 }
 
@@ -441,8 +441,8 @@ func Test_28_MP_Invoke_Success(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": len(results) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(results) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 results", actual)
 }
 
@@ -483,8 +483,8 @@ func Test_31_MP_GetFirstResponseOfInvoke(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": first != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": first != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'hello'", actual)
 }
 
@@ -512,8 +512,8 @@ func Test_33_MP_InvokeResultOfIndex(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": result != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'test'", actual)
 }
 
@@ -576,11 +576,11 @@ func Test_37_MP_InvokeFirstAndError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected processing error:", actual)
-	actual := args.Map{"result": funcErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": funcErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil func error", actual)
-	actual := args.Map{"result": first != "test"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": first != "test"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'test'", actual)
 }
 
@@ -795,11 +795,11 @@ func Test_53_RVK_InvalidModel(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": rvk.Error == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rvk.Error == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": rvk.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rvk.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsInvalid true", actual)
 }
 

@@ -316,8 +316,8 @@ func Test_Invoke_TypeMismatch(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected type mismatch error", actual)
-	actual := args.Map{"hasErr": true}
-	expected := args.Map{"hasErr": true}
+	actual = args.Map{"hasErr": true}
+	expected = args.Map{"hasErr": true}
 	expected.ShouldBeEqual(t, 0, "Invoke returns correct value -- type mismatch", actual)
 }
 

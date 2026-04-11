@@ -151,23 +151,23 @@ func Test_Variant_IntComparisons(t *testing.T) {
 	actual := args.Map{"result": v.IsEqualInt(5)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsEqualInt(5) true", actual)
-	actual := args.Map{"result": v.IsEqualInt(3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsEqualInt(3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsEqualInt(3) false", actual)
-	actual := args.Map{"result": v.IsGreaterInt(3)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsGreaterInt(3)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsGreaterInt(3) true", actual)
-	actual := args.Map{"result": v.IsGreaterEqualInt(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsGreaterEqualInt(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsGreaterEqualInt(5) true", actual)
-	actual := args.Map{"result": v.IsLessInt(7)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsLessInt(7)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsLessInt(7) true", actual)
-	actual := args.Map{"result": v.IsLessEqualInt(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsLessEqualInt(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsLessEqualInt(5) true", actual)
-	actual := args.Map{"result": v.IsBetweenInt(3, 7)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsBetweenInt(3, 7)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsBetweenInt(3,7) true", actual)
 }
 
@@ -179,8 +179,8 @@ func Test_Variant_Is(t *testing.T) {
 	actual := args.Map{"result": v.Is(bytetype.Three)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected Is(Three) true", actual)
-	actual := args.Map{"result": v.Is(bytetype.One)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.Is(bytetype.One)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Is(One) false", actual)
 }
 
@@ -196,21 +196,21 @@ func Test_Variant_HasIndexInStrings(t *testing.T) {
 	actual := args.Map{"result": isValid}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected isValid true", actual)
-	actual := args.Map{"result": val != "one"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": val != "one"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'one', got ''", actual)
 
 	// Out of range
 	v2 := bytetype.New(10)
 	_, isValid2 := v2.HasIndexInStrings(items...)
-	actual := args.Map{"result": isValid2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isValid2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected isValid false for out of range", actual)
 
 	// Empty slice
 	_, isValid3 := v.HasIndexInStrings()
-	actual := args.Map{"result": isValid3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isValid3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected isValid false for empty slice", actual)
 }
 
@@ -222,23 +222,23 @@ func Test_Variant_ValueConversions(t *testing.T) {
 	actual := args.Map{"result": v.ValueUInt16() != 42}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ValueUInt16=42", actual)
-	actual := args.Map{"result": v.ValueInt8() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt8() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ValueInt8=42", actual)
-	actual := args.Map{"result": v.ValueInt16() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt16() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ValueInt16=42", actual)
-	actual := args.Map{"result": v.ValueInt32() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueInt32() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ValueInt32=42", actual)
-	actual := args.Map{"result": v.ValueString() != "42"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ValueString() != "42"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ValueString='42', got ''", actual)
-	actual := args.Map{"result": v.ToNumberString() != "42"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.ToNumberString() != "42"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToNumberString='42', got ''", actual)
-	actual := args.Map{"result": v.StringValue() != "42"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.StringValue() != "42"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected StringValue='42', got ''", actual)
 }
 
@@ -250,8 +250,8 @@ func Test_Variant_IsValueEqual(t *testing.T) {
 	actual := args.Map{"result": v.IsValueEqual(5)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsValueEqual(5) true", actual)
-	actual := args.Map{"result": v.IsValueEqual(3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsValueEqual(3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsValueEqual(3) false", actual)
 }
 
@@ -266,8 +266,8 @@ func Test_Variant_ToPtr(t *testing.T) {
 	actual := args.Map{"result": ptr == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ToPtr to not be nil", actual)
-	actual := args.Map{"result": ptr.ValueInt() != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptr.ValueInt() != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ptr value 7", actual)
 }
 
@@ -282,8 +282,8 @@ func Test_Variant_IsNameEqual(t *testing.T) {
 	actual := args.Map{"result": v.IsNameEqual(name)}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsNameEqual('') true", actual)
-	actual := args.Map{"result": v.IsNameEqual("NonExistent")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsNameEqual("NonExistent")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsNameEqual('NonExistent') false", actual)
 }
 
@@ -296,7 +296,7 @@ func Test_Variant_IsAnyNamesOf(t *testing.T) {
 	actual := args.Map{"result": v.IsAnyNamesOf(name, "Other")}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsAnyNamesOf to find match", actual)
-	actual := args.Map{"result": v.IsAnyNamesOf("None", "Other")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsAnyNamesOf("None", "Other")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected IsAnyNamesOf to not match", actual)
 }

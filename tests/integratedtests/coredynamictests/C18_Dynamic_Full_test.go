@@ -50,13 +50,13 @@ func Test_C18_Dynamic_Clone(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "clone invalid", actual)
-	actual := args.Map{"result": cloneP.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": cloneP.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "cloneP invalid", actual)
 
 	var nilD *coredynamic.Dynamic
-	actual := args.Map{"result": nilD.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -91,8 +91,8 @@ func Test_C18_Dynamic_Length(t *testing.T) {
 	expected := args.Map{"result": 3}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	nilD := coredynamic.NewDynamic(nil, false)
-	actual := args.Map{"result": nilD.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 for nil", actual)
 }
 
@@ -143,15 +143,15 @@ func Test_C18_Dynamic_IsPointer_IsValueType(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "string not a pointer", actual)
-	actual := args.Map{"result": d.IsValueType()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsValueType()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "string is value type", actual)
 	// call again for cache
 	_ = d.IsPointer()
 
 	ptrD := coredynamic.NewDynamic(&struct{}{}, true)
-	actual := args.Map{"result": ptrD.IsPointer()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": ptrD.IsPointer()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "ptr should be pointer", actual)
 }
 
@@ -218,14 +218,14 @@ func Test_C18_Dynamic_IntDefault(t *testing.T) {
 
 	badD := coredynamic.NewDynamic("notint", true)
 	val2, ok2 := badD.IntDefault(99)
-	actual := args.Map{"result": ok2 || val2 != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2 || val2 != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 99 default", actual)
 
 	nilD := coredynamic.NewDynamic(nil, false)
 	val3, ok3 := nilD.IntDefault(7)
-	actual := args.Map{"result": ok3 || val3 != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok3 || val3 != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 7", actual)
 }
 
@@ -243,14 +243,14 @@ func Test_C18_Dynamic_Float64(t *testing.T) {
 
 	nilD := coredynamic.NewDynamic(nil, false)
 	_, err2 := nilD.Float64()
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 
 	badD := coredynamic.NewDynamic("notnum", true)
 	_, err3 := badD.Float64()
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -280,20 +280,20 @@ func Test_C18_Dynamic_ValueCasts(t *testing.T) {
 
 	// Wrong type casts
 	badInt := coredynamic.NewDynamic("str", true)
-	actual := args.Map{"result": badInt.ValueInt() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": badInt.ValueInt() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
-	actual := args.Map{"result": badInt.ValueUInt() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": badInt.ValueUInt() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": badInt.ValueStrings() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": badInt.ValueStrings() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": badInt.ValueBool()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": badInt.ValueBool()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": badInt.ValueInt64() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": badInt.ValueInt64() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
 }
 
@@ -309,13 +309,13 @@ func Test_C18_Dynamic_ValueNullErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	nilD := coredynamic.NewDynamic(nil, false)
-	actual := args.Map{"result": nilD.ValueNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.ValueNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	var ptrD *coredynamic.Dynamic
-	actual := args.Map{"result": ptrD.ValueNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ptrD.ValueNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -331,13 +331,13 @@ func Test_C18_Dynamic_ValueString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 
 	intD := coredynamic.NewDynamic(42, true)
-	actual := args.Map{"result": intD.ValueString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": intD.ValueString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 
 	var nilD *coredynamic.Dynamic
-	actual := args.Map{"result": nilD.ValueString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.ValueString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
@@ -355,8 +355,8 @@ func Test_C18_Dynamic_Bytes(t *testing.T) {
 
 	var nilD *coredynamic.Dynamic
 	b2, ok2 := nilD.Bytes()
-	actual := args.Map{"result": ok2 || b2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2 || b2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -375,8 +375,8 @@ func Test_C18_Dynamic_ReflectValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	// cached
 	rv2 := d.ReflectValue()
-	actual := args.Map{"result": rv2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rv2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached", actual)
 }
 
@@ -391,14 +391,14 @@ func Test_C18_Dynamic_ReflectKind_Type_TypeName(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 	rt := d.ReflectType()
-	actual := args.Map{"result": rt == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rt == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	// cached
 	_ = d.ReflectType()
 	tn := d.ReflectTypeName()
-	actual := args.Map{"result": tn == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tn == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -412,8 +412,8 @@ func Test_C18_Dynamic_IsReflectTypeOf_IsReflectKind(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": d.IsReflectKind(reflect.String)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": d.IsReflectKind(reflect.String)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -429,14 +429,14 @@ func Test_C18_Dynamic_ItemUsingIndex_Key(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 20", actual)
 	rv := sliceD.ItemReflectValueUsingIndex(0)
-	actual := args.Map{"result": rv.Int() != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rv.Int() != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 10", actual)
 
 	mapD := coredynamic.NewDynamic(map[string]int{"a": 1}, true)
 	val := mapD.ItemUsingKey("a")
-	actual := args.Map{"result": val != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": val != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	_ = mapD.ItemReflectValueUsingKey("a")
 }
@@ -463,15 +463,15 @@ func Test_C18_Dynamic_Loop(t *testing.T) {
 		count2++
 		return i == 0
 	})
-	actual := args.Map{"result": count2 != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count2 != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1 iteration", actual)
 
 	// nil/invalid
 	nilD := coredynamic.NewDynamic(nil, false)
 	called := nilD.Loop(func(i int, item any) bool { return false })
-	actual := args.Map{"result": called}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": called}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for nil", actual)
 }
 
@@ -496,8 +496,8 @@ func Test_C18_Dynamic_LoopMap(t *testing.T) {
 
 	// nil
 	nilD := coredynamic.NewDynamic(nil, false)
-	actual := args.Map{"result": nilD.LoopMap(func(i int, k, v any) bool { return false })}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilD.LoopMap(func(i int, k, v any) bool { return false })}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -519,15 +519,15 @@ func Test_C18_Dynamic_FilterAsDynamicCollection(t *testing.T) {
 	result2 := d.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) {
 		return true, i == 1
 	})
-	actual := args.Map{"result": result2.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result2.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 
 	// nil
 	nilD := coredynamic.NewDynamic(nil, false)
 	r := nilD.FilterAsDynamicCollection(func(i int, item coredynamic.Dynamic) (bool, bool) { return true, false })
-	actual := args.Map{"result": r.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -576,8 +576,8 @@ func Test_C18_Dynamic_JsonNull(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error for null", actual)
-	actual := args.Map{"result": len(b) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty bytes", actual)
 }
 
@@ -657,16 +657,16 @@ func Test_C18_DynamicStatus(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": cloneP == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloneP == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": dsNoMsg.IsValid()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dsNoMsg.IsValid()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 
 	var nilDS *coredynamic.DynamicStatus
-	actual := args.Map{"result": nilDS.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilDS.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -709,12 +709,12 @@ func Test_C18_SimpleRequest_TypeMismatch(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for matching type", actual)
 	err2 := sr.GetErrorOnTypeMismatch(reflect.TypeOf(0), false)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for mismatch", actual)
 	err3 := sr.GetErrorOnTypeMismatch(reflect.TypeOf(0), true)
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error with message", actual)
 }
 
@@ -743,13 +743,13 @@ func Test_C18_SimpleRequest_InvalidError(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected nil for empty msg", actual)
 	sr2 := coredynamic.InvalidSimpleRequest("some error")
 	err := sr2.InvalidError()
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// cached
 	err2 := sr2.InvalidError()
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached error", actual)
 }
 
@@ -789,8 +789,8 @@ func Test_C18_SimpleResult_TypeMismatch(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err2 := sr.GetErrorOnTypeMismatch(reflect.TypeOf(0), true)
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -805,12 +805,12 @@ func Test_C18_SimpleResult_InvalidError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	sr2 := coredynamic.InvalidSimpleResult("err msg")
-	actual := args.Map{"result": sr2.InvalidError() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr2.InvalidError() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// cached
-	actual := args.Map{"result": sr2.InvalidError() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sr2.InvalidError() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached", actual)
 }
 
@@ -826,13 +826,13 @@ func Test_C18_SimpleResult_Clone(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "clone invalid", actual)
-	actual := args.Map{"result": cloneP == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloneP == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	var nilSR *coredynamic.SimpleResult
-	actual := args.Map{"result": nilSR.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilSR.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -893,8 +893,8 @@ func Test_C18_TypedDynamic_UnmarshalJSON(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": td.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": td.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid after unmarshal", actual)
 }
 
@@ -912,8 +912,8 @@ func Test_C18_TypedDynamic_Deserialize(t *testing.T) {
 
 	var nilTD *coredynamic.TypedDynamic[string]
 	err2 := nilTD.Deserialize([]byte(`"x"`))
-	actual := args.Map{"result": err2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 }
 
@@ -932,37 +932,37 @@ func Test_C18_TypedDynamic_GetAs(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetAsString failed", actual)
 	i, iok := intTD.GetAsInt()
-	actual := args.Map{"result": iok || i != 42}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": iok || i != 42}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetAsInt failed", actual)
 	b, bok := boolTD.GetAsBool()
-	actual := args.Map{"result": bok || !b}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": bok || !b}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "GetAsBool failed", actual)
 
 	_, i64ok := intTD.GetAsInt64()
-	actual := args.Map{"result": i64ok}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": i64ok}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for int->int64", actual)
 	_, uok := intTD.GetAsUint()
-	actual := args.Map{"result": uok}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": uok}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, f64ok := intTD.GetAsFloat64()
-	actual := args.Map{"result": f64ok}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": f64ok}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, f32ok := intTD.GetAsFloat32()
-	actual := args.Map{"result": f32ok}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": f32ok}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, bok2 := intTD.GetAsBytes()
-	actual := args.Map{"result": bok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_, sok2 := intTD.GetAsStrings()
-	actual := args.Map{"result": sok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -979,28 +979,28 @@ func Test_C18_TypedDynamic_Value_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
-	actual := args.Map{"result": intTD.ValueInt() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": intTD.ValueInt() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
-	actual := args.Map{"result": boolTD.ValueBool()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": boolTD.ValueBool()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": int64TD.ValueInt64() != 100}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": int64TD.ValueInt64() != 100}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 100", actual)
 
 	// wrong type
-	actual := args.Map{"result": strTD.ValueInt() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": strTD.ValueInt() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
-	actual := args.Map{"result": strTD.ValueBool()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": strTD.ValueBool()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": strTD.ValueInt64() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": strTD.ValueInt64() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
-	actual := args.Map{"result": intTD.ValueString() == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": intTD.ValueString() == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty via sprintf", actual)
 }
 
@@ -1019,13 +1019,13 @@ func Test_C18_TypedDynamic_Clone(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "clone mismatch", actual)
-	actual := args.Map{"result": cloneP == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloneP == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 
 	var nilTD *coredynamic.TypedDynamic[string]
-	actual := args.Map{"result": nilTD.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilTD.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1042,8 +1042,8 @@ func Test_C18_TypedDynamic_Bytes_AsBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 
 	_, bok := bytesTD.GetAsBytes()
-	actual := args.Map{"result": bok}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": bok}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1082,29 +1082,29 @@ func Test_C18_KeyVal_ValueCasts(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
-	actual := args.Map{"result": kvBool.ValueBool()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": kvBool.ValueBool()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": len(kvStr.ValueStrings()) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(kvStr.ValueStrings()) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": kvUInt.ValueUInt() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvUInt.ValueUInt() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": kvI64.ValueInt64() != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvI64.ValueInt64() != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 99", actual)
 
 	// wrong type
 	kvBad := coredynamic.KeyVal{Key: "k", Value: "str"}
-	actual := args.Map{"result": kvBad.ValueInt() != -1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvBad.ValueInt() != -1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected -1", actual)
-	actual := args.Map{"result": kvBad.ValueUInt() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvBad.ValueUInt() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": kvBad.ValueBool()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvBad.ValueBool()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1118,30 +1118,30 @@ func Test_C18_KeyVal_NullChecks(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": kv.KeyNullErr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kv.KeyNullErr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 
 	kvNil := coredynamic.KeyVal{Key: nil, Value: nil}
-	actual := args.Map{"result": kvNil.ValueNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvNil.ValueNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": kvNil.KeyNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvNil.KeyNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 
 	var nilKV *coredynamic.KeyVal
-	actual := args.Map{"result": nilKV.ValueNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKV.ValueNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
-	actual := args.Map{"result": nilKV.KeyNullErr() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKV.KeyNullErr() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
-	actual := args.Map{"result": nilKV.KeyString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKV.KeyString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": nilKV.ValueString() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKV.ValueString() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1179,11 +1179,11 @@ func Test_C18_KeyValCollection_Full(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": 5}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": kvc.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kvc.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
-	actual := args.Map{"result": kvc.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": kvc.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	_ = kvc.Items()
 	_ = kvc.MapAnyItems()
@@ -1216,14 +1216,14 @@ func Test_C18_KeyValCollection_NilItems(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
-	actual := args.Map{"result": nilKVC.Items() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKVC.Items() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": nilKVC.String() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKVC.String() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": nilKVC.ClonePtr() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilKVC.ClonePtr() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1328,33 +1328,33 @@ func Test_C18_LeftRight_Nil(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": nilLR.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": nilLR.HasLeft()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.HasLeft()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": nilLR.HasRight()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.HasRight()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": nilLR.LeftToDynamic() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.LeftToDynamic() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": nilLR.RightToDynamic() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.RightToDynamic() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": nilLR.DeserializeLeft() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.DeserializeLeft() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": nilLR.DeserializeRight() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.DeserializeRight() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	_ = nilLR.TypeStatus()
-	actual := args.Map{"result": nilLR.LeftReflectSet(nil) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.LeftReflectSet(nil) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": nilLR.RightReflectSet(nil) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilLR.RightReflectSet(nil) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1371,8 +1371,8 @@ func Test_C18_ValueStatus(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": vsNoMsg.IsValid}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": vsNoMsg.IsValid}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
 }
 
@@ -1389,8 +1389,8 @@ func Test_C18_SafeTypeName(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'string'", actual)
 	nilName := coredynamic.SafeTypeName(nil)
-	actual := args.Map{"result": nilName != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilName != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty for nil", actual)
 }
 
@@ -1409,8 +1409,8 @@ func Test_C18_IsAnyTypesOf(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	notFound := coredynamic.IsAnyTypesOf(reflect.TypeOf(true), strType, intType)
-	actual := args.Map{"result": notFound}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": notFound}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 

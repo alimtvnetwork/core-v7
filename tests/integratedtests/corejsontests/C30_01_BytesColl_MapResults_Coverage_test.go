@@ -46,8 +46,8 @@ func Test_C30_03_BC_IsEmpty_HasAnyItem(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": bc.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -62,8 +62,8 @@ func Test_C30_04_BC_FirstOrDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	bc.Add([]byte(`"x"`))
-	actual := args.Map{"result": bc.FirstOrDefault() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.FirstOrDefault() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -78,8 +78,8 @@ func Test_C30_05_BC_LastOrDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	bc.Add([]byte(`"x"`))
-	actual := args.Map{"result": bc.LastOrDefault() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.LastOrDefault() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -114,8 +114,8 @@ func Test_C30_07_BC_Limit(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	l = bc.Limit(1)
-	actual := args.Map{"result": l.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": l.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -348,11 +348,11 @@ func Test_C30_23_BC_GetAtSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bc.GetAtSafe(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetAtSafe(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": bc.GetAtSafe(999) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetAtSafe(999) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -367,8 +367,8 @@ func Test_C30_24_BC_GetAtSafePtr(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bc.GetAtSafePtr(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetAtSafePtr(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -383,8 +383,8 @@ func Test_C30_25_BC_GetResultAtSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bc.GetResultAtSafe(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetResultAtSafe(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -399,8 +399,8 @@ func Test_C30_26_BC_GetAtSafeUsingLength(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": bc.GetAtSafeUsingLength(5, 1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetAtSafeUsingLength(5, 1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -444,11 +444,11 @@ func Test_C30_29_BC_AddAnyItems(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 	err = bc.AddAnyItems("x", 42)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
-	actual := args.Map{"result": bc.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -524,8 +524,8 @@ func Test_C30_34_BC_AddAny(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
-	actual := args.Map{"result": bc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -602,8 +602,8 @@ func Test_C30_41_BC_Strings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	bc.Add([]byte(`"x"`))
 	s = bc.Strings()
-	actual := args.Map{"result": len(s) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(s) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -638,8 +638,8 @@ func Test_C30_44_BC_GetPagesSize(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		bc.Add([]byte(`"x"`))
 	}
-	actual := args.Map{"result": bc.GetPagesSize(2) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": bc.GetPagesSize(2) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -688,8 +688,8 @@ func Test_C30_47_BC_GetSinglePageCollection(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	page = bc.GetSinglePageCollection(3, 4)
-	actual := args.Map{"result": page.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -861,8 +861,8 @@ func Test_C30_65_MR_IsEmpty_HasAnyItem(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": mr.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -878,8 +878,8 @@ func Test_C30_66_MR_AddSkipOnNil(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.AddSkipOnNil("k", corejson.NewResult.AnyPtr("v"))
-	actual := args.Map{"result": mr.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -894,8 +894,8 @@ func Test_C30_67_MR_GetByKey(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	mr.Add("k", corejson.NewResult.Any("v"))
-	actual := args.Map{"result": mr.GetByKey("k") == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr.GetByKey("k") == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -910,8 +910,8 @@ func Test_C30_68_MR_HasError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	mr.Add("k", corejson.NewResult.Error(errors.New("e")))
-	actual := args.Map{"result": mr.HasError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": mr.HasError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -929,8 +929,8 @@ func Test_C30_69_MR_AllErrors(t *testing.T) {
 	mr.Add("k", corejson.NewResult.Error(errors.New("e")))
 	mr.Add("ok", corejson.NewResult.Any("v"))
 	errs, has = mr.AllErrors()
-	actual := args.Map{"result": has || len(errs) != 1}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": has || len(errs) != 1}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -948,8 +948,8 @@ func Test_C30_70_MR_GetErrorsStrings(t *testing.T) {
 	mr.Add("k", corejson.NewResult.Error(errors.New("e")))
 	mr.Add("ok", corejson.NewResult.Any("v"))
 	s = mr.GetErrorsStrings()
-	actual := args.Map{"result": len(s) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(s) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1087,8 +1087,8 @@ func Test_C30_84_MR_AddAny(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for nil", actual)
 	err = mr.AddAny("k", "hello")
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error", actual)
 }
 
@@ -1118,8 +1118,8 @@ func Test_C30_86_MR_AddAnySkipOnNil(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 	err = mr.AddAnySkipOnNil("k", "v")
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected", actual)
 }
 
@@ -1322,8 +1322,8 @@ func Test_C30_100_MR_AllKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.Add("a", corejson.NewResult.Any("v"))
 	keys = mr.AllKeys()
-	actual := args.Map{"result": len(keys) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(keys) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1371,8 +1371,8 @@ func Test_C30_103_MR_AllResultsCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.Add("k", corejson.NewResult.Any("v"))
 	rc = mr.AllResultsCollection()
-	actual := args.Map{"result": rc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1394,8 +1394,8 @@ func Test_C30_105_MR_GetStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.Add("k", corejson.NewResult.Any("v"))
 	s = mr.GetStrings()
-	actual := args.Map{"result": len(s) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(s) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1448,8 +1448,8 @@ func Test_C30_111_MR_GetPagesSize(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		mr.Add(string(rune('a'+i)), corejson.NewResult.Any(i))
 	}
-	actual := args.Map{"result": mr.GetPagesSize(2) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr.GetPagesSize(2) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -1500,8 +1500,8 @@ func Test_C30_114_MR_AddMapResultsUsingCloneOption(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	mr2 := corejson.NewMapResults.Empty()
 	mr2.AddMapResultsUsingCloneOption(true, true, m)
-	actual := args.Map{"result": mr2.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": mr2.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1521,8 +1521,8 @@ func Test_C30_115_MR_GetSinglePageCollection(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	page = mr.GetSinglePageCollection(3, 4, allKeys)
-	actual := args.Map{"result": page.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -1555,13 +1555,13 @@ func Test_C30_117_MR_GetNewMapUsingKeys(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	sub = mr.GetNewMapUsingKeys(false)
-	actual := args.Map{"result": sub.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sub.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	// non-panic missing
 	sub = mr.GetNewMapUsingKeys(false, "missing")
-	actual := args.Map{"result": sub.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sub.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1578,8 +1578,8 @@ func Test_C30_118_MR_ResultCollection(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	mr.Add("k", corejson.NewResult.Any("v"))
 	rc = mr.ResultCollection()
-	actual := args.Map{"result": rc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 

@@ -62,8 +62,8 @@ func Test_TypedErrorFunctionsExecuteResults_WithError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": len(results) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(results) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 

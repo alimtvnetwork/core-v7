@@ -22,17 +22,17 @@ func Test_CovArgs_01_One_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
-	actual := args.Map{"result": o.Expected() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.Expected() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
-	actual := args.Map{"result": o.HasFirst()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.HasFirst()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.ArgsCount() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.ArgsCount() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -48,21 +48,21 @@ func Test_CovArgs_02_One_ValidArgs_Args_Slice(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	a := o.Args(1)
-	actual := args.Map{"result": len(a) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	a0 := o.Args(0)
-	actual := args.Map{"result": len(a0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	sl := o.Slice()
-	actual := args.Map{"result": len(sl) < 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sl) < 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 1", actual)
 	// cached
 	sl2 := o.Slice()
-	actual := args.Map{"result": len(sl2) != len(sl)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sl2) != len(sl)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected same", actual)
 }
 
@@ -125,23 +125,23 @@ func Test_CovArgs_07_Two_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
-	actual := args.Map{"result": tw.SecondItem() != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tw.SecondItem() != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
-	actual := args.Map{"result": tw.Expected() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tw.Expected() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": tw.HasFirst()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tw.HasFirst()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": tw.HasSecond()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tw.HasSecond()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": tw.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tw.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": tw.ArgsCount() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tw.ArgsCount() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -157,16 +157,16 @@ func Test_CovArgs_08_Two_ValidArgs_Args_Slice(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a := tw.Args(2)
-	actual := args.Map{"result": len(a) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a1 := tw.Args(1)
-	actual := args.Map{"result": len(a1) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a1) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	sl := tw.Slice()
-	actual := args.Map{"result": len(sl) < 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sl) < 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 }
 
@@ -197,8 +197,8 @@ func Test_CovArgs_10_Two_LeftRight_ArgTwo(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a,b", actual)
 	a2 := tw.ArgTwo()
-	actual := args.Map{"result": a2.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a2.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 }
 
@@ -223,17 +223,17 @@ func Test_CovArgs_12_Map_Basic(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": m.Expected() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Expected() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
-	actual := args.Map{"result": m.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.HasFirst()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasFirst()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.FirstItem() != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.FirstItem() != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
 }
 
@@ -267,20 +267,20 @@ func Test_CovArgs_14_Map_Get_Has_HasDefined(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 	_, ok2 := m.Get("missing")
-	actual := args.Map{"result": ok2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ok2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.Has("key")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.Has("key")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.Has("missing")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Has("missing")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.HasDefined("key")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.HasDefined("key")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.HasDefined("missing")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefined("missing")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -297,17 +297,17 @@ func Test_CovArgs_15_Map_HasDefinedAll_IsKeyInvalid_IsKeyMissing(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": m.HasDefinedAll("a", "missing")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefinedAll("a", "missing")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.HasDefinedAll()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefinedAll()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false for empty names", actual)
-	actual := args.Map{"result": m.IsKeyMissing("a")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyMissing("a")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.IsKeyMissing("missing")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": m.IsKeyMissing("missing")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -322,20 +322,20 @@ func Test_CovArgs_16_Map_NilMap(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.Has("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Has("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.HasDefined("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefined("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.HasDefinedAll("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.HasDefinedAll("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.IsKeyInvalid("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyInvalid("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": m.IsKeyMissing("key")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.IsKeyMissing("key")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -353,14 +353,14 @@ func Test_CovArgs_17_Map_SortedKeys(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 keys", actual)
-	actual := args.Map{"result": keys[0] != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": keys[0] != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a first", actual)
 	// empty map
 	m2 := args.Map{}
 	keys2, _ := m2.SortedKeys()
-	actual := args.Map{"result": len(keys2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(keys2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -395,20 +395,20 @@ func Test_CovArgs_19_Map_Items(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
-	actual := args.Map{"result": m.ThirdItem() != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.ThirdItem() != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected c", actual)
-	actual := args.Map{"result": m.FourthItem() != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.FourthItem() != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected d", actual)
-	actual := args.Map{"result": m.FifthItem() != "e"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.FifthItem() != "e"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected e", actual)
-	actual := args.Map{"result": m.SixthItem() != "f"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.SixthItem() != "f"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected f", actual)
-	actual := args.Map{"result": m.Seventh() != "g"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Seventh() != "g"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected g", actual)
 }
 
@@ -424,12 +424,12 @@ func Test_CovArgs_20_Map_GetLowerCase_GetDirectLower(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 	v2 := m.GetDirectLower("KEY")
-	actual := args.Map{"result": v2 != "val"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v2 != "val"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected val", actual)
 	v3 := m.GetDirectLower("MISSING")
-	actual := args.Map{"result": v3 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v3 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -447,11 +447,11 @@ func Test_CovArgs_21_Map_Expect_Actual_Arrange(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": m.Actual() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Actual() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": m.Arrange() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Arrange() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -481,8 +481,8 @@ func Test_CovArgs_23_Map_When_Title(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected w", actual)
-	actual := args.Map{"result": m.Title() != "t"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": m.Title() != "t"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected t", actual)
 }
 
@@ -515,12 +515,12 @@ func Test_CovArgs_25_Map_Raw_Args_ValidArgs(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a := m.Args("first", "second")
-	actual := args.Map{"result": len(a) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	va := m.ValidArgs()
-	actual := args.Map{"result": len(va) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(va) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -536,8 +536,8 @@ func Test_CovArgs_26_Map_GetFirstOfNames(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	v2 := m.GetFirstOfNames()
-	actual := args.Map{"result": v2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -553,12 +553,12 @@ func Test_CovArgs_27_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	r2 := m.GetAsStringSliceFirstOfNames("missing")
-	actual := args.Map{"result": r2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	r3 := m.GetAsStringSliceFirstOfNames()
-	actual := args.Map{"result": r3 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -574,51 +574,51 @@ func Test_CovArgs_28_LeftRight(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
-	actual := args.Map{"result": lr.SecondItem() != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lr.SecondItem() != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
-	actual := args.Map{"result": lr.Expected() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lr.Expected() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
-	actual := args.Map{"result": lr.ArgsCount() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lr.ArgsCount() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": lr.HasFirst()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lr.HasFirst()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": lr.HasSecond()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lr.HasSecond()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": lr.HasLeft()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lr.HasLeft()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": lr.HasRight()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lr.HasRight()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": lr.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lr.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	va := lr.ValidArgs()
-	actual := args.Map{"result": len(va) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(va) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	a := lr.Args(2)
-	actual := args.Map{"result": len(a) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	sl := lr.Slice()
-	actual := args.Map{"result": len(sl) < 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sl) < 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 2", actual)
 	_ = lr.GetByIndex(0)
 	_ = lr.String()
 	a2 := lr.ArgTwo()
-	actual := args.Map{"result": a2.First != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": a2.First != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	c := lr.Clone()
-	actual := args.Map{"result": c.Left != "a"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Left != "a"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
 	lrV := args.LeftRightAny{Left: "a", Right: "b"}
 	_ = lrV.AsTwoParameter()
@@ -647,64 +647,64 @@ func Test_CovArgs_29_Holder(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected a", actual)
-	actual := args.Map{"result": h.SecondItem() != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.SecondItem() != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b", actual)
-	actual := args.Map{"result": h.ThirdItem() != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.ThirdItem() != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected c", actual)
-	actual := args.Map{"result": h.FourthItem() != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.FourthItem() != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected d", actual)
-	actual := args.Map{"result": h.FifthItem() != "e"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.FifthItem() != "e"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected e", actual)
-	actual := args.Map{"result": h.SixthItem() != "f"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.SixthItem() != "f"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected f", actual)
-	actual := args.Map{"result": h.Expected() != "x"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.Expected() != "x"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected x", actual)
-	actual := args.Map{"result": h.ArgsCount() != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": h.ArgsCount() != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 7", actual)
-	actual := args.Map{"result": h.HasFirst()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFirst()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasSecond()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasSecond()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasThird()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasThird()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasFourth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFourth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasFifth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFifth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasSixth()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasSixth()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasFunc()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasFunc()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": h.HasExpect()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": h.HasExpect()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 	_ = h.GetWorkFunc()
 	_ = h.GetFuncName()
 	va := h.ValidArgs()
-	actual := args.Map{"result": len(va) != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(va) != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 6", actual)
 	a := h.Args(6)
-	actual := args.Map{"result": len(a) != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(a) != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 6", actual)
 	sl := h.Slice()
-	actual := args.Map{"result": len(sl) < 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(sl) < 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected at least 6", actual)
 	_ = h.GetByIndex(0)
 	_ = h.String()
@@ -729,26 +729,26 @@ func Test_CovArgs_30_String(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hello", actual)
-	actual := args.Map{"result": s.Length() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.Length() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": s.Count() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.Count() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": s.AscIILength() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.AscIILength() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": s.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": s.HasCharacter()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.HasCharacter()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": s.IsDefined()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.IsDefined()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": s.IsEmptyOrWhitespace()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.IsEmptyOrWhitespace()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	_ = s.Bytes()
 	_ = s.Runes()
@@ -774,11 +774,11 @@ func Test_CovArgs_31_String_Empty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": s.HasCharacter()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.HasCharacter()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": s.IsEmptyOrWhitespace()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": s.IsEmptyOrWhitespace()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 

@@ -154,8 +154,8 @@ func Test_C33_10_Collection_ConcatNew(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
 	// original unchanged
-	actual := args.Map{"result": c.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected original 2", actual)
 }
 
@@ -172,8 +172,8 @@ func Test_C33_11_Collection_Clone(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected original 2", actual)
-	actual := args.Map{"result": cloned.Length() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloned.Length() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cloned 3", actual)
 }
 
@@ -247,8 +247,8 @@ func Test_C33_17_Collection_Resize(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected capacity >= 20", actual)
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected length 1", actual)
 }
 
@@ -310,8 +310,8 @@ func Test_C33_22_Collection_InsertAt(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
-	actual := args.Map{"result": c.At(1) != "b"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.At(1) != "b"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected b at index 1", actual)
 }
 
@@ -368,8 +368,8 @@ func Test_C33_26_Collection_ContainsFunc(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": c.ContainsFunc(func(s string) bool { return s == "nope" })}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.ContainsFunc(func(s string) bool { return s == "nope" })}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -472,8 +472,8 @@ func Test_C33_33_Collection_SortedFunc_NoMutate(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "original should be unchanged", actual)
-	actual := args.Map{"result": sorted.At(0) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sorted.At(0) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "sorted should start with 1", actual)
 }
 
@@ -545,8 +545,8 @@ func Test_C33_38_SortedAsc(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "original unchanged", actual)
-	actual := args.Map{"result": s.At(0) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.At(0) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected sorted", actual)
 }
 
@@ -826,8 +826,8 @@ func Test_C33_59_Dynamic_IsReflectTypeOf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected match", actual)
-	actual := args.Map{"result": d.IsReflectTypeOf(reflect.TypeOf(""))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": d.IsReflectTypeOf(reflect.TypeOf(""))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }
 
@@ -937,8 +937,8 @@ func Test_C33_67_Dynamic_Loop_Slice(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected called", actual)
-	actual := args.Map{"result": sum != 60}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": sum != 60}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 60", actual)
 }
 
@@ -1033,8 +1033,8 @@ func Test_C33_73_Dynamic_LoopMap(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected called", actual)
-	actual := args.Map{"result": count != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": count != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -1079,8 +1079,8 @@ func Test_C33_76_Dynamic_MapToKeyVal(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": kv == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": kv == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -1186,8 +1186,8 @@ func Test_C33_84_PointerOrNonPointer_NonPointerOutput(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
-	actual := args.Map{"result": rv.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rv.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid reflect value", actual)
 }
 
@@ -1339,8 +1339,8 @@ func Test_C33_95_TypeSameStatus_Pointers(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected left pointer", actual)
-	actual := args.Map{"result": st.IsRightPointer}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": st.IsRightPointer}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected right non-pointer", actual)
 }
 
@@ -1588,8 +1588,8 @@ func Test_C33_113_InvalidSimpleRequestNoMessage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": r.Message() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Message() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty message", actual)
 }
 
@@ -1603,8 +1603,8 @@ func Test_C33_114_InvalidSimpleRequest(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": r.Message() != "bad input"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Message() != "bad input"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected message", actual)
 }
 
@@ -1618,8 +1618,8 @@ func Test_C33_115_NewSimpleRequest(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
-	actual := args.Map{"result": r.Request() != "data"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Request() != "data"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected data", actual)
 }
 
@@ -1633,8 +1633,8 @@ func Test_C33_116_NewSimpleRequestValid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
-	actual := args.Map{"result": r.Value() != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Value() != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -1648,11 +1648,11 @@ func Test_C33_117_SimpleRequest_NilReceiver(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": r.Request() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Request() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": r.Value() != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Value() != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -1836,8 +1836,8 @@ func Test_C33_131_InvalidSimpleResultNoMessage(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": r.Message != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Message != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1851,8 +1851,8 @@ func Test_C33_132_InvalidSimpleResult(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": r.Message != "error msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Message != "error msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected message", actual)
 }
 
@@ -1866,8 +1866,8 @@ func Test_C33_133_NewSimpleResultValid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
-	actual := args.Map{"result": r.Result != 42}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r.Result != 42}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 42", actual)
 }
 
@@ -2340,8 +2340,8 @@ func Test_C33_168_DynamicCollection_AddAnyWithTypeValidation_Valid(t *testing.T)
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": dc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -2370,8 +2370,8 @@ func Test_C33_170_DynamicCollection_AddAnyItemsWithTypeValidation_ContinueOnErro
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// should have added valid items
-	actual := args.Map{"result": dc.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dc.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -2386,8 +2386,8 @@ func Test_C33_171_DynamicCollection_AddAnyItemsWithTypeValidation_StopOnError(t 
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": dc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -2476,8 +2476,8 @@ func Test_C33_177_DynamicCollection_JsonString(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
@@ -2634,8 +2634,8 @@ func Test_C33_188_DynamicCollection_RemoveAt_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
-	actual := args.Map{"result": dc.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": dc.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 }
 
@@ -2668,8 +2668,8 @@ func Test_C33_190_DynamicCollection_ParseInjectUsingJson(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": result == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 
@@ -2796,8 +2796,8 @@ func Test_C33_199_DynamicCollection_MarshalJSON(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty bytes", actual)
 }
 

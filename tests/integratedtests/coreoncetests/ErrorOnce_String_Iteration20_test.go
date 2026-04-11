@@ -57,8 +57,8 @@ func Test_ErrorOnce_IsMessageEqual_FromErrorOnceStringItera(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsMessageEqual("nope")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsMessageEqual("nope")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -167,8 +167,8 @@ func Test_ErrorOnce_MarshalJSON(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(b) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty json", actual)
 }
 
@@ -183,8 +183,8 @@ func Test_ErrorOnce_MarshalJSON_NilError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": string(b) != `""`}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(b) != `""`}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty string json", actual)
 }
 
@@ -199,8 +199,8 @@ func Test_ErrorOnce_UnmarshalJSON(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": o.IsMessageEqual("test-error")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsMessageEqual("test-error")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected unmarshalled error message", actual)
 }
 
@@ -215,29 +215,29 @@ func Test_ErrorOnce_Predicates(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasError true", actual)
-	actual := args.Map{"result": oNil.HasError()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": oNil.HasError()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasError false", actual)
-	actual := args.Map{"result": oErr.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsInvalid true", actual)
-	actual := args.Map{"result": oNil.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oNil.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsValid true", actual)
-	actual := args.Map{"result": oNil.IsSuccess()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oNil.IsSuccess()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsSuccess true", actual)
-	actual := args.Map{"result": oErr.IsFailed()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.IsFailed()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsFailed true", actual)
-	actual := args.Map{"result": oErr.IsDefined()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.IsDefined()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsDefined true", actual)
-	actual := args.Map{"result": oErr.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true", actual)
-	actual := args.Map{"result": oNil.HasAnyItem()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": oNil.HasAnyItem()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem false for nil error", actual)
 }
 
@@ -264,8 +264,8 @@ func Test_ErrorOnce_Serialize(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(b) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
@@ -284,8 +284,8 @@ func Test_BytesErrorOnce_MarshalJSON_FromErrorOnceStringItera(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(b) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
@@ -456,26 +456,26 @@ func Test_BytesErrorOnce_Predicates(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasSafeItems true", actual)
-	actual := args.Map{"result": oErr.HasSafeItems()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": oErr.HasSafeItems()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected HasSafeItems false", actual)
-	actual := args.Map{"result": oOk.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oOk.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsValid true", actual)
-	actual := args.Map{"result": oErr.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsInvalid true", actual)
-	actual := args.Map{"result": oOk.IsSuccess()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oOk.IsSuccess()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsSuccess true", actual)
-	actual := args.Map{"result": oErr.IsFailed()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oErr.IsFailed()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsFailed true", actual)
-	actual := args.Map{"result": oOk.IsDefined()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oOk.IsDefined()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsDefined true", actual)
-	actual := args.Map{"result": oOk.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": oOk.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasAnyItem true", actual)
 }
 
@@ -726,8 +726,8 @@ func Test_AnyOnce_IsInitialized(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not initialized", actual)
 	o.Value()
-	actual := args.Map{"result": o.IsInitialized()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsInitialized()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected initialized", actual)
 }
 
@@ -830,8 +830,8 @@ func Test_AnyErrorOnce_ValueString_Nil_FromErrorOnceStringItera(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no error", actual)
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil bracket", actual)
 }
 
@@ -1046,38 +1046,38 @@ func Test_IntegerOnce_Comparisons(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsAboveEqual(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsAboveEqual(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsLessThan(10)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsLessThan(10)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsLessThanEqual(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsLessThanEqual(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsAboveZero()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsAboveZero()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsAboveEqualZero()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsAboveEqualZero()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsLessThanZero()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsLessThanZero()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": o.IsLessThanEqualZero()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsLessThanEqualZero()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": o.IsPositive()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsPositive()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsNegative()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsNegative()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
-	actual := args.Map{"result": o.IsValidIndex()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsValidIndex()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsInvalidIndex()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsInvalidIndex()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1091,14 +1091,14 @@ func Test_IntegerOnce_NegativeComparisons(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsInvalidIndex()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsInvalidIndex()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsLessThanZero()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsLessThanZero()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsLessThanEqualZero()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsLessThanEqualZero()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1114,17 +1114,17 @@ func Test_ByteOnce_Methods(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
-	actual := args.Map{"result": o.IsPositive()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsPositive()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected positive", actual)
-	actual := args.Map{"result": o.IsNegative()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsNegative()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "byte is unsigned, should not be negative", actual)
-	actual := args.Map{"result": o.IsZero()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsZero()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-zero", actual)
-	actual := args.Map{"result": o.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1138,8 +1138,8 @@ func Test_ByteOnce_Zero_FromErrorOnceStringItera(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected zero", actual)
-	actual := args.Map{"result": o.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1156,8 +1156,8 @@ func Test_BytesOnce_NilInitializer(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
-	actual := args.Map{"result": o.Length() != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.Length() != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0 length", actual)
 }
 
@@ -1186,8 +1186,8 @@ func Test_StringOnce_HasPrefix(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsStartsWith("hello")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsStartsWith("hello")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1201,8 +1201,8 @@ func Test_StringOnce_HasSuffix(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsEndsWith("world")}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": o.IsEndsWith("world")}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -1297,8 +1297,8 @@ func Test_MapStringStringOnce_AllValuesSorted(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	// call again to hit cache
 	vs2 := o.AllValuesSorted()
-	actual := args.Map{"result": len(vs2) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(vs2) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected cached 2", actual)
 }
 
@@ -1316,8 +1316,8 @@ func Test_MapStringStringOnce_GetValueWithStatus_FromErrorOnceStringItera(t *tes
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected found", actual)
 	_, has2 := o.GetValueWithStatus("missing")
-	actual := args.Map{"result": has2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": has2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not found", actual)
 }
 
@@ -1364,8 +1364,8 @@ func Test_MapStringStringOnce_IsMissing_FromErrorOnceStringItera(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.IsMissing("k")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.IsMissing("k")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1604,14 +1604,14 @@ func Test_IntegersOnce_Aliases(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": len(o.Integers()) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(o.Integers()) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": len(o.Slice()) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(o.Slice()) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": len(o.List()) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(o.List()) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 }
 
@@ -1629,8 +1629,8 @@ func Test_MapStringStringOnce_HasAll(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
-	actual := args.Map{"result": o.HasAll("a", "c")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": o.HasAll("a", "c")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 }
 
@@ -1968,12 +1968,12 @@ func Test_AnyOnce_Deserialize_UnmarshalError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error, got nil", actual)
-	expected := "deserializing failed:"
-	actual := args.Map{"result": len(err.Error()) < len(expected)}
-	expected := args.Map{"result": false}
+	expected = "deserializing failed:"
+	actual = args.Map{"result": len(err.Error()) < len(expected)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error too short:", actual)
-	actual := args.Map{"result": err.Error()[:len(expected)] != expected}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err.Error()[:len(expected)] != expected}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error starting with '', got ''", actual)
 }
 
@@ -2002,9 +2002,9 @@ func Test_AnyErrorOnce_Deserialize_UnmarshalError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected unmarshal error, got nil", actual)
-	expected := "deserializing failed:"
-	actual := args.Map{"result": err.Error()[:len(expected)] != expected}
-	expected := args.Map{"result": false}
+	expected = "deserializing failed:"
+	actual = args.Map{"result": err.Error()[:len(expected)] != expected}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error starting with '', got ''", actual)
 }
 

@@ -210,8 +210,8 @@ func Test_Hashmap_FilterOps(t *testing.T) {
 		col := h.GetKeysFilteredCollection(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": col.Length() != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -620,14 +620,14 @@ func Test_Hashset_Filter_FromHashmapAddMethodsHas(t *testing.T) {
 		items := h.GetFilteredItems(func(s string, i int) (string, bool, bool) {
 			return s, s == "abc", false
 		})
-		actual := args.Map{"result": len(items) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(items) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		col := h.GetFilteredCollection(func(s string, i int) (string, bool, bool) {
 			return s, true, false
 		})
-		actual := args.Map{"result": col.Length() != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": col.Length() != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 	})
 }

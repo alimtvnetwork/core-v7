@@ -18,8 +18,8 @@ func Test_QW_Conclusive_LeftNilRightDefined(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
-	actual := args.Map{"result": isConclusive}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": isConclusive}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected conclusive", actual)
 }
 

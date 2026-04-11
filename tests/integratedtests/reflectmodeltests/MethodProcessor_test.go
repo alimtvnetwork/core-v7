@@ -23,8 +23,8 @@ func Test_MethodProcessor_HasValidFunc_True(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "failed to create MethodProcessor for PublicMethod", actual)
 
-	actual := args.Map{"result": mp.HasValidFunc()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": mp.HasValidFunc()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected HasValidFunc() = true", actual)
 }
 
@@ -418,8 +418,8 @@ func Test_MethodProcessor_InArgsVerifyRv_LengthMismatch(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected InArgsVerifyRv = false for length mismatch", actual)
-	actual := args.Map{"result": err == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error for length mismatch", actual)
 }
 
@@ -438,12 +438,12 @@ func Test_MethodProcessor_Invoke_Success(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Invoke error:", actual)
 
-	actual := args.Map{"result": len(results) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(results) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Invoke results len =, want 1", actual)
 
-	actual := args.Map{"result": results[0] != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": results[0] != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Invoke result =, want", results[0], "hello", actual)
 }
 
@@ -485,8 +485,8 @@ func Test_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GetFirstResponseOfInvoke error:", actual)
 
-	actual := args.Map{"result": first != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": first != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "first response =, want", first, "hello", actual)
 }
 
@@ -503,7 +503,7 @@ func Test_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "InvokeResultOfIndex error:", actual)
 
-	actual := args.Map{"result": result != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "result =, want", result, "hello", actual)
 }

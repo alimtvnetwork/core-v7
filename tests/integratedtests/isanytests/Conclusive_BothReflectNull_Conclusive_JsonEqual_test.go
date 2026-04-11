@@ -68,8 +68,8 @@ func Test_JsonEqual_IntEqual(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected equal", actual)
-	actual := args.Map{"result": isany.JsonEqual(42, 43)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isany.JsonEqual(42, 43)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not equal", actual)
 }
 

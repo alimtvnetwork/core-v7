@@ -1083,8 +1083,8 @@ func Test_C33_SS_IsContainsFunc_IndexOfFunc(t *testing.T) {
 		idx := ss.IndexOfFunc("World", func(item, searching string) bool {
 			return item == searching
 		})
-		actual := args.Map{"result": idx != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": idx != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	})
 }

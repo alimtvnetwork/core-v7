@@ -233,7 +233,7 @@ func Test_IfTrueFuncStrings_Typed_Verification(t *testing.T) {
 			}
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%v", len(result)),
 				"first":  result[0],
 			}
@@ -264,7 +264,7 @@ func Test_IfTrueFuncBytes_Typed_Verification(t *testing.T) {
 			}
 			testCase.ShouldBeEqualMap(t, caseIndex, actual)
 		} else {
-			actual := args.Map{
+			actual = args.Map{
 				"length": fmt.Sprintf("%v", len(result)),
 				"first":  fmt.Sprintf("%v", result[0]),
 			}

@@ -16,7 +16,7 @@ func Test_IntegersOnce_IsEqual_NilReceiver(t *testing.T) {
 	actual := nilOnce.IsEqual(nil...)
 
 	// Assert
-	actual := args.Map{"result": actual}
+	actual = args.Map{"result": actual}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil IntegersOnce.IsEqual(nil) should return true, got false", actual)
 }
@@ -30,7 +30,7 @@ func Test_IntegersOnce_IsEqual_NilReceiverEmpty(t *testing.T) {
 	actual := nilOnce.IsEqual()
 
 	// Assert
-	actual := args.Map{"result": actual}
+	actual = args.Map{"result": actual}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil IntegersOnce.IsEqual() should return true, got false", actual)
 }
@@ -44,7 +44,7 @@ func Test_MapStringStringOnce_IsEqual_NilReceiver(t *testing.T) {
 	actual := nilOnce.IsEqual(nil)
 
 	// Assert
-	actual := args.Map{"result": actual}
+	actual = args.Map{"result": actual}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil MapStringStringOnce.IsEqual(nil) should return true, got false", actual)
 }
@@ -61,8 +61,8 @@ func Test_MapStringStringOnce_JsonStringMust_Success_FromIntegersOnceIsEqualI(t 
 
 	// Assert
 	expected := `{"key":"value"}`
-	actual := args.Map{"result": actual != expected}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": actual != expected}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MapStringStringOnce.JsonStringMust: got, want", actual)
 }
 
@@ -75,7 +75,7 @@ func Test_StringsOnce_IsEqual_NilReceiver(t *testing.T) {
 	actual := nilOnce.IsEqual()
 
 	// Assert
-	actual := args.Map{"result": actual}
+	actual = args.Map{"result": actual}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil StringsOnce.IsEqual() should return true, got false", actual)
 }
@@ -92,7 +92,7 @@ func Test_StringsOnce_JsonStringMust_Success_FromIntegersOnceIsEqualI(t *testing
 
 	// Assert
 	expected := `["a","b"]`
-	actual := args.Map{"result": actual != expected}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": actual != expected}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "StringsOnce.JsonStringMust: got, want", actual)
 }

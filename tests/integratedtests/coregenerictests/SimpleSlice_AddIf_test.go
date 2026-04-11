@@ -185,11 +185,11 @@ func Test_SimpleSlice_HasIndex(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have index 2", actual)
-	actual := args.Map{"result": s.HasIndex(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.HasIndex(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have index 5", actual)
-	actual := args.Map{"result": s.HasIndex(-1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.HasIndex(-1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not have negative index", actual)
 }
 
@@ -205,8 +205,8 @@ func Test_SimpleSlice_InsertAt_OutOfBounds(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "negative index should not insert", actual)
 	s.InsertAt(10, 0)
-	actual := args.Map{"result": s.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "out of bounds should not insert", actual)
 }
 
@@ -675,8 +675,8 @@ func Test_LinkedList_IndexAt_OutOfBounds_Cov(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "negative should return nil", actual)
-	actual := args.Map{"result": ll.IndexAt(5) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": ll.IndexAt(5) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "out of bounds should return nil", actual)
 }
 
@@ -810,8 +810,8 @@ func Test_Hashmap_GetOrDefault_FromSimpleSliceAddIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "missing key should return default", actual)
 	hm.Set("x", 10)
-	actual := args.Map{"result": hm.GetOrDefault("x", 42) != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": hm.GetOrDefault("x", 42) != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "found key should return value", actual)
 }
 
@@ -1063,8 +1063,8 @@ func Test_Hashmap_Set_Overwrite(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "first set should be new", actual)
 	isNew = hm.Set("a", 2)
-	actual := args.Map{"result": isNew}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": isNew}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "second set should not be new", actual)
 }
 
@@ -1517,8 +1517,8 @@ func Test_Collection_RemoveAt_OutOfBounds_Cov(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "negative should return false", actual)
-	actual := args.Map{"result": col.RemoveAt(5)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.RemoveAt(5)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "out of bounds should return false", actual)
 }
 
@@ -2122,8 +2122,8 @@ func Test_TripleFromSplit_FourParts(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "4+ parts should be valid", actual)
-	actual := args.Map{"result": tr.Right != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tr.Right != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "right should be last part, got ''", actual)
 }
 
@@ -2802,11 +2802,11 @@ func Test_Clamp_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "below min", actual)
-	actual := args.Map{"result": coregeneric.Clamp(15, 0, 10) != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Clamp(15, 0, 10) != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "above max", actual)
-	actual := args.Map{"result": coregeneric.Clamp(5, 0, 10) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Clamp(5, 0, 10) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "in range", actual)
 }
 
@@ -2817,8 +2817,8 @@ func Test_ClampMin(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should clamp to min", actual)
-	actual := args.Map{"result": coregeneric.ClampMin(5, 0) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.ClampMin(5, 0) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should keep value", actual)
 }
 
@@ -2829,8 +2829,8 @@ func Test_ClampMax(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should clamp to max", actual)
-	actual := args.Map{"result": coregeneric.ClampMax(5, 10) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.ClampMax(5, 10) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should keep value", actual)
 }
 
@@ -2841,8 +2841,8 @@ func Test_InRange(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be in range", actual)
-	actual := args.Map{"result": coregeneric.InRange(-1, 0, 10)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.InRange(-1, 0, 10)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be in range", actual)
 }
 
@@ -2853,8 +2853,8 @@ func Test_InRangeExclusive_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "boundary should not be in range exclusive", actual)
-	actual := args.Map{"result": coregeneric.InRangeExclusive(5, 0, 10)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": coregeneric.InRangeExclusive(5, 0, 10)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be in range exclusive", actual)
 }
 
@@ -2865,8 +2865,8 @@ func Test_Abs_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "abs(-5) should be 5", actual)
-	actual := args.Map{"result": coregeneric.Abs(5) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Abs(5) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "abs(5) should be 5", actual)
 }
 
@@ -2877,8 +2877,8 @@ func Test_AbsDiff_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be 2", actual)
-	actual := args.Map{"result": coregeneric.AbsDiff(5, 3) != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.AbsDiff(5, 3) != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be 2", actual)
 }
 
@@ -2970,11 +2970,11 @@ func Test_Sign_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "negative should be -1", actual)
-	actual := args.Map{"result": coregeneric.Sign(0) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Sign(0) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "zero should be 0", actual)
-	actual := args.Map{"result": coregeneric.Sign(5) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.Sign(5) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "positive should be 1", actual)
 }
 
@@ -2985,8 +2985,8 @@ func Test_SafeDiv_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "div by zero should return 0", actual)
-	actual := args.Map{"result": coregeneric.SafeDiv(10, 2) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.SafeDiv(10, 2) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "10/2 should be 5", actual)
 }
 
@@ -2997,8 +2997,8 @@ func Test_SafeDivOrDefault_FromSimpleSliceAddIf(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "div by zero should return default", actual)
-	actual := args.Map{"result": coregeneric.SafeDivOrDefault(10, 2, -1) != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": coregeneric.SafeDivOrDefault(10, 2, -1) != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "10/2 should be 5", actual)
 }
 
@@ -3017,12 +3017,12 @@ func Test_CompareNumeric_All(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "equal", actual)
 	gt := coregeneric.CompareNumeric(5, 3)
-	actual := args.Map{"result": gt.IsLeftGreater()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": gt.IsLeftGreater()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "greater", actual)
 	lt := coregeneric.CompareNumeric(3, 5)
-	actual := args.Map{"result": lt.IsLeftLess()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": lt.IsLeftLess()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "less", actual)
 }
 
@@ -3088,8 +3088,8 @@ func Test_PointerSliceSorter_SetMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "should be desc", actual)
 	sorter.SetAsc()
 	sorter.Sort()
-	actual := args.Map{"result": *sorter.Items()[0] != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": *sorter.Items()[0] != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should be asc", actual)
 	sorter.SetNilFirst(true)
 	sorter.SetLessFunc(func(x, y int) bool { return x < y })
@@ -3507,8 +3507,8 @@ func Test_RemoveItem_Found_Cov(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should remove", actual)
-	actual := args.Map{"result": col.Length() != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": col.Length() != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should have 2", actual)
 }
 

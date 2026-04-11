@@ -89,7 +89,7 @@ func Test_Attribute_UsingByte(t *testing.T) {
 		expected := args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "UsingByte() returned error:", actual)
 
-		actual := args.Map{
+		actual = args.Map{
 			"read":    attr.IsRead,
 			"write":   attr.IsWrite,
 			"execute": attr.IsExecute,
@@ -132,14 +132,14 @@ func Test_Attribute_ToAttributeValue_FromAttribute(t *testing.T) {
 	actual := args.Map{"result": attrVal.Read != 4}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Read=4", actual)
-	actual := args.Map{"result": attrVal.Write != 2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attrVal.Write != 2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Write=2", actual)
-	actual := args.Map{"result": attrVal.Execute != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attrVal.Execute != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Execute=0", actual)
-	actual := args.Map{"result": attrVal.Sum != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": attrVal.Sum != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Sum=6", actual)
 }
 
@@ -235,16 +235,16 @@ func Test_IsPathExistsPlusFileInfo(t *testing.T) {
 	actual := args.Map{"result": exists}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected '.' to exist", actual)
-	actual := args.Map{"result": fileInfo == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fileInfo == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected fileInfo to not be nil", actual)
 
 	// Arrange - non-existing path
 	exists2, _ := chmodhelper.IsPathExistsPlusFileInfo("/non/existing/path/xyz")
 
 	// Assert
-	actual := args.Map{"result": exists2}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": exists2}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-existing path to return false", actual)
 }
 
@@ -256,11 +256,11 @@ func Test_Attribute_NilIsEmpty(t *testing.T) {
 	actual := args.Map{"result": attr.IsNull()}
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil attribute IsNull to be true", actual)
-	actual := args.Map{"result": attr.IsAnyNull()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsAnyNull()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil attribute IsAnyNull to be true", actual)
-	actual := args.Map{"result": attr.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": attr.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected nil attribute IsEmpty to be true", actual)
 }
 

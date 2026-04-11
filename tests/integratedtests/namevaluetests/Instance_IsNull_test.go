@@ -413,8 +413,8 @@ func Test_Collection_ConcatNew_Cov2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": c.Length() != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Length() != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "original should be unchanged", actual)
 }
 
@@ -482,8 +482,8 @@ func Test_Collection_HasAnyItem_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-	actual := args.Map{"result": c.HasAnyItem()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": c.HasAnyItem()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -498,8 +498,8 @@ func Test_Collection_HasIndex_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected false", actual)
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-	actual := args.Map{"result": c.HasIndex(0)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": c.HasIndex(0)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }
 
@@ -593,8 +593,8 @@ func Test_Collection_Error_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-	actual := args.Map{"result": c.Error() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.Error() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
@@ -609,8 +609,8 @@ func Test_Collection_ErrorUsingMessage_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "empty should return nil", actual)
 	c.Add(namevalue.Instance[string, string]{Name: "a", Value: "1"})
-	actual := args.Map{"result": c.ErrorUsingMessage("msg") == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.ErrorUsingMessage("msg") == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return error", actual)
 }
 
@@ -766,12 +766,12 @@ func Test_NameValuesCollection_Aliases_Cov2(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	c2 := namevalue.NewCollection()
-	actual := args.Map{"result": c2 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c2 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	c3 := namevalue.EmptyNameValuesCollection()
-	actual := args.Map{"result": c3 == nil || !c3.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c3 == nil || !c3.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 

@@ -23,11 +23,11 @@ func Test_Gap_RC_GetAtSafeUsingLength(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 2) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafeUsingLength(5, 2) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": c.GetAtSafeUsingLength(-1, 2) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafeUsingLength(-1, 2) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -251,11 +251,11 @@ func Test_Gap_RPC_GetAtSafe(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": c.GetAtSafe(-1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafe(-1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
-	actual := args.Map{"result": c.GetAtSafe(5) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafe(5) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -270,8 +270,8 @@ func Test_Gap_RPC_GetAtSafeUsingLength(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -340,8 +340,8 @@ func Test_Gap_BC_GetAtSafeUsingLength(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": c.GetAtSafeUsingLength(5, 1) != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -429,13 +429,13 @@ func Test_Gap_BC_GetSinglePageCollection(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	page2 := c.GetSinglePageCollection(5, 3)
-	actual := args.Map{"result": page2.Length() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page2.Length() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5", actual)
 	// Last page
 	page3 := c.GetSinglePageCollection(10, 2)
-	actual := args.Map{"result": page3.Length() != 5}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": page3.Length() != 5}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 5 for last partial page", actual)
 }
 

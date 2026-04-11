@@ -371,21 +371,21 @@ func Test_SimpleSlice_SkipTake_Regression(t *testing.T) {
 		// Case 1: Take beyond length
 		{
 			tc := simpleSliceTakeBeyondTestCase
-			result := ss.Take(100)
+			result = ss.Take(100)
 			tc.ShouldBeEqual(t, 1, fmt.Sprintf("%d", len(result)))
 		}
 
 		// Case 2: Skip 0
 		{
 			tc := simpleSliceSkipZeroTestCase
-			result := ss.Skip(0)
+			result = ss.Skip(0)
 			tc.ShouldBeEqual(t, 2, fmt.Sprintf("%d", len(result)))
 		}
 
 		// Case 3: Take 0
 		{
 			tc := simpleSliceTakeZeroTestCase
-			result := ss.Take(0)
+			result = ss.Take(0)
 			tc.ShouldBeEqual(t, 3, fmt.Sprintf("%d", len(result)))
 		}
 	})

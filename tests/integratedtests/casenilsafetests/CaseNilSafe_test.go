@@ -89,8 +89,8 @@ func Test_CaseNilSafe_MethodName(t *testing.T) {
 		}
 
 		for i, line := range actLines {
-			actual := args.Map{"result": line != expLines[i]}
-			expected := args.Map{"result": false}
+			actual = args.Map{"result": line != expLines[i]}
+			expected = args.Map{"result": false}
 			expected.ShouldBeEqual(t, 0, "Case: got, want", actual)
 		}
 	}
@@ -115,8 +115,8 @@ func Test_CaseNilSafe_CaseTitleFallback(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected explicit title", actual)
 
-	actual := args.Map{"result": titleFromMethod != "IsValid"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": titleFromMethod != "IsValid"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected method name fallback", actual)
 }
 
@@ -137,7 +137,7 @@ func Test_CaseNilSafe_InvokeWithReceiver(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not panic with valid receiver", actual)
 
-	actual := args.Map{"result": result.ValueString() != "true"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.ValueString() != "true"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected true", actual)
 }

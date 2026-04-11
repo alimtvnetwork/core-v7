@@ -22,8 +22,8 @@ func Test_KeyJson_Serialize_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Serialize should not error:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Serialize should return non-empty bytes", actual)
 }
 
@@ -39,13 +39,13 @@ func Test_KeyJson_MarshalUnmarshal_Ext2(t *testing.T) {
 
 	var restored keymk.Key
 	err = restored.UnmarshalJSON(data)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "UnmarshalJSON error:", actual)
 
 	// Assert
-	actual := args.Map{"result": restored.MainName() != "root"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": restored.MainName() != "root"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected main 'root', got ''", actual)
 }
 
@@ -125,8 +125,8 @@ func Test_KeyJson_ParseInjectUsingJson_Ext2(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "ParseInjectUsingJson error:", actual)
-	actual := args.Map{"result": parsed == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": parsed == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-nil", actual)
 }
 
@@ -297,8 +297,8 @@ func Test_FixedLegend_FormatKeyMap_Ext2(t *testing.T) {
 	actual := args.Map{"result": format == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "format should not be empty", actual)
-	actual := args.Map{"result": len(replacerMap) != 6}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(replacerMap) != 6}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 6 replacers", actual)
 }
 
@@ -388,14 +388,14 @@ func Test_KeyWithLegend_Getters_Ext2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "RootName mismatch", actual)
-	actual := args.Map{"result": k.PackageName() != "p"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.PackageName() != "p"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PackageName mismatch", actual)
-	actual := args.Map{"result": k.GroupName() != "g"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.GroupName() != "g"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "GroupName mismatch", actual)
-	actual := args.Map{"result": k.StateName() != "s"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.StateName() != "s"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "StateName mismatch", actual)
 }
 
@@ -930,8 +930,8 @@ func Test_KeyWithLegend_CloneUsing_Ext2(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CloneUsing should not be nil", actual)
-	actual := args.Map{"result": cloned.GroupName() != "newGroup"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cloned.GroupName() != "newGroup"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'newGroup', got ''", actual)
 }
 
@@ -1271,7 +1271,7 @@ func Test_Key_AppendChainStrings_SkipEmpty_Ext2(t *testing.T) {
 	expected := args.Map{
 		"length": 2,
 	}
-	actual := args.Map{"result": actual["length"] != expected["length"]}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": actual["length"] != expected["length"]}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2 chains (empty skipped)", actual)
 }

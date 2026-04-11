@@ -362,12 +362,12 @@ func Test_Result_Ptr_ToPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ptr", actual)
 	np := r.ToPtr()
-	actual := args.Map{"result": np == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": np == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ptr", actual)
 	np2 := r.ToNonPtr()
-	actual := args.Map{"result": np2.Length() == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": np2.Length() == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
@@ -534,8 +534,8 @@ func Test_Result_Serialize_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(b) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(b) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected bytes", actual)
 }
 
@@ -604,8 +604,8 @@ func Test_Result_UnmarshalSkipExistingIssues_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": s != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 }
 
@@ -668,8 +668,8 @@ func Test_Result_Json_JsonPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected json", actual)
 	jp := r.JsonPtr()
-	actual := args.Map{"result": jp == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": jp == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ptr", actual)
 }
 
@@ -812,8 +812,8 @@ func Test_Result_RawPrettyString_FromResultCloneIfIterati(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": s == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected string", actual)
 }
 
@@ -1745,8 +1745,8 @@ func Test_Deserializer_UsingStringPtr_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": s != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": s != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'hello', got ''", actual)
 }
 

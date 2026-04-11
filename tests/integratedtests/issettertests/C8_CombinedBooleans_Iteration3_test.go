@@ -840,8 +840,8 @@ func Test_C8_IsInitBoolean(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.False.IsInitBoolean()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.False.IsInitBoolean()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -870,8 +870,8 @@ func Test_C8_IsInitSet(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.Unset.IsInitSet()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.Unset.IsInitSet()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -945,8 +945,8 @@ func Test_C8_IsDefinedLogically(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.Uninitialized.IsDefinedLogically()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": issetter.Uninitialized.IsDefinedLogically()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1135,11 +1135,11 @@ func Test_C8_ToByteCondition(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.False.ToByteCondition(10, 20, 30) != 20}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": issetter.False.ToByteCondition(10, 20, 30) != 20}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.Uninitialized.ToByteCondition(10, 20, 30) != 30}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": issetter.Uninitialized.ToByteCondition(10, 20, 30) != 30}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1150,8 +1150,8 @@ func Test_C8_ToByteConditionWithWildcard(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.True.ToByteConditionWithWildcard(99, 10, 20, 30) != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": issetter.True.ToByteConditionWithWildcard(99, 10, 20, 30) != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1180,8 +1180,8 @@ func Test_C8_WildcardValueApply(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.True.WildcardValueApply(issetter.False)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.True.WildcardValueApply(issetter.False)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1192,8 +1192,8 @@ func Test_C8_OrBool(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.True.OrBool(false)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.True.OrBool(false)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1204,8 +1204,8 @@ func Test_C8_OrValue(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.True.OrValue(issetter.False)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.True.OrValue(issetter.False)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1216,8 +1216,8 @@ func Test_C8_AndBool(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.True.AndBool(false)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": issetter.True.AndBool(false)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1232,8 +1232,8 @@ func Test_C8_And(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 	r2 := issetter.True.And(issetter.False)
-	actual := args.Map{"result": r2 != issetter.False}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != issetter.False}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1271,8 +1271,8 @@ func Test_C8_IsNegative(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.False.IsNegative()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.False.IsNegative()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 
@@ -1283,8 +1283,8 @@ func Test_C8_IsPositive(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
-	actual := args.Map{"result": issetter.Set.IsPositive()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": issetter.Set.IsPositive()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "assertion", actual)
 }
 

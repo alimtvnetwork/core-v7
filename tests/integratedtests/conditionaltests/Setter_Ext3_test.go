@@ -836,8 +836,8 @@ func Test_NilDefPtrBool_Ext3_Verification(t *testing.T) {
 	// Arrange - non-nil
 	v := false
 	resultNonNil := conditional.NilDefPtrBool(&v, true)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != false}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != false}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrBool non-nil case failed", actual)
 }
 
@@ -854,8 +854,8 @@ func Test_NilDefPtrInt_Ext3_Verification(t *testing.T) {
 
 	v := 7
 	resultNonNil := conditional.NilDefPtrInt(&v, 42)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrInt non-nil case failed", actual)
 }
 
@@ -872,8 +872,8 @@ func Test_NilDefPtrByte_Ext3_Verification(t *testing.T) {
 
 	v := byte(0x0A)
 	resultNonNil := conditional.NilDefPtrByte(&v, byte(0xFF))
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != byte(0x0A)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != byte(0x0A)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilDefPtrByte non-nil case failed", actual)
 }
 
@@ -890,8 +890,8 @@ func Test_PtrOrZeroBool_Ext3_Verification(t *testing.T) {
 
 	v := true
 	resultNonNil := conditional.PtrOrZeroBool(&v)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != true}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != true}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroBool non-nil case failed", actual)
 }
 
@@ -908,8 +908,8 @@ func Test_PtrOrZeroInt_Ext3_Verification(t *testing.T) {
 
 	v := 99
 	resultNonNil := conditional.PtrOrZeroInt(&v)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != 99}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != 99}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroInt non-nil case failed", actual)
 }
 
@@ -926,8 +926,8 @@ func Test_PtrOrZeroByte_Ext3_Verification(t *testing.T) {
 
 	v := byte(42)
 	resultNonNil := conditional.PtrOrZeroByte(&v)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != byte(42)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != byte(42)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PtrOrZeroByte non-nil case failed", actual)
 }
 
@@ -944,8 +944,8 @@ func Test_NilValPtrBool_Ext3_Verification(t *testing.T) {
 
 	v := true
 	resultNonNil := conditional.NilValPtrBool(&v, true, false)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != false}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != false}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilValPtrBool non-nil case failed", actual)
 }
 
@@ -962,8 +962,8 @@ func Test_NilValPtrInt_Ext3_Verification(t *testing.T) {
 
 	v := 50
 	resultNonNil := conditional.NilValPtrInt(&v, -1, 1)
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilValPtrInt non-nil case failed", actual)
 }
 
@@ -980,8 +980,8 @@ func Test_NilValPtrByte_Ext3_Verification(t *testing.T) {
 
 	v := byte(5)
 	resultNonNil := conditional.NilValPtrByte(&v, byte(0), byte(1))
-	actual := args.Map{"result": resultNonNil == nil || *resultNonNil != byte(1)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resultNonNil == nil || *resultNonNil != byte(1)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "NilValPtrByte non-nil case failed", actual)
 }
 
@@ -1003,7 +1003,7 @@ func Test_IfTrueFuncByte_Ext3_Verification(t *testing.T) {
 
 	// false case
 	result2 := conditional.IfTrueFuncByte(false, func() byte { return byte(42) })
-	actual := args.Map{"result": result2 != byte(0)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result2 != byte(0)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "IfTrueFuncByte false case failed", actual)
 }

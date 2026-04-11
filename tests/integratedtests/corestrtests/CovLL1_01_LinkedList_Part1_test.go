@@ -558,8 +558,8 @@ func Test_CovLL1_26_Loop(t *testing.T) {
 			count++
 			return false
 		})
-		actual := args.Map{"result": count != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": count != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// break
 		count = 0
@@ -567,8 +567,8 @@ func Test_CovLL1_26_Loop(t *testing.T) {
 			count++
 			return true
 		})
-		actual := args.Map{"result": count != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": count != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// break on second
 		count = 0
@@ -576,8 +576,8 @@ func Test_CovLL1_26_Loop(t *testing.T) {
 			count++
 			return arg.Index == 1
 		})
-		actual := args.Map{"result": count != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": count != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
@@ -602,29 +602,29 @@ func Test_CovLL1_27_Filter(t *testing.T) {
 		r2 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true}
 		})
-		actual := args.Map{"result": len(r2) != 3}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 3}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 3", actual)
 		// break on first
 		r3 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true, IsBreak: true}
 		})
-		actual := args.Map{"result": len(r3) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// skip all
 		r4 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: false}
 		})
-		actual := args.Map{"result": len(r4) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 		// break on loop iteration
 		r5 := ll.Filter(func(arg *corestr.LinkedListFilterParameter) *corestr.LinkedListFilterResult {
 			return &corestr.LinkedListFilterResult{Value: arg.Node, IsKeep: true, IsBreak: arg.Index == 1}
 		})
-		actual := args.Map{"result": len(r5) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r5) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }

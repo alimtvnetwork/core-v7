@@ -81,7 +81,7 @@ func Test_BytesErrorOnce_Caching(t *testing.T) {
 		r1, _ := once.Value()
 		r2, _ := once.Value()
 
-		actual := args.Map{
+		actual = args.Map{
 			"value1":         string(r1),
 			"value2":         string(r2),
 			"value1EqValue2": string(r1) == string(r2),
@@ -283,14 +283,14 @@ func Test_BytesErrorOnce_Deserialize(t *testing.T) {
 			}
 		} else if initJson == "not-json" {
 			var result map[string]string
-			err := once.Deserialize(&result)
+			err = once.Deserialize(&result)
 			actual = args.Map{
 				"hasError":    err != nil,
 				"isJsonError": strings.Contains(err.Error(), "deserialize failed"),
 			}
 		} else {
 			var result map[string]string
-			err := once.Deserialize(&result)
+			err = once.Deserialize(&result)
 			actual = args.Map{
 				"noError":          err == nil,
 				"deserializedName": result["name"],

@@ -21,8 +21,8 @@ func Test_Key_CompileKeys(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// nil key in list
 	result2 := k.CompileKeys(nil, k2)
-	actual := args.Map{"result": result2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -67,8 +67,8 @@ func Test_Key_CompileStrings_Finalized(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := k.CompileStrings()
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -165,8 +165,8 @@ func Test_KeyJson_Serialize_Unmarshal(t *testing.T) {
 
 	k2 := &keymk.Key{}
 	err = k2.UnmarshalJSON(data)
-	actual := args.Map{"result": err != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected unmarshal success", actual)
 }
 
@@ -210,14 +210,14 @@ func Test_KeyJson_AsJsonContractsBinder(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": k.AsJsoner() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.AsJsoner() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": k.AsJsonParseSelfInjector() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.AsJsonParseSelfInjector() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
-	actual := args.Map{"result": k.AsJsonMarshaller() == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": k.AsJsonMarshaller() == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 }
 

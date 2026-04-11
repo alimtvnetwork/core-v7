@@ -163,11 +163,11 @@ func Test_Trace_Message_And_ShortString(t *testing.T) {
 	actual := args.Map{"result": msg == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Message to not be empty", actual)
-	actual := args.Map{"result": shortStr == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": shortStr == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected ShortString to not be empty", actual)
-	actual := args.Map{"result": str == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": str == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected String to not be empty", actual)
 }
 
@@ -186,8 +186,8 @@ func Test_Trace_FileWithLine_FromTrace(t *testing.T) {
 	actual := args.Map{"result": fwl.FilePath != "/src/file.go"}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected FilePath '/src/file.go', got ''", actual)
-	actual := args.Map{"result": fwl.Line != 10}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fwl.Line != 10}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected Line 10", actual)
 }
 
@@ -304,8 +304,8 @@ func Test_FileWithLine_AsFileLiner_FromTrace(t *testing.T) {
 	actual := args.Map{"result": liner == nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected AsFileLiner to not be nil", actual)
-	actual := args.Map{"result": liner.FullFilePath() != "/src/test.go"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": liner.FullFilePath() != "/src/test.go"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected path '/src/test.go', got ''", actual)
 }
 

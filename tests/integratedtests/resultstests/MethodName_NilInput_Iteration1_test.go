@@ -14,7 +14,7 @@ func Test_MethodName_NilInput(t *testing.T) {
 	actual := results.MethodName(nil)
 
 	// Assert
-	actual := args.Map{"result": actual != ""}
+	actual = args.Map{"result": actual != ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MethodName(nil) should return empty string", actual)
 }
@@ -25,7 +25,7 @@ func Test_MethodName_NonFuncInput(t *testing.T) {
 	actual := results.MethodName("not-a-func")
 
 	// Assert
-	actual := args.Map{"result": actual != ""}
+	actual = args.Map{"result": actual != ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MethodName(string) should return empty string", actual)
 }
@@ -39,7 +39,7 @@ func Test_MethodName_SimpleFuncNoDot(t *testing.T) {
 	actual := results.MethodName(myFunc)
 
 	// Assert
-	actual := args.Map{"result": actual == ""}
+	actual = args.Map{"result": actual == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "MethodName(func) should return non-empty, got empty", actual)
 }
@@ -56,8 +56,8 @@ func Test_InvokeWithPanicRecovery_VoidFunc(t *testing.T) {
 	actual := args.Map{"result": result.Panicked}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "void func should not panic, got panicked", actual)
-	actual := args.Map{"result": result.ReturnCount != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.ReturnCount != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "void func return count: got, want 0", actual)
 }
 
@@ -89,8 +89,8 @@ func Test_InvokeWithPanicRecovery_FuncReturning42(t *testing.T) {
 	actual := args.Map{"result": result.Panicked}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no panic", actual)
-	actual := args.Map{"result": result.ReturnCount != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.ReturnCount != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected return count 1", actual)
 }
 

@@ -24,8 +24,8 @@ func Test_StringSlice_Clone_NonEmpty(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Clone: expected 3", actual)
 	// independence
 	result[0] = "z"
-	actual := args.Map{"result": src[0] == "z"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": src[0] == "z"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone should produce independent copy", actual)
 }
 
@@ -51,8 +51,8 @@ func Test_StringSlice_Clone_Nil(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone nil should return non-nil empty slice", actual)
-	actual := args.Map{"result": len(result) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(result) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Clone nil: expected 0", actual)
 }
 
@@ -71,8 +71,8 @@ func Test_StringSlice_CloneUsingCap_AddsCapacity(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CloneUsingCap len: expected 1", actual)
-	actual := args.Map{"result": cap(result) < 11}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": cap(result) < 11}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "CloneUsingCap cap: expected >= 11", actual)
 }
 
@@ -288,8 +288,8 @@ func Test_StringSlice_MergeNew_BothNonEmpty(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 4", actual)
-	actual := args.Map{"result": result[0] != "a" || result[3] != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "a" || result[3] != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected order:", actual)
 }
 
@@ -506,8 +506,8 @@ func Test_StringSlice_SafeRangeItems_ValidRange(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
-	actual := args.Map{"result": result[0] != "b" || result[1] != "c"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result[0] != "b" || result[1] != "c"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected [b c]", actual)
 }
 

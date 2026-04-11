@@ -210,8 +210,8 @@ func Test_Read_Success(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": string(data) != "hello"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": string(data) != "hello"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected content", actual)
 }
 

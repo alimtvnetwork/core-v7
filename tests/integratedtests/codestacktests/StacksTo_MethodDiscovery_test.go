@@ -649,8 +649,8 @@ func Test_File_PathLineSep_Ext(t *testing.T) {
 	actual := args.Map{"result": filePath == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PathLineSep should return non-empty file path", actual)
-	actual := args.Map{"result": lineNumber <= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lineNumber <= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PathLineSep should return positive line number", actual)
 }
 
@@ -662,8 +662,8 @@ func Test_File_PathLineSepDefault_Ext(t *testing.T) {
 	actual := args.Map{"result": filePath == ""}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PathLineSepDefault should return non-empty file path", actual)
-	actual := args.Map{"result": lineNumber <= 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": lineNumber <= 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "PathLineSepDefault should return positive line number", actual)
 }
 
@@ -1320,8 +1320,8 @@ func Test_TraceCollection_ParseInjectUsingJson_Ext(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": result.Length() != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.Length() != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -1626,8 +1626,8 @@ func Test_Trace_ParseInjectUsingJson_Ext(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": result.PackageName != "pkg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.PackageName != "pkg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should preserve PackageName", actual)
 }
 
@@ -1738,8 +1738,8 @@ func Test_FileWithLine_ParseInjectUsingJson_Ext(t *testing.T) {
 	actual := args.Map{"result": err != nil}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": result.FilePath != "/f.go"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.FilePath != "/f.go"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should preserve FilePath", actual)
 }
 

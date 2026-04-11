@@ -73,8 +73,8 @@ func Test_QW_UsingBracketsWrappedTemplate(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	result2 := stringutil.ReplaceTemplate.UsingBracketsWrappedTemplate("", "REPLACED")
-	actual := args.Map{"result": result2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -92,8 +92,8 @@ func Test_QW_UsingQuotesWrappedTemplate(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	result2 := stringutil.ReplaceTemplate.UsingQuotesWrappedTemplate("", "REPLACED")
-	actual := args.Map{"result": result2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 

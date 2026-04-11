@@ -34,34 +34,34 @@ func Test_CovErr_01_CountStateChangeTracker(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected same state", actual)
-	actual := args.Map{"result": tracker.IsValid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tracker.IsValid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
-	actual := args.Map{"result": tracker.IsSuccess()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tracker.IsSuccess()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected success", actual)
-	actual := args.Map{"result": tracker.HasChanges()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tracker.HasChanges()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no changes", actual)
-	actual := args.Map{"result": tracker.IsFailed()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tracker.IsFailed()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not failed", actual)
-	actual := args.Map{"result": tracker.IsSameStateUsingCount(5)}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tracker.IsSameStateUsingCount(5)}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected same state using count", actual)
-	actual := args.Map{"result": tracker.IsSameStateUsingCount(3)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tracker.IsSameStateUsingCount(3)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not same state", actual)
 	// change length
 	mg.length = 10
-	actual := args.Map{"result": tracker.IsSameState()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": tracker.IsSameState()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected different state", actual)
-	actual := args.Map{"result": tracker.HasChanges()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tracker.HasChanges()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected changes", actual)
-	actual := args.Map{"result": tracker.IsFailed()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": tracker.IsFailed()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected failed", actual)
 }
 
@@ -79,13 +79,13 @@ func Test_CovErr_02_CombineWithMsgTypeNoStack(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// empty otherMsg
 	r2 := errcore.CombineWithMsgTypeNoStack(errcore.OutOfRangeType, "", "ref")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// nil reference
 	r3 := errcore.CombineWithMsgTypeNoStack(errcore.OutOfRangeType, "msg", nil)
-	actual := args.Map{"result": r3 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -115,8 +115,8 @@ func Test_CovErr_04_ConcatMessageWithErr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	// nil err
 	err2 := errcore.ConcatMessageWithErr("prefix", nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -131,8 +131,8 @@ func Test_CovErr_05_ConcatMessageWithErrWithStackTrace(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.ConcatMessageWithErrWithStackTrace("prefix", nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -164,8 +164,8 @@ func Test_CovErr_07_EnumRangeNotMeet(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// nil wholeRange
 	r2 := errcore.EnumRangeNotMeet(1, 10, nil)
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -182,8 +182,8 @@ func Test_CovErr_08_ErrorToSplitLines(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	lines2 := errcore.ErrorToSplitLines(nil)
-	actual := args.Map{"result": len(lines2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(lines2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -213,18 +213,18 @@ func Test_CovErr_10_ErrorWithRef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// nil err
 	r2 := errcore.ErrorWithRef(nil, "ref")
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	// nil ref
 	r3 := errcore.ErrorWithRef(errors.New("err"), nil)
-	actual := args.Map{"result": r3 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// empty ref
 	r4 := errcore.ErrorWithRef(errors.New("err"), "")
-	actual := args.Map{"result": r4 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r4 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -239,8 +239,8 @@ func Test_CovErr_11_ErrorWithRefToError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.ErrorWithRefToError(nil, "ref")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -259,18 +259,18 @@ func Test_CovErr_12_ErrorWithCompiledTraceRef(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	// empty traces
 	r2 := errcore.ErrorWithCompiledTraceRef(errors.New("err"), "", "ref")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// nil reference
 	r3 := errcore.ErrorWithCompiledTraceRef(errors.New("err"), "trace", nil)
-	actual := args.Map{"result": r3 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r3 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	// all present
 	r4 := errcore.ErrorWithCompiledTraceRef(errors.New("err"), "trace", "ref")
-	actual := args.Map{"result": r4 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r4 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -287,8 +287,8 @@ func Test_CovErr_13_MeaningfulError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.MeaningfulError(errcore.OutOfRangeType, "func", nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -303,8 +303,8 @@ func Test_CovErr_14_MeaningfulErrorWithData(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.MeaningfulErrorWithData(errcore.OutOfRangeType, "func", nil, "data")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -319,8 +319,8 @@ func Test_CovErr_15_MeaningfulMessageError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.MeaningfulMessageError(errcore.OutOfRangeType, "func", nil, "extra")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -344,8 +344,8 @@ func Test_CovErr_17_PathMeaningfulMessage(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.PathMeaningfulMessage(errcore.OutOfRangeType, "func", "/path")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -362,8 +362,8 @@ func Test_CovErr_18_PathMeaningfulError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.PathMeaningfulError(errcore.OutOfRangeType, nil, "/path")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -380,8 +380,8 @@ func Test_CovErr_19_MergeErrors(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.MergeErrors()
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -396,8 +396,8 @@ func Test_CovErr_20_MergeErrorsToString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.MergeErrorsToString(", ")
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -412,8 +412,8 @@ func Test_CovErr_21_MergeErrorsToStringDefault(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.MergeErrorsToStringDefault()
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -430,8 +430,8 @@ func Test_CovErr_22_ManyErrorToSingle(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.ManyErrorToSingle(nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -460,8 +460,8 @@ func Test_CovErr_24_SliceError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.SliceError(", ", []string{})
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -488,8 +488,8 @@ func Test_CovErr_26_SliceErrorsToStrings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	ss2 := errcore.SliceErrorsToStrings()
-	actual := args.Map{"result": len(ss2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(ss2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -504,16 +504,16 @@ func Test_CovErr_27_SliceToError_SliceToErrorPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.SliceToError([]string{})
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	err3 := errcore.SliceToErrorPtr([]string{"a"})
-	actual := args.Map{"result": err3 == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err3 == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err4 := errcore.SliceToErrorPtr([]string{})
-	actual := args.Map{"result": err4 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err4 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -530,8 +530,8 @@ func Test_CovErr_28_VarTwo(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.VarTwo(false, "a", 1, "b", 2)
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -558,8 +558,8 @@ func Test_CovErr_30_VarThree(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.VarThree(false, "a", 1, "b", 2, "c", 3)
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -588,8 +588,8 @@ func Test_CovErr_32_VarMap(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.VarMap(map[string]any{})
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -604,8 +604,8 @@ func Test_CovErr_33_VarMapStrings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	ss2 := errcore.VarMapStrings(map[string]any{})
-	actual := args.Map{"result": len(ss2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(ss2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -621,8 +621,8 @@ func Test_CovErr_34_VarNameValues(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.VarNameValues()
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -638,8 +638,8 @@ func Test_CovErr_35_VarNameValuesJoiner(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.VarNameValuesJoiner(", ")
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -655,8 +655,8 @@ func Test_CovErr_36_VarNameValuesStrings(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	ss2 := errcore.VarNameValuesStrings()
-	actual := args.Map{"result": len(ss2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(ss2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -697,8 +697,8 @@ func Test_CovErr_39_MessageVarMap(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.MessageVarMap("msg", map[string]any{})
-	actual := args.Map{"result": r2 != "msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != "msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected just msg", actual)
 }
 
@@ -714,8 +714,8 @@ func Test_CovErr_40_MessageNameValues(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.MessageNameValues("msg")
-	actual := args.Map{"result": r2 != "msg"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != "msg"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected just msg", actual)
 }
 
@@ -758,8 +758,8 @@ func Test_CovErr_43_SourceDestination(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.SourceDestination(false, "src", "dst")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -800,8 +800,8 @@ func Test_CovErr_46_ToError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.ToError("")
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 
@@ -816,8 +816,8 @@ func Test_CovErr_47_ToString(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected msg", actual)
 	r2 := errcore.ToString(nil)
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -832,8 +832,8 @@ func Test_CovErr_48_ToStringPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected msg", actual)
 	r2 := errcore.ToStringPtr(nil)
-	actual := args.Map{"result": *r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": *r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -860,8 +860,8 @@ func Test_CovErr_50_ToExitError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 	r2 := errcore.ToExitError(errors.New("not exit error"))
-	actual := args.Map{"result": r2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil for non-exit error", actual)
 }
 
@@ -878,8 +878,8 @@ func Test_CovErr_51_StringLinesToQuoteLines(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	ss2 := errcore.StringLinesToQuoteLines([]string{})
-	actual := args.Map{"result": len(ss2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(ss2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -906,8 +906,8 @@ func Test_CovErr_53_LinesToDoubleQuoteLinesWithTabs(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	ss2 := errcore.LinesToDoubleQuoteLinesWithTabs(0, []string{})
-	actual := args.Map{"result": len(ss2) != 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(ss2) != 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 0", actual)
 }
 
@@ -936,8 +936,8 @@ func Test_CovErr_55_MsgHeaderIf(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.MsgHeaderIf(false, "test")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1001,8 +1001,8 @@ func Test_CovErr_63_RangeNotMeet(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.RangeNotMeet("msg", 0, 10, "range")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1017,8 +1017,8 @@ func Test_CovErr_64_PanicRangeNotMeet(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.PanicRangeNotMeet("msg", 0, 10, "range")
-	actual := args.Map{"result": r2 == ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 == ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 }
 
@@ -1035,8 +1035,8 @@ func Test_CovErr_65_Ref(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-empty", actual)
 	r2 := errcore.Ref(nil)
-	actual := args.Map{"result": r2 != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": r2 != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 }
 
@@ -1051,8 +1051,8 @@ func Test_CovErr_66_RefToError(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
 	err2 := errcore.RefToError(nil)
-	actual := args.Map{"result": err2 != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err2 != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil", actual)
 }
 

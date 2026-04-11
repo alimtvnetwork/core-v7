@@ -81,8 +81,8 @@ func Test_Info_IsName_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should match name", actual)
-	actual := args.Map{"result": info.IsName("other")}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.IsName("other")}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not match other", actual)
 }
 
@@ -280,29 +280,29 @@ func Test_Info_IsInclude_Getters_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include root name", actual)
-	actual := args.Map{"result": info.IsIncludeDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include description", actual)
-	actual := args.Map{"result": info.IsIncludeUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include url", actual)
-	actual := args.Map{"result": info.IsIncludeHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include hint url", actual)
-	actual := args.Map{"result": info.IsIncludeErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include error url", actual)
-	actual := args.Map{"result": info.IsIncludeExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include example url", actual)
-	actual := args.Map{"result": info.IsIncludeSingleExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeSingleExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include single example", actual)
-	actual := args.Map{"result": info.IsIncludeExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include examples", actual)
-	actual := args.Map{"result": info.IsIncludeAdditionalErrorWrap()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeAdditionalErrorWrap()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include additional error wrap", actual)
 }
 
@@ -316,8 +316,8 @@ func Test_Info_NilIsInclude_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not include root name", actual)
-	actual := args.Map{"result": info.IsIncludeAdditionalErrorWrap()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludeAdditionalErrorWrap()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include additional error wrap", actual)
 }
 
@@ -331,11 +331,11 @@ func Test_Info_IsSecure_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be secure", actual)
-	actual := args.Map{"result": info.IsExcludePayload()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludePayload()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude payload", actual)
-	actual := args.Map{"result": info.IsPlainText()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.IsPlainText()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be plain text", actual)
 }
 
@@ -349,8 +349,8 @@ func Test_Info_IsPlainText_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be plain text", actual)
-	actual := args.Map{"result": info.IsIncludePayloads()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsIncludePayloads()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should include payloads", actual)
 }
 
@@ -375,23 +375,23 @@ func Test_Info_SafeGetters_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeName mismatch", actual)
-	actual := args.Map{"result": info.SafeDescription() != "d"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeDescription() != "d"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeDescription mismatch", actual)
-	actual := args.Map{"result": info.SafeUrl() != "u"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeUrl() != "u"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeUrl mismatch", actual)
-	actual := args.Map{"result": info.SafeHintUrl() != "h"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeHintUrl() != "h"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeHintUrl mismatch", actual)
-	actual := args.Map{"result": info.SafeErrorUrl() != "e"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeErrorUrl() != "e"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeErrorUrl mismatch", actual)
-	actual := args.Map{"result": info.SafeExampleUrl() != "ex"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeExampleUrl() != "ex"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeExampleUrl mismatch", actual)
-	actual := args.Map{"result": info.SafeChainingExample() != "ex"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeChainingExample() != "ex"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "SafeChainingExample mismatch", actual)
 }
 
@@ -405,23 +405,23 @@ func Test_Info_NilSafeGetters_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeName should be empty", actual)
-	actual := args.Map{"result": info.SafeDescription() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeDescription() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeDescription should be empty", actual)
-	actual := args.Map{"result": info.SafeUrl() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeUrl() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeUrl should be empty", actual)
-	actual := args.Map{"result": info.SafeHintUrl() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeHintUrl() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeHintUrl should be empty", actual)
-	actual := args.Map{"result": info.SafeErrorUrl() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeErrorUrl() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeErrorUrl should be empty", actual)
-	actual := args.Map{"result": info.SafeExampleUrl() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeExampleUrl() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeExampleUrl should be empty", actual)
-	actual := args.Map{"result": info.SafeChainingExample() != ""}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": info.SafeChainingExample() != ""}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil SafeChainingExample should be empty", actual)
 }
 
@@ -449,29 +449,29 @@ func Test_Info_HasChecks_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have root name", actual)
-	actual := args.Map{"result": info.HasDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have description", actual)
-	actual := args.Map{"result": info.HasUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have url", actual)
-	actual := args.Map{"result": info.HasHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have hint url", actual)
-	actual := args.Map{"result": info.HasErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have error url", actual)
-	actual := args.Map{"result": info.HasExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have example url", actual)
-	actual := args.Map{"result": info.HasChainingExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasChainingExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have chaining example", actual)
-	actual := args.Map{"result": info.HasExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have examples", actual)
-	actual := args.Map{"result": info.HasExcludeOptions()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.HasExcludeOptions()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should have exclude options", actual)
 }
 
@@ -489,29 +489,29 @@ func Test_Info_IsEmptyChecks_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty name", actual)
-	actual := args.Map{"result": info.IsEmptyDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty description", actual)
-	actual := args.Map{"result": info.IsEmptyUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty url", actual)
-	actual := args.Map{"result": info.IsEmptyHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty hint url", actual)
-	actual := args.Map{"result": info.IsEmptyErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty error url", actual)
-	actual := args.Map{"result": info.IsEmptyExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty example url", actual)
-	actual := args.Map{"result": info.IsEmptySingleExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptySingleExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty single example", actual)
-	actual := args.Map{"result": info.IsEmptyExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty examples", actual)
-	actual := args.Map{"result": info.IsEmptyExcludeOptions()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsEmptyExcludeOptions()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty exclude options", actual)
 }
 
@@ -541,29 +541,29 @@ func Test_Info_IsExcludeChecks_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude root name", actual)
-	actual := args.Map{"result": info.IsExcludeDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude description", actual)
-	actual := args.Map{"result": info.IsExcludeUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude url", actual)
-	actual := args.Map{"result": info.IsExcludeHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude hint url", actual)
-	actual := args.Map{"result": info.IsExcludeErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude error url", actual)
-	actual := args.Map{"result": info.IsExcludeAdditionalErrorWrap()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeAdditionalErrorWrap()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude additional error wrap", actual)
-	actual := args.Map{"result": info.IsExcludeExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude example url", actual)
-	actual := args.Map{"result": info.IsExcludeSingleExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeSingleExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude single example", actual)
-	actual := args.Map{"result": info.IsExcludeExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": info.IsExcludeExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should exclude examples", actual)
 }
 
@@ -660,8 +660,8 @@ func Test_Info_Serialize_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Serialize error:", actual)
-	actual := args.Map{"result": len(bytes) == 0}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(bytes) == 0}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should return non-empty bytes", actual)
 }
 
@@ -980,8 +980,8 @@ func Test_ExcludingOptions_IsEmpty_Ext(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "default should be empty", actual)
 	opts.IsExcludeRootName = true
-	actual := args.Map{"result": opts.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be empty after setting a flag", actual)
 }
 
@@ -1072,32 +1072,32 @@ func Test_ExcludingOptions_IsInclude_All_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include root name", actual)
-	actual := args.Map{"result": opts.IsIncludeDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include description", actual)
-	actual := args.Map{"result": opts.IsIncludeUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include url", actual)
-	actual := args.Map{"result": opts.IsIncludeHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include hint url", actual)
-	actual := args.Map{"result": opts.IsIncludeErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include error url", actual)
-	actual := args.Map{"result": opts.IsIncludeExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include example url", actual)
-	actual := args.Map{"result": opts.IsIncludeSingleExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeSingleExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include single example", actual)
-	actual := args.Map{"result": opts.IsIncludeExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include examples", actual)
-	actual := args.Map{"result": opts.IsIncludeAdditionalErrorWrap()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludeAdditionalErrorWrap()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include additional error wrap", actual)
-	actual := args.Map{"result": opts.IsIncludePayloads()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opts.IsIncludePayloads()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include payloads", actual)
 }
 
@@ -1111,32 +1111,32 @@ func Test_ExcludingOptions_IsSafe_All_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeDescription()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeDescription()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeUrl()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeUrl()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeErrorUrl()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeErrorUrl()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeAdditionalErrorWrap()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeAdditionalErrorWrap()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeHintUrl()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeHintUrl()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeExampleUrl()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeExampleUrl()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeSingleExample()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeSingleExample()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeExcludeExamples()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeExcludeExamples()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not exclude", actual)
-	actual := args.Map{"result": opts.IsSafeSecureText()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opts.IsSafeSecureText()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should not be secure", actual)
 }
 
@@ -1708,8 +1708,8 @@ func Test_NewInfo_Deserialized_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Deserialized error:", actual)
-	actual := args.Map{"result": result.RootName != "n"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.RootName != "n"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should preserve root name", actual)
 }
 
@@ -1725,8 +1725,8 @@ func Test_NewInfo_DeserializedUsingJsonResult_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "error:", actual)
-	actual := args.Map{"result": result.RootName != "n"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": result.RootName != "n"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should preserve root name", actual)
 }
 
@@ -1742,8 +1742,8 @@ func Test_Info_Deserialize_Ext(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "Deserialize error:", actual)
-	actual := args.Map{"result": target.RootName != "n"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": target.RootName != "n"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should preserve root name", actual)
 }
 

@@ -28,8 +28,8 @@ func Test_CompiledWrapper_Fixed(t *testing.T) {
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	w, err := exec.CompiledWrapper(0755)
-	actual := args.Map{"result": err != nil || w == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || w == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
@@ -49,8 +49,8 @@ func Test_CompiledWrapper_Var(t *testing.T) {
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	w, err := exec.CompiledWrapper(0755)
-	actual := args.Map{"result": err != nil || w == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || w == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
@@ -73,8 +73,8 @@ func Test_CompiledRwxWrapperUsingFixed_Fixed(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	existing := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 	w, err := exec.CompiledRwxWrapperUsingFixedRwxWrapper(existing)
-	actual := args.Map{"result": err != nil || w == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || w == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 
@@ -95,8 +95,8 @@ func Test_CompiledRwxWrapperUsingFixed_Var(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "err", actual)
 	existing := chmodhelper.New.RwxWrapper.UsingFileModePtr(0755)
 	w, err := exec.CompiledRwxWrapperUsingFixedRwxWrapper(existing)
-	actual := args.Map{"result": err != nil || w == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": err != nil || w == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected wrapper", actual)
 }
 

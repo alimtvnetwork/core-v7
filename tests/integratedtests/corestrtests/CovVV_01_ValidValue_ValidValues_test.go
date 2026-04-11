@@ -664,22 +664,22 @@ func Test_CovVVs_08_Find(t *testing.T) {
 		r2 := vvs.Find(func(i int, vv *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return vv, true, false
 		})
-		actual := args.Map{"result": len(r2) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r2) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 		// break
 		r3 := vvs.Find(func(i int, vv *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return vv, true, true
 		})
-		actual := args.Map{"result": len(r3) != 1}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r3) != 1}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 1", actual)
 		// skip
 		r4 := vvs.Find(func(i int, vv *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return vv, false, false
 		})
-		actual := args.Map{"result": len(r4) != 0}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(r4) != 0}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 0", actual)
 	})
 }

@@ -26,8 +26,8 @@ func Test_FieldProcessor_IsFieldType_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected match", actual)
-	actual := args.Map{"result": fp.IsFieldType(reflect.TypeOf(""))}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fp.IsFieldType(reflect.TypeOf(""))}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }
 
@@ -57,8 +57,8 @@ func Test_FieldProcessor_IsFieldKind_Valid(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected int kind", actual)
-	actual := args.Map{"result": fp.IsFieldKind(reflect.String)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": fp.IsFieldKind(reflect.String)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no match", actual)
 }
 
@@ -112,8 +112,8 @@ func Test_MP_HasValidFunc(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	var nilMp *reflectmodel.MethodProcessor
-	actual := args.Map{"result": nilMp.HasValidFunc()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": nilMp.HasValidFunc()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
@@ -140,8 +140,8 @@ func Test_MP_IsInvalid(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected valid", actual)
 	var nilMp *reflectmodel.MethodProcessor
-	actual := args.Map{"result": nilMp.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilMp.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be invalid", actual)
 }
 
@@ -255,8 +255,8 @@ func Test_MP_Invoke_Success(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": len(results) != 1 || results[0].(int) != 7}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(results) != 1 || results[0].(int) != 7}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 7", actual)
 }
 
@@ -297,8 +297,8 @@ func Test_MP_GetFirstResponseOfInvoke(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": resp.(string) != "hi"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resp.(string) != "hi"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected hi", actual)
 }
 
@@ -313,8 +313,8 @@ func Test_MP_InvokeResultOfIndex(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": resp.(int) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": resp.(int) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3", actual)
 }
 
@@ -330,8 +330,8 @@ func Test_MP_InvokeError(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
-	actual := args.Map{"result": funcErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": funcErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected nil error from Err()", actual)
 }
 
@@ -347,11 +347,11 @@ func Test_MP_InvokeFirstAndError_Success(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "processing error:", actual)
-	actual := args.Map{"result": funcErr != nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": funcErr != nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected no func error", actual)
-	actual := args.Map{"result": first.(string) != "ok"}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": first.(string) != "ok"}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 'ok'", actual)
 }
 
@@ -461,8 +461,8 @@ func Test_MP_GetOutArgsTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected 1", actual)
 	// Call again to hit cache
 	out2 := mp.GetOutArgsTypes()
-	actual := args.Map{"result": len(out2) != 1}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(out2) != 1}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
@@ -492,8 +492,8 @@ func Test_MP_GetInArgsTypes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 	// Call again to hit cache
 	in2 := mp.GetInArgsTypes()
-	actual := args.Map{"result": len(in2) != len(in)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(in2) != len(in)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
@@ -523,8 +523,8 @@ func Test_MP_GetInArgsTypesNames(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected >= 2", actual)
 	// Call again to hit cache
 	names2 := mp.GetInArgsTypesNames()
-	actual := args.Map{"result": len(names2) != len(names)}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(names2) != len(names)}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "cache should return same", actual)
 }
 
@@ -672,11 +672,11 @@ func Test_RVK_InvalidReflectValueKindModel(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected invalid", actual)
-	actual := args.Map{"result": rvk.Error == nil}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": rvk.Error == nil}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected error", actual)
-	actual := args.Map{"result": rvk.IsInvalid()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": rvk.IsInvalid()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected IsInvalid true", actual)
 }
 
@@ -691,8 +691,8 @@ func Test_RVK_IsEmptyError(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty error", actual)
 	var nilRvk *reflectmodel.ReflectValueKind
-	actual := args.Map{"result": nilRvk.IsEmptyError()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": nilRvk.IsEmptyError()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should be empty error", actual)
 }
 

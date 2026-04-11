@@ -15,11 +15,11 @@ func Test_Value_Methods_Ext2(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "unexpected error:", actual)
 
 	// Assert
-	actual := args.Map{"result": v.IsUnset()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": v.IsUnset()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
-	actual := args.Map{"result": v.IsSet()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsSet()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be set", actual)
 }
 
@@ -31,8 +31,8 @@ func Test_NewBool_Ext2(t *testing.T) {
 	actual := args.Map{"result": v.IsUnset()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
-	actual := args.Map{"result": v.Boolean()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.Boolean()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be true", actual)
 }
 
@@ -44,8 +44,8 @@ func Test_NewMust_Ext2(t *testing.T) {
 	actual := args.Map{"result": v.IsUnset()}
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "should not be unset", actual)
-	actual := args.Map{"result": v.IsTrue()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": v.IsTrue()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "should be True", actual)
 }
 

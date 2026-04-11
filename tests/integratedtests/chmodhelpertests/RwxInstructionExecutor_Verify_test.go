@@ -128,10 +128,10 @@ func Test_RwxVariableWrapper_VerifyOnLocations_ContinueOnError(t *testing.T) {
 	}
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"parseOk": parseErr == nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"parseOk": true,
 	}
 	actual.ShouldBeEqual(t, 1, "RwxVariableWrapper VerifyOnLocations", expected)
@@ -166,11 +166,11 @@ func Test_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	}
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"parseOk":  parseErr == nil,
 		"hasError": applyErr != nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"parseOk":  true,
 		"hasError": true,
 	}
@@ -205,11 +205,11 @@ func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	}
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"parseOk":  parseErr == nil,
 		"hasError": applyErr != nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"parseOk":  true,
 		"hasError": false,
 	}
@@ -246,11 +246,11 @@ func Test_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	}
 
 	// Assert
-	actual := args.Map{
+	actual = args.Map{
 		"parseOk":  parseErr == nil,
 		"hasError": applyErr != nil,
 	}
-	expected := args.Map{
+	expected = args.Map{
 		"parseOk":  true,
 		"hasError": false,
 	}

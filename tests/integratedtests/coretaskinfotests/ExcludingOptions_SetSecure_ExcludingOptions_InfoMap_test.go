@@ -57,8 +57,8 @@ func Test_ExcludingOptions_IsEmpty(t *testing.T) {
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty", actual)
 	opt.IsExcludeRootName = true
-	actual := args.Map{"result": opt.IsEmpty()}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": opt.IsEmpty()}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected not empty", actual)
 }
 
@@ -84,32 +84,32 @@ func Test_ExcludingOptions_AllIncludes(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include root name", actual)
-	actual := args.Map{"result": opt.IsIncludeDescription()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeDescription()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include desc", actual)
-	actual := args.Map{"result": opt.IsIncludeUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include url", actual)
-	actual := args.Map{"result": opt.IsIncludeHintUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeHintUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include hint url", actual)
-	actual := args.Map{"result": opt.IsIncludeErrorUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeErrorUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include error url", actual)
-	actual := args.Map{"result": opt.IsIncludeExampleUrl()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeExampleUrl()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include example url", actual)
-	actual := args.Map{"result": opt.IsIncludeSingleExample()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeSingleExample()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include single example", actual)
-	actual := args.Map{"result": opt.IsIncludeExamples()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeExamples()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include examples", actual)
-	actual := args.Map{"result": opt.IsIncludeAdditionalErrorWrap()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludeAdditionalErrorWrap()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include additional error wrap", actual)
-	actual := args.Map{"result": opt.IsIncludePayloads()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": opt.IsIncludePayloads()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "nil should include payloads", actual)
 }
 
@@ -138,7 +138,7 @@ func Test_ExcludingOptions_ToPtr_ToNonPtr(t *testing.T) {
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil", actual)
 	np := opt.ToNonPtr()
-	actual := args.Map{"result": np.IsExcludeRootName}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": np.IsExcludeRootName}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected copied", actual)
 }

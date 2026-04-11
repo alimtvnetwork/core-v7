@@ -236,8 +236,8 @@ func Test_UsingChmod_Zero(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected non-nil wrapper", actual)
-	actual := args.Map{"result": w.IsEmpty()}
-	expected := args.Map{"result": true}
+	actual = args.Map{"result": w.IsEmpty()}
+	expected = args.Map{"result": true}
 	expected.ShouldBeEqual(t, 0, "expected empty wrapper for zero mode", actual)
 }
 
@@ -1231,8 +1231,8 @@ func Test_FileWithContent_ReadLines_Success(t *testing.T) {
 	// Assert
 	expected := args.Map{"result": nil}
 	expected.ShouldBeEqual(t, 0, "err", actual)
-	actual := args.Map{"result": len(lines) != 3}
-	expected := args.Map{"result": false}
+	actual = args.Map{"result": len(lines) != 3}
+	expected = args.Map{"result": false}
 	expected.ShouldBeEqual(t, 0, "expected 3 lines", actual)
 }
 

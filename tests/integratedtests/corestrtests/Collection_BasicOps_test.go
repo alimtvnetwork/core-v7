@@ -1922,8 +1922,8 @@ func Test_ValidValues_AllMethods(t *testing.T) {
 		found := vv.Find(func(i int, v *corestr.ValidValue) (*corestr.ValidValue, bool, bool) {
 			return v, true, false
 		})
-		actual := args.Map{"result": len(found) != 2}
-		expected := args.Map{"result": false}
+		actual = args.Map{"result": len(found) != 2}
+		expected = args.Map{"result": false}
 		expected.ShouldBeEqual(t, 0, "expected 2", actual)
 	})
 }
