@@ -11,7 +11,7 @@ import (
 
 func sampleStringFunc(s string) string { return strings.ToUpper(s) }
 
-func Test_I13_Dynamic_NilBranches(t *testing.T) {
+func Test_Dynamic_NilBranches(t *testing.T) {
 	var d *Dynamic[string]
 	if d.ArgsCount() != 0 {
 		t.Fatal("nil ArgsCount should be 0")
@@ -24,7 +24,7 @@ func Test_I13_Dynamic_NilBranches(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_GetWorkFunc(t *testing.T) {
+func Test_Dynamic_GetWorkFunc(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"func": sampleStringFunc},
 	}
@@ -33,7 +33,7 @@ func Test_I13_Dynamic_GetWorkFunc(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_HasFunc(t *testing.T) {
+func Test_Dynamic_HasFunc(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"func": sampleStringFunc},
 	}
@@ -43,7 +43,7 @@ func Test_I13_Dynamic_HasFunc(t *testing.T) {
 	_ = d.GetFuncName()
 }
 
-func Test_I13_Dynamic_InvokeMust(t *testing.T) {
+func Test_Dynamic_InvokeMust(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"func": sampleStringFunc, "first": "hello"},
 	}
@@ -53,7 +53,7 @@ func Test_I13_Dynamic_InvokeMust(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_FuncWrap(t *testing.T) {
+func Test_Dynamic_FuncWrap(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"func": sampleStringFunc},
 	}
@@ -63,7 +63,7 @@ func Test_I13_Dynamic_FuncWrap(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_Items(t *testing.T) {
+func Test_Dynamic_Items(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{
 			"first":  "a",
@@ -87,7 +87,7 @@ func Test_I13_Dynamic_Items(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_GetVariants(t *testing.T) {
+func Test_Dynamic_GetVariants(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{
 			"key1":   "val1",
@@ -109,7 +109,7 @@ func Test_I13_Dynamic_GetVariants(t *testing.T) {
 	_, _ = d.GetAsAnyItems("key1")
 }
 
-func Test_I13_Dynamic_HasDefined(t *testing.T) {
+func Test_Dynamic_HasDefined(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"a": "x"},
 	}
@@ -133,7 +133,7 @@ func Test_I13_Dynamic_HasDefined(t *testing.T) {
 	}
 }
 
-func Test_I13_Dynamic_ValidArgsAndSlice(t *testing.T) {
+func Test_Dynamic_ValidArgsAndSlice(t *testing.T) {
 	d := &Dynamic[string]{
 		Params: Map{"1": "a", "2": "b"},
 		Expect: "exp",
@@ -166,7 +166,7 @@ func Test_I13_Dynamic_ValidArgsAndSlice(t *testing.T) {
 // DynamicFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_DynamicFunc_Branches(t *testing.T) {
+func Test_DynamicFunc_Branches(t *testing.T) {
 	df := &DynamicFunc[func(string) string]{
 		Params:   Map{"first": "hello"},
 		WorkFunc: sampleStringFunc,
@@ -234,7 +234,7 @@ func Test_I13_DynamicFunc_Branches(t *testing.T) {
 	_ = df.AsArgBaseContractsBinder()
 }
 
-func Test_I13_DynamicFunc_NilBranches(t *testing.T) {
+func Test_DynamicFunc_NilBranches(t *testing.T) {
 	var df *DynamicFunc[any]
 	if df.ArgsCount() != 0 {
 		t.Fatal("nil ArgsCount should be 0")
@@ -252,7 +252,7 @@ func Test_I13_DynamicFunc_NilBranches(t *testing.T) {
 // FuncWrap — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_FuncWrap_NewTypedFuncWrap(t *testing.T) {
+func Test_FuncWrap_NewTypedFuncWrap(t *testing.T) {
 	fw := NewTypedFuncWrap(sampleStringFunc)
 	if fw.IsInvalid() {
 		t.Fatal("expected valid")
@@ -294,7 +294,7 @@ func Test_I13_FuncWrap_NewTypedFuncWrap(t *testing.T) {
 	}
 }
 
-func Test_I13_FuncWrap_InvokeTypedHelpers(t *testing.T) {
+func Test_FuncWrap_InvokeTypedHelpers(t *testing.T) {
 	boolFn := func(s string) bool { return s == "yes" }
 	fw := NewTypedFuncWrap(boolFn)
 	if !fw.IsBoolFunc() {
@@ -333,7 +333,7 @@ func Test_I13_FuncWrap_InvokeTypedHelpers(t *testing.T) {
 	_, _ = fwv.VoidCall()
 }
 
-func Test_I13_FuncWrap_Validation(t *testing.T) {
+func Test_FuncWrap_Validation(t *testing.T) {
 	fw := NewTypedFuncWrap(sampleStringFunc)
 	fw.MustBeValid()
 	if fw.ValidationError() != nil {
@@ -353,7 +353,7 @@ func Test_I13_FuncWrap_Validation(t *testing.T) {
 	}
 }
 
-func Test_I13_FuncWrap_Args(t *testing.T) {
+func Test_FuncWrap_Args(t *testing.T) {
 	fw := NewTypedFuncWrap(sampleStringFunc)
 	if fw.ArgsCount() != 1 {
 		t.Fatal("expected 1 arg")
@@ -380,7 +380,7 @@ func Test_I13_FuncWrap_Args(t *testing.T) {
 	}
 }
 
-func Test_I13_FuncWrap_NilReceiver(t *testing.T) {
+func Test_FuncWrap_NilReceiver(t *testing.T) {
 	var fw *FuncWrap[any]
 	if fw.GetFuncName() != "" {
 		t.Fatal("nil should return empty name")
@@ -400,7 +400,7 @@ func Test_I13_FuncWrap_NilReceiver(t *testing.T) {
 // FuncMap — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_FuncMap_Ops(t *testing.T) {
+func Test_FuncMap_Ops(t *testing.T) {
 	fm := NewFuncWrap.Map(sampleStringFunc)
 	if fm.IsEmpty() {
 		t.Fatal("expected non-empty")
@@ -465,7 +465,7 @@ func Test_I13_FuncMap_Ops(t *testing.T) {
 	_ = fm.ArgsCount("nonexistent")
 }
 
-func Test_I13_FuncMap_Add(t *testing.T) {
+func Test_FuncMap_Add(t *testing.T) {
 	fm := FuncMap{}
 	fm.Add(sampleStringFunc)
 	if fm.IsEmpty() {
@@ -478,7 +478,7 @@ func Test_I13_FuncMap_Add(t *testing.T) {
 // Holder — uncovered InvokeWithValidArgs, InvokeArgs, Args
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_Holder_Branches(t *testing.T) {
+func Test_Holder_Branches(t *testing.T) {
 	h := &Holder[func(string) string]{
 		First:    "hello",
 		Second:   "world",
@@ -529,7 +529,7 @@ func Test_I13_Holder_Branches(t *testing.T) {
 // OneFunc — uncovered InvokeArgs, Args branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_OneFunc_Branches(t *testing.T) {
+func Test_OneFunc_Branches(t *testing.T) {
 	of := &OneFunc[string]{
 		First:    "hello",
 		WorkFunc: sampleStringFunc,
@@ -561,7 +561,7 @@ func Test_I13_OneFunc_Branches(t *testing.T) {
 // TwoFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_TwoFunc_Branches(t *testing.T) {
+func Test_TwoFunc_Branches(t *testing.T) {
 	tf := &TwoFunc[string, string]{
 		First:    "a",
 		Second:   "b",
@@ -582,7 +582,7 @@ func Test_I13_TwoFunc_Branches(t *testing.T) {
 // ThreeFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_ThreeFunc_Branches(t *testing.T) {
+func Test_ThreeFunc_Branches(t *testing.T) {
 	tf := &ThreeFunc[string, string, string]{
 		First:    "a",
 		Second:   "b",
@@ -604,7 +604,7 @@ func Test_I13_ThreeFunc_Branches(t *testing.T) {
 // FourFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_FourFunc_Branches(t *testing.T) {
+func Test_FourFunc_Branches(t *testing.T) {
 	ff := &FourFunc[string, string, string, string]{
 		First:    "a",
 		Second:   "b",
@@ -626,7 +626,7 @@ func Test_I13_FourFunc_Branches(t *testing.T) {
 // FiveFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_FiveFunc_Branches(t *testing.T) {
+func Test_FiveFunc_Branches(t *testing.T) {
 	ff := &FiveFunc[string, string, string, string, string]{
 		First:    "a",
 		Second:   "b",
@@ -649,7 +649,7 @@ func Test_I13_FiveFunc_Branches(t *testing.T) {
 // SixFunc — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_SixFunc_Branches(t *testing.T) {
+func Test_SixFunc_Branches(t *testing.T) {
 	sf := &SixFunc[string, string, string, string, string, string]{
 		First:    "a",
 		Second:   "b",
@@ -673,7 +673,7 @@ func Test_I13_SixFunc_Branches(t *testing.T) {
 // LeftRight — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_LeftRight_Branches(t *testing.T) {
+func Test_LeftRight_Branches(t *testing.T) {
 	lr := &LeftRight[string, string]{
 		Left:   "a",
 		Right:  "b",
@@ -698,7 +698,7 @@ func Test_I13_LeftRight_Branches(t *testing.T) {
 // String type — exercise
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_String_Branches(t *testing.T) {
+func Test_String_Branches(t *testing.T) {
 	s := String("hello")
 	_ = s.Concat(" world")
 	_ = s.Join(",", "a", "b")
@@ -727,28 +727,28 @@ func Test_I13_String_Branches(t *testing.T) {
 // newFuncWrapCreator — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_NewFuncWrap_Invalid(t *testing.T) {
+func Test_NewFuncWrap_Invalid(t *testing.T) {
 	fw := NewFuncWrap.Invalid()
 	if !fw.IsInvalid() {
 		t.Fatal("expected invalid")
 	}
 }
 
-func Test_I13_NewFuncWrap_Many(t *testing.T) {
+func Test_NewFuncWrap_Many(t *testing.T) {
 	many := NewFuncWrap.Many(sampleStringFunc)
 	if len(many) != 1 {
 		t.Fatal("expected 1")
 	}
 }
 
-func Test_I13_NewFuncWrap_Default_NonFunc(t *testing.T) {
+func Test_NewFuncWrap_Default_NonFunc(t *testing.T) {
 	fw := NewFuncWrap.Default("not a func")
 	if !fw.IsInvalid() {
 		t.Fatal("expected invalid for non-func")
 	}
 }
 
-func Test_I13_NewFuncWrap_Default_FuncWrapPtr(t *testing.T) {
+func Test_NewFuncWrap_Default_FuncWrapPtr(t *testing.T) {
 	fw := NewFuncWrap.Default(sampleStringFunc)
 	fw2 := NewFuncWrap.Default(fw) // should detect *FuncWrapAny
 	if fw2.IsInvalid() {
@@ -760,7 +760,7 @@ func Test_I13_NewFuncWrap_Default_FuncWrapPtr(t *testing.T) {
 // funcDetector — exercise
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_FuncDetector_Branches(t *testing.T) {
+func Test_FuncDetector_Branches(t *testing.T) {
 	fd := funcDetector{}
 	// direct func
 	fw := fd.GetFuncWrap(sampleStringFunc)
@@ -780,7 +780,7 @@ func Test_I13_FuncDetector_Branches(t *testing.T) {
 // Map — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I13_Map_GetByIndex_OutOfBounds(t *testing.T) {
+func Test_Map_GetByIndex_OutOfBounds(t *testing.T) {
 	m := Map{"a": 1}
 	r := m.GetByIndex(999)
 	if r != nil {
@@ -788,7 +788,7 @@ func Test_I13_Map_GetByIndex_OutOfBounds(t *testing.T) {
 	}
 }
 
-func Test_I13_Map_SortedKeys(t *testing.T) {
+func Test_Map_SortedKeys(t *testing.T) {
 	m := Map{"b": 1, "a": 2}
 	keys, err := m.SortedKeys()
 	if err != nil {
@@ -799,17 +799,17 @@ func Test_I13_Map_SortedKeys(t *testing.T) {
 	}
 }
 
-func Test_I13_Map_InvokeWithValidArgs(t *testing.T) {
+func Test_Map_InvokeWithValidArgs(t *testing.T) {
 	m := Map{"func": sampleStringFunc, "first": "hello"}
 	_, _ = m.InvokeWithValidArgs()
 }
 
-func Test_I13_Map_InvokeArgs(t *testing.T) {
+func Test_Map_InvokeArgs(t *testing.T) {
 	m := Map{"func": sampleStringFunc, "first": "hello"}
 	_, _ = m.InvokeArgs("first")
 }
 
-func Test_I13_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
+func Test_Map_GetAsStringSliceFirstOfNames(t *testing.T) {
 	m := Map{"items": []string{"a", "b"}}
 	r := m.GetAsStringSliceFirstOfNames("items")
 	if len(r) != 2 {

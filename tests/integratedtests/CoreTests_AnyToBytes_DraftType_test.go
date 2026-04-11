@@ -9,7 +9,7 @@ import (
 
 // ── AnyToBytes ──
 
-func Test_Cov_AnyToBytes_FromBytes(t *testing.T) {
+func Test_AnyToBytes_FromBytes(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytes([]byte("hello"))
 
@@ -21,7 +21,7 @@ func Test_Cov_AnyToBytes_FromBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from bytes", actual)
 }
 
-func Test_Cov_AnyToBytes_FromNilBytes(t *testing.T) {
+func Test_AnyToBytes_FromNilBytes(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytes([]byte(nil))
 
@@ -33,7 +33,7 @@ func Test_Cov_AnyToBytes_FromNilBytes(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from nil bytes", actual)
 }
 
-func Test_Cov_AnyToBytes_FromString(t *testing.T) {
+func Test_AnyToBytes_FromString(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytes("hello")
 
@@ -45,7 +45,7 @@ func Test_Cov_AnyToBytes_FromString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToBytes from string", actual)
 }
 
-func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
+func Test_AnyToBytes_FromStruct(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytes(struct{ N int }{42})
 
@@ -59,7 +59,7 @@ func Test_Cov_AnyToBytes_FromStruct(t *testing.T) {
 
 // ── AnyToBytesPtr (deprecated alias) ──
 
-func Test_Cov_AnyToBytesPtr(t *testing.T) {
+func Test_AnyToBytesPtr(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToBytesPtr("test")
 
@@ -73,7 +73,7 @@ func Test_Cov_AnyToBytesPtr(t *testing.T) {
 
 // ── AnyToDraftType ──
 
-func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
+func Test_AnyToDraftType_FromValue(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "hello"}
 	result := coretests.AnyToDraftType(dt)
@@ -92,7 +92,7 @@ func Test_Cov_AnyToDraftType_FromValue(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from value", actual)
 }
 
-func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
+func Test_AnyToDraftType_FromPtr(t *testing.T) {
 	// Arrange
 	dt := &coretests.DraftType{SampleString1: "hello"}
 	result := coretests.AnyToDraftType(dt)
@@ -111,7 +111,7 @@ func Test_Cov_AnyToDraftType_FromPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "AnyToDraftType from ptr", actual)
 }
 
-func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
+func Test_AnyToDraftType_FromOther(t *testing.T) {
 	// Arrange
 	result := coretests.AnyToDraftType("not a draft type")
 
@@ -125,7 +125,7 @@ func Test_Cov_AnyToDraftType_FromOther(t *testing.T) {
 
 // ── DraftType ──
 
-func Test_Cov_DraftType_Getters(t *testing.T) {
+func Test_DraftType_Getters(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{
 		SampleString1: "s1",
@@ -154,7 +154,7 @@ func Test_Cov_DraftType_Getters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType getters", actual)
 }
 
-func Test_Cov_DraftType_JsonString(t *testing.T) {
+func Test_DraftType_JsonString(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "test"}
 
@@ -174,7 +174,7 @@ func Test_Cov_DraftType_JsonString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType json", actual)
 }
 
-func Test_Cov_DraftType_NonPtr(t *testing.T) {
+func Test_DraftType_NonPtr(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "test"}
 	nonPtr := dt.NonPtr()
@@ -187,7 +187,7 @@ func Test_Cov_DraftType_NonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType NonPtr", actual)
 }
 
-func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
+func Test_DraftType_PtrOrNonPtr(t *testing.T) {
 	// Arrange
 	dt := &coretests.DraftType{SampleString1: "test"}
 	ptrResult := dt.PtrOrNonPtr(true)
@@ -211,7 +211,7 @@ func Test_Cov_DraftType_PtrOrNonPtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType PtrOrNonPtr", actual)
 }
 
-func Test_Cov_DraftType_Clone(t *testing.T) {
+func Test_DraftType_Clone(t *testing.T) {
 	// Arrange
 	dt := coretests.DraftType{SampleString1: "test", Lines: []string{"a"}, RawBytes: []byte("b")}
 	clone := dt.Clone()
@@ -230,7 +230,7 @@ func Test_Cov_DraftType_Clone(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType Clone", actual)
 }
 
-func Test_Cov_DraftType_ClonePtr(t *testing.T) {
+func Test_DraftType_ClonePtr(t *testing.T) {
 	// Arrange
 	dt := &coretests.DraftType{SampleString1: "test"}
 	clone := dt.ClonePtr()
@@ -251,7 +251,7 @@ func Test_Cov_DraftType_ClonePtr(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType ClonePtr", actual)
 }
 
-func Test_Cov_DraftType_IsEqual(t *testing.T) {
+func Test_DraftType_IsEqual(t *testing.T) {
 	// Arrange
 	dt1 := &coretests.DraftType{SampleString1: "a"}
 	dt2 := &coretests.DraftType{SampleString1: "a"}
@@ -279,7 +279,7 @@ func Test_Cov_DraftType_IsEqual(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "DraftType IsEqual", actual)
 }
 
-func Test_Cov_DraftType_Verify(t *testing.T) {
+func Test_DraftType_Verify(t *testing.T) {
 	// Arrange
 	dt1 := &coretests.DraftType{SampleString1: "a"}
 	dt2 := &coretests.DraftType{SampleString1: "b"}
@@ -311,7 +311,7 @@ func Test_Cov_DraftType_Verify(t *testing.T) {
 
 // ── TestFuncName ──
 
-func Test_Cov_TestFuncName(t *testing.T) {
+func Test_TestFuncName(t *testing.T) {
 	// Arrange
 	fn := coretests.TestFuncName("myFunc")
 
@@ -325,7 +325,7 @@ func Test_Cov_TestFuncName(t *testing.T) {
 
 // ── SomeString ──
 
-func Test_Cov_SomeString(t *testing.T) {
+func Test_SomeString(t *testing.T) {
 	// Arrange
 	s := coretests.SomeString{Value: "hello"}
 
@@ -345,7 +345,7 @@ func Test_Cov_SomeString(t *testing.T) {
 
 // ── VerifyTypeOf ──
 
-func Test_Cov_VerifyTypeOf(t *testing.T) {
+func Test_VerifyTypeOf(t *testing.T) {
 	// Arrange
 	vt := coretests.NewVerifyTypeOf("hello")
 
@@ -365,7 +365,7 @@ func Test_Cov_VerifyTypeOf(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "VerifyTypeOf", actual)
 }
 
-func Test_Cov_VerifyTypeOf_Nil(t *testing.T) {
+func Test_VerifyTypeOf_Nil(t *testing.T) {
 	// Arrange
 	var vt *coretests.VerifyTypeOf
 
@@ -385,7 +385,7 @@ func Test_Cov_VerifyTypeOf_Nil(t *testing.T) {
 
 // ── LogOnFail ──
 
-func Test_Cov_LogOnFail_Pass(t *testing.T) {
+func Test_LogOnFail_Pass(t *testing.T) {
 	// Arrange
 	// Should not panic
 	coretests.LogOnFail(true, "expected", "actual")
@@ -398,7 +398,7 @@ func Test_Cov_LogOnFail_Pass(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "LogOnFail pass", actual)
 }
 
-func Test_Cov_LogOnFail_Fail(t *testing.T) {
+func Test_LogOnFail_Fail(t *testing.T) {
 	// Arrange
 	// Should log but not panic
 	coretests.LogOnFail(false, "expected", "actual")
@@ -413,7 +413,7 @@ func Test_Cov_LogOnFail_Fail(t *testing.T) {
 
 // ── ToStringValues / ToStringNameValues ──
 
-func Test_Cov_ToStringValues(t *testing.T) {
+func Test_ToStringValues(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"val": coretests.ToStringValues(42) != "",
@@ -428,7 +428,7 @@ func Test_Cov_ToStringValues(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "ToStringValues", actual)
 }
 
-func Test_Cov_ToStringNameValues(t *testing.T) {
+func Test_ToStringNameValues(t *testing.T) {
 	// Act
 	actual := args.Map{
 		"val": coretests.ToStringNameValues(42) != "",
@@ -445,7 +445,7 @@ func Test_Cov_ToStringNameValues(t *testing.T) {
 
 // ── SimpleGherkins ──
 
-func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
+func Test_SimpleGherkins_ToString(t *testing.T) {
 	// Arrange
 	g := &coretests.SimpleGherkins{
 		Feature: "Login",
@@ -478,7 +478,7 @@ func Test_Cov_SimpleGherkins_ToString(t *testing.T) {
 
 // ── BaseTestCase ──
 
-func Test_Cov_BaseTestCase_Getters(t *testing.T) {
+func Test_BaseTestCase_Getters(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{
 		Title:         "test",
@@ -524,7 +524,7 @@ func Test_Cov_BaseTestCase_Getters(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase getters", actual)
 }
 
-func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
+func Test_BaseTestCase_WithParams(t *testing.T) {
 	// Arrange
 	bt := &coretests.BaseTestCase{
 		Title: "test",
@@ -568,7 +568,7 @@ func Test_Cov_BaseTestCase_WithParams(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BaseTestCase with params", actual)
 }
 
-func Test_Cov_BaseTestCase_Nil(t *testing.T) {
+func Test_BaseTestCase_Nil(t *testing.T) {
 	// Arrange
 	var bt *coretests.BaseTestCase
 
@@ -588,7 +588,7 @@ func Test_Cov_BaseTestCase_Nil(t *testing.T) {
 
 // ── CaseIndexPlusIsPrint ──
 
-func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
+func Test_CaseIndexPlusIsPrint(t *testing.T) {
 	// Arrange
 	c := &coretests.CaseIndexPlusIsPrint{
 		IsPrint:   true,
@@ -611,7 +611,7 @@ func Test_Cov_CaseIndexPlusIsPrint(t *testing.T) {
 
 // ── SimpleTestCase ──
 
-func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
+func Test_SimpleTestCase_Getters(t *testing.T) {
 	// Arrange
 	tc := coretests.SimpleTestCase{
 		Title:         "test",
@@ -648,7 +648,7 @@ func Test_Cov_SimpleTestCase_Getters(t *testing.T) {
 
 // ── GetAssert ──
 
-func Test_Cov_GetAssert_ToString(t *testing.T) {
+func Test_GetAssert_ToString(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.ToString("hello")
 
@@ -660,7 +660,7 @@ func Test_Cov_GetAssert_ToString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToString", actual)
 }
 
-func Test_Cov_GetAssert_SortedMessage(t *testing.T) {
+func Test_GetAssert_SortedMessage(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.SortedMessage(false, "c b a", " ")
 
@@ -672,7 +672,7 @@ func Test_Cov_GetAssert_SortedMessage(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.SortedMessage", actual)
 }
 
-func Test_Cov_GetAssert_SortedArrayNoPrint(t *testing.T) {
+func Test_GetAssert_SortedArrayNoPrint(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.SortedArrayNoPrint("c b a")
 
@@ -684,7 +684,7 @@ func Test_Cov_GetAssert_SortedArrayNoPrint(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.SortedArrayNoPrint", actual)
 }
 
-func Test_Cov_GetAssert_ToStrings(t *testing.T) {
+func Test_GetAssert_ToStrings(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.ToStrings("hello")
 
@@ -696,7 +696,7 @@ func Test_Cov_GetAssert_ToStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToStrings", actual)
 }
 
-func Test_Cov_GetAssert_ToStringsWithSpace(t *testing.T) {
+func Test_GetAssert_ToStringsWithSpace(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.ToStringsWithSpace(2, "hello")
 
@@ -708,7 +708,7 @@ func Test_Cov_GetAssert_ToStringsWithSpace(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ToStringsWithSpace", actual)
 }
 
-func Test_Cov_GetAssert_ErrorToLinesWithSpaces(t *testing.T) {
+func Test_GetAssert_ErrorToLinesWithSpaces(t *testing.T) {
 	// Arrange
 	nilResult := coretests.GetAssert.ErrorToLinesWithSpaces(2, nil)
 
@@ -720,7 +720,7 @@ func Test_Cov_GetAssert_ErrorToLinesWithSpaces(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ErrorToLinesWithSpaces nil", actual)
 }
 
-func Test_Cov_GetAssert_ErrorToLinesWithSpacesDefault(t *testing.T) {
+func Test_GetAssert_ErrorToLinesWithSpacesDefault(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.ErrorToLinesWithSpacesDefault(nil)
 
@@ -732,7 +732,7 @@ func Test_Cov_GetAssert_ErrorToLinesWithSpacesDefault(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ErrorToLinesWithSpacesDefault", actual)
 }
 
-func Test_Cov_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
+func Test_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.AnyToDoubleQuoteLines(2, "hello")
 
@@ -744,7 +744,7 @@ func Test_Cov_GetAssert_AnyToDoubleQuoteLines(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.AnyToDoubleQuoteLines", actual)
 }
 
-func Test_Cov_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
+func Test_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.ConvertLinesToDoubleQuoteThenString(2, []string{"a", "b"})
 
@@ -756,7 +756,7 @@ func Test_Cov_GetAssert_ConvertLinesToDoubleQuoteThenString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "GetAssert.ConvertLinesToDoubleQuoteThenString", actual)
 }
 
-func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
+func Test_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
 	// Arrange
 	result := coretests.GetAssert.AnyToStringDoubleQuoteLine(2, "hello")
 
@@ -770,7 +770,7 @@ func Test_Cov_GetAssert_AnyToStringDoubleQuoteLine(t *testing.T) {
 
 // ── Compare ──
 
-func Test_Cov_Compare_SortedStrings(t *testing.T) {
+func Test_Compare_SortedStrings(t *testing.T) {
 	// Arrange
 	c := &coretests.Compare{StringContains: "c b a"}
 	ss := c.SortedStrings()
@@ -790,7 +790,7 @@ func Test_Cov_Compare_SortedStrings(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Compare.SortedStrings", actual)
 }
 
-func Test_Cov_Compare_SortedString(t *testing.T) {
+func Test_Compare_SortedString(t *testing.T) {
 	// Arrange
 	c := &coretests.Compare{StringContains: "b a"}
 	s := c.SortedString()
@@ -810,7 +810,7 @@ func Test_Cov_Compare_SortedString(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "Compare.SortedString", actual)
 }
 
-func Test_Cov_Compare_GetPrintMessage(t *testing.T) {
+func Test_Compare_GetPrintMessage(t *testing.T) {
 	// Arrange
 	c := &coretests.Compare{StringContains: "hello"}
 	msg := c.GetPrintMessage(0)
