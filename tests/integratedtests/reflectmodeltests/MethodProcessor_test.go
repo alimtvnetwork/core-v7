@@ -317,7 +317,7 @@ func Test_MethodProcessor_IsEqual_SameMethod(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected IsEqual for same method = true", actual)
 }
 
-func Test_MethodProcessor_IsNotEqual(t *testing.T) {
+func Test_MethodProcessor_IsNotEqual_FromMethodProcessor(t *testing.T) {
 	// Arrange
 	a := newMethodProcessor("PublicMethod")
 	b := newMethodProcessor("NoArgsMethod")
@@ -362,7 +362,7 @@ func Test_MethodProcessor_ValidateMethodArgs_WrongType(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "expected error for wrong arg type", actual)
 }
 
-func Test_MethodProcessor_ValidateMethodArgs_Correct(t *testing.T) {
+func Test_MethodProcessor_ValidateMethodArgs_Correct_FromMethodProcessor(t *testing.T) {
 	// Arrange
 	mp := newMethodProcessor("PublicMethod")
 

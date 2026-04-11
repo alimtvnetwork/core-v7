@@ -9,7 +9,7 @@ import (
 
 // ===== ReflectValueKind Tests =====
 
-func Test_InvalidReflectValueKindModel(t *testing.T) {
+func Test_InvalidReflectValueKindModel_FromReflectValueKind(t *testing.T) {
 	// Arrange
 	rvk := reflectmodel.InvalidReflectValueKindModel("test error")
 

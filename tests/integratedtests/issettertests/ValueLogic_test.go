@@ -65,7 +65,7 @@ func Test_Value_IsWildcardOrBool(t *testing.T) {
 	}
 }
 
-func Test_Value_ToByteCondition(t *testing.T) {
+func Test_Value_ToByteCondition_FromValueLogic(t *testing.T) {
 	for caseIndex, tc := range toByteConditionTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -100,7 +100,7 @@ func Test_Value_ToByteConditionWithWildcard(t *testing.T) {
 	}
 }
 
-func Test_Value_IsDefinedLogically(t *testing.T) {
+func Test_Value_IsDefinedLogically_FromValueLogic(t *testing.T) {
 	for caseIndex, tc := range isDefinedLogicallyTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
@@ -114,7 +114,7 @@ func Test_Value_IsDefinedLogically(t *testing.T) {
 	}
 }
 
-func Test_Value_IsUndefinedLogically(t *testing.T) {
+func Test_Value_IsUndefinedLogically_FromValueLogic(t *testing.T) {
 	for caseIndex, tc := range isUndefinedLogicallyTestCases {
 		// Arrange
 		input := tc.ArrangeInput.(args.Map)
