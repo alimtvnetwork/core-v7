@@ -20,7 +20,7 @@ import (
 //   - AnyCollection — use Collection[any] instead
 type Collection[T any] struct {
 	items []T
-	sync.Mutex
+	sync.RWMutex
 }
 
 // NewCollection creates a new Collection with the given initial capacity.

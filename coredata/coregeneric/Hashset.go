@@ -9,7 +9,7 @@ import (
 // It generalizes corestr.Hashset from string-only to any comparable type T.
 type Hashset[T comparable] struct {
 	items map[T]bool
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyHashset creates a zero-capacity Hashset[T].
@@ -54,8 +54,8 @@ func (it *Hashset[T]) HasItems() bool {
 
 // IsEmptyLock returns IsEmpty with mutex protection.
 func (it *Hashset[T]) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -71,8 +71,8 @@ func (it *Hashset[T]) Length() int {
 
 // LengthLock returns the length with mutex protection.
 func (it *Hashset[T]) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Length()
 }
@@ -196,9 +196,9 @@ func (it *Hashset[T]) Contains(key T) bool {
 
 // ContainsLock returns Contains with mutex protection.
 func (it *Hashset[T]) ContainsLock(key T) bool {
-	it.Lock()
+	it.RLock()
 	_, found := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return found
 }

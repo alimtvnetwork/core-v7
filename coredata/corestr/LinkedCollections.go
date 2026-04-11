@@ -15,7 +15,7 @@ import (
 type LinkedCollections struct {
 	head, tail *LinkedCollectionNode
 	length     int
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *LinkedCollections) Tail() *LinkedCollectionNode {
@@ -100,9 +100,9 @@ func (it *LinkedCollections) decrementLength() int {
 }
 
 func (it *LinkedCollections) incrementLengthLock() {
-	it.Lock()
+	it.RLock()
 	it.length++
-	it.Unlock()
+	it.RUnlock()
 }
 
 func (it *LinkedCollections) incrementLengthUsingNumber(number int) int {
@@ -112,8 +112,8 @@ func (it *LinkedCollections) incrementLengthUsingNumber(number int) int {
 }
 
 func (it *LinkedCollections) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.length
 }
@@ -156,8 +156,8 @@ func (it *LinkedCollections) IsEqualsPtr(
 }
 
 func (it *LinkedCollections) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.head == nil || it.length == 0
 }
@@ -321,8 +321,8 @@ func (it *LinkedCollections) AddStringsLock(
 		return it
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.AddStrings(stringsItems...)
 }
@@ -1389,8 +1389,8 @@ func (it *LinkedCollections) StringLock() string {
 		return commonJoiner + NoElements
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return commonJoiner +
 		strings.Join(

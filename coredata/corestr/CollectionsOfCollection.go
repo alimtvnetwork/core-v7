@@ -11,7 +11,7 @@ import (
 
 type CollectionsOfCollection struct {
 	items []*Collection
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *CollectionsOfCollection) AsJsonContractsBinder() corejson.JsonContractsBinder {

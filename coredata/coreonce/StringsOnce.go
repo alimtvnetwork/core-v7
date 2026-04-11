@@ -15,7 +15,7 @@ type StringsOnce struct {
 	initializerFunc func() []string
 	isInitialized   bool
 	sortedValues    []string
-	sync.Mutex
+	sync.RWMutex
 }
 
 func NewStringsOnce(initializerFunc func() []string) StringsOnce {
@@ -117,8 +117,8 @@ func (it *StringsOnce) HasAll(searchTerms ...string) bool {
 }
 
 func (it *StringsOnce) UniqueMapLock() map[string]bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.UniqueMap()
 }

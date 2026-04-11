@@ -16,7 +16,7 @@ import (
 type CharHashsetMap struct {
 	items               map[byte]*Hashset
 	eachHashsetCapacity int
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *CharHashsetMap) GetChar(
@@ -132,8 +132,8 @@ func (it *CharHashsetMap) GetMap() map[byte]*Hashset {
 
 // GetCopyMapLock Sends a copy of items
 func (it *CharHashsetMap) GetCopyMapLock() map[byte]*Hashset {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return map[byte]*Hashset{}
@@ -322,8 +322,8 @@ func (it *CharHashsetMap) HasItems() bool {
 }
 
 func (it *CharHashsetMap) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -384,8 +384,8 @@ func (it *CharHashsetMap) HasWithHashset(
 func (it *CharHashsetMap) HasWithHashsetLock(
 	str string,
 ) (bool, *Hashset) {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return false, New.Hashset.Empty()
@@ -418,8 +418,8 @@ func (it *CharHashsetMap) LengthOf(char byte) int {
 }
 
 func (it *CharHashsetMap) LengthOfLock(char byte) int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return 0
@@ -451,8 +451,8 @@ func (it *CharHashsetMap) AllLengthsSum() int {
 
 // AllLengthsSumLock All lengths sum.
 func (it *CharHashsetMap) AllLengthsSumLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return 0
@@ -521,8 +521,8 @@ func (it *CharHashsetMap) Length() int {
 }
 
 func (it *CharHashsetMap) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return 0
@@ -534,8 +534,8 @@ func (it *CharHashsetMap) LengthLock() int {
 func (it *CharHashsetMap) IsEqualsLock(
 	another *CharHashsetMap,
 ) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEquals(another)
 }
@@ -813,8 +813,8 @@ func (it *CharHashsetMap) GetHashsetLock(
 	isAddNewOnEmpty bool,
 	strFirstChar string,
 ) *Hashset {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.GetHashset(
 		strFirstChar,
@@ -1046,24 +1046,24 @@ func (it *CharHashsetMap) AddHashsetLock(
 		newHashset := New.Hashset.Cap(
 			it.eachHashsetCapacity,
 		)
-		it.Lock()
+		it.RLock()
 		if it.items == nil {
 			it.items = make(map[byte]*Hashset, 4)
 		}
 		it.items[char] = newHashset
-		it.Unlock()
+		it.RUnlock()
 
 		return newHashset
 	}
 
 	// items exist or stringsWithSameStartChar exists
-	it.Lock()
+	it.RLock()
 	if it.items == nil {
 		it.items = make(map[byte]*Hashset, 4)
 	}
 	it.items[char] =
 		stringsWithSameStartChar
-	it.Unlock()
+	it.RUnlock()
 
 	return stringsWithSameStartChar
 }
@@ -1085,9 +1085,9 @@ func (it *CharHashsetMap) HashsetByChar(
 func (it *CharHashsetMap) HashsetByCharLock(
 	char byte,
 ) *Hashset {
-	it.Lock()
+	it.RLock()
 	hashset := it.items[char]
-	it.Unlock()
+	it.RUnlock()
 
 	if hashset == nil {
 		return New.Hashset.Empty()

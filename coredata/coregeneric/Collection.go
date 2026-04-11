@@ -10,7 +10,7 @@ import (
 // It generalizes corestr.Collection from string-only to any type T.
 type Collection[T any] struct {
 	items []T
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyCollection creates a zero-capacity Collection[T].
@@ -91,8 +91,8 @@ func (it *Collection[T]) Length() int {
 
 // LengthLock returns the length with mutex protection.
 func (it *Collection[T]) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Length()
 }
@@ -104,8 +104,8 @@ func (it *Collection[T]) IsEmpty() bool {
 
 // IsEmptyLock returns IsEmpty with mutex protection.
 func (it *Collection[T]) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }

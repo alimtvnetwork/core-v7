@@ -21,7 +21,7 @@ import (
 
 type Collection struct {
 	items []string
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *Collection) JsonString() string {
@@ -91,8 +91,8 @@ func (it *Collection) Length() int {
 }
 
 func (it *Collection) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it == nil || it.items == nil {
 		return 0
@@ -172,8 +172,8 @@ func (it *Collection) IsEqualsWithSensitive(
 }
 
 func (it *Collection) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it == nil ||
 		len(it.items) == 0
@@ -1106,9 +1106,9 @@ func (it *Collection) AppendAnysLock(
 		return it
 	}
 
-	it.Lock()
+	it.RLock()
 	it.AppendAnys(anyItems...)
-	it.Unlock()
+	it.RUnlock()
 
 	return it
 }
@@ -1216,12 +1216,12 @@ func (it *Collection) AppendAnysUsingFilterLock(
 			continue
 		}
 
-		it.Lock()
+		it.RLock()
 		it.items = append(
 			it.items,
 			result,
 		)
-		it.Unlock()
+		it.RUnlock()
 
 		if isBreak {
 			return it
@@ -1329,20 +1329,20 @@ func (it *Collection) AddsNonEmptyPtrLock(
 			continue
 		}
 
-		it.Lock()
+		it.RLock()
 		it.items = append(
 			it.items,
 			*str,
 		)
-		it.Unlock()
+		it.RUnlock()
 	}
 
 	return it
 }
 
 func (it *Collection) UniqueBoolMapLock() map[string]bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.UniqueBoolMap()
 }
@@ -1361,8 +1361,8 @@ func (it *Collection) UniqueBoolMap() map[string]bool {
 }
 
 func (it *Collection) UniqueListLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.UniqueList()
 }
@@ -1572,8 +1572,8 @@ func (it *Collection) ListPtr() []string {
 //
 // must return a slice
 func (it *Collection) ListCopyPtrLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return []string{}
@@ -1583,8 +1583,8 @@ func (it *Collection) ListCopyPtrLock() []string {
 }
 
 func (it *Collection) HasLock(str string) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Has(str)
 }
@@ -1753,8 +1753,8 @@ func (it *Collection) IsContainsAll(items ...string) bool {
 
 // IsContainsAllLock nil will return false.
 func (it *Collection) IsContainsAllLock(items ...string) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if items == nil {
 		return false
@@ -2003,8 +2003,8 @@ func (it *Collection) StringLock() string {
 		return commonJoiner + NoElements
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return commonJoiner +
 		strings.Join(

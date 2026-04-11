@@ -56,10 +56,9 @@
 - Blocked on: external consumer audit by user
 - **Priority**: Medium
 
-### S-013: sync.Mutex → sync.RWMutex Migration (Open)
-- 27 mutex usages to audit
-- S-010 benchmarks now available as baseline
-- **Priority**: Medium
+### ~~S-013: sync.Mutex → sync.RWMutex Migration~~ (Closed — Complete)
+- 16 collection types migrated, 84 read methods converted to RLock
+- 3 global mutex vars kept as sync.Mutex (write-only guards)
 
 ### S-015: Version Bump Discipline (Permanent Rule)
 - Every code change must bump minor version

@@ -11,7 +11,7 @@ func NewHashmapUsingDataModel(dataModel *HashmapDataModel) *Hashmap {
 		items:         dataModel.Items,
 		hasMapUpdated: false,
 		cachedList:    nil,
-		Mutex:         sync.Mutex{},
+		Mutex:         sync.RWMutex{},
 	}
 }
 

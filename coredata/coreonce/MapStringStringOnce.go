@@ -17,7 +17,7 @@ type MapStringStringOnce struct {
 	isInitialized                                      bool
 	compiledStrings                                    []string
 	allKeys, allValues, allKeysSorted, allValuesSorted []string
-	sync.Mutex
+	sync.RWMutex
 }
 
 func NewMapStringStringOnce(initializerFunc func() map[string]string) MapStringStringOnce {
