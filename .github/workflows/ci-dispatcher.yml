@@ -1,0 +1,101 @@
+name: CI Dispatcher
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dispatch:
+    name: Dispatch CI for recent bot branch updates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch CI runs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const defaultBranch = context.payload.repository.default_branch;
+            const dispatchWindowMs = 11 * 60 * 1000;
+            const lovableBotLogins = new Set([
+              'gpt-engineer-app[bot]',
+              'lovable-dev[bot]',
+            ]);
+
+            const branches = [];
+            for (let page = 1; ; page += 1) {
+              const { data } = await github.rest.repos.listBranches({
+                owner,
+                repo,
+                per_page: 100,
+                page,
+              });
+
+              branches.push(...data);
+
+              if (data.length < 100) {
+                break;
+              }
+            }
+
+            const now = Date.now();
+            const dispatched = [];
+            const skipped = [];
+
+            for (const branch of branches) {
+              if (branch.name === defaultBranch || branch.name.startsWith('release/')) {
+                skipped.push(`${branch.name} — excluded branch`);
+                continue;
+              }
+
+              const { data: commit } = await github.rest.repos.getCommit({
+                owner,
+                repo,
+                ref: branch.commit.sha,
+              });
+
+              const actor = commit.author?.login || commit.committer?.login || '';
+              if (!lovableBotLogins.has(actor)) {
+                skipped.push(`${branch.name} — latest commit is not from Lovable bot`);
+                continue;
+              }
+
+              const committedAt = commit.commit.committer?.date || commit.commit.author?.date;
+              if (!committedAt) {
+                skipped.push(`${branch.name} — missing commit timestamp`);
+                continue;
+              }
+
+              const ageMs = now - Date.parse(committedAt);
+              if (Number.isNaN(ageMs) || ageMs < 0 || ageMs > dispatchWindowMs) {
+                skipped.push(`${branch.name} — latest bot commit is outside dispatch window`);
+                continue;
+              }
+
+              await github.request('POST /repos/{owner}/{repo}/dispatches', {
+                owner,
+                repo,
+                event_type: 'ci_run',
+                client_payload: {
+                  ref: branch.name,
+                  sha: branch.commit.sha,
+                },
+              });
+
+              dispatched.push(`${branch.name} @ ${branch.commit.sha.slice(0, 7)}`);
+            }
+
+            await core.summary
+              .addHeading('CI Dispatch Summary')
+              .addRaw(
+                dispatched.length
+                  ? dispatched.map((entry) => `- ${entry}`).join('\n')
+                  : 'No recent Lovable bot commits needed CI dispatch.\n',
+                true,
+              )
+              .addDetails('Skipped branches', skipped.length ? skipped.join('\n') : 'None')
+              .write();

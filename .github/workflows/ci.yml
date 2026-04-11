@@ -1,5 +1,7 @@
 name: CI
 
+run-name: CI • ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.ref || github.ref_name }}
+
 on:
   push:
   pull_request:
@@ -18,7 +20,8 @@ permissions:
   pull-requests: write
 
 env:
-  CI_REF: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.ref || github.ref }}
+  CI_TARGET_REF: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.ref || github.event_name == 'workflow_dispatch' && github.event.inputs.ref || github.ref_name }}
+  CI_CHECKOUT_REF: ${{ github.event_name == 'repository_dispatch' && github.event.client_payload.sha || github.event_name == 'workflow_dispatch' && github.event.inputs.ref || github.ref }}
 
 jobs:
   lint:
@@ -27,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.CI_REF }}
+          ref: ${{ env.CI_CHECKOUT_REF }}
 
       - uses: actions/setup-go@v5
         with:
@@ -45,7 +48,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.CI_REF }}
+          ref: ${{ env.CI_CHECKOUT_REF }}
 
       - uses: actions/setup-go@v5
         with:
@@ -60,7 +63,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.CI_REF }}
+          ref: ${{ env.CI_CHECKOUT_REF }}
 
       - uses: actions/setup-go@v5
         with:
@@ -101,6 +104,8 @@ jobs:
 
           {
             echo "## 🧪 Test Summary"
+            echo
+            echo "**Target ref:** ${CI_TARGET_REF}"
             echo
             if [ "${{ steps.run-tests.outputs.exit_code }}" = "0" ]; then
               echo "✅ **All tests passed**"
@@ -302,7 +307,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.CI_REF }}
+          ref: ${{ env.CI_CHECKOUT_REF }}
 
       - uses: actions/setup-go@v5
         with:
@@ -321,7 +326,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ env.CI_REF }}
+          ref: ${{ env.CI_CHECKOUT_REF }}
 
       - uses: actions/setup-go@v5
         with:
