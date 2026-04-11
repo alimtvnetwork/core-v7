@@ -144,7 +144,7 @@ func Test_FileWriter_ApplyDirChmod_NotCreateDir(t *testing.T) {
 	}
 }
 
-func Test_FileWriter_ApplyDirChmod_DefaultChmod(t *testing.T) {
+func Test_FileWriter_ApplyDirChmod_DefaultChmod_NoCreate(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -228,7 +228,7 @@ func Test_ErrorCreator_DirError_NotDirButExists(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
+func Test_ErrorCreator_NotDirError_PathInvalid_FileWriterContext(t *testing.T) {
 	// Arrange & Act — path doesn't exist
 	err := newError.notDirError("/nonexistent/xyz")
 
@@ -238,7 +238,7 @@ func Test_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathError_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.pathError("test", 0644, "/tmp/x", nil)
 
@@ -258,7 +258,7 @@ func Test_ErrorCreator_PathError_WithErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NotDir_FileWriterContext(t *testing.T) {
 	// Arrange — create a file (not dir)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "file.txt")
@@ -273,7 +273,7 @@ func Test_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 
@@ -286,7 +286,7 @@ func Test_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0644, "/tmp/x", nil)
 
@@ -296,7 +296,7 @@ func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_ChmodApplyFailed_WithErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_WithErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0644, "/tmp/x", errors.New("chmod-fail"))
 
@@ -320,7 +320,7 @@ func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid_FileModeContext(t *testing.T) {
 	// Arrange & Act — invalid path should return true
 	result := ChmodVerify.IsEqualSkipInvalid("/nonexistent/xyz", 0644)
 
@@ -601,7 +601,7 @@ func Test_SimpleFileReaderWriter_ErrorWrap_NilErr(t *testing.T) {
 	}
 }
 
-func Test_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr(t *testing.T) {
+func Test_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr_Cov4(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		FilePath: "/tmp/test.txt",
@@ -637,7 +637,7 @@ func Test_SimpleFileReaderWriter_GetOnExist_Error(t *testing.T) {
 //               ToUint32Octal error, clone
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_RwxWrapper_VerifyPaths(t *testing.T) {
+func Test_RwxWrapper_VerifyPaths_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -874,7 +874,7 @@ func Test_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	}
 }
 
-func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid_NonExistent(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -989,7 +989,7 @@ func Test_RwxInstructionExecutor_ApplyOnPaths_Empty(t *testing.T) {
 // RwxInstructionExecutors — ApplyOnPaths with locations
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_RwxInstructionExecutors_ApplyOnPaths_NonEmpty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPaths_NonEmpty_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1057,7 +1057,7 @@ func Test_RwxInstructionExecutors_ApplyOnPaths_Error(t *testing.T) {
 // RwxPartialToInstructionExecutor — nil condition
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_NilCondition_ReturnsError(t *testing.T) {
 	// Arrange & Act
 	_, err := RwxPartialToInstructionExecutor("rwx", nil)
 
@@ -1158,7 +1158,7 @@ func Test_CreateDirWithFiles_WithFiles(t *testing.T) {
 	}
 }
 
-func Test_CreateDirWithFiles_ChmodError(t *testing.T) {
+func Test_CreateDirWithFiles_ChmodError_ReadOnlyDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1202,7 +1202,7 @@ func Test_DirFilesWithContent_Create_RemoveDirError(t *testing.T) {
 	}
 }
 
-func Test_DirFilesWithContent_Create_FileWriteError(t *testing.T) {
+func Test_DirFilesWithContent_Create_FileWriteError_ReadOnlyDir(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	dfwc := &DirFilesWithContent{
@@ -1244,7 +1244,7 @@ func Test_MergeRwxWildcardWithFixedRwx_Error(t *testing.T) {
 // PathExistStat — MeaningFullError with error
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError_FormatCheck(t *testing.T) {
 	// Arrange
 	stat := &PathExistStat{
 		Location: "/nonexistent/xyz",

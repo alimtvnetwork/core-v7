@@ -83,7 +83,7 @@ func Test_DirFilesWithContent_Create_RemoveError(t *testing.T) {
 	}
 }
 
-func Test_DirFilesWithContent_Create_FileWriteError(t *testing.T) {
+func Test_DirFilesWithContent_Create_FileWriteError_InvalidDir(t *testing.T) {
 	dfwc := &DirFilesWithContent{
 		Dir:         "/dev/null/impossible/sub",
 		DirFileMode: 0755,
@@ -141,7 +141,7 @@ func Test_GetRecursivePaths_ContinueOnError_NonExistent(t *testing.T) {
 	}
 }
 
-func Test_GetRecursivePathsContinueOnError_ValidDir(t *testing.T) {
+func Test_GetRecursivePathsContinueOnError_ValidDir_WithSubdir(t *testing.T) {
 	dir := t.TempDir()
 	os.WriteFile(filepath.Join(dir, "a.txt"), []byte("x"), 0644)
 
@@ -165,7 +165,7 @@ func Test_MergeRwxWildcardWithFixedRwx_InvalidLength(t *testing.T) {
 
 // ── PathExistStat.MeaningFullError ─────────────────────────
 
-func Test_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError_PermDenied(t *testing.T) {
 	stat := GetPathExistStat("/nonexistent/xyz/abc")
 	err := stat.MeaningFullError()
 	// If path doesn't exist, stat has error
@@ -213,7 +213,7 @@ func Test_RwxInstructionExecutor_CompiledRwxWrapperUsingFixedRwxWrapper_Dead(t *
 	}
 }
 
-func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid_InvalidDir(t *testing.T) {
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 			Owner: "rwx",
@@ -309,7 +309,7 @@ func Test_RwxInstructionExecutor_VerifyRwxModifiers_NoContinue(t *testing.T) {
 
 // ── RwxInstructionExecutors.ApplyOnPaths (non-empty) ───────
 
-func Test_RwxInstructionExecutors_ApplyOnPaths_NonEmpty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPaths_NonEmpty_TempDir(t *testing.T) {
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
 			Owner: "rwx",
@@ -358,7 +358,7 @@ func Test_RwxInstructionExecutors_ApplyOnPaths_WithError(t *testing.T) {
 
 // ── RwxPartialToInstructionExecutor error ──────────────────
 
-func Test_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_NilCondition_ReturnsNil(t *testing.T) {
 	_, err := RwxPartialToInstructionExecutor("-rwxr-xr-x", nil)
 	if err == nil {
 		t.Fatal("expected error for nil condition")
@@ -442,7 +442,7 @@ func Test_RwxVariableWrapper_RwxMatchingStatus_Mismatch(t *testing.T) {
 
 // ── RwxWrapper uncovered branches ──────────────────────────
 
-func Test_RwxWrapper_VerifyPaths_Invalid(t *testing.T) {
+func Test_RwxWrapper_VerifyPaths_InvalidPath_SkipOnInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -551,7 +551,7 @@ func Test_RwxWrapper_ApplyRecursive_Dir(t *testing.T) {
 	}
 }
 
-func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive_TempFiles(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -570,7 +570,7 @@ func Test_RwxWrapper_ApplyLinuxChmodOnMany_NonRecursive(t *testing.T) {
 	}
 }
 
-func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxChmodOnMany_Recursive_TempDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}

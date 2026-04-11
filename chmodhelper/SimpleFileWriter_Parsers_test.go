@@ -48,7 +48,7 @@ func Test_ChmodVerify_Noop(t *testing.T) {
 // ParseRwxInstructionsToExecutors — nil input (L10-12)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
+func Test_ParseRwxInstructionsToExecutors_Nil_ChecksExecutors(t *testing.T) {
 	executors, err := ParseRwxInstructionsToExecutors(nil)
 	if err == nil {
 		t.Fatal("expected error for nil input")

@@ -520,7 +520,7 @@ func Test_VarAttribute_HasWildcard(t *testing.T) {
 // errorCreator — remaining paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathError_NilErr_ApplyVerifyContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.pathError("test", 0755, "/tmp/x", nil)
 
@@ -530,7 +530,7 @@ func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_NilErr_ApplyVerifyContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0644, "/tmp/x", nil)
 

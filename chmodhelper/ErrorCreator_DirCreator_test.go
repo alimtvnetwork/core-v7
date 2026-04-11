@@ -45,7 +45,7 @@ func Test_ErrorCreator_DirError_PathInvalid(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
+func Test_ErrorCreator_NotDirError_PathInvalid_ReturnsNil(t *testing.T) {
 	// Arrange — path doesn't exist
 	invalidPath := "/nonexistent/nowhere"
 
@@ -58,7 +58,7 @@ func Test_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathError_NilErr_ReturnsNil(t *testing.T) {
 	// Arrange & Act
 	err := newError.pathError("test", 0644, "/tmp", nil)
 
@@ -68,7 +68,7 @@ func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NotDir_ReturnsError(t *testing.T) {
 	// Arrange — file path (not a dir)
 	dir := t.TempDir()
 	filePath := filepath.Join(dir, "notdir.txt")
@@ -85,7 +85,7 @@ func Test_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NilErr_ReturnsNil(t *testing.T) {
 	// Arrange — valid dir path, nil err
 	dir := t.TempDir()
 
@@ -98,7 +98,7 @@ func Test_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_NilErr_ReturnsNil(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0755, "/tmp", nil)
 
@@ -108,7 +108,7 @@ func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 	}
 }
 
-func Test_ErrorCreator_ChmodApplyFailed_WithErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_WithErr_FormatsMessage(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0755, "/tmp/test", os.ErrPermission)
 
@@ -240,7 +240,7 @@ func Test_FileWriter_ApplyDirChmod_NotRequired(t *testing.T) {
 	}
 }
 
-func Test_FileWriter_ApplyDirChmod_DefaultChmod(t *testing.T) {
+func Test_FileWriter_ApplyDirChmod_DefaultChmod_SkipZeroMode(t *testing.T) {
 	// Arrange & Act — chmodDir equals dirDefaultChmod, skip
 	fw := fileWriter{}
 	err := fw.applyDirChmod(true, dirDefaultChmod, "/any")
@@ -282,7 +282,7 @@ func Test_SimpleFileReaderWriter_GetOnExist_ReadError(t *testing.T) {
 	}
 }
 
-func Test_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr(t *testing.T) {
+func Test_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr_ReturnsNil(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{FilePath: "/tmp/test.txt"}
 
