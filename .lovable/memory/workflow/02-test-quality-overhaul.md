@@ -35,7 +35,7 @@ Tasks:
 
 ---
 
-## Phase 2: Integrated Tests — File/Filesystem Packages — ⬜ TODO
+## Phase 2: Integrated Tests — File/Filesystem Packages — ✅ DONE
 
 **Scope:** ~12 packages, ~100+ files
 **Packages:** `chmodhelpertests`, `chmodinstests`, `chmodclasstypetests`, `fsinternaltests`, `pathinternaltests`, `simplewraptests`, and related
