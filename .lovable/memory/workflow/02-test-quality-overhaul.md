@@ -21,7 +21,7 @@ Across 72 packages, test files and functions use meaningless names like `Coverag
 
 ---
 
-## Phase 1: In-Package Tests — ⬜ TODO
+## Phase 1: In-Package Tests — ✅ DONE
 
 **Scope:** 6 packages, ~13 files
 **Packages:** `chmodhelper`, `coreimpl/enumimpl`, `coreutils/stringutil`, `reflectcore/reflectmodel`, `regexnew`
