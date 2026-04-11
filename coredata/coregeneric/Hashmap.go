@@ -9,7 +9,7 @@ import (
 // It generalizes corestr.Hashmap from map[string]string to map[K]V.
 type Hashmap[K comparable, V any] struct {
 	items map[K]V
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyHashmap creates a zero-capacity Hashmap[K, V].

@@ -10,7 +10,7 @@ import (
 type LinkedList[T any] struct {
 	head, tail *LinkedListNode[T]
 	length     int
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyLinkedList creates an empty LinkedList[T].

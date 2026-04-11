@@ -9,7 +9,7 @@ import (
 // It generalizes corestr.Hashset from string-only to any comparable type T.
 type Hashset[T comparable] struct {
 	items map[T]bool
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyHashset creates a zero-capacity Hashset[T].

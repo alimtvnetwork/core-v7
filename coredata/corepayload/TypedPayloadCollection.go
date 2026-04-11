@@ -10,7 +10,7 @@ import (
 // TypedPayloadCollection is a generic, thread-safe collection of TypedPayloadWrapper[T].
 //
 // It mirrors PayloadsCollection but provides compile-time type safety for the
-// deserialized payload data. The embedded sync.Mutex supports concurrent access
+// deserialized payload data. The embedded sync.RWMutex supports concurrent access
 // via *Lock methods.
 //
 // Usage:
@@ -22,7 +22,7 @@ import (
 //	})
 type TypedPayloadCollection[T any] struct {
 	items []*TypedPayloadWrapper[T]
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyTypedPayloadCollection creates a zero-capacity TypedPayloadCollection[T].

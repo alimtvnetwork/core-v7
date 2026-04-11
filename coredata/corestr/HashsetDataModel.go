@@ -11,7 +11,7 @@ func NewHashsetUsingDataModel(dataModel *HashsetDataModel) *Hashset {
 		items:         dataModel.Items,
 		hasMapUpdated: false,
 		cachedList:    nil,
-		Mutex:         sync.Mutex{},
+		Mutex:         sync.RWMutex{},
 	}
 }
 

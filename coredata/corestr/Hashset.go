@@ -19,7 +19,7 @@ type Hashset struct {
 	hasMapUpdated bool
 	items         map[string]bool
 	cachedList    []string
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *Hashset) IsEmpty() bool {
@@ -113,8 +113,8 @@ func (it *Hashset) Collection() *Collection {
 }
 
 func (it *Hashset) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -306,13 +306,13 @@ func (it *Hashset) AddStringsPtrWgLock(
 		it.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
 	}
 
-	it.Lock()
+	it.RLock()
 	for _, key := range keys {
 		it.items[key] = true
 	}
 
 	it.hasMapUpdated = true
-	it.Unlock()
+	it.RUnlock()
 
 	wg.Done()
 
@@ -386,7 +386,7 @@ func (it *Hashset) AddItemsMapWgLock(
 		it.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
 	}
 
-	it.Lock()
+	it.RLock()
 	for k, isEnabled := range *itemsMap {
 		isDisabled := !isEnabled
 
@@ -398,7 +398,7 @@ func (it *Hashset) AddItemsMapWgLock(
 	}
 
 	it.hasMapUpdated = true
-	it.Unlock()
+	it.RUnlock()
 
 	wg.Done()
 
@@ -419,13 +419,13 @@ func (it *Hashset) AddHashsetWgLock(
 		it.AddCapacitiesLock(length*2, constants.ArbitraryCapacity100)
 	}
 
-	it.Lock()
+	it.RLock()
 	for k := range hashsetAdd.items {
 		it.items[k] = true
 	}
 
 	it.hasMapUpdated = true
-	it.Unlock()
+	it.RUnlock()
 
 	wg.Done()
 
@@ -459,13 +459,13 @@ func (it *Hashset) AddStringsLock(keys []string) *Hashset {
 		return it
 	}
 
-	it.Lock()
+	it.RLock()
 	for _, key := range keys {
 		it.items[key] = true
 	}
 
 	it.hasMapUpdated = true
-	it.Unlock()
+	it.RUnlock()
 
 	return it
 }
@@ -572,10 +572,10 @@ func (it *Hashset) AddsAnyUsingFilterLock(
 		result, isKeep, isBreak := filter(anyStr, i)
 
 		if isKeep {
-			it.Lock()
+			it.RLock()
 			it.items[result] = true
 			it.hasMapUpdated = true
-			it.Unlock()
+			it.RUnlock()
 		}
 
 		if isBreak {
@@ -631,9 +631,9 @@ func (it *Hashset) IsMissing(key string) bool {
 }
 
 func (it *Hashset) IsMissingLock(key string) bool {
-	it.Lock()
+	it.RLock()
 	_, isFound := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return !isFound
 }
@@ -678,9 +678,9 @@ func (it *Hashset) Filter(predicate func(string) bool) *Hashset {
 }
 
 func (it *Hashset) HasLock(key string) bool {
-	it.Lock()
+	it.RLock()
 	isSet, isFound := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return isFound && isSet
 }
@@ -753,8 +753,8 @@ func (it *Hashset) HasAny(keys ...string) bool {
 }
 
 func (it *Hashset) HasWithLock(key string) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	isSet, isFound := it.items[key]
 
@@ -1051,8 +1051,8 @@ func (it *Hashset) Dispose() {
 
 // ListCopyLock a slice must returned
 func (it *Hashset) ListCopyLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 	cloned := it.List()
 
 	return cloned
@@ -1100,15 +1100,15 @@ func (it *Hashset) Length() int {
 }
 
 func (it *Hashset) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Length()
 }
 
 func (it *Hashset) IsEqualsLock(another *Hashset) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEquals(another)
 }
@@ -1195,8 +1195,8 @@ func (it *Hashset) StringLock() string {
 		return commonJoiner + NoElements
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return commonJoiner +
 		strings.Join(

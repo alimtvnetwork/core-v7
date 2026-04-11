@@ -17,7 +17,7 @@ type Hashmap struct {
 	hasMapUpdated bool
 	items         map[string]string
 	cachedList    []string
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *Hashmap) IsEmpty() bool {
@@ -33,8 +33,8 @@ func (it *Hashmap) Collection() *Collection {
 }
 
 func (it *Hashmap) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -187,13 +187,13 @@ func (it *Hashmap) AddOrUpdateStringsPtrWgLock(
 		return it
 	}
 
-	it.Lock()
+	it.RLock()
 	for i, key := range keys {
 		it.items[key] = values[i]
 	}
 
 	it.hasMapUpdated = true
-	it.Unlock()
+	it.RUnlock()
 	safeWaitGroupDone(wg)
 
 	return it
@@ -339,9 +339,9 @@ func (it *Hashmap) AddsOrUpdatesAnyUsingFilterLock(
 		result, isKeep, isBreak := filter(pair)
 
 		if isKeep {
-			it.Lock()
+			it.RLock()
 			it.items[pair.Key] = result
-			it.Unlock()
+			it.RUnlock()
 
 			it.hasMapUpdated = true
 		}
@@ -479,9 +479,9 @@ func (it *Hashmap) Contains(key string) bool {
 }
 
 func (it *Hashmap) ContainsLock(key string) bool {
-	it.Lock()
+	it.RLock()
 	_, isFound := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return isFound
 }
@@ -493,17 +493,17 @@ func (it *Hashmap) IsKeyMissing(key string) bool {
 }
 
 func (it *Hashmap) IsKeyMissingLock(key string) bool {
-	it.Lock()
+	it.RLock()
 	_, isFound := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return !isFound
 }
 
 func (it *Hashmap) HasLock(key string) bool {
-	it.Lock()
+	it.RLock()
 	_, isFound := it.items[key]
-	it.Unlock()
+	it.RUnlock()
 
 	return isFound
 }
@@ -584,8 +584,8 @@ func (it *Hashmap) HasAny(keys ...string) bool {
 }
 
 func (it *Hashmap) HasWithLock(key string) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	_, isFound := it.items[key]
 
@@ -686,8 +686,8 @@ func (it *Hashmap) SafeItems() map[string]string {
 
 //goland:noinspection GoLinterLocal
 func (it *Hashmap) ItemsCopyLock() *map[string]string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	copiedMap := make(map[string]string, len(it.items))
 	for k, v := range it.items {
@@ -805,7 +805,7 @@ func (it *Hashmap) KeysValuePairsCollection() *KeyValueCollection {
 func (it *Hashmap) KeysValuesListLock() (
 	keys, values []string,
 ) {
-	it.Lock()
+	it.RLock()
 	wg := sync.WaitGroup{}
 	wg.Add(2)
 
@@ -819,7 +819,7 @@ func (it *Hashmap) KeysValuesListLock() (
 	}()
 
 	wg.Wait()
-	it.Unlock()
+	it.RUnlock()
 
 	return keys, values
 }
@@ -860,13 +860,13 @@ func (it *Hashmap) KeysLock() []string {
 	}
 
 	i := 0
-	it.Lock()
+	it.RLock()
 	for k := range it.items {
 		keys[i] = k
 		i++
 	}
 
-	it.Unlock()
+	it.RUnlock()
 
 	return keys
 }
@@ -875,8 +875,8 @@ func (it *Hashmap) KeysLock() []string {
 //
 //	a slice must be returned
 func (it *Hashmap) ValuesListCopyLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.ValuesList()
 }
@@ -932,8 +932,8 @@ func (it *Hashmap) Length() int {
 }
 
 func (it *Hashmap) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.Length()
 }
@@ -944,8 +944,8 @@ func (it *Hashmap) IsEqual(another Hashmap) bool { //nolint:govet
 }
 
 func (it *Hashmap) IsEqualPtrLock(another *Hashmap) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEqualPtr(another)
 }
@@ -1023,8 +1023,8 @@ func (it *Hashmap) StringLock() string {
 		return commonJoiner + NoElements
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return commonJoiner +
 		strings.Join(

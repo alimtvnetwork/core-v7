@@ -15,7 +15,7 @@ import (
 type CharCollectionMap struct {
 	items                  map[byte]*Collection
 	eachCollectionCapacity int
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *CharCollectionMap) GetChar(
@@ -60,8 +60,8 @@ func (it *CharCollectionMap) GetMap() map[byte]*Collection {
 
 // GetCopyMapLock Sends a copy of items
 func (it *CharCollectionMap) GetCopyMapLock() map[byte]*Collection {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return map[byte]*Collection{}
@@ -234,8 +234,8 @@ func (it *CharCollectionMap) HasItems() bool {
 }
 
 func (it *CharCollectionMap) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEmpty()
 }
@@ -296,8 +296,8 @@ func (it *CharCollectionMap) HasWithCollection(
 func (it *CharCollectionMap) HasWithCollectionLock(
 	str string,
 ) (bool, *Collection) {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return false, Empty.Collection()
@@ -330,8 +330,8 @@ func (it *CharCollectionMap) LengthOf(char byte) int {
 }
 
 func (it *CharCollectionMap) LengthOfLock(char byte) int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it.IsEmpty() {
 		return 0
@@ -363,8 +363,8 @@ func (it *CharCollectionMap) AllLengthsSum() int {
 
 // AllLengthsSumLock All lengths sum.
 func (it *CharCollectionMap) AllLengthsSumLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it == nil || it.items == nil {
 		return 0
@@ -389,8 +389,8 @@ func (it *CharCollectionMap) Length() int {
 }
 
 func (it *CharCollectionMap) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	if it == nil || it.items == nil {
 		return 0
@@ -402,8 +402,8 @@ func (it *CharCollectionMap) LengthLock() int {
 func (it *CharCollectionMap) IsEqualsLock(
 	another *CharCollectionMap,
 ) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEqualsCaseSensitive(
 		true,
@@ -424,8 +424,8 @@ func (it *CharCollectionMap) IsEqualsCaseSensitiveLock(
 	isCaseSensitive bool,
 	another *CharCollectionMap,
 ) bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.IsEqualsCaseSensitive(
 		isCaseSensitive,
@@ -679,8 +679,8 @@ func (it *CharCollectionMap) GetCollectionLock(
 	strFirstChar string,
 	isAddNewOnEmpty bool,
 ) *Collection {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.GetCollection(
 		strFirstChar,
@@ -826,8 +826,8 @@ func (it *CharCollectionMap) List() []string {
 }
 
 func (it *CharCollectionMap) ListLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.List()
 }
@@ -912,9 +912,9 @@ func (it *CharCollectionMap) HashsetByChar(
 func (it *CharCollectionMap) HashsetByCharLock(
 	char byte,
 ) *Hashset {
-	it.Lock()
+	it.RLock()
 	collection := it.items[char]
-	it.Unlock()
+	it.RUnlock()
 
 	if collection == nil {
 		return New.Hashset.Empty()

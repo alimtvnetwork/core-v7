@@ -16,7 +16,7 @@ import (
 type LinkedList struct {
 	head, tail *LinkedListNode
 	length     int
-	sync.Mutex
+	sync.RWMutex
 }
 
 func (it *LinkedList) Tail() *LinkedListNode {
@@ -62,8 +62,8 @@ func (it *LinkedList) decrementLength() int {
 }
 
 func (it *LinkedList) LengthLock() int {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.length
 }
@@ -120,8 +120,8 @@ func (it *LinkedList) IsEqualsWithSensitive(
 }
 
 func (it *LinkedList) IsEmptyLock() bool {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.head == nil || it.length == 0
 }
@@ -854,8 +854,8 @@ func (it *LinkedList) SafeIndexAt(index int) *LinkedListNode {
 
 // SafeIndexAtLock Expensive operation BigO(n)
 func (it *LinkedList) SafeIndexAtLock(index int) *LinkedListNode {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.SafeIndexAt(index)
 }
@@ -865,8 +865,8 @@ func (it *LinkedList) SafePointerIndexAtUsingDefaultLock(
 	index int,
 	defaultString string,
 ) string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.SafePointerIndexAtUsingDefault(index, defaultString)
 }
@@ -981,15 +981,15 @@ func (it *LinkedList) ListPtr() []string {
 
 // ListLock returns the list with mutex protection.
 func (it *LinkedList) ListLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.List()
 }
 
 func (it *LinkedList) ListPtrLock() []string {
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return it.List()
 }
@@ -1011,8 +1011,8 @@ func (it *LinkedList) StringLock() string {
 		return commonJoiner + NoElements
 	}
 
-	it.Lock()
-	defer it.Unlock()
+	it.RLock()
+	defer it.RUnlock()
 
 	return commonJoiner +
 		strings.Join(

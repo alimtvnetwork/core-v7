@@ -10,7 +10,7 @@ import (
 // It generalizes corestr.Collection from string-only to any type T.
 type Collection[T any] struct {
 	items []T
-	sync.Mutex
+	sync.RWMutex
 }
 
 // EmptyCollection creates a zero-capacity Collection[T].
