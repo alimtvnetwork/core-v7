@@ -17,8 +17,7 @@ func Test_DefaultCsv_FromDefaultCsv(t *testing.T) {
 
 	// Assert
 	expected := args.Map{
-		"result": `"a",
-		"b"`,
+		"result": `"a", "b"`,
 	}
 	expected.ShouldBeEqual(t, 0, "DefaultCsv returns double-quoted csv -- two items", actual)
 }
@@ -38,8 +37,7 @@ func Test_DefaultAnyCsv_FromDefaultCsv(t *testing.T) {
 
 	// Assert
 	expected := args.Map{
-		"result": `"x",
-		"1"`,
+		"result": `"x", "1"`,
 	}
 	expected.ShouldBeEqual(t, 0, "DefaultAnyCsv returns double-quoted csv -- mixed types", actual)
 }
@@ -125,8 +123,7 @@ func Test_StringsToStringDefault_FromDefaultCsv(t *testing.T) {
 
 	// Assert
 	expected := args.Map{
-		"result": `"a",
-		"b"`,
+		"result": `"a", "b"`,
 	}
 	expected.ShouldBeEqual(t, 0, "StringsToStringDefault returns joined csv -- two items", actual)
 }
