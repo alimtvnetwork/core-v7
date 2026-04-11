@@ -9,7 +9,7 @@ import (
 // MethodProcessor.IsEqual — invalid != valid branch (line 163-165)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_MethodProcessor_IsEqual_InvalidVsValid(t *testing.T) {
+func Test_MethodProcessor_IsEqual_InvalidVsValid(t *testing.T) {
 	// Arrange
 	valid := newMethodProcessorInternal("PublicMethod")
 	var invalid *MethodProcessor // nil is invalid
@@ -33,7 +33,7 @@ func TestCov3_MethodProcessor_IsEqual_InvalidVsValid(t *testing.T) {
 // MethodProcessor.GetInArgsTypes — zero args branch (line 229-231)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_MethodProcessor_GetInArgsTypes_ZeroArgs(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypes_ZeroArgs(t *testing.T) {
 	// Arrange — create a MethodProcessor that wraps a function type with 0 in-args
 	// This is effectively impossible via MethodByName (always has receiver),
 	// but we test the invalid branch which returns empty
@@ -53,7 +53,7 @@ func TestCov3_MethodProcessor_GetInArgsTypes_ZeroArgs(t *testing.T) {
 // MethodProcessor.GetInArgsTypesNames — zero args branch (line 253-255)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_MethodProcessor_GetInArgsTypesNames_ZeroArgs(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypesNames_ZeroArgs(t *testing.T) {
 	// Arrange
 	var mp *MethodProcessor
 
@@ -70,7 +70,7 @@ func TestCov3_MethodProcessor_GetInArgsTypesNames_ZeroArgs(t *testing.T) {
 // MethodProcessor.validationError — invalid (non-nil) branch (line 276-284)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_MethodProcessor_ValidationError_Invalid(t *testing.T) {
+func Test_MethodProcessor_ValidationError_Invalid(t *testing.T) {
 	// Arrange — a nil MethodProcessor triggers the nil guard
 	var mp *MethodProcessor
 
@@ -89,7 +89,7 @@ func TestCov3_MethodProcessor_ValidationError_Invalid(t *testing.T) {
 //       by Coverage_internal_test.go — if showing 0, it's a collection issue.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_IsNull_Struct(t *testing.T) {
+func Test_IsNull_Struct(t *testing.T) {
 	// Arrange
 	type sample struct{ X int }
 
@@ -102,7 +102,7 @@ func TestCov3_IsNull_Struct(t *testing.T) {
 	}
 }
 
-func TestCov3_IsNull_NilUnsafePointer(t *testing.T) {
+func Test_IsNull_NilUnsafePointer(t *testing.T) {
 	// Arrange
 	var p *int
 
@@ -119,7 +119,7 @@ func TestCov3_IsNull_NilUnsafePointer(t *testing.T) {
 // rvUtils — ReflectValueToAnyValue nil interface branch (line 45-47)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_ReflectValueToAnyValue_NilInterface(t *testing.T) {
+func Test_RvUtils_ReflectValueToAnyValue_NilInterface(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 	var nilPtr *string
@@ -137,7 +137,7 @@ func TestCov3_RvUtils_ReflectValueToAnyValue_NilInterface(t *testing.T) {
 // rvUtils — IsNull non-nil value (line 64-75 default branch)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_IsNull_NonNilValue(t *testing.T) {
+func Test_RvUtils_IsNull_NonNilValue(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -154,7 +154,7 @@ func TestCov3_RvUtils_IsNull_NonNilValue(t *testing.T) {
 // rvUtils — InterfacesToTypes non-empty (line 102-104)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_InterfacesToTypes_NonEmpty(t *testing.T) {
+func Test_RvUtils_InterfacesToTypes_NonEmpty(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -171,7 +171,7 @@ func TestCov3_RvUtils_InterfacesToTypes_NonEmpty(t *testing.T) {
 // rvUtils.IsReflectTypeMatchAny (line 193-198)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_IsReflectTypeMatchAny_Match(t *testing.T) {
+func Test_RvUtils_IsReflectTypeMatchAny_Match(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -184,7 +184,7 @@ func TestCov3_RvUtils_IsReflectTypeMatchAny_Match(t *testing.T) {
 	}
 }
 
-func TestCov3_RvUtils_IsReflectTypeMatchAny_Mismatch(t *testing.T) {
+func Test_RvUtils_IsReflectTypeMatchAny_Mismatch(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -201,7 +201,7 @@ func TestCov3_RvUtils_IsReflectTypeMatchAny_Mismatch(t *testing.T) {
 // rvUtils.PrependWithSpaces — with no spaces (line 223-225)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_PrependWithSpaces_ZeroPrependSpaces(t *testing.T) {
+func Test_RvUtils_PrependWithSpaces_ZeroPrependSpaces(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -218,7 +218,7 @@ func TestCov3_RvUtils_PrependWithSpaces_ZeroPrependSpaces(t *testing.T) {
 // rvUtils.WithSpaces — empty (line 239-241)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_WithSpaces_Empty(t *testing.T) {
+func Test_RvUtils_WithSpaces_Empty(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 
@@ -235,7 +235,7 @@ func TestCov3_RvUtils_WithSpaces_Empty(t *testing.T) {
 // rvUtils.ArgsToReflectValues — empty branch (line 15-17)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func TestCov3_RvUtils_ArgsToReflectValues_Empty(t *testing.T) {
+func Test_RvUtils_ArgsToReflectValues_Empty(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 

@@ -19,7 +19,7 @@ func (n testNamerInternal) Name() string {
 	return n.name
 }
 
-func TestCov_UsingNamerMapOptions_CurlyKeys(t *testing.T) {
+func Test_UsingNamerMapOptions_CurlyKeys(t *testing.T) {
 	// Arrange
 	rt := replaceTemplate{}
 	namerMap := map[namer]string{
@@ -40,7 +40,7 @@ func TestCov_UsingNamerMapOptions_CurlyKeys(t *testing.T) {
 	}
 }
 
-func TestCov_UsingNamerMapOptions_DirectKeys(t *testing.T) {
+func Test_UsingNamerMapOptions_DirectKeys(t *testing.T) {
 	// Arrange
 	rt := replaceTemplate{}
 	namerMap := map[namer]string{

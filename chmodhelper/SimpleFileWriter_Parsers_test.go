@@ -12,7 +12,7 @@ import (
 // simpleFileWriter — Lock/Unlock (L9, L13)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_SimpleFileWriter_LockUnlock(t *testing.T) {
+func Test_SimpleFileWriter_LockUnlock(t *testing.T) {
 	SimpleFileWriter.Lock()
 	SimpleFileWriter.Unlock()
 }
@@ -21,7 +21,7 @@ func Test_Cov2_SimpleFileWriter_LockUnlock(t *testing.T) {
 // newCreator — field access
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_NewCreator_Fields(t *testing.T) {
+func Test_NewCreator_Fields(t *testing.T) {
 	_ = New.RwxWrapper
 	_ = New.SimpleFileReaderWriter
 	_ = New.Attribute
@@ -31,7 +31,7 @@ func Test_Cov2_NewCreator_Fields(t *testing.T) {
 // chmodApplier — test that Apply works with valid chmod (simplified)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_ChmodApply_Noop(t *testing.T) {
+func Test_ChmodApply_Noop(t *testing.T) {
 	// Just validate the struct exists and can be referenced
 	_ = ChmodApply
 }
@@ -40,7 +40,7 @@ func Test_Cov2_ChmodApply_Noop(t *testing.T) {
 // ChmodVerify — struct exists
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_ChmodVerify_Noop(t *testing.T) {
+func Test_ChmodVerify_Noop(t *testing.T) {
 	_ = ChmodVerify
 }
 
@@ -48,7 +48,7 @@ func Test_Cov2_ChmodVerify_Noop(t *testing.T) {
 // ParseRwxInstructionsToExecutors — nil input (L10-12)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
+func Test_ParseRwxInstructionsToExecutors_Nil_ChecksExecutors(t *testing.T) {
 	executors, err := ParseRwxInstructionsToExecutors(nil)
 	if err == nil {
 		t.Fatal("expected error for nil input")
@@ -62,7 +62,7 @@ func Test_Cov2_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
 // ParseRwxInstructionsToExecutors — empty input (L17-19)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_ParseRwxInstructionsToExecutors_Empty(t *testing.T) {
+func Test_ParseRwxInstructionsToExecutors_Empty(t *testing.T) {
 	executors, err := ParseRwxInstructionsToExecutors([]chmodins.RwxInstruction{})
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
@@ -76,7 +76,7 @@ func Test_Cov2_ParseRwxInstructionsToExecutors_Empty(t *testing.T) {
 // ParseRwxOwnerGroupOtherToFileModeMust — nil input panics (L15-17)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_ParseRwxOwnerGroupOtherToFileModeMust_Nil(t *testing.T) {
+func Test_ParseRwxOwnerGroupOtherToFileModeMust_Nil(t *testing.T) {
 	defer func() {
 		if r := recover(); r == nil {
 			t.Fatal("expected panic for nil input")
@@ -89,7 +89,7 @@ func Test_Cov2_ParseRwxOwnerGroupOtherToFileModeMust_Nil(t *testing.T) {
 // TempDirGetter — basic coverage
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_TempDirGetter_Value(t *testing.T) {
+func Test_TempDirGetter_Value(t *testing.T) {
 	val := TempDirGetter.TempDefault()
 	if val == "" {
 		t.Log("temp dir is empty string on this platform")
@@ -100,7 +100,7 @@ func Test_Cov2_TempDirGetter_Value(t *testing.T) {
 // RwxVariableWrapper — Parse with valid hyphen-prefixed input (no error)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_RwxVariableWrapper_Parse_Valid(t *testing.T) {
+func Test_RwxVariableWrapper_Parse_Valid(t *testing.T) {
 	// NewRwxVariableWrapper pads with wildcards; any single-char input
 	// produces valid wildcard attributes, so no error is possible.
 	// Test that it returns successfully with a hyphen-prefixed input.
@@ -113,7 +113,7 @@ func Test_Cov2_RwxVariableWrapper_Parse_Valid(t *testing.T) {
 	}
 }
 
-func Test_Cov2_RwxVariableWrapper_Parse_SingleChar(t *testing.T) {
+func Test_RwxVariableWrapper_Parse_SingleChar(t *testing.T) {
 	// "X" is padded to "X*********" — all wildcard segments, always valid.
 	wrapper, err := NewRwxVariableWrapper("X")
 	if err != nil {
@@ -128,7 +128,7 @@ func Test_Cov2_RwxVariableWrapper_Parse_SingleChar(t *testing.T) {
 // RwxInstructionExecutor — verifyChmodLocations error paths (L196, L227)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_RwxInstructionExecutor_VerifyChmod_CompiledWrapperError(t *testing.T) {
+func Test_RwxInstructionExecutor_VerifyChmod_CompiledWrapperError(t *testing.T) {
 	tmpDir := t.TempDir()
 	tmpFile := filepath.Join(tmpDir, "test.txt")
 	os.WriteFile(tmpFile, []byte("test"), 0o644)
@@ -157,7 +157,7 @@ func Test_Cov2_RwxInstructionExecutor_VerifyChmod_CompiledWrapperError(t *testin
 // RwxPartialToInstructionExecutor — error path (L29)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_RwxPartialToInstructionExecutor_InvalidPartial(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_InvalidPartial(t *testing.T) {
 	cond := chmodins.DefaultAllFalseCondition()
 	_, err := RwxPartialToInstructionExecutor("INVALID_VERY_LONG_RWX_STRING", cond)
 	if err == nil {
@@ -169,7 +169,7 @@ func Test_Cov2_RwxPartialToInstructionExecutor_InvalidPartial(t *testing.T) {
 // RwxInstructionExecutors — ApplyOnPathsPtr with empty executor (nil rwxInstruction)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov2_RwxInstructionExecutors_ApplyOnPathsPtr_WithExecutors(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPathsPtr_WithExecutors(t *testing.T) {
 	// An empty RwxInstructionExecutor{} has nil rwxInstruction which panics
 	// in ApplyOnPathsPtr when accessing rwxInstruction.IsContinueOnError.
 	// Recover from the expected nil pointer dereference.

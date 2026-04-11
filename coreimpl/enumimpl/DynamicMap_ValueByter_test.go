@@ -14,7 +14,7 @@ type stubExactValueByter struct{ v byte }
 
 func (s stubExactValueByter) ValueByte() byte { return s.v }
 
-func Test_InPkg_KeyValueByte_ValueByter(t *testing.T) {
+func Test_KeyValueByte_ValueByter(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(map[string]any{"k": stubValueByter{v: 42}})
 
@@ -27,7 +27,7 @@ func Test_InPkg_KeyValueByte_ValueByter(t *testing.T) {
 	}
 }
 
-func Test_InPkg_KeyValueByte_ExactValueByter(t *testing.T) {
+func Test_KeyValueByte_ExactValueByter(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(map[string]any{"k": stubExactValueByter{v: 77}})
 
@@ -40,7 +40,7 @@ func Test_InPkg_KeyValueByte_ExactValueByter(t *testing.T) {
 	}
 }
 
-func Test_InPkg_KeyValueInt_ValueByter(t *testing.T) {
+func Test_KeyValueInt_ValueByter(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(map[string]any{"k": stubValueByter{v: 10}})
 
@@ -53,7 +53,7 @@ func Test_InPkg_KeyValueInt_ValueByter(t *testing.T) {
 	}
 }
 
-func Test_InPkg_KeyValueInt_ExactValueByter(t *testing.T) {
+func Test_KeyValueInt_ExactValueByter(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(map[string]any{"k": stubExactValueByter{v: 20}})
 
@@ -67,7 +67,7 @@ func Test_InPkg_KeyValueInt_ExactValueByter(t *testing.T) {
 }
 
 // DynamicMap.Set nil receiver branch
-func Test_InPkg_DynamicMap_Set_NilInit(t *testing.T) {
+func Test_DynamicMap_Set_NilInit(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(nil)
 	dmPtr := &dm
@@ -82,7 +82,7 @@ func Test_InPkg_DynamicMap_Set_NilInit(t *testing.T) {
 }
 
 // DynamicMap.AddNewOnly nil receiver branch
-func Test_InPkg_DynamicMap_AddNewOnly_NilInit(t *testing.T) {
+func Test_DynamicMap_AddNewOnly_NilInit(t *testing.T) {
 	// Arrange
 	dm := DynamicMap(nil)
 	dmPtr := &dm

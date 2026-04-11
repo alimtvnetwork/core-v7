@@ -16,7 +16,7 @@ import (
 // fileWriter — error branches in All, RemoveIf, applyDirChmod
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_FileWriter_All_CleanUpError(t *testing.T) {
+func Test_FileWriter_All_CleanUpError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -48,7 +48,7 @@ func Test_Cov4_FileWriter_All_CleanUpError(t *testing.T) {
 	_ = err
 }
 
-func Test_Cov4_FileWriter_All_WriteFailure(t *testing.T) {
+func Test_FileWriter_All_WriteFailure(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 	invalidPath := string([]byte{0}) + "/impossible/file.txt"
@@ -72,7 +72,7 @@ func Test_Cov4_FileWriter_All_WriteFailure(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_All_ChmodMismatchBranch(t *testing.T) {
+func Test_FileWriter_All_ChmodMismatchBranch(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -102,7 +102,7 @@ func Test_Cov4_FileWriter_All_ChmodMismatchBranch(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_All_ChmodMustNotMismatch(t *testing.T) {
+func Test_FileWriter_All_ChmodMustNotMismatch(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -131,7 +131,7 @@ func Test_Cov4_FileWriter_All_ChmodMustNotMismatch(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_ApplyDirChmod_NotCreateDir(t *testing.T) {
+func Test_FileWriter_ApplyDirChmod_NotCreateDir(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -144,7 +144,7 @@ func Test_Cov4_FileWriter_ApplyDirChmod_NotCreateDir(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_ApplyDirChmod_DefaultChmod(t *testing.T) {
+func Test_FileWriter_ApplyDirChmod_DefaultChmod_NoCreate(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -157,7 +157,7 @@ func Test_Cov4_FileWriter_ApplyDirChmod_DefaultChmod(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_ApplyDirChmod_ChmodError(t *testing.T) {
+func Test_FileWriter_ApplyDirChmod_ChmodError(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -170,7 +170,7 @@ func Test_Cov4_FileWriter_ApplyDirChmod_ChmodError(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_RemoveIf_NotRemove(t *testing.T) {
+func Test_FileWriter_RemoveIf_NotRemove(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -183,7 +183,7 @@ func Test_Cov4_FileWriter_RemoveIf_NotRemove(t *testing.T) {
 	}
 }
 
-func Test_Cov4_FileWriter_RemoveIf_PathNotExist(t *testing.T) {
+func Test_FileWriter_RemoveIf_PathNotExist(t *testing.T) {
 	// Arrange
 	fw := fileWriter{}
 
@@ -200,7 +200,7 @@ func Test_Cov4_FileWriter_RemoveIf_PathNotExist(t *testing.T) {
 // errorCreator — all error branch paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_ErrorCreator_DirError_WithError(t *testing.T) {
+func Test_ErrorCreator_DirError_WithError(t *testing.T) {
 	// Arrange & Act
 	err := newError.dirError("/nonexistent/xyz", errors.New("test-err"))
 
@@ -210,7 +210,7 @@ func Test_Cov4_ErrorCreator_DirError_WithError(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_DirError_NotDirButExists(t *testing.T) {
+func Test_ErrorCreator_DirError_NotDirButExists(t *testing.T) {
 	// Arrange — create a file (not a directory)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "file.txt")
@@ -228,7 +228,7 @@ func Test_Cov4_ErrorCreator_DirError_NotDirButExists(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
+func Test_ErrorCreator_NotDirError_PathInvalid_FileWriterContext(t *testing.T) {
 	// Arrange & Act — path doesn't exist
 	err := newError.notDirError("/nonexistent/xyz")
 
@@ -238,7 +238,7 @@ func Test_Cov4_ErrorCreator_NotDirError_PathInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_PathError_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathError_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.pathError("test", 0644, "/tmp/x", nil)
 
@@ -248,7 +248,7 @@ func Test_Cov4_ErrorCreator_PathError_NilErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_PathError_WithErr(t *testing.T) {
+func Test_ErrorCreator_PathError_WithErr(t *testing.T) {
 	// Arrange & Act
 	err := newError.pathError("test msg", 0644, "/tmp/x", errors.New("inner"))
 
@@ -258,7 +258,7 @@ func Test_Cov4_ErrorCreator_PathError_WithErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NotDir_FileWriterContext(t *testing.T) {
 	// Arrange — create a file (not dir)
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "file.txt")
@@ -273,7 +273,7 @@ func Test_Cov4_ErrorCreator_PathErrorWithDirValidate_NotDir(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathErrorWithDirValidate_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 
@@ -286,7 +286,7 @@ func Test_Cov4_ErrorCreator_PathErrorWithDirValidate_NilErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_NilErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0644, "/tmp/x", nil)
 
@@ -296,7 +296,7 @@ func Test_Cov4_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ErrorCreator_ChmodApplyFailed_WithErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_WithErr_FileWriterContext(t *testing.T) {
 	// Arrange & Act
 	err := newError.chmodApplyFailed(0644, "/tmp/x", errors.New("chmod-fail"))
 
@@ -310,7 +310,7 @@ func Test_Cov4_ErrorCreator_ChmodApplyFailed_WithErr(t *testing.T) {
 // chmodVerifier — remaining uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	// Arrange & Act — invalid path should return true (skip)
 	result := ChmodVerify.IsEqualRwxFullSkipInvalid("/nonexistent/xyz", "-rwxrwxrwx")
 
@@ -320,7 +320,7 @@ func Test_Cov4_ChmodVerifier_IsEqualRwxFullSkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid_FileModeContext(t *testing.T) {
 	// Arrange & Act — invalid path should return true
 	result := ChmodVerify.IsEqualSkipInvalid("/nonexistent/xyz", 0644)
 
@@ -330,7 +330,7 @@ func Test_Cov4_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_GetRwx9_EmptyReturn(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9_EmptyReturn(t *testing.T) {
 	// Arrange — mode 0 produces "----------" which is 10 chars
 	// We need a mode whose String() is <= 9 chars — this is practically
 	// impossible with standard Go, but we call it to cover the function
@@ -344,7 +344,7 @@ func Test_Cov4_ChmodVerifier_GetRwx9_EmptyReturn(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_PathIf_NotVerify(t *testing.T) {
+func Test_ChmodVerifier_PathIf_NotVerify(t *testing.T) {
 	// Arrange & Act
 	err := ChmodVerify.PathIf(false, "/any/path", 0644)
 
@@ -354,7 +354,7 @@ func Test_Cov4_ChmodVerifier_PathIf_NotVerify(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_PathIf_Verify(t *testing.T) {
+func Test_ChmodVerifier_PathIf_Verify(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -373,7 +373,7 @@ func Test_Cov4_ChmodVerifier_PathIf_Verify(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -392,7 +392,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingFileMode(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingRwxFull_NilLocations(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingRwxFull_NilLocations(t *testing.T) {
 	// Arrange & Act
 	err := ChmodVerify.PathsUsingRwxFull(false, "-rwxrwxrwx")
 
@@ -402,7 +402,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingRwxFull_NilLocations(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
+func Test_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
 	// Arrange & Act — invalid partial rwx
 	err := ChmodVerify.PathsUsingPartialRwxOptions(false, false, "INVALID", "/tmp")
 
@@ -416,7 +416,7 @@ func Test_Cov4_ChmodVerifier_PathsUsingPartialRwxOptions_Error(t *testing.T) {
 // fwChmodVerifier — IsEqualFile with valid file
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_FwChmodVerifier_IsEqualFile(t *testing.T) {
+func Test_FwChmodVerifier_IsEqualFile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -446,7 +446,7 @@ func Test_Cov4_FwChmodVerifier_IsEqualFile(t *testing.T) {
 // fwChmodApplier — OnDiffFile skip-on-invalid branch
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
+func Test_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
 	// Arrange
 	rw := &SimpleFileReaderWriter{
 		ChmodDir:  0755,
@@ -469,7 +469,7 @@ func Test_Cov4_FwChmodApplier_OnDiffFile_SkipInvalid(t *testing.T) {
 // dirCreator — Default with error, ByChecking error branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_DirCreator_Default_Error(t *testing.T) {
+func Test_DirCreator_Default_Error(t *testing.T) {
 	// Arrange & Act
 	err := internalDirCreator.Default(0755, "/dev/null/impossible/dir")
 
@@ -479,7 +479,7 @@ func Test_Cov4_DirCreator_Default_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_DirCreator_Direct_Error(t *testing.T) {
+func Test_DirCreator_Direct_Error(t *testing.T) {
 	// Arrange & Act
 	err := internalDirCreator.Direct("/dev/null/impossible/dir")
 
@@ -489,7 +489,7 @@ func Test_Cov4_DirCreator_Direct_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_DirCreator_DirectLock(t *testing.T) {
+func Test_DirCreator_DirectLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	subDir := filepath.Join(dir, "sub")
@@ -503,7 +503,7 @@ func Test_Cov4_DirCreator_DirectLock(t *testing.T) {
 	}
 }
 
-func Test_Cov4_DirCreator_DefaultLock(t *testing.T) {
+func Test_DirCreator_DefaultLock(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	subDir := filepath.Join(dir, "sub2")
@@ -521,7 +521,7 @@ func Test_Cov4_DirCreator_DefaultLock(t *testing.T) {
 // SimpleFileReaderWriter — errorWrap and WriteString branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_SimpleFileReaderWriter_WriteString_Error(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteString_Error(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		ChmodDir:               0755,
@@ -542,7 +542,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteString_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteRelativePath_Error(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteRelativePath_Error(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		ChmodDir:               0755,
@@ -563,7 +563,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteRelativePath_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_SimpleFileReaderWriter_WriteAny_Error(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAny_Error(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		ChmodDir:               0755,
@@ -586,7 +586,7 @@ func Test_Cov4_SimpleFileReaderWriter_WriteAny_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ErrorWrap_NilErr(t *testing.T) {
+func Test_SimpleFileReaderWriter_ErrorWrap_NilErr(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		FilePath: "/tmp/test.txt",
@@ -601,7 +601,7 @@ func Test_Cov4_SimpleFileReaderWriter_ErrorWrap_NilErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr(t *testing.T) {
+func Test_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr_Cov4(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		FilePath: "/tmp/test.txt",
@@ -616,7 +616,7 @@ func Test_Cov4_SimpleFileReaderWriter_ErrorWrapFilePath_NilErr(t *testing.T) {
 	}
 }
 
-func Test_Cov4_SimpleFileReaderWriter_GetOnExist_Error(t *testing.T) {
+func Test_SimpleFileReaderWriter_GetOnExist_Error(t *testing.T) {
 	// Arrange
 	rw := SimpleFileReaderWriter{
 		FilePath: "/nonexistent/xyz/file.json",
@@ -637,7 +637,7 @@ func Test_Cov4_SimpleFileReaderWriter_GetOnExist_Error(t *testing.T) {
 //               ToUint32Octal error, clone
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxWrapper_VerifyPaths(t *testing.T) {
+func Test_RwxWrapper_VerifyPaths_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -654,7 +654,7 @@ func Test_Cov4_RwxWrapper_VerifyPaths(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmod_InvalidPath_SkipOnInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_InvalidPath_SkipOnInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -671,7 +671,7 @@ func Test_Cov4_RwxWrapper_ApplyChmod_InvalidPath_SkipOnInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmod_InvalidPath_NoSkip(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_InvalidPath_NoSkip(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -688,7 +688,7 @@ func Test_Cov4_RwxWrapper_ApplyChmod_InvalidPath_NoSkip(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmod_ValidPath(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod_ValidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -708,7 +708,7 @@ func Test_Cov4_RwxWrapper_ApplyChmod_ValidPath(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmodOptions_Equal(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodOptions_Equal(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -728,7 +728,7 @@ func Test_Cov4_RwxWrapper_ApplyChmodOptions_Equal(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmodOptions_Mismatch(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodOptions_Mismatch(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -748,7 +748,7 @@ func Test_Cov4_RwxWrapper_ApplyChmodOptions_Mismatch(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyChmodOptions_InvalidPath(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodOptions_InvalidPath(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -769,7 +769,7 @@ func Test_Cov4_RwxWrapper_ApplyChmodOptions_InvalidPath(t *testing.T) {
 // RwxWrapper — ApplyRecursive non-Linux (walk-based), error branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxWrapper_ApplyRecursive_FileOnly(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_FileOnly(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -789,7 +789,7 @@ func Test_Cov4_RwxWrapper_ApplyRecursive_FileOnly(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyRecursive_SkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_SkipInvalid(t *testing.T) {
 	// Arrange
 	rwx := New.RwxWrapper.UsingFileMode(0644)
 
@@ -802,7 +802,7 @@ func Test_Cov4_RwxWrapper_ApplyRecursive_SkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxWrapper_ApplyRecursive_NoSkipInvalid(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive_NoSkipInvalid(t *testing.T) {
 	// Arrange
 	rwx := New.RwxWrapper.UsingFileMode(0644)
 
@@ -819,7 +819,7 @@ func Test_Cov4_RwxWrapper_ApplyRecursive_NoSkipInvalid(t *testing.T) {
 // RwxWrapper — applyLinuxRecursiveChmodUsingCmd, getLinuxRecursiveCmdForChmod
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxWrapper_ApplyLinuxRecursiveCmdError(t *testing.T) {
+func Test_RwxWrapper_ApplyLinuxRecursiveCmdError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -842,7 +842,7 @@ func Test_Cov4_RwxWrapper_ApplyLinuxRecursiveCmdError(t *testing.T) {
 //                          ApplyOnPath branches, verifyChmod branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -874,7 +874,7 @@ func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_ExitOnInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid_NonExistent(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -906,7 +906,7 @@ func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_SkipOnInvalid(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -943,7 +943,7 @@ func Test_Cov4_RwxInstructionExecutor_ApplyOnPath_Recursive(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxInstructionExecutor_ApplyOnPathsDirect_Empty(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPathsDirect_Empty(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -964,7 +964,7 @@ func Test_Cov4_RwxInstructionExecutor_ApplyOnPathsDirect_Empty(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxInstructionExecutor_ApplyOnPaths_Empty(t *testing.T) {
+func Test_RwxInstructionExecutor_ApplyOnPaths_Empty(t *testing.T) {
 	// Arrange
 	ins := &chmodins.RwxInstruction{
 		RwxOwnerGroupOther: chmodins.RwxOwnerGroupOther{
@@ -989,7 +989,7 @@ func Test_Cov4_RwxInstructionExecutor_ApplyOnPaths_Empty(t *testing.T) {
 // RwxInstructionExecutors — ApplyOnPaths with locations
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_NonEmpty(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPaths_NonEmpty_ValidDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1022,7 +1022,7 @@ func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_NonEmpty(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_Error(t *testing.T) {
+func Test_RwxInstructionExecutors_ApplyOnPaths_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1057,7 +1057,7 @@ func Test_Cov4_RwxInstructionExecutors_ApplyOnPaths_Error(t *testing.T) {
 // RwxPartialToInstructionExecutor — nil condition
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
+func Test_RwxPartialToInstructionExecutor_NilCondition_ReturnsError(t *testing.T) {
 	// Arrange & Act
 	_, err := RwxPartialToInstructionExecutor("rwx", nil)
 
@@ -1071,7 +1071,7 @@ func Test_Cov4_RwxPartialToInstructionExecutor_NilCondition(t *testing.T) {
 // CreateDirFilesWithRwxPermissions — error propagation
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 	// Arrange
 	items := []DirFilesWithRwxPermission{
 		{
@@ -1095,7 +1095,7 @@ func Test_Cov4_CreateDirFilesWithRwxPermissions_Error(t *testing.T) {
 	}
 }
 
-func Test_Cov4_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
+func Test_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 	// Arrange
 	defer func() {
 		if r := recover(); r == nil {
@@ -1124,7 +1124,7 @@ func Test_Cov4_CreateDirFilesWithRwxPermissionsMust_Panic(t *testing.T) {
 // CreateDirWithFiles — error branches (removeDirErr, fileManipulateErr)
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_CreateDirWithFiles_MkDirError(t *testing.T) {
+func Test_CreateDirWithFiles_MkDirError(t *testing.T) {
 	// Arrange — null byte in path is universally invalid
 	dw := &DirWithFiles{
 		Dir:   string([]byte{0}) + "/impossible/dir",
@@ -1140,7 +1140,7 @@ func Test_Cov4_CreateDirWithFiles_MkDirError(t *testing.T) {
 	}
 }
 
-func Test_Cov4_CreateDirWithFiles_WithFiles(t *testing.T) {
+func Test_CreateDirWithFiles_WithFiles(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	subDir := filepath.Join(dir, "sub")
@@ -1158,7 +1158,7 @@ func Test_Cov4_CreateDirWithFiles_WithFiles(t *testing.T) {
 	}
 }
 
-func Test_Cov4_CreateDirWithFiles_ChmodError(t *testing.T) {
+func Test_CreateDirWithFiles_ChmodError_ReadOnlyDir(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1182,7 +1182,7 @@ func Test_Cov4_CreateDirWithFiles_ChmodError(t *testing.T) {
 // DirFilesWithContent — Create error branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_DirFilesWithContent_Create_RemoveDirError(t *testing.T) {
+func Test_DirFilesWithContent_Create_RemoveDirError(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1202,7 +1202,7 @@ func Test_Cov4_DirFilesWithContent_Create_RemoveDirError(t *testing.T) {
 	}
 }
 
-func Test_Cov4_DirFilesWithContent_Create_FileWriteError(t *testing.T) {
+func Test_DirFilesWithContent_Create_FileWriteError_ReadOnlyDir(t *testing.T) {
 	// Arrange
 	dir := t.TempDir()
 	dfwc := &DirFilesWithContent{
@@ -1230,7 +1230,7 @@ func Test_Cov4_DirFilesWithContent_Create_FileWriteError(t *testing.T) {
 // MergeRwxWildcardWithFixedRwx — error branch
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_MergeRwxWildcardWithFixedRwx_Error(t *testing.T) {
+func Test_MergeRwxWildcardWithFixedRwx_Error(t *testing.T) {
 	// Arrange & Act — invalid wildcard input
 	_, err := MergeRwxWildcardWithFixedRwx("INVALID", "rwx")
 
@@ -1244,7 +1244,7 @@ func Test_Cov4_MergeRwxWildcardWithFixedRwx_Error(t *testing.T) {
 // PathExistStat — MeaningFullError with error
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_PathExistStat_MeaningFullError_WithError(t *testing.T) {
+func Test_PathExistStat_MeaningFullError_WithError_FormatCheck(t *testing.T) {
 	// Arrange
 	stat := &PathExistStat{
 		Location: "/nonexistent/xyz",
@@ -1264,7 +1264,7 @@ func Test_Cov4_PathExistStat_MeaningFullError_WithError(t *testing.T) {
 // RwxVariableWrapper — remaining error branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_RwxVariableWrapper_NewError(t *testing.T) {
+func Test_RwxVariableWrapper_NewError(t *testing.T) {
 	// Arrange & Act
 	// "INVALID" gets padded to 10 chars and sliced to valid 3-char segments,
 	// so NewRwxVariableWrapper never errors for any string input.
@@ -1280,7 +1280,7 @@ func Test_Cov4_RwxVariableWrapper_NewError(t *testing.T) {
 	}
 }
 
-func Test_Cov4_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T) {
 	// Arrange
 	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
@@ -1296,7 +1296,7 @@ func Test_Cov4_RwxVariableWrapper_IsEqualUsingLocation_NonExistent(t *testing.T)
 	}
 }
 
-func Test_Cov4_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
+func Test_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 	// Arrange
 	w, err := NewRwxVariableWrapper("rwxrwxrwx")
 	if err != nil {
@@ -1316,7 +1316,7 @@ func Test_Cov4_RwxVariableWrapper_IsEqualUsingFileInfo_Nil(t *testing.T) {
 // SingleRwx — default panic for invalid class type
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_SingleRwx_ToRwxOwnerGroupOther_DefaultPanic(t *testing.T) {
+func Test_SingleRwx_ToRwxOwnerGroupOther_DefaultPanic(t *testing.T) {
 	// Arrange
 	defer func() {
 		if r := recover(); r == nil {
@@ -1333,7 +1333,7 @@ func Test_Cov4_SingleRwx_ToRwxOwnerGroupOther_DefaultPanic(t *testing.T) {
 	s.ToRwxOwnerGroupOther()
 }
 
-func Test_Cov4_SingleRwx_ApplyOnMany_Error(t *testing.T) {
+func Test_SingleRwx_ApplyOnMany_Error(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("Linux-only test")
 	}
@@ -1358,7 +1358,7 @@ func Test_Cov4_SingleRwx_ApplyOnMany_Error(t *testing.T) {
 // chmodApplier — RwxPartial nil condition, RwxStringApplyChmod error branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_ChmodApplier_RwxPartial_NilCondition(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_NilCondition(t *testing.T) {
 	// Arrange & Act
 	err := ChmodApply.RwxPartial("rwx", nil, "/tmp")
 
@@ -1368,7 +1368,7 @@ func Test_Cov4_ChmodApplier_RwxPartial_NilCondition(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
 	// Arrange
 	cond := chmodins.DefaultAllFalseCondition()
 
@@ -1381,7 +1381,7 @@ func Test_Cov4_ChmodApplier_RwxPartial_EmptyLocations(t *testing.T) {
 	}
 }
 
-func Test_Cov4_ChmodApplier_RwxPartial_InvalidRwx(t *testing.T) {
+func Test_ChmodApplier_RwxPartial_InvalidRwx(t *testing.T) {
 	// Arrange
 	cond := chmodins.DefaultAllFalseCondition()
 
@@ -1398,7 +1398,7 @@ func Test_Cov4_ChmodApplier_RwxPartial_InvalidRwx(t *testing.T) {
 // newRwxWrapperCreator — UsingVariantPtr error
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
+func Test_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
 	// Arrange & Act — use a 3-char variant with invalid octal digit (9 > 7)
 	// Create() panics for wrong length, so use valid length with bad digit
 	_, err := New.RwxWrapper.UsingVariantPtr(Variant("899"))
@@ -1413,7 +1413,7 @@ func Test_Cov4_NewRwxWrapperCreator_UsingVariantPtr_Error(t *testing.T) {
 // tempDirGetter — TempPermanent
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
+func Test_TempDirGetter_TempPermanent(t *testing.T) {
 	// Arrange & Act
 	result := TempDirGetter.TempPermanent()
 
@@ -1423,7 +1423,7 @@ func Test_Cov4_TempDirGetter_TempPermanent(t *testing.T) {
 	}
 }
 
-func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
+func Test_TempDirGetter_TempOption_Permanent(t *testing.T) {
 	// Arrange & Act
 	result := TempDirGetter.TempOption(true)
 
@@ -1437,7 +1437,7 @@ func Test_Cov4_TempDirGetter_TempOption_Permanent(t *testing.T) {
 // VarAttribute — IsEqualPtr nil branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_Cov4_VarAttribute_IsEqualPtr_OneNil(t *testing.T) {
+func Test_VarAttribute_IsEqualPtr_OneNil(t *testing.T) {
 	// Arrange — parse a valid VarAttribute
 	attr, err := ParseRwxToVarAttribute("rwx")
 	if err != nil {

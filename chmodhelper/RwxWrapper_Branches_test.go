@@ -11,7 +11,7 @@ import (
 // RwxWrapper — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_RwxWrapper_NilAndEmpty(t *testing.T) {
+func Test_RwxWrapper_NilAndEmpty(t *testing.T) {
 	var nilW *RwxWrapper
 	if !nilW.IsEmpty() {
 		t.Fatal("nil should be empty")
@@ -30,7 +30,7 @@ func Test_I12_RwxWrapper_NilAndEmpty(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_UsingFileMode(t *testing.T) {
+func Test_RwxWrapper_UsingFileMode(t *testing.T) {
 	rwx := New.RwxWrapper.UsingFileMode(0755)
 	s := rwx.ToFullRwxValueString()
 	if len(s) != 10 {
@@ -60,7 +60,7 @@ func Test_I12_RwxWrapper_UsingFileMode(t *testing.T) {
 	_ = rwx.ToUint32Octal()
 }
 
-func Test_I12_RwxWrapper_ApplyChmod(t *testing.T) {
+func Test_RwxWrapper_ApplyChmod(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -84,7 +84,7 @@ func Test_I12_RwxWrapper_ApplyChmod(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_ApplyChmodOptions(t *testing.T) {
+func Test_RwxWrapper_ApplyChmodOptions(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -110,7 +110,7 @@ func Test_I12_RwxWrapper_ApplyChmodOptions(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_ApplyRecursive(t *testing.T) {
+func Test_RwxWrapper_ApplyRecursive(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -143,7 +143,7 @@ func Test_I12_RwxWrapper_ApplyRecursive(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_MustApplyChmod_Success(t *testing.T) {
+func Test_RwxWrapper_MustApplyChmod_Success(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -155,7 +155,7 @@ func Test_I12_RwxWrapper_MustApplyChmod_Success(t *testing.T) {
 	rwx.MustApplyChmod(fp)
 }
 
-func Test_I12_RwxWrapper_HasChmod(t *testing.T) {
+func Test_RwxWrapper_HasChmod(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -168,7 +168,7 @@ func Test_I12_RwxWrapper_HasChmod(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_Verify(t *testing.T) {
+func Test_RwxWrapper_Verify(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -182,7 +182,7 @@ func Test_I12_RwxWrapper_Verify(t *testing.T) {
 	}
 }
 
-func Test_I12_RwxWrapper_VerifyPaths(t *testing.T) {
+func Test_RwxWrapper_VerifyPaths(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("chmod not supported on Windows")
 	}
@@ -200,7 +200,7 @@ func Test_I12_RwxWrapper_VerifyPaths(t *testing.T) {
 // RwxWrapper — JSON, Clone, IsEqual
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_RwxWrapper_JsonAndClone(t *testing.T) {
+func Test_RwxWrapper_JsonAndClone(t *testing.T) {
 	rwx := New.RwxWrapper.UsingFileMode(0755)
 	j := rwx.Json()
 	if j.HasError() {
@@ -221,7 +221,7 @@ func Test_I12_RwxWrapper_JsonAndClone(t *testing.T) {
 	_ = rwx.ToRwxOwnerGroupOther()
 }
 
-func Test_I12_RwxWrapper_IsEqualFileMode(t *testing.T) {
+func Test_RwxWrapper_IsEqualFileMode(t *testing.T) {
 	rwx := New.RwxWrapper.UsingFileMode(0755)
 	if !rwx.IsEqualFileMode(0755) {
 		t.Fatal("expected equal file mode")
@@ -235,7 +235,7 @@ func Test_I12_RwxWrapper_IsEqualFileMode(t *testing.T) {
 // PathExistStat — branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_PathExistStat_ValidFile(t *testing.T) {
+func Test_PathExistStat_ValidFile(t *testing.T) {
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "stat.txt")
 	os.WriteFile(fp, []byte("x"), 0644)
@@ -284,7 +284,7 @@ func Test_I12_PathExistStat_ValidFile(t *testing.T) {
 	}
 }
 
-func Test_I12_PathExistStat_NonExistent(t *testing.T) {
+func Test_PathExistStat_NonExistent(t *testing.T) {
 	stat := GetPathExistStat("/nonexistent/abc/xyz")
 	if !stat.IsInvalid() {
 		t.Fatal("expected invalid stat")
@@ -297,7 +297,7 @@ func Test_I12_PathExistStat_NonExistent(t *testing.T) {
 	}
 }
 
-func Test_I12_PathExistStat_NilReceiver(t *testing.T) {
+func Test_PathExistStat_NilReceiver(t *testing.T) {
 	var stat *PathExistStat
 	if stat.HasError() {
 		t.Fatal("nil should not have error")
@@ -340,7 +340,7 @@ func Test_I12_PathExistStat_NilReceiver(t *testing.T) {
 	}
 }
 
-func Test_I12_PathExistStat_DirBranches(t *testing.T) {
+func Test_PathExistStat_DirBranches(t *testing.T) {
 	dir := t.TempDir()
 	stat := GetPathExistStat(dir)
 	if !stat.IsDir() {
@@ -360,7 +360,7 @@ func Test_I12_PathExistStat_DirBranches(t *testing.T) {
 	}
 }
 
-func Test_I12_PathExistStat_CombineMethods(t *testing.T) {
+func Test_PathExistStat_CombineMethods(t *testing.T) {
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "c.txt")
 	os.WriteFile(fp, []byte("x"), 0644)
@@ -383,7 +383,7 @@ func Test_I12_PathExistStat_CombineMethods(t *testing.T) {
 // dirCreator, fileWriter — uncovered branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_DirCreator_ByChecking(t *testing.T) {
+func Test_DirCreator_ByChecking(t *testing.T) {
 	dir := t.TempDir()
 	sub := filepath.Join(dir, "sub")
 	// create new
@@ -398,7 +398,7 @@ func Test_I12_DirCreator_ByChecking(t *testing.T) {
 	}
 }
 
-func Test_I12_FileWriter_ChmodAndChmodFile(t *testing.T) {
+func Test_FileWriter_ChmodAndChmodFile(t *testing.T) {
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "fw.txt")
 	fw := fileWriter{}
@@ -413,14 +413,14 @@ func Test_I12_FileWriter_ChmodAndChmodFile(t *testing.T) {
 	}
 }
 
-func Test_I12_ErrorCreator_PathError_NilErr(t *testing.T) {
+func Test_ErrorCreator_PathError_NilErr(t *testing.T) {
 	err := newError.pathError("msg", 0644, "/tmp/x", nil)
 	if err != nil {
 		t.Fatal("nil input error should return nil")
 	}
 }
 
-func Test_I12_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
+func Test_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 	err := newError.chmodApplyFailed(0644, "/tmp/x", nil)
 	if err != nil {
 		t.Fatal("nil input error should return nil")
@@ -431,7 +431,7 @@ func Test_I12_ErrorCreator_ChmodApplyFailed_NilErr(t *testing.T) {
 // SimpleFileReaderWriter — uncovered init and read methods
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_SimpleFileReaderWriter_Init(t *testing.T) {
+func Test_SimpleFileReaderWriter_Init(t *testing.T) {
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "sfrw.txt")
 	rw := SimpleFileReaderWriter{
@@ -449,7 +449,7 @@ func Test_I12_SimpleFileReaderWriter_Init(t *testing.T) {
 	}
 }
 
-func Test_I12_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
+func Test_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 	dir := t.TempDir()
 	fp := filepath.Join(dir, "sfrw.txt")
 	rw := SimpleFileReaderWriter{
@@ -478,7 +478,7 @@ func Test_I12_SimpleFileReaderWriter_WriteAndRead(t *testing.T) {
 // RwxInstructionExecutors — empty and nil paths
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_RwxInstructionExecutors_EmptyPaths(t *testing.T) {
+func Test_RwxInstructionExecutors_EmptyPaths(t *testing.T) {
 	execs := NewRwxInstructionExecutors(0)
 	if !execs.IsEmpty() {
 		t.Fatal("expected empty")
@@ -510,7 +510,7 @@ func Test_I12_RwxInstructionExecutors_EmptyPaths(t *testing.T) {
 // ParseRwxInstructionsToExecutors — nil input
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
+func Test_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
 	_, err := ParseRwxInstructionsToExecutors(nil)
 	if err == nil {
 		t.Fatal("expected error for nil instructions")
@@ -521,14 +521,14 @@ func Test_I12_ParseRwxInstructionsToExecutors_Nil(t *testing.T) {
 // chmodApplier — skip branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_ChmodApplier_ApplyIf_Skip(t *testing.T) {
+func Test_ChmodApplier_ApplyIf_Skip(t *testing.T) {
 	err := ChmodApply.ApplyIf(false, 0644, "/whatever")
 	if err != nil {
 		t.Fatal("expected nil on skip-apply")
 	}
 }
 
-func Test_I12_ChmodApplier_OnMismatchOption_Skip(t *testing.T) {
+func Test_ChmodApplier_OnMismatchOption_Skip(t *testing.T) {
 	err := ChmodApply.OnMismatchOption(false, false, 0644, "/whatever")
 	if err != nil {
 		t.Fatal("expected nil on skip-apply")
@@ -539,7 +539,7 @@ func Test_I12_ChmodApplier_OnMismatchOption_Skip(t *testing.T) {
 // chmodVerifier — extra branches
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
+func Test_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	if !ChmodVerify.IsEqualSkipInvalid("/nonexistent", 0644) {
 		t.Fatal("expected true on skip-invalid path")
 	}
@@ -548,14 +548,14 @@ func Test_I12_ChmodVerifier_IsEqualSkipInvalid(t *testing.T) {
 	}
 }
 
-func Test_I12_ChmodVerifier_GetRwx9(t *testing.T) {
+func Test_ChmodVerifier_GetRwx9(t *testing.T) {
 	s := ChmodVerify.GetRwx9(0755)
 	if len(s) != 9 {
 		t.Fatal("expected 9 char rwx string")
 	}
 }
 
-func Test_I12_ChmodVerifier_PathIf_Skip(t *testing.T) {
+func Test_ChmodVerifier_PathIf_Skip(t *testing.T) {
 	err := ChmodVerify.PathIf(false, "/whatever", 0644)
 	if err != nil {
 		t.Fatal("expected nil on skip-verify")
@@ -566,7 +566,7 @@ func Test_I12_ChmodVerifier_PathIf_Skip(t *testing.T) {
 // tempDirGetter
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_I12_TempDirGetter(t *testing.T) {
+func Test_TempDirGetter(t *testing.T) {
 	d := TempDirGetter.TempDefault()
 	if d == "" {
 		t.Fatal("expected temp dir")

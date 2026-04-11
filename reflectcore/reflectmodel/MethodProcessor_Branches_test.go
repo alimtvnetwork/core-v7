@@ -18,7 +18,7 @@ import (
 
 // ---------- MethodProcessor.IsEqual — IsPublicMethod branch ----------
 
-func TestCov4_IsEqual_DifferentIsPublicMethod(t *testing.T) {
+func Test_IsEqual_DifferentIsPublicMethod(t *testing.T) {
 	// Arrange — both have same Name and same IsInvalid (false)
 	// but different PkgPath (one public, one private)
 	a := newMethodProcessorInternal("PublicMethod")
@@ -36,7 +36,7 @@ func TestCov4_IsEqual_DifferentIsPublicMethod(t *testing.T) {
 
 // ---------- MethodProcessor.IsEqual — ArgsCount branch ----------
 
-func TestCov4_IsEqual_DifferentArgsCount(t *testing.T) {
+func Test_IsEqual_DifferentArgsCount(t *testing.T) {
 	// Arrange — same name, same IsPublicMethod, but different ArgsCount
 	a := newMethodProcessorInternal("PublicMethod") // NumIn=2 (receiver+string)
 	b := newMethodProcessorInternal("NoArgs")       // NumIn=1 (receiver)
@@ -58,7 +58,7 @@ type returnHost struct{}
 func (r returnHost) TwoReturns(s string) (string, error) { return s, nil }
 func (r returnHost) OneReturn(s string) string            { return s }
 
-func TestCov4_IsEqual_DifferentReturnLength(t *testing.T) {
+func Test_IsEqual_DifferentReturnLength(t *testing.T) {
 	// Arrange — same name, same IsPublicMethod, same ArgsCount, different ReturnLength
 	rt := reflect.TypeOf(returnHost{})
 
@@ -79,7 +79,7 @@ func TestCov4_IsEqual_DifferentReturnLength(t *testing.T) {
 
 // ---------- rvUtils.PrependWithSpaces — prependingLinesSpaceCount > 0 ----------
 
-func TestCov4_PrependWithSpaces_WithPrependingSpaces(t *testing.T) {
+func Test_PrependWithSpaces_WithPrependingSpaces(t *testing.T) {
 	// Arrange
 	u := rvUtils{}
 	existing := []string{"line1", "line2"}
@@ -98,7 +98,7 @@ func TestCov4_PrependWithSpaces_WithPrependingSpaces(t *testing.T) {
 
 // ---------- isNull — nil input and nilable kinds ----------
 
-func TestCov4_IsNull_NilInput(t *testing.T) {
+func Test_IsNull_NilInput(t *testing.T) {
 	// Arrange & Act
 	result := isNull(nil)
 
@@ -108,7 +108,7 @@ func TestCov4_IsNull_NilInput(t *testing.T) {
 	}
 }
 
-func TestCov4_IsNull_NilMap(t *testing.T) {
+func Test_IsNull_NilMap(t *testing.T) {
 	// Arrange
 	var m map[string]int
 
@@ -121,7 +121,7 @@ func TestCov4_IsNull_NilMap(t *testing.T) {
 	}
 }
 
-func TestCov4_IsNull_NilSlice(t *testing.T) {
+func Test_IsNull_NilSlice(t *testing.T) {
 	// Arrange
 	var s []int
 
@@ -134,7 +134,7 @@ func TestCov4_IsNull_NilSlice(t *testing.T) {
 	}
 }
 
-func TestCov4_IsNull_NilChan(t *testing.T) {
+func Test_IsNull_NilChan(t *testing.T) {
 	// Arrange
 	var ch chan int
 
@@ -147,7 +147,7 @@ func TestCov4_IsNull_NilChan(t *testing.T) {
 	}
 }
 
-func TestCov4_IsNull_NilFunc(t *testing.T) {
+func Test_IsNull_NilFunc(t *testing.T) {
 	// Arrange
 	var fn func()
 
@@ -160,7 +160,7 @@ func TestCov4_IsNull_NilFunc(t *testing.T) {
 	}
 }
 
-func TestCov4_IsNull_NonNilInt(t *testing.T) {
+func Test_IsNull_NonNilInt(t *testing.T) {
 	// Arrange & Act
 	result := isNull(42)
 

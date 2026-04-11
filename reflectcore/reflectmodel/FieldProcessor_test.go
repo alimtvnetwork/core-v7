@@ -15,7 +15,7 @@ type sampleStruct struct {
 	Age  int
 }
 
-func TestCov2_FieldProcessor_IsFieldType(t *testing.T) {
+func Test_FieldProcessor_IsFieldType(t *testing.T) {
 	st := reflect.TypeOf(sampleStruct{})
 	field, _ := st.FieldByName("Name")
 	fp := &FieldProcessor{
@@ -32,7 +32,7 @@ func TestCov2_FieldProcessor_IsFieldType(t *testing.T) {
 	}
 }
 
-func TestCov2_FieldProcessor_IsFieldKind(t *testing.T) {
+func Test_FieldProcessor_IsFieldKind(t *testing.T) {
 	st := reflect.TypeOf(sampleStruct{})
 	field, _ := st.FieldByName("Age")
 	fp := &FieldProcessor{
@@ -49,7 +49,7 @@ func TestCov2_FieldProcessor_IsFieldKind(t *testing.T) {
 	}
 }
 
-func TestCov2_FieldProcessor_NilReceiver(t *testing.T) {
+func Test_FieldProcessor_NilReceiver(t *testing.T) {
 	var fp *FieldProcessor
 	if fp.IsFieldType(reflect.TypeOf("")) {
 		t.Fatal("nil receiver should return false")
@@ -87,7 +87,7 @@ func newMethodProcessorInternal(name string) *MethodProcessor {
 	}
 }
 
-func TestCov2_MethodProcessor_HasValidFunc(t *testing.T) {
+func Test_MethodProcessor_HasValidFunc(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if !mp.HasValidFunc() {
 		t.Fatal("expected valid")
@@ -98,14 +98,14 @@ func TestCov2_MethodProcessor_HasValidFunc(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetFuncName(t *testing.T) {
+func Test_MethodProcessor_GetFuncName(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if mp.GetFuncName() != "PublicMethod" {
 		t.Fatal("wrong name")
 	}
 }
 
-func TestCov2_MethodProcessor_IsInvalid(t *testing.T) {
+func Test_MethodProcessor_IsInvalid(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if mp.IsInvalid() {
 		t.Fatal("should not be invalid")
@@ -116,7 +116,7 @@ func TestCov2_MethodProcessor_IsInvalid(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_Func(t *testing.T) {
+func Test_MethodProcessor_Func(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	fn := mp.Func()
 	if fn == nil {
@@ -124,7 +124,7 @@ func TestCov2_MethodProcessor_Func(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_Func_Nil(t *testing.T) {
+func Test_MethodProcessor_Func_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	fn := mp.Func()
 	if fn != nil {
@@ -132,7 +132,7 @@ func TestCov2_MethodProcessor_Func_Nil(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_ArgsCount(t *testing.T) {
+func Test_MethodProcessor_ArgsCount(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	// Method on value receiver: first arg is the receiver itself
 	count := mp.ArgsCount()
@@ -141,7 +141,7 @@ func TestCov2_MethodProcessor_ArgsCount(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_ReturnLength(t *testing.T) {
+func Test_MethodProcessor_ReturnLength(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	rl := mp.ReturnLength()
 	if rl != 2 { // string, error
@@ -149,35 +149,35 @@ func TestCov2_MethodProcessor_ReturnLength(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_ReturnLength_Nil(t *testing.T) {
+func Test_MethodProcessor_ReturnLength_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	if mp.ReturnLength() != -1 {
 		t.Fatal("expected -1 for nil")
 	}
 }
 
-func TestCov2_MethodProcessor_IsPublicMethod(t *testing.T) {
+func Test_MethodProcessor_IsPublicMethod(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if !mp.IsPublicMethod() {
 		t.Fatal("expected public")
 	}
 }
 
-func TestCov2_MethodProcessor_IsPrivateMethod(t *testing.T) {
+func Test_MethodProcessor_IsPrivateMethod(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if mp.IsPrivateMethod() {
 		t.Fatal("expected not private")
 	}
 }
 
-func TestCov2_MethodProcessor_ArgsLength(t *testing.T) {
+func Test_MethodProcessor_ArgsLength(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if mp.ArgsLength() != 2 {
 		t.Fatal("expected 2")
 	}
 }
 
-func TestCov2_MethodProcessor_Invoke(t *testing.T) {
+func Test_MethodProcessor_Invoke(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	host := methodHost{}
 	results, err := mp.Invoke(host, "test")
@@ -192,7 +192,7 @@ func TestCov2_MethodProcessor_Invoke(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_Invoke_NilReceiver(t *testing.T) {
+func Test_MethodProcessor_Invoke_NilReceiver(t *testing.T) {
 	var mp *MethodProcessor
 	_, err := mp.Invoke()
 	if err == nil {
@@ -200,7 +200,7 @@ func TestCov2_MethodProcessor_Invoke_NilReceiver(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_Invoke_ArgsMismatch(t *testing.T) {
+func Test_MethodProcessor_Invoke_ArgsMismatch(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	_, err := mp.Invoke() // missing args
 	if err == nil {
@@ -208,7 +208,7 @@ func TestCov2_MethodProcessor_Invoke_ArgsMismatch(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
+func Test_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	host := methodHost{}
 	result, err := mp.GetFirstResponseOfInvoke(host, "hello")
@@ -220,7 +220,7 @@ func TestCov2_MethodProcessor_GetFirstResponseOfInvoke(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetFirstResponseOfInvoke_Error(t *testing.T) {
+func Test_MethodProcessor_GetFirstResponseOfInvoke_Error(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	_, err := mp.GetFirstResponseOfInvoke() // missing args
 	if err == nil {
@@ -228,7 +228,7 @@ func TestCov2_MethodProcessor_GetFirstResponseOfInvoke_Error(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
+func Test_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	host := methodHost{}
 	result, err := mp.InvokeResultOfIndex(0, host, "val")
@@ -240,7 +240,7 @@ func TestCov2_MethodProcessor_InvokeResultOfIndex(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_InvokeFirstAndError(t *testing.T) {
+func Test_MethodProcessor_InvokeFirstAndError(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	host := methodHost{}
 	first, funcErr, procErr := mp.InvokeFirstAndError(host, "data")
@@ -255,7 +255,7 @@ func TestCov2_MethodProcessor_InvokeFirstAndError(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_InvokeFirstAndError_ProcessingError(t *testing.T) {
+func Test_MethodProcessor_InvokeFirstAndError_ProcessingError(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	_, _, procErr := mp.InvokeFirstAndError() // missing args
 	if procErr == nil {
@@ -263,7 +263,7 @@ func TestCov2_MethodProcessor_InvokeFirstAndError_ProcessingError(t *testing.T) 
 	}
 }
 
-func TestCov2_MethodProcessor_InvokeFirstAndError_TooFewReturns(t *testing.T) {
+func Test_MethodProcessor_InvokeFirstAndError_TooFewReturns(t *testing.T) {
 	mp := newMethodProcessorInternal("NoArgs") // returns only 1 value
 	host := methodHost{}
 	_, _, procErr := mp.InvokeFirstAndError(host)
@@ -272,28 +272,28 @@ func TestCov2_MethodProcessor_InvokeFirstAndError_TooFewReturns(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_IsEqual_BothNil(t *testing.T) {
+func Test_MethodProcessor_IsEqual_BothNil(t *testing.T) {
 	var a, b *MethodProcessor
 	if !a.IsEqual(b) {
 		t.Fatal("both nil should be equal")
 	}
 }
 
-func TestCov2_MethodProcessor_IsEqual_OneNil(t *testing.T) {
+func Test_MethodProcessor_IsEqual_OneNil(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if mp.IsEqual(nil) {
 		t.Fatal("non-nil should not equal nil")
 	}
 }
 
-func TestCov2_MethodProcessor_IsEqual_SamePtr(t *testing.T) {
+func Test_MethodProcessor_IsEqual_SamePtr(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	if !mp.IsEqual(mp) {
 		t.Fatal("same pointer should be equal")
 	}
 }
 
-func TestCov2_MethodProcessor_IsEqual_SameMethod(t *testing.T) {
+func Test_MethodProcessor_IsEqual_SameMethod(t *testing.T) {
 	a := newMethodProcessorInternal("PublicMethod")
 	b := newMethodProcessorInternal("PublicMethod")
 	if !a.IsEqual(b) {
@@ -301,7 +301,7 @@ func TestCov2_MethodProcessor_IsEqual_SameMethod(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_IsNotEqual(t *testing.T) {
+func Test_MethodProcessor_IsNotEqual(t *testing.T) {
 	a := newMethodProcessorInternal("PublicMethod")
 	b := newMethodProcessorInternal("NoArgs")
 	if !a.IsNotEqual(b) {
@@ -309,7 +309,7 @@ func TestCov2_MethodProcessor_IsNotEqual(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetType(t *testing.T) {
+func Test_MethodProcessor_GetType(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	ty := mp.GetType()
 	if ty == nil {
@@ -317,7 +317,7 @@ func TestCov2_MethodProcessor_GetType(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetType_Nil(t *testing.T) {
+func Test_MethodProcessor_GetType_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	ty := mp.GetType()
 	if ty != nil {
@@ -325,7 +325,7 @@ func TestCov2_MethodProcessor_GetType_Nil(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetOutArgsTypes(t *testing.T) {
+func Test_MethodProcessor_GetOutArgsTypes(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	out := mp.GetOutArgsTypes()
 	if len(out) != 2 {
@@ -338,7 +338,7 @@ func TestCov2_MethodProcessor_GetOutArgsTypes(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetOutArgsTypes_Nil(t *testing.T) {
+func Test_MethodProcessor_GetOutArgsTypes_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	out := mp.GetOutArgsTypes()
 	if len(out) != 0 {
@@ -346,7 +346,7 @@ func TestCov2_MethodProcessor_GetOutArgsTypes_Nil(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetInArgsTypes(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypes(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	in := mp.GetInArgsTypes()
 	if len(in) != 2 {
@@ -359,7 +359,7 @@ func TestCov2_MethodProcessor_GetInArgsTypes(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetInArgsTypes_Nil(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypes_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	in := mp.GetInArgsTypes()
 	if len(in) != 0 {
@@ -367,7 +367,7 @@ func TestCov2_MethodProcessor_GetInArgsTypes_Nil(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetInArgsTypesNames(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypesNames(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	names := mp.GetInArgsTypesNames()
 	if len(names) != 2 {
@@ -380,7 +380,7 @@ func TestCov2_MethodProcessor_GetInArgsTypesNames(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetInArgsTypesNames_Nil(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypesNames_Nil(t *testing.T) {
 	var mp *MethodProcessor
 	names := mp.GetInArgsTypesNames()
 	if len(names) != 0 {
@@ -388,7 +388,7 @@ func TestCov2_MethodProcessor_GetInArgsTypesNames_Nil(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_GetInArgsTypesNames_NoArgs(t *testing.T) {
+func Test_MethodProcessor_GetInArgsTypesNames_NoArgs(t *testing.T) {
 	mp := newMethodProcessorInternal("NoArgs")
 	names := mp.GetInArgsTypesNames()
 	// NoArgs has 1 in arg (receiver), so let's check
@@ -397,7 +397,7 @@ func TestCov2_MethodProcessor_GetInArgsTypesNames_NoArgs(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_VerifyInArgs(t *testing.T) {
+func Test_MethodProcessor_VerifyInArgs(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	host := methodHost{}
 	ok, err := mp.VerifyInArgs([]any{host, "test"})
@@ -406,7 +406,7 @@ func TestCov2_MethodProcessor_VerifyInArgs(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_VerifyOutArgs(t *testing.T) {
+func Test_MethodProcessor_VerifyOutArgs(t *testing.T) {
 	mp := newMethodProcessorInternal("NoArgs")
 	ok, err := mp.VerifyOutArgs([]any{"result"})
 	if !ok || err != nil {
@@ -414,7 +414,7 @@ func TestCov2_MethodProcessor_VerifyOutArgs(t *testing.T) {
 	}
 }
 
-func TestCov2_MethodProcessor_ValidateMethodArgs_CountMismatch(t *testing.T) {
+func Test_MethodProcessor_ValidateMethodArgs_CountMismatch(t *testing.T) {
 	mp := newMethodProcessorInternal("PublicMethod")
 	err := mp.ValidateMethodArgs([]any{"too", "many", "args"})
 	if err == nil {
