@@ -12,7 +12,7 @@ import (
 // LeftRight
 // ═══════════════════════════════════════════════════════════════
 
-func Test_LeftRight_NewLeftRight_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRight_NewLeftRight_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_NewLeftRight", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		tc := caseV1Compat{Name: "LR New", Expected: true, Actual: lr.IsValid && lr.Left == "a" && lr.Right == "b", Args: args.Map{}}
@@ -32,7 +32,7 @@ func Test_LeftRight_InvalidLeftRight(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_InvalidNoMessage_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRight_InvalidNoMessage_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_InvalidNoMessage", func() {
 		lr := corestr.InvalidLeftRightNoMessage()
 		tc := caseV1Compat{Name: "LR InvalidNoMsg", Expected: false, Actual: lr.IsValid, Args: args.Map{}}
@@ -202,7 +202,7 @@ func Test_LeftRight_IsRight(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_IsEqual_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRight_IsEqual_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_IsEqual", func() {
 		lr1 := corestr.NewLeftRight("a", "b")
 		lr2 := corestr.NewLeftRight("a", "b")
@@ -223,7 +223,7 @@ func Test_LeftRight_IsEqual_Nil(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRight_Clone_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_Clone", func() {
 		lr := corestr.NewLeftRight("a", "b")
 		c := lr.Clone()
@@ -329,7 +329,7 @@ func Test_LeftRight_UsingSlice_Single_FromLeftRightNewLeftRigh(t *testing.T) {
 	})
 }
 
-func Test_LeftRight_UsingSlice_Empty_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRight_UsingSlice_Empty_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRight_UsingSlice_Empty", func() {
 		lr := corestr.LeftRightUsingSlice([]string{})
 		tc := caseV1Compat{Name: "LR UsingSlice empty", Expected: false, Actual: lr.IsValid, Args: args.Map{}}
@@ -353,7 +353,7 @@ func Test_LeftRight_TrimmedUsingSlice_FromLeftRightNewLeftRigh(t *testing.T) {
 // LeftRightFromSplit
 // ═══════════════════════════════════════════════════════════════
 
-func Test_LeftRightFromSplit_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRightFromSplit_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplit", func() {
 		lr := corestr.LeftRightFromSplit("key=value", "=")
 		tc := caseV1Compat{Name: "LRFromSplit", Expected: "key", Actual: lr.Left, Args: args.Map{}}
@@ -363,7 +363,7 @@ func Test_LeftRightFromSplit_FromLeftRightNewLeftRigh(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitTrimmed_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRightFromSplitTrimmed_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitTrimmed", func() {
 		lr := corestr.LeftRightFromSplitTrimmed(" key = value ", "=")
 		tc := caseV1Compat{Name: "LRFromSplitTrimmed", Expected: "key", Actual: lr.Left, Args: args.Map{}}
@@ -373,7 +373,7 @@ func Test_LeftRightFromSplitTrimmed_FromLeftRightNewLeftRigh(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitFull_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRightFromSplitFull_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitFull", func() {
 		lr := corestr.LeftRightFromSplitFull("a:b:c:d", ":")
 		tc := caseV1Compat{Name: "LRFromSplitFull", Expected: "b:c:d", Actual: lr.Right, Args: args.Map{}}
@@ -383,7 +383,7 @@ func Test_LeftRightFromSplitFull_FromLeftRightNewLeftRigh(t *testing.T) {
 	})
 }
 
-func Test_LeftRightFromSplitFullTrimmed_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_LeftRightFromSplitFullTrimmed_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_LeftRightFromSplitFullTrimmed", func() {
 		lr := corestr.LeftRightFromSplitFullTrimmed(" a : b : c ", ":")
 		tc := caseV1Compat{Name: "LRFromSplitFullTrimmed", Expected: "a", Actual: lr.Left, Args: args.Map{}}
@@ -1041,7 +1041,7 @@ func Test_ValidValues_Empty_FromLeftRightNewLeftRigh(t *testing.T) {
 // ValueStatus
 // ═══════════════════════════════════════════════════════════════
 
-func Test_ValueStatus_Invalid_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_ValueStatus_Invalid_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValueStatus_Invalid", func() {
 		vs := corestr.InvalidValueStatus("err")
 		tc := caseV1Compat{Name: "VS Invalid", Expected: false, Actual: vs.ValueValid.IsValid, Args: args.Map{}}
@@ -1061,7 +1061,7 @@ func Test_ValueStatus_InvalidNoMsg(t *testing.T) {
 	})
 }
 
-func Test_ValueStatus_Clone_FromLeftRightNewLeftRigh(t *testing.T) {
+func Test_ValueStatus_Clone_FromLeftRightNewLeftRigh_FromLeftRightNewLeftRigh(t *testing.T) {
 	safeTest(t, "Test_Cov53_ValueStatus_Clone", func() {
 		vs := corestr.InvalidValueStatus("err")
 		c := vs.Clone()

@@ -14,7 +14,7 @@ import (
 // map[string]string never returns an error in standard Go.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_MapStringStringOnce_JsonStringMust_FromMapStringStringOnceJ(t *testing.T) {
+func Test_MapStringStringOnce_JsonStringMust_FromMapStringStringOnceJ_FromMapStringStringOnceJ(t *testing.T) {
 	// Arrange
 	tc := cov13MapStringStringOnceJsonStringMustTestCase
 	m := coreonce.NewMapStringStringOnce(func() map[string]string {
@@ -51,7 +51,7 @@ func Test_MapStringStringOnce_JsonStringMust_FromMapStringStringOnceJ(t *testing
 // []string never returns an error in standard Go.
 // ══════════════════════════════════════════════════════════════════════════════
 
-func Test_StringsOnce_JsonStringMust_FromMapStringStringOnceJ(t *testing.T) {
+func Test_StringsOnce_JsonStringMust_FromMapStringStringOnceJ_FromMapStringStringOnceJ(t *testing.T) {
 	// Arrange
 	tc := cov13StringsOnceJsonStringMustTestCase
 	s := coreonce.NewStringsOnce(func() []string {

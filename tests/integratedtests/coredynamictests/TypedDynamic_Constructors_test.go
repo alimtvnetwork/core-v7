@@ -13,7 +13,7 @@ import (
 // TypedDynamic — comprehensive coverage
 // ==========================================================================
 
-func Test_TypedDynamic_Constructors_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_Constructors_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d1 := coredynamic.NewTypedDynamic[string]("hello", true)
 	d2 := coredynamic.NewTypedDynamicValid[string]("world")
@@ -72,7 +72,7 @@ func Test_TypedDynamic_StringAndJson(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic string and JSON methods -- string value", actual)
 }
 
-func Test_TypedDynamic_GetAs_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_GetAs_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	dStr := coredynamic.NewTypedDynamicValid[any]("hello")
 	dInt := coredynamic.NewTypedDynamicValid[any](42)
@@ -138,7 +138,7 @@ func Test_TypedDynamic_ValueMethods(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Value* methods return expected -- various", actual)
 }
 
-func Test_TypedDynamic_Clone_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_Clone_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid[string]("hello")
 	cloned := d.Clone()
@@ -166,7 +166,7 @@ func Test_TypedDynamic_Clone_FromTypedDynamicConstruc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Clone methods return expected -- all paths", actual)
 }
 
-func Test_TypedDynamic_ToDynamic_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_ToDynamic_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicValid[string]("hello")
 	dyn := d.ToDynamic()
@@ -185,7 +185,7 @@ func Test_TypedDynamic_ToDynamic_FromTypedDynamicConstruc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic ToDynamic returns expected -- valid", actual)
 }
 
-func Test_TypedDynamic_Deserialize_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_Deserialize_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr[string]("", false)
 	err := d.Deserialize([]byte(`"hello"`))
@@ -206,7 +206,7 @@ func Test_TypedDynamic_Deserialize_FromTypedDynamicConstruc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "TypedDynamic Deserialize sets data -- valid JSON", actual)
 }
 
-func Test_TypedDynamic_UnmarshalJSON_FromTypedDynamicConstruc(t *testing.T) {
+func Test_TypedDynamic_UnmarshalJSON_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	d := coredynamic.NewTypedDynamicPtr[string]("", false)
 	err := d.UnmarshalJSON([]byte(`"world"`))
@@ -650,7 +650,7 @@ func Test_BytesConverter_CastString_FromTypedDynamicConstruc(t *testing.T) {
 	expected.ShouldBeEqual(t, 0, "BytesConverter CastString returns expected -- valid and empty", actual)
 }
 
-func Test_BytesConverter_ToBool_FromTypedDynamicConstruc(t *testing.T) {
+func Test_BytesConverter_ToBool_FromTypedDynamicConstruc_FromTypedDynamicConstruc(t *testing.T) {
 	// Arrange
 	bc := coredynamic.NewBytesConverter([]byte("true"))
 	val, err := bc.ToBool()

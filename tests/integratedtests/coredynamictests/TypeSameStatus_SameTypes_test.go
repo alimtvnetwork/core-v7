@@ -786,7 +786,7 @@ func Test_ValueStatus_Basic(t *testing.T) {
 // ZeroSet / SafeZeroSet
 // ═══════════════════════════════════════════
 
-func Test_ZeroSet_FromTypeSameStatusSameTy(t *testing.T) {
+func Test_ZeroSet_FromTypeSameStatusSameTy_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	type testStruct struct{ Name string }
 	ts := testStruct{Name: "hello"}
@@ -954,7 +954,7 @@ func Test_BytesConverter_Deserialize_FromTypeSameStatusSameTy(t *testing.T) {
 // Type function
 // ═══════════════════════════════════════════
 
-func Test_Type_FromTypeSameStatusSameTy(t *testing.T) {
+func Test_Type_FromTypeSameStatusSameTy_FromTypeSameStatusSameTy(t *testing.T) {
 	// Arrange
 	rt := coredynamic.Type("hello")
 
